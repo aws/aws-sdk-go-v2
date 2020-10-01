@@ -56,11 +56,20 @@ func (c *Client) AdminRemoveUserFromGroup(ctx context.Context, params *AdminRemo
 }
 
 type AdminRemoveUserFromGroupInput struct {
+
 	// The username for the user.
+	//
+	// This member is required.
 	Username *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The group name.
+	//
+	// This member is required.
 	GroupName *string
 }
 

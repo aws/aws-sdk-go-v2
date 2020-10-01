@@ -59,14 +59,22 @@ func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyI
 }
 
 type UpdateVocabularyInput struct {
+
 	// An array of strings containing the vocabulary entries.
 	Phrases []*string
+
 	// The language code of the vocabulary entries.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// The name of the vocabulary to update. The name is case-sensitive. If you try to
 	// update a vocabulary with the same name as a previous vocabulary you will receive
 	// a ConflictException error.
+	//
+	// This member is required.
 	VocabularyName *string
+
 	// The S3 location of the text file that contains the definition of the custom
 	// vocabulary. The URI must be in the same region as the API endpoint that you are
 	// calling. The general form is  <p>For example:</p> <p>For more information about
@@ -80,13 +88,17 @@ type UpdateVocabularyInput struct {
 }
 
 type UpdateVocabularyOutput struct {
+
 	// The language code of the vocabulary entries.
 	LanguageCode types.LanguageCode
+
 	// The processing state of the vocabulary. When the VocabularyState field contains
 	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
 	VocabularyState types.VocabularyState
+
 	// The date and time that the vocabulary was updated.
 	LastModifiedTime *time.Time
+
 	// The name of the vocabulary that was updated.
 	VocabularyName *string
 

@@ -55,19 +55,24 @@ func (c *Client) ListTopicsDetectionJobs(ctx context.Context, params *ListTopics
 }
 
 type ListTopicsDetectionJobsInput struct {
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
 	// Filters the jobs that are returned. Jobs can be filtered on their name, status,
 	// or the date and time that they were submitted. You can set only one filter at a
 	// time.
 	Filter *types.TopicsDetectionJobFilter
+
 	// Identifies the next page of results to return.
 	NextToken *string
 }
 
 type ListTopicsDetectionJobsOutput struct {
+
 	// A list containing the properties of each job that is returned.
 	TopicsDetectionJobPropertiesList []*types.TopicsDetectionJobProperties
+
 	// Identifies the next page of results to return.
 	NextToken *string
 

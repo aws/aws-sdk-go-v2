@@ -60,14 +60,19 @@ func (c *Client) GetCelebrityInfo(ctx context.Context, params *GetCelebrityInfoI
 }
 
 type GetCelebrityInfoInput struct {
+
 	// The ID for the celebrity. You get the celebrity ID from a call to the
 	// RecognizeCelebrities () operation, which recognizes celebrities in an image.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetCelebrityInfoOutput struct {
+
 	// The name of the celebrity.
 	Name *string
+
 	// An array of URLs pointing to additional celebrity information.
 	Urls []*string
 

@@ -77,25 +77,33 @@ func (c *Client) ListFragments(ctx context.Context, params *ListFragmentsInput, 
 }
 
 type ListFragmentsInput struct {
+
 	// The name of the stream from which to retrieve a fragment list.
+	//
+	// This member is required.
 	StreamName *string
+
 	// The total number of fragments to return. If the total number of fragments
 	// available is more than the value specified in max-results, then a
 	// ListFragmentsOutput$NextToken () is provided in the output that you can use to
 	// resume pagination.
 	MaxResults *int64
+
 	// A token to specify where to start paginating. This is the
 	// ListFragmentsOutput$NextToken () from a previously truncated response.
 	NextToken *string
+
 	// Describes the timestamp range and timestamp origin for the range of fragments to
 	// return.
 	FragmentSelector *types.FragmentSelector
 }
 
 type ListFragmentsOutput struct {
+
 	// A list of archived Fragment () objects from the stream that meet the selector
 	// criteria. Results are in no specific order, even across pages.
 	Fragments []*types.Fragment
+
 	// If the returned list is truncated, the operation returns this token to use to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.

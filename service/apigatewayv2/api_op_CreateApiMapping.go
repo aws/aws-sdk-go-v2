@@ -56,23 +56,37 @@ func (c *Client) CreateApiMapping(ctx context.Context, params *CreateApiMappingI
 
 // Creates a new ApiMapping resource to represent an API mapping.
 type CreateApiMappingInput struct {
+
 	// The API mapping key.
 	ApiMappingKey *string
+
 	// The domain name.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The API stage.
+	//
+	// This member is required.
 	Stage *string
 }
 
 type CreateApiMappingOutput struct {
+
 	// The API identifier.
 	ApiId *string
+
 	// The API stage.
 	Stage *string
+
 	// The API mapping key.
 	ApiMappingKey *string
+
 	// The API mapping identifier.
 	ApiMappingId *string
 

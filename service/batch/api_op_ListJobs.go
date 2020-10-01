@@ -68,13 +68,16 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 }
 
 type ListJobsInput struct {
+
 	// The job ID for an array job. Specifying an array job ID with this parameter
 	// lists all child jobs from within the specified array.
 	ArrayJobId *string
+
 	// The job ID for a multi-node parallel job. Specifying a multi-node parallel job
 	// ID with this parameter lists all nodes that are associated with the specified
 	// job.
 	MultiNodeJobId *string
+
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
 	// page along with a nextToken response element. The remaining results of the
@@ -83,12 +86,15 @@ type ListJobsInput struct {
 	// is not used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
+
 	// The job status with which to filter jobs in the specified queue. If you do not
 	// specify a status, only RUNNING jobs are returned.
 	JobStatus types.JobStatus
+
 	// The name or full Amazon Resource Name (ARN) of the job queue with which to list
 	// jobs.
 	JobQueue *string
+
 	// The nextToken value returned from a previous paginated ListJobs request where
 	// maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
@@ -99,8 +105,12 @@ type ListJobsInput struct {
 }
 
 type ListJobsOutput struct {
+
 	// A list of job summaries that match the request.
+	//
+	// This member is required.
 	JobSummaryList []*types.JobSummary
+
 	// The nextToken value to include in a future ListJobs request. When the results of
 	// a ListJobs request exceed maxResults, this value can be used to retrieve the
 	// next page of results. This value is null when there are no more results to

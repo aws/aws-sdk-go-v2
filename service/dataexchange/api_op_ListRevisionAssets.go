@@ -57,20 +57,30 @@ func (c *Client) ListRevisionAssets(ctx context.Context, params *ListRevisionAss
 }
 
 type ListRevisionAssetsInput struct {
+
 	// The unique identifier for a revision.
+	//
+	// This member is required.
 	RevisionId *string
+
 	// The maximum number of results returned by a single call.
 	MaxResults *int32
+
 	// The unique identifier for a data set.
+	//
+	// This member is required.
 	DataSetId *string
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string
 }
 
 type ListRevisionAssetsOutput struct {
+
 	// The asset objects listed by the request.
 	Assets []*types.AssetEntry
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string

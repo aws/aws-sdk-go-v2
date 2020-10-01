@@ -59,13 +59,23 @@ func (c *Client) UpdateDocumentationVersion(ctx context.Context, params *UpdateD
 // Updates an existing documentation version of an API.
 type UpdateDocumentationVersionInput struct {
 	TemplateSkipList []*string
-	Title            *string
-	Template         *bool
+
+	Title *string
+
+	Template *bool
+
 	// [Required] The version identifier of the to-be-updated documentation version.
+	//
+	// This member is required.
 	DocumentationVersion *string
+
 	// [Required] The string identifier of the associated RestApi ()..
+	//
+	// This member is required.
 	RestApiId *string
-	Name      *string
+
+	Name *string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -77,10 +87,13 @@ type UpdateDocumentationVersionInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
 // DocumentationPart (), DocumentationVersions ()
 type UpdateDocumentationVersionOutput struct {
+
 	// The description of the API documentation snapshot.
 	Description *string
+
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
 	// The version identifier of the API documentation snapshot.
 	Version *string
 

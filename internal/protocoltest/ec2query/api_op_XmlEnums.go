@@ -55,12 +55,17 @@ type XmlEnumsInput struct {
 }
 
 type XmlEnumsOutput struct {
-	FooEnum1    types.FooEnum
-	FooEnum2    types.FooEnum
-	FooEnum3    types.FooEnum
+	FooEnum1 types.FooEnum
+
+	FooEnum2 types.FooEnum
+
+	FooEnum3 types.FooEnum
+
 	FooEnumList []types.FooEnum
-	FooEnumSet  []types.FooEnum
-	FooEnumMap  map[string]types.FooEnum
+
+	FooEnumSet []types.FooEnum
+
+	FooEnumMap map[string]types.FooEnum
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

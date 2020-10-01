@@ -58,10 +58,17 @@ func (c *Client) DisassociateQualificationFromWorker(ctx context.Context, params
 }
 
 type DisassociateQualificationFromWorkerInput struct {
+
 	// The ID of the Qualification type of the Qualification to be revoked.
+	//
+	// This member is required.
 	QualificationTypeId *string
+
 	// The ID of the Worker who possesses the Qualification to be revoked.
+	//
+	// This member is required.
 	WorkerId *string
+
 	// A text message that explains why the Qualification was revoked. The user who had
 	// the Qualification sees this message.
 	Reason *string

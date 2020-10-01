@@ -55,8 +55,12 @@ func (c *Client) DisassociateSkillFromSkillGroup(ctx context.Context, params *Di
 }
 
 type DisassociateSkillFromSkillGroupInput struct {
+
 	// The ARN of a skill group to associate to a skill.
+	//
+	// This member is required.
 	SkillId *string
+
 	// The unique identifier of a skill. Required.
 	SkillGroupArn *string
 }

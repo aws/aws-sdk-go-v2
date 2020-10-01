@@ -58,11 +58,16 @@ func (c *Client) ListPartnerEventSourceAccounts(ctx context.Context, params *Lis
 }
 
 type ListPartnerEventSourceAccountsInput struct {
+
 	// The token returned by a previous call to this operation. Specifying this
 	// retrieves the next set of results.
 	NextToken *string
+
 	// The name of the partner event source to display account information about.
+	//
+	// This member is required.
 	EventSourceName *string
+
 	// Specifying this limits the number of results returned by this operation. The
 	// operation also returns a NextToken which you can use in a subsequent operation
 	// to retrieve the next set of results.
@@ -70,8 +75,10 @@ type ListPartnerEventSourceAccountsInput struct {
 }
 
 type ListPartnerEventSourceAccountsOutput struct {
+
 	// The list of partner event sources returned by the operation.
 	PartnerEventSourceAccounts []*types.PartnerEventSourceAccount
+
 	// A token you can use in a subsequent operation to retrieve the next set of
 	// results.
 	NextToken *string

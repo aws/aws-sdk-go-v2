@@ -56,29 +56,46 @@ func (c *Client) GetModelVersion(ctx context.Context, params *GetModelVersionInp
 }
 
 type GetModelVersionInput struct {
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
+
 	// The model type.
+	//
+	// This member is required.
 	ModelType types.ModelTypeEnum
+
 	// The model version number.
+	//
+	// This member is required.
 	ModelVersionNumber *string
 }
 
 type GetModelVersionOutput struct {
+
 	// The model version ARN.
 	Arn *string
+
 	// The training data source.
 	TrainingDataSource types.TrainingDataSourceEnum
+
 	// The training data schema.
 	TrainingDataSchema *types.TrainingDataSchema
+
 	// The model version status.
 	Status *string
+
 	// The model ID.
 	ModelId *string
+
 	// The model version number.
 	ModelVersionNumber *string
+
 	// The event details.
 	ExternalEventsDetail *types.ExternalEventsDetail
+
 	// The model type.
 	ModelType types.ModelTypeEnum
 

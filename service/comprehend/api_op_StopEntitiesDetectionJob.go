@@ -62,13 +62,18 @@ func (c *Client) StopEntitiesDetectionJob(ctx context.Context, params *StopEntit
 }
 
 type StopEntitiesDetectionJobInput struct {
+
 	// The identifier of the entities detection job to stop.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopEntitiesDetectionJobOutput struct {
+
 	// The identifier of the entities detection job to stop.
 	JobId *string
+
 	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
 	// previously stopped with the StopEntitiesDetectionJob operation.
 	JobStatus types.JobStatus

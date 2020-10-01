@@ -64,6 +64,7 @@ func (c *Client) EnableKeyRotation(ctx context.Context, params *EnableKeyRotatio
 }
 
 type EnableKeyRotationInput struct {
+
 	// Identifies a symmetric customer master key (CMK). You cannot enable automatic
 	// rotation of asymmetric CMKs, CMKs with imported key material, or CMKs in a
 	// custom key store
@@ -74,6 +75,8 @@ type EnableKeyRotationInput struct {
 	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
 	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
 	// or <a>DescribeKey</a>.</p>
+	//
+	// This member is required.
 	KeyId *string
 }
 

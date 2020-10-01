@@ -73,8 +73,12 @@ func (c *Client) ModifyIdentityIdFormat(ctx context.Context, params *ModifyIdent
 }
 
 type ModifyIdentityIdFormatInput struct {
+
 	// Indicates whether the resource should use longer IDs (17-character IDs)
+	//
+	// This member is required.
 	UseLongIds *bool
+
 	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
 	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log |
 	// image | import-task | internet-gateway | network-acl | network-acl-association |
@@ -84,10 +88,15 @@ type ModifyIdentityIdFormatInput struct {
 	// | vpc-peering-connection | vpn-connection | vpn-gateway. Alternatively, use the
 	// all-current option to include all resource types that are currently within their
 	// opt-in period for longer IDs.
+	//
+	// This member is required.
 	Resource *string
+
 	// The ARN of the principal, which can be an IAM user, IAM role, or the root user.
 	// Specify all to modify the ID format for all IAM users, IAM roles, and the root
 	// user of the account.
+	//
+	// This member is required.
 	PrincipalArn *string
 }
 

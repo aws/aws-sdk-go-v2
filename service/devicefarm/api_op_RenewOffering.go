@@ -60,14 +60,17 @@ func (c *Client) RenewOffering(ctx context.Context, params *RenewOfferingInput, 
 
 // A request that represents an offering renewal.
 type RenewOfferingInput struct {
+
 	// The ID of a request to renew an offering.
 	OfferingId *string
+
 	// The quantity requested in an offering renewal.
 	Quantity *int32
 }
 
 // The result of a renewal offering.
 type RenewOfferingOutput struct {
+
 	// Represents the status of the offering transaction for the renewal.
 	OfferingTransaction *types.OfferingTransaction
 

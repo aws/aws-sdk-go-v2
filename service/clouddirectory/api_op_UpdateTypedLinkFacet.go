@@ -57,10 +57,17 @@ func (c *Client) UpdateTypedLinkFacet(ctx context.Context, params *UpdateTypedLi
 }
 
 type UpdateTypedLinkFacetInput struct {
+
 	// The unique name of the typed link facet.
+	//
+	// This member is required.
 	Name *string
+
 	// Attributes update structure.
+	//
+	// This member is required.
 	AttributeUpdates []*types.TypedLinkFacetAttributeUpdate
+
 	// The order of identity attributes for the facet, from most significant to least
 	// significant. The ability to filter typed links considers the order that the
 	// attributes are defined on the typed link facet. When providing ranges to a typed
@@ -70,9 +77,14 @@ type UpdateTypedLinkFacetInput struct {
 	// not the order in which they are supplied to any API calls. For more information
 	// about identity attributes, see Typed Links
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+	//
+	// This member is required.
 	IdentityAttributeOrder []*string
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
 }
 

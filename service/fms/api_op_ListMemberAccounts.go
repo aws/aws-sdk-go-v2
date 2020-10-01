@@ -56,11 +56,13 @@ func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccou
 }
 
 type ListMemberAccountsInput struct {
+
 	// Specifies the number of member account IDs that you want AWS Firewall Manager to
 	// return for this request. If you have more IDs than the number that you specify
 	// for MaxResults, the response includes a NextToken value that you can use to get
 	// another batch of member account IDs.
 	MaxResults *int32
+
 	// If you specify a value for MaxResults and you have more account IDs than the
 	// number that you specify for MaxResults, AWS Firewall Manager returns a NextToken
 	// value in the response that allows you to list another group of IDs. For the
@@ -71,11 +73,13 @@ type ListMemberAccountsInput struct {
 }
 
 type ListMemberAccountsOutput struct {
+
 	// If you have more member account IDs than the number that you specified for
 	// MaxResults in the request, the response includes a NextToken value. To list more
 	// IDs, submit another ListMemberAccounts request, and specify the NextToken value
 	// from the response in the NextToken value in the next request.
 	NextToken *string
+
 	// An array of account IDs.
 	MemberAccounts []*string
 

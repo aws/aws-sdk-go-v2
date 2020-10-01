@@ -56,11 +56,15 @@ func (c *Client) GetOutpost(ctx context.Context, params *GetOutpostInput, optFns
 }
 
 type GetOutpostInput struct {
+
 	// The ID of the Outpost.
+	//
+	// This member is required.
 	OutpostId *string
 }
 
 type GetOutpostOutput struct {
+
 	// Information about an Outpost.
 	Outpost *types.Outpost
 

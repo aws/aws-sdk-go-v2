@@ -56,19 +56,26 @@ func (c *Client) DescribeUsers(ctx context.Context, params *DescribeUsersInput, 
 }
 
 type DescribeUsersInput struct {
+
 	// The maximum size of each page of results.
 	MaxResults *int32
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
 	// The authentication type for the users in the user pool to describe. You must
 	// specify USERPOOL.
+	//
+	// This member is required.
 	AuthenticationType types.AuthenticationType
 }
 
 type DescribeUsersOutput struct {
+
 	// Information about users in the user pool.
 	Users []*types.User
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

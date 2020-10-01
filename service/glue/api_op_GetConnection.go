@@ -56,11 +56,16 @@ func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, 
 }
 
 type GetConnectionInput struct {
+
 	// The name of the connection definition to retrieve.
+	//
+	// This member is required.
 	Name *string
+
 	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string
+
 	// Allows you to retrieve the connection metadata without returning the password.
 	// For instance, the AWS Glue console uses this flag to retrieve the connection,
 	// and does not display the password. Set this parameter when the caller might not
@@ -70,6 +75,7 @@ type GetConnectionInput struct {
 }
 
 type GetConnectionOutput struct {
+
 	// The requested connection definition.
 	Connection *types.Connection
 

@@ -58,11 +58,14 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 }
 
 type ListAliasesInput struct {
+
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
 	Marker *string
+
 	// Limit the number of aliases returned.
 	MaxItems *int32
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -77,14 +80,19 @@ type ListAliasesInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// Specify a function version to only list aliases that invoke that version.
 	FunctionVersion *string
 }
 
 type ListAliasesOutput struct {
+
 	// A list of aliases.
 	Aliases []*types.AliasConfiguration
+
 	// The pagination token that's included if more results are available.
 	NextMarker *string
 

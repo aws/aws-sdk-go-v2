@@ -55,15 +55,23 @@ func (c *Client) DeregisterTaskFromMaintenanceWindow(ctx context.Context, params
 }
 
 type DeregisterTaskFromMaintenanceWindowInput struct {
+
 	// The ID of the maintenance window the task should be removed from.
+	//
+	// This member is required.
 	WindowId *string
+
 	// The ID of the task to remove from the maintenance window.
+	//
+	// This member is required.
 	WindowTaskId *string
 }
 
 type DeregisterTaskFromMaintenanceWindowOutput struct {
+
 	// The ID of the maintenance window the task was removed from.
 	WindowId *string
+
 	// The ID of the task removed from the maintenance window.
 	WindowTaskId *string
 

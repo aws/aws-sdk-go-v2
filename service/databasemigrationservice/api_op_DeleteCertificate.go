@@ -56,11 +56,15 @@ func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificat
 }
 
 type DeleteCertificateInput struct {
+
 	// The Amazon Resource Name (ARN) of the deleted certificate.
+	//
+	// This member is required.
 	CertificateArn *string
 }
 
 type DeleteCertificateOutput struct {
+
 	// The Secure Sockets Layer (SSL) certificate.
 	Certificate *types.Certificate
 

@@ -62,7 +62,10 @@ func (c *Client) StopNotebookInstance(ctx context.Context, params *StopNotebookI
 }
 
 type StopNotebookInstanceInput struct {
+
 	// The name of the notebook instance to terminate.
+	//
+	// This member is required.
 	NotebookInstanceName *string
 }
 

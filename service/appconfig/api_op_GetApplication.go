@@ -55,15 +55,21 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 }
 
 type GetApplicationInput struct {
+
 	// The ID of the application you want to get.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetApplicationOutput struct {
+
 	// The application name.
 	Name *string
+
 	// The application ID.
 	Id *string
+
 	// The description of the application.
 	Description *string
 

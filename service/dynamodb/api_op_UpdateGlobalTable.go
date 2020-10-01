@@ -75,13 +75,20 @@ func (c *Client) UpdateGlobalTable(ctx context.Context, params *UpdateGlobalTabl
 }
 
 type UpdateGlobalTableInput struct {
+
 	// The global table name.
+	//
+	// This member is required.
 	GlobalTableName *string
+
 	// A list of Regions that should be added or removed from the global table.
+	//
+	// This member is required.
 	ReplicaUpdates []*types.ReplicaUpdate
 }
 
 type UpdateGlobalTableOutput struct {
+
 	// Contains the details of the global table.
 	GlobalTableDescription *types.GlobalTableDescription
 

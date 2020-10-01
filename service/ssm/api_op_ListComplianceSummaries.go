@@ -58,22 +58,27 @@ func (c *Client) ListComplianceSummaries(ctx context.Context, params *ListCompli
 }
 
 type ListComplianceSummariesInput struct {
+
 	// The maximum number of items to return for this call. Currently, you can specify
 	// null or 50. The call also returns a token that you can specify in a subsequent
 	// call to get the next set of results.
 	MaxResults *int32
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
+
 	// One or more compliance or inventory filters. Use a filter to return a more
 	// specific list of results.
 	Filters []*types.ComplianceStringFilter
 }
 
 type ListComplianceSummariesOutput struct {
+
 	// A list of compliant and non-compliant summary counts based on compliance types.
 	// For example, this call returns State Manager associations, patches, or custom
 	// compliance types according to the filter criteria that you specified.
 	ComplianceSummaryItems []*types.ComplianceSummaryItem
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string

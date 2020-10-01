@@ -56,19 +56,31 @@ func (c *Client) UpdateClusterKafkaVersion(ctx context.Context, params *UpdateCl
 }
 
 type UpdateClusterKafkaVersionInput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster to be updated.
+	//
+	// This member is required.
 	ClusterArn *string
+
 	// Current cluster version.
+	//
+	// This member is required.
 	CurrentVersion *string
+
 	// Target Kafka version.
+	//
+	// This member is required.
 	TargetKafkaVersion *string
+
 	// The custom configuration that should be applied on the new version of cluster.
 	ConfigurationInfo *types.ConfigurationInfo
 }
 
 type UpdateClusterKafkaVersionOutput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster operation.
 	ClusterOperationArn *string
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 

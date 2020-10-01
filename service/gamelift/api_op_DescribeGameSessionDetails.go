@@ -89,31 +89,39 @@ func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *Describ
 
 // Represents the input for a request action.
 type DescribeGameSessionDetailsInput struct {
+
 	// A unique identifier for a fleet to retrieve all game sessions active on the
 	// fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
+
 	// A unique identifier for an alias associated with the fleet to retrieve all game
 	// sessions for. You can use either the alias ID or ARN value.
 	AliasId *string
+
 	// Game session status to filter results on. Possible game session statuses include
 	// ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are transitory).
 	StatusFilter *string
+
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
+
 	// A unique identifier for the game session to retrieve.
 	GameSessionId *string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeGameSessionDetailsOutput struct {
+
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string
+
 	// A collection of objects containing game session properties and the protection
 	// policy currently in force for each session matching the request.
 	GameSessionDetails []*types.GameSessionDetail

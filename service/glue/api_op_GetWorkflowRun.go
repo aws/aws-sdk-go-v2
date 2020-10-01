@@ -56,15 +56,23 @@ func (c *Client) GetWorkflowRun(ctx context.Context, params *GetWorkflowRunInput
 }
 
 type GetWorkflowRunInput struct {
+
 	// The ID of the workflow run.
+	//
+	// This member is required.
 	RunId *string
+
 	// Specifies whether to include the workflow graph in response or not.
 	IncludeGraph *bool
+
 	// Name of the workflow being run.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetWorkflowRunOutput struct {
+
 	// The requested workflow run metadata.
 	Run *types.WorkflowRun
 

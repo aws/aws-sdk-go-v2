@@ -57,7 +57,10 @@ func (c *Client) DisableRadius(ctx context.Context, params *DisableRadiusInput, 
 
 // Contains the inputs for the DisableRadius () operation.
 type DisableRadiusInput struct {
+
 	// The identifier of the directory for which to disable MFA.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 

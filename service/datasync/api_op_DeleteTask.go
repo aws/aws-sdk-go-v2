@@ -56,7 +56,10 @@ func (c *Client) DeleteTask(ctx context.Context, params *DeleteTaskInput, optFns
 
 // DeleteTask
 type DeleteTaskInput struct {
+
 	// The Amazon Resource Name (ARN) of the task to delete.
+	//
+	// This member is required.
 	TaskArn *string
 }
 

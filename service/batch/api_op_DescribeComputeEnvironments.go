@@ -58,9 +58,11 @@ func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *Descri
 }
 
 type DescribeComputeEnvironmentsInput struct {
+
 	// A list of up to 100 compute environment names or full Amazon Resource Name (ARN)
 	// entries.
 	ComputeEnvironments []*string
+
 	// The nextToken value returned from a previous paginated
 	// DescribeComputeEnvironments request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
@@ -69,6 +71,7 @@ type DescribeComputeEnvironmentsInput struct {
 	// identifier that is only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
+
 	// The maximum number of cluster results returned by DescribeComputeEnvironments in
 	// paginated output. When this parameter is used, DescribeComputeEnvironments only
 	// returns maxResults results in a single page along with a nextToken response
@@ -81,11 +84,13 @@ type DescribeComputeEnvironmentsInput struct {
 }
 
 type DescribeComputeEnvironmentsOutput struct {
+
 	// The nextToken value to include in a future DescribeComputeEnvironments request.
 	// When the results of a DescribeJobDefinitions request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The list of compute environments.
 	ComputeEnvironments []*types.ComputeEnvironmentDetail
 

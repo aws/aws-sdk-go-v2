@@ -55,7 +55,10 @@ func (c *Client) DeleteClassifier(ctx context.Context, params *DeleteClassifierI
 }
 
 type DeleteClassifierInput struct {
+
 	// Name of the classifier to remove.
+	//
+	// This member is required.
 	Name *string
 }
 

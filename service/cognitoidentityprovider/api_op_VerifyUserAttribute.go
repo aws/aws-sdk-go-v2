@@ -53,11 +53,20 @@ func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttr
 
 // Represents the request to verify user attributes.
 type VerifyUserAttributeInput struct {
+
 	// Represents the access token of the request to verify user attributes.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// The verification code in the request to verify user attributes.
+	//
+	// This member is required.
 	Code *string
+
 	// The attribute name in the request to verify user attributes.
+	//
+	// This member is required.
 	AttributeName *string
 }
 

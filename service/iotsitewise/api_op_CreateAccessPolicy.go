@@ -60,19 +60,30 @@ func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPol
 }
 
 type CreateAccessPolicyInput struct {
+
 	// The identity for this access policy. Choose either a user or a group but not
 	// both.
+	//
+	// This member is required.
 	AccessPolicyIdentity *types.Identity
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
 	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either
 	// portal or project but not both.
+	//
+	// This member is required.
 	AccessPolicyResource *types.Resource
+
 	// The permission level for this access policy. Note that a project ADMINISTRATOR
 	// is also known as a project owner.
+	//
+	// This member is required.
 	AccessPolicyPermission types.Permission
+
 	// A list of key-value pairs that contain metadata for the access policy. For more
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
@@ -81,12 +92,18 @@ type CreateAccessPolicyInput struct {
 }
 
 type CreateAccessPolicyOutput struct {
+
 	// The ID of the access policy.
+	//
+	// This member is required.
 	AccessPolicyId *string
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the access policy, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
+	//
+	// This member is required.
 	AccessPolicyArn *string
 
 	// Metadata pertaining to the operation's result.

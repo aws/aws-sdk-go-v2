@@ -79,12 +79,16 @@ func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGa
 }
 
 type DescribeGameServerGroupInput struct {
+
 	// The unique identifier for the game server group being requested. Use either the
 	// GameServerGroup () name or ARN value.
+	//
+	// This member is required.
 	GameServerGroupName *string
 }
 
 type DescribeGameServerGroupOutput struct {
+
 	// An object that describes the requested game server group resource.
 	GameServerGroup *types.GameServerGroup
 

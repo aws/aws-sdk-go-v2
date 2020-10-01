@@ -58,11 +58,20 @@ func (c *Client) UpdatePrimaryEmailAddress(ctx context.Context, params *UpdatePr
 }
 
 type UpdatePrimaryEmailAddressInput struct {
+
 	// The organization that contains the user, group, or resource to update.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The value of the email to be updated as primary.
+	//
+	// This member is required.
 	Email *string
+
 	// The user, group, or resource to update.
+	//
+	// This member is required.
 	EntityId *string
 }
 

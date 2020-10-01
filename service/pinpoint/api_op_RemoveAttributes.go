@@ -57,6 +57,7 @@ func (c *Client) RemoveAttributes(ctx context.Context, params *RemoveAttributesI
 }
 
 type RemoveAttributesInput struct {
+
 	// The type of attribute or attributes to remove. Valid values are:
 	//
 	//     *
@@ -71,18 +72,29 @@ type RemoveAttributesInput struct {
 	//     *
 	// endpoint-user-attributes - Custom attributes that describe users, such as first
 	// name, last name, and age.
+	//
+	// This member is required.
 	AttributeType *string
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies one or more attributes to remove from all the endpoints that are
 	// associated with an application.
+	//
+	// This member is required.
 	UpdateAttributesRequest *types.UpdateAttributesRequest
 }
 
 type RemoveAttributesOutput struct {
+
 	// Provides information about the type and the names of attributes that were
 	// removed from all the endpoints that are associated with an application.
+	//
+	// This member is required.
 	AttributesResource *types.AttributesResource
 
 	// Metadata pertaining to the operation's result.

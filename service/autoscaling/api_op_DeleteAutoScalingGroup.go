@@ -64,8 +64,12 @@ func (c *Client) DeleteAutoScalingGroup(ctx context.Context, params *DeleteAutoS
 }
 
 type DeleteAutoScalingGroupInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// Specifies that the group is to be deleted along with all instances associated
 	// with the group, without waiting for all instances to be terminated. This
 	// parameter also deletes any lifecycle actions associated with the group.

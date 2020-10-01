@@ -65,6 +65,7 @@ func (c *Client) ListRepositoryAssociations(ctx context.Context, params *ListRep
 }
 
 type ListRepositoryAssociationsInput struct {
+
 	// The maximum number of repository association results returned by
 	// ListRepositoryAssociations in paginated output. When this parameter is used,
 	// ListRepositoryAssociations only returns maxResults results in a single page with
@@ -74,6 +75,7 @@ type ListRepositoryAssociationsInput struct {
 	// used, ListRepositoryAssociations returns up to 100 results and a nextToken value
 	// if applicable.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated
 	// ListRepositoryAssociations request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
@@ -81,8 +83,10 @@ type ListRepositoryAssociationsInput struct {
 	// opaque identifier that is only used to retrieve the next items in a list and not
 	// for other programmatic purposes.
 	NextToken *string
+
 	// List of provider types to use as a filter.
 	ProviderTypes []types.ProviderType
+
 	// List of repository association states to use as a filter. The valid repository
 	// association states are:
 	//
@@ -108,18 +112,22 @@ type ListRepositoryAssociationsInput struct {
 	// Disassociating: CodeGuru Reviewer is removing the repository's pull request
 	// notifications and source code access.
 	States []types.RepositoryAssociationState
+
 	// List of owners to use as a filter. For AWS CodeCommit, it is the name of the
 	// CodeCommit account that was used to associate the repository. For other
 	// repository source providers, such as Bitbucket, this is name of the account that
 	// was used to associate the repository.
 	Owners []*string
+
 	// List of repository names to use as a filter.
 	Names []*string
 }
 
 type ListRepositoryAssociationsOutput struct {
+
 	// A list of repository associations that meet the criteria of the request.
 	RepositoryAssociationSummaries []*types.RepositoryAssociationSummary
+
 	// The nextToken value to include in a future ListRecommendations request. When the
 	// results of a ListRecommendations request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no

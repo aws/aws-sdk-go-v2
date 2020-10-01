@@ -73,13 +73,17 @@ func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, 
 
 // Represents the input for a request action.
 type DescribeAliasInput struct {
+
 	// The unique identifier for the fleet alias that you want to retrieve. You can use
 	// either the alias ID or ARN value.
+	//
+	// This member is required.
 	AliasId *string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeAliasOutput struct {
+
 	// The requested alias resource.
 	Alias *types.Alias
 

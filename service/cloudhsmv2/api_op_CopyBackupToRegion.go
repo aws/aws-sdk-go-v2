@@ -56,17 +56,25 @@ func (c *Client) CopyBackupToRegion(ctx context.Context, params *CopyBackupToReg
 }
 
 type CopyBackupToRegionInput struct {
+
 	// Tags to apply to the destination backup during creation. If you specify tags,
 	// only these tags will be applied to the destination backup. If you do not specify
 	// tags, the service copies tags from the source backup to the destination backup.
 	TagList []*types.Tag
+
 	// The AWS region that will contain your copied CloudHSM cluster backup.
+	//
+	// This member is required.
 	DestinationRegion *string
+
 	// The ID of the backup that will be copied to the destination region.
+	//
+	// This member is required.
 	BackupId *string
 }
 
 type CopyBackupToRegionOutput struct {
+
 	// Information on the backup that will be copied to the destination region,
 	// including CreateTimestamp, SourceBackup, SourceCluster, and Source Region.
 	// CreateTimestamp of the destination backup will be the same as that of the source

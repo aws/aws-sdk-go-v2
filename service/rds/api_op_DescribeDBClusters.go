@@ -61,6 +61,7 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 
 //
 type DescribeDBClustersInput struct {
+
 	// A filter that specifies one or more DB clusters to describe. Supported
 	// filters:
 	//
@@ -68,9 +69,11 @@ type DescribeDBClustersInput struct {
 	// Amazon Resource Names (ARNs). The results list will only include information
 	// about the DB clusters identified by these ARNs.
 	Filters []*types.Filter
+
 	// Optional Boolean parameter that specifies whether the output includes
 	// information about clusters shared from other AWS accounts.
 	IncludeShared *bool
+
 	// The user-supplied DB cluster identifier. If this parameter is specified,
 	// information from only the specific DB cluster is returned. This parameter isn't
 	// case-sensitive. Constraints:
@@ -78,11 +81,13 @@ type DescribeDBClustersInput struct {
 	//     * If supplied, must match an existing
 	// DBClusterIdentifier.
 	DBClusterIdentifier *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An optional pagination token provided by a previous DescribeDBClusters request.
 	// If this parameter is specified, the response includes only records beyond the
 	// marker, up to the value specified by MaxRecords.
@@ -91,8 +96,10 @@ type DescribeDBClustersInput struct {
 
 // Contains the result of a successful invocation of the DescribeDBClusters action.
 type DescribeDBClustersOutput struct {
+
 	// Contains a list of DB clusters for the user.
 	DBClusters []*types.DBCluster
+
 	// A pagination token that can be used in a later DescribeDBClusters request.
 	Marker *string
 

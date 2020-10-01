@@ -58,13 +58,18 @@ func (c *Client) GetUpgradeHistory(ctx context.Context, params *GetUpgradeHistor
 
 // Container for request parameters to GetUpgradeHistory () operation.
 type GetUpgradeHistoryInput struct {
+
 	// Set this value to limit the number of results returned.
 	MaxResults *int32
+
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or
 	// number and can contain the following characters: a-z (lowercase), 0-9, and -
 	// (hyphen).
+	//
+	// This member is required.
 	DomainName *string
+
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
 	// more results.
@@ -73,9 +78,11 @@ type GetUpgradeHistoryInput struct {
 
 // Container for response returned by GetUpgradeHistory () operation.
 type GetUpgradeHistoryOutput struct {
+
 	// Pagination token that needs to be supplied to the next call to get the next page
 	// of results
 	NextToken *string
+
 	// A list of UpgradeHistory () objects corresponding to each Upgrade or Upgrade
 	// Eligibility Check performed on a domain returned as part of
 	// GetUpgradeHistoryResponse () object.

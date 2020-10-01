@@ -56,11 +56,15 @@ func (c *Client) GetRelationalDatabase(ctx context.Context, params *GetRelationa
 }
 
 type GetRelationalDatabaseInput struct {
+
 	// The name of the database that you are looking up.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
 }
 
 type GetRelationalDatabaseOutput struct {
+
 	// An object describing the specified database.
 	RelationalDatabase *types.RelationalDatabase
 

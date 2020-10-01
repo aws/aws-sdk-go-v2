@@ -56,12 +56,15 @@ func (c *Client) DescribeNetworkInterfacePermissions(ctx context.Context, params
 
 // Contains the parameters for DescribeNetworkInterfacePermissions.
 type DescribeNetworkInterfacePermissionsInput struct {
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. If this
 	// parameter is not specified, up to 50 results are returned by default.
 	MaxResults *int32
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// One or more filters.
 	//
 	//     *
@@ -80,14 +83,17 @@ type DescribeNetworkInterfacePermissionsInput struct {
 	//     * network-interface-permission.permission - The type of permission
 	// (INSTANCE-ATTACH | EIP-ASSOCIATE).
 	Filters []*types.Filter
+
 	// One or more network interface permission IDs.
 	NetworkInterfacePermissionIds []*string
 }
 
 // Contains the output for DescribeNetworkInterfacePermissions.
 type DescribeNetworkInterfacePermissionsOutput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The network interface permissions.
 	NetworkInterfacePermissions []*types.NetworkInterfacePermission
 

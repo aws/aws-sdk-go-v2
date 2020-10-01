@@ -56,17 +56,27 @@ func (c *Client) CreateType(ctx context.Context, params *CreateTypeInput, optFns
 }
 
 type CreateTypeInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The type format: SDL or JSON.
+	//
+	// This member is required.
 	Format types.TypeDefinitionFormat
+
 	// The type definition, in GraphQL Schema Definition Language (SDL) format. For
 	// more information, see the GraphQL SDL documentation
 	// (http://graphql.org/learn/schema/).
+	//
+	// This member is required.
 	Definition *string
 }
 
 type CreateTypeOutput struct {
+
 	// The Type object.
 	Type *types.Type
 

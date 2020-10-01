@@ -78,14 +78,20 @@ func (c *Client) BatchPutAssetPropertyValue(ctx context.Context, params *BatchPu
 }
 
 type BatchPutAssetPropertyValueInput struct {
+
 	// The list of asset property value entries for the batch put request. You can
 	// specify up to 10 entries per request.
+	//
+	// This member is required.
 	Entries []*types.PutAssetPropertyValueEntry
 }
 
 type BatchPutAssetPropertyValueOutput struct {
+
 	// A list of the errors (if any) associated with the batch put request. Each error
 	// entry contains the entryId of the entry that failed.
+	//
+	// This member is required.
 	ErrorEntries []*types.BatchPutAssetPropertyErrorEntry
 
 	// Metadata pertaining to the operation's result.

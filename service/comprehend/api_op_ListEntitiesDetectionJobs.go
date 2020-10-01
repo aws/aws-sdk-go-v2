@@ -55,19 +55,24 @@ func (c *Client) ListEntitiesDetectionJobs(ctx context.Context, params *ListEnti
 }
 
 type ListEntitiesDetectionJobsInput struct {
+
 	// Filters the jobs that are returned. You can filter jobs on their name, status,
 	// or the date and time that they were submitted. You can only set one filter at a
 	// time.
 	Filter *types.EntitiesDetectionJobFilter
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
 	// Identifies the next page of results to return.
 	NextToken *string
 }
 
 type ListEntitiesDetectionJobsOutput struct {
+
 	// A list containing the properties of each job that is returned.
 	EntitiesDetectionJobPropertiesList []*types.EntitiesDetectionJobProperties
+
 	// Identifies the next page of results to return.
 	NextToken *string
 

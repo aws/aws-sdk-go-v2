@@ -63,6 +63,7 @@ type DescribeMyUserProfileInput struct {
 
 // Contains the response to a DescribeMyUserProfile request.
 type DescribeMyUserProfileOutput struct {
+
 	// A UserProfile object that describes the user's SSH information.
 	UserProfile *types.SelfUserProfile
 

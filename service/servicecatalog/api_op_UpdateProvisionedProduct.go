@@ -62,22 +62,28 @@ func (c *Client) UpdateProvisionedProduct(ctx context.Context, params *UpdatePro
 }
 
 type UpdateProvisionedProductInput struct {
+
 	// The name of the provisioned product. You cannot specify both
 	// ProvisionedProductName and ProvisionedProductId.
 	ProvisionedProductName *string
+
 	// The name of the provisioning artifact. You must provide the name or ID, but not
 	// both.
 	ProvisioningArtifactName *string
+
 	// The path identifier. This value is optional if the product has a default path,
 	// and required if the product has more than one path. You must provide the name or
 	// ID, but not both.
 	PathId *string
+
 	// The identifier of the provisioned product. You must provide the name or ID, but
 	// not both.
 	ProvisionedProductId *string
+
 	// An object that contains information about the provisioning preferences for a
 	// stack set.
 	ProvisioningPreferences *types.UpdateProvisioningPreferences
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -87,24 +93,34 @@ type UpdateProvisionedProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The name of the path. You must provide the name or ID, but not both.
 	PathName *string
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The new parameters.
 	ProvisioningParameters []*types.UpdateProvisioningParameter
+
 	// One or more tags. Requires the product to have RESOURCE_UPDATE constraint with
 	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
 	Tags []*types.Tag
+
 	// The name of the product. You must provide the name or ID, but not both.
 	ProductName *string
+
 	// The identifier of the product. You must provide the name or ID, but not both.
 	ProductId *string
+
 	// The idempotency token that uniquely identifies the provisioning update request.
+	//
+	// This member is required.
 	UpdateToken *string
 }
 
 type UpdateProvisionedProductOutput struct {
+
 	// Information about the result of the request.
 	RecordDetail *types.RecordDetail
 

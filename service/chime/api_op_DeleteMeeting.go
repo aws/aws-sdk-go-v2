@@ -59,7 +59,10 @@ func (c *Client) DeleteMeeting(ctx context.Context, params *DeleteMeetingInput, 
 }
 
 type DeleteMeetingInput struct {
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
 }
 

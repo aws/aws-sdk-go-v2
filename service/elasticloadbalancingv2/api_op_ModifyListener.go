@@ -63,8 +63,10 @@ func (c *Client) ModifyListener(ctx context.Context, params *ModifyListenerInput
 }
 
 type ModifyListenerInput struct {
+
 	// The port for connections from clients to the load balancer.
 	Port *int32
+
 	// The actions for the default rule. The rule must include one forward action or
 	// one or more fixed-response actions. If the action type is forward, you specify
 	// one or more target groups. The protocol of the target group must be HTTP or
@@ -78,6 +80,7 @@ type ModifyListenerInput struct {
 	// another. [Application Load Balancer] If the action type is fixed-response, you
 	// drop specified client requests and return a custom HTTP response.
 	DefaultActions []*types.Action
+
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
 	// ciphers are supported. The following are the possible values:
 	//
@@ -111,10 +114,12 @@ type ModifyListenerInput struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
 	// in the Network Load Balancers Guide.
 	SslPolicy *string
+
 	// The protocol for connections from clients to the load balancer. Application Load
 	// Balancers support the HTTP and HTTPS protocols. Network Load Balancers support
 	// the TCP, TLS, UDP, and TCP_UDP protocols.
 	Protocol types.ProtocolEnum
+
 	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
 	// policy. You can specify one policy name. The following are the possible
 	// values:
@@ -134,8 +139,12 @@ type ModifyListenerInput struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
 	AlpnPolicy []*string
+
 	// The Amazon Resource Name (ARN) of the listener.
+	//
+	// This member is required.
 	ListenerArn *string
+
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
 	// do not set IsDefault. To create a certificate list, use AddListenerCertificates
@@ -144,6 +153,7 @@ type ModifyListenerInput struct {
 }
 
 type ModifyListenerOutput struct {
+
 	// Information about the modified listener.
 	Listeners []*types.Listener
 

@@ -58,17 +58,29 @@ func (c *Client) AdminGetDevice(ctx context.Context, params *AdminGetDeviceInput
 
 // Represents the request to get the device, as an administrator.
 type AdminGetDeviceInput struct {
+
 	// The user name.
+	//
+	// This member is required.
 	Username *string
+
 	// The device key.
+	//
+	// This member is required.
 	DeviceKey *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 // Gets the device response, as an administrator.
 type AdminGetDeviceOutput struct {
+
 	// The device.
+	//
+	// This member is required.
 	Device *types.DeviceType
 
 	// Metadata pertaining to the operation's result.

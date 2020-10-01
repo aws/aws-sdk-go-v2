@@ -58,13 +58,18 @@ func (c *Client) GetRestApis(ctx context.Context, params *GetRestApisInput, optF
 // The GET request to list existing RestApis () defined for your collection.
 type GetRestApisInput struct {
 	Name *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
-	Limit            *int32
+	Limit *int32
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	Template *bool
 }
 
@@ -73,8 +78,10 @@ type GetRestApisInput struct {
 // an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type GetRestApisOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.RestApi
+
 	// The current pagination position in the paged result set.
 	Position *string
 

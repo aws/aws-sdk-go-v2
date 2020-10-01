@@ -59,11 +59,15 @@ func (c *Client) GetVoiceConnectorStreamingConfiguration(ctx context.Context, pa
 }
 
 type GetVoiceConnectorStreamingConfigurationInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type GetVoiceConnectorStreamingConfigurationOutput struct {
+
 	// The streaming configuration details.
 	StreamingConfiguration *types.StreamingConfiguration
 

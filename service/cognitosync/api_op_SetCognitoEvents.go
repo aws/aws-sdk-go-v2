@@ -60,9 +60,15 @@ func (c *Client) SetCognitoEvents(ctx context.Context, params *SetCognitoEventsI
 
 // A request to configure Cognito Events.
 type SetCognitoEventsInput struct {
+
 	// The events to configure
+	//
+	// This member is required.
 	Events map[string]*string
+
 	// The Cognito Identity Pool to use when configuring Cognito Events
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 

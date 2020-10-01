@@ -56,15 +56,24 @@ func (c *Client) GetArchiveRule(ctx context.Context, params *GetArchiveRuleInput
 
 // Retrieves an archive rule.
 type GetArchiveRuleInput struct {
+
 	// The name of the analyzer to retrieve rules from.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// The name of the rule to retrieve.
+	//
+	// This member is required.
 	RuleName *string
 }
 
 // The response to the request.
 type GetArchiveRuleOutput struct {
+
 	// Contains information about an archive rule.
+	//
+	// This member is required.
 	ArchiveRule *types.ArchiveRuleSummary
 
 	// Metadata pertaining to the operation's result.

@@ -57,17 +57,21 @@ func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddresse
 }
 
 type DescribeAddressesInput struct {
+
 	// HTTP requests are stateless. To identify what object comes "next" in the list of
 	// ADDRESS objects, you have the option of specifying a value for NextToken as the
 	// starting point for your list of returned addresses.
 	NextToken *string
+
 	// The number of ADDRESS objects to return.
 	MaxResults *int32
 }
 
 type DescribeAddressesOutput struct {
+
 	// The Snowball shipping addresses that were created for this account.
 	Addresses []*types.Address
+
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next DescribeAddresses call, your list of returned addresses will
 	// start from this point in the array.

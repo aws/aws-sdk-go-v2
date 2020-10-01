@@ -57,14 +57,20 @@ func (c *Client) DeleteBaiduChannel(ctx context.Context, params *DeleteBaiduChan
 }
 
 type DeleteBaiduChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteBaiduChannelOutput struct {
+
 	// Provides information about the status and settings of the Baidu (Baidu Cloud
 	// Push) channel for an application.
+	//
+	// This member is required.
 	BaiduChannelResponse *types.BaiduChannelResponse
 
 	// Metadata pertaining to the operation's result.

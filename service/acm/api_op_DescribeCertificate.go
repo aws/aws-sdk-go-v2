@@ -56,16 +56,20 @@ func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertif
 }
 
 type DescribeCertificateInput struct {
+
 	// The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the
 	// following form:
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
 	CertificateArn *string
 }
 
 type DescribeCertificateOutput struct {
+
 	// Metadata about an ACM certificate.
 	Certificate *types.CertificateDetail
 

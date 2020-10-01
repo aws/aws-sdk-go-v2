@@ -72,13 +72,18 @@ func (c *Client) CreatePresignedNotebookInstanceUrl(ctx context.Context, params 
 }
 
 type CreatePresignedNotebookInstanceUrlInput struct {
+
 	// The name of the notebook instance.
+	//
+	// This member is required.
 	NotebookInstanceName *string
+
 	// The duration of the session, in seconds. The default is 12 hours.
 	SessionExpirationDurationInSeconds *int32
 }
 
 type CreatePresignedNotebookInstanceUrlOutput struct {
+
 	// A JSON object that contains the URL string.
 	AuthorizedUrl *string
 

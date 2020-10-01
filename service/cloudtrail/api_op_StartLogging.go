@@ -60,9 +60,12 @@ func (c *Client) StartLogging(ctx context.Context, params *StartLoggingInput, op
 
 // The request to CloudTrail to start logging AWS API calls for an account.
 type StartLoggingInput struct {
+
 	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs
 	// AWS API calls. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	Name *string
 }
 

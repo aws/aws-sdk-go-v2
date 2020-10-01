@@ -56,39 +56,62 @@ func (c *Client) UpdateDataSet(ctx context.Context, params *UpdateDataSetInput, 
 }
 
 type UpdateDataSetInput struct {
+
 	// Groupings of columns that work together in certain QuickSight features.
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []*types.ColumnGroup
+
 	// Indicates whether you want to import the data into SPICE.
+	//
+	// This member is required.
 	ImportMode types.DataSetImportMode
+
 	// The row-level security configuration for the data you want to create.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
+
 	// Declares the physical tables that are available in the underlying data sources.
+	//
+	// This member is required.
 	PhysicalTableMap map[string]*types.PhysicalTable
+
 	// The display name for the dataset.
+	//
+	// This member is required.
 	Name *string
+
 	// Configures the combination and transformation of the data from the physical
 	// tables.
 	LogicalTableMap map[string]*types.LogicalTable
+
 	// The ID for the dataset that you want to update. This ID is unique per AWS Region
 	// for each AWS account.
+	//
+	// This member is required.
 	DataSetId *string
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type UpdateDataSetOutput struct {
+
 	// The ID of the ingestion, which is triggered as a result of dataset creation if
 	// the import mode is SPICE.
 	IngestionId *string
+
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
+
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
 	DataSetId *string
+
 	// The ARN for the ingestion, which is triggered as a result of dataset creation if
 	// the import mode is SPICE.
 	IngestionArn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

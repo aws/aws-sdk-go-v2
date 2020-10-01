@@ -56,21 +56,32 @@ func (c *Client) UpgradePublishedSchema(ctx context.Context, params *UpgradePubl
 }
 
 type UpgradePublishedSchemaInput struct {
+
 	// Identifies the minor version of the published schema that will be created. This
 	// parameter is NOT optional.
+	//
+	// This member is required.
 	MinorVersion *string
+
 	// The ARN of the published schema to be upgraded.
+	//
+	// This member is required.
 	PublishedSchemaArn *string
+
 	// Used for testing whether the Development schema provided is backwards
 	// compatible, or not, with the publish schema provided by the user to be upgraded.
 	// If schema compatibility fails, an exception would be thrown else the call would
 	// succeed. This parameter is optional and defaults to false.
 	DryRun *bool
+
 	// The ARN of the development schema with the changes used for the upgrade.
+	//
+	// This member is required.
 	DevelopmentSchemaArn *string
 }
 
 type UpgradePublishedSchemaOutput struct {
+
 	// The ARN of the upgraded schema that is returned as part of the response.
 	UpgradedSchemaArn *string
 

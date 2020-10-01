@@ -57,14 +57,21 @@ func (c *Client) GetAnalyzedResource(ctx context.Context, params *GetAnalyzedRes
 
 // Retrieves an analyzed resource.
 type GetAnalyzedResourceInput struct {
+
 	// The ARN of the analyzer to retrieve information from.
+	//
+	// This member is required.
 	AnalyzerArn *string
+
 	// The ARN of the resource to retrieve information about.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 // The response to the request.
 type GetAnalyzedResourceOutput struct {
+
 	// An AnalyedResource object that contains information that Access Analyzer found
 	// when it analyzed the resource.
 	Resource *types.AnalyzedResource

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An internal service error occurred.
@@ -24,12 +23,6 @@ func (e *InternalServiceError) ErrorMessage() string {
 }
 func (e *InternalServiceError) ErrorCode() string             { return "InternalServiceError" }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was not valid. Verify that your request was properly formatted, that
 // the signature was generated with the correct credentials, and that you haven't
@@ -49,12 +42,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified pipeline has been deleted.
 type PipelineDeletedException struct {
@@ -72,12 +59,6 @@ func (e *PipelineDeletedException) ErrorMessage() string {
 }
 func (e *PipelineDeletedException) ErrorCode() string             { return "PipelineDeletedException" }
 func (e *PipelineDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PipelineDeletedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PipelineDeletedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified pipeline was not found. Verify that you used the correct user and
 // account identifiers.
@@ -96,12 +77,6 @@ func (e *PipelineNotFoundException) ErrorMessage() string {
 }
 func (e *PipelineNotFoundException) ErrorCode() string             { return "PipelineNotFoundException" }
 func (e *PipelineNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PipelineNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PipelineNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified task was not found.
 type TaskNotFoundException struct {
@@ -119,9 +94,3 @@ func (e *TaskNotFoundException) ErrorMessage() string {
 }
 func (e *TaskNotFoundException) ErrorCode() string             { return "TaskNotFoundException" }
 func (e *TaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TaskNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TaskNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

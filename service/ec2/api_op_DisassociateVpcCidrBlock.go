@@ -60,15 +60,21 @@ func (c *Client) DisassociateVpcCidrBlock(ctx context.Context, params *Disassoci
 }
 
 type DisassociateVpcCidrBlockInput struct {
+
 	// The association ID for the CIDR block.
+	//
+	// This member is required.
 	AssociationId *string
 }
 
 type DisassociateVpcCidrBlockOutput struct {
+
 	// The ID of the VPC.
 	VpcId *string
+
 	// Information about the IPv4 CIDR block association.
 	CidrBlockAssociation *types.VpcCidrBlockAssociation
+
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *types.VpcIpv6CidrBlockAssociation
 

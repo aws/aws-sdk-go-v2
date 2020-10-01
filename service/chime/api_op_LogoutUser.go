@@ -56,9 +56,15 @@ func (c *Client) LogoutUser(ctx context.Context, params *LogoutUserInput, optFns
 }
 
 type LogoutUserInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The user ID.
+	//
+	// This member is required.
 	UserId *string
 }
 

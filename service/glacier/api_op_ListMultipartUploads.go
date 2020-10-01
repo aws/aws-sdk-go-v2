@@ -88,17 +88,25 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 // Provides options for retrieving list of in-progress multipart uploads for an
 // Amazon Glacier vault.
 type ListMultipartUploadsInput struct {
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// Specifies the maximum number of uploads returned in the response body. If this
 	// value is not specified, the List Uploads operation returns up to 50 uploads.
 	Limit *string
+
 	// An opaque string used for pagination. This value specifies the upload at which
 	// the listing of uploads should begin. Get the marker value from a previous List
 	// Uploads response. You need only include the marker if you are continuing the
@@ -108,10 +116,12 @@ type ListMultipartUploadsInput struct {
 
 // Contains the Amazon S3 Glacier response to your request.
 type ListMultipartUploadsOutput struct {
+
 	// An opaque string that represents where to continue pagination of the results.
 	// You use the marker in a new List Multipart Uploads request to obtain more
 	// uploads in the list. If there are no more uploads, this value is null.
 	Marker *string
+
 	// A list of in-progress multipart uploads.
 	UploadsList []*types.UploadListElement
 

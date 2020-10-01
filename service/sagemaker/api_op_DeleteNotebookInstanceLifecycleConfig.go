@@ -55,7 +55,10 @@ func (c *Client) DeleteNotebookInstanceLifecycleConfig(ctx context.Context, para
 }
 
 type DeleteNotebookInstanceLifecycleConfigInput struct {
+
 	// The name of the lifecycle configuration to delete.
+	//
+	// This member is required.
 	NotebookInstanceLifecycleConfigName *string
 }
 

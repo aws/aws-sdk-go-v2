@@ -61,6 +61,7 @@ type GetHomeRegionInput struct {
 }
 
 type GetHomeRegionOutput struct {
+
 	// The name of the home region of the calling account.
 	HomeRegion *string
 

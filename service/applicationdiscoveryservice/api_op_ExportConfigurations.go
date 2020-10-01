@@ -62,6 +62,7 @@ type ExportConfigurationsInput struct {
 }
 
 type ExportConfigurationsOutput struct {
+
 	// A unique identifier that you can use to query the export status.
 	ExportId *string
 

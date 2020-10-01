@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The request was rejected because it attempted to create a resource that already
@@ -25,12 +24,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified AWS CloudHSM cluster is already
 // associated with a custom key store or it shares a backup history with a cluster
@@ -55,12 +48,6 @@ func (e *CloudHsmClusterInUseException) ErrorMessage() string {
 }
 func (e *CloudHsmClusterInUseException) ErrorCode() string             { return "CloudHsmClusterInUseException" }
 func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmClusterInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmClusterInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the associated AWS CloudHSM cluster did not
 // meet the configuration requirements for a custom key store.  <ul> <li> <p>The
@@ -113,12 +100,6 @@ func (e *CloudHsmClusterInvalidConfigurationException) ErrorCode() string {
 func (e *CloudHsmClusterInvalidConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CloudHsmClusterInvalidConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmClusterInvalidConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the AWS CloudHSM cluster that is associated
 // with the custom key store is not active. Initialize and activate the cluster and
@@ -142,12 +123,6 @@ func (e *CloudHsmClusterNotActiveException) ErrorCode() string {
 	return "CloudHsmClusterNotActiveException"
 }
 func (e *CloudHsmClusterNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmClusterNotActiveException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmClusterNotActiveException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because AWS KMS cannot find the AWS CloudHSM cluster
 // with the specified cluster ID. Retry the request with a different cluster ID.
@@ -168,12 +143,6 @@ func (e *CloudHsmClusterNotFoundException) ErrorCode() string {
 	return "CloudHsmClusterNotFoundException"
 }
 func (e *CloudHsmClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmClusterNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmClusterNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified AWS CloudHSM cluster has a
 // different cluster certificate than the original cluster. You cannot use the
@@ -204,12 +173,6 @@ func (e *CloudHsmClusterNotRelatedException) ErrorCode() string {
 func (e *CloudHsmClusterNotRelatedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CloudHsmClusterNotRelatedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmClusterNotRelatedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the custom key store contains AWS KMS customer
 // master keys (CMKs). After verifying that you do not need to use the CMKs, use
@@ -230,12 +193,6 @@ func (e *CustomKeyStoreHasCMKsException) ErrorMessage() string {
 }
 func (e *CustomKeyStoreHasCMKsException) ErrorCode() string             { return "CustomKeyStoreHasCMKsException" }
 func (e *CustomKeyStoreHasCMKsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CustomKeyStoreHasCMKsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomKeyStoreHasCMKsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because of the ConnectionState of the custom key store.
 // To get the ConnectionState of a custom key store, use the
@@ -274,12 +231,6 @@ func (e *CustomKeyStoreInvalidStateException) ErrorCode() string {
 func (e *CustomKeyStoreInvalidStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CustomKeyStoreInvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomKeyStoreInvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified custom key store name is already
 // assigned to another custom key store in the account. Try again with a custom key
@@ -301,12 +252,6 @@ func (e *CustomKeyStoreNameInUseException) ErrorCode() string {
 	return "CustomKeyStoreNameInUseException"
 }
 func (e *CustomKeyStoreNameInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CustomKeyStoreNameInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomKeyStoreNameInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because AWS KMS cannot find a custom key store with the
 // specified key store name or ID.
@@ -327,12 +272,6 @@ func (e *CustomKeyStoreNotFoundException) ErrorCode() string {
 	return "CustomKeyStoreNotFoundException"
 }
 func (e *CustomKeyStoreNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CustomKeyStoreNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomKeyStoreNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The system timed out while trying to fulfill the request. The request can be
 // retried.
@@ -351,12 +290,6 @@ func (e *DependencyTimeoutException) ErrorMessage() string {
 }
 func (e *DependencyTimeoutException) ErrorCode() string             { return "DependencyTimeoutException" }
 func (e *DependencyTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *DependencyTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified CMK is not enabled.
 type DisabledException struct {
@@ -374,12 +307,6 @@ func (e *DisabledException) ErrorMessage() string {
 }
 func (e *DisabledException) ErrorCode() string             { return "DisabledException" }
 func (e *DisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified import token is expired. Use
 // GetParametersForImport () to get a new import token and public key, use the new
@@ -399,12 +326,6 @@ func (e *ExpiredImportTokenException) ErrorMessage() string {
 }
 func (e *ExpiredImportTokenException) ErrorCode() string             { return "ExpiredImportTokenException" }
 func (e *ExpiredImportTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredImportTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredImportTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified CMK cannot decrypt the data. The
 // KeyId in a Decrypt () request and the SourceKeyId in a ReEncrypt () request must
@@ -424,12 +345,6 @@ func (e *IncorrectKeyException) ErrorMessage() string {
 }
 func (e *IncorrectKeyException) ErrorCode() string             { return "IncorrectKeyException" }
 func (e *IncorrectKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncorrectKeyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncorrectKeyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the key material in the request is, expired,
 // invalid, or is not the same key material that was previously imported into this
@@ -449,12 +364,6 @@ func (e *IncorrectKeyMaterialException) ErrorMessage() string {
 }
 func (e *IncorrectKeyMaterialException) ErrorCode() string             { return "IncorrectKeyMaterialException" }
 func (e *IncorrectKeyMaterialException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncorrectKeyMaterialException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncorrectKeyMaterialException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the trust anchor certificate in the request is
 // not the trust anchor certificate for the specified AWS CloudHSM cluster. When
@@ -476,12 +385,6 @@ func (e *IncorrectTrustAnchorException) ErrorMessage() string {
 }
 func (e *IncorrectTrustAnchorException) ErrorCode() string             { return "IncorrectTrustAnchorException" }
 func (e *IncorrectTrustAnchorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncorrectTrustAnchorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncorrectTrustAnchorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified alias name is not valid.
 type InvalidAliasNameException struct {
@@ -499,12 +402,6 @@ func (e *InvalidAliasNameException) ErrorMessage() string {
 }
 func (e *InvalidAliasNameException) ErrorCode() string             { return "InvalidAliasNameException" }
 func (e *InvalidAliasNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAliasNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAliasNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because a specified ARN, or an ARN in a key policy, is
 // not valid.
@@ -523,12 +420,6 @@ func (e *InvalidArnException) ErrorMessage() string {
 }
 func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // From the Decrypt () or ReEncrypt () operation, the request was rejected because
 // the specified ciphertext, or additional authenticated data incorporated into the
@@ -550,12 +441,6 @@ func (e *InvalidCiphertextException) ErrorMessage() string {
 }
 func (e *InvalidCiphertextException) ErrorCode() string             { return "InvalidCiphertextException" }
 func (e *InvalidCiphertextException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCiphertextException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCiphertextException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified GrantId is not valid.
 type InvalidGrantIdException struct {
@@ -573,12 +458,6 @@ func (e *InvalidGrantIdException) ErrorMessage() string {
 }
 func (e *InvalidGrantIdException) ErrorCode() string             { return "InvalidGrantIdException" }
 func (e *InvalidGrantIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGrantIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGrantIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified grant token is not valid.
 type InvalidGrantTokenException struct {
@@ -596,12 +475,6 @@ func (e *InvalidGrantTokenException) ErrorMessage() string {
 }
 func (e *InvalidGrantTokenException) ErrorCode() string             { return "InvalidGrantTokenException" }
 func (e *InvalidGrantTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGrantTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGrantTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the provided import token is invalid or is
 // associated with a different customer master key (CMK).
@@ -620,12 +493,6 @@ func (e *InvalidImportTokenException) ErrorMessage() string {
 }
 func (e *InvalidImportTokenException) ErrorCode() string             { return "InvalidImportTokenException" }
 func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidImportTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidImportTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected for one of the following reasons:
 //
@@ -657,12 +524,6 @@ func (e *InvalidKeyUsageException) ErrorMessage() string {
 }
 func (e *InvalidKeyUsageException) ErrorCode() string             { return "InvalidKeyUsageException" }
 func (e *InvalidKeyUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidKeyUsageException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidKeyUsageException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the marker that specifies where pagination
 // should next begin is not valid.
@@ -681,12 +542,6 @@ func (e *InvalidMarkerException) ErrorMessage() string {
 }
 func (e *InvalidMarkerException) ErrorCode() string             { return "InvalidMarkerException" }
 func (e *InvalidMarkerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMarkerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMarkerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified CMK was not available. You can
 // retry the request.
@@ -705,12 +560,6 @@ func (e *KeyUnavailableException) ErrorMessage() string {
 }
 func (e *KeyUnavailableException) ErrorCode() string             { return "KeyUnavailableException" }
 func (e *KeyUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *KeyUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KeyUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because an internal exception occurred. The request can
 // be retried.
@@ -729,12 +578,6 @@ func (e *KMSInternalException) ErrorMessage() string {
 }
 func (e *KMSInternalException) ErrorCode() string             { return "KMSInternalException" }
 func (e *KMSInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *KMSInternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSInternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the signature verification failed. Signature
 // verification fails when it cannot confirm that signature was produced by signing
@@ -754,12 +597,6 @@ func (e *KMSInvalidSignatureException) ErrorMessage() string {
 }
 func (e *KMSInvalidSignatureException) ErrorCode() string             { return "KMSInvalidSignatureException" }
 func (e *KMSInvalidSignatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSInvalidSignatureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSInvalidSignatureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the state of the specified resource is not
 // valid for this request. For more information about how key state affects the use
@@ -781,12 +618,6 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 }
 func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidStateException" }
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSInvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSInvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because a quota was exceeded. For more information, see
 // Quotas (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html) in
@@ -806,12 +637,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified policy is not syntactically or
 // semantically correct.
@@ -832,12 +657,6 @@ func (e *MalformedPolicyDocumentException) ErrorCode() string {
 	return "MalformedPolicyDocumentException"
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedPolicyDocumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedPolicyDocumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified entity or resource could not be
 // found.
@@ -856,12 +675,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because one or more tags are not valid.
 type TagException struct {
@@ -879,12 +692,6 @@ func (e *TagException) ErrorMessage() string {
 }
 func (e *TagException) ErrorCode() string             { return "TagException" }
 func (e *TagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because a specified parameter is not supported or a
 // specified resource is not valid for this operation.
@@ -903,9 +710,3 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 }
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperationException) HasMessage() bool {
-	return e.Message != nil
-}

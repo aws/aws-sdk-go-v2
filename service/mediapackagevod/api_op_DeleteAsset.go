@@ -55,7 +55,10 @@ func (c *Client) DeleteAsset(ctx context.Context, params *DeleteAssetInput, optF
 }
 
 type DeleteAssetInput struct {
+
 	// The ID of the MediaPackage VOD Asset resource to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

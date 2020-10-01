@@ -56,13 +56,19 @@ func (c *Client) GetTelemetryMetadata(ctx context.Context, params *GetTelemetryM
 }
 
 type GetTelemetryMetadataInput struct {
+
 	// The ARN that specifies the assessment run that has the telemetry data that you
 	// want to obtain.
+	//
+	// This member is required.
 	AssessmentRunArn *string
 }
 
 type GetTelemetryMetadataOutput struct {
+
 	// Telemetry details.
+	//
+	// This member is required.
 	TelemetryMetadata []*types.TelemetryMetadata
 
 	// Metadata pertaining to the operation's result.

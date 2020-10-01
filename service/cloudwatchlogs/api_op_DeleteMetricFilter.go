@@ -55,9 +55,15 @@ func (c *Client) DeleteMetricFilter(ctx context.Context, params *DeleteMetricFil
 }
 
 type DeleteMetricFilterInput struct {
+
 	// The name of the metric filter.
+	//
+	// This member is required.
 	FilterName *string
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 

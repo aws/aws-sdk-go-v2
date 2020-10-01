@@ -62,22 +62,28 @@ func (c *Client) ListContainers(ctx context.Context, params *ListContainersInput
 }
 
 type ListContainersInput struct {
+
 	// Only if you used MaxResults in the first command, enter the token (which was
 	// included in the previous response) to obtain the next set of containers. This
 	// token is included in a response only if there actually are more containers to
 	// list.
 	NextToken *string
+
 	// Enter the maximum number of containers in the response. Use from 1 to 255
 	// characters.
 	MaxResults *int32
 }
 
 type ListContainersOutput struct {
+
 	// NextToken is the token to use in the next call to ListContainers. This token is
 	// returned only if you included the MaxResults tag in the original command, and
 	// only if there are still containers to return.
 	NextToken *string
+
 	// The names of the containers.
+	//
+	// This member is required.
 	Containers []*types.Container
 
 	// Metadata pertaining to the operation's result.

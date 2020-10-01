@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Access to resource denied.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The AWS user account does not have permission to perform the action. Check the
 // IAM policy associated with this account.
@@ -48,12 +41,6 @@ func (e *AuthorizationException) ErrorMessage() string {
 }
 func (e *AuthorizationException) ErrorCode() string             { return "AuthorizationException" }
 func (e *AuthorizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A dependency required to run the API is missing.
 type FailedDependencyException struct {
@@ -71,12 +58,6 @@ func (e *FailedDependencyException) ErrorMessage() string {
 }
 func (e *FailedDependencyException) ErrorCode() string             { return "FailedDependencyException" }
 func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FailedDependencyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FailedDependencyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request uses too many filters or too many filter values.
 type FilterLimitExceededException struct {
@@ -94,12 +75,6 @@ func (e *FilterLimitExceededException) ErrorMessage() string {
 }
 func (e *FilterLimitExceededException) ErrorCode() string             { return "FilterLimitExceededException" }
 func (e *FilterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FilterLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FilterLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameter values are not valid.
 type InvalidParameterValueException struct {
@@ -117,12 +92,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // License Manager cannot allocate a license to a resource because of its state.
 // For example, you cannot allocate a license to an instance in the process of
@@ -142,12 +111,6 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 }
 func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You do not have enough licenses available to support a new resource launch.
 type LicenseUsageException struct {
@@ -165,12 +128,6 @@ func (e *LicenseUsageException) ErrorMessage() string {
 }
 func (e *LicenseUsageException) ErrorCode() string             { return "LicenseUsageException" }
 func (e *LicenseUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LicenseUsageException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LicenseUsageException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Too many requests have been submitted. Try again after a brief wait.
 type RateLimitExceededException struct {
@@ -188,12 +145,6 @@ func (e *RateLimitExceededException) ErrorMessage() string {
 }
 func (e *RateLimitExceededException) ErrorCode() string             { return "RateLimitExceededException" }
 func (e *RateLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RateLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RateLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your resource limits have been exceeded.
 type ResourceLimitExceededException struct {
@@ -211,12 +162,6 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 }
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The server experienced an internal error. Try again.
 type ServerInternalException struct {
@@ -234,9 +179,3 @@ func (e *ServerInternalException) ErrorMessage() string {
 }
 func (e *ServerInternalException) ErrorCode() string             { return "ServerInternalException" }
 func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServerInternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerInternalException) HasMessage() bool {
-	return e.Message != nil
-}

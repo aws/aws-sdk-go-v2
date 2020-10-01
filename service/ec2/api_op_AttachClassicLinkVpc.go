@@ -63,21 +63,32 @@ func (c *Client) AttachClassicLinkVpc(ctx context.Context, params *AttachClassic
 }
 
 type AttachClassicLinkVpcInput struct {
+
 	// The ID of one or more of the VPC's security groups. You cannot specify security
 	// groups from a different VPC.
+	//
+	// This member is required.
 	Groups []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The ID of a ClassicLink-enabled VPC.
+	//
+	// This member is required.
 	VpcId *string
 }
 
 type AttachClassicLinkVpcOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 

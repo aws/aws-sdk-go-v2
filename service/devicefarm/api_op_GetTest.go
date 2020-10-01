@@ -57,12 +57,16 @@ func (c *Client) GetTest(ctx context.Context, params *GetTestInput, optFns ...fu
 
 // Represents a request to the get test operation.
 type GetTestInput struct {
+
 	// The test's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get test request.
 type GetTestOutput struct {
+
 	// A test condition that is evaluated.
 	Test *types.Test
 

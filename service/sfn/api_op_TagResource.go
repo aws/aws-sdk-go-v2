@@ -63,10 +63,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The list of tags to add to a resource. Tags may only contain Unicode letters,
 	// digits, white space, or these symbols: _ . : / = + - @.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

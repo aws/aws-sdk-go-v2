@@ -56,20 +56,30 @@ func (c *Client) DescribeDashboardPermissions(ctx context.Context, params *Descr
 }
 
 type DescribeDashboardPermissionsInput struct {
+
 	// The ID for the dashboard, also added to the IAM policy.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// The ID of the AWS account that contains the dashboard that you're describing
 	// permissions for.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DescribeDashboardPermissionsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ID for the dashboard.
 	DashboardId *string
+
 	// A structure that contains the permissions for the dashboard.
 	Permissions []*types.ResourcePermission
 

@@ -60,7 +60,10 @@ func (c *Client) DeleteDocumentClassifier(ctx context.Context, params *DeleteDoc
 }
 
 type DeleteDocumentClassifierInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the document classifier.
+	//
+	// This member is required.
 	DocumentClassifierArn *string
 }
 

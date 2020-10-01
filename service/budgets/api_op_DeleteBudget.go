@@ -57,9 +57,15 @@ func (c *Client) DeleteBudget(ctx context.Context, params *DeleteBudgetInput, op
 
 // Request of DeleteBudget
 type DeleteBudgetInput struct {
+
 	// The name of the budget that you want to delete.
+	//
+	// This member is required.
 	BudgetName *string
+
 	// The accountId that is associated with the budget that you want to delete.
+	//
+	// This member is required.
 	AccountId *string
 }
 

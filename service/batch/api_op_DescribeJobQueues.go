@@ -55,6 +55,7 @@ func (c *Client) DescribeJobQueues(ctx context.Context, params *DescribeJobQueue
 }
 
 type DescribeJobQueuesInput struct {
+
 	// The nextToken value returned from a previous paginated DescribeJobQueues request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
@@ -62,9 +63,11 @@ type DescribeJobQueuesInput struct {
 	// This token should be treated as an opaque identifier that is only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
+
 	// A list of up to 100 queue names or full queue Amazon Resource Name (ARN)
 	// entries.
 	JobQueues []*string
+
 	// The maximum number of results returned by DescribeJobQueues in paginated output.
 	// When this parameter is used, DescribeJobQueues only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
@@ -76,11 +79,13 @@ type DescribeJobQueuesInput struct {
 }
 
 type DescribeJobQueuesOutput struct {
+
 	// The nextToken value to include in a future DescribeJobQueues request. When the
 	// results of a DescribeJobQueues request exceed maxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
+
 	// The list of job queues.
 	JobQueues []*types.JobQueueDetail
 

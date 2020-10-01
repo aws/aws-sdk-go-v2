@@ -58,14 +58,18 @@ func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInp
 }
 
 type DescribeAccountInput struct {
+
 	// The unique identifier (ID) of the AWS account that you want information about.
 	// You can get the ID from the ListAccounts () or ListAccountsForParent ()
 	// operations. The regex pattern (http://wikipedia.org/wiki/regex) for an account
 	// ID string requires exactly 12 digits.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type DescribeAccountOutput struct {
+
 	// A structure that contains information about the requested account.
 	Account *types.Account
 

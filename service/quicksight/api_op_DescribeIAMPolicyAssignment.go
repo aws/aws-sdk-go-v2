@@ -57,18 +57,29 @@ func (c *Client) DescribeIAMPolicyAssignment(ctx context.Context, params *Descri
 }
 
 type DescribeIAMPolicyAssignmentInput struct {
+
 	// The ID of the AWS account that contains the assignment that you want to
 	// describe.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The namespace that contains the assignment.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The name of the assignment.
+	//
+	// This member is required.
 	AssignmentName *string
 }
 
 type DescribeIAMPolicyAssignmentOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// Information describing the IAM policy assignment.
 	IAMPolicyAssignment *types.IAMPolicyAssignment
 

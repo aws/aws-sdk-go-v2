@@ -70,26 +70,37 @@ func (c *Client) GetReservationPurchaseRecommendation(ctx context.Context, param
 }
 
 type GetReservationPurchaseRecommendationInput struct {
+
 	// The number of recommendations that you want returned in a single response
 	// object.
 	PageSize *int32
+
 	// The account ID that is associated with the recommendation.
 	AccountId *string
+
 	// The specific service that you want recommendations for.
+	//
+	// This member is required.
 	Service *string
+
 	// The number of previous days that you want AWS to consider when it calculates
 	// your recommendations.
 	LookbackPeriodInDays types.LookbackPeriodInDays
+
 	// The reservation term that you want recommendations for.
 	TermInYears types.TermInYears
+
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
 	NextPageToken *string
+
 	// The hardware specifications for the service instances that you want
 	// recommendations for, such as standard or convertible Amazon EC2 instances.
 	ServiceSpecification *types.ServiceSpecification
+
 	// The reservation purchase option that you want recommendations for.
 	PaymentOption types.PaymentOption
+
 	// The account scope that you want your recommendations for. Amazon Web Services
 	// calculates recommendations including the payer account and linked accounts if
 	// the value is set to PAYER. If the value is LINKED, recommendations are
@@ -98,11 +109,14 @@ type GetReservationPurchaseRecommendationInput struct {
 }
 
 type GetReservationPurchaseRecommendationOutput struct {
+
 	// Recommendations for reservations to purchase.
 	Recommendations []*types.ReservationPurchaseRecommendation
+
 	// Information about this specific recommendation call, such as the time stamp for
 	// when Cost Explorer generated this recommendation.
 	Metadata *types.ReservationPurchaseRecommendationMetadata
+
 	// The pagination token for the next set of retrievable results.
 	NextPageToken *string
 

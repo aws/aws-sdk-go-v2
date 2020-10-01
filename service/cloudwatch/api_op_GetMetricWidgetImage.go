@@ -64,6 +64,7 @@ func (c *Client) GetMetricWidgetImage(ctx context.Context, params *GetMetricWidg
 }
 
 type GetMetricWidgetImageInput struct {
+
 	// A JSON string that defines the bitmap graph to be retrieved. The string includes
 	// the metrics to include in the graph, statistics, annotations, title, axis
 	// limits, and so on. You can include only one MetricWidget parameter in each
@@ -72,7 +73,10 @@ type GetMetricWidgetImageInput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html).
 	// <p>If any metric on the graph could not load all the requested data points, an
 	// orange triangle with an exclamation point appears next to the graph legend.</p>
+	//
+	// This member is required.
 	MetricWidget *string
+
 	// The format of the resulting image. Only PNG images are supported.  <p>The
 	// default is <code>png</code>. If you specify <code>png</code>, the API returns an
 	// HTTP response with the content-type set to <code>text/xml</code>. The image data
@@ -94,6 +98,7 @@ type GetMetricWidgetImageInput struct {
 }
 
 type GetMetricWidgetImageOutput struct {
+
 	// The image of the graph, in the output format specified. The output is
 	// base64-encoded.
 	MetricWidgetImage []byte

@@ -56,12 +56,21 @@ func (c *Client) UpdateImagePermissions(ctx context.Context, params *UpdateImage
 }
 
 type UpdateImagePermissionsInput struct {
+
 	// The name of the private image.
+	//
+	// This member is required.
 	Name *string
+
 	// The permissions for the image.
+	//
+	// This member is required.
 	ImagePermissions *types.ImagePermissions
+
 	// The 12-digit identifier of the AWS account for which you want add or update
 	// image permissions.
+	//
+	// This member is required.
 	SharedAccountId *string
 }
 

@@ -59,24 +59,35 @@ func (c *Client) InitializeCluster(ctx context.Context, params *InitializeCluste
 }
 
 type InitializeClusterInput struct {
+
 	// The cluster certificate issued (signed) by your issuing certificate authority
 	// (CA). The certificate must be in PEM format and can contain a maximum of 5000
 	// characters.
+	//
+	// This member is required.
 	SignedCert *string
+
 	// The identifier (ID) of the cluster that you are claiming. To find the cluster
 	// ID, use DescribeClusters ().
+	//
+	// This member is required.
 	ClusterId *string
+
 	// The issuing certificate of the issuing certificate authority (CA) that issued
 	// (signed) the cluster certificate. You must use a self-signed certificate. The
 	// certificate used to sign the HSM CSR must be directly available, and thus must
 	// be the root certificate. The certificate must be in PEM format and can contain a
 	// maximum of 5000 characters.
+	//
+	// This member is required.
 	TrustAnchor *string
 }
 
 type InitializeClusterOutput struct {
+
 	// A description of the cluster's state.
 	StateMessage *string
+
 	// The cluster's state.
 	State types.ClusterState
 

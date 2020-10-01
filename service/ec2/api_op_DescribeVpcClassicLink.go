@@ -55,6 +55,7 @@ func (c *Client) DescribeVpcClassicLink(ctx context.Context, params *DescribeVpc
 }
 
 type DescribeVpcClassicLinkInput struct {
+
 	// One or more filters.
 	//
 	//     * is-classic-link-enabled - Whether the VPC is enabled
@@ -70,16 +71,19 @@ type DescribeVpcClassicLinkInput struct {
 	// resource. Use this filter to find all resources assigned a tag with a specific
 	// key, regardless of the tag value.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more VPCs for which you want to describe the ClassicLink status.
 	VpcIds []*string
 }
 
 type DescribeVpcClassicLinkOutput struct {
+
 	// The ClassicLink status of one or more VPCs.
 	Vpcs []*types.VpcClassicLink
 

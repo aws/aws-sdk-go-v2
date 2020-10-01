@@ -57,31 +57,45 @@ func (c *Client) DescribeResource(ctx context.Context, params *DescribeResourceI
 }
 
 type DescribeResourceInput struct {
+
 	// The identifier associated with the organization for which the resource is
 	// described.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier of the resource to be described.
+	//
+	// This member is required.
 	ResourceId *string
 }
 
 type DescribeResourceOutput struct {
+
 	// The type of the described resource.
 	Type types.ResourceType
+
 	// The name of the described resource.
 	Name *string
+
 	// The date and time when a resource was disabled from WorkMail, in UNIX epoch time
 	// format.
 	DisabledDate *time.Time
+
 	// The identifier of the described resource.
 	ResourceId *string
+
 	// The state of the resource: enabled (registered to Amazon WorkMail) or disabled
 	// (deregistered or never registered to WorkMail).
 	State types.EntityState
+
 	// The booking options for the described resource.
 	BookingOptions *types.BookingOptions
+
 	// The date and time when a resource was enabled for WorkMail, in UNIX epoch time
 	// format.
 	EnabledDate *time.Time
+
 	// The email of the described resource.
 	Email *string
 

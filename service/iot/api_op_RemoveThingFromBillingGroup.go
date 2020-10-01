@@ -54,12 +54,16 @@ func (c *Client) RemoveThingFromBillingGroup(ctx context.Context, params *Remove
 }
 
 type RemoveThingFromBillingGroupInput struct {
+
 	// The ARN of the thing to be removed from the billing group.
 	ThingArn *string
+
 	// The name of the thing to be removed from the billing group.
 	ThingName *string
+
 	// The ARN of the billing group.
 	BillingGroupArn *string
+
 	// The name of the billing group.
 	BillingGroupName *string
 }

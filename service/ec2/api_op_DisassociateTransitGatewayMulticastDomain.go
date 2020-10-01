@@ -55,20 +55,25 @@ func (c *Client) DisassociateTransitGatewayMulticastDomain(ctx context.Context, 
 }
 
 type DisassociateTransitGatewayMulticastDomainInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
+
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
+
 	// The IDs of the subnets;
 	SubnetIds []*string
 }
 
 type DisassociateTransitGatewayMulticastDomainOutput struct {
+
 	// Information about the association.
 	Associations *types.TransitGatewayMulticastDomainAssociations
 

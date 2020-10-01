@@ -56,18 +56,25 @@ func (c *Client) GetFolder(ctx context.Context, params *GetFolderInput, optFns .
 }
 
 type GetFolderInput struct {
+
 	// The ID of the folder.
+	//
+	// This member is required.
 	FolderId *string
+
 	// Set to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata *bool
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
 }
 
 type GetFolderOutput struct {
+
 	// The custom metadata on the folder.
 	CustomMetadata map[string]*string
+
 	// The metadata of the folder.
 	Metadata *types.FolderMetadata
 

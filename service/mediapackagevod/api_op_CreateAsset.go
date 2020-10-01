@@ -57,37 +57,60 @@ func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optF
 
 // A new MediaPackage VOD Asset configuration.
 type CreateAssetInput struct {
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The resource ID to include in SPEKE key requests.
 	ResourceId *string
+
 	// ARN of the source object in S3.
+	//
+	// This member is required.
 	SourceArn *string
+
 	// The ID of the PackagingGroup for the Asset.
+	//
+	// This member is required.
 	PackagingGroupId *string
+
 	// The IAM role ARN used to access the source S3 bucket.
+	//
+	// This member is required.
 	SourceRoleArn *string
+
 	// The unique identifier for the Asset.
+	//
+	// This member is required.
 	Id *string
 }
 
 type CreateAssetOutput struct {
+
 	// The time the Asset was initially submitted for Ingest.
 	CreatedAt *string
+
 	// ARN of the source object in S3.
 	SourceArn *string
+
 	// The unique identifier for the Asset.
 	Id *string
+
 	// The ID of the PackagingGroup for the Asset.
 	PackagingGroupId *string
+
 	// The resource ID to include in SPEKE key requests.
 	ResourceId *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The list of egress endpoints available for the Asset.
 	EgressEndpoints []*types.EgressEndpoint
+
 	// The IAM role_arn used to access the source S3 bucket.
 	SourceRoleArn *string
+
 	// The ARN of the Asset.
 	Arn *string
 

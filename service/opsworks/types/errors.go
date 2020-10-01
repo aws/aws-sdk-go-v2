@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Indicates that a resource was not found.
@@ -24,12 +23,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that a request was not valid.
 type ValidationException struct {
@@ -47,9 +40,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

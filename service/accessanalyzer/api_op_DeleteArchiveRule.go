@@ -55,10 +55,17 @@ func (c *Client) DeleteArchiveRule(ctx context.Context, params *DeleteArchiveRul
 
 // Deletes an archive rule.
 type DeleteArchiveRuleInput struct {
+
 	// The name of the analyzer that associated with the archive rule to delete.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// The name of the rule to delete.
+	//
+	// This member is required.
 	RuleName *string
+
 	// A client token.
 	ClientToken *string
 }

@@ -58,6 +58,7 @@ type DescribeAccountAttributesInput struct {
 }
 
 type DescribeAccountAttributesOutput struct {
+
 	// The attributes that are currently set for the account.
 	Attributes []*types.AccountAttribute
 

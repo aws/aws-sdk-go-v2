@@ -59,17 +59,22 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 }
 
 type CreateDomainInput struct {
+
 	// The domain name to manage (e.g., example.com). You cannot register a new domain
 	// name using Lightsail. You must register a domain name using Amazon Route 53 or
 	// another domain name registrar. If you have already registered your domain, you
 	// can enter its name in this parameter to manage the DNS records for that domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
 }
 
 type CreateDomainOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -58,16 +58,19 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 }
 
 type ListRetirableGrantsInput struct {
+
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, AWS KMS does not return more than the specified number of
 	// items, but it might return fewer. This value is optional. If you include a
 	// value, it must be between 1 and 100, inclusive. If you do not include a value,
 	// it defaults to 50.
 	Limit *int32
+
 	// Use this parameter in a subsequent request after you receive a response with
 	// truncated results. Set it to the value of NextMarker from the truncated response
 	// you just received.
 	Marker *string
+
 	// The retiring principal for which to list grants. To specify the retiring
 	// principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -76,15 +79,20 @@ type ListRetirableGrantsInput struct {
 	// specifying a principal, see AWS Identity and Access Management (IAM)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the Amazon Web Services General Reference.
+	//
+	// This member is required.
 	RetiringPrincipal *string
 }
 
 type ListRetirableGrantsOutput struct {
+
 	// A list of grants.
 	Grants []*types.GrantListEntry
+
 	// When Truncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent request.
 	NextMarker *string
+
 	// A flag that indicates whether there are more items in the list. When this value
 	// is true, the list in this response is truncated. To get more items, pass the
 	// value of the NextMarker element in thisresponse to the Marker parameter in a

@@ -63,12 +63,16 @@ func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...fu
 }
 
 type GetRuleInput struct {
+
 	// The RuleId of the Rule () that you want to get. RuleId is returned by CreateRule
 	// () and by ListRules ().
+	//
+	// This member is required.
 	RuleId *string
 }
 
 type GetRuleOutput struct {
+
 	// Information about the Rule () that you specified in the GetRule request. For
 	// more information, see the following topics:
 	//

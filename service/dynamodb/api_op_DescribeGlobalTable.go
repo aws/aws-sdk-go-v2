@@ -65,11 +65,15 @@ func (c *Client) DescribeGlobalTable(ctx context.Context, params *DescribeGlobal
 }
 
 type DescribeGlobalTableInput struct {
+
 	// The name of the global table.
+	//
+	// This member is required.
 	GlobalTableName *string
 }
 
 type DescribeGlobalTableOutput struct {
+
 	// Contains the details of the global table.
 	GlobalTableDescription *types.GlobalTableDescription
 

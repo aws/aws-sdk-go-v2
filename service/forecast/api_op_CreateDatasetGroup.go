@@ -63,8 +63,12 @@ func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGr
 }
 
 type CreateDatasetGroupInput struct {
+
 	// A name for the dataset group.
+	//
+	// This member is required.
 	DatasetGroupName *string
+
 	// The optional metadata that you apply to the dataset group to help you categorize
 	// and organize them. Each tag consists of a key and an optional value, both of
 	// which you define. The following basic restrictions apply to tags:
@@ -97,6 +101,7 @@ type CreateDatasetGroupInput struct {
 	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
 	// resource limit.
 	Tags []*types.Tag
+
 	// The domain associated with the dataset group. When you add a dataset to a
 	// dataset group, this value and the value specified for the Domain parameter of
 	// the CreateDataset () operation must match. The Domain and DatasetType that you
@@ -105,13 +110,17 @@ type CreateDatasetGroupInput struct {
 	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires that item_id,
 	// timestamp, and demand fields are present in your data. For more information, see
 	// howitworks-datasets-groups ().
+	//
+	// This member is required.
 	Domain types.Domain
+
 	// An array of Amazon Resource Names (ARNs) of the datasets that you want to
 	// include in the dataset group.
 	DatasetArns []*string
 }
 
 type CreateDatasetGroupOutput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset group.
 	DatasetGroupArn *string
 

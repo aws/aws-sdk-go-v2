@@ -55,9 +55,15 @@ func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentI
 }
 
 type DeleteDeploymentInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The deployment ID.
+	//
+	// This member is required.
 	DeploymentId *string
 }
 

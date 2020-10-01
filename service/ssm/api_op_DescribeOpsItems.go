@@ -65,11 +65,14 @@ func (c *Client) DescribeOpsItems(ctx context.Context, params *DescribeOpsItemsI
 }
 
 type DescribeOpsItemsInput struct {
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
+
 	// One or more filters to limit the response.
 	//
 	//     * Key: CreatedTime Operations:
@@ -113,8 +116,10 @@ type DescribeOpsItemsInput struct {
 }
 
 type DescribeOpsItemsOutput struct {
+
 	// A list of OpsItems.
 	OpsItemSummaries []*types.OpsItemSummary
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string

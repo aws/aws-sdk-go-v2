@@ -57,18 +57,29 @@ func (c *Client) GetModel(ctx context.Context, params *GetModelInput, optFns ...
 
 // Request to list information about a model in an existing RestApi () resource.
 type GetModelInput struct {
+
 	// [Required] The RestApi () identifier under which the Model () exists.
-	RestApiId        *string
+	//
+	// This member is required.
+	RestApiId *string
+
 	TemplateSkipList []*string
+
 	// A query parameter of a Boolean value to resolve (true) all external model
 	// references and returns a flattened model schema or not (false) The default is
 	// false.
 	Flatten *bool
+
 	// [Required] The name of the model as an identifier.
+	//
+	// This member is required.
 	ModelName *string
-	Template  *bool
-	Title     *string
-	Name      *string
+
+	Template *bool
+
+	Title *string
+
+	Name *string
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -80,14 +91,19 @@ type GetModelInput struct {
 // Method (), MethodResponse (), Models and Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type GetModelOutput struct {
+
 	// The identifier for the model resource.
 	Id *string
+
 	// The name of the model. Must be an alphanumeric string.
 	Name *string
+
 	// The content-type for the model.
 	ContentType *string
+
 	// The description of the model.
 	Description *string
+
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model. Do
 	// not include "\*/" characters in the description of any properties because such

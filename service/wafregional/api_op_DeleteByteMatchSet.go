@@ -75,14 +75,21 @@ func (c *Client) DeleteByteMatchSet(ctx context.Context, params *DeleteByteMatch
 }
 
 type DeleteByteMatchSetInput struct {
+
 	// The ByteMatchSetId of the ByteMatchSet () that you want to delete.
 	// ByteMatchSetId is returned by CreateByteMatchSet () and by ListByteMatchSets ().
+	//
+	// This member is required.
 	ByteMatchSetId *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type DeleteByteMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

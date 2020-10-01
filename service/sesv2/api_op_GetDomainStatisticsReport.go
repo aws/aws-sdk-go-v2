@@ -59,27 +59,42 @@ func (c *Client) GetDomainStatisticsReport(ctx context.Context, params *GetDomai
 
 // A request to obtain deliverability metrics for a domain.
 type GetDomainStatisticsReportInput struct {
+
 	// The domain that you want to obtain deliverability metrics for.
+	//
+	// This member is required.
 	Domain *string
+
 	// The last day (in Unix time) that you want to obtain domain deliverability
 	// metrics for. The EndDate that you specify has to be less than or equal to 30
 	// days after the StartDate.
+	//
+	// This member is required.
 	EndDate *time.Time
+
 	// The first day (in Unix time) that you want to obtain domain deliverability
 	// metrics for.
+	//
+	// This member is required.
 	StartDate *time.Time
 }
 
 // An object that includes statistics that are related to the domain that you
 // specified.
 type GetDomainStatisticsReportOutput struct {
+
 	// An object that contains deliverability metrics for the domain that you
 	// specified. This object contains data for each day, starting on the StartDate and
 	// ending on the EndDate.
+	//
+	// This member is required.
 	DailyVolumes []*types.DailyVolume
+
 	// An object that contains deliverability metrics for the domain that you
 	// specified. The data in this object is a summary of all of the data that was
 	// collected from the StartDate to the EndDate.
+	//
+	// This member is required.
 	OverallVolume *types.OverallVolume
 
 	// Metadata pertaining to the operation's result.

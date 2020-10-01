@@ -56,17 +56,26 @@ func (c *Client) DescribeWebsiteCertificateAuthority(ctx context.Context, params
 }
 
 type DescribeWebsiteCertificateAuthorityInput struct {
+
 	// A unique identifier for the certificate authority.
+	//
+	// This member is required.
 	WebsiteCaId *string
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 
 type DescribeWebsiteCertificateAuthorityOutput struct {
+
 	// The time that the certificate authority was added.
 	CreatedTime *time.Time
+
 	// The root certificate of the certificate authority.
 	Certificate *string
+
 	// The certificate name to display.
 	DisplayName *string
 

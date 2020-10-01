@@ -56,16 +56,22 @@ func (c *Client) RejectResourceShareInvitation(ctx context.Context, params *Reje
 }
 
 type RejectResourceShareInvitationInput struct {
+
 	// The Amazon Resource Name (ARN) of the invitation.
+	//
+	// This member is required.
 	ResourceShareInvitationArn *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 }
 
 type RejectResourceShareInvitationOutput struct {
+
 	// Information about the invitation.
 	ResourceShareInvitation *types.ResourceShareInvitation
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string

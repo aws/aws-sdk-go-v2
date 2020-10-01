@@ -75,15 +75,22 @@ func (c *Client) DeleteXssMatchSet(ctx context.Context, params *DeleteXssMatchSe
 
 // A request to delete an XssMatchSet () from AWS WAF.
 type DeleteXssMatchSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// The XssMatchSetId of the XssMatchSet () that you want to delete. XssMatchSetId
 	// is returned by CreateXssMatchSet () and by ListXssMatchSets ().
+	//
+	// This member is required.
 	XssMatchSetId *string
 }
 
 // The response to a request to delete an XssMatchSet () from AWS WAF.
 type DeleteXssMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteXssMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

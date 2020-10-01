@@ -65,6 +65,7 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 
 // Represents the input of a GetItem operation.
 type GetItemInput struct {
+
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document. The
 	// attributes in the expression must be separated by commas. If no attribute names
@@ -74,13 +75,18 @@ type GetItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProjectionExpression *string
+
 	// The name of the table containing the requested item.
+	//
+	// This member is required.
 	TableName *string
+
 	// This is a legacy parameter. Use ProjectionExpression instead. For more
 	// information, see AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
 	AttributesToGet []*string
+
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -121,6 +127,7 @@ type GetItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -137,12 +144,16 @@ type GetItemInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// A map of attribute names to AttributeValue objects, representing the primary key
 	// of the item to retrieve. For the primary key, you must provide all of the
 	// attributes. For example, with a simple primary key, you only need to provide a
 	// value for the partition key. For a composite primary key, you must provide
 	// values for both the partition key and the sort key.
+	//
+	// This member is required.
 	Key map[string]*types.AttributeValue
+
 	// Determines the read consistency model: If set to true, then the operation uses
 	// strongly consistent reads; otherwise, the operation uses eventually consistent
 	// reads.
@@ -151,6 +162,7 @@ type GetItemInput struct {
 
 // Represents the output of a GetItem operation.
 type GetItemOutput struct {
+
 	// The capacity units consumed by the GetItem operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the table
 	// and any indexes involved in the operation. ConsumedCapacity is only returned if
@@ -159,6 +171,7 @@ type GetItemOutput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
+
 	// A map of attribute names to AttributeValue objects, as specified by
 	// ProjectionExpression.
 	Item map[string]*types.AttributeValue

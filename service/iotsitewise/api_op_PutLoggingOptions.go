@@ -56,7 +56,10 @@ func (c *Client) PutLoggingOptions(ctx context.Context, params *PutLoggingOption
 }
 
 type PutLoggingOptionsInput struct {
+
 	// The logging options to set.
+	//
+	// This member is required.
 	LoggingOptions *types.LoggingOptions
 }
 

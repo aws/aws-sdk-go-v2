@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -26,15 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *AccessDeniedException) GetReason() AccessDeniedExceptionReason {
-	return e.Reason
-}
 
 // You have reached the limit for concurrent API requests. For more information,
 // see Optimizing performance of the EBS direct APIs
@@ -57,12 +47,6 @@ func (e *ConcurrentLimitExceededException) ErrorCode() string {
 	return "ConcurrentLimitExceededException"
 }
 func (e *ConcurrentLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request uses the same client token as a previous, but non-identical request.
 type ConflictException struct {
@@ -80,12 +64,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal error has occurred.
 type InternalServerException struct {
@@ -103,12 +81,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of API requests has exceed the maximum allowed API request throttling
 // limit.
@@ -129,15 +101,6 @@ func (e *RequestThrottledException) ErrorMessage() string {
 }
 func (e *RequestThrottledException) ErrorCode() string             { return "RequestThrottledException" }
 func (e *RequestThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestThrottledException) GetReason() RequestThrottledExceptionReason {
-	return e.Reason
-}
-func (e *RequestThrottledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestThrottledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -157,15 +120,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetReason() ResourceNotFoundExceptionReason {
-	return e.Reason
-}
 
 // Your current service quotas do not allow you to perform this action.
 type ServiceQuotaExceededException struct {
@@ -185,15 +139,6 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceQuotaExceededException) GetReason() ServiceQuotaExceededExceptionReason {
-	return e.Reason
-}
-func (e *ServiceQuotaExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceQuotaExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input fails to satisfy the constraints of the EBS direct APIs.
 type ValidationException struct {
@@ -213,12 +158,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ValidationException) GetReason() ValidationExceptionReason {
-	return e.Reason
-}

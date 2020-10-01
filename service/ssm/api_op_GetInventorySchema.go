@@ -56,16 +56,21 @@ func (c *Client) GetInventorySchema(ctx context.Context, params *GetInventorySch
 }
 
 type GetInventorySchemaInput struct {
+
 	// The type of inventory item to return.
 	TypeName *string
+
 	// Returns the sub-type schema for a specified inventory type.
 	SubType *bool
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// Returns inventory schemas that support aggregation. For example, this call
 	// returns the AWS:InstanceInformation type, because it supports aggregation based
 	// on the PlatformName, PlatformType, and PlatformVersion attributes.
@@ -73,8 +78,10 @@ type GetInventorySchemaInput struct {
 }
 
 type GetInventorySchemaOutput struct {
+
 	// Inventory schemas returned by the request.
 	Schemas []*types.InventoryItemSchema
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string

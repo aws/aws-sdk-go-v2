@@ -100,12 +100,17 @@ func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optF
 }
 
 type CreateGrantInput struct {
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// A list of operations that the grant permits.
+	//
+	// This member is required.
 	Operations []types.GrantOperation
+
 	// The principal that is given permission to perform the operations that the grant
 	// permits. To specify the principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -115,7 +120,10 @@ type CreateGrantInput struct {
 	// (IAM)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the AWS General Reference.
+	//
+	// This member is required.
 	GranteePrincipal *string
+
 	// The principal that is given permission to retire the grant by using RetireGrant
 	// () operation. To specify the principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -125,6 +133,7 @@ type CreateGrantInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the AWS General Reference.
 	RetiringPrincipal *string
+
 	// A friendly name for identifying the grant. Use this value to prevent the
 	// unintended creation of duplicate grants when retrying this request. When this
 	// value is absent, all CreateGrant requests result in a new grant with a unique
@@ -136,6 +145,7 @@ type CreateGrantInput struct {
 	// request, even when a duplicate GrantId is returned. All grant tokens obtained in
 	// this way can be used interchangeably.
 	Name *string
+
 	// The unique identifier for the customer master key (CMK) that the grant applies
 	// to.  <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
 	// specify a CMK in a  different AWS account, you must use the key ARN. For
@@ -148,7 +158,10 @@ type CreateGrantInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// Allows a cryptographic operation
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// only when the encryption context matches or includes the encryption context
@@ -160,9 +173,11 @@ type CreateGrantInput struct {
 }
 
 type CreateGrantOutput struct {
+
 	// The unique identifier for the grant. You can use the GrantId in a subsequent
 	// RetireGrant () or RevokeGrant () operation.
 	GrantId *string
+
 	// The grant token. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.

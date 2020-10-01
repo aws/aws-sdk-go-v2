@@ -63,7 +63,10 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 // sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type DeleteConfigurationSetInput struct {
+
 	// The name of the configuration set to delete.
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 

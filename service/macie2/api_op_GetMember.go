@@ -58,32 +58,43 @@ func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns .
 }
 
 type GetMemberInput struct {
+
 	// The unique identifier for the Amazon Macie resource or account that the request
 	// applies to.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetMemberOutput struct {
+
 	// The AWS account ID for the account.
 	AccountId *string
+
 	// The Amazon Resource Name (ARN) of the account.
 	Arn *string
+
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
 	// membership invitation was last sent to the account. This value is null if a
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
+
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
 	// change to the status of the relationship between the account and the master
 	// account.
 	UpdatedAt *time.Time
+
 	// The email address for the account.
 	Email *string
+
 	// The current status of the relationship between the account and the master
 	// account.
 	RelationshipStatus types.RelationshipStatus
+
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the member account in Amazon Macie.
 	Tags map[string]*string
+
 	// The AWS account ID for the master account.
 	MasterAccountId *string
 

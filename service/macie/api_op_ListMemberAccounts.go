@@ -56,9 +56,11 @@ func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccou
 }
 
 type ListMemberAccountsInput struct {
+
 	// Use this parameter to indicate the maximum number of items that you want in the
 	// response. The default value is 250.
 	MaxResults *int32
+
 	// Use this parameter when paginating results. Set the value of this parameter to
 	// null on your first call to the ListMemberAccounts action. Subsequent calls to
 	// the action fill nextToken in the request with the value of nextToken from the
@@ -67,9 +69,11 @@ type ListMemberAccountsInput struct {
 }
 
 type ListMemberAccountsOutput struct {
+
 	// A list of the Amazon Macie Classic member accounts returned by the action. The
 	// current master account is also included in this list.
 	MemberAccounts []*types.MemberAccount
+
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to be

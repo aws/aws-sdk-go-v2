@@ -61,12 +61,16 @@ func (c *Client) DescribeTimeBasedAutoScaling(ctx context.Context, params *Descr
 }
 
 type DescribeTimeBasedAutoScalingInput struct {
+
 	// An array of instance IDs.
+	//
+	// This member is required.
 	InstanceIds []*string
 }
 
 // Contains the response to a DescribeTimeBasedAutoScaling request.
 type DescribeTimeBasedAutoScalingOutput struct {
+
 	// An array of TimeBasedAutoScalingConfiguration objects that describe the
 	// configuration for the specified instances.
 	TimeBasedAutoScalingConfigurations []*types.TimeBasedAutoScalingConfiguration

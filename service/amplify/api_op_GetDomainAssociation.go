@@ -57,16 +57,25 @@ func (c *Client) GetDomainAssociation(ctx context.Context, params *GetDomainAsso
 
 // The request structure for the get domain association request.
 type GetDomainAssociationInput struct {
+
 	// The name of the domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The unique id for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
 }
 
 // The result structure for the get domain association request.
 type GetDomainAssociationOutput struct {
+
 	// Describes the structure of a domain association, which associates a custom
 	// domain with an Amplify app.
+	//
+	// This member is required.
 	DomainAssociation *types.DomainAssociation
 
 	// Metadata pertaining to the operation's result.

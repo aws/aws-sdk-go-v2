@@ -74,18 +74,31 @@ func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatas
 }
 
 type CreateDatasetImportJobInput struct {
+
 	// The Amazon S3 bucket that contains the training data to import.
+	//
+	// This member is required.
 	DataSource *types.DataSource
+
 	// The name for the dataset import job.
+	//
+	// This member is required.
 	JobName *string
+
 	// The ARN of the IAM role that has permissions to read from the Amazon S3 data
 	// source.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The ARN of the dataset that receives the imported data.
+	//
+	// This member is required.
 	DatasetArn *string
 }
 
 type CreateDatasetImportJobOutput struct {
+
 	// The ARN of the dataset import job.
 	DatasetImportJobArn *string
 

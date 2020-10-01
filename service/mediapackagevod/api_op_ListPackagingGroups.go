@@ -55,15 +55,19 @@ func (c *Client) ListPackagingGroups(ctx context.Context, params *ListPackagingG
 }
 
 type ListPackagingGroupsInput struct {
+
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
+
 	// Upper bound on number of records to return.
 	MaxResults *int32
 }
 
 type ListPackagingGroupsOutput struct {
+
 	// A list of MediaPackage VOD PackagingGroup resources.
 	PackagingGroups []*types.PackagingGroup
+
 	// A token that can be used to resume pagination from the end of the collection.
 	NextToken *string
 

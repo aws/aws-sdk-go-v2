@@ -59,15 +59,23 @@ func (c *Client) GetRequestValidators(ctx context.Context, params *GetRequestVal
 // Gets the RequestValidators () collection of a given RestApi ().
 type GetRequestValidatorsInput struct {
 	Template *bool
-	Title    *string
-	Name     *string
+
+	Title *string
+
+	Name *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
+
 	// The current pagination position in the paged result set.
-	Position         *string
+	Position *string
+
 	TemplateSkipList []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
 }
 
@@ -78,8 +86,10 @@ type GetRequestValidatorsInput struct {
 // extension. Enable Basic Request Validation in API Gateway
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
 type GetRequestValidatorsOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.RequestValidator
+
 	// The current pagination position in the paged result set.
 	Position *string
 

@@ -63,22 +63,31 @@ func (c *Client) CancelSpotFleetRequests(ctx context.Context, params *CancelSpot
 
 // Contains the parameters for CancelSpotFleetRequests.
 type CancelSpotFleetRequestsInput struct {
+
 	// The IDs of the Spot Fleet requests.
+	//
+	// This member is required.
 	SpotFleetRequestIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// Indicates whether to terminate instances for a Spot Fleet request if it is
 	// canceled successfully.
+	//
+	// This member is required.
 	TerminateInstances *bool
 }
 
 // Contains the output of CancelSpotFleetRequests.
 type CancelSpotFleetRequestsOutput struct {
+
 	// Information about the Spot Fleet requests that are successfully canceled.
 	SuccessfulFleetRequests []*types.CancelSpotFleetRequestsSuccessItem
+
 	// Information about the Spot Fleet requests that are not successfully canceled.
 	UnsuccessfulFleetRequests []*types.CancelSpotFleetRequestsErrorItem
 

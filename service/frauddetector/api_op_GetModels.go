@@ -62,19 +62,25 @@ func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns .
 }
 
 type GetModelsInput struct {
+
 	// The model type.
 	ModelType types.ModelTypeEnum
+
 	// The next token for the subsequent request.
 	NextToken *string
+
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
+
 	// The model ID.
 	ModelId *string
 }
 
 type GetModelsOutput struct {
+
 	// The next page token to be used in subsequent requests.
 	NextToken *string
+
 	// The array of models.
 	Models []*types.Model
 

@@ -57,14 +57,20 @@ func (c *Client) GetEmailChannel(ctx context.Context, params *GetEmailChannelInp
 }
 
 type GetEmailChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetEmailChannelOutput struct {
+
 	// Provides information about the status and settings of the email channel for an
 	// application.
+	//
+	// This member is required.
 	EmailChannelResponse *types.EmailChannelResponse
 
 	// Metadata pertaining to the operation's result.

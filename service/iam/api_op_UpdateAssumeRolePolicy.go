@@ -58,6 +58,7 @@ func (c *Client) UpdateAssumeRolePolicy(ctx context.Context, params *UpdateAssum
 }
 
 type UpdateAssumeRolePolicyInput struct {
+
 	// The policy that grants an entity permission to assume the role. You must provide
 	// policies in JSON format in IAM. However, for AWS CloudFormation templates
 	// formatted in YAML, you can provide the policy in JSON or YAML format. AWS
@@ -74,11 +75,16 @@ type UpdateAssumeRolePolicyInput struct {
 	//
 	//     * The special
 	// characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+	//
+	// This member is required.
 	PolicyDocument *string
+
 	// The name of the role to update with the new policy. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
 }
 

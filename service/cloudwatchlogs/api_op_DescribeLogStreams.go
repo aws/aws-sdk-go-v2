@@ -59,6 +59,7 @@ func (c *Client) DescribeLogStreams(ctx context.Context, params *DescribeLogStre
 }
 
 type DescribeLogStreamsInput struct {
+
 	// If the value is LogStreamName, the results are ordered by log stream name. If
 	// the value is LastEventTime, the results are ordered by the event time. The
 	// default value is LogStreamName. If you order the results by event time, you
@@ -69,25 +70,34 @@ type DescribeLogStreamsInput struct {
 	// updates in less than an hour from ingestion, but may take longer in some rare
 	// situations.
 	OrderBy types.OrderBy
+
 	// The maximum number of items returned. If you don't specify a value, the default
 	// is up to 50 items.
 	Limit *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The prefix to match. If orderBy is LastEventTime,you cannot specify this
 	// parameter.
 	LogStreamNamePrefix *string
+
 	// If the value is true, results are returned in descending order. If the value is
 	// to false, results are returned in ascending order. The default value is false.
 	Descending *bool
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 
 type DescribeLogStreamsOutput struct {
+
 	// The log streams.
 	LogStreams []*types.LogStream
+
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 

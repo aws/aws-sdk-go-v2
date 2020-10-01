@@ -57,16 +57,22 @@ func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryI
 }
 
 type DeleteRepositoryInput struct {
+
 	// The AWS account ID associated with the registry that contains the repository to
 	// delete. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The name of the repository to delete.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// If a repository contains images, forces the deletion.
 	Force *bool
 }
 
 type DeleteRepositoryOutput struct {
+
 	// The repository that was deleted.
 	Repository *types.Repository
 

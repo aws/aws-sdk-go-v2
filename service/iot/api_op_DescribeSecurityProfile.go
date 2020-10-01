@@ -57,36 +57,49 @@ func (c *Client) DescribeSecurityProfile(ctx context.Context, params *DescribeSe
 }
 
 type DescribeSecurityProfileInput struct {
+
 	// The name of the security profile whose information you want to get.
+	//
+	// This member is required.
 	SecurityProfileName *string
 }
 
 type DescribeSecurityProfileOutput struct {
+
 	// The name of the security profile.
 	SecurityProfileName *string
+
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here. Note: This API field is deprecated. Please use
 	// DescribeSecurityProfileResponse$additionalMetricsToRetainV2 () instead.
 	AdditionalMetricsToRetain []*string
+
 	// A description of the security profile (associated with the security profile when
 	// it was created or updated).
 	SecurityProfileDescription *string
+
 	// The version of the security profile. A new version is generated whenever the
 	// security profile is updated.
 	Version *int64
+
 	// The time the security profile was created.
 	CreationDate *time.Time
+
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]*types.AlertTarget
+
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []*types.Behavior
+
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
 	AdditionalMetricsToRetainV2 []*types.MetricToRetain
+
 	// The time the security profile was last modified.
 	LastModifiedDate *time.Time
+
 	// The ARN of the security profile.
 	SecurityProfileArn *string
 

@@ -56,11 +56,15 @@ func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func
 }
 
 type GetJobInput struct {
+
 	// The name of the job definition to retrieve.
+	//
+	// This member is required.
 	JobName *string
 }
 
 type GetJobOutput struct {
+
 	// The requested job definition.
 	Job *types.Job
 

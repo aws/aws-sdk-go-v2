@@ -68,20 +68,27 @@ func (c *Client) AcceptDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 // The AcceptDomainTransferFromAnotherAwsAccount request includes the following
 // elements.
 type AcceptDomainTransferFromAnotherAwsAccountInput struct {
+
 	// The name of the domain that was specified when another AWS account submitted a
 	// TransferDomainToAnotherAwsAccount
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The password that was returned by the TransferDomainToAnotherAwsAccount
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
+	//
+	// This member is required.
 	Password *string
 }
 
 // The AcceptDomainTransferFromAnotherAwsAccount response includes the following
 // element.
 type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
+
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).

@@ -58,9 +58,13 @@ func (c *Client) CreatePullRequest(ctx context.Context, params *CreatePullReques
 }
 
 type CreatePullRequestInput struct {
+
 	// The title of the pull request. This title is used to identify the pull request
 	// to other users in the repository.
+	//
+	// This member is required.
 	Title *string
+
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
 	// received with the same parameters and a token is included, the request returns
@@ -68,17 +72,24 @@ type CreatePullRequestInput struct {
 	// prepopulate client request tokens. If you are using an AWS SDK, an idempotency
 	// token is created for you.
 	ClientRequestToken *string
+
 	// A description of the pull request.
 	Description *string
+
 	// The targets for the pull request, including the source of the code to be
 	// reviewed (the source branch) and the destination where the creator of the pull
 	// request intends the code to be merged after the pull request is closed (the
 	// destination branch).
+	//
+	// This member is required.
 	Targets []*types.Target
 }
 
 type CreatePullRequestOutput struct {
+
 	// Information about the newly created pull request.
+	//
+	// This member is required.
 	PullRequest *types.PullRequest
 
 	// Metadata pertaining to the operation's result.

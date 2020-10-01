@@ -56,21 +56,30 @@ func (c *Client) GetBulkDeploymentStatus(ctx context.Context, params *GetBulkDep
 }
 
 type GetBulkDeploymentStatusInput struct {
+
 	// The ID of the bulk deployment.
+	//
+	// This member is required.
 	BulkDeploymentId *string
 }
 
 type GetBulkDeploymentStatusOutput struct {
+
 	// Tag(s) attached to the resource arn.
 	Tags map[string]*string
+
 	// The time, in ISO format, when the deployment was created.
 	CreatedAt *string
+
 	// Error message
 	ErrorMessage *string
+
 	// The status of the bulk deployment.
 	BulkDeploymentStatus types.BulkDeploymentStatus
+
 	// Relevant metrics on input records processed during bulk deployment.
 	BulkDeploymentMetrics *types.BulkDeploymentMetrics
+
 	// Error details
 	ErrorDetails []*types.ErrorDetail
 

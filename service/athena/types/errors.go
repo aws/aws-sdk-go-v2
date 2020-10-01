@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Indicates a platform issue, which may be due to a transient condition or outage.
@@ -24,12 +23,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that something is wrong with the input to the request. For example, a
 // required parameter may be missing or out of range.
@@ -50,18 +43,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetAthenaErrorCode() string {
-	return ptr.ToString(e.AthenaErrorCode)
-}
-func (e *InvalidRequestException) HasAthenaErrorCode() bool {
-	return e.AthenaErrorCode != nil
-}
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception that Athena received when it called a custom metastore. Occurs if
 // the error is not caused by user input (InvalidRequestException) or from the
@@ -83,12 +64,6 @@ func (e *MetadataException) ErrorMessage() string {
 }
 func (e *MetadataException) ErrorCode() string             { return "MetadataException" }
 func (e *MetadataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MetadataException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MetadataException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource, such as a workgroup, was not found.
 type ResourceNotFoundException struct {
@@ -108,18 +83,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourceNotFoundException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the request was throttled.
 type TooManyRequestsException struct {
@@ -139,12 +102,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetReason() ThrottleReason {
-	return e.Reason
-}
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

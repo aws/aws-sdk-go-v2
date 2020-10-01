@@ -57,7 +57,10 @@ func (c *Client) DeleteMonitoringSchedule(ctx context.Context, params *DeleteMon
 }
 
 type DeleteMonitoringScheduleInput struct {
+
 	// The name of the monitoring schedule to delete.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
 }
 

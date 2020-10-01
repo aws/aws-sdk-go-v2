@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Invalid request parameters.
@@ -24,9 +23,3 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -68,6 +68,7 @@ func (c *Client) StopStreamEncryption(ctx context.Context, params *StopStreamEnc
 }
 
 type StopStreamEncryptionInput struct {
+
 	// The GUID for the customer-managed AWS KMS key to use for encryption. This value
 	// can be a globally unique identifier, a fully specified Amazon Resource Name
 	// (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You can
@@ -88,10 +89,18 @@ type StopStreamEncryptionInput struct {
 	//
 	//     * Master key owned by Kinesis Data
 	// Streams: alias/aws/kinesis
+	//
+	// This member is required.
 	KeyId *string
+
 	// The name of the stream on which to stop encrypting records.
+	//
+	// This member is required.
 	StreamName *string
+
 	// The encryption type. The only valid value is KMS.
+	//
+	// This member is required.
 	EncryptionType types.EncryptionType
 }
 

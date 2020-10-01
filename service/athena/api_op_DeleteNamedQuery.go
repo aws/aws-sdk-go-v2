@@ -60,7 +60,10 @@ func (c *Client) DeleteNamedQuery(ctx context.Context, params *DeleteNamedQueryI
 }
 
 type DeleteNamedQueryInput struct {
+
 	// The unique ID of the query to delete.
+	//
+	// This member is required.
 	NamedQueryId *string
 }
 

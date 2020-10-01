@@ -55,7 +55,10 @@ func (c *Client) DeleteReport(ctx context.Context, params *DeleteReportInput, op
 }
 
 type DeleteReportInput struct {
+
 	// The ARN of the report to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

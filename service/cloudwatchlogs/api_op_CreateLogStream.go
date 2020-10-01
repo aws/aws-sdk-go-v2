@@ -67,9 +67,15 @@ func (c *Client) CreateLogStream(ctx context.Context, params *CreateLogStreamInp
 }
 
 type CreateLogStreamInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
+
 	// The name of the log stream.
+	//
+	// This member is required.
 	LogStreamName *string
 }
 

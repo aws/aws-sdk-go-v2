@@ -55,10 +55,12 @@ func (c *Client) ListSharedProjects(ctx context.Context, params *ListSharedProje
 }
 
 type ListSharedProjectsInput struct {
+
 	// The maximum number of paginated shared build projects returned per response. Use
 	// nextToken to iterate pages in the list of returned Project objects. The default
 	// value is 100.
 	MaxResults *int32
+
 	// The order in which to list shared build projects. Valid values include:
 	//
 	//     *
@@ -66,6 +68,7 @@ type ListSharedProjectsInput struct {
 	//
 	//     * DESCENDING: List in descending order.
 	SortOrder types.SortOrderType
+
 	// The criterion to be used to list build projects shared with the current AWS
 	// account or user. Valid values include:
 	//
@@ -75,6 +78,7 @@ type ListSharedProjectsInput struct {
 	// MODIFIED_TIME: List based on when information about the shared project was last
 	// changed.
 	SortBy types.SharedResourceSortByType
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -85,9 +89,11 @@ type ListSharedProjectsInput struct {
 }
 
 type ListSharedProjectsOutput struct {
+
 	// The list of ARNs for the build projects shared with the current AWS account or
 	// user.
 	Projects []*string
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the

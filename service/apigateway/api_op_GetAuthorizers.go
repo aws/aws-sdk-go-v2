@@ -60,15 +60,23 @@ func (c *Client) GetAuthorizers(ctx context.Context, params *GetAuthorizersInput
 // Request to describe an existing Authorizers () resource.
 type GetAuthorizersInput struct {
 	TemplateSkipList []*string
-	Title            *string
-	Template         *bool
+
+	Title *string
+
+	Template *bool
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
-	Name  *string
+
+	Name *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
 }
 
@@ -78,8 +86,10 @@ type GetAuthorizersInput struct {
 // Cognito User Pool as Authorizer
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 type GetAuthorizersOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.Authorizer
+
 	// The current pagination position in the paged result set.
 	Position *string
 

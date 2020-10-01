@@ -59,6 +59,7 @@ func (c *Client) DescribeSpotDatafeedSubscription(ctx context.Context, params *D
 
 // Contains the parameters for DescribeSpotDatafeedSubscription.
 type DescribeSpotDatafeedSubscriptionInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -68,6 +69,7 @@ type DescribeSpotDatafeedSubscriptionInput struct {
 
 // Contains the output of DescribeSpotDatafeedSubscription.
 type DescribeSpotDatafeedSubscriptionOutput struct {
+
 	// The Spot Instance data feed subscription.
 	SpotDatafeedSubscription *types.SpotDatafeedSubscription
 

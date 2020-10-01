@@ -58,7 +58,10 @@ func (c *Client) StopBulkDeployment(ctx context.Context, params *StopBulkDeploym
 }
 
 type StopBulkDeploymentInput struct {
+
 	// The ID of the bulk deployment.
+	//
+	// This member is required.
 	BulkDeploymentId *string
 }
 

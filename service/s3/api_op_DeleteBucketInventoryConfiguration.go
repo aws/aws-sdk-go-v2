@@ -77,9 +77,15 @@ func (c *Client) DeleteBucketInventoryConfiguration(ctx context.Context, params 
 }
 
 type DeleteBucketInventoryConfigurationInput struct {
+
 	// The ID used to identify the inventory configuration.
+	//
+	// This member is required.
 	Id *string
+
 	// The name of the bucket containing the inventory configuration to delete.
+	//
+	// This member is required.
 	Bucket *string
 }
 

@@ -66,9 +66,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The ARN of the EventBridge resource that you're adding tags to.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// The list of key-value pairs to associate with the resource.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

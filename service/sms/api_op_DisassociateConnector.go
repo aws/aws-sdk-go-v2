@@ -56,7 +56,10 @@ func (c *Client) DisassociateConnector(ctx context.Context, params *Disassociate
 }
 
 type DisassociateConnectorInput struct {
+
 	// The identifier of the connector.
+	//
+	// This member is required.
 	ConnectorId *string
 }
 

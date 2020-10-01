@@ -72,6 +72,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 
 //
 type ModifyDBParameterGroupInput struct {
+
 	// An array of parameter names, values, and the apply method for the parameter
 	// update. At least one parameter name, value, and apply method must be supplied;
 	// later arguments are optional. A maximum of 20 parameters can be modified in a
@@ -79,17 +80,23 @@ type ModifyDBParameterGroupInput struct {
 	// pending-reboot You can use the immediate value with dynamic parameters only. You
 	// can use the pending-reboot value for both dynamic and static parameters, and
 	// changes are applied when you reboot the DB instance without failover.
+	//
+	// This member is required.
 	Parameters []*types.Parameter
+
 	// The name of the DB parameter group. Constraints:
 	//
 	//     * If supplied, must match
 	// the name of an existing DBParameterGroup.
+	//
+	// This member is required.
 	DBParameterGroupName *string
 }
 
 // Contains the result of a successful invocation of the ModifyDBParameterGroup or
 // ResetDBParameterGroup action.
 type ModifyDBParameterGroupOutput struct {
+
 	// Provides the name of the DB parameter group.
 	DBParameterGroupName *string
 

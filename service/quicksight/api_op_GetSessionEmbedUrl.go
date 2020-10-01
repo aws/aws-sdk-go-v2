@@ -56,12 +56,17 @@ func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbed
 }
 
 type GetSessionEmbedUrlInput struct {
+
 	// How many minutes the session is valid. The session lifetime must be 15-600
 	// minutes.
 	SessionLifetimeInMinutes *int64
+
 	// The ID for the AWS account that contains the QuickSight session that you're
 	// embedding.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
 	// identity type. You can use this for any Amazon QuickSight users in your account
 	// (readers, authors, or admins) authenticated as one of the following:
@@ -75,16 +80,19 @@ type GetSessionEmbedUrlInput struct {
 	// * IAM users and IAM role-based sessions authenticated through Federated Single
 	// Sign-On using SAML, OpenID Connect, or IAM federation.
 	UserArn *string
+
 	// The entry point for the embedded session.
 	EntryPoint *string
 }
 
 type GetSessionEmbedUrlOutput struct {
+
 	// A single-use URL that you can put into your server-side web page to embed your
 	// QuickSight session. This URL is valid for 5 minutes. The API provides the URL
 	// with an auth_code value that enables one (and only one) sign-on to a user
 	// session that is valid for 10 hours.
 	EmbedUrl *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

@@ -58,19 +58,24 @@ func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesI
 }
 
 type ListRepositoriesInput struct {
+
 	// A prefix used to filter returned repositories. Only repositories with names that
 	// start with repositoryPrefix are returned.
 	RepositoryPrefix *string
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListRepositoriesOutput struct {
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
+
 	// The returned list of RepositorySummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
 	// objects.

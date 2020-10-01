@@ -56,16 +56,24 @@ func (c *Client) DescribeDataSet(ctx context.Context, params *DescribeDataSetInp
 }
 
 type DescribeDataSetInput struct {
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
+	//
+	// This member is required.
 	DataSetId *string
 }
 
 type DescribeDataSetOutput struct {
+
 	// Information on the dataset.
 	DataSet *types.DataSet
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

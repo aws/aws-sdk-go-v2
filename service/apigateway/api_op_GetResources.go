@@ -59,10 +59,16 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 // Request to list information about a collection of resources.
 type GetResourcesInput struct {
 	Template *bool
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
+	//
+	// This member is required.
+	RestApiId *string
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// A query parameter used to retrieve the specified resources embedded in the
 	// returned Resources () resource in the response. This embed parameter value is a
 	// list of comma-separated strings. Currently, the request supports only retrieval
@@ -70,19 +76,24 @@ type GetResourcesInput struct {
 	// a single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources?embed=methods.
 	Embed []*string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
-	Name  *string
+
+	Name *string
 }
 
 // Represents a collection of Resource () resources. Create an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type GetResourcesOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.Resource
+
 	// The current pagination position in the paged result set.
 	Position *string
 

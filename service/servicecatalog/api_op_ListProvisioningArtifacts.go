@@ -57,8 +57,12 @@ func (c *Client) ListProvisioningArtifacts(ctx context.Context, params *ListProv
 }
 
 type ListProvisioningArtifactsInput struct {
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -71,9 +75,11 @@ type ListProvisioningArtifactsInput struct {
 }
 
 type ListProvisioningArtifactsOutput struct {
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Information about the provisioning artifacts.
 	ProvisioningArtifactDetails []*types.ProvisioningArtifactDetail
 

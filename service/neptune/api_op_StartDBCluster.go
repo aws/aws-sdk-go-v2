@@ -57,12 +57,16 @@ func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput
 }
 
 type StartDBClusterInput struct {
+
 	// The DB cluster identifier of the Neptune DB cluster to be started. This
 	// parameter is stored as a lowercase string.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type StartDBClusterOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
 	// a response element in the DescribeDBClusters () action.
 	DBCluster *types.DBCluster

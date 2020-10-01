@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The request syntax was malformed. Check your request syntax and try again.
@@ -24,12 +23,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request contains a client token that was used for a previous update resource
 // call with different specifications. Try the request again with a new client
@@ -49,12 +42,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You don't have permissions to perform this action.
 type ForbiddenException struct {
@@ -72,12 +59,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request processing has failed because of an unknown error, exception, or
 // failure.
@@ -96,12 +77,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded a service limit for your account. For more information, see
 // Service Limits
@@ -122,12 +97,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource doesn't exist. Check your request syntax and try again.
 type NotFoundException struct {
@@ -145,12 +114,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't delete the specified resource because it's in use or required by
 // another resource.
@@ -169,12 +132,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request has failed due to a temporary failure of the service.
 type ServiceUnavailableException struct {
@@ -192,12 +149,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum request rate permitted by the App Mesh APIs has been exceeded for
 // your account. For best results, use an increasing or variable sleep interval
@@ -217,12 +168,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request exceeds the maximum allowed number of tags allowed per resource. The
 // current limit is 50 user tags per resource. You must reduce the number of tags
@@ -242,9 +187,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

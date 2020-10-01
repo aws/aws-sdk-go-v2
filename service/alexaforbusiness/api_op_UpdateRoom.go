@@ -54,14 +54,19 @@ func (c *Client) UpdateRoom(ctx context.Context, params *UpdateRoomInput, optFns
 }
 
 type UpdateRoomInput struct {
+
 	// The updated description for the room.
 	Description *string
+
 	// The updated profile ARN for the room.
 	ProfileArn *string
+
 	// The ARN of the room to update.
 	RoomArn *string
+
 	// The updated provider calendar ARN for the room.
 	ProviderCalendarId *string
+
 	// The updated name for the room.
 	RoomName *string
 }

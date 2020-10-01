@@ -60,14 +60,19 @@ func (c *Client) CreateApprovalRuleTemplate(ctx context.Context, params *CreateA
 }
 
 type CreateApprovalRuleTemplateInput struct {
+
 	// The name of the approval rule template. Provide descriptive names, because this
 	// name is applied to the approval rules created automatically in associated
 	// repositories.
+	//
+	// This member is required.
 	ApprovalRuleTemplateName *string
+
 	// The description of the approval rule template. Consider providing a description
 	// that explains what this template does and when it might be appropriate to
 	// associate it with repositories.
 	ApprovalRuleTemplateDescription *string
+
 	// The content of the approval rule that is created on pull requests in associated
 	// repositories. If you specify one or more destination references (branches),
 	// approval rules are created in an associated repository only if their destination
@@ -103,11 +108,16 @@ type CreateApprovalRuleTemplateInput struct {
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
 	// the IAM User Guide.  </note>
+	//
+	// This member is required.
 	ApprovalRuleTemplateContent *string
 }
 
 type CreateApprovalRuleTemplateOutput struct {
+
 	// The content and structure of the created approval rule template.
+	//
+	// This member is required.
 	ApprovalRuleTemplate *types.ApprovalRuleTemplate
 
 	// Metadata pertaining to the operation's result.

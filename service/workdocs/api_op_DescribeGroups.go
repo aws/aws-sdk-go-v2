@@ -57,24 +57,33 @@ func (c *Client) DescribeGroups(ctx context.Context, params *DescribeGroupsInput
 }
 
 type DescribeGroupsInput struct {
+
 	// A query to describe groups by group name.
+	//
+	// This member is required.
 	SearchQuery *string
+
 	// The maximum number of items to return with this call.
 	Limit *int32
+
 	// The ID of the organization.
 	OrganizationId *string
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
 }
 
 type DescribeGroupsOutput struct {
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
+
 	// The list of groups.
 	Groups []*types.GroupMetadata
 

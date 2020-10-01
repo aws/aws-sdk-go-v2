@@ -56,9 +56,11 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 
 // Represents a request to the list projects operation.
 type ListProjectsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// Optional. If no Amazon Resource Name (ARN) is specified, then AWS Device Farm
 	// returns a list of all projects for the AWS account. You can also specify a
 	// project ARN.
@@ -67,8 +69,10 @@ type ListProjectsInput struct {
 
 // Represents the result of a list projects request.
 type ListProjectsOutput struct {
+
 	// Information about the projects.
 	Projects []*types.Project
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.

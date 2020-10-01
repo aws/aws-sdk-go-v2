@@ -55,7 +55,10 @@ func (c *Client) DeleteScheduledAction(ctx context.Context, params *DeleteSchedu
 }
 
 type DeleteScheduledActionInput struct {
+
 	// The name of the scheduled action to delete.
+	//
+	// This member is required.
 	ScheduledActionName *string
 }
 

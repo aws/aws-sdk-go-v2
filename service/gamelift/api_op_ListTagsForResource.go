@@ -89,16 +89,20 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
 	// assigned to and uniquely identifies the GameLift resource that you want to
 	// retrieve tags for. GameLift resource ARNs are included in the data object for
 	// the resource, which can be retrieved by calling a List or Describe action for
 	// the resource type.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The collection of tags that have been assigned to the specified resource.
 	Tags []*types.Tag
 

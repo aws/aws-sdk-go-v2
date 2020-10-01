@@ -75,17 +75,22 @@ func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUp
 
 // Represents the input for a request action.
 type RequestUploadCredentialsInput struct {
+
 	// A unique identifier for a build to get credentials for. You can use either the
 	// build ID or ARN value.
+	//
+	// This member is required.
 	BuildId *string
 }
 
 // Represents the returned data in response to a request action.
 type RequestUploadCredentialsOutput struct {
+
 	// AWS credentials required when uploading a game build to the storage location.
 	// These credentials have a limited lifespan and are valid only for the build they
 	// were issued for.
 	UploadCredentials *types.AwsCredentials
+
 	// Amazon S3 path and key, identifying where the game build files are stored.
 	StorageLocation *types.S3Location
 

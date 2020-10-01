@@ -56,21 +56,30 @@ func (c *Client) DescribeDiscoverer(ctx context.Context, params *DescribeDiscove
 }
 
 type DescribeDiscovererInput struct {
+
 	// The ID of the discoverer.
+	//
+	// This member is required.
 	DiscovererId *string
 }
 
 type DescribeDiscovererOutput struct {
+
 	// The state of the discoverer.
 	State types.DiscovererState
+
 	// The description of the discoverer.
 	Description *string
+
 	// The ARN of the discoverer.
 	DiscovererArn *string
+
 	// Tags associated with the resource.
 	Tags map[string]*string
+
 	// The ID of the discoverer.
 	DiscovererId *string
+
 	// The ARN of the event bus.
 	SourceArn *string
 

@@ -59,23 +59,34 @@ func (c *Client) UpdateMonitoring(ctx context.Context, params *UpdateMonitoringI
 
 // Request body for UpdateMonitoring.
 type UpdateMonitoringInput struct {
+
 	// Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon
 	// CloudWatch for this cluster.
 	EnhancedMonitoring types.EnhancedMonitoring
-	LoggingInfo        *types.LoggingInfo
+
+	LoggingInfo *types.LoggingInfo
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
 	ClusterArn *string
+
 	// The settings for open monitoring.
 	OpenMonitoring *types.OpenMonitoringInfo
+
 	// The version of the MSK cluster to update. Cluster versions aren't simple
 	// numbers. You can describe an MSK cluster to find its version. When this update
 	// operation is successful, it generates a new cluster version.
+	//
+	// This member is required.
 	CurrentVersion *string
 }
 
 type UpdateMonitoringOutput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster operation.
 	ClusterOperationArn *string
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 

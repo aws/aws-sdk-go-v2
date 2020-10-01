@@ -59,10 +59,15 @@ func (c *Client) UpdateRdsDbInstance(ctx context.Context, params *UpdateRdsDbIns
 }
 
 type UpdateRdsDbInstanceInput struct {
+
 	// The Amazon RDS instance's ARN.
+	//
+	// This member is required.
 	RdsDbInstanceArn *string
+
 	// The master user name.
 	DbUser *string
+
 	// The database password.
 	DbPassword *string
 }

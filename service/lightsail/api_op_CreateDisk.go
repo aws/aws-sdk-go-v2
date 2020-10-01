@@ -60,23 +60,35 @@ func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns
 }
 
 type CreateDiskInput struct {
+
 	// The size of the disk in GB (e.g., 32).
+	//
+	// This member is required.
 	SizeInGb *int32
+
 	// An array of objects that represent the add-ons to enable for the new disk.
 	AddOns []*types.AddOnRequest
+
 	// The unique Lightsail disk name (e.g., my-disk).
+	//
+	// This member is required.
 	DiskName *string
+
 	// The Availability Zone where you want to create the disk (e.g., us-east-2a). Use
 	// the same Availability Zone as the Lightsail instance to which you want to attach
 	// the disk. Use the get regions operation to list the Availability Zones where
 	// Lightsail is currently available.
+	//
+	// This member is required.
 	AvailabilityZone *string
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
 }
 
 type CreateDiskOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

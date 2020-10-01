@@ -60,11 +60,15 @@ func (c *Client) BatchEnableStandards(ctx context.Context, params *BatchEnableSt
 }
 
 type BatchEnableStandardsInput struct {
+
 	// The list of standards checks to enable.
+	//
+	// This member is required.
 	StandardsSubscriptionRequests []*types.StandardsSubscriptionRequest
 }
 
 type BatchEnableStandardsOutput struct {
+
 	// The details of the standards subscriptions that were enabled.
 	StandardsSubscriptions []*types.StandardsSubscription
 

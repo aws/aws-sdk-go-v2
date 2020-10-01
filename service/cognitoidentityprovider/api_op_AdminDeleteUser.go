@@ -57,9 +57,15 @@ func (c *Client) AdminDeleteUser(ctx context.Context, params *AdminDeleteUserInp
 
 // Represents the request to delete a user as an administrator.
 type AdminDeleteUserInput struct {
+
 	// The user pool ID for the user pool where you want to delete the user.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The user name of the user you wish to delete.
+	//
+	// This member is required.
 	Username *string
 }
 

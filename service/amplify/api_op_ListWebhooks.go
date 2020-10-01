@@ -57,10 +57,15 @@ func (c *Client) ListWebhooks(ctx context.Context, params *ListWebhooksInput, op
 
 // The request structure for the list webhooks request.
 type ListWebhooksInput struct {
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// A pagination token. Set to null to start listing webhooks from the start. If
 	// non-null,the pagination token is returned in a result. Pass its value in here to
 	// list more webhooks.
@@ -69,8 +74,12 @@ type ListWebhooksInput struct {
 
 // The result structure for the list webhooks request.
 type ListWebhooksOutput struct {
+
 	// A list of webhooks.
+	//
+	// This member is required.
 	Webhooks []*types.Webhook
+
 	// A pagination token. If non-null, the pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.
 	NextToken *string

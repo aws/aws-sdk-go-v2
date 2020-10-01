@@ -55,11 +55,13 @@ func (c *Client) GetRoom(ctx context.Context, params *GetRoomInput, optFns ...fu
 }
 
 type GetRoomInput struct {
+
 	// The ARN of the room for which to request details. Required.
 	RoomArn *string
 }
 
 type GetRoomOutput struct {
+
 	// The details of the room requested.
 	Room *types.Room
 

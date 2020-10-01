@@ -66,12 +66,16 @@ func (c *Client) DescribeContinuousBackups(ctx context.Context, params *Describe
 }
 
 type DescribeContinuousBackupsInput struct {
+
 	// Name of the table for which the customer wants to check the continuous backups
 	// and point in time recovery settings.
+	//
+	// This member is required.
 	TableName *string
 }
 
 type DescribeContinuousBackupsOutput struct {
+
 	// Represents the continuous backups and point in time recovery settings on the
 	// table.
 	ContinuousBackupsDescription *types.ContinuousBackupsDescription

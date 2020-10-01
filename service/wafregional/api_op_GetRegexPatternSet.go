@@ -62,13 +62,17 @@ func (c *Client) GetRegexPatternSet(ctx context.Context, params *GetRegexPattern
 }
 
 type GetRegexPatternSetInput struct {
+
 	// The RegexPatternSetId of the RegexPatternSet () that you want to get.
 	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
 	// ListRegexPatternSets ().
+	//
+	// This member is required.
 	RegexPatternSetId *string
 }
 
 type GetRegexPatternSetOutput struct {
+
 	// Information about the RegexPatternSet () that you specified in the
 	// GetRegexPatternSet request, including the identifier of the pattern set and the
 	// regular expression patterns you want AWS WAF to search for.

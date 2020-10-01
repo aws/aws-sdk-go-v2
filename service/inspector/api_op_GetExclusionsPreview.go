@@ -58,33 +58,47 @@ func (c *Client) GetExclusionsPreview(ctx context.Context, params *GetExclusions
 }
 
 type GetExclusionsPreviewInput struct {
+
 	// The ARN that specifies the assessment template for which the exclusions preview
 	// was requested.
+	//
+	// This member is required.
 	AssessmentTemplateArn *string
+
 	// The locale into which you want to translate the exclusion's title, description,
 	// and recommendation.
 	Locale types.Locale
+
 	// The unique identifier associated of the exclusions preview.
+	//
+	// This member is required.
 	PreviewToken *string
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the GetExclusionsPreviewRequest action.
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 100. The maximum value is 500.
 	MaxResults *int32
 }
 
 type GetExclusionsPreviewOutput struct {
+
 	// Information about the exclusions included in the preview.
 	ExclusionPreviews []*types.ExclusionPreview
+
 	// When a response is generated, if there is more data to be listed, this
 	// parameters is present in the response and contains the value to use for the
 	// nextToken parameter in a subsequent pagination request. If there is no more data
 	// to be listed, this parameter is set to null.
 	NextToken *string
+
 	// Specifies the status of the request to generate an exclusions preview.
+	//
+	// This member is required.
 	PreviewStatus types.PreviewStatus
 
 	// Metadata pertaining to the operation's result.

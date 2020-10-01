@@ -78,24 +78,31 @@ func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnaps
 }
 
 type CreateDiskSnapshotInput struct {
+
 	// The unique name of the source disk (e.g., Disk-Virginia-1). This parameter
 	// cannot be defined together with the instance name parameter. The disk name and
 	// instance name parameters are mutually exclusive.
 	DiskName *string
+
 	// The unique name of the source instance (e.g., Amazon_Linux-512MB-Virginia-1).
 	// When this is defined, a snapshot of the instance's system volume is created.
 	// This parameter cannot be defined together with the disk name parameter. The
 	// instance name and disk name parameters are mutually exclusive.
 	InstanceName *string
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// The name of the destination disk snapshot (e.g., my-disk-snapshot) based on the
 	// source disk.
+	//
+	// This member is required.
 	DiskSnapshotName *string
 }
 
 type CreateDiskSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

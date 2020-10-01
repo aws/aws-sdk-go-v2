@@ -68,6 +68,7 @@ func (c *Client) ListHsms(ctx context.Context, params *ListHsmsInput, optFns ...
 }
 
 type ListHsmsInput struct {
+
 	// The NextToken value from a previous call to ListHsms. Pass null if this is the
 	// first call.
 	NextToken *string
@@ -75,9 +76,11 @@ type ListHsmsInput struct {
 
 // Contains the output of the ListHsms operation.
 type ListHsmsOutput struct {
+
 	// If not null, more results are available. Pass this value to ListHsms to retrieve
 	// the next set of items.
 	NextToken *string
+
 	// The list of ARNs that identify the HSMs.
 	HsmList []*string
 

@@ -55,12 +55,18 @@ func (c *Client) GetLifecyclePolicy(ctx context.Context, params *GetLifecyclePol
 }
 
 type GetLifecyclePolicyInput struct {
+
 	// The name of the container that the object lifecycle policy is assigned to.
+	//
+	// This member is required.
 	ContainerName *string
 }
 
 type GetLifecyclePolicyOutput struct {
+
 	// The object lifecycle policy that is assigned to the container.
+	//
+	// This member is required.
 	LifecyclePolicy *string
 
 	// Metadata pertaining to the operation's result.

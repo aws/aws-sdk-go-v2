@@ -56,13 +56,18 @@ func (c *Client) StartDiscoverer(ctx context.Context, params *StartDiscovererInp
 }
 
 type StartDiscovererInput struct {
+
 	// The ID of the discoverer.
+	//
+	// This member is required.
 	DiscovererId *string
 }
 
 type StartDiscovererOutput struct {
+
 	// The state of the discoverer.
 	State types.DiscovererState
+
 	// The ID of the discoverer.
 	DiscovererId *string
 

@@ -9,28 +9,34 @@ import (
 // This section describes operations that you can perform on an AWS Elemental
 // MediaStore container.
 type Container struct {
+
 	// The DNS endpoint of the container. Use the endpoint to identify the specific
 	// container when sending requests to the data plane. The service assigns this
 	// value when the container is created. Once the value has been assigned, it does
 	// not change.
 	Endpoint *string
+
 	// The Amazon Resource Name (ARN) of the container. The ARN has the following
 	// format: arn:aws:::container/ For example:
 	// arn:aws:mediastore:us-west-2:111122223333:container/movies
 	ARN *string
+
 	// The status of container creation or deletion. The status is one of the
 	// following: CREATING, ACTIVE, or DELETING. While the service is creating the
 	// container, the status is CREATING. When the endpoint is available, the status
 	// changes to ACTIVE.
 	Status ContainerStatus
+
 	// The state of access logging on the container. This value is false by default,
 	// indicating that AWS Elemental MediaStore does not send access logs to Amazon
 	// CloudWatch Logs. When you enable access logging on the container, MediaStore
 	// changes this value to true, indicating that the service delivers access logs for
 	// objects stored in that container to CloudWatch Logs.
 	AccessLoggingEnabled *bool
+
 	// Unix timestamp.
 	CreationTime *time.Time
+
 	// The name of the container.
 	Name *string
 }
@@ -38,29 +44,38 @@ type Container struct {
 // A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more
 // than one rule applies, the service uses the first applicable rule listed.
 type CorsRule struct {
+
 	// One or more headers in the response that you want users to be able to access
 	// from their applications (for example, from a JavaScript XMLHttpRequest object).
 	// This element is optional for each rule.
 	ExposeHeaders []*string
+
 	// Identifies an HTTP method that the origin that is specified in the rule is
 	// allowed to execute. Each CORS rule must contain at least one AllowedMethods and
 	// one AllowedOrigins element.
 	AllowedMethods []MethodName
+
 	// Specifies which headers are allowed in a preflight OPTIONS request through the
 	// Access-Control-Request-Headers header. Each header name that is specified in
 	// Access-Control-Request-Headers must have a corresponding entry in the rule. Only
 	// the headers that were requested are sent back. This element can contain only one
 	// wildcard character (*).
+	//
+	// This member is required.
 	AllowedHeaders []*string
+
 	// The time in seconds that your browser caches the preflight response for the
 	// specified resource. A CORS rule can have only one MaxAgeSeconds element.
 	MaxAgeSeconds *int32
+
 	// One or more response headers that you want users to be able to access from their
 	// applications (for example, from a JavaScript XMLHttpRequest object). Each CORS
 	// rule must have at least one AllowedOrigins element. The string value can include
 	// only one wildcard character (*), for example, http://*.example.com.
 	// Additionally, you can specify only one wildcard character to allow cross-origin
 	// access for all origins.
+	//
+	// This member is required.
 	AllowedOrigins []*string
 }
 
@@ -72,6 +87,7 @@ type CorsRule struct {
 // policy for your use case, see Example Metric Policies
 // (https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html).
 type MetricPolicy struct {
+
 	// A parameter that holds an array of rules that enable metrics at the object
 	// level. This parameter is optional, but if you choose to include it, you must
 	// also include at least one rule. By default, you can include up to five rules.
@@ -79,7 +95,10 @@ type MetricPolicy struct {
 	// (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
 	// to allow up to 300 rules per policy.
 	MetricPolicyRules []*MetricPolicyRule
+
 	// A setting to enable or disable metrics at the container level.
+	//
+	// This member is required.
 	ContainerLevelMetrics ContainerLevelMetrics
 }
 
@@ -90,10 +109,16 @@ type MetricPolicy struct {
 // (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
 // to allow up to 300 rules per policy.
 type MetricPolicyRule struct {
+
 	// A path or file name that defines which objects to include in the group.
 	// Wildcards (*) are acceptable.
+	//
+	// This member is required.
 	ObjectGroup *string
+
 	// A name that allows you to refer to the object group.
+	//
+	// This member is required.
 	ObjectGroupName *string
 }
 
@@ -105,11 +130,15 @@ type MetricPolicyRule struct {
 // about tagging, including naming and usage conventions, see Tagging Resources in
 // MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
 type Tag struct {
+
 	// Part of the key:value pair that defines a tag. You can use a tag value to
 	// describe a specific value within a category, such as "companyA" or "companyB."
 	// Tag values are case-sensitive.
 	Value *string
+
 	// Part of the key:value pair that defines a tag. You can use a tag key to describe
 	// a category of information, such as "customer." Tag keys are case-sensitive.
+	//
+	// This member is required.
 	Key *string
 }

@@ -59,6 +59,7 @@ func (c *Client) ResumeProcesses(ctx context.Context, params *ResumeProcessesInp
 }
 
 type ResumeProcessesInput struct {
+
 	// One or more of the following processes:
 	//
 	//     * Launch
@@ -84,7 +85,10 @@ type ResumeProcessesInput struct {
 	//
 	// If you omit this parameter, all processes are specified.
 	ScalingProcesses []*string
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
 }
 

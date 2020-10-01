@@ -60,9 +60,13 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 }
 
 type DeletePolicyInput struct {
+
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
+
 	// The name or Amazon Resource Name (ARN) of the policy.
+	//
+	// This member is required.
 	PolicyName *string
 }
 

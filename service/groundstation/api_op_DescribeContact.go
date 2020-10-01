@@ -57,38 +57,54 @@ func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInp
 
 //
 type DescribeContactInput struct {
+
 	// UUID of a contact.
+	//
+	// This member is required.
 	ContactId *string
 }
 
 //
 type DescribeContactOutput struct {
+
 	// UUID of a contact.
 	ContactId *string
+
 	// Status of a contact.
 	ContactStatus types.ContactStatus
+
 	// End time of a contact.
 	EndTime *time.Time
+
 	// Error message for a contact.
 	ErrorMessage *string
+
 	// Ground station for a contact.
 	GroundStation *string
+
 	// Maximum elevation angle of a contact.
 	MaximumElevation *types.Elevation
+
 	// ARN of a mission profile.
 	MissionProfileArn *string
+
 	// Amount of time after a contact ends that you’d like to receive a CloudWatch
 	// event indicating the pass has finished.
 	PostPassEndTime *time.Time
+
 	// Amount of time prior to contact start you’d like to receive a CloudWatch event
 	// indicating an upcoming pass.
 	PrePassStartTime *time.Time
+
 	// Region of a contact.
 	Region *string
+
 	// ARN of a satellite.
 	SatelliteArn *string
+
 	// Start time of a contact.
 	StartTime *time.Time
+
 	// Tags assigned to a contact.
 	Tags map[string]*string
 

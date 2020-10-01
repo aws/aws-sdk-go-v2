@@ -56,23 +56,34 @@ func (c *Client) GetDocumentVersion(ctx context.Context, params *GetDocumentVers
 }
 
 type GetDocumentVersionInput struct {
+
 	// Set this to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata *bool
+
 	// The version ID of the document.
+	//
+	// This member is required.
 	VersionId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
+
 	// A comma-separated list of values. Specify "SOURCE" to include a URL for the
 	// source document.
 	Fields *string
 }
 
 type GetDocumentVersionOutput struct {
+
 	// The version metadata.
 	Metadata *types.DocumentVersionMetadata
+
 	// The custom metadata on the document version.
 	CustomMetadata map[string]*string
 

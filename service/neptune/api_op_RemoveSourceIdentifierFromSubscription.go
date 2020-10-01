@@ -56,15 +56,22 @@ func (c *Client) RemoveSourceIdentifierFromSubscription(ctx context.Context, par
 }
 
 type RemoveSourceIdentifierFromSubscriptionInput struct {
+
 	// The name of the event notification subscription you want to remove a source
 	// identifier from.
+	//
+	// This member is required.
 	SubscriptionName *string
+
 	// The source identifier to be removed from the subscription, such as the DB
 	// instance identifier for a DB instance or the name of a security group.
+	//
+	// This member is required.
 	SourceIdentifier *string
 }
 
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
+
 	// Contains the results of a successful invocation of the
 	// DescribeEventSubscriptions () action.
 	EventSubscription *types.EventSubscription

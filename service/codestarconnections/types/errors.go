@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Exceeded the maximum limit for connections.
@@ -24,12 +23,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Resource not found. Verify the connection resource ARN and try again.
 type ResourceNotFoundException struct {
@@ -47,12 +40,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Resource not found. Verify the ARN for the host resource and try again.
 type ResourceUnavailableException struct {
@@ -70,9 +57,3 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 }
 func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}

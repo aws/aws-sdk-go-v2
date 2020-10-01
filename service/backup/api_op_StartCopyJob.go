@@ -57,25 +57,39 @@ func (c *Client) StartCopyJob(ctx context.Context, params *StartCopyJobInput, op
 }
 
 type StartCopyJobInput struct {
+
 	// The name of a logical source container where backups are stored. Backup vaults
 	// are identified by names that are unique to the account used to create them and
 	// the AWS Region where they are created. They consist of lowercase letters,
 	// numbers, and hyphens.
+	//
+	// This member is required.
 	SourceBackupVaultName *string
+
 	// A customer chosen string that can be used to distinguish between calls to
 	// StartCopyJob.
 	IdempotencyToken *string
+
 	// An Amazon Resource Name (ARN) that uniquely identifies a destination backup
 	// vault to copy to; for example,
 	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	//
+	// This member is required.
 	DestinationBackupVaultArn *string
+
 	// Specifies the IAM role ARN used to copy the target recovery point; for example,
 	// arn:aws:iam::123456789012:role/S3Access.
+	//
+	// This member is required.
 	IamRoleArn *string
+
 	// An ARN that uniquely identifies a recovery point to use for the copy job; for
 	// example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	//
+	// This member is required.
 	RecoveryPointArn *string
+
 	// Contains an array of Transition objects specifying how long in days before a
 	// recovery point transitions to cold storage or is deleted. Backups transitioned
 	// to cold storage must be stored in cold storage for a minimum of 90 days.
@@ -87,11 +101,13 @@ type StartCopyJobInput struct {
 }
 
 type StartCopyJobOutput struct {
+
 	// The date and time that a copy job is started, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
 	// example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
+
 	// Uniquely identifies a copy job.
 	CopyJobId *string
 

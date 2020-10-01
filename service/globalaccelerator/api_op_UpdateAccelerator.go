@@ -58,21 +58,28 @@ func (c *Client) UpdateAccelerator(ctx context.Context, params *UpdateAccelerato
 }
 
 type UpdateAcceleratorInput struct {
+
 	// Indicates whether an accelerator is enabled. The value is true or false. The
 	// default value is true. If the value is set to true, the accelerator cannot be
 	// deleted. If set to false, the accelerator can be deleted.
 	Enabled *bool
+
 	// The name of the accelerator. The name can have a maximum of 32 characters, must
 	// contain only alphanumeric characters or hyphens (-), and must not begin or end
 	// with a hyphen.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the accelerator to update.
+	//
+	// This member is required.
 	AcceleratorArn *string
+
 	// The value for the address type must be IPv4.
 	IpAddressType types.IpAddressType
 }
 
 type UpdateAcceleratorOutput struct {
+
 	// Information about the updated accelerator.
 	Accelerator *types.Accelerator
 

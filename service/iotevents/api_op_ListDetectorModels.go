@@ -56,15 +56,19 @@ func (c *Client) ListDetectorModels(ctx context.Context, params *ListDetectorMod
 }
 
 type ListDetectorModelsInput struct {
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListDetectorModelsOutput struct {
+
 	// Summary information about the detector models.
 	DetectorModelSummaries []*types.DetectorModelSummary
+
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

@@ -56,17 +56,28 @@ func (c *Client) DescribeIngestion(ctx context.Context, params *DescribeIngestio
 }
 
 type DescribeIngestionInput struct {
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// An ID for the ingestion.
+	//
+	// This member is required.
 	IngestionId *string
+
 	// The ID of the dataset used in the ingestion.
+	//
+	// This member is required.
 	DataSetId *string
 }
 
 type DescribeIngestionOutput struct {
+
 	// Information about the ingestion.
 	Ingestion *types.Ingestion
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

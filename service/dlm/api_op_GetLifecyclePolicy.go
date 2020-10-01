@@ -56,11 +56,15 @@ func (c *Client) GetLifecyclePolicy(ctx context.Context, params *GetLifecyclePol
 }
 
 type GetLifecyclePolicyInput struct {
+
 	// The identifier of the lifecycle policy.
+	//
+	// This member is required.
 	PolicyId *string
 }
 
 type GetLifecyclePolicyOutput struct {
+
 	// Detailed information about the lifecycle policy.
 	Policy *types.LifecyclePolicy
 

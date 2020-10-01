@@ -62,6 +62,7 @@ func (c *Client) CreateSnapshotCopyGrant(ctx context.Context, params *CreateSnap
 
 // The result of the CreateSnapshotCopyGrant action.
 type CreateSnapshotCopyGrantInput struct {
+
 	// The name of the snapshot copy grant. This name must be unique in the region for
 	// the AWS account. Constraints:
 	//
@@ -78,15 +79,20 @@ type CreateSnapshotCopyGrantInput struct {
 	//
 	//     * Must be unique for all clusters within an AWS
 	// account.
+	//
+	// This member is required.
 	SnapshotCopyGrantName *string
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// The unique identifier of the customer master key (CMK) to which to grant Amazon
 	// Redshift permission. If no key is specified, the default key is used.
 	KmsKeyId *string
 }
 
 type CreateSnapshotCopyGrantOutput struct {
+
 	// The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
 	// snapshots with the specified customer master key (CMK) from AWS KMS in the
 	// destination region. For more information about managing snapshot copy grants, go

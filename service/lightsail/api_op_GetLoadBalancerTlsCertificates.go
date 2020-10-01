@@ -60,11 +60,15 @@ func (c *Client) GetLoadBalancerTlsCertificates(ctx context.Context, params *Get
 }
 
 type GetLoadBalancerTlsCertificatesInput struct {
+
 	// The name of the load balancer you associated with your SSL/TLS certificate.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 type GetLoadBalancerTlsCertificatesOutput struct {
+
 	// An array of LoadBalancerTlsCertificate objects describing your SSL/TLS
 	// certificates.
 	TlsCertificates []*types.LoadBalancerTlsCertificate

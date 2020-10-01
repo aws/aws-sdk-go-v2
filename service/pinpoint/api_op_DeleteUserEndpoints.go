@@ -56,15 +56,24 @@ func (c *Client) DeleteUserEndpoints(ctx context.Context, params *DeleteUserEndp
 }
 
 type DeleteUserEndpointsInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The unique identifier for the user.
+	//
+	// This member is required.
 	UserId *string
 }
 
 type DeleteUserEndpointsOutput struct {
+
 	// Provides information about all the endpoints that are associated with a user ID.
+	//
+	// This member is required.
 	EndpointsResponse *types.EndpointsResponse
 
 	// Metadata pertaining to the operation's result.

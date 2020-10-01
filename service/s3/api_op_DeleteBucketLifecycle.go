@@ -71,7 +71,10 @@ func (c *Client) DeleteBucketLifecycle(ctx context.Context, params *DeleteBucket
 }
 
 type DeleteBucketLifecycleInput struct {
+
 	// The bucket name of the lifecycle to delete.
+	//
+	// This member is required.
 	Bucket *string
 }
 

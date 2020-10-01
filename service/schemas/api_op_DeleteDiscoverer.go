@@ -55,7 +55,10 @@ func (c *Client) DeleteDiscoverer(ctx context.Context, params *DeleteDiscovererI
 }
 
 type DeleteDiscovererInput struct {
+
 	// The ID of the discoverer.
+	//
+	// This member is required.
 	DiscovererId *string
 }
 

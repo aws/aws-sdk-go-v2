@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An Active Directory error.
@@ -27,21 +26,6 @@ func (e *ActiveDirectoryError) ErrorMessage() string {
 }
 func (e *ActiveDirectoryError) ErrorCode() string             { return "ActiveDirectoryError" }
 func (e *ActiveDirectoryError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ActiveDirectoryError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ActiveDirectoryError) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ActiveDirectoryError) GetActiveDirectoryId() string {
-	return ptr.ToString(e.ActiveDirectoryId)
-}
-func (e *ActiveDirectoryError) HasActiveDirectoryId() bool {
-	return e.ActiveDirectoryId != nil
-}
-func (e *ActiveDirectoryError) GetType() ActiveDirectoryErrorType {
-	return e.Type
-}
 
 // Another backup is already under way. Wait for completion before initiating
 // additional backups of this file system.
@@ -60,12 +44,6 @@ func (e *BackupInProgress) ErrorMessage() string {
 }
 func (e *BackupInProgress) ErrorCode() string             { return "BackupInProgress" }
 func (e *BackupInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BackupInProgress) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BackupInProgress) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No Amazon FSx backups were found based upon the supplied parameters.
 type BackupNotFound struct {
@@ -83,12 +61,6 @@ func (e *BackupNotFound) ErrorMessage() string {
 }
 func (e *BackupNotFound) ErrorCode() string             { return "BackupNotFound" }
 func (e *BackupNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BackupNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BackupNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't delete a backup while it's being used to restore a file system.
 type BackupRestoring struct {
@@ -108,18 +80,6 @@ func (e *BackupRestoring) ErrorMessage() string {
 }
 func (e *BackupRestoring) ErrorCode() string             { return "BackupRestoring" }
 func (e *BackupRestoring) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BackupRestoring) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BackupRestoring) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *BackupRestoring) GetFileSystemId() string {
-	return ptr.ToString(e.FileSystemId)
-}
-func (e *BackupRestoring) HasFileSystemId() bool {
-	return e.FileSystemId != nil
-}
 
 // A generic error indicating a failure with a client request.
 type BadRequest struct {
@@ -137,12 +97,6 @@ func (e *BadRequest) ErrorMessage() string {
 }
 func (e *BadRequest) ErrorCode() string             { return "BadRequest" }
 func (e *BadRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequest) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequest) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The data repository task could not be canceled because the task has already
 // ended.
@@ -161,12 +115,6 @@ func (e *DataRepositoryTaskEnded) ErrorMessage() string {
 }
 func (e *DataRepositoryTaskEnded) ErrorCode() string             { return "DataRepositoryTaskEnded" }
 func (e *DataRepositoryTaskEnded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DataRepositoryTaskEnded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DataRepositoryTaskEnded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An existing data repository task is currently executing on the file system. Wait
 // until the existing task has completed, then create the new task.
@@ -185,12 +133,6 @@ func (e *DataRepositoryTaskExecuting) ErrorMessage() string {
 }
 func (e *DataRepositoryTaskExecuting) ErrorCode() string             { return "DataRepositoryTaskExecuting" }
 func (e *DataRepositoryTaskExecuting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DataRepositoryTaskExecuting) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DataRepositoryTaskExecuting) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The data repository task or tasks you specified could not be found.
 type DataRepositoryTaskNotFound struct {
@@ -208,12 +150,6 @@ func (e *DataRepositoryTaskNotFound) ErrorMessage() string {
 }
 func (e *DataRepositoryTaskNotFound) ErrorCode() string             { return "DataRepositoryTaskNotFound" }
 func (e *DataRepositoryTaskNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DataRepositoryTaskNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DataRepositoryTaskNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No Amazon FSx file systems were found based upon supplied parameters.
 type FileSystemNotFound struct {
@@ -231,12 +167,6 @@ func (e *FileSystemNotFound) ErrorMessage() string {
 }
 func (e *FileSystemNotFound) ErrorCode() string             { return "FileSystemNotFound" }
 func (e *FileSystemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileSystemNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileSystemNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The error returned when a second request is received with the same client
 // request token but different parameters settings. A client request token should
@@ -258,18 +188,6 @@ func (e *IncompatibleParameterError) ErrorMessage() string {
 }
 func (e *IncompatibleParameterError) ErrorCode() string             { return "IncompatibleParameterError" }
 func (e *IncompatibleParameterError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatibleParameterError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatibleParameterError) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *IncompatibleParameterError) GetParameter() string {
-	return ptr.ToString(e.Parameter)
-}
-func (e *IncompatibleParameterError) HasParameter() bool {
-	return e.Parameter != nil
-}
 
 // A generic error indicating a server-side failure.
 type InternalServerError struct {
@@ -287,12 +205,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The path provided for data repository export isn't valid.
 type InvalidExportPath struct {
@@ -310,12 +222,6 @@ func (e *InvalidExportPath) ErrorMessage() string {
 }
 func (e *InvalidExportPath) ErrorCode() string             { return "InvalidExportPath" }
 func (e *InvalidExportPath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidExportPath) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidExportPath) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The path provided for data repository import isn't valid.
 type InvalidImportPath struct {
@@ -333,12 +239,6 @@ func (e *InvalidImportPath) ErrorMessage() string {
 }
 func (e *InvalidImportPath) ErrorCode() string             { return "InvalidImportPath" }
 func (e *InvalidImportPath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidImportPath) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidImportPath) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more network settings specified in the request are invalid. InvalidVpcId
 // means that the ID passed for the virtual private cloud (VPC) is invalid.
@@ -363,24 +263,6 @@ func (e *InvalidNetworkSettings) ErrorMessage() string {
 }
 func (e *InvalidNetworkSettings) ErrorCode() string             { return "InvalidNetworkSettings" }
 func (e *InvalidNetworkSettings) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNetworkSettings) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNetworkSettings) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidNetworkSettings) GetInvalidSubnetId() string {
-	return ptr.ToString(e.InvalidSubnetId)
-}
-func (e *InvalidNetworkSettings) HasInvalidSubnetId() bool {
-	return e.InvalidSubnetId != nil
-}
-func (e *InvalidNetworkSettings) GetInvalidSecurityGroupId() string {
-	return ptr.ToString(e.InvalidSecurityGroupId)
-}
-func (e *InvalidNetworkSettings) HasInvalidSecurityGroupId() bool {
-	return e.InvalidSecurityGroupId != nil
-}
 
 // An invalid value for PerUnitStorageThroughput was provided. Please create your
 // file system again, using a valid value.
@@ -401,12 +283,6 @@ func (e *InvalidPerUnitStorageThroughput) ErrorCode() string {
 	return "InvalidPerUnitStorageThroughput"
 }
 func (e *InvalidPerUnitStorageThroughput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPerUnitStorageThroughput) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPerUnitStorageThroughput) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A file system configuration is required for this operation.
 type MissingFileSystemConfiguration struct {
@@ -424,12 +300,6 @@ func (e *MissingFileSystemConfiguration) ErrorMessage() string {
 }
 func (e *MissingFileSystemConfiguration) ErrorCode() string             { return "MissingFileSystemConfiguration" }
 func (e *MissingFileSystemConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingFileSystemConfiguration) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingFileSystemConfiguration) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource specified for the tagging operation is not a resource type owned by
 // Amazon FSx. Use the API of the relevant service to perform the operation.
@@ -450,18 +320,6 @@ func (e *NotServiceResourceError) ErrorMessage() string {
 }
 func (e *NotServiceResourceError) ErrorCode() string             { return "NotServiceResourceError" }
 func (e *NotServiceResourceError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotServiceResourceError) GetResourceARN() string {
-	return ptr.ToString(e.ResourceARN)
-}
-func (e *NotServiceResourceError) HasResourceARN() bool {
-	return e.ResourceARN != nil
-}
-func (e *NotServiceResourceError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotServiceResourceError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource specified does not support tagging.
 type ResourceDoesNotSupportTagging struct {
@@ -481,18 +339,6 @@ func (e *ResourceDoesNotSupportTagging) ErrorMessage() string {
 }
 func (e *ResourceDoesNotSupportTagging) ErrorCode() string             { return "ResourceDoesNotSupportTagging" }
 func (e *ResourceDoesNotSupportTagging) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceDoesNotSupportTagging) GetResourceARN() string {
-	return ptr.ToString(e.ResourceARN)
-}
-func (e *ResourceDoesNotSupportTagging) HasResourceARN() bool {
-	return e.ResourceARN != nil
-}
-func (e *ResourceDoesNotSupportTagging) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceDoesNotSupportTagging) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource specified by the Amazon Resource Name (ARN) can't be found.
 type ResourceNotFound struct {
@@ -512,18 +358,6 @@ func (e *ResourceNotFound) ErrorMessage() string {
 }
 func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFound) GetResourceARN() string {
-	return ptr.ToString(e.ResourceARN)
-}
-func (e *ResourceNotFound) HasResourceARN() bool {
-	return e.ResourceARN != nil
-}
-func (e *ResourceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error indicating that a particular service limit was exceeded. You can
 // increase some service limits by contacting AWS Support.
@@ -544,15 +378,6 @@ func (e *ServiceLimitExceeded) ErrorMessage() string {
 }
 func (e *ServiceLimitExceeded) ErrorCode() string             { return "ServiceLimitExceeded" }
 func (e *ServiceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceLimitExceeded) GetLimit() ServiceLimit {
-	return e.Limit
-}
 
 // The requested operation is not supported for this resource or API.
 type UnsupportedOperation struct {
@@ -570,9 +395,3 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 }
 func (e *UnsupportedOperation) ErrorCode() string             { return "UnsupportedOperation" }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperation) HasMessage() bool {
-	return e.Message != nil
-}

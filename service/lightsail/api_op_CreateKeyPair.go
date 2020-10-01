@@ -58,23 +58,31 @@ func (c *Client) CreateKeyPair(ctx context.Context, params *CreateKeyPairInput, 
 }
 
 type CreateKeyPairInput struct {
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// The name for your new key pair.
+	//
+	// This member is required.
 	KeyPairName *string
 }
 
 type CreateKeyPairOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
 	Operation *types.Operation
+
 	// A base64-encoded RSA private key.
 	PrivateKeyBase64 *string
+
 	// An array of key-value pairs containing information about the new key pair you
 	// just created.
 	KeyPair *types.KeyPair
+
 	// A base64-encoded public key of the ssh-rsa type.
 	PublicKeyBase64 *string
 

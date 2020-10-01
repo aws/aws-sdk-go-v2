@@ -75,10 +75,12 @@ func (c *Client) SimulatePrincipalPolicy(ctx context.Context, params *SimulatePr
 }
 
 type SimulatePrincipalPolicyInput struct {
+
 	// A list of context keys and corresponding values for the simulation to use.
 	// Whenever a context key is evaluated in one of the simulated IAM permissions
 	// policies, the corresponding value is supplied.
 	ContextEntries []*types.ContextEntry
+
 	// The IAM permissions boundary policy to simulate. The permissions boundary sets
 	// the maximum permissions that the entity can have. You can input only one
 	// permissions boundary when you pass a policy to this operation. An IAM entity can
@@ -103,6 +105,7 @@ type SimulatePrincipalPolicyInput struct {
 	//     * The special characters tab (\u0009), line
 	// feed (\u000A), and carriage return (\u000D)
 	PermissionsBoundaryPolicyInputList []*string
+
 	// A list of ARNs of AWS resources to include in the simulation. If this parameter
 	// is not provided, then the value defaults to * (all resources). Each API in the
 	// ActionNames parameter is evaluated for each resource in this list. The
@@ -115,6 +118,7 @@ type SimulatePrincipalPolicyInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	ResourceArns []*string
+
 	// The ARN of the IAM user that you want to specify as the simulated caller of the
 	// API operations. If you do not specify a CallerArn, it defaults to the ARN of the
 	// user that you specify in PolicySourceArn, if you specified a user. If you
@@ -131,6 +135,7 @@ type SimulatePrincipalPolicyInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	CallerArn *string
+
 	// A resource-based policy to include in the simulation provided as a string. Each
 	// resource in the simulation is treated as if it had this policy attached. You can
 	// include only one resource-based policy in a simulation. The regex pattern
@@ -147,6 +152,7 @@ type SimulatePrincipalPolicyInput struct {
 	//     * The special characters tab (\u0009), line
 	// feed (\u000A), and carriage return (\u000D)
 	ResourcePolicy *string
+
 	// The Amazon Resource Name (ARN) of a user, group, or role whose policies you want
 	// to include in the simulation. If you specify a user, group, or role, the
 	// simulation includes all policies that are associated with that entity. If you
@@ -155,7 +161,10 @@ type SimulatePrincipalPolicyInput struct {
 	// Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	PolicySourceArn *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -164,11 +173,13 @@ type SimulatePrincipalPolicyInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
 	// should start.
 	Marker *string
+
 	// Specifies the type of simulation to run. Different API operations that support
 	// resource-based policies require different combinations of resources. By
 	// specifying the type of simulation to run, you enable the policy simulator to
@@ -203,10 +214,14 @@ type SimulatePrincipalPolicyInput struct {
 	//     * EC2-VPC-EBS-Subnet instance, image, security group,
 	// network interface, subnet, volume
 	ResourceHandlingOption *string
+
 	// A list of names of API operations to evaluate in the simulation. Each operation
 	// is evaluated for each resource. Each operation must include the service
 	// identifier, such as iam:CreateUser.
+	//
+	// This member is required.
 	ActionNames []*string
+
 	// An optional list of additional policy documents to include in the simulation.
 	// Each document is specified as a string containing the complete, valid JSON text
 	// of an IAM policy. The regex pattern (http://wikipedia.org/wiki/regex) used to
@@ -223,6 +238,7 @@ type SimulatePrincipalPolicyInput struct {
 	// special characters tab (\u0009), line feed (\u000A), and carriage return
 	// (\u000D)
 	PolicyInputList []*string
+
 	// An AWS account ID that specifies the owner of any simulated resource that does
 	// not identify its owner in the resource ARN. Examples of resource ARNs include an
 	// S3 bucket or object. If ResourceOwner is specified, it is also used as the
@@ -238,6 +254,7 @@ type SimulatePrincipalPolicyInput struct {
 // Contains the response to a successful SimulatePrincipalPolicy () or
 // SimulateCustomPolicy () request.
 type SimulatePrincipalPolicyOutput struct {
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -245,9 +262,11 @@ type SimulatePrincipalPolicyOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
+
 	// The results of the simulation.
 	EvaluationResults []*types.EvaluationResult
 

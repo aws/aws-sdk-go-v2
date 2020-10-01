@@ -62,16 +62,23 @@ func (c *Client) StartProjectVersion(ctx context.Context, params *StartProjectVe
 }
 
 type StartProjectVersionInput struct {
+
 	// The Amazon Resource Name(ARN) of the model version that you want to start.
+	//
+	// This member is required.
 	ProjectVersionArn *string
+
 	// The minimum number of inference units to use. A single inference unit represents
 	// 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use
 	// a higher number to increase the TPS throughput of your model. You are charged
 	// for the number of inference units that you use.
+	//
+	// This member is required.
 	MinInferenceUnits *int32
 }
 
 type StartProjectVersionOutput struct {
+
 	// The current running status of the model.
 	Status types.ProjectVersionStatus
 

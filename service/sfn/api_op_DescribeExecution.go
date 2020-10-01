@@ -59,17 +59,28 @@ func (c *Client) DescribeExecution(ctx context.Context, params *DescribeExecutio
 }
 
 type DescribeExecutionInput struct {
+
 	// The Amazon Resource Name (ARN) of the execution to describe.
+	//
+	// This member is required.
 	ExecutionArn *string
 }
 
 type DescribeExecutionOutput struct {
+
 	// The current status of the execution.
+	//
+	// This member is required.
 	Status types.ExecutionStatus
+
 	// If the execution has already ended, the date the execution stopped.
 	StopDate *time.Time
+
 	// The date the execution is started.
+	//
+	// This member is required.
 	StartDate *time.Time
+
 	// The name of the execution. A name must not contain:
 	//
 	//     * white space
@@ -88,14 +99,24 @@ type DescribeExecutionOutput struct {
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
 	Name *string
+
 	// The JSON output data of the execution. This field is set only if the execution
 	// succeeds. If the execution fails, this field is null.
 	Output *string
+
 	// The Amazon Resource Name (ARN) of the executed stated machine.
+	//
+	// This member is required.
 	StateMachineArn *string
+
 	// The string that contains the JSON input data of the execution.
+	//
+	// This member is required.
 	Input *string
+
 	// The Amazon Resource Name (ARN) that id entifies the execution.
+	//
+	// This member is required.
 	ExecutionArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -55,11 +55,17 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 }
 
 type DeleteUserInput struct {
+
 	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
 	BrokerId *string
+
 	// The username of the ActiveMQ user. This value can contain only alphanumeric
 	// characters, dashes, periods, underscores, and tildes (- . _ ~). This value must
 	// be 2-100 characters long.
+	//
+	// This member is required.
 	Username *string
 }
 

@@ -56,18 +56,22 @@ func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *List
 }
 
 type ListOrganizationAdminAccountsInput struct {
+
 	// The maximum number of items to include in each page of a paginated response.
 	MaxResults *int32
+
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
 }
 
 type ListOrganizationAdminAccountsOutput struct {
+
 	// An array of objects, one for each account that's designated as a delegated
 	// administrator of Amazon Macie for the AWS organization. Of those accounts, only
 	// one can have a status of ENABLED.
 	AdminAccounts []*types.AdminAccount
+
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string

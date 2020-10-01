@@ -60,54 +60,80 @@ func (c *Client) GetDomainDetail(ctx context.Context, params *GetDomainDetailInp
 
 // The GetDomainDetail request includes the following element.
 type GetDomainDetailInput struct {
+
 	// The name of the domain that you want to get detailed information about.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The GetDomainDetail response includes the following elements.
 type GetDomainDetailOutput struct {
+
 	// Reseller of the domain. Domains registered or transferred using Route 53 domains
 	// will have "Amazon" as the reseller.
 	Reseller *string
+
 	// The last updated date of the domain as found in the response to a WHOIS query.
 	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	UpdatedDate *time.Time
+
 	// Provides details about the domain registrant.
+	//
+	// This member is required.
 	RegistrantContact *types.ContactDetail
+
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If the value is false, WHOIS queries
 	// return the information that you entered for the technical contact.
 	TechPrivacy *bool
+
 	// Provides details about the domain technical contact.
+	//
+	// This member is required.
 	TechContact *types.ContactDetail
+
 	// The name of a domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If the value is false, WHOIS queries
 	// return the information that you entered for the admin contact.
 	AdminPrivacy *bool
+
 	// Email address to contact to report incorrect contact information for a domain,
 	// to report that the domain is being used to send spam, to report that someone is
 	// cybersquatting on a domain name, or report some other type of abuse.
 	AbuseContactEmail *string
+
 	// The date when the domain was created as found in the response to a WHOIS query.
 	// The date and time is in Unix time format and Coordinated Universal time (UTC).
 	CreationDate *time.Time
+
 	// Reserved for future use.
 	DnsSec *string
+
 	// Specifies whether the domain registration is set to renew automatically.
 	AutoRenew *bool
+
 	// Web address of the registrar.
 	RegistrarUrl *string
+
 	// The fully qualified name of the WHOIS server that can answer the WHOIS query for
 	// the domain.
 	WhoIsServer *string
+
 	// The name of the domain.
+	//
+	// This member is required.
 	Nameservers []*types.Nameserver
+
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
@@ -115,6 +141,7 @@ type GetDomainDetailOutput struct {
 	// return the information that you entered for the registrant contact (domain
 	// owner).
 	RegistrantPrivacy *bool
+
 	// An array of domain name status codes, also known as Extensible Provisioning
 	// Protocol (EPP) status codes. ICANN, the organization that maintains a central
 	// database of domain names, has developed a set of domain name status codes that
@@ -126,15 +153,22 @@ type GetDomainDetailOutput struct {
 	// (https://www.icann.org/) and search for epp status codes. (Search on the ICANN
 	// website; web searches sometimes return an old version of the document.)
 	StatusList []*string
+
 	// Reserved for future use.
 	RegistryDomainId *string
+
 	// Phone number for reporting abuse.
 	AbuseContactPhone *string
+
 	// Provides details about the domain administrative contact.
+	//
+	// This member is required.
 	AdminContact *types.ContactDetail
+
 	// The date when the registration for the domain is set to expire. The date and
 	// time is in Unix time format and Coordinated Universal time (UTC).
 	ExpirationDate *time.Time
+
 	// Name of the registrar of the domain as identified in the registry. Domains with
 	// a .com, .net, or .org TLD are registered by Amazon Registrar. All other domains
 	// are registered by our registrar associate, Gandi. The value for domains that are

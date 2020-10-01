@@ -55,11 +55,15 @@ func (c *Client) DisassociateRoleFromGroup(ctx context.Context, params *Disassoc
 }
 
 type DisassociateRoleFromGroupInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type DisassociateRoleFromGroupOutput struct {
+
 	// The time, in milliseconds since the epoch, when the role was disassociated from
 	// the group.
 	DisassociatedAt *string

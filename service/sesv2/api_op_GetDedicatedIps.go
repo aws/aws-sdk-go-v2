@@ -56,14 +56,17 @@ func (c *Client) GetDedicatedIps(ctx context.Context, params *GetDedicatedIpsInp
 
 // A request to obtain more information about dedicated IP pools.
 type GetDedicatedIpsInput struct {
+
 	// The number of results to show in a single call to GetDedicatedIpsRequest. If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
+
 	// A token returned from a previous call to GetDedicatedIps to indicate the
 	// position of the dedicated IP pool in the list of IP pools.
 	NextToken *string
+
 	// The name of the IP pool that the dedicated IP address is associated with.
 	PoolName *string
 }
@@ -71,10 +74,12 @@ type GetDedicatedIpsInput struct {
 // Information about the dedicated IP addresses that are associated with your AWS
 // account.
 type GetDedicatedIpsOutput struct {
+
 	// A token that indicates that there are additional dedicated IP addresses to list.
 	// To view additional addresses, issue another request to GetDedicatedIps, passing
 	// this token in the NextToken parameter.
 	NextToken *string
+
 	// A list of dedicated IP addresses that are associated with your AWS account.
 	DedicatedIps []*types.DedicatedIp
 

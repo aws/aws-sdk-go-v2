@@ -62,6 +62,7 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 }
 
 type CreateStreamInput struct {
+
 	// The media type of the stream. Consumers of the stream can use this information
 	// when processing the stream. For more information about media types, see Media
 	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml). If you
@@ -71,15 +72,20 @@ type CreateStreamInput struct {
 	// parameter is optional; the default value is <code>null</code> (or empty in
 	// JSON).</p>
 	MediaType *string
+
 	// A name for the stream that you are creating. The stream name is an identifier
 	// for the stream, and must be unique for each account and region.
+	//
+	// This member is required.
 	StreamName *string
+
 	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis
 	// Video Streams to use to encrypt stream data. If no key ID is specified, the
 	// default, Kinesis Video-managed key (aws/kinesisvideo) is used. For more
 	// information, see DescribeKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
 	KmsKeyId *string
+
 	// The number of hours that you want to retain the data in the stream. Kinesis
 	// Video Streams retains the data in a data store that is associated with the
 	// stream. The default value is 0, indicating that the stream does not persist
@@ -88,15 +94,18 @@ type CreateStreamInput struct {
 	// limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed
 	// from the buffer when either limit is reached.
 	DataRetentionInHours *int32
+
 	// The name of the device that is writing to the stream. In the current
 	// implementation, Kinesis Video Streams does not use this name.
 	DeviceName *string
+
 	// A list of tags to associate with the specified stream. Each tag is a key-value
 	// pair (the value is optional).
 	Tags map[string]*string
 }
 
 type CreateStreamOutput struct {
+
 	// The Amazon Resource Name (ARN) of the stream.
 	StreamARN *string
 

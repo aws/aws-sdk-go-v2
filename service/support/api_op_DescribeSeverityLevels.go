@@ -66,6 +66,7 @@ func (c *Client) DescribeSeverityLevels(ctx context.Context, params *DescribeSev
 }
 
 type DescribeSeverityLevelsInput struct {
+
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
@@ -74,6 +75,7 @@ type DescribeSeverityLevelsInput struct {
 
 // The list of severity levels returned by the DescribeSeverityLevels () operation.
 type DescribeSeverityLevelsOutput struct {
+
 	// The available severity levels for the support case. Available severity levels
 	// are defined by your service level agreement with AWS.
 	SeverityLevels []*types.SeverityLevel

@@ -60,17 +60,22 @@ func (c *Client) GetEventTypes(ctx context.Context, params *GetEventTypesInput, 
 }
 
 type GetEventTypesInput struct {
+
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
+
 	// The next token for the subsequent request.
 	NextToken *string
+
 	// The name.
 	Name *string
 }
 
 type GetEventTypesOutput struct {
+
 	// The next page token.
 	NextToken *string
+
 	// An array of event types.
 	EventTypes []*types.EventType
 

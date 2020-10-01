@@ -56,6 +56,7 @@ func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfi
 
 // A request to create a new configuration set.
 type CreateConfigurationSetInput struct {
+
 	// The name that you want to give the configuration set.
 	ConfigurationSetName *string
 }

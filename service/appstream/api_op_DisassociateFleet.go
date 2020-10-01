@@ -55,9 +55,15 @@ func (c *Client) DisassociateFleet(ctx context.Context, params *DisassociateFlee
 }
 
 type DisassociateFleetInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	FleetName *string
+
 	// The name of the stack.
+	//
+	// This member is required.
 	StackName *string
 }
 

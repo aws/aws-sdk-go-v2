@@ -71,6 +71,7 @@ func (c *Client) PutScheduledAction(ctx context.Context, params *PutScheduledAct
 }
 
 type PutScheduledActionInput struct {
+
 	// The identifier of the resource associated with the scheduled action. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -128,11 +129,16 @@ type PutScheduledActionInput struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The date and time for the recurring schedule to end.
 	EndTime *time.Time
+
 	// The date and time for this scheduled action to start.
 	StartTime *time.Time
+
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
 	//
@@ -189,7 +195,10 @@ type PutScheduledActionInput struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	// This member is required.
 	ScalableDimension types.ScalableDimension
+
 	// The schedule for this action. The following formats are supported:
 	//
 	//     * At
@@ -210,12 +219,19 @@ type PutScheduledActionInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
 	// in the Application Auto Scaling User Guide.
 	Schedule *string
+
 	// The namespace of the AWS service that provides the resource. For a resource
 	// provided by your own application or service, use custom-resource instead.
+	//
+	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
 	// The name of the scheduled action. This name must be unique among all other
 	// scheduled actions on the specified scalable target.
+	//
+	// This member is required.
 	ScheduledActionName *string
+
 	// The new minimum and maximum capacity. You can set both values or just one. At
 	// the scheduled time, if the current capacity is below the minimum capacity,
 	// Application Auto Scaling scales out to the minimum capacity. If the current

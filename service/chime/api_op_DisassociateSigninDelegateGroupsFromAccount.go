@@ -56,9 +56,15 @@ func (c *Client) DisassociateSigninDelegateGroupsFromAccount(ctx context.Context
 }
 
 type DisassociateSigninDelegateGroupsFromAccountInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The sign-in delegate group names.
+	//
+	// This member is required.
 	GroupNames []*string
 }
 

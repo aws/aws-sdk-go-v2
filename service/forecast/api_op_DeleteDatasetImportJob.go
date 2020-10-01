@@ -58,7 +58,10 @@ func (c *Client) DeleteDatasetImportJob(ctx context.Context, params *DeleteDatas
 }
 
 type DeleteDatasetImportJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset import job to delete.
+	//
+	// This member is required.
 	DatasetImportJobArn *string
 }
 

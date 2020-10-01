@@ -58,14 +58,20 @@ func (c *Client) DescribeElasticsearchDomain(ctx context.Context, params *Descri
 
 // Container for the parameters to the DescribeElasticsearchDomain () operation.
 type DescribeElasticsearchDomainInput struct {
+
 	// The name of the Elasticsearch domain for which you want information.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DescribeElasticsearchDomain request. Contains the status of the
 // domain specified in the request.
 type DescribeElasticsearchDomainOutput struct {
+
 	// The current status of the Elasticsearch domain.
+	//
+	// This member is required.
 	DomainStatus *types.ElasticsearchDomainStatus
 
 	// Metadata pertaining to the operation's result.

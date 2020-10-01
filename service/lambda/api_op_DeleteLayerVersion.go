@@ -59,9 +59,15 @@ func (c *Client) DeleteLayerVersion(ctx context.Context, params *DeleteLayerVers
 }
 
 type DeleteLayerVersionInput struct {
+
 	// The name or Amazon Resource Name (ARN) of the layer.
+	//
+	// This member is required.
 	LayerName *string
+
 	// The version number.
+	//
+	// This member is required.
 	VersionNumber *int64
 }
 

@@ -56,24 +56,38 @@ func (c *Client) GetRouteResponse(ctx context.Context, params *GetRouteResponseI
 }
 
 type GetRouteResponseInput struct {
+
 	// The route response ID.
+	//
+	// This member is required.
 	RouteResponseId *string
+
 	// The route ID.
+	//
+	// This member is required.
 	RouteId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetRouteResponseOutput struct {
+
 	// Represents the model selection expression of a route response. Supported only
 	// for WebSocket APIs.
 	ModelSelectionExpression *string
+
 	// Represents the response models of a route response.
 	ResponseModels map[string]*string
+
 	// Represents the route response key of a route response.
 	RouteResponseKey *string
+
 	// Represents the identifier of a route response.
 	RouteResponseId *string
+
 	// Represents the response parameters of a route response.
 	ResponseParameters map[string]*types.ParameterConstraints
 

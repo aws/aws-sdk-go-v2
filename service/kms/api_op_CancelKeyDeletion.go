@@ -65,6 +65,7 @@ func (c *Client) CancelKeyDeletion(ctx context.Context, params *CancelKeyDeletio
 }
 
 type CancelKeyDeletionInput struct {
+
 	// The unique identifier for the customer master key (CMK) for which to cancel
 	// deletion. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. For
 	// example:
@@ -76,10 +77,13 @@ type CancelKeyDeletionInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 
 type CancelKeyDeletionOutput struct {
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK whose deletion is canceled.

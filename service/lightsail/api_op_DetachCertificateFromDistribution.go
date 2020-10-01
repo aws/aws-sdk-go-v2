@@ -59,13 +59,17 @@ func (c *Client) DetachCertificateFromDistribution(ctx context.Context, params *
 }
 
 type DetachCertificateFromDistributionInput struct {
+
 	// The name of the distribution from which to detach the certificate.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p>
+	//
+	// This member is required.
 	DistributionName *string
 }
 
 type DetachCertificateFromDistributionOutput struct {
+
 	// An object that describes the result of the action, such as the status of the
 	// request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -59,16 +59,19 @@ func (c *Client) ListMFADevices(ctx context.Context, params *ListMFADevicesInput
 }
 
 type ListMFADevicesInput struct {
+
 	// The name of the user whose MFA devices you want to list. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
 	// should start.
 	Marker *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -81,11 +84,16 @@ type ListMFADevicesInput struct {
 
 // Contains the response to a successful ListMFADevices () request.
 type ListMFADevicesOutput struct {
+
 	// A list of MFA devices.
+	//
+	// This member is required.
 	MFADevices []*types.MFADevice
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than

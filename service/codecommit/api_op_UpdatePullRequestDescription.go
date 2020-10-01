@@ -56,16 +56,25 @@ func (c *Client) UpdatePullRequestDescription(ctx context.Context, params *Updat
 }
 
 type UpdatePullRequestDescriptionInput struct {
+
 	// The updated content of the description for the pull request. This content
 	// replaces the existing description.
+	//
+	// This member is required.
 	Description *string
+
 	// The system-generated ID of the pull request. To get this ID, use
 	// ListPullRequests ().
+	//
+	// This member is required.
 	PullRequestId *string
 }
 
 type UpdatePullRequestDescriptionOutput struct {
+
 	// Information about the updated pull request.
+	//
+	// This member is required.
 	PullRequest *types.PullRequest
 
 	// Metadata pertaining to the operation's result.

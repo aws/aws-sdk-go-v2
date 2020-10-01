@@ -56,9 +56,13 @@ func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns
 
 // A map of the key-value pairs for the resource tag.
 type CreateTagsInput struct {
+
 	// The key-value pair for the resource tag.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the resource tag.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

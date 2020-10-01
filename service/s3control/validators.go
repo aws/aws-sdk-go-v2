@@ -30,6 +30,26 @@ func (m *validateOpCreateAccessPoint) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBucket struct {
+}
+
+func (*validateOpCreateBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBucketInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateJob struct {
 }
 
@@ -85,6 +105,86 @@ func (m *validateOpDeleteAccessPointPolicy) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccessPointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBucket struct {
+}
+
+func (*validateOpDeleteBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBucketLifecycleConfiguration struct {
+}
+
+func (*validateOpDeleteBucketLifecycleConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucketLifecycleConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketLifecycleConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketLifecycleConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBucketPolicy struct {
+}
+
+func (*validateOpDeleteBucketPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucketPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBucketTagging struct {
+}
+
+func (*validateOpDeleteBucketTagging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucketTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketTaggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketTaggingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +310,86 @@ func (m *validateOpGetAccessPointPolicyStatus) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBucket struct {
+}
+
+func (*validateOpGetBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketLifecycleConfiguration struct {
+}
+
+func (*validateOpGetBucketLifecycleConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketLifecycleConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketLifecycleConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketLifecycleConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketPolicy struct {
+}
+
+func (*validateOpGetBucketPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketTagging struct {
+}
+
+func (*validateOpGetBucketTagging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketTaggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketTaggingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetJobTagging struct {
 }
 
@@ -290,6 +470,26 @@ func (m *validateOpListJobs) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRegionalBuckets struct {
+}
+
+func (*validateOpListRegionalBuckets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRegionalBuckets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRegionalBucketsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRegionalBucketsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutAccessPointPolicy struct {
 }
 
@@ -305,6 +505,66 @@ func (m *validateOpPutAccessPointPolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutAccessPointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutBucketLifecycleConfiguration struct {
+}
+
+func (*validateOpPutBucketLifecycleConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBucketLifecycleConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBucketLifecycleConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBucketLifecycleConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutBucketPolicy struct {
+}
+
+func (*validateOpPutBucketPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBucketPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBucketPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBucketPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutBucketTagging struct {
+}
+
+func (*validateOpPutBucketTagging) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBucketTagging) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBucketTaggingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBucketTaggingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -394,6 +654,10 @@ func addOpCreateAccessPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessPoint{}, middleware.After)
 }
 
+func addOpCreateBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBucket{}, middleware.After)
+}
+
 func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
@@ -404,6 +668,22 @@ func addOpDeleteAccessPointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccessPointPolicy{}, middleware.After)
+}
+
+func addOpDeleteBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucket{}, middleware.After)
+}
+
+func addOpDeleteBucketLifecycleConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucketLifecycleConfiguration{}, middleware.After)
+}
+
+func addOpDeleteBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucketPolicy{}, middleware.After)
+}
+
+func addOpDeleteBucketTaggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucketTagging{}, middleware.After)
 }
 
 func addOpDeleteJobTaggingValidationMiddleware(stack *middleware.Stack) error {
@@ -430,6 +710,22 @@ func addOpGetAccessPointPolicyStatusValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpGetAccessPointPolicyStatus{}, middleware.After)
 }
 
+func addOpGetBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucket{}, middleware.After)
+}
+
+func addOpGetBucketLifecycleConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketLifecycleConfiguration{}, middleware.After)
+}
+
+func addOpGetBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketPolicy{}, middleware.After)
+}
+
+func addOpGetBucketTaggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketTagging{}, middleware.After)
+}
+
 func addOpGetJobTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobTagging{}, middleware.After)
 }
@@ -446,8 +742,24 @@ func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobs{}, middleware.After)
 }
 
+func addOpListRegionalBucketsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRegionalBuckets{}, middleware.After)
+}
+
 func addOpPutAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccessPointPolicy{}, middleware.After)
+}
+
+func addOpPutBucketLifecycleConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBucketLifecycleConfiguration{}, middleware.After)
+}
+
+func addOpPutBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBucketPolicy{}, middleware.After)
+}
+
+func addOpPutBucketTaggingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBucketTagging{}, middleware.After)
 }
 
 func addOpPutJobTaggingValidationMiddleware(stack *middleware.Stack) error {
@@ -497,11 +809,11 @@ func validateJobManifestLocation(v *types.JobManifestLocation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JobManifestLocation"}
-	if v.ObjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectArn"))
-	}
 	if v.ETag == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ETag"))
+	}
+	if v.ObjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -535,6 +847,11 @@ func validateJobOperation(v *types.JobOperation) error {
 			invalidParams.AddNested("S3PutObjectLegalHold", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.S3PutObjectCopy != nil {
+		if err := validateS3CopyObjectOperation(v.S3PutObjectCopy); err != nil {
+			invalidParams.AddNested("S3PutObjectCopy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.S3PutObjectTagging != nil {
 		if err := validateS3SetObjectTaggingOperation(v.S3PutObjectTagging); err != nil {
 			invalidParams.AddNested("S3PutObjectTagging", err.(smithy.InvalidParamsError))
@@ -543,11 +860,6 @@ func validateJobOperation(v *types.JobOperation) error {
 	if v.S3PutObjectRetention != nil {
 		if err := validateS3SetObjectRetentionOperation(v.S3PutObjectRetention); err != nil {
 			invalidParams.AddNested("S3PutObjectRetention", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.S3PutObjectCopy != nil {
-		if err := validateS3CopyObjectOperation(v.S3PutObjectCopy); err != nil {
-			invalidParams.AddNested("S3PutObjectCopy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.S3PutObjectAcl != nil {
@@ -569,6 +881,99 @@ func validateJobReport(v *types.JobReport) error {
 	invalidParams := smithy.InvalidParamsError{Context: "JobReport"}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleConfiguration(v *types.LifecycleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleConfiguration"}
+	if v.Rules != nil {
+		if err := validateLifecycleRules(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleRule(v *types.LifecycleRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRule"}
+	if v.Filter != nil {
+		if err := validateLifecycleRuleFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleRuleAndOperator(v *types.LifecycleRuleAndOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRuleAndOperator"}
+	if v.Tags != nil {
+		if err := validateS3TagSet(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleRuleFilter(v *types.LifecycleRuleFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRuleFilter"}
+	if v.Tag != nil {
+		if err := validateS3Tag(v.Tag); err != nil {
+			invalidParams.AddNested("Tag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.And != nil {
+		if err := validateLifecycleRuleAndOperator(v.And); err != nil {
+			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleRules(v []*types.LifecycleRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRules"}
+	for i := range v {
+		if err := validateLifecycleRule(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -744,6 +1149,25 @@ func validateS3TagSet(v []*types.S3Tag) error {
 	}
 }
 
+func validateTagging(v *types.Tagging) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tagging"}
+	if v.TagSet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagSet"))
+	} else if v.TagSet != nil {
+		if err := validateS3TagSet(v.TagSet); err != nil {
+			invalidParams.AddNested("TagSet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVpcConfiguration(v *types.VpcConfiguration) error {
 	if v == nil {
 		return nil
@@ -764,19 +1188,34 @@ func validateOpCreateAccessPointInput(v *CreateAccessPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessPointInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBucketInput(v *CreateBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBucketInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -793,18 +1232,12 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
-	if v.Report == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Report"))
-	} else if v.Report != nil {
-		if err := validateJobReport(v.Report); err != nil {
-			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	} else if v.Manifest != nil {
+		if err := validateJobManifest(v.Manifest); err != nil {
+			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if v.Operation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
@@ -813,20 +1246,26 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 			invalidParams.AddNested("Operation", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
-	} else if v.Manifest != nil {
-		if err := validateJobManifest(v.Manifest); err != nil {
-			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
-		}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Report == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Report"))
+	} else if v.Report != nil {
+		if err := validateJobReport(v.Report); err != nil {
+			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateS3TagSet(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -863,6 +1302,78 @@ func validateOpDeleteAccessPointPolicyInput(v *DeleteAccessPointPolicyInput) err
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBucketInput(v *DeleteBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBucketLifecycleConfigurationInput(v *DeleteBucketLifecycleConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketLifecycleConfigurationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBucketPolicyInput(v *DeleteBucketPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBucketTaggingInput(v *DeleteBucketTaggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketTaggingInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -976,6 +1487,78 @@ func validateOpGetAccessPointPolicyStatusInput(v *GetAccessPointPolicyStatusInpu
 	}
 }
 
+func validateOpGetBucketInput(v *GetBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketLifecycleConfigurationInput(v *GetBucketLifecycleConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketLifecycleConfigurationInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketPolicyInput(v *GetBucketPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketTaggingInput(v *GetBucketTaggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketTaggingInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetJobTaggingInput(v *GetJobTaggingInput) error {
 	if v == nil {
 		return nil
@@ -1039,19 +1622,103 @@ func validateOpListJobsInput(v *ListJobsInput) error {
 	}
 }
 
+func validateOpListRegionalBucketsInput(v *ListRegionalBucketsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRegionalBucketsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutAccessPointPolicyInput(v *PutAccessPointPolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAccessPointPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutBucketLifecycleConfigurationInput(v *PutBucketLifecycleConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBucketLifecycleConfigurationInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.LifecycleConfiguration != nil {
+		if err := validateLifecycleConfiguration(v.LifecycleConfiguration); err != nil {
+			invalidParams.AddNested("LifecycleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutBucketPolicyInput(v *PutBucketPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBucketPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutBucketTaggingInput(v *PutBucketTaggingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBucketTaggingInput"}
+	if v.Tagging == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tagging"))
+	} else if v.Tagging != nil {
+		if err := validateTagging(v.Tagging); err != nil {
+			invalidParams.AddNested("Tagging", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1065,8 +1732,8 @@ func validateOpPutJobTaggingInput(v *PutJobTaggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutJobTaggingInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
@@ -1075,8 +1742,8 @@ func validateOpPutJobTaggingInput(v *PutJobTaggingInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

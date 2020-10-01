@@ -58,18 +58,34 @@ func (c *Client) UpdateMethodResponse(ctx context.Context, params *UpdateMethodR
 
 // A request to update an existing MethodResponse () resource.
 type UpdateMethodResponseInput struct {
-	Template         *bool
-	Title            *string
+	Template *bool
+
+	Title *string
+
 	TemplateSkipList []*string
+
 	// [Required] The Resource () identifier for the MethodResponse () resource.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// [Required] The HTTP verb of the Method () resource.
+	//
+	// This member is required.
 	HttpMethod *string
-	Name       *string
+
+	Name *string
+
 	// [Required] The status code for the MethodResponse () resource.
+	//
+	// This member is required.
 	StatusCode *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -107,12 +123,15 @@ type UpdateMethodResponseInput struct {
 // IntegrationResponse (), Integration ()Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateMethodResponseOutput struct {
+
 	// Specifies the Model () resources used for the response's content-type. Response
 	// models are represented as a key/value map, with a content-type as the key and a
 	// Model () name as the value.
 	ResponseModels map[string]*string
+
 	// The method response's status code.
 	StatusCode *string
+
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or

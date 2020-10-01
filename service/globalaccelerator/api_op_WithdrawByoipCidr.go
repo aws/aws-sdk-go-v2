@@ -64,11 +64,15 @@ func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCid
 }
 
 type WithdrawByoipCidrInput struct {
+
 	// The address range, in CIDR notation.
+	//
+	// This member is required.
 	Cidr *string
 }
 
 type WithdrawByoipCidrOutput struct {
+
 	// Information about the address pool.
 	ByoipCidr *types.ByoipCidr
 

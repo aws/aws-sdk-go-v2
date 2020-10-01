@@ -54,15 +54,19 @@ func (c *Client) ListDevelopmentSchemaArns(ctx context.Context, params *ListDeve
 }
 
 type ListDevelopmentSchemaArnsInput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
 }
 
 type ListDevelopmentSchemaArnsOutput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The ARNs of retrieved development schemas.
 	SchemaArns []*string
 

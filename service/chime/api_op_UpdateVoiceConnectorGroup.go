@@ -57,15 +57,25 @@ func (c *Client) UpdateVoiceConnectorGroup(ctx context.Context, params *UpdateVo
 }
 
 type UpdateVoiceConnectorGroupInput struct {
+
 	// The VoiceConnectorItems to associate with the group.
+	//
+	// This member is required.
 	VoiceConnectorItems []*types.VoiceConnectorItem
+
 	// The Amazon Chime Voice Connector group ID.
+	//
+	// This member is required.
 	VoiceConnectorGroupId *string
+
 	// The name of the Amazon Chime Voice Connector group.
+	//
+	// This member is required.
 	Name *string
 }
 
 type UpdateVoiceConnectorGroupOutput struct {
+
 	// The updated Amazon Chime Voice Connector group details.
 	VoiceConnectorGroup *types.VoiceConnectorGroup
 

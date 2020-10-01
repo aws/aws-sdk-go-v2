@@ -61,22 +61,32 @@ func (c *Client) GetAttributeValues(ctx context.Context, params *GetAttributeVal
 }
 
 type GetAttributeValuesInput struct {
+
 	// The name of the attribute that you want to retrieve the values for, such as
 	// volumeType.
+	//
+	// This member is required.
 	AttributeName *string
+
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
 	NextToken *string
+
 	// The maximum number of results to return in response.
 	MaxResults *int32
+
 	// The service code for the service whose attributes you want to retrieve. For
 	// example, if you want the retrieve an EC2 attribute, use AmazonEC2.
+	//
+	// This member is required.
 	ServiceCode *string
 }
 
 type GetAttributeValuesOutput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// The list of values for an attribute. For example, Throughput Optimized HDD and
 	// Provisioned IOPS are two available values for the AmazonEC2volumeType.
 	AttributeValues []*types.AttributeValue

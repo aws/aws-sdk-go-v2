@@ -59,11 +59,17 @@ func (c *Client) ModifyCacheParameterGroup(ctx context.Context, params *ModifyCa
 
 // Represents the input of a ModifyCacheParameterGroup operation.
 type ModifyCacheParameterGroupInput struct {
+
 	// An array of parameter names and values for the parameter update. You must supply
 	// at least one parameter name and value; subsequent arguments are optional. A
 	// maximum of 20 parameters may be modified per request.
+	//
+	// This member is required.
 	ParameterNameValues []*types.ParameterNameValue
+
 	// The name of the cache parameter group to modify.
+	//
+	// This member is required.
 	CacheParameterGroupName *string
 }
 
@@ -74,6 +80,7 @@ type ModifyCacheParameterGroupInput struct {
 //
 //     * ResetCacheParameterGroup
 type ModifyCacheParameterGroupOutput struct {
+
 	// The name of the cache parameter group.
 	CacheParameterGroupName *string
 

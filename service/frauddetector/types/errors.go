@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An exception indicating Amazon Fraud Detector does not have the needed
@@ -26,12 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception indicating there was a conflict during a delete operation. The
 // following delete operations can cause a conflict exception:
@@ -62,12 +55,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception indicating an internal server error.
 type InternalServerException struct {
@@ -85,12 +72,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception indicating the specified resource was not found.
 type ResourceNotFoundException struct {
@@ -108,12 +89,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception indicating a throttling error.
 type ThrottlingException struct {
@@ -131,12 +106,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception indicating a specified value is not allowed.
 type ValidationException struct {
@@ -154,9 +123,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

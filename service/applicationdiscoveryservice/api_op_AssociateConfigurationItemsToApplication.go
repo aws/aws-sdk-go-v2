@@ -55,9 +55,15 @@ func (c *Client) AssociateConfigurationItemsToApplication(ctx context.Context, p
 }
 
 type AssociateConfigurationItemsToApplicationInput struct {
+
 	// The configuration ID of an application with which items are to be associated.
+	//
+	// This member is required.
 	ApplicationConfigurationId *string
+
 	// The ID of each configuration item to be associated with an application.
+	//
+	// This member is required.
 	ConfigurationIds []*string
 }
 

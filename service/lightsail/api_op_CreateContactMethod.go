@@ -62,6 +62,7 @@ func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactM
 }
 
 type CreateContactMethodInput struct {
+
 	// The protocol of the contact method, such as Email or SMS (text messaging). The
 	// SMS protocol is supported only in the following AWS Regions.
 	//
@@ -88,7 +89,10 @@ type CreateContactMethodInput struct {
 	// in the Amazon SNS Developer Guide. For more information about notifications in
 	// Amazon Lightsail, see Notifications in Amazon Lightsail
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications).
+	//
+	// This member is required.
 	Protocol types.ContactProtocol
+
 	// The destination of the contact method, such as an email address or a mobile
 	// phone number. Use the E.164 format when specifying a mobile phone number. E.164
 	// is a standard for the phone number structure used for international
@@ -97,10 +101,13 @@ type CreateContactMethodInput struct {
 	// code. For example, a U.S. phone number in E.164 format would be specified as
 	// +1XXX5550100. For more information, see E.164
 	// (https://en.wikipedia.org/wiki/E.164) on Wikipedia.
+	//
+	// This member is required.
 	ContactEndpoint *string
 }
 
 type CreateContactMethodOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

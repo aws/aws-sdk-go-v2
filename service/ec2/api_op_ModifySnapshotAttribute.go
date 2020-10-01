@@ -66,19 +66,28 @@ func (c *Client) ModifySnapshotAttribute(ctx context.Context, params *ModifySnap
 }
 
 type ModifySnapshotAttributeInput struct {
+
 	// The account ID to modify for the snapshot.
 	UserIds []*string
+
 	// The ID of the snapshot.
+	//
+	// This member is required.
 	SnapshotId *string
+
 	// The type of operation to perform to the attribute.
 	OperationType types.OperationType
+
 	// The snapshot attribute to modify. Only volume creation permissions can be
 	// modified.
 	Attribute types.SnapshotAttributeName
+
 	// A JSON representation of the snapshot attribute modification.
 	CreateVolumePermission *types.CreateVolumePermissionModifications
+
 	// The group to modify for the snapshot.
 	GroupNames []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

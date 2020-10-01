@@ -83,6 +83,7 @@ func (c *Client) DescribeVolumeStatus(ctx context.Context, params *DescribeVolum
 }
 
 type DescribeVolumeStatusInput struct {
+
 	// The filters.
 	//
 	//     * action.code - The action code for the event (for example,
@@ -123,13 +124,16 @@ type DescribeVolumeStatusInput struct {
 	//     * volume-status.status - The status of the
 	// volume (ok | impaired | warning | insufficient-data).
 	Filters []*types.Filter
+
 	// The IDs of the volumes. Default: Describes all your volumes.
 	VolumeIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of volume results returned by DescribeVolumeStatus in
 	// paginated output. When this parameter is used, the request only returns
 	// MaxResults results in a single page along with a NextToken response element. The
@@ -139,6 +143,7 @@ type DescribeVolumeStatusInput struct {
 	// this parameter is not used, then DescribeVolumeStatus returns all results. You
 	// cannot specify this parameter and the volume IDs parameter in the same request.
 	MaxResults *int32
+
 	// The NextToken value to include in a future DescribeVolumeStatus request. When
 	// the results of the request exceed MaxResults, this value can be used to retrieve
 	// the next page of results. This value is null when there are no more results to
@@ -147,8 +152,10 @@ type DescribeVolumeStatusInput struct {
 }
 
 type DescribeVolumeStatusOutput struct {
+
 	// Information about the status of the volumes.
 	VolumeStatuses []*types.VolumeStatusItem
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

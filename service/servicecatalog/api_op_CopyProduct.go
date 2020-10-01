@@ -62,13 +62,19 @@ func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optF
 }
 
 type CopyProductInput struct {
+
 	// The Amazon Resource Name (ARN) of the source product.
+	//
+	// This member is required.
 	SourceProductArn *string
+
 	// A name for the target product. The default is the name of the source product.
 	TargetProductName *string
+
 	// The identifiers of the provisioning artifacts (also known as versions) of the
 	// product to copy. By default, all provisioning artifacts are copied.
 	SourceProvisioningArtifactIdentifiers []map[string]*string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -78,18 +84,24 @@ type CopyProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The copy options. If the value is CopyTags, the tags from the source product are
 	// copied to the target product.
 	CopyOptions []types.CopyOption
+
 	// The identifier of the target product. By default, a new product is created.
 	TargetProductId *string
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
+	//
+	// This member is required.
 	IdempotencyToken *string
 }
 
 type CopyProductOutput struct {
+
 	// The token to use to track the progress of the operation.
 	CopyProductToken *string
 

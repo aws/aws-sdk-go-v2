@@ -53,7 +53,10 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 // Represents the request to delete a user.
 type DeleteUserInput struct {
+
 	// The access token from a request to delete a user.
+	//
+	// This member is required.
 	AccessToken *string
 }
 

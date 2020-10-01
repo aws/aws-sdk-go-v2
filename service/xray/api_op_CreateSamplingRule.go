@@ -62,11 +62,15 @@ func (c *Client) CreateSamplingRule(ctx context.Context, params *CreateSamplingR
 }
 
 type CreateSamplingRuleInput struct {
+
 	// The rule definition.
+	//
+	// This member is required.
 	SamplingRule *types.SamplingRule
 }
 
 type CreateSamplingRuleOutput struct {
+
 	// The saved rule definition and metadata.
 	SamplingRuleRecord *types.SamplingRuleRecord
 

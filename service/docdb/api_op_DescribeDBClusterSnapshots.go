@@ -58,6 +58,7 @@ func (c *Client) DescribeDBClusterSnapshots(ctx context.Context, params *Describ
 
 // Represents the input to DescribeDBClusterSnapshots ().
 type DescribeDBClusterSnapshotsInput struct {
+
 	// The ID of the cluster to retrieve the list of cluster snapshots for. This
 	// parameter can't be used with the DBClusterSnapshotIdentifier parameter. This
 	// parameter is not case sensitive. Constraints:
@@ -65,6 +66,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	//     * If provided, must match the
 	// identifier of an existing DBCluster.
 	DBClusterIdentifier *string
+
 	// A specific cluster snapshot identifier to describe. This parameter can't be used
 	// with the DBClusterIdentifier parameter. This value is stored as a lowercase
 	// string. Constraints:
@@ -75,10 +77,12 @@ type DescribeDBClusterSnapshotsInput struct {
 	//     * If this identifier is for an automated
 	// snapshot, the SnapshotType parameter must also be specified.
 	DBClusterSnapshotIdentifier *string
+
 	// Set to true to include shared manual cluster snapshots from other AWS accounts
 	// that this AWS account has been given permission to copy or restore, and
 	// otherwise false. The default is false.
 	IncludeShared *bool
+
 	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
 	//
@@ -104,17 +108,21 @@ type DescribeDBClusterSnapshotsInput struct {
 	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
 	// parameter doesn't apply when SnapshotType is set to public.
 	SnapshotType *string
+
 	// Set to true to include manual cluster snapshots that are public and can be
 	// copied or restored by any AWS account, and otherwise false. The default is
 	// false.
 	IncludePublic *bool
+
 	// This parameter is not currently supported.
 	Filters []*types.Filter
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token (marker) is included in
 	// the response so that the remaining results can be retrieved. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
@@ -123,10 +131,12 @@ type DescribeDBClusterSnapshotsInput struct {
 
 // Represents the output of DescribeDBClusterSnapshots ().
 type DescribeDBClusterSnapshotsOutput struct {
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
 	// Provides a list of cluster snapshots.
 	DBClusterSnapshots []*types.DBClusterSnapshot
 

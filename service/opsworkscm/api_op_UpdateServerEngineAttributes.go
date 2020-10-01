@@ -63,15 +63,23 @@ func (c *Client) UpdateServerEngineAttributes(ctx context.Context, params *Updat
 }
 
 type UpdateServerEngineAttributesInput struct {
+
 	// The name of the engine attribute to update.
+	//
+	// This member is required.
 	AttributeName *string
+
 	// The name of the server to update.
+	//
+	// This member is required.
 	ServerName *string
+
 	// The value to set for the attribute.
 	AttributeValue *string
 }
 
 type UpdateServerEngineAttributesOutput struct {
+
 	// Contains the response to an UpdateServerEngineAttributes request.
 	Server *types.Server
 

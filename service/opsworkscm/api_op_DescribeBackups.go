@@ -59,19 +59,25 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 }
 
 type DescribeBackupsInput struct {
+
 	// Describes a single backup.
 	BackupId *string
+
 	// Returns backups for the server with the specified ServerName.
 	ServerName *string
+
 	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string
+
 	// This is not currently implemented for DescribeBackups requests.
 	MaxResults *int32
 }
 
 type DescribeBackupsOutput struct {
+
 	// Contains the response to a DescribeBackups request.
 	Backups []*types.Backup
+
 	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string
 

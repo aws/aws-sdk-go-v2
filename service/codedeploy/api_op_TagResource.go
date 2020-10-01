@@ -57,10 +57,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// A list of tags that TagResource associates with a resource. The resource is
 	// identified by the ResourceArn input parameter.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The ARN of a resource, such as a CodeDeploy application or deployment group.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

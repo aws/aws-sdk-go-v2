@@ -69,16 +69,22 @@ func (c *Client) CreateCloudFrontOriginAccessIdentity(ctx context.Context, param
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
 // in the Amazon CloudFront Developer Guide.
 type CreateCloudFrontOriginAccessIdentityInput struct {
+
 	// The current configuration information for the identity.
+	//
+	// This member is required.
 	CloudFrontOriginAccessIdentityConfig *types.CloudFrontOriginAccessIdentityConfig
 }
 
 // The returned result of the corresponding request.
 type CreateCloudFrontOriginAccessIdentityOutput struct {
+
 	// The current version of the origin access identity created.
 	ETag *string
+
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *types.CloudFrontOriginAccessIdentity
+
 	// The fully qualified URI of the new origin access identity just created.
 	Location *string
 

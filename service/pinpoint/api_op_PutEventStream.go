@@ -57,18 +57,27 @@ func (c *Client) PutEventStream(ctx context.Context, params *PutEventStreamInput
 }
 
 type PutEventStreamInput struct {
+
 	// Specifies the Amazon Resource Name (ARN) of an event stream to publish events to
 	// and the AWS Identity and Access Management (IAM) role to use when publishing
 	// those events.
+	//
+	// This member is required.
 	WriteEventStream *types.WriteEventStream
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type PutEventStreamOutput struct {
+
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream or
 	// an Amazon Kinesis Data Firehose delivery stream.
+	//
+	// This member is required.
 	EventStream *types.EventStream
 
 	// Metadata pertaining to the operation's result.

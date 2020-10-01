@@ -58,13 +58,20 @@ func (c *Client) BatchUpdateUser(ctx context.Context, params *BatchUpdateUserInp
 }
 
 type BatchUpdateUserInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The request containing the user IDs and details to update.
+	//
+	// This member is required.
 	UpdateUserRequestItems []*types.UpdateUserRequestItem
 }
 
 type BatchUpdateUserOutput struct {
+
 	// If the BatchUpdateUser () action fails for one or more of the user IDs in the
 	// request, a list of the user IDs is returned, along with error codes and error
 	// messages.

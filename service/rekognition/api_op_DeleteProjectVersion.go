@@ -61,11 +61,15 @@ func (c *Client) DeleteProjectVersion(ctx context.Context, params *DeleteProject
 }
 
 type DeleteProjectVersionInput struct {
+
 	// The Amazon Resource Name (ARN) of the model version that you want to delete.
+	//
+	// This member is required.
 	ProjectVersionArn *string
 }
 
 type DeleteProjectVersionOutput struct {
+
 	// The status of the deletion operation.
 	Status types.ProjectVersionStatus
 

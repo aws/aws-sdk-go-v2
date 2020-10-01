@@ -57,8 +57,12 @@ func (c *Client) UpdateHostedZoneComment(ctx context.Context, params *UpdateHost
 
 // A request to update the comment for a hosted zone.
 type UpdateHostedZoneCommentInput struct {
+
 	// The ID for the hosted zone that you want to update the comment for.
+	//
+	// This member is required.
 	Id *string
+
 	// The new comment for the hosted zone. If you don't specify a value for Comment,
 	// Amazon Route 53 deletes the existing value of the Comment element, if any.
 	Comment *string
@@ -67,8 +71,11 @@ type UpdateHostedZoneCommentInput struct {
 // A complex type that contains the response to the UpdateHostedZoneComment
 // request.
 type UpdateHostedZoneCommentOutput struct {
+
 	// A complex type that contains the response to the UpdateHostedZoneComment
 	// request.
+	//
+	// This member is required.
 	HostedZone *types.HostedZone
 
 	// Metadata pertaining to the operation's result.

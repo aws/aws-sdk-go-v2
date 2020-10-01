@@ -58,9 +58,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// One or more tags to be associated with the signing profile.
+	//
+	// This member is required.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) for the signing profile.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

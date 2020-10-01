@@ -57,10 +57,13 @@ func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResour
 }
 
 type ListGroupResourcesInput struct {
+
 	// The name or the ARN of the resource group
 	Group *string
+
 	// Don't use this parameter. Use Group instead.
 	GroupName *string
+
 	// Filters, formatted as ResourceFilter () objects, that you want to apply to a
 	// ListGroupResources operation. Filters the results to include only those of the
 	// specified resource types.
@@ -83,11 +86,13 @@ type ListGroupResourcesInput struct {
 	// because a group based on such a query can contain any of the allowed resource
 	// types for the query type (tag-based or AWS CloudFormation stack-based queries).
 	Filters []*types.ResourceFilter
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value provided by a previous call's
 	// NextToken response to indicate where the output should continue from.
 	NextToken *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -101,15 +106,18 @@ type ListGroupResourcesInput struct {
 }
 
 type ListGroupResourcesOutput struct {
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// A list of QueryError objects. Each error is an object that contains ErrorCode
 	// and Message structures. Possible values for ErrorCode are
 	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
 	QueryErrors []*types.QueryError
+
 	// The ARNs and resource types of resources that are members of the group that you
 	// specified.
 	ResourceIdentifiers []*types.ResourceIdentifier

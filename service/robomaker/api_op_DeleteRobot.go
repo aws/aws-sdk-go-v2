@@ -55,7 +55,10 @@ func (c *Client) DeleteRobot(ctx context.Context, params *DeleteRobotInput, optF
 }
 
 type DeleteRobotInput struct {
+
 	// The Amazon Resource Name (ARN) of the robot.
+	//
+	// This member is required.
 	Robot *string
 }
 

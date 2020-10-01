@@ -58,12 +58,14 @@ func (c *Client) DescribeUserProfiles(ctx context.Context, params *DescribeUserP
 }
 
 type DescribeUserProfilesInput struct {
+
 	// An array of IAM or federated user ARNs that identify the users to be described.
 	IamUserArns []*string
 }
 
 // Contains the response to a DescribeUserProfiles request.
 type DescribeUserProfilesOutput struct {
+
 	// A Users object that describes the specified users.
 	UserProfiles []*types.UserProfile
 

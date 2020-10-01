@@ -58,19 +58,30 @@ func (c *Client) GetModelTemplate(ctx context.Context, params *GetModelTemplateI
 
 // Request to generate a sample mapping template used to transform the payload.
 type GetModelTemplateInput struct {
+
 	// [Required] The name of the model for which to generate a template.
+	//
+	// This member is required.
 	ModelName *string
-	Template  *bool
+
+	Template *bool
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
+	//
+	// This member is required.
+	RestApiId *string
+
 	TemplateSkipList []*string
-	Title            *string
-	Name             *string
+
+	Title *string
+
+	Name *string
 }
 
 // Represents a mapping template used to transform a payload. Mapping Templates
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings)
 type GetModelTemplateOutput struct {
+
 	// The Apache Velocity Template Language (VTL)
 	// (https://velocity.apache.org/engine/devel/vtl-reference.html) template content
 	// used for the template resource.

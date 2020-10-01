@@ -84,20 +84,29 @@ func (c *Client) RegisterUsage(ctx context.Context, params *RegisterUsageInput, 
 }
 
 type RegisterUsageInput struct {
+
 	// Product code is used to uniquely identify a product in AWS Marketplace. The
 	// product code should be the same as the one used during the publishing of a new
 	// product.
+	//
+	// This member is required.
 	ProductCode *string
+
 	// (Optional) To scope down the registration to a specific running software
 	// instance and guard against replay attacks.
 	Nonce *string
+
 	// Public Key Version provided by AWS Marketplace
+	//
+	// This member is required.
 	PublicKeyVersion *int32
 }
 
 type RegisterUsageOutput struct {
+
 	// (Optional) Only included when public key version has expired
 	PublicKeyRotationTimestamp *time.Time
+
 	// JWT Token
 	Signature *string
 

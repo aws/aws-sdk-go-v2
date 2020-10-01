@@ -17,13 +17,17 @@ import (
 // argument list. Amazon EMR accepts and forwards the argument list to the
 // corresponding installation script as bootstrap action argument.
 type Application struct {
+
 	// This option is for advanced users only. This is meta information about
 	// third-party applications that third-party vendors use for testing purposes.
 	AdditionalInfo map[string]*string
+
 	// The version of the application.
 	Version *string
+
 	// The name of the application.
 	Name *string
+
 	// Arguments for Amazon EMR to pass to the application.
 	Args []*string
 }
@@ -33,11 +37,17 @@ type Application struct {
 // dynamically adds and terminates EC2 instances in response to the value of a
 // CloudWatch metric. See PutAutoScalingPolicy ().
 type AutoScalingPolicy struct {
+
 	// The scale-in and scale-out rules that comprise the automatic scaling policy.
+	//
+	// This member is required.
 	Rules []*ScalingRule
+
 	// The upper and lower EC2 instance limits for an automatic scaling policy.
 	// Automatic scaling activity will not cause an instance group to grow above or
 	// below these limits.
+	//
+	// This member is required.
 	Constraints *ScalingConstraints
 }
 
@@ -46,10 +56,13 @@ type AutoScalingPolicy struct {
 // group dynamically adds and terminates EC2 instances in response to the value of
 // a CloudWatch metric. See PutAutoScalingPolicy ().
 type AutoScalingPolicyDescription struct {
+
 	// The status of an automatic scaling policy.
 	Status *AutoScalingPolicyStatus
+
 	// The scale-in and scale-out rules that comprise the automatic scaling policy.
 	Rules []*ScalingRule
+
 	// The upper and lower EC2 instance limits for an automatic scaling policy.
 	// Automatic scaling activity will not cause an instance group to grow above or
 	// below these limits.
@@ -58,11 +71,13 @@ type AutoScalingPolicyDescription struct {
 
 // The reason for an AutoScalingPolicyStatus () change.
 type AutoScalingPolicyStateChangeReason struct {
+
 	// The code indicating the reason for the change in status.USER_REQUEST indicates
 	// that the scaling policy status was changed by a user. PROVISION_FAILURE
 	// indicates that the status change was because the policy failed to provision.
 	// CLEANUP_FAILURE indicates an error.
 	Code AutoScalingPolicyStateChangeReasonCode
+
 	// A friendly, more verbose message that accompanies an automatic scaling policy
 	// state change.
 	Message *string
@@ -70,8 +85,10 @@ type AutoScalingPolicyStateChangeReason struct {
 
 // The status of an automatic scaling policy.
 type AutoScalingPolicyStatus struct {
+
 	// The reason for a change in status.
 	StateChangeReason *AutoScalingPolicyStateChangeReason
+
 	// Indicates the status of the automatic scaling policy.
 	State AutoScalingPolicyState
 }
@@ -82,14 +99,20 @@ type AutoScalingPolicyStatus struct {
 // traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an
 // exception using PermittedPublicSecurityGroupRuleRanges.
 type BlockPublicAccessConfiguration struct {
+
 	// A set of properties specified within a configuration classification.
 	Properties map[string]*string
+
 	// A list of additional configurations to apply within a configuration object.
 	Configurations []*Configuration
+
 	// Indicates whether EMR block public access is enabled (true) or disabled (false).
 	// By default, the value is false for accounts that have created EMR clusters
 	// before July 2019. For accounts created after this, the default is true.
+	//
+	// This member is required.
 	BlockPublicSecurityGroupRules *bool
+
 	// Specifies ports and port ranges that are permitted to have security group rules
 	// that allow inbound traffic from all public sources. For example, if Port 23
 	// (Telnet) is specified for PermittedPublicSecurityGroupRuleRanges, Amazon EMR
@@ -98,6 +121,7 @@ type BlockPublicAccessConfiguration struct {
 	// ::/0 as the source. By default, Port 22, which is used for SSH access to the
 	// cluster EC2 instances, is in the list of PermittedPublicSecurityGroupRuleRanges.
 	PermittedPublicSecurityGroupRuleRanges []*PortRange
+
 	// The classification within a configuration.
 	Classification *string
 }
@@ -108,22 +132,35 @@ type BlockPublicAccessConfiguration struct {
 // time a configuration for block public access is updated, Amazon EMR updates this
 // metadata.
 type BlockPublicAccessConfigurationMetadata struct {
+
 	// The Amazon Resource Name that created or last modified the configuration.
+	//
+	// This member is required.
 	CreatedByArn *string
+
 	// The date and time that the configuration was created.
+	//
+	// This member is required.
 	CreationDateTime *time.Time
 }
 
 // Configuration of a bootstrap action.
 type BootstrapActionConfig struct {
+
 	// The script run by the bootstrap action.
+	//
+	// This member is required.
 	ScriptBootstrapAction *ScriptBootstrapActionConfig
+
 	// The name of the bootstrap action.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Reports the configuration of a bootstrap action in a cluster (job flow).
 type BootstrapActionDetail struct {
+
 	// A description of the bootstrap action.
 	BootstrapActionConfig *BootstrapActionConfig
 }
@@ -131,10 +168,13 @@ type BootstrapActionDetail struct {
 // Specification of the status of a CancelSteps request. Available only in Amazon
 // EMR version 4.8.0 and later, excluding version 5.0.0.
 type CancelStepsInfo struct {
+
 	// The encrypted StepId of a step.
 	StepId *string
+
 	// The status of a CancelSteps Request. The value may be SUBMITTED or FAILED.
 	Status CancelStepsRequestStatus
+
 	// The reason for the failure if the CancelSteps request fails.
 	Reason *string
 }
@@ -143,30 +183,47 @@ type CancelStepsInfo struct {
 // scaling activity is triggered. When the defined alarm conditions are satisfied,
 // scaling activity begins.
 type CloudWatchAlarmDefinition struct {
+
 	// The period, in seconds, over which the statistic is applied. EMR CloudWatch
 	// metrics are emitted every five minutes (300 seconds), so if an EMR CloudWatch
 	// metric is specified, specify 300.
+	//
+	// This member is required.
 	Period *int32
+
 	// The value against which the specified statistic is compared.
+	//
+	// This member is required.
 	Threshold *float64
+
 	// The number of periods, in five-minute increments, during which the alarm
 	// condition must exist before the alarm triggers automatic scaling activity. The
 	// default value is 1.
 	EvaluationPeriods *int32
+
 	// A CloudWatch metric dimension.
 	Dimensions []*MetricDimension
+
 	// The namespace for the CloudWatch metric. The default is AWS/ElasticMapReduce.
 	Namespace *string
+
 	// Determines how the metric specified by MetricName is compared to the value
 	// specified by Threshold.
+	//
+	// This member is required.
 	ComparisonOperator ComparisonOperator
+
 	// The unit of measure associated with the CloudWatch metric being watched. The
 	// value specified for Unit must correspond to the units specified in the
 	// CloudWatch metric.
 	Unit Unit
+
 	// The name of the CloudWatch metric that is watched to determine an alarm
 	// condition.
+	//
+	// This member is required.
 	MetricName *string
+
 	// The statistic to apply to the metric associated with the alarm. The default is
 	// AVERAGE.
 	Statistic Statistic
@@ -174,38 +231,50 @@ type CloudWatchAlarmDefinition struct {
 
 // The detailed description of the cluster.
 type Cluster struct {
+
 	// A list of tags associated with a cluster.
 	Tags []*Tag
+
 	// The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
 	OutpostArn *string
+
 	// Applies only to Amazon EMR releases 4.x and later. The list of Configurations
 	// supplied to the EMR cluster.
 	Configurations []*Configuration
+
 	// The current status details about the cluster.
 	Status *ClusterStatus
+
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
+
 	// The AWS KMS customer master key (CMK) used for encrypting log files. This
 	// attribute is only available with EMR version 5.30.0 and later, excluding EMR
 	// 6.0.0.
 	LogEncryptionKmsKeyId *string
+
 	// Attributes for Kerberos configuration when Kerberos authentication is enabled
 	// using a security configuration. For more information see Use Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html) in
 	// the EMR Management Guide.
 	KerberosAttributes *KerberosAttributes
+
 	// Provides information about the EC2 instances in a cluster grouped by category.
 	// For example, key name, subnet ID, IAM instance profile, and so on.
 	Ec2InstanceAttributes *Ec2InstanceAttributes
+
 	// Specifies whether the cluster should terminate after completing all steps.
 	AutoTerminate *bool
+
 	// Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances
 	// from being terminated by an API call or user intervention, or in the event of a
 	// cluster error.
 	TerminationProtected *bool
+
 	// The name of the cluster.
 	Name *string
+
 	// The way that individual Amazon EC2 instances terminate when an automatic
 	// scale-in activity occurs or an instance group is resized.
 	// TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the
@@ -220,6 +289,7 @@ type Cluster struct {
 	// 4.1.0 and later, and is the default for versions of Amazon EMR earlier than
 	// 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
+
 	// Indicates whether the cluster is visible to all IAM users of the AWS account
 	// associated with the cluster. The default value, true, indicates that all IAM
 	// users in the AWS account can perform cluster actions if they have the proper IAM
@@ -229,17 +299,22 @@ type Cluster struct {
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
 	VisibleToAllUsers *bool
+
 	// The path to the Amazon S3 location where logs for this cluster are stored.
 	LogUri *string
+
 	// The IAM role that will be assumed by the Amazon EMR service to access AWS
 	// resources on your behalf.
 	ServiceRole *string
+
 	// The name of the security configuration applied to the cluster.
 	SecurityConfiguration *string
+
 	// Applies only when CustomAmiID is used. Specifies the type of updates that are
 	// applied from the Amazon Linux AMI package repositories when an instance boots
 	// using the AMI.
 	RepoUpgradeOnBoot RepoUpgradeOnBoot
+
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the form
 	// emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0. For
@@ -249,31 +324,40 @@ type Cluster struct {
 	// applies only to Amazon EMR releases version 4.0 and later. Earlier versions use
 	// AmiVersion.
 	ReleaseLabel *string
+
 	// The unique identifier for the cluster.
 	Id *string
+
 	// The AMI version requested for this cluster.
 	RequestedAmiVersion *string
+
 	// The instance fleet configuration is available only in Amazon EMR versions 4.8.0
 	// and later, excluding 5.0.x versions. The instance group configuration of the
 	// cluster. A value of INSTANCE_GROUP indicates a uniform instance group
 	// configuration. A value of INSTANCE_FLEET indicates an instance fleets
 	// configuration.
 	InstanceCollectionType InstanceCollectionType
+
 	// The DNS name of the master node. If the cluster is on a private subnet, this is
 	// the private DNS name. On a public subnet, this is the public DNS name.
 	MasterPublicDnsName *string
+
 	// Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon
 	// EBS-backed Linux AMI if the cluster uses a custom AMI.
 	CustomAmiId *string
+
 	// An IAM role for automatic scaling policies. The default role is
 	// EMR_AutoScaling_DefaultRole. The IAM role provides permissions that the
 	// automatic scaling feature requires to launch and terminate EC2 instances in an
 	// instance group.
 	AutoScalingRole *string
+
 	// Specifies the number of steps that can be executed concurrently.
 	StepConcurrencyLevel *int32
+
 	// The AMI version running on this cluster.
 	RunningAmiVersion *string
+
 	// An approximation of the cost of the cluster, represented in m1.small/hours. This
 	// value is incremented one time for every hour an m1.small instance runs. Larger
 	// instances are weighted more, so an EC2 instance that is roughly four times more
@@ -281,8 +365,10 @@ type Cluster struct {
 	// four. This result is only an approximation and does not reflect the actual
 	// billing rate.
 	NormalizedInstanceHours *int32
+
 	// The applications installed on this cluster.
 	Applications []*Application
+
 	// The size, in GiB, of the EBS root device volume of the Linux AMI that is used
 	// for each EC2 instance. Available in Amazon EMR version 4.x and later.
 	EbsRootVolumeSize *int32
@@ -290,18 +376,23 @@ type Cluster struct {
 
 // The reason that the cluster changed to its current state.
 type ClusterStateChangeReason struct {
+
 	// The programmatic code for the state change reason.
 	Code ClusterStateChangeReasonCode
+
 	// The descriptive message for the state change reason.
 	Message *string
 }
 
 // The detailed status of the cluster.
 type ClusterStatus struct {
+
 	// The current state of the cluster.
 	State ClusterState
+
 	// The reason for the cluster status change.
 	StateChangeReason *ClusterStateChangeReason
+
 	// A timeline that represents the status of a cluster over the lifetime of the
 	// cluster.
 	Timeline *ClusterTimeline
@@ -309,6 +400,7 @@ type ClusterStatus struct {
 
 // The summary description of the cluster.
 type ClusterSummary struct {
+
 	// An approximation of the cost of the cluster, represented in m1.small/hours. This
 	// value is incremented one time for every hour an m1.small instance runs. Larger
 	// instances are weighted more, so an EC2 instance that is roughly four times more
@@ -316,34 +408,45 @@ type ClusterSummary struct {
 	// four. This result is only an approximation and does not reflect the actual
 	// billing rate.
 	NormalizedInstanceHours *int32
+
 	// The name of the cluster.
 	Name *string
+
 	// The unique identifier for the cluster.
 	Id *string
+
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
+
 	// The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
 	OutpostArn *string
+
 	// The details about the current status of the cluster.
 	Status *ClusterStatus
 }
 
 // Represents the timeline of the cluster's lifecycle.
 type ClusterTimeline struct {
+
 	// The date and time when the cluster was ready to execute steps.
 	ReadyDateTime *time.Time
+
 	// The date and time when the cluster was terminated.
 	EndDateTime *time.Time
+
 	// The creation date and time of the cluster.
 	CreationDateTime *time.Time
 }
 
 // An entity describing an executable that runs on a cluster.
 type Command struct {
+
 	// The name of the command.
 	Name *string
+
 	// Arguments for Amazon EMR to pass to the command for execution.
 	Args []*string
+
 	// The Amazon S3 location of the command script.
 	ScriptPath *string
 }
@@ -353,30 +456,41 @@ type Command struct {
 // the core and task nodes. The master node cannot be scaled after initial
 // configuration.
 type ComputeLimits struct {
+
 	// The unit type used for specifying a managed scaling policy.
+	//
+	// This member is required.
 	UnitType ComputeLimitsUnitType
+
 	// The upper boundary of EC2 units for core node type in a cluster. It is measured
 	// through VCPU cores or instances for instance groups and measured through units
 	// for instance fleets. The core units are not allowed to scale beyond this
 	// boundary. The parameter is used to split capacity allocation between core and
 	// task nodes.
 	MaximumCoreCapacityUnits *int32
+
 	// The upper boundary of On-Demand EC2 units. It is measured through VCPU cores or
 	// instances for instance groups and measured through units for instance fleets.
 	// The On-Demand units are not allowed to scale beyond this boundary. The parameter
 	// is used to split capacity allocation between On-Demand and Spot instances.
 	MaximumOnDemandCapacityUnits *int32
+
 	// The lower boundary of EC2 units. It is measured through VCPU cores or instances
 	// for instance groups and measured through units for instance fleets. Managed
 	// scaling activities are not allowed beyond this boundary. The limit only applies
 	// to the core and task nodes. The master node cannot be scaled after initial
 	// configuration.
+	//
+	// This member is required.
 	MinimumCapacityUnits *int32
+
 	// The upper boundary of EC2 units. It is measured through VCPU cores or instances
 	// for instance groups and measured through units for instance fleets. Managed
 	// scaling activities are not allowed beyond this boundary. The limit only applies
 	// to the core and task nodes. The master node cannot be scaled after initial
 	// configuration.
+	//
+	// This member is required.
 	MaximumCapacityUnits *int32
 }
 
@@ -389,19 +503,24 @@ type ComputeLimits struct {
 // Applications
 // (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html).
 type Configuration struct {
+
 	// The classification within a configuration.
 	Classification *string
+
 	// A list of additional configurations to apply within a configuration object.
 	Configurations []*Configuration
+
 	// A set of properties specified within a configuration classification.
 	Properties map[string]*string
 }
 
 // Configuration of requested EBS block device associated with the instance group.
 type EbsBlockDevice struct {
+
 	// EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
 	// requested for the EBS volume attached to an EC2 instance in the cluster.
 	VolumeSpecification *VolumeSpecification
+
 	// The device name that is exposed to the instance, such as /dev/sdh.
 	Device *string
 }
@@ -409,9 +528,13 @@ type EbsBlockDevice struct {
 // Configuration of requested EBS block device associated with the instance group
 // with count of volumes that will be associated to every instance.
 type EbsBlockDeviceConfig struct {
+
 	// EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
 	// requested for the EBS volume attached to an EC2 instance in the cluster.
+	//
+	// This member is required.
 	VolumeSpecification *VolumeSpecification
+
 	// Number of EBS volumes with a specific volume configuration that will be
 	// associated with every instance in the instance group
 	VolumesPerInstance *int32
@@ -419,16 +542,20 @@ type EbsBlockDeviceConfig struct {
 
 // The Amazon EBS configuration of a cluster instance.
 type EbsConfiguration struct {
+
 	// Indicates whether an Amazon EBS volume is EBS-optimized.
 	EbsOptimized *bool
+
 	// An array of Amazon EBS volume specifications attached to a cluster instance.
 	EbsBlockDeviceConfigs []*EbsBlockDeviceConfig
 }
 
 // EBS block device that's attached to an EC2 instance.
 type EbsVolume struct {
+
 	// The device name that is exposed to the instance, such as /dev/sdh.
 	Device *string
+
 	// The volume identifier of the EBS volume.
 	VolumeId *string
 }
@@ -436,17 +563,22 @@ type EbsVolume struct {
 // Provides information about the EC2 instances in a cluster grouped by category.
 // For example, key name, subnet ID, IAM instance profile, and so on.
 type Ec2InstanceAttributes struct {
+
 	// Set this parameter to the identifier of the Amazon VPC subnet where you want the
 	// cluster to launch. If you do not specify this value, and your account supports
 	// EC2-Classic, the cluster launches in EC2-Classic.
 	Ec2SubnetId *string
+
 	// The identifier of the Amazon EC2 security group for the master node.
 	EmrManagedMasterSecurityGroup *string
+
 	// The name of the Amazon EC2 key pair to use when connecting with SSH into the
 	// master node as a user named "hadoop".
 	Ec2KeyName *string
+
 	// The identifier of the Amazon EC2 security group for the core and task nodes.
 	EmrManagedSlaveSecurityGroup *string
+
 	// Applies to clusters configured with the instance fleets option. Specifies the
 	// unique identifier of one or more Amazon EC2 subnets in which to launch EC2
 	// cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses
@@ -459,6 +591,7 @@ type Ec2InstanceAttributes struct {
 	// RequestedEc2SubnetIDs and RequestedEc2AvailabilityZones cannot be specified
 	// together.
 	RequestedEc2SubnetIds []*string
+
 	// Applies to clusters configured with the instance fleets option. Specifies one or
 	// more Availability Zones in which to launch EC2 cluster instances when the
 	// EC2-Classic network configuration is supported. Amazon EMR chooses the
@@ -468,15 +601,20 @@ type Ec2InstanceAttributes struct {
 	// Availability Zone for you. RequestedEc2SubnetIDs and
 	// RequestedEc2AvailabilityZones cannot be specified together.
 	RequestedEc2AvailabilityZones []*string
+
 	// The Availability Zone in which the cluster will run.
 	Ec2AvailabilityZone *string
+
 	// The IAM role that was specified when the cluster was launched. The EC2 instances
 	// of the cluster assume this role.
 	IamInstanceProfile *string
+
 	// A list of additional Amazon EC2 security group IDs for the core and task nodes.
 	AdditionalSlaveSecurityGroups []*string
+
 	// A list of additional Amazon EC2 security group IDs for the master node.
 	AdditionalMasterSecurityGroups []*string
+
 	// The identifier of the Amazon EC2 security group for the Amazon EMR service to
 	// access clusters in VPC private subnets.
 	ServiceAccessSecurityGroup *string
@@ -485,13 +623,16 @@ type Ec2InstanceAttributes struct {
 // The details of the step failure. The service attempts to detect the root cause
 // for many common failures.
 type FailureDetails struct {
+
 	// The path to the log file where the step failure root cause was originally
 	// recorded.
 	LogFile *string
+
 	// The reason for the step failure. In the case where the service cannot
 	// successfully determine the root cause of the failure, it returns "Unknown Error"
 	// as a reason.
 	Reason *string
+
 	// The descriptive message including the error the EMR service has identified as
 	// the cause of step failure. This is text from an error log that describes the
 	// root cause of the failure.
@@ -502,14 +643,20 @@ type FailureDetails struct {
 // The main function submits a job for Hadoop to execute and waits for the job to
 // finish or fail.
 type HadoopJarStepConfig struct {
+
 	// The name of the main class in the specified Java file. If not specified, the JAR
 	// file should specify a Main-Class in its manifest file.
 	MainClass *string
+
 	// A path to a JAR file run during the step.
+	//
+	// This member is required.
 	Jar *string
+
 	// A list of command line arguments passed to the JAR file's main function when
 	// executed.
 	Args []*string
+
 	// A list of Java properties that are set when the step runs. You can use these
 	// properties to pass key value pairs to your main function.
 	Properties []*KeyValue
@@ -519,43 +666,59 @@ type HadoopJarStepConfig struct {
 // The main function submits a job for Hadoop to execute and waits for the job to
 // finish or fail.
 type HadoopStepConfig struct {
+
 	// The list of Java properties that are set when the step runs. You can use these
 	// properties to pass key value pairs to your main function.
 	Properties map[string]*string
+
 	// The name of the main class in the specified Java file. If not specified, the JAR
 	// file should specify a main class in its manifest file.
 	MainClass *string
+
 	// The list of command line arguments to pass to the JAR file's main function for
 	// execution.
 	Args []*string
+
 	// The path to the JAR file that runs during the step.
 	Jar *string
 }
 
 // Represents an EC2 instance provisioned as part of cluster.
 type Instance struct {
+
 	// The identifier of the instance group to which this instance belongs.
 	InstanceGroupId *string
+
 	// The unique identifier for the instance in Amazon EMR.
 	Id *string
+
 	// The public IP address of the instance.
 	PublicIpAddress *string
+
 	// The unique identifier of the instance in Amazon EC2.
 	Ec2InstanceId *string
+
 	// The private DNS name of the instance.
 	PrivateDnsName *string
+
 	// The private IP address of the instance.
 	PrivateIpAddress *string
+
 	// The current status of the instance.
 	Status *InstanceStatus
+
 	// The instance purchasing option. Valid values are ON_DEMAND or SPOT.
 	Market MarketType
+
 	// The EC2 instance type, for example m3.xlarge.
 	InstanceType *string
+
 	// The list of EBS volumes that are attached to this instance.
 	EbsVolumes []*EbsVolume
+
 	// The public DNS name of the instance.
 	PublicDnsName *string
+
 	// The unique identifier of the instance fleet to which an EC2 instance belongs.
 	InstanceFleetId *string
 }
@@ -567,12 +730,15 @@ type Instance struct {
 // configuration is available only in Amazon EMR versions 4.8.0 and later,
 // excluding 5.0.x versions.
 type InstanceFleet struct {
+
 	// The number of Spot units that have been provisioned for this instance fleet to
 	// fulfill TargetSpotCapacity. This provisioned capacity might be less than or
 	// greater than TargetSpotCapacity.
 	ProvisionedSpotCapacity *int32
+
 	// The unique identifier of the instance fleet.
 	Id *string
+
 	// The target capacity of On-Demand units for the instance fleet, which determines
 	// how many On-Demand instances to provision. When the instance fleet launches,
 	// Amazon EMR tries to provision On-Demand instances as specified by
@@ -591,22 +757,29 @@ type InstanceFleet struct {
 	// only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and
 	// its value must be 1.
 	TargetOnDemandCapacity *int32
+
 	// A friendly name for the instance fleet.
 	Name *string
+
 	// The number of On-Demand units that have been provisioned for the instance fleet
 	// to fulfill TargetOnDemandCapacity. This provisioned capacity might be less than
 	// or greater than TargetOnDemandCapacity.
 	ProvisionedOnDemandCapacity *int32
+
 	// The specification for the instance types that comprise an instance fleet. Up to
 	// five unique instance specifications may be defined for each instance fleet.
 	InstanceTypeSpecifications []*InstanceTypeSpecification
+
 	// Describes the launch specification for an instance fleet.
 	LaunchSpecifications *InstanceFleetProvisioningSpecifications
+
 	// The current status of the instance fleet.
 	Status *InstanceFleetStatus
+
 	// The node type that the instance fleet hosts. Valid values are MASTER, CORE, or
 	// TASK.
 	InstanceFleetType InstanceFleetType
+
 	// The target capacity of Spot units for the instance fleet, which determines how
 	// many Spot instances to provision. When the instance fleet launches, Amazon EMR
 	// tries to provision Spot instances as specified by InstanceTypeConfig (). Each
@@ -630,13 +803,17 @@ type InstanceFleet struct {
 // configuration is available only in Amazon EMR versions 4.8.0 and later,
 // excluding 5.0.x versions.
 type InstanceFleetConfig struct {
+
 	// The friendly name of the instance fleet.
 	Name *string
+
 	// The instance type configurations that define the EC2 instances in the instance
 	// fleet.
 	InstanceTypeConfigs []*InstanceTypeConfig
+
 	// The launch specification for the instance fleet.
 	LaunchSpecifications *InstanceFleetProvisioningSpecifications
+
 	// The target capacity of On-Demand units for the instance fleet, which determines
 	// how many On-Demand instances to provision. When the instance fleet launches,
 	// Amazon EMR tries to provision On-Demand instances as specified by
@@ -653,9 +830,13 @@ type InstanceFleetConfig struct {
 	// only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and
 	// its value must be 1.
 	TargetOnDemandCapacity *int32
+
 	// The node type that the instance fleet hosts. Valid values are MASTER,CORE,and
 	// TASK.
+	//
+	// This member is required.
 	InstanceFleetType InstanceFleetType
+
 	// The target capacity of Spot units for the instance fleet, which determines how
 	// many Spot instances to provision. When the instance fleet launches, Amazon EMR
 	// tries to provision Spot instances as specified by InstanceTypeConfig (). Each
@@ -677,11 +858,16 @@ type InstanceFleetConfig struct {
 // instance fleet configuration is available only in Amazon EMR versions 4.8.0 and
 // later, excluding 5.0.x versions.
 type InstanceFleetModifyConfig struct {
+
 	// A unique identifier for the instance fleet.
+	//
+	// This member is required.
 	InstanceFleetId *string
+
 	// The target capacity of Spot units for the instance fleet. For more information,
 	// see InstanceFleetConfig$TargetSpotCapacity ().
 	TargetSpotCapacity *int32
+
 	// The target capacity of On-Demand units for the instance fleet. For more
 	// information see InstanceFleetConfig$TargetOnDemandCapacity ().
 	TargetOnDemandCapacity *int32
@@ -693,12 +879,14 @@ type InstanceFleetModifyConfig struct {
 // later, excluding 5.0.x versions. On-Demand and Spot instance allocation
 // strategies are available in Amazon EMR version 5.12.1 and later.
 type InstanceFleetProvisioningSpecifications struct {
+
 	// The launch specification for On-Demand instances in the instance fleet, which
 	// determines the allocation strategy. The instance fleet configuration is
 	// available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
 	// On-Demand instances allocation strategy is available in Amazon EMR version
 	// 5.12.1 and later.
 	OnDemandSpecification *OnDemandProvisioningSpecification
+
 	// The launch specification for Spot instances in the fleet, which determines the
 	// defined duration, provisioning timeout behavior, and allocation strategy.
 	SpotSpecification *SpotProvisioningSpecification
@@ -708,8 +896,10 @@ type InstanceFleetProvisioningSpecifications struct {
 // configuration is available only in Amazon EMR versions 4.8.0 and later,
 // excluding 5.0.x versions.
 type InstanceFleetStateChangeReason struct {
+
 	// An explanatory message.
 	Message *string
+
 	// A code corresponding to the reason the state change occurred.
 	Code InstanceFleetStateChangeReasonCode
 }
@@ -717,6 +907,7 @@ type InstanceFleetStateChangeReason struct {
 // The status of the instance fleet. The instance fleet configuration is available
 // only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
 type InstanceFleetStatus struct {
+
 	// A code representing the instance fleet status.
 	//
 	//     * PROVISIONING—The instance
@@ -743,8 +934,10 @@ type InstanceFleetStatus struct {
 	//     * TERMINATED—The instance fleet is no longer active, and all EC2
 	// instances have been terminated.
 	State InstanceFleetState
+
 	// Provides status change reason details for the instance fleet.
 	StateChangeReason *InstanceFleetStateChangeReason
+
 	// Provides historical timestamps for the instance fleet, including the time of
 	// creation, the time it became ready to run jobs, and the time of termination.
 	Timeline *InstanceFleetTimeline
@@ -755,10 +948,13 @@ type InstanceFleetStatus struct {
 // instance fleet configuration is available only in Amazon EMR versions 4.8.0 and
 // later, excluding 5.0.x versions.
 type InstanceFleetTimeline struct {
+
 	// The time and date the instance fleet was created.
 	CreationDateTime *time.Time
+
 	// The time and date the instance fleet terminated.
 	EndDateTime *time.Time
+
 	// The time and date the instance fleet was ready to run jobs.
 	ReadyDateTime *time.Time
 }
@@ -766,50 +962,67 @@ type InstanceFleetTimeline struct {
 // This entity represents an instance group, which is a group of instances that
 // have common purpose. For example, CORE instance group is used for HDFS.
 type InstanceGroup struct {
+
 	// The marketplace to provision instances for this group. Valid values are
 	// ON_DEMAND or SPOT.
 	Market MarketType
+
 	// The version number of a configuration specification that was successfully
 	// applied for an instance group last time.
 	LastSuccessfullyAppliedConfigurationsVersion *int64
+
 	// The name of the instance group.
 	Name *string
+
 	// The bid price for each EC2 Spot instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
+
 	// A list of configurations that were successfully applied for an instance group
 	// last time.
 	LastSuccessfullyAppliedConfigurations []*Configuration
+
 	// The number of instances currently running in this instance group.
 	RunningInstanceCount *int32
+
 	// An automatic scaling policy for a core instance group or task instance group in
 	// an Amazon EMR cluster. The automatic scaling policy defines how an instance
 	// group dynamically adds and terminates EC2 instances in response to the value of
 	// a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicyDescription
+
 	// The EC2 instance type for all instances in the instance group.
 	InstanceType *string
+
 	// The current status of the instance group.
 	Status *InstanceGroupStatus
+
 	// The type of the instance group. Valid values are MASTER, CORE or TASK.
 	InstanceGroupType InstanceGroupType
+
 	// The EBS block devices that are mapped to this instance group.
 	EbsBlockDevices []*EbsBlockDevice
+
 	// The target number of instances for the instance group.
 	RequestedInstanceCount *int32
+
 	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
 	// cluster instance group. You can specify a separate configuration for each
 	// instance group (master, core, and task).
 	Configurations []*Configuration
+
 	// The identifier of the instance group.
 	Id *string
+
 	// If the instance group is EBS-optimized. An Amazon EBS-optimized instance uses an
 	// optimized configuration stack and provides additional, dedicated capacity for
 	// Amazon EBS I/O.
 	EbsOptimized *bool
+
 	// Policy for customizing shrink operations.
 	ShrinkPolicy *ShrinkPolicy
+
 	// The version number of the requested configuration specification for this
 	// instance group.
 	ConfigurationsVersion *int64
@@ -817,28 +1030,43 @@ type InstanceGroup struct {
 
 // Configuration defining a new instance group.
 type InstanceGroupConfig struct {
+
 	// An automatic scaling policy for a core instance group or task instance group in
 	// an Amazon EMR cluster. The automatic scaling policy defines how an instance
 	// group dynamically adds and terminates EC2 instances in response to the value of
 	// a CloudWatch metric. See PutAutoScalingPolicy ().
 	AutoScalingPolicy *AutoScalingPolicy
+
 	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
 	// cluster instance group. You can specify a separate configuration for each
 	// instance group (master, core, and task).
 	Configurations []*Configuration
+
 	// Friendly name given to the instance group.
 	Name *string
+
 	// The role of the instance group in the cluster.
+	//
+	// This member is required.
 	InstanceRole InstanceRoleType
+
 	// Market type of the EC2 instances used to create a cluster node.
 	Market MarketType
+
 	// The EC2 instance type for all instances in the instance group.
+	//
+	// This member is required.
 	InstanceType *string
+
 	// EBS configurations that will be attached to each EC2 instance in the instance
 	// group.
 	EbsConfiguration *EbsConfiguration
+
 	// Target number of instances for the instance group.
+	//
+	// This member is required.
 	InstanceCount *int32
+
 	// The bid price for each EC2 Spot instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
@@ -847,78 +1075,121 @@ type InstanceGroupConfig struct {
 
 // Detailed information about an instance group.
 type InstanceGroupDetail struct {
+
 	// Details regarding the state of the instance group.
 	LastStateChangeReason *string
+
 	// The date/time the instance group was terminated.
 	EndDateTime *time.Time
+
 	// Instance group role in the cluster
+	//
+	// This member is required.
 	InstanceRole InstanceRoleType
+
 	// Actual count of running instances.
+	//
+	// This member is required.
 	InstanceRunningCount *int32
+
 	// Unique identifier for the instance group.
 	InstanceGroupId *string
+
 	// The date/time the instance group was available to the cluster.
 	ReadyDateTime *time.Time
+
 	// Friendly name for the instance group.
 	Name *string
+
 	// Target number of instances to run in the instance group.
+	//
+	// This member is required.
 	InstanceRequestCount *int32
+
 	// State of instance group. The following values are deprecated: STARTING,
 	// TERMINATED, and FAILED.
+	//
+	// This member is required.
 	State InstanceGroupState
+
 	// Market type of the EC2 instances used to create a cluster node.
+	//
+	// This member is required.
 	Market MarketType
+
 	// The date/time the instance group was started.
 	StartDateTime *time.Time
+
 	// The bid price for each EC2 Spot instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
+
 	// EC2 instance type.
+	//
+	// This member is required.
 	InstanceType *string
+
 	// The date/time the instance group was created.
+	//
+	// This member is required.
 	CreationDateTime *time.Time
 }
 
 // Modify the size or configurations of an instance group.
 type InstanceGroupModifyConfig struct {
+
 	// Target size for the instance group.
 	InstanceCount *int32
+
 	// The EC2 InstanceIds to terminate. After you terminate the instances, the
 	// instance group will not return to its original requested size.
 	EC2InstanceIdsToTerminate []*string
+
 	// A list of new or modified configurations to apply for an instance group.
 	Configurations []*Configuration
+
 	// Policy for customizing shrink operations.
 	ShrinkPolicy *ShrinkPolicy
+
 	// Unique ID of the instance group to expand or shrink.
+	//
+	// This member is required.
 	InstanceGroupId *string
 }
 
 // The status change reason details for the instance group.
 type InstanceGroupStateChangeReason struct {
+
 	// The status change reason description.
 	Message *string
+
 	// The programmable code for the state change reason.
 	Code InstanceGroupStateChangeReasonCode
 }
 
 // The details of the instance group status.
 type InstanceGroupStatus struct {
+
 	// The status change reason details for the instance group.
 	StateChangeReason *InstanceGroupStateChangeReason
+
 	// The current state of the instance group.
 	State InstanceGroupState
+
 	// The timeline of the instance group status over time.
 	Timeline *InstanceGroupTimeline
 }
 
 // The timeline of the instance group lifecycle.
 type InstanceGroupTimeline struct {
+
 	// The date and time when the instance group terminated.
 	EndDateTime *time.Time
+
 	// The creation date and time of the instance group.
 	CreationDateTime *time.Time
+
 	// The date and time when the instance group became ready to perform tasks.
 	ReadyDateTime *time.Time
 }
@@ -926,39 +1197,50 @@ type InstanceGroupTimeline struct {
 // Custom policy for requesting termination protection or termination of specific
 // instances when shrinking an instance group.
 type InstanceResizePolicy struct {
+
 	// Decommissioning timeout override for the specific list of instances to be
 	// terminated.
 	InstanceTerminationTimeout *int32
+
 	// Specific list of instances to be terminated when shrinking an instance group.
 	InstancesToTerminate []*string
+
 	// Specific list of instances to be protected when shrinking an instance group.
 	InstancesToProtect []*string
 }
 
 // The details of the status change reason for the instance.
 type InstanceStateChangeReason struct {
+
 	// The programmable code for the state change reason.
 	Code InstanceStateChangeReasonCode
+
 	// The status change reason description.
 	Message *string
 }
 
 // The instance status details.
 type InstanceStatus struct {
+
 	// The current state of the instance.
 	State InstanceState
+
 	// The details of the status change reason for the instance.
 	StateChangeReason *InstanceStateChangeReason
+
 	// The timeline of the instance status over time.
 	Timeline *InstanceTimeline
 }
 
 // The timeline of the instance lifecycle.
 type InstanceTimeline struct {
+
 	// The creation date and time of the instance.
 	CreationDateTime *time.Time
+
 	// The date and time when the instance was ready to perform tasks.
 	ReadyDateTime *time.Time
+
 	// The date and time when the instance was terminated.
 	EndDateTime *time.Time
 }
@@ -969,28 +1251,36 @@ type InstanceTimeline struct {
 // configurations in a fleet. The instance fleet configuration is available only in
 // Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
 type InstanceTypeConfig struct {
+
 	// The configuration of Amazon Elastic Block Storage (EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsConfiguration *EbsConfiguration
+
 	// The number of units that a provisioned instance of this type provides toward
 	// fulfilling the target capacities defined in InstanceFleetConfig (). This value
 	// is 1 for a master instance fleet, and must be 1 or greater for core and task
 	// instance fleets. Defaults to 1 if not specified.
 	WeightedCapacity *int32
+
 	// A configuration classification that applies when provisioning cluster instances,
 	// which can include configurations for applications and software that run on the
 	// cluster.
 	Configurations []*Configuration
+
 	// The bid price for each EC2 Spot instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
+
 	// The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as
 	// defined by InstanceType. Expressed as a number (for example, 20 specifies 20%).
 	// If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided,
 	// BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPriceAsPercentageOfOnDemandPrice *float64
+
 	// An EC2 instance type, such as m3.xlarge.
+	//
+	// This member is required.
 	InstanceType *string
 }
 
@@ -998,23 +1288,30 @@ type InstanceTypeConfig struct {
 // instance fleet configuration is available only in Amazon EMR versions 4.8.0 and
 // later, excluding 5.0.x versions.
 type InstanceTypeSpecification struct {
+
 	// Evaluates to TRUE when the specified InstanceType is EBS-optimized.
 	EbsOptimized *bool
+
 	// The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as
 	// defined by InstanceType. Expressed as a number (for example, 20 specifies 20%).
 	BidPriceAsPercentageOfOnDemandPrice *float64
+
 	// A configuration classification that applies when provisioning cluster instances,
 	// which can include configurations for applications and software bundled with
 	// Amazon EMR.
 	Configurations []*Configuration
+
 	// The configuration of Amazon Elastic Block Storage (EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsBlockDevices []*EbsBlockDevice
+
 	// The EC2 instance type, for example m3.xlarge.
 	InstanceType *string
+
 	// The bid price for each EC2 Spot instance type as defined by InstanceType.
 	// Expressed in USD.
 	BidPrice *string
+
 	// The number of units that a provisioned instance of this type provides toward
 	// fulfilling the target capacities defined in InstanceFleetConfig (). Capacity
 	// values represent performance characteristics such as vCPUs, memory, or I/O. If
@@ -1024,14 +1321,25 @@ type InstanceTypeSpecification struct {
 
 // A description of a cluster (job flow).
 type JobFlowDetail struct {
+
 	// Describes the execution status of the job flow.
+	//
+	// This member is required.
 	ExecutionStatusDetail *JobFlowExecutionStatusDetail
+
 	// A list of the bootstrap actions run by the job flow.
 	BootstrapActions []*BootstrapActionDetail
+
 	// The job flow identifier.
+	//
+	// This member is required.
 	JobFlowId *string
+
 	// Describes the Amazon EC2 instances of the job flow.
+	//
+	// This member is required.
 	Instances *JobFlowInstancesDetail
+
 	// The way that individual Amazon EC2 instances terminate when an automatic
 	// scale-in activity occurs or an instance group is resized.
 	// TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the
@@ -1046,23 +1354,32 @@ type JobFlowDetail struct {
 	// 4.1.0 and later, and is the default for versions of Amazon EMR earlier than
 	// 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
+
 	// A list of steps run by the job flow.
 	Steps []*StepDetail
+
 	// The name of the job flow.
+	//
+	// This member is required.
 	Name *string
+
 	// The IAM role that was specified when the job flow was launched. The EC2
 	// instances of the job flow assume this role.
 	JobFlowRole *string
+
 	// Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0
 	// and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
 	AmiVersion *string
+
 	// The location in Amazon S3 where log files for the job are stored.
 	LogUri *string
+
 	// An IAM role for automatic scaling policies. The default role is
 	// EMR_AutoScaling_DefaultRole. The IAM role provides a way for the automatic
 	// scaling feature to get the required permissions it needs to launch and terminate
 	// EC2 instances in an instance group.
 	AutoScalingRole *string
+
 	// Indicates whether the cluster is visible to all IAM users of the AWS account
 	// associated with the cluster. The default value, true, indicates that all IAM
 	// users in the AWS account can perform cluster actions if they have the proper IAM
@@ -1072,13 +1389,16 @@ type JobFlowDetail struct {
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
 	VisibleToAllUsers *bool
+
 	// The IAM role that will be assumed by the Amazon EMR service to access AWS
 	// resources on your behalf.
 	ServiceRole *string
+
 	// A list of strings set by third party software when the job flow is launched. If
 	// you are not using third party software to manage the job flow this value is
 	// empty.
 	SupportedProducts []*string
+
 	// The AWS KMS customer master key (CMK) used for encrypting log files. This
 	// attribute is only available with EMR version 5.30.0 and later, excluding EMR
 	// 6.0.0.
@@ -1087,17 +1407,27 @@ type JobFlowDetail struct {
 
 // Describes the status of the cluster (job flow).
 type JobFlowExecutionStatusDetail struct {
+
 	// The state of the job flow.
+	//
+	// This member is required.
 	State JobFlowExecutionState
+
 	// The date and time when the job flow was ready to start running bootstrap
 	// actions.
 	ReadyDateTime *time.Time
+
 	// The completion date and time of the job flow.
 	EndDateTime *time.Time
+
 	// The start date and time of the job flow.
 	StartDateTime *time.Time
+
 	// The creation date and time of the job flow.
+	//
+	// This member is required.
 	CreationDateTime *time.Time
+
 	// Description of the job flow last changed state.
 	LastStateChangeReason *string
 }
@@ -1109,41 +1439,53 @@ type JobFlowExecutionStatusDetail struct {
 // InstanceCount (all three must be present), but we don't recommend this
 // configuration.
 type JobFlowInstancesConfig struct {
+
 	// The instance fleet configuration is available only in Amazon EMR versions 4.8.0
 	// and later, excluding 5.0.x versions. Describes the EC2 instances and instance
 	// configurations for clusters that use the instance fleet configuration.
 	InstanceFleets []*InstanceFleetConfig
+
 	// Applies to clusters that use the instance fleet configuration. When multiple EC2
 	// subnet IDs are specified, Amazon EMR evaluates them and launches instances in
 	// the optimal subnet. The instance fleet configuration is available only in Amazon
 	// EMR versions 4.8.0 and later, excluding 5.0.x versions.
 	Ec2SubnetIds []*string
+
 	// The EC2 instance type of the core and task nodes.
 	SlaveInstanceType *string
+
 	// Configuration for the instance groups in a cluster.
 	InstanceGroups []*InstanceGroupConfig
+
 	// A list of additional Amazon EC2 security group IDs for the core and task nodes.
 	AdditionalSlaveSecurityGroups []*string
+
 	// Specifies whether to lock the cluster to prevent the Amazon EC2 instances from
 	// being terminated by API call, user intervention, or in the event of a job-flow
 	// error.
 	TerminationProtected *bool
+
 	// The name of the EC2 key pair that can be used to ssh to the master node as the
 	// user called "hadoop."
 	Ec2KeyName *string
+
 	// Specifies whether the cluster should remain available after completing all
 	// steps.
 	KeepJobFlowAliveWhenNoSteps *bool
+
 	// The EC2 instance type of the master node.
 	MasterInstanceType *string
+
 	// The Availability Zone in which the cluster runs.
 	Placement *PlacementType
+
 	// Applies to clusters that use the uniform instance group configuration. To launch
 	// the cluster in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to
 	// the identifier of the Amazon VPC subnet where you want the cluster to launch. If
 	// you do not specify this value and your account supports EC2-Classic, the cluster
 	// launches in EC2-Classic.
 	Ec2SubnetId *string
+
 	// Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version
 	// for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated),
 	// "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this
@@ -1151,39 +1493,58 @@ type JobFlowInstancesConfig struct {
 	// the RunJobFlow call, in which case the default version of Hadoop for that AMI
 	// version is used.
 	HadoopVersion *string
+
 	// The number of EC2 instances in the cluster.
 	InstanceCount *int32
+
 	// The identifier of the Amazon EC2 security group for the core and task nodes.
 	EmrManagedSlaveSecurityGroup *string
+
 	// A list of additional Amazon EC2 security group IDs for the master node.
 	AdditionalMasterSecurityGroups []*string
+
 	// The identifier of the Amazon EC2 security group for the Amazon EMR service to
 	// access clusters in VPC private subnets.
 	ServiceAccessSecurityGroup *string
+
 	// The identifier of the Amazon EC2 security group for the master node.
 	EmrManagedMasterSecurityGroup *string
 }
 
 // Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
 type JobFlowInstancesDetail struct {
+
 	// The Hadoop version for the cluster.
 	HadoopVersion *string
+
 	// The Amazon EC2 Availability Zone for the cluster.
 	Placement *PlacementType
+
 	// The Amazon EC2 instance identifier of the master node.
 	MasterInstanceId *string
+
 	// For clusters launched within Amazon Virtual Private Cloud, this is the
 	// identifier of the subnet where the cluster was launched.
 	Ec2SubnetId *string
+
 	// The number of Amazon EC2 instances in the cluster. If the value is 1, the same
 	// instance serves as both the master and core and task node. If the value is
 	// greater than 1, one instance is the master node and all others are core and task
 	// nodes.
+	//
+	// This member is required.
 	InstanceCount *int32
+
 	// The Amazon EC2 core and task node instance type.
+	//
+	// This member is required.
 	SlaveInstanceType *string
+
 	// The Amazon EC2 master node instance type.
+	//
+	// This member is required.
 	MasterInstanceType *string
+
 	// An approximation of the cost of the cluster, represented in m1.small/hours. This
 	// value is incremented one time for every hour that an m1.small runs. Larger
 	// instances are weighted more, so an Amazon EC2 instance that is roughly four
@@ -1191,17 +1552,22 @@ type JobFlowInstancesDetail struct {
 	// incremented by four. This result is only an approximation and does not reflect
 	// the actual billing rate.
 	NormalizedInstanceHours *int32
+
 	// The DNS name of the master node. If the cluster is on a private subnet, this is
 	// the private DNS name. On a public subnet, this is the public DNS name.
 	MasterPublicDnsName *string
+
 	// Details about the instance groups in a cluster.
 	InstanceGroups []*InstanceGroupDetail
+
 	// Specifies whether the Amazon EC2 instances in the cluster are protected from
 	// termination by API calls, user intervention, or in the event of a job-flow
 	// error.
 	TerminationProtected *bool
+
 	// The name of an Amazon EC2 key pair that can be used to ssh to the master node.
 	Ec2KeyName *string
+
 	// Specifies whether the cluster should remain available after completing all
 	// steps.
 	KeepJobFlowAliveWhenNoSteps *bool
@@ -1213,28 +1579,39 @@ type JobFlowInstancesDetail struct {
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html) in
 // the EMR Management Guide.
 type KerberosAttributes struct {
+
 	// The name of the Kerberos realm to which all nodes in a cluster belong. For
 	// example, EC2.INTERNAL.
+	//
+	// This member is required.
 	Realm *string
+
 	// Required only when establishing a cross-realm trust with a KDC in a different
 	// realm. The cross-realm principal password, which must be identical across
 	// realms.
 	CrossRealmTrustPrincipalPassword *string
+
 	// Required only when establishing a cross-realm trust with an Active Directory
 	// domain. A user with sufficient privileges to join resources to the domain.
 	ADDomainJoinUser *string
+
 	// The password used within the cluster for the kadmin service on the
 	// cluster-dedicated KDC, which maintains Kerberos principals, password policies,
 	// and keytabs for the cluster.
+	//
+	// This member is required.
 	KdcAdminPassword *string
+
 	// The Active Directory password for ADDomainJoinUser.
 	ADDomainJoinPassword *string
 }
 
 // A key value pair.
 type KeyValue struct {
+
 	// The unique identifier of a key value pair.
 	Key *string
+
 	// The value part of the identified key.
 	Value *string
 }
@@ -1244,6 +1621,7 @@ type KeyValue struct {
 // only applies to the core and task nodes. The master node cannot be scaled after
 // initial configuration.
 type ManagedScalingPolicy struct {
+
 	// The EC2 unit limits for a managed scaling policy. The managed scaling activity
 	// of a cluster is not allowed to go above or below these limits. The limit only
 	// applies to the core and task nodes. The master node cannot be scaled after
@@ -1257,8 +1635,10 @@ type ManagedScalingPolicy struct {
 // ${emr.clusterId}. This enables the rule to bootstrap when the cluster ID becomes
 // available.
 type MetricDimension struct {
+
 	// The dimension name.
 	Key *string
+
 	// The dimension value.
 	Value *string
 }
@@ -1269,18 +1649,23 @@ type MetricDimension struct {
 // On-Demand instances allocation strategy is available in Amazon EMR version
 // 5.12.1 and later.
 type OnDemandProvisioningSpecification struct {
+
 	// Specifies the strategy to use in launching On-Demand instance fleets. Currently,
 	// the only option is lowest-price (the default), which launches the lowest price
 	// first.
+	//
+	// This member is required.
 	AllocationStrategy OnDemandProvisioningAllocationStrategy
 }
 
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).
 type PlacementType struct {
+
 	// The Amazon EC2 Availability Zone for the cluster. AvailabilityZone is used for
 	// uniform instance groups, while AvailabilityZones (plural) is used for instance
 	// fleets.
 	AvailabilityZone *string
+
 	// When multiple Availability Zones are specified, Amazon EMR evaluates them and
 	// launches instances in the optimal Availability Zone. AvailabilityZones is used
 	// for instance fleets, while AvailabilityZone (singular) is used for uniform
@@ -1293,20 +1678,28 @@ type PlacementType struct {
 // public IP addresses. To specify a single port, use the same value for MinRange
 // and MaxRange.
 type PortRange struct {
+
 	// The smallest port number in a specified range of port numbers.
 	MaxRange *int32
+
 	// The smallest port number in a specified range of port numbers.
+	//
+	// This member is required.
 	MinRange *int32
 }
 
 // The type of adjustment the automatic scaling activity makes when triggered, and
 // the periodicity of the adjustment.
 type ScalingAction struct {
+
 	// Not available for instance groups. Instance groups use the market type specified
 	// for the group.
 	Market MarketType
+
 	// The type of adjustment the automatic scaling activity makes when triggered, and
 	// the periodicity of the adjustment.
+	//
+	// This member is required.
 	SimpleScalingPolicyConfiguration *SimpleScalingPolicyConfiguration
 }
 
@@ -1314,13 +1707,19 @@ type ScalingAction struct {
 // Automatic scaling activities triggered by automatic scaling rules will not cause
 // an instance group to grow above or below these limits.
 type ScalingConstraints struct {
+
 	// The upper boundary of EC2 instances in an instance group beyond which scaling
 	// activities are not allowed to grow. Scale-out activities will not add instances
 	// beyond this boundary.
+	//
+	// This member is required.
 	MaxCapacity *int32
+
 	// The lower boundary of EC2 instances in an instance group below which scaling
 	// activities are not allowed to shrink. Scale-in activities will not terminate
 	// instances below this boundary.
+	//
+	// This member is required.
 	MinCapacity *int32
 }
 
@@ -1329,38 +1728,57 @@ type ScalingConstraints struct {
 // removed, and the periodicity of adjustments. The automatic scaling policy for an
 // instance group can comprise one or more automatic scaling rules.
 type ScalingRule struct {
+
 	// The CloudWatch alarm definition that determines when automatic scaling activity
 	// is triggered.
+	//
+	// This member is required.
 	Trigger *ScalingTrigger
+
 	// The name used to identify an automatic scaling rule. Rule names must be unique
 	// within a scaling policy.
+	//
+	// This member is required.
 	Name *string
+
 	// A friendly, more verbose description of the automatic scaling rule.
 	Description *string
+
 	// The conditions that trigger an automatic scaling activity.
+	//
+	// This member is required.
 	Action *ScalingAction
 }
 
 // The conditions that trigger an automatic scaling activity.
 type ScalingTrigger struct {
+
 	// The definition of a CloudWatch metric alarm. When the defined alarm conditions
 	// are met along with other trigger parameters, scaling activity begins.
+	//
+	// This member is required.
 	CloudWatchAlarmDefinition *CloudWatchAlarmDefinition
 }
 
 // Configuration of the script to run during a bootstrap action.
 type ScriptBootstrapActionConfig struct {
+
 	// A list of command line arguments to pass to the bootstrap action script.
 	Args []*string
+
 	// Location of the script to run during a bootstrap action. Can be either a
 	// location in Amazon S3 or on a local file system.
+	//
+	// This member is required.
 	Path *string
 }
 
 // The creation date and time, and name, of a security configuration.
 type SecurityConfigurationSummary struct {
+
 	// The date and time the security configuration was created.
 	CreationDateTime *time.Time
+
 	// The name of the security configuration.
 	Name *string
 }
@@ -1368,9 +1786,11 @@ type SecurityConfigurationSummary struct {
 // Policy for customizing shrink operations. Allows configuration of
 // decommissioning timeout and targeted instance shrinking.
 type ShrinkPolicy struct {
+
 	// Custom policy for requesting termination protection or termination of specific
 	// instances when shrinking an instance group.
 	InstanceResizePolicy *InstanceResizePolicy
+
 	// The desired timeout for decommissioning an instance. Overrides the default YARN
 	// decommissioning timeout.
 	DecommissionTimeout *int32
@@ -1380,6 +1800,7 @@ type ShrinkPolicy struct {
 // removes instances, the cooldown period, and the number of EC2 instances that
 // will be added each time the CloudWatch metric alarm condition is satisfied.
 type SimpleScalingPolicyConfiguration struct {
+
 	// The way in which EC2 instances are added (if ScalingAdjustment is a positive
 	// number) or terminated (if ScalingAdjustment is a negative number) each time the
 	// scaling activity is triggered. CHANGE_IN_CAPACITY is the default.
@@ -1392,9 +1813,11 @@ type SimpleScalingPolicyConfiguration struct {
 	// group with the number of EC2 instances specified by ScalingAdjustment, which
 	// should be expressed as a positive integer.
 	AdjustmentType AdjustmentType
+
 	// The amount of time, in seconds, after a scaling activity completes before any
 	// further trigger-related scaling activities can start. The default value is 0.
 	CoolDown *int32
+
 	// The amount by which to scale in or scale out, based on the specified
 	// AdjustmentType. A positive value adds to the instance group's EC2 instance count
 	// while a negative number removes instances. If AdjustmentType is set to
@@ -1402,6 +1825,8 @@ type SimpleScalingPolicyConfiguration struct {
 	// is set to PERCENT_CHANGE_IN_CAPACITY, the value should express the percentage as
 	// an integer. For example, -20 indicates a decrease in 20% increments of cluster
 	// capacity.
+	//
+	// This member is required.
 	ScalingAdjustment *int32
 }
 
@@ -1411,13 +1836,17 @@ type SimpleScalingPolicyConfiguration struct {
 // versions 4.8.0 and later, excluding 5.0.x versions. Spot instance allocation
 // strategy is available in Amazon EMR version 5.12.1 and later.
 type SpotProvisioningSpecification struct {
+
 	// The action to take when TargetSpotCapacity has not been fulfilled when the
 	// TimeoutDurationMinutes has expired; that is, when all Spot instances could not
 	// be provisioned within the Spot provisioning timeout. Valid values are
 	// TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if
 	// no Spot instances are available, On-Demand Instances should be provisioned to
 	// fulfill any remaining Spot capacity.
+	//
+	// This member is required.
 	TimeoutAction SpotProvisioningTimeoutAction
+
 	// The defined duration for Spot instances (also known as Spot blocks) in minutes.
 	// When specified, the Spot instance does not terminate before the defined duration
 	// expires, and defined duration pricing for Spot instances applies. Valid values
@@ -1426,11 +1855,15 @@ type SpotProvisioningSpecification struct {
 	// the Spot instance for termination and provides a Spot instance termination
 	// notice, which gives the instance a two-minute warning before it terminates.
 	BlockDurationMinutes *int32
+
 	// The spot provisioning timeout period in minutes. If Spot instances are not
 	// provisioned within this time period, the TimeOutAction is taken. Minimum value
 	// is 5 and maximum value is 1440. The timeout applies only during initial
 	// provisioning, when the cluster is first created.
+	//
+	// This member is required.
 	TimeoutDurationMinutes *int32
+
 	// Specifies the strategy to use in launching Spot instance fleets. Currently, the
 	// only option is capacity-optimized (the default), which launches instances from
 	// Spot instance pools with optimal capacity for the number of instances that are
@@ -1440,71 +1873,104 @@ type SpotProvisioningSpecification struct {
 
 // This represents a step in a cluster.
 type Step struct {
+
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
+
 	// The current execution status details of the cluster step.
 	Status *StepStatus
+
 	// The name of the cluster step.
 	Name *string
+
 	// The action to take when the cluster step fails. Possible values are
 	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided
 	// for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 	ActionOnFailure ActionOnFailure
+
 	// The identifier of the cluster step.
 	Id *string
 }
 
 // Specification of a cluster (job flow) step.
 type StepConfig struct {
+
 	// The JAR file used for the step.
+	//
+	// This member is required.
 	HadoopJarStep *HadoopJarStepConfig
+
 	// The action to take when the cluster step fails. Possible values are
 	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided
 	// for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 	ActionOnFailure ActionOnFailure
+
 	// The name of the step.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Combines the execution state and configuration of a step.
 type StepDetail struct {
+
 	// The description of the step status.
+	//
+	// This member is required.
 	ExecutionStatusDetail *StepExecutionStatusDetail
+
 	// The step configuration.
+	//
+	// This member is required.
 	StepConfig *StepConfig
 }
 
 // The execution state of a step.
 type StepExecutionStatusDetail struct {
+
 	// The start date and time of the step.
 	StartDateTime *time.Time
+
 	// The completion date and time of the step.
 	EndDateTime *time.Time
+
 	// A description of the step's current state.
 	LastStateChangeReason *string
+
 	// The state of the step.
+	//
+	// This member is required.
 	State StepExecutionState
+
 	// The creation date and time of the step.
+	//
+	// This member is required.
 	CreationDateTime *time.Time
 }
 
 // The details of the step state change reason.
 type StepStateChangeReason struct {
+
 	// The programmable code for the state change reason. Note: Currently, the service
 	// provides no code for the state change.
 	Code StepStateChangeReasonCode
+
 	// The descriptive message for the state change reason.
 	Message *string
 }
 
 // The execution status details of the cluster step.
 type StepStatus struct {
+
 	// The reason for the step execution status change.
 	StateChangeReason *StepStateChangeReason
+
 	// The execution state of the cluster step.
 	State StepState
+
 	// The timeline of the cluster step status over time.
 	Timeline *StepTimeline
+
 	// The details for the step failure including reason, message, and log file path
 	// where the root cause was identified.
 	FailureDetails *FailureDetails
@@ -1512,27 +1978,35 @@ type StepStatus struct {
 
 // The summary of the cluster step.
 type StepSummary struct {
+
 	// The current execution status details of the cluster step.
 	Status *StepStatus
+
 	// The action to take when the cluster step fails. Possible values are
 	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is
 	// available for backward compatibility. We recommend using TERMINATE_CLUSTER
 	// instead.
 	ActionOnFailure ActionOnFailure
+
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
+
 	// The name of the cluster step.
 	Name *string
+
 	// The identifier of the cluster step.
 	Id *string
 }
 
 // The timeline of the cluster step lifecycle.
 type StepTimeline struct {
+
 	// The date and time when the cluster step execution started.
 	StartDateTime *time.Time
+
 	// The date and time when the cluster step execution completed or failed.
 	EndDateTime *time.Time
+
 	// The date and time when the cluster step was created.
 	CreationDateTime *time.Time
 }
@@ -1541,8 +2015,10 @@ type StepTimeline struct {
 // arguments. EMR accepts these arguments and forwards them to the corresponding
 // installation script as bootstrap action arguments.
 type SupportedProductConfig struct {
+
 	// The name of the product configuration.
 	Name *string
+
 	// The list of user-supplied arguments.
 	Args []*string
 }
@@ -1553,10 +2029,12 @@ type SupportedProductConfig struct {
 // For more information, see Tag Clusters
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
 type Tag struct {
+
 	// A user-defined value, which is optional in a tag. For more information, see Tag
 	// Clusters
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
 	Value *string
+
 	// A user-defined key, which is the minimum required information for a valid tag.
 	// For more information, see Tag
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
@@ -1566,11 +2044,18 @@ type Tag struct {
 // EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
 // requested for the EBS volume attached to an EC2 instance in the cluster.
 type VolumeSpecification struct {
+
 	// The volume type. Volume types supported are gp2, io1, standard.
+	//
+	// This member is required.
 	VolumeType *string
+
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	Iops *int32
+
 	// The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the
 	// volume type is EBS-optimized, the minimum value is 10.
+	//
+	// This member is required.
 	SizeInGB *int32
 }

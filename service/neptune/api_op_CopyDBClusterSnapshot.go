@@ -58,11 +58,14 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 }
 
 type CopyDBClusterSnapshotInput struct {
+
 	// The tags to assign to the new DB cluster snapshot copy.
 	Tags []*types.Tag
+
 	// True to copy all tags from the source DB cluster snapshot to the target DB
 	// cluster snapshot, and otherwise false. The default is false.
 	CopyTags *bool
+
 	// The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is
 	// the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the
 	// KMS encryption key.  <p>If you copy an encrypted DB cluster snapshot from your
@@ -78,6 +81,7 @@ type CopyDBClusterSnapshotInput struct {
 	// an unencrypted DB cluster snapshot and specify a value for the KmsKeyId
 	// parameter, an error is returned.</p>
 	KmsKeyId *string
+
 	// The identifier of the DB cluster snapshot to copy. This parameter is not
 	// case-sensitive. You can't copy from one AWS Region to another. Constraints:
 	//
@@ -88,9 +92,13 @@ type CopyDBClusterSnapshotInput struct {
 	// a valid DB snapshot identifier.
 	//
 	// Example: my-cluster-snapshot1
+	//
+	// This member is required.
 	SourceDBClusterSnapshotIdentifier *string
+
 	// Not currently supported.
 	PreSignedUrl *string
+
 	// The identifier of the new DB cluster snapshot to create from the source DB
 	// cluster snapshot. This parameter is not case-sensitive. Constraints:
 	//
@@ -104,10 +112,13 @@ type CopyDBClusterSnapshotInput struct {
 	// hyphens.
 	//
 	// Example: my-cluster-snapshot2
+	//
+	// This member is required.
 	TargetDBClusterSnapshotIdentifier *string
 }
 
 type CopyDBClusterSnapshotOutput struct {
+
 	// Contains the details for an Amazon Neptune DB cluster snapshot This data type is
 	// used as a response element in the DescribeDBClusterSnapshots () action.
 	DBClusterSnapshot *types.DBClusterSnapshot

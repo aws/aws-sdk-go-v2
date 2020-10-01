@@ -56,26 +56,37 @@ func (c *Client) SearchLocalGatewayRoutes(ctx context.Context, params *SearchLoc
 }
 
 type SearchLocalGatewayRoutesInput struct {
+
 	// One or more filters.
+	//
+	// This member is required.
 	Filters []*types.Filter
+
 	// The ID of the local gateway route table.
+	//
+	// This member is required.
 	LocalGatewayRouteTableId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type SearchLocalGatewayRoutesOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the routes.
 	Routes []*types.LocalGatewayRoute
 

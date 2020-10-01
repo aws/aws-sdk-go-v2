@@ -84,9 +84,11 @@ func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput
 }
 
 type CreateSolutionInput struct {
+
 	// The ARN of the recipe to use for model training. Only specified when
 	// performAutoML is false.
 	RecipeArn *string
+
 	// Whether to perform automated machine learning (AutoML). The default is false.
 	// For this case, you must specify recipeArn. When set to true, Amazon Personalize
 	// analyzes your training data and selects the optimal USER_PERSONALIZATION recipe
@@ -95,26 +97,36 @@ type CreateSolutionInput struct {
 	// hyperparameters. AutoML lengthens the training process as compared to selecting
 	// a specific recipe.
 	PerformAutoML *bool
+
 	// Whether to perform hyperparameter optimization (HPO) on the specified or
 	// selected recipe. The default is false. When performing AutoML, this parameter is
 	// always true and you should not set it to false.
 	PerformHPO *bool
+
 	// The name for the solution.
+	//
+	// This member is required.
 	Name *string
+
 	// The configuration to use with the solution. When performAutoML is set to true,
 	// Amazon Personalize only evaluates the autoMLConfig section of the solution
 	// configuration.
 	SolutionConfig *types.SolutionConfig
+
 	// When your have multiple event types (using an EVENT_TYPE schema field), this
 	// parameter specifies which event type (for example, 'click' or 'like') is used
 	// for training the model.
 	EventType *string
+
 	// The Amazon Resource Name (ARN) of the dataset group that provides the training
 	// data.
+	//
+	// This member is required.
 	DatasetGroupArn *string
 }
 
 type CreateSolutionOutput struct {
+
 	// The ARN of the solution.
 	SolutionArn *string
 

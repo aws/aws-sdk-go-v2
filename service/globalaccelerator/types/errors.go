@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The accelerator that you specified could not be disabled.
@@ -26,12 +25,6 @@ func (e *AcceleratorNotDisabledException) ErrorCode() string {
 	return "AcceleratorNotDisabledException"
 }
 func (e *AcceleratorNotDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AcceleratorNotDisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AcceleratorNotDisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The accelerator that you specified doesn't exist.
 type AcceleratorNotFoundException struct {
@@ -49,12 +42,6 @@ func (e *AcceleratorNotFoundException) ErrorMessage() string {
 }
 func (e *AcceleratorNotFoundException) ErrorCode() string             { return "AcceleratorNotFoundException" }
 func (e *AcceleratorNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AcceleratorNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AcceleratorNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You don't have access permission.
 type AccessDeniedException struct {
@@ -72,12 +59,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The listener that you specified has an endpoint group associated with it. You
 // must remove all dependent resources from a listener before you can delete it.
@@ -100,12 +81,6 @@ func (e *AssociatedEndpointGroupFoundException) ErrorCode() string {
 func (e *AssociatedEndpointGroupFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AssociatedEndpointGroupFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AssociatedEndpointGroupFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The accelerator that you specified has a listener associated with it. You must
 // remove all dependent resources from an accelerator before you can delete it.
@@ -126,12 +101,6 @@ func (e *AssociatedListenerFoundException) ErrorCode() string {
 	return "AssociatedListenerFoundException"
 }
 func (e *AssociatedListenerFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AssociatedListenerFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AssociatedListenerFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The CIDR that you specified was not found or is incorrect.
 type ByoipCidrNotFoundException struct {
@@ -149,12 +118,6 @@ func (e *ByoipCidrNotFoundException) ErrorMessage() string {
 }
 func (e *ByoipCidrNotFoundException) ErrorCode() string             { return "ByoipCidrNotFoundException" }
 func (e *ByoipCidrNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ByoipCidrNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ByoipCidrNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The endpoint group that you specified already exists.
 type EndpointGroupAlreadyExistsException struct {
@@ -176,12 +139,6 @@ func (e *EndpointGroupAlreadyExistsException) ErrorCode() string {
 func (e *EndpointGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *EndpointGroupAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EndpointGroupAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The endpoint group that you specified doesn't exist.
 type EndpointGroupNotFoundException struct {
@@ -199,12 +156,6 @@ func (e *EndpointGroupNotFoundException) ErrorMessage() string {
 }
 func (e *EndpointGroupNotFoundException) ErrorCode() string             { return "EndpointGroupNotFoundException" }
 func (e *EndpointGroupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EndpointGroupNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EndpointGroupNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The CIDR that you specified is not valid for this action. For example, the state
 // of the CIDR might be incorrect for this action.
@@ -223,12 +174,6 @@ func (e *IncorrectCidrStateException) ErrorMessage() string {
 }
 func (e *IncorrectCidrStateException) ErrorCode() string             { return "IncorrectCidrStateException" }
 func (e *IncorrectCidrStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncorrectCidrStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncorrectCidrStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There was an internal error for AWS Global Accelerator.
 type InternalServiceErrorException struct {
@@ -246,12 +191,6 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 }
 func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An argument that you specified is invalid.
 type InvalidArgumentException struct {
@@ -269,12 +208,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There isn't another item to return.
 type InvalidNextTokenException struct {
@@ -292,12 +225,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The port numbers that you specified are not valid numbers or are not unique for
 // this accelerator.
@@ -316,12 +243,6 @@ func (e *InvalidPortRangeException) ErrorMessage() string {
 }
 func (e *InvalidPortRangeException) ErrorCode() string             { return "InvalidPortRangeException" }
 func (e *InvalidPortRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPortRangeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPortRangeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing your request would cause you to exceed an AWS Global Accelerator
 // limit.
@@ -340,12 +261,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The listener that you specified doesn't exist.
 type ListenerNotFoundException struct {
@@ -363,9 +278,3 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 }
 func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ListenerNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ListenerNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

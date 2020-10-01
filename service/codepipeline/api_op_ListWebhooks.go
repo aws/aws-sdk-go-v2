@@ -57,19 +57,23 @@ func (c *Client) ListWebhooks(ctx context.Context, params *ListWebhooksInput, op
 }
 
 type ListWebhooksInput struct {
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token that was returned from the previous ListWebhooks call, which can be
 	// used to return the next set of webhooks in the list.
 	NextToken *string
 }
 
 type ListWebhooksOutput struct {
+
 	// If the amount of returned information is significantly large, an identifier is
 	// also returned and can be used in a subsequent ListWebhooks call to return the
 	// next set of webhooks in the list.
 	NextToken *string
+
 	// The JSON detail returned for each webhook in the list output for the
 	// ListWebhooks call.
 	Webhooks []*types.ListWebhookItem

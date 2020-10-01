@@ -56,18 +56,25 @@ func (c *Client) ListSubscriptionDefinitionVersions(ctx context.Context, params 
 }
 
 type ListSubscriptionDefinitionVersionsInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
+
 	// The ID of the subscription definition.
+	//
+	// This member is required.
 	SubscriptionDefinitionId *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 }
 
 type ListSubscriptionDefinitionVersionsOutput struct {
+
 	// Information about a version.
 	Versions []*types.VersionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

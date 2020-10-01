@@ -64,20 +64,30 @@ func (c *Client) AssociateTargetsWithJob(ctx context.Context, params *AssociateT
 }
 
 type AssociateTargetsWithJobInput struct {
+
 	// The unique identifier you assigned to this job when it was created.
+	//
+	// This member is required.
 	JobId *string
+
 	// A list of thing group ARNs that define the targets of the job.
+	//
+	// This member is required.
 	Targets []*string
+
 	// An optional comment string describing why the job was associated with the
 	// targets.
 	Comment *string
 }
 
 type AssociateTargetsWithJobOutput struct {
+
 	// An ARN identifying the job.
 	JobArn *string
+
 	// A short text description of the job.
 	Description *string
+
 	// The unique identifier you assigned to this job when it was created.
 	JobId *string
 

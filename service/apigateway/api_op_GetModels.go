@@ -58,16 +58,25 @@ func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns .
 
 // Request to list existing Models () defined for a RestApi () resource.
 type GetModelsInput struct {
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
-	Limit            *int32
-	Name             *string
+	Limit *int32
+
+	Name *string
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	Template *bool
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
 }
 
@@ -75,8 +84,10 @@ type GetModelsInput struct {
 // Models and Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type GetModelsOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.Model
+
 	// The current pagination position in the paged result set.
 	Position *string
 

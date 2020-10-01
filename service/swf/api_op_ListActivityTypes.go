@@ -79,8 +79,10 @@ func (c *Client) ListActivityTypes(ctx context.Context, params *ListActivityType
 }
 
 type ListActivityTypesInput struct {
+
 	// If specified, only lists the activity types that have this name.
 	Name *string
+
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
@@ -89,27 +91,39 @@ type ListActivityTypesInput struct {
 	// maximum lifetime".  <p>The configured <code>maximumPageSize</code> determines
 	// how many results can be returned in a single call. </p>
 	NextPageToken *string
+
 	// Specifies the registration status of the activity types to list.
+	//
+	// This member is required.
 	RegistrationStatus types.RegistrationStatus
+
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the activity types.
 	ReverseOrder *bool
+
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
 	MaximumPageSize *int32
+
 	// The name of the domain in which the activity types have been registered.
+	//
+	// This member is required.
 	Domain *string
 }
 
 // Contains a paginated list of activity type information structures.
 type ListActivityTypesOutput struct {
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in nextPageToken. Keep all other arguments unchanged. The
 	// configured maximumPageSize determines how many results can be returned in a
 	// single call.
 	NextPageToken *string
+
 	// List of activity type information.
+	//
+	// This member is required.
 	TypeInfos []*types.ActivityTypeInfo
 
 	// Metadata pertaining to the operation's result.

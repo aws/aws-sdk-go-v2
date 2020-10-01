@@ -69,14 +69,18 @@ func (c *Client) DescribeAttachment(ctx context.Context, params *DescribeAttachm
 }
 
 type DescribeAttachmentInput struct {
+
 	// The ID of the attachment to return. Attachment IDs are returned by the
 	// DescribeCommunications () operation.
+	//
+	// This member is required.
 	AttachmentId *string
 }
 
 // The content and file name of the attachment returned by the DescribeAttachment
 // () operation.
 type DescribeAttachmentOutput struct {
+
 	// This object includes the attachment content and file name. In the previous
 	// response syntax, the value for the data parameter appears as blob, which is
 	// represented as a base64-encoded string. The value for fileName is the name of

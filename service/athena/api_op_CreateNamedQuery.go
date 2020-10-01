@@ -60,10 +60,13 @@ func (c *Client) CreateNamedQuery(ctx context.Context, params *CreateNamedQueryI
 }
 
 type CreateNamedQueryInput struct {
+
 	// The name of the workgroup in which the named query is being created.
 	WorkGroup *string
+
 	// The query description.
 	Description *string
+
 	// A unique case-sensitive string used to ensure the request to create the query is
 	// idempotent (executes only once). If another CreateNamedQuery request is
 	// received, the same response is returned and another query is not created. If a
@@ -72,15 +75,25 @@ type CreateNamedQueryInput struct {
 	// Java) auto-generate the token for users. If you are not using the AWS SDK or the
 	// AWS CLI, you must provide this token or the action will fail.
 	ClientRequestToken *string
+
 	// The contents of the query with all query statements.
+	//
+	// This member is required.
 	QueryString *string
+
 	// The database to which the query belongs.
+	//
+	// This member is required.
 	Database *string
+
 	// The query name.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateNamedQueryOutput struct {
+
 	// The unique ID of the query.
 	NamedQueryId *string
 

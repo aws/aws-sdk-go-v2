@@ -57,30 +57,54 @@ func (c *Client) DescribeMonitoringSchedule(ctx context.Context, params *Describ
 }
 
 type DescribeMonitoringScheduleInput struct {
+
 	// Name of a previously created monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
 }
 
 type DescribeMonitoringScheduleOutput struct {
+
 	// The status of an monitoring job.
+	//
+	// This member is required.
 	MonitoringScheduleStatus types.ScheduleStatus
+
 	// The name of the endpoint for the monitoring job.
 	EndpointName *string
+
 	// Describes metadata on the last execution to run, if there was one.
 	LastMonitoringExecutionSummary *types.MonitoringExecutionSummary
+
 	// The configuration object that specifies the monitoring schedule and defines the
 	// monitoring job.
+	//
+	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
+
 	// A string, up to one KB in size, that contains the reason a monitoring job
 	// failed, if it failed.
 	FailureReason *string
+
 	// The time at which the monitoring job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The time at which the monitoring job was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// Name of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
+
 	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleArn *string
 
 	// Metadata pertaining to the operation's result.

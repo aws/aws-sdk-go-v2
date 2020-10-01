@@ -56,22 +56,32 @@ func (c *Client) ListSchemaVersions(ctx context.Context, params *ListSchemaVersi
 }
 
 type ListSchemaVersionsInput struct {
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
-	Limit     *int32
+
+	Limit *int32
 }
 
 type ListSchemaVersionsOutput struct {
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
+
 	// An array of schema version summaries.
 	SchemaVersions []*types.SchemaVersionSummary
 

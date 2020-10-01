@@ -55,24 +55,36 @@ func (c *Client) AssociateTeamMember(ctx context.Context, params *AssociateTeamM
 }
 
 type AssociateTeamMemberInput struct {
+
 	// Whether the team member is allowed to use an SSH public/private key pair to
 	// remotely access project resources, for example Amazon EC2 instances.
 	RemoteAccessAllowed *bool
+
 	// A user- or system-generated token that identifies the entity that requested the
 	// team member association to the project. This token can be used to repeat the
 	// request.
 	ClientRequestToken *string
+
 	// The AWS CodeStar project role that will apply to this user. This role determines
 	// what actions a user can take in an AWS CodeStar project.
+	//
+	// This member is required.
 	ProjectRole *string
+
 	// The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS
 	// CodeStar project.
+	//
+	// This member is required.
 	UserArn *string
+
 	// The ID of the project to which you will add the IAM user.
+	//
+	// This member is required.
 	ProjectId *string
 }
 
 type AssociateTeamMemberOutput struct {
+
 	// The user- or system-generated token from the initial request that can be used to
 	// repeat the request.
 	ClientRequestToken *string

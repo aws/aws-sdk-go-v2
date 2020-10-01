@@ -68,14 +68,21 @@ func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClus
 
 // Represents the input of a RebootCacheCluster operation.
 type RebootCacheClusterInput struct {
+
 	// The cluster identifier. This parameter is stored as a lowercase string.
+	//
+	// This member is required.
 	CacheClusterId *string
+
 	// A list of cache node IDs to reboot. A node ID is a numeric identifier (0001,
 	// 0002, etc.). To reboot an entire cluster, specify all of the cache node IDs.
+	//
+	// This member is required.
 	CacheNodeIdsToReboot []*string
 }
 
 type RebootCacheClusterOutput struct {
+
 	// Contains all of the attributes of a specific cluster.
 	CacheCluster *types.CacheCluster
 

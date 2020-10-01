@@ -57,11 +57,15 @@ func (c *Client) CancelMaintenanceWindowExecution(ctx context.Context, params *C
 }
 
 type CancelMaintenanceWindowExecutionInput struct {
+
 	// The ID of the maintenance window execution to stop.
+	//
+	// This member is required.
 	WindowExecutionId *string
 }
 
 type CancelMaintenanceWindowExecutionOutput struct {
+
 	// The ID of the maintenance window execution that has been stopped.
 	WindowExecutionId *string
 

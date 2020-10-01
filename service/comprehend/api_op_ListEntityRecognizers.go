@@ -60,18 +60,23 @@ func (c *Client) ListEntityRecognizers(ctx context.Context, params *ListEntityRe
 }
 
 type ListEntityRecognizersInput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// The maximum number of results to return on each page. The default is 100.
 	MaxResults *int32
+
 	// Filters the list of entities returned. You can filter on Status,
 	// SubmitTimeBefore, or SubmitTimeAfter. You can only set one filter at a time.
 	Filter *types.EntityRecognizerFilter
 }
 
 type ListEntityRecognizersOutput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// The list of properties of an entity recognizer.
 	EntityRecognizerPropertiesList []*types.EntityRecognizerProperties
 

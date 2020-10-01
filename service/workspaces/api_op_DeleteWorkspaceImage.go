@@ -57,7 +57,10 @@ func (c *Client) DeleteWorkspaceImage(ctx context.Context, params *DeleteWorkspa
 }
 
 type DeleteWorkspaceImageInput struct {
+
 	// The identifier of the image.
+	//
+	// This member is required.
 	ImageId *string
 }
 

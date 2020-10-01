@@ -57,18 +57,26 @@ func (c *Client) RejectVpcEndpointConnections(ctx context.Context, params *Rejec
 }
 
 type RejectVpcEndpointConnectionsInput struct {
+
 	// The IDs of one or more VPC endpoints.
+	//
+	// This member is required.
 	VpcEndpointIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the service.
+	//
+	// This member is required.
 	ServiceId *string
 }
 
 type RejectVpcEndpointConnectionsOutput struct {
+
 	// Information about the endpoints that were not rejected, if applicable.
 	Unsuccessful []*types.UnsuccessfulItem
 

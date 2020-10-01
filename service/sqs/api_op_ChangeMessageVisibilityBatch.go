@@ -67,11 +67,17 @@ func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *Chang
 
 //
 type ChangeMessageVisibilityBatchInput struct {
+
 	// A list of receipt handles of the messages for which the visibility timeout must
 	// be changed.
+	//
+	// This member is required.
 	Entries []*types.ChangeMessageVisibilityBatchRequestEntry
+
 	// The URL of the Amazon SQS queue whose messages' visibility is changed. Queue
 	// URLs and names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
 }
 
@@ -79,9 +85,15 @@ type ChangeMessageVisibilityBatchInput struct {
 // ChangeMessageVisibilityBatchResultEntry () tag if the message succeeds or a
 // BatchResultErrorEntry () tag if the message fails.
 type ChangeMessageVisibilityBatchOutput struct {
+
 	// A list of ChangeMessageVisibilityBatchResultEntry () items.
+	//
+	// This member is required.
 	Successful []*types.ChangeMessageVisibilityBatchResultEntry
+
 	// A list of BatchResultErrorEntry () items.
+	//
+	// This member is required.
 	Failed []*types.BatchResultErrorEntry
 
 	// Metadata pertaining to the operation's result.

@@ -57,18 +57,27 @@ func (c *Client) StartImagePipelineExecution(ctx context.Context, params *StartI
 }
 
 type StartImagePipelineExecutionInput struct {
+
 	// The idempotency token used to make this request idempotent.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The Amazon Resource Name (ARN) of the image pipeline that you want to manually
 	// invoke.
+	//
+	// This member is required.
 	ImagePipelineArn *string
 }
 
 type StartImagePipelineExecutionOutput struct {
+
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the image that was created by this request.
 	ImageBuildVersionArn *string
 

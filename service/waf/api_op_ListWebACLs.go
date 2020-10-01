@@ -61,11 +61,13 @@ func (c *Client) ListWebACLs(ctx context.Context, params *ListWebACLsInput, optF
 }
 
 type ListWebACLsInput struct {
+
 	// Specifies the number of WebACL objects that you want AWS WAF to return for this
 	// request. If you have more WebACL objects than the number that you specify for
 	// Limit, the response includes a NextMarker value that you can use to get another
 	// batch of WebACL objects.
 	Limit *int32
+
 	// If you specify a value for Limit and you have more WebACL objects than the
 	// number that you specify for Limit, AWS WAF returns a NextMarker value in the
 	// response that allows you to list another group of WebACL objects. For the second
@@ -75,8 +77,10 @@ type ListWebACLsInput struct {
 }
 
 type ListWebACLsOutput struct {
+
 	// An array of WebACLSummary () objects.
 	WebACLs []*types.WebACLSummary
+
 	// If you have more WebACL objects than the number that you specified for Limit in
 	// the request, the response includes a NextMarker value. To list more WebACL
 	// objects, submit another ListWebACLs request, and specify the NextMarker value

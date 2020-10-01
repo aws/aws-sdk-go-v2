@@ -77,8 +77,12 @@ func (c *Client) AssociateRepository(ctx context.Context, params *AssociateRepos
 }
 
 type AssociateRepositoryInput struct {
+
 	// The repository to associate.
+	//
+	// This member is required.
 	Repository *types.Repository
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. To add a new repository association, this parameter specifies a
 	// unique identifier for the new repository association that helps ensure
@@ -97,6 +101,7 @@ type AssociateRepositoryInput struct {
 }
 
 type AssociateRepositoryOutput struct {
+
 	// Information about the repository association.
 	RepositoryAssociation *types.RepositoryAssociation
 

@@ -60,14 +60,18 @@ func (c *Client) DescribeTrusts(ctx context.Context, params *DescribeTrustsInput
 // directory. If no input parameters are are provided, such as directory ID or
 // trust ID, this request describes all the trust relationships.
 type DescribeTrustsInput struct {
+
 	// The Directory ID of the AWS directory that is a part of the requested trust
 	// relationship.
 	DirectoryId *string
+
 	// The maximum number of objects to return.
 	Limit *int32
+
 	// The DescribeTrustsResult.NextToken value from a previous call to DescribeTrusts
 	// (). Pass null if this is the first call.
 	NextToken *string
+
 	// A list of identifiers of the trust relationships for which to obtain the
 	// information. If this member is null, all trust relationships that belong to the
 	// current account are returned. An empty list results in an
@@ -77,11 +81,13 @@ type DescribeTrustsInput struct {
 
 // The result of a DescribeTrust request.
 type DescribeTrustsOutput struct {
+
 	// The list of Trust objects that were retrieved. It is possible that this list
 	// contains less than the number of items specified in the Limit member of the
 	// request. This occurs if there are less than the requested number of items left
 	// to retrieve, or if the limitations of the operation have been exceeded.
 	Trusts []*types.Trust
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeTrusts () to retrieve the next set of
 	// items.

@@ -58,14 +58,21 @@ func (c *Client) GetFacet(ctx context.Context, params *GetFacetInput, optFns ...
 }
 
 type GetFacetInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the Facet (). For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
+
 	// The name of the facet to retrieve.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetFacetOutput struct {
+
 	// The Facet () structure that is associated with the facet.
 	Facet *types.Facet
 

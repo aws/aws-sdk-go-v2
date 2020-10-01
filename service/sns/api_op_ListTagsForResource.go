@@ -58,11 +58,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The ARN of the topic for which to list tags.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The tags associated with the specified topic.
 	Tags []*types.Tag
 

@@ -79,18 +79,28 @@ func (c *Client) CountPendingDecisionTasks(ctx context.Context, params *CountPen
 }
 
 type CountPendingDecisionTasksInput struct {
+
 	// The name of the domain that contains the task list.
+	//
+	// This member is required.
 	Domain *string
+
 	// The name of the task list.
+	//
+	// This member is required.
 	TaskList *types.TaskList
 }
 
 // Contains the count of tasks in a task list.
 type CountPendingDecisionTasksOutput struct {
+
 	// If set to true, indicates that the actual count was more than the maximum
 	// supported by this API and the count returned is the truncated value.
 	Truncated *bool
+
 	// The number of tasks in the task list.
+	//
+	// This member is required.
 	Count *int32
 
 	// Metadata pertaining to the operation's result.

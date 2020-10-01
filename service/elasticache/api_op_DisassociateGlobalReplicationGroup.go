@@ -58,15 +58,25 @@ func (c *Client) DisassociateGlobalReplicationGroup(ctx context.Context, params 
 }
 
 type DisassociateGlobalReplicationGroupInput struct {
+
 	// The name of the secondary cluster you wish to remove from the Global Datastore
+	//
+	// This member is required.
 	ReplicationGroupId *string
+
 	// The AWS region of secondary cluster you wish to remove from the Global Datastore
+	//
+	// This member is required.
 	ReplicationGroupRegion *string
+
 	// The name of the Global Datastore
+	//
+	// This member is required.
 	GlobalReplicationGroupId *string
 }
 
 type DisassociateGlobalReplicationGroupOutput struct {
+
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the

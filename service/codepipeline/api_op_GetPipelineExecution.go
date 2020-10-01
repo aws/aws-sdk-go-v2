@@ -59,14 +59,21 @@ func (c *Client) GetPipelineExecution(ctx context.Context, params *GetPipelineEx
 
 // Represents the input of a GetPipelineExecution action.
 type GetPipelineExecutionInput struct {
+
 	// The name of the pipeline about which you want to get execution details.
+	//
+	// This member is required.
 	PipelineName *string
+
 	// The ID of the pipeline execution about which you want to get execution details.
+	//
+	// This member is required.
 	PipelineExecutionId *string
 }
 
 // Represents the output of a GetPipelineExecution action.
 type GetPipelineExecutionOutput struct {
+
 	// Represents information about the execution of a pipeline.
 	PipelineExecution *types.PipelineExecution
 

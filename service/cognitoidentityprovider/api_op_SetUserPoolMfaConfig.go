@@ -56,8 +56,12 @@ func (c *Client) SetUserPoolMfaConfig(ctx context.Context, params *SetUserPoolMf
 }
 
 type SetUserPoolMfaConfigInput struct {
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The MFA configuration. Valid values include:
 	//
 	//     * OFF MFA will not be used for
@@ -68,13 +72,16 @@ type SetUserPoolMfaConfigInput struct {
 	//     * OPTIONAL
 	// MFA will be required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
+
 	// The software token MFA configuration.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
+
 	// The SMS text message MFA configuration.
 	SmsMfaConfiguration *types.SmsMfaConfigType
 }
 
 type SetUserPoolMfaConfigOutput struct {
+
 	// The MFA configuration. Valid values include:
 	//
 	//     * OFF MFA will not be used for
@@ -85,8 +92,10 @@ type SetUserPoolMfaConfigOutput struct {
 	//     * OPTIONAL
 	// MFA will be required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
+
 	// The software token MFA configuration.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
+
 	// The SMS text message MFA configuration.
 	SmsMfaConfiguration *types.SmsMfaConfigType
 

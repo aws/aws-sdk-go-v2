@@ -56,13 +56,18 @@ func (c *Client) StopDiscoverer(ctx context.Context, params *StopDiscovererInput
 }
 
 type StopDiscovererInput struct {
+
 	// The ID of the discoverer.
+	//
+	// This member is required.
 	DiscovererId *string
 }
 
 type StopDiscovererOutput struct {
+
 	// The state of the discoverer.
 	State types.DiscovererState
+
 	// The ID of the discoverer.
 	DiscovererId *string
 

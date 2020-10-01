@@ -58,14 +58,22 @@ func (c *Client) CreateVocabulary(ctx context.Context, params *CreateVocabularyI
 }
 
 type CreateVocabularyInput struct {
+
 	// The name of the vocabulary. The name must be unique within an AWS account. The
 	// name is case-sensitive. If you try to create a vocabulary with the same name as
 	// a previous vocabulary you will receive a ConflictException error.
+	//
+	// This member is required.
 	VocabularyName *string
+
 	// The language code of the vocabulary entries.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// An array of strings that contains the vocabulary entries.
 	Phrases []*string
+
 	// The S3 location of the text file that contains the definition of the custom
 	// vocabulary. The URI must be in the same region as the API endpoint that you are
 	// calling. The general form is  <p>For more information about S3 object names, see
@@ -79,16 +87,21 @@ type CreateVocabularyInput struct {
 }
 
 type CreateVocabularyOutput struct {
+
 	// The date and time that the vocabulary was created.
 	LastModifiedTime *time.Time
+
 	// The processing state of the vocabulary. When the VocabularyState field contains
 	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
 	VocabularyState types.VocabularyState
+
 	// If the VocabularyState field is FAILED, this field contains information about
 	// why the job failed.
 	FailureReason *string
+
 	// The language code of the vocabulary entries.
 	LanguageCode types.LanguageCode
+
 	// The name of the vocabulary.
 	VocabularyName *string
 

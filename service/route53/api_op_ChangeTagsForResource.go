@@ -61,18 +61,26 @@ func (c *Client) ChangeTagsForResource(ctx context.Context, params *ChangeTagsFo
 // A complex type that contains information about the tags that you want to add,
 // edit, or delete.
 type ChangeTagsForResourceInput struct {
+
 	// The ID of the resource for which you want to add, change, or delete tags.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// A complex type that contains a list of the tags that you want to delete from the
 	// specified health check or hosted zone. You can specify up to 10 keys.
 	RemoveTagKeys []*string
+
 	// The type of the resource.
 	//
 	//     * The resource type for health checks is
 	// healthcheck.
 	//
 	//     * The resource type for hosted zones is hostedzone.
+	//
+	// This member is required.
 	ResourceType types.TagResourceType
+
 	// A complex type that contains a list of the tags that you want to add to the
 	// specified health check or hosted zone and/or the tags that you want to edit
 	// Value for. You can add a maximum of 10 tags to a health check or a hosted zone.

@@ -55,15 +55,26 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 
 type HttpRequestWithLabelsInput struct {
 	String_ *string
-	Short   *int16
+
+	Short *int16
+
 	Integer *int32
-	Long    *int64
-	Float   *float32
-	Double  *float64
+
+	Long *int64
+
+	Float *float32
+
+	Double *float64
+
 	// Serialized in the path as true or false.
+	//
+	// This member is required.
 	Boolean *bool
+
 	// Note that this member has no format, so it's serialized as an RFC 3399
 	// date-time.
+	//
+	// This member is required.
 	Timestamp *time.Time
 }
 

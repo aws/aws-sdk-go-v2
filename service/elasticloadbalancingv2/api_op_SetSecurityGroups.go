@@ -57,13 +57,20 @@ func (c *Client) SetSecurityGroups(ctx context.Context, params *SetSecurityGroup
 }
 
 type SetSecurityGroupsInput struct {
+
 	// The Amazon Resource Name (ARN) of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerArn *string
+
 	// The IDs of the security groups.
+	//
+	// This member is required.
 	SecurityGroups []*string
 }
 
 type SetSecurityGroupsOutput struct {
+
 	// The IDs of the security groups associated with the load balancer.
 	SecurityGroupIds []*string
 

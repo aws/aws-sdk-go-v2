@@ -59,20 +59,25 @@ func (c *Client) ListSuppressedDestinations(ctx context.Context, params *ListSup
 // A request to obtain a list of email destinations that are on the suppression
 // list for your account.
 type ListSuppressedDestinationsInput struct {
+
 	// Used to filter the list of suppressed email destinations so that it only
 	// includes addresses that were added to the list before a specific date. The date
 	// that you specify should be in Unix time format.
 	EndDate *time.Time
+
 	// A token returned from a previous call to ListSuppressedDestinations to indicate
 	// the position in the list of suppressed email addresses.
 	NextToken *string
+
 	// The number of results to show in a single call to ListSuppressedDestinations. If
 	// the number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
+
 	// The factors that caused the email address to be added to .
 	Reasons []types.SuppressionListReason
+
 	// Used to filter the list of suppressed email destinations so that it only
 	// includes addresses that were added to the list after a specific date. The date
 	// that you specify should be in Unix time format.
@@ -81,9 +86,11 @@ type ListSuppressedDestinationsInput struct {
 
 // A list of suppressed email addresses.
 type ListSuppressedDestinationsOutput struct {
+
 	// A list of summaries, each containing a summary for a suppressed email
 	// destination.
 	SuppressedDestinationSummaries []*types.SuppressedDestinationSummary
+
 	// A token that indicates that there are additional email addresses on the
 	// suppression list for your account. To view additional suppressed addresses,
 	// issue another request to ListSuppressedDestinations, and pass this token in the

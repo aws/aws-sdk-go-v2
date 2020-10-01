@@ -56,12 +56,16 @@ func (c *Client) DescribeDocumentClassifier(ctx context.Context, params *Describ
 }
 
 type DescribeDocumentClassifierInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the document classifier. The
 	// operation returns this identifier in its response.
+	//
+	// This member is required.
 	DocumentClassifierArn *string
 }
 
 type DescribeDocumentClassifierOutput struct {
+
 	// An object that contains the properties associated with a document classifier.
 	DocumentClassifierProperties *types.DocumentClassifierProperties
 

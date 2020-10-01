@@ -102,26 +102,38 @@ func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns
 }
 
 type CreateRuleInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	//
 	Tags []*types.Tag
+
 	// A friendly name or description of the Rule (). You can't change the name of a
 	// Rule after you create it.
+	//
+	// This member is required.
 	Name *string
+
 	// A friendly name or description for the metrics for this Rule. The name can
 	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128
 	// and minimum length one. It can't contain whitespace or metric names reserved for
 	// AWS WAF, including "All" and "Default_Action." You can't change the name of the
 	// metric after you create the Rule.
+	//
+	// This member is required.
 	MetricName *string
 }
 
 type CreateRuleOutput struct {
+
 	// The ChangeToken that you used to submit the CreateRule request. You can also use
 	// this value to query the status of the request. For more information, see
 	// GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// The Rule () returned in the CreateRule response.
 	Rule *types.Rule
 

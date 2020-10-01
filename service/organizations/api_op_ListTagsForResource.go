@@ -59,21 +59,27 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
 	// The ID of the resource that you want to retrieve tags for.
+	//
+	// This member is required.
 	ResourceId *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// The tags that are assigned to the resource.
 	Tags []*types.Tag
 

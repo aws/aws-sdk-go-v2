@@ -56,12 +56,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource that you want to list tags for.
 	// To get the ARN, send a GET request with the resource name.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
 	// resource.
 	ResourceTags *types.ResourceTags

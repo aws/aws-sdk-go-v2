@@ -54,23 +54,31 @@ func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *Search
 }
 
 type SearchAvailablePhoneNumbersInput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The toll-free prefix that you use to filter results.
 	TollFreePrefix *string
+
 	// The country used to filter results.
 	Country *string
+
 	// The city used to filter results.
 	City *string
+
 	// The state used to filter results.
 	State *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The area code used to filter results.
 	AreaCode *string
 }
 
 type SearchAvailablePhoneNumbersOutput struct {
+
 	// List of phone numbers, in E.164 format.
 	E164PhoneNumbers []*string
 

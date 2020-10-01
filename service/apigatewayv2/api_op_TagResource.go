@@ -56,8 +56,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 // Creates a new Tag resource to represent a tag.
 type TagResourceInput struct {
+
 	// The resource ARN for the tag.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 }

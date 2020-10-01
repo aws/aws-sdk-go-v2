@@ -58,18 +58,26 @@ func (c *Client) GetPullRequestOverrideState(ctx context.Context, params *GetPul
 }
 
 type GetPullRequestOverrideStateInput struct {
+
 	// The ID of the pull request for which you want to get information about whether
 	// approval rules have been set aside (overridden).
+	//
+	// This member is required.
 	PullRequestId *string
+
 	// The system-generated ID of the revision for the pull request. To retrieve the
 	// most recent revision ID, use GetPullRequest ().
+	//
+	// This member is required.
 	RevisionId *string
 }
 
 type GetPullRequestOverrideStateOutput struct {
+
 	// The Amazon Resource Name (ARN) of the user or identity that overrode the rules
 	// and their requirements for the pull request.
 	Overrider *string
+
 	// A Boolean value that indicates whether a pull request has had its rules set
 	// aside (TRUE) or whether all approval rules still apply (FALSE).
 	Overridden *bool

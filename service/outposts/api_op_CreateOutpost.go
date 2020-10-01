@@ -56,20 +56,28 @@ func (c *Client) CreateOutpost(ctx context.Context, params *CreateOutpostInput, 
 }
 
 type CreateOutpostInput struct {
+
 	// The name of the Outpost.
 	Name *string
+
 	// The Availability Zone. You must specify AvailabilityZone or AvailabilityZoneId.
 	AvailabilityZone *string
+
 	// The ID of the Availability Zone. You must specify AvailabilityZone or
 	// AvailabilityZoneId.
 	AvailabilityZoneId *string
+
 	// The ID of the site.
+	//
+	// This member is required.
 	SiteId *string
+
 	// The Outpost description.
 	Description *string
 }
 
 type CreateOutpostOutput struct {
+
 	// Information about an Outpost.
 	Outpost *types.Outpost
 

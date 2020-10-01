@@ -69,16 +69,22 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 
 // The request to create a new distribution.
 type CreateDistributionInput struct {
+
 	// The distribution's configuration information.
+	//
+	// This member is required.
 	DistributionConfig *types.DistributionConfig
 }
 
 // The returned result of the corresponding request.
 type CreateDistributionOutput struct {
+
 	// The distribution's information.
 	Distribution *types.Distribution
+
 	// The current version of the distribution created.
 	ETag *string
+
 	// The fully qualified URI of the new distribution resource just created.
 	Location *string
 

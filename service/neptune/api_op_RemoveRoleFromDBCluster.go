@@ -55,10 +55,16 @@ func (c *Client) RemoveRoleFromDBCluster(ctx context.Context, params *RemoveRole
 }
 
 type RemoveRoleFromDBClusterInput struct {
+
 	// The name of the DB cluster to disassociate the IAM role from.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB
 	// cluster, for example arn:aws:iam::123456789012:role/NeptuneAccessRole.
+	//
+	// This member is required.
 	RoleArn *string
 }
 

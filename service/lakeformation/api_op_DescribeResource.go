@@ -57,11 +57,15 @@ func (c *Client) DescribeResource(ctx context.Context, params *DescribeResourceI
 }
 
 type DescribeResourceInput struct {
+
 	// The resource ARN.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type DescribeResourceOutput struct {
+
 	// A structure containing information about an AWS Lake Formation resource.
 	ResourceInfo *types.ResourceInfo
 

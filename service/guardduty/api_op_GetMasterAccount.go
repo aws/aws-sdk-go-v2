@@ -57,12 +57,18 @@ func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountI
 }
 
 type GetMasterAccountInput struct {
+
 	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type GetMasterAccountOutput struct {
+
 	// The master account details.
+	//
+	// This member is required.
 	Master *types.Master
 
 	// Metadata pertaining to the operation's result.

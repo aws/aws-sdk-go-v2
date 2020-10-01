@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // One or more of of request parameters specified is not valid.
@@ -24,12 +23,6 @@ func (e *InvalidArgsException) ErrorMessage() string {
 }
 func (e *InvalidArgsException) ErrorCode() string             { return "InvalidArgsException" }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidArnException struct {
@@ -47,12 +40,6 @@ func (e *InvalidArnException) ErrorMessage() string {
 }
 func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more values in the DomainValidationOption () structure is incorrect.
 type InvalidDomainValidationOptionsException struct {
@@ -74,12 +61,6 @@ func (e *InvalidDomainValidationOptionsException) ErrorCode() string {
 func (e *InvalidDomainValidationOptionsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDomainValidationOptionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDomainValidationOptionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An input parameter was invalid.
 type InvalidParameterException struct {
@@ -97,12 +78,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing has reached an invalid state.
 type InvalidStateException struct {
@@ -120,12 +95,6 @@ func (e *InvalidStateException) ErrorMessage() string {
 }
 func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or both of the values that make up the key-value pair is not valid. For
 // example, you cannot specify a tag value that begins with aws:.
@@ -144,12 +113,6 @@ func (e *InvalidTagException) ErrorMessage() string {
 }
 func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An ACM quota has been exceeded.
 type LimitExceededException struct {
@@ -167,12 +130,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The certificate request is in process and the certificate in your account has
 // not yet been issued.
@@ -191,12 +148,6 @@ func (e *RequestInProgressException) ErrorMessage() string {
 }
 func (e *RequestInProgressException) ErrorCode() string             { return "RequestInProgressException" }
 func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The certificate is in use by another AWS service in the caller's account. Remove
 // the association and try again.
@@ -215,12 +166,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified certificate cannot be found in the caller's account or the
 // caller's account cannot be found.
@@ -239,12 +184,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified tag did not comply with an existing tag policy and was rejected.
 type TagPolicyException struct {
@@ -262,12 +201,6 @@ func (e *TagPolicyException) ErrorMessage() string {
 }
 func (e *TagPolicyException) ErrorCode() string             { return "TagPolicyException" }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request contains too many tags. Try the request again with fewer tags.
 type TooManyTagsException struct {
@@ -285,9 +218,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

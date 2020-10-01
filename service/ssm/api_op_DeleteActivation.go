@@ -58,7 +58,10 @@ func (c *Client) DeleteActivation(ctx context.Context, params *DeleteActivationI
 }
 
 type DeleteActivationInput struct {
+
 	// The ID of the activation that you want to delete.
+	//
+	// This member is required.
 	ActivationId *string
 }
 

@@ -64,13 +64,18 @@ func (c *Client) GetBucketAcl(ctx context.Context, params *GetBucketAclInput, op
 }
 
 type GetBucketAclInput struct {
+
 	// Specifies the S3 bucket whose ACL is being requested.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketAclOutput struct {
+
 	// A list of grants.
 	Grants []*types.Grant
+
 	// Container for the bucket owner's display name and ID.
 	Owner *types.Owner
 

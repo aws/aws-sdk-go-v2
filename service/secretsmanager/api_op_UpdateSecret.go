@@ -122,6 +122,7 @@ func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, op
 }
 
 type UpdateSecretInput struct {
+
 	// (Optional) Specifies updated binary data that you want to encrypt and store in
 	// the new version of the secret. To use this parameter in the command-line tools,
 	// we recommend that you store your binary data in a file and then use the
@@ -130,6 +131,7 @@ type UpdateSecretInput struct {
 	// They cannot both be empty. This parameter is not accessible using the Secrets
 	// Manager console.
 	SecretBinary []byte
+
 	// (Optional) Specifies updated text data that you want to encrypt and store in
 	// this new version of the secret. Either SecretBinary or SecretString must have a
 	// value, but not both. They cannot both be empty. If you create this secret by
@@ -150,6 +152,7 @@ type UpdateSecretInput struct {
 	// double-quotes. All of the embedded double quotes are escaped:
 	// "[{\"username\":\"bob\"},{\"password\":\"abc123xyz456\"}]"
 	SecretString *string
+
 	// (Optional) Specifies an updated ARN or alias of the AWS KMS customer master key
 	// (CMK) to be used to encrypt the protected text in new versions of this secret.
 	// You can only use the account's default CMK to encrypt and decrypt if you call
@@ -158,8 +161,10 @@ type UpdateSecretInput struct {
 	// provide the ARN of that CMK in this field. The user making the call must have
 	// permissions to both the secret and the CMK in their respective accounts.
 	KmsKeyId *string
+
 	// (Optional) Specifies an updated user-provided description of the secret.
 	Description *string
+
 	// Specifies the secret that you want to modify or to which you want to add a new
 	// version. You can specify either the Amazon Resource Name (ARN) or the friendly
 	// name of the secret. If you specify an ARN, we generally recommend that you
@@ -177,7 +182,10 @@ type UpdateSecretInput struct {
 	// random suffix. If you do include the random suffix added by Secrets Manager, you
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
+
 	// (Optional) If you want to add a new version to the secret, this parameter
 	// specifies a unique identifier for the new version that helps ensure idempotency.
 	// If you use the AWS CLI or one of the AWS SDK to call this operation, then you
@@ -212,6 +220,7 @@ type UpdateSecretInput struct {
 }
 
 type UpdateSecretOutput struct {
+
 	// The ARN of the secret that was updated. Secrets Manager automatically adds
 	// several random characters to the name at the end of the ARN when you initially
 	// create a secret. This affects only the ARN and not the actual friendly name.
@@ -219,9 +228,11 @@ type UpdateSecretOutput struct {
 	// that you previously deleted, then users with access to the old secret don't
 	// automatically get access to the new secret because the ARNs are different.
 	ARN *string
+
 	// If a new version of the secret was created by this operation, then VersionId
 	// contains the unique identifier of the new version.
 	VersionId *string
+
 	// The friendly name of the secret that was updated.
 	Name *string
 

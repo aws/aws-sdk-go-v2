@@ -55,9 +55,15 @@ func (c *Client) AssociateIpGroups(ctx context.Context, params *AssociateIpGroup
 }
 
 type AssociateIpGroupsInput struct {
+
 	// The identifiers of one or more IP access control groups.
+	//
+	// This member is required.
 	GroupIds []*string
+
 	// The identifier of the directory.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 

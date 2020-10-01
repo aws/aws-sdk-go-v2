@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // A conflicting operation is already in progress.
@@ -24,12 +23,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An unknown internal error occurred.
 type InternalServerException struct {
@@ -47,12 +40,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One of the specified resources was not found.
 type ResourceNotFoundException struct {
@@ -70,12 +57,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A parameter could not be validated.
 type ValidationException struct {
@@ -93,9 +74,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

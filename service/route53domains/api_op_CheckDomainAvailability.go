@@ -59,8 +59,10 @@ func (c *Client) CheckDomainAvailability(ctx context.Context, params *CheckDomai
 
 // The CheckDomainAvailability request contains the following elements.
 type CheckDomainAvailabilityInput struct {
+
 	// Reserved for future use.
 	IdnLangCode *string
+
 	// The name of the domain that you want to get availability for. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
 	// supported TLDs, see Domains that You Can Register with Amazon Route 53
@@ -86,11 +88,14 @@ type CheckDomainAvailabilityInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
 	// For more information, see Formatting Internationalized Domain Names
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The CheckDomainAvailability response includes the following elements.
 type CheckDomainAvailabilityOutput struct {
+
 	// Whether the domain name is available for registering. You can register only
 	// domains designated as AVAILABLE. Valid values: AVAILABLE The domain name is
 	// available. AVAILABLE_RESERVED The domain name is reserved under specific
@@ -104,6 +109,8 @@ type CheckDomainAvailabilityOutput struct {
 	// name has been reserved for another person or organization. UNAVAILABLE The
 	// domain name is not available. UNAVAILABLE_PREMIUM The domain name is not
 	// available. UNAVAILABLE_RESTRICTED The domain name is forbidden.
+	//
+	// This member is required.
 	Availability types.DomainAvailability
 
 	// Metadata pertaining to the operation's result.

@@ -55,10 +55,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The ARN of the canary that you're removing tags from. The ARN format of a canary
 	// is arn:aws:synthetics:Region:account-id:canary:canary-name .
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The list of tag keys to remove from the resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

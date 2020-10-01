@@ -56,10 +56,13 @@ func (c *Client) GetFindingStatistics(ctx context.Context, params *GetFindingSta
 }
 
 type GetFindingStatisticsInput struct {
+
 	// The maximum number of items to include in each page of the response.
 	Size *int32
+
 	// The criteria to use to sort the query results.
 	SortCriteria *types.FindingStatisticsSortCriteria
+
 	// The finding property to use to group the query results. Valid values are:
 	//
 	//     *
@@ -75,12 +78,16 @@ type GetFindingStatisticsInput struct {
 	//     * type - The type of
 	// finding, such as Policy:IAMUser/S3BucketPublic and
 	// SensitiveData:S3Object/Personal.
+	//
+	// This member is required.
 	GroupBy types.GroupBy
+
 	// The criteria to use to filter the query results.
 	FindingCriteria *types.FindingCriteria
 }
 
 type GetFindingStatisticsOutput struct {
+
 	// An array of objects, one for each group of findings that meet the filter
 	// criteria specified in the request.
 	CountsByGroup []*types.GroupCount

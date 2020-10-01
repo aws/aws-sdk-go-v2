@@ -56,11 +56,15 @@ func (c *Client) GetBackupPlanFromJSON(ctx context.Context, params *GetBackupPla
 }
 
 type GetBackupPlanFromJSONInput struct {
+
 	// A customer-supplied backup plan document in JSON format.
+	//
+	// This member is required.
 	BackupPlanTemplateJson *string
 }
 
 type GetBackupPlanFromJSONOutput struct {
+
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
 	// sets of Rules.
 	BackupPlan *types.BackupPlan

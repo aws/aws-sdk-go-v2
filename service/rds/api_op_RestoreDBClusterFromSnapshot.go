@@ -68,6 +68,7 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 
 //
 type RestoreDBClusterFromSnapshotInput struct {
+
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default DB cluster parameter group for the
 	// specified engine is used. Constraints:
@@ -83,9 +84,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//     *
 	// Can't end with a hyphen or contain two consecutive hyphens.
 	DBClusterParameterGroupName *string
+
 	// A value that indicates whether to copy all tags from the restored DB cluster to
 	// snapshots of the restored DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool
+
 	// The name of the DB cluster to create from the DB snapshot or DB cluster
 	// snapshot. This parameter isn't case-sensitive. Constraints:
 	//
@@ -99,18 +102,25 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// hyphens
 	//
 	// Example: my-snapshot-id
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The name of the option group to use for the restored DB cluster.
 	OptionGroupName *string
+
 	// The port number on which the new DB cluster accepts connections. Constraints:
 	// This value must be 1150-65535 Default: The same port as the original DB cluster.
 	Port *int32
+
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled.
 	DeletionProtection *bool
+
 	// The database name for the restored DB cluster.
 	DatabaseName *string
+
 	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from a
 	// DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon
 	// Resource Name (ARN) for the KMS encryption key. If you are restoring a DB
@@ -128,9 +138,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// SnapshotIdentifier isn't encrypted, then the restored DB cluster isn't
 	// encrypted.
 	KmsKeyId *string
+
 	// For DB clusters in serverless DB engine mode, the scaling properties of the DB
 	// cluster.
 	ScalingConfiguration *types.ScalingConfiguration
+
 	// The version of the database engine to use for the new DB cluster. To list all of
 	// the available engine versions for aurora (for MySQL 5.6-compatible Aurora), use
 	// the following command: aws rds describe-db-engine-versions --engine aurora
@@ -145,48 +157,64 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// 5.6.10a, 5.6.mysql_aurora.1.19.2, 5.7.12, 5.7.mysql_aurora.2.04.5 Aurora
 	// PostgreSQL Example: 9.6.3, 10.7
 	EngineVersion *string
+
 	// Specify the name of the IAM role to be used when making API calls to the
 	// Directory Service.
 	DomainIAMRoleName *string
+
 	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
 	// Logs. The values in the list depend on the DB engine being used. For more
 	// information, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []*string
+
 	// The database engine to use for the new DB cluster. Default: The same as source
 	// Constraint: Must be compatible with the engine of the source
+	//
+	// This member is required.
 	Engine *string
+
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	// <p>For more information, see <a
 	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
 	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
 	EnableIAMDatabaseAuthentication *bool
+
 	// Provides the list of Availability Zones (AZs) where instances in the restored DB
 	// cluster can be created.
 	AvailabilityZones []*string
+
 	// The identifier for the DB snapshot or DB cluster snapshot to restore from. You
 	// can use either the name or the Amazon Resource Name (ARN) to specify a DB
 	// cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
 	// Constraints:
 	//
 	//     * Must match the identifier of an existing Snapshot.
+	//
+	// This member is required.
 	SnapshotIdentifier *string
+
 	// The DB engine mode of the DB cluster, either provisioned, serverless,
 	// parallelquery, global, or multimaster.
 	EngineMode *string
+
 	// The name of the DB subnet group to use for the new DB cluster. Constraints: If
 	// supplied, must match the name of an existing DB subnet group. Example:
 	// mySubnetgroup
 	DBSubnetGroupName *string
+
 	// A list of VPC security groups that the new DB cluster will belong to.
 	VpcSecurityGroupIds []*string
+
 	// The tags to be assigned to the restored DB cluster.
 	Tags []*types.Tag
+
 	// Specify the Active Directory directory ID to restore the DB cluster in. The
 	// domain must be created prior to this operation.
 	Domain *string
+
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
@@ -197,6 +225,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 }
 
 type RestoreDBClusterFromSnapshotOutput struct {
+
 	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
 	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
 	// actions.

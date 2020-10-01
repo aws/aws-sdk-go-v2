@@ -58,16 +58,27 @@ func (c *Client) DescribePackageVersion(ctx context.Context, params *DescribePac
 }
 
 type DescribePackageVersionInput struct {
+
 	// The name of the domain that contains the repository that contains the package
 	// version.
+	//
+	// This member is required.
 	Domain *string
+
 	// The name of the requested package version.
+	//
+	// This member is required.
 	Package *string
+
 	// The name of the repository that contains the package version.
+	//
+	// This member is required.
 	Repository *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -80,6 +91,7 @@ type DescribePackageVersionInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// A format that specifies the type of the requested package version. The valid
 	// values are:
 	//
@@ -88,15 +100,23 @@ type DescribePackageVersionInput struct {
 	//     * pypi
 	//
 	//     * maven
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// A string that contains the package version (for example, 3.5.2).
+	//
+	// This member is required.
 	PackageVersion *string
 }
 
 type DescribePackageVersionOutput struct {
+
 	// A PackageVersionDescription
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
 	// object that contains information about the requested package version.
+	//
+	// This member is required.
 	PackageVersion *types.PackageVersionDescription
 
 	// Metadata pertaining to the operation's result.

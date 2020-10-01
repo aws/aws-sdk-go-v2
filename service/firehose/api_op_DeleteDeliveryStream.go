@@ -63,8 +63,12 @@ func (c *Client) DeleteDeliveryStream(ctx context.Context, params *DeleteDeliver
 }
 
 type DeleteDeliveryStreamInput struct {
+
 	// The name of the delivery stream.
+	//
+	// This member is required.
 	DeliveryStreamName *string
+
 	// Set this to true if you want to delete the delivery stream even if Kinesis Data
 	// Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose might
 	// be unable to retire the grant due to a customer error, such as when the CMK or

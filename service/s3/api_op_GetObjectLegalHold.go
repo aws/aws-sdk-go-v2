@@ -60,8 +60,12 @@ func (c *Client) GetObjectLegalHold(ctx context.Context, params *GetObjectLegalH
 }
 
 type GetObjectLegalHoldInput struct {
+
 	// The key name for the object whose Legal Hold status you want to retrieve.
+	//
+	// This member is required.
 	Key *string
+
 	// The bucket name containing the object whose Legal Hold status you want to
 	// retrieve. When using this API with an access point, you must direct requests to
 	// the access point hostname. The access point hostname takes the form
@@ -71,7 +75,10 @@ type GetObjectLegalHoldInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -79,11 +86,13 @@ type GetObjectLegalHoldInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// The version ID of the object whose Legal Hold status you want to retrieve.
 	VersionId *string
 }
 
 type GetObjectLegalHoldOutput struct {
+
 	// The current Legal Hold status for the specified object.
 	LegalHold *types.ObjectLockLegalHold
 

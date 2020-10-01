@@ -56,12 +56,22 @@ func (c *Client) UpdateFindingsFeedback(ctx context.Context, params *UpdateFindi
 }
 
 type UpdateFindingsFeedbackInput struct {
+
 	// The ID of the detector associated with the findings to update feedback for.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The IDs of the findings that you want to mark as useful or not useful.
+	//
+	// This member is required.
 	FindingIds []*string
+
 	// The feedback for the finding.
+	//
+	// This member is required.
 	Feedback types.Feedback
+
 	// Additional feedback about the GuardDuty findings.
 	Comments *string
 }

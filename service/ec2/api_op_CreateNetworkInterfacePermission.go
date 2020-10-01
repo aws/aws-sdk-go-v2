@@ -59,23 +59,33 @@ func (c *Client) CreateNetworkInterfacePermission(ctx context.Context, params *C
 
 // Contains the parameters for CreateNetworkInterfacePermission.
 type CreateNetworkInterfacePermissionInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
+
 	// The AWS account ID.
 	AwsAccountId *string
+
 	// The AWS service. Currently not supported.
 	AwsService *string
+
 	// The type of permission to grant.
+	//
+	// This member is required.
 	Permission types.InterfacePermissionType
 }
 
 // Contains the output of CreateNetworkInterfacePermission.
 type CreateNetworkInterfacePermissionOutput struct {
+
 	// Information about the permission for the network interface.
 	InterfacePermission *types.NetworkInterfacePermission
 

@@ -57,23 +57,37 @@ func (c *Client) DescribeCodeBinding(ctx context.Context, params *DescribeCodeBi
 }
 
 type DescribeCodeBindingInput struct {
+
 	// Specifying this limits the results to only this schema version.
 	SchemaVersion *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The language of the code binding.
+	//
+	// This member is required.
 	Language *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
 }
 
 type DescribeCodeBindingOutput struct {
+
 	// The version number of the schema.
 	SchemaVersion *string
+
 	// The time and date that the code binding was created.
 	CreationDate *time.Time
+
 	// The date and time that code bindings were modified.
 	LastModified *time.Time
+
 	// The current status of code binding generation.
 	Status types.CodeGenerationStatus
 

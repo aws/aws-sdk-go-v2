@@ -65,12 +65,16 @@ func (c *Client) ResetCache(ctx context.Context, params *ResetCacheInput, optFns
 }
 
 type ResetCacheInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 type ResetCacheOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

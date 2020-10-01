@@ -57,19 +57,24 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 }
 
 type ListDatasetsInput struct {
+
 	// The maximum number of datasets to return.
 	MaxResults *int32
+
 	// A token returned from the previous call to ListDatasetImportJobs for getting the
 	// next set of dataset import jobs (if they exist).
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the dataset group that contains the datasets
 	// to list.
 	DatasetGroupArn *string
 }
 
 type ListDatasetsOutput struct {
+
 	// A token for getting the next set of datasets (if they exist).
 	NextToken *string
+
 	// An array of Dataset objects. Each object provides metadata information.
 	Datasets []*types.DatasetSummary
 

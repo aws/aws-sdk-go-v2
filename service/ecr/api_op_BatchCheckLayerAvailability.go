@@ -61,18 +61,27 @@ func (c *Client) BatchCheckLayerAvailability(ctx context.Context, params *BatchC
 }
 
 type BatchCheckLayerAvailabilityInput struct {
+
 	// The AWS account ID associated with the registry that contains the image layers
 	// to check. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The digests of the image layers to check.
+	//
+	// This member is required.
 	LayerDigests []*string
+
 	// The name of the repository that is associated with the image layers to check.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type BatchCheckLayerAvailabilityOutput struct {
+
 	// Any failures associated with the call.
 	Failures []*types.LayerFailure
+
 	// A list of image layer objects corresponding to the image layer references in the
 	// request.
 	Layers []*types.Layer

@@ -55,7 +55,10 @@ func (c *Client) DeleteSnapshotSchedule(ctx context.Context, params *DeleteSnaps
 }
 
 type DeleteSnapshotScheduleInput struct {
+
 	// A unique identifier of the snapshot schedule to delete.
+	//
+	// This member is required.
 	ScheduleIdentifier *string
 }
 

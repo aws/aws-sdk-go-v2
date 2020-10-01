@@ -58,7 +58,10 @@ func (c *Client) StartNotebookInstance(ctx context.Context, params *StartNoteboo
 }
 
 type StartNotebookInstanceInput struct {
+
 	// The name of the notebook instance to start.
+	//
+	// This member is required.
 	NotebookInstanceName *string
 }
 

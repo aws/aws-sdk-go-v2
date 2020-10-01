@@ -56,33 +56,46 @@ func (c *Client) GetSubscriptionDefinitionVersion(ctx context.Context, params *G
 }
 
 type GetSubscriptionDefinitionVersionInput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The ID of the subscription definition.
+	//
+	// This member is required.
 	SubscriptionDefinitionId *string
+
 	// The ID of the subscription definition version. This value maps to the
 	// ''Version'' property of the corresponding ''VersionInformation'' object, which
 	// is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version
 	// is the last one that was associated with a subscription definition, the value
 	// also maps to the ''LatestVersion'' property of the corresponding
 	// ''DefinitionInformation'' object.
+	//
+	// This member is required.
 	SubscriptionDefinitionVersionId *string
 }
 
 type GetSubscriptionDefinitionVersionOutput struct {
+
 	// The ID of the subscription definition version.
 	Id *string
+
 	// The ARN of the subscription definition version.
 	Arn *string
+
 	// Information about the subscription definition version.
 	Definition *types.SubscriptionDefinitionVersion
+
 	// The time, in milliseconds since the epoch, when the subscription definition
 	// version was created.
 	CreationTimestamp *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The version of the subscription definition version.
 	Version *string
 

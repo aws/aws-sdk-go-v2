@@ -57,11 +57,17 @@ func (c *Client) DeleteSlotTypeVersion(ctx context.Context, params *DeleteSlotTy
 }
 
 type DeleteSlotTypeVersionInput struct {
+
 	// The version of the slot type to delete. You cannot delete the $LATEST version of
 	// the slot type. To delete the $LATEST version, use the DeleteSlotType ()
 	// operation.
+	//
+	// This member is required.
 	Version *string
+
 	// The name of the slot type.
+	//
+	// This member is required.
 	Name *string
 }
 

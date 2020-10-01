@@ -57,17 +57,22 @@ func (c *Client) ListDomainConfigurations(ctx context.Context, params *ListDomai
 }
 
 type ListDomainConfigurationsInput struct {
+
 	// The marker for the next set of results.
 	Marker *string
+
 	// The type of service delivered by the endpoint.
 	ServiceType types.ServiceType
+
 	// The result page size.
 	PageSize *int32
 }
 
 type ListDomainConfigurationsOutput struct {
+
 	// The marker for the next set of results.
 	NextMarker *string
+
 	// A list of objects that contain summary information about the user's domain
 	// configurations.
 	DomainConfigurations []*types.DomainConfigurationSummary

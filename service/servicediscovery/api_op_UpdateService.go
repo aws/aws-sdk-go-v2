@@ -78,13 +78,20 @@ func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, 
 }
 
 type UpdateServiceInput struct {
+
 	// A complex type that contains the new settings for the service.
+	//
+	// This member is required.
 	Service *types.ServiceChange
+
 	// The ID of the service that you want to update.
+	//
+	// This member is required.
 	Id *string
 }
 
 type UpdateServiceOutput struct {
+
 	// A value that you can use to determine whether the request completed
 	// successfully. To get the status of the operation, see GetOperation
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).

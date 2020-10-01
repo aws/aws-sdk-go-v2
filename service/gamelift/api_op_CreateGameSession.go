@@ -102,40 +102,51 @@ func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessio
 
 // Represents the input for a request action.
 type CreateGameSessionInput struct {
+
 	// The maximum number of players that can be connected simultaneously to the game
 	// session.
+	//
+	// This member is required.
 	MaximumPlayerSessionCount *int32
+
 	// A unique identifier for an alias associated with the fleet to create a game
 	// session in. You can use either the alias ID or ARN value. Each request must
 	// reference either a fleet ID or alias ID, but not both.
 	AliasId *string
+
 	// A unique identifier for a player or entity creating the game session. This ID is
 	// used to enforce a resource protection policy (if one exists) that limits the
 	// number of concurrent active game sessions one player can have.
 	CreatorId *string
+
 	// A descriptive label that is associated with a game session. Session names do not
 	// need to be unique.
 	Name *string
+
 	// Set of custom properties for a game session, formatted as key:value pairs. These
 	// properties are passed to a game server process in the GameSession () object with
 	// a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameProperties []*types.GameProperty
+
 	// Set of custom game session properties, formatted as a single string value. This
 	// data is passed to a game server process in the GameSession () object with a
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
+
 	// This parameter is no longer preferred. Please use IdempotencyToken instead.
 	// Custom string that uniquely identifies a request for a new game session. Maximum
 	// token length is 48 characters. If provided, this string is included in the new
 	// game session's ID. (A game session ARN has the following format:
 	// arn:aws:gamelift:::gamesession//.)
 	GameSessionId *string
+
 	// A unique identifier for a fleet to create a game session in. You can use either
 	// the fleet ID or ARN value. Each request must reference either a fleet ID or
 	// alias ID, but not both.
 	FleetId *string
+
 	// Custom string that uniquely identifies a request for a new game session. Maximum
 	// token length is 48 characters. If provided, this string is included in the new
 	// game session's ID. (A game session ARN has the following format:
@@ -147,6 +158,7 @@ type CreateGameSessionInput struct {
 
 // Represents the returned data in response to a request action.
 type CreateGameSessionOutput struct {
+
 	// Object that describes the newly created game session record.
 	GameSession *types.GameSession
 

@@ -66,6 +66,7 @@ func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfi
 }
 
 type ListConfigurationHistoryInput struct {
+
 	// The maximum number of results returned by ListConfigurationHistory in paginated
 	// output. When this parameter is used, ListConfigurationHistory returns only
 	// MaxResults in a single page along with a NextToken response element. The
@@ -73,26 +74,33 @@ type ListConfigurationHistoryInput struct {
 	// ListConfigurationHistory request with the returned NextToken value. If this
 	// parameter is not used, then ListConfigurationHistory returns all results.
 	MaxResults *int32
+
 	// Resource group to which the application belongs.
 	ResourceGroupName *string
+
 	// The NextToken value returned from a previous paginated ListConfigurationHistory
 	// request where MaxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the NextToken value. This value is null when there are no more results
 	// to return.
 	NextToken *string
+
 	// The status of the configuration update event. Possible values include INFO,
 	// WARN, and ERROR.
 	EventStatus types.ConfigurationEventStatus
+
 	// The end time of the event.
 	EndTime *time.Time
+
 	// The start time of the event.
 	StartTime *time.Time
 }
 
 type ListConfigurationHistoryOutput struct {
+
 	// The list of configuration events and their corresponding details.
 	EventList []*types.ConfigurationEvent
+
 	// The NextToken value to include in a future ListConfigurationHistory request.
 	// When the results of a ListConfigurationHistory request exceed MaxResults, this
 	// value can be used to retrieve the next page of results. This value is null when

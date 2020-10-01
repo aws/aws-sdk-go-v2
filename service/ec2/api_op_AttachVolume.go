@@ -83,13 +83,23 @@ func (c *Client) AttachVolume(ctx context.Context, params *AttachVolumeInput, op
 }
 
 type AttachVolumeInput struct {
+
 	// The ID of the EBS volume. The volume and instance must be within the same
 	// Availability Zone.
+	//
+	// This member is required.
 	VolumeId *string
+
 	// The device name (for example, /dev/sdh or xvdh).
+	//
+	// This member is required.
 	Device *string
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -99,16 +109,22 @@ type AttachVolumeInput struct {
 
 // Describes volume attachment details.
 type AttachVolumeOutput struct {
+
 	// The ID of the volume.
 	VolumeId *string
+
 	// The ID of the instance.
 	InstanceId *string
+
 	// The time stamp when the attachment initiated.
 	AttachTime *time.Time
+
 	// The device name.
 	Device *string
+
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool
+
 	// The attachment state of the volume.
 	State types.VolumeAttachmentState
 

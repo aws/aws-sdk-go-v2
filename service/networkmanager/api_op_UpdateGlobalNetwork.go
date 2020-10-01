@@ -57,14 +57,19 @@ func (c *Client) UpdateGlobalNetwork(ctx context.Context, params *UpdateGlobalNe
 }
 
 type UpdateGlobalNetworkInput struct {
+
 	// The ID of your global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// A description of the global network. Length Constraints: Maximum length of 256
 	// characters.
 	Description *string
 }
 
 type UpdateGlobalNetworkOutput struct {
+
 	// Information about the global network object.
 	GlobalNetwork *types.GlobalNetwork
 

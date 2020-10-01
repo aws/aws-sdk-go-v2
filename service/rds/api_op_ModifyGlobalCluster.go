@@ -60,15 +60,18 @@ func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalCl
 }
 
 type ModifyGlobalClusterInput struct {
+
 	// Indicates if the global database cluster has deletion protection enabled. The
 	// global database cluster can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
+
 	// The DB cluster identifier for the global cluster being modified. This parameter
 	// isn't case-sensitive. Constraints:
 	//
 	//     * Must match the identifier of an
 	// existing global database cluster.
 	GlobalClusterIdentifier *string
+
 	// The new cluster identifier for the global database cluster when modifying a
 	// global database cluster. This value is stored as a lowercase string.
 	// Constraints:
@@ -86,6 +89,7 @@ type ModifyGlobalClusterInput struct {
 }
 
 type ModifyGlobalClusterOutput struct {
+
 	// A data type representing an Aurora global database.
 	GlobalCluster *types.GlobalCluster
 

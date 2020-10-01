@@ -58,11 +58,15 @@ func (c *Client) RebootWorkspaces(ctx context.Context, params *RebootWorkspacesI
 }
 
 type RebootWorkspacesInput struct {
+
 	// The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
+	//
+	// This member is required.
 	RebootWorkspaceRequests []*types.RebootRequest
 }
 
 type RebootWorkspacesOutput struct {
+
 	// Information about the WorkSpaces that could not be rebooted.
 	FailedRequests []*types.FailedWorkspaceChangeRequest
 

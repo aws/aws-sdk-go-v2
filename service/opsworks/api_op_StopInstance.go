@@ -64,8 +64,12 @@ func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, op
 }
 
 type StopInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Specifies whether to force an instance to stop. If the instance's root device
 	// type is ebs, or EBS-backed, adding the Force parameter to the StopInstances API
 	// call disassociates the AWS OpsWorks Stacks instance from EC2, and forces

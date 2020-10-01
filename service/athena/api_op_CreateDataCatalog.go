@@ -57,13 +57,20 @@ func (c *Client) CreateDataCatalog(ctx context.Context, params *CreateDataCatalo
 }
 
 type CreateDataCatalogInput struct {
+
 	// The name of the data catalog to create. The catalog name must be unique for the
 	// AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or
 	// hyphen characters.
+	//
+	// This member is required.
 	Name *string
+
 	// The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS
 	// Glue Catalog, or HIVE for an external hive metastore.
+	//
+	// This member is required.
 	Type types.DataCatalogType
+
 	// Specifies the Lambda function or functions to use for creating the data catalog.
 	// This is a mapping whose values depend on the catalog type.
 	//
@@ -87,8 +94,10 @@ type CreateDataCatalogInput struct {
 	//
 	//     * The GLUE type has no parameters.
 	Parameters map[string]*string
+
 	// A list of comma separated tags to add to the data catalog that is created.
 	Tags []*types.Tag
+
 	// A description of the data catalog to be created.
 	Description *string
 }

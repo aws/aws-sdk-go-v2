@@ -56,9 +56,15 @@ func (c *Client) DisassociateIpGroups(ctx context.Context, params *DisassociateI
 }
 
 type DisassociateIpGroupsInput struct {
+
 	// The identifiers of one or more IP access control groups.
+	//
+	// This member is required.
 	GroupIds []*string
+
 	// The identifier of the directory.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 

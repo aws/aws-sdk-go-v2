@@ -56,6 +56,7 @@ func (c *Client) PutProvisionedConcurrencyConfig(ctx context.Context, params *Pu
 }
 
 type PutProvisionedConcurrencyConfigInput struct {
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -70,25 +71,39 @@ type PutProvisionedConcurrencyConfigInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The amount of provisioned concurrency to allocate for the version or alias.
+	//
+	// This member is required.
 	ProvisionedConcurrentExecutions *int32
+
 	// The version number or alias name.
+	//
+	// This member is required.
 	Qualifier *string
 }
 
 type PutProvisionedConcurrencyConfigOutput struct {
+
 	// The amount of provisioned concurrency available.
 	AvailableProvisionedConcurrentExecutions *int32
+
 	// The status of the allocation process.
 	Status types.ProvisionedConcurrencyStatusEnum
+
 	// For failed allocations, the reason that provisioned concurrency could not be
 	// allocated.
 	StatusReason *string
+
 	// The amount of provisioned concurrency requested.
 	RequestedProvisionedConcurrentExecutions *int32
+
 	// The amount of provisioned concurrency allocated.
 	AllocatedProvisionedConcurrentExecutions *int32
+
 	// The date and time that a user last updated the configuration, in ISO 8601 format
 	// (https://www.iso.org/iso-8601-date-and-time-format.html).
 	LastModified *string

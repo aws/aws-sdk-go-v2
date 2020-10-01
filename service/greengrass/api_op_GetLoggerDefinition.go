@@ -55,25 +55,36 @@ func (c *Client) GetLoggerDefinition(ctx context.Context, params *GetLoggerDefin
 }
 
 type GetLoggerDefinitionInput struct {
+
 	// The ID of the logger definition.
+	//
+	// This member is required.
 	LoggerDefinitionId *string
 }
 
 type GetLoggerDefinitionOutput struct {
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
+
 	// The name of the definition.
 	Name *string
+
 	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string
+
 	// Tag(s) attached to the resource arn.
 	Tags map[string]*string
+
 	// The ID of the definition.
 	Id *string
+
 	// The ARN of the definition.
 	Arn *string
+
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
+
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string
 

@@ -57,11 +57,15 @@ func (c *Client) GetNamedQuery(ctx context.Context, params *GetNamedQueryInput, 
 }
 
 type GetNamedQueryInput struct {
+
 	// The unique ID of the query. Use ListNamedQueries () to get query IDs.
+	//
+	// This member is required.
 	NamedQueryId *string
 }
 
 type GetNamedQueryOutput struct {
+
 	// Information about the query.
 	NamedQuery *types.NamedQuery
 

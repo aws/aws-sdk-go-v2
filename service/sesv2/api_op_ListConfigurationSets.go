@@ -61,11 +61,13 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 // A request to obtain a list of configuration sets for your Amazon SES account in
 // the current AWS Region.
 type ListConfigurationSetsInput struct {
+
 	// The number of results to show in a single call to ListConfigurationSets. If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
+
 	// A token returned from a previous call to ListConfigurationSets to indicate the
 	// position in the list of configuration sets.
 	NextToken *string
@@ -74,9 +76,11 @@ type ListConfigurationSetsInput struct {
 // A list of configuration sets in your Amazon SES account in the current AWS
 // Region.
 type ListConfigurationSetsOutput struct {
+
 	// An array that contains all of the configuration sets in your Amazon SES account
 	// in the current AWS Region.
 	ConfigurationSets []*string
+
 	// A token that indicates that there are additional configuration sets to list. To
 	// view additional configuration sets, issue another request to
 	// ListConfigurationSets, and pass this token in the NextToken parameter.

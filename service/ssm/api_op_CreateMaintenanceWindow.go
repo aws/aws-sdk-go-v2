@@ -64,9 +64,11 @@ func (c *Client) CreateMaintenanceWindow(ctx context.Context, params *CreateMain
 }
 
 type CreateMaintenanceWindowInput struct {
+
 	// An optional description for the maintenance window. We recommend specifying a
 	// description to help you organize your maintenance windows.
 	Description *string
+
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag a maintenance window to identify the type of
@@ -84,46 +86,67 @@ type CreateMaintenanceWindowInput struct {
 	// To add tags to an existing maintenance window,
 	// use the AddTagsToResource () action.
 	Tags []*types.Tag
+
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
+
 	// User-provided idempotency token.
 	ClientToken *string
+
 	// The date and time, in ISO-8601 Extended format, for when you want the
 	// maintenance window to become active. StartDate allows you to delay activation of
 	// the maintenance window until the specified future date.
 	StartDate *string
+
 	// The duration of the maintenance window in hours.
+	//
+	// This member is required.
 	Duration *int32
+
 	// The name of the maintenance window.
+	//
+	// This member is required.
 	Name *string
+
 	// The schedule of the maintenance window in the form of a cron or rate expression.
+	//
+	// This member is required.
 	Schedule *string
+
 	// The date and time, in ISO-8601 Extended format, for when you want the
 	// maintenance window to become inactive. EndDate allows you to set a date and time
 	// in the future when the maintenance window will no longer run.
 	EndDate *string
+
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
+	//
+	// This member is required.
 	Cutoff *int32
+
 	// The number of days to wait after the date and time specified by a CRON
 	// expression before running the maintenance window. For example, the following
 	// cron expression schedules a maintenance window to run on the third Tuesday of
 	// every month at 11:30 PM. cron(0 30 23 ? * TUE#3 *) If the schedule offset is 2,
 	// the maintenance window won't run until two days later.
 	ScheduleOffset *int32
+
 	// Enables a maintenance window task to run on managed instances, even if you have
 	// not registered those instances as targets. If enabled, then you must specify the
 	// unregistered instances (by instance ID) when you register a task with the
 	// maintenance window. If you don't enable this option, then you must specify
 	// previously-registered targets when you register a task with the maintenance
 	// window.
+	//
+	// This member is required.
 	AllowUnassociatedTargets *bool
 }
 
 type CreateMaintenanceWindowOutput struct {
+
 	// The ID of the created maintenance window.
 	WindowId *string
 

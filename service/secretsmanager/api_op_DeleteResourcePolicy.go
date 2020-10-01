@@ -70,6 +70,7 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 }
 
 type DeleteResourcePolicyInput struct {
+
 	// Specifies the secret that you want to delete the attached resource-based policy
 	// for. You can specify either the Amazon Resource Name (ARN) or the friendly name
 	// of the secret. If you specify an ARN, we generally recommend that you specify a
@@ -87,12 +88,16 @@ type DeleteResourcePolicyInput struct {
 	// random suffix. If you do include the random suffix added by Secrets Manager, you
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type DeleteResourcePolicyOutput struct {
+
 	// The friendly name of the secret that the resource-based policy was deleted for.
 	Name *string
+
 	// The ARN of the secret that the resource-based policy was deleted for.
 	ARN *string
 

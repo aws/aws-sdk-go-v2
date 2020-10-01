@@ -59,6 +59,7 @@ func (c *Client) DeleteScheduledAction(ctx context.Context, params *DeleteSchedu
 }
 
 type DeleteScheduledActionInput struct {
+
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
 	//
@@ -115,10 +116,16 @@ type DeleteScheduledActionInput struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	// This member is required.
 	ScalableDimension types.ScalableDimension
+
 	// The namespace of the AWS service that provides the resource. For a resource
 	// provided by your own application or service, use custom-resource instead.
+	//
+	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
 	// The identifier of the resource associated with the scheduled action. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -176,8 +183,13 @@ type DeleteScheduledActionInput struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The name of the scheduled action.
+	//
+	// This member is required.
 	ScheduledActionName *string
 }
 

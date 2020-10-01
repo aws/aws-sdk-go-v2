@@ -61,8 +61,11 @@ func (c *Client) StartServer(ctx context.Context, params *StartServerInput, optF
 }
 
 type StartServerInput struct {
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// that you start.
+	//
+	// This member is required.
 	ServerId *string
 }
 

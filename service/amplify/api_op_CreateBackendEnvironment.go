@@ -57,19 +57,30 @@ func (c *Client) CreateBackendEnvironment(ctx context.Context, params *CreateBac
 
 // The request structure for the backend environment create request.
 type CreateBackendEnvironmentInput struct {
+
 	// The AWS CloudFormation stack name of a backend environment.
 	StackName *string
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The name of deployment artifacts.
 	DeploymentArtifacts *string
+
 	// The name for the backend environment.
+	//
+	// This member is required.
 	EnvironmentName *string
 }
 
 // The result structure for the create backend environment request.
 type CreateBackendEnvironmentOutput struct {
+
 	// Describes the backend environment for an Amplify app.
+	//
+	// This member is required.
 	BackendEnvironment *types.BackendEnvironment
 
 	// Metadata pertaining to the operation's result.

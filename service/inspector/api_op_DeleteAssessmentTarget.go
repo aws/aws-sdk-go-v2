@@ -56,7 +56,10 @@ func (c *Client) DeleteAssessmentTarget(ctx context.Context, params *DeleteAsses
 }
 
 type DeleteAssessmentTargetInput struct {
+
 	// The ARN that specifies the assessment target that you want to delete.
+	//
+	// This member is required.
 	AssessmentTargetArn *string
 }
 

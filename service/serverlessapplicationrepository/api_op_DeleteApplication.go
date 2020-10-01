@@ -55,7 +55,10 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 }
 
 type DeleteApplicationInput struct {
+
 	// The Amazon Resource Name (ARN) of the application.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 

@@ -58,20 +58,36 @@ func (c *Client) AttachTypedLink(ctx context.Context, params *AttachTypedLinkInp
 }
 
 type AttachTypedLinkInput struct {
+
 	// Identifies the typed link facet that is associated with the typed link.
+	//
+	// This member is required.
 	TypedLinkFacet *types.TypedLinkSchemaAndFacetName
+
 	// Identifies the source object that the typed link will attach to.
+	//
+	// This member is required.
 	SourceObjectReference *types.ObjectReference
+
 	// The Amazon Resource Name (ARN) of the directory where you want to attach the
 	// typed link.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// A set of attributes that are associated with the typed link.
+	//
+	// This member is required.
 	Attributes []*types.AttributeNameAndValue
+
 	// Identifies the target object that the typed link will attach to.
+	//
+	// This member is required.
 	TargetObjectReference *types.ObjectReference
 }
 
 type AttachTypedLinkOutput struct {
+
 	// Returns a typed link specifier as output.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
 

@@ -54,6 +54,7 @@ func (c *Client) DeleteAppLaunchConfiguration(ctx context.Context, params *Delet
 }
 
 type DeleteAppLaunchConfigurationInput struct {
+
 	// ID of the application associated with the launch configuration.
 	AppId *string
 }

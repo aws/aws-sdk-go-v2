@@ -55,7 +55,10 @@ func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns
 }
 
 type DeleteRuleInput struct {
+
 	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
 	RuleArn *string
 }
 

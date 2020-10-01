@@ -96,14 +96,18 @@ func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshot
 }
 
 type DescribeSnapshotsInput struct {
+
 	// The IDs of the AWS accounts that can create volumes from the snapshot.
 	RestorableByUserIds []*string
+
 	// The snapshot IDs. Default: Describes the snapshots for which you have create
 	// volume permissions.
 	SnapshotIds []*string
+
 	// Scopes the results to snapshots with the specified owners. You can specify a
 	// combination of AWS account IDs, self, and amazon.
 	OwnerIds []*string
+
 	// The filters.
 	//
 	//     * description - A description of the snapshot.
@@ -147,11 +151,13 @@ type DescribeSnapshotsInput struct {
 	//     * volume-size - The
 	// size of the volume, in GiB.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of snapshot results returned by DescribeSnapshots in
 	// paginated output. When this parameter is used, DescribeSnapshots only returns
 	// MaxResults results in a single page along with a NextToken response element. The
@@ -162,6 +168,7 @@ type DescribeSnapshotsInput struct {
 	// returns all results. You cannot specify this parameter and the snapshot IDs
 	// parameter in the same request.
 	MaxResults *int32
+
 	// The NextToken value returned from a previous paginated DescribeSnapshots request
 	// where MaxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
@@ -170,8 +177,10 @@ type DescribeSnapshotsInput struct {
 }
 
 type DescribeSnapshotsOutput struct {
+
 	// Information about the snapshots.
 	Snapshots []*types.Snapshot
+
 	// The NextToken value to include in a future DescribeSnapshots request. When the
 	// results of a DescribeSnapshots request exceed MaxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no more

@@ -56,6 +56,7 @@ func (c *Client) PutEncryptionConfig(ctx context.Context, params *PutEncryptionC
 }
 
 type PutEncryptionConfigInput struct {
+
 	// An AWS KMS customer master key (CMK) in one of the following formats:
 	//
 	//     *
@@ -73,12 +74,16 @@ type PutEncryptionConfigInput struct {
 	// Omit this key if you
 	// set Type to NONE.
 	KeyId *string
+
 	// The type of encryption. Set to KMS to use your own key for encryption. Set to
 	// NONE for default encryption.
+	//
+	// This member is required.
 	Type types.EncryptionType
 }
 
 type PutEncryptionConfigOutput struct {
+
 	// The new encryption configuration.
 	EncryptionConfig *types.EncryptionConfig
 

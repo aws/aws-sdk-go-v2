@@ -57,14 +57,21 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 
 //
 type DeleteConnectionInput struct {
+
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
+
 	// The Amazon Resource Name (ARN) of the replication instance.
+	//
+	// This member is required.
 	ReplicationInstanceArn *string
 }
 
 //
 type DeleteConnectionOutput struct {
+
 	// The connection that is being deleted.
 	Connection *types.Connection
 

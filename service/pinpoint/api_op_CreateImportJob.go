@@ -56,19 +56,28 @@ func (c *Client) CreateImportJob(ctx context.Context, params *CreateImportJobInp
 }
 
 type CreateImportJobInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies the settings for a job that imports endpoint definitions from an
 	// Amazon Simple Storage Service (Amazon S3) bucket.
+	//
+	// This member is required.
 	ImportJobRequest *types.ImportJobRequest
 }
 
 type CreateImportJobOutput struct {
+
 	// Provides information about the status and settings of a job that imports
 	// endpoint definitions from one or more files. The files can be stored in an
 	// Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a
 	// computer by using the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ImportJobResponse *types.ImportJobResponse
 
 	// Metadata pertaining to the operation's result.

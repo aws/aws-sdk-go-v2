@@ -76,26 +76,39 @@ func (c *Client) PutPipelineDefinition(ctx context.Context, params *PutPipelineD
 
 // Contains the parameters for PutPipelineDefinition.
 type PutPipelineDefinitionInput struct {
+
 	// The objects that define the pipeline. These objects overwrite the existing
 	// pipeline definition.
+	//
+	// This member is required.
 	PipelineObjects []*types.PipelineObject
+
 	// The ID of the pipeline.
+	//
+	// This member is required.
 	PipelineId *string
+
 	// The parameter objects used with the pipeline.
 	ParameterObjects []*types.ParameterObject
+
 	// The parameter values used with the pipeline.
 	ParameterValues []*types.ParameterValue
 }
 
 // Contains the output of PutPipelineDefinition.
 type PutPipelineDefinitionOutput struct {
+
 	// Indicates whether there were validation errors, and the pipeline definition is
 	// stored but cannot be activated until you correct the pipeline and call
 	// PutPipelineDefinition to commit the corrected pipeline.
+	//
+	// This member is required.
 	Errored *bool
+
 	// The validation errors that are associated with the objects defined in
 	// pipelineObjects.
 	ValidationErrors []*types.ValidationError
+
 	// The validation warnings that are associated with the objects defined in
 	// pipelineObjects.
 	ValidationWarnings []*types.ValidationWarning

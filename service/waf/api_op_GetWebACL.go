@@ -62,12 +62,16 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 }
 
 type GetWebACLInput struct {
+
 	// The WebACLId of the WebACL () that you want to get. WebACLId is returned by
 	// CreateWebACL () and by ListWebACLs ().
+	//
+	// This member is required.
 	WebACLId *string
 }
 
 type GetWebACLOutput struct {
+
 	// Information about the WebACL () that you specified in the GetWebACL request. For
 	// more information, see the following topics:
 	//

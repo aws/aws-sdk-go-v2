@@ -59,14 +59,23 @@ func (c *Client) CreateImageRecipe(ctx context.Context, params *CreateImageRecip
 }
 
 type CreateImageRecipeInput struct {
+
 	// The components of the image recipe.
+	//
+	// This member is required.
 	Components []*types.ComponentConfiguration
+
 	// The idempotency token used to make this request idempotent.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The working directory to be used during build and test workflows.
 	WorkingDirectory *string
+
 	// The block device mappings of the image recipe.
 	BlockDeviceMappings []*types.InstanceBlockDeviceMapping
+
 	// The parent image of the image recipe. The value of the string can be the ARN of
 	// the parent image or an AMI ID. The format for the ARN follows this example:
 	// arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x.
@@ -75,23 +84,36 @@ type CreateImageRecipeInput struct {
 	// version that you want to use, or you can use a wildcard in all of the fields. If
 	// you enter an AMI ID for the string value, you must have access to the AMI, and
 	// the AMI must be in the same Region in which you are using Image Builder.
+	//
+	// This member is required.
 	ParentImage *string
+
 	// The name of the image recipe.
+	//
+	// This member is required.
 	Name *string
+
 	// The description of the image recipe.
 	Description *string
+
 	// The tags of the image recipe.
 	Tags map[string]*string
+
 	// The semantic version of the image recipe.
+	//
+	// This member is required.
 	SemanticVersion *string
 }
 
 type CreateImageRecipeOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the image recipe that was created by this
 	// request.
 	ImageRecipeArn *string
+
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 

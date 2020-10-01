@@ -56,16 +56,20 @@ func (c *Client) DescribeInstanceTypes(ctx context.Context, params *DescribeInst
 }
 
 type DescribeInstanceTypesInput struct {
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the next token
 	// value.
 	MaxResults *int32
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The instance types. For more information, see Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	InstanceTypes []types.InstanceType
+
 	// One or more filters. Filter names and values are case-sensitive.
 	//
 	//     *
@@ -184,6 +188,7 @@ type DescribeInstanceTypesInput struct {
 	//     *
 	// vcpu-info.default-vcpus - The default number of vCPUs for the instance type.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -192,10 +197,12 @@ type DescribeInstanceTypesInput struct {
 }
 
 type DescribeInstanceTypesOutput struct {
+
 	// The instance type. For more information, see Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	InstanceTypes []*types.InstanceTypeInfo
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

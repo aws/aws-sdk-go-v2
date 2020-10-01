@@ -56,13 +56,18 @@ func (c *Client) DescribeFileSystemPolicy(ctx context.Context, params *DescribeF
 }
 
 type DescribeFileSystemPolicyInput struct {
+
 	// Specifies which EFS file system to retrieve the FileSystemPolicy for.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
 type DescribeFileSystemPolicyOutput struct {
+
 	// Specifies the EFS file system to which the FileSystemPolicy applies.
 	FileSystemId *string
+
 	// The JSON formatted FileSystemPolicy for the EFS file system.
 	Policy *string
 

@@ -64,6 +64,7 @@ func (c *Client) GetContextKeysForCustomPolicy(ctx context.Context, params *GetC
 }
 
 type GetContextKeysForCustomPolicyInput struct {
+
 	// A list of policies for which you want the list of context keys referenced in
 	// those policies. Each document is specified as a string containing the complete,
 	// valid JSON text of an IAM policy. The regex pattern
@@ -79,12 +80,15 @@ type GetContextKeysForCustomPolicyInput struct {
 	//
 	//     * The special characters tab (\u0009), line
 	// feed (\u000A), and carriage return (\u000D)
+	//
+	// This member is required.
 	PolicyInputList []*string
 }
 
 // Contains the response to a successful GetContextKeysForPrincipalPolicy () or
 // GetContextKeysForCustomPolicy () request.
 type GetContextKeysForCustomPolicyOutput struct {
+
 	// The list of context keys that are referenced in the input policies.
 	ContextKeyNames []*string
 

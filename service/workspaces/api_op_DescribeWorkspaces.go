@@ -57,21 +57,27 @@ func (c *Client) DescribeWorkspaces(ctx context.Context, params *DescribeWorkspa
 }
 
 type DescribeWorkspacesInput struct {
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
 	// The name of the directory user. You must specify this parameter with
 	// DirectoryId.
 	UserName *string
+
 	// The maximum number of items to return.
 	Limit *int32
+
 	// The identifier of the bundle. All WorkSpaces that are created from this bundle
 	// are retrieved. You cannot combine this parameter with any other filter.
 	BundleId *string
+
 	// The identifier of the directory. In addition, you can optionally specify a
 	// specific directory user (see UserName). You cannot combine this parameter with
 	// any other filter.
 	DirectoryId *string
+
 	// The identifiers of the WorkSpaces. You cannot combine this parameter with any
 	// other filter. Because the CreateWorkspaces () operation is asynchronous, the
 	// identifier it returns is not immediately available. If you immediately call
@@ -80,9 +86,11 @@ type DescribeWorkspacesInput struct {
 }
 
 type DescribeWorkspacesOutput struct {
+
 	// Information about the WorkSpaces. Because CreateWorkspaces () is an asynchronous
 	// operation, some of the returned information could be incomplete.
 	Workspaces []*types.Workspace
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string

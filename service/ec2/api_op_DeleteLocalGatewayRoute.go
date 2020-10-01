@@ -56,18 +56,26 @@ func (c *Client) DeleteLocalGatewayRoute(ctx context.Context, params *DeleteLoca
 }
 
 type DeleteLocalGatewayRouteInput struct {
+
 	// The ID of the local gateway route table.
+	//
+	// This member is required.
 	LocalGatewayRouteTableId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The CIDR range for the route. This must match the CIDR for the route exactly.
+	//
+	// This member is required.
 	DestinationCidrBlock *string
 }
 
 type DeleteLocalGatewayRouteOutput struct {
+
 	// Information about the route.
 	Route *types.LocalGatewayRoute
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An internal failure occured.
@@ -24,12 +23,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was invalid.
 type InvalidRequestException struct {
@@ -47,12 +40,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource was not found.
 type ResourceNotFoundException struct {
@@ -70,12 +57,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is currently unavailable.
 type ServiceUnavailableException struct {
@@ -93,12 +74,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request could not be completed due to throttling.
 type ThrottlingException struct {
@@ -116,9 +91,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}

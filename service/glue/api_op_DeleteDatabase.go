@@ -63,11 +63,15 @@ func (c *Client) DeleteDatabase(ctx context.Context, params *DeleteDatabaseInput
 }
 
 type DeleteDatabaseInput struct {
+
 	// The ID of the Data Catalog in which the database resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string
+
 	// The name of the database to delete. For Hive compatibility, this must be all
 	// lowercase.
+	//
+	// This member is required.
 	Name *string
 }
 

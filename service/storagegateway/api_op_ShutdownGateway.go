@@ -73,14 +73,18 @@ func (c *Client) ShutdownGateway(ctx context.Context, params *ShutdownGatewayInp
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway to shut
 // down.
 type ShutdownGatewayInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
 // shut down.
 type ShutdownGatewayOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

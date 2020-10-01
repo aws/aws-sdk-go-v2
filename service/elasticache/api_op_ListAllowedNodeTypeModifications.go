@@ -60,6 +60,7 @@ func (c *Client) ListAllowedNodeTypeModifications(ctx context.Context, params *L
 
 // The input parameters for the ListAllowedNodeTypeModifications operation.
 type ListAllowedNodeTypeModificationsInput struct {
+
 	// The name of the replication group want to scale up to a larger node type.
 	// ElastiCache uses the replication group id to identify the current node type
 	// being used by this replication group, and from that to create a list of node
@@ -67,6 +68,7 @@ type ListAllowedNodeTypeModificationsInput struct {
 	// the <code>CacheClusterId</code> or the <code>ReplicationGroupId</code>.</p>
 	// </important>
 	ReplicationGroupId *string
+
 	// The name of the cluster you want to scale up to a larger node instanced type.
 	// ElastiCache uses the cluster id to identify the current node type of this
 	// cluster and from that to create a list of node types you can scale up to.
@@ -79,11 +81,13 @@ type ListAllowedNodeTypeModificationsInput struct {
 // Represents the allowed node types you can use to modify your cluster or
 // replication group.
 type ListAllowedNodeTypeModificationsOutput struct {
+
 	// A string list, each element of which specifies a cache node type which you can
 	// use to scale your cluster or replication group. When scaling up a Redis cluster
 	// or replication group using ModifyCacheCluster or ModifyReplicationGroup, use a
 	// value from this list for the CacheNodeType parameter.
 	ScaleUpModifications []*string
+
 	// A string list, each element of which specifies a cache node type which you can
 	// use to scale your cluster or replication group.  When scaling down a Redis
 	// cluster or replication group using ModifyCacheCluster or ModifyReplicationGroup,

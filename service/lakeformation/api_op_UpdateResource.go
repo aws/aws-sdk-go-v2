@@ -56,9 +56,15 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 }
 
 type UpdateResourceInput struct {
+
 	// The resource ARN.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The new role to use for the given resource registered in AWS Lake Formation.
+	//
+	// This member is required.
 	RoleArn *string
 }
 

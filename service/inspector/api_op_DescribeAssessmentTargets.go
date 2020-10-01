@@ -57,15 +57,24 @@ func (c *Client) DescribeAssessmentTargets(ctx context.Context, params *Describe
 }
 
 type DescribeAssessmentTargetsInput struct {
+
 	// The ARNs that specifies the assessment targets that you want to describe.
+	//
+	// This member is required.
 	AssessmentTargetArns []*string
 }
 
 type DescribeAssessmentTargetsOutput struct {
+
 	// Assessment target details that cannot be described. An error code is provided
 	// for each failed item.
+	//
+	// This member is required.
 	FailedItems map[string]*types.FailedItemDetails
+
 	// Information about the assessment targets.
+	//
+	// This member is required.
 	AssessmentTargets []*types.AssessmentTarget
 
 	// Metadata pertaining to the operation's result.

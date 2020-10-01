@@ -56,11 +56,15 @@ func (c *Client) DescribePipeline(ctx context.Context, params *DescribePipelineI
 }
 
 type DescribePipelineInput struct {
+
 	// The name of the pipeline whose information is retrieved.
+	//
+	// This member is required.
 	PipelineName *string
 }
 
 type DescribePipelineOutput struct {
+
 	// A "Pipeline" object that contains information about the pipeline.
 	Pipeline *types.Pipeline
 

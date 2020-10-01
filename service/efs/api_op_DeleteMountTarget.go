@@ -73,7 +73,10 @@ func (c *Client) DeleteMountTarget(ctx context.Context, params *DeleteMountTarge
 
 //
 type DeleteMountTargetInput struct {
+
 	// The ID of the mount target to delete (String).
+	//
+	// This member is required.
 	MountTargetId *string
 }
 

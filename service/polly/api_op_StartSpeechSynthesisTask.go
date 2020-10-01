@@ -62,13 +62,16 @@ func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpee
 }
 
 type StartSpeechSynthesisTaskInput struct {
+
 	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
 	// "8000", "16000", "22050", and "24000". The default value for standard voices is
 	// "22050". The default value for neural voices is "24000". Valid values for pcm
 	// are "8000" and "16000" The default value is "16000".
 	SampleRate *string
+
 	// The type of speech marks returned for the input text.
 	SpeechMarkTypes []types.SpeechMarkType
+
 	// Optional language code for the Speech Synthesis request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
 	// English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language
@@ -79,35 +82,53 @@ type StartSpeechSynthesisTaskInput struct {
 	// for the LanguageCode parameter. For example, if no language code is specified,
 	// Aditi will use Indian English rather than Hindi.
 	LanguageCode types.LanguageCode
+
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon is
 	// the same as the language of the voice.
 	LexiconNames []*string
+
 	// Amazon S3 bucket name to which the output file will be saved.
+	//
+	// This member is required.
 	OutputS3BucketName *string
+
 	// Specifies the engine (standard or neural) for Amazon Polly to use when
 	// processing input text for speech synthesis. Using a voice that is not supported
 	// for the engine selected will result in an error.
 	Engine types.Engine
+
 	// The Amazon S3 key prefix for the output speech file.
 	OutputS3KeyPrefix *string
+
 	// Specifies whether the input text is plain text or SSML. The default value is
 	// plain text.
 	TextType types.TextType
+
 	// ARN for the SNS topic optionally used for providing status notification for a
 	// speech synthesis task.
 	SnsTopicArn *string
+
 	// The input text to synthesize. If you specify ssml as the TextType, follow the
 	// SSML format for the input text.
+	//
+	// This member is required.
 	Text *string
+
 	// Voice ID to use for the synthesis.
+	//
+	// This member is required.
 	VoiceId types.VoiceId
+
 	// The format in which the returned output will be encoded. For audio stream, this
 	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	//
+	// This member is required.
 	OutputFormat types.OutputFormat
 }
 
 type StartSpeechSynthesisTaskOutput struct {
+
 	// SynthesisTask object that provides information and attributes about a newly
 	// submitted speech synthesis task.
 	SynthesisTask *types.SynthesisTask

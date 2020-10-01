@@ -56,11 +56,13 @@ func (c *Client) GetAppReplicationConfiguration(ctx context.Context, params *Get
 }
 
 type GetAppReplicationConfigurationInput struct {
+
 	// ID of the application associated with the replication configuration.
 	AppId *string
 }
 
 type GetAppReplicationConfigurationOutput struct {
+
 	// Replication configurations associated with server groups in this application.
 	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
 

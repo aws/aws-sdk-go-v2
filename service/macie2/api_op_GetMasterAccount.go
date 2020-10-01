@@ -58,6 +58,7 @@ type GetMasterAccountInput struct {
 }
 
 type GetMasterAccountOutput struct {
+
 	// The AWS account ID for the master account. If the accounts are associated by a
 	// Macie membership invitation, this object also provides details about the
 	// invitation that was sent and accepted to establish the relationship between the

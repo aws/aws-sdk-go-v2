@@ -56,17 +56,24 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 }
 
 type CreateUserInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The user's email address.
 	Email *string
+
 	// The user type.
 	UserType types.UserType
+
 	// The user name.
 	Username *string
 }
 
 type CreateUserOutput struct {
+
 	// The user on the Amazon Chime account.
 	User *types.User
 

@@ -57,33 +57,47 @@ func (c *Client) ListLabelingJobsForWorkteam(ctx context.Context, params *ListLa
 }
 
 type ListLabelingJobsForWorkteamInput struct {
+
 	// The field to sort results by. The default is CreationTime.
 	SortBy types.ListLabelingJobsForWorkteamSortByOptions
+
 	// A filter the limits jobs to only the ones whose job reference code contains the
 	// specified string.
 	JobReferenceCodeContains *string
+
 	// If the result of the previous ListLabelingJobsForWorkteam request was truncated,
 	// the response includes a NextToken. To retrieve the next set of labeling jobs,
 	// use the token in the next request.
 	NextToken *string
+
 	// The maximum number of labeling jobs to return in each page of the response.
 	MaxResults *int32
+
 	// A filter that returns only labeling jobs created before the specified time
 	// (timestamp).
 	CreationTimeBefore *time.Time
+
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
+
 	// A filter that returns only labeling jobs created after the specified time
 	// (timestamp).
 	CreationTimeAfter *time.Time
+
 	// The Amazon Resource Name (ARN) of the work team for which you want to see
 	// labeling jobs for.
+	//
+	// This member is required.
 	WorkteamArn *string
 }
 
 type ListLabelingJobsForWorkteamOutput struct {
+
 	// An array of LabelingJobSummary objects, each describing a labeling job.
+	//
+	// This member is required.
 	LabelingJobSummaryList []*types.LabelingJobForWorkteamSummary
+
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of labeling jobs, use it in the subsequent request.
 	NextToken *string

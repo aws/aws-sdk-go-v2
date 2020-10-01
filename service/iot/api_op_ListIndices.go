@@ -54,16 +54,20 @@ func (c *Client) ListIndices(ctx context.Context, params *ListIndicesInput, optF
 }
 
 type ListIndicesInput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListIndicesOutput struct {
+
 	// The index names.
 	IndexNames []*string
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string

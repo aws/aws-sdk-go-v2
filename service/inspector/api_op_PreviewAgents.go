@@ -57,11 +57,16 @@ func (c *Client) PreviewAgents(ctx context.Context, params *PreviewAgentsInput, 
 }
 
 type PreviewAgentsInput struct {
+
 	// The ARN of the assessment target whose agents you want to preview.
+	//
+	// This member is required.
 	PreviewAgentsArn *string
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 10. The maximum value is 500.
 	MaxResults *int32
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the PreviewAgents action. Subsequent
 	// calls to the action fill nextToken in the request with the value of NextToken
@@ -70,12 +75,16 @@ type PreviewAgentsInput struct {
 }
 
 type PreviewAgentsOutput struct {
+
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to be
 	// listed, this parameter is set to null.
 	NextToken *string
+
 	// The resulting list of agents.
+	//
+	// This member is required.
 	AgentPreviews []*types.AgentPreview
 
 	// Metadata pertaining to the operation's result.

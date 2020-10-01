@@ -55,8 +55,10 @@ func (c *Client) UpdateRole(ctx context.Context, params *UpdateRoleInput, optFns
 }
 
 type UpdateRoleInput struct {
+
 	// The new description that you want to apply to the specified role.
 	Description *string
+
 	// The maximum session duration (in seconds) that you want to set for the specified
 	// role. If you do not specify a value for this setting, the default maximum of one
 	// hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone
@@ -71,7 +73,10 @@ type UpdateRoleInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
 	// User Guide.
 	MaxSessionDuration *int32
+
 	// The name of the role that you want to modify.
+	//
+	// This member is required.
 	RoleName *string
 }
 

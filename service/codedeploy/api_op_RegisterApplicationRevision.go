@@ -57,12 +57,19 @@ func (c *Client) RegisterApplicationRevision(ctx context.Context, params *Regist
 
 // Represents the input of a RegisterApplicationRevision operation.
 type RegisterApplicationRevisionInput struct {
+
 	// Information about the application revision to register, including type and
 	// location.
+	//
+	// This member is required.
 	Revision *types.RevisionLocation
+
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// A comment about the revision.
 	Description *string
 }

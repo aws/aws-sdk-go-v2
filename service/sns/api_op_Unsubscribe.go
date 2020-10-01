@@ -62,7 +62,10 @@ func (c *Client) Unsubscribe(ctx context.Context, params *UnsubscribeInput, optF
 
 // Input for Unsubscribe action.
 type UnsubscribeInput struct {
+
 	// The ARN of the subscription to be deleted.
+	//
+	// This member is required.
 	SubscriptionArn *string
 }
 

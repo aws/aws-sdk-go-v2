@@ -62,32 +62,47 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 }
 
 type CreateEnvironmentInput struct {
+
 	// Metadata to assign to the environment. Tags help organize and categorize your
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
 	Tags map[string]*string
+
 	// Amazon CloudWatch alarms to monitor during the deployment process.
 	Monitors []*types.Monitor
+
 	// A description of the environment.
 	Description *string
+
 	// A name for the environment.
+	//
+	// This member is required.
 	Name *string
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type CreateEnvironmentOutput struct {
+
 	// The name of the environment.
 	Name *string
+
 	// The application ID.
 	ApplicationId *string
+
 	// The description of the environment.
 	Description *string
+
 	// The state of the environment. An environment can be in one of the following
 	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
 	State types.EnvironmentState
+
 	// The environment ID.
 	Id *string
+
 	// Amazon CloudWatch alarms monitored during the deployment.
 	Monitors []*types.Monitor
 

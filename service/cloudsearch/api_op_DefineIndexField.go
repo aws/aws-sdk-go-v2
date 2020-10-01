@@ -66,19 +66,28 @@ func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldI
 // Container for the parameters to the DefineIndexField () operation. Specifies the
 // name of the domain you want to update and the index field configuration.
 type DefineIndexFieldInput struct {
+
 	// The index field and field options you want to configure.
+	//
+	// This member is required.
 	IndexField *types.IndexField
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DefineIndexField () request. Contains the status of the
 // newly-configured index field.
 type DefineIndexFieldOutput struct {
+
 	// The value of an IndexField and its current status.
+	//
+	// This member is required.
 	IndexField *types.IndexFieldStatus
 
 	// Metadata pertaining to the operation's result.

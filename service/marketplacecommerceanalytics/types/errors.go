@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This exception is thrown when an internal service error occurs.
@@ -27,10 +26,4 @@ func (e *MarketplaceCommerceAnalyticsException) ErrorCode() string {
 }
 func (e *MarketplaceCommerceAnalyticsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
-}
-func (e *MarketplaceCommerceAnalyticsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MarketplaceCommerceAnalyticsException) HasMessage() bool {
-	return e.Message != nil
 }

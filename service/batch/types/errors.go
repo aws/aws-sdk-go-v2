@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // These errors are usually caused by a client action, such as using an action or
@@ -26,12 +25,6 @@ func (e *ClientException) ErrorMessage() string {
 }
 func (e *ClientException) ErrorCode() string             { return "ClientException" }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // These errors are usually caused by a server issue.
 type ServerException struct {
@@ -49,9 +42,3 @@ func (e *ServerException) ErrorMessage() string {
 }
 func (e *ServerException) ErrorCode() string             { return "ServerException" }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -68,15 +68,20 @@ func (c *Client) UpdateTagsForResource(ctx context.Context, params *UpdateTagsFo
 }
 
 type UpdateTagsForResourceInput struct {
+
 	// A list of tags to add or update. If a key of an existing tag is added, the tag's
 	// value is updated. Specify at least one of these parameters: TagsToAdd,
 	// TagsToRemove.
 	TagsToAdd []*types.Tag
+
 	// A list of tag keys to remove. If a tag key doesn't exist, it is silently
 	// ignored. Specify at least one of these parameters: TagsToAdd, TagsToRemove.
 	TagsToRemove []*string
+
 	// The Amazon Resource Name (ARN) of the resouce to be updated. Must be the ARN of
 	// an Elastic Beanstalk resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

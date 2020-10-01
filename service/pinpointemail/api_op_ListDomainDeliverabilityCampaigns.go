@@ -64,20 +64,31 @@ func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *
 // only if you enabled the Deliverability dashboard
 // (PutDeliverabilityDashboardOption operation) for the domain.
 type ListDomainDeliverabilityCampaignsInput struct {
+
 	// The maximum number of results to include in response to a single call to the
 	// ListDomainDeliverabilityCampaigns operation. If the number of results is larger
 	// than the number that you specify in this parameter, the response includes a
 	// NextToken element, which you can use to obtain additional results.
 	PageSize *int32
+
 	// The last day, in Unix time format, that you want to obtain deliverability data
 	// for. This value has to be less than or equal to 30 days after the value of the
 	// StartDate parameter.
+	//
+	// This member is required.
 	EndDate *time.Time
+
 	// The domain to obtain deliverability data for.
+	//
+	// This member is required.
 	SubscribedDomain *string
+
 	// The first day, in Unix time format, that you want to obtain deliverability data
 	// for.
+	//
+	// This member is required.
 	StartDate *time.Time
+
 	// A token that’s returned from a previous call to the
 	// ListDomainDeliverabilityCampaigns operation. This token indicates the position
 	// of a campaign in the list of campaigns.
@@ -89,9 +100,13 @@ type ListDomainDeliverabilityCampaignsInput struct {
 // available for a domain only if you enabled the Deliverability dashboard
 // (PutDeliverabilityDashboardOption operation) for the domain.
 type ListDomainDeliverabilityCampaignsOutput struct {
+
 	// An array of responses, one for each campaign that used the domain to send email
 	// during the specified time range.
+	//
+	// This member is required.
 	DomainDeliverabilityCampaigns []*types.DomainDeliverabilityCampaign
+
 	// A token that’s returned from a previous call to the
 	// ListDomainDeliverabilityCampaigns operation. This token indicates the position
 	// of the campaign in the list of campaigns.

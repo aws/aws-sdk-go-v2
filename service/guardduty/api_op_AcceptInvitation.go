@@ -55,12 +55,21 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 }
 
 type AcceptInvitationInput struct {
+
 	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The value that is used to validate the master account to the member account.
+	//
+	// This member is required.
 	InvitationId *string
+
 	// The account ID of the master GuardDuty account whose invitation you're
 	// accepting.
+	//
+	// This member is required.
 	MasterId *string
 }
 

@@ -56,10 +56,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The cluster identifier (ID) for the cluster that you are tagging. To find the
 	// cluster ID, use DescribeClusters ().
+	//
+	// This member is required.
 	ResourceId *string
+
 	// A list of one or more tags.
+	//
+	// This member is required.
 	TagList []*types.Tag
 }
 

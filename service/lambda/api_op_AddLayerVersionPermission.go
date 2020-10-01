@@ -60,29 +60,48 @@ func (c *Client) AddLayerVersionPermission(ctx context.Context, params *AddLayer
 }
 
 type AddLayerVersionPermissionInput struct {
+
 	// The API action that grants access to the layer. For example,
 	// lambda:GetLayerVersion.
+	//
+	// This member is required.
 	Action *string
+
 	// An identifier that distinguishes the policy from others on the same layer
 	// version.
+	//
+	// This member is required.
 	StatementId *string
+
 	// An account ID, or * to grant permission to all AWS accounts.
+	//
+	// This member is required.
 	Principal *string
+
 	// Only update the policy if the revision ID matches the ID specified. Use this
 	// option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
+
 	// The version number.
+	//
+	// This member is required.
 	VersionNumber *int64
+
 	// The name or Amazon Resource Name (ARN) of the layer.
+	//
+	// This member is required.
 	LayerName *string
+
 	// With the principal set to *, grant permission to all accounts in the specified
 	// organization.
 	OrganizationId *string
 }
 
 type AddLayerVersionPermissionOutput struct {
+
 	// A unique identifier for the current revision of the policy.
 	RevisionId *string
+
 	// The permission statement.
 	Statement *string
 

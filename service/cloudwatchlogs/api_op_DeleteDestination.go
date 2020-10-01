@@ -57,7 +57,10 @@ func (c *Client) DeleteDestination(ctx context.Context, params *DeleteDestinatio
 }
 
 type DeleteDestinationInput struct {
+
 	// The name of the destination.
+	//
+	// This member is required.
 	DestinationName *string
 }
 

@@ -55,10 +55,14 @@ func (c *Client) DeleteRemediationConfiguration(ctx context.Context, params *Del
 }
 
 type DeleteRemediationConfigurationInput struct {
+
 	// The type of a resource.
 	ResourceType *string
+
 	// The name of the AWS Config rule for which you want to delete remediation
 	// configuration.
+	//
+	// This member is required.
 	ConfigRuleName *string
 }
 

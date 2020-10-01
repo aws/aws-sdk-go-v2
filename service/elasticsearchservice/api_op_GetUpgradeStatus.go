@@ -58,17 +58,22 @@ func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusI
 
 // Container for request parameters to GetUpgradeStatus () operation.
 type GetUpgradeStatusInput struct {
+
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or
 	// number and can contain the following characters: a-z (lowercase), 0-9, and -
 	// (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // Container for response returned by GetUpgradeStatus () operation.
 type GetUpgradeStatusOutput struct {
+
 	// A string that describes the update briefly
 	UpgradeName *string
+
 	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
 	// through:
 	//
@@ -78,6 +83,7 @@ type GetUpgradeStatusOutput struct {
 	//
 	//     * Upgrade
 	UpgradeStep types.UpgradeStep
+
 	// One of 4 statuses that a step can go through returned as part of the
 	// GetUpgradeStatusResponse () object. The status can take one of the following
 	// values:

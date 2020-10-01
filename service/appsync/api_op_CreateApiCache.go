@@ -57,13 +57,17 @@ func (c *Client) CreateApiCache(ctx context.Context, params *CreateApiCacheInput
 
 // Represents the input of a CreateApiCache operation.
 type CreateApiCacheInput struct {
+
 	// Caching behavior.
 	//
 	//     * FULL_REQUEST_CACHING: All requests are fully cached.
 	//
 	//
 	// * PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.
+	//
+	// This member is required.
 	ApiCachingBehavior types.ApiCachingBehavior
+
 	// The cache instance type.
 	//
 	//     * T2_SMALL: A t2.small instance type.
@@ -83,21 +87,32 @@ type CreateApiCacheInput struct {
 	//
 	//     *
 	// R4_8XLARGE: A r4.8xlarge instance type.
+	//
+	// This member is required.
 	Type types.ApiCacheType
+
 	// At rest encryption flag for cache. This setting cannot be updated after
 	// creation.
 	AtRestEncryptionEnabled *bool
+
 	// The GraphQL API Id.
+	//
+	// This member is required.
 	ApiId *string
+
 	// Transit encryption flag when connecting to cache. This setting cannot be updated
 	// after creation.
 	TransitEncryptionEnabled *bool
+
 	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+	//
+	// This member is required.
 	Ttl *int64
 }
 
 // Represents the output of a CreateApiCache operation.
 type CreateApiCacheOutput struct {
+
 	// The ApiCache object.
 	ApiCache *types.ApiCache
 

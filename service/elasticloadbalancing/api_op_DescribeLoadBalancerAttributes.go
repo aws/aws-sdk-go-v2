@@ -57,12 +57,16 @@ func (c *Client) DescribeLoadBalancerAttributes(ctx context.Context, params *Des
 
 // Contains the parameters for DescribeLoadBalancerAttributes.
 type DescribeLoadBalancerAttributesInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 // Contains the output of DescribeLoadBalancerAttributes.
 type DescribeLoadBalancerAttributesOutput struct {
+
 	// Information about the load balancer attributes.
 	LoadBalancerAttributes *types.LoadBalancerAttributes
 

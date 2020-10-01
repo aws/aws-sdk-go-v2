@@ -95,13 +95,18 @@ func (c *Client) ListResourceRecordSets(ctx context.Context, params *ListResourc
 // A request for the resource record sets that are associated with a specified
 // hosted zone.
 type ListResourceRecordSetsInput struct {
+
 	// The ID of the hosted zone that contains the resource record sets that you want
 	// to list.
+	//
+	// This member is required.
 	HostedZoneId *string
+
 	// The first name in the lexicographic ordering of resource record sets that you
 	// want to list. If the specified record name doesn't exist, the results begin with
 	// the first resource record set that has a name greater than the value of name.
 	StartRecordName *string
+
 	// (Optional) The maximum number of resource records sets to include in the
 	// response body for this request. If the response includes more than maxitems
 	// resource record sets, the value of the IsTruncated element in the response is
@@ -109,11 +114,13 @@ type ListResourceRecordSetsInput struct {
 	// response identify the first resource record set in the next group of maxitems
 	// resource record sets.
 	MaxItems *string
+
 	// Resource record sets that have a routing policy other than simple: If results
 	// were truncated for a given DNS name and type, specify the value of
 	// NextRecordIdentifier from the previous response to get the next resource record
 	// set that has the current DNS name and type.
 	StartRecordIdentifier *string
+
 	// The type of resource record set to begin the record listing from. Valid values
 	// for basic resource record sets: A | AAAA | CAA | CNAME | MX | NAPTR | NS | PTR |
 	// SOA | SPF | SRV | TXT Values for weighted, latency, geolocation, and failover
@@ -147,14 +154,24 @@ type ListResourceRecordSetsInput struct {
 
 // A complex type that contains list information for the resource record set.
 type ListResourceRecordSetsOutput struct {
+
 	// A flag that indicates whether more resource record sets remain to be listed. If
 	// your results were truncated, you can make a follow-up pagination request by
 	// using the NextRecordName element.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// Information about multiple resource record sets.
+	//
+	// This member is required.
 	ResourceRecordSets []*types.ResourceRecordSet
+
 	// The maximum number of records you requested.
+	//
+	// This member is required.
 	MaxItems *string
+
 	// Resource record sets that have a routing policy other than simple: If results
 	// were truncated for a given DNS name and type, the value of SetIdentifier for the
 	// next resource record set that has the current DNS name and type. For information
@@ -162,9 +179,11 @@ type ListResourceRecordSetsOutput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html)
 	// in the Amazon Route 53 Developer Guide.
 	NextRecordIdentifier *string
+
 	// If the results were truncated, the type of the next record in the list. This
 	// element is present only if IsTruncated is true.
 	NextRecordType types.RRType
+
 	// If the results were truncated, the name of the next record in the list. This
 	// element is present only if IsTruncated is true.
 	NextRecordName *string

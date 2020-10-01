@@ -64,12 +64,21 @@ func (c *Client) DeleteCustomActionType(ctx context.Context, params *DeleteCusto
 // Represents the input of a DeleteCustomActionType operation. The custom action
 // will be marked as deleted.
 type DeleteCustomActionTypeInput struct {
+
 	// The category of the custom action that you want to delete, such as source or
 	// deploy.
+	//
+	// This member is required.
 	Category types.ActionCategory
+
 	// The provider of the service used in the custom action, such as AWS CodeDeploy.
+	//
+	// This member is required.
 	Provider *string
+
 	// The version of the custom action to delete.
+	//
+	// This member is required.
 	Version *string
 }
 

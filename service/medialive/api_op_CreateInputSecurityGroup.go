@@ -56,14 +56,17 @@ func (c *Client) CreateInputSecurityGroup(ctx context.Context, params *CreateInp
 
 // The IPv4 CIDRs to whitelist for this Input Security Group
 type CreateInputSecurityGroupInput struct {
+
 	// List of IPv4 CIDR addresses to whitelist
 	WhitelistRules []*types.InputWhitelistRuleCidr
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
 }
 
 // Placeholder documentation for CreateInputSecurityGroupResponse
 type CreateInputSecurityGroupOutput struct {
+
 	// An Input Security Group
 	SecurityGroup *types.InputSecurityGroup
 

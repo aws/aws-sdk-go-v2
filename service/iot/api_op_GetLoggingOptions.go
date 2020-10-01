@@ -61,8 +61,10 @@ type GetLoggingOptionsInput struct {
 
 // The output from the GetLoggingOptions operation.
 type GetLoggingOptionsOutput struct {
+
 	// The logging level.
 	LogLevel types.LogLevel
+
 	// The ARN of the IAM role that grants access.
 	RoleArn *string
 

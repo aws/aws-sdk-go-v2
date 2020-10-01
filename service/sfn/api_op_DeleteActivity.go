@@ -55,7 +55,10 @@ func (c *Client) DeleteActivity(ctx context.Context, params *DeleteActivityInput
 }
 
 type DeleteActivityInput struct {
+
 	// The Amazon Resource Name (ARN) of the activity to delete.
+	//
+	// This member is required.
 	ActivityArn *string
 }
 

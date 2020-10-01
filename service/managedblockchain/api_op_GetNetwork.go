@@ -56,11 +56,15 @@ func (c *Client) GetNetwork(ctx context.Context, params *GetNetworkInput, optFns
 }
 
 type GetNetworkInput struct {
+
 	// The unique identifier of the network to get information about.
+	//
+	// This member is required.
 	NetworkId *string
 }
 
 type GetNetworkOutput struct {
+
 	// An object containing network configuration parameters.
 	Network *types.Network
 

@@ -56,10 +56,17 @@ func (c *Client) DeleteVirtualService(ctx context.Context, params *DeleteVirtual
 
 //
 type DeleteVirtualServiceInput struct {
+
 	// The name of the virtual service to delete.
+	//
+	// This member is required.
 	VirtualServiceName *string
+
 	// The name of the service mesh to delete the virtual service in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -69,7 +76,10 @@ type DeleteVirtualServiceInput struct {
 
 //
 type DeleteVirtualServiceOutput struct {
+
 	// The virtual service that was deleted.
+	//
+	// This member is required.
 	VirtualService *types.VirtualServiceData
 
 	// Metadata pertaining to the operation's result.

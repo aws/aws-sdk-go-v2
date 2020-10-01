@@ -57,27 +57,34 @@ func (c *Client) SearchContacts(ctx context.Context, params *SearchContactsInput
 }
 
 type SearchContactsInput struct {
+
 	// The sort order to use in listing the specified set of contacts. The supported
 	// sort keys are DisplayName, FirstName, and LastName.
 	SortCriteria []*types.Sort
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response only
 	// includes results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
 	MaxResults *int32
+
 	// The filters to use to list a specified set of address books. The supported
 	// filter keys are DisplayName, FirstName, LastName, and AddressBookArns.
 	Filters []*types.Filter
 }
 
 type SearchContactsOutput struct {
+
 	// The contacts that meet the specified set of filter criteria, in sort order.
 	Contacts []*types.ContactData
+
 	// The token returned to indicate that there is more data available.
 	NextToken *string
+
 	// The total number of contacts returned.
 	TotalCount *int32
 

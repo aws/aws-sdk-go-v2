@@ -69,16 +69,26 @@ func (c *Client) PutDestination(ctx context.Context, params *PutDestinationInput
 }
 
 type PutDestinationInput struct {
+
 	// The ARN of an Amazon Kinesis stream to which to deliver matching log events.
+	//
+	// This member is required.
 	TargetArn *string
+
 	// A name for the destination.
+	//
+	// This member is required.
 	DestinationName *string
+
 	// The ARN of an IAM role that grants CloudWatch Logs permissions to call the
 	// Amazon Kinesis PutRecord operation on the destination stream.
+	//
+	// This member is required.
 	RoleArn *string
 }
 
 type PutDestinationOutput struct {
+
 	// The destination.
 	Destination *types.Destination
 

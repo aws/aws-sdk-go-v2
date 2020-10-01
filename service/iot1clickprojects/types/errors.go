@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 //
@@ -26,18 +25,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InternalFailureException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type InvalidRequestException struct {
@@ -57,18 +44,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidRequestException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ResourceConflictException struct {
@@ -88,18 +63,6 @@ func (e *ResourceConflictException) ErrorMessage() string {
 }
 func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceConflictException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceConflictException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ResourceNotFoundException struct {
@@ -119,18 +82,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceNotFoundException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type TooManyRequestsException struct {
@@ -150,15 +101,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyRequestsException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *TooManyRequestsException) HasCode() bool {
-	return e.Code != nil
-}

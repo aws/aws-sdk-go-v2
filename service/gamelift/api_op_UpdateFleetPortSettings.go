@@ -88,17 +88,23 @@ func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFlee
 
 // Represents the input for a request action.
 type UpdateFleetPortSettingsInput struct {
+
 	// A collection of port settings to be added to the fleet resource.
 	InboundPermissionAuthorizations []*types.IpPermission
+
 	// A collection of port settings to be removed from the fleet resource.
 	InboundPermissionRevocations []*types.IpPermission
+
 	// A unique identifier for a fleet to update port settings for. You can use either
 	// the fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
 }
 
 // Represents the returned data in response to a request action.
 type UpdateFleetPortSettingsOutput struct {
+
 	// A unique identifier for a fleet that was updated.
 	FleetId *string
 

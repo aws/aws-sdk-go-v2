@@ -60,15 +60,20 @@ func (c *Client) DisassociateS3Resources(ctx context.Context, params *Disassocia
 }
 
 type DisassociateS3ResourcesInput struct {
+
 	// The ID of the Amazon Macie Classic member account whose resources you want to
 	// remove from being monitored by Amazon Macie Classic.
 	MemberAccountId *string
+
 	// The S3 resources (buckets or prefixes) that you want to remove from being
 	// monitored and classified by Amazon Macie Classic.
+	//
+	// This member is required.
 	AssociatedS3Resources []*types.S3Resource
 }
 
 type DisassociateS3ResourcesOutput struct {
+
 	// S3 resources that couldn't be removed from being monitored and classified by
 	// Amazon Macie Classic. An error code and an error message are provided for each
 	// failed item.

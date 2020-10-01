@@ -56,21 +56,33 @@ func (c *Client) BatchGetPartition(ctx context.Context, params *BatchGetPartitio
 }
 
 type BatchGetPartitionInput struct {
+
 	// The ID of the Data Catalog where the partitions in question reside. If none is
 	// supplied, the AWS account ID is used by default.
 	CatalogId *string
+
 	// A list of partition values identifying the partitions to retrieve.
+	//
+	// This member is required.
 	PartitionsToGet []*types.PartitionValueList
+
 	// The name of the catalog database where the partitions reside.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The name of the partitions' table.
+	//
+	// This member is required.
 	TableName *string
 }
 
 type BatchGetPartitionOutput struct {
+
 	// A list of the partition values in the request for which partitions were not
 	// returned.
 	UnprocessedKeys []*types.PartitionValueList
+
 	// A list of the requested partitions.
 	Partitions []*types.Partition
 

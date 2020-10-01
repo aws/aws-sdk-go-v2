@@ -57,8 +57,11 @@ func (c *Client) DeleteMetricPolicy(ctx context.Context, params *DeleteMetricPol
 }
 
 type DeleteMetricPolicyInput struct {
+
 	// The name of the container that is associated with the metric policy that you
 	// want to delete.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

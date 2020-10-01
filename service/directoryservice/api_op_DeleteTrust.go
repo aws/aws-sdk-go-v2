@@ -58,14 +58,19 @@ func (c *Client) DeleteTrust(ctx context.Context, params *DeleteTrustInput, optF
 // Deletes the local side of an existing trust relationship between the AWS Managed
 // Microsoft AD directory and the external domain.
 type DeleteTrustInput struct {
+
 	// Delete a conditional forwarder as part of a DeleteTrustRequest.
 	DeleteAssociatedConditionalForwarder *bool
+
 	// The Trust ID of the trust relationship to be deleted.
+	//
+	// This member is required.
 	TrustId *string
 }
 
 // The result of a DeleteTrust request.
 type DeleteTrustOutput struct {
+
 	// The Trust ID of the trust relationship that was deleted.
 	TrustId *string
 

@@ -57,27 +57,40 @@ func (c *Client) GetSdk(ctx context.Context, params *GetSdkInput, optFns ...func
 
 // Request a new generated client SDK for a RestApi () and Stage ().
 type GetSdkInput struct {
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// A string-to-string key-value map of query parameters sdkType-dependent
 	// properties of the SDK. For sdkType of objectivec or swift, a parameter named
 	// classPrefix is required. For sdkType of android, parameters named groupId,
 	// artifactId, artifactVersion, and invokerPackage are required. For sdkType of
 	// java, parameters named serviceName and javaPackageName are required.
 	Parameters map[string]*string
+
 	// [Required] The language for the generated SDK. Currently java, javascript,
 	// android, objectivec (for iOS), swift (for iOS), and ruby are supported.
+	//
+	// This member is required.
 	SdkType *string
+
 	// [Required] The name of the Stage () that the SDK will use.
+	//
+	// This member is required.
 	StageName *string
 }
 
 // The binary blob response to GetSdk (), which contains the generated SDK.
 type GetSdkOutput struct {
+
 	// The content-disposition header value in the HTTP response.
 	ContentDisposition *string
+
 	// The content-type header value in the HTTP response.
 	ContentType *string
+
 	// The binary blob response to GetSdk (), which contains the generated SDK.
 	Body []byte
 

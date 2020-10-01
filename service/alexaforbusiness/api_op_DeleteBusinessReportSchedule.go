@@ -55,7 +55,10 @@ func (c *Client) DeleteBusinessReportSchedule(ctx context.Context, params *Delet
 }
 
 type DeleteBusinessReportScheduleInput struct {
+
 	// The ARN of the business report schedule.
+	//
+	// This member is required.
 	ScheduleArn *string
 }
 

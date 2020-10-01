@@ -55,9 +55,15 @@ func (c *Client) AssociateContactWithAddressBook(ctx context.Context, params *As
 }
 
 type AssociateContactWithAddressBookInput struct {
+
 	// The ARN of the address book with which to associate the contact.
+	//
+	// This member is required.
 	AddressBookArn *string
+
 	// The ARN of the contact to associate with an address book.
+	//
+	// This member is required.
 	ContactArn *string
 }
 

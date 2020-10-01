@@ -55,11 +55,15 @@ func (c *Client) StartWorkflowRun(ctx context.Context, params *StartWorkflowRunI
 }
 
 type StartWorkflowRunInput struct {
+
 	// The name of the workflow to start.
+	//
+	// This member is required.
 	Name *string
 }
 
 type StartWorkflowRunOutput struct {
+
 	// An Id for the new run.
 	RunId *string
 

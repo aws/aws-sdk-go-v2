@@ -65,6 +65,7 @@ func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEf
 }
 
 type DescribeEffectivePolicyInput struct {
+
 	// The type of policy that you want information about. You can specify one of the
 	// following values:
 	//
@@ -78,7 +79,10 @@ type DescribeEffectivePolicyInput struct {
 	//
 	// * TAG_POLICY
 	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//
+	// This member is required.
 	PolicyType types.EffectivePolicyType
+
 	// When you're signed in as the master account, specify the ID of the account that
 	// you want details about. Specifying an organization root or organizational unit
 	// (OU) as the target is not supported.
@@ -86,6 +90,7 @@ type DescribeEffectivePolicyInput struct {
 }
 
 type DescribeEffectivePolicyOutput struct {
+
 	// The contents of the effective policy.
 	EffectivePolicy *types.EffectivePolicy
 

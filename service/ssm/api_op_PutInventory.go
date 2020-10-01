@@ -58,13 +58,20 @@ func (c *Client) PutInventory(ctx context.Context, params *PutInventoryInput, op
 }
 
 type PutInventoryInput struct {
+
 	// The inventory items that you want to add or update on instances.
+	//
+	// This member is required.
 	Items []*types.InventoryItem
+
 	// An instance ID where you want to add or update inventory items.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 type PutInventoryOutput struct {
+
 	// Information about the request.
 	Message *string
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteLogSubscription(ctx context.Context, params *DeleteLogSub
 }
 
 type DeleteLogSubscriptionInput struct {
+
 	// Identifier of the directory whose log subscription you want to delete.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 

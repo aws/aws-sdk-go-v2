@@ -61,35 +61,44 @@ func (c *Client) RequestSpotInstances(ctx context.Context, params *RequestSpotIn
 
 // Contains the parameters for RequestSpotInstances.
 type RequestSpotInstancesInput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	ClientToken *string
+
 	// The end date of the request. If this is a one-time request, the request remains
 	// active until all instances launch, the request is canceled, or this date is
 	// reached. If the request is persistent, it remains active until it is canceled or
 	// this date is reached. The default end date is 7 days from the current date.
 	ValidUntil *time.Time
+
 	// The launch specification.
 	LaunchSpecification *types.RequestSpotLaunchSpecification
+
 	// The maximum price per hour that you are willing to pay for a Spot Instance. The
 	// default is the On-Demand price.
 	SpotPrice *string
+
 	// The Spot Instance request type. Default: one-time
 	Type types.SpotInstanceType
+
 	// The key-value pair for tagging the Spot Instance request on creation. The value
 	// for ResourceType must be spot-instances-request, otherwise the Spot Instance
 	// request fails. To tag the Spot Instance request after it has been created, see
 	// CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []*types.TagSpecification
+
 	// The instance launch group. Launch groups are Spot Instances that launch together
 	// and terminate together. Default: Instances are launched and terminated
 	// individually
 	LaunchGroup *string
+
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
 	InstanceInterruptionBehavior types.InstanceInterruptionBehavior
+
 	// The start date of the request. If this is a one-time request, the request
 	// becomes active at this date and time and remains active until all instances
 	// launch, the request expires, or the request is canceled. If the request is
@@ -98,8 +107,10 @@ type RequestSpotInstancesInput struct {
 	// equal to the current date and time. You must specify a start date and time that
 	// occurs after the current date and time.
 	ValidFrom *time.Time
+
 	// The maximum number of Spot Instances to launch. Default: 1
 	InstanceCount *int32
+
 	// The user-specified name for a logical grouping of requests. When you specify an
 	// Availability Zone group in a Spot Instance request, all Spot Instances in the
 	// request are launched in the same Availability Zone. Instance proximity is
@@ -117,11 +128,13 @@ type RequestSpotInstancesInput struct {
 	// Availability Zone group. Default: Instances are launched in any available
 	// Availability Zone.
 	AvailabilityZoneGroup *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The required duration for the Spot Instances (also known as Spot blocks), in
 	// minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
 	// The duration period starts as soon as your Spot Instance receives its instance
@@ -134,6 +147,7 @@ type RequestSpotInstancesInput struct {
 
 // Contains the output of RequestSpotInstances.
 type RequestSpotInstancesOutput struct {
+
 	// One or more Spot Instance requests.
 	SpotInstanceRequests []*types.SpotInstanceRequest
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optF
 }
 
 type DeleteQueueInput struct {
+
 	// The name of the queue that you want to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

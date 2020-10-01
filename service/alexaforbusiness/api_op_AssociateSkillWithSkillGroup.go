@@ -55,9 +55,13 @@ func (c *Client) AssociateSkillWithSkillGroup(ctx context.Context, params *Assoc
 }
 
 type AssociateSkillWithSkillGroupInput struct {
+
 	// The ARN of the skill group to associate the skill to. Required.
 	SkillGroupArn *string
+
 	// The unique identifier of the skill.
+	//
+	// This member is required.
 	SkillId *string
 }
 

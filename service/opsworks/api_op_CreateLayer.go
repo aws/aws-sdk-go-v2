@@ -67,22 +67,33 @@ func (c *Client) CreateLayer(ctx context.Context, params *CreateLayerInput, optF
 }
 
 type CreateLayerInput struct {
+
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool
+
 	// The ARN of an IAM profile to be used for the layer's EC2 instances. For more
 	// information about IAM ARNs, see Using Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	CustomInstanceProfileArn *string
+
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool
+
 	// A LifeCycleEventConfiguration object that you can use to configure the Shutdown
 	// event to specify an execution timeout and enable or disable Elastic Load
 	// Balancer connection draining.
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
+
 	// The layer stack ID.
+	//
+	// This member is required.
 	StackId *string
+
 	// The layer name, which is used by the console.
+	//
+	// This member is required.
 	Name *string
+
 	// For custom layers only, use this parameter to specify the layer's short name,
 	// which is used internally by AWS OpsWorks Stacks and by Chef recipes. The short
 	// name is also used as the name for the directory where your app files are
@@ -90,7 +101,10 @@ type CreateLayerInput struct {
 	// alphanumeric characters, '-', '_', and '.'. The built-in layers' short names are
 	// defined by AWS OpsWorks Stacks. For more information, see the Layer Reference
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html).
+	//
+	// This member is required.
 	Shortname *string
+
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
@@ -99,37 +113,49 @@ type CreateLayerInput struct {
 	// instances have the latest security updates, we strongly recommend using the
 	// default value of true.
 	InstallUpdatesOnBoot *bool
+
 	// Specifies CloudWatch Logs configuration options for the layer. For more
 	// information, see CloudWatchLogsLogStream ().
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
+
 	// An array of Package objects that describes the layer packages.
 	Packages []*string
+
 	// Whether to automatically assign an Elastic IP address
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// to the layer's instances. For more information, see How to Edit a Layer
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
 	AutoAssignElasticIps *bool
+
 	// An array containing the layer custom security group IDs.
 	CustomSecurityGroupIds []*string
+
 	// The layer type. A stack cannot have more than one built-in layer of the same
 	// type. It can have any number of custom layers. Built-in layers are not available
 	// in Chef 12 stacks.
+	//
+	// This member is required.
 	Type types.LayerType
+
 	// A JSON-formatted string containing custom stack configuration and deployment
 	// attributes to be installed on the layer's instances. For more information, see
 	// Using Custom JSON
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
 	// This feature is supported as of version 1.7.42 of the AWS CLI.
 	CustomJson *string
+
 	// A LayerCustomRecipes object that specifies the layer custom recipes.
 	CustomRecipes *types.Recipes
+
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []*types.VolumeConfiguration
+
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see How to Edit a
 	// Layer
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
 	AutoAssignPublicIps *bool
+
 	// One or more user-defined key-value pairs to be added to the stack attributes. To
 	// create a cluster layer, set the EcsClusterArn attribute to the cluster's ARN.
 	Attributes map[string]*string
@@ -137,6 +163,7 @@ type CreateLayerInput struct {
 
 // Contains the response to a CreateLayer request.
 type CreateLayerOutput struct {
+
 	// The layer ID.
 	LayerId *string
 

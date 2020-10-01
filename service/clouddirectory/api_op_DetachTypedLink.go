@@ -58,10 +58,16 @@ func (c *Client) DetachTypedLink(ctx context.Context, params *DetachTypedLinkInp
 }
 
 type DetachTypedLinkInput struct {
+
 	// Used to accept a typed link specifier as input.
+	//
+	// This member is required.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
+
 	// The Amazon Resource Name (ARN) of the directory where you want to detach the
 	// typed link.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 

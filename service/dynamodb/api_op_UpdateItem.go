@@ -65,11 +65,13 @@ func (c *Client) UpdateItem(ctx context.Context, params *UpdateItemInput, optFns
 
 // Represents the input of an UpdateItem operation.
 type UpdateItemInput struct {
+
 	// Determines whether item collection metrics are returned. If set to SIZE, the
 	// response includes statistics about item collections, if any, that were modified
 	// during the operation are returned in the response. If set to NONE (the default),
 	// no statistics are returned.
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
+
 	// Use ReturnValues if you want to get the item attributes as they appear before or
 	// after they are updated. For UpdateItem, the valid values are:
 	//
@@ -96,6 +98,7 @@ type UpdateItemInput struct {
 	// larger response. No read capacity units are consumed. The values returned are
 	// strongly consistent.
 	ReturnValues types.ReturnValue
+
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -136,6 +139,7 @@ type UpdateItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
+
 	// An expression that defines one or more attributes to be updated, the action to
 	// be performed on them, and new values for them. The following action values are
 	// available for UpdateExpression.
@@ -204,6 +208,7 @@ type UpdateItemInput struct {
 	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html">Modifying
 	// Items and Attributes</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
 	UpdateExpression *string
+
 	// A condition that must be satisfied in order for a conditional update to succeed.
 	// An expression can contain any of the following:
 	//
@@ -222,11 +227,13 @@ type UpdateItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionExpression *string
+
 	// This is a legacy parameter. Use ConditionExpression instead. For more
 	// information, see ConditionalOperator
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionalOperator types.ConditionalOperator
+
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
 	// suppose that you wanted to check whether the value of the ProductStatus
@@ -239,6 +246,7 @@ type UpdateItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]*types.AttributeValue
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -255,33 +263,43 @@ type UpdateItemInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// This is a legacy parameter. Use UpdateExpression instead. For more information,
 	// see AttributeUpdates
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html)
 	// in the Amazon DynamoDB Developer Guide.
 	AttributeUpdates map[string]*types.AttributeValueUpdate
+
 	// The primary key of the item to be updated. Each element consists of an attribute
 	// name and a value for that attribute. For the primary key, you must provide all
 	// of the attributes. For example, with a simple primary key, you only need to
 	// provide a value for the partition key. For a composite primary key, you must
 	// provide values for both the partition key and the sort key.
+	//
+	// This member is required.
 	Key map[string]*types.AttributeValue
+
 	// This is a legacy parameter. Use ConditionExpression instead. For more
 	// information, see Expected
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
 	// in the Amazon DynamoDB Developer Guide.
 	Expected map[string]*types.ExpectedAttributeValue
+
 	// The name of the table containing the item to update.
+	//
+	// This member is required.
 	TableName *string
 }
 
 // Represents the output of an UpdateItem operation.
 type UpdateItemOutput struct {
+
 	// A map of attribute values as they appear before or after the UpdateItem
 	// operation, as determined by the ReturnValues parameter. The Attributes map is
 	// only present if ReturnValues was specified as something other than NONE in the
 	// request. Each element represents one attribute.
 	Attributes map[string]*types.AttributeValue
+
 	// Information about item collections, if any, that were affected by the UpdateItem
 	// operation. ItemCollectionMetrics is only returned if the
 	// ReturnItemCollectionMetrics parameter was specified. If the table does not have
@@ -301,6 +319,7 @@ type UpdateItemOutput struct {
 	// subject to change over time; therefore, do not rely on the precision or accuracy
 	// of the estimate.
 	ItemCollectionMetrics *types.ItemCollectionMetrics
+
 	// The capacity units consumed by the UpdateItem operation. The data returned
 	// includes the total provisioned throughput consumed, along with statistics for
 	// the table and any indexes involved in the operation. ConsumedCapacity is only

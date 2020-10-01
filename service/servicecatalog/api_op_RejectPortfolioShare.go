@@ -56,8 +56,12 @@ func (c *Client) RejectPortfolioShare(ctx context.Context, params *RejectPortfol
 }
 
 type RejectPortfolioShareInput struct {
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The type of shared portfolios to reject. The default is to reject imported
 	// portfolios.
 	//
@@ -73,6 +77,7 @@ type RejectPortfolioShareInput struct {
 	// example, aws servicecatalog reject-portfolio-share --portfolio-id
 	// "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS
 	PortfolioShareType types.PortfolioShareType
+
 	// The language code.
 	//
 	//     * en - English (default)

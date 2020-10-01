@@ -56,29 +56,41 @@ func (c *Client) GetLoggerDefinitionVersion(ctx context.Context, params *GetLogg
 }
 
 type GetLoggerDefinitionVersionInput struct {
+
 	// The ID of the logger definition.
+	//
+	// This member is required.
 	LoggerDefinitionId *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The ID of the logger definition version. This value maps to the ''Version''
 	// property of the corresponding ''VersionInformation'' object, which is returned
 	// by ''ListLoggerDefinitionVersions'' requests. If the version is the last one
 	// that was associated with a logger definition, the value also maps to the
 	// ''LatestVersion'' property of the corresponding ''DefinitionInformation''
 	// object.
+	//
+	// This member is required.
 	LoggerDefinitionVersionId *string
 }
 
 type GetLoggerDefinitionVersionOutput struct {
+
 	// The version of the logger definition version.
 	Version *string
+
 	// The ID of the logger definition version.
 	Id *string
+
 	// The ARN of the logger definition version.
 	Arn *string
+
 	// Information about the logger definition version.
 	Definition *types.LoggerDefinitionVersion
+
 	// The time, in milliseconds since the epoch, when the logger definition version
 	// was created.
 	CreationTimestamp *string

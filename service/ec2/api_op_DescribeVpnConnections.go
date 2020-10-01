@@ -58,11 +58,13 @@ func (c *Client) DescribeVpnConnections(ctx context.Context, params *DescribeVpn
 
 // Contains the parameters for DescribeVpnConnections.
 type DescribeVpnConnectionsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * customer-gateway-configuration - The configuration
@@ -108,12 +110,14 @@ type DescribeVpnConnectionsInput struct {
 	// transit-gateway-id - The ID of a transit gateway associated with the VPN
 	// connection.
 	Filters []*types.Filter
+
 	// One or more VPN connection IDs. Default: Describes your VPN connections.
 	VpnConnectionIds []*string
 }
 
 // Contains the output of DescribeVpnConnections.
 type DescribeVpnConnectionsOutput struct {
+
 	// Information about one or more VPN connections.
 	VpnConnections []*types.VpnConnection
 

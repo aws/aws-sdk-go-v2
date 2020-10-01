@@ -58,14 +58,17 @@ func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFrom
 }
 
 type RemoveFromGlobalClusterInput struct {
+
 	// The cluster identifier to detach from the Aurora global database cluster.
 	GlobalClusterIdentifier *string
+
 	// The Amazon Resource Name (ARN) identifying the cluster that was detached from
 	// the Aurora global database cluster.
 	DbClusterIdentifier *string
 }
 
 type RemoveFromGlobalClusterOutput struct {
+
 	// A data type representing an Aurora global database.
 	GlobalCluster *types.GlobalCluster
 

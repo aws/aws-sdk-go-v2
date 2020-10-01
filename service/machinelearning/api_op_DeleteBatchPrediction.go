@@ -59,7 +59,10 @@ func (c *Client) DeleteBatchPrediction(ctx context.Context, params *DeleteBatchP
 }
 
 type DeleteBatchPredictionInput struct {
+
 	// A user-supplied ID that uniquely identifies the BatchPrediction.
+	//
+	// This member is required.
 	BatchPredictionId *string
 }
 
@@ -67,6 +70,7 @@ type DeleteBatchPredictionInput struct {
 // GetBatchPrediction operation and check the value of the Status parameter to see
 // whether a BatchPrediction is marked as DELETED.
 type DeleteBatchPredictionOutput struct {
+
 	// A user-supplied ID that uniquely identifies the BatchPrediction. This value
 	// should be identical to the value of the BatchPredictionID in the request.
 	BatchPredictionId *string

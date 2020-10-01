@@ -56,11 +56,15 @@ func (c *Client) DeleteImageBuilder(ctx context.Context, params *DeleteImageBuil
 }
 
 type DeleteImageBuilderInput struct {
+
 	// The name of the image builder.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DeleteImageBuilderOutput struct {
+
 	// Information about the image builder.
 	ImageBuilder *types.ImageBuilder
 

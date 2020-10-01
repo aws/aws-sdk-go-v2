@@ -55,11 +55,13 @@ func (c *Client) DeletePlatformVersion(ctx context.Context, params *DeletePlatfo
 }
 
 type DeletePlatformVersionInput struct {
+
 	// The ARN of the version of the custom platform.
 	PlatformArn *string
 }
 
 type DeletePlatformVersionOutput struct {
+
 	// Detailed information about the version of the custom platform.
 	PlatformSummary *types.PlatformSummary
 

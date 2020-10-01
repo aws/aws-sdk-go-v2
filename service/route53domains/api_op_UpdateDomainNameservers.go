@@ -67,19 +67,29 @@ func (c *Client) UpdateDomainNameservers(ctx context.Context, params *UpdateDoma
 // progress and completion of the action. If the request is not completed
 // successfully, the domain registrant will be notified by email.
 type UpdateDomainNameserversInput struct {
+
 	// The authorization key for .fi domains
 	FIAuthKey *string
+
 	// The name of the domain that you want to change name servers for.
+	//
+	// This member is required.
 	DomainName *string
+
 	// A list of new name servers for the domain.
+	//
+	// This member is required.
 	Nameservers []*types.Nameserver
 }
 
 // The UpdateDomainNameservers response includes the following element.
 type UpdateDomainNameserversOutput struct {
+
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	//
+	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

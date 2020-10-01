@@ -60,12 +60,16 @@ func (c *Client) CreateLoginProfile(ctx context.Context, params *CreateLoginProf
 }
 
 type CreateLoginProfileInput struct {
+
 	// The name of the IAM user to create a password for. The user must already exist.
 	// This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
+
 	// The new password for the user. The regex pattern
 	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
 	// string of characters. That string can include almost any printable ASCII
@@ -75,14 +79,20 @@ type CreateLoginProfileInput struct {
 	// password. However, many tools, such as the AWS Management Console, might
 	// restrict the ability to type certain characters because they have special
 	// meaning within that tool.
+	//
+	// This member is required.
 	Password *string
+
 	// Specifies whether the user is required to set a new password on next sign-in.
 	PasswordResetRequired *bool
 }
 
 // Contains the response to a successful CreateLoginProfile () request.
 type CreateLoginProfileOutput struct {
+
 	// A structure containing the user name and password create date.
+	//
+	// This member is required.
 	LoginProfile *types.LoginProfile
 
 	// Metadata pertaining to the operation's result.

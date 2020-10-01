@@ -57,23 +57,33 @@ func (c *Client) ListMailboxPermissions(ctx context.Context, params *ListMailbox
 }
 
 type ListMailboxPermissionsInput struct {
+
 	// The identifier of the organization under which the user, group, or resource
 	// exists.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier of the user, group, or resource for which to list mailbox
 	// permissions.
+	//
+	// This member is required.
 	EntityId *string
+
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.
 	NextToken *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 }
 
 type ListMailboxPermissionsOutput struct {
+
 	// The token to use to retrieve the next page of results. The value is "null" when
 	// there are no more results to return.
 	NextToken *string
+
 	// One page of the user, group, or resource mailbox permissions.
 	Permissions []*types.Permission
 

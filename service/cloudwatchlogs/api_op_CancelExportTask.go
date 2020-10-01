@@ -56,7 +56,10 @@ func (c *Client) CancelExportTask(ctx context.Context, params *CancelExportTaskI
 }
 
 type CancelExportTaskInput struct {
+
 	// The ID of the export task.
+	//
+	// This member is required.
 	TaskId *string
 }
 

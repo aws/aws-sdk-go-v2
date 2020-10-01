@@ -75,12 +75,17 @@ func (c *Client) GetTextDetection(ctx context.Context, params *GetTextDetectionI
 }
 
 type GetTextDetectionInput struct {
+
 	// Job identifier for the text detection operation for which you want results
 	// returned. You get the job identifer from an initial call to StartTextDetection.
+	//
+	// This member is required.
 	JobId *string
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there are more labels to
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of text.
@@ -88,19 +93,25 @@ type GetTextDetectionInput struct {
 }
 
 type GetTextDetectionOutput struct {
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of text.
 	NextToken *string
+
 	// Version number of the text detection model that was used to detect text.
 	TextModelVersion *string
+
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
 	// Information about a video that Amazon Rekognition analyzed. Videometadata is
 	// returned in every page of paginated responses from a Amazon Rekognition video
 	// operation.
 	VideoMetadata *types.VideoMetadata
+
 	// Current status of the text detection job.
 	JobStatus types.VideoJobStatus
+
 	// An array of text detected in the video. Each element contains the detected text,
 	// the time in milliseconds from the start of the video that the text was detected,
 	// and where it was detected on the screen.

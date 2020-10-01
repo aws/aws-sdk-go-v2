@@ -58,11 +58,15 @@ func (c *Client) SetRulePriorities(ctx context.Context, params *SetRulePrioritie
 }
 
 type SetRulePrioritiesInput struct {
+
 	// The rule priorities.
+	//
+	// This member is required.
 	RulePriorities []*types.RulePriorityPair
 }
 
 type SetRulePrioritiesOutput struct {
+
 	// Information about the rules.
 	Rules []*types.Rule
 

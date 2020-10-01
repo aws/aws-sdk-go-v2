@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The pagination token expired. Try again without a pagination token.
@@ -24,12 +23,6 @@ func (e *ExpiredNextTokenException) ErrorMessage() string {
 }
 func (e *ExpiredNextTokenException) ErrorCode() string             { return "ExpiredNextTokenException" }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error on the server occurred during the processing of your request. Try again
 // later.
@@ -48,12 +41,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
@@ -71,12 +58,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameters had an invalid value.
 type InvalidParameterException struct {
@@ -94,12 +75,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource can't be found.
 type NotFoundException struct {
@@ -117,9 +92,3 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

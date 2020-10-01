@@ -56,11 +56,20 @@ func (c *Client) DeleteNode(ctx context.Context, params *DeleteNodeInput, optFns
 }
 
 type DeleteNodeInput struct {
+
 	// The unique identifier of the network that the node belongs to.
+	//
+	// This member is required.
 	NetworkId *string
+
 	// The unique identifier of the node.
+	//
+	// This member is required.
 	NodeId *string
+
 	// The unique identifier of the member that owns this node.
+	//
+	// This member is required.
 	MemberId *string
 }
 

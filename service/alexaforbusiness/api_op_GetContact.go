@@ -56,11 +56,15 @@ func (c *Client) GetContact(ctx context.Context, params *GetContactInput, optFns
 }
 
 type GetContactInput struct {
+
 	// The ARN of the contact for which to request details.
+	//
+	// This member is required.
 	ContactArn *string
 }
 
 type GetContactOutput struct {
+
 	// The details of the requested contact.
 	Contact *types.Contact
 

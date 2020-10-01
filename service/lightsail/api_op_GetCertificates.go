@@ -59,14 +59,17 @@ func (c *Client) GetCertificates(ctx context.Context, params *GetCertificatesInp
 }
 
 type GetCertificatesInput struct {
+
 	// Indicates whether to include detailed information about the certificates in the
 	// response.  <p>When omitted, the response includes only the certificate names,
 	// Amazon Resource Names (ARNs), domain names, and tags.</p>
 	IncludeCertificateDetails *bool
+
 	// The name for the certificate for which to return information.  <p>When omitted,
 	// the response includes all of your certificates in the AWS region where the
 	// request is made.</p>
 	CertificateName *string
+
 	// The status of the certificates for which to return information.  <p>For example,
 	// specify <code>ISSUED</code> to return only certificates with an
 	// <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of
@@ -76,6 +79,7 @@ type GetCertificatesInput struct {
 }
 
 type GetCertificatesOutput struct {
+
 	// An object that describes certificates.
 	Certificates []*types.CertificateSummary
 

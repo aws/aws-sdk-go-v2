@@ -55,7 +55,10 @@ func (c *Client) DeleteContainerPolicy(ctx context.Context, params *DeleteContai
 }
 
 type DeleteContainerPolicyInput struct {
+
 	// The name of the container that holds the policy.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

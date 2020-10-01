@@ -63,6 +63,7 @@ func (c *Client) GetAuthorizationToken(ctx context.Context, params *GetAuthoriza
 }
 
 type GetAuthorizationTokenInput struct {
+
 	// A list of AWS account IDs that are associated with the registries for which to
 	// get AuthorizationData objects. If you do not specify a registry, the default
 	// registry is assumed.
@@ -70,6 +71,7 @@ type GetAuthorizationTokenInput struct {
 }
 
 type GetAuthorizationTokenOutput struct {
+
 	// A list of authorization token data objects that correspond to the registryIds
 	// values in the request.
 	AuthorizationData []*types.AuthorizationData

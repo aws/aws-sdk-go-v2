@@ -60,14 +60,19 @@ func (c *Client) TerminateProvisionedProduct(ctx context.Context, params *Termin
 }
 
 type TerminateProvisionedProductInput struct {
+
 	// An idempotency token that uniquely identifies the termination request. This
 	// token is only valid during the termination process. After the provisioned
 	// product is terminated, subsequent requests to terminate the same provisioned
 	// product always return ResourceNotFound.
+	//
+	// This member is required.
 	TerminateToken *string
+
 	// The identifier of the provisioned product. You cannot specify both
 	// ProvisionedProductName and ProvisionedProductId.
 	ProvisionedProductId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -77,15 +82,18 @@ type TerminateProvisionedProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// If set to true, AWS Service Catalog stops managing the specified provisioned
 	// product even if it cannot delete the underlying resources.
 	IgnoreErrors *bool
+
 	// The name of the provisioned product. You cannot specify both
 	// ProvisionedProductName and ProvisionedProductId.
 	ProvisionedProductName *string
 }
 
 type TerminateProvisionedProductOutput struct {
+
 	// Information about the result of this request.
 	RecordDetail *types.RecordDetail
 

@@ -54,6 +54,7 @@ func (c *Client) DeleteSkillGroup(ctx context.Context, params *DeleteSkillGroupI
 }
 
 type DeleteSkillGroupInput struct {
+
 	// The ARN of the skill group to delete. Required.
 	SkillGroupArn *string
 }

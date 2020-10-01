@@ -60,14 +60,21 @@ func (c *Client) DescribeBudget(ctx context.Context, params *DescribeBudgetInput
 
 // Request of DescribeBudget
 type DescribeBudgetInput struct {
+
 	// The name of the budget that you want a description of.
+	//
+	// This member is required.
 	BudgetName *string
+
 	// The accountId that is associated with the budget that you want a description of.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 // Response of DescribeBudget
 type DescribeBudgetOutput struct {
+
 	// The description of the budget.
 	Budget *types.Budget
 

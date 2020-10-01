@@ -62,25 +62,36 @@ func (c *Client) CreatePolicyVersion(ctx context.Context, params *CreatePolicyVe
 
 // The input for the CreatePolicyVersion operation.
 type CreatePolicyVersionInput struct {
+
 	// Specifies whether the policy version is set as the default. When this parameter
 	// is true, the new policy version becomes the operative version (that is, the
 	// version that is in effect for the certificates to which the policy is attached).
 	SetAsDefault *bool
+
 	// The JSON document that describes the policy. Minimum length of 1. Maximum length
 	// of 2048, excluding whitespace.
+	//
+	// This member is required.
 	PolicyDocument *string
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
 }
 
 // The output of the CreatePolicyVersion operation.
 type CreatePolicyVersionOutput struct {
+
 	// The JSON document that describes the policy.
 	PolicyDocument *string
+
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool
+
 	// The policy version ID.
 	PolicyVersionId *string
+
 	// The policy ARN.
 	PolicyArn *string
 

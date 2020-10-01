@@ -58,17 +58,24 @@ func (c *Client) CreateSkillGroup(ctx context.Context, params *CreateSkillGroupI
 }
 
 type CreateSkillGroupInput struct {
+
 	// The description for the skill group.
 	Description *string
+
 	// The name for the skill group.
+	//
+	// This member is required.
 	SkillGroupName *string
+
 	// A unique, user-specified identifier for this request that ensures idempotency.
 	ClientRequestToken *string
+
 	// The tags for the skill group.
 	Tags []*types.Tag
 }
 
 type CreateSkillGroupOutput struct {
+
 	// The ARN of the newly created skill group in the response.
 	SkillGroupArn *string
 

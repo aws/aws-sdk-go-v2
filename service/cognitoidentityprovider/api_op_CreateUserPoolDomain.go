@@ -56,10 +56,17 @@ func (c *Client) CreateUserPoolDomain(ctx context.Context, params *CreateUserPoo
 }
 
 type CreateUserPoolDomainInput struct {
+
 	// The domain string.
+	//
+	// This member is required.
 	Domain *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The configuration for a custom domain that hosts the sign-up and sign-in
 	// webpages for your application. Provide this parameter only if you want to use a
 	// custom domain for your user pool. Otherwise, you can exclude this parameter and
@@ -70,6 +77,7 @@ type CreateUserPoolDomainInput struct {
 }
 
 type CreateUserPoolDomainOutput struct {
+
 	// The Amazon CloudFront endpoint that you use as the target of the alias that you
 	// set up with your Domain Name Service (DNS) provider.
 	CloudFrontDomain *string

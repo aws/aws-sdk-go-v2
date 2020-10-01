@@ -61,8 +61,12 @@ func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns .
 
 // Input for Subscribe action.
 type SubscribeInput struct {
+
 	// The ARN of the topic you want to subscribe to.
+	//
+	// This member is required.
 	TopicArn *string
+
 	// The protocol you want to use. Supported protocols include:
 	//
 	//     * http –
@@ -87,7 +91,10 @@ type SubscribeInput struct {
 	//
 	//     * lambda – delivery of
 	// JSON-encoded message to an Amazon Lambda function.
+	//
+	// This member is required.
 	Protocol *string
+
 	// The endpoint that you want to receive notifications. Endpoints vary by
 	// protocol:
 	//
@@ -115,6 +122,7 @@ type SubscribeInput struct {
 	//     * For the lambda protocol, the endpoint is the ARN
 	// of an Amazon Lambda function.
 	Endpoint *string
+
 	// Sets whether the response from the Subscribe request includes the subscription
 	// ARN, even if the subscription is not yet confirmed.
 	//
@@ -128,6 +136,7 @@ type SubscribeInput struct {
 	//
 	// The default value is false.
 	ReturnSubscriptionArn *bool
+
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
 	// SetTopicAttributes action uses:
@@ -156,6 +165,7 @@ type SubscribeInput struct {
 
 // Response for Subscribe action.
 type SubscribeOutput struct {
+
 	// The ARN of the subscription if it is confirmed, or the string "pending
 	// confirmation" if the subscription requires confirmation. However, if the API
 	// request parameter ReturnSubscriptionArn is true, then the value is always the

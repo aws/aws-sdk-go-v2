@@ -57,11 +57,15 @@ func (c *Client) GetInstance(ctx context.Context, params *GetInstanceInput, optF
 }
 
 type GetInstanceInput struct {
+
 	// The name of the instance.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type GetInstanceOutput struct {
+
 	// An array of key-value pairs containing information about the specified instance.
 	Instance *types.Instance
 

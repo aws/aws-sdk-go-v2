@@ -57,14 +57,17 @@ func (c *Client) DescribeEndpointTypes(ctx context.Context, params *DescribeEndp
 
 //
 type DescribeEndpointTypesInput struct {
+
 	// Filters applied to the endpoint types. Valid filter names: engine-name |
 	// endpoint-type
 	Filters []*types.Filter
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
@@ -73,10 +76,12 @@ type DescribeEndpointTypesInput struct {
 
 //
 type DescribeEndpointTypesOutput struct {
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
 	// The types of endpoints that are supported.
 	SupportedEndpointTypes []*types.SupportedEndpointType
 

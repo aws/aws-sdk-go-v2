@@ -67,7 +67,10 @@ func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemI
 
 //
 type DeleteFileSystemInput struct {
+
 	// The ID of the file system you want to delete.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 

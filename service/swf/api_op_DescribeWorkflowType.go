@@ -84,17 +84,27 @@ func (c *Client) DescribeWorkflowType(ctx context.Context, params *DescribeWorkf
 }
 
 type DescribeWorkflowTypeInput struct {
+
 	// The name of the domain in which this workflow type is registered.
+	//
+	// This member is required.
 	Domain *string
+
 	// The workflow type to describe.
+	//
+	// This member is required.
 	WorkflowType *types.WorkflowType
 }
 
 // Contains details about a workflow type.
 type DescribeWorkflowTypeOutput struct {
+
 	// Configuration settings of the workflow type registered through
 	// RegisterWorkflowType ()
+	//
+	// This member is required.
 	Configuration *types.WorkflowTypeConfiguration
+
 	// General information about the workflow type. The status of the workflow type
 	// (returned in the WorkflowTypeInfo structure) can be one of the following.
 	//
@@ -106,6 +116,8 @@ type DescribeWorkflowTypeOutput struct {
 	// DeprecateWorkflowType (), but is still in use. You should keep workers
 	// supporting this type running. You cannot create new workflow executions of this
 	// type.
+	//
+	// This member is required.
 	TypeInfo *types.WorkflowTypeInfo
 
 	// Metadata pertaining to the operation's result.

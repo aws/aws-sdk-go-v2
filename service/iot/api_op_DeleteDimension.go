@@ -55,7 +55,10 @@ func (c *Client) DeleteDimension(ctx context.Context, params *DeleteDimensionInp
 }
 
 type DeleteDimensionInput struct {
+
 	// The unique identifier for the dimension that you want to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

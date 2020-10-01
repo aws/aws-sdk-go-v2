@@ -61,31 +61,47 @@ func (c *Client) GetMLTaskRun(ctx context.Context, params *GetMLTaskRunInput, op
 }
 
 type GetMLTaskRunInput struct {
+
 	// The unique identifier of the machine learning transform.
+	//
+	// This member is required.
 	TransformId *string
+
 	// The unique identifier of the task run.
+	//
+	// This member is required.
 	TaskRunId *string
 }
 
 type GetMLTaskRunOutput struct {
+
 	// The amount of time (in seconds) that the task run consumed resources.
 	ExecutionTime *int32
+
 	// The status for this task run.
 	Status types.TaskStatusType
+
 	// The list of properties that are associated with the task run.
 	Properties *types.TaskRunProperties
+
 	// The unique run identifier associated with this run.
 	TaskRunId *string
+
 	// The date and time when this task run was last modified.
 	LastModifiedOn *time.Time
+
 	// The names of the log groups that are associated with the task run.
 	LogGroupName *string
+
 	// The date and time when this task run was completed.
 	CompletedOn *time.Time
+
 	// The unique identifier of the task run.
 	TransformId *string
+
 	// The error strings that are associated with the task run.
 	ErrorString *string
+
 	// The date and time when this task run started.
 	StartedOn *time.Time
 

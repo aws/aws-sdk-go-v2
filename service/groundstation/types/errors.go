@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Dependency encountered an error.
@@ -26,18 +25,6 @@ func (e *DependencyException) ErrorMessage() string {
 }
 func (e *DependencyException) ErrorCode() string             { return "DependencyException" }
 func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *DependencyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DependencyException) GetParameterName() string {
-	return ptr.ToString(e.ParameterName)
-}
-func (e *DependencyException) HasParameterName() bool {
-	return e.ParameterName != nil
-}
 
 // One or more parameters are not valid.
 type InvalidParameterException struct {
@@ -57,18 +44,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidParameterException) GetParameterName() string {
-	return ptr.ToString(e.ParameterName)
-}
-func (e *InvalidParameterException) HasParameterName() bool {
-	return e.ParameterName != nil
-}
 
 // Account limits for this resource have been exceeded.
 type ResourceLimitExceededException struct {
@@ -88,18 +63,6 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 }
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceLimitExceededException) GetParameterName() string {
-	return ptr.ToString(e.ParameterName)
-}
-func (e *ResourceLimitExceededException) HasParameterName() bool {
-	return e.ParameterName != nil
-}
 
 // Resource was not found.
 type ResourceNotFoundException struct {
@@ -117,9 +80,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

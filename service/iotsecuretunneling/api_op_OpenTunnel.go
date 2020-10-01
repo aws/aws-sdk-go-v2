@@ -57,26 +57,34 @@ func (c *Client) OpenTunnel(ctx context.Context, params *OpenTunnelInput, optFns
 }
 
 type OpenTunnelInput struct {
+
 	// A collection of tag metadata.
 	Tags []*types.Tag
+
 	// Timeout configuration for a tunnel.
 	TimeoutConfig *types.TimeoutConfig
+
 	// The destination configuration for the OpenTunnel request.
 	DestinationConfig *types.DestinationConfig
+
 	// A short text description of the tunnel.
 	Description *string
 }
 
 type OpenTunnelOutput struct {
+
 	// The Amazon Resource Name for the tunnel. The tunnel ARN format is
 	// arn:aws:tunnel:::tunnel/
 	TunnelArn *string
+
 	// The access token the destination local proxy uses to connect to AWS IoT Secure
 	// Tunneling.
 	DestinationAccessToken *string
+
 	// The access token the source local proxy uses to connect to AWS IoT Secure
 	// Tunneling.
 	SourceAccessToken *string
+
 	// A unique alpha-numeric tunnel ID.
 	TunnelId *string
 

@@ -83,7 +83,10 @@ func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdent
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 type GetIdentityDkimAttributesInput struct {
+
 	// A list of one or more verified identities - email addresses, domains, or both.
+	//
+	// This member is required.
 	Identities []*string
 }
 
@@ -92,7 +95,10 @@ type GetIdentityDkimAttributesInput struct {
 // for Easy DKIM signing, and whether Amazon SES successfully verified that these
 // tokens were published.
 type GetIdentityDkimAttributesOutput struct {
+
 	// The DKIM attributes for an email address or a domain.
+	//
+	// This member is required.
 	DkimAttributes map[string]*types.IdentityDkimAttributes
 
 	// Metadata pertaining to the operation's result.

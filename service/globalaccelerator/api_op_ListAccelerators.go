@@ -56,17 +56,21 @@ func (c *Client) ListAccelerators(ctx context.Context, params *ListAcceleratorsI
 }
 
 type ListAcceleratorsInput struct {
+
 	// The number of Global Accelerator objects that you want to return with this call.
 	// The default value is 10.
 	MaxResults *int32
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
 }
 
 type ListAcceleratorsOutput struct {
+
 	// The list of accelerators for a customer account.
 	Accelerators []*types.Accelerator
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string

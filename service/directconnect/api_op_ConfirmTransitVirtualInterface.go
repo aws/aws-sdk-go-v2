@@ -59,13 +59,20 @@ func (c *Client) ConfirmTransitVirtualInterface(ctx context.Context, params *Con
 }
 
 type ConfirmTransitVirtualInterfaceInput struct {
+
 	// The ID of the virtual interface.
+	//
+	// This member is required.
 	VirtualInterfaceId *string
+
 	// The ID of the Direct Connect gateway.
+	//
+	// This member is required.
 	DirectConnectGatewayId *string
 }
 
 type ConfirmTransitVirtualInterfaceOutput struct {
+
 	// The state of the virtual interface. The following are the possible values:
 	//
 	//

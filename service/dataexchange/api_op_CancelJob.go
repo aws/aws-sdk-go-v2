@@ -56,7 +56,10 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 }
 
 type CancelJobInput struct {
+
 	// The unique identifier for a job.
+	//
+	// This member is required.
 	JobId *string
 }
 

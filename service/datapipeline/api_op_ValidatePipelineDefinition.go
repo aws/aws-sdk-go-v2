@@ -58,22 +58,35 @@ func (c *Client) ValidatePipelineDefinition(ctx context.Context, params *Validat
 
 // Contains the parameters for ValidatePipelineDefinition.
 type ValidatePipelineDefinitionInput struct {
+
 	// The objects that define the pipeline changes to validate against the pipeline.
+	//
+	// This member is required.
 	PipelineObjects []*types.PipelineObject
+
 	// The parameter objects used with the pipeline.
 	ParameterObjects []*types.ParameterObject
+
 	// The ID of the pipeline.
+	//
+	// This member is required.
 	PipelineId *string
+
 	// The parameter values used with the pipeline.
 	ParameterValues []*types.ParameterValue
 }
 
 // Contains the output of ValidatePipelineDefinition.
 type ValidatePipelineDefinitionOutput struct {
+
 	// Any validation errors that were found.
 	ValidationErrors []*types.ValidationError
+
 	// Indicates whether there were validation errors.
+	//
+	// This member is required.
 	Errored *bool
+
 	// Any validation warnings that were found.
 	ValidationWarnings []*types.ValidationWarning
 

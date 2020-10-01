@@ -57,13 +57,18 @@ func (c *Client) ListNodegroups(ctx context.Context, params *ListNodegroupsInput
 }
 
 type ListNodegroupsInput struct {
+
 	// The nextToken value returned from a previous paginated ListNodegroups request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	NextToken *string
+
 	// The name of the Amazon EKS cluster that you would like to list node groups in.
+	//
+	// This member is required.
 	ClusterName *string
+
 	// The maximum number of node group results returned by ListNodegroups in paginated
 	// output. When you use this parameter, ListNodegroups returns only maxResults
 	// results in a single page along with a nextToken response element. You can see
@@ -75,8 +80,10 @@ type ListNodegroupsInput struct {
 }
 
 type ListNodegroupsOutput struct {
+
 	// A list of all of the node groups associated with the specified cluster.
 	Nodegroups []*string
+
 	// The nextToken value to include in a future ListNodegroups request. When the
 	// results of a ListNodegroups request exceed maxResults, you can use this value to
 	// retrieve the next page of results. This value is null when there are no more

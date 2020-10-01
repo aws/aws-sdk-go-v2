@@ -59,7 +59,10 @@ func (c *Client) DeletePlatformApplication(ctx context.Context, params *DeletePl
 
 // Input for DeletePlatformApplication action.
 type DeletePlatformApplicationInput struct {
+
 	// PlatformApplicationArn of platform application object to delete.
+	//
+	// This member is required.
 	PlatformApplicationArn *string
 }
 

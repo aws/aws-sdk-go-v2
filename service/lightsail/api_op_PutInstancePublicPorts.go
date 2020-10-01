@@ -65,13 +65,20 @@ func (c *Client) PutInstancePublicPorts(ctx context.Context, params *PutInstance
 }
 
 type PutInstancePublicPortsInput struct {
+
 	// The name of the instance for which to open ports.
+	//
+	// This member is required.
 	InstanceName *string
+
 	// An array of objects to describe the ports to open for the specified instance.
+	//
+	// This member is required.
 	PortInfos []*types.PortInfo
 }
 
 type PutInstancePublicPortsOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -55,9 +55,11 @@ func (c *Client) DescribeDataSources(ctx context.Context, params *DescribeDataSo
 }
 
 type DescribeDataSourcesInput struct {
+
 	// The not equal to operator. The DataSource results will have FilterVariable
 	// values not equal to the value specified with NE.
 	NE *string
+
 	// A two-value parameter that determines the sequence of the resulting list of
 	// DataSource.
 	//
@@ -69,26 +71,33 @@ type DescribeDataSourcesInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
 	// The less than or equal to operator. The DataSource results will have
 	// FilterVariable values that are less than or equal to the value specified with
 	// LE.
 	LE *string
+
 	// The less than operator. The DataSource results will have FilterVariable values
 	// that are less than the value specified with LT.
 	LT *string
+
 	// The ID of the page in the paginated results.
 	NextToken *string
+
 	// The maximum number of DataSource to include in the result.
 	Limit *int32
+
 	// A string that is found at the beginning of a variable, such as Name or Id. For
 	// example, a DataSource could have the Name2014-09-09-HolidayGiftMailer. To search
 	// for this DataSource, select Name for the FilterVariable and any of the following
 	// strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li> <p>2014-09-09</p>
 	// </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
 	Prefix *string
+
 	// The greater than operator. The DataSource results will have FilterVariable
 	// values that are greater than the value specified with GT.
 	GT *string
+
 	// Use one of the following variables to filter a list of DataSource:
 	//
 	//     *
@@ -108,9 +117,11 @@ type DescribeDataSourcesInput struct {
 	//     * IAMUser - Sets the search criteria to the user account that
 	// invoked the DataSource creation.
 	FilterVariable types.DataSourceFilterVariable
+
 	// The equal to operator. The DataSource results will have FilterVariable values
 	// that exactly match the value specified with EQ.
 	EQ *string
+
 	// The greater than or equal to operator. The DataSource results will have
 	// FilterVariable values that are greater than or equal to the value specified with
 	// GE.
@@ -120,9 +131,11 @@ type DescribeDataSourcesInput struct {
 // Represents the query results from a DescribeDataSources () operation. The
 // content is essentially a list of DataSource.
 type DescribeDataSourcesOutput struct {
+
 	// An ID of the next page in the paginated results that indicates at least one more
 	// page follows.
 	NextToken *string
+
 	// A list of DataSource that meet the search criteria.
 	Results []*types.DataSource
 

@@ -57,13 +57,20 @@ func (c *Client) DeleteFaces(ctx context.Context, params *DeleteFacesInput, optF
 }
 
 type DeleteFacesInput struct {
+
 	// Collection from which to remove the specific faces.
+	//
+	// This member is required.
 	CollectionId *string
+
 	// An array of face IDs to delete.
+	//
+	// This member is required.
 	FaceIds []*string
 }
 
 type DeleteFacesOutput struct {
+
 	// An array of strings (face IDs) of the faces that were deleted.
 	DeletedFaces []*string
 

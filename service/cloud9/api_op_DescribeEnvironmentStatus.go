@@ -56,13 +56,18 @@ func (c *Client) DescribeEnvironmentStatus(ctx context.Context, params *Describe
 }
 
 type DescribeEnvironmentStatusInput struct {
+
 	// The ID of the environment to get status information about.
+	//
+	// This member is required.
 	EnvironmentId *string
 }
 
 type DescribeEnvironmentStatusOutput struct {
+
 	// Any informational message about the status of the environment.
 	Message *string
+
 	// The status of the environment. Available values include:
 	//
 	//     * connecting: The

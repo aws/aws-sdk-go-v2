@@ -59,36 +59,45 @@ func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optF
 
 // The input for CreateStack () action.
 type CreateStackInput struct {
+
 	// Structure containing the stack policy body. For more information, go to  Prevent
 	// Updates to Stack Resources
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
 	// in the AWS CloudFormation User Guide. You can specify either the StackPolicyBody
 	// or the StackPolicyURL parameter, but not both.
 	StackPolicyBody *string
+
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. For more information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
 	// TemplateBody or the TemplateURL parameter, but not both.
 	TemplateBody *string
+
 	// The name that is associated with the stack. The name must be unique in the
 	// Region in which you are creating the stack. A stack name can contain only
 	// alphanumeric characters (case sensitive) and hyphens. It must start with an
 	// alphabetic character and cannot be longer than 128 characters.
+	//
+	// This member is required.
 	StackName *string
+
 	// Location of a file containing the stack policy. The URL must point to a policy
 	// (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack.
 	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
 	// not both.
 	StackPolicyURL *string
+
 	// Determines what action will be taken if stack creation fails. This must be one
 	// of: DO_NOTHING, ROLLBACK, or DELETE. You can specify either OnFailure or
 	// DisableRollback, but not both. Default: ROLLBACK
 	OnFailure types.OnFailure
+
 	// The Simple Notification Service (SNS) topic ARNs to publish stack related
 	// events. You can find your SNS topic ARNs using the SNS console or your Command
 	// Line Interface (CLI).
 	NotificationARNs []*string
+
 	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for AWS CloudFormation to create the stack.
 	//
@@ -171,6 +180,7 @@ type CreateStackInput struct {
 	// Processing on Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
+
 	// Whether to enable termination protection on the specified stack. If a user
 	// attempts to delete a stack with termination protection enabled, the operation
 	// fails and the stack remains unchanged. For more information, see Protecting a
@@ -182,12 +192,15 @@ type CreateStackInput struct {
 	// termination protection is set on the root stack and cannot be changed directly
 	// on the nested stack.
 	EnableTerminationProtection *bool
+
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED;
 	// if DisableRollback is not set or is set to false, the stack will be rolled back.
 	TimeoutInMinutes *int32
+
 	// Set to true to disable rollback of the stack if stack creation failed. You can
 	// specify either DisableRollback or OnFailure, but not both. Default: false
 	DisableRollback *bool
+
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to create the stack. AWS CloudFormation
 	// uses the role's credentials to make calls on your behalf. AWS CloudFormation
@@ -199,18 +212,22 @@ type CreateStackInput struct {
 	// CloudFormation uses a temporary session that is generated from your user
 	// credentials.
 	RoleARN *string
+
 	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
 	// these tags to the resources created in the stack. A maximum number of 50 tags
 	// can be specified.
 	Tags []*types.Tag
+
 	// The rollback triggers for AWS CloudFormation to monitor during stack creation
 	// and updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *types.RollbackConfiguration
+
 	// A list of Parameter structures that specify input parameters for the stack. For
 	// more information, see the Parameter
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
 	Parameters []*types.Parameter
+
 	// The template resource types that you have permissions to work with for this
 	// create stack action, such as AWS::EC2::Instance, AWS::EC2::*, or
 	// Custom::MyCustomInstance. Use the following syntax to describe template resource
@@ -225,6 +242,7 @@ type CreateStackInput struct {
 	// information, see Controlling Access with AWS Identity and Access Management
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
 	ResourceTypes []*string
+
 	// A unique identifier for this CreateStack request. Specify this token if you plan
 	// to retry requests so that AWS CloudFormation knows that you're not attempting to
 	// create a stack with the same name. You might retry CreateStack requests to
@@ -239,6 +257,7 @@ type CreateStackInput struct {
 	// the console, each stack event would be assigned the same token in the following
 	// format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002.
 	ClientRequestToken *string
+
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more
 	// information, go to the Template Anatomy
@@ -250,6 +269,7 @@ type CreateStackInput struct {
 
 // The output for a CreateStack () action.
 type CreateStackOutput struct {
+
 	// Unique identifier of the stack.
 	StackId *string
 

@@ -56,7 +56,10 @@ func (c *Client) DeregisterOnPremisesInstance(ctx context.Context, params *Dereg
 
 // Represents the input of a DeregisterOnPremisesInstance operation.
 type DeregisterOnPremisesInstanceInput struct {
+
 	// The name of the on-premises instance to deregister.
+	//
+	// This member is required.
 	InstanceName *string
 }
 

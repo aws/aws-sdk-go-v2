@@ -55,6 +55,7 @@ func (c *Client) GetStaticIps(ctx context.Context, params *GetStaticIpsInput, op
 }
 
 type GetStaticIpsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetStaticIps request. If your results are
 	// paginated, the response will return a next page token that you can specify as
@@ -63,9 +64,11 @@ type GetStaticIpsInput struct {
 }
 
 type GetStaticIpsOutput struct {
+
 	// An array of key-value pairs containing information about your get static IPs
 	// request.
 	StaticIps []*types.StaticIp
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetStaticIps request and specify the next page

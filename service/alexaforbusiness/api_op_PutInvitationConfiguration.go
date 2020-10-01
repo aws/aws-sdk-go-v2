@@ -56,11 +56,16 @@ func (c *Client) PutInvitationConfiguration(ctx context.Context, params *PutInvi
 }
 
 type PutInvitationConfigurationInput struct {
+
 	// The name of the organization sending the enrollment invite to a user.
+	//
+	// This member is required.
 	OrganizationName *string
+
 	// The list of private skill IDs that you want to recommend to the user to enable
 	// in the invitation.
 	PrivateSkillIds []*string
+
 	// The email ID of the organization or individual contact that the enrolled user
 	// can use.
 	ContactEmail *string

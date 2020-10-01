@@ -58,13 +58,16 @@ func (c *Client) EnableMacie(ctx context.Context, params *EnableMacieInput, optF
 }
 
 type EnableMacieInput struct {
+
 	// A unique, case-sensitive token that you provide to ensure the idempotency of the
 	// request.
 	ClientToken *string
+
 	// Specifies how often to publish updates to policy findings for the account. This
 	// includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly
 	// called Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
+
 	// Specifies the status for the account. To enable Amazon Macie and start all
 	// Amazon Macie activities for the account, set this value to ENABLED.
 	Status types.MacieStatus

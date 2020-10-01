@@ -55,8 +55,11 @@ func (c *Client) DeleteProtocolsList(ctx context.Context, params *DeleteProtocol
 }
 
 type DeleteProtocolsListInput struct {
+
 	// The ID of the protocols list that you want to delete. You can retrieve this ID
 	// from PutProtocolsList, ListProtocolsLists, and GetProtocolsLost.
+	//
+	// This member is required.
 	ListId *string
 }
 

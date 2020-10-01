@@ -63,6 +63,7 @@ func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentI
 }
 
 type BatchPutDocumentInput struct {
+
 	// One or more documents to add to the index. Documents have the following file
 	// size limits.
 	//
@@ -76,17 +77,24 @@ type BatchPutDocumentInput struct {
 	// For more
 	// information about file size and transaction per second quotas, see Quotas
 	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
+	//
+	// This member is required.
 	Documents []*types.Document
+
 	// The Amazon Resource Name (ARN) of a role that is allowed to run the
 	// BatchPutDocument operation. For more information, see IAM Roles for Amazon
 	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
+
 	// The identifier of the index to add the documents to. You need to create the
 	// index first using the CreateIndex () operation.
+	//
+	// This member is required.
 	IndexId *string
 }
 
 type BatchPutDocumentOutput struct {
+
 	// A list of documents that were not added to the index because the document failed
 	// a validation check. Each document contains an error message that indicates why
 	// the document couldn't be added to the index. If there was an error adding a

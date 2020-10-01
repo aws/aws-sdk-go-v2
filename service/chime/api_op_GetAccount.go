@@ -57,11 +57,15 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 }
 
 type GetAccountInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type GetAccountOutput struct {
+
 	// The Amazon Chime account details.
 	Account *types.Account
 

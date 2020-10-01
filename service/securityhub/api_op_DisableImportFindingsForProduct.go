@@ -57,7 +57,10 @@ func (c *Client) DisableImportFindingsForProduct(ctx context.Context, params *Di
 }
 
 type DisableImportFindingsForProductInput struct {
+
 	// The ARN of the integrated product to disable the integration for.
+	//
+	// This member is required.
 	ProductSubscriptionArn *string
 }
 

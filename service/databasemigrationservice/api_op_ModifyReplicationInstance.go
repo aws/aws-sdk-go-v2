@@ -59,6 +59,7 @@ func (c *Client) ModifyReplicationInstance(ctx context.Context, params *ModifyRe
 
 //
 type ModifyReplicationInstanceInput struct {
+
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For example to specify the instance class
 	// dms.c4.large, set this parameter to "dms.c4.large". For more information on the
@@ -66,8 +67,12 @@ type ModifyReplicationInstanceInput struct {
 	// Selecting the right AWS DMS replication instance for your migration
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
 	ReplicationInstanceClass *string
+
 	// The Amazon Resource Name (ARN) of the replication instance.
+	//
+	// This member is required.
 	ReplicationInstanceArn *string
+
 	// A value that indicates that minor version upgrades are applied automatically to
 	// the replication instance during the maintenance window. Changing this parameter
 	// doesn't result in an outage, except in the case dsecribed following. The change
@@ -82,26 +87,33 @@ type ModifyReplicationInstanceInput struct {
 	//     * AWS DMS has enabled
 	// automatic patching for the given engine version.
 	AutoMinorVersionUpgrade *bool
+
 	// Specifies the VPC security group to be used with the replication instance. The
 	// VPC security group must work with the VPC containing the replication instance.
 	VpcSecurityGroupIds []*string
+
 	// Indicates that major version upgrades are allowed. Changing this parameter does
 	// not result in an outage, and the change is asynchronously applied as soon as
 	// possible. This parameter must be set to true when specifying a value for the
 	// EngineVersion parameter that is a different major version than the replication
 	// instance's current version.
 	AllowMajorVersionUpgrade *bool
+
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
 	MultiAZ *bool
+
 	// Indicates whether the changes should be applied immediately or during the next
 	// maintenance window.
 	ApplyImmediately *bool
+
 	// The engine version number of the replication instance.
 	EngineVersion *string
+
 	// The replication instance identifier. This parameter is stored as a lowercase
 	// string.
 	ReplicationInstanceIdentifier *string
+
 	// The weekly time range (in UTC) during which system maintenance can occur, which
 	// might result in an outage. Changing this parameter does not result in an outage,
 	// except in the following situation, and the change is asynchronously applied as
@@ -111,6 +123,7 @@ type ModifyReplicationInstanceInput struct {
 	// ddd:hh24:mi-ddd:hh24:mi Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
 	// Constraints: Must be at least 30 minutes
 	PreferredMaintenanceWindow *string
+
 	// The amount of storage (in gigabytes) to be allocated for the replication
 	// instance.
 	AllocatedStorage *int32
@@ -118,6 +131,7 @@ type ModifyReplicationInstanceInput struct {
 
 //
 type ModifyReplicationInstanceOutput struct {
+
 	// The modified replication instance.
 	ReplicationInstance *types.ReplicationInstance
 

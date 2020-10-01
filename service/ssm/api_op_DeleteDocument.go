@@ -58,16 +58,22 @@ func (c *Client) DeleteDocument(ctx context.Context, params *DeleteDocumentInput
 }
 
 type DeleteDocumentInput struct {
+
 	// Some SSM document types require that you specify a Force flag before you can
 	// delete the document. For example, you must specify a Force flag to delete a
 	// document of type ApplicationConfigurationSchema. You can restrict access to the
 	// Force flag in an AWS Identity and Access Management (IAM) policy.
 	Force *bool
+
 	// The version name of the document that you want to delete. If not provided, all
 	// versions of the document are deleted.
 	VersionName *string
+
 	// The name of the document.
+	//
+	// This member is required.
 	Name *string
+
 	// The version of the document that you want to delete. If not provided, all
 	// versions of the document are deleted.
 	DocumentVersion *string

@@ -58,14 +58,25 @@ func (c *Client) UpdateModel(ctx context.Context, params *UpdateModelInput, optF
 
 // Request to update an existing model in an existing RestApi () resource.
 type UpdateModelInput struct {
+
 	// [Required] The name of the model to update.
-	ModelName        *string
-	Title            *string
-	Name             *string
+	//
+	// This member is required.
+	ModelName *string
+
+	Title *string
+
+	Name *string
+
 	TemplateSkipList []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Template  *bool
+
+	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -80,14 +91,19 @@ type UpdateModelInput struct {
 // Method (), MethodResponse (), Models and Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type UpdateModelOutput struct {
+
 	// The identifier for the model resource.
 	Id *string
+
 	// The name of the model. Must be an alphanumeric string.
 	Name *string
+
 	// The content-type for the model.
 	ContentType *string
+
 	// The description of the model.
 	Description *string
+
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model. Do
 	// not include "\*/" characters in the description of any properties because such

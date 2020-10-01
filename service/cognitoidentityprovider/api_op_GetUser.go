@@ -54,28 +54,40 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 
 // Represents the request to get information about the user.
 type GetUserInput struct {
+
 	// The access token returned by the server response to get information about the
 	// user.
+	//
+	// This member is required.
 	AccessToken *string
 }
 
 // Represents the response from the server from the request to get information
 // about the user.
 type GetUserOutput struct {
+
 	// The user name of the user you wish to retrieve from the get user request.
+	//
+	// This member is required.
 	Username *string
+
 	// The MFA options that are enabled for the user. The possible values in this list
 	// are SMS_MFA and SOFTWARE_TOKEN_MFA.
 	UserMFASettingList []*string
+
 	// An array of name-value pairs representing user attributes. For custom
 	// attributes, you must prepend the custom: prefix to the attribute name.
+	//
+	// This member is required.
 	UserAttributes []*types.AttributeType
+
 	// This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about TOTP software
 	// token MFA configurations. To look up information about either type of MFA
 	// configuration, use the use the GetUserResponse$UserMFASettingList () response
 	// instead.
 	MFAOptions []*types.MFAOptionType
+
 	// The user's preferred MFA setting.
 	PreferredMfaSetting *string
 

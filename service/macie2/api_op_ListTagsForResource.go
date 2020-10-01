@@ -56,12 +56,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the classification job, custom data
 	// identifier, findings filter, or member account.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the resource.
 	Tags map[string]*string

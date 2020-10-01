@@ -57,12 +57,17 @@ func (c *Client) GetVpcLinks(ctx context.Context, params *GetVpcLinksInput, optF
 
 // Gets the VpcLinks () collection under the caller's account in a selected region.
 type GetVpcLinksInput struct {
-	Template         *bool
+	Template *bool
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// The current pagination position in the paged result set.
 	Position *string
-	Name     *string
+
+	Name *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
@@ -75,8 +80,10 @@ type GetVpcLinksInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html)
 // </div>
 type GetVpcLinksOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.VpcLink
+
 	// The current pagination position in the paged result set.
 	Position *string
 

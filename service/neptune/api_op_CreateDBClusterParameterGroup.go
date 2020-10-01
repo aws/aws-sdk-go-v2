@@ -76,10 +76,15 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 }
 
 type CreateDBClusterParameterGroupInput struct {
+
 	// The description for the DB cluster parameter group.
+	//
+	// This member is required.
 	Description *string
+
 	// The tags to be assigned to the new DB cluster parameter group.
 	Tags []*types.Tag
+
 	// The name of the DB cluster parameter group. Constraints:
 	//
 	//     * Must match the
@@ -87,15 +92,21 @@ type CreateDBClusterParameterGroupInput struct {
 	//
 	// This value is stored as a
 	// lowercase string.
+	//
+	// This member is required.
 	DBClusterParameterGroupName *string
+
 	// The DB cluster parameter group family name. A DB cluster parameter group can be
 	// associated with one and only one DB cluster parameter group family, and can be
 	// applied only to a DB cluster running a database engine and engine version
 	// compatible with that DB cluster parameter group family.
+	//
+	// This member is required.
 	DBParameterGroupFamily *string
 }
 
 type CreateDBClusterParameterGroupOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster parameter group. This data
 	// type is used as a response element in the DescribeDBClusterParameterGroups ()
 	// action.

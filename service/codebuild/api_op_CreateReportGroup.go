@@ -56,20 +56,31 @@ func (c *Client) CreateReportGroup(ctx context.Context, params *CreateReportGrou
 }
 
 type CreateReportGroupInput struct {
+
 	// The type of report group.
+	//
+	// This member is required.
 	Type types.ReportType
+
 	// The name of the report group.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of tag key and value pairs associated with this report group. These tags
 	// are available for use by AWS services that support AWS CodeBuild report group
 	// tags.
 	Tags []*types.Tag
+
 	// A ReportExportConfig object that contains information about where the report
 	// group test results are exported.
+	//
+	// This member is required.
 	ExportConfig *types.ReportExportConfig
 }
 
 type CreateReportGroupOutput struct {
+
 	// Information about the report group that was created.
 	ReportGroup *types.ReportGroup
 

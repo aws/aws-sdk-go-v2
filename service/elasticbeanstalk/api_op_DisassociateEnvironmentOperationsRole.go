@@ -61,7 +61,10 @@ func (c *Client) DisassociateEnvironmentOperationsRole(ctx context.Context, para
 
 // Request to disassociate the operations role from an environment.
 type DisassociateEnvironmentOperationsRoleInput struct {
+
 	// The name of the environment from which to disassociate the operations role.
+	//
+	// This member is required.
 	EnvironmentName *string
 }
 

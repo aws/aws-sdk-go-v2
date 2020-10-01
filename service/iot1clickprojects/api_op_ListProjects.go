@@ -56,18 +56,24 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 }
 
 type ListProjectsInput struct {
+
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListProjectsOutput struct {
+
 	// The token used to retrieve the next set of results - will be effectively empty
 	// if there are no further results.
 	NextToken *string
+
 	// An object containing the list of projects.
+	//
+	// This member is required.
 	Projects []*types.ProjectSummary
 
 	// Metadata pertaining to the operation's result.

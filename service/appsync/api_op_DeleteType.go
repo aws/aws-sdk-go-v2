@@ -55,9 +55,15 @@ func (c *Client) DeleteType(ctx context.Context, params *DeleteTypeInput, optFns
 }
 
 type DeleteTypeInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The type name.
+	//
+	// This member is required.
 	TypeName *string
 }
 

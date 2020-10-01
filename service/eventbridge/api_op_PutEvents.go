@@ -56,15 +56,20 @@ func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns .
 }
 
 type PutEventsInput struct {
+
 	// The entry that defines an event in your system. You can specify several
 	// parameters for the entry such as the source and type of the event, resources
 	// associated with the event, and so on.
+	//
+	// This member is required.
 	Entries []*types.PutEventsRequestEntry
 }
 
 type PutEventsOutput struct {
+
 	// The number of failed entries.
 	FailedEntryCount *int32
+
 	// The successfully and unsuccessfully ingested events results. If the ingestion
 	// was successful, the entry has the event ID in it. Otherwise, you can use the
 	// error code and error message to identify the problem with the entry.

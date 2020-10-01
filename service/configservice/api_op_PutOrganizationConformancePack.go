@@ -76,33 +76,45 @@ func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *Put
 }
 
 type PutOrganizationConformancePackInput struct {
+
 	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results.
 	// AWS Config stores intermediate files while processing conformance pack template.
 	// The delivery bucket name should start with awsconfigconforms. For example:
 	// "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see
 	// Permissions for cross account bucket access
 	// (https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html).
+	//
+	// This member is required.
 	DeliveryS3Bucket *string
+
 	// A string containing full conformance pack template body. Structure containing
 	// the template body with a minimum length of 1 byte and a maximum length of 51,200
 	// bytes.
 	TemplateBody *string
+
 	// Location of file containing the template body. The uri must point to the
 	// conformance pack template (max size: 300 KB). You must have access to read
 	// Amazon S3 bucket.
 	TemplateS3Uri *string
+
 	// Name of the organization conformance pack you want to create.
+	//
+	// This member is required.
 	OrganizationConformancePackName *string
+
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []*types.ConformancePackInputParameter
+
 	// The prefix for the Amazon S3 bucket.
 	DeliveryS3KeyPrefix *string
+
 	// A list of AWS accounts to be excluded from an organization conformance pack
 	// while deploying a conformance pack.
 	ExcludedAccounts []*string
 }
 
 type PutOrganizationConformancePackOutput struct {
+
 	// ARN of the organization conformance pack.
 	OrganizationConformancePackArn *string
 

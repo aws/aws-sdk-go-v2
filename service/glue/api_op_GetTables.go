@@ -56,24 +56,33 @@ func (c *Client) GetTables(ctx context.Context, params *GetTablesInput, optFns .
 }
 
 type GetTablesInput struct {
+
 	// The ID of the Data Catalog where the tables reside. If none is provided, the AWS
 	// account ID is used by default.
 	CatalogId *string
+
 	// The database in the catalog whose tables to list. For Hive compatibility, this
 	// name is entirely lowercase.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// A continuation token, included if this is a continuation call.
 	NextToken *string
+
 	// The maximum number of tables to return in a single response.
 	MaxResults *int32
+
 	// A regular expression pattern. If present, only those tables whose names match
 	// the pattern are returned.
 	Expression *string
 }
 
 type GetTablesOutput struct {
+
 	// A list of the requested Table objects.
 	TableList []*types.Table
+
 	// A continuation token, present if the current list segment is not the last.
 	NextToken *string
 

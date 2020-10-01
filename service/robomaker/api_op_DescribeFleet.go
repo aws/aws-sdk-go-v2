@@ -57,25 +57,36 @@ func (c *Client) DescribeFleet(ctx context.Context, params *DescribeFleetInput, 
 }
 
 type DescribeFleetInput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// This member is required.
 	Fleet *string
 }
 
 type DescribeFleetOutput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Arn *string
+
 	// The status of the last deployment.
 	LastDeploymentStatus types.DeploymentStatus
+
 	// The time of the last deployment.
 	LastDeploymentTime *time.Time
+
 	// The list of all tags added to the specified fleet.
 	Tags map[string]*string
+
 	// A list of robots.
 	Robots []*types.Robot
+
 	// The Amazon Resource Name (ARN) of the last deployment job.
 	LastDeploymentJob *string
+
 	// The time, in milliseconds since the epoch, when the fleet was created.
 	CreatedAt *time.Time
+
 	// The name of the fleet.
 	Name *string
 

@@ -56,22 +56,33 @@ func (c *Client) DescribeConfigurationRevision(ctx context.Context, params *Desc
 }
 
 type DescribeConfigurationRevisionInput struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and
 	// all of its revisions.
+	//
+	// This member is required.
 	Arn *string
+
 	// A string that uniquely identifies a revision of an MSK configuration.
+	//
+	// This member is required.
 	Revision *int64
 }
 
 type DescribeConfigurationRevisionOutput struct {
+
 	// The Amazon Resource Name (ARN) of the configuration.
 	Arn *string
+
 	// The time when the configuration was created.
 	CreationTime *time.Time
+
 	// The description of the configuration.
 	Description *string
+
 	// The revision number.
 	Revision *int64
+
 	// Contents of the server.properties file. When using the API, you must ensure that
 	// the contents of the file are base64 encoded. When using the AWS Management
 	// Console, the SDK, or the AWS CLI, the contents of server.properties can be in

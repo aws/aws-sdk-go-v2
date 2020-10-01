@@ -62,20 +62,32 @@ func (c *Client) GetReusableDelegationSetLimit(ctx context.Context, params *GetR
 // A complex type that contains information about the request to create a hosted
 // zone.
 type GetReusableDelegationSetLimitInput struct {
+
 	// The ID of the delegation set that you want to get the limit for.
+	//
+	// This member is required.
 	DelegationSetId *string
+
 	// Specify MAX_ZONES_BY_REUSABLE_DELEGATION_SET to get the maximum number of hosted
 	// zones that you can associate with the specified reusable delegation set.
+	//
+	// This member is required.
 	Type types.ReusableDelegationSetLimitType
 }
 
 // A complex type that contains the requested limit.
 type GetReusableDelegationSetLimitOutput struct {
+
 	// The current setting for the limit on hosted zones that you can associate with
 	// the specified reusable delegation set.
+	//
+	// This member is required.
 	Limit *types.ReusableDelegationSetLimit
+
 	// The current number of hosted zones that you can associate with the specified
 	// reusable delegation set.
+	//
+	// This member is required.
 	Count *int64
 
 	// Metadata pertaining to the operation's result.

@@ -59,8 +59,11 @@ func (c *Client) ConfirmTopicRuleDestination(ctx context.Context, params *Confir
 }
 
 type ConfirmTopicRuleDestinationInput struct {
+
 	// The token used to confirm ownership or access to the topic rule confirmation
 	// URL.
+	//
+	// This member is required.
 	ConfirmationToken *string
 }
 

@@ -60,28 +60,47 @@ func (c *Client) DescribeStateMachineForExecution(ctx context.Context, params *D
 }
 
 type DescribeStateMachineForExecutionInput struct {
+
 	// The Amazon Resource Name (ARN) of the execution you want state machine
 	// information for.
+	//
+	// This member is required.
 	ExecutionArn *string
 }
 
 type DescribeStateMachineForExecutionOutput struct {
+
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
+
 	// The Amazon Resource Name (ARN) of the state machine associated with the
 	// execution.
+	//
+	// This member is required.
 	StateMachineArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role of the State Machine for the
 	// execution.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The name of the state machine associated with the execution.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	//
+	// This member is required.
 	Definition *string
+
 	// The date and time the state machine associated with an execution was updated.
 	// For a newly created state machine, this is the creation date.
+	//
+	// This member is required.
 	UpdateDate *time.Time
 
 	// Metadata pertaining to the operation's result.

@@ -59,18 +59,22 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 }
 
 type ListJobsInput struct {
+
 	// HTTP requests are stateless. To identify what object comes "next" in the list of
 	// JobListEntry objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
 	NextToken *string
+
 	// The number of JobListEntry objects to return.
 	MaxResults *int32
 }
 
 type ListJobsOutput struct {
+
 	// Each JobListEntry object contains a job's state, a job's ID, and a value that
 	// indicates whether the job is a job part, in the case of export jobs.
 	JobListEntries []*types.JobListEntry
+
 	// HTTP requests are stateless. If you use this automatically generated NextToken
 	// value in your next ListJobs call, your returned JobListEntry objects will start
 	// from this point in the array.

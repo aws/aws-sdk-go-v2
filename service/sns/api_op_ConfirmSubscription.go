@@ -60,19 +60,27 @@ func (c *Client) ConfirmSubscription(ctx context.Context, params *ConfirmSubscri
 
 // Input for ConfirmSubscription action.
 type ConfirmSubscriptionInput struct {
+
 	// Short-lived token sent to an endpoint during the Subscribe action.
+	//
+	// This member is required.
 	Token *string
+
 	// Disallows unauthenticated unsubscribes of the subscription. If the value of this
 	// parameter is true and the request has an AWS signature, then only the topic
 	// owner and the subscription owner can unsubscribe the endpoint. The unsubscribe
 	// action requires AWS authentication.
 	AuthenticateOnUnsubscribe *string
+
 	// The ARN of the topic for which you wish to confirm a subscription.
+	//
+	// This member is required.
 	TopicArn *string
 }
 
 // Response for ConfirmSubscriptions action.
 type ConfirmSubscriptionOutput struct {
+
 	// The ARN of the created subscription.
 	SubscriptionArn *string
 

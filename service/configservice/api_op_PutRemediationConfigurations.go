@@ -61,11 +61,15 @@ func (c *Client) PutRemediationConfigurations(ctx context.Context, params *PutRe
 }
 
 type PutRemediationConfigurationsInput struct {
+
 	// A list of remediation configuration objects.
+	//
+	// This member is required.
 	RemediationConfigurations []*types.RemediationConfiguration
 }
 
 type PutRemediationConfigurationsOutput struct {
+
 	// Returns a list of failed remediation batch objects.
 	FailedBatches []*types.FailedRemediationBatch
 

@@ -57,11 +57,15 @@ func (c *Client) DescribeListener(ctx context.Context, params *DescribeListenerI
 }
 
 type DescribeListenerInput struct {
+
 	// The Amazon Resource Name (ARN) of the listener to describe.
+	//
+	// This member is required.
 	ListenerArn *string
 }
 
 type DescribeListenerOutput struct {
+
 	// The description of a listener.
 	Listener *types.Listener
 

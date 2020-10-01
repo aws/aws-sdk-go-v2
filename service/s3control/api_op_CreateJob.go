@@ -14,22 +14,27 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// You can use Amazon S3 Batch Operations to perform large-scale Batch Operations
-// on Amazon S3 objects. Amazon S3 Batch Operations can execute a single operation
-// or action on lists of Amazon S3 objects that you specify. For more information,
-// see Amazon S3 Batch Operations
+// S3 Batch Operations performs large-scale Batch Operations on Amazon S3 objects.
+// Batch Operations can run a single operation or action on lists of Amazon S3
+// objects that you specify. For more information, see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
-// Amazon Simple Storage Service Developer Guide. Related actions include:
+// Amazon Simple Storage Service Developer Guide. This operation creates a S3 Batch
+// Operations job. Related actions include:
 //
-//     *
-// DescribeJob ()
+//     * DescribeJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
 //
-//     * ListJobs ()
 //
-//     * UpdateJobPriority ()
+// * ListJobs
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
 //
-//     *
-// UpdateJobStatus ()
+//
+// * UpdateJobPriority
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
+//
+//
+// * UpdateJobStatus
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	stack := middleware.NewStack("CreateJob", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -74,39 +79,63 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 }
 
 type CreateJobInput struct {
+
+	// The AWS account ID that creates the job.
+	//
+	// This member is required.
+	AccountId *string
+
+	// Configuration parameters for the manifest.
+	//
+	// This member is required.
+	Manifest *types.JobManifest
+
 	// A description for this job. You can use any string within the permitted length.
 	// Descriptions don't need to be unique and can be used for multiple jobs.
 	Description *string
+
+	// The operation that you want this job to perform on each object listed in the
+	// manifest. For more information about the available operations, see Operations
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html) in
+	// the Amazon Simple Storage Service Developer Guide.
 	//
-	AccountId *string
-	// Configuration parameters for the optional job-completion report.
-	Report *types.JobReport
-	// The numerical priority for this job. Higher numbers indicate higher priority.
-	Priority *int32
+	// This member is required.
+	Operation *types.JobOperation
+
 	// An idempotency token to ensure that you don't accidentally submit the same
 	// request twice. You can use any string up to the maximum length.
+	//
+	// This member is required.
 	ClientRequestToken *string
+
+	// The numerical priority for this job. Higher numbers indicate higher priority.
+	//
+	// This member is required.
+	Priority *int32
+
 	// Indicates whether confirmation is required before Amazon S3 runs the job.
 	// Confirmation is only required for jobs created through the Amazon S3 console.
 	ConfirmationRequired *bool
-	// The operation that you want this job to perform on each object listed in the
-	// manifest. For more information about the available operations, see Available
-	// Operations
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html) in
-	// the Amazon Simple Storage Service Developer Guide.
-	Operation *types.JobOperation
-	// Configuration parameters for the manifest.
-	Manifest *types.JobManifest
-	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
-	// role that Batch Operations will use to execute this job's operation on each
-	// object in the manifest.
-	RoleArn *string
-	// A set of tags to associate with the Amazon S3 Batch Operations job. This is an
-	// optional parameter.
+
+	// Configuration parameters for the optional job-completion report.
+	//
+	// This member is required.
+	Report *types.JobReport
+
+	// A set of tags to associate with the S3 Batch Operations job. This is an optional
+	// parameter.
 	Tags []*types.S3Tag
+
+	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
+	// role that Batch Operations will use to run this job's operation on each object
+	// in the manifest.
+	//
+	// This member is required.
+	RoleArn *string
 }
 
 type CreateJobOutput struct {
+
 	// The ID for this job. Amazon S3 generates this ID automatically and returns it
 	// after a successful Create Job request.
 	JobId *string

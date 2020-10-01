@@ -57,38 +57,61 @@ func (c *Client) UpdateSimulationApplication(ctx context.Context, params *Update
 }
 
 type UpdateSimulationApplicationInput struct {
+
 	// The simulation software suite used by the simulation application.
+	//
+	// This member is required.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
+
 	// The revision id for the robot application.
 	CurrentRevisionId *string
+
 	// Information about the robot software suite (ROS distribution).
+	//
+	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
 	// The sources of the simulation application.
+	//
+	// This member is required.
 	Sources []*types.SourceConfig
+
 	// The application information for the simulation application.
+	//
+	// This member is required.
 	Application *string
 }
 
 type UpdateSimulationApplicationOutput struct {
+
 	// The sources of the simulation application.
 	Sources []*types.Source
+
 	// The Amazon Resource Name (ARN) of the updated simulation application.
 	Arn *string
+
 	// The simulation software suite used by the simulation application.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
+
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
 	LastUpdatedAt *time.Time
+
 	// The revision id of the simulation application.
 	RevisionId *string
+
 	// The name of the simulation application.
 	Name *string
+
 	// Information about the robot software suite (ROS distribution).
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The version of the robot application.
 	Version *string
+
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
 

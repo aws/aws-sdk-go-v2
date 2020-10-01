@@ -58,7 +58,10 @@ type GetSubscriptionStateInput struct {
 }
 
 type GetSubscriptionStateOutput struct {
+
 	// The status of the subscription.
+	//
+	// This member is required.
 	SubscriptionState types.SubscriptionState
 
 	// Metadata pertaining to the operation's result.

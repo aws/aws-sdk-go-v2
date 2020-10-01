@@ -54,8 +54,10 @@ func (c *Client) RevokeInvitation(ctx context.Context, params *RevokeInvitationI
 }
 
 type RevokeInvitationInput struct {
+
 	// The ARN of the enrollment invitation to revoke. Required.
 	EnrollmentId *string
+
 	// The ARN of the user for whom to revoke an enrollment invitation. Required.
 	UserArn *string
 }

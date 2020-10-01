@@ -58,10 +58,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The list of tags to add to the given AWS Cloud9 development environment.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to add
 	// tags to.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 

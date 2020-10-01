@@ -60,9 +60,15 @@ func (c *Client) ModifyInstanceFleet(ctx context.Context, params *ModifyInstance
 }
 
 type ModifyInstanceFleetInput struct {
+
 	// The unique identifier of the cluster.
+	//
+	// This member is required.
 	ClusterId *string
+
 	// The unique identifier of the instance fleet.
+	//
+	// This member is required.
 	InstanceFleet *types.InstanceFleetModifyConfig
 }
 

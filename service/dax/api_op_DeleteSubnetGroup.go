@@ -56,11 +56,15 @@ func (c *Client) DeleteSubnetGroup(ctx context.Context, params *DeleteSubnetGrou
 }
 
 type DeleteSubnetGroupInput struct {
+
 	// The name of the subnet group to delete.
+	//
+	// This member is required.
 	SubnetGroupName *string
 }
 
 type DeleteSubnetGroupOutput struct {
+
 	// A user-specified message for this action (i.e., a reason for deleting the subnet
 	// group).
 	DeletionMessage *string

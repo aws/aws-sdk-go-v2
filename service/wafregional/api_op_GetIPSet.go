@@ -62,12 +62,16 @@ func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...
 }
 
 type GetIPSetInput struct {
+
 	// The IPSetId of the IPSet () that you want to get. IPSetId is returned by
 	// CreateIPSet () and by ListIPSets ().
+	//
+	// This member is required.
 	IPSetId *string
 }
 
 type GetIPSetOutput struct {
+
 	// Information about the IPSet () that you specified in the GetIPSet request. For
 	// more information, see the following topics:
 	//

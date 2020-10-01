@@ -57,6 +57,7 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 
 // The ListDomains request includes the following elements.
 type ListDomainsInput struct {
+
 	// For an initial request for a list of domains, omit this element. If the number
 	// of domains that are associated with the current AWS account is greater than the
 	// value that you specified for MaxItems, you can use Marker to return additional
@@ -64,16 +65,21 @@ type ListDomainsInput struct {
 	// another request that includes the value of NextPageMarker in the Marker element.
 	// Constraints: The marker must match the value specified in the previous request.
 	Marker *string
+
 	// Number of domains to be returned. Default: 20
 	MaxItems *int32
 }
 
 // The ListDomains response includes the following elements.
 type ListDomainsOutput struct {
+
 	// If there are more domains than you specified for MaxItems in the request, submit
 	// another request and include the value of NextPageMarker in the value of Marker.
 	NextPageMarker *string
+
 	// A summary of domains.
+	//
+	// This member is required.
 	Domains []*types.DomainSummary
 
 	// Metadata pertaining to the operation's result.

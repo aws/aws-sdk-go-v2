@@ -4,71 +4,110 @@ package types
 
 // A nested application summary.
 type ApplicationDependencySummary struct {
+
 	// The Amazon Resource Name (ARN) of the nested application.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The semantic version of the nested application.
+	//
+	// This member is required.
 	SemanticVersion *string
 }
 
 // Policy statement applied to the application.
 type ApplicationPolicyStatement struct {
+
 	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
 	// global condition key.
 	PrincipalOrgIDs []*string
+
 	// For the list of actions supported for this operation, see Application
 	// Permissions
 	// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions).
+	//
+	// This member is required.
 	Actions []*string
+
 	// An array of AWS account IDs, or * to make the application public.
+	//
+	// This member is required.
 	Principals []*string
+
 	// A unique ID for the statement.
 	StatementId *string
 }
 
 // Summary of details about the application.
 type ApplicationSummary struct {
+
 	// The application Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
 	SpdxLicenseId *string
+
 	// A URL with more information about the application, for example the location of
 	// your GitHub repository for the application.
 	HomePageUrl *string
+
 	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
 	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []*string
+
 	// The name of the author publishing the app.Minimum length=1. Maximum
 	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
+	//
+	// This member is required.
 	Author *string
+
 	// The description of the application.Minimum length=1. Maximum length=256
+	//
+	// This member is required.
 	Description *string
+
 	// The date and time this resource was created.
 	CreationTime *string
+
 	// The name of the application.Minimum length=1. Maximum length=140Pattern:
 	// "[a-zA-Z0-9\\-]+";
+	//
+	// This member is required.
 	Name *string
 }
 
 // Parameters supported by the application.
 type ParameterDefinition struct {
+
 	// An integer value that determines the smallest number of characters that you want
 	// to allow for String types.
 	MinLength *int32
+
 	// The name of the parameter.
+	//
+	// This member is required.
 	Name *string
+
 	// A value of the appropriate type for the template to use if no value is specified
 	// when a stack is created. If you define constraints for the parameter, you must
 	// specify a value that adheres to those constraints.
 	DefaultValue *string
+
 	// A numeric value that determines the largest numeric value that you want to allow
 	// for Number types.
 	MaxValue *int32
+
 	// A regular expression that represents the patterns to allow for String types.
 	AllowedPattern *string
+
 	// An integer value that determines the largest number of characters that you want
 	// to allow for String types.
 	MaxLength *int32
+
 	// A string that explains a constraint when the constraint is violated. For
 	// example, without a constraint description, a parameter that has an allowed
 	// pattern of [A-Za-z0-9]+ displays the following error message when the user
@@ -78,11 +117,14 @@ type ParameterDefinition struct {
 	// customized error message: Malformed input-Parameter MyParameter must contain
 	// only uppercase and lowercase letters and numbers.
 	ConstraintDescription *string
+
 	// A numeric value that determines the smallest numeric value that you want to
 	// allow for Number types.
 	MinValue *int32
+
 	// An array containing the list of values allowed for the parameter.
 	AllowedValues []*string
+
 	// The type of the parameter.Valid values: String | Number | List<Number> |
 	// CommaDelimitedList String: A literal string.For example, users can specify
 	// "MyUserName". Number: An integer or float. AWS CloudFormation validates the
@@ -99,10 +141,15 @@ type ParameterDefinition struct {
 	// space-trimmed.For example, users might specify "test,dev,prod", and then Ref
 	// results in ["test","dev","prod"].
 	Type *string
+
 	// A string of up to 4,000 characters that describes the parameter.
 	Description *string
+
 	// A list of AWS SAM resources that use this parameter.
+	//
+	// This member is required.
 	ReferencedByResources []*string
+
 	// Whether to mask the parameter value whenever anyone makes a call that describes
 	// the stack. If you set the value to true, the parameter value is masked with
 	// asterisks (*****).
@@ -111,11 +158,17 @@ type ParameterDefinition struct {
 
 // Parameter value of the application.
 type ParameterValue struct {
+
 	// The key associated with the parameter. If you don't specify a key and value for
 	// a particular parameter, AWS CloudFormation uses the default value that is
 	// specified in your template.
+	//
+	// This member is required.
 	Name *string
+
 	// The input value associated with the parameter.
+	//
+	// This member is required.
 	Value *string
 }
 
@@ -123,11 +176,13 @@ type ParameterValue struct {
 // (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 // Data Type.
 type RollbackConfiguration struct {
+
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackConfiguration
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
 	MonitoringTimeInMinutes *int32
+
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackConfiguration
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
@@ -139,15 +194,21 @@ type RollbackConfiguration struct {
 // (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 // Data Type.
 type RollbackTrigger struct {
+
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackTrigger
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 	// Data Type.
+	//
+	// This member is required.
 	Arn *string
+
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation RollbackTrigger
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 	// Data Type.
+	//
+	// This member is required.
 	Type *string
 }
 
@@ -155,20 +216,27 @@ type RollbackTrigger struct {
 // (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag) Data
 // Type.
 type Tag struct {
+
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation Tag
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag) Data
 	// Type.
+	//
+	// This member is required.
 	Key *string
+
 	// This property corresponds to the content of the same name for the AWS
 	// CloudFormation  Tag
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag) Data
 	// Type.
+	//
+	// This member is required.
 	Value *string
 }
 
 // Application version details.
 type Version struct {
+
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
 	// permissions in your AWS account, for example, by creating new AWS Identity and
@@ -204,39 +272,71 @@ type Version struct {
 	// resources, we recommend that you review all permissions associated with the
 	// application before deploying. If you don't specify this parameter for an
 	// application that requires capabilities, the call will fail.
+	//
+	// This member is required.
 	RequiredCapabilities []Capability
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
+	//
+	// This member is required.
 	SemanticVersion *string
+
 	// The application Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// An array of parameter types supported by the application.
+	//
+	// This member is required.
 	ParameterDefinitions []*ParameterDefinition
+
 	// A link to a public repository for the source code of your application, for
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
+
 	// The date and time this resource was created.
+	//
+	// This member is required.
 	CreationTime *string
+
 	// A link to the packaged AWS SAM template of your application.
+	//
+	// This member is required.
 	TemplateUrl *string
+
 	// A link to the S3 object that contains the ZIP archive of the source code for
 	// this version of your application.Maximum size 50 MB
 	SourceCodeArchiveUrl *string
+
 	// Whether all of the AWS resources contained in this application are supported in
 	// the region in which it is being retrieved.
+	//
+	// This member is required.
 	ResourcesSupported *bool
 }
 
 // An application version summary.
 type VersionSummary struct {
+
 	// A link to a public repository for the source code of your application, for
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
+
 	// The application Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The date and time this resource was created.
+	//
+	// This member is required.
 	CreationTime *string
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
+	//
+	// This member is required.
 	SemanticVersion *string
 }

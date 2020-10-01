@@ -68,11 +68,15 @@ func (c *Client) CancelDataRepositoryTask(ctx context.Context, params *CancelDat
 
 // Cancels a data repository task.
 type CancelDataRepositoryTaskInput struct {
+
 	// Specifies the data repository task to cancel.
+	//
+	// This member is required.
 	TaskId *string
 }
 
 type CancelDataRepositoryTaskOutput struct {
+
 	// The lifecycle status of the data repository task, as follows:
 	//
 	//     * PENDING -
@@ -94,6 +98,7 @@ type CancelDataRepositoryTaskOutput struct {
 	//     *
 	// CANCELING - FSx is in process of canceling the task.
 	Lifecycle types.DataRepositoryTaskLifecycle
+
 	// The ID of the task being canceled.
 	TaskId *string
 

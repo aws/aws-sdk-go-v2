@@ -8,61 +8,93 @@ import (
 
 // Contains metadata for a column in a table.
 type Column struct {
+
 	// Optional information about the column.
 	Comment *string
+
 	// The data type of the column.
 	Type *string
+
 	// The name of the column.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Information about the columns in a query execution result.
 type ColumnInfo struct {
+
 	// For DECIMAL data types, specifies the total number of digits in the fractional
 	// part of the value. Defaults to 0.
 	Scale *int32
+
 	// The table name for the query results.
 	TableName *string
+
 	// Indicates whether values in the column are case-sensitive.
 	CaseSensitive *bool
+
 	// The catalog to which the query results belong.
 	CatalogName *string
+
 	// The name of the column.
+	//
+	// This member is required.
 	Name *string
+
 	// The data type of the column.
+	//
+	// This member is required.
 	Type *string
+
 	// Indicates the column's nullable status.
 	Nullable ColumnNullable
+
 	// A column label.
 	Label *string
+
 	// For DECIMAL data types, specifies the total number of digits, up to 38. For
 	// performance reasons, we recommend up to 18 digits.
 	Precision *int32
+
 	// The schema name (database name) to which the query results belong.
 	SchemaName *string
 }
 
 // Contains metadata information for a database in a data catalog.
 type Database struct {
+
 	// A set of custom key/value pairs.
 	Parameters map[string]*string
+
 	// The name of the database.
+	//
+	// This member is required.
 	Name *string
+
 	// An optional description of the database.
 	Description *string
 }
 
 // Contains information about a data catalog in an AWS account.
 type DataCatalog struct {
+
 	// An optional description of the data catalog.
 	Description *string
+
 	// The name of the data catalog. The catalog name must be unique for the AWS
 	// account and can use a maximum of 128 alphanumeric, underscore, at sign, or
 	// hyphen characters.
+	//
+	// This member is required.
 	Name *string
+
 	// The type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue
 	// Catalog, or HIVE for an external hive metastore.
+	//
+	// This member is required.
 	Type DataCatalogType
+
 	// Specifies the Lambda function or functions to use for the data catalog. This is
 	// a mapping whose values depend on the catalog type.
 	//
@@ -90,14 +122,17 @@ type DataCatalog struct {
 
 // The summary information for the data catalog, which includes its name and type.
 type DataCatalogSummary struct {
+
 	// The name of the data catalog.
 	CatalogName *string
+
 	// The data catalog type.
 	Type DataCatalogType
 }
 
 // A piece of data (a field in the table).
 type Datum struct {
+
 	// The value of the datum.
 	VarCharValue *string
 }
@@ -105,13 +140,17 @@ type Datum struct {
 // If query results are encrypted in Amazon S3, indicates the encryption option
 // used (for example, SSE-KMS or CSE-KMS) and key information.
 type EncryptionConfiguration struct {
+
 	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys
 	// (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side
 	// encryption with KMS-managed keys (CSE-KMS) is used. If a query runs in a
 	// workgroup and the workgroup overrides client-side settings, then the workgroup's
 	// setting for encryption is used. It specifies whether query results must be
 	// encrypted, for all queries that run in this workgroup.
+	//
+	// This member is required.
 	EncryptionOption EncryptionOption
+
 	// For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 	KmsKey *string
 }
@@ -119,42 +158,62 @@ type EncryptionConfiguration struct {
 // A query, where QueryString is the list of SQL query statements that comprise the
 // query.
 type NamedQuery struct {
+
 	// The query name.
+	//
+	// This member is required.
 	Name *string
+
 	// The unique identifier of the query.
 	NamedQueryId *string
+
 	// The SQL query statements that comprise the query.
+	//
+	// This member is required.
 	QueryString *string
+
 	// The query description.
 	Description *string
+
 	// The database to which the query belongs.
+	//
+	// This member is required.
 	Database *string
+
 	// The name of the workgroup that contains the named query.
 	WorkGroup *string
 }
 
 // Information about a single instance of a query execution.
 type QueryExecution struct {
+
 	// Query execution statistics, such as the amount of data scanned, the amount of
 	// time that the query took to process, and the type of statement that was run.
 	Statistics *QueryExecutionStatistics
+
 	// The database in which the query execution occurred.
 	QueryExecutionContext *QueryExecutionContext
+
 	// The SQL query statements which the query execution ran.
 	Query *string
+
 	// The completion date, current state, submission time, and state change reason (if
 	// applicable) for the query execution.
 	Status *QueryExecutionStatus
+
 	// The name of the workgroup in which the query ran.
 	WorkGroup *string
+
 	// The location in Amazon S3 where query results were stored and the encryption
 	// option, if any, used for query results. These are known as "client-side
 	// settings". If workgroup settings override client-side settings, then the query
 	// uses the location for the query results and the encryption configuration that
 	// are specified for the workgroup.
 	ResultConfiguration *ResultConfiguration
+
 	// The unique identifier for each query execution.
 	QueryExecutionId *string
+
 	// The type of query statement that was run. DDL indicates DDL query statements.
 	// DML indicates DML (Data Manipulation Language) query statements, such as CREATE
 	// TABLE AS SELECT. UTILITY indicates query statements other than DDL and DML, such
@@ -164,8 +223,10 @@ type QueryExecution struct {
 
 // The database and data catalog context in which the query execution occurs.
 type QueryExecutionContext struct {
+
 	// The name of the database used in the query execution.
 	Database *string
+
 	// The name of the data catalog used in the query execution.
 	Catalog *string
 }
@@ -173,6 +234,7 @@ type QueryExecutionContext struct {
 // The amount of data scanned during the query execution and the amount of time
 // that it took to execute, and the type of statement that was run.
 type QueryExecutionStatistics struct {
+
 	// The location and file name of a data manifest file. The manifest file is saved
 	// to the Athena query results location in Amazon S3. The manifest file tracks
 	// files that the query wrote to Amazon S3. If the query fails, the manifest file
@@ -182,22 +244,28 @@ type QueryExecutionStatistics struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html) in the Amazon
 	// Athena User Guide.
 	DataManifestLocation *string
+
 	// The number of milliseconds that the query was in your query queue waiting for
 	// resources. Note that if transient errors occur, Athena might automatically add
 	// the query back to the queue.
 	QueryQueueTimeInMillis *int64
+
 	// The number of milliseconds that Athena took to finalize and publish the query
 	// results after the query engine finished running the query.
 	ServiceProcessingTimeInMillis *int64
+
 	// The number of milliseconds that Athena took to run the query.
 	TotalExecutionTimeInMillis *int64
+
 	// The number of milliseconds that Athena took to plan the query processing flow.
 	// This includes the time spent retrieving table partitions from the data source.
 	// Note that because the query engine performs the query planning, query planning
 	// time is a subset of engine processing time.
 	QueryPlanningTimeInMillis *int64
+
 	// The number of bytes in the data that was queried.
 	DataScannedInBytes *int64
+
 	// The number of milliseconds that the query took to execute.
 	EngineExecutionTimeInMillis *int64
 }
@@ -205,6 +273,7 @@ type QueryExecutionStatistics struct {
 // The completion date, current state, submission time, and state change reason (if
 // applicable) for the query execution.
 type QueryExecutionStatus struct {
+
 	// The state of query execution. QUEUED indicates that the query has been submitted
 	// to the service, and Athena will execute the query as soon as resources are
 	// available. RUNNING indicates that the query is in execution phase. SUCCEEDED
@@ -214,10 +283,13 @@ type QueryExecutionStatus struct {
 	// queries in cases of certain transient errors. As a result, you may see the query
 	// state transition from RUNNING or FAILED to QUEUED.
 	State QueryExecutionState
+
 	// The date and time that the query completed.
 	CompletionDateTime *time.Time
+
 	// The date and time that the query was submitted.
 	SubmissionDateTime *time.Time
+
 	// Further detail about the status of the query.
 	StateChangeReason *string
 }
@@ -227,6 +299,7 @@ type QueryExecutionStatus struct {
 // settings". If workgroup settings override client-side settings, then the query
 // uses the workgroup settings.
 type ResultConfiguration struct {
+
 	// If query results are encrypted in Amazon S3, indicates the encryption option
 	// used (for example, SSE-KMS or CSE-KMS) and key information. This is a
 	// client-side setting. If workgroup settings override client-side settings, then
@@ -236,6 +309,7 @@ type ResultConfiguration struct {
 	// Settings Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EncryptionConfiguration *EncryptionConfiguration
+
 	// The location in Amazon S3 where your query results are stored, such as
 	// s3://path/to/query/bucket/. To run the query, you must specify the query results
 	// location using one of the ways: either for individual queries using either this
@@ -252,8 +326,10 @@ type ResultConfiguration struct {
 // The information about the updates in the query results, such as output location
 // and encryption configuration for the query results.
 type ResultConfigurationUpdates struct {
+
 	// The encryption configuration for the query results.
 	EncryptionConfiguration *EncryptionConfiguration
+
 	// If set to "true", indicates that the previously-specified query results location
 	// (also known as a client-side setting) for queries in this workgroup should be
 	// ignored and set to null. If set to "false" or not set, and a value is present in
@@ -263,6 +339,7 @@ type ResultConfigurationUpdates struct {
 	// Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	RemoveOutputLocation *bool
+
 	// If set to "true", indicates that the previously-specified encryption
 	// configuration (also known as the client-side setting) for queries in this
 	// workgroup should be ignored and set to null. If set to "false" or not set, and a
@@ -272,6 +349,7 @@ type ResultConfigurationUpdates struct {
 	// see Workgroup Settings Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	RemoveEncryptionConfiguration *bool
+
 	// The location in Amazon S3 where your query results are stored, such as
 	// s3://path/to/query/bucket/. For more information, see Query Results
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html) If workgroup
@@ -287,9 +365,11 @@ type ResultConfigurationUpdates struct {
 // the column structure and data types. To return a ResultSet object, use
 // GetQueryResults ().
 type ResultSet struct {
+
 	// The metadata that describes the column structure and data types of a table of
 	// query results.
 	ResultSetMetadata *ResultSetMetadata
+
 	// The rows in the table.
 	Rows []*Row
 }
@@ -297,30 +377,41 @@ type ResultSet struct {
 // The metadata that describes the column structure and data types of a table of
 // query results. To return a ResultSetMetadata object, use GetQueryResults ().
 type ResultSetMetadata struct {
+
 	// Information about the columns returned in a query result metadata.
 	ColumnInfo []*ColumnInfo
 }
 
 // The rows that comprise a query result table.
 type Row struct {
+
 	// The data that populates a row in a query result table.
 	Data []*Datum
 }
 
 // Contains metadata for a table.
 type TableMetadata struct {
+
 	// The type of table. In Athena, only EXTERNAL_TABLE is supported.
 	TableType *string
+
 	// A list of the partition keys in the table.
 	PartitionKeys []*Column
+
 	// A set of custom key/value pairs for table properties.
 	Parameters map[string]*string
+
 	// The last time the table was accessed.
 	LastAccessTime *time.Time
+
 	// A list of the columns in the table.
 	Columns []*Column
+
 	// The name of the table.
+	//
+	// This member is required.
 	Name *string
+
 	// The time that the table was created.
 	CreateTime *time.Time
 }
@@ -338,11 +429,13 @@ type TableMetadata struct {
 // case-sensitive. Tag keys must be unique per resource. If you specify more than
 // one tag, separate them by commas.
 type Tag struct {
+
 	// A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You
 	// can use letters and numbers representable in UTF-8, and the following
 	// characters: + - = . _ : / @. Tag keys are case-sensitive and must be unique per
 	// resource.
 	Key *string
+
 	// A tag value. The tag value length is from 0 to 256 Unicode characters in UTF-8.
 	// You can use letters and numbers representable in UTF-8, and the following
 	// characters: + - = . _ : / @. Tag values are case-sensitive.
@@ -351,24 +444,30 @@ type Tag struct {
 
 // Information about a named query ID that could not be processed.
 type UnprocessedNamedQueryId struct {
+
 	// The error message returned when the processing request for the named query
 	// failed, if applicable.
 	ErrorMessage *string
+
 	// The error code returned when the processing request for the named query failed,
 	// if applicable.
 	ErrorCode *string
+
 	// The unique identifier of the named query.
 	NamedQueryId *string
 }
 
 // Describes a query execution that failed to process.
 type UnprocessedQueryExecutionId struct {
+
 	// The error code returned when the query execution failed to process, if
 	// applicable.
 	ErrorCode *string
+
 	// The error message returned when the query execution failed to process, if
 	// applicable.
 	ErrorMessage *string
+
 	// The unique identifier of the query execution.
 	QueryExecutionId *string
 }
@@ -383,12 +482,18 @@ type UnprocessedQueryExecutionId struct {
 // EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See
 // WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
 type WorkGroup struct {
+
 	// The workgroup name.
+	//
+	// This member is required.
 	Name *string
+
 	// The date and time the workgroup was created.
 	CreationTime *time.Time
+
 	// The state of the workgroup: ENABLED or DISABLED.
 	State WorkGroupState
+
 	// The configuration of the workgroup, which includes the location in Amazon S3
 	// where query results are stored, the encryption configuration, if any, used for
 	// query results; whether the Amazon CloudWatch Metrics are enabled for the
@@ -398,6 +503,7 @@ type WorkGroup struct {
 	// (true/false) in the WorkGroupConfiguration. See
 	// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
 	Configuration *WorkGroupConfiguration
+
 	// The workgroup description.
 	Description *string
 }
@@ -411,9 +517,11 @@ type WorkGroup struct {
 // the WorkGroupConfiguration. See
 // WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
 type WorkGroupConfiguration struct {
+
 	// The upper data usage limit (cutoff) for the amount of bytes a single query in a
 	// workgroup is allowed to scan.
 	BytesScannedCutoffPerQuery *int64
+
 	// If set to true, allows members assigned to a workgroup to reference Amazon S3
 	// Requester Pays buckets in queries. If set to false, workgroup members cannot
 	// query data from Requester Pays buckets, and queries that retrieve data from
@@ -422,13 +530,16 @@ type WorkGroupConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html) in
 	// the Amazon Simple Storage Service Developer Guide.
 	RequesterPaysEnabled *bool
+
 	// Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 	PublishCloudWatchMetricsEnabled *bool
+
 	// If set to "true", the settings for the workgroup override client-side settings.
 	// If set to "false", client-side settings are used. For more information, see
 	// Workgroup Settings Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EnforceWorkGroupConfiguration *bool
+
 	// The configuration for the workgroup, which includes the location in Amazon S3
 	// where query results are stored and the encryption option, if any, used for query
 	// results. To run the query, you must specify the query results location using one
@@ -447,13 +558,16 @@ type WorkGroupConfiguration struct {
 // the client-side settings, and the data usage limit for the amount of bytes
 // scanned per query, if it is specified.
 type WorkGroupConfigurationUpdates struct {
+
 	// Indicates whether this workgroup enables publishing metrics to Amazon
 	// CloudWatch.
 	PublishCloudWatchMetricsEnabled *bool
+
 	// The result configuration information about the queries in this workgroup that
 	// will be updated. Includes the updated results location and an updated option for
 	// encrypting query results.
 	ResultConfigurationUpdates *ResultConfigurationUpdates
+
 	// If set to true, allows members assigned to a workgroup to specify Amazon S3
 	// Requester Pays buckets in queries. If set to false, workgroup members cannot
 	// query data from Requester Pays buckets, and queries that retrieve data from
@@ -462,14 +576,17 @@ type WorkGroupConfigurationUpdates struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html) in
 	// the Amazon Simple Storage Service Developer Guide.
 	RequesterPaysEnabled *bool
+
 	// The upper limit (cutoff) for the amount of bytes a single query in a workgroup
 	// is allowed to scan.
 	BytesScannedCutoffPerQuery *int64
+
 	// If set to "true", the settings for the workgroup override client-side settings.
 	// If set to "false" client-side settings are used. For more information, see
 	// Workgroup Settings Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EnforceWorkGroupConfiguration *bool
+
 	// Indicates that the data usage control limit per query is removed.
 	// WorkGroupConfiguration$BytesScannedCutoffPerQuery ()
 	RemoveBytesScannedCutoffPerQuery *bool
@@ -478,12 +595,16 @@ type WorkGroupConfigurationUpdates struct {
 // The summary information for the workgroup, which includes its name, state,
 // description, and the date and time it was created.
 type WorkGroupSummary struct {
+
 	// The workgroup creation date and time.
 	CreationTime *time.Time
+
 	// The name of the workgroup.
 	Name *string
+
 	// The workgroup description.
 	Description *string
+
 	// The state of the workgroup.
 	State WorkGroupState
 }

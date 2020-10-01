@@ -55,18 +55,22 @@ func (c *Client) ListProgressUpdateStreams(ctx context.Context, params *ListProg
 }
 
 type ListProgressUpdateStreamsInput struct {
+
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
 	// Filter to limit the maximum number of results to list per page.
 	MaxResults *int32
 }
 
 type ListProgressUpdateStreamsOutput struct {
+
 	// If there are more streams created than the max result, return the next token to
 	// be passed to the next call as a bookmark of where to start from.
 	NextToken *string
+
 	// List of progress update streams up to the max number of results passed in the
 	// input.
 	ProgressUpdateStreamSummaryList []*types.ProgressUpdateStreamSummary

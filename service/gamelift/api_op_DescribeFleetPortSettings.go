@@ -97,13 +97,17 @@ func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *Describe
 
 // Represents the input for a request action.
 type DescribeFleetPortSettingsInput struct {
+
 	// A unique identifier for a fleet to retrieve port settings for. You can use
 	// either the fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeFleetPortSettingsOutput struct {
+
 	// The port settings for the requested fleet ID.
 	InboundPermissions []*types.IpPermission
 

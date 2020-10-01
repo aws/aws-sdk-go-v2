@@ -56,6 +56,7 @@ func (c *Client) PutAccountSuppressionAttributes(ctx context.Context, params *Pu
 
 // A request to change your account's suppression preferences.
 type PutAccountSuppressionAttributesInput struct {
+
 	// A list that contains the reasons that email addresses will be automatically
 	// added to the suppression list for your account. This list can contain any or all
 	// of the following:

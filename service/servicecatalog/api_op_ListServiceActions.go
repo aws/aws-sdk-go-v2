@@ -55,11 +55,14 @@ func (c *Client) ListServiceActions(ctx context.Context, params *ListServiceActi
 }
 
 type ListServiceActionsInput struct {
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -72,9 +75,11 @@ type ListServiceActionsInput struct {
 }
 
 type ListServiceActionsOutput struct {
+
 	// An object containing information about the service actions associated with the
 	// provisioning artifact.
 	ServiceActionSummaries []*types.ServiceActionSummary
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string

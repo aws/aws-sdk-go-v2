@@ -65,18 +65,22 @@ func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, param
 }
 
 type PutLifecycleEventHookExecutionStatusInput struct {
+
 	// The unique ID of a deployment. Pass this ID to a Lambda function that validates
 	// a deployment lifecycle event.
 	DeploymentId *string
+
 	// The result of a Lambda function that validates a deployment lifecycle event
 	// (Succeeded or Failed).
 	Status types.LifecycleEventStatus
+
 	// The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook
 	// is specified in the hooks section of the AppSpec file.
 	LifecycleEventHookExecutionId *string
 }
 
 type PutLifecycleEventHookExecutionStatusOutput struct {
+
 	// The execution ID of the lifecycle event hook. A hook is specified in the hooks
 	// section of the deployment's AppSpec file.
 	LifecycleEventHookExecutionId *string

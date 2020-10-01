@@ -58,14 +58,22 @@ func (c *Client) BatchGetImage(ctx context.Context, params *BatchGetImageInput, 
 }
 
 type BatchGetImageInput struct {
+
 	// A list of image ID references that correspond to images to describe. The format
 	// of the imageIds reference is imageTag=tag or imageDigest=digest.
+	//
+	// This member is required.
 	ImageIds []*types.ImageIdentifier
+
 	// The repository that contains the images to describe.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The AWS account ID associated with the registry that contains the images to
 	// describe. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The accepted media types for the request. Valid values:
 	// application/vnd.docker.distribution.manifest.v1+json |
 	// application/vnd.docker.distribution.manifest.v2+json |
@@ -74,8 +82,10 @@ type BatchGetImageInput struct {
 }
 
 type BatchGetImageOutput struct {
+
 	// Any failures associated with the call.
 	Failures []*types.ImageFailure
+
 	// A list of image objects corresponding to the image references in the request.
 	Images []*types.Image
 

@@ -62,17 +62,22 @@ func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceI
 
 // Represents the input to RebootDBInstance ().
 type RebootDBInstanceInput struct {
+
 	// The instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
 	//     * Must match the identifier of an existing DBInstance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// When true, the reboot is conducted through a Multi-AZ failover. Constraint: You
 	// can't specify true if the instance is not configured for Multi-AZ.
 	ForceFailover *bool
 }
 
 type RebootDBInstanceOutput struct {
+
 	// Detailed information about an instance.
 	DBInstance *types.DBInstance
 

@@ -62,7 +62,10 @@ func (c *Client) UnassignInstance(ctx context.Context, params *UnassignInstanceI
 }
 
 type UnassignInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

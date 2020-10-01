@@ -57,7 +57,10 @@ func (c *Client) RejectInvitation(ctx context.Context, params *RejectInvitationI
 }
 
 type RejectInvitationInput struct {
+
 	// The unique identifier of the invitation to reject.
+	//
+	// This member is required.
 	InvitationId *string
 }
 

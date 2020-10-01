@@ -59,29 +59,35 @@ func (c *Client) DescribeCustomAvailabilityZones(ctx context.Context, params *De
 }
 
 type DescribeCustomAvailabilityZonesInput struct {
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// A filter that specifies one or more custom AZs to describe.
 	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous
 	// DescribeCustomAvailabilityZones request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The custom AZ identifier. If this parameter is specified, information from only
 	// the specific custom AZ is returned.
 	CustomAvailabilityZoneId *string
 }
 
 type DescribeCustomAvailabilityZonesOutput struct {
+
 	// An optional pagination token provided by a previous
 	// DescribeCustomAvailabilityZones request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The list of CustomAvailabilityZone () objects for the AWS account.
 	CustomAvailabilityZones []*types.CustomAvailabilityZone
 

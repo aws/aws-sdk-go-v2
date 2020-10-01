@@ -57,26 +57,40 @@ func (c *Client) GetDeliverabilityTestReport(ctx context.Context, params *GetDel
 
 // A request to retrieve the results of a predictive inbox placement test.
 type GetDeliverabilityTestReportInput struct {
+
 	// A unique string that identifies the predictive inbox placement test.
+	//
+	// This member is required.
 	ReportId *string
 }
 
 // The results of the predictive inbox placement test.
 type GetDeliverabilityTestReportOutput struct {
+
 	// An object that describes how the test email was handled by several email
 	// providers, including Gmail, Hotmail, Yahoo, AOL, and others.
+	//
+	// This member is required.
 	IspPlacements []*types.IspPlacement
+
 	// An array of objects that define the tags (keys and values) that are associated
 	// with the predictive inbox placement test.
 	Tags []*types.Tag
+
 	// An object that specifies how many test messages that were sent during the
 	// predictive inbox placement test were delivered to recipients' inboxes, how many
 	// were sent to recipients' spam folders, and how many weren't delivered.
+	//
+	// This member is required.
 	OverallPlacement *types.PlacementStatistics
+
 	// An object that contains the message that you sent when you performed this
 	// predictive inbox placement test.
 	Message *string
+
 	// An object that contains the results of the predictive inbox placement test.
+	//
+	// This member is required.
 	DeliverabilityTestReport *types.DeliverabilityTestReport
 
 	// Metadata pertaining to the operation's result.

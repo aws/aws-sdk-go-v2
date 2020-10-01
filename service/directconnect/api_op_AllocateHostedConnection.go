@@ -63,43 +63,69 @@ func (c *Client) AllocateHostedConnection(ctx context.Context, params *AllocateH
 }
 
 type AllocateHostedConnectionInput struct {
+
 	// The tags associated with the connection.
 	Tags []*types.Tag
+
 	// The ID of the AWS account ID of the customer for the connection.
+	//
+	// This member is required.
 	OwnerAccount *string
+
 	// The name of the hosted connection.
+	//
+	// This member is required.
 	ConnectionName *string
+
 	// The dedicated VLAN provisioned to the hosted connection.
+	//
+	// This member is required.
 	Vlan *int32
+
 	// The ID of the interconnect or LAG.
+	//
+	// This member is required.
 	ConnectionId *string
+
 	// The bandwidth of the connection. The possible values are 50Mbps, 100Mbps,
 	// 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that
 	// only those AWS Direct Connect Partners who have met specific requirements are
 	// allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.
+	//
+	// This member is required.
 	Bandwidth *string
 }
 
 // Information about an AWS Direct Connect connection.
 type AllocateHostedConnectionOutput struct {
+
 	// Indicates whether jumbo frames (9001 MTU) are supported.
 	JumboFrameCapable *bool
+
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
 	// The ID of the VLAN.
 	Vlan *int32
+
 	// The name of the connection.
 	ConnectionName *string
+
 	// The AWS Region where the connection is located.
 	Region *string
+
 	// The ID of the LAG.
 	LagId *string
+
 	// The ID of the connection.
 	ConnectionId *string
+
 	// The tags associated with the connection.
 	Tags []*types.Tag
+
 	// The ID of the AWS account that owns the connection.
 	OwnerAccount *string
+
 	// The state of the connection. The following are the possible values:
 	//
 	//     *
@@ -132,20 +158,27 @@ type AllocateHostedConnectionOutput struct {
 	//     * unknown: The state of the connection is
 	// not available.
 	ConnectionState types.ConnectionState
+
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDevice *string
+
 	// The name of the AWS Direct Connect service provider associated with the
 	// connection.
 	PartnerName *string
+
 	// The time of the most recent call to DescribeLoa () for this connection.
 	LoaIssueTime *time.Time
+
 	// Indicates whether the connection supports a secondary BGP peer in the same
 	// address family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string
+
 	// The bandwidth of the connection.
 	Bandwidth *string
+
 	// The location of the connection.
 	Location *string
 

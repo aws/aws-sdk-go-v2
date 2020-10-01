@@ -63,20 +63,26 @@ func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInp
 }
 
 type GetCostAndUsageInput struct {
+
 	// Sets the start and end dates for retrieving AWS costs. The start date is
 	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
 	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
 	// up to and including 2017-04-30 but not including 2017-05-01.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
 	// Filters AWS costs by different dimensions. For example, you can specify SERVICE
 	// and LINKED_ACCOUNT and get the costs that are associated with that account's
 	// usage of that service. You can nest Expression objects to define any combination
 	// of dimension filters. For more information, see Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *types.Expression
+
 	// Which metrics are returned in the query. For more information about blended and
 	// unblended rates, see Why does the "blended" annotation appear on some line items
 	// in my bill?
@@ -90,10 +96,12 @@ type GetCostAndUsageInput struct {
 	// To get more meaningful UsageQuantity metrics, filter by UsageType or
 	// UsageTypeGroups. Metrics is required for GetCostAndUsage requests.
 	Metrics []*string
+
 	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
 	// isn't set, the response object doesn't include the Granularity, either MONTHLY
 	// or DAILY, or HOURLY.
 	Granularity types.Granularity
+
 	// You can group AWS costs using up to two different groups, either dimensions, tag
 	// keys, or both. When you group by tag key, you get all tag values, including
 	// empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME,
@@ -103,12 +111,15 @@ type GetCostAndUsageInput struct {
 }
 
 type GetCostAndUsageOutput struct {
+
 	// The groups that are specified by the Filter or GroupBy parameters in the
 	// request.
 	GroupDefinitions []*types.GroupDefinition
+
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
 	// The time period that is covered by the results in the response.
 	ResultsByTime []*types.ResultByTime
 

@@ -78,6 +78,7 @@ func (c *Client) CreateResourceDataSync(ctx context.Context, params *CreateResou
 }
 
 type CreateResourceDataSyncInput struct {
+
 	// Specify SyncToDestination to create a resource data sync that synchronizes data
 	// to an S3 bucket for Inventory. If you specify SyncToDestination, you must
 	// provide a value for S3Destination. Specify SyncFromSource to synchronize data
@@ -86,11 +87,16 @@ type CreateResourceDataSyncInput struct {
 	// SyncFromSource, you must provide a value for SyncSource. The default value is
 	// SyncToDestination.
 	SyncType *string
+
 	// A name for the configuration.
+	//
+	// This member is required.
 	SyncName *string
+
 	// Specify information about the data sources to synchronize. This parameter is
 	// required if the SyncType value is SyncFromSource.
 	SyncSource *types.ResourceDataSyncSource
+
 	// Amazon S3 configuration details for the sync. This parameter is required if the
 	// SyncType value is SyncToDestination.
 	S3Destination *types.ResourceDataSyncS3Destination

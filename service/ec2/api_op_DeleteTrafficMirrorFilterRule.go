@@ -55,8 +55,12 @@ func (c *Client) DeleteTrafficMirrorFilterRule(ctx context.Context, params *Dele
 }
 
 type DeleteTrafficMirrorFilterRuleInput struct {
+
 	// The ID of the Traffic Mirror rule.
+	//
+	// This member is required.
 	TrafficMirrorFilterRuleId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -65,6 +69,7 @@ type DeleteTrafficMirrorFilterRuleInput struct {
 }
 
 type DeleteTrafficMirrorFilterRuleOutput struct {
+
 	// The ID of the deleted Traffic Mirror rule.
 	TrafficMirrorFilterRuleId *string
 

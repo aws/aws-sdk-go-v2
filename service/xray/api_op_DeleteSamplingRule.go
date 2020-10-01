@@ -55,15 +55,18 @@ func (c *Client) DeleteSamplingRule(ctx context.Context, params *DeleteSamplingR
 }
 
 type DeleteSamplingRuleInput struct {
+
 	// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
 	// both.
 	RuleARN *string
+
 	// The name of the sampling rule. Specify a rule by either name or ARN, but not
 	// both.
 	RuleName *string
 }
 
 type DeleteSamplingRuleOutput struct {
+
 	// The deleted rule definition and metadata.
 	SamplingRuleRecord *types.SamplingRuleRecord
 

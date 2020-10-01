@@ -60,53 +60,75 @@ func (c *Client) DescribeInstanceAttribute(ctx context.Context, params *Describe
 }
 
 type DescribeInstanceAttributeInput struct {
+
 	// The instance attribute. Note: The enaSupport attribute is not supported at this
 	// time.
+	//
+	// This member is required.
 	Attribute types.InstanceAttributeName
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 // Describes an instance attribute.
 type DescribeInstanceAttributeOutput struct {
+
 	// The security groups associated with the instance.
 	Groups []*types.GroupIdentifier
+
 	// If the value is true, you can't terminate the instance through the Amazon EC2
 	// console, CLI, or API; otherwise, you can.
 	DisableApiTermination *types.AttributeBooleanValue
+
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
 	InstanceInitiatedShutdownBehavior *types.AttributeValue
+
 	// Indicates whether enhanced networking with the Intel 82599 Virtual Function
 	// interface is enabled.
 	SriovNetSupport *types.AttributeValue
+
 	// A list of product codes.
 	ProductCodes []*types.ProductCode
+
 	// The device name of the root device volume (for example, /dev/sda1).
 	RootDeviceName *types.AttributeValue
+
 	// Indicates whether the instance is optimized for Amazon EBS I/O.
 	EbsOptimized *types.AttributeBooleanValue
+
 	// The RAM disk ID.
 	RamdiskId *types.AttributeValue
+
 	// The instance type.
 	InstanceType *types.AttributeValue
+
 	// The user data.
 	UserData *types.AttributeValue
+
 	// The block device mapping of the instance.
 	BlockDeviceMappings []*types.InstanceBlockDeviceMapping
+
 	// Indicates whether enhanced networking with ENA is enabled.
 	EnaSupport *types.AttributeBooleanValue
+
 	// The ID of the instance.
 	InstanceId *string
+
 	// Indicates whether source/destination checking is enabled. A value of true means
 	// that checking is enabled, and false means that checking is disabled. This value
 	// must be false for a NAT instance to perform NAT.
 	SourceDestCheck *types.AttributeBooleanValue
+
 	// The kernel ID.
 	KernelId *types.AttributeValue
 

@@ -68,17 +68,23 @@ func (c *Client) ListIdentityPolicies(ctx context.Context, params *ListIdentityP
 // see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 type ListIdentityPoliciesInput struct {
+
 	// The identity that is associated with the policy for which the policies will be
 	// listed. You can specify an identity by using its name or by using its Amazon
 	// Resource Name (ARN). Examples: user@example.com, example.com,
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com. To successfully call
 	// this API, you must own the identity.
+	//
+	// This member is required.
 	Identity *string
 }
 
 // A list of names of sending authorization policies that apply to an identity.
 type ListIdentityPoliciesOutput struct {
+
 	// A list of names of policies that apply to the specified identity.
+	//
+	// This member is required.
 	PolicyNames []*string
 
 	// Metadata pertaining to the operation's result.

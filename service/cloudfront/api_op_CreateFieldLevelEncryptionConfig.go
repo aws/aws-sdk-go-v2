@@ -56,16 +56,22 @@ func (c *Client) CreateFieldLevelEncryptionConfig(ctx context.Context, params *C
 }
 
 type CreateFieldLevelEncryptionConfigInput struct {
+
 	// The request to create a new field-level encryption configuration.
+	//
+	// This member is required.
 	FieldLevelEncryptionConfig *types.FieldLevelEncryptionConfig
 }
 
 type CreateFieldLevelEncryptionConfigOutput struct {
+
 	// The fully qualified URI of the new configuration resource just created.
 	Location *string
+
 	// The current version of the field level encryption configuration. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
+
 	// Returned when you create a new field-level encryption configuration.
 	FieldLevelEncryption *types.FieldLevelEncryption
 

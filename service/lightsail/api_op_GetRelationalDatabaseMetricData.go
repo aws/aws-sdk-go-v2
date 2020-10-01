@@ -60,6 +60,7 @@ func (c *Client) GetRelationalDatabaseMetricData(ctx context.Context, params *Ge
 }
 
 type GetRelationalDatabaseMetricDataInput struct {
+
 	// The metric for which you want to return information. Valid relational database
 	// metric names are listed below, along with the most useful statistics to include
 	// in your request, and the published unit value. All relational database metric
@@ -92,7 +93,10 @@ type GetRelationalDatabaseMetricDataInput struct {
 	// traffic on the database, including both customer database traffic and AWS
 	// traffic used for monitoring and replication. Statistics: The most useful
 	// statistic is Average. Unit: The published unit is Bytes/Second.
+	//
+	// This member is required.
 	MetricName types.RelationalDatabaseMetricName
+
 	// The end of the time interval from which to get metric data. Constraints:
 	//
 	//     *
@@ -101,11 +105,17 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//     * Specified in the Unix time
 	// format. For example, if you wish to use an end time of October 1, 2018, at 8 PM
 	// UTC, then you input 1538424000 as the end time.  </li> </ul>
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// The unit for the metric data request. Valid units depend on the metric data
 	// being requested. For the valid units with each available metric, see the
 	// metricName parameter.
+	//
+	// This member is required.
 	Unit types.MetricUnit
+
 	// The start of the time interval from which to get metric data. Constraints:
 	//
 	//
@@ -114,7 +124,10 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//     * Specified in the Unix
 	// time format. For example, if you wish to use a start time of October 1, 2018, at
 	// 8 PM UTC, then you input 1538424000 as the start time.  </li> </ul>
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// The statistic for the metric. The following statistics are available:
 	//
 	//     *
@@ -137,17 +150,27 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//
 	//     * SampleCount - The
 	// count, or number, of data points used for the statistical calculation.
+	//
+	// This member is required.
 	Statistics []types.MetricStatistic
+
 	// The name of your database from which to get metric data.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
+
 	// The granularity, in seconds, of the returned data points. All relational
 	// database metric data is available in 1-minute (60 seconds) granularity.
+	//
+	// This member is required.
 	Period *int32
 }
 
 type GetRelationalDatabaseMetricDataOutput struct {
+
 	// An array of objects that describe the metric data returned.
 	MetricData []*types.MetricDatapoint
+
 	// The name of the metric returned.
 	MetricName types.RelationalDatabaseMetricName
 

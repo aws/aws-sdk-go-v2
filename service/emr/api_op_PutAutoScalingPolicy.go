@@ -59,24 +59,37 @@ func (c *Client) PutAutoScalingPolicy(ctx context.Context, params *PutAutoScalin
 }
 
 type PutAutoScalingPolicyInput struct {
+
 	// Specifies the ID of the instance group to which the automatic scaling policy is
 	// applied.
+	//
+	// This member is required.
 	InstanceGroupId *string
+
 	// Specifies the ID of a cluster. The instance group to which the automatic scaling
 	// policy is applied is within this cluster.
+	//
+	// This member is required.
 	ClusterId *string
+
 	// Specifies the definition of the automatic scaling policy.
+	//
+	// This member is required.
 	AutoScalingPolicy *types.AutoScalingPolicy
 }
 
 type PutAutoScalingPolicyOutput struct {
+
 	// Specifies the ID of a cluster. The instance group to which the automatic scaling
 	// policy is applied is within this cluster.
 	ClusterId *string
+
 	// Specifies the ID of the instance group to which the scaling policy is applied.
 	InstanceGroupId *string
+
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
+
 	// The automatic scaling policy definition.
 	AutoScalingPolicy *types.AutoScalingPolicyDescription
 

@@ -57,8 +57,11 @@ func (c *Client) DeleteCacheSubnetGroup(ctx context.Context, params *DeleteCache
 
 // Represents the input of a DeleteCacheSubnetGroup operation.
 type DeleteCacheSubnetGroupInput struct {
+
 	// The name of the cache subnet group to delete. Constraints: Must contain no more
 	// than 255 alphanumeric characters or hyphens.
+	//
+	// This member is required.
 	CacheSubnetGroupName *string
 }
 

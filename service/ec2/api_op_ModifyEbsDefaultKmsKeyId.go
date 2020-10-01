@@ -64,6 +64,7 @@ func (c *Client) ModifyEbsDefaultKmsKeyId(ctx context.Context, params *ModifyEbs
 }
 
 type ModifyEbsDefaultKmsKeyIdInput struct {
+
 	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
 	// (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your
 	// AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state
@@ -86,7 +87,10 @@ type ModifyEbsDefaultKmsKeyIdInput struct {
 	// CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not
 	// valid, the action can appear to complete, but eventually fails. Amazon EBS does
 	// not support asymmetric CMKs.
+	//
+	// This member is required.
 	KmsKeyId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -95,6 +99,7 @@ type ModifyEbsDefaultKmsKeyIdInput struct {
 }
 
 type ModifyEbsDefaultKmsKeyIdOutput struct {
+
 	// The Amazon Resource Name (ARN) of the default CMK for encryption by default.
 	KmsKeyId *string
 

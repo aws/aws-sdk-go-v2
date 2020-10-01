@@ -56,9 +56,15 @@ func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfil
 }
 
 type DeleteUserProfileInput struct {
+
 	// The user profile name.
+	//
+	// This member is required.
 	UserProfileName *string
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
 }
 

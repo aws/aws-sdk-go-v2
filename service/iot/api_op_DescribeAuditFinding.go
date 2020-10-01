@@ -58,12 +58,16 @@ func (c *Client) DescribeAuditFinding(ctx context.Context, params *DescribeAudit
 }
 
 type DescribeAuditFindingInput struct {
+
 	// A unique identifier for a single audit finding. You can use this identifier to
 	// apply mitigation actions to the finding.
+	//
+	// This member is required.
 	FindingId *string
 }
 
 type DescribeAuditFindingOutput struct {
+
 	// The findings (results) of the audit.
 	Finding *types.AuditFinding
 

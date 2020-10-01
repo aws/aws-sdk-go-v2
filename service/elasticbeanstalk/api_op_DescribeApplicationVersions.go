@@ -56,26 +56,32 @@ func (c *Client) DescribeApplicationVersions(ctx context.Context, params *Descri
 
 // Request to describe application versions.
 type DescribeApplicationVersionsInput struct {
+
 	// Specify an application name to show only application versions for that
 	// application.
 	ApplicationName *string
+
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
 	// the ones specified in the initial request. If no NextToken is specified, the
 	// first page is retrieved.
 	NextToken *string
+
 	// For a paginated request. Specify a maximum number of application versions to
 	// include in each response. If no MaxRecords is specified, all available
 	// application versions are retrieved in a single response.
 	MaxRecords *int32
+
 	// Specify a version label to show a specific application version.
 	VersionLabels []*string
 }
 
 // Result message wrapping a list of application version descriptions.
 type DescribeApplicationVersionsOutput struct {
+
 	// List of ApplicationVersionDescription objects sorted in order of creation.
 	ApplicationVersions []*types.ApplicationVersionDescription
+
 	// In a paginated request, the token that you can pass in a subsequent request to
 	// get the next response page.
 	NextToken *string

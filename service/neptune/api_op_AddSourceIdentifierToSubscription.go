@@ -56,6 +56,7 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 }
 
 type AddSourceIdentifierToSubscriptionInput struct {
+
 	// The identifier of the event source to be added. Constraints:
 	//
 	//     * If the
@@ -70,13 +71,19 @@ type AddSourceIdentifierToSubscriptionInput struct {
 	//
 	//     * If the source type is a DB
 	// snapshot, a DBSnapshotIdentifier must be supplied.
+	//
+	// This member is required.
 	SourceIdentifier *string
+
 	// The name of the event notification subscription you want to add a source
 	// identifier to.
+	//
+	// This member is required.
 	SubscriptionName *string
 }
 
 type AddSourceIdentifierToSubscriptionOutput struct {
+
 	// Contains the results of a successful invocation of the
 	// DescribeEventSubscriptions () action.
 	EventSubscription *types.EventSubscription

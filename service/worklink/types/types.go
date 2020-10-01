@@ -8,63 +8,92 @@ import (
 
 // The summary of devices.
 type DeviceSummary struct {
+
 	// The ID of the device.
 	DeviceId *string
+
 	// The status of the device.
 	DeviceStatus DeviceStatus
 }
 
 // The summary of the domain.
 type DomainSummary struct {
+
 	// The name of the domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The name to display.
 	DisplayName *string
+
 	// The status of the domain.
+	//
+	// This member is required.
 	DomainStatus DomainStatus
+
 	// The time that the domain was created.
+	//
+	// This member is required.
 	CreatedTime *time.Time
 }
 
 // The summary of the fleet.
 type FleetSummary struct {
+
 	// The time when the fleet was last updated.
 	LastUpdatedTime *time.Time
+
 	// The identifier used by users to sign into the Amazon WorkLink app.
 	CompanyCode *string
+
 	// The name of the fleet to display.
 	DisplayName *string
+
 	// The name of the fleet.
 	FleetName *string
+
 	// The time when the fleet was created.
 	CreatedTime *time.Time
+
 	// The status of the fleet.
 	FleetStatus FleetStatus
+
 	// The tags attached to the resource. A tag is a key-value pair.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	FleetArn *string
 }
 
 // The summary of the website authorization provider.
 type WebsiteAuthorizationProviderSummary struct {
+
 	// A unique identifier for the authorization provider.
 	AuthorizationProviderId *string
+
 	// The domain name of the authorization provider. This applies only to SAML-based
 	// authorization providers.
 	DomainName *string
+
 	// The time of creation.
 	CreatedTime *time.Time
+
 	// The authorization provider type.
+	//
+	// This member is required.
 	AuthorizationProviderType AuthorizationProviderType
 }
 
 // The summary of the certificate authority (CA).
 type WebsiteCaSummary struct {
+
 	// The time when the CA was added.
 	CreatedTime *time.Time
+
 	// A unique identifier for the CA.
 	WebsiteCaId *string
+
 	// The name to display.
 	DisplayName *string
 }

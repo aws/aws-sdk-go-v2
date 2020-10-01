@@ -56,7 +56,10 @@ func (c *Client) DeleteInputSecurityGroup(ctx context.Context, params *DeleteInp
 
 // Placeholder documentation for DeleteInputSecurityGroupRequest
 type DeleteInputSecurityGroupInput struct {
+
 	// The Input Security Group to delete
+	//
+	// This member is required.
 	InputSecurityGroupId *string
 }
 

@@ -55,8 +55,12 @@ func (c *Client) DeleteDocument(ctx context.Context, params *DeleteDocumentInput
 }
 
 type DeleteDocumentInput struct {
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string

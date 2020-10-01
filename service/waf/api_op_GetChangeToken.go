@@ -73,6 +73,7 @@ type GetChangeTokenInput struct {
 }
 
 type GetChangeTokenOutput struct {
+
 	// The ChangeToken that you used in the request. Use this value in a
 	// GetChangeTokenStatus request to get the current status of the request.
 	ChangeToken *string

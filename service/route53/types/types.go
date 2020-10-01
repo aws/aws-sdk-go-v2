@@ -9,9 +9,13 @@ import (
 // A complex type that contains the type of limit that you specified in the request
 // and the current value for that limit.
 type AccountLimit struct {
+
 	// The current value for the limit that is specified by Type
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AccountLimit.html#Route53-Type-AccountLimit-Type).
+	//
+	// This member is required.
 	Value *int64
+
 	// The limit that you requested. Valid values include the following:
 	//
 	//     *
@@ -34,6 +38,8 @@ type AccountLimit struct {
 	// instances that you can create using the current account. (Traffic policy
 	// instances are referred to as traffic flow policy records in the Amazon Route 53
 	// console.)
+	//
+	// This member is required.
 	Type AccountLimitType
 }
 
@@ -41,12 +47,16 @@ type AccountLimit struct {
 // 53 health checkers to use to determine whether the specified health check is
 // healthy.
 type AlarmIdentifier struct {
+
 	// For the CloudWatch alarm that you want Route 53 health checkers to use to
 	// determine whether this health check is healthy, the region that the alarm was
 	// created in. For the current list of CloudWatch regions, see Amazon CloudWatch
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region) in the AWS
 	// Service Endpoints chapter of the Amazon Web Services General Reference.
+	//
+	// This member is required.
 	Region CloudWatchRegion
+
 	// The name of the CloudWatch alarm that you want Amazon Route 53 health checkers
 	// to use to determine whether this health check is healthy. Route 53 supports
 	// CloudWatch alarms with the following features:
@@ -59,6 +69,8 @@ type AlarmIdentifier struct {
 	//
 	//     * Statistics: Average, Minimum,
 	// Maximum, Sum, and SampleCount. Extended statistics aren't supported.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -75,6 +87,7 @@ type AlarmIdentifier struct {
 // zone, see Configuring Failover in a Private Hosted Zone
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html).
 type AliasTarget struct {
+
 	// Applies only to alias, failover alias, geolocation alias, latency alias, and
 	// weighted alias resource record sets: When EvaluateTargetHealth is true, an alias
 	// resource record set inherits the health of the referenced AWS resource, such as
@@ -126,7 +139,10 @@ type AliasTarget struct {
 	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Amazon
 	// Route 53 Health Checks and DNS Failover</a> in the <i>Amazon Route 53 Developer
 	// Guide</i>.</p>
+	//
+	// This member is required.
 	EvaluateTargetHealth *bool
+
 	// Alias resource record sets only: The value that you specify depends on where you
 	// want to route queries: Amazon API Gateway custom regional APIs and
 	// edge-optimized APIs Specify the applicable domain name for your API. You can get
@@ -260,7 +276,10 @@ type AliasTarget struct {
 	// must have the same type as the record that you're routing traffic to, and
 	// creating a CNAME record for the zone apex isn't supported even for an alias
 	// record.
+	//
+	// This member is required.
 	DNSName *string
+
 	// Alias resource records sets only: The value used depends on where you want to
 	// route traffic: Amazon API Gateway custom regional APIs and edge-optimized APIs
 	// Specify the hosted zone ID for your API. You can get the applicable value using
@@ -336,11 +355,14 @@ type AliasTarget struct {
 	// set in your hosted zone Specify the hosted zone ID of your hosted zone. (An
 	// alias resource record set can't reference a resource record set in a different
 	// hosted zone.)
+	//
+	// This member is required.
 	HostedZoneId *string
 }
 
 // The information for each resource record set that you want to change.
 type Change struct {
+
 	// The action to perform:
 	//
 	//     * CREATE: Creates a resource record set that has the
@@ -358,15 +380,24 @@ type Change struct {
 	//     * UPSERT: If a resource
 	// record set doesn't already exist, Route 53 creates it. If a resource record set
 	// does exist, Route 53 updates it with the values in the request.
+	//
+	// This member is required.
 	Action ChangeAction
+
 	// Information about the resource record set to create, delete, or update.
+	//
+	// This member is required.
 	ResourceRecordSet *ResourceRecordSet
 }
 
 // The information for a change request.
 type ChangeBatch struct {
+
 	// Information about the changes to make to the record sets.
+	//
+	// This member is required.
 	Changes []*Change
+
 	// Optional: Any comments you want to include about a change batch request.
 	Comment *string
 }
@@ -374,66 +405,103 @@ type ChangeBatch struct {
 // A complex type that describes change information about changes made to your
 // hosted zone.
 type ChangeInfo struct {
+
 	// The ID of the request.
+	//
+	// This member is required.
 	Id *string
+
 	// A complex type that describes change information about changes made to your
 	// hosted zone. This element contains an ID that you use when performing a
 	// GetChange
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
 	// action to get detailed information about the change.
 	Comment *string
+
 	// The date and time that the change request was submitted in ISO 8601 format
 	// (https://en.wikipedia.org/wiki/ISO_8601) and Coordinated Universal Time (UTC).
 	// For example, the value 2017-03-27T17:48:16.751Z represents March 27, 2017 at
 	// 17:48:16.751 UTC.
+	//
+	// This member is required.
 	SubmittedAt *time.Time
+
 	// The current state of the request. PENDING indicates that this request has not
 	// yet been applied to all Amazon Route 53 DNS servers.
+	//
+	// This member is required.
 	Status ChangeStatus
 }
 
 // A complex type that contains information about the CloudWatch alarm that Amazon
 // Route 53 is monitoring for this health check.
 type CloudWatchAlarmConfiguration struct {
+
 	// For the metric that the CloudWatch alarm is associated with, the value the
 	// metric is compared with.
+	//
+	// This member is required.
 	Threshold *float64
+
 	// The namespace of the metric that the alarm is associated with. For more
 	// information, see Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
 	// in the Amazon CloudWatch User Guide.
+	//
+	// This member is required.
 	Namespace *string
+
 	// For the metric that the CloudWatch alarm is associated with, the duration of one
 	// evaluation period in seconds.
+	//
+	// This member is required.
 	Period *int32
+
 	// For the metric that the CloudWatch alarm is associated with, a complex type that
 	// contains information about the dimensions for the metric. For information, see
 	// Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
 	// in the Amazon CloudWatch User Guide.
 	Dimensions []*Dimension
+
 	// For the metric that the CloudWatch alarm is associated with, the number of
 	// periods that the metric is compared to the threshold.
+	//
+	// This member is required.
 	EvaluationPeriods *int32
+
 	// For the metric that the CloudWatch alarm is associated with, the arithmetic
 	// operation that is used for the comparison.
+	//
+	// This member is required.
 	ComparisonOperator ComparisonOperator
+
 	// For the metric that the CloudWatch alarm is associated with, the statistic that
 	// is applied to the metric.
+	//
+	// This member is required.
 	Statistic Statistic
+
 	// The name of the CloudWatch metric that the alarm is associated with.
+	//
+	// This member is required.
 	MetricName *string
 }
 
 // A complex type that lists the name servers in a delegation set, as well as the
 // CallerReference and the ID for the delegation set.
 type DelegationSet struct {
+
 	// A complex type that contains a list of the authoritative name servers for a
 	// hosted zone or for a reusable delegation set.
+	//
+	// This member is required.
 	NameServers []*string
+
 	// The value that you specified for CallerReference when you created the reusable
 	// delegation set.
 	CallerReference *string
+
 	// The ID that Amazon Route 53 assigns to a reusable delegation set.
 	Id *string
 }
@@ -441,20 +509,28 @@ type DelegationSet struct {
 // For the metric that the CloudWatch alarm is associated with, a complex type that
 // contains information about one dimension.
 type Dimension struct {
+
 	// For the metric that the CloudWatch alarm is associated with, the name of one
 	// dimension.
+	//
+	// This member is required.
 	Name *string
+
 	// For the metric that the CloudWatch alarm is associated with, the value of one
 	// dimension.
+	//
+	// This member is required.
 	Value *string
 }
 
 // A complex type that contains information about a geographic location.
 type GeoLocation struct {
+
 	// For geolocation resource record sets, the two-letter code for a country. Amazon
 	// Route 53 uses the two-letter country codes that are specified in ISO standard
 	// 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 	CountryCode *string
+
 	// The two-letter code for the continent. Amazon Route 53 supports the following
 	// continent codes:
 	//
@@ -477,6 +553,7 @@ type GeoLocation struct {
 	// Constraint: Specifying ContinentCode with either CountryCode or
 	// SubdivisionCode returns an InvalidInput error.
 	ContinentCode *string
+
 	// For geolocation resource record sets, the two-letter code for a state of the
 	// United States. Route 53 doesn't support any other values for SubdivisionCode.
 	// For a list of state abbreviations, see Appendix B: Two–Letter State and
@@ -489,18 +566,24 @@ type GeoLocation struct {
 // A complex type that contains the codes and full continent, country, and
 // subdivision names for the specified geolocation code.
 type GeoLocationDetails struct {
+
 	// The name of the country.
 	CountryName *string
+
 	// The full name of the continent.
 	ContinentName *string
+
 	// The full name of the subdivision. Route 53 currently supports only states in the
 	// United States.
 	SubdivisionName *string
+
 	// The code for the subdivision. Route 53 currently supports only states in the
 	// United States.
 	SubdivisionCode *string
+
 	// The two-letter code for the continent.
 	ContinentCode *string
+
 	// The two-letter code for the country.
 	CountryCode *string
 }
@@ -508,20 +591,34 @@ type GeoLocationDetails struct {
 // A complex type that contains information about one health check that is
 // associated with the current AWS account.
 type HealthCheck struct {
+
 	// The identifier that Amazon Route 53assigned to the health check when you created
 	// it. When you add or update a resource record set, you use this value to specify
 	// which health check to use. The value can be up to 64 characters long.
+	//
+	// This member is required.
 	Id *string
+
 	// A complex type that contains detailed information about one health check.
+	//
+	// This member is required.
 	HealthCheckConfig *HealthCheckConfig
+
 	// A complex type that contains information about the CloudWatch alarm that Amazon
 	// Route 53 is monitoring for this health check.
 	CloudWatchAlarmConfiguration *CloudWatchAlarmConfiguration
+
 	// A unique string that you specified when you created the health check.
+	//
+	// This member is required.
 	CallerReference *string
+
 	// The version of the health check. You can optionally pass this value in a call to
 	// UpdateHealthCheck to prevent overwriting another change to the health check.
+	//
+	// This member is required.
 	HealthCheckVersion *int64
+
 	// If the health check was created by another service, the service that created the
 	// health check. When a health check is created by another service, you can't edit
 	// or delete it using Amazon Route 53.
@@ -530,6 +627,7 @@ type HealthCheck struct {
 
 // A complex type that contains information about the health check.
 type HealthCheckConfig struct {
+
 	// The number of child health checks that are associated with a CALCULATED health
 	// check that Amazon Route 53 must consider healthy for the CALCULATED health check
 	// to be considered healthy. To specify the child health checks that you want to
@@ -544,10 +642,12 @@ type HealthCheckConfig struct {
 	//     * If you specify 0, Route 53 always considers this health check
 	// to be healthy.
 	HealthThreshold *int32
+
 	// A complex type that identifies the CloudWatch alarm that you want Amazon Route
 	// 53 health checkers to use to determine whether the specified health check is
 	// healthy.
 	AlarmIdentifier *AlarmIdentifier
+
 	// The type of health check that you want to create, which indicates how Amazon
 	// Route 53 determines whether an endpoint is healthy. You can't change the value
 	// of Type after you create a health check. You can create the following types of
@@ -592,7 +692,10 @@ type HealthCheckConfig struct {
 	// Endpoint Is Healthy
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Amazon Route 53 Developer Guide.
+	//
+	// This member is required.
 	Type HealthCheckType
+
 	// The IPv4 or IPv6 IP address of the endpoint that you want Amazon Route 53 to
 	// perform health checks on. If you don't specify a value for IPAddress, Route 53
 	// sends a DNS request to resolve the domain name that you specify in
@@ -624,12 +727,14 @@ type HealthCheckConfig struct {
 	// <code>CALCULATED</code> or <code>CLOUDWATCH_METRIC</code>, omit
 	// <code>IPAddress</code>.</p>
 	IPAddress *string
+
 	// The path, if any, that you want Amazon Route 53 to request when performing
 	// health checks. The path can be any value for which your endpoint will return an
 	// HTTP status code of 2xx or 3xx when the endpoint is healthy, for example, the
 	// file /docs/route53-health-check.html. You can also include query string
 	// parameters, for example, /welcome.html?language=jp&login=y.
 	ResourcePath *string
+
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:
 	//
@@ -653,6 +758,7 @@ type HealthCheckConfig struct {
 	// disabled. For more information, see <a
 	// href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p>
 	Disabled *bool
+
 	// Specify whether you want Amazon Route 53 to send the value of
 	// FullyQualifiedDomainName to the endpoint in the client_hello message during TLS
 	// negotiation. This allows the endpoint to respond to HTTPS health check requests
@@ -671,6 +777,7 @@ type HealthCheckConfig struct {
 	// second attempt, the health checker will omit FullyQualifiedDomainName from the
 	// client_hello message.
 	EnableSNI *bool
+
 	// Amazon Route 53 behavior depends on whether you specify a value for IPAddress.
 	// <p> <b>If you specify a value for</b> <code>IPAddress</code>:</p> <p>Amazon
 	// Route 53 sends health check requests to the specified IPv4 or IPv6 address and
@@ -720,16 +827,19 @@ type HealthCheckConfig struct {
 	// <code>Type</code> is <code>TCP</code>, Route 53 doesn't pass a <code>Host</code>
 	// header.</p>
 	FullyQualifiedDomainName *string
+
 	// The number of seconds between the time that Amazon Route 53 gets a response from
 	// your endpoint and the time that it sends the next health check request. Each
 	// Route 53 health checker makes requests at this interval. You can't change the
 	// value of RequestInterval after you create a health check. If you don't specify a
 	// value for RequestInterval, the default value is 30 seconds.
 	RequestInterval *int32
+
 	// Specify whether you want Amazon Route 53 to invert the status of a health check,
 	// for example, to consider a health check unhealthy when it otherwise would be
 	// considered healthy.
 	Inverted *bool
+
 	// When CloudWatch has insufficient data about the metric to determine the alarm
 	// state, the status that you want Amazon Route 53 to assign to the health check:
 	//
@@ -744,6 +854,7 @@ type HealthCheckConfig struct {
 	// had sufficient data to determine the alarm state. For new health checks that
 	// have no last known status, the default status for the health check is healthy.
 	InsufficientDataHealthStatus InsufficientDataHealthStatus
+
 	// The number of consecutive health checks that an endpoint must pass or fail for
 	// Amazon Route 53 to change the current status of the endpoint from unhealthy to
 	// healthy or vice versa. For more information, see How Amazon Route 53 Determines
@@ -752,12 +863,14 @@ type HealthCheckConfig struct {
 	// in the Amazon Route 53 Developer Guide. If you don't specify a value for
 	// FailureThreshold, the default value is three health checks.
 	FailureThreshold *int32
+
 	// If the value of Type is HTTP_STR_MATCH or HTTPS_STR_MATCH, the string that you
 	// want Amazon Route 53 to search for in the response body from the specified
 	// resource. If the string appears in the response body, Route 53 considers the
 	// resource healthy. Route 53 considers case when searching for SearchString in the
 	// response body.
 	SearchString *string
+
 	// A complex type that contains one Region element for each region from which you
 	// want Amazon Route 53 health checkers to check the specified endpoint. If you
 	// don't specify any regions, Route 53 health checkers automatically performs
@@ -767,15 +880,18 @@ type HealthCheckConfig struct {
 	// health checkers are always checking the endpoint (for example, if you replace
 	// three regions with four different regions).
 	Regions []HealthCheckRegion
+
 	// Specify whether you want Amazon Route 53 to measure the latency between health
 	// checkers in multiple AWS regions and your endpoint, and to display CloudWatch
 	// latency graphs on the Health Checks page in the Route 53 console. You can't
 	// change the value of MeasureLatency after you create a health check.
 	MeasureLatency *bool
+
 	// The port on the endpoint that you want Amazon Route 53 to perform health checks
 	// on. Don't specify a value for Port when you specify a value for Type of
 	// CLOUDWATCH_METRIC or CALCULATED.
 	Port *int32
+
 	// (CALCULATED Health Checks Only) A complex type that contains one
 	// ChildHealthCheck element for each health check that you want to associate with a
 	// CALCULATED health check.
@@ -785,12 +901,15 @@ type HealthCheckConfig struct {
 // A complex type that contains the last failure reason as reported by one Amazon
 // Route 53 health checker.
 type HealthCheckObservation struct {
+
 	// The region of the Amazon Route 53 health checker that provided the status in
 	// StatusReport.
 	Region HealthCheckRegion
+
 	// A complex type that contains the last failure reason as reported by one Amazon
 	// Route 53 health checker and the time of the failed health check.
 	StatusReport *StatusReport
+
 	// The IP address of the Amazon Route 53 health checker that provided the failure
 	// reason in StatusReport.
 	IPAddress *string
@@ -798,26 +917,38 @@ type HealthCheckObservation struct {
 
 // A complex type that contains general information about the hosted zone.
 type HostedZone struct {
+
 	// The number of resource record sets in the hosted zone.
 	ResourceRecordSetCount *int64
+
 	// The name of the domain. For public hosted zones, this is the name that you have
 	// registered with your DNS registrar. For information about how to specify
 	// characters other than a-z, 0-9, and - (hyphen) and how to specify
 	// internationalized domain names, see CreateHostedZone
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html).
+	//
+	// This member is required.
 	Name *string
+
 	// A complex type that includes the Comment and PrivateZone elements. If you
 	// omitted the HostedZoneConfig and Comment elements from the request, the Config
 	// and Comment elements don't appear in the response.
 	Config *HostedZoneConfig
+
 	// If the hosted zone was created by another service, the service that created the
 	// hosted zone. When a hosted zone is created by another service, you can't edit or
 	// delete it using Route 53.
 	LinkedService *LinkedService
+
 	// The value that you specified for CallerReference when you created the hosted
 	// zone.
+	//
+	// This member is required.
 	CallerReference *string
+
 	// The ID that Amazon Route 53 assigned to the hosted zone when you created it.
+	//
+	// This member is required.
 	Id *string
 }
 
@@ -825,8 +956,10 @@ type HostedZone struct {
 // don't want to specify a comment, omit both the HostedZoneConfig and Comment
 // elements.
 type HostedZoneConfig struct {
+
 	// Any comments that you want to include about the hosted zone.
 	Comment *string
+
 	// A value that indicates whether this is a private hosted zone.
 	PrivateZone *bool
 }
@@ -834,8 +967,12 @@ type HostedZoneConfig struct {
 // A complex type that contains the type of limit that you specified in the request
 // and the current value for that limit.
 type HostedZoneLimit struct {
+
 	// The current value for the limit that is specified by Type.
+	//
+	// This member is required.
 	Value *int64
+
 	// The limit that you requested. Valid values include the following:
 	//
 	//     *
@@ -844,6 +981,8 @@ type HostedZoneLimit struct {
 	//
 	//     * MAX_VPCS_ASSOCIATED_BY_ZONE: The maximum number of
 	// Amazon VPCs that you can associate with the specified private hosted zone.
+	//
+	// This member is required.
 	Type HostedZoneLimitType
 }
 
@@ -851,12 +990,14 @@ type HostedZoneLimit struct {
 // associated with and the owner of the hosted zone. If there is a value for
 // OwningAccount, there is no value for OwningService, and vice versa.
 type HostedZoneOwner struct {
+
 	// If the hosted zone was created by an AWS account, or was created by an AWS
 	// service that creates hosted zones using the current account, OwningAccount
 	// contains the account ID of that account. For example, when you use AWS Cloud Map
 	// to create a hosted zone, Cloud Map creates the hosted zone using the current AWS
 	// account.
 	OwningAccount *string
+
 	// If an AWS service uses its own account to create a hosted zone and associate the
 	// specified VPC with that hosted zone, OwningService contains an abbreviation that
 	// identifies the service. For example, if Amazon Elastic File System (Amazon EFS)
@@ -870,13 +1011,22 @@ type HostedZoneOwner struct {
 // specified Amazon VPC is associated with. Each HostedZoneSummary element contains
 // the hosted zone name and ID, and information about who owns the hosted zone.
 type HostedZoneSummary struct {
+
 	// The owner of a private hosted zone that the specified VPC is associated with.
 	// The owner can be either an AWS account or an AWS service.
+	//
+	// This member is required.
 	Owner *HostedZoneOwner
+
 	// The Route 53 hosted zone ID of a private hosted zone that the specified VPC is
 	// associated with.
+	//
+	// This member is required.
 	HostedZoneId *string
+
 	// The name of the private hosted zone, such as example.com.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -885,10 +1035,12 @@ type HostedZoneSummary struct {
 // resource is created by another service, you can't edit or delete it using Amazon
 // Route 53.
 type LinkedService struct {
+
 	// If the health check or hosted zone was created by another service, an optional
 	// description that can be provided by the other service. When a resource is
 	// created by another service, you can't edit or delete it using Amazon Route 53.
 	Description *string
+
 	// If the health check or hosted zone was created by another service, the service
 	// that created the resource. When a resource is created by another service, you
 	// can't edit or delete it using Amazon Route 53.
@@ -898,18 +1050,28 @@ type LinkedService struct {
 // A complex type that contains information about a configuration for DNS query
 // logging.
 type QueryLoggingConfig struct {
+
 	// The ID for a configuration for DNS query logging.
+	//
+	// This member is required.
 	Id *string
+
 	// The ID of the hosted zone that CloudWatch Logs is logging queries for.
+	//
+	// This member is required.
 	HostedZoneId *string
+
 	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon
 	// Route 53 is publishing logs to.
+	//
+	// This member is required.
 	CloudWatchLogsLogGroupArn *string
 }
 
 // Information specific to the resource record. If you're creating an alias
 // resource record set, omit ResourceRecord.
 type ResourceRecord struct {
+
 	// The current or new DNS record value, not to exceed 4,000 characters. In the case
 	// of a DELETE action, if the current value does not match the actual value, an
 	// error is returned. For descriptions about how to format Value for different
@@ -918,11 +1080,14 @@ type ResourceRecord struct {
 	// in the Amazon Route 53 Developer Guide. You can specify more than one value for
 	// all record types except CNAME and SOA. If you're creating an alias resource
 	// record set, omit Value.
+	//
+	// This member is required.
 	Value *string
 }
 
 // Information about the resource record set to create or delete.
 type ResourceRecordSet struct {
+
 	// Resource record sets that have a routing policy other than simple: An identifier
 	// that differentiates among multiple resource record sets that have the same
 	// combination of name and type, such as multiple weighted resource record sets
@@ -933,6 +1098,7 @@ type ResourceRecordSet struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html)
 	// in the Amazon Route 53 Developer Guide.
 	SetIdentifier *string
+
 	// Alias resource record sets only: Information about the AWS resource, such as a
 	// CloudFront distribution or an Amazon S3 bucket, that you want to route traffic
 	// to. If you're creating resource records sets for a private hosted zone, note the
@@ -951,6 +1117,7 @@ type ResourceRecordSet struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
 	// in the Amazon Route 53 Developer Guide.
 	AliasTarget *AliasTarget
+
 	// Weighted resource record sets only: Among resource record sets that have the
 	// same combination of DNS name and type, a value that determines the proportion of
 	// DNS queries that Amazon Route 53 responds to using the current resource record
@@ -984,6 +1151,7 @@ type ResourceRecordSet struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html)
 	// in the Amazon Route 53 Developer Guide.
 	Weight *int64
+
 	// If you want Amazon Route 53 to return this resource record set in response to a
 	// DNS query only when the status of a health check is healthy, include the
 	// HealthCheckId element and specify the ID of the applicable health check. Route
@@ -1068,6 +1236,7 @@ type ResourceRecordSet struct {
 	// as the name of a resource record set.</p> </li> <li> <p>Associate that health
 	// check with the resource record set.</p> </li> </ul> </important>
 	HealthCheckId *string
+
 	// Latency-based resource record sets only: The Amazon EC2 Region where you created
 	// the resource that this resource record set refers to. The resource typically is
 	// an AWS resource, such as an EC2 instance or an ELB load balancer, and is
@@ -1095,6 +1264,7 @@ type ResourceRecordSet struct {
 	// sets that have the same values for the Name and Type elements as latency
 	// resource record sets.
 	Region ResourceRecordSetRegion
+
 	// Geolocation resource record sets only: A complex type that lets you control how
 	// Amazon Route 53 responds to DNS queries based on the geographic origin of the
 	// query. For example, if you want all queries from Africa to be routed to a web
@@ -1122,9 +1292,11 @@ type ResourceRecordSet struct {
 	// locations. You can't create non-geolocation resource record sets that have the
 	// same values for the Name and Type elements as geolocation resource record sets.
 	GeoLocation *GeoLocation
+
 	// Information about the resource records to act upon. If you're creating an alias
 	// resource record set, omit ResourceRecords.
 	ResourceRecords []*ResourceRecord
+
 	// Failover resource record sets only: To configure failover, you add the Failover
 	// element to two resource record sets. For one resource record set, you specify
 	// PRIMARY as the value for Failover; for the other resource record set, you
@@ -1168,6 +1340,7 @@ type ResourceRecordSet struct {
 	// * Configuring Failover in a Private Hosted Zone
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
 	Failover ResourceRecordSetFailover
+
 	// The DNS record type. For information about different record types and how data
 	// is encoded for them, see Supported DNS Resource Record Types
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html)
@@ -1214,7 +1387,10 @@ type ResourceRecordSet struct {
 	// CNAME. This is because the alias record must have the same type as the record
 	// you're routing traffic to, and creating a CNAME record for the zone apex isn't
 	// supported even for an alias record.
+	//
+	// This member is required.
 	Type RRType
+
 	// The resource record cache time to live (TTL), in seconds. Note the following:
 	//
 	//
@@ -1237,6 +1413,7 @@ type ResourceRecordSet struct {
 	// Values other than 60 seconds (the TTL for load balancers) will change the effect
 	// of the values that you specify for Weight.
 	TTL *int64
+
 	// Multivalue answer resource record sets only: To route traffic approximately
 	// randomly to multiple resources, such as web servers, create one multivalue
 	// answer record for each resource and specify true for MultiValueAnswer. Note the
@@ -1268,6 +1445,7 @@ type ResourceRecordSet struct {
 	//
 	// You can't create multivalue answer alias records.
 	MultiValueAnswer *bool
+
 	// For ChangeResourceRecordSets requests, the name of the record that you want to
 	// create, update, or delete. For ListResourceRecordSets responses, the name of a
 	// record in the specified hosted zone.  <p> <b>ChangeResourceRecordSets Only</b>
@@ -1296,7 +1474,10 @@ type ResourceRecordSet struct {
 	// labels, for example, <code>marketing.*.example.com</code>. In addition, the *
 	// must replace the entire label; for example, you can't specify
 	// <code>prod*.example.com</code>.</p>
+	//
+	// This member is required.
 	Name *string
+
 	// When you create a traffic policy instance, Amazon Route 53 automatically creates
 	// a resource record set. TrafficPolicyInstanceId is the ID of the traffic policy
 	// instance that Route 53 created this resource record set for. To delete the
@@ -1311,10 +1492,13 @@ type ResourceRecordSet struct {
 
 // A complex type containing a resource and its associated tags.
 type ResourceTagSet struct {
+
 	// The tags associated with the specified resource.
 	Tags []*Tag
+
 	// The ID for the specified resource.
 	ResourceId *string
+
 	// The type of the resource.
 	//
 	//     * The resource type for health checks is
@@ -1327,22 +1511,30 @@ type ResourceTagSet struct {
 // A complex type that contains the type of limit that you specified in the request
 // and the current value for that limit.
 type ReusableDelegationSetLimit struct {
+
 	// The limit that you requested: MAX_ZONES_BY_REUSABLE_DELEGATION_SET, the maximum
 	// number of hosted zones that you can associate with the specified reusable
 	// delegation set.
+	//
+	// This member is required.
 	Type ReusableDelegationSetLimitType
+
 	// The current value for the MAX_ZONES_BY_REUSABLE_DELEGATION_SET limit.
+	//
+	// This member is required.
 	Value *int64
 }
 
 // A complex type that contains the status that one Amazon Route 53 health checker
 // reports and the time of the health check.
 type StatusReport struct {
+
 	// The date and time that the health checker performed the health check in ISO 8601
 	// format (https://en.wikipedia.org/wiki/ISO_8601) and Coordinated Universal Time
 	// (UTC). For example, the value 2017-03-27T17:48:16.751Z represents March 27, 2017
 	// at 17:48:16.751 UTC.
 	CheckedTime *time.Time
+
 	// A description of the status of the health check endpoint as reported by one of
 	// the Amazon Route 53 health checkers.
 	Status *string
@@ -1351,6 +1543,7 @@ type StatusReport struct {
 // A complex type that contains information about a tag that you want to add or
 // edit for the specified health check or hosted zone.
 type Tag struct {
+
 	// The value of Key depends on the operation that you want to perform:
 	//
 	//     * Add a
@@ -1367,6 +1560,7 @@ type Tag struct {
 	// Amazon Route 53 console, the list of your health checks includes a Name column
 	// that lets you see the name that you've given to each health check.
 	Key *string
+
 	// The value of Value depends on the operation that you want to perform:
 	//
 	//     * Add
@@ -1380,48 +1574,86 @@ type Tag struct {
 
 // A complex type that contains settings for a traffic policy.
 type TrafficPolicy struct {
+
 	// The DNS type of the resource record sets that Amazon Route 53 creates when you
 	// use a traffic policy to create a traffic policy instance.
+	//
+	// This member is required.
 	Type RRType
+
 	// The comment that you specify in the CreateTrafficPolicy request, if any.
 	Comment *string
+
 	// The name that you specified when you created the traffic policy.
+	//
+	// This member is required.
 	Name *string
+
 	// The definition of a traffic policy in JSON format. You specify the JSON document
 	// to use for a new traffic policy in the CreateTrafficPolicy request. For more
 	// information about the JSON format, see Traffic Policy Document Format
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html).
+	//
+	// This member is required.
 	Document *string
+
 	// The version number that Amazon Route 53 assigns to a traffic policy. For a new
 	// traffic policy, the value of Version is always 1.
+	//
+	// This member is required.
 	Version *int32
+
 	// The ID that Amazon Route 53 assigned to a traffic policy when you created it.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains settings for the new traffic policy instance.
 type TrafficPolicyInstance struct {
+
 	// The TTL that Amazon Route 53 assigned to all of the resource record sets that it
 	// created in the specified hosted zone.
+	//
+	// This member is required.
 	TTL *int64
+
 	// The ID that Amazon Route 53 assigned to the new traffic policy instance.
+	//
+	// This member is required.
 	Id *string
+
 	// The version of the traffic policy that Amazon Route 53 used to create resource
 	// record sets in the specified hosted zone.
+	//
+	// This member is required.
 	TrafficPolicyVersion *int32
+
 	// The DNS name, such as www.example.com, for which Amazon Route 53 responds to
 	// queries by using the resource record sets that are associated with this traffic
 	// policy instance.
+	//
+	// This member is required.
 	Name *string
+
 	// If State is Failed, an explanation of the reason for the failure. If State is
 	// another value, Message is empty.
+	//
+	// This member is required.
 	Message *string
+
 	// The ID of the traffic policy that Amazon Route 53 used to create resource record
 	// sets in the specified hosted zone.
+	//
+	// This member is required.
 	TrafficPolicyId *string
+
 	// The DNS type that Amazon Route 53 assigned to all of the resource record sets
 	// that it created for this traffic policy instance.
+	//
+	// This member is required.
 	TrafficPolicyType RRType
+
 	// The value of State is one of the following values: Applied Amazon Route 53 has
 	// finished creating resource record sets, and changes have propagated to all Route
 	// 53 edge locations. Creating Route 53 is creating the resource record sets. Use
@@ -1429,32 +1661,54 @@ type TrafficPolicyInstance struct {
 	// completed successfully. Failed Route 53 wasn't able to create or update the
 	// resource record sets. When the value of State is Failed, see Message for an
 	// explanation of what caused the request to fail.
+	//
+	// This member is required.
 	State *string
+
 	// The ID of the hosted zone that Amazon Route 53 created resource record sets in.
+	//
+	// This member is required.
 	HostedZoneId *string
 }
 
 // A complex type that contains information about the latest version of one traffic
 // policy that is associated with the current AWS account.
 type TrafficPolicySummary struct {
+
 	// The name that you specified for the traffic policy when you created it.
+	//
+	// This member is required.
 	Name *string
+
 	// The DNS type of the resource record sets that Amazon Route 53 creates when you
 	// use a traffic policy to create a traffic policy instance.
+	//
+	// This member is required.
 	Type RRType
+
 	// The version number of the latest version of the traffic policy.
+	//
+	// This member is required.
 	LatestVersion *int32
+
 	// The ID that Amazon Route 53 assigned to the traffic policy when you created it.
+	//
+	// This member is required.
 	Id *string
+
 	// The number of traffic policies that are associated with the current AWS account.
+	//
+	// This member is required.
 	TrafficPolicyCount *int32
 }
 
 // (Private hosted zones only) A complex type that contains information about an
 // Amazon VPC.
 type VPC struct {
+
 	// (Private hosted zones only) The region that an Amazon VPC was created in.
 	VPCRegion VPCRegion
+
 	// (Private hosted zones only) The ID of an Amazon VPC.
 	VPCId *string
 }

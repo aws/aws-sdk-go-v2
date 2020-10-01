@@ -54,6 +54,7 @@ func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, op
 
 // Initiates the authentication request.
 type InitiateAuthInput struct {
+
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
 	//
@@ -69,6 +70,7 @@ type InitiateAuthInput struct {
 	// * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured
 	// with client secret), DEVICE_KEY
 	AuthParameters map[string]*string
+
 	// A map of custom key-value pairs that you can provide as input for certain custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the InitiateAuth API
@@ -107,15 +109,21 @@ type InitiateAuthInput struct {
 	// ClientMetadata value, so don't use it to provide sensitive information.</p>
 	// </li> </ul> </note>
 	ClientMetadata map[string]*string
+
 	// The Amazon Pinpoint analytics metadata for collecting metrics for InitiateAuth
 	// calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// The app client ID.
+	//
+	// This member is required.
 	ClientId *string
+
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
 	// The authentication flow for this call to execute. The API action will depend on
 	// this value. For example:
 	//
@@ -153,21 +161,26 @@ type InitiateAuthInput struct {
 	//
 	// ADMIN_NO_SRP_AUTH is not a valid
 	// value.
+	//
+	// This member is required.
 	AuthFlow types.AuthFlowType
 }
 
 // Initiates the authentication response.
 type InitiateAuthOutput struct {
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If the or API call determines that the caller needs to go through
 	// another challenge, they return a session with other challenge parameters. This
 	// session should be passed as it is to the next RespondToAuthChallenge API call.
 	Session *string
+
 	// The challenge parameters. These are returned to you in the InitiateAuth response
 	// if you need to pass another challenge. The responses in this parameter should be
 	// used to compute inputs to the next call (RespondToAuthChallenge). All challenges
 	// require USERNAME and SECRET_HASH (if applicable).
 	ChallengeParameters map[string]*string
+
 	// The name of the challenge which you are responding to with this call. This is
 	// returned to you in the AdminInitiateAuth response if you need to pass another
 	// challenge. Valid values include the following. Note that all of these challenges
@@ -197,6 +210,7 @@ type InitiateAuthOutput struct {
 	// after successful first login. This challenge should be passed with NEW_PASSWORD
 	// and any other required attributes.
 	ChallengeName types.ChallengeNameType
+
 	// The result of the authentication response. This is only returned if the caller
 	// does not need to pass another challenge. If the caller does need to pass another
 	// challenge before it gets tokens, ChallengeName, ChallengeParameters, and Session

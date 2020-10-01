@@ -59,11 +59,15 @@ func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedi
 }
 
 type GetMedicalTranscriptionJobInput struct {
+
 	// The name of the medical transcription job.
+	//
+	// This member is required.
 	MedicalTranscriptionJobName *string
 }
 
 type GetMedicalTranscriptionJobOutput struct {
+
 	// An object that contains the results of the medical transcription job.
 	MedicalTranscriptionJob *types.MedicalTranscriptionJob
 

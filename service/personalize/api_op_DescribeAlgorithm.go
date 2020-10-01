@@ -56,11 +56,15 @@ func (c *Client) DescribeAlgorithm(ctx context.Context, params *DescribeAlgorith
 }
 
 type DescribeAlgorithmInput struct {
+
 	// The Amazon Resource Name (ARN) of the algorithm to describe.
+	//
+	// This member is required.
 	AlgorithmArn *string
 }
 
 type DescribeAlgorithmOutput struct {
+
 	// A listing of the properties of the algorithm.
 	Algorithm *types.Algorithm
 

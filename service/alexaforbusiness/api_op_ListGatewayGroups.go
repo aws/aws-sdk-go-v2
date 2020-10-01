@@ -56,15 +56,19 @@ func (c *Client) ListGatewayGroups(ctx context.Context, params *ListGatewayGroup
 }
 
 type ListGatewayGroupsInput struct {
+
 	// The token used to paginate though multiple pages of gateway group summaries.
 	NextToken *string
+
 	// The maximum number of gateway group summaries to return. The default is 50.
 	MaxResults *int32
 }
 
 type ListGatewayGroupsOutput struct {
+
 	// The token used to paginate though multiple pages of gateway group summaries.
 	NextToken *string
+
 	// The gateway groups in the list.
 	GatewayGroups []*types.GatewayGroupSummary
 

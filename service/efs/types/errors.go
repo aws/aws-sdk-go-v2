@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Returned if the access point you are trying to create already exists, with the
@@ -28,24 +27,6 @@ func (e *AccessPointAlreadyExists) ErrorMessage() string {
 }
 func (e *AccessPointAlreadyExists) ErrorCode() string             { return "AccessPointAlreadyExists" }
 func (e *AccessPointAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessPointAlreadyExists) GetAccessPointId() string {
-	return ptr.ToString(e.AccessPointId)
-}
-func (e *AccessPointAlreadyExists) HasAccessPointId() bool {
-	return e.AccessPointId != nil
-}
-func (e *AccessPointAlreadyExists) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *AccessPointAlreadyExists) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *AccessPointAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessPointAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the AWS account has already created the maximum number of access
 // points allowed per file system.
@@ -66,18 +47,6 @@ func (e *AccessPointLimitExceeded) ErrorMessage() string {
 }
 func (e *AccessPointLimitExceeded) ErrorCode() string             { return "AccessPointLimitExceeded" }
 func (e *AccessPointLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessPointLimitExceeded) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *AccessPointLimitExceeded) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *AccessPointLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessPointLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the specified AccessPointId value doesn't exist in the requester's
 // AWS account.
@@ -98,18 +67,6 @@ func (e *AccessPointNotFound) ErrorMessage() string {
 }
 func (e *AccessPointNotFound) ErrorCode() string             { return "AccessPointNotFound" }
 func (e *AccessPointNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessPointNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessPointNotFound) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *AccessPointNotFound) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *AccessPointNotFound) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the request is malformed or contains an error such as an invalid
 // parameter value or a missing required parameter.
@@ -130,18 +87,6 @@ func (e *BadRequest) ErrorMessage() string {
 }
 func (e *BadRequest) ErrorCode() string             { return "BadRequest" }
 func (e *BadRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequest) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *BadRequest) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *BadRequest) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequest) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service timed out trying to fulfill the request, and the client should try
 // the call again.
@@ -162,18 +107,6 @@ func (e *DependencyTimeout) ErrorMessage() string {
 }
 func (e *DependencyTimeout) ErrorCode() string             { return "DependencyTimeout" }
 func (e *DependencyTimeout) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *DependencyTimeout) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *DependencyTimeout) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *DependencyTimeout) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyTimeout) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the file system you are trying to create already exists, with the
 // creation token you provided.
@@ -195,24 +128,6 @@ func (e *FileSystemAlreadyExists) ErrorMessage() string {
 }
 func (e *FileSystemAlreadyExists) ErrorCode() string             { return "FileSystemAlreadyExists" }
 func (e *FileSystemAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileSystemAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileSystemAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *FileSystemAlreadyExists) GetFileSystemId() string {
-	return ptr.ToString(e.FileSystemId)
-}
-func (e *FileSystemAlreadyExists) HasFileSystemId() bool {
-	return e.FileSystemId != nil
-}
-func (e *FileSystemAlreadyExists) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *FileSystemAlreadyExists) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if a file system has mount targets.
 type FileSystemInUse struct {
@@ -232,18 +147,6 @@ func (e *FileSystemInUse) ErrorMessage() string {
 }
 func (e *FileSystemInUse) ErrorCode() string             { return "FileSystemInUse" }
 func (e *FileSystemInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileSystemInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileSystemInUse) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *FileSystemInUse) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *FileSystemInUse) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the AWS account has already created the maximum number of file
 // systems allowed per account.
@@ -264,18 +167,6 @@ func (e *FileSystemLimitExceeded) ErrorMessage() string {
 }
 func (e *FileSystemLimitExceeded) ErrorCode() string             { return "FileSystemLimitExceeded" }
 func (e *FileSystemLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileSystemLimitExceeded) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *FileSystemLimitExceeded) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *FileSystemLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileSystemLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the specified FileSystemId value doesn't exist in the requester's
 // AWS account.
@@ -296,18 +187,6 @@ func (e *FileSystemNotFound) ErrorMessage() string {
 }
 func (e *FileSystemNotFound) ErrorCode() string             { return "FileSystemNotFound" }
 func (e *FileSystemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileSystemNotFound) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *FileSystemNotFound) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *FileSystemNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileSystemNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the file system's lifecycle state is not "available".
 type IncorrectFileSystemLifeCycleState struct {
@@ -329,18 +208,6 @@ func (e *IncorrectFileSystemLifeCycleState) ErrorCode() string {
 	return "IncorrectFileSystemLifeCycleState"
 }
 func (e *IncorrectFileSystemLifeCycleState) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncorrectFileSystemLifeCycleState) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncorrectFileSystemLifeCycleState) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *IncorrectFileSystemLifeCycleState) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *IncorrectFileSystemLifeCycleState) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the mount target is not in the correct state for the operation.
 type IncorrectMountTargetState struct {
@@ -360,18 +227,6 @@ func (e *IncorrectMountTargetState) ErrorMessage() string {
 }
 func (e *IncorrectMountTargetState) ErrorCode() string             { return "IncorrectMountTargetState" }
 func (e *IncorrectMountTargetState) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncorrectMountTargetState) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncorrectMountTargetState) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *IncorrectMountTargetState) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *IncorrectMountTargetState) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if there's not enough capacity to provision additional throughput. This
 // value might be returned when you try to create a file system in provisioned
@@ -395,18 +250,6 @@ func (e *InsufficientThroughputCapacity) ErrorMessage() string {
 }
 func (e *InsufficientThroughputCapacity) ErrorCode() string             { return "InsufficientThroughputCapacity" }
 func (e *InsufficientThroughputCapacity) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InsufficientThroughputCapacity) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InsufficientThroughputCapacity) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *InsufficientThroughputCapacity) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientThroughputCapacity) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if an error occurred on the server side.
 type InternalServerError struct {
@@ -426,18 +269,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalServerError) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InternalServerError) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the FileSystemPolicy is is malformed or contains an error such as an
 // invalid parameter value or a missing required parameter. Returned in the case of
@@ -459,18 +290,6 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 }
 func (e *InvalidPolicyException) ErrorCode() string             { return "InvalidPolicyException" }
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidPolicyException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InvalidPolicyException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the request specified an IpAddress that is already in use in the
 // subnet.
@@ -491,18 +310,6 @@ func (e *IpAddressInUse) ErrorMessage() string {
 }
 func (e *IpAddressInUse) ErrorCode() string             { return "IpAddressInUse" }
 func (e *IpAddressInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IpAddressInUse) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *IpAddressInUse) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *IpAddressInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IpAddressInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the mount target would violate one of the specified restrictions
 // based on the file system's existing mount targets.
@@ -523,18 +330,6 @@ func (e *MountTargetConflict) ErrorMessage() string {
 }
 func (e *MountTargetConflict) ErrorCode() string             { return "MountTargetConflict" }
 func (e *MountTargetConflict) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MountTargetConflict) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *MountTargetConflict) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *MountTargetConflict) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MountTargetConflict) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if there is no mount target with the specified ID found in the caller's
 // account.
@@ -555,18 +350,6 @@ func (e *MountTargetNotFound) ErrorMessage() string {
 }
 func (e *MountTargetNotFound) ErrorCode() string             { return "MountTargetNotFound" }
 func (e *MountTargetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MountTargetNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MountTargetNotFound) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *MountTargetNotFound) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *MountTargetNotFound) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // The calling account has reached the limit for elastic network interfaces for the
 // specific AWS Region. The client should try to delete some elastic network
@@ -592,18 +375,6 @@ func (e *NetworkInterfaceLimitExceeded) ErrorMessage() string {
 }
 func (e *NetworkInterfaceLimitExceeded) ErrorCode() string             { return "NetworkInterfaceLimitExceeded" }
 func (e *NetworkInterfaceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NetworkInterfaceLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NetworkInterfaceLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *NetworkInterfaceLimitExceeded) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *NetworkInterfaceLimitExceeded) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if IpAddress was not specified in the request and there are no free IP
 // addresses in the subnet.
@@ -624,18 +395,6 @@ func (e *NoFreeAddressesInSubnet) ErrorMessage() string {
 }
 func (e *NoFreeAddressesInSubnet) ErrorCode() string             { return "NoFreeAddressesInSubnet" }
 func (e *NoFreeAddressesInSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoFreeAddressesInSubnet) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *NoFreeAddressesInSubnet) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *NoFreeAddressesInSubnet) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoFreeAddressesInSubnet) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the default file system policy is in effect for the EFS file system
 // specified.
@@ -656,18 +415,6 @@ func (e *PolicyNotFound) ErrorMessage() string {
 }
 func (e *PolicyNotFound) ErrorCode() string             { return "PolicyNotFound" }
 func (e *PolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyNotFound) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *PolicyNotFound) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *PolicyNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if the size of SecurityGroups specified in the request is greater than
 // five.
@@ -688,18 +435,6 @@ func (e *SecurityGroupLimitExceeded) ErrorMessage() string {
 }
 func (e *SecurityGroupLimitExceeded) ErrorCode() string             { return "SecurityGroupLimitExceeded" }
 func (e *SecurityGroupLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SecurityGroupLimitExceeded) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *SecurityGroupLimitExceeded) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *SecurityGroupLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SecurityGroupLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returned if one of the specified security groups doesn't exist in the subnet's
 // VPC.
@@ -720,18 +455,6 @@ func (e *SecurityGroupNotFound) ErrorMessage() string {
 }
 func (e *SecurityGroupNotFound) ErrorCode() string             { return "SecurityGroupNotFound" }
 func (e *SecurityGroupNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SecurityGroupNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SecurityGroupNotFound) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *SecurityGroupNotFound) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *SecurityGroupNotFound) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if there is no subnet with ID SubnetId provided in the request.
 type SubnetNotFound struct {
@@ -751,18 +474,6 @@ func (e *SubnetNotFound) ErrorMessage() string {
 }
 func (e *SubnetNotFound) ErrorCode() string             { return "SubnetNotFound" }
 func (e *SubnetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetNotFound) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *SubnetNotFound) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *SubnetNotFound) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the throughput mode or amount of provisioned throughput can't be
 // changed because the throughput limit of 1024 MiB/s has been reached.
@@ -783,18 +494,6 @@ func (e *ThroughputLimitExceeded) ErrorMessage() string {
 }
 func (e *ThroughputLimitExceeded) ErrorCode() string             { return "ThroughputLimitExceeded" }
 func (e *ThroughputLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThroughputLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThroughputLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ThroughputLimitExceeded) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *ThroughputLimitExceeded) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if you don’t wait at least 24 hours before changing the throughput
 // mode, or decreasing the Provisioned Throughput value.
@@ -815,18 +514,6 @@ func (e *TooManyRequests) ErrorMessage() string {
 }
 func (e *TooManyRequests) ErrorCode() string             { return "TooManyRequests" }
 func (e *TooManyRequests) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequests) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *TooManyRequests) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *TooManyRequests) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequests) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type UnsupportedAvailabilityZone struct {
@@ -846,18 +533,6 @@ func (e *UnsupportedAvailabilityZone) ErrorMessage() string {
 }
 func (e *UnsupportedAvailabilityZone) ErrorCode() string             { return "UnsupportedAvailabilityZone" }
 func (e *UnsupportedAvailabilityZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedAvailabilityZone) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedAvailabilityZone) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnsupportedAvailabilityZone) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *UnsupportedAvailabilityZone) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // Returned if the AWS Backup service is not available in the region that the
 // request was made.
@@ -878,15 +553,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *ValidationException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

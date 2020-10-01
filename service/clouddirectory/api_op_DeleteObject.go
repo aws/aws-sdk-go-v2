@@ -60,10 +60,16 @@ func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, op
 }
 
 type DeleteObjectInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// the object resides. For more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// A reference that identifies the object.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
 }
 

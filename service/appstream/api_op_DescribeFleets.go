@@ -56,16 +56,20 @@ func (c *Client) DescribeFleets(ctx context.Context, params *DescribeFleetsInput
 }
 
 type DescribeFleetsInput struct {
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
 	// The names of the fleets to describe.
 	Names []*string
 }
 
 type DescribeFleetsOutput struct {
+
 	// Information about the fleets.
 	Fleets []*types.Fleet
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

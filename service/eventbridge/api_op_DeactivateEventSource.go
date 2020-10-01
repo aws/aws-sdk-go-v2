@@ -59,7 +59,10 @@ func (c *Client) DeactivateEventSource(ctx context.Context, params *DeactivateEv
 }
 
 type DeactivateEventSourceInput struct {
+
 	// The name of the partner event source to deactivate.
+	//
+	// This member is required.
 	Name *string
 }
 

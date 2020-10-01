@@ -55,19 +55,23 @@ func (c *Client) ListEnabledProductsForImport(ctx context.Context, params *ListE
 }
 
 type ListEnabledProductsForImportInput struct {
+
 	// The token that is required for pagination. On your first call to the
 	// ListEnabledProductsForImport operation, set the value of this parameter to NULL.
 	// For subsequent calls to the operation, to continue listing data, set the value
 	// of this parameter to the value returned from the previous response.
 	NextToken *string
+
 	// The maximum number of items to return in the response.
 	MaxResults *int32
 }
 
 type ListEnabledProductsForImportOutput struct {
+
 	// The list of ARNs for the resources that represent your subscriptions to
 	// products.
 	ProductSubscriptions []*string
+
 	// The pagination token to use to request the next page of results.
 	NextToken *string
 

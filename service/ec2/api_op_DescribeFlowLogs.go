@@ -57,18 +57,23 @@ func (c *Client) DescribeFlowLogs(ctx context.Context, params *DescribeFlowLogsI
 }
 
 type DescribeFlowLogsInput struct {
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
 	FlowLogIds []*string
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * deliver-log-status - The status of the logs delivery
@@ -102,8 +107,10 @@ type DescribeFlowLogsInput struct {
 }
 
 type DescribeFlowLogsOutput struct {
+
 	// Information about the flow logs.
 	FlowLogs []*types.FlowLog
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

@@ -73,13 +73,21 @@ func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInp
 }
 
 type PutBucketPolicyInput struct {
+
 	// The name of the bucket.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The bucket policy as a JSON document.
+	//
+	// This member is required.
 	Policy *string
+
 	// Set this parameter to true to confirm that you want to remove your permissions
 	// to change this bucket policy in the future.
 	ConfirmRemoveSelfBucketAccess *bool
+
 	// The MD5 hash of the request body.
 	ContentMD5 *string
 }

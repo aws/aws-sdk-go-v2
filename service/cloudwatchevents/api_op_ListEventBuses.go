@@ -56,11 +56,14 @@ func (c *Client) ListEventBuses(ctx context.Context, params *ListEventBusesInput
 }
 
 type ListEventBusesInput struct {
+
 	// Specifying this limits the results to only those event buses with names that
 	// start with the specified prefix.
 	NamePrefix *string
+
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
+
 	// Specifying this limits the number of results returned by this operation. The
 	// operation also returns a NextToken which you can use in a subsequent operation
 	// to retrieve the next set of results.
@@ -68,8 +71,10 @@ type ListEventBusesInput struct {
 }
 
 type ListEventBusesOutput struct {
+
 	// This list of event buses.
 	EventBuses []*types.EventBus
+
 	// A token you can use in a subsequent operation to retrieve the next set of
 	// results.
 	NextToken *string

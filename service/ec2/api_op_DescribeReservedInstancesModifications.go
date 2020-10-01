@@ -62,6 +62,7 @@ func (c *Client) DescribeReservedInstancesModifications(ctx context.Context, par
 
 // Contains the parameters for DescribeReservedInstancesModifications.
 type DescribeReservedInstancesModificationsInput struct {
+
 	// One or more filters.
 	//
 	//     * client-token - The idempotency token for the
@@ -108,16 +109,20 @@ type DescribeReservedInstancesModificationsInput struct {
 	//     *
 	// update-date - The time when the modification request was last updated.
 	Filters []*types.Filter
+
 	// IDs for the submitted modification request.
 	ReservedInstancesModificationIds []*string
+
 	// The token to retrieve the next page of results.
 	NextToken *string
 }
 
 // Contains the output of DescribeReservedInstancesModifications.
 type DescribeReservedInstancesModificationsOutput struct {
+
 	// The Reserved Instance modification information.
 	ReservedInstancesModifications []*types.ReservedInstancesModification
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

@@ -9,9 +9,11 @@ import (
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectDominantLanguageItemResult struct {
+
 	// One or more DominantLanguage () objects describing the dominant languages in the
 	// document.
 	Languages []*DominantLanguage
+
 	// The zero-based index of the document in the input list.
 	Index *int32
 }
@@ -19,8 +21,10 @@ type BatchDetectDominantLanguageItemResult struct {
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectEntitiesItemResult struct {
+
 	// One or more Entity () objects, one for each entity detected in the document.
 	Entities []*Entity
+
 	// The zero-based index of the document in the input list.
 	Index *int32
 }
@@ -28,9 +32,11 @@ type BatchDetectEntitiesItemResult struct {
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectKeyPhrasesItemResult struct {
+
 	// One or more KeyPhrase () objects, one for each key phrase detected in the
 	// document.
 	KeyPhrases []*KeyPhrase
+
 	// The zero-based index of the document in the input list.
 	Index *int32
 }
@@ -38,10 +44,13 @@ type BatchDetectKeyPhrasesItemResult struct {
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectSentimentItemResult struct {
+
 	// The sentiment detected in the document.
 	Sentiment SentimentType
+
 	// The zero-based index of the document in the input list.
 	Index *int32
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// sentiment detection.
 	SentimentScore *SentimentScore
@@ -50,8 +59,10 @@ type BatchDetectSentimentItemResult struct {
 // The result of calling the operation. The operation returns one object that is
 // successfully processed by the operation.
 type BatchDetectSyntaxItemResult struct {
+
 	// The zero-based index of the document in the input list.
 	Index *int32
+
 	// The syntax tokens for the words in the document, one token for each word.
 	SyntaxTokens []*SyntaxToken
 }
@@ -60,10 +71,13 @@ type BatchDetectSyntaxItemResult struct {
 // operation returns on BatchItemError object for each document that contained an
 // error.
 type BatchItemError struct {
+
 	// The zero-based index of the document in the input list.
 	Index *int32
+
 	// A text description of the error.
 	ErrorMessage *string
+
 	// The numeric error code of the error.
 	ErrorCode *string
 }
@@ -71,14 +85,17 @@ type BatchItemError struct {
 // Describes the result metrics for the test data associated with an documentation
 // classifier.
 type ClassifierEvaluationMetrics struct {
+
 	// The fraction of the labels that were correct recognized. It is computed by
 	// dividing the number of labels in the test documents that were correctly
 	// recognized by the total number of labels in the test documents.
 	Accuracy *float64
+
 	// Indicates the fraction of labels that are incorrectly predicted. Also seen as
 	// the fraction of wrong labels compared to the total number of labels. Scores
 	// closer to zero are better.
 	HammingLoss *float64
+
 	// A measure of how complete the classifier results are for the test data. High
 	// recall means that the classifier returned most of the relevant results.
 	// Specifically, this indicates how many of the correct categories in the text that
@@ -87,22 +104,27 @@ type ClassifierEvaluationMetrics struct {
 	// Recall), micro Recall is based on the overall score of all recall scores added
 	// together.
 	MicroRecall *float64
+
 	// A measure of how accurate the classifier results are for the test data. It is a
 	// combination of the Micro Precision and Micro Recall values. The Micro F1Score is
 	// the harmonic mean of the two scores. The highest score is 1, and the worst score
 	// is 0.
 	MicroF1Score *float64
+
 	// A measure of how accurate the classifier results are for the test data. It is
 	// derived from the Precision and Recall values. The F1Score is the harmonic
 	// average of the two scores. The highest score is 1, and the worst score is 0.
 	F1Score *float64
+
 	// A measure of how complete the classifier results are for the test data. High
 	// recall means that the classifier returned most of the relevant results.
 	Recall *float64
+
 	// A measure of the usefulness of the classifier results in the test data. High
 	// precision means that the classifier returned substantially more relevant results
 	// than irrelevant ones.
 	Precision *float64
+
 	// A measure of the usefulness of the recognizer results in the test data. High
 	// precision means that the recognizer returned substantially more relevant results
 	// than irrelevant ones. Unlike the Precision metric which comes from averaging the
@@ -113,15 +135,19 @@ type ClassifierEvaluationMetrics struct {
 
 // Provides information about a document classifier.
 type ClassifierMetadata struct {
+
 	// The number of labels in the input data.
 	NumberOfLabels *int32
+
 	// The number of documents in the input data that were used to train the
 	// classifier. Typically this is 80 to 90 percent of the input documents.
 	NumberOfTrainedDocuments *int32
+
 	// The number of documents in the input data that were used to test the classifier.
 	// Typically this is 10 to 20 percent of the input documents, up to 10,000
 	// documents.
 	NumberOfTestDocuments *int32
+
 	// Describes the result metrics for the test data associated with an documentation
 	// classifier.
 	EvaluationMetrics *ClassifierEvaluationMetrics
@@ -129,8 +155,10 @@ type ClassifierMetadata struct {
 
 // Specifies the class that categorizes the document being analyzed
 type DocumentClass struct {
+
 	// The name of the class.
 	Name *string
+
 	// The confidence score that Amazon Comprehend has this class correctly attributed.
 	Score *float32
 }
@@ -139,15 +167,19 @@ type DocumentClass struct {
 // more information, see the operation. You can provide only one filter parameter
 // in each request.
 type DocumentClassificationJobFilter struct {
+
 	// Filters on the name of the job.
 	JobName *string
+
 	// Filters the list based on job status. Returns only jobs with the specified
 	// status.
 	JobStatus JobStatus
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
@@ -156,12 +188,16 @@ type DocumentClassificationJobFilter struct {
 
 // Provides information about a document classification job.
 type DocumentClassificationJobProperties struct {
+
 	// A description of the status of the job.
 	Message *string
+
 	// The time that the document classification job was submitted for processing.
 	SubmitTime *time.Time
+
 	// The Amazon Resource Name (ARN) that identifies the document classifier.
 	DocumentClassifierArn *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -173,27 +209,35 @@ type DocumentClassificationJobProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The identifier assigned to the document classification job.
 	JobId *string
+
 	// The current status of the document classification job. If the status is FAILED,
 	// the Message field shows the reason for the failure.
 	JobStatus JobStatus
+
 	// The input data configuration that you supplied when you created the document
 	// classification job.
 	InputDataConfig *InputDataConfig
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your document classification job. For more
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
 	// The time that the document classification job completed.
 	EndTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM)
 	// role that grants Amazon Comprehend read access to your input data.
 	DataAccessRoleArn *string
+
 	// The output data configuration that you supplied when you created the document
 	// classification job.
 	OutputDataConfig *OutputDataConfig
+
 	// The name that you assigned to the document classification job.
 	JobName *string
 }
@@ -202,12 +246,15 @@ type DocumentClassificationJobProperties struct {
 // specify one filtering parameter in a request. For more information, see the
 // operation.
 type DocumentClassifierFilter struct {
+
 	// Filters the list of classifiers based on the time that the classifier was
 	// submitted for processing. Returns only classifiers submitted after the specified
 	// time. Classifiers are returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of classifiers based on status.
 	Status ModelStatus
+
 	// Filters the list of classifiers based on the time that the classifier was
 	// submitted for processing. Returns only classifiers submitted before the
 	// specified time. Classifiers are returned in ascending order, oldest to newest.
@@ -218,13 +265,17 @@ type DocumentClassifierFilter struct {
 // how the input file is formatted, see how-document-classification-training-data
 // ().
 type DocumentClassifierInputDataConfig struct {
+
 	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
 	// as the API endpoint that you are calling. The URI can point to a single input
 	// file or it can provide the prefix for a collection of input files. For example,
 	// if you use the URI S3://bucketName/prefix, if the prefix is a single file,
 	// Amazon Comprehend uses that file as input. If more than one file begins with the
 	// prefix, Amazon Comprehend uses all of them as input.
+	//
+	// This member is required.
 	S3Uri *string
+
 	// Indicates the delimiter used to separate each label for training a multi-label
 	// classifier. The default delimiter between labels is a pipe (|). You can use a
 	// different character as a delimiter (if it's an allowed character) by specifying
@@ -236,6 +287,7 @@ type DocumentClassifierInputDataConfig struct {
 
 // Provides output results configuration parameters for custom classifier jobs.
 type DocumentClassifierOutputDataConfig struct {
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
 	// following formats:
@@ -252,6 +304,7 @@ type DocumentClassifierOutputDataConfig struct {
 	//     * ARN of a KMS Key Alias:
 	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	KmsKeyId *string
+
 	// When you use the OutputDataConfig object while creating a custom classifier, you
 	// specify the Amazon S3 location where you want to write the confusion matrix. The
 	// URI must be in the same region as the API endpoint that you are calling. The
@@ -265,33 +318,42 @@ type DocumentClassifierOutputDataConfig struct {
 
 // Provides information about a document classifier.
 type DocumentClassifierProperties struct {
+
 	// The status of the document classifier. If the status is TRAINED the classifier
 	// is ready to use. If the status is FAILED you can see additional information
 	// about why the classifier wasn't trained in the Message field.
 	Status ModelStatus
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your custom classifier. For more information,
 	// see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
 	// The time that the document classifier was submitted for training.
 	SubmitTime *time.Time
+
 	// Indicates the mode in which the specific classifier was trained. This also
 	// indicates the format of input documents and the format of the confusion matrix.
 	// Each classifier can only be trained in one mode and this cannot be changed once
 	// the classifier is trained.
 	Mode DocumentClassifierMode
+
 	// The input data configuration that you supplied when you created the document
 	// classifier for training.
 	InputDataConfig *DocumentClassifierInputDataConfig
+
 	// The time that training the document classifier completed.
 	EndTime *time.Time
+
 	// The time that training of the document classifier was completed. Indicates the
 	// time when the training completes on documentation classifiers. You are billed
 	// for the time interval between this time and the value of TrainingStartTime.
 	TrainingEndTime *time.Time
+
 	// Provides output results configuration parameters for custom classifier jobs.
 	OutputDataConfig *DocumentClassifierOutputDataConfig
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -303,22 +365,28 @@ type DocumentClassifierProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The language code for the language of the documents that the classifier was
 	// trained on.
 	LanguageCode LanguageCode
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
 	// that grants Amazon Comprehend read access to your input data.
 	DataAccessRoleArn *string
+
 	// Indicates the time when the training starts on documentation classifiers. You
 	// are billed for the time interval between this time and the value of
 	// TrainingEndTime.
 	TrainingStartTime *time.Time
+
 	// The Amazon Resource Name (ARN) that identifies the document classifier.
 	DocumentClassifierArn *string
+
 	// Information about the document classifier, including the number of documents
 	// used for training the classifier, the number of documents used for test the
 	// classifier, and an accuracy rating.
 	ClassifierMetadata *ClassifierMetadata
+
 	// Additional information about the status of the classifier.
 	Message *string
 }
@@ -326,8 +394,10 @@ type DocumentClassifierProperties struct {
 // Specifies one of the label or labels that categorize the document being
 // analyzed.
 type DocumentLabel struct {
+
 	// The name of the label.
 	Name *string
+
 	// The confidence score that Amazon Comprehend has this label correctly attributed.
 	Score *float32
 }
@@ -335,9 +405,11 @@ type DocumentLabel struct {
 // Returns the code for the dominant language in the input text and the level of
 // confidence that Amazon Comprehend has in the accuracy of the detection.
 type DominantLanguage struct {
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
 	// detection.
 	Score *float32
+
 	// The RFC 5646 language code for the dominant language. For more information about
 	// RFC 5646, see Tags for Identifying Languages
 	// (https://tools.ietf.org/html/rfc5646) on the IETF Tools web site.
@@ -347,15 +419,19 @@ type DominantLanguage struct {
 // Provides information for filtering a list of dominant language detection jobs.
 // For more information, see the operation.
 type DominantLanguageDetectionJobFilter struct {
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of jobs based on job status. Returns only jobs with the
 	// specified status.
 	JobStatus JobStatus
+
 	// Filters on the name of the job.
 	JobName *string
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
@@ -364,28 +440,37 @@ type DominantLanguageDetectionJobFilter struct {
 
 // Provides information about a dominant language detection job.
 type DominantLanguageDetectionJobProperties struct {
+
 	// The current status of the dominant language detection job. If the status is
 	// FAILED, the Message field shows the reason for the failure.
 	JobStatus JobStatus
+
 	// The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your
 	// input data.
 	DataAccessRoleArn *string
+
 	// The time that the dominant language detection job was submitted for processing.
 	SubmitTime *time.Time
+
 	// The identifier assigned to the dominant language detection job.
 	JobId *string
+
 	// A description for the status of a job.
 	Message *string
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your dominant language detection job. For more
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
 	// The name that you assigned to the dominant language detection job.
 	JobName *string
+
 	// The output data configuration that you supplied when you created the dominant
 	// language detection job.
 	OutputDataConfig *OutputDataConfig
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -397,8 +482,10 @@ type DominantLanguageDetectionJobProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The time that the dominant language detection job completed.
 	EndTime *time.Time
+
 	// The input data configuration that you supplied when you created the dominant
 	// language detection job.
 	InputDataConfig *InputDataConfig
@@ -408,37 +495,49 @@ type DominantLanguageDetectionJobProperties struct {
 // jobs on their name, model, status, or the date and time that they were created.
 // You can only set one filter at a time.
 type EndpointFilter struct {
+
 	// Specifies a date after which the returned endpoint or endpoints were created.
 	CreationTimeAfter *time.Time
+
 	// Specifies a date before which the returned endpoint or endpoints were created.
 	CreationTimeBefore *time.Time
+
 	// Specifies the status of the endpoint being returned. Possible values are:
 	// Creating, Ready, Updating, Deleting, Failed.
 	Status EndpointStatus
+
 	// The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
 	ModelArn *string
 }
 
 // Specifies information about the specified endpoint.
 type EndpointProperties struct {
+
 	// The desired number of inference units to be used by the model using this
 	// endpoint. Each inference unit represents of a throughput of 100 characters per
 	// second.
 	DesiredInferenceUnits *int32
+
 	// The date and time that the endpoint was last modified.
 	LastModifiedTime *time.Time
+
 	// Specifies a reason for failure in cases of Failed status.
 	Message *string
+
 	// The number of inference units currently used by the model using this endpoint.
 	CurrentInferenceUnits *int32
+
 	// The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
 	ModelArn *string
+
 	// Specifies the status of the endpoint. Because the endpoint updates and creation
 	// are asynchronous, so customers will need to wait for the endpoint to be Ready
 	// status before making inference requests.
 	Status EndpointStatus
+
 	// The Amazon Resource Number (ARN) of the endpoint.
 	EndpointArn *string
+
 	// The creation date and time of the endpoint.
 	CreationTime *time.Time
 }
@@ -446,15 +545,19 @@ type EndpointProperties struct {
 // Provides information for filtering a list of dominant language detection jobs.
 // For more information, see the operation.
 type EntitiesDetectionJobFilter struct {
+
 	// Filters the list of jobs based on job status. Returns only jobs with the
 	// specified status.
 	JobStatus JobStatus
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time
+
 	// Filters on the name of the job.
 	JobName *string
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
@@ -463,32 +566,43 @@ type EntitiesDetectionJobFilter struct {
 
 // Provides information about an entities detection job.
 type EntitiesDetectionJobProperties struct {
+
 	// The current status of the entities detection job. If the status is FAILED, the
 	// Message field shows the reason for the failure.
 	JobStatus JobStatus
+
 	// The language code of the input documents.
 	LanguageCode LanguageCode
+
 	// The name that you assigned the entities detection job.
 	JobName *string
+
 	// The output data configuration that you supplied when you created the entities
 	// detection job.
 	OutputDataConfig *OutputDataConfig
+
 	// The input data configuration that you supplied when you created the entities
 	// detection job.
 	InputDataConfig *InputDataConfig
+
 	// The time that the entities detection job was submitted for processing.
 	SubmitTime *time.Time
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your entity detection job. For more information,
 	// see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
 	// The time that the entities detection job completed
 	EndTime *time.Time
+
 	// A description of the status of a job.
 	Message *string
+
 	// The identifier assigned to the entities detection job.
 	JobId *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -500,28 +614,35 @@ type EntitiesDetectionJobProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your
 	// input data.
 	DataAccessRoleArn *string
+
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
 	EntityRecognizerArn *string
 }
 
 // Provides information about an entity.
 type Entity struct {
+
 	// The text of the entity.
 	Text *string
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
 	// detection.
 	Score *float32
+
 	// The entity's type.
 	Type EntityType
+
 	// A character offset in the input text that shows where the entity begins (the
 	// first character is at position 0). The offset returns the position of each UTF-8
 	// code point in the string. A code point is the abstract character from a
 	// particular graphical representation. For example, a multi-byte UTF-8 character
 	// maps to a single code point.
 	BeginOffset *int32
+
 	// A character offset in the input text that shows where the entity ends. The
 	// offset returns the position of each UTF-8 code point in the string. A code point
 	// is the abstract character from a particular graphical representation. For
@@ -531,36 +652,48 @@ type Entity struct {
 
 // Describes the annotations associated with a entity recognizer.
 type EntityRecognizerAnnotations struct {
+
 	// Specifies the Amazon S3 location where the annotations for an entity recognizer
 	// are located. The URI must be in the same region as the API endpoint that you are
 	// calling.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Describes the training documents submitted with an entity recognizer.
 type EntityRecognizerDocuments struct {
+
 	// Specifies the Amazon S3 location where the training documents for an entity
 	// recognizer are located. The URI must be in the same region as the API endpoint
 	// that you are calling.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Describes the entity recognizer submitted with an entity recognizer.
 type EntityRecognizerEntityList struct {
+
 	// Specifies the Amazon S3 location where the entity list is located. The URI must
 	// be in the same region as the API endpoint that you are calling.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Detailed information about the accuracy of an entity recognizer.
 type EntityRecognizerEvaluationMetrics struct {
+
 	// A measure of how accurate the recognizer results are for the test data. It is
 	// derived from the Precision and Recall values. The F1Score is the harmonic
 	// average of the two scores. The highest score is 1, and the worst score is 0.
 	F1Score *float64
+
 	// A measure of how complete the recognizer results are for the test data. High
 	// recall means that the recognizer returned most of the relevant results.
 	Recall *float64
+
 	// A measure of the usefulness of the recognizer results in the test data. High
 	// precision means that the recognizer returned substantially more relevant results
 	// than irrelevant ones.
@@ -571,12 +704,15 @@ type EntityRecognizerEvaluationMetrics struct {
 // specify one filtering parameter in a request. For more information, see the
 // operation./>
 type EntityRecognizerFilter struct {
+
 	// The status of an entity recognizer.
 	Status ModelStatus
+
 	// Filters the list of entities based on the time that the list was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of entities based on the time that the list was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in descending order, newest to oldest.
@@ -585,26 +721,38 @@ type EntityRecognizerFilter struct {
 
 // Specifies the format and location of the input data.
 type EntityRecognizerInputDataConfig struct {
+
 	// The entity types in the input data for an entity recognizer. A maximum of 12
 	// entity types can be used at one time to train an entity recognizer.
+	//
+	// This member is required.
 	EntityTypes []*EntityTypesListItem
+
 	// S3 location of the entity list for an entity recognizer.
 	EntityList *EntityRecognizerEntityList
+
 	// S3 location of the annotations file for an entity recognizer.
 	Annotations *EntityRecognizerAnnotations
+
 	// S3 location of the documents folder for an entity recognizer
+	//
+	// This member is required.
 	Documents *EntityRecognizerDocuments
 }
 
 // Detailed information about an entity recognizer.
 type EntityRecognizerMetadata struct {
+
 	// Entity types from the metadata of an entity recognizer.
 	EntityTypes []*EntityRecognizerMetadataEntityTypesListItem
+
 	// Detailed information about the accuracy of an entity recognizer.
 	EvaluationMetrics *EntityRecognizerEvaluationMetrics
+
 	// The number of documents in the input data that were used to test the entity
 	// recognizer. Typically this is 10 to 20 percent of the input documents.
 	NumberOfTestDocuments *int32
+
 	// The number of documents in the input data that were used to train the entity
 	// recognizer. Typically this is 80 to 90 percent of the input documents.
 	NumberOfTrainedDocuments *int32
@@ -613,12 +761,15 @@ type EntityRecognizerMetadata struct {
 // Individual item from the list of entity types in the metadata of an entity
 // recognizer.
 type EntityRecognizerMetadataEntityTypesListItem struct {
+
 	// Detailed information about the accuracy of the entity recognizer for a specific
 	// item on the list of entity types.
 	EvaluationMetrics *EntityTypesEvaluationMetrics
+
 	// Type of entity from the list of entity types in the metadata of an entity
 	// recognizer.
 	Type *string
+
 	// Indicates the number of times the given entity type was seen in the training
 	// data.
 	NumberOfTrainMentions *int32
@@ -626,32 +777,44 @@ type EntityRecognizerMetadataEntityTypesListItem struct {
 
 // Describes information about an entity recognizer.
 type EntityRecognizerProperties struct {
+
 	// The time that the recognizer was submitted for processing.
 	SubmitTime *time.Time
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your custom entity recognizer. For more
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
 	// The time that the recognizer creation completed.
 	EndTime *time.Time
+
 	// The input data properties of an entity recognizer.
 	InputDataConfig *EntityRecognizerInputDataConfig
+
 	// The time that training of the entity recognizer started.
 	TrainingStartTime *time.Time
+
 	// A description of the status of the recognizer.
 	Message *string
+
 	// The time that training of the entity recognizer was completed.
 	TrainingEndTime *time.Time
+
 	// Provides the status of the entity recognizer.
 	Status ModelStatus
+
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
 	EntityRecognizerArn *string
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
 	// that grants Amazon Comprehend read access to your input data.
 	DataAccessRoleArn *string
+
 	// Provides information about an entity recognizer.
 	RecognizerMetadata *EntityRecognizerMetadata
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -663,6 +826,7 @@ type EntityRecognizerProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The language of the input documents. All documents must be in the same language.
 	// Only English ("en") is currently supported.
 	LanguageCode LanguageCode
@@ -671,14 +835,17 @@ type EntityRecognizerProperties struct {
 // Detailed information about the accuracy of an entity recognizer for a specific
 // entity type.
 type EntityTypesEvaluationMetrics struct {
+
 	// A measure of the usefulness of the recognizer results for a specific entity type
 	// in the test data. High precision means that the recognizer returned
 	// substantially more relevant results than irrelevant ones.
 	Precision *float64
+
 	// A measure of how complete the recognizer results are for a specific entity type
 	// in the test data. High recall means that the recognizer returned most of the
 	// relevant results.
 	Recall *float64
+
 	// A measure of how accurate the recognizer results are for for a specific entity
 	// type in the test data. It is derived from the Precision and Recall values. The
 	// F1Score is the harmonic average of the two scores. The highest score is 1, and
@@ -688,12 +855,16 @@ type EntityTypesEvaluationMetrics struct {
 
 // Information about an individual item on a list of entity types.
 type EntityTypesListItem struct {
+
 	// Entity type of an item on an entity type list.
+	//
+	// This member is required.
 	Type *string
 }
 
 // The input properties for a topic detection job.
 type InputDataConfig struct {
+
 	// Specifies how the text in an input file should be processed:
 	//
 	//     *
@@ -705,30 +876,37 @@ type InputDataConfig struct {
 	// separate document. Use this option when you are processing many short documents,
 	// such as text messages.
 	InputFormat InputFormat
+
 	// The Amazon S3 URI for the input data. The URI must be in same region as the API
 	// endpoint that you are calling. The URI can point to a single input file or it
 	// can provide the prefix for a collection of data files. For example, if you use
 	// the URI S3://bucketName/prefix, if the prefix is a single file, Amazon
 	// Comprehend uses that file as input. If more than one file begins with the
 	// prefix, Amazon Comprehend uses all of them as input.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Describes a key noun phrase.
 type KeyPhrase struct {
+
 	// The text of a key noun phrase.
 	Text *string
+
 	// A character offset in the input text where the key phrase ends. The offset
 	// returns the position of each UTF-8 code point in the string. A code point is the
 	// abstract character from a particular graphical representation. For example, a
 	// multi-byte UTF-8 character maps to a single code point.
 	EndOffset *int32
+
 	// A character offset in the input text that shows where the key phrase begins (the
 	// first character is at position 0). The offset returns the position of each UTF-8
 	// code point in the string. A code point is the abstract character from a
 	// particular graphical representation. For example, a multi-byte UTF-8 character
 	// maps to a single code point.
 	BeginOffset *int32
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
 	// detection.
 	Score *float32
@@ -737,15 +915,19 @@ type KeyPhrase struct {
 // Provides information for filtering a list of dominant language detection jobs.
 // For more information, see the operation.
 type KeyPhrasesDetectionJobFilter struct {
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
 	// Filters on the name of the job.
 	JobName *string
+
 	// Filters the list of jobs based on job status. Returns only jobs with the
 	// specified status.
 	JobStatus JobStatus
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
@@ -754,24 +936,32 @@ type KeyPhrasesDetectionJobFilter struct {
 
 // Provides information about a key phrases detection job.
 type KeyPhrasesDetectionJobProperties struct {
+
 	// The language code of the input documents.
 	LanguageCode LanguageCode
+
 	// The identifier assigned to the key phrases detection job.
 	JobId *string
+
 	// The current status of the key phrases detection job. If the status is FAILED,
 	// the Message field shows the reason for the failure.
 	JobStatus JobStatus
+
 	// The time that the key phrases detection job completed.
 	EndTime *time.Time
+
 	// The input data configuration that you supplied when you created the key phrases
 	// detection job.
 	InputDataConfig *InputDataConfig
+
 	// The output data configuration that you supplied when you created the key phrases
 	// detection job.
 	OutputDataConfig *OutputDataConfig
+
 	// The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your
 	// input data.
 	DataAccessRoleArn *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -783,12 +973,16 @@ type KeyPhrasesDetectionJobProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The name that you assigned the key phrases detection job.
 	JobName *string
+
 	// A description of the status of a job.
 	Message *string
+
 	// The time that the key phrases detection job was submitted for processing.
 	SubmitTime *time.Time
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your key phrases detection job. For more
 	// information, see Amazon VPC
@@ -798,6 +992,7 @@ type KeyPhrasesDetectionJobProperties struct {
 
 // Provides configuration parameters for the output of topic detection jobs.
 type OutputDataConfig struct {
+
 	// When you use the OutputDataConfig object with asynchronous operations, you
 	// specify the Amazon S3 location where you want to write the output data. The URI
 	// must be in the same region as the API endpoint that you are calling. The
@@ -806,7 +1001,10 @@ type OutputDataConfig struct {
 	// directory specific to the job. The S3Uri field contains the location of the
 	// output file, called output.tar.gz. It is a compressed archive that contains the
 	// ouput of the operation.
+	//
+	// This member is required.
 	S3Uri *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
 	// following formats:
@@ -830,8 +1028,10 @@ type OutputDataConfig struct {
 // more information about the parts of speech that Amazon Comprehend can identify,
 // see how-syntax ().
 type PartOfSpeechTag struct {
+
 	// Identifies the part of speech that the token represents.
 	Tag PartOfSpeechTagType
+
 	// The confidence that Amazon Comprehend has that the part of speech was correctly
 	// identified.
 	Score *float32
@@ -840,52 +1040,68 @@ type PartOfSpeechTag struct {
 // Provides information for filtering a list of dominant language detection jobs.
 // For more information, see the operation.
 type SentimentDetectionJobFilter struct {
+
 	// Filters the list of jobs based on job status. Returns only jobs with the
 	// specified status.
 	JobStatus JobStatus
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
 	// Filters on the name of the job.
 	JobName *string
 }
 
 // Provides information about a sentiment detection job.
 type SentimentDetectionJobProperties struct {
+
 	// The identifier assigned to the sentiment detection job.
 	JobId *string
+
 	// A description of the status of a job.
 	Message *string
+
 	// The output data configuration that you supplied when you created the sentiment
 	// detection job.
 	OutputDataConfig *OutputDataConfig
+
 	// The name that you assigned to the sentiment detection job
 	JobName *string
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your sentiment detection job. For more
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
 	// The language code of the input documents.
 	LanguageCode LanguageCode
+
 	// The input data configuration that you supplied when you created the sentiment
 	// detection job.
 	InputDataConfig *InputDataConfig
+
 	// The time that the sentiment detection job was submitted for processing.
 	SubmitTime *time.Time
+
 	// The time that the sentiment detection job ended.
 	EndTime *time.Time
+
 	// The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your
 	// input data.
 	DataAccessRoleArn *string
+
 	// The current status of the sentiment detection job. If the status is FAILED, the
 	// Messages field shows the reason for the failure.
 	JobStatus JobStatus
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -902,15 +1118,19 @@ type SentimentDetectionJobProperties struct {
 // Describes the level of confidence that Amazon Comprehend has in the accuracy of
 // its detection of sentiments.
 type SentimentScore struct {
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// detection of the NEGATIVE sentiment.
 	Negative *float32
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// detection of the POSITIVE sentiment.
 	Positive *float32
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// detection of the MIXED sentiment.
 	Mixed *float32
+
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// detection of the NEUTRAL sentiment.
 	Neutral *float32
@@ -919,16 +1139,21 @@ type SentimentScore struct {
 // Represents a work in the input text that was recognized and assigned a part of
 // speech. There is one syntax token record for each word in the source text.
 type SyntaxToken struct {
+
 	// A unique identifier for a token.
 	TokenId *int32
+
 	// The zero-based offset from the beginning of the source text to the first
 	// character in the word.
 	BeginOffset *int32
+
 	// The zero-based offset from the beginning of the source text to the last
 	// character in the word.
 	EndOffset *int32
+
 	// The word that was recognized in the source text.
 	Text *string
+
 	// Provides the part of speech label and the confidence level that Amazon
 	// Comprehend has that the part of speech was correctly identified. For more
 	// information, see how-syntax ().
@@ -939,42 +1164,53 @@ type SyntaxToken struct {
 // Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’
 // might be added to a resource to indicate its use by a particular department.
 type Tag struct {
+
 	// The second part of a key-value pair that forms a tag associated with a given
 	// resource. For instance, if you want to show which resources are used by which
 	// departments, you might use “Department” as the initial (key) portion of the
 	// pair, with a value of “sales” to indicate the sales department.
 	Value *string
+
 	// The initial part of a key-value pair that forms a tag associated with a given
 	// resource. For instance, if you want to show which resources are used by which
 	// departments, you might use “Department” as the key portion of the pair, with
 	// multiple possible values such as “sales,” “legal,” and “administration.”
+	//
+	// This member is required.
 	Key *string
 }
 
 // Provides information for filtering topic detection jobs. For more information,
 // see .
 type TopicsDetectionJobFilter struct {
+
 	// Filters the list of topic detection jobs based on job status. Returns only jobs
 	// with the specified status.
 	JobStatus JobStatus
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Only returns jobs submitted after the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Only returns jobs submitted before the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeBefore *time.Time
+
 	//
 	JobName *string
 }
 
 // Provides information about a topic detection job.
 type TopicsDetectionJobProperties struct {
+
 	// A description for the status of a job.
 	Message *string
+
 	// The time that the topic detection job was submitted for processing.
 	SubmitTime *time.Time
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -986,25 +1222,34 @@ type TopicsDetectionJobProperties struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The current status of the topic detection job. If the status is Failed, the
 	// reason for the failure is shown in the Message field.
 	JobStatus JobStatus
+
 	// The identifier assigned to the topic detection job.
 	JobId *string
+
 	// The input data configuration supplied when you created the topic detection job.
 	InputDataConfig *InputDataConfig
+
 	// The number of topics to detect supplied when you created the topic detection
 	// job. The default is 10.
 	NumberOfTopics *int32
+
 	// The time that the topic detection job was completed.
 	EndTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
 	// that grants Amazon Comprehend read access to your job data.
 	DataAccessRoleArn *string
+
 	// The output data configuration supplied when you created the topic detection job.
 	OutputDataConfig *OutputDataConfig
+
 	// The name of the topic detection job.
 	JobName *string
+
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your topic detection job. For more information,
 	// see Amazon VPC
@@ -1017,17 +1262,23 @@ type TopicsDetectionJobProperties struct {
 // see Amazon VPC
 // (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 type VpcConfig struct {
+
 	// The ID for each subnet being used in your private VPC. This subnet is a subset
 	// of the a range of IPv4 addresses used by the VPC and is specific to a given
 	// availability zone in the VPC’s region. This ID number is preceded by "subnet-",
 	// for instance: "subnet-04ccf456919e69055". For more information, see VPCs and
 	// Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html).
+	//
+	// This member is required.
 	Subnets []*string
+
 	// The ID number for a security group on an instance of your private VPC. Security
 	// groups on your VPC function serve as a virtual firewall to control inbound and
 	// outbound traffic and provides security for the resources that you’ll be
 	// accessing on the VPC. This ID number is preceded by "sg-", for instance:
 	// "sg-03b388029b0a285ea". For more information, see Security Groups for your VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html).
+	//
+	// This member is required.
 	SecurityGroupIds []*string
 }

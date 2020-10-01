@@ -60,11 +60,15 @@ func (c *Client) DeleteSnapshot(ctx context.Context, params *DeleteSnapshotInput
 
 // Represents the input of a DeleteSnapshot operation.
 type DeleteSnapshotInput struct {
+
 	// The name of the snapshot to be deleted.
+	//
+	// This member is required.
 	SnapshotName *string
 }
 
 type DeleteSnapshotOutput struct {
+
 	// Represents a copy of an entire Redis cluster as of the time when the snapshot
 	// was taken.
 	Snapshot *types.Snapshot

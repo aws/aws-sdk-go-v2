@@ -64,6 +64,7 @@ func (c *Client) ResolveCase(ctx context.Context, params *ResolveCaseInput, optF
 }
 
 type ResolveCaseInput struct {
+
 	// The AWS Support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
 	// case-12345678910-2013-c4c1d2bf33c5cf47
@@ -72,8 +73,10 @@ type ResolveCaseInput struct {
 
 // The status of the case returned by the ResolveCase () operation.
 type ResolveCaseOutput struct {
+
 	// The status of the case when the ResolveCase () request was sent.
 	InitialCaseStatus *string
+
 	// The status of the case after the ResolveCase () request was processed.
 	FinalCaseStatus *string
 

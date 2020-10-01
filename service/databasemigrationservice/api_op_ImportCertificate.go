@@ -56,19 +56,26 @@ func (c *Client) ImportCertificate(ctx context.Context, params *ImportCertificat
 }
 
 type ImportCertificateInput struct {
+
 	// The location of an imported Oracle Wallet certificate for use with SSL.
 	CertificateWallet []byte
+
 	// The contents of a .pem file, which contains an X.509 certificate.
 	CertificatePem *string
+
 	// A customer-assigned name for the certificate. Identifiers must begin with a
 	// letter and must contain only ASCII letters, digits, and hyphens. They can't end
 	// with a hyphen or contain two consecutive hyphens.
+	//
+	// This member is required.
 	CertificateIdentifier *string
+
 	// The tags associated with the certificate.
 	Tags []*types.Tag
 }
 
 type ImportCertificateOutput struct {
+
 	// The certificate to be uploaded.
 	Certificate *types.Certificate
 

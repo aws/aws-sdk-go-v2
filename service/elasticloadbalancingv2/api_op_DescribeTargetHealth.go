@@ -56,13 +56,18 @@ func (c *Client) DescribeTargetHealth(ctx context.Context, params *DescribeTarge
 }
 
 type DescribeTargetHealthInput struct {
+
 	// The targets.
 	Targets []*types.TargetDescription
+
 	// The Amazon Resource Name (ARN) of the target group.
+	//
+	// This member is required.
 	TargetGroupArn *string
 }
 
 type DescribeTargetHealthOutput struct {
+
 	// Information about the health of the targets.
 	TargetHealthDescriptions []*types.TargetHealthDescription
 

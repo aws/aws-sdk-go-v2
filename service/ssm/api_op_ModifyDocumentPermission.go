@@ -59,18 +59,27 @@ func (c *Client) ModifyDocumentPermission(ctx context.Context, params *ModifyDoc
 }
 
 type ModifyDocumentPermissionInput struct {
+
 	// The permission type for the document. The permission type can be Share.
+	//
+	// This member is required.
 	PermissionType types.DocumentPermissionType
+
 	// The name of the document that you want to share.
+	//
+	// This member is required.
 	Name *string
+
 	// The AWS user accounts that should have access to the document. The account IDs
 	// can either be a group of account IDs or All.
 	AccountIdsToAdd []*string
+
 	// The AWS user accounts that should no longer have access to the document. The AWS
 	// user account can either be a group of account IDs or All. This action has a
 	// higher priority than AccountIdsToAdd. If you specify an account ID to add and
 	// the same ID to remove, the system removes access to the document.
 	AccountIdsToRemove []*string
+
 	// (Optional) The version of the document to share. If it's not specified, the
 	// system choose the Default version to share.
 	SharedDocumentVersion *string

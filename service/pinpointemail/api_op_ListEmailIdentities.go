@@ -62,9 +62,11 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 // identities that are unverified, and identities that were verified in the past,
 // but are no longer verified.
 type ListEmailIdentitiesInput struct {
+
 	// A token returned from a previous call to ListEmailIdentities to indicate the
 	// position in the list of identities.
 	NextToken *string
+
 	// The number of results to show in a single call to ListEmailIdentities. If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
@@ -77,9 +79,11 @@ type ListEmailIdentitiesInput struct {
 // Amazon Pinpoint, regardless of whether or not those identities were successfully
 // verified.
 type ListEmailIdentitiesOutput struct {
+
 	// An array that includes all of the identities associated with your Amazon
 	// Pinpoint account.
 	EmailIdentities []*types.IdentityInfo
+
 	// A token that indicates that there are additional configuration sets to list. To
 	// view additional configuration sets, issue another request to
 	// ListEmailIdentities, and pass this token in the NextToken parameter.

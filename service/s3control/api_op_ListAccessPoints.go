@@ -17,7 +17,26 @@ import (
 // bucket. You can retrieve up to 1000 access points per call. If the specified
 // bucket has more than 1,000 access points (or the number specified in maxResults,
 // whichever is less), the response will include a continuation token that you can
-// use to list the additional access points.
+// use to list the additional access points. All Amazon S3 on Outposts REST API
+// requests for this action require an additional parameter of outpost-id to be
+// passed with the request and an S3 on Outposts endpoint hostname prefix instead
+// of s3-control. For an example of the request syntax for Amazon S3 on Outposts
+// that uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
+// using the access point ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
+// section below. The following actions are related to ListAccessPoints:
+//
+//     *
+// CreateAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
+//
+//
+// * DeleteAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
+//
+//
+// * GetAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
 func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsInput, optFns ...func(*Options)) (*ListAccessPointsOutput, error) {
 	stack := middleware.NewStack("ListAccessPoints", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -61,15 +80,27 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 }
 
 type ListAccessPointsInput struct {
-	// The name of the bucket whose associated access points you want to list.
+
+	// The name of the bucket whose associated access points you want to list. For
+	// Amazon S3 on Outposts specify the ARN of the bucket accessed in the format
+	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
+	// reports through outpost my-outpost owned by account 123456789012 in Region
+	// us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
+	// The value must be URL encoded.
 	Bucket *string
+
 	// The maximum number of access points that you want to include in the list. If the
 	// specified bucket has more than this number of access points, then the response
 	// will include a continuation token in the NextToken field that you can use to
 	// retrieve the next page of access points.
 	MaxResults *int32
+
 	// The AWS account ID for owner of the bucket whose access points you want to list.
+	//
+	// This member is required.
 	AccountId *string
+
 	// A continuation token. If a previous call to ListAccessPoints returned a
 	// continuation token in the NextToken field, then providing that value here causes
 	// Amazon S3 to retrieve the next page of results.
@@ -77,10 +108,12 @@ type ListAccessPointsInput struct {
 }
 
 type ListAccessPointsOutput struct {
+
 	// If the specified bucket has more access points than can be returned in one call
-	// to this API, then this field contains a continuation token that you can provide
-	// in subsequent calls to this API to retrieve additional access points.
+	// to this API, this field contains a continuation token that you can provide in
+	// subsequent calls to this API to retrieve additional access points.
 	NextToken *string
+
 	// Contains identification and configuration information for one or more access
 	// points associated with the specified bucket.
 	AccessPointList []*types.AccessPoint

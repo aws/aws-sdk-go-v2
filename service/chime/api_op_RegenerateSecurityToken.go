@@ -56,13 +56,20 @@ func (c *Client) RegenerateSecurityToken(ctx context.Context, params *Regenerate
 }
 
 type RegenerateSecurityTokenInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The bot ID.
+	//
+	// This member is required.
 	BotId *string
 }
 
 type RegenerateSecurityTokenOutput struct {
+
 	// A resource that allows Enterprise account administrators to configure an
 	// interface to receive events from Amazon Chime.
 	Bot *types.Bot

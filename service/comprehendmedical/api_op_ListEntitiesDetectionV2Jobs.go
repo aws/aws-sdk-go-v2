@@ -55,19 +55,24 @@ func (c *Client) ListEntitiesDetectionV2Jobs(ctx context.Context, params *ListEn
 }
 
 type ListEntitiesDetectionV2JobsInput struct {
+
 	// Filters the jobs that are returned. You can filter jobs based on their names,
 	// status, or the date and time that they were submitted. You can only set one
 	// filter at a time.
 	Filter *types.ComprehendMedicalAsyncJobFilter
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
 }
 
 type ListEntitiesDetectionV2JobsOutput struct {
+
 	// A list containing the properties of each job returned.
 	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+
 	// Identifies the next page of results to return.
 	NextToken *string
 

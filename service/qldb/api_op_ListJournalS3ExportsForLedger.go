@@ -62,12 +62,17 @@ func (c *Client) ListJournalS3ExportsForLedger(ctx context.Context, params *List
 }
 
 type ListJournalS3ExportsForLedgerInput struct {
+
 	// The name of the ledger.
+	//
+	// This member is required.
 	Name *string
+
 	// The maximum number of results to return in a single
 	// ListJournalS3ExportsForLedger request. (The actual number of results returned
 	// might be fewer.)
 	MaxResults *int32
+
 	// A pagination token, indicating that you want to retrieve the next page of
 	// results. If you received a value for NextToken in the response from a previous
 	// ListJournalS3ExportsForLedger call, then you should use that value as input
@@ -76,9 +81,11 @@ type ListJournalS3ExportsForLedgerInput struct {
 }
 
 type ListJournalS3ExportsForLedgerOutput struct {
+
 	// The array of journal export job descriptions that are associated with the
 	// specified ledger.
 	JournalS3Exports []*types.JournalS3ExportDescription
+
 	// * If NextToken is empty, then the last page of results has been processed and
 	// there are no more results to be retrieved.
 	//

@@ -12,19 +12,26 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon S3 Batch Operations job's priority. For more
-// information, see Amazon S3 Batch Operations
+// Updates an existing S3 Batch Operations job's priority. For more information,
+// see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
 // Amazon Simple Storage Service Developer Guide. Related actions include:
 //
 //     *
-// CreateJob ()
+// CreateJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//     * ListJobs ()
 //
-//     * DescribeJob ()
+// * ListJobs
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
 //
-//     * UpdateJobStatus ()
+//
+// * DescribeJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
+//
+//
+// * UpdateJobStatus
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) UpdateJobPriority(ctx context.Context, params *UpdateJobPriorityInput, optFns ...func(*Options)) (*UpdateJobPriorityOutput, error) {
 	stack := middleware.NewStack("UpdateJobPriority", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -68,18 +75,33 @@ func (c *Client) UpdateJobPriority(ctx context.Context, params *UpdateJobPriorit
 }
 
 type UpdateJobPriorityInput struct {
+
 	// The ID for the job whose priority you want to update.
-	JobId *string
 	//
+	// This member is required.
+	JobId *string
+
+	//
+	//
+	// This member is required.
 	AccountId *string
+
 	// The priority you want to assign to this job.
+	//
+	// This member is required.
 	Priority *int32
 }
 
 type UpdateJobPriorityOutput struct {
+
 	// The ID for the job whose priority Amazon S3 updated.
+	//
+	// This member is required.
 	JobId *string
+
 	// The new priority assigned to the specified job.
+	//
+	// This member is required.
 	Priority *int32
 
 	// Metadata pertaining to the operation's result.

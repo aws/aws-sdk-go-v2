@@ -56,11 +56,15 @@ func (c *Client) GetStream(ctx context.Context, params *GetStreamInput, optFns .
 }
 
 type GetStreamInput struct {
+
 	// Channel ARN for stream to be accessed.
+	//
+	// This member is required.
 	ChannelArn *string
 }
 
 type GetStreamOutput struct {
+
 	// Specifies a live video stream that has been ingested and distributed.
 	Stream *types.Stream
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The operation failed because of a system problem, even though the request was
@@ -25,12 +24,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameters of the request were invalid.
 type InvalidInputException struct {
@@ -48,12 +41,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation failed because there was nothing to do or the operation wasn't
 // possible. For example, you might have submitted an AssociateAdminAccount request
@@ -76,12 +63,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 }
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of the Type parameter is invalid.
 type InvalidTypeException struct {
@@ -99,12 +80,6 @@ func (e *InvalidTypeException) ErrorMessage() string {
 }
 func (e *InvalidTypeException) ErrorCode() string             { return "InvalidTypeException" }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation exceeds a resource limit, for example, the maximum number of
 // policy objects that you can create for an AWS account. For more information, see
@@ -126,12 +101,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -149,9 +118,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

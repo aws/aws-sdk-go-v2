@@ -63,12 +63,19 @@ func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificat
 }
 
 type RevokeCertificateInput struct {
+
 	// Amazon Resource Name (ARN) of the private CA that issued the certificate to be
 	// revoked. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
+
 	// Specifies why you revoked the certificate.
+	//
+	// This member is required.
 	RevocationReason types.RevocationReason
+
 	// Serial number of the certificate to be revoked. This must be in hexadecimal
 	// format. You can retrieve the serial number by calling GetCertificate () with the
 	// Amazon Resource Name (ARN) of the certificate you want and the ARN of your
@@ -79,6 +86,8 @@ type RevokeCertificateInput struct {
 	// DescribeCertificate
 	// (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
 	// action in the AWS Certificate Manager API Reference.
+	//
+	// This member is required.
 	CertificateSerial *string
 }
 

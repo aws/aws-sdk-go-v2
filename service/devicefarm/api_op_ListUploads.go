@@ -57,9 +57,11 @@ func (c *Client) ListUploads(ctx context.Context, params *ListUploadsInput, optF
 
 // Represents a request to the list uploads operation.
 type ListUploadsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The type of upload. Must be one of the following values:
 	//
 	//     * ANDROID_APP
@@ -141,15 +143,20 @@ type ListUploadsInput struct {
 	//
 	//     * XCTEST_UI_TEST_SPEC
 	Type types.UploadType
+
 	// The Amazon Resource Name (ARN) of the project for which you want to list
 	// uploads.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a list uploads request.
 type ListUploadsOutput struct {
+
 	// Information about the uploads.
 	Uploads []*types.Upload
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.

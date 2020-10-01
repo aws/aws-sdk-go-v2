@@ -56,8 +56,12 @@ func (c *Client) DeleteLocalGatewayRouteTableVpcAssociation(ctx context.Context,
 }
 
 type DeleteLocalGatewayRouteTableVpcAssociationInput struct {
+
 	// The ID of the association.
+	//
+	// This member is required.
 	LocalGatewayRouteTableVpcAssociationId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -66,6 +70,7 @@ type DeleteLocalGatewayRouteTableVpcAssociationInput struct {
 }
 
 type DeleteLocalGatewayRouteTableVpcAssociationOutput struct {
+
 	// Information about the association.
 	LocalGatewayRouteTableVpcAssociation *types.LocalGatewayRouteTableVpcAssociation
 

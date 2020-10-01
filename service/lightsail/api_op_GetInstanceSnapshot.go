@@ -56,11 +56,15 @@ func (c *Client) GetInstanceSnapshot(ctx context.Context, params *GetInstanceSna
 }
 
 type GetInstanceSnapshotInput struct {
+
 	// The name of the snapshot for which you are requesting information.
+	//
+	// This member is required.
 	InstanceSnapshotName *string
 }
 
 type GetInstanceSnapshotOutput struct {
+
 	// An array of key-value pairs containing information about the results of your get
 	// instance snapshot request.
 	InstanceSnapshot *types.InstanceSnapshot

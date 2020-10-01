@@ -56,7 +56,10 @@ func (c *Client) DeleteLocation(ctx context.Context, params *DeleteLocationInput
 
 // DeleteLocation
 type DeleteLocationInput struct {
+
 	// The Amazon Resource Name (ARN) of the location to delete.
+	//
+	// This member is required.
 	LocationArn *string
 }
 

@@ -57,14 +57,20 @@ func (c *Client) GetBaiduChannel(ctx context.Context, params *GetBaiduChannelInp
 }
 
 type GetBaiduChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetBaiduChannelOutput struct {
+
 	// Provides information about the status and settings of the Baidu (Baidu Cloud
 	// Push) channel for an application.
+	//
+	// This member is required.
 	BaiduChannelResponse *types.BaiduChannelResponse
 
 	// Metadata pertaining to the operation's result.

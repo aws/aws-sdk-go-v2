@@ -55,13 +55,18 @@ func (c *Client) GetBootstrapBrokers(ctx context.Context, params *GetBootstrapBr
 }
 
 type GetBootstrapBrokersInput struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
 	ClusterArn *string
 }
 
 type GetBootstrapBrokersOutput struct {
+
 	// A string containing one or more DNS names (or IP) and TLS port pairs.
 	BootstrapBrokerStringTls *string
+
 	// A string containing one or more hostname:port pairs.
 	BootstrapBrokerString *string
 

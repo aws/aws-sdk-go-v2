@@ -55,9 +55,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The GraphqlApi ARN.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A TagMap object.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

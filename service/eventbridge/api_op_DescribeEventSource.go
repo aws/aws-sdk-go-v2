@@ -58,26 +58,35 @@ func (c *Client) DescribeEventSource(ctx context.Context, params *DescribeEventS
 }
 
 type DescribeEventSourceInput struct {
+
 	// The name of the partner event source to display the details of.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DescribeEventSourceOutput struct {
+
 	// The name of the SaaS partner that created the event source.
 	CreatedBy *string
+
 	// The name of the partner event source.
 	Name *string
+
 	// The date and time that the event source will expire if you do not create a
 	// matching event bus.
 	ExpirationTime *time.Time
+
 	// The ARN of the partner event source.
 	Arn *string
+
 	// The state of the event source. If it is ACTIVE, you have already created a
 	// matching event bus for this event source, and that event bus is active. If it is
 	// PENDING, either you haven't yet created a matching event bus, or that event bus
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State types.EventSourceState
+
 	// The date and time that the event source was created.
 	CreationTime *time.Time
 

@@ -57,7 +57,10 @@ func (c *Client) StartCrawler(ctx context.Context, params *StartCrawlerInput, op
 }
 
 type StartCrawlerInput struct {
+
 	// Name of the crawler to start.
+	//
+	// This member is required.
 	Name *string
 }
 

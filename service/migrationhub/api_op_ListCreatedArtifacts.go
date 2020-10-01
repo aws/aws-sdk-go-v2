@@ -66,23 +66,33 @@ func (c *Client) ListCreatedArtifacts(ctx context.Context, params *ListCreatedAr
 }
 
 type ListCreatedArtifactsInput struct {
+
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
+	//
+	// This member is required.
 	MigrationTaskName *string
+
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
 	// Maximum number of results to be returned per page.
 	MaxResults *int32
+
 	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
 	ProgressUpdateStream *string
 }
 
 type ListCreatedArtifactsOutput struct {
+
 	// List of created artifacts up to the maximum number of results specified in the
 	// request.
 	CreatedArtifactList []*types.CreatedArtifact
+
 	// If there are more created artifacts than the max result, return the next token
 	// to be passed to the next call as a bookmark of where to start from.
 	NextToken *string

@@ -108,10 +108,14 @@ func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSize
 }
 
 type UpdateSizeConstraintSetInput struct {
+
 	// The SizeConstraintSetId of the SizeConstraintSet () that you want to update.
 	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
 	// ListSizeConstraintSets ().
+	//
+	// This member is required.
 	SizeConstraintSetId *string
+
 	// An array of SizeConstraintSetUpdate objects that you want to insert into or
 	// delete from a SizeConstraintSet (). For more information, see the applicable
 	// data types:
@@ -124,12 +128,18 @@ type UpdateSizeConstraintSetInput struct {
 	//
 	//     * FieldToMatch ():
 	// Contains Data and Type
+	//
+	// This member is required.
 	Updates []*types.SizeConstraintSetUpdate
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type UpdateSizeConstraintSetOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateSizeConstraintSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().

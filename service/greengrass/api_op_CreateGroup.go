@@ -58,29 +58,40 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 }
 
 type CreateGroupInput struct {
+
 	// The name of the group.
 	Name *string
+
 	// Information about the initial version of the group.
 	InitialVersion *types.GroupVersion
+
 	// Tag(s) to add to the new resource.
 	Tags map[string]*string
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 }
 
 type CreateGroupOutput struct {
+
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string
+
 	// The ID of the definition.
 	Id *string
+
 	// The ARN of the definition.
 	Arn *string
+
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
+
 	// The name of the definition.
 	Name *string
+
 	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
 

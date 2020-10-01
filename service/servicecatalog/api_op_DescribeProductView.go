@@ -56,6 +56,7 @@ func (c *Client) DescribeProductView(ctx context.Context, params *DescribeProduc
 }
 
 type DescribeProductViewInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,13 +66,18 @@ type DescribeProductViewInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The product view identifier.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeProductViewOutput struct {
+
 	// Information about the provisioning artifacts for the product.
 	ProvisioningArtifacts []*types.ProvisioningArtifact
+
 	// Summary information about the product.
 	ProductViewSummary *types.ProductViewSummary
 

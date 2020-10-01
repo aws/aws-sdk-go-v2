@@ -57,11 +57,15 @@ func (c *Client) DescribeEndpointGroup(ctx context.Context, params *DescribeEndp
 }
 
 type DescribeEndpointGroupInput struct {
+
 	// The Amazon Resource Name (ARN) of the endpoint group to describe.
+	//
+	// This member is required.
 	EndpointGroupArn *string
 }
 
 type DescribeEndpointGroupOutput struct {
+
 	// The description of an endpoint group.
 	EndpointGroup *types.EndpointGroup
 

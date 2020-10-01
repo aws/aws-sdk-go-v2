@@ -56,13 +56,19 @@ func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, 
 }
 
 type UpdateGatewayInput struct {
+
 	// The ARN of the gateway to update.
+	//
+	// This member is required.
 	GatewayArn *string
+
 	// The updated software version of the gateway. The gateway automatically updates
 	// its software version during normal operation.
 	SoftwareVersion *string
+
 	// The updated name of the gateway.
 	Name *string
+
 	// The updated description of the gateway.
 	Description *string
 }

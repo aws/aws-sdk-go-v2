@@ -59,10 +59,17 @@ func (c *Client) ModifyInstanceCapacityReservationAttributes(ctx context.Context
 }
 
 type ModifyInstanceCapacityReservationAttributesInput struct {
+
 	// The ID of the instance to be modified.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Information about the Capacity Reservation targeting option.
+	//
+	// This member is required.
 	CapacityReservationSpecification *types.CapacityReservationSpecification
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -71,6 +78,7 @@ type ModifyInstanceCapacityReservationAttributesInput struct {
 }
 
 type ModifyInstanceCapacityReservationAttributesOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 

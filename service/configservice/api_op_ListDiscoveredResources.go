@@ -67,22 +67,30 @@ func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscov
 
 //
 type ListDiscoveredResourcesInput struct {
+
 	// The maximum number of resource identifiers returned on each page. The default is
 	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
 	Limit *int32
+
 	// Specifies whether AWS Config includes deleted resources in the results. By
 	// default, deleted resources are not included.
 	IncludeDeletedResources *bool
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The type of resources that you want AWS Config to list in the response.
+	//
+	// This member is required.
 	ResourceType types.ResourceType
+
 	// The IDs of only those resources that you want AWS Config to list in the
 	// response. If you do not specify this parameter, AWS Config lists all resources
 	// of the specified type that it has discovered.
 	ResourceIds []*string
+
 	// The custom name of only those resources that you want AWS Config to list in the
 	// response. If you do not specify this parameter, AWS Config lists all resources
 	// of the specified type that it has discovered.
@@ -91,9 +99,11 @@ type ListDiscoveredResourcesInput struct {
 
 //
 type ListDiscoveredResourcesOutput struct {
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string
+
 	// The details that identify a resource that is discovered by AWS Config, including
 	// the resource type, ID, and (if available) the custom resource name.
 	ResourceIdentifiers []*types.ResourceIdentifier

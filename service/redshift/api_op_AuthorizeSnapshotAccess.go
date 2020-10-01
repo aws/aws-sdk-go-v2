@@ -61,18 +61,26 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 
 //
 type AuthorizeSnapshotAccessInput struct {
+
 	// The identifier of the cluster the snapshot was created from. This parameter is
 	// required if your IAM user has a policy containing a snapshot resource element
 	// that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
+
 	// The identifier of the AWS customer account authorized to restore the specified
 	// snapshot. To share a snapshot with AWS support, specify amazon-redshift-support.
+	//
+	// This member is required.
 	AccountWithRestoreAccess *string
+
 	// The identifier of the snapshot the account is authorized to restore.
+	//
+	// This member is required.
 	SnapshotIdentifier *string
 }
 
 type AuthorizeSnapshotAccessOutput struct {
+
 	// Describes a snapshot.
 	Snapshot *types.Snapshot
 

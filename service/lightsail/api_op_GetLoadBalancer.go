@@ -56,11 +56,15 @@ func (c *Client) GetLoadBalancer(ctx context.Context, params *GetLoadBalancerInp
 }
 
 type GetLoadBalancerInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 type GetLoadBalancerOutput struct {
+
 	// An object containing information about your load balancer.
 	LoadBalancer *types.LoadBalancer
 

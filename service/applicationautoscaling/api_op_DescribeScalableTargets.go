@@ -57,9 +57,13 @@ func (c *Client) DescribeScalableTargets(ctx context.Context, params *DescribeSc
 }
 
 type DescribeScalableTargetsInput struct {
+
 	// The namespace of the AWS service that provides the resource. For a resource
 	// provided by your own application or service, use custom-resource instead.
+	//
+	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
 	// The maximum number of scalable targets. This value can be between 1 and 50. The
 	// default value is 50. If this parameter is used, the operation returns up to
 	// MaxResults results at a time, along with a NextToken value. To get the next set
@@ -67,6 +71,7 @@ type DescribeScalableTargetsInput struct {
 	// is not used, the operation returns up to 50 results and a NextToken value, if
 	// applicable.
 	MaxResults *int32
+
 	// The identifier of the resource associated with the scalable target. This string
 	// consists of the resource type and unique identifier. If you specify a scalable
 	// dimension, you must also specify a resource ID.
@@ -126,8 +131,10 @@ type DescribeScalableTargetsInput struct {
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
 	ResourceIds []*string
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The scalable dimension associated with the scalable target. This string consists
 	// of the service namespace, resource type, and scaling property. If you specify a
 	// scalable dimension, you must also specify a resource ID.
@@ -189,8 +196,10 @@ type DescribeScalableTargetsInput struct {
 }
 
 type DescribeScalableTargetsOutput struct {
+
 	// The scalable targets that match the request parameters.
 	ScalableTargets []*types.ScalableTarget
+
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string

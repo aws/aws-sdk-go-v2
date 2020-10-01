@@ -65,6 +65,7 @@ func (c *Client) ListPlatformApplications(ctx context.Context, params *ListPlatf
 
 // Input for ListPlatformApplications action.
 type ListPlatformApplicationsInput struct {
+
 	// NextToken string is used when calling ListPlatformApplications action to
 	// retrieve additional records that are available after the first page results.
 	NextToken *string
@@ -72,9 +73,11 @@ type ListPlatformApplicationsInput struct {
 
 // Response for ListPlatformApplications action.
 type ListPlatformApplicationsOutput struct {
+
 	// NextToken string is returned when calling ListPlatformApplications action if
 	// additional records are available after the first page results.
 	NextToken *string
+
 	// Platform applications returned when calling ListPlatformApplications action.
 	PlatformApplications []*types.PlatformApplication
 

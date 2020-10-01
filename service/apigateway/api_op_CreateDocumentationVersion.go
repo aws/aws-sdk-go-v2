@@ -58,15 +58,26 @@ func (c *Client) CreateDocumentationVersion(ctx context.Context, params *CreateD
 // Creates a new documentation version of a given API.
 type CreateDocumentationVersionInput struct {
 	Title *string
-	Name  *string
+
+	Name *string
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
+	//
+	// This member is required.
+	RestApiId *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// The stage name to be associated with the new documentation snapshot.
 	StageName *string
+
 	// [Required] The version identifier of the new snapshot.
+	//
+	// This member is required.
 	DocumentationVersion *string
+
 	// A description about the new documentation snapshot.
 	Description *string
 }
@@ -77,10 +88,13 @@ type CreateDocumentationVersionInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
 // DocumentationPart (), DocumentationVersions ()
 type CreateDocumentationVersionOutput struct {
+
 	// The description of the API documentation snapshot.
 	Description *string
+
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
 	// The version identifier of the API documentation snapshot.
 	Version *string
 

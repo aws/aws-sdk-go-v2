@@ -62,8 +62,12 @@ func (c *Client) AssociateElasticIp(ctx context.Context, params *AssociateElasti
 }
 
 type AssociateElasticIpInput struct {
+
 	// The Elastic IP address.
+	//
+	// This member is required.
 	ElasticIp *string
+
 	// The instance ID.
 	InstanceId *string
 }

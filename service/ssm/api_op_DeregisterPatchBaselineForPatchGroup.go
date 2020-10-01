@@ -55,15 +55,23 @@ func (c *Client) DeregisterPatchBaselineForPatchGroup(ctx context.Context, param
 }
 
 type DeregisterPatchBaselineForPatchGroupInput struct {
+
 	// The name of the patch group that should be deregistered from the patch baseline.
+	//
+	// This member is required.
 	PatchGroup *string
+
 	// The ID of the patch baseline to deregister the patch group from.
+	//
+	// This member is required.
 	BaselineId *string
 }
 
 type DeregisterPatchBaselineForPatchGroupOutput struct {
+
 	// The ID of the patch baseline the patch group was deregistered from.
 	BaselineId *string
+
 	// The name of the patch group deregistered from the patch baseline.
 	PatchGroup *string
 

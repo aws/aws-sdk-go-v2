@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // There is an error in the call or in a SQL statement.
@@ -24,12 +23,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There are insufficient privileges to make the call.
 type ForbiddenException struct {
@@ -47,12 +40,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal error occurred.
 type InternalServerErrorException struct {
@@ -87,12 +74,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service specified by the resourceArn parameter is not available.
 type ServiceUnavailableError struct {
@@ -129,15 +110,3 @@ func (e *StatementTimeoutException) ErrorMessage() string {
 }
 func (e *StatementTimeoutException) ErrorCode() string             { return "StatementTimeoutException" }
 func (e *StatementTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StatementTimeoutException) GetDbConnectionId() int64 {
-	return ptr.ToInt64(e.DbConnectionId)
-}
-func (e *StatementTimeoutException) HasDbConnectionId() bool {
-	return e.DbConnectionId != nil
-}
-func (e *StatementTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StatementTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}

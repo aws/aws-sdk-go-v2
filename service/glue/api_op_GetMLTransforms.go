@@ -60,19 +60,27 @@ func (c *Client) GetMLTransforms(ctx context.Context, params *GetMLTransformsInp
 }
 
 type GetMLTransformsInput struct {
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The filter transformation criteria.
 	Filter *types.TransformFilterCriteria
+
 	// A paginated token to offset the results.
 	NextToken *string
+
 	// The sorting criteria.
 	Sort *types.TransformSortCriteria
 }
 
 type GetMLTransformsOutput struct {
+
 	// A list of machine learning transforms.
+	//
+	// This member is required.
 	Transforms []*types.MLTransform
+
 	// A pagination token, if more results are available.
 	NextToken *string
 

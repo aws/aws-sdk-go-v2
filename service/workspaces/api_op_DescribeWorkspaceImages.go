@@ -56,21 +56,27 @@ func (c *Client) DescribeWorkspaceImages(ctx context.Context, params *DescribeWo
 }
 
 type DescribeWorkspaceImagesInput struct {
+
 	// The identifier of the image.
 	ImageIds []*string
+
 	// The maximum number of items to return.
 	MaxResults *int32
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
 	// The type (owned or shared) of the image.
 	ImageType types.ImageType
 }
 
 type DescribeWorkspaceImagesOutput struct {
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
+
 	// Information about the images.
 	Images []*types.WorkspaceImage
 

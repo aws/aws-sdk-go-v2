@@ -67,6 +67,7 @@ func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteIm
 }
 
 type DeleteImportedKeyMaterialInput struct {
+
 	// Identifies the CMK from which you are deleting imported key material. The Origin
 	// of the CMK must be EXTERNAL. Specify the key ID or the Amazon Resource Name
 	// (ARN) of the CMK. For example:
@@ -79,6 +80,8 @@ type DeleteImportedKeyMaterialInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 

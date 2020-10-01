@@ -60,8 +60,10 @@ func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput
 }
 
 type GenerateRandomInput struct {
+
 	// The length of the byte string.
 	NumberOfBytes *int32
+
 	// Generates the random byte string in the AWS CloudHSM cluster that is associated
 	// with the specified custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
@@ -71,6 +73,7 @@ type GenerateRandomInput struct {
 }
 
 type GenerateRandomOutput struct {
+
 	// The random byte string. When you use the HTTP API or the AWS CLI, the value is
 	// Base64-encoded. Otherwise, it is not Base64-encoded.
 	Plaintext []byte

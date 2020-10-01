@@ -56,16 +56,20 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 // Placeholder documentation for ListChannelsRequest
 type ListChannelsInput struct {
+
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
+
 	// Placeholder documentation for __string
 	NextToken *string
 }
 
 // Placeholder documentation for ListChannelsResponse
 type ListChannelsOutput struct {
+
 	// Placeholder documentation for __string
 	NextToken *string
+
 	// Placeholder documentation for __listOfChannelSummary
 	Channels []*types.ChannelSummary
 

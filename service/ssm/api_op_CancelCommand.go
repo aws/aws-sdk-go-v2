@@ -58,11 +58,15 @@ func (c *Client) CancelCommand(ctx context.Context, params *CancelCommandInput, 
 
 //
 type CancelCommandInput struct {
+
 	// (Optional) A list of instance IDs on which you want to cancel the command. If
 	// not provided, the command is canceled on every instance on which it was
 	// requested.
 	InstanceIds []*string
+
 	// The ID of the command you want to cancel.
+	//
+	// This member is required.
 	CommandId *string
 }
 

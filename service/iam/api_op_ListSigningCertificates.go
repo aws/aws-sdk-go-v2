@@ -63,11 +63,13 @@ func (c *Client) ListSigningCertificates(ctx context.Context, params *ListSignin
 }
 
 type ListSigningCertificatesInput struct {
+
 	// The name of the IAM user whose signing certificates you want to examine. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
 	// string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -76,6 +78,7 @@ type ListSigningCertificatesInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -85,11 +88,16 @@ type ListSigningCertificatesInput struct {
 
 // Contains the response to a successful ListSigningCertificates () request.
 type ListSigningCertificatesOutput struct {
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
+
 	// A list of the user's signing certificate information.
+	//
+	// This member is required.
 	Certificates []*types.SigningCertificate
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than

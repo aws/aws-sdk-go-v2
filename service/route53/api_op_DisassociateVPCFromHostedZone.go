@@ -80,20 +80,30 @@ func (c *Client) DisassociateVPCFromHostedZone(ctx context.Context, params *Disa
 // A complex type that contains information about the VPC that you want to
 // disassociate from a specified private hosted zone.
 type DisassociateVPCFromHostedZoneInput struct {
+
 	// Optional: A comment about the disassociation request.
 	Comment *string
+
 	// A complex type that contains information about the VPC that you're
 	// disassociating from the specified hosted zone.
+	//
+	// This member is required.
 	VPC *types.VPC
+
 	// The ID of the private hosted zone that you want to disassociate a VPC from.
+	//
+	// This member is required.
 	HostedZoneId *string
 }
 
 // A complex type that contains the response information for the disassociate
 // request.
 type DisassociateVPCFromHostedZoneOutput struct {
+
 	// A complex type that describes the changes made to the specified private hosted
 	// zone.
+	//
+	// This member is required.
 	ChangeInfo *types.ChangeInfo
 
 	// Metadata pertaining to the operation's result.

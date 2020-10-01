@@ -57,13 +57,17 @@ func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertif
 
 // The input for the DescribeCertificate operation.
 type DescribeCertificateInput struct {
+
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
 }
 
 // The output of the DescribeCertificate operation.
 type DescribeCertificateOutput struct {
+
 	// The description of the certificate.
 	CertificateDescription *types.CertificateDescription
 

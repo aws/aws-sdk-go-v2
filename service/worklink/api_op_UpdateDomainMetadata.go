@@ -55,10 +55,17 @@ func (c *Client) UpdateDomainMetadata(ctx context.Context, params *UpdateDomainM
 }
 
 type UpdateDomainMetadataInput struct {
+
 	// The name of the domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The name to display.
 	DisplayName *string
 }

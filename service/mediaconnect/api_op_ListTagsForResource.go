@@ -55,12 +55,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect
 	// resource for which to list the tags.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// A map from tag keys to values. Tag keys can have a maximum character length of
 	// 128 characters, and tag values can have a maximum length of 256 characters.
 	Tags map[string]*string

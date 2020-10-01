@@ -56,17 +56,27 @@ func (c *Client) GetFindingsStatistics(ctx context.Context, params *GetFindingsS
 }
 
 type GetFindingsStatisticsInput struct {
+
 	// The ID of the detector that specifies the GuardDuty service whose findings'
 	// statistics you want to retrieve.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The types of finding statistics to retrieve.
+	//
+	// This member is required.
 	FindingStatisticTypes []types.FindingStatisticType
+
 	// Represents the criteria that is used for querying findings.
 	FindingCriteria *types.FindingCriteria
 }
 
 type GetFindingsStatisticsOutput struct {
+
 	// The finding statistics object.
+	//
+	// This member is required.
 	FindingStatistics *types.FindingStatistics
 
 	// Metadata pertaining to the operation's result.

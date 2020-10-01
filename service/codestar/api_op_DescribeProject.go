@@ -57,28 +57,40 @@ func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInp
 }
 
 type DescribeProjectInput struct {
+
 	// The ID of the project.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeProjectOutput struct {
+
 	// The description of the project, if any.
 	Description *string
+
 	// The date and time the project was created, in timestamp format.
 	CreatedTimeStamp *time.Time
+
 	// The display name for the project.
 	Name *string
+
 	// The Amazon Resource Name (ARN) for the project.
 	Arn *string
+
 	// The project creation or deletion status.
 	Status *types.ProjectStatus
+
 	// The ID for the AWS CodeStar project template used to create the project.
 	ProjectTemplateId *string
+
 	// The ID of the project.
 	Id *string
+
 	// A user- or system-generated token that identifies the entity that requested
 	// project creation.
 	ClientRequestToken *string
+
 	// The ID of the primary stack in AWS CloudFormation used to generate resources for
 	// the project.
 	StackId *string

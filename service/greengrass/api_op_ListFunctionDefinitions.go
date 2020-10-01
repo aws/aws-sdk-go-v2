@@ -55,16 +55,20 @@ func (c *Client) ListFunctionDefinitions(ctx context.Context, params *ListFuncti
 }
 
 type ListFunctionDefinitionsInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 }
 
 type ListFunctionDefinitionsOutput struct {
+
 	// Information about a definition.
 	Definitions []*types.DefinitionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

@@ -58,52 +58,79 @@ func (c *Client) StopDeployment(ctx context.Context, params *StopDeploymentInput
 }
 
 type StopDeploymentInput struct {
+
 	// The environment ID.
+	//
+	// This member is required.
 	EnvironmentId *string
+
 	// The sequence number of the deployment.
+	//
+	// This member is required.
 	DeploymentNumber *int32
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type StopDeploymentOutput struct {
+
 	// The ID of the deployment strategy that was deployed.
 	DeploymentStrategyId *string
+
 	// The ID of the application that was deployed.
 	ApplicationId *string
+
 	// Information about the source location of the configuration.
 	ConfigurationLocationUri *string
+
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType
+
 	// The percentage of targets for which the deployment is available.
 	PercentageComplete *float32
+
 	// The state of the deployment.
 	State types.DeploymentState
+
 	// A list containing all events related to a deployment. The most recent events are
 	// displayed first.
 	EventLog []*types.DeploymentEvent
+
 	// The configuration version that was deployed.
 	ConfigurationVersion *string
+
 	// The description of the deployment.
 	Description *string
+
 	// The ID of the configuration profile that was deployed.
 	ConfigurationProfileId *string
+
 	// Total amount of time the deployment lasted.
 	DeploymentDurationInMinutes *int32
+
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
 	FinalBakeTimeInMinutes *int32
+
 	// The time the deployment started.
 	StartedAt *time.Time
+
 	// The sequence number of the deployment.
 	DeploymentNumber *int32
+
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
 	GrowthFactor *float32
+
 	// The time the deployment completed.
 	CompletedAt *time.Time
+
 	// The name of the configuration.
 	ConfigurationName *string
+
 	// The ID of the environment that was deployed.
 	EnvironmentId *string
 

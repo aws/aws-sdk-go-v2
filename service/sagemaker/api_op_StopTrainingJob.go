@@ -60,7 +60,10 @@ func (c *Client) StopTrainingJob(ctx context.Context, params *StopTrainingJobInp
 }
 
 type StopTrainingJobInput struct {
+
 	// The name of the training job to stop.
+	//
+	// This member is required.
 	TrainingJobName *string
 }
 

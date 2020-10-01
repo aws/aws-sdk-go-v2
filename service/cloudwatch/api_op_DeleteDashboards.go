@@ -56,7 +56,10 @@ func (c *Client) DeleteDashboards(ctx context.Context, params *DeleteDashboardsI
 }
 
 type DeleteDashboardsInput struct {
+
 	// The dashboards to be deleted. This parameter is required.
+	//
+	// This member is required.
 	DashboardNames []*string
 }
 

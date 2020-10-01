@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Provide a valid value for the field or parameter.
@@ -24,12 +23,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -47,9 +40,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

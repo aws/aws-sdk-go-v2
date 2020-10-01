@@ -62,9 +62,13 @@ func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSet
 }
 
 type PutDataLakeSettingsInput struct {
+
 	// A structure representing a list of AWS Lake Formation principals designated as
 	// data lake administrators.
+	//
+	// This member is required.
 	DataLakeSettings *types.DataLakeSettings
+
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
 	// table definitions, and other control information to manage your AWS Lake

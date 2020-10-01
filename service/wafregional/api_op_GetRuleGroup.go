@@ -64,12 +64,16 @@ func (c *Client) GetRuleGroup(ctx context.Context, params *GetRuleGroupInput, op
 }
 
 type GetRuleGroupInput struct {
+
 	// The RuleGroupId of the RuleGroup () that you want to get. RuleGroupId is
 	// returned by CreateRuleGroup () and by ListRuleGroups ().
+	//
+	// This member is required.
 	RuleGroupId *string
 }
 
 type GetRuleGroupOutput struct {
+
 	// Information about the RuleGroup () that you specified in the GetRuleGroup
 	// request.
 	RuleGroup *types.RuleGroup

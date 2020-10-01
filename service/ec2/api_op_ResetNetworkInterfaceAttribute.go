@@ -57,13 +57,18 @@ func (c *Client) ResetNetworkInterfaceAttribute(ctx context.Context, params *Res
 
 // Contains the parameters for ResetNetworkInterfaceAttribute.
 type ResetNetworkInterfaceAttributeInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
+
 	// The source/destination checking attribute. Resets the value to true.
 	SourceDestCheck *string
 }

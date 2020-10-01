@@ -57,12 +57,18 @@ func (c *Client) GetContainerPolicy(ctx context.Context, params *GetContainerPol
 }
 
 type GetContainerPolicyInput struct {
+
 	// The name of the container.
+	//
+	// This member is required.
 	ContainerName *string
 }
 
 type GetContainerPolicyOutput struct {
+
 	// The contents of the access policy.
+	//
+	// This member is required.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

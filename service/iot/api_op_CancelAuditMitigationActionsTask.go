@@ -56,7 +56,10 @@ func (c *Client) CancelAuditMitigationActionsTask(ctx context.Context, params *C
 }
 
 type CancelAuditMitigationActionsTaskInput struct {
+
 	// The unique identifier for the task that you want to cancel.
+	//
+	// This member is required.
 	TaskId *string
 }
 

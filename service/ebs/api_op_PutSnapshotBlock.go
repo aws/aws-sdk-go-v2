@@ -61,24 +61,41 @@ func (c *Client) PutSnapshotBlock(ctx context.Context, params *PutSnapshotBlockI
 }
 
 type PutSnapshotBlockInput struct {
+
 	// The size of the data to write to the block, in bytes. Currently, the only
 	// supported size is 524288. Valid values: 524288
+	//
+	// This member is required.
 	DataLength *int32
+
 	// The progress of the write process, as a percentage.
 	Progress *int32
+
 	// The block index of the block in which to write the data. A block index is the
 	// offset position of a block within a snapshot, and it is used to identify the
 	// block. To identify the logical offset of the data in the logical volume,
 	// multiply the block index with the block size (Block index * 512 bytes).
+	//
+	// This member is required.
 	BlockIndex *int32
+
 	// A Base64-encoded SHA256 checksum of the data. Only SHA256 checksums are
 	// supported.
+	//
+	// This member is required.
 	Checksum *string
+
 	// The ID of the snapshot.
+	//
+	// This member is required.
 	SnapshotId *string
+
 	// The algorithm used to generate the checksum. Currently, the only supported
 	// algorithm is SHA256.
+	//
+	// This member is required.
 	ChecksumAlgorithm types.ChecksumAlgorithm
+
 	// The data to write to the block. The block data is not signed as part of the
 	// Signature Version 4 signing process. As a result, you must generate and provide
 	// a Base64-encoded SHA256 checksum for the block data using the x-amz-Checksum
@@ -90,12 +107,16 @@ type PutSnapshotBlockInput struct {
 	// Using checksums with the EBS direct APIs
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums)
 	// in the Amazon Elastic Compute Cloud User Guide.
+	//
+	// This member is required.
 	BlockData io.Reader
 }
 
 type PutSnapshotBlockOutput struct {
+
 	// The SHA256 checksum generated for the block data by Amazon EBS.
 	Checksum *string
+
 	// The algorithm used by Amazon EBS to generate the checksum.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 

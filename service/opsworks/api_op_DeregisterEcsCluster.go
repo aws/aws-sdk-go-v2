@@ -62,7 +62,10 @@ func (c *Client) DeregisterEcsCluster(ctx context.Context, params *DeregisterEcs
 }
 
 type DeregisterEcsClusterInput struct {
+
 	// The cluster's Amazon Resource Number (ARN).
+	//
+	// This member is required.
 	EcsClusterArn *string
 }
 

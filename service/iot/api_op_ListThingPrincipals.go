@@ -58,12 +58,16 @@ func (c *Client) ListThingPrincipals(ctx context.Context, params *ListThingPrinc
 
 // The input for the ListThingPrincipal operation.
 type ListThingPrincipalsInput struct {
+
 	// The name of the thing.
+	//
+	// This member is required.
 	ThingName *string
 }
 
 // The output from the ListThingPrincipals operation.
 type ListThingPrincipalsOutput struct {
+
 	// The principals associated with the thing.
 	Principals []*string
 

@@ -54,6 +54,7 @@ func (c *Client) RespondToAuthChallenge(ctx context.Context, params *RespondToAu
 
 // The request to respond to an authentication challenge.
 type RespondToAuthChallengeInput struct {
+
 	// The challenge responses. These are inputs corresponding to the value of
 	// ChallengeName, for example: SECRET_HASH (if app client is configured with client
 	// secret) applies to all inputs below (including SOFTWARE_TOKEN_MFA).
@@ -77,8 +78,12 @@ type RespondToAuthChallengeInput struct {
 	//     * DEVICE_PASSWORD_VERIFIER requires everything that
 	// PASSWORD_VERIFIER requires plus DEVICE_KEY.
 	ChallengeResponses map[string]*string
+
 	// The app client ID.
+	//
+	// This member is required.
 	ClientId *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -108,18 +113,24 @@ type RespondToAuthChallengeInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
+
 	// The challenge name. For more information, see . ADMIN_NO_SRP_AUTH is not a valid
 	// value.
+	//
+	// This member is required.
 	ChallengeName types.ChallengeNameType
+
 	// The Amazon Pinpoint analytics metadata for collecting metrics for
 	// RespondToAuthChallenge calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If InitiateAuth or RespondToAuthChallenge API call determines that the
 	// caller needs to go through another challenge, they return a session with other
 	// challenge parameters. This session should be passed as it is to the next
 	// RespondToAuthChallenge API call.
 	Session *string
+
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
@@ -128,16 +139,20 @@ type RespondToAuthChallengeInput struct {
 
 // The response to respond to the authentication challenge.
 type RespondToAuthChallengeOutput struct {
+
 	// The result returned by the server in response to the request to respond to the
 	// authentication challenge.
 	AuthenticationResult *types.AuthenticationResultType
+
 	// The challenge name. For more information, see .
 	ChallengeName types.ChallengeNameType
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If the or API call determines that the caller needs to go through
 	// another challenge, they return a session with other challenge parameters. This
 	// session should be passed as it is to the next RespondToAuthChallenge API call.
 	Session *string
+
 	// The challenge parameters. For more information, see .
 	ChallengeParameters map[string]*string
 

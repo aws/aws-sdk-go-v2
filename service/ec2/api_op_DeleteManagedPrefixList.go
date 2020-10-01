@@ -57,8 +57,12 @@ func (c *Client) DeleteManagedPrefixList(ctx context.Context, params *DeleteMana
 }
 
 type DeleteManagedPrefixListInput struct {
+
 	// The ID of the prefix list.
+	//
+	// This member is required.
 	PrefixListId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -67,6 +71,7 @@ type DeleteManagedPrefixListInput struct {
 }
 
 type DeleteManagedPrefixListOutput struct {
+
 	// Information about the prefix list.
 	PrefixList *types.ManagedPrefixList
 

@@ -99,6 +99,7 @@ func (c *Client) GetSessionToken(ctx context.Context, params *GetSessionTokenInp
 }
 
 type GetSessionTokenInput struct {
+
 	// The value provided by the MFA device, if MFA is required. If any policy requires
 	// the IAM user to submit an MFA code, specify this value. If MFA authentication is
 	// required, the user must provide a code when requesting a set of temporary
@@ -107,6 +108,7 @@ type GetSessionTokenInput struct {
 	// format for this parameter, as described by its regex pattern, is a sequence of
 	// six numeric digits.
 	TokenCode *string
+
 	// The duration, in seconds, that the credentials should remain valid. Acceptable
 	// durations for IAM user sessions range from 900 seconds (15 minutes) to 129,600
 	// seconds (36 hours), with 43,200 seconds (12 hours) as the default. Sessions for
@@ -114,6 +116,7 @@ type GetSessionTokenInput struct {
 	// the duration is longer than one hour, the session for AWS account owners
 	// defaults to one hour.
 	DurationSeconds *int32
+
 	// The identification number of the MFA device that is associated with the IAM user
 	// who is making the GetSessionToken call. Specify this value if the IAM user has a
 	// policy that requires MFA authentication. The value is either the serial number
@@ -130,6 +133,7 @@ type GetSessionTokenInput struct {
 // Contains the response to a successful GetSessionToken () request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type GetSessionTokenOutput struct {
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security (or session) token. The size of the security token
 	// that STS API operations return is not fixed. We strongly recommend that you make

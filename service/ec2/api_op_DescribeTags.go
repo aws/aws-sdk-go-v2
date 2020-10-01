@@ -58,6 +58,7 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 }
 
 type DescribeTagsInput struct {
+
 	// The filters.
 	//
 	//     * key - The tag key.
@@ -80,13 +81,16 @@ type DescribeTagsInput struct {
 	//
 	//     * value - The tag value.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call. This value can be
 	// between 5 and 1000. To retrieve the remaining results, make another call with
 	// the returned NextToken value.
@@ -94,9 +98,11 @@ type DescribeTagsInput struct {
 }
 
 type DescribeTagsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The tags.
 	Tags []*types.TagDescription
 

@@ -55,11 +55,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The resource ARN.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// Metadata to assign to AppConfig resources. Tags help organize and categorize
 	// your AppConfig resources. Each tag consists of a key and an optional value, both
 	// of which you define.

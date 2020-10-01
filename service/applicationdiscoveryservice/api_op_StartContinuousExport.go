@@ -59,18 +59,23 @@ type StartContinuousExportInput struct {
 }
 
 type StartContinuousExportOutput struct {
+
 	// The name of the s3 bucket where the export data parquet files are stored.
 	S3Bucket *string
+
 	// A dictionary which describes how the data is stored.
 	//
 	//     * databaseName - the
 	// name of the Glue database used to store the schema.
 	SchemaStorageConfig map[string]*string
+
 	// The type of data collector used to gather this data (currently only offered for
 	// AGENT).
 	DataSource types.DataSource
+
 	// The timestamp representing when the continuous export was started.
 	StartTime *time.Time
+
 	// The unique ID assigned to this export.
 	ExportId *string
 

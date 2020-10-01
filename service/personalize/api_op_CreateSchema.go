@@ -61,13 +61,20 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 }
 
 type CreateSchemaInput struct {
+
 	// A schema in Avro JSON format.
+	//
+	// This member is required.
 	Schema *string
+
 	// The name for the schema.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateSchemaOutput struct {
+
 	// The Amazon Resource Name (ARN) of the created schema.
 	SchemaArn *string
 

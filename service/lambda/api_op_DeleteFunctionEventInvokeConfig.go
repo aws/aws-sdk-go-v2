@@ -57,8 +57,10 @@ func (c *Client) DeleteFunctionEventInvokeConfig(ctx context.Context, params *De
 }
 
 type DeleteFunctionEventInvokeConfigInput struct {
+
 	// A version number or alias name.
 	Qualifier *string
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -73,6 +75,8 @@ type DeleteFunctionEventInvokeConfigInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
 }
 

@@ -56,9 +56,15 @@ func (c *Client) SetV2LoggingLevel(ctx context.Context, params *SetV2LoggingLeve
 }
 
 type SetV2LoggingLevelInput struct {
+
 	// The log level.
+	//
+	// This member is required.
 	LogLevel types.LogLevel
+
 	// The log target.
+	//
+	// This member is required.
 	LogTarget *types.LogTarget
 }
 

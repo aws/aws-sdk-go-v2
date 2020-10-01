@@ -56,11 +56,15 @@ func (c *Client) GetAddressBook(ctx context.Context, params *GetAddressBookInput
 }
 
 type GetAddressBookInput struct {
+
 	// The ARN of the address book for which to request details.
+	//
+	// This member is required.
 	AddressBookArn *string
 }
 
 type GetAddressBookOutput struct {
+
 	// The details of the requested address book.
 	AddressBook *types.AddressBook
 

@@ -61,7 +61,10 @@ type GetHealthCheckCountInput struct {
 
 // A complex type that contains the response to a GetHealthCheckCount request.
 type GetHealthCheckCountOutput struct {
+
 	// The number of health checks associated with the current AWS account.
+	//
+	// This member is required.
 	HealthCheckCount *int64
 
 	// Metadata pertaining to the operation's result.

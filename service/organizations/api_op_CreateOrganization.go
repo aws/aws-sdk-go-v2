@@ -66,6 +66,7 @@ func (c *Client) CreateOrganization(ctx context.Context, params *CreateOrganizat
 }
 
 type CreateOrganizationInput struct {
+
 	// Specifies the feature set supported by the new organization. Each feature set
 	// supports different levels of functionality.
 	//
@@ -86,6 +87,7 @@ type CreateOrganizationInput struct {
 }
 
 type CreateOrganizationOutput struct {
+
 	// A structure that contains details about the newly created organization.
 	Organization *types.Organization
 

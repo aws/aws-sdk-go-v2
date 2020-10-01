@@ -55,17 +55,21 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 }
 
 type ListApplicationsInput struct {
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 }
 
 type ListApplicationsOutput struct {
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
+
 	// The elements from this collection.
 	Items []*types.Application
 

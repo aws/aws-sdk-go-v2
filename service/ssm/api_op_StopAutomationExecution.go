@@ -56,8 +56,12 @@ func (c *Client) StopAutomationExecution(ctx context.Context, params *StopAutoma
 }
 
 type StopAutomationExecutionInput struct {
+
 	// The execution ID of the Automation to stop.
+	//
+	// This member is required.
 	AutomationExecutionId *string
+
 	// The stop request type. Valid types include the following: Cancel and Complete.
 	// The default type is Cancel.
 	Type types.StopType

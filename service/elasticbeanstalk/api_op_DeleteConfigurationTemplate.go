@@ -59,9 +59,15 @@ func (c *Client) DeleteConfigurationTemplate(ctx context.Context, params *Delete
 
 // Request to delete a configuration template.
 type DeleteConfigurationTemplateInput struct {
+
 	// The name of the application to delete the configuration template from.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The name of the configuration template to delete.
+	//
+	// This member is required.
 	TemplateName *string
 }
 

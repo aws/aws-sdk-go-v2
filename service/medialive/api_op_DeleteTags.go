@@ -56,9 +56,15 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 // Placeholder documentation for DeleteTagsRequest
 type DeleteTagsInput struct {
+
 	// Placeholder documentation for __string
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// An array of tag keys to delete
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

@@ -57,19 +57,28 @@ func (c *Client) UpdatePublicKey(ctx context.Context, params *UpdatePublicKeyInp
 }
 
 type UpdatePublicKeyInput struct {
+
 	// Request to update public key information.
+	//
+	// This member is required.
 	PublicKeyConfig *types.PublicKeyConfig
+
 	// ID of the public key to be updated.
+	//
+	// This member is required.
 	Id *string
+
 	// The value of the ETag header that you received when retrieving the public key to
 	// update. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
 }
 
 type UpdatePublicKeyOutput struct {
+
 	// The current version of the update public key result. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
+
 	// Return the results of updating the public key.
 	PublicKey *types.PublicKey
 

@@ -62,8 +62,11 @@ func (c *Client) GetDomainDeliverabilityCampaign(ctx context.Context, params *Ge
 // the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
 // operation).
 type GetDomainDeliverabilityCampaignInput struct {
+
 	// The unique identifier for the campaign. The Deliverability dashboard
 	// automatically generates and assigns this identifier to a campaign.
+	//
+	// This member is required.
 	CampaignId *string
 }
 
@@ -71,7 +74,10 @@ type GetDomainDeliverabilityCampaignInput struct {
 // This data is available for a campaign only if the campaign sent email by using a
 // domain that the Deliverability dashboard is enabled for.
 type GetDomainDeliverabilityCampaignOutput struct {
+
 	// An object that contains the deliverability data for the campaign.
+	//
+	// This member is required.
 	DomainDeliverabilityCampaign *types.DomainDeliverabilityCampaign
 
 	// Metadata pertaining to the operation's result.

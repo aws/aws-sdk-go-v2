@@ -58,9 +58,15 @@ func (c *Client) UpdateManagedInstanceRole(ctx context.Context, params *UpdateMa
 }
 
 type UpdateManagedInstanceRoleInput struct {
+
 	// The ID of the managed instance where you want to update the role.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The IAM role you want to assign or change.
+	//
+	// This member is required.
 	IamRole *string
 }
 

@@ -55,11 +55,15 @@ func (c *Client) StopICD10CMInferenceJob(ctx context.Context, params *StopICD10C
 }
 
 type StopICD10CMInferenceJobInput struct {
+
 	// The identifier of the job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopICD10CMInferenceJobOutput struct {
+
 	// The identifier generated for the job. To get the status of job, use this
 	// identifier with the DescribeICD10CMInferenceJob operation.
 	JobId *string

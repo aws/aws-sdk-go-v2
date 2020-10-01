@@ -61,10 +61,15 @@ func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateC
 
 //
 type CreateClusterSecurityGroupInput struct {
+
 	// A description for the security group.
+	//
+	// This member is required.
 	Description *string
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// The name for the security group. Amazon Redshift stores the value as a lowercase
 	// string. Constraints:
 	//
@@ -78,10 +83,13 @@ type CreateClusterSecurityGroupInput struct {
 	//
 	// Example:
 	// examplesecuritygroup
+	//
+	// This member is required.
 	ClusterSecurityGroupName *string
 }
 
 type CreateClusterSecurityGroupOutput struct {
+
 	// Describes a security group.
 	ClusterSecurityGroup *types.ClusterSecurityGroup
 

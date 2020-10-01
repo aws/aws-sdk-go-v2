@@ -64,19 +64,28 @@ func (c *Client) BeginTransaction(ctx context.Context, params *BeginTransactionI
 // The request parameters represent the input of a request to start a SQL
 // transaction.
 type BeginTransactionInput struct {
+
 	// The name of the database.
 	Database *string
+
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The name of the database schema.
 	Schema *string
+
 	// The name or ARN of the secret that enables access to the DB cluster.
+	//
+	// This member is required.
 	SecretArn *string
 }
 
 // The response elements represent the output of a request to start a SQL
 // transaction.
 type BeginTransactionOutput struct {
+
 	// The transaction ID of the transaction started by the call.
 	TransactionId *string
 

@@ -56,13 +56,23 @@ func (c *Client) UpdateNode(ctx context.Context, params *UpdateNodeInput, optFns
 }
 
 type UpdateNodeInput struct {
+
 	// The unique ID of the node.
+	//
+	// This member is required.
 	NodeId *string
+
 	// The unique ID of the member that owns the node.
+	//
+	// This member is required.
 	MemberId *string
+
 	// Configuration properties for publishing to Amazon CloudWatch Logs.
 	LogPublishingConfiguration *types.NodeLogPublishingConfiguration
+
 	// The unique ID of the Managed Blockchain network to which the node belongs.
+	//
+	// This member is required.
 	NetworkId *string
 }
 

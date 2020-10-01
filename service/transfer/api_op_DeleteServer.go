@@ -56,8 +56,11 @@ func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, op
 }
 
 type DeleteServerInput struct {
+
 	// A unique system-assigned identifier for a file transfer protocol-enabled server
 	// instance.
+	//
+	// This member is required.
 	ServerId *string
 }
 

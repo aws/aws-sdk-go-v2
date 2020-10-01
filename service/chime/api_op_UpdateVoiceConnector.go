@@ -56,15 +56,25 @@ func (c *Client) UpdateVoiceConnector(ctx context.Context, params *UpdateVoiceCo
 }
 
 type UpdateVoiceConnectorInput struct {
+
 	// The name of the Amazon Chime Voice Connector.
+	//
+	// This member is required.
 	Name *string
+
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
+	//
+	// This member is required.
 	RequireEncryption *bool
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type UpdateVoiceConnectorOutput struct {
+
 	// The updated Amazon Chime Voice Connector details.
 	VoiceConnector *types.VoiceConnector
 

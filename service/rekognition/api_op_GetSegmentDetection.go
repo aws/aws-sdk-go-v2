@@ -79,42 +79,54 @@ func (c *Client) GetSegmentDetection(ctx context.Context, params *GetSegmentDete
 }
 
 type GetSegmentDetectionInput struct {
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000.
 	MaxResults *int32
+
 	// Job identifier for the text detection operation for which you want results
 	// returned. You get the job identifer from an initial call to
 	// StartSegmentDetection.
+	//
+	// This member is required.
 	JobId *string
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of text.
 	NextToken *string
 }
 
 type GetSegmentDetectionOutput struct {
+
 	// If the previous response was incomplete (because there are more labels to
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of text.
 	NextToken *string
+
 	// An array of objects. There can be multiple audio streams. Each AudioMetadata
 	// object contains metadata for a single audio stream. Audio information in an
 	// AudioMetadata objects includes the audio codec, the number of audio channels,
 	// the duration of the audio stream, and the sample rate. Audio metadata is
 	// returned in each page of information returned by GetSegmentDetection.
 	AudioMetadata []*types.AudioMetadata
+
 	// An array of segments detected in a video.
 	Segments []*types.SegmentDetection
+
 	// An array containing the segment types requested in the call to
 	// StartSegmentDetection.
 	SelectedSegmentTypes []*types.SegmentTypeInfo
+
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
 	// Currently, Amazon Rekognition Video returns a single object in the VideoMetadata
 	// array. The object contains information about the video stream in the input file
 	// that Amazon Rekognition Video chose to analyze. The VideoMetadata object
 	// includes the video codec, video format and other information. Video metadata is
 	// returned in each page of information returned by GetSegmentDetection.
 	VideoMetadata []*types.VideoMetadata
+
 	// Current status of the segment detection job.
 	JobStatus types.VideoJobStatus
 

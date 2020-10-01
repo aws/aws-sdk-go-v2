@@ -57,12 +57,18 @@ func (c *Client) ListBackendEnvironments(ctx context.Context, params *ListBacken
 
 // The request structure for the list backend environments request.
 type ListBackendEnvironmentsInput struct {
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The name of the backend environment
 	EnvironmentName *string
+
 	// A pagination token. Set to null to start listing backend environments from the
 	// start. If a non-null pagination token is returned in a result, pass its value in
 	// here to list more backend environments.
@@ -71,8 +77,12 @@ type ListBackendEnvironmentsInput struct {
 
 // The result structure for the list backend environments result.
 type ListBackendEnvironmentsOutput struct {
+
 	// The list of backend environments for an Amplify app.
+	//
+	// This member is required.
 	BackendEnvironments []*types.BackendEnvironment
+
 	// A pagination token. If a non-null pagination token is returned in a result, pass
 	// its value in another request to retrieve more entries.
 	NextToken *string

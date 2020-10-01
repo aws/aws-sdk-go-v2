@@ -56,9 +56,15 @@ func (c *Client) DeleteIPSet(ctx context.Context, params *DeleteIPSetInput, optF
 }
 
 type DeleteIPSetInput struct {
+
 	// The unique ID of the detector associated with the IPSet.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The unique ID of the IPSet to delete.
+	//
+	// This member is required.
 	IpSetId *string
 }
 

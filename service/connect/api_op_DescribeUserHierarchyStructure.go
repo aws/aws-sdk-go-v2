@@ -56,11 +56,15 @@ func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *Des
 }
 
 type DescribeUserHierarchyStructureInput struct {
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 type DescribeUserHierarchyStructureOutput struct {
+
 	// Information about the hierarchy structure.
 	HierarchyStructure *types.HierarchyStructure
 

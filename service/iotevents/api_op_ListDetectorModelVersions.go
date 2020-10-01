@@ -57,18 +57,25 @@ func (c *Client) ListDetectorModelVersions(ctx context.Context, params *ListDete
 }
 
 type ListDetectorModelVersionsInput struct {
+
 	// The name of the detector model whose versions are returned.
+	//
+	// This member is required.
 	DetectorModelName *string
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListDetectorModelVersionsOutput struct {
+
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// Summary information about the detector model versions.
 	DetectorModelVersionSummaries []*types.DetectorModelVersionSummary
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Either the Amazon Lex bot is still building, or one of the dependent services
@@ -25,12 +24,6 @@ func (e *BadGatewayException) ErrorMessage() string {
 }
 func (e *BadGatewayException) ErrorCode() string             { return "BadGatewayException" }
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *BadGatewayException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadGatewayException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Request validation failed, there is no usable message in the context, or the bot
 // build failed, is still in progress, or contains unbuilt changes.
@@ -49,12 +42,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Two clients are using the same AWS account, Amazon Lex bot, and user ID.
 type ConflictException struct {
@@ -72,12 +59,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
 // For example,
@@ -105,12 +86,6 @@ func (e *DependencyFailedException) ErrorMessage() string {
 }
 func (e *DependencyFailedException) ErrorCode() string             { return "DependencyFailedException" }
 func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DependencyFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Internal service error. Retry the call.
 type InternalFailureException struct {
@@ -128,12 +103,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exceeded a limit.
 type LimitExceededException struct {
@@ -153,18 +122,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *LimitExceededException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
 
 // This exception is not used.
 type LoopDetectedException struct {
@@ -182,12 +139,6 @@ func (e *LoopDetectedException) ErrorMessage() string {
 }
 func (e *LoopDetectedException) ErrorCode() string             { return "LoopDetectedException" }
 func (e *LoopDetectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *LoopDetectedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LoopDetectedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The accept header in the request does not have a valid value.
 type NotAcceptableException struct {
@@ -205,12 +156,6 @@ func (e *NotAcceptableException) ErrorMessage() string {
 }
 func (e *NotAcceptableException) ErrorCode() string             { return "NotAcceptableException" }
 func (e *NotAcceptableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAcceptableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAcceptableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource (such as the Amazon Lex bot or an alias) that is referred to is not
 // found.
@@ -229,12 +174,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input speech is too long.
 type RequestTimeoutException struct {
@@ -252,12 +191,6 @@ func (e *RequestTimeoutException) ErrorMessage() string {
 }
 func (e *RequestTimeoutException) ErrorCode() string             { return "RequestTimeoutException" }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Content-Type header (PostContent API) has an invalid value.
 type UnsupportedMediaTypeException struct {
@@ -275,9 +208,3 @@ func (e *UnsupportedMediaTypeException) ErrorMessage() string {
 }
 func (e *UnsupportedMediaTypeException) ErrorCode() string             { return "UnsupportedMediaTypeException" }
 func (e *UnsupportedMediaTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedMediaTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedMediaTypeException) HasMessage() bool {
-	return e.Message != nil
-}

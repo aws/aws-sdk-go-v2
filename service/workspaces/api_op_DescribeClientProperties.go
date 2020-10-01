@@ -56,11 +56,15 @@ func (c *Client) DescribeClientProperties(ctx context.Context, params *DescribeC
 }
 
 type DescribeClientPropertiesInput struct {
+
 	// The resource identifier, in the form of directory IDs.
+	//
+	// This member is required.
 	ResourceIds []*string
 }
 
 type DescribeClientPropertiesOutput struct {
+
 	// Information about the specified Amazon WorkSpaces clients.
 	ClientPropertiesList []*types.ClientPropertiesResult
 

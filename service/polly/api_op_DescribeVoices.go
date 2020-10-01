@@ -67,28 +67,34 @@ func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput
 }
 
 type DescribeVoicesInput struct {
+
 	// The language identification tag (ISO 639 code for the language name-ISO 3166
 	// country code) for filtering the list of voices returned. If you don't specify
 	// this optional parameter, all available voices are returned. </p>
 	LanguageCode types.LanguageCode
+
 	// An opaque pagination token returned from the previous DescribeVoices operation.
 	// If present, this indicates where to continue the listing.
 	NextToken *string
+
 	// Boolean value indicating whether to return any bilingual voices that use the
 	// specified language as an additional language. For instance, if you request all
 	// languages that use US English (es-US), and there is an Italian voice that speaks
 	// both Italian (it-IT) and US English, that voice will be included if you specify
 	// yes but not if you specify no.
 	IncludeAdditionalLanguageCodes *bool
+
 	// Specifies the engine (standard or neural) used by Amazon Polly when processing
 	// input text for speech synthesis.
 	Engine types.Engine
 }
 
 type DescribeVoicesOutput struct {
+
 	// The pagination token to use in the next request to continue the listing of
 	// voices. NextToken is returned only if the response is truncated.
 	NextToken *string
+
 	// A list of voices with their properties.
 	Voices []*types.Voice
 

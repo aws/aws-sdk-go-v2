@@ -68,10 +68,15 @@ func (c *Client) GetOpenIdTokenForDeveloperIdentity(ctx context.Context, params 
 
 // Input to the GetOpenIdTokenForDeveloperIdentity action.
 type GetOpenIdTokenForDeveloperIdentityInput struct {
+
 	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// Each name-value pair represents a user from a public provider or developer
 	// provider. If the user is from a developer provider, the name-value pair will
@@ -81,7 +86,10 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// developer user identifier is an identifier from your backend that uniquely
 	// identifies a user. When you create an identity pool, you can specify the
 	// supported logins.
+	//
+	// This member is required.
 	Logins map[string]*string
+
 	// The expiration time of the token, in seconds. You can specify a custom
 	// expiration time for the token so that you can cache it. If you don't provide an
 	// expiration time, the token is valid for 15 minutes. You can exchange the token
@@ -96,8 +104,10 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 
 // Returned in response to a successful GetOpenIdTokenForDeveloperIdentity request.
 type GetOpenIdTokenForDeveloperIdentityOutput struct {
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
 	// An OpenID token.
 	Token *string
 

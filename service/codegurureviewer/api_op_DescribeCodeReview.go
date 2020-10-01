@@ -56,13 +56,17 @@ func (c *Client) DescribeCodeReview(ctx context.Context, params *DescribeCodeRev
 }
 
 type DescribeCodeReviewInput struct {
+
 	// The Amazon Resource Name (ARN) of the CodeReview
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
+	//
+	// This member is required.
 	CodeReviewArn *string
 }
 
 type DescribeCodeReviewOutput struct {
+
 	// Information about the code review.
 	CodeReview *types.CodeReview
 

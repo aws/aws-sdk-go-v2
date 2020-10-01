@@ -62,10 +62,15 @@ func (c *Client) PutInsightRule(ctx context.Context, params *PutInsightRuleInput
 }
 
 type PutInsightRuleInput struct {
+
 	// The state of the rule. Valid values are ENABLED and DISABLED.
 	RuleState *string
+
 	// A unique name for the rule.
+	//
+	// This member is required.
 	RuleName *string
+
 	// A list of key-value pairs to associate with the Contributor Insights rule. You
 	// can associate as many as 50 tags with a rule. Tags can help you organize and
 	// categorize your resources. You can also use them to scope user permissions, by
@@ -77,9 +82,12 @@ type PutInsightRuleInput struct {
 	// tags of an existing rule, use TagResource
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html).
 	Tags []*types.Tag
+
 	// The definition of the rule, as a JSON object. For details on the valid syntax,
 	// see Contributor Insights Rule Syntax
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html).
+	//
+	// This member is required.
 	RuleDefinition *string
 }
 

@@ -55,13 +55,18 @@ func (c *Client) DeleteImageRecipe(ctx context.Context, params *DeleteImageRecip
 }
 
 type DeleteImageRecipeInput struct {
+
 	// The Amazon Resource Name (ARN) of the image recipe to delete.
+	//
+	// This member is required.
 	ImageRecipeArn *string
 }
 
 type DeleteImageRecipeOutput struct {
+
 	// The Amazon Resource Name (ARN) of the image recipe that was deleted.
 	ImageRecipeArn *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

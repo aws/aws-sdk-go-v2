@@ -56,18 +56,25 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 }
 
 type ListGroupsInput struct {
+
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.
 	NextToken *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The identifier for the organization under which the groups exist.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type ListGroupsOutput struct {
+
 	// The overview of groups for an organization.
 	Groups []*types.Group
+
 	// The token to use to retrieve the next page of results. The value is "null" when
 	// there are no more results to return.
 	NextToken *string

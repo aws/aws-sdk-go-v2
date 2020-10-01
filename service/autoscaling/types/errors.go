@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The request failed because an active instance refresh for the specified Auto
@@ -29,12 +28,6 @@ func (e *ActiveInstanceRefreshNotFoundFault) ErrorCode() string {
 func (e *ActiveInstanceRefreshNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ActiveInstanceRefreshNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ActiveInstanceRefreshNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You already have an Auto Scaling group or launch configuration with this name.
 type AlreadyExistsFault struct {
@@ -52,12 +45,6 @@ func (e *AlreadyExistsFault) ErrorMessage() string {
 }
 func (e *AlreadyExistsFault) ErrorCode() string             { return "AlreadyExistsFault" }
 func (e *AlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request failed because an active instance refresh operation already exists
 // for the specified Auto Scaling group.
@@ -76,12 +63,6 @@ func (e *InstanceRefreshInProgressFault) ErrorMessage() string {
 }
 func (e *InstanceRefreshInProgressFault) ErrorCode() string             { return "InstanceRefreshInProgressFault" }
 func (e *InstanceRefreshInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceRefreshInProgressFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceRefreshInProgressFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The NextToken value is not valid.
 type InvalidNextToken struct {
@@ -99,12 +80,6 @@ func (e *InvalidNextToken) ErrorMessage() string {
 }
 func (e *InvalidNextToken) ErrorCode() string             { return "InvalidNextToken" }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextToken) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextToken) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have already reached a limit for your Amazon EC2 Auto Scaling resources (for
 // example, Auto Scaling groups, launch configurations, or lifecycle hooks). For
@@ -126,12 +101,6 @@ func (e *LimitExceededFault) ErrorMessage() string {
 }
 func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceededFault" }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You already have a pending update to an Amazon EC2 Auto Scaling resource (for
 // example, an Auto Scaling group, instance, or load balancer).
@@ -150,12 +119,6 @@ func (e *ResourceContentionFault) ErrorMessage() string {
 }
 func (e *ResourceContentionFault) ErrorCode() string             { return "ResourceContentionFault" }
 func (e *ResourceContentionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ResourceContentionFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceContentionFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation can't be performed because the resource is in use.
 type ResourceInUseFault struct {
@@ -173,12 +136,6 @@ func (e *ResourceInUseFault) ErrorMessage() string {
 }
 func (e *ResourceInUseFault) ErrorCode() string             { return "ResourceInUseFault" }
 func (e *ResourceInUseFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation can't be performed because there are scaling activities in
 // progress.
@@ -197,12 +154,6 @@ func (e *ScalingActivityInProgressFault) ErrorMessage() string {
 }
 func (e *ScalingActivityInProgressFault) ErrorCode() string             { return "ScalingActivityInProgressFault" }
 func (e *ScalingActivityInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ScalingActivityInProgressFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScalingActivityInProgressFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service-linked role is not yet ready for use.
 type ServiceLinkedRoleFailure struct {
@@ -220,9 +171,3 @@ func (e *ServiceLinkedRoleFailure) ErrorMessage() string {
 }
 func (e *ServiceLinkedRoleFailure) ErrorCode() string             { return "ServiceLinkedRoleFailure" }
 func (e *ServiceLinkedRoleFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceLinkedRoleFailure) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceLinkedRoleFailure) HasMessage() bool {
-	return e.Message != nil
-}

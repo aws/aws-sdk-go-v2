@@ -56,11 +56,15 @@ func (c *Client) GetGraphqlApi(ctx context.Context, params *GetGraphqlApiInput, 
 }
 
 type GetGraphqlApiInput struct {
+
 	// The API ID for the GraphQL API.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetGraphqlApiOutput struct {
+
 	// The GraphqlApi object.
 	GraphqlApi *types.GraphqlApi
 

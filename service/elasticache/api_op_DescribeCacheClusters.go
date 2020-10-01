@@ -69,23 +69,28 @@ func (c *Client) DescribeCacheClusters(ctx context.Context, params *DescribeCach
 
 // Represents the input of a DescribeCacheClusters operation.
 type DescribeCacheClustersInput struct {
+
 	// An optional flag that can be included in the DescribeCacheCluster request to
 	// retrieve information about the individual cache nodes.
 	ShowCacheNodeInfo *bool
+
 	// An optional flag that can be included in the DescribeCacheCluster request to
 	// show only nodes (API/CLI: clusters) that are not members of a replication group.
 	// In practice, this mean Memcached and single node Redis clusters.
 	ShowCacheClustersNotInReplicationGroups *bool
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
 	// <p>Constraints: minimum 20; maximum 100.</p>
 	MaxRecords *int32
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The user-supplied cluster identifier. If this parameter is specified, only
 	// information about that specific cluster is returned. This parameter isn't case
 	// sensitive.
@@ -94,9 +99,11 @@ type DescribeCacheClustersInput struct {
 
 // Represents the output of a DescribeCacheClusters operation.
 type DescribeCacheClustersOutput struct {
+
 	// A list of clusters. Each item in the list contains detailed information about
 	// one cluster.
 	CacheClusters []*types.CacheCluster
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
 

@@ -62,8 +62,12 @@ func (c *Client) SetPlatformApplicationAttributes(ctx context.Context, params *S
 
 // Input for SetPlatformApplicationAttributes action.
 type SetPlatformApplicationAttributesInput struct {
+
 	// PlatformApplicationArn for SetPlatformApplicationAttributes action.
+	//
+	// This member is required.
 	PlatformApplicationArn *string
+
 	// A map of the platform application attributes. Attributes in this map include the
 	// following:
 	//
@@ -101,6 +105,8 @@ type SetPlatformApplicationAttributesInput struct {
 	//
 	// * SuccessFeedbackSampleRate – Sample rate percentage (0-100) of successfully
 	// delivered messages.
+	//
+	// This member is required.
 	Attributes map[string]*string
 }
 

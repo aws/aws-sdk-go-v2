@@ -58,9 +58,15 @@ func (c *Client) DeleteScalingPlan(ctx context.Context, params *DeleteScalingPla
 }
 
 type DeleteScalingPlanInput struct {
+
 	// The name of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanName *string
+
 	// The version number of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanVersion *int64
 }
 

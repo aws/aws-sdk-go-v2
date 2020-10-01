@@ -78,20 +78,25 @@ func (c *Client) DescribeComplianceByResource(ctx context.Context, params *Descr
 
 //
 type DescribeComplianceByResourceInput struct {
+
 	// Filters the results by compliance. The allowed values are COMPLIANT,
 	// NON_COMPLIANT, and INSUFFICIENT_DATA.
 	ComplianceTypes []types.ComplianceType
+
 	// The ID of the AWS resource for which you want compliance information. You can
 	// specify only one resource ID. If you specify a resource ID, you must also
 	// specify a type for ResourceType.
 	ResourceId *string
+
 	// The maximum number of evaluation results returned on each page. The default is
 	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
 	Limit *int32
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The types of AWS resources for which you want compliance information (for
 	// example, AWS::EC2::Instance). For this action, you can specify that the resource
 	// type is an AWS account by specifying AWS::::Account.
@@ -100,9 +105,11 @@ type DescribeComplianceByResourceInput struct {
 
 //
 type DescribeComplianceByResourceOutput struct {
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string
+
 	// Indicates whether the specified AWS resource complies with all of the AWS Config
 	// rules that evaluate it.
 	ComplianceByResources []*types.ComplianceByResource

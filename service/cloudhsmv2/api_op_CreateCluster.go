@@ -56,12 +56,15 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 }
 
 type CreateClusterInput struct {
+
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup
 	// ID, use DescribeBackups ().
 	SourceBackupId *string
+
 	// Tags to apply to the CloudHSM cluster during creation.
 	TagList []*types.Tag
+
 	// The identifiers (IDs) of the subnets where you are creating the cluster. You
 	// must specify at least one subnet. If you specify multiple subnets, they must
 	// meet the following criteria:
@@ -71,13 +74,19 @@ type CreateClusterInput struct {
 	//
 	//     * You can specify only one subnet per Availability
 	// Zone.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// The type of HSM to use in the cluster. Currently the only allowed value is
 	// hsm1.medium.
+	//
+	// This member is required.
 	HsmType *string
 }
 
 type CreateClusterOutput struct {
+
 	// Information about the cluster that was created.
 	Cluster *types.Cluster
 

@@ -59,11 +59,15 @@ func (c *Client) ConfirmConnection(ctx context.Context, params *ConfirmConnectio
 }
 
 type ConfirmConnectionInput struct {
+
 	// The ID of the hosted connection.
+	//
+	// This member is required.
 	ConnectionId *string
 }
 
 type ConfirmConnectionOutput struct {
+
 	// The state of the connection. The following are the possible values:
 	//
 	//     *

@@ -57,24 +57,31 @@ func (c *Client) GetServers(ctx context.Context, params *GetServersInput, optFns
 }
 
 type GetServersInput struct {
+
 	// The maximum number of results to return in a single call. The default value is
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
 	MaxResults *int32
+
 	// List of VmServerAddress objects
 	VmServerAddressList []*types.VmServerAddress
+
 	// The token for the next set of results.
 	NextToken *string
 }
 
 type GetServersOutput struct {
+
 	// The status of the server catalog.
 	ServerCatalogStatus types.ServerCatalogStatus
+
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the servers.
 	ServerList []*types.Server
+
 	// The time when the server was last modified.
 	LastModifiedOn *time.Time
 

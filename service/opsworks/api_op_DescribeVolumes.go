@@ -60,15 +60,19 @@ func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInp
 }
 
 type DescribeVolumesInput struct {
+
 	// A stack ID. The action describes the stack's registered Amazon EBS volumes.
 	StackId *string
+
 	// Am array of volume IDs. If you use this parameter, DescribeVolumes returns
 	// descriptions of the specified volumes. Otherwise, it returns a description of
 	// every volume.
 	VolumeIds []*string
+
 	// The RAID array ID. If you use this parameter, DescribeVolumes returns
 	// descriptions of the volumes associated with the specified RAID array.
 	RaidArrayId *string
+
 	// The instance ID. If you use this parameter, DescribeVolumes returns descriptions
 	// of the volumes associated with the specified instance.
 	InstanceId *string
@@ -76,6 +80,7 @@ type DescribeVolumesInput struct {
 
 // Contains the response to a DescribeVolumes request.
 type DescribeVolumesOutput struct {
+
 	// An array of volume IDs.
 	Volumes []*types.Volume
 

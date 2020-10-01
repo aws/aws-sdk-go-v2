@@ -56,11 +56,15 @@ func (c *Client) DescribeSchema(ctx context.Context, params *DescribeSchemaInput
 }
 
 type DescribeSchemaInput struct {
+
 	// The Amazon Resource Name (ARN) of the schema to retrieve.
+	//
+	// This member is required.
 	SchemaArn *string
 }
 
 type DescribeSchemaOutput struct {
+
 	// The requested schema.
 	Schema *types.DatasetSchema
 

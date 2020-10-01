@@ -57,21 +57,28 @@ func (c *Client) ListListeners(ctx context.Context, params *ListListenersInput, 
 }
 
 type ListListenersInput struct {
+
 	// The Amazon Resource Name (ARN) of the accelerator for which you want to list
 	// listener objects.
+	//
+	// This member is required.
 	AcceleratorArn *string
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
 	// The number of listener objects that you want to return with this call. The
 	// default value is 10.
 	MaxResults *int32
 }
 
 type ListListenersOutput struct {
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
 	// The list of listeners for an accelerator.
 	Listeners []*types.Listener
 

@@ -59,17 +59,22 @@ func (c *Client) PutConfigurationSetDeliveryOptions(ctx context.Context, params 
 
 // A request to associate a configuration set with a dedicated IP pool.
 type PutConfigurationSetDeliveryOptionsInput struct {
+
 	// The name of the dedicated IP pool that you want to associate with the
 	// configuration set.
 	SendingPoolName *string
+
 	// Specifies whether messages that use the configuration set are required to use
 	// Transport Layer Security (TLS). If the value is Require, messages are only
 	// delivered if a TLS connection can be established. If the value is Optional,
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy types.TlsPolicy
+
 	// The name of the configuration set that you want to associate with a dedicated IP
 	// pool.
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 

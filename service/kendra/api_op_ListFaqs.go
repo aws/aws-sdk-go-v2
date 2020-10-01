@@ -56,19 +56,26 @@ func (c *Client) ListFaqs(ctx context.Context, params *ListFaqsInput, optFns ...
 }
 
 type ListFaqsInput struct {
+
 	// The index that contains the FAQ lists.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The maximum number of FAQs to return in the response. If there are fewer results
 	// in the list, this response contains only the actual results.
 	MaxResults *int32
+
 	// If the result of the previous request to ListFaqs was truncated, include the
 	// NextToken to fetch the next set of FAQs.
 	NextToken *string
 }
 
 type ListFaqsOutput struct {
+
 	// information about the FAQs associated with the specified index.
 	FaqSummaryItems []*types.FaqSummary
+
 	// The ListFaqs operation returns a page of FAQs at a time. The maximum size of the
 	// page is set by the MaxResults parameter. If there are more jobs in the list than
 	// the page size, Amazon Kendra returns the NextPage token. Include the token in

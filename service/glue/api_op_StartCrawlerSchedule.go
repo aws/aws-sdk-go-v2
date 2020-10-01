@@ -56,7 +56,10 @@ func (c *Client) StartCrawlerSchedule(ctx context.Context, params *StartCrawlerS
 }
 
 type StartCrawlerScheduleInput struct {
+
 	// Name of the crawler to schedule.
+	//
+	// This member is required.
 	CrawlerName *string
 }
 

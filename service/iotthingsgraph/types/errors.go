@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 //
@@ -24,12 +23,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type InvalidRequestException struct {
@@ -47,12 +40,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type LimitExceededException struct {
@@ -70,12 +57,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ResourceAlreadyExistsException struct {
@@ -93,12 +74,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ResourceInUseException struct {
@@ -116,12 +91,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ResourceNotFoundException struct {
@@ -139,12 +108,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ThrottlingException struct {
@@ -162,9 +125,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}

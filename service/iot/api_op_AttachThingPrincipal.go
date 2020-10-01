@@ -58,10 +58,16 @@ func (c *Client) AttachThingPrincipal(ctx context.Context, params *AttachThingPr
 
 // The input for the AttachThingPrincipal operation.
 type AttachThingPrincipalInput struct {
+
 	// The principal, which can be a certificate ARN (as returned from the
 	// CreateCertificate operation) or an Amazon Cognito ID.
+	//
+	// This member is required.
 	Principal *string
+
 	// The name of the thing.
+	//
+	// This member is required.
 	ThingName *string
 }
 

@@ -64,37 +64,59 @@ func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextT
 }
 
 type StartTextTranslationJobInput struct {
+
 	// The client token of the EC2 instance calling the request. This token is
 	// auto-generated when using the Amazon Translate SDK. Otherwise, use the
 	// DescribeInstances () EC2 operation to retreive an instance's client token. For
 	// more information, see Client Tokens () in the EC2 User Guide.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
 	// role that grants Amazon Translate read access to your input data. For more
 	// nformation, see identity-and-access-management ().
+	//
+	// This member is required.
 	DataAccessRoleArn *string
+
 	// Specifies the format and S3 location of the input documents for the translation
 	// job.
+	//
+	// This member is required.
 	InputDataConfig *types.InputDataConfig
+
 	// Specifies the S3 folder to which your job output will be saved.
+	//
+	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
+
 	// The name of the batch translation job to be performed.
 	JobName *string
+
 	// The language code of the input language. For a list of language codes, see
 	// what-is-languages (). Amazon Translate does not automatically detect a source
 	// language during batch translation jobs.
+	//
+	// This member is required.
 	SourceLanguageCode *string
+
 	// The name of the terminology to use in the batch translation job. For a list of
 	// available terminologies, use the ListTerminologies () operation.
 	TerminologyNames []*string
+
 	// The language code of the output language.
+	//
+	// This member is required.
 	TargetLanguageCodes []*string
 }
 
 type StartTextTranslationJobOutput struct {
+
 	// The identifier generated for the job. To get the status of a job, use this ID
 	// with the DescribeTextTranslationJob () operation.
 	JobId *string
+
 	// The status of the job. Possible values include:
 	//
 	//     * SUBMITTED - The job has

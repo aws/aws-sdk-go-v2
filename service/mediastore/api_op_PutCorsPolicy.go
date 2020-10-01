@@ -67,9 +67,15 @@ func (c *Client) PutCorsPolicy(ctx context.Context, params *PutCorsPolicyInput, 
 }
 
 type PutCorsPolicyInput struct {
+
 	// The CORS policy to apply to the container.
+	//
+	// This member is required.
 	CorsPolicy []*types.CorsRule
+
 	// The name of the container that you want to assign the CORS policy to.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

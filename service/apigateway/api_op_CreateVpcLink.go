@@ -64,17 +64,28 @@ func (c *Client) CreateVpcLink(ctx context.Context, params *CreateVpcLinkInput, 
 // operational. The caller must have permissions to create and update VPC Endpoint
 // services.
 type CreateVpcLinkInput struct {
+
 	// [Required] The name used to label and identify the VPC link.
-	Name             *string
-	Template         *bool
-	Title            *string
+	//
+	// This member is required.
+	Name *string
+
+	Template *bool
+
+	Title *string
+
 	TemplateSkipList []*string
+
 	// [Required] The ARN of the network load balancer of the VPC targeted by the VPC
 	// link. The network load balancer must be owned by the same AWS account of the API
 	// owner.
+	//
+	// This member is required.
 	TargetArns []*string
+
 	// The description of the VPC link.
 	Description *string
+
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
@@ -90,22 +101,29 @@ type CreateVpcLinkInput struct {
 // HTTP_PROXY and has a connection type of VPC_LINK. The integration uses the
 // connectionId property to identify the VpcLink () used.
 type CreateVpcLinkOutput struct {
+
 	// The identifier of the VpcLink (). It is used in an Integration () to reference
 	// this VpcLink ().
 	Id *string
+
 	// The name used to label and identify the VPC link.
 	Name *string
+
 	// The description of the VPC link.
 	Description *string
+
 	// A description about the VPC link status.
 	StatusMessage *string
+
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
 	// network load balancer must be owned by the same AWS account of the API owner.
 	TargetArns []*string
+
 	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
 	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
 	// the status is DELETING.
 	Status types.VpcLinkStatus
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 

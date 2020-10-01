@@ -56,25 +56,33 @@ func (c *Client) DescribeMaintenanceWindowExecutionTasks(ctx context.Context, pa
 }
 
 type DescribeMaintenanceWindowExecutionTasksInput struct {
+
 	// Optional filters used to scope down the returned tasks. The supported filter key
 	// is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED,
 	// TIMED_OUT, CANCELLING, and CANCELLED.
 	Filters []*types.MaintenanceWindowFilter
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The ID of the maintenance window execution whose task executions should be
 	// retrieved.
+	//
+	// This member is required.
 	WindowExecutionId *string
 }
 
 type DescribeMaintenanceWindowExecutionTasksOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// Information about the task executions.
 	WindowExecutionTaskIdentities []*types.MaintenanceWindowExecutionTaskIdentity
 

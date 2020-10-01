@@ -56,17 +56,24 @@ func (c *Client) ListProvisioningTemplateVersions(ctx context.Context, params *L
 }
 
 type ListProvisioningTemplateVersionsInput struct {
+
 	// A token to retrieve the next set of results.
 	NextToken *string
+
 	// The name of the fleet provisioning template.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListProvisioningTemplateVersionsOutput struct {
+
 	// A token to retrieve the next set of results.
 	NextToken *string
+
 	// The list of fleet provisioning template versions.
 	Versions []*types.ProvisioningTemplateVersionSummary
 

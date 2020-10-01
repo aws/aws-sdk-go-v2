@@ -56,7 +56,10 @@ func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput
 }
 
 type DeleteEndpointInput struct {
+
 	// The Amazon Resource Number (ARN) of the endpoint being deleted.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 

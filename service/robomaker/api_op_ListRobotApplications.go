@@ -56,10 +56,12 @@ func (c *Client) ListRobotApplications(ctx context.Context, params *ListRobotApp
 }
 
 type ListRobotApplicationsInput struct {
+
 	// Optional filters to limit results. The filter name name is supported. When
 	// filtering, you must use the complete value of the filtered item. You can use up
 	// to three filters.
 	Filters []*types.Filter
+
 	// When this parameter is used, ListRobotApplications only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another
@@ -67,8 +69,10 @@ type ListRobotApplicationsInput struct {
 	// be between 1 and 100. If this parameter is not used, then ListRobotApplications
 	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
+
 	// The version qualifier of the robot application.
 	VersionQualifier *string
+
 	// The nextToken value returned from a previous paginated ListRobotApplications
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -77,8 +81,10 @@ type ListRobotApplicationsInput struct {
 }
 
 type ListRobotApplicationsOutput struct {
+
 	// A list of robot application summaries that meet the criteria of the request.
 	RobotApplicationSummaries []*types.RobotApplicationSummary
+
 	// The nextToken value to include in a future ListRobotApplications request. When
 	// the results of a ListRobotApplications request exceed maxResults, this value can
 	// be used to retrieve the next page of results. This value is null when there are

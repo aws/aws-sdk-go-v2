@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // A report with the specified name already exists in the account. Specify a
@@ -25,12 +24,6 @@ func (e *DuplicateReportNameException) ErrorMessage() string {
 }
 func (e *DuplicateReportNameException) ErrorCode() string             { return "DuplicateReportNameException" }
 func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateReportNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateReportNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error on the server occurred during the processing of your request. Try again
 // later.
@@ -49,12 +42,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This account already has five reports defined. To define a new report, you must
 // delete an existing report.
@@ -73,12 +60,6 @@ func (e *ReportLimitReachedException) ErrorMessage() string {
 }
 func (e *ReportLimitReachedException) ErrorCode() string             { return "ReportLimitReachedException" }
 func (e *ReportLimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReportLimitReachedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReportLimitReachedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
@@ -96,9 +77,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

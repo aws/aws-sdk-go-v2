@@ -56,13 +56,16 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 }
 
 type DescribeExportTasksInput struct {
+
 	// the filters for the export tasks.
 	Filters []*types.Filter
+
 	// The export task IDs.
 	ExportTaskIds []*string
 }
 
 type DescribeExportTasksOutput struct {
+
 	// Information about the export tasks.
 	ExportTasks []*types.ExportTask
 

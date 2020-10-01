@@ -55,8 +55,12 @@ func (c *Client) UpdateConnectorDefinition(ctx context.Context, params *UpdateCo
 }
 
 type UpdateConnectorDefinitionInput struct {
+
 	// The ID of the connector definition.
+	//
+	// This member is required.
 	ConnectorDefinitionId *string
+
 	// The name of the definition.
 	Name *string
 }

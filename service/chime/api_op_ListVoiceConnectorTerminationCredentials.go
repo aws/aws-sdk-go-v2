@@ -55,11 +55,15 @@ func (c *Client) ListVoiceConnectorTerminationCredentials(ctx context.Context, p
 }
 
 type ListVoiceConnectorTerminationCredentialsInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type ListVoiceConnectorTerminationCredentialsOutput struct {
+
 	// A list of user names.
 	Usernames []*string
 

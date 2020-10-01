@@ -55,12 +55,14 @@ func (c *Client) DeleteGitHubAccountToken(ctx context.Context, params *DeleteGit
 
 // Represents the input of a DeleteGitHubAccount operation.
 type DeleteGitHubAccountTokenInput struct {
+
 	// The name of the GitHub account connection to delete.
 	TokenName *string
 }
 
 // Represents the output of a DeleteGitHubAccountToken operation.
 type DeleteGitHubAccountTokenOutput struct {
+
 	// The name of the GitHub account connection that was deleted.
 	TokenName *string
 

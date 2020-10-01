@@ -65,8 +65,12 @@ func (c *Client) AttachInstances(ctx context.Context, params *AttachInstancesInp
 }
 
 type AttachInstancesInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []*string
 }

@@ -56,11 +56,15 @@ func (c *Client) DescribeAuthorizer(ctx context.Context, params *DescribeAuthori
 }
 
 type DescribeAuthorizerInput struct {
+
 	// The name of the authorizer to describe.
+	//
+	// This member is required.
 	AuthorizerName *string
 }
 
 type DescribeAuthorizerOutput struct {
+
 	// The authorizer description.
 	AuthorizerDescription *types.AuthorizerDescription
 

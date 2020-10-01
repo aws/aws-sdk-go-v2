@@ -63,18 +63,25 @@ func (c *Client) ReportTaskProgress(ctx context.Context, params *ReportTaskProgr
 
 // Contains the parameters for ReportTaskProgress.
 type ReportTaskProgressInput struct {
+
 	// Key-value pairs that define the properties of the ReportTaskProgressInput
 	// object.
 	Fields []*types.Field
+
 	// The ID of the task assigned to the task runner. This value is provided in the
 	// response for PollForTask ().
+	//
+	// This member is required.
 	TaskId *string
 }
 
 // Contains the output of ReportTaskProgress.
 type ReportTaskProgressOutput struct {
+
 	// If true, the calling task runner should cancel processing of the task. The task
 	// runner does not need to call SetTaskStatus () for canceled tasks.
+	//
+	// This member is required.
 	Canceled *bool
 
 	// Metadata pertaining to the operation's result.

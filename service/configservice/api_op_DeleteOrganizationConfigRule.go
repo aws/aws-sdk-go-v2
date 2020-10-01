@@ -61,7 +61,10 @@ func (c *Client) DeleteOrganizationConfigRule(ctx context.Context, params *Delet
 }
 
 type DeleteOrganizationConfigRuleInput struct {
+
 	// The name of organization config rule that you want to delete.
+	//
+	// This member is required.
 	OrganizationConfigRuleName *string
 }
 

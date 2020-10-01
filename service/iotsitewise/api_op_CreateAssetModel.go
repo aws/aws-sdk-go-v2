@@ -64,8 +64,10 @@ func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelI
 }
 
 type CreateAssetModelInput struct {
+
 	// A description for the asset model.
 	AssetModelDescription *string
+
 	// The property definitions of the asset model. For more information, see Asset
 	// Properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
@@ -74,17 +76,23 @@ type CreateAssetModelInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
 	AssetModelProperties []*types.AssetModelPropertyDefinition
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
 	// A unique, friendly name for the asset model.
+	//
+	// This member is required.
 	AssetModelName *string
+
 	// A list of key-value pairs that contain metadata for the asset model. For more
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
 	Tags map[string]*string
+
 	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
 	// model whose assets can be children of any other assets created from this asset
 	// model. For more information, see Asset Hierarchies
@@ -97,16 +105,25 @@ type CreateAssetModelInput struct {
 }
 
 type CreateAssetModelOutput struct {
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the asset model, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	//
+	// This member is required.
 	AssetModelArn *string
+
 	// The status of the asset model, which contains a state (CREATING after
 	// successfully calling this operation) and any error message.
+	//
+	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
+
 	// The ID of the asset model. You can use this ID when you call other AWS IoT
 	// SiteWise APIs.
+	//
+	// This member is required.
 	AssetModelId *string
 
 	// Metadata pertaining to the operation's result.

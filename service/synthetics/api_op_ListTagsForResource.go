@@ -55,12 +55,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The ARN of the canary that you want to view tags for. The ARN format of a canary
 	// is arn:aws:synthetics:Region:account-id:canary:canary-name .
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The list of tag keys and values associated with the canary that you specified.
 	Tags map[string]*string
 

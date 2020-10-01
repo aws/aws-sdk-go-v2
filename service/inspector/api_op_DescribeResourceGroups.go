@@ -57,15 +57,24 @@ func (c *Client) DescribeResourceGroups(ctx context.Context, params *DescribeRes
 }
 
 type DescribeResourceGroupsInput struct {
+
 	// The ARN that specifies the resource group that you want to describe.
+	//
+	// This member is required.
 	ResourceGroupArns []*string
 }
 
 type DescribeResourceGroupsOutput struct {
+
 	// Resource group details that cannot be described. An error code is provided for
 	// each failed item.
+	//
+	// This member is required.
 	FailedItems map[string]*types.FailedItemDetails
+
 	// Information about a resource group.
+	//
+	// This member is required.
 	ResourceGroups []*types.ResourceGroup
 
 	// Metadata pertaining to the operation's result.

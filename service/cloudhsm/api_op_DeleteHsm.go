@@ -67,13 +67,19 @@ func (c *Client) DeleteHsm(ctx context.Context, params *DeleteHsmInput, optFns .
 
 // Contains the inputs for the DeleteHsm () operation.
 type DeleteHsmInput struct {
+
 	// The ARN of the HSM to delete.
+	//
+	// This member is required.
 	HsmArn *string
 }
 
 // Contains the output of the DeleteHsm () operation.
 type DeleteHsmOutput struct {
+
 	// The status of the operation.
+	//
+	// This member is required.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

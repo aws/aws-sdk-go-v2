@@ -62,7 +62,10 @@ func (c *Client) StartInstance(ctx context.Context, params *StartInstanceInput, 
 }
 
 type StartInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

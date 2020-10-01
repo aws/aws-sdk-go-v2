@@ -81,18 +81,24 @@ func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackin
 }
 
 type GetPersonTrackingInput struct {
+
 	// Sort to use for elements in the Persons array. Use TIMESTAMP to sort array
 	// elements by the time persons are detected. Use INDEX to sort by the tracked
 	// persons. If you sort by INDEX, the array elements for each person are sorted by
 	// detection confidence. The default sort is by TIMESTAMP.
 	SortBy types.PersonTrackingSortBy
+
 	// The identifier for a job that tracks persons in a video. You get the JobId from
 	// a call to StartPersonTracking.
+	//
+	// This member is required.
 	JobId *string
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
 	// results is returned. The default value is 1000.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there are more persons to
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of persons.
@@ -100,19 +106,24 @@ type GetPersonTrackingInput struct {
 }
 
 type GetPersonTrackingOutput struct {
+
 	// The current status of the person tracking job.
 	JobStatus types.VideoJobStatus
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of persons.
 	NextToken *string
+
 	// An array of the persons detected in the video and the time(s) their path was
 	// tracked throughout the video. An array element will exist for each time a
 	// person's path is tracked.
 	Persons []*types.PersonDetection
+
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
 	// is returned in every page of paginated responses from a Amazon Rekognition Video
 	// operation.
 	VideoMetadata *types.VideoMetadata
+
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
 

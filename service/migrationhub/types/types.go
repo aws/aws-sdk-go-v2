@@ -9,10 +9,13 @@ import (
 // The state of an application discovered through Migration Hub import, the AWS
 // Agentless Discovery Connector, or the AWS Application Discovery Agent.
 type ApplicationState struct {
+
 	// The current status of an application.
 	ApplicationStatus ApplicationStatus
+
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time
+
 	// The configurationId from the Application Discovery Service that uniquely
 	// identifies an application.
 	ApplicationId *string
@@ -21,8 +24,12 @@ type ApplicationState struct {
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
 // instance, RDS instance, etc.).
 type CreatedArtifact struct {
+
 	// An ARN that uniquely identifies the result of a migration task.
+	//
+	// This member is required.
 	Name *string
+
 	// A description that can be free-form text to record additional detail about the
 	// artifact for clarity or for later reference.
 	Description *string
@@ -30,25 +37,34 @@ type CreatedArtifact struct {
 
 // Object representing the on-premises resource being migrated.
 type DiscoveredResource struct {
+
 	// A description that can be free-form text to record additional detail about the
 	// discovered resource for clarity or later reference.
 	Description *string
+
 	// The configurationId in Application Discovery Service that uniquely identifies
 	// the on-premise resource.
+	//
+	// This member is required.
 	ConfigurationId *string
 }
 
 // Represents a migration task in a migration tool.
 type MigrationTask struct {
+
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
 	MigrationTaskName *string
+
 	// Task object encapsulating task information.
 	Task *Task
+
 	// The timestamp when the task was gathered.
 	UpdateDateTime *time.Time
+
 	// A name that identifies the vendor of the migration tool being used.
 	ProgressUpdateStream *string
+
 	// Information about the resource that is being migrated. This data will be used to
 	// map the task to a resource in the Application Discovery Service repository.
 	ResourceAttributeList []*ResourceAttribute
@@ -57,18 +73,24 @@ type MigrationTask struct {
 // MigrationTaskSummary includes MigrationTaskName, ProgressPercent,
 // ProgressUpdateStream, Status, and UpdateDateTime for each task.
 type MigrationTaskSummary struct {
+
 	// Detail information of what is being done within the overall status state.
 	StatusDetail *string
+
 	// Status of the task.
 	Status Status
+
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
 	MigrationTaskName *string
+
 	// The timestamp when the task was gathered.
 	UpdateDateTime *time.Time
+
 	// An AWS resource used for access control. It should uniquely identify the
 	// migration tool as it is used for all updates made by the tool.
 	ProgressUpdateStream *string
+
 	// Indication of the percentage completion of the task.
 	ProgressPercent *int32
 }
@@ -76,6 +98,7 @@ type MigrationTaskSummary struct {
 // Summary of the AWS resource used for access control that is implicitly linked to
 // your AWS account.
 type ProgressUpdateStreamSummary struct {
+
 	// The name of the ProgressUpdateStream. Do not store personal data in this field.
 	ProgressUpdateStreamName *string
 }
@@ -89,20 +112,31 @@ type ProgressUpdateStreamSummary struct {
 // <dt>FQDN</dt> <dd> <p> <code>^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$</code> </p>
 // </dd> </dl>
 type ResourceAttribute struct {
+
 	// Type of resource.
+	//
+	// This member is required.
 	Type ResourceAttributeType
+
 	// Value of the resource type.
+	//
+	// This member is required.
 	Value *string
 }
 
 // Task object encapsulating task information.
 type Task struct {
+
 	// Indication of the percentage completion of the task.
 	ProgressPercent *int32
+
 	// Details of task status as notified by a migration tool. A tool might use this
 	// field to provide clarifying information about the status that is unique to that
 	// tool or that explains an error state.
 	StatusDetail *string
+
 	// Status of the task - Not Started, In-Progress, Complete.
+	//
+	// This member is required.
 	Status Status
 }

@@ -56,17 +56,22 @@ func (c *Client) BatchRevokePermissions(ctx context.Context, params *BatchRevoke
 }
 
 type BatchRevokePermissionsInput struct {
+
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
 	// A list of up to 20 entries for resource permissions to be revoked by batch
 	// operation to the principal.
+	//
+	// This member is required.
 	Entries []*types.BatchPermissionsRequestEntry
 }
 
 type BatchRevokePermissionsOutput struct {
+
 	// A list of failures to revoke permissions to the resources.
 	Failures []*types.BatchPermissionsFailureEntry
 

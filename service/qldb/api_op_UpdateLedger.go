@@ -57,8 +57,12 @@ func (c *Client) UpdateLedger(ctx context.Context, params *UpdateLedgerInput, op
 }
 
 type UpdateLedgerInput struct {
+
 	// The name of the ledger.
+	//
+	// This member is required.
 	Name *string
+
 	// The flag that prevents a ledger from being deleted by any user. If not provided
 	// on ledger creation, this feature is enabled (true) by default. If deletion
 	// protection is enabled, you must first disable it before you can delete the
@@ -70,14 +74,18 @@ type UpdateLedgerInput struct {
 }
 
 type UpdateLedgerOutput struct {
+
 	// The Amazon Resource Name (ARN) for the ledger.
 	Arn *string
+
 	// The current status of the ledger.
 	State types.LedgerState
+
 	// The date and time, in epoch time format, when the ledger was created. (Epoch
 	// time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970
 	// UTC.)
 	CreationDateTime *time.Time
+
 	// The flag that prevents a ledger from being deleted by any user. If not provided
 	// on ledger creation, this feature is enabled (true) by default. If deletion
 	// protection is enabled, you must first disable it before you can delete the
@@ -86,6 +94,7 @@ type UpdateLedgerOutput struct {
 	// QLDB console disables deletion protection for you when you use it to delete a
 	// ledger.
 	DeletionProtection *bool
+
 	// The name of the ledger.
 	Name *string
 

@@ -57,7 +57,10 @@ func (c *Client) DeletePredictor(ctx context.Context, params *DeletePredictorInp
 }
 
 type DeletePredictorInput struct {
+
 	// The Amazon Resource Name (ARN) of the predictor to delete.
+	//
+	// This member is required.
 	PredictorArn *string
 }
 

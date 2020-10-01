@@ -73,22 +73,33 @@ func (c *Client) GetUtterancesView(ctx context.Context, params *GetUtterancesVie
 }
 
 type GetUtterancesViewInput struct {
+
 	// To return utterances that were recognized and handled, use Detected. To return
 	// utterances that were not recognized, use Missed.
+	//
+	// This member is required.
 	StatusType types.StatusType
+
 	// An array of bot versions for which utterance information should be returned. The
 	// limit is 5 versions per request.
+	//
+	// This member is required.
 	BotVersions []*string
+
 	// The name of the bot for which utterance information should be returned.
+	//
+	// This member is required.
 	BotName *string
 }
 
 type GetUtterancesViewOutput struct {
+
 	// An array of UtteranceList () objects, each containing a list of UtteranceData ()
 	// objects describing the utterances that were processed by your bot. The response
 	// contains a maximum of 100 UtteranceData objects for each version. Amazon Lex
 	// returns the most frequent utterances received by the bot in the last 15 days.
 	Utterances []*types.UtteranceList
+
 	// The name of the bot for which utterance information was returned.
 	BotName *string
 

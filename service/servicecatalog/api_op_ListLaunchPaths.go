@@ -58,8 +58,12 @@ func (c *Client) ListLaunchPaths(ctx context.Context, params *ListLaunchPathsInp
 }
 
 type ListLaunchPathsInput struct {
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -69,17 +73,21 @@ type ListLaunchPathsInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
 }
 
 type ListLaunchPathsOutput struct {
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Information about the launch path.
 	LaunchPathSummaries []*types.LaunchPathSummary
 

@@ -55,18 +55,25 @@ func (c *Client) UpdateGroupCertificateConfiguration(ctx context.Context, params
 }
 
 type UpdateGroupCertificateConfigurationInput struct {
+
 	// The amount of time remaining before the certificate expires, in milliseconds.
 	CertificateExpiryInMilliseconds *string
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type UpdateGroupCertificateConfigurationOutput struct {
+
 	// The ID of the group certificate configuration.
 	GroupId *string
+
 	// The amount of time remaining before the certificate authority expires, in
 	// milliseconds.
 	CertificateAuthorityExpiryInMilliseconds *string
+
 	// The amount of time remaining before the certificate expires, in milliseconds.
 	CertificateExpiryInMilliseconds *string
 

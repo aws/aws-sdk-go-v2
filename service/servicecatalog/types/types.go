@@ -8,6 +8,7 @@ import (
 
 // The access level to use to filter results.
 type AccessLevelFilter struct {
+
 	// The access level.
 	//
 	//     * Account - Filter results based on the account.
@@ -18,31 +19,38 @@ type AccessLevelFilter struct {
 	//     *
 	// User - Filter results based on the specified user.
 	Key AccessLevelFilterKey
+
 	// The user to which the access level applies. The only supported value is Self.
 	Value *string
 }
 
 // Information about a budget.
 type BudgetDetail struct {
+
 	// Name of the associated budget.
 	BudgetName *string
 }
 
 // Information about a CloudWatch dashboard.
 type CloudWatchDashboard struct {
+
 	// The name of the CloudWatch dashboard.
 	Name *string
 }
 
 // Information about a constraint.
 type ConstraintDetail struct {
+
 	// The identifier of the product the constraint applies to. Note that a constraint
 	// applies to a specific instance of a product within a certain portfolio.
 	ProductId *string
+
 	// The description of the constraint.
 	Description *string
+
 	// The identifier of the constraint.
 	ConstraintId *string
+
 	// The type of constraint.
 	//
 	//     * LAUNCH
@@ -54,8 +62,10 @@ type ConstraintDetail struct {
 	//     *
 	// TEMPLATE
 	Type *string
+
 	// The owner of the constraint.
 	Owner *string
+
 	// The identifier of the portfolio the product resides in. The constraint applies
 	// only to the instance of the product that lives within this portfolio.
 	PortfolioId *string
@@ -63,8 +73,10 @@ type ConstraintDetail struct {
 
 // Summary information about a constraint.
 type ConstraintSummary struct {
+
 	// The description of the constraint.
 	Description *string
+
 	// The type of constraint.
 	//
 	//     * LAUNCH
@@ -81,10 +93,13 @@ type ConstraintSummary struct {
 // Details of an execution parameter value that is passed to a self-service action
 // when executed on a provisioned product.
 type ExecutionParameter struct {
+
 	// The name of the execution parameter.
 	Name *string
+
 	// The execution parameter type.
 	Type *string
+
 	// The default values for the execution parameter.
 	DefaultValues []*string
 }
@@ -92,42 +107,55 @@ type ExecutionParameter struct {
 // An object containing information about the error, along with identifying
 // information about the self-service action and its associations.
 type FailedServiceActionAssociation struct {
+
 	// The self-service action identifier. For example, act-fs7abcd89wxyz.
 	ServiceActionId *string
+
 	// The product identifier. For example, prod-abcdzk7xy33qa.
 	ProductId *string
+
 	// A text description of the error.
 	ErrorMessage *string
+
 	// The error code. Valid values are listed below.
 	ErrorCode ServiceActionAssociationErrorCode
+
 	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
 	ProvisioningArtifactId *string
 }
 
 // A launch path object.
 type LaunchPath struct {
+
 	// The name of the launch path.
 	Name *string
+
 	// The identifier of the launch path.
 	Id *string
 }
 
 // Summary information about a product path for a user.
 type LaunchPathSummary struct {
+
 	// The constraints on the portfolio-product relationship.
 	ConstraintSummaries []*ConstraintSummary
+
 	// The tags associated with this product path.
 	Tags []*Tag
+
 	// The name of the portfolio to which the user was assigned.
 	Name *string
+
 	// The identifier of the product path.
 	Id *string
 }
 
 // The search filter to use when listing history records.
 type ListRecordHistorySearchFilter struct {
+
 	// The filter value.
 	Value *string
+
 	// The filter key.
 	//
 	//     * product - Filter results based on the specified product
@@ -140,48 +168,62 @@ type ListRecordHistorySearchFilter struct {
 
 // Filters to use when listing TagOptions.
 type ListTagOptionsFilters struct {
+
 	// The TagOption key.
 	Key *string
+
 	// The TagOption value.
 	Value *string
+
 	// The active state.
 	Active *bool
 }
 
 // Information about the organization node.
 type OrganizationNode struct {
+
 	// The identifier of the organization node.
 	Value *string
+
 	// The organization node type.
 	Type OrganizationNodeType
 }
 
 // The constraints that the administrator has put on the parameter.
 type ParameterConstraints struct {
+
 	// The values that the administrator has allowed for the parameter.
 	AllowedValues []*string
 }
 
 // Information about a portfolio.
 type PortfolioDetail struct {
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
 	// The description of the portfolio.
 	Description *string
+
 	// The name of the portfolio provider.
 	ProviderName *string
+
 	// The portfolio identifier.
 	Id *string
+
 	// The ARN assigned to the portfolio.
 	ARN *string
+
 	// The name to use for display purposes.
 	DisplayName *string
 }
 
 // Information about a principal.
 type Principal struct {
+
 	// The ARN of the principal (IAM user, role, or group).
 	PrincipalARN *string
+
 	// The principal type. The supported value is IAM.
 	PrincipalType PrincipalType
 }
@@ -189,20 +231,26 @@ type Principal struct {
 // A single product view aggregation value/count pair, containing metadata about
 // each product to which the calling user has access.
 type ProductViewAggregationValue struct {
+
 	// An approximate count of the products that match the value.
 	ApproximateCount *int32
+
 	// The value of the product view aggregation.
 	Value *string
 }
 
 // Information about a product view.
 type ProductViewDetail struct {
+
 	// Summary information about the product view.
 	ProductViewSummary *ProductViewSummary
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
 	// The ARN of the product.
 	ProductARN *string
+
 	// The status of the product.
 	//
 	//     * AVAILABLE - The product is ready for use.
@@ -217,44 +265,59 @@ type ProductViewDetail struct {
 
 // Summary information about a product view.
 type ProductViewSummary struct {
+
 	// Indicates whether the product has a default path. If the product does not have a
 	// default path, call ListLaunchPaths () to disambiguate between paths. Otherwise,
 	// ListLaunchPaths () is not required, and the output of ProductViewSummary () can
 	// be used directly with DescribeProvisioningParameters ().
 	HasDefaultPath *bool
+
 	// The description of the support for this Product.
 	SupportDescription *string
+
 	// The product view identifier.
 	Id *string
+
 	// The product identifier.
 	ProductId *string
+
 	// Short description of the product.
 	ShortDescription *string
+
 	// The name of the product.
 	Name *string
+
 	// The distributor of the product. Contact the product administrator for the
 	// significance of this value.
 	Distributor *string
+
 	// The URL information to obtain support for this Product.
 	SupportUrl *string
+
 	// The product type. Contact the product administrator for the significance of this
 	// value. If this value is MARKETPLACE, the product was created by AWS Marketplace.
 	Type ProductType
+
 	// The owner of the product. Contact the product administrator for the significance
 	// of this value.
 	Owner *string
+
 	// The email contact information to obtain support for this Product.
 	SupportEmail *string
 }
 
 // Information about a provisioned product.
 type ProvisionedProductAttribute struct {
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The ARN of the IAM user in the session. This ARN might contain a session ID.
 	UserArnSession *string
+
 	// The ARN of the provisioned product.
 	Arn *string
+
 	// The current status of the provisioned product.
 	//
 	//     * AVAILABLE - Stable state,
@@ -280,59 +343,81 @@ type ProvisionedProductAttribute struct {
 	// been created. After reviewing the list of resources to be created, execute the
 	// plan. Wait for an AVAILABLE status before performing operations.
 	Status ProvisionedProductStatus
+
 	// The Amazon Resource Name (ARN) of the IAM user.
 	UserArn *string
+
 	// The identifier of the provisioned product.
 	Id *string
+
 	// One or more tags.
 	Tags []*Tag
+
 	// The type of provisioned product. The supported values are CFN_STACK and
 	// CFN_STACKSET.
 	Type *string
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
 	IdempotencyToken *string
+
 	// The record identifier of the last request performed on this provisioned product.
 	LastRecordId *string
+
 	// The assigned identifier for the resource, such as an EC2 instance ID or an S3
 	// bucket name.
 	PhysicalId *string
+
 	// The product identifier.
 	ProductId *string
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
 	// The user-friendly name of the provisioned product.
 	Name *string
+
 	// The current status message of the provisioned product.
 	StatusMessage *string
 }
 
 // Information about a provisioned product.
 type ProvisionedProductDetail struct {
+
 	// The product identifier. For example, prod-abcdzk7xy33qa.
 	ProductId *string
+
 	// The current status message of the provisioned product.
 	StatusMessage *string
+
 	// The identifier of the provisioned product.
 	Id *string
+
 	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
 	ProvisioningArtifactId *string
+
 	// The user-friendly name of the provisioned product.
 	Name *string
+
 	// The record identifier of the last request performed on this provisioned product.
 	LastRecordId *string
+
 	// The ARN of the provisioned product.
 	Arn *string
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
 	// The type of provisioned product. The supported values are CFN_STACK and
 	// CFN_STACKSET.
 	Type *string
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
 	IdempotencyToken *string
+
 	// The current status of the provisioned product.
 	//
 	//     * AVAILABLE - Stable state,
@@ -362,37 +447,52 @@ type ProvisionedProductDetail struct {
 
 // Information about a plan.
 type ProvisionedProductPlanDetails struct {
+
 	// The plan identifier.
 	PlanId *string
+
 	// The status.
 	Status ProvisionedProductPlanStatus
+
 	// The user-friendly name of the provisioned product.
 	ProvisionProductName *string
+
 	// The plan type.
 	PlanType ProvisionedProductPlanType
+
 	// The time when the plan was last updated.
 	UpdatedTime *time.Time
+
 	// The product identifier.
 	ProvisionProductId *string
+
 	// One or more tags.
 	Tags []*Tag
+
 	// Parameters specified by the administrator that are required for provisioning the
 	// product.
 	ProvisioningParameters []*UpdateProvisioningParameter
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
 	// paths for a product, use ListLaunchPaths ().
 	PathId *string
+
 	// The status message.
 	StatusMessage *string
+
 	// The name of the plan.
 	PlanName *string
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
 	// The product identifier.
 	ProductId *string
+
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
 	NotificationArns []*string
@@ -400,16 +500,22 @@ type ProvisionedProductPlanDetails struct {
 
 // Summary information about a plan.
 type ProvisionedProductPlanSummary struct {
+
 	// The user-friendly name of the provisioned product.
 	ProvisionProductName *string
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The plan identifier.
 	PlanId *string
+
 	// The product identifier.
 	ProvisionProductId *string
+
 	// The name of the plan.
 	PlanName *string
+
 	// The plan type.
 	PlanType ProvisionedProductPlanType
 }
@@ -417,15 +523,20 @@ type ProvisionedProductPlanSummary struct {
 // Information about a provisioning artifact. A provisioning artifact is also known
 // as a product version.
 type ProvisioningArtifact struct {
+
 	// The identifier of the provisioning artifact.
 	Id *string
+
 	// The description of the provisioning artifact.
 	Description *string
+
 	// The name of the provisioning artifact.
 	Name *string
+
 	// Information set by the administrator to provide guidance to end users about
 	// which provisioning artifacts to use.
 	Guidance ProvisioningArtifactGuidance
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
 }
@@ -433,8 +544,10 @@ type ProvisioningArtifact struct {
 // Information about a provisioning artifact (also known as a version) for a
 // product.
 type ProvisioningArtifactDetail struct {
+
 	// The identifier of the provisioning artifact.
 	Id *string
+
 	// The type of provisioning artifact.
 	//
 	//     * CLOUD_FORMATION_TEMPLATE - AWS
@@ -445,41 +558,54 @@ type ProvisioningArtifactDetail struct {
 	//     *
 	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType
+
 	// Indicates whether the product version is active.
 	Active *bool
+
 	// Information set by the administrator to provide guidance to end users about
 	// which provisioning artifacts to use.
 	Guidance ProvisioningArtifactGuidance
+
 	// The name of the provisioning artifact.
 	Name *string
+
 	// The description of the provisioning artifact.
 	Description *string
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
 }
 
 // Provisioning artifact output.
 type ProvisioningArtifactOutput struct {
+
 	// Description of the provisioning artifact output key.
 	Description *string
+
 	// The provisioning artifact output key.
 	Key *string
 }
 
 // Information about a parameter used to provision a product.
 type ProvisioningArtifactParameter struct {
+
 	// If this value is true, the value for this parameter is obfuscated from view when
 	// the parameter is retrieved. This parameter is used to hide sensitive
 	// information.
 	IsNoEcho *bool
+
 	// Constraints that the administrator has put on a parameter.
 	ParameterConstraints *ParameterConstraints
+
 	// The parameter type.
 	ParameterType *string
+
 	// The default value.
 	DefaultValue *string
+
 	// The description of the parameter.
 	Description *string
+
 	// The parameter key.
 	ParameterKey *string
 }
@@ -491,11 +617,13 @@ type ProvisioningArtifactParameter struct {
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options)
 // in the AWS CloudFormation User Guide.
 type ProvisioningArtifactPreferences struct {
+
 	// One or more AWS accounts where stack instances are deployed from the stack set.
 	// These accounts can be scoped in ProvisioningPreferences$StackSetAccounts and
 	// UpdateProvisioningPreferences$StackSetAccounts. Applicable only to a
 	// CFN_STACKSET provisioned product type.
 	StackSetAccounts []*string
+
 	// One or more AWS Regions where stack instances are deployed from the stack set.
 	// These regions can be scoped in ProvisioningPreferences$StackSetRegions and
 	// UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET
@@ -506,19 +634,26 @@ type ProvisioningArtifactPreferences struct {
 // Information about a provisioning artifact (also known as a version) for a
 // product.
 type ProvisioningArtifactProperties struct {
+
 	// The description of the provisioning artifact, including how it differs from the
 	// previous provisioning artifact.
 	Description *string
+
 	// If set to true, AWS Service Catalog stops validating the specified provisioning
 	// artifact even if it is invalid.
 	DisableTemplateValidation *bool
+
 	// The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON
 	// format as follows: "LoadTemplateFromURL":
 	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."
+	//
+	// This member is required.
 	Info map[string]*string
+
 	// The name of the provisioning artifact (for example, v1 v2beta). No spaces are
 	// allowed.
 	Name *string
+
 	// The type of provisioning artifact.
 	//
 	//     * CLOUD_FORMATION_TEMPLATE - AWS
@@ -534,15 +669,20 @@ type ProvisioningArtifactProperties struct {
 // Summary information about a provisioning artifact (also known as a version) for
 // a product.
 type ProvisioningArtifactSummary struct {
+
 	// The metadata for the provisioning artifact. This is used with AWS Marketplace
 	// products.
 	ProvisioningArtifactMetadata map[string]*string
+
 	// The name of the provisioning artifact.
 	Name *string
+
 	// The identifier of the provisioning artifact.
 	Id *string
+
 	// The description of the provisioning artifact.
 	Description *string
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
 }
@@ -550,8 +690,10 @@ type ProvisioningArtifactSummary struct {
 // An object that contains summary information about a product view and a
 // provisioning artifact.
 type ProvisioningArtifactView struct {
+
 	// Summary information about a product view.
 	ProductViewSummary *ProductViewSummary
+
 	// Information about a provisioning artifact. A provisioning artifact is also known
 	// as a product version.
 	ProvisioningArtifact *ProvisioningArtifact
@@ -559,8 +701,10 @@ type ProvisioningArtifactView struct {
 
 // Information about a parameter used to provision a product.
 type ProvisioningParameter struct {
+
 	// The parameter key.
 	Key *string
+
 	// The parameter value.
 	Value *string
 }
@@ -568,6 +712,7 @@ type ProvisioningParameter struct {
 // The user-defined preferences that will be applied when updating a provisioned
 // product. Not all preferences are applicable to all provisioned product types.
 type ProvisioningPreferences struct {
+
 	// One or more AWS accounts that will have access to the provisioned product.
 	// Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts
 	// specified should be within the list of accounts in the STACKSET constraint. To
@@ -575,6 +720,7 @@ type ProvisioningPreferences struct {
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all accounts from the STACKSET constraint.
 	StackSetAccounts []*string
+
 	// One or more AWS Regions where the provisioned product will be available.
 	// Applicable only to a CFN_STACKSET provisioned product type. The specified
 	// regions should be within the list of regions from the STACKSET constraint. To
@@ -582,6 +728,7 @@ type ProvisioningPreferences struct {
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all regions from the STACKSET constraint.
 	StackSetRegions []*string
+
 	// The percentage of accounts, per region, for which this stack operation can fail
 	// before AWS Service Catalog stops the operation in that region. If the operation
 	// is stopped in a region, AWS Service Catalog doesn't attempt the operation in any
@@ -591,6 +738,7 @@ type ProvisioningPreferences struct {
 	// must specify either StackSetFailureToleranceCount or
 	// StackSetFailureTolerancePercentage, but not both.
 	StackSetFailureTolerancePercentage *int32
+
 	// The number of accounts, per region, for which this operation can fail before AWS
 	// Service Catalog stops the operation in that region. If the operation is stopped
 	// in a region, AWS Service Catalog doesn't attempt the operation in any subsequent
@@ -599,6 +747,7 @@ type ProvisioningPreferences struct {
 	// StackSetFailureTolerancePercentage, but not both. The default value is 0 if no
 	// value is specified.
 	StackSetFailureToleranceCount *int32
+
 	// The maximum percentage of accounts in which to perform this operation at one
 	// time. When calculating the number of accounts based on the specified percentage,
 	// AWS Service Catalog rounds down to the next whole number. This is true except in
@@ -610,6 +759,7 @@ type ProvisioningPreferences struct {
 	// Conditional: You must specify either StackSetMaxConcurrentCount or
 	// StackSetMaxConcurrentPercentage, but not both.
 	StackSetMaxConcurrencyPercentage *int32
+
 	// The maximum number of accounts in which to perform this operation at one time.
 	// This is dependent on the value of StackSetFailureToleranceCount.
 	// StackSetMaxConcurrentCount is at most one more than the
@@ -624,6 +774,7 @@ type ProvisioningPreferences struct {
 
 // Information about a request operation.
 type RecordDetail struct {
+
 	// The status of the provisioned product.
 	//
 	//     * CREATED - The request was created
@@ -642,12 +793,16 @@ type RecordDetail struct {
 	//     * FAILED - The requested operation has unsuccessfully completed.
 	// Investigate using the error messages returned.
 	Status RecordStatus
+
 	// One or more tags.
 	RecordTags []*RecordTag
+
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
 	// The product identifier.
 	ProductId *string
+
 	// The record type.
 	//
 	//     * PROVISION_PRODUCT
@@ -657,29 +812,39 @@ type RecordDetail struct {
 	//
 	// * TERMINATE_PROVISIONED_PRODUCT
 	RecordType *string
+
 	// The type of provisioned product. The supported values are CFN_STACK and
 	// CFN_STACKSET.
 	ProvisionedProductType *string
+
 	// The path identifier.
 	PathId *string
+
 	// The identifier of the record.
 	RecordId *string
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The time when the record was last updated.
 	UpdatedTime *time.Time
+
 	// The user-friendly name of the provisioned product.
 	ProvisionedProductName *string
+
 	// The identifier of the provisioned product.
 	ProvisionedProductId *string
+
 	// The errors that occurred.
 	RecordErrors []*RecordError
 }
 
 // The error code and description resulting from an operation.
 type RecordError struct {
+
 	// The numeric value of the error.
 	Code *string
+
 	// The description of the error.
 	Description *string
 }
@@ -688,47 +853,62 @@ type RecordError struct {
 // output for a CloudFormation-backed product that creates an S3 bucket would
 // include the S3 bucket URL.
 type RecordOutput struct {
+
 	// The description of the output.
 	Description *string
+
 	// The output key.
 	OutputKey *string
+
 	// The output value.
 	OutputValue *string
 }
 
 // Information about a tag, which is a key-value pair.
 type RecordTag struct {
+
 	// The key for this tag.
 	Key *string
+
 	// The value for this tag.
 	Value *string
 }
 
 // Information about a resource change that will occur when a plan is executed.
 type ResourceChange struct {
+
 	// The ID of the resource, if it was already created.
 	PhysicalResourceId *string
+
 	// The type of resource.
 	ResourceType *string
+
 	// If the change type is Modify, indicates whether the existing resource is deleted
 	// and replaced with a new one.
 	Replacement Replacement
+
 	// The change action.
 	Action ChangeAction
+
 	// The change scope.
 	Scope []ResourceAttribute
+
 	// The ID of the resource, as defined in the CloudFormation template.
 	LogicalResourceId *string
+
 	// Information about the resource changes.
 	Details []*ResourceChangeDetail
 }
 
 // Information about a change to a resource attribute.
 type ResourceChangeDetail struct {
+
 	// Information about the resource attribute to be modified.
 	Target *ResourceTargetDefinition
+
 	// The ID of the entity that caused the change.
 	CausingEntity *string
+
 	// For static evaluations, the value of the resource attribute will change and the
 	// new value is known. For dynamic evaluations, the value might change, and any new
 	// value will be determined when the plan is updated.
@@ -737,26 +917,34 @@ type ResourceChangeDetail struct {
 
 // Information about a resource.
 type ResourceDetail struct {
+
 	// The creation time of the resource.
 	CreatedTime *time.Time
+
 	// The identifier of the resource.
 	Id *string
+
 	// The ARN of the resource.
 	ARN *string
+
 	// The description of the resource.
 	Description *string
+
 	// The name of the resource.
 	Name *string
 }
 
 // Information about a change to a resource attribute.
 type ResourceTargetDefinition struct {
+
 	// If the attribute is Properties, indicates whether a change to this property
 	// causes the resource to be re-created.
 	RequiresRecreation RequiresRecreation
+
 	// If the attribute is Properties, the value is the name of the property.
 	// Otherwise, the value is null.
 	Name *string
+
 	// The attribute to be changed.
 	Attribute ResourceAttribute
 }
@@ -764,48 +952,68 @@ type ResourceTargetDefinition struct {
 // A self-service action association consisting of the Action ID, the Product ID,
 // and the Provisioning Artifact ID.
 type ServiceActionAssociation struct {
+
 	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	//
+	// This member is required.
 	ServiceActionId *string
+
 	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	//
+	// This member is required.
 	ProvisioningArtifactId *string
+
 	// The product identifier. For example, prod-abcdzk7xy33qa.
+	//
+	// This member is required.
 	ProductId *string
 }
 
 // An object containing detailed information about the self-service action.
 type ServiceActionDetail struct {
+
 	// A map that defines the self-service action.
 	Definition map[string]*string
+
 	// Summary information about the self-service action.
 	ServiceActionSummary *ServiceActionSummary
 }
 
 // Detailed information about the self-service action.
 type ServiceActionSummary struct {
+
 	// The self-service action definition type. For example, SSM_AUTOMATION.
 	DefinitionType ServiceActionDefinitionType
+
 	// The self-service action name.
 	Name *string
+
 	// The self-service action description.
 	Description *string
+
 	// The self-service action identifier.
 	Id *string
 }
 
 // Information about the portfolio share operation.
 type ShareDetails struct {
+
 	// List of accounts for whom the operation succeeded.
 	SuccessfulShares []*string
+
 	// List of errors.
 	ShareErrors []*ShareError
 }
 
 // Errors that occurred during the portfolio share operation.
 type ShareError struct {
+
 	// Error type that happened when processing the operation.
 	Error *string
+
 	// Information about the error.
 	Message *string
+
 	// List of accounts impacted by the error.
 	Accounts []*string
 }
@@ -818,6 +1026,7 @@ type ShareError struct {
 // contains the ID of its associated stack set, as well as the ID of the actual
 // stack and the stack status.
 type StackInstance struct {
+
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
 	//
@@ -836,8 +1045,10 @@ type StackInstance struct {
 	//     * CURRENT: The stack is
 	// currently up to date with the stack set.
 	StackInstanceStatus StackInstanceStatus
+
 	// The name of the AWS account that the stack instance is associated with.
 	Account *string
+
 	// The name of the AWS region that the stack instance is associated with.
 	Region *string
 }
@@ -845,38 +1056,53 @@ type StackInstance struct {
 // Information about a tag. A tag is a key-value pair. Tags are propagated to the
 // resources created when provisioning a product.
 type Tag struct {
+
 	// The value for this key.
+	//
+	// This member is required.
 	Value *string
+
 	// The tag key.
+	//
+	// This member is required.
 	Key *string
 }
 
 // Information about a TagOption.
 type TagOptionDetail struct {
+
 	// The TagOption identifier.
 	Id *string
+
 	// The TagOption key.
 	Key *string
+
 	// The TagOption value.
 	Value *string
+
 	// The TagOption active state.
 	Active *bool
 }
 
 // Summary information about a TagOption.
 type TagOptionSummary struct {
+
 	// The TagOption value.
 	Values []*string
+
 	// The TagOption key.
 	Key *string
 }
 
 // The parameter key-value pair used to update a provisioned product.
 type UpdateProvisioningParameter struct {
+
 	// The parameter key.
 	Key *string
+
 	// If set to true, Value is ignored and the previous parameter value is kept.
 	UsePreviousValue *bool
+
 	// The parameter value.
 	Value *string
 }
@@ -884,6 +1110,7 @@ type UpdateProvisioningParameter struct {
 // The user-defined preferences that will be applied when updating a provisioned
 // product. Not all preferences are applicable to all provisioned product types.
 type UpdateProvisioningPreferences struct {
+
 	// One or more AWS Regions where the provisioned product will be available.
 	// Applicable only to a CFN_STACKSET provisioned product type. The specified
 	// regions should be within the list of regions from the STACKSET constraint. To
@@ -891,6 +1118,7 @@ type UpdateProvisioningPreferences struct {
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all regions from the STACKSET constraint.
 	StackSetRegions []*string
+
 	// The maximum number of accounts in which to perform this operation at one time.
 	// This is dependent on the value of StackSetFailureToleranceCount.
 	// StackSetMaxConcurrentCount is at most one more than the
@@ -901,6 +1129,7 @@ type UpdateProvisioningPreferences struct {
 	// Conditional: You must specify either StackSetMaxConcurrentCount or
 	// StackSetMaxConcurrentPercentage, but not both.
 	StackSetMaxConcurrencyCount *int32
+
 	// One or more AWS accounts that will have access to the provisioned product.
 	// Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts
 	// specified should be within the list of accounts in the STACKSET constraint. To
@@ -908,6 +1137,7 @@ type UpdateProvisioningPreferences struct {
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all accounts from the STACKSET constraint.
 	StackSetAccounts []*string
+
 	// Determines what action AWS Service Catalog performs to a stack set or a stack
 	// instance represented by the provisioned product. The default value is UPDATE if
 	// nothing is specified. Applicable only to a CFN_STACKSET provisioned product
@@ -918,6 +1148,7 @@ type UpdateProvisioningPreferences struct {
 	// provisioned product and also its stack instances. DELETE Deletes a stack
 	// instance in the stack set represented by the provisioned product.
 	StackSetOperationType StackSetOperationType
+
 	// The number of accounts, per region, for which this operation can fail before AWS
 	// Service Catalog stops the operation in that region. If the operation is stopped
 	// in a region, AWS Service Catalog doesn't attempt the operation in any subsequent
@@ -926,6 +1157,7 @@ type UpdateProvisioningPreferences struct {
 	// StackSetFailureTolerancePercentage, but not both. The default value is 0 if no
 	// value is specified.
 	StackSetFailureToleranceCount *int32
+
 	// The percentage of accounts, per region, for which this stack operation can fail
 	// before AWS Service Catalog stops the operation in that region. If the operation
 	// is stopped in a region, AWS Service Catalog doesn't attempt the operation in any
@@ -935,6 +1167,7 @@ type UpdateProvisioningPreferences struct {
 	// must specify either StackSetFailureToleranceCount or
 	// StackSetFailureTolerancePercentage, but not both.
 	StackSetFailureTolerancePercentage *int32
+
 	// The maximum percentage of accounts in which to perform this operation at one
 	// time. When calculating the number of accounts based on the specified percentage,
 	// AWS Service Catalog rounds down to the next whole number. This is true except in
@@ -950,8 +1183,10 @@ type UpdateProvisioningPreferences struct {
 
 // Additional information provided by the administrator.
 type UsageInstruction struct {
+
 	// The usage instruction value for this type.
 	Value *string
+
 	// The usage instruction type for the value.
 	Type *string
 }

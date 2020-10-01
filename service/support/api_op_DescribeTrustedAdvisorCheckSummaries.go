@@ -68,14 +68,20 @@ func (c *Client) DescribeTrustedAdvisorCheckSummaries(ctx context.Context, param
 }
 
 type DescribeTrustedAdvisorCheckSummariesInput struct {
+
 	// The IDs of the Trusted Advisor checks.
+	//
+	// This member is required.
 	CheckIds []*string
 }
 
 // The summaries of the Trusted Advisor checks returned by the
 // DescribeTrustedAdvisorCheckSummaries () operation.
 type DescribeTrustedAdvisorCheckSummariesOutput struct {
+
 	// The summary information for the requested Trusted Advisor checks.
+	//
+	// This member is required.
 	Summaries []*types.TrustedAdvisorCheckSummary
 
 	// Metadata pertaining to the operation's result.

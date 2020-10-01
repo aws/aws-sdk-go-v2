@@ -55,6 +55,7 @@ func (c *Client) DisassociatePrincipalFromPortfolio(ctx context.Context, params 
 }
 
 type DisassociatePrincipalFromPortfolioInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -64,9 +65,15 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The ARN of the principal (IAM user, role, or group).
+	//
+	// This member is required.
 	PrincipalARN *string
 }
 

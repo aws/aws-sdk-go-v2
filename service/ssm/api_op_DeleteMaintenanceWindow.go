@@ -55,11 +55,15 @@ func (c *Client) DeleteMaintenanceWindow(ctx context.Context, params *DeleteMain
 }
 
 type DeleteMaintenanceWindowInput struct {
+
 	// The ID of the maintenance window to delete.
+	//
+	// This member is required.
 	WindowId *string
 }
 
 type DeleteMaintenanceWindowOutput struct {
+
 	// The ID of the deleted maintenance window.
 	WindowId *string
 

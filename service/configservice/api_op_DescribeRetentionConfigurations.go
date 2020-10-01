@@ -58,9 +58,11 @@ func (c *Client) DescribeRetentionConfigurations(ctx context.Context, params *De
 }
 
 type DescribeRetentionConfigurationsInput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// A list of names of retention configurations for which you want details. If you
 	// do not specify a name, AWS Config returns details for all the retention
 	// configurations for that account. Currently, AWS Config supports only one
@@ -69,9 +71,11 @@ type DescribeRetentionConfigurationsInput struct {
 }
 
 type DescribeRetentionConfigurationsOutput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// Returns a retention configuration object.
 	RetentionConfigurations []*types.RetentionConfiguration
 

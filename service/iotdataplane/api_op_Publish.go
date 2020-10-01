@@ -58,10 +58,15 @@ func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...fu
 
 // The input for the Publish operation.
 type PublishInput struct {
+
 	// The name of the MQTT topic.
+	//
+	// This member is required.
 	Topic *string
+
 	// The Quality of Service (QoS) level.
 	Qos *int32
+
 	// The state information, in JSON format.
 	Payload []byte
 }

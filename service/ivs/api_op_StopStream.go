@@ -59,7 +59,10 @@ func (c *Client) StopStream(ctx context.Context, params *StopStreamInput, optFns
 }
 
 type StopStreamInput struct {
+
 	// ARN of the channel for which the stream is to be stopped.
+	//
+	// This member is required.
 	ChannelArn *string
 }
 

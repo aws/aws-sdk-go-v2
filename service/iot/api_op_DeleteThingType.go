@@ -60,7 +60,10 @@ func (c *Client) DeleteThingType(ctx context.Context, params *DeleteThingTypeInp
 
 // The input for the DeleteThingType operation.
 type DeleteThingTypeInput struct {
+
 	// The name of the thing type.
+	//
+	// This member is required.
 	ThingTypeName *string
 }
 

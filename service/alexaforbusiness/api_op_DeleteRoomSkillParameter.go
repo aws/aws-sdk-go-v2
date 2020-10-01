@@ -55,10 +55,17 @@ func (c *Client) DeleteRoomSkillParameter(ctx context.Context, params *DeleteRoo
 }
 
 type DeleteRoomSkillParameterInput struct {
+
 	// The ID of the skill from which to remove the room skill parameter details.
+	//
+	// This member is required.
 	SkillId *string
+
 	// The room skill parameter key for which to remove details.
+	//
+	// This member is required.
 	ParameterKey *string
+
 	// The ARN of the room from which to remove the room skill parameter details.
 	RoomArn *string
 }

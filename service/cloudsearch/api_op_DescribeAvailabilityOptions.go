@@ -64,16 +64,21 @@ func (c *Client) DescribeAvailabilityOptions(ctx context.Context, params *Descri
 // Specifies the name of the domain you want to describe. To show the active
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeAvailabilityOptionsInput struct {
+
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
+
 	// The name of the domain you want to describe.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DescribeAvailabilityOptions request. Indicates whether or not
 // the Multi-AZ option is enabled for the domain specified in the request.
 type DescribeAvailabilityOptionsOutput struct {
+
 	// The availability options configured for the domain. Indicates whether Multi-AZ
 	// is enabled for the domain.
 	AvailabilityOptions *types.AvailabilityOptionsStatus

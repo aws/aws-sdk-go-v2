@@ -64,12 +64,15 @@ func (c *Client) DescribeDirectories(ctx context.Context, params *DescribeDirect
 
 // Contains the inputs for the DescribeDirectories () operation.
 type DescribeDirectoriesInput struct {
+
 	// The DescribeDirectoriesResult.NextToken value from a previous call to
 	// DescribeDirectories (). Pass null if this is the first call.
 	NextToken *string
+
 	// The maximum number of items to return. If this value is zero, the maximum number
 	// of items is specified by the limitations of the operation.
 	Limit *int32
+
 	// A list of identifiers of the directories for which to obtain the information. If
 	// this member is null, all directories that belong to the current account are
 	// returned. An empty list results in an InvalidParameterException being thrown.
@@ -78,10 +81,12 @@ type DescribeDirectoriesInput struct {
 
 // Contains the results of the DescribeDirectories () operation.
 type DescribeDirectoriesOutput struct {
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeDirectories () to retrieve the next
 	// set of items.
 	NextToken *string
+
 	// The list of DirectoryDescription () objects that were retrieved. It is possible
 	// that this list contains less than the number of items specified in the Limit
 	// member of the request. This occurs if there are less than the requested number

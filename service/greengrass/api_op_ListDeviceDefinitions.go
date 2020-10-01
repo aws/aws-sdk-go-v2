@@ -55,17 +55,21 @@ func (c *Client) ListDeviceDefinitions(ctx context.Context, params *ListDeviceDe
 }
 
 type ListDeviceDefinitionsInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 }
 
 type ListDeviceDefinitionsOutput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// Information about a definition.
 	Definitions []*types.DefinitionInformation
 

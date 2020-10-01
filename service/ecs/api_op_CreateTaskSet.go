@@ -60,31 +60,43 @@ func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, 
 }
 
 type CreateTaskSetInput struct {
+
 	// The details of the service discovery registries to assign to this task set. For
 	// more information, see Service Discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	ServiceRegistries []*types.ServiceRegistry
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// service to create the task set in.
+	//
+	// This member is required.
 	Cluster *string
+
 	// The platform version that the tasks in the task set should use. A platform
 	// version is specified only for tasks using the Fargate launch type. If one isn't
 	// specified, the LATEST platform version is used by default.
 	PlatformVersion *string
+
 	// A load balancer object representing the load balancer to use with the task set.
 	// The supported load balancer types are either an Application Load Balancer or a
 	// Network Load Balancer.
 	LoadBalancers []*types.LoadBalancer
+
 	// An optional non-unique tag that identifies this task set in external systems. If
 	// the task set is associated with a service discovery registry, the tasks in this
 	// task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to
 	// the provided value.
 	ExternalId *string
+
 	// An object representing the network configuration for a task or service.
 	NetworkConfiguration *types.NetworkConfiguration
+
 	// The short name or full Amazon Resource Name (ARN) of the service to create the
 	// task set in.
+	//
+	// This member is required.
 	Service *string
+
 	// The capacity provider strategy to use for the task set. A capacity provider
 	// strategy consists of one or more capacity providers along with the base and
 	// weight to assign to them. A capacity provider must be associated with the
@@ -103,17 +115,23 @@ type CreateTaskSetInput struct {
 	// used to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+
 	// The task definition for the tasks in the task set to use.
+	//
+	// This member is required.
 	TaskDefinition *string
+
 	// The launch type that new tasks in the task set will use. For more information,
 	// see Amazon ECS Launch Types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
 	LaunchType types.LaunchType
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 32 ASCII characters are allowed.
 	ClientToken *string
+
 	// The metadata that you apply to the task set to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. When a service is deleted, the tags are deleted as well. The following
@@ -144,12 +162,14 @@ type CreateTaskSetInput struct {
 	// AWS use. You cannot edit or delete tag keys or values with this prefix. Tags
 	// with this prefix do not count against your tags per resource limit.
 	Tags []*types.Tag
+
 	// A floating-point percentage of the desired number of tasks to place and keep
 	// running in the task set.
 	Scale *types.Scale
 }
 
 type CreateTaskSetOutput struct {
+
 	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
 	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
 	// number of tasks, how many tasks are running, and whether the task set serves

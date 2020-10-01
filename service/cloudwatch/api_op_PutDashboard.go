@@ -69,20 +69,27 @@ func (c *Client) PutDashboard(ctx context.Context, params *PutDashboardInput, op
 }
 
 type PutDashboardInput struct {
+
 	// The detailed information about the dashboard in JSON format, including the
 	// widgets to include and their location on the dashboard. This parameter is
 	// required. For more information about the syntax, see Dashboard Body Structure
 	// and Syntax
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html).
+	//
+	// This member is required.
 	DashboardBody *string
+
 	// The name of the dashboard. If a dashboard with this name already exists, this
 	// call modifies that dashboard, replacing its current contents. Otherwise, a new
 	// dashboard is created. The maximum length is 255, and valid characters are A-Z,
 	// a-z, 0-9, "-", and "_". This parameter is required.
+	//
+	// This member is required.
 	DashboardName *string
 }
 
 type PutDashboardOutput struct {
+
 	// If the input for PutDashboard was correct and the dashboard was successfully
 	// created or modified, this result is empty. If this result includes only warning
 	// messages, then the input was valid enough for the dashboard to be created or

@@ -56,18 +56,24 @@ func (c *Client) CreateTransitGatewayRouteTable(ctx context.Context, params *Cre
 }
 
 type CreateTransitGatewayRouteTableInput struct {
+
 	// The ID of the transit gateway.
+	//
+	// This member is required.
 	TransitGatewayId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to apply to the transit gateway route table.
 	TagSpecifications []*types.TagSpecification
 }
 
 type CreateTransitGatewayRouteTableOutput struct {
+
 	// Information about the transit gateway route table.
 	TransitGatewayRouteTable *types.TransitGatewayRouteTable
 

@@ -56,11 +56,15 @@ func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns .
 }
 
 type DeleteJobInput struct {
+
 	// The name of the job definition to delete.
+	//
+	// This member is required.
 	JobName *string
 }
 
 type DeleteJobOutput struct {
+
 	// The name of the job definition that was deleted.
 	JobName *string
 

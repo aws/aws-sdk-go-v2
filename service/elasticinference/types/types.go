@@ -4,22 +4,28 @@ package types
 
 // The details of an Elastic Inference Accelerator type.
 type AcceleratorType struct {
+
 	// The throughput information of the Elastic Inference Accelerator type.
 	ThroughputInfo []*KeyValuePair
+
 	// The name of the Elastic Inference Accelerator type.
 	AcceleratorTypeName *string
+
 	// The memory information of the Elastic Inference Accelerator type.
 	MemoryInfo *MemoryInfo
 }
 
 // The offering for an Elastic Inference Accelerator type.
 type AcceleratorTypeOffering struct {
+
 	// The name of the Elastic Inference Accelerator type.
 	AcceleratorType *string
+
 	// The location for the offering. It will return either the region, availability
 	// zone or availability zone id for the offering depending on the locationType
 	// value.
 	Location *string
+
 	// The location type for the offering. It can assume the following values: region:
 	// defines that the offering is at the regional level. availability-zone: defines
 	// that the offering is at the availability zone level. availability-zone-id:
@@ -30,28 +36,36 @@ type AcceleratorTypeOffering struct {
 
 // The details of an Elastic Inference Accelerator.
 type ElasticInferenceAccelerator struct {
+
 	// The type of the Elastic Inference Accelerator.
 	AcceleratorType *string
+
 	// The availability zone where the Elastic Inference Accelerator is present.
 	AvailabilityZone *string
+
 	// The ID of the Elastic Inference Accelerator.
 	AcceleratorId *string
+
 	// The ARN of the resource that the Elastic Inference Accelerator is attached to.
 	AttachedResource *string
+
 	// The health of the Elastic Inference Accelerator.
 	AcceleratorHealth *ElasticInferenceAcceleratorHealth
 }
 
 // The health details of an Elastic Inference Accelerator.
 type ElasticInferenceAcceleratorHealth struct {
+
 	// The health status of the Elastic Inference Accelerator.
 	Status *string
 }
 
 // A filter expression for the Elastic Inference Accelerator list.
 type Filter struct {
+
 	// The values for the filter of the Elastic Inference Accelerator list.
 	Values []*string
+
 	// The filter name for the Elastic Inference Accelerator list. It can assume the
 	// following values: accelerator-type: the type of Elastic Inference Accelerator to
 	// filter for. instance-id: an EC2 instance id to filter for.
@@ -60,16 +74,19 @@ type Filter struct {
 
 // A throughput entry for an Elastic Inference Accelerator type.
 type KeyValuePair struct {
+
 	// The throughput value of the Elastic Inference Accelerator type. It can assume
 	// the following values: TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS.
 	// TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS.
 	Key *string
+
 	// The throughput value of the Elastic Inference Accelerator type.
 	Value *int32
 }
 
 // The memory information of an Elastic Inference Accelerator type.
 type MemoryInfo struct {
+
 	// The size in mebibytes of the Elastic Inference Accelerator type.
 	SizeInMiB *int32
 }

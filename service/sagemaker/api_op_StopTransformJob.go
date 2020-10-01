@@ -58,7 +58,10 @@ func (c *Client) StopTransformJob(ctx context.Context, params *StopTransformJobI
 }
 
 type StopTransformJobInput struct {
+
 	// The name of the transform job to stop.
+	//
+	// This member is required.
 	TransformJobName *string
 }
 

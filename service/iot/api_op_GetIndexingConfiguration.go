@@ -58,8 +58,10 @@ type GetIndexingConfigurationInput struct {
 }
 
 type GetIndexingConfigurationOutput struct {
+
 	// Thing indexing configuration.
 	ThingIndexingConfiguration *types.ThingIndexingConfiguration
+
 	// The index configuration.
 	ThingGroupIndexingConfiguration *types.ThingGroupIndexingConfiguration
 

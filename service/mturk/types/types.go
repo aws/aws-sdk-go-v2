@@ -10,10 +10,12 @@ import (
 // Worker. The assignment tracks the Worker's efforts to complete the HIT, and
 // contains the results for later retrieval.
 type Assignment struct {
+
 	// The date and time of the deadline for the assignment. This value is derived from
 	// the deadline specification for the HIT and the date and time the Worker accepted
 	// the HIT.
 	Deadline *time.Time
+
 	// If results have been submitted, AutoApprovalTime is the date and time the
 	// results of the assignment results are considered Approved automatically if they
 	// have not already been explicitly approved or rejected by the Requester. This
@@ -21,34 +23,44 @@ type Assignment struct {
 	// HIT. This value is omitted from the assignment if the Worker has not yet
 	// submitted results.
 	AutoApprovalTime *time.Time
+
 	// The status of the assignment.
 	AssignmentStatus AssignmentStatus
+
 	// A unique identifier for the assignment.
 	AssignmentId *string
+
 	// The ID of the HIT.
 	HITId *string
+
 	// The date and time the Worker accepted the assignment.
 	AcceptTime *time.Time
+
 	// If the Worker has submitted results and the Requester has approved the results,
 	// ApprovalTime is the date and time the Requester approved the results. This value
 	// is omitted from the assignment if the Requester has not yet approved the
 	// results.
 	ApprovalTime *time.Time
+
 	// The feedback string included with the call to the ApproveAssignment operation or
 	// the RejectAssignment operation, if the Requester approved or rejected the
 	// assignment and specified feedback.
 	RequesterFeedback *string
+
 	// If the Worker has submitted results, SubmitTime is the date and time the
 	// assignment was submitted. This value is omitted from the assignment if the
 	// Worker has not yet submitted results.
 	SubmitTime *time.Time
+
 	// The ID of the Worker who accepted the HIT.
 	WorkerId *string
+
 	// The Worker's answers submitted for the HIT contained in a QuestionFormAnswers
 	// document, if the Worker provides an answer. If the Worker does not provide any
 	// answers, Answer may contain a QuestionFormAnswers document, or Answer may be
 	// empty.
 	Answer *string
+
 	// If the Worker has submitted results and the Requester has rejected the results,
 	// RejectionTime is the date and time the Requester rejected the results.
 	RejectionTime *time.Time
@@ -56,14 +68,19 @@ type Assignment struct {
 
 // An object representing a Bonus payment paid to a Worker.
 type BonusPayment struct {
+
 	// The Reason text given when the bonus was granted, if any.
 	Reason *string
+
 	// The date and time of when the bonus was granted.
 	GrantTime *time.Time
+
 	// A string representing a currency amount.
 	BonusAmount *string
+
 	// The ID of the Worker to whom the bonus was paid.
 	WorkerId *string
+
 	// The ID of the assignment associated with this bonus payment.
 	AssignmentId *string
 }
@@ -71,62 +88,83 @@ type BonusPayment struct {
 // The HIT data structure represents a single HIT, including all the information
 // necessary for a Worker to accept and complete the HIT.
 type HIT struct {
+
 	// The number of times the HIT can be accepted and completed before the HIT becomes
 	// unavailable.
 	MaxAssignments *int32
+
 	// The status of the HIT and its assignments. Valid Values are Assignable |
 	// Unassignable | Reviewable | Reviewing | Disposed.
 	HITStatus HITStatus
+
 	// The ID of the HIT type of this HIT
 	HITTypeId *string
+
 	// The date and time the HIT was created.
 	CreationTime *time.Time
+
 	// The length of time, in seconds, that a Worker has to complete the HIT after
 	// accepting it.
 	AssignmentDurationInSeconds *int64
+
 	// The date and time the HIT expires.
 	Expiration *time.Time
+
 	// A general description of the HIT.
 	Description *string
+
 	// The ID of the HIT Group of this HIT.
 	HITGroupId *string
+
 	// One or more words or phrases that describe the HIT, separated by commas. Search
 	// terms similar to the keywords of a HIT are more likely to have the HIT in the
 	// search results.
 	Keywords *string
+
 	// An arbitrary data field the Requester who created the HIT can use. This field is
 	// visible only to the creator of the HIT.
 	RequesterAnnotation *string
+
 	// The number of assignments for this HIT that have been approved or rejected.
 	NumberOfAssignmentsCompleted *int32
+
 	// The number of assignments for this HIT that are available for Workers to accept.
 	NumberOfAssignmentsAvailable *int32
+
 	// The number of assignments for this HIT that are being previewed or have been
 	// accepted by Workers, but have not yet been submitted, returned, or abandoned.
 	NumberOfAssignmentsPending *int32
+
 	// The ID of the HIT Layout of this HIT.
 	HITLayoutId *string
+
 	// Conditions that a Worker's Qualifications must meet in order to accept the HIT.
 	// A HIT can have between zero and ten Qualification requirements. All requirements
 	// must be met in order for a Worker to accept the HIT. Additionally, other actions
 	// can be restricted using the ActionsGuarded field on each
 	// QualificationRequirement structure.
 	QualificationRequirements []*QualificationRequirement
+
 	// The amount of time, in seconds, after the Worker submits an assignment for the
 	// HIT that the results are automatically approved by Amazon Mechanical Turk. This
 	// is the amount of time the Requester has to reject an assignment submitted by a
 	// Worker before the assignment is auto-approved and the Worker is paid.
 	AutoApprovalDelayInSeconds *int64
+
 	// A string representing a currency amount.
 	Reward *string
+
 	// The data the Worker completing the HIT uses produce the results. This is either
 	// either a QuestionForm, HTMLQuestion or an ExternalQuestion data structure.
 	Question *string
+
 	// Indicates the review status of the HIT. Valid Values are NotReviewed |
 	// MarkedForReview | ReviewedAppropriate | ReviewedInappropriate.
 	HITReviewStatus HITReviewStatus
+
 	// A unique identifier for the HIT.
 	HITId *string
+
 	// The title of the HIT.
 	Title *string
 }
@@ -135,17 +173,27 @@ type HIT struct {
 // HITLayout. A HITLayout is a reusable Amazon Mechanical Turk project template
 // used to provide Human Intelligence Task (HIT) question data for CreateHIT.
 type HITLayoutParameter struct {
+
 	// The name of the parameter in the HITLayout.
+	//
+	// This member is required.
 	Name *string
+
 	// The value substituted for the parameter referenced in the HITLayout.
+	//
+	// This member is required.
 	Value *string
 }
 
 // The Locale data structure represents a geographical region or location.
 type Locale struct {
+
 	// The country of the locale. Must be a valid ISO 3166 country code. For example,
 	// the code US refers to the United States of America.
+	//
+	// This member is required.
 	Country *string
+
 	// The state or subdivision of the locale. A valid ISO 3166-2 subdivision code. For
 	// example, the code WA refers to the state of Washington.
 	Subdivision *string
@@ -154,15 +202,22 @@ type Locale struct {
 // The NotificationSpecification data structure describes a HIT event notification
 // for a HIT type.
 type NotificationSpecification struct {
+
 	// The list of events that should cause notifications to be sent. Valid Values:
 	// AssignmentAccepted | AssignmentAbandoned | AssignmentReturned |
 	// AssignmentSubmitted | AssignmentRejected | AssignmentApproved | HITCreated |
 	// HITExtended | HITDisposed | HITReviewable | HITExpired | Ping. The Ping event is
 	// only valid for the SendTestEventNotification operation.
+	//
+	// This member is required.
 	EventTypes []EventType
+
 	// The method Amazon Mechanical Turk uses to send the notification. Valid Values:
 	// Email | SQS | SNS.
+	//
+	// This member is required.
 	Transport NotificationTransport
+
 	// The target for notification messages. The Destination’s format is determined by
 	// the specified Transport:
 	//
@@ -173,18 +228,26 @@ type NotificationSpecification struct {
 	// URL.
 	//
 	//     * When Transport is SNS, the Destination is the ARN of your topic.
+	//
+	// This member is required.
 	Destination *string
+
 	// The version of the Notification API to use. Valid value is 2006-05-05.
+	//
+	// This member is required.
 	Version *string
 }
 
 // When MTurk encounters an issue with notifying the Workers you specified, it
 // returns back this object with failure details.
 type NotifyWorkersFailureStatus struct {
+
 	// A message detailing the reason the Worker could not be notified.
 	NotifyWorkersFailureMessage *string
+
 	// The ID of the Worker.
 	WorkerId *string
+
 	// Encoded value for the failure type.
 	NotifyWorkersFailureCode NotifyWorkersFailureCode
 }
@@ -192,9 +255,11 @@ type NotifyWorkersFailureStatus struct {
 // This data structure is the data type for the AnswerKey parameter of the
 // ScoreMyKnownAnswers/2011-09-01 Review Policy.
 type ParameterMapEntry struct {
+
 	// The list of answers to the question specified in the MapEntry Key element. The
 	// Worker must match all values in order for the answer to be scored correctly.
 	Values []*string
+
 	// The QuestionID from the HIT that is used to identify which question requires
 	// Mechanical Turk to score as part of the ScoreMyKnownAnswers/2011-09-01 Review
 	// Policy.
@@ -203,10 +268,13 @@ type ParameterMapEntry struct {
 
 // Name of the parameter from the Review policy.
 type PolicyParameter struct {
+
 	// Name of the parameter from the list of Review Polices.
 	Key *string
+
 	// The list of values of the Parameter
 	Values []*string
+
 	// List of ParameterMapEntry objects.
 	MapEntries []*ParameterMapEntry
 }
@@ -214,20 +282,26 @@ type PolicyParameter struct {
 // The Qualification data structure represents a Qualification assigned to a user,
 // including the Qualification type and the value (score).
 type Qualification struct {
+
 	// The value (score) of the Qualification, if the Qualification has an integer
 	// value.
 	IntegerValue *int32
+
 	// The Locale data structure represents a geographical region or location.
 	LocaleValue *Locale
+
 	// The ID of the Worker who possesses the Qualification.
 	WorkerId *string
+
 	// The ID of the Qualification type for the Qualification.
 	QualificationTypeId *string
+
 	// The date and time the Qualification was granted to the Worker. If the Worker's
 	// Qualification was revoked, and then re-granted based on a new Qualification
 	// request, GrantTime is the date and time of the last call to the
 	// AcceptQualificationRequest operation.
 	GrantTime *time.Time
+
 	// The status of the Qualification. Valid values are Granted | Revoked.
 	Status QualificationStatus
 }
@@ -235,24 +309,30 @@ type Qualification struct {
 // The QualificationRequest data structure represents a request a Worker has made
 // for a Qualification.
 type QualificationRequest struct {
+
 	// The ID of the Qualification type the Worker is requesting, as returned by the
 	// CreateQualificationType operation.
 	QualificationTypeId *string
+
 	// The ID of the Worker requesting the Qualification.
 	WorkerId *string
+
 	// The ID of the Qualification request, a unique identifier generated when the
 	// request was submitted.  </p>
 	QualificationRequestId *string
+
 	// The date and time the Qualification request had a status of Submitted. This is
 	// either the time the Worker submitted answers for a Qualification test, or the
 	// time the Worker requested the Qualification if the Qualification type does not
 	// have a test.
 	SubmitTime *time.Time
+
 	// The Worker's answers for the Qualification type's test contained in a
 	// QuestionFormAnswers document, if the type has a test and the Worker has
 	// submitted answers. If the Worker does not provide any answers, Answer may be
 	// empty.
 	Answer *string
+
 	// The contents of the Qualification test that was presented to the Worker, if the
 	// type has a test and the Worker has submitted answers. This value is identical to
 	// the QuestionForm associated with the Qualification type at the time the Worker
@@ -265,6 +345,7 @@ type QualificationRequest struct {
 // optionally state that a Worker must have the Qualification in order to preview
 // the HIT, or see the HIT in search results.
 type QualificationRequirement struct {
+
 	// Setting this attribute prevents Workers whose Qualifications do not meet this
 	// QualificationRequirement from taking the specified action. Valid arguments
 	// include "Accept" (Worker cannot accept the HIT, but can preview the HIT and see
@@ -283,6 +364,7 @@ type QualificationRequirement struct {
 	// ActionsGuarded should not be used in combination with the RequiredToPreview
 	// field.
 	ActionsGuarded HITAccessActions
+
 	// DEPRECATED: Use the ActionsGuarded field instead. If RequiredToPreview is true,
 	// the question data for the HIT will not be shown when a Worker whose
 	// Qualifications do not meet this requirement tries to preview the HIT. That is, a
@@ -294,6 +376,7 @@ type QualificationRequirement struct {
 	// accept and complete the HIT. The default is false. This should not be used in
 	// combination with the ActionsGuarded field.
 	RequiredToPreview *bool
+
 	// The locale value to compare against the Qualification's value. The local value
 	// must be a valid ISO 3166 country code or supports ISO 3166-2 subdivisions.
 	// LocaleValue can only be used with a Worker_Locale QualificationType ID.
@@ -303,6 +386,7 @@ type QualificationRequirement struct {
 	// In or the NotIn comparator, you can use up to 30 LocaleValue elements in a
 	// QualificationRequirement data structure.
 	LocaleValues []*Locale
+
 	// The integer value to compare against the Qualification's value. IntegerValue
 	// must not be present if Comparator is Exists or DoesNotExist. IntegerValue can
 	// only be used if the Qualification type has an integer value; it cannot be used
@@ -310,8 +394,12 @@ type QualificationRequirement struct {
 	// using the In or the NotIn comparator, you can use up to 15 IntegerValue elements
 	// in a QualificationRequirement data structure.
 	IntegerValues []*int32
+
 	// The ID of the Qualification type for the requirement.
+	//
+	// This member is required.
 	QualificationTypeId *string
+
 	// The kind of comparison to make against a Qualification's value. You can compare
 	// a Qualification's value to an IntegerValue to see if it is LessThan,
 	// LessThanOrEqualTo, GreaterThan, GreaterThanOrEqualTo, EqualTo, or NotEqualTo the
@@ -320,6 +408,8 @@ type QualificationRequirement struct {
 	// set of IntegerValue or LocaleValue values. Lastly, a Qualification requirement
 	// can also test if a Qualification Exists or DoesNotExist in the user's profile,
 	// regardless of its value.
+	//
+	// This member is required.
 	Comparator Comparator
 }
 
@@ -329,11 +419,13 @@ type QualificationRequirement struct {
 // Worker can obtain a Qualification of that type, such as through a Qualification
 // test.
 type QualificationType struct {
+
 	// The questions for a Qualification test associated with this Qualification type
 	// that a user can take to obtain a Qualification of this type. This parameter must
 	// be specified if AnswerKey is present. A Qualification type cannot have both a
 	// specified Test parameter and an AutoGranted value of true.
 	Test *string
+
 	// The amount of time, in seconds, Workers must wait after taking the Qualification
 	// test before they can take it again. Workers can take a Qualification test
 	// multiple times if they were not granted the Qualification from a previous
@@ -341,39 +433,50 @@ type QualificationType struct {
 	// not specified, retries are disabled and Workers can request a Qualification only
 	// once.
 	RetryDelayInSeconds *int64
+
 	// The name of the Qualification type. The type name is used to identify the type,
 	// and to find the type using a Qualification type search.
 	Name *string
+
 	// One or more words or phrases that describe theQualification type, separated by
 	// commas. The Keywords make the type easier to find using a search.
 	Keywords *string
+
 	// A unique identifier for the Qualification type. A Qualification type is given a
 	// Qualification type ID when you call the CreateQualificationType operation.
 	QualificationTypeId *string
+
 	// Specifies that requests for the Qualification type are granted immediately,
 	// without prompting the Worker with a Qualification test. Valid values are True |
 	// False.
 	AutoGranted *bool
+
 	// The date and time the Qualification type was created.
 	CreationTime *time.Time
+
 	// The amount of time, in seconds, given to a Worker to complete the Qualification
 	// test, beginning from the time the Worker requests the Qualification.
 	TestDurationInSeconds *int64
+
 	// A long description for the Qualification type.
 	Description *string
+
 	// The Qualification integer value to use for automatically granted Qualifications,
 	// if AutoGranted is true. This is 1 by default.
 	AutoGrantedValue *int32
+
 	// The status of the Qualification type. A Qualification type's status determines
 	// if users can apply to receive a Qualification of this type, and if HITs can be
 	// created with requirements based on this type. Valid values are Active |
 	// Inactive.
 	QualificationTypeStatus QualificationTypeStatus
+
 	// Specifies whether the Qualification type is one that a user can request through
 	// the Amazon Mechanical Turk web site, such as by taking a Qualification test.
 	// This value is False for Qualifications assigned automatically by the system.
 	// Valid values are True | False.
 	IsRequestable *bool
+
 	// The answers to the Qualification test specified in the Test parameter.
 	AnswerKey *string
 }
@@ -382,22 +485,30 @@ type QualificationType struct {
 // ReviewActionDetail data structure. This structure is returned multiple times for
 // each action specified in the Review Policy.
 type ReviewActionDetail struct {
+
 	// The unique identifier for the action.
 	ActionId *string
+
 	// The date when the action was completed.
 	CompleteTime *time.Time
+
 	// The nature of the action itself. The Review Policy is responsible for examining
 	// the HIT and Assignments, emitting results, and deciding which other actions will
 	// be necessary.
 	ActionName *string
+
 	// A description of the outcome of the review.
 	Result *string
+
 	// The specific HITId or AssignmentID targeted by the action.
 	TargetId *string
+
 	// The type of object in TargetId.
 	TargetType *string
+
 	// Present only when the Results have a FAILED Status.
 	ErrorCode *string
+
 	// The current disposition of the action: INTENDED, SUCCEEDED, FAILED, or
 	// CANCELLED.
 	Status ReviewActionStatus
@@ -406,17 +517,23 @@ type ReviewActionDetail struct {
 // HIT Review Policy data structures represent HIT review policies, which you
 // specify when you create a HIT.
 type ReviewPolicy struct {
+
 	// Name of the parameter from the Review policy.
 	Parameters []*PolicyParameter
+
 	// Name of a Review Policy: SimplePlurality/2011-09-01 or
 	// ScoreMyKnownAnswers/2011-09-01
+	//
+	// This member is required.
 	PolicyName *string
 }
 
 // Contains both ReviewResult and ReviewAction elements for a particular HIT.
 type ReviewReport struct {
+
 	// A list of ReviewAction objects for each action specified in the Review Policy.
 	ReviewActions []*ReviewActionDetail
+
 	// A list of ReviewResults objects for each action specified in the Review Policy.
 	ReviewResults []*ReviewResultDetail
 }
@@ -424,6 +541,7 @@ type ReviewReport struct {
 // This data structure is returned multiple times for each result specified in the
 // Review Policy.
 type ReviewResultDetail struct {
+
 	// Specifies the QuestionId the result is describing. Depending on whether the
 	// TargetType is a HIT or Assignment this results could specify multiple values. If
 	// TargetType is HIT and QuestionId is absent, then the result describes results of
@@ -431,17 +549,22 @@ type ReviewResultDetail struct {
 	// QuestionId is absent, then the result describes the Worker's performance on the
 	// HIT.
 	QuestionId *string
+
 	// A unique identifier of the Review action result.
 	ActionId *string
+
 	// Key identifies the particular piece of reviewed information.
 	Key *string
+
 	// The HITID or AssignmentId about which this result was taken. Note that HIT-level
 	// Review Policies will often emit results about both the HIT itself and its
 	// Assignments, while Assignment-level review policies generally only emit results
 	// about the Assignment itself.
 	SubjectId *string
+
 	// The type of the object from the SubjectId field.
 	SubjectType *string
+
 	// The values of Key provided by the review policies you have selected.
 	Value *string
 }
@@ -449,8 +572,10 @@ type ReviewResultDetail struct {
 // The WorkerBlock data structure represents a Worker who has been blocked. It has
 // two elements: the WorkerId and the Reason for the block.
 type WorkerBlock struct {
+
 	// A message explaining the reason the Worker was blocked.
 	Reason *string
+
 	// The ID of the Worker who accepted the HIT.
 	WorkerId *string
 }

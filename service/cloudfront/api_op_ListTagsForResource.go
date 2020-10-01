@@ -57,13 +57,19 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 // The request to list tags for a CloudFront resource.
 type ListTagsForResourceInput struct {
+
 	// An ARN of a CloudFront resource.
+	//
+	// This member is required.
 	Resource *string
 }
 
 // The returned result of the corresponding request.
 type ListTagsForResourceOutput struct {
+
 	// A complex type that contains zero or more Tag elements.
+	//
+	// This member is required.
 	Tags *types.Tags
 
 	// Metadata pertaining to the operation's result.

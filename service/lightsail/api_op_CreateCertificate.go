@@ -63,25 +63,35 @@ func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificat
 }
 
 type CreateCertificateInput struct {
+
 	// The tag keys and optional values to add to the certificate during create.
 	// <p>Use the <code>TagResource</code> action to tag a resource after it's
 	// created.</p>
 	Tags []*types.Tag
+
 	// The name for the certificate.
+	//
+	// This member is required.
 	CertificateName *string
+
 	// An array of strings that specify the alternate domains (e.g., example2.com) and
 	// subdomains (e.g., blog.example.com) for the certificate.  <p>You can specify a
 	// maximum of nine alternate domains (in addition to the primary domain name).</p>
 	// <p>Wildcard domain entries (e.g., <code>*.example.com</code>) are not
 	// supported.</p>
 	SubjectAlternativeNames []*string
+
 	// The domain name (e.g., example.com) for the certificate.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 type CreateCertificateOutput struct {
+
 	// An object that describes the certificate created.
 	Certificate *types.CertificateSummary
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

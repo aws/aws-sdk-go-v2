@@ -61,16 +61,20 @@ func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *Describ
 
 //
 type DescribeTableRestoreStatusInput struct {
+
 	// An optional pagination token provided by a previous DescribeTableRestoreStatus
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by the MaxRecords parameter.
 	Marker *string
+
 	// The identifier of the table restore request to return status for. If you don't
 	// specify a TableRestoreRequestId value, then DescribeTableRestoreStatus returns
 	// the status of all in-progress table restore requests.
 	TableRestoreRequestId *string
+
 	// The Amazon Redshift cluster that the table is being restored to.
 	ClusterIdentifier *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
@@ -79,8 +83,10 @@ type DescribeTableRestoreStatusInput struct {
 
 //
 type DescribeTableRestoreStatusOutput struct {
+
 	// A list of status details for one or more table restore requests.
 	TableRestoreStatusDetails []*types.TableRestoreStatus
+
 	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus
 	// () request.
 	Marker *string

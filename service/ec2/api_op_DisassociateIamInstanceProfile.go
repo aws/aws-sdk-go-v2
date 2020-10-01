@@ -57,11 +57,15 @@ func (c *Client) DisassociateIamInstanceProfile(ctx context.Context, params *Dis
 }
 
 type DisassociateIamInstanceProfileInput struct {
+
 	// The ID of the IAM instance profile association.
+	//
+	// This member is required.
 	AssociationId *string
 }
 
 type DisassociateIamInstanceProfileOutput struct {
+
 	// Information about the IAM instance profile association.
 	IamInstanceProfileAssociation *types.IamInstanceProfileAssociation
 

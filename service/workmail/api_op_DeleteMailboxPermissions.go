@@ -55,13 +55,22 @@ func (c *Client) DeleteMailboxPermissions(ctx context.Context, params *DeleteMai
 }
 
 type DeleteMailboxPermissionsInput struct {
+
 	// The identifier of the member (user or group)that owns the mailbox.
+	//
+	// This member is required.
 	EntityId *string
+
 	// The identifier of the organization under which the member (user or group)
 	// exists.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier of the member (user or group) for which to delete granted
 	// permissions.
+	//
+	// This member is required.
 	GranteeId *string
 }
 

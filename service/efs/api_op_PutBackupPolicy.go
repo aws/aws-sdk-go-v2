@@ -57,13 +57,20 @@ func (c *Client) PutBackupPolicy(ctx context.Context, params *PutBackupPolicyInp
 }
 
 type PutBackupPolicyInput struct {
+
 	// The backup policy included in the PutBackupPolicy request.
+	//
+	// This member is required.
 	BackupPolicy *types.BackupPolicy
+
 	// Specifies which EFS file system to update the backup policy for.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
 type PutBackupPolicyOutput struct {
+
 	// Describes the file system's backup policy, indicating whether automatic backups
 	// are turned on or off..
 	BackupPolicy *types.BackupPolicy

@@ -55,7 +55,10 @@ func (c *Client) DeleteOriginEndpoint(ctx context.Context, params *DeleteOriginE
 }
 
 type DeleteOriginEndpointInput struct {
+
 	// The ID of the OriginEndpoint to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

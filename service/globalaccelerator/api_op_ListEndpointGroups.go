@@ -57,19 +57,26 @@ func (c *Client) ListEndpointGroups(ctx context.Context, params *ListEndpointGro
 }
 
 type ListEndpointGroupsInput struct {
+
 	// The Amazon Resource Name (ARN) of the listener.
+	//
+	// This member is required.
 	ListenerArn *string
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
 	// The number of endpoint group objects that you want to return with this call. The
 	// default value is 10.
 	MaxResults *int32
 }
 
 type ListEndpointGroupsOutput struct {
+
 	// The list of the endpoint groups associated with a listener.
 	EndpointGroups []*types.EndpointGroup
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string

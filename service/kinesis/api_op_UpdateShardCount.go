@@ -92,19 +92,31 @@ func (c *Client) UpdateShardCount(ctx context.Context, params *UpdateShardCountI
 }
 
 type UpdateShardCountInput struct {
+
 	// The name of the stream.
+	//
+	// This member is required.
 	StreamName *string
+
 	// The new number of shards.
+	//
+	// This member is required.
 	TargetShardCount *int32
+
 	// The scaling type. Uniform scaling creates shards of equal size.
+	//
+	// This member is required.
 	ScalingType types.ScalingType
 }
 
 type UpdateShardCountOutput struct {
+
 	// The current number of shards.
 	CurrentShardCount *int32
+
 	// The name of the stream.
 	StreamName *string
+
 	// The updated number of shards.
 	TargetShardCount *int32
 

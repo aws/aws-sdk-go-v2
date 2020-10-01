@@ -57,16 +57,19 @@ func (c *Client) ListLedgers(ctx context.Context, params *ListLedgersInput, optF
 }
 
 type ListLedgersInput struct {
+
 	// A pagination token, indicating that you want to retrieve the next page of
 	// results. If you received a value for NextToken in the response from a previous
 	// ListLedgers call, then you should use that value as input here.
 	NextToken *string
+
 	// The maximum number of results to return in a single ListLedgers request. (The
 	// actual number of results returned might be fewer.)
 	MaxResults *int32
 }
 
 type ListLedgersOutput struct {
+
 	// A pagination token, indicating whether there are more results available:
 	//
 	//     *
@@ -77,6 +80,7 @@ type ListLedgersOutput struct {
 	// then there are more results available. To retrieve the next page of results, use
 	// the value of NextToken in a subsequent ListLedgers call.
 	NextToken *string
+
 	// The array of ledger summaries that are associated with the current AWS account
 	// and Region.
 	Ledgers []*types.LedgerSummary

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You are not authorized to use this operation with the given parameters.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've exceeded the notification or subscriber limit.
 type CreationLimitExceededException struct {
@@ -47,12 +40,6 @@ func (e *CreationLimitExceededException) ErrorMessage() string {
 }
 func (e *CreationLimitExceededException) ErrorCode() string             { return "CreationLimitExceededException" }
 func (e *CreationLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CreationLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CreationLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The budget name already exists. Budget names must be unique within an account.
 type DuplicateRecordException struct {
@@ -70,12 +57,6 @@ func (e *DuplicateRecordException) ErrorMessage() string {
 }
 func (e *DuplicateRecordException) ErrorCode() string             { return "DuplicateRecordException" }
 func (e *DuplicateRecordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateRecordException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateRecordException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pagination token expired.
 type ExpiredNextTokenException struct {
@@ -93,12 +74,6 @@ func (e *ExpiredNextTokenException) ErrorMessage() string {
 }
 func (e *ExpiredNextTokenException) ErrorCode() string             { return "ExpiredNextTokenException" }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error on the server occurred during the processing of your request. Try again
 // later.
@@ -117,12 +92,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pagination token is invalid.
 type InvalidNextTokenException struct {
@@ -140,12 +109,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error on the client occurred. Typically, the cause is an invalid input value.
 type InvalidParameterException struct {
@@ -163,12 +126,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can’t locate the resource that you specified.
 type NotFoundException struct {
@@ -186,9 +143,3 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

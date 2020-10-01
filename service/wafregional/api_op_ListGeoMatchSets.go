@@ -61,12 +61,14 @@ func (c *Client) ListGeoMatchSets(ctx context.Context, params *ListGeoMatchSetsI
 }
 
 type ListGeoMatchSetsInput struct {
+
 	// If you specify a value for Limit and you have more GeoMatchSets than the value
 	// of Limit, AWS WAF returns a NextMarker value in the response that allows you to
 	// list another group of GeoMatchSet objects. For the second and subsequent
 	// ListGeoMatchSets requests, specify the value of NextMarker from the previous
 	// response to get information about another batch of GeoMatchSet objects.
 	NextMarker *string
+
 	// Specifies the number of GeoMatchSet objects that you want AWS WAF to return for
 	// this request. If you have more GeoMatchSet objects than the number you specify
 	// for Limit, the response includes a NextMarker value that you can use to get
@@ -75,11 +77,13 @@ type ListGeoMatchSetsInput struct {
 }
 
 type ListGeoMatchSetsOutput struct {
+
 	// If you have more GeoMatchSet objects than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more
 	// GeoMatchSet objects, submit another ListGeoMatchSets request, and specify the
 	// NextMarker value from the response in the NextMarker value in the next request.
 	NextMarker *string
+
 	// An array of GeoMatchSetSummary () objects.
 	GeoMatchSets []*types.GeoMatchSetSummary
 

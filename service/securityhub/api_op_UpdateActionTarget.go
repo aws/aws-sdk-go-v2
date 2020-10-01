@@ -55,10 +55,15 @@ func (c *Client) UpdateActionTarget(ctx context.Context, params *UpdateActionTar
 }
 
 type UpdateActionTargetInput struct {
+
 	// The ARN of the custom action target to update.
+	//
+	// This member is required.
 	ActionTargetArn *string
+
 	// The updated description for the custom action target.
 	Description *string
+
 	// The updated name of the custom action target.
 	Name *string
 }

@@ -67,6 +67,7 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 // A request to set the attributes that control how bounce and complaint events are
 // processed.
 type PutEmailIdentityFeedbackAttributesInput struct {
+
 	// Sets the feedback forwarding configuration for the identity. If the value is
 	// true, Amazon Pinpoint sends you email notifications when bounce or complaint
 	// events occur. Amazon Pinpoint sends this notification to the address that you
@@ -78,8 +79,11 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// Pinpoint sends an email notification when these events occur (even if this
 	// setting is disabled).
 	EmailForwardingEnabled *bool
+
 	// The email identity that you want to configure bounce and complaint feedback
 	// forwarding for.
+	//
+	// This member is required.
 	EmailIdentity *string
 }
 

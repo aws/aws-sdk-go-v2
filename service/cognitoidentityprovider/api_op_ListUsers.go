@@ -57,17 +57,24 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 
 // Represents the request to list users.
 type ListUsersInput struct {
+
 	// An array of strings, where each string is the name of a user attribute to be
 	// returned for each user in the search results. If the array is null, all
 	// attributes are returned.
 	AttributesToGet []*string
+
 	// The user pool ID for the user pool on which the search should be performed.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	PaginationToken *string
+
 	// Maximum number of users to be returned.
 	Limit *int32
+
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash (\)
 	// character. For example, "family_name = \"Reddy\"".
@@ -122,8 +129,10 @@ type ListUsersInput struct {
 
 // The response from the request to list users.
 type ListUsersOutput struct {
+
 	// The users returned in the request to list users.
 	Users []*types.UserType
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	PaginationToken *string

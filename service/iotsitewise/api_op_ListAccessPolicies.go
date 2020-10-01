@@ -56,27 +56,37 @@ func (c *Client) ListAccessPolicies(ctx context.Context, params *ListAccessPolic
 }
 
 type ListAccessPoliciesInput struct {
+
 	// The ID of the identity. This parameter is required if you specify identityType.
 	IdentityId *string
+
 	// The type of identity (user or group). This parameter is required if you specify
 	// identityId.
 	IdentityType types.IdentityType
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
 	// The ID of the resource. This parameter is required if you specify resourceType.
 	ResourceId *string
+
 	// The type of resource (portal or project). This parameter is required if you
 	// specify resourceId.
 	ResourceType types.ResourceType
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
 }
 
 type ListAccessPoliciesOutput struct {
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// A list that summarizes each access policy.
+	//
+	// This member is required.
 	AccessPolicySummaries []*types.AccessPolicySummary
 
 	// Metadata pertaining to the operation's result.

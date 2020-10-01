@@ -59,6 +59,7 @@ func (c *Client) ValidateResourcePolicy(ctx context.Context, params *ValidateRes
 }
 
 type ValidateResourcePolicyInput struct {
+
 	// The identifier for the secret that you want to validate a resource policy. You
 	// can specify either the Amazon Resource Name (ARN) or the friendly name of the
 	// secret. If you specify an ARN, we generally recommend that you specify a
@@ -77,13 +78,18 @@ type ValidateResourcePolicyInput struct {
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
 	SecretId *string
+
 	// Identifies the Resource Policy attached to the secret.
+	//
+	// This member is required.
 	ResourcePolicy *string
 }
 
 type ValidateResourcePolicyOutput struct {
+
 	// Returns a message stating that your Reource Policy passed validation.
 	PolicyValidationPassed *bool
+
 	// Returns an error message if your policy doesn't pass validatation.
 	ValidationErrors []*types.ValidationErrorsEntry
 

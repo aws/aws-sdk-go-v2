@@ -55,11 +55,20 @@ func (c *Client) UntagAttendee(ctx context.Context, params *UntagAttendeeInput, 
 }
 
 type UntagAttendeeInput struct {
+
 	// The tag keys.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The Amazon Chime SDK attendee ID.
+	//
+	// This member is required.
 	AttendeeId *string
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
 }
 

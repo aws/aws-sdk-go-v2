@@ -59,14 +59,20 @@ func (c *Client) DescribeElasticsearchDomains(ctx context.Context, params *Descr
 // Container for the parameters to the DescribeElasticsearchDomains () operation.
 // By default, the API returns the status of all Elasticsearch domains.
 type DescribeElasticsearchDomainsInput struct {
+
 	// The Elasticsearch domains for which you want information.
+	//
+	// This member is required.
 	DomainNames []*string
 }
 
 // The result of a DescribeElasticsearchDomains request. Contains the status of the
 // specified domains or all domains owned by the account.
 type DescribeElasticsearchDomainsOutput struct {
+
 	// The status of the domains requested in the DescribeElasticsearchDomains request.
+	//
+	// This member is required.
 	DomainStatusList []*types.ElasticsearchDomainStatus
 
 	// Metadata pertaining to the operation's result.

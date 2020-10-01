@@ -56,27 +56,39 @@ func (c *Client) DescribeAsset(ctx context.Context, params *DescribeAssetInput, 
 }
 
 type DescribeAssetInput struct {
+
 	// The ID of an MediaPackage VOD Asset resource.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeAssetOutput struct {
+
 	// The IAM role_arn used to access the source S3 bucket.
 	SourceRoleArn *string
+
 	// The unique identifier for the Asset.
 	Id *string
+
 	// The resource ID to include in SPEKE key requests.
 	ResourceId *string
+
 	// The time the Asset was initially submitted for Ingest.
 	CreatedAt *string
+
 	// ARN of the source object in S3.
 	SourceArn *string
+
 	// The ID of the PackagingGroup for the Asset.
 	PackagingGroupId *string
+
 	// The ARN of the Asset.
 	Arn *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The list of egress endpoints available for the Asset.
 	EgressEndpoints []*types.EgressEndpoint
 

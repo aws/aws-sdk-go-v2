@@ -58,31 +58,41 @@ func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *Desc
 
 // DescribeLocationObjectStorageRequest
 type DescribeLocationObjectStorageInput struct {
+
 	// The Amazon Resource Name (ARN) of the self-managed object storage server
 	// location that was described.
+	//
+	// This member is required.
 	LocationArn *string
 }
 
 // DescribeLocationObjectStorageResponse
 type DescribeLocationObjectStorageOutput struct {
+
 	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
 	// object storage server location.
 	AgentArns []*string
+
 	// The Amazon Resource Name (ARN) of the self-managed object storage server
 	// location to describe.
 	LocationArn *string
+
 	// The URL of the source self-managed object storage server location that was
 	// described.
 	LocationUri *string
+
 	// Optional. The access key is used if credentials are required to access the
 	// self-managed object storage server.
 	AccessKey *string
+
 	// The port that your self-managed object storage server accepts inbound network
 	// traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443
 	// (HTTPS).
 	ServerPort *int32
+
 	// The time that the self-managed object storage server agent was created.
 	CreationTime *time.Time
+
 	// The protocol that the object storage server uses to communicate. Valid values
 	// are HTTP or HTTPS.
 	ServerProtocol types.ObjectStorageServerProtocol

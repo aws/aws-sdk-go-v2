@@ -63,15 +63,22 @@ func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexP
 }
 
 type DeleteRegexPatternSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// The RegexPatternSetId of the RegexPatternSet () that you want to delete.
 	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
 	// ListRegexPatternSets ().
+	//
+	// This member is required.
 	RegexPatternSetId *string
 }
 
 type DeleteRegexPatternSetOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().

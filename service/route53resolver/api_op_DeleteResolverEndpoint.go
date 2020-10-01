@@ -64,11 +64,15 @@ func (c *Client) DeleteResolverEndpoint(ctx context.Context, params *DeleteResol
 }
 
 type DeleteResolverEndpointInput struct {
+
 	// The ID of the resolver endpoint that you want to delete.
+	//
+	// This member is required.
 	ResolverEndpointId *string
 }
 
 type DeleteResolverEndpointOutput struct {
+
 	// Information about the DeleteResolverEndpoint request, including the status of
 	// the request.
 	ResolverEndpoint *types.ResolverEndpoint

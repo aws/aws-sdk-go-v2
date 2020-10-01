@@ -58,16 +58,22 @@ func (c *Client) GetBlacklistReports(ctx context.Context, params *GetBlacklistRe
 // A request to retrieve a list of the blacklists that your dedicated IP addresses
 // appear on.
 type GetBlacklistReportsInput struct {
+
 	// A list of IP addresses that you want to retrieve blacklist information about.
 	// You can only specify the dedicated IP addresses that you use to send email using
 	// Amazon SES or Amazon Pinpoint.
+	//
+	// This member is required.
 	BlacklistItemNames []*string
 }
 
 // An object that contains information about blacklist events.
 type GetBlacklistReportsOutput struct {
+
 	// An object that contains information about a blacklist that one of your dedicated
 	// IP addresses appears on.
+	//
+	// This member is required.
 	BlacklistReport map[string][]*types.BlacklistEntry
 
 	// Metadata pertaining to the operation's result.

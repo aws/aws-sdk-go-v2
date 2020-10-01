@@ -56,13 +56,20 @@ func (c *Client) UpdateTrigger(ctx context.Context, params *UpdateTriggerInput, 
 }
 
 type UpdateTriggerInput struct {
+
 	// The new values with which to update the trigger.
+	//
+	// This member is required.
 	TriggerUpdate *types.TriggerUpdate
+
 	// The name of the trigger to update.
+	//
+	// This member is required.
 	Name *string
 }
 
 type UpdateTriggerOutput struct {
+
 	// The resulting trigger definition.
 	Trigger *types.Trigger
 

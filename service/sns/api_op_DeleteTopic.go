@@ -58,7 +58,10 @@ func (c *Client) DeleteTopic(ctx context.Context, params *DeleteTopicInput, optF
 }
 
 type DeleteTopicInput struct {
+
 	// The ARN of the topic you want to delete.
+	//
+	// This member is required.
 	TopicArn *string
 }
 

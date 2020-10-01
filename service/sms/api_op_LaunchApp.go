@@ -54,6 +54,7 @@ func (c *Client) LaunchApp(ctx context.Context, params *LaunchAppInput, optFns .
 }
 
 type LaunchAppInput struct {
+
 	// ID of the application to launch.
 	AppId *string
 }

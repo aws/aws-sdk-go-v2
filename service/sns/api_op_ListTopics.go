@@ -58,14 +58,17 @@ func (c *Client) ListTopics(ctx context.Context, params *ListTopicsInput, optFns
 }
 
 type ListTopicsInput struct {
+
 	// Token returned by the previous ListTopics request.
 	NextToken *string
 }
 
 // Response for ListTopics action.
 type ListTopicsOutput struct {
+
 	// A list of topic ARNs.
 	Topics []*types.Topic
+
 	// Token to pass along to the next ListTopics request. This element is returned if
 	// there are additional topics to retrieve.
 	NextToken *string

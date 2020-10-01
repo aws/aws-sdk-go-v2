@@ -60,7 +60,10 @@ func (c *Client) DeleteSAMLProvider(ctx context.Context, params *DeleteSAMLProvi
 }
 
 type DeleteSAMLProviderInput struct {
+
 	// The Amazon Resource Name (ARN) of the SAML provider to delete.
+	//
+	// This member is required.
 	SAMLProviderArn *string
 }
 

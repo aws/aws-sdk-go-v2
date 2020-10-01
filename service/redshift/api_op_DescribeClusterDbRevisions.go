@@ -55,6 +55,7 @@ func (c *Client) DescribeClusterDbRevisions(ctx context.Context, params *Describ
 }
 
 type DescribeClusterDbRevisionsInput struct {
+
 	// An optional parameter that specifies the starting point for returning a set of
 	// response records. When the results of a DescribeClusterDbRevisions request
 	// exceed the value specified in MaxRecords, Amazon Redshift returns a value in the
@@ -63,10 +64,12 @@ type DescribeClusterDbRevisionsInput struct {
 	// request. Constraints: You can specify either the ClusterIdentifier parameter, or
 	// the marker parameter, but not both.
 	Marker *string
+
 	// A unique identifier for a cluster whose ClusterDbRevisions you are requesting.
 	// This parameter is case sensitive. All clusters defined for an account are
 	// returned by default.
 	ClusterIdentifier *string
+
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in the marker field of the response. You can retrieve the next set of
@@ -76,8 +79,10 @@ type DescribeClusterDbRevisionsInput struct {
 }
 
 type DescribeClusterDbRevisionsOutput struct {
+
 	// A list of revisions.
 	ClusterDbRevisions []*types.ClusterDbRevision
+
 	// A string representing the starting point for the next set of revisions. If a
 	// value is returned in a response, you can retrieve the next set of revisions by
 	// providing the value in the marker parameter and retrying the command. If the

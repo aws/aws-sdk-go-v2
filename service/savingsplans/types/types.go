@@ -4,178 +4,243 @@ package types
 
 // Information about a Savings Plan offering.
 type ParentSavingsPlanOffering struct {
+
 	// The duration, in seconds.
 	DurationSeconds *int64
+
 	// The description.
 	PlanDescription *string
+
 	// The ID of the offering.
 	OfferingId *string
+
 	// The currency.
 	Currency CurrencyCode
+
 	// The payment option.
 	PaymentOption SavingsPlanPaymentOption
+
 	// The plan type.
 	PlanType SavingsPlanType
 }
 
 // Information about a Savings Plan.
 type SavingsPlan struct {
+
 	// The hourly commitment, in USD.
 	Commitment *string
+
 	// The end time.
 	End *string
+
 	// The start time.
 	Start *string
+
 	// The payment option.
 	PaymentOption SavingsPlanPaymentOption
+
 	// The up-front payment amount.
 	UpfrontPaymentAmount *string
+
 	// One or more tags.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the Savings Plan.
 	SavingsPlanArn *string
+
 	// The ID of the offering.
 	OfferingId *string
+
 	// The description.
 	Description *string
+
 	// The EC2 instance family.
 	Ec2InstanceFamily *string
+
 	// The currency.
 	Currency CurrencyCode
+
 	// The AWS Region.
 	Region *string
+
 	// The state.
 	State SavingsPlanState
+
 	// The product types.
 	ProductTypes []SavingsPlanProductType
+
 	// The recurring payment amount.
 	RecurringPaymentAmount *string
+
 	// The duration of the term, in seconds.
 	TermDurationInSeconds *int64
+
 	// The plan type.
 	SavingsPlanType SavingsPlanType
+
 	// The ID of the Savings Plan.
 	SavingsPlanId *string
 }
 
 // Information about a filter.
 type SavingsPlanFilter struct {
+
 	// The filter value.
 	Values []*string
+
 	// The filter name.
 	Name SavingsPlansFilterName
 }
 
 // Information about a Savings Plan offering.
 type SavingsPlanOffering struct {
+
 	// The plan type.
 	PlanType SavingsPlanType
+
 	// The properties.
 	Properties []*SavingsPlanOfferingProperty
+
 	// The description.
 	Description *string
+
 	// The product type.
 	ProductTypes []SavingsPlanProductType
+
 	// The service.
 	ServiceCode *string
+
 	// The duration, in seconds.
 	DurationSeconds *int64
+
 	// The specific AWS operation for the line item in the billing report.
 	Operation *string
+
 	// The usage details of the line item in the billing report.
 	UsageType *string
+
 	// The payment option.
 	PaymentOption SavingsPlanPaymentOption
+
 	// The ID of the offering.
 	OfferingId *string
+
 	// The currency.
 	Currency CurrencyCode
 }
 
 // Information about a filter.
 type SavingsPlanOfferingFilterElement struct {
+
 	// The filter name.
 	Name SavingsPlanOfferingFilterAttribute
+
 	// The filter values.
 	Values []*string
 }
 
 // Information about a property.
 type SavingsPlanOfferingProperty struct {
+
 	// The property value.
 	Value *string
+
 	// The property name.
 	Name SavingsPlanOfferingPropertyKey
 }
 
 // Information about a Savings Plan offering rate.
 type SavingsPlanOfferingRate struct {
+
 	// The service.
 	ServiceCode SavingsPlanRateServiceCode
+
 	// The specific AWS operation for the line item in the billing report.
 	Operation *string
+
 	// The unit.
 	Unit SavingsPlanRateUnit
+
 	// The properties.
 	Properties []*SavingsPlanOfferingRateProperty
+
 	// The usage details of the line item in the billing report.
 	UsageType *string
+
 	// The Savings Plan offering.
 	SavingsPlanOffering *ParentSavingsPlanOffering
+
 	// The product type.
 	ProductType SavingsPlanProductType
+
 	// The Savings Plan rate.
 	Rate *string
 }
 
 // Information about a filter.
 type SavingsPlanOfferingRateFilterElement struct {
+
 	// The filter values.
 	Values []*string
+
 	// The filter name.
 	Name SavingsPlanRateFilterAttribute
 }
 
 // Information about a property.
 type SavingsPlanOfferingRateProperty struct {
+
 	// The property name.
 	Name *string
+
 	// The property value.
 	Value *string
 }
 
 // Information about a Savings Plan rate.
 type SavingsPlanRate struct {
+
 	// The rate.
 	Rate *string
+
 	// The usage details of the line item in the billing report.
 	UsageType *string
+
 	// The currency.
 	Currency CurrencyCode
+
 	// The service.
 	ServiceCode SavingsPlanRateServiceCode
+
 	// The unit.
 	Unit SavingsPlanRateUnit
+
 	// The product type.
 	ProductType SavingsPlanProductType
+
 	// The specific AWS operation for the line item in the billing report.
 	Operation *string
+
 	// The properties.
 	Properties []*SavingsPlanRateProperty
 }
 
 // Information about a filter.
 type SavingsPlanRateFilter struct {
+
 	// The filter values.
 	Values []*string
+
 	// The filter name.
 	Name SavingsPlanRateFilterName
 }
 
 // Information about a property.
 type SavingsPlanRateProperty struct {
+
 	// The property value.
 	Value *string
+
 	// The property name.
 	Name SavingsPlanRatePropertyKey
 }

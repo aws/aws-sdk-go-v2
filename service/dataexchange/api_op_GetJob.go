@@ -57,25 +57,36 @@ func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func
 }
 
 type GetJobInput struct {
+
 	// The unique identifier for a job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type GetJobOutput struct {
+
 	// The unique identifier for the job.
 	Id *string
+
 	// The state of the job.
 	State types.State
+
 	// The date and time that the job was created, in ISO 8601 format.
 	CreatedAt *time.Time
+
 	// The ARN for the job.
 	Arn *string
+
 	// The errors associated with jobs.
 	Errors []*types.JobError
+
 	// The job type.
 	Type types.Type
+
 	// The date and time that the job was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
+
 	// Details about the job.
 	Details *types.ResponseDetails
 

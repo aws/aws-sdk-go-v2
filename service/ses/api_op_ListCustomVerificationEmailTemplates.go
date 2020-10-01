@@ -65,9 +65,11 @@ func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, param
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 type ListCustomVerificationEmailTemplatesInput struct {
+
 	// An array the contains the name and creation time stamp for each template in your
 	// Amazon SES account.
 	NextToken *string
+
 	// The maximum number of custom verification email templates to return. This value
 	// must be at least 1 and less than or equal to 50. If you do not specify a value,
 	// or if you specify a value less than 1 or greater than 50, the operation will
@@ -77,8 +79,10 @@ type ListCustomVerificationEmailTemplatesInput struct {
 
 // A paginated list of custom verification email templates.
 type ListCustomVerificationEmailTemplatesOutput struct {
+
 	// A list of the custom verification email templates that exist in your account.
 	CustomVerificationEmailTemplates []*types.CustomVerificationEmailTemplate
+
 	// A token indicating that there are additional custom verification email templates
 	// available to be listed. Pass this token to a subsequent call to ListTemplates to
 	// retrieve the next 50 custom verification email templates.

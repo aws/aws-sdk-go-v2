@@ -59,22 +59,32 @@ func (c *Client) UpdateFlowEntitlement(ctx context.Context, params *UpdateFlowEn
 
 // The entitlement fields that you want to update.
 type UpdateFlowEntitlementInput struct {
+
 	// An indication of whether you want to enable the entitlement to allow access, or
 	// disable it to stop streaming content to the subscriber’s flow temporarily. If
 	// you don’t specify the entitlementStatus field in your request, MediaConnect
 	// leaves the value unchanged.
 	EntitlementStatus types.EntitlementStatus
+
 	// The type of encryption that will be used on the output associated with this
 	// entitlement.
 	Encryption *types.UpdateEncryption
+
 	// A description of the entitlement. This description appears only on the AWS
 	// Elemental MediaConnect console and will not be seen by the subscriber or end
 	// user.
 	Description *string
+
 	// The flow that is associated with the entitlement that you want to update.
+	//
+	// This member is required.
 	FlowArn *string
+
 	// The ARN of the entitlement that you want to update.
+	//
+	// This member is required.
 	EntitlementArn *string
+
 	// The AWS account IDs that you want to share your content with. The receiving
 	// accounts (subscribers) will be allowed to create their own flow using your
 	// content as the source.
@@ -82,8 +92,10 @@ type UpdateFlowEntitlementInput struct {
 }
 
 type UpdateFlowEntitlementOutput struct {
+
 	// The settings for a flow entitlement.
 	Entitlement *types.Entitlement
+
 	// The ARN of the flow that this entitlement was granted on.
 	FlowArn *string
 

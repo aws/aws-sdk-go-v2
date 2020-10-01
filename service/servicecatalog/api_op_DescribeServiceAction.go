@@ -56,8 +56,12 @@ func (c *Client) DescribeServiceAction(ctx context.Context, params *DescribeServ
 }
 
 type DescribeServiceActionInput struct {
+
 	// The self-service action identifier.
+	//
+	// This member is required.
 	Id *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -70,6 +74,7 @@ type DescribeServiceActionInput struct {
 }
 
 type DescribeServiceActionOutput struct {
+
 	// Detailed information about the self-service action.
 	ServiceActionDetail *types.ServiceActionDetail
 

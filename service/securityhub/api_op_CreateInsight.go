@@ -58,20 +58,32 @@ func (c *Client) CreateInsight(ctx context.Context, params *CreateInsightInput, 
 }
 
 type CreateInsightInput struct {
+
 	// The name of the custom insight to create.
+	//
+	// This member is required.
 	Name *string
+
 	// The attribute used to group the findings for the insight. The grouping attribute
 	// identifies the type of item that the insight applies to. For example, if an
 	// insight is grouped by resource identifier, then the insight produces a list of
 	// resource identifiers.
+	//
+	// This member is required.
 	GroupByAttribute *string
+
 	// One or more attributes used to filter the findings included in the insight. The
 	// insight only includes findings that match the criteria defined in the filters.
+	//
+	// This member is required.
 	Filters *types.AwsSecurityFindingFilters
 }
 
 type CreateInsightOutput struct {
+
 	// The ARN of the insight created.
+	//
+	// This member is required.
 	InsightArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -58,6 +58,7 @@ func (c *Client) DeleteStack(ctx context.Context, params *DeleteStackInput, optF
 
 // The input for DeleteStack () action.
 type DeleteStackInput struct {
+
 	// A unique identifier for this DeleteStack request. Specify this token if you plan
 	// to retry requests so that AWS CloudFormation knows that you're not attempting to
 	// delete a stack with the same name. You might retry DeleteStack requests to
@@ -72,6 +73,7 @@ type DeleteStackInput struct {
 	// the console, each stack event would be assigned the same token in the following
 	// format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002.
 	ClientRequestToken *string
+
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to delete the stack. AWS CloudFormation
 	// uses the role's credentials to make calls on your behalf. If you don't specify a
@@ -79,13 +81,17 @@ type DeleteStackInput struct {
 	// stack. If no role is available, AWS CloudFormation uses a temporary session that
 	// is generated from your user credentials.
 	RoleARN *string
+
 	// For stacks in the DELETE_FAILED state, a list of resource logical IDs that are
 	// associated with the resources you want to retain. During deletion, AWS
 	// CloudFormation deletes the stack but does not delete the retained resources.
 	// Retaining resources is useful when you cannot delete a resource, such as a
 	// non-empty S3 bucket, but you want to delete the stack.
 	RetainResources []*string
+
 	// The name or the unique stack ID that is associated with the stack.
+	//
+	// This member is required.
 	StackName *string
 }
 

@@ -56,7 +56,10 @@ func (c *Client) DisableTopicRule(ctx context.Context, params *DisableTopicRuleI
 
 // The input for the DisableTopicRuleRequest operation.
 type DisableTopicRuleInput struct {
+
 	// The name of the rule to disable.
+	//
+	// This member is required.
 	RuleName *string
 }
 

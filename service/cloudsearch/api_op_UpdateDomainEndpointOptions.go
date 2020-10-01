@@ -63,17 +63,24 @@ func (c *Client) UpdateDomainEndpointOptions(ctx context.Context, params *Update
 // Specifies the name of the domain you want to update and the domain endpoint
 // options.
 type UpdateDomainEndpointOptionsInput struct {
+
 	// Whether to require that all requests to the domain arrive over HTTPS. We
 	// recommend Policy-Min-TLS-1-2-2019-07 for TLSSecurityPolicy. For compatibility
 	// with older clients, the default is Policy-Min-TLS-1-0-2019-07.
+	//
+	// This member is required.
 	DomainEndpointOptions *types.DomainEndpointOptions
+
 	// A string that represents the name of a domain.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a UpdateDomainEndpointOptions request. Contains the configuration
 // and status of the domain's endpoint options.
 type UpdateDomainEndpointOptionsOutput struct {
+
 	// The newly-configured domain endpoint options.
 	DomainEndpointOptions *types.DomainEndpointOptionsStatus
 

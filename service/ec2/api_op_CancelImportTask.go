@@ -54,10 +54,13 @@ func (c *Client) CancelImportTask(ctx context.Context, params *CancelImportTaskI
 }
 
 type CancelImportTaskInput struct {
+
 	// The ID of the import image or import snapshot task to be canceled.
 	ImportTaskId *string
+
 	// The reason for canceling the task.
 	CancelReason *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -66,10 +69,13 @@ type CancelImportTaskInput struct {
 }
 
 type CancelImportTaskOutput struct {
+
 	// The current state of the task being canceled.
 	State *string
+
 	// The current state of the task being canceled.
 	PreviousState *string
+
 	// The ID of the task being canceled.
 	ImportTaskId *string
 

@@ -61,17 +61,20 @@ func (c *Client) ListQueryLoggingConfigs(ctx context.Context, params *ListQueryL
 }
 
 type ListQueryLoggingConfigsInput struct {
+
 	// (Optional) If you want to list the query logging configuration that is
 	// associated with a hosted zone, specify the ID in HostedZoneId. If you don't
 	// specify a hosted zone ID, ListQueryLoggingConfigs returns all of the
 	// configurations that are associated with the current AWS account.
 	HostedZoneId *string
+
 	// (Optional) If the current AWS account has more than MaxResults query logging
 	// configurations, use NextToken to get the second and subsequent pages of results.
 	// For the first ListQueryLoggingConfigs request, omit this value. For the second
 	// and subsequent requests, get the value of NextToken from the previous response
 	// and specify that value for NextToken in the request.
 	NextToken *string
+
 	// (Optional) The maximum number of query logging configurations that you want
 	// Amazon Route 53 to return in response to the current request. If the current AWS
 	// account has more than MaxResults configurations, use the value of NextToken
@@ -82,11 +85,15 @@ type ListQueryLoggingConfigsInput struct {
 }
 
 type ListQueryLoggingConfigsOutput struct {
+
 	// An array that contains one QueryLoggingConfig
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html)
 	// element for each configuration for DNS query logging that is associated with the
 	// current AWS account.
+	//
+	// This member is required.
 	QueryLoggingConfigs []*types.QueryLoggingConfig
+
 	// If a response includes the last of the query logging configurations that are
 	// associated with the current AWS account, NextToken doesn't appear in the
 	// response. If a response doesn't include the last of the configurations, you can

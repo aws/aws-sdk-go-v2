@@ -58,21 +58,27 @@ func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoad
 }
 
 type DescribeLoadBalancersInput struct {
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
 	// The names of the load balancers.
 	Names []*string
+
 	// The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20
 	// load balancers in a single call.
 	LoadBalancerArns []*string
 }
 
 type DescribeLoadBalancersOutput struct {
+
 	// Information about the load balancers.
 	LoadBalancers []*types.LoadBalancer
+
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.
 	NextMarker *string

@@ -57,11 +57,15 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 }
 
 type DescribeDatasetInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset to describe.
+	//
+	// This member is required.
 	DatasetArn *string
 }
 
 type DescribeDatasetOutput struct {
+
 	// A listing of the dataset's properties.
 	Dataset *types.Dataset
 

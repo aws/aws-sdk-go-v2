@@ -59,15 +59,21 @@ func (c *Client) GetComplianceDetailsByConfigRule(ctx context.Context, params *G
 
 //
 type GetComplianceDetailsByConfigRuleInput struct {
+
 	// The maximum number of evaluation results returned on each page. The default is
 	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
 	Limit *int32
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The name of the AWS Config rule for which you want compliance information.
+	//
+	// This member is required.
 	ConfigRuleName *string
+
 	// Filters the results by compliance. The allowed values are COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE.
 	ComplianceTypes []types.ComplianceType
@@ -75,8 +81,10 @@ type GetComplianceDetailsByConfigRuleInput struct {
 
 //
 type GetComplianceDetailsByConfigRuleOutput struct {
+
 	// Indicates whether the AWS resource complies with the specified AWS Config rule.
 	EvaluationResults []*types.EvaluationResult
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string

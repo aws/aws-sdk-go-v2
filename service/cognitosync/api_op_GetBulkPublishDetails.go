@@ -60,13 +60,17 @@ func (c *Client) GetBulkPublishDetails(ctx context.Context, params *GetBulkPubli
 
 // The input for the GetBulkPublishDetails operation.
 type GetBulkPublishDetailsInput struct {
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 
 // The output for the GetBulkPublishDetails operation.
 type GetBulkPublishDetailsOutput struct {
+
 	// Status of the last bulk publish operation, valid values are:
 	//
 	//     * NOT_STARTED
@@ -82,15 +86,19 @@ type GetBulkPublishDetailsOutput struct {
 	// Some portion of the data has failed to publish, check FailureMessage for the
 	// cause.
 	BulkPublishStatus types.BulkPublishStatus
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
 	IdentityPoolId *string
+
 	// If BulkPublishStatus is FAILED this field will contain the error message that
 	// caused the bulk publish to fail.
 	FailureMessage *string
+
 	// If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation
 	// completed.
 	BulkPublishCompleteTime *time.Time
+
 	// The date/time at which the last bulk publish was initiated.
 	BulkPublishStartTime *time.Time
 

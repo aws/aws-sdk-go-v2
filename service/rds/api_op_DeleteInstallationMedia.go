@@ -57,28 +57,39 @@ func (c *Client) DeleteInstallationMedia(ctx context.Context, params *DeleteInst
 }
 
 type DeleteInstallationMediaInput struct {
+
 	// The installation medium ID.
+	//
+	// This member is required.
 	InstallationMediaId *string
 }
 
 // Contains the installation media for a DB engine that requires an on-premises
 // customer provided license, such as Microsoft SQL Server.
 type DeleteInstallationMediaOutput struct {
+
 	// The status of the installation medium.
 	Status *string
+
 	// The engine version of the DB engine.
 	EngineVersion *string
+
 	// The custom Availability Zone (AZ) that contains the installation media.
 	CustomAvailabilityZoneId *string
+
 	// The path to the installation medium for the operating system associated with the
 	// DB engine.
 	OSInstallationMediaPath *string
+
 	// The DB engine.
 	Engine *string
+
 	// If an installation media failure occurred, the cause of the failure.
 	FailureCause *types.InstallationMediaFailureCause
+
 	// The installation medium ID.
 	InstallationMediaId *string
+
 	// The path to the installation medium for the DB engine.
 	EngineInstallationMediaPath *string
 

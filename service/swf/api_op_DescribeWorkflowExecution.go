@@ -78,26 +78,43 @@ func (c *Client) DescribeWorkflowExecution(ctx context.Context, params *Describe
 }
 
 type DescribeWorkflowExecutionInput struct {
+
 	// The workflow execution to describe.
+	//
+	// This member is required.
 	Execution *types.WorkflowExecution
+
 	// The name of the domain containing the workflow execution.
+	//
+	// This member is required.
 	Domain *string
 }
 
 // Contains details about a workflow execution.
 type DescribeWorkflowExecutionOutput struct {
+
 	// The configuration settings for this workflow execution including timeout values,
 	// tasklist etc.
+	//
+	// This member is required.
 	ExecutionConfiguration *types.WorkflowExecutionConfiguration
+
 	// The time when the last activity task was scheduled for this workflow execution.
 	// You can use this information to determine if the workflow has not made progress
 	// for an unusually long period of time and might require a corrective action.
 	LatestActivityTaskTimestamp *time.Time
+
 	// Information about the workflow execution.
+	//
+	// This member is required.
 	ExecutionInfo *types.WorkflowExecutionInfo
+
 	// The number of tasks for this workflow execution. This includes open and closed
 	// tasks of all types.
+	//
+	// This member is required.
 	OpenCounts *types.WorkflowExecutionOpenCounts
+
 	// The latest executionContext provided by the decider for this workflow execution.
 	// A decider can provide an executionContext (a free-form string) when closing a
 	// decision task using RespondDecisionTaskCompleted ().

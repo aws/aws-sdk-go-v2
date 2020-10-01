@@ -64,19 +64,27 @@ func (c *Client) GetPercentiles(ctx context.Context, params *GetPercentilesInput
 }
 
 type GetPercentilesInput struct {
+
 	// The percentile groups returned.
 	Percents []*float64
+
 	// The name of the index to search.
 	IndexName *string
+
 	// The query version.
 	QueryVersion *string
+
 	// The query string.
+	//
+	// This member is required.
 	QueryString *string
+
 	// The field to aggregate.
 	AggregationField *string
 }
 
 type GetPercentilesOutput struct {
+
 	// The percentile values of the aggregated fields.
 	Percentiles []*types.PercentPair
 

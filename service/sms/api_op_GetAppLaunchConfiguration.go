@@ -55,16 +55,20 @@ func (c *Client) GetAppLaunchConfiguration(ctx context.Context, params *GetAppLa
 }
 
 type GetAppLaunchConfigurationInput struct {
+
 	// ID of the application launch configuration.
 	AppId *string
 }
 
 type GetAppLaunchConfigurationOutput struct {
+
 	// List of launch configurations for server groups in this application.
 	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
+
 	// Name of the service role in the customer's account that Amazon CloudFormation
 	// uses to launch the application.
 	RoleName *string
+
 	// ID of the application associated with the launch configuration.
 	AppId *string
 

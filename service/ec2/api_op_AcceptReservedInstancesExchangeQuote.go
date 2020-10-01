@@ -58,12 +58,17 @@ func (c *Client) AcceptReservedInstancesExchangeQuote(ctx context.Context, param
 
 // Contains the parameters for accepting the quote.
 type AcceptReservedInstancesExchangeQuoteInput struct {
+
 	// The IDs of the Convertible Reserved Instances to exchange for another
 	// Convertible Reserved Instance of the same or higher value.
+	//
+	// This member is required.
 	ReservedInstanceIds []*string
+
 	// The configuration of the target Convertible Reserved Instance to exchange for
 	// your current Convertible Reserved Instances.
 	TargetConfigurations []*types.TargetConfigurationRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -73,6 +78,7 @@ type AcceptReservedInstancesExchangeQuoteInput struct {
 
 // The result of the exchange and whether it was successful.
 type AcceptReservedInstancesExchangeQuoteOutput struct {
+
 	// The ID of the successful exchange.
 	ExchangeId *string
 

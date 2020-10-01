@@ -56,6 +56,7 @@ func (c *Client) StartDataCollectionByAgentIds(ctx context.Context, params *Star
 }
 
 type StartDataCollectionByAgentIdsInput struct {
+
 	// The IDs of the agents or connectors from which to start collecting data. If you
 	// send a request to an agent/connector ID that you do not have permission to
 	// contact, according to your AWS account, the service does not throw an exception.
@@ -63,10 +64,13 @@ type StartDataCollectionByAgentIdsInput struct {
 	// multiple agents/connectors and you do not have permission to contact some of
 	// those agents/connectors, the system does not throw an exception. Instead, the
 	// system shows Failed in the Description field.
+	//
+	// This member is required.
 	AgentIds []*string
 }
 
 type StartDataCollectionByAgentIdsOutput struct {
+
 	// Information about agents or the connector that were instructed to start
 	// collecting data. Information includes the agent/connector ID, a description of
 	// the operation performed, and whether the agent/connector configuration was

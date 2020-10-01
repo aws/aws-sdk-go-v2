@@ -57,13 +57,20 @@ func (c *Client) StartSchemaCreation(ctx context.Context, params *StartSchemaCre
 }
 
 type StartSchemaCreationInput struct {
+
 	// The schema definition, in GraphQL schema language format.
+	//
+	// This member is required.
 	Definition []byte
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type StartSchemaCreationOutput struct {
+
 	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or
 	// NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.
 	Status types.SchemaStatus

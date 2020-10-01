@@ -80,19 +80,26 @@ func (c *Client) CreateCertificateFromCsr(ctx context.Context, params *CreateCer
 
 // The input for the CreateCertificateFromCsr operation.
 type CreateCertificateFromCsrInput struct {
+
 	// Specifies whether the certificate is active.
 	SetAsActive *bool
+
 	// The certificate signing request (CSR).
+	//
+	// This member is required.
 	CertificateSigningRequest *string
 }
 
 // The output from the CreateCertificateFromCsr operation.
 type CreateCertificateFromCsrOutput struct {
+
 	// The certificate data, in PEM format.
 	CertificatePem *string
+
 	// The ID of the certificate. Certificate management operations only take a
 	// certificateId.
 	CertificateId *string
+
 	// The Amazon Resource Name (ARN) of the certificate. You can use the ARN as a
 	// principal for policy operations.
 	CertificateArn *string

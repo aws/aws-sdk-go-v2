@@ -61,9 +61,13 @@ func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, op
 }
 
 type DeleteWebACLInput struct {
+
 	// The unique identifier for the Web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
 	Id *string
+
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to
@@ -71,7 +75,10 @@ type DeleteWebACLInput struct {
 	// changes have been made to the entity since you last retrieved it. If a change
 	// has been made, the update fails with a WAFOptimisticLockException. If this
 	// happens, perform another get, and use the new token returned by that operation.
+	//
+	// This member is required.
 	LockToken *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -82,9 +89,14 @@ type DeleteWebACLInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// The name of the Web ACL. You cannot change the name of a Web ACL after you
 	// create it.
+	//
+	// This member is required.
 	Name *string
 }
 

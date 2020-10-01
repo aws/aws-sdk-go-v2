@@ -69,20 +69,29 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 }
 
 type AddPermissionInput struct {
+
 	// The action that the principal can use on the function. For example,
 	// lambda:InvokeFunction or lambda:GetFunction.
+	//
+	// This member is required.
 	Action *string
+
 	// For AWS services, the ARN of the AWS resource that invokes the function. For
 	// example, an Amazon S3 bucket or Amazon SNS topic.
 	SourceArn *string
+
 	// For Amazon S3, the ID of the account that owns the resource. Use this together
 	// with SourceArn to ensure that the resource is owned by the specified account. It
 	// is possible for an Amazon S3 bucket to be deleted by its owner and recreated by
 	// another account.
 	SourceAccount *string
+
 	// A statement identifier that differentiates the statement from others in the same
 	// policy.
+	//
+	// This member is required.
 	StatementId *string
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -97,22 +106,31 @@ type AddPermissionInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// For Alexa Smart Home functions, a token that must be supplied by the invoker.
 	EventSourceToken *string
+
 	// Specify a version or alias to add permissions to a published version of the
 	// function.
 	Qualifier *string
+
 	// The AWS service or account that invokes the function. If you specify a service,
 	// use SourceArn or SourceAccount to limit who can invoke the function through that
 	// service.
+	//
+	// This member is required.
 	Principal *string
+
 	// Only update the policy if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
 }
 
 type AddPermissionOutput struct {
+
 	// The permission statement that's added to the function policy.
 	Statement *string
 

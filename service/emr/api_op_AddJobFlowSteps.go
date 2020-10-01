@@ -73,15 +73,22 @@ func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInp
 
 // The input argument to the AddJobFlowSteps () operation.
 type AddJobFlowStepsInput struct {
+
 	// A string that uniquely identifies the job flow. This identifier is returned by
 	// RunJobFlow () and can also be obtained from ListClusters ().
+	//
+	// This member is required.
 	JobFlowId *string
+
 	// A list of StepConfig () to be executed by the job flow.
+	//
+	// This member is required.
 	Steps []*types.StepConfig
 }
 
 // The output for the AddJobFlowSteps () operation.
 type AddJobFlowStepsOutput struct {
+
 	// The identifiers of the list of steps added to the job flow.
 	StepIds []*string
 

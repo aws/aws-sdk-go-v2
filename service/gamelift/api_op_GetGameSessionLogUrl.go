@@ -86,12 +86,16 @@ func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessio
 
 // Represents the input for a request action.
 type GetGameSessionLogUrlInput struct {
+
 	// A unique identifier for the game session to get logs for.
+	//
+	// This member is required.
 	GameSessionId *string
 }
 
 // Represents the returned data in response to a request action.
 type GetGameSessionLogUrlOutput struct {
+
 	// Location of the requested game session logs, available for download. This URL is
 	// valid for 15 minutes, after which S3 will reject any download request using this
 	// URL. You can request a new URL any time within the 14-day period that the logs

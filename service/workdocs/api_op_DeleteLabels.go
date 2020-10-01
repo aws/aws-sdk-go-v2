@@ -55,13 +55,19 @@ func (c *Client) DeleteLabels(ctx context.Context, params *DeleteLabelsInput, op
 }
 
 type DeleteLabelsInput struct {
+
 	// Flag to request removal of all labels from the specified resource.
 	DeleteAll *bool
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The ID of the resource.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// List of labels to delete from the resource.
 	Labels []*string
 }

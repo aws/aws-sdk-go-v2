@@ -56,9 +56,15 @@ func (c *Client) ModifyClientProperties(ctx context.Context, params *ModifyClien
 }
 
 type ModifyClientPropertiesInput struct {
+
 	// Information about the Amazon WorkSpaces client.
+	//
+	// This member is required.
 	ClientProperties *types.ClientProperties
+
 	// The resource identifiers, in the form of directory IDs.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

@@ -58,12 +58,16 @@ func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput
 
 //
 type DeleteEndpointInput struct {
+
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 
 //
 type DeleteEndpointOutput struct {
+
 	// The endpoint that was deleted.
 	Endpoint *types.Endpoint
 

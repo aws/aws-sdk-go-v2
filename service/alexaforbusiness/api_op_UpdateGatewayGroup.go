@@ -56,10 +56,15 @@ func (c *Client) UpdateGatewayGroup(ctx context.Context, params *UpdateGatewayGr
 }
 
 type UpdateGatewayGroupInput struct {
+
 	// The ARN of the gateway group to update.
+	//
+	// This member is required.
 	GatewayGroupArn *string
+
 	// The updated name of the gateway group.
 	Name *string
+
 	// The updated description of the gateway group.
 	Description *string
 }

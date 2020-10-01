@@ -56,41 +56,53 @@ func (c *Client) DescribeActivities(ctx context.Context, params *DescribeActivit
 }
 
 type DescribeActivitiesInput struct {
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// Specifies which activity types to include in the response. If this field is left
 	// empty, all activity types are returned.
 	ActivityTypes *string
+
 	// The ID of the organization. This is a mandatory parameter when using
 	// administrative API (SigV4) requests.
 	OrganizationId *string
+
 	// The marker for the next set of results.
 	Marker *string
+
 	// Includes indirect activities. An indirect activity results from a direct
 	// activity performed on a parent resource. For example, sharing a parent folder
 	// (the direct activity) shares all of the subfolders and documents within the
 	// parent folder (the indirect activity).
 	IncludeIndirectActivities *bool
+
 	// The maximum number of items to return.
 	Limit *int32
+
 	// The timestamp that determines the end time of the activities. The response
 	// includes the activities performed before the specified timestamp.
 	EndTime *time.Time
+
 	// The ID of the user who performed the action. The response includes activities
 	// pertaining to this user. This is an optional parameter and is only applicable
 	// for administrative API (SigV4) requests.
 	UserId *string
+
 	// The timestamp that determines the starting time of the activities. The response
 	// includes the activities performed after the specified timestamp.
 	StartTime *time.Time
+
 	// The document or folder ID for which to describe activity types.
 	ResourceId *string
 }
 
 type DescribeActivitiesOutput struct {
+
 	// The list of activities for the specified user and time period.
 	UserActivities []*types.Activity
+
 	// The marker for the next set of results.
 	Marker *string
 

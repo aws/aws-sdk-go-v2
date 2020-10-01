@@ -56,11 +56,15 @@ func (c *Client) StopBgpFailoverTest(ctx context.Context, params *StopBgpFailove
 }
 
 type StopBgpFailoverTestInput struct {
+
 	// The ID of the virtual interface you no longer want to test.
+	//
+	// This member is required.
 	VirtualInterfaceId *string
 }
 
 type StopBgpFailoverTestOutput struct {
+
 	// Information about the virtual interface failover test.
 	VirtualInterfaceTest *types.VirtualInterfaceTestHistory
 

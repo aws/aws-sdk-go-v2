@@ -60,22 +60,31 @@ func (c *Client) ListMLTransforms(ctx context.Context, params *ListMLTransformsI
 }
 
 type ListMLTransformsInput struct {
+
 	// A TransformFilterCriteria used to filter the machine learning transforms.
 	Filter *types.TransformFilterCriteria
+
 	// The maximum size of a list to return.
 	MaxResults *int32
+
 	// Specifies to return only these tagged resources.
 	Tags map[string]*string
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
 	// A TransformSortCriteria used to sort the machine learning transforms.
 	Sort *types.TransformSortCriteria
 }
 
 type ListMLTransformsOutput struct {
+
 	// The identifiers of all the machine learning transforms in the account, or the
 	// machine learning transforms with the specified tags.
+	//
+	// This member is required.
 	TransformIds []*string
+
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
 	NextToken *string

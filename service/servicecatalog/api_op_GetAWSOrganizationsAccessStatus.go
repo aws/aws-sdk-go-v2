@@ -60,6 +60,7 @@ type GetAWSOrganizationsAccessStatusInput struct {
 }
 
 type GetAWSOrganizationsAccessStatusOutput struct {
+
 	// The status of the portfolio share feature.
 	AccessStatus types.AccessStatus
 

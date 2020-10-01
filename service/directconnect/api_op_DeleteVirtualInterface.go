@@ -56,11 +56,15 @@ func (c *Client) DeleteVirtualInterface(ctx context.Context, params *DeleteVirtu
 }
 
 type DeleteVirtualInterfaceInput struct {
+
 	// The ID of the virtual interface.
+	//
+	// This member is required.
 	VirtualInterfaceId *string
 }
 
 type DeleteVirtualInterfaceOutput struct {
+
 	// The state of the virtual interface. The following are the possible values:
 	//
 	//

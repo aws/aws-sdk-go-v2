@@ -55,17 +55,22 @@ func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns
 }
 
 type ListAssetsInput struct {
+
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
+
 	// Upper bound on number of records to return.
 	MaxResults *int32
+
 	// Returns Assets associated with the specified PackagingGroup.
 	PackagingGroupId *string
 }
 
 type ListAssetsOutput struct {
+
 	// A list of MediaPackage VOD Asset resources.
 	Assets []*types.AssetShallow
+
 	// A token that can be used to resume pagination from the end of the collection.
 	NextToken *string
 

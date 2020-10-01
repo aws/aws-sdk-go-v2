@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the UpdatServer is called for a file transfer
 // protocol-enabled server that has VPC as the endpoint type and the server's
@@ -49,12 +42,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when an error occurs in the AWS Transfer Family
 // service.
@@ -73,12 +60,6 @@ func (e *InternalServiceError) ErrorMessage() string {
 }
 func (e *InternalServiceError) ErrorCode() string             { return "InternalServiceError" }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The NextToken parameter that was passed is invalid.
 type InvalidNextTokenException struct {
@@ -96,12 +77,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the client submits a malformed request.
 type InvalidRequestException struct {
@@ -119,12 +94,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource does not exist.
 type ResourceExistsException struct {
@@ -145,24 +114,6 @@ func (e *ResourceExistsException) ErrorMessage() string {
 }
 func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceExistsException) GetResource() string {
-	return ptr.ToString(e.Resource)
-}
-func (e *ResourceExistsException) HasResource() bool {
-	return e.Resource != nil
-}
-func (e *ResourceExistsException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceExistsException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a resource is not found by the AWS Transfer Family
 // service.
@@ -184,24 +135,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetResource() string {
-	return ptr.ToString(e.Resource)
-}
-func (e *ResourceNotFoundException) HasResource() bool {
-	return e.Resource != nil
-}
-func (e *ResourceNotFoundException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceNotFoundException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
 
 // The request has failed because the AWS Transfer Family service is not available.
 type ServiceUnavailableException struct {
@@ -219,12 +152,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was denied due to request throttling.  <p> HTTP Status Code: 400</p>
 type ThrottlingException struct {
@@ -244,9 +171,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *ThrottlingException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}

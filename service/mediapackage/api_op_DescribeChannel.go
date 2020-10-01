@@ -56,19 +56,27 @@ func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInp
 }
 
 type DescribeChannelInput struct {
+
 	// The ID of a Channel.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeChannelOutput struct {
+
 	// A short text description of the Channel.
 	Description *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The ID of the Channel.
 	Id *string
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
+
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
 

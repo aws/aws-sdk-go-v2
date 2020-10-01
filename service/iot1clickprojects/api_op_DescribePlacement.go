@@ -56,14 +56,23 @@ func (c *Client) DescribePlacement(ctx context.Context, params *DescribePlacemen
 }
 
 type DescribePlacementInput struct {
+
 	// The name of the placement within a project.
+	//
+	// This member is required.
 	PlacementName *string
+
 	// The project containing the placement to be described.
+	//
+	// This member is required.
 	ProjectName *string
 }
 
 type DescribePlacementOutput struct {
+
 	// An object describing the placement.
+	//
+	// This member is required.
 	Placement *types.PlacementDescription
 
 	// Metadata pertaining to the operation's result.

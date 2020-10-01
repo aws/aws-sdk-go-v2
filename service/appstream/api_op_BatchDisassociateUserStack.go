@@ -56,11 +56,15 @@ func (c *Client) BatchDisassociateUserStack(ctx context.Context, params *BatchDi
 }
 
 type BatchDisassociateUserStackInput struct {
+
 	// The list of UserStackAssociation objects.
+	//
+	// This member is required.
 	UserStackAssociations []*types.UserStackAssociation
 }
 
 type BatchDisassociateUserStackOutput struct {
+
 	// The list of UserStackAssociationError objects.
 	Errors []*types.UserStackAssociationError
 

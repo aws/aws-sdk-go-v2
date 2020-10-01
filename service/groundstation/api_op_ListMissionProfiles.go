@@ -55,8 +55,10 @@ func (c *Client) ListMissionProfiles(ctx context.Context, params *ListMissionPro
 
 //
 type ListMissionProfilesInput struct {
+
 	// Maximum number of mission profiles returned.
 	MaxResults *int32
+
 	// Next token returned in the request of a previous ListMissionProfiles call. Used
 	// to get the next page of results.
 	NextToken *string
@@ -64,8 +66,10 @@ type ListMissionProfilesInput struct {
 
 //
 type ListMissionProfilesOutput struct {
+
 	// List of mission profiles.
 	MissionProfileList []*types.MissionProfileListItem
+
 	// Next token returned in the response of a previous ListMissionProfiles call. Used
 	// to get the next page of results.
 	NextToken *string

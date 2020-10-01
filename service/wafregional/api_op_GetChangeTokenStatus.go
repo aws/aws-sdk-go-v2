@@ -73,12 +73,16 @@ func (c *Client) GetChangeTokenStatus(ctx context.Context, params *GetChangeToke
 }
 
 type GetChangeTokenStatusInput struct {
+
 	// The change token for which you want to get the status. This change token was
 	// previously returned in the GetChangeToken response.
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type GetChangeTokenStatusOutput struct {
+
 	// The status of the change token.
 	ChangeTokenStatus types.ChangeTokenStatus
 

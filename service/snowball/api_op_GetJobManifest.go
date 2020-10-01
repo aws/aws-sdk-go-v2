@@ -68,12 +68,16 @@ func (c *Client) GetJobManifest(ctx context.Context, params *GetJobManifestInput
 }
 
 type GetJobManifestInput struct {
+
 	// The ID for a job that you want to get the manifest file for, for example
 	// JID123e4567-e89b-12d3-a456-426655440000.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type GetJobManifestOutput struct {
+
 	// The Amazon S3 presigned URL for the manifest file associated with the specified
 	// JobId value.
 	ManifestURI *string

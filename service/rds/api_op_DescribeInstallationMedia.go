@@ -57,10 +57,12 @@ func (c *Client) DescribeInstallationMedia(ctx context.Context, params *Describe
 }
 
 type DescribeInstallationMediaInput struct {
+
 	// An optional pagination token provided by a previous DescribeInstallationMedia
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	MaxRecords *int32
+
 	// A filter that specifies one or more installation media to describe. Supported
 	// filters include the following:
 	//
@@ -73,8 +75,10 @@ type DescribeInstallationMediaInput struct {
 	// database engines identified by these identifiers. For more information about the
 	// valid engines for installation media, see ImportInstallationMedia ().
 	Filters []*types.Filter
+
 	// The installation medium ID.
 	InstallationMediaId *string
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
@@ -82,10 +86,12 @@ type DescribeInstallationMediaInput struct {
 }
 
 type DescribeInstallationMediaOutput struct {
+
 	// An optional pagination token provided by a previous DescribeInstallationMedia ()
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
+
 	// The list of InstallationMedia () objects for the AWS account.
 	InstallationMedia []*types.InstallationMedia
 

@@ -67,24 +67,37 @@ func (c *Client) MergeDeveloperIdentities(ctx context.Context, params *MergeDeve
 
 // Input to the MergeDeveloperIdentities action.
 type MergeDeveloperIdentitiesInput struct {
+
 	// User identifier for the destination user. The value should be a
 	// DeveloperUserIdentifier.
+	//
+	// This member is required.
 	DestinationUserIdentifier *string
+
 	// The "domain" by which Cognito will refer to your users. This is a (pseudo)
 	// domain name that you provide while creating an identity pool. This name acts as
 	// a placeholder that allows your backend and the Cognito service to communicate
 	// about the developer provider. For the DeveloperProviderName, you can use letters
 	// as well as period (.), underscore (_), and dash (-).
+	//
+	// This member is required.
 	DeveloperProviderName *string
+
 	// User identifier for the source user. The value should be a
 	// DeveloperUserIdentifier.
+	//
+	// This member is required.
 	SourceUserIdentifier *string
+
 	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 
 // Returned in response to a successful MergeDeveloperIdentities action.
 type MergeDeveloperIdentitiesOutput struct {
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
 

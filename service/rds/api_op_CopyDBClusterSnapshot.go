@@ -115,6 +115,7 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 
 //
 type CopyDBClusterSnapshotInput struct {
+
 	// The identifier of the new DB cluster snapshot to create from the source DB
 	// cluster snapshot. This parameter isn't case-sensitive. Constraints:
 	//
@@ -128,7 +129,10 @@ type CopyDBClusterSnapshotInput struct {
 	// hyphens.
 	//
 	// Example: my-cluster-snapshot2
+	//
+	// This member is required.
 	TargetDBClusterSnapshotIdentifier *string
+
 	// The URL that contains a Signature Version 4 signed request for the
 	// CopyDBClusterSnapshot API action in the AWS Region that contains the source DB
 	// cluster snapshot to copy. The PreSignedUrl parameter must be used when copying
@@ -164,6 +168,7 @@ type CopyDBClusterSnapshotInput struct {
 	// autogenerates a pre-signed URL that is a valid request for the operation that
 	// can be executed in the source AWS Region.</p> </note>
 	PreSignedUrl *string
+
 	// The identifier of the DB cluster snapshot to copy. This parameter isn't
 	// case-sensitive. You can't copy an encrypted, shared DB cluster snapshot from one
 	// AWS Region to another. Constraints:
@@ -181,14 +186,19 @@ type CopyDBClusterSnapshotInput struct {
 	// in the Amazon Aurora User Guide.
 	//
 	// Example: my-cluster-snapshot1
+	//
+	// This member is required.
 	SourceDBClusterSnapshotIdentifier *string
+
 	// A value that indicates whether to copy all tags from the source DB cluster
 	// snapshot to the target DB cluster snapshot. By default, tags are not copied.
 	CopyTags *bool
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
+
 	// The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the
 	// Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
 	// encryption key.  <p>If you copy an encrypted DB cluster snapshot from your AWS
@@ -209,6 +219,7 @@ type CopyDBClusterSnapshotInput struct {
 }
 
 type CopyDBClusterSnapshotOutput struct {
+
 	// Contains the details for an Amazon RDS DB cluster snapshot This data type is
 	// used as a response element in the DescribeDBClusterSnapshots action.
 	DBClusterSnapshot *types.DBClusterSnapshot

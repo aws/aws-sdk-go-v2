@@ -55,11 +55,15 @@ func (c *Client) DeleteNotificationRule(ctx context.Context, params *DeleteNotif
 }
 
 type DeleteNotificationRuleInput struct {
+
 	// The Amazon Resource Name (ARN) of the notification rule you want to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type DeleteNotificationRuleOutput struct {
+
 	// The Amazon Resource Name (ARN) of the deleted notification rule.
 	Arn *string
 

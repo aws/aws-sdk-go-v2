@@ -90,46 +90,61 @@ func (c *Client) RegisterImage(ctx context.Context, params *RegisterImageInput, 
 
 // Contains the parameters for RegisterImage.
 type RegisterImageInput struct {
+
 	// Set to simple to enable enhanced networking with the Intel 82599 Virtual
 	// Function interface for the AMI and any instances that you launch from the AMI.
 	// There is no way to disable sriovNetSupport at this time. This option is
 	// supported only for HVM AMIs. Specifying this option with a PV AMI can make
 	// instances launched from the AMI unreachable.
 	SriovNetSupport *string
+
 	// The full path to your AMI manifest in Amazon S3 storage. The specified bucket
 	// must have the aws-exec-read canned access control list (ACL) to ensure that it
 	// can be accessed by Amazon EC2. For more information, see Canned ACLs
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
 	// in the Amazon S3 Service Developer Guide.
 	ImageLocation *string
+
 	// The device name of the root device volume (for example, /dev/sda1).
 	RootDeviceName *string
+
 	// The billing product codes. Your account must be authorized to specify billing
 	// product codes. Otherwise, you can use the AWS Marketplace to bill for the use of
 	// an AMI.
 	BillingProducts []*string
+
 	// The architecture of the AMI. Default: For Amazon EBS-backed AMIs, i386. For
 	// instance store-backed AMIs, the architecture specified in the manifest file.
 	Architecture types.ArchitectureValues
+
 	// The type of virtualization (hvm | paravirtual). Default: paravirtual
 	VirtualizationType *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the kernel.
 	KernelId *string
+
 	// The ID of the RAM disk.
 	RamdiskId *string
+
 	// A name for your AMI. Constraints: 3-128 alphanumeric characters, parentheses
 	// (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-),
 	// single quotes ('), at-signs (@), or underscores(_)
+	//
+	// This member is required.
 	Name *string
+
 	// A description for your AMI.
 	Description *string
+
 	// The block device mapping entries.
 	BlockDeviceMappings []*types.BlockDeviceMapping
+
 	// Set to true to enable enhanced networking with ENA for the AMI and any instances
 	// that you launch from the AMI. This option is supported only for HVM AMIs.
 	// Specifying this option with a PV AMI can make instances launched from the AMI
@@ -139,6 +154,7 @@ type RegisterImageInput struct {
 
 // Contains the output of RegisterImage.
 type RegisterImageOutput struct {
+
 	// The ID of the newly registered AMI.
 	ImageId *string
 

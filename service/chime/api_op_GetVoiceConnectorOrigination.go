@@ -57,11 +57,15 @@ func (c *Client) GetVoiceConnectorOrigination(ctx context.Context, params *GetVo
 }
 
 type GetVoiceConnectorOriginationInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type GetVoiceConnectorOriginationOutput struct {
+
 	// The origination setting details.
 	Origination *types.Origination
 

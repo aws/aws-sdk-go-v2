@@ -55,9 +55,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The tags to add to the Elastic Inference Accelerator.
+	//
+	// This member is required.
 	Tags map[string]*string
+
 	// The ARN of the Elastic Inference Accelerator to tag.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

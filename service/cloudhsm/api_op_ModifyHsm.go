@@ -70,19 +70,27 @@ func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns .
 
 // Contains the inputs for the ModifyHsm () operation.
 type ModifyHsmInput struct {
+
 	// The new identifier of the subnet that the HSM is in. The new subnet must be in
 	// the same Availability Zone as the current subnet.
 	SubnetId *string
+
 	// The new external ID.
 	ExternalId *string
+
 	// The new IP address for the elastic network interface (ENI) attached to the HSM.
 	// If the HSM is moved to a different subnet, and an IP address is not specified,
 	// an IP address will be randomly chosen from the CIDR range of the new subnet.
 	EniIp *string
+
 	// The ARN of the HSM to modify.
+	//
+	// This member is required.
 	HsmArn *string
+
 	// The new IAM role ARN.
 	IamRoleArn *string
+
 	// The new IP address for the syslog monitoring server. The AWS CloudHSM service
 	// only supports one syslog monitoring server.
 	SyslogIp *string
@@ -90,6 +98,7 @@ type ModifyHsmInput struct {
 
 // Contains the output of the ModifyHsm () operation.
 type ModifyHsmOutput struct {
+
 	// The ARN of the HSM.
 	HsmArn *string
 

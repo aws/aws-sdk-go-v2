@@ -61,12 +61,16 @@ func (c *Client) GetJobDetails(ctx context.Context, params *GetJobDetailsInput, 
 
 // Represents the input of a GetJobDetails action.
 type GetJobDetailsInput struct {
+
 	// The unique system-generated ID for the job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 // Represents the output of a GetJobDetails action.
 type GetJobDetailsOutput struct {
+
 	// The details of the job. If AWSSessionCredentials is used, a long-running job can
 	// call GetJobDetails again to obtain new credentials.
 	JobDetails *types.JobDetails

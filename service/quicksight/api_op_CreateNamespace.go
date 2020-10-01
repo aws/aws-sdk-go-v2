@@ -63,33 +63,49 @@ func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInp
 }
 
 type CreateNamespaceInput struct {
+
 	// The ID for the AWS account that you want to create the QuickSight namespace in.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The tags that you want to associate with the namespace that you're creating.
 	Tags []*types.Tag
+
 	// The name that you want to use to describe the new namespace.
+	//
+	// This member is required.
 	Namespace *string
+
 	// Specifies the type of your user identity directory. Currently, this supports
 	// users with an identity type of QUICKSIGHT.
+	//
+	// This member is required.
 	IdentityStore types.IdentityStore
 }
 
 type CreateNamespaceOutput struct {
+
 	// The status of the creation of the namespace. This is an asynchronous process. A
 	// status of CREATED means that your namespace is ready to use. If an error occurs,
 	// it indicates if the process is retryable or non-retryable. In the case of a
 	// non-retryable error, refer to the error message for follow-up actions.
 	CreationStatus types.NamespaceStatus
+
 	// The name of the new namespace that you created.
 	Name *string
+
 	// Specifies the type of your user identity directory. Currently, this supports
 	// users with an identity type of QUICKSIGHT.
 	IdentityStore types.IdentityStore
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The AWS Region that you want to use for the free SPICE capacity for the new
 	// namespace. This is set to the region that you run CreateNamespace in.
 	CapacityRegion *string
+
 	// The ARN of the QuickSight namespace you created.
 	Arn *string
 

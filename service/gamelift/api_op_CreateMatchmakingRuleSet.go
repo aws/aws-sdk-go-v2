@@ -99,6 +99,7 @@ func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMat
 
 // Represents the input for a request action.
 type CreateMatchmakingRuleSetInput struct {
+
 	// A list of labels to assign to the new matchmaking rule set resource. Tags are
 	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
 	// management, access management and cost allocation. For more information, see
@@ -109,18 +110,27 @@ type CreateMatchmakingRuleSetInput struct {
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag
+
 	// A collection of matchmaking rules, formatted as a JSON string. Comments are not
 	// allowed in JSON, but most elements support a description field.
+	//
+	// This member is required.
 	RuleSetBody *string
+
 	// A unique identifier for a matchmaking rule set. A matchmaking configuration
 	// identifies the rule set it uses by this name value. Note that the rule set name
 	// is different from the optional name field in the rule set body.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Represents the returned data in response to a request action.
 type CreateMatchmakingRuleSetOutput struct {
+
 	// The newly created matchmaking rule set.
+	//
+	// This member is required.
 	RuleSet *types.MatchmakingRuleSet
 
 	// Metadata pertaining to the operation's result.

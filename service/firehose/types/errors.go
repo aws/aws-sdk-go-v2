@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Another modification has already happened. Fetch VersionId again and use it to
@@ -27,12 +26,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified input parameter has a value that is not valid.
 type InvalidArgumentException struct {
@@ -50,12 +43,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Kinesis Data Firehose throws this exception when an attempt to put records or to
 // start or stop delivery stream encryption fails. This happens when the KMS
@@ -78,18 +65,6 @@ func (e *InvalidKMSResourceException) ErrorMessage() string {
 }
 func (e *InvalidKMSResourceException) ErrorCode() string             { return "InvalidKMSResourceException" }
 func (e *InvalidKMSResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidKMSResourceException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidKMSResourceException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidKMSResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidKMSResourceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have already reached the limit for a requested resource.
 type LimitExceededException struct {
@@ -107,12 +82,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is already in use and not available for this operation.
 type ResourceInUseException struct {
@@ -130,12 +99,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
@@ -153,12 +116,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is unavailable. Back off and retry the operation. If you continue to
 // see the exception, throughput limits for the delivery stream may have been
@@ -180,9 +137,3 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}

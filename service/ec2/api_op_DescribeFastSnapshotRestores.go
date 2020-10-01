@@ -55,6 +55,7 @@ func (c *Client) DescribeFastSnapshotRestores(ctx context.Context, params *Descr
 }
 
 type DescribeFastSnapshotRestoresInput struct {
+
 	// The filters. The possible values are:
 	//
 	//     * availability-zone: The Availability
@@ -69,22 +70,27 @@ type DescribeFastSnapshotRestoresInput struct {
 	//     * state: The state of fast snapshot restores for the snapshot
 	// (enabling | optimizing | enabled | disabling | disabled).
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 }
 
 type DescribeFastSnapshotRestoresOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the state of fast snapshot restores.
 	FastSnapshotRestores []*types.DescribeFastSnapshotRestoreSuccessItem
 

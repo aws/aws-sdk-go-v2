@@ -56,18 +56,27 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 }
 
 type DescribeTagsInput struct {
+
 	// The ID of the ML object. For example, exampleModelId.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The type of the ML object.
+	//
+	// This member is required.
 	ResourceType types.TaggableResourceType
 }
 
 // Amazon ML returns the following elements.
 type DescribeTagsOutput struct {
+
 	// A list of tags associated with the ML object.
 	Tags []*types.Tag
+
 	// The type of the tagged ML object.
 	ResourceType types.TaggableResourceType
+
 	// The ID of the tagged ML object.
 	ResourceId *string
 

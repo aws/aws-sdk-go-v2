@@ -62,13 +62,25 @@ func (c *Client) UpdateModelVersionStatus(ctx context.Context, params *UpdateMod
 }
 
 type UpdateModelVersionStatusInput struct {
+
 	// The model ID of the model version to update.
+	//
+	// This member is required.
 	ModelId *string
+
 	// The model version number.
+	//
+	// This member is required.
 	ModelVersionNumber *string
+
 	// The model type.
+	//
+	// This member is required.
 	ModelType types.ModelTypeEnum
+
 	// The model version status.
+	//
+	// This member is required.
 	Status types.ModelVersionStatus
 }
 

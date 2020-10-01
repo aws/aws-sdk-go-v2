@@ -63,21 +63,30 @@ func (c *Client) GetRules(ctx context.Context, params *GetRulesInput, optFns ...
 }
 
 type GetRulesInput struct {
+
 	// The maximum number of rules to return for the request.
 	MaxResults *int32
+
 	// The detector ID.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The rule version.
 	RuleVersion *string
+
 	// The next page token.
 	NextToken *string
+
 	// The rule ID.
 	RuleId *string
 }
 
 type GetRulesOutput struct {
+
 	// The details of the requested rule.
 	RuleDetails []*types.RuleDetail
+
 	// The next page token to be used in subsequent requests.
 	NextToken *string
 

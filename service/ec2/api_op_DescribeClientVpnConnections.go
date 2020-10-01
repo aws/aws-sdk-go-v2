@@ -57,19 +57,26 @@ func (c *Client) DescribeClientVpnConnections(ctx context.Context, params *Descr
 }
 
 type DescribeClientVpnConnectionsInput struct {
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the nextToken
 	// value.
 	MaxResults *int32
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
+
 	// One or more filters. Filter names and values are case-sensitive.
 	//
 	//     *
@@ -82,8 +89,10 @@ type DescribeClientVpnConnectionsInput struct {
 }
 
 type DescribeClientVpnConnectionsOutput struct {
+
 	// Information about the active and terminated client connections.
 	Connections []*types.ClientVpnConnection
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

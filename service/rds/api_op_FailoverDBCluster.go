@@ -67,19 +67,24 @@ func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBCluste
 
 //
 type FailoverDBClusterInput struct {
+
 	// The name of the instance to promote to the primary instance. You must specify
 	// the instance identifier for an Aurora Replica in the DB cluster. For example,
 	// mydbcluster-replica1.
 	TargetDBInstanceIdentifier *string
+
 	// A DB cluster identifier to force a failover for. This parameter isn't
 	// case-sensitive. Constraints:
 	//
 	//     * Must match the identifier of an existing
 	// DBCluster.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type FailoverDBClusterOutput struct {
+
 	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
 	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
 	// actions.

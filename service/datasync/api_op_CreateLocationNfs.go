@@ -58,18 +58,24 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 
 // CreateLocationNfsRequest
 type CreateLocationNfsInput struct {
+
 	// The NFS mount options that DataSync can use to mount your NFS share.
 	MountOptions *types.NfsMountOptions
+
 	// Contains a list of Amazon Resource Names (ARNs) of agents that are used to
 	// connect to an NFS server. If you are copying data to or from your AWS Snowcone
 	// device, see NFS Server on AWS Snowcone
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information.
+	//
+	// This member is required.
 	OnPremConfig *types.OnPremConfig
+
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []*types.TagListEntry
+
 	// The name of the NFS server. This value is the IP address or Domain Name Service
 	// (DNS) name of the NFS server. An agent that is installed on-premises uses this
 	// host name to mount the NFS server in a network. If you are copying data to or
@@ -77,7 +83,10 @@ type CreateLocationNfsInput struct {
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information. This name must either be DNS-compliant or must be an IP
 	// version 4 (IPv4) address.
+	//
+	// This member is required.
 	ServerHostname *string
+
 	// The subdirectory in the NFS file system that is used to read data from the NFS
 	// source location or write data to the NFS destination. The NFS path should be a
 	// path that's exported by the NFS server, or a subdirectory of that path. The path
@@ -97,11 +106,14 @@ type CreateLocationNfsInput struct {
 	// for more information.  <p>For information about NFS export configuration, see
 	// 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux
 	// documentation.</p>
+	//
+	// This member is required.
 	Subdirectory *string
 }
 
 // CreateLocationNfsResponse
 type CreateLocationNfsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the source NFS file system location that is
 	// created.
 	LocationArn *string

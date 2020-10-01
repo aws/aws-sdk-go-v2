@@ -57,28 +57,40 @@ func (c *Client) DescribeExperiment(ctx context.Context, params *DescribeExperim
 }
 
 type DescribeExperimentInput struct {
+
 	// The name of the experiment to describe.
+	//
+	// This member is required.
 	ExperimentName *string
 }
 
 type DescribeExperimentOutput struct {
+
 	// When the experiment was created.
 	CreationTime *time.Time
+
 	// When the experiment was last modified.
 	LastModifiedTime *time.Time
+
 	// The name of the experiment as displayed. If DisplayName isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
+
 	// Who last modified the experiment.
 	LastModifiedBy *types.UserContext
+
 	// The ARN of the source and, optionally, the type.
 	Source *types.ExperimentSource
+
 	// Who created the experiment.
 	CreatedBy *types.UserContext
+
 	// The description of the experiment.
 	Description *string
+
 	// The name of the experiment.
 	ExperimentName *string
+
 	// The Amazon Resource Name (ARN) of the experiment.
 	ExperimentArn *string
 

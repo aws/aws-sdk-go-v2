@@ -56,16 +56,27 @@ func (c *Client) UpdateVirtualRouter(ctx context.Context, params *UpdateVirtualR
 
 //
 type UpdateVirtualRouterInput struct {
+
 	// The name of the virtual router to update.
+	//
+	// This member is required.
 	VirtualRouterName *string
+
 	// The name of the service mesh that the virtual router resides in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The new virtual router specification to apply. This overwrites the existing
 	// data.
+	//
+	// This member is required.
 	Spec *types.VirtualRouterSpec
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -75,7 +86,10 @@ type UpdateVirtualRouterInput struct {
 
 //
 type UpdateVirtualRouterOutput struct {
+
 	// A full description of the virtual router that was updated.
+	//
+	// This member is required.
 	VirtualRouter *types.VirtualRouterData
 
 	// Metadata pertaining to the operation's result.

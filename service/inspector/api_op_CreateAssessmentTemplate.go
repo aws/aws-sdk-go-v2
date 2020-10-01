@@ -61,28 +61,44 @@ func (c *Client) CreateAssessmentTemplate(ctx context.Context, params *CreateAss
 }
 
 type CreateAssessmentTemplateInput struct {
+
 	// The ARNs that specify the rules packages that you want to attach to the
 	// assessment template.
+	//
+	// This member is required.
 	RulesPackageArns []*string
+
 	// The user-defined name that identifies the assessment template that you want to
 	// create. You can create several assessment templates for an assessment target.
 	// The names of the assessment templates that correspond to a particular assessment
 	// target must be unique.
+	//
+	// This member is required.
 	AssessmentTemplateName *string
+
 	// The ARN that specifies the assessment target for which you want to create the
 	// assessment template.
+	//
+	// This member is required.
 	AssessmentTargetArn *string
+
 	// The user-defined attributes that are assigned to every finding that is generated
 	// by the assessment run that uses this assessment template. An attribute is a key
 	// and value pair (an Attribute () object). Within an assessment template, each key
 	// must be unique.
 	UserAttributesForFindings []*types.Attribute
+
 	// The duration of the assessment run in seconds.
+	//
+	// This member is required.
 	DurationInSeconds *int32
 }
 
 type CreateAssessmentTemplateOutput struct {
+
 	// The ARN that specifies the assessment template that is created.
+	//
+	// This member is required.
 	AssessmentTemplateArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -64,20 +64,36 @@ func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProject
 }
 
 type CreateProjectVersionInput struct {
+
 	// The Amazon S3 location to store the results of training.
+	//
+	// This member is required.
 	OutputConfig *types.OutputConfig
+
 	// A name for the version of the model. This value must be unique.
+	//
+	// This member is required.
 	VersionName *string
+
 	// The ARN of the Amazon Rekognition Custom Labels project that manages the model
 	// that you want to train.
+	//
+	// This member is required.
 	ProjectArn *string
+
 	// The dataset to use for training.
+	//
+	// This member is required.
 	TrainingData *types.TrainingData
+
 	// The dataset to use for testing.
+	//
+	// This member is required.
 	TestingData *types.TestingData
 }
 
 type CreateProjectVersionOutput struct {
+
 	// The ARN of the model version that was created. Use DescribeProjectVersion to get
 	// the current status of the training operation.
 	ProjectVersionArn *string

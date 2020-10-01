@@ -77,14 +77,21 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 
 // Represents the input of an UpdateTimeToLive operation.
 type UpdateTimeToLiveInput struct {
+
 	// Represents the settings used to enable or disable Time to Live for the specified
 	// table.
+	//
+	// This member is required.
 	TimeToLiveSpecification *types.TimeToLiveSpecification
+
 	// The name of the table to be configured.
+	//
+	// This member is required.
 	TableName *string
 }
 
 type UpdateTimeToLiveOutput struct {
+
 	// Represents the output of an UpdateTimeToLive operation.
 	TimeToLiveSpecification *types.TimeToLiveSpecification
 

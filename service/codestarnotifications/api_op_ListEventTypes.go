@@ -57,20 +57,25 @@ func (c *Client) ListEventTypes(ctx context.Context, params *ListEventTypesInput
 }
 
 type ListEventTypesInput struct {
+
 	// The filters to use to return information by service or resource type.
 	Filters []*types.ListEventTypesFilter
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
 	// A non-negative integer used to limit the number of returned results. The default
 	// number is 50. The maximum number of results that can be returned is 100.
 	MaxResults *int32
 }
 
 type ListEventTypesOutput struct {
+
 	// Information about each event, including service name, resource type, event ID,
 	// and event name.
 	EventTypes []*types.EventTypeSummary
+
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string

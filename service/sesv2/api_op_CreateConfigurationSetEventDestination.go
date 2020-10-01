@@ -63,11 +63,20 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 
 // A request to add an event destination to a configuration set.
 type CreateConfigurationSetEventDestinationInput struct {
+
 	// The name of the configuration set that you want to add an event destination to.
+	//
+	// This member is required.
 	ConfigurationSetName *string
+
 	// An object that defines the event destination.
+	//
+	// This member is required.
 	EventDestination *types.EventDestinationDefinition
+
 	// A name that identifies the event destination within the configuration set.
+	//
+	// This member is required.
 	EventDestinationName *string
 }
 

@@ -61,7 +61,10 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 
 // The input for the DeletePolicy operation.
 type DeletePolicyInput struct {
+
 	// The name of the policy to delete.
+	//
+	// This member is required.
 	PolicyName *string
 }
 

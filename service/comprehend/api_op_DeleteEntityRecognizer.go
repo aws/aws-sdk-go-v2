@@ -60,7 +60,10 @@ func (c *Client) DeleteEntityRecognizer(ctx context.Context, params *DeleteEntit
 }
 
 type DeleteEntityRecognizerInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
+	//
+	// This member is required.
 	EntityRecognizerArn *string
 }
 

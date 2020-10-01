@@ -57,22 +57,31 @@ func (c *Client) DescribeInputSecurityGroup(ctx context.Context, params *Describ
 
 // Placeholder documentation for DescribeInputSecurityGroupRequest
 type DescribeInputSecurityGroupInput struct {
+
 	// The id of the Input Security Group to describe
+	//
+	// This member is required.
 	InputSecurityGroupId *string
 }
 
 // Placeholder documentation for DescribeInputSecurityGroupResponse
 type DescribeInputSecurityGroupOutput struct {
+
 	// Unique ARN of Input Security Group
 	Arn *string
+
 	// Whitelist rules and their sync status
 	WhitelistRules []*types.InputWhitelistRule
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
+
 	// The list of inputs currently using this Input Security Group.
 	Inputs []*string
+
 	// The current state of the Input Security Group.
 	State types.InputSecurityGroupState
+
 	// The Id of the Input Security Group
 	Id *string
 

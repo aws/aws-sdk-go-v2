@@ -57,13 +57,17 @@ func (c *Client) StopProjectVersion(ctx context.Context, params *StopProjectVers
 }
 
 type StopProjectVersionInput struct {
+
 	// The Amazon Resource Name (ARN) of the model version that you want to delete.
 	// This operation requires permissions to perform the
 	// rekognition:StopProjectVersion action.
+	//
+	// This member is required.
 	ProjectVersionArn *string
 }
 
 type StopProjectVersionOutput struct {
+
 	// The current status of the stop operation.
 	Status types.ProjectVersionStatus
 

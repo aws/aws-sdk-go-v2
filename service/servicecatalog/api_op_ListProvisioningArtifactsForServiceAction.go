@@ -57,8 +57,12 @@ func (c *Client) ListProvisioningArtifactsForServiceAction(ctx context.Context, 
 }
 
 type ListProvisioningArtifactsForServiceActionInput struct {
+
 	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	//
+	// This member is required.
 	ServiceActionId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -68,17 +72,21 @@ type ListProvisioningArtifactsForServiceActionInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
 }
 
 type ListProvisioningArtifactsForServiceActionOutput struct {
+
 	// An array of objects with information about product views and provisioning
 	// artifacts.
 	ProvisioningArtifactViews []*types.ProvisioningArtifactView
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string

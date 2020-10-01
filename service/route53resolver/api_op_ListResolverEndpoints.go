@@ -56,15 +56,18 @@ func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolver
 }
 
 type ListResolverEndpointsInput struct {
+
 	// The maximum number of resolver endpoints that you want to return in the response
 	// to a ListResolverEndpoints request. If you don't specify a value for MaxResults,
 	// Resolver returns up to 100 resolver endpoints.
 	MaxResults *int32
+
 	// For the first ListResolverEndpoints request, omit this value. If you have more
 	// than MaxResults resolver endpoints, you can submit another ListResolverEndpoints
 	// request to get the next group of resolver endpoints. In the next request,
 	// specify the value of NextToken from the previous response.
 	NextToken *string
+
 	// An optional specification to return a subset of resolver endpoints, such as all
 	// inbound resolver endpoints. If you submit a second or subsequent
 	// ListResolverEndpoints request and specify the NextToken parameter, you must use
@@ -73,12 +76,15 @@ type ListResolverEndpointsInput struct {
 }
 
 type ListResolverEndpointsOutput struct {
+
 	// The value that you specified for MaxResults in the request.
 	MaxResults *int32
+
 	// If more than MaxResults IP addresses match the specified criteria, you can
 	// submit another ListResolverEndpoint request to get the next group of results. In
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
+
 	// The resolver endpoints that were created by using the current AWS account, and
 	// that match the specified filters, if any.
 	ResolverEndpoints []*types.ResolverEndpoint

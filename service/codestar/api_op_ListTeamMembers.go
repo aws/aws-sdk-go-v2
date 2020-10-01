@@ -56,18 +56,27 @@ func (c *Client) ListTeamMembers(ctx context.Context, params *ListTeamMembersInp
 }
 
 type ListTeamMembersInput struct {
+
 	// The maximum number of team members you want returned in a response.
 	MaxResults *int32
+
 	// The ID of the project for which you want to list team members.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.
 	NextToken *string
 }
 
 type ListTeamMembersOutput struct {
+
 	// A list of team member objects for the project.
+	//
+	// This member is required.
 	TeamMembers []*types.TeamMember
+
 	// The continuation token to use when requesting the next set of results, if there
 	// are more results to be returned.
 	NextToken *string

@@ -69,6 +69,7 @@ func (c *Client) StartStreamEncryption(ctx context.Context, params *StartStreamE
 }
 
 type StartStreamEncryptionInput struct {
+
 	// The GUID for the customer-managed AWS KMS key to use for encryption. This value
 	// can be a globally unique identifier, a fully specified Amazon Resource Name
 	// (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You can
@@ -89,10 +90,18 @@ type StartStreamEncryptionInput struct {
 	//
 	//     * Master key owned by Kinesis Data
 	// Streams: alias/aws/kinesis
+	//
+	// This member is required.
 	KeyId *string
+
 	// The encryption type to use. The only valid value is KMS.
+	//
+	// This member is required.
 	EncryptionType types.EncryptionType
+
 	// The name of the stream for which to start encrypting records.
+	//
+	// This member is required.
 	StreamName *string
 }
 

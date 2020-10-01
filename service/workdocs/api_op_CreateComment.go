@@ -56,29 +56,44 @@ func (c *Client) CreateComment(ctx context.Context, params *CreateCommentInput, 
 }
 
 type CreateCommentInput struct {
+
 	// Set this parameter to TRUE to send an email out to the document collaborators
 	// after the comment is created.
 	NotifyCollaborators *bool
+
 	// The ID of the parent comment.
 	ParentId *string
+
 	// The visibility of the comment. Options are either PRIVATE, where the comment is
 	// visible only to the comment author and document owner and co-owners, or PUBLIC,
 	// where the comment is visible to document owners, co-owners, and contributors.
 	Visibility types.CommentVisibilityType
+
 	// The ID of the root comment in the thread.
 	ThreadId *string
+
 	// The ID of the document version.
+	//
+	// This member is required.
 	VersionId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The text of the comment.
+	//
+	// This member is required.
 	Text *string
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
 }
 
 type CreateCommentOutput struct {
+
 	// The comment that has been created.
 	Comment *types.Comment
 

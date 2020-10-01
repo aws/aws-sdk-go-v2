@@ -56,11 +56,15 @@ func (c *Client) GetBackupPlanFromTemplate(ctx context.Context, params *GetBacku
 }
 
 type GetBackupPlanFromTemplateInput struct {
+
 	// Uniquely identifies a stored backup plan template.
+	//
+	// This member is required.
 	BackupPlanTemplateId *string
 }
 
 type GetBackupPlanFromTemplateOutput struct {
+
 	// Returns the body of a backup plan based on the target template, including the
 	// name, rules, and backup vault of the plan.
 	BackupPlanDocument *types.BackupPlan

@@ -56,15 +56,23 @@ func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesI
 }
 
 type UngroupResourcesInput struct {
+
 	// The ARNs of the resources to be removed from the group.
+	//
+	// This member is required.
 	ResourceArns []*string
+
 	// The name or the ARN of the resource group from which to remove the resources.
+	//
+	// This member is required.
 	Group *string
 }
 
 type UngroupResourcesOutput struct {
+
 	// The resources that failed to be removed from the group.
 	Failed []*types.FailedResource
+
 	// The ARNs of the resources that were successfully removed from the group.
 	Succeeded []*string
 

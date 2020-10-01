@@ -57,11 +57,20 @@ func (c *Client) PutWorkflowRunProperties(ctx context.Context, params *PutWorkfl
 }
 
 type PutWorkflowRunPropertiesInput struct {
+
 	// Name of the workflow which was run.
+	//
+	// This member is required.
 	Name *string
+
 	// The ID of the workflow run for which the run properties should be updated.
+	//
+	// This member is required.
 	RunId *string
+
 	// The properties to put for the specified run.
+	//
+	// This member is required.
 	RunProperties map[string]*string
 }
 

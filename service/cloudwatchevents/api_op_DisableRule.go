@@ -58,10 +58,14 @@ func (c *Client) DisableRule(ctx context.Context, params *DisableRuleInput, optF
 }
 
 type DisableRuleInput struct {
+
 	// The event bus associated with the rule. If you omit this, the default event bus
 	// is used.
 	EventBusName *string
+
 	// The name of the rule.
+	//
+	// This member is required.
 	Name *string
 }
 

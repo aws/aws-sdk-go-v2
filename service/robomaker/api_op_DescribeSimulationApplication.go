@@ -57,31 +57,45 @@ func (c *Client) DescribeSimulationApplication(ctx context.Context, params *Desc
 }
 
 type DescribeSimulationApplicationInput struct {
+
 	// The application information for the simulation application.
+	//
+	// This member is required.
 	Application *string
+
 	// The version of the simulation application to describe.
 	ApplicationVersion *string
 }
 
 type DescribeSimulationApplicationOutput struct {
+
 	// The sources of the simulation application.
 	Sources []*types.Source
+
 	// The revision id of the simulation application.
 	RevisionId *string
+
 	// The version of the simulation application.
 	Version *string
+
 	// The list of all tags added to the specified simulation application.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the robot simulation application.
 	Arn *string
+
 	// Information about the robot software suite (ROS distribution).
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
 	// The name of the simulation application.
 	Name *string
+
 	// The simulation software suite used by the simulation application.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
+
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
 	LastUpdatedAt *time.Time

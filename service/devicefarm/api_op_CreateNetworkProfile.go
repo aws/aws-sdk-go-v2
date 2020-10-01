@@ -56,38 +56,55 @@ func (c *Client) CreateNetworkProfile(ctx context.Context, params *CreateNetwork
 }
 
 type CreateNetworkProfileInput struct {
+
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
 	DownlinkLossPercent *int32
+
 	// Delay time for all packets to destination in milliseconds as an integer from 0
 	// to 2000.
 	UplinkDelayMs *int64
+
 	// The name for the new network profile.
+	//
+	// This member is required.
 	Name *string
+
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64
+
 	// Time variation in the delay of received packets in milliseconds as an integer
 	// from 0 to 2000.
 	UplinkJitterMs *int64
+
 	// Delay time for all packets to destination in milliseconds as an integer from 0
 	// to 2000.
 	DownlinkDelayMs *int64
+
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	DownlinkBandwidthBits *int64
+
 	// The type of network profile to create. Valid values are listed here.
 	Type types.NetworkProfileType
+
 	// Proportion of transmitted packets that fail to arrive from 0 to 100 percent.
 	UplinkLossPercent *int32
+
 	// The Amazon Resource Name (ARN) of the project for which you want to create a
 	// network profile.
+	//
+	// This member is required.
 	ProjectArn *string
+
 	// The description of the network profile.
 	Description *string
+
 	// Time variation in the delay of received packets in milliseconds as an integer
 	// from 0 to 2000.
 	DownlinkJitterMs *int64
 }
 
 type CreateNetworkProfileOutput struct {
+
 	// The network profile that is returned by the create network profile request.
 	NetworkProfile *types.NetworkProfile
 

@@ -96,11 +96,20 @@ func (c *Client) PutBucketAnalyticsConfiguration(ctx context.Context, params *Pu
 }
 
 type PutBucketAnalyticsConfigurationInput struct {
+
 	// The ID that identifies the analytics configuration.
+	//
+	// This member is required.
 	Id *string
+
 	// The configuration and any analyses for the analytics filter.
+	//
+	// This member is required.
 	AnalyticsConfiguration *types.AnalyticsConfiguration
+
 	// The name of the bucket to which an analytics configuration is stored.
+	//
+	// This member is required.
 	Bucket *string
 }
 

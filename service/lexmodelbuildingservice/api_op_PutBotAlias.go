@@ -60,14 +60,25 @@ func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optF
 }
 
 type PutBotAliasInput struct {
+
 	// The name of the bot.
+	//
+	// This member is required.
 	BotName *string
+
 	// The version of the bot.
+	//
+	// This member is required.
 	BotVersion *string
+
 	// A description of the alias.
 	Description *string
+
 	// The name of the alias. The name is not case sensitive.
+	//
+	// This member is required.
 	Name *string
+
 	// Identifies a specific revision of the $LATEST version. When you create a new bot
 	// alias, leave the checksum field blank. If you specify a checksum you get a
 	// BadRequestException exception. When you want to update a bot alias, set the
@@ -75,32 +86,43 @@ type PutBotAliasInput struct {
 	// version. If you don't specify the  checksum field, or if the checksum does not
 	// match the $LATEST version, you get a PreconditionFailedException exception.
 	Checksum *string
+
 	// A list of tags to add to the bot alias. You can only add tags when you create an
 	// alias, you can't use the PutBotAlias operation to update the tags on a bot
 	// alias. To update tags, use the TagResource operation.
 	Tags []*types.Tag
+
 	// Settings for conversation logs for the alias.
 	ConversationLogs *types.ConversationLogsRequest
 }
 
 type PutBotAliasOutput struct {
+
 	// A description of the alias.
 	Description *string
+
 	// The settings that determine how Amazon Lex uses conversation logs for the alias.
 	ConversationLogs *types.ConversationLogsResponse
+
 	// The date that the bot alias was updated. When you create a resource, the
 	// creation date and the last updated date are the same.
 	LastUpdatedDate *time.Time
+
 	// The name of the bot that the alias points to.
 	BotName *string
+
 	// The date that the bot alias was created.
 	CreatedDate *time.Time
+
 	// The version of the bot that the alias points to.
 	BotVersion *string
+
 	// The checksum for the current version of the alias.
 	Checksum *string
+
 	// The name of the alias.
 	Name *string
+
 	// A list of tags associated with a bot.
 	Tags []*types.Tag
 

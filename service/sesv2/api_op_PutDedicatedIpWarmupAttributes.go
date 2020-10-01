@@ -58,9 +58,15 @@ func (c *Client) PutDedicatedIpWarmupAttributes(ctx context.Context, params *Put
 // operation is useful when you want to resume the warm-up process for an existing
 // IP address.
 type PutDedicatedIpWarmupAttributesInput struct {
+
 	// The dedicated IP address that you want to update the warm-up attributes for.
+	//
+	// This member is required.
 	Ip *string
+
 	// The warm-up percentage that you want to associate with the dedicated IP address.
+	//
+	// This member is required.
 	WarmupPercentage *int32
 }
 

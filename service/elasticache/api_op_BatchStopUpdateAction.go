@@ -58,17 +58,24 @@ func (c *Client) BatchStopUpdateAction(ctx context.Context, params *BatchStopUpd
 }
 
 type BatchStopUpdateActionInput struct {
+
 	// The replication group IDs
 	ReplicationGroupIds []*string
+
 	// The cache cluster IDs
 	CacheClusterIds []*string
+
 	// The unique ID of the service update
+	//
+	// This member is required.
 	ServiceUpdateName *string
 }
 
 type BatchStopUpdateActionOutput struct {
+
 	// Update actions that haven't been processed successfully
 	UnprocessedUpdateActions []*types.UnprocessedUpdateAction
+
 	// Update actions that have been processed successfully
 	ProcessedUpdateActions []*types.ProcessedUpdateAction
 

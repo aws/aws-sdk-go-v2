@@ -55,15 +55,19 @@ func (c *Client) ListVoiceConnectors(ctx context.Context, params *ListVoiceConne
 }
 
 type ListVoiceConnectorsInput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 }
 
 type ListVoiceConnectorsOutput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The details of the Amazon Chime Voice Connectors.
 	VoiceConnectors []*types.VoiceConnector
 

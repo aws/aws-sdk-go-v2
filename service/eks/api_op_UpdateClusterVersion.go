@@ -67,16 +67,24 @@ func (c *Client) UpdateClusterVersion(ctx context.Context, params *UpdateCluster
 }
 
 type UpdateClusterVersionInput struct {
+
 	// The name of the Amazon EKS cluster to update.
+	//
+	// This member is required.
 	Name *string
+
 	// The desired Kubernetes version following a successful update.
+	//
+	// This member is required.
 	Version *string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
 }
 
 type UpdateClusterVersionOutput struct {
+
 	// The full description of the specified update
 	Update *types.Update
 

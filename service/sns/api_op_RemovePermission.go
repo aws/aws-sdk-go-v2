@@ -56,9 +56,15 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 
 // Input for RemovePermission action.
 type RemovePermissionInput struct {
+
 	// The ARN of the topic whose access control policy you wish to modify.
+	//
+	// This member is required.
 	TopicArn *string
+
 	// The unique label of the statement you want to remove.
+	//
+	// This member is required.
 	Label *string
 }
 

@@ -69,6 +69,7 @@ func (c *Client) LookupDeveloperIdentity(ctx context.Context, params *LookupDeve
 
 // Input to the LookupDeveloperIdentityInput action.
 type LookupDeveloperIdentityInput struct {
+
 	// A pagination token. The first call you make will have NextToken set to null.
 	// After that the service will return NextToken values as needed. For example,
 	// let's say you make a request with MaxResults set to 10, and there are 20 matches
@@ -76,22 +77,30 @@ type LookupDeveloperIdentityInput struct {
 	// response. This token can be used to call the API again and get results starting
 	// from the 11th match.
 	NextToken *string
+
 	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// A unique ID used by your backend authentication process to identify a user.
 	// Typically, a developer identity provider would issue many developer user
 	// identifiers, in keeping with the number of users.
 	DeveloperUserIdentifier *string
+
 	// The maximum number of identities to return.
 	MaxResults *int32
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
 }
 
 // Returned in response to a successful LookupDeveloperIdentity action.
 type LookupDeveloperIdentityOutput struct {
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
 	// A pagination token. The first call you make will have NextToken set to null.
 	// After that the service will return NextToken values as needed. For example,
 	// let's say you make a request with MaxResults set to 10, and there are 20 matches
@@ -99,6 +108,7 @@ type LookupDeveloperIdentityOutput struct {
 	// response. This token can be used to call the API again and get results starting
 	// from the 11th match.
 	NextToken *string
+
 	// This is the list of developer user identifiers associated with an identity ID.
 	// Cognito supports the association of multiple developer user identifiers with an
 	// identity ID.

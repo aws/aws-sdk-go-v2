@@ -61,10 +61,16 @@ func (c *Client) UpdateConfigurationSetReputationMetricsEnabled(ctx context.Cont
 // Represents a request to modify the reputation metric publishing settings for a
 // configuration set.
 type UpdateConfigurationSetReputationMetricsEnabledInput struct {
+
 	// The name of the configuration set that you want to update.
+	//
+	// This member is required.
 	ConfigurationSetName *string
+
 	// Describes whether or not Amazon SES will publish reputation metrics for the
 	// configuration set, such as bounce and complaint rates, to Amazon CloudWatch.
+	//
+	// This member is required.
 	Enabled *bool
 }
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Internal failure occurred.
@@ -24,12 +23,6 @@ func (e *InternalFailure) ErrorMessage() string {
 }
 func (e *InternalFailure) ErrorCode() string             { return "InternalFailure" }
 func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailure) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailure) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Model (owned by the customer in the container) returned an error 500.
 type ModelError struct {
@@ -51,30 +44,6 @@ func (e *ModelError) ErrorMessage() string {
 }
 func (e *ModelError) ErrorCode() string             { return "ModelError" }
 func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ModelError) GetLogStreamArn() string {
-	return ptr.ToString(e.LogStreamArn)
-}
-func (e *ModelError) HasLogStreamArn() bool {
-	return e.LogStreamArn != nil
-}
-func (e *ModelError) GetOriginalStatusCode() int32 {
-	return ptr.ToInt32(e.OriginalStatusCode)
-}
-func (e *ModelError) HasOriginalStatusCode() bool {
-	return e.OriginalStatusCode != nil
-}
-func (e *ModelError) GetOriginalMessage() string {
-	return ptr.ToString(e.OriginalMessage)
-}
-func (e *ModelError) HasOriginalMessage() bool {
-	return e.OriginalMessage != nil
-}
-func (e *ModelError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ModelError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Service is unavailable. Try your call again.
 type ServiceUnavailable struct {
@@ -92,12 +61,6 @@ func (e *ServiceUnavailable) ErrorMessage() string {
 }
 func (e *ServiceUnavailable) ErrorCode() string             { return "ServiceUnavailable" }
 func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailable) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailable) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Inspect your request and try again.  </p>
 type ValidationError struct {
@@ -115,9 +78,3 @@ func (e *ValidationError) ErrorMessage() string {
 }
 func (e *ValidationError) ErrorCode() string             { return "ValidationError" }
 func (e *ValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationError) HasMessage() bool {
-	return e.Message != nil
-}

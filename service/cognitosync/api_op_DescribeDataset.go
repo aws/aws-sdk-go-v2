@@ -63,19 +63,29 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 // A request for meta data about a dataset (creation date, number of records, size)
 // by owner and dataset name.
 type DescribeDatasetInput struct {
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityId *string
+
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
+	//
+	// This member is required.
 	DatasetName *string
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 
 // Response to a successful DescribeDataset request.
 type DescribeDatasetOutput struct {
+
 	// Metadata for a collection of data for an identity. An identity can have multiple
 	// datasets. A dataset can be general or associated with a particular entity in an
 	// application (like a saved game). Datasets are automatically created if they

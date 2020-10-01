@@ -61,6 +61,7 @@ func (c *Client) UpdateAccountSendingEnabled(ctx context.Context, params *Update
 // Represents a request to enable or disable the email sending capabilities for
 // your entire Amazon SES account.
 type UpdateAccountSendingEnabledInput struct {
+
 	// Describes whether email sending is enabled or disabled for your Amazon SES
 	// account in the current AWS Region.
 	Enabled *bool

@@ -59,11 +59,18 @@ func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClus
 }
 
 type AddRoleToDBClusterInput struct {
+
 	// The name of the DB cluster to associate the IAM role with.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB
 	// cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The name of the feature for the DB cluster that the IAM role is to be associated
 	// with. For the list of supported feature names, see DBEngineVersion ().
 	FeatureName *string

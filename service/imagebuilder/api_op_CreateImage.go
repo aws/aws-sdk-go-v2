@@ -59,32 +59,48 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 }
 
 type CreateImageInput struct {
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that defines
 	// the environment in which your image will be built and tested.
+	//
+	// This member is required.
 	InfrastructureConfigurationArn *string
+
 	// The Amazon Resource Name (ARN) of the distribution configuration that defines
 	// and configures the outputs of your pipeline.
 	DistributionConfigurationArn *string
+
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
+
 	// The tags of the image.
 	Tags map[string]*string
+
 	// The image tests configuration of the image.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
+
 	// The Amazon Resource Name (ARN) of the image recipe that defines how images are
 	// configured, tested, and assessed.
+	//
+	// This member is required.
 	ImageRecipeArn *string
+
 	// The idempotency token used to make this request idempotent.
+	//
+	// This member is required.
 	ClientToken *string
 }
 
 type CreateImageOutput struct {
+
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the image that was created by this request.
 	ImageBuildVersionArn *string
 

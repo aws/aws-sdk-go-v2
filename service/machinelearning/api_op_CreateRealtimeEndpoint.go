@@ -58,7 +58,10 @@ func (c *Client) CreateRealtimeEndpoint(ctx context.Context, params *CreateRealt
 }
 
 type CreateRealtimeEndpointInput struct {
+
 	// The ID assigned to the MLModel during creation.
+	//
+	// This member is required.
 	MLModelId *string
 }
 
@@ -67,9 +70,11 @@ type CreateRealtimeEndpointInput struct {
 // endpoint information includes the URI of the MLModel; that is, the location to
 // send online prediction requests for the specified MLModel.
 type CreateRealtimeEndpointOutput struct {
+
 	// A user-supplied ID that uniquely identifies the MLModel. This value should be
 	// identical to the value of the MLModelId in the request.
 	MLModelId *string
+
 	// The endpoint information of the MLModel
 	RealtimeEndpointInfo *types.RealtimeEndpointInfo
 

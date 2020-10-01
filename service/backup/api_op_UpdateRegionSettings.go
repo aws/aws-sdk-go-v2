@@ -58,6 +58,7 @@ func (c *Client) UpdateRegionSettings(ctx context.Context, params *UpdateRegionS
 }
 
 type UpdateRegionSettingsInput struct {
+
 	// Updates the list of services along with the opt-in preferences for the region.
 	ResourceTypeOptInPreference map[string]*bool
 }

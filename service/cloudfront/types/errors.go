@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Access denied.
@@ -24,12 +23,6 @@ func (e *AccessDenied) ErrorMessage() string {
 }
 func (e *AccessDenied) ErrorCode() string             { return "AccessDenied" }
 func (e *AccessDenied) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDenied) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDenied) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Invalidation batch specified is too large.
 type BatchTooLarge struct {
@@ -47,12 +40,6 @@ func (e *BatchTooLarge) ErrorMessage() string {
 }
 func (e *BatchTooLarge) ErrorCode() string             { return "BatchTooLarge" }
 func (e *BatchTooLarge) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BatchTooLarge) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BatchTooLarge) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A cache policy with this name already exists. You must provide a unique name. To
 // modify an existing cache policy, use UpdateCachePolicy.
@@ -71,12 +58,6 @@ func (e *CachePolicyAlreadyExists) ErrorMessage() string {
 }
 func (e *CachePolicyAlreadyExists) ErrorCode() string             { return "CachePolicyAlreadyExists" }
 func (e *CachePolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CachePolicyAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CachePolicyAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cannot delete the cache policy because it is attached to one or more cache
 // behaviors.
@@ -95,12 +76,6 @@ func (e *CachePolicyInUse) ErrorMessage() string {
 }
 func (e *CachePolicyInUse) ErrorCode() string             { return "CachePolicyInUse" }
 func (e *CachePolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CachePolicyInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CachePolicyInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't change the value of a public key.
 type CannotChangeImmutablePublicKeyFields struct {
@@ -121,12 +96,6 @@ func (e *CannotChangeImmutablePublicKeyFields) ErrorCode() string {
 }
 func (e *CannotChangeImmutablePublicKeyFields) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CannotChangeImmutablePublicKeyFields) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CannotChangeImmutablePublicKeyFields) HasMessage() bool {
-	return e.Message != nil
 }
 
 // If the CallerReference is a value you already sent in a previous request to
@@ -152,12 +121,6 @@ func (e *CloudFrontOriginAccessIdentityAlreadyExists) ErrorCode() string {
 func (e *CloudFrontOriginAccessIdentityAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CloudFrontOriginAccessIdentityAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudFrontOriginAccessIdentityAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Origin Access Identity specified is already in use.
 type CloudFrontOriginAccessIdentityInUse struct {
@@ -179,12 +142,6 @@ func (e *CloudFrontOriginAccessIdentityInUse) ErrorCode() string {
 func (e *CloudFrontOriginAccessIdentityInUse) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CloudFrontOriginAccessIdentityInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudFrontOriginAccessIdentityInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The CNAME specified is already defined for CloudFront.
 type CNAMEAlreadyExists struct {
@@ -202,12 +159,6 @@ func (e *CNAMEAlreadyExists) ErrorMessage() string {
 }
 func (e *CNAMEAlreadyExists) ErrorCode() string             { return "CNAMEAlreadyExists" }
 func (e *CNAMEAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CNAMEAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CNAMEAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The caller reference you attempted to create the distribution with is associated
 // with another distribution.
@@ -226,12 +177,6 @@ func (e *DistributionAlreadyExists) ErrorMessage() string {
 }
 func (e *DistributionAlreadyExists) ErrorCode() string             { return "DistributionAlreadyExists" }
 func (e *DistributionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DistributionAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DistributionAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified CloudFront distribution is not disabled. You must disable the
 // distribution before you can delete it.
@@ -250,12 +195,6 @@ func (e *DistributionNotDisabled) ErrorMessage() string {
 }
 func (e *DistributionNotDisabled) ErrorCode() string             { return "DistributionNotDisabled" }
 func (e *DistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DistributionNotDisabled) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DistributionNotDisabled) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration for field-level encryption already exists.
 type FieldLevelEncryptionConfigAlreadyExists struct {
@@ -277,12 +216,6 @@ func (e *FieldLevelEncryptionConfigAlreadyExists) ErrorCode() string {
 func (e *FieldLevelEncryptionConfigAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FieldLevelEncryptionConfigAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FieldLevelEncryptionConfigAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration for field-level encryption is in use.
 type FieldLevelEncryptionConfigInUse struct {
@@ -302,12 +235,6 @@ func (e *FieldLevelEncryptionConfigInUse) ErrorCode() string {
 	return "FieldLevelEncryptionConfigInUse"
 }
 func (e *FieldLevelEncryptionConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FieldLevelEncryptionConfigInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FieldLevelEncryptionConfigInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified profile for field-level encryption already exists.
 type FieldLevelEncryptionProfileAlreadyExists struct {
@@ -329,12 +256,6 @@ func (e *FieldLevelEncryptionProfileAlreadyExists) ErrorCode() string {
 func (e *FieldLevelEncryptionProfileAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FieldLevelEncryptionProfileAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FieldLevelEncryptionProfileAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified profile for field-level encryption is in use.
 type FieldLevelEncryptionProfileInUse struct {
@@ -354,12 +275,6 @@ func (e *FieldLevelEncryptionProfileInUse) ErrorCode() string {
 	return "FieldLevelEncryptionProfileInUse"
 }
 func (e *FieldLevelEncryptionProfileInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FieldLevelEncryptionProfileInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FieldLevelEncryptionProfileInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum size of a profile for field-level encryption was exceeded.
 type FieldLevelEncryptionProfileSizeExceeded struct {
@@ -381,12 +296,6 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorCode() string {
 func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FieldLevelEncryptionProfileSizeExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FieldLevelEncryptionProfileSizeExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot delete a managed policy.
 type IllegalDelete struct {
@@ -404,12 +313,6 @@ func (e *IllegalDelete) ErrorMessage() string {
 }
 func (e *IllegalDelete) ErrorCode() string             { return "IllegalDelete" }
 func (e *IllegalDelete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IllegalDelete) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IllegalDelete) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration for field-level encryption can't be associated with
 // the specified cache behavior.
@@ -432,12 +335,6 @@ func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorCod
 func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The update contains modifications that are not allowed.
 type IllegalUpdate struct {
@@ -455,12 +352,6 @@ func (e *IllegalUpdate) ErrorMessage() string {
 }
 func (e *IllegalUpdate) ErrorCode() string             { return "IllegalUpdate" }
 func (e *IllegalUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IllegalUpdate) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IllegalUpdate) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of Quantity and the size of Items don't match.
 type InconsistentQuantities struct {
@@ -478,12 +369,6 @@ func (e *InconsistentQuantities) ErrorMessage() string {
 }
 func (e *InconsistentQuantities) ErrorCode() string             { return "InconsistentQuantities" }
 func (e *InconsistentQuantities) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InconsistentQuantities) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InconsistentQuantities) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An argument is invalid.
 type InvalidArgument struct {
@@ -501,12 +386,6 @@ func (e *InvalidArgument) ErrorMessage() string {
 }
 func (e *InvalidArgument) ErrorCode() string             { return "InvalidArgument" }
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgument) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgument) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The default root object file name is too big or contains an invalid character.
 type InvalidDefaultRootObject struct {
@@ -524,12 +403,6 @@ func (e *InvalidDefaultRootObject) ErrorMessage() string {
 }
 func (e *InvalidDefaultRootObject) ErrorCode() string             { return "InvalidDefaultRootObject" }
 func (e *InvalidDefaultRootObject) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDefaultRootObject) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDefaultRootObject) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid error code was specified.
 type InvalidErrorCode struct {
@@ -547,12 +420,6 @@ func (e *InvalidErrorCode) ErrorMessage() string {
 }
 func (e *InvalidErrorCode) ErrorCode() string             { return "InvalidErrorCode" }
 func (e *InvalidErrorCode) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidErrorCode) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidErrorCode) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains forward cookies option which doesn't match with the
 // expectation for the whitelisted list of cookie names. Either list of cookie
@@ -573,12 +440,6 @@ func (e *InvalidForwardCookies) ErrorMessage() string {
 }
 func (e *InvalidForwardCookies) ErrorCode() string             { return "InvalidForwardCookies" }
 func (e *InvalidForwardCookies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidForwardCookies) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidForwardCookies) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified geo restriction parameter is not valid.
 type InvalidGeoRestrictionParameter struct {
@@ -596,12 +457,6 @@ func (e *InvalidGeoRestrictionParameter) ErrorMessage() string {
 }
 func (e *InvalidGeoRestrictionParameter) ErrorCode() string             { return "InvalidGeoRestrictionParameter" }
 func (e *InvalidGeoRestrictionParameter) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGeoRestrictionParameter) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGeoRestrictionParameter) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The headers specified are not valid for an Amazon S3 origin.
 type InvalidHeadersForS3Origin struct {
@@ -619,12 +474,6 @@ func (e *InvalidHeadersForS3Origin) ErrorMessage() string {
 }
 func (e *InvalidHeadersForS3Origin) ErrorCode() string             { return "InvalidHeadersForS3Origin" }
 func (e *InvalidHeadersForS3Origin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidHeadersForS3Origin) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidHeadersForS3Origin) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The If-Match version is missing or not valid.
 type InvalidIfMatchVersion struct {
@@ -642,12 +491,6 @@ func (e *InvalidIfMatchVersion) ErrorMessage() string {
 }
 func (e *InvalidIfMatchVersion) ErrorCode() string             { return "InvalidIfMatchVersion" }
 func (e *InvalidIfMatchVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidIfMatchVersion) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidIfMatchVersion) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Lambda function association is invalid.
 type InvalidLambdaFunctionAssociation struct {
@@ -667,12 +510,6 @@ func (e *InvalidLambdaFunctionAssociation) ErrorCode() string {
 	return "InvalidLambdaFunctionAssociation"
 }
 func (e *InvalidLambdaFunctionAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLambdaFunctionAssociation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLambdaFunctionAssociation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The location code specified is not valid.
 type InvalidLocationCode struct {
@@ -690,12 +527,6 @@ func (e *InvalidLocationCode) ErrorMessage() string {
 }
 func (e *InvalidLocationCode) ErrorCode() string             { return "InvalidLocationCode" }
 func (e *InvalidLocationCode) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLocationCode) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLocationCode) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The minimum protocol version specified is not valid.
 type InvalidMinimumProtocolVersion struct {
@@ -713,12 +544,6 @@ func (e *InvalidMinimumProtocolVersion) ErrorMessage() string {
 }
 func (e *InvalidMinimumProtocolVersion) ErrorCode() string             { return "InvalidMinimumProtocolVersion" }
 func (e *InvalidMinimumProtocolVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMinimumProtocolVersion) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMinimumProtocolVersion) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon S3 origin server specified does not refer to a valid Amazon S3
 // bucket.
@@ -737,12 +562,6 @@ func (e *InvalidOrigin) ErrorMessage() string {
 }
 func (e *InvalidOrigin) ErrorCode() string             { return "InvalidOrigin" }
 func (e *InvalidOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOrigin) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOrigin) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The origin access identity is not valid or doesn't exist.
 type InvalidOriginAccessIdentity struct {
@@ -760,12 +579,6 @@ func (e *InvalidOriginAccessIdentity) ErrorMessage() string {
 }
 func (e *InvalidOriginAccessIdentity) ErrorCode() string             { return "InvalidOriginAccessIdentity" }
 func (e *InvalidOriginAccessIdentity) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOriginAccessIdentity) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOriginAccessIdentity) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The keep alive timeout specified for the origin is not valid.
 type InvalidOriginKeepaliveTimeout struct {
@@ -783,12 +596,6 @@ func (e *InvalidOriginKeepaliveTimeout) ErrorMessage() string {
 }
 func (e *InvalidOriginKeepaliveTimeout) ErrorCode() string             { return "InvalidOriginKeepaliveTimeout" }
 func (e *InvalidOriginKeepaliveTimeout) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOriginKeepaliveTimeout) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOriginKeepaliveTimeout) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The read timeout specified for the origin is not valid.
 type InvalidOriginReadTimeout struct {
@@ -806,12 +613,6 @@ func (e *InvalidOriginReadTimeout) ErrorMessage() string {
 }
 func (e *InvalidOriginReadTimeout) ErrorCode() string             { return "InvalidOriginReadTimeout" }
 func (e *InvalidOriginReadTimeout) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOriginReadTimeout) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOriginReadTimeout) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot specify SSLv3 as the minimum protocol version if you only want to
 // support only clients that support Server Name Indication (SNI).
@@ -830,12 +631,6 @@ func (e *InvalidProtocolSettings) ErrorMessage() string {
 }
 func (e *InvalidProtocolSettings) ErrorCode() string             { return "InvalidProtocolSettings" }
 func (e *InvalidProtocolSettings) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidProtocolSettings) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidProtocolSettings) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The query string parameters specified are not valid.
 type InvalidQueryStringParameters struct {
@@ -853,12 +648,6 @@ func (e *InvalidQueryStringParameters) ErrorMessage() string {
 }
 func (e *InvalidQueryStringParameters) ErrorCode() string             { return "InvalidQueryStringParameters" }
 func (e *InvalidQueryStringParameters) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidQueryStringParameters) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidQueryStringParameters) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The relative path is too big, is not URL-encoded, or does not begin with a slash
 // (/).
@@ -877,12 +666,6 @@ func (e *InvalidRelativePath) ErrorMessage() string {
 }
 func (e *InvalidRelativePath) ErrorCode() string             { return "InvalidRelativePath" }
 func (e *InvalidRelativePath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRelativePath) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRelativePath) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation requires the HTTPS protocol. Ensure that you specify the HTTPS
 // protocol in your request, or omit the RequiredProtocols element from your
@@ -902,12 +685,6 @@ func (e *InvalidRequiredProtocol) ErrorMessage() string {
 }
 func (e *InvalidRequiredProtocol) ErrorCode() string             { return "InvalidRequiredProtocol" }
 func (e *InvalidRequiredProtocol) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequiredProtocol) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequiredProtocol) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A response code is not valid.
 type InvalidResponseCode struct {
@@ -925,12 +702,6 @@ func (e *InvalidResponseCode) ErrorMessage() string {
 }
 func (e *InvalidResponseCode) ErrorCode() string             { return "InvalidResponseCode" }
 func (e *InvalidResponseCode) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResponseCode) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResponseCode) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tagging specified is not valid.
 type InvalidTagging struct {
@@ -948,12 +719,6 @@ func (e *InvalidTagging) ErrorMessage() string {
 }
 func (e *InvalidTagging) ErrorCode() string             { return "InvalidTagging" }
 func (e *InvalidTagging) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagging) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagging) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The TTL order specified is not valid.
 type InvalidTTLOrder struct {
@@ -971,12 +736,6 @@ func (e *InvalidTTLOrder) ErrorMessage() string {
 }
 func (e *InvalidTTLOrder) ErrorCode() string             { return "InvalidTTLOrder" }
 func (e *InvalidTTLOrder) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTTLOrder) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTTLOrder) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A viewer certificate specified is not valid.
 type InvalidViewerCertificate struct {
@@ -994,12 +753,6 @@ func (e *InvalidViewerCertificate) ErrorMessage() string {
 }
 func (e *InvalidViewerCertificate) ErrorCode() string             { return "InvalidViewerCertificate" }
 func (e *InvalidViewerCertificate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidViewerCertificate) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidViewerCertificate) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A web ACL ID specified is not valid. To specify a web ACL created using the
 // latest version of AWS WAF, use the ACL ARN, for example
@@ -1021,12 +774,6 @@ func (e *InvalidWebACLId) ErrorMessage() string {
 }
 func (e *InvalidWebACLId) ErrorCode() string             { return "InvalidWebACLId" }
 func (e *InvalidWebACLId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidWebACLId) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidWebACLId) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation requires a body. Ensure that the body is present and the
 // Content-Type header is set.
@@ -1045,12 +792,6 @@ func (e *MissingBody) ErrorMessage() string {
 }
 func (e *MissingBody) ErrorCode() string             { return "MissingBody" }
 func (e *MissingBody) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingBody) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingBody) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cache policy does not exist.
 type NoSuchCachePolicy struct {
@@ -1068,12 +809,6 @@ func (e *NoSuchCachePolicy) ErrorMessage() string {
 }
 func (e *NoSuchCachePolicy) ErrorCode() string             { return "NoSuchCachePolicy" }
 func (e *NoSuchCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchCachePolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchCachePolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified origin access identity does not exist.
 type NoSuchCloudFrontOriginAccessIdentity struct {
@@ -1095,12 +830,6 @@ func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorCode() string {
 func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoSuchCloudFrontOriginAccessIdentity) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchCloudFrontOriginAccessIdentity) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified distribution does not exist.
 type NoSuchDistribution struct {
@@ -1118,12 +847,6 @@ func (e *NoSuchDistribution) ErrorMessage() string {
 }
 func (e *NoSuchDistribution) ErrorCode() string             { return "NoSuchDistribution" }
 func (e *NoSuchDistribution) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchDistribution) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchDistribution) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration for field-level encryption doesn't exist.
 type NoSuchFieldLevelEncryptionConfig struct {
@@ -1143,12 +866,6 @@ func (e *NoSuchFieldLevelEncryptionConfig) ErrorCode() string {
 	return "NoSuchFieldLevelEncryptionConfig"
 }
 func (e *NoSuchFieldLevelEncryptionConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchFieldLevelEncryptionConfig) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchFieldLevelEncryptionConfig) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified profile for field-level encryption doesn't exist.
 type NoSuchFieldLevelEncryptionProfile struct {
@@ -1168,12 +885,6 @@ func (e *NoSuchFieldLevelEncryptionProfile) ErrorCode() string {
 	return "NoSuchFieldLevelEncryptionProfile"
 }
 func (e *NoSuchFieldLevelEncryptionProfile) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchFieldLevelEncryptionProfile) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchFieldLevelEncryptionProfile) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified invalidation does not exist.
 type NoSuchInvalidation struct {
@@ -1191,12 +902,6 @@ func (e *NoSuchInvalidation) ErrorMessage() string {
 }
 func (e *NoSuchInvalidation) ErrorCode() string             { return "NoSuchInvalidation" }
 func (e *NoSuchInvalidation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchInvalidation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchInvalidation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No origin exists with the specified Origin Id.
 type NoSuchOrigin struct {
@@ -1214,12 +919,6 @@ func (e *NoSuchOrigin) ErrorMessage() string {
 }
 func (e *NoSuchOrigin) ErrorCode() string             { return "NoSuchOrigin" }
 func (e *NoSuchOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchOrigin) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchOrigin) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The origin request policy does not exist.
 type NoSuchOriginRequestPolicy struct {
@@ -1237,12 +936,6 @@ func (e *NoSuchOriginRequestPolicy) ErrorMessage() string {
 }
 func (e *NoSuchOriginRequestPolicy) ErrorCode() string             { return "NoSuchOriginRequestPolicy" }
 func (e *NoSuchOriginRequestPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchOriginRequestPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchOriginRequestPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified public key doesn't exist.
 type NoSuchPublicKey struct {
@@ -1260,12 +953,6 @@ func (e *NoSuchPublicKey) ErrorMessage() string {
 }
 func (e *NoSuchPublicKey) ErrorCode() string             { return "NoSuchPublicKey" }
 func (e *NoSuchPublicKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchPublicKey) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchPublicKey) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource that was specified is not valid.
 type NoSuchResource struct {
@@ -1283,12 +970,6 @@ func (e *NoSuchResource) ErrorMessage() string {
 }
 func (e *NoSuchResource) ErrorCode() string             { return "NoSuchResource" }
 func (e *NoSuchResource) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchResource) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchResource) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified streaming distribution does not exist.
 type NoSuchStreamingDistribution struct {
@@ -1306,12 +987,6 @@ func (e *NoSuchStreamingDistribution) ErrorMessage() string {
 }
 func (e *NoSuchStreamingDistribution) ErrorCode() string             { return "NoSuchStreamingDistribution" }
 func (e *NoSuchStreamingDistribution) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchStreamingDistribution) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchStreamingDistribution) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An origin request policy with this name already exists. You must provide a
 // unique name. To modify an existing origin request policy, use
@@ -1333,12 +1008,6 @@ func (e *OriginRequestPolicyAlreadyExists) ErrorCode() string {
 	return "OriginRequestPolicyAlreadyExists"
 }
 func (e *OriginRequestPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OriginRequestPolicyAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OriginRequestPolicyAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cannot delete the origin request policy because it is attached to one or more
 // cache behaviors.
@@ -1357,12 +1026,6 @@ func (e *OriginRequestPolicyInUse) ErrorMessage() string {
 }
 func (e *OriginRequestPolicyInUse) ErrorCode() string             { return "OriginRequestPolicyInUse" }
 func (e *OriginRequestPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OriginRequestPolicyInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OriginRequestPolicyInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The precondition given in one or more of the request header fields evaluated to
 // false.
@@ -1381,12 +1044,6 @@ func (e *PreconditionFailed) ErrorMessage() string {
 }
 func (e *PreconditionFailed) ErrorCode() string             { return "PreconditionFailed" }
 func (e *PreconditionFailed) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PreconditionFailed) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PreconditionFailed) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified public key already exists.
 type PublicKeyAlreadyExists struct {
@@ -1404,12 +1061,6 @@ func (e *PublicKeyAlreadyExists) ErrorMessage() string {
 }
 func (e *PublicKeyAlreadyExists) ErrorCode() string             { return "PublicKeyAlreadyExists" }
 func (e *PublicKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PublicKeyAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PublicKeyAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified public key is in use.
 type PublicKeyInUse struct {
@@ -1427,12 +1078,6 @@ func (e *PublicKeyInUse) ErrorMessage() string {
 }
 func (e *PublicKeyInUse) ErrorCode() string             { return "PublicKeyInUse" }
 func (e *PublicKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PublicKeyInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PublicKeyInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No profile specified for the field-level encryption query argument.
 type QueryArgProfileEmpty struct {
@@ -1450,12 +1095,6 @@ func (e *QueryArgProfileEmpty) ErrorMessage() string {
 }
 func (e *QueryArgProfileEmpty) ErrorCode() string             { return "QueryArgProfileEmpty" }
 func (e *QueryArgProfileEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *QueryArgProfileEmpty) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *QueryArgProfileEmpty) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The caller reference you attempted to create the streaming distribution with is
 // associated with another distribution
@@ -1478,12 +1117,6 @@ func (e *StreamingDistributionAlreadyExists) ErrorCode() string {
 func (e *StreamingDistributionAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *StreamingDistributionAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StreamingDistributionAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified CloudFront distribution is not disabled. You must disable the
 // distribution before you can delete it.
@@ -1504,12 +1137,6 @@ func (e *StreamingDistributionNotDisabled) ErrorCode() string {
 	return "StreamingDistributionNotDisabled"
 }
 func (e *StreamingDistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StreamingDistributionNotDisabled) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StreamingDistributionNotDisabled) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot create more cache behaviors for the distribution.
 type TooManyCacheBehaviors struct {
@@ -1527,12 +1154,6 @@ func (e *TooManyCacheBehaviors) ErrorMessage() string {
 }
 func (e *TooManyCacheBehaviors) ErrorCode() string             { return "TooManyCacheBehaviors" }
 func (e *TooManyCacheBehaviors) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyCacheBehaviors) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCacheBehaviors) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the maximum number of cache policies for this AWS account. For
 // more information, see Quotas
@@ -1553,12 +1174,6 @@ func (e *TooManyCachePolicies) ErrorMessage() string {
 }
 func (e *TooManyCachePolicies) ErrorCode() string             { return "TooManyCachePolicies" }
 func (e *TooManyCachePolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyCachePolicies) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCachePolicies) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot create anymore custom SSL/TLS certificates.
 type TooManyCertificates struct {
@@ -1576,12 +1191,6 @@ func (e *TooManyCertificates) ErrorMessage() string {
 }
 func (e *TooManyCertificates) ErrorCode() string             { return "TooManyCertificates" }
 func (e *TooManyCertificates) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyCertificates) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCertificates) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing your request would cause you to exceed the maximum number of origin
 // access identities allowed.
@@ -1604,12 +1213,6 @@ func (e *TooManyCloudFrontOriginAccessIdentities) ErrorCode() string {
 func (e *TooManyCloudFrontOriginAccessIdentities) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyCloudFrontOriginAccessIdentities) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCloudFrontOriginAccessIdentities) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains more cookie names in the whitelist than are allowed per
 // cache behavior.
@@ -1628,12 +1231,6 @@ func (e *TooManyCookieNamesInWhiteList) ErrorMessage() string {
 }
 func (e *TooManyCookieNamesInWhiteList) ErrorCode() string             { return "TooManyCookieNamesInWhiteList" }
 func (e *TooManyCookieNamesInWhiteList) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyCookieNamesInWhiteList) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCookieNamesInWhiteList) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of cookies in the cache policy exceeds the maximum. For more
 // information, see Quotas
@@ -1654,12 +1251,6 @@ func (e *TooManyCookiesInCachePolicy) ErrorMessage() string {
 }
 func (e *TooManyCookiesInCachePolicy) ErrorCode() string             { return "TooManyCookiesInCachePolicy" }
 func (e *TooManyCookiesInCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyCookiesInCachePolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCookiesInCachePolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of cookies in the origin request policy exceeds the maximum. For more
 // information, see Quotas
@@ -1684,12 +1275,6 @@ func (e *TooManyCookiesInOriginRequestPolicy) ErrorCode() string {
 func (e *TooManyCookiesInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyCookiesInOriginRequestPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCookiesInOriginRequestPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyDistributionCNAMEs struct {
@@ -1707,12 +1292,6 @@ func (e *TooManyDistributionCNAMEs) ErrorMessage() string {
 }
 func (e *TooManyDistributionCNAMEs) ErrorCode() string             { return "TooManyDistributionCNAMEs" }
 func (e *TooManyDistributionCNAMEs) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyDistributionCNAMEs) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributionCNAMEs) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing your request would cause you to exceed the maximum number of
 // distributions allowed.
@@ -1731,12 +1310,6 @@ func (e *TooManyDistributions) ErrorMessage() string {
 }
 func (e *TooManyDistributions) ErrorCode() string             { return "TooManyDistributions" }
 func (e *TooManyDistributions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyDistributions) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributions) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of distributions have been associated with the specified
 // cache policy. For more information, see Quotas
@@ -1761,12 +1334,6 @@ func (e *TooManyDistributionsAssociatedToCachePolicy) ErrorCode() string {
 func (e *TooManyDistributionsAssociatedToCachePolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyDistributionsAssociatedToCachePolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributionsAssociatedToCachePolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of distributions have been associated with the specified
 // configuration for field-level encryption.
@@ -1788,12 +1355,6 @@ func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorCode()
 }
 func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of distributions have been associated with the specified
@@ -1819,12 +1380,6 @@ func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorCode() string
 func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing your request would cause the maximum number of distributions with
 // Lambda function associations per owner to be exceeded.
@@ -1846,12 +1401,6 @@ func (e *TooManyDistributionsWithLambdaAssociations) ErrorCode() string {
 }
 func (e *TooManyDistributionsWithLambdaAssociations) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *TooManyDistributionsWithLambdaAssociations) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributionsWithLambdaAssociations) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of distributions have been associated with the specified
@@ -1875,12 +1424,6 @@ func (e *TooManyDistributionsWithSingleFunctionARN) ErrorCode() string {
 func (e *TooManyDistributionsWithSingleFunctionARN) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyDistributionsWithSingleFunctionARN) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyDistributionsWithSingleFunctionARN) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of configurations for field-level encryption have been
 // created.
@@ -1902,12 +1445,6 @@ func (e *TooManyFieldLevelEncryptionConfigs) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionConfigs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *TooManyFieldLevelEncryptionConfigs) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFieldLevelEncryptionConfigs) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of content type profiles for field-level encryption have been
@@ -1931,12 +1468,6 @@ func (e *TooManyFieldLevelEncryptionContentTypeProfiles) ErrorCode() string {
 func (e *TooManyFieldLevelEncryptionContentTypeProfiles) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyFieldLevelEncryptionContentTypeProfiles) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFieldLevelEncryptionContentTypeProfiles) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of encryption entities for field-level encryption have been
 // created.
@@ -1958,12 +1489,6 @@ func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *TooManyFieldLevelEncryptionEncryptionEntities) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFieldLevelEncryptionEncryptionEntities) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of field patterns for field-level encryption have been
@@ -1987,12 +1512,6 @@ func (e *TooManyFieldLevelEncryptionFieldPatterns) ErrorCode() string {
 func (e *TooManyFieldLevelEncryptionFieldPatterns) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyFieldLevelEncryptionFieldPatterns) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFieldLevelEncryptionFieldPatterns) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of profiles for field-level encryption have been created.
 type TooManyFieldLevelEncryptionProfiles struct {
@@ -2013,12 +1532,6 @@ func (e *TooManyFieldLevelEncryptionProfiles) ErrorCode() string {
 }
 func (e *TooManyFieldLevelEncryptionProfiles) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *TooManyFieldLevelEncryptionProfiles) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFieldLevelEncryptionProfiles) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of query arg profiles for field-level encryption have been
@@ -2042,12 +1555,6 @@ func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorCode() string {
 func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyFieldLevelEncryptionQueryArgProfiles) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFieldLevelEncryptionQueryArgProfiles) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of headers in the cache policy exceeds the maximum. For more
 // information, see Quotas
@@ -2068,12 +1575,6 @@ func (e *TooManyHeadersInCachePolicy) ErrorMessage() string {
 }
 func (e *TooManyHeadersInCachePolicy) ErrorCode() string             { return "TooManyHeadersInCachePolicy" }
 func (e *TooManyHeadersInCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyHeadersInCachePolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyHeadersInCachePolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains too many headers in forwarded values.
 type TooManyHeadersInForwardedValues struct {
@@ -2093,12 +1594,6 @@ func (e *TooManyHeadersInForwardedValues) ErrorCode() string {
 	return "TooManyHeadersInForwardedValues"
 }
 func (e *TooManyHeadersInForwardedValues) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyHeadersInForwardedValues) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyHeadersInForwardedValues) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of headers in the origin request policy exceeds the maximum. For more
 // information, see Quotas
@@ -2123,12 +1618,6 @@ func (e *TooManyHeadersInOriginRequestPolicy) ErrorCode() string {
 func (e *TooManyHeadersInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyHeadersInOriginRequestPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyHeadersInOriginRequestPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the maximum number of allowable InProgress invalidation batch
 // requests, or invalidation objects.
@@ -2147,12 +1636,6 @@ func (e *TooManyInvalidationsInProgress) ErrorMessage() string {
 }
 func (e *TooManyInvalidationsInProgress) ErrorCode() string             { return "TooManyInvalidationsInProgress" }
 func (e *TooManyInvalidationsInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyInvalidationsInProgress) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyInvalidationsInProgress) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains more Lambda function associations than are allowed per
 // distribution.
@@ -2173,12 +1656,6 @@ func (e *TooManyLambdaFunctionAssociations) ErrorCode() string {
 	return "TooManyLambdaFunctionAssociations"
 }
 func (e *TooManyLambdaFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyLambdaFunctionAssociations) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyLambdaFunctionAssociations) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains too many origin custom headers.
 type TooManyOriginCustomHeaders struct {
@@ -2196,12 +1673,6 @@ func (e *TooManyOriginCustomHeaders) ErrorMessage() string {
 }
 func (e *TooManyOriginCustomHeaders) ErrorCode() string             { return "TooManyOriginCustomHeaders" }
 func (e *TooManyOriginCustomHeaders) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyOriginCustomHeaders) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyOriginCustomHeaders) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing your request would cause you to exceed the maximum number of origin
 // groups allowed.
@@ -2224,12 +1695,6 @@ func (e *TooManyOriginGroupsPerDistribution) ErrorCode() string {
 func (e *TooManyOriginGroupsPerDistribution) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyOriginGroupsPerDistribution) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyOriginGroupsPerDistribution) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the maximum number of origin request policies for this AWS
 // account. For more information, see Quotas
@@ -2250,12 +1715,6 @@ func (e *TooManyOriginRequestPolicies) ErrorMessage() string {
 }
 func (e *TooManyOriginRequestPolicies) ErrorCode() string             { return "TooManyOriginRequestPolicies" }
 func (e *TooManyOriginRequestPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyOriginRequestPolicies) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyOriginRequestPolicies) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot create more origins for the distribution.
 type TooManyOrigins struct {
@@ -2273,12 +1732,6 @@ func (e *TooManyOrigins) ErrorMessage() string {
 }
 func (e *TooManyOrigins) ErrorCode() string             { return "TooManyOrigins" }
 func (e *TooManyOrigins) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyOrigins) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyOrigins) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of public keys for field-level encryption have been created.
 // To create a new public key, delete one of the existing keys.
@@ -2297,12 +1750,6 @@ func (e *TooManyPublicKeys) ErrorMessage() string {
 }
 func (e *TooManyPublicKeys) ErrorCode() string             { return "TooManyPublicKeys" }
 func (e *TooManyPublicKeys) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyPublicKeys) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyPublicKeys) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains too many query string parameters.
 type TooManyQueryStringParameters struct {
@@ -2320,12 +1767,6 @@ func (e *TooManyQueryStringParameters) ErrorMessage() string {
 }
 func (e *TooManyQueryStringParameters) ErrorCode() string             { return "TooManyQueryStringParameters" }
 func (e *TooManyQueryStringParameters) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyQueryStringParameters) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyQueryStringParameters) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of query strings in the cache policy exceeds the maximum. For more
 // information, see Quotas
@@ -2348,12 +1789,6 @@ func (e *TooManyQueryStringsInCachePolicy) ErrorCode() string {
 	return "TooManyQueryStringsInCachePolicy"
 }
 func (e *TooManyQueryStringsInCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyQueryStringsInCachePolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyQueryStringsInCachePolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of query strings in the origin request policy exceeds the maximum.
 // For more information, see Quotas
@@ -2378,12 +1813,6 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorCode() string {
 func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyQueryStringsInOriginRequestPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyQueryStringsInOriginRequestPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyStreamingDistributionCNAMEs struct {
@@ -2405,12 +1834,6 @@ func (e *TooManyStreamingDistributionCNAMEs) ErrorCode() string {
 func (e *TooManyStreamingDistributionCNAMEs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyStreamingDistributionCNAMEs) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyStreamingDistributionCNAMEs) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Processing your request would cause you to exceed the maximum number of
 // streaming distributions allowed.
@@ -2429,12 +1852,6 @@ func (e *TooManyStreamingDistributions) ErrorMessage() string {
 }
 func (e *TooManyStreamingDistributions) ErrorCode() string             { return "TooManyStreamingDistributions" }
 func (e *TooManyStreamingDistributions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyStreamingDistributions) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyStreamingDistributions) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request contains more trusted signers than are allowed per distribution.
 type TooManyTrustedSigners struct {
@@ -2452,12 +1869,6 @@ func (e *TooManyTrustedSigners) ErrorMessage() string {
 }
 func (e *TooManyTrustedSigners) ErrorCode() string             { return "TooManyTrustedSigners" }
 func (e *TooManyTrustedSigners) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTrustedSigners) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTrustedSigners) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of your trusted signers don't exist.
 type TrustedSignerDoesNotExist struct {
@@ -2475,9 +1886,3 @@ func (e *TrustedSignerDoesNotExist) ErrorMessage() string {
 }
 func (e *TrustedSignerDoesNotExist) ErrorCode() string             { return "TrustedSignerDoesNotExist" }
 func (e *TrustedSignerDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrustedSignerDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrustedSignerDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}

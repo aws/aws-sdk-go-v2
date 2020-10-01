@@ -57,6 +57,7 @@ func (c *Client) ListBuildsForProject(ctx context.Context, params *ListBuildsFor
 }
 
 type ListBuildsForProjectInput struct {
+
 	// The order to list build IDs. Valid values include:
 	//
 	//     * ASCENDING: List the
@@ -65,6 +66,7 @@ type ListBuildsForProjectInput struct {
 	//     * DESCENDING: List the build IDs
 	// in descending order by build ID.
 	SortOrder types.SortOrderType
+
 	// During a previous call, if there are more than 100 items in the list, only the
 	// first 100 items are returned, along with a unique string called a nextToken. To
 	// get the next batch of items in the list, call this operation again, adding the
@@ -72,16 +74,21 @@ type ListBuildsForProjectInput struct {
 	// operation with each subsequent next token that is returned, until no more next
 	// tokens are returned.
 	NextToken *string
+
 	// The name of the AWS CodeBuild project.
+	//
+	// This member is required.
 	ProjectName *string
 }
 
 type ListBuildsForProjectOutput struct {
+
 	// If there are more than 100 items in the list, only the first 100 items are
 	// returned, along with a unique string called a nextToken. To get the next batch
 	// of items in the list, call this operation again, adding the next token to the
 	// call.
 	NextToken *string
+
 	// A list of build IDs for the specified build project, with each build ID
 	// representing a single build.
 	Ids []*string

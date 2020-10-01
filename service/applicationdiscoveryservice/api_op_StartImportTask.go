@@ -79,24 +79,32 @@ func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInp
 }
 
 type StartImportTaskInput struct {
+
 	// The URL for your import file that you've uploaded to Amazon S3.  <note> <p>If
 	// you're using the AWS CLI, this URL is structured as follows:
 	// <code>s3://BucketName/ImportFileName.CSV</code> </p> </note>
+	//
+	// This member is required.
 	ImportUrl *string
+
 	// Optional. A unique token that you can provide to prevent the same import request
 	// from occurring more than once. If you don't provide a token, a token is
 	// automatically generated.  <p>Sending more than one <code>StartImportTask</code>
 	// request with the same client request token will return information about the
 	// original import task with that client request token.</p>
 	ClientRequestToken *string
+
 	// A descriptive name for this request. You can use this name to filter future
 	// requests related to this import task, such as identifying applications and
 	// servers that were included in this import task. We recommend that you use a
 	// meaningful name for each import task.
+	//
+	// This member is required.
 	Name *string
 }
 
 type StartImportTaskOutput struct {
+
 	// An array of information related to the import task request including status
 	// information, times, IDs, the Amazon S3 Object URL for the import file, and more.
 	Task *types.ImportTask

@@ -58,21 +58,34 @@ func (c *Client) CreateConferenceProvider(ctx context.Context, params *CreateCon
 }
 
 type CreateConferenceProviderInput struct {
+
 	// The IP endpoint and protocol for calling.
 	IPDialIn *types.IPDialIn
+
 	// The request token of the client.
 	ClientRequestToken *string
+
 	// The information for PSTN conferencing.
 	PSTNDialIn *types.PSTNDialIn
+
 	// The meeting settings for the conference provider.
+	//
+	// This member is required.
 	MeetingSetting *types.MeetingSetting
+
 	// The name of the conference provider.
+	//
+	// This member is required.
 	ConferenceProviderName *string
+
 	// Represents a type within a list of predefined types.
+	//
+	// This member is required.
 	ConferenceProviderType types.ConferenceProviderType
 }
 
 type CreateConferenceProviderOutput struct {
+
 	// The ARN of the newly-created conference provider.
 	ConferenceProviderArn *string
 

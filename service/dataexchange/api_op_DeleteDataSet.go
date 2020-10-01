@@ -55,7 +55,10 @@ func (c *Client) DeleteDataSet(ctx context.Context, params *DeleteDataSetInput, 
 }
 
 type DeleteDataSetInput struct {
+
 	// The unique identifier for a data set.
+	//
+	// This member is required.
 	DataSetId *string
 }
 

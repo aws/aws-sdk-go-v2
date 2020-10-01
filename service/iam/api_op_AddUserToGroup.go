@@ -55,15 +55,21 @@ func (c *Client) AddUserToGroup(ctx context.Context, params *AddUserToGroupInput
 }
 
 type AddUserToGroupInput struct {
+
 	// The name of the user to add. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
+
 	// The name of the group to update. This parameter allows (through its regex
 	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
 	// upper and lowercase alphanumeric characters with no spaces. You can also include
 	// any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	GroupName *string
 }
 

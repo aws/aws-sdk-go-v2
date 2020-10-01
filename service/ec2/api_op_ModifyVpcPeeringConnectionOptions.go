@@ -81,12 +81,18 @@ func (c *Client) ModifyVpcPeeringConnectionOptions(ctx context.Context, params *
 }
 
 type ModifyVpcPeeringConnectionOptionsInput struct {
+
 	// The ID of the VPC peering connection.
+	//
+	// This member is required.
 	VpcPeeringConnectionId *string
+
 	// The VPC peering connection options for the requester VPC.
 	RequesterPeeringConnectionOptions *types.PeeringConnectionOptionsRequest
+
 	// The VPC peering connection options for the accepter VPC.
 	AccepterPeeringConnectionOptions *types.PeeringConnectionOptionsRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -95,8 +101,10 @@ type ModifyVpcPeeringConnectionOptionsInput struct {
 }
 
 type ModifyVpcPeeringConnectionOptionsOutput struct {
+
 	// Information about the VPC peering connection options for the accepter VPC.
 	AccepterPeeringConnectionOptions *types.PeeringConnectionOptions
+
 	// Information about the VPC peering connection options for the requester VPC.
 	RequesterPeeringConnectionOptions *types.PeeringConnectionOptions
 

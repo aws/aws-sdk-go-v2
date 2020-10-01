@@ -56,13 +56,20 @@ func (c *Client) DescribeRecommendationFeedback(ctx context.Context, params *Des
 }
 
 type DescribeRecommendationFeedbackInput struct {
+
 	// The recommendation ID that can be used to track the provided recommendations and
 	// then to collect the feedback.
+	//
+	// This member is required.
 	RecommendationId *string
+
 	// The Amazon Resource Name (ARN) of the CodeReview
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
+	//
+	// This member is required.
 	CodeReviewArn *string
+
 	// Optional parameter to describe the feedback for a given user. If this is not
 	// supplied, it defaults to the user making the request. The UserId is an IAM
 	// principal that can be specified as an AWS account ID or an Amazon Resource Name
@@ -73,6 +80,7 @@ type DescribeRecommendationFeedbackInput struct {
 }
 
 type DescribeRecommendationFeedbackOutput struct {
+
 	// The recommendation feedback given by the user.
 	RecommendationFeedback *types.RecommendationFeedback
 

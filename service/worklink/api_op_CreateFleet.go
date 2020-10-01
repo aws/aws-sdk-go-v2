@@ -57,18 +57,25 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 }
 
 type CreateFleetInput struct {
+
 	// A unique name for the fleet.
+	//
+	// This member is required.
 	FleetName *string
+
 	// The tags to add to the resource. A tag is a key-value pair.
 	Tags map[string]*string
+
 	// The fleet name to display.
 	DisplayName *string
+
 	// The option to optimize for better performance by routing traffic through the
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool
 }
 
 type CreateFleetOutput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	FleetArn *string
 

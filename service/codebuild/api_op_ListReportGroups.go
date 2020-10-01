@@ -55,6 +55,7 @@ func (c *Client) ListReportGroups(ctx context.Context, params *ListReportGroupsI
 }
 
 type ListReportGroupsInput struct {
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -62,6 +63,7 @@ type ListReportGroupsInput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
+
 	// The criterion to be used to list build report groups. Valid values include:
 	//
 	//
@@ -73,18 +75,22 @@ type ListReportGroupsInput struct {
 	//
 	// * NAME: List based on each report group's name.
 	SortBy types.ReportGroupSortByType
+
 	// The maximum number of paginated report groups returned per response. Use
 	// nextToken to iterate pages in the list of returned ReportGroup objects. The
 	// default value is 100.
 	MaxResults *int32
+
 	// Used to specify the order to sort the list of returned report groups. Valid
 	// values are ASCENDING and DESCENDING.
 	SortOrder types.SortOrderType
 }
 
 type ListReportGroupsOutput struct {
+
 	// The list of ARNs for the report groups in the current AWS account.
 	ReportGroups []*string
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the

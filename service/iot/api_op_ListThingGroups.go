@@ -55,22 +55,29 @@ func (c *Client) ListThingGroups(ctx context.Context, params *ListThingGroupsInp
 }
 
 type ListThingGroupsInput struct {
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// A filter that limits the results to those with the specified name prefix.
 	NamePrefixFilter *string
+
 	// A filter that limits the results to those with the specified parent group.
 	ParentGroup *string
+
 	// If true, return child groups as well.
 	Recursive *bool
 }
 
 type ListThingGroupsOutput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The thing groups.
 	ThingGroups []*types.GroupNameAndArn
 

@@ -11,47 +11,61 @@ import (
 // information about the attribute such as id, begin and end offset within the
 // input text, and the segment of the input text.
 type Attribute struct {
+
 	// The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as an attribute.
 	Score *float32
+
 	// The category of attribute.
 	Category EntityType
+
 	// The level of confidence that Amazon Comprehend Medical has that this attribute
 	// is correctly related to this entity.
 	RelationshipScore *float32
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
+
 	// The numeric identifier for this attribute. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
+
 	// Contextual information for this attribute.
 	Traits []*Trait
+
 	// The type of relationship between the entity and attribute. Type for the
 	// relationship is OVERLAP, indicating that the entity occurred at the same time as
 	// the Date_Expression.
 	RelationshipType RelationshipType
+
 	// The segment of input text extracted as this attribute.
 	Text *string
+
 	// The type of attribute.
 	Type EntitySubType
 }
 
 // Provides information for filtering a list of detection jobs.
 type ComprehendMedicalAsyncJobFilter struct {
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time
+
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
 	// Filters on the name of the job.
 	JobName *string
+
 	// Filters the list of jobs based on job status. Returns only jobs with the
 	// specified status.
 	JobStatus JobStatus
@@ -59,67 +73,90 @@ type ComprehendMedicalAsyncJobFilter struct {
 
 // Provides information about a detection job.
 type ComprehendMedicalAsyncJobProperties struct {
+
 	// The path to the file that describes the results of a batch job.
 	ManifestFilePath *string
+
 	// The input data configuration that you supplied when you created the detection
 	// job.
 	InputDataConfig *InputDataConfig
+
 	// The version of the model used to analyze the documents. The version number looks
 	// like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
 	ModelVersion *string
+
 	// The output data configuration that you supplied when you created the detection
 	// job.
 	OutputDataConfig *OutputDataConfig
+
 	// The time that the detection job completed.
 	EndTime *time.Time
+
 	// The name that you assigned to the detection job.
 	JobName *string
+
 	// A description of the status of a job.
 	Message *string
+
 	// The time that the detection job was submitted for processing.
 	SubmitTime *time.Time
+
 	// The date and time that job metadata is deleted from the server. Output files in
 	// your S3 bucket will not be deleted. After the metadata is deleted, the job will
 	// no longer appear in the results of the ListEntitiesDetectionV2Job or the
 	// ListPHIDetectionJobs operation.
 	ExpirationTime *time.Time
+
 	// The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access
 	// to your input data.
 	DataAccessRoleArn *string
+
 	// The AWS Key Management Service key, if any, used to encrypt the output files.
 	KMSKey *string
+
 	// The current status of the detection job. If the status is FAILED, the Message
 	// field shows the reason for the failure.
 	JobStatus JobStatus
+
 	// The language code of the input documents.
 	LanguageCode LanguageCode
+
 	// The identifier assigned to the detection job.
 	JobId *string
 }
 
 // Provides information about an extracted medical entity.
 type Entity struct {
+
 	// The segment of input text extracted as this entity.
 	Text *string
+
 	// The 0-based character offset in the input text that shows where the entity ends.
 	// The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
+
 	// The extracted attributes that relate to this entity.
 	Attributes []*Attribute
+
 	// The category of the entity.
 	Category EntityType
+
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
+
 	// The numeric identifier for the entity. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
+
 	// Describes the specific type of entity with category of entities.
 	Type EntitySubType
+
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detection.
 	Score *float32
+
 	// Contextual information for the entity.
 	Traits []*Trait
 }
@@ -129,26 +166,34 @@ type Entity struct {
 // an entity. InferICD10CM detects the following attributes: Direction, System,
 // Organ or Site, and Acuity.
 type ICD10CMAttribute struct {
+
 	// The level of confidence that Amazon Comprehend Medical has that this attribute
 	// is correctly related to this entity.
 	RelationshipScore *float32
+
 	// The type of attribute. InferICD10CM detects entities of the type DX_NAME.
 	Type ICD10CMAttributeType
+
 	// The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as an attribute.
 	Score *float32
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
+
 	// The numeric identifier for this attribute. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
+
 	// The contextual information for the attribute. The traits recognized by
 	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
 	Traits []*ICD10CMTrait
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
+
 	// The segment of input text which contains the detected attribute.
 	Text *string
 }
@@ -156,11 +201,14 @@ type ICD10CMAttribute struct {
 // The ICD-10-CM concepts that the entity could refer to, along with a score
 // indicating the likelihood of the match.
 type ICD10CMConcept struct {
+
 	// The level of confidence that Amazon Comprehend Medical has that the entity is
 	// accurately linked to an ICD-10-CM concept.
 	Score *float32
+
 	// The long description of the ICD-10-CM code in the ontology.
 	Description *string
+
 	// The ICD-10-CM code that identifies the concept found in the knowledge base from
 	// the Centers for Disease Control.
 	Code *string
@@ -172,34 +220,44 @@ type ICD10CMConcept struct {
 // confidence that Amazon Comprehend Medical has in the detection and analysis.
 // Attributes and traits of the entity are also returned.
 type ICD10CMEntity struct {
+
 	// The detected attributes that relate to the entity. An extracted segment of the
 	// text that is an attribute of an entity, or otherwise related to an entity, such
 	// as the nature of a medical condition.
 	Attributes []*ICD10CMAttribute
+
 	// The ICD-10-CM concepts that the entity could refer to, along with a score
 	// indicating the likelihood of the match.
 	ICD10CMConcepts []*ICD10CMConcept
+
 	// The numeric identifier for the entity. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
+
 	// Provides Contextual information for the entity. The traits recognized by
 	// InferICD10CM are DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
 	Traits []*ICD10CMTrait
+
 	// The 0-based character offset in the input text that shows where the entity ends.
 	// The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
+
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
+
 	// Describes the specific type of entity with category of entities. InferICD10CM
 	// detects entities of the type DX_NAME.
 	Type ICD10CMEntityType
+
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detection.
 	Score *float32
+
 	// The category of the entity. InferICD10CM detects entities in the
 	// MEDICAL_CONDITION category.
 	Category ICD10CMEntityCategory
+
 	// The segment of input text that is matched to the detected entity.
 	Text *string
 }
@@ -207,8 +265,10 @@ type ICD10CMEntity struct {
 // Contextual information for the entity. The traits recognized by InferICD10CM are
 // DIAGNOSIS, SIGN, SYMPTOM, and NEGATION.
 type ICD10CMTrait struct {
+
 	// Provides a name or contextual description about the trait.
 	Name ICD10CMTraitName
+
 	// The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as a trait.
 	Score *float32
@@ -218,53 +278,69 @@ type ICD10CMTrait struct {
 // the S3 bucket and the path to the files to be analyzed. See batch-manifest ()
 // for more information.
 type InputDataConfig struct {
+
 	// The URI of the S3 bucket that contains the input data. The bucket must be in the
 	// same region as the API endpoint that you are calling. Each file in the document
 	// collection must be less than 40 KB. You can store a maximum of 30 GB in the
 	// bucket.
+	//
+	// This member is required.
 	S3Bucket *string
+
 	// The path to the input data files in the S3 bucket.
 	S3Key *string
 }
 
 // The output properties for a detection job.
 type OutputDataConfig struct {
+
 	// The path to the output data files in the S3 bucket. Amazon Comprehend Medical
 	// creates an output directory using the job ID so that the output from one job
 	// does not overwrite the output of another.
 	S3Key *string
+
 	// When you use the OutputDataConfig object with asynchronous operations, you
 	// specify the Amazon S3 location where you want to write the output data. The URI
 	// must be in the same region as the API endpoint that you are calling. The
 	// location is used as the prefix for the actual location of the output.
+	//
+	// This member is required.
 	S3Bucket *string
 }
 
 // The extracted attributes that relate to this entity. The attributes recognized
 // by InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE.
 type RxNormAttribute struct {
+
 	// The level of confidence that Comprehend Medical has that the segment of text is
 	// correctly recognized as an attribute.
 	Score *float32
+
 	// The level of confidence that Amazon Comprehend Medical has that the attribute is
 	// accurately linked to an entity.
 	RelationshipScore *float32
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
+
 	// The type of attribute. The types of attributes recognized by InferRxNorm are
 	// BRAND_NAME and GENERIC_NAME.
 	Type RxNormAttributeType
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
+
 	// Contextual information for the attribute. InferRxNorm recognizes the trait
 	// NEGATION for attributes, i.e. that the patient is not taking a specific dose or
 	// form of a medication.
 	Traits []*RxNormTrait
+
 	// The numeric identifier for this attribute. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
+
 	// The segment of input text which corresponds to the detected attribute.
 	Text *string
 }
@@ -272,11 +348,14 @@ type RxNormAttribute struct {
 // The RxNorm concept that the entity could refer to, along with a score indicating
 // the likelihood of the match.
 type RxNormConcept struct {
+
 	// The level of confidence that Amazon Comprehend Medical has that the entity is
 	// accurately linked to the reported RxNorm concept.
 	Score *float32
+
 	// The description of the RxNorm concept.
 	Description *string
+
 	// RxNorm concept ID, also known as the RxCUI.
 	Code *string
 }
@@ -287,31 +366,41 @@ type RxNormConcept struct {
 // confidence that Amazon Comprehend Medical has in the detection and analysis.
 // Attributes and traits of the entity are also returned.
 type RxNormEntity struct {
+
 	// The 0-based character offset in the input text that shows where the entity ends.
 	// The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
+
 	// The category of the entity. The recognized categories are GENERIC or BRAND_NAME.
 	Category RxNormEntityCategory
+
 	// The numeric identifier for the entity. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
+
 	// The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
+
 	// The extracted attributes that relate to the entity. The attributes recognized by
 	// InferRxNorm are DOSAGE, DURATION, FORM, FREQUENCY, RATE, ROUTE_OR_MODE, and
 	// STRENGTH.
 	Attributes []*RxNormAttribute
+
 	// The segment of input text extracted from which the entity was detected.
 	Text *string
+
 	// The RxNorm concepts that the entity could refer to, along with a score
 	// indicating the likelihood of the match.
 	RxNormConcepts []*RxNormConcept
+
 	// Contextual information for the entity.
 	Traits []*RxNormTrait
+
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detected entity.
 	Score *float32
+
 	// Describes the specific type of entity. For InferRxNorm, the recognized entity
 	// type is MEDICATION.
 	Type RxNormEntityType
@@ -320,17 +409,21 @@ type RxNormEntity struct {
 // The contextual information for the entity. InferRxNorm recognizes the trait
 // NEGATION, which is any indication that the patient is not taking a medication.
 type RxNormTrait struct {
+
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detected trait.
 	Score *float32
+
 	// Provides a name or contextual description about the trait.
 	Name RxNormTraitName
 }
 
 // Provides contextual information about the extracted entity.
 type Trait struct {
+
 	// Provides a name or contextual description about the trait.
 	Name AttributeName
+
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// this trait.
 	Score *float32
@@ -338,8 +431,10 @@ type Trait struct {
 
 // An attribute that we extracted, but were unable to relate to an entity.
 type UnmappedAttribute struct {
+
 	// The specific attribute that has been extracted but not mapped to an entity.
 	Attribute *Attribute
+
 	// The type of the attribute, could be one of the following values: "MEDICATION",
 	// "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or
 	// "PROTECTED_HEALTH_INFORMATION".

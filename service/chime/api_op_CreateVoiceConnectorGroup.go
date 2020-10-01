@@ -61,13 +61,18 @@ func (c *Client) CreateVoiceConnectorGroup(ctx context.Context, params *CreateVo
 }
 
 type CreateVoiceConnectorGroupInput struct {
+
 	// The Amazon Chime Voice Connectors to route inbound calls to.
 	VoiceConnectorItems []*types.VoiceConnectorItem
+
 	// The name of the Amazon Chime Voice Connector group.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateVoiceConnectorGroupOutput struct {
+
 	// The Amazon Chime Voice Connector group details.
 	VoiceConnectorGroup *types.VoiceConnectorGroup
 

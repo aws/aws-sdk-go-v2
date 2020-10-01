@@ -58,25 +58,33 @@ func (c *Client) CreateTrail(ctx context.Context, params *CreateTrailInput, optF
 
 // Specifies the settings for each trail.
 type CreateTrailInput struct {
+
 	// Specifies the name of the Amazon S3 bucket designated for publishing log files.
 	// See Amazon S3 Bucket Naming Requirements
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
+	//
+	// This member is required.
 	S3BucketName *string
+
 	// Specifies the name of the Amazon SNS topic defined for notification of log file
 	// delivery. The maximum length is 256 characters.
 	SnsTopicName *string
+
 	// Specifies whether the trail is publishing events from global services such as
 	// IAM to the log files.
 	IncludeGlobalServiceEvents *bool
+
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to a
 	// user's log group.
 	CloudWatchLogsRoleArn *string
+
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
 	// have designated for log file delivery. For more information, see Finding Your
 	// CloudTrail Log Files
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
 	// The maximum length is 200 characters.
 	S3KeyPrefix *string
+
 	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The
 	// value can be an alias name prefixed by "alias/", a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
@@ -93,8 +101,10 @@ type CreateTrailInput struct {
 	//
 	// * 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
+
 	// A list of tags.
 	TagsList []*types.Tag
+
 	// Specifies whether log file integrity validation is enabled. The default is
 	// false. When you disable log file integrity validation, the chain of digest files
 	// is broken after one hour. CloudTrail will not create digest files for log files
@@ -105,15 +115,18 @@ type CreateTrailInput struct {
 	// January 2 to noon on January 10. The same applies whenever you stop CloudTrail
 	// logging or delete a trail.
 	EnableLogFileValidation *bool
+
 	// Specifies whether the trail is created in the current region or in all regions.
 	// The default is false, which creates a trail only in the region where you are
 	// signed in. As a best practice, consider creating trails that log events in all
 	// regions.
 	IsMultiRegionTrail *bool
+
 	// Specifies a log group name using an Amazon Resource Name (ARN), a unique
 	// identifier that represents the log group to which CloudTrail logs will be
 	// delivered. Not required unless you specify CloudWatchLogsRoleArn.
 	CloudWatchLogsLogGroupArn *string
+
 	// Specifies the name of the trail. The name must meet the following
 	// requirements:
 	//
@@ -131,7 +144,10 @@ type CreateTrailInput struct {
 	//
 	//     * Not be in IP address format (for example,
 	// 192.168.5.4)
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies whether the trail is created for all accounts in an organization in
 	// AWS Organizations, or only for the current AWS account. The default is false,
 	// and cannot be true unless the call is made on behalf of an AWS account that is
@@ -142,40 +158,53 @@ type CreateTrailInput struct {
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type CreateTrailOutput struct {
+
 	// Specifies whether the trail exists in one region or in all regions.
 	IsMultiRegionTrail *bool
+
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send
 	// notifications when log files are delivered. The format of a topic ARN is:
 	// arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string
+
 	// Specifies the name of the Amazon S3 bucket designated for publishing log files.
 	S3BucketName *string
+
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to a
 	// user's log group.
 	CloudWatchLogsRoleArn *string
+
 	// This field is no longer in use. Use SnsTopicARN.
 	SnsTopicName *string
+
 	// Specifies the name of the trail.
 	Name *string
+
 	// Specifies whether the trail is an organization trail.
 	IsOrganizationTrail *bool
+
 	// Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The
 	// value is a fully specified ARN to a KMS key in the format:
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
+
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
 	// have designated for log file delivery. For more information, see Finding Your
 	// CloudTrail Log Files
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
 	S3KeyPrefix *string
+
 	// Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail
 	// logs will be delivered.
 	CloudWatchLogsLogGroupArn *string
+
 	// Specifies whether the trail is publishing events from global services such as
 	// IAM to the log files.
 	IncludeGlobalServiceEvents *bool
+
 	// Specifies whether log file integrity validation is enabled.
 	LogFileValidationEnabled *bool
+
 	// Specifies the ARN of the trail that was created. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	TrailARN *string

@@ -56,15 +56,23 @@ func (c *Client) CreateBot(ctx context.Context, params *CreateBotInput, optFns .
 }
 
 type CreateBotInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The domain of the Amazon Chime Enterprise account.
 	Domain *string
+
 	// The bot display name.
+	//
+	// This member is required.
 	DisplayName *string
 }
 
 type CreateBotOutput struct {
+
 	// The bot details.
 	Bot *types.Bot
 

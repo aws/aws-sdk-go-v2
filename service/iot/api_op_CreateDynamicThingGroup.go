@@ -56,35 +56,51 @@ func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDyna
 }
 
 type CreateDynamicThingGroupInput struct {
+
 	// The dynamic thing group query version. Currently one query version is supported:
 	// "2017-09-30". If not specified, the query version defaults to this value.
 	QueryVersion *string
+
 	// The dynamic thing group index name. Currently one index is supported:
 	// "AWS_Things".
 	IndexName *string
+
 	// The dynamic thing group properties.
 	ThingGroupProperties *types.ThingGroupProperties
+
 	// The dynamic thing group search query string. See Query Syntax
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html) for
 	// information about query string syntax.
+	//
+	// This member is required.
 	QueryString *string
+
 	// The dynamic thing group name to create.
+	//
+	// This member is required.
 	ThingGroupName *string
+
 	// Metadata which can be used to manage the dynamic thing group.
 	Tags []*types.Tag
 }
 
 type CreateDynamicThingGroupOutput struct {
+
 	// The dynamic thing group ARN.
 	ThingGroupArn *string
+
 	// The dynamic thing group search query string.
 	QueryString *string
+
 	// The dynamic thing group query version.
 	QueryVersion *string
+
 	// The dynamic thing group name.
 	ThingGroupName *string
+
 	// The dynamic thing group index name.
 	IndexName *string
+
 	// The dynamic thing group ID.
 	ThingGroupId *string
 

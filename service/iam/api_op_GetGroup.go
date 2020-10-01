@@ -57,6 +57,7 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 }
 
 type GetGroupInput struct {
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -65,11 +66,15 @@ type GetGroupInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
 	// The name of the group. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	GroupName *string
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -79,13 +84,21 @@ type GetGroupInput struct {
 
 // Contains the response to a successful GetGroup () request.
 type GetGroupOutput struct {
+
 	// A structure that contains details about the group.
+	//
+	// This member is required.
 	Group *types.Group
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
+
 	// A list of users in the group.
+	//
+	// This member is required.
 	Users []*types.User
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than

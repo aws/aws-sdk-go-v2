@@ -55,8 +55,12 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 }
 
 type DeleteConnectionInput struct {
+
 	// The name of the connection to delete.
+	//
+	// This member is required.
 	ConnectionName *string
+
 	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string

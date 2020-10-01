@@ -63,10 +63,13 @@ func (c *Client) GetDomainDeliverabilityCampaign(ctx context.Context, params *Ge
 // the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
 // operation).
 type GetDomainDeliverabilityCampaignInput struct {
+
 	// The unique identifier for the campaign. Amazon Pinpoint automatically generates
 	// and assigns this identifier to a campaign. This value is not the same as the
 	// campaign identifier that Amazon Pinpoint assigns to campaigns that you create
 	// and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.
+	//
+	// This member is required.
 	CampaignId *string
 }
 
@@ -75,7 +78,10 @@ type GetDomainDeliverabilityCampaignInput struct {
 // domain that the Deliverability dashboard is enabled for
 // (PutDeliverabilityDashboardOption operation).
 type GetDomainDeliverabilityCampaignOutput struct {
+
 	// An object that contains the deliverability data for the campaign.
+	//
+	// This member is required.
 	DomainDeliverabilityCampaign *types.DomainDeliverabilityCampaign
 
 	// Metadata pertaining to the operation's result.

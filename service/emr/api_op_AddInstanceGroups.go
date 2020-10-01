@@ -57,18 +57,27 @@ func (c *Client) AddInstanceGroups(ctx context.Context, params *AddInstanceGroup
 
 // Input to an AddInstanceGroups call.
 type AddInstanceGroupsInput struct {
+
 	// Job flow in which to add the instance groups.
+	//
+	// This member is required.
 	JobFlowId *string
+
 	// Instance groups to add.
+	//
+	// This member is required.
 	InstanceGroups []*types.InstanceGroupConfig
 }
 
 // Output from an AddInstanceGroups call.
 type AddInstanceGroupsOutput struct {
+
 	// The job flow ID in which the instance groups are added.
 	JobFlowId *string
+
 	// Instance group IDs of the newly created instance groups.
 	InstanceGroupIds []*string
+
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
 

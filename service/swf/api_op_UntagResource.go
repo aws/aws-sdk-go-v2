@@ -55,9 +55,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the Amazon SWF domain.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The list of tags to remove from the Amazon SWF domain.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

@@ -56,17 +56,25 @@ func (c *Client) BatchRead(ctx context.Context, params *BatchReadInput, optFns .
 }
 
 type BatchReadInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory (). For
 	// more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// Represents the manner and timing in which the successful write or update of an
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
+
 	// A list of operations that are part of the batch.
+	//
+	// This member is required.
 	Operations []*types.BatchReadOperation
 }
 
 type BatchReadOutput struct {
+
 	// A list of all the responses for each batch read.
 	Responses []*types.BatchReadOperationResponse
 

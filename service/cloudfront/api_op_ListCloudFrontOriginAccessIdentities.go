@@ -56,8 +56,10 @@ func (c *Client) ListCloudFrontOriginAccessIdentities(ctx context.Context, param
 
 // The request to list origin access identities.
 type ListCloudFrontOriginAccessIdentitiesInput struct {
+
 	// The maximum number of origin access identities you want in the response body.
 	MaxItems *string
+
 	// Use this when paginating results to indicate where to begin in your list of
 	// origin access identities. The results include identities in the list that occur
 	// after the marker. To get the next page of results, set the Marker to the value
@@ -68,6 +70,7 @@ type ListCloudFrontOriginAccessIdentitiesInput struct {
 
 // The returned result of the corresponding request.
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
+
 	// The CloudFrontOriginAccessIdentityList type.
 	CloudFrontOriginAccessIdentityList *types.CloudFrontOriginAccessIdentityList
 

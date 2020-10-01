@@ -57,19 +57,29 @@ func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVote
 }
 
 type ListProposalVotesInput struct {
+
 	// The unique identifier of the network.
+	//
+	// This member is required.
 	NetworkId *string
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// The maximum number of votes to return.
 	MaxResults *int32
+
 	// The unique identifier of the proposal.
+	//
+	// This member is required.
 	ProposalId *string
 }
 
 type ListProposalVotesOutput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// The listing of votes.
 	ProposalVotes []*types.VoteSummary
 

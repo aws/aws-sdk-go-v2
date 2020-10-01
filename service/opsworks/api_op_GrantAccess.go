@@ -57,8 +57,12 @@ func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optF
 }
 
 type GrantAccessInput struct {
+
 	// The instance's AWS OpsWorks Stacks ID.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The length of time (in minutes) that the grant is valid. When the grant expires
 	// at the end of this period, the user will no longer be able to use the
 	// credentials to log in. If the user is logged in at the time, he or she
@@ -68,6 +72,7 @@ type GrantAccessInput struct {
 
 // Contains the response to a GrantAccess request.
 type GrantAccessOutput struct {
+
 	// A TemporaryCredential object that contains the data needed to log in to the
 	// instance by RDP clients, such as the Microsoft Remote Desktop Connection.
 	TemporaryCredential *types.TemporaryCredential

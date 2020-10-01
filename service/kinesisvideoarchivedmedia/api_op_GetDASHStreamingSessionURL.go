@@ -162,9 +162,11 @@ func (c *Client) GetDASHStreamingSessionURL(ctx context.Context, params *GetDASH
 }
 
 type GetDASHStreamingSessionURLInput struct {
+
 	// The Amazon Resource Name (ARN) of the stream for which to retrieve the MPEG-DASH
 	// manifest URL. You must specify either the StreamName or the StreamARN.
 	StreamARN *string
+
 	// Per the MPEG-DASH specification, the wall-clock time of fragments in the
 	// manifest file can be derived using attributes in the manifest itself. However,
 	// typically, MPEG-DASH compatible media players do not properly handle gaps in the
@@ -179,6 +181,7 @@ type GetDASHStreamingSessionURLInput struct {
 	// DASHFragmentSelector () is PRODUCER_TIMESTAMP, the timestamps will be the
 	// producer start timestamps.
 	DisplayFragmentTimestamp types.DASHDisplayFragmentTimestamp
+
 	// The time range of the requested fragment and the source of the timestamps. This
 	// parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
 	// parameter is optional if PlaybackMode isLIVE. If PlaybackMode is LIVE, the
@@ -186,9 +189,11 @@ type GetDASHStreamingSessionURLInput struct {
 	// PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
 	// TimestampRange must be set.
 	DASHFragmentSelector *types.DASHFragmentSelector
+
 	// The name of the stream for which to retrieve the MPEG-DASH manifest URL. You
 	// must specify either the StreamName or the StreamARN.
 	StreamName *string
+
 	// Fragments are identified in the manifest file based on their sequence number in
 	// the session. If DisplayFragmentNumber is set to ALWAYS, the Kinesis Video
 	// Streams fragment number is added to each S element in the manifest file with the
@@ -197,11 +202,13 @@ type GetDASHStreamingSessionURLInput struct {
 	// MPEG-DASH media player is necessary to leverage these this custom attribute. The
 	// default value is NEVER.
 	DisplayFragmentNumber types.DASHDisplayFragmentNumber
+
 	// The time in seconds until the requested session expires. This value can be
 	// between 300 (5 minutes) and 43200 (12 hours). When a session expires, no new
 	// calls to GetDashManifest, GetMP4InitFragment, or GetMP4MediaFragment can be made
 	// for that session. The default is 300 (5 minutes).
 	Expires *int32
+
 	// The maximum number of fragments that are returned in the MPEG-DASH manifest.
 	// When the PlaybackMode is LIVE, the most recent fragments are returned up to this
 	// value. When the PlaybackMode is ON_DEMAND, the oldest fragments are returned, up
@@ -216,6 +223,7 @@ type GetDASHStreamingSessionURLInput struct {
 	// fragments, and more than 2 1/2 hours of video on streams with 10-second
 	// fragments.
 	MaxManifestFragmentResults *int64
+
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:
 	//
@@ -264,6 +272,7 @@ type GetDASHStreamingSessionURLInput struct {
 }
 
 type GetDASHStreamingSessionURLOutput struct {
+
 	// The URL (containing the session token) that a media player can use to retrieve
 	// the MPEG-DASH manifest.
 	DASHStreamingSessionURL *string

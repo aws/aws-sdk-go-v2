@@ -55,20 +55,26 @@ func (c *Client) ListActiveViolations(ctx context.Context, params *ListActiveVio
 }
 
 type ListActiveViolationsInput struct {
+
 	// The name of the thing whose active violations are listed.
 	ThingName *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The name of the Device Defender security profile for which violations are
 	// listed.
 	SecurityProfileName *string
 }
 
 type ListActiveViolationsOutput struct {
+
 	// The list of active violations.
 	ActiveViolations []*types.ActiveViolation
+
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string

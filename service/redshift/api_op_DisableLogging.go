@@ -58,23 +58,32 @@ func (c *Client) DisableLogging(ctx context.Context, params *DisableLoggingInput
 
 //
 type DisableLoggingInput struct {
+
 	// The identifier of the cluster on which logging is to be stopped. Example:
 	// examplecluster
+	//
+	// This member is required.
 	ClusterIdentifier *string
 }
 
 // Describes the status of logging for a cluster.
 type DisableLoggingOutput struct {
+
 	// The prefix applied to the log file names.
 	S3KeyPrefix *string
+
 	// The message indicating that logs failed to be delivered.
 	LastFailureMessage *string
+
 	// true if logging is on, false if logging is off.
 	LoggingEnabled *bool
+
 	// The last time when logs failed to be delivered.
 	LastFailureTime *time.Time
+
 	// The name of the S3 bucket where the log files are stored.
 	BucketName *string
+
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 

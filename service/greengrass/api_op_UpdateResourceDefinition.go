@@ -55,8 +55,12 @@ func (c *Client) UpdateResourceDefinition(ctx context.Context, params *UpdateRes
 }
 
 type UpdateResourceDefinitionInput struct {
+
 	// The ID of the resource definition.
+	//
+	// This member is required.
 	ResourceDefinitionId *string
+
 	// The name of the definition.
 	Name *string
 }

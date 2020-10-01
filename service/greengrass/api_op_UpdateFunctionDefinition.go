@@ -55,8 +55,12 @@ func (c *Client) UpdateFunctionDefinition(ctx context.Context, params *UpdateFun
 }
 
 type UpdateFunctionDefinitionInput struct {
+
 	// The ID of the Lambda function definition.
+	//
+	// This member is required.
 	FunctionDefinitionId *string
+
 	// The name of the definition.
 	Name *string
 }

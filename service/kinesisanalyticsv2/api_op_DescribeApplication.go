@@ -58,16 +58,23 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 }
 
 type DescribeApplicationInput struct {
+
 	// Displays verbose information about a Kinesis Data Analytics application,
 	// including the application's job plan.
 	IncludeAdditionalDetails *bool
+
 	// The name of the application.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 type DescribeApplicationOutput struct {
+
 	// Provides a description of the application, such as the application's Amazon
 	// Resource Name (ARN), status, and latest version.
+	//
+	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
 
 	// Metadata pertaining to the operation's result.

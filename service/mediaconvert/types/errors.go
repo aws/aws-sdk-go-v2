@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The service can't process your request because of a problem in the request.
@@ -25,12 +24,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service couldn't complete your request because there is a conflict with the
 // current state of the resource.
@@ -49,12 +42,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You don't have permissions for this action with the credentials you sent.
 type ForbiddenException struct {
@@ -72,12 +59,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service encountered an unexpected condition and can't fulfill your request.
 type InternalServerErrorException struct {
@@ -95,12 +76,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you requested doesn't exist.
 type NotFoundException struct {
@@ -118,12 +93,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Too many requests have been sent in too short of a time. The service limits the
 // rate at which it will accept requests.
@@ -142,9 +111,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

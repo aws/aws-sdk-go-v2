@@ -71,9 +71,15 @@ func (c *Client) DeleteBucketAnalyticsConfiguration(ctx context.Context, params 
 }
 
 type DeleteBucketAnalyticsConfigurationInput struct {
+
 	// The name of the bucket from which an analytics configuration is deleted.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The ID that identifies the analytics configuration.
+	//
+	// This member is required.
 	Id *string
 }
 

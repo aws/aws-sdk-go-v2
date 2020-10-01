@@ -58,20 +58,27 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// You can use NextToken in a subsequent request to fetch the next page of access
 	// point descriptions if the response payload was paginated.
 	NextToken *string
+
 	// (Optional) Specifies the maximum number of tag objects to return in the
 	// response. The default value is 100.
 	MaxResults *int32
+
 	// Specifies the EFS resource you want to retrieve tags for. You can retrieve tags
 	// for EFS file systems and access points using this API endpoint.
+	//
+	// This member is required.
 	ResourceId *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// An array of the tags for the specified EFS resource.
 	Tags []*types.Tag
+
 	// NextToken is present if the response payload is paginated. You can use NextToken
 	// in a subsequent request to fetch the next page of access point descriptions.
 	NextToken *string

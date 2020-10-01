@@ -56,11 +56,15 @@ func (c *Client) DescribeUserPoolDomain(ctx context.Context, params *DescribeUse
 }
 
 type DescribeUserPoolDomainInput struct {
+
 	// The domain string.
+	//
+	// This member is required.
 	Domain *string
 }
 
 type DescribeUserPoolDomainOutput struct {
+
 	// A domain description object containing information about the domain.
 	DomainDescription *types.DomainDescriptionType
 

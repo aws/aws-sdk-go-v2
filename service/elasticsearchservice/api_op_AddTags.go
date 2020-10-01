@@ -61,9 +61,15 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 // Container for the parameters to the AddTags () operation. Specify the tags that
 // you want to attach to the Elasticsearch domain.
 type AddTagsInput struct {
+
 	// Specify the ARN for which you want to add the tags.
+	//
+	// This member is required.
 	ARN *string
+
 	// List of Tag that need to be added for the Elasticsearch domain.
+	//
+	// This member is required.
 	TagList []*types.Tag
 }
 

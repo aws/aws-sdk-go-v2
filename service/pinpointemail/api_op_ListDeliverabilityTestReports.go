@@ -60,9 +60,11 @@ func (c *Client) ListDeliverabilityTestReports(ctx context.Context, params *List
 // A request to list all of the predictive inbox placement tests that you've
 // performed.
 type ListDeliverabilityTestReportsInput struct {
+
 	// A token returned from a previous call to ListDeliverabilityTestReports to
 	// indicate the position in the list of predictive inbox placement tests.
 	NextToken *string
+
 	// The number of results to show in a single call to ListDeliverabilityTestReports.
 	// If the number of results is larger than the number you specified in this
 	// parameter, then the response includes a NextToken element, which you can use to
@@ -74,9 +76,13 @@ type ListDeliverabilityTestReportsInput struct {
 // A list of the predictive inbox placement test reports that are available for
 // your account, regardless of whether or not those tests are complete.
 type ListDeliverabilityTestReportsOutput struct {
+
 	// An object that contains a lists of predictive inbox placement tests that you've
 	// performed.
+	//
+	// This member is required.
 	DeliverabilityTestReports []*types.DeliverabilityTestReport
+
 	// A token that indicates that there are additional predictive inbox placement
 	// tests to list. To view additional predictive inbox placement tests, issue
 	// another request to ListDeliverabilityTestReports, and pass this token in the

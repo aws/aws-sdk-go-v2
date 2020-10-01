@@ -61,29 +61,45 @@ func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementI
 // The request parameters represent the input of a request to run a SQL statement
 // against a database.
 type ExecuteStatementInput struct {
+
 	// A value that indicates whether to continue running the statement after the call
 	// times out. By default, the statement stops running when the call times out. For
 	// DDL statements, we recommend continuing to run the statement after the call
 	// times out. When a DDL statement terminates before it is finished running, it can
 	// result in errors and possibly corrupted data structures.
 	ContinueAfterTimeout *bool
+
 	// The name of the database.
 	Database *string
+
 	// A value that indicates whether to include metadata in the results.
 	IncludeResultMetadata *bool
+
 	// The parameters for the SQL statement. Array parameters are not supported.
 	Parameters []*types.SqlParameter
+
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Options that control how the result set is returned.
 	ResultSetOptions *types.ResultSetOptions
+
 	// The name of the database schema. Currently, the schema parameter isn't
 	// supported.
 	Schema *string
+
 	// The name or ARN of the secret that enables access to the DB cluster.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The SQL statement to run.
+	//
+	// This member is required.
 	Sql *string
+
 	// The identifier of a transaction that was started by using the BeginTransaction
 	// operation. Specify the transaction ID of the transaction that you want to
 	// include the SQL statement in. If the SQL statement is not part of a transaction,
@@ -94,8 +110,10 @@ type ExecuteStatementInput struct {
 // The response elements represent the output of a request to run a SQL statement
 // against a database.
 type ExecuteStatementOutput struct {
+
 	// Metadata for the columns included in the results.
 	ColumnMetadata []*types.ColumnMetadata
+
 	// Values for fields generated during the request.  <note> <p>The
 	// <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get
 	// the values of generated fields, use the <code>RETURNING</code> clause. For more
@@ -103,8 +121,10 @@ type ExecuteStatementOutput struct {
 	// href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From
 	// Modified Rows</a> in the PostgreSQL documentation.</p> </note>
 	GeneratedFields []types.Field
+
 	// The number of records updated by the request.
 	NumberOfRecordsUpdated *int64
+
 	// The records returned by the SQL statement.
 	Records [][]types.Field
 

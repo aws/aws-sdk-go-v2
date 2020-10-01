@@ -58,15 +58,23 @@ func (c *Client) GetApiKey(ctx context.Context, params *GetApiKeyInput, optFns .
 
 // A request to get information about the current ApiKey () resource.
 type GetApiKeyInput struct {
+
 	// [Required] The identifier of the ApiKey () resource.
-	ApiKey           *string
+	//
+	// This member is required.
+	ApiKey *string
+
 	TemplateSkipList []*string
-	Title            *string
-	Name             *string
+
+	Title *string
+
+	Name *string
+
 	// A boolean flag to specify whether (true) or not (false) the result contains the
 	// key value.
 	IncludeValue *bool
-	Template     *bool
+
+	Template *bool
 }
 
 // A resource that can be distributed to callers for executing Method () resources
@@ -75,25 +83,35 @@ type GetApiKeyInput struct {
 // stage. Use API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type GetApiKeyOutput struct {
+
 	// The name of the API Key.
 	Name *string
+
 	// A list of Stage () resources that are associated with the ApiKey () resource.
 	StageKeys []*string
+
 	// The timestamp when the API Key was created.
 	CreatedDate *time.Time
+
 	// The identifier of the API Key.
 	Id *string
+
 	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
 	// Marketplace.
 	CustomerId *string
+
 	// The timestamp when the API Key was last updated.
 	LastUpdatedDate *time.Time
+
 	// Specifies whether the API Key can be used by callers.
 	Enabled *bool
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The description of the API Key.
 	Description *string
+
 	// The value of the API Key.
 	Value *string
 

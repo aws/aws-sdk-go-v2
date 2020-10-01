@@ -59,16 +59,20 @@ func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInp
 // Container for the parameters to the BuildSuggester () operation. Specifies the
 // name of the domain you want to update.
 type BuildSuggestersInput struct {
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a BuildSuggester request. Contains a list of the fields used for
 // suggestions.
 type BuildSuggestersOutput struct {
+
 	// A list of field names.
 	FieldNames []*string
 

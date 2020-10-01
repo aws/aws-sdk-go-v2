@@ -59,11 +59,15 @@ func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, 
 }
 
 type StopDBClusterInput struct {
+
 	// The identifier of the cluster to stop. Example: docdb-2019-05-28-15-24-52
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type StopDBClusterOutput struct {
+
 	// Detailed information about a cluster.
 	DBCluster *types.DBCluster
 

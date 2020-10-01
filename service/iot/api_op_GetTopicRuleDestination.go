@@ -56,11 +56,15 @@ func (c *Client) GetTopicRuleDestination(ctx context.Context, params *GetTopicRu
 }
 
 type GetTopicRuleDestinationInput struct {
+
 	// The ARN of the topic rule destination.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetTopicRuleDestinationOutput struct {
+
 	// The topic rule destination.
 	TopicRuleDestination *types.TopicRuleDestination
 

@@ -55,10 +55,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect
 	// resource from which to delete tags.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The keys of the tags to be removed.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

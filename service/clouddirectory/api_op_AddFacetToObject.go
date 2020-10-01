@@ -57,15 +57,25 @@ func (c *Client) AddFacetToObject(ctx context.Context, params *AddFacetToObjectI
 }
 
 type AddFacetToObjectInput struct {
+
 	// Identifiers for the facet that you are adding to the object. See SchemaFacet ()
 	// for details.
+	//
+	// This member is required.
 	SchemaFacet *types.SchemaFacet
+
 	// A reference to the object you are adding the specified facet to.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// Attributes on the facet that you are adding to the object.
 	ObjectAttributeList []*types.AttributeKeyAndValue
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// the object resides. For more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 

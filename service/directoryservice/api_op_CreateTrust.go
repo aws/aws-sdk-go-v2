@@ -70,27 +70,43 @@ func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optF
 // creation of the AWS side of a trust relationship between an AWS Managed
 // Microsoft AD directory and an external domain.
 type CreateTrustInput struct {
+
 	// The Directory ID of the AWS Managed Microsoft AD directory for which to
 	// establish the trust relationship.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The Fully Qualified Domain Name (FQDN) of the external domain for which to
 	// create the trust relationship.
+	//
+	// This member is required.
 	RemoteDomainName *string
+
 	// Optional parameter to enable selective authentication for the trust.
 	SelectiveAuth types.SelectiveAuth
+
 	// The trust relationship type. Forest is the default.
 	TrustType types.TrustType
+
 	// The direction of the trust relationship.
+	//
+	// This member is required.
 	TrustDirection types.TrustDirection
+
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
 	ConditionalForwarderIpAddrs []*string
+
 	// The trust password. The must be the same password that was used when creating
 	// the trust relationship on the external domain.
+	//
+	// This member is required.
 	TrustPassword *string
 }
 
 // The result of a CreateTrust request.
 type CreateTrustOutput struct {
+
 	// A unique identifier for the trust relationship that was created.
 	TrustId *string
 

@@ -55,13 +55,16 @@ func (c *Client) GetDataflowGraph(ctx context.Context, params *GetDataflowGraphI
 }
 
 type GetDataflowGraphInput struct {
+
 	// The Python script to transform.
 	PythonScript *string
 }
 
 type GetDataflowGraphOutput struct {
+
 	// A list of the edges in the resulting DAG.
 	DagEdges []*types.CodeGenEdge
+
 	// A list of the nodes in the resulting DAG.
 	DagNodes []*types.CodeGenNode
 

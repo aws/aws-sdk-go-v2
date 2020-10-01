@@ -55,11 +55,15 @@ func (c *Client) ListTagsLogGroup(ctx context.Context, params *ListTagsLogGroupI
 }
 
 type ListTagsLogGroupInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 
 type ListTagsLogGroupOutput struct {
+
 	// The tags for the log group.
 	Tags map[string]*string
 

@@ -70,15 +70,24 @@ func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateCont
 }
 
 type UpdateContactAttributesInput struct {
+
 	// The Amazon Connect attributes. These attributes can be accessed in contact flows
 	// just like any other contact attributes. You can have up to 32,768 UTF-8 bytes
 	// across all attributes for a contact. Attribute keys can include only
 	// alphanumeric, dash, and underscore characters.
+	//
+	// This member is required.
 	Attributes map[string]*string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The identifier of the contact. This is the identifier of the contact associated
 	// with the first interaction with the contact center.
+	//
+	// This member is required.
 	InitialContactId *string
 }
 

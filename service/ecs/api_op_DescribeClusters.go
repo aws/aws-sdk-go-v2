@@ -55,6 +55,7 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 }
 
 type DescribeClustersInput struct {
+
 	// Whether to include additional information about your clusters in the response.
 	// If this field is omitted, the attachments, statistics, and tags are not
 	// included. If ATTACHMENTS is specified, the attachments for the container
@@ -85,14 +86,17 @@ type DescribeClustersInput struct {
 	// If TAGS is
 	// specified, the metadata tags associated with the cluster are included.
 	Include []types.ClusterField
+
 	// A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN)
 	// entries. If you do not specify a cluster, the default cluster is assumed.
 	Clusters []*string
 }
 
 type DescribeClustersOutput struct {
+
 	// Any failures associated with the call.
 	Failures []*types.Failure
+
 	// The list of clusters.
 	Clusters []*types.Cluster
 

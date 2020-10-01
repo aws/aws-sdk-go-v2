@@ -8,14 +8,17 @@ import (
 
 // Contains details about an activity that failed during an execution.
 type ActivityFailedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The error code of the failure.
 	Error *string
 }
 
 // Contains details about an activity.
 type ActivityListItem struct {
+
 	// The name of the activity. A name must not contain:
 	//
 	//     * white space
@@ -33,21 +36,35 @@ type ActivityListItem struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
+
 	// The date the activity is created.
+	//
+	// This member is required.
 	CreationDate *time.Time
+
 	// The Amazon Resource Name (ARN) that identifies the activity.
+	//
+	// This member is required.
 	ActivityArn *string
 }
 
 // Contains details about an activity scheduled during an execution.
 type ActivityScheduledEventDetails struct {
+
 	// The JSON data input to the activity task.
 	Input *string
+
 	// The Amazon Resource Name (ARN) of the scheduled activity.
+	//
+	// This member is required.
 	Resource *string
+
 	// The maximum allowed duration of the activity task.
 	TimeoutInSeconds *int64
+
 	// The maximum allowed duration between two heartbeats for the activity task.
 	HeartbeatInSeconds *int64
 }
@@ -55,14 +72,17 @@ type ActivityScheduledEventDetails struct {
 // Contains details about an activity schedule failure that occurred during an
 // execution.
 type ActivityScheduleFailedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The error code of the failure.
 	Error *string
 }
 
 // Contains details about the start of an activity during an execution.
 type ActivityStartedEventDetails struct {
+
 	// The name of the worker that the task is assigned to. These names are provided by
 	// the workers when calling GetActivityTask ().
 	WorkerName *string
@@ -71,20 +91,24 @@ type ActivityStartedEventDetails struct {
 // Contains details about an activity that successfully terminated during an
 // execution.
 type ActivitySucceededEventDetails struct {
+
 	// The JSON data output by the activity task.
 	Output *string
 }
 
 // Contains details about an activity timeout that occurred during an execution.
 type ActivityTimedOutEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// A more detailed explanation of the cause of the timeout.
 	Cause *string
 }
 
 //
 type CloudWatchLogsLogGroup struct {
+
 	// The ARN of the the CloudWatch log group to which you want your logs emitted to.
 	// The ARN must end with :*
 	LogGroupArn *string
@@ -92,24 +116,32 @@ type CloudWatchLogsLogGroup struct {
 
 // Contains details about an abort of an execution.
 type ExecutionAbortedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The error code of the failure.
 	Error *string
 }
 
 // Contains details about an execution failure event.
 type ExecutionFailedEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
 }
 
 // Contains details about an execution.
 type ExecutionListItem struct {
+
 	// The current status of the execution.
+	//
+	// This member is required.
 	Status ExecutionStatus
+
 	// The name of the execution. A name must not contain:
 	//
 	//     * white space
@@ -127,145 +159,213 @@ type ExecutionListItem struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) that id entifies the execution.
+	//
+	// This member is required.
 	ExecutionArn *string
+
 	// The date the execution started.
+	//
+	// This member is required.
 	StartDate *time.Time
+
 	// If the execution already ended, the date the execution stopped.
 	StopDate *time.Time
+
 	// The Amazon Resource Name (ARN) of the executed state machine.
+	//
+	// This member is required.
 	StateMachineArn *string
 }
 
 // Contains details about the start of the execution.
 type ExecutionStartedEventDetails struct {
+
 	// The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda
 	// tasks.
 	RoleArn *string
+
 	// The JSON data input to the execution.
 	Input *string
 }
 
 // Contains details about the successful termination of the execution.
 type ExecutionSucceededEventDetails struct {
+
 	// The JSON data output by the execution.
 	Output *string
 }
 
 // Contains details about the execution timeout that occurred during the execution.
 type ExecutionTimedOutEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// A more detailed explanation of the cause of the timeout.
 	Cause *string
 }
 
 // Contains details about the events of an execution.
 type HistoryEvent struct {
+
 	// Contains details about an activity schedule event that failed during an
 	// execution.
 	ActivityScheduleFailedEventDetails *ActivityScheduleFailedEventDetails
+
 	// Contains details about the successful termination of the execution.
 	ExecutionSucceededEventDetails *ExecutionSucceededEventDetails
+
 	// Contains details about a task that succeeded.
 	TaskSucceededEventDetails *TaskSucceededEventDetails
+
 	// The type of the event.
+	//
+	// This member is required.
 	Type HistoryEventType
+
 	// Contains details about a lambda function that terminated successfully during an
 	// execution.
 	LambdaFunctionSucceededEventDetails *LambdaFunctionSucceededEventDetails
+
 	// Contains details about a lambda function timeout that occurred during an
 	// execution.
 	LambdaFunctionTimedOutEventDetails *LambdaFunctionTimedOutEventDetails
+
 	// Contains details about a state entered during an execution.
 	StateEnteredEventDetails *StateEnteredEventDetails
+
 	// Contains details about an exit from a state during an execution.
 	StateExitedEventDetails *StateExitedEventDetails
+
 	// Contains details about the execution timeout that occurred during the execution.
 	ExecutionTimedOutEventDetails *ExecutionTimedOutEventDetails
+
 	// The date and time the event occurred.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// Contains details about an activity that successfully terminated during an
 	// execution.
 	ActivitySucceededEventDetails *ActivitySucceededEventDetails
+
 	// Contains details about the failure of a task.
 	TaskFailedEventDetails *TaskFailedEventDetails
+
 	// Contains details about an activity timeout that occurred during an execution.
 	ActivityTimedOutEventDetails *ActivityTimedOutEventDetails
+
 	// Contains details about an iteration of a Map state that failed.
 	MapIterationFailedEventDetails *MapIterationEventDetails
+
 	// Contains details about an iteration of a Map state that succeeded.
 	MapIterationSucceededEventDetails *MapIterationEventDetails
+
 	// Contains details about a submitted task.
 	TaskSubmittedEventDetails *TaskSubmittedEventDetails
+
 	// Contains details about an activity scheduled during an execution.
 	ActivityScheduledEventDetails *ActivityScheduledEventDetails
+
 	// Contains details about a task that failed to start.
 	TaskStartFailedEventDetails *TaskStartFailedEventDetails
+
 	// Contains details about a failed lambda function schedule event that occurred
 	// during an execution.
 	LambdaFunctionScheduleFailedEventDetails *LambdaFunctionScheduleFailedEventDetails
+
 	// Contains details about an iteration of a Map state that was aborted.
 	MapIterationAbortedEventDetails *MapIterationEventDetails
+
 	// The id of the event. Events are numbered sequentially, starting at one.
+	//
+	// This member is required.
 	Id *int64
+
 	// Contains details about a lambda function that failed to start during an
 	// execution.
 	LambdaFunctionStartFailedEventDetails *LambdaFunctionStartFailedEventDetails
+
 	// Contains details about the start of the execution.
 	ExecutionStartedEventDetails *ExecutionStartedEventDetails
+
 	// Contains details about a lambda function scheduled during an execution.
 	LambdaFunctionScheduledEventDetails *LambdaFunctionScheduledEventDetails
+
 	// Contains details about an execution failure event.
 	ExecutionFailedEventDetails *ExecutionFailedEventDetails
+
 	// Contains details about an activity that failed during an execution.
 	ActivityFailedEventDetails *ActivityFailedEventDetails
+
 	// Contains details about an abort of an execution.
 	ExecutionAbortedEventDetails *ExecutionAbortedEventDetails
+
 	// Contains details about a task that where the submit failed.
 	TaskSubmitFailedEventDetails *TaskSubmitFailedEventDetails
+
 	// Contains details about a task that timed out.
 	TaskTimedOutEventDetails *TaskTimedOutEventDetails
+
 	// Contains details about a lambda function that failed during an execution.
 	LambdaFunctionFailedEventDetails *LambdaFunctionFailedEventDetails
+
 	// Contains details about Map state that was started.
 	MapStateStartedEventDetails *MapStateStartedEventDetails
+
 	// Contains details about a task that was scheduled.
 	TaskScheduledEventDetails *TaskScheduledEventDetails
+
 	// The id of the previous event.
 	PreviousEventId *int64
+
 	// Contains details about a task that was started.
 	TaskStartedEventDetails *TaskStartedEventDetails
+
 	// Contains details about an iteration of a Map state that was started.
 	MapIterationStartedEventDetails *MapIterationEventDetails
+
 	// Contains details about the start of an activity during an execution.
 	ActivityStartedEventDetails *ActivityStartedEventDetails
 }
 
 // Contains details about a lambda function that failed during an execution.
 type LambdaFunctionFailedEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
 }
 
 // Contains details about a lambda function scheduled during an execution.
 type LambdaFunctionScheduledEventDetails struct {
+
 	// The JSON data input to the lambda function.
 	Input *string
+
 	// The maximum allowed duration of the lambda function.
 	TimeoutInSeconds *int64
+
 	// The Amazon Resource Name (ARN) of the scheduled lambda function.
+	//
+	// This member is required.
 	Resource *string
 }
 
 // Contains details about a failed lambda function schedule event that occurred
 // during an execution.
 type LambdaFunctionScheduleFailedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The error code of the failure.
 	Error *string
 }
@@ -273,8 +373,10 @@ type LambdaFunctionScheduleFailedEventDetails struct {
 // Contains details about a lambda function that failed to start during an
 // execution.
 type LambdaFunctionStartFailedEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
 }
@@ -282,6 +384,7 @@ type LambdaFunctionStartFailedEventDetails struct {
 // Contains details about a lambda function that successfully terminated during an
 // execution.
 type LambdaFunctionSucceededEventDetails struct {
+
 	// The JSON data output by the lambda function.
 	Output *string
 }
@@ -289,14 +392,17 @@ type LambdaFunctionSucceededEventDetails struct {
 // Contains details about a lambda function timeout that occurred during an
 // execution.
 type LambdaFunctionTimedOutEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// A more detailed explanation of the cause of the timeout.
 	Cause *string
 }
 
 //
 type LogDestination struct {
+
 	// An object describing a CloudWatch log group. For more information, see
 	// AWS::Logs::LogGroup
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
@@ -306,40 +412,51 @@ type LogDestination struct {
 
 // The LoggingConfiguration data type is used to set CloudWatch Logs options.
 type LoggingConfiguration struct {
+
 	// Determines whether execution data is included in your log. When set to FALSE,
 	// data is excluded.
 	IncludeExecutionData *bool
+
 	// An array of objects that describes where your execution history events will be
 	// logged. Limited to size 1. Required, if your log level is not set to OFF.
 	Destinations []*LogDestination
+
 	// Defines which category of execution history events are logged.
 	Level LogLevel
 }
 
 // Contains details about an iteration of a Map state.
 type MapIterationEventDetails struct {
+
 	// The name of the iteration’s parent Map state.
 	Name *string
+
 	// The index of the array belonging to the Map state iteration.
 	Index *int32
 }
 
 // Details about a Map state that was started.
 type MapStateStartedEventDetails struct {
+
 	// The size of the array for Map state iterations.
 	Length *int32
 }
 
 // Contains details about a state entered during an execution.
 type StateEnteredEventDetails struct {
+
 	// The name of the state.
+	//
+	// This member is required.
 	Name *string
+
 	// The string that contains the JSON input data for the state.
 	Input *string
 }
 
 // Contains details about an exit from a state during an execution.
 type StateExitedEventDetails struct {
+
 	// The name of the state. A name must not contain:
 	//
 	//     * white space
@@ -357,13 +474,17 @@ type StateExitedEventDetails struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
+
 	// The JSON output data of the state.
 	Output *string
 }
 
 // Contains details about the state machine.
 type StateMachineListItem struct {
+
 	// The name of the state machine. A name must not contain:
 	//
 	//     * white space
@@ -381,12 +502,23 @@ type StateMachineListItem struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
-	Name *string
-	// The date the state machine is created.
-	CreationDate *time.Time
-	// The Amazon Resource Name (ARN) that identifies the state machine.
-	StateMachineArn *string
 	//
+	// This member is required.
+	Name *string
+
+	// The date the state machine is created.
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// The Amazon Resource Name (ARN) that identifies the state machine.
+	//
+	// This member is required.
+	StateMachineArn *string
+
+	//
+	//
+	// This member is required.
 	Type StateMachineType
 }
 
@@ -400,86 +532,145 @@ type StateMachineListItem struct {
 // may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 // = + - @.
 type Tag struct {
+
 	// The key of a tag.
 	Key *string
+
 	// The value of a tag.
 	Value *string
 }
 
 // Contains details about a task failure event.
 type TaskFailedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
+
 	// The error code of the failure.
 	Error *string
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
 }
 
 // Contains details about a task scheduled during an execution.
 type TaskScheduledEventDetails struct {
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
+
 	// The region of the scheduled task
+	//
+	// This member is required.
 	Region *string
+
 	// The maximum allowed duration of the task.
 	TimeoutInSeconds *int64
+
 	// The JSON data passed to the resource referenced in a task state.
+	//
+	// This member is required.
 	Parameters *string
 }
 
 // Contains details about the start of a task during an execution.
 type TaskStartedEventDetails struct {
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
 }
 
 // Contains details about a task that failed to start during an execution.
 type TaskStartFailedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The error code of the failure.
 	Error *string
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
 }
 
 // Contains details about a task that failed to submit during an execution.
 type TaskSubmitFailedEventDetails struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
+
 	// The error code of the failure.
 	Error *string
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
 }
 
 // Contains details about a task submitted to a resource .
 type TaskSubmittedEventDetails struct {
+
 	// The response from a resource when a task has started.
 	Output *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
 }
 
 // Contains details about the successful completion of a task state.
 type TaskSucceededEventDetails struct {
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
+
 	// The full JSON response from a resource when a task has succeeded. This response
 	// becomes the output of the related task.
 	Output *string
@@ -487,12 +678,20 @@ type TaskSucceededEventDetails struct {
 
 // Contains details about a resource timeout that occurred during an execution.
 type TaskTimedOutEventDetails struct {
+
 	// The error code of the failure.
 	Error *string
+
 	// The service name of the resource in a task state.
+	//
+	// This member is required.
 	Resource *string
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The action of the resource called by a task state.
+	//
+	// This member is required.
 	ResourceType *string
 }

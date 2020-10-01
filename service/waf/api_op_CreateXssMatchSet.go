@@ -85,19 +85,27 @@ func (c *Client) CreateXssMatchSet(ctx context.Context, params *CreateXssMatchSe
 
 // A request to create an XssMatchSet ().
 type CreateXssMatchSetInput struct {
+
 	// A friendly name or description for the XssMatchSet () that you're creating. You
 	// can't change Name after you create the XssMatchSet.
+	//
+	// This member is required.
 	Name *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 // The response to a CreateXssMatchSet request.
 type CreateXssMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the CreateXssMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// An XssMatchSet ().
 	XssMatchSet *types.XssMatchSet
 

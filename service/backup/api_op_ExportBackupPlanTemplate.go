@@ -55,11 +55,15 @@ func (c *Client) ExportBackupPlanTemplate(ctx context.Context, params *ExportBac
 }
 
 type ExportBackupPlanTemplateInput struct {
+
 	// Uniquely identifies a backup plan.
+	//
+	// This member is required.
 	BackupPlanId *string
 }
 
 type ExportBackupPlanTemplateOutput struct {
+
 	// The body of a backup plan template in JSON format. This is a signed JSON
 	// document that cannot be modified before being passed to GetBackupPlanFromJSON.
 	BackupPlanTemplateJson *string

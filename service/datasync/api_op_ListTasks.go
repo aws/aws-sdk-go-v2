@@ -56,8 +56,10 @@ func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns .
 
 // ListTasksRequest
 type ListTasksInput struct {
+
 	// The maximum number of tasks to return.
 	MaxResults *int32
+
 	// An opaque string that indicates the position at which to begin the next list of
 	// tasks.
 	NextToken *string
@@ -65,9 +67,11 @@ type ListTasksInput struct {
 
 // ListTasksResponse
 type ListTasksOutput struct {
+
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of tasks.
 	NextToken *string
+
 	// A list of all the tasks that are returned.
 	Tasks []*types.TaskListEntry
 

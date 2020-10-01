@@ -56,8 +56,11 @@ func (c *Client) DisassociateMembership(ctx context.Context, params *Disassociat
 }
 
 type DisassociateMembershipInput struct {
+
 	// The ARN of the behavior graph to remove the member account from. The member
 	// account's member status in the behavior graph must be ENABLED.
+	//
+	// This member is required.
 	GraphArn *string
 }
 

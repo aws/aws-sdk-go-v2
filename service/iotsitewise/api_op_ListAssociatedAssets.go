@@ -57,10 +57,15 @@ func (c *Client) ListAssociatedAssets(ctx context.Context, params *ListAssociate
 }
 
 type ListAssociatedAssetsInput struct {
+
 	// The ID of the parent asset.
+	//
+	// This member is required.
 	AssetId *string
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
+
 	// The hierarchy ID (of the parent asset model) whose associated assets are
 	// returned. To find a hierarchy ID, use the DescribeAsset
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html)
@@ -69,16 +74,23 @@ type ListAssociatedAssetsInput struct {
 	// actions. For more information, see Asset Hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
 	HierarchyId *string
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 }
 
 type ListAssociatedAssetsOutput struct {
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// A list that summarizes the associated assets.
+	//
+	// This member is required.
 	AssetSummaries []*types.AssociatedAssetsSummary
 
 	// Metadata pertaining to the operation's result.

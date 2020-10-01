@@ -57,30 +57,47 @@ func (c *Client) UpdateRobotApplication(ctx context.Context, params *UpdateRobot
 }
 
 type UpdateRobotApplicationInput struct {
+
 	// The revision id for the robot application.
 	CurrentRevisionId *string
+
 	// The sources of the robot application.
+	//
+	// This member is required.
 	Sources []*types.SourceConfig
+
 	// The application information for the robot application.
+	//
+	// This member is required.
 	Application *string
+
 	// The robot software suite (ROS distribution) used by the robot application.
+	//
+	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 }
 
 type UpdateRobotApplicationOutput struct {
+
 	// The sources of the robot application.
 	Sources []*types.Source
+
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
 	LastUpdatedAt *time.Time
+
 	// The robot software suite (ROS distribution) used by the robot application.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The revision id of the robot application.
 	RevisionId *string
+
 	// The version of the robot application.
 	Version *string
+
 	// The name of the robot application.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the updated robot application.
 	Arn *string
 

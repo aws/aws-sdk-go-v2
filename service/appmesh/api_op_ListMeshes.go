@@ -55,12 +55,14 @@ func (c *Client) ListMeshes(ctx context.Context, params *ListMeshesInput, optFns
 
 //
 type ListMeshesInput struct {
+
 	// The nextToken value returned from a previous paginated ListMeshes request where
 	// limit was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
 	// value. This token should be treated as an opaque identifier that is used only to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
+
 	// The maximum number of results returned by ListMeshes in paginated output. When
 	// you use this parameter, ListMeshes returns only limit results in a single page
 	// along with a nextToken response element. You can see the remaining results of
@@ -73,8 +75,12 @@ type ListMeshesInput struct {
 
 //
 type ListMeshesOutput struct {
+
 	// The list of existing service meshes.
+	//
+	// This member is required.
 	Meshes []*types.MeshRef
+
 	// The nextToken value to include in a future ListMeshes request. When the results
 	// of a ListMeshes request exceed limit, you can use this value to retrieve the
 	// next page of results. This value is null when there are no more results to

@@ -56,18 +56,25 @@ func (c *Client) ListDeviceDefinitionVersions(ctx context.Context, params *ListD
 }
 
 type ListDeviceDefinitionVersionsInput struct {
+
 	// The ID of the device definition.
+	//
+	// This member is required.
 	DeviceDefinitionId *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
 }
 
 type ListDeviceDefinitionVersionsOutput struct {
+
 	// Information about a version.
 	Versions []*types.VersionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

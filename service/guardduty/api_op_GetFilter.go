@@ -56,24 +56,42 @@ func (c *Client) GetFilter(ctx context.Context, params *GetFilterInput, optFns .
 }
 
 type GetFilterInput struct {
+
 	// The name of the filter you want to get.
+	//
+	// This member is required.
 	FilterName *string
+
 	// The unique ID of the detector that the filter is associated with.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type GetFilterOutput struct {
+
 	// Represents the criteria to be used in the filter for querying findings.
+	//
+	// This member is required.
 	FindingCriteria *types.FindingCriteria
+
 	// The description of the filter.
 	Description *string
+
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
+	//
+	// This member is required.
 	Action types.FilterAction
+
 	// The name of the filter.
+	//
+	// This member is required.
 	Name *string
+
 	// The tags of the filter resource.
 	Tags map[string]*string
+
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
 	Rank *int32

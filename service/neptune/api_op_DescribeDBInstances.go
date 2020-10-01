@@ -58,6 +58,7 @@ func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInst
 }
 
 type DescribeDBInstancesInput struct {
+
 	// A filter that specifies one or more DB instances to describe. Supported
 	// filters:
 	//
@@ -73,11 +74,13 @@ type DescribeDBInstancesInput struct {
 	// invoke this API from the AWS CLI and filter so that only Neptune DB instances
 	// are returned, you could use the following command:</p>
 	Filters []*types.Filter
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// The user-supplied instance identifier. If this parameter is specified,
 	// information from only the specific DB instance is returned. This parameter isn't
 	// case-sensitive. Constraints:
@@ -85,6 +88,7 @@ type DescribeDBInstancesInput struct {
 	//     * If supplied, must match the identifier of an
 	// existing DBInstance.
 	DBInstanceIdentifier *string
+
 	// An optional pagination token provided by a previous DescribeDBInstances request.
 	// If this parameter is specified, the response includes only records beyond the
 	// marker, up to the value specified by MaxRecords.
@@ -92,10 +96,12 @@ type DescribeDBInstancesInput struct {
 }
 
 type DescribeDBInstancesOutput struct {
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
+
 	// A list of DBInstance () instances.
 	DBInstances []*types.DBInstance
 

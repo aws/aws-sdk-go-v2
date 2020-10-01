@@ -56,6 +56,7 @@ func (c *Client) ModifyVpcAttribute(ctx context.Context, params *ModifyVpcAttrib
 }
 
 type ModifyVpcAttributeInput struct {
+
 	// Indicates whether the DNS resolution is supported for the VPC. If enabled,
 	// queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or
 	// the reserved IP address at the base of the VPC network range "plus two" succeed.
@@ -64,8 +65,12 @@ type ModifyVpcAttributeInput struct {
 	// and DNS hostnames attributes in the same request. Use separate requests for each
 	// attribute.
 	EnableDnsSupport *types.AttributeBooleanValue
+
 	// The ID of the VPC.
+	//
+	// This member is required.
 	VpcId *string
+
 	// Indicates whether the instances launched in the VPC get DNS hostnames. If
 	// enabled, instances in the VPC get DNS hostnames; otherwise, they do not. You
 	// cannot modify the DNS resolution and DNS hostnames attributes in the same

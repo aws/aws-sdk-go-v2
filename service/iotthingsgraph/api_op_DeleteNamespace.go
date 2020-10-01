@@ -59,8 +59,10 @@ type DeleteNamespaceInput struct {
 }
 
 type DeleteNamespaceOutput struct {
+
 	// The name of the namespace to be deleted.
 	NamespaceName *string
+
 	// The ARN of the namespace to be deleted.
 	NamespaceArn *string
 

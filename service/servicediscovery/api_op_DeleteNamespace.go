@@ -56,11 +56,15 @@ func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInp
 }
 
 type DeleteNamespaceInput struct {
+
 	// The ID of the namespace that you want to delete.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DeleteNamespaceOutput struct {
+
 	// A value that you can use to determine whether the request completed
 	// successfully. To get the status of the operation, see GetOperation
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).

@@ -72,8 +72,10 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 }
 
 type GetObjectTaggingInput struct {
+
 	// The versionId of the object for which to get the tagging information.
 	VersionId *string
+
 	// The bucket name containing the object for which to get the tagging information.
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
@@ -83,14 +85,23 @@ type GetObjectTaggingInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Object key for which to get the tagging information.
+	//
+	// This member is required.
 	Key *string
 }
 
 type GetObjectTaggingOutput struct {
+
 	// Contains the tag set.
+	//
+	// This member is required.
 	TagSet []*types.Tag
+
 	// The versionId of the object for which you got the tagging information.
 	VersionId *string
 

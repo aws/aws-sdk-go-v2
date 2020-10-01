@@ -60,8 +60,11 @@ func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput
 }
 
 type UpdateTemplateInput struct {
+
 	// The content of the email, composed of a subject line, an HTML part, and a
 	// text-only part.
+	//
+	// This member is required.
 	Template *types.Template
 }
 

@@ -92,24 +92,34 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 // Provides options for retrieving a job list for an Amazon S3 Glacier vault.
 type ListJobsInput struct {
+
 	// The state of the jobs to return. You can specify true or false.
 	Completed *string
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// An opaque string used for pagination. This value specifies the job at which the
 	// listing of jobs should begin. Get the marker value from a previous List Jobs
 	// response. You only need to include the marker if you are continuing the
 	// pagination of results started in a previous List Jobs request.
 	Marker *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// The type of job status to return. You can specify the following values:
 	// InProgress, Succeeded, or Failed.
 	Statuscode *string
+
 	// The maximum number of jobs to be returned. The default limit is 50. The number
 	// of jobs returned might be fewer than the specified limit, but the number of
 	// returned jobs never exceeds the limit.
@@ -118,11 +128,13 @@ type ListJobsInput struct {
 
 // Contains the Amazon S3 Glacier response to your request.
 type ListJobsOutput struct {
+
 	// An opaque string used for pagination that specifies the job at which the listing
 	// of jobs should begin. You get the marker value from a previous List Jobs
 	// response. You only need to include the marker if you are continuing the
 	// pagination of the results started in a previous List Jobs request.
 	Marker *string
+
 	// A list of job objects. Each job object contains metadata describing the job.
 	JobList []*types.GlacierJobDescription
 

@@ -56,28 +56,35 @@ func (c *Client) ListCommands(ctx context.Context, params *ListCommandsInput, op
 }
 
 type ListCommandsInput struct {
+
 	// (Optional) The maximum number of items to return for this call. The call also
 	// returns a token that you can specify in a subsequent call to get the next set of
 	// results.
 	MaxResults *int32
+
 	// (Optional) Lists commands issued against this instance ID. You can't specify an
 	// instance ID in the same command that you specify Status = Pending. This is
 	// because the command has not reached the instance yet.
 	InstanceId *string
+
 	// (Optional) If provided, lists only the specified command.
 	CommandId *string
+
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
 	NextToken *string
+
 	// (Optional) One or more filters. Use a filter to return a more specific list of
 	// results.
 	Filters []*types.CommandFilter
 }
 
 type ListCommandsOutput struct {
+
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
 	NextToken *string
+
 	// (Optional) The list of commands requested by the user.
 	Commands []*types.Command
 

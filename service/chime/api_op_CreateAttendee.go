@@ -59,16 +59,24 @@ func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput
 }
 
 type CreateAttendeeInput struct {
+
 	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
 	// by a builder application.
+	//
+	// This member is required.
 	ExternalUserId *string
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
+
 	// The tag key-value pairs.
 	Tags []*types.Tag
 }
 
 type CreateAttendeeOutput struct {
+
 	// The attendee information, including attendee ID and join token.
 	Attendee *types.Attendee
 

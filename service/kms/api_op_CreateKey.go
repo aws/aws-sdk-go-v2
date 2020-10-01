@@ -110,6 +110,7 @@ func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns .
 }
 
 type CreateKeyInput struct {
+
 	// The source of the key material for the CMK. You cannot change the origin after
 	// you create the CMK. The default is AWS_KMS, which means AWS KMS creates the key
 	// material. When the parameter value is EXTERNAL, AWS KMS creates a CMK without
@@ -125,6 +126,7 @@ type CreateKeyInput struct {
 	// also use the CustomKeyStoreId parameter to identify the custom key store. This
 	// value is valid only for symmetric CMKs.
 	Origin types.OriginType
+
 	// The key policy to attach to the CMK. If you provide a key policy, it must meet
 	// the following criteria:
 	//
@@ -153,6 +155,7 @@ type CreateKeyInput struct {
 	// in the AWS Key Management Service Developer Guide. The key policy size quota is
 	// 32 kilobytes (32768 bytes).
 	Policy *string
+
 	// Specifies the type of CMK to create. The default value, SYMMETRIC_DEFAULT,
 	// creates a CMK with a 256-bit symmetric key for encryption and decryption. For
 	// help choosing a key spec for your CMK, see How to Choose Your CMK Configuration
@@ -207,9 +210,11 @@ type CreateKeyInput struct {
 	//         * ECC_SECG_P256K1 (secp256k1), commonly used
 	// for cryptocurrencies.
 	CustomerMasterKeySpec types.CustomerMasterKeySpec
+
 	// A description of the CMK. Use a description that helps you decide whether the
 	// CMK is appropriate for a task.
 	Description *string
+
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the CMK becomes unmanageable.
 	// Do not set this value to true indiscriminately. For more information, refer to
@@ -220,6 +225,7 @@ type CreateKeyInput struct {
 	// principal that is making the request from making a subsequent PutKeyPolicy ()
 	// request on the CMK. The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool
+
 	// Determines the cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This
@@ -235,6 +241,7 @@ type CreateKeyInput struct {
 	//
 	// * For asymmetric CMKs with ECC key material, specify SIGN_VERIFY.
 	KeyUsage types.KeyUsageType
+
 	// Creates the CMK in the specified custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 	// and the key material in its associated AWS CloudHSM cluster. To create a CMK in
@@ -250,6 +257,7 @@ type CreateKeyInput struct {
 	// feature in AWS KMS, which combines the convenience and extensive integration of
 	// AWS KMS with the isolation and control of a single-tenant key store.
 	CustomKeyStoreId *string
+
 	// One or more tags. Each tag consists of a tag key and a tag value. Both the tag
 	// key and the tag value are required, but the tag value can be an empty (null)
 	// string. When you add tags to an AWS resource, AWS generates a cost allocation
@@ -262,6 +270,7 @@ type CreateKeyInput struct {
 }
 
 type CreateKeyOutput struct {
+
 	// Metadata associated with the CMK.
 	KeyMetadata *types.KeyMetadata
 

@@ -55,9 +55,15 @@ func (c *Client) DeleteConfigurationSetEventDestination(ctx context.Context, par
 }
 
 type DeleteConfigurationSetEventDestinationInput struct {
+
 	// ConfigurationSetName
+	//
+	// This member is required.
 	ConfigurationSetName *string
+
 	// EventDestinationName
+	//
+	// This member is required.
 	EventDestinationName *string
 }
 

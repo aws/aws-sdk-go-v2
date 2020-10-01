@@ -57,18 +57,27 @@ func (c *Client) GetApplicationRevision(ctx context.Context, params *GetApplicat
 
 // Represents the input of a GetApplicationRevision operation.
 type GetApplicationRevisionInput struct {
+
 	// The name of the application that corresponds to the revision.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// Information about the application revision to get, including type and location.
+	//
+	// This member is required.
 	Revision *types.RevisionLocation
 }
 
 // Represents the output of a GetApplicationRevision operation.
 type GetApplicationRevisionOutput struct {
+
 	// General information about the revision.
 	RevisionInfo *types.GenericRevisionInfo
+
 	// Additional information about the revision, including type and location.
 	Revision *types.RevisionLocation
+
 	// The name of the application that corresponds to the revision.
 	ApplicationName *string
 

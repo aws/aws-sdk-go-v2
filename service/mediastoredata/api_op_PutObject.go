@@ -58,18 +58,22 @@ func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns .
 }
 
 type PutObjectInput struct {
+
 	// Indicates the storage class of a Put request. Defaults to high-performance
 	// temporal storage class, and objects are persisted into durable storage shortly
 	// after being received.
 	StorageClass types.StorageClass
+
 	// An optional CacheControl header that allows the caller to control the object's
 	// cache behavior. Headers can be passed in as specified in the HTTP at
 	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9). Headers with
 	// a custom user-defined value are also accepted.
 	CacheControl *string
+
 	// The content type of the object.
 	ContentType *string
+
 	// The path (including the file name) where the object is stored in the container.
 	// Format: // For example, to upload the file mlaw.avi to the folder path
 	// premium\canada in the container movies, enter the path premium/canada/mlaw.avi.
@@ -85,16 +89,24 @@ type PutObjectInput struct {
 	// that is assigned to the file that you upload. The file can have the same name
 	// inside and outside of AWS Elemental MediaStore, or it can have the same name.
 	// The file name can include or omit an extension.
+	//
+	// This member is required.
 	Path *string
+
 	// The bytes to be stored.
+	//
+	// This member is required.
 	Body io.Reader
 }
 
 type PutObjectOutput struct {
+
 	// Unique identifier of the object in the container.
 	ETag *string
+
 	// The SHA256 digest of the object that is persisted.
 	ContentSHA256 *string
+
 	// The storage class where the object was persisted. The class should be
 	// “Temporal”.
 	StorageClass types.StorageClass

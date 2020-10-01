@@ -66,7 +66,10 @@ func (c *Client) DeleteBot(ctx context.Context, params *DeleteBotInput, optFns .
 }
 
 type DeleteBotInput struct {
+
 	// The name of the bot. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 

@@ -55,11 +55,20 @@ func (c *Client) UpdateUserSecurityProfiles(ctx context.Context, params *UpdateU
 }
 
 type UpdateUserSecurityProfilesInput struct {
+
 	// The identifiers of the security profiles for the user.
+	//
+	// This member is required.
 	SecurityProfileIds []*string
+
 	// The identifier of the user account.
+	//
+	// This member is required.
 	UserId *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

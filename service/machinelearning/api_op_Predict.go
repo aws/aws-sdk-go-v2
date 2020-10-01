@@ -58,15 +58,25 @@ func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...fu
 }
 
 type PredictInput struct {
+
 	// A map of variable name-value pairs that represent an observation.
+	//
+	// This member is required.
 	Record map[string]*string
+
 	// A unique identifier of the MLModel.
+	//
+	// This member is required.
 	MLModelId *string
+
 	// The predicted endpoint for the input.
+	//
+	// This member is required.
 	PredictEndpoint *string
 }
 
 type PredictOutput struct {
+
 	// The output from a Predict operation:  <ul> <li> <p> <code>Details</code> -
 	// Contains the following attributes: <code>DetailsAttributes.PREDICTIVE_MODEL_TYPE
 	// - REGRESSION | BINARY | MULTICLASS</code> <code>DetailsAttributes.ALGORITHM -

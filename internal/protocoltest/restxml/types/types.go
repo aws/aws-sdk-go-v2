@@ -8,7 +8,8 @@ type ComplexNestedErrorData struct {
 
 type NestedPayload struct {
 	Greeting *string
-	Name     *string
+
+	Name *string
 }
 
 type PayloadWithXmlName struct {
@@ -24,27 +25,32 @@ type PayloadWithXmlNamespaceAndPrefix struct {
 }
 
 type RecursiveShapesInputOutputNested1 struct {
-	Foo    *string
+	Foo *string
+
 	Nested *RecursiveShapesInputOutputNested2
 }
 
 type RecursiveShapesInputOutputNested2 struct {
-	Bar             *string
+	Bar *string
+
 	RecursiveMember *RecursiveShapesInputOutputNested1
 }
 
 type StructureListMember struct {
 	A *string
+
 	B *string
 }
 
 type XmlAttributesInputOutput struct {
-	Foo  *string
+	Foo *string
+
 	Attr *string
 }
 
 type XmlNamespaceNested struct {
-	Foo    *string
+	Foo *string
+
 	Values []*string
 }
 

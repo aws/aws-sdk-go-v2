@@ -57,8 +57,12 @@ func (c *Client) DeleteAnalyzer(ctx context.Context, params *DeleteAnalyzerInput
 
 // Deletes an analyzer.
 type DeleteAnalyzerInput struct {
+
 	// The name of the analyzer to delete.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// A client token.
 	ClientToken *string
 }

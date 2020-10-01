@@ -57,12 +57,16 @@ func (c *Client) DescribeRxNormInferenceJob(ctx context.Context, params *Describ
 }
 
 type DescribeRxNormInferenceJobInput struct {
+
 	// The identifier that Amazon Comprehend Medical generated for the job. The
 	// StartRxNormInferenceJob operation returns this identifier in its response.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribeRxNormInferenceJobOutput struct {
+
 	// An object that contains the properties associated with a detection job.
 	ComprehendMedicalAsyncJobProperties *types.ComprehendMedicalAsyncJobProperties
 

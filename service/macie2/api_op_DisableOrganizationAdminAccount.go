@@ -56,7 +56,10 @@ func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *Di
 }
 
 type DisableOrganizationAdminAccountInput struct {
+
 	// The AWS account ID of the delegated administrator account.
+	//
+	// This member is required.
 	AdminAccountId *string
 }
 

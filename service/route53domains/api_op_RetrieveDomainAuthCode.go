@@ -58,13 +58,19 @@ func (c *Client) RetrieveDomainAuthCode(ctx context.Context, params *RetrieveDom
 // A request for the authorization code for the specified domain. To transfer a
 // domain to another registrar, you provide this value to the new registrar.
 type RetrieveDomainAuthCodeInput struct {
+
 	// The name of the domain that you want to get an authorization code for.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The RetrieveDomainAuthCode response includes the following element.
 type RetrieveDomainAuthCodeOutput struct {
+
 	// The authorization code for the domain.
+	//
+	// This member is required.
 	AuthCode *string
 
 	// Metadata pertaining to the operation's result.

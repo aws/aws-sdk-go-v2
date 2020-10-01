@@ -59,25 +59,36 @@ func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns
 // Creates a new flow. The request must include one source. The request optionally
 // can include outputs (up to 50) and entitlements (up to 50).
 type CreateFlowInput struct {
+
 	// The VPC interfaces you want on the flow.
 	VpcInterfaces []*types.VpcInterfaceRequest
+
 	// The Availability Zone that you want to create the flow in. These options are
 	// limited to the Availability Zones within the current AWS Region.
 	AvailabilityZone *string
+
 	// The settings for source failover
 	SourceFailoverConfig *types.FailoverConfig
+
 	// The entitlements that you want to grant on a flow.
 	Entitlements []*types.GrantEntitlementRequest
-	Sources      []*types.SetSourceRequest
+
+	Sources []*types.SetSourceRequest
+
 	// The outputs that you want to add to this flow.
 	Outputs []*types.AddOutputRequest
+
 	// The name of the flow.
+	//
+	// This member is required.
 	Name *string
+
 	// The settings for the source of the flow.
 	Source *types.SetSourceRequest
 }
 
 type CreateFlowOutput struct {
+
 	// The settings for a flow, including its source, outputs, and entitlements.
 	Flow *types.Flow
 

@@ -55,12 +55,18 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 
 type HttpRequestWithLabelsAndTimestampFormatInput struct {
 	MemberEpochSeconds *time.Time
-	MemberHttpDate     *time.Time
-	MemberDateTime     *time.Time
-	DefaultFormat      *time.Time
+
+	MemberHttpDate *time.Time
+
+	MemberDateTime *time.Time
+
+	DefaultFormat *time.Time
+
 	TargetEpochSeconds *time.Time
-	TargetHttpDate     *time.Time
-	TargetDateTime     *time.Time
+
+	TargetHttpDate *time.Time
+
+	TargetDateTime *time.Time
 }
 
 type HttpRequestWithLabelsAndTimestampFormatOutput struct {

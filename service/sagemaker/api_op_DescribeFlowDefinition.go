@@ -57,33 +57,60 @@ func (c *Client) DescribeFlowDefinition(ctx context.Context, params *DescribeFlo
 }
 
 type DescribeFlowDefinitionInput struct {
+
 	// The name of the flow definition.
+	//
+	// This member is required.
 	FlowDefinitionName *string
 }
 
 type DescribeFlowDefinitionOutput struct {
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// execution role for the flow definition.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The status of the flow definition. Valid values are listed below.
+	//
+	// This member is required.
 	FlowDefinitionStatus types.FlowDefinitionStatus
+
 	// The timestamp when the flow definition was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// An object containing information about the output file.
+	//
+	// This member is required.
 	OutputConfig *types.FlowDefinitionOutputConfig
+
 	// An object containing information about what triggers a human review workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
+
 	// Container for configuring the source of human task requests. Used to specify if
 	// Amazon Rekognition or Amazon Textract is used as an integration source.
 	HumanLoopRequestSource *types.HumanLoopRequestSource
+
 	// An object containing information about who works on the task, the workforce task
 	// price, and other task details.
+	//
+	// This member is required.
 	HumanLoopConfig *types.HumanLoopConfig
+
 	// The reason your flow definition failed.
 	FailureReason *string
+
 	// The Amazon Resource Name (ARN) of the flow defintion.
+	//
+	// This member is required.
 	FlowDefinitionArn *string
+
 	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// This member is required.
 	FlowDefinitionName *string
 
 	// Metadata pertaining to the operation's result.

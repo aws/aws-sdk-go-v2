@@ -57,17 +57,22 @@ func (c *Client) ListPresets(ctx context.Context, params *ListPresetsInput, optF
 }
 
 type ListPresetsInput struct {
+
 	// Optional. Number of presets, up to twenty, that will be returned at one time
 	MaxResults *int32
+
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
+
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of presets.
 	NextToken *string
+
 	// Optionally, specify a preset category to limit responses to only presets from
 	// that category.
 	Category *string
+
 	// Optional. When you request a list of presets, you can choose to list them
 	// alphabetically by NAME or chronologically by CREATION_DATE. If you don't
 	// specify, the service will list them by name.
@@ -75,8 +80,10 @@ type ListPresetsInput struct {
 }
 
 type ListPresetsOutput struct {
+
 	// Use this string to request the next batch of presets.
 	NextToken *string
+
 	// List of presets
 	Presets []*types.Preset
 

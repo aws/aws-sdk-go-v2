@@ -62,15 +62,21 @@ func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumbe
 }
 
 type UpdatePhoneNumberInput struct {
+
 	// The product type.
 	ProductType types.PhoneNumberProductType
+
 	// The outbound calling name associated with the phone number.
 	CallingName *string
+
 	// The phone number ID.
+	//
+	// This member is required.
 	PhoneNumberId *string
 }
 
 type UpdatePhoneNumberOutput struct {
+
 	// The updated phone number details.
 	PhoneNumber *types.PhoneNumber
 

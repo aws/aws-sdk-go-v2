@@ -56,16 +56,25 @@ func (c *Client) SendUsersMessages(ctx context.Context, params *SendUsersMessage
 }
 
 type SendUsersMessagesInput struct {
+
 	// Specifies the configuration and other settings for a message to send to all the
 	// endpoints that are associated with a list of users.
+	//
+	// This member is required.
 	SendUsersMessageRequest *types.SendUsersMessageRequest
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type SendUsersMessagesOutput struct {
+
 	// Provides information about which users and endpoints a message was sent to.
+	//
+	// This member is required.
 	SendUsersMessageResponse *types.SendUsersMessageResponse
 
 	// Metadata pertaining to the operation's result.

@@ -73,21 +73,32 @@ func (c *Client) CreateConfigurationProfile(ctx context.Context, params *CreateC
 }
 
 type CreateConfigurationProfileInput struct {
+
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
 	RetrievalRoleArn *string
+
 	// A list of methods for validating the configuration.
 	Validators []*types.Validator
+
 	// A name for the configuration profile.
+	//
+	// This member is required.
 	Name *string
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Metadata to assign to the configuration profile. Tags help organize and
 	// categorize your AppConfig resources. Each tag consists of a key and an optional
 	// value, both of which you define.
 	Tags map[string]*string
+
 	// A description of the configuration profile.
 	Description *string
+
 	// A URI to locate the configuration. You can specify a Systems Manager (SSM)
 	// document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM
 	// document, specify either the document name in the format ssm-document:// or the
@@ -95,23 +106,32 @@ type CreateConfigurationProfileInput struct {
 	// in the format ssm-parameter:// or the ARN. For an Amazon S3 object, specify the
 	// URI in the following format: s3:/// . Here is an example:
 	// s3://my-bucket/my-app/us-east-1/my-config.json
+	//
+	// This member is required.
 	LocationUri *string
 }
 
 type CreateConfigurationProfileOutput struct {
+
 	// The application ID.
 	ApplicationId *string
+
 	// The name of the configuration profile.
 	Name *string
+
 	// A list of methods for validating the configuration.
 	Validators []*types.Validator
+
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
 	RetrievalRoleArn *string
+
 	// The URI location of the configuration.
 	LocationUri *string
+
 	// The configuration profile ID.
 	Id *string
+
 	// The configuration profile description.
 	Description *string
 

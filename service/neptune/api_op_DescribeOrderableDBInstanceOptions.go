@@ -56,38 +56,50 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 }
 
 type DescribeOrderableDBInstanceOptionsInput struct {
+
 	// An optional pagination token provided by a previous
 	// DescribeOrderableDBInstanceOptions request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords .
 	Marker *string
+
 	// The VPC filter value. Specify this parameter to show only the available VPC or
 	// non-VPC offerings.
 	Vpc *bool
+
 	// The name of the engine to retrieve DB instance options for.
+	//
+	// This member is required.
 	Engine *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// The DB instance class filter value. Specify this parameter to show only the
 	// available offerings matching the specified DB instance class.
 	DBInstanceClass *string
+
 	// This parameter is not currently supported.
 	Filters []*types.Filter
+
 	// The license model filter value. Specify this parameter to show only the
 	// available offerings matching the specified license model.
 	LicenseModel *string
+
 	// The engine version filter value. Specify this parameter to show only the
 	// available offerings matching the specified engine version.
 	EngineVersion *string
 }
 
 type DescribeOrderableDBInstanceOptionsOutput struct {
+
 	// An OrderableDBInstanceOption () structure containing information about orderable
 	// options for the DB instance.
 	OrderableDBInstanceOptions []*types.OrderableDBInstanceOption
+
 	// An optional pagination token provided by a previous OrderableDBInstanceOptions
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .

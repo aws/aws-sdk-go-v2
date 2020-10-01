@@ -58,10 +58,17 @@ func (c *Client) BatchAssociateProjectAssets(ctx context.Context, params *BatchA
 }
 
 type BatchAssociateProjectAssetsInput struct {
+
 	// The IDs of the assets to be associated to the project.
+	//
+	// This member is required.
 	AssetIds []*string
+
 	// The ID of the project to which to associate the assets.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
@@ -69,6 +76,7 @@ type BatchAssociateProjectAssetsInput struct {
 }
 
 type BatchAssociateProjectAssetsOutput struct {
+
 	// A list of associated error information, if any.
 	Errors []*types.AssetErrorDetails
 

@@ -56,11 +56,15 @@ func (c *Client) GetJobTemplate(ctx context.Context, params *GetJobTemplateInput
 }
 
 type GetJobTemplateInput struct {
+
 	// The name of the job template.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetJobTemplateOutput struct {
+
 	// A job template is a pre-made set of encoding instructions that you can use to
 	// quickly create a job.
 	JobTemplate *types.JobTemplate

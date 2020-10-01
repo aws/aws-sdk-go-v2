@@ -60,19 +60,24 @@ func (c *Client) UpdateLayer(ctx context.Context, params *UpdateLayerInput, optF
 }
 
 type UpdateLayerInput struct {
+
 	//
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
+
 	// The ARN of an IAM profile to be used for all of the layer's EC2 instances. For
 	// more information about IAM ARNs, see Using Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	CustomInstanceProfileArn *string
+
 	// The layer name, which is used by the console.
 	Name *string
+
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see How to Edit a
 	// Layer
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
 	AutoAssignPublicIps *bool
+
 	// For custom layers only, use this parameter to specify the layer's short name,
 	// which is used internally by AWS OpsWorks Stacks and by Chef. The short name is
 	// also used as the name for the directory where your app files are installed. It
@@ -81,15 +86,20 @@ type UpdateLayerInput struct {
 	// OpsWorks Stacks. For more information, see the Layer Reference
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html)
 	Shortname *string
+
 	// Whether to disable auto healing for the layer.
 	EnableAutoHealing *bool
+
 	// An array of Package objects that describe the layer's packages.
 	Packages []*string
+
 	// Specifies CloudWatch Logs configuration options for the layer. For more
 	// information, see CloudWatchLogsLogStream ().
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
+
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool
+
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
@@ -98,24 +108,33 @@ type UpdateLayerInput struct {
 	// default value of true, to ensure that your instances have the latest security
 	// updates.
 	InstallUpdatesOnBoot *bool
+
 	// One or more user-defined key/value pairs to be added to the stack attributes.
 	Attributes map[string]*string
+
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []*types.VolumeConfiguration
+
 	// Whether to automatically assign an Elastic IP address
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// to the layer's instances. For more information, see How to Edit a Layer
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
 	AutoAssignElasticIps *bool
+
 	// The layer ID.
+	//
+	// This member is required.
 	LayerId *string
+
 	// An array containing the layer's custom security group IDs.
 	CustomSecurityGroupIds []*string
+
 	// A JSON-formatted string containing custom stack configuration and deployment
 	// attributes to be installed on the layer's instances. For more information, see
 	// Using Custom JSON
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
 	CustomJson *string
+
 	// A LayerCustomRecipes object that specifies the layer's custom recipes.
 	CustomRecipes *types.Recipes
 }

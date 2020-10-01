@@ -64,12 +64,17 @@ func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteRepli
 
 // Represents the input of a DeleteReplicationGroup operation.
 type DeleteReplicationGroupInput struct {
+
 	// If set to true, all of the read replicas are deleted, but the primary node is
 	// retained.
 	RetainPrimaryCluster *bool
+
 	// The identifier for the cluster to be deleted. This parameter is not case
 	// sensitive.
+	//
+	// This member is required.
 	ReplicationGroupId *string
+
 	// The name of a final node group (shard) snapshot. ElastiCache creates the
 	// snapshot from the primary node in the cluster, rather than one of the replicas;
 	// this is to ensure that it captures the freshest data. After the final snapshot
@@ -78,6 +83,7 @@ type DeleteReplicationGroupInput struct {
 }
 
 type DeleteReplicationGroupOutput struct {
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *types.ReplicationGroup
 

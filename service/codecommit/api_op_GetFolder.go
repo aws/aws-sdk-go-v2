@@ -56,12 +56,19 @@ func (c *Client) GetFolder(ctx context.Context, params *GetFolderInput, optFns .
 }
 
 type GetFolderInput struct {
+
 	// The fully qualified path to the folder whose contents are returned, including
 	// the folder name. For example, /examples is a fully-qualified path to a folder
 	// named examples that was created off of the root directory (/) of a repository.
+	//
+	// This member is required.
 	FolderPath *string
+
 	// The name of the repository.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// A fully qualified reference used to identify a commit that contains the version
 	// of the folder's content to return. A fully qualified reference can be a commit
 	// ID, branch name, tag, or reference such as HEAD. If no specifier is provided,
@@ -70,21 +77,32 @@ type GetFolderInput struct {
 }
 
 type GetFolderOutput struct {
+
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// folder.
 	TreeId *string
+
 	// The fully qualified path of the folder whose contents are returned.
+	//
+	// This member is required.
 	FolderPath *string
+
 	// The list of files in the specified folder, if any.
 	Files []*types.File
+
 	// The full commit ID used as a reference for the returned version of the folder
 	// content.
+	//
+	// This member is required.
 	CommitId *string
+
 	// The list of submodules in the specified folder, if any.
 	SubModules []*types.SubModule
+
 	// The list of symbolic links to other files and folders in the specified folder,
 	// if any.
 	SymbolicLinks []*types.SymbolicLink
+
 	// The list of folders that exist under the specified folder, if any.
 	SubFolders []*types.Folder
 

@@ -56,11 +56,16 @@ func (c *Client) ModifySubnetAttribute(ctx context.Context, params *ModifySubnet
 }
 
 type ModifySubnetAttributeInput struct {
+
 	// The ID of the subnet.
+	//
+	// This member is required.
 	SubnetId *string
+
 	// The customer-owned IPv4 address pool associated with the subnet. You must set
 	// this value when you specify true for MapCustomerOwnedIpOnLaunch.
 	CustomerOwnedIpv4Pool *string
+
 	// Specify true to indicate that network interfaces created in the specified subnet
 	// should be assigned an IPv6 address. This includes a network interface that's
 	// created when launching an instance into the subnet (the instance therefore
@@ -68,11 +73,13 @@ type ModifySubnetAttributeInput struct {
 	// subnet, your network interface or instance only receives an IPv6 address if it's
 	// created using version 2016-11-15 or later of the Amazon EC2 API.
 	AssignIpv6AddressOnCreation *types.AttributeBooleanValue
+
 	// Specify true to indicate that network interfaces attached to instances created
 	// in the specified subnet should be assigned a customer-owned IPv4 address. When
 	// this value is true, you must specify the customer-owned IP pool using
 	// CustomerOwnedIpv4Pool.
 	MapCustomerOwnedIpOnLaunch *types.AttributeBooleanValue
+
 	// Specify true to indicate that network interfaces attached to instances created
 	// in the specified subnet should be assigned a public IPv4 address.
 	MapPublicIpOnLaunch *types.AttributeBooleanValue

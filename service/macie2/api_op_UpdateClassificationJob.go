@@ -56,10 +56,16 @@ func (c *Client) UpdateClassificationJob(ctx context.Context, params *UpdateClas
 }
 
 type UpdateClassificationJobInput struct {
+
 	// The unique identifier for the classification job.
+	//
+	// This member is required.
 	JobId *string
+
 	// The status to change the job's status to. The only supported value is CANCELLED,
 	// which cancels the job completely.
+	//
+	// This member is required.
 	JobStatus types.JobStatus
 }
 

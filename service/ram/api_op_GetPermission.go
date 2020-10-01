@@ -56,13 +56,18 @@ func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, 
 }
 
 type GetPermissionInput struct {
+
 	// The ARN of the permission.
+	//
+	// This member is required.
 	PermissionArn *string
+
 	// The identifier for the version of the permission.
 	PermissionVersion *int32
 }
 
 type GetPermissionOutput struct {
+
 	// Information about the permission.
 	Permission *types.ResourceSharePermissionDetail
 

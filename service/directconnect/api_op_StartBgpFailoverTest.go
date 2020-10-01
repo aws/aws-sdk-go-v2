@@ -64,16 +64,22 @@ func (c *Client) StartBgpFailoverTest(ctx context.Context, params *StartBgpFailo
 }
 
 type StartBgpFailoverTestInput struct {
+
 	// The time in minutes that the virtual interface failover test will last. Maximum
 	// value: 180 minutes (3 hours). Default: 180 minutes (3 hours).
 	TestDurationInMinutes *int32
+
 	// The ID of the virtual interface you want to test.
+	//
+	// This member is required.
 	VirtualInterfaceId *string
+
 	// The BGP peers to place in the DOWN state.
 	BgpPeers []*string
 }
 
 type StartBgpFailoverTestOutput struct {
+
 	// Information about the virtual interface failover test.
 	VirtualInterfaceTest *types.VirtualInterfaceTestHistory
 

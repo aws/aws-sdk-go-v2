@@ -55,19 +55,23 @@ func (c *Client) ListHosts(ctx context.Context, params *ListHostsInput, optFns .
 }
 
 type ListHostsInput struct {
+
 	// The token that was returned from the previous ListHosts call, which can be used
 	// to return the next set of hosts in the list.
 	NextToken *string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 }
 
 type ListHostsOutput struct {
+
 	// A token that can be used in the next ListHosts call. To view all items in the
 	// list, continue to call this operation with each subsequent token until no more
 	// nextToken values are returned.
 	NextToken *string
+
 	// A list of hosts and the details for each host, such as status, endpoint, and
 	// provider type.
 	Hosts []*types.Host

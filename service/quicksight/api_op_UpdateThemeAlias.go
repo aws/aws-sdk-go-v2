@@ -56,19 +56,33 @@ func (c *Client) UpdateThemeAlias(ctx context.Context, params *UpdateThemeAliasI
 }
 
 type UpdateThemeAliasInput struct {
+
 	// The version number of the theme that the alias should reference.
+	//
+	// This member is required.
 	ThemeVersionNumber *int64
+
 	// The name of the theme alias that you want to update.
+	//
+	// This member is required.
 	AliasName *string
+
 	// The ID of the AWS account that contains the theme alias that you're updating.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the theme.
+	//
+	// This member is required.
 	ThemeId *string
 }
 
 type UpdateThemeAliasOutput struct {
+
 	// Information about the theme alias.
 	ThemeAlias *types.ThemeAlias
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

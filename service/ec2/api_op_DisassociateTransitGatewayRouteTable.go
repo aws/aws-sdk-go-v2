@@ -56,18 +56,26 @@ func (c *Client) DisassociateTransitGatewayRouteTable(ctx context.Context, param
 }
 
 type DisassociateTransitGatewayRouteTableInput struct {
+
 	// The ID of the attachment.
+	//
+	// This member is required.
 	TransitGatewayAttachmentId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the transit gateway route table.
+	//
+	// This member is required.
 	TransitGatewayRouteTableId *string
 }
 
 type DisassociateTransitGatewayRouteTableOutput struct {
+
 	// Information about the association.
 	Association *types.TransitGatewayAssociation
 

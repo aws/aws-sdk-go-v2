@@ -57,19 +57,29 @@ func (c *Client) ListRoomMemberships(ctx context.Context, params *ListRoomMember
 }
 
 type ListRoomMembershipsInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The room ID.
+	//
+	// This member is required.
 	RoomId *string
 }
 
 type ListRoomMembershipsOutput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The room membership details.
 	RoomMemberships []*types.RoomMembership
 

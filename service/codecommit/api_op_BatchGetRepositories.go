@@ -62,15 +62,20 @@ func (c *Client) BatchGetRepositories(ctx context.Context, params *BatchGetRepos
 
 // Represents the input of a batch get repositories operation.
 type BatchGetRepositoriesInput struct {
+
 	// The names of the repositories to get information about. The length constraint
 	// limit is for each string in the array. The array itself can be empty.
+	//
+	// This member is required.
 	RepositoryNames []*string
 }
 
 // Represents the output of a batch get repositories operation.
 type BatchGetRepositoriesOutput struct {
+
 	// Returns a list of repository names for which information could not be found.
 	RepositoriesNotFound []*string
+
 	// A list of repositories returned by the batch get repositories operation.
 	Repositories []*types.RepositoryMetadata
 

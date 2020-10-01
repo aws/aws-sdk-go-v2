@@ -62,13 +62,23 @@ func (c *Client) ListPackageVersionDependencies(ctx context.Context, params *Lis
 }
 
 type ListPackageVersionDependenciesInput struct {
+
 	// The domain that contains the repository that contains the requested package
 	// version dependencies.
+	//
+	// This member is required.
 	Domain *string
+
 	// The name of the package versions' package.
+	//
+	// This member is required.
 	Package *string
+
 	// A string that contains the package version (for example, 3.5.2).
+	//
+	// This member is required.
 	PackageVersion *string
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -81,9 +91,11 @@ type ListPackageVersionDependenciesInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// The format of the package with the requested dependencies. The valid package
 	// types are:
 	//
@@ -94,15 +106,22 @@ type ListPackageVersionDependenciesInput struct {
 	//
 	//     * maven: A Maven package that contains
 	// compiled code in a distributable format, such as a JAR file.
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// The name of the repository that contains the requested package version.
+	//
+	// This member is required.
 	Repository *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
 }
 
 type ListPackageVersionDependenciesOutput struct {
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -115,6 +134,7 @@ type ListPackageVersionDependenciesOutput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// A format that specifies the type of the package that contains the returned
 	// dependencies. The valid values are:
 	//
@@ -124,18 +144,23 @@ type ListPackageVersionDependenciesOutput struct {
 	//
 	//     * maven
 	Format types.PackageFormat
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// The returned list of PackageDependency
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
 	// objects.
 	Dependencies []*types.PackageDependency
+
 	// The name of the package that contains the returned package versions
 	// dependencies.
 	Package *string
+
 	// The version of the package that is specified in the request.
 	Version *string
+
 	// The current revision associated with the package version.
 	VersionRevision *string
 

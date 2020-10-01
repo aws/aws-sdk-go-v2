@@ -57,12 +57,20 @@ func (c *Client) UpdateScalingPlan(ctx context.Context, params *UpdateScalingPla
 }
 
 type UpdateScalingPlanInput struct {
+
 	// The scaling instructions.
 	ScalingInstructions []*types.ScalingInstruction
+
 	// The version number of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanVersion *int64
+
 	// The name of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanName *string
+
 	// A CloudFormation stack or set of tags.
 	ApplicationSource *types.ApplicationSource
 }

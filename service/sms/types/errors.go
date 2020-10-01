@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An internal error occurred.
@@ -24,12 +23,6 @@ func (e *InternalError) ErrorMessage() string {
 }
 func (e *InternalError) ErrorCode() string             { return "InternalError" }
 func (e *InternalError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified parameter is not valid.
 type InvalidParameterException struct {
@@ -47,12 +40,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A required parameter is missing.
 type MissingRequiredParameterException struct {
@@ -72,12 +59,6 @@ func (e *MissingRequiredParameterException) ErrorCode() string {
 	return "MissingRequiredParameterException"
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingRequiredParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingRequiredParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There are no connectors available.
 type NoConnectorsAvailableException struct {
@@ -95,12 +76,6 @@ func (e *NoConnectorsAvailableException) ErrorMessage() string {
 }
 func (e *NoConnectorsAvailableException) ErrorCode() string             { return "NoConnectorsAvailableException" }
 func (e *NoConnectorsAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoConnectorsAvailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoConnectorsAvailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
@@ -118,12 +93,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified replication job already exists.
 type ReplicationJobAlreadyExistsException struct {
@@ -145,12 +114,6 @@ func (e *ReplicationJobAlreadyExistsException) ErrorCode() string {
 func (e *ReplicationJobAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReplicationJobAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationJobAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified replication job does not exist.
 type ReplicationJobNotFoundException struct {
@@ -170,12 +133,6 @@ func (e *ReplicationJobNotFoundException) ErrorCode() string {
 	return "ReplicationJobNotFoundException"
 }
 func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReplicationJobNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationJobNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the number of on-demand replication runs you can request in a
 // 24-hour period.
@@ -198,12 +155,6 @@ func (e *ReplicationRunLimitExceededException) ErrorCode() string {
 func (e *ReplicationRunLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReplicationRunLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationRunLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified server cannot be replicated.
 type ServerCannotBeReplicatedException struct {
@@ -223,12 +174,6 @@ func (e *ServerCannotBeReplicatedException) ErrorCode() string {
 	return "ServerCannotBeReplicatedException"
 }
 func (e *ServerCannotBeReplicatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServerCannotBeReplicatedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerCannotBeReplicatedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable.
 type TemporarilyUnavailableException struct {
@@ -266,9 +211,3 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 }
 func (e *UnauthorizedOperationException) ErrorCode() string             { return "UnauthorizedOperationException" }
 func (e *UnauthorizedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedOperationException) HasMessage() bool {
-	return e.Message != nil
-}

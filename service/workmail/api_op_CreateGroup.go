@@ -56,13 +56,20 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 }
 
 type CreateGroupInput struct {
+
 	// The name of the group.
+	//
+	// This member is required.
 	Name *string
+
 	// The organization under which the group is to be created.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type CreateGroupOutput struct {
+
 	// The identifier of the group.
 	GroupId *string
 

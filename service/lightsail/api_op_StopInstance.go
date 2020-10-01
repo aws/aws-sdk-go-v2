@@ -65,8 +65,12 @@ func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, op
 }
 
 type StopInstanceInput struct {
+
 	// The name of the instance (a virtual private server) to stop.
+	//
+	// This member is required.
 	InstanceName *string
+
 	// When set to True, forces a Lightsail instance that is stuck in a stopping state
 	// to stop. Only use the force parameter if your instance is stuck in the stopping
 	// state. In any other state, your instance should stop normally without adding
@@ -75,6 +79,7 @@ type StopInstanceInput struct {
 }
 
 type StopInstanceOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

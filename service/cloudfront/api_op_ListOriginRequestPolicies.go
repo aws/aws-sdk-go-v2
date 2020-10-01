@@ -62,8 +62,10 @@ func (c *Client) ListOriginRequestPolicies(ctx context.Context, params *ListOrig
 }
 
 type ListOriginRequestPoliciesInput struct {
+
 	// The maximum number of origin request policies that you want in the response.
 	MaxItems *string
+
 	// A filter to return only the specified kinds of origin request policies. Valid
 	// values are:
 	//
@@ -72,6 +74,7 @@ type ListOriginRequestPoliciesInput struct {
 	//
 	// * custom – Returns only the custom policies created in your AWS account.
 	Type types.OriginRequestPolicyType
+
 	// Use this field when paginating results to indicate where to begin in your list
 	// of origin request policies. The response includes origin request policies in the
 	// list that occur after the marker. To get the next page of the list, set this
@@ -80,6 +83,7 @@ type ListOriginRequestPoliciesInput struct {
 }
 
 type ListOriginRequestPoliciesOutput struct {
+
 	// A list of origin request policies.
 	OriginRequestPolicyList *types.OriginRequestPolicyList
 

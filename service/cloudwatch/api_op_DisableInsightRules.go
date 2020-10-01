@@ -57,13 +57,17 @@ func (c *Client) DisableInsightRules(ctx context.Context, params *DisableInsight
 }
 
 type DisableInsightRulesInput struct {
+
 	// An array of the rule names to disable. If you need to find out the names of your
 	// rules, use DescribeInsightRules
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html).
+	//
+	// This member is required.
 	RuleNames []*string
 }
 
 type DisableInsightRulesOutput struct {
+
 	// An array listing the rules that could not be disabled. You cannot disable
 	// built-in rules.
 	Failures []*types.PartialFailure

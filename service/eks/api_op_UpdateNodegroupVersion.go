@@ -70,6 +70,7 @@ func (c *Client) UpdateNodegroupVersion(ctx context.Context, params *UpdateNodeg
 }
 
 type UpdateNodegroupVersionInput struct {
+
 	// The AMI version of the Amazon EKS-optimized AMI to use for the update. By
 	// default, the latest available AMI version for the node group's Kubernetes
 	// version is used. For more information, see Amazon EKS-Optimized Linux AMI
@@ -77,27 +78,37 @@ type UpdateNodegroupVersionInput struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
 	// in the Amazon EKS User Guide.
 	ReleaseVersion *string
+
 	// Force the update if the existing node group's pods are unable to be drained due
 	// to a pod disruption budget issue. If an update fails because pods could not be
 	// drained, you can force the update after it fails to terminate the old node
 	// whether or not any pods are running on the node.
 	Force *bool
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
 	// The Kubernetes version to update to. If no version is specified, then the
 	// Kubernetes version of the node group does not change. You can specify the
 	// Kubernetes version of the cluster to update the node group to the latest AMI
 	// version of the cluster's Kubernetes version.
 	Version *string
+
 	// The name of the Amazon EKS cluster that is associated with the managed node
 	// group to update.
+	//
+	// This member is required.
 	ClusterName *string
+
 	// The name of the managed node group to update.
+	//
+	// This member is required.
 	NodegroupName *string
 }
 
 type UpdateNodegroupVersionOutput struct {
+
 	// An object representing an asynchronous update.
 	Update *types.Update
 

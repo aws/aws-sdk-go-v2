@@ -64,27 +64,35 @@ func (c *Client) DescribeSpotPriceHistory(ctx context.Context, params *DescribeS
 
 // Contains the parameters for DescribeSpotPriceHistory.
 type DescribeSpotPriceHistoryInput struct {
+
 	// The date and time, up to the current date, from which to stop retrieving the
 	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	EndTime *time.Time
+
 	// Filters the results by the specified instance types.
 	InstanceTypes []types.InstanceType
+
 	// The date and time, up to the past 90 days, from which to start retrieving the
 	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	StartTime *time.Time
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// Filters the results by the specified Availability Zone.
 	AvailabilityZone *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * availability-zone - The Availability Zone for which
@@ -105,15 +113,18 @@ type DescribeSpotPriceHistoryInput struct {
 	// price history, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use
 	// wildcards (* and ?). Greater than or less than comparison is not supported.
 	Filters []*types.Filter
+
 	// Filters the results by the specified basic product descriptions.
 	ProductDescriptions []*string
 }
 
 // Contains the output of DescribeSpotPriceHistory.
 type DescribeSpotPriceHistoryOutput struct {
+
 	// The token required to retrieve the next set of results. This value is null or an
 	// empty string when there are no more results to return.
 	NextToken *string
+
 	// The historical Spot prices.
 	SpotPriceHistory []*types.SpotPrice
 

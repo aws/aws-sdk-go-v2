@@ -67,6 +67,7 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 
 // Represents the input of a DeleteItem operation.
 type DeleteItemInput struct {
+
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
 	// suppose that you wanted to check whether the value of the ProductStatus
@@ -79,6 +80,7 @@ type DeleteItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]*types.AttributeValue
+
 	// A condition that must be satisfied in order for a conditional DeleteItem to
 	// succeed. An expression can contain any of the following:
 	//
@@ -97,22 +99,28 @@ type DeleteItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionExpression *string
+
 	// A map of attribute names to AttributeValue objects, representing the primary key
 	// of the item to delete. For the primary key, you must provide all of the
 	// attributes. For example, with a simple primary key, you only need to provide a
 	// value for the partition key. For a composite primary key, you must provide
 	// values for both the partition key and the sort key.
+	//
+	// This member is required.
 	Key map[string]*types.AttributeValue
+
 	// This is a legacy parameter. Use ConditionExpression instead. For more
 	// information, see Expected
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
 	// in the Amazon DynamoDB Developer Guide.
 	Expected map[string]*types.ExpectedAttributeValue
+
 	// This is a legacy parameter. Use ConditionExpression instead. For more
 	// information, see ConditionalOperator
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionalOperator types.ConditionalOperator
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -129,6 +137,7 @@ type DeleteItemInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// Use ReturnValues if you want to get the item attributes as they appeared before
 	// they were deleted. For DeleteItem, the valid values are:
 	//
@@ -143,6 +152,7 @@ type DeleteItemInput struct {
 	// several DynamoDB operations; however, DeleteItem does not recognize any values
 	// other than NONE or ALL_OLD.
 	ReturnValues types.ReturnValue
+
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -183,17 +193,22 @@ type DeleteItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
+
 	// Determines whether item collection metrics are returned. If set to SIZE, the
 	// response includes statistics about item collections, if any, that were modified
 	// during the operation are returned in the response. If set to NONE (the default),
 	// no statistics are returned.
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
+
 	// The name of the table from which to delete the item.
+	//
+	// This member is required.
 	TableName *string
 }
 
 // Represents the output of a DeleteItem operation.
 type DeleteItemOutput struct {
+
 	// Information about item collections, if any, that were affected by the DeleteItem
 	// operation. ItemCollectionMetrics is only returned if the
 	// ReturnItemCollectionMetrics parameter was specified. If the table does not have
@@ -213,10 +228,12 @@ type DeleteItemOutput struct {
 	// subject to change over time; therefore, do not rely on the precision or accuracy
 	// of the estimate.
 	ItemCollectionMetrics *types.ItemCollectionMetrics
+
 	// A map of attribute names to AttributeValue objects, representing the item as it
 	// appeared before the DeleteItem operation. This map appears in the response only
 	// if ReturnValues was specified as ALL_OLD in the request.
 	Attributes map[string]*types.AttributeValue
+
 	// The capacity units consumed by the DeleteItem operation. The data returned
 	// includes the total provisioned throughput consumed, along with statistics for
 	// the table and any indexes involved in the operation. ConsumedCapacity is only

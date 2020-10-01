@@ -57,11 +57,15 @@ func (c *Client) CreateContainer(ctx context.Context, params *CreateContainerInp
 }
 
 type CreateContainerInput struct {
+
 	// The name for the container. The name must be from 1 to 255 characters. Container
 	// names must be unique to your AWS account within a specific region. As an
 	// example, you could create a container named movies in every region, as long as
 	// you don’t have an existing container with that name.
+	//
+	// This member is required.
 	ContainerName *string
+
 	// An array of key:value pairs that you define. These values can be anything that
 	// you want. Typically, the tag key represents a category (such as "environment")
 	// and the tag value represents a specific value within that category (such as
@@ -73,6 +77,7 @@ type CreateContainerInput struct {
 }
 
 type CreateContainerOutput struct {
+
 	// ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The
 	// ARN has the following format: arn:aws:::container/. For example:
 	// arn:aws:mediastore:us-west-2:111122223333:container/movies ContainerName: The
@@ -83,6 +88,8 @@ type CreateContainerOutput struct {
 	// changes to ACTIVE. The return value does not include the container's endpoint.
 	// To make downstream requests, you must obtain this value by using
 	// DescribeContainer () or ListContainers ().
+	//
+	// This member is required.
 	Container *types.Container
 
 	// Metadata pertaining to the operation's result.

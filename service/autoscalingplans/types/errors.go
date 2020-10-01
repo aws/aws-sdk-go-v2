@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Concurrent updates caused an exception, for example, if you request an update to
@@ -25,12 +24,6 @@ func (e *ConcurrentUpdateException) ErrorMessage() string {
 }
 func (e *ConcurrentUpdateException) ErrorCode() string             { return "ConcurrentUpdateException" }
 func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ConcurrentUpdateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentUpdateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service encountered an internal error.
 type InternalServiceException struct {
@@ -48,12 +41,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The token provided is not valid.
 type InvalidNextTokenException struct {
@@ -71,12 +58,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your account exceeded a limit. This exception is thrown when a per-account
 // resource limit is exceeded.
@@ -95,12 +76,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified object could not be found.
 type ObjectNotFoundException struct {
@@ -118,12 +93,6 @@ func (e *ObjectNotFoundException) ErrorMessage() string {
 }
 func (e *ObjectNotFoundException) ErrorCode() string             { return "ObjectNotFoundException" }
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ObjectNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ObjectNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception was thrown for a validation issue. Review the parameters provided.
 type ValidationException struct {
@@ -141,9 +110,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

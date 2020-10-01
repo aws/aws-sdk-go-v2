@@ -67,20 +67,30 @@ func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput
 }
 
 type StartChangeSetInput struct {
+
 	// Array of change object.
+	//
+	// This member is required.
 	ChangeSet []*types.Change
+
 	// Optional case sensitive string of up to 100 ASCII characters. The change set
 	// name can be used to filter the list of change sets.
 	ChangeSetName *string
+
 	// A unique token to identify the request to ensure idempotency.
 	ClientRequestToken *string
+
 	// The catalog related to the request. Fixed value: AWSMarketplace
+	//
+	// This member is required.
 	Catalog *string
 }
 
 type StartChangeSetOutput struct {
+
 	// Unique identifier generated for the request.
 	ChangeSetId *string
+
 	// The ARN associated to the unique identifier generated for the request.
 	ChangeSetArn *string
 

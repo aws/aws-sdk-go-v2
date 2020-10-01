@@ -56,32 +56,57 @@ func (c *Client) DescribeDashboard(ctx context.Context, params *DescribeDashboar
 }
 
 type DescribeDashboardInput struct {
+
 	// The ID of the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
 }
 
 type DescribeDashboardOutput struct {
+
 	// The ID of the project that the dashboard is in.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// The date the dashboard was created, in Unix epoch time.
+	//
+	// This member is required.
 	DashboardCreationDate *time.Time
+
 	// The ID of the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// The dashboard's description.
 	DashboardDescription *string
+
 	// The date the dashboard was last updated, in Unix epoch time.
+	//
+	// This member is required.
 	DashboardLastUpdateDate *time.Time
+
 	// The dashboard's definition JSON literal. For detailed information, see Creating
 	// Dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
 	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
 	DashboardDefinition *string
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the dashboard, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	//
+	// This member is required.
 	DashboardArn *string
+
 	// The name of the dashboard.
+	//
+	// This member is required.
 	DashboardName *string
 
 	// Metadata pertaining to the operation's result.

@@ -57,14 +57,19 @@ func (c *Client) CreateParameterGroup(ctx context.Context, params *CreateParamet
 }
 
 type CreateParameterGroupInput struct {
+
 	// The name of the parameter group to apply to all of the clusters in this
 	// replication group.
+	//
+	// This member is required.
 	ParameterGroupName *string
+
 	// A description of the parameter group.
 	Description *string
 }
 
 type CreateParameterGroupOutput struct {
+
 	// Represents the output of a CreateParameterGroup action.
 	ParameterGroup *types.ParameterGroup
 

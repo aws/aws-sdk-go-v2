@@ -57,16 +57,25 @@ func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns .
 }
 
 type PutEventsInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies a batch of events to process.
+	//
+	// This member is required.
 	EventsRequest *types.EventsRequest
 }
 
 type PutEventsOutput struct {
+
 	// Provides information about endpoints and the events that they're associated
 	// with.
+	//
+	// This member is required.
 	EventsResponse *types.EventsResponse
 
 	// Metadata pertaining to the operation's result.

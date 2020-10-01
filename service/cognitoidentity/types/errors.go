@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Thrown if there are parallel requests to modify a resource.
@@ -26,12 +25,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided developer user identifier is already registered with Cognito under
 // a different identity ID.
@@ -54,12 +47,6 @@ func (e *DeveloperUserAlreadyRegisteredException) ErrorCode() string {
 func (e *DeveloperUserAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeveloperUserAlreadyRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeveloperUserAlreadyRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception thrown when a dependent service such as Facebook or Twitter is not
 // responding
@@ -78,12 +65,6 @@ func (e *ExternalServiceException) ErrorMessage() string {
 }
 func (e *ExternalServiceException) ErrorCode() string             { return "ExternalServiceException" }
 func (e *ExternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown when the service encounters an error during processing the request.
 type InternalErrorException struct {
@@ -101,12 +82,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown if the identity pool has no role associated for the given auth type
 // (auth/unauth) or if the AssumeRole fails.
@@ -129,12 +104,6 @@ func (e *InvalidIdentityPoolConfigurationException) ErrorCode() string {
 func (e *InvalidIdentityPoolConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidIdentityPoolConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidIdentityPoolConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown for missing or bad input parameter(s).
 type InvalidParameterException struct {
@@ -152,12 +121,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown when the total number of user pools has exceeded a preset limit.
 type LimitExceededException struct {
@@ -175,12 +138,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown when a user is not authorized to access the requested resource.
 type NotAuthorizedException struct {
@@ -198,12 +155,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown when a user tries to use a login which is already linked to another
 // account.
@@ -222,12 +173,6 @@ func (e *ResourceConflictException) ErrorMessage() string {
 }
 func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown when the requested resource (for example, a dataset or record) does not
 // exist.
@@ -246,12 +191,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Thrown when a request is throttled.
 type TooManyRequestsException struct {
@@ -269,9 +208,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

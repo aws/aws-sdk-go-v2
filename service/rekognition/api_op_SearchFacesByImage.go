@@ -85,19 +85,25 @@ func (c *Client) SearchFacesByImage(ctx context.Context, params *SearchFacesByIm
 }
 
 type SearchFacesByImageInput struct {
+
 	// Maximum number of faces to return. The operation returns the maximum number of
 	// faces with the highest confidence in the match.
 	MaxFaces *int32
+
 	// (Optional) Specifies the minimum confidence in the face match to return. For
 	// example, don't return any matches where confidence in matches is less than 70%.
 	// The default value is 80%.
 	FaceMatchThreshold *float32
+
 	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
 	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
 	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
 	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
 	Image *types.Image
+
 	// A filter that specifies a quality bar for how much filtering is done to identify
 	// faces. Filtered faces aren't searched for in the collection. If you specify
 	// AUTO, Amazon Rekognition chooses the quality bar. If you specify LOW, MEDIUM, or
@@ -110,19 +116,26 @@ type SearchFacesByImageInput struct {
 	// collection you are using must be associated with version 3 of the face model or
 	// higher.</p>
 	QualityFilter types.QualityFilter
+
 	// ID of the collection to search.
+	//
+	// This member is required.
 	CollectionId *string
 }
 
 type SearchFacesByImageOutput struct {
+
 	// The level of confidence that the searchedFaceBoundingBox, contains a face.
 	SearchedFaceConfidence *float32
+
 	// The bounding box around the face in the input image that Amazon Rekognition used
 	// for the search.
 	SearchedFaceBoundingBox *types.BoundingBox
+
 	// An array of faces that match the input face, along with the confidence in the
 	// match.
 	FaceMatches []*types.FaceMatch
+
 	// Version number of the face detection model associated with the input collection
 	// (CollectionId).
 	FaceModelVersion *string

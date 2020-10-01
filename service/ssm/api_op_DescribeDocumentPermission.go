@@ -58,16 +58,24 @@ func (c *Client) DescribeDocumentPermission(ctx context.Context, params *Describ
 }
 
 type DescribeDocumentPermissionInput struct {
+
 	// The name of the document for which you are the owner.
+	//
+	// This member is required.
 	Name *string
+
 	// The permission type for the document. The permission type can be Share.
+	//
+	// This member is required.
 	PermissionType types.DocumentPermissionType
 }
 
 type DescribeDocumentPermissionOutput struct {
+
 	// The account IDs that have permission to use this document. The ID can be either
 	// an AWS account or All.
 	AccountIds []*string
+
 	// A list of AWS accounts where the current document is shared and the version
 	// shared with each account.
 	AccountSharingInfoList []*types.AccountSharingInfo

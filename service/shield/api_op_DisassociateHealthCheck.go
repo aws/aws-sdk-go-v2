@@ -63,11 +63,17 @@ func (c *Client) DisassociateHealthCheck(ctx context.Context, params *Disassocia
 }
 
 type DisassociateHealthCheckInput struct {
+
 	// The Amazon Resource Name (ARN) of the health check that is associated with the
 	// protection.
+	//
+	// This member is required.
 	HealthCheckArn *string
+
 	// The unique identifier (ID) for the Protection () object to remove the health
 	// check association from.
+	//
+	// This member is required.
 	ProtectionId *string
 }
 

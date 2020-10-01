@@ -56,11 +56,15 @@ func (c *Client) DescribeObservation(ctx context.Context, params *DescribeObserv
 }
 
 type DescribeObservationInput struct {
+
 	// The ID of the observation.
+	//
+	// This member is required.
 	ObservationId *string
 }
 
 type DescribeObservationOutput struct {
+
 	// Information about the observation.
 	Observation *types.Observation
 

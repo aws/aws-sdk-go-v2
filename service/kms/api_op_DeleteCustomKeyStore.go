@@ -81,8 +81,11 @@ func (c *Client) DeleteCustomKeyStore(ctx context.Context, params *DeleteCustomK
 }
 
 type DeleteCustomKeyStoreInput struct {
+
 	// Enter the ID of the custom key store you want to delete. To find the ID of a
 	// custom key store, use the DescribeCustomKeyStores () operation.
+	//
+	// This member is required.
 	CustomKeyStoreId *string
 }
 

@@ -77,11 +77,14 @@ func (c *Client) DescribeComplianceByConfigRule(ctx context.Context, params *Des
 
 //
 type DescribeComplianceByConfigRuleInput struct {
+
 	// Filters the results by compliance. The allowed values are COMPLIANT and
 	// NON_COMPLIANT.
 	ComplianceTypes []types.ComplianceType
+
 	// Specify one or more AWS Config rule names to filter the results by rule.
 	ConfigRuleNames []*string
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
@@ -89,8 +92,10 @@ type DescribeComplianceByConfigRuleInput struct {
 
 //
 type DescribeComplianceByConfigRuleOutput struct {
+
 	// Indicates whether each of the specified AWS Config rules is compliant.
 	ComplianceByConfigRules []*types.ComplianceByConfigRule
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string

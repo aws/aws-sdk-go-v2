@@ -61,8 +61,10 @@ func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *Registe
 }
 
 type RegisterWorkspaceDirectoryInput struct {
+
 	// The tags associated with the directory.
 	Tags []*types.Tag
+
 	// Indicates whether your WorkSpace directory is dedicated or shared. To use Bring
 	// Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS
 	// account must be enabled for BYOL. If your account has not been enabled for BYOL,
@@ -70,23 +72,31 @@ type RegisterWorkspaceDirectoryInput struct {
 	// about BYOL images, see Bring Your Own Windows Desktop Images
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	Tenancy types.Tenancy
+
 	// The identifier of the directory. You cannot register a directory if it does not
 	// have a status of Active. If the directory does not have a status of Active, you
 	// will receive an InvalidResourceStateException error. If you have already
 	// registered the maximum number of directories that you can register with Amazon
 	// WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister
 	// directories that you are not using for WorkSpaces, and try again.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled
 	// this parameter and WorkDocs is not available in the Region, you will receive an
 	// OperationNotSupportedException error. Set EnableWorkDocs to disabled, and try
 	// again.
+	//
+	// This member is required.
 	EnableWorkDocs *bool
+
 	// The identifiers of the subnets for your virtual private cloud (VPC). Make sure
 	// that the subnets are in supported Availability Zones. The subnets must also be
 	// in separate Availability Zones. If these conditions are not met, you will
 	// receive an OperationNotSupportedException error.
 	SubnetIds []*string
+
 	// Indicates whether self-service capabilities are enabled or disabled.
 	EnableSelfService *bool
 }

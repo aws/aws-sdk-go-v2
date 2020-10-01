@@ -74,7 +74,10 @@ func (c *Client) DeleteHIT(ctx context.Context, params *DeleteHITInput, optFns .
 }
 
 type DeleteHITInput struct {
+
 	// The ID of the HIT to be deleted.
+	//
+	// This member is required.
 	HITId *string
 }
 

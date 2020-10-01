@@ -63,13 +63,22 @@ func (c *Client) AddApplicationCloudWatchLoggingOption(ctx context.Context, para
 }
 
 type AddApplicationCloudWatchLoggingOptionInput struct {
+
 	// The Kinesis Analytics application name.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The version ID of the Kinesis Analytics application.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
+
 	// Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role
 	// ARN. Note: To write application messages to CloudWatch, the IAM role that is
 	// used must have the PutLogEvents policy action enabled.
+	//
+	// This member is required.
 	CloudWatchLoggingOption *types.CloudWatchLoggingOption
 }
 

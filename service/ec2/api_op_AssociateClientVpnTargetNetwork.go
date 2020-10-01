@@ -66,24 +66,34 @@ func (c *Client) AssociateClientVpnTargetNetwork(ctx context.Context, params *As
 }
 
 type AssociateClientVpnTargetNetworkInput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the subnet to associate with the Client VPN endpoint.
+	//
+	// This member is required.
 	SubnetId *string
+
 	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
 }
 
 type AssociateClientVpnTargetNetworkOutput struct {
+
 	// The unique ID of the target network association.
 	AssociationId *string
+
 	// The current state of the target network association.
 	Status *types.AssociationStatus
 

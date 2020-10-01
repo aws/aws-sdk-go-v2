@@ -66,6 +66,7 @@ func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns
 }
 
 type DisableKeyInput struct {
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -77,6 +78,8 @@ type DisableKeyInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 

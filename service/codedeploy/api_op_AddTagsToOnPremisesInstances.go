@@ -57,11 +57,17 @@ func (c *Client) AddTagsToOnPremisesInstances(ctx context.Context, params *AddTa
 
 // Represents the input of, and adds tags to, an on-premises instance operation.
 type AddTagsToOnPremisesInstancesInput struct {
+
 	// The names of the on-premises instances to which to add tags.
+	//
+	// This member is required.
 	InstanceNames []*string
+
 	// The tag key-value pairs to add to the on-premises instances. Keys and values are
 	// both required. Keys cannot be null or empty strings. Value-only tags are not
 	// allowed.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

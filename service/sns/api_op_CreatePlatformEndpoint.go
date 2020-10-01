@@ -69,25 +69,34 @@ func (c *Client) CreatePlatformEndpoint(ctx context.Context, params *CreatePlatf
 
 // Input for CreatePlatformEndpoint action.
 type CreatePlatformEndpointInput struct {
+
 	// For a list of attributes, see SetEndpointAttributes
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html).
 	Attributes map[string]*string
+
 	// PlatformApplicationArn returned from CreatePlatformApplication is used to create
 	// a an endpoint.
+	//
+	// This member is required.
 	PlatformApplicationArn *string
+
 	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use this
 	// data. The data must be in UTF-8 format and less than 2KB.
 	CustomUserData *string
+
 	// Unique identifier created by the notification service for an app on a device.
 	// The specific name for Token will vary, depending on which notification service
 	// is being used. For example, when using APNS as the notification service, you
 	// need the device token. Alternatively, when using GCM (Firebase Cloud Messaging)
 	// or ADM, the device token equivalent is called the registration ID.
+	//
+	// This member is required.
 	Token *string
 }
 
 // Response from CreateEndpoint action.
 type CreatePlatformEndpointOutput struct {
+
 	// EndpointArn returned from CreateEndpoint action.
 	EndpointArn *string
 

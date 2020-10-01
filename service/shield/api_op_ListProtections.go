@@ -55,9 +55,11 @@ func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInp
 }
 
 type ListProtectionsInput struct {
+
 	// The ListProtectionsRequest.NextToken value from a previous call to
 	// ListProtections. Pass null if this is the first call.
 	NextToken *string
+
 	// The maximum number of Protection () objects to be returned. If this is left
 	// blank the first 20 results will be returned. This is a maximum value; it is
 	// possible that AWS WAF will return the results in smaller batches. That is, the
@@ -68,6 +70,7 @@ type ListProtectionsInput struct {
 }
 
 type ListProtectionsOutput struct {
+
 	// If you specify a value for MaxResults and you have more Protections than the
 	// value of MaxResults, AWS Shield Advanced returns a NextToken value in the
 	// response that allows you to list another group of Protections. For the second
@@ -77,6 +80,7 @@ type ListProtectionsOutput struct {
 	// number specified by MaxResults. If there are more Protection () objects to
 	// return, AWS WAF will always also return a NextToken.
 	NextToken *string
+
 	// The array of enabled Protection () objects.
 	Protections []*types.Protection
 

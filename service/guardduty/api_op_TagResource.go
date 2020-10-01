@@ -55,9 +55,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the GuardDuty resource to apply a tag to.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The tags to be added to a resource.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

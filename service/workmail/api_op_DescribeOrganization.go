@@ -57,28 +57,39 @@ func (c *Client) DescribeOrganization(ctx context.Context, params *DescribeOrgan
 }
 
 type DescribeOrganizationInput struct {
+
 	// The identifier for the organization to be described.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type DescribeOrganizationOutput struct {
+
 	// The identifier for the directory associated with an Amazon WorkMail
 	// organization.
 	DirectoryId *string
+
 	// (Optional) The error message indicating if unexpected behavior was encountered
 	// with regards to the organization.
 	ErrorMessage *string
+
 	// The default mail domain associated with the organization.
 	DefaultMailDomain *string
+
 	// The identifier of an organization.
 	OrganizationId *string
+
 	// The date at which the organization became usable in the WorkMail context, in
 	// UNIX epoch time format.
 	CompletedDate *time.Time
+
 	// The type of directory associated with the WorkMail organization.
 	DirectoryType *string
+
 	// The alias for an organization.
 	Alias *string
+
 	// The state of an organization.
 	State *string
 

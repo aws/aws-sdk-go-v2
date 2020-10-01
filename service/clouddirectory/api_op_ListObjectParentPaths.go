@@ -65,20 +65,30 @@ func (c *Client) ListObjectParentPaths(ctx context.Context, params *ListObjectPa
 }
 
 type ListObjectParentPathsInput struct {
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int32
+
 	// The ARN of the directory to which the parent path applies.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// The reference that identifies the object whose parent paths are listed.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The pagination token.
 	NextToken *string
 }
 
 type ListObjectParentPathsOutput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// Returns the path to the ObjectIdentifiers that are associated with the
 	// directory.
 	PathToObjectIdentifiersList []*types.PathToObjectIdentifiers

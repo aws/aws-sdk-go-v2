@@ -64,11 +64,15 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 }
 
 type DeleteClusterInput struct {
+
 	// The name of the cluster to delete.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DeleteClusterOutput struct {
+
 	// The full description of the cluster to delete.
 	Cluster *types.Cluster
 

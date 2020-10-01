@@ -60,11 +60,15 @@ func (c *Client) StartMLEvaluationTaskRun(ctx context.Context, params *StartMLEv
 }
 
 type StartMLEvaluationTaskRunInput struct {
+
 	// The unique identifier of the machine learning transform.
+	//
+	// This member is required.
 	TransformId *string
 }
 
 type StartMLEvaluationTaskRunOutput struct {
+
 	// The unique identifier associated with this run.
 	TaskRunId *string
 

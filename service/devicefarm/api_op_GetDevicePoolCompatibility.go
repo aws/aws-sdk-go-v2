@@ -57,14 +57,21 @@ func (c *Client) GetDevicePoolCompatibility(ctx context.Context, params *GetDevi
 
 // Represents a request to the get device pool compatibility operation.
 type GetDevicePoolCompatibilityInput struct {
+
 	// Information about the uploaded test to be run against the device pool.
 	Test *types.ScheduleRunTest
+
 	// The device pool's ARN.
+	//
+	// This member is required.
 	DevicePoolArn *string
+
 	// An object that contains information about the settings for a run.
 	Configuration *types.ScheduleRunConfiguration
+
 	// The ARN of the app that is associated with the specified device pool.
 	AppArn *string
+
 	// The test type for the specified device pool. Allowed values include the
 	// following:
 	//
@@ -115,8 +122,10 @@ type GetDevicePoolCompatibilityInput struct {
 
 // Represents the result of describe device pool compatibility request.
 type GetDevicePoolCompatibilityOutput struct {
+
 	// Information about incompatible devices.
 	IncompatibleDevices []*types.DevicePoolCompatibilityResult
+
 	// Information about compatible devices.
 	CompatibleDevices []*types.DevicePoolCompatibilityResult
 

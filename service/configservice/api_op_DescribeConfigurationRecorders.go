@@ -59,12 +59,14 @@ func (c *Client) DescribeConfigurationRecorders(ctx context.Context, params *Des
 
 // The input for the DescribeConfigurationRecorders () action.
 type DescribeConfigurationRecordersInput struct {
+
 	// A list of configuration recorder names.
 	ConfigurationRecorderNames []*string
 }
 
 // The output for the DescribeConfigurationRecorders () action.
 type DescribeConfigurationRecordersOutput struct {
+
 	// A list that contains the descriptions of the specified configuration recorders.
 	ConfigurationRecorders []*types.ConfigurationRecorder
 

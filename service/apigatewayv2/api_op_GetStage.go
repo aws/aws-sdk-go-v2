@@ -57,48 +57,68 @@ func (c *Client) GetStage(ctx context.Context, params *GetStageInput, optFns ...
 }
 
 type GetStageInput struct {
+
 	// The stage name. Stage names can only contain alphanumeric characters, hyphens,
 	// and underscores. Maximum length is 128 characters.
+	//
+	// This member is required.
 	StageName *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetStageOutput struct {
+
 	// Specifies whether a stage is managed by API Gateway. If you created an API using
 	// quick create, the $default stage is managed by API Gateway. You can't modify the
 	// $default stage.
 	ApiGatewayManaged *bool
+
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
 	AutoDeploy *bool
+
 	// The timestamp when the stage was last updated.
 	LastUpdatedDate *time.Time
+
 	// The description of the stage.
 	Description *string
+
 	// The timestamp when the stage was created.
 	CreatedDate *time.Time
+
 	// Default route settings for the stage.
 	DefaultRouteSettings *types.RouteSettings
+
 	// The identifier of the Deployment that the Stage is associated with. Can't be
 	// updated if autoDeploy is enabled.
 	DeploymentId *string
+
 	// Describes the status of the last deployment of a stage. Supported only for
 	// stages with autoDeploy enabled.
 	LastDeploymentStatusMessage *string
+
 	// Settings for logging access in this stage.
 	AccessLogSettings *types.AccessLogSettings
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The identifier of a client certificate for a Stage. Supported only for WebSocket
 	// APIs.
 	ClientCertificateId *string
+
 	// The name of the stage.
 	StageName *string
+
 	// A map that defines the stage variables for a stage resource. Variable names can
 	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]*string
+
 	// Route settings for the stage, by routeKey.
 	RouteSettings map[string]*types.RouteSettings
 

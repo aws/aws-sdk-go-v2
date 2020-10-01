@@ -57,23 +57,33 @@ func (c *Client) CreateSavingsPlan(ctx context.Context, params *CreateSavingsPla
 }
 
 type CreateSavingsPlanInput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string
+
 	// The ID of the offering.
+	//
+	// This member is required.
 	SavingsPlanOfferingId *string
+
 	// The hourly commitment, in USD. This is a value between 0.001 and 1 million. You
 	// cannot specify more than three digits after the decimal point.
+	//
+	// This member is required.
 	Commitment *string
+
 	// The up-front payment amount. This is a whole number between 50 and 99 percent of
 	// the total value of the Savings Plan. This parameter is supported only if the
 	// payment option is Partial Upfront.
 	UpfrontPaymentAmount *string
+
 	// One or more tags.
 	Tags map[string]*string
 }
 
 type CreateSavingsPlanOutput struct {
+
 	// The ID of the Savings Plan.
 	SavingsPlanId *string
 

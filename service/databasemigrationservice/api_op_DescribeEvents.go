@@ -62,26 +62,35 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 
 //
 type DescribeEventsInput struct {
+
 	// The end time for the events to be listed.
 	EndTime *time.Time
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// The identifier of an event source.
 	SourceIdentifier *string
+
 	// The duration of the events to be listed.
 	Duration *int32
+
 	// The type of AWS DMS resource that generates events. Valid values:
 	// replication-instance | replication-task
 	SourceType types.SourceType
+
 	// Filters applied to events.
 	Filters []*types.Filter
+
 	// A list of event categories for the source type that you've chosen.
 	EventCategories []*string
+
 	// The start time for the events to be listed.
 	StartTime *time.Time
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
@@ -90,8 +99,10 @@ type DescribeEventsInput struct {
 
 //
 type DescribeEventsOutput struct {
+
 	// The events described.
 	Events []*types.Event
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.

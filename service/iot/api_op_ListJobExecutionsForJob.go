@@ -56,20 +56,28 @@ func (c *Client) ListJobExecutionsForJob(ctx context.Context, params *ListJobExe
 }
 
 type ListJobExecutionsForJobInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
 	// The unique identifier you assigned to this job when it was created.
+	//
+	// This member is required.
 	JobId *string
+
 	// The status of the job.
 	Status types.JobExecutionStatus
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListJobExecutionsForJobOutput struct {
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// A list of job execution summaries.
 	ExecutionSummaries []*types.JobExecutionSummaryForJob
 

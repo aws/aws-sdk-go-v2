@@ -56,13 +56,18 @@ func (c *Client) GetPendingJobExecutions(ctx context.Context, params *GetPending
 }
 
 type GetPendingJobExecutionsInput struct {
+
 	// The name of the thing that is executing the job.
+	//
+	// This member is required.
 	ThingName *string
 }
 
 type GetPendingJobExecutionsOutput struct {
+
 	// A list of JobExecutionSummary objects with status IN_PROGRESS.
 	InProgressJobs []*types.JobExecutionSummary
+
 	// A list of JobExecutionSummary objects with status QUEUED.
 	QueuedJobs []*types.JobExecutionSummary
 

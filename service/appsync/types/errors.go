@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have access to perform this operation on this resource.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The API key exceeded a limit. Try your request again.
 type ApiKeyLimitExceededException struct {
@@ -47,12 +40,6 @@ func (e *ApiKeyLimitExceededException) ErrorMessage() string {
 }
 func (e *ApiKeyLimitExceededException) ErrorCode() string             { return "ApiKeyLimitExceededException" }
 func (e *ApiKeyLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApiKeyLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApiKeyLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The API key expiration must be set to a value between 1 and 365 days from
 // creation (for CreateApiKey) or from update (for UpdateApiKey).
@@ -75,12 +62,6 @@ func (e *ApiKeyValidityOutOfBoundsException) ErrorCode() string {
 func (e *ApiKeyValidityOutOfBoundsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ApiKeyValidityOutOfBoundsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApiKeyValidityOutOfBoundsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The GraphQL API exceeded a limit. Try your request again.
 type ApiLimitExceededException struct {
@@ -98,12 +79,6 @@ func (e *ApiLimitExceededException) ErrorMessage() string {
 }
 func (e *ApiLimitExceededException) ErrorCode() string             { return "ApiLimitExceededException" }
 func (e *ApiLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApiLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApiLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is not well formed. For example, a value is invalid or a required
 // field is missing. Check the field values, and then try again.
@@ -122,12 +97,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Another modification is in progress at this time and it must complete before you
 // can make your change.
@@ -148,12 +117,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The GraphQL schema is not valid.
 type GraphQLSchemaException struct {
@@ -171,12 +134,6 @@ func (e *GraphQLSchemaException) ErrorMessage() string {
 }
 func (e *GraphQLSchemaException) ErrorCode() string             { return "GraphQLSchemaException" }
 func (e *GraphQLSchemaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *GraphQLSchemaException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GraphQLSchemaException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal AWS AppSync error occurred. Try your request again.
 type InternalFailureException struct {
@@ -194,12 +151,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request exceeded a limit. Try your request again.
 type LimitExceededException struct {
@@ -217,12 +168,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource specified in the request was not found. Check the resource, and
 // then try again.
@@ -241,12 +186,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You are not authorized to perform this operation.
 type UnauthorizedException struct {
@@ -264,9 +203,3 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}

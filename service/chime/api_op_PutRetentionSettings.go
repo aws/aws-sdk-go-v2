@@ -66,15 +66,23 @@ func (c *Client) PutRetentionSettings(ctx context.Context, params *PutRetentionS
 }
 
 type PutRetentionSettingsInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The retention settings.
+	//
+	// This member is required.
 	RetentionSettings *types.RetentionSettings
 }
 
 type PutRetentionSettingsOutput struct {
+
 	// The retention settings.
 	RetentionSettings *types.RetentionSettings
+
 	// The timestamp representing the time at which the specified items are permanently
 	// deleted, in ISO 8601 format.
 	InitiateDeletionTimestamp *time.Time

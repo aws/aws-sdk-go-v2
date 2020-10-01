@@ -57,13 +57,19 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The value of the resource that will have the tag removed. An Amazon Resource
 	// Name (ARN) is an identifier for a specific AWS resource, such as a server, user,
 	// or role.
+	//
+	// This member is required.
 	Arn *string
+
 	// TagKeys are key-value pairs assigned to ARNs that can be used to group and
 	// search for resources by type. This metadata can be attached to resources for any
 	// purpose.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

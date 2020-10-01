@@ -59,7 +59,10 @@ func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, 
 }
 
 type DeleteGatewayInput struct {
+
 	// The ID of the gateway to delete.
+	//
+	// This member is required.
 	GatewayId *string
 }
 

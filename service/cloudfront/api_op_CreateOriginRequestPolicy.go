@@ -80,15 +80,21 @@ func (c *Client) CreateOriginRequestPolicy(ctx context.Context, params *CreateOr
 }
 
 type CreateOriginRequestPolicyInput struct {
+
 	// An origin request policy configuration.
+	//
+	// This member is required.
 	OriginRequestPolicyConfig *types.OriginRequestPolicyConfig
 }
 
 type CreateOriginRequestPolicyOutput struct {
+
 	// An origin request policy.
 	OriginRequestPolicy *types.OriginRequestPolicy
+
 	// The fully qualified URI of the origin request policy just created.
 	Location *string
+
 	// The current version of the origin request policy.
 	ETag *string
 

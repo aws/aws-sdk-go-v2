@@ -58,14 +58,19 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 
 // Represents the input of a DescribeEngineDefaultParameters operation.
 type DescribeEngineDefaultParametersInput struct {
+
 	// The name of the cache parameter group family. Valid values are: memcached1.4 |
 	// memcached1.5 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 |
+	//
+	// This member is required.
 	CacheParameterGroupFamily *string
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
@@ -74,6 +79,7 @@ type DescribeEngineDefaultParametersInput struct {
 }
 
 type DescribeEngineDefaultParametersOutput struct {
+
 	// Represents the output of a DescribeEngineDefaultParameters operation.
 	EngineDefaults *types.EngineDefaults
 

@@ -12,18 +12,24 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes the entire tag set from the specified Amazon S3 Batch Operations job. To
-// use this operation, you must have permission to perform the s3:DeleteJobTagging
-// action. For more information, see Using Job Tags
+// Removes the entire tag set from the specified S3 Batch Operations job. To use
+// this operation, you must have permission to perform the s3:DeleteJobTagging
+// action. For more information, see Controlling access and labeling jobs using
+// tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
 // in the Amazon Simple Storage Service Developer Guide. Related actions include:
 //
 //
-// * CreateJob ()
+// * CreateJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//     * GetJobTagging ()
 //
-//     * PutJobTagging ()
+// * GetJobTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html)
+//
+//
+// * PutJobTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
 func (c *Client) DeleteJobTagging(ctx context.Context, params *DeleteJobTaggingInput, optFns ...func(*Options)) (*DeleteJobTaggingOutput, error) {
 	stack := middleware.NewStack("DeleteJobTagging", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -67,9 +73,15 @@ func (c *Client) DeleteJobTagging(ctx context.Context, params *DeleteJobTaggingI
 }
 
 type DeleteJobTaggingInput struct {
-	// The ID for the Amazon S3 Batch Operations job whose tags you want to delete.
+
+	// The ID for the S3 Batch Operations job whose tags you want to delete.
+	//
+	// This member is required.
 	JobId *string
-	// The AWS account ID associated with the Amazon S3 Batch Operations job.
+
+	// The AWS account ID associated with the S3 Batch Operations job.
+	//
+	// This member is required.
 	AccountId *string
 }
 

@@ -58,27 +58,35 @@ func (c *Client) ListElasticsearchInstanceTypes(ctx context.Context, params *Lis
 
 // Container for the parameters to the ListElasticsearchInstanceTypes () operation.
 type ListElasticsearchInstanceTypesInput struct {
+
 	// NextToken should be sent in case if earlier API call produced result containing
 	// NextToken. It is used for pagination.
 	NextToken *string
+
 	// DomainName represents the name of the Domain that we are trying to modify. This
 	// should be present only if we are querying for list of available Elasticsearch
 	// instance types when modifying existing domain.
 	DomainName *string
+
 	// Set this value to limit the number of results returned. Value provided must be
 	// greater than 30 else it wont be honored.
 	MaxResults *int32
+
 	// Version of Elasticsearch for which list of supported elasticsearch instance
 	// types are needed.
+	//
+	// This member is required.
 	ElasticsearchVersion *string
 }
 
 // Container for the parameters returned by ListElasticsearchInstanceTypes ()
 // operation.
 type ListElasticsearchInstanceTypesOutput struct {
+
 	// List of instance types supported by Amazon Elasticsearch service for given
 	// ElasticsearchVersion ()
 	ElasticsearchInstanceTypes []types.ESPartitionInstanceType
+
 	// In case if there are more results available NextToken would be present, make
 	// further request to the same API with received NextToken to paginate remaining
 	// results.

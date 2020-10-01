@@ -58,22 +58,29 @@ func (c *Client) ListClusterJobs(ctx context.Context, params *ListClusterJobsInp
 }
 
 type ListClusterJobsInput struct {
+
 	// HTTP requests are stateless. To identify what object comes "next" in the list of
 	// JobListEntry objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
 	NextToken *string
+
 	// The 39-character ID for the cluster that you want to list, for example
 	// CID123e4567-e89b-12d3-a456-426655440000.
+	//
+	// This member is required.
 	ClusterId *string
+
 	// The number of JobListEntry objects to return.
 	MaxResults *int32
 }
 
 type ListClusterJobsOutput struct {
+
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ListClusterJobsResult call, your list of returned jobs will
 	// start from this point in the array.
 	NextToken *string
+
 	// Each JobListEntry object contains a job's state, a job's ID, and a value that
 	// indicates whether the job is a job part, in the case of export jobs.
 	JobListEntries []*types.JobListEntry

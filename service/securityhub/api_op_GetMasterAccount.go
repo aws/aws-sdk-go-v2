@@ -59,6 +59,7 @@ type GetMasterAccountInput struct {
 }
 
 type GetMasterAccountOutput struct {
+
 	// A list of details about the Security Hub master account for the current member
 	// account.
 	Master *types.Invitation

@@ -55,6 +55,7 @@ func (c *Client) SendInvitation(ctx context.Context, params *SendInvitationInput
 }
 
 type SendInvitationInput struct {
+
 	// The ARN of the user to whom to send an invitation. Required.
 	UserArn *string
 }

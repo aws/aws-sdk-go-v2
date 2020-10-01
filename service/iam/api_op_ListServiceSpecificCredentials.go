@@ -62,6 +62,7 @@ func (c *Client) ListServiceSpecificCredentials(ctx context.Context, params *Lis
 }
 
 type ListServiceSpecificCredentialsInput struct {
+
 	// The name of the user whose service-specific credentials you want information
 	// about. If this value is not specified, then the operation assumes the user whose
 	// credentials are used to call the operation. This parameter allows (through its
@@ -69,12 +70,14 @@ type ListServiceSpecificCredentialsInput struct {
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	UserName *string
+
 	// Filters the returned results to only those for the specified AWS service. If not
 	// specified, then AWS returns service-specific credentials for all services.
 	ServiceName *string
 }
 
 type ListServiceSpecificCredentialsOutput struct {
+
 	// A list of structures that each contain details about a service-specific
 	// credential.
 	ServiceSpecificCredentials []*types.ServiceSpecificCredentialMetadata

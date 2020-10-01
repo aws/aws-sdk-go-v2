@@ -57,14 +57,20 @@ func (c *Client) GetApnsSandboxChannel(ctx context.Context, params *GetApnsSandb
 }
 
 type GetApnsSandboxChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetApnsSandboxChannelOutput struct {
+
 	// Provides information about the status and settings of the APNs (Apple Push
 	// Notification service) sandbox channel for an application.
+	//
+	// This member is required.
 	APNSSandboxChannelResponse *types.APNSSandboxChannelResponse
 
 	// Metadata pertaining to the operation's result.

@@ -57,12 +57,16 @@ func (c *Client) GetSnapshotLimits(ctx context.Context, params *GetSnapshotLimit
 
 // Contains the inputs for the GetSnapshotLimits () operation.
 type GetSnapshotLimitsInput struct {
+
 	// Contains the identifier of the directory to obtain the limits for.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 
 // Contains the results of the GetSnapshotLimits () operation.
 type GetSnapshotLimitsOutput struct {
+
 	// A SnapshotLimits () object that contains the manual snapshot limits for the
 	// specified directory.
 	SnapshotLimits *types.SnapshotLimits

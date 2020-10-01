@@ -8,11 +8,14 @@ import (
 
 // An action to be performed when the condition is TRUE.
 type Action struct {
+
 	// Sends information about the detector model instance and the event that triggered
 	// the action to an Amazon Kinesis Data Firehose delivery stream.
 	Firehose *FirehoseAction
+
 	// Publishes an MQTT message with the given topic to the AWS IoT message broker.
 	IotTopicPublish *IotTopicPublishAction
+
 	// Writes to the DynamoDB table that you created. The default action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event that triggered the action. You can also customize
@@ -23,10 +26,13 @@ type Action struct {
 	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
 	// in AWS IoT Events Developer Guide.
 	DynamoDBv2 *DynamoDBv2Action
+
 	// Information needed to set the timer.
 	SetTimer *SetTimerAction
+
 	// Information needed to clear the timer.
 	ClearTimer *ClearTimerAction
+
 	// Writes to the DynamoDB table that you created. The default action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event that triggered the action. You can also customize
@@ -37,21 +43,28 @@ type Action struct {
 	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html)
 	// in AWS IoT Events Developer Guide.
 	DynamoDB *DynamoDBAction
+
 	// Information needed to reset the timer.
 	ResetTimer *ResetTimerAction
+
 	// Sends an Amazon SNS message.
 	Sns *SNSTopicPublishAction
+
 	// Sets a variable to a specified value.
 	SetVariable *SetVariableAction
+
 	// Sends information about the detector model instance and the event that triggered
 	// the action to an Amazon SQS queue.
 	Sqs *SqsAction
+
 	// Calls a Lambda function, passing in information about the detector model
 	// instance and the event that triggered the action.
 	Lambda *LambdaAction
+
 	// Sends AWS IoT Events input, which passes information about the detector model
 	// instance and the event that triggered the action.
 	IotEvents *IotEventsAction
+
 	// Sends information about the detector model instance and the event that triggered
 	// the action to an asset property in AWS IoT SiteWise .
 	IotSiteWise *IotSiteWiseAction
@@ -73,11 +86,15 @@ type Action struct {
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type AssetPropertyTimestamp struct {
+
 	// The nanosecond offset converted from timeInSeconds. The valid range is between
 	// 0-999999999. You can also specify an expression.
 	OffsetInNanos *string
+
 	// The timestamp, in seconds, in the Unix epoch format. The valid range is between
 	// 1-31556889864403199. You can also specify an expression.
+	//
+	// This member is required.
 	TimeInSeconds *string
 }
 
@@ -96,11 +113,16 @@ type AssetPropertyTimestamp struct {
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type AssetPropertyValue struct {
+
 	// The value to send to an asset property.
+	//
+	// This member is required.
 	Value *AssetPropertyVariant
+
 	// The timestamp associated with the asset property value. The default is the
 	// current event time.
 	Timestamp *AssetPropertyTimestamp
+
 	// The quality of the asset property value. The value must be GOOD, BAD, or
 	// UNCERTAIN. You can also specify an expression.
 	Quality *string
@@ -125,16 +147,20 @@ type AssetPropertyValue struct {
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type AssetPropertyVariant struct {
+
 	// The asset property value is a Boolean value that must be TRUE or FALSE. You can
 	// also specify an expression. If you use an expression, the evaluated result
 	// should be a Boolean value.
 	BooleanValue *string
+
 	// The asset property value is a double. You can also specify an expression. If you
 	// use an expression, the evaluated result should be a double.
 	DoubleValue *string
+
 	// The asset property value is a string. You can also specify an expression. If you
 	// use an expression, the evaluated result should be a string.
 	StringValue *string
+
 	// The asset property value is an integer. You can also specify an expression. If
 	// you use an expression, the evaluated result should be an integer.
 	IntegerValue *string
@@ -146,55 +172,74 @@ type AssetPropertyVariant struct {
 // (and their paired values) specified here are available for use in the condition
 // expressions used by detectors.
 type Attribute struct {
+
 	// An expression that specifies an attribute-value pair in a JSON structure. Use
 	// this to specify an attribute from the JSON payload that is made available by the
 	// input. Inputs are derived from messages sent to AWS IoT Events
 	// (BatchPutMessage). Each such message contains a JSON payload. The attribute (and
 	// its paired value) specified here are available for use in the condition
 	// expressions used by detectors. Syntax: ....
+	//
+	// This member is required.
 	JsonPath *string
 }
 
 // Information needed to clear the timer.
 type ClearTimerAction struct {
+
 	// The name of the timer to clear.
+	//
+	// This member is required.
 	TimerName *string
 }
 
 // The detector model and the specific detectors (instances) for which the logging
 // level is given.
 type DetectorDebugOption struct {
+
 	// The value of the input attribute key used to create the detector (the instance
 	// of the detector model).
 	KeyValue *string
+
 	// The name of the detector model.
+	//
+	// This member is required.
 	DetectorModelName *string
 }
 
 // Information about the detector model.
 type DetectorModel struct {
+
 	// Information about how the detector is configured.
 	DetectorModelConfiguration *DetectorModelConfiguration
+
 	// Information that defines how a detector operates.
 	DetectorModelDefinition *DetectorModelDefinition
 }
 
 // Information about how the detector model is configured.
 type DetectorModelConfiguration struct {
+
 	// The time the detector model was created.
 	CreationTime *time.Time
+
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
 	EvaluationMethod EvaluationMethod
+
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
 	RoleArn *string
+
 	// The version of the detector model.
 	DetectorModelVersion *string
+
 	// The ARN of the detector model.
 	DetectorModelArn *string
+
 	// The name of the detector model.
 	DetectorModelName *string
+
 	// The value used to identify a detector instance. When a device or system sends
 	// input, a new detector instance with a unique key value is created. AWS IoT
 	// Events can continue to route input to its corresponding detector instance based
@@ -203,49 +248,69 @@ type DetectorModelConfiguration struct {
 	// identification. To route the message to the correct detector instance, the
 	// device must send a message payload that contains the same attribute-value.
 	Key *string
+
 	// A brief description of the detector model.
 	DetectorModelDescription *string
+
 	// The status of the detector model.
 	Status DetectorModelVersionStatus
+
 	// The time the detector model was last updated.
 	LastUpdateTime *time.Time
 }
 
 // Information that defines how a detector operates.
 type DetectorModelDefinition struct {
+
 	// The state that is entered at the creation of each detector (instance).
+	//
+	// This member is required.
 	InitialStateName *string
+
 	// Information about the states of the detector.
+	//
+	// This member is required.
 	States []*State
 }
 
 // Information about the detector model.
 type DetectorModelSummary struct {
+
 	// The time the detector model was created.
 	CreationTime *time.Time
+
 	// A brief description of the detector model.
 	DetectorModelDescription *string
+
 	// The name of the detector model.
 	DetectorModelName *string
 }
 
 // Information about the detector model version.
 type DetectorModelVersionSummary struct {
+
 	// The last time the detector model version was updated.
 	LastUpdateTime *time.Time
+
 	// The status of the detector model version.
 	Status DetectorModelVersionStatus
+
 	// The ARN of the detector model version.
 	DetectorModelArn *string
+
 	// The name of the detector model.
 	DetectorModelName *string
+
 	// The ID of the detector model version.
 	DetectorModelVersion *string
+
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
 	EvaluationMethod EvaluationMethod
+
 	// The time the detector model version was created.
 	CreationTime *time.Time
+
 	// The ARN of the role that grants the detector model permission to perform its
 	// tasks.
 	RoleArn *string
@@ -270,21 +335,31 @@ type DetectorModelVersionSummary struct {
 // DynamoDB console displays the data as Base64-encoded text. The payloadField is
 // _raw.
 type DynamoDBAction struct {
+
 	// The value of the range key (also called the sort key).
 	RangeKeyValue *string
+
 	// The name of the DynamoDB column that receives the action payload. If you don't
 	// specify this parameter, the name of the DynamoDB column is payload.
 	PayloadField *string
+
 	// The name of the DynamoDB table.
+	//
+	// This member is required.
 	TableName *string
+
 	// The value of the hash key (also called the partition key).
+	//
+	// This member is required.
 	HashKeyValue *string
+
 	// Information needed to configure the payload. By default, AWS IoT Events
 	// generates a standard payload in JSON for any action. This action payload
 	// contains all attribute-value pairs that have the information about the detector
 	// model instance and the event triggered the action. To configure the action
 	// payload, you can use contentExpression.
 	Payload *Payload
+
 	// The data type for the hash key (also called the partition key). You can specify
 	// the following values:
 	//
@@ -296,8 +371,12 @@ type DynamoDBAction struct {
 	// If you don't specify hashKeyType, the default value
 	// is STRING.
 	HashKeyType *string
+
 	// The name of the hash key (also called the partition key).
+	//
+	// This member is required.
 	HashKeyField *string
+
 	// The data type for the range key (also called the sort key), You can specify the
 	// following values:
 	//
@@ -309,6 +388,7 @@ type DynamoDBAction struct {
 	// If you don't specify rangeKeyField, the default value is
 	// STRING.
 	RangeKeyType *string
+
 	// The type of operation to perform. You can specify the following values:
 	//
 	//     *
@@ -328,6 +408,7 @@ type DynamoDBAction struct {
 	// If you don't specify this
 	// parameter, AWS IoT Events triggers the INSERT operation.
 	Operation *string
+
 	// The name of the range key (also called the sort key).
 	RangeKeyField *string
 }
@@ -344,8 +425,12 @@ type DynamoDBAction struct {
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type DynamoDBv2Action struct {
+
 	// The name of the DynamoDB table.
+	//
+	// This member is required.
 	TableName *string
+
 	// Information needed to configure the payload. By default, AWS IoT Events
 	// generates a standard payload in JSON for any action. This action payload
 	// contains all attribute-value pairs that have the information about the detector
@@ -356,10 +441,15 @@ type DynamoDBv2Action struct {
 
 // Specifies the actions to be performed when the condition evaluates to TRUE.
 type Event struct {
+
 	// The name of the event.
+	//
+	// This member is required.
 	EventName *string
+
 	// The actions to be performed.
 	Actions []*Action
+
 	// Optional. The Boolean expression that, when TRUE, causes the actions to be
 	// performed. If not present, the actions are performed (=TRUE). If the expression
 	// result is not a Boolean value, the actions are not performed (=FALSE).
@@ -369,11 +459,16 @@ type Event struct {
 // Sends information about the detector model instance and the event that triggered
 // the action to an Amazon Kinesis Data Firehose delivery stream.
 type FirehoseAction struct {
+
 	// The name of the Kinesis Data Firehose delivery stream where the data is written.
+	//
+	// This member is required.
 	DeliveryStreamName *string
+
 	// You can configure the action payload when you send a message to an Amazon
 	// Kinesis Data Firehose delivery stream.
 	Payload *Payload
+
 	// A character separator that is used to separate records written to the Kinesis
 	// Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab),
 	// '\r\n' (Windows newline), ',' (comma).
@@ -382,50 +477,77 @@ type FirehoseAction struct {
 
 // Information about the input.
 type Input struct {
+
 	// Information about the configuration of an input.
 	InputConfiguration *InputConfiguration
+
 	// The definition of the input.
 	InputDefinition *InputDefinition
 }
 
 // Information about the configuration of an input.
 type InputConfiguration struct {
+
 	// The ARN of the input.
+	//
+	// This member is required.
 	InputArn *string
+
 	// The name of the input.
+	//
+	// This member is required.
 	InputName *string
+
 	// The status of the input.
+	//
+	// This member is required.
 	Status InputStatus
+
 	// The last time the input was updated.
+	//
+	// This member is required.
 	LastUpdateTime *time.Time
+
 	// A brief description of the input.
 	InputDescription *string
+
 	// The time the input was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
 }
 
 // The definition of the input.
 type InputDefinition struct {
+
 	// The attributes from the JSON payload that are made available by the input.
 	// Inputs are derived from messages sent to the AWS IoT Events system using
 	// BatchPutMessage. Each such message contains a JSON payload, and those attributes
 	// (and their paired values) specified here are available for use in the condition
 	// expressions used by detectors that monitor this input.
+	//
+	// This member is required.
 	Attributes []*Attribute
 }
 
 // Information about the input.
 type InputSummary struct {
+
 	// The ARN of the input.
 	InputArn *string
+
 	// The time the input was created.
 	CreationTime *time.Time
+
 	// The name of the input.
 	InputName *string
+
 	// The status of the input.
 	Status InputStatus
+
 	// The last time the input was updated.
 	LastUpdateTime *time.Time
+
 	// A brief description of the input.
 	InputDescription *string
 }
@@ -433,10 +555,14 @@ type InputSummary struct {
 // Sends an AWS IoT Events input, passing in information about the detector model
 // instance and the event that triggered the action.
 type IotEventsAction struct {
+
 	// You can configure the action payload when you send a message to an AWS IoT
 	// Events input.
 	Payload *Payload
+
 	// The name of the AWS IoT Events input where the data is sent.
+	//
+	// This member is required.
 	InputName *string
 }
 
@@ -456,17 +582,24 @@ type IotEventsAction struct {
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type IotSiteWiseAction struct {
+
 	// The ID of the asset property. You can specify an expression.
 	PropertyId *string
+
 	// A unique identifier for this entry. You can use the entry ID to track which data
 	// entry causes an error in case of failure. The default is a new unique
 	// identifier. You can also specify an expression.
 	EntryId *string
+
 	// The value to send to the asset property. This value contains timestamp, quality,
 	// and value (TQV) information.
+	//
+	// This member is required.
 	PropertyValue *AssetPropertyValue
+
 	// The alias of the asset property. You can also specify an expression.
 	PropertyAlias *string
+
 	// The ID of the asset that has the specified property. You can specify an
 	// expression.
 	AssetId *string
@@ -475,39 +608,58 @@ type IotSiteWiseAction struct {
 // Information required to publish the MQTT message through the AWS IoT message
 // broker.
 type IotTopicPublishAction struct {
+
 	// You can configure the action payload when you publish a message to an AWS IoT
 	// Core topic.
 	Payload *Payload
+
 	// The MQTT topic of the message. You can use a string expression that includes
 	// variables ($variable.) and input values ($input..) as the topic string.
+	//
+	// This member is required.
 	MqttTopic *string
 }
 
 // Calls a Lambda function, passing in information about the detector model
 // instance and the event that triggered the action.
 type LambdaAction struct {
+
 	// You can configure the action payload when you send a message to a Lambda
 	// function.
 	Payload *Payload
+
 	// The ARN of the Lambda function that is executed.
+	//
+	// This member is required.
 	FunctionArn *string
 }
 
 // The values of the AWS IoT Events logging options.
 type LoggingOptions struct {
+
 	// The ARN of the role that grants permission to AWS IoT Events to perform logging.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The logging level.
+	//
+	// This member is required.
 	Level LoggingLevel
+
 	// Information that identifies those detector models and their detectors
 	// (instances) for which the logging level is given.
 	DetectorDebugOptions []*DetectorDebugOption
+
 	// If TRUE, logging is enabled for AWS IoT Events.
+	//
+	// This member is required.
 	Enabled *bool
 }
 
 // When entering this state, perform these actions if the condition is TRUE.
 type OnEnterLifecycle struct {
+
 	// Specifies the actions that are performed when the state is entered and the
 	// condition is TRUE.
 	Events []*Event
@@ -516,6 +668,7 @@ type OnEnterLifecycle struct {
 // When exiting this state, perform these actions if the specified condition is
 // TRUE.
 type OnExitLifecycle struct {
+
 	// Specifies the actions that are performed when the state is exited and the
 	// condition is TRUE.
 	Events []*Event
@@ -523,9 +676,11 @@ type OnExitLifecycle struct {
 
 // Specifies the actions performed when the condition evaluates to TRUE.
 type OnInputLifecycle struct {
+
 	// Specifies the actions performed, and the next state entered, when a condition
 	// evaluates to TRUE.
 	TransitionEvents []*TransitionEvent
+
 	// Specifies the actions performed when the condition evaluates to TRUE.
 	Events []*Event
 }
@@ -536,12 +691,18 @@ type OnInputLifecycle struct {
 // model instance and the event triggered the action. To configure the action
 // payload, you can use contentExpression.
 type Payload struct {
+
 	// The content of the payload. You can use a string expression that includes quoted
 	// strings (''), variables ($variable.), input values ($input..), string
 	// concatenations, and quoted strings that contain ${} as the content. The
 	// recommended maximum size of a content expression is 1 KB.
+	//
+	// This member is required.
 	ContentExpression *string
+
 	// The value of the payload type can be either STRING or JSON.
+	//
+	// This member is required.
 	Type PayloadType
 }
 
@@ -549,17 +710,25 @@ type Payload struct {
 // evaluated result of the duration. The duration expression isn't reevaluated when
 // you reset the timer.
 type ResetTimerAction struct {
+
 	// The name of the timer to reset.
+	//
+	// This member is required.
 	TimerName *string
 }
 
 // Information needed to set the timer.
 type SetTimerAction struct {
+
 	// The number of seconds until the timer expires. The minimum value is 60 seconds
 	// to ensure accuracy. The maximum value is 31622400 seconds.
 	Seconds *int32
+
 	// The name of the timer.
+	//
+	// This member is required.
 	TimerName *string
+
 	// The duration of the timer, in seconds. You can use a string expression that
 	// includes numbers, variables ($variable.), and input values ($input..) as the
 	// duration. The range of the duration is 1-31622400 seconds. To ensure accuracy,
@@ -570,43 +739,64 @@ type SetTimerAction struct {
 
 // Information about the variable and its new value.
 type SetVariableAction struct {
+
 	// The new value of the variable.
+	//
+	// This member is required.
 	Value *string
+
 	// The name of the variable.
+	//
+	// This member is required.
 	VariableName *string
 }
 
 // Information required to publish the Amazon SNS message.
 type SNSTopicPublishAction struct {
+
 	// You can configure the action payload when you send a message as an Amazon SNS
 	// push notification.
 	Payload *Payload
+
 	// The ARN of the Amazon SNS target where the message is sent.
+	//
+	// This member is required.
 	TargetArn *string
 }
 
 // Sends information about the detector model instance and the event that triggered
 // the action to an Amazon SQS queue.
 type SqsAction struct {
+
 	// You can configure the action payload when you send a message to an Amazon SQS
 	// queue.
 	Payload *Payload
+
 	// Set this to TRUE if you want the data to be base-64 encoded before it is written
 	// to the queue. Otherwise, set this to FALSE.
 	UseBase64 *bool
+
 	// The URL of the SQS queue where the data is written.
+	//
+	// This member is required.
 	QueueUrl *string
 }
 
 // Information that defines a state of a detector.
 type State struct {
+
 	// When entering this state, perform these actions if the condition is TRUE.
 	OnEnter *OnEnterLifecycle
+
 	// When an input is received and the condition is TRUE, perform the specified
 	// actions.
 	OnInput *OnInputLifecycle
+
 	// The name of the state.
+	//
+	// This member is required.
 	StateName *string
+
 	// When exiting this state, perform these actions if the specified condition is
 	// TRUE.
 	OnExit *OnExitLifecycle
@@ -614,22 +804,38 @@ type State struct {
 
 // Metadata that can be used to manage the resource.
 type Tag struct {
+
 	// The tag's value.
+	//
+	// This member is required.
 	Value *string
+
 	// The tag's key.
+	//
+	// This member is required.
 	Key *string
 }
 
 // Specifies the actions performed and the next state entered when a condition
 // evaluates to TRUE.
 type TransitionEvent struct {
+
 	// Required. A Boolean expression that when TRUE causes the actions to be performed
 	// and the nextState to be entered.
+	//
+	// This member is required.
 	Condition *string
+
 	// The name of the transition event.
+	//
+	// This member is required.
 	EventName *string
+
 	// The actions to be performed.
 	Actions []*Action
+
 	// The next state to enter.
+	//
+	// This member is required.
 	NextState *string
 }

@@ -69,15 +69,22 @@ func (c *Client) CreateLBCookieStickinessPolicy(ctx context.Context, params *Cre
 
 // Contains the parameters for CreateLBCookieStickinessPolicy.
 type CreateLBCookieStickinessPolicyInput struct {
+
 	// The name of the policy being created. Policy names must consist of alphanumeric
 	// characters and dashes (-). This name must be unique within the set of policies
 	// for this load balancer.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The time period, in seconds, after which the cookie should be considered stale.
 	// If you do not specify this parameter, the default value is 0, which indicates
 	// that the sticky session should last for the duration of the browser session.
 	CookieExpirationPeriod *int64
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 

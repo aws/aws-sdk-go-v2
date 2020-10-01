@@ -53,15 +53,19 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 }
 
 type NullOperationInput struct {
-	String_    *string
+	String_ *string
+
 	StringList []*string
-	StringMap  map[string]*string
+
+	StringMap map[string]*string
 }
 
 type NullOperationOutput struct {
-	String_    *string
+	String_ *string
+
 	StringList []*string
-	StringMap  map[string]*string
+
+	StringMap map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

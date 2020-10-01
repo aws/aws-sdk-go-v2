@@ -55,10 +55,16 @@ func (c *Client) DeleteEnvironmentMembership(ctx context.Context, params *Delete
 }
 
 type DeleteEnvironmentMembershipInput struct {
+
 	// The Amazon Resource Name (ARN) of the environment member to delete from the
 	// environment.
+	//
+	// This member is required.
 	UserArn *string
+
 	// The ID of the environment to delete the environment member from.
+	//
+	// This member is required.
 	EnvironmentId *string
 }
 

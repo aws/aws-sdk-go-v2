@@ -55,61 +55,111 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 }
 
 type KitchenSinkOperationInput struct {
-	Blob                   []byte
-	Boolean                *bool
-	Double                 *float64
-	EmptyStruct            *types.EmptyStruct
-	Float                  *float32
-	HttpdateTimestamp      *time.Time
-	Integer                *int32
-	Iso8601Timestamp       *time.Time
-	JsonValue              *string
-	ListOfLists            [][]*string
-	ListOfMapsOfStrings    []map[string]*string
-	ListOfStrings          []*string
-	ListOfStructs          []*types.SimpleStruct
-	Long                   *int64
-	MapOfListsOfStrings    map[string][]*string
-	MapOfMaps              map[string]map[string]*string
-	MapOfStrings           map[string]*string
-	MapOfStructs           map[string]*types.SimpleStruct
-	RecursiveList          []*types.KitchenSink
-	RecursiveMap           map[string]*types.KitchenSink
-	RecursiveStruct        *types.KitchenSink
-	SimpleStruct           *types.SimpleStruct
-	String_                *string
+	Blob []byte
+
+	Boolean *bool
+
+	Double *float64
+
+	EmptyStruct *types.EmptyStruct
+
+	Float *float32
+
+	HttpdateTimestamp *time.Time
+
+	Integer *int32
+
+	Iso8601Timestamp *time.Time
+
+	JsonValue *string
+
+	ListOfLists [][]*string
+
+	ListOfMapsOfStrings []map[string]*string
+
+	ListOfStrings []*string
+
+	ListOfStructs []*types.SimpleStruct
+
+	Long *int64
+
+	MapOfListsOfStrings map[string][]*string
+
+	MapOfMaps map[string]map[string]*string
+
+	MapOfStrings map[string]*string
+
+	MapOfStructs map[string]*types.SimpleStruct
+
+	RecursiveList []*types.KitchenSink
+
+	RecursiveMap map[string]*types.KitchenSink
+
+	RecursiveStruct *types.KitchenSink
+
+	SimpleStruct *types.SimpleStruct
+
+	String_ *string
+
 	StructWithLocationName *types.StructWithLocationName
-	Timestamp              *time.Time
-	UnixTimestamp          *time.Time
+
+	Timestamp *time.Time
+
+	UnixTimestamp *time.Time
 }
 
 type KitchenSinkOperationOutput struct {
-	Blob                   []byte
-	Boolean                *bool
-	Double                 *float64
-	EmptyStruct            *types.EmptyStruct
-	Float                  *float32
-	HttpdateTimestamp      *time.Time
-	Integer                *int32
-	Iso8601Timestamp       *time.Time
-	JsonValue              *string
-	ListOfLists            [][]*string
-	ListOfMapsOfStrings    []map[string]*string
-	ListOfStrings          []*string
-	ListOfStructs          []*types.SimpleStruct
-	Long                   *int64
-	MapOfListsOfStrings    map[string][]*string
-	MapOfMaps              map[string]map[string]*string
-	MapOfStrings           map[string]*string
-	MapOfStructs           map[string]*types.SimpleStruct
-	RecursiveList          []*types.KitchenSink
-	RecursiveMap           map[string]*types.KitchenSink
-	RecursiveStruct        *types.KitchenSink
-	SimpleStruct           *types.SimpleStruct
-	String_                *string
+	Blob []byte
+
+	Boolean *bool
+
+	Double *float64
+
+	EmptyStruct *types.EmptyStruct
+
+	Float *float32
+
+	HttpdateTimestamp *time.Time
+
+	Integer *int32
+
+	Iso8601Timestamp *time.Time
+
+	JsonValue *string
+
+	ListOfLists [][]*string
+
+	ListOfMapsOfStrings []map[string]*string
+
+	ListOfStrings []*string
+
+	ListOfStructs []*types.SimpleStruct
+
+	Long *int64
+
+	MapOfListsOfStrings map[string][]*string
+
+	MapOfMaps map[string]map[string]*string
+
+	MapOfStrings map[string]*string
+
+	MapOfStructs map[string]*types.SimpleStruct
+
+	RecursiveList []*types.KitchenSink
+
+	RecursiveMap map[string]*types.KitchenSink
+
+	RecursiveStruct *types.KitchenSink
+
+	SimpleStruct *types.SimpleStruct
+
+	String_ *string
+
 	StructWithLocationName *types.StructWithLocationName
-	Timestamp              *time.Time
-	UnixTimestamp          *time.Time
+
+	Timestamp *time.Time
+
+	UnixTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

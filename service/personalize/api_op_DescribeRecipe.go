@@ -73,11 +73,15 @@ func (c *Client) DescribeRecipe(ctx context.Context, params *DescribeRecipeInput
 }
 
 type DescribeRecipeInput struct {
+
 	// The Amazon Resource Name (ARN) of the recipe to describe.
+	//
+	// This member is required.
 	RecipeArn *string
 }
 
 type DescribeRecipeOutput struct {
+
 	// An object that describes the recipe.
 	Recipe *types.Recipe
 

@@ -69,15 +69,19 @@ func (c *Client) GetServiceSetting(ctx context.Context, params *GetServiceSettin
 
 // The request body of the GetServiceSetting API action.
 type GetServiceSettingInput struct {
+
 	// The ID of the service setting to get. The setting ID can be
 	// /ssm/parameter-store/default-parameter-tier,
 	// /ssm/parameter-store/high-throughput-enabled, or
 	// /ssm/managed-instance/activation-tier.
+	//
+	// This member is required.
 	SettingId *string
 }
 
 // The query result body of the GetServiceSetting API action.
 type GetServiceSettingOutput struct {
+
 	// The query result of the current service setting.
 	ServiceSetting *types.ServiceSetting
 

@@ -57,10 +57,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 // ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource whose tags to list.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The maximum number of locations to return.
 	MaxResults *int32
+
 	// An opaque string that indicates the position at which to begin the next list of
 	// locations.
 	NextToken *string
@@ -68,8 +73,10 @@ type ListTagsForResourceInput struct {
 
 // ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
+
 	// Array of resource tags.
 	Tags []*types.TagListEntry
+
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of resource tags.
 	NextToken *string

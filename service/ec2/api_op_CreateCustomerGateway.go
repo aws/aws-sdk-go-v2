@@ -73,29 +73,41 @@ func (c *Client) CreateCustomerGateway(ctx context.Context, params *CreateCustom
 
 // Contains the parameters for CreateCustomerGateway.
 type CreateCustomerGatewayInput struct {
+
 	// The Internet-routable IP address for the customer gateway's outside interface.
 	// The address must be static.
 	PublicIp *string
+
 	// The tags to apply to the customer gateway.
 	TagSpecifications []*types.TagSpecification
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The type of VPN connection that this customer gateway supports (ipsec.1).
+	//
+	// This member is required.
 	Type types.GatewayType
+
 	// A name for the customer gateway device. Length Constraints: Up to 255
 	// characters.
 	DeviceName *string
+
 	// The Amazon Resource Name (ARN) for the customer gateway certificate.
 	CertificateArn *string
+
 	// For devices that support BGP, the customer gateway's BGP ASN. Default: 65000
+	//
+	// This member is required.
 	BgpAsn *int32
 }
 
 // Contains the output of CreateCustomerGateway.
 type CreateCustomerGatewayOutput struct {
+
 	// Information about the customer gateway.
 	CustomerGateway *types.CustomerGateway
 

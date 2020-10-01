@@ -56,14 +56,19 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 }
 
 type GetFindingsInput struct {
+
 	// The criteria for sorting the results of the request.
 	SortCriteria *types.SortCriteria
+
 	// An array of strings that lists the unique identifiers for the findings to
 	// retrieve information about.
+	//
+	// This member is required.
 	FindingIds []*string
 }
 
 type GetFindingsOutput struct {
+
 	// An array of objects, one for each finding that meets the criteria specified in
 	// the request.
 	Findings []*types.Finding

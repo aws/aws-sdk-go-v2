@@ -56,19 +56,30 @@ func (c *Client) GetLinkAttributes(ctx context.Context, params *GetLinkAttribute
 }
 
 type GetLinkAttributesInput struct {
+
 	// A list of attribute names whose values will be retrieved.
+	//
+	// This member is required.
 	AttributeNames []*string
+
 	// The consistency level at which to retrieve the attributes on a typed link.
 	ConsistencyLevel types.ConsistencyLevel
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// typed link resides. For more information, see arns () or Typed Links
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// Allows a typed link specifier to be accepted as input.
+	//
+	// This member is required.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
 }
 
 type GetLinkAttributesOutput struct {
+
 	// The attributes that are associated with the typed link.
 	Attributes []*types.AttributeKeyAndValue
 

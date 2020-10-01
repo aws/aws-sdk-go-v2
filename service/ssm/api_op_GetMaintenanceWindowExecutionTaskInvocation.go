@@ -57,41 +57,62 @@ func (c *Client) GetMaintenanceWindowExecutionTaskInvocation(ctx context.Context
 }
 
 type GetMaintenanceWindowExecutionTaskInvocationInput struct {
+
 	// The invocation ID to retrieve.
+	//
+	// This member is required.
 	InvocationId *string
+
 	// The ID of the specific task in the maintenance window task that should be
 	// retrieved.
+	//
+	// This member is required.
 	TaskId *string
+
 	// The ID of the maintenance window execution for which the task is a part.
+	//
+	// This member is required.
 	WindowExecutionId *string
 }
 
 type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
+
 	// The task execution ID.
 	TaskExecutionId *string
+
 	// User-provided value to be included in any CloudWatch events raised while running
 	// tasks for these targets in this maintenance window.
 	OwnerInformation *string
+
 	// The task status for an invocation.
 	Status types.MaintenanceWindowExecutionStatus
+
 	// The maintenance window execution ID.
 	WindowExecutionId *string
+
 	// The time that the task finished running on the target.
 	EndTime *time.Time
+
 	// The parameters used at the time that the task ran.
 	Parameters *string
+
 	// The time that the task started running on the target.
 	StartTime *time.Time
+
 	// The details explaining the status. Details are only available for certain status
 	// values.
 	StatusDetails *string
+
 	// Retrieves the task type for a maintenance window. Task types include the
 	// following: LAMBDA, STEP_FUNCTIONS, AUTOMATION, RUN_COMMAND.
 	TaskType types.MaintenanceWindowTaskType
+
 	// The invocation ID.
 	InvocationId *string
+
 	// The maintenance window target ID.
 	WindowTargetId *string
+
 	// The execution ID.
 	ExecutionId *string
 

@@ -56,13 +56,18 @@ func (c *Client) ListVirtualRouters(ctx context.Context, params *ListVirtualRout
 
 //
 type ListVirtualRoutersInput struct {
+
 	// The name of the service mesh to list virtual routers in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The nextToken value returned from a previous paginated ListVirtualRouters
 	// request where limit was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	NextToken *string
+
 	// The maximum number of results returned by ListVirtualRouters in paginated
 	// output. When you use this parameter, ListVirtualRouters returns only limit
 	// results in a single page along with a nextToken response element. You can see
@@ -71,6 +76,7 @@ type ListVirtualRoutersInput struct {
 	// between 1 and 100. If you don't use this parameter, ListVirtualRouters returns
 	// up to 100 results and a nextToken value if applicable.
 	Limit *int32
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -80,8 +86,12 @@ type ListVirtualRoutersInput struct {
 
 //
 type ListVirtualRoutersOutput struct {
+
 	// The list of existing virtual routers for the specified service mesh.
+	//
+	// This member is required.
 	VirtualRouters []*types.VirtualRouterRef
+
 	// The nextToken value to include in a future ListVirtualRouters request. When the
 	// results of a ListVirtualRouters request exceed limit, you can use this value to
 	// retrieve the next page of results. This value is null when there are no more

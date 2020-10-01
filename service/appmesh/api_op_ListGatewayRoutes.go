@@ -56,15 +56,23 @@ func (c *Client) ListGatewayRoutes(ctx context.Context, params *ListGatewayRoute
 }
 
 type ListGatewayRoutesInput struct {
+
 	// The name of the service mesh to list gateway routes in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual gateway to list gateway routes in.
+	//
+	// This member is required.
 	VirtualGatewayName *string
+
 	// The nextToken value returned from a previous paginated ListGatewayRoutes request
 	// where limit was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	NextToken *string
+
 	// The maximum number of results returned by ListGatewayRoutes in paginated output.
 	// When you use this parameter, ListGatewayRoutes returns only limit results in a
 	// single page along with a nextToken response element. You can see the remaining
@@ -73,6 +81,7 @@ type ListGatewayRoutesInput struct {
 	// use this parameter, ListGatewayRoutes returns up to 100 results and a nextToken
 	// value if applicable.
 	Limit *int32
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -81,9 +90,13 @@ type ListGatewayRoutesInput struct {
 }
 
 type ListGatewayRoutesOutput struct {
+
 	// The list of existing gateway routes for the specified service mesh and virtual
 	// gateway.
+	//
+	// This member is required.
 	GatewayRoutes []*types.GatewayRouteRef
+
 	// The nextToken value to include in a future ListGatewayRoutes request. When the
 	// results of a ListGatewayRoutes request exceed limit, you can use this value to
 	// retrieve the next page of results. This value is null when there are no more

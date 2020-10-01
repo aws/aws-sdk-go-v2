@@ -62,12 +62,17 @@ func (c *Client) DescribeLoa(ctx context.Context, params *DescribeLoaInput, optF
 }
 
 type DescribeLoaInput struct {
+
 	// The ID of a connection, LAG, or interconnect.
+	//
+	// This member is required.
 	ConnectionId *string
+
 	// The name of the service provider who establishes connectivity on your behalf. If
 	// you specify this parameter, the LOA-CFA lists the provider name alongside your
 	// company name as the requester of the cross connect.
 	ProviderName *string
+
 	// The standard media type for the LOA-CFA document. The only supported value is
 	// application/pdf.
 	LoaContentType types.LoaContentType
@@ -76,8 +81,10 @@ type DescribeLoaInput struct {
 // Information about a Letter of Authorization - Connecting Facility Assignment
 // (LOA-CFA) for a connection.
 type DescribeLoaOutput struct {
+
 	// The binary contents of the LOA-CFA document.
 	LoaContent []byte
+
 	// The standard media type for the LOA-CFA document. The only supported value is
 	// application/pdf.
 	LoaContentType types.LoaContentType

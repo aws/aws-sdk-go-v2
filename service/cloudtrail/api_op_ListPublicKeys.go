@@ -63,11 +63,14 @@ func (c *Client) ListPublicKeys(ctx context.Context, params *ListPublicKeysInput
 
 // Requests the public keys for a specified time range.
 type ListPublicKeysInput struct {
+
 	// Reserved for future use.
 	NextToken *string
+
 	// Optionally specifies, in UTC, the end of the time range to look up public keys
 	// for CloudTrail digest files. If not specified, the current time is used.
 	EndTime *time.Time
+
 	// Optionally specifies, in UTC, the start of the time range to look up public keys
 	// for CloudTrail digest files. If not specified, the current time is used, and the
 	// current public key is returned.
@@ -77,8 +80,10 @@ type ListPublicKeysInput struct {
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type ListPublicKeysOutput struct {
+
 	// Reserved for future use.
 	NextToken *string
+
 	// Contains an array of PublicKey objects. The returned public keys may have
 	// validity time ranges that overlap.
 	PublicKeyList []*types.PublicKey

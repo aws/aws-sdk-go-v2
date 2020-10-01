@@ -55,7 +55,10 @@ func (c *Client) DeleteSubscriptionDefinition(ctx context.Context, params *Delet
 }
 
 type DeleteSubscriptionDefinitionInput struct {
+
 	// The ID of the subscription definition.
+	//
+	// This member is required.
 	SubscriptionDefinitionId *string
 }
 

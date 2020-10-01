@@ -56,6 +56,7 @@ func (c *Client) DeleteDBParameterGroup(ctx context.Context, params *DeleteDBPar
 }
 
 type DeleteDBParameterGroupInput struct {
+
 	// The name of the DB parameter group. Constraints:
 	//
 	//     * Must be the name of an
@@ -65,6 +66,8 @@ type DeleteDBParameterGroupInput struct {
 	// group
 	//
 	//     * Cannot be associated with any DB instances
+	//
+	// This member is required.
 	DBParameterGroupName *string
 }
 

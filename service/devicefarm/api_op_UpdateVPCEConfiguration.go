@@ -57,24 +57,32 @@ func (c *Client) UpdateVPCEConfiguration(ctx context.Context, params *UpdateVPCE
 }
 
 type UpdateVPCEConfigurationInput struct {
+
 	// The friendly name you give to your VPC endpoint configuration to manage your
 	// configurations more easily.
 	VpceConfigurationName *string
+
 	// The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to
 	// update.
+	//
+	// This member is required.
 	Arn *string
+
 	// The name of the VPC endpoint service running in your AWS account that you want
 	// Device Farm to test.
 	VpceServiceName *string
+
 	// The DNS (domain) name used to connect to your private service in your VPC. The
 	// DNS name must not already be in use on the internet.
 	ServiceDnsName *string
+
 	// An optional description that provides details about your VPC endpoint
 	// configuration.
 	VpceConfigurationDescription *string
 }
 
 type UpdateVPCEConfigurationOutput struct {
+
 	// An object that contains information about your VPC endpoint configuration.
 	VpceConfiguration *types.VPCEConfiguration
 

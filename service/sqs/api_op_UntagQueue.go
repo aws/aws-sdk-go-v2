@@ -62,9 +62,15 @@ func (c *Client) UntagQueue(ctx context.Context, params *UntagQueueInput, optFns
 }
 
 type UntagQueueInput struct {
+
 	// The URL of the queue.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// The list of tags to be removed from the specified queue.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

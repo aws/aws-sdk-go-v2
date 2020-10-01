@@ -54,6 +54,7 @@ func (c *Client) TerminateApp(ctx context.Context, params *TerminateAppInput, op
 }
 
 type TerminateAppInput struct {
+
 	// ID of the application to terminate.
 	AppId *string
 }

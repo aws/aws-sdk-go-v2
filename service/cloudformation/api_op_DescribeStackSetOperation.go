@@ -56,13 +56,20 @@ func (c *Client) DescribeStackSetOperation(ctx context.Context, params *Describe
 }
 
 type DescribeStackSetOperationInput struct {
+
 	// The unique ID of the stack set operation.
+	//
+	// This member is required.
 	OperationId *string
+
 	// The name or the unique stack ID of the stack set for the stack operation.
+	//
+	// This member is required.
 	StackSetName *string
 }
 
 type DescribeStackSetOperationOutput struct {
+
 	// The specified stack set operation.
 	StackSetOperation *types.StackSetOperation
 

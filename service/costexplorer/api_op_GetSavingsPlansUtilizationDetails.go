@@ -62,10 +62,14 @@ func (c *Client) GetSavingsPlansUtilizationDetails(ctx context.Context, params *
 }
 
 type GetSavingsPlansUtilizationDetailsInput struct {
+
 	// The time period that you want the usage and costs for. The Start date must be
 	// within 13 months. The End date must be after the Start date, and before the
 	// current date. Future dates can't be used as an End date.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
 	//
@@ -86,9 +90,11 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *types.Expression
+
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
 	// page size.
@@ -96,15 +102,23 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 }
 
 type GetSavingsPlansUtilizationDetailsOutput struct {
+
 	// Retrieves a single daily or monthly Savings Plans utilization rate and details
 	// for your account.
+	//
+	// This member is required.
 	SavingsPlansUtilizationDetails []*types.SavingsPlansUtilizationDetail
+
 	// The time period that you want the usage and costs for.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
 	// page size.
 	NextToken *string
+
 	// The total Savings Plans utilization, regardless of time period.
 	Total *types.SavingsPlansUtilizationAggregates
 

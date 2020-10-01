@@ -63,6 +63,7 @@ func (c *Client) ListGeoLocations(ctx context.Context, params *ListGeoLocationsI
 // A request to get a list of geographic locations that Amazon Route 53 supports
 // for geolocation resource record sets.
 type ListGeoLocationsInput struct {
+
 	// The code for the continent with which you want to start listing locations that
 	// Amazon Route 53 supports for geolocation. If Route 53 has already returned a
 	// page or more of results, if IsTruncated is true, and if NextContinentCode from
@@ -71,6 +72,7 @@ type ListGeoLocationsInput struct {
 	// list continents. Don't include startcontinentcode when you're listing countries
 	// or countries with their subdivisions.
 	StartContinentCode *string
+
 	// The code for the state of the United States with which you want to start listing
 	// locations that Amazon Route 53 supports for geolocation. If Route 53 has already
 	// returned a page or more of results, if IsTruncated is true, and if
@@ -78,12 +80,14 @@ type ListGeoLocationsInput struct {
 	// startsubdivisioncode to return the next page of results. To list subdivisions
 	// (U.S. states), you must include both startcountrycode and startsubdivisioncode.
 	StartSubdivisionCode *string
+
 	// The code for the country with which you want to start listing locations that
 	// Amazon Route 53 supports for geolocation. If Route 53 has already returned a
 	// page or more of results, if IsTruncated is true, and if NextCountryCode from the
 	// previous response has a value, enter that value in startcountrycode to return
 	// the next page of results.
 	StartCountryCode *string
+
 	// (Optional) The maximum number of geolocations to be included in the response
 	// body for this request. If more than maxitems geolocations remain to be listed,
 	// then the value of the IsTruncated element in the response is true.
@@ -92,28 +96,40 @@ type ListGeoLocationsInput struct {
 
 // A complex type containing the response information for the request.
 type ListGeoLocationsOutput struct {
+
 	// A complex type that contains one GeoLocationDetails element for each location
 	// that Amazon Route 53 supports for geolocation.
+	//
+	// This member is required.
 	GeoLocationDetailsList []*types.GeoLocationDetails
+
 	// If IsTruncated is true, you can make a follow-up request to display more
 	// locations. Enter the value of NextSubdivisionCode in the startsubdivisioncode
 	// parameter in another ListGeoLocations request.
 	NextSubdivisionCode *string
+
 	// A value that indicates whether more locations remain to be listed after the last
 	// location in this response. If so, the value of IsTruncated is true. To get more
 	// values, submit another request and include the values of NextContinentCode,
 	// NextCountryCode, and NextSubdivisionCode in the startcontinentcode,
 	// startcountrycode, and startsubdivisioncode, as applicable.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// If IsTruncated is true, you can make a follow-up request to display more
 	// locations. Enter the value of NextContinentCode in the startcontinentcode
 	// parameter in another ListGeoLocations request.
 	NextContinentCode *string
+
 	// If IsTruncated is true, you can make a follow-up request to display more
 	// locations. Enter the value of NextCountryCode in the startcountrycode parameter
 	// in another ListGeoLocations request.
 	NextCountryCode *string
+
 	// The value that you specified for MaxItems in the request.
+	//
+	// This member is required.
 	MaxItems *string
 
 	// Metadata pertaining to the operation's result.

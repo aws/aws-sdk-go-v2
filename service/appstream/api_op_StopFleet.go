@@ -55,7 +55,10 @@ func (c *Client) StopFleet(ctx context.Context, params *StopFleetInput, optFns .
 }
 
 type StopFleetInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	Name *string
 }
 

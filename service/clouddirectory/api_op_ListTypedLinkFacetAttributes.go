@@ -58,20 +58,30 @@ func (c *Client) ListTypedLinkFacetAttributes(ctx context.Context, params *ListT
 }
 
 type ListTypedLinkFacetAttributesInput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
 	// The unique name of the typed link facet.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
 }
 
 type ListTypedLinkFacetAttributesOutput struct {
+
 	// An ordered set of attributes associate with the typed link.
 	Attributes []*types.TypedLinkAttributeDefinition
+
 	// The pagination token.
 	NextToken *string
 

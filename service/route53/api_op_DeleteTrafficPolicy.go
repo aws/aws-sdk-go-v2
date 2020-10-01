@@ -56,9 +56,15 @@ func (c *Client) DeleteTrafficPolicy(ctx context.Context, params *DeleteTrafficP
 
 // A request to delete a specified traffic policy version.
 type DeleteTrafficPolicyInput struct {
+
 	// The ID of the traffic policy that you want to delete.
+	//
+	// This member is required.
 	Id *string
+
 	// The version number of the traffic policy that you want to delete.
+	//
+	// This member is required.
 	Version *int32
 }
 

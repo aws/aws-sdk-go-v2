@@ -59,6 +59,7 @@ func (c *Client) ValidateTemplate(ctx context.Context, params *ValidateTemplateI
 
 // The input for ValidateTemplate () action.
 type ValidateTemplateInput struct {
+
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more
 	// information, go to Template Anatomy
@@ -66,6 +67,7 @@ type ValidateTemplateInput struct {
 	// in the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or
 	// TemplateBody. If both are passed, only TemplateBody is used.
 	TemplateURL *string
+
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. For more information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
@@ -76,13 +78,17 @@ type ValidateTemplateInput struct {
 
 // The output for ValidateTemplate () action.
 type ValidateTemplateOutput struct {
+
 	// A list of TemplateParameter structures.
 	Parameters []*types.TemplateParameter
+
 	// The list of resources that generated the values in the Capabilities response
 	// element.
 	CapabilitiesReason *string
+
 	// A list of the transforms that are declared in the template.
 	DeclaredTransforms []*string
+
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for
 	// this parameter when you use the CreateStack () or UpdateStack () actions with
@@ -91,6 +97,7 @@ type ValidateTemplateOutput struct {
 	// CloudFormation Templates
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	Capabilities []types.Capability
+
 	// The description found within the template.
 	Description *string
 

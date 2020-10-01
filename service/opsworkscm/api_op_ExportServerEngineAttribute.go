@@ -62,12 +62,19 @@ func (c *Client) ExportServerEngineAttribute(ctx context.Context, params *Export
 }
 
 type ExportServerEngineAttributeInput struct {
+
 	// The name of the export attribute. Currently, the supported export attribute is
 	// Userdata. This exports a user data script that includes parameters and values
 	// provided in the InputAttributes list.
+	//
+	// This member is required.
 	ExportAttributeName *string
+
 	// The name of the server from which you are exporting the attribute.
+	//
+	// This member is required.
 	ServerName *string
+
 	// The list of engine attributes. The list type is EngineAttribute. An
 	// EngineAttribute list item is a pair that includes an attribute name and its
 	// value. For the Userdata ExportAttributeName, the following are supported engine
@@ -93,8 +100,10 @@ type ExportServerEngineAttributeInput struct {
 }
 
 type ExportServerEngineAttributeOutput struct {
+
 	// The requested engine attribute pair with attribute name and value.
 	EngineAttribute *types.EngineAttribute
+
 	// The server name used in the request.
 	ServerName *string
 

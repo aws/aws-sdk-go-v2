@@ -61,19 +61,24 @@ func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKey
 
 // The input for the CreateKeysAndCertificate operation.
 type CreateKeysAndCertificateInput struct {
+
 	// Specifies whether the certificate is active.
 	SetAsActive *bool
 }
 
 // The output of the CreateKeysAndCertificate operation.
 type CreateKeysAndCertificateOutput struct {
+
 	// The ARN of the certificate.
 	CertificateArn *string
+
 	// The generated key pair.
 	KeyPair *types.KeyPair
+
 	// The ID of the certificate. AWS IoT issues a default subject name for the
 	// certificate (for example, AWS IoT Certificate).
 	CertificateId *string
+
 	// The certificate data, in PEM format.
 	CertificatePem *string
 

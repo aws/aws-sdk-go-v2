@@ -57,24 +57,35 @@ func (c *Client) DescribeBudgetPerformanceHistory(ctx context.Context, params *D
 }
 
 type DescribeBudgetPerformanceHistoryInput struct {
+
 	// A string that represents the budget name. The ":" and "\" characters aren't
 	// allowed.
+	//
+	// This member is required.
 	BudgetName *string
+
 	// A generic string.
 	NextToken *string
+
 	// An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	MaxResults *int32
+
 	// Retrieves how often the budget went into an ALARM state for the specified time
 	// period.
 	TimePeriod *types.TimePeriod
+
 	// The account ID of the user. It should be a 12-digit number.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type DescribeBudgetPerformanceHistoryOutput struct {
+
 	// A generic string.
 	NextToken *string
+
 	// The history of how often the budget has gone into an ALARM state. For DAILY
 	// budgets, the history saves the state of the budget for the last 60 days. For
 	// MONTHLY budgets, the history saves the state of the budget for the current month

@@ -123,6 +123,7 @@ func (c *Client) SendRawEmail(ctx context.Context, params *SendRawEmailInput, op
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
 type SendRawEmailInput struct {
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to send for the email address specified in the Source parameter. For
@@ -138,6 +139,7 @@ type SendRawEmailInput struct {
 	// Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	SourceArn *string
+
 	// The raw email message itself. The message has to meet the following criteria:
 	//
 	//
@@ -167,7 +169,10 @@ type SendRawEmailInput struct {
 	//     * Per RFC 5321
 	// (https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6), the maximum length of
 	// each line of text, including the , must not exceed 1,000 characters.
+	//
+	// This member is required.
 	RawMessage *types.RawMessage
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to specify a particular "From" address in the header of the raw email.
@@ -178,9 +183,11 @@ type SendRawEmailInput struct {
 	// SendRawEmail in this guide, or see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	FromArn *string
+
 	// A list of destinations for the message, consisting of To:, CC:, and BCC:
 	// addresses.
 	Destinations []*string
+
 	// The identity's email address. If you do not provide a value for this parameter,
 	// you must specify a "From" address in the raw text of the message. (You can also
 	// specify both.) Amazon SES does not support the SMTPUTF8 extension, as described
@@ -200,10 +207,12 @@ type SendRawEmailInput struct {
 	// any Return-Path header that you might include in the raw text of the
 	// message.</p>
 	Source *string
+
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendRawEmail. Tags correspond to characteristics of the email that
 	// you define, so that you can publish email sending events.
 	Tags []*types.MessageTag
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the ReturnPath parameter. For example,
@@ -219,6 +228,7 @@ type SendRawEmailInput struct {
 	// the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	ReturnPathArn *string
+
 	// The name of the configuration set to use when you send an email using
 	// SendRawEmail.
 	ConfigurationSetName *string
@@ -226,7 +236,10 @@ type SendRawEmailInput struct {
 
 // Represents a unique message ID.
 type SendRawEmailOutput struct {
+
 	// The unique message identifier returned from the SendRawEmail action.
+	//
+	// This member is required.
 	MessageId *string
 
 	// Metadata pertaining to the operation's result.

@@ -58,12 +58,18 @@ func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, 
 }
 
 type UpdateChannelInput struct {
+
 	// Channel latency mode. Default: LOW.
 	LatencyMode types.ChannelLatencyMode
+
 	// ARN of the channel to be updated.
+	//
+	// This member is required.
 	Arn *string
+
 	// Channel name.
 	Name *string
+
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
 	// immediately. Valid values:
@@ -83,6 +89,7 @@ type UpdateChannelInput struct {
 }
 
 type UpdateChannelOutput struct {
+
 	// Object specifying a channel.
 	Channel *types.Channel
 

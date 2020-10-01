@@ -4,35 +4,49 @@ package types
 
 // Metadata for column in the table.
 type ColumnMetadata struct {
+
 	// The name of the column.
+	//
+	// This member is required.
 	Name *string
+
 	// The format of the column.
+	//
+	// This member is required.
 	Format Format
 }
 
 // The data in a particular data cell defined on the screen.
 type DataItem struct {
+
 	// The formatted value of the data. e.g. John Smith.
 	FormattedValue *string
+
 	// The overrideFormat is optional and is specified only if a particular row of data
 	// has a different format for the data than the default format defined on the
 	// screen or the table.
 	OverrideFormat Format
+
 	// The raw value of the data. e.g. jsmith@example.com
 	RawValue *string
 }
 
 // A single row in the ResultSet.
 type ResultRow struct {
+
 	// The ID for a particular row.
 	RowId *string
+
 	// List of all the data cells in a row.
+	//
+	// This member is required.
 	DataItems []*DataItem
 }
 
 // ResultSet contains the results of the request for a single block or list defined
 // on the screen.
 type ResultSet struct {
+
 	// List of headers for all the data cells in the block. The header identifies the
 	// name and default format of the data cell. Data cells appear in the same order in
 	// all rows as defined in the header. The names and formats are not repeated in the
@@ -44,16 +58,24 @@ type ResultSet struct {
 	// item and assigned person as the third item. If a particular task does not have a
 	// due date, that row will still have a blank value in the second element and the
 	// assigned person will still be in the third element.
+	//
+	// This member is required.
 	Headers []*ColumnMetadata
+
 	// List of rows returned by the request. Each row has a row Id and a list of data
 	// cells in that row. The data cells will be present in the same order as they are
 	// defined in the header.
+	//
+	// This member is required.
 	Rows []*ResultRow
 }
 
 // The input variables to the app to be used by the InvokeScreenAutomation action
 // request.
 type VariableValue struct {
+
 	// Raw value of the variable.
+	//
+	// This member is required.
 	RawValue *string
 }

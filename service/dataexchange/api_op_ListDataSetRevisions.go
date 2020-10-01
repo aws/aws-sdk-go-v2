@@ -57,18 +57,25 @@ func (c *Client) ListDataSetRevisions(ctx context.Context, params *ListDataSetRe
 }
 
 type ListDataSetRevisionsInput struct {
+
 	// The maximum number of results returned by a single call.
 	MaxResults *int32
+
 	// The unique identifier for a data set.
+	//
+	// This member is required.
 	DataSetId *string
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string
 }
 
 type ListDataSetRevisionsOutput struct {
+
 	// The asset objects listed by the request.
 	Revisions []*types.RevisionEntry
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string

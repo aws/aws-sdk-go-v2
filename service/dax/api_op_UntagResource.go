@@ -57,14 +57,21 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The name of the DAX resource from which the tags should be removed.
+	//
+	// This member is required.
 	ResourceName *string
+
 	// A list of tag keys. If the DAX cluster has any tags with these keys, then the
 	// tags are removed from the cluster.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 
 type UntagResourceOutput struct {
+
 	// The tag keys that have been removed from the cluster.
 	Tags []*types.Tag
 

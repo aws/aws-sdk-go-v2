@@ -82,12 +82,19 @@ func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransform
 }
 
 type CreateTransformJobInput struct {
+
 	// The name of the model that you want to use for the transform job. ModelName must
 	// be the name of an existing Amazon SageMaker model within an AWS Region in an AWS
 	// account.
+	//
+	// This member is required.
 	ModelName *string
+
 	// Describes the results of the transform job.
+	//
+	// This member is required.
 	TransformOutput *types.TransformOutput
+
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
@@ -98,9 +105,13 @@ type CreateTransformJobInput struct {
 	//
 	//     * CreateTransformJob ()
 	ExperimentConfig *types.ExperimentConfig
+
 	// The name of the transform job. The name must be unique within an AWS Region in
 	// an AWS account.
+	//
+	// This member is required.
 	TransformJobName *string
+
 	// The maximum allowed size of the payload, in MB. A payload is the data portion of
 	// a record (without metadata). The value in MaxPayloadInMB must be greater than,
 	// or equal to, the size of a single record. To estimate the size of a record in
@@ -111,6 +122,7 @@ type CreateTransformJobInput struct {
 	// to 0. This feature works only in supported algorithms. Currently, Amazon
 	// SageMaker built-in algorithms do not support HTTP chunked encoding.
 	MaxPayloadInMB *int32
+
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
 	// request. A record is a single unit of input data that inference can be made on.
 	// For example, a single line in a CSV file is a record. To enable the batch
@@ -120,14 +132,19 @@ type CreateTransformJobInput struct {
 	// mini-batch as can fit within the MaxPayloadInMB limit, set BatchStrategy to
 	// MultiRecord and SplitType to Line.
 	BatchStrategy types.BatchStrategy
+
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
+
 	// Describes the resources, including ML instance types and ML instance count, to
 	// use for the transform job.
+	//
+	// This member is required.
 	TransformResources *types.TransformResources
+
 	// The data structure used to specify the data to be used for inference in a batch
 	// transform job and to associate the data that is relevant to the prediction
 	// results in the output. The input filter provided allows you to exclude input
@@ -137,14 +154,20 @@ type CreateTransformJobInput struct {
 	// Prediction Results with their Corresponding Input Records
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
 	DataProcessing *types.DataProcessing
+
 	// The environment variables to set in the Docker container. We support up to 16
 	// key and values entries in the map.
 	Environment map[string]*string
+
 	// Configures the timeout and maximum number of retries for processing a transform
 	// job invocation.
 	ModelClientConfig *types.ModelClientConfig
+
 	// Describes the input source and the way the transform job consumes it.
+	//
+	// This member is required.
 	TransformInput *types.TransformInput
+
 	// The maximum number of parallel requests that can be sent to each instance in a
 	// transform job. If MaxConcurrentTransforms is set to 0 or left unset, Amazon
 	// SageMaker checks the optional execution-parameters to determine the settings for
@@ -158,7 +181,10 @@ type CreateTransformJobInput struct {
 }
 
 type CreateTransformJobOutput struct {
+
 	// The Amazon Resource Name (ARN) of the transform job.
+	//
+	// This member is required.
 	TransformJobArn *string
 
 	// Metadata pertaining to the operation's result.

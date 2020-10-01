@@ -56,11 +56,15 @@ func (c *Client) DeleteDBProxy(ctx context.Context, params *DeleteDBProxyInput, 
 }
 
 type DeleteDBProxyInput struct {
+
 	// The name of the DB proxy to delete.
+	//
+	// This member is required.
 	DBProxyName *string
 }
 
 type DeleteDBProxyOutput struct {
+
 	// The data structure representing the details of the DB proxy that you delete.
 	DBProxy *types.DBProxy
 

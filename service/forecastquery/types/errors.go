@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The value is invalid or is too long.
@@ -24,12 +23,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The token is not valid. Tokens expire after 24 hours.
 type InvalidNextTokenException struct {
@@ -47,12 +40,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit on the number of requests per second has been exceeded.
 type LimitExceededException struct {
@@ -70,12 +57,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource is in use.
 type ResourceInUseException struct {
@@ -93,12 +74,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find that resource. Check the information that you've provided and try
 // again.
@@ -117,9 +92,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -62,7 +62,10 @@ func (c *Client) DeleteStack(ctx context.Context, params *DeleteStackInput, optF
 }
 
 type DeleteStackInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 

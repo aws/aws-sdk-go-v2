@@ -4,97 +4,135 @@ package types
 
 // Details of an EC2 AMI.
 type Ami struct {
+
 	// The description of the EC2 AMI.
 	Description *string
+
 	// The AMI ID of the EC2 AMI.
 	Image *string
+
 	// Image state shows the image status and the reason for that status.
 	State *ImageState
+
 	// The name of the EC2 AMI.
 	Name *string
+
 	// The AWS Region of the EC2 AMI.
 	Region *string
 }
 
 // Define and configure the output AMIs of the pipeline.
 type AmiDistributionConfiguration struct {
+
 	// The tags to apply to AMIs distributed to this Region.
 	AmiTags map[string]*string
+
 	// The description of the distribution configuration.
 	Description *string
+
 	// The name of the distribution configuration.
 	Name *string
+
 	// Launch permissions can be used to configure which AWS accounts can use the AMI
 	// to launch instances.
 	LaunchPermission *LaunchPermissionConfiguration
+
 	// The KMS key identifier used to encrypt the distributed image.
 	KmsKeyId *string
 }
 
 // A detailed view of a component.
 type Component struct {
+
 	// The owner of the component.
 	Owner *string
+
 	// The change description of the component.
 	ChangeDescription *string
+
 	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
+
 	// The tags associated with the component.
 	Tags map[string]*string
+
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
 	Type ComponentType
+
 	// The platform of the component.
 	Platform Platform
+
 	// The version of the component.
 	Version *string
+
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
 	SupportedOsVersions []*string
+
 	// The date that the component was created.
 	DateCreated *string
+
 	// The description of the component.
 	Description *string
+
 	// The KMS key identifier used to encrypt the component.
 	KmsKeyId *string
+
 	// The name of the component.
 	Name *string
+
 	// The encryption status of the component.
 	Encrypted *bool
+
 	// The data of the component.
 	Data *string
 }
 
 // Configuration details of the component.
 type ComponentConfiguration struct {
+
 	// The Amazon Resource Name (ARN) of the component.
+	//
+	// This member is required.
 	ComponentArn *string
 }
 
 // A high-level summary of a component.
 type ComponentSummary struct {
+
 	// The name of the component.
 	Name *string
+
 	// The description of the component.
 	Description *string
+
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
 	Type ComponentType
+
 	// The tags associated with the component.
 	Tags map[string]*string
+
 	// The version of the component.
 	Version *string
+
 	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
+
 	// The platform of the component.
 	Platform Platform
+
 	// The owner of the component.
 	Owner *string
+
 	// The change description of the component.
 	ChangeDescription *string
+
 	// The date that the component was created.
 	DateCreated *string
+
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
@@ -103,24 +141,33 @@ type ComponentSummary struct {
 
 // A high-level overview of a component semantic version.
 type ComponentVersion struct {
+
 	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
+
 	// The owner of the component.
 	Owner *string
+
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
 	SupportedOsVersions []*string
+
 	// The semantic version of the component.
 	Version *string
+
 	// The date that the component was created.
 	DateCreated *string
+
 	// The description of the component.
 	Description *string
+
 	// The name of the component.
 	Name *string
+
 	// The platform of the component.
 	Platform Platform
+
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
 	Type ComponentType
@@ -128,65 +175,93 @@ type ComponentVersion struct {
 
 // Defines the settings for a specific Region.
 type Distribution struct {
+
 	// The specific AMI settings (for example, launch permissions, AMI tags).
 	AmiDistributionConfiguration *AmiDistributionConfiguration
+
 	// The License Manager Configuration to associate with the AMI in the specified
 	// Region.
 	LicenseConfigurationArns []*string
+
 	// The target Region.
+	//
+	// This member is required.
 	Region *string
 }
 
 // A distribution configuration.
 type DistributionConfiguration struct {
+
 	// The description of the distribution configuration.
 	Description *string
+
 	// The maximum duration in minutes for this distribution configuration.
+	//
+	// This member is required.
 	TimeoutMinutes *int32
+
 	// The name of the distribution configuration.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the distribution configuration.
 	Arn *string
+
 	// The date on which this distribution configuration was last updated.
 	DateUpdated *string
+
 	// The tags of the distribution configuration.
 	Tags map[string]*string
+
 	// The distributions of the distribution configuration.
 	Distributions []*Distribution
+
 	// The date on which this distribution configuration was created.
 	DateCreated *string
 }
 
 // A high-level overview of a distribution configuration.
 type DistributionConfigurationSummary struct {
+
 	// The Amazon Resource Name (ARN) of the distribution configuration.
 	Arn *string
+
 	// The date on which the distribution configuration was updated.
 	DateUpdated *string
+
 	// The date on which the distribution configuration was created.
 	DateCreated *string
+
 	// The description of the distribution configuration.
 	Description *string
+
 	// The name of the distribution configuration.
 	Name *string
+
 	// The tags associated with the distribution configuration.
 	Tags map[string]*string
 }
 
 // Amazon EBS-specific block device mapping specifications.
 type EbsInstanceBlockDeviceSpecification struct {
+
 	// Use to configure delete on termination of the associated device.
 	DeleteOnTermination *bool
+
 	// Use to override the device's volume type.
 	VolumeType EbsVolumeType
+
 	// Use to configure the KMS key to use when encrypting the device.
 	KmsKeyId *string
+
 	// Use to configure device IOPS.
 	Iops *int32
+
 	// The snapshot that defines the device contents.
 	SnapshotId *string
+
 	// Use to configure device encryption.
 	Encrypted *bool
+
 	// Use to override the device's volume size.
 	VolumeSize *int32
 }
@@ -195,87 +270,121 @@ type EbsInstanceBlockDeviceSpecification struct {
 // results from a list operation. Filters can be used to match a set of resources
 // by specific criteria, such as tags, attributes, or IDs.
 type Filter struct {
+
 	// The name of the filter. Filter names are case-sensitive.
 	Name *string
+
 	// The filter values. Filter values are case-sensitive.
 	Values []*string
 }
 
 // An image build version.
 type Image struct {
+
 	// The distribution configuration used when creating this image.
 	DistributionConfiguration *DistributionConfiguration
+
 	// The name of the image pipeline that created this image.
 	SourcePipelineName *string
+
 	// The output resources produced when creating this image.
 	OutputResources *OutputResources
+
 	// The Amazon Resource Name (ARN) of the image pipeline that created this image.
 	SourcePipelineArn *string
+
 	// The platform of the image.
 	Platform Platform
+
 	// The tags of the image.
 	Tags map[string]*string
+
 	// The semantic version of the image.
 	Version *string
+
 	// The image tests configuration used when creating this image.
 	ImageTestsConfiguration *ImageTestsConfiguration
+
 	// The infrastructure used when creating this image.
 	InfrastructureConfiguration *InfrastructureConfiguration
+
 	// The image recipe used when creating the image.
 	ImageRecipe *ImageRecipe
+
 	// The date on which this image was created.
 	DateCreated *string
+
 	// The operating system version of the instance. For example, Amazon Linux 2,
 	// Ubuntu 18, or Microsoft Windows Server 2019.
 	OsVersion *string
+
 	// The state of the image.
 	State *ImageState
+
 	// The name of the image.
 	Name *string
+
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the image.
 	Arn *string
 }
 
 // Details of an image pipeline.
 type ImagePipeline struct {
+
 	// The Amazon Resource Name (ARN) of the image pipeline.
 	Arn *string
+
 	// The status of the image pipeline.
 	Status PipelineStatus
+
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
+
 	// The tags of this image pipeline.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the distribution configuration associated with
 	// this image pipeline.
 	DistributionConfigurationArn *string
+
 	// The date on which this image pipeline was created.
 	DateCreated *string
+
 	// The schedule of the image pipeline.
 	Schedule *Schedule
+
 	// The image tests configuration of the image pipeline.
 	ImageTestsConfiguration *ImageTestsConfiguration
+
 	// The platform of the image pipeline.
 	Platform Platform
+
 	// The date on which this image pipeline was last updated.
 	DateUpdated *string
+
 	// The name of the image pipeline.
 	Name *string
+
 	// The date on which this image pipeline will next be run.
 	DateNextRun *string
+
 	// The description of the image pipeline.
 	Description *string
+
 	// The date on which this image pipeline was last run.
 	DateLastRun *string
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration associated
 	// with this image pipeline.
 	InfrastructureConfigurationArn *string
+
 	// The Amazon Resource Name (ARN) of the image recipe associated with this image
 	// pipeline.
 	ImageRecipeArn *string
@@ -283,171 +392,237 @@ type ImagePipeline struct {
 
 // An image recipe.
 type ImageRecipe struct {
+
 	// The owner of the image recipe.
 	Owner *string
+
 	// The date on which this image recipe was created.
 	DateCreated *string
+
 	// The block device mappings to apply when creating images from this recipe.
 	BlockDeviceMappings []*InstanceBlockDeviceMapping
+
 	// The working directory to be used during build and test workflows.
 	WorkingDirectory *string
+
 	// The components of the image recipe.
 	Components []*ComponentConfiguration
+
 	// The description of the image recipe.
 	Description *string
+
 	// The name of the image recipe.
 	Name *string
+
 	// The parent image of the image recipe.
 	ParentImage *string
+
 	// The tags of the image recipe.
 	Tags map[string]*string
+
 	// The version of the image recipe.
 	Version *string
+
 	// The Amazon Resource Name (ARN) of the image recipe.
 	Arn *string
+
 	// The platform of the image recipe.
 	Platform Platform
 }
 
 // A summary of an image recipe.
 type ImageRecipeSummary struct {
+
 	// The platform of the image recipe.
 	Platform Platform
+
 	// The tags of the image recipe.
 	Tags map[string]*string
+
 	// The name of the image recipe.
 	Name *string
+
 	// The parent image of the image recipe.
 	ParentImage *string
+
 	// The owner of the image recipe.
 	Owner *string
+
 	// The Amazon Resource Name (ARN) of the image recipe.
 	Arn *string
+
 	// The date on which this image recipe was created.
 	DateCreated *string
 }
 
 // Image state shows the image status and the reason for that status.
 type ImageState struct {
+
 	// The status of the image.
 	Status ImageStatus
+
 	// The reason for the image's status.
 	Reason *string
 }
 
 // An image summary.
 type ImageSummary struct {
+
 	// The date on which this image was created.
 	DateCreated *string
+
 	// The output resources produced when creating this image.
 	OutputResources *OutputResources
+
 	// The tags of the image.
 	Tags map[string]*string
+
 	// The owner of the image.
 	Owner *string
+
 	// The operating system version of the instance. For example, Amazon Linux 2,
 	// Ubuntu 18, or Microsoft Windows Server 2019.
 	OsVersion *string
+
 	// The version of the image.
 	Version *string
+
 	// The platform of the image.
 	Platform Platform
+
 	// The Amazon Resource Name (ARN) of the image.
 	Arn *string
+
 	// The name of the image.
 	Name *string
+
 	// The state of the image.
 	State *ImageState
 }
 
 // Image tests configuration.
 type ImageTestsConfiguration struct {
+
 	// The maximum time in minutes that tests are permitted to run.
 	TimeoutMinutes *int32
+
 	// Defines if tests should be executed when building this image.
 	ImageTestsEnabled *bool
 }
 
 // An image semantic version.
 type ImageVersion struct {
+
 	// The platform of the image semantic version.
 	Platform Platform
+
 	// The operating system version of the instance. For example, Amazon Linux 2,
 	// Ubuntu 18, or Microsoft Windows Server 2019.
 	OsVersion *string
+
 	// The name of the image semantic version.
 	Name *string
+
 	// The semantic version of the image semantic version.
 	Version *string
+
 	// The Amazon Resource Name (ARN) of the image semantic version.
 	Arn *string
+
 	// The owner of the image semantic version.
 	Owner *string
+
 	// The date at which this image semantic version was created.
 	DateCreated *string
 }
 
 // Details of the infrastructure configuration.
 type InfrastructureConfiguration struct {
+
 	// The description of the infrastructure configuration.
 	Description *string
+
 	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []*string
+
 	// The tags of the infrastructure configuration.
 	Tags map[string]*string
+
 	// The date on which the infrastructure configuration was last updated.
 	DateUpdated *string
+
 	// The terminate instance on failure configuration of the infrastructure
 	// configuration.
 	TerminateInstanceOnFailure *bool
+
 	// The subnet ID of the infrastructure configuration.
 	SubnetId *string
+
 	// The instance profile of the infrastructure configuration.
 	InstanceProfileName *string
+
 	// The EC2 key pair of the infrastructure configuration.
 	KeyPair *string
+
 	// The name of the infrastructure configuration.
 	Name *string
+
 	// The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.
 	SnsTopicArn *string
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration.
 	Arn *string
+
 	// The tags attached to the resource created by Image Builder.
 	ResourceTags map[string]*string
+
 	// The date on which the infrastructure configuration was created.
 	DateCreated *string
+
 	// The logging configuration of the infrastructure configuration.
 	Logging *Logging
+
 	// The instance types of the infrastructure configuration.
 	InstanceTypes []*string
 }
 
 // The infrastructure used when building EC2 AMIs.
 type InfrastructureConfigurationSummary struct {
+
 	// The description of the infrastructure configuration.
 	Description *string
+
 	// The tags of the infrastructure configuration.
 	Tags map[string]*string
+
 	// The date on which the infrastructure configuration was last updated.
 	DateUpdated *string
+
 	// The name of the infrastructure configuration.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration.
 	Arn *string
+
 	// The tags attached to the image created by Image Builder.
 	ResourceTags map[string]*string
+
 	// The date on which the infrastructure configuration was created.
 	DateCreated *string
 }
 
 // Defines block device mappings for the instance used to configure your image.
 type InstanceBlockDeviceMapping struct {
+
 	// Use to remove a mapping from the parent image.
 	NoDevice *string
+
 	// The device to which these mappings apply.
 	DeviceName *string
+
 	// Use to manage Amazon EBS-specific configuration for this mapping.
 	Ebs *EbsInstanceBlockDeviceSpecification
+
 	// Use to manage instance ephemeral devices.
 	VirtualName *string
 }
@@ -460,28 +635,34 @@ type InstanceBlockDeviceMapping struct {
 // all. See the examples for making an AMI public at EC2 ModifyImageAttribute
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html).
 type LaunchPermissionConfiguration struct {
+
 	// The name of the group.
 	UserGroups []*string
+
 	// The AWS account ID.
 	UserIds []*string
 }
 
 // Logging configuration defines where Image Builder uploads your logs.
 type Logging struct {
+
 	// The Amazon S3 logging configuration.
 	S3Logs *S3Logs
 }
 
 // The resources produced by this image.
 type OutputResources struct {
+
 	// The EC2 AMIs created by this image.
 	Amis []*Ami
 }
 
 // Amazon S3 logging configuration.
 type S3Logs struct {
+
 	// The Amazon S3 path in which to store the logs.
 	S3KeyPrefix *string
+
 	// The Amazon S3 bucket in which to store the logs.
 	S3BucketName *string
 }
@@ -489,9 +670,11 @@ type S3Logs struct {
 // A schedule configures how often and when a pipeline will automatically create a
 // new image.
 type Schedule struct {
+
 	// The expression determines how often EC2 Image Builder evaluates your
 	// pipelineExecutionStartCondition.
 	ScheduleExpression *string
+
 	// The condition configures when the pipeline should trigger a new image build.
 	// When the pipelineExecutionStartCondition is set to
 	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, EC2 Image Builder will build

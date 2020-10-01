@@ -56,12 +56,17 @@ func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadD
 
 //
 type DownloadDBLogFilePortionInput struct {
+
 	// The pagination token provided in the previous request or "0". If the Marker
 	// parameter is specified the response includes only records beyond the marker
 	// until the end of the file or up to NumberOfLines.
 	Marker *string
+
 	// The name of the log file to be downloaded.
+	//
+	// This member is required.
 	LogFileName *string
+
 	// The number of lines to download. If the number of lines specified results in a
 	// file over 1 MB in size, the file is truncated at 1 MB in size. If the
 	// NumberOfLines parameter is specified, then the block of lines returned can be
@@ -86,20 +91,26 @@ type DownloadDBLogFilePortionInput struct {
 	// response as the Marker value for the next request, continuing until the
 	// AdditionalDataPending response element returns false.
 	NumberOfLines *int32
+
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
 	//
 	//     * Must match the identifier of an existing
 	// DBInstance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
 }
 
 // This data type is used as a response element to DownloadDBLogFilePortion.
 type DownloadDBLogFilePortionOutput struct {
+
 	// A pagination token that can be used in a later DownloadDBLogFilePortion request.
 	Marker *string
+
 	// Entries from the specified log file.
 	LogFileData *string
+
 	// Boolean value that if true, indicates there is more data to be downloaded.
 	AdditionalDataPending *bool
 

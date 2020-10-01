@@ -62,19 +62,28 @@ func (c *Client) BatchDeleteImage(ctx context.Context, params *BatchDeleteImageI
 // Deletes specified images within a specified repository. Images are specified
 // with either the imageTag or imageDigest.
 type BatchDeleteImageInput struct {
+
 	// A list of image ID references that correspond to images to delete. The format of
 	// the imageIds reference is imageTag=tag or imageDigest=digest.
+	//
+	// This member is required.
 	ImageIds []*types.ImageIdentifier
+
 	// The repository that contains the image to delete.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The AWS account ID associated with the registry that contains the image to
 	// delete. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string
 }
 
 type BatchDeleteImageOutput struct {
+
 	// The image IDs of the deleted images.
 	ImageIds []*types.ImageIdentifier
+
 	// Any failures associated with the call.
 	Failures []*types.ImageFailure
 

@@ -56,11 +56,15 @@ func (c *Client) GetOTAUpdate(ctx context.Context, params *GetOTAUpdateInput, op
 }
 
 type GetOTAUpdateInput struct {
+
 	// The OTA update ID.
+	//
+	// This member is required.
 	OtaUpdateId *string
 }
 
 type GetOTAUpdateOutput struct {
+
 	// The OTA update info.
 	OtaUpdateInfo *types.OTAUpdateInfo
 

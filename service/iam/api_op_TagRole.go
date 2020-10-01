@@ -91,13 +91,19 @@ func (c *Client) TagRole(ctx context.Context, params *TagRoleInput, optFns ...fu
 }
 
 type TagRoleInput struct {
+
 	// The list of tags that you want to attach to the role. Each tag consists of a key
 	// name and an associated value. You can specify this with a JSON string.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The name of the role that you want to add tags to. This parameter accepts
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters that consist of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
 }
 

@@ -113,12 +113,16 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 }
 
 type PostContentInput struct {
+
 	// User input in PCM or Opus audio format or text format as described in the
 	// Content-Type HTTP header. You can stream audio data to Amazon Lex or you can
 	// create a local buffer that captures all of the audio data before sending. In
 	// general, you get better performance if you stream audio data rather than
 	// buffering the data locally.
+	//
+	// This member is required.
 	InputStream io.Reader
+
 	// You pass this value as the x-amz-lex-session-attributes HTTP header.
 	// Application-specific information passed between Amazon Lex and a client
 	// application. The value must be a JSON serialized and base64 encoded map with
@@ -128,6 +132,7 @@ type PostContentInput struct {
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
+
 	// You pass this value as the x-amz-lex-request-attributes HTTP header.
 	// Request-specific information passed between Amazon Lex and a client application.
 	// The value must be a JSON serialized and base64 encoded map with string keys and
@@ -138,6 +143,7 @@ type PostContentInput struct {
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
 	// This value conforms to the media type: application/json
 	RequestAttributes *string
+
 	// You pass this value as the Accept HTTP header. The message Amazon Lex returns in
 	// the response can be either text or speech based on the Accept HTTP header value
 	// in the request.
@@ -168,6 +174,7 @@ type PostContentInput struct {
 	//
 	//         * audio/* (defaults to mpeg)
 	Accept *string
+
 	// You pass this value as the Content-Type HTTP header. Indicates the audio format
 	// or text. The header value must start with one of the following prefixes:
 	//
@@ -193,7 +200,10 @@ type PostContentInput struct {
 	//
 	//         * text/plain;
 	// charset=utf-8
+	//
+	// This member is required.
 	ContentType *string
+
 	// The ID of the client application user. Amazon Lex uses this to identify a user's
 	// conversation with your bot. At runtime, each request must contain the userID
 	// field. To decide the user ID to use for your application, consider the following
@@ -216,14 +226,23 @@ type PostContentInput struct {
 	// BETA versions of the same bot. If you anticipate that a user will need to have
 	// conversation with two different versions, for example, while testing, include
 	// the bot alias in the user ID to separate the two conversations.
+	//
+	// This member is required.
 	UserId *string
+
 	// Name of the Amazon Lex bot.
+	//
+	// This member is required.
 	BotName *string
+
 	// Alias of the Amazon Lex bot.
+	//
+	// This member is required.
 	BotAlias *string
 }
 
 type PostContentOutput struct {
+
 	// The message to convey to the user. The message can come from the bot's
 	// configuration or from a Lambda function. If the intent is not configured with a
 	// Lambda function, or if the Lambda function returned Delegate as the
@@ -238,6 +257,7 @@ type PostContentOutput struct {
 	// msg-prompts-formats (). If the Lambda function returns a message, Amazon Lex
 	// passes it to the client in its response.
 	Message *string
+
 	// Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the
 	// user input during the conversation. The field is base-64 encoded. Amazon Lex
 	// creates a resolution list containing likely values for a slot. The value that it
@@ -249,6 +269,7 @@ type PostContentOutput struct {
 	// If you don't specify a valueSelectionStrategy, the default is ORIGINAL_VALUE.
 	// This value conforms to the media type: application/json
 	Slots *string
+
 	// The prompt (or statement) to convey to the user. This is based on the bot
 	// configuration and context. For example, if Amazon Lex did not understand the
 	// user intent, it sends the clarificationPrompt configured for the bot. If the
@@ -257,6 +278,7 @@ type PostContentOutput struct {
 	// successfully fulfilled the intent, and sent a message to convey to the user.
 	// Then Amazon Lex sends that message in the response.
 	AudioStream io.ReadCloser
+
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
 	// the following values as dialogState. The client can optionally use this
 	// information to customize the user interface.
@@ -294,14 +316,17 @@ type PostContentOutput struct {
 	// the service (you can configure how many times Amazon Lex can prompt a user for
 	// specific information), or if the Lambda function fails to fulfill the intent.
 	DialogState types.DialogState
+
 	// Current user intent that Amazon Lex is aware of.
 	IntentName *string
+
 	// The text used to process the request. If the input was an audio stream, the
 	// inputTranscript field contains the text extracted from the audio stream. This is
 	// the text that is actually processed to recognize intents and slot values. You
 	// can use this information to determine if Amazon Lex is correctly processing the
 	// audio that you send.
 	InputTranscript *string
+
 	// The format of the response message. One of the following values:
 	//
 	//     *
@@ -317,17 +342,22 @@ type PostContentOutput struct {
 	// escaped JSON object containing one or more messages from the groups that
 	// messages were assigned to when the intent was created.
 	MessageFormat types.MessageFormatType
+
 	// Content type as specified in the Accept HTTP header in the request.
 	ContentType *string
+
 	// The unique identifier for the session.
 	SessionId *string
+
 	// Map of key/value pairs representing the session-specific context information.
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
+
 	// The sentiment expressed in and utterance. When the bot is configured to send
 	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
 	// result of the analysis.
 	SentimentResponse *string
+
 	// If the dialogState value is ElicitSlot, returns the name of the slot for which
 	// Amazon Lex is eliciting a value.
 	SlotToElicit *string

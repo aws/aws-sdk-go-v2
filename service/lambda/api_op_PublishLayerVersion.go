@@ -60,16 +60,25 @@ func (c *Client) PublishLayerVersion(ctx context.Context, params *PublishLayerVe
 }
 
 type PublishLayerVersionInput struct {
+
 	// The function layer archive.
+	//
+	// This member is required.
 	Content *types.LayerVersionContentInput
+
 	// The description of the version.
 	Description *string
+
 	// The name or Amazon Resource Name (ARN) of the layer.
+	//
+	// This member is required.
 	LayerName *string
+
 	// A list of compatible function runtimes
 	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Used for
 	// filtering with ListLayers () and ListLayerVersions ().
 	CompatibleRuntimes []types.Runtime
+
 	// The layer's software license. It can be any of the following:
 	//
 	//     * An SPDX
@@ -84,21 +93,29 @@ type PublishLayerVersionInput struct {
 }
 
 type PublishLayerVersionOutput struct {
+
 	// The description of the version.
 	Description *string
+
 	// The ARN of the layer version.
 	LayerVersionArn *string
+
 	// The version number.
 	Version *int64
+
 	// The date that the layer version was created, in ISO-8601 format
 	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
 	CreatedDate *string
+
 	// The ARN of the layer.
 	LayerArn *string
+
 	// Details about the layer version.
 	Content *types.LayerVersionContentOutput
+
 	// The layer's compatible runtimes.
 	CompatibleRuntimes []types.Runtime
+
 	// The layer's software license.
 	LicenseInfo *string
 

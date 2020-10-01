@@ -56,12 +56,14 @@ func (c *Client) ListFlows(ctx context.Context, params *ListFlowsInput, optFns .
 }
 
 type ListFlowsInput struct {
+
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListFlows request with MaxResults set at 5. The service
 	// returns the first batch of results (up to 5) and a NextToken value. To see the
 	// next batch of results, you can submit the ListFlows request a second time and
 	// specify the NextToken value.
 	NextToken *string
+
 	// The maximum number of results to return per API request. For example, you submit
 	// a ListFlows request with MaxResults set at 5. Although 20 items match your
 	// request, the service returns no more than the first 5 items. (The service also
@@ -73,8 +75,10 @@ type ListFlowsInput struct {
 }
 
 type ListFlowsOutput struct {
+
 	// A list of flow summaries.
 	Flows []*types.ListedFlow
+
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListFlows request with MaxResults set at 5. The service
 	// returns the first batch of results (up to 5) and a NextToken value. To see the

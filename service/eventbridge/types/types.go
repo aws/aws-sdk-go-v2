@@ -10,17 +10,22 @@ import (
 // whether a public IP address is to be used. This structure is relevant only for
 // ECS tasks that use the awsvpc network mode.
 type AwsVpcConfiguration struct {
+
 	// Specifies whether the task's elastic network interface receives a public IP
 	// address. You can specify ENABLED only when LaunchType in EcsParameters is set to
 	// FARGATE.
 	AssignPublicIp AssignPublicIp
+
 	// Specifies the security groups associated with the task. These security groups
 	// must all be in the same VPC. You can specify as many as five security groups. If
 	// you do not specify a security group, the default security group for the VPC is
 	// used.
 	SecurityGroups []*string
+
 	// Specifies the subnets associated with the task. These subnets must all be in the
 	// same VPC. You can specify as many as 16 subnets.
+	//
+	// This member is required.
 	Subnets []*string
 }
 
@@ -29,6 +34,7 @@ type AwsVpcConfiguration struct {
 // job, it becomes an array job. This parameter is used only if the target is an
 // AWS Batch job.
 type BatchArrayProperties struct {
+
 	// The size of the array, if this is an array batch job. Valid values are integers
 	// between 2 and 10,000.
 	Size *int32
@@ -36,17 +42,25 @@ type BatchArrayProperties struct {
 
 // The custom parameters to be used when the target is an AWS Batch job.
 type BatchParameters struct {
+
 	// The array properties for the submitted job, such as the size of the array. The
 	// array size can be between 2 and 10,000. If you specify array properties for a
 	// job, it becomes an array job. This parameter is used only if the target is an
 	// AWS Batch job.
 	ArrayProperties *BatchArrayProperties
+
 	// The ARN or name of the job definition to use if the event target is an AWS Batch
 	// job. This job definition must already exist.
+	//
+	// This member is required.
 	JobDefinition *string
+
 	// The name to use for this execution of the job, if the target is an AWS Batch
 	// job.
+	//
+	// This member is required.
 	JobName *string
+
 	// The retry strategy to use for failed jobs, if the target is an AWS Batch job.
 	// The retry strategy is the number of times to retry the failed job execution.
 	// Valid values are 1–10. When you specify a retry strategy here, it overrides the
@@ -58,6 +72,7 @@ type BatchParameters struct {
 // you specify a retry strategy here, it overrides the retry strategy defined in
 // the job definition.
 type BatchRetryStrategy struct {
+
 	// The number of times to attempt to retry, if the job fails. Valid values are
 	// 1–10.
 	Attempts *int32
@@ -70,23 +85,35 @@ type BatchRetryStrategy struct {
 // organization. Following is an example value for Condition: '{"Type" :
 // "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}'
 type Condition struct {
+
 	// Specifies the type of condition. Currently the only supported value is
 	// StringEquals.
+	//
+	// This member is required.
 	Type *string
+
 	// Specifies the value for the key. Currently, this must be the ID of the
 	// organization.
+	//
+	// This member is required.
 	Value *string
+
 	// Specifies the key for the condition. Currently the only supported key is
 	// aws:PrincipalOrgID.
+	//
+	// This member is required.
 	Key *string
 }
 
 // The custom parameters to be used when the target is an Amazon ECS task.
 type EcsParameters struct {
+
 	// Specifies an ECS task group for the task. The maximum length is 255 characters.
 	Group *string
+
 	// The number of tasks to create based on TaskDefinition. The default is 1.
 	TaskCount *int32
+
 	// Specifies the platform version for the task. Specify only the numeric portion of
 	// the platform version, such as 1.1.0. This structure is used only if LaunchType
 	// is FARGATE. For more information about valid platform versions, see AWS Fargate
@@ -94,6 +121,7 @@ type EcsParameters struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
+
 	// Use this structure if the ECS task uses the awsvpc network mode. This structure
 	// specifies the VPC subnets and security groups associated with the task, and
 	// whether a public IP address is to be used. This structure is required if
@@ -101,8 +129,12 @@ type EcsParameters struct {
 	// you specify NetworkConfiguration when the target ECS task does not use the
 	// awsvpc network mode, the task fails.
 	NetworkConfiguration *NetworkConfiguration
+
 	// The ARN of the task definition to use if the event target is an Amazon ECS task.
+	//
+	// This member is required.
 	TaskDefinitionArn *string
+
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where AWS
@@ -120,10 +152,13 @@ type EcsParameters struct {
 // event source created by an SaaS partner. These events come from the partners
 // services or applications.
 type EventBus struct {
+
 	// The ARN of the event bus.
 	Arn *string
+
 	// The name of the event bus.
 	Name *string
+
 	// The permissions policy of the event bus, describing which other AWS accounts can
 	// write events to this event bus.
 	Policy *string
@@ -133,21 +168,27 @@ type EventBus struct {
 // partner event bus that matches this event source, that AWS account can receive
 // events from the partner's applications or services.
 type EventSource struct {
+
 	// The name of the event source.
 	Name *string
+
 	// The state of the event source. If it is ACTIVE, you have already created a
 	// matching event bus for this event source, and that event bus is active. If it is
 	// PENDING, either you haven't yet created a matching event bus, or that event bus
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State EventSourceState
+
 	// The name of the partner that created the event source.
 	CreatedBy *string
+
 	// The date and time the event source was created.
 	CreationTime *time.Time
+
 	// The date and time that the event source will expire, if the AWS account doesn't
 	// create a matching event bus for it.
 	ExpirationTime *time.Time
+
 	// The ARN of the event source.
 	Arn *string
 }
@@ -155,12 +196,15 @@ type EventSource struct {
 // These are custom parameter to be used when the target is an API Gateway REST
 // APIs.
 type HttpParameters struct {
+
 	// The headers that need to be sent as part of request invoking the API Gateway
 	// REST API.
 	HeaderParameters map[string]*string
+
 	// The path parameter values to be used to populate API Gateway REST API path
 	// wildcards ("*").
 	PathParameterValues []*string
+
 	// The query string keys/values that need to be sent as part of request invoking
 	// the API Gateway REST API.
 	QueryStringParameters map[string]*string
@@ -169,6 +213,7 @@ type HttpParameters struct {
 // Contains the parameters needed for you to provide custom input to a target based
 // on one or more pieces of data extracted from the event.
 type InputTransformer struct {
+
 	// Input template where you specify placeholders that will be filled with the
 	// values of the keys from InputPathsMap to customize the data sent to the target.
 	// Enclose each InputPathsMaps value in brackets: <value> The InputTemplate must be
@@ -187,7 +232,10 @@ type InputTransformer struct {
 	// <code>"InputPathsMap": {"instance": "$.detail.instance","status":
 	// "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "<instance> is in
 	// state \"<status>\""</code> </p> <p> <code>}</code> </p>
+	//
+	// This member is required.
 	InputTemplate *string
+
 	// Map of JSON paths to be extracted from the event. You can then insert these in
 	// the template in InputTemplate to produce the output you want to be sent to the
 	// target. InputPathsMap is an array key-value pairs, where each value is a valid
@@ -201,15 +249,19 @@ type InputTransformer struct {
 // the shard to which the event goes. If you do not include this parameter, the
 // default is to use the eventId as the partition key.
 type KinesisParameters struct {
+
 	// The JSON path to be extracted from the event and used as the partition key. For
 	// more information, see Amazon Kinesis Streams Key Concepts
 	// (https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key)
 	// in the Amazon Kinesis Streams Developer Guide.
+	//
+	// This member is required.
 	PartitionKeyPath *string
 }
 
 // This structure specifies the network configuration for an ECS task.
 type NetworkConfiguration struct {
+
 	// Use this structure to specify the VPC subnets and security groups for the task,
 	// and whether a public IP address is to be used. This structure is relevant only
 	// for ECS tasks that use the awsvpc network mode.
@@ -220,21 +272,27 @@ type NetworkConfiguration struct {
 // partner event bus that matches this event source, that AWS account can receive
 // events from the partner's applications or services.
 type PartnerEventSource struct {
+
 	// The name of the partner event source.
 	Name *string
+
 	// The ARN of the partner event source.
 	Arn *string
 }
 
 // The AWS account that a partner event source has been offered to.
 type PartnerEventSourceAccount struct {
+
 	// The date and time the event source was created.
 	CreationTime *time.Time
+
 	// The date and time that the event source will expire, if the AWS account doesn't
 	// create a matching event bus for it.
 	ExpirationTime *time.Time
+
 	// The AWS account ID that the partner event source was offered to.
 	Account *string
+
 	// The state of the event source. If it is ACTIVE, you have already created a
 	// matching event bus for this event source, and that event bus is active. If it is
 	// PENDING, either you haven't yet created a matching event bus, or that event bus
@@ -245,20 +303,26 @@ type PartnerEventSourceAccount struct {
 
 // Represents an event to be submitted.
 type PutEventsRequestEntry struct {
+
 	// The source of the event.
 	Source *string
+
 	// The time stamp of the event, per RFC3339
 	// (https://www.rfc-editor.org/rfc/rfc3339.txt). If no time stamp is provided, the
 	// time stamp of the PutEvents () call is used.
 	Time *time.Time
+
 	// AWS resources, identified by Amazon Resource Name (ARN), which the event
 	// primarily concerns. Any number, including zero, may be present.
 	Resources []*string
+
 	// Free-form string used to decide what fields to expect in the event detail.
 	DetailType *string
+
 	// A valid JSON string. There is no other schema imposed. The JSON string may
 	// contain fields and nested subobjects.
 	Detail *string
+
 	// The event bus that will receive the event. Only the rules that are associated
 	// with this event bus will be able to match the event.
 	EventBusName *string
@@ -266,25 +330,33 @@ type PutEventsRequestEntry struct {
 
 // Represents an event that failed to be submitted.
 type PutEventsResultEntry struct {
+
 	// The error code that indicates why the event submission failed.
 	ErrorCode *string
+
 	// The ID of the event.
 	EventId *string
+
 	// The error message that explains why the event submission failed.
 	ErrorMessage *string
 }
 
 // The details about an event generated by an SaaS partner.
 type PutPartnerEventsRequestEntry struct {
+
 	// A valid JSON string. There is no other schema imposed. The JSON string may
 	// contain fields and nested subobjects.
 	Detail *string
+
 	// A free-form string used to decide what fields to expect in the event detail.
 	DetailType *string
+
 	// The event source that is generating the evntry.
 	Source *string
+
 	// The date and time of the event.
 	Time *time.Time
+
 	// AWS resources, identified by Amazon Resource Name (ARN), which the event
 	// primarily concerns. Any number, including zero, may be present.
 	Resources []*string
@@ -292,58 +364,76 @@ type PutPartnerEventsRequestEntry struct {
 
 // Represents an event that a partner tried to generate, but failed.
 type PutPartnerEventsResultEntry struct {
+
 	// The error message that explains why the event submission failed.
 	ErrorMessage *string
+
 	// The ID of the event.
 	EventId *string
+
 	// The error code that indicates why the event submission failed.
 	ErrorCode *string
 }
 
 // Represents a target that failed to be added to a rule.
 type PutTargetsResultEntry struct {
+
 	// The error message that explains why the target addition failed.
 	ErrorMessage *string
+
 	// The error code that indicates why the target addition failed. If the value is
 	// ConcurrentModificationException, too many requests were made at the same time.
 	ErrorCode *string
+
 	// The ID of the target.
 	TargetId *string
 }
 
 // Represents a target that failed to be removed from a rule.
 type RemoveTargetsResultEntry struct {
+
 	// The error code that indicates why the target removal failed. If the value is
 	// ConcurrentModificationException, too many requests were made at the same time.
 	ErrorCode *string
+
 	// The ID of the target.
 	TargetId *string
+
 	// The error message that explains why the target removal failed.
 	ErrorMessage *string
 }
 
 // Contains information about a rule in Amazon EventBridge.
 type Rule struct {
+
 	// The state of the rule.
 	State RuleState
+
 	// The Amazon Resource Name (ARN) of the role that is used for target invocation.
 	RoleArn *string
+
 	// The Amazon Resource Name (ARN) of the rule.
 	Arn *string
+
 	// The event pattern of the rule. For more information, see Events and Event
 	// Patterns
 	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	EventPattern *string
+
 	// The event bus associated with the rule.
 	EventBusName *string
+
 	// If the rule was created on behalf of your account by an AWS service, this field
 	// displays the principal name of the service that created the rule.
 	ManagedBy *string
+
 	// The description of the rule.
 	Description *string
+
 	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
 	ScheduleExpression *string
+
 	// The name of the rule.
 	Name *string
 }
@@ -351,8 +441,11 @@ type Rule struct {
 // This parameter contains the criteria (either InstanceIds or a tag) used to
 // specify which EC2 instances are to be sent the command.
 type RunCommandParameters struct {
+
 	// Currently, we support including only one RunCommandTarget block, which specifies
 	// either an array of InstanceIds or a tag.
+	//
+	// This member is required.
 	RunCommandTargets []*RunCommandTarget
 }
 
@@ -360,16 +453,23 @@ type RunCommandParameters struct {
 // as key-value pairs. Each RunCommandTarget block can include only one key, but
 // this key may specify multiple values.
 type RunCommandTarget struct {
+
 	// If Key is tag: tag-key, Values is a list of tag values. If Key is InstanceIds,
 	// Values is a list of Amazon EC2 instance IDs.
+	//
+	// This member is required.
 	Values []*string
+
 	// Can be either tag: tag-key or InstanceIds.
+	//
+	// This member is required.
 	Key *string
 }
 
 // This structure includes the custom parameter to be used when the target is an
 // SQS FIFO queue.
 type SqsParameters struct {
+
 	// The FIFO message group ID to use as the target.
 	MessageGroupId *string
 }
@@ -377,10 +477,16 @@ type SqsParameters struct {
 // A key-value pair associated with an AWS resource. In EventBridge, rules and
 // event buses support tagging.
 type Tag struct {
+
 	// The value for the specified tag key.
+	//
+	// This member is required.
 	Value *string
+
 	// A string you can use to assign a value. The combination of tag keys and values
 	// can help you organize and categorize your resources.
+	//
+	// This member is required.
 	Key *string
 }
 
@@ -395,48 +501,64 @@ type Tag struct {
 // and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User
 // Guide</i>.</p>
 type Target struct {
+
 	// Valid JSON text passed to the target. In this case, nothing from the event
 	// itself is passed to the target. For more information, see The JavaScript Object
 	// Notation (JSON) Data Interchange Format
 	// (http://www.rfc-editor.org/rfc/rfc7159.txt).
 	Input *string
+
 	// The value of the JSONPath that is used for extracting part of the matched event
 	// when passing it to the target. You must use JSON dot notation, not bracket
 	// notation. For more information about JSON paths, see JSONPath
 	// (http://goessner.net/articles/JsonPath/).
 	InputPath *string
+
 	// If the event target is an AWS Batch job, this contains the job definition, job
 	// name, and other parameters. For more information, see Jobs
 	// (https://docs.aws.amazon.com/batch/latest/userguide/jobs.html) in the AWS Batch
 	// User Guide.
 	BatchParameters *BatchParameters
+
 	// The custom parameter you can use to control the shard assignment, when the
 	// target is a Kinesis data stream. If you do not include this parameter, the
 	// default is to use the eventId as the partition key.
 	KinesisParameters *KinesisParameters
+
 	// The Amazon Resource Name (ARN) of the IAM role to be used for this target when
 	// the rule is triggered. If one rule triggers multiple targets, you can use a
 	// different IAM role for each target.
 	RoleArn *string
+
 	// The ID of the target.
+	//
+	// This member is required.
 	Id *string
+
 	// Settings to enable you to provide custom input to a target based on certain
 	// event data. You can extract one or more key-value pairs from the event and then
 	// use that data to send customized input to the target.
 	InputTransformer *InputTransformer
+
 	// The Amazon Resource Name (ARN) of the target.
+	//
+	// This member is required.
 	Arn *string
+
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
 	RunCommandParameters *RunCommandParameters
+
 	// Contains the HTTP parameters to use when the target is a API Gateway REST
 	// endpoint. If you specify an API Gateway REST API as a target, you can use this
 	// parameter to specify headers, path parameter, query string keys/values as part
 	// of your target invoking request.
 	HttpParameters *HttpParameters
+
 	// Contains the message group ID to use when the target is a FIFO queue. If you
 	// specify an SQS FIFO queue as a target, the queue must have content-based
 	// deduplication enabled.
 	SqsParameters *SqsParameters
+
 	// Contains the Amazon ECS task definition and task count to be used, if the event
 	// target is an Amazon ECS task. For more information about Amazon ECS tasks, see
 	// Task Definitions

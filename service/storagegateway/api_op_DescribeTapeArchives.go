@@ -60,12 +60,15 @@ func (c *Client) DescribeTapeArchives(ctx context.Context, params *DescribeTapeA
 
 // DescribeTapeArchivesInput
 type DescribeTapeArchivesInput struct {
+
 	// Specifies that the number of virtual tapes described be limited to the specified
 	// number.
 	Limit *int32
+
 	// An opaque string that indicates the position at which to begin describing
 	// virtual tapes.
 	Marker *string
+
 	// Specifies one or more unique Amazon Resource Names (ARNs) that represent the
 	// virtual tapes you want to describe.
 	TapeARNs []*string
@@ -73,12 +76,14 @@ type DescribeTapeArchivesInput struct {
 
 // DescribeTapeArchivesOutput
 type DescribeTapeArchivesOutput struct {
+
 	// An opaque string that indicates the position at which the virtual tapes that
 	// were fetched for description ended. Use this marker in your next request to
 	// fetch the next set of virtual tapes in the virtual tape shelf (VTS). If there
 	// are no more virtual tapes to describe, this field does not appear in the
 	// response.
 	Marker *string
+
 	// An array of virtual tape objects in the virtual tape shelf (VTS). The
 	// description includes of the Amazon Resource Name (ARN) of the virtual tapes. The
 	// information returned includes the Amazon Resource Names (ARNs) of the tapes,

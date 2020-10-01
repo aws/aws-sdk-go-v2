@@ -56,14 +56,23 @@ func (c *Client) DeleteDocumentationVersion(ctx context.Context, params *DeleteD
 
 // Deletes an existing documentation version of an API.
 type DeleteDocumentationVersionInput struct {
-	Title            *string
+	Title *string
+
 	TemplateSkipList []*string
+
 	// [Required] The version identifier of a to-be-deleted documentation snapshot.
+	//
+	// This member is required.
 	DocumentationVersion *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Template  *bool
-	Name      *string
+
+	Template *bool
+
+	Name *string
 }
 
 type DeleteDocumentationVersionOutput struct {

@@ -67,9 +67,11 @@ func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns
 }
 
 type ListAssetsInput struct {
+
 	// The ID of the asset model by which to filter the list of assets. This parameter
 	// is required if you choose ALL for filter.
 	AssetModelId *string
+
 	// The filter for the requested list of assets. Choose one of the following
 	// options. Defaults to ALL.
 	//
@@ -80,15 +82,21 @@ type ListAssetsInput struct {
 	// * TOP_LEVEL – The list includes only top-level assets in the asset hierarchy
 	// tree.
 	Filter types.ListAssetsFilter
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
 }
 
 type ListAssetsOutput struct {
+
 	// A list that summarizes each asset.
+	//
+	// This member is required.
 	AssetSummaries []*types.AssetSummary
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

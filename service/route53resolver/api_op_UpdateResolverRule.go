@@ -58,13 +58,20 @@ func (c *Client) UpdateResolverRule(ctx context.Context, params *UpdateResolverR
 }
 
 type UpdateResolverRuleInput struct {
+
 	// The new settings for the resolver rule.
+	//
+	// This member is required.
 	Config *types.ResolverRuleConfig
+
 	// The ID of the resolver rule that you want to update.
+	//
+	// This member is required.
 	ResolverRuleId *string
 }
 
 type UpdateResolverRuleOutput struct {
+
 	// The response to an UpdateResolverRule request.
 	ResolverRule *types.ResolverRule
 

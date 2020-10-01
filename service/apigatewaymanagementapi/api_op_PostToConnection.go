@@ -55,9 +55,15 @@ func (c *Client) PostToConnection(ctx context.Context, params *PostToConnectionI
 }
 
 type PostToConnectionInput struct {
+
 	// The identifier of the connection that a specific client is using.
+	//
+	// This member is required.
 	ConnectionId *string
+
 	// The data to be sent to the client specified by its connection id.
+	//
+	// This member is required.
 	Data []byte
 }
 

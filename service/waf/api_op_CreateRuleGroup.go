@@ -77,26 +77,38 @@ func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInp
 }
 
 type CreateRuleGroupInput struct {
+
 	//
 	Tags []*types.Tag
+
 	// A friendly name or description for the metrics for this RuleGroup. The name can
 	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128
 	// and minimum length one. It can't contain whitespace or metric names reserved for
 	// AWS WAF, including "All" and "Default_Action." You can't change the name of the
 	// metric after you create the RuleGroup.
+	//
+	// This member is required.
 	MetricName *string
+
 	// A friendly name or description of the RuleGroup (). You can't change Name after
 	// you create a RuleGroup.
+	//
+	// This member is required.
 	Name *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type CreateRuleGroupOutput struct {
+
 	// The ChangeToken that you used to submit the CreateRuleGroup request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// An empty RuleGroup ().
 	RuleGroup *types.RuleGroup
 

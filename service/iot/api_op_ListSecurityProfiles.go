@@ -57,19 +57,24 @@ func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityP
 }
 
 type ListSecurityProfilesInput struct {
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
 	// A filter to limit results to the security profiles that use the defined
 	// dimension.
 	DimensionName *string
 }
 
 type ListSecurityProfilesOutput struct {
+
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
+
 	// A list of security profile identifiers (names and ARNs).
 	SecurityProfileIdentifiers []*types.SecurityProfileIdentifier
 

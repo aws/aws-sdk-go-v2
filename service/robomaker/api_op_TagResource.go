@@ -60,9 +60,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// A map that contains tag keys and tag values that are attached to the resource.
+	//
+	// This member is required.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are tagging.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

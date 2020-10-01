@@ -58,9 +58,15 @@ func (c *Client) ModifyWorkspaceAccessProperties(ctx context.Context, params *Mo
 }
 
 type ModifyWorkspaceAccessPropertiesInput struct {
+
 	// The identifier of the directory.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The device types and operating systems to enable or disable for access.
+	//
+	// This member is required.
 	WorkspaceAccessProperties *types.WorkspaceAccessProperties
 }
 

@@ -57,6 +57,7 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 
 // Contains the parameters for ListPipelines.
 type ListPipelinesInput struct {
+
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
 	// ListPipelines with the marker value from the previous call to retrieve the next
@@ -66,13 +67,18 @@ type ListPipelinesInput struct {
 
 // Contains the output of ListPipelines.
 type ListPipelinesOutput struct {
+
 	// Indicates whether there are more results that can be obtained by a subsequent
 	// call.
 	HasMoreResults *bool
+
 	// The pipeline identifiers. If you require additional information about the
 	// pipelines, you can use these identifiers to call DescribePipelines () and
 	// GetPipelineDefinition ().
+	//
+	// This member is required.
 	PipelineIdList []*types.PipelineIdName
+
 	// The starting point for the next page of results. To view the next page of
 	// results, call ListPipelinesOutput again with this marker value. If the value is
 	// null, there are no more results.

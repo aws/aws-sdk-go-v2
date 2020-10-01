@@ -57,8 +57,12 @@ func (c *Client) DeleteSignalingChannel(ctx context.Context, params *DeleteSigna
 }
 
 type DeleteSignalingChannelInput struct {
+
 	// The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
+	//
+	// This member is required.
 	ChannelARN *string
+
 	// The current version of the signaling channel that you want to delete. You can
 	// obtain the current version by invoking the DescribeSignalingChannel or
 	// ListSignalingChannels API operations.

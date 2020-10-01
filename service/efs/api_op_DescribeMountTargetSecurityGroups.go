@@ -66,12 +66,18 @@ func (c *Client) DescribeMountTargetSecurityGroups(ctx context.Context, params *
 
 //
 type DescribeMountTargetSecurityGroupsInput struct {
+
 	// The ID of the mount target whose security groups you want to retrieve.
+	//
+	// This member is required.
 	MountTargetId *string
 }
 
 type DescribeMountTargetSecurityGroupsOutput struct {
+
 	// An array of security groups.
+	//
+	// This member is required.
 	SecurityGroups []*string
 
 	// Metadata pertaining to the operation's result.

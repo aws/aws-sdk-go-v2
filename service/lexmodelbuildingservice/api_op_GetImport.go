@@ -57,25 +57,35 @@ func (c *Client) GetImport(ctx context.Context, params *GetImportInput, optFns .
 }
 
 type GetImportInput struct {
+
 	// The identifier of the import job information to return.
+	//
+	// This member is required.
 	ImportId *string
 }
 
 type GetImportOutput struct {
+
 	// The name given to the import job.
 	Name *string
+
 	// The status of the import job. If the status is FAILED, you can get the reason
 	// for the failure from the failureReason field.
 	ImportStatus types.ImportStatus
+
 	// The type of resource imported.
 	ResourceType types.ResourceType
+
 	// A timestamp for the date and time that the import job was created.
 	CreatedDate *time.Time
+
 	// The action taken when there was a conflict between an existing resource and a
 	// resource in the import file.
 	MergeStrategy types.MergeStrategy
+
 	// A string that describes why an import job failed to complete.
 	FailureReason []*string
+
 	// The identifier for the specific import job.
 	ImportId *string
 

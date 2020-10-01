@@ -59,6 +59,7 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 }
 
 type UpdateMedicalVocabularyInput struct {
+
 	// The Amazon S3 location of the text file containing the definition of the custom
 	// vocabulary. The URI must be in the same AWS region as the API endpoint you are
 	// calling. You can see the fields you need to enter for you Amazon S3 location in
@@ -70,23 +71,33 @@ type UpdateMedicalVocabularyInput struct {
 	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
 	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
 	VocabularyFileUri *string
+
 	// The language code of the entries in the updated vocabulary. US English (en-US)
 	// is the only valid language code in Amazon Transcribe Medical.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// The name of the vocabulary to update. The name is case-sensitive. If you try to
 	// update a vocabulary with the same name as a previous vocabulary you will receive
 	// a ConflictException error.
+	//
+	// This member is required.
 	VocabularyName *string
 }
 
 type UpdateMedicalVocabularyOutput struct {
+
 	// The language code for the text file used to update the custom vocabulary. US
 	// English (en-US) is the only language supported in Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
+
 	// The name of the updated vocabulary.
 	VocabularyName *string
+
 	// The date and time the vocabulary was updated.
 	LastModifiedTime *time.Time
+
 	// The processing state of the update to the vocabulary. When the VocabularyState
 	// field is READY the vocabulary is ready to be used in a
 	// StartMedicalTranscriptionJob request.

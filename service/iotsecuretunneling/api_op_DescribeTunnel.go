@@ -56,11 +56,15 @@ func (c *Client) DescribeTunnel(ctx context.Context, params *DescribeTunnelInput
 }
 
 type DescribeTunnelInput struct {
+
 	// The tunnel to describe.
+	//
+	// This member is required.
 	TunnelId *string
 }
 
 type DescribeTunnelOutput struct {
+
 	// The tunnel being described.
 	Tunnel *types.Tunnel
 

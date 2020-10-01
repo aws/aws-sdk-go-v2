@@ -61,9 +61,15 @@ func (c *Client) UpdateRepositoryName(ctx context.Context, params *UpdateReposit
 
 // Represents the input of an update repository description operation.
 type UpdateRepositoryNameInput struct {
+
 	// The new name for the repository.
+	//
+	// This member is required.
 	NewName *string
+
 	// The current name of the repository.
+	//
+	// This member is required.
 	OldName *string
 }
 

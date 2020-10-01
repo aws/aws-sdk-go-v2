@@ -59,7 +59,10 @@ func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDelive
 // The input for the DeleteDeliveryChannel () action. The action accepts the
 // following data, in JSON format.
 type DeleteDeliveryChannelInput struct {
+
 	// The name of the delivery channel to delete.
+	//
+	// This member is required.
 	DeliveryChannelName *string
 }
 

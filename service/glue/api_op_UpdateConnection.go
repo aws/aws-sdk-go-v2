@@ -56,12 +56,19 @@ func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionI
 }
 
 type UpdateConnectionInput struct {
+
 	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string
+
 	// The name of the connection definition to update.
+	//
+	// This member is required.
 	Name *string
+
 	// A ConnectionInput object that redefines the connection in question.
+	//
+	// This member is required.
 	ConnectionInput *types.ConnectionInput
 }
 

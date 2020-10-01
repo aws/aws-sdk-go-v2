@@ -58,9 +58,15 @@ func (c *Client) DeleteResourceConfig(ctx context.Context, params *DeleteResourc
 }
 
 type DeleteResourceConfigInput struct {
+
 	// The type of the resource.
+	//
+	// This member is required.
 	ResourceType *string
+
 	// Unique identifier of the resource.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

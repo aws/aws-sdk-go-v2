@@ -55,13 +55,19 @@ func (c *Client) UpdateVariable(ctx context.Context, params *UpdateVariableInput
 }
 
 type UpdateVariableInput struct {
+
 	// The variable type. For more information see Variable types
 	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
 	VariableType *string
+
 	// The new description.
 	Description *string
+
 	// The name of the variable.
+	//
+	// This member is required.
 	Name *string
+
 	// The new default value of the variable.
 	DefaultValue *string
 }

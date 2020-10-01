@@ -57,22 +57,33 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 }
 
 type CreateDeploymentInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// The ID of the group version to be deployed.
 	GroupVersionId *string
+
 	// The ID of the deployment if you wish to redeploy a previous deployment.
 	DeploymentId *string
+
 	// The type of deployment. When used for ''CreateDeployment'', only
 	// ''NewDeployment'' and ''Redeployment'' are valid.
+	//
+	// This member is required.
 	DeploymentType types.DeploymentType
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 }
 
 type CreateDeploymentOutput struct {
+
 	// The ARN of the deployment.
 	DeploymentArn *string
+
 	// The ID of the deployment.
 	DeploymentId *string
 

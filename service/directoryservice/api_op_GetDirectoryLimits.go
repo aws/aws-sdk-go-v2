@@ -60,6 +60,7 @@ type GetDirectoryLimitsInput struct {
 
 // Contains the results of the GetDirectoryLimits () operation.
 type GetDirectoryLimitsOutput struct {
+
 	// A DirectoryLimits () object that contains the directory limits for the current
 	// rRegion.
 	DirectoryLimits *types.DirectoryLimits

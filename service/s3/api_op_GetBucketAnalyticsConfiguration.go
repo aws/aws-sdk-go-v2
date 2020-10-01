@@ -73,13 +73,20 @@ func (c *Client) GetBucketAnalyticsConfiguration(ctx context.Context, params *Ge
 }
 
 type GetBucketAnalyticsConfigurationInput struct {
+
 	// The name of the bucket from which an analytics configuration is retrieved.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The ID that identifies the analytics configuration.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetBucketAnalyticsConfigurationOutput struct {
+
 	// The configuration and any analyses for the analytics filter.
 	AnalyticsConfiguration *types.AnalyticsConfiguration
 

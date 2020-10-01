@@ -56,7 +56,10 @@ func (c *Client) ActivateEventSource(ctx context.Context, params *ActivateEventS
 }
 
 type ActivateEventSourceInput struct {
+
 	// The name of the partner event source to activate.
+	//
+	// This member is required.
 	Name *string
 }
 

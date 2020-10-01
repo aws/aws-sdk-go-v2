@@ -58,6 +58,7 @@ func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *Describ
 }
 
 type DescribeOrganizationalUnitInput struct {
+
 	// The unique identifier (ID) of the organizational unit that you want details
 	// about. You can get the ID from the ListOrganizationalUnitsForParent ()
 	// operation. The regex pattern (http://wikipedia.org/wiki/regex) for an
@@ -65,10 +66,13 @@ type DescribeOrganizationalUnitInput struct {
 	// letters or digits (the ID of the root that contains the OU). This string is
 	// followed by a second "-" dash and from 8 to 32 additional lowercase letters or
 	// digits.
+	//
+	// This member is required.
 	OrganizationalUnitId *string
 }
 
 type DescribeOrganizationalUnitOutput struct {
+
 	// A structure that contains details about the specified OU.
 	OrganizationalUnit *types.OrganizationalUnit
 

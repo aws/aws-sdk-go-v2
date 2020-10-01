@@ -60,10 +60,17 @@ func (c *Client) UpgradeAppliedSchema(ctx context.Context, params *UpgradeApplie
 }
 
 type UpgradeAppliedSchemaInput struct {
+
 	// The ARN for the directory to which the upgraded schema will be applied.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// The revision of the published schema to upgrade the directory to.
+	//
+	// This member is required.
 	PublishedSchemaArn *string
+
 	// Used for testing whether the major version schemas are backward compatible or
 	// not. If schema compatibility fails, an exception would be thrown else the call
 	// would succeed but no changes will be saved. This parameter is optional.
@@ -71,8 +78,10 @@ type UpgradeAppliedSchemaInput struct {
 }
 
 type UpgradeAppliedSchemaOutput struct {
+
 	// The ARN of the directory that is returned as part of the response.
 	DirectoryArn *string
+
 	// The ARN of the upgraded schema that is returned as part of the response.
 	UpgradedSchemaArn *string
 

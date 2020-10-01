@@ -63,11 +63,16 @@ func (c *Client) AssignIpv6Addresses(ctx context.Context, params *AssignIpv6Addr
 }
 
 type AssignIpv6AddressesInput struct {
+
 	// One or more specific IPv6 addresses to be assigned to the network interface. You
 	// can't use this option if you're specifying a number of IPv6 addresses.
 	Ipv6Addresses []*string
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
+
 	// The number of IPv6 addresses to assign to the network interface. Amazon EC2
 	// automatically selects the IPv6 addresses from the subnet range. You can't use
 	// this option if specifying specific IPv6 addresses.
@@ -75,8 +80,10 @@ type AssignIpv6AddressesInput struct {
 }
 
 type AssignIpv6AddressesOutput struct {
+
 	// The ID of the network interface.
 	NetworkInterfaceId *string
+
 	// The IPv6 addresses assigned to the network interface.
 	AssignedIpv6Addresses []*string
 

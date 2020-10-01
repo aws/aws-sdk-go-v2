@@ -56,7 +56,10 @@ func (c *Client) DeleteVoiceConnectorStreamingConfiguration(ctx context.Context,
 }
 
 type DeleteVoiceConnectorStreamingConfigurationInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 

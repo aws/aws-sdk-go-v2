@@ -58,11 +58,15 @@ func (c *Client) DescribeEventTracker(ctx context.Context, params *DescribeEvent
 }
 
 type DescribeEventTrackerInput struct {
+
 	// The Amazon Resource Name (ARN) of the event tracker to describe.
+	//
+	// This member is required.
 	EventTrackerArn *string
 }
 
 type DescribeEventTrackerOutput struct {
+
 	// An object that describes the event tracker.
 	EventTracker *types.EventTracker
 

@@ -56,16 +56,20 @@ func (c *Client) ListInputDevices(ctx context.Context, params *ListInputDevicesI
 
 // Placeholder documentation for ListInputDevicesRequest
 type ListInputDevicesInput struct {
+
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
+
 	// Placeholder documentation for __string
 	NextToken *string
 }
 
 // Placeholder documentation for ListInputDevicesResponse
 type ListInputDevicesOutput struct {
+
 	// The list of input devices.
 	InputDevices []*types.InputDeviceSummary
+
 	// A token to get additional list results.
 	NextToken *string
 

@@ -60,16 +60,21 @@ func (c *Client) MonitorInstances(ctx context.Context, params *MonitorInstancesI
 }
 
 type MonitorInstancesInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IDs of the instances.
+	//
+	// This member is required.
 	InstanceIds []*string
 }
 
 type MonitorInstancesOutput struct {
+
 	// The monitoring information.
 	InstanceMonitorings []*types.InstanceMonitoring
 

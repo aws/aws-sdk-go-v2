@@ -55,20 +55,30 @@ func (c *Client) DeleteDashboard(ctx context.Context, params *DeleteDashboardInp
 }
 
 type DeleteDashboardInput struct {
+
 	// The ID for the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// The ID of the AWS account that contains the dashboard that you're deleting.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The version number of the dashboard. If the version number property is provided,
 	// only the specified version of the dashboard is deleted.
 	VersionNumber *int64
 }
 
 type DeleteDashboardOutput struct {
+
 	// The Secure Socket Layer (SSL) properties that apply for the resource.
 	Arn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ID of the dashboard.
 	DashboardId *string
 

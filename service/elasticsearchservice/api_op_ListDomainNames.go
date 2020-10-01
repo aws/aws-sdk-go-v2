@@ -61,6 +61,7 @@ type ListDomainNamesInput struct {
 // The result of a ListDomainNames operation. Contains the names of all
 // Elasticsearch domains owned by this account.
 type ListDomainNamesOutput struct {
+
 	// List of Elasticsearch domain names.
 	DomainNames []*types.DomainInfo
 

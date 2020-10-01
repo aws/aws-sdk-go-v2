@@ -56,13 +56,18 @@ func (c *Client) GetConnectivityInfo(ctx context.Context, params *GetConnectivit
 }
 
 type GetConnectivityInfoInput struct {
+
 	// The thing name.
+	//
+	// This member is required.
 	ThingName *string
 }
 
 type GetConnectivityInfoOutput struct {
+
 	// A message about the connectivity info request.
 	Message *string
+
 	// Connectivity info list.
 	ConnectivityInfo []*types.ConnectivityInfo
 

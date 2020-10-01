@@ -58,11 +58,15 @@ func (c *Client) DescribeValidDBInstanceModifications(ctx context.Context, param
 }
 
 type DescribeValidDBInstanceModificationsInput struct {
+
 	// The customer identifier or the ARN of your DB instance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
 }
 
 type DescribeValidDBInstanceModificationsOutput struct {
+
 	// Information about valid modifications that you can make to your DB instance.
 	// Contains the result of a successful call to the
 	// DescribeValidDBInstanceModifications () action. You can use this information

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Another modification is being made. That modification must complete before you
@@ -27,12 +26,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The next token is not valid.
 type InvalidNextTokenException struct {
@@ -50,12 +43,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service role is not valid.
 type InvalidServiceRoleException struct {
@@ -73,12 +60,6 @@ func (e *InvalidServiceRoleException) ErrorMessage() string {
 }
 func (e *InvalidServiceRoleException) ErrorCode() string             { return "InvalidServiceRoleException" }
 func (e *InvalidServiceRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidServiceRoleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidServiceRoleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource limit has been exceeded.
 type LimitExceededException struct {
@@ -96,12 +77,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An AWS CodeStar project with the same ID already exists in this region for the
 // AWS account. AWS CodeStar project IDs must be unique within a region for the AWS
@@ -121,12 +96,6 @@ func (e *ProjectAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ProjectAlreadyExistsException) ErrorCode() string             { return "ProjectAlreadyExistsException" }
 func (e *ProjectAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ProjectAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProjectAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Project configuration information is required but not specified.
 type ProjectConfigurationException struct {
@@ -144,12 +113,6 @@ func (e *ProjectConfigurationException) ErrorMessage() string {
 }
 func (e *ProjectConfigurationException) ErrorCode() string             { return "ProjectConfigurationException" }
 func (e *ProjectConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ProjectConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProjectConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The project creation request was valid, but a nonspecific exception or error
 // occurred during project creation. The project could not be created in AWS
@@ -169,12 +132,6 @@ func (e *ProjectCreationFailedException) ErrorMessage() string {
 }
 func (e *ProjectCreationFailedException) ErrorCode() string             { return "ProjectCreationFailedException" }
 func (e *ProjectCreationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ProjectCreationFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProjectCreationFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified AWS CodeStar project was not found.
 type ProjectNotFoundException struct {
@@ -192,12 +149,6 @@ func (e *ProjectNotFoundException) ErrorMessage() string {
 }
 func (e *ProjectNotFoundException) ErrorCode() string             { return "ProjectNotFoundException" }
 func (e *ProjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ProjectNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProjectNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The team member is already associated with a role in this project.
 type TeamMemberAlreadyAssociatedException struct {
@@ -219,12 +170,6 @@ func (e *TeamMemberAlreadyAssociatedException) ErrorCode() string {
 func (e *TeamMemberAlreadyAssociatedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TeamMemberAlreadyAssociatedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TeamMemberAlreadyAssociatedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified team member was not found.
 type TeamMemberNotFoundException struct {
@@ -242,12 +187,6 @@ func (e *TeamMemberNotFoundException) ErrorMessage() string {
 }
 func (e *TeamMemberNotFoundException) ErrorCode() string             { return "TeamMemberNotFoundException" }
 func (e *TeamMemberNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TeamMemberNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TeamMemberNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A user profile with that name already exists in this region for the AWS account.
 // AWS CodeStar user profile names must be unique within a region for the AWS
@@ -269,12 +208,6 @@ func (e *UserProfileAlreadyExistsException) ErrorCode() string {
 	return "UserProfileAlreadyExistsException"
 }
 func (e *UserProfileAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserProfileAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserProfileAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The user profile was not found.
 type UserProfileNotFoundException struct {
@@ -292,12 +225,6 @@ func (e *UserProfileNotFoundException) ErrorMessage() string {
 }
 func (e *UserProfileNotFoundException) ErrorCode() string             { return "UserProfileNotFoundException" }
 func (e *UserProfileNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserProfileNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserProfileNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified input is either not valid, or it could not be validated.
 type ValidationException struct {
@@ -315,9 +242,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

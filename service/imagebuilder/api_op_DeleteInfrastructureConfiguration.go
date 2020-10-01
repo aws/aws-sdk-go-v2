@@ -55,13 +55,18 @@ func (c *Client) DeleteInfrastructureConfiguration(ctx context.Context, params *
 }
 
 type DeleteInfrastructureConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration to delete.
+	//
+	// This member is required.
 	InfrastructureConfigurationArn *string
 }
 
 type DeleteInfrastructureConfigurationOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that was
 	// deleted.
 	InfrastructureConfigurationArn *string

@@ -56,15 +56,22 @@ func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecy
 }
 
 type UpdateLifecyclePolicyInput struct {
+
 	// The identifier of the lifecycle policy.
+	//
+	// This member is required.
 	PolicyId *string
+
 	// The desired activation state of the lifecycle policy after creation.
 	State types.SettablePolicyStateValues
+
 	// The configuration of the lifecycle policy. You cannot update the policy type or
 	// the resource type.
 	PolicyDetails *types.PolicyDetails
+
 	// A description of the lifecycle policy.
 	Description *string
+
 	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
 	// specified by the lifecycle policy.
 	ExecutionRoleArn *string

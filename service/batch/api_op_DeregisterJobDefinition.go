@@ -56,8 +56,11 @@ func (c *Client) DeregisterJobDefinition(ctx context.Context, params *Deregister
 }
 
 type DeregisterJobDefinitionInput struct {
+
 	// The name and revision (name:revision) or full Amazon Resource Name (ARN) of the
 	// job definition to deregister.
+	//
+	// This member is required.
 	JobDefinition *string
 }
 

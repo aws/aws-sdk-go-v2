@@ -55,12 +55,16 @@ func (c *Client) DeleteMissionProfile(ctx context.Context, params *DeleteMission
 
 //
 type DeleteMissionProfileInput struct {
+
 	// UUID of a mission profile.
+	//
+	// This member is required.
 	MissionProfileId *string
 }
 
 //
 type DeleteMissionProfileOutput struct {
+
 	// UUID of a mission profile.
 	MissionProfileId *string
 

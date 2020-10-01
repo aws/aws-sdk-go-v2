@@ -58,13 +58,20 @@ func (c *Client) PutSchemaFromJson(ctx context.Context, params *PutSchemaFromJso
 }
 
 type PutSchemaFromJsonInput struct {
+
 	// The ARN of the schema to update.
+	//
+	// This member is required.
 	SchemaArn *string
+
 	// The replacement JSON schema.
+	//
+	// This member is required.
 	Document *string
 }
 
 type PutSchemaFromJsonOutput struct {
+
 	// The ARN of the schema to update.
 	Arn *string
 

@@ -59,18 +59,22 @@ func (c *Client) DescribeReservedInstances(ctx context.Context, params *Describe
 
 // Contains the parameters for DescribeReservedInstances.
 type DescribeReservedInstancesInput struct {
+
 	// One or more Reserved Instance IDs. Default: Describes all your Reserved
 	// Instances, or only those otherwise specified.
 	ReservedInstancesIds []*string
+
 	// The Reserved Instance offering type. If you are using tools that predate the
 	// 2011-11-01 API version, you only have access to the Medium Utilization Reserved
 	// Instance offering type.
 	OfferingType types.OfferingTypeValues
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * availability-zone - The Availability Zone where the
@@ -126,12 +130,14 @@ type DescribeReservedInstancesInput struct {
 	//     * usage-price - The usage price of the Reserved Instance,
 	// per hour (for example, 0.84).
 	Filters []*types.Filter
+
 	// Describes whether the Reserved Instance is Standard or Convertible.
 	OfferingClass types.OfferingClassType
 }
 
 // Contains the output for DescribeReservedInstances.
 type DescribeReservedInstancesOutput struct {
+
 	// A list of Reserved Instances.
 	ReservedInstances []*types.ReservedInstances
 

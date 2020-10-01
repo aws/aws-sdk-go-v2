@@ -59,11 +59,13 @@ func (c *Client) DescribePlatformVersion(ctx context.Context, params *DescribePl
 }
 
 type DescribePlatformVersionInput struct {
+
 	// The ARN of the platform version.
 	PlatformArn *string
 }
 
 type DescribePlatformVersionOutput struct {
+
 	// Detailed information about the platform version.
 	PlatformDescription *types.PlatformDescription
 

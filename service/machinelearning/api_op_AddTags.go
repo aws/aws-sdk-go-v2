@@ -58,20 +58,31 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 }
 
 type AddTagsInput struct {
+
 	// The type of the ML object to tag.
+	//
+	// This member is required.
 	ResourceType types.TaggableResourceType
+
 	// The key-value pairs to use to create tags. If you specify a key without
 	// specifying a value, Amazon ML creates a tag with the specified key and a value
 	// of null.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The ID of the ML object to tag. For example, exampleModelId.
+	//
+	// This member is required.
 	ResourceId *string
 }
 
 // Amazon ML returns the following elements.
 type AddTagsOutput struct {
+
 	// The ID of the ML object that was tagged.
 	ResourceId *string
+
 	// The type of the ML object that was tagged.
 	ResourceType types.TaggableResourceType
 

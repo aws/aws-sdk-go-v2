@@ -68,14 +68,21 @@ func (c *Client) TerminateInstanceInAutoScalingGroup(ctx context.Context, params
 }
 
 type TerminateInstanceInAutoScalingGroupInput struct {
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Indicates whether terminating the instance also decrements the size of the Auto
 	// Scaling group.
+	//
+	// This member is required.
 	ShouldDecrementDesiredCapacity *bool
 }
 
 type TerminateInstanceInAutoScalingGroupOutput struct {
+
 	// A scaling activity.
 	Activity *types.Activity
 

@@ -56,7 +56,10 @@ func (c *Client) PutKMSEncryptionKey(ctx context.Context, params *PutKMSEncrypti
 }
 
 type PutKMSEncryptionKeyInput struct {
+
 	// The KMS encryption key ARN.
+	//
+	// This member is required.
 	KmsEncryptionKeyArn *string
 }
 

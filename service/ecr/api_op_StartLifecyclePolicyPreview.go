@@ -58,23 +58,32 @@ func (c *Client) StartLifecyclePolicyPreview(ctx context.Context, params *StartL
 }
 
 type StartLifecyclePolicyPreviewInput struct {
+
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The name of the repository to be evaluated.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The policy to be evaluated against. If you do not specify a policy, the current
 	// policy for the repository is used.
 	LifecyclePolicyText *string
 }
 
 type StartLifecyclePolicyPreviewOutput struct {
+
 	// The repository name associated with the request.
 	RepositoryName *string
+
 	// The registry ID associated with the request.
 	RegistryId *string
+
 	// The status of the lifecycle policy preview request.
 	Status types.LifecyclePolicyPreviewStatus
+
 	// The JSON repository policy text.
 	LifecyclePolicyText *string
 

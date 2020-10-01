@@ -58,13 +58,18 @@ func (c *Client) StartOnDemandReplicationRun(ctx context.Context, params *StartO
 }
 
 type StartOnDemandReplicationRunInput struct {
+
 	// The identifier of the replication job.
+	//
+	// This member is required.
 	ReplicationJobId *string
+
 	// The description of the replication run.
 	Description *string
 }
 
 type StartOnDemandReplicationRunOutput struct {
+
 	// The identifier of the replication run.
 	ReplicationRunId *string
 

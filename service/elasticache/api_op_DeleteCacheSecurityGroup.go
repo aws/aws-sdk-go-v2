@@ -57,8 +57,11 @@ func (c *Client) DeleteCacheSecurityGroup(ctx context.Context, params *DeleteCac
 
 // Represents the input of a DeleteCacheSecurityGroup operation.
 type DeleteCacheSecurityGroupInput struct {
+
 	// The name of the cache security group to delete. You cannot delete the default
 	// security group.
+	//
+	// This member is required.
 	CacheSecurityGroupName *string
 }
 

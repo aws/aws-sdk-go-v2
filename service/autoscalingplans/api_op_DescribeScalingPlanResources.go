@@ -56,20 +56,30 @@ func (c *Client) DescribeScalingPlanResources(ctx context.Context, params *Descr
 }
 
 type DescribeScalingPlanResourcesInput struct {
+
 	// The name of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanName *string
+
 	// The version number of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanVersion *int64
+
 	// The maximum number of scalable resources to return. The value must be between 1
 	// and 50. The default value is 50.
 	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
 }
 
 type DescribeScalingPlanResourcesOutput struct {
+
 	// Information about the scalable resources.
 	ScalingPlanResources []*types.ScalingPlanResource
+
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string

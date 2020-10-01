@@ -56,11 +56,15 @@ func (c *Client) GetNetworkProfile(ctx context.Context, params *GetNetworkProfil
 }
 
 type GetNetworkProfileInput struct {
+
 	// The ARN of the network profile associated with a device.
+	//
+	// This member is required.
 	NetworkProfileArn *string
 }
 
 type GetNetworkProfileOutput struct {
+
 	// The network profile associated with a device.
 	NetworkProfile *types.NetworkProfile
 

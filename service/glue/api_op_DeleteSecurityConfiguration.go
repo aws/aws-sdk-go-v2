@@ -55,7 +55,10 @@ func (c *Client) DeleteSecurityConfiguration(ctx context.Context, params *Delete
 }
 
 type DeleteSecurityConfigurationInput struct {
+
 	// The name of the security configuration to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

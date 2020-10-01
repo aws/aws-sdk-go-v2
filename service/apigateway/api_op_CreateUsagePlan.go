@@ -61,21 +61,32 @@ func (c *Client) CreateUsagePlan(ctx context.Context, params *CreateUsagePlanInp
 // limits and quota limits, as well as the associated API stages, specified in the
 // payload.
 type CreateUsagePlanInput struct {
+
 	// [Required] The name of the usage plan.
-	Name             *string
-	Title            *string
-	Template         *bool
+	//
+	// This member is required.
+	Name *string
+
+	Title *string
+
+	Template *bool
+
 	TemplateSkipList []*string
+
 	// The throttling limits of the usage plan.
 	Throttle *types.ThrottleSettings
+
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
+
 	// The associated API stages of the usage plan.
 	ApiStages []*types.ApiStage
+
 	// The description of the usage plan.
 	Description *string
+
 	// The quota of the usage plan.
 	Quota *types.QuotaSettings
 }
@@ -86,21 +97,29 @@ type CreateUsagePlanInput struct {
 // customers by adding API keys to the plan. Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type CreateUsagePlanOutput struct {
+
 	// The identifier of a UsagePlan () resource.
 	Id *string
+
 	// The request throttle limits of a usage plan.
 	Throttle *types.ThrottleSettings
+
 	// The name of a usage plan.
 	Name *string
+
 	// The associated API stages of a usage plan.
 	ApiStages []*types.ApiStage
+
 	// The AWS Markeplace product identifier to associate with the usage plan as a SaaS
 	// product on AWS Marketplace.
 	ProductCode *string
+
 	// The maximum number of permitted requests per a given unit time interval.
 	Quota *types.QuotaSettings
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The description of a usage plan.
 	Description *string
 

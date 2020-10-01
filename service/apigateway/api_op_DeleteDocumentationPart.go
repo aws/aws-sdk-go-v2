@@ -56,13 +56,23 @@ func (c *Client) DeleteDocumentationPart(ctx context.Context, params *DeleteDocu
 
 // Deletes an existing documentation part of an API.
 type DeleteDocumentationPartInput struct {
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
-	Template         *bool
+	//
+	// This member is required.
+	RestApiId *string
+
+	Template *bool
+
 	TemplateSkipList []*string
-	Title            *string
-	Name             *string
+
+	Title *string
+
+	Name *string
+
 	// [Required] The identifier of the to-be-deleted documentation part.
+	//
+	// This member is required.
 	DocumentationPartId *string
 }
 

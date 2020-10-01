@@ -57,20 +57,30 @@ func (c *Client) CreateConfig(ctx context.Context, params *CreateConfigInput, op
 
 //
 type CreateConfigInput struct {
+
 	// Parameters of a Config.
+	//
+	// This member is required.
 	ConfigData types.ConfigTypeData
+
 	// Name of a Config.
+	//
+	// This member is required.
 	Name *string
+
 	// Tags assigned to a Config.
 	Tags map[string]*string
 }
 
 //
 type CreateConfigOutput struct {
+
 	// ARN of a Config.
 	ConfigArn *string
+
 	// UUID of a Config.
 	ConfigId *string
+
 	// Type of a Config.
 	ConfigType types.ConfigCapabilityType
 

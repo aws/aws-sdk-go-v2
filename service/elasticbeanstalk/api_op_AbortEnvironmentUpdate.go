@@ -56,9 +56,11 @@ func (c *Client) AbortEnvironmentUpdate(ctx context.Context, params *AbortEnviro
 
 //
 type AbortEnvironmentUpdateInput struct {
+
 	// This specifies the ID of the environment with the in-progress update that you
 	// want to cancel.
 	EnvironmentId *string
+
 	// This specifies the name of the environment with the in-progress update that you
 	// want to cancel.
 	EnvironmentName *string

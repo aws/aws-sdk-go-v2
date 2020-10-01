@@ -79,11 +79,13 @@ func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSec
 }
 
 type UpdateSecretVersionStageInput struct {
+
 	// (Optional) The secret version ID that you want to add the staging label. If you
 	// want to remove a label from a version, then do not specify this parameter. If
 	// the staging label is already attached to a different version of the secret, then
 	// you must also specify the RemoveFromVersionId parameter.
 	MoveToVersionId *string
+
 	// Specifies the secret with the version with the list of staging labels you want
 	// to modify. You can specify either the Amazon Resource Name (ARN) or the friendly
 	// name of the secret. If you specify an ARN, we generally recommend that you
@@ -101,7 +103,10 @@ type UpdateSecretVersionStageInput struct {
 	// random suffix. If you do include the random suffix added by Secrets Manager, you
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
+
 	// Specifies the secret version ID of the version that the staging label is to be
 	// removed from. If the staging label you are trying to attach to one version is
 	// already attached to a different version, then you must include this parameter
@@ -109,13 +114,18 @@ type UpdateSecretVersionStageInput struct {
 	// attached and you either do not specify this parameter, or the version ID does
 	// not match, then the operation fails.
 	RemoveFromVersionId *string
+
 	// The staging label to add to this version.
+	//
+	// This member is required.
 	VersionStage *string
 }
 
 type UpdateSecretVersionStageOutput struct {
+
 	// The ARN of the secret with the modified staging label.
 	ARN *string
+
 	// The friendly name of the secret with the modified staging label.
 	Name *string
 

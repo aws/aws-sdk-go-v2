@@ -60,8 +60,11 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 // Requests API Gateway to get information about a Deployment () resource.
 type GetDeploymentInput struct {
 	TemplateSkipList []*string
-	Title            *string
-	Name             *string
+
+	Title *string
+
+	Name *string
+
 	// A query parameter to retrieve the specified embedded resources of the returned
 	// Deployment () resource in the response. In a REST API call, this embed parameter
 	// value is a list of comma-separated strings, as in GET
@@ -72,12 +75,19 @@ type GetDeploymentInput struct {
 	// "apisummary" string. For example, GET
 	// /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
 	Embed []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// [Required] The identifier of the Deployment () resource to get information
 	// about.
+	//
+	// This member is required.
 	DeploymentId *string
-	Template     *bool
+
+	Template *bool
 }
 
 // An immutable representation of a RestApi () resource that can be called by users
@@ -90,13 +100,17 @@ type GetDeploymentInput struct {
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
 // AWS SDKs (https://aws.amazon.com/tools/)
 type GetDeploymentOutput struct {
+
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time
+
 	// A summary of the RestApi () at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
+
 	// The identifier for the deployment resource.
 	Id *string
+
 	// The description for the deployment resource.
 	Description *string
 

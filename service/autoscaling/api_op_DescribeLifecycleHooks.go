@@ -56,14 +56,19 @@ func (c *Client) DescribeLifecycleHooks(ctx context.Context, params *DescribeLif
 }
 
 type DescribeLifecycleHooksInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The names of one or more lifecycle hooks. If you omit this parameter, all
 	// lifecycle hooks are described.
 	LifecycleHookNames []*string
 }
 
 type DescribeLifecycleHooksOutput struct {
+
 	// The lifecycle hooks for the specified group.
 	LifecycleHooks []*types.LifecycleHook
 

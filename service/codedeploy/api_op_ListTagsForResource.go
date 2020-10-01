@@ -58,18 +58,24 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// An identifier returned from the previous ListTagsForResource call. It can be
 	// used to return the next set of applications in the list.
 	NextToken *string
+
 	// The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags
 	// associated with the resource that is identified by the ResourceArn.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// A list of tags returned by ListTagsForResource. The tags are associated with the
 	// resource identified by the input ResourceArn parameter.
 	Tags []*types.Tag
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list application revisions call to return the next
 	// set of application revisions in the list.

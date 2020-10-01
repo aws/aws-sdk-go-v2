@@ -57,11 +57,15 @@ func (c *Client) DeleteTrial(ctx context.Context, params *DeleteTrialInput, optF
 }
 
 type DeleteTrialInput struct {
+
 	// The name of the trial to delete.
+	//
+	// This member is required.
 	TrialName *string
 }
 
 type DeleteTrialOutput struct {
+
 	// The Amazon Resource Name (ARN) of the trial that is being deleted.
 	TrialArn *string
 

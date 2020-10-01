@@ -58,6 +58,7 @@ func (c *Client) AdminInitiateAuth(ctx context.Context, params *AdminInitiateAut
 
 // Initiates the authorization request, as an administrator.
 type AdminInitiateAuthInput struct {
+
 	// The authentication flow for this call to execute. The API action will depend on
 	// this value. For example:
 	//
@@ -96,9 +97,15 @@ type AdminInitiateAuthInput struct {
 	// password authentication. This replaces the ADMIN_NO_SRP_AUTH authentication
 	// flow. In this flow, Cognito receives the password in the request instead of
 	// using the SRP process to verify passwords.
+	//
+	// This member is required.
 	AuthFlow types.AuthFlowType
+
 	// The ID of the Amazon Cognito user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// A map of custom key-value pairs that you can provide as input for certain custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the AdminInitiateAuth
@@ -138,13 +145,16 @@ type AdminInitiateAuthInput struct {
 	// ClientMetadata value, so don't use it to provide sensitive information.</p>
 	// </li> </ul> </note>
 	ClientMetadata map[string]*string
+
 	// The analytics metadata for collecting Amazon Pinpoint metrics for
 	// AdminInitiateAuth calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	ContextData *types.ContextDataType
+
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
 	//
@@ -164,17 +174,22 @@ type AdminInitiateAuthInput struct {
 	// CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured with
 	// client secret), DEVICE_KEY
 	AuthParameters map[string]*string
+
 	// The app client ID.
+	//
+	// This member is required.
 	ClientId *string
 }
 
 // Initiates the authentication response, as an administrator.
 type AdminInitiateAuthOutput struct {
+
 	// The result of the authentication response. This is only returned if the caller
 	// does not need to pass another challenge. If the caller does need to pass another
 	// challenge before it gets tokens, ChallengeName, ChallengeParameters, and Session
 	// are returned.
 	AuthenticationResult *types.AuthenticationResultType
+
 	// The name of the challenge which you are responding to with this call. This is
 	// returned to you in the AdminInitiateAuth response if you need to pass another
 	// challenge.
@@ -215,12 +230,14 @@ type AdminInitiateAuthOutput struct {
 	// after successful first login. This challenge should be passed with NEW_PASSWORD
 	// and any other required attributes.
 	ChallengeName types.ChallengeNameType
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If AdminInitiateAuth or AdminRespondToAuthChallenge API call determines
 	// that the caller needs to go through another challenge, they return a session
 	// with other challenge parameters. This session should be passed as it is to the
 	// next AdminRespondToAuthChallenge API call.
 	Session *string
+
 	// The challenge parameters. These are returned to you in the AdminInitiateAuth
 	// response if you need to pass another challenge. The responses in this parameter
 	// should be used to compute inputs to the next call (AdminRespondToAuthChallenge).

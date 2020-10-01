@@ -56,11 +56,13 @@ func (c *Client) ListUpdates(ctx context.Context, params *ListUpdatesInput, optF
 }
 
 type ListUpdatesInput struct {
+
 	// The nextToken value returned from a previous paginated ListUpdates request where
 	// maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	NextToken *string
+
 	// The maximum number of update results returned by ListUpdates in paginated
 	// output. When you use this parameter, ListUpdates returns only maxResults results
 	// in a single page along with a nextToken response element. You can see the
@@ -69,18 +71,24 @@ type ListUpdatesInput struct {
 	// don't use this parameter, ListUpdates returns up to 100 results and a nextToken
 	// value if applicable.
 	MaxResults *int32
+
 	// The name of the Amazon EKS managed node group to list updates for.
 	NodegroupName *string
+
 	// The name of the Amazon EKS cluster to list updates for.
+	//
+	// This member is required.
 	Name *string
 }
 
 type ListUpdatesOutput struct {
+
 	// The nextToken value to include in a future ListUpdates request. When the results
 	// of a ListUpdates request exceed maxResults, you can use this value to retrieve
 	// the next page of results. This value is null when there are no more results to
 	// return.
 	NextToken *string
+
 	// A list of all the updates for the specified cluster and Region.
 	UpdateIds []*string
 

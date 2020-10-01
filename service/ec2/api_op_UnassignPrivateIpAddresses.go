@@ -56,10 +56,16 @@ func (c *Client) UnassignPrivateIpAddresses(ctx context.Context, params *Unassig
 
 // Contains the parameters for UnassignPrivateIpAddresses.
 type UnassignPrivateIpAddressesInput struct {
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
+
 	// The secondary private IP addresses to unassign from the network interface. You
 	// can specify this option multiple times to unassign more than one IP address.
+	//
+	// This member is required.
 	PrivateIpAddresses []*string
 }
 

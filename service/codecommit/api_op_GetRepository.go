@@ -62,12 +62,16 @@ func (c *Client) GetRepository(ctx context.Context, params *GetRepositoryInput, 
 
 // Represents the input of a get repository operation.
 type GetRepositoryInput struct {
+
 	// The name of the repository to get information about.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 // Represents the output of a get repository operation.
 type GetRepositoryOutput struct {
+
 	// Information about the repository.
 	RepositoryMetadata *types.RepositoryMetadata
 

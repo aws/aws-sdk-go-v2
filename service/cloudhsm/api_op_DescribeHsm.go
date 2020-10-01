@@ -67,9 +67,11 @@ func (c *Client) DescribeHsm(ctx context.Context, params *DescribeHsmInput, optF
 
 // Contains the inputs for the DescribeHsm () operation.
 type DescribeHsmInput struct {
+
 	// The serial number of the HSM. Either the HsmArn or the HsmSerialNumber parameter
 	// must be specified.
 	HsmSerialNumber *string
+
 	// The ARN of the HSM. Either the HsmArn or the SerialNumber parameter must be
 	// specified.
 	HsmArn *string
@@ -77,34 +79,49 @@ type DescribeHsmInput struct {
 
 // Contains the output of the DescribeHsm () operation.
 type DescribeHsmOutput struct {
+
 	// The subscription start date.
 	SubscriptionStartDate *string
+
 	// The name of the HSM vendor.
 	VendorName *string
+
 	// The identifier of the subnet that the HSM is in.
 	SubnetId *string
+
 	// The ARN of the IAM role assigned to the HSM.
 	IamRoleArn *string
+
 	// Contains additional information about the status of the HSM.
 	StatusDetails *string
+
 	// The identifier of the elastic network interface (ENI) attached to the HSM.
 	EniId *string
+
 	// The identifier of the VPC that the HSM is in.
 	VpcId *string
+
 	// The Availability Zone that the HSM is in.
 	AvailabilityZone *string
+
 	// The date and time that the SSH key was last updated.
 	SshKeyLastUpdated *string
+
 	// The public SSH key.
 	SshPublicKey *string
+
 	// The HSM software version.
 	SoftwareVersion *string
+
 	// The date and time that the server certificate was last updated.
 	ServerCertLastUpdated *string
+
 	// The subscription end date.
 	SubscriptionEndDate *string
+
 	// The ARN of the HSM.
 	HsmArn *string
+
 	// Specifies the type of subscription for the HSM.
 	//
 	//     * PRODUCTION - The HSM is
@@ -113,16 +130,22 @@ type DescribeHsmOutput struct {
 	//     * TRIAL - The HSM is being used in
 	// a product trial.
 	SubscriptionType types.SubscriptionType
+
 	// The HSM model type.
 	HsmType *string
+
 	// The URI of the certificate server.
 	ServerCertUri *string
+
 	// The list of partitions on the HSM.
 	Partitions []*string
+
 	// The status of the HSM.
 	Status types.HsmStatus
+
 	// The IP address assigned to the HSM's ENI.
 	EniIp *string
+
 	// The serial number of the HSM.
 	SerialNumber *string
 

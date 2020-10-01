@@ -61,21 +61,30 @@ func (c *Client) UpdateDomainContact(ctx context.Context, params *UpdateDomainCo
 
 // The UpdateDomainContact request includes the following elements.
 type UpdateDomainContactInput struct {
+
 	// Provides detailed contact information.
 	AdminContact *types.ContactDetail
+
 	// Provides detailed contact information.
 	RegistrantContact *types.ContactDetail
+
 	// The name of the domain that you want to update contact information for.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Provides detailed contact information.
 	TechContact *types.ContactDetail
 }
 
 // The UpdateDomainContact response includes the following element.
 type UpdateDomainContactOutput struct {
+
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	//
+	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

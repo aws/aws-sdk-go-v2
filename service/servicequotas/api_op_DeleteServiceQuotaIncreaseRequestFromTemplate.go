@@ -55,11 +55,20 @@ func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Conte
 }
 
 type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
+
 	// Specifies the code for the quota that you want to delete.
+	//
+	// This member is required.
 	QuotaCode *string
+
 	// Specifies the code for the service that you want to delete.
+	//
+	// This member is required.
 	ServiceCode *string
+
 	// Specifies the AWS Region for the quota that you want to delete.
+	//
+	// This member is required.
 	AwsRegion *string
 }
 

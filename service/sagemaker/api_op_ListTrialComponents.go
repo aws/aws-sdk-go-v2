@@ -65,35 +65,46 @@ func (c *Client) ListTrialComponents(ctx context.Context, params *ListTrialCompo
 }
 
 type ListTrialComponentsInput struct {
+
 	// If the previous call to ListTrialComponents didn't return the full set of
 	// components, the call returns a token for getting the next set of components.
 	NextToken *string
+
 	// A filter that returns only components created before the specified time.
 	CreatedBefore *time.Time
+
 	// A filter that returns only components that have the specified source Amazon
 	// Resource Name (ARN). If you specify SourceArn, you can't filter by
 	// ExperimentName or TrialName.
 	SourceArn *string
+
 	// The maximum number of components to return in the response. The default value is
 	// 10.
 	MaxResults *int32
+
 	// A filter that returns only components that are part of the specified experiment.
 	// If you specify ExperimentName, you can't filter by SourceArn or TrialName.
 	ExperimentName *string
+
 	// A filter that returns only components that are part of the specified trial. If
 	// you specify TrialName, you can't filter by ExperimentName or SourceArn.
 	TrialName *string
+
 	// A filter that returns only components created after the specified time.
 	CreatedAfter *time.Time
+
 	// The property used to sort results. The default value is CreationTime.
 	SortBy types.SortTrialComponentsBy
+
 	// The sort order. The default value is Descending.
 	SortOrder types.SortOrder
 }
 
 type ListTrialComponentsOutput struct {
+
 	// A token for getting the next set of components, if there are any.
 	NextToken *string
+
 	// A list of the summaries of your trial components.
 	TrialComponentSummaries []*types.TrialComponentSummary
 

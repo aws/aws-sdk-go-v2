@@ -65,8 +65,12 @@ func (c *Client) DescribeServiceAccessPolicies(ctx context.Context, params *Desc
 // Specifies the name of the domain you want to describe. To show the active
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeServiceAccessPoliciesInput struct {
+
 	// The name of the domain you want to describe.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
@@ -74,7 +78,10 @@ type DescribeServiceAccessPoliciesInput struct {
 
 // The result of a DescribeServiceAccessPolicies request.
 type DescribeServiceAccessPoliciesOutput struct {
+
 	// The access rules configured for the domain specified in the request.
+	//
+	// This member is required.
 	AccessPolicies *types.AccessPoliciesStatus
 
 	// Metadata pertaining to the operation's result.

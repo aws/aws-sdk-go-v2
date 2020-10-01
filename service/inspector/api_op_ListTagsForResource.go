@@ -56,12 +56,18 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The ARN that specifies the assessment template whose tags you want to list.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// A collection of key and value pairs.
+	//
+	// This member is required.
 	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.

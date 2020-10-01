@@ -58,20 +58,26 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 }
 
 type ListRulesInput struct {
+
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
+
 	// Limits the results to show only the rules associated with the specified event
 	// bus.
 	EventBusName *string
+
 	// The prefix matching the rule name.
 	NamePrefix *string
+
 	// The maximum number of results to return.
 	Limit *int32
 }
 
 type ListRulesOutput struct {
+
 	// The rules that match the specified criteria.
 	Rules []*types.Rule
+
 	// Indicates whether there are additional results to retrieve. If there are no more
 	// results, the value is null.
 	NextToken *string

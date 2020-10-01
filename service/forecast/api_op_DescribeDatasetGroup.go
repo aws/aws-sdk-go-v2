@@ -69,15 +69,20 @@ func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatas
 }
 
 type DescribeDatasetGroupInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset group.
+	//
+	// This member is required.
 	DatasetGroupArn *string
 }
 
 type DescribeDatasetGroupOutput struct {
+
 	// When the dataset group was created or last updated from a call to the
 	// UpdateDatasetGroup () operation. While the dataset group is being updated,
 	// LastModificationTime is the current time of the DescribeDatasetGroup call.
 	LastModificationTime *time.Time
+
 	// The status of the dataset group. States include:
 	//
 	//     * ACTIVE
@@ -95,15 +100,20 @@ type DescribeDatasetGroupOutput struct {
 	// operation. The Status of the dataset group must be ACTIVE before you can use the
 	// dataset group to create a predictor.
 	Status *string
+
 	// An array of Amazon Resource Names (ARNs) of the datasets contained in the
 	// dataset group.
 	DatasetArns []*string
+
 	// The name of the dataset group.
 	DatasetGroupName *string
+
 	// The ARN of the dataset group.
 	DatasetGroupArn *string
+
 	// The domain associated with the dataset group.
 	Domain types.Domain
+
 	// When the dataset group was created.
 	CreationTime *time.Time
 

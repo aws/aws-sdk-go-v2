@@ -59,6 +59,7 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 }
 
 type UpdateUserInput struct {
+
 	// Allows you to supply a scope-down policy for your user so you can use the same
 	// IAM role across multiple users. The policy scopes down user access to portions
 	// of your Amazon S3 bucket. Variables you can use inside this policy include
@@ -72,6 +73,7 @@ type UpdateUserInput struct {
 	// href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a>
 	// in the <i>AWS Security Token Service API Reference</i>.</p> </note>
 	Policy *string
+
 	// The IAM role that controls your users' access to your Amazon S3 bucket. The
 	// policies attached to this role will determine the level of access you want to
 	// provide your users when transferring files into and out of your Amazon S3 bucket
@@ -79,16 +81,23 @@ type UpdateUserInput struct {
 	// the file transfer protocol-enabled server to access your resources when
 	// servicing your users' transfer requests.
 	Role *string
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// instance that the user account is assigned to.
+	//
+	// This member is required.
 	ServerId *string
+
 	// A unique string that identifies a user and is associated with a file transfer
 	// protocol-enabled server as specified by the ServerId. This is the string that
 	// will be used by your user when they log in to your server. This user name is a
 	// minimum of 3 and a maximum of 32 characters long. The following are valid
 	// characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start
 	// with a hyphen.
+	//
+	// This member is required.
 	UserName *string
+
 	// Logical directory mappings that specify what Amazon S3 paths and keys should be
 	// visible to your user and how you want to make them visible. You will need to
 	// specify the "Entry" and "Target" pair, where Entry shows how the path is made
@@ -109,10 +118,12 @@ type UpdateUserInput struct {
 	// Make sure that the end of the key name ends in a / for it to be considered a
 	// folder.</p> </note>
 	HomeDirectoryMappings []*types.HomeDirectoryMapEntry
+
 	// Specifies the landing directory (folder) for a user when they log in to the file
 	// transfer protocol-enabled server using their file transfer protocol client.
 	// <p>An example is <code>your-Amazon-S3-bucket-name>/home/username</code>.</p>
 	HomeDirectory *string
+
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the file transfer protocol-enabled server. If you set it to
 	// PATH, the user will see the absolute Amazon S3 bucket paths as is in their file
@@ -125,11 +136,17 @@ type UpdateUserInput struct {
 // UpdateUserResponse returns the user name and file transfer protocol-enabled
 // server identifier for the request to update a user's properties.
 type UpdateUserOutput struct {
+
 	// The unique identifier for a user that is assigned to a file transfer
 	// protocol-enabled server instance that was specified in the request.
+	//
+	// This member is required.
 	UserName *string
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// instance that the user account is assigned to.
+	//
+	// This member is required.
 	ServerId *string
 
 	// Metadata pertaining to the operation's result.

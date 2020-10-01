@@ -86,18 +86,26 @@ func (c *Client) CreateByteMatchSet(ctx context.Context, params *CreateByteMatch
 }
 
 type CreateByteMatchSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// A friendly name or description of the ByteMatchSet (). You can't change Name
 	// after you create a ByteMatchSet.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateByteMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the CreateByteMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// A ByteMatchSet () that contains no ByteMatchTuple objects.
 	ByteMatchSet *types.ByteMatchSet
 

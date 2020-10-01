@@ -58,19 +58,24 @@ func (c *Client) DescribeClassicLinkInstances(ctx context.Context, params *Descr
 }
 
 type DescribeClassicLinkInstancesInput struct {
+
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
 	InstanceIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	// Constraint: If the value is greater than 1000, we return only 1000 items.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// One or more filters.
 	//
 	//     * group-id - The ID of a VPC security group that's
@@ -96,8 +101,10 @@ type DescribeClassicLinkInstancesInput struct {
 }
 
 type DescribeClassicLinkInstancesOutput struct {
+
 	// Information about one or more linked EC2-Classic instances.
 	Instances []*types.ClassicLinkInstance
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

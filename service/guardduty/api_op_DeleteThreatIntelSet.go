@@ -55,9 +55,15 @@ func (c *Client) DeleteThreatIntelSet(ctx context.Context, params *DeleteThreatI
 }
 
 type DeleteThreatIntelSetInput struct {
+
 	// The unique ID of the detector that the threatIntelSet is associated with.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The unique ID of the threatIntelSet that you want to delete.
+	//
+	// This member is required.
 	ThreatIntelSetId *string
 }
 

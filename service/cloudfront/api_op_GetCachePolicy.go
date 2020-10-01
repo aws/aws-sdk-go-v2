@@ -67,16 +67,21 @@ func (c *Client) GetCachePolicy(ctx context.Context, params *GetCachePolicyInput
 }
 
 type GetCachePolicyInput struct {
+
 	// The unique identifier for the cache policy. If the cache policy is attached to a
 	// distribution’s cache behavior, you can get the policy’s identifier using
 	// ListDistributions or GetDistribution. If the cache policy is not attached to a
 	// cache behavior, you can get the identifier using ListCachePolicies.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetCachePolicyOutput struct {
+
 	// The current version of the cache policy.
 	ETag *string
+
 	// The cache policy.
 	CachePolicy *types.CachePolicy
 

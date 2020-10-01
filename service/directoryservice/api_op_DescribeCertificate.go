@@ -57,13 +57,20 @@ func (c *Client) DescribeCertificate(ctx context.Context, params *DescribeCertif
 }
 
 type DescribeCertificateInput struct {
+
 	// The identifier of the certificate.
+	//
+	// This member is required.
 	CertificateId *string
+
 	// The identifier of the directory.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 
 type DescribeCertificateOutput struct {
+
 	// Information about the certificate, including registered date time, certificate
 	// state, the reason for the state, expiration date time, and certificate common
 	// name.

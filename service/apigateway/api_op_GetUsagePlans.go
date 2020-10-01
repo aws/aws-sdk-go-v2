@@ -57,14 +57,20 @@ func (c *Client) GetUsagePlans(ctx context.Context, params *GetUsagePlansInput, 
 
 // The GET request to get all the usage plans of the caller's account.
 type GetUsagePlansInput struct {
-	Template         *bool
+	Template *bool
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	// The identifier of the API key associated with the usage plans.
 	KeyId *string
-	Name  *string
+
+	Name *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
@@ -74,8 +80,10 @@ type GetUsagePlansInput struct {
 // Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type GetUsagePlansOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.UsagePlan
+
 	// The current pagination position in the paged result set.
 	Position *string
 

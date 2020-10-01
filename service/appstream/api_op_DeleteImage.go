@@ -57,11 +57,15 @@ func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optF
 }
 
 type DeleteImageInput struct {
+
 	// The name of the image.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DeleteImageOutput struct {
+
 	// Information about the image.
 	Image *types.Image
 

@@ -59,9 +59,11 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 
 // Represents the input of a ListTables operation.
 type ListTablesInput struct {
+
 	// A maximum number of table names to return. If this parameter is not specified,
 	// the limit is 100.
 	Limit *int32
+
 	// The first table name that this operation will evaluate. Use the value that was
 	// returned for LastEvaluatedTableName in a previous operation, so that you can
 	// obtain the next page of results.
@@ -70,12 +72,14 @@ type ListTablesInput struct {
 
 // Represents the output of a ListTables operation.
 type ListTablesOutput struct {
+
 	// The names of the tables associated with the current account at the current
 	// endpoint. The maximum size of this array is 100. If LastEvaluatedTableName also
 	// appears in the output, you can use this value as the ExclusiveStartTableName
 	// parameter in a subsequent ListTables request and obtain the next page of
 	// results.
 	TableNames []*string
+
 	// The name of the last table in the current page of results. Use this value as the
 	// ExclusiveStartTableName in a new request to obtain the next page of results,
 	// until all the table names are returned. If you do not receive a

@@ -55,7 +55,10 @@ func (c *Client) DeleteFunctionDefinition(ctx context.Context, params *DeleteFun
 }
 
 type DeleteFunctionDefinitionInput struct {
+
 	// The ID of the Lambda function definition.
+	//
+	// This member is required.
 	FunctionDefinitionId *string
 }
 

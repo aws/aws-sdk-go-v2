@@ -59,11 +59,16 @@ func (c *Client) DeleteNetworkInterfacePermission(ctx context.Context, params *D
 
 // Contains the parameters for DeleteNetworkInterfacePermission.
 type DeleteNetworkInterfacePermissionInput struct {
+
 	// The ID of the network interface permission.
+	//
+	// This member is required.
 	NetworkInterfacePermissionId *string
+
 	// Specify true to remove the permission even if the network interface is attached
 	// to an instance.
 	Force *bool
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -73,6 +78,7 @@ type DeleteNetworkInterfacePermissionInput struct {
 
 // Contains the output for DeleteNetworkInterfacePermission.
 type DeleteNetworkInterfacePermissionOutput struct {
+
 	// Returns true if the request succeeds, otherwise returns an error.
 	Return *bool
 

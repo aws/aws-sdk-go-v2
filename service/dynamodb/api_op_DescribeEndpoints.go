@@ -60,7 +60,10 @@ type DescribeEndpointsInput struct {
 }
 
 type DescribeEndpointsOutput struct {
+
 	// List of endpoints.
+	//
+	// This member is required.
 	Endpoints []*types.Endpoint
 
 	// Metadata pertaining to the operation's result.

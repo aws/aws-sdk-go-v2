@@ -56,14 +56,23 @@ func (c *Client) DescribeIdentityProvider(ctx context.Context, params *DescribeI
 }
 
 type DescribeIdentityProviderInput struct {
+
 	// The identity provider name.
+	//
+	// This member is required.
 	ProviderName *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type DescribeIdentityProviderOutput struct {
+
 	// The identity provider that was deleted.
+	//
+	// This member is required.
 	IdentityProvider *types.IdentityProviderType
 
 	// Metadata pertaining to the operation's result.

@@ -69,18 +69,25 @@ func (c *Client) GetIceServerConfig(ctx context.Context, params *GetIceServerCon
 }
 
 type GetIceServerConfigInput struct {
+
 	// Specifies the desired service. Currently, TURN is the only valid value.
 	Service types.Service
+
 	// Unique identifier for the viewer. Must be unique within the signaling channel.
 	ClientId *string
+
 	// An optional user ID to be associated with the credentials.
 	Username *string
+
 	// The ARN of the signaling channel to be used for the peer-to-peer connection
 	// between configured peers.
+	//
+	// This member is required.
 	ChannelARN *string
 }
 
 type GetIceServerConfigOutput struct {
+
 	// The list of ICE server information objects.
 	IceServerList []*types.IceServer
 

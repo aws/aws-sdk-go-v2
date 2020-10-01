@@ -57,21 +57,31 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 }
 
 type DescribeUserInput struct {
+
 	// The identifier for the organization under which the user exists.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier for the user to be described.
+	//
+	// This member is required.
 	UserId *string
 }
 
 type DescribeUserOutput struct {
+
 	// The date and time at which the user was disabled for Amazon WorkMail usage, in
 	// UNIX epoch time format.
 	DisabledDate *time.Time
+
 	// The date and time at which the user was enabled for Amazon WorkMail usage, in
 	// UNIX epoch time format.
 	EnabledDate *time.Time
+
 	// The email of the user.
 	Email *string
+
 	// In certain cases, other entities are modeled as users. If interoperability is
 	// enabled, resources are imported into Amazon WorkMail as users. Because different
 	// WorkMail organizations rely on different directory types, administrators can
@@ -79,13 +89,17 @@ type DescribeUserOutput struct {
 	// role) and the directory administrators. The values are USER, RESOURCE, and
 	// SYSTEM_USER.
 	UserRole types.UserRole
+
 	// The state of a user: enabled (registered to Amazon WorkMail) or disabled
 	// (deregistered or never registered to WorkMail).
 	State types.EntityState
+
 	// The name for the user.
 	Name *string
+
 	// The identifier for the described user.
 	UserId *string
+
 	// The display name of the user.
 	DisplayName *string
 

@@ -62,14 +62,17 @@ func (c *Client) DescribeLoadBalancerPolicies(ctx context.Context, params *Descr
 
 // Contains the parameters for DescribeLoadBalancerPolicies.
 type DescribeLoadBalancerPoliciesInput struct {
+
 	// The name of the load balancer.
 	LoadBalancerName *string
+
 	// The names of the policies.
 	PolicyNames []*string
 }
 
 // Contains the output of DescribeLoadBalancerPolicies.
 type DescribeLoadBalancerPoliciesOutput struct {
+
 	// Information about the policies.
 	PolicyDescriptions []*types.PolicyDescription
 

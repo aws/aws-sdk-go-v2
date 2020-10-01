@@ -57,14 +57,17 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 }
 
 type ListNamespacesInput struct {
+
 	// The maximum number of namespaces that you want AWS Cloud Map to return in the
 	// response to a ListNamespaces request. If you don't specify a value for
 	// MaxResults, AWS Cloud Map returns up to 100 namespaces.
 	MaxResults *int32
+
 	// A complex type that contains specifications for the namespaces that you want to
 	// list. If you specify more than one filter, a namespace must match all filters to
 	// be returned by ListNamespaces.
 	Filters []*types.NamespaceFilter
+
 	// For the first ListNamespaces request, omit this value. If the response contains
 	// NextToken, submit another ListNamespaces request to get the next group of
 	// results. Specify the value of NextToken from the previous response in the next
@@ -76,6 +79,7 @@ type ListNamespacesInput struct {
 }
 
 type ListNamespacesOutput struct {
+
 	// If the response contains NextToken, submit another ListNamespaces request to get
 	// the next group of results. Specify the value of NextToken from the previous
 	// response in the next request. AWS Cloud Map gets MaxResults namespaces and then
@@ -84,6 +88,7 @@ type ListNamespacesOutput struct {
 	// subsequent groups of MaxResults namespaces do contain namespaces that match the
 	// criteria.
 	NextToken *string
+
 	// An array that contains one NamespaceSummary object for each namespace that
 	// matches the specified filter criteria.
 	Namespaces []*types.NamespaceSummary

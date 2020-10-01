@@ -56,12 +56,16 @@ func (c *Client) GetTestGridProject(ctx context.Context, params *GetTestGridProj
 }
 
 type GetTestGridProjectInput struct {
+
 	// The ARN of the Selenium testing project, from either CreateTestGridProject () or
 	// ListTestGridProjects ().
+	//
+	// This member is required.
 	ProjectArn *string
 }
 
 type GetTestGridProjectOutput struct {
+
 	// A TestGridProject ().
 	TestGridProject *types.TestGridProject
 

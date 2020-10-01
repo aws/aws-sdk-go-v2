@@ -60,26 +60,37 @@ func (c *Client) GetDeploymentStrategy(ctx context.Context, params *GetDeploymen
 }
 
 type GetDeploymentStrategyInput struct {
+
 	// The ID of the deployment strategy to get.
+	//
+	// This member is required.
 	DeploymentStrategyId *string
 }
 
 type GetDeploymentStrategyOutput struct {
+
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType
+
 	// Total amount of time the deployment lasted.
 	DeploymentDurationInMinutes *int32
+
 	// Save the deployment strategy to a Systems Manager (SSM) document.
 	ReplicateTo types.ReplicateTo
+
 	// The deployment strategy ID.
 	Id *string
+
 	// The description of the deployment strategy.
 	Description *string
+
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
 	FinalBakeTimeInMinutes *int32
+
 	// The name of the deployment strategy.
 	Name *string
+
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
 	GrowthFactor *float32

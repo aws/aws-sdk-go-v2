@@ -70,20 +70,25 @@ func (c *Client) CreateTransitGateway(ctx context.Context, params *CreateTransit
 }
 
 type CreateTransitGatewayInput struct {
+
 	// The tags to apply to the transit gateway.
 	TagSpecifications []*types.TagSpecification
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The transit gateway options.
 	Options *types.TransitGatewayRequestOptions
+
 	// A description of the transit gateway.
 	Description *string
 }
 
 type CreateTransitGatewayOutput struct {
+
 	// Information about the transit gateway.
 	TransitGateway *types.TransitGateway
 

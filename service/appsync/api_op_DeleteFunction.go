@@ -55,9 +55,15 @@ func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput
 }
 
 type DeleteFunctionInput struct {
+
 	// The GraphQL API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The Function ID.
+	//
+	// This member is required.
 	FunctionId *string
 }
 

@@ -72,15 +72,21 @@ func (c *Client) AddRoleToInstanceProfile(ctx context.Context, params *AddRoleTo
 }
 
 type AddRoleToInstanceProfileInput struct {
+
 	// The name of the role to add. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
+
 	// The name of the instance profile to update. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	InstanceProfileName *string
 }
 

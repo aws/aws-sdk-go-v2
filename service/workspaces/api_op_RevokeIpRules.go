@@ -55,9 +55,15 @@ func (c *Client) RevokeIpRules(ctx context.Context, params *RevokeIpRulesInput, 
 }
 
 type RevokeIpRulesInput struct {
+
 	// The identifier of the group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// The rules to remove from the group.
+	//
+	// This member is required.
 	UserRules []*string
 }
 

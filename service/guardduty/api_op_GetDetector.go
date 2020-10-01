@@ -56,23 +56,37 @@ func (c *Client) GetDetector(ctx context.Context, params *GetDetectorInput, optF
 }
 
 type GetDetectorInput struct {
+
 	// The unique ID of the detector that you want to get.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type GetDetectorOutput struct {
+
 	// The last-updated timestamp for the detector.
 	UpdatedAt *string
+
 	// The timestamp of when the detector was created.
 	CreatedAt *string
+
 	// The tags of the detector resource.
 	Tags map[string]*string
+
 	// An object that describes which data sources are enabled for the detector.
 	DataSources *types.DataSourceConfigurationsResult
+
 	// The GuardDuty service role.
+	//
+	// This member is required.
 	ServiceRole *string
+
 	// The detector status.
+	//
+	// This member is required.
 	Status types.DetectorStatus
+
 	// The publishing frequency of the finding.
 	FindingPublishingFrequency types.FindingPublishingFrequency
 

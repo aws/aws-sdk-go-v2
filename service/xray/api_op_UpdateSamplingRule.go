@@ -56,11 +56,15 @@ func (c *Client) UpdateSamplingRule(ctx context.Context, params *UpdateSamplingR
 }
 
 type UpdateSamplingRuleInput struct {
+
 	// The rule and fields to change.
+	//
+	// This member is required.
 	SamplingRuleUpdate *types.SamplingRuleUpdate
 }
 
 type UpdateSamplingRuleOutput struct {
+
 	// The updated rule definition and metadata.
 	SamplingRuleRecord *types.SamplingRuleRecord
 

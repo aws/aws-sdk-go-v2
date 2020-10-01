@@ -84,15 +84,25 @@ func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns .
 }
 
 type PutRecordInput struct {
+
 	// The record.
+	//
+	// This member is required.
 	Record *types.Record
+
 	// The name of the delivery stream.
+	//
+	// This member is required.
 	DeliveryStreamName *string
 }
 
 type PutRecordOutput struct {
+
 	// The ID of the record.
+	//
+	// This member is required.
 	RecordId *string
+
 	// Indicates whether server-side encryption (SSE) was enabled during this
 	// operation.
 	Encrypted *bool

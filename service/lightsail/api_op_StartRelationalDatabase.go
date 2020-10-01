@@ -61,11 +61,15 @@ func (c *Client) StartRelationalDatabase(ctx context.Context, params *StartRelat
 }
 
 type StartRelationalDatabaseInput struct {
+
 	// The name of your database to start.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
 }
 
 type StartRelationalDatabaseOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

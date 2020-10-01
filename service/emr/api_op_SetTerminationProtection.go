@@ -70,13 +70,19 @@ func (c *Client) SetTerminationProtection(ctx context.Context, params *SetTermin
 
 // The input argument to the TerminationProtection () operation.
 type SetTerminationProtectionInput struct {
+
 	// A Boolean that indicates whether to protect the cluster and prevent the Amazon
 	// EC2 instances in the cluster from shutting down due to API calls, user
 	// intervention, or job-flow error.
+	//
+	// This member is required.
 	TerminationProtected *bool
+
 	// A list of strings that uniquely identify the clusters to protect. This
 	// identifier is returned by RunJobFlow () and can also be obtained from
 	// DescribeJobFlows () .
+	//
+	// This member is required.
 	JobFlowIds []*string
 }
 

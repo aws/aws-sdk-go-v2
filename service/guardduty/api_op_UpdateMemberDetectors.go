@@ -56,17 +56,27 @@ func (c *Client) UpdateMemberDetectors(ctx context.Context, params *UpdateMember
 }
 
 type UpdateMemberDetectorsInput struct {
+
 	// A list of member account IDs to be updated.
+	//
+	// This member is required.
 	AccountIds []*string
+
 	// The detector ID of the master account.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// An object describes which data sources will be updated.
 	DataSources *types.DataSourceConfigurations
 }
 
 type UpdateMemberDetectorsOutput struct {
+
 	// A list of member account IDs that were unable to be processed along with an
 	// explanation for why they were not processed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

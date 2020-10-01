@@ -55,22 +55,28 @@ func (c *Client) DescribeServiceUpdates(ctx context.Context, params *DescribeSer
 }
 
 type DescribeServiceUpdatesInput struct {
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The status of the service update
 	ServiceUpdateStatus []types.ServiceUpdateStatus
+
 	// The maximum number of records to include in the response
 	MaxRecords *int32
+
 	// The unique ID of the service update
 	ServiceUpdateName *string
 }
 
 type DescribeServiceUpdatesOutput struct {
+
 	// A list of service updates
 	ServiceUpdates []*types.ServiceUpdate
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by

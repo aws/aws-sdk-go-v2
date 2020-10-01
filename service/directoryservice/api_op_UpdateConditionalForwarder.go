@@ -56,14 +56,23 @@ func (c *Client) UpdateConditionalForwarder(ctx context.Context, params *UpdateC
 
 // Updates a conditional forwarder.
 type UpdateConditionalForwarderInput struct {
+
 	// The fully qualified domain name (FQDN) of the remote domain with which you will
 	// set up a trust relationship.
+	//
+	// This member is required.
 	RemoteDomainName *string
+
 	// The directory ID of the AWS directory for which to update the conditional
 	// forwarder.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The updated IP addresses of the remote DNS server associated with the
 	// conditional forwarder.
+	//
+	// This member is required.
 	DnsIpAddrs []*string
 }
 

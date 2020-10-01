@@ -59,16 +59,19 @@ func (c *Client) DescribePermissions(ctx context.Context, params *DescribePermis
 }
 
 type DescribePermissionsInput struct {
+
 	// The user's IAM ARN. This can also be a federated user's ARN. For more
 	// information about IAM ARNs, see Using Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	IamUserArn *string
+
 	// The stack ID.
 	StackId *string
 }
 
 // Contains the response to a DescribePermissions request.
 type DescribePermissionsOutput struct {
+
 	// An array of Permission objects that describe the stack permissions.
 	//
 	//     * If

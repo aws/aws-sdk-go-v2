@@ -61,12 +61,16 @@ func (c *Client) PutRetentionConfiguration(ctx context.Context, params *PutReten
 }
 
 type PutRetentionConfigurationInput struct {
+
 	// Number of days AWS Config stores your historical information. Currently, only
 	// applicable to the configuration item history.
+	//
+	// This member is required.
 	RetentionPeriodInDays *int32
 }
 
 type PutRetentionConfigurationOutput struct {
+
 	// Returns a retention configuration object.
 	RetentionConfiguration *types.RetentionConfiguration
 

@@ -84,16 +84,23 @@ func (c *Client) TestFailover(ctx context.Context, params *TestFailoverInput, op
 }
 
 type TestFailoverInput struct {
+
 	// The name of the node group (called shard in the console) in this replication
 	// group on which automatic failover is to be tested. You may test automatic
 	// failover on up to 5 node groups in any rolling 24-hour period.
+	//
+	// This member is required.
 	NodeGroupId *string
+
 	// The name of the replication group (console: cluster) whose automatic failover is
 	// being tested by this operation.
+	//
+	// This member is required.
 	ReplicationGroupId *string
 }
 
 type TestFailoverOutput struct {
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *types.ReplicationGroup
 

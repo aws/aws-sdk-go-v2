@@ -58,14 +58,26 @@ func (c *Client) DeleteSubscriber(ctx context.Context, params *DeleteSubscriberI
 
 // Request of DeleteSubscriber
 type DeleteSubscriberInput struct {
+
 	// The notification whose subscriber you want to delete.
+	//
+	// This member is required.
 	Notification *types.Notification
+
 	// The name of the budget whose subscriber you want to delete.
+	//
+	// This member is required.
 	BudgetName *string
+
 	// The accountId that is associated with the budget whose subscriber you want to
 	// delete.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The subscriber that you want to delete.
+	//
+	// This member is required.
 	Subscriber *types.Subscriber
 }
 

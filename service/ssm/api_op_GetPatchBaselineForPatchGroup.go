@@ -56,18 +56,25 @@ func (c *Client) GetPatchBaselineForPatchGroup(ctx context.Context, params *GetP
 }
 
 type GetPatchBaselineForPatchGroupInput struct {
+
 	// The name of the patch group whose patch baseline should be retrieved.
+	//
+	// This member is required.
 	PatchGroup *string
+
 	// Returns he operating system rule specified for patch groups using the patch
 	// baseline.
 	OperatingSystem types.OperatingSystem
 }
 
 type GetPatchBaselineForPatchGroupOutput struct {
+
 	// The name of the patch group.
 	PatchGroup *string
+
 	// The ID of the patch baseline that should be used for the patch group.
 	BaselineId *string
+
 	// The operating system rule specified for patch groups using the patch baseline.
 	OperatingSystem types.OperatingSystem
 

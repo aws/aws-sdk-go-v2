@@ -58,8 +58,12 @@ func (c *Client) RevokeGrant(ctx context.Context, params *RevokeGrantInput, optF
 }
 
 type RevokeGrantInput struct {
+
 	// Identifier of the grant to be revoked.
+	//
+	// This member is required.
 	GrantId *string
+
 	// A unique identifier for the customer master key associated with the grant.
 	// <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a
 	// CMK in a  different AWS account, you must use the key ARN. For example:
@@ -72,6 +76,8 @@ type RevokeGrantInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 

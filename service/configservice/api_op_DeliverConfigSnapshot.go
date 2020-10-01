@@ -67,12 +67,16 @@ func (c *Client) DeliverConfigSnapshot(ctx context.Context, params *DeliverConfi
 
 // The input for the DeliverConfigSnapshot () action.
 type DeliverConfigSnapshotInput struct {
+
 	// The name of the delivery channel through which the snapshot is delivered.
+	//
+	// This member is required.
 	DeliveryChannelName *string
 }
 
 // The output for the DeliverConfigSnapshot () action, in JSON format.
 type DeliverConfigSnapshotOutput struct {
+
 	// The ID of the snapshot that is being created.
 	ConfigSnapshotId *string
 

@@ -57,11 +57,16 @@ func (c *Client) PurchaseReservedCacheNodesOffering(ctx context.Context, params 
 
 // Represents the input of a PurchaseReservedCacheNodesOffering operation.
 type PurchaseReservedCacheNodesOfferingInput struct {
+
 	// The ID of the reserved cache node offering to purchase. Example:
 	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
+	//
+	// This member is required.
 	ReservedCacheNodesOfferingId *string
+
 	// The number of cache node instances to reserve. Default: 1
 	CacheNodeCount *int32
+
 	// A customer-specified identifier to track this reservation. The Reserved Cache
 	// Node ID is an unique customer-specified identifier to track this reservation. If
 	// this parameter is not specified, ElastiCache automatically generates an
@@ -70,6 +75,7 @@ type PurchaseReservedCacheNodesOfferingInput struct {
 }
 
 type PurchaseReservedCacheNodesOfferingOutput struct {
+
 	// Represents the output of a PurchaseReservedCacheNodesOffering operation.
 	ReservedCacheNode *types.ReservedCacheNode
 

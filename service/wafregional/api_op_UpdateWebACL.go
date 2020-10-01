@@ -114,13 +114,18 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 }
 
 type UpdateWebACLInput struct {
+
 	// The WebACLId of the WebACL () that you want to update. WebACLId is returned by
 	// CreateWebACL () and by ListWebACLs ().
+	//
+	// This member is required.
 	WebACLId *string
+
 	// A default action for the web ACL, either ALLOW or BLOCK. AWS WAF performs the
 	// default action if a request doesn't match the criteria in any of the rules in a
 	// web ACL.
 	DefaultAction *types.WafAction
+
 	// An array of updates to make to the WebACL (). An array of WebACLUpdate objects
 	// that you want to insert into or delete from a WebACL (). For more information,
 	// see the applicable data types:
@@ -136,11 +141,15 @@ type UpdateWebACLInput struct {
 	//
 	//     * WafAction (): Contains Type
 	Updates []*types.WebACLUpdate
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type UpdateWebACLOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateWebACL request. You can also
 	// use this value to query the status of the request. For more information, see
 	// GetChangeTokenStatus ().

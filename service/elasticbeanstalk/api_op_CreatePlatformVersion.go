@@ -57,16 +57,28 @@ func (c *Client) CreatePlatformVersion(ctx context.Context, params *CreatePlatfo
 
 // Request to create a new platform version.
 type CreatePlatformVersionInput struct {
+
 	// The number, such as 1.0.2, for the new platform version.
+	//
+	// This member is required.
 	PlatformVersion *string
+
 	// The location of the platform definition archive in Amazon S3.
+	//
+	// This member is required.
 	PlatformDefinitionBundle *types.S3Location
+
 	// The name of your custom platform.
+	//
+	// This member is required.
 	PlatformName *string
+
 	// The name of the builder environment.
 	EnvironmentName *string
+
 	// The configuration option settings to apply to the builder environment.
 	OptionSettings []*types.ConfigurationOptionSetting
+
 	// Specifies the tags applied to the new platform version. Elastic Beanstalk
 	// applies these tags only to the platform version. Environments that you create
 	// using the platform version don't inherit the tags.
@@ -74,8 +86,10 @@ type CreatePlatformVersionInput struct {
 }
 
 type CreatePlatformVersionOutput struct {
+
 	// Detailed information about the new version of the custom platform.
 	PlatformSummary *types.PlatformSummary
+
 	// The builder used to create the custom platform.
 	Builder *types.Builder
 

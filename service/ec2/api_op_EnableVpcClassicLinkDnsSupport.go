@@ -62,11 +62,13 @@ func (c *Client) EnableVpcClassicLinkDnsSupport(ctx context.Context, params *Ena
 }
 
 type EnableVpcClassicLinkDnsSupportInput struct {
+
 	// The ID of the VPC.
 	VpcId *string
 }
 
 type EnableVpcClassicLinkDnsSupportOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 

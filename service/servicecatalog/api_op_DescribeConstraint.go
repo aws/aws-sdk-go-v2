@@ -56,6 +56,7 @@ func (c *Client) DescribeConstraint(ctx context.Context, params *DescribeConstra
 }
 
 type DescribeConstraintInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,15 +66,21 @@ type DescribeConstraintInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The identifier of the constraint.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeConstraintOutput struct {
+
 	// The constraint parameters.
 	ConstraintParameters *string
+
 	// The status of the current request.
 	Status types.Status
+
 	// Information about the constraint.
 	ConstraintDetail *types.ConstraintDetail
 

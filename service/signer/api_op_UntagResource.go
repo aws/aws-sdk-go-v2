@@ -56,9 +56,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the signing profile.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A list of tag keys to be removed from the signing profile.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

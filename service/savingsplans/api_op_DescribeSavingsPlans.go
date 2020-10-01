@@ -55,25 +55,33 @@ func (c *Client) DescribeSavingsPlans(ctx context.Context, params *DescribeSavin
 }
 
 type DescribeSavingsPlansInput struct {
+
 	// The maximum number of results to return with a single call. To retrieve
 	// additional results, make another call with the returned token value.
 	MaxResults *int32
+
 	// The Amazon Resource Names (ARN) of the Savings Plans.
 	SavingsPlanArns []*string
+
 	// The IDs of the Savings Plans.
 	SavingsPlanIds []*string
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The states.
 	States []types.SavingsPlanState
+
 	// The filters.
 	Filters []*types.SavingsPlanFilter
 }
 
 type DescribeSavingsPlansOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the Savings Plans.
 	SavingsPlans []*types.SavingsPlan
 

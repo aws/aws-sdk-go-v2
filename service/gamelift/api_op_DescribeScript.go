@@ -71,12 +71,16 @@ func (c *Client) DescribeScript(ctx context.Context, params *DescribeScriptInput
 }
 
 type DescribeScriptInput struct {
+
 	// A unique identifier for a Realtime script to retrieve properties for. You can
 	// use either the script ID or ARN value.
+	//
+	// This member is required.
 	ScriptId *string
 }
 
 type DescribeScriptOutput struct {
+
 	// A set of properties describing the requested script.
 	Script *types.Script
 

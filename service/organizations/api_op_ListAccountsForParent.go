@@ -66,9 +66,13 @@ func (c *Client) ListAccountsForParent(ctx context.Context, params *ListAccounts
 }
 
 type ListAccountsForParentInput struct {
+
 	// The unique identifier (ID) for the parent root or organization unit (OU) whose
 	// accounts you want to list.
+	//
+	// This member is required.
 	ParentId *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -79,6 +83,7 @@ type ListAccountsForParentInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
@@ -87,8 +92,10 @@ type ListAccountsForParentInput struct {
 }
 
 type ListAccountsForParentOutput struct {
+
 	// A list of the accounts in the specified root or OU.
 	Accounts []*types.Account
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should

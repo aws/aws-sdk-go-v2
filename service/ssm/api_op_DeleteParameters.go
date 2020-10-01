@@ -55,13 +55,18 @@ func (c *Client) DeleteParameters(ctx context.Context, params *DeleteParametersI
 }
 
 type DeleteParametersInput struct {
+
 	// The names of the parameters to delete.
+	//
+	// This member is required.
 	Names []*string
 }
 
 type DeleteParametersOutput struct {
+
 	// The names of the deleted parameters.
 	DeletedParameters []*string
+
 	// The names of parameters that weren't deleted because the parameters are not
 	// valid.
 	InvalidParameters []*string

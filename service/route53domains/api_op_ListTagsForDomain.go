@@ -59,13 +59,19 @@ func (c *Client) ListTagsForDomain(ctx context.Context, params *ListTagsForDomai
 
 // The ListTagsForDomainRequest includes the following elements.
 type ListTagsForDomainInput struct {
+
 	// The domain for which you want to get a list of tags.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The ListTagsForDomain response includes the following elements.
 type ListTagsForDomainOutput struct {
+
 	// A list of the tags that are associated with the specified domain.
+	//
+	// This member is required.
 	TagList []*types.Tag
 
 	// Metadata pertaining to the operation's result.

@@ -63,8 +63,11 @@ func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type CreateTemplateInput struct {
+
 	// The content of the email, composed of a subject line, an HTML part, and a
 	// text-only part.
+	//
+	// This member is required.
 	Template *types.Template
 }
 

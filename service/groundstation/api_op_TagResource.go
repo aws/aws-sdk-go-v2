@@ -56,9 +56,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 //
 type TagResourceInput struct {
+
 	// ARN of a resource tag.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Tags assigned to a resource.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

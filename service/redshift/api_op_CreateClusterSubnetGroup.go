@@ -62,11 +62,16 @@ func (c *Client) CreateClusterSubnetGroup(ctx context.Context, params *CreateClu
 
 //
 type CreateClusterSubnetGroupInput struct {
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single
 	// request.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// The name for the subnet group. Amazon Redshift stores the value as a lowercase
 	// string. Constraints:
 	//
@@ -80,12 +85,18 @@ type CreateClusterSubnetGroupInput struct {
 	//
 	// Example:
 	// examplesubnetgroup
+	//
+	// This member is required.
 	ClusterSubnetGroupName *string
+
 	// A description for the subnet group.
+	//
+	// This member is required.
 	Description *string
 }
 
 type CreateClusterSubnetGroupOutput struct {
+
 	// Describes a subnet group.
 	ClusterSubnetGroup *types.ClusterSubnetGroup
 

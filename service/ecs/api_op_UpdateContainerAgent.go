@@ -65,9 +65,13 @@ func (c *Client) UpdateContainerAgent(ctx context.Context, params *UpdateContain
 }
 
 type UpdateContainerAgentInput struct {
+
 	// The container instance ID or full ARN entries for the container instance on
 	// which you would like to update the Amazon ECS container agent.
+	//
+	// This member is required.
 	ContainerInstance *string
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your
 	// container instance is running on. If you do not specify a cluster, the default
 	// cluster is assumed.
@@ -75,6 +79,7 @@ type UpdateContainerAgentInput struct {
 }
 
 type UpdateContainerAgentOutput struct {
+
 	// The container instance for which the container agent was updated.
 	ContainerInstance *types.ContainerInstance
 

@@ -56,11 +56,15 @@ func (c *Client) GetHIT(ctx context.Context, params *GetHITInput, optFns ...func
 }
 
 type GetHITInput struct {
+
 	// The ID of the HIT to be retrieved.
+	//
+	// This member is required.
 	HITId *string
 }
 
 type GetHITOutput struct {
+
 	// Contains the requested HIT data.
 	HIT *types.HIT
 

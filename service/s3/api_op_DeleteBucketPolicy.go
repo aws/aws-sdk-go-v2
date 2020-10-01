@@ -77,7 +77,10 @@ func (c *Client) DeleteBucketPolicy(ctx context.Context, params *DeleteBucketPol
 }
 
 type DeleteBucketPolicyInput struct {
+
 	// The bucket name.
+	//
+	// This member is required.
 	Bucket *string
 }
 

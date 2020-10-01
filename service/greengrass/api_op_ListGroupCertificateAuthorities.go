@@ -56,11 +56,15 @@ func (c *Client) ListGroupCertificateAuthorities(ctx context.Context, params *Li
 }
 
 type ListGroupCertificateAuthoritiesInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type ListGroupCertificateAuthoritiesOutput struct {
+
 	// A list of certificate authorities associated with the group.
 	GroupCertificateAuthorities []*types.GroupCertificateAuthorityProperties
 

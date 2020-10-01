@@ -62,6 +62,7 @@ func (c *Client) CreateRole(ctx context.Context, params *CreateRoleInput, optFns
 }
 
 type CreateRoleInput struct {
+
 	// A list of tags that you want to attach to the newly created role. Each tag
 	// consists of a key name and an associated value. For more information about
 	// tagging, see Tagging IAM Identities
@@ -69,6 +70,7 @@ type CreateRoleInput struct {
 	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
 	// tags per role, then the entire request fails and the role is not created.
 	Tags []*types.Tag
+
 	// The path to the role. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
@@ -79,6 +81,7 @@ type CreateRoleInput struct {
 	// through the DEL character (\u007F), including most punctuation characters,
 	// digits, and upper and lowercased letters.
 	Path *string
+
 	// The maximum session duration (in seconds) that you want to set for the specified
 	// role. If you do not specify a value for this setting, the default maximum of one
 	// hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone
@@ -93,12 +96,17 @@ type CreateRoleInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
 	// User Guide.
 	MaxSessionDuration *int32
+
 	// The name of the role to create. IAM user, group, role, and policy names must be
 	// unique within the account. Names are not distinguished by case. For example, you
 	// cannot create resources named both "MyResource" and "myresource".
+	//
+	// This member is required.
 	RoleName *string
+
 	// A description of the role.
 	Description *string
+
 	// The trust relationship policy document that grants an entity permission to
 	// assume the role.  <p>In IAM, you must provide a JSON policy that has been
 	// converted to a string. However, for AWS CloudFormation templates formatted in
@@ -113,14 +121,20 @@ type CreateRoleInput struct {
 	// characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
 	// carriage return (<code>\u000D</code>)</p> </li> </ul> <p> Upon success, the
 	// response includes the same trust policy in JSON format.</p>
+	//
+	// This member is required.
 	AssumeRolePolicyDocument *string
+
 	// The ARN of the policy that is used to set the permissions boundary for the role.
 	PermissionsBoundary *string
 }
 
 // Contains the response to a successful CreateRole () request.
 type CreateRoleOutput struct {
+
 	// A structure containing details about the new role.
+	//
+	// This member is required.
 	Role *types.Role
 
 	// Metadata pertaining to the operation's result.

@@ -63,21 +63,26 @@ func (c *Client) DescribeHostReservationOfferings(ctx context.Context, params *D
 }
 
 type DescribeHostReservationOfferingsInput struct {
+
 	// This is the maximum duration of the reservation to purchase, specified in
 	// seconds. Reservations are available in one-year and three-year terms. The number
 	// of seconds specified must be the number of seconds in a year (365x24x60x60)
 	// times one of the supported durations (1 or 3). For example, specify 94608000 for
 	// three years.
 	MaxDuration *int32
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The ID of the reservation offering.
 	OfferingId *string
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
 	// nextToken value. This value can be between 5 and 500. If maxResults is given a
 	// larger value than 500, you receive an error.
 	MaxResults *int32
+
 	// The filters.
 	//
 	//     * instance-family - The instance family of the offering (for
@@ -86,6 +91,7 @@ type DescribeHostReservationOfferingsInput struct {
 	//     * payment-option - The payment option (NoUpfront |
 	// PartialUpfront | AllUpfront).
 	Filter []*types.Filter
+
 	// This is the minimum duration of the reservation you'd like to purchase,
 	// specified in seconds. Reservations are available in one-year and three-year
 	// terms. The number of seconds specified must be the number of seconds in a year
@@ -95,9 +101,11 @@ type DescribeHostReservationOfferingsInput struct {
 }
 
 type DescribeHostReservationOfferingsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the offerings.
 	OfferingSet []*types.HostOffering
 

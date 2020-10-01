@@ -67,11 +67,15 @@ func (c *Client) SendContactMethodVerification(ctx context.Context, params *Send
 }
 
 type SendContactMethodVerificationInput struct {
+
 	// The protocol to verify, such as Email or SMS (text messaging).
+	//
+	// This member is required.
 	Protocol types.ContactMethodVerificationProtocol
 }
 
 type SendContactMethodVerificationOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

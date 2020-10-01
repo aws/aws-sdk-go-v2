@@ -56,12 +56,18 @@ func (c *Client) PhoneNumberValidate(ctx context.Context, params *PhoneNumberVal
 }
 
 type PhoneNumberValidateInput struct {
+
 	// Specifies a phone number to validate and retrieve information about.
+	//
+	// This member is required.
 	NumberValidateRequest *types.NumberValidateRequest
 }
 
 type PhoneNumberValidateOutput struct {
+
 	// Provides information about a phone number.
+	//
+	// This member is required.
 	NumberValidateResponse *types.NumberValidateResponse
 
 	// Metadata pertaining to the operation's result.

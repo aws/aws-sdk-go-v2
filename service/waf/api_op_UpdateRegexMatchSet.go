@@ -101,18 +101,28 @@ func (c *Client) UpdateRegexMatchSet(ctx context.Context, params *UpdateRegexMat
 }
 
 type UpdateRegexMatchSetInput struct {
+
 	// The RegexMatchSetId of the RegexMatchSet () that you want to update.
 	// RegexMatchSetId is returned by CreateRegexMatchSet () and by ListRegexMatchSets
 	// ().
+	//
+	// This member is required.
 	RegexMatchSetId *string
+
 	// An array of RegexMatchSetUpdate objects that you want to insert into or delete
 	// from a RegexMatchSet (). For more information, see RegexMatchTuple ().
+	//
+	// This member is required.
 	Updates []*types.RegexMatchSetUpdate
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type UpdateRegexMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateRegexMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

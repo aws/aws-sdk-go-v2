@@ -58,20 +58,30 @@ func (c *Client) AdminListDevices(ctx context.Context, params *AdminListDevicesI
 
 // Represents the request to list devices, as an administrator.
 type AdminListDevicesInput struct {
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The user name.
+	//
+	// This member is required.
 	Username *string
+
 	// The pagination token.
 	PaginationToken *string
+
 	// The limit of the devices request.
 	Limit *int32
 }
 
 // Lists the device's response, as an administrator.
 type AdminListDevicesOutput struct {
+
 	// The pagination token.
 	PaginationToken *string
+
 	// The devices in the list of devices response.
 	Devices []*types.DeviceType
 

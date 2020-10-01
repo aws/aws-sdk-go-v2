@@ -73,6 +73,7 @@ func (c *Client) CreateDBParameterGroup(ctx context.Context, params *CreateDBPar
 }
 
 type CreateDBParameterGroupInput struct {
+
 	// The name of the DB parameter group. Constraints:
 	//
 	//     * Must be 1 to 255
@@ -85,19 +86,29 @@ type CreateDBParameterGroupInput struct {
 	//
 	// This value is
 	// stored as a lowercase string.
+	//
+	// This member is required.
 	DBParameterGroupName *string
+
 	// The tags to be assigned to the new DB parameter group.
 	Tags []*types.Tag
+
 	// The description for the DB parameter group.
+	//
+	// This member is required.
 	Description *string
+
 	// The DB parameter group family name. A DB parameter group can be associated with
 	// one and only one DB parameter group family, and can be applied only to a DB
 	// instance running a database engine and engine version compatible with that DB
 	// parameter group family.
+	//
+	// This member is required.
 	DBParameterGroupFamily *string
 }
 
 type CreateDBParameterGroupOutput struct {
+
 	// Contains the details of an Amazon Neptune DB parameter group. This data type is
 	// used as a response element in the DescribeDBParameterGroups () action.
 	DBParameterGroup *types.DBParameterGroup

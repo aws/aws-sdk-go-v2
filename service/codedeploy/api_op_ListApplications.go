@@ -55,6 +55,7 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 // Represents the input of a ListApplications operation.
 type ListApplicationsInput struct {
+
 	// An identifier returned from the previous list applications call. It can be used
 	// to return the next set of applications in the list.
 	NextToken *string
@@ -62,8 +63,10 @@ type ListApplicationsInput struct {
 
 // Represents the output of a ListApplications operation.
 type ListApplicationsOutput struct {
+
 	// A list of application names.
 	Applications []*string
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list applications call to return the next set of
 	// applications in the list.

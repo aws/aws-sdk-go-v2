@@ -65,40 +65,51 @@ func (c *Client) DescribeReservedInstancesOfferings(ctx context.Context, params 
 
 // Contains the parameters for DescribeReservedInstancesOfferings.
 type DescribeReservedInstancesOfferingsInput struct {
+
 	// The offering class of the Reserved Instance. Can be standard or convertible.
 	OfferingClass types.OfferingClassType
+
 	// The instance type that the reservation will cover (for example, m1.small). For
 	// more information, see Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	InstanceType types.InstanceType
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The Reserved Instance product platform description. Instances that include
 	// (Amazon VPC) in the description are for use with Amazon VPC.
 	ProductDescription types.RIProductDescription
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The Availability Zone in which the Reserved Instance can be used.
 	AvailabilityZone *string
+
 	// The tenancy of the instances covered by the reservation. A Reserved Instance
 	// with a tenancy of dedicated is applied to instances that run in a VPC on
 	// single-tenant hardware (i.e., Dedicated Instances). Important: The host value
 	// cannot be used with this parameter. Use the default or dedicated values only.
 	// Default: default
 	InstanceTenancy types.Tenancy
+
 	// The Reserved Instance offering type. If you are using tools that predate the
 	// 2011-11-01 API version, you only have access to the Medium Utilization Reserved
 	// Instance offering type.
 	OfferingType types.OfferingTypeValues
+
 	// The minimum duration (in seconds) to filter when searching for offerings.
 	// Default: 2592000 (1 month)
 	MinDuration *int64
+
 	// Include Reserved Instance Marketplace offerings in the response.
 	IncludeMarketplace *bool
+
 	// One or more filters.
 	//
 	//     * availability-zone - The Availability Zone where the
@@ -139,24 +150,30 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// usage-price - The usage price of the Reserved Instance, per hour (for example,
 	// 0.84).
 	Filters []*types.Filter
+
 	// The maximum duration (in seconds) to filter when searching for offerings.
 	// Default: 94608000 (3 years)
 	MaxDuration *int64
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. The maximum is 100. Default: 100
 	MaxResults *int32
+
 	// The maximum number of instances to filter when searching for offerings. Default:
 	// 20
 	MaxInstanceCount *int32
+
 	// One or more Reserved Instances offering IDs.
 	ReservedInstancesOfferingIds []*string
 }
 
 // Contains the output of DescribeReservedInstancesOfferings.
 type DescribeReservedInstancesOfferingsOutput struct {
+
 	// A list of Reserved Instances offerings.
 	ReservedInstancesOfferings []*types.ReservedInstancesOffering
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

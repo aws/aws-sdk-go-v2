@@ -63,18 +63,25 @@ func (c *Client) DescribeRootFolders(ctx context.Context, params *DescribeRootFo
 }
 
 type DescribeRootFoldersInput struct {
+
 	// The maximum number of items to return.
 	Limit *int32
+
 	// Amazon WorkDocs authentication token.
+	//
+	// This member is required.
 	AuthenticationToken *string
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
 }
 
 type DescribeRootFoldersOutput struct {
+
 	// The marker for the next set of results.
 	Marker *string
+
 	// The user's special folders.
 	Folders []*types.FolderMetadata
 

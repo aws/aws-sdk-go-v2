@@ -61,11 +61,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The DynamoDB resource that the tags will be removed from. This value is an
 	// Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A list of tag keys. Existing tags of the resource whose keys are members of this
 	// list will be removed from the DynamoDB resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

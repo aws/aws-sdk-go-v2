@@ -60,7 +60,10 @@ func (c *Client) DeleteSolution(ctx context.Context, params *DeleteSolutionInput
 }
 
 type DeleteSolutionInput struct {
+
 	// The ARN of the solution to delete.
+	//
+	// This member is required.
 	SolutionArn *string
 }
 

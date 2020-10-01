@@ -57,21 +57,26 @@ func (c *Client) ListEventSources(ctx context.Context, params *ListEventSourcesI
 }
 
 type ListEventSourcesInput struct {
+
 	// Specifying this limits the results to only those partner event sources with
 	// names that start with the specified prefix.
 	NamePrefix *string
+
 	// Specifying this limits the number of results returned by this operation. The
 	// operation also returns a NextToken which you can use in a subsequent operation
 	// to retrieve the next set of results.
 	Limit *int32
+
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListEventSourcesOutput struct {
+
 	// A token you can use in a subsequent operation to retrieve the next set of
 	// results.
 	NextToken *string
+
 	// The list of event sources.
 	EventSources []*types.EventSource
 

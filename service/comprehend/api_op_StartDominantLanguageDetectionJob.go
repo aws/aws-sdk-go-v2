@@ -59,10 +59,15 @@ func (c *Client) StartDominantLanguageDetectionJob(ctx context.Context, params *
 }
 
 type StartDominantLanguageDetectionJobInput struct {
+
 	// An identifier for the job.
 	JobName *string
+
 	// Specifies the format and location of the input data for the job.
+	//
+	// This member is required.
 	InputDataConfig *types.InputDataConfig
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -74,28 +79,38 @@ type StartDominantLanguageDetectionJobInput struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend read access to your input data. For more
 	// information, see
 	// https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions).
+	//
+	// This member is required.
 	DataAccessRoleArn *string
+
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your dominant language detection job.
 	// For more information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
 	// A unique identifier for the request. If you do not set the client request token,
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
+
 	// Specifies where to send the output files.
+	//
+	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 }
 
 type StartDominantLanguageDetectionJobOutput struct {
+
 	// The identifier generated for the job. To get the status of a job, use this
 	// identifier with the operation.
 	JobId *string
+
 	// The status of the job.
 	//
 	//     * SUBMITTED - The job has been received and is

@@ -57,12 +57,15 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 
 // DescribeEndpointsRequest
 type DescribeEndpointsInput struct {
+
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of endpoints.
 	NextToken *string
+
 	// Optional. Max number of endpoints, up to twenty, that will be returned at one
 	// time.
 	MaxResults *int32
+
 	// Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to
 	// return your endpoints if any exist, or to create an endpoint for you and return
 	// it if one doesn't already exist. Specify GET_ONLY to return your endpoints if
@@ -71,8 +74,10 @@ type DescribeEndpointsInput struct {
 }
 
 type DescribeEndpointsOutput struct {
+
 	// Use this string to request the next batch of endpoints.
 	NextToken *string
+
 	// List of endpoints
 	Endpoints []*types.Endpoint
 

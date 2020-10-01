@@ -63,15 +63,20 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 
 //
 type ResetDBParameterGroupInput struct {
+
 	// A value that indicates whether to reset all parameters in the DB parameter group
 	// to default values. By default, all parameters in the DB parameter group are
 	// reset to default values.
 	ResetAllParameters *bool
+
 	// The name of the DB parameter group. Constraints:
 	//
 	//     * Must match the name of
 	// an existing DBParameterGroup.
+	//
+	// This member is required.
 	DBParameterGroupName *string
+
 	// To reset the entire DB parameter group, specify the DBParameterGroup name and
 	// ResetAllParameters parameters. To reset specific parameters, provide a list of
 	// the following: ParameterName and ApplyMethod. A maximum of 20 parameters can be
@@ -89,6 +94,7 @@ type ResetDBParameterGroupInput struct {
 // Contains the result of a successful invocation of the ModifyDBParameterGroup or
 // ResetDBParameterGroup action.
 type ResetDBParameterGroupOutput struct {
+
 	// Provides the name of the DB parameter group.
 	DBParameterGroupName *string
 

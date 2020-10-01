@@ -58,18 +58,23 @@ func (c *Client) GetCertificateAuthorityCertificate(ctx context.Context, params 
 }
 
 type GetCertificateAuthorityCertificateInput struct {
+
 	// The Amazon Resource Name (ARN) of your private CA. This is of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
 }
 
 type GetCertificateAuthorityCertificateOutput struct {
+
 	// Base64-encoded certificate chain that includes any intermediate certificates and
 	// chains up to root on-premises certificate that you used to sign your private CA
 	// certificate. The chain does not include your private CA certificate. If this is
 	// a root CA, the value will be null.
 	CertificateChain *string
+
 	// Base64-encoded certificate authority (CA) certificate.
 	Certificate *string
 

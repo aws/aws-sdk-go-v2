@@ -62,13 +62,18 @@ func (c *Client) StopKeyPhrasesDetectionJob(ctx context.Context, params *StopKey
 }
 
 type StopKeyPhrasesDetectionJobInput struct {
+
 	// The identifier of the key phrases detection job to stop.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopKeyPhrasesDetectionJobOutput struct {
+
 	// The identifier of the key phrases detection job to stop.
 	JobId *string
+
 	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
 	// previously stopped with the StopKeyPhrasesDetectionJob operation.
 	JobStatus types.JobStatus

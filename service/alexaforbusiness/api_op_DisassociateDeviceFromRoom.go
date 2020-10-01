@@ -56,6 +56,7 @@ func (c *Client) DisassociateDeviceFromRoom(ctx context.Context, params *Disasso
 }
 
 type DisassociateDeviceFromRoomInput struct {
+
 	// The ARN of the device to disassociate from a room. Required.
 	DeviceArn *string
 }

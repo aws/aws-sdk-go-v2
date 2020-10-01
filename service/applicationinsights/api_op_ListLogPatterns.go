@@ -56,23 +56,32 @@ func (c *Client) ListLogPatterns(ctx context.Context, params *ListLogPatternsInp
 }
 
 type ListLogPatternsInput struct {
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The name of the log pattern set.
 	PatternSetName *string
+
 	// The token to request the next page of results.
 	NextToken *string
 }
 
 type ListLogPatternsOutput struct {
+
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The list of log patterns.
 	LogPatterns []*types.LogPattern
+
 	// The name of the resource group.
 	ResourceGroupName *string
 

@@ -56,11 +56,15 @@ func (c *Client) DeleteParameterGroup(ctx context.Context, params *DeleteParamet
 }
 
 type DeleteParameterGroupInput struct {
+
 	// The name of the parameter group to delete.
+	//
+	// This member is required.
 	ParameterGroupName *string
 }
 
 type DeleteParameterGroupOutput struct {
+
 	// A user-specified message for this action (i.e., a reason for deleting the
 	// parameter group).
 	DeletionMessage *string

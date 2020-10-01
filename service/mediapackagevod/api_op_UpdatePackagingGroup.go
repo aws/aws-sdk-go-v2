@@ -58,21 +58,30 @@ func (c *Client) UpdatePackagingGroup(ctx context.Context, params *UpdatePackagi
 
 // A MediaPackage VOD PackagingGroup resource configuration.
 type UpdatePackagingGroupInput struct {
+
 	// The ID of a MediaPackage VOD PackagingGroup resource.
+	//
+	// This member is required.
 	Id *string
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
 }
 
 type UpdatePackagingGroupOutput struct {
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
+
 	// The ARN of the PackagingGroup.
 	Arn *string
+
 	// The ID of the PackagingGroup.
 	Id *string
 

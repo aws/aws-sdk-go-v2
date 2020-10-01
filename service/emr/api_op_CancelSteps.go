@@ -62,12 +62,19 @@ func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optF
 
 // The input argument to the CancelSteps () operation.
 type CancelStepsInput struct {
+
 	// The ClusterID for which specified steps will be canceled. Use RunJobFlow () and
 	// ListClusters () to get ClusterIDs.
+	//
+	// This member is required.
 	ClusterId *string
+
 	// The list of StepIDs to cancel. Use ListSteps () to get steps and their states
 	// for the specified cluster.
+	//
+	// This member is required.
 	StepIds []*string
+
 	// The option to choose for cancelling RUNNING steps. By default, the value is
 	// SEND_INTERRUPT.
 	StepCancellationOption types.StepCancellationOption
@@ -75,6 +82,7 @@ type CancelStepsInput struct {
 
 // The output for the CancelSteps () operation.
 type CancelStepsOutput struct {
+
 	// A list of CancelStepsInfo (), which shows the status of specified cancel
 	// requests for each StepID specified.
 	CancelStepsInfoList []*types.CancelStepsInfo

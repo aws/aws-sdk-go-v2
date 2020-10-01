@@ -56,27 +56,35 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 }
 
 type GetResourcesInput struct {
+
 	// The collection type.
 	CollectionType types.ResourceCollectionType
+
 	// The marker for the next set of results. This marker was received from a previous
 	// call.
 	Marker *string
+
 	// The user ID for the resource collection. This is a required field for accessing
 	// the API operation using IAM credentials.
 	UserId *string
+
 	// The Amazon WorkDocs authentication token. Not required when using AWS
 	// administrator credentials to access the API.
 	AuthenticationToken *string
+
 	// The maximum number of resources to return.
 	Limit *int32
 }
 
 type GetResourcesOutput struct {
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
+
 	// The documents in the specified collection.
 	Documents []*types.DocumentMetadata
+
 	// The folders in the specified folder.
 	Folders []*types.FolderMetadata
 

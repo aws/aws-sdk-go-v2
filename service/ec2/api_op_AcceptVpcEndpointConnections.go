@@ -57,10 +57,17 @@ func (c *Client) AcceptVpcEndpointConnections(ctx context.Context, params *Accep
 }
 
 type AcceptVpcEndpointConnectionsInput struct {
+
 	// The ID of the VPC endpoint service.
+	//
+	// This member is required.
 	ServiceId *string
+
 	// The IDs of one or more interface VPC endpoints.
+	//
+	// This member is required.
 	VpcEndpointIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -69,6 +76,7 @@ type AcceptVpcEndpointConnectionsInput struct {
 }
 
 type AcceptVpcEndpointConnectionsOutput struct {
+
 	// Information about the interface endpoints that were not accepted, if applicable.
 	Unsuccessful []*types.UnsuccessfulItem
 

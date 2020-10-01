@@ -56,11 +56,15 @@ func (c *Client) DescribeInput(ctx context.Context, params *DescribeInputInput, 
 }
 
 type DescribeInputInput struct {
+
 	// The name of the input.
+	//
+	// This member is required.
 	InputName *string
 }
 
 type DescribeInputOutput struct {
+
 	// Information about the input.
 	Input *types.Input
 

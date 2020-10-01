@@ -60,9 +60,15 @@ func (c *Client) DeleteAttendee(ctx context.Context, params *DeleteAttendeeInput
 }
 
 type DeleteAttendeeInput struct {
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
+
 	// The Amazon Chime SDK attendee ID.
+	//
+	// This member is required.
 	AttendeeId *string
 }
 

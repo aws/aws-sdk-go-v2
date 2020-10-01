@@ -61,9 +61,11 @@ func (c *Client) CreateRelationalDatabaseSnapshot(ctx context.Context, params *C
 }
 
 type CreateRelationalDatabaseSnapshotInput struct {
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// The name for your new database snapshot. Constraints:
 	//
 	//     * Must contain from 2
@@ -71,12 +73,18 @@ type CreateRelationalDatabaseSnapshotInput struct {
 	//
 	//     * The first and last character
 	// must be a letter or number.
+	//
+	// This member is required.
 	RelationalDatabaseSnapshotName *string
+
 	// The name of the database on which to base your new snapshot.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
 }
 
 type CreateRelationalDatabaseSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -56,10 +56,12 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 }
 
 type PutResourcePolicyInput struct {
+
 	// The hash value returned when the previous policy was set using
 	// PutResourcePolicy. Its purpose is to prevent concurrent modifications of a
 	// policy. Do not use this parameter if no previous policy has been set.
 	PolicyHashCondition *string
+
 	// Allows you to specify if you want to use both resource-level and
 	// account/catalog-level resource policies. A resource-level policy is a policy
 	// attached to an individual resource such as a database or a table.  <p>The
@@ -68,12 +70,17 @@ type PutResourcePolicyInput struct {
 	// of both resource-level and account/catalog-level resource policies is
 	// allowed.</p>
 	EnableHybrid types.EnableHybridValues
+
 	// Contains the policy document to set, in JSON format.
+	//
+	// This member is required.
 	PolicyInJson *string
+
 	// A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is used
 	// to create a new policy. If a value of NONE or a null value is used, the call
 	// will not depend on the existence of a policy.
 	PolicyExistsCondition types.ExistCondition
+
 	// The ARN of the AWS Glue resource for the resource policy to be set. For more
 	// information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
@@ -81,6 +88,7 @@ type PutResourcePolicyInput struct {
 }
 
 type PutResourcePolicyOutput struct {
+
 	// A hash of the policy that has just been set. This must be included in a
 	// subsequent call that overwrites or updates this policy.
 	PolicyHash *string

@@ -59,21 +59,27 @@ func (c *Client) ListTriggers(ctx context.Context, params *ListTriggersInput, op
 }
 
 type ListTriggersInput struct {
+
 	// The name of the job for which to retrieve triggers. The trigger that can start
 	// this job is returned. If there is no such trigger, all triggers are returned.
 	DependentJobName *string
+
 	// The maximum size of a list to return.
 	MaxResults *int32
+
 	// Specifies to return only these tagged resources.
 	Tags map[string]*string
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 }
 
 type ListTriggersOutput struct {
+
 	// The names of all triggers in the account, or the triggers with the specified
 	// tags.
 	TriggerNames []*string
+
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
 	NextToken *string

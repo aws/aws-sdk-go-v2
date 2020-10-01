@@ -56,13 +56,18 @@ func (c *Client) SetDefaultAuthorizer(ctx context.Context, params *SetDefaultAut
 }
 
 type SetDefaultAuthorizerInput struct {
+
 	// The authorizer name.
+	//
+	// This member is required.
 	AuthorizerName *string
 }
 
 type SetDefaultAuthorizerOutput struct {
+
 	// The authorizer name.
 	AuthorizerName *string
+
 	// The authorizer ARN.
 	AuthorizerArn *string
 

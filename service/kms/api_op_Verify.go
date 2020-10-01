@@ -79,25 +79,34 @@ func (c *Client) Verify(ctx context.Context, params *VerifyInput, optFns ...func
 }
 
 type VerifyInput struct {
+
 	// Tells AWS KMS whether the value of the Message parameter is a message or message
 	// digest. The default value, RAW, indicates a message. To indicate a message
 	// digest, enter DIGEST. Use the DIGEST value only when the value of the Message
 	// parameter is a message digest. If you use the DIGEST value with a raw message,
 	// the security of the verification operation can be compromised.
 	MessageType types.MessageType
+
 	// Specifies the message that was signed. You can submit a raw message of up to
 	// 4096 bytes, or a hash digest of the message. If you submit a digest, use the
 	// MessageType parameter with a value of DIGEST. If the message specified here is
 	// different from the message that was signed, the signature verification fails. A
 	// message and its hash digest are considered to be the same message.
+	//
+	// This member is required.
 	Message []byte
+
 	// The signing algorithm that was used to sign the message. If you submit a
 	// different algorithm, the signature verification fails.
+	//
+	// This member is required.
 	SigningAlgorithm types.SigningAlgorithmSpec
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// Identifies the asymmetric CMK that will be used to verify the signature. This
 	// must be the same CMK that was used to generate the signature. If you specify a
 	// different CMK, the signature verification fails.  <p>To specify a CMK, use its
@@ -112,18 +121,26 @@ type VerifyInput struct {
 	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
 	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
 	// <a>ListAliases</a>.</p>
+	//
+	// This member is required.
 	KeyId *string
+
 	// The signature that the Sign operation generated.
+	//
+	// This member is required.
 	Signature []byte
 }
 
 type VerifyOutput struct {
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the asymmetric CMK that was used to verify the signature.
 	KeyId *string
+
 	// The signing algorithm that was used to verify the signature.
 	SigningAlgorithm types.SigningAlgorithmSpec
+
 	// A Boolean value that indicates whether the signature was verified. A value of
 	// True indicates that the Signature was produced by signing the Message with the
 	// specified KeyID and SigningAlgorithm. If the signature is not verified, the

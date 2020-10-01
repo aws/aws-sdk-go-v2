@@ -57,8 +57,12 @@ func (c *Client) DeleteFirewallManagerRuleGroups(ctx context.Context, params *De
 }
 
 type DeleteFirewallManagerRuleGroupsInput struct {
+
 	// The Amazon Resource Name (ARN) of the web ACL.
+	//
+	// This member is required.
 	WebACLArn *string
+
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to
@@ -66,10 +70,13 @@ type DeleteFirewallManagerRuleGroupsInput struct {
 	// changes have been made to the entity since you last retrieved it. If a change
 	// has been made, the update fails with a WAFOptimisticLockException. If this
 	// happens, perform another get, and use the new token returned by that operation.
+	//
+	// This member is required.
 	WebACLLockToken *string
 }
 
 type DeleteFirewallManagerRuleGroupsOutput struct {
+
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to

@@ -58,6 +58,7 @@ func (c *Client) PromoteReadReplicaDBCluster(ctx context.Context, params *Promot
 
 //
 type PromoteReadReplicaDBClusterInput struct {
+
 	// The identifier of the DB cluster read replica to promote. This parameter isn't
 	// case-sensitive. Constraints:
 	//
@@ -65,10 +66,13 @@ type PromoteReadReplicaDBClusterInput struct {
 	// cluster read replica.
 	//
 	// Example: my-cluster-replica1
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type PromoteReadReplicaDBClusterOutput struct {
+
 	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
 	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
 	// actions.

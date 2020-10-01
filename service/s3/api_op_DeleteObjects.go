@@ -87,6 +87,7 @@ func (c *Client) DeleteObjects(ctx context.Context, params *DeleteObjectsInput, 
 }
 
 type DeleteObjectsInput struct {
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -94,12 +95,17 @@ type DeleteObjectsInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// Specifies whether you want to delete this object even if it has a
 	// Governance-type Object Lock in place. You must have sufficient permissions to
 	// perform this operation.
 	BypassGovernanceRetention *bool
+
 	// Container for the request.
+	//
+	// This member is required.
 	Delete *types.Delete
+
 	// The bucket name containing the objects to delete. When using this API with an
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
@@ -109,7 +115,10 @@ type DeleteObjectsInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The concatenation of the authentication device's serial number, a space, and the
 	// value that is displayed on your authentication device. Required to permanently
 	// delete a versioned object if versioning is configured with MFA delete enabled.
@@ -117,12 +126,15 @@ type DeleteObjectsInput struct {
 }
 
 type DeleteObjectsOutput struct {
+
 	// Container element for a successful delete. It identifies the object that was
 	// successfully deleted.
 	Deleted []*types.DeletedObject
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
 	// Container for a failed delete operation that describes the object that Amazon S3
 	// attempted to delete and the error it encountered.
 	Errors []*types.Error

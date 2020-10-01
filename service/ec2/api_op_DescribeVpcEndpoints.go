@@ -56,11 +56,13 @@ func (c *Client) DescribeVpcEndpoints(ctx context.Context, params *DescribeVpcEn
 
 // Contains the parameters for DescribeVpcEndpoints.
 type DescribeVpcEndpointsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * service-name - The name of the service.
@@ -85,12 +87,15 @@ type DescribeVpcEndpointsInput struct {
 	// filter to find all resources assigned a tag with a specific key, regardless of
 	// the tag value.
 	Filters []*types.Filter
+
 	// One or more endpoint IDs.
 	VpcEndpointIds []*string
+
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
 	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// prior call.)
 	NextToken *string
@@ -98,9 +103,11 @@ type DescribeVpcEndpointsInput struct {
 
 // Contains the output of DescribeVpcEndpoints.
 type DescribeVpcEndpointsOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// Information about the endpoints.
 	VpcEndpoints []*types.VpcEndpoint
 

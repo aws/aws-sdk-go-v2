@@ -60,20 +60,29 @@ func (c *Client) DeleteClientVpnRoute(ctx context.Context, params *DeleteClientV
 }
 
 type DeleteClientVpnRouteInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IPv4 address range, in CIDR notation, of the route to be deleted.
+	//
+	// This member is required.
 	DestinationCidrBlock *string
+
 	// The ID of the target subnet used by the route.
 	TargetVpcSubnetId *string
+
 	// The ID of the Client VPN endpoint from which the route is to be deleted.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
 }
 
 type DeleteClientVpnRouteOutput struct {
+
 	// The current state of the route.
 	Status *types.ClientVpnRouteStatus
 

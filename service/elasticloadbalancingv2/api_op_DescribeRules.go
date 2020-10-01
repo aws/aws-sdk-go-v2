@@ -56,20 +56,26 @@ func (c *Client) DescribeRules(ctx context.Context, params *DescribeRulesInput, 
 }
 
 type DescribeRulesInput struct {
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
 	// The Amazon Resource Names (ARN) of the rules.
 	RuleArns []*string
+
 	// The Amazon Resource Name (ARN) of the listener.
 	ListenerArn *string
 }
 
 type DescribeRulesOutput struct {
+
 	// Information about the rules.
 	Rules []*types.Rule
+
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.
 	NextMarker *string

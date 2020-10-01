@@ -62,6 +62,7 @@ func (c *Client) CreateReceiptRuleSet(ctx context.Context, params *CreateReceipt
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type CreateReceiptRuleSetInput struct {
+
 	// The name of the rule set to create. The name must:
 	//
 	//     * This value can only
@@ -72,6 +73,8 @@ type CreateReceiptRuleSetInput struct {
 	//
 	//     * Contain less than 64
 	// characters.
+	//
+	// This member is required.
 	RuleSetName *string
 }
 

@@ -57,12 +57,16 @@ func (c *Client) DeleteEventSubscription(ctx context.Context, params *DeleteEven
 
 //
 type DeleteEventSubscriptionInput struct {
+
 	// The name of the DMS event notification subscription to be deleted.
+	//
+	// This member is required.
 	SubscriptionName *string
 }
 
 //
 type DeleteEventSubscriptionOutput struct {
+
 	// The event subscription that was deleted.
 	EventSubscription *types.EventSubscription
 

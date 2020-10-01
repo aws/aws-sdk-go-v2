@@ -59,15 +59,25 @@ func (c *Client) GetPersonalizedRanking(ctx context.Context, params *GetPersonal
 }
 
 type GetPersonalizedRankingInput struct {
+
 	// The Amazon Resource Name (ARN) of the campaign to use for generating the
 	// personalized ranking.
+	//
+	// This member is required.
 	CampaignArn *string
+
 	// The user for which you want the campaign to provide a personalized ranking.
+	//
+	// This member is required.
 	UserId *string
+
 	// A list of items (itemId's) to rank. If an item was not included in the training
 	// dataset, the item is appended to the end of the reranked list. The maximum is
 	// 500.
+	//
+	// This member is required.
 	InputList []*string
+
 	// The contextual metadata to use when getting recommendations. Contextual metadata
 	// includes any interaction information that might be relevant when getting a
 	// user's recommendations, such as the user's current location or device type.
@@ -75,6 +85,7 @@ type GetPersonalizedRankingInput struct {
 }
 
 type GetPersonalizedRankingOutput struct {
+
 	// A list of items in order of most likely interest to the user. The maximum is
 	// 500.
 	PersonalizedRanking []*types.PredictedItem

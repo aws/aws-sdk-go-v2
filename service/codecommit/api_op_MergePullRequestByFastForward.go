@@ -59,11 +59,18 @@ func (c *Client) MergePullRequestByFastForward(ctx context.Context, params *Merg
 }
 
 type MergePullRequestByFastForwardInput struct {
+
 	// The name of the repository where the pull request was created.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The system-generated ID of the pull request. To get this ID, use
 	// ListPullRequests ().
+	//
+	// This member is required.
 	PullRequestId *string
+
 	// The full commit ID of the original or updated commit in the pull request source
 	// branch. Pass this value if you want an exception thrown if the current commit ID
 	// of the tip of the source branch does not match this commit ID.
@@ -71,6 +78,7 @@ type MergePullRequestByFastForwardInput struct {
 }
 
 type MergePullRequestByFastForwardOutput struct {
+
 	// Information about the specified pull request, including the merge.
 	PullRequest *types.PullRequest
 

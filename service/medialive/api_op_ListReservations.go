@@ -56,32 +56,44 @@ func (c *Client) ListReservations(ctx context.Context, params *ListReservationsI
 
 // Placeholder documentation for ListReservationsRequest
 type ListReservationsInput struct {
+
 	// Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
 	Resolution *string
+
 	// Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
 	ResourceType *string
+
 	// Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'
 	MaximumFramerate *string
+
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
+
 	// Placeholder documentation for __string
 	NextToken *string
+
 	// Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
 	MaximumBitrate *string
+
 	// Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
 	SpecialFeature *string
+
 	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
 	Codec *string
+
 	// Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
 	VideoQuality *string
+
 	// Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
 	ChannelClass *string
 }
 
 // Placeholder documentation for ListReservationsResponse
 type ListReservationsOutput struct {
+
 	// List of reservations
 	Reservations []*types.Reservation
+
 	// Token to retrieve the next page of results
 	NextToken *string
 

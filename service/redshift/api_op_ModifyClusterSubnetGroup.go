@@ -59,16 +59,24 @@ func (c *Client) ModifyClusterSubnetGroup(ctx context.Context, params *ModifyClu
 
 //
 type ModifyClusterSubnetGroupInput struct {
+
 	// The name of the subnet group to be modified.
+	//
+	// This member is required.
 	ClusterSubnetGroupName *string
+
 	// A text description of the subnet group to be modified.
 	Description *string
+
 	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single
 	// request.
+	//
+	// This member is required.
 	SubnetIds []*string
 }
 
 type ModifyClusterSubnetGroupOutput struct {
+
 	// Describes a subnet group.
 	ClusterSubnetGroup *types.ClusterSubnetGroup
 

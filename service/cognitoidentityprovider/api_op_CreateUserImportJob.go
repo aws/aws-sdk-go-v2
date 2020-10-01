@@ -57,17 +57,27 @@ func (c *Client) CreateUserImportJob(ctx context.Context, params *CreateUserImpo
 
 // Represents the request to create the user import job.
 type CreateUserImportJobInput struct {
+
 	// The user pool ID for the user pool that the users are being imported into.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The role ARN for the Amazon CloudWatch Logging role for the user import job.
+	//
+	// This member is required.
 	CloudWatchLogsRoleArn *string
+
 	// The job name for the user import job.
+	//
+	// This member is required.
 	JobName *string
 }
 
 // Represents the response from the server to the request to create the user import
 // job.
 type CreateUserImportJobOutput struct {
+
 	// The job object that represents the user import job.
 	UserImportJob *types.UserImportJobType
 

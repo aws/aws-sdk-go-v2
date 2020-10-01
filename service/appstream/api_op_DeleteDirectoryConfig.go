@@ -57,7 +57,10 @@ func (c *Client) DeleteDirectoryConfig(ctx context.Context, params *DeleteDirect
 }
 
 type DeleteDirectoryConfigInput struct {
+
 	// The name of the directory configuration.
+	//
+	// This member is required.
 	DirectoryName *string
 }
 

@@ -63,8 +63,11 @@ func (c *Client) PurgeQueue(ctx context.Context, params *PurgeQueueInput, optFns
 
 //
 type PurgeQueueInput struct {
+
 	// The URL of the queue from which the PurgeQueue action deletes messages. Queue
 	// URLs and names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
 }
 

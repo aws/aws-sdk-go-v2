@@ -56,20 +56,33 @@ func (c *Client) CreateResourceServer(ctx context.Context, params *CreateResourc
 }
 
 type CreateResourceServerInput struct {
+
 	// A unique resource server identifier for the resource server. This could be an
 	// HTTPS endpoint where the resource server is located. For example,
 	// https://my-weather-api.example.com.
+	//
+	// This member is required.
 	Identifier *string
+
 	// A list of scopes. Each scope is map, where the keys are name and description.
 	Scopes []*types.ResourceServerScopeType
+
 	// A friendly name for the resource server.
+	//
+	// This member is required.
 	Name *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type CreateResourceServerOutput struct {
+
 	// The newly created resource server.
+	//
+	// This member is required.
 	ResourceServer *types.ResourceServerType
 
 	// Metadata pertaining to the operation's result.

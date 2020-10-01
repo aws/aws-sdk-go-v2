@@ -56,6 +56,7 @@ func (c *Client) UpdateSubscription(ctx context.Context, params *UpdateSubscript
 }
 
 type UpdateSubscriptionInput struct {
+
 	// When you initally create a subscription, AutoRenew is set to ENABLED. If
 	// ENABLED, the subscription will be automatically renewed at the end of the
 	// existing subscription period. You can change this by submitting an

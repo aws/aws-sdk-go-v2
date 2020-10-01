@@ -55,18 +55,25 @@ func (c *Client) ListThingsInBillingGroup(ctx context.Context, params *ListThing
 }
 
 type ListThingsInBillingGroupInput struct {
+
 	// The name of the billing group.
+	//
+	// This member is required.
 	BillingGroupName *string
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return per request.
 	MaxResults *int32
 }
 
 type ListThingsInBillingGroupOutput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// A list of things in the billing group.
 	Things []*string
 

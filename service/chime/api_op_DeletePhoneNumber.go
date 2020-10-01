@@ -58,7 +58,10 @@ func (c *Client) DeletePhoneNumber(ctx context.Context, params *DeletePhoneNumbe
 }
 
 type DeletePhoneNumberInput struct {
+
 	// The phone number ID.
+	//
+	// This member is required.
 	PhoneNumberId *string
 }
 

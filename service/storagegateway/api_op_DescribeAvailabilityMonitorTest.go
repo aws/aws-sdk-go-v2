@@ -59,18 +59,24 @@ func (c *Client) DescribeAvailabilityMonitorTest(ctx context.Context, params *De
 }
 
 type DescribeAvailabilityMonitorTestInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 type DescribeAvailabilityMonitorTestOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
 	// The status of the High Availability monitoring test. If a test hasn't been
 	// performed, the value of this field is null.
 	Status types.AvailabilityMonitorTestStatus
+
 	// The time the High Availability monitoring test was started. If a test hasn't
 	// been performed, the value of this field is null.
 	StartTime *time.Time

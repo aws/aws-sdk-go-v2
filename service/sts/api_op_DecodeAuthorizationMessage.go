@@ -84,7 +84,10 @@ func (c *Client) DecodeAuthorizationMessage(ctx context.Context, params *DecodeA
 }
 
 type DecodeAuthorizationMessageInput struct {
+
 	// The encoded message that was returned with the response.
+	//
+	// This member is required.
 	EncodedMessage *string
 }
 
@@ -92,6 +95,7 @@ type DecodeAuthorizationMessageInput struct {
 // of a request from an encoded message that is returned in response to an AWS
 // request.
 type DecodeAuthorizationMessageOutput struct {
+
 	// An XML document that contains the decoded message.
 	DecodedMessage *string
 

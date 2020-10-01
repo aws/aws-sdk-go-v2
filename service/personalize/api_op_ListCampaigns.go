@@ -58,20 +58,25 @@ func (c *Client) ListCampaigns(ctx context.Context, params *ListCampaignsInput, 
 }
 
 type ListCampaignsInput struct {
+
 	// The maximum number of campaigns to return.
 	MaxResults *int32
+
 	// The Amazon Resource Name (ARN) of the solution to list the campaigns for. When a
 	// solution is not specified, all the campaigns associated with the account are
 	// listed.
 	SolutionArn *string
+
 	// A token returned from the previous call to ListCampaigns for getting the next
 	// set of campaigns (if they exist).
 	NextToken *string
 }
 
 type ListCampaignsOutput struct {
+
 	// A token for getting the next set of campaigns (if they exist).
 	NextToken *string
+
 	// A list of the campaigns.
 	Campaigns []*types.CampaignSummary
 

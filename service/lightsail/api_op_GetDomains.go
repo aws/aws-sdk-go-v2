@@ -55,6 +55,7 @@ func (c *Client) GetDomains(ctx context.Context, params *GetDomainsInput, optFns
 }
 
 type GetDomainsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetDomains request. If your results are
 	// paginated, the response will return a next page token that you can specify as
@@ -63,9 +64,11 @@ type GetDomainsInput struct {
 }
 
 type GetDomainsOutput struct {
+
 	// An array of key-value pairs containing information about each of the domain
 	// entries in the user's account.
 	Domains []*types.Domain
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetDomains request and specify the next page

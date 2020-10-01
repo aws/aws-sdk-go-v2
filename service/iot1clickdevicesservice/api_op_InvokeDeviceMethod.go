@@ -57,15 +57,21 @@ func (c *Client) InvokeDeviceMethod(ctx context.Context, params *InvokeDeviceMet
 }
 
 type InvokeDeviceMethodInput struct {
+
 	// The device method to invoke.
 	DeviceMethod *types.DeviceMethod
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// A JSON encoded string containing the device method request parameters.
 	DeviceMethodParameters *string
 }
 
 type InvokeDeviceMethodOutput struct {
+
 	// A JSON encoded string containing the device method response.
 	DeviceMethodResponse *string
 

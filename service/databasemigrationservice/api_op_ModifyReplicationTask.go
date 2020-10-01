@@ -62,11 +62,13 @@ func (c *Client) ModifyReplicationTask(ctx context.Context, params *ModifyReplic
 
 //
 type ModifyReplicationTaskInput struct {
+
 	// When using the AWS CLI or boto3, provide the path of the JSON file that contains
 	// the table mappings. Precede the path with file://. When working with the DMS
 	// API, provide the JSON as the parameter value, for example: --table-mappings
 	// file://mappingfile.json
 	TableMappings *string
+
 	// Indicates when you want a change data capture (CDC) operation to start. Use
 	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
 	// to start. Specifying both values results in an error. The value can be in date,
@@ -81,8 +83,10 @@ type ModifyReplicationTaskInput struct {
 	// Attributes When Using PostgreSQL as a Source for AWS DMS
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
 	CdcStartPosition *string
+
 	// JSON file that contains settings for the task, such as task metadata settings.
 	ReplicationTaskSettings *string
+
 	// The replication task identifier. Constraints:
 	//
 	//     * Must contain 1-255
@@ -93,21 +97,28 @@ type ModifyReplicationTaskInput struct {
 	//
 	// * Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
+
 	// Indicates when you want a change data capture (CDC) operation to stop. The value
 	// can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example:
 	// --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
 	CdcStopPosition *string
+
 	// The Amazon Resource Name (ARN) of the replication task.
+	//
+	// This member is required.
 	ReplicationTaskArn *string
+
 	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
 	MigrationType types.MigrationTypeValue
+
 	// Supplemental information that the task requires to migrate the data for certain
 	// source and target endpoints. For more information, see Specifying Supplemental
 	// Data for Task Settings
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
 	// the AWS Database Migration Service User Guide.
 	TaskData *string
+
 	// Indicates the start time for a change data capture (CDC) operation. Use either
 	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
 	// start. Specifying both values results in an error. Timestamp Example:
@@ -117,6 +128,7 @@ type ModifyReplicationTaskInput struct {
 
 //
 type ModifyReplicationTaskOutput struct {
+
 	// The replication task that was modified.
 	ReplicationTask *types.ReplicationTask
 

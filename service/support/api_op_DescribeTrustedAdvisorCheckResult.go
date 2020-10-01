@@ -88,8 +88,12 @@ func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *
 
 //
 type DescribeTrustedAdvisorCheckResultInput struct {
+
 	// The unique identifier for the Trusted Advisor check.
+	//
+	// This member is required.
 	CheckId *string
+
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
@@ -99,6 +103,7 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 // The result of the Trusted Advisor check returned by the
 // DescribeTrustedAdvisorCheckResult () operation.
 type DescribeTrustedAdvisorCheckResultOutput struct {
+
 	// The detailed results of the Trusted Advisor check.
 	Result *types.TrustedAdvisorCheckResult
 

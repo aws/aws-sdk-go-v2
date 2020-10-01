@@ -57,17 +57,21 @@ func (c *Client) TerminateEnvironment(ctx context.Context, params *TerminateEnvi
 
 // Request to terminate an environment.
 type TerminateEnvironmentInput struct {
+
 	// Terminates the target environment even if another environment in the same group
 	// is dependent on it.
 	ForceTerminate *bool
+
 	// The ID of the environment to terminate. Condition: You must specify either this
 	// or an EnvironmentName, or both. If you do not specify either, AWS Elastic
 	// Beanstalk returns MissingRequiredParameter error.
 	EnvironmentId *string
+
 	// The name of the environment to terminate. Condition: You must specify either
 	// this or an EnvironmentId, or both. If you do not specify either, AWS Elastic
 	// Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
+
 	// Indicates whether the associated AWS resources should shut down when the
 	// environment is terminated:
 	//
@@ -87,40 +91,54 @@ type TerminateEnvironmentInput struct {
 
 // Describes the properties of an environment.
 type TerminateEnvironmentOutput struct {
+
 	// A list of links to other environments in the same group.
 	EnvironmentLinks []*types.EnvironmentLink
+
 	// Returns the health status of the application running in your environment. For
 	// more information, see Health Colors and Statuses
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
 	HealthStatus types.EnvironmentHealthStatus
+
 	// For load-balanced, autoscaling environments, the URL to the LoadBalancer. For
 	// single-instance environments, the IP address of the instance.
 	EndpointURL *string
+
 	// The ARN of the platform version.
 	PlatformArn *string
+
 	// The ID of this environment.
 	EnvironmentId *string
+
 	// The name of the application associated with this environment.
 	ApplicationName *string
+
 	// Indicates if there is an in-progress environment configuration update or
 	// application version deployment that you can cancel. true: There is an update in
 	// progress. false: There are no updates currently in progress.
 	AbortableOperationInProgress *bool
+
 	// The creation date for this environment.
 	DateCreated *time.Time
+
 	// The Amazon Resource Name (ARN) of the environment's operations role. For more
 	// information, see Operations roles
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
 	// in the AWS Elastic Beanstalk Developer Guide.
 	OperationsRole *string
+
 	// Describes the current tier of this environment.
 	Tier *types.EnvironmentTier
+
 	// The URL to the CNAME for this environment.
 	CNAME *string
+
 	// Describes this environment.
 	Description *string
+
 	// The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
+
 	// The current operational status of the environment:  <ul> <li> <p>
 	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
 	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
@@ -130,11 +148,14 @@ type TerminateEnvironmentOutput struct {
 	// Environment is in the shut-down process.</p> </li> <li> <p>
 	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
 	Status types.EnvironmentStatus
+
 	// The environment's Amazon Resource Name (ARN), which can be used in other API
 	// requests that require an ARN.
 	EnvironmentArn *string
+
 	// The last modified date for this environment.
 	DateUpdated *time.Time
+
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
 	//
@@ -155,12 +176,16 @@ type TerminateEnvironmentOutput struct {
 	//
 	// Default: Grey
 	Health types.EnvironmentHealth
+
 	// The application version deployed in this environment.
 	VersionLabel *string
+
 	// The name of this environment.
 	EnvironmentName *string
+
 	// The description of the AWS resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
+
 	// The name of the configuration template used to originally launch this
 	// environment.
 	TemplateName *string

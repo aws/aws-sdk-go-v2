@@ -56,13 +56,17 @@ func (c *Client) GetAutomationExecution(ctx context.Context, params *GetAutomati
 }
 
 type GetAutomationExecutionInput struct {
+
 	// The unique identifier for an existing automation execution to examine. The
 	// execution ID is returned by StartAutomationExecution when the execution of an
 	// Automation document is initiated.
+	//
+	// This member is required.
 	AutomationExecutionId *string
 }
 
 type GetAutomationExecutionOutput struct {
+
 	// Detailed information about the current state of an automation execution.
 	AutomationExecution *types.AutomationExecution
 

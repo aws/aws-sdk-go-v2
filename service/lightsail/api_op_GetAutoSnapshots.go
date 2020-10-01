@@ -58,17 +58,23 @@ func (c *Client) GetAutoSnapshots(ctx context.Context, params *GetAutoSnapshotsI
 }
 
 type GetAutoSnapshotsInput struct {
+
 	// The name of the source instance or disk from which to get automatic snapshot
 	// information.
+	//
+	// This member is required.
 	ResourceName *string
 }
 
 type GetAutoSnapshotsOutput struct {
+
 	// An array of objects that describe the automatic snapshots that are available for
 	// the specified source instance or disk.
 	AutoSnapshots []*types.AutoSnapshotDetails
+
 	// The resource type (e.g., Instance or Disk).
 	ResourceType types.ResourceType
+
 	// The name of the source instance or disk for the automatic snapshots.
 	ResourceName *string
 

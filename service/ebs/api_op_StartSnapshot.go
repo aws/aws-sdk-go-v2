@@ -62,6 +62,7 @@ func (c *Client) StartSnapshot(ctx context.Context, params *StartSnapshotInput, 
 }
 
 type StartSnapshotInput struct {
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. Idempotency ensures that an API request completes only once.
 	// With an idempotent request, if the original request completes successfully. The
@@ -72,12 +73,18 @@ type StartSnapshotInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	ClientToken *string
+
 	// A description for the snapshot.
 	Description *string
+
 	// The tags to apply to the snapshot.
 	Tags []*types.Tag
+
 	// The size of the volume, in GiB. The maximum size is 16384 GiB (16 TiB).
+	//
+	// This member is required.
 	VolumeSize *int64
+
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) to be used to encrypt the snapshot. If you do not
 	// specify a CMK, the default AWS managed CMK is used. If you specify a
@@ -85,6 +92,7 @@ type StartSnapshotInput struct {
 	// same CMK that was used to encrypt the parent snapshot. If Encrypted is set to
 	// true, you must specify a CMK ARN.
 	KmsKeyArn *string
+
 	// Indicates whether to encrypt the snapshot. To create an encrypted snapshot,
 	// specify true. To create an unencrypted snapshot, omit this parameter. If you
 	// specify a value for ParentSnapshotId, omit this parameter. If you specify true,
@@ -99,6 +107,7 @@ type StartSnapshotInput struct {
 	// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption">
 	// Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
 	Encrypted *bool
+
 	// The ID of the parent snapshot. If there is no parent snapshot, or if you are
 	// creating the first snapshot for an on-premises volume, omit this parameter. If
 	// your account is enabled for encryption by default, you cannot use an unencrypted
@@ -106,6 +115,7 @@ type StartSnapshotInput struct {
 	// parent snapshot using CopySnapshot
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html).
 	ParentSnapshotId *string
+
 	// The amount of time (in minutes) after which the snapshot is automatically
 	// cancelled if:
 	//
@@ -120,28 +130,38 @@ type StartSnapshotInput struct {
 }
 
 type StartSnapshotOutput struct {
+
 	// The timestamp when the snapshot was created.
 	StartTime *time.Time
+
 	// The AWS account ID of the snapshot owner.
 	OwnerId *string
+
 	// The ID of the snapshot.
 	SnapshotId *string
+
 	// The description of the snapshot.
 	Description *string
+
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) used to encrypt the snapshot.
 	KmsKeyArn *string
+
 	// The ID of the parent snapshot.
 	ParentSnapshotId *string
+
 	// The status of the snapshot.
 	Status types.Status
+
 	// The size of the blocks in the snapshot, in bytes.
 	BlockSize *int32
+
 	// The tags applied to the snapshot. You can specify up to 50 tags per snapshot.
 	// For more information, see  Tagging your Amazon EC2 resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	Tags []*types.Tag
+
 	// The size of the volume, in GiB.
 	VolumeSize *int64
 

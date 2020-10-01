@@ -79,14 +79,20 @@ func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optF
 
 // Represents the input of an UpdateTable operation.
 type UpdateTableInput struct {
+
 	// The new server-side encryption settings for the specified table.
 	SSESpecification *types.SSESpecification
+
 	// The name of the table to be updated.
+	//
+	// This member is required.
 	TableName *string
+
 	// An array of attributes that describe the key schema for the table and indexes.
 	// If you are adding a new global secondary index to the table,
 	// AttributeDefinitions must include the key element(s) of the new index.
 	AttributeDefinitions []*types.AttributeDefinition
+
 	// An array of one or more global secondary indexes for the table. For each index
 	// in the array, you can request one action:
 	//
@@ -105,6 +111,7 @@ type UpdateTableInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
 	// in the Amazon DynamoDB Developer Guide.
 	GlobalSecondaryIndexUpdates []*types.GlobalSecondaryIndexUpdate
+
 	// Controls how you are charged for read and write throughput and how you manage
 	// capacity. When switching from pay-per-request to provisioned capacity, initial
 	// provisioned capacity values must be set. The initial provisioned capacity values
@@ -121,13 +128,16 @@ type UpdateTableInput struct {
 	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
 	BillingMode types.BillingMode
+
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *types.ProvisionedThroughput
+
 	// A list of replica update actions (create, delete, or update) for the table. This
 	// property only applies to Version 2019.11.21
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 	// of global tables.
 	ReplicaUpdates []*types.ReplicationGroupUpdate
+
 	// Represents the DynamoDB Streams configuration for the table. You receive a
 	// ResourceInUseException if you try to enable a stream on a table that already has
 	// a stream, or if you try to disable a stream on a table that doesn't have a
@@ -137,6 +147,7 @@ type UpdateTableInput struct {
 
 // Represents the output of an UpdateTable operation.
 type UpdateTableOutput struct {
+
 	// Represents the properties of the table.
 	TableDescription *types.TableDescription
 

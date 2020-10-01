@@ -58,17 +58,26 @@ func (c *Client) ListPackageVersionAssets(ctx context.Context, params *ListPacka
 }
 
 type ListPackageVersionAssetsInput struct {
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// A string that contains the package version (for example, 3.5.2).
+	//
+	// This member is required.
 	PackageVersion *string
+
 	// The name of the domain that contains the repository associated with the package
 	// version assets.
+	//
+	// This member is required.
 	Domain *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The format of the package that contains the returned package version assets. The
 	// valid package types are:
 	//
@@ -79,14 +88,24 @@ type ListPackageVersionAssetsInput struct {
 	//
 	//     * maven: A Maven package
 	// that contains compiled code in a distributable format, such as a JAR file.
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
+
 	// The name of the package that contains the returned package version assets.
+	//
+	// This member is required.
 	Package *string
+
 	// The name of the repository that contains the package that contains the returned
 	// package version assets.
+	//
+	// This member is required.
 	Repository *string
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -102,14 +121,18 @@ type ListPackageVersionAssetsInput struct {
 }
 
 type ListPackageVersionAssetsOutput struct {
+
 	// The version of the package associated with the returned assets.
 	Version *string
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
+
 	// The returned list of AssetSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
 	// objects.
 	Assets []*types.AssetSummary
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -122,10 +145,13 @@ type ListPackageVersionAssetsOutput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// The format of the package that contains the returned package version assets.
 	Format types.PackageFormat
+
 	// The current revision associated with the package version.
 	VersionRevision *string
+
 	// The name of the package that contains the returned package version assets.
 	Package *string
 

@@ -56,6 +56,7 @@ func (c *Client) GetFunctionConcurrency(ctx context.Context, params *GetFunction
 }
 
 type GetFunctionConcurrencyInput struct {
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -70,10 +71,13 @@ type GetFunctionConcurrencyInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
 }
 
 type GetFunctionConcurrencyOutput struct {
+
 	// The number of simultaneous executions that are reserved for the function.
 	ReservedConcurrentExecutions *int32
 

@@ -59,29 +59,44 @@ func (c *Client) AdminGetUser(ctx context.Context, params *AdminGetUserInput, op
 
 // Represents the request to get the specified user as an administrator.
 type AdminGetUserInput struct {
+
 	// The user pool ID for the user pool where you want to get information about the
 	// user.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The user name of the user you wish to retrieve.
+	//
+	// This member is required.
 	Username *string
 }
 
 // Represents the response from the server from the request to get the specified
 // user as an administrator.
 type AdminGetUserOutput struct {
+
 	// The user's preferred MFA setting.
 	PreferredMfaSetting *string
+
 	// The date the user was created.
 	UserCreateDate *time.Time
+
 	// The user name of the user about whom you are receiving information.
+	//
+	// This member is required.
 	Username *string
+
 	// The MFA options that are enabled for the user. The possible values in this list
 	// are SMS_MFA and SOFTWARE_TOKEN_MFA.
 	UserMFASettingList []*string
+
 	// Indicates that the status is enabled.
 	Enabled *bool
+
 	// An array of name-value pairs representing user attributes.
 	UserAttributes []*types.AttributeType
+
 	// The user status. Can be one of the following:
 	//
 	//     * UNCONFIRMED - User has been
@@ -106,12 +121,14 @@ type AdminGetUserOutput struct {
 	// on first sign-in, the user must change his or her password to a new value before
 	// doing anything else.
 	UserStatus types.UserStatusType
+
 	// This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about TOTP software
 	// token MFA configurations. To look up information about either type of MFA
 	// configuration, use the AdminGetUserResponse$UserMFASettingList () response
 	// instead.
 	MFAOptions []*types.MFAOptionType
+
 	// The date the user was last modified.
 	UserLastModifiedDate *time.Time
 

@@ -56,18 +56,29 @@ func (c *Client) CopyImage(ctx context.Context, params *CopyImageInput, optFns .
 }
 
 type CopyImageInput struct {
+
 	// The name of the image to copy.
+	//
+	// This member is required.
 	SourceImageName *string
+
 	// The description that the image will have when it is copied to the destination.
 	DestinationImageDescription *string
+
 	// The name that the image will have when it is copied to the destination.
+	//
+	// This member is required.
 	DestinationImageName *string
+
 	// The destination region to which the image will be copied. This parameter is
 	// required, even if you are copying an image within the same region.
+	//
+	// This member is required.
 	DestinationRegion *string
 }
 
 type CopyImageOutput struct {
+
 	// The name of the destination image.
 	DestinationImageName *string
 

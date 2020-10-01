@@ -58,11 +58,18 @@ func (c *Client) EnableMetricsCollection(ctx context.Context, params *EnableMetr
 }
 
 type EnableMetricsCollectionInput struct {
+
 	// The granularity to associate with the metrics to collect. The only valid value
 	// is 1Minute.
+	//
+	// This member is required.
 	Granularity *string
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// Specifies which group-level metrics to start collecting. You can specify one or
 	// more of the following metrics:
 	//

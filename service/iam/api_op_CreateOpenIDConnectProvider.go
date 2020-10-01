@@ -75,6 +75,7 @@ func (c *Client) CreateOpenIDConnectProvider(ctx context.Context, params *Create
 }
 
 type CreateOpenIDConnectProviderInput struct {
+
 	// The URL of the identity provider. The URL must begin with https:// and should
 	// correspond to the iss claim in the provider's OpenID Connect ID tokens. Per the
 	// OIDC standard, path components are allowed but query parameters are not.
@@ -82,7 +83,10 @@ type CreateOpenIDConnectProviderInput struct {
 	// or https://example.com. You cannot register the same provider multiple times in
 	// a single AWS account. If you try to submit a URL that has already been used for
 	// an OpenID Connect provider in the AWS account, you will get an error.
+	//
+	// This member is required.
 	Url *string
+
 	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity
 	// provider's server certificates. Typically this list includes only one entry.
 	// However, IAM lets you have up to five thumbprints for an OIDC provider. This
@@ -99,7 +103,10 @@ type CreateOpenIDConnectProviderInput struct {
 	// Connect Provider
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html)
 	// in the IAM User Guide.
+	//
+	// This member is required.
 	ThumbprintList []*string
+
 	// A list of client IDs (also known as audiences). When a mobile or web app
 	// registers with an OpenID Connect provider, they establish a value that
 	// identifies the application. (This is the value that's sent as the client_id
@@ -114,6 +121,7 @@ type CreateOpenIDConnectProviderInput struct {
 
 // Contains the response to a successful CreateOpenIDConnectProvider () request.
 type CreateOpenIDConnectProviderOutput struct {
+
 	// The Amazon Resource Name (ARN) of the new IAM OpenID Connect provider that is
 	// created. For more information, see OpenIDConnectProviderListEntry ().
 	OpenIDConnectProviderArn *string

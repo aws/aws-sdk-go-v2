@@ -56,12 +56,18 @@ func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInp
 }
 
 type DescribeProjectInput struct {
+
 	// The name of the project to be described.
+	//
+	// This member is required.
 	ProjectName *string
 }
 
 type DescribeProjectOutput struct {
+
 	// An object describing the project.
+	//
+	// This member is required.
 	Project *types.ProjectDescription
 
 	// Metadata pertaining to the operation's result.

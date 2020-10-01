@@ -59,12 +59,18 @@ func (c *Client) GetCorsPolicy(ctx context.Context, params *GetCorsPolicyInput, 
 }
 
 type GetCorsPolicyInput struct {
+
 	// The name of the container that the policy is assigned to.
+	//
+	// This member is required.
 	ContainerName *string
 }
 
 type GetCorsPolicyOutput struct {
+
 	// The CORS policy assigned to the container.
+	//
+	// This member is required.
 	CorsPolicy []*types.CorsRule
 
 	// Metadata pertaining to the operation's result.

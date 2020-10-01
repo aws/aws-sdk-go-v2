@@ -58,25 +58,38 @@ func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsI
 }
 
 type ListDeviceEventsInput struct {
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
 	MaxResults *int32
+
 	// The start date for the device event query, in ISO8061 format. For example,
 	// 2018-03-28T15:45:12.880Z
+	//
+	// This member is required.
 	FromTimeStamp *time.Time
+
 	// The end date for the device event query, in ISO8061 format. For example,
 	// 2018-03-28T15:45:12.880Z
+	//
+	// This member is required.
 	ToTimeStamp *time.Time
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListDeviceEventsOutput struct {
+
 	// An array of zero or more elements describing the event(s) associated with the
 	// device.
 	Events []*types.DeviceEvent
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 

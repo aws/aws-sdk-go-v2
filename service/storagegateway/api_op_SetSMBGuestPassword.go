@@ -57,14 +57,21 @@ func (c *Client) SetSMBGuestPassword(ctx context.Context, params *SetSMBGuestPas
 
 // SetSMBGuestPasswordInput
 type SetSMBGuestPasswordInput struct {
+
 	// The Amazon Resource Name (ARN) of the file gateway the SMB file share is
 	// associated with.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// The password that you want to set for your SMB server.
+	//
+	// This member is required.
 	Password *string
 }
 
 type SetSMBGuestPasswordOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

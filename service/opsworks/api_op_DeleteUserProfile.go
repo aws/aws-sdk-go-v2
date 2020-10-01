@@ -58,7 +58,10 @@ func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfil
 }
 
 type DeleteUserProfileInput struct {
+
 	// The user's IAM ARN. This can also be a federated user's ARN.
+	//
+	// This member is required.
 	IamUserArn *string
 }
 

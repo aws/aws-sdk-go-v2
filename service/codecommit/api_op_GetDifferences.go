@@ -58,26 +58,37 @@ func (c *Client) GetDifferences(ctx context.Context, params *GetDifferencesInput
 }
 
 type GetDifferencesInput struct {
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, the full commit ID). Optional. If not specified, all
 	// changes before the afterCommitSpecifier value are shown. If you do not use
 	// beforeCommitSpecifier in your request, consider limiting the results with
 	// maxResults.
 	BeforeCommitSpecifier *string
+
 	// The file path in which to check for differences. Limits the results to this
 	// path. Can also be used to specify the previous name of a directory or folder. If
 	// beforePath and afterPath are not specified, differences are shown for all paths.
 	BeforePath *string
+
 	// The name of the repository where you want to get differences.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit.
+	//
+	// This member is required.
 	AfterCommitSpecifier *string
+
 	// The file path in which to check differences. Limits the results to this path.
 	// Can also be used to specify the changed name of a directory or folder, if it has
 	// changed. If not specified, differences are shown for all paths.
@@ -85,9 +96,11 @@ type GetDifferencesInput struct {
 }
 
 type GetDifferencesOutput struct {
+
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string
+
 	// A data type object that contains information about the differences, including
 	// whether the difference is added, modified, or deleted (A, D, M).
 	Differences []*types.Difference

@@ -58,13 +58,23 @@ func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, 
 
 // The request body for CreateDataSet.
 type CreateDataSetInput struct {
+
 	// A description for the data set. This value can be up to 16,348 characters long.
+	//
+	// This member is required.
 	Description *string
+
 	// The name of the data set.
+	//
+	// This member is required.
 	Name *string
+
 	// The type of file your data is stored in. Currently, the supported asset type is
 	// S3_SNAPSHOT.
+	//
+	// This member is required.
 	AssetType types.AssetType
+
 	// A data set tag is an optional label that you can assign to a data set when you
 	// create it. Each tag consists of a key and an optional value, both of which you
 	// define. When you use tagging, you can also use tag-based access control in IAM
@@ -73,30 +83,41 @@ type CreateDataSetInput struct {
 }
 
 type CreateDataSetOutput struct {
+
 	// The type of file your data is stored in. Currently, the supported asset type is
 	// S3_SNAPSHOT.
 	AssetType types.AssetType
+
 	// The date and time that the data set was created, in ISO 8601 format.
 	CreatedAt *time.Time
+
 	// The tags for the data set.
 	Tags map[string]*string
+
 	// The data set ID of the owned data set corresponding to the entitled data set
 	// being viewed. This parameter is returned when a data set owner is viewing the
 	// entitled copy of its owned data set.
 	SourceId *string
+
 	// If the origin of this data set is ENTITLED, includes the details for the product
 	// on AWS Marketplace.
 	OriginDetails *types.OriginDetails
+
 	// The name of the data set.
 	Name *string
+
 	// The date and time that the data set was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
+
 	// The description for the data set.
 	Description *string
+
 	// The ARN for the data set.
 	Arn *string
+
 	// The unique identifier for the data set.
 	Id *string
+
 	// A property that defines the data set as OWNED by the account (for providers) or
 	// ENTITLED to the account (for subscribers).
 	Origin types.Origin

@@ -57,20 +57,25 @@ func (c *Client) ListSpeechSynthesisTasks(ctx context.Context, params *ListSpeec
 }
 
 type ListSpeechSynthesisTasksInput struct {
+
 	// Maximum number of speech synthesis tasks returned in a List operation.
 	MaxResults *int32
+
 	// The pagination token to use in the next request to continue the listing of
 	// speech synthesis tasks.
 	NextToken *string
+
 	// Status of the speech synthesis tasks returned in a List operation
 	Status types.TaskStatus
 }
 
 type ListSpeechSynthesisTasksOutput struct {
+
 	// List of SynthesisTask objects that provides information from the specified task
 	// in the list request, including output format, creation time, task status, and so
 	// on.
 	SynthesisTasks []*types.SynthesisTask
+
 	// An opaque pagination token returned from the previous List operation in this
 	// request. If present, this indicates where to continue the listing.
 	NextToken *string

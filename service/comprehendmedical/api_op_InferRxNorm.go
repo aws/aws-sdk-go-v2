@@ -59,20 +59,28 @@ func (c *Client) InferRxNorm(ctx context.Context, params *InferRxNormInput, optF
 }
 
 type InferRxNormInput struct {
+
 	// The input text used for analysis. The input for InferRxNorm is a string from 1
 	// to 10000 characters.
+	//
+	// This member is required.
 	Text *string
 }
 
 type InferRxNormOutput struct {
+
 	// The medication entities detected in the text linked to RxNorm concepts. If the
 	// action is successful, the service sends back an HTTP 200 response, as well as
 	// the entities detected.
+	//
+	// This member is required.
 	Entities []*types.RxNormEntity
+
 	// The version of the model used to analyze the documents, in the format n.n.n You
 	// can use this information to track the model used for a particular batch of
 	// documents.
 	ModelVersion *string
+
 	// If the result of the previous request to InferRxNorm was truncated, include the
 	// PaginationToken to fetch the next page of medication entities.
 	PaginationToken *string

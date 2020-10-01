@@ -56,14 +56,19 @@ func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, op
 }
 
 type GetComponentInput struct {
+
 	// The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex
 	// requires "/\d+$" suffix.
+	//
+	// This member is required.
 	ComponentBuildVersionArn *string
 }
 
 type GetComponentOutput struct {
+
 	// The component object associated with the specified ARN.
 	Component *types.Component
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

@@ -60,20 +60,31 @@ func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, 
 }
 
 type DeleteTaskSetInput struct {
+
 	// The short name or full Amazon Resource Name (ARN) of the service that hosts the
 	// task set to delete.
+	//
+	// This member is required.
 	Service *string
+
 	// The task set ID or full Amazon Resource Name (ARN) of the task set to delete.
+	//
+	// This member is required.
 	TaskSet *string
+
 	// If true, this allows you to delete a task set even if it hasn't been scaled down
 	// to zero.
 	Force *bool
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// service that the task set exists in to delete.
+	//
+	// This member is required.
 	Cluster *string
 }
 
 type DeleteTaskSetOutput struct {
+
 	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
 	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
 	// number of tasks, how many tasks are running, and whether the task set serves

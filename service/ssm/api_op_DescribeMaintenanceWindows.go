@@ -55,21 +55,26 @@ func (c *Client) DescribeMaintenanceWindows(ctx context.Context, params *Describ
 }
 
 type DescribeMaintenanceWindowsInput struct {
+
 	// Optional filters used to narrow down the scope of the returned maintenance
 	// windows. Supported filter keys are Name and Enabled.
 	Filters []*types.MaintenanceWindowFilter
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 }
 
 type DescribeMaintenanceWindowsOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// Information about the maintenance windows.
 	WindowIdentities []*types.MaintenanceWindowIdentity
 

@@ -56,11 +56,15 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 }
 
 type DescribeTagsInput struct {
+
 	// The Amazon Resource Names (ARNs) of the resources.
+	//
+	// This member is required.
 	ResourceArns []*string
 }
 
 type DescribeTagsOutput struct {
+
 	// Information about the tags.
 	ResourceTags []*types.ResourceTag
 

@@ -56,17 +56,24 @@ func (c *Client) StartJobRun(ctx context.Context, params *StartJobRunInput, optF
 }
 
 type StartJobRunInput struct {
+
 	// The name of the job definition to use.
+	//
+	// This member is required.
 	JobName *string
+
 	// The ID of a previous JobRun to retry.
 	JobRunId *string
+
 	// The name of the SecurityConfiguration structure to be used with this job run.
 	SecurityConfiguration *string
+
 	// The JobRun timeout in minutes. This is the maximum time that a job run can
 	// consume resources before it is terminated and enters TIMEOUT status. The default
 	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
 	// job.
 	Timeout *int32
+
 	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
 	// data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can
 	// be allocated; the default is 10. A DPU is a relative measure of processing power
@@ -75,6 +82,7 @@ type StartJobRunInput struct {
 	// href="https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/">AWS Glue
 	// pricing page</a>.</p>
 	AllocatedCapacity *int32
+
 	// The job arguments specifically for this run. For this job run, they replace the
 	// default arguments set in the job definition itself. You can specify arguments
 	// here that your own job-execution script consumes, as well as arguments that AWS
@@ -86,6 +94,7 @@ type StartJobRunInput struct {
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]*string
+
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
 	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
@@ -101,8 +110,10 @@ type StartJobRunInput struct {
 	// to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
 	// allocation.</p> </li> </ul>
 	MaxCapacity *float64
+
 	// Specifies configuration properties of a job run notification.
 	NotificationProperty *types.NotificationProperty
+
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, or G.2X.
 	//
@@ -117,6 +128,7 @@ type StartJobRunInput struct {
 	// worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per
 	// worker.
 	WorkerType types.WorkerType
+
 	// The number of workers of a defined workerType that are allocated when a job
 	// runs.  <p>The maximum number of workers you can define are 299 for
 	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
@@ -124,6 +136,7 @@ type StartJobRunInput struct {
 }
 
 type StartJobRunOutput struct {
+
 	// The ID assigned to this job run.
 	JobRunId *string
 

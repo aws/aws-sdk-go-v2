@@ -86,14 +86,17 @@ func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetA
 
 // Represents the input for a request action.
 type UpdateFleetAttributesInput struct {
+
 	// Names of metric groups to include this fleet in. Amazon CloudWatch uses a fleet
 	// metric group is to aggregate metrics from multiple fleets. Use an existing
 	// metric group name to add this fleet to the group. Or use a new name to create a
 	// new metric group. A fleet can only be included in one metric group at a time.
 	MetricGroups []*string
+
 	// A descriptive label that is associated with a fleet. Fleet names do not need to
 	// be unique.
 	Name *string
+
 	// Game session protection policy to apply to all new instances created in this
 	// fleet. Instances that already exist are not affected. You can set protection for
 	// individual instances using UpdateGameSession ().
@@ -105,11 +108,16 @@ type UpdateFleetAttributesInput struct {
 	// the game session is in an ACTIVE status, it cannot be terminated during a
 	// scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
+
 	// Human-readable description of a fleet.
 	Description *string
+
 	// A unique identifier for a fleet to update attribute metadata for. You can use
 	// either the fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
+
 	// Policy that limits the number of game sessions an individual player can create
 	// over a span of time.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
@@ -117,6 +125,7 @@ type UpdateFleetAttributesInput struct {
 
 // Represents the returned data in response to a request action.
 type UpdateFleetAttributesOutput struct {
+
 	// A unique identifier for a fleet that was updated. Use either the fleet ID or ARN
 	// value.
 	FleetId *string

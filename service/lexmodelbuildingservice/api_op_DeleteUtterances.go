@@ -63,13 +63,19 @@ func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesI
 }
 
 type DeleteUtterancesInput struct {
+
 	// The name of the bot that stored the utterances.
+	//
+	// This member is required.
 	BotName *string
+
 	// The unique identifier for the user that made the utterances. This is the user ID
 	// that was sent in the PostContent
 	// (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html) or
 	// PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
 	// operation request that contained the utterance.
+	//
+	// This member is required.
 	UserId *string
 }
 

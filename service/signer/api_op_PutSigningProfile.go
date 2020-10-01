@@ -59,25 +59,38 @@ func (c *Client) PutSigningProfile(ctx context.Context, params *PutSigningProfil
 }
 
 type PutSigningProfileInput struct {
+
 	// Tags to be associated with the signing profile that is being created.
 	Tags map[string]*string
+
 	// The name of the signing profile to be created.
+	//
+	// This member is required.
 	ProfileName *string
+
 	// A subfield of platform. This specifies any different configuration options that
 	// you want to apply to the chosen platform (such as a different hash-algorithm or
 	// signing-algorithm).
 	Overrides *types.SigningPlatformOverrides
+
 	// Map of key-value pairs for signing. These can include any information that you
 	// want to use during signing.
 	SigningParameters map[string]*string
+
 	// The ID of the signing platform to be created.
+	//
+	// This member is required.
 	PlatformId *string
+
 	// The AWS Certificate Manager certificate that will be used to sign code with the
 	// new signing profile.
+	//
+	// This member is required.
 	SigningMaterial *types.SigningMaterial
 }
 
 type PutSigningProfileOutput struct {
+
 	// The Amazon Resource Name (ARN) of the signing profile created.
 	Arn *string
 

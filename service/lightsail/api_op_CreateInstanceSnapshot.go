@@ -60,16 +60,24 @@ func (c *Client) CreateInstanceSnapshot(ctx context.Context, params *CreateInsta
 }
 
 type CreateInstanceSnapshotInput struct {
+
 	// The name for your new snapshot.
+	//
+	// This member is required.
 	InstanceSnapshotName *string
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// The Lightsail instance on which to base your snapshot.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type CreateInstanceSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

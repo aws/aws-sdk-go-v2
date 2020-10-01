@@ -59,6 +59,7 @@ type DescribeAcceleratorTypesInput struct {
 }
 
 type DescribeAcceleratorTypesOutput struct {
+
 	// The available accelerator types.
 	AcceleratorTypes []*types.AcceleratorType
 

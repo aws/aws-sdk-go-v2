@@ -59,30 +59,50 @@ func (c *Client) CreateSoftwareUpdateJob(ctx context.Context, params *CreateSoft
 }
 
 type CreateSoftwareUpdateJobInput struct {
+
 	// The operating system of the cores which are the targets of an update.
+	//
+	// This member is required.
 	UpdateTargetsOperatingSystem types.UpdateTargetsOperatingSystem
+
 	// The minimum level of log statements that should be logged by the OTA Agent
 	// during an update.
 	UpdateAgentLogLevel types.UpdateAgentLogLevel
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
 	// The IAM Role that Greengrass will use to create pre-signed URLs pointing towards
 	// the update artifact.
+	//
+	// This member is required.
 	S3UrlSignerRole *string
+
 	// The ARNs of the targets (IoT things or IoT thing groups) that this update will
 	// be applied to.
+	//
+	// This member is required.
 	UpdateTargets []*string
+
 	// The architecture of the cores which are the targets of an update.
+	//
+	// This member is required.
 	UpdateTargetsArchitecture types.UpdateTargetsArchitecture
+
 	// The piece of software on the Greengrass core that will be updated.
+	//
+	// This member is required.
 	SoftwareToUpdate types.SoftwareToUpdate
 }
 
 type CreateSoftwareUpdateJobOutput struct {
+
 	// The software version installed on the device or devices after the update.
 	PlatformSoftwareVersion *string
+
 	// The IoT Job ARN corresponding to this update.
 	IotJobArn *string
+
 	// The IoT Job Id corresponding to this update.
 	IotJobId *string
 

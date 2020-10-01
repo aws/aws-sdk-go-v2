@@ -55,10 +55,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The tags to be removed from the specified resource. Do not provide system tags.
 	// Required.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The ARN of the resource from which to remove metadata tags. Required.
+	//
+	// This member is required.
 	Arn *string
 }
 

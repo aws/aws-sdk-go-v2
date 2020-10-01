@@ -57,16 +57,24 @@ func (c *Client) ModifyReplicationSubnetGroup(ctx context.Context, params *Modif
 
 //
 type ModifyReplicationSubnetGroupInput struct {
+
 	// A list of subnet IDs.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// The name of the replication instance subnet group.
+	//
+	// This member is required.
 	ReplicationSubnetGroupIdentifier *string
+
 	// A description for the replication instance subnet group.
 	ReplicationSubnetGroupDescription *string
 }
 
 //
 type ModifyReplicationSubnetGroupOutput struct {
+
 	// The modified replication subnet group.
 	ReplicationSubnetGroup *types.ReplicationSubnetGroup
 

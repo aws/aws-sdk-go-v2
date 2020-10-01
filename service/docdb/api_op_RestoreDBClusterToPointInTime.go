@@ -62,16 +62,22 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 
 // Represents the input to RestoreDBClusterToPointInTime ().
 type RestoreDBClusterToPointInTimeInput struct {
+
 	// The tags to be assigned to the restored cluster.
 	Tags []*types.Tag
+
 	// The identifier of the source cluster from which to restore. Constraints:
 	//
 	//     *
 	// Must match the identifier of an existing DBCluster.
+	//
+	// This member is required.
 	SourceDBClusterIdentifier *string
+
 	// The port number on which the new cluster accepts connections. Constraints: Must
 	// be a value from 1150 to 65535. Default: The default port for the engine.
 	Port *int32
+
 	// The date and time to restore the cluster to. Valid values: A time in Universal
 	// Coordinated Time (UTC) format. Constraints:
 	//
@@ -89,20 +95,25 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time
+
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []*string
+
 	// A value that is set to true to restore the cluster to the latest restorable
 	// backup time, and false otherwise. Default: false Constraints: Cannot be
 	// specified if the RestoreToTime parameter is provided.
 	UseLatestRestorableTime *bool
+
 	// The subnet group name to use for the new cluster. Constraints: If provided, must
 	// match the name of an existing DBSubnetGroup. Example: mySubnetgroup
 	DBSubnetGroupName *string
+
 	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
 	// the cluster cannot be deleted unless it is modified and DeletionProtection is
 	// disabled. DeletionProtection protects clusters from being accidentally deleted.
 	DeletionProtection *bool
+
 	// The name of the new cluster to be created. Constraints:
 	//
 	//     * Must contain from
@@ -112,7 +123,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// letter.
 	//
 	//     * Cannot end with a hyphen or contain two consecutive hyphens.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The AWS KMS key identifier to use when restoring an encrypted cluster from an
 	// encrypted cluster. The AWS KMS key identifier is the Amazon Resource Name (ARN)
 	// for the AWS KMS encryption key. If you are restoring a cluster with the same AWS
@@ -134,11 +148,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// If DBClusterIdentifier refers to a cluster that is
 	// not encrypted, then the restore request is rejected.
 	KmsKeyId *string
+
 	// A list of VPC security groups that the new cluster belongs to.
 	VpcSecurityGroupIds []*string
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {
+
 	// Detailed information about a cluster.
 	DBCluster *types.DBCluster
 

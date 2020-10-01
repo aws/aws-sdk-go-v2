@@ -56,25 +56,34 @@ func (c *Client) ListConfigurationRevisions(ctx context.Context, params *ListCon
 }
 
 type ListConfigurationRevisionsInput struct {
+
 	// The unique ID that Amazon MQ generates for the configuration.
+	//
+	// This member is required.
 	ConfigurationId *string
+
 	// The maximum number of configurations that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults *int32
+
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
 }
 
 type ListConfigurationRevisionsOutput struct {
+
 	// The maximum number of configuration revisions that can be returned per page (20
 	// by default). This value must be an integer from 5 to 100.
 	MaxResults *int32
+
 	// The list of all revisions for the specified configuration.
 	Revisions []*types.ConfigurationRevision
+
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
+
 	// The unique ID that Amazon MQ generates for the configuration.
 	ConfigurationId *string
 

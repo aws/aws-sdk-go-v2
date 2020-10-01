@@ -67,8 +67,10 @@ type DescribeAccountAttributesInput struct {
 
 //
 type DescribeAccountAttributesOutput struct {
+
 	// Account quota information.
 	AccountQuotas []*types.AccountQuota
+
 	// A unique AWS DMS identifier for an account in a particular AWS Region. The value
 	// of this identifier has the following format: c99999999999. DMS uses this
 	// identifier to name artifacts. For example, DMS uses this identifier to name the

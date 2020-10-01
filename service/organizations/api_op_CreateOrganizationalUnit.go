@@ -64,8 +64,12 @@ func (c *Client) CreateOrganizationalUnit(ctx context.Context, params *CreateOrg
 }
 
 type CreateOrganizationalUnitInput struct {
+
 	// The friendly name to assign to the new OU.
+	//
+	// This member is required.
 	Name *string
+
 	// The unique identifier (ID) of the parent root or OU that you want to create the
 	// new OU in. The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID
 	// string requires one of the following:
@@ -78,10 +82,13 @@ type CreateOrganizationalUnitInput struct {
 	// letters or digits (the ID of the root that the OU is in). This string is
 	// followed by a second "-" dash and from 8 to 32 additional lowercase letters or
 	// digits.
+	//
+	// This member is required.
 	ParentId *string
 }
 
 type CreateOrganizationalUnitOutput struct {
+
 	// A structure that contains details about the newly created OU.
 	OrganizationalUnit *types.OrganizationalUnit
 

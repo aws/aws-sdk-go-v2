@@ -64,6 +64,7 @@ func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInp
 
 // Represents the request to create a user in the specified user pool.
 type AdminCreateUserInput struct {
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the AdminCreateUser API
@@ -91,6 +92,7 @@ type AdminCreateUserInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
+
 	// This parameter is only used if the phone_number_verified or email_verified
 	// attribute is set to True. Otherwise, it is ignored. If this parameter is set to
 	// True and the phone number or email address specified in the UserAttributes
@@ -100,10 +102,12 @@ type AdminCreateUserInput struct {
 	// to False, the API throws an AliasExistsException error if the alias already
 	// exists. The default value is False.
 	ForceAliasCreation *bool
+
 	// Set to "RESEND" to resend the invitation message to a user that already exists
 	// and reset the expiration limit on the user's account. Set to "SUPPRESS" to
 	// suppress sending the message. Only one value can be specified.
 	MessageAction types.MessageActionType
+
 	// The user's validation data. This is an array of name-value pairs that contain
 	// user attributes and attribute values that you can use for custom validation,
 	// such as restricting the types of user accounts that can be registered. For
@@ -113,12 +117,19 @@ type AdminCreateUserInput struct {
 	// The Lambda trigger receives the validation data and uses it in the validation
 	// process. The user's validation data is not persisted.
 	ValidationData []*types.AttributeType
+
 	// The user pool ID for the user pool where the user will be created.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The username for the user. Must be unique within the user pool. Must be a UTF-8
 	// string between 1 and 128 characters. After the user is created, the username
 	// cannot be changed.
+	//
+	// This member is required.
 	Username *string
+
 	// An array of name-value pairs that contain user attributes and attribute values
 	// to be set for the user to be created. You can create a user without specifying
 	// any attributes other than Username. However, any attributes that you specify as
@@ -143,6 +154,7 @@ type AdminCreateUserInput struct {
 	// attribute is set to True, or if "SMS" is specified in the DesiredDeliveryMediums
 	// parameter.
 	UserAttributes []*types.AttributeType
+
 	// The user's temporary password. This password must conform to the password policy
 	// that you specified when you created the user pool. The temporary password is
 	// valid only once. To complete the Admin Create User flow, the user must enter the
@@ -153,6 +165,7 @@ type AdminCreateUserInput struct {
 	// the user pool. To reset the account after that time limit, you must call
 	// AdminCreateUser again, specifying "RESEND" for the MessageAction parameter.
 	TemporaryPassword *string
+
 	// Specify "EMAIL" if email will be used to send the welcome message. Specify "SMS"
 	// if the phone number will be used. The default value is "SMS". More than one
 	// value can be specified.
@@ -161,6 +174,7 @@ type AdminCreateUserInput struct {
 
 // Represents the response from the server to the request to create the user.
 type AdminCreateUserOutput struct {
+
 	// The newly created user.
 	User *types.UserType
 

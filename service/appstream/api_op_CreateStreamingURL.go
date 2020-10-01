@@ -58,27 +58,41 @@ func (c *Client) CreateStreamingURL(ctx context.Context, params *CreateStreaming
 }
 
 type CreateStreamingURLInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	FleetName *string
+
 	// The time that the streaming URL will be valid, in seconds. Specify a value
 	// between 1 and 604800 seconds. The default is 60 seconds.
 	Validity *int64
+
 	// The session context. For more information, see Session Context
 	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	SessionContext *string
+
 	// The identifier of the user.
+	//
+	// This member is required.
 	UserId *string
+
 	// The name of the application to launch after the session starts. This is the name
 	// that you specified as Name in the Image Assistant.
 	ApplicationId *string
+
 	// The name of the stack.
+	//
+	// This member is required.
 	StackName *string
 }
 
 type CreateStreamingURLOutput struct {
+
 	// The URL to start the AppStream 2.0 streaming session.
 	StreamingURL *string
+
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
 	Expires *time.Time
 

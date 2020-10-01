@@ -63,18 +63,23 @@ func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params 
 }
 
 type GetAutoScalingGroupRecommendationsInput struct {
+
 	// The maximum number of Auto Scaling group recommendations to return with a single
 	// request. To retrieve the remaining results, make another request with the
 	// returned NextToken value.
 	MaxResults *int32
+
 	// An array of objects that describe a filter that returns a more specific list of
 	// Auto Scaling group recommendations.
 	Filters []*types.Filter
+
 	// The token to advance to the next page of Auto Scaling group recommendations.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return
 	// recommendations.
 	AutoScalingGroupArns []*string
+
 	// The IDs of the AWS accounts for which to return Auto Scaling group
 	// recommendations. If your account is the master account of an organization, use
 	// this parameter to specify the member accounts for which you want to return Auto
@@ -83,14 +88,17 @@ type GetAutoScalingGroupRecommendationsInput struct {
 }
 
 type GetAutoScalingGroupRecommendationsOutput struct {
+
 	// An array of objects that describe errors of the request. For example, an error
 	// is returned if you request recommendations for an unsupported Auto Scaling
 	// group.
 	Errors []*types.GetRecommendationError
+
 	// The token to use to advance to the next page of Auto Scaling group
 	// recommendations. This value is null when there are no more pages of Auto Scaling
 	// group recommendations to return.
 	NextToken *string
+
 	// An array of objects that describe Auto Scaling group recommendations.
 	AutoScalingGroupRecommendations []*types.AutoScalingGroupRecommendation
 

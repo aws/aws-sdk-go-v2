@@ -55,7 +55,10 @@ func (c *Client) DeleteResourceDefinition(ctx context.Context, params *DeleteRes
 }
 
 type DeleteResourceDefinitionInput struct {
+
 	// The ID of the resource definition.
+	//
+	// This member is required.
 	ResourceDefinitionId *string
 }
 

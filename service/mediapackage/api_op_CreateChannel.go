@@ -57,24 +57,34 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 // A new Channel configuration.
 type CreateChannelInput struct {
+
 	// The ID of the Channel. The ID must be unique within the region and it cannot be
 	// changed after a Channel is created.
+	//
+	// This member is required.
 	Id *string
+
 	// A short text description of the Channel.
 	Description *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
 }
 
 type CreateChannelOutput struct {
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
+
 	// A short text description of the Channel.
 	Description *string
+
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
+
 	// The ID of the Channel.
 	Id *string
 

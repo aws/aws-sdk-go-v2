@@ -62,8 +62,12 @@ func (c *Client) GetLaunchTemplateData(ctx context.Context, params *GetLaunchTem
 }
 
 type GetLaunchTemplateDataInput struct {
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -72,6 +76,7 @@ type GetLaunchTemplateDataInput struct {
 }
 
 type GetLaunchTemplateDataOutput struct {
+
 	// The instance data.
 	LaunchTemplateData *types.ResponseLaunchTemplateData
 

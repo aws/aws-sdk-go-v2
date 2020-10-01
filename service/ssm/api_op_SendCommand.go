@@ -56,6 +56,7 @@ func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optF
 }
 
 type SendCommandInput struct {
+
 	// The SSM document version to use in the request. You can specify $DEFAULT,
 	// $LATEST, or a specific version number. If you run commands by using the AWS CLI,
 	// then you must escape the first two options by using a backslash. If you specify
@@ -63,20 +64,26 @@ type SendCommandInput struct {
 	// --document-version "\$DEFAULT" --document-version "\$LATEST" --document-version
 	// "3"
 	DocumentVersion *string
+
 	// Configurations for sending notifications.
 	NotificationConfig *types.NotificationConfig
+
 	// (Deprecated) You can no longer specify this parameter. The system ignores it.
 	// Instead, Systems Manager automatically determines the Region of the S3 bucket.
 	OutputS3Region *string
+
 	// The Sha256 or Sha1 hash created by the system when the document was created.
 	// Sha1 hashes have been deprecated.
 	DocumentHash *string
+
 	// The directory structure within the S3 bucket where the responses should be
 	// stored.
 	OutputS3KeyPrefix *string
+
 	// User-specified information about the command, such as a brief description of
 	// what the command should do.
 	Comment *string
+
 	// The maximum number of errors allowed without the command failing. When the
 	// command fails one more time beyond the value of MaxErrors, the systems stops
 	// sending the command to additional targets. You can specify a number like 10 or a
@@ -85,8 +92,10 @@ type SendCommandInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
 	// in the AWS Systems Manager User Guide.
 	MaxErrors *string
+
 	// The required and optional parameters specified in the document being run.
 	Parameters map[string][]*string
+
 	// (Optional) The maximum number of instances that are allowed to run the command
 	// at the same time. You can specify a number such as 10 or a percentage such as
 	// 10%. The default value is 50. For more information about how to use
@@ -94,6 +103,7 @@ type SendCommandInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
 	// in the AWS Systems Manager User Guide.
 	MaxConcurrency *string
+
 	// The IDs of the instances where the command should run. Specifying instance IDs
 	// is most useful when you are targeting a limited number of instances, though you
 	// can specify up to 50 IDs. To target a larger number of instances, or if you
@@ -105,21 +115,30 @@ type SendCommandInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
 	InstanceIds []*string
+
 	// Required. The name of the Systems Manager document to run. This can be a public
 	// document or a custom document.
+	//
+	// This member is required.
 	DocumentName *string
+
 	// The name of the S3 bucket where command execution responses should be stored.
 	OutputS3BucketName *string
+
 	// If this time is reached and the command has not already started running, it will
 	// not run.
 	TimeoutSeconds *int32
+
 	// Sha256 or Sha1. Sha1 hashes have been deprecated.
 	DocumentHashType types.DocumentHashType
+
 	// Enables Systems Manager to send Run Command output to Amazon CloudWatch Logs.
 	CloudWatchOutputConfig *types.CloudWatchOutputConfig
+
 	// The ARN of the IAM service role to use to publish Amazon Simple Notification
 	// Service (Amazon SNS) notifications for Run Command commands.
 	ServiceRoleArn *string
+
 	// An array of search criteria that targets instances using a Key,Value combination
 	// that you specify. Specifying targets is most useful when you want to send a
 	// command to a large number of instances at once. Using Targets, which accepts tag
@@ -133,6 +152,7 @@ type SendCommandInput struct {
 }
 
 type SendCommandOutput struct {
+
 	// The request as it was received by Systems Manager. Also provides the command ID
 	// which can be used future references to this request.
 	Command *types.Command

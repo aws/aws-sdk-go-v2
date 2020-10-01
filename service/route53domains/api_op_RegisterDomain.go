@@ -85,19 +85,24 @@ func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput
 
 // The RegisterDomain request includes the following elements.
 type RegisterDomainInput struct {
+
 	// The number of years that you want to register the domain for. Domains are
 	// registered for a minimum of one year. The maximum period depends on the
 	// top-level domain. For the range of valid values for your domain, see Domains
 	// that You Can Register with Amazon Route 53
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. Default: 1
+	//
+	// This member is required.
 	DurationInYears *int32
+
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact. Default: true
 	PrivacyProtectTechContact *bool
+
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
@@ -105,26 +110,36 @@ type RegisterDomainInput struct {
 	// return the information that you entered for the registrant contact (the domain
 	// owner). Default: true
 	PrivacyProtectRegistrantContact *bool
+
 	// Indicates whether the domain will be automatically renewed (true) or not
 	// (false). Autorenewal only takes effect after the account is charged. Default:
 	// true
 	AutoRenew *bool
+
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the admin contact. Default: true
 	PrivacyProtectAdminContact *bool
+
 	// Reserved for future use.
 	IdnLangCode *string
+
 	// Provides detailed contact information. For information about the values that you
 	// specify for each element, see ContactDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+	//
+	// This member is required.
 	RegistrantContact *types.ContactDetail
+
 	// Provides detailed contact information. For information about the values that you
 	// specify for each element, see ContactDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+	//
+	// This member is required.
 	AdminContact *types.ContactDetail
+
 	// The domain name that you want to register. The top-level domain (TLD), such as
 	// .com, must be a TLD that Route 53 supports. For a list of supported TLDs, see
 	// Domains that You Can Register with Amazon Route 53
@@ -150,18 +165,26 @@ type RegisterDomainInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
 	// For more information, see Formatting Internationalized Domain Names
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
+	//
+	// This member is required.
 	DomainName *string
+
 	// Provides detailed contact information. For information about the values that you
 	// specify for each element, see ContactDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+	//
+	// This member is required.
 	TechContact *types.ContactDetail
 }
 
 // The RegisterDomain response includes the following element.
 type RegisterDomainOutput struct {
+
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	//
+	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

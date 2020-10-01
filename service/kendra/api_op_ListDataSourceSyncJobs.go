@@ -56,27 +56,39 @@ func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSou
 }
 
 type ListDataSourceSyncJobsInput struct {
+
 	// The identifier of the data source.
+	//
+	// This member is required.
 	Id *string
+
 	// The identifier of the index that contains the data source.
+	//
+	// This member is required.
 	IndexId *string
+
 	// If the result of the previous request to GetDataSourceSyncJobHistory was
 	// truncated, include the NextToken to fetch the next set of jobs.
 	NextToken *string
+
 	// The maximum number of synchronization jobs to return in the response. If there
 	// are fewer results in the list, this response contains only the actual results.
 	MaxResults *int32
+
 	// When specified, the synchronization jobs returned in the list are limited to
 	// jobs between the specified dates.
 	StartTimeFilter *types.TimeRange
+
 	// When specified, only returns synchronization jobs with the Status field equal to
 	// the specified status.
 	StatusFilter types.DataSourceSyncJobStatus
 }
 
 type ListDataSourceSyncJobsOutput struct {
+
 	// A history of synchronization jobs for the data source.
 	History []*types.DataSourceSyncJob
+
 	// The GetDataSourceSyncJobHistory operation returns a page of vocabularies at a
 	// time. The maximum size of the page is set by the MaxResults parameter. If there
 	// are more jobs in the list than the page size, Amazon Kendra returns the NextPage

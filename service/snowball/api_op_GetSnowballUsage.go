@@ -60,9 +60,11 @@ type GetSnowballUsageInput struct {
 }
 
 type GetSnowballUsageOutput struct {
+
 	// The service limit for number of Snowballs this account can have at once. The
 	// default service limit is 1 (one).
 	SnowballLimit *int32
+
 	// The number of Snowballs that this account is currently using.
 	SnowballsInUse *int32
 

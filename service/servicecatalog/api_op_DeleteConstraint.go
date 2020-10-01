@@ -56,6 +56,7 @@ func (c *Client) DeleteConstraint(ctx context.Context, params *DeleteConstraintI
 }
 
 type DeleteConstraintInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,7 +66,10 @@ type DeleteConstraintInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The identifier of the constraint.
+	//
+	// This member is required.
 	Id *string
 }
 

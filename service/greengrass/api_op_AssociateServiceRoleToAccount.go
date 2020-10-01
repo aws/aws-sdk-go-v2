@@ -58,11 +58,15 @@ func (c *Client) AssociateServiceRoleToAccount(ctx context.Context, params *Asso
 }
 
 type AssociateServiceRoleToAccountInput struct {
+
 	// The ARN of the service role you wish to associate with your account.
+	//
+	// This member is required.
 	RoleArn *string
 }
 
 type AssociateServiceRoleToAccountOutput struct {
+
 	// The time when the service role was associated with the account.
 	AssociatedAt *string
 

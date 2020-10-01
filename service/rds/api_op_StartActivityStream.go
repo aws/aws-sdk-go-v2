@@ -59,32 +59,47 @@ func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityS
 }
 
 type StartActivityStreamInput struct {
+
 	// Specifies whether or not the database activity stream is to start as soon as
 	// possible, regardless of the maintenance window for the database.
 	ApplyImmediately *bool
+
 	// The Amazon Resource Name (ARN) of the DB cluster, for example
 	// arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The AWS KMS key identifier for encrypting messages in the database activity
 	// stream. The key identifier can be either a key ID, a key ARN, or a key alias.
+	//
+	// This member is required.
 	KmsKeyId *string
+
 	// Specifies the mode of the database activity stream. Database events such as a
 	// change or access generate an activity stream event. The database session can
 	// handle these events either synchronously or asynchronously.
+	//
+	// This member is required.
 	Mode types.ActivityStreamMode
 }
 
 type StartActivityStreamOutput struct {
+
 	// The name of the Amazon Kinesis data stream to be used for the database activity
 	// stream.
 	KinesisStreamName *string
+
 	// The AWS KMS key identifier for encryption of messages in the database activity
 	// stream.
 	KmsKeyId *string
+
 	// The mode of the database activity stream.
 	Mode types.ActivityStreamMode
+
 	// The status of the database activity stream.
 	Status types.ActivityStreamStatus
+
 	// Indicates whether or not the database activity stream will start as soon as
 	// possible, regardless of the maintenance window for the database.
 	ApplyImmediately *bool

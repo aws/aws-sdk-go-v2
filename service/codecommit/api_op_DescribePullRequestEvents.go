@@ -56,28 +56,39 @@ func (c *Client) DescribePullRequestEvents(ctx context.Context, params *Describe
 }
 
 type DescribePullRequestEventsInput struct {
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
 	// Examples include updating the pull request with more commits or changing the
 	// status of a pull request.
 	ActorArn *string
+
 	// Optional. The pull request event type about which you want to return
 	// information.
 	PullRequestEventType types.PullRequestEventType
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	// The default is 100 events, which is also the maximum number of events that can
 	// be returned in a result.
 	MaxResults *int32
+
 	// The system-generated ID of the pull request. To get this ID, use
 	// ListPullRequests ().
+	//
+	// This member is required.
 	PullRequestId *string
 }
 
 type DescribePullRequestEventsOutput struct {
+
 	// Information about the pull request events.
+	//
+	// This member is required.
 	PullRequestEvents []*types.PullRequestEvent
+
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string

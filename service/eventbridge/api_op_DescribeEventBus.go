@@ -60,17 +60,21 @@ func (c *Client) DescribeEventBus(ctx context.Context, params *DescribeEventBusI
 }
 
 type DescribeEventBusInput struct {
+
 	// The name of the event bus to show details for. If you omit this, the default
 	// event bus is displayed.
 	Name *string
 }
 
 type DescribeEventBusOutput struct {
+
 	// The name of the event bus. Currently, this is always default.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the account permitted to write events to the
 	// current account.
 	Arn *string
+
 	// The policy that enables the external account to send events to your account.
 	Policy *string
 

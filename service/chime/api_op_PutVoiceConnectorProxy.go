@@ -57,20 +57,32 @@ func (c *Client) PutVoiceConnectorProxy(ctx context.Context, params *PutVoiceCon
 }
 
 type PutVoiceConnectorProxyInput struct {
+
 	// When true, stops proxy sessions from being created on the specified Amazon Chime
 	// Voice Connector.
 	Disabled *bool
+
 	// The Amazon Chime voice connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
+
 	// The default number of minutes allowed for proxy sessions.
+	//
+	// This member is required.
 	DefaultSessionExpiryMinutes *int32
+
 	// The phone number to route calls to after a proxy session expires.
 	FallBackPhoneNumber *string
+
 	// The countries for proxy phone numbers to be selected from.
+	//
+	// This member is required.
 	PhoneNumberPoolCountries []*string
 }
 
 type PutVoiceConnectorProxyOutput struct {
+
 	// The proxy configuration details.
 	Proxy *types.Proxy
 

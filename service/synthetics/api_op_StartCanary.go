@@ -58,9 +58,12 @@ func (c *Client) StartCanary(ctx context.Context, params *StartCanaryInput, optF
 }
 
 type StartCanaryInput struct {
+
 	// The name of the canary that you want to run. To find canary names, use
 	// DescribeCanaries
 	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
+	//
+	// This member is required.
 	Name *string
 }
 

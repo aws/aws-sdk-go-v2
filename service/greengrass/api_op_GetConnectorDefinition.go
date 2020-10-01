@@ -55,25 +55,36 @@ func (c *Client) GetConnectorDefinition(ctx context.Context, params *GetConnecto
 }
 
 type GetConnectorDefinitionInput struct {
+
 	// The ID of the connector definition.
+	//
+	// This member is required.
 	ConnectorDefinitionId *string
 }
 
 type GetConnectorDefinitionOutput struct {
+
 	// Tag(s) attached to the resource arn.
 	Tags map[string]*string
+
 	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
+
 	// The ID of the definition.
 	Id *string
+
 	// The ARN of the definition.
 	Arn *string
+
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string
+
 	// The name of the definition.
 	Name *string
+
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
 

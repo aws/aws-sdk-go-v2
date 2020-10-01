@@ -62,31 +62,44 @@ func (c *Client) GetAggregateDiscoveredResourceCounts(ctx context.Context, param
 }
 
 type GetAggregateDiscoveredResourceCountsInput struct {
+
 	// The maximum number of GroupedResourceCount () objects returned on each page. The
 	// default is 1000. You cannot specify a number greater than 1000. If you specify
 	// 0, AWS Config uses the default.
 	Limit *int32
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// Filters the results based on the ResourceCountFilters object.
 	Filters *types.ResourceCountFilters
+
 	// The key to group the resource counts.
 	GroupByKey types.ResourceCountGroupKey
 }
 
 type GetAggregateDiscoveredResourceCountsOutput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The key passed into the request object. If GroupByKey is not provided, the
 	// result will be empty.
 	GroupByKey *string
+
 	// The total number of resources that are present in an aggregator with the filters
 	// that you provide.
+	//
+	// This member is required.
 	TotalDiscoveredResources *int64
+
 	// Returns a list of GroupedResourceCount objects.
 	GroupedResourceCounts []*types.GroupedResourceCount
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteAlgorithm(ctx context.Context, params *DeleteAlgorithmInp
 }
 
 type DeleteAlgorithmInput struct {
+
 	// The name of the algorithm to delete.
+	//
+	// This member is required.
 	AlgorithmName *string
 }
 

@@ -57,8 +57,11 @@ func (c *Client) PutReportDefinition(ctx context.Context, params *PutReportDefin
 
 // Creates a Cost and Usage Report.
 type PutReportDefinitionInput struct {
+
 	// Represents the output of the PutReportDefinition operation. The content consists
 	// of the detailed metadata and data file information.
+	//
+	// This member is required.
 	ReportDefinition *types.ReportDefinition
 }
 

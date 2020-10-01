@@ -55,23 +55,44 @@ func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns .
 }
 
 type GetDeviceInput struct {
+
 	// The ARN of the device to retrieve.
+	//
+	// This member is required.
 	DeviceArn *string
 }
 
 type GetDeviceOutput struct {
+
 	// The ARN of the device.
+	//
+	// This member is required.
 	DeviceArn *string
+
 	// The name of the device.
+	//
+	// This member is required.
 	DeviceName *string
+
 	// The name of the partner company for the device.
+	//
+	// This member is required.
 	ProviderName *string
+
 	// The type of the device.
+	//
+	// This member is required.
 	DeviceType types.DeviceType
+
 	// The status of the device.
+	//
+	// This member is required.
 	DeviceStatus types.DeviceStatus
+
 	// Details about the capabilities of the device.
 	// This value conforms to the media type: application/json
+	//
+	// This member is required.
 	DeviceCapabilities *string
 
 	// Metadata pertaining to the operation's result.

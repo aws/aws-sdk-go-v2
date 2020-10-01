@@ -57,8 +57,12 @@ func (c *Client) AcceptTransitGatewayPeeringAttachment(ctx context.Context, para
 }
 
 type AcceptTransitGatewayPeeringAttachmentInput struct {
+
 	// The ID of the transit gateway attachment.
+	//
+	// This member is required.
 	TransitGatewayAttachmentId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -67,6 +71,7 @@ type AcceptTransitGatewayPeeringAttachmentInput struct {
 }
 
 type AcceptTransitGatewayPeeringAttachmentOutput struct {
+
 	// The transit gateway peering attachment.
 	TransitGatewayPeeringAttachment *types.TransitGatewayPeeringAttachment
 

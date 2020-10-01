@@ -57,7 +57,10 @@ func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, 
 }
 
 type DeleteDatasetInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset to delete.
+	//
+	// This member is required.
 	DatasetArn *string
 }
 

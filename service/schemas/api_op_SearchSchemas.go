@@ -56,23 +56,33 @@ func (c *Client) SearchSchemas(ctx context.Context, params *SearchSchemasInput, 
 }
 
 type SearchSchemasInput struct {
+
 	// Specifying this limits the results to only schemas that include the provided
 	// keywords.
+	//
+	// This member is required.
 	Keywords *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
-	Limit     *int32
+
+	Limit *int32
 }
 
 type SearchSchemasOutput struct {
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
+
 	// An array of SearchSchemaSummary information.
 	Schemas []*types.SearchSchemaSummary
 

@@ -56,12 +56,16 @@ func (c *Client) RejectSharedDirectory(ctx context.Context, params *RejectShared
 }
 
 type RejectSharedDirectoryInput struct {
+
 	// Identifier of the shared directory in the directory consumer account. This
 	// identifier is different for each directory owner account.
+	//
+	// This member is required.
 	SharedDirectoryId *string
 }
 
 type RejectSharedDirectoryOutput struct {
+
 	// Identifier of the shared directory in the directory consumer account.
 	SharedDirectoryId *string
 

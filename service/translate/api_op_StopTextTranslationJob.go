@@ -62,14 +62,19 @@ func (c *Client) StopTextTranslationJob(ctx context.Context, params *StopTextTra
 }
 
 type StopTextTranslationJobInput struct {
+
 	// The job ID of the job to be stopped.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopTextTranslationJobOutput struct {
+
 	// The status of the designated job. Upon successful completion, the job's status
 	// will be STOPPED.
 	JobStatus types.JobStatus
+
 	// The job ID of the stopped batch translation job.
 	JobId *string
 

@@ -56,17 +56,25 @@ func (c *Client) AssociatePhoneNumbersWithVoiceConnector(ctx context.Context, pa
 }
 
 type AssociatePhoneNumbersWithVoiceConnectorInput struct {
+
 	// If true, associates the provided phone numbers with the provided Amazon Chime
 	// Voice Connector and removes any previously existing associations. If false, does
 	// not associate any phone numbers that have previously existing associations.
 	ForceAssociate *bool
+
 	// List of phone numbers, in E.164 format.
+	//
+	// This member is required.
 	E164PhoneNumbers []*string
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type AssociatePhoneNumbersWithVoiceConnectorOutput struct {
+
 	// If the action fails for one or more of the phone numbers in the request, a list
 	// of the phone numbers is returned, along with error codes and error messages.
 	PhoneNumberErrors []*types.PhoneNumberError

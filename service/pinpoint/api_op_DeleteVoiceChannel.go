@@ -57,14 +57,20 @@ func (c *Client) DeleteVoiceChannel(ctx context.Context, params *DeleteVoiceChan
 }
 
 type DeleteVoiceChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteVoiceChannelOutput struct {
+
 	// Provides information about the status and settings of the voice channel for an
 	// application.
+	//
+	// This member is required.
 	VoiceChannelResponse *types.VoiceChannelResponse
 
 	// Metadata pertaining to the operation's result.

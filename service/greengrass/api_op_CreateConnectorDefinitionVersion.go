@@ -56,22 +56,31 @@ func (c *Client) CreateConnectorDefinitionVersion(ctx context.Context, params *C
 }
 
 type CreateConnectorDefinitionVersionInput struct {
+
 	// A list of references to connectors in this version, with their corresponding
 	// configuration settings.
 	Connectors []*types.Connector
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
 	// The ID of the connector definition.
+	//
+	// This member is required.
 	ConnectorDefinitionId *string
 }
 
 type CreateConnectorDefinitionVersionOutput struct {
+
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string
+
 	// The ID of the version.
 	Version *string
+
 	// The ID of the parent definition that the version is associated with.
 	Id *string
+
 	// The ARN of the version.
 	Arn *string
 

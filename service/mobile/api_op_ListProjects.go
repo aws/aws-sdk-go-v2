@@ -56,8 +56,10 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 
 // Request structure used to request projects list in AWS Mobile Hub.
 type ListProjectsInput struct {
+
 	// Maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// Pagination token. Set to null to start listing projects from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more projects.
@@ -66,10 +68,12 @@ type ListProjectsInput struct {
 
 // Result structure used for requests to list projects in AWS Mobile Hub.
 type ListProjectsOutput struct {
+
 	// Pagination token. Set to null to start listing records from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more entries.
 	NextToken *string
+
 	// List of projects.
 	Projects []*types.ProjectSummary
 

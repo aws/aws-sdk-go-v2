@@ -68,10 +68,15 @@ func (c *Client) DescribeAnalysisSchemes(ctx context.Context, params *DescribeAn
 // to describe. To show the active configuration and exclude any pending changes,
 // set the Deployed option to true.
 type DescribeAnalysisSchemesInput struct {
+
 	// The name of the domain you want to describe.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The analysis schemes you want to describe.
 	AnalysisSchemeNames []*string
+
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
@@ -80,7 +85,10 @@ type DescribeAnalysisSchemesInput struct {
 // The result of a DescribeAnalysisSchemes request. Contains the analysis schemes
 // configured for the domain specified in the request.
 type DescribeAnalysisSchemesOutput struct {
+
 	// The analysis scheme descriptions.
+	//
+	// This member is required.
 	AnalysisSchemes []*types.AnalysisSchemeStatus
 
 	// Metadata pertaining to the operation's result.

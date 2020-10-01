@@ -54,6 +54,7 @@ func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, 
 }
 
 type DeleteProfileInput struct {
+
 	// The ARN of the room profile to delete. Required.
 	ProfileArn *string
 }

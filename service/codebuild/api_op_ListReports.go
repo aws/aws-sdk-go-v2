@@ -55,11 +55,14 @@ func (c *Client) ListReports(ctx context.Context, params *ListReportsInput, optF
 }
 
 type ListReportsInput struct {
+
 	// The maximum number of paginated reports returned per response. Use nextToken to
 	// iterate pages in the list of returned Report objects. The default value is 100.
 	MaxResults *int32
+
 	// A ReportFilter object used to filter the returned reports.
 	Filter *types.ReportFilter
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -67,6 +70,7 @@ type ListReportsInput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
+
 	// Specifies the sort order for the list of returned reports. Valid values are:
 	//
 	//
@@ -79,8 +83,10 @@ type ListReportsInput struct {
 }
 
 type ListReportsOutput struct {
+
 	// The list of returned ARNs for the reports in the current AWS account.
 	Reports []*string
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the

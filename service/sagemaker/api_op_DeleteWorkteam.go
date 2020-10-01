@@ -55,13 +55,19 @@ func (c *Client) DeleteWorkteam(ctx context.Context, params *DeleteWorkteamInput
 }
 
 type DeleteWorkteamInput struct {
+
 	// The name of the work team to delete.
+	//
+	// This member is required.
 	WorkteamName *string
 }
 
 type DeleteWorkteamOutput struct {
+
 	// Returns true if the work team was successfully deleted; otherwise, returns
 	// false.
+	//
+	// This member is required.
 	Success *bool
 
 	// Metadata pertaining to the operation's result.

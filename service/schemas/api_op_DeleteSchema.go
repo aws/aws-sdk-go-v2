@@ -55,9 +55,15 @@ func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, op
 }
 
 type DeleteSchemaInput struct {
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
 }
 

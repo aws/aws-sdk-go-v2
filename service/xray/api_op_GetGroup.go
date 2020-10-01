@@ -55,13 +55,16 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 }
 
 type GetGroupInput struct {
+
 	// The case-sensitive name of the group.
 	GroupName *string
+
 	// The ARN of the group that was generated on creation.
 	GroupARN *string
 }
 
 type GetGroupOutput struct {
+
 	// The group that was requested. Contains the name of the group, the ARN of the
 	// group, and the filter expression that assigned to the group.
 	Group *types.Group

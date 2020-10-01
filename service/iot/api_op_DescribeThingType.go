@@ -57,22 +57,30 @@ func (c *Client) DescribeThingType(ctx context.Context, params *DescribeThingTyp
 
 // The input for the DescribeThingType operation.
 type DescribeThingTypeInput struct {
+
 	// The name of the thing type.
+	//
+	// This member is required.
 	ThingTypeName *string
 }
 
 // The output for the DescribeThingType operation.
 type DescribeThingTypeOutput struct {
+
 	// The thing type ID.
 	ThingTypeId *string
+
 	// The ThingTypeMetadata contains additional information about the thing type
 	// including: creation date and time, a value indicating whether the thing type is
 	// deprecated, and a date and time when it was deprecated.
 	ThingTypeMetadata *types.ThingTypeMetadata
+
 	// The name of the thing type.
 	ThingTypeName *string
+
 	// The thing type ARN.
 	ThingTypeArn *string
+
 	// The ThingTypeProperties contains information about the thing type including
 	// description, and a list of searchable thing attribute names.
 	ThingTypeProperties *types.ThingTypeProperties

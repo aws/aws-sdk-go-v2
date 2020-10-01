@@ -60,15 +60,18 @@ func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAcco
 
 // The input for the DescribeAccountLimits () action.
 type DescribeAccountLimitsInput struct {
+
 	// A string that identifies the next page of limits that you want to retrieve.
 	NextToken *string
 }
 
 // The output for the DescribeAccountLimits () action.
 type DescribeAccountLimitsOutput struct {
+
 	// If the output exceeds 1 MB in size, a string that identifies the next page of
 	// limits. If no additional page exists, this value is null.
 	NextToken *string
+
 	// An account limit structure that contain a list of AWS CloudFormation account
 	// limits and their values.
 	AccountLimits []*types.AccountLimit

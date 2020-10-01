@@ -61,6 +61,7 @@ func (c *Client) DescribeDBClusterBacktracks(ctx context.Context, params *Descri
 
 //
 type DescribeDBClusterBacktracksInput struct {
+
 	// A filter that specifies one or more DB clusters to describe. Supported filters
 	// include the following:
 	//
@@ -83,6 +84,7 @@ type DescribeDBClusterBacktracksInput struct {
 	//     The results list includes
 	// information about only the backtracks identified by these values.
 	Filters []*types.Filter
+
 	// If specified, this value is the backtrack identifier of the backtrack to be
 	// described. Constraints:
 	//
@@ -93,6 +95,7 @@ type DescribeDBClusterBacktracksInput struct {
 	// Example:
 	// 123e4567-e89b-12d3-a456-426655440000
 	BacktrackIdentifier *string
+
 	// The DB cluster identifier of the DB cluster to be described. This parameter is
 	// stored as a lowercase string. Constraints:
 	//
@@ -106,12 +109,16 @@ type DescribeDBClusterBacktracksInput struct {
 	//
 	// Example:
 	// my-cluster1
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
@@ -121,9 +128,11 @@ type DescribeDBClusterBacktracksInput struct {
 // Contains the result of a successful invocation of the
 // DescribeDBClusterBacktracks action.
 type DescribeDBClusterBacktracksOutput struct {
+
 	// A pagination token that can be used in a later DescribeDBClusterBacktracks
 	// request.
 	Marker *string
+
 	// Contains a list of backtracks for the user.
 	DBClusterBacktracks []*types.DBClusterBacktrack
 

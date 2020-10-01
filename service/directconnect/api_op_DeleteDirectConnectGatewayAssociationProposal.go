@@ -57,11 +57,15 @@ func (c *Client) DeleteDirectConnectGatewayAssociationProposal(ctx context.Conte
 }
 
 type DeleteDirectConnectGatewayAssociationProposalInput struct {
+
 	// The ID of the proposal.
+	//
+	// This member is required.
 	ProposalId *string
 }
 
 type DeleteDirectConnectGatewayAssociationProposalOutput struct {
+
 	// The ID of the associated gateway.
 	DirectConnectGatewayAssociationProposal *types.DirectConnectGatewayAssociationProposal
 

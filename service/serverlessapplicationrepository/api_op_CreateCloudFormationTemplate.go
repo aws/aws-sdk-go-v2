@@ -56,29 +56,40 @@ func (c *Client) CreateCloudFormationTemplate(ctx context.Context, params *Creat
 }
 
 type CreateCloudFormationTemplateInput struct {
+
 	// The Amazon Resource Name (ARN) of the application.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	SemanticVersion *string
 }
 
 type CreateCloudFormationTemplateOutput struct {
+
 	// The date and time this template expires. Templates expire 1 hour after creation.
 	ExpirationTime *string
+
 	// Status of the template creation workflow.Possible values: PREPARING | ACTIVE |
 	// EXPIRED
 	Status types.Status
+
 	// The UUID returned by CreateCloudFormationTemplate.Pattern:
 	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
 	TemplateId *string
+
 	// The date and time this resource was created.
 	CreationTime *string
+
 	// The application Amazon Resource Name (ARN).
 	ApplicationId *string
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	SemanticVersion *string
+
 	// A link to the template that can be used to deploy the application using AWS
 	// CloudFormation.
 	TemplateUrl *string

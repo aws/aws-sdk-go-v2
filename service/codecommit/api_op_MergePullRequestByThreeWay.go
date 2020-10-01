@@ -59,43 +59,58 @@ func (c *Client) MergePullRequestByThreeWay(ctx context.Context, params *MergePu
 }
 
 type MergePullRequestByThreeWayInput struct {
+
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
 	// requires any conflicts to be resolved manually before the merge operation is
 	// successful.
 	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
+
 	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
 	// used, which returns a not-mergeable result if the same file has differences in
 	// both branches. If LINE_LEVEL is specified, a conflict is considered not
 	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
+
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If true, a .gitkeep file is created for
 	// empty folders. The default is false.
 	KeepEmptyFolders *bool
+
 	// The email address of the person merging the branches. This information is used
 	// in the commit information for the merge.
 	Email *string
+
 	// The name of the repository where the pull request was created.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The system-generated ID of the pull request. To get this ID, use
 	// ListPullRequests ().
+	//
+	// This member is required.
 	PullRequestId *string
+
 	// If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
 	// resolving conflicts during a merge.
 	ConflictResolution *types.ConflictResolution
+
 	// The full commit ID of the original or updated commit in the pull request source
 	// branch. Pass this value if you want an exception thrown if the current commit ID
 	// of the tip of the source branch does not match this commit ID.
 	SourceCommitId *string
+
 	// The name of the author who created the commit. This information is used as both
 	// the author and committer for the commit.
 	AuthorName *string
+
 	// The commit message to include in the commit information for the merge.
 	CommitMessage *string
 }
 
 type MergePullRequestByThreeWayOutput struct {
+
 	// Returns information about a pull request.
 	PullRequest *types.PullRequest
 

@@ -81,9 +81,12 @@ func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, op
 }
 
 type DeleteCanaryInput struct {
+
 	// The name of the canary that you want to delete. To find the names of your
 	// canaries, use DescribeCanaries
 	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
+	//
+	// This member is required.
 	Name *string
 }
 

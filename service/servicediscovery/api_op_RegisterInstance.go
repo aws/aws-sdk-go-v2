@@ -92,6 +92,7 @@ func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceI
 }
 
 type RegisterInstanceInput struct {
+
 	// A unique string that identifies the request and that allows failed
 	// RegisterInstance requests to be retried without the risk of executing the
 	// operation twice. You must use a unique CreatorRequestId string every time you
@@ -99,6 +100,7 @@ type RegisterInstanceInput struct {
 	// the same namespace and service. CreatorRequestId can be any unique string, for
 	// example, a date/time stamp.
 	CreatorRequestId *string
+
 	// A string map that contains the following information for the service that you
 	// specify in ServiceId:
 	//
@@ -163,7 +165,10 @@ type RegisterInstanceInput struct {
 	// 255 characters, and the maximum length of the attribute value is 1,024
 	// characters. Total size of all provided attributes (sum of all keys and values)
 	// must not exceed 5,000 characters.
+	//
+	// This member is required.
 	Attributes map[string]*string
+
 	// An identifier that you want to associate with the instance. Note the
 	// following:
 	//
@@ -185,12 +190,18 @@ type RegisterInstanceInput struct {
 	// check and creates a new one. The health check isn't deleted immediately, so it
 	// will still appear for a while if you submit a ListHealthChecks request, for
 	// example.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The ID of the service that you want to use for settings for the instance.
+	//
+	// This member is required.
 	ServiceId *string
 }
 
 type RegisterInstanceOutput struct {
+
 	// A value that you can use to determine whether the request completed
 	// successfully. To get the status of the operation, see GetOperation
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).

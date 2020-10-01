@@ -73,11 +73,15 @@ func (c *Client) GetBucketPolicy(ctx context.Context, params *GetBucketPolicyInp
 }
 
 type GetBucketPolicyInput struct {
+
 	// The bucket name for which to get the bucket policy.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketPolicyOutput struct {
+
 	// The bucket policy as a JSON document.
 	Policy *string
 

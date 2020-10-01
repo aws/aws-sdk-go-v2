@@ -56,11 +56,15 @@ func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvir
 }
 
 type DescribeEnvironmentsInput struct {
+
 	// The IDs of individual environments to get information about.
+	//
+	// This member is required.
 	EnvironmentIds []*string
 }
 
 type DescribeEnvironmentsOutput struct {
+
 	// Information about the environments that are returned.
 	Environments []*types.Environment
 

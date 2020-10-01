@@ -105,14 +105,21 @@ func (c *Client) PutRecords(ctx context.Context, params *PutRecordsInput, optFns
 
 // A PutRecords request.
 type PutRecordsInput struct {
+
 	// The stream name associated with the request.
+	//
+	// This member is required.
 	StreamName *string
+
 	// The records associated with the request.
+	//
+	// This member is required.
 	Records []*types.PutRecordsRequestEntry
 }
 
 // PutRecords results.
 type PutRecordsOutput struct {
+
 	// The encryption type used on the records. This parameter can be one of the
 	// following values:
 	//
@@ -121,12 +128,16 @@ type PutRecordsOutput struct {
 	//     * KMS: Use
 	// server-side encryption on the records using a customer-managed AWS KMS key.
 	EncryptionType types.EncryptionType
+
 	// The number of unsuccessfully processed records in a PutRecords request.
 	FailedRecordCount *int32
+
 	// An array of successfully and unsuccessfully processed record results, correlated
 	// with the request by natural ordering. A record that is successfully added to a
 	// stream includes SequenceNumber and ShardId in the result. A record that fails to
 	// be added to a stream includes ErrorCode and ErrorMessage in the result.
+	//
+	// This member is required.
 	Records []*types.PutRecordsResultEntry
 
 	// Metadata pertaining to the operation's result.

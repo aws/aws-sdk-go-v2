@@ -56,22 +56,30 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 }
 
 type UpdateApplicationInput struct {
+
 	// Indicates whether Application Insights can listen to CloudWatch events for the
 	// application resources, such as instance terminated, failed deployment, and
 	// others.
 	CWEMonitorEnabled *bool
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// When set to true, creates opsItems for any problems detected on an application.
 	OpsCenterEnabled *bool
+
 	// Disassociates the SNS topic from the opsItem created for detected problems.
 	RemoveSNSTopic *bool
+
 	// The SNS topic provided to Application Insights that is associated to the created
 	// opsItem. Allows you to receive notifications for updates to the opsItem.
 	OpsItemSNSTopicArn *string
 }
 
 type UpdateApplicationOutput struct {
+
 	// Information about the application.
 	ApplicationInfo *types.ApplicationInfo
 

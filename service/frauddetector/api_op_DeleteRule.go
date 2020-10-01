@@ -57,7 +57,10 @@ func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns
 }
 
 type DeleteRuleInput struct {
+
 	// A rule.
+	//
+	// This member is required.
 	Rule *types.Rule
 }
 

@@ -57,9 +57,15 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 }
 
 type UpdateGlobalSettingsInput struct {
+
 	// The Amazon Chime Business Calling settings.
+	//
+	// This member is required.
 	BusinessCalling *types.BusinessCallingSettings
+
 	// The Amazon Chime Voice Connector settings.
+	//
+	// This member is required.
 	VoiceConnector *types.VoiceConnectorSettings
 }
 

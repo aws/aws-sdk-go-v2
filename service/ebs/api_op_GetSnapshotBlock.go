@@ -56,25 +56,38 @@ func (c *Client) GetSnapshotBlock(ctx context.Context, params *GetSnapshotBlockI
 }
 
 type GetSnapshotBlockInput struct {
+
 	// The block token of the block from which to get data.  <p>Obtain the
 	// <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or
 	// <code>ListSnapshotBlocks</code> operations.</p>
+	//
+	// This member is required.
 	BlockToken *string
+
 	// The block index of the block from which to get data.  <p>Obtain the
 	// <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or
 	// <code>ListSnapshotBlocks</code> operations.</p>
+	//
+	// This member is required.
 	BlockIndex *int32
+
 	// The ID of the snapshot containing the block from which to get data.
+	//
+	// This member is required.
 	SnapshotId *string
 }
 
 type GetSnapshotBlockOutput struct {
+
 	// The data content of the block.
 	BlockData io.ReadCloser
+
 	// The checksum generated for the block, which is Base64 encoded.
 	Checksum *string
+
 	// The size of the data in the block.
 	DataLength *int32
+
 	// The algorithm used to generate the checksum for the block, such as SHA256.
 	ChecksumAlgorithm types.ChecksumAlgorithm
 

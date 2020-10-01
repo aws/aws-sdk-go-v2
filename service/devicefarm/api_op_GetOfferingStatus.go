@@ -62,6 +62,7 @@ func (c *Client) GetOfferingStatus(ctx context.Context, params *GetOfferingStatu
 // Represents the request to retrieve the offering status for the specified
 // customer or account.
 type GetOfferingStatusInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
@@ -69,11 +70,14 @@ type GetOfferingStatusInput struct {
 
 // Returns the status result for a device offering.
 type GetOfferingStatusOutput struct {
+
 	// When specified, gets the offering status for the current period.
 	Current map[string]*types.OfferingStatus
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// When specified, gets the offering status for the next period.
 	NextPeriod map[string]*types.OfferingStatus
 

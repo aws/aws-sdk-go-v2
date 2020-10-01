@@ -59,51 +59,84 @@ func (c *Client) DescribeMergeConflicts(ctx context.Context, params *DescribeMer
 }
 
 type DescribeMergeConflictsInput struct {
+
 	// The merge option or strategy you want to use to merge the code.
+	//
+	// This member is required.
 	MergeOption types.MergeOptionTypeEnum
+
 	// The name of the repository where you want to get information about a merge
 	// conflict.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The path of the target files used to describe the conflicts.
+	//
+	// This member is required.
 	FilePath *string
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
 	DestinationCommitSpecifier *string
+
 	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
 	// used, which returns a not-mergeable result if the same file has differences in
 	// both branches. If LINE_LEVEL is specified, a conflict is considered not
 	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
 	SourceCommitSpecifier *string
+
 	// The maximum number of merge hunks to include in the output.
 	MaxMergeHunks *int32
+
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
 	// requires any conflicts to be resolved manually before the merge operation is
 	// successful.
 	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
 }
 
 type DescribeMergeConflictsOutput struct {
+
 	// The commit ID of the destination commit specifier that was used in the merge
 	// evaluation.
+	//
+	// This member is required.
 	DestinationCommitId *string
+
 	// The commit ID of the source commit specifier that was used in the merge
 	// evaluation.
+	//
+	// This member is required.
 	SourceCommitId *string
+
 	// The commit ID of the merge base.
 	BaseCommitId *string
+
 	// Contains metadata about the conflicts found in the merge.
+	//
+	// This member is required.
 	ConflictMetadata *types.ConflictMetadata
+
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string
+
 	// A list of merge hunks of the differences between the files or lines.
+	//
+	// This member is required.
 	MergeHunks []*types.MergeHunk
 
 	// Metadata pertaining to the operation's result.

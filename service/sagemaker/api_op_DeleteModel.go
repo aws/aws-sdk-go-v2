@@ -58,7 +58,10 @@ func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optF
 }
 
 type DeleteModelInput struct {
+
 	// The name of the model to delete.
+	//
+	// This member is required.
 	ModelName *string
 }
 

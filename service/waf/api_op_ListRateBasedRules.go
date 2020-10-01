@@ -61,10 +61,12 @@ func (c *Client) ListRateBasedRules(ctx context.Context, params *ListRateBasedRu
 }
 
 type ListRateBasedRulesInput struct {
+
 	// Specifies the number of Rules that you want AWS WAF to return for this request.
 	// If you have more Rules than the number that you specify for Limit, the response
 	// includes a NextMarker value that you can use to get another batch of Rules.
 	Limit *int32
+
 	// If you specify a value for Limit and you have more Rules than the value of
 	// Limit, AWS WAF returns a NextMarker value in the response that allows you to
 	// list another group of Rules. For the second and subsequent ListRateBasedRules
@@ -74,11 +76,13 @@ type ListRateBasedRulesInput struct {
 }
 
 type ListRateBasedRulesOutput struct {
+
 	// If you have more Rules than the number that you specified for Limit in the
 	// request, the response includes a NextMarker value. To list more Rules, submit
 	// another ListRateBasedRules request, and specify the NextMarker value from the
 	// response in the NextMarker value in the next request.
 	NextMarker *string
+
 	// An array of RuleSummary () objects.
 	Rules []*types.RuleSummary
 

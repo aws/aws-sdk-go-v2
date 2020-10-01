@@ -61,45 +61,60 @@ func (c *Client) GetTrailStatus(ctx context.Context, params *GetTrailStatusInput
 
 // The name of a trail about which you want the current status.
 type GetTrailStatusInput struct {
+
 	// Specifies the name or the CloudTrail ARN of the trail for which you are
 	// requesting status. To get the status of a shadow trail (a replication of the
 	// trail in another region), you must specify its ARN. The format of a trail ARN
 	// is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	Name *string
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type GetTrailStatusOutput struct {
+
 	// Displays any CloudWatch Logs error that CloudTrail encountered when attempting
 	// to deliver logs to CloudWatch Logs.
 	LatestCloudWatchLogsDeliveryError *string
+
 	// This field is no longer in use.
 	TimeLoggingStopped *string
+
 	// This field is no longer in use.
 	TimeLoggingStarted *string
+
 	// This field is no longer in use.
 	LatestNotificationAttemptTime *string
+
 	// This field is no longer in use.
 	LatestNotificationAttemptSucceeded *string
+
 	// This field is no longer in use.
 	LatestDeliveryAttemptSucceeded *string
+
 	// This field is no longer in use.
 	LatestDeliveryAttemptTime *string
+
 	// Specifies the most recent date and time when CloudTrail started recording API
 	// calls for an AWS account.
 	StartLoggingTime *time.Time
+
 	// Specifies the date and time that CloudTrail last delivered log files to an
 	// account's Amazon S3 bucket.
 	LatestDeliveryTime *time.Time
+
 	// Displays any Amazon SNS error that CloudTrail encountered when attempting to
 	// send a notification. For more information about Amazon SNS errors, see the
 	// Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
 	LatestNotificationError *string
+
 	// Displays the most recent date and time when CloudTrail delivered logs to
 	// CloudWatch Logs.
 	LatestCloudWatchLogsDeliveryTime *time.Time
+
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting to
 	// deliver a digest file to the designated bucket. For more information see the
 	// topic Error Responses
@@ -109,11 +124,14 @@ type GetTrailStatusOutput struct {
 	// create a new bucket and call UpdateTrail to specify the new bucket, or fix the
 	// existing objects so that CloudTrail can again write to the bucket.
 	LatestDigestDeliveryError *string
+
 	// Specifies the most recent date and time when CloudTrail stopped recording API
 	// calls for an AWS account.
 	StopLoggingTime *time.Time
+
 	// Whether the CloudTrail is currently logging AWS API calls.
 	IsLogging *bool
+
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting to
 	// deliver log files to the designated bucket. For more information see the topic
 	// Error Responses
@@ -123,9 +141,11 @@ type GetTrailStatusOutput struct {
 	// create a new bucket and call UpdateTrail to specify the new bucket, or fix the
 	// existing objects so that CloudTrail can again write to the bucket.
 	LatestDeliveryError *string
+
 	// Specifies the date and time of the most recent Amazon SNS notification that
 	// CloudTrail has written a new log file to an account's Amazon S3 bucket.
 	LatestNotificationTime *time.Time
+
 	// Specifies the date and time that CloudTrail last delivered a digest file to an
 	// account's Amazon S3 bucket.
 	LatestDigestDeliveryTime *time.Time

@@ -58,15 +58,23 @@ func (c *Client) CreateRequestValidator(ctx context.Context, params *CreateReque
 // Creates a RequestValidator () of a given RestApi ().
 type CreateRequestValidatorInput struct {
 	Template *bool
-	Title    *string
+
+	Title *string
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
+	//
+	// This member is required.
+	RestApiId *string
+
 	TemplateSkipList []*string
+
 	// The name of the to-be-created RequestValidator ().
 	Name *string
+
 	// A Boolean flag to indicate whether to validate request body according to the
 	// configured model schema for the method (true) or not (false).
 	ValidateRequestBody *bool
+
 	// A Boolean flag to indicate whether to validate request parameters, true, or not
 	// false.
 	ValidateRequestParameters *bool
@@ -81,14 +89,18 @@ type CreateRequestValidatorInput struct {
 // property. Enable Basic Request Validation in API Gateway
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
 type CreateRequestValidatorOutput struct {
+
 	// The identifier of this RequestValidator ().
 	Id *string
+
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model () schema.
 	ValidateRequestBody *bool
+
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters *bool
+
 	// The name of this RequestValidator ()
 	Name *string
 

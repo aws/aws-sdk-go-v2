@@ -64,6 +64,7 @@ func (c *Client) GetWebACLForResource(ctx context.Context, params *GetWebACLForR
 }
 
 type GetWebACLForResourceInput struct {
+
 	// The ARN (Amazon Resource Name) of the resource for which to get the web ACL,
 	// either an application load balancer or Amazon API Gateway stage. The ARN should
 	// be in one of the following formats:
@@ -74,10 +75,13 @@ type GetWebACLForResourceInput struct {
 	//
 	// * For an Amazon API Gateway stage:
 	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type GetWebACLForResourceOutput struct {
+
 	// Information about the web ACL that you specified in the GetWebACLForResource
 	// request. If there is no associated resource, a null WebACLSummary is returned.
 	WebACLSummary *types.WebACLSummary

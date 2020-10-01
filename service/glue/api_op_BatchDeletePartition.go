@@ -56,18 +56,29 @@ func (c *Client) BatchDeletePartition(ctx context.Context, params *BatchDeletePa
 }
 
 type BatchDeletePartitionInput struct {
+
 	// The name of the catalog database in which the table in question resides.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The name of the table that contains the partitions to be deleted.
+	//
+	// This member is required.
 	TableName *string
+
 	// A list of PartitionInput structures that define the partitions to be deleted.
+	//
+	// This member is required.
 	PartitionsToDelete []*types.PartitionValueList
+
 	// The ID of the Data Catalog where the partition to be deleted resides. If none is
 	// provided, the AWS account ID is used by default.
 	CatalogId *string
 }
 
 type BatchDeletePartitionOutput struct {
+
 	// The errors encountered when trying to delete the requested partitions.
 	Errors []*types.PartitionError
 

@@ -57,12 +57,16 @@ func (c *Client) GetOnPremisesInstance(ctx context.Context, params *GetOnPremise
 
 // Represents the input of a GetOnPremisesInstance operation.
 type GetOnPremisesInstanceInput struct {
+
 	// The name of the on-premises instance about which to get information.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 // Represents the output of a GetOnPremisesInstance operation.
 type GetOnPremisesInstanceOutput struct {
+
 	// Information about the on-premises instance.
 	InstanceInfo *types.InstanceInfo
 

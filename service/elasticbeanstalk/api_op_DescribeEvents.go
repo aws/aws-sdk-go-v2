@@ -58,49 +58,63 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 
 // Request to retrieve a list of events for an environment.
 type DescribeEventsInput struct {
+
 	// If specified, AWS Elastic Beanstalk restricts the described events to include
 	// only those associated with this request ID.
 	RequestId *string
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// that are associated with this environment configuration.
 	TemplateName *string
+
 	// Specifies the maximum number of events that can be returned, beginning with the
 	// most recent event.
 	MaxRecords *int32
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// that occur on or after this time.
 	StartTime *time.Time
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// that occur up to, but not including, the EndTime.
 	EndTime *time.Time
+
 	// If specified, limits the events returned from this call to include only those
 	// with the specified severity or higher.
 	Severity types.EventSeverity
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those associated with this application.
 	ApplicationName *string
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// associated with this environment.
 	EnvironmentName *string
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// associated with this environment.
 	EnvironmentId *string
+
 	// The ARN of a custom platform version. If specified, AWS Elastic Beanstalk
 	// restricts the returned descriptions to those associated with this custom
 	// platform version.
 	PlatformArn *string
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// associated with this application version.
 	VersionLabel *string
+
 	// Pagination token. If specified, the events return the next batch of results.
 	NextToken *string
 }
 
 // Result message wrapping a list of event descriptions.
 type DescribeEventsOutput struct {
+
 	// If returned, this indicates that there are more results to obtain. Use this
 	// token in the next DescribeEvents () call to get the next batch of events.
 	NextToken *string
+
 	// A list of EventDescription ().
 	Events []*types.EventDescription
 

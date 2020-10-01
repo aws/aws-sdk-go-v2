@@ -57,18 +57,30 @@ func (c *Client) GetCampaignVersion(ctx context.Context, params *GetCampaignVers
 }
 
 type GetCampaignVersionInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The unique version number (Version property) for the campaign version.
+	//
+	// This member is required.
 	Version *string
+
 	// The unique identifier for the campaign.
+	//
+	// This member is required.
 	CampaignId *string
 }
 
 type GetCampaignVersionOutput struct {
+
 	// Provides information about the status, configuration, and other settings for a
 	// campaign.
+	//
+	// This member is required.
 	CampaignResponse *types.CampaignResponse
 
 	// Metadata pertaining to the operation's result.

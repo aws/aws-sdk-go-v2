@@ -55,7 +55,10 @@ func (c *Client) DeletePipeline(ctx context.Context, params *DeletePipelineInput
 }
 
 type DeletePipelineInput struct {
+
 	// The name of the pipeline to delete.
+	//
+	// This member is required.
 	PipelineName *string
 }
 

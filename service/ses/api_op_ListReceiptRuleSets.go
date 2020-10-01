@@ -65,6 +65,7 @@ func (c *Client) ListReceiptRuleSets(ctx context.Context, params *ListReceiptRul
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type ListReceiptRuleSetsInput struct {
+
 	// A token returned from a previous call to ListReceiptRuleSets to indicate the
 	// position in the receipt rule set list.
 	NextToken *string
@@ -72,9 +73,11 @@ type ListReceiptRuleSetsInput struct {
 
 // A list of receipt rule sets that exist under your AWS account.
 type ListReceiptRuleSetsOutput struct {
+
 	// The metadata for the currently active receipt rule set. The metadata consists of
 	// the rule set name and the timestamp of when the rule set was created.
 	RuleSets []*types.ReceiptRuleSetMetadata
+
 	// A token indicating that there are additional receipt rule sets available to be
 	// listed. Pass this token to successive calls of ListReceiptRuleSets to retrieve
 	// up to 100 receipt rule sets at a time.

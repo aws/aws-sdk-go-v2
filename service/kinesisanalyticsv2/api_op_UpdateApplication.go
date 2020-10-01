@@ -59,25 +59,38 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 }
 
 type UpdateApplicationInput struct {
+
 	// Describes application Amazon CloudWatch logging option updates. You can only
 	// update existing CloudWatch logging options with this action. To add a new
 	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption ().
 	CloudWatchLoggingOptionUpdates []*types.CloudWatchLoggingOptionUpdate
+
 	// The current application version ID. You can retrieve the application version ID
 	// using DescribeApplication ().
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
+
 	// Describes updates to the application's starting parameters.
 	RunConfigurationUpdate *types.RunConfigurationUpdate
+
 	// The name of the application to update.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// Describes application configuration updates.
 	ApplicationConfigurationUpdate *types.ApplicationConfigurationUpdate
+
 	// Describes updates to the service execution role.
 	ServiceExecutionRoleUpdate *string
 }
 
 type UpdateApplicationOutput struct {
+
 	// Describes application updates.
+	//
+	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
 
 	// Metadata pertaining to the operation's result.

@@ -57,28 +57,35 @@ func (c *Client) DescribeReservedCacheNodes(ctx context.Context, params *Describ
 
 // Represents the input of a DescribeReservedCacheNodes operation.
 type DescribeReservedCacheNodesInput struct {
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
 	// <p>Constraints: minimum 20; maximum 100.</p>
 	MaxRecords *int32
+
 	// The offering identifier filter value. Use this parameter to show only purchased
 	// reservations matching the specified offering identifier.
 	ReservedCacheNodesOfferingId *string
+
 	// The offering type filter value. Use this parameter to show only the available
 	// offerings matching the specified offering type. Valid values: "Light
 	// Utilization"|"Medium Utilization"|"Heavy Utilization"
 	OfferingType *string
+
 	// The reserved cache node identifier filter value. Use this parameter to show only
 	// the reservation that matches the specified reservation ID.
 	ReservedCacheNodeId *string
+
 	// The product description filter value. Use this parameter to show only those
 	// reservations matching the specified product description.
 	ProductDescription *string
+
 	// The duration filter value, specified in years or seconds. Use this parameter to
 	// show only reservations for this duration. Valid Values: 1 | 3 | 31536000 |
 	// 94608000
 	Duration *string
+
 	// The cache node type filter value. Use this parameter to show only those
 	// reservations matching the specified cache node type.  <p>The following node
 	// types are supported by ElastiCache. Generally speaking, the current generation
@@ -124,6 +131,7 @@ type DescribeReservedCacheNodesInput struct {
 	// <code>appendfsync</code> are not supported on Redis version 2.8.22 and
 	// later.</p> </li> </ul>
 	CacheNodeType *string
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
@@ -133,9 +141,11 @@ type DescribeReservedCacheNodesInput struct {
 
 // Represents the output of a DescribeReservedCacheNodes operation.
 type DescribeReservedCacheNodesOutput struct {
+
 	// A list of reserved cache nodes. Each element in the list contains detailed
 	// information about one node.
 	ReservedCacheNodes []*types.ReservedCacheNode
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
 

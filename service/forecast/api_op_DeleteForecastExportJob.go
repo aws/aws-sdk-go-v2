@@ -58,7 +58,10 @@ func (c *Client) DeleteForecastExportJob(ctx context.Context, params *DeleteFore
 }
 
 type DeleteForecastExportJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the forecast export job to delete.
+	//
+	// This member is required.
 	ForecastExportJobArn *string
 }
 

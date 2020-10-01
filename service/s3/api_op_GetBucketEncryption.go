@@ -73,12 +73,16 @@ func (c *Client) GetBucketEncryption(ctx context.Context, params *GetBucketEncry
 }
 
 type GetBucketEncryptionInput struct {
+
 	// The name of the bucket from which the server-side encryption configuration is
 	// retrieved.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketEncryptionOutput struct {
+
 	// Specifies the default server-side-encryption configuration.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 

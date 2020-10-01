@@ -81,8 +81,12 @@ func (c *Client) CreateHealthCheck(ctx context.Context, params *CreateHealthChec
 
 // A complex type that contains the health check request information.
 type CreateHealthCheckInput struct {
+
 	// A complex type that contains settings for a new health check.
+	//
+	// This member is required.
 	HealthCheckConfig *types.HealthCheckConfig
+
 	// A unique string that identifies the request and that allows you to retry a
 	// failed CreateHealthCheck request without the risk of creating two identical
 	// health checks:
@@ -104,14 +108,22 @@ type CreateHealthCheckInput struct {
 	//     * If you send
 	// a CreateHealthCheck request with a unique CallerReference but settings identical
 	// to an existing health check, Route 53 creates the health check.
+	//
+	// This member is required.
 	CallerReference *string
 }
 
 // A complex type containing the response information for the new health check.
 type CreateHealthCheckOutput struct {
+
 	// The unique URL representing the new health check.
+	//
+	// This member is required.
 	Location *string
+
 	// A complex type that contains identifying information about the health check.
+	//
+	// This member is required.
 	HealthCheck *types.HealthCheck
 
 	// Metadata pertaining to the operation's result.

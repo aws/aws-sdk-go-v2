@@ -60,22 +60,30 @@ func (c *Client) GetPipelineState(ctx context.Context, params *GetPipelineStateI
 
 // Represents the input of a GetPipelineState action.
 type GetPipelineStateInput struct {
+
 	// The name of the pipeline about which you want to get information.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Represents the output of a GetPipelineState action.
 type GetPipelineStateOutput struct {
+
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time
+
 	// A list of the pipeline stage output information, including stage name, state,
 	// most recent run details, whether the stage is disabled, and other data.
 	StageStates []*types.StageState
+
 	// The date and time the pipeline was created, in timestamp format.
 	Created *time.Time
+
 	// The version number of the pipeline. A newly created pipeline is always assigned
 	// a version number of 1.
 	PipelineVersion *int32
+
 	// The name of the pipeline for which you want to get the state.
 	PipelineName *string
 

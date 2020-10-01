@@ -61,12 +61,16 @@ func (c *Client) StopRun(ctx context.Context, params *StopRunInput, optFns ...fu
 
 // Represents the request to stop a specific run.
 type StopRunInput struct {
+
 	// Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the results of your stop run attempt.
 type StopRunOutput struct {
+
 	// The run that was stopped.
 	Run *types.Run
 

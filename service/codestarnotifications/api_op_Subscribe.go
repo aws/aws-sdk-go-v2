@@ -58,17 +58,25 @@ func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns .
 }
 
 type SubscribeInput struct {
+
 	// Information about the SNS topics associated with a notification rule.
+	//
+	// This member is required.
 	Target *types.Target
+
 	// The Amazon Resource Name (ARN) of the notification rule for which you want to
 	// create the association.
+	//
+	// This member is required.
 	Arn *string
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	ClientRequestToken *string
 }
 
 type SubscribeOutput struct {
+
 	// The Amazon Resource Name (ARN) of the notification rule for which you have
 	// created assocations.
 	Arn *string

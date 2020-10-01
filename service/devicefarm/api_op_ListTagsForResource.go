@@ -56,14 +56,18 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource or resources for which to list
 	// tags. You can associate tags with the following Device Farm resources: PROJECT,
 	// RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL,
 	// DEVICE, and VPCE_CONFIGURATION.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The tags to add to the resource. A tag is an array of key-value pairs. Tag keys
 	// can have a maximum character length of 128 characters. Tag values can have a
 	// maximum length of 256 characters.

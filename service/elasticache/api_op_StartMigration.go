@@ -56,14 +56,21 @@ func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput
 }
 
 type StartMigrationInput struct {
+
 	// List of endpoints from which data should be migrated. For Redis (cluster mode
 	// disabled), list should have only one element.
+	//
+	// This member is required.
 	CustomerNodeEndpointList []*types.CustomerNodeEndpoint
+
 	// The ID of the replication group to which data should be migrated.
+	//
+	// This member is required.
 	ReplicationGroupId *string
 }
 
 type StartMigrationOutput struct {
+
 	// Contains all of the attributes of a specific Redis replication group.
 	ReplicationGroup *types.ReplicationGroup
 

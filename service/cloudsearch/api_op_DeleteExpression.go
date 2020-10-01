@@ -62,19 +62,28 @@ func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionI
 // name of the domain you want to update and the name of the expression you want to
 // delete.
 type DeleteExpressionInput struct {
+
 	// The name of the Expression () to delete.
+	//
+	// This member is required.
 	ExpressionName *string
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DeleteExpression () request. Specifies the expression being
 // deleted.
 type DeleteExpressionOutput struct {
+
 	// The status of the expression being deleted.
+	//
+	// This member is required.
 	Expression *types.ExpressionStatus
 
 	// Metadata pertaining to the operation's result.

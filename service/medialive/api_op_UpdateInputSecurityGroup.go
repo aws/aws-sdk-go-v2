@@ -58,16 +58,22 @@ func (c *Client) UpdateInputSecurityGroup(ctx context.Context, params *UpdateInp
 // The request to update some combination of the Input Security Group name and the
 // IPv4 CIDRs the Input Security Group should allow.
 type UpdateInputSecurityGroupInput struct {
+
 	// List of IPv4 CIDR addresses to whitelist
 	WhitelistRules []*types.InputWhitelistRuleCidr
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
+
 	// The id of the Input Security Group to update.
+	//
+	// This member is required.
 	InputSecurityGroupId *string
 }
 
 // Placeholder documentation for UpdateInputSecurityGroupResponse
 type UpdateInputSecurityGroupOutput struct {
+
 	// An Input Security Group
 	SecurityGroup *types.InputSecurityGroup
 

@@ -57,13 +57,18 @@ func (c *Client) GetSchemaAsJson(ctx context.Context, params *GetSchemaAsJsonInp
 }
 
 type GetSchemaAsJsonInput struct {
+
 	// The ARN of the schema to retrieve.
+	//
+	// This member is required.
 	SchemaArn *string
 }
 
 type GetSchemaAsJsonOutput struct {
+
 	// The name of the retrieved schema.
 	Name *string
+
 	// The JSON representation of the schema document.
 	Document *string
 

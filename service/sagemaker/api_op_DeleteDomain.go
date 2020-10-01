@@ -59,11 +59,15 @@ func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, op
 }
 
 type DeleteDomainInput struct {
+
 	// The retention policy for this domain, which specifies whether resources will be
 	// retained after the Domain is deleted. By default, all resources are retained
 	// (not automatically deleted).
 	RetentionPolicy *types.RetentionPolicy
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
 }
 

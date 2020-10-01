@@ -56,40 +56,55 @@ func (c *Client) UpdateStack(ctx context.Context, params *UpdateStackInput, optF
 }
 
 type UpdateStackInput struct {
+
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default, these actions are enabled.
 	UserSettings []*types.UserSetting
+
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings are
 	// automatically saved after each session and applied to the next session.
 	ApplicationSettings *types.ApplicationSettings
+
 	// The list of interface VPC endpoint (interface endpoint) objects. Users of the
 	// stack can connect to AppStream 2.0 only through the specified endpoints.
 	AccessEndpoints []*types.AccessEndpoint
+
 	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
 	// You must approve the domains that you want to host embedded AppStream 2.0
 	// streaming sessions.
 	EmbedHostDomains []*string
+
 	// The stack attributes to delete.
 	AttributesToDelete []types.StackAttribute
+
 	// The description to display.
 	Description *string
+
 	// The stack name to display.
 	DisplayName *string
+
 	// The storage connectors to enable.
 	StorageConnectors []*types.StorageConnector
+
 	// The URL that users are redirected to after they choose the Send Feedback link.
 	// If no URL is specified, no Send Feedback link is displayed.
 	FeedbackURL *string
+
 	// Deletes the storage connectors currently enabled for the stack.
 	DeleteStorageConnectors *bool
+
 	// The name of the stack.
+	//
+	// This member is required.
 	Name *string
+
 	// The URL that users are redirected to after their streaming session ends.
 	RedirectURL *string
 }
 
 type UpdateStackOutput struct {
+
 	// Information about the stack.
 	Stack *types.Stack
 

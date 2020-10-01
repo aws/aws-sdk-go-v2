@@ -56,19 +56,30 @@ func (c *Client) UpdateBrokerStorage(ctx context.Context, params *UpdateBrokerSt
 }
 
 type UpdateBrokerStorageInput struct {
+
 	// Describes the target volume size and the ID of the broker to apply the update
 	// to.
+	//
+	// This member is required.
 	TargetBrokerEBSVolumeInfo []*types.BrokerEBSVolumeInfo
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
 	ClusterArn *string
+
 	// The version of cluster to update from. A successful operation will then generate
 	// a new version.
+	//
+	// This member is required.
 	CurrentVersion *string
 }
 
 type UpdateBrokerStorageOutput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster operation.
 	ClusterOperationArn *string
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 

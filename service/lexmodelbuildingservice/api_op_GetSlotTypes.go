@@ -65,23 +65,28 @@ func (c *Client) GetSlotTypes(ctx context.Context, params *GetSlotTypesInput, op
 }
 
 type GetSlotTypesInput struct {
+
 	// A pagination token that fetches the next page of slot types. If the response to
 	// this API call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch next page of slot types, specify the pagination token in the
 	// next request.
 	NextToken *string
+
 	// Substring to match in slot type names. A slot type will be returned if any part
 	// of its name matches the substring. For example, "xyz" matches both "xyzabc" and
 	// "abcxyz."
 	NameContains *string
+
 	// The maximum number of slot types to return in the response. The default is 10.
 	MaxResults *int32
 }
 
 type GetSlotTypesOutput struct {
+
 	// An array of objects, one for each slot type, that provides information such as
 	// the name of the slot type, the version, and a description.
 	SlotTypes []*types.SlotTypeMetadata
+
 	// If the response is truncated, it includes a pagination token that you can
 	// specify in your next request to fetch the next page of slot types.
 	NextToken *string

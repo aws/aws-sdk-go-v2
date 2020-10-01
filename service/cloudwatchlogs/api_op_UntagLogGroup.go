@@ -59,9 +59,15 @@ func (c *Client) UntagLogGroup(ctx context.Context, params *UntagLogGroupInput, 
 }
 
 type UntagLogGroupInput struct {
+
 	// The tag keys. The corresponding tags are removed from the log group.
+	//
+	// This member is required.
 	Tags []*string
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 

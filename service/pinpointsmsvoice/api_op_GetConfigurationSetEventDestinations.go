@@ -58,12 +58,16 @@ func (c *Client) GetConfigurationSetEventDestinations(ctx context.Context, param
 }
 
 type GetConfigurationSetEventDestinationsInput struct {
+
 	// ConfigurationSetName
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 
 // An object that contains information about an event destination.
 type GetConfigurationSetEventDestinationsOutput struct {
+
 	// An array of EventDestination objects. Each EventDestination object includes ARNs
 	// and other information that define an event destination.
 	EventDestinations []*types.EventDestination

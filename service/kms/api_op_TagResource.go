@@ -68,6 +68,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// A unique identifier for the CMK you are tagging. Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -79,8 +80,13 @@ type TagResourceInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// One or more tags. Each tag consists of a tag key and a tag value.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

@@ -55,20 +55,27 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The first tag to retrieve. This is used for pagination; see the nextToken
 	// response field.
 	NextToken *string
+
 	// Maximum number of tags to return.
 	MaxResults *int32
+
 	// The ARN of the resource to be retrieved.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// If there are more tags than maxResults, use nextToken in the request to get the
 	// next set.
 	NextToken *string
-	Tags      map[string]*string
+
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

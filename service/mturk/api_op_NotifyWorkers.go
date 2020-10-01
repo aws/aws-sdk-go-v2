@@ -60,16 +60,26 @@ func (c *Client) NotifyWorkers(ctx context.Context, params *NotifyWorkersInput, 
 }
 
 type NotifyWorkersInput struct {
+
 	// A list of Worker IDs you wish to notify. You can notify upto 100 Workers at a
 	// time.
+	//
+	// This member is required.
 	WorkerIds []*string
+
 	// The text of the email message to send. Can include up to 4,096 characters
+	//
+	// This member is required.
 	MessageText *string
+
 	// The subject line of the email message to send. Can include up to 200 characters.
+	//
+	// This member is required.
 	Subject *string
 }
 
 type NotifyWorkersOutput struct {
+
 	// When MTurk sends notifications to the list of Workers, it returns back any
 	// failures it encounters in this list of NotifyWorkersFailureStatus objects.
 	NotifyWorkersFailureStatuses []*types.NotifyWorkersFailureStatus

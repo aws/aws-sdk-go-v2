@@ -56,20 +56,28 @@ func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecy
 }
 
 type DeleteLifecyclePolicyInput struct {
+
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The name of the repository.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type DeleteLifecyclePolicyOutput struct {
+
 	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string
+
 	// The repository name associated with the request.
 	RepositoryName *string
+
 	// The time stamp of the last time that the lifecycle policy was run.
 	LastEvaluatedAt *time.Time
+
 	// The registry ID associated with the request.
 	RegistryId *string
 

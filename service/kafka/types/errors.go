@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Returns information about an error.
@@ -26,18 +25,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *BadRequestException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type ConflictException struct {
@@ -57,18 +44,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *ConflictException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type ForbiddenException struct {
@@ -88,18 +63,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *ForbiddenException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type InternalServerErrorException struct {
@@ -119,18 +82,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalServerErrorException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *InternalServerErrorException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
 
 // Returns information about an error.
 type NotFoundException struct {
@@ -150,18 +101,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *NotFoundException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *NotFoundException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
 
 // Returns information about an error.
 type ServiceUnavailableException struct {
@@ -181,18 +120,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceUnavailableException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *ServiceUnavailableException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
 
 // Returns information about an error.
 type TooManyRequestsException struct {
@@ -212,18 +139,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyRequestsException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *TooManyRequestsException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
 
 // Returns information about an error.
 type UnauthorizedException struct {
@@ -243,15 +158,3 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetInvalidParameter() string {
-	return ptr.ToString(e.InvalidParameter)
-}
-func (e *UnauthorizedException) HasInvalidParameter() bool {
-	return e.InvalidParameter != nil
-}
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}

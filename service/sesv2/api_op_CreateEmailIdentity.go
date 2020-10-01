@@ -77,6 +77,7 @@ func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIde
 // A request to begin the verification process for an email identity (an email
 // address or domain).
 type CreateEmailIdentityInput struct {
+
 	// If your request includes this object, Amazon SES configures the identity to use
 	// Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to
 	// the default method, Easy DKIM
@@ -84,8 +85,12 @@ type CreateEmailIdentityInput struct {
 	// only specify this object if the email identity is a domain, as opposed to an
 	// address.
 	DkimSigningAttributes *types.DkimSigningAttributes
+
 	// The email address or domain that you want to verify.
+	//
+	// This member is required.
 	EmailIdentity *string
+
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the email identity.
 	Tags []*types.Tag
@@ -95,13 +100,16 @@ type CreateEmailIdentityInput struct {
 // DKIM verification status for the domain. If the email identity is an email
 // address, this object is empty.
 type CreateEmailIdentityOutput struct {
+
 	// Specifies whether or not the identity is verified. You can only send email from
 	// verified email addresses or domains. For more information about verifying
 	// identities, see the Amazon Pinpoint User Guide
 	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
 	VerifiedForSendingStatus *bool
+
 	// An object that contains information about the DKIM attributes for the identity.
 	DkimAttributes *types.DkimAttributes
+
 	// The email identity type.
 	IdentityType types.IdentityType
 

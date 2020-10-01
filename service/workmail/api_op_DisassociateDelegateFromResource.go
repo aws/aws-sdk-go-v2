@@ -55,12 +55,21 @@ func (c *Client) DisassociateDelegateFromResource(ctx context.Context, params *D
 }
 
 type DisassociateDelegateFromResourceInput struct {
+
 	// The identifier for the organization under which the resource exists.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier of the resource from which delegates' set members are removed.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The identifier for the member (user, group) to be removed from the resource's
 	// delegates.
+	//
+	// This member is required.
 	EntityId *string
 }
 

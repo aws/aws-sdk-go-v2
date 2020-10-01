@@ -57,8 +57,11 @@ func (c *Client) DisassociateCertificate(ctx context.Context, params *Disassocia
 }
 
 type DisassociateCertificateInput struct {
+
 	// The ARN of the ACM certificate that you want to disassociate from your
 	// MediaConvert resource.
+	//
+	// This member is required.
 	Arn *string
 }
 

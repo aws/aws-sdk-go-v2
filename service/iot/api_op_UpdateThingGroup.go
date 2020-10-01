@@ -56,16 +56,24 @@ func (c *Client) UpdateThingGroup(ctx context.Context, params *UpdateThingGroupI
 }
 
 type UpdateThingGroupInput struct {
+
 	// The thing group to update.
+	//
+	// This member is required.
 	ThingGroupName *string
+
 	// The expected version of the thing group. If this does not match the version of
 	// the thing group being updated, the update will fail.
 	ExpectedVersion *int64
+
 	// The thing group properties.
+	//
+	// This member is required.
 	ThingGroupProperties *types.ThingGroupProperties
 }
 
 type UpdateThingGroupOutput struct {
+
 	// The version of the updated thing group.
 	Version *int64
 

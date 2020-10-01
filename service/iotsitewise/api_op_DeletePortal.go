@@ -58,8 +58,12 @@ func (c *Client) DeletePortal(ctx context.Context, params *DeletePortalInput, op
 }
 
 type DeletePortalInput struct {
+
 	// The ID of the portal to delete.
+	//
+	// This member is required.
 	PortalId *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
@@ -67,8 +71,11 @@ type DeletePortalInput struct {
 }
 
 type DeletePortalOutput struct {
+
 	// The status of the portal, which contains a state (DELETING after successfully
 	// calling this operation) and any error message.
+	//
+	// This member is required.
 	PortalStatus *types.PortalStatus
 
 	// Metadata pertaining to the operation's result.

@@ -56,12 +56,18 @@ func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *Deregiste
 }
 
 type DeregisterDBProxyTargetsInput struct {
+
 	// The identifier of the DBProxyTargetGroup.
 	TargetGroupName *string
+
 	// One or more DB cluster identifiers.
 	DBClusterIdentifiers []*string
+
 	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
+	//
+	// This member is required.
 	DBProxyName *string
+
 	// One or more DB instance identifiers.
 	DBInstanceIdentifiers []*string
 }

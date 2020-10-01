@@ -57,18 +57,26 @@ func (c *Client) DetectSentiment(ctx context.Context, params *DetectSentimentInp
 }
 
 type DetectSentimentInput struct {
+
 	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
 	// encoded characters.
+	//
+	// This member is required.
 	Text *string
+
 	// The language of the input documents. You can specify any of the primary
 	// languages supported by Amazon Comprehend. All documents must be in the same
 	// language.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
 }
 
 type DetectSentimentOutput struct {
+
 	// An object that lists the sentiments, and their corresponding confidence levels.
 	SentimentScore *types.SentimentScore
+
 	// The inferred sentiment that Amazon Comprehend has the highest level of
 	// confidence in.
 	Sentiment types.SentimentType

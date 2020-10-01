@@ -58,20 +58,28 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 }
 
 type VerifySoftwareTokenInput struct {
+
 	// The friendly device name.
 	FriendlyDeviceName *string
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service.
 	Session *string
+
 	// The one time password computed using the secret code returned by
+	//
+	// This member is required.
 	UserCode *string
+
 	// The access token.
 	AccessToken *string
 }
 
 type VerifySoftwareTokenOutput struct {
+
 	// The status of the verify software token.
 	Status types.VerifySoftwareTokenResponseType
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service.
 	Session *string

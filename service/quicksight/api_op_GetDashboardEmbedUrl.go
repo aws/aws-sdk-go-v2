@@ -77,19 +77,29 @@ func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardE
 }
 
 type GetDashboardEmbedUrlInput struct {
+
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
 	// enables the reset button.
 	ResetDisabled *bool
+
 	// How many minutes the session is valid. The session lifetime must be 15-600
 	// minutes.
 	SessionLifetimeInMinutes *int64
+
 	// The ID for the AWS account that contains the dashboard that you're embedding.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The authentication method that the user uses to sign in.
+	//
+	// This member is required.
 	IdentityType types.IdentityType
+
 	// Remove the undo/redo button on the embedded dashboard. The default is FALSE,
 	// which enables the undo/redo button.
 	UndoRedoDisabled *bool
+
 	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
 	// identity type. You can use this for any Amazon QuickSight users in your account
 	// (readers, authors, or admins) authenticated as one of the following:
@@ -103,16 +113,21 @@ type GetDashboardEmbedUrlInput struct {
 	// * IAM users and IAM role-based sessions authenticated through Federated Single
 	// Sign-On using SAML, OpenID Connect, or IAM federation.
 	UserArn *string
+
 	// The ID for the dashboard, also added to the IAM policy.
+	//
+	// This member is required.
 	DashboardId *string
 }
 
 type GetDashboardEmbedUrlOutput struct {
+
 	// A single-use URL that you can put into your server-side webpage to embed your
 	// dashboard. This URL is valid for 5 minutes. The API provides the URL with an
 	// auth_code value that enables one (and only one) sign-on to a user session that
 	// is valid for 10 hours.
 	EmbedUrl *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

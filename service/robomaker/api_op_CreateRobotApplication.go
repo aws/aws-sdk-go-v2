@@ -57,33 +57,51 @@ func (c *Client) CreateRobotApplication(ctx context.Context, params *CreateRobot
 }
 
 type CreateRobotApplicationInput struct {
+
 	// The robot software suite (ROS distribuition) used by the robot application.
+	//
+	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The sources of the robot application.
+	//
+	// This member is required.
 	Sources []*types.SourceConfig
+
 	// A map that contains tag keys and tag values that are attached to the robot
 	// application.
 	Tags map[string]*string
+
 	// The name of the robot application.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateRobotApplicationOutput struct {
+
 	// The robot software suite (ROS distribution) used by the robot application.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The sources of the robot application.
 	Sources []*types.Source
+
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
 	LastUpdatedAt *time.Time
+
 	// The Amazon Resource Name (ARN) of the robot application.
 	Arn *string
+
 	// The revision id of the robot application.
 	RevisionId *string
+
 	// The version of the robot application.
 	Version *string
+
 	// The list of all tags added to the robot application.
 	Tags map[string]*string
+
 	// The name of the robot application.
 	Name *string
 

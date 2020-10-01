@@ -90,19 +90,26 @@ func (c *Client) GetMedia(ctx context.Context, params *GetMediaInput, optFns ...
 }
 
 type GetMediaInput struct {
+
 	// The ARN of the stream from where you want to get the media content. If you don't
 	// specify the streamARN, you must specify the streamName.
 	StreamARN *string
+
 	// The Kinesis video stream name from where you want to get the media content. If
 	// you don't specify the streamName, you must specify the streamARN.
 	StreamName *string
+
 	// Identifies the starting chunk to get from the specified stream.
+	//
+	// This member is required.
 	StartSelector *types.StartSelector
 }
 
 type GetMediaOutput struct {
+
 	// The content type of the requested media.
 	ContentType *string
+
 	// The payload Kinesis Video Streams returns is a sequence of chunks from the
 	// specified stream. For information about the chunks, see . The chunks that
 	// Kinesis Video Streams returns in the GetMedia call also include the following

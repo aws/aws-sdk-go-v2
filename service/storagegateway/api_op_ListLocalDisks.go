@@ -64,15 +64,20 @@ func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type ListLocalDisksInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 type ListLocalDisksOutput struct {
+
 	// A JSON object containing the following fields:  <ul> <li> <p>
 	// <a>ListLocalDisksOutput$Disks</a> </p> </li> </ul>
 	Disks []*types.Disk
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

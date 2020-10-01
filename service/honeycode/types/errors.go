@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action. Check that the
@@ -26,12 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The automation execution did not end successfully.
 type AutomationExecutionException struct {
@@ -49,12 +42,6 @@ func (e *AutomationExecutionException) ErrorMessage() string {
 }
 func (e *AutomationExecutionException) ErrorCode() string             { return "AutomationExecutionException" }
 func (e *AutomationExecutionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AutomationExecutionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationExecutionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The automation execution timed out.
 type AutomationExecutionTimeoutException struct {
@@ -76,12 +63,6 @@ func (e *AutomationExecutionTimeoutException) ErrorCode() string {
 func (e *AutomationExecutionTimeoutException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
-func (e *AutomationExecutionTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationExecutionTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There were unexpected errors from the server.
 type InternalServerException struct {
@@ -99,12 +80,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request timed out.
 type RequestTimeoutException struct {
@@ -122,12 +97,6 @@ func (e *RequestTimeoutException) ErrorMessage() string {
 }
 func (e *RequestTimeoutException) ErrorCode() string             { return "RequestTimeoutException" }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *RequestTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A Workbook, App, Screen or Screen Automation was not found with the given ID.
 type ResourceNotFoundException struct {
@@ -145,12 +114,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Remote service is unreachable.
 type ServiceUnavailableException struct {
@@ -168,12 +131,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Tps(transactions per second) rate reached.
 type ThrottlingException struct {
@@ -191,12 +148,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Request is invalid. The message in the response contains details on why the
 // request is invalid.
@@ -215,9 +166,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

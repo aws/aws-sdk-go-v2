@@ -61,11 +61,13 @@ func (c *Client) ListIPSets(ctx context.Context, params *ListIPSetsInput, optFns
 }
 
 type ListIPSetsInput struct {
+
 	// AWS WAF returns a NextMarker value in the response that allows you to list
 	// another group of IPSets. For the second and subsequent ListIPSets requests,
 	// specify the value of NextMarker from the previous response to get information
 	// about another batch of IPSets.
 	NextMarker *string
+
 	// Specifies the number of IPSet objects that you want AWS WAF to return for this
 	// request. If you have more IPSet objects than the number you specify for Limit,
 	// the response includes a NextMarker value that you can use to get another batch
@@ -74,8 +76,10 @@ type ListIPSetsInput struct {
 }
 
 type ListIPSetsOutput struct {
+
 	// An array of IPSetSummary () objects.
 	IPSets []*types.IPSetSummary
+
 	// To list more IPSet objects, submit another ListIPSets request, and in the next
 	// request use the NextMarker response value as the NextMarker value.
 	NextMarker *string

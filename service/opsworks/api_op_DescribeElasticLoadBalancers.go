@@ -60,8 +60,10 @@ func (c *Client) DescribeElasticLoadBalancers(ctx context.Context, params *Descr
 }
 
 type DescribeElasticLoadBalancersInput struct {
+
 	// A stack ID. The action describes the stack's Elastic Load Balancing instances.
 	StackId *string
+
 	// A list of layer IDs. The action describes the Elastic Load Balancing instances
 	// for the specified layers.
 	LayerIds []*string
@@ -69,6 +71,7 @@ type DescribeElasticLoadBalancersInput struct {
 
 // Contains the response to a DescribeElasticLoadBalancers request.
 type DescribeElasticLoadBalancersOutput struct {
+
 	// A list of ElasticLoadBalancer objects that describe the specified Elastic Load
 	// Balancing instances.
 	ElasticLoadBalancers []*types.ElasticLoadBalancer

@@ -73,6 +73,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 }
 
 type GetResourcePolicyInput struct {
+
 	// Specifies the secret that you want to retrieve the attached resource-based
 	// policy for. You can specify either the Amazon Resource Name (ARN) or the
 	// friendly name of the secret. If you specify an ARN, we generally recommend that
@@ -90,12 +91,16 @@ type GetResourcePolicyInput struct {
 	// name', you must not include the random suffix. If you do include the random
 	// suffix added by Secrets Manager, you receive either a ResourceNotFoundException
 	// or an AccessDeniedException error, depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type GetResourcePolicyOutput struct {
+
 	// The ARN of the secret that the resource-based policy was retrieved for.
 	ARN *string
+
 	// A JSON-formatted string that describes the permissions that are associated with
 	// the attached secret. These permissions are combined with any permissions that
 	// are associated with the user or role that attempts to access this secret. The
@@ -105,6 +110,7 @@ type GetResourcePolicyOutput struct {
 	// (http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
 	// in the AWS Secrets Manager User Guide.
 	ResourcePolicy *string
+
 	// The friendly name of the secret that the resource-based policy was retrieved
 	// for.
 	Name *string

@@ -57,24 +57,33 @@ func (c *Client) DescribeImagePermissions(ctx context.Context, params *DescribeI
 }
 
 type DescribeImagePermissionsInput struct {
+
 	// The name of the private image for which to describe permissions. The image must
 	// be one that you own.
+	//
+	// This member is required.
 	Name *string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
 	// The maximum size of each page of results.
 	MaxResults *int32
+
 	// The 12-digit identifier of one or more AWS accounts with which the image is
 	// shared.
 	SharedAwsAccountIds []*string
 }
 
 type DescribeImagePermissionsOutput struct {
+
 	// The permissions for a private image that you own.
 	SharedImagePermissionsList []*types.SharedImagePermissions
+
 	// The name of the private image.
 	Name *string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

@@ -56,16 +56,20 @@ func (c *Client) StartBuild(ctx context.Context, params *StartBuildInput, optFns
 }
 
 type StartBuildInput struct {
+
 	// Log settings for this build that override the log settings defined in the build
 	// project.
 	LogsConfigOverride *types.LogsConfig
+
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutesOverride *int32
+
 	// Set to true to report to your source provider the status of a build's start and
 	// completion. If you use this option with a source provider other than GitHub,
 	// GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. The status
 	// of a build triggered by a webhook is always reported to your source provider.
 	ReportBuildStatusOverride *bool
+
 	// The version of the build input to be built, for this build only. If not
 	// specified, the latest version is used. If specified, the contents depends on the
 	// source provider: AWS CodeCommit The commit ID, branch, or Git tag to use. GitHub
@@ -84,6 +88,7 @@ type StartBuildInput struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string
+
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that
 	// overrides the one specified in the build project. The CMK key encrypts the build
 	// output artifacts. You can use a cross-account KMS key to encrypt the build
@@ -91,32 +96,44 @@ type StartBuildInput struct {
 	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
 	// CMK's alias (using the format alias/alias-name ).
 	EncryptionKeyOverride *string
+
 	// Build output artifact settings that override, for this build only, the latest
 	// ones already defined in the build project.
 	ArtifactsOverride *types.ProjectArtifacts
+
 	// The user-defined depth of history, with a minimum value of 0, that overrides,
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int32
+
 	// An array of ProjectArtifacts objects.
 	SecondaryArtifactsOverride []*types.ProjectArtifacts
+
 	// The name of the AWS CodeBuild build project to start running a build.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// An array of ProjectSourceVersion objects that specify one or more versions of
 	// the project's secondary sources to be used for this build only.
 	SecondarySourcesVersionOverride []*types.ProjectSourceVersion
+
 	// Enable this flag to override the insecure SSL setting that is specified in the
 	// build project. The insecure SSL setting determines whether to ignore SSL
 	// warnings while connecting to the project source code. This override applies only
 	// if the build's source is GitHub Enterprise.
 	InsecureSslOverride *bool
+
 	// The credentials for access to a private registry.
 	RegistryCredentialOverride *types.RegistryCredential
+
 	// An authorization type for this build that overrides the one defined in the build
 	// project. This override applies only if the build project's source is BitBucket
 	// or GitHub.
 	SourceAuthOverride *types.SourceAuth
+
 	// An array of ProjectSource objects.
 	SecondarySourcesOverride []*types.ProjectSource
+
 	// A buildspec file declaration that overrides, for this build only, the latest one
 	// already defined in the build project. If this value is set, it can be either an
 	// inline buildspec definition, the path to an alternate buildspec file relative to
@@ -129,32 +146,41 @@ type StartBuildInput struct {
 	// Location
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage).
 	BuildspecOverride *string
+
 	// Information about the Git submodules configuration for this build of an AWS
 	// CodeBuild build project.
 	GitSubmodulesConfigOverride *types.GitSubmodulesConfig
+
 	// A unique, case sensitive identifier you provide to ensure the idempotency of the
 	// StartBuild request. The token is included in the StartBuild request and is valid
 	// for 5 minutes. If you repeat the StartBuild request with the same token, but
 	// change a parameter, AWS CodeBuild returns a parameter mismatch error.
 	IdempotencyToken *string
+
 	// Enable this flag to override privileged mode in the build project.
 	PrivilegedModeOverride *bool
+
 	// A ProjectCache object specified for this build that overrides the one defined in
 	// the build project.
 	CacheOverride *types.ProjectCache
+
 	// The name of a compute type for this build that overrides the one specified in
 	// the build project.
 	ComputeTypeOverride types.ComputeType
+
 	// The name of an image for this build that overrides the one specified in the
 	// build project.
 	ImageOverride *string
+
 	// Specifies if session debugging is enabled for this build. For more information,
 	// see Viewing a running build in Session Manager
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
 	DebugSessionEnabled *bool
+
 	// A container type for this build that overrides the one specified in the build
 	// project.
 	EnvironmentTypeOverride types.EnvironmentType
+
 	// The type of credentials AWS CodeBuild uses to pull images in your build. There
 	// are two valid values: CODEBUILD Specifies that AWS CodeBuild uses its own
 	// credentials. This requires that you modify your ECR repository policy to trust
@@ -163,31 +189,39 @@ type StartBuildInput struct {
 	// registry image, you must use SERVICE_ROLE credentials. When using an AWS
 	// CodeBuild curated image, you must use CODEBUILD credentials.
 	ImagePullCredentialsTypeOverride types.ImagePullCredentialsType
+
 	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,
 	// for this build only, the latest setting already defined in the build project.
 	TimeoutInMinutesOverride *int32
+
 	// The name of a service role for this build that overrides the one specified in
 	// the build project.
 	ServiceRoleOverride *string
+
 	// Contains information that defines how the build project reports the build status
 	// to the source provider. This option is only used when the source provider is
 	// GITHUB, GITHUB_ENTERPRISE, or BITBUCKET.
 	BuildStatusConfigOverride *types.BuildStatusConfig
+
 	// The name of a certificate for this build that overrides the one specified in the
 	// build project.
 	CertificateOverride *string
+
 	// A source input type, for this build, that overrides the source input defined in
 	// the build project.
 	SourceTypeOverride types.SourceType
+
 	// A set of environment variables that overrides, for this build only, the latest
 	// ones already defined in the build project.
 	EnvironmentVariablesOverride []*types.EnvironmentVariable
+
 	// A location that overrides, for this build, the source location for the one
 	// defined in the build project.
 	SourceLocationOverride *string
 }
 
 type StartBuildOutput struct {
+
 	// Information about the build to be run.
 	Build *types.Build
 

@@ -57,10 +57,14 @@ func (c *Client) GetUsageForecast(ctx context.Context, params *GetUsageForecastI
 }
 
 type GetUsageForecastInput struct {
+
 	// How granular you want the forecast to be. You can get 3 months of DAILY
 	// forecasts or 12 months of MONTHLY forecasts. The GetUsageForecast operation
 	// supports only DAILY and MONTHLY granularities.
+	//
+	// This member is required.
 	Granularity types.Granularity
+
 	// Which metric Cost Explorer uses to create your forecast. Valid values for a
 	// GetUsageForecast call are the following:
 	//
@@ -68,28 +72,37 @@ type GetUsageForecastInput struct {
 	//
 	//     *
 	// NORMALIZED_USAGE_AMOUNT
+	//
+	// This member is required.
 	Metric types.Metric
+
 	// Cost Explorer always returns the mean forecast as a single point. You can
 	// request a prediction interval around the mean by specifying a confidence level.
 	// The higher the confidence level, the more confident Cost Explorer is about the
 	// actual value falling in the prediction interval. Higher confidence levels result
 	// in wider prediction intervals.
 	PredictionIntervalLevel *int32
+
 	// The start and end dates of the period that you want to retrieve usage forecast
 	// for. The start date is inclusive, but the end date is exclusive. For example, if
 	// start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is
 	// retrieved from 2017-01-01 up to and including 2017-04-30 but not including
 	// 2017-05-01.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// The filters that you want to use to filter your forecast. Cost Explorer API
 	// supports all of the Cost Explorer filters.
 	Filter *types.Expression
 }
 
 type GetUsageForecastOutput struct {
+
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of
 	// days. For MONTHLY forecasts, this is a list of months.
 	ForecastResultsByTime []*types.ForecastResult
+
 	// How much you're forecasted to use over the forecast period.
 	Total *types.MetricValue
 

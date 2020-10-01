@@ -89,9 +89,13 @@ func (c *Client) ListPoliciesGrantingServiceAccess(ctx context.Context, params *
 }
 
 type ListPoliciesGrantingServiceAccessInput struct {
+
 	// The ARN of the IAM identity (user, group, or role) whose policies you want to
 	// list.
+	//
+	// This member is required.
 	Arn *string
+
 	// The service namespace for the AWS services whose policies you want to list. To
 	// learn the service namespace for a service, go to Actions, Resources, and
 	// Condition Keys for AWS Services
@@ -102,7 +106,10 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the AWS General Reference.
+	//
+	// This member is required.
 	ServiceNamespaces []*string
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -111,14 +118,19 @@ type ListPoliciesGrantingServiceAccessInput struct {
 }
 
 type ListPoliciesGrantingServiceAccessOutput struct {
+
 	// A ListPoliciesGrantingServiceAccess object that contains details about the
 	// permissions policies attached to the specified identity (user, group, or role).
+	//
+	// This member is required.
 	PoliciesGrantingServiceAccess []*types.ListPoliciesGrantingServiceAccessEntry
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. We recommend that you check
 	// IsTruncated after every call to ensure that you receive all your results.
 	IsTruncated *bool
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string

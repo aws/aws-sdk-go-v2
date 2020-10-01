@@ -56,29 +56,41 @@ func (c *Client) GetCoreDefinitionVersion(ctx context.Context, params *GetCoreDe
 }
 
 type GetCoreDefinitionVersionInput struct {
+
 	// The ID of the core definition.
+	//
+	// This member is required.
 	CoreDefinitionId *string
+
 	// The ID of the core definition version. This value maps to the ''Version''
 	// property of the corresponding ''VersionInformation'' object, which is returned
 	// by ''ListCoreDefinitionVersions'' requests. If the version is the last one that
 	// was associated with a core definition, the value also maps to the
 	// ''LatestVersion'' property of the corresponding ''DefinitionInformation''
 	// object.
+	//
+	// This member is required.
 	CoreDefinitionVersionId *string
 }
 
 type GetCoreDefinitionVersionOutput struct {
+
 	// The time, in milliseconds since the epoch, when the core definition version was
 	// created.
 	CreationTimestamp *string
+
 	// The ARN of the core definition version.
 	Arn *string
+
 	// Information about the core definition version.
 	Definition *types.CoreDefinitionVersion
+
 	// The version of the core definition version.
 	Version *string
+
 	// The ID of the core definition version.
 	Id *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

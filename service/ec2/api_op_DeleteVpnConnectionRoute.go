@@ -59,9 +59,15 @@ func (c *Client) DeleteVpnConnectionRoute(ctx context.Context, params *DeleteVpn
 
 // Contains the parameters for DeleteVpnConnectionRoute.
 type DeleteVpnConnectionRouteInput struct {
+
 	// The ID of the VPN connection.
+	//
+	// This member is required.
 	VpnConnectionId *string
+
 	// The CIDR block associated with the local subnet of the customer network.
+	//
+	// This member is required.
 	DestinationCidrBlock *string
 }
 

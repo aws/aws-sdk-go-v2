@@ -56,8 +56,11 @@ func (c *Client) DeleteCACertificate(ctx context.Context, params *DeleteCACertif
 
 // Input for the DeleteCACertificate operation.
 type DeleteCACertificateInput struct {
+
 	// The ID of the certificate to delete. (The last part of the certificate ARN
 	// contains the certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
 }
 

@@ -62,12 +62,16 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 
 //
 type DeleteDBClusterSnapshotInput struct {
+
 	// The identifier of the DB cluster snapshot to delete. Constraints: Must be the
 	// name of an existing DB cluster snapshot in the available state.
+	//
+	// This member is required.
 	DBClusterSnapshotIdentifier *string
 }
 
 type DeleteDBClusterSnapshotOutput struct {
+
 	// Contains the details for an Amazon RDS DB cluster snapshot This data type is
 	// used as a response element in the DescribeDBClusterSnapshots action.
 	DBClusterSnapshot *types.DBClusterSnapshot

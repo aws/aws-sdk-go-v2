@@ -57,13 +57,17 @@ func (c *Client) StopRemoteAccessSession(ctx context.Context, params *StopRemote
 
 // Represents the request to stop the remote access session.
 type StopRemoteAccessSessionInput struct {
+
 	// The Amazon Resource Name (ARN) of the remote access session to stop.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the response from the server that describes the remote access session
 // when AWS Device Farm stops the session.
 type StopRemoteAccessSessionOutput struct {
+
 	// A container that represents the metadata from the service about the remote
 	// access session you are stopping.
 	RemoteAccessSession *types.RemoteAccessSession

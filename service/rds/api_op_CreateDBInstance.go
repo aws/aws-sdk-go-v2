@@ -57,34 +57,43 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 
 //
 type CreateDBInstanceInput struct {
+
 	// A DB subnet group to associate with this DB instance. If there is no DB subnet
 	// group, then it is a non-VPC DB instance.
 	DBSubnetGroupName *string
+
 	// A list of DB security groups to associate with this DB instance. Default: The
 	// default DB security group for the database engine.
 	DBSecurityGroups []*string
+
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the DB instance during the maintenance window. By default, minor engine
 	// upgrades are applied automatically.
 	AutoMinorVersionUpgrade *bool
+
 	// The compute and memory capacity of the DB instance, for example, db.m4.large.
 	// Not all DB instance classes are available in all AWS Regions, or for all
 	// database engines. For the full list of DB instance classes, and availability for
 	// your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide.
+	//
+	// This member is required.
 	DBInstanceClass *string
+
 	// A list of Amazon EC2 VPC security groups to associate with this DB instance.
 	// <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC
 	// security groups is managed by the DB cluster.</p> <p>Default: The default EC2
 	// VPC security group for the DB subnet group's VPC.</p>
 	VpcSecurityGroupIds []*string
+
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Relational Database Service User Guide.
 	EnableCloudwatchLogsExports []*string
+
 	// The name of the database engine to be used for this instance.  <p>Not every
 	// database engine is available for every AWS Region. </p> <p>Valid Values: </p>
 	// <ul> <li> <p> <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p> </li>
@@ -97,7 +106,10 @@ type CreateDBInstanceInput struct {
 	// <code>sqlserver-ee</code> </p> </li> <li> <p> <code>sqlserver-se</code> </p>
 	// </li> <li> <p> <code>sqlserver-ex</code> </p> </li> <li> <p>
 	// <code>sqlserver-web</code> </p> </li> </ul>
+	//
+	// This member is required.
 	Engine *string
+
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled. For more information, see  Deleting a DB
@@ -108,6 +120,7 @@ type CreateDBInstanceInput struct {
 	// cluster can be deleted even when deletion protection is enabled for the DB
 	// cluster.
 	DeletionProtection *bool
+
 	// The meaning of this parameter differs according to the database engine you use.
 	// MySQL The name of the database to create when the DB instance is created. If
 	// this parameter isn't specified, no database is created in the DB instance.
@@ -159,14 +172,17 @@ type CreateDBInstanceInput struct {
 	//     * Can't be a word reserved by the
 	// specified database engine
 	DBName *string
+
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
 	// DB instance.
 	MaxAllocatedStorage *int32
+
 	// A value that indicates whether to copy tags from the DB instance to snapshots of
 	// the DB instance. By default, tags are not copied. Amazon Aurora Not applicable.
 	// Copying tags to snapshots is managed by the DB cluster. Setting this value for
 	// an Aurora DB instance has no effect on the DB cluster setting.
 	CopyTagsToSnapshot *bool
+
 	// The name for the master user.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable.
 	// The name for the master user is managed by the DB cluster. </p> <p>
 	// <b>MariaDB</b> </p> <p>Constraints:</p> <ul> <li> <p>Required for MariaDB.</p>
@@ -188,6 +204,7 @@ type CreateDBInstanceInput struct {
 	// <p>First character must be a letter.</p> </li> <li> <p>Can't be a reserved word
 	// for the chosen database engine.</p> </li> </ul>
 	MasterUsername *string
+
 	// The Availability Zone (AZ) where the database will be created. For information
 	// on AWS Regions and Availability Zones, see Regions and Availability Zones
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
@@ -200,6 +217,7 @@ type CreateDBInstanceInput struct {
 	// more information about RDS on VMware, see the  RDS on VMware User Guide.
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
 	AvailabilityZone *string
+
 	// The AWS KMS key identifier for an encrypted DB instance. The KMS key identifier
 	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
 	// creating a DB instance with the same AWS account that owns the KMS encryption
@@ -212,6 +230,7 @@ type CreateDBInstanceInput struct {
 	// your AWS account. Your AWS account has a different default encryption key for
 	// each AWS Region.</p>
 	KmsKeyId *string
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. For more
 	// information, see The Backup Window
@@ -228,15 +247,18 @@ type CreateDBInstanceInput struct {
 	// Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance
 	// window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>
 	PreferredBackupWindow *string
+
 	// The time zone of the DB instance. The time zone parameter is currently supported
 	// only by Microsoft SQL Server
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).
 	Timezone *string
+
 	// A value that indicates whether to enable Performance Insights for the DB
 	// instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon Relational Database Service User Guide.
 	EnablePerformanceInsights *bool
+
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). For more information, see Amazon RDS Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance).
@@ -245,9 +267,11 @@ type CreateDBInstanceInput struct {
 	// day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints:
 	// Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
 	// License model information for this DB instance. Valid values: license-included |
 	// bring-your-own-license | general-public-license
 	LicenseModel *string
+
 	// The amount of Provisioned IOPS (input/output operations per second) to be
 	// initially allocated for the DB instance. For information about valid Iops
 	// values, see Amazon RDS Provisioned IOPS Storage to Improve Performance
@@ -257,14 +281,17 @@ type CreateDBInstanceInput struct {
 	// amount for the DB instance. For SQL Server DB instances, must be a multiple
 	// between 1 and 50 of the storage amount for the DB instance.
 	Iops *int32
+
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
 	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, then
 	// you must also set MonitoringInterval to a value other than 0. Valid Values: 0,
 	// 1, 5, 10, 15, 30, 60
 	MonitoringInterval *int32
+
 	// The password for the given ARN from the key store in order to access the device.
 	TdeCredentialPassword *string
+
 	// The name of the DB parameter group to associate with this DB instance. If you do
 	// not specify a value, then the default DB parameter group for the specified DB
 	// engine and version is used. Constraints:
@@ -277,6 +304,7 @@ type CreateDBInstanceInput struct {
 	//     * Can't end
 	// with a hyphen or contain two consecutive hyphens
 	DBParameterGroupName *string
+
 	// The Active Directory directory ID to create the DB instance in. Currently, only
 	// Microsoft SQL Server and Oracle DB instances can be created in an Active
 	// Directory Domain. For Microsoft SQL Server DB instances, Amazon RDS can use
@@ -291,6 +319,7 @@ type CreateDBInstanceInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html) in
 	// the Amazon RDS User Guide.
 	Domain *string
+
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	// You can enable IAM database authentication for the following database engines:
@@ -306,19 +335,23 @@ type CreateDBInstanceInput struct {
 	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
 	// User Guide.</i> </p>
 	EnableIAMDatabaseAuthentication *bool
+
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
 	// information, see  Fault Tolerance for an Aurora DB Cluster
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
 	// in the Amazon Aurora User Guide. Default: 1 Valid Values: 0 - 15
 	PromotionTier *int32
+
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []*types.ProcessorFeature
+
 	// A value that indicates whether the DB instance is a Multi-AZ deployment. You
 	// can't set the AvailabilityZone parameter if the DB instance is a Multi-AZ
 	// deployment.
 	MultiAZ *bool
+
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to
 	// Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess. For
 	// information on creating a monitoring role, go to Setting Up and Enabling
@@ -327,8 +360,10 @@ type CreateDBInstanceInput struct {
 	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other than
 	// 0, then you must supply a MonitoringRoleArn value.
 	MonitoringRoleArn *string
+
 	// Tags to assign to the DB instance.
 	Tags []*types.Tag
+
 	// A value that indicates whether the DB instance is publicly accessible. When the
 	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
 	// address from within the DB instance's VPC, and to the public IP address from
@@ -358,6 +393,7 @@ type CreateDBInstanceInput struct {
 	//     * If the subnets are part of a VPC that has an Internet gateway
 	// attached to it, the DB instance is public.
 	PubliclyAccessible *bool
+
 	// The password for the master user. The password can include any printable ASCII
 	// character except "/", """, or "@".  <p> <b>Amazon Aurora</b> </p> <p>Not
 	// applicable. The password for the master user is managed by the DB cluster.</p>
@@ -368,6 +404,7 @@ type CreateDBInstanceInput struct {
 	// contain from 8 to 30 characters.</p> <p> <b>PostgreSQL</b> </p> <p>Constraints:
 	// Must contain from 8 to 128 characters.</p>
 	MasterUserPassword *string
+
 	// The AWS KMS key identifier for encryption of Performance Insights data. The KMS
 	// key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
 	// alias for the KMS encryption key. If you do not specify a value for
@@ -375,12 +412,15 @@ type CreateDBInstanceInput struct {
 	// AWS KMS creates the default encryption key for your AWS account. Your AWS
 	// account has a different default encryption key for each AWS Region.
 	PerformanceInsightsKMSKeyId *string
+
 	// Specify the name of the IAM role to be used when making API calls to the
 	// Directory Service.
 	DomainIAMRoleName *string
+
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
 	TdeCredentialArn *string
+
 	// The port number on which the database accepts connections. MySQL Default: 3306
 	// Valid values: 1150-65535 Type: Integer MariaDB Default: 3306 Valid values:
 	// 1150-65535 Type: Integer PostgreSQL Default: 5432 Valid values: 1150-65535 Type:
@@ -388,18 +428,22 @@ type CreateDBInstanceInput struct {
 	// Valid values: 1150-65535 except 1234, 1434, 3260, 3343, 3389, 47001, and
 	// 49152-49156. Amazon Aurora Default: 3306 Valid values: 1150-65535 Type: Integer
 	Port *int32
+
 	// Indicates that the DB instance should be associated with the specified option
 	// group. Permanent options, such as the TDE option for Oracle Advanced Security
 	// TDE, can't be removed from an option group. Also, that option group can't be
 	// removed from a DB instance once it is associated with a DB instance
 	OptionGroupName *string
+
 	// The identifier of the DB cluster that the instance will belong to.
 	DBClusterIdentifier *string
+
 	// For supported engines, indicates that the DB instance should be associated with
 	// the specified CharacterSet.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable.
 	// The character set is managed by the DB cluster. For more information, see
 	// <code>CreateDBCluster</code>.</p>
 	CharacterSetName *string
+
 	// The number of days for which automated backups are retained. Setting this
 	// parameter to a positive number enables backups. Setting this parameter to 0
 	// disables automated backups. Amazon Aurora Not applicable. The retention period
@@ -411,13 +455,16 @@ type CreateDBInstanceInput struct {
 	//     * Can't be set to 0 if the DB instance is a
 	// source to read replicas
 	BackupRetentionPeriod *int32
+
 	// A value that indicates whether the DB instance is encrypted. By default, it
 	// isn't encrypted.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The
 	// encryption for DB instances is managed by the DB cluster.</p>
 	StorageEncrypted *bool
+
 	// The amount of time, in days, to retain Performance Insights data. Valid values
 	// are 7 or 731 (2 years).
 	PerformanceInsightsRetentionPeriod *int32
+
 	// The version number of the database engine to use. For a list of valid engine
 	// versions, use the DescribeDBEngineVersions action. The following are the
 	// database engines and links to information about the major and minor versions
@@ -440,10 +487,12 @@ type CreateDBInstanceInput struct {
 	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported
 	// PostgreSQL Database Versions</a> in the <i>Amazon RDS User Guide.</i> </p>
 	EngineVersion *string
+
 	// Specifies the storage type to be associated with the DB instance. Valid values:
 	// standard | gp2 | io1 If you specify io1, you must also include a value for the
 	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
 	StorageType *string
+
 	// The amount of storage (in gibibytes) to allocate for the DB instance. Type:
 	// Integer Amazon Aurora Not applicable. Aurora cluster volumes automatically grow
 	// as the amount of data in your database increases, though you are only charged
@@ -480,6 +529,7 @@ type CreateDBInstanceInput struct {
 	// </li> <li> <p>Web and Express editions: Must be an integer from 20 to 1024.</p>
 	// </li> </ul> </li> </ul>
 	AllocatedStorage *int32
+
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
@@ -492,10 +542,13 @@ type CreateDBInstanceInput struct {
 	// two consecutive hyphens.
 	//
 	// Example: mydbinstance
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
 }
 
 type CreateDBInstanceOutput struct {
+
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
 	// response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance

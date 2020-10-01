@@ -57,23 +57,33 @@ func (c *Client) DescribeDimensionKeys(ctx context.Context, params *DescribeDime
 }
 
 type DescribeDimensionKeysInput struct {
+
 	// An immutable, AWS Region-unique identifier for a data source. Performance
 	// Insights gathers metrics from this data source. To use an Amazon RDS instance as
 	// a data source, you specify its DbiResourceId value - for example:
 	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
+	//
+	// This member is required.
 	Identifier *string
+
 	// A specification for how to aggregate the data points from a query result. You
 	// must specify a valid dimension group. Performance Insights will return all of
 	// the dimensions within that group, unless you provide the names of specific
 	// dimensions within that group. You can also request that Performance Insights
 	// return a limited number of values for a dimension.
+	//
+	// This member is required.
 	GroupBy *types.DimensionGroup
+
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:  <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of
 	// the number of active sessions for the database engine.</p> </li> <li> <p>
 	// <code>db.sampledload.avg</code> - the raw number of active sessions for the
 	// database engine.</p> </li> </ul>
+	//
+	// This member is required.
 	Metric *string
+
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:  <ul> <li> <p> <code>1</code> (one second)</p> </li>
@@ -83,22 +93,31 @@ type DescribeDimensionKeysInput struct {
 	// <code>PeriodInSeconds</code>, then Performance Insights will choose a value for
 	// you, with a goal of returning roughly 100-200 data points in the response.</p>
 	PeriodInSeconds *int32
+
 	// The date and time specifying the beginning of the requested time series data.
 	// You can't specify a StartTime that's earlier than 7 days ago. The value
 	// specified is inclusive - data points equal to or greater than StartTime will be
 	// returned. The value for StartTime must be earlier than the value for EndTime.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
 	// value specified by MaxRecords.
 	NextToken *string
+
 	// The maximum number of items to return in the response. If more items exist than
 	// the specified MaxRecords value, a pagination token is included in the response
 	// so that the remaining results can be retrieved.
 	MaxResults *int32
+
 	// The AWS service for which Performance Insights will return metrics. The only
 	// valid value for ServiceType is: RDS
+	//
+	// This member is required.
 	ServiceType types.ServiceType
+
 	// One or more filters to apply in the request. Restrictions:
 	//
 	//     * Any number of
@@ -108,31 +127,40 @@ type DescribeDimensionKeysInput struct {
 	//     * A single filter for any other dimension in this dimension
 	// group.
 	Filter map[string]*string
+
 	// For each dimension specified in GroupBy, specify a secondary dimension to
 	// further subdivide the partition keys in the response.
 	PartitionBy *types.DimensionGroup
+
 	// The date and time specifying the end of the requested time series data. The
 	// value specified is exclusive - data points less than (but not equal to) EndTime
 	// will be returned. The value for EndTime must be later than the value for
 	// StartTime.
+	//
+	// This member is required.
 	EndTime *time.Time
 }
 
 type DescribeDimensionKeysOutput struct {
+
 	// The end time for the returned dimension keys, after alignment to a granular
 	// boundary (as specified by PeriodInSeconds). AlignedEndTime will be greater than
 	// or equal to the value of the user-specified Endtime.
 	AlignedEndTime *time.Time
+
 	// The start time for the returned dimension keys, after alignment to a granular
 	// boundary (as specified by PeriodInSeconds). AlignedStartTime will be less than
 	// or equal to the value of the user-specified StartTime.
 	AlignedStartTime *time.Time
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
 	// value specified by MaxRecords.
 	NextToken *string
+
 	// The dimension keys that were requested.
 	Keys []*types.DimensionKeyDescription
+
 	// If PartitionBy was present in the request, PartitionKeys contains the breakdown
 	// of dimension keys by the specified partitions.
 	PartitionKeys []*types.ResponsePartitionKey

@@ -67,10 +67,12 @@ func (c *Client) PutSlotType(ctx context.Context, params *PutSlotTypeInput, optF
 }
 
 type PutSlotTypeInput struct {
+
 	// When set to true a new numbered version of the slot type is created. This is the
 	// same as calling the CreateSlotTypeVersion operation. If you do not specify
 	// createVersion, the default is false.
 	CreateVersion *bool
+
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot type
 	// values. The field can be set to one of the following values:
 	//
@@ -85,9 +87,11 @@ type PutSlotTypeInput struct {
 	// If you don't specify
 	// the valueSelectionStrategy, the default is ORIGINAL_VALUE.
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
+
 	// Configuration information that extends the parent built-in slot type. The
 	// configuration is added to the settings for the parent slot type.
 	SlotTypeConfigurations []*types.SlotTypeConfiguration
+
 	// Identifies a specific revision of the $LATEST version. When you create a new
 	// slot type, leave the checksum field blank. If you specify a checksum you get a
 	// BadRequestException exception. When you want to update a slot type, set the
@@ -95,6 +99,7 @@ type PutSlotTypeInput struct {
 	// version. If you don't specify the  checksum field, or if the checksum does not
 	// match the $LATEST version, you get a PreconditionFailedException exception.
 	Checksum *string
+
 	// The name of the slot type. The name is not case sensitive. The name can't match
 	// a built-in slot type name, or a built-in slot type name with "AMAZON." removed.
 	// For example, because there is a built-in slot type called AMAZON.DATE, you can't
@@ -102,7 +107,10 @@ type PutSlotTypeInput struct {
 	// Slot Type Reference
 	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
 	// in the Alexa Skills Kit.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of EnumerationValue objects that defines the values that the slot type
 	// can take. Each value can have a list of synonyms, which are additional values
 	// that help train the machine learning model about the values that it resolves for
@@ -113,8 +121,10 @@ type PutSlotTypeInput struct {
 	// first value in the resolution list as the slot value. The valueSelectionStrategy
 	// field indicates the option to use.
 	EnumerationValues []*types.EnumerationValue
+
 	// A description of the slot type.
 	Description *string
+
 	// The built-in slot type used as the parent of the slot type. When you define a
 	// parent slot type, the new slot type has all of the same configuration as the
 	// parent. Only AMAZON.AlphaNumeric is supported.
@@ -122,31 +132,42 @@ type PutSlotTypeInput struct {
 }
 
 type PutSlotTypeOutput struct {
+
 	// Configuration information that extends the parent built-in slot type.
 	SlotTypeConfigurations []*types.SlotTypeConfiguration
+
 	// The slot resolution strategy that Amazon Lex uses to determine the value of the
 	// slot. For more information, see PutSlotType ().
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
+
 	// The date that the slot type was updated. When you create a slot type, the
 	// creation date and last update date are the same.
 	LastUpdatedDate *time.Time
+
 	// A description of the slot type.
 	Description *string
+
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string
+
 	// The name of the slot type.
 	Name *string
+
 	// The version of the slot type. For a new slot type, the version is always
 	// $LATEST.
 	Version *string
+
 	// The date that the slot type was created.
 	CreatedDate *time.Time
+
 	// True if a new version of the slot type was created. If the createVersion field
 	// was not specified in the request, the createVersion field is set to false in the
 	// response.
 	CreateVersion *bool
+
 	// The built-in slot type used as the parent of the slot type.
 	ParentSlotTypeSignature *string
+
 	// A list of EnumerationValue objects that defines the values that the slot type
 	// can take.
 	EnumerationValues []*types.EnumerationValue

@@ -18,9 +18,11 @@ import (
 // more information, see Configuring a target account gate
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-account-gating.html).
 type AccountGateResult struct {
+
 	// The reason for the account gate status assigned to this account and Region for
 	// the stack set operation.
 	StatusReason *string
+
 	// The status of the account gate function.
 	//
 	//     * SUCCEEDED: The account gate
@@ -68,9 +70,11 @@ type AccountGateResult struct {
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the AWS CloudFormation User Guide.
 type AccountLimit struct {
+
 	// The name of the account limit. Values: ConcurrentResourcesLimit | StackLimit |
 	// StackOutputsLimit
 	Name *string
+
 	// The value that is associated with the account limit name.
 	Value *int32
 }
@@ -79,10 +83,12 @@ type AccountLimit struct {
 // to AWS Organizations accounts that are added to a target organization or
 // organizational unit (OU).
 type AutoDeployment struct {
+
 	// If set to true, stack resources are retained when an account is removed from a
 	// target organization or OU. If set to false, stack resources are deleted. Specify
 	// only if Enabled is set to True.
 	RetainStacksOnAccountRemoval *bool
+
 	// If set to true, StackSets automatically deploys additional stack instances to
 	// AWS Organizations accounts that are added to a target organization or
 	// organizational unit (OU) in the specified Regions. If an account is removed from
@@ -94,9 +100,11 @@ type AutoDeployment struct {
 // The Change structure describes the changes AWS CloudFormation will perform if
 // you execute the change set.
 type Change struct {
+
 	// A ResourceChange structure that describes the resource and action that AWS
 	// CloudFormation will perform.
 	ResourceChange *ResourceChange
+
 	// The type of entity that AWS CloudFormation changes. Currently, the only entity
 	// type is Resource.
 	Type ChangeType
@@ -105,27 +113,36 @@ type Change struct {
 // The ChangeSetSummary structure describes a change set, its status, and the stack
 // with which it's associated.
 type ChangeSetSummary struct {
+
 	// The state of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE, or
 	// FAILED.
 	Status ChangeSetStatus
+
 	// A description of the change set's status. For example, if your change set is in
 	// the FAILED state, AWS CloudFormation shows the error message.
 	StatusReason *string
+
 	// Descriptive information about the change set.
 	Description *string
+
 	// The ID of the change set.
 	ChangeSetId *string
+
 	// If the change set execution status is AVAILABLE, you can execute the change set.
 	// If you can’t execute the change set, the status indicates why. For example, a
 	// change set might be in an UNAVAILABLE state because AWS CloudFormation is still
 	// creating it or in an OBSOLETE state because the stack was already updated.
 	ExecutionStatus ExecutionStatus
+
 	// The name of the change set.
 	ChangeSetName *string
+
 	// The name of the stack with which the change set is associated.
 	StackName *string
+
 	// The ID of the stack with which the change set is associated.
 	StackId *string
+
 	// The start time when the change set was created, in UTC.
 	CreationTime *time.Time
 }
@@ -137,9 +154,11 @@ type ChangeSetSummary struct {
 // OrganizationalUnitIds. For create and delete operations, specify
 // OrganizationalUnitIds.
 type DeploymentTargets struct {
+
 	// The names of one or more AWS accounts for which you want to deploy stack set
 	// updates.
 	Accounts []*string
+
 	// The organization root ID or organizational unit (OU) IDs to which StackSets
 	// deploys.
 	OrganizationalUnitIds []*string
@@ -147,52 +166,69 @@ type DeploymentTargets struct {
 
 // The Export structure describes the exported output values for a stack.
 type Export struct {
+
 	// The name of exported output value. Use this name and the Fn::ImportValue
 	// function to import the associated value into other stacks. The name is defined
 	// in the Export field in the associated stack's Outputs section.
 	Name *string
+
 	// The value of the exported output, such as a resource physical ID. This value is
 	// defined in the Export field in the associated stack's Outputs section.
 	Value *string
+
 	// The stack that contains the exported output name and value.
 	ExportingStackId *string
 }
 
 // Contains logging configuration information for a type.
 type LoggingConfig struct {
+
 	// The ARN of the role that CloudFormation should assume when sending log entries
 	// to CloudWatch logs.
+	//
+	// This member is required.
 	LogRoleArn *string
+
 	// The Amazon CloudWatch log group to which CloudFormation sends error logging
 	// information when invoking the type's handlers.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 
 // The Output data type.
 type Output struct {
+
 	// The value associated with the output.
 	OutputValue *string
+
 	// The key associated with the output.
 	OutputKey *string
+
 	// The name of the export associated with the output.
 	ExportName *string
+
 	// User defined description associated with the output.
 	Description *string
 }
 
 // The Parameter data type.
 type Parameter struct {
+
 	// The key associated with the parameter. If you don't specify a key and value for
 	// a particular parameter, AWS CloudFormation uses the default value that is
 	// specified in your template.
 	ParameterKey *string
+
 	// Read-only. The value that corresponds to a Systems Manager parameter key. This
 	// field is returned only for SSM parameter types
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types)
 	// in the template.
 	ResolvedValue *string
+
 	// The input value associated with the parameter.
 	ParameterValue *string
+
 	// During a stack update, use the existing parameter value that the stack is using
 	// for a given parameter key. If you specify true, do not specify a parameter
 	// value.
@@ -203,23 +239,30 @@ type Parameter struct {
 // Although other constraints might be defined in the stack template, AWS
 // CloudFormation returns only the AllowedValues property.
 type ParameterConstraints struct {
+
 	// A list of values that are permitted for a parameter.
 	AllowedValues []*string
 }
 
 // The ParameterDeclaration data type.
 type ParameterDeclaration struct {
+
 	// The criteria that AWS CloudFormation uses to validate parameter values.
 	ParameterConstraints *ParameterConstraints
+
 	// The description that is associate with the parameter.
 	Description *string
+
 	// The type of parameter.
 	ParameterType *string
+
 	// Flag that indicates whether the parameter value is shown as plain text in logs
 	// and in the AWS Management Console.
 	NoEcho *bool
+
 	// The default value of the parameter.
 	DefaultValue *string
+
 	// The name that is associated with the parameter.
 	ParameterKey *string
 }
@@ -230,9 +273,15 @@ type ParameterDeclaration struct {
 // resource. Each context key-value pair specifies a resource that contains the
 // targeted resource.
 type PhysicalResourceIdContextKeyValuePair struct {
+
 	// The resource context value.
+	//
+	// This member is required.
 	Value *string
+
 	// The resource context key.
+	//
+	// This member is required.
 	Key *string
 }
 
@@ -243,13 +292,23 @@ type PhysicalResourceIdContextKeyValuePair struct {
 // Unregulated Configuration Changes to Stacks and Resources
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 type PropertyDifference struct {
+
 	// The fully-qualified path to the resource property.
+	//
+	// This member is required.
 	PropertyPath *string
+
 	// The expected property value of the resource property, as defined in the stack
 	// template and any values specified as template parameters.
+	//
+	// This member is required.
 	ExpectedValue *string
+
 	// The actual property value of the resource property.
+	//
+	// This member is required.
 	ActualValue *string
+
 	// The type of property difference.
 	//
 	//     * ADD: A value has been added to a
@@ -261,15 +320,19 @@ type PropertyDifference struct {
 	//     *
 	// NOT_EQUAL: The current property value differs from its expected value (as
 	// defined in the stack template and any values specified as template parameters).
+	//
+	// This member is required.
 	DifferenceType DifferenceType
 }
 
 // The ResourceChange structure describes the resource and the action that AWS
 // CloudFormation will perform on it if you execute this change set.
 type ResourceChange struct {
+
 	// The resource's physical ID (resource name). Resources that you are adding don't
 	// have physical IDs because they haven't been created.
 	PhysicalResourceId *string
+
 	// For the Modify action, indicates whether AWS CloudFormation will replace the
 	// resource by creating a new one and deleting the old one. This value depends on
 	// the value of the RequiresRecreation property in the ResourceTargetDefinition
@@ -281,18 +344,23 @@ type ResourceChange struct {
 	// RequiresRecreation value of Always has the most impact, followed by
 	// Conditionally, and then Never.
 	Replacement Replacement
+
 	// The action that AWS CloudFormation takes on the resource, such as Add (adds a
 	// new resource), Modify (changes a resource), or Remove (deletes a resource).
 	Action ChangeAction
+
 	// The type of AWS CloudFormation resource, such as AWS::S3::Bucket.
 	ResourceType *string
+
 	// For the Modify action, indicates which resource attribute is triggering this
 	// update, such as a change in the resource attribute's Metadata, Properties, or
 	// Tags.
 	Scope []ResourceAttribute
+
 	// For the Modify action, a list of ResourceChangeDetail structures that describes
 	// the changes that AWS CloudFormation will make to the resource.
 	Details []*ResourceChangeDetail
+
 	// The resource's logical ID, which is defined in the stack's template.
 	LogicalResourceId *string
 }
@@ -300,6 +368,7 @@ type ResourceChange struct {
 // For a resource with Modify as the action, the ResourceChange structure describes
 // the changes AWS CloudFormation will make to that resource.
 type ResourceChangeDetail struct {
+
 	// The group to which the CausingEntity value belongs. There are five entity
 	// groups:
 	//
@@ -325,15 +394,18 @@ type ResourceChangeDetail struct {
 	// template might have changed. Changes to a nested stack's template aren't visible
 	// to AWS CloudFormation until you run an update on the parent stack.
 	ChangeSource ChangeSource
+
 	// The identity of the entity that triggered this change. This entity is a member
 	// of the group that is specified by the ChangeSource field. For example, if you
 	// modified the value of the KeyPairName parameter, the CausingEntity is the name
 	// of the parameter (KeyPairName). If the ChangeSource value is DirectModification,
 	// no value is given for CausingEntity.
 	CausingEntity *string
+
 	// A ResourceTargetDefinition structure that describes the field that AWS
 	// CloudFormation will change and whether the resource will be recreated.
 	Target *ResourceTargetDefinition
+
 	// Indicates whether AWS CloudFormation can determine the target value, and whether
 	// the target value will change before you execute a change set. For Static
 	// evaluations, AWS CloudFormation can determine that the target value will change,
@@ -354,13 +426,16 @@ type ResourceChangeDetail struct {
 // example, all AWS::S3::Bucket resources) and the properties you can provide
 // during the import to identify resources of that type.
 type ResourceIdentifierSummary struct {
+
 	// The logical IDs of the target resources of the specified ResourceType, as
 	// defined in the import template.
 	LogicalResourceIds []*string
+
 	// The resource properties you can provide during the import to identify your
 	// target resources. For example, BucketName is a possible identifier property for
 	// AWS::S3::Bucket resources.
 	ResourceIdentifiers []*string
+
 	// The template resource type of the target resources, such as AWS::S3::Bucket.
 	ResourceType *string
 }
@@ -368,9 +443,11 @@ type ResourceIdentifierSummary struct {
 // The field that AWS CloudFormation will change, such as the name of a resource's
 // property, and whether the resource will be recreated.
 type ResourceTargetDefinition struct {
+
 	// If the Attribute value is Properties, the name of the property. For all other
 	// attributes, the value is null.
 	Name *string
+
 	// If the Attribute value is Properties, indicates whether a change to this
 	// property causes the resource to be recreated. The value can be Never, Always, or
 	// Conditionally. To determine the conditions for a Conditionally recreation, see
@@ -378,6 +455,7 @@ type ResourceTargetDefinition struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	RequiresRecreation RequiresRecreation
+
 	// Indicates which resource attribute is triggering this update, such as a change
 	// in the resource attribute's Metadata, Properties, or Tags.
 	Attribute ResourceAttribute
@@ -385,16 +463,25 @@ type ResourceTargetDefinition struct {
 
 // Describes the target resource of an import operation.
 type ResourceToImport struct {
+
 	// The logical ID of the target resource as specified in the template.
+	//
+	// This member is required.
 	LogicalResourceId *string
+
 	// A key-value pair that identifies the target resource. The key is an identifier
 	// property (for example, BucketName for AWS::S3::Bucket resources) and the value
 	// is the actual property value (for example, MyS3Bucket).
+	//
+	// This member is required.
 	ResourceIdentifier map[string]*string
+
 	// The type of resource to import into your stack, such as AWS::S3::Bucket. For a
 	// list of supported resource types, see Resources that support import operations
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html)
 	// in the AWS CloudFormation User Guide.
+	//
+	// This member is required.
 	ResourceType *string
 }
 
@@ -407,6 +494,7 @@ type ResourceToImport struct {
 // Operations
 // (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html).
 type RollbackConfiguration struct {
+
 	// The triggers to monitor during stack creation or update actions. By default, AWS
 	// CloudFormation saves the rollback triggers specified for a stack and applies
 	// them to any subsequent update operations for the stack, unless you specify
@@ -430,6 +518,7 @@ type RollbackConfiguration struct {
 	// a specified trigger is missing, the entire stack operation fails and is rolled
 	// back.
 	RollbackTriggers []*RollbackTrigger
+
 	// The amount of time, in minutes, during which CloudFormation should monitor all
 	// the rollback triggers after the stack creation or update operation deploys all
 	// necessary resources. The default is 0 minutes. If you specify a monitoring
@@ -451,30 +540,42 @@ type RollbackConfiguration struct {
 // operation or within the specified monitoring period afterwards, CloudFormation
 // rolls back the entire stack operation.
 type RollbackTrigger struct {
+
 	// The resource type of the rollback trigger. Currently, AWS::CloudWatch::Alarm
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html)
 	// is the only supported resource type.
+	//
+	// This member is required.
 	Type *string
+
 	// The Amazon Resource Name (ARN) of the rollback trigger. If a specified trigger
 	// is missing, the entire stack operation fails and is rolled back.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // The Stack data type.
 type Stack struct {
+
 	// A list of output structures.
 	Outputs []*Output
+
 	// A list of Parameter structures.
 	Parameters []*Parameter
+
 	// The rollback triggers for AWS CloudFormation to monitor during stack creation
 	// and updating operations, and for the specified monitoring period afterwards.
 	RollbackConfiguration *RollbackConfiguration
+
 	// The time the stack was deleted.
 	DeletionTime *time.Time
+
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that is associated with the stack. During a stack operation, AWS
 	// CloudFormation uses this role's credentials to make calls on your behalf.
 	RoleARN *string
+
 	// Whether termination protection is enabled for the stack. For nested stacks
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
 	// termination protection is set on the root stack and cannot be changed directly
@@ -483,6 +584,7 @@ type Stack struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
 	// in the AWS CloudFormation User Guide.
 	EnableTerminationProtection *bool
+
 	// Boolean to enable or disable rollback on stack creation failures:
 	//
 	//     * true:
@@ -490,25 +592,37 @@ type Stack struct {
 	//
 	//     * false: enable rollback
 	DisableRollback *bool
+
 	// The time at which the stack was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The time the stack was last updated. This field will only be returned if the
 	// stack has been updated at least once.
 	LastUpdatedTime *time.Time
+
 	// Success/failure message associated with the stack status.
 	StackStatusReason *string
+
 	// The capabilities allowed in the stack.
 	Capabilities []Capability
+
 	// Current status of the stack.
+	//
+	// This member is required.
 	StackStatus StackStatus
+
 	// A user-defined description associated with the stack.
 	Description *string
+
 	// For nested stacks--stacks created as resources for another stack--the stack ID
 	// of the top-level stack to which the nested stack ultimately belongs. For more
 	// information, see Working with Nested Stacks
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
 	// in the AWS CloudFormation User Guide.
 	RootId *string
+
 	// For nested stacks--stacks created as resources for another stack--the stack ID
 	// of the direct parent of this stack. For the first level of nested stacks, the
 	// root stack is also the parent stack. For more information, see Working with
@@ -516,18 +630,27 @@ type Stack struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
 	// in the AWS CloudFormation User Guide.
 	ParentId *string
+
 	// SNS topic ARNs to which stack related events are published.
 	NotificationARNs []*string
+
 	// The unique ID of the change set.
 	ChangeSetId *string
+
 	// A list of Tags that specify information about the stack.
 	Tags []*Tag
+
 	// The amount of time within which stack creation should complete.
 	TimeoutInMinutes *int32
+
 	// The name associated with the stack.
+	//
+	// This member is required.
 	StackName *string
+
 	// Unique identifier of the stack.
 	StackId *string
+
 	// Information on whether a stack's actual configuration differs, or has drifted,
 	// from it's expected configuration, as defined in the stack template and any
 	// values specified as template parameters. For more information, see Detecting
@@ -541,9 +664,11 @@ type Stack struct {
 // and any values specified as template parameters. A stack is considered to have
 // drifted if one or more of its resources have drifted.
 type StackDriftInformation struct {
+
 	// Most recent time when a drift detection operation was initiated on the stack, or
 	// any of its individual resources that support drift detection.
 	LastCheckTimestamp *time.Time
+
 	// Status of the stack's actual configuration compared to its expected template
 	// configuration.
 	//
@@ -559,6 +684,8 @@ type StackDriftInformation struct {
 	//
 	//
 	// * UNKNOWN: This value is reserved for future use.
+	//
+	// This member is required.
 	StackDriftStatus StackDriftStatus
 }
 
@@ -567,6 +694,7 @@ type StackDriftInformation struct {
 // and any values specified as template parameters. A stack is considered to have
 // drifted if one or more of its resources have drifted.
 type StackDriftInformationSummary struct {
+
 	// Status of the stack's actual configuration compared to its expected template
 	// configuration.
 	//
@@ -582,7 +710,10 @@ type StackDriftInformationSummary struct {
 	//
 	//
 	// * UNKNOWN: This value is reserved for future use.
+	//
+	// This member is required.
 	StackDriftStatus StackDriftStatus
+
 	// Most recent time when a drift detection operation was initiated on the stack, or
 	// any of its individual resources that support drift detection.
 	LastCheckTimestamp *time.Time
@@ -590,6 +721,7 @@ type StackDriftInformationSummary struct {
 
 // The StackEvent data type.
 type StackEvent struct {
+
 	// The token passed to the operation that generated this event. All events
 	// triggered by a given stack operation are assigned the same client request token,
 	// which you can use to track operations. For example, if you execute a CreateStack
@@ -602,26 +734,44 @@ type StackEvent struct {
 	// assigned the same token in the following format:
 	// Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002.
 	ClientRequestToken *string
+
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string
+
 	// The logical name of the resource specified in the template.
 	LogicalResourceId *string
+
 	// BLOB of the properties used to create the resource.
 	ResourceProperties *string
+
 	// Time the status was updated.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// The name associated with a stack.
+	//
+	// This member is required.
 	StackName *string
+
 	// The unique ID name of the instance of the stack.
+	//
+	// This member is required.
 	StackId *string
+
 	// The unique ID of this event.
+	//
+	// This member is required.
 	EventId *string
+
 	// Current status of the resource.
 	ResourceStatus ResourceStatus
+
 	// Type of resource. (For more information, go to  AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
 	ResourceType *string
+
 	// The name or unique identifier associated with the physical instance of the
 	// resource.
 	PhysicalResourceId *string
@@ -635,8 +785,10 @@ type StackEvent struct {
 // contains the ID of its associated stack set, as well as the ID of the actual
 // stack and the stack status.
 type StackInstance struct {
+
 	// The name of the AWS Region that the stack instance is associated with.
 	Region *string
+
 	// Status of the stack instance's actual configuration compared to the expected
 	// template and parameter configuration of the stack set to which it belongs.
 	//
@@ -655,18 +807,23 @@ type StackInstance struct {
 	//
 	//     * UNKNOWN: This value is reserved for future use.
 	DriftStatus StackDriftStatus
+
 	// A list of parameters from the stack set template whose values have been
 	// overridden in this stack instance.
 	ParameterOverrides []*Parameter
+
 	// The explanation for the specific status code that is assigned to this stack
 	// instance.
 	StatusReason *string
+
 	// The ID of the stack instance.
 	StackId *string
+
 	// Most recent time when CloudFormation performed a drift detection operation on
 	// the stack instance. This value will be NULL for any stack instance on which
 	// drift detection has not yet been performed.
 	LastDriftCheckTimestamp *time.Time
+
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
 	//
@@ -689,22 +846,27 @@ type StackInstance struct {
 	//     * CURRENT: The stack
 	// is currently up to date with the stack set.
 	Status StackInstanceStatus
+
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string
+
 	// The name or unique ID of the stack set that the stack instance is associated
 	// with.
 	StackSetId *string
+
 	// [Self-managed permissions] The name of the AWS account that the stack instance
 	// is associated with.
 	Account *string
+
 	// The detailed status of the stack instance.
 	StackInstanceStatus *StackInstanceComprehensiveStatus
 }
 
 // The detailed status of the stack instance.
 type StackInstanceComprehensiveStatus struct {
+
 	// * CANCELLED: The operation in the specified account and Region has been
 	// cancelled. This is either because a user has stopped the stack set operation, or
 	// because the failure tolerance of the stack set operation has been exceeded.
@@ -734,14 +896,17 @@ type StackInstanceComprehensiveStatus struct {
 
 // The status that stack instances are filtered by.
 type StackInstanceFilter struct {
+
 	// The type of filter to apply.
 	Name StackInstanceFilterName
+
 	// The status to filter by.
 	Values *string
 }
 
 // The structure that contains summary information about a stack instance.
 type StackInstanceSummary struct {
+
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
 	//
@@ -764,24 +929,31 @@ type StackInstanceSummary struct {
 	//     * CURRENT: The stack
 	// is currently up to date with the stack set.
 	Status StackInstanceStatus
+
 	// The explanation for the specific status code assigned to this stack instance.
 	StatusReason *string
+
 	// Most recent time when CloudFormation performed a drift detection operation on
 	// the stack instance. This value will be NULL for any stack instance on which
 	// drift detection has not yet been performed.
 	LastDriftCheckTimestamp *time.Time
+
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string
+
 	// The name or unique ID of the stack set that the stack instance is associated
 	// with.
 	StackSetId *string
+
 	// [Self-managed permissions] The name of the AWS account that the stack instance
 	// is associated with.
 	Account *string
+
 	// The detailed status of the stack instance.
 	StackInstanceStatus *StackInstanceComprehensiveStatus
+
 	// Status of the stack instance's actual configuration compared to the expected
 	// template and parameter configuration of the stack set to which it belongs.
 	//
@@ -800,76 +972,115 @@ type StackInstanceSummary struct {
 	//
 	//     * UNKNOWN: This value is reserved for future use.
 	DriftStatus StackDriftStatus
+
 	// The ID of the stack instance.
 	StackId *string
+
 	// The name of the AWS Region that the stack instance is associated with.
 	Region *string
 }
 
 // The StackResource data type.
 type StackResource struct {
+
 	// The logical name of the resource specified in the template.
+	//
+	// This member is required.
 	LogicalResourceId *string
+
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string
+
 	// User defined description associated with the resource.
 	Description *string
+
 	// Information about whether the resource's actual configuration differs, or has
 	// drifted, from its expected configuration, as defined in the stack template and
 	// any values specified as template parameters. For more information, see Detecting
 	// Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackResourceDriftInformation
+
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation.
 	PhysicalResourceId *string
+
 	// Current status of the resource.
+	//
+	// This member is required.
 	ResourceStatus ResourceStatus
+
 	// Type of resource. (For more information, go to  AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
+	//
+	// This member is required.
 	ResourceType *string
+
 	// Time the status was updated.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// The name associated with the stack.
 	StackName *string
+
 	// Unique identifier of the stack.
 	StackId *string
 }
 
 // Contains detailed information about the specified stack resource.
 type StackResourceDetail struct {
+
 	// Information about whether the resource's actual configuration differs, or has
 	// drifted, from its expected configuration, as defined in the stack template and
 	// any values specified as template parameters. For more information, see Detecting
 	// Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackResourceDriftInformation
+
 	// Unique identifier of the stack.
 	StackId *string
+
 	// The name associated with the stack.
 	StackName *string
+
 	// The logical name of the resource specified in the template.
+	//
+	// This member is required.
 	LogicalResourceId *string
+
 	// Time the status was updated.
+	//
+	// This member is required.
 	LastUpdatedTimestamp *time.Time
+
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation.
 	PhysicalResourceId *string
+
 	// The content of the Metadata attribute declared for the resource. For more
 	// information, see Metadata Attribute
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html)
 	// in the AWS CloudFormation User Guide.
 	Metadata *string
+
 	// User defined description associated with the resource.
 	Description *string
+
 	// Type of resource. ((For more information, go to  AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
+	//
+	// This member is required.
 	ResourceType *string
+
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string
+
 	// Current status of the resource.
+	//
+	// This member is required.
 	ResourceStatus ResourceStatus
 }
 
@@ -887,18 +1098,24 @@ type StackResourceDetail struct {
 // DetectStackDrift () to detect drift on all resources in a given stack that
 // support drift detection.
 type StackResourceDrift struct {
+
 	// The logical name of the resource specified in the template.
+	//
+	// This member is required.
 	LogicalResourceId *string
+
 	// Context information that enables AWS CloudFormation to uniquely identify a
 	// resource. AWS CloudFormation uses context key-value pairs in cases where a
 	// resource's logical and physical IDs are not enough to uniquely identify that
 	// resource. Each context key-value pair specifies a unique resource that contains
 	// the targeted resource.
 	PhysicalResourceIdContext []*PhysicalResourceIdContextKeyValuePair
+
 	// A JSON structure containing the actual property values of the stack resource.
 	// For resources whose StackResourceDriftStatus is DELETED, this structure will not
 	// be present.
 	ActualProperties *string
+
 	// Status of the resource's actual configuration compared to its expected
 	// configuration
 	//
@@ -915,22 +1132,36 @@ type StackResourceDrift struct {
 	//
 	//     * NOT_CHECKED: AWS CloudFormation does not currently return
 	// this value.
+	//
+	// This member is required.
 	StackResourceDriftStatus StackResourceDriftStatus
+
 	// The type of the resource.
+	//
+	// This member is required.
 	ResourceType *string
+
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation.
 	PhysicalResourceId *string
+
 	// Time at which AWS CloudFormation performed drift detection on the stack
 	// resource.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// A JSON structure containing the expected property values of the stack resource,
 	// as defined in the stack template and any values specified as template
 	// parameters. For resources whose StackResourceDriftStatus is DELETED, this
 	// structure will not be present.
 	ExpectedProperties *string
+
 	// The ID of the stack.
+	//
+	// This member is required.
 	StackId *string
+
 	// A collection of the resource properties whose actual values differ from their
 	// expected values. These will be present only for resources whose
 	// StackResourceDriftStatus is MODIFIED.
@@ -940,6 +1171,7 @@ type StackResourceDrift struct {
 // Contains information about whether the resource's actual configuration differs,
 // or has drifted, from its expected configuration.
 type StackResourceDriftInformation struct {
+
 	// Status of the resource's actual configuration compared to its expected
 	// configuration
 	//
@@ -958,7 +1190,10 @@ type StackResourceDriftInformation struct {
 	//
 	// * IN_SYNC: The resources's actual configuration matches its expected
 	// configuration.
+	//
+	// This member is required.
 	StackResourceDriftStatus StackResourceDriftStatus
+
 	// When AWS CloudFormation last checked if the resource had drifted from its
 	// expected configuration.
 	LastCheckTimestamp *time.Time
@@ -967,9 +1202,11 @@ type StackResourceDriftInformation struct {
 // Summarizes information about whether the resource's actual configuration
 // differs, or has drifted, from its expected configuration.
 type StackResourceDriftInformationSummary struct {
+
 	// When AWS CloudFormation last checked if the resource had drifted from its
 	// expected configuration.
 	LastCheckTimestamp *time.Time
+
 	// Status of the resource's actual configuration compared to its expected
 	// configuration
 	//
@@ -993,31 +1230,48 @@ type StackResourceDriftInformationSummary struct {
 	//
 	//     * IN_SYNC: The resources's actual
 	// configuration matches its expected configuration.
+	//
+	// This member is required.
 	StackResourceDriftStatus StackResourceDriftStatus
 }
 
 // Contains high-level information about the specified stack resource.
 type StackResourceSummary struct {
+
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string
+
 	// The logical name of the resource specified in the template.
+	//
+	// This member is required.
 	LogicalResourceId *string
+
 	// The name or unique identifier that corresponds to a physical instance ID of the
 	// resource.
 	PhysicalResourceId *string
+
 	// Time the status was updated.
+	//
+	// This member is required.
 	LastUpdatedTimestamp *time.Time
+
 	// Type of resource. (For more information, go to  AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
+	//
+	// This member is required.
 	ResourceType *string
+
 	// Information about whether the resource's actual configuration differs, or has
 	// drifted, from its expected configuration, as defined in the stack template and
 	// any values specified as template parameters. For more information, see Detecting
 	// Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackResourceDriftInformationSummary
+
 	// Current status of the resource.
+	//
+	// This member is required.
 	ResourceStatus ResourceStatus
 }
 
@@ -1026,17 +1280,22 @@ type StackResourceSummary struct {
 // CloudFormation template. In the stack set, you specify the template to use, as
 // well as any parameters and capabilities that the template requires.
 type StackSet struct {
+
 	// The status of the stack set.
 	Status StackSetStatus
+
 	// The name that's associated with the stack set.
 	StackSetName *string
+
 	// The name of the IAM execution role used to create or update the stack set. Use
 	// customized execution roles to control which stack resources users and groups can
 	// include in their stack sets.
 	ExecutionRoleName *string
+
 	// A description of the stack set that you specify when the stack set is created or
 	// updated.
 	Description *string
+
 	// The Amazon Resource Number (ARN) of the IAM role used to create or update the
 	// stack set. Use customized administrator roles to control which users or groups
 	// can manage specific stack sets within the same administrator account. For more
@@ -1044,18 +1303,22 @@ type StackSet struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
 	// in the AWS CloudFormation User Guide.
 	AdministrationRoleARN *string
+
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitIds []*string
+
 	// A list of tags that specify information about the stack set. A maximum number of
 	// 50 tags can be specified.
 	Tags []*Tag
+
 	// Detailed information about the drift status of the stack set. For stack sets,
 	// contains information about the last completed drift operation performed on the
 	// stack set. Information about drift operations currently in progress is not
 	// included.
 	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails
+
 	// Describes how the IAM roles required for stack set operations are created.
 	//
 	//
@@ -1070,12 +1333,15 @@ type StackSet struct {
 	// information, see Grant Service-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel PermissionModels
+
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
 	// to AWS Organizations accounts that are added to a target organization or
 	// organizational unit (OU).
 	AutoDeployment *AutoDeployment
+
 	// The ID of the stack set.
 	StackSetId *string
+
 	// The capabilities that are allowed in the stack set. Some stack set templates
 	// might include resources that can affect permissions in your AWS account—for
 	// example, by creating new AWS Identity and Access Management (IAM) users. For
@@ -1083,10 +1349,13 @@ type StackSet struct {
 	// Templates.
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
 	Capabilities []Capability
+
 	// The Amazon Resource Number (ARN) of the stack set.
 	StackSetARN *string
+
 	// A list of input parameters for a stack set.
 	Parameters []*Parameter
+
 	// The structure that contains the body of the template that was used to create or
 	// update the stack set.
 	TemplateBody *string
@@ -1101,6 +1370,7 @@ type StackSet struct {
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html)
 // in the AWS CloudFormation User Guide.
 type StackSetDriftDetectionDetails struct {
+
 	// The total number of stack instances belonging to this stack set. The total
 	// number of stack instances is equal to the total of:
 	//
@@ -1115,14 +1385,17 @@ type StackSetDriftDetectionDetails struct {
 	//
 	//     * Stack instances currently being checked for drift.
 	TotalStackInstancesCount *int32
+
 	// The number of stack instances that have drifted from the expected template and
 	// parameter configuration of the stack set. A stack instance is considered to have
 	// drifted if one or more of the resources in the associated stack do not match
 	// their expected configuration.
 	DriftedStackInstancesCount *int32
+
 	// The number of stack instances which match the expected template and parameter
 	// configuration of the stack set.
 	InSyncStackInstancesCount *int32
+
 	// The status of the stack set drift detection operation.
 	//
 	//     * COMPLETED: The
@@ -1141,6 +1414,7 @@ type StackSetDriftDetectionDetails struct {
 	//     * STOPPED: The
 	// user has cancelled the drift detection operation.
 	DriftDetectionStatus StackSetDriftDetectionStatus
+
 	// Status of the stack set's actual configuration compared to its expected template
 	// and parameter configuration. A stack set is considered to have drifted if one or
 	// more of its stack instances have drifted from their expected template and
@@ -1158,10 +1432,13 @@ type StackSetDriftDetectionDetails struct {
 	// IN_SYNC: All of the stack instances belonging to the stack set stack match from
 	// the expected template and parameter configuration.
 	DriftStatus StackSetDriftStatus
+
 	// The number of stack instances that are currently being checked for drift.
 	InProgressStackInstancesCount *int32
+
 	// The number of stack instances for which the drift detection operation failed.
 	FailedStackInstancesCount *int32
+
 	// Most recent time when CloudFormation performed a drift detection operation on
 	// the stack set. This value will be NULL for any stack set on which drift
 	// detection has not yet been performed.
@@ -1170,8 +1447,10 @@ type StackSetDriftDetectionDetails struct {
 
 // The structure that contains information about a stack set operation.
 type StackSetOperation struct {
+
 	// The ID of the stack set.
 	StackSetId *string
+
 	// The status of the operation.
 	//
 	//     * FAILED: The operation exceeded the specified
@@ -1201,26 +1480,33 @@ type StackSetOperation struct {
 	// SUCCEEDED: The operation completed creating or updating all the specified stacks
 	// without exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
+
 	// For stack set operations of action type DELETE, specifies whether to remove the
 	// stack instances from the specified stack set, but doesn't delete the stacks. You
 	// can't reassociate a retained stack, or add an existing, saved stack to a new
 	// stack set.
 	RetainStacks *bool
+
 	// The preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *StackSetOperationPreferences
+
 	// The time at which the stack set operation ended, across all accounts and Regions
 	// specified. Note that this doesn't necessarily mean that the stack set operation
 	// was successful, or even attempted, in each account or Region.
 	EndTimestamp *time.Time
+
 	// [Service-managed permissions] The AWS Organizations accounts affected by the
 	// stack operation.
 	DeploymentTargets *DeploymentTargets
+
 	// The name of the IAM execution role used to create or update the stack set. Use
 	// customized execution roles to control which stack resources users and groups can
 	// include in their stack sets.
 	ExecutionRoleName *string
+
 	// The unique ID of a stack set operation.
 	OperationId *string
+
 	// Detailed information about the drift status of the stack set. This includes
 	// information about drift operations currently being performed on the stack set.
 	// this information will only be present for stack set operations whose Action type
@@ -1229,17 +1515,20 @@ type StackSetOperation struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html)
 	// in the AWS CloudFormation User Guide.
 	StackSetDriftDetectionDetails *StackSetDriftDetectionDetails
+
 	// The type of stack set operation: CREATE, UPDATE, or DELETE. Create and delete
 	// operations affect only the specified stack set instances that are associated
 	// with the specified stack set. Update operations affect both the stack set
 	// itself, as well as all associated stack set instances.
 	Action StackSetOperationAction
+
 	// The time at which the operation was initiated. Note that the creation times for
 	// the stack set operation might differ from the creation time of the individual
 	// stacks themselves. This is because AWS CloudFormation needs to perform
 	// preparatory work for the operation, such as dispatching the work to the
 	// requested Regions, before actually creating the first stacks.
 	CreationTimestamp *time.Time
+
 	// The Amazon Resource Number (ARN) of the IAM role used to perform this stack set
 	// operation. Use customized administrator roles to control which users or groups
 	// can manage specific stack sets within the same administrator account. For more
@@ -1254,6 +1543,7 @@ type StackSetOperation struct {
 // tolerance, see Stack set operation options
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
 type StackSetOperationPreferences struct {
+
 	// The maximum number of accounts in which to perform this operation at one time.
 	// This is dependent on the value of FailureToleranceCount. MaxConcurrentCount is
 	// at most one more than the FailureToleranceCount. Note that this setting lets you
@@ -1262,14 +1552,17 @@ type StackSetOperationPreferences struct {
 	// due to service throttling. Conditional: You must specify either
 	// MaxConcurrentCount or MaxConcurrentPercentage, but not both.
 	MaxConcurrentCount *int32
+
 	// The order of the Regions in where you want to perform the stack operation.
 	RegionOrder []*string
+
 	// The number of accounts, per Region, for which this operation can fail before AWS
 	// CloudFormation stops the operation in that Region. If the operation is stopped
 	// in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent
 	// Regions. Conditional: You must specify either FailureToleranceCount or
 	// FailureTolerancePercentage (but not both).
 	FailureToleranceCount *int32
+
 	// The percentage of accounts, per Region, for which this stack operation can fail
 	// before AWS CloudFormation stops the operation in that Region. If the operation
 	// is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any
@@ -1278,6 +1571,7 @@ type StackSetOperationPreferences struct {
 	// Conditional: You must specify either FailureToleranceCount or
 	// FailureTolerancePercentage, but not both.
 	FailureTolerancePercentage *int32
+
 	// The maximum percentage of accounts in which to perform this operation at one
 	// time. When calculating the number of accounts based on the specified percentage,
 	// AWS CloudFormation rounds down to the next whole number. This is true except in
@@ -1293,13 +1587,17 @@ type StackSetOperationPreferences struct {
 // The structure that contains information about a specified operation's results
 // for a given account in a given Region.
 type StackSetOperationResultSummary struct {
+
 	// The results of the account gate function AWS CloudFormation invokes, if present,
 	// before proceeding with stack set operations in an account
 	AccountGateResult *AccountGateResult
+
 	// The reason for the assigned result status.
 	StatusReason *string
+
 	// The name of the AWS Region for this operation result.
 	Region *string
+
 	// The result status of the stack set operation for the given account in the given
 	// Region.
 	//
@@ -1322,9 +1620,11 @@ type StackSetOperationResultSummary struct {
 	//     * SUCCEEDED: The operation in the specified account and
 	// Region completed successfully.
 	Status StackSetOperationResultStatus
+
 	// [Self-managed permissions] The name of the AWS account for this operation
 	// result.
 	Account *string
+
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
@@ -1333,11 +1633,13 @@ type StackSetOperationResultSummary struct {
 
 // The structures that contain summary information about the specified operation.
 type StackSetOperationSummary struct {
+
 	// The type of operation: CREATE, UPDATE, or DELETE. Create and delete operations
 	// affect only the specified stack instances that are associated with the specified
 	// stack set. Update operations affect both the stack set itself as well as all
 	// associated stack set instances.
 	Action StackSetOperationAction
+
 	// The overall status of the operation.
 	//
 	//     * FAILED: The operation exceeded the
@@ -1367,14 +1669,17 @@ type StackSetOperationSummary struct {
 	// SUCCEEDED: The operation completed creating or updating all the specified stacks
 	// without exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
+
 	// The unique ID of the stack set operation.
 	OperationId *string
+
 	// The time at which the operation was initiated. Note that the creation times for
 	// the stack set operation might differ from the creation time of the individual
 	// stacks themselves. This is because AWS CloudFormation needs to perform
 	// preparatory work for the operation, such as dispatching the work to the
 	// requested Regions, before actually creating the first stacks.
 	CreationTimestamp *time.Time
+
 	// The time at which the stack set operation ended, across all accounts and Regions
 	// specified. Note that this doesn't necessarily mean that the stack set operation
 	// was successful, or even attempted, in each account or Region.
@@ -1383,17 +1688,22 @@ type StackSetOperationSummary struct {
 
 // The structures that contain summary information about the specified stack set.
 type StackSetSummary struct {
+
 	// The status of the stack set.
 	Status StackSetStatus
+
 	// [Service-managed permissions] Describes whether StackSets automatically deploys
 	// to AWS Organizations accounts that are added to a target organizational unit
 	// (OU).
 	AutoDeployment *AutoDeployment
+
 	// A description of the stack set that you specify when the stack set is created or
 	// updated.
 	Description *string
+
 	// The ID of the stack set.
 	StackSetId *string
+
 	// Describes how the IAM roles required for stack set operations are created.
 	//
 	//
@@ -1408,12 +1718,15 @@ type StackSetSummary struct {
 	// information, see Grant Service-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel PermissionModels
+
 	// Most recent time when CloudFormation performed a drift detection operation on
 	// the stack set. This value will be NULL for any stack set on which drift
 	// detection has not yet been performed.
 	LastDriftCheckTimestamp *time.Time
+
 	// The name of the stack set.
 	StackSetName *string
+
 	// Status of the stack set's actual configuration compared to its expected template
 	// and parameter configuration. A stack set is considered to have drifted if one or
 	// more of its stack instances have drifted from their expected template and
@@ -1438,23 +1751,34 @@ type StackSetSummary struct {
 
 // The StackSummary Data Type
 type StackSummary struct {
+
 	// Success/Failure message associated with the stack status.
 	StackStatusReason *string
+
 	// The name associated with the stack.
+	//
+	// This member is required.
 	StackName *string
+
 	// Unique stack identifier.
 	StackId *string
+
 	// The time the stack was last updated. This field will only be returned if the
 	// stack has been updated at least once.
 	LastUpdatedTime *time.Time
+
 	// Summarizes information on whether a stack's actual configuration differs, or has
 	// drifted, from it's expected configuration, as defined in the stack template and
 	// any values specified as template parameters. For more information, see Detecting
 	// Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackDriftInformationSummary
+
 	// The time the stack was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// For nested stacks--stacks created as resources for another stack--the stack ID
 	// of the direct parent of this stack. For the first level of nested stacks, the
 	// root stack is also the parent stack. For more information, see Working with
@@ -1462,16 +1786,22 @@ type StackSummary struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
 	// in the AWS CloudFormation User Guide.
 	ParentId *string
+
 	// For nested stacks--stacks created as resources for another stack--the stack ID
 	// of the top-level stack to which the nested stack ultimately belongs. For more
 	// information, see Working with Nested Stacks
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
 	// in the AWS CloudFormation User Guide.
 	RootId *string
+
 	// The current status of the stack.
+	//
+	// This member is required.
 	StackStatus StackStatus
+
 	// The time the stack was deleted.
 	DeletionTime *time.Time
+
 	// The template description of the template used to create the stack.
 	TemplateDescription *string
 }
@@ -1479,62 +1809,85 @@ type StackSummary struct {
 // The Tag type enables you to specify a key-value pair that can be used to store
 // information about an AWS CloudFormation stack.
 type Tag struct {
+
 	// Required. A string containing the value for this tag. You can specify a maximum
 	// of 256 characters for a tag value.
+	//
+	// This member is required.
 	Value *string
+
 	// Required. A string used to identify this tag. You can specify a maximum of 128
 	// characters for a tag key. Tags owned by Amazon Web Services (AWS) have the
 	// reserved prefix: aws:.
+	//
+	// This member is required.
 	Key *string
 }
 
 // The TemplateParameter data type.
 type TemplateParameter struct {
+
 	// User defined description associated with the parameter.
 	Description *string
+
 	// The name associated with the parameter.
 	ParameterKey *string
+
 	// Flag indicating whether the parameter should be displayed as plain text in logs
 	// and UIs.
 	NoEcho *bool
+
 	// The default value associated with the parameter.
 	DefaultValue *string
 }
 
 // Contains summary information about the specified CloudFormation type.
 type TypeSummary struct {
+
 	// The kind of type.
 	Type RegistryType
+
 	// The name of the type.
 	TypeName *string
+
 	// The description of the type.
 	Description *string
+
 	// The ID of the default version of the type. The default version is used when the
 	// type version is not specified. To set the default version of a type, use
 	// SetTypeDefaultVersion ().
 	DefaultVersionId *string
+
 	// When the current default version of the type was registered.
 	LastUpdated *time.Time
+
 	// The Amazon Resource Name (ARN) of the type.
 	TypeArn *string
 }
 
 // Contains summary information about a specific version of a CloudFormation type.
 type TypeVersionSummary struct {
+
 	// The Amazon Resource Name (ARN) of the type version.
 	Arn *string
+
 	// The name of the type.
 	TypeName *string
+
 	// The description of the type version.
 	Description *string
+
 	// The ID of a specific version of the type. The version ID is the value at the end
 	// of the Amazon Resource Name (ARN) assigned to the type version when it is
 	// registered.
 	VersionId *string
+
 	// When the version was registered.
 	TimeCreated *time.Time
+
 	// Whether the specified type version is set as the default version.
 	IsDefaultVersion *bool
+
 	// The kind of type.
 	Type RegistryType
 }

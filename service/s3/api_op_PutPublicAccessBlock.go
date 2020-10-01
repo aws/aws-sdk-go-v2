@@ -78,17 +78,24 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 }
 
 type PutPublicAccessBlockInput struct {
+
 	// The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want
 	// to set.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The MD5 hash of the PutPublicAccessBlock request body.
 	ContentMD5 *string
+
 	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
 	// bucket. You can enable the configuration options in any combination. For more
 	// information about when Amazon S3 considers a bucket or object public, see The
 	// Meaning of "Public"
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
 	// in the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 }
 

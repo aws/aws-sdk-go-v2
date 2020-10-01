@@ -58,19 +58,33 @@ func (c *Client) ImportWorkspaceImage(ctx context.Context, params *ImportWorkspa
 }
 
 type ImportWorkspaceImageInput struct {
+
 	// The identifier of the EC2 image.
+	//
+	// This member is required.
 	Ec2ImageId *string
+
 	// The description of the WorkSpace image.
+	//
+	// This member is required.
 	ImageDescription *string
+
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	Tags []*types.Tag
+
 	// The ingestion process to be used when importing the image.
+	//
+	// This member is required.
 	IngestionProcess types.WorkspaceImageIngestionProcess
+
 	// The name of the WorkSpace image.
+	//
+	// This member is required.
 	ImageName *string
 }
 
 type ImportWorkspaceImageOutput struct {
+
 	// The identifier of the WorkSpace image.
 	ImageId *string
 

@@ -56,9 +56,13 @@ func (c *Client) BatchAssociateServiceActionWithProvisioningArtifact(ctx context
 }
 
 type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
+
 	// One or more associations, each consisting of the Action ID, the Product ID, and
 	// the Provisioning Artifact ID.
+	//
+	// This member is required.
 	ServiceActionAssociations []*types.ServiceActionAssociation
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -71,6 +75,7 @@ type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
 }
 
 type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
+
 	// An object that contains a list of errors, along with information to help you
 	// identify the self-service action.
 	FailedServiceActionAssociations []*types.FailedServiceActionAssociation

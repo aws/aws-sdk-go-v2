@@ -65,12 +65,16 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 
 // Represents the input of a DescribeTable operation.
 type DescribeTableInput struct {
+
 	// The name of the table to describe.
+	//
+	// This member is required.
 	TableName *string
 }
 
 // Represents the output of a DescribeTable operation.
 type DescribeTableOutput struct {
+
 	// The properties of the table.
 	Table *types.TableDescription
 

@@ -74,6 +74,7 @@ func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput
 }
 
 type GetSecretValueInput struct {
+
 	// Specifies the secret containing the version that you want to retrieve. You can
 	// specify either the Amazon Resource Name (ARN) or the friendly name of the
 	// secret. If you specify an ARN, we generally recommend that you specify a
@@ -91,7 +92,10 @@ type GetSecretValueInput struct {
 	// random suffix. If you do include the random suffix added by Secrets Manager, you
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
+
 	// Specifies the unique identifier of the version of the secret that you want to
 	// retrieve. If you specify this parameter then don't specify VersionStage. If you
 	// don't specify either a VersionStage or VersionId then the default is to perform
@@ -100,6 +104,7 @@ type GetSecretValueInput struct {
 	// (https://wikipedia.org/wiki/Universally_unique_identifier) value with 32
 	// hexadecimal digits.
 	VersionId *string
+
 	// Specifies the secret version that you want to retrieve by the staging label
 	// attached to the version. Staging labels are used to keep track of different
 	// versions during the rotation process. If you use this parameter then don't
@@ -110,10 +115,13 @@ type GetSecretValueInput struct {
 }
 
 type GetSecretValueOutput struct {
+
 	// The friendly name of the secret.
 	Name *string
+
 	// The date and time that this version of the secret was created.
 	CreatedDate *time.Time
+
 	// The decrypted part of the protected secret information that was originally
 	// provided as binary data in the form of a byte array. The response parameter
 	// represents the binary data as a base64-encoded
@@ -123,6 +131,7 @@ type GetSecretValueOutput struct {
 	// rotation function to parse and interpret whatever you store in the SecretString
 	// or SecretBinary fields.
 	SecretBinary []byte
+
 	// The decrypted part of the protected secret information that was originally
 	// provided as a string. If you create this secret by using the Secrets Manager
 	// console then only the SecretString parameter contains data. Secrets Manager
@@ -133,10 +142,13 @@ type GetSecretValueOutput struct {
 	// type in the console, then you must code your Lambda rotation function to parse
 	// and interpret those values.
 	SecretString *string
+
 	// The unique identifier of this version of the secret.
 	VersionId *string
+
 	// The ARN of the secret.
 	ARN *string
+
 	// A list of all of the staging labels currently attached to this version of the
 	// secret.
 	VersionStages []*string

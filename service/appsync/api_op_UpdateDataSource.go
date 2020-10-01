@@ -56,29 +56,46 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 }
 
 type UpdateDataSourceInput struct {
+
 	// The new Amazon DynamoDB configuration.
 	DynamodbConfig *types.DynamodbDataSourceConfig
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The new relational database configuration.
 	RelationalDatabaseConfig *types.RelationalDatabaseDataSourceConfig
+
 	// The new data source type.
+	//
+	// This member is required.
 	Type types.DataSourceType
+
 	// The new AWS Lambda configuration.
 	LambdaConfig *types.LambdaDataSourceConfig
+
 	// The new service role ARN for the data source.
 	ServiceRoleArn *string
+
 	// The new description for the data source.
 	Description *string
+
 	// The new name for the data source.
+	//
+	// This member is required.
 	Name *string
+
 	// The new HTTP endpoint configuration.
 	HttpConfig *types.HttpDataSourceConfig
+
 	// The new Elasticsearch Service configuration.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 }
 
 type UpdateDataSourceOutput struct {
+
 	// The updated DataSource object.
 	DataSource *types.DataSource
 

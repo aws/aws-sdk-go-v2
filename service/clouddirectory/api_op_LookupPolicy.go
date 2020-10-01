@@ -62,23 +62,33 @@ func (c *Client) LookupPolicy(ctx context.Context, params *LookupPolicyInput, op
 }
 
 type LookupPolicyInput struct {
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int32
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory (). For
 	// more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// Reference that identifies the object whose policies will be looked up.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The token to request the next page of results.
 	NextToken *string
 }
 
 type LookupPolicyOutput struct {
+
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
 	// and PolicyType. For more information, see Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	PolicyToPathList []*types.PolicyToPath
+
 	// The pagination token.
 	NextToken *string
 

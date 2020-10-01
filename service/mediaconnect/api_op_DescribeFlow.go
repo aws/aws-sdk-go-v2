@@ -58,13 +58,18 @@ func (c *Client) DescribeFlow(ctx context.Context, params *DescribeFlowInput, op
 }
 
 type DescribeFlowInput struct {
+
 	// The ARN of the flow that you want to describe.
+	//
+	// This member is required.
 	FlowArn *string
 }
 
 type DescribeFlowOutput struct {
+
 	// Messages that provide the state of the flow.
 	Messages *types.Messages
+
 	// The settings for a flow, including its source, outputs, and entitlements.
 	Flow *types.Flow
 

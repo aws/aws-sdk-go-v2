@@ -66,15 +66,20 @@ func (c *Client) DetectModerationLabels(ctx context.Context, params *DetectModer
 }
 
 type DetectModerationLabelsInput struct {
+
 	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
 	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
 	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
 	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
 	Image *types.Image
+
 	// Sets up the configuration for human evaluation, including the FlowDefinition the
 	// image will be sent to.
 	HumanLoopConfig *types.HumanLoopConfig
+
 	// Specifies the minimum confidence level for the labels to return. Amazon
 	// Rekognition doesn't return any labels with a confidence level lower than this
 	// specified value. If you don't specify MinConfidence, the operation returns
@@ -83,11 +88,14 @@ type DetectModerationLabelsInput struct {
 }
 
 type DetectModerationLabelsOutput struct {
+
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
+
 	// Version number of the moderation detection model that was used to detect unsafe
 	// content.
 	ModerationModelVersion *string
+
 	// Array of detected Moderation labels and the time, in milliseconds from the start
 	// of the video, they were detected.
 	ModerationLabels []*types.ModerationLabel

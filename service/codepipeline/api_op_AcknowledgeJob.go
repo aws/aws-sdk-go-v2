@@ -58,16 +58,23 @@ func (c *Client) AcknowledgeJob(ctx context.Context, params *AcknowledgeJobInput
 
 // Represents the input of an AcknowledgeJob action.
 type AcknowledgeJobInput struct {
+
 	// A system-generated random number that AWS CodePipeline uses to ensure that the
 	// job is being worked on by only one job worker. Get this number from the response
 	// of the PollForJobs () request that returned this job.
+	//
+	// This member is required.
 	Nonce *string
+
 	// The unique system-generated ID of the job for which you want to confirm receipt.
+	//
+	// This member is required.
 	JobId *string
 }
 
 // Represents the output of an AcknowledgeJob action.
 type AcknowledgeJobOutput struct {
+
 	// Whether the job worker has received the specified job.
 	Status types.JobStatus
 

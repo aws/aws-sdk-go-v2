@@ -58,29 +58,42 @@ func (c *Client) UpdateVpcLink(ctx context.Context, params *UpdateVpcLinkInput, 
 
 // Updates a VPC link.
 type UpdateVpcLinkInput struct {
+
 	// The ID of the VPC link.
+	//
+	// This member is required.
 	VpcLinkId *string
+
 	// The name of the VPC link.
 	Name *string
 }
 
 type UpdateVpcLinkOutput struct {
+
 	// The name of the VPC link.
 	Name *string
+
 	// The version of the VPC link.
 	VpcLinkVersion types.VpcLinkVersion
+
 	// A message summarizing the cause of the status of the VPC link.
 	VpcLinkStatusMessage *string
+
 	// The timestamp when the VPC link was created.
 	CreatedDate *time.Time
+
 	// A list of security group IDs for the VPC link.
 	SecurityGroupIds []*string
+
 	// The status of the VPC link.
 	VpcLinkStatus types.VpcLinkStatus
+
 	// Tags for the VPC link.
 	Tags map[string]*string
+
 	// The ID of the VPC link.
 	VpcLinkId *string
+
 	// A list of subnet IDs to include in the VPC link.
 	SubnetIds []*string
 

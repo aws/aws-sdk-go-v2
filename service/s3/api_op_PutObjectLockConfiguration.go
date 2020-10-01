@@ -65,14 +65,21 @@ func (c *Client) PutObjectLockConfiguration(ctx context.Context, params *PutObje
 }
 
 type PutObjectLockConfigurationInput struct {
+
 	// The bucket whose Object Lock configuration you want to create or replace.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The MD5 hash for the request body.
 	ContentMD5 *string
+
 	// A token to allow Object Lock to be enabled for an existing bucket.
 	Token *string
+
 	// The Object Lock configuration that you want to apply to the specified bucket.
 	ObjectLockConfiguration *types.ObjectLockConfiguration
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -83,6 +90,7 @@ type PutObjectLockConfigurationInput struct {
 }
 
 type PutObjectLockConfigurationOutput struct {
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged

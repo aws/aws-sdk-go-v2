@@ -56,10 +56,16 @@ func (c *Client) DisableLDAPS(ctx context.Context, params *DisableLDAPSInput, op
 }
 
 type DisableLDAPSInput struct {
+
 	// The identifier of the directory.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The type of LDAP security to enable. Currently only the value Client is
 	// supported.
+	//
+	// This member is required.
 	Type types.LDAPSType
 }
 

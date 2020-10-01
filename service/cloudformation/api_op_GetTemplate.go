@@ -59,6 +59,7 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 
 // The input for a GetTemplate () action.
 type GetTemplateInput struct {
+
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
@@ -70,12 +71,14 @@ type GetTemplateInput struct {
 	//
 	// Default: There is no default value.
 	StackName *string
+
 	// For templates that include transforms, the stage of the template that AWS
 	// CloudFormation returns. To get the user-submitted template, specify Original. To
 	// get the template after AWS CloudFormation has processed all transforms, specify
 	// Processed. If the template doesn't include transforms, Original and Processed
 	// return the same template. By default, AWS CloudFormation specifies Original.
 	TemplateStage types.TemplateStage
+
 	// The name or Amazon Resource Name (ARN) of a change set for which AWS
 	// CloudFormation returns the associated template. If you specify a name, you must
 	// also specify the StackName.
@@ -84,12 +87,14 @@ type GetTemplateInput struct {
 
 // The output for GetTemplate () action.
 type GetTemplateOutput struct {
+
 	// Structure containing the template body. (For more information, go to Template
 	// Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the AWS CloudFormation User Guide.) AWS CloudFormation returns the same
 	// template that was used when the stack was created.
 	TemplateBody *string
+
 	// The stage of the template that you can retrieve. For stacks, the Original and
 	// Processed templates are always available. For change sets, the Original template
 	// is always available. After AWS CloudFormation finishes creating the change set,

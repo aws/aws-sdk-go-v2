@@ -61,13 +61,16 @@ func (c *Client) DescribeRouteTables(ctx context.Context, params *DescribeRouteT
 }
 
 type DescribeRouteTablesInput struct {
+
 	// One or more route table IDs. Default: Describes all your route tables.
 	RouteTableIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * association.route-table-association-id - The ID of
@@ -143,8 +146,10 @@ type DescribeRouteTablesInput struct {
 	//     * vpc-id - The ID of
 	// the VPC for the route table.
 	Filters []*types.Filter
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
@@ -152,9 +157,11 @@ type DescribeRouteTablesInput struct {
 
 // Contains the output of DescribeRouteTables.
 type DescribeRouteTablesOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about one or more route tables.
 	RouteTables []*types.RouteTable
 

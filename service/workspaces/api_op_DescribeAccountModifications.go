@@ -56,14 +56,17 @@ func (c *Client) DescribeAccountModifications(ctx context.Context, params *Descr
 }
 
 type DescribeAccountModificationsInput struct {
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
 }
 
 type DescribeAccountModificationsOutput struct {
+
 	// The list of modifications to the configuration of BYOL.
 	AccountModifications []*types.AccountModification
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string

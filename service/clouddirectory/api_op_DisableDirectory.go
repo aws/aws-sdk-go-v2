@@ -57,12 +57,18 @@ func (c *Client) DisableDirectory(ctx context.Context, params *DisableDirectoryI
 }
 
 type DisableDirectoryInput struct {
+
 	// The ARN of the directory to disable.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type DisableDirectoryOutput struct {
+
 	// The ARN of the directory that has been disabled.
+	//
+	// This member is required.
 	DirectoryArn *string
 
 	// Metadata pertaining to the operation's result.

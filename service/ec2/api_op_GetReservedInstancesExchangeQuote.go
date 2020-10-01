@@ -61,36 +61,50 @@ func (c *Client) GetReservedInstancesExchangeQuote(ctx context.Context, params *
 
 // Contains the parameters for GetReservedInstanceExchangeQuote.
 type GetReservedInstancesExchangeQuoteInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The configuration of the target Convertible Reserved Instance to exchange for
 	// your current Convertible Reserved Instances.
 	TargetConfigurations []*types.TargetConfigurationRequest
+
 	// The IDs of the Convertible Reserved Instances to exchange.
+	//
+	// This member is required.
 	ReservedInstanceIds []*string
 }
 
 // Contains the output of GetReservedInstancesExchangeQuote.
 type GetReservedInstancesExchangeQuoteOutput struct {
+
 	// If true, the exchange is valid. If false, the exchange cannot be completed.
 	IsValidExchange *bool
+
 	// The configuration of your Convertible Reserved Instances.
 	ReservedInstanceValueSet []*types.ReservedInstanceReservationValue
+
 	// The values of the target Convertible Reserved Instances.
 	TargetConfigurationValueSet []*types.TargetReservationValue
+
 	// The new end date of the reservation term.
 	OutputReservedInstancesWillExpireAt *time.Time
+
 	// The cost associated with the Reserved Instance.
 	TargetConfigurationValueRollup *types.ReservationValue
+
 	// Describes the reason why the exchange cannot be completed.
 	ValidationFailureReason *string
+
 	// The cost associated with the Reserved Instance.
 	ReservedInstanceValueRollup *types.ReservationValue
+
 	// The currency of the transaction.
 	CurrencyCode *string
+
 	// The total true upfront charge for the exchange.
 	PaymentDue *string
 

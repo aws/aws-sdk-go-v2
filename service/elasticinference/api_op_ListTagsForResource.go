@@ -55,11 +55,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The ARN of the Elastic Inference Accelerator to list the tags for.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The tags of the Elastic Inference Accelerator.
 	Tags map[string]*string
 

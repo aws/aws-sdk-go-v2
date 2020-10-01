@@ -56,6 +56,7 @@ func (c *Client) ListReportsForReportGroup(ctx context.Context, params *ListRepo
 }
 
 type ListReportsForReportGroupInput struct {
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -63,22 +64,30 @@ type ListReportsForReportGroupInput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
+
 	// Use to specify whether the results are returned in ascending or descending
 	// order.
 	SortOrder types.SortOrderType
+
 	// The maximum number of paginated reports in this report group returned per
 	// response. Use nextToken to iterate pages in the list of returned Report objects.
 	// The default value is 100.
 	MaxResults *int32
+
 	// The ARN of the report group for which you want to return report ARNs.
+	//
+	// This member is required.
 	ReportGroupArn *string
+
 	// A ReportFilter object used to filter the returned reports.
 	Filter *types.ReportFilter
 }
 
 type ListReportsForReportGroupOutput struct {
+
 	// The list of report ARNs.
 	Reports []*string
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the

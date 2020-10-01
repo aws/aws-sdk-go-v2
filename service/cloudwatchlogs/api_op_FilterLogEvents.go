@@ -62,20 +62,28 @@ func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInp
 }
 
 type FilterLogEventsInput struct {
+
 	// The start of the time range, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.
 	StartTime *int64
+
 	// The token for the next set of events to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of events to return. The default is 10,000 events.
 	Limit *int32
+
 	// The end of the time range, expressed as the number of milliseconds after Jan 1,
 	// 1970 00:00:00 UTC. Events with a timestamp later than this time are not
 	// returned.
 	EndTime *int64
+
 	// The name of the log group to search.
+	//
+	// This member is required.
 	LogGroupName *string
+
 	// If the value is true, the operation makes a best effort to provide responses
 	// that contain events from multiple log streams within the log group, interleaved
 	// in a single response. If the value is false, all the matched log events in the
@@ -85,16 +93,19 @@ type FilterLogEventsInput struct {
 	// operation will always interleave events from multiple log streams within a log
 	// group.
 	Interleaved *bool
+
 	// The filter pattern to use. For more information, see Filter and Pattern Syntax
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).
 	// If not provided, all the events are matched.
 	FilterPattern *string
+
 	// Filters the results to include only events from log streams that have names
 	// starting with this prefix. If you specify a value for both logStreamNamePrefix
 	// and logStreamNames, but the value for logStreamNamePrefix does not match any log
 	// stream names specified in logStreamNames, the action returns an
 	// InvalidParameterException error.
 	LogStreamNamePrefix *string
+
 	// Filters the results to only logs from the log streams in this list. If you
 	// specify a value for both logStreamNamePrefix and logStreamNames, the action
 	// returns an InvalidParameterException error.
@@ -102,11 +113,14 @@ type FilterLogEventsInput struct {
 }
 
 type FilterLogEventsOutput struct {
+
 	// The token to use when requesting the next set of items. The token expires after
 	// 24 hours.
 	NextToken *string
+
 	// The matched events.
 	Events []*types.FilteredLogEvent
+
 	// Indicates which log streams have been searched and whether each has been
 	// searched completely.
 	SearchedLogStreams []*types.SearchedLogStream

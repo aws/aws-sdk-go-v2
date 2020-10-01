@@ -54,13 +54,16 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 }
 
 type GetResourcePolicyInput struct {
+
 	// The name of the registry.
 	RegistryName *string
 }
 
 type GetResourcePolicyOutput struct {
+
 	// The revision ID.
 	RevisionId *string
+
 	// The resource-based policy.
 	// This value conforms to the media type: application/json
 	Policy *string

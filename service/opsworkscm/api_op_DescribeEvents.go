@@ -59,8 +59,12 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 }
 
 type DescribeEventsInput struct {
+
 	// The name of the server for which you want to view events.
+	//
+	// This member is required.
 	ServerName *string
+
 	// NextToken is a string that is returned in some command responses. It indicates
 	// that not all entries have been returned, and that you must run at least one more
 	// request to get remaining items. To get remaining results, call DescribeEvents
@@ -69,6 +73,7 @@ type DescribeEventsInput struct {
 	// nextToken parameter value is null. Setting a nextToken value that was not
 	// returned in your previous results causes an InvalidNextTokenException to occur.
 	NextToken *string
+
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
@@ -77,8 +82,10 @@ type DescribeEventsInput struct {
 }
 
 type DescribeEventsOutput struct {
+
 	// Contains the response to a DescribeEvents request.
 	ServerEvents []*types.ServerEvent
+
 	// NextToken is a string that is returned in some command responses. It indicates
 	// that not all entries have been returned, and that you must run at least one more
 	// request to get remaining items. To get remaining results, call DescribeEvents

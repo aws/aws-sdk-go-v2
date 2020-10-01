@@ -72,18 +72,27 @@ func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...fu
 
 // Container for the parameters to the Suggest request.
 type SuggestInput struct {
+
 	// Specifies the string for which you want to get suggestions.
+	//
+	// This member is required.
 	Query *string
+
 	// Specifies the maximum number of suggestions to return.
 	Size *int64
+
 	// Specifies the name of the suggester to use to find suggested matches.
+	//
+	// This member is required.
 	Suggester *string
 }
 
 // Contains the response to a Suggest request.
 type SuggestOutput struct {
+
 	// Container for the matching search suggestion information.
 	Suggest *types.SuggestModel
+
 	// The status of a SuggestRequest. Contains the resource ID (rid) and how long it
 	// took to process the request (timems).
 	Status *types.SuggestStatus

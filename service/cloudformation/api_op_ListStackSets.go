@@ -55,27 +55,32 @@ func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, 
 }
 
 type ListStackSetsInput struct {
+
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call ListStackSets again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
+
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
 	// value that you can assign to the NextToken request parameter to get the next set
 	// of results.
 	MaxResults *int32
+
 	// The status of the stack sets that you want to get summary information about.
 	Status types.StackSetStatus
 }
 
 type ListStackSetsOutput struct {
+
 	// If the request doesn't return all of the remaining results, NextToken is set to
 	// a token. To retrieve the next set of results, call ListStackInstances again and
 	// assign that token to the request object's NextToken parameter. If the request
 	// returns all results, NextToken is set to null.
 	NextToken *string
+
 	// A list of StackSetSummary structures that contain information about the user's
 	// stack sets.
 	Summaries []*types.StackSetSummary

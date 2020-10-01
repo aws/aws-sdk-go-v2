@@ -54,6 +54,7 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 }
 
 type DeleteResourcePolicyInput struct {
+
 	// The name of the registry.
 	RegistryName *string
 }

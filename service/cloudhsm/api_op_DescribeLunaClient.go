@@ -64,21 +64,28 @@ func (c *Client) DescribeLunaClient(ctx context.Context, params *DescribeLunaCli
 }
 
 type DescribeLunaClientInput struct {
+
 	// The ARN of the client.
 	ClientArn *string
+
 	// The certificate fingerprint.
 	CertificateFingerprint *string
 }
 
 type DescribeLunaClientOutput struct {
+
 	// The label of the client.
 	Label *string
+
 	// The certificate fingerprint.
 	CertificateFingerprint *string
+
 	// The ARN of the client.
 	ClientArn *string
+
 	// The date and time the client was last modified.
 	LastModifiedTimestamp *string
+
 	// The certificate installed on the HSMs used by this client.
 	Certificate *string
 

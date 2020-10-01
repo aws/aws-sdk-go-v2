@@ -55,18 +55,23 @@ func (c *Client) ListMitigationActions(ctx context.Context, params *ListMitigati
 }
 
 type ListMitigationActionsInput struct {
+
 	// Specify a value to limit the result to mitigation actions with a specific action
 	// type.
 	ActionType types.MitigationActionType
+
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
 }
 
 type ListMitigationActionsOutput struct {
+
 	// A set of actions that matched the specified filter criteria.
 	ActionIdentifiers []*types.MitigationActionIdentifier
+
 	// The token for the next set of results.
 	NextToken *string
 

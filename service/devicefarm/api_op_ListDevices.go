@@ -56,11 +56,14 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 
 // Represents the result of a list devices request.
 type ListDevicesInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the project.
 	Arn *string
+
 	// Used to select a set of devices. A filter is made up of an attribute, an
 	// operator, and one or more values.
 	//
@@ -141,10 +144,12 @@ type ListDevicesInput struct {
 
 // Represents the result of a list devices operation.
 type ListDevicesOutput struct {
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.
 	NextToken *string
+
 	// Information about the devices.
 	Devices []*types.Device
 

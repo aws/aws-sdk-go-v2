@@ -79,12 +79,18 @@ func (c *Client) ModifySpotFleetRequest(ctx context.Context, params *ModifySpotF
 
 // Contains the parameters for ModifySpotFleetRequest.
 type ModifySpotFleetRequestInput struct {
+
 	// The ID of the Spot Fleet request.
+	//
+	// This member is required.
 	SpotFleetRequestId *string
+
 	// The size of the fleet.
 	TargetCapacity *int32
+
 	// The number of On-Demand Instances in the fleet.
 	OnDemandTargetCapacity *int32
+
 	// Indicates whether running Spot Instances should be terminated if the target
 	// capacity of the Spot Fleet request is decreased below the current size of the
 	// Spot Fleet.
@@ -93,6 +99,7 @@ type ModifySpotFleetRequestInput struct {
 
 // Contains the output of ModifySpotFleetRequest.
 type ModifySpotFleetRequestOutput struct {
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool
 

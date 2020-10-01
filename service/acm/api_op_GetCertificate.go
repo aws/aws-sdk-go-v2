@@ -59,19 +59,24 @@ func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput
 }
 
 type GetCertificateInput struct {
+
 	// String that contains a certificate ARN in the following format:
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
 	CertificateArn *string
 }
 
 type GetCertificateOutput struct {
+
 	// Certificates forming the requested certificate's chain of trust. The chain
 	// consists of the certificate of the issuing CA and the intermediate certificates
 	// of any other subordinate CAs.
 	CertificateChain *string
+
 	// The ACM-issued certificate corresponding to the ARN specified as input.
 	Certificate *string
 

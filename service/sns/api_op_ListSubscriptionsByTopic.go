@@ -61,17 +61,23 @@ func (c *Client) ListSubscriptionsByTopic(ctx context.Context, params *ListSubsc
 
 // Input for ListSubscriptionsByTopic action.
 type ListSubscriptionsByTopicInput struct {
+
 	// Token returned by the previous ListSubscriptionsByTopic request.
 	NextToken *string
+
 	// The ARN of the topic for which you wish to find subscriptions.
+	//
+	// This member is required.
 	TopicArn *string
 }
 
 // Response for ListSubscriptionsByTopic action.
 type ListSubscriptionsByTopicOutput struct {
+
 	// Token to pass along to the next ListSubscriptionsByTopic request. This element
 	// is returned if there are more subscriptions to retrieve.
 	NextToken *string
+
 	// A list of subscriptions.
 	Subscriptions []*types.Subscription
 

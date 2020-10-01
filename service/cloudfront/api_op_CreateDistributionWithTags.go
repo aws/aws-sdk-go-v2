@@ -57,16 +57,22 @@ func (c *Client) CreateDistributionWithTags(ctx context.Context, params *CreateD
 
 // The request to create a new distribution with tags.
 type CreateDistributionWithTagsInput struct {
+
 	// The distribution's configuration information.
+	//
+	// This member is required.
 	DistributionConfigWithTags *types.DistributionConfigWithTags
 }
 
 // The returned result of the corresponding request.
 type CreateDistributionWithTagsOutput struct {
+
 	// The distribution's information.
 	Distribution *types.Distribution
+
 	// The current version of the distribution created.
 	ETag *string
+
 	// The fully qualified URI of the new distribution resource just created.
 	Location *string
 

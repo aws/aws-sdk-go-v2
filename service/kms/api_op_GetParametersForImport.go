@@ -77,9 +77,13 @@ func (c *Client) GetParametersForImport(ctx context.Context, params *GetParamete
 }
 
 type GetParametersForImportInput struct {
+
 	// The type of wrapping key (public key) to return in the response. Only 2048-bit
 	// RSA public keys are supported.
+	//
+	// This member is required.
 	WrappingKeySpec types.WrappingKeySpec
+
 	// The identifier of the symmetric CMK into which you will import key material. The
 	// Origin of the CMK must be EXTERNAL. Specify the key ID or the Amazon Resource
 	// Name (ARN) of the CMK. For example:
@@ -92,25 +96,34 @@ type GetParametersForImportInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// The algorithm you will use to encrypt the key material before importing it with
 	// ImportKeyMaterial (). For more information, see Encrypt the Key Material
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html)
 	// in the AWS Key Management Service Developer Guide.
+	//
+	// This member is required.
 	WrappingAlgorithm types.AlgorithmSpec
 }
 
 type GetParametersForImportOutput struct {
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK to use in a subsequent ImportKeyMaterial () request. This is the same
 	// CMK specified in the GetParametersForImport request.
 	KeyId *string
+
 	// The import token to send in a subsequent ImportKeyMaterial () request.
 	ImportToken []byte
+
 	// The public key to use to encrypt the key material before importing it with
 	// ImportKeyMaterial ().
 	PublicKey []byte
+
 	// The time at which the import token and public key are no longer valid. After
 	// this time, you cannot use them to make an ImportKeyMaterial () request and you
 	// must send another GetParametersForImport request to get new ones.

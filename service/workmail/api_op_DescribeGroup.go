@@ -57,25 +57,37 @@ func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, 
 }
 
 type DescribeGroupInput struct {
+
 	// The identifier for the group to be described.
+	//
+	// This member is required.
 	GroupId *string
+
 	// The identifier for the organization under which the group exists.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type DescribeGroupOutput struct {
+
 	// The identifier of the described group.
 	GroupId *string
+
 	// The date and time when a user was deregistered from WorkMail, in UNIX epoch time
 	// format.
 	DisabledDate *time.Time
+
 	// The name of the described group.
 	Name *string
+
 	// The date and time when a user was registered to WorkMail, in UNIX epoch time
 	// format.
 	EnabledDate *time.Time
+
 	// The email of the described group.
 	Email *string
+
 	// The state of the user: enabled (registered to Amazon WorkMail) or disabled
 	// (deregistered or never registered to WorkMail).
 	State types.EntityState

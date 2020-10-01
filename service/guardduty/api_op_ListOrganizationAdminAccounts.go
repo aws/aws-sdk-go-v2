@@ -55,8 +55,10 @@ func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *List
 }
 
 type ListOrganizationAdminAccountsInput struct {
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// A token to use for paginating results that are returned in the response. Set the
 	// value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
@@ -65,9 +67,11 @@ type ListOrganizationAdminAccountsInput struct {
 }
 
 type ListOrganizationAdminAccountsOutput struct {
+
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.
 	NextToken *string
+
 	// An AdminAccounts object that includes a list of accounts configured as GuardDuty
 	// delegated administrators.
 	AdminAccounts []*types.AdminAccount

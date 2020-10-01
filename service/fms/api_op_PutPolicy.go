@@ -78,15 +78,21 @@ func (c *Client) PutPolicy(ctx context.Context, params *PutPolicyInput, optFns .
 }
 
 type PutPolicyInput struct {
+
 	// The details of the AWS Firewall Manager policy to be created.
+	//
+	// This member is required.
 	Policy *types.Policy
+
 	// The tags to add to the AWS resource.
 	TagList []*types.Tag
 }
 
 type PutPolicyOutput struct {
+
 	// The details of the AWS Firewall Manager policy.
 	Policy *types.Policy
+
 	// The Amazon Resource Name (ARN) of the policy.
 	PolicyArn *string
 

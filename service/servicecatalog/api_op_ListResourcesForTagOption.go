@@ -56,13 +56,19 @@ func (c *Client) ListResourcesForTagOption(ctx context.Context, params *ListReso
 }
 
 type ListResourcesForTagOptionInput struct {
+
 	// The TagOption identifier.
+	//
+	// This member is required.
 	TagOptionId *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The resource type.
 	//
 	//     * Portfolio
@@ -72,9 +78,11 @@ type ListResourcesForTagOptionInput struct {
 }
 
 type ListResourcesForTagOptionOutput struct {
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// Information about the resources.
 	ResourceDetails []*types.ResourceDetail
 

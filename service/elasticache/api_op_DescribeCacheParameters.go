@@ -57,15 +57,21 @@ func (c *Client) DescribeCacheParameters(ctx context.Context, params *DescribeCa
 
 // Represents the input of a DescribeCacheParameters operation.
 type DescribeCacheParametersInput struct {
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
 	// <p>Constraints: minimum 20; maximum 100.</p>
 	MaxRecords *int32
+
 	// The parameter types to return. Valid values: user | system | engine-default
 	Source *string
+
 	// The name of a specific cache parameter group to return details for.
+	//
+	// This member is required.
 	CacheParameterGroupName *string
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
@@ -75,10 +81,13 @@ type DescribeCacheParametersInput struct {
 
 // Represents the output of a DescribeCacheParameters operation.
 type DescribeCacheParametersOutput struct {
+
 	// A list of Parameter () instances.
 	Parameters []*types.Parameter
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
+
 	// A list of parameters specific to a particular cache node type. Each element in
 	// the list contains detailed information about one parameter.
 	CacheNodeTypeSpecificParameters []*types.CacheNodeTypeSpecificParameter

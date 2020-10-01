@@ -59,6 +59,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The tags to add to the resource. A tag is an array of key-value pairs. The
 	// following basic restrictions apply to tags:
 	//
@@ -89,10 +90,15 @@ type TagResourceInput struct {
 	// then Forecast considers it to be a user tag and will count against the limit of
 	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
 	// resource limit.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) that identifies the resource for which to list
 	// the tags. Currently, the supported resources are Forecast dataset groups,
 	// datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

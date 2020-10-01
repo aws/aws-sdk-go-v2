@@ -62,15 +62,22 @@ func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCac
 
 // Represents the input of a CreateCacheSecurityGroup operation.
 type CreateCacheSecurityGroupInput struct {
+
 	// A name for the cache security group. This value is stored as a lowercase string.
 	// Constraints: Must contain no more than 255 alphanumeric characters. Cannot be
 	// the word "Default". Example: mysecuritygroup
+	//
+	// This member is required.
 	CacheSecurityGroupName *string
+
 	// A description for the cache security group.
+	//
+	// This member is required.
 	Description *string
 }
 
 type CreateCacheSecurityGroupOutput struct {
+
 	// Represents the output of one of the following operations:
 	//
 	//     *

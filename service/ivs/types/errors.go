@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 type AccessDeniedException struct {
@@ -25,12 +24,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *AccessDeniedException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type ChannelNotBroadcasting struct {
 	Message *string
@@ -49,12 +42,6 @@ func (e *ChannelNotBroadcasting) ErrorMessage() string {
 }
 func (e *ChannelNotBroadcasting) ErrorCode() string             { return "ChannelNotBroadcasting" }
 func (e *ChannelNotBroadcasting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ChannelNotBroadcasting) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *ChannelNotBroadcasting) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type ConflictException struct {
 	Message *string
@@ -73,12 +60,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *ConflictException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type InternalServerException struct {
 	Message *string
@@ -97,12 +78,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *InternalServerException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type PendingVerification struct {
 	Message *string
@@ -121,12 +96,6 @@ func (e *PendingVerification) ErrorMessage() string {
 }
 func (e *PendingVerification) ErrorCode() string             { return "PendingVerification" }
 func (e *PendingVerification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PendingVerification) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *PendingVerification) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type ResourceNotFoundException struct {
 	Message *string
@@ -145,12 +114,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *ResourceNotFoundException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type ServiceQuotaExceededException struct {
 	Message *string
@@ -169,12 +132,6 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceQuotaExceededException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *ServiceQuotaExceededException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type StreamUnavailable struct {
 	Message *string
@@ -193,12 +150,6 @@ func (e *StreamUnavailable) ErrorMessage() string {
 }
 func (e *StreamUnavailable) ErrorCode() string             { return "StreamUnavailable" }
 func (e *StreamUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *StreamUnavailable) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *StreamUnavailable) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type ThrottlingException struct {
 	Message *string
@@ -217,12 +168,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *ThrottlingException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}
 
 type ValidationException struct {
 	Message *string
@@ -241,9 +186,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetExceptionMessage() string {
-	return ptr.ToString(e.ExceptionMessage)
-}
-func (e *ValidationException) HasExceptionMessage() bool {
-	return e.ExceptionMessage != nil
-}

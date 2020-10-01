@@ -56,19 +56,30 @@ func (c *Client) CreateCostCategoryDefinition(ctx context.Context, params *Creat
 }
 
 type CreateCostCategoryDefinitionInput struct {
+
 	// The rule schema version in this particular Cost Category.
+	//
+	// This member is required.
 	RuleVersion types.CostCategoryRuleVersion
+
 	// The unique name of the Cost Category.
+	//
+	// This member is required.
 	Name *string
+
 	// The Cost Category rules used to categorize costs. For more information, see
 	// CostCategoryRule
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
+	//
+	// This member is required.
 	Rules []*types.CostCategoryRule
 }
 
 type CreateCostCategoryDefinitionOutput struct {
+
 	// The Cost Category's effective start date.
 	EffectiveStart *string
+
 	// The unique identifier for your newly created Cost Category.
 	CostCategoryArn *string
 

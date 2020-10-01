@@ -56,13 +56,20 @@ func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSo
 }
 
 type StartDataSourceSyncJobInput struct {
+
 	// The identifier of the data source to synchronize.
+	//
+	// This member is required.
 	Id *string
+
 	// The identifier of the index that contains the data source.
+	//
+	// This member is required.
 	IndexId *string
 }
 
 type StartDataSourceSyncJobOutput struct {
+
 	// Identifies a particular synchronization job.
 	ExecutionId *string
 

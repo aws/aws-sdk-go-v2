@@ -57,18 +57,25 @@ func (c *Client) ListWebsiteCertificateAuthorities(ctx context.Context, params *
 }
 
 type ListWebsiteCertificateAuthoritiesInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The maximum number of results to be included in the next page.
 	MaxResults *int32
+
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListWebsiteCertificateAuthoritiesOutput struct {
+
 	// Information about the certificates.
 	WebsiteCertificateAuthorities []*types.WebsiteCaSummary
+
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

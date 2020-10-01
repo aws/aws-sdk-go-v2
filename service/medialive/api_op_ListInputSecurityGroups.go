@@ -56,16 +56,20 @@ func (c *Client) ListInputSecurityGroups(ctx context.Context, params *ListInputS
 
 // Placeholder documentation for ListInputSecurityGroupsRequest
 type ListInputSecurityGroupsInput struct {
+
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
+
 	// Placeholder documentation for __string
 	NextToken *string
 }
 
 // Placeholder documentation for ListInputSecurityGroupsResponse
 type ListInputSecurityGroupsOutput struct {
+
 	// List of input security groups
 	InputSecurityGroups []*types.InputSecurityGroup
+
 	// Placeholder documentation for __string
 	NextToken *string
 

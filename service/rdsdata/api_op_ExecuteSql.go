@@ -59,24 +59,36 @@ func (c *Client) ExecuteSql(ctx context.Context, params *ExecuteSqlInput, optFns
 // The request parameters represent the input of a request to run one or more SQL
 // statements.
 type ExecuteSqlInput struct {
+
 	// The Amazon Resource Name (ARN) of the secret that enables access to the DB
 	// cluster.
+	//
+	// This member is required.
 	AwsSecretStoreArn *string
+
 	// The name of the database.
 	Database *string
+
 	// The ARN of the Aurora Serverless DB cluster.
+	//
+	// This member is required.
 	DbClusterOrInstanceArn *string
+
 	// The name of the database schema.
 	Schema *string
+
 	// One or more SQL statements to run on the DB cluster. You can separate SQL
 	// statements from each other with a semicolon (;). Any valid SQL statement is
 	// permitted, including data definition, data manipulation, and commit statements.
+	//
+	// This member is required.
 	SqlStatements *string
 }
 
 // The response elements represent the output of a request to run one or more SQL
 // statements.
 type ExecuteSqlOutput struct {
+
 	// The results of the SQL statement or statements.
 	SqlStatementResults []*types.SqlStatementResult
 

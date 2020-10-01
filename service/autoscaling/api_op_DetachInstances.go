@@ -66,16 +66,24 @@ func (c *Client) DetachInstances(ctx context.Context, params *DetachInstancesInp
 }
 
 type DetachInstancesInput struct {
+
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []*string
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// Indicates whether the Auto Scaling group decrements the desired capacity value
 	// by the number of instances detached.
+	//
+	// This member is required.
 	ShouldDecrementDesiredCapacity *bool
 }
 
 type DetachInstancesOutput struct {
+
 	// The activities related to detaching the instances from the Auto Scaling group.
 	Activities []*types.Activity
 

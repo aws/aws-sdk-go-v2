@@ -63,21 +63,26 @@ func (c *Client) RegisterTransitGatewayMulticastGroupSources(ctx context.Context
 }
 
 type RegisterTransitGatewayMulticastGroupSourcesInput struct {
+
 	// The IP address assigned to the transit gateway multicast group.
 	GroupIpAddress *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The group sources' network interface IDs to register with the transit gateway
 	// multicast group.
 	NetworkInterfaceIds []*string
+
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
 }
 
 type RegisterTransitGatewayMulticastGroupSourcesOutput struct {
+
 	// Information about the transit gateway multicast group sources.
 	RegisteredMulticastGroupSources *types.TransitGatewayMulticastRegisteredGroupSources
 

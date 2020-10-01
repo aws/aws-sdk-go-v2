@@ -56,16 +56,22 @@ func (c *Client) CreateImageBuilderStreamingURL(ctx context.Context, params *Cre
 }
 
 type CreateImageBuilderStreamingURLInput struct {
+
 	// The name of the image builder.
+	//
+	// This member is required.
 	Name *string
+
 	// The time that the streaming URL will be valid, in seconds. Specify a value
 	// between 1 and 604800 seconds. The default is 3600 seconds.
 	Validity *int64
 }
 
 type CreateImageBuilderStreamingURLOutput struct {
+
 	// The URL to start the AppStream 2.0 streaming session.
 	StreamingURL *string
+
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
 	Expires *time.Time
 

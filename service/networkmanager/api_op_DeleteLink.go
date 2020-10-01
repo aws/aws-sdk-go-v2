@@ -57,13 +57,20 @@ func (c *Client) DeleteLink(ctx context.Context, params *DeleteLinkInput, optFns
 }
 
 type DeleteLinkInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The ID of the link.
+	//
+	// This member is required.
 	LinkId *string
 }
 
 type DeleteLinkOutput struct {
+
 	// Information about the link.
 	Link *types.Link
 

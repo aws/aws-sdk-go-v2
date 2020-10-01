@@ -58,14 +58,18 @@ func (c *Client) GetLogRecord(ctx context.Context, params *GetLogRecordInput, op
 }
 
 type GetLogRecordInput struct {
+
 	// The pointer corresponding to the log event record you want to retrieve. You get
 	// this from the response of a GetQueryResults operation. In that response, the
 	// value of the @ptr field for a log event is the value to use as logRecordPointer
 	// to retrieve that complete log event record.
+	//
+	// This member is required.
 	LogRecordPointer *string
 }
 
 type GetLogRecordOutput struct {
+
 	// The requested log event, as a JSON string.
 	LogRecord map[string]*string
 

@@ -58,8 +58,10 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 }
 
 type ListApplicationsInput struct {
+
 	// The maximum number of applications to list.
 	Limit *int32
+
 	// If a previous command returned a pagination token, pass it into this value to
 	// retrieve the next set of results. For more information about pagination, see
 	// Using the AWS Command Line Interface's Pagination Options
@@ -68,13 +70,17 @@ type ListApplicationsInput struct {
 }
 
 type ListApplicationsOutput struct {
+
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. Pass this token into a subsequent command to retrieve the
 	// next set of items For more information about pagination, see Using the AWS
 	// Command Line Interface's Pagination Options
 	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string
+
 	// A list of ApplicationSummary objects.
+	//
+	// This member is required.
 	ApplicationSummaries []*types.ApplicationSummary
 
 	// Metadata pertaining to the operation's result.

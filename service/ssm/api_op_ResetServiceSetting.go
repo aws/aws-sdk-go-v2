@@ -69,16 +69,20 @@ func (c *Client) ResetServiceSetting(ctx context.Context, params *ResetServiceSe
 
 // The request body of the ResetServiceSetting API action.
 type ResetServiceSettingInput struct {
+
 	// The Amazon Resource Name (ARN) of the service setting to reset. The setting ID
 	// can be /ssm/parameter-store/default-parameter-tier,
 	// /ssm/parameter-store/high-throughput-enabled, or
 	// /ssm/managed-instance/activation-tier. For example,
 	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
+	//
+	// This member is required.
 	SettingId *string
 }
 
 // The result body of the ResetServiceSetting API action.
 type ResetServiceSettingOutput struct {
+
 	// The current, effective service setting after calling the ResetServiceSetting API
 	// action.
 	ServiceSetting *types.ServiceSetting

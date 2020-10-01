@@ -56,17 +56,23 @@ func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, op
 }
 
 type ListFindingsInput struct {
+
 	// The ID of the detector that specifies the GuardDuty service whose findings you
 	// want to list.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 50. The maximum value is 50.
 	MaxResults *int32
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
 	// the action, fill nextToken in the request with the value of NextToken from the
 	// previous response to continue listing data.
 	NextToken *string
+
 	// Represents the criteria used for querying findings. Valid values include:
 	//
 	//     *
@@ -208,13 +214,18 @@ type ListFindingsInput struct {
 	//     * updatedAt Type: Timestamp in Unix Epoch millisecond format:
 	// 1486685375000
 	FindingCriteria *types.FindingCriteria
+
 	// Represents the criteria used for sorting findings.
 	SortCriteria *types.SortCriteria
 }
 
 type ListFindingsOutput struct {
+
 	// The IDs of the findings that you're listing.
+	//
+	// This member is required.
 	FindingIds []*string
+
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.
 	NextToken *string

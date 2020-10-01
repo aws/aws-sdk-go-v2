@@ -56,16 +56,25 @@ func (c *Client) CreateJourney(ctx context.Context, params *CreateJourneyInput, 
 }
 
 type CreateJourneyInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies the configuration and other settings for a journey.
+	//
+	// This member is required.
 	WriteJourneyRequest *types.WriteJourneyRequest
 }
 
 type CreateJourneyOutput struct {
+
 	// Provides information about the status, configuration, and other settings for a
 	// journey.
+	//
+	// This member is required.
 	JourneyResponse *types.JourneyResponse
 
 	// Metadata pertaining to the operation's result.

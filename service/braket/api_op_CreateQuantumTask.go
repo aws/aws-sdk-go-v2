@@ -54,26 +54,48 @@ func (c *Client) CreateQuantumTask(ctx context.Context, params *CreateQuantumTas
 }
 
 type CreateQuantumTaskInput struct {
+
 	// The client token associated with the request.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The ARN of the device to run the task on.
+	//
+	// This member is required.
 	DeviceArn *string
+
 	// The parameters for the device to run the task on.
 	// This value conforms to the media type: application/json
 	DeviceParameters *string
+
 	// The number of shots to use for the task.
+	//
+	// This member is required.
 	Shots *int64
+
 	// The S3 bucket to store task result files in.
+	//
+	// This member is required.
 	OutputS3Bucket *string
+
 	// The key prefix for the location in the S3 bucket to store task results in.
+	//
+	// This member is required.
 	OutputS3KeyPrefix *string
+
 	// The action associated with the task.
 	// This value conforms to the media type: application/json
+	//
+	// This member is required.
 	Action *string
 }
 
 type CreateQuantumTaskOutput struct {
+
 	// The ARN of the task created by the request.
+	//
+	// This member is required.
 	QuantumTaskArn *string
 
 	// Metadata pertaining to the operation's result.

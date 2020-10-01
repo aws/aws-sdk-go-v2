@@ -56,7 +56,10 @@ func (c *Client) DeleteApiCache(ctx context.Context, params *DeleteApiCacheInput
 
 // Represents the input of a DeleteApiCache operation.
 type DeleteApiCacheInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
 }
 

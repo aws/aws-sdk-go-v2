@@ -56,16 +56,24 @@ func (c *Client) GetIntrospectionSchema(ctx context.Context, params *GetIntrospe
 }
 
 type GetIntrospectionSchemaInput struct {
+
 	// A flag that specifies whether the schema introspection should contain
 	// directives.
 	IncludeDirectives *bool
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The schema format: SDL or JSON.
+	//
+	// This member is required.
 	Format types.OutputType
 }
 
 type GetIntrospectionSchemaOutput struct {
+
 	// The schema, in GraphQL Schema Definition Language (SDL) format. For more
 	// information, see the GraphQL SDL documentation
 	// (http://graphql.org/learn/schema/).

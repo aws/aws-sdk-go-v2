@@ -55,9 +55,15 @@ func (c *Client) DisassociateContactFromAddressBook(ctx context.Context, params 
 }
 
 type DisassociateContactFromAddressBookInput struct {
+
 	// The ARN of the address from which to disassociate the contact.
+	//
+	// This member is required.
 	AddressBookArn *string
+
 	// The ARN of the contact to disassociate from an address book.
+	//
+	// This member is required.
 	ContactArn *string
 }
 

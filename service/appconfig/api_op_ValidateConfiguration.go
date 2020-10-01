@@ -55,11 +55,20 @@ func (c *Client) ValidateConfiguration(ctx context.Context, params *ValidateConf
 }
 
 type ValidateConfigurationInput struct {
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The configuration profile ID.
+	//
+	// This member is required.
 	ConfigurationProfileId *string
+
 	// The version of the configuration to validate.
+	//
+	// This member is required.
 	ConfigurationVersion *string
 }
 

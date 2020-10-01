@@ -60,16 +60,22 @@ type GetDiscoverySummaryInput struct {
 }
 
 type GetDiscoverySummaryOutput struct {
+
 	// The number of servers mapped to tags.
 	ServersMappedtoTags *int64
+
 	// The number of servers mapped to applications.
 	ServersMappedToApplications *int64
+
 	// The number of servers discovered.
 	Servers *int64
+
 	// The number of applications discovered.
 	Applications *int64
+
 	// Details about discovered connectors, including connector status and health.
 	ConnectorSummary *types.CustomerConnectorInfo
+
 	// Details about discovered agents, including agent status and health.
 	AgentSummary *types.CustomerAgentInfo
 

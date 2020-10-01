@@ -59,12 +59,16 @@ func (c *Client) CheckIfPhoneNumberIsOptedOut(ctx context.Context, params *Check
 
 // The input for the CheckIfPhoneNumberIsOptedOut action.
 type CheckIfPhoneNumberIsOptedOutInput struct {
+
 	// The phone number for which you want to check the opt out status.
+	//
+	// This member is required.
 	PhoneNumber *string
 }
 
 // The response from the CheckIfPhoneNumberIsOptedOut action.
 type CheckIfPhoneNumberIsOptedOutOutput struct {
+
 	// Indicates whether the phone number is opted out:
 	//
 	//     * true – The phone number

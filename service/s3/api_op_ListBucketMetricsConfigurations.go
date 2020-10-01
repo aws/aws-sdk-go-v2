@@ -84,26 +84,34 @@ func (c *Client) ListBucketMetricsConfigurations(ctx context.Context, params *Li
 }
 
 type ListBucketMetricsConfigurationsInput struct {
+
 	// The marker that is used to continue a metrics configuration listing that has
 	// been truncated. Use the NextContinuationToken from a previously truncated list
 	// response to continue the listing. The continuation token is an opaque value that
 	// Amazon S3 understands.
 	ContinuationToken *string
+
 	// The name of the bucket containing the metrics configurations to retrieve.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type ListBucketMetricsConfigurationsOutput struct {
+
 	// The list of metrics configurations for a bucket.
 	MetricsConfigurationList []*types.MetricsConfiguration
+
 	// The marker used to continue a metrics configuration listing that has been
 	// truncated. Use the NextContinuationToken from a previously truncated list
 	// response to continue the listing. The continuation token is an opaque value that
 	// Amazon S3 understands.
 	NextContinuationToken *string
+
 	// The marker that is used as a starting point for this metrics configuration list
 	// response. This value is present if it was sent in the request.
 	ContinuationToken *string
+
 	// Indicates whether the returned list of metrics configurations is complete. A
 	// value of true indicates that the list is not complete and the
 	// NextContinuationToken will be provided for a subsequent request.

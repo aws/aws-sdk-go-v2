@@ -58,12 +58,16 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 }
 
 type DeleteDataSourceInput struct {
+
 	// A user-supplied ID that uniquely identifies the DataSource.
+	//
+	// This member is required.
 	DataSourceId *string
 }
 
 // Represents the output of a DeleteDataSource operation.
 type DeleteDataSourceOutput struct {
+
 	// A user-supplied ID that uniquely identifies the DataSource. This value should be
 	// identical to the value of the DataSourceID in the request.
 	DataSourceId *string

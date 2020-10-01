@@ -62,14 +62,21 @@ func (c *Client) DeregisterInstancesFromLoadBalancer(ctx context.Context, params
 
 // Contains the parameters for DeregisterInstancesFromLoadBalancer.
 type DeregisterInstancesFromLoadBalancerInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The IDs of the instances.
+	//
+	// This member is required.
 	Instances []*types.Instance
 }
 
 // Contains the output of DeregisterInstancesFromLoadBalancer.
 type DeregisterInstancesFromLoadBalancerOutput struct {
+
 	// The remaining instances registered with the load balancer.
 	Instances []*types.Instance
 

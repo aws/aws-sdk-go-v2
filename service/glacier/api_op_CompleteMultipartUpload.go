@@ -102,19 +102,30 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 // and saving the archive to the vault, Glacier returns the URI path of the newly
 // created archive resource.
 type CompleteMultipartUploadInput struct {
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The upload ID of the multipart upload.
+	//
+	// This member is required.
 	UploadId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// The total size, in bytes, of the entire archive. This value should be the sum of
 	// all the sizes of the individual parts that you uploaded.
 	ArchiveSize *string
+
 	// The SHA256 tree hash of the entire archive. It is the tree hash of SHA256 tree
 	// hash of the individual parts. If the value you specify in the request does not
 	// match the SHA256 tree hash of the final assembled archive as computed by Amazon
@@ -128,10 +139,13 @@ type CompleteMultipartUploadInput struct {
 // For conceptual information, see Working with Archives in Amazon S3 Glacier
 // (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
 type CompleteMultipartUploadOutput struct {
+
 	// The checksum of the archive computed by Amazon S3 Glacier.
 	Checksum *string
+
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string
+
 	// The relative URI path of the newly added archive resource.
 	Location *string
 

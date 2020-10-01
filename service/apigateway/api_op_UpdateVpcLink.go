@@ -59,12 +59,19 @@ func (c *Client) UpdateVpcLink(ctx context.Context, params *UpdateVpcLinkInput, 
 // Updates an existing VpcLink () of a specified identifier.
 type UpdateVpcLinkInput struct {
 	Template *bool
+
 	// [Required] The identifier of the VpcLink (). It is used in an Integration () to
 	// reference this VpcLink ().
-	VpcLinkId        *string
-	Title            *string
-	Name             *string
+	//
+	// This member is required.
+	VpcLinkId *string
+
+	Title *string
+
+	Name *string
+
 	TemplateSkipList []*string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -79,22 +86,29 @@ type UpdateVpcLinkInput struct {
 // HTTP_PROXY and has a connection type of VPC_LINK. The integration uses the
 // connectionId property to identify the VpcLink () used.
 type UpdateVpcLinkOutput struct {
+
 	// The identifier of the VpcLink (). It is used in an Integration () to reference
 	// this VpcLink ().
 	Id *string
+
 	// The name used to label and identify the VPC link.
 	Name *string
+
 	// The description of the VPC link.
 	Description *string
+
 	// A description about the VPC link status.
 	StatusMessage *string
+
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
 	// network load balancer must be owned by the same AWS account of the API owner.
 	TargetArns []*string
+
 	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
 	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
 	// the status is DELETING.
 	Status types.VpcLinkStatus
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 

@@ -56,6 +56,7 @@ func (c *Client) RegisterJobDefinition(ctx context.Context, params *RegisterJobD
 }
 
 type RegisterJobDefinitionInput struct {
+
 	// An object with various properties specific to multi-node parallel jobs. If you
 	// specify node properties for a job, it becomes a multi-node parallel job. For
 	// more information, see Multi-node Parallel Jobs
@@ -63,24 +64,34 @@ type RegisterJobDefinitionInput struct {
 	// in the AWS Batch User Guide. If the job definition's type parameter is
 	// container, then you must specify either containerProperties or nodeProperties.
 	NodeProperties *types.NodeProperties
+
 	// An object with various properties specific to single-node container-based jobs.
 	// If the job definition's type parameter is container, then you must specify
 	// either containerProperties or nodeProperties.
 	ContainerProperties *types.ContainerProperties
+
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition. Any retry strategy that is specified during a SubmitJob () operation
 	// overrides the retry strategy defined here. If a job is terminated due to a
 	// timeout, it is not retried.
 	RetryStrategy *types.RetryStrategy
+
 	// The type of job definition.
+	//
+	// This member is required.
 	Type types.JobDefinitionType
+
 	// Default parameter substitution placeholders to set in the job definition.
 	// Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob
 	// request override any corresponding parameter defaults from the job definition.
 	Parameters map[string]*string
+
 	// The name of the job definition to register. Up to 128 letters (uppercase and
 	// lowercase), numbers, hyphens, and underscores are allowed.
+	//
+	// This member is required.
 	JobDefinitionName *string
+
 	// The timeout configuration for jobs that are submitted with this job definition,
 	// after which AWS Batch terminates your jobs if they have not finished. If a job
 	// is terminated due to a timeout, it is not retried. The minimum value for the
@@ -93,11 +104,20 @@ type RegisterJobDefinitionInput struct {
 }
 
 type RegisterJobDefinitionOutput struct {
+
 	// The revision of the job definition.
+	//
+	// This member is required.
 	Revision *int32
+
 	// The name of the job definition.
+	//
+	// This member is required.
 	JobDefinitionName *string
+
 	// The Amazon Resource Name (ARN) of the job definition.
+	//
+	// This member is required.
 	JobDefinitionArn *string
 
 	// Metadata pertaining to the operation's result.

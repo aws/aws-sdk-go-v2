@@ -59,9 +59,15 @@ func (c *Client) ReplaceTopicRule(ctx context.Context, params *ReplaceTopicRuleI
 
 // The input for the ReplaceTopicRule operation.
 type ReplaceTopicRuleInput struct {
+
 	// The rule payload.
+	//
+	// This member is required.
 	TopicRulePayload *types.TopicRulePayload
+
 	// The name of the rule.
+	//
+	// This member is required.
 	RuleName *string
 }
 

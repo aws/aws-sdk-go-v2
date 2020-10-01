@@ -60,11 +60,15 @@ func (c *Client) DeleteInstanceSnapshot(ctx context.Context, params *DeleteInsta
 }
 
 type DeleteInstanceSnapshotInput struct {
+
 	// The name of the snapshot to delete.
+	//
+	// This member is required.
 	InstanceSnapshotName *string
 }
 
 type DeleteInstanceSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

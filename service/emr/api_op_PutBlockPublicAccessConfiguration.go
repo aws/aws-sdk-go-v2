@@ -60,6 +60,7 @@ func (c *Client) PutBlockPublicAccessConfiguration(ctx context.Context, params *
 }
 
 type PutBlockPublicAccessConfigurationInput struct {
+
 	// A configuration for Amazon EMR block public access. The configuration applies to
 	// all clusters created in your account for the current Region. The configuration
 	// specifies whether block public access is enabled. If block public access is
@@ -73,6 +74,8 @@ type PutBlockPublicAccessConfigurationInput struct {
 	// by default in that Region. To use this feature, you must manually enable and
 	// configure it. For accounts that did not create an EMR cluster in a Region before
 	// this date, block public access is enabled by default in that Region.
+	//
+	// This member is required.
 	BlockPublicAccessConfiguration *types.BlockPublicAccessConfiguration
 }
 

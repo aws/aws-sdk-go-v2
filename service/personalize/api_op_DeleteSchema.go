@@ -56,7 +56,10 @@ func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, op
 }
 
 type DeleteSchemaInput struct {
+
 	// The Amazon Resource Name (ARN) of the schema to delete.
+	//
+	// This member is required.
 	SchemaArn *string
 }
 

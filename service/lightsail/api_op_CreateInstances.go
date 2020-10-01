@@ -59,6 +59,7 @@ func (c *Client) CreateInstances(ctx context.Context, params *CreateInstancesInp
 }
 
 type CreateInstancesInput struct {
+
 	// The ID for a virtual private server image (e.g., app_wordpress_4_4 or
 	// app_lamp_7_0). Use the get blueprints operation to return a list of available
 	// images (or blueprints). Use active blueprints when creating new instances.
@@ -66,26 +67,40 @@ type CreateInstancesInput struct {
 	// are not necessarily available to create new instances. Blueprints are marked
 	// inactive when they become outdated due to operating system updates or new
 	// application releases.
+	//
+	// This member is required.
 	BlueprintId *string
+
 	// The name of your key pair.
 	KeyPairName *string
+
 	// The bundle of specification information for your virtual private server (or
 	// instance), including the pricing plan (e.g., micro_1_0).
+	//
+	// This member is required.
 	BundleId *string
+
 	// The Availability Zone in which to create your instance. Use the following
 	// format: us-east-2a (case sensitive). You can get a list of Availability Zones by
 	// using the get regions
 	// (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
 	// operation. Be sure to add the include Availability Zones parameter to your
 	// request.
+	//
+	// This member is required.
 	AvailabilityZone *string
+
 	// The names to use for your new Lightsail instances. Separate multiple values
 	// using quotation marks and commas, for example:
 	// ["MyFirstInstance","MySecondInstance"]
+	//
+	// This member is required.
 	InstanceNames []*string
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// A launch script you can create that configures a server with additional user
 	// data. For example, you might want to run apt-get -y update. Depending on the
 	// machine image you choose, the command to get software on your instance varies.
@@ -93,14 +108,17 @@ type CreateInstancesInput struct {
 	// pkg. For a complete list, see the Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image).
 	UserData *string
+
 	// An array of objects representing the add-ons to enable for the new instance.
 	AddOns []*types.AddOnRequest
+
 	// (Deprecated) The name for your custom image. In releases prior to June 12, 2017,
 	// this parameter was ignored by the API. It is now deprecated.
 	CustomImageName *string
 }
 
 type CreateInstancesOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

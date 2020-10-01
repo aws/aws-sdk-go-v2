@@ -55,8 +55,12 @@ func (c *Client) DeletePublicKey(ctx context.Context, params *DeletePublicKeyInp
 }
 
 type DeletePublicKeyInput struct {
+
 	// The ID of the public key you want to remove from CloudFront.
+	//
+	// This member is required.
 	Id *string
+
 	// The value of the ETag header that you received when retrieving the public key
 	// identity to delete. For example: E2QWRUHAPOMQZL.
 	IfMatch *string

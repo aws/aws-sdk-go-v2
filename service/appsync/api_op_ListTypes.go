@@ -56,21 +56,31 @@ func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns .
 }
 
 type ListTypesInput struct {
+
 	// The maximum number of results you want the request to return.
 	MaxResults *int32
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The type format: SDL or JSON.
+	//
+	// This member is required.
 	Format types.TypeDefinitionFormat
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
 }
 
 type ListTypesOutput struct {
+
 	// An identifier to be passed in the next request to this operation to return the
 	// next set of items in the list.
 	NextToken *string
+
 	// The Type objects.
 	Types []*types.Type
 

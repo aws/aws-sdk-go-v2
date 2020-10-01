@@ -56,16 +56,22 @@ func (c *Client) DeleteBuildBatch(ctx context.Context, params *DeleteBuildBatchI
 }
 
 type DeleteBuildBatchInput struct {
+
 	// The identifier of the batch build to delete.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DeleteBuildBatchOutput struct {
+
 	// The status code.
 	StatusCode *string
+
 	// An array of BuildNotDeleted objects that specify the builds that could not be
 	// deleted.
 	BuildsNotDeleted []*types.BuildNotDeleted
+
 	// An array of strings that contain the identifiers of the builds that were
 	// deleted.
 	BuildsDeleted []*string

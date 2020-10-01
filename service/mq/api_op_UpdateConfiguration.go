@@ -58,28 +58,39 @@ func (c *Client) UpdateConfiguration(ctx context.Context, params *UpdateConfigur
 
 // Updates the specified configuration.
 type UpdateConfigurationInput struct {
+
 	// The unique ID that Amazon MQ generates for the configuration.
+	//
+	// This member is required.
 	ConfigurationId *string
+
 	// Required. The base64-encoded XML configuration.
 	Data *string
+
 	// The description of the configuration.
 	Description *string
 }
 
 type UpdateConfigurationOutput struct {
+
 	// Required. The date and time of the configuration.
 	Created *time.Time
+
 	// Required. The name of the configuration. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 1-150 characters long.
 	Name *string
+
 	// The list of the first 20 warnings about the configuration XML elements or
 	// attributes that were sanitized.
 	Warnings []*types.SanitizationWarning
+
 	// Required. The Amazon Resource Name (ARN) of the configuration.
 	Arn *string
+
 	// Required. The unique ID that Amazon MQ generates for the configuration.
 	Id *string
+
 	// The latest revision of the configuration.
 	LatestRevision *types.ConfigurationRevision
 

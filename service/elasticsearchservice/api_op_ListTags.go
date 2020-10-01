@@ -59,14 +59,18 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 // the Elasticsearch domain to which the tags are attached that you want to view
 // are attached.
 type ListTagsInput struct {
+
 	// Specify the ARN for the Elasticsearch domain to which the tags are attached that
 	// you want to view.
+	//
+	// This member is required.
 	ARN *string
 }
 
 // The result of a ListTags operation. Contains tags for all requested
 // Elasticsearch domains.
 type ListTagsOutput struct {
+
 	// List of Tag for the requested Elasticsearch domain.
 	TagList []*types.Tag
 

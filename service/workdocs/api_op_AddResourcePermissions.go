@@ -58,18 +58,27 @@ func (c *Client) AddResourcePermissions(ctx context.Context, params *AddResource
 }
 
 type AddResourcePermissionsInput struct {
+
 	// The notification options.
 	NotificationOptions *types.NotificationOptions
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The ID of the resource.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The users, groups, or organization being granted permission.
+	//
+	// This member is required.
 	Principals []*types.SharePrincipal
 }
 
 type AddResourcePermissionsOutput struct {
+
 	// The share results.
 	ShareResults []*types.ShareResult
 

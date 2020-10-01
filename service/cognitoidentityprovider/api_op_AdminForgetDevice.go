@@ -57,11 +57,20 @@ func (c *Client) AdminForgetDevice(ctx context.Context, params *AdminForgetDevic
 
 // Sends the forgot device request, as an administrator.
 type AdminForgetDeviceInput struct {
+
 	// The device key.
+	//
+	// This member is required.
 	DeviceKey *string
+
 	// The user name.
+	//
+	// This member is required.
 	Username *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

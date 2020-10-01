@@ -68,21 +68,37 @@ func (c *Client) NotifyMigrationTaskState(ctx context.Context, params *NotifyMig
 }
 
 type NotifyMigrationTaskStateInput struct {
+
 	// The timestamp when the task was gathered.
+	//
+	// This member is required.
 	UpdateDateTime *time.Time
+
 	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
 	ProgressUpdateStream *string
+
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun *bool
+
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
+	//
+	// This member is required.
 	MigrationTaskName *string
+
 	// Number of seconds after the UpdateDateTime within which the Migration Hub can
 	// expect an update. If Migration Hub does not receive an update within the
 	// specified interval, then the migration task will be considered stale.
+	//
+	// This member is required.
 	NextUpdateSeconds *int32
+
 	// Information about the task's progress and status.
+	//
+	// This member is required.
 	Task *types.Task
 }
 

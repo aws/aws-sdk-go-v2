@@ -56,8 +56,12 @@ func (c *Client) DeleteRouteTable(ctx context.Context, params *DeleteRouteTableI
 }
 
 type DeleteRouteTableInput struct {
+
 	// The ID of the route table.
+	//
+	// This member is required.
 	RouteTableId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

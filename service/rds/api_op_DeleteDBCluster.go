@@ -62,6 +62,7 @@ func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInp
 
 //
 type DeleteDBClusterInput struct {
+
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created when
 	// SkipFinalSnapshot is disabled. Specifying this parameter and also skipping the
 	// creation of a final DB cluster snapshot with the SkipFinalShapshot parameter
@@ -75,11 +76,15 @@ type DeleteDBClusterInput struct {
 	//     * Can't end with a hyphen
 	// or contain two consecutive hyphens
 	FinalDBSnapshotIdentifier *string
+
 	// The DB cluster identifier for the DB cluster to be deleted. This parameter isn't
 	// case-sensitive. Constraints:
 	//
 	//     * Must match an existing DBClusterIdentifier.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// A value that indicates whether to skip the creation of a final DB cluster
 	// snapshot before the DB cluster is deleted. If skip is specified, no DB cluster
 	// snapshot is created. If skip isn't specified, a DB cluster snapshot is created
@@ -90,6 +95,7 @@ type DeleteDBClusterInput struct {
 }
 
 type DeleteDBClusterOutput struct {
+
 	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
 	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
 	// actions.

@@ -56,15 +56,24 @@ func (c *Client) GetArtifactUrl(ctx context.Context, params *GetArtifactUrlInput
 
 // Returns the request structure for the get artifact request.
 type GetArtifactUrlInput struct {
+
 	// The unique ID for an artifact.
+	//
+	// This member is required.
 	ArtifactId *string
 }
 
 // Returns the result structure for the get artifact request.
 type GetArtifactUrlOutput struct {
+
 	// The presigned URL for the artifact.
+	//
+	// This member is required.
 	ArtifactUrl *string
+
 	// The unique ID for an artifact.
+	//
+	// This member is required.
 	ArtifactId *string
 
 	// Metadata pertaining to the operation's result.

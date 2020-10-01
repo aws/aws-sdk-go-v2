@@ -56,13 +56,20 @@ func (c *Client) DeleteNodegroup(ctx context.Context, params *DeleteNodegroupInp
 }
 
 type DeleteNodegroupInput struct {
+
 	// The name of the node group to delete.
+	//
+	// This member is required.
 	NodegroupName *string
+
 	// The name of the Amazon EKS cluster that is associated with your node group.
+	//
+	// This member is required.
 	ClusterName *string
 }
 
 type DeleteNodegroupOutput struct {
+
 	// The full description of your deleted node group.
 	Nodegroup *types.Nodegroup
 

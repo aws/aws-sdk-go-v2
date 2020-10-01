@@ -62,6 +62,7 @@ type GetAccountSettingsInput struct {
 // Represents the account settings return values from the GetAccountSettings
 // request.
 type GetAccountSettingsOutput struct {
+
 	// The account settings.
 	AccountSettings *types.AccountSettings
 

@@ -59,15 +59,21 @@ func (c *Client) UpdateConnectivityInfo(ctx context.Context, params *UpdateConne
 
 // Connectivity information.
 type UpdateConnectivityInfoInput struct {
+
 	// A list of connectivity info.
 	ConnectivityInfo []*types.ConnectivityInfo
+
 	// The thing name.
+	//
+	// This member is required.
 	ThingName *string
 }
 
 type UpdateConnectivityInfoOutput struct {
+
 	// The new version of the connectivity info.
 	Version *string
+
 	// A message about the connectivity info update request.
 	Message *string
 

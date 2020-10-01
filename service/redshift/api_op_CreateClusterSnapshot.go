@@ -61,14 +61,20 @@ func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateCluste
 
 //
 type CreateClusterSnapshotInput struct {
+
 	// The number of days that a manual snapshot is retained. If the value is -1, the
 	// manual snapshot is retained indefinitely.  <p>The value must be either -1 or an
 	// integer between 1 and 3,653.</p> <p>The default value is -1.</p>
 	ManualSnapshotRetentionPeriod *int32
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// The cluster identifier for which you want a snapshot.
+	//
+	// This member is required.
 	ClusterIdentifier *string
+
 	// A unique identifier for the snapshot that you are requesting. This identifier
 	// must be unique for all snapshots within the AWS account. Constraints:
 	//
@@ -84,10 +90,13 @@ type CreateClusterSnapshotInput struct {
 	// with a hyphen or contain two consecutive hyphens
 	//
 	// Example: my-snapshot-id
+	//
+	// This member is required.
 	SnapshotIdentifier *string
 }
 
 type CreateClusterSnapshotOutput struct {
+
 	// Describes a snapshot.
 	Snapshot *types.Snapshot
 

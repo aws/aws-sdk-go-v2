@@ -57,12 +57,16 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 
 // Contains the parameters for DescribeTags.
 type DescribeTagsInput struct {
+
 	// The names of the load balancers.
+	//
+	// This member is required.
 	LoadBalancerNames []*string
 }
 
 // Contains the output for DescribeTags.
 type DescribeTagsOutput struct {
+
 	// Information about the tags.
 	TagDescriptions []*types.TagDescription
 

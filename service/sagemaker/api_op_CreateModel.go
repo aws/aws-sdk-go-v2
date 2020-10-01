@@ -77,6 +77,7 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 }
 
 type CreateModelInput struct {
+
 	// A VpcConfig () object that specifies the VPC that you want your model to connect
 	// to. Control access to and from your model container by configuring the VPC.
 	// VpcConfig is used in hosting services and in batch transform. For more
@@ -85,14 +86,17 @@ type CreateModelInput struct {
 	// in Batch Transform Jobs by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
 	VpcConfig *types.VpcConfig
+
 	// Isolates the model container. No inbound or outbound network calls can be made
 	// to or from the model container.
 	EnableNetworkIsolation *bool
+
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume
 	// to access model artifacts and docker image for deployment on ML compute
 	// instances or for batch transform jobs. Deploying on ML compute instances is part
@@ -100,19 +104,29 @@ type CreateModelInput struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
 	// able to pass this role to Amazon SageMaker, the caller of this API must have the
 	// iam:PassRole permission.
+	//
+	// This member is required.
 	ExecutionRoleArn *string
+
 	// The location of the primary docker image containing inference code, associated
 	// artifacts, and custom environment map that the inference code uses when the
 	// model is deployed for predictions.
 	PrimaryContainer *types.ContainerDefinition
+
 	// The name of the new model.
+	//
+	// This member is required.
 	ModelName *string
+
 	// Specifies the containers in the inference pipeline.
 	Containers []*types.ContainerDefinition
 }
 
 type CreateModelOutput struct {
+
 	// The ARN of the model created in Amazon SageMaker.
+	//
+	// This member is required.
 	ModelArn *string
 
 	// Metadata pertaining to the operation's result.

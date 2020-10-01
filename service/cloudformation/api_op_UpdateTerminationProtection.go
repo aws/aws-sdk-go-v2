@@ -63,14 +63,21 @@ func (c *Client) UpdateTerminationProtection(ctx context.Context, params *Update
 }
 
 type UpdateTerminationProtectionInput struct {
+
 	// Whether to enable termination protection on the specified stack.
+	//
+	// This member is required.
 	EnableTerminationProtection *bool
+
 	// The name or unique ID of the stack for which you want to set termination
 	// protection.
+	//
+	// This member is required.
 	StackName *string
 }
 
 type UpdateTerminationProtectionOutput struct {
+
 	// The unique ID of the stack.
 	StackId *string
 

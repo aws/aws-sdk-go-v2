@@ -58,7 +58,10 @@ func (c *Client) RejectSkill(ctx context.Context, params *RejectSkillInput, optF
 }
 
 type RejectSkillInput struct {
+
 	// The unique identifier of the skill.
+	//
+	// This member is required.
 	SkillId *string
 }
 

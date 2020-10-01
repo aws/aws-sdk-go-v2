@@ -57,7 +57,10 @@ func (c *Client) CancelSigningProfile(ctx context.Context, params *CancelSigning
 }
 
 type CancelSigningProfileInput struct {
+
 	// The name of the signing profile to be canceled.
+	//
+	// This member is required.
 	ProfileName *string
 }
 

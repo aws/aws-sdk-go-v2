@@ -56,7 +56,10 @@ func (c *Client) DeleteLogGroup(ctx context.Context, params *DeleteLogGroupInput
 }
 
 type DeleteLogGroupInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 

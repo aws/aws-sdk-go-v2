@@ -56,21 +56,32 @@ func (c *Client) ListAttachedIndices(ctx context.Context, params *ListAttachedIn
 }
 
 type ListAttachedIndicesInput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// A reference to the object that has indices attached.
+	//
+	// This member is required.
 	TargetReference *types.ObjectReference
+
 	// The consistency level to use for this operation.
 	ConsistencyLevel types.ConsistencyLevel
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
 	// The ARN of the directory.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type ListAttachedIndicesOutput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The indices attached to the specified object.
 	IndexAttachments []*types.IndexAttachment
 

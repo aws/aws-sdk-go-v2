@@ -62,9 +62,15 @@ func (c *Client) UpdateReceiptRule(ctx context.Context, params *UpdateReceiptRul
 // email with Amazon SES. For more information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type UpdateReceiptRuleInput struct {
+
 	// The name of the receipt rule set that the receipt rule belongs to.
+	//
+	// This member is required.
 	RuleSetName *string
+
 	// A data structure that contains the updated receipt rule information.
+	//
+	// This member is required.
 	Rule *types.ReceiptRule
 }
 

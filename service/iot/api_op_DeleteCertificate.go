@@ -60,9 +60,13 @@ func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificat
 
 // The input for the DeleteCertificate operation.
 type DeleteCertificateInput struct {
+
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
+
 	// Forces the deletion of a certificate if it is inactive and is not attached to an
 	// IoT thing.
 	ForceDelete *bool

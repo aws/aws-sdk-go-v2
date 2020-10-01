@@ -65,6 +65,7 @@ func (c *Client) ListTrafficPolicyInstancesByHostedZone(ctx context.Context, par
 // A request for the traffic policy instances that you created in a specified
 // hosted zone.
 type ListTrafficPolicyInstancesByHostedZoneInput struct {
+
 	// If the value of IsTruncated in the previous response is true, you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
 	// ListTrafficPolicyInstances request. For the value of trafficpolicyinstancetype,
@@ -73,8 +74,12 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	// traffic policy instances. If the value of IsTruncated in the previous response
 	// was false, there are no more traffic policy instances to get.
 	TrafficPolicyInstanceTypeMarker types.RRType
+
 	// The ID of the hosted zone that you want to list traffic policy instances for.
+	//
+	// This member is required.
 	HostedZoneId *string
+
 	// The maximum number of traffic policy instances to be included in the response
 	// body for this request. If you have more than MaxItems traffic policy instances,
 	// the value of the IsTruncated element in the response is true, and the values of
@@ -82,6 +87,7 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	// TrafficPolicyInstanceTypeMarker represent the first traffic policy instance that
 	// Amazon Route 53 will return if you submit another request.
 	MaxItems *string
+
 	// If the value of IsTruncated in the previous response is true, you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
 	// ListTrafficPolicyInstances request. For the value of trafficpolicyinstancename,
@@ -94,23 +100,34 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 
 // A complex type that contains the response information for the request.
 type ListTrafficPolicyInstancesByHostedZoneOutput struct {
+
 	// A flag that indicates whether there are more traffic policy instances to be
 	// listed. If the response was truncated, you can get the next group of traffic
 	// policy instances by submitting another ListTrafficPolicyInstancesByHostedZone
 	// request and specifying the values of HostedZoneIdMarker,
 	// TrafficPolicyInstanceNameMarker, and TrafficPolicyInstanceTypeMarker in the
 	// corresponding request parameters.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// The value that you specified for the MaxItems parameter in the
 	// ListTrafficPolicyInstancesByHostedZone request that produced the current
 	// response.
+	//
+	// This member is required.
 	MaxItems *string
+
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
+	//
+	// This member is required.
 	TrafficPolicyInstances []*types.TrafficPolicyInstance
+
 	// If IsTruncated is true, TrafficPolicyInstanceNameMarker is the name of the first
 	// traffic policy instance in the next group of traffic policy instances.
 	TrafficPolicyInstanceNameMarker *string
+
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of the
 	// resource record sets that are associated with the first traffic policy instance
 	// in the next group of traffic policy instances.

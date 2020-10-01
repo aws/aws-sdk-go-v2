@@ -60,13 +60,25 @@ func (c *Client) UnlinkDeveloperIdentity(ctx context.Context, params *UnlinkDeve
 
 // Input to the UnlinkDeveloperIdentity action.
 type UnlinkDeveloperIdentityInput struct {
+
 	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// A unique identifier in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityId *string
+
 	// A unique ID used by your backend authentication process to identify a user.
+	//
+	// This member is required.
 	DeveloperUserIdentifier *string
+
 	// The "domain" by which Cognito will refer to your users.
+	//
+	// This member is required.
 	DeveloperProviderName *string
 }
 

@@ -65,6 +65,7 @@ func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, 
 }
 
 type RestoreSecretInput struct {
+
 	// Specifies the secret that you want to restore from a previously scheduled
 	// deletion. You can specify either the Amazon Resource Name (ARN) or the friendly
 	// name of the secret. If you specify an ARN, we generally recommend that you
@@ -82,12 +83,16 @@ type RestoreSecretInput struct {
 	// random suffix. If you do include the random suffix added by Secrets Manager, you
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type RestoreSecretOutput struct {
+
 	// The ARN of the secret that was restored.
 	ARN *string
+
 	// The friendly name of the secret that was restored.
 	Name *string
 

@@ -55,6 +55,7 @@ func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointI
 
 // The input for the DescribeEndpoint operation.
 type DescribeEndpointInput struct {
+
 	// The endpoint type. Valid endpoint types include:
 	//
 	//     * iot:Data - Returns a
@@ -77,6 +78,7 @@ type DescribeEndpointInput struct {
 
 // The output from the DescribeEndpoint operation.
 type DescribeEndpointOutput struct {
+
 	// The endpoint. The format of the endpoint is as follows:
 	// identifier.iot.region.amazonaws.com.
 	EndpointAddress *string

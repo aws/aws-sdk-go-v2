@@ -74,14 +74,21 @@ func (c *Client) DeleteGeoMatchSet(ctx context.Context, params *DeleteGeoMatchSe
 }
 
 type DeleteGeoMatchSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// The GeoMatchSetID of the GeoMatchSet () that you want to delete. GeoMatchSetId
 	// is returned by CreateGeoMatchSet () and by ListGeoMatchSets ().
+	//
+	// This member is required.
 	GeoMatchSetId *string
 }
 
 type DeleteGeoMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteGeoMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

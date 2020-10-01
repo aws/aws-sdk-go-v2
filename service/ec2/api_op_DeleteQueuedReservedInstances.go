@@ -56,8 +56,12 @@ func (c *Client) DeleteQueuedReservedInstances(ctx context.Context, params *Dele
 }
 
 type DeleteQueuedReservedInstancesInput struct {
+
 	// The IDs of the Reserved Instances.
+	//
+	// This member is required.
 	ReservedInstancesIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -66,8 +70,10 @@ type DeleteQueuedReservedInstancesInput struct {
 }
 
 type DeleteQueuedReservedInstancesOutput struct {
+
 	// Information about the queued purchases that were successfully deleted.
 	SuccessfulQueuedPurchaseDeletions []*types.SuccessfulQueuedPurchaseDeletion
+
 	// Information about the queued purchases that could not be deleted.
 	FailedQueuedPurchaseDeletions []*types.FailedQueuedPurchaseDeletion
 

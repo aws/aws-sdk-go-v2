@@ -56,15 +56,24 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 }
 
 type CreateRepositoryInput struct {
+
 	// The name of the repository to create.
+	//
+	// This member is required.
 	Repository *string
+
 	// A description of the created repository.
 	Description *string
+
 	// The domain that contains the created repository.
+	//
+	// This member is required.
 	Domain *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// A list of upstream repositories to associate with the repository. The order of
 	// the upstream repositories in the list determines their priority order when AWS
 	// CodeArtifact looks for a requested package version. For more information, see
@@ -74,6 +83,7 @@ type CreateRepositoryInput struct {
 }
 
 type CreateRepositoryOutput struct {
+
 	// Information about the created repository after processing the request.
 	Repository *types.RepositoryDescription
 

@@ -66,13 +66,18 @@ func (c *Client) RequestEnvironmentInfo(ctx context.Context, params *RequestEnvi
 // Request to retrieve logs from an environment and store them in your Elastic
 // Beanstalk storage bucket.
 type RequestEnvironmentInfoInput struct {
+
 	// The type of information to request.
+	//
+	// This member is required.
 	InfoType types.EnvironmentInfoType
+
 	// The name of the environment of the requested data. If no such environment is
 	// found, RequestEnvironmentInfo returns an InvalidParameterValue error. Condition:
 	// You must specify either this or an EnvironmentId, or both. If you do not specify
 	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
+
 	// The ID of the environment of the requested data. If no such environment is
 	// found, RequestEnvironmentInfo returns an InvalidParameterValue error. Condition:
 	// You must specify either this or an EnvironmentName, or both. If you do not

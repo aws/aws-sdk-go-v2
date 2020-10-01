@@ -65,6 +65,7 @@ func (c *Client) CreatePolicyVersion(ctx context.Context, params *CreatePolicyVe
 }
 
 type CreatePolicyVersionInput struct {
+
 	// The JSON policy document that you want to use as the content for this new
 	// version of the policy. You must provide policies in JSON format in IAM. However,
 	// for AWS CloudFormation templates formatted in YAML, you can provide the policy
@@ -82,7 +83,10 @@ type CreatePolicyVersionInput struct {
 	//
 	//     * The special characters tab (\u0009), line
 	// feed (\u000A), and carriage return (\u000D)
+	//
+	// This member is required.
 	PolicyDocument *string
+
 	// Specifies whether to set this version as the policy's default version. When this
 	// parameter is true, the new policy version becomes the operative version. That
 	// is, it becomes the version that is in effect for the IAM users, groups, and
@@ -91,16 +95,20 @@ type CreatePolicyVersionInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	SetAsDefault *bool
+
 	// The Amazon Resource Name (ARN) of the IAM policy to which you want to add a new
 	// version. For more information about ARNs, see Amazon Resource Names (ARNs) and
 	// AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	PolicyArn *string
 }
 
 // Contains the response to a successful CreatePolicyVersion () request.
 type CreatePolicyVersionOutput struct {
+
 	// A structure containing details about the new policy version.
 	PolicyVersion *types.PolicyVersion
 

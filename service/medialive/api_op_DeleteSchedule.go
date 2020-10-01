@@ -56,7 +56,10 @@ func (c *Client) DeleteSchedule(ctx context.Context, params *DeleteScheduleInput
 
 // Placeholder documentation for DeleteScheduleRequest
 type DeleteScheduleInput struct {
+
 	// Id of the channel whose schedule is being deleted.
+	//
+	// This member is required.
 	ChannelId *string
 }
 

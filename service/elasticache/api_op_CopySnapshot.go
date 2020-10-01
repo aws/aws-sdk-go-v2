@@ -107,10 +107,15 @@ func (c *Client) CopySnapshot(ctx context.Context, params *CopySnapshotInput, op
 
 // Represents the input of a CopySnapshotMessage operation.
 type CopySnapshotInput struct {
+
 	// The ID of the KMS key used to encrypt the target snapshot.
 	KmsKeyId *string
+
 	// The name of an existing snapshot from which to make a copy.
+	//
+	// This member is required.
 	SourceSnapshotName *string
+
 	// The Amazon S3 bucket to which the snapshot is exported. This parameter is used
 	// only when exporting a snapshot for external access. When using this parameter to
 	// export a snapshot, be sure Amazon ElastiCache has the needed permissions to this
@@ -121,13 +126,17 @@ type CopySnapshotInput struct {
 	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html">Exporting
 	// a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>
 	TargetBucket *string
+
 	// A name for the snapshot copy. ElastiCache does not permit overwriting a
 	// snapshot, therefore this name must be unique within its context - ElastiCache or
 	// an Amazon S3 bucket if exporting.
+	//
+	// This member is required.
 	TargetSnapshotName *string
 }
 
 type CopySnapshotOutput struct {
+
 	// Represents a copy of an entire Redis cluster as of the time when the snapshot
 	// was taken.
 	Snapshot *types.Snapshot

@@ -56,7 +56,10 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 }
 
 type DeleteTagsInput struct {
+
 	// One or more tags.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

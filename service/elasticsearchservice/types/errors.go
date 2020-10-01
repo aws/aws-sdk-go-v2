@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An error occurred because user does not have permissions to access the resource.
@@ -25,12 +24,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occurred while processing the request.
 type BaseException struct {
@@ -48,12 +41,6 @@ func (e *BaseException) ErrorMessage() string {
 }
 func (e *BaseException) ErrorCode() string             { return "BaseException" }
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BaseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BaseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occurred because the client attempts to remove a resource that is
 // currently in use. Returns HTTP status code 409.
@@ -72,12 +59,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occured because the client wanted to access a not supported operation.
 // Gives http status code of 409.
@@ -96,12 +77,6 @@ func (e *DisabledOperationException) ErrorMessage() string {
 }
 func (e *DisabledOperationException) ErrorCode() string             { return "DisabledOperationException" }
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DisabledOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DisabledOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request processing has failed because of an unknown error, exception or
 // failure (the failure is internal to the service) . Gives http status code of
@@ -121,12 +96,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request processing has failed because of invalid pagination token provided
 // by customer. Returns an HTTP status code of 400.
@@ -147,12 +116,6 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 	return "InvalidPaginationTokenException"
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPaginationTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPaginationTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception for trying to create or access sub-resource that is either invalid
 // or not supported. Gives http status code of 409.
@@ -171,12 +134,6 @@ func (e *InvalidTypeException) ErrorMessage() string {
 }
 func (e *InvalidTypeException) ErrorCode() string             { return "InvalidTypeException" }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception for trying to create more than allowed resources or sub-resources.
 // Gives http status code of 409.
@@ -195,12 +152,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception for creating a resource that already exists. Gives http status code
 // of 400.
@@ -219,12 +170,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception for accessing or deleting a resource that does not exist. Gives
 // http status code of 400.
@@ -243,12 +188,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception for missing / invalid input fields. Gives http status code of 400.
 type ValidationException struct {
@@ -266,9 +205,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

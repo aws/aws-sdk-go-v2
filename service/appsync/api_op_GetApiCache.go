@@ -57,12 +57,16 @@ func (c *Client) GetApiCache(ctx context.Context, params *GetApiCacheInput, optF
 
 // Represents the input of a GetApiCache operation.
 type GetApiCacheInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 // Represents the output of a GetApiCache operation.
 type GetApiCacheOutput struct {
+
 	// The ApiCache object.
 	ApiCache *types.ApiCache
 

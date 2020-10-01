@@ -57,21 +57,32 @@ func (c *Client) AcceptDirectConnectGatewayAssociationProposal(ctx context.Conte
 }
 
 type AcceptDirectConnectGatewayAssociationProposalInput struct {
+
 	// The ID of the Direct Connect gateway.
+	//
+	// This member is required.
 	DirectConnectGatewayId *string
+
 	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway. For
 	// information about how to set the prefixes, see Allowed Prefixes
 	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
 	// in the AWS Direct Connect User Guide.
 	OverrideAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
+
 	// The ID of the AWS account that owns the virtual private gateway or transit
 	// gateway.
+	//
+	// This member is required.
 	AssociatedGatewayOwnerAccount *string
+
 	// The ID of the request proposal.
+	//
+	// This member is required.
 	ProposalId *string
 }
 
 type AcceptDirectConnectGatewayAssociationProposalOutput struct {
+
 	// Information about an association between a Direct Connect gateway and a virtual
 	// private gateway or transit gateway.
 	DirectConnectGatewayAssociation *types.DirectConnectGatewayAssociation

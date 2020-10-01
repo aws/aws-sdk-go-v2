@@ -99,6 +99,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The identifier for the secret that you want to attach tags to. You can specify
 	// either the Amazon Resource Name (ARN) or the friendly name of the secret. If you
 	// specify an ARN, we generally recommend that you specify a complete ARN. You can
@@ -116,7 +117,10 @@ type TagResourceInput struct {
 	// you do include the random suffix added by Secrets Manager, you receive either a
 	// ResourceNotFoundException or an AccessDeniedException error, depending on your
 	// permissions.
+	//
+	// This member is required.
 	SecretId *string
+
 	// The tags to attach to the secret. Each element in the list consists of a Key and
 	// a Value. This parameter to the API requires a JSON text string argument. For
 	// information on how to format a JSON parameter for the various command line tool
@@ -124,6 +128,8 @@ type TagResourceInput struct {
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
 	// in the AWS CLI User Guide. For the AWS CLI, you can also use the syntax: --Tags
 	// Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

@@ -63,12 +63,21 @@ func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *Upd
 }
 
 type UpdateWorkspaceImagePermissionInput struct {
+
 	// The permission to copy the image. This permission can be revoked only after an
 	// image has been shared.
+	//
+	// This member is required.
 	AllowCopyImage *bool
+
 	// The identifier of the AWS account to share or unshare the image with.
+	//
+	// This member is required.
 	SharedAccountId *string
+
 	// The identifier of the image.
+	//
+	// This member is required.
 	ImageId *string
 }
 

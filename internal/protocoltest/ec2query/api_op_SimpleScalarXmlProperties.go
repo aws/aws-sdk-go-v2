@@ -53,16 +53,25 @@ type SimpleScalarXmlPropertiesInput struct {
 }
 
 type SimpleScalarXmlPropertiesOutput struct {
-	StringValue       *string
-	EmptyStringValue  *string
-	TrueBooleanValue  *bool
+	StringValue *string
+
+	EmptyStringValue *string
+
+	TrueBooleanValue *bool
+
 	FalseBooleanValue *bool
-	ByteValue         *int8
-	ShortValue        *int16
-	IntegerValue      *int32
-	LongValue         *int64
-	FloatValue        *float32
-	DoubleValue       *float64
+
+	ByteValue *int8
+
+	ShortValue *int16
+
+	IntegerValue *int32
+
+	LongValue *int64
+
+	FloatValue *float32
+
+	DoubleValue *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

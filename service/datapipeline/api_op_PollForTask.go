@@ -68,12 +68,16 @@ func (c *Client) PollForTask(ctx context.Context, params *PollForTaskInput, optF
 
 // Contains the parameters for PollForTask.
 type PollForTaskInput struct {
+
 	// The type of task the task runner is configured to accept and process. The worker
 	// group is set as a field on objects in the pipeline when they are created. You
 	// can only specify a single value for workerGroup in the call to PollForTask.
 	// There are no wildcard values permitted in workerGroup; the string must be an
 	// exact, case-sensitive, match.
+	//
+	// This member is required.
 	WorkerGroup *string
+
 	// Identity information for the EC2 instance that is hosting the task runner. You
 	// can get this value from the instance using
 	// http://169.254.169.254/latest/meta-data/instance-id. For more information, see
@@ -83,12 +87,14 @@ type PollForTaskInput struct {
 	// that your task runner is running on an EC2 instance, and ensures the proper AWS
 	// Data Pipeline service charges are applied to your pipeline.
 	InstanceIdentity *types.InstanceIdentity
+
 	// The public DNS name of the calling task runner.
 	Hostname *string
 }
 
 // Contains the output of PollForTask.
 type PollForTaskOutput struct {
+
 	// The information needed to complete the task that is being assigned to the task
 	// runner. One of the fields returned in this object is taskId, which contains an
 	// identifier for the task being assigned. The calling task runner uses taskId in

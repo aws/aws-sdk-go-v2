@@ -56,12 +56,16 @@ func (c *Client) GetManagedScalingPolicy(ctx context.Context, params *GetManaged
 }
 
 type GetManagedScalingPolicyInput struct {
+
 	// Specifies the ID of the cluster for which the managed scaling policy will be
 	// fetched.
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 type GetManagedScalingPolicyOutput struct {
+
 	// Specifies the managed scaling policy that is attached to an Amazon EMR cluster.
 	ManagedScalingPolicy *types.ManagedScalingPolicy
 

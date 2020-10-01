@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Indicates that either your AWS credentials are invalid or you do not have access
@@ -25,12 +24,6 @@ func (e *AuthException) ErrorMessage() string {
 }
 func (e *AuthException) ErrorCode() string             { return "AuthException" }
 func (e *AuthException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the instance requested was not found in the given zone. Check
 // that you have provided a valid instance ID and the correct zone.
@@ -49,12 +42,6 @@ func (e *EC2InstanceNotFoundException) ErrorMessage() string {
 }
 func (e *EC2InstanceNotFoundException) ErrorCode() string             { return "EC2InstanceNotFoundException" }
 func (e *EC2InstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EC2InstanceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EC2InstanceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that you provided bad input. Ensure you have a valid instance ID, the
 // correct zone, and a valid SSH public key.
@@ -73,12 +60,6 @@ func (e *InvalidArgsException) ErrorMessage() string {
 }
 func (e *InvalidArgsException) ErrorCode() string             { return "InvalidArgsException" }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the service encountered an error. Follow the message's
 // instructions and try again.
@@ -97,12 +78,6 @@ func (e *ServiceException) ErrorMessage() string {
 }
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates you have been making requests too frequently and have been throttled.
 // Wait for a while and try again. If higher call volume is warranted contact AWS
@@ -122,9 +97,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}

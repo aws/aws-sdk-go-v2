@@ -55,15 +55,24 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 
 // The structure representing the getPolicyRequest.
 type GetPolicyInput struct {
+
 	// The name of the profiling group.
+	//
+	// This member is required.
 	ProfilingGroupName *string
 }
 
 // The structure representing the getPolicyResponse.
 type GetPolicyOutput struct {
+
 	// The resource-based policy attached to the ProfilingGroup.
+	//
+	// This member is required.
 	Policy *string
+
 	// A unique identifier for the current revision of the policy.
+	//
+	// This member is required.
 	RevisionId *string
 
 	// Metadata pertaining to the operation's result.

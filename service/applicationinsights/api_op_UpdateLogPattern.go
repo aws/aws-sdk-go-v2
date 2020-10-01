@@ -56,21 +56,34 @@ func (c *Client) UpdateLogPattern(ctx context.Context, params *UpdateLogPatternI
 }
 
 type UpdateLogPatternInput struct {
+
 	// The log pattern.
 	Pattern *string
+
 	// The name of the log pattern set.
+	//
+	// This member is required.
 	PatternSetName *string
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The name of the log pattern.
+	//
+	// This member is required.
 	PatternName *string
+
 	// Rank of the log pattern.
 	Rank *int32
 }
 
 type UpdateLogPatternOutput struct {
+
 	// The name of the resource group.
 	ResourceGroupName *string
+
 	// The successfully created log pattern.
 	LogPattern *types.LogPattern
 

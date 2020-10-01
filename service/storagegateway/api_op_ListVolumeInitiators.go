@@ -58,13 +58,17 @@ func (c *Client) ListVolumeInitiators(ctx context.Context, params *ListVolumeIni
 
 // ListVolumeInitiatorsInput
 type ListVolumeInitiatorsInput struct {
+
 	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes () operation
 	// to return a list of gateway volumes for the gateway.
+	//
+	// This member is required.
 	VolumeARN *string
 }
 
 // ListVolumeInitiatorsOutput
 type ListVolumeInitiatorsOutput struct {
+
 	// The host names and port numbers of all iSCSI initiators that are connected to
 	// the gateway.
 	Initiators []*string

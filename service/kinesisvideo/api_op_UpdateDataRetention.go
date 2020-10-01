@@ -69,16 +69,27 @@ func (c *Client) UpdateDataRetention(ctx context.Context, params *UpdateDataRete
 }
 
 type UpdateDataRetentionInput struct {
+
 	// The name of the stream whose retention period you want to change.
 	StreamName *string
+
 	// The version of the stream whose retention period you want to change. To get the
 	// version, call either the DescribeStream or the ListStreams API.
+	//
+	// This member is required.
 	CurrentVersion *string
+
 	// The retention period, in hours. The value you specify replaces the current
 	// value. The maximum value for this parameter is 87600 (ten years).
+	//
+	// This member is required.
 	DataRetentionChangeInHours *int32
+
 	// Indicates whether you want to increase or decrease the retention period.
+	//
+	// This member is required.
 	Operation types.UpdateDataRetentionOperation
+
 	// The Amazon Resource Name (ARN) of the stream whose retention period you want to
 	// change.
 	StreamARN *string

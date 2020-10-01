@@ -64,7 +64,10 @@ func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsI
 }
 
 type DeleteBucketCorsInput struct {
+
 	// Specifies the bucket whose cors configuration is being deleted.
+	//
+	// This member is required.
 	Bucket *string
 }
 

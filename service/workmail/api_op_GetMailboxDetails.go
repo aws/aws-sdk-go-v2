@@ -55,16 +55,24 @@ func (c *Client) GetMailboxDetails(ctx context.Context, params *GetMailboxDetail
 }
 
 type GetMailboxDetailsInput struct {
+
 	// The identifier for the user whose mailbox details are being requested.
+	//
+	// This member is required.
 	UserId *string
+
 	// The identifier for the organization that contains the user whose mailbox details
 	// are being requested.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type GetMailboxDetailsOutput struct {
+
 	// The current mailbox size, in MB, for the specified user.
 	MailboxSize *float64
+
 	// The maximum allowed mailbox size, in MB, for the specified user.
 	MailboxQuota *int32
 

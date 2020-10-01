@@ -67,8 +67,10 @@ func (c *Client) DescribePrincipalIdFormat(ctx context.Context, params *Describe
 }
 
 type DescribePrincipalIdFormatInput struct {
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
 	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log |
 	// image | import-task | instance | internet-gateway | network-acl |
@@ -78,9 +80,11 @@ type DescribePrincipalIdFormatInput struct {
 	// vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection |
 	// vpn-connection | vpn-gateway
 	Resources []*string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -89,9 +93,11 @@ type DescribePrincipalIdFormatInput struct {
 }
 
 type DescribePrincipalIdFormatOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the ID format settings for the ARN.
 	Principals []*types.PrincipalIdFormat
 

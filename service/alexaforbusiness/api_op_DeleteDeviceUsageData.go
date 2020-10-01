@@ -59,9 +59,15 @@ func (c *Client) DeleteDeviceUsageData(ctx context.Context, params *DeleteDevice
 }
 
 type DeleteDeviceUsageDataInput struct {
+
 	// The ARN of the device.
+	//
+	// This member is required.
 	DeviceArn *string
+
 	// The type of usage data to delete.
+	//
+	// This member is required.
 	DeviceUsageType types.DeviceUsageType
 }
 

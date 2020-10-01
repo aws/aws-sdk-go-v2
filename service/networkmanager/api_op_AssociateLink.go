@@ -58,15 +58,25 @@ func (c *Client) AssociateLink(ctx context.Context, params *AssociateLinkInput, 
 }
 
 type AssociateLinkInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The ID of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// The ID of the link.
+	//
+	// This member is required.
 	LinkId *string
 }
 
 type AssociateLinkOutput struct {
+
 	// The link association.
 	LinkAssociation *types.LinkAssociation
 

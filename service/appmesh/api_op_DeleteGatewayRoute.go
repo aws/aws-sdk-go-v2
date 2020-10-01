@@ -55,12 +55,22 @@ func (c *Client) DeleteGatewayRoute(ctx context.Context, params *DeleteGatewayRo
 }
 
 type DeleteGatewayRouteInput struct {
+
 	// The name of the gateway route to delete.
+	//
+	// This member is required.
 	GatewayRouteName *string
+
 	// The name of the service mesh to delete the gateway route from.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual gateway to delete the route from.
+	//
+	// This member is required.
 	VirtualGatewayName *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -69,7 +79,10 @@ type DeleteGatewayRouteInput struct {
 }
 
 type DeleteGatewayRouteOutput struct {
+
 	// The gateway route that was deleted.
+	//
+	// This member is required.
 	GatewayRoute *types.GatewayRouteData
 
 	// Metadata pertaining to the operation's result.

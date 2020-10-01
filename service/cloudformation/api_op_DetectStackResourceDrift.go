@@ -69,16 +69,25 @@ func (c *Client) DetectStackResourceDrift(ctx context.Context, params *DetectSta
 }
 
 type DetectStackResourceDriftInput struct {
+
 	// The name of the stack to which the resource belongs.
+	//
+	// This member is required.
 	StackName *string
+
 	// The logical name of the resource for which to return drift information.
+	//
+	// This member is required.
 	LogicalResourceId *string
 }
 
 type DetectStackResourceDriftOutput struct {
+
 	// Information about whether the resource's actual configuration has drifted from
 	// its expected template configuration, including actual and expected property
 	// values and any differences detected.
+	//
+	// This member is required.
 	StackResourceDrift *types.StackResourceDrift
 
 	// Metadata pertaining to the operation's result.

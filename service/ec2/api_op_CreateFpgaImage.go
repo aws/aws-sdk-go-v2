@@ -61,31 +61,42 @@ func (c *Client) CreateFpgaImage(ctx context.Context, params *CreateFpgaImageInp
 }
 
 type CreateFpgaImageInput struct {
+
 	// The location of the encrypted design checkpoint in Amazon S3. The input must be
 	// a tarball.
+	//
+	// This member is required.
 	InputStorageLocation *types.StorageLocation
+
 	// The location in Amazon S3 for the output logs.
 	LogsStorageLocation *types.StorageLocation
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// A name for the AFI.
 	Name *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to apply to the FPGA image during creation.
 	TagSpecifications []*types.TagSpecification
+
 	// A description for the AFI.
 	Description *string
 }
 
 type CreateFpgaImageOutput struct {
+
 	// The FPGA image identifier (AFI ID).
 	FpgaImageId *string
+
 	// The global FPGA image identifier (AGFI ID).
 	FpgaImageGlobalId *string
 

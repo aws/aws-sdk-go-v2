@@ -83,15 +83,22 @@ func (c *Client) DescribeActivityType(ctx context.Context, params *DescribeActiv
 }
 
 type DescribeActivityTypeInput struct {
+
 	// The name of the domain in which the activity type is registered.
+	//
+	// This member is required.
 	Domain *string
+
 	// The activity type to get information about. Activity types are identified by the
 	// name and version that were supplied when the activity was registered.
+	//
+	// This member is required.
 	ActivityType *types.ActivityType
 }
 
 // Detailed information about an activity type.
 type DescribeActivityTypeOutput struct {
+
 	// General information about the activity type. The status of activity type
 	// (returned in the ActivityTypeInfo structure) can be one of the following.
 	//
@@ -102,8 +109,13 @@ type DescribeActivityTypeOutput struct {
 	//     * DEPRECATED – The type was deprecated using
 	// DeprecateActivityType (), but is still in use. You should keep workers
 	// supporting this type running. You cannot create new tasks of this type.
+	//
+	// This member is required.
 	TypeInfo *types.ActivityTypeInfo
+
 	// The configuration settings registered with the activity type.
+	//
+	// This member is required.
 	Configuration *types.ActivityTypeConfiguration
 
 	// Metadata pertaining to the operation's result.

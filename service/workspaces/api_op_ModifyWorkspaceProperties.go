@@ -58,9 +58,15 @@ func (c *Client) ModifyWorkspaceProperties(ctx context.Context, params *ModifyWo
 }
 
 type ModifyWorkspacePropertiesInput struct {
+
 	// The identifier of the WorkSpace.
+	//
+	// This member is required.
 	WorkspaceId *string
+
 	// The properties of the WorkSpace.
+	//
+	// This member is required.
 	WorkspaceProperties *types.WorkspaceProperties
 }
 

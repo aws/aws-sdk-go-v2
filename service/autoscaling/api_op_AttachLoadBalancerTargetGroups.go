@@ -64,10 +64,16 @@ func (c *Client) AttachLoadBalancerTargetGroups(ctx context.Context, params *Att
 }
 
 type AttachLoadBalancerTargetGroupsInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The Amazon Resource Names (ARN) of the target groups. You can specify up to 10
 	// target groups.
+	//
+	// This member is required.
 	TargetGroupARNs []*string
 }
 

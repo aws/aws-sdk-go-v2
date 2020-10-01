@@ -56,17 +56,24 @@ func (c *Client) ListSmartHomeAppliances(ctx context.Context, params *ListSmartH
 }
 
 type ListSmartHomeAppliancesInput struct {
+
 	// The tokens used for pagination.
 	NextToken *string
+
 	// The maximum number of appliances to be returned, per paginated calls.
 	MaxResults *int32
+
 	// The room that the appliances are associated with.
+	//
+	// This member is required.
 	RoomArn *string
 }
 
 type ListSmartHomeAppliancesOutput struct {
+
 	// The smart home appliances.
 	SmartHomeAppliances []*types.SmartHomeAppliance
+
 	// The tokens used for pagination.
 	NextToken *string
 

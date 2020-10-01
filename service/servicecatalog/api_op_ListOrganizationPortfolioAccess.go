@@ -59,6 +59,7 @@ func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *Li
 }
 
 type ListOrganizationPortfolioAccessInput struct {
+
 	// The organization node type that will be returned in the output.
 	//
 	//     *
@@ -70,14 +71,22 @@ type ListOrganizationPortfolioAccessInput struct {
 	//
 	//     * ACCOUNT - Account that has access to the
 	// portfolio within your organization.
+	//
+	// This member is required.
 	OrganizationNodeType types.OrganizationNodeType
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The portfolio identifier. For example, port-2abcdext3y5fk.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -90,9 +99,11 @@ type ListOrganizationPortfolioAccessInput struct {
 }
 
 type ListOrganizationPortfolioAccessOutput struct {
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Displays information about the organization nodes.
 	OrganizationNodes []*types.OrganizationNode
 

@@ -67,21 +67,28 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 
 // Represents the input of an AddTagsToResource operation.
 type AddTagsToResourceInput struct {
+
 	// A list of cost allocation tags to be added to this resource. A tag is a
 	// key-value pair. A tag key must be accompanied by a tag value.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the resource to which the tags are to be
 	// added, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or
 	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. ElastiCache
 	// resources are cluster and snapshot. For more information about ARNs, see Amazon
 	// Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
 	ResourceName *string
 }
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
 // RemoveTagsFromResource operations.
 type AddTagsToResourceOutput struct {
+
 	// A list of cost allocation tags as key-value pairs.
 	TagList []*types.Tag
 

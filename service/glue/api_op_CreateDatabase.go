@@ -56,8 +56,12 @@ func (c *Client) CreateDatabase(ctx context.Context, params *CreateDatabaseInput
 }
 
 type CreateDatabaseInput struct {
+
 	// The metadata for the database.
+	//
+	// This member is required.
 	DatabaseInput *types.DatabaseInput
+
 	// The ID of the Data Catalog in which to create the database. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string

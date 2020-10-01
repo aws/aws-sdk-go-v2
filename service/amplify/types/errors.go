@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // A request contains unexpected data.
@@ -24,12 +23,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An operation failed because a dependent service threw an exception.
 type DependentServiceFailureException struct {
@@ -49,12 +42,6 @@ func (e *DependentServiceFailureException) ErrorCode() string {
 	return "DependentServiceFailureException"
 }
 func (e *DependentServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *DependentServiceFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependentServiceFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service failed to perform an operation due to an internal issue.
 type InternalFailureException struct {
@@ -72,12 +59,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource could not be created because service quotas were exceeded.
 type LimitExceededException struct {
@@ -95,12 +76,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An entity was not found during an operation.
 type NotFoundException struct {
@@ -118,12 +93,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An operation failed due to a non-existent resource.
 type ResourceNotFoundException struct {
@@ -143,18 +112,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceNotFoundException) HasCode() bool {
-	return e.Code != nil
-}
 
 // An operation failed due to a lack of access.
 type UnauthorizedException struct {
@@ -172,9 +129,3 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}

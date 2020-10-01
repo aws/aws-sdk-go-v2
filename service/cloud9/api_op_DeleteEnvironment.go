@@ -56,7 +56,10 @@ func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmen
 }
 
 type DeleteEnvironmentInput struct {
+
 	// The ID of the environment to delete.
+	//
+	// This member is required.
 	EnvironmentId *string
 }
 

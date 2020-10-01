@@ -63,6 +63,7 @@ func (c *Client) DescribeRecord(ctx context.Context, params *DescribeRecordInput
 }
 
 type DescribeRecordInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -72,22 +73,30 @@ type DescribeRecordInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The record identifier of the provisioned product. This identifier is returned by
 	// the request operation.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeRecordOutput struct {
+
 	// Information about the product.
 	RecordDetail *types.RecordDetail
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Information about the product created as the result of a request. For example,
 	// the output for a CloudFormation-backed product that creates an S3 bucket would
 	// include the S3 bucket URL.

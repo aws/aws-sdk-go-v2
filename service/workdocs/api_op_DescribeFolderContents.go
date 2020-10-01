@@ -60,31 +60,44 @@ func (c *Client) DescribeFolderContents(ctx context.Context, params *DescribeFol
 }
 
 type DescribeFolderContentsInput struct {
+
 	// The ID of the folder.
+	//
+	// This member is required.
 	FolderId *string
+
 	// The sorting criteria.
 	Sort types.ResourceSortType
+
 	// The marker for the next set of results. This marker was received from a previous
 	// call.
 	Marker *string
+
 	// The contents to include. Specify "INITIALIZED" to include initialized documents.
 	Include *string
+
 	// The maximum number of items to return with this call.
 	Limit *int32
+
 	// The order for the contents of the folder.
 	Order types.OrderType
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The type of items.
 	Type types.FolderContentType
 }
 
 type DescribeFolderContentsOutput struct {
+
 	// The subfolders in the specified folder.
 	Folders []*types.FolderMetadata
+
 	// The documents in the specified folder.
 	Documents []*types.DocumentMetadata
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string

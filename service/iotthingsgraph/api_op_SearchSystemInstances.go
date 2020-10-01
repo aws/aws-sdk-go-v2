@@ -55,11 +55,14 @@ func (c *Client) SearchSystemInstances(ctx context.Context, params *SearchSystem
 }
 
 type SearchSystemInstancesInput struct {
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
 	// Optional filter to apply to the search. Valid filters are SYSTEM_TEMPLATE_ID,
 	// STATUS, and GREENGRASS_GROUP_NAME. Multiple filters function as OR criteria in
 	// the query. Multiple values passed inside the filter function as AND criteria.
@@ -67,8 +70,10 @@ type SearchSystemInstancesInput struct {
 }
 
 type SearchSystemInstancesOutput struct {
+
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
+
 	// An array of objects that contain summary data abour the system instances in the
 	// result set.
 	Summaries []*types.SystemInstanceSummary

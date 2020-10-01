@@ -58,12 +58,16 @@ func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInp
 
 // This input determines which cluster to describe.
 type DescribeClusterInput struct {
+
 	// The identifier of the cluster to describe.
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 // This output contains the description of the cluster.
 type DescribeClusterOutput struct {
+
 	// This output contains the details for the requested cluster.
 	Cluster *types.Cluster
 

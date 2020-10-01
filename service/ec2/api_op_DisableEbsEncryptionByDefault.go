@@ -60,6 +60,7 @@ func (c *Client) DisableEbsEncryptionByDefault(ctx context.Context, params *Disa
 }
 
 type DisableEbsEncryptionByDefaultInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -68,6 +69,7 @@ type DisableEbsEncryptionByDefaultInput struct {
 }
 
 type DisableEbsEncryptionByDefaultOutput struct {
+
 	// The updated status of encryption by default.
 	EbsEncryptionByDefault *bool
 

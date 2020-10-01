@@ -74,6 +74,7 @@ func (c *Client) SetSecurityTokenServicePreferences(ctx context.Context, params 
 }
 
 type SetSecurityTokenServicePreferencesInput struct {
+
 	// The version of the global endpoint token. Version 1 tokens are valid only in AWS
 	// Regions that are available by default. These tokens do not work in manually
 	// enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in
@@ -82,6 +83,8 @@ type SetSecurityTokenServicePreferencesInput struct {
 	// STS in an AWS Region
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the IAM User Guide.
+	//
+	// This member is required.
 	GlobalEndpointTokenVersion types.GlobalEndpointTokenVersion
 }
 

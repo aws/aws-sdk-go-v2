@@ -56,25 +56,36 @@ func (c *Client) SearchDashboards(ctx context.Context, params *SearchDashboardsI
 }
 
 type SearchDashboardsInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
 	// The ID of the AWS account that contains the user whose dashboards you're
 	// searching for.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The filters to apply to the search. Currently, you can search only by user name,
 	// for example, "Filters": [ { "Name": "QUICKSIGHT_USER", "Operator":
 	// "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"
 	// } ]
+	//
+	// This member is required.
 	Filters []*types.DashboardSearchFilter
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 }
 
 type SearchDashboardsOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The list of dashboards owned by the user specified in Filters in your request.
 	DashboardSummaryList []*types.DashboardSummary
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 

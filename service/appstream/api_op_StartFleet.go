@@ -55,7 +55,10 @@ func (c *Client) StartFleet(ctx context.Context, params *StartFleetInput, optFns
 }
 
 type StartFleetInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	Name *string
 }
 

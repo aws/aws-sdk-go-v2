@@ -57,20 +57,30 @@ func (c *Client) AdminListUserAuthEvents(ctx context.Context, params *AdminListU
 }
 
 type AdminListUserAuthEventsInput struct {
+
 	// The maximum number of authentication events to return.
 	MaxResults *int32
+
 	// A pagination token.
 	NextToken *string
+
 	// The user pool username or an alias.
+	//
+	// This member is required.
 	Username *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type AdminListUserAuthEventsOutput struct {
+
 	// The response object. It includes the EventID, EventType, CreationDate,
 	// EventRisk, and EventResponse.
 	AuthEvents []*types.AuthEventType
+
 	// A pagination token.
 	NextToken *string
 

@@ -61,12 +61,14 @@ func (c *Client) ListActivities(ctx context.Context, params *ListActivitiesInput
 }
 
 type ListActivitiesInput struct {
+
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
 	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
@@ -76,8 +78,12 @@ type ListActivitiesInput struct {
 }
 
 type ListActivitiesOutput struct {
+
 	// The list of activities.
+	//
+	// This member is required.
 	Activities []*types.ActivityListItem
+
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments

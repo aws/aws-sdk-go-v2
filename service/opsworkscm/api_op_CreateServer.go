@@ -76,12 +76,14 @@ func (c *Client) CreateServer(ctx context.Context, params *CreateServerInput, op
 }
 
 type CreateServerInput struct {
+
 	// A list of security group IDs to attach to the Amazon EC2 instance. If you add
 	// this parameter, the specified security groups must be within the VPC that is
 	// specified by SubnetIds. If you do not specify this parameter, AWS OpsWorks CM
 	// creates one new security group that uses TCP ports 22 and 443, open to 0.0.0.0/0
 	// (everyone).
 	SecurityGroupIds []*string
+
 	// The IDs of subnets in which to launch the server EC2 instance. Amazon
 	// EC2-Classic customers: This field is required. All servers must run within a
 	// VPC. The VPC must have "Auto Assign Public IP" enabled. EC2-VPC customers: This
@@ -91,16 +93,22 @@ type CreateServerInput struct {
 	// information about supported Amazon EC2 platforms, see Supported Platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
 	SubnetIds []*string
+
 	// The number of automated backups that you want to keep. Whenever a new backup is
 	// created, AWS OpsWorks CM deletes the oldest backups if this number is exceeded.
 	// The default value is 1.
 	BackupRetentionCount *int32
+
 	// If you specify this field, AWS OpsWorks CM creates the server by using the
 	// backup represented by BackupId.
 	BackupId *string
+
 	// The configuration management engine to use. Valid values include ChefAutomate
 	// and Puppet.
+	//
+	// This member is required.
 	Engine *string
+
 	// The ARN of the instance profile that your Amazon EC2 instances use. Although the
 	// AWS OpsWorks console typically creates the instance profile for you, if you are
 	// using API commands instead, run the service-role-creation.yaml AWS
@@ -108,18 +116,26 @@ type CreateServerInput struct {
 	// https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
 	// This template creates a CloudFormation stack that includes the instance profile
 	// you need.  </p>
+	//
+	// This member is required.
 	InstanceProfileArn *string
+
 	// The Amazon EC2 instance type to use. For example, m5.large.
+	//
+	// This member is required.
 	InstanceType *string
+
 	// The major release version of the engine that you want to use. For a Chef server,
 	// the valid value for EngineVersion is currently 2. For a Puppet server, the valid
 	// value is 2017.
 	EngineVersion *string
+
 	// A private key in PEM format for connecting to the server by using HTTPS. The
 	// private key must not be encrypted; it cannot be protected by a password or
 	// passphrase. If you specify a custom private key, you must also specify values
 	// for CustomDomain and CustomCertificate.
 	CustomPrivateKey *string
+
 	// The service role that the AWS OpsWorks CM service backend uses to work with your
 	// account. Although the AWS OpsWorks management console typically creates the
 	// service role for you, if you are using the AWS CLI or API commands, run the
@@ -127,11 +143,17 @@ type CreateServerInput struct {
 	// https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
 	// This template creates a CloudFormation stack that includes the service role and
 	// instance profile that you need.
+	//
+	// This member is required.
 	ServiceRoleArn *string
+
 	// The name of the server. The server name must be unique within your AWS account,
 	// within each region. Server names must start with a letter; then letters,
 	// numbers, or hyphens (-) are allowed, up to a maximum of 40 characters.
+	//
+	// This member is required.
 	ServerName *string
+
 	// The start time for a one-hour period during which AWS OpsWorks CM backs up
 	// application-level data on your server if automated backups are enabled. Valid
 	// values must be specified in one of the following formats:
@@ -147,6 +169,7 @@ type CreateServerInput struct {
 	// 08:00 UTC. Example: Mon:08:00, which represents a start time of every Monday at
 	// 08:00 UTC. (8:00 a.m.)
 	PreferredBackupWindow *string
+
 	// The start time for a one-hour period each week during which AWS OpsWorks CM
 	// performs maintenance on the instance. Valid values must be specified in the
 	// following format: DDD:HH:MM. MM must be specified as 00. The specified time is
@@ -155,6 +178,7 @@ type CreateServerInput struct {
 	// information. Example: Mon:08:00, which represents a start time of every Monday
 	// at 08:00 UTC. (8:00 a.m.)
 	PreferredMaintenanceWindow *string
+
 	// Optional engine attributes on a specified server. Attributes accepted in a Chef
 	// createServer request:
 	//
@@ -186,6 +210,7 @@ type CreateServerInput struct {
 	// private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded
 	// private SSH key.
 	EngineAttributes []*types.EngineAttribute
+
 	// A map that contains tag keys and tag values to attach to an AWS OpsWorks for
 	// Chef Automate or AWS OpsWorks for Puppet Enterprise server.
 	//
@@ -206,6 +231,7 @@ type CreateServerInput struct {
 	//     * A maximum of 50 user-applied tags is
 	// allowed for any AWS OpsWorks-CM server.
 	Tags []*types.Tag
+
 	// A PEM-formatted HTTPS certificate. The value can be be a single, self-signed
 	// certificate, or a certificate chain. If you specify a custom certificate, you
 	// must also specify values for CustomDomain and CustomPrivateKey. The following
@@ -229,13 +255,16 @@ type CreateServerInput struct {
 	//     * The certificate must match the
 	// value of CustomPrivateKey.
 	CustomCertificate *string
+
 	// Associate a public IP address with a server that you are launching. Valid values
 	// are true or false. The default value is true.
 	AssociatePublicIpAddress *bool
+
 	// The Amazon EC2 key pair to set for the instance. This parameter is optional; if
 	// desired, you may specify this parameter to connect to your instances by using
 	// SSH.
 	KeyPair *string
+
 	// An optional public endpoint of a server, such as https://aws.my-company.com. To
 	// access the server, create a CNAME DNS record in your preferred DNS service that
 	// points the custom domain to the endpoint that is generated when the server is
@@ -244,15 +273,18 @@ type CreateServerInput struct {
 	// domain. If you specify a custom domain, you must also specify values for
 	// CustomCertificate and CustomPrivateKey.
 	CustomDomain *string
+
 	// The engine model of the server. Valid values in this release include Monolithic
 	// for Puppet and Single for Chef.
 	EngineModel *string
+
 	// Enable or disable scheduled backups. Valid values are true or false. The default
 	// value is true.
 	DisableAutomatedBackup *bool
 }
 
 type CreateServerOutput struct {
+
 	// The server that is created by the request.
 	Server *types.Server
 

@@ -56,13 +56,20 @@ func (c *Client) DeleteSite(ctx context.Context, params *DeleteSiteInput, optFns
 }
 
 type DeleteSiteInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The ID of the site.
+	//
+	// This member is required.
 	SiteId *string
 }
 
 type DeleteSiteOutput struct {
+
 	// Information about the site.
 	Site *types.Site
 

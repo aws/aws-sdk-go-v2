@@ -56,16 +56,20 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 }
 
 type DescribeStacksInput struct {
+
 	// The names of the stacks to describe.
 	Names []*string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type DescribeStacksOutput struct {
+
 	// Information about the stacks.
 	Stacks []*types.Stack
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

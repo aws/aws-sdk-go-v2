@@ -92,13 +92,20 @@ func (c *Client) GetMetricStatistics(ctx context.Context, params *GetMetricStati
 }
 
 type GetMetricStatisticsInput struct {
+
 	// The name of the metric, with or without spaces.
+	//
+	// This member is required.
 	MetricName *string
+
 	// The time stamp that determines the last data point to return. The value
 	// specified is exclusive; results include data points up to the specified time
 	// stamp. In a raw HTTP query, the time stamp must be in ISO 8601 UTC format (for
 	// example, 2016-10-10T23:00:00Z).
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// The time stamp that determines the first data point to return. Start times are
 	// evaluated relative to the time that CloudWatch receives the request. The value
 	// specified is inclusive; results include data points with the specified time
@@ -125,7 +132,10 @@ type GetMetricStatisticsInput struct {
 	// 01:05:20. If you make a query at 15:07:17 for the previous 5 minutes of data,
 	// using a period of 5 seconds, you receive data timestamped between 15:02:15 and
 	// 15:07:15.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// The dimensions. If the metric contains multiple dimensions, you must include a
 	// value for each dimension. CloudWatch treats each unique combination of
 	// dimensions as a separate metric. If a specific combination of dimensions was not
@@ -138,6 +148,7 @@ type GetMetricStatisticsInput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 	// in the Amazon CloudWatch User Guide.
 	Dimensions []*types.Dimension
+
 	// The granularity, in seconds, of the returned data points. For metrics with
 	// regular resolution, a period can be as short as one minute (60 seconds) and must
 	// be a multiple of 60. For high-resolution metrics that are collected at intervals
@@ -156,7 +167,10 @@ type GetMetricStatisticsInput struct {
 	//
 	//     * Start time greater than 63 days ago - Use a multiple
 	// of 3600 seconds (1 hour).
+	//
+	// This member is required.
 	Period *int32
+
 	// The unit for a given metric. If you omit Unit, all data that was collected with
 	// any unit is returned, along with the corresponding units that were specified
 	// when the data was reported to CloudWatch. If you specify a unit, the operation
@@ -164,12 +178,17 @@ type GetMetricStatisticsInput struct {
 	// unit that does not match the data collected, the results of the operation are
 	// null. CloudWatch does not perform unit conversions.
 	Unit types.StandardUnit
+
 	// The metric statistics, other than percentile. For percentile statistics, use
 	// ExtendedStatistics. When calling GetMetricStatistics, you must specify either
 	// Statistics or ExtendedStatistics, but not both.
 	Statistics []types.Statistic
+
 	// The namespace of the metric, with or without spaces.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The percentile statistics. Specify values between p0.0 and p100. When calling
 	// GetMetricStatistics, you must specify either Statistics or ExtendedStatistics,
 	// but not both. Percentile statistics are not available for metrics when any of
@@ -178,8 +197,10 @@ type GetMetricStatisticsInput struct {
 }
 
 type GetMetricStatisticsOutput struct {
+
 	// A label for the specified metric.
 	Label *string
+
 	// The data points for the specified metric.
 	Datapoints []*types.Datapoint
 

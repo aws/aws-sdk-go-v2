@@ -55,7 +55,10 @@ func (c *Client) DeleteMitigationAction(ctx context.Context, params *DeleteMitig
 }
 
 type DeleteMitigationActionInput struct {
+
 	// The name of the mitigation action that you want to delete.
+	//
+	// This member is required.
 	ActionName *string
 }
 

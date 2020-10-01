@@ -56,18 +56,25 @@ func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsI
 }
 
 type ListEnvironmentsInput struct {
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 }
 
 type ListEnvironmentsOutput struct {
+
 	// The elements from this collection.
 	Items []*types.Environment
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string

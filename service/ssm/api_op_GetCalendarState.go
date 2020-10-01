@@ -64,24 +64,31 @@ func (c *Client) GetCalendarState(ctx context.Context, params *GetCalendarStateI
 }
 
 type GetCalendarStateInput struct {
+
 	// (Optional) The specific time for which you want to get calendar state
 	// information, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. If you
 	// do not add AtTime, the current time is assumed.
 	AtTime *string
+
 	// The names or Amazon Resource Names (ARNs) of the Systems Manager documents that
 	// represent the calendar entries for which you want to get the state.
+	//
+	// This member is required.
 	CalendarNames []*string
 }
 
 type GetCalendarStateOutput struct {
+
 	// The state of the calendar. An OPEN calendar indicates that actions are allowed
 	// to proceed, and a CLOSED calendar indicates that actions are not allowed to
 	// proceed.
 	State types.CalendarState
+
 	// The time, as an ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) string, that
 	// you specified in your command. If you did not specify a time, GetCalendarState
 	// uses the current time.
 	AtTime *string
+
 	// The time, as an ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) string, that
 	// the calendar state will change. If the current calendar state is OPEN,
 	// NextTransitionTime indicates when the calendar state changes to CLOSED, and

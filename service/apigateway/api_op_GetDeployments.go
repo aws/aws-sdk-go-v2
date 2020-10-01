@@ -58,16 +58,25 @@ func (c *Client) GetDeployments(ctx context.Context, params *GetDeploymentsInput
 
 // Requests API Gateway to get information about a Deployments () collection.
 type GetDeploymentsInput struct {
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
-	Limit    *int32
-	Name     *string
-	Title    *string
+	Limit *int32
+
+	Name *string
+
+	Title *string
+
 	Template *bool
+
 	// The current pagination position in the paged result set.
-	Position         *string
+	Position *string
+
 	TemplateSkipList []*string
 }
 
@@ -83,8 +92,10 @@ type GetDeploymentsInput struct {
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
 // AWS SDKs (https://aws.amazon.com/tools/)
 type GetDeploymentsOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.Deployment
+
 	// The current pagination position in the paged result set.
 	Position *string
 

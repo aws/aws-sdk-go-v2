@@ -56,23 +56,30 @@ func (c *Client) ListNetworks(ctx context.Context, params *ListNetworksInput, op
 }
 
 type ListNetworksInput struct {
+
 	// An optional status specifier. If provided, only networks currently in this
 	// status are listed.
 	Status types.NetworkStatus
+
 	// An optional framework specifier. If provided, only networks of this framework
 	// type are listed.
 	Framework types.Framework
+
 	// The name of the network.
 	Name *string
+
 	// The maximum number of networks to list.
 	MaxResults *int32
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 }
 
 type ListNetworksOutput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// An array of NetworkSummary objects that contain configuration properties for
 	// each network.
 	Networks []*types.NetworkSummary

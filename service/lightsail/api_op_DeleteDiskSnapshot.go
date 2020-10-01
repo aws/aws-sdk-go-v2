@@ -65,11 +65,15 @@ func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnaps
 }
 
 type DeleteDiskSnapshotInput struct {
+
 	// The name of the disk snapshot you want to delete (e.g., my-disk-snapshot).
+	//
+	// This member is required.
 	DiskSnapshotName *string
 }
 
 type DeleteDiskSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

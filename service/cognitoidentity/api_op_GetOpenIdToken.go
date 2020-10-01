@@ -57,20 +57,26 @@ func (c *Client) GetOpenIdToken(ctx context.Context, params *GetOpenIdTokenInput
 
 // Input to the GetOpenIdToken action.
 type GetOpenIdTokenInput struct {
+
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// When using graph.facebook.com and www.amazon.com, supply the access_token
 	// returned from the provider's authflow. For accounts.google.com, an Amazon
 	// Cognito user pool provider, or any other OpenId Connect provider, always include
 	// the id_token.
 	Logins map[string]*string
+
 	// A unique identifier in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityId *string
 }
 
 // Returned in response to a successful GetOpenIdToken request.
 type GetOpenIdTokenOutput struct {
+
 	// An OpenID token, valid for 10 minutes.
 	Token *string
+
 	// A unique identifier in the format REGION:GUID. Note that the IdentityId returned
 	// may not match the one passed on input.
 	IdentityId *string

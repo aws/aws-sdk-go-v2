@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // More than one process tried to modify a resource at the same time.
@@ -26,12 +25,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Some part of the dashboard data is invalid.
 type DashboardInvalidInputError struct {
@@ -51,18 +44,6 @@ func (e *DashboardInvalidInputError) ErrorMessage() string {
 }
 func (e *DashboardInvalidInputError) ErrorCode() string             { return "DashboardInvalidInputError" }
 func (e *DashboardInvalidInputError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DashboardInvalidInputError) GetDashboardValidationMessages() []*DashboardValidationMessage {
-	return e.DashboardValidationMessages
-}
-func (e *DashboardInvalidInputError) HasDashboardValidationMessages() bool {
-	return e.DashboardValidationMessages != nil
-}
-func (e *DashboardInvalidInputError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DashboardInvalidInputError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified dashboard does not exist.
 type DashboardNotFoundError struct {
@@ -80,12 +61,6 @@ func (e *DashboardNotFoundError) ErrorMessage() string {
 }
 func (e *DashboardNotFoundError) ErrorCode() string             { return "DashboardNotFoundError" }
 func (e *DashboardNotFoundError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DashboardNotFoundError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DashboardNotFoundError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Request processing has failed due to some unknown error, exception, or failure.
 type InternalServiceFault struct {
@@ -103,12 +78,6 @@ func (e *InternalServiceFault) ErrorMessage() string {
 }
 func (e *InternalServiceFault) ErrorCode() string             { return "InternalServiceFault" }
 func (e *InternalServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Data was not syntactically valid JSON.
 type InvalidFormatFault struct {
@@ -126,12 +95,6 @@ func (e *InvalidFormatFault) ErrorMessage() string {
 }
 func (e *InvalidFormatFault) ErrorCode() string             { return "InvalidFormatFault" }
 func (e *InvalidFormatFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFormatFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFormatFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The next token specified is invalid.
 type InvalidNextToken struct {
@@ -149,12 +112,6 @@ func (e *InvalidNextToken) ErrorMessage() string {
 }
 func (e *InvalidNextToken) ErrorCode() string             { return "InvalidNextToken" }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextToken) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextToken) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Parameters were used together that cannot be used together.
 type InvalidParameterCombinationException struct {
@@ -176,12 +133,6 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidParameterCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of an input parameter is bad or out-of-range.
 type InvalidParameterValueException struct {
@@ -199,12 +150,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation exceeded one or more limits.
 type LimitExceededException struct {
@@ -222,12 +167,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for alarms for this customer has already been reached.
 type LimitExceededFault struct {
@@ -245,12 +184,6 @@ func (e *LimitExceededFault) ErrorMessage() string {
 }
 func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceededFault" }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An input parameter that is required is missing.
 type MissingRequiredParameterException struct {
@@ -270,12 +203,6 @@ func (e *MissingRequiredParameterException) ErrorCode() string {
 	return "MissingRequiredParameterException"
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingRequiredParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingRequiredParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The named resource does not exist.
 type ResourceNotFound struct {
@@ -293,12 +220,6 @@ func (e *ResourceNotFound) ErrorMessage() string {
 }
 func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The named resource does not exist.
 type ResourceNotFoundException struct {
@@ -319,21 +240,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceNotFoundException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ResourceNotFoundException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceNotFoundException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

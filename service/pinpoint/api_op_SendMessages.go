@@ -56,16 +56,25 @@ func (c *Client) SendMessages(ctx context.Context, params *SendMessagesInput, op
 }
 
 type SendMessagesInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies the configuration and other settings for a message.
+	//
+	// This member is required.
 	MessageRequest *types.MessageRequest
 }
 
 type SendMessagesOutput struct {
+
 	// Provides information about the results of a request to send a message to an
 	// endpoint address.
+	//
+	// This member is required.
 	MessageResponse *types.MessageResponse
 
 	// Metadata pertaining to the operation's result.

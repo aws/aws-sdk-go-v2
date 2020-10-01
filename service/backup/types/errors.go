@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The required resource already exists.
@@ -30,42 +29,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *AlreadyExistsException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *AlreadyExistsException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *AlreadyExistsException) GetArn() string {
-	return ptr.ToString(e.Arn)
-}
-func (e *AlreadyExistsException) HasArn() bool {
-	return e.Arn != nil
-}
-func (e *AlreadyExistsException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *AlreadyExistsException) HasContext() bool {
-	return e.Context != nil
-}
-func (e *AlreadyExistsException) GetCreatorRequestId() string {
-	return ptr.ToString(e.CreatorRequestId)
-}
-func (e *AlreadyExistsException) HasCreatorRequestId() bool {
-	return e.CreatorRequestId != nil
-}
-func (e *AlreadyExistsException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *AlreadyExistsException) HasType() bool {
-	return e.Type != nil
-}
 
 // A dependent AWS service or resource returned an error to the AWS Backup service,
 // and the action cannot be completed.
@@ -88,30 +51,6 @@ func (e *DependencyFailureException) ErrorMessage() string {
 }
 func (e *DependencyFailureException) ErrorCode() string             { return "DependencyFailureException" }
 func (e *DependencyFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *DependencyFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyFailureException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DependencyFailureException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *DependencyFailureException) HasType() bool {
-	return e.Type != nil
-}
-func (e *DependencyFailureException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *DependencyFailureException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *DependencyFailureException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *DependencyFailureException) HasContext() bool {
-	return e.Context != nil
-}
 
 // Indicates that something is wrong with a parameter's value. For example, the
 // value is out of range.
@@ -134,30 +73,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidParameterValueException) HasType() bool {
-	return e.Type != nil
-}
-func (e *InvalidParameterValueException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *InvalidParameterValueException) HasContext() bool {
-	return e.Context != nil
-}
-func (e *InvalidParameterValueException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidParameterValueException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that something is wrong with the input to the request. For example, a
 // parameter is of the wrong type.
@@ -180,30 +95,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidRequestException) HasType() bool {
-	return e.Type != nil
-}
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidRequestException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidRequestException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidRequestException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *InvalidRequestException) HasContext() bool {
-	return e.Context != nil
-}
 
 // A limit in the request has been exceeded; for example, a maximum number of items
 // allowed in a request.
@@ -226,30 +117,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *LimitExceededException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *LimitExceededException) HasType() bool {
-	return e.Type != nil
-}
-func (e *LimitExceededException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *LimitExceededException) HasContext() bool {
-	return e.Context != nil
-}
 
 // Indicates that a required parameter is missing.
 type MissingParameterValueException struct {
@@ -271,30 +138,6 @@ func (e *MissingParameterValueException) ErrorMessage() string {
 }
 func (e *MissingParameterValueException) ErrorCode() string             { return "MissingParameterValueException" }
 func (e *MissingParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingParameterValueException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *MissingParameterValueException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *MissingParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *MissingParameterValueException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *MissingParameterValueException) HasType() bool {
-	return e.Type != nil
-}
-func (e *MissingParameterValueException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *MissingParameterValueException) HasContext() bool {
-	return e.Context != nil
-}
 
 // A resource that is required for the action doesn't exist.
 type ResourceNotFoundException struct {
@@ -316,30 +159,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceNotFoundException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ResourceNotFoundException) HasType() bool {
-	return e.Type != nil
-}
-func (e *ResourceNotFoundException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *ResourceNotFoundException) HasContext() bool {
-	return e.Context != nil
-}
 
 // The request failed due to a temporary failure of the server.
 type ServiceUnavailableException struct {
@@ -361,27 +180,3 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ServiceUnavailableException) HasType() bool {
-	return e.Type != nil
-}
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceUnavailableException) GetContext() string {
-	return ptr.ToString(e.Context)
-}
-func (e *ServiceUnavailableException) HasContext() bool {
-	return e.Context != nil
-}
-func (e *ServiceUnavailableException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ServiceUnavailableException) HasCode() bool {
-	return e.Code != nil
-}

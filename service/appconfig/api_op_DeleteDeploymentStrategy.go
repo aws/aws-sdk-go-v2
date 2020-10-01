@@ -56,7 +56,10 @@ func (c *Client) DeleteDeploymentStrategy(ctx context.Context, params *DeleteDep
 }
 
 type DeleteDeploymentStrategyInput struct {
+
 	// The ID of the deployment strategy you want to delete.
+	//
+	// This member is required.
 	DeploymentStrategyId *string
 }
 

@@ -57,16 +57,23 @@ func (c *Client) DetectSyntax(ctx context.Context, params *DetectSyntaxInput, op
 }
 
 type DetectSyntaxInput struct {
+
 	// A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded
 	// characters.
+	//
+	// This member is required.
 	Text *string
+
 	// The language code of the input documents. You can specify any of the following
 	// languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish
 	// ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
+	//
+	// This member is required.
 	LanguageCode types.SyntaxLanguageCode
 }
 
 type DetectSyntaxOutput struct {
+
 	// A collection of syntax tokens describing the text. For each token, the response
 	// provides the text, the token type, where the text begins and ends, and the level
 	// of confidence that Amazon Comprehend has that the token is correct. For a list

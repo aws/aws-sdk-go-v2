@@ -57,6 +57,7 @@ func (c *Client) CreateOptionGroup(ctx context.Context, params *CreateOptionGrou
 
 //
 type CreateOptionGroupInput struct {
+
 	// Specifies the name of the option group to be created. Constraints:
 	//
 	//     * Must
@@ -69,20 +70,33 @@ type CreateOptionGroupInput struct {
 	// hyphens
 	//
 	// Example: myoptiongroup
+	//
+	// This member is required.
 	OptionGroupName *string
+
 	// Specifies the name of the engine that this option group should be associated
 	// with.
+	//
+	// This member is required.
 	EngineName *string
+
 	// The description of the option group.
+	//
+	// This member is required.
 	OptionGroupDescription *string
+
 	// Tags to assign to the option group.
 	Tags []*types.Tag
+
 	// Specifies the major version of the engine that this option group should be
 	// associated with.
+	//
+	// This member is required.
 	MajorEngineVersion *string
 }
 
 type CreateOptionGroupOutput struct {
+
 	//
 	OptionGroup *types.OptionGroup
 

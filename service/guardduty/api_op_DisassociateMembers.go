@@ -57,17 +57,26 @@ func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMe
 }
 
 type DisassociateMembersInput struct {
+
 	// A list of account IDs of the GuardDuty member accounts that you want to
 	// disassociate from the master account.
+	//
+	// This member is required.
 	AccountIds []*string
+
 	// The unique ID of the detector of the GuardDuty account whose members you want to
 	// disassociate from the master account.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type DisassociateMembersOutput struct {
+
 	// A list of objects that contain the unprocessed account and a result string that
 	// explains why it was unprocessed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

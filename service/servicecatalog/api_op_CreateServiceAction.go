@@ -58,14 +58,22 @@ func (c *Client) CreateServiceAction(ctx context.Context, params *CreateServiceA
 }
 
 type CreateServiceActionInput struct {
+
 	// The self-service action description.
 	Description *string
+
 	// The self-service action name.
+	//
+	// This member is required.
 	Name *string
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
+	//
+	// This member is required.
 	IdempotencyToken *string
+
 	// The self-service action definition. Can be one of the following: Name The name
 	// of the AWS Systems Manager document (SSM document). For example,
 	// AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide
@@ -77,7 +85,10 @@ type CreateServiceActionInput struct {
 	// The list of parameters in JSON format. For example:
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
+	//
+	// This member is required.
 	Definition map[string]*string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -87,11 +98,15 @@ type CreateServiceActionInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The service action definition type. For example, SSM_AUTOMATION.
+	//
+	// This member is required.
 	DefinitionType types.ServiceActionDefinitionType
 }
 
 type CreateServiceActionOutput struct {
+
 	// An object containing information about the self-service action.
 	ServiceActionDetail *types.ServiceActionDetail
 

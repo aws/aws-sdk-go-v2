@@ -58,20 +58,32 @@ func (c *Client) UpdateSegment(ctx context.Context, params *UpdateSegmentInput, 
 }
 
 type UpdateSegmentInput struct {
+
 	// The unique identifier for the segment.
+	//
+	// This member is required.
 	SegmentId *string
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies the configuration, dimension, and other settings for a segment. A
 	// WriteSegmentRequest object can include a Dimensions object or a SegmentGroups
 	// object, but not both.
+	//
+	// This member is required.
 	WriteSegmentRequest *types.WriteSegmentRequest
 }
 
 type UpdateSegmentOutput struct {
+
 	// Provides information about the configuration, dimension, and other settings for
 	// a segment.
+	//
+	// This member is required.
 	SegmentResponse *types.SegmentResponse
 
 	// Metadata pertaining to the operation's result.

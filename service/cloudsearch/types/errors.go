@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An error occurred while processing the request.
@@ -26,18 +25,6 @@ func (e *BaseException) ErrorMessage() string {
 }
 func (e *BaseException) ErrorCode() string             { return "BaseException" }
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BaseException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *BaseException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *BaseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BaseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because it attempted an operation which is not enabled.
 type DisabledOperationException struct {
@@ -57,18 +44,6 @@ func (e *DisabledOperationException) ErrorMessage() string {
 }
 func (e *DisabledOperationException) ErrorCode() string             { return "DisabledOperationException" }
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DisabledOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DisabledOperationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DisabledOperationException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *DisabledOperationException) HasCode() bool {
-	return e.Code != nil
-}
 
 // An internal error occurred while processing the request. If this problem
 // persists, report an issue from the Service Health Dashboard
@@ -90,18 +65,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InternalException) HasCode() bool {
-	return e.Code != nil
-}
 
 // The request was rejected because it specified an invalid type definition.
 type InvalidTypeException struct {
@@ -121,18 +84,6 @@ func (e *InvalidTypeException) ErrorMessage() string {
 }
 func (e *InvalidTypeException) ErrorCode() string             { return "InvalidTypeException" }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTypeException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidTypeException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because a resource limit has already been met.
 type LimitExceededException struct {
@@ -152,18 +103,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *LimitExceededException) HasCode() bool {
-	return e.Code != nil
-}
 
 // The request was rejected because it attempted to reference a resource that does
 // not exist.
@@ -184,18 +123,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceNotFoundException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because it has invalid parameters.
 type ValidationException struct {
@@ -215,15 +142,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ValidationException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ValidationException) HasCode() bool {
-	return e.Code != nil
-}

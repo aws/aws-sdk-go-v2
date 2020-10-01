@@ -63,20 +63,29 @@ func (c *Client) UpdateStateMachine(ctx context.Context, params *UpdateStateMach
 }
 
 type UpdateStateMachineInput struct {
+
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	Definition *string
+
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
+
 	// The Amazon Resource Name (ARN) of the state machine.
+	//
+	// This member is required.
 	StateMachineArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
 	RoleArn *string
 }
 
 type UpdateStateMachineOutput struct {
+
 	// The date and time the state machine was updated.
+	//
+	// This member is required.
 	UpdateDate *time.Time
 
 	// Metadata pertaining to the operation's result.

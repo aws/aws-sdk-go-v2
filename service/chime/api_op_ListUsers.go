@@ -58,21 +58,30 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 }
 
 type ListUsersInput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// Optional. The user email address used to filter results. Maximum 1.
 	UserEmail *string
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The user type.
 	UserType types.UserType
+
 	// The maximum number of results to return in a single call. Defaults to 100.
 	MaxResults *int32
 }
 
 type ListUsersOutput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// List of users and user details.
 	Users []*types.User
 

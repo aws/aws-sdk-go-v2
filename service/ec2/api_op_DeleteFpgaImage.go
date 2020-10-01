@@ -55,8 +55,12 @@ func (c *Client) DeleteFpgaImage(ctx context.Context, params *DeleteFpgaImageInp
 }
 
 type DeleteFpgaImageInput struct {
+
 	// The ID of the AFI.
+	//
+	// This member is required.
 	FpgaImageId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -65,6 +69,7 @@ type DeleteFpgaImageInput struct {
 }
 
 type DeleteFpgaImageOutput struct {
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool
 

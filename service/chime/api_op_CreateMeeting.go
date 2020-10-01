@@ -65,26 +65,35 @@ func (c *Client) CreateMeeting(ctx context.Context, params *CreateMeetingInput, 
 }
 
 type CreateMeetingInput struct {
+
 	// The tag key-value pairs.
 	Tags []*types.Tag
+
 	// The Region in which to create the meeting. Default: us-east-1. Available values:
 	// ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1,
 	// eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2,
 	// us-west-1, us-west-2.
 	MediaRegion *string
+
 	// The unique identifier for the client request. Use a different token for
 	// different meetings.
+	//
+	// This member is required.
 	ClientRequestToken *string
+
 	// Reserved.
 	MeetingHostId *string
+
 	// The configuration for resource targets to receive notifications when meeting and
 	// attendee events occur.
 	NotificationsConfiguration *types.MeetingNotificationConfiguration
+
 	// The external meeting ID.
 	ExternalMeetingId *string
 }
 
 type CreateMeetingOutput struct {
+
 	// The meeting information, including the meeting ID and MediaPlacement.
 	Meeting *types.Meeting
 

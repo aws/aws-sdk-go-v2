@@ -56,28 +56,40 @@ func (c *Client) ListObjectAttributes(ctx context.Context, params *ListObjectAtt
 }
 
 type ListObjectAttributesInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// the object resides. For more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// Represents the manner and timing in which the successful write or update of an
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
+
 	// The reference that identifies the object whose attributes will be listed.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int32
+
 	// Used to filter the list of object attributes that are associated with a certain
 	// facet.
 	FacetFilter *types.SchemaFacet
 }
 
 type ListObjectAttributesOutput struct {
+
 	// Attributes map that is associated with the object. AttributeArn is the key, and
 	// attribute value is the value.
 	Attributes []*types.AttributeKeyAndValue
+
 	// The pagination token.
 	NextToken *string
 

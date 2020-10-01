@@ -56,19 +56,27 @@ func (c *Client) ListDetectors(ctx context.Context, params *ListDetectorsInput, 
 }
 
 type ListDetectorsInput struct {
+
 	// A filter that limits results to those detectors (instances) in the given state.
 	StateName *string
+
 	// The name of the detector model whose detectors (instances) are listed.
+	//
+	// This member is required.
 	DetectorModelName *string
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListDetectorsOutput struct {
+
 	// A list of summary information about the detectors (instances).
 	DetectorSummaries []*types.DetectorSummary
+
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

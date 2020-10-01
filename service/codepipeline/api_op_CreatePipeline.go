@@ -59,16 +59,22 @@ func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput
 
 // Represents the input of a CreatePipeline action.
 type CreatePipelineInput struct {
+
 	// Represents the structure of actions and stages to be performed in the pipeline.
+	//
+	// This member is required.
 	Pipeline *types.PipelineDeclaration
+
 	// The tags for the pipeline.
 	Tags []*types.Tag
 }
 
 // Represents the output of a CreatePipeline action.
 type CreatePipelineOutput struct {
+
 	// Specifies the tags applied to the pipeline.
 	Tags []*types.Tag
+
 	// Represents the structure of actions and stages to be performed in the pipeline.
 	Pipeline *types.PipelineDeclaration
 

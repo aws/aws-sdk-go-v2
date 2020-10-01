@@ -59,8 +59,12 @@ func (c *Client) UpdateTagsForDomain(ctx context.Context, params *UpdateTagsForD
 
 // The UpdateTagsForDomainRequest includes the following elements.
 type UpdateTagsForDomainInput struct {
+
 	// The domain for which you want to add or update tags.
+	//
+	// This member is required.
 	DomainName *string
+
 	// A list of the tag keys and values that you want to add or update. If you specify
 	// a key that already exists, the corresponding value will be replaced.
 	TagsToUpdate []*types.Tag

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // General authentication failure. The request was not signed correctly.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type IncompatibleVersionException struct {
 	Message *string
@@ -46,12 +39,6 @@ func (e *IncompatibleVersionException) ErrorMessage() string {
 }
 func (e *IncompatibleVersionException) ErrorCode() string             { return "IncompatibleVersionException" }
 func (e *IncompatibleVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatibleVersionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatibleVersionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Elastic Transcoder encountered an unexpected exception while trying to fulfill
 // the request.
@@ -70,12 +57,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Too many operations for a given AWS account. For example, the number of
 // pipelines exceeds the maximum allowed.
@@ -94,12 +75,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you are attempting to change is in use. For example, you are
 // attempting to delete a pipeline that is currently in use.
@@ -118,12 +93,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource does not exist or is not available. For example, the
 // pipeline to which you're trying to add a job doesn't exist or is still being
@@ -143,12 +112,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more required parameter values were not provided in the request.
 type ValidationException struct {
@@ -166,9 +129,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

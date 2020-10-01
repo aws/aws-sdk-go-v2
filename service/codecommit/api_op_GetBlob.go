@@ -56,15 +56,24 @@ func (c *Client) GetBlob(ctx context.Context, params *GetBlobInput, optFns ...fu
 
 // Represents the input of a get blob operation.
 type GetBlobInput struct {
+
 	// The ID of the blob, which is its SHA-1 pointer.
+	//
+	// This member is required.
 	BlobId *string
+
 	// The name of the repository that contains the blob.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 // Represents the output of a get blob operation.
 type GetBlobOutput struct {
+
 	// The content of the blob, usually a file.
+	//
+	// This member is required.
 	Content []byte
 
 	// Metadata pertaining to the operation's result.

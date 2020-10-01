@@ -57,23 +57,31 @@ func (c *Client) ListCertificatesByCA(ctx context.Context, params *ListCertifica
 
 // The input to the ListCertificatesByCA operation.
 type ListCertificatesByCAInput struct {
+
 	// The result page size.
 	PageSize *int32
+
 	// The marker for the next set of results.
 	Marker *string
+
 	// Specifies the order for results. If True, the results are returned in ascending
 	// order, based on the creation date.
 	AscendingOrder *bool
+
 	// The ID of the CA certificate. This operation will list all registered device
 	// certificate that were signed by this CA certificate.
+	//
+	// This member is required.
 	CaCertificateId *string
 }
 
 // The output of the ListCertificatesByCA operation.
 type ListCertificatesByCAOutput struct {
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string
+
 	// The device certificates signed by the specified CA certificate.
 	Certificates []*types.Certificate
 

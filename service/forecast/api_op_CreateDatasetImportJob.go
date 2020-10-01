@@ -72,6 +72,7 @@ func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatas
 }
 
 type CreateDatasetImportJobInput struct {
+
 	// The location of the training data to import and an AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the data. The
 	// training data must be stored in an Amazon S3 bucket. If encryption is used,
@@ -79,14 +80,23 @@ type CreateDatasetImportJobInput struct {
 	// must allow Amazon Forecast permission to access the key. The KMS key and IAM
 	// role must match those specified in the EncryptionConfig parameter of the
 	// CreateDataset () operation.
+	//
+	// This member is required.
 	DataSource *types.DataSource
+
 	// The Amazon Resource Name (ARN) of the Amazon Forecast dataset that you want to
 	// import data to.
+	//
+	// This member is required.
 	DatasetArn *string
+
 	// The name for the dataset import job. We recommend including the current
 	// timestamp in the name, for example, 20190721DatasetImport. This can help you
 	// avoid getting a ResourceAlreadyExistsException exception.
+	//
+	// This member is required.
 	DatasetImportJobName *string
+
 	// The optional metadata that you apply to the dataset import job to help you
 	// categorize and organize them. Each tag consists of a key and an optional value,
 	// both of which you define. The following basic restrictions apply to tags:
@@ -119,6 +129,7 @@ type CreateDatasetImportJobInput struct {
 	// against the limit of 50 tags. Tags with only the key prefix of aws do not count
 	// against your tags per resource limit.
 	Tags []*types.Tag
+
 	// The format of timestamps in the dataset. The format that you specify depends on
 	// the DataFrequency specified when the dataset was created. The following formats
 	// are supported
@@ -135,6 +146,7 @@ type CreateDatasetImportJobInput struct {
 }
 
 type CreateDatasetImportJobOutput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset import job.
 	DatasetImportJobArn *string
 

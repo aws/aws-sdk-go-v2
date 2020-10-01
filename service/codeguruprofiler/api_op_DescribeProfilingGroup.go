@@ -56,13 +56,19 @@ func (c *Client) DescribeProfilingGroup(ctx context.Context, params *DescribePro
 
 // The structure representing the describeProfilingGroupRequest.
 type DescribeProfilingGroupInput struct {
+
 	// The profiling group name.
+	//
+	// This member is required.
 	ProfilingGroupName *string
 }
 
 // The structure representing the describeProfilingGroupResponse.
 type DescribeProfilingGroupOutput struct {
+
 	// Information about a profiling group.
+	//
+	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription
 
 	// Metadata pertaining to the operation's result.

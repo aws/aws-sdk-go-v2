@@ -58,8 +58,12 @@ func (c *Client) ExportClientVpnClientConfiguration(ctx context.Context, params 
 }
 
 type ExportClientVpnClientConfigurationInput struct {
+
 	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -68,6 +72,7 @@ type ExportClientVpnClientConfigurationInput struct {
 }
 
 type ExportClientVpnClientConfigurationOutput struct {
+
 	// The contents of the Client VPN endpoint configuration file.
 	ClientConfiguration *string
 

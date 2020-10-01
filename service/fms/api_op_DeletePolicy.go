@@ -55,6 +55,7 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 }
 
 type DeletePolicyInput struct {
+
 	// If True, the request performs cleanup according to the policy type. For AWS WAF
 	// and Shield Advanced policies, the cleanup does the following:
 	//
@@ -85,8 +86,11 @@ type DeletePolicyInput struct {
 	// accounts and resources are handled by the policy. All others are out of scope.
 	// If you don't specify tags or accounts, all resources are in scope.
 	DeleteAllPolicyResources *bool
+
 	// The ID of the policy that you want to delete. You can retrieve this ID from
 	// PutPolicy and ListPolicies.
+	//
+	// This member is required.
 	PolicyId *string
 }
 

@@ -55,9 +55,15 @@ func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optF
 }
 
 type DeleteModelInput struct {
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 

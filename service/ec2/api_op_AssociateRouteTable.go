@@ -63,22 +63,30 @@ func (c *Client) AssociateRouteTable(ctx context.Context, params *AssociateRoute
 }
 
 type AssociateRouteTableInput struct {
+
 	// The ID of the subnet.
 	SubnetId *string
+
 	// The ID of the internet gateway or virtual private gateway.
 	GatewayId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the route table.
+	//
+	// This member is required.
 	RouteTableId *string
 }
 
 type AssociateRouteTableOutput struct {
+
 	// The state of the association.
 	AssociationState *types.RouteTableAssociationState
+
 	// The route table association ID. This ID is required for disassociating the route
 	// table.
 	AssociationId *string

@@ -88,8 +88,10 @@ func (c *Client) PutObjectTagging(ctx context.Context, params *PutObjectTaggingI
 }
 
 type PutObjectTaggingInput struct {
+
 	// The versionId of the object that the tag-set will be added to.
 	VersionId *string
+
 	// The bucket name containing the object. When using this API with an access point,
 	// you must direct requests to the access point hostname. The access point hostname
 	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
@@ -98,16 +100,26 @@ type PutObjectTaggingInput struct {
 	// about access point ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Container for the TagSet and Tag elements
+	//
+	// This member is required.
 	Tagging *types.Tagging
+
 	// The MD5 hash for the request body.
 	ContentMD5 *string
+
 	// Name of the tag.
+	//
+	// This member is required.
 	Key *string
 }
 
 type PutObjectTaggingOutput struct {
+
 	// The versionId of the object the tag-set was added to.
 	VersionId *string
 

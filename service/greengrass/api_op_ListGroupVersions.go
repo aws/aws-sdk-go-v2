@@ -56,19 +56,26 @@ func (c *Client) ListGroupVersions(ctx context.Context, params *ListGroupVersion
 }
 
 type ListGroupVersionsInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
 }
 
 type ListGroupVersionsOutput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// Information about a version.
 	Versions []*types.VersionInformation
 

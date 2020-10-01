@@ -97,16 +97,26 @@ func (c *Client) GetJobOutput(ctx context.Context, params *GetJobOutputInput, op
 
 // Provides options for downloading output of an Amazon S3 Glacier job.
 type GetJobOutputInput struct {
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The job ID whose data is downloaded.
+	//
+	// This member is required.
 	JobId *string
+
 	// The range of bytes to retrieve from the output. For example, if you want to
 	// download the first 1,048,576 bytes, specify the range as bytes=0-1048575. By
 	// default, this operation downloads the entire output.  <p>If the job output is
@@ -134,23 +144,29 @@ type GetJobOutputInput struct {
 
 // Contains the Amazon S3 Glacier response to your request.
 type GetJobOutputOutput struct {
+
 	// Indicates the range units accepted. For more information, see RFC2616
 	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 	AcceptRanges *string
+
 	// The Content-Type depends on whether the job output is an archive or a vault
 	// inventory. For archive data, the Content-Type is application/octet-stream. For
 	// vault inventory, if you requested CSV format when you initiated the job, the
 	// Content-Type is text/csv. Otherwise, by default, vault inventory is returned as
 	// JSON, and the Content-Type is application/json.
 	ContentType *string
+
 	// The range of bytes returned by Amazon S3 Glacier. If only partial output is
 	// downloaded, the response provides the range of bytes Amazon S3 Glacier returned.
 	// For example, bytes 0-1048575/8388608 returns the first 1 MB from 8 MB.
 	ContentRange *string
+
 	// The description of an archive.
 	ArchiveDescription *string
+
 	// The job data, either archive data or inventory data.
 	Body io.ReadCloser
+
 	// The checksum of the data in the response. This header is returned only when
 	// retrieving the output for an archive retrieval job. Furthermore, this header
 	// appears only under the following conditions:

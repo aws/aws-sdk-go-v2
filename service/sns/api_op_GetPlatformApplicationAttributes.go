@@ -59,12 +59,16 @@ func (c *Client) GetPlatformApplicationAttributes(ctx context.Context, params *G
 
 // Input for GetPlatformApplicationAttributes action.
 type GetPlatformApplicationAttributesInput struct {
+
 	// PlatformApplicationArn for GetPlatformApplicationAttributesInput.
+	//
+	// This member is required.
 	PlatformApplicationArn *string
 }
 
 // Response for GetPlatformApplicationAttributes action.
 type GetPlatformApplicationAttributesOutput struct {
+
 	// Attributes include the following:
 	//
 	//     * EventEndpointCreated – Topic ARN to

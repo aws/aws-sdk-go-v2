@@ -103,13 +103,20 @@ func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTabl
 }
 
 type CreateGlobalTableInput struct {
+
 	// The global table name.
+	//
+	// This member is required.
 	GlobalTableName *string
+
 	// The Regions where the global table needs to be created.
+	//
+	// This member is required.
 	ReplicationGroup []*types.Replica
 }
 
 type CreateGlobalTableOutput struct {
+
 	// Contains the details of the global table.
 	GlobalTableDescription *types.GlobalTableDescription
 

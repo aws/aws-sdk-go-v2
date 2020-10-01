@@ -60,12 +60,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the accelerator to list tags for. An ARN
 	// uniquely identifies an accelerator.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// Root level tag for the Tags parameters.
 	Tags []*types.Tag
 

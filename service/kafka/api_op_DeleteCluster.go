@@ -57,15 +57,21 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 }
 
 type DeleteClusterInput struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
 	ClusterArn *string
+
 	// The current version of the MSK cluster.
 	CurrentVersion *string
 }
 
 type DeleteClusterOutput struct {
+
 	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
 	State types.ClusterState
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 

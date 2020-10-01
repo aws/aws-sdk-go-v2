@@ -56,11 +56,15 @@ func (c *Client) DescribeStackSet(ctx context.Context, params *DescribeStackSetI
 }
 
 type DescribeStackSetInput struct {
+
 	// The name or unique ID of the stack set whose description you want.
+	//
+	// This member is required.
 	StackSetName *string
 }
 
 type DescribeStackSetOutput struct {
+
 	// The specified stack set.
 	StackSet *types.StackSet
 

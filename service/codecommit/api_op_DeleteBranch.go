@@ -58,14 +58,21 @@ func (c *Client) DeleteBranch(ctx context.Context, params *DeleteBranchInput, op
 
 // Represents the input of a delete branch operation.
 type DeleteBranchInput struct {
+
 	// The name of the repository that contains the branch to be deleted.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The name of the branch to delete.
+	//
+	// This member is required.
 	BranchName *string
 }
 
 // Represents the output of a delete branch operation.
 type DeleteBranchOutput struct {
+
 	// Information about the branch deleted by the operation, including the branch name
 	// and the commit ID that was the tip of the branch.
 	DeletedBranch *types.BranchInfo

@@ -62,18 +62,24 @@ func (c *Client) DescribeInterconnectLoa(ctx context.Context, params *DescribeIn
 }
 
 type DescribeInterconnectLoaInput struct {
+
 	// The ID of the interconnect.
+	//
+	// This member is required.
 	InterconnectId *string
+
 	// The name of the service provider who establishes connectivity on your behalf. If
 	// you supply this parameter, the LOA-CFA lists the provider name alongside your
 	// company name as the requester of the cross connect.
 	ProviderName *string
+
 	// The standard media type for the LOA-CFA document. The only supported value is
 	// application/pdf.
 	LoaContentType types.LoaContentType
 }
 
 type DescribeInterconnectLoaOutput struct {
+
 	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
 	Loa *types.Loa
 

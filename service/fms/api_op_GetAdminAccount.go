@@ -59,8 +59,10 @@ type GetAdminAccountInput struct {
 }
 
 type GetAdminAccountOutput struct {
+
 	// The AWS account that is set as the AWS Firewall Manager administrator.
 	AdminAccount *string
+
 	// The status of the AWS account that you set as the AWS Firewall Manager
 	// administrator.
 	RoleStatus types.AccountRoleStatus

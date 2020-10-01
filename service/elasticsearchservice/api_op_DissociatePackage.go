@@ -57,15 +57,22 @@ func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackag
 
 // Container for request parameters to DissociatePackage () operation.
 type DissociatePackageInput struct {
+
 	// Internal ID of the package that you want to associate with a domain. Use
 	// DescribePackages to find this value.
+	//
+	// This member is required.
 	PackageID *string
+
 	// Name of the domain that you want to associate the package with.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // Container for response returned by DissociatePackage () operation.
 type DissociatePackageOutput struct {
+
 	// DomainPackageDetails
 	DomainPackageDetails *types.DomainPackageDetails
 

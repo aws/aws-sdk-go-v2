@@ -58,45 +58,62 @@ func (c *Client) GetEventSourceMapping(ctx context.Context, params *GetEventSour
 }
 
 type GetEventSourceMappingInput struct {
+
 	// The identifier of the event source mapping.
+	//
+	// This member is required.
 	UUID *string
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
 // CreateEventSourceMapping () for details.
 type GetEventSourceMappingOutput struct {
+
 	// The state of the event source mapping. It can be one of the following: Creating,
 	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
 	State *string
+
 	// (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded
 	// records.
 	DestinationConfig *types.DestinationConfig
+
 	// (Streams) The maximum amount of time to gather records before invoking the
 	// function, in seconds.
 	MaximumBatchingWindowInSeconds *int32
+
 	// (Streams) The maximum number of times to retry when the function returns an
 	// error.
 	MaximumRetryAttempts *int32
+
 	// The maximum number of items to retrieve in a single batch.
 	BatchSize *int32
+
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string
+
 	// (Streams) The number of batches to process from each shard concurrently.
 	ParallelizationFactor *int32
+
 	// (Streams) If the function returns an error, split the batch in two and retry.
 	BisectBatchOnFunctionError *bool
+
 	// Indicates whether the last change to the event source mapping was made by a
 	// user, or by the Lambda service.
 	StateTransitionReason *string
+
 	// (Streams) The maximum age of a record that Lambda sends to a function for
 	// processing.
 	MaximumRecordAgeInSeconds *int32
+
 	// The date that the event source mapping was last updated, or its state changed.
 	LastModified *time.Time
+
 	// The ARN of the Lambda function.
 	FunctionArn *string
+
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
+
 	// The identifier of the event source mapping.
 	UUID *string
 

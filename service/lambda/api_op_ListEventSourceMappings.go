@@ -56,10 +56,13 @@ func (c *Client) ListEventSourceMappings(ctx context.Context, params *ListEventS
 }
 
 type ListEventSourceMappingsInput struct {
+
 	// A pagination token returned by a previous call.
 	Marker *string
+
 	// The maximum number of event source mappings to return.
 	MaxItems *int32
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -78,6 +81,7 @@ type ListEventSourceMappingsInput struct {
 	// only to the full ARN. If you specify only the function name, it's limited to 64
 	// characters in length.
 	FunctionName *string
+
 	// The Amazon Resource Name (ARN) of the event source.
 	//
 	//     * Amazon Kinesis - The
@@ -92,9 +96,11 @@ type ListEventSourceMappingsInput struct {
 }
 
 type ListEventSourceMappingsOutput struct {
+
 	// A pagination token that's returned when the response doesn't contain all event
 	// source mappings.
 	NextMarker *string
+
 	// A list of event source mappings.
 	EventSourceMappings []*types.EventSourceMappingConfiguration
 

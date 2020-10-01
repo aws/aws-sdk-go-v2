@@ -56,20 +56,30 @@ func (c *Client) GetIntegrationResponses(ctx context.Context, params *GetIntegra
 }
 
 type GetIntegrationResponsesInput struct {
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
 	// The maximum number of elements to be returned for this resource.
 	MaxResults *string
+
 	// The integration ID.
+	//
+	// This member is required.
 	IntegrationId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetIntegrationResponsesOutput struct {
+
 	// The elements from this collection.
 	Items []*types.IntegrationResponse
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string

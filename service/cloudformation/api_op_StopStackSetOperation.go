@@ -56,9 +56,15 @@ func (c *Client) StopStackSetOperation(ctx context.Context, params *StopStackSet
 }
 
 type StopStackSetOperationInput struct {
+
 	// The ID of the stack operation.
+	//
+	// This member is required.
 	OperationId *string
+
 	// The name or unique ID of the stack set that you want to stop the operation for.
+	//
+	// This member is required.
 	StackSetName *string
 }
 

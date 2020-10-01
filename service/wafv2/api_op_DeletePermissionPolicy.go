@@ -56,8 +56,11 @@ func (c *Client) DeletePermissionPolicy(ctx context.Context, params *DeletePermi
 }
 
 type DeletePermissionPolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the rule group from which you want to delete
 	// the policy. You must be the owner of the rule group to perform this operation.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

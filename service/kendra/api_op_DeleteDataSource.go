@@ -59,9 +59,15 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 }
 
 type DeleteDataSourceInput struct {
+
 	// The unique identifier of the data source to delete.
+	//
+	// This member is required.
 	Id *string
+
 	// The unique identifier of the index associated with the data source.
+	//
+	// This member is required.
 	IndexId *string
 }
 

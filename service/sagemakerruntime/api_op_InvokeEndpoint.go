@@ -61,24 +61,37 @@ func (c *Client) InvokeEndpoint(ctx context.Context, params *InvokeEndpointInput
 }
 
 type InvokeEndpointInput struct {
+
 	// The MIME type of the input data in the request body.
 	ContentType *string
+
 	// Provides input data, in the format specified in the ContentType request header.
 	// Amazon SageMaker passes all of the data in the body to the model.
+	//
+	// This member is required.
 	Body []byte
+
 	// The name of the endpoint that you specified when you created the endpoint using
 	// the CreateEndpoint
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
+	//
+	// This member is required.
 	EndpointName *string
+
 	// The desired MIME type of the inference in the response.
 	Accept *string
 }
 
 type InvokeEndpointOutput struct {
+
 	// Includes the inference provided by the model.
+	//
+	// This member is required.
 	Body []byte
+
 	// Identifies the production variant that was invoked.
 	InvokedProductionVariant *string
+
 	// The MIME type of the inference returned in the response body.
 	ContentType *string
 

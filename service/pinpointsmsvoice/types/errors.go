@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The resource specified in your request already exists.
@@ -24,12 +23,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input you provided is invalid.
 type BadRequestException struct {
@@ -47,12 +40,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The API encountered an unexpected error and couldn't complete the request. You
 // might be able to successfully issue the request again in the future.
@@ -71,12 +58,6 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 }
 func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There are too many instances of the specified resource type.
 type LimitExceededException struct {
@@ -94,12 +75,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you attempted to access doesn't exist.
 type NotFoundException struct {
@@ -117,12 +92,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've issued too many requests to the resource. Wait a few minutes, and then
 // try again.
@@ -141,9 +110,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

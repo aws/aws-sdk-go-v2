@@ -56,9 +56,15 @@ func (c *Client) DetachSecurityProfile(ctx context.Context, params *DetachSecuri
 }
 
 type DetachSecurityProfileInput struct {
+
 	// The security profile that is detached.
+	//
+	// This member is required.
 	SecurityProfileName *string
+
 	// The ARN of the thing group from which the security profile is detached.
+	//
+	// This member is required.
 	SecurityProfileTargetArn *string
 }
 

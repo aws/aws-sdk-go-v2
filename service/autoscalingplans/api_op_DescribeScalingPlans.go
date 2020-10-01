@@ -55,26 +55,33 @@ func (c *Client) DescribeScalingPlans(ctx context.Context, params *DescribeScali
 }
 
 type DescribeScalingPlansInput struct {
+
 	// The version number of the scaling plan. If you specify a scaling plan version,
 	// you must also specify a scaling plan name.
 	ScalingPlanVersion *int64
+
 	// The sources for the applications (up to 10). If you specify scaling plan names,
 	// you cannot specify application sources.
 	ApplicationSources []*types.ApplicationSource
+
 	// The names of the scaling plans (up to 10). If you specify application sources,
 	// you cannot specify scaling plan names.
 	ScalingPlanNames []*string
+
 	// The maximum number of scalable resources to return. This value can be between 1
 	// and 50. The default value is 50.
 	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
 }
 
 type DescribeScalingPlansOutput struct {
+
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string
+
 	// Information about the scaling plans.
 	ScalingPlans []*types.ScalingPlan
 

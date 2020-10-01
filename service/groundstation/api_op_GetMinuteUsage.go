@@ -56,25 +56,36 @@ func (c *Client) GetMinuteUsage(ctx context.Context, params *GetMinuteUsageInput
 
 //
 type GetMinuteUsageInput struct {
+
 	// The month being requested, with a value of 1-12.
+	//
+	// This member is required.
 	Month *int32
+
 	// The year being requested, in the format of YYYY.
+	//
+	// This member is required.
 	Year *int32
 }
 
 //
 type GetMinuteUsageOutput struct {
+
 	// Estimated number of minutes remaining for an account, specific to the month
 	// being requested.
 	EstimatedMinutesRemaining *int32
+
 	// Returns whether or not an account has signed up for the reserved minutes pricing
 	// plan, specific to the month being requested.
 	IsReservedMinutesCustomer *bool
+
 	// Total number of reserved minutes allocated, specific to the month being
 	// requested.
 	TotalReservedMinuteAllocation *int32
+
 	// Total scheduled minutes for an account, specific to the month being requested.
 	TotalScheduledMinutes *int32
+
 	// Upcoming minutes scheduled for an account, specific to the month being
 	// requested.
 	UpcomingMinutesScheduled *int32

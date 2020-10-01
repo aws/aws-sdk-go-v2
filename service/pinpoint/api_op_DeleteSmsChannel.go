@@ -57,14 +57,20 @@ func (c *Client) DeleteSmsChannel(ctx context.Context, params *DeleteSmsChannelI
 }
 
 type DeleteSmsChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteSmsChannelOutput struct {
+
 	// Provides information about the status and settings of the SMS channel for an
 	// application.
+	//
+	// This member is required.
 	SMSChannelResponse *types.SMSChannelResponse
 
 	// Metadata pertaining to the operation's result.

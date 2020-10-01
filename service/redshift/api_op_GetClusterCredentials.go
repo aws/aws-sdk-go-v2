@@ -77,6 +77,7 @@ func (c *Client) GetClusterCredentials(ctx context.Context, params *GetClusterCr
 
 // The request parameters to get cluster credentials.
 type GetClusterCredentialsInput struct {
+
 	// A list of the names of existing database groups that the user named in DbUser
 	// will join for the current session, in addition to any group memberships for an
 	// existing user. If not specified, a new user is added only to PUBLIC. Database
@@ -98,12 +99,15 @@ type GetClusterCredentialsInput struct {
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
 	DbGroups []*string
+
 	// The number of seconds until the returned temporary password expires. Constraint:
 	// minimum 900, maximum 3600. Default: 900
 	DurationSeconds *int32
+
 	// Create a database user with the name specified for the user named in DbUser if
 	// one does not exist.
 	AutoCreate *bool
+
 	// The name of a database that DbUser is authorized to log on to. If DbName is not
 	// specified, DbUser can log on to any existing database. Constraints:
 	//
@@ -124,9 +128,13 @@ type GetClusterCredentialsInput struct {
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
 	DbName *string
+
 	// The unique identifier of the cluster that contains the database for which your
 	// are requesting credentials. This parameter is case sensitive.
+	//
+	// This member is required.
 	ClusterIdentifier *string
+
 	// The name of a database user. If a user name matching DbUser exists in the
 	// database, the temporary user credentials have the same permissions as the
 	// existing user. If DbUser doesn't exist in the database and Autocreate is True, a
@@ -153,15 +161,19 @@ type GetClusterCredentialsInput struct {
 	// of reserved words can be found in Reserved Words
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
+	//
+	// This member is required.
 	DbUser *string
 }
 
 // Temporary credentials with authorization to log on to an Amazon Redshift
 // database.
 type GetClusterCredentialsOutput struct {
+
 	// A temporary password that authorizes the user name returned by DbUser to log on
 	// to the database DbName.
 	DbPassword *string
+
 	// A database user name that is authorized to log on to the database DbName using
 	// the password DbPassword. If the specified DbUser exists in the database, the new
 	// user name has the same database privileges as the the user named in DbUser. By
@@ -169,6 +181,7 @@ type GetClusterCredentialsOutput struct {
 	// DbUser is added to the listed groups for any sessions created using these
 	// credentials.
 	DbUser *string
+
 	// The date and time the password in DbPassword expires.
 	Expiration *time.Time
 

@@ -58,34 +58,47 @@ func (c *Client) CreateUserPool(ctx context.Context, params *CreateUserPoolInput
 
 // Represents the request to create a user pool.
 type CreateUserPoolInput struct {
+
 	// The email configuration.
 	EmailConfiguration *types.EmailConfigurationType
+
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *types.AdminCreateUserConfigType
+
 	// A string representing the email verification message.
 	EmailVerificationMessage *string
+
 	// The device configuration.
 	DeviceConfiguration *types.DeviceConfigurationType
+
 	// The SMS configuration.
 	SmsConfiguration *types.SmsConfigurationType
+
 	// The tag keys and values to assign to the user pool. A tag is a label that you
 	// can use to categorize and manage user pools in different ways, such as by
 	// purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]*string
+
 	// A string representing the email verification subject.
 	EmailVerificationSubject *string
+
 	// Used to enable advanced security risk detection. Set the key
 	// AdvancedSecurityMode to the value "AUDIT".
 	UserPoolAddOns *types.UserPoolAddOnsType
+
 	// The policies associated with the new user pool.
 	Policies *types.UserPoolPolicyType
+
 	// An array of schema attributes for the new user pool. These attributes can be
 	// standard or custom attributes.
 	Schema []*types.SchemaAttributeType
+
 	// The attributes to be auto-verified. Possible values: email, phone_number.
 	AutoVerifiedAttributes []types.VerifiedAttributeType
+
 	// A string representing the SMS authentication message.
 	SmsAuthenticationMessage *string
+
 	// Use this setting to define which verified available method a user can use to
 	// recover their password when they call ForgotPassword. It allows you to define a
 	// preferred method when a user has more than one method available. With this
@@ -96,9 +109,11 @@ type CreateUserPoolInput struct {
 	// default to verified_email first and verified_phone_number as the second option
 	// for newly created user pools if no value is provided.
 	AccountRecoverySetting *types.AccountRecoverySettingType
+
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
 	UsernameAttributes []types.UsernameAttributeType
+
 	// The Lambda trigger configuration information for the new user pool. In a push
 	// model, event sources (such as Amazon S3 and custom applications) need permission
 	// to invoke a function. So you will need to make an extra call to add permission
@@ -108,27 +123,36 @@ type CreateUserPoolInput struct {
 	// adding permission using the AWS CLI, see  add-permission
 	// (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).
 	LambdaConfig *types.LambdaConfigType
+
 	// The template for the verification message that the user sees when the app
 	// requests permission to access the user's information.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType
+
 	// A string used to name the user pool.
+	//
+	// This member is required.
 	PoolName *string
+
 	// You can choose to set case sensitivity on the username input for the selected
 	// sign-in option. For example, when this is set to False, users will be able to
 	// sign in using either "username" or "Username". This configuration is immutable
 	// once it has been set. For more information, see .
 	UsernameConfiguration *types.UsernameConfigurationType
+
 	// Attributes supported as an alias for this user pool. Possible values:
 	// phone_number, email, or preferred_username.
 	AliasAttributes []types.AliasAttributeType
+
 	// A string representing the SMS verification message.
 	SmsVerificationMessage *string
+
 	// Specifies MFA configuration details.
 	MfaConfiguration types.UserPoolMfaType
 }
 
 // Represents the response from the server for the request to create a user pool.
 type CreateUserPoolOutput struct {
+
 	// A container for the user pool details.
 	UserPool *types.UserPoolType
 

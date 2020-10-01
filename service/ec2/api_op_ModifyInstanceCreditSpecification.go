@@ -60,12 +60,17 @@ func (c *Client) ModifyInstanceCreditSpecification(ctx context.Context, params *
 }
 
 type ModifyInstanceCreditSpecificationInput struct {
+
 	// A unique, case-sensitive token that you provide to ensure idempotency of your
 	// modification request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Information about the credit option for CPU usage.
+	//
+	// This member is required.
 	InstanceCreditSpecifications []*types.InstanceCreditSpecificationRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -74,9 +79,11 @@ type ModifyInstanceCreditSpecificationInput struct {
 }
 
 type ModifyInstanceCreditSpecificationOutput struct {
+
 	// Information about the instances whose credit option for CPU usage was
 	// successfully modified.
 	SuccessfulInstanceCreditSpecifications []*types.SuccessfulInstanceCreditSpecificationItem
+
 	// Information about the instances whose credit option for CPU usage was not
 	// modified.
 	UnsuccessfulInstanceCreditSpecifications []*types.UnsuccessfulInstanceCreditSpecificationItem

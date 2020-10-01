@@ -56,15 +56,21 @@ func (c *Client) UpdateDeviceInstance(ctx context.Context, params *UpdateDeviceI
 }
 
 type UpdateDeviceInstanceInput struct {
+
 	// The ARN of the profile that you want to associate with the device instance.
 	ProfileArn *string
+
 	// An array of strings that you want to associate with the device instance.
 	Labels []*string
+
 	// The Amazon Resource Name (ARN) of the device instance.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type UpdateDeviceInstanceOutput struct {
+
 	// An object that contains information about your device instance.
 	DeviceInstance *types.DeviceInstance
 

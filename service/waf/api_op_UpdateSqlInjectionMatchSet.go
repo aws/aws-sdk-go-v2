@@ -101,10 +101,14 @@ func (c *Client) UpdateSqlInjectionMatchSet(ctx context.Context, params *UpdateS
 
 // A request to update a SqlInjectionMatchSet ().
 type UpdateSqlInjectionMatchSetInput struct {
+
 	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to update.
 	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet () and by
 	// ListSqlInjectionMatchSets ().
+	//
+	// This member is required.
 	SqlInjectionMatchSetId *string
+
 	// An array of SqlInjectionMatchSetUpdate objects that you want to insert into or
 	// delete from a SqlInjectionMatchSet (). For more information, see the applicable
 	// data types:
@@ -116,13 +120,19 @@ type UpdateSqlInjectionMatchSetInput struct {
 	// and TextTransformation
 	//
 	//     * FieldToMatch (): Contains Data and Type
+	//
+	// This member is required.
 	Updates []*types.SqlInjectionMatchSetUpdate
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 // The response to an UpdateSqlInjectionMatchSets () request.
 type UpdateSqlInjectionMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateSqlInjectionMatchSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().

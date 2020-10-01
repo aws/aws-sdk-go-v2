@@ -63,21 +63,29 @@ func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInp
 // A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of
 // usage within your application.
 type BatchMeterUsageInput struct {
+
 	// Product code is used to uniquely identify a product in AWS Marketplace. The
 	// product code should be the same as the one used during the publishing of a new
 	// product.
+	//
+	// This member is required.
 	ProductCode *string
+
 	// The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords
 	// at a time.
+	//
+	// This member is required.
 	UsageRecords []*types.UsageRecord
 }
 
 // Contains the UsageRecords processed by BatchMeterUsage and any records that have
 // failed due to transient error.
 type BatchMeterUsageOutput struct {
+
 	// Contains all UsageRecords processed by BatchMeterUsage. These records were
 	// either honored by AWS Marketplace Metering Service or were invalid.
 	Results []*types.UsageRecordResult
+
 	// Contains all UsageRecords that were not processed by BatchMeterUsage. This is a
 	// list of UsageRecords. You can retry the failed request by making another
 	// BatchMeterUsage call with this list as input in the BatchMeterUsageRequest.

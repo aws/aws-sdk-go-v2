@@ -56,25 +56,35 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 }
 
 type SearchIndexInput struct {
+
 	// The search query string.
+	//
+	// This member is required.
 	QueryString *string
+
 	// The query version.
 	QueryVersion *string
+
 	// The search index name.
 	IndexName *string
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type SearchIndexOutput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The things that match the search query.
 	Things []*types.ThingDocument
+
 	// The thing groups that match the search query.
 	ThingGroups []*types.ThingGroupDocument
 

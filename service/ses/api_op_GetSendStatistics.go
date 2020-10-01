@@ -63,6 +63,7 @@ type GetSendStatisticsInput struct {
 // Represents a list of data points. This list contains aggregated data from the
 // previous two weeks of your sending activity with Amazon SES.
 type GetSendStatisticsOutput struct {
+
 	// A list of data points, each of which represents 15 minutes of activity.
 	SendDataPoints []*types.SendDataPoint
 

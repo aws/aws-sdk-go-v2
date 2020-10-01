@@ -61,18 +61,22 @@ func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params 
 
 // Parameter input for DescribeDBInstanceAutomatedBackups.
 type DescribeDBInstanceAutomatedBackupsInput struct {
+
 	// The pagination token provided in the previous request. If this parameter is
 	// specified the response includes only records beyond the marker, up to
 	// MaxRecords.
 	Marker *string
+
 	// (Optional) The user-supplied instance identifier. If this parameter is
 	// specified, it must match the identifier of an existing DB instance. It returns
 	// information from the specific DB instance' automated backup. This parameter
 	// isn't case-sensitive.
 	DBInstanceIdentifier *string
+
 	// The resource ID of the DB instance that is the source of the automated backup.
 	// This parameter isn't case-sensitive.
 	DbiResourceId *string
+
 	// A filter that specifies which resources to return based on status. Supported
 	// filters are the following:
 	//
@@ -100,6 +104,7 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	// Returns all resources by default. The status for each resource is
 	// specified in the response.
 	Filters []*types.Filter
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
@@ -109,10 +114,12 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 // Contains the result of a successful invocation of the
 // DescribeDBInstanceAutomatedBackups action.
 type DescribeDBInstanceAutomatedBackupsOutput struct {
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
+
 	// A list of DBInstanceAutomatedBackup instances.
 	DBInstanceAutomatedBackups []*types.DBInstanceAutomatedBackup
 

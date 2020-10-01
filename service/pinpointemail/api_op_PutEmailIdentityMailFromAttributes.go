@@ -58,9 +58,13 @@ func (c *Client) PutEmailIdentityMailFromAttributes(ctx context.Context, params 
 
 // A request to configure the custom MAIL FROM domain for a verified identity.
 type PutEmailIdentityMailFromAttributesInput struct {
+
 	// The verified email identity that you want to set up the custom MAIL FROM domain
 	// for.
+	//
+	// This member is required.
 	EmailIdentity *string
+
 	// The action that you want Amazon Pinpoint to take if it can't read the required
 	// MX record when you send an email. When you set this value to UseDefaultValue,
 	// Amazon Pinpoint uses amazonses.com as the MAIL FROM domain. When you set this
@@ -69,6 +73,7 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	// the custom MAIL FROM domain configuration is in the Pending, Failed, and
 	// TemporaryFailure states.
 	BehaviorOnMxFailure types.BehaviorOnMxFailure
+
 	// The custom MAIL FROM domain that you want the verified identity to use. The MAIL
 	// FROM domain must meet the following criteria:
 	//

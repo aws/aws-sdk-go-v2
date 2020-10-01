@@ -75,9 +75,12 @@ func (c *Client) RemoveAccountFromOrganization(ctx context.Context, params *Remo
 }
 
 type RemoveAccountFromOrganizationInput struct {
+
 	// The unique identifier (ID) of the member account that you want to remove from
 	// the organization. The regex pattern (http://wikipedia.org/wiki/regex) for an
 	// account ID string requires exactly 12 digits.
+	//
+	// This member is required.
 	AccountId *string
 }
 

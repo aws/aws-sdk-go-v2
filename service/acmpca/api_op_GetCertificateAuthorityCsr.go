@@ -60,13 +60,17 @@ func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCert
 }
 
 type GetCertificateAuthorityCsrInput struct {
+
 	// The Amazon Resource Name (ARN) that was returned when you called the
 	// CreateCertificateAuthority () action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
 }
 
 type GetCertificateAuthorityCsrOutput struct {
+
 	// The base64 PEM-encoded certificate signing request (CSR) for your private CA
 	// certificate.
 	Csr *string

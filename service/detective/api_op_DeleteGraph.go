@@ -57,7 +57,10 @@ func (c *Client) DeleteGraph(ctx context.Context, params *DeleteGraphInput, optF
 }
 
 type DeleteGraphInput struct {
+
 	// The ARN of the behavior graph to disable.
+	//
+	// This member is required.
 	GraphArn *string
 }
 

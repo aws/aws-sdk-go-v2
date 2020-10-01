@@ -55,13 +55,16 @@ func (c *Client) GetSamplingStatisticSummaries(ctx context.Context, params *GetS
 }
 
 type GetSamplingStatisticSummariesInput struct {
+
 	// Pagination token.
 	NextToken *string
 }
 
 type GetSamplingStatisticSummariesOutput struct {
+
 	// Information about the number of requests instrumented for each sampling rule.
 	SamplingStatisticSummaries []*types.SamplingStatisticSummary
+
 	// Pagination token.
 	NextToken *string
 

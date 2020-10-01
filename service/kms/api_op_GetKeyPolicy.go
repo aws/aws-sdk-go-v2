@@ -56,9 +56,13 @@ func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, op
 }
 
 type GetKeyPolicyInput struct {
+
 	// Specifies the name of the key policy. The only valid name is default. To get the
 	// names of key policies, use ListKeyPolicies ().
+	//
+	// This member is required.
 	PolicyName *string
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -70,10 +74,13 @@ type GetKeyPolicyInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 
 type GetKeyPolicyOutput struct {
+
 	// A key policy document in JSON format.
 	Policy *string
 

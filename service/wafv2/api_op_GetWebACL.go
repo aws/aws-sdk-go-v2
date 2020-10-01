@@ -60,9 +60,13 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 }
 
 type GetWebACLInput struct {
+
 	// The name of the Web ACL. You cannot change the name of a Web ACL after you
 	// create it.
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -73,13 +77,19 @@ type GetWebACLInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// The unique identifier for the Web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetWebACLOutput struct {
+
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to
@@ -88,6 +98,7 @@ type GetWebACLOutput struct {
 	// has been made, the update fails with a WAFOptimisticLockException. If this
 	// happens, perform another get, and use the new token returned by that operation.
 	LockToken *string
+
 	// The Web ACL specification. You can modify the settings in this Web ACL and use
 	// it to update this Web ACL or create a new one.
 	WebACL *types.WebACL

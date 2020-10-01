@@ -56,7 +56,10 @@ func (c *Client) CancelSimulationJobBatch(ctx context.Context, params *CancelSim
 }
 
 type CancelSimulationJobBatchInput struct {
+
 	// The id of the batch to cancel.
+	//
+	// This member is required.
 	Batch *string
 }
 

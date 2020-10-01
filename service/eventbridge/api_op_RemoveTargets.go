@@ -63,23 +63,33 @@ func (c *Client) RemoveTargets(ctx context.Context, params *RemoveTargetsInput, 
 }
 
 type RemoveTargetsInput struct {
+
 	// If this is a managed rule, created by an AWS service on your behalf, you must
 	// specify Force as True to remove targets. This parameter is ignored for rules
 	// that are not managed rules. You can check whether a rule is a managed rule by
 	// using DescribeRule or ListRules and checking the ManagedBy field of the
 	// response.
 	Force *bool
+
 	// The IDs of the targets to remove from the rule.
+	//
+	// This member is required.
 	Ids []*string
+
 	// The name of the rule.
+	//
+	// This member is required.
 	Rule *string
+
 	// The name of the event bus associated with the rule.
 	EventBusName *string
 }
 
 type RemoveTargetsOutput struct {
+
 	// The number of failed entries.
 	FailedEntryCount *int32
+
 	// The failed target entries.
 	FailedEntries []*types.RemoveTargetsResultEntry
 

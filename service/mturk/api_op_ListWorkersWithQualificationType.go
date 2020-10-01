@@ -57,24 +57,33 @@ func (c *Client) ListWorkersWithQualificationType(ctx context.Context, params *L
 }
 
 type ListWorkersWithQualificationTypeInput struct {
+
 	// The ID of the Qualification type of the Qualifications to return.
+	//
+	// This member is required.
 	QualificationTypeId *string
+
 	// Pagination Token
 	NextToken *string
+
 	// Limit the number of results returned.
 	MaxResults *int32
+
 	// The status of the Qualifications to return. Can be Granted | Revoked.
 	Status types.QualificationStatus
 }
 
 type ListWorkersWithQualificationTypeOutput struct {
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The number of Qualifications on this page in the filtered results list,
 	// equivalent to the number of Qualifications being returned by this call.
 	NumResults *int32
+
 	// The list of Qualification elements returned by this call.
 	Qualifications []*types.Qualification
 

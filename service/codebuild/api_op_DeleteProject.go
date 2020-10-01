@@ -55,7 +55,10 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 }
 
 type DeleteProjectInput struct {
+
 	// The name of the build project.
+	//
+	// This member is required.
 	Name *string
 }
 

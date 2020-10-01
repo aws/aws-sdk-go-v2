@@ -56,19 +56,28 @@ func (c *Client) PurchaseReservedElasticsearchInstanceOffering(ctx context.Conte
 
 // Container for parameters to PurchaseReservedElasticsearchInstanceOffering
 type PurchaseReservedElasticsearchInstanceOfferingInput struct {
+
 	// The number of Elasticsearch instances to reserve.
 	InstanceCount *int32
+
 	// The ID of the reserved Elasticsearch instance offering to purchase.
+	//
+	// This member is required.
 	ReservedElasticsearchInstanceOfferingId *string
+
 	// A customer-specified identifier to track this reservation.
+	//
+	// This member is required.
 	ReservationName *string
 }
 
 // Represents the output of a PurchaseReservedElasticsearchInstanceOffering
 // operation.
 type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
+
 	// Details of the reserved Elasticsearch instance which was purchased.
 	ReservedElasticsearchInstanceId *string
+
 	// The customer-specified identifier used to track this reservation.
 	ReservationName *string
 

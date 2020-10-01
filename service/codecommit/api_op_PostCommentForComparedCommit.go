@@ -58,41 +58,60 @@ func (c *Client) PostCommentForComparedCommit(ctx context.Context, params *PostC
 }
 
 type PostCommentForComparedCommitInput struct {
+
 	// The content of the comment you want to make.
+	//
+	// This member is required.
 	Content *string
+
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
 	// received with the same parameters and a token is included, the request returns
 	// information about the initial request that used that token.
 	ClientRequestToken *string
+
 	// The name of the repository where you want to post a comment on the comparison
 	// between commits.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// To establish the directionality of the comparison, the full commit ID of the
 	// before commit. Required for commenting on any commit unless that commit is the
 	// initial commit.
 	BeforeCommitId *string
+
 	// The location of the comparison where you want to comment.
 	Location *types.Location
+
 	// To establish the directionality of the comparison, the full commit ID of the
 	// after commit.
+	//
+	// This member is required.
 	AfterCommitId *string
 }
 
 type PostCommentForComparedCommitOutput struct {
+
 	// The location of the comment in the comparison between the two commits.
 	Location *types.Location
+
 	// In the directionality you established, the blob ID of the after blob.
 	AfterBlobId *string
+
 	// In the directionality you established, the full commit ID of the before commit.
 	BeforeCommitId *string
+
 	// The name of the repository where you posted a comment on the comparison between
 	// commits.
 	RepositoryName *string
+
 	// The content of the comment you posted.
 	Comment *types.Comment
+
 	// In the directionality you established, the full commit ID of the after commit.
 	AfterCommitId *string
+
 	// In the directionality you established, the blob ID of the before blob.
 	BeforeBlobId *string
 

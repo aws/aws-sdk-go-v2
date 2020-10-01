@@ -58,7 +58,10 @@ func (c *Client) DeleteStreamProcessor(ctx context.Context, params *DeleteStream
 }
 
 type DeleteStreamProcessorInput struct {
+
 	// The name of the stream processor you want to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

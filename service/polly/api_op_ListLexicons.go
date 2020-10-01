@@ -57,14 +57,17 @@ func (c *Client) ListLexicons(ctx context.Context, params *ListLexiconsInput, op
 }
 
 type ListLexiconsInput struct {
+
 	// An opaque pagination token returned from previous ListLexicons operation. If
 	// present, indicates where to continue the list of lexicons.
 	NextToken *string
 }
 
 type ListLexiconsOutput struct {
+
 	// A list of lexicon names and attributes.
 	Lexicons []*types.LexiconDescription
+
 	// The pagination token to use in the next request to continue the listing of
 	// lexicons. NextToken is returned only if the response is truncated.
 	NextToken *string

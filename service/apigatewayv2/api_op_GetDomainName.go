@@ -56,17 +56,24 @@ func (c *Client) GetDomainName(ctx context.Context, params *GetDomainNameInput, 
 }
 
 type GetDomainNameInput struct {
+
 	// The domain name.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 type GetDomainNameOutput struct {
+
 	// The collection of tags associated with a domain name.
 	Tags map[string]*string
+
 	// The domain name configurations.
 	DomainNameConfigurations []*types.DomainNameConfiguration
+
 	// The name of the DomainName resource.
 	DomainName *string
+
 	// The API mapping selection expression.
 	ApiMappingSelectionExpression *string
 

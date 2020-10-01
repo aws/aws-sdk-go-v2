@@ -62,6 +62,7 @@ func (c *Client) GetContactMethods(ctx context.Context, params *GetContactMethod
 }
 
 type GetContactMethodsInput struct {
+
 	// The protocols used to send notifications, such as Email, or SMS (text
 	// messaging). Specify a protocol in your request to return information about a
 	// specific contact method protocol.
@@ -69,6 +70,7 @@ type GetContactMethodsInput struct {
 }
 
 type GetContactMethodsOutput struct {
+
 	// An array of objects that describe the contact methods.
 	ContactMethods []*types.ContactMethod
 

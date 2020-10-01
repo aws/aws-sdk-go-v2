@@ -57,27 +57,38 @@ func (c *Client) GetResourceDefinitionVersion(ctx context.Context, params *GetRe
 }
 
 type GetResourceDefinitionVersionInput struct {
+
 	// The ID of the resource definition version. This value maps to the ''Version''
 	// property of the corresponding ''VersionInformation'' object, which is returned
 	// by ''ListResourceDefinitionVersions'' requests. If the version is the last one
 	// that was associated with a resource definition, the value also maps to the
 	// ''LatestVersion'' property of the corresponding ''DefinitionInformation''
 	// object.
+	//
+	// This member is required.
 	ResourceDefinitionVersionId *string
+
 	// The ID of the resource definition.
+	//
+	// This member is required.
 	ResourceDefinitionId *string
 }
 
 type GetResourceDefinitionVersionOutput struct {
+
 	// The time, in milliseconds since the epoch, when the resource definition version
 	// was created.
 	CreationTimestamp *string
+
 	// Arn of the resource definition version.
 	Arn *string
+
 	// Information about the definition.
 	Definition *types.ResourceDefinitionVersion
+
 	// The ID of the resource definition version.
 	Id *string
+
 	// The version of the resource definition version.
 	Version *string
 

@@ -56,7 +56,10 @@ func (c *Client) DeleteTopicRule(ctx context.Context, params *DeleteTopicRuleInp
 
 // The input for the DeleteTopicRule operation.
 type DeleteTopicRuleInput struct {
+
 	// The name of the rule.
+	//
+	// This member is required.
 	RuleName *string
 }
 

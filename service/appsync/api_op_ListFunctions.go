@@ -56,18 +56,25 @@ func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, 
 }
 
 type ListFunctionsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The GraphQL API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The maximum number of results you want the request to return.
 	MaxResults *int32
 }
 
 type ListFunctionsOutput struct {
+
 	// A list of Function objects.
 	Functions []*types.FunctionConfiguration
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string

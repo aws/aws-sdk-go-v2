@@ -58,13 +58,22 @@ type DescribeCrossAccountAccessRoleInput struct {
 }
 
 type DescribeCrossAccountAccessRoleOutput struct {
+
 	// A Boolean value that specifies whether the IAM role has the necessary policies
 	// attached to enable Amazon Inspector to access your AWS account.
+	//
+	// This member is required.
 	Valid *bool
+
 	// The ARN that specifies the IAM role that Amazon Inspector uses to access your
 	// AWS account.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The date when the cross-account access role was registered.
+	//
+	// This member is required.
 	RegisteredAt *time.Time
 
 	// Metadata pertaining to the operation's result.

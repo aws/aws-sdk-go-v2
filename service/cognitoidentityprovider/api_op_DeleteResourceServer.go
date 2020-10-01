@@ -55,9 +55,15 @@ func (c *Client) DeleteResourceServer(ctx context.Context, params *DeleteResourc
 }
 
 type DeleteResourceServerInput struct {
+
 	// The user pool ID for the user pool that hosts the resource server.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The identifier for the resource server.
+	//
+	// This member is required.
 	Identifier *string
 }
 

@@ -57,18 +57,25 @@ func (c *Client) SampleChannelData(ctx context.Context, params *SampleChannelDat
 }
 
 type SampleChannelDataInput struct {
+
 	// The end of the time window from which sample messages are retrieved.
 	EndTime *time.Time
+
 	// The start of the time window from which sample messages are retrieved.
 	StartTime *time.Time
+
 	// The name of the channel whose message samples are retrieved.
+	//
+	// This member is required.
 	ChannelName *string
+
 	// The number of sample messages to be retrieved. The limit is 10, the default is
 	// also 10.
 	MaxMessages *int32
 }
 
 type SampleChannelDataOutput struct {
+
 	// The list of message samples. Each sample message is returned as a base64-encoded
 	// string.
 	Payloads [][]byte

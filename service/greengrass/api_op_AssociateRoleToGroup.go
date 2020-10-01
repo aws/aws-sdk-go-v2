@@ -57,14 +57,21 @@ func (c *Client) AssociateRoleToGroup(ctx context.Context, params *AssociateRole
 }
 
 type AssociateRoleToGroupInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// The ARN of the role you wish to associate with this group. The existence of the
 	// role is not validated.
+	//
+	// This member is required.
 	RoleArn *string
 }
 
 type AssociateRoleToGroupOutput struct {
+
 	// The time, in milliseconds since the epoch, when the role ARN was associated with
 	// the group.
 	AssociatedAt *string

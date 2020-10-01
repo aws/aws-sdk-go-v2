@@ -75,11 +75,15 @@ func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketRepl
 }
 
 type GetBucketReplicationInput struct {
+
 	// The bucket name for which to get the replication information.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketReplicationOutput struct {
+
 	// A container for replication rules. You can add up to 1,000 rules. The maximum
 	// size of a replication configuration is 2 MB.
 	ReplicationConfiguration *types.ReplicationConfiguration

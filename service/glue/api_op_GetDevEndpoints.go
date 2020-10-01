@@ -59,15 +59,19 @@ func (c *Client) GetDevEndpoints(ctx context.Context, params *GetDevEndpointsInp
 }
 
 type GetDevEndpointsInput struct {
+
 	// The maximum size of information to return.
 	MaxResults *int32
+
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 }
 
 type GetDevEndpointsOutput struct {
+
 	// A list of DevEndpoint definitions.
 	DevEndpoints []*types.DevEndpoint
+
 	// A continuation token, if not all DevEndpoint definitions have yet been returned.
 	NextToken *string
 

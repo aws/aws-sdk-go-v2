@@ -65,13 +65,19 @@ func (c *Client) UpdateOpsItem(ctx context.Context, params *UpdateOpsItemInput, 
 }
 
 type UpdateOpsItemInput struct {
+
 	// Keys that you want to remove from the OperationalData map.
 	OperationalDataToDelete []*string
+
 	// Update the information about the OpsItem. Provide enough information so that
 	// users reading this OpsItem for the first time understand the issue.
 	Description *string
+
 	// The ID of the OpsItem.
+	//
+	// This member is required.
 	OpsItemId *string
+
 	// Add new keys or edit existing key-value pairs of the OperationalData map in the
 	// OpsItem object. Operational data is custom data that provides useful reference
 	// details about the OpsItem. For example, you can specify log files, error
@@ -92,25 +98,32 @@ type UpdateOpsItemInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]*types.OpsItemDataValue
+
 	// Specify a new category for an OpsItem.
 	Category *string
+
 	// One or more OpsItems that share something in common with the current OpsItems.
 	// For example, related OpsItems can include OpsItems with similar error messages,
 	// impacted resources, or statuses for the impacted resource.
 	RelatedOpsItems []*types.RelatedOpsItem
+
 	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
 	// this OpsItem is edited or changed.
 	Notifications []*types.OpsItemNotification
+
 	// A short heading that describes the nature of the OpsItem and the impacted
 	// resource.
 	Title *string
+
 	// The OpsItem status. Status can be Open, In Progress, or Resolved. For more
 	// information, see Editing OpsItem details
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details)
 	// in the AWS Systems Manager User Guide.
 	Status types.OpsItemStatus
+
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int32
+
 	// Specify a new severity for an OpsItem.
 	Severity *string
 }

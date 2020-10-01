@@ -57,7 +57,10 @@ func (c *Client) DeleteTargetGroup(ctx context.Context, params *DeleteTargetGrou
 }
 
 type DeleteTargetGroupInput struct {
+
 	// The Amazon Resource Name (ARN) of the target group.
+	//
+	// This member is required.
 	TargetGroupArn *string
 }
 

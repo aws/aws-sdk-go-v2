@@ -57,11 +57,15 @@ func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInp
 }
 
 type DescribeClusterInput struct {
+
 	// The automatically generated ID for a cluster.
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 type DescribeClusterOutput struct {
+
 	// Information about a specific cluster, including shipping information, cluster
 	// status, and other important metadata.
 	ClusterMetadata *types.ClusterMetadata

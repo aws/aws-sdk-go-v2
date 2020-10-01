@@ -57,8 +57,11 @@ func (c *Client) DeregisterManagedInstance(ctx context.Context, params *Deregist
 }
 
 type DeregisterManagedInstanceInput struct {
+
 	// The ID assigned to the managed instance when you registered it using the
 	// activation process.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

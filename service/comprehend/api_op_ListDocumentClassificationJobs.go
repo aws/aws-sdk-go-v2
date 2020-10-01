@@ -55,19 +55,24 @@ func (c *Client) ListDocumentClassificationJobs(ctx context.Context, params *Lis
 }
 
 type ListDocumentClassificationJobsInput struct {
+
 	// Filters the jobs that are returned. You can filter jobs on their names, status,
 	// or the date and time that they were submitted. You can only set one filter at a
 	// time.
 	Filter *types.DocumentClassificationJobFilter
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
 	// Identifies the next page of results to return.
 	NextToken *string
 }
 
 type ListDocumentClassificationJobsOutput struct {
+
 	// A list containing the properties of each job returned.
 	DocumentClassificationJobPropertiesList []*types.DocumentClassificationJobProperties
+
 	// Identifies the next page of results to return.
 	NextToken *string
 

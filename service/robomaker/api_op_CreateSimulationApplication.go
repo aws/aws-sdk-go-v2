@@ -57,41 +57,65 @@ func (c *Client) CreateSimulationApplication(ctx context.Context, params *Create
 }
 
 type CreateSimulationApplicationInput struct {
+
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// application.
 	Tags map[string]*string
+
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
 	// The simulation software suite used by the simulation application.
+	//
+	// This member is required.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
+
 	// The sources of the simulation application.
+	//
+	// This member is required.
 	Sources []*types.SourceConfig
+
 	// The robot software suite (ROS distribution) used by the simulation application.
+	//
+	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The name of the simulation application.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateSimulationApplicationOutput struct {
+
 	// The list of all tags added to the simulation application.
 	Tags map[string]*string
+
 	// The name of the simulation application.
 	Name *string
+
 	// The version of the simulation application.
 	Version *string
+
 	// The revision id of the simulation application.
 	RevisionId *string
+
 	// The Amazon Resource Name (ARN) of the simulation application.
 	Arn *string
+
 	// The simulation software suite used by the simulation application.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
+
 	// Information about the robot software suite (ROS distribution).
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
 	LastUpdatedAt *time.Time
+
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
 	// The sources of the simulation application.
 	Sources []*types.Source
 

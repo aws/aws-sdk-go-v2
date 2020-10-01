@@ -68,12 +68,16 @@ func (c *Client) CreateVirtualMFADevice(ctx context.Context, params *CreateVirtu
 }
 
 type CreateVirtualMFADeviceInput struct {
+
 	// The name of the virtual MFA device. Use with path to uniquely identify a virtual
 	// MFA device. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	VirtualMFADeviceName *string
+
 	// The path for the virtual MFA device. For more information about paths, see IAM
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -89,7 +93,10 @@ type CreateVirtualMFADeviceInput struct {
 
 // Contains the response to a successful CreateVirtualMFADevice () request.
 type CreateVirtualMFADeviceOutput struct {
+
 	// A structure containing details about the new virtual MFA device.
+	//
+	// This member is required.
 	VirtualMFADevice *types.VirtualMFADevice
 
 	// Metadata pertaining to the operation's result.

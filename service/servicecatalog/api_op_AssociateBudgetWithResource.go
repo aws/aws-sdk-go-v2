@@ -55,9 +55,15 @@ func (c *Client) AssociateBudgetWithResource(ctx context.Context, params *Associ
 }
 
 type AssociateBudgetWithResourceInput struct {
+
 	// The name of the budget you want to associate.
+	//
+	// This member is required.
 	BudgetName *string
+
 	// The resource identifier. Either a portfolio-id or a product-id.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

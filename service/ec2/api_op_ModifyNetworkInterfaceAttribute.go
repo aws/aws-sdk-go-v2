@@ -59,28 +59,36 @@ func (c *Client) ModifyNetworkInterfaceAttribute(ctx context.Context, params *Mo
 
 // Contains the parameters for ModifyNetworkInterfaceAttribute.
 type ModifyNetworkInterfaceAttributeInput struct {
+
 	// Indicates whether source/destination checking is enabled. A value of true means
 	// checking is enabled, and false means checking is disabled. This value must be
 	// false for a NAT instance to perform NAT. For more information, see NAT Instances
 	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html)
 	// in the Amazon Virtual Private Cloud User Guide.
 	SourceDestCheck *types.AttributeBooleanValue
+
 	// Changes the security groups for the network interface. The new set of groups you
 	// specify replaces the current set. You must specify at least one group, even if
 	// it's just the default security group in the VPC. You must specify the ID of the
 	// security group, not the name.
 	Groups []*string
+
 	// A description for the network interface.
 	Description *types.AttributeValue
+
 	// Information about the interface attachment. If modifying the 'delete on
 	// termination' attribute, you must specify the ID of the interface attachment.
 	Attachment *types.NetworkInterfaceAttachmentChanges
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
 }
 

@@ -62,8 +62,10 @@ type GetConnectionInput struct {
 
 type GetConnectionOutput struct {
 	Identity *types.Identity
+
 	// The time in ISO 8601 format for when the connection was established.
 	ConnectedAt *time.Time
+
 	// The time in ISO 8601 format for when the connection was last active.
 	LastActiveAt *time.Time
 

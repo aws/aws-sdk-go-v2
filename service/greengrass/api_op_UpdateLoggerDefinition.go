@@ -55,8 +55,12 @@ func (c *Client) UpdateLoggerDefinition(ctx context.Context, params *UpdateLogge
 }
 
 type UpdateLoggerDefinitionInput struct {
+
 	// The ID of the logger definition.
+	//
+	// This member is required.
 	LoggerDefinitionId *string
+
 	// The name of the definition.
 	Name *string
 }

@@ -58,31 +58,53 @@ func (c *Client) CreateNetwork(ctx context.Context, params *CreateNetworkInput, 
 }
 
 type CreateNetworkInput struct {
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the operation. An idempotent operation completes no more than one time. This
 	// identifier is required only if you make a service request directly using an HTTP
 	// client. It is generated automatically if you use an AWS SDK or the AWS CLI.
+	//
+	// This member is required.
 	ClientRequestToken *string
+
 	// An optional description for the network.
 	Description *string
+
 	// The name of the network.
+	//
+	// This member is required.
 	Name *string
+
 	// Configuration properties for the first member within the network.
+	//
+	// This member is required.
 	MemberConfiguration *types.MemberConfiguration
+
 	// The voting rules used by the network to determine if a proposal is approved.
+	//
+	// This member is required.
 	VotingPolicy *types.VotingPolicy
+
 	// The blockchain framework that the network uses.
+	//
+	// This member is required.
 	Framework types.Framework
+
 	// Configuration properties of the blockchain framework relevant to the network
 	// configuration.
 	FrameworkConfiguration *types.NetworkFrameworkConfiguration
+
 	// The version of the blockchain framework that the network uses.
+	//
+	// This member is required.
 	FrameworkVersion *string
 }
 
 type CreateNetworkOutput struct {
+
 	// The unique identifier for the network.
 	NetworkId *string
+
 	// The unique identifier for the first member within the network.
 	MemberId *string
 

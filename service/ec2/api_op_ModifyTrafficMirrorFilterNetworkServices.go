@@ -64,12 +64,18 @@ func (c *Client) ModifyTrafficMirrorFilterNetworkServices(ctx context.Context, p
 }
 
 type ModifyTrafficMirrorFilterNetworkServicesInput struct {
+
 	// The ID of the Traffic Mirror filter.
+	//
+	// This member is required.
 	TrafficMirrorFilterId *string
+
 	// The network service, for example Amazon DNS, that you want to mirror.
 	AddNetworkServices []types.TrafficMirrorNetworkService
+
 	// The network service, for example Amazon DNS, that you no longer want to mirror.
 	RemoveNetworkServices []types.TrafficMirrorNetworkService
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -78,6 +84,7 @@ type ModifyTrafficMirrorFilterNetworkServicesInput struct {
 }
 
 type ModifyTrafficMirrorFilterNetworkServicesOutput struct {
+
 	// The Traffic Mirror filter that the network service is associated with.
 	TrafficMirrorFilter *types.TrafficMirrorFilter
 

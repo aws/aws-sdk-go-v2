@@ -88,13 +88,17 @@ func (c *Client) VerifyDomainDkim(ctx context.Context, params *VerifyDomainDkimI
 // SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 type VerifyDomainDkimInput struct {
+
 	// The name of the domain to be verified for Easy DKIM signing.
+	//
+	// This member is required.
 	Domain *string
 }
 
 // Returns CNAME records that you must publish to the DNS server of your domain to
 // set up Easy DKIM with Amazon SES.
 type VerifyDomainDkimOutput struct {
+
 	// A set of character strings that represent the domain's identity. If the identity
 	// is an email address, the tokens represent the domain of that address. Using
 	// these tokens, you need to create DNS CNAME records that point to DKIM public
@@ -105,6 +109,8 @@ type VerifyDomainDkimOutput struct {
 	// address identities.) For more information about creating DNS records using DKIM
 	// tokens, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+	//
+	// This member is required.
 	DkimTokens []*string
 
 	// Metadata pertaining to the operation's result.

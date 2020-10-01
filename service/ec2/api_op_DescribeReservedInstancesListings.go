@@ -71,8 +71,10 @@ func (c *Client) DescribeReservedInstancesListings(ctx context.Context, params *
 
 // Contains the parameters for DescribeReservedInstancesListings.
 type DescribeReservedInstancesListingsInput struct {
+
 	// One or more Reserved Instance listing IDs.
 	ReservedInstancesListingId *string
+
 	// One or more filters.
 	//
 	//     * reserved-instances-id - The ID of the Reserved
@@ -87,12 +89,14 @@ type DescribeReservedInstancesListingsInput struct {
 	//     * status-message - The reason for
 	// the status.
 	Filters []*types.Filter
+
 	// One or more Reserved Instance IDs.
 	ReservedInstancesId *string
 }
 
 // Contains the output of DescribeReservedInstancesListings.
 type DescribeReservedInstancesListingsOutput struct {
+
 	// Information about the Reserved Instance listing.
 	ReservedInstancesListings []*types.ReservedInstancesListing
 

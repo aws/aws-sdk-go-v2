@@ -58,8 +58,12 @@ func (c *Client) GetCredentialsForIdentity(ctx context.Context, params *GetCrede
 
 // Input to the GetCredentialsForIdentity action.
 type GetCredentialsForIdentityInput struct {
+
 	// A unique identifier in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityId *string
+
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// The name-value pair will follow the syntax "provider_name":
 	// "provider_user_identifier". Logins should not be specified when trying to get
@@ -70,6 +74,7 @@ type GetCredentialsForIdentityInput struct {
 	// (http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
 	// section of the Amazon Cognito Developer Guide.
 	Logins map[string]*string
+
 	// The Amazon Resource Name (ARN) of the role to be assumed when multiple roles
 	// were received in the token from the identity provider. For example, a SAML-based
 	// identity provider. This parameter is optional for identity providers that do not
@@ -79,8 +84,10 @@ type GetCredentialsForIdentityInput struct {
 
 // Returned in response to a successful GetCredentialsForIdentity operation.
 type GetCredentialsForIdentityOutput struct {
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
 	// Credentials for the provided identity ID.
 	Credentials *types.Credentials
 

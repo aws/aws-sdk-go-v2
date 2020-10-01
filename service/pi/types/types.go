@@ -9,9 +9,15 @@ import (
 // A timestamp, and a single numerical value, which together represent a
 // measurement at a particular point in time.
 type DataPoint struct {
+
 	// The time, in epoch format, associated with a particular Value.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// The actual value associated with a particular Timestamp.
+	//
+	// This member is required.
 	Value *float64
 }
 
@@ -19,6 +25,7 @@ type DataPoint struct {
 // For example, the db.sql dimension group consists of the following dimensions:
 // db.sql.id, db.sql.db_id, db.sql.statement, and db.sql.tokenized_id.
 type DimensionGroup struct {
+
 	// A list of specific dimensions from a dimension group. If this parameter is not
 	// present, then it signifies that all of the dimensions in the group were
 	// requested, or are present in the response. Valid values for elements in the
@@ -56,12 +63,16 @@ type DimensionGroup struct {
 	//
 	//     * db.wait_event_type.name
 	Dimensions []*string
+
 	// The name of the dimension group. Valid values are:  <ul> <li> <p>
 	// <code>db.user</code> </p> </li> <li> <p> <code>db.host</code> </p> </li> <li>
 	// <p> <code>db.sql</code> </p> </li> <li> <p> <code>db.sql_tokenized</code> </p>
 	// </li> <li> <p> <code>db.wait_event</code> </p> </li> <li> <p>
 	// <code>db.wait_event_type</code> </p> </li> </ul>
+	//
+	// This member is required.
 	Group *string
+
 	// The maximum number of items to fetch for this dimension group.
 	Limit *int32
 }
@@ -69,10 +80,13 @@ type DimensionGroup struct {
 // An array of descriptions and aggregated values for each dimension within a
 // dimension group.
 type DimensionKeyDescription struct {
+
 	// If PartitionBy was specified, PartitionKeys contains the dimensions that were.
 	Partitions []*float64
+
 	// The aggregated metric value for the dimension(s), over the requested time range.
 	Total *float64
+
 	// A map of name-value pairs for the dimensions in the group.
 	Dimensions map[string]*string
 }
@@ -80,8 +94,10 @@ type DimensionKeyDescription struct {
 // A time-ordered series of data points, correpsonding to a dimension of a
 // Performance Insights metric.
 type MetricKeyDataPoints struct {
+
 	// The dimension(s) to which the data points apply.
 	Key *ResponseResourceMetricKey
+
 	// An array of timestamp-value pairs, representing measurements over a period of
 	// time.
 	DataPoints []*DataPoint
@@ -93,18 +109,23 @@ type MetricKeyDataPoints struct {
 // aggregated by dimension group ( GroupBy), and return only those data points that
 // match your criteria (Filter).
 type MetricQuery struct {
+
 	// A specification for how to aggregate the data points from a query result. You
 	// must specify a valid dimension group. Performance Insights will return all of
 	// the dimensions within that group, unless you provide the names of specific
 	// dimensions within that group. You can also request that Performance Insights
 	// return a limited number of values for a dimension.
 	GroupBy *DimensionGroup
+
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:  <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of
 	// the number of active sessions for the database engine.</p> </li> <li> <p>
 	// <code>db.sampledload.avg</code> - the raw number of active sessions for the
 	// database engine.</p> </li> </ul>
+	//
+	// This member is required.
 	Metric *string
+
 	// One or more filters to apply in the request. Restrictions:
 	//
 	//     * Any number of
@@ -118,19 +139,26 @@ type MetricQuery struct {
 // If PartitionBy was specified in a DescribeDimensionKeys request, the dimensions
 // are returned in an array. Each element in the array specifies one dimension.
 type ResponsePartitionKey struct {
+
 	// A dimension map that contains the dimension(s) for this partition.
+	//
+	// This member is required.
 	Dimensions map[string]*string
 }
 
 // An object describing a Performance Insights metric and one or more dimensions
 // for that metric.
 type ResponseResourceMetricKey struct {
+
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:  <ul> <li> <p> <code>db.load.avg</code> - a scaled representation of
 	// the number of active sessions for the database engine.</p> </li> <li> <p>
 	// <code>db.sampledload.avg</code> - the raw number of active sessions for the
 	// database engine.</p> </li> </ul>
+	//
+	// This member is required.
 	Metric *string
+
 	// The valid dimensions for the metric.
 	Dimensions map[string]*string
 }

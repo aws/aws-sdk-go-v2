@@ -71,16 +71,25 @@ func (c *Client) UpdateAssetModel(ctx context.Context, params *UpdateAssetModelI
 }
 
 type UpdateAssetModelInput struct {
+
 	// The ID of the asset model to update.
+	//
+	// This member is required.
 	AssetModelId *string
+
 	// A unique, friendly name for the asset model.
+	//
+	// This member is required.
 	AssetModelName *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
 	// A description for the asset model.
 	AssetModelDescription *string
+
 	// The updated property definitions of the asset model. For more information, see
 	// Asset Properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
@@ -89,6 +98,7 @@ type UpdateAssetModelInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
 	AssetModelProperties []*types.AssetModelProperty
+
 	// The updated hierarchy definitions of the asset model. Each hierarchy specifies
 	// an asset model whose assets can be children of any other assets created from
 	// this asset model. For more information, see Asset Hierarchies
@@ -101,8 +111,11 @@ type UpdateAssetModelInput struct {
 }
 
 type UpdateAssetModelOutput struct {
+
 	// The status of the asset model, which contains a state (UPDATING after
 	// successfully calling this operation) and any error message.
+	//
+	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
 
 	// Metadata pertaining to the operation's result.

@@ -9,6 +9,7 @@ package types
 // Merge Policy to "Prepend", "Append", or "Fallback", and use an empty Artwork
 // array.
 type Artwork struct {
+
 	// The name of the file to be used as album art. To determine which Amazon S3
 	// bucket contains the specified file, Elastic Transcoder checks the pipeline
 	// specified by PipelineId; the InputBucket object in that pipeline identifies the
@@ -16,11 +17,13 @@ type Artwork struct {
 	// include the prefix in the key. If the file isn't in the specified bucket,
 	// Elastic Transcoder returns an error.
 	InputKey *string
+
 	// When you set PaddingPolicy to Pad, Elastic Transcoder may add white bars to the
 	// top and bottom and/or left and right sides of the output album art to make the
 	// total size of the output art match the values that you specified for MaxWidth
 	// and MaxHeight.
 	PaddingPolicy *string
+
 	// Specify one of the following values to control scaling of the output album art:
 	// <ul> <li> <p> <code>Fit:</code> Elastic Transcoder scales the output art so it
 	// matches the value that you specified in either <code>MaxWidth</code> or
@@ -47,15 +50,19 @@ type Artwork struct {
 	// either value. If you specify this option, Elastic Transcoder does not scale the
 	// art up.</p> </li> </ul>
 	SizingPolicy *string
+
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your artwork.
 	Encryption *Encryption
+
 	// The format of album art, if any. Valid formats are .jpg and .png.
 	AlbumArtFormat *string
+
 	// The maximum height of the output album art in pixels. If you specify auto,
 	// Elastic Transcoder uses 600 as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 3072, inclusive.
 	MaxHeight *string
+
 	// The maximum width of the output album art in pixels. If you specify auto,
 	// Elastic Transcoder uses 600 as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 4096, inclusive.
@@ -64,6 +71,7 @@ type Artwork struct {
 
 // Options associated with your audio codec.
 type AudioCodecOptions struct {
+
 	// You can only choose an audio profile when you specify AAC for the value of
 	// Audio:Codec. Specify the AAC profile for the output file. Elastic Transcoder
 	// supports the following profiles:
@@ -86,15 +94,18 @@ type AudioCodecOptions struct {
 	// AAC profiles were added, Elastic Transcoder automatically updated your presets
 	// to use AAC-LC. You can change the value as required.
 	Profile *string
+
 	// You can only choose whether an audio sample is signed when you specify pcm for
 	// the value of Audio:Codec. Whether audio samples are represented with negative
 	// and positive numbers (signed) or only positive numbers (unsigned). The supported
 	// value is Signed.
 	Signed *string
+
 	// You can only choose an audio bit order when you specify pcm for the value of
 	// Audio:Codec. The order the bits of a PCM sample are stored in. The supported
 	// value is LittleEndian.
 	BitOrder *string
+
 	// You can only choose an audio bit depth when you specify flac or pcm for the
 	// value of Audio:Codec. The bit depth of a sample is how many bits of information
 	// are included in the audio samples. The higher the bit depth, the better the
@@ -105,6 +116,7 @@ type AudioCodecOptions struct {
 
 // Parameters required for transcoding audio.
 type AudioParameters struct {
+
 	// The number of audio channels in the output file. The following values are valid:
 	// auto, 0, 1, 2 One channel carries the information played by a single speaker.
 	// For example, a stereo track with two channels sends one channel to the left
@@ -122,10 +134,12 @@ type AudioParameters struct {
 	// </li> </ul> <p> For more information about how Elastic Transcoder organizes
 	// channels and tracks, see <code>Audio:AudioPackingMode</code>.</p>
 	Channels *string
+
 	// The sample rate of the audio stream in the output file, in Hertz. Valid values
 	// include: auto, 22050, 32000, 44100, 48000, 96000 If you specify auto, Elastic
 	// Transcoder automatically detects the sample rate.
 	SampleRate *string
+
 	// The method of organizing audio channels and tracks. Use Audio:Channels to
 	// specify the number of channels in your output, and Audio:AudioPackingMode to
 	// specify the number of tracks and their relation to the channels. If you do not
@@ -193,13 +207,16 @@ type AudioParameters struct {
 	// one channel each, plus MOS tracks until there are eight tracks in all</p> </li>
 	// </ul>
 	AudioPackingMode *string
+
 	// If you specified AAC for Audio:Codec, this is the AAC compression profile to
 	// use. Valid values include: auto, AAC-LC, HE-AAC, HE-AACv2 If you specify auto,
 	// Elastic Transcoder chooses a profile based on the bit rate of the output file.
 	CodecOptions *AudioCodecOptions
+
 	// The bit rate of the audio stream in the output file, in kilobits/second. Enter
 	// an integer between 64 and 320, inclusive.
 	BitRate *string
+
 	// The audio codec for the output file. Valid values include aac, flac, mp2, mp3,
 	// pcm, and vorbis.
 	Codec *string
@@ -208,6 +225,7 @@ type AudioParameters struct {
 // The file format of the output captions. If you leave this value blank, Elastic
 // Transcoder returns an error.
 type CaptionFormat struct {
+
 	// The format you specify determines whether Elastic Transcoder generates an
 	// embedded or sidecar caption for this output.
 	//
@@ -240,6 +258,7 @@ type CaptionFormat struct {
 	//     fmp4 captions
 	// have an extension of .ismt
 	Format *string
+
 	// The prefix for caption filenames, in the form description-{language}, where:
 	//
 	//
@@ -257,6 +276,7 @@ type CaptionFormat struct {
 	// "Sydney-{language}-sunrise", and the language of the captions is English (en),
 	// the name of the first caption file is be Sydney-en-sunrise00000.srt.
 	Pattern *string
+
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your caption formats.
 	Encryption *Encryption
@@ -264,6 +284,7 @@ type CaptionFormat struct {
 
 // The captions to be created, if any.
 type Captions struct {
+
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple captions.
 	//
@@ -285,9 +306,11 @@ type Captions struct {
 	//
 	// MergePolicy cannot be null.
 	MergePolicy *string
+
 	// The array of file formats for the output captions. If you leave this value
 	// blank, Elastic Transcoder returns an error.
 	CaptionFormats []*CaptionFormat
+
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
 	CaptionSources []*CaptionSource
@@ -296,22 +319,27 @@ type Captions struct {
 // A source file for the input sidecar captions used during the transcoding
 // process.
 type CaptionSource struct {
+
 	// The label of the caption shown in the player when choosing a language. We
 	// recommend that you put the caption language name here, in the language of the
 	// captions.
 	Label *string
+
 	// For clip generation or captions that do not start at the same time as the
 	// associated video file, the TimeOffset tells Elastic Transcoder how much of the
 	// video to encode before including captions. Specify the TimeOffset in the form
 	// [+-]SS.sss or [+-]HH:mm:SS.ss.
 	TimeOffset *string
+
 	// The encryption settings, if any, that Elastic Transcoder needs to decyrpt your
 	// caption sources, or that you want Elastic Transcoder to apply to your caption
 	// sources.
 	Encryption *Encryption
+
 	// The name of the sidecar caption file that you want Elastic Transcoder to include
 	// in the output file.
 	Key *string
+
 	// A string that specifies the language of the caption. If you specified multiple
 	// inputs with captions, the caption language must match in order to be included in
 	// the output. Specify this as one of:
@@ -329,12 +357,14 @@ type CaptionSource struct {
 // Settings for one clip in a composition. All jobs in a playlist must have the
 // same clip settings.
 type Clip struct {
+
 	// Settings that determine when a clip begins and how long it lasts.
 	TimeSpan *TimeSpan
 }
 
 // The CreateJobOutput structure.
 type CreateJobOutput struct {
+
 	// Whether you want Elastic Transcoder to create thumbnails for your videos and, if
 	// so, how you want Elastic Transcoder to name the files. If you don't want Elastic
 	// Transcoder to create thumbnails, specify "". If you do want Elastic Transcoder
@@ -364,25 +394,30 @@ type CreateJobOutput struct {
 	// preset that you specified in the PresetID value of CreateJobOutput. Elastic
 	// Transcoder also appends the applicable file name extension.
 	ThumbnailPattern *string
+
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your thumbnail.
 	ThumbnailEncryption *Encryption
+
 	// You can create an output file that contains an excerpt from the input file. This
 	// excerpt, called a clip, can come from the beginning, middle, or end of the file.
 	// The Composition object contains settings for the clips that make up an output
 	// file. For the current release, you can only specify settings for a single clip
 	// per output file. The Composition object cannot be null.
 	Composition []*Clip
+
 	// Information about the album art that you want Elastic Transcoder to add to the
 	// file during transcoding. You can specify up to twenty album artworks for each
 	// output. Settings for each artwork must be defined in the job for the current
 	// output.
 	AlbumArt *JobAlbumArt
+
 	// The name to assign to the transcoded file. Elastic Transcoder saves the file in
 	// the Amazon S3 bucket specified by the OutputBucket object in the pipeline that
 	// is specified by the pipeline ID. If a file with the specified name already
 	// exists in the output bucket, the job fails.
 	Key *string
+
 	// (Outputs in Fragmented MP4 or MPEG-TS format only. If you specify a preset in
 	// PresetId for which the value of Container is fmp4 (Fragmented MP4) or ts
 	// (MPEG-TS), SegmentDuration is the target maximum duration of each segment in
@@ -398,19 +433,23 @@ type CreateJobOutput struct {
 	// for this job, include it in the <code>OutputKeys</code> of the associated
 	// playlist.</p>
 	SegmentDuration *string
+
 	// The number of degrees clockwise by which you want Elastic Transcoder to rotate
 	// the output relative to the input. Enter one of the following values: auto, 0,
 	// 90, 180, 270. The value auto generally works only if the file that you're
 	// transcoding contains rotation metadata.
 	Rotate *string
+
 	// You can specify encryption settings for any output files that you want to use
 	// for a transcoding job. This includes the output file and any watermarks,
 	// thumbnails, album art, or captions that you want to use. You must specify
 	// encryption settings for each file individually.
 	Encryption *Encryption
+
 	// The Id of the preset to use for this job. The preset determines the audio,
 	// video, and thumbnail settings that Elastic Transcoder uses for transcoding.
 	PresetId *string
+
 	// You can configure Elastic Transcoder to transcode captions, or subtitles, from
 	// one format to another. All captions must be in UTF-8. Elastic Transcoder
 	// supports two types of captions:
@@ -443,6 +482,7 @@ type CreateJobOutput struct {
 	// Subtitles Wikipedia page. For more information on sidecar files, see the
 	// Extensible Metadata Platform and Sidecar file Wikipedia pages.
 	Captions *Captions
+
 	// Information about the watermarks that you want Elastic Transcoder to add to the
 	// video during transcoding. You can specify up to four watermarks for each output.
 	// Settings for each watermark must be defined in the preset for the current
@@ -452,12 +492,15 @@ type CreateJobOutput struct {
 
 // Information about the master playlist.
 type CreateJobPlaylist struct {
+
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
 	PlayReadyDrm *PlayReadyDrm
+
 	// The format of the output playlist. Valid formats include HLSv3, HLSv4, and
 	// Smooth.
 	Format *string
+
 	// The name that you want Elastic Transcoder to assign to the master playlist, for
 	// example, nyc-vacation.m3u8. If the name includes a / character, the section of
 	// the name before the last / must be identical for all Name objects. If you create
@@ -467,6 +510,7 @@ type CreateJobPlaylist struct {
 	// playlists). If you include a file extension in Name, the file name will have two
 	// extensions.
 	Name *string
+
 	// For each output in this job that you want to include in a master playlist, the
 	// value of the Outputs:Key object.
 	//
@@ -498,6 +542,7 @@ type CreateJobPlaylist struct {
 	// <code>Video:FrameRate</code> to <code>Video:KeyframesMaxDist</code> ratio must
 	// be the same for all outputs.</p>
 	OutputKeys []*string
+
 	// The HLS content protection settings, if any, that you want Elastic Transcoder to
 	// apply to the output files associated with this playlist.
 	HlsContentProtection *HlsContentProtection
@@ -506,14 +551,19 @@ type CreateJobPlaylist struct {
 // The detected properties of the input file. Elastic Transcoder identifies these
 // values from the input file.
 type DetectedProperties struct {
+
 	// The detected width of the input file, in pixels.
 	Width *int32
+
 	// The detected file size of the input file, in bytes.
 	FileSize *int64
+
 	// The detected height of the input file, in pixels.
 	Height *int32
+
 	// The detected duration of the input file, in milliseconds.
 	DurationMillis *int64
+
 	// The detected frame rate of the input file, in frames per second.
 	FrameRate *string
 }
@@ -524,6 +574,7 @@ type DetectedProperties struct {
 // you must specify the mode you want Elastic Transcoder to use to encrypt your
 // output files.
 type Encryption struct {
+
 	// The specific server-side encryption mode that you want Elastic Transcoder to use
 	// when decrypting your input files or encrypting your output files. Elastic
 	// Transcoder supports the following options:
@@ -562,18 +613,21 @@ type Encryption struct {
 	// important that you safely manage your encryption keys. If you lose them, you
 	// won't be able to unencrypt your data.
 	Mode *string
+
 	// The data encryption key that you want Elastic Transcoder to use to encrypt your
 	// output file, or that was used to encrypt your input file. The key must be
 	// base64-encoded and it must be one of the following bit lengths before being
 	// base64-encoded: 128, 192, or 256. The key must also be encrypted by using the
 	// Amazon Key Management Service.
 	Key *string
+
 	// The MD5 digest of the key that you used to encrypt your input file, or that you
 	// want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder
 	// uses the key digest as a checksum to make sure your key was not corrupted in
 	// transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
 	// long before being base64-encoded.
 	KeyMd5 *string
+
 	// The series of random bits created by a random bit generator, unique for every
 	// encryption operation, that you used to encrypt your input files or that you want
 	// Elastic Transcoder to use to encrypt your output files. The initialization
@@ -585,30 +639,36 @@ type Encryption struct {
 // The HLS content protection settings, if any, that you want Elastic Transcoder to
 // apply to your output files.
 type HlsContentProtection struct {
+
 	// If Elastic Transcoder is generating your key for you, you must leave this field
 	// blank. The MD5 digest of the key that you want Elastic Transcoder to use to
 	// encrypt your output file, and that you want Elastic Transcoder to use as a
 	// checksum to make sure your key was not corrupted in transit. The key MD5 must be
 	// base64-encoded, and it must be exactly 16 bytes before being base64- encoded.
 	KeyMd5 *string
+
 	// The location of the license key required to decrypt your HLS playlist. The URL
 	// must be an absolute path, and is referenced in the URI attribute of the
 	// EXT-X-KEY metadata tag in the playlist file.
 	LicenseAcquisitionUrl *string
+
 	// If you want Elastic Transcoder to generate a key for you, leave this field
 	// blank. If you choose to supply your own key, you must encrypt the key by using
 	// AWS KMS. The key must be base64-encoded, and it must be one of the following bit
 	// lengths before being base64-encoded: 128, 192, or 256.
 	Key *string
+
 	// Specify whether you want Elastic Transcoder to write your HLS license key to an
 	// Amazon S3 bucket. If you choose WithVariantPlaylists, LicenseAcquisitionUrl must
 	// be left blank and Elastic Transcoder writes your data key into the same bucket
 	// as the associated playlist.
 	KeyStoragePolicy *string
+
 	// The content protection method for your output. The only valid value is: aes-128.
 	// This value is written into the method attribute of the EXT-X-KEY metadata tag in
 	// the output playlist.
 	Method *string
+
 	// If Elastic Transcoder is generating your key for you, you must leave this field
 	// blank. The series of random bits created by a random bit generator, unique for
 	// every encryption operation, that you want Elastic Transcoder to use to encrypt
@@ -619,9 +679,11 @@ type HlsContentProtection struct {
 
 // The captions to be created, if any.
 type InputCaptions struct {
+
 	// Source files for the input sidecar captions used during the transcoding process.
 	// To omit all sidecar captions, leave CaptionSources blank.
 	CaptionSources []*CaptionSource
+
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple captions.
 	//
@@ -648,18 +710,23 @@ type InputCaptions struct {
 // A section of the response body that provides information about the job that is
 // created.
 type Job struct {
+
 	// A section of the request or response body that provides information about the
 	// file that is being transcoded.
 	Input *JobInput
+
 	// Information about the files that you're transcoding. If you specified multiple
 	// files for this job, Elastic Transcoder stitches the files together to make one
 	// output.
 	Inputs []*JobInput
+
 	// The Amazon Resource Name (ARN) for the job.
 	Arn *string
+
 	// The identifier that Elastic Transcoder assigned to the job. You use this value
 	// to get settings for the job or to delete the job.
 	Id *string
+
 	// Information about the output files. We recommend that you use the Outputs syntax
 	// for all jobs, even when you want Elastic Transcoder to transcode a file into
 	// only one format. Do not use both the Outputs and Output syntaxes in the same
@@ -667,6 +734,7 @@ type Job struct {
 	// than one output for a job, Elastic Transcoder creates the files for each output
 	// in the order in which you specify them in the job.
 	Outputs []*JobOutput
+
 	// User-defined metadata that you want to associate with an Elastic Transcoder job.
 	// You specify metadata in key/value pairs, and you can add up to 10 key/value
 	// pairs per job. Elastic Transcoder does not guarantee that key/value pairs are
@@ -682,19 +750,23 @@ type Job struct {
 	//
 	//     * The following symbols: _.:/=+-%@
 	UserMetadata map[string]*string
+
 	// Outputs in Fragmented MP4 or MPEG-TS format only. If you specify a preset in
 	// PresetId for which the value of Container is fmp4 (Fragmented MP4) or ts
 	// (MPEG-TS), Playlists contains information about the master playlists that you
 	// want Elastic Transcoder to create. The maximum number of master playlists in a
 	// job is 30.
 	Playlists []*Playlist
+
 	// Details about the timing of a job.
 	Timing *Timing
+
 	// The Id of the pipeline that you want Elastic Transcoder to use for transcoding.
 	// The pipeline determines several settings, including the Amazon S3 bucket from
 	// which Elastic Transcoder gets the files to transcode and the bucket into which
 	// Elastic Transcoder puts the transcoded files.
 	PipelineId *string
+
 	// If you specified one output for a job, information about that output. If you
 	// specified multiple outputs for a job, the Output object lists information about
 	// the first output. This duplicates the information that is listed for the first
@@ -702,20 +774,24 @@ type Job struct {
 	// request or response body that provides information about the transcoded (target)
 	// file.
 	Output *JobOutput
+
 	// The value, if any, that you want Elastic Transcoder to prepend to the names of
 	// all files that this job creates, including output files, thumbnails, and
 	// playlists. We recommend that you add a / or some other delimiter to the end of
 	// the OutputKeyPrefix.
 	OutputKeyPrefix *string
+
 	// The status of the job: Submitted, Progressing, Complete, Canceled, or Error.
 	Status *string
 }
 
 // The .jpg or .png file associated with an audio file.
 type JobAlbumArt struct {
+
 	// The file to be used as album art. There can be multiple artworks associated with
 	// an audio file, to a maximum of 20. Valid formats are .jpg and .png
 	Artwork []*Artwork
+
 	// A policy that determines how Elastic Transcoder handles the existence of
 	// multiple album artwork files.  <ul> <li> <p> <code>Replace:</code> The specified
 	// album art replaces any existing album art.</p> </li> <li> <p>
@@ -730,21 +806,26 @@ type JobAlbumArt struct {
 
 // Information about the file that you're transcoding.
 type JobInput struct {
+
 	// The encryption settings, if any, that are used for decrypting your input files.
 	// If your input file is encrypted, you must specify the mode that Elastic
 	// Transcoder uses to decrypt your file.
 	Encryption *Encryption
+
 	// This value must be auto, which causes Elastic Transcoder to automatically detect
 	// the resolution of the input file.
 	Resolution *string
+
 	// Settings for clipping an input. Each input can have different clip settings.
 	TimeSpan *TimeSpan
+
 	// The container type for the input file. If you want Elastic Transcoder to
 	// automatically detect the container type of the input file, specify auto. If you
 	// want to specify the container type for the input file, enter one of the
 	// following values: 3gp, aac, asf, avi, divx, flv, m4a, mkv, mov, mp3, mp4, mpeg,
 	// mpeg-ps, mpeg-ts, mxf, ogg, vob, wav, webm
 	Container *string
+
 	// The name of the file to transcode. Elsewhere in the body of the JSON block is
 	// the the ID of the pipeline to use for processing the job. The InputBucket object
 	// in that pipeline tells Elastic Transcoder which Amazon S3 bucket to get the file
@@ -752,26 +833,31 @@ type JobInput struct {
 	// the prefix in the key. If the file isn't in the specified bucket, Elastic
 	// Transcoder returns an error.
 	Key *string
+
 	// The detected properties of the input file.
 	DetectedProperties *DetectedProperties
+
 	// Whether the input file is interlaced. If you want Elastic Transcoder to
 	// automatically detect whether the input file is interlaced, specify auto. If you
 	// want to specify whether the input file is interlaced, enter one of the following
 	// values: true, false If you specify a value other than auto, Elastic Transcoder
 	// disables automatic detection of interlacing.
 	Interlaced *string
+
 	// The aspect ratio of the input file. If you want Elastic Transcoder to
 	// automatically detect the aspect ratio of the input file, specify auto. If you
 	// want to specify the aspect ratio for the output file, enter one of the following
 	// values: 1:1, 4:3, 3:2, 16:9 If you specify a value other than auto, Elastic
 	// Transcoder disables automatic detection of the aspect ratio.
 	AspectRatio *string
+
 	// The frame rate of the input file. If you want Elastic Transcoder to
 	// automatically detect the frame rate of the input file, specify auto. If you want
 	// to specify the frame rate for the input file, enter one of the following values:
 	// 10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify a value other than auto,
 	// Elastic Transcoder disables automatic detection of the frame rate.
 	FrameRate *string
+
 	// You can configure Elastic Transcoder to transcode captions, or subtitles, from
 	// one format to another. All captions must be in UTF-8. Elastic Transcoder
 	// supports two types of captions:
@@ -811,11 +897,14 @@ type JobInput struct {
 // object lists information about the first output. This duplicates the information
 // that is listed for the first output in the Outputs object.
 type JobOutput struct {
+
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your thumbnail.
 	ThumbnailEncryption *Encryption
+
 	// Duration of the output file, in seconds.
 	Duration *int64
+
 	// You can configure Elastic Transcoder to transcode captions, or subtitles, from
 	// one format to another. All captions must be in UTF-8. Elastic Transcoder
 	// supports two types of captions:
@@ -848,6 +937,7 @@ type JobOutput struct {
 	// Subtitles Wikipedia page. For more information on sidecar files, see the
 	// Extensible Metadata Platform and Sidecar file Wikipedia pages.
 	Captions *Captions
+
 	// Information about the watermarks that you want Elastic Transcoder to add to the
 	// video during transcoding. You can specify up to four watermarks for each output.
 	// Settings for each watermark must be defined in the preset that you specify in
@@ -859,13 +949,16 @@ type JobOutput struct {
 	// that you add covers the first one, the third one covers the second, and the
 	// fourth one covers the third.
 	Watermarks []*JobWatermark
+
 	// Information that further explains Status.
 	StatusDetail *string
+
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your output files. If you choose to use encryption, you must specify a mode to
 	// use. If you choose not to use encryption, Elastic Transcoder writes an
 	// unencrypted file to your Amazon S3 bucket.
 	Encryption *Encryption
+
 	// (Outputs in Fragmented MP4 or MPEG-TS format only. If you specify a preset in
 	// PresetId for which the value of Container is fmp4 (Fragmented MP4) or ts
 	// (MPEG-TS), SegmentDuration is the target maximum duration of each segment in
@@ -881,14 +974,17 @@ type JobOutput struct {
 	// for this job, include it in the <code>OutputKeys</code> of the associated
 	// playlist.</p>
 	SegmentDuration *string
+
 	// Duration of the output file, in milliseconds.
 	DurationMillis *int64
+
 	// You can create an output file that contains an excerpt from the input file. This
 	// excerpt, called a clip, can come from the beginning, middle, or end of the file.
 	// The Composition object contains settings for the clips that make up an output
 	// file. For the current release, you can only specify settings for a single clip
 	// per output file. The Composition object cannot be null.
 	Composition []*Clip
+
 	// The status of one output in a job. If you specified only one output for the job,
 	// Outputs:Status is always the same as Job:Status. If you specified more than one
 	// output:
@@ -913,6 +1009,7 @@ type JobOutput struct {
 	// The value of Status is one of
 	// the following: Submitted, Progressing, Complete, Canceled, or Error.
 	Status *string
+
 	// Whether you want Elastic Transcoder to create thumbnails for your videos and, if
 	// so, how you want Elastic Transcoder to name the files. If you don't want Elastic
 	// Transcoder to create thumbnails, specify "". If you do want Elastic Transcoder
@@ -942,23 +1039,29 @@ type JobOutput struct {
 	// preset that you specified in the PresetID value of CreateJobOutput. Elastic
 	// Transcoder also appends the applicable file name extension.
 	ThumbnailPattern *string
+
 	// Specifies the width of the output file in pixels.
 	Width *int32
+
 	// If Elastic Transcoder used a preset with a ColorSpaceConversionMode to transcode
 	// the output file, the AppliedColorSpaceConversion parameter shows the conversion
 	// used. If no ColorSpaceConversionMode was defined in the preset, this parameter
 	// is not be included in the job response.
 	AppliedColorSpaceConversion *string
+
 	// A sequential counter, starting with 1, that identifies an output among the
 	// outputs from the current job. In the Output syntax, this value is always 1.
 	Id *string
+
 	// The number of degrees clockwise by which you want Elastic Transcoder to rotate
 	// the output relative to the input. Enter one of the following values: auto, 0,
 	// 90, 180, 270 The value auto generally works only if the file that you're
 	// transcoding contains rotation metadata.
 	Rotate *string
+
 	// Frame rate of the output file, in frames per second.
 	FrameRate *string
+
 	// The value of the Id object for the preset that you want to use for this job. The
 	// preset determines the audio, video, and thumbnail settings that Elastic
 	// Transcoder uses for transcoding. To use a preset that you created, specify the
@@ -966,12 +1069,16 @@ type JobOutput struct {
 	// preset. You can also use the Elastic Transcoder system presets, which you can
 	// get with ListPresets.
 	PresetId *string
+
 	// Height of the output file, in pixels.
 	Height *int32
+
 	// File size of the output file, in bytes.
 	FileSize *int64
+
 	// The album art to be associated with the output file, if any.
 	AlbumArt *JobAlbumArt
+
 	// The name to assign to the transcoded file. Elastic Transcoder saves the file in
 	// the Amazon S3 bucket specified by the OutputBucket object in the pipeline that
 	// is specified by the pipeline ID.
@@ -981,6 +1088,7 @@ type JobOutput struct {
 // Watermarks can be in .png or .jpg format. If you want to display a watermark
 // that is not rectangular, use the .png format, which supports transparency.
 type JobWatermark struct {
+
 	// The name of the .png or .jpg file that you want to use for the watermark. To
 	// determine which Amazon S3 bucket contains the specified file, Elastic Transcoder
 	// checks the pipeline specified by Pipeline; the Input Bucket object in that
@@ -988,9 +1096,11 @@ type JobWatermark struct {
 	// logos/128x64.png, include the prefix in the key. If the file isn't in the
 	// specified bucket, Elastic Transcoder returns an error.
 	InputKey *string
+
 	// The encryption settings, if any, that you want Elastic Transcoder to apply to
 	// your watermarks.
 	Encryption *Encryption
+
 	// The ID of the watermark settings that Elastic Transcoder uses to add watermarks
 	// to the video during transcoding. The settings are in the preset specified by
 	// Preset for the current output. In that preset, the value of Watermarks Id tells
@@ -1002,15 +1112,19 @@ type JobWatermark struct {
 // order to report job status. To receive notifications, you must also subscribe to
 // the new topic in the Amazon SNS console.
 type Notifications struct {
+
 	// The Amazon Simple Notification Service (Amazon SNS) topic that you want to
 	// notify when Elastic Transcoder has started to process the job.
 	Progressing *string
+
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder has
 	// finished processing the job.
 	Completed *string
+
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder encounters
 	// an error condition.
 	Error *string
+
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder encounters
 	// a warning condition.
 	Warning *string
@@ -1018,11 +1132,13 @@ type Notifications struct {
 
 // The Permission structure.
 type Permission struct {
+
 	// The AWS user or group that you want to have access to transcoded files and
 	// playlists. To identify the user or group, you can specify the canonical user ID
 	// for an AWS account, an origin access identity for a CloudFront distribution, the
 	// registered email address of an AWS account, or a predefined Amazon S3 group.
 	Grantee *string
+
 	// The type of value that appears in the Grantee object:
 	//
 	//     * Canonical: Either
@@ -1036,6 +1152,7 @@ type Permission struct {
 	// * Group: One of the following predefined Amazon S3 groups: AllUsers,
 	// AuthenticatedUsers, or LogDelivery.
 	GranteeType *string
+
 	// The permission that you want to give to the AWS user that is listed in Grantee.
 	// Valid values include:
 	//
@@ -1058,6 +1175,7 @@ type Permission struct {
 
 // The pipeline (queue) that is used to manage jobs.
 type Pipeline struct {
+
 	// Information about the Amazon S3 bucket in which you want Elastic Transcoder to
 	// save thumbnail files. Either you specify both ContentConfig and ThumbnailConfig,
 	// or you specify OutputBucket.
@@ -1110,9 +1228,11 @@ type Pipeline struct {
 	// you want Elastic Transcoder to assign to the thumbnails that it stores in your
 	// Amazon S3 bucket.
 	ThumbnailConfig *PipelineOutputConfig
+
 	// The name of the pipeline. We recommend that the name be unique within the AWS
 	// account, but uniqueness is not enforced. Constraints: Maximum 40 characters
 	Name *string
+
 	// Information about the Amazon S3 bucket in which you want Elastic Transcoder to
 	// save transcoded files and playlists. Either you specify both ContentConfig and
 	// ThumbnailConfig, or you specify OutputBucket.
@@ -1165,6 +1285,7 @@ type Pipeline struct {
 	// Transcoder to assign to the video files and playlists that it stores in your
 	// Amazon S3 bucket.
 	ContentConfig *PipelineOutputConfig
+
 	// The Amazon Simple Notification Service (Amazon SNS) topic that you want to
 	// notify to report job status. To receive notifications, you must also subscribe
 	// to the new topic in the Amazon SNS console.
@@ -1184,15 +1305,19 @@ type Pipeline struct {
 	//     * Error (optional): The Amazon SNS topic that you want to notify
 	// when Elastic Transcoder encounters an error condition.
 	Notifications *Notifications
+
 	// The identifier for the pipeline. You use this value to identify the pipeline in
 	// which you want to perform a variety of operations, such as creating a job or a
 	// preset.
 	Id *string
+
 	// The Amazon Resource Name (ARN) for the pipeline.
 	Arn *string
+
 	// The IAM Amazon Resource Name (ARN) for the role that Elastic Transcoder uses to
 	// transcode jobs for this pipeline.
 	Role *string
+
 	// The AWS Key Management Service (AWS KMS) key that you want to use with this
 	// pipeline. If you use either s3 or s3-aws-kms as your Encryption:Mode, you don't
 	// need to provide a key with your job because a default key, known as an AWS-KMS
@@ -1200,13 +1325,16 @@ type Pipeline struct {
 	// if you want to use a non-default AWS-KMS key, or if you are using an
 	// Encryption:Mode of aes-cbc-pkcs7, aes-ctr, or aes-gcm.
 	AwsKmsKeyArn *string
+
 	// The Amazon S3 bucket from which Elastic Transcoder gets media files for
 	// transcoding and the graphics files, if any, that you want to use for watermarks.
 	InputBucket *string
+
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded
 	// files, thumbnails, and playlists. Either you specify this value, or you specify
 	// both ContentConfig and ThumbnailConfig.
 	OutputBucket *string
+
 	// The current status of the pipeline:
 	//
 	//     * Active: The pipeline is processing
@@ -1218,6 +1346,7 @@ type Pipeline struct {
 
 // The PipelineOutputConfig structure.
 type PipelineOutputConfig struct {
+
 	// Optional. The Permissions object specifies which users and/or predefined Amazon
 	// S3 groups you want to have access to transcoded files and playlists, and the
 	// type of access you want them to have. You can grant permissions to a maximum of
@@ -1229,6 +1358,7 @@ type PipelineOutputConfig struct {
 	// files and playlists to the owner of the role specified by Role, and grants no
 	// other permissions to any other user or group.
 	Permissions []*Permission
+
 	// The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded
 	// files. Specify this value when all of the following are true:
 	//
@@ -1252,6 +1382,7 @@ type PipelineOutputConfig struct {
 	// storage class, omit OutputBucket and specify values for ContentConfig and
 	// ThumbnailConfig instead.
 	Bucket *string
+
 	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want
 	// Elastic Transcoder to assign to the video files and playlists that it stores in
 	// your Amazon S3 bucket.
@@ -1264,6 +1395,7 @@ type PipelineOutputConfig struct {
 // to create. We recommend that you create only one master playlist per output
 // format. The maximum number of master playlists in a job is 30.
 type Playlist struct {
+
 	// The name that you want Elastic Transcoder to assign to the master playlist, for
 	// example, nyc-vacation.m3u8. If the name includes a / character, the section of
 	// the name before the last / must be identical for all Name objects. If you create
@@ -1273,19 +1405,25 @@ type Playlist struct {
 	// playlists). If you include a file extension in Name, the file name will have two
 	// extensions.
 	Name *string
+
 	// The format of the output playlist. Valid formats include HLSv3, HLSv4, and
 	// Smooth.
 	Format *string
+
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
 	PlayReadyDrm *PlayReadyDrm
+
 	// The status of the job with which the playlist is associated.
 	Status *string
+
 	// The HLS content protection settings, if any, that you want Elastic Transcoder to
 	// apply to the output files associated with this playlist.
 	HlsContentProtection *HlsContentProtection
+
 	// Information that further explains the status.
 	StatusDetail *string
+
 	// For each output in this job that you want to include in a master playlist, the
 	// value of the Outputs:Key object.
 	//
@@ -1324,9 +1462,11 @@ type Playlist struct {
 // media files using aes-ctr encryption. If you use DRM for an HLSv3 playlist, your
 // outputs must have a master playlist.
 type PlayReadyDrm struct {
+
 	// The type of DRM, if any, that you want Elastic Transcoder to apply to the output
 	// files associated with this playlist.
 	Format *string
+
 	// The location of the license key required to play DRM content. The URL must be an
 	// absolute path, and is referenced by the PlayReady header. The PlayReady header
 	// is referenced in the protection header of the client manifest for Smooth
@@ -1334,23 +1474,27 @@ type PlayReadyDrm struct {
 	// HLS playlist outputs. An example URL looks like this:
 	// https://www.example.com/exampleKey/
 	LicenseAcquisitionUrl *string
+
 	// The series of random bits created by a random bit generator, unique for every
 	// encryption operation, that you want Elastic Transcoder to use to encrypt your
 	// files. The initialization vector must be base64-encoded, and it must be exactly
 	// 8 bytes long before being base64-encoded. If no initialization vector is
 	// provided, Elastic Transcoder generates one for you.
 	InitializationVector *string
+
 	// The ID for your DRM key, so that your DRM license provider knows which key to
 	// provide. The key ID must be provided in big endian, and Elastic Transcoder
 	// converts it to little endian before inserting it into the PlayReady DRM headers.
 	// If you are unsure whether your license server provides your key ID in big or
 	// little endian, check with your DRM provider.
 	KeyId *string
+
 	// The MD5 digest of the key used for DRM on your file, and that you want Elastic
 	// Transcoder to use as a checksum to make sure your key was not corrupted in
 	// transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
 	// before being base64-encoded.
 	KeyMd5 *string
+
 	// The DRM key for your file, provided by your DRM license provider. The key must
 	// be base64-encoded, and it must be one of the following bit lengths before being
 	// base64-encoded: 128, 192, or 256. The key must also be encrypted by using AWS
@@ -1364,28 +1508,37 @@ type PlayReadyDrm struct {
 // can also create your own presets for formats that aren't included among the
 // default presets. You specify which preset you want to use when you create a job.
 type Preset struct {
+
 	// Whether the preset is a default preset provided by Elastic Transcoder (System)
 	// or a preset that you have defined (Custom).
 	Type *string
+
 	// A section of the response body that provides information about the video preset
 	// values.
 	Video *VideoParameters
+
 	// The container type for the output file. Valid values include flac, flv, fmp4,
 	// gif, mp3, mp4, mpg, mxf, oga, ogg, ts, and webm.
 	Container *string
+
 	// A section of the response body that provides information about the thumbnail
 	// preset values, if any.
 	Thumbnails *Thumbnails
+
 	// A description of the preset.
 	Description *string
+
 	// Identifier for the new preset. You use this value to get settings for the preset
 	// or to delete it.
 	Id *string
+
 	// The Amazon Resource Name (ARN) for the preset.
 	Arn *string
+
 	// A section of the response body that provides information about the audio preset
 	// values.
 	Audio *AudioParameters
+
 	// The name of the preset.
 	Name *string
 }
@@ -1402,6 +1555,7 @@ type Preset struct {
 // settings in the preset, which allows you to use the same preset for up to four
 // watermarks that have different dimensions.
 type PresetWatermark struct {
+
 	// The horizontal position of the watermark unless you specify a non-zero value for
 	// HorizontalOffset:
 	//
@@ -1414,6 +1568,7 @@ type PresetWatermark struct {
 	//     * Center: The watermark is
 	// centered between the left and right borders.
 	HorizontalAlign *string
+
 	// The maximum width of the watermark in one of the following formats:
 	//
 	//     *
@@ -1426,6 +1581,7 @@ type PresetWatermark struct {
 	// any, in the calculation. If you specify the value in pixels, it must be less
 	// than or equal to the value of MaxWidth.
 	MaxWidth *string
+
 	// The amount by which you want the horizontal position of the watermark to be
 	// offset from the position specified by HorizontalAlign:
 	//
@@ -1447,6 +1603,7 @@ type PresetWatermark struct {
 	// you want to include the black bars that are added by Elastic Transcoder, if any,
 	// in the offset calculation.
 	HorizontalOffset *string
+
 	// A value that determines how Elastic Transcoder interprets values that you
 	// specified for HorizontalOffset, VerticalOffset, MaxWidth, and MaxHeight:
 	//
@@ -1463,9 +1620,11 @@ type PresetWatermark struct {
 	// specified as a percentage, are calculated based on the borders of the video
 	// including black bars added by Elastic Transcoder, if any.
 	Target *string
+
 	// A unique identifier for the settings for one watermark. The value of Id can be
 	// up to 40 characters long.
 	Id *string
+
 	// The maximum height of the watermark in one of the following formats:
 	//
 	//     *
@@ -1480,6 +1639,7 @@ type PresetWatermark struct {
 	// If you specify the value in pixels, it must be less
 	// than or equal to the value of MaxHeight.
 	MaxHeight *string
+
 	// A percentage that indicates how much you want a watermark to obscure the video
 	// in the location where it appears. Valid values are 0 (the watermark is
 	// invisible) to 100 (the watermark completely obscures the video in the specified
@@ -1488,6 +1648,7 @@ type PresetWatermark struct {
 	// portion of the video appears as if you had specified a value of 0 for Opacity.
 	// The .jpg file format doesn't support transparency.
 	Opacity *string
+
 	// A value that controls scaling of the watermark:
 	//
 	//     * Fit: Elastic Transcoder
@@ -1505,6 +1666,7 @@ type PresetWatermark struct {
 	// MaxWidth and MaxHeight without exceeding either value. If you specify this
 	// option, Elastic Transcoder does not scale the watermark up.
 	SizingPolicy *string
+
 	// The vertical position of the watermark unless you specify a non-zero value for
 	// VerticalOffset:
 	//
@@ -1517,6 +1679,7 @@ type PresetWatermark struct {
 	//     * Center: The watermark is
 	// centered between the top and bottom borders.
 	VerticalAlign *string
+
 	// VerticalOffset The amount by which you want the vertical position of the
 	// watermark to be offset from the position specified by VerticalAlign:
 	//
@@ -1542,16 +1705,20 @@ type PresetWatermark struct {
 
 // Thumbnails for videos.
 type Thumbnails struct {
+
 	// The approximate number of seconds between thumbnails. Specify an integer value.
 	Interval *string
+
 	// The maximum height of thumbnails in pixels. If you specify auto, Elastic
 	// Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 3072.
 	MaxHeight *string
+
 	// The maximum width of thumbnails in pixels. If you specify auto, Elastic
 	// Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 32 and 4096.
 	MaxWidth *string
+
 	// To better control resolution and aspect ratio of thumbnails, we recommend that
 	// you use the values MaxWidth, MaxHeight, SizingPolicy, and PaddingPolicy instead
 	// of Resolution and AspectRatio. The two groups of settings are mutually
@@ -1560,6 +1727,7 @@ type Thumbnails struct {
 	// even integers. The values cannot exceed the width and height that you specified
 	// in the Video:Resolution object.
 	Resolution *string
+
 	// Specify one of the following values to control scaling of thumbnails:  <ul> <li>
 	// <p> <code>Fit</code>: Elastic Transcoder scales thumbnails so they match the
 	// value that you specified in thumbnail MaxWidth or MaxHeight settings without
@@ -1586,14 +1754,17 @@ type Thumbnails struct {
 	// value. If you specify this option, Elastic Transcoder does not scale thumbnails
 	// up.</p> </li> </ul>
 	SizingPolicy *string
+
 	// The format of thumbnails, if any. Valid values are jpg and png. You specify
 	// whether you want Elastic Transcoder to create thumbnails when you create a job.
 	Format *string
+
 	// When you set PaddingPolicy to Pad, Elastic Transcoder may add black bars to the
 	// top and bottom and/or left and right sides of thumbnails to make the total size
 	// of the thumbnails match the values that you specified for thumbnail MaxWidth and
 	// MaxHeight settings.
 	PaddingPolicy *string
+
 	// To better control resolution and aspect ratio of thumbnails, we recommend that
 	// you use the values MaxWidth, MaxHeight, SizingPolicy, and PaddingPolicy instead
 	// of Resolution and AspectRatio. The two groups of settings are mutually
@@ -1605,6 +1776,7 @@ type Thumbnails struct {
 
 // Settings that determine when a clip begins and how long it lasts.
 type TimeSpan struct {
+
 	// The duration of the clip. The format can be either HH:mm:ss.SSS (maximum value:
 	// 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value:
 	// 86399.999). If you don't specify a value, Elastic Transcoder creates an output
@@ -1612,6 +1784,7 @@ type TimeSpan struct {
 	// the duration of the input file, Elastic Transcoder transcodes the file and
 	// returns a warning message.
 	Duration *string
+
 	// The place in the input file where you want a clip to start. The format can be
 	// either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths of a
 	// second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value,
@@ -1621,16 +1794,20 @@ type TimeSpan struct {
 
 // Details about the timing of a job.
 type Timing struct {
+
 	// The time the job began transcoding, in epoch milliseconds.
 	StartTimeMillis *int64
+
 	// The time the job finished transcoding, in epoch milliseconds.
 	FinishTimeMillis *int64
+
 	// The time the job was submitted to Elastic Transcoder, in epoch milliseconds.
 	SubmitTimeMillis *int64
 }
 
 // The VideoParameters structure.
 type VideoParameters struct {
+
 	// The frames per second for the video stream in the output file. Valid values
 	// include: auto, 10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify auto, Elastic
 	// Transcoder uses the detected frame rate of the input source. If you specify a
@@ -1678,6 +1855,7 @@ type VideoParameters struct {
 	//
 	//     * 4.1 - 62914560
 	FrameRate *string
+
 	// Applicable only when the value of Video:Codec is one of H.264, MPEG2, or VP8.
 	// The maximum number of frames between key frames. Key frames are fully encoded
 	// frames; the frames between key frames are encoded based, in part, on the content
@@ -1693,6 +1871,7 @@ type VideoParameters struct {
 	// achieved by setting FrameRate to auto and having the same values for
 	// MaxFrameRate and KeyframesMaxDist.
 	KeyframesMaxDist *string
+
 	// Profile (H.264/VP8/VP9 Only) The H.264 profile that you want to use for the
 	// output file. Elastic Transcoder supports the following profiles:
 	//
@@ -1806,6 +1985,7 @@ type VideoParameters struct {
 	// to loop. Valid values include <code>Infinite</code> and integers between
 	// <code>0</code> and <code>100</code>, inclusive.</p>
 	CodecOptions map[string]*string
+
 	// Specify one of the following values to control scaling of the output video:
 	// <ul> <li> <p> <code>Fit</code>: Elastic Transcoder scales the output video so it
 	// matches the value that you specified in either <code>MaxWidth</code> or
@@ -1832,10 +2012,12 @@ type VideoParameters struct {
 	// below either value. If you specify this option, Elastic Transcoder does not
 	// scale the video up.</p> </li> </ul>
 	SizingPolicy *string
+
 	// The maximum height of the output video in pixels. If you specify auto, Elastic
 	// Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 96 and 3072.
 	MaxHeight *string
+
 	// To better control resolution and aspect ratio of output videos, we recommend
 	// that you use the values MaxWidth, MaxHeight, SizingPolicy, PaddingPolicy, and
 	// DisplayAspectRatio instead of Resolution and AspectRatio. The two groups of
@@ -1900,6 +2082,7 @@ type VideoParameters struct {
 	//
 	//         * 4.1 - 2097152
 	Resolution *string
+
 	// The bit rate of the video stream in the output file, in kilobits/second. Valid
 	// values depend on the values of Level and Profile. If you specify auto, Elastic
 	// Transcoder uses the detected bit rate of the input source. If you specify a
@@ -1933,21 +2116,25 @@ type VideoParameters struct {
 	//
 	//     * 4.1 - 50000 : 62500
 	BitRate *string
+
 	// If you specify auto for FrameRate, Elastic Transcoder uses the frame rate of the
 	// input video for the frame rate of the output video. Specify the maximum frame
 	// rate that you want Elastic Transcoder to use when the frame rate of the input
 	// video is greater than the desired maximum frame rate of the output video. Valid
 	// values include: 10, 15, 23.97, 24, 25, 29.97, 30, 60.
 	MaxFrameRate *string
+
 	// When you set PaddingPolicy to Pad, Elastic Transcoder may add black bars to the
 	// top and bottom and/or left and right sides of the output video to make the total
 	// size of the output video match the values that you specified for MaxWidth and
 	// MaxHeight.
 	PaddingPolicy *string
+
 	// The maximum width of the output video in pixels. If you specify auto, Elastic
 	// Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric
 	// value, enter an even integer between 128 and 4096.
 	MaxWidth *string
+
 	// To better control resolution and aspect ratio of output videos, we recommend
 	// that you use the values MaxWidth, MaxHeight, SizingPolicy, PaddingPolicy, and
 	// DisplayAspectRatio instead of Resolution and AspectRatio. The two groups of
@@ -1959,8 +2146,10 @@ type VideoParameters struct {
 	// pillarboxing (black bars on the sides) or letterboxing (black bars on the top
 	// and bottom) to maintain the aspect ratio of the active region of the video.
 	AspectRatio *string
+
 	// The value that Elastic Transcoder adds to the metadata in the output file.
 	DisplayAspectRatio *string
+
 	// Applicable only when the value of Video:Codec is one of H.264, MPEG2, or VP8.
 	// Whether to use a fixed value for FixedGOP. Valid values are true and false:
 	//
@@ -1974,10 +2163,12 @@ type VideoParameters struct {
 	// FixedGOP must be set to true
 	// for fmp4 containers.
 	FixedGOP *string
+
 	// The video codec for the output file. Valid values include gif, H.264, mpeg2,
 	// vp8, and vp9. You can only specify vp8 and vp9 when the container type is webm,
 	// gif when the container type is gif, and mpeg2 when the container type is mpg.
 	Codec *string
+
 	// Settings for the size, location, and opacity of graphics that you want Elastic
 	// Transcoder to overlay over videos that are transcoded using this preset. You can
 	// specify settings for up to four watermarks. Watermarks appear in the specified
@@ -1997,9 +2188,11 @@ type VideoParameters struct {
 // as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key,
 // reduces processing time and prevents cross-regional charges.
 type Warning struct {
+
 	// The message explaining what resources are in a different region from the
 	// pipeline. AWS KMS keys must be in the same region as the pipeline.
 	Message *string
+
 	// The code of the cross-regional warning.
 	Code *string
 }

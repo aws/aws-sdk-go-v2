@@ -56,15 +56,25 @@ func (c *Client) GetNode(ctx context.Context, params *GetNodeInput, optFns ...fu
 }
 
 type GetNodeInput struct {
+
 	// The unique identifier of the node.
+	//
+	// This member is required.
 	NodeId *string
+
 	// The unique identifier of the member that owns the node.
+	//
+	// This member is required.
 	MemberId *string
+
 	// The unique identifier of the network to which the node belongs.
+	//
+	// This member is required.
 	NetworkId *string
 }
 
 type GetNodeOutput struct {
+
 	// Properties of the node configuration.
 	Node *types.Node
 

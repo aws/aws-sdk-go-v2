@@ -55,11 +55,20 @@ func (c *Client) DeleteResolver(ctx context.Context, params *DeleteResolverInput
 }
 
 type DeleteResolverInput struct {
+
 	// The resolver field name.
+	//
+	// This member is required.
 	FieldName *string
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The name of the resolver type.
+	//
+	// This member is required.
 	TypeName *string
 }
 

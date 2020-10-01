@@ -61,12 +61,16 @@ func (c *Client) GetPermissionPolicy(ctx context.Context, params *GetPermissionP
 }
 
 type GetPermissionPolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the
 	// policy.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type GetPermissionPolicyOutput struct {
+
 	// The IAM policy attached to the specified RuleGroup.
 	Policy *string
 

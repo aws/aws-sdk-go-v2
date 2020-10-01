@@ -57,13 +57,20 @@ func (c *Client) DeleteDevice(ctx context.Context, params *DeleteDeviceInput, op
 }
 
 type DeleteDeviceInput struct {
+
 	// The ID of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
 }
 
 type DeleteDeviceOutput struct {
+
 	// Information about the device.
 	Device *types.Device
 

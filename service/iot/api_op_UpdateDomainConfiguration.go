@@ -58,19 +58,27 @@ func (c *Client) UpdateDomainConfiguration(ctx context.Context, params *UpdateDo
 }
 
 type UpdateDomainConfigurationInput struct {
+
 	// The name of the domain configuration to be updated.
+	//
+	// This member is required.
 	DomainConfigurationName *string
+
 	// The status to which the domain configuration should be updated.
 	DomainConfigurationStatus types.DomainConfigurationStatus
+
 	// An object that specifies the authorization service for a domain.
 	AuthorizerConfig *types.AuthorizerConfig
+
 	// Removes the authorization configuration from a domain.
 	RemoveAuthorizerConfig *bool
 }
 
 type UpdateDomainConfigurationOutput struct {
+
 	// The name of the domain configuration that was updated.
 	DomainConfigurationName *string
+
 	// The ARN of the domain configuration that was updated.
 	DomainConfigurationArn *string
 

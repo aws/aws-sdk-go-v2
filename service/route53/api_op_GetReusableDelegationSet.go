@@ -58,15 +58,21 @@ func (c *Client) GetReusableDelegationSet(ctx context.Context, params *GetReusab
 
 // A request to get information about a specified reusable delegation set.
 type GetReusableDelegationSetInput struct {
+
 	// The ID of the reusable delegation set that you want to get a list of name
 	// servers for.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains the response to the GetReusableDelegationSet
 // request.
 type GetReusableDelegationSetOutput struct {
+
 	// A complex type that contains information about the reusable delegation set.
+	//
+	// This member is required.
 	DelegationSet *types.DelegationSet
 
 	// Metadata pertaining to the operation's result.

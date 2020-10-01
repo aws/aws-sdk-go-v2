@@ -57,17 +57,26 @@ func (c *Client) AddInstanceFleet(ctx context.Context, params *AddInstanceFleetI
 }
 
 type AddInstanceFleetInput struct {
+
 	// Specifies the configuration of the instance fleet.
+	//
+	// This member is required.
 	InstanceFleet *types.InstanceFleetConfig
+
 	// The unique identifier of the cluster.
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 type AddInstanceFleetOutput struct {
+
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
+
 	// The unique identifier of the cluster.
 	ClusterId *string
+
 	// The unique identifier of the instance fleet.
 	InstanceFleetId *string
 

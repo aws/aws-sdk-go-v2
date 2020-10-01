@@ -57,13 +57,18 @@ func (c *Client) DescribeDetectorModel(ctx context.Context, params *DescribeDete
 }
 
 type DescribeDetectorModelInput struct {
+
 	// The version of the detector model.
 	DetectorModelVersion *string
+
 	// The name of the detector model.
+	//
+	// This member is required.
 	DetectorModelName *string
 }
 
 type DescribeDetectorModelOutput struct {
+
 	// Information about the detector model.
 	DetectorModel *types.DetectorModel
 

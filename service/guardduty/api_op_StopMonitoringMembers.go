@@ -57,16 +57,25 @@ func (c *Client) StopMonitoringMembers(ctx context.Context, params *StopMonitori
 }
 
 type StopMonitoringMembersInput struct {
+
 	// A list of account IDs for the member accounts to stop monitoring.
+	//
+	// This member is required.
 	AccountIds []*string
+
 	// The unique ID of the detector associated with the GuardDuty master account that
 	// is monitoring member accounts.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type StopMonitoringMembersOutput struct {
+
 	// A list of objects that contain an accountId for each account that could not be
 	// processed, and a result string that indicates why the account was not processed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

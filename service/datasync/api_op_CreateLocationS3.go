@@ -64,11 +64,15 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 
 // CreateLocationS3Request
 type CreateLocationS3Input struct {
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that is used to access an Amazon S3 bucket.  <p>For detailed information
 	// about using such a role, see Creating a Location for Amazon S3 in the <i>AWS
 	// DataSync User Guide</i>.</p>
+	//
+	// This member is required.
 	S3Config *types.S3Config
+
 	// The Amazon S3 storage class that you want to store your files in when this
 	// location is used as a task destination. For more information about S3 storage
 	// classes, see Amazon S3 Storage Classes
@@ -76,19 +80,25 @@ type CreateLocationS3Input struct {
 	// Service Developer Guide. Some storage classes have behaviors that can affect
 	// your S3 storage cost. For detailed information, see using-storage-classes ().
 	S3StorageClass types.S3StorageClass
+
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used
 	// to read data from the S3 source location or write data to the S3 destination.
 	Subdirectory *string
+
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []*types.TagListEntry
+
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+	//
+	// This member is required.
 	S3BucketArn *string
 }
 
 // CreateLocationS3Response
 type CreateLocationS3Output struct {
+
 	// The Amazon Resource Name (ARN) of the source Amazon S3 bucket location that is
 	// created.
 	LocationArn *string

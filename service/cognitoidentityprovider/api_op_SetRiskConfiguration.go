@@ -59,14 +59,21 @@ func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfig
 }
 
 type SetRiskConfigurationInput struct {
+
 	// The configuration to override the risk decision.
 	RiskExceptionConfiguration *types.RiskExceptionConfigurationType
+
 	// The account takeover risk configuration.
 	AccountTakeoverRiskConfiguration *types.AccountTakeoverRiskConfigurationType
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The compromised credentials risk configuration.
 	CompromisedCredentialsRiskConfiguration *types.CompromisedCredentialsRiskConfigurationType
+
 	// The app client ID. If ClientId is null, then the risk configuration is mapped to
 	// userPoolId. When the client ID is null, the same risk configuration is applied
 	// to all the clients in the userPool. Otherwise, ClientId is mapped to the client.
@@ -76,7 +83,10 @@ type SetRiskConfigurationInput struct {
 }
 
 type SetRiskConfigurationOutput struct {
+
 	// The risk configuration.
+	//
+	// This member is required.
 	RiskConfiguration *types.RiskConfigurationType
 
 	// Metadata pertaining to the operation's result.

@@ -58,6 +58,7 @@ func (c *Client) CreateProduct(ctx context.Context, params *CreateProductInput, 
 }
 
 type CreateProductInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -67,37 +68,61 @@ type CreateProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The contact URL for product support.
 	SupportUrl *string
+
 	// The configuration of the provisioning artifact.
+	//
+	// This member is required.
 	ProvisioningArtifactParameters *types.ProvisioningArtifactProperties
+
 	// The name of the product.
+	//
+	// This member is required.
 	Name *string
+
 	// The contact email for product support.
 	SupportEmail *string
+
 	// The type of product.
+	//
+	// This member is required.
 	ProductType types.ProductType
+
 	// The distributor of the product.
 	Distributor *string
+
 	// The support information about the product.
 	SupportDescription *string
+
 	// The description of the product.
 	Description *string
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
+	//
+	// This member is required.
 	IdempotencyToken *string
+
 	// One or more tags.
 	Tags []*types.Tag
+
 	// The owner of the product.
+	//
+	// This member is required.
 	Owner *string
 }
 
 type CreateProductOutput struct {
+
 	// Information about the tags associated with the product.
 	Tags []*types.Tag
+
 	// Information about the product view.
 	ProductViewDetail *types.ProductViewDetail
+
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
 

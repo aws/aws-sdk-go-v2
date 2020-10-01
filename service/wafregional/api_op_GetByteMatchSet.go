@@ -62,12 +62,16 @@ func (c *Client) GetByteMatchSet(ctx context.Context, params *GetByteMatchSetInp
 }
 
 type GetByteMatchSetInput struct {
+
 	// The ByteMatchSetId of the ByteMatchSet () that you want to get. ByteMatchSetId
 	// is returned by CreateByteMatchSet () and by ListByteMatchSets ().
+	//
+	// This member is required.
 	ByteMatchSetId *string
 }
 
 type GetByteMatchSetOutput struct {
+
 	// Information about the ByteMatchSet () that you specified in the GetByteMatchSet
 	// request. For more information, see the following topics:
 	//

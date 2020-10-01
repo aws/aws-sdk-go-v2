@@ -63,16 +63,20 @@ func (c *Client) GetTestGridSession(ctx context.Context, params *GetTestGridSess
 }
 
 type GetTestGridSessionInput struct {
+
 	// An ARN that uniquely identifies a TestGridSession ().
 	SessionArn *string
+
 	// The ARN for the project that this session belongs to. See CreateTestGridProject
 	// () and ListTestGridProjects ().
 	ProjectArn *string
+
 	// An ID associated with this session.
 	SessionId *string
 }
 
 type GetTestGridSessionOutput struct {
+
 	// The TestGridSession () that was requested.
 	TestGridSession *types.TestGridSession
 

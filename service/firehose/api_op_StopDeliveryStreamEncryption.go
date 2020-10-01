@@ -72,8 +72,11 @@ func (c *Client) StopDeliveryStreamEncryption(ctx context.Context, params *StopD
 }
 
 type StopDeliveryStreamEncryptionInput struct {
+
 	// The name of the delivery stream for which you want to disable server-side
 	// encryption (SSE).
+	//
+	// This member is required.
 	DeliveryStreamName *string
 }
 

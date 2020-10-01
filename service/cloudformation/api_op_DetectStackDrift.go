@@ -76,17 +76,24 @@ func (c *Client) DetectStackDrift(ctx context.Context, params *DetectStackDriftI
 }
 
 type DetectStackDriftInput struct {
+
 	// The logical names of any resources you want to use as filters.
 	LogicalResourceIds []*string
+
 	// The name of the stack for which you want to detect drift.
+	//
+	// This member is required.
 	StackName *string
 }
 
 type DetectStackDriftOutput struct {
+
 	// The ID of the drift detection results of this operation. AWS CloudFormation
 	// generates new results, with a new drift detection ID, each time this operation
 	// is run. However, the number of drift results AWS CloudFormation retains for any
 	// given stack, and for how long, may vary.
+	//
+	// This member is required.
 	StackDriftDetectionId *string
 
 	// Metadata pertaining to the operation's result.

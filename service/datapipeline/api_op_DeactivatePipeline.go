@@ -60,11 +60,15 @@ func (c *Client) DeactivatePipeline(ctx context.Context, params *DeactivatePipel
 
 // Contains the parameters for DeactivatePipeline.
 type DeactivatePipelineInput struct {
+
 	// Indicates whether to cancel any running objects. The default is true, which sets
 	// the state of any running objects to CANCELED. If this value is false, the
 	// pipeline is deactivated after all running objects finish.
 	CancelActive *bool
+
 	// The ID of the pipeline.
+	//
+	// This member is required.
 	PipelineId *string
 }
 

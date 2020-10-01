@@ -60,24 +60,39 @@ func (c *Client) CreateTransitGatewayPeeringAttachment(ctx context.Context, para
 }
 
 type CreateTransitGatewayPeeringAttachmentInput struct {
+
 	// The ID of the transit gateway.
+	//
+	// This member is required.
 	TransitGatewayId *string
+
 	// The ID of the peer transit gateway with which to create the peering attachment.
+	//
+	// This member is required.
 	PeerTransitGatewayId *string
+
 	// The tags to apply to the transit gateway peering attachment.
 	TagSpecifications []*types.TagSpecification
+
 	// The AWS account ID of the owner of the peer transit gateway.
+	//
+	// This member is required.
 	PeerAccountId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The Region where the peer transit gateway is located.
+	//
+	// This member is required.
 	PeerRegion *string
 }
 
 type CreateTransitGatewayPeeringAttachmentOutput struct {
+
 	// The transit gateway peering attachment.
 	TransitGatewayPeeringAttachment *types.TransitGatewayPeeringAttachment
 

@@ -64,9 +64,15 @@ func (c *Client) AttachLoadBalancers(ctx context.Context, params *AttachLoadBala
 }
 
 type AttachLoadBalancersInput struct {
+
 	// The names of the load balancers. You can specify up to 10 load balancers.
+	//
+	// This member is required.
 	LoadBalancerNames []*string
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
 }
 

@@ -81,10 +81,15 @@ func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, op
 }
 
 type DeleteObjectInput struct {
+
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
 	// Key name of the object to delete.
+	//
+	// This member is required.
 	Key *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -92,13 +97,16 @@ type DeleteObjectInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// The concatenation of the authentication device's serial number, a space, and the
 	// value that is displayed on your authentication device. Required to permanently
 	// delete a versioned object if versioning is configured with MFA delete enabled.
 	MFA *string
+
 	// Indicates whether S3 Object Lock should bypass Governance-mode restrictions to
 	// process this operation.
 	BypassGovernanceRetention *bool
+
 	// The bucket name of the bucket containing the object. When using this API with an
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
@@ -108,16 +116,21 @@ type DeleteObjectInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type DeleteObjectOutput struct {
+
 	// Returns the version ID of the delete marker created as a result of the DELETE
 	// operation.
 	VersionId *string
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
 	// Specifies whether the versioned object that was permanently deleted was (true)
 	// or was not (false) a delete marker.
 	DeleteMarker *bool

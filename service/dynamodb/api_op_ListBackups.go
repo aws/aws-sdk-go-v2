@@ -64,6 +64,7 @@ func (c *Client) ListBackups(ctx context.Context, params *ListBackupsInput, optF
 }
 
 type ListBackupsInput struct {
+
 	// The backups from the table specified by BackupType are listed. Where BackupType
 	// can be:
 	//
@@ -75,27 +76,34 @@ type ListBackupsInput struct {
 	//     * ALL - All types of on-demand
 	// backups (USER and SYSTEM).
 	BackupType types.BackupTypeFilter
+
 	// Only backups created before this time are listed. TimeRangeUpperBound is
 	// exclusive.
 	TimeRangeUpperBound *time.Time
+
 	// LastEvaluatedBackupArn is the Amazon Resource Name (ARN) of the backup last
 	// evaluated when the current page of results was returned, inclusive of the
 	// current page of results. This value may be specified as the
 	// ExclusiveStartBackupArn of a new ListBackups operation in order to fetch the
 	// next page of results.
 	ExclusiveStartBackupArn *string
+
 	// Only backups created after this time are listed. TimeRangeLowerBound is
 	// inclusive.
 	TimeRangeLowerBound *time.Time
+
 	// The backups from the table specified by TableName are listed.
 	TableName *string
+
 	// Maximum number of backups to return at once.
 	Limit *int32
 }
 
 type ListBackupsOutput struct {
+
 	// List of BackupSummary objects.
 	BackupSummaries []*types.BackupSummary
+
 	// The ARN of the backup last evaluated when the current page of results was
 	// returned, inclusive of the current page of results. This value may be specified
 	// as the ExclusiveStartBackupArn of a new ListBackups operation in order to fetch

@@ -70,12 +70,21 @@ func (c *Client) ResetUserPassword(ctx context.Context, params *ResetUserPasswor
 }
 
 type ResetUserPasswordInput struct {
+
 	// The new password that will be reset.
+	//
+	// This member is required.
 	NewPassword *string
+
 	// Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the
 	// user resides.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The user name of the user whose password will be reset.
+	//
+	// This member is required.
 	UserName *string
 }
 

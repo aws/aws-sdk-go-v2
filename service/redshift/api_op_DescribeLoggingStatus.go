@@ -58,23 +58,32 @@ func (c *Client) DescribeLoggingStatus(ctx context.Context, params *DescribeLogg
 
 //
 type DescribeLoggingStatusInput struct {
+
 	// The identifier of the cluster from which to get the logging status. Example:
 	// examplecluster
+	//
+	// This member is required.
 	ClusterIdentifier *string
 }
 
 // Describes the status of logging for a cluster.
 type DescribeLoggingStatusOutput struct {
+
 	// The prefix applied to the log file names.
 	S3KeyPrefix *string
+
 	// The message indicating that logs failed to be delivered.
 	LastFailureMessage *string
+
 	// true if logging is on, false if logging is off.
 	LoggingEnabled *bool
+
 	// The last time when logs failed to be delivered.
 	LastFailureTime *time.Time
+
 	// The name of the S3 bucket where the log files are stored.
 	BucketName *string
+
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 

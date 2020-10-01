@@ -67,13 +67,17 @@ func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApp
 
 //
 type CreateApplicationVersionInput struct {
+
 	// A description of this application version.
 	Description *string
+
 	// Set to true to create an application with the specified name if it doesn't
 	// already exist.
 	AutoCreateApplication *bool
+
 	// Settings for an AWS CodeBuild build.
 	BuildConfiguration *types.BuildConfiguration
+
 	// Pre-processes and validates the environment manifest (env.yaml) and
 	// configuration files (*.config files in the .ebextensions folder) in the source
 	// bundle. Validating configuration files can identify issues prior to deploying
@@ -84,16 +88,22 @@ type CreateApplicationVersionInput struct {
 	// doesn't validate your application's configuration files, like proxy server or
 	// Docker configuration.
 	Process *bool
+
 	// Specifies the tags applied to the application version. Elastic Beanstalk applies
 	// these tags only to the application version. Environments that use the
 	// application version don't inherit the tags.
 	Tags []*types.Tag
+
 	// The name of the application. If no application is found with this name, and
 	// AutoCreateApplication is false, returns an InvalidParameterValue error.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// Specify a commit in an AWS CodeCommit Git repository to use as the source code
 	// for the application version.
 	SourceBuildInformation *types.SourceBuildInformation
+
 	// The Amazon S3 bucket and key that identify the location of the source bundle for
 	// this version. The Amazon S3 bucket must be in the same region as the
 	// environment. Specify a source bundle in S3 or a commit in an AWS CodeCommit
@@ -101,14 +111,18 @@ type CreateApplicationVersionInput struct {
 	// nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample
 	// application.
 	SourceBundle *types.S3Location
+
 	// A label identifying this version. Constraint: Must be unique per application. If
 	// an application version already exists with this label for the specified
 	// application, AWS Elastic Beanstalk returns an InvalidParameterValue error.
+	//
+	// This member is required.
 	VersionLabel *string
 }
 
 // Result message wrapping a single description of an application version.
 type CreateApplicationVersionOutput struct {
+
 	// The ApplicationVersionDescription () of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 

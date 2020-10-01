@@ -58,20 +58,33 @@ func (c *Client) CreateNode(ctx context.Context, params *CreateNodeInput, optFns
 }
 
 type CreateNodeInput struct {
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the operation. An idempotent operation completes no more than one time. This
 	// identifier is required only if you make a service request directly using an HTTP
 	// client. It is generated automatically if you use an AWS SDK or the AWS CLI.
+	//
+	// This member is required.
 	ClientRequestToken *string
+
 	// The unique identifier of the member that owns this node.
+	//
+	// This member is required.
 	MemberId *string
+
 	// The properties of a node configuration.
+	//
+	// This member is required.
 	NodeConfiguration *types.NodeConfiguration
+
 	// The unique identifier of the network in which this node runs.
+	//
+	// This member is required.
 	NetworkId *string
 }
 
 type CreateNodeOutput struct {
+
 	// The unique identifier of the node.
 	NodeId *string
 

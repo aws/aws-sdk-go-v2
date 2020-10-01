@@ -57,6 +57,7 @@ func (c *Client) DescribeTrails(ctx context.Context, params *DescribeTrailsInput
 
 // Returns information about the trail.
 type DescribeTrailsInput struct {
+
 	// Specifies whether to include shadow trails in the response. A shadow trail is
 	// the replication in a region of a trail that was created in a different region,
 	// or in the case of an organization trail, the replication of an organization
@@ -64,6 +65,7 @@ type DescribeTrailsInput struct {
 	// trails in a member account and region replication trails will not be returned.
 	// The default is true.
 	IncludeShadowTrails *bool
+
 	// Specifies a list of trail names, trail ARNs, or both, of the trails to describe.
 	// The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
@@ -83,6 +85,7 @@ type DescribeTrailsInput struct {
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type DescribeTrailsOutput struct {
+
 	// The list of trail objects. Trail objects with string values are only returned if
 	// values for the objects exist in a trail's configuration. For example,
 	// SNSTopicName and SNSTopicARN are only returned in results if a trail is

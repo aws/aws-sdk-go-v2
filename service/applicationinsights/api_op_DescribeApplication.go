@@ -56,11 +56,15 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 }
 
 type DescribeApplicationInput struct {
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
 }
 
 type DescribeApplicationOutput struct {
+
 	// Information about the application.
 	ApplicationInfo *types.ApplicationInfo
 

@@ -56,13 +56,20 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 }
 
 type GetDataSourceInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The name of the data source.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetDataSourceOutput struct {
+
 	// The DataSource object.
 	DataSource *types.DataSource
 

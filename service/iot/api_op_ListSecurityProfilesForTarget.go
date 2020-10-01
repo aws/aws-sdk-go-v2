@@ -56,21 +56,29 @@ func (c *Client) ListSecurityProfilesForTarget(ctx context.Context, params *List
 }
 
 type ListSecurityProfilesForTargetInput struct {
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
 	// If true, return child groups too.
 	Recursive *bool
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The ARN of the target (thing group) whose attached security profiles you want to
 	// get.
+	//
+	// This member is required.
 	SecurityProfileTargetArn *string
 }
 
 type ListSecurityProfilesForTargetOutput struct {
+
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
+
 	// A list of security profiles and their associated targets.
 	SecurityProfileTargetMappings []*types.SecurityProfileTargetMapping
 

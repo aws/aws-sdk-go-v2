@@ -54,6 +54,7 @@ func (c *Client) DeleteResourcesByExternalId(ctx context.Context, params *Delete
 }
 
 type DeleteResourcesByExternalIdInput struct {
+
 	// The unique ID of an external resource (for example, a CloudFormation stack ID)
 	// that is linked to one or more CodeDeploy resources.
 	ExternalId *string

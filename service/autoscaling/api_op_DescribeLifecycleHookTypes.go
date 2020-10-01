@@ -63,6 +63,7 @@ type DescribeLifecycleHookTypesInput struct {
 }
 
 type DescribeLifecycleHookTypesOutput struct {
+
 	// The lifecycle hook types.
 	LifecycleHookTypes []*string
 

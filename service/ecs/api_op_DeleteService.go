@@ -70,12 +70,17 @@ func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, 
 }
 
 type DeleteServiceInput struct {
+
 	// If true, allows you to delete a service even if it has not been scaled down to
 	// zero tasks. It is only necessary to use this if the service is using the REPLICA
 	// scheduling strategy.
 	Force *bool
+
 	// The name of the service to delete.
+	//
+	// This member is required.
 	Service *string
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// service to delete. If you do not specify a cluster, the default cluster is
 	// assumed.
@@ -83,6 +88,7 @@ type DeleteServiceInput struct {
 }
 
 type DeleteServiceOutput struct {
+
 	// The full description of the deleted service.
 	Service *types.Service
 

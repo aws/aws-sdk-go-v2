@@ -56,11 +56,20 @@ func (c *Client) UpdateDetectorVersionMetadata(ctx context.Context, params *Upda
 }
 
 type UpdateDetectorVersionMetadataInput struct {
+
 	// The detector version ID.
+	//
+	// This member is required.
 	DetectorVersionId *string
+
 	// The detector ID.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The description.
+	//
+	// This member is required.
 	Description *string
 }
 

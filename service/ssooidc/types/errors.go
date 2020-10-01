@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -27,18 +26,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *AccessDeniedException) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *AccessDeniedException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *AccessDeniedException) HasError_description() bool {
-	return e.Error_description != nil
-}
 
 // Indicates that a request to authorize a client with an access user session token
 // is pending.
@@ -60,18 +47,6 @@ func (e *AuthorizationPendingException) ErrorMessage() string {
 }
 func (e *AuthorizationPendingException) ErrorCode() string             { return "AuthorizationPendingException" }
 func (e *AuthorizationPendingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationPendingException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *AuthorizationPendingException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *AuthorizationPendingException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *AuthorizationPendingException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that the token issued by the service is expired and is no longer
 // valid.
@@ -93,18 +68,6 @@ func (e *ExpiredTokenException) ErrorMessage() string {
 }
 func (e *ExpiredTokenException) ErrorCode() string             { return "ExpiredTokenException" }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredTokenException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *ExpiredTokenException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *ExpiredTokenException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *ExpiredTokenException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that an error from the service occurred while trying to process a
 // request.
@@ -126,18 +89,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *InternalServerException) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *InternalServerException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *InternalServerException) HasError_description() bool {
-	return e.Error_description != nil
-}
 
 // Indicates that the clientId or clientSecret in the request is invalid. For
 // example, this can occur when a client sends an incorrect clientId or an expired
@@ -160,18 +111,6 @@ func (e *InvalidClientException) ErrorMessage() string {
 }
 func (e *InvalidClientException) ErrorCode() string             { return "InvalidClientException" }
 func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClientException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *InvalidClientException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *InvalidClientException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *InvalidClientException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that the client information sent in the request during registration is
 // invalid.
@@ -193,18 +132,6 @@ func (e *InvalidClientMetadataException) ErrorMessage() string {
 }
 func (e *InvalidClientMetadataException) ErrorCode() string             { return "InvalidClientMetadataException" }
 func (e *InvalidClientMetadataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClientMetadataException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *InvalidClientMetadataException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *InvalidClientMetadataException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *InvalidClientMetadataException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that a request contains an invalid grant. This can occur if a client
 // makes a CreateToken () request with an invalid grant type.
@@ -226,18 +153,6 @@ func (e *InvalidGrantException) ErrorMessage() string {
 }
 func (e *InvalidGrantException) ErrorCode() string             { return "InvalidGrantException" }
 func (e *InvalidGrantException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGrantException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *InvalidGrantException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *InvalidGrantException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *InvalidGrantException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that something is wrong with the input to the request. For example, a
 // required parameter might be missing or out of range.
@@ -259,18 +174,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *InvalidRequestException) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *InvalidRequestException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *InvalidRequestException) HasError_description() bool {
-	return e.Error_description != nil
-}
 
 // Indicates that the scope provided in the request is invalid.
 type InvalidScopeException struct {
@@ -291,18 +194,6 @@ func (e *InvalidScopeException) ErrorMessage() string {
 }
 func (e *InvalidScopeException) ErrorCode() string             { return "InvalidScopeException" }
 func (e *InvalidScopeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidScopeException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *InvalidScopeException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *InvalidScopeException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *InvalidScopeException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that the client is making the request too frequently and is more than
 // the service can handle.
@@ -324,18 +215,6 @@ func (e *SlowDownException) ErrorMessage() string {
 }
 func (e *SlowDownException) ErrorCode() string             { return "SlowDownException" }
 func (e *SlowDownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SlowDownException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *SlowDownException) HasError_description() bool {
-	return e.Error_description != nil
-}
-func (e *SlowDownException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *SlowDownException) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // Indicates that the client is not currently authorized to make the request. This
 // can happen when a clientId is not issued for a public client.
@@ -357,18 +236,6 @@ func (e *UnauthorizedClientException) ErrorMessage() string {
 }
 func (e *UnauthorizedClientException) ErrorCode() string             { return "UnauthorizedClientException" }
 func (e *UnauthorizedClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedClientException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *UnauthorizedClientException) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *UnauthorizedClientException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *UnauthorizedClientException) HasError_description() bool {
-	return e.Error_description != nil
-}
 
 // Indicates that the grant type in the request is not supported by the service.
 type UnsupportedGrantTypeException struct {
@@ -389,15 +256,3 @@ func (e *UnsupportedGrantTypeException) ErrorMessage() string {
 }
 func (e *UnsupportedGrantTypeException) ErrorCode() string             { return "UnsupportedGrantTypeException" }
 func (e *UnsupportedGrantTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedGrantTypeException) GetError_() string {
-	return ptr.ToString(e.Error_)
-}
-func (e *UnsupportedGrantTypeException) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *UnsupportedGrantTypeException) GetError_description() string {
-	return ptr.ToString(e.Error_description)
-}
-func (e *UnsupportedGrantTypeException) HasError_description() bool {
-	return e.Error_description != nil
-}

@@ -58,24 +58,29 @@ func (c *Client) GetApplicationDateRangeKpi(ctx context.Context, params *GetAppl
 }
 
 type GetApplicationDateRangeKpiInput struct {
+
 	// The first date and time to retrieve data for, as part of an inclusive date range
 	// that filters the query results. This value should be in extended ISO 8601 format
 	// and use Coordinated Universal Time (UTC), for example: 2019-07-19T20:00:00Z for
 	// 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the
 	// current day.
 	StartTime *time.Time
+
 	// The last date and time to retrieve data for, as part of an inclusive date range
 	// that filters the query results. This value should be in extended ISO 8601 format
 	// and use Coordinated Universal Time (UTC), for example: 2019-07-26T20:00:00Z for
 	// 8:00 PM UTC July 26, 2019.
 	EndTime *time.Time
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
 	// The string that specifies which page of results to return in a paginated
 	// response. This parameter is not supported for application, campaign, and journey
 	// metrics.
 	NextToken *string
+
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// to retrieve data for. This value describes the associated metric and consists of
 	// two or more terms, which are comprised of lowercase alphanumeric characters,
@@ -83,15 +88,23 @@ type GetApplicationDateRangeKpiInput struct {
 	// successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint
 	// Developer Guide
 	// (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
+	//
+	// This member is required.
 	KpiName *string
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetApplicationDateRangeKpiOutput struct {
+
 	// Provides the results of a query that retrieved the data for a standard metric
 	// that applies to an application, and provides information about that query.
+	//
+	// This member is required.
 	ApplicationDateRangeKpiResponse *types.ApplicationDateRangeKpiResponse
 
 	// Metadata pertaining to the operation's result.

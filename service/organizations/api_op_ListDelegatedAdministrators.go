@@ -58,6 +58,7 @@ func (c *Client) ListDelegatedAdministrators(ctx context.Context, params *ListDe
 }
 
 type ListDelegatedAdministratorsInput struct {
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -68,11 +69,13 @@ type ListDelegatedAdministratorsInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
 	// Specifies a service principal name. If specified, then the operation lists the
 	// delegated administrators only for the specified service. If you don't specify a
 	// service principal, the operation lists all delegated administrators for all
 	// services in your organization.
 	ServicePrincipal *string
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
@@ -81,8 +84,10 @@ type ListDelegatedAdministratorsInput struct {
 }
 
 type ListDelegatedAdministratorsOutput struct {
+
 	// The list of delegated administrators in your organization.
 	DelegatedAdministrators []*types.DelegatedAdministrator
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should

@@ -56,13 +56,20 @@ func (c *Client) AttachStaticIp(ctx context.Context, params *AttachStaticIpInput
 }
 
 type AttachStaticIpInput struct {
+
 	// The name of the static IP.
+	//
+	// This member is required.
 	StaticIpName *string
+
 	// The instance name to which you want to attach the static IP address.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type AttachStaticIpOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -57,21 +57,31 @@ func (c *Client) AdminListGroupsForUser(ctx context.Context, params *AdminListGr
 }
 
 type AdminListGroupsForUserInput struct {
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The username for the user.
+	//
+	// This member is required.
 	Username *string
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The limit of the request to list groups.
 	Limit *int32
 }
 
 type AdminListGroupsForUserOutput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The groups that the user belongs to.
 	Groups []*types.GroupType
 

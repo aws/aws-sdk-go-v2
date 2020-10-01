@@ -63,17 +63,21 @@ func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClu
 }
 
 type DescribeEcsClustersInput struct {
+
 	// A list of ARNs, one for each cluster to be described.
 	EcsClusterArns []*string
+
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object'sNextToken parameter value is set to a token. To retrieve
 	// the next set of results, call DescribeEcsClusters again and assign that token to
 	// the request object's NextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
+
 	// A stack ID. DescribeEcsClusters returns a description of the cluster that is
 	// registered with the stack.
 	StackId *string
+
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
 	// results exceeds this maximum, the response includes a NextToken value that you
@@ -83,8 +87,10 @@ type DescribeEcsClustersInput struct {
 
 // Contains the response to a DescribeEcsClusters request.
 type DescribeEcsClustersOutput struct {
+
 	// A list of EcsCluster objects containing the cluster descriptions.
 	EcsClusters []*types.EcsCluster
+
 	// If a paginated request does not return all of the remaining results, this
 	// parameter is set to a token that you can assign to the request object's
 	// NextToken parameter to retrieve the next set of results. If the previous

@@ -55,11 +55,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The list of all tags added to the specified resource.
 	Tags map[string]*string
 

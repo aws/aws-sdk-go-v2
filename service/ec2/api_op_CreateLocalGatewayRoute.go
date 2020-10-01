@@ -56,21 +56,32 @@ func (c *Client) CreateLocalGatewayRoute(ctx context.Context, params *CreateLoca
 }
 
 type CreateLocalGatewayRouteInput struct {
+
 	// The ID of the virtual interface group.
+	//
+	// This member is required.
 	LocalGatewayVirtualInterfaceGroupId *string
+
 	// The ID of the local gateway route table.
+	//
+	// This member is required.
 	LocalGatewayRouteTableId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The CIDR range used for destination matches. Routing decisions are based on the
 	// most specific match.
+	//
+	// This member is required.
 	DestinationCidrBlock *string
 }
 
 type CreateLocalGatewayRouteOutput struct {
+
 	// Information about the route.
 	Route *types.LocalGatewayRoute
 

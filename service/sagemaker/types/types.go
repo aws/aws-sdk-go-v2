@@ -13,6 +13,7 @@ import (
 // SageMaker
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
 type AlgorithmSpecification struct {
+
 	// The input mode that the algorithm supports. For the input modes that Amazon
 	// SageMaker algorithms support, see Algorithms
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). If an algorithm
@@ -30,7 +31,10 @@ type AlgorithmSpecification struct {
 	// If the object sizes are skewed, training won't be optimal as the data
 	// distribution is also skewed where one host in a training cluster is overloaded,
 	// thus becoming bottleneck in training.
+	//
+	// This member is required.
 	TrainingInputMode TrainingInputMode
+
 	// To generate and save time-series metrics during training, set to true. The
 	// default is false and time-series metrics aren't generated except in the
 	// following cases:
@@ -52,14 +56,17 @@ type AlgorithmSpecification struct {
 	//
 	//     * You specify at least one MetricDefinition ()
 	EnableSageMakerMetricsTimeSeries *bool
+
 	// The name of the algorithm resource to use for the training job. This must be an
 	// algorithm resource that you created or subscribe to on AWS Marketplace. If you
 	// specify a value for this parameter, you can't specify a value for TrainingImage.
 	AlgorithmName *string
+
 	// A list of metric definition objects. Each object specifies the metric name and
 	// regular expressions used to parse algorithm logs. Amazon SageMaker publishes
 	// each metric to Amazon CloudWatch.
 	MetricDefinitions []*MetricDefinition
+
 	// The registry path of the Docker image that contains the training algorithm. For
 	// information about docker registry paths for built-in algorithms, see Algorithms
 	// Provided by Amazon SageMaker: Common Parameters
@@ -73,33 +80,55 @@ type AlgorithmSpecification struct {
 
 // Specifies the validation and image scan statuses of the algorithm.
 type AlgorithmStatusDetails struct {
+
 	// The status of algorithm validation.
 	ValidationStatuses []*AlgorithmStatusItem
+
 	// The status of the scan of the algorithm's Docker image container.
 	ImageScanStatuses []*AlgorithmStatusItem
 }
 
 // Represents the overall status of an algorithm.
 type AlgorithmStatusItem struct {
+
 	// The current status.
+	//
+	// This member is required.
 	Status DetailedAlgorithmStatus
+
 	// if the overall status is Failed, the reason for the failure.
 	FailureReason *string
+
 	// The name of the algorithm for which the overall status is being reported.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Provides summary information about an algorithm.
 type AlgorithmSummary struct {
+
 	// A timestamp that shows when the algorithm was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// A brief description of the algorithm.
 	AlgorithmDescription *string
+
 	// The overall status of the algorithm.
+	//
+	// This member is required.
 	AlgorithmStatus AlgorithmStatus
+
 	// The Amazon Resource Name (ARN) of the algorithm.
+	//
+	// This member is required.
 	AlgorithmArn *string
+
 	// The name of the algorithm that is described by the summary.
+	//
+	// This member is required.
 	AlgorithmName *string
 }
 
@@ -107,12 +136,19 @@ type AlgorithmSummary struct {
 // validate your algorithm. The data provided in the validation profile is made
 // available to your buyers on AWS Marketplace.
 type AlgorithmValidationProfile struct {
+
 	// The TrainingJobDefinition object that describes the training job that Amazon
 	// SageMaker runs to validate your algorithm.
+	//
+	// This member is required.
 	TrainingJobDefinition *TrainingJobDefinition
+
 	// The name of the profile for the algorithm. The name must have 1 to 63
 	// characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// This member is required.
 	ProfileName *string
+
 	// The TransformJobDefinition object that describes the transform job that Amazon
 	// SageMaker runs to validate your algorithm.
 	TransformJobDefinition *TransformJobDefinition
@@ -121,17 +157,24 @@ type AlgorithmValidationProfile struct {
 // Specifies configurations for one or more training jobs that Amazon SageMaker
 // runs to test the algorithm.
 type AlgorithmValidationSpecification struct {
+
 	// An array of AlgorithmValidationProfile objects, each of which specifies a
 	// training job and batch transform job that Amazon SageMaker runs to validate your
 	// algorithm.
+	//
+	// This member is required.
 	ValidationProfiles []*AlgorithmValidationProfile
+
 	// The IAM roles that Amazon SageMaker uses to run the training jobs.
+	//
+	// This member is required.
 	ValidationRole *string
 }
 
 // Configures how labels are consolidated across human workers and processes output
 // data.
 type AnnotationConsolidationConfig struct {
+
 	// The Amazon Resource Name (ARN) of a Lambda function implements the logic for
 	// annotation consolidation
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html)
@@ -756,31 +799,44 @@ type AnnotationConsolidationConfig struct {
 	// </p> <p>
 	// <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
 	// </p> </li> </ul>
+	//
+	// This member is required.
 	AnnotationConsolidationLambdaArn *string
 }
 
 // The app's details.
 type AppDetails struct {
+
 	// The name of the app.
 	AppName *string
+
 	// The creation time.
 	CreationTime *time.Time
+
 	// The domain ID.
 	DomainId *string
+
 	// The type of app.
 	AppType AppType
+
 	// The user profile name.
 	UserProfileName *string
+
 	// The status.
 	Status AppStatus
 }
 
 // Configuration to run a processing job in a specified container image.
 type AppSpecification struct {
+
 	// The arguments for a container used to run a processing job.
 	ContainerArguments []*string
+
 	// The container image to be run by the processing job.
+	//
+	// This member is required.
 	ImageUri *string
+
 	// The entrypoint for a container used to run a processing job.
 	ContainerEntrypoint []*string
 }
@@ -788,45 +844,83 @@ type AppSpecification struct {
 // An AutoPilot job will return recommendations, or candidates. Each candidate has
 // futher details about the steps involed, and the status.
 type AutoMLCandidate struct {
+
 	// The candidate name.
+	//
+	// This member is required.
 	CandidateName *string
+
 	// The failure reason.
 	FailureReason *string
+
 	// The candidate's status.
+	//
+	// This member is required.
 	CandidateStatus CandidateStatus
+
 	// The objective status.
+	//
+	// This member is required.
 	ObjectiveStatus ObjectiveStatus
+
 	// The candidate result from a job.
 	FinalAutoMLJobObjectiveMetric *FinalAutoMLJobObjectiveMetric
+
 	// The end time.
 	EndTime *time.Time
+
 	// The inference containers.
 	InferenceContainers []*AutoMLContainerDefinition
+
 	// The creation time.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The last modified time.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The candidate's steps.
+	//
+	// This member is required.
 	CandidateSteps []*AutoMLCandidateStep
 }
 
 // Information about the steps for a Candidate, and what step it is working on.
 type AutoMLCandidateStep struct {
+
 	// The name for the Candidate's step.
+	//
+	// This member is required.
 	CandidateStepName *string
+
 	// Whether the Candidate is at the transform, training, or processing step.
+	//
+	// This member is required.
 	CandidateStepType CandidateStepType
+
 	// The ARN for the Candidate's step.
+	//
+	// This member is required.
 	CandidateStepArn *string
 }
 
 // Similar to Channel. A channel is a named input source that training algorithms
 // can consume. Refer to Channel for detailed descriptions.
 type AutoMLChannel struct {
+
 	// The name of the target variable in supervised learning, a.k.a. 'y'.
+	//
+	// This member is required.
 	TargetAttributeName *string
+
 	// The data source.
+	//
+	// This member is required.
 	DataSource *AutoMLDataSource
+
 	// You can use Gzip or None. The default value is None.
 	CompressionType CompressionType
 }
@@ -834,27 +928,39 @@ type AutoMLChannel struct {
 // A list of container definitions that describe the different containers that make
 // up one AutoML candidate. Refer to ContainerDefinition for more details.
 type AutoMLContainerDefinition struct {
+
 	// Environment variables to set in the container. Refer to ContainerDefinition for
 	// more details.
 	Environment map[string]*string
+
 	// The location of the model artifacts. Refer to ContainerDefinition for more
 	// details.
+	//
+	// This member is required.
 	ModelDataUrl *string
+
 	// The ECR path of the container. Refer to ContainerDefinition for more details.
+	//
+	// This member is required.
 	Image *string
 }
 
 // The data source for the AutoPilot job.
 type AutoMLDataSource struct {
+
 	// The Amazon S3 location of the input data. The input data must be in CSV format
 	// and contain at least 1000 rows.
+	//
+	// This member is required.
 	S3DataSource *AutoMLS3DataSource
 }
 
 // Artifacts that are generation during a job.
 type AutoMLJobArtifacts struct {
+
 	// The URL to the notebook location.
 	DataExplorationNotebookLocation *string
+
 	// The URL to the notebook location.
 	CandidateDefinitionNotebookLocation *string
 }
@@ -862,10 +968,13 @@ type AutoMLJobArtifacts struct {
 // How long a job is allowed to run, or how many candidates a job is allowed to
 // generate.
 type AutoMLJobCompletionCriteria struct {
+
 	// The maximum time, in seconds, a job is allowed to run.
 	MaxRuntimePerTrainingJobInSeconds *int32
+
 	// The maximum number of times a training job is allowed to run.
 	MaxCandidates *int32
+
 	// The maximum time, in seconds, an AutoML job is allowed to wait for a trial to
 	// complete. It must be equal to or greater than MaxRuntimePerTrainingJobInSeconds.
 	MaxAutoMLJobRuntimeInSeconds *int32
@@ -873,97 +982,151 @@ type AutoMLJobCompletionCriteria struct {
 
 // A collection of settings used for a job.
 type AutoMLJobConfig struct {
+
 	// How long a job is allowed to run, or how many candidates a job is allowed to
 	// generate.
 	CompletionCriteria *AutoMLJobCompletionCriteria
+
 	// Security configuration for traffic encryption or Amazon VPC settings.
 	SecurityConfig *AutoMLSecurityConfig
 }
 
 // Applies a metric to minimize or maximize for the job's objective.
 type AutoMLJobObjective struct {
+
 	// The name of the metric.
+	//
+	// This member is required.
 	MetricName AutoMLMetricEnum
 }
 
 // Provides a summary about a job.
 type AutoMLJobSummary struct {
+
 	// The ARN of the job.
+	//
+	// This member is required.
 	AutoMLJobArn *string
+
 	// The failure reason.
 	FailureReason *string
+
 	// The name of the object you are requesting.
+	//
+	// This member is required.
 	AutoMLJobName *string
+
 	// The end time.
 	EndTime *time.Time
+
 	// When the job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// When the job was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The job's secondary status.
+	//
+	// This member is required.
 	AutoMLJobSecondaryStatus AutoMLJobSecondaryStatus
+
 	// The job's status.
+	//
+	// This member is required.
 	AutoMLJobStatus AutoMLJobStatus
 }
 
 // The output data configuration.
 type AutoMLOutputDataConfig struct {
+
 	// The AWS KMS encryption key ID.
 	KmsKeyId *string
+
 	// The Amazon S3 output path. Must be 128 characters or less.
+	//
+	// This member is required.
 	S3OutputPath *string
 }
 
 // The Amazon S3 data source.
 type AutoMLS3DataSource struct {
+
 	// The data type.
+	//
+	// This member is required.
 	S3DataType AutoMLS3DataType
+
 	// The URL to the Amazon S3 data source.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Security options.
 type AutoMLSecurityConfig struct {
+
 	// VPC configuration.
 	VpcConfig *VpcConfig
+
 	// Whether to use traffic encryption between the container layers.
 	EnableInterContainerTrafficEncryption *bool
+
 	// The key used to encrypt stored data.
 	VolumeKmsKeyId *string
 }
 
 //
 type CaptureContentTypeHeader struct {
+
 	//
 	CsvContentTypes []*string
+
 	//
 	JsonContentTypes []*string
 }
 
 //
 type CaptureOption struct {
+
 	//
+	//
+	// This member is required.
 	CaptureMode CaptureMode
 }
 
 // A list of categorical hyperparameters to tune.
 type CategoricalParameterRange struct {
+
 	// A list of the categories for the hyperparameter.
+	//
+	// This member is required.
 	Values []*string
+
 	// The name of the categorical hyperparameter to tune.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Defines the possible values for a categorical hyperparameter.
 type CategoricalParameterRangeSpecification struct {
+
 	// The allowed categories for the hyperparameter.
+	//
+	// This member is required.
 	Values []*string
 }
 
 // A channel is a named input source that training algorithms can consume.
 type Channel struct {
+
 	// The MIME type of the data.
 	ContentType *string
+
 	// (Optional) The input mode to use for the data channel in a training job. If you
 	// don't set a value for InputMode, Amazon SageMaker uses the value set for
 	// TrainingInputMode. Use this parameter to override the TrainingInputMode setting
@@ -974,6 +1137,7 @@ type Channel struct {
 	// To stream data directly from Amazon S3 to the container, choose Pipe input mode.
 	// To use a model for incremental training, choose File input model.
 	InputMode TrainingInputMode
+
 	// A configuration for a shuffle option for input data in a channel. If you use
 	// S3Prefix for S3DataType, this shuffles the results of the S3 key prefix matches.
 	// If you use ManifestFile, the order of the S3 object references in the
@@ -987,6 +1151,7 @@ type Channel struct {
 	// that the content sent to a particular node on the first epoch might be sent to a
 	// different node on the second epoch.
 	ShuffleConfig *ShuffleConfig
+
 	// Specify RecordIO as the value when input data is in raw format but the training
 	// algorithm requires the RecordIO format. In this case, Amazon SageMaker wraps
 	// each individual S3 object in a RecordIO record. If the input data is already in
@@ -995,60 +1160,96 @@ type Channel struct {
 	// (https://mxnet.apache.org/api/architecture/note_data_loading#data-format). In
 	// File mode, leave this field unset or set it to None.
 	RecordWrapperType RecordWrapper
+
 	// The name of the channel.
+	//
+	// This member is required.
 	ChannelName *string
+
 	// If training data is compressed, the compression type. The default value is None.
 	// CompressionType is used only in Pipe input mode. In File mode, leave this field
 	// unset or set it to None.
 	CompressionType CompressionType
+
 	// The location of the channel data.
+	//
+	// This member is required.
 	DataSource *DataSource
 }
 
 // Defines a named input source, called a channel, to be used by an algorithm.
 type ChannelSpecification struct {
+
 	// The supported MIME types for the data.
+	//
+	// This member is required.
 	SupportedContentTypes []*string
+
 	// Indicates whether the channel is required by the algorithm.
 	IsRequired *bool
+
 	// The allowed compression types, if data compression is used.
 	SupportedCompressionTypes []CompressionType
+
 	// A brief description of the channel.
 	Description *string
+
 	// The allowed input mode, either FILE or PIPE. In FILE mode, Amazon SageMaker
 	// copies the data from the input source onto the local Amazon Elastic Block Store
 	// (Amazon EBS) volumes before starting your training algorithm. This is the most
 	// commonly used input mode. In PIPE mode, Amazon SageMaker streams input data from
 	// the source directly to your algorithm without using the EBS volume.
+	//
+	// This member is required.
 	SupportedInputModes []TrainingInputMode
+
 	// The name of the channel.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Contains information about the output location for managed spot training
 // checkpoint data.
 type CheckpointConfig struct {
+
 	// (Optional) The local directory where checkpoints are written. The default
 	// directory is /opt/ml/checkpoints/.
 	LocalPath *string
+
 	// Identifies the S3 path where you want Amazon SageMaker to store checkpoints. For
 	// example, s3://bucket-name/key-name-prefix.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Specifies summary information about a Git repository.
 type CodeRepositorySummary struct {
+
 	// The Amazon Resource Name (ARN) of the Git repository.
+	//
+	// This member is required.
 	CodeRepositoryArn *string
+
 	// The date and time that the Git repository was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The date and time that the Git repository was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// Configuration details for the Git repository, including the URL where it is
 	// located and the ARN of the AWS Secrets Manager secret that contains the
 	// credentials used to access the repository.
 	GitConfig *GitConfig
+
 	// The name of the Git repository.
+	//
+	// This member is required.
 	CodeRepositoryName *string
 }
 
@@ -1056,36 +1257,53 @@ type CodeRepositorySummary struct {
 // workforce is created using and corresponds to a single  Amazon Cognito user pool
 // (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
 type CognitoConfig struct {
+
 	// The client ID for your Amazon Cognito user pool.
+	//
+	// This member is required.
 	ClientId *string
+
 	// A  user pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
 	// is a user directory in Amazon Cognito. With a user pool, your users can sign in
 	// to your web or mobile app through Amazon Cognito. Your users can also sign in
 	// through social identity providers like Google, Facebook, Amazon, or Apple, and
 	// through SAML identity providers.
+	//
+	// This member is required.
 	UserPool *string
 }
 
 // Identifies a Amazon Cognito user group. A user group can be used in on or more
 // work teams.
 type CognitoMemberDefinition struct {
+
 	// An identifier for an application client. You must create the app client ID using
 	// Amazon Cognito.
+	//
+	// This member is required.
 	ClientId *string
+
 	// An identifier for a user pool. The user pool must be in the same region as the
 	// service that you are calling.
+	//
+	// This member is required.
 	UserPool *string
+
 	// An identifier for a user group.
+	//
+	// This member is required.
 	UserGroup *string
 }
 
 // Configuration information for tensor collections.
 type CollectionConfiguration struct {
+
 	// Parameter values for the tensor collection. The allowed parameters are "name",
 	// "include_regex", "reduction_config", "save_config", "tensor_names", and
 	// "save_histogram".
 	CollectionParameters map[string]*string
+
 	// The name of the tensor collection. The name must be unique relative to other
 	// rule configuration names.
 	CollectionName *string
@@ -1093,45 +1311,68 @@ type CollectionConfiguration struct {
 
 // A summary of a model compilation job.
 type CompilationJobSummary struct {
+
 	// The type of OS that the model will run on after the compilation job has
 	// completed.
 	CompilationTargetPlatformOs TargetPlatformOs
+
 	// The type of device that the model will run on after the compilation job has
 	// completed.
 	CompilationTargetDevice TargetDevice
+
 	// The type of architecture that the model will run on after the compilation job
 	// has completed.
 	CompilationTargetPlatformArch TargetPlatformArch
+
 	// The time when the model compilation job completed.
 	CompilationEndTime *time.Time
+
 	// The type of accelerator that the model will run on after the compilation job has
 	// completed.
 	CompilationTargetPlatformAccelerator TargetPlatformAccelerator
+
 	// The time when the model compilation job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The time when the model compilation job was last modified.
 	LastModifiedTime *time.Time
+
 	// The time when the model compilation job started.
 	CompilationStartTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the model compilation job.
+	//
+	// This member is required.
 	CompilationJobArn *string
+
 	// The name of the model compilation job that you want a summary for.
+	//
+	// This member is required.
 	CompilationJobName *string
+
 	// The status of the model compilation job.
+	//
+	// This member is required.
 	CompilationJobStatus CompilationJobStatus
 }
 
 // Describes the container, as part of model definition.
 type ContainerDefinition struct {
+
 	// The environment variables to set in the Docker container. Each key and value in
 	// the Environment string to string map can have length of up to 1024. We support
 	// up to 16 entries in the map.
 	Environment map[string]*string
+
 	// The name or Amazon Resource Name (ARN) of the model package to use to create the
 	// model.
 	ModelPackageName *string
+
 	// Whether the container hosts a single model or multiple models.
 	Mode ContainerMode
+
 	// This parameter is ignored for models that contain only a PrimaryContainer. When
 	// a ContainerDefinition is part of an inference pipeline, the value of the
 	// parameter uniquely identifies the container for the purposes of logging and
@@ -1145,6 +1386,7 @@ type ContainerDefinition struct {
 	// inference pipeline, you must specify a value for the ContainerHostName parameter
 	// of every ContainerDefinition in that pipeline.
 	ContainerHostname *string
+
 	// The Amazon EC2 Container Registry (Amazon ECR) path where inference code is
 	// stored. If you are using your own custom algorithm instead of an algorithm
 	// provided by Amazon SageMaker, the inference code must meet Amazon SageMaker
@@ -1153,6 +1395,7 @@ type ContainerDefinition struct {
 	// Your Own Algorithms with Amazon SageMaker
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
 	Image *string
+
 	// The S3 path where the model artifacts, which result from model training, are
 	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
 	// suffix). The S3 path is required for Amazon SageMaker built-in algorithms, but
@@ -1173,9 +1416,13 @@ type ContainerDefinition struct {
 
 // A list of continuous hyperparameters to tune.
 type ContinuousParameterRange struct {
+
 	// The maximum value for the hyperparameter. The tuning job uses floating-point
 	// values between MinValue value and this value for tuning.
+	//
+	// This member is required.
 	MaxValue *string
+
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
 	// Scaling
@@ -1190,48 +1437,87 @@ type ContinuousParameterRange struct {
 	// logarithmic scaling works only for ranges that are entirely within the range
 	// 0<=x<1.0.
 	ScalingType HyperParameterScalingType
+
 	// The name of the continuous hyperparameter to tune.
+	//
+	// This member is required.
 	Name *string
+
 	// The minimum value for the hyperparameter. The tuning job uses floating-point
 	// values between this value and MaxValuefor tuning.
+	//
+	// This member is required.
 	MinValue *string
 }
 
 // Defines the possible values for a continuous hyperparameter.
 type ContinuousParameterRangeSpecification struct {
+
 	// The minimum floating-point value allowed.
+	//
+	// This member is required.
 	MinValue *string
+
 	// The maximum floating-point value allowed.
+	//
+	// This member is required.
 	MaxValue *string
 }
 
 //
 type DataCaptureConfig struct {
+
 	//
 	EnableCapture *bool
+
 	//
 	KmsKeyId *string
+
 	//
+	//
+	// This member is required.
 	DestinationS3Uri *string
+
 	//
+	//
+	// This member is required.
 	InitialSamplingPercentage *int32
+
 	//
+	//
+	// This member is required.
 	CaptureOptions []*CaptureOption
+
 	//
 	CaptureContentTypeHeader *CaptureContentTypeHeader
 }
 
 //
 type DataCaptureConfigSummary struct {
+
 	//
+	//
+	// This member is required.
 	DestinationS3Uri *string
+
 	//
+	//
+	// This member is required.
 	CaptureStatus CaptureStatus
+
 	//
+	//
+	// This member is required.
 	KmsKeyId *string
+
 	//
+	//
+	// This member is required.
 	EnableCapture *bool
+
 	//
+	//
+	// This member is required.
 	CurrentSamplingPercentage *int32
 }
 
@@ -1244,6 +1530,7 @@ type DataCaptureConfigSummary struct {
 // Prediction Results with their Corresponding Input Records
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
 type DataProcessing struct {
+
 	// A JSONPath
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
 	// expression used to select a portion of the input data to pass to the algorithm.
@@ -1251,6 +1538,7 @@ type DataProcessing struct {
 	// input. If you want Amazon SageMaker to pass the entire input dataset to the
 	// algorithm, accept the default value $. Examples: "$", "$[1:]", "$.features"
 	InputFilter *string
+
 	// Specifies the source of the data to join with the transformed data. The valid
 	// values are None and Input. The default value is None, which specifies not to
 	// join the input with the transformed data. If you want the batch transform job to
@@ -1266,6 +1554,7 @@ type DataProcessing struct {
 	// it in the output file. The joined data has the joined input data followed by the
 	// transformed data and the output is a CSV file. </p>
 	JoinSource JoinSource
+
 	// A JSONPath
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
 	// expression used to select a portion of the joined dataset to save in the output
@@ -1278,8 +1567,10 @@ type DataProcessing struct {
 
 // Describes the location of the channel data.
 type DataSource struct {
+
 	// The S3 location of the data source that is associated with a channel.
 	S3DataSource *S3DataSource
+
 	// The file system that is associated with a channel.
 	FileSystemDataSource *FileSystemDataSource
 }
@@ -1287,31 +1578,48 @@ type DataSource struct {
 // Configuration information for the debug hook parameters, collection
 // configuration, and storage paths.
 type DebugHookConfig struct {
+
 	// Configuration information for tensor collections.
 	CollectionConfigurations []*CollectionConfiguration
+
 	// Path to local storage location for tensors. Defaults to /opt/ml/output/tensors/.
 	LocalPath *string
+
 	// Configuration information for the debug hook parameters.
 	HookParameters map[string]*string
+
 	// Path to Amazon S3 storage location for tensors.
+	//
+	// This member is required.
 	S3OutputPath *string
 }
 
 // Configuration information for debugging rules.
 type DebugRuleConfiguration struct {
+
 	// Path to Amazon S3 storage location for rules.
 	S3OutputPath *string
+
 	// The instance type to deploy for a training job.
 	InstanceType ProcessingInstanceType
+
 	// The Amazon Elastic Container (ECR) Image for the managed rule evaluation.
+	//
+	// This member is required.
 	RuleEvaluatorImage *string
+
 	// The name of the rule configuration. It must be unique relative to other rule
 	// configuration names.
+	//
+	// This member is required.
 	RuleConfigurationName *string
+
 	// Runtime configuration for rule container.
 	RuleParameters map[string]*string
+
 	// The size, in GB, of the ML storage volume attached to the processing instance.
 	VolumeSizeInGB *int32
+
 	// Path to local storage location for output of rules. Defaults to
 	// /opt/ml/processing/output/rule/.
 	LocalPath *string
@@ -1319,14 +1627,19 @@ type DebugRuleConfiguration struct {
 
 // Information about the status of the rule evaluation.
 type DebugRuleEvaluationStatus struct {
+
 	// Timestamp when the rule evaluation status was last modified.
 	LastModifiedTime *time.Time
+
 	// Details from the rule evaluation.
 	StatusDetails *string
+
 	// The Amazon Resource Name (ARN) of the rule evaluation job.
 	RuleEvaluationJobArn *string
+
 	// Status of the rule evaluation.
 	RuleEvaluationStatus RuleEvaluationStatus
+
 	// The name of the rule configuration
 	RuleConfigurationName *string
 }
@@ -1341,72 +1654,108 @@ type DebugRuleEvaluationStatus struct {
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
 // in the Amazon ECR User Guide.
 type DeployedImage struct {
+
 	// The date and time when the image path for the model resolved to the
 	// ResolvedImage
 	ResolutionTime *time.Time
+
 	// The specific digest path of the image hosted in this ProductionVariant.
 	ResolvedImage *string
+
 	// The image path you specified when you created the model.
 	SpecifiedImage *string
 }
 
 // Specifies weight and capacity values for a production variant.
 type DesiredWeightAndCapacity struct {
+
 	// The name of the variant to update.
+	//
+	// This member is required.
 	VariantName *string
+
 	// The variant's capacity.
 	DesiredInstanceCount *int32
+
 	// The variant's weight.
 	DesiredWeight *float32
 }
 
 // The domain's details.
 type DomainDetails struct {
+
 	// The domain name.
 	DomainName *string
+
 	// The domain ID.
 	DomainId *string
+
 	// The status.
 	Status DomainStatus
+
 	// The creation time.
 	CreationTime *time.Time
+
 	// The last modified time.
 	LastModifiedTime *time.Time
+
 	// The domain's URL.
 	Url *string
+
 	// The domain's Amazon Resource Name (ARN).
 	DomainArn *string
 }
 
 // Provides summary information for an endpoint configuration.
 type EndpointConfigSummary struct {
+
 	// The name of the endpoint configuration.
+	//
+	// This member is required.
 	EndpointConfigName *string
+
 	// A timestamp that shows when the endpoint configuration was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the endpoint configuration.
+	//
+	// This member is required.
 	EndpointConfigArn *string
 }
 
 // Input object for the endpoint
 type EndpointInput struct {
+
 	// An endpoint in customer's account which has enabled DataCaptureConfig enabled.
+	//
+	// This member is required.
 	EndpointName *string
+
 	// Whether the Pipe or File is used as the input mode for transfering data for the
 	// monitoring job. Pipe mode is recommended for large datasets. File mode is useful
 	// for small files that fit in memory. Defaults to File.
 	S3InputMode ProcessingS3InputMode
+
 	// Whether input data distributed in Amazon S3 is fully replicated or sharded by an
 	// S3 key. Defauts to FullyReplicated
 	S3DataDistributionType ProcessingS3DataDistributionType
+
 	// Path to the filesystem where the endpoint data is available to the container.
+	//
+	// This member is required.
 	LocalPath *string
 }
 
 // Provides summary information for an endpoint.
 type EndpointSummary struct {
+
 	// The name of the endpoint.
+	//
+	// This member is required.
 	EndpointName *string
+
 	// The status of the endpoint.
 	//
 	//     * OutOfService: Endpoint is not available to
@@ -1445,39 +1794,60 @@ type EndpointSummary struct {
 	//
 	// To get a list of endpoints with a specified
 	// status, use the ListEndpointsInput$StatusEquals () filter.
+	//
+	// This member is required.
 	EndpointStatus EndpointStatus
+
 	// The Amazon Resource Name (ARN) of the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
+
 	// A timestamp that shows when the endpoint was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// A timestamp that shows when the endpoint was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
 }
 
 // The properties of an experiment as returned by the Search () API.
 type Experiment struct {
+
 	// The list of tags that are associated with the experiment. You can use Search ()
 	// API to search on the tags.
 	Tags []*Tag
+
 	// The source of the experiment.
 	Source *ExperimentSource
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	LastModifiedBy *UserContext
+
 	// The description of the experiment.
 	Description *string
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	CreatedBy *UserContext
+
 	// The name of the experiment.
 	ExperimentName *string
+
 	// The Amazon Resource Name (ARN) of the experiment.
 	ExperimentArn *string
+
 	// The name of the experiment as displayed. If DisplayName isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
+
 	// When the experiment was last modified.
 	LastModifiedTime *time.Time
+
 	// When the experiment was created.
 	CreationTime *time.Time
 }
@@ -1492,11 +1862,14 @@ type Experiment struct {
 //
 //     * CreateTransformJob ()
 type ExperimentConfig struct {
+
 	// The name of an existing trial to associate the trial component with. If not
 	// specified, a new trial is created.
 	TrialName *string
+
 	// The name of an existing experiment to associate the trial component with.
 	ExperimentName *string
+
 	// The display name for the trial component. If this key isn't specified, the
 	// display name is the trial component name.
 	TrialComponentDisplayName *string
@@ -1504,8 +1877,12 @@ type ExperimentConfig struct {
 
 // The source of the experiment.
 type ExperimentSource struct {
+
 	// The Amazon Resource Name (ARN) of the source.
+	//
+	// This member is required.
 	SourceArn *string
+
 	// The source type.
 	SourceType *string
 }
@@ -1513,16 +1890,22 @@ type ExperimentSource struct {
 // A summary of the properties of an experiment. To get the complete set of
 // properties, call the DescribeExperiment () API and provide the ExperimentName.
 type ExperimentSummary struct {
+
 	// The source of the experiment.
 	ExperimentSource *ExperimentSource
+
 	// The name of the experiment.
 	ExperimentName *string
+
 	// The Amazon Resource Name (ARN) of the experiment.
 	ExperimentArn *string
+
 	// When the experiment was created.
 	CreationTime *time.Time
+
 	// When the experiment was last modified.
 	LastModifiedTime *time.Time
+
 	// The name of the experiment as displayed. If DisplayName isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
@@ -1530,14 +1913,26 @@ type ExperimentSummary struct {
 
 // Specifies a file system data source for a channel.
 type FileSystemDataSource struct {
+
 	// The full path to the directory to associate with the channel.
+	//
+	// This member is required.
 	DirectoryPath *string
+
 	// The access mode of the mount of the directory associated with the channel. A
 	// directory can be mounted either in ro (read-only) or rw (read-write) mode.
+	//
+	// This member is required.
 	FileSystemAccessMode FileSystemAccessMode
+
 	// The file system type.
+	//
+	// This member is required.
 	FileSystemType FileSystemType
+
 	// The file system id.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
@@ -1565,14 +1960,19 @@ type FileSystemDataSource struct {
 // }</code> </p> </dd> <dt>Tags</dt> <dd> <p>To define a tag filter, enter a value
 // with the form <code>Tags.<key></code>.</p> </dd> </dl>
 type Filter struct {
+
 	// A value used with Name and Operator to determine which resources satisfy the
 	// filter's condition. For numerical properties, Value must be an integer or
 	// floating-point decimal. For timestamp properties, Value must be an ISO 8601
 	// date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS.
 	Value *string
+
 	// A resource property name. For example, TrainingJobName. For valid property
 	// names, see SearchRecord (). You must specify a valid property for the resource.
+	//
+	// This member is required.
 	Name *string
+
 	// A Boolean binary operator that is used to evaluate the filter. The operator
 	// field contains one of the following values: Equals The value of Name equals
 	// Value. NotEquals The value of Name doesn't equal Value. Exists The Name property
@@ -1623,11 +2023,18 @@ type Filter struct {
 
 // The candidate result from a job.
 type FinalAutoMLJobObjectiveMetric struct {
+
 	// The value of the metric.
+	//
+	// This member is required.
 	Value *float32
+
 	// The metric type used.
 	Type AutoMLJobObjectiveType
+
 	// The name of the metric.
+	//
+	// This member is required.
 	MetricName AutoMLMetricEnum
 }
 
@@ -1635,55 +2042,85 @@ type FinalAutoMLJobObjectiveMetric struct {
 // launched by a hyperparameter tuning job. You define the objective metric in the
 // HyperParameterTuningJobObjective parameter of HyperParameterTuningJobConfig ().
 type FinalHyperParameterTuningJobObjectiveMetric struct {
+
 	// Whether to minimize or maximize the objective metric. Valid values are Minimize
 	// and Maximize.
 	Type HyperParameterTuningJobObjectiveType
+
 	// The value of the objective metric.
+	//
+	// This member is required.
 	Value *float32
+
 	// The name of the objective metric.
+	//
+	// This member is required.
 	MetricName *string
 }
 
 // Contains information about where human output will be stored.
 type FlowDefinitionOutputConfig struct {
+
 	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
 	KmsKeyId *string
+
 	// The Amazon S3 path where the object containing human output will be made
 	// available.
+	//
+	// This member is required.
 	S3OutputPath *string
 }
 
 // Contains summary information about the flow definition.
 type FlowDefinitionSummary struct {
+
 	// The timestamp when SageMaker created the flow definition.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The reason why the flow definition creation failed. A failure reason is returned
 	// only when the flow definition status is Failed.
 	FailureReason *string
+
 	// The status of the flow definition. Valid values:
+	//
+	// This member is required.
 	FlowDefinitionStatus FlowDefinitionStatus
+
 	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// This member is required.
 	FlowDefinitionArn *string
+
 	// The name of the flow definition.
+	//
+	// This member is required.
 	FlowDefinitionName *string
 }
 
 // Specifies configuration details for a Git repository in your AWS account.
 type GitConfig struct {
+
 	// The default branch for the Git repository.
 	Branch *string
+
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
 	// the credentials used to access the git repository. The secret must have a
 	// staging label of AWSCURRENT and must be in the following format: {"username":
 	// UserName, "password": Password}
 	SecretArn *string
+
 	// The URL where the Git repository is located.
+	//
+	// This member is required.
 	RepositoryUrl *string
 }
 
 // Specifies configuration details for a Git repository when the repository is
 // updated.
 type GitConfigForUpdate struct {
+
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
 	// the credentials used to access the git repository. The secret must have a
 	// staging label of AWSCURRENT and must be in the following format: {"username":
@@ -1694,6 +2131,7 @@ type GitConfigForUpdate struct {
 // Defines under what conditions SageMaker creates a human loop. Used within . See
 // for the required format of activation conditions.
 type HumanLoopActivationConditionsConfig struct {
+
 	// JSON expressing use-case specific conditions declaratively. If any condition is
 	// matched, atomic tasks are created against the configured work team. The set of
 	// conditions is different for Rekognition and Textract. For more information about
@@ -1702,6 +2140,8 @@ type HumanLoopActivationConditionsConfig struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-human-fallback-conditions-json-schema.html)
 	// in the Amazon SageMaker Developer Guide.
 	// This value conforms to the media type: application/json
+	//
+	// This member is required.
 	HumanLoopActivationConditions *string
 }
 
@@ -1709,13 +2149,17 @@ type HumanLoopActivationConditionsConfig struct {
 // human loop. If HumanLoopActivationConfig is not given, then all requests go to
 // humans.
 type HumanLoopActivationConfig struct {
+
 	// Container structure for defining under what conditions SageMaker creates a human
 	// loop.
+	//
+	// This member is required.
 	HumanLoopActivationConditionsConfig *HumanLoopActivationConditionsConfig
 }
 
 // Describes the work to be performed by human workers.
 type HumanLoopConfig struct {
+
 	// Defines the amount of money paid to an Amazon Mechanical Turk worker for each
 	// task performed. Use one of the following prices for bounding box tasks. Prices
 	// are in US dollars and should be based on the complexity of the task; the longer
@@ -1938,55 +2382,94 @@ type HumanLoopConfig struct {
 	//
 	//     * 0.012
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice
+
 	// The amount of time that a worker has to complete a task.
 	TaskTimeLimitInSeconds *int32
+
 	// The number of distinct workers who will perform the same task on each object.
 	// For example, if TaskCount is set to 3 for an image classification labeling job,
 	// three workers will classify each input image. Increasing TaskCount can improve
 	// label accuracy.
+	//
+	// This member is required.
 	TaskCount *int32
+
 	// Keywords used to describe the task so that workers can discover the task.
 	TaskKeywords []*string
+
 	// The length of time that a task remains available for labeling by human workers.
 	TaskAvailabilityLifetimeInSeconds *int32
+
 	// A title for the human worker task.
+	//
+	// This member is required.
 	TaskTitle *string
+
 	// The Amazon Resource Name (ARN) of the human task user interface.
+	//
+	// This member is required.
 	HumanTaskUiArn *string
+
 	// A description for the human worker task.
+	//
+	// This member is required.
 	TaskDescription *string
+
 	// Amazon Resource Name (ARN) of a team of workers.
+	//
+	// This member is required.
 	WorkteamArn *string
 }
 
 // Container for configuring the source of human task requests.
 type HumanLoopRequestSource struct {
+
 	// Specifies whether Amazon Rekognition or Amazon Textract are used as the
 	// integration source. The default field settings and JSON parsing rules are
 	// different based on the integration source. Valid values:
+	//
+	// This member is required.
 	AwsManagedHumanLoopRequestSource AwsManagedHumanLoopRequestSource
 }
 
 // Information required for human workers to complete a labeling task.
 type HumanTaskConfig struct {
+
 	// The Amazon Resource Name (ARN) of the work team assigned to complete the tasks.
+	//
+	// This member is required.
 	WorkteamArn *string
+
 	// Defines the maximum number of data objects that can be labeled by human workers
 	// at the same time. Also referred to as batch size. Each object may have more than
 	// one worker at one time. The default value is 1000 objects.
 	MaxConcurrentTaskCount *int32
+
 	// Configures how labels are consolidated across human workers.
+	//
+	// This member is required.
 	AnnotationConsolidationConfig *AnnotationConsolidationConfig
+
 	// Information about the user interface that workers use to complete the labeling
 	// task.
+	//
+	// This member is required.
 	UiConfig *UiConfig
+
 	// Keywords used to describe the task so that workers on Amazon Mechanical Turk can
 	// discover the task.
 	TaskKeywords []*string
+
 	// The amount of time that a worker has to complete a task.
+	//
+	// This member is required.
 	TaskTimeLimitInSeconds *int32
+
 	// A title for the task for your human workers.
+	//
+	// This member is required.
 	TaskTitle *string
+
 	// The Amazon Resource Name (ARN) of a Lambda function that is run before a data
 	// object is sent to a human worker. Use this function to provide input to a custom
 	// labeling job. For built-in task types
@@ -2584,34 +3067,54 @@ type HumanTaskConfig struct {
 	// </p> </li> <li> <p>
 	// <code>arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation</code>
 	// </p> </li> </ul>
+	//
+	// This member is required.
 	PreHumanTaskLambdaArn *string
+
 	// The length of time that a task remains available for labeling by human workers.
 	// If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours
 	// (43200). The default value is 864000 seconds (10 days). For private and vendor
 	// workforces, the maximum is as listed.
 	TaskAvailabilityLifetimeInSeconds *int32
+
 	// The price that you pay for each task performed by an Amazon Mechanical Turk
 	// worker.
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice
+
 	// The number of human workers that will label an object.
+	//
+	// This member is required.
 	NumberOfHumanWorkersPerDataObject *int32
+
 	// A description of the task for your human workers.
+	//
+	// This member is required.
 	TaskDescription *string
 }
 
 // Container for human task user interface information.
 type HumanTaskUiSummary struct {
+
 	// The Amazon Resource Name (ARN) of the human task user interface.
+	//
+	// This member is required.
 	HumanTaskUiArn *string
+
 	// The name of the human task user interface.
+	//
+	// This member is required.
 	HumanTaskUiName *string
+
 	// A timestamp when SageMaker created the human task user interface.
+	//
+	// This member is required.
 	CreationTime *time.Time
 }
 
 // Specifies which training algorithm to use for training jobs that a
 // hyperparameter tuning job launches and the metrics to monitor.
 type HyperParameterAlgorithmSpecification struct {
+
 	// The input mode that the algorithm supports: File or Pipe. In File input mode,
 	// Amazon SageMaker downloads the training data from Amazon S3 to the storage
 	// volume that is attached to the training instance and mounts the directory to the
@@ -2622,14 +3125,19 @@ type HyperParameterAlgorithmSpecification struct {
 	// Amazon S3, the model artifacts, and intermediate information. For more
 	// information about input modes, see Algorithms
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
+	//
+	// This member is required.
 	TrainingInputMode TrainingInputMode
+
 	// An array of MetricDefinition () objects that specify the metrics that the
 	// algorithm emits.
 	MetricDefinitions []*MetricDefinition
+
 	// The name of the resource algorithm to use for the hyperparameter tuning job. If
 	// you specify a value for this parameter, do not specify a value for
 	// TrainingImage.
 	AlgorithmName *string
+
 	// The registry path of the Docker image that contains the training algorithm. For
 	// information about Docker registry paths for built-in algorithms, see Algorithms
 	// Provided by Amazon SageMaker: Common Parameters
@@ -2643,32 +3151,45 @@ type HyperParameterAlgorithmSpecification struct {
 
 // Defines a hyperparameter to be used by an algorithm.
 type HyperParameterSpecification struct {
+
 	// The type of this hyperparameter. The valid types are Integer, Continuous,
 	// Categorical, and FreeText.
+	//
+	// This member is required.
 	Type ParameterType
+
 	// A brief description of the hyperparameter.
 	Description *string
+
 	// The allowed range for this hyperparameter.
 	Range *ParameterRange
+
 	// The name of this hyperparameter. The name must be unique.
+	//
+	// This member is required.
 	Name *string
+
 	// The default value for this hyperparameter. If a default value is specified, a
 	// hyperparameter cannot be required.
 	DefaultValue *string
+
 	// Indicates whether this hyperparameter is tunable in a hyperparameter tuning job.
 	IsTunable *bool
+
 	// Indicates whether this hyperparameter is required.
 	IsRequired *bool
 }
 
 // Defines the training jobs launched by a hyperparameter tuning job.
 type HyperParameterTrainingJobDefinition struct {
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithm in distributed training.
 	EnableInterContainerTrafficEncryption *bool
+
 	// Isolates the training container. No inbound or outbound network calls can be
 	// made, except for calls between peers within a training cluster for distributed
 	// training. If network isolation is used for training jobs that are configured to
@@ -2676,13 +3197,18 @@ type HyperParameterTrainingJobDefinition struct {
 	// artifacts through the specified VPC, but the training container does not have
 	// network access.
 	EnableNetworkIsolation *bool
+
 	// Specifies a limit to how long a model hyperparameter training job can run. It
 	// also specifies how long you are willing to wait for a managed spot training job
 	// to complete. When the job reaches the a limit, Amazon SageMaker ends the
 	// training job. Use this API to cap model training costs.
+	//
+	// This member is required.
 	StoppingCondition *StoppingCondition
+
 	// Specifies the values of hyperparameters that do not change for the tuning job.
 	StaticHyperParameters map[string]*string
+
 	// Specifies ranges of integer, continuous, and categorical hyperparameters that a
 	// hyperparameter tuning job searches. The hyperparameter tuning job launches
 	// training jobs with hyperparameter values within these ranges to find the
@@ -2692,6 +3218,7 @@ type HyperParameterTrainingJobDefinition struct {
 	// search over. Every possible value of a categorical parameter range counts
 	// against this limit.
 	HyperParameterRanges *ParameterRanges
+
 	// The resources, including the compute instances and storage volumes, to use for
 	// the training jobs that the tuning job launches. Storage volumes store model
 	// artifacts and incremental states. Training algorithms might also use storage
@@ -2699,35 +3226,52 @@ type HyperParameterTrainingJobDefinition struct {
 	// volume to store the training data, choose File as the TrainingInputMode in the
 	// algorithm specification. For distributed training algorithms, specify an
 	// instance count greater than 1.
+	//
+	// This member is required.
 	ResourceConfig *ResourceConfig
+
 	// Defines the objective metric for a hyperparameter tuning job. Hyperparameter
 	// tuning uses the value of this metric to evaluate the training jobs it launches,
 	// and returns the training job that results in either the highest or lowest value
 	// for this metric, depending on the value you specify for the Type parameter.
 	TuningObjective *HyperParameterTuningJobObjective
+
 	// The HyperParameterAlgorithmSpecification () object that specifies the resource
 	// algorithm to use for the training jobs that the tuning job launches.
+	//
+	// This member is required.
 	AlgorithmSpecification *HyperParameterAlgorithmSpecification
+
 	// The job definition name.
 	DefinitionName *string
+
 	// Contains information about the output location for managed spot training
 	// checkpoint data.
 	CheckpointConfig *CheckpointConfig
+
 	// The VpcConfig () object that specifies the VPC that you want the training jobs
 	// that this hyperparameter tuning job launches to connect to. Control access to
 	// and from your training container by configuring the VPC. For more information,
 	// see Protect Training Jobs by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig
+
 	// Specifies the path to the Amazon S3 bucket where you store model artifacts from
 	// the training jobs that the tuning job launches.
+	//
+	// This member is required.
 	OutputDataConfig *OutputDataConfig
+
 	// An array of Channel () objects that specify the input for the training jobs that
 	// the tuning job launches.
 	InputDataConfig []*Channel
+
 	// The Amazon Resource Name (ARN) of the IAM role associated with the training jobs
 	// that the tuning job launches.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// A Boolean indicating whether managed spot training is enabled (True) or not
 	// (False).
 	EnableManagedSpotTraining *bool
@@ -2735,28 +3279,46 @@ type HyperParameterTrainingJobDefinition struct {
 
 // Specifies summary information about a training job.
 type HyperParameterTrainingJobSummary struct {
+
 	// The date and time that the training job started.
 	TrainingStartTime *time.Time
+
 	// The date and time that the training job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// Specifies the time when the training job ends on training instances. You are
 	// billed for the time interval between the value of TrainingStartTime and this
 	// time. For successful jobs and stopped jobs, this is the time after model
 	// artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker
 	// detects a job failure.
 	TrainingEndTime *time.Time
+
 	// The reason that the training job failed.
 	FailureReason *string
+
 	// The training job definition name.
 	TrainingJobDefinitionName *string
+
 	// The HyperParameter tuning job that launched the training job.
 	TuningJobName *string
+
 	// The status of the training job.
+	//
+	// This member is required.
 	TrainingJobStatus TrainingJobStatus
+
 	// A list of the hyperparameters for which you specified ranges to search.
+	//
+	// This member is required.
 	TunedHyperParameters map[string]*string
+
 	// The name of the training job.
+	//
+	// This member is required.
 	TrainingJobName *string
+
 	// The status of the objective metric for the training job:
 	//
 	//     * Succeeded: The
@@ -2771,29 +3333,42 @@ type HyperParameterTrainingJobSummary struct {
 	// evaluated, and was not used in the hyperparameter tuning process. This typically
 	// occurs when the training job failed or did not emit an objective metric.
 	ObjectiveStatus ObjectiveStatus
+
 	// The FinalHyperParameterTuningJobObjectiveMetric () object that specifies the
 	// value of the objective metric of the tuning job that launched this training job.
 	FinalHyperParameterTuningJobObjectiveMetric *FinalHyperParameterTuningJobObjectiveMetric
+
 	// The Amazon Resource Name (ARN) of the training job.
+	//
+	// This member is required.
 	TrainingJobArn *string
 }
 
 // Configures a hyperparameter tuning job.
 type HyperParameterTuningJobConfig struct {
+
 	// The HyperParameterTuningJobObjective () object that specifies the objective
 	// metric for this tuning job.
 	HyperParameterTuningJobObjective *HyperParameterTuningJobObjective
+
 	// The tuning job's completion criteria.
 	TuningJobCompletionCriteria *TuningJobCompletionCriteria
+
 	// The ResourceLimits () object that specifies the maximum number of training jobs
 	// and parallel training jobs for this tuning job.
+	//
+	// This member is required.
 	ResourceLimits *ResourceLimits
+
 	// Specifies how hyperparameter tuning chooses the combinations of hyperparameter
 	// values to use for the training job it launches. To use the Bayesian search
 	// strategy, set this to Bayesian. To randomly search, set it to Random. For
 	// information about search strategies, see How Hyperparameter Tuning Works
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+	//
+	// This member is required.
 	Strategy HyperParameterTuningJobStrategyType
+
 	// Specifies whether to use early stopping for training jobs launched by the
 	// hyperparameter tuning job. This can be one of the following values (the default
 	// value is OFF): OFF Training jobs launched by the hyperparameter tuning job do
@@ -2803,6 +3378,7 @@ type HyperParameterTuningJobConfig struct {
 	// Early
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
 	TrainingJobEarlyStoppingType TrainingJobEarlyStoppingType
+
 	// The ParameterRanges () object that specifies the ranges of hyperparameters that
 	// this tuning job searches.
 	ParameterRanges *ParameterRanges
@@ -2813,38 +3389,68 @@ type HyperParameterTuningJobConfig struct {
 // and returns the training job that results in either the highest or lowest value
 // for this metric, depending on the value you specify for the Type parameter.
 type HyperParameterTuningJobObjective struct {
+
 	// The name of the metric to use for the objective metric.
+	//
+	// This member is required.
 	MetricName *string
+
 	// Whether to minimize or maximize the objective metric.
+	//
+	// This member is required.
 	Type HyperParameterTuningJobObjectiveType
 }
 
 // Provides summary information about a hyperparameter tuning job.
 type HyperParameterTuningJobSummary struct {
+
 	// The ResourceLimits () object that specifies the maximum number of training jobs
 	// and parallel training jobs allowed for this tuning job.
 	ResourceLimits *ResourceLimits
+
 	// The date and time that the tuning job was modified.
 	LastModifiedTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the tuning job.
+	//
+	// This member is required.
 	HyperParameterTuningJobArn *string
+
 	// Specifies the search strategy hyperparameter tuning uses to choose which
 	// hyperparameters to use for each iteration. Currently, the only valid value is
 	// Bayesian.
+	//
+	// This member is required.
 	Strategy HyperParameterTuningJobStrategyType
+
 	// The date and time that the tuning job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The status of the tuning job.
+	//
+	// This member is required.
 	HyperParameterTuningJobStatus HyperParameterTuningJobStatus
+
 	// The ObjectiveStatusCounters () object that specifies the numbers of training
 	// jobs, categorized by objective metric status, that this tuning job launched.
+	//
+	// This member is required.
 	ObjectiveStatusCounters *ObjectiveStatusCounters
+
 	// The TrainingJobStatusCounters () object that specifies the numbers of training
 	// jobs, categorized by status, that this tuning job launched.
+	//
+	// This member is required.
 	TrainingJobStatusCounters *TrainingJobStatusCounters
+
 	// The date and time that the tuning job ended.
 	HyperParameterTuningEndTime *time.Time
+
 	// The name of the tuning job.
+	//
+	// This member is required.
 	HyperParameterTuningJobName *string
 }
 
@@ -2860,6 +3466,7 @@ type HyperParameterTuningJobSummary struct {
 // hyperparameter tuning jobs count against the limit of training jobs for the
 // tuning job.
 type HyperParameterTuningJobWarmStartConfig struct {
+
 	// An array of hyperparameter tuning jobs that are used as the starting point for
 	// the new hyperparameter tuning job. For more information about warm starting a
 	// hyperparameter tuning job, see Using a Previous Hyperparameter Tuning Job as a
@@ -2867,7 +3474,10 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html).
 	// Hyperparameter tuning jobs created before October 1, 2018 cannot be used as
 	// parent jobs for warm start tuning jobs.
+	//
+	// This member is required.
 	ParentHyperParameterTuningJobs []*ParentHyperParameterTuningJob
+
 	// Specifies one of the following: IDENTICAL_DATA_AND_ALGORITHM The new
 	// hyperparameter tuning job uses the same input data and training image as the
 	// parent tuning jobs. You can change the hyperparameter ranges to search and the
@@ -2887,22 +3497,39 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	// static, and from static to tunable, but the total number of static plus tunable
 	// hyperparameters must remain the same as it is in all parent jobs. The objective
 	// metric for the new tuning job must be the same as for all parent jobs.
+	//
+	// This member is required.
 	WarmStartType HyperParameterTuningJobWarmStartType
 }
 
 // Defines how to perform inference generation after a training job is run.
 type InferenceSpecification struct {
+
 	// A list of the instance types that are used to generate inferences in real-time.
+	//
+	// This member is required.
 	SupportedRealtimeInferenceInstanceTypes []ProductionVariantInstanceType
+
 	// The supported MIME types for the input data.
+	//
+	// This member is required.
 	SupportedContentTypes []*string
+
 	// A list of the instance types on which a transformation job can be run or on
 	// which an endpoint can be deployed.
+	//
+	// This member is required.
 	SupportedTransformInstanceTypes []TransformInstanceType
+
 	// The supported MIME types for the output data.
+	//
+	// This member is required.
 	SupportedResponseMIMETypes []*string
+
 	// The Amazon ECR registry path of the Docker image that contains the inference
 	// code.
+	//
+	// This member is required.
 	Containers []*ModelPackageContainerDefinition
 }
 
@@ -2910,9 +3537,13 @@ type InferenceSpecification struct {
 // shape of the expected data inputs, and the framework in which the model was
 // trained.
 type InputConfig struct {
+
 	// Identifies the framework in which the model was trained. For example:
 	// TENSORFLOW.
+	//
+	// This member is required.
 	Framework Framework
+
 	// Specifies the name and shape of the expected data inputs for your trained model
 	// with a JSON dictionary form. The data inputs are InputConfig$Framework ()
 	// specific.
@@ -3014,16 +3645,22 @@ type InputConfig struct {
 	//
 	//     *
 	// XGBOOST: input data name and shape are not needed.
+	//
+	// This member is required.
 	DataInputConfig *string
+
 	// The S3 path where the model artifacts, which result from model training, are
 	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
 	// suffix).
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // For a hyperparameter of the integer type, specifies the range that a
 // hyperparameter tuning job searches.
 type IntegerParameterRange struct {
+
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
 	// Scaling
@@ -3035,24 +3672,40 @@ type IntegerParameterRange struct {
 	// logarithmic scale. Logarithmic scaling works only for ranges that have only
 	// values greater than 0.
 	ScalingType HyperParameterScalingType
+
 	// The maximum value of the hyperparameter to search.
+	//
+	// This member is required.
 	MaxValue *string
+
 	// The minimum value of the hyperparameter to search.
+	//
+	// This member is required.
 	MinValue *string
+
 	// The name of the hyperparameter to search.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Defines the possible values for an integer hyperparameter.
 type IntegerParameterRangeSpecification struct {
+
 	// The maximum integer value allowed.
+	//
+	// This member is required.
 	MaxValue *string
+
 	// The minimum integer value allowed.
+	//
+	// This member is required.
 	MinValue *string
 }
 
 // Jupyter server's app settings.
 type JupyterServerAppSettings struct {
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
 	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec
@@ -3060,6 +3713,7 @@ type JupyterServerAppSettings struct {
 
 // The kernel gateway app settings.
 type KernelGatewayAppSettings struct {
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
 	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec
@@ -3067,24 +3721,32 @@ type KernelGatewayAppSettings struct {
 
 // Provides a breakdown of the number of objects labeled.
 type LabelCounters struct {
+
 	// The total number of objects labeled by automated data labeling.
 	MachineLabeled *int32
+
 	// The total number of objects that could not be labeled due to an error.
 	FailedNonRetryableError *int32
+
 	// The total number of objects labeled.
 	TotalLabeled *int32
+
 	// The total number of objects labeled by a human worker.
 	HumanLabeled *int32
+
 	// The total number of objects not yet labeled.
 	Unlabeled *int32
 }
 
 // Provides counts for human-labeled tasks in the labeling job.
 type LabelCountersForWorkteam struct {
+
 	// The total number of data objects that need to be labeled by a human worker.
 	PendingHuman *int32
+
 	// The total number of tasks in the labeling job.
 	Total *int32
+
 	// The total number of data objects labeled by a human worker.
 	HumanLabeled *int32
 }
@@ -3093,13 +3755,16 @@ type LabelCountersForWorkteam struct {
 // LabelingJobAlgorithmsConfig object must be supplied in order to use
 // auto-labeling.
 type LabelingJobAlgorithmsConfig struct {
+
 	// At the end of an auto-label job Amazon SageMaker Ground Truth sends the Amazon
 	// Resource Nam (ARN) of the final model used for auto-labeling. You can use this
 	// model as the starting point for subsequent similar jobs by providing the ARN of
 	// the model here.
 	InitialActiveLearningModelArn *string
+
 	// Provides configuration information for a labeling job.
 	LabelingJobResourceConfig *LabelingJobResourceConfig
+
 	// Specifies the Amazon Resource Name (ARN) of the algorithm used for
 	// auto-labeling. You must select one of the following ARNs:
 	//
@@ -3118,12 +3783,15 @@ type LabelingJobAlgorithmsConfig struct {
 	//
 	// * Semantic Segmentation
 	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/semantic-segmentation
+	//
+	// This member is required.
 	LabelingJobAlgorithmSpecificationArn *string
 }
 
 // Attributes of the data specified by the customer. Use these to describe the data
 // to be labeled.
 type LabelingJobDataAttributes struct {
+
 	// Declares that your content is free of personally identifiable information or
 	// adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk workers
 	// that can view your task based on this information.
@@ -3132,46 +3800,68 @@ type LabelingJobDataAttributes struct {
 
 // Provides information about the location of input data.
 type LabelingJobDataSource struct {
+
 	// The Amazon S3 location of the input data objects.
 	S3DataSource *LabelingJobS3DataSource
 }
 
 // Provides summary information for a work team.
 type LabelingJobForWorkteamSummary struct {
+
 	// Provides information about the progress of a labeling job.
 	LabelCounters *LabelCountersForWorkteam
+
 	// A unique identifier for a labeling job. You can use this to refer to a specific
 	// labeling job.
+	//
+	// This member is required.
 	JobReferenceCode *string
+
 	// The configured number of workers per data object.
 	NumberOfHumanWorkersPerDataObject *int32
+
 	//
+	//
+	// This member is required.
 	WorkRequesterAccountId *string
+
 	// The date and time that the labeling job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The name of the labeling job that the work team is assigned to.
 	LabelingJobName *string
 }
 
 // Input configuration information for a labeling job.
 type LabelingJobInputConfig struct {
+
 	// The location of the input data.
+	//
+	// This member is required.
 	DataSource *LabelingJobDataSource
+
 	// Attributes of the data specified by the customer.
 	DataAttributes *LabelingJobDataAttributes
 }
 
 // Specifies the location of the output produced by the labeling job.
 type LabelingJobOutput struct {
+
 	// The Amazon Resource Name (ARN) for the most recent Amazon SageMaker model
 	// trained as part of automated data labeling.
 	FinalActiveLearningModelArn *string
+
 	// The Amazon S3 bucket location of the manifest file for labeled data.
+	//
+	// This member is required.
 	OutputDatasetS3Uri *string
 }
 
 // Output configuration information for a labeling job.
 type LabelingJobOutputConfig struct {
+
 	// The AWS Key Management Service ID of the key used to encrypt the output data, if
 	// any. If you use a KMS key ID or an alias of your master key, the Amazon
 	// SageMaker execution role must include permissions to call kms:Encrypt. If you
@@ -3188,12 +3878,16 @@ type LabelingJobOutputConfig struct {
 	// (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
 	// AWS Key Management Service Developer Guide.
 	KmsKeyId *string
+
 	// The Amazon S3 location to write output data.
+	//
+	// This member is required.
 	S3OutputPath *string
 }
 
 // Provides configuration information for labeling jobs.
 type LabelingJobResourceConfig struct {
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// run the training job. The VolumeKmsKeyId can be any of the following formats:
@@ -3209,8 +3903,11 @@ type LabelingJobResourceConfig struct {
 
 // The Amazon S3 location of the input data objects.
 type LabelingJobS3DataSource struct {
+
 	// The Amazon S3 location of the manifest file that describes the input data
 	// objects.
+	//
+	// This member is required.
 	ManifestS3Uri *string
 }
 
@@ -3219,49 +3916,81 @@ type LabelingJobS3DataSource struct {
 // the cost of data labeling. Labeling jobs fail after 30 days with an appropriate
 // client error message.
 type LabelingJobStoppingConditions struct {
+
 	// The maximum number of input data objects that should be labeled.
 	MaxPercentageOfInputDatasetLabeled *int32
+
 	// The maximum number of objects that can be labeled by human workers.
 	MaxHumanLabeledObjectCount *int32
 }
 
 // Provides summary information about a labeling job.
 type LabelingJobSummary struct {
+
 	// The date and time that the job was created (timestamp).
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The date and time that the job was last modified (timestamp).
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The current status of the labeling job.
+	//
+	// This member is required.
 	LabelingJobStatus LabelingJobStatus
+
 	// If the LabelingJobStatus field is Failed, this field contains a description of
 	// the error.
 	FailureReason *string
+
 	// The Amazon Resource Name (ARN) of the Lambda function used to consolidate the
 	// annotations from individual workers into a label for a data object. For more
 	// information, see Annotation Consolidation
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
 	AnnotationConsolidationLambdaArn *string
+
 	// Counts showing the progress of the labeling job.
+	//
+	// This member is required.
 	LabelCounters *LabelCounters
+
 	// Input configuration for the labeling job.
 	InputConfig *LabelingJobInputConfig
+
 	// The name of the labeling job.
+	//
+	// This member is required.
 	LabelingJobName *string
+
 	// The Amazon Resource Name (ARN) of a Lambda function. The function is run before
 	// each data object is sent to a worker.
+	//
+	// This member is required.
 	PreHumanTaskLambdaArn *string
+
 	// The Amazon Resource Name (ARN) of the work team assigned to the job.
+	//
+	// This member is required.
 	WorkteamArn *string
+
 	// The Amazon Resource Name (ARN) assigned to the labeling job when it was created.
+	//
+	// This member is required.
 	LabelingJobArn *string
+
 	// The location of the output produced by the labeling job.
 	LabelingJobOutput *LabelingJobOutput
 }
 
 // Defines the Amazon Cognito user group that is part of a work team.
 type MemberDefinition struct {
+
 	// The Amazon Cognito user group that is part of the work team.
 	CognitoMemberDefinition *CognitoMemberDefinition
+
 	// A list user groups that exist in your OIDC Identity Provider (IdP). One to ten
 	// groups can be used to create a single private work team. When you add a user
 	// group to the list of Groups, you can add that user group to one or more private
@@ -3273,10 +4002,13 @@ type MemberDefinition struct {
 // The name, value, and date and time of a metric that was emitted to Amazon
 // CloudWatch.
 type MetricData struct {
+
 	// The name of the metric.
 	MetricName *string
+
 	// The date and time that the algorithm emitted the metric.
 	Timestamp *time.Time
+
 	// The value of the metric.
 	Value *float32
 }
@@ -3286,12 +4018,18 @@ type MetricData struct {
 // one metric that a hyperparameter tuning job uses as its objective metric to
 // choose the best training job.
 type MetricDefinition struct {
+
 	// The name of the metric.
+	//
+	// This member is required.
 	Name *string
+
 	// A regular expression that searches the output of a training job and gets the
 	// value of the metric. For more information about using regular expressions to
 	// define metrics, see Defining Objective Metrics
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html).
+	//
+	// This member is required.
 	Regex *string
 }
 
@@ -3300,30 +4038,39 @@ type MetricDefinition struct {
 // and typically consist of trained parameters, a model defintion that desribes how
 // to compute inferences, and other metadata.
 type ModelArtifacts struct {
+
 	// The path of the S3 object that contains the model artifacts. For example,
 	// s3://bucket-name/keynameprefix/model.tar.gz.
+	//
+	// This member is required.
 	S3ModelArtifacts *string
 }
 
 // Configures the timeout and maximum number of retries for processing a transform
 // job invocation.
 type ModelClientConfig struct {
+
 	// The timeout value in seconds for an invocation request.
 	InvocationsTimeoutInSeconds *int32
+
 	// The maximum number of retries when invocation requests are failing.
 	InvocationsMaxRetries *int32
 }
 
 // Describes the Docker container for the model package.
 type ModelPackageContainerDefinition struct {
+
 	// The AWS Marketplace product ID of the model package.
 	ProductId *string
+
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
 	// (.tar.gz suffix).
 	ModelDataUrl *string
+
 	// The DNS host name for the Docker container.
 	ContainerHostname *string
+
 	// The Amazon EC2 Container Registry (Amazon ECR) path where inference code is
 	// stored. If you are using your own custom algorithm instead of an algorithm
 	// provided by Amazon SageMaker, the inference code must meet Amazon SageMaker
@@ -3331,7 +4078,10 @@ type ModelPackageContainerDefinition struct {
 	// registry/repository[@digest] image path formats. For more information, see Using
 	// Your Own Algorithms with Amazon SageMaker
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+	//
+	// This member is required.
 	Image *string
+
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	ImageDigest *string
@@ -3339,33 +4089,57 @@ type ModelPackageContainerDefinition struct {
 
 // Specifies the validation and image scan statuses of the model package.
 type ModelPackageStatusDetails struct {
+
 	// The validation status of the model package.
+	//
+	// This member is required.
 	ValidationStatuses []*ModelPackageStatusItem
+
 	// The status of the scan of the Docker image container for the model package.
 	ImageScanStatuses []*ModelPackageStatusItem
 }
 
 // Represents the overall status of a model package.
 type ModelPackageStatusItem struct {
+
 	// if the overall status is Failed, the reason for the failure.
 	FailureReason *string
+
 	// The name of the model package for which the overall status is being reported.
+	//
+	// This member is required.
 	Name *string
+
 	// The current status.
+	//
+	// This member is required.
 	Status DetailedModelPackageStatus
 }
 
 // Provides summary information about a model package.
 type ModelPackageSummary struct {
+
 	// The name of the model package.
+	//
+	// This member is required.
 	ModelPackageName *string
+
 	// The Amazon Resource Name (ARN) of the model package.
+	//
+	// This member is required.
 	ModelPackageArn *string
+
 	// A brief description of the model package.
 	ModelPackageDescription *string
+
 	// The overall status of the model package.
+	//
+	// This member is required.
 	ModelPackageStatus ModelPackageStatus
+
 	// A timestamp that shows when the model package was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
 }
 
@@ -3373,44 +4147,72 @@ type ModelPackageSummary struct {
 // the process of validating the model package. The data provided in the validation
 // profile is made available to your buyers on AWS Marketplace.
 type ModelPackageValidationProfile struct {
+
 	// The TransformJobDefinition object that describes the transform job used for the
 	// validation of the model package.
+	//
+	// This member is required.
 	TransformJobDefinition *TransformJobDefinition
+
 	// The name of the profile for the model package.
+	//
+	// This member is required.
 	ProfileName *string
 }
 
 // Specifies batch transform jobs that Amazon SageMaker runs to validate your model
 // package.
 type ModelPackageValidationSpecification struct {
+
 	// An array of ModelPackageValidationProfile objects, each of which specifies a
 	// batch transform job that Amazon SageMaker runs to validate your model package.
+	//
+	// This member is required.
 	ValidationProfiles []*ModelPackageValidationProfile
+
 	// The IAM roles to be used for the validation of the model package.
+	//
+	// This member is required.
 	ValidationRole *string
 }
 
 // Provides summary information about a model.
 type ModelSummary struct {
+
 	// A timestamp that indicates when the model was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the model.
+	//
+	// This member is required.
 	ModelArn *string
+
 	// The name of the model that you want a summary for.
+	//
+	// This member is required.
 	ModelName *string
 }
 
 // Container image configuration object for the monitoring job.
 type MonitoringAppSpecification struct {
+
 	// The container image to be run by the monitoring job.
+	//
+	// This member is required.
 	ImageUri *string
+
 	// Specifies the entrypoint for a container used to run the monitoring job.
 	ContainerEntrypoint []*string
+
 	// An Amazon S3 URI to a script that is called after analysis has been performed.
 	// Applicable only for the built-in (first party) containers.
 	PostAnalyticsProcessorSourceUri *string
+
 	// An array of arguments for the container used to run the monitoring job.
 	ContainerArguments []*string
+
 	// An Amazon S3 URI to a script that is called per row prior to running analysis.
 	// It can base64 decode the payload and convert it into a flatted json so that the
 	// built-in container can use the converted data. Applicable only for the built-in
@@ -3422,9 +4224,11 @@ type MonitoringAppSpecification struct {
 // baseline resources are compared against the results of the current job from the
 // series of jobs scheduled to collect data periodically.
 type MonitoringBaselineConfig struct {
+
 	// The baseline statistics file in Amazon S3 that the current monitoring job should
 	// be validated against.
 	StatisticsResource *MonitoringStatisticsResource
+
 	// The baseline constraint file in Amazon S3 that the current monitoring job should
 	// validated against.
 	ConstraintsResource *MonitoringConstraintsResource
@@ -3432,92 +4236,150 @@ type MonitoringBaselineConfig struct {
 
 // Configuration for the cluster used to run model monitoring jobs.
 type MonitoringClusterConfig struct {
+
 	// The number of ML compute instances to use in the model monitoring job. For
 	// distributed processing jobs, specify a value greater than 1. The default value
 	// is 1.
+	//
+	// This member is required.
 	InstanceCount *int32
+
 	// The ML compute instance type for the processing job.
+	//
+	// This member is required.
 	InstanceType ProcessingInstanceType
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// run the model monitoring job.
 	VolumeKmsKeyId *string
+
 	// The size of the ML storage volume, in gigabytes, that you want to provision. You
 	// must specify sufficient ML storage for your scenario.
+	//
+	// This member is required.
 	VolumeSizeInGB *int32
 }
 
 // The constraints resource for a monitoring job.
 type MonitoringConstraintsResource struct {
+
 	// The Amazon S3 URI for the constraints resource.
 	S3Uri *string
 }
 
 // Summary of information about the last monitoring job to run.
 type MonitoringExecutionSummary struct {
+
 	// The time the monitoring job was scheduled.
+	//
+	// This member is required.
 	ScheduledTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the monitoring job.
 	ProcessingJobArn *string
+
 	// The status of the monitoring job.
+	//
+	// This member is required.
 	MonitoringExecutionStatus ExecutionStatus
+
 	// A timestamp that indicates the last time the monitoring job was modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The time at which the monitoring job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The name of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
+
 	// Contains the reason a monitoring job failed, if it failed.
 	FailureReason *string
+
 	// The name of teh endpoint used to run the monitoring job.
 	EndpointName *string
 }
 
 // The inputs for a monitoring job.
 type MonitoringInput struct {
+
 	// The endpoint for a monitoring job.
+	//
+	// This member is required.
 	EndpointInput *EndpointInput
 }
 
 // Defines the monitoring job.
 type MonitoringJobDefinition struct {
+
 	// The array of outputs from the monitoring job to be uploaded to Amazon Simple
 	// Storage Service (Amazon S3).
+	//
+	// This member is required.
 	MonitoringOutputConfig *MonitoringOutputConfig
+
 	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
 	// for a monitoring job. In distributed processing, you specify more than one
 	// instance.
+	//
+	// This member is required.
 	MonitoringResources *MonitoringResources
+
 	// Configures the monitoring job to run a specified Docker container image.
+	//
+	// This member is required.
 	MonitoringAppSpecification *MonitoringAppSpecification
+
 	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
 	// to perform tasks on your behalf.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// Sets the environment variables in the Docker container.
 	Environment map[string]*string
+
 	// Baseline configuration used to validate that the data conforms to the specified
 	// constraints and statistics
 	BaselineConfig *MonitoringBaselineConfig
+
 	// Specifies a time limit for how long the monitoring job is allowed to run.
 	StoppingCondition *MonitoringStoppingCondition
+
 	// The array of inputs for the monitoring job. Currently we support monitoring an
 	// Amazon SageMaker Endpoint.
+	//
+	// This member is required.
 	MonitoringInputs []*MonitoringInput
+
 	// Specifies networking options for an monitoring job.
 	NetworkConfig *NetworkConfig
 }
 
 // The output object for a monitoring job.
 type MonitoringOutput struct {
+
 	// The Amazon S3 storage location where the results of a monitoring job are saved.
+	//
+	// This member is required.
 	S3Output *MonitoringS3Output
 }
 
 // The output configuration for monitoring jobs.
 type MonitoringOutputConfig struct {
+
 	// Monitoring outputs for monitoring jobs. This is where the output of the periodic
 	// monitoring jobs is uploaded.
+	//
+	// This member is required.
 	MonitoringOutputs []*MonitoringOutput
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	KmsKeyId *string
@@ -3525,58 +4387,92 @@ type MonitoringOutputConfig struct {
 
 // Identifies the resources to deploy for a monitoring job.
 type MonitoringResources struct {
+
 	// The configuration for the cluster resources used to run the processing job.
+	//
+	// This member is required.
 	ClusterConfig *MonitoringClusterConfig
 }
 
 // Information about where and how you want to store the results of a monitoring
 // job.
 type MonitoringS3Output struct {
+
 	// The local path to the Amazon S3 storage location where Amazon SageMaker saves
 	// the results of a monitoring job. LocalPath is an absolute path for the output
 	// data.
+	//
+	// This member is required.
 	LocalPath *string
+
 	// Whether to upload the results of the monitoring job continuously or after the
 	// job completes.
 	S3UploadMode ProcessingS3UploadMode
+
 	// A URI that identifies the Amazon S3 storage location where Amazon SageMaker
 	// saves the results of a monitoring job.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Configures the monitoring schedule and defines the monitoring job.
 type MonitoringScheduleConfig struct {
+
 	// Defines the monitoring job.
+	//
+	// This member is required.
 	MonitoringJobDefinition *MonitoringJobDefinition
+
 	// Configures the monitoring schedule.
 	ScheduleConfig *ScheduleConfig
 }
 
 // Summarizes the monitoring schedule.
 type MonitoringScheduleSummary struct {
+
 	// The last time the monitoring schedule was modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The creation time of the monitoring schedule.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The name of the endpoint using the monitoring schedule.
 	EndpointName *string
+
 	// The status of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleStatus ScheduleStatus
+
 	// The name of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
+
 	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleArn *string
 }
 
 // The statistics resource for a monitoring job.
 type MonitoringStatisticsResource struct {
+
 	// The Amazon S3 URI for the statistics resource.
 	S3Uri *string
 }
 
 // A time limit for how long the monitoring job is allowed to run before stopping.
 type MonitoringStoppingCondition struct {
+
 	// The maximum runtime allowed in seconds.
+	//
+	// This member is required.
 	MaxRuntimeInSeconds *int32
 }
 
@@ -3592,13 +4488,19 @@ type MonitoringStoppingCondition struct {
 // * '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains",
 // "Value":"mybucket/catdata"}'
 type NestedFilters struct {
+
 	// A list of filters. Each filter acts on a property. Filters must contain at least
 	// one Filters value. For example, a NestedFilters call might include a filter on
 	// the PropertyName parameter of the InputDataConfig property:
 	// InputDataConfig.DataSource.S3DataSource.S3Uri.
+	//
+	// This member is required.
 	Filters []*Filter
+
 	// The name of the property to use in the nested filters. The value must match a
 	// listed property name, such as InputDataConfig.
+	//
+	// This member is required.
 	NestedPropertyName *string
 }
 
@@ -3606,13 +4508,16 @@ type NestedFilters struct {
 // containers, whether to allow inbound and outbound network calls to and from
 // containers, and the VPC subnets and security groups to use for VPC-enabled jobs.
 type NetworkConfig struct {
+
 	// Whether to allow inbound and outbound network calls to and from the containers
 	// used for the processing job.
 	EnableNetworkIsolation *bool
+
 	// Whether to encrypt all communications between distributed processing jobs.
 	// Choose True to encrypt communications. Encryption provides greater security for
 	// distributed processing jobs, but the processing might take longer.
 	EnableInterContainerTrafficEncryption *bool
+
 	// Specifies a VPC that your training jobs and hosted models have access to.
 	// Control access to and from your training and model containers by configuring the
 	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
@@ -3624,12 +4529,20 @@ type NetworkConfig struct {
 
 // Provides a summary of a notebook instance lifecycle configuration.
 type NotebookInstanceLifecycleConfigSummary struct {
+
 	// The name of the lifecycle configuration.
+	//
+	// This member is required.
 	NotebookInstanceLifecycleConfigName *string
+
 	// The Amazon Resource Name (ARN) of the lifecycle configuration.
+	//
+	// This member is required.
 	NotebookInstanceLifecycleConfigArn *string
+
 	// A timestamp that tells when the lifecycle configuration was last modified.
 	LastModifiedTime *time.Time
+
 	// A timestamp that tells when the lifecycle configuration was created.
 	CreationTime *time.Time
 }
@@ -3646,6 +4559,7 @@ type NotebookInstanceLifecycleConfigSummary struct {
 // (Optional) Customize a Notebook Instance
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 type NotebookInstanceLifecycleHook struct {
+
 	// A base64-encoded string that contains a shell script for a notebook instance
 	// lifecycle configuration.
 	Content *string
@@ -3653,8 +4567,10 @@ type NotebookInstanceLifecycleHook struct {
 
 // Provides summary information for an Amazon SageMaker notebook instance.
 type NotebookInstanceSummary struct {
+
 	// A timestamp that shows when the notebook instance was created.
 	CreationTime *time.Time
+
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
 	// in your account, or the URL of a Git repository in AWS CodeCommit
@@ -3664,6 +4580,7 @@ type NotebookInstanceSummary struct {
 	// Git Repositories with Amazon SageMaker Notebook Instances
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	DefaultCodeRepository *string
+
 	// An array of up to three Git repositories associated with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your
 	// account, or the URL of Git repositories in AWS CodeCommit
@@ -3673,21 +4590,32 @@ type NotebookInstanceSummary struct {
 	// Associating Git Repositories with Amazon SageMaker Notebook Instances
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	AdditionalCodeRepositories []*string
+
 	// A timestamp that shows when the notebook instance was last modified.
 	LastModifiedTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the notebook instance.
+	//
+	// This member is required.
 	NotebookInstanceArn *string
+
 	// The status of the notebook instance.
 	NotebookInstanceStatus NotebookInstanceStatus
+
 	// The name of a notebook instance lifecycle configuration associated with this
 	// notebook instance. For information about notebook instance lifestyle
 	// configurations, see Step 2.1: (Optional) Customize a Notebook Instance
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 	NotebookInstanceLifecycleConfigName *string
+
 	// The name of the notebook instance that you want a summary for.
+	//
+	// This member is required.
 	NotebookInstanceName *string
+
 	// The type of ML compute instance that the notebook instance is running on.
 	InstanceType InstanceType
+
 	// The URL that you use to connect to the Jupyter instance running in your notebook
 	// instance.
 	Url *string
@@ -3695,6 +4623,7 @@ type NotebookInstanceSummary struct {
 
 // Configures SNS notifications of available or expiring work items for work teams.
 type NotificationConfiguration struct {
+
 	// The ARN for the SNS topic to which notifications should be published.
 	NotificationTopicArn *string
 }
@@ -3704,13 +4633,16 @@ type NotificationConfiguration struct {
 // metric status shows whether the final objective metric for the training job has
 // been evaluated by the tuning job and used in the hyperparameter tuning process.
 type ObjectiveStatusCounters struct {
+
 	// The number of training jobs that are in progress and pending evaluation of their
 	// final objective metric.
 	Pending *int32
+
 	// The number of training jobs whose final objective metric was not evaluated and
 	// used in the hyperparameter tuning process. This typically occurs when the
 	// training job failed or did not emit an objective metric.
 	Failed *int32
+
 	// The number of training jobs whose final objective metric was evaluated by the
 	// hyperparameter tuning job and used in the hyperparameter tuning process.
 	Succeeded *int32
@@ -3718,40 +4650,71 @@ type ObjectiveStatusCounters struct {
 
 // Use this parameter to configure your OIDC Identity Provider (IdP).
 type OidcConfig struct {
+
 	// The OIDC IdP logout endpoint used to configure your private workforce.
+	//
+	// This member is required.
 	LogoutEndpoint *string
+
 	// The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private
 	// workforce.
+	//
+	// This member is required.
 	JwksUri *string
+
 	// The OIDC IdP token endpoint used to configure your private workforce.
+	//
+	// This member is required.
 	TokenEndpoint *string
+
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
+	//
+	// This member is required.
 	AuthorizationEndpoint *string
+
 	// The OIDC IdP user information endpoint used to configure your private workforce.
+	//
+	// This member is required.
 	UserInfoEndpoint *string
+
 	// The OIDC IdP client ID used to configure your private workforce.
+	//
+	// This member is required.
 	ClientId *string
+
 	// The OIDC IdP issuer used to configure your private workforce.
+	//
+	// This member is required.
 	Issuer *string
+
 	// The OIDC IdP client secret used to configure your private workforce.
+	//
+	// This member is required.
 	ClientSecret *string
 }
 
 // Your Amazon Cognito workforce configuration.
 type OidcConfigForResponse struct {
+
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	TokenEndpoint *string
+
 	// The OIDC IdP logout endpoint used to configure your private workforce.
 	LogoutEndpoint *string
+
 	// The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private
 	// workforce.
 	JwksUri *string
+
 	// The OIDC IdP user information endpoint used to configure your private workforce.
 	UserInfoEndpoint *string
+
 	// The OIDC IdP client ID used to configure your private workforce.
 	ClientId *string
+
 	// The OIDC IdP issuer used to configure your private workforce.
 	Issuer *string
+
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
 	AuthorizationEndpoint *string
 }
@@ -3762,8 +4725,11 @@ type OidcConfigForResponse struct {
 // work teams. If you add a user group to a private work team, all workers in that
 // user group are added to the work team.
 type OidcMemberDefinition struct {
+
 	// A list of comma seperated strings that identifies user groups in your OIDC IdP.
 	// Each user group is made up of a group of private workers.
+	//
+	// This member is required.
 	Groups []*string
 }
 
@@ -3775,6 +4741,7 @@ type OidcMemberDefinition struct {
 // device and CompilerOptions if there are specific settings that are required or
 // recommended to use for particular TargetPlatform.
 type OutputConfig struct {
+
 	// Specifies additional parameters for compiler options in JSON format. The
 	// compiler options are TargetPlatform specific. It is required for NVIDIA
 	// accelerators and highly recommended for CPU compliations. For any other cases,
@@ -3822,9 +4789,13 @@ type OutputConfig struct {
 	// {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform
 	// with NEON support.
 	CompilerOptions *string
+
 	// Identifies the S3 bucket where you want Amazon SageMaker to store the model
 	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	//
+	// This member is required.
 	S3OutputLocation *string
+
 	// Contains information about a target platform that you want your model to run on,
 	// such as OS, architecture, and accelerators. It is an alternative of
 	// TargetDevice. The following examples show how to configure the TargetPlatform
@@ -3853,6 +4824,7 @@ type OutputConfig struct {
 	// * ARMv8 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"},
 	// "CompilerOptions": {'ANDROID_PLATFORM': 29}
 	TargetPlatform *TargetPlatform
+
 	// Identifies the target device or the machine learning instance that you want to
 	// run your model on after the compilation has completed. Alternatively, you can
 	// specify OS, architecture, and accelerator using TargetPlatform () fields. It can
@@ -3863,6 +4835,7 @@ type OutputConfig struct {
 // Provides information about how to store model training results (model
 // artifacts).
 type OutputDataConfig struct {
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption. The
 	// KmsKeyId can be any of the following formats:
@@ -3900,20 +4873,26 @@ type OutputDataConfig struct {
 	// Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
 	// Guide</i>.</p>
 	KmsKeyId *string
+
 	// Identifies the S3 path where you want Amazon SageMaker to store the model
 	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	//
+	// This member is required.
 	S3OutputPath *string
 }
 
 // Defines the possible values for categorical, continuous, and integer
 // hyperparameters to be used by an algorithm.
 type ParameterRange struct {
+
 	// A IntegerParameterRangeSpecification object that defines the possible values for
 	// an integer hyperparameter.
 	IntegerParameterRangeSpecification *IntegerParameterRangeSpecification
+
 	// A CategoricalParameterRangeSpecification object that defines the possible values
 	// for a categorical hyperparameter.
 	CategoricalParameterRangeSpecification *CategoricalParameterRangeSpecification
+
 	// A ContinuousParameterRangeSpecification object that defines the possible values
 	// for a continuous hyperparameter.
 	ContinuousParameterRangeSpecification *ContinuousParameterRangeSpecification
@@ -3928,12 +4907,15 @@ type ParameterRange struct {
 // search over. Every possible value of a categorical parameter range counts
 // against this limit.
 type ParameterRanges struct {
+
 	// The array of CategoricalParameterRange () objects that specify ranges of
 	// categorical hyperparameters that a hyperparameter tuning job searches.
 	CategoricalParameterRanges []*CategoricalParameterRange
+
 	// The array of ContinuousParameterRange () objects that specify ranges of
 	// continuous hyperparameters that a hyperparameter tuning job searches.
 	ContinuousParameterRanges []*ContinuousParameterRange
+
 	// The array of IntegerParameterRange () objects that specify ranges of integer
 	// hyperparameters that a hyperparameter tuning job searches.
 	IntegerParameterRanges []*IntegerParameterRange
@@ -3943,8 +4925,10 @@ type ParameterRanges struct {
 // is part of. A component might not be associated with a trial. A component can be
 // associated with multiple trials.
 type Parent struct {
+
 	// The name of the experiment.
 	ExperimentName *string
+
 	// The name of the trial.
 	TrialName *string
 }
@@ -3952,6 +4936,7 @@ type Parent struct {
 // A previously completed or stopped hyperparameter tuning job to be used as a
 // starting point for a new hyperparameter tuning job.
 type ParentHyperParameterTuningJob struct {
+
 	// The name of the hyperparameter tuning job to be used as a starting point for a
 	// new hyperparameter tuning job.
 	HyperParameterTuningJobName *string
@@ -3959,25 +4944,41 @@ type ParentHyperParameterTuningJob struct {
 
 // Configuration for the cluster used to run a processing job.
 type ProcessingClusterConfig struct {
+
 	// The number of ML compute instances to use in the processing job. For distributed
 	// processing jobs, specify a value greater than 1. The default value is 1.
+	//
+	// This member is required.
 	InstanceCount *int32
+
 	// The size of the ML storage volume in gigabytes that you want to provision. You
 	// must specify sufficient ML storage for your scenario.
+	//
+	// This member is required.
 	VolumeSizeInGB *int32
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// run the processing job.
 	VolumeKmsKeyId *string
+
 	// The ML compute instance type for the processing job.
+	//
+	// This member is required.
 	InstanceType ProcessingInstanceType
 }
 
 // The inputs for a processing job.
 type ProcessingInput struct {
+
 	// The name of the inputs for the processing job.
+	//
+	// This member is required.
 	InputName *string
+
 	// The S3 inputs for the processing job.
+	//
+	// This member is required.
 	S3Input *ProcessingS3Input
 }
 
@@ -3985,25 +4986,34 @@ type ProcessingInput struct {
 // models. For more information, see Process Data and Evaluate Models
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html).
 type ProcessingJob struct {
+
 	// For each input, data is downloaded from S3 into the processing container before
 	// the processing job begins running if "S3InputMode" is set to File.
 	ProcessingInputs []*ProcessingInput
+
 	// The name of the processing job.
 	ProcessingJobName *string
+
 	// The ARN of the role used to create the processing job.
 	RoleArn *string
+
 	// The output configuration for the processing job.
 	ProcessingOutputConfig *ProcessingOutputConfig
+
 	// The ARN of the training job associated with this processing job.
 	TrainingJobArn *string
+
 	// Networking options for a job, such as network traffic encryption between
 	// containers, whether to allow inbound and outbound network calls to and from
 	// containers, and the VPC subnets and security groups to use for VPC-enabled jobs.
 	NetworkConfig *NetworkConfig
+
 	// The time that the processing job ended.
 	ProcessingEndTime *time.Time
+
 	// The ARN of the processing job.
 	ProcessingJobArn *string
+
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
@@ -4014,60 +5024,89 @@ type ProcessingJob struct {
 	//
 	//     * CreateTransformJob ()
 	ExperimentConfig *ExperimentConfig
+
 	// The time that the processing job started.
 	ProcessingStartTime *time.Time
+
 	// The ARN of a monitoring schedule for an endpoint associated with this processing
 	// job.
 	MonitoringScheduleArn *string
+
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*Tag
+
 	// A string, up to one KB in size, that contains the reason a processing job
 	// failed, if it failed.
 	FailureReason *string
+
 	// The Amazon Resource Name (ARN) of the AutoML job associated with this processing
 	// job.
 	AutoMLJobArn *string
+
 	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
 	// for a processing job. In distributed training, you specify more than one
 	// instance.
 	ProcessingResources *ProcessingResources
+
 	// A string, up to one KB in size, that contains metadata from the processing
 	// container when the processing job exits.
 	ExitMessage *string
+
 	// The status of the processing job.
 	ProcessingJobStatus ProcessingJobStatus
+
 	// The time the processing job was last modified.
 	LastModifiedTime *time.Time
+
 	// The time the processing job was created.
 	CreationTime *time.Time
+
 	// Sets the environment variables in the Docker container.
 	Environment map[string]*string
+
 	// Configuration to run a processing job in a specified container image.
 	AppSpecification *AppSpecification
+
 	// Specifies a time limit for how long the processing job is allowed to run.
 	StoppingCondition *ProcessingStoppingCondition
 }
 
 // Summary of information about a processing job.
 type ProcessingJobSummary struct {
+
 	// A timestamp that indicates the last time the processing job was modified.
 	LastModifiedTime *time.Time
+
 	// The time at which the processing job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The status of the processing job.
+	//
+	// This member is required.
 	ProcessingJobStatus ProcessingJobStatus
+
 	// The time at which the processing job completed.
 	ProcessingEndTime *time.Time
+
 	// An optional string, up to one KB in size, that contains metadata from the
 	// processing container when the processing job exits.
 	ExitMessage *string
+
 	// The Amazon Resource Name (ARN) of the processing job..
+	//
+	// This member is required.
 	ProcessingJobArn *string
+
 	// The name of the processing job.
+	//
+	// This member is required.
 	ProcessingJobName *string
+
 	// A string, up to one KB in size, that contains the reason a processing job
 	// failed, if it failed.
 	FailureReason *string
@@ -4075,16 +5114,26 @@ type ProcessingJobSummary struct {
 
 // Describes the results of a processing job.
 type ProcessingOutput struct {
+
 	// The name for the processing job output.
+	//
+	// This member is required.
 	OutputName *string
+
 	// Configuration for processing job outputs in Amazon S3.
+	//
+	// This member is required.
 	S3Output *ProcessingS3Output
 }
 
 // The output configuration for the processing job.
 type ProcessingOutputConfig struct {
+
 	// Output configuration information for a processing job.
+	//
+	// This member is required.
 	Outputs []*ProcessingOutput
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt the processing job output. KmsKeyId can be an ID of a KMS key, ARN of a
 	// KMS key, alias of a KMS key, or alias of a KMS key. The KmsKeyId is applied to
@@ -4096,57 +5145,86 @@ type ProcessingOutputConfig struct {
 // for a processing job. In distributed training, you specify more than one
 // instance.
 type ProcessingResources struct {
+
 	// The configuration for the resources in a cluster used to run the processing job.
+	//
+	// This member is required.
 	ClusterConfig *ProcessingClusterConfig
 }
 
 // Information about where and how you want to obtain the inputs for an processing
 // job.
 type ProcessingS3Input struct {
+
 	// Whether you use an S3Prefix or a ManifestFile for the data type. If you choose
 	// S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects
 	// with the specified key name prefix for the processing job. If you choose
 	// ManifestFile, S3Uri identifies an object that is a manifest file containing a
 	// list of object keys that you want Amazon SageMaker to use for the processing
 	// job.
+	//
+	// This member is required.
 	S3DataType ProcessingS3DataType
+
 	// Whether the data stored in Amazon S3 is FullyReplicated or ShardedByS3Key.
 	S3DataDistributionType ProcessingS3DataDistributionType
+
 	// Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies
 	// the data from the input source onto the local Amazon Elastic Block Store (Amazon
 	// EBS) volumes before starting your training algorithm. This is the most commonly
 	// used input mode. In Pipe mode, Amazon SageMaker streams input data from the
 	// source directly to your algorithm without using the EBS volume.
+	//
+	// This member is required.
 	S3InputMode ProcessingS3InputMode
+
 	// Whether to use Gzip compression for Amazon S3 storage.
 	S3CompressionType ProcessingS3CompressionType
+
 	// The URI for the Amazon S3 storage where you want Amazon SageMaker to download
 	// the artifacts needed to run a processing job.
+	//
+	// This member is required.
 	S3Uri *string
+
 	// The local path to the Amazon S3 bucket where you want Amazon SageMaker to
 	// download the inputs to run a processing job. LocalPath is an absolute path to
 	// the input data.
+	//
+	// This member is required.
 	LocalPath *string
 }
 
 // Information about where and how you want to store the results of an processing
 // job.
 type ProcessingS3Output struct {
+
 	// The local path to the Amazon S3 bucket where you want Amazon SageMaker to save
 	// the results of an processing job. LocalPath is an absolute path to the input
 	// data.
+	//
+	// This member is required.
 	LocalPath *string
+
 	// Whether to upload the results of the processing job continuously or after the
 	// job completes.
+	//
+	// This member is required.
 	S3UploadMode ProcessingS3UploadMode
+
 	// A URI that identifies the Amazon S3 bucket where you want Amazon SageMaker to
 	// save the results of a processing job.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Specifies a time limit for how long the processing job is allowed to run.
 type ProcessingStoppingCondition struct {
+
 	// Specifies the maximum runtime in seconds.
+	//
+	// This member is required.
 	MaxRuntimeInSeconds *int32
 }
 
@@ -4154,20 +5232,34 @@ type ProcessingStoppingCondition struct {
 // it. If you are deploying multiple models, tell Amazon SageMaker how to
 // distribute traffic among the models by specifying variant weights.
 type ProductionVariant struct {
+
 	// The name of the model that you want to host. This is the name that you specified
 	// when creating the model.
+	//
+	// This member is required.
 	ModelName *string
+
 	// The ML compute instance type.
+	//
+	// This member is required.
 	InstanceType ProductionVariantInstanceType
+
 	// Number of instances to launch initially.
+	//
+	// This member is required.
 	InitialInstanceCount *int32
+
 	// The name of the production variant.
+	//
+	// This member is required.
 	VariantName *string
+
 	// Determines initial traffic distribution among all of the models that you specify
 	// in the endpoint configuration. The traffic to a production variant is determined
 	// by the ratio of the VariantWeight to the sum of all VariantWeight values across
 	// all ProductionVariants. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float32
+
 	// The size of the Elastic Inference (EI) instance to use for the production
 	// variant. EI instances provide on-demand GPU computing for inference. For more
 	// information, see Using Elastic Inference in Amazon SageMaker
@@ -4180,18 +5272,26 @@ type ProductionVariant struct {
 // and the endpoint status is Updating, you get different desired and current
 // values.
 type ProductionVariantSummary struct {
+
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredWeight *float32
+
 	// The name of the variant.
+	//
+	// This member is required.
 	VariantName *string
+
 	// The number of instances associated with the variant.
 	CurrentInstanceCount *int32
+
 	// The number of instances requested in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredInstanceCount *int32
+
 	// The weight associated with the variant.
 	CurrentWeight *float32
+
 	// An array of DeployedImage objects that specify the Amazon EC2 Container Registry
 	// paths of the inference images deployed on instances of this ProductionVariant.
 	DeployedImages []*DeployedImage
@@ -4200,13 +5300,17 @@ type ProductionVariantSummary struct {
 // Part of the SuggestionQuery type. Specifies a hint for retrieving property names
 // that begin with the specified text.
 type PropertyNameQuery struct {
+
 	// Text that begins a property's name.
+	//
+	// This member is required.
 	PropertyNameHint *string
 }
 
 // A property name returned from a GetSearchSuggestions call that specifies a value
 // in the PropertyNameQuery field.
 type PropertyNameSuggestion struct {
+
 	// A suggested property name based on what you entered in the search textbox in the
 	// Amazon SageMaker console.
 	PropertyName *string
@@ -4434,6 +5538,7 @@ type PropertyNameSuggestion struct {
 //
 //     * 0.012
 type PublicWorkforceTaskPrice struct {
+
 	// Defines the amount of money paid to an Amazon Mechanical Turk worker in United
 	// States dollars.
 	AmountInUsd *USD
@@ -4441,28 +5546,40 @@ type PublicWorkforceTaskPrice struct {
 
 // Contains input values for a task.
 type RenderableTask struct {
+
 	// A JSON object that contains values for the variables defined in the template. It
 	// is made available to the template under the substitution variable task.input.
 	// For example, if you define a variable task.input.text in your template, you can
 	// supply the variable in the JSON object as "text": "sample text".
+	//
+	// This member is required.
 	Input *string
 }
 
 // A description of an error that occurred while rendering the template.
 type RenderingError struct {
+
 	// A human-readable message describing the error.
+	//
+	// This member is required.
 	Message *string
+
 	// A unique identifier for a specific class of errors.
+	//
+	// This member is required.
 	Code *string
 }
 
 // The resolved attributes.
 type ResolvedAttributes struct {
+
 	// The problem type.
 	ProblemType ProblemType
+
 	// How long a job is allowed to run, or how many candidates a job is allowed to
 	// generate.
 	CompletionCriteria *AutoMLJobCompletionCriteria
+
 	// Applies a metric to minimize or maximize for the job's objective.
 	AutoMLJobObjective *AutoMLJobObjective
 }
@@ -4470,6 +5587,7 @@ type ResolvedAttributes struct {
 // Describes the resources, including ML compute instances and ML storage volumes,
 // to use for model training.
 type ResourceConfig struct {
+
 	// The AWS KMS key that Amazon SageMaker uses to encrypt data on the storage volume
 	// attached to the ML compute instance(s) that run the training job. Certain
 	// Nitro-based instances include local storage, dependent on the instance type.
@@ -4490,11 +5608,18 @@ type ResourceConfig struct {
 	// KMS Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The ML compute instance type.
+	//
+	// This member is required.
 	InstanceType TrainingInstanceType
+
 	// The number of ML compute instances to use. For distributed training, provide a
 	// value greater than 1.
+	//
+	// This member is required.
 	InstanceCount *int32
+
 	// The size of the ML storage volume that you want to provision. ML storage volumes
 	// store model artifacts and incremental states. Training algorithms might also use
 	// the ML storage volume for scratch space. If you want to store the training data
@@ -4508,16 +5633,24 @@ type ResourceConfig struct {
 	// instance storage. For a list of instance types that support local instance
 	// storage, including the total size per instance type, see Instance Store Volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
+	//
+	// This member is required.
 	VolumeSizeInGB *int32
 }
 
 // Specifies the maximum number of training jobs and parallel training jobs that a
 // hyperparameter tuning job can launch.
 type ResourceLimits struct {
+
 	// The maximum number of concurrent training jobs that a hyperparameter tuning job
 	// can launch.
+	//
+	// This member is required.
 	MaxParallelTrainingJobs *int32
+
 	// The maximum number of training jobs that a hyperparameter tuning job can launch.
+	//
+	// This member is required.
 	MaxNumberOfTrainingJobs *int32
 }
 
@@ -4525,8 +5658,10 @@ type ResourceLimits struct {
 // created on the instance. The ARN is stored as metadata in SageMaker Studio
 // notebooks.
 type ResourceSpec struct {
+
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	SageMakerImageArn *string
+
 	// The instance type.
 	InstanceType AppInstanceType
 }
@@ -4534,6 +5669,7 @@ type ResourceSpec struct {
 // The retention policy for data stored on an Amazon Elastic File System (EFS)
 // volume.
 type RetentionPolicy struct {
+
 	// The default is Retain, which specifies to keep the data stored on the EFS
 	// volume. Specify Delete to delete the data stored on the EFS volume.
 	HomeEfsFileSystem RetentionType
@@ -4541,6 +5677,7 @@ type RetentionPolicy struct {
 
 // Describes the S3 data source.
 type S3DataSource struct {
+
 	// If you want Amazon SageMaker to replicate the entire dataset on each ML compute
 	// instance that is launched for model training, specify FullyReplicated. If you
 	// want Amazon SageMaker to replicate a subset of data on each ML compute instance
@@ -4556,9 +5693,11 @@ type S3DataSource struct {
 	// storage volume (when TrainingInputMode is set to File), this copies 1/n of the
 	// number of objects.
 	S3DataDistributionType S3DataDistribution
+
 	// A list of one or more attribute names to use that are found in a specified
 	// augmented manifest file.
 	AttributeNames []*string
+
 	// If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker
 	// uses all objects that match the specified key name prefix for model training. If
 	// you choose ManifestFile, S3Uri identifies an object that is a manifest file
@@ -4567,7 +5706,10 @@ type S3DataSource struct {
 	// is an augmented manifest file in JSON lines format. This file contains the data
 	// you want to use for model training. AugmentedManifestFile can only be used if
 	// the Channel's input mode is Pipe.
+	//
+	// This member is required.
 	S3DataType S3DataType
+
 	// Depending on the value specified for the S3DataType, identifies either a key
 	// name prefix or a manifest. For example:
 	//
@@ -4588,11 +5730,14 @@ type S3DataSource struct {
 	// The complete set of S3Uri in this manifest is the input data for the channel for
 	// this data source. The object that each S3Uri points to must be readable by the
 	// IAM role that Amazon SageMaker uses to perform tasks on your behalf.
+	//
+	// This member is required.
 	S3Uri *string
 }
 
 // Configuration details about the monitoring schedule.
 type ScheduleConfig struct {
+
 	// A cron expression that describes details about the monitoring schedule.
 	// <p>Currently the only supported cron expressions are:</p> <ul> <li> <p>If you
 	// want to set the job to start every hour, please use the following:</p> <p>
@@ -4611,6 +5756,8 @@ type ScheduleConfig struct {
 	// run the execution. </p> </li> <li> <p>We recommend that if you would like a
 	// daily schedule, you do not provide this parameter. Amazon SageMaker will pick a
 	// time for running every day.</p> </li> </ul> </note>
+	//
+	// This member is required.
 	ScheduleExpression *string
 }
 
@@ -4635,28 +5782,36 @@ type ScheduleConfig struct {
 //
 //     * A Boolean operator: And or Or.
 type SearchExpression struct {
+
 	// A list of filter objects.
 	Filters []*Filter
+
 	// A list of search expression objects.
 	SubExpressions []*SearchExpression
+
 	// A Boolean operator used to evaluate the search expression. If you want every
 	// conditional statement in all lists to be satisfied for the entire search
 	// expression to be true, specify And. If only a single conditional statement needs
 	// to be true for the entire search expression to be true, specify Or. The default
 	// value is And.
 	Operator BooleanOperator
+
 	// A list of nested filter objects.
 	NestedFilters []*NestedFilters
 }
 
 // A single resource returned as part of the Search () API response.
 type SearchRecord struct {
+
 	// The properties of a trial.
 	Trial *Trial
+
 	// The properties of an experiment.
 	Experiment *Experiment
+
 	// The properties of a trial component.
 	TrialComponent *TrialComponent
+
 	// The properties of a training job.
 	TrainingJob *TrainingJob
 }
@@ -4670,6 +5825,7 @@ type SearchRecord struct {
 // instances. These transitional states are referred to as the job's secondary
 // status.
 type SecondaryStatusTransition struct {
+
 	// A detailed description of the progress within a secondary status. Amazon
 	// SageMaker provides secondary statuses and status messages that apply to each of
 	// them: Starting
@@ -4710,9 +5866,13 @@ type SecondaryStatusTransition struct {
 	//     * StatusMessage - Downloading
 	// the training image
 	StatusMessage *string
+
 	// A timestamp that shows when the training job transitioned to the current
 	// secondary status state.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// Contains a secondary status information from a training job. Status might be one
 	// of the following secondary statuses: InProgress
 	//
@@ -4762,7 +5922,10 @@ type SecondaryStatusTransition struct {
 	//
 	//     *
 	// DownloadingTrainingImage
+	//
+	// This member is required.
 	Status SecondaryStatus
+
 	// A timestamp that shows when the training job transitioned out of this secondary
 	// status state into another secondary status state or when the training job has
 	// ended.
@@ -4774,12 +5937,15 @@ type SecondaryStatusTransition struct {
 // API is called, and as part of UserSettings when the CreateUserProfile () API is
 // called.
 type SharingSettings struct {
+
 	// Whether to include the notebook cell output when sharing the notebook. The
 	// default is Disabled.
 	NotebookOutputOption NotebookOutputOption
+
 	// When NotebookOutputOption is Allowed, the Amazon S3 bucket used to save the
 	// notebook cell output. If S3OutputPath isn't specified, a default bucket is used.
 	S3OutputPath *string
+
 	// When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS)
 	// encryption key ID used to encrypt the notebook cell output in the Amazon S3
 	// bucket.
@@ -4799,7 +5965,10 @@ type SharingSettings struct {
 // the data is shuffled across nodes so that the content sent to a particular node
 // on the first epoch might be sent to a different node on the second epoch.
 type ShuffleConfig struct {
+
 	// Determines the shuffling order in ShuffleConfig value.
+	//
+	// This member is required.
 	Seed *int64
 }
 
@@ -4807,10 +5976,14 @@ type ShuffleConfig struct {
 // must be either an algorithm resource in your Amazon SageMaker account or an
 // algorithm in AWS Marketplace that you are subscribed to.
 type SourceAlgorithm struct {
+
 	// The name of an algorithm that was used to create the model package. The
 	// algorithm must be either an algorithm resource in your Amazon SageMaker account
 	// or an algorithm in AWS Marketplace that you are subscribed to.
+	//
+	// This member is required.
 	AlgorithmName *string
+
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
 	// (.tar.gz suffix).
@@ -4819,7 +5992,10 @@ type SourceAlgorithm struct {
 
 // A list of algorithms that were used to create a model package.
 type SourceAlgorithmSpecification struct {
+
 	// A list of the algorithms that were used to create a model package.
+	//
+	// This member is required.
 	SourceAlgorithms []*SourceAlgorithm
 }
 
@@ -4828,10 +6004,13 @@ type SourceAlgorithmSpecification struct {
 // create an allow list of IP addresses for a private workforce. For more
 // information, see .
 type SourceIpConfig struct {
+
 	// A list of one to ten Classless Inter-Domain Routing
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) (CIDR)
 	// values. Maximum: Ten CIDR values The following Length Constraints apply to
 	// individual CIDR values in the CIDR value list.
+	//
+	// This member is required.
 	Cidrs []*string
 }
 
@@ -4852,11 +6031,13 @@ type SourceIpConfig struct {
 // NTMs, make sure that the maximum runtime is sufficient for the training job to
 // complete.
 type StoppingCondition struct {
+
 	// The maximum length of time, in seconds, how long you are willing to wait for a
 	// managed spot training job to complete. It is the amount of time spent waiting
 	// for Spot capacity plus the amount of time the training job runs. It must be
 	// equal to or greater than MaxRuntimeInSeconds.
 	MaxWaitTimeInSeconds *int32
+
 	// The maximum length of time, in seconds, that the training or compilation job can
 	// run. If job does not complete during this time, Amazon SageMaker ends the job.
 	// If value is not specified, default value is 1 day. The maximum value is 28 days.
@@ -4865,14 +6046,21 @@ type StoppingCondition struct {
 
 // Describes a work team of a vendor that does the a labelling job.
 type SubscribedWorkteam struct {
+
 	// The Amazon Resource Name (ARN) of the vendor that you have subscribed.
+	//
+	// This member is required.
 	WorkteamArn *string
+
 	// The title of the service provided by the vendor in the Amazon Marketplace.
 	MarketplaceTitle *string
+
 	// Marketplace product listing ID.
 	ListingId *string
+
 	// The description of the vendor from the Amazon Marketplace.
 	MarketplaceDescription *string
+
 	// The name of the vendor in the Amazon Marketplace.
 	SellerName *string
 }
@@ -4880,6 +6068,7 @@ type SubscribedWorkteam struct {
 // Specified in the GetSearchSuggestions () request. Limits the property names that
 // are included in the response.
 type SuggestionQuery struct {
+
 	// Defines a property name hint. Only property names that begin with the specified
 	// hint are included in the response.
 	PropertyNameQuery *PropertyNameQuery
@@ -4887,9 +6076,15 @@ type SuggestionQuery struct {
 
 // Describes a tag.
 type Tag struct {
+
 	// The tag value.
+	//
+	// This member is required.
 	Value *string
+
 	// The tag key.
+	//
+	// This member is required.
 	Key *string
 }
 
@@ -4897,6 +6092,7 @@ type Tag struct {
 // such as OS, architecture, and accelerators. It is an alternative of
 // TargetDevice.
 type TargetPlatform struct {
+
 	// Specifies a target platform OS.
 	//
 	//     * LINUX: Linux-based operating systems.
@@ -4905,7 +6101,10 @@ type TargetPlatform struct {
 	// * ANDROID: Android operating systems. Android API level can be specified using
 	// the ANDROID_PLATFORM compiler option. For example, "CompilerOptions":
 	// {'ANDROID_PLATFORM': 28}
+	//
+	// This member is required.
 	Os TargetPlatformOs
+
 	// Specifies a target platform accelerator (optional).
 	//
 	//     * NVIDIA: Nvidia
@@ -4917,6 +6116,7 @@ type TargetPlatform struct {
 	//     * INTEL_GRAPHICS:
 	// Integrated Intel graphics
 	Accelerator TargetPlatformAccelerator
+
 	// Specifies a target platform architecture.
 	//
 	//     * X86_64: 64-bit version of the
@@ -4931,11 +6131,14 @@ type TargetPlatform struct {
 	//
 	//     *
 	// ARM_EABI: ARMv7 32-bit, Soft Float. Used by Android 32-bit ARM platform.
+	//
+	// This member is required.
 	Arch TargetPlatformArch
 }
 
 // The TensorBoard app settings.
 type TensorBoardAppSettings struct {
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
 	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec
@@ -4943,8 +6146,12 @@ type TensorBoardAppSettings struct {
 
 // Configuration of storage locations for TensorBoard output.
 type TensorBoardOutputConfig struct {
+
 	// Path to Amazon S3 storage location for TensorBoard output.
+	//
+	// This member is required.
 	S3OutputPath *string
+
 	// Path to local storage location for tensorBoard output. Defaults to
 	// /opt/ml/output/tensorboard.
 	LocalPath *string
@@ -4952,27 +6159,35 @@ type TensorBoardOutputConfig struct {
 
 // Contains information about a training job.
 type TrainingJob struct {
+
 	// Resources, including ML compute instances and ML storage volumes, that are
 	// configured for model training.
 	ResourceConfig *ResourceConfig
+
 	// The S3 path where model artifacts that you configured when creating the job are
 	// stored. Amazon SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *OutputDataConfig
+
 	// Information about the Amazon S3 location that is configured for storing model
 	// artifacts.
 	ModelArtifacts *ModelArtifacts
+
 	// Information about the evaluation status of the rules for the training job.
 	DebugRuleEvaluationStatuses []*DebugRuleEvaluationStatus
+
 	// A VpcConfig () object that specifies the VPC that this training job has access
 	// to. For more information, see Protect Training Jobs by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig
+
 	// An array of Channel objects that describes each data input channel.
 	InputDataConfig []*Channel
+
 	// If the TrainingJob was created with network isolation, the value is set to true.
 	// If network isolation is enabled, nodes can't communicate beyond the VPC they run
 	// in.
 	EnableNetworkIsolation *bool
+
 	// Specifies a limit to how long a model training job can run. When the job reaches
 	// the time limit, Amazon SageMaker ends the training job. Use this API to cap
 	// model training costs. To stop a job, Amazon SageMaker sends the algorithm the
@@ -4980,25 +6195,32 @@ type TrainingJob struct {
 	// this 120-second window to save the model artifacts, so the results of training
 	// are not lost.
 	StoppingCondition *StoppingCondition
+
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*Tag
+
 	// Information about the debug rule configuration.
 	DebugRuleConfigurations []*DebugRuleConfiguration
+
 	// The Amazon Resource Name (ARN) of the job.
 	AutoMLJobArn *string
+
 	// Indicates the time when the training job starts on training instances. You are
 	// billed for the time interval between this time and the value of TrainingEndTime.
 	// The start time in CloudWatch Logs might be later than this time. The difference
 	// is due to the time it takes to download the training data and to the size of the
 	// training container.
 	TrainingStartTime *time.Time
+
 	// Information about the algorithm used for training, and algorithm metadata.
 	AlgorithmSpecification *AlgorithmSpecification
+
 	// The name of the training job.
 	TrainingJobName *string
+
 	// Provides detailed information about the state of the training job. For detailed
 	// information about the secondary status of the training job, see StatusMessage
 	// under SecondaryStatusTransition (). Amazon SageMaker provides primary statuses
@@ -5051,25 +6273,33 @@ type TrainingJob struct {
 	//
 	//     * DownloadingTrainingImage
 	SecondaryStatus SecondaryStatus
+
 	// Algorithm-specific parameters.
 	HyperParameters map[string]*string
+
 	// A list of final metric values that are set when the training job completes. Used
 	// only if the training job was configured to use metrics.
 	FinalMetricDataList []*MetricData
+
 	// A history of all of the secondary statuses that the training job has
 	// transitioned through.
 	SecondaryStatusTransitions []*SecondaryStatusTransition
+
 	// The billable time in seconds.
 	BillableTimeInSeconds *int32
+
 	// Contains information about the output location for managed spot training
 	// checkpoint data.
 	CheckpointConfig *CheckpointConfig
+
 	// Configuration information for the debug hook parameters, collection
 	// configuration, and storage paths.
 	DebugHookConfig *DebugHookConfig
+
 	// The AWS Identity and Access Management (IAM) role configured for the training
 	// job.
 	RoleArn *string
+
 	// The status of the training job. Training job statuses are:
 	//
 	//     * InProgress -
@@ -5090,18 +6320,23 @@ type TrainingJob struct {
 	// For more detailed
 	// information, see SecondaryStatus.
 	TrainingJobStatus TrainingJobStatus
+
 	// When true, enables managed spot training using Amazon EC2 Spot instances to run
 	// training jobs instead of on-demand instances. For more information, see Managed
 	// Spot Training
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 	EnableManagedSpotTraining *bool
+
 	// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job if
 	// the training job was launched by a hyperparameter tuning job.
 	TuningJobArn *string
+
 	// If the training job failed, the reason it failed.
 	FailureReason *string
+
 	// The Amazon Resource Name (ARN) of the labeling job.
 	LabelingJobArn *string
+
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
@@ -5112,23 +6347,30 @@ type TrainingJob struct {
 	//
 	//     * CreateTransformJob ()
 	ExperimentConfig *ExperimentConfig
+
 	// A timestamp that indicates when the status of the training job was last
 	// modified.
 	LastModifiedTime *time.Time
+
 	// A timestamp that indicates when the training job was created.
 	CreationTime *time.Time
+
 	// Configuration of storage locations for TensorBoard output.
 	TensorBoardOutputConfig *TensorBoardOutputConfig
+
 	// The training time in seconds.
 	TrainingTimeInSeconds *int32
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithm in distributed training.
 	EnableInterContainerTrafficEncryption *bool
+
 	// The Amazon Resource Name (ARN) of the training job.
 	TrainingJobArn *string
+
 	// Indicates the time when the training job ends on training instances. You are
 	// billed for the time interval between the value of TrainingStartTime and this
 	// time. For successful jobs and stopped jobs, this is the time after model
@@ -5139,6 +6381,7 @@ type TrainingJob struct {
 
 // Defines the input needed to run a training job using the algorithm.
 type TrainingJobDefinition struct {
+
 	// The input mode used by the algorithm for the training job. For the input modes
 	// that Amazon SageMaker algorithms support, see Algorithms
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). If an algorithm
@@ -5146,109 +6389,166 @@ type TrainingJobDefinition struct {
 	// S3 to the provisioned ML storage Volume, and mounts the directory to docker
 	// volume for training container. If an algorithm supports the Pipe input mode,
 	// Amazon SageMaker streams data directly from S3 to the container.
+	//
+	// This member is required.
 	TrainingInputMode TrainingInputMode
+
 	// The hyperparameters used for the training job.
 	HyperParameters map[string]*string
+
 	// An array of Channel objects, each of which specifies an input source.
+	//
+	// This member is required.
 	InputDataConfig []*Channel
+
 	// the path to the S3 bucket where you want to store model artifacts. Amazon
 	// SageMaker creates subfolders for the artifacts.
+	//
+	// This member is required.
 	OutputDataConfig *OutputDataConfig
+
 	// The resources, including the ML compute instances and ML storage volumes, to use
 	// for model training.
+	//
+	// This member is required.
 	ResourceConfig *ResourceConfig
+
 	// Specifies a limit to how long a model training job can run. When the job reaches
 	// the time limit, Amazon SageMaker ends the training job. Use this API to cap
 	// model training costs. To stop a job, Amazon SageMaker sends the algorithm the
 	// SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use
 	// this 120-second window to save the model artifacts.
+	//
+	// This member is required.
 	StoppingCondition *StoppingCondition
 }
 
 // The numbers of training jobs launched by a hyperparameter tuning job,
 // categorized by status.
 type TrainingJobStatusCounters struct {
+
 	// The number of training jobs that failed, but can be retried. A failed training
 	// job can be retried only if it failed because an internal service error occurred.
 	RetryableError *int32
+
 	// The number of training jobs that failed and can't be retried. A failed training
 	// job can't be retried if it failed because a client error occurred.
 	NonRetryableError *int32
+
 	// The number of completed training jobs launched by the hyperparameter tuning job.
 	Completed *int32
+
 	// The number of training jobs launched by a hyperparameter tuning job that were
 	// manually stopped.
 	Stopped *int32
+
 	// The number of in-progress training jobs launched by a hyperparameter tuning job.
 	InProgress *int32
 }
 
 // Provides summary information about a training job.
 type TrainingJobSummary struct {
+
 	// The status of the training job.
+	//
+	// This member is required.
 	TrainingJobStatus TrainingJobStatus
+
 	// The Amazon Resource Name (ARN) of the training job.
+	//
+	// This member is required.
 	TrainingJobArn *string
+
 	// A timestamp that shows when the training job ended. This field is set only if
 	// the training job has one of the terminal statuses (Completed, Failed, or
 	// Stopped).
 	TrainingEndTime *time.Time
+
 	// Timestamp when the training job was last modified.
 	LastModifiedTime *time.Time
+
 	// The name of the training job that you want a summary for.
+	//
+	// This member is required.
 	TrainingJobName *string
+
 	// A timestamp that shows when the training job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
 }
 
 // Defines how the algorithm is used for a training job.
 type TrainingSpecification struct {
+
 	// A list of the metrics that the algorithm emits that can be used as the objective
 	// metric in a hyperparameter tuning job.
 	SupportedTuningJobObjectiveMetrics []*HyperParameterTuningJobObjective
+
 	// A list of ChannelSpecification objects, which specify the input sources to be
 	// used by the algorithm.
+	//
+	// This member is required.
 	TrainingChannels []*ChannelSpecification
+
 	// Indicates whether the algorithm supports distributed training. If set to false,
 	// buyers can't request more than one instance during training.
 	SupportsDistributedTraining *bool
+
 	// A list of the HyperParameterSpecification objects, that define the supported
 	// hyperparameters. This is required if the algorithm supports automatic model
 	// tuning.>
 	SupportedHyperParameters []*HyperParameterSpecification
+
 	// A list of MetricDefinition objects, which are used for parsing metrics generated
 	// by the algorithm.
 	MetricDefinitions []*MetricDefinition
+
 	// The Amazon ECR registry path of the Docker image that contains the training
 	// algorithm.
+	//
+	// This member is required.
 	TrainingImage *string
+
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	TrainingImageDigest *string
+
 	// A list of the instance types that this algorithm can use for training.
+	//
+	// This member is required.
 	SupportedTrainingInstanceTypes []TrainingInstanceType
 }
 
 // Describes the location of the channel data.
 type TransformDataSource struct {
+
 	// The S3 location of the data source that is associated with a channel.
+	//
+	// This member is required.
 	S3DataSource *TransformS3DataSource
 }
 
 // Describes the input source of a transform job and the way the transform job
 // consumes it.
 type TransformInput struct {
+
 	// If your transform data is compressed, specify the compression type. Amazon
 	// SageMaker automatically decompresses the data for the transform job accordingly.
 	// The default value is None.
 	CompressionType CompressionType
+
 	// Describes the location of the channel data, which is, the S3 location of the
 	// input data that the model can consume.
+	//
+	// This member is required.
 	DataSource *TransformDataSource
+
 	// The multipurpose internet mail extension (MIME) type of the data. Amazon
 	// SageMaker uses the MIME type with each http call to transfer data to the
 	// transform job.
 	ContentType *string
+
 	// The method to use to split the transform job's data files into smaller batches.
 	// Splitting is necessary when the total size of each object is too large to fit in
 	// a single request. You can also use data splitting to improve performance by
@@ -5278,10 +6578,13 @@ type TransformInput struct {
 // Batch Transform
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
 type TransformJob struct {
+
 	// Describes the results of a transform job.
 	TransformOutput *TransformOutput
+
 	// The name of the model associated with the transform job.
 	ModelName *string
+
 	// The maximum allowed size of the payload, in MB. A payload is the data portion of
 	// a record (without metadata). The value in MaxPayloadInMB must be greater than,
 	// or equal to, the size of a single record. To estimate the size of a record in
@@ -5292,28 +6595,37 @@ type TransformJob struct {
 	// to 0. This feature works only in supported algorithms. Currently, SageMaker
 	// built-in algorithms do not support HTTP chunked encoding.
 	MaxPayloadInMB *int32
+
 	// The environment variables to set in the Docker container. We support up to 16
 	// key and values entries in the map.
 	Environment map[string]*string
+
 	// A timestamp that shows when the transform Job was created.
 	CreationTime *time.Time
+
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
 	// request. A record is a single unit of input data that inference can be made on.
 	// For example, a single line in a CSV file is a record.
 	BatchStrategy BatchStrategy
+
 	// The name of the transform job.
 	TransformJobName *string
+
 	// A list of tags associated with the transform job.
 	Tags []*Tag
+
 	// Describes the resources, including ML instance types and ML instance count, to
 	// use for transform job.
 	TransformResources *TransformResources
+
 	// Indicates when the transform job starts on ML instances. You are billed for the
 	// time interval between this time and the value of TransformEndTime.
 	TransformStartTime *time.Time
+
 	// Configures the timeout and maximum number of retries for processing a transform
 	// job invocation.
 	ModelClientConfig *ModelClientConfig
+
 	// The maximum number of parallel requests that can be sent to each instance in a
 	// transform job. If MaxConcurrentTransforms is set to 0 or left unset, SageMaker
 	// checks the optional execution-parameters to determine the settings for your
@@ -5321,9 +6633,11 @@ type TransformJob struct {
 	// default value is 1. For built-in algorithms, you don't need to set a value for
 	// MaxConcurrentTransforms.
 	MaxConcurrentTransforms *int32
+
 	// The Amazon Resource Name (ARN) of the labeling job that created the transform
 	// job.
 	LabelingJobArn *string
+
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
@@ -5334,13 +6648,17 @@ type TransformJob struct {
 	//
 	//     * CreateTransformJob ()
 	ExperimentConfig *ExperimentConfig
+
 	// The Amazon Resource Name (ARN) of the AutoML job that created the transform job.
 	AutoMLJobArn *string
+
 	// If the transform job failed, the reason it failed.
 	FailureReason *string
+
 	// Describes the input source of a transform job and the way the transform job
 	// consumes it.
 	TransformInput *TransformInput
+
 	// The status of the transform job. Transform job statuses are:
 	//
 	//     * InProgress -
@@ -5358,12 +6676,15 @@ type TransformJob struct {
 	//     * Stopped - The transform job has
 	// stopped.
 	TransformJobStatus TransformJobStatus
+
 	// The Amazon Resource Name (ARN) of the transform job.
 	TransformJobArn *string
+
 	// Indicates when the transform job has been completed, or has stopped or failed.
 	// You are billed for the time interval between this time and the value of
 	// TransformStartTime.
 	TransformEndTime *time.Time
+
 	// The data structure used to specify the data to be used for inference in a batch
 	// transform job and to associate the data that is relevant to the prediction
 	// results in the output. The input filter provided allows you to exclude input
@@ -5378,24 +6699,37 @@ type TransformJob struct {
 // Defines the input needed to run a transform job using the inference
 // specification specified in the algorithm.
 type TransformJobDefinition struct {
+
 	// The environment variables to set in the Docker container. We support up to 16
 	// key and values entries in the map.
 	Environment map[string]*string
+
 	// A string that determines the number of records included in a single mini-batch.
 	// SingleRecord means only one record is used per mini-batch. MultiRecord means a
 	// mini-batch is set to contain as many records that can fit within the
 	// MaxPayloadInMB limit.
 	BatchStrategy BatchStrategy
+
 	// A description of the input source and the way the transform job consumes it.
+	//
+	// This member is required.
 	TransformInput *TransformInput
+
 	// The maximum number of parallel requests that can be sent to each instance in a
 	// transform job. The default value is 1.
 	MaxConcurrentTransforms *int32
+
 	// Identifies the Amazon S3 location where you want Amazon SageMaker to save the
 	// results from the transform job.
+	//
+	// This member is required.
 	TransformOutput *TransformOutput
+
 	// Identifies the ML compute instances for the transform job.
+	//
+	// This member is required.
 	TransformResources *TransformResources
+
 	// The maximum payload size allowed, in MB. A payload is the data portion of a
 	// record (without metadata).
 	MaxPayloadInMB *int32
@@ -5404,27 +6738,43 @@ type TransformJobDefinition struct {
 // Provides a summary of a transform job. Multiple TransformJobSummary objects are
 // returned as a list after in response to a ListTransformJobs () call.
 type TransformJobSummary struct {
+
 	// If the transform job failed, the reason it failed.
 	FailureReason *string
+
 	// The status of the transform job.
+	//
+	// This member is required.
 	TransformJobStatus TransformJobStatus
+
 	// Indicates when the transform job ends on compute instances. For successful jobs
 	// and stopped jobs, this is the exact time recorded after the results are
 	// uploaded. For failed jobs, this is when Amazon SageMaker detected that the job
 	// failed.
 	TransformEndTime *time.Time
+
 	// Indicates when the transform job was last modified.
 	LastModifiedTime *time.Time
+
 	// A timestamp that shows when the transform Job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the transform job.
+	//
+	// This member is required.
 	TransformJobArn *string
+
 	// The name of the transform job.
+	//
+	// This member is required.
 	TransformJobName *string
 }
 
 // Describes the results of a transform job.
 type TransformOutput struct {
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption. The
 	// KmsKeyId can be any of the following formats:
@@ -5452,14 +6802,17 @@ type TransformOutput struct {
 	// Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
 	// Guide</i>.</p>
 	KmsKeyId *string
+
 	// Defines how to assemble the results of the transform job as a single S3 object.
 	// Choose a format that is most convenient to you. To concatenate the results in
 	// binary format, specify None. To add a newline character at the end of every
 	// transformed record, specify Line.
 	AssembleWith AssemblyType
+
 	// The MIME type used to specify the output data. Amazon SageMaker uses the MIME
 	// type with each http call to transfer data from the transform job.
 	Accept *string
+
 	// The Amazon S3 path where you want Amazon SageMaker to store the results of the
 	// transform job. For example, s3://bucket-name/key-name-prefix. For every S3
 	// object used as input for the transform job, batch transform stores the
@@ -5474,15 +6827,21 @@ type TransformOutput struct {
 	// the batch transform job processes the listed S3 objects and uploads only the
 	// output for successfully processed objects. If any object fails in the transform
 	// job batch transform marks the job as failed to prompt investigation.
+	//
+	// This member is required.
 	S3OutputPath *string
 }
 
 // Describes the resources, including ML instance types and ML instance count, to
 // use for transform job.
 type TransformResources struct {
+
 	// The number of ML compute instances to use in the transform job. For distributed
 	// transform jobs, specify a value greater than 1. The default value is 1.
+	//
+	// This member is required.
 	InstanceCount *int32
+
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt model data on the storage volume attached to the ML compute instance(s)
 	// that run the batch transform job. The VolumeKmsKeyId can be any of the following
@@ -5499,14 +6858,18 @@ type TransformResources struct {
 	//     * Alias name ARN:
 	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	VolumeKmsKeyId *string
+
 	// The ML compute instance type for the transform job. If you are using built-in
 	// algorithms to transform moderately sized datasets, we recommend using
 	// ml.m4.xlarge or ml.m5.large instance types.
+	//
+	// This member is required.
 	InstanceType TransformInstanceType
 }
 
 // Describes the S3 data source.
 type TransformS3DataSource struct {
+
 	// Depending on the value specified for the S3DataType, identifies either a key
 	// name prefix or a manifest. For example:
 	//
@@ -5523,42 +6886,58 @@ type TransformS3DataSource struct {
 	// channel for this datasource. The object that each S3Uris points to must be
 	// readable by the IAM role that Amazon SageMaker uses to perform tasks on your
 	// behalf.
+	//
+	// This member is required.
 	S3Uri *string
+
 	// If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker
 	// uses all objects with the specified key name prefix for batch transform. If you
 	// choose ManifestFile, S3Uri identifies an object that is a manifest file
 	// containing a list of object keys that you want Amazon SageMaker to use for batch
 	// transform. The following values are compatible: ManifestFile, S3Prefix The
 	// following value is not compatible: AugmentedManifestFile
+	//
+	// This member is required.
 	S3DataType S3DataType
 }
 
 // The properties of a trial as returned by the Search () API.
 type Trial struct {
+
 	// The name of the experiment the trial is part of.
 	ExperimentName *string
+
 	// When the trial was created.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
+
 	// The name of the trial.
 	TrialName *string
+
 	// The source of the trial.
 	Source *TrialSource
+
 	// Who last modified the trial.
 	LastModifiedTime *time.Time
+
 	// The name of the trial as displayed. If DisplayName isn't specified, TrialName is
 	// displayed.
 	DisplayName *string
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	CreatedBy *UserContext
+
 	// The list of tags that are associated with the trial. You can use Search () API
 	// to search on the tags.
 	Tags []*Tag
+
 	// A list of the components associated with the trial. For each component, a
 	// summary of the component's properties is included.
 	TrialComponentSummaries []*TrialComponentSimpleSummary
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	LastModifiedBy *UserContext
@@ -5566,46 +6945,64 @@ type Trial struct {
 
 // The properties of a trial component as returned by the Search () API.
 type TrialComponent struct {
+
 	// When the component ended.
 	EndTime *time.Time
+
 	// When the component was created.
 	CreationTime *time.Time
+
 	// When the component was last modified.
 	LastModifiedTime *time.Time
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	LastModifiedBy *UserContext
+
 	// The name of the trial component.
 	TrialComponentName *string
+
 	// The metrics for the component.
 	Metrics []*TrialComponentMetricSummary
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	CreatedBy *UserContext
+
 	// The hyperparameters of the component.
 	Parameters map[string]*TrialComponentParameterValue
+
 	// An array of the parents of the component. A parent is a trial the component is
 	// associated with and the experiment the trial is part of. A component might not
 	// have any parents.
 	Parents []*Parent
+
 	// The input artifacts of the component.
 	InputArtifacts map[string]*TrialComponentArtifact
+
 	// When the component started.
 	StartTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the trial component.
 	TrialComponentArn *string
+
 	// Details of the source of the component.
 	SourceDetail *TrialComponentSourceDetail
+
 	// The list of tags that are associated with the component. You can use Search ()
 	// API to search on the tags.
 	Tags []*Tag
+
 	// The Amazon Resource Name (ARN) and job type of the source of the component.
 	Source *TrialComponentSource
+
 	// The name of the component as displayed. If DisplayName isn't specified,
 	// TrialComponentName is displayed.
 	DisplayName *string
+
 	// The output artifacts of the component.
 	OutputArtifacts map[string]*TrialComponentArtifact
+
 	// The status of the trial component.
 	Status *TrialComponentStatus
 }
@@ -5616,8 +7013,12 @@ type TrialComponent struct {
 // are datasets, algorithms, hyperparameters, source code, and instance types.
 // Examples of output artifacts are metrics, snapshots, logs, and images.
 type TrialComponentArtifact struct {
+
 	// The location of the artifact.
+	//
+	// This member is required.
 	Value *string
+
 	// The media type of the artifact, which indicates the type of data in the artifact
 	// file. The media type consists of a type and a subtype concatenated with a slash
 	// (/) character, for example, text/csv, image/jpeg, and s3/uri. The type specifies
@@ -5627,22 +7028,31 @@ type TrialComponentArtifact struct {
 
 // A summary of the metrics of a trial component.
 type TrialComponentMetricSummary struct {
+
 	// When the metric was last updated.
 	TimeStamp *time.Time
+
 	// The Amazon Resource Name (ARN) of the source.
 	SourceArn *string
+
 	// The most recent value of the metric.
 	Last *float64
+
 	// The number of samples used to generate the metric.
 	Count *int32
+
 	// The minimum value of the metric.
 	Min *float64
+
 	// The average value of the metric.
 	Avg *float64
+
 	// The standard deviation of the metric.
 	StdDev *float64
+
 	// The maximum value of the metric.
 	Max *float64
+
 	// The name of the metric.
 	MetricName *string
 }
@@ -5650,9 +7060,11 @@ type TrialComponentMetricSummary struct {
 // The value of a hyperparameter. Only one of NumberValue or StringValue can be
 // specified. This object is specified in the CreateTrialComponent () request.
 type TrialComponentParameterValue struct {
+
 	// The string value of a categorical hyperparameter. If you specify a value for
 	// this parameter, you can't specify the NumberValue parameter.
 	StringValue *string
+
 	// The numeric value of a numeric hyperparameter. If you specify a value for this
 	// parameter, you can't specify the StringValue parameter.
 	NumberValue *float64
@@ -5660,14 +7072,19 @@ type TrialComponentParameterValue struct {
 
 // A short summary of a trial component.
 type TrialComponentSimpleSummary struct {
+
 	// The Amazon Resource Name (ARN) and job type of the source of a trial component.
 	TrialComponentSource *TrialComponentSource
+
 	// When the component was created.
 	CreationTime *time.Time
+
 	// The name of the trial component.
 	TrialComponentName *string
+
 	// The Amazon Resource Name (ARN) of the trial component.
 	TrialComponentArn *string
+
 	// Information about the user who created or modified an experiment, trial, or
 	// trial component.
 	CreatedBy *UserContext
@@ -5675,8 +7092,12 @@ type TrialComponentSimpleSummary struct {
 
 // The Amazon Resource Name (ARN) and job type of the source of a trial component.
 type TrialComponentSource struct {
+
 	// The source ARN.
+	//
+	// This member is required.
 	SourceArn *string
+
 	// The source job type.
 	SourceType *string
 }
@@ -5684,20 +7105,26 @@ type TrialComponentSource struct {
 // Detailed information about the source of a trial component. Either ProcessingJob
 // or TrainingJob is returned.
 type TrialComponentSourceDetail struct {
+
 	// Information about a processing job that's the source of a trial component.
 	ProcessingJob *ProcessingJob
+
 	// The Amazon Resource Name (ARN) of the source.
 	SourceArn *string
+
 	// Information about a training job that's the source of a trial component.
 	TrainingJob *TrainingJob
+
 	// Information about a transform job that's the source of the trial component.
 	TransformJob *TransformJob
 }
 
 // The status of the trial component.
 type TrialComponentStatus struct {
+
 	// The status of the trial component.
 	PrimaryStatus TrialComponentPrimaryStatus
+
 	// If the component failed, a message describing why.
 	Message *string
 }
@@ -5705,6 +7132,7 @@ type TrialComponentStatus struct {
 // A summary of the properties of a trial component. To get all the properties,
 // call the DescribeTrialComponent () API and provide the TrialComponentName.
 type TrialComponentSummary struct {
+
 	// The status of the component. States include:
 	//
 	//     * InProgress
@@ -5714,24 +7142,34 @@ type TrialComponentSummary struct {
 	//
 	//     * Failed
 	Status *TrialComponentStatus
+
 	// Who last modified the component.
 	LastModifiedBy *UserContext
+
 	// Who created the component.
 	CreatedBy *UserContext
+
 	// When the component was created.
 	CreationTime *time.Time
+
 	// When the component was last modified.
 	LastModifiedTime *time.Time
+
 	// When the component started.
 	StartTime *time.Time
+
 	// The name of the trial component.
 	TrialComponentName *string
+
 	// When the component ended.
 	EndTime *time.Time
+
 	// The ARN of the trial component.
 	TrialComponentArn *string
+
 	// The Amazon Resource Name (ARN) and job type of the source of a trial component.
 	TrialComponentSource *TrialComponentSource
+
 	// The name of the component as displayed. If DisplayName isn't specified,
 	// TrialComponentName is displayed.
 	DisplayName *string
@@ -5739,25 +7177,35 @@ type TrialComponentSummary struct {
 
 // The source of the trial.
 type TrialSource struct {
+
 	// The source job type.
 	SourceType *string
+
 	// The Amazon Resource Name (ARN) of the source.
+	//
+	// This member is required.
 	SourceArn *string
 }
 
 // A summary of the properties of a trial. To get the complete set of properties,
 // call the DescribeTrial () API and provide the TrialName.
 type TrialSummary struct {
+
 	// The name of the trial.
 	TrialName *string
+
 	// The source of the trial.
 	TrialSource *TrialSource
+
 	// When the trial was created.
 	CreationTime *time.Time
+
 	// When the trial was last modified.
 	LastModifiedTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
+
 	// The name of the trial as displayed. If DisplayName isn't specified, TrialName is
 	// displayed.
 	DisplayName *string
@@ -5765,12 +7213,16 @@ type TrialSummary struct {
 
 // The job completion criteria.
 type TuningJobCompletionCriteria struct {
+
 	// The objective metric's value.
+	//
+	// This member is required.
 	TargetObjectiveMetricValue *float32
 }
 
 // Provided configuration information for the worker UI for a labeling job.
 type UiConfig struct {
+
 	// The ARN of the worker task template used to render the worker UI and tools for
 	// labeling job tasks. Use this parameter when you are creating a labeling job for
 	// 3D point cloud and video fram labeling jobs. Use your labeling job task type to
@@ -5798,6 +7250,7 @@ type UiConfig struct {
 	// <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking</code>
 	// </p> </li> </ul>
 	HumanTaskUiArn *string
+
 	// The Amazon S3 bucket location of the UI template, or worker task template. This
 	// is the template used to render the worker UI and tools for labeling job tasks.
 	// For more information about the contents of a UI template, see  Creating Your
@@ -5808,24 +7261,32 @@ type UiConfig struct {
 
 // The Liquid template for the worker user interface.
 type UiTemplate struct {
+
 	// The content of the Liquid template for the worker user interface.
+	//
+	// This member is required.
 	Content *string
 }
 
 // Container for user interface template information.
 type UiTemplateInfo struct {
+
 	// The SHA-256 digest of the contents of the template.
 	ContentSha256 *string
+
 	// The URL for the user interface template.
 	Url *string
 }
 
 // Represents an amount of money in United States dollars/
 type USD struct {
+
 	// The whole number of dollars in the amount.
 	Dollars *int32
+
 	// Fractions of a cent, in tenths.
 	TenthFractionsOfACent *int32
+
 	// The fractional portion, in cents, of the amount.
 	Cents *int32
 }
@@ -5833,40 +7294,54 @@ type USD struct {
 // Information about the user who created or modified an experiment, trial, or
 // trial component.
 type UserContext struct {
+
 	// The domain associated with the user.
 	DomainId *string
+
 	// The name of the user's profile.
 	UserProfileName *string
+
 	// The Amazon Resource Name (ARN) of the user's profile.
 	UserProfileArn *string
 }
 
 // The user profile details.
 type UserProfileDetails struct {
+
 	// The user profile name.
 	UserProfileName *string
+
 	// The status.
 	Status UserProfileStatus
+
 	// The domain ID.
 	DomainId *string
+
 	// The last modified time.
 	LastModifiedTime *time.Time
+
 	// The creation time.
 	CreationTime *time.Time
 }
 
 // A collection of settings.
 type UserSettings struct {
+
 	// The execution role for the user.
 	ExecutionRole *string
+
 	// The Jupyter server's app settings.
 	JupyterServerAppSettings *JupyterServerAppSettings
+
 	// The TensorBoard app settings.
 	TensorBoardAppSettings *TensorBoardAppSettings
+
 	// The kernel gateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
+
 	// The sharing settings.
 	SharingSettings *SharingSettings
+
 	// The security groups.
 	SecurityGroups []*string
 }
@@ -5877,6 +7352,7 @@ type UserSettings struct {
 // UpdateEndpointInput$ExcludeRetainedVariantProperties () override the existing
 // variant properties of the endpoint.
 type VariantProperty struct {
+
 	// The type of variant property. The supported values are:
 	//
 	//     *
@@ -5890,6 +7366,8 @@ type VariantProperty struct {
 	//
 	//     *
 	// DataCaptureConfig: (Not currently supported.)
+	//
+	// This member is required.
 	VariantPropertyType VariantPropertyType
 }
 
@@ -5900,13 +7378,19 @@ type VariantProperty struct {
 // and Protect Training Jobs by Using an Amazon Virtual Private Cloud
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 type VpcConfig struct {
+
 	// The ID of the subnets in the VPC to which you want to connect your training job
 	// or model. For information about the availability of specific instance types, see
 	// Supported Instance Types and Availability Zones
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html).
+	//
+	// This member is required.
 	Subnets []*string
+
 	// The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups
 	// for the VPC that is specified in the Subnets field.
+	//
+	// This member is required.
 	SecurityGroupIds []*string
 }
 
@@ -5917,52 +7401,82 @@ type VpcConfig struct {
 // create a private workforce, see Create a Private Workforce
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
 type Workforce struct {
+
 	// The configuration of an OIDC Identity Provider (IdP) private workforce.
 	OidcConfig *OidcConfigForResponse
+
 	// The name of the private workforce.
+	//
+	// This member is required.
 	WorkforceName *string
+
 	// The most recent date that was used to successfully add one or more IP address
 	// ranges (CIDRs
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to a
 	// private workforce's allow list.
 	LastUpdatedDate *time.Time
+
 	// The subdomain for your OIDC Identity Provider.
 	SubDomain *string
+
 	// The configuration of an Amazon Cognito workforce. A single Cognito workforce is
 	// created using and corresponds to a single  Amazon Cognito user pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
 	CognitoConfig *CognitoConfig
+
 	// A list of one to ten IP address ranges (CIDRs
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to be added
 	// to the workforce allow list.
 	SourceIpConfig *SourceIpConfig
+
 	// The date that the workforce is created.
 	CreateDate *time.Time
+
 	// The Amazon Resource Name (ARN) of the private workforce.
+	//
+	// This member is required.
 	WorkforceArn *string
 }
 
 // Provides details about a labeling work team.
 type Workteam struct {
+
 	// The date and time that the work team was last updated (timestamp).
 	LastUpdatedDate *time.Time
+
 	// The date and time that the work team was created (timestamp).
 	CreateDate *time.Time
+
 	// The URI of the labeling job's user interface. Workers open this URI to start
 	// labeling your data objects.
 	SubDomain *string
+
 	// A description of the work team.
+	//
+	// This member is required.
 	Description *string
+
 	// The Amazon Resource Name (ARN) that identifies the work team.
+	//
+	// This member is required.
 	WorkteamArn *string
+
 	// The Amazon Marketplace identifier for a vendor's work team.
 	ProductListingIds []*string
+
 	// Configures SNS notifications of available or expiring work items for work teams.
 	NotificationConfiguration *NotificationConfiguration
+
 	// The Amazon Resource Name (ARN) of the workforce.
 	WorkforceArn *string
+
 	// The Amazon Cognito user groups that make up the work team.
+	//
+	// This member is required.
 	MemberDefinitions []*MemberDefinition
+
 	// The name of the work team.
+	//
+	// This member is required.
 	WorkteamName *string
 }

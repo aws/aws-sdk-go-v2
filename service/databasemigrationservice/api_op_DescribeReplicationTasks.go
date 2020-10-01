@@ -58,18 +58,22 @@ func (c *Client) DescribeReplicationTasks(ctx context.Context, params *DescribeR
 
 //
 type DescribeReplicationTasksInput struct {
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An option to set to avoid returning information about settings. Use this to
 	// reduce overhead when setting information is too large. To use this option,
 	// choose true; otherwise, choose false (the default).
 	WithoutSettings *bool
+
 	// Filters applied to replication tasks. Valid filter names: replication-task-arn |
 	// replication-task-id | migration-type | endpoint-arn | replication-instance-arn
 	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
@@ -78,8 +82,10 @@ type DescribeReplicationTasksInput struct {
 
 //
 type DescribeReplicationTasksOutput struct {
+
 	// A description of the replication tasks.
 	ReplicationTasks []*types.ReplicationTask
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.

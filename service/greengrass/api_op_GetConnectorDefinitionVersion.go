@@ -59,32 +59,45 @@ func (c *Client) GetConnectorDefinitionVersion(ctx context.Context, params *GetC
 }
 
 type GetConnectorDefinitionVersionInput struct {
+
 	// The ID of the connector definition version. This value maps to the ''Version''
 	// property of the corresponding ''VersionInformation'' object, which is returned
 	// by ''ListConnectorDefinitionVersions'' requests. If the version is the last one
 	// that was associated with a connector definition, the value also maps to the
 	// ''LatestVersion'' property of the corresponding ''DefinitionInformation''
 	// object.
+	//
+	// This member is required.
 	ConnectorDefinitionVersionId *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The ID of the connector definition.
+	//
+	// This member is required.
 	ConnectorDefinitionId *string
 }
 
 type GetConnectorDefinitionVersionOutput struct {
+
 	// The time, in milliseconds since the epoch, when the connector definition version
 	// was created.
 	CreationTimestamp *string
+
 	// The ID of the connector definition version.
 	Id *string
+
 	// The ARN of the connector definition version.
 	Arn *string
+
 	// Information about the connector definition version.
 	Definition *types.ConnectorDefinitionVersion
+
 	// The version of the connector definition version.
 	Version *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

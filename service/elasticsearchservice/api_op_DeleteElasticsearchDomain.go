@@ -59,7 +59,10 @@ func (c *Client) DeleteElasticsearchDomain(ctx context.Context, params *DeleteEl
 // Container for the parameters to the DeleteElasticsearchDomain () operation.
 // Specifies the name of the Elasticsearch domain that you want to delete.
 type DeleteElasticsearchDomainInput struct {
+
 	// The name of the Elasticsearch domain that you want to permanently delete.
+	//
+	// This member is required.
 	DomainName *string
 }
 
@@ -67,6 +70,7 @@ type DeleteElasticsearchDomainInput struct {
 // pending deletion, or no status if the domain and all of its resources have been
 // deleted.
 type DeleteElasticsearchDomainOutput struct {
+
 	// The status of the Elasticsearch domain being deleted.
 	DomainStatus *types.ElasticsearchDomainStatus
 

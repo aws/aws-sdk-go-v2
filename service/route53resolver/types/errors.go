@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // We encountered an unknown error. Try again in a few minutes.
@@ -24,12 +23,6 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 }
 func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InternalServiceErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value that you specified for NextToken in a List request isn't valid.
 type InvalidNextTokenException struct {
@@ -47,12 +40,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameters in this request are not valid.
 type InvalidParameterException struct {
@@ -72,18 +59,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetFieldName() string {
-	return ptr.ToString(e.FieldName)
-}
-func (e *InvalidParameterException) HasFieldName() bool {
-	return e.FieldName != nil
-}
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resolver rule policy is invalid.
 type InvalidPolicyDocument struct {
@@ -101,12 +76,6 @@ func (e *InvalidPolicyDocument) ErrorMessage() string {
 }
 func (e *InvalidPolicyDocument) ErrorCode() string             { return "InvalidPolicyDocument" }
 func (e *InvalidPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPolicyDocument) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPolicyDocument) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is invalid.
 type InvalidRequestException struct {
@@ -124,12 +93,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified tag is invalid.
 type InvalidTagException struct {
@@ -147,12 +110,6 @@ func (e *InvalidTagException) ErrorMessage() string {
 }
 func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request caused one or more limits to be exceeded.
 type LimitExceededException struct {
@@ -172,18 +129,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *LimitExceededException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource that you tried to create already exists.
 type ResourceExistsException struct {
@@ -203,18 +148,6 @@ func (e *ResourceExistsException) ErrorMessage() string {
 }
 func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceExistsException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceExistsException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource that you tried to update or delete is currently in use.
 type ResourceInUseException struct {
@@ -234,18 +167,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceInUseException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource doesn't exist.
 type ResourceNotFoundException struct {
@@ -265,18 +186,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceNotFoundException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource isn't available.
 type ResourceUnavailableException struct {
@@ -296,18 +205,6 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 }
 func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceUnavailableException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceUnavailableException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was throttled. Try again in a few minutes.
 type ThrottlingException struct {
@@ -325,12 +222,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource doesn't exist.
 type UnknownResourceException struct {
@@ -348,9 +239,3 @@ func (e *UnknownResourceException) ErrorMessage() string {
 }
 func (e *UnknownResourceException) ErrorCode() string             { return "UnknownResourceException" }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnknownResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnknownResourceException) HasMessage() bool {
-	return e.Message != nil
-}

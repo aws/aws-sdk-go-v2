@@ -59,11 +59,18 @@ func (c *Client) RemoveRoleFromDBCluster(ctx context.Context, params *RemoveRole
 }
 
 type RemoveRoleFromDBClusterInput struct {
+
 	// The Amazon Resource Name (ARN) of the IAM role to disassociate from the Aurora
 	// DB cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The name of the DB cluster to disassociate the IAM role from.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The name of the feature for the DB cluster that the IAM role is to be
 	// disassociated from. For the list of supported feature names, see DBEngineVersion
 	// ().

@@ -56,7 +56,10 @@ func (c *Client) DeleteReplicationSubnetGroup(ctx context.Context, params *Delet
 
 //
 type DeleteReplicationSubnetGroupInput struct {
+
 	// The subnet group name of the replication instance.
+	//
+	// This member is required.
 	ReplicationSubnetGroupIdentifier *string
 }
 

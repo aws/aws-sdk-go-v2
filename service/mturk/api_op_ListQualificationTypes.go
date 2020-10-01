@@ -57,33 +57,43 @@ func (c *Client) ListQualificationTypes(ctx context.Context, params *ListQualifi
 }
 
 type ListQualificationTypesInput struct {
+
 	// Specifies that only Qualification types that a user can request through the
 	// Amazon Mechanical Turk web site, such as by taking a Qualification test, are
 	// returned as results of the search. Some Qualification types, such as those
 	// assigned automatically by the system, cannot be requested directly by users. If
 	// false, all Qualification types, including those managed by the system, are
 	// considered. Valid values are True | False.
+	//
+	// This member is required.
 	MustBeRequestable *bool
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// Specifies that only Qualification types that the Requester created are returned.
 	// If false, the operation returns all Qualification types.
 	MustBeOwnedByCaller *bool
+
 	// A text query against all of the searchable attributes of Qualification types.
 	Query *string
 }
 
 type ListQualificationTypesOutput struct {
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The list of QualificationType elements returned by the query.
 	QualificationTypes []*types.QualificationType
+
 	// The number of Qualification types on this page in the filtered results list,
 	// equivalent to the number of types this operation returns.
 	NumResults *int32

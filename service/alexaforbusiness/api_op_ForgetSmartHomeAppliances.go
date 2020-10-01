@@ -55,7 +55,10 @@ func (c *Client) ForgetSmartHomeAppliances(ctx context.Context, params *ForgetSm
 }
 
 type ForgetSmartHomeAppliancesInput struct {
+
 	// The room that the appliances are associated with.
+	//
+	// This member is required.
 	RoomArn *string
 }
 

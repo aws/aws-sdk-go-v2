@@ -63,19 +63,25 @@ func (c *Client) PollForJobs(ctx context.Context, params *PollForJobsInput, optF
 
 // Represents the input of a PollForJobs action.
 type PollForJobsInput struct {
+
 	// A map of property names and values. For an action type with no queryable
 	// properties, this value must be null or an empty map. For an action type with a
 	// queryable property, you must supply that property as a key in the map. Only jobs
 	// whose action configuration matches the mapped value are returned.
 	QueryParam map[string]*string
+
 	// The maximum number of jobs to return in a poll for jobs call.
 	MaxBatchSize *int32
+
 	// Represents information about an action type.
+	//
+	// This member is required.
 	ActionTypeId *types.ActionTypeId
 }
 
 // Represents the output of a PollForJobs action.
 type PollForJobsOutput struct {
+
 	// Information about the jobs to take action on.
 	Jobs []*types.Job
 

@@ -57,18 +57,25 @@ func (c *Client) BatchUpdateSchedule(ctx context.Context, params *BatchUpdateSch
 
 // List of actions to create and list of actions to delete.
 type BatchUpdateScheduleInput struct {
+
 	// Id of the channel whose schedule is being updated.
+	//
+	// This member is required.
 	ChannelId *string
+
 	// Schedule actions to delete from the schedule.
 	Deletes *types.BatchScheduleActionDeleteRequest
+
 	// Schedule actions to create in the schedule.
 	Creates *types.BatchScheduleActionCreateRequest
 }
 
 // Placeholder documentation for BatchUpdateScheduleResponse
 type BatchUpdateScheduleOutput struct {
+
 	// Schedule actions deleted from the schedule.
 	Deletes *types.BatchScheduleActionDeleteResult
+
 	// Schedule actions created in the schedule.
 	Creates *types.BatchScheduleActionCreateResult
 

@@ -60,11 +60,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags
 	// to. An ARN uniquely identifies a resource.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The tags to add to a resource. A tag consists of a key and a value that you
 	// define.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

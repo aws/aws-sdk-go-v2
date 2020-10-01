@@ -67,8 +67,12 @@ func (c *Client) ListEndpointsByPlatformApplication(ctx context.Context, params 
 
 // Input for ListEndpointsByPlatformApplication action.
 type ListEndpointsByPlatformApplicationInput struct {
+
 	// PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
+	//
+	// This member is required.
 	PlatformApplicationArn *string
+
 	// NextToken string is used when calling ListEndpointsByPlatformApplication action
 	// to retrieve additional records that are available after the first page results.
 	NextToken *string
@@ -76,9 +80,11 @@ type ListEndpointsByPlatformApplicationInput struct {
 
 // Response for ListEndpointsByPlatformApplication action.
 type ListEndpointsByPlatformApplicationOutput struct {
+
 	// NextToken string is returned when calling ListEndpointsByPlatformApplication
 	// action if additional records are available after the first page results.
 	NextToken *string
+
 	// Endpoints returned for ListEndpointsByPlatformApplication action.
 	Endpoints []*types.Endpoint
 

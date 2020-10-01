@@ -79,10 +79,16 @@ func (c *Client) StartFleetActions(ctx context.Context, params *StartFleetAction
 }
 
 type StartFleetActionsInput struct {
+
 	// List of actions to restart on the fleet.
+	//
+	// This member is required.
 	Actions []types.FleetAction
+
 	// A unique identifier for a fleet to start actions on. You can use either the
 	// fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
 }
 

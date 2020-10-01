@@ -58,30 +58,43 @@ func (c *Client) TestInvokeAuthorizer(ctx context.Context, params *TestInvokeAut
 }
 
 type TestInvokeAuthorizerInput struct {
+
 	// The token returned by your custom authentication service.
 	Token *string
+
 	// The signature made with the token and your custom authentication service's
 	// private key. This value must be Base-64-encoded.
 	TokenSignature *string
+
 	// Specifies a test MQTT authorization request.
 	MqttContext *types.MqttContext
+
 	// The custom authorizer name.
+	//
+	// This member is required.
 	AuthorizerName *string
+
 	// Specifies a test TLS authorization request.
 	TlsContext *types.TlsContext
+
 	// Specifies a test HTTP authorization request.
 	HttpContext *types.HttpContext
 }
 
 type TestInvokeAuthorizerOutput struct {
+
 	// IAM policy documents.
 	PolicyDocuments []*string
+
 	// The number of seconds after which the temporary credentials are refreshed.
 	RefreshAfterInSeconds *int32
+
 	// True if the token is authenticated, otherwise false.
 	IsAuthenticated *bool
+
 	// The number of seconds after which the connection is terminated.
 	DisconnectAfterInSeconds *int32
+
 	// The principal ID.
 	PrincipalId *string
 

@@ -55,11 +55,16 @@ func (c *Client) ListFilters(ctx context.Context, params *ListFiltersInput, optF
 }
 
 type ListFiltersInput struct {
+
 	// The unique ID of the detector that the filter is associated with.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// You can use this parameter to indicate the maximum number of items that you want
 	// in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int32
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
 	// the action, fill nextToken in the request with the value of NextToken from the
@@ -68,8 +73,12 @@ type ListFiltersInput struct {
 }
 
 type ListFiltersOutput struct {
+
 	// A list of filter names.
+	//
+	// This member is required.
 	FilterNames []*string
+
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.
 	NextToken *string

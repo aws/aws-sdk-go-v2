@@ -56,37 +56,51 @@ func (c *Client) ListTransformJobs(ctx context.Context, params *ListTransformJob
 }
 
 type ListTransformJobsInput struct {
+
 	// A filter that retrieves only transform jobs with a specific status.
 	StatusEquals types.TransformJobStatus
+
 	// A filter that returns only transform jobs modified after the specified time.
 	LastModifiedTimeAfter *time.Time
+
 	// The sort order for results. The default is Descending.
 	SortOrder types.SortOrder
+
 	// If the result of the previous ListTransformJobs request was truncated, the
 	// response includes a NextToken. To retrieve the next set of transform jobs, use
 	// the token in the next request.
 	NextToken *string
+
 	// The maximum number of transform jobs to return in the response. The default
 	// value is 10.
 	MaxResults *int32
+
 	// The field to sort results by. The default is CreationTime.
 	SortBy types.SortBy
+
 	// A filter that returns only transform jobs modified before the specified time.
 	LastModifiedTimeBefore *time.Time
+
 	// A filter that returns only transform jobs created before the specified time.
 	CreationTimeBefore *time.Time
+
 	// A filter that returns only transform jobs created after the specified time.
 	CreationTimeAfter *time.Time
+
 	// A string in the transform job name. This filter returns only transform jobs
 	// whose name contains the specified string.
 	NameContains *string
 }
 
 type ListTransformJobsOutput struct {
+
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of transform jobs, use it in the next request.
 	NextToken *string
+
 	// An array of TransformJobSummary objects.
+	//
+	// This member is required.
 	TransformJobSummaries []*types.TransformJobSummary
 
 	// Metadata pertaining to the operation's result.

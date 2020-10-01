@@ -62,9 +62,15 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 //
 type DeleteTagsInput struct {
+
 	// A list of tag keys to delete.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The ID of the file system whose tags you want to delete (String).
+	//
+	// This member is required.
 	FileSystemId *string
 }
 

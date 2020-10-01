@@ -58,8 +58,12 @@ func (c *Client) ModifyDBSnapshot(ctx context.Context, params *ModifyDBSnapshotI
 }
 
 type ModifyDBSnapshotInput struct {
+
 	// The identifier of the DB snapshot to modify.
+	//
+	// This member is required.
 	DBSnapshotIdentifier *string
+
 	// The engine version to upgrade the DB snapshot to.  <p>The following are the
 	// database engines and engine versions that are available when you upgrade a DB
 	// snapshot. </p> <p> <b>MySQL</b> </p> <ul> <li> <p> <code>5.5.46</code>
@@ -72,6 +76,7 @@ type ModifyDBSnapshotInput struct {
 	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion">
 	// Upgrading the PostgreSQL DB Engine for Amazon RDS</a>. </p>
 	EngineVersion *string
+
 	// The option group to identify with the upgraded DB snapshot.  <p>You can specify
 	// this parameter when you upgrade an Oracle DB snapshot. The same option group
 	// considerations apply when upgrading a DB snapshot as when upgrading a DB
@@ -82,6 +87,7 @@ type ModifyDBSnapshotInput struct {
 }
 
 type ModifyDBSnapshotOutput struct {
+
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a
 	// response element in the DescribeDBSnapshots action.
 	DBSnapshot *types.DBSnapshot

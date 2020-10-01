@@ -64,8 +64,12 @@ func (c *Client) AssignVolume(ctx context.Context, params *AssignVolumeInput, op
 }
 
 type AssignVolumeInput struct {
+
 	// The volume ID.
+	//
+	// This member is required.
 	VolumeId *string
+
 	// The instance ID.
 	InstanceId *string
 }

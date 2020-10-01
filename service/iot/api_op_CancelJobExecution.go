@@ -55,10 +55,12 @@ func (c *Client) CancelJobExecution(ctx context.Context, params *CancelJobExecut
 }
 
 type CancelJobExecutionInput struct {
+
 	// A collection of name/value pairs that describe the status of the job execution.
 	// If not specified, the statusDetails are unchanged. You can specify at most 10
 	// name/value pairs.
 	StatusDetails map[string]*string
+
 	// (Optional) If true the job execution will be canceled if it has status
 	// IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it
 	// has status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS,
@@ -68,6 +70,7 @@ type CancelJobExecutionInput struct {
 	// status. Use caution and ensure that the device is able to recover to a valid
 	// state.
 	Force *bool
+
 	// (Optional) The expected current version of the job execution. Each time you
 	// update the job execution, its version is incremented. If the version of the job
 	// execution stored in Jobs does not match, the update is rejected with a
@@ -76,9 +79,15 @@ type CancelJobExecutionInput struct {
 	// separate DescribeJobExecution request in order to obtain the job execution
 	// status data.)
 	ExpectedVersion *int64
+
 	// The ID of the job to be canceled.
+	//
+	// This member is required.
 	JobId *string
+
 	// The name of the thing whose execution of the job will be canceled.
+	//
+	// This member is required.
 	ThingName *string
 }
 

@@ -56,22 +56,36 @@ func (c *Client) CreateTemplateAlias(ctx context.Context, params *CreateTemplate
 }
 
 type CreateTemplateAliasInput struct {
+
 	// The version number of the template.
+	//
+	// This member is required.
 	TemplateVersionNumber *int64
+
 	// The name that you want to give to the template alias that you're creating. Don't
 	// start the alias name with the $ character. Alias names that start with $ are
 	// reserved by QuickSight.
+	//
+	// This member is required.
 	AliasName *string
+
 	// The ID of the AWS account that contains the template that you creating an alias
 	// for.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// An ID for the template.
+	//
+	// This member is required.
 	TemplateId *string
 }
 
 type CreateTemplateAliasOutput struct {
+
 	// Information about the template alias.
 	TemplateAlias *types.TemplateAlias
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

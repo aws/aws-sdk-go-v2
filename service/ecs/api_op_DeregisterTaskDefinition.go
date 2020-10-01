@@ -68,12 +68,16 @@ func (c *Client) DeregisterTaskDefinition(ctx context.Context, params *Deregiste
 }
 
 type DeregisterTaskDefinitionInput struct {
+
 	// The family and revision (family:revision) or full Amazon Resource Name (ARN) of
 	// the task definition to deregister. You must specify a revision.
+	//
+	// This member is required.
 	TaskDefinition *string
 }
 
 type DeregisterTaskDefinitionOutput struct {
+
 	// The full description of the deregistered task.
 	TaskDefinition *types.TaskDefinition
 

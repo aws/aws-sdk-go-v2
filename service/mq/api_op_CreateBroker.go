@@ -59,59 +59,78 @@ func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, op
 
 // Creates a broker using the specified properties.
 type CreateBrokerInput struct {
+
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
+
 	// Required. The list of ActiveMQ users (persons or applications) who can access
 	// queues and topics. This value can contain only alphanumeric characters, dashes,
 	// periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters
 	// long.
 	Users []*types.User
+
 	// Required. The version of the broker engine. For a list of supported engine
 	// versions, see
 	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
+
 	// The authentication strategy used to secure the broker.
 	AuthenticationStrategy types.AuthenticationStrategy
+
 	// Required. Enables automatic upgrades to new minor versions for brokers, as
 	// Apache releases the versions. The automatic upgrades occur during the
 	// maintenance window of the broker or after a manual broker reboot.
 	AutoMinorVersionUpgrade *bool
+
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
+
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
 	SecurityGroups []*string
+
 	// Create tags when creating the broker.
 	Tags map[string]*string
+
 	// The metadata of the LDAP server used to authenticate and authorize connections
 	// to the broker.
 	LdapServerMetadata *types.LdapServerMetadataInput
+
 	// Encryption options for the broker.
 	EncryptionOptions *types.EncryptionOptions
+
 	// Required. Enables connections from applications outside of the VPC that hosts
 	// the broker's subnets.
 	PubliclyAccessible *bool
+
 	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
 	// ACTIVEMQ.
 	EngineType types.EngineType
+
 	// Required. The deployment mode of the broker.
 	DeploymentMode types.DeploymentMode
+
 	// Enables Amazon CloudWatch logging for brokers.
 	Logs *types.Logs
+
 	// Required. The broker's instance type.
 	HostInstanceType *string
+
 	// Required. The name of the broker. This value must be unique in your AWS account,
 	// 1-50 characters long, must contain only letters, numbers, dashes, and
 	// underscores, and must not contain whitespaces, brackets, wildcard characters, or
 	// special characters.
 	BrokerName *string
+
 	// The parameters that determine the WeeklyStartTime.
 	MaintenanceWindowStartTime *types.WeeklyStartTime
+
 	// The unique ID that the requester receives for the created broker. Amazon MQ
 	// passes your ID with the API action. Note: We recommend using a Universally
 	// Unique Identifier (UUID) for the creatorRequestId. You may omit the
 	// creatorRequestId if your application doesn't require idempotency.
 	CreatorRequestId *string
+
 	// The list of groups (2 maximum) that define which subnets and IP ranges the
 	// broker can use from different Availability Zones. A SINGLE_INSTANCE deployment
 	// requires one subnet (for example, the default subnet). An
@@ -120,8 +139,10 @@ type CreateBrokerInput struct {
 }
 
 type CreateBrokerOutput struct {
+
 	// The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
+
 	// The Amazon Resource Name (ARN) of the broker.
 	BrokerArn *string
 

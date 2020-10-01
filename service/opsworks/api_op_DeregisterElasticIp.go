@@ -61,7 +61,10 @@ func (c *Client) DeregisterElasticIp(ctx context.Context, params *DeregisterElas
 }
 
 type DeregisterElasticIpInput struct {
+
 	// The Elastic IP address.
+	//
+	// This member is required.
 	ElasticIp *string
 }
 

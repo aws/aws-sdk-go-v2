@@ -65,7 +65,10 @@ func (c *Client) DeleteIntent(ctx context.Context, params *DeleteIntentInput, op
 }
 
 type DeleteIntentInput struct {
+
 	// The name of the intent. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 

@@ -55,10 +55,13 @@ func (c *Client) DescribeTransitGatewayPeeringAttachments(ctx context.Context, p
 }
 
 type DescribeTransitGatewayPeeringAttachmentsInput struct {
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// One or more IDs of the transit gateway peering attachments.
 	TransitGatewayAttachmentIds []*string
+
 	// One or more filters. The possible values are:
 	//
 	//     *
@@ -77,9 +80,11 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 	//
 	// * transit-gateway-id - The ID of the transit gateway.
 	Filters []*types.Filter
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -88,9 +93,11 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 }
 
 type DescribeTransitGatewayPeeringAttachmentsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The transit gateway peering attachments.
 	TransitGatewayPeeringAttachments []*types.TransitGatewayPeeringAttachment
 

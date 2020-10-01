@@ -59,18 +59,23 @@ func (c *Client) ListSolutions(ctx context.Context, params *ListSolutionsInput, 
 }
 
 type ListSolutionsInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset group.
 	DatasetGroupArn *string
+
 	// The maximum number of solutions to return.
 	MaxResults *int32
+
 	// A token returned from the previous call to ListSolutions for getting the next
 	// set of solutions (if they exist).
 	NextToken *string
 }
 
 type ListSolutionsOutput struct {
+
 	// A token for getting the next set of solutions (if they exist).
 	NextToken *string
+
 	// A list of the current solutions.
 	Solutions []*types.SolutionSummary
 

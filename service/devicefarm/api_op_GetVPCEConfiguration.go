@@ -57,12 +57,16 @@ func (c *Client) GetVPCEConfiguration(ctx context.Context, params *GetVPCEConfig
 }
 
 type GetVPCEConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to
 	// describe.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetVPCEConfigurationOutput struct {
+
 	// An object that contains information about your VPC endpoint configuration.
 	VpceConfiguration *types.VPCEConfiguration
 

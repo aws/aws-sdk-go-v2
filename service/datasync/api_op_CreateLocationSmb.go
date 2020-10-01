@@ -58,23 +58,36 @@ func (c *Client) CreateLocationSmb(ctx context.Context, params *CreateLocationSm
 
 // CreateLocationSmbRequest
 type CreateLocationSmbInput struct {
+
 	// The name of the Windows domain that the SMB server belongs to.
 	Domain *string
+
 	// The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block
 	// (SMB) location.
+	//
+	// This member is required.
 	AgentArns []*string
+
 	// The mount options used by DataSync to access the SMB server.
 	MountOptions *types.SmbMountOptions
+
 	// The password of the user who can mount the share, has the permissions to access
 	// files and folders in the SMB share.
+	//
+	// This member is required.
 	Password *string
+
 	// The user who can mount the share, has the permissions to access files and
 	// folders in the SMB share.
+	//
+	// This member is required.
 	User *string
+
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []*types.TagListEntry
+
 	// The subdirectory in the SMB file system that is used to read data from the SMB
 	// source location or write data to the SMB destination. The SMB path should be a
 	// path that's exported by the SMB server, or a subdirectory of that path. The path
@@ -89,16 +102,22 @@ type CreateLocationSmbInput struct {
 	// to mount the share. Doing either enables the agent to access the data. For the
 	// agent to access directories, you must additionally enable all execute
 	// access.</p>
+	//
+	// This member is required.
 	Subdirectory *string
+
 	// The name of the SMB server. This value is the IP address or Domain Name Service
 	// (DNS) name of the SMB server. An agent that is installed on-premises uses this
 	// hostname to mount the SMB server in a network. This name must either be
 	// DNS-compliant or must be an IP version 4 (IPv4) address.
+	//
+	// This member is required.
 	ServerHostname *string
 }
 
 // CreateLocationSmbResponse
 type CreateLocationSmbOutput struct {
+
 	// The Amazon Resource Name (ARN) of the source SMB file system location that is
 	// created.
 	LocationArn *string

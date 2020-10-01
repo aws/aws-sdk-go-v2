@@ -14,19 +14,25 @@ import (
 )
 
 // Retrieves the configuration parameters and status for a Batch Operations job.
-// For more information, see Amazon S3 Batch Operations
+// For more information, see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
 // Amazon Simple Storage Service Developer Guide. Related actions include:
 //
 //     *
-// CreateJob ()
+// CreateJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//     * ListJobs ()
 //
-//     * UpdateJobPriority ()
+// * ListJobs
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
 //
-//     *
-// UpdateJobStatus ()
+//
+// * UpdateJobPriority
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
+//
+//
+// * UpdateJobStatus
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optFns ...func(*Options)) (*DescribeJobOutput, error) {
 	stack := middleware.NewStack("DescribeJob", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -70,13 +76,20 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 }
 
 type DescribeJobInput struct {
+
 	// The ID for the job whose information you want to retrieve.
-	JobId *string
 	//
+	// This member is required.
+	JobId *string
+
+	//
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type DescribeJobOutput struct {
+
 	// Contains the configuration parameters and status for the job specified in the
 	// Describe Job request.
 	Job *types.JobDescriptor

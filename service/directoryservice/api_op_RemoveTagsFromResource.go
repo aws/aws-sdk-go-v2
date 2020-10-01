@@ -55,9 +55,15 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 }
 
 type RemoveTagsFromResourceInput struct {
+
 	// Identifier (ID) of the directory from which to remove the tag.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The tag key (name) of the tag to be removed.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

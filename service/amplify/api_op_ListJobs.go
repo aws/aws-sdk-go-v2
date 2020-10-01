@@ -57,12 +57,20 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 // The request structure for the list jobs request.
 type ListJobsInput struct {
+
 	// The name for a branch.
+	//
+	// This member is required.
 	BranchName *string
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// A pagination token. Set to null to start listing steps from the start. If a
 	// non-null pagination token is returned in a result, pass its value in here to
 	// list more steps.
@@ -71,8 +79,12 @@ type ListJobsInput struct {
 
 // The maximum number of records to list in a single response.
 type ListJobsOutput struct {
+
 	// The result structure for the list job result request.
+	//
+	// This member is required.
 	JobSummaries []*types.JobSummary
+
 	// A pagination token. If non-null the pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.
 	NextToken *string

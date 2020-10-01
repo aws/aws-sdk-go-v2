@@ -66,20 +66,27 @@ func (c *Client) CreateServiceSpecificCredential(ctx context.Context, params *Cr
 }
 
 type CreateServiceSpecificCredentialInput struct {
+
 	// The name of the AWS service that is to be associated with the credentials. The
 	// service you specify here is the only service that can be accessed using these
 	// credentials.
+	//
+	// This member is required.
 	ServiceName *string
+
 	// The name of the IAM user that is to be associated with the credentials. The new
 	// service-specific credentials have the same permissions as the associated user
 	// except that they can be used only to access the specified service. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
 	// string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
 }
 
 type CreateServiceSpecificCredentialOutput struct {
+
 	// A structure that contains information about the newly created service-specific
 	// credential. This is the only time that the password for this credential set is
 	// available. It cannot be recovered later. Instead, you must reset the password

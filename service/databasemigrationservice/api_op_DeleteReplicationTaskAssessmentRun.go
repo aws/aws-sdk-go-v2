@@ -60,12 +60,16 @@ func (c *Client) DeleteReplicationTaskAssessmentRun(ctx context.Context, params 
 
 //
 type DeleteReplicationTaskAssessmentRunInput struct {
+
 	// Amazon Resource Name (ARN) of the premigration assessment run to be deleted.
+	//
+	// This member is required.
 	ReplicationTaskAssessmentRunArn *string
 }
 
 //
 type DeleteReplicationTaskAssessmentRunOutput struct {
+
 	// The ReplicationTaskAssessmentRun object for the deleted assessment run.
 	ReplicationTaskAssessmentRun *types.ReplicationTaskAssessmentRun
 

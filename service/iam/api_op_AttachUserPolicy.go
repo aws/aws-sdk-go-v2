@@ -60,16 +60,22 @@ func (c *Client) AttachUserPolicy(ctx context.Context, params *AttachUserPolicyI
 }
 
 type AttachUserPolicyInput struct {
+
 	// The name (friendly name, not ARN) of the IAM user to attach the policy to. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
 	// string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
+
 	// The Amazon Resource Name (ARN) of the IAM policy you want to attach. For more
 	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	PolicyArn *string
 }
 

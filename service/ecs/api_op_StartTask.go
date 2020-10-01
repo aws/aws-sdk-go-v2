@@ -60,24 +60,32 @@ func (c *Client) StartTask(ctx context.Context, params *StartTaskInput, optFns .
 }
 
 type StartTaskInput struct {
+
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// start. If a revision is not specified, the latest ACTIVE revision is used.
+	//
+	// This member is required.
 	TaskDefinition *string
+
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
 	// information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags *bool
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to
 	// start your task. If you do not specify a cluster, the default cluster is
 	// assumed.
 	Cluster *string
+
 	// The VPC subnet and security group configuration for tasks that receive their own
 	// elastic network interface by using the awsvpc networking mode.
 	NetworkConfiguration *types.NetworkConfiguration
+
 	// Specifies whether to propagate the tags from the task definition or the service
 	// to the task. If no value is specified, the tags are not propagated.
 	PropagateTags types.PropagateTags
+
 	// An optional tag specified when a task is started. For example, if you
 	// automatically trigger a task to run a batch process job, you could apply a
 	// unique identifier for that job to your task with the startedBy parameter. You
@@ -87,6 +95,7 @@ type StartTaskInput struct {
 	// by an Amazon ECS service, then the startedBy parameter contains the deployment
 	// ID of the service that starts it.
 	StartedBy *string
+
 	// A list of container overrides in JSON format that specify the name of a
 	// container in the specified task definition and the overrides it should receive.
 	// You can override the default command for a container (that is specified in the
@@ -96,15 +105,21 @@ type StartTaskInput struct {
 	// environment override. A total of 8192 characters are allowed for overrides. This
 	// limit includes the JSON formatting characters of the override structure.
 	Overrides *types.TaskOverride
+
 	// The container instance IDs or full ARN entries for the container instances on
 	// which you would like to place your task. You can specify up to 10 container
 	// instances.
+	//
+	// This member is required.
 	ContainerInstances []*string
+
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string
+
 	// The reference ID to use for the task.
 	ReferenceId *string
+
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
@@ -138,8 +153,10 @@ type StartTaskInput struct {
 }
 
 type StartTaskOutput struct {
+
 	// Any failures associated with the call.
 	Failures []*types.Failure
+
 	// A full description of the tasks that were started. Each task that was
 	// successfully placed on your container instances is described.
 	Tasks []*types.Task

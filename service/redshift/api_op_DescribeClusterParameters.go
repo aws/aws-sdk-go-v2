@@ -66,19 +66,25 @@ func (c *Client) DescribeClusterParameters(ctx context.Context, params *Describe
 
 //
 type DescribeClusterParametersInput struct {
+
 	// The parameter types to return. Specify user to show parameters that are
 	// different form the default. Similarly, specify engine-default to show parameters
 	// that are the same as the default parameter group. Default: All parameter types
 	// returned. Valid Values: user | engine-default
 	Source *string
+
 	// The name of a cluster parameter group for which to return details.
+	//
+	// This member is required.
 	ParameterGroupName *string
+
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
 	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterParameters () request
 	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
@@ -90,12 +96,14 @@ type DescribeClusterParametersInput struct {
 
 // Contains the output from the DescribeClusterParameters () action.
 type DescribeClusterParametersOutput struct {
+
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
 	// the next set of records by providing this returned marker value in the Marker
 	// parameter and retrying the command. If the Marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
+
 	// A list of Parameter () instances. Each instance lists the parameters of one
 	// cluster parameter group.
 	Parameters []*types.Parameter

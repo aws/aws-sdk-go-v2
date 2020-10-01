@@ -56,10 +56,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource. Tagging is only supported for
 	// directories.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A list of tag key-value pairs.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

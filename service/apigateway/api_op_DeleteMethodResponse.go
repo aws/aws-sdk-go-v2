@@ -58,16 +58,31 @@ func (c *Client) DeleteMethodResponse(ctx context.Context, params *DeleteMethodR
 // A request to delete an existing MethodResponse () resource.
 type DeleteMethodResponseInput struct {
 	Title *string
+
 	// [Required] The HTTP verb of the Method () resource.
+	//
+	// This member is required.
 	HttpMethod *string
+
 	// [Required] The status code identifier for the MethodResponse () resource.
+	//
+	// This member is required.
 	StatusCode *string
+
 	// [Required] The Resource () identifier for the MethodResponse () resource.
+	//
+	// This member is required.
 	ResourceId *string
-	Template   *bool
+
+	Template *bool
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
-	Name             *string
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
+
 	TemplateSkipList []*string
 }
 

@@ -13,18 +13,23 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns the tags on an Amazon S3 Batch Operations job. To use this operation,
-// you must have permission to perform the s3:GetJobTagging action. For more
-// information, see Using Job Tags
+// Returns the tags on an S3 Batch Operations job. To use this operation, you must
+// have permission to perform the s3:GetJobTagging action. For more information,
+// see Controlling access and labeling jobs using tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
 // in the Amazon Simple Storage Service Developer Guide. Related actions include:
 //
 //
-// * CreateJob ()
+// * CreateJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//     * PutJobTagging ()
 //
-//     * DeleteJobTagging ()
+// * PutJobTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
+//
+//
+// * DeleteJobTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html)
 func (c *Client) GetJobTagging(ctx context.Context, params *GetJobTaggingInput, optFns ...func(*Options)) (*GetJobTaggingOutput, error) {
 	stack := middleware.NewStack("GetJobTagging", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -68,14 +73,21 @@ func (c *Client) GetJobTagging(ctx context.Context, params *GetJobTaggingInput, 
 }
 
 type GetJobTaggingInput struct {
-	// The ID for the Amazon S3 Batch Operations job whose tags you want to retrieve.
+
+	// The ID for the S3 Batch Operations job whose tags you want to retrieve.
+	//
+	// This member is required.
 	JobId *string
-	// The AWS account ID associated with the Amazon S3 Batch Operations job.
+
+	// The AWS account ID associated with the S3 Batch Operations job.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type GetJobTaggingOutput struct {
-	// The set of tags associated with the Amazon S3 Batch Operations job.
+
+	// The set of tags associated with the S3 Batch Operations job.
 	Tags []*types.S3Tag
 
 	// Metadata pertaining to the operation's result.

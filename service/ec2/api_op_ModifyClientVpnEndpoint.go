@@ -57,18 +57,23 @@ func (c *Client) ModifyClientVpnEndpoint(ctx context.Context, params *ModifyClie
 }
 
 type ModifyClientVpnEndpointInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The port number to assign to the Client VPN endpoint for TCP and UDP traffic.
 	// Valid Values: 443 | 1194 Default Value: 443
 	VpnPort *int32
+
 	// The IDs of one or more security groups to apply to the target network.
 	SecurityGroupIds []*string
+
 	// A brief description of the Client VPN endpoint.
 	Description *string
+
 	// Information about the client connection logging options. If you enable client
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:
@@ -84,24 +89,32 @@ type ModifyClientVpnEndpointInput struct {
 	//     * Client connection
 	// termination time
 	ConnectionLogOptions *types.ConnectionLogOptions
+
 	// The ARN of the server certificate to be used. The server certificate must be
 	// provisioned in AWS Certificate Manager (ACM).
 	ServerCertificateArn *string
+
 	// Information about the DNS servers to be used by Client VPN connections. A Client
 	// VPN endpoint can have up to two DNS servers.
 	DnsServers *types.DnsServersOptionsModifyStructure
+
 	// Indicates whether the VPN is split-tunnel. For information about split-tunnel
 	// VPN endpoints, see Split-Tunnel AWS Client VPN Endpoint
 	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
 	// in the AWS Client VPN Administrator Guide.
 	SplitTunnel *bool
+
 	// The ID of the VPC to associate with the Client VPN endpoint.
 	VpcId *string
+
 	// The ID of the Client VPN endpoint to modify.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
 }
 
 type ModifyClientVpnEndpointOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 

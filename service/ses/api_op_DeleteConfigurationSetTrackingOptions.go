@@ -65,8 +65,11 @@ func (c *Client) DeleteConfigurationSetTrackingOptions(ctx context.Context, para
 // Represents a request to delete open and click tracking options in a
 // configuration set.
 type DeleteConfigurationSetTrackingOptionsInput struct {
+
 	// The name of the configuration set from which you want to delete the tracking
 	// options.
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 

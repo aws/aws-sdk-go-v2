@@ -56,12 +56,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 //
 type ListTagsForResourceInput struct {
+
 	// ARN of a resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 //
 type ListTagsForResourceOutput struct {
+
 	// Tags assigned to a resource.
 	Tags map[string]*string
 

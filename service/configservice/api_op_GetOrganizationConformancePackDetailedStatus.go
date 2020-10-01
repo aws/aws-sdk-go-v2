@@ -60,14 +60,20 @@ func (c *Client) GetOrganizationConformancePackDetailedStatus(ctx context.Contex
 }
 
 type GetOrganizationConformancePackDetailedStatusInput struct {
+
 	// An OrganizationResourceDetailedStatusFilters object.
 	Filters *types.OrganizationResourceDetailedStatusFilters
+
 	// The name of organization conformance pack for which you want status details for
 	// member accounts.
+	//
+	// This member is required.
 	OrganizationConformancePackName *string
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The maximum number of OrganizationConformancePackDetailedStatuses returned on
 	// each page. If you do not specify a number, AWS Config uses the default. The
 	// default is 100.
@@ -75,9 +81,11 @@ type GetOrganizationConformancePackDetailedStatusInput struct {
 }
 
 type GetOrganizationConformancePackDetailedStatusOutput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// A list of OrganizationConformancePackDetailedStatus objects.
 	OrganizationConformancePackDetailedStatuses []*types.OrganizationConformancePackDetailedStatus
 

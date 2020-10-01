@@ -99,16 +99,22 @@ func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGr
 }
 
 type CreateDatasetGroupInput struct {
+
 	// The Amazon Resource Name (ARN) of a KMS key used to encrypt the datasets.
 	KmsKeyArn *string
+
 	// The ARN of the IAM role that has permissions to access the KMS key. Supplying an
 	// IAM role is only valid when also specifying a KMS key.
 	RoleArn *string
+
 	// The name for the new dataset group.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateDatasetGroupOutput struct {
+
 	// The Amazon Resource Name (ARN) of the new dataset group.
 	DatasetGroupArn *string
 

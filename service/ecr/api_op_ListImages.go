@@ -61,6 +61,7 @@ func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns
 }
 
 type ListImagesInput struct {
+
 	// The nextToken value returned from a previous paginated ListImages request where
 	// maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
@@ -68,6 +69,7 @@ type ListImagesInput struct {
 	// This token should be treated as an opaque identifier that is only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
+
 	// The maximum number of image results returned by ListImages in paginated output.
 	// When this parameter is used, ListImages only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
@@ -76,10 +78,15 @@ type ListImagesInput struct {
 	// parameter is not used, then ListImages returns up to 100 results and a nextToken
 	// value, if applicable.
 	MaxResults *int32
+
 	// The filter key and value with which to filter your ListImages results.
 	Filter *types.ListImagesFilter
+
 	// The repository with image IDs to be listed.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The AWS account ID associated with the registry that contains the repository in
 	// which to list images. If you do not specify a registry, the default registry is
 	// assumed.
@@ -87,11 +94,13 @@ type ListImagesInput struct {
 }
 
 type ListImagesOutput struct {
+
 	// The nextToken value to include in a future ListImages request. When the results
 	// of a ListImages request exceed maxResults, this value can be used to retrieve
 	// the next page of results. This value is null when there are no more results to
 	// return.
 	NextToken *string
+
 	// The list of image IDs for the requested repository.
 	ImageIds []*types.ImageIdentifier
 

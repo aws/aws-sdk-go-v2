@@ -56,8 +56,10 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 }
 
 type CopyDBClusterParameterGroupInput struct {
+
 	// The tags to be assigned to the copied DB cluster parameter group.
 	Tags []*types.Tag
+
 	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
 	// group. For information about creating an ARN, see  Constructing an Amazon
 	// Resource Name (ARN)
@@ -75,7 +77,10 @@ type CopyDBClusterParameterGroupInput struct {
 	// group is in a different AWS Region than the copy, specify a valid DB cluster
 	// parameter group ARN, for example
 	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
+	//
+	// This member is required.
 	SourceDBClusterParameterGroupIdentifier *string
+
 	// The identifier for the copied DB cluster parameter group. Constraints:
 	//
 	//     *
@@ -91,12 +96,18 @@ type CopyDBClusterParameterGroupInput struct {
 	//
 	// Example:
 	// my-cluster-param-group1
+	//
+	// This member is required.
 	TargetDBClusterParameterGroupIdentifier *string
+
 	// A description for the copied DB cluster parameter group.
+	//
+	// This member is required.
 	TargetDBClusterParameterGroupDescription *string
 }
 
 type CopyDBClusterParameterGroupOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster parameter group. This data
 	// type is used as a response element in the DescribeDBClusterParameterGroups ()
 	// action.

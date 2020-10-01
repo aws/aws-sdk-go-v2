@@ -71,12 +71,16 @@ func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optF
 
 // Represents the input of a DeleteTable operation.
 type DeleteTableInput struct {
+
 	// The name of the table to delete.
+	//
+	// This member is required.
 	TableName *string
 }
 
 // Represents the output of a DeleteTable operation.
 type DeleteTableOutput struct {
+
 	// Represents the properties of a table.
 	TableDescription *types.TableDescription
 

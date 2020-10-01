@@ -57,15 +57,20 @@ func (c *Client) GetInfrastructureConfiguration(ctx context.Context, params *Get
 
 // GetInfrastructureConfiguration request object.
 type GetInfrastructureConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that you want
 	// to retrieve.
+	//
+	// This member is required.
 	InfrastructureConfigurationArn *string
 }
 
 // GetInfrastructureConfiguration response object.
 type GetInfrastructureConfigurationOutput struct {
+
 	// The infrastructure configuration object.
 	InfrastructureConfiguration *types.InfrastructureConfiguration
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

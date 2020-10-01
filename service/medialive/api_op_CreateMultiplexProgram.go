@@ -59,18 +59,31 @@ func (c *Client) CreateMultiplexProgram(ctx context.Context, params *CreateMulti
 
 // A request to create a program in a multiplex.
 type CreateMultiplexProgramInput struct {
+
 	// ID of the multiplex where the program is to be created.
+	//
+	// This member is required.
 	MultiplexId *string
+
 	// The settings for this multiplex program.
+	//
+	// This member is required.
 	MultiplexProgramSettings *types.MultiplexProgramSettings
+
 	// Name of multiplex program.
+	//
+	// This member is required.
 	ProgramName *string
+
 	// Unique request ID. This prevents retries from creating multiple resources.
+	//
+	// This member is required.
 	RequestId *string
 }
 
 // Placeholder documentation for CreateMultiplexProgramResponse
 type CreateMultiplexProgramOutput struct {
+
 	// The newly created multiplex program.
 	MultiplexProgram *types.MultiplexProgram
 

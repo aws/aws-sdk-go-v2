@@ -68,9 +68,11 @@ func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePack
 }
 
 type DisposePackageVersionsInput struct {
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// A format that specifies the type of package versions you want to dispose. The
 	// valid values are:
 	//
@@ -79,7 +81,10 @@ type DisposePackageVersionsInput struct {
 	//     * pypi
 	//
 	//     * maven
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -92,15 +97,26 @@ type DisposePackageVersionsInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// The name of the repository that contains the package versions you want to
 	// dispose.
+	//
+	// This member is required.
 	Repository *string
+
 	// The revisions of the package versions you want to dispose.
 	VersionRevisions map[string]*string
+
 	// The name of the domain that contains the repository you want to dispose.
+	//
+	// This member is required.
 	Domain *string
+
 	// The versions of the package you want to dispose.
+	//
+	// This member is required.
 	Versions []*string
+
 	// The expected status of the package version to dispose. Valid values are:
 	//
 	//     *
@@ -114,13 +130,18 @@ type DisposePackageVersionsInput struct {
 	//
 	//     * Disposed
 	ExpectedStatus types.PackageVersionStatus
+
 	// The name of the package with the versions you want to dispose.
+	//
+	// This member is required.
 	Package *string
 }
 
 type DisposePackageVersionsOutput struct {
+
 	// A list of the package versions that were successfully disposed.
 	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
+
 	// A PackageVersionError object that contains a map of errors codes for the
 	// disposed package versions that failed. The possible error codes are:
 	//

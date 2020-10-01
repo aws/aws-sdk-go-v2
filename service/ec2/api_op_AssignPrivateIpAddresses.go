@@ -73,25 +73,33 @@ func (c *Client) AssignPrivateIpAddresses(ctx context.Context, params *AssignPri
 
 // Contains the parameters for AssignPrivateIpAddresses.
 type AssignPrivateIpAddressesInput struct {
+
 	// Indicates whether to allow an IP address that is already assigned to another
 	// network interface or instance to be reassigned to the specified network
 	// interface.
 	AllowReassignment *bool
+
 	// One or more IP addresses to be assigned as a secondary private IP address to the
 	// network interface. You can't specify this parameter when also specifying a
 	// number of secondary IP addresses. If you don't specify an IP address, Amazon EC2
 	// automatically selects an IP address within the subnet range.
 	PrivateIpAddresses []*string
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
+
 	// The number of secondary IP addresses to assign to the network interface. You
 	// can't specify this parameter when also specifying private IP addresses.
 	SecondaryPrivateIpAddressCount *int32
 }
 
 type AssignPrivateIpAddressesOutput struct {
+
 	// The private IP addresses assigned to the network interface.
 	AssignedPrivateIpAddresses []*types.AssignedPrivateIpAddress
+
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 

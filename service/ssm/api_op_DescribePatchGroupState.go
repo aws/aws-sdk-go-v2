@@ -55,36 +55,48 @@ func (c *Client) DescribePatchGroupState(ctx context.Context, params *DescribePa
 }
 
 type DescribePatchGroupStateInput struct {
+
 	// The name of the patch group whose patch snapshot should be retrieved.
+	//
+	// This member is required.
 	PatchGroup *string
 }
 
 type DescribePatchGroupStateOutput struct {
+
 	// The number of instances with NotApplicable patches beyond the supported limit,
 	// which are not reported by name to Systems Manager Inventory.
 	InstancesWithUnreportedNotApplicablePatches *int32
+
 	// The number of instances with patches from the patch baseline that failed to
 	// install.
 	InstancesWithFailedPatches *int32
+
 	// The number of instances with installed patches.
 	InstancesWithInstalledPatches *int32
+
 	// The number of instances with patches installed by Patch Manager that have not
 	// been rebooted after the patch installation. The status of these instances is
 	// NON_COMPLIANT.
 	InstancesWithInstalledPendingRebootPatches *int32
+
 	// The number of instances with patches installed that are specified in a
 	// RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically
 	// installed before they were added to a RejectedPatches list. If
 	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
 	// of InstancesWithInstalledRejectedPatches will always be 0 (zero).
 	InstancesWithInstalledRejectedPatches *int32
+
 	// The number of instances with patches that aren't applicable.
 	InstancesWithNotApplicablePatches *int32
+
 	// The number of instances with patches installed that aren't defined in the patch
 	// baseline.
 	InstancesWithInstalledOtherPatches *int32
+
 	// The number of instances with missing patches from the patch baseline.
 	InstancesWithMissingPatches *int32
+
 	// The number of instances in the patch group.
 	Instances *int32
 

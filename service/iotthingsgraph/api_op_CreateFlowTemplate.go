@@ -60,14 +60,19 @@ func (c *Client) CreateFlowTemplate(ctx context.Context, params *CreateFlowTempl
 }
 
 type CreateFlowTemplateInput struct {
+
 	// The workflow DefinitionDocument.
+	//
+	// This member is required.
 	Definition *types.DefinitionDocument
+
 	// The namespace version in which the workflow is to be created. If no value is
 	// specified, the latest version is used by default.
 	CompatibleNamespaceVersion *int64
 }
 
 type CreateFlowTemplateOutput struct {
+
 	// The summary object that describes the created workflow.
 	Summary *types.FlowTemplateSummary
 

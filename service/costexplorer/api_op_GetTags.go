@@ -57,29 +57,45 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 }
 
 type GetTagsInput struct {
+
 	// The value that you want to search for.
 	SearchString *string
+
 	// The key of the tag that you want to return values for.
 	TagKey *string
+
 	// The start and end dates for retrieving the dimension values. The start date is
 	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
 	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
 	// up to and including 2017-04-30 but not including 2017-05-01.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
 }
 
 type GetTagsOutput struct {
+
 	// The number of query results that AWS returns at a time.
+	//
+	// This member is required.
 	ReturnSize *int32
+
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
 	// The tags that match your request.
+	//
+	// This member is required.
 	Tags []*string
+
 	// The total number of query results.
+	//
+	// This member is required.
 	TotalSize *int32
 
 	// Metadata pertaining to the operation's result.

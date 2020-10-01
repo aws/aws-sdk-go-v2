@@ -56,11 +56,15 @@ func (c *Client) ResumeCluster(ctx context.Context, params *ResumeClusterInput, 
 }
 
 type ResumeClusterInput struct {
+
 	// The identifier of the cluster to be resumed.
+	//
+	// This member is required.
 	ClusterIdentifier *string
 }
 
 type ResumeClusterOutput struct {
+
 	// Describes a cluster.
 	Cluster *types.Cluster
 

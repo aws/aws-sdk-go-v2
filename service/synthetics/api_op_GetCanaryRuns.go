@@ -56,20 +56,27 @@ func (c *Client) GetCanaryRuns(ctx context.Context, params *GetCanaryRunsInput, 
 }
 
 type GetCanaryRunsInput struct {
+
 	// The name of the canary that you want to see runs for.
+	//
+	// This member is required.
 	Name *string
+
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent GetCanaryRuns operation to retrieve the next set of results.
 	NextToken *string
+
 	// Specify this parameter to limit how many runs are returned each time you use the
 	// GetCanaryRuns operation. If you omit this parameter, the default of 100 is used.
 	MaxResults *int32
 }
 
 type GetCanaryRunsOutput struct {
+
 	// An array of structures. Each structure contains the details of one of the
 	// retrieved canary runs.
 	CanaryRuns []*types.CanaryRun
+
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent GetCanaryRuns operation to retrieve the next set of results.
 	NextToken *string

@@ -58,13 +58,20 @@ func (c *Client) PutVoiceConnectorLoggingConfiguration(ctx context.Context, para
 }
 
 type PutVoiceConnectorLoggingConfigurationInput struct {
+
 	// The logging configuration details to add.
+	//
+	// This member is required.
 	LoggingConfiguration *types.LoggingConfiguration
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type PutVoiceConnectorLoggingConfigurationOutput struct {
+
 	// The updated logging configuration details.
 	LoggingConfiguration *types.LoggingConfiguration
 

@@ -59,9 +59,15 @@ func (c *Client) AdminUserGlobalSignOut(ctx context.Context, params *AdminUserGl
 
 // The request to sign out of all devices, as an administrator.
 type AdminUserGlobalSignOutInput struct {
+
 	// The user name.
+	//
+	// This member is required.
 	Username *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

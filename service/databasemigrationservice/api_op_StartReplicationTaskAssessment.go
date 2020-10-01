@@ -58,12 +58,16 @@ func (c *Client) StartReplicationTaskAssessment(ctx context.Context, params *Sta
 
 //
 type StartReplicationTaskAssessmentInput struct {
+
 	// The Amazon Resource Name (ARN) of the replication task.
+	//
+	// This member is required.
 	ReplicationTaskArn *string
 }
 
 //
 type StartReplicationTaskAssessmentOutput struct {
+
 	// The assessed replication task.
 	ReplicationTask *types.ReplicationTask
 

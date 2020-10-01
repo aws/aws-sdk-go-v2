@@ -55,11 +55,16 @@ func (c *Client) UpdateAddressBook(ctx context.Context, params *UpdateAddressBoo
 }
 
 type UpdateAddressBookInput struct {
+
 	// The updated name of the room.
 	Name *string
+
 	// The updated description of the room.
 	Description *string
+
 	// The ARN of the room to update.
+	//
+	// This member is required.
 	AddressBookArn *string
 }
 

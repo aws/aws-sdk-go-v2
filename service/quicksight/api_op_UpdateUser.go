@@ -56,25 +56,40 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 }
 
 type UpdateUserInput struct {
+
 	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The name of the custom permissions profile that you want to assign to this user.
 	// Currently, custom permissions profile names are assigned to permissions profiles
 	// in the QuickSight console. You use this API to assign the named set of
 	// permissions to a QuickSight user.
 	CustomPermissionsName *string
+
 	// The email address of the user that you want to update.
+	//
+	// This member is required.
 	Email *string
+
 	// The ID for the AWS account that the user is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The Amazon QuickSight user name that you want to update.
+	//
+	// This member is required.
 	UserName *string
+
 	// A flag that you use to indicate that you want to remove all custom permissions
 	// from this user. Using this parameter resets the user to the state it was in
 	// before a custom permissions profile was applied. This parameter defaults to NULL
 	// and it doesn't accept any other value.
 	UnapplyCustomPermissions *bool
+
 	// The Amazon QuickSight role of the user. The user role can be one of the
 	// following:
 	//
@@ -86,12 +101,16 @@ type UpdateUserInput struct {
 	//
 	//     * ADMIN: A user who is an author, who can also manage Amazon
 	// QuickSight settings.
+	//
+	// This member is required.
 	Role types.UserRole
 }
 
 type UpdateUserOutput struct {
+
 	// The Amazon QuickSight user.
 	User *types.User
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

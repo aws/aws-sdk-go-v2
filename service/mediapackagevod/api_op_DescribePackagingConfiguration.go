@@ -56,25 +56,36 @@ func (c *Client) DescribePackagingConfiguration(ctx context.Context, params *Des
 }
 
 type DescribePackagingConfigurationInput struct {
+
 	// The ID of a MediaPackage VOD PackagingConfiguration resource.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribePackagingConfigurationOutput struct {
+
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
+
 	// The ID of the PackagingConfiguration.
 	Id *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// A CMAF packaging configuration.
 	CmafPackage *types.CmafPackage
+
 	// A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
 	MssPackage *types.MssPackage
+
 	// The ID of a PackagingGroup.
 	PackagingGroupId *string
+
 	// The ARN of the PackagingConfiguration.
 	Arn *string
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
 

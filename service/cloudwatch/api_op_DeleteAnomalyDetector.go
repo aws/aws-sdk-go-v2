@@ -56,13 +56,23 @@ func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomal
 }
 
 type DeleteAnomalyDetectorInput struct {
+
 	// The metric name associated with the anomaly detection model to delete.
+	//
+	// This member is required.
 	MetricName *string
+
 	// The metric dimensions associated with the anomaly detection model to delete.
 	Dimensions []*types.Dimension
+
 	// The namespace associated with the anomaly detection model to delete.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The statistic associated with the anomaly detection model to delete.
+	//
+	// This member is required.
 	Stat *string
 }
 

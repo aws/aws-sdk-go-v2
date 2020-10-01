@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Provide a valid value for the field or parameter.
@@ -24,9 +23,3 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}

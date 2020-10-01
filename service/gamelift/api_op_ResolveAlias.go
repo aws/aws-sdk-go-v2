@@ -70,15 +70,20 @@ func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, op
 
 // Represents the input for a request action.
 type ResolveAliasInput struct {
+
 	// The unique identifier of the alias that you want to retrieve a fleet ID for. You
 	// can use either the alias ID or ARN value.
+	//
+	// This member is required.
 	AliasId *string
 }
 
 // Represents the returned data in response to a request action.
 type ResolveAliasOutput struct {
+
 	// The fleet identifier that the alias is pointing to.
 	FleetId *string
+
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet resource that this alias points to.

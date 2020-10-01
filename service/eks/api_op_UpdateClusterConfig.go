@@ -78,11 +78,14 @@ func (c *Client) UpdateClusterConfig(ctx context.Context, params *UpdateClusterC
 }
 
 type UpdateClusterConfigInput struct {
+
 	// An object representing the VPC configuration to use for an Amazon EKS cluster.
 	ResourcesVpcConfig *types.VpcConfigRequest
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
 	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to
 	// CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs
@@ -91,11 +94,15 @@ type UpdateClusterConfigInput struct {
 	// scanning rates apply to exported control plane logs. For more information, see
 	// Amazon CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
 	Logging *types.Logging
+
 	// The name of the Amazon EKS cluster to update.
+	//
+	// This member is required.
 	Name *string
 }
 
 type UpdateClusterConfigOutput struct {
+
 	// An object representing an asynchronous update.
 	Update *types.Update
 

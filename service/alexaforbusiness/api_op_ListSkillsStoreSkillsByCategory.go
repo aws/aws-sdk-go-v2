@@ -56,17 +56,24 @@ func (c *Client) ListSkillsStoreSkillsByCategory(ctx context.Context, params *Li
 }
 
 type ListSkillsStoreSkillsByCategoryInput struct {
+
 	// The category ID for which the skills are being retrieved from the skill store.
+	//
+	// This member is required.
 	CategoryId *int64
+
 	// The tokens used for pagination.
 	NextToken *string
+
 	// The maximum number of skills returned per paginated calls.
 	MaxResults *int32
 }
 
 type ListSkillsStoreSkillsByCategoryOutput struct {
+
 	// The skill store skills.
 	SkillsStoreSkills []*types.SkillsStoreSkill
+
 	// The tokens used for pagination.
 	NextToken *string
 

@@ -59,10 +59,14 @@ func (c *Client) DescribeTaskDefinition(ctx context.Context, params *DescribeTas
 }
 
 type DescribeTaskDefinitionInput struct {
+
 	// The family for the latest ACTIVE revision, family and revision (family:revision)
 	// for a specific revision in the family, or full Amazon Resource Name (ARN) of the
 	// task definition to describe.
+	//
+	// This member is required.
 	TaskDefinition *string
+
 	// Specifies whether to see the resource tags for the task definition. If TAGS is
 	// specified, the tags are included in the response. If this field is omitted, tags
 	// are not included in the response.
@@ -70,8 +74,10 @@ type DescribeTaskDefinitionInput struct {
 }
 
 type DescribeTaskDefinitionOutput struct {
+
 	// The full task definition description.
 	TaskDefinition *types.TaskDefinition
+
 	// The metadata that is applied to the task definition to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:

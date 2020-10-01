@@ -60,14 +60,18 @@ func (c *Client) DescribeCachediSCSIVolumes(ctx context.Context, params *Describ
 }
 
 type DescribeCachediSCSIVolumesInput struct {
+
 	// An array of strings where each string represents the Amazon Resource Name (ARN)
 	// of a cached volume. All of the specified cached volumes must be from the same
 	// gateway. Use ListVolumes () to get volume ARNs for a gateway.
+	//
+	// This member is required.
 	VolumeARNs []*string
 }
 
 // A JSON object containing the following fields:
 type DescribeCachediSCSIVolumesOutput struct {
+
 	// An array of objects where each object contains metadata about one cached volume.
 	CachediSCSIVolumes []*types.CachediSCSIVolume
 

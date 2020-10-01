@@ -58,11 +58,15 @@ func (c *Client) GetOperation(ctx context.Context, params *GetOperationInput, op
 }
 
 type GetOperationInput struct {
+
 	// A GUID used to identify the operation.
+	//
+	// This member is required.
 	OperationId *string
 }
 
 type GetOperationOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

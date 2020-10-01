@@ -56,17 +56,21 @@ func (c *Client) ListDeviceInstances(ctx context.Context, params *ListDeviceInst
 }
 
 type ListDeviceInstancesInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// An integer that specifies the maximum number of items you want to return in the
 	// API response.
 	MaxResults *int32
 }
 
 type ListDeviceInstancesOutput struct {
+
 	// An object that contains information about your device instances.
 	DeviceInstances []*types.DeviceInstance
+
 	// An identifier that can be used in the next call to this operation to return the
 	// next set of items in the list.
 	NextToken *string

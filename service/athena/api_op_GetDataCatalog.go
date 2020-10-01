@@ -56,11 +56,15 @@ func (c *Client) GetDataCatalog(ctx context.Context, params *GetDataCatalogInput
 }
 
 type GetDataCatalogInput struct {
+
 	// The name of the data catalog to return.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetDataCatalogOutput struct {
+
 	// The data catalog returned.
 	DataCatalog *types.DataCatalog
 

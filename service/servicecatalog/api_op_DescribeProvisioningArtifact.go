@@ -56,6 +56,7 @@ func (c *Client) DescribeProvisioningArtifact(ctx context.Context, params *Descr
 }
 
 type DescribeProvisioningArtifactInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,23 +66,31 @@ type DescribeProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The product identifier.
 	ProductId *string
+
 	// The product name.
 	ProductName *string
+
 	// Indicates whether a verbose level of detail is enabled.
 	Verbose *bool
+
 	// The provisioning artifact name.
 	ProvisioningArtifactName *string
 }
 
 type DescribeProvisioningArtifactOutput struct {
+
 	// The status of the current request.
 	Status types.Status
+
 	// The URL of the CloudFormation template in Amazon S3.
 	Info map[string]*string
+
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
 

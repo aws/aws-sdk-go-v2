@@ -55,7 +55,10 @@ func (c *Client) DeleteFilter(ctx context.Context, params *DeleteFilterInput, op
 }
 
 type DeleteFilterInput struct {
+
 	// The ARN of the filter to delete.
+	//
+	// This member is required.
 	FilterArn *string
 }
 

@@ -55,9 +55,13 @@ func (c *Client) DeleteRobotApplication(ctx context.Context, params *DeleteRobot
 }
 
 type DeleteRobotApplicationInput struct {
+
 	// The version of the robot application to delete.
 	ApplicationVersion *string
+
 	// The Amazon Resource Name (ARN) of the the robot application.
+	//
+	// This member is required.
 	Application *string
 }
 

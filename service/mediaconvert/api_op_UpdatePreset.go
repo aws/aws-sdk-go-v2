@@ -56,17 +56,24 @@ func (c *Client) UpdatePreset(ctx context.Context, params *UpdatePresetInput, op
 }
 
 type UpdatePresetInput struct {
+
 	// Settings for preset
 	Settings *types.PresetSettings
+
 	// The name of the preset you are modifying.
+	//
+	// This member is required.
 	Name *string
+
 	// The new category for the preset, if you are changing it.
 	Category *string
+
 	// The new description for the preset, if you are changing it.
 	Description *string
 }
 
 type UpdatePresetOutput struct {
+
 	// A preset is a collection of preconfigured media conversion settings that you
 	// want MediaConvert to apply to the output during the conversion process.
 	Preset *types.Preset

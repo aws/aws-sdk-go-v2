@@ -59,11 +59,17 @@ func (c *Client) DetachThingPrincipal(ctx context.Context, params *DetachThingPr
 
 // The input for the DetachThingPrincipal operation.
 type DetachThingPrincipalInput struct {
+
 	// The name of the thing.
+	//
+	// This member is required.
 	ThingName *string
+
 	// If the principal is a certificate, this value must be ARN of the certificate. If
 	// the principal is an Amazon Cognito identity, this value must be the ID of the
 	// Amazon Cognito identity.
+	//
+	// This member is required.
 	Principal *string
 }
 

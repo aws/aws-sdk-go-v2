@@ -69,29 +69,45 @@ func (c *Client) UpdateRecords(ctx context.Context, params *UpdateRecordsInput, 
 // A request to post updates to records or add and delete records for a dataset and
 // user.
 type UpdateRecordsInput struct {
+
 	// A list of patch operations.
 	RecordPatches []*types.RecordPatch
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
+	//
+	// This member is required.
 	DatasetName *string
+
 	// Intended to supply a device ID that will populate the lastModifiedBy field
 	// referenced in other methods. The ClientContext field is not yet implemented.
 	ClientContext *string
+
 	// The unique ID generated for this device by Cognito.
 	DeviceId *string
+
 	// The SyncSessionToken returned by a previous call to ListRecords for this dataset
 	// and identity.
+	//
+	// This member is required.
 	SyncSessionToken *string
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityId *string
 }
 
 // Returned for a successful UpdateRecordsRequest.
 type UpdateRecordsOutput struct {
+
 	// A list of records that have been updated.
 	Records []*types.Record
 

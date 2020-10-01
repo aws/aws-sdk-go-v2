@@ -55,22 +55,28 @@ func (c *Client) ListRegistries(ctx context.Context, params *ListRegistriesInput
 }
 
 type ListRegistriesInput struct {
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
+
 	// Specifying this limits the results to only those registry names that start with
 	// the specified prefix.
 	RegistryNamePrefix *string
-	Limit              *int32
+
+	Limit *int32
+
 	// Can be set to Local or AWS to limit responses to your custom registries, or the
 	// ones provided by AWS.
 	Scope *string
 }
 
 type ListRegistriesOutput struct {
+
 	// An array of registry summaries.
 	Registries []*types.RegistrySummary
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.

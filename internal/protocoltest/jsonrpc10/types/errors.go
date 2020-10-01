@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This error is thrown when a request is invalid.
@@ -27,18 +26,6 @@ func (e *ComplexError) ErrorMessage() string {
 }
 func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ComplexError) GetTopLevel() string {
-	return ptr.ToString(e.TopLevel)
-}
-func (e *ComplexError) HasTopLevel() bool {
-	return e.TopLevel != nil
-}
-func (e *ComplexError) GetNested() *ComplexNestedErrorData {
-	return e.Nested
-}
-func (e *ComplexError) HasNested() bool {
-	return e.Nested != nil
-}
 
 // This error has test cases that test some of the dark corners of Amazon service
 // framework history. It should only be implemented by clients.
@@ -74,9 +61,3 @@ func (e *InvalidGreeting) ErrorMessage() string {
 }
 func (e *InvalidGreeting) ErrorCode() string             { return "InvalidGreeting" }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGreeting) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGreeting) HasMessage() bool {
-	return e.Message != nil
-}

@@ -56,17 +56,31 @@ func (c *Client) UpdateGatewayRoute(ctx context.Context, params *UpdateGatewayRo
 }
 
 type UpdateGatewayRouteInput struct {
+
 	// The name of the gateway route to update.
+	//
+	// This member is required.
 	GatewayRouteName *string
+
 	// The name of the service mesh that the gateway route resides in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual gateway that the gateway route is associated with.
+	//
+	// This member is required.
 	VirtualGatewayName *string
+
 	// The new gateway route specification to apply. This overwrites the existing data.
+	//
+	// This member is required.
 	Spec *types.GatewayRouteSpec
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -75,7 +89,10 @@ type UpdateGatewayRouteInput struct {
 }
 
 type UpdateGatewayRouteOutput struct {
+
 	// A full description of the gateway route that was updated.
+	//
+	// This member is required.
 	GatewayRoute *types.GatewayRouteData
 
 	// Metadata pertaining to the operation's result.

@@ -112,6 +112,7 @@ func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, op
 }
 
 type RotateSecretInput struct {
+
 	// (Optional) Specifies a unique identifier for the new version of the secret that
 	// helps ensure idempotency. If you use the AWS CLI or one of the AWS SDK to call
 	// this operation, then you can leave this parameter empty. The CLI or SDK
@@ -128,10 +129,13 @@ type RotateSecretInput struct {
 	// retries during the function's processing. This value becomes the VersionId of
 	// the new version.
 	ClientRequestToken *string
+
 	// (Optional) Specifies the ARN of the Lambda function that can rotate the secret.
 	RotationLambdaARN *string
+
 	// A structure that defines the rotation configuration for this secret.
 	RotationRules *types.RotationRulesType
+
 	// Specifies the secret that you want to rotate. You can specify either the Amazon
 	// Resource Name (ARN) or the friendly name of the secret. If you specify an ARN,
 	// we generally recommend that you specify a complete ARN. You can specify a
@@ -149,15 +153,20 @@ type RotateSecretInput struct {
 	// you do include the random suffix added by Secrets Manager, you receive either a
 	// ResourceNotFoundException or an AccessDeniedException error, depending on your
 	// permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type RotateSecretOutput struct {
+
 	// The ID of the new version of the secret created by the rotation started by this
 	// request.
 	VersionId *string
+
 	// The friendly name of the secret.
 	Name *string
+
 	// The ARN of the secret.
 	ARN *string
 

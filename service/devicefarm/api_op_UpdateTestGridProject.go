@@ -56,15 +56,21 @@ func (c *Client) UpdateTestGridProject(ctx context.Context, params *UpdateTestGr
 }
 
 type UpdateTestGridProjectInput struct {
+
 	// ARN of the project to update.
+	//
+	// This member is required.
 	ProjectArn *string
+
 	// Human-readable description for the project.
 	Description *string
+
 	// Human-readable name for the project.
 	Name *string
 }
 
 type UpdateTestGridProjectOutput struct {
+
 	// The project, including updated information.
 	TestGridProject *types.TestGridProject
 

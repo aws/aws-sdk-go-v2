@@ -67,16 +67,21 @@ func (c *Client) ListLunaClients(ctx context.Context, params *ListLunaClientsInp
 }
 
 type ListLunaClientsInput struct {
+
 	// The NextToken value from a previous call to ListLunaClients. Pass null if this
 	// is the first call.
 	NextToken *string
 }
 
 type ListLunaClientsOutput struct {
+
 	// If not null, more results are available. Pass this to ListLunaClients to
 	// retrieve the next set of items.
 	NextToken *string
+
 	// The list of clients.
+	//
+	// This member is required.
 	ClientList []*string
 
 	// Metadata pertaining to the operation's result.

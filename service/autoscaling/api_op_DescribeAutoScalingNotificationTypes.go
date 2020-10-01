@@ -57,6 +57,7 @@ type DescribeAutoScalingNotificationTypesInput struct {
 }
 
 type DescribeAutoScalingNotificationTypesOutput struct {
+
 	// The notification types.
 	AutoScalingNotificationTypes []*string
 

@@ -55,7 +55,10 @@ func (c *Client) RebootBroker(ctx context.Context, params *RebootBrokerInput, op
 }
 
 type RebootBrokerInput struct {
+
 	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
 	BrokerId *string
 }
 

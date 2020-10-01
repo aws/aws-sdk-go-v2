@@ -75,15 +75,22 @@ func (c *Client) DeleteSizeConstraintSet(ctx context.Context, params *DeleteSize
 }
 
 type DeleteSizeConstraintSetInput struct {
+
 	// The SizeConstraintSetId of the SizeConstraintSet () that you want to delete.
 	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
 	// ListSizeConstraintSets ().
+	//
+	// This member is required.
 	SizeConstraintSetId *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type DeleteSizeConstraintSetOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().

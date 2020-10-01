@@ -8,18 +8,25 @@ import (
 
 // A structure that encapsulates a signaling channel's metadata and properties.
 type ChannelInfo struct {
+
 	// Current status of the signaling channel.
 	ChannelStatus Status
+
 	// The Amazon Resource Name (ARN) of the signaling channel.
 	ChannelARN *string
+
 	// The current version of the signaling channel.
 	Version *string
+
 	// The time at which the signaling channel was created.
 	CreationTime *time.Time
+
 	// The name of the signaling channel.
 	ChannelName *string
+
 	// A structure that contains the configuration for the SINGLE_MASTER channel type.
 	SingleMasterConfiguration *SingleMasterConfiguration
+
 	// The type of the signaling channel.
 	ChannelType ChannelType
 }
@@ -28,8 +35,10 @@ type ChannelInfo struct {
 // parameter is specified while invoking ListSignalingChannels, the API returns
 // only the channels that satisfy a condition specified in ChannelNameCondition.
 type ChannelNameCondition struct {
+
 	// A value to compare.
 	ComparisonValue *string
+
 	// A comparison operator. Currently, you can only specify the BEGINS_WITH operator,
 	// which finds signaling channels whose names begin with a given prefix.
 	ComparisonOperator ComparisonOperator
@@ -38,9 +47,11 @@ type ChannelNameCondition struct {
 // An object that describes the endpoint of the signaling channel returned by the
 // GetSignalingChannelEndpoint API.
 type ResourceEndpointListItem struct {
+
 	// The protocol of the signaling channel returned by the
 	// GetSignalingChannelEndpoint API.
 	Protocol ChannelProtocol
+
 	// The endpoint of the signaling channel returned by the
 	// GetSignalingChannelEndpoint API.
 	ResourceEndpoint *string
@@ -49,10 +60,12 @@ type ResourceEndpointListItem struct {
 // An object that contains the endpoint configuration for the SINGLE_MASTER channel
 // type.
 type SingleMasterChannelEndpointConfiguration struct {
+
 	// This property is used to determine the nature of communication over this
 	// SINGLE_MASTER signaling channel. If WSS is specified, this API returns a
 	// websocket endpoint. If HTTPS is specified, this API returns an HTTPS endpoint.
 	Protocols []ChannelProtocol
+
 	// This property is used to determine messaging permissions in this SINGLE_MASTER
 	// signaling channel. If MASTER is specified, this API returns an endpoint that a
 	// client can use to receive offers from and send answers to any of the viewers on
@@ -64,6 +77,7 @@ type SingleMasterChannelEndpointConfiguration struct {
 
 // A structure that contains the configuration for the SINGLE_MASTER channel type.
 type SingleMasterConfiguration struct {
+
 	// The period of time a signaling channel retains underlivered messages before they
 	// are discarded.
 	MessageTtlSeconds *int32
@@ -71,23 +85,32 @@ type SingleMasterConfiguration struct {
 
 // An object describing a Kinesis video stream.
 type StreamInfo struct {
+
 	// The MediaType of the stream.
 	MediaType *string
+
 	// A time stamp that indicates when the stream was created.
 	CreationTime *time.Time
+
 	// The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video
 	// Streams uses to encrypt data on the stream.
 	KmsKeyId *string
+
 	// The name of the stream.
 	StreamName *string
+
 	// The version of the stream.
 	Version *string
+
 	// The status of the stream.
 	Status Status
+
 	// The Amazon Resource Name (ARN) of the stream.
 	StreamARN *string
+
 	// The name of the device that is associated with the stream.
 	DeviceName *string
+
 	// How long the stream retains data, in hours.
 	DataRetentionInHours *int32
 }
@@ -97,17 +120,25 @@ type StreamInfo struct {
 // value. Currently, you can specify only the BEGINS_WITH operator, which finds
 // streams whose names start with a given prefix.
 type StreamNameCondition struct {
+
 	// A comparison operator. Currently, you can specify only the BEGINS_WITH operator,
 	// which finds streams whose names start with a given prefix.
 	ComparisonOperator ComparisonOperator
+
 	// A value to compare.
 	ComparisonValue *string
 }
 
 // A key and value pair that is associated with the specified signaling channel.
 type Tag struct {
+
 	// The value of the tag that is associated with the specified signaling channel.
+	//
+	// This member is required.
 	Value *string
+
 	// The key of the tag that is associated with the specified signaling channel.
+	//
+	// This member is required.
 	Key *string
 }

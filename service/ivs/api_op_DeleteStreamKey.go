@@ -56,7 +56,10 @@ func (c *Client) DeleteStreamKey(ctx context.Context, params *DeleteStreamKeyInp
 }
 
 type DeleteStreamKeyInput struct {
+
 	// ARN of the stream key to be deleted.
+	//
+	// This member is required.
 	Arn *string
 }
 

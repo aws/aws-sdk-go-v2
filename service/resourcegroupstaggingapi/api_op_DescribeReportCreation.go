@@ -59,12 +59,16 @@ type DescribeReportCreationInput struct {
 }
 
 type DescribeReportCreationOutput struct {
+
 	// Details of the common errors that all operations return.
 	ErrorMessage *string
+
 	// The date and time that the report was started.
 	StartDate *string
+
 	// The path to the Amazon S3 bucket where the report was stored on creation.
 	S3Location *string
+
 	// Reports the status of the operation. The operation status can be one of the
 	// following:
 	//

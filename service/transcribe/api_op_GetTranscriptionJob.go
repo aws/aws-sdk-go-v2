@@ -60,11 +60,15 @@ func (c *Client) GetTranscriptionJob(ctx context.Context, params *GetTranscripti
 }
 
 type GetTranscriptionJobInput struct {
+
 	// The name of the job.
+	//
+	// This member is required.
 	TranscriptionJobName *string
 }
 
 type GetTranscriptionJobOutput struct {
+
 	// An object that contains the results of the transcription job.
 	TranscriptionJob *types.TranscriptionJob
 

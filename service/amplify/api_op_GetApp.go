@@ -57,13 +57,19 @@ func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func
 
 // The request structure for the get app request.
 type GetAppInput struct {
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
 }
 
 type GetAppOutput struct {
+
 	// Represents the different branches of a repository for building, deploying, and
 	// hosting an Amplify app.
+	//
+	// This member is required.
 	App *types.App
 
 	// Metadata pertaining to the operation's result.

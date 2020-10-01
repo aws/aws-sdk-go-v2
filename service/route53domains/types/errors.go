@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The number of domains has exceeded the allowed threshold for the account.
@@ -24,12 +23,6 @@ func (e *DomainLimitExceeded) ErrorMessage() string {
 }
 func (e *DomainLimitExceeded) ErrorCode() string             { return "DomainLimitExceeded" }
 func (e *DomainLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DomainLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DomainLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is already in progress for the domain.
 type DuplicateRequest struct {
@@ -47,12 +40,6 @@ func (e *DuplicateRequest) ErrorMessage() string {
 }
 func (e *DuplicateRequest) ErrorCode() string             { return "DuplicateRequest" }
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateRequest) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateRequest) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested item is not acceptable. For example, for APIs that accept a domain
 // name, the request might specify a domain name that doesn't belong to the account
@@ -73,12 +60,6 @@ func (e *InvalidInput) ErrorMessage() string {
 }
 func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInput) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInput) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of operations or jobs running exceeded the allowed threshold for the
 // account.
@@ -97,12 +78,6 @@ func (e *OperationLimitExceeded) ErrorMessage() string {
 }
 func (e *OperationLimitExceeded) ErrorCode() string             { return "OperationLimitExceeded" }
 func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The top-level domain does not support this operation.
 type TLDRulesViolation struct {
@@ -120,12 +95,6 @@ func (e *TLDRulesViolation) ErrorMessage() string {
 }
 func (e *TLDRulesViolation) ErrorCode() string             { return "TLDRulesViolation" }
 func (e *TLDRulesViolation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TLDRulesViolation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TLDRulesViolation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Route 53 does not support this top-level domain (TLD).
 type UnsupportedTLD struct {
@@ -143,9 +112,3 @@ func (e *UnsupportedTLD) ErrorMessage() string {
 }
 func (e *UnsupportedTLD) ErrorCode() string             { return "UnsupportedTLD" }
 func (e *UnsupportedTLD) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedTLD) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedTLD) HasMessage() bool {
-	return e.Message != nil
-}

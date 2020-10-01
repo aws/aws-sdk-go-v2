@@ -58,25 +58,36 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 
 // Creates a new Deployment resource to represent a deployment.
 type CreateDeploymentInput struct {
+
 	// The name of the Stage resource for the Deployment resource to create.
 	StageName *string
+
 	// The description for the deployment resource.
 	Description *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type CreateDeploymentOutput struct {
+
 	// Specifies whether a deployment was automatically released.
 	AutoDeployed *bool
+
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time
+
 	// May contain additional feedback on the status of an API deployment.
 	DeploymentStatusMessage *string
+
 	// The identifier for the deployment.
 	DeploymentId *string
+
 	// The status of the deployment: PENDING, FAILED, or SUCCEEDED.
 	DeploymentStatus types.DeploymentStatus
+
 	// The description for the deployment.
 	Description *string
 

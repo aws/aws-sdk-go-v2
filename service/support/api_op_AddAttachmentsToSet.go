@@ -68,13 +68,17 @@ func (c *Client) AddAttachmentsToSet(ctx context.Context, params *AddAttachments
 }
 
 type AddAttachmentsToSetInput struct {
+
 	// One or more attachments to add to the set. You can add up to three attachments
 	// per set. The size limit is 5 MB per attachment. In the Attachment object, use
 	// the data parameter to specify the contents of the attachment file. In the
 	// previous request syntax, the value for data appear as blob, which is represented
 	// as a base64-encoded string. The value for fileName is the name of the
 	// attachment, such as troubleshoot-screenshot.png.
+	//
+	// This member is required.
 	Attachments []*types.Attachment
+
 	// The ID of the attachment set. If an attachmentSetId is not specified, a new
 	// attachment set is created, and the ID of the set is returned in the response. If
 	// an attachmentSetId is specified, the attachments are added to the specified set,
@@ -85,11 +89,13 @@ type AddAttachmentsToSetInput struct {
 // The ID and expiry time of the attachment set returned by the AddAttachmentsToSet
 // () operation.
 type AddAttachmentsToSetOutput struct {
+
 	// The ID of the attachment set. If an attachmentSetId was not specified, a new
 	// attachment set is created, and the ID of the set is returned in the response. If
 	// an attachmentSetId was specified, the attachments are added to the specified
 	// set, if it exists.
 	AttachmentSetId *string
+
 	// The time and date when the attachment set expires.
 	ExpiryTime *string
 

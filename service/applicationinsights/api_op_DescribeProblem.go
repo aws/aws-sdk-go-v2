@@ -56,11 +56,15 @@ func (c *Client) DescribeProblem(ctx context.Context, params *DescribeProblemInp
 }
 
 type DescribeProblemInput struct {
+
 	// The ID of the problem.
+	//
+	// This member is required.
 	ProblemId *string
 }
 
 type DescribeProblemOutput struct {
+
 	// Information about the problem.
 	Problem *types.Problem
 

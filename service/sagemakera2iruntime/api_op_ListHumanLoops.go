@@ -58,29 +58,41 @@ func (c *Client) ListHumanLoops(ctx context.Context, params *ListHumanLoopsInput
 }
 
 type ListHumanLoopsInput struct {
+
 	// (Optional) The timestamp of the date when you want the human loops to begin in
 	// ISO 8601 format. For example, 2020-02-24.
 	CreationTimeAfter *time.Time
+
 	// (Optional) The timestamp of the date before which you want the human loops to
 	// begin in ISO 8601 format. For example, 2020-02-24.
 	CreationTimeBefore *time.Time
+
 	// The total number of items to return. If the total number of available items is
 	// more than the value specified in MaxResults, then a NextToken is returned in the
 	// output. You can use this token to display the next page of results.
 	MaxResults *int32
+
 	// A token to display the next page of results.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of a flow definition.
+	//
+	// This member is required.
 	FlowDefinitionArn *string
+
 	// Optional. The order for displaying results. Valid values: Ascending and
 	// Descending.
 	SortOrder types.SortOrder
 }
 
 type ListHumanLoopsOutput struct {
+
 	// A token to display the next page of results.
 	NextToken *string
+
 	// An array of objects that contain information about the human loops.
+	//
+	// This member is required.
 	HumanLoopSummaries []*types.HumanLoopSummary
 
 	// Metadata pertaining to the operation's result.

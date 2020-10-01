@@ -4,8 +4,10 @@ package types
 
 // Endpoint for mobile app and device.
 type Endpoint struct {
+
 	// Attributes for endpoint.
 	Attributes map[string]*string
+
 	// EndpointArn for mobile app and device.
 	EndpointArn *string
 }
@@ -20,14 +22,19 @@ type Endpoint struct {
 // (262,144 bytes). For more information, see Using Amazon SNS Message Attributes
 // (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html).
 type MessageAttributeValue struct {
+
 	// Strings are Unicode with UTF8 binary encoding. For a list of code values, see
 	// ASCII Printable Characters
 	// (https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
 	StringValue *string
+
 	// Amazon SNS supports the following logical data types: String, String.Array,
 	// Number, and Binary. For more information, see Message Attribute Data Types
 	// (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes).
+	//
+	// This member is required.
 	DataType *string
+
 	// Binary type attributes can store any binary data, for example, compressed data,
 	// encrypted data, or images.
 	BinaryValue []byte
@@ -35,37 +42,51 @@ type MessageAttributeValue struct {
 
 // Platform application object.
 type PlatformApplication struct {
+
 	// Attributes for platform application object.
 	Attributes map[string]*string
+
 	// PlatformApplicationArn for platform application object.
 	PlatformApplicationArn *string
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
 type Subscription struct {
+
 	// The subscription's protocol.
 	Protocol *string
+
 	// The subscription's owner.
 	Owner *string
+
 	// The subscription's ARN.
 	SubscriptionArn *string
+
 	// The subscription's endpoint (format depends on the protocol).
 	Endpoint *string
+
 	// The ARN of the subscription's topic.
 	TopicArn *string
 }
 
 // The list of tags to be added to the specified topic.
 type Tag struct {
+
 	// The required key portion of the tag.
+	//
+	// This member is required.
 	Key *string
+
 	// The optional value portion of the tag.
+	//
+	// This member is required.
 	Value *string
 }
 
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a topic's
 // attributes, use GetTopicAttributes.
 type Topic struct {
+
 	// The topic's ARN.
 	TopicArn *string
 }

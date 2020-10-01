@@ -55,7 +55,10 @@ func (c *Client) DisassociateFromMasterAccount(ctx context.Context, params *Disa
 }
 
 type DisassociateFromMasterAccountInput struct {
+
 	// The unique ID of the detector of the GuardDuty member account.
+	//
+	// This member is required.
 	DetectorId *string
 }
 

@@ -84,21 +84,32 @@ func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns .
 // Provides options for retrieving a list of parts of an archive that have been
 // uploaded in a specific multipart upload.
 type ListPartsInput struct {
+
 	// An opaque string used for pagination. This value specifies the part at which the
 	// listing of parts should begin. Get the marker value from the response of a
 	// previous List Parts response. You need only include the marker if you are
 	// continuing the pagination of results started in a previous List Parts request.
 	Marker *string
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The upload ID of the multipart upload.
+	//
+	// This member is required.
 	UploadId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// The maximum number of parts to be returned. The default limit is 50. The number
 	// of parts returned might be fewer than the specified limit, but the number of
 	// returned parts never exceeds the limit.
@@ -107,23 +118,30 @@ type ListPartsInput struct {
 
 // Contains the Amazon S3 Glacier response to your request.
 type ListPartsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the vault to which the multipart upload was
 	// initiated.
 	VaultARN *string
+
 	// The description of the archive that was specified in the Initiate Multipart
 	// Upload request.
 	ArchiveDescription *string
+
 	// The ID of the upload to which the parts are associated.
 	MultipartUploadId *string
+
 	// An opaque string that represents where to continue pagination of the results.
 	// You use the marker in a new List Parts request to obtain more jobs in the list.
 	// If there are no more parts, this value is null.
 	Marker *string
+
 	// The UTC time at which the multipart upload was initiated.
 	CreationDate *string
+
 	// The part size in bytes. This is the same value that you specified in the
 	// Initiate Multipart Upload request.
 	PartSizeInBytes *int64
+
 	// A list of the part sizes of the multipart upload. Each object in the array
 	// contains a RangeBytes and sha256-tree-hash name/value pair.
 	Parts []*types.PartListElement

@@ -55,15 +55,19 @@ func (c *Client) ListInputs(ctx context.Context, params *ListInputsInput, optFns
 }
 
 type ListInputsInput struct {
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListInputsOutput struct {
+
 	// Summary information about the inputs.
 	InputSummaries []*types.InputSummary
+
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

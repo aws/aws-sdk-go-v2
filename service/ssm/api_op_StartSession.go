@@ -64,10 +64,15 @@ func (c *Client) StartSession(ctx context.Context, params *StartSessionInput, op
 }
 
 type StartSessionInput struct {
+
 	// Reserved for future use.
 	Parameters map[string][]*string
+
 	// The instance to connect to for the session.
+	//
+	// This member is required.
 	Target *string
+
 	// The name of the SSM document to define the parameters and plugin settings for
 	// the session. For example, SSM-SessionManagerRunShell. You can call the
 	// GetDocument () API to verify the document exists before attempting to start a
@@ -77,9 +82,11 @@ type StartSessionInput struct {
 }
 
 type StartSessionOutput struct {
+
 	// An encrypted token value containing session and caller information. Used to
 	// authenticate the connection to the instance.
 	TokenValue *string
+
 	// A URL back to SSM Agent on the instance that the Session Manager client uses to
 	// send commands and receive output from the instance. Format:
 	// wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)
@@ -90,6 +97,7 @@ type StartSessionOutput struct {
 	// the AWS General Reference. session-id represents the ID of a Session Manager
 	// session, such as 1a2b3c4dEXAMPLE.
 	StreamUrl *string
+
 	// The ID of the session.
 	SessionId *string
 

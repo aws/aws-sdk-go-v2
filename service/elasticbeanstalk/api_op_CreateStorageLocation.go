@@ -62,6 +62,7 @@ type CreateStorageLocationInput struct {
 
 // Results of a CreateStorageLocationResult () call.
 type CreateStorageLocationOutput struct {
+
 	// The name of the Amazon S3 bucket created.
 	S3Bucket *string
 

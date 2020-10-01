@@ -58,7 +58,10 @@ func (c *Client) DeleteVerifiedEmailAddress(ctx context.Context, params *DeleteV
 // Represents a request to delete an email address from the list of email addresses
 // you have attempted to verify under your AWS account.
 type DeleteVerifiedEmailAddressInput struct {
+
 	// An email address to be removed from the list of verified addresses.
+	//
+	// This member is required.
 	EmailAddress *string
 }
 

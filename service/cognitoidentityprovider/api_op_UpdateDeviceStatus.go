@@ -57,10 +57,17 @@ func (c *Client) UpdateDeviceStatus(ctx context.Context, params *UpdateDeviceSta
 
 // Represents the request to update the device status.
 type UpdateDeviceStatusInput struct {
+
 	// The access token.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// The device key.
+	//
+	// This member is required.
 	DeviceKey *string
+
 	// The status of whether a device is remembered.
 	DeviceRememberedStatus types.DeviceRememberedStatusType
 }

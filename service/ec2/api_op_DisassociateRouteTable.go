@@ -60,9 +60,13 @@ func (c *Client) DisassociateRouteTable(ctx context.Context, params *Disassociat
 }
 
 type DisassociateRouteTableInput struct {
+
 	// The association ID representing the current association between the route table
 	// and subnet or gateway.
+	//
+	// This member is required.
 	AssociationId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

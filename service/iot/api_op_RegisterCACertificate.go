@@ -63,28 +63,40 @@ func (c *Client) RegisterCACertificate(ctx context.Context, params *RegisterCACe
 
 // The input to the RegisterCACertificate operation.
 type RegisterCACertificateInput struct {
+
 	// Metadata which can be used to manage the CA certificate. For URI Request
 	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []*types.Tag
+
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
+
 	// The CA certificate.
+	//
+	// This member is required.
 	CaCertificate *string
+
 	// The private key verification certificate.
+	//
+	// This member is required.
 	VerificationCertificate *string
+
 	// Allows this CA certificate to be used for auto registration of device
 	// certificates.
 	AllowAutoRegistration *bool
+
 	// A boolean value that specifies if the CA certificate is set to active.
 	SetAsActive *bool
 }
 
 // The output from the RegisterCACertificateResponse operation.
 type RegisterCACertificateOutput struct {
+
 	// The CA certificate ARN.
 	CertificateArn *string
+
 	// The CA certificate identifier.
 	CertificateId *string
 

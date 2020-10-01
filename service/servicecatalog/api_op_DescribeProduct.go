@@ -55,10 +55,13 @@ func (c *Client) DescribeProduct(ctx context.Context, params *DescribeProductInp
 }
 
 type DescribeProductInput struct {
+
 	// The product name.
 	Name *string
+
 	// The product identifier.
 	Id *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -71,12 +74,16 @@ type DescribeProductInput struct {
 }
 
 type DescribeProductOutput struct {
+
 	// Summary information about the product view.
 	ProductViewSummary *types.ProductViewSummary
+
 	// Information about the provisioning artifacts for the specified product.
 	ProvisioningArtifacts []*types.ProvisioningArtifact
+
 	// Information about the associated launch paths.
 	LaunchPaths []*types.LaunchPath
+
 	// Information about the associated budgets.
 	Budgets []*types.BudgetDetail
 

@@ -58,15 +58,25 @@ func (c *Client) BatchCreateRoomMembership(ctx context.Context, params *BatchCre
 }
 
 type BatchCreateRoomMembershipInput struct {
+
 	// The list of membership items.
+	//
+	// This member is required.
 	MembershipItemList []*types.MembershipItem
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The room ID.
+	//
+	// This member is required.
 	RoomId *string
 }
 
 type BatchCreateRoomMembershipOutput struct {
+
 	// If the action fails for one or more of the member IDs in the request, a list of
 	// the member IDs is returned, along with error codes and error messages.
 	Errors []*types.MemberError

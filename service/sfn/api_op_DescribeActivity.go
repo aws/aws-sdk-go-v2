@@ -57,13 +57,20 @@ func (c *Client) DescribeActivity(ctx context.Context, params *DescribeActivityI
 }
 
 type DescribeActivityInput struct {
+
 	// The Amazon Resource Name (ARN) of the activity to describe.
+	//
+	// This member is required.
 	ActivityArn *string
 }
 
 type DescribeActivityOutput struct {
+
 	// The date the activity is created.
+	//
+	// This member is required.
 	CreationDate *time.Time
+
 	// The name of the activity. A name must not contain:
 	//
 	//     * white space
@@ -81,8 +88,13 @@ type DescribeActivityOutput struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) that identifies the activity.
+	//
+	// This member is required.
 	ActivityArn *string
 
 	// Metadata pertaining to the operation's result.

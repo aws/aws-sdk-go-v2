@@ -56,8 +56,11 @@ func (c *Client) RegisterCrossAccountAccessRole(ctx context.Context, params *Reg
 }
 
 type RegisterCrossAccountAccessRoleInput struct {
+
 	// The ARN of the IAM role that grants Amazon Inspector access to AWS Services
 	// needed to perform security assessments.
+	//
+	// This member is required.
 	RoleArn *string
 }
 

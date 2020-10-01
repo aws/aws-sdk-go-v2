@@ -59,23 +59,33 @@ func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanI
 }
 
 type UpdateBackupPlanInput struct {
+
 	// Uniquely identifies a backup plan.
+	//
+	// This member is required.
 	BackupPlanId *string
+
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
 	// sets of Rules.
+	//
+	// This member is required.
 	BackupPlan *types.BackupPlanInput
 }
 
 type UpdateBackupPlanOutput struct {
+
 	// Uniquely identifies a backup plan.
 	BackupPlanId *string
+
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,
 	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50.
 	BackupPlanArn *string
+
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version Ids cannot be edited.
 	VersionId *string
+
 	// The date and time a backup plan is updated, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
 	// example, the value 1516925490.087 represents Friday, January 26, 2018

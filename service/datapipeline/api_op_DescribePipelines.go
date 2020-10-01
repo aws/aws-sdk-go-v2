@@ -64,14 +64,20 @@ func (c *Client) DescribePipelines(ctx context.Context, params *DescribePipeline
 
 // Contains the parameters for DescribePipelines.
 type DescribePipelinesInput struct {
+
 	// The IDs of the pipelines to describe. You can pass as many as 25 identifiers in
 	// a single call. To obtain pipeline IDs, call ListPipelines ().
+	//
+	// This member is required.
 	PipelineIds []*string
 }
 
 // Contains the output of DescribePipelines.
 type DescribePipelinesOutput struct {
+
 	// An array of descriptions for the specified pipelines.
+	//
+	// This member is required.
 	PipelineDescriptionList []*types.PipelineDescription
 
 	// Metadata pertaining to the operation's result.

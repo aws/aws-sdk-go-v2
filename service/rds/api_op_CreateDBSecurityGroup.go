@@ -59,10 +59,15 @@ func (c *Client) CreateDBSecurityGroup(ctx context.Context, params *CreateDBSecu
 
 //
 type CreateDBSecurityGroupInput struct {
+
 	// Tags to assign to the DB security group.
 	Tags []*types.Tag
+
 	// The description for the DB security group.
+	//
+	// This member is required.
 	DBSecurityGroupDescription *string
+
 	// The name for the DB security group. This value is stored as a lowercase string.
 	// Constraints:
 	//
@@ -77,10 +82,13 @@ type CreateDBSecurityGroupInput struct {
 	//     * Must not be "Default"
 	//
 	// Example: mysecuritygroup
+	//
+	// This member is required.
 	DBSecurityGroupName *string
 }
 
 type CreateDBSecurityGroupOutput struct {
+
 	// Contains the details for an Amazon RDS DB security group. This data type is used
 	// as a response element in the DescribeDBSecurityGroups action.
 	DBSecurityGroup *types.DBSecurityGroup

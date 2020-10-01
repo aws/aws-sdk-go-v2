@@ -57,10 +57,14 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 
 // Specifies the tags to remove from a trail.
 type RemoveTagsInput struct {
+
 	// Specifies a list of tags to be removed.
 	TagsList []*types.Tag
+
 	// Specifies the ARN of the trail from which tags should be removed. The format of
 	// a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	ResourceId *string
 }
 

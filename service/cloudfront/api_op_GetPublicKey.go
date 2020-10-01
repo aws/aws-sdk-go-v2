@@ -56,13 +56,18 @@ func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, op
 }
 
 type GetPublicKeyInput struct {
+
 	// Request the ID for the public key.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetPublicKeyOutput struct {
+
 	// Return the public key.
 	PublicKey *types.PublicKey
+
 	// The current version of the public key. For example: E2QWRUHAPOMQZL.
 	ETag *string
 

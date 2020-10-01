@@ -62,17 +62,23 @@ func (c *Client) GetDataEndpoint(ctx context.Context, params *GetDataEndpointInp
 }
 
 type GetDataEndpointInput struct {
+
 	// The Amazon Resource Name (ARN) of the stream that you want to get the endpoint
 	// for. You must specify either this parameter or a StreamName in the request.
 	StreamARN *string
+
 	// The name of the stream that you want to get the endpoint for. You must specify
 	// either this parameter or a StreamARN in the request.
 	StreamName *string
+
 	// The name of the API action for which to get an endpoint.
+	//
+	// This member is required.
 	APIName types.APIName
 }
 
 type GetDataEndpointOutput struct {
+
 	// The endpoint value. To read data from the stream or to write data to it, specify
 	// this endpoint in your application.
 	DataEndpoint *string

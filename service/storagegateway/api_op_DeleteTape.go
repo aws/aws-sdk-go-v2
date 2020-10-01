@@ -57,16 +57,23 @@ func (c *Client) DeleteTape(ctx context.Context, params *DeleteTapeInput, optFns
 
 // DeleteTapeInput
 type DeleteTapeInput struct {
+
 	// The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to
 	// delete is associated with. Use the ListGateways () operation to return a list of
 	// gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// The Amazon Resource Name (ARN) of the virtual tape to delete.
+	//
+	// This member is required.
 	TapeARN *string
 }
 
 // DeleteTapeOutput
 type DeleteTapeOutput struct {
+
 	// The Amazon Resource Name (ARN) of the deleted virtual tape.
 	TapeARN *string
 

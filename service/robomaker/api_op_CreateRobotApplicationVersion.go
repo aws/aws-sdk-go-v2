@@ -57,27 +57,38 @@ func (c *Client) CreateRobotApplicationVersion(ctx context.Context, params *Crea
 }
 
 type CreateRobotApplicationVersionInput struct {
+
 	// The application information for the robot application.
+	//
+	// This member is required.
 	Application *string
+
 	// The current revision id for the robot application. If you provide a value and it
 	// matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
 }
 
 type CreateRobotApplicationVersionOutput struct {
+
 	// The Amazon Resource Name (ARN) of the robot application.
 	Arn *string
+
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
 	LastUpdatedAt *time.Time
+
 	// The robot software suite (ROS distribution) used by the robot application.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The sources of the robot application.
 	Sources []*types.Source
+
 	// The version of the robot application.
 	Version *string
+
 	// The name of the robot application.
 	Name *string
+
 	// The revision id of the robot application.
 	RevisionId *string
 

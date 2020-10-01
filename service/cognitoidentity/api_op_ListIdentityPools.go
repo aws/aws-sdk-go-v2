@@ -58,16 +58,22 @@ func (c *Client) ListIdentityPools(ctx context.Context, params *ListIdentityPool
 
 // Input to the ListIdentityPools action.
 type ListIdentityPoolsInput struct {
+
 	// The maximum number of identities to return.
+	//
+	// This member is required.
 	MaxResults *int32
+
 	// A pagination token.
 	NextToken *string
 }
 
 // The result of a successful ListIdentityPools action.
 type ListIdentityPoolsOutput struct {
+
 	// A pagination token.
 	NextToken *string
+
 	// The identity pools returned by the ListIdentityPools action.
 	IdentityPools []*types.IdentityPoolShortDescription
 

@@ -73,6 +73,7 @@ func (c *Client) GetEventSelectors(ctx context.Context, params *GetEventSelector
 }
 
 type GetEventSelectorsInput struct {
+
 	// Specifies the name of the trail or trail ARN. If you specify a trail name, the
 	// string must meet the following requirements:
 	//
@@ -93,12 +94,16 @@ type GetEventSelectorsInput struct {
 	//
 	// If you specify a trail ARN, it must
 	// be in the format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	TrailName *string
 }
 
 type GetEventSelectorsOutput struct {
+
 	// The specified trail ARN that has the event selectors.
 	TrailARN *string
+
 	// The event selectors that are configured for the trail.
 	EventSelectors []*types.EventSelector
 

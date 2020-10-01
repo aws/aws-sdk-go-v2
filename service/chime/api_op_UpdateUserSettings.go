@@ -56,11 +56,20 @@ func (c *Client) UpdateUserSettings(ctx context.Context, params *UpdateUserSetti
 }
 
 type UpdateUserSettingsInput struct {
+
 	// The user ID.
+	//
+	// This member is required.
 	UserId *string
+
 	// The user settings to update.
+	//
+	// This member is required.
 	UserSettings *types.UserSettings
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 

@@ -56,20 +56,28 @@ func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput
 }
 
 type ListDashboardsInput struct {
+
 	// The ID of the AWS account that contains the dashboards that you're listing.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
 }
 
 type ListDashboardsOutput struct {
+
 	// A structure that contains all of the dashboards in your AWS account. This
 	// structure provides basic information about the dashboards.
 	DashboardSummaryList []*types.DashboardSummary
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

@@ -59,12 +59,16 @@ func (c *Client) GetComment(ctx context.Context, params *GetCommentInput, optFns
 }
 
 type GetCommentInput struct {
+
 	// The unique, system-generated ID of the comment. To get this ID, use
 	// GetCommentsForComparedCommit () or GetCommentsForPullRequest ().
+	//
+	// This member is required.
 	CommentId *string
 }
 
 type GetCommentOutput struct {
+
 	// The contents of the comment.
 	Comment *types.Comment
 

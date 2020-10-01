@@ -56,12 +56,16 @@ func (c *Client) GetTrail(ctx context.Context, params *GetTrailInput, optFns ...
 }
 
 type GetTrailInput struct {
+
 	// The name or the Amazon Resource Name (ARN) of the trail for which you want to
 	// retrieve settings information.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetTrailOutput struct {
+
 	// The settings for a trail.
 	Trail *types.Trail
 

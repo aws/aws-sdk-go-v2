@@ -57,12 +57,18 @@ func (c *Client) DeleteActionTarget(ctx context.Context, params *DeleteActionTar
 }
 
 type DeleteActionTargetInput struct {
+
 	// The ARN of the custom action target to delete.
+	//
+	// This member is required.
 	ActionTargetArn *string
 }
 
 type DeleteActionTargetOutput struct {
+
 	// The ARN of the custom action target that was deleted.
+	//
+	// This member is required.
 	ActionTargetArn *string
 
 	// Metadata pertaining to the operation's result.

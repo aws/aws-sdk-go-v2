@@ -57,15 +57,22 @@ func (c *Client) ModifyClusterDbRevision(ctx context.Context, params *ModifyClus
 }
 
 type ModifyClusterDbRevisionInput struct {
+
 	// The identifier of the database revision. You can retrieve this value from the
 	// response to the DescribeClusterDbRevisions () request.
+	//
+	// This member is required.
 	RevisionTarget *string
+
 	// The unique identifier of a cluster whose database revision you want to modify.
 	// Example: examplecluster
+	//
+	// This member is required.
 	ClusterIdentifier *string
 }
 
 type ModifyClusterDbRevisionOutput struct {
+
 	// Describes a cluster.
 	Cluster *types.Cluster
 

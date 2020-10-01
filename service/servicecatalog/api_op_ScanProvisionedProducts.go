@@ -56,11 +56,14 @@ func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvis
 }
 
 type ScanProvisionedProductsInput struct {
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The access level to use to obtain results. The default is User.
 	AccessLevelFilter *types.AccessLevelFilter
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -70,14 +73,17 @@ type ScanProvisionedProductsInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
 }
 
 type ScanProvisionedProductsOutput struct {
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Information about the provisioned products.
 	ProvisionedProducts []*types.ProvisionedProductDetail
 

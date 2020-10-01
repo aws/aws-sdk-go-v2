@@ -57,17 +57,24 @@ func (c *Client) CreateProvisioningClaim(ctx context.Context, params *CreateProv
 }
 
 type CreateProvisioningClaimInput struct {
+
 	// The name of the provisioning template to use.
+	//
+	// This member is required.
 	TemplateName *string
 }
 
 type CreateProvisioningClaimOutput struct {
+
 	// The provisioning claim certificate.
 	CertificatePem *string
+
 	// The provisioning claim expiration time.
 	Expiration *time.Time
+
 	// The ID of the certificate.
 	CertificateId *string
+
 	// The provisioning claim key pair.
 	KeyPair *types.KeyPair
 

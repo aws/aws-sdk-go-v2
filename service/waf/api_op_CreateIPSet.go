@@ -85,16 +85,24 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 }
 
 type CreateIPSetInput struct {
+
 	// A friendly name or description of the IPSet (). You can't change Name after you
 	// create the IPSet.
+	//
+	// This member is required.
 	Name *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type CreateIPSetOutput struct {
+
 	// The IPSet () returned in the CreateIPSet response.
 	IPSet *types.IPSet
+
 	// The ChangeToken that you used to submit the CreateIPSet request. You can also
 	// use this value to query the status of the request. For more information, see
 	// GetChangeTokenStatus ().

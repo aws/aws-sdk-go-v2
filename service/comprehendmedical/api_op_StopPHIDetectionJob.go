@@ -55,11 +55,15 @@ func (c *Client) StopPHIDetectionJob(ctx context.Context, params *StopPHIDetecti
 }
 
 type StopPHIDetectionJobInput struct {
+
 	// The identifier of the PHI detection job to stop.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopPHIDetectionJobOutput struct {
+
 	// The identifier of the PHI detection job that was stopped.
 	JobId *string
 

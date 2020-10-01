@@ -58,27 +58,37 @@ func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, 
 }
 
 type UpdateClusterInput struct {
+
 	// The name of a parameter group for this cluster.
 	ParameterGroupName *string
+
 	// A description of the changes being made to the cluster.
 	Description *string
+
 	// A list of user-specified security group IDs to be assigned to each node in the
 	// DAX cluster. If this parameter is not specified, DAX assigns the default VPC
 	// security group to each node.
 	SecurityGroupIds []*string
+
 	// The Amazon Resource Name (ARN) that identifies the topic.
 	NotificationTopicArn *string
+
 	// A range of time when maintenance of DAX cluster software will be performed. For
 	// example: sun:01:00-sun:09:00. Cluster maintenance normally takes less than 30
 	// minutes, and is performed automatically within the maintenance window.
 	PreferredMaintenanceWindow *string
+
 	// The current state of the topic.
 	NotificationTopicStatus *string
+
 	// The name of the DAX cluster to be modified.
+	//
+	// This member is required.
 	ClusterName *string
 }
 
 type UpdateClusterOutput struct {
+
 	// A description of the DAX cluster, after it has been modified.
 	Cluster *types.Cluster
 

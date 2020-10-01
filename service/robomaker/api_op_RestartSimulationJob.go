@@ -55,7 +55,10 @@ func (c *Client) RestartSimulationJob(ctx context.Context, params *RestartSimula
 }
 
 type RestartSimulationJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the simulation job.
+	//
+	// This member is required.
 	Job *string
 }
 

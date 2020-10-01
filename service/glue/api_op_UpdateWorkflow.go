@@ -55,15 +55,21 @@ func (c *Client) UpdateWorkflow(ctx context.Context, params *UpdateWorkflowInput
 }
 
 type UpdateWorkflowInput struct {
+
 	// A collection of properties to be used as part of each execution of the workflow.
 	DefaultRunProperties map[string]*string
+
 	// The description of the workflow.
 	Description *string
+
 	// Name of the workflow to be updated.
+	//
+	// This member is required.
 	Name *string
 }
 
 type UpdateWorkflowOutput struct {
+
 	// The name of the workflow which was specified in input.
 	Name *string
 

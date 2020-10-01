@@ -57,11 +57,15 @@ func (c *Client) CreateTopicRuleDestination(ctx context.Context, params *CreateT
 }
 
 type CreateTopicRuleDestinationInput struct {
+
 	// The topic rule destination configuration.
+	//
+	// This member is required.
 	DestinationConfiguration *types.TopicRuleDestinationConfiguration
 }
 
 type CreateTopicRuleDestinationOutput struct {
+
 	// The topic rule destination.
 	TopicRuleDestination *types.TopicRuleDestination
 

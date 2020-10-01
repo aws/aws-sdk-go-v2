@@ -65,11 +65,15 @@ func (c *Client) DeleteSnapshotSchedule(ctx context.Context, params *DeleteSnaps
 }
 
 type DeleteSnapshotScheduleInput struct {
+
 	// The volume which snapshot schedule to delete.
+	//
+	// This member is required.
 	VolumeARN *string
 }
 
 type DeleteSnapshotScheduleOutput struct {
+
 	// The volume which snapshot schedule was deleted.
 	VolumeARN *string
 

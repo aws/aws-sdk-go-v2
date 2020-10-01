@@ -61,24 +61,33 @@ func (c *Client) GetCustomVerificationEmailTemplate(ctx context.Context, params 
 
 // Represents a request to retrieve an existing custom verification email template.
 type GetCustomVerificationEmailTemplateInput struct {
+
 	// The name of the custom verification email template that you want to retrieve.
+	//
+	// This member is required.
 	TemplateName *string
 }
 
 // The following elements are returned by the service.
 type GetCustomVerificationEmailTemplateOutput struct {
+
 	// The email address that the custom verification email is sent from.
 	FromEmailAddress *string
+
 	// The content of the custom verification email.
 	TemplateContent *string
+
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is successfully verified.
 	SuccessRedirectionURL *string
+
 	// The name of the custom verification email template.
 	TemplateName *string
+
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is not successfully verified.
 	FailureRedirectionURL *string
+
 	// The subject line of the custom verification email.
 	TemplateSubject *string
 

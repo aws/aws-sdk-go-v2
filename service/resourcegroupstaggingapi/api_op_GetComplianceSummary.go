@@ -59,18 +59,22 @@ func (c *Client) GetComplianceSummary(ctx context.Context, params *GetCompliance
 }
 
 type GetComplianceSummaryInput struct {
+
 	// The target identifiers (usually, specific account IDs) to limit the output by.
 	// If you use this parameter, the count of returned noncompliant resources includes
 	// only resources with the specified target IDs.
 	TargetIdFilters []*string
+
 	// A list of tag keys to limit the output by. If you use this parameter, the count
 	// of returned noncompliant resources includes only resources that have the
 	// specified tag keys.
 	TagKeyFilters []*string
+
 	// A list of Regions to limit the output by. If you use this parameter, the count
 	// of returned noncompliant resources includes only resources in the specified
 	// Regions.
 	RegionFilters []*string
+
 	// The constraints on the resources that you want returned. The format of each
 	// resource type is service[:resourceType]. For example, specifying a resource type
 	// of ec2 returns all Amazon EC2 resources (which includes EC2 instances).
@@ -96,20 +100,25 @@ type GetComplianceSummaryInput struct {
 	// to 100 items. Note that the length constraint requirement applies to each
 	// resource type filter.
 	ResourceTypeFilters []*string
+
 	// A string that indicates that additional data is available. Leave this value
 	// empty for your initial request. If the response includes a PaginationToken, use
 	// that string for this value to request an additional page of data.
 	PaginationToken *string
+
 	// A limit that restricts the number of results that are returned per page.
 	MaxResults *int32
+
 	// A list of attributes to group the counts of noncompliant resources by. If
 	// supplied, the counts are sorted by those attributes.
 	GroupBy []types.GroupByAttribute
 }
 
 type GetComplianceSummaryOutput struct {
+
 	// A table that shows counts of noncompliant resources.
 	SummaryList []*types.Summary
+
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.

@@ -57,9 +57,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The tags to add to the resource. A tag is a key-value pair.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

@@ -58,34 +58,46 @@ func (c *Client) QueryObjects(ctx context.Context, params *QueryObjectsInput, op
 
 // Contains the parameters for QueryObjects.
 type QueryObjectsInput struct {
+
 	// Indicates whether the query applies to components or instances. The possible
 	// values are: COMPONENT, INSTANCE, and ATTEMPT.
+	//
+	// This member is required.
 	Sphere *string
+
 	// The maximum number of object names that QueryObjects will return in a single
 	// call. The default value is 100.
 	Limit *int32
+
 	// The query that defines the objects to be returned. The Query object can contain
 	// a maximum of ten selectors. The conditions in the query are limited to top-level
 	// String fields in the object. These filters can be applied to components,
 	// instances, and attempts.
 	Query *types.Query
+
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
 	// QueryObjects with the marker value from the previous call to retrieve the next
 	// set of results.
 	Marker *string
+
 	// The ID of the pipeline.
+	//
+	// This member is required.
 	PipelineId *string
 }
 
 // Contains the output of QueryObjects.
 type QueryObjectsOutput struct {
+
 	// The starting point for the next page of results. To view the next page of
 	// results, call QueryObjects again with this marker value. If the value is null,
 	// there are no more results.
 	Marker *string
+
 	// The identifiers that match the query selectors.
 	Ids []*string
+
 	// Indicates whether there are more results that can be obtained by a subsequent
 	// call.
 	HasMoreResults *bool

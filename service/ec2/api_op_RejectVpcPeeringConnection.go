@@ -59,16 +59,21 @@ func (c *Client) RejectVpcPeeringConnection(ctx context.Context, params *RejectV
 }
 
 type RejectVpcPeeringConnectionInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the VPC peering connection.
+	//
+	// This member is required.
 	VpcPeeringConnectionId *string
 }
 
 type RejectVpcPeeringConnectionOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 

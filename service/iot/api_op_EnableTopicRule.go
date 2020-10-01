@@ -56,7 +56,10 @@ func (c *Client) EnableTopicRule(ctx context.Context, params *EnableTopicRuleInp
 
 // The input for the EnableTopicRuleRequest operation.
 type EnableTopicRuleInput struct {
+
 	// The name of the topic rule to enable.
+	//
+	// This member is required.
 	RuleName *string
 }
 

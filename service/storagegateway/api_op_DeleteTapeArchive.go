@@ -57,13 +57,17 @@ func (c *Client) DeleteTapeArchive(ctx context.Context, params *DeleteTapeArchiv
 
 // DeleteTapeArchiveInput
 type DeleteTapeArchiveInput struct {
+
 	// The Amazon Resource Name (ARN) of the virtual tape to delete from the virtual
 	// tape shelf (VTS).
+	//
+	// This member is required.
 	TapeARN *string
 }
 
 // DeleteTapeArchiveOutput
 type DeleteTapeArchiveOutput struct {
+
 	// The Amazon Resource Name (ARN) of the virtual tape that was deleted from the
 	// virtual tape shelf (VTS).
 	TapeARN *string

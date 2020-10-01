@@ -57,6 +57,7 @@ func (c *Client) UpdateAccountAuditConfiguration(ctx context.Context, params *Up
 }
 
 type UpdateAccountAuditConfigurationInput struct {
+
 	// Specifies which audit checks are enabled and disabled for this account. Use
 	// DescribeAccountAuditConfiguration to see the list of all checks, including those
 	// that are currently enabled. Some data collection might start immediately when
@@ -67,8 +68,10 @@ type UpdateAccountAuditConfigurationInput struct {
 	// UpdateAccountAuditConfiguration, this parameter is required and must specify at
 	// least one enabled check.
 	AuditCheckConfigurations map[string]*types.AuditCheckConfiguration
+
 	// Information about the targets to which audit notifications are sent.
 	AuditNotificationTargetConfigurations map[string]*types.AuditNotificationTarget
+
 	// The ARN of the role that grants permission to AWS IoT to access information
 	// about your devices, policies, certificates and other items as required when
 	// performing an audit.

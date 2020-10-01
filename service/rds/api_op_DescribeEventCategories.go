@@ -61,8 +61,10 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 
 //
 type DescribeEventCategoriesInput struct {
+
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
+
 	// The type of source that is generating the events. Valid values: db-instance |
 	// db-parameter-group | db-security-group | db-snapshot
 	SourceType *string
@@ -70,6 +72,7 @@ type DescribeEventCategoriesInput struct {
 
 // Data returned from the DescribeEventCategories action.
 type DescribeEventCategoriesOutput struct {
+
 	// A list of EventCategoriesMap data types.
 	EventCategoriesMapList []*types.EventCategoriesMap
 

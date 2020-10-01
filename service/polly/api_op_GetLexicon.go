@@ -58,15 +58,20 @@ func (c *Client) GetLexicon(ctx context.Context, params *GetLexiconInput, optFns
 }
 
 type GetLexiconInput struct {
+
 	// Name of the lexicon.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetLexiconOutput struct {
+
 	// Metadata of the lexicon, including phonetic alphabetic used, language code,
 	// lexicon ARN, number of lexemes defined in the lexicon, and size of lexicon in
 	// bytes.
 	LexiconAttributes *types.LexiconAttributes
+
 	// Lexicon object that provides name and the string content of the lexicon.
 	Lexicon *types.Lexicon
 

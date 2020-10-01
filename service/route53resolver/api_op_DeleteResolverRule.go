@@ -58,11 +58,15 @@ func (c *Client) DeleteResolverRule(ctx context.Context, params *DeleteResolverR
 }
 
 type DeleteResolverRuleInput struct {
+
 	// The ID of the resolver rule that you want to delete.
+	//
+	// This member is required.
 	ResolverRuleId *string
 }
 
 type DeleteResolverRuleOutput struct {
+
 	// Information about the DeleteResolverRule request, including the status of the
 	// request.
 	ResolverRule *types.ResolverRule

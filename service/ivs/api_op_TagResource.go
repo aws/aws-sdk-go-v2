@@ -55,9 +55,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// ARN of the resource for which tags are to be added or updated.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Array of tags to be added or updated.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

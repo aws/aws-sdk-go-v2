@@ -57,21 +57,32 @@ func (c *Client) RotateIngestEndpointCredentials(ctx context.Context, params *Ro
 }
 
 type RotateIngestEndpointCredentialsInput struct {
+
 	// The ID of the channel the IngestEndpoint is on.
+	//
+	// This member is required.
 	Id *string
+
 	// The id of the IngestEndpoint whose credentials should be rotated
+	//
+	// This member is required.
 	IngestEndpointId *string
 }
 
 type RotateIngestEndpointCredentialsOutput struct {
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
+
 	// A short text description of the Channel.
 	Description *string
+
 	// The ID of the Channel.
 	Id *string
 

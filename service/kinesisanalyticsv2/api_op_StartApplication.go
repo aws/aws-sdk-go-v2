@@ -58,10 +58,16 @@ func (c *Client) StartApplication(ctx context.Context, params *StartApplicationI
 }
 
 type StartApplicationInput struct {
+
 	// The name of the application.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
 	// application.
+	//
+	// This member is required.
 	RunConfiguration *types.RunConfiguration
 }
 

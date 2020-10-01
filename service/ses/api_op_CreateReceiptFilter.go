@@ -63,8 +63,11 @@ func (c *Client) CreateReceiptFilter(ctx context.Context, params *CreateReceiptF
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type CreateReceiptFilterInput struct {
+
 	// A data structure that describes the IP address filter to create, which consists
 	// of a name, an IP address range, and whether to allow or block mail from it.
+	//
+	// This member is required.
 	Filter *types.ReceiptFilter
 }
 

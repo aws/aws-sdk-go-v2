@@ -57,16 +57,22 @@ func (c *Client) CreateStreamingDistributionWithTags(ctx context.Context, params
 
 // The request to create a new streaming distribution with tags.
 type CreateStreamingDistributionWithTagsInput struct {
+
 	// The streaming distribution's configuration information.
+	//
+	// This member is required.
 	StreamingDistributionConfigWithTags *types.StreamingDistributionConfigWithTags
 }
 
 // The returned result of the corresponding request.
 type CreateStreamingDistributionWithTagsOutput struct {
+
 	// The streaming distribution's information.
 	StreamingDistribution *types.StreamingDistribution
+
 	// The fully qualified URI of the new streaming distribution resource just created.
 	Location *string
+
 	// The current version of the distribution created.
 	ETag *string
 

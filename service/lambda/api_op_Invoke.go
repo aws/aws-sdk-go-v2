@@ -94,6 +94,7 @@ func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func
 }
 
 type InvokeInput struct {
+
 	// Choose from the following options.
 	//
 	//     * RequestResponse (default) - Invoke the
@@ -109,15 +110,20 @@ type InvokeInput struct {
 	// Validate parameter values and verify that the user or role has permission to
 	// invoke the function.
 	InvocationType types.InvocationType
+
 	// Set to Tail to include the execution log in the response.
 	LogType types.LogType
+
 	// The JSON that you want to provide to your Lambda function as input.
 	Payload []byte
+
 	// Specify a version or alias to invoke a published version of the function.
 	Qualifier *string
+
 	// Up to 3583 bytes of base64-encoded data about the invoking client to pass to the
 	// function in the context object.
 	ClientContext *string
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -132,17 +138,23 @@ type InvokeInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
 }
 
 type InvokeOutput struct {
+
 	// The last 4 KB of the execution log, which is base64 encoded.
 	LogResult *string
+
 	// The response from the function, or an error object.
 	Payload []byte
+
 	// The version of the function that executed. When you invoke a function with an
 	// alias, this indicates which version the alias resolved to.
 	ExecutedVersion *string
+
 	// If present, indicates that an error occurred during function execution. Details
 	// about the error are included in the response payload.
 	FunctionError *string

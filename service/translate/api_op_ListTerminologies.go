@@ -55,16 +55,20 @@ func (c *Client) ListTerminologies(ctx context.Context, params *ListTerminologie
 }
 
 type ListTerminologiesInput struct {
+
 	// The maximum number of custom terminologies returned per list request.
 	MaxResults *int32
+
 	// If the result of the request to ListTerminologies was truncated, include the
 	// NextToken to fetch the next group of custom terminologies.
 	NextToken *string
 }
 
 type ListTerminologiesOutput struct {
+
 	// The properties list of the custom terminologies returned on the list request.
 	TerminologyPropertiesList []*types.TerminologyProperties
+
 	// If the response to the ListTerminologies was truncated, the NextToken fetches
 	// the next group of custom terminologies.
 	NextToken *string

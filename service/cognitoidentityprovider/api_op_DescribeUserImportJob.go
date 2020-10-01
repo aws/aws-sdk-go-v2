@@ -57,15 +57,22 @@ func (c *Client) DescribeUserImportJob(ctx context.Context, params *DescribeUser
 
 // Represents the request to describe the user import job.
 type DescribeUserImportJobInput struct {
+
 	// The job ID for the user import job.
+	//
+	// This member is required.
 	JobId *string
+
 	// The user pool ID for the user pool that the users are being imported into.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 // Represents the response from the server to the request to describe the user
 // import job.
 type DescribeUserImportJobOutput struct {
+
 	// The job object that represents the user import job.
 	UserImportJob *types.UserImportJobType
 

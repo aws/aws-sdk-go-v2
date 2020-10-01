@@ -69,11 +69,15 @@ func (c *Client) ExportSnapshot(ctx context.Context, params *ExportSnapshotInput
 }
 
 type ExportSnapshotInput struct {
+
 	// The name of the instance or disk snapshot to be exported to Amazon EC2.
+	//
+	// This member is required.
 	SourceSnapshotName *string
 }
 
 type ExportSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

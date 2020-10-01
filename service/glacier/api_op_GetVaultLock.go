@@ -85,25 +85,35 @@ func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, op
 
 // The input values for GetVaultLock.
 type GetVaultLockInput struct {
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
 }
 
 // Contains the Amazon S3 Glacier response to your request.
 type GetVaultLockOutput struct {
+
 	// The state of the vault lock. InProgress or Locked.
 	State *string
+
 	// The vault lock policy as a JSON string, which uses "\" as an escape character.
 	Policy *string
+
 	// The UTC date and time at which the lock ID expires. This value can be null if
 	// the vault lock is in a Locked state.
 	ExpirationDate *string
+
 	// The UTC date and time at which the vault lock was put into the InProgress state.
 	CreationDate *string
 

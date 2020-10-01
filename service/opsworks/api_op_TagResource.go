@@ -58,8 +58,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The stack or layer's Amazon Resource Number (ARN).
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A map that contains tag keys and tag values that are attached to a stack or
 	// layer.
 	//
@@ -78,6 +82,8 @@ type TagResourceInput struct {
 	//
 	//     * A maximum of 40 tags is
 	// allowed for any resource.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

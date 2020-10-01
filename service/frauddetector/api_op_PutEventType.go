@@ -62,18 +62,30 @@ func (c *Client) PutEventType(ctx context.Context, params *PutEventTypeInput, op
 }
 
 type PutEventTypeInput struct {
+
 	// The event type labels.
 	Labels []*string
+
 	// The event type variables.
+	//
+	// This member is required.
 	EventVariables []*string
+
 	// A collection of key and value pairs.
 	Tags []*types.Tag
+
 	// The entity type for the event type. Example entity types: customer, merchant,
 	// account.
+	//
+	// This member is required.
 	EntityTypes []*string
+
 	// The description of the event type.
 	Description *string
+
 	// The name.
+	//
+	// This member is required.
 	Name *string
 }
 

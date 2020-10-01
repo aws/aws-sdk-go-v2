@@ -57,26 +57,47 @@ func (c *Client) DescribePublishingDestination(ctx context.Context, params *Desc
 }
 
 type DescribePublishingDestinationInput struct {
+
 	// The ID of the publishing destination to retrieve.
+	//
+	// This member is required.
 	DestinationId *string
+
 	// The unique ID of the detector associated with the publishing destination to
 	// retrieve.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type DescribePublishingDestinationOutput struct {
+
 	// The ID of the publishing destination.
+	//
+	// This member is required.
 	DestinationId *string
+
 	// The time, in epoch millisecond format, at which GuardDuty was first unable to
 	// publish findings to the destination.
+	//
+	// This member is required.
 	PublishingFailureStartTimestamp *int64
+
 	// The status of the publishing destination.
+	//
+	// This member is required.
 	Status types.PublishingStatus
+
 	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
 	// the publishing destination.
+	//
+	// This member is required.
 	DestinationProperties *types.DestinationProperties
+
 	// The type of publishing destination. Currently, only Amazon S3 buckets are
 	// supported.
+	//
+	// This member is required.
 	DestinationType types.DestinationType
 
 	// Metadata pertaining to the operation's result.

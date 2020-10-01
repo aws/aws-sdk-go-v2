@@ -84,31 +84,42 @@ func (c *Client) AnalyzeDocument(ctx context.Context, params *AnalyzeDocumentInp
 }
 
 type AnalyzeDocumentInput struct {
+
 	// The input document as base64-encoded bytes or an Amazon S3 object. If you use
 	// the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The
 	// document must be an image in JPEG or PNG format. If you're using an AWS SDK to
 	// call Amazon Textract, you might not need to base64-encode image bytes that are
 	// passed using the Bytes field.
+	//
+	// This member is required.
 	Document *types.Document
+
 	// Sets the configuration for the human in the loop workflow for analyzing
 	// documents.
 	HumanLoopConfig *types.HumanLoopConfig
+
 	// A list of the types of analysis to perform. Add TABLES to the list to return
 	// information about the tables that are detected in the input document. Add FORMS
 	// to return detected form data. To perform both types of analysis, add TABLES and
 	// FORMS to FeatureTypes. All lines and words detected in the document are included
 	// in the response (including text that isn't related to the value of
 	// FeatureTypes).
+	//
+	// This member is required.
 	FeatureTypes []types.FeatureType
 }
 
 type AnalyzeDocumentOutput struct {
+
 	// The items that are detected and analyzed by AnalyzeDocument.
 	Blocks []*types.Block
+
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
+
 	// The version of the model used to analyze the document.
 	AnalyzeDocumentModelVersion *string
+
 	// Metadata about the analyzed document. An example is the number of pages.
 	DocumentMetadata *types.DocumentMetadata
 

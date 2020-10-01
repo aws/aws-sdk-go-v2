@@ -197,40 +197,57 @@ func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultip
 }
 
 type CreateMultipartUploadInput struct {
+
 	// The server-side encryption algorithm used when storing this object in Amazon S3
 	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
+
 	// If the bucket is configured as a website, redirects requests for this object to
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata.
 	WebsiteRedirectLocation *string
+
 	// Allows grantee to write the ACL for the applicable object.
 	GrantWriteACP *string
+
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
 	Tagging *string
+
 	// The canned ACL to apply to the object.
 	ACL types.ObjectCannedACL
+
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
+
 	// Specifies the algorithm to use to when encrypting the object (for example,
 	// AES256).
 	SSECustomerAlgorithm *string
+
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
 	// Amazon S3 uses this header for a message integrity check to ensure that the
 	// encryption key was transmitted without error.
 	SSECustomerKeyMD5 *string
+
 	// Allows grantee to read the object ACL.
 	GrantReadACP *string
+
 	// Object key for which the multipart upload is to be initiated.
+	//
+	// This member is required.
 	Key *string
+
 	// Specifies whether you want to apply a Legal Hold to the uploaded object.
 	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus
+
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
+
 	// A standard MIME type describing the format of the object data.
 	ContentType *string
+
 	// Specifies the Object Lock mode that you want to apply to the uploaded object.
 	ObjectLockMode types.ObjectLockMode
+
 	// Specifies the ID of the symmetric customer managed AWS KMS CMK to use for object
 	// encryption. All GET and PUT requests for an object protected by AWS KMS will
 	// fail if not made via SSL or using SigV4. For information about configuring using
@@ -239,10 +256,13 @@ type CreateMultipartUploadInput struct {
 	// (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
 	// in the Amazon S3 Developer Guide.
 	SSEKMSKeyId *string
+
 	// The language the content is in.
 	ContentLanguage *string
+
 	// Allows grantee to read the object data and its metadata.
 	GrantRead *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -250,28 +270,39 @@ type CreateMultipartUploadInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// Specifies the date and time when you want the Object Lock to expire.
 	ObjectLockRetainUntilDate *time.Time
+
 	// The name of the bucket to which to initiate the upload
+	//
+	// This member is required.
 	Bucket *string
+
 	// Specifies presentational information for the object.
 	ContentDisposition *string
+
 	// Specifies the customer-provided encryption key for Amazon S3 to use in
 	// encrypting data. This value is used to store the object and then it is
 	// discarded; Amazon S3 does not store the encryption key. The key must be
 	// appropriate for use with the algorithm specified in the
 	// x-amz-server-side-encryption-customer-algorithm header.
 	SSECustomerKey *string
+
 	// Specifies what content encodings have been applied to the object and thus what
 	// decoding mechanisms must be applied to obtain the media-type referenced by the
 	// Content-Type header field.
 	ContentEncoding *string
+
 	// The type of storage to use for the object. Defaults to 'STANDARD'.
 	StorageClass types.StorageClass
+
 	// A map of metadata to store with the object in S3.
 	Metadata map[string]*string
+
 	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
 	GrantFullControl *string
+
 	// Specifies the AWS KMS Encryption Context to use for object encryption. The value
 	// of this header is a base64-encoded UTF-8 string holding JSON with the encryption
 	// context key-value pairs.
@@ -279,10 +310,12 @@ type CreateMultipartUploadInput struct {
 }
 
 type CreateMultipartUploadOutput struct {
+
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header to provide round-trip message integrity
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
+
 	// Name of the bucket to which the multipart upload was initiated. When using this
 	// API with an access point, you must direct requests to the access point hostname.
 	// The access point hostname takes the form
@@ -293,25 +326,32 @@ type CreateMultipartUploadOutput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
 	Bucket *string
+
 	// If present, specifies the AWS KMS Encryption Context to use for object
 	// encryption. The value of this header is a base64-encoded UTF-8 string holding
 	// JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
+
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm used.
 	SSECustomerAlgorithm *string
+
 	// This header is returned along with the x-amz-abort-date header. It identifies
 	// the applicable lifecycle configuration rule that defines the action to abort
 	// incomplete multipart uploads.
 	AbortRuleId *string
+
 	// The server-side encryption algorithm used when storing this object in Amazon S3
 	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
+
 	// ID for the initiated multipart upload.
 	UploadId *string
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
 	// If the bucket has a lifecycle rule configured with an action to abort incomplete
 	// multipart uploads and the prefix in the lifecycle rule matches the object name
 	// in the request, the response includes this header. The header indicates when the
@@ -323,8 +363,10 @@ type CreateMultipartUploadOutput struct {
 	// provides the ID of the lifecycle configuration rule that defines this
 	// action.</p>
 	AbortDate *time.Time
+
 	// Object key for which the multipart upload was initiated.
 	Key *string
+
 	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
 	// symmetric customer managed customer master key (CMK) that was used for the
 	// object.

@@ -75,17 +75,24 @@ func (c *Client) PutLifecycleConfiguration(ctx context.Context, params *PutLifec
 }
 
 type PutLifecycleConfigurationInput struct {
+
 	// The ID of the file system for which you are creating the LifecycleConfiguration
 	// object (String).
+	//
+	// This member is required.
 	FileSystemId *string
+
 	// An array of LifecyclePolicy objects that define the file system's
 	// LifecycleConfiguration object. A LifecycleConfiguration object tells lifecycle
 	// management when to transition files from the Standard storage class to the
 	// Infrequent Access storage class.
+	//
+	// This member is required.
 	LifecyclePolicies []*types.LifecyclePolicy
 }
 
 type PutLifecycleConfigurationOutput struct {
+
 	// An array of lifecycle management policies. Currently, EFS supports a maximum of
 	// one policy per file system.
 	LifecyclePolicies []*types.LifecyclePolicy

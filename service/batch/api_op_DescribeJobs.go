@@ -56,11 +56,15 @@ func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, op
 }
 
 type DescribeJobsInput struct {
+
 	// A list of up to 100 job IDs.
+	//
+	// This member is required.
 	Jobs []*string
 }
 
 type DescribeJobsOutput struct {
+
 	// The list of jobs.
 	Jobs []*types.JobDetail
 

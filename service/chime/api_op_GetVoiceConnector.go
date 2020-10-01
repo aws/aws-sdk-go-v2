@@ -57,11 +57,15 @@ func (c *Client) GetVoiceConnector(ctx context.Context, params *GetVoiceConnecto
 }
 
 type GetVoiceConnectorInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type GetVoiceConnectorOutput struct {
+
 	// The Amazon Chime Voice Connector details.
 	VoiceConnector *types.VoiceConnector
 

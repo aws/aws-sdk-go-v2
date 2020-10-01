@@ -58,18 +58,24 @@ func (c *Client) GetDashboard(ctx context.Context, params *GetDashboardInput, op
 }
 
 type GetDashboardInput struct {
+
 	// The name of the dashboard to be described.
+	//
+	// This member is required.
 	DashboardName *string
 }
 
 type GetDashboardOutput struct {
+
 	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string
+
 	// The detailed information about the dashboard, including what widgets are
 	// included and their location on the dashboard. For more information about the
 	// DashboardBody syntax, see Dashboard Body Structure and Syntax
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html).
 	DashboardBody *string
+
 	// The name of the dashboard.
 	DashboardName *string
 

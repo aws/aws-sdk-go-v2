@@ -68,13 +68,21 @@ func (c *Client) SearchFaces(ctx context.Context, params *SearchFacesInput, optF
 }
 
 type SearchFacesInput struct {
+
 	// ID of a face to find matches for in the collection.
+	//
+	// This member is required.
 	FaceId *string
+
 	// Maximum number of faces to return. The operation returns the maximum number of
 	// faces with the highest confidence in the match.
 	MaxFaces *int32
+
 	// ID of the collection the face belongs to.
+	//
+	// This member is required.
 	CollectionId *string
+
 	// Optional value specifying the minimum confidence in the face match to return.
 	// For example, don't return any matches where confidence in matches is less than
 	// 70%. The default value is 80%.
@@ -82,11 +90,14 @@ type SearchFacesInput struct {
 }
 
 type SearchFacesOutput struct {
+
 	// ID of the face that was searched for matches in a collection.
 	SearchedFaceId *string
+
 	// Version number of the face detection model associated with the input collection
 	// (CollectionId).
 	FaceModelVersion *string
+
 	// An array of faces that matched the input face, along with the confidence in the
 	// match.
 	FaceMatches []*types.FaceMatch

@@ -59,9 +59,15 @@ type DescribeLimitsInput struct {
 }
 
 type DescribeLimitsOutput struct {
+
 	// The number of open shards.
+	//
+	// This member is required.
 	OpenShardCount *int32
+
 	// The maximum number of shards.
+	//
+	// This member is required.
 	ShardLimit *int32
 
 	// Metadata pertaining to the operation's result.

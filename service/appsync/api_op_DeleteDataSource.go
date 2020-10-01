@@ -55,9 +55,15 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 }
 
 type DeleteDataSourceInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The name of the data source.
+	//
+	// This member is required.
 	Name *string
 }
 

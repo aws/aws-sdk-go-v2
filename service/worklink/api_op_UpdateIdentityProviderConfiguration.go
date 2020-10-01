@@ -56,10 +56,17 @@ func (c *Client) UpdateIdentityProviderConfiguration(ctx context.Context, params
 }
 
 type UpdateIdentityProviderConfigurationInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The type of identity provider.
+	//
+	// This member is required.
 	IdentityProviderType types.IdentityProviderType
+
 	// The SAML metadata document provided by the customer’s identity provider. The
 	// existing IdentityProviderSamlMetadata is unset if null is passed.
 	IdentityProviderSamlMetadata *string

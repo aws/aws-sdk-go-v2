@@ -55,16 +55,20 @@ func (c *Client) GetCrawlers(ctx context.Context, params *GetCrawlersInput, optF
 }
 
 type GetCrawlersInput struct {
+
 	// The number of crawlers to return on each call.
 	MaxResults *int32
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 }
 
 type GetCrawlersOutput struct {
+
 	// A continuation token, if the returned list has not reached the end of those
 	// defined in this customer account.
 	NextToken *string
+
 	// A list of crawler metadata.
 	Crawlers []*types.Crawler
 

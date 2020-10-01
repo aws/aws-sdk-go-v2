@@ -82,11 +82,20 @@ func (c *Client) PutBucketMetricsConfiguration(ctx context.Context, params *PutB
 }
 
 type PutBucketMetricsConfigurationInput struct {
+
 	// The name of the bucket for which the metrics configuration is set.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Specifies the metrics configuration.
+	//
+	// This member is required.
 	MetricsConfiguration *types.MetricsConfiguration
+
 	// The ID used to identify the metrics configuration.
+	//
+	// This member is required.
 	Id *string
 }
 

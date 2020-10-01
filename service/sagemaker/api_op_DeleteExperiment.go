@@ -57,11 +57,15 @@ func (c *Client) DeleteExperiment(ctx context.Context, params *DeleteExperimentI
 }
 
 type DeleteExperimentInput struct {
+
 	// The name of the experiment to delete.
+	//
+	// This member is required.
 	ExperimentName *string
 }
 
 type DeleteExperimentOutput struct {
+
 	// The Amazon Resource Name (ARN) of the experiment that is being deleted.
 	ExperimentArn *string
 

@@ -57,17 +57,21 @@ func (c *Client) DescribeDBClusterEndpoints(ctx context.Context, params *Describ
 }
 
 type DescribeDBClusterEndpointsInput struct {
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// The identifier of the endpoint to describe. This parameter is stored as a
 	// lowercase string.
 	DBClusterEndpointIdentifier *string
+
 	// The DB cluster identifier of the DB cluster associated with the endpoint. This
 	// parameter is stored as a lowercase string.
 	DBClusterIdentifier *string
+
 	// A set of name-value pairs that define which endpoints to include in the output.
 	// The filters are specified as name-value pairs, in the format
 	// Name=endpoint_type,Values=endpoint_type1,endpoint_type2,.... Name can be one of:
@@ -78,6 +82,7 @@ type DescribeDBClusterEndpointsInput struct {
 	// reader, any. Values for the db-cluster-endpoint-status filter can be one or more
 	// of: available, creating, deleting, modifying.
 	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
@@ -85,10 +90,12 @@ type DescribeDBClusterEndpointsInput struct {
 }
 
 type DescribeDBClusterEndpointsOutput struct {
+
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
+
 	// Contains the details of the endpoints associated with the cluster and matching
 	// any filter conditions.
 	DBClusterEndpoints []*types.DBClusterEndpoint

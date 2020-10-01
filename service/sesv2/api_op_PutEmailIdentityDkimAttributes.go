@@ -57,8 +57,12 @@ func (c *Client) PutEmailIdentityDkimAttributes(ctx context.Context, params *Put
 // A request to enable or disable DKIM signing of email that you send from an email
 // identity.
 type PutEmailIdentityDkimAttributesInput struct {
+
 	// The email identity that you want to change the DKIM settings for.
+	//
+	// This member is required.
 	EmailIdentity *string
+
 	// Sets the DKIM signing configuration for the identity. When you set this value
 	// true, then the messages that are sent from the identity are signed using DKIM.
 	// If you set this value to false, your messages are sent without DKIM signing.

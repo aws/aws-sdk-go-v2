@@ -88,15 +88,21 @@ func (c *Client) CreateDataSourceFromRedshift(ctx context.Context, params *Creat
 }
 
 type CreateDataSourceFromRedshiftInput struct {
+
 	// A user-supplied ID that uniquely identifies the DataSource.
+	//
+	// This member is required.
 	DataSourceId *string
+
 	// The compute statistics for a DataSource. The statistics are generated from the
 	// observation data referenced by a DataSource. Amazon ML uses the statistics
 	// internally during MLModel training. This parameter must be set to true if the
 	// DataSource needs to be used for MLModel training.
 	ComputeStatistics *bool
+
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string
+
 	// The data specification of an Amazon Redshift DataSource:
 	//
 	//     *
@@ -129,12 +135,17 @@ type CreateDataSourceFromRedshiftInput struct {
 	//     * DataRearrangement - A JSON string that represents the
 	// splitting and rearrangement requirements for the DataSource. Sample -
 	// "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//
+	// This member is required.
 	DataSpec *types.RedshiftDataSpec
+
 	// A fully specified role Amazon Resource Name (ARN). Amazon ML assumes the role on
 	// behalf of the user to create the following:  <ul> <li> <p>A security group to
 	// allow Amazon ML to execute the <code>SelectSqlQuery</code> query on an Amazon
 	// Redshift cluster</p> </li> <li> <p>An Amazon S3 bucket policy to grant Amazon ML
 	// read/write permissions on the <code>S3StagingLocation</code> </p> </li> </ul>
+	//
+	// This member is required.
 	RoleARN *string
 }
 
@@ -143,6 +154,7 @@ type CreateDataSourceFromRedshiftInput struct {
 // CreateDataSourceFromRedshift operation is asynchronous. You can poll for updates
 // by using the GetBatchPrediction operation and checking the Status parameter.
 type CreateDataSourceFromRedshiftOutput struct {
+
 	// A user-supplied ID that uniquely identifies the datasource. This value should be
 	// identical to the value of the DataSourceID in the request.
 	DataSourceId *string

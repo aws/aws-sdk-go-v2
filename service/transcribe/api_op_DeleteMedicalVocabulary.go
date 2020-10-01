@@ -55,7 +55,10 @@ func (c *Client) DeleteMedicalVocabulary(ctx context.Context, params *DeleteMedi
 }
 
 type DeleteMedicalVocabularyInput struct {
+
 	// The name of the vocabulary you are choosing to delete.
+	//
+	// This member is required.
 	VocabularyName *string
 }
 

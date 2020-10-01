@@ -61,14 +61,19 @@ func (c *Client) UpdateS3Resources(ctx context.Context, params *UpdateS3Resource
 }
 
 type UpdateS3ResourcesInput struct {
+
 	// The S3 resources whose classification types you want to update.
+	//
+	// This member is required.
 	S3ResourcesUpdate []*types.S3ResourceClassificationUpdate
+
 	// The AWS ID of the Amazon Macie Classic member account whose S3 resources'
 	// classification types you want to update.
 	MemberAccountId *string
 }
 
 type UpdateS3ResourcesOutput struct {
+
 	// The S3 resources whose classification types can't be updated. An error code and
 	// an error message are provided for each failed item.
 	FailedS3Resources []*types.FailedS3Resource

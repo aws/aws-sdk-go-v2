@@ -70,11 +70,15 @@ func (c *Client) GetAccuracyMetrics(ctx context.Context, params *GetAccuracyMetr
 }
 
 type GetAccuracyMetricsInput struct {
+
 	// The Amazon Resource Name (ARN) of the predictor to get metrics for.
+	//
+	// This member is required.
 	PredictorArn *string
 }
 
 type GetAccuracyMetricsOutput struct {
+
 	// An array of results from evaluating the predictor.
 	PredictorEvaluationResults []*types.EvaluationResult
 

@@ -56,13 +56,20 @@ func (c *Client) ImportKeyPair(ctx context.Context, params *ImportKeyPairInput, 
 }
 
 type ImportKeyPairInput struct {
+
 	// A base64-encoded public key of the ssh-rsa type.
+	//
+	// This member is required.
 	PublicKeyBase64 *string
+
 	// The name of the key pair for which you want to import the public key.
+	//
+	// This member is required.
 	KeyPairName *string
 }
 
 type ImportKeyPairOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

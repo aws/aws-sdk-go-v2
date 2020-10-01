@@ -63,14 +63,21 @@ func (c *Client) RegisterElasticIp(ctx context.Context, params *RegisterElasticI
 }
 
 type RegisterElasticIpInput struct {
+
 	// The Elastic IP address.
+	//
+	// This member is required.
 	ElasticIp *string
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 
 // Contains the response to a RegisterElasticIp request.
 type RegisterElasticIpOutput struct {
+
 	// The Elastic IP address.
 	ElasticIp *string
 

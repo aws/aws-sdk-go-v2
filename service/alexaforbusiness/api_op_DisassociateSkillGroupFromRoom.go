@@ -55,8 +55,10 @@ func (c *Client) DisassociateSkillGroupFromRoom(ctx context.Context, params *Dis
 }
 
 type DisassociateSkillGroupFromRoomInput struct {
+
 	// The ARN of the skill group to disassociate from a room. Required.
 	SkillGroupArn *string
+
 	// The ARN of the room from which the skill group is to be disassociated. Required.
 	RoomArn *string
 }

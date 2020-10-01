@@ -57,14 +57,19 @@ func (c *Client) SubmitAttachmentStateChanges(ctx context.Context, params *Submi
 }
 
 type SubmitAttachmentStateChangesInput struct {
+
 	// Any attachments associated with the state change request.
+	//
+	// This member is required.
 	Attachments []*types.AttachmentStateChange
+
 	// The short name or full ARN of the cluster that hosts the container instance the
 	// attachment belongs to.
 	Cluster *string
 }
 
 type SubmitAttachmentStateChangesOutput struct {
+
 	// Acknowledgement of the state change.
 	Acknowledgment *string
 

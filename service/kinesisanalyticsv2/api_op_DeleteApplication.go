@@ -57,9 +57,15 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 }
 
 type DeleteApplicationInput struct {
+
 	// Use the DescribeApplication operation to get this value.
+	//
+	// This member is required.
 	CreateTimestamp *time.Time
+
 	// The name of the application to delete.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 

@@ -61,6 +61,7 @@ func (c *Client) ListPhoneNumbersOptedOut(ctx context.Context, params *ListPhone
 
 // The input for the ListPhoneNumbersOptedOut action.
 type ListPhoneNumbersOptedOutInput struct {
+
 	// A NextToken string is used when you call the ListPhoneNumbersOptedOut action to
 	// retrieve additional records that are available after the first page of results.
 	NextToken *string
@@ -68,9 +69,11 @@ type ListPhoneNumbersOptedOutInput struct {
 
 // The response from the ListPhoneNumbersOptedOut action.
 type ListPhoneNumbersOptedOutOutput struct {
+
 	// A NextToken string is returned when you call the ListPhoneNumbersOptedOut action
 	// if additional records are available after the first page of results.
 	NextToken *string
+
 	// A list of phone numbers that are opted out of receiving SMS messages. The list
 	// is paginated, and each page can contain up to 100 phone numbers.
 	PhoneNumbers []*string

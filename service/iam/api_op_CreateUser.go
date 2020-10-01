@@ -60,6 +60,7 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 }
 
 type CreateUserInput struct {
+
 	// The path for the user name. For more information about paths, see IAM
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -71,10 +72,14 @@ type CreateUserInput struct {
 	// through the DEL character (\u007F), including most punctuation characters,
 	// digits, and upper and lowercased letters.
 	Path *string
+
 	// The name of the user to create. IAM user, group, role, and policy names must be
 	// unique within the account. Names are not distinguished by case. For example, you
 	// cannot create resources named both "MyResource" and "myresource".
+	//
+	// This member is required.
 	UserName *string
+
 	// A list of tags that you want to attach to the newly created user. Each tag
 	// consists of a key name and an associated value. For more information about
 	// tagging, see Tagging IAM Identities
@@ -82,12 +87,14 @@ type CreateUserInput struct {
 	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
 	// tags per user, then the entire request fails and the user is not created.
 	Tags []*types.Tag
+
 	// The ARN of the policy that is used to set the permissions boundary for the user.
 	PermissionsBoundary *string
 }
 
 // Contains the response to a successful CreateUser () request.
 type CreateUserOutput struct {
+
 	// A structure with details about the new IAM user.
 	User *types.User
 

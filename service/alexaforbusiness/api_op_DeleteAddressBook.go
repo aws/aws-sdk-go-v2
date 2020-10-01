@@ -55,7 +55,10 @@ func (c *Client) DeleteAddressBook(ctx context.Context, params *DeleteAddressBoo
 }
 
 type DeleteAddressBookInput struct {
+
 	// The ARN of the address book to delete.
+	//
+	// This member is required.
 	AddressBookArn *string
 }
 

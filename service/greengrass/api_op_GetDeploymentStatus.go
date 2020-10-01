@@ -56,22 +56,33 @@ func (c *Client) GetDeploymentStatus(ctx context.Context, params *GetDeploymentS
 }
 
 type GetDeploymentStatusInput struct {
+
 	// The ID of the deployment.
+	//
+	// This member is required.
 	DeploymentId *string
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type GetDeploymentStatusOutput struct {
+
 	// The type of the deployment.
 	DeploymentType types.DeploymentType
+
 	// Error details
 	ErrorDetails []*types.ErrorDetail
+
 	// Error message
 	ErrorMessage *string
+
 	// The time, in milliseconds since the epoch, when the deployment status was
 	// updated.
 	UpdatedAt *string
+
 	// The status of the deployment: ''InProgress'', ''Building'', ''Success'', or
 	// ''Failure''.
 	DeploymentStatus *string

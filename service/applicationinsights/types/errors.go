@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The request is not understood by the server.
@@ -24,12 +23,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The server encountered an internal error and is unable to complete the request.
 type InternalServerException struct {
@@ -47,12 +40,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is already created or in use.
 type ResourceInUseException struct {
@@ -70,12 +57,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource does not exist in the customer account.
 type ResourceNotFoundException struct {
@@ -93,12 +74,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Tags are already registered for the specified application ARN.
 type TagsAlreadyExistException struct {
@@ -116,12 +91,6 @@ func (e *TagsAlreadyExistException) ErrorMessage() string {
 }
 func (e *TagsAlreadyExistException) ErrorCode() string             { return "TagsAlreadyExistException" }
 func (e *TagsAlreadyExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagsAlreadyExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagsAlreadyExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of the provided tags is beyond the limit, or the number of total tags
 // you are trying to attach to the specified resource exceeds the limit.
@@ -142,18 +111,6 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *TooManyTagsException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter is not valid.
 type ValidationException struct {
@@ -171,9 +128,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

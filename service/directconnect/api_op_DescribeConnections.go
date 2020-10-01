@@ -55,11 +55,13 @@ func (c *Client) DescribeConnections(ctx context.Context, params *DescribeConnec
 }
 
 type DescribeConnectionsInput struct {
+
 	// The ID of the connection.
 	ConnectionId *string
 }
 
 type DescribeConnectionsOutput struct {
+
 	// The connections.
 	Connections []*types.Connection
 

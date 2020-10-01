@@ -56,15 +56,23 @@ func (c *Client) RemoveFlowSource(ctx context.Context, params *RemoveFlowSourceI
 }
 
 type RemoveFlowSourceInput struct {
+
 	// The flow that you want to remove a source from.
+	//
+	// This member is required.
 	FlowArn *string
+
 	// The ARN of the source that you want to remove.
+	//
+	// This member is required.
 	SourceArn *string
 }
 
 type RemoveFlowSourceOutput struct {
+
 	// The ARN of the flow that is associated with the source you removed.
 	FlowArn *string
+
 	// The ARN of the source that was removed.
 	SourceArn *string
 

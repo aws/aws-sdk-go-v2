@@ -59,20 +59,26 @@ func (c *Client) GetSAMLProvider(ctx context.Context, params *GetSAMLProviderInp
 }
 
 type GetSAMLProviderInput struct {
+
 	// The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to
 	// get information about. For more information about ARNs, see Amazon Resource
 	// Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	SAMLProviderArn *string
 }
 
 // Contains the response to a successful GetSAMLProvider () request.
 type GetSAMLProviderOutput struct {
+
 	// The expiration date and time for the SAML provider.
 	ValidUntil *time.Time
+
 	// The XML metadata document that includes information about an identity provider.
 	SAMLMetadataDocument *string
+
 	// The date and time when the SAML provider was created.
 	CreateDate *time.Time
 

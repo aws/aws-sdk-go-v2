@@ -59,6 +59,7 @@ func (c *Client) UpdateSMBSecurityStrategy(ctx context.Context, params *UpdateSM
 }
 
 type UpdateSMBSecurityStrategyInput struct {
+
 	// Specifies the type of security strategy.  <p>ClientSpecified: if you use this
 	// option, requests are established based on what is negotiated by the client. This
 	// option is recommended when you want to maximize compatibility across different
@@ -70,13 +71,19 @@ type UpdateSMBSecurityStrategyInput struct {
 	// encryption enabled. This option is highly recommended for environments that
 	// handle sensitive data. This option works with SMB clients on Microsoft Windows
 	// 8, Windows Server 2012 or newer.</p>
+	//
+	// This member is required.
 	SMBSecurityStrategy types.SMBSecurityStrategy
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 type UpdateSMBSecurityStrategyOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

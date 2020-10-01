@@ -55,17 +55,28 @@ func (c *Client) DeleteIAMPolicyAssignment(ctx context.Context, params *DeleteIA
 }
 
 type DeleteIAMPolicyAssignmentInput struct {
+
 	// The namespace that contains the assignment.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The name of the assignment.
+	//
+	// This member is required.
 	AssignmentName *string
+
 	// The AWS account ID where you want to delete the IAM policy assignment.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DeleteIAMPolicyAssignmentOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The name of the assignment.
 	AssignmentName *string
 

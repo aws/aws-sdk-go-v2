@@ -64,15 +64,22 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 }
 
 type CreateDeploymentInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
+
 	// The instance IDs for the deployment targets.
 	InstanceIds []*string
+
 	// The app ID. This parameter is required for app deployments, but not for other
 	// deployment commands.
 	AppId *string
+
 	// A user-defined comment.
 	Comment *string
+
 	// A string that contains user-defined, custom JSON. You can use this parameter to
 	// override some corresponding default stack configuration JSON values. The string
 	// should be in the following format: "{\"key1\": \"value1\", \"key2\":
@@ -82,15 +89,20 @@ type CreateDeploymentInput struct {
 	// and Overriding Attributes With Custom JSON
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
 	CustomJson *string
+
 	// A DeploymentCommand object that specifies the deployment command and any
 	// associated arguments.
+	//
+	// This member is required.
 	Command *types.DeploymentCommand
+
 	// The layer IDs for the deployment targets.
 	LayerIds []*string
 }
 
 // Contains the response to a CreateDeployment request.
 type CreateDeploymentOutput struct {
+
 	// The deployment ID, which can be used with other requests to identify the
 	// deployment.
 	DeploymentId *string

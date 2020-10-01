@@ -56,8 +56,12 @@ func (c *Client) DescribeProvisionedProduct(ctx context.Context, params *Describ
 }
 
 type DescribeProvisionedProductInput struct {
+
 	// The provisioned product identifier.
+	//
+	// This member is required.
 	Id *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -70,8 +74,10 @@ type DescribeProvisionedProductInput struct {
 }
 
 type DescribeProvisionedProductOutput struct {
+
 	// Any CloudWatch dashboards that were created when provisioning the product.
 	CloudWatchDashboards []*types.CloudWatchDashboard
+
 	// Information about the provisioned product.
 	ProvisionedProductDetail *types.ProvisionedProductDetail
 

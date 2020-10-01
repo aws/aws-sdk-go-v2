@@ -60,16 +60,22 @@ func (c *Client) DeleteRolePolicy(ctx context.Context, params *DeleteRolePolicyI
 }
 
 type DeleteRolePolicyInput struct {
+
 	// The name of the inline policy to delete from the specified IAM role. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
 	// string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The name (friendly name, not ARN) identifying the role that the policy is
 	// embedded in. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
 }
 

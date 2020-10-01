@@ -60,14 +60,20 @@ func (c *Client) EnableDomainTransferLock(ctx context.Context, params *EnableDom
 
 // A request to set the transfer lock for the specified domain.
 type EnableDomainTransferLockInput struct {
+
 	// The name of the domain that you want to set the transfer lock for.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The EnableDomainTransferLock response includes the following elements.
 type EnableDomainTransferLockOutput struct {
+
 	// Identifier for tracking the progress of the request. To use this ID to query the
 	// operation status, use GetOperationDetail.
+	//
+	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

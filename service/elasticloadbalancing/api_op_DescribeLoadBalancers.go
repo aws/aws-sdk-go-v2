@@ -57,11 +57,14 @@ func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoad
 
 // Contains the parameters for DescribeLoadBalancers.
 type DescribeLoadBalancersInput struct {
+
 	// The names of the load balancers.
 	LoadBalancerNames []*string
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// The maximum number of results to return with this call (a number from 1 to 400).
 	// The default is 400.
 	PageSize *int32
@@ -69,9 +72,11 @@ type DescribeLoadBalancersInput struct {
 
 // Contains the parameters for DescribeLoadBalancers.
 type DescribeLoadBalancersOutput struct {
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	NextMarker *string
+
 	// Information about the load balancers.
 	LoadBalancerDescriptions []*types.LoadBalancerDescription
 

@@ -57,6 +57,7 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 }
 
 type GetPolicyInput struct {
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -71,14 +72,19 @@ type GetPolicyInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// Specify a version or alias to get the policy for that resource.
 	Qualifier *string
 }
 
 type GetPolicyOutput struct {
+
 	// The resource-based policy.
 	Policy *string
+
 	// A unique identifier for the current revision of the policy.
 	RevisionId *string
 

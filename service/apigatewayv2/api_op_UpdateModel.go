@@ -56,31 +56,46 @@ func (c *Client) UpdateModel(ctx context.Context, params *UpdateModelInput, optF
 
 // Updates a Model.
 type UpdateModelInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
+
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.
 	Schema *string
+
 	// The name of the model.
 	Name *string
+
 	// The content-type for the model, for example, "application/json".
 	ContentType *string
+
 	// The description of the model.
 	Description *string
 }
 
 type UpdateModelOutput struct {
+
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.
 	Schema *string
+
 	// The description of the model.
 	Description *string
+
 	// The content-type for the model, for example, "application/json".
 	ContentType *string
+
 	// The name of the model. Must be alphanumeric.
 	Name *string
+
 	// The model identifier.
 	ModelId *string
 

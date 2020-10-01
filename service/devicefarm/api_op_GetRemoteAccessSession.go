@@ -58,14 +58,18 @@ func (c *Client) GetRemoteAccessSession(ctx context.Context, params *GetRemoteAc
 // Represents the request to get information about the specified remote access
 // session.
 type GetRemoteAccessSessionInput struct {
+
 	// The Amazon Resource Name (ARN) of the remote access session about which you want
 	// to get session information.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the response from the server that lists detailed information about
 // the remote access session.
 type GetRemoteAccessSessionOutput struct {
+
 	// A container that lists detailed information about the remote access session.
 	RemoteAccessSession *types.RemoteAccessSession
 

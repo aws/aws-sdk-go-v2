@@ -62,10 +62,12 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 }
 
 type CreateAliasInput struct {
+
 	// The routing configuration
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing)
 	// of the alias.
 	RoutingConfig *types.AliasRoutingConfiguration
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -80,30 +82,45 @@ type CreateAliasInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// A description of the alias.
 	Description *string
+
 	// The function version that the alias invokes.
+	//
+	// This member is required.
 	FunctionVersion *string
+
 	// The name of the alias.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Provides configuration information about a Lambda function alias
 // (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 type CreateAliasOutput struct {
+
 	// The routing configuration
 	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
 	// of the alias.
 	RoutingConfig *types.AliasRoutingConfiguration
+
 	// The name of the alias.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the alias.
 	AliasArn *string
+
 	// A unique identifier that changes when you update the alias.
 	RevisionId *string
+
 	// The function version that the alias invokes.
 	FunctionVersion *string
+
 	// A description of the alias.
 	Description *string
 

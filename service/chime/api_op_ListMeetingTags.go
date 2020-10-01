@@ -56,11 +56,15 @@ func (c *Client) ListMeetingTags(ctx context.Context, params *ListMeetingTagsInp
 }
 
 type ListMeetingTagsInput struct {
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
 }
 
 type ListMeetingTagsOutput struct {
+
 	// A list of tag key-value pairs.
 	Tags []*types.Tag
 

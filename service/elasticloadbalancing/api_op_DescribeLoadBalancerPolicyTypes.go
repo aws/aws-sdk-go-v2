@@ -63,6 +63,7 @@ func (c *Client) DescribeLoadBalancerPolicyTypes(ctx context.Context, params *De
 
 // Contains the parameters for DescribeLoadBalancerPolicyTypes.
 type DescribeLoadBalancerPolicyTypesInput struct {
+
 	// The names of the policy types. If no names are specified, describes all policy
 	// types defined by Elastic Load Balancing.
 	PolicyTypeNames []*string
@@ -70,6 +71,7 @@ type DescribeLoadBalancerPolicyTypesInput struct {
 
 // Contains the output of DescribeLoadBalancerPolicyTypes.
 type DescribeLoadBalancerPolicyTypesOutput struct {
+
 	// Information about the policy types.
 	PolicyTypeDescriptions []*types.PolicyTypeDescription
 

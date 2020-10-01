@@ -61,9 +61,15 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 }
 
 type AddTagsInput struct {
+
 	// The tags.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// This member is required.
 	ResourceArns []*string
 }
 

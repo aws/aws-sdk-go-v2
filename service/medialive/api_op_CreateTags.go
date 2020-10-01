@@ -56,9 +56,13 @@ func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns
 
 // Placeholder documentation for CreateTagsRequest
 type CreateTagsInput struct {
+
 	// Placeholder documentation for Tags
 	Tags map[string]*string
+
 	// Placeholder documentation for __string
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

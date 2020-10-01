@@ -58,11 +58,15 @@ func (c *Client) EnableImportFindingsForProduct(ctx context.Context, params *Ena
 }
 
 type EnableImportFindingsForProductInput struct {
+
 	// The ARN of the product to enable the integration for.
+	//
+	// This member is required.
 	ProductArn *string
 }
 
 type EnableImportFindingsForProductOutput struct {
+
 	// The ARN of your subscription to the product to enable integrations for.
 	ProductSubscriptionArn *string
 

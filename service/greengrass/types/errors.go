@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // General error information.
@@ -26,18 +25,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *BadRequestException) GetErrorDetails() []*ErrorDetail {
-	return e.ErrorDetails
-}
-func (e *BadRequestException) HasErrorDetails() bool {
-	return e.ErrorDetails != nil
-}
 
 // General error information.
 type InternalServerErrorException struct {
@@ -57,15 +44,3 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetErrorDetails() []*ErrorDetail {
-	return e.ErrorDetails
-}
-func (e *InternalServerErrorException) HasErrorDetails() bool {
-	return e.ErrorDetails != nil
-}
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}

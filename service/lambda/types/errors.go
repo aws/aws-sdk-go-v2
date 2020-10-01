@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You have exceeded your maximum total code size per account. Learn more
@@ -27,18 +26,6 @@ func (e *CodeStorageExceededException) ErrorMessage() string {
 }
 func (e *CodeStorageExceededException) ErrorCode() string             { return "CodeStorageExceededException" }
 func (e *CodeStorageExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CodeStorageExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CodeStorageExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CodeStorageExceededException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *CodeStorageExceededException) HasType() bool {
-	return e.Type != nil
-}
 
 // Need additional permissions to configure VPC settings.
 type EC2AccessDeniedException struct {
@@ -58,18 +45,6 @@ func (e *EC2AccessDeniedException) ErrorMessage() string {
 }
 func (e *EC2AccessDeniedException) ErrorCode() string             { return "EC2AccessDeniedException" }
 func (e *EC2AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *EC2AccessDeniedException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EC2AccessDeniedException) HasType() bool {
-	return e.Type != nil
-}
-func (e *EC2AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EC2AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Lambda was throttled by Amazon EC2 during Lambda function initialization
 // using the execution role provided for the Lambda function.
@@ -90,18 +65,6 @@ func (e *EC2ThrottledException) ErrorMessage() string {
 }
 func (e *EC2ThrottledException) ErrorCode() string             { return "EC2ThrottledException" }
 func (e *EC2ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *EC2ThrottledException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EC2ThrottledException) HasType() bool {
-	return e.Type != nil
-}
-func (e *EC2ThrottledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EC2ThrottledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Lambda received an unexpected EC2 client exception while setting up for the
 // Lambda function.
@@ -123,24 +86,6 @@ func (e *EC2UnexpectedException) ErrorMessage() string {
 }
 func (e *EC2UnexpectedException) ErrorCode() string             { return "EC2UnexpectedException" }
 func (e *EC2UnexpectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *EC2UnexpectedException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EC2UnexpectedException) HasType() bool {
-	return e.Type != nil
-}
-func (e *EC2UnexpectedException) GetEC2ErrorCode() string {
-	return ptr.ToString(e.EC2ErrorCode)
-}
-func (e *EC2UnexpectedException) HasEC2ErrorCode() bool {
-	return e.EC2ErrorCode != nil
-}
-func (e *EC2UnexpectedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EC2UnexpectedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occured when reading from or writing to a connected file system.
 type EFSIOException struct {
@@ -160,18 +105,6 @@ func (e *EFSIOException) ErrorMessage() string {
 }
 func (e *EFSIOException) ErrorCode() string             { return "EFSIOException" }
 func (e *EFSIOException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EFSIOException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EFSIOException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *EFSIOException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EFSIOException) HasType() bool {
-	return e.Type != nil
-}
 
 // The function couldn't make a network connection to the configured file system.
 type EFSMountConnectivityException struct {
@@ -191,18 +124,6 @@ func (e *EFSMountConnectivityException) ErrorMessage() string {
 }
 func (e *EFSMountConnectivityException) ErrorCode() string             { return "EFSMountConnectivityException" }
 func (e *EFSMountConnectivityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EFSMountConnectivityException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EFSMountConnectivityException) HasType() bool {
-	return e.Type != nil
-}
-func (e *EFSMountConnectivityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EFSMountConnectivityException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The function couldn't mount the configured file system due to a permission or
 // configuration issue.
@@ -223,18 +144,6 @@ func (e *EFSMountFailureException) ErrorMessage() string {
 }
 func (e *EFSMountFailureException) ErrorCode() string             { return "EFSMountFailureException" }
 func (e *EFSMountFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EFSMountFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EFSMountFailureException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *EFSMountFailureException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EFSMountFailureException) HasType() bool {
-	return e.Type != nil
-}
 
 // The function was able to make a network connection to the configured file
 // system, but the mount operation timed out.
@@ -255,18 +164,6 @@ func (e *EFSMountTimeoutException) ErrorMessage() string {
 }
 func (e *EFSMountTimeoutException) ErrorCode() string             { return "EFSMountTimeoutException" }
 func (e *EFSMountTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EFSMountTimeoutException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *EFSMountTimeoutException) HasType() bool {
-	return e.Type != nil
-}
-func (e *EFSMountTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EFSMountTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Lambda was not able to create an elastic network interface in the VPC,
 // specified as part of Lambda function configuration, because the limit for
@@ -288,18 +185,6 @@ func (e *ENILimitReachedException) ErrorMessage() string {
 }
 func (e *ENILimitReachedException) ErrorCode() string             { return "ENILimitReachedException" }
 func (e *ENILimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ENILimitReachedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ENILimitReachedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ENILimitReachedException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ENILimitReachedException) HasType() bool {
-	return e.Type != nil
-}
 
 // One of the parameters in the request is invalid.
 type InvalidParameterValueException struct {
@@ -319,18 +204,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidParameterValueException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidParameterValueException) HasType() bool {
-	return e.Type != nil
-}
 
 // The request body could not be parsed as JSON.
 type InvalidRequestContentException struct {
@@ -350,18 +223,6 @@ func (e *InvalidRequestContentException) ErrorMessage() string {
 }
 func (e *InvalidRequestContentException) ErrorCode() string             { return "InvalidRequestContentException" }
 func (e *InvalidRequestContentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestContentException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidRequestContentException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidRequestContentException) HasType() bool {
-	return e.Type != nil
-}
 
 // The runtime or runtime version specified is not supported.
 type InvalidRuntimeException struct {
@@ -381,18 +242,6 @@ func (e *InvalidRuntimeException) ErrorMessage() string {
 }
 func (e *InvalidRuntimeException) ErrorCode() string             { return "InvalidRuntimeException" }
 func (e *InvalidRuntimeException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InvalidRuntimeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRuntimeException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidRuntimeException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidRuntimeException) HasType() bool {
-	return e.Type != nil
-}
 
 // The Security Group ID provided in the Lambda function VPC configuration is
 // invalid.
@@ -415,18 +264,6 @@ func (e *InvalidSecurityGroupIDException) ErrorCode() string {
 	return "InvalidSecurityGroupIDException"
 }
 func (e *InvalidSecurityGroupIDException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InvalidSecurityGroupIDException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSecurityGroupIDException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidSecurityGroupIDException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidSecurityGroupIDException) HasType() bool {
-	return e.Type != nil
-}
 
 // The Subnet ID provided in the Lambda function VPC configuration is invalid.
 type InvalidSubnetIDException struct {
@@ -446,18 +283,6 @@ func (e *InvalidSubnetIDException) ErrorMessage() string {
 }
 func (e *InvalidSubnetIDException) ErrorCode() string             { return "InvalidSubnetIDException" }
 func (e *InvalidSubnetIDException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InvalidSubnetIDException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidSubnetIDException) HasType() bool {
-	return e.Type != nil
-}
-func (e *InvalidSubnetIDException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubnetIDException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Lambda could not unzip the deployment package.
 type InvalidZipFileException struct {
@@ -477,18 +302,6 @@ func (e *InvalidZipFileException) ErrorMessage() string {
 }
 func (e *InvalidZipFileException) ErrorCode() string             { return "InvalidZipFileException" }
 func (e *InvalidZipFileException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InvalidZipFileException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidZipFileException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidZipFileException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *InvalidZipFileException) HasType() bool {
-	return e.Type != nil
-}
 
 // Lambda was unable to decrypt the environment variables because KMS access was
 // denied. Check the Lambda function's KMS permissions.
@@ -509,18 +322,6 @@ func (e *KMSAccessDeniedException) ErrorMessage() string {
 }
 func (e *KMSAccessDeniedException) ErrorCode() string             { return "KMSAccessDeniedException" }
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *KMSAccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSAccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *KMSAccessDeniedException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *KMSAccessDeniedException) HasType() bool {
-	return e.Type != nil
-}
 
 // Lambda was unable to decrypt the environment variables because the KMS key used
 // is disabled. Check the Lambda function's KMS key settings.
@@ -541,18 +342,6 @@ func (e *KMSDisabledException) ErrorMessage() string {
 }
 func (e *KMSDisabledException) ErrorCode() string             { return "KMSDisabledException" }
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *KMSDisabledException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *KMSDisabledException) HasType() bool {
-	return e.Type != nil
-}
-func (e *KMSDisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSDisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Lambda was unable to decrypt the environment variables because the KMS key used
 // is in an invalid state for Decrypt. Check the function's KMS key settings.
@@ -573,18 +362,6 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 }
 func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidStateException" }
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *KMSInvalidStateException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *KMSInvalidStateException) HasType() bool {
-	return e.Type != nil
-}
-func (e *KMSInvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSInvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Lambda was unable to decrypt the environment variables because the KMS key was
 // not found. Check the function's KMS key settings.
@@ -605,18 +382,6 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 }
 func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFoundException" }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *KMSNotFoundException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *KMSNotFoundException) HasType() bool {
-	return e.Type != nil
-}
-func (e *KMSNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The permissions policy for the resource is too large. Learn more
 // (https://docs.aws.amazon.com/lambda/latest/dg/limits.html)
@@ -637,18 +402,6 @@ func (e *PolicyLengthExceededException) ErrorMessage() string {
 }
 func (e *PolicyLengthExceededException) ErrorCode() string             { return "PolicyLengthExceededException" }
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyLengthExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyLengthExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *PolicyLengthExceededException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *PolicyLengthExceededException) HasType() bool {
-	return e.Type != nil
-}
 
 // The RevisionId provided does not match the latest RevisionId for the Lambda
 // function or alias. Call the GetFunction or the GetAlias API to retrieve the
@@ -670,18 +423,6 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 }
 func (e *PreconditionFailedException) ErrorCode() string             { return "PreconditionFailedException" }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PreconditionFailedException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *PreconditionFailedException) HasType() bool {
-	return e.Type != nil
-}
-func (e *PreconditionFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PreconditionFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration does not exist.
 type ProvisionedConcurrencyConfigNotFoundException struct {
@@ -705,18 +446,6 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorCode() string {
 func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ProvisionedConcurrencyConfigNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProvisionedConcurrencyConfigNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ProvisionedConcurrencyConfigNotFoundException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ProvisionedConcurrencyConfigNotFoundException) HasType() bool {
-	return e.Type != nil
-}
 
 // The request payload exceeded the Invoke request body JSON input limit. For more
 // information, see Limits
@@ -738,18 +467,6 @@ func (e *RequestTooLargeException) ErrorMessage() string {
 }
 func (e *RequestTooLargeException) ErrorCode() string             { return "RequestTooLargeException" }
 func (e *RequestTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestTooLargeException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *RequestTooLargeException) HasType() bool {
-	return e.Type != nil
-}
-func (e *RequestTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource already exists, or another operation is in progress.
 type ResourceConflictException struct {
@@ -769,18 +486,6 @@ func (e *ResourceConflictException) ErrorMessage() string {
 }
 func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceConflictException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ResourceConflictException) HasType() bool {
-	return e.Type != nil
-}
-func (e *ResourceConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation conflicts with the resource's availability. For example, you
 // attempted to update an EventSource Mapping in CREATING, or tried to delete a
@@ -802,18 +507,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ResourceInUseException) HasType() bool {
-	return e.Type != nil
-}
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource specified in the request does not exist.
 type ResourceNotFoundException struct {
@@ -833,18 +526,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ResourceNotFoundException) HasType() bool {
-	return e.Type != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The function is inactive and its VPC connection is no longer available. Wait for
 // the VPC connection to reestablish and try again.
@@ -865,18 +546,6 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 }
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ResourceNotReadyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotReadyException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotReadyException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ResourceNotReadyException) HasType() bool {
-	return e.Type != nil
-}
 
 // The AWS Lambda service encountered an internal error.
 type ServiceException struct {
@@ -896,18 +565,6 @@ func (e *ServiceException) ErrorMessage() string {
 }
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *ServiceException) HasType() bool {
-	return e.Type != nil
-}
 
 // AWS Lambda was not able to set up VPC access for the Lambda function because one
 // or more configured subnets has no available IP addresses.
@@ -932,18 +589,6 @@ func (e *SubnetIPAddressLimitReachedException) ErrorCode() string {
 func (e *SubnetIPAddressLimitReachedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
-func (e *SubnetIPAddressLimitReachedException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *SubnetIPAddressLimitReachedException) HasType() bool {
-	return e.Type != nil
-}
-func (e *SubnetIPAddressLimitReachedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetIPAddressLimitReachedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request throughput limit was exceeded.
 type TooManyRequestsException struct {
@@ -965,27 +610,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyRequestsException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *TooManyRequestsException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
-func (e *TooManyRequestsException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *TooManyRequestsException) HasType() bool {
-	return e.Type != nil
-}
-func (e *TooManyRequestsException) GetReason() ThrottleReason {
-	return e.Reason
-}
 
 // The content type of the Invoke request body is not JSON.
 type UnsupportedMediaTypeException struct {
@@ -1005,15 +629,3 @@ func (e *UnsupportedMediaTypeException) ErrorMessage() string {
 }
 func (e *UnsupportedMediaTypeException) ErrorCode() string             { return "UnsupportedMediaTypeException" }
 func (e *UnsupportedMediaTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedMediaTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedMediaTypeException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnsupportedMediaTypeException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *UnsupportedMediaTypeException) HasType() bool {
-	return e.Type != nil
-}

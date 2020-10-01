@@ -55,7 +55,10 @@ func (c *Client) DeleteScheduledAudit(ctx context.Context, params *DeleteSchedul
 }
 
 type DeleteScheduledAuditInput struct {
+
 	// The name of the scheduled audit you want to delete.
+	//
+	// This member is required.
 	ScheduledAuditName *string
 }
 

@@ -94,6 +94,7 @@ func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, op
 }
 
 type GetPublicKeyInput struct {
+
 	// Identifies the asymmetric CMK that includes the public key.  <p>To specify a
 	// CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When
 	// using an alias name, prefix it with <code>"alias/"</code>. To specify a CMK in a
@@ -106,7 +107,10 @@ type GetPublicKeyInput struct {
 	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
 	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
 	// <a>ListAliases</a>.</p>
+	//
+	// This member is required.
 	KeyId *string
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
@@ -114,24 +118,30 @@ type GetPublicKeyInput struct {
 }
 
 type GetPublicKeyOutput struct {
+
 	// The permitted use of the public key. Valid values are ENCRYPT_DECRYPT or
 	// SIGN_VERIFY. This information is critical. If a public key with SIGN_VERIFY key
 	// usage encrypts data outside of AWS KMS, the ciphertext cannot be decrypted.
 	KeyUsage types.KeyUsageType
+
 	// The exported public key. The value is a DER-encoded X.509 public key, also known
 	// as SubjectPublicKeyInfo (SPKI), as defined in RFC 5280
 	// (https://tools.ietf.org/html/rfc5280). When you use the HTTP API or the AWS CLI,
 	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	PublicKey []byte
+
 	// The type of the of the public key that was downloaded.
 	CustomerMasterKeySpec types.CustomerMasterKeySpec
+
 	// The signing algorithms that AWS KMS supports for this key. This field appears in
 	// the response only when the KeyUsage of the public key is SIGN_VERIFY.
 	SigningAlgorithms []types.SigningAlgorithmSpec
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the asymmetric CMK from which the public key was downloaded.
 	KeyId *string
+
 	// The encryption algorithms that AWS KMS supports for this key. This information
 	// is critical. If a public key encrypts data outside of AWS KMS by using an
 	// unsupported encryption algorithm, the ciphertext cannot be decrypted. This field

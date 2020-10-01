@@ -64,6 +64,7 @@ func (c *Client) CloneReceiptRuleSet(ctx context.Context, params *CloneReceiptRu
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type CloneReceiptRuleSetInput struct {
+
 	// The name of the rule set to create. The name must:
 	//
 	//     * This value can only
@@ -74,8 +75,13 @@ type CloneReceiptRuleSetInput struct {
 	//
 	//     * Contain less than 64
 	// characters.
+	//
+	// This member is required.
 	RuleSetName *string
+
 	// The name of the rule set to clone.
+	//
+	// This member is required.
 	OriginalRuleSetName *string
 }
 

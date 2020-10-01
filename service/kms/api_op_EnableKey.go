@@ -62,6 +62,7 @@ func (c *Client) EnableKey(ctx context.Context, params *EnableKeyInput, optFns .
 }
 
 type EnableKeyInput struct {
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -73,6 +74,8 @@ type EnableKeyInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 

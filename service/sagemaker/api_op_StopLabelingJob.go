@@ -57,7 +57,10 @@ func (c *Client) StopLabelingJob(ctx context.Context, params *StopLabelingJobInp
 }
 
 type StopLabelingJobInput struct {
+
 	// The name of the labeling job to stop.
+	//
+	// This member is required.
 	LabelingJobName *string
 }
 

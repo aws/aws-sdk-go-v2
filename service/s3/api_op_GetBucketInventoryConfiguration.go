@@ -74,13 +74,20 @@ func (c *Client) GetBucketInventoryConfiguration(ctx context.Context, params *Ge
 }
 
 type GetBucketInventoryConfigurationInput struct {
+
 	// The ID used to identify the inventory configuration.
+	//
+	// This member is required.
 	Id *string
+
 	// The name of the bucket containing the inventory configuration to retrieve.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketInventoryConfigurationOutput struct {
+
 	// Specifies the inventory configuration.
 	InventoryConfiguration *types.InventoryConfiguration
 

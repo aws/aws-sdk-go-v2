@@ -58,6 +58,7 @@ type DescribeDefaultAuthorizerInput struct {
 }
 
 type DescribeDefaultAuthorizerOutput struct {
+
 	// The default authorizer's description.
 	AuthorizerDescription *types.AuthorizerDescription
 

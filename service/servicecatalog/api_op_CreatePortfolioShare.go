@@ -63,13 +63,16 @@ func (c *Client) CreatePortfolioShare(ctx context.Context, params *CreatePortfol
 }
 
 type CreatePortfolioShareInput struct {
+
 	// The AWS account ID. For example, 123456789012.
 	AccountId *string
+
 	// The organization node to whom you are going to share. If OrganizationNode is
 	// passed in, PortfolioShare will be created for the node and its children (when
 	// applies), and a PortfolioShareToken will be returned in the output in order for
 	// the administrator to monitor the status of the PortfolioShare creation process.
 	OrganizationNode *types.OrganizationNode
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -79,11 +82,15 @@ type CreatePortfolioShareInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
 }
 
 type CreatePortfolioShareOutput struct {
+
 	// The portfolio share unique identifier. This will only be returned if portfolio
 	// is shared to an organization node.
 	PortfolioShareToken *string

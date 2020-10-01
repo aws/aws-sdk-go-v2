@@ -63,32 +63,42 @@ func (c *Client) GetParametersByPath(ctx context.Context, params *GetParametersB
 }
 
 type GetParametersByPathInput struct {
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
+
 	// Retrieve all parameters within a hierarchy. If a user has access to a path, then
 	// the user can access all levels of that path. For example, if a user has
 	// permission to access path /a, then the user can also access /a/b. Even if a user
 	// has explicitly been denied access in IAM for parameter /a/b, they can still call
 	// the GetParametersByPath API action recursively for /a and view /a/b.
 	Recursive *bool
+
 	// The hierarchy for the parameter. Hierarchies start with a forward slash (/) and
 	// end with the parameter name. A parameter name hierarchy can have a maximum of 15
 	// levels. Here is an example of a hierarchy:
 	// /Finance/Prod/IAD/WinServ2016/license33
+	//
+	// This member is required.
 	Path *string
+
 	// Filters to limit the request results.
 	ParameterFilters []*types.ParameterStringFilter
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// Retrieve all parameters in a hierarchy with their value decrypted.
 	WithDecryption *bool
 }
 
 type GetParametersByPathOutput struct {
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
+
 	// A list of parameters found in the specified hierarchy.
 	Parameters []*types.Parameter
 

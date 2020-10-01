@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You have specified a template that is not valid or supported.
@@ -28,12 +27,6 @@ func (e *ConformancePackTemplateValidationException) ErrorCode() string {
 func (e *ConformancePackTemplateValidationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ConformancePackTemplateValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConformancePackTemplateValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your Amazon S3 bucket policy does not permit AWS Config to write to it.
 type InsufficientDeliveryPolicyException struct {
@@ -54,12 +47,6 @@ func (e *InsufficientDeliveryPolicyException) ErrorCode() string {
 }
 func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InsufficientDeliveryPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientDeliveryPolicyException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Indicates one of the following errors:
@@ -101,12 +88,6 @@ func (e *InsufficientPermissionsException) ErrorCode() string {
 	return "InsufficientPermissionsException"
 }
 func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientPermissionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientPermissionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have provided a configuration recorder name that is not valid.
 type InvalidConfigurationRecorderNameException struct {
@@ -127,12 +108,6 @@ func (e *InvalidConfigurationRecorderNameException) ErrorCode() string {
 }
 func (e *InvalidConfigurationRecorderNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidConfigurationRecorderNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConfigurationRecorderNameException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The specified delivery channel name is not valid.
@@ -155,12 +130,6 @@ func (e *InvalidDeliveryChannelNameException) ErrorCode() string {
 func (e *InvalidDeliveryChannelNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDeliveryChannelNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeliveryChannelNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The syntax of the query is incorrect.
 type InvalidExpressionException struct {
@@ -178,12 +147,6 @@ func (e *InvalidExpressionException) ErrorMessage() string {
 }
 func (e *InvalidExpressionException) ErrorCode() string             { return "InvalidExpressionException" }
 func (e *InvalidExpressionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidExpressionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidExpressionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified limit is outside the allowable range.
 type InvalidLimitException struct {
@@ -201,12 +164,6 @@ func (e *InvalidLimitException) ErrorMessage() string {
 }
 func (e *InvalidLimitException) ErrorCode() string             { return "InvalidLimitException" }
 func (e *InvalidLimitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLimitException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLimitException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified next token is invalid. Specify the nextToken string that was
 // returned in the previous response to get the next page of results.
@@ -225,12 +182,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified parameters are invalid. Verify that your parameters
 // are valid and try again.
@@ -249,12 +200,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Config throws an exception if the recording group does not contain a valid
 // list of resource types. Invalid values might also be incorrectly formatted.
@@ -273,12 +218,6 @@ func (e *InvalidRecordingGroupException) ErrorMessage() string {
 }
 func (e *InvalidRecordingGroupException) ErrorCode() string             { return "InvalidRecordingGroupException" }
 func (e *InvalidRecordingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRecordingGroupException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRecordingGroupException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ResultToken is invalid.
 type InvalidResultTokenException struct {
@@ -296,12 +235,6 @@ func (e *InvalidResultTokenException) ErrorMessage() string {
 }
 func (e *InvalidResultTokenException) ErrorCode() string             { return "InvalidResultTokenException" }
 func (e *InvalidResultTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResultTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResultTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have provided a null or empty role ARN.
 type InvalidRoleException struct {
@@ -319,12 +252,6 @@ func (e *InvalidRoleException) ErrorMessage() string {
 }
 func (e *InvalidRoleException) ErrorCode() string             { return "InvalidRoleException" }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRoleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRoleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon S3 key prefix is not valid.
 type InvalidS3KeyPrefixException struct {
@@ -342,12 +269,6 @@ func (e *InvalidS3KeyPrefixException) ErrorMessage() string {
 }
 func (e *InvalidS3KeyPrefixException) ErrorCode() string             { return "InvalidS3KeyPrefixException" }
 func (e *InvalidS3KeyPrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3KeyPrefixException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3KeyPrefixException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon SNS topic does not exist.
 type InvalidSNSTopicARNException struct {
@@ -365,12 +286,6 @@ func (e *InvalidSNSTopicARNException) ErrorMessage() string {
 }
 func (e *InvalidSNSTopicARNException) ErrorCode() string             { return "InvalidSNSTopicARNException" }
 func (e *InvalidSNSTopicARNException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSNSTopicARNException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSNSTopicARNException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified time range is not valid. The earlier time is not chronologically
 // before the later time.
@@ -389,12 +304,6 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 }
 func (e *InvalidTimeRangeException) ErrorCode() string             { return "InvalidTimeRangeException" }
 func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTimeRangeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTimeRangeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot delete the delivery channel you specified because the configuration
 // recorder is running.
@@ -417,12 +326,6 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorCode() string {
 func (e *LastDeliveryChannelDeleteFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *LastDeliveryChannelDeleteFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LastDeliveryChannelDeleteFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // For StartConfigRulesEvaluation API, this exception is thrown if an evaluation is
 // in progress or if you call the StartConfigRulesEvaluation () API more than once
@@ -443,12 +346,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the limit (100,000) of active custom resource types in your
 // account. Delete unused resources using DeleteResourceConfig.
@@ -470,12 +367,6 @@ func (e *MaxActiveResourcesExceededException) ErrorCode() string {
 }
 func (e *MaxActiveResourcesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaxActiveResourcesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxActiveResourcesExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Failed to add the AWS Config rule because the account already contains the
@@ -500,12 +391,6 @@ func (e *MaxNumberOfConfigRulesExceededException) ErrorCode() string {
 func (e *MaxNumberOfConfigRulesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaxNumberOfConfigRulesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfConfigRulesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the limit of the number of recorders you can create.
 type MaxNumberOfConfigurationRecordersExceededException struct {
@@ -526,12 +411,6 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorCode() string 
 }
 func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaxNumberOfConfigurationRecordersExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfConfigurationRecordersExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You have reached the limit (6) of the number of conformance packs in an account
@@ -555,12 +434,6 @@ func (e *MaxNumberOfConformancePacksExceededException) ErrorCode() string {
 func (e *MaxNumberOfConformancePacksExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaxNumberOfConformancePacksExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfConformancePacksExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the limit of the number of delivery channels you can create.
 type MaxNumberOfDeliveryChannelsExceededException struct {
@@ -581,12 +454,6 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorCode() string {
 }
 func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaxNumberOfDeliveryChannelsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfDeliveryChannelsExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You have reached the limit of the number of organization config rules you can
@@ -609,12 +476,6 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorCode() string
 }
 func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaxNumberOfOrganizationConfigRulesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfOrganizationConfigRulesExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You have reached the limit (6) of the number of organization conformance packs
@@ -639,12 +500,6 @@ func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorCode() s
 func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaxNumberOfOrganizationConformancePacksExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfOrganizationConformancePacksExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Failed to add the retention configuration because a retention configuration with
 // that name already exists.
@@ -666,12 +521,6 @@ func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorCode() string
 }
 func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaxNumberOfRetentionConfigurationsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxNumberOfRetentionConfigurationsExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // There are no configuration recorders available to provide the role needed to
@@ -695,12 +544,6 @@ func (e *NoAvailableConfigurationRecorderException) ErrorCode() string {
 func (e *NoAvailableConfigurationRecorderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoAvailableConfigurationRecorderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoAvailableConfigurationRecorderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no delivery channel available to record configurations.
 type NoAvailableDeliveryChannelException struct {
@@ -722,12 +565,6 @@ func (e *NoAvailableDeliveryChannelException) ErrorCode() string {
 func (e *NoAvailableDeliveryChannelException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoAvailableDeliveryChannelException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoAvailableDeliveryChannelException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Organization is no longer available.
 type NoAvailableOrganizationException struct {
@@ -747,12 +584,6 @@ func (e *NoAvailableOrganizationException) ErrorCode() string {
 	return "NoAvailableOrganizationException"
 }
 func (e *NoAvailableOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoAvailableOrganizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoAvailableOrganizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no configuration recorder running.
 type NoRunningConfigurationRecorderException struct {
@@ -774,12 +605,6 @@ func (e *NoRunningConfigurationRecorderException) ErrorCode() string {
 func (e *NoRunningConfigurationRecorderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoRunningConfigurationRecorderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoRunningConfigurationRecorderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon S3 bucket does not exist.
 type NoSuchBucketException struct {
@@ -797,12 +622,6 @@ func (e *NoSuchBucketException) ErrorMessage() string {
 }
 func (e *NoSuchBucketException) ErrorCode() string             { return "NoSuchBucketException" }
 func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchBucketException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchBucketException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more AWS Config rules in the request are invalid. Verify that the rule
 // names are correct and try again.
@@ -821,12 +640,6 @@ func (e *NoSuchConfigRuleException) ErrorMessage() string {
 }
 func (e *NoSuchConfigRuleException) ErrorCode() string             { return "NoSuchConfigRuleException" }
 func (e *NoSuchConfigRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchConfigRuleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchConfigRuleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Config rule that you passed in the filter does not exist.
 type NoSuchConfigRuleInConformancePackException struct {
@@ -847,12 +660,6 @@ func (e *NoSuchConfigRuleInConformancePackException) ErrorCode() string {
 }
 func (e *NoSuchConfigRuleInConformancePackException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *NoSuchConfigRuleInConformancePackException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchConfigRuleInConformancePackException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You have specified a configuration aggregator that does not exist.
@@ -875,12 +682,6 @@ func (e *NoSuchConfigurationAggregatorException) ErrorCode() string {
 func (e *NoSuchConfigurationAggregatorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoSuchConfigurationAggregatorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchConfigurationAggregatorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have specified a configuration recorder that does not exist.
 type NoSuchConfigurationRecorderException struct {
@@ -902,12 +703,6 @@ func (e *NoSuchConfigurationRecorderException) ErrorCode() string {
 func (e *NoSuchConfigurationRecorderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoSuchConfigurationRecorderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchConfigurationRecorderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified one or more conformance packs that do not exist.
 type NoSuchConformancePackException struct {
@@ -925,12 +720,6 @@ func (e *NoSuchConformancePackException) ErrorMessage() string {
 }
 func (e *NoSuchConformancePackException) ErrorCode() string             { return "NoSuchConformancePackException" }
 func (e *NoSuchConformancePackException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchConformancePackException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchConformancePackException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have specified a delivery channel that does not exist.
 type NoSuchDeliveryChannelException struct {
@@ -948,12 +737,6 @@ func (e *NoSuchDeliveryChannelException) ErrorMessage() string {
 }
 func (e *NoSuchDeliveryChannelException) ErrorCode() string             { return "NoSuchDeliveryChannelException" }
 func (e *NoSuchDeliveryChannelException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchDeliveryChannelException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchDeliveryChannelException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified one or more organization config rules that do not exist.
 type NoSuchOrganizationConfigRuleException struct {
@@ -974,12 +757,6 @@ func (e *NoSuchOrganizationConfigRuleException) ErrorCode() string {
 }
 func (e *NoSuchOrganizationConfigRuleException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *NoSuchOrganizationConfigRuleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchOrganizationConfigRuleException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // AWS Config organization conformance pack that you passed in the filter does not
@@ -1004,12 +781,6 @@ func (e *NoSuchOrganizationConformancePackException) ErrorCode() string {
 func (e *NoSuchOrganizationConformancePackException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoSuchOrganizationConformancePackException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchOrganizationConformancePackException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified an AWS Config rule without a remediation configuration.
 type NoSuchRemediationConfigurationException struct {
@@ -1030,12 +801,6 @@ func (e *NoSuchRemediationConfigurationException) ErrorCode() string {
 }
 func (e *NoSuchRemediationConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *NoSuchRemediationConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchRemediationConfigurationException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You tried to delete a remediation exception that does not exist.
@@ -1058,12 +823,6 @@ func (e *NoSuchRemediationExceptionException) ErrorCode() string {
 func (e *NoSuchRemediationExceptionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoSuchRemediationExceptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchRemediationExceptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have specified a retention configuration that does not exist.
 type NoSuchRetentionConfigurationException struct {
@@ -1084,12 +843,6 @@ func (e *NoSuchRetentionConfigurationException) ErrorCode() string {
 }
 func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *NoSuchRetentionConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchRetentionConfigurationException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.
@@ -1113,12 +866,6 @@ func (e *OrganizationAccessDeniedException) ErrorCode() string {
 	return "OrganizationAccessDeniedException"
 }
 func (e *OrganizationAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OrganizationAccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationAccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Config resource cannot be created because your organization does not have
 // all features enabled.
@@ -1141,12 +888,6 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorCode() string {
 func (e *OrganizationAllFeaturesNotEnabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OrganizationAllFeaturesNotEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationAllFeaturesNotEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have specified a template that is not valid or supported.
 type OrganizationConformancePackTemplateValidationException struct {
@@ -1167,12 +908,6 @@ func (e *OrganizationConformancePackTemplateValidationException) ErrorCode() str
 }
 func (e *OrganizationConformancePackTemplateValidationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *OrganizationConformancePackTemplateValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationConformancePackTemplateValidationException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The configuration item size is outside the allowable range.
@@ -1195,12 +930,6 @@ func (e *OversizedConfigurationItemException) ErrorCode() string {
 func (e *OversizedConfigurationItemException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OversizedConfigurationItemException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OversizedConfigurationItemException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Remediation action is in progress. You can either cancel execution in AWS
 // Systems Manager or wait and try again later.
@@ -1219,12 +948,6 @@ func (e *RemediationInProgressException) ErrorMessage() string {
 }
 func (e *RemediationInProgressException) ErrorCode() string             { return "RemediationInProgressException" }
 func (e *RemediationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RemediationInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RemediationInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You see this exception in the following cases:
 //
@@ -1269,12 +992,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have specified a resource that is either unknown or has not been discovered.
 type ResourceNotDiscoveredException struct {
@@ -1292,12 +1009,6 @@ func (e *ResourceNotDiscoveredException) ErrorMessage() string {
 }
 func (e *ResourceNotDiscoveredException) ErrorCode() string             { return "ResourceNotDiscoveredException" }
 func (e *ResourceNotDiscoveredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotDiscoveredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotDiscoveredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have specified a resource that does not exist.
 type ResourceNotFoundException struct {
@@ -1315,12 +1026,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the limit of the number of tags you can use. You have more than
 // 50 tags.
@@ -1339,12 +1044,6 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested action is not valid.
 type ValidationException struct {
@@ -1362,9 +1061,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

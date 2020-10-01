@@ -55,13 +55,20 @@ func (c *Client) GetModelTemplate(ctx context.Context, params *GetModelTemplateI
 }
 
 type GetModelTemplateInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
 }
 
 type GetModelTemplateOutput struct {
+
 	// The template value.
 	Value *string
 

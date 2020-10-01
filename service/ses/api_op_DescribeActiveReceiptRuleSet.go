@@ -68,9 +68,11 @@ type DescribeActiveReceiptRuleSetInput struct {
 // Represents the metadata and receipt rules for the receipt rule set that is
 // currently active.
 type DescribeActiveReceiptRuleSetOutput struct {
+
 	// The metadata for the currently active receipt rule set. The metadata consists of
 	// the rule set name and a timestamp of when the rule set was created.
 	Metadata *types.ReceiptRuleSetMetadata
+
 	// The receipt rules that belong to the active rule set.
 	Rules []*types.ReceiptRule
 

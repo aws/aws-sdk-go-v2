@@ -66,8 +66,11 @@ func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optF
 
 //
 type DeleteQueueInput struct {
+
 	// The URL of the Amazon SQS queue to delete. Queue URLs and names are
 	// case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
 }
 

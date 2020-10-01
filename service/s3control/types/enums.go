@@ -2,6 +2,41 @@
 
 package types
 
+type BucketCannedACL string
+
+// Enum values for BucketCannedACL
+const (
+	BucketCannedACLPrivate           BucketCannedACL = "private"
+	BucketCannedACLPublicRead        BucketCannedACL = "public-read"
+	BucketCannedACLPublicReadWrite   BucketCannedACL = "public-read-write"
+	BucketCannedACLAuthenticatedRead BucketCannedACL = "authenticated-read"
+)
+
+type BucketLocationConstraint string
+
+// Enum values for BucketLocationConstraint
+const (
+	BucketLocationConstraintEu           BucketLocationConstraint = "EU"
+	BucketLocationConstraintEuWest1      BucketLocationConstraint = "eu-west-1"
+	BucketLocationConstraintUsWest1      BucketLocationConstraint = "us-west-1"
+	BucketLocationConstraintUsWest2      BucketLocationConstraint = "us-west-2"
+	BucketLocationConstraintApSouth1     BucketLocationConstraint = "ap-south-1"
+	BucketLocationConstraintApSoutheast1 BucketLocationConstraint = "ap-southeast-1"
+	BucketLocationConstraintApSoutheast2 BucketLocationConstraint = "ap-southeast-2"
+	BucketLocationConstraintApNortheast1 BucketLocationConstraint = "ap-northeast-1"
+	BucketLocationConstraintSaEast1      BucketLocationConstraint = "sa-east-1"
+	BucketLocationConstraintCnNorth1     BucketLocationConstraint = "cn-north-1"
+	BucketLocationConstraintEuCentral1   BucketLocationConstraint = "eu-central-1"
+)
+
+type ExpirationStatus string
+
+// Enum values for ExpirationStatus
+const (
+	ExpirationStatusEnabled  ExpirationStatus = "Enabled"
+	ExpirationStatusDisabled ExpirationStatus = "Disabled"
+)
+
 type JobManifestFieldName string
 
 // Enum values for JobManifestFieldName
@@ -174,4 +209,15 @@ const (
 	S3StorageClassGlacier             S3StorageClass = "GLACIER"
 	S3StorageClassIntelligent_tiering S3StorageClass = "INTELLIGENT_TIERING"
 	S3StorageClassDeep_archive        S3StorageClass = "DEEP_ARCHIVE"
+)
+
+type TransitionStorageClass string
+
+// Enum values for TransitionStorageClass
+const (
+	TransitionStorageClassGlacier             TransitionStorageClass = "GLACIER"
+	TransitionStorageClassStandard_ia         TransitionStorageClass = "STANDARD_IA"
+	TransitionStorageClassOnezone_ia          TransitionStorageClass = "ONEZONE_IA"
+	TransitionStorageClassIntelligent_tiering TransitionStorageClass = "INTELLIGENT_TIERING"
+	TransitionStorageClassDeep_archive        TransitionStorageClass = "DEEP_ARCHIVE"
 )

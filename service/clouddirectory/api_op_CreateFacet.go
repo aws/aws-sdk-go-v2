@@ -57,17 +57,26 @@ func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optF
 }
 
 type CreateFacetInput struct {
+
 	// The schema ARN in which the new Facet () will be created. For more information,
 	// see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
+
 	// There are two different styles that you can define on any given facet, Static
 	// and Dynamic. For static facets, all attributes must be defined in the schema.
 	// For dynamic facets, attributes can be defined during data plane operations.
 	FacetStyle types.FacetStyle
+
 	// The name of the Facet (), which is unique for a given schema.
+	//
+	// This member is required.
 	Name *string
+
 	// The attributes that are associated with the Facet ().
 	Attributes []*types.FacetAttribute
+
 	// Specifies whether a given object created from this facet is of type node, leaf
 	// node, policy or index.
 	//

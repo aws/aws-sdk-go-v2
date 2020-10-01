@@ -59,7 +59,10 @@ func (c *Client) DeleteQueryLoggingConfig(ctx context.Context, params *DeleteQue
 }
 
 type DeleteQueryLoggingConfigInput struct {
+
 	// The ID of the configuration that you want to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

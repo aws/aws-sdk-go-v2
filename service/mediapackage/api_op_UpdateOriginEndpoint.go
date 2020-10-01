@@ -57,76 +57,106 @@ func (c *Client) UpdateOriginEndpoint(ctx context.Context, params *UpdateOriginE
 
 // Configuration parameters used to update an existing OriginEndpoint.
 type UpdateOriginEndpointInput struct {
+
 	// A list of source IP CIDR blocks that will be allowed to access the
 	// OriginEndpoint.
 	Whitelist []*string
+
 	// Amount of delay (in seconds) to enforce on the playback of live content. If not
 	// specified, there will be no time delay in effect for the OriginEndpoint.
 	TimeDelaySeconds *int32
+
 	// A Common Media Application Format (CMAF) packaging configuration.
 	CmafPackage *types.CmafPackageCreateOrUpdateParameters
+
 	// The ID of the OriginEndpoint to update.
+	//
+	// This member is required.
 	Id *string
+
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
+
 	// A short text description of the OriginEndpoint.
 	Description *string
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
+
 	// Maximum duration (in seconds) of content to retain for startover playback. If
 	// not specified, startover playback will be disabled for the OriginEndpoint.
 	StartoverWindowSeconds *int32
+
 	// A short string that will be appended to the end of the Endpoint URL.
 	ManifestName *string
+
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
+
 	// Control whether origination of video is allowed for this OriginEndpoint. If set
 	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination
 	Origination types.Origination
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
 }
 
 type UpdateOriginEndpointOutput struct {
+
 	// A short text description of the OriginEndpoint.
 	Description *string
+
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
+
 	// The ID of the OriginEndpoint.
 	Id *string
+
 	// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
 	Arn *string
+
 	// Amount of delay (seconds) to enforce on the playback of live content. If not
 	// specified, there will be no time delay in effect for the OriginEndpoint.
 	TimeDelaySeconds *int32
+
 	// A Common Media Application Format (CMAF) packaging configuration.
 	CmafPackage *types.CmafPackage
+
 	// The URL of the packaged OriginEndpoint for consumption.
 	Url *string
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
+
 	// The ID of the Channel the OriginEndpoint is associated with.
 	ChannelId *string
+
 	// Control whether origination of video is allowed for this OriginEndpoint. If set
 	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination
 	Origination types.Origination
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// Maximum duration (seconds) of content to retain for startover playback. If not
 	// specified, startover playback will be disabled for the OriginEndpoint.
 	StartoverWindowSeconds *int32
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
+
 	// A short string appended to the end of the OriginEndpoint URL.
 	ManifestName *string
+
 	// A list of source IP CIDR blocks that will be allowed to access the
 	// OriginEndpoint.
 	Whitelist []*string

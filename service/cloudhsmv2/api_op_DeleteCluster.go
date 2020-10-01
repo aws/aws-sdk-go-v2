@@ -58,12 +58,16 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 }
 
 type DeleteClusterInput struct {
+
 	// The identifier (ID) of the cluster that you are deleting. To find the cluster
 	// ID, use DescribeClusters ().
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 type DeleteClusterOutput struct {
+
 	// Information about the cluster that was deleted.
 	Cluster *types.Cluster
 

@@ -56,6 +56,7 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 }
 
 type ListGroupsInput struct {
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -64,6 +65,7 @@ type ListGroupsInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
 	// The path prefix for filtering the results. For example, the prefix
 	// /division_abc/subdivision_xyz/ gets all groups whose path starts with
 	// /division_abc/subdivision_xyz/. This parameter is optional. If it is not
@@ -74,6 +76,7 @@ type ListGroupsInput struct {
 	// character from the ! (\u0021) through the DEL character (\u007F), including most
 	// punctuation characters, digits, and upper and lowercased letters.
 	PathPrefix *string
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -83,9 +86,11 @@ type ListGroupsInput struct {
 
 // Contains the response to a successful ListGroups () request.
 type ListGroupsOutput struct {
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -93,7 +98,10 @@ type ListGroupsOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
 	// A list of groups.
+	//
+	// This member is required.
 	Groups []*types.Group
 
 	// Metadata pertaining to the operation's result.

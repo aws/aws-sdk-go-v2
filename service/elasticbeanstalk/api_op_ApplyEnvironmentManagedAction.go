@@ -59,22 +59,31 @@ func (c *Client) ApplyEnvironmentManagedAction(ctx context.Context, params *Appl
 
 // Request to execute a scheduled managed action immediately.
 type ApplyEnvironmentManagedActionInput struct {
+
 	// The environment ID of the target environment.
 	EnvironmentId *string
+
 	// The name of the target environment.
 	EnvironmentName *string
+
 	// The action ID of the scheduled managed action to execute.
+	//
+	// This member is required.
 	ActionId *string
 }
 
 // The result message containing information about the managed action.
 type ApplyEnvironmentManagedActionOutput struct {
+
 	// The status of the managed action.
 	Status *string
+
 	// A description of the managed action.
 	ActionDescription *string
+
 	// The type of managed action.
 	ActionType types.ActionType
+
 	// The action ID of the managed action.
 	ActionId *string
 

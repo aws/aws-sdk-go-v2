@@ -58,27 +58,41 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 // The request body for CreateJob.
 type CreateJobInput struct {
+
 	// The details for the CreateJob request.
+	//
+	// This member is required.
 	Details *types.RequestDetails
+
 	// The type of job to be created.
+	//
+	// This member is required.
 	Type types.Type
 }
 
 type CreateJobOutput struct {
+
 	// The job type.
 	Type types.Type
+
 	// Details about the job.
 	Details *types.ResponseDetails
+
 	// The errors associated with jobs.
 	Errors []*types.JobError
+
 	// The date and time that the job was created, in ISO 8601 format.
 	CreatedAt *time.Time
+
 	// The state of the job.
 	State types.State
+
 	// The unique identifier for the job.
 	Id *string
+
 	// The ARN for the job.
 	Arn *string
+
 	// The date and time that the job was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
 

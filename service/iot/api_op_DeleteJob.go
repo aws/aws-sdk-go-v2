@@ -61,6 +61,7 @@ func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns .
 }
 
 type DeleteJobInput struct {
+
 	// (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise,
 	// you can only delete a job which is in a terminal state ("COMPLETED" or
 	// "CANCELED") or an exception will occur. The default is false. Deleting a job
@@ -69,10 +70,13 @@ type DeleteJobInput struct {
 	// and ensure that each device executing a job which is deleted is able to recover
 	// to a valid state.
 	Force *bool
+
 	// The ID of the job to be deleted. After a job deletion is completed, you may
 	// reuse this jobId when you create a new job. However, this is not recommended,
 	// and you must ensure that your devices are not using the jobId to refer to the
 	// deleted job.
+	//
+	// This member is required.
 	JobId *string
 }
 

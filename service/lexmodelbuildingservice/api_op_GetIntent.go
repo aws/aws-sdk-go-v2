@@ -59,50 +59,72 @@ func (c *Client) GetIntent(ctx context.Context, params *GetIntentInput, optFns .
 }
 
 type GetIntentInput struct {
+
 	// The name of the intent. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
+
 	// The version of the intent.
+	//
+	// This member is required.
 	Version *string
 }
 
 type GetIntentOutput struct {
+
 	// A description of the intent.
 	Description *string
+
 	// Configuration information, if any, to connect to an Amazon Kendra index with the
 	// AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
+
 	// A unique identifier for a built-in intent.
 	ParentIntentSignature *string
+
 	// After the Lambda function specified in the fulfillmentActivity element fulfills
 	// the intent, Amazon Lex conveys this statement to the user.
 	ConclusionStatement *types.Statement
+
 	// An array of sample utterances configured for the intent.
 	SampleUtterances []*string
+
 	// The date that the intent was created.
 	CreatedDate *time.Time
+
 	// If the user answers "no" to the question defined in confirmationPrompt, Amazon
 	// Lex responds with this statement to acknowledge that the intent was canceled.
 	RejectionStatement *types.Statement
+
 	// Checksum of the intent.
 	Checksum *string
+
 	// If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each
 	// user input. For more information, see PutIntent ().
 	DialogCodeHook *types.CodeHook
+
 	// An array of intent slots configured for the intent.
 	Slots []*types.Slot
+
 	// The name of the intent.
 	Name *string
+
 	// The date that the intent was updated. When you create a resource, the creation
 	// date and the last updated date are the same.
 	LastUpdatedDate *time.Time
+
 	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
 	// fulfilling the user's request. For more information, see PutIntent ().
 	ConfirmationPrompt *types.Prompt
+
 	// Describes how the intent is fulfilled. For more information, see PutIntent ().
 	FulfillmentActivity *types.FulfillmentActivity
+
 	// If defined in the bot, Amazon Lex uses this prompt to solicit additional user
 	// activity after the intent is fulfilled. For more information, see PutIntent ().
 	FollowUpPrompt *types.FollowUpPrompt
+
 	// The version of the intent.
 	Version *string
 

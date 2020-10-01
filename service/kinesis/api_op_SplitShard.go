@@ -93,6 +93,7 @@ func (c *Client) SplitShard(ctx context.Context, params *SplitShardInput, optFns
 
 // Represents the input for SplitShard.
 type SplitShardInput struct {
+
 	// A hash key value for the starting hash key of one of the child shards created by
 	// the split. The hash key range for a given shard constitutes a set of ordered
 	// contiguous positive integers. The value for NewStartingHashKey must be in the
@@ -100,10 +101,18 @@ type SplitShardInput struct {
 	// value and all higher hash key values in hash key range are distributed to one of
 	// the child shards. All the lower hash key values in the range are distributed to
 	// the other child shard.
+	//
+	// This member is required.
 	NewStartingHashKey *string
+
 	// The shard ID of the shard to split.
+	//
+	// This member is required.
 	ShardToSplit *string
+
 	// The name of the stream for the shard split.
+	//
+	// This member is required.
 	StreamName *string
 }
 

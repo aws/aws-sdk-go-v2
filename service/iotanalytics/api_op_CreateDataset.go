@@ -60,25 +60,36 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 }
 
 type CreateDatasetInput struct {
+
 	// [Optional] How many versions of data set contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the "retentionPeriod"
 	// parameter. (For more information, see
 	// https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	VersioningConfiguration *types.VersioningConfiguration
+
 	// A list of actions that create the data set contents.
+	//
+	// This member is required.
 	Actions []*types.DatasetAction
+
 	// When data set contents are created they are delivered to destinations specified
 	// here.
 	ContentDeliveryRules []*types.DatasetContentDeliveryRule
+
 	// The name of the data set.
+	//
+	// This member is required.
 	DatasetName *string
+
 	// A list of triggers. A trigger causes data set contents to be populated at a
 	// specified time interval or when another data set's contents are created. The
 	// list of triggers can be empty or contain up to five DataSetTrigger objects.
 	Triggers []*types.DatasetTrigger
+
 	// Metadata which can be used to manage the data set.
 	Tags []*types.Tag
+
 	// [Optional] How long, in days, versions of data set contents are kept for the
 	// data set. If not specified or set to null, versions of data set contents are
 	// retained for at most 90 days. The number of versions of data set contents
@@ -89,10 +100,13 @@ type CreateDatasetInput struct {
 }
 
 type CreateDatasetOutput struct {
+
 	// How long, in days, data set contents are kept for the data set.
 	RetentionPeriod *types.RetentionPeriod
+
 	// The name of the data set.
 	DatasetName *string
+
 	// The ARN of the data set.
 	DatasetArn *string
 

@@ -56,13 +56,18 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 }
 
 type DescribeServicesInput struct {
+
 	// A list of services to describe. You may specify up to 10 services to describe in
 	// a single operation.
+	//
+	// This member is required.
 	Services []*string
+
 	// Specifies whether you want to see the resource tags for the service. If TAGS is
 	// specified, the tags are included in the response. If this field is omitted, tags
 	// are not included in the response.
 	Include []types.ServiceField
+
 	// The short name or full Amazon Resource Name (ARN)the cluster that hosts the
 	// service to describe. If you do not specify a cluster, the default cluster is
 	// assumed. This parameter is required if the service or services you are
@@ -71,8 +76,10 @@ type DescribeServicesInput struct {
 }
 
 type DescribeServicesOutput struct {
+
 	// Any failures associated with the call.
 	Failures []*types.Failure
+
 	// The list of services described.
 	Services []*types.Service
 

@@ -55,6 +55,7 @@ func (c *Client) DescribeIpv6Pools(ctx context.Context, params *DescribeIpv6Pool
 }
 
 type DescribeIpv6PoolsInput struct {
+
 	// One or more filters.
 	//
 	//     * tag: - The key/value combination of a tag assigned
@@ -67,24 +68,30 @@ type DescribeIpv6PoolsInput struct {
 	// Use this filter to find all resources assigned a tag with a specific key,
 	// regardless of the tag value.
 	Filters []*types.Filter
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The IDs of the IPv6 address pools.
 	PoolIds []*string
 }
 
 type DescribeIpv6PoolsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the IPv6 address pools.
 	Ipv6Pools []*types.Ipv6Pool
 

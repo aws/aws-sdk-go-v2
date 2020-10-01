@@ -63,8 +63,11 @@ func (c *Client) StopServer(ctx context.Context, params *StopServerInput, optFns
 }
 
 type StopServerInput struct {
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// that you stopped.
+	//
+	// This member is required.
 	ServerId *string
 }
 

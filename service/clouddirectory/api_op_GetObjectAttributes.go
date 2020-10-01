@@ -56,21 +56,35 @@ func (c *Client) GetObjectAttributes(ctx context.Context, params *GetObjectAttri
 }
 
 type GetObjectAttributesInput struct {
+
 	// List of attribute names whose values will be retrieved.
+	//
+	// This member is required.
 	AttributeNames []*string
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// the object resides.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// Reference that identifies the object whose attributes will be retrieved.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet ()
 	// for details.
+	//
+	// This member is required.
 	SchemaFacet *types.SchemaFacet
+
 	// The consistency level at which to retrieve the attributes on an object.
 	ConsistencyLevel types.ConsistencyLevel
 }
 
 type GetObjectAttributesOutput struct {
+
 	// The attributes that are associated with the object.
 	Attributes []*types.AttributeKeyAndValue
 

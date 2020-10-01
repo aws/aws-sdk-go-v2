@@ -64,16 +64,22 @@ func (c *Client) GetRole(ctx context.Context, params *GetRoleInput, optFns ...fu
 }
 
 type GetRoleInput struct {
+
 	// The name of the IAM role to get information about. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
 }
 
 // Contains the response to a successful GetRole () request.
 type GetRoleOutput struct {
+
 	// A structure containing details about the IAM role.
+	//
+	// This member is required.
 	Role *types.Role
 
 	// Metadata pertaining to the operation's result.

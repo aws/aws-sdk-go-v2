@@ -57,21 +57,29 @@ func (c *Client) DisassociateResourceShare(ctx context.Context, params *Disassoc
 }
 
 type DisassociateResourceShareInput struct {
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
 	// The principals.
 	Principals []*string
+
 	// The Amazon Resource Names (ARNs) of the resources.
 	ResourceArns []*string
+
 	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
 	ResourceShareArn *string
 }
 
 type DisassociateResourceShareOutput struct {
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
 	// Information about the associations.
 	ResourceShareAssociations []*types.ResourceShareAssociation
 

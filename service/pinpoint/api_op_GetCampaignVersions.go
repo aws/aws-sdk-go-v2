@@ -57,22 +57,33 @@ func (c *Client) GetCampaignVersions(ctx context.Context, params *GetCampaignVer
 }
 
 type GetCampaignVersionsInput struct {
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
 	// The unique identifier for the campaign.
+	//
+	// This member is required.
 	CampaignId *string
+
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetCampaignVersionsOutput struct {
+
 	// Provides information about the configuration and other settings for all the
 	// campaigns that are associated with an application.
+	//
+	// This member is required.
 	CampaignsResponse *types.CampaignsResponse
 
 	// Metadata pertaining to the operation's result.

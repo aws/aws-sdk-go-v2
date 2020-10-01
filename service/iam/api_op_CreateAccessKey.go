@@ -68,6 +68,7 @@ func (c *Client) CreateAccessKey(ctx context.Context, params *CreateAccessKeyInp
 }
 
 type CreateAccessKeyInput struct {
+
 	// The name of the IAM user that the new key will belong to. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
@@ -77,7 +78,10 @@ type CreateAccessKeyInput struct {
 
 // Contains the response to a successful CreateAccessKey () request.
 type CreateAccessKeyOutput struct {
+
 	// A structure with details about the access key.
+	//
+	// This member is required.
 	AccessKey *types.AccessKey
 
 	// Metadata pertaining to the operation's result.

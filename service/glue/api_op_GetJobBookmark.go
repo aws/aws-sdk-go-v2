@@ -56,13 +56,18 @@ func (c *Client) GetJobBookmark(ctx context.Context, params *GetJobBookmarkInput
 }
 
 type GetJobBookmarkInput struct {
+
 	// The name of the job in question.
+	//
+	// This member is required.
 	JobName *string
+
 	// The unique run identifier associated with this job run.
 	RunId *string
 }
 
 type GetJobBookmarkOutput struct {
+
 	// A structure that defines a point that a job can resume processing.
 	JobBookmarkEntry *types.JobBookmarkEntry
 

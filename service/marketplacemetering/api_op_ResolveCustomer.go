@@ -59,19 +59,24 @@ func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInp
 
 // Contains input to the ResolveCustomer operation.
 type ResolveCustomerInput struct {
+
 	// When a buyer visits your website during the registration process, the buyer
 	// submits a registration token through the browser. The registration token is
 	// resolved to obtain a CustomerIdentifier and product code.
+	//
+	// This member is required.
 	RegistrationToken *string
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier and
 // product code.
 type ResolveCustomerOutput struct {
+
 	// The product code is returned to confirm that the buyer is registering for your
 	// product. Subsequent BatchMeterUsage calls should be made using this product
 	// code.
 	ProductCode *string
+
 	// The CustomerIdentifier is used to identify an individual customer in your
 	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
 	// UsageRecord.

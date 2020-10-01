@@ -56,14 +56,18 @@ func (c *Client) UpdateServiceSettings(ctx context.Context, params *UpdateServic
 }
 
 type UpdateServiceSettingsInput struct {
+
 	// Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager
 	// alerts.
 	SnsTopicArn *string
+
 	// Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager
 	// information is stored.
 	S3BucketArn *string
+
 	// Activates cross-account discovery.
 	EnableCrossAccountsDiscovery *bool
+
 	// Enables integration with AWS Organizations for cross-account discovery.
 	OrganizationConfiguration *types.OrganizationConfiguration
 }

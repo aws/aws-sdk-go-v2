@@ -65,6 +65,7 @@ func (c *Client) DisableKeyRotation(ctx context.Context, params *DisableKeyRotat
 }
 
 type DisableKeyRotationInput struct {
+
 	// Identifies a symmetric customer master key (CMK). You cannot enable automatic
 	// rotation of asymmetric CMKs
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#asymmetric-cmks),
@@ -82,6 +83,8 @@ type DisableKeyRotationInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 

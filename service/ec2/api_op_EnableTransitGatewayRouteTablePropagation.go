@@ -57,18 +57,26 @@ func (c *Client) EnableTransitGatewayRouteTablePropagation(ctx context.Context, 
 }
 
 type EnableTransitGatewayRouteTablePropagationInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the propagation route table.
+	//
+	// This member is required.
 	TransitGatewayRouteTableId *string
+
 	// The ID of the attachment.
+	//
+	// This member is required.
 	TransitGatewayAttachmentId *string
 }
 
 type EnableTransitGatewayRouteTablePropagationOutput struct {
+
 	// Information about route propagation.
 	Propagation *types.TransitGatewayPropagation
 

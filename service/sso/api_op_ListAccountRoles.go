@@ -53,23 +53,33 @@ func (c *Client) ListAccountRoles(ctx context.Context, params *ListAccountRolesI
 }
 
 type ListAccountRolesInput struct {
+
 	// The page token from the previous response output when you request subsequent
 	// pages.
 	NextToken *string
+
 	// The token issued by the CreateToken API call. For more information, see
 	// CreateToken
 	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html)
 	// in the AWS SSO OIDC API Reference Guide.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// The identifier for the AWS account that is assigned to the user.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The number of items that clients can request per page.
 	MaxResults *int32
 }
 
 type ListAccountRolesOutput struct {
+
 	// The page token client that is used to retrieve the list of accounts.
 	NextToken *string
+
 	// A paginated response with the list of roles and the next token if more results
 	// are available.
 	RoleList []*types.RoleInfo

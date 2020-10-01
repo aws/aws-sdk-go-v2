@@ -56,21 +56,30 @@ func (c *Client) CreateSubscriptionDefinitionVersion(ctx context.Context, params
 }
 
 type CreateSubscriptionDefinitionVersionInput struct {
+
 	// A list of subscriptions.
 	Subscriptions []*types.Subscription
+
 	// The ID of the subscription definition.
+	//
+	// This member is required.
 	SubscriptionDefinitionId *string
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 }
 
 type CreateSubscriptionDefinitionVersionOutput struct {
+
 	// The ARN of the version.
 	Arn *string
+
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string
+
 	// The ID of the parent definition that the version is associated with.
 	Id *string
+
 	// The ID of the version.
 	Version *string
 

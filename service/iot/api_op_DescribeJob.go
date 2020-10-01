@@ -56,13 +56,18 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 }
 
 type DescribeJobInput struct {
+
 	// The unique identifier you assigned to this job when it was created.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribeJobOutput struct {
+
 	// An S3 link to the job document.
 	DocumentSource *string
+
 	// Information about the job.
 	Job *types.Job
 

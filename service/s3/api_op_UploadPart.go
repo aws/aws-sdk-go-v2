@@ -117,11 +117,16 @@ func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns
 }
 
 type UploadPartInput struct {
+
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically.
 	ContentLength *int64
+
 	// Name of the bucket to which the multipart upload was initiated.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Specifies the customer-provided encryption key for Amazon S3 to use in
 	// encrypting data. This value is used to store the object and then it is
 	// discarded; Amazon S3 does not store the encryption key. The key must be
@@ -129,10 +134,12 @@ type UploadPartInput struct {
 	// x-amz-server-side-encryption-customer-algorithm header. This must be the same
 	// encryption key specified in the initiate multipart upload request.
 	SSECustomerKey *string
+
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
 	// Amazon S3 uses this header for a message integrity check to ensure that the
 	// encryption key was transmitted without error.
 	SSECustomerKeyMD5 *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -140,40 +147,58 @@ type UploadPartInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// The base64-encoded 128-bit MD5 digest of the part data. This parameter is
 	// auto-populated when using the command from the CLI. This parameter is required
 	// if object lock parameters are specified.
 	ContentMD5 *string
+
 	// Specifies the algorithm to use to when encrypting the object (for example,
 	// AES256).
 	SSECustomerAlgorithm *string
+
 	// Object data.
 	Body io.Reader
+
 	// Part number of part being uploaded. This is a positive integer between 1 and
 	// 10,000.
+	//
+	// This member is required.
 	PartNumber *int32
+
 	// Upload ID identifying the multipart upload whose part is being uploaded.
+	//
+	// This member is required.
 	UploadId *string
+
 	// Object key for which the multipart upload was initiated.
+	//
+	// This member is required.
 	Key *string
 }
 
 type UploadPartOutput struct {
+
 	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
 	// symmetric customer managed customer master key (CMK) was used for the object.
 	SSEKMSKeyId *string
+
 	// The server-side encryption algorithm used when storing this object in Amazon S3
 	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
 	// Entity tag for the uploaded object.
 	ETag *string
+
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header to provide round-trip message integrity
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
+
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm used.
 	SSECustomerAlgorithm *string

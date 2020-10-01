@@ -57,28 +57,36 @@ func (c *Client) ListRestoreJobs(ctx context.Context, params *ListRestoreJobsInp
 }
 
 type ListRestoreJobsInput struct {
+
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
 	// The account ID to list the jobs from. Returns only restore jobs associated with
 	// the specified account ID.
 	ByAccountId *string
+
 	// Returns only restore jobs that were created after the specified date.
 	ByCreatedAfter *time.Time
+
 	// Returns only restore jobs associated with the specified job status.
 	ByStatus types.RestoreJobStatus
+
 	// The maximum number of items to be returned.
 	MaxResults *int32
+
 	// Returns only restore jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 }
 
 type ListRestoreJobsOutput struct {
+
 	// An array of objects that contain detailed information about jobs to restore
 	// saved resources.
 	RestoreJobs []*types.RestoreJobsListMember
+
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next

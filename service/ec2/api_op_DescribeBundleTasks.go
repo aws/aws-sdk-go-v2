@@ -59,13 +59,16 @@ func (c *Client) DescribeBundleTasks(ctx context.Context, params *DescribeBundle
 }
 
 type DescribeBundleTasksInput struct {
+
 	// The bundle task IDs. Default: Describes all your bundle tasks.
 	BundleIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The filters.
 	//
 	//     * bundle-id - The ID of the bundle task.
@@ -100,6 +103,7 @@ type DescribeBundleTasksInput struct {
 }
 
 type DescribeBundleTasksOutput struct {
+
 	// Information about the bundle tasks.
 	BundleTasks []*types.BundleTask
 

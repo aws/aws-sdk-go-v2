@@ -56,13 +56,20 @@ func (c *Client) GetProposal(ctx context.Context, params *GetProposalInput, optF
 }
 
 type GetProposalInput struct {
+
 	// The unique identifier of the proposal.
+	//
+	// This member is required.
 	ProposalId *string
+
 	// The unique identifier of the network for which the proposal is made.
+	//
+	// This member is required.
 	NetworkId *string
 }
 
 type GetProposalOutput struct {
+
 	// Information about a proposal.
 	Proposal *types.Proposal
 

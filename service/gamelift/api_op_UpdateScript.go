@@ -77,12 +77,17 @@ func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, op
 }
 
 type UpdateScriptInput struct {
+
 	// The version that is associated with a build or script. Version strings do not
 	// need to be unique.
 	Version *string
+
 	// A unique identifier for a Realtime script to update. You can use either the
 	// script ID or ARN value.
+	//
+	// This member is required.
 	ScriptId *string
+
 	// A data object containing your Realtime scripts and dependencies as a zip file.
 	// The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
 	// When using the AWS CLI tool to create a script, this parameter is set to the zip
@@ -90,6 +95,7 @@ type UpdateScriptInput struct {
 	// file data is a binary object. For example: --zip-file
 	// fileb://myRealtimeScript.zip.
 	ZipFile []byte
+
 	// The location of the Amazon S3 bucket where a zipped file containing your
 	// Realtime scripts is stored. The storage location must specify the Amazon S3
 	// bucket name, the zip file name (the "key"), and a role ARN that allows Amazon
@@ -99,12 +105,14 @@ type UpdateScriptInput struct {
 	// turned on, you can use the ObjectVersion parameter to specify an earlier
 	// version.
 	StorageLocation *types.S3Location
+
 	// A descriptive label that is associated with a script. Script names do not need
 	// to be unique.
 	Name *string
 }
 
 type UpdateScriptOutput struct {
+
 	// The newly created script record with a unique script ID. The new script's
 	// storage location reflects an Amazon S3 location: (1) If the script was uploaded
 	// from an S3 bucket under your account, the storage location reflects the

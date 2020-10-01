@@ -76,6 +76,7 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 }
 
 type RegisterTypeInput struct {
+
 	// The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when
 	// invoking the resource provider. If your resource type calls AWS APIs in any of
 	// its handlers, you must create an IAM execution role
@@ -86,11 +87,13 @@ type RegisterTypeInput struct {
 	// session token, which it then passes to the resource provider handler, thereby
 	// supplying your resource provider with the appropriate credentials.
 	ExecutionRoleArn *string
+
 	// A unique identifier that acts as an idempotency key for this registration
 	// request. Specifying a client request token prevents CloudFormation from
 	// generating more than one version of a type from the same registeration request,
 	// even if the request is submitted multiple times.
 	ClientRequestToken *string
+
 	// The name of the type being registered. We recommend that type names adhere to
 	// the following pattern: company_or_organization::service::type. The following
 	// organization namespaces are reserved and cannot be used in your resource type
@@ -108,11 +111,16 @@ type RegisterTypeInput struct {
 	//
 	//     *
 	// Dev
+	//
+	// This member is required.
 	TypeName *string
+
 	// Specifies logging configuration information for a type.
 	LoggingConfig *types.LoggingConfig
+
 	// The kind of type. Currently, the only valid value is RESOURCE.
 	Type types.RegistryType
+
 	// A url to the S3 bucket containing the schema handler package that contains the
 	// schema, event handlers, and associated files for the type you want to register.
 	// For information on generating a schema handler package for the type you want to
@@ -124,10 +132,13 @@ type RegisterTypeInput struct {
 	// Permissions for Registering a Resource Provider
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions)
 	// in the AWS CloudFormation User Guide.
+	//
+	// This member is required.
 	SchemaHandlerPackage *string
 }
 
 type RegisterTypeOutput struct {
+
 	// The identifier for this registration request. Use this registration token when
 	// calling DescribeTypeRegistration (), which returns information about the status
 	// and IDs of the type registration.

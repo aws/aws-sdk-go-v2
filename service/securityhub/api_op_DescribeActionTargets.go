@@ -55,22 +55,29 @@ func (c *Client) DescribeActionTargets(ctx context.Context, params *DescribeActi
 }
 
 type DescribeActionTargetsInput struct {
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The token that is required for pagination. On your first call to the
 	// DescribeActionTargets operation, set the value of this parameter to NULL. For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
+
 	// A list of custom action target ARNs for the custom action targets to retrieve.
 	ActionTargetArns []*string
 }
 
 type DescribeActionTargetsOutput struct {
+
 	// The pagination token to use to request the next page of results.
 	NextToken *string
+
 	// A list of ActionTarget objects. Each object includes the ActionTargetArn,
 	// Description, and Name of a custom action target available in Security Hub.
+	//
+	// This member is required.
 	ActionTargets []*types.ActionTarget
 
 	// Metadata pertaining to the operation's result.

@@ -57,15 +57,25 @@ func (c *Client) RequestServiceQuotaIncrease(ctx context.Context, params *Reques
 }
 
 type RequestServiceQuotaIncreaseInput struct {
+
 	// Specifies the value submitted in the service quota increase request.
+	//
+	// This member is required.
 	DesiredValue *float64
+
 	// Specifies the service that you want to use.
+	//
+	// This member is required.
 	ServiceCode *string
+
 	// Specifies the service quota that you want to use.
+	//
+	// This member is required.
 	QuotaCode *string
 }
 
 type RequestServiceQuotaIncreaseOutput struct {
+
 	// Returns a list of service quota requests.
 	RequestedQuota *types.RequestedServiceQuotaChange
 

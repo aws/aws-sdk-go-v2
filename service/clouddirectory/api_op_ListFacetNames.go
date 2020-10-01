@@ -55,17 +55,24 @@ func (c *Client) ListFacetNames(ctx context.Context, params *ListFacetNamesInput
 }
 
 type ListFacetNamesInput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
 	// The Amazon Resource Name (ARN) to retrieve facet names from.
+	//
+	// This member is required.
 	SchemaArn *string
 }
 
 type ListFacetNamesOutput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The names of facets that exist within the schema.
 	FacetNames []*string
 

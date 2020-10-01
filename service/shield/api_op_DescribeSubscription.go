@@ -58,6 +58,7 @@ type DescribeSubscriptionInput struct {
 }
 
 type DescribeSubscriptionOutput struct {
+
 	// The AWS Shield Advanced subscription details for an account.
 	Subscription *types.Subscription
 

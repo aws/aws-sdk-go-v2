@@ -70,7 +70,10 @@ func (c *Client) DeleteAccelerator(ctx context.Context, params *DeleteAccelerato
 }
 
 type DeleteAcceleratorInput struct {
+
 	// The Amazon Resource Name (ARN) of an accelerator.
+	//
+	// This member is required.
 	AcceleratorArn *string
 }
 

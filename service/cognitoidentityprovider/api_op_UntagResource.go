@@ -56,9 +56,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The keys of the tags to remove from the user pool.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

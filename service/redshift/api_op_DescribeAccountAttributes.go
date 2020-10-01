@@ -55,11 +55,13 @@ func (c *Client) DescribeAccountAttributes(ctx context.Context, params *Describe
 }
 
 type DescribeAccountAttributesInput struct {
+
 	// A list of attribute names.
 	AttributeNames []*string
 }
 
 type DescribeAccountAttributesOutput struct {
+
 	// A list of attributes assigned to an account.
 	AccountAttributes []*types.AccountAttribute
 

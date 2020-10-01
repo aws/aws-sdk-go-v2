@@ -57,15 +57,22 @@ func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns .
 
 // Represents the request to get the device.
 type GetDeviceInput struct {
+
 	// The access token.
 	AccessToken *string
+
 	// The device key.
+	//
+	// This member is required.
 	DeviceKey *string
 }
 
 // Gets the device response.
 type GetDeviceOutput struct {
+
 	// The device.
+	//
+	// This member is required.
 	Device *types.DeviceType
 
 	// Metadata pertaining to the operation's result.

@@ -64,6 +64,7 @@ func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInp
 }
 
 type CreateRuleGroupInput struct {
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -74,12 +75,17 @@ type CreateRuleGroupInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// An array of key:value pairs to associate with the resource.
 	Tags []*types.Tag
+
 	// A description of the rule group that helps with identification. You cannot
 	// change the description of a rule group after you create it.
 	Description *string
+
 	// The web ACL capacity units (WCUs) required for this rule group. When you create
 	// your own rule group, you define this, and you cannot change it after creation.
 	// When you add or modify the rules in a rule group, AWS WAF enforces this limit.
@@ -91,12 +97,21 @@ type CreateRuleGroupInput struct {
 	// processing power. Rule group capacity is fixed at creation, which helps users
 	// plan their web ACL WCU usage when they use a rule group. The WCU limit for web
 	// ACLs is 1,500.
+	//
+	// This member is required.
 	Capacity *int64
+
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//
+	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
+
 	// The name of the rule group. You cannot change the name of a rule group after you
 	// create it.
+	//
+	// This member is required.
 	Name *string
+
 	// The Rule () statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
@@ -105,6 +120,7 @@ type CreateRuleGroupInput struct {
 }
 
 type CreateRuleGroupOutput struct {
+
 	// High-level information about a RuleGroup (), returned by operations like create
 	// and list. This provides information like the ID, that you can use to retrieve
 	// and manage a RuleGroup, and the ARN, that you provide to the

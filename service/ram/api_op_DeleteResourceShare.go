@@ -55,16 +55,22 @@ func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResource
 }
 
 type DeleteResourceShareInput struct {
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
 	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
 	ResourceShareArn *string
 }
 
 type DeleteResourceShareOutput struct {
+
 	// Indicates whether the request succeeded.
 	ReturnValue *bool
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string

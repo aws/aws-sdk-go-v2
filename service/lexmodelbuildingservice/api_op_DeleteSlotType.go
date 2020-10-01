@@ -65,7 +65,10 @@ func (c *Client) DeleteSlotType(ctx context.Context, params *DeleteSlotTypeInput
 }
 
 type DeleteSlotTypeInput struct {
+
 	// The name of the slot type. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 

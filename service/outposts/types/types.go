@@ -4,41 +4,55 @@ package types
 
 // Information about an instance type.
 type InstanceTypeItem struct {
+
 	// The instance type.
 	InstanceType *string
 }
 
 // Information about an Outpost.
 type Outpost struct {
+
 	// The ID of the Availability Zone. You must specify AvailabilityZone or
 	// AvailabilityZoneId.
 	AvailabilityZoneId *string
+
 	// The Availability Zone. You must specify AvailabilityZone or AvailabilityZoneId.
 	AvailabilityZone *string
+
 	// The life cycle status.
 	LifeCycleStatus *string
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
+
 	// The name of the Outpost.
 	Name *string
+
 	// The ID of the site.
 	SiteId *string
+
 	// The ID of the Outpost.
 	OutpostId *string
+
 	// The AWS account ID of the Outpost owner.
 	OwnerId *string
+
 	// The Outpost description.
 	Description *string
 }
 
 // Information about a site.
 type Site struct {
+
 	// The ID of the AWS account.
 	AccountId *string
+
 	// The name of the site.
 	Name *string
+
 	// The ID of the site.
 	SiteId *string
+
 	// The description of the site.
 	Description *string
 }

@@ -81,6 +81,7 @@ type EnableAllFeaturesInput struct {
 }
 
 type EnableAllFeaturesOutput struct {
+
 	// A structure that contains details about the handshake created to support this
 	// request to enable all features in the organization.
 	Handshake *types.Handshake

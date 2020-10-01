@@ -63,22 +63,27 @@ func (c *Client) ListResourceDataSync(ctx context.Context, params *ListResourceD
 }
 
 type ListResourceDataSyncInput struct {
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// View a list of resource data syncs according to the sync type. Specify
 	// SyncToDestination to view resource data syncs that synchronize data to an Amazon
 	// S3 buckets. Specify SyncFromSource to view resource data syncs from AWS
 	// Organizations or from multiple AWS Regions.
 	SyncType *string
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 }
 
 type ListResourceDataSyncOutput struct {
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
+
 	// A list of your current Resource Data Sync configurations and their statuses.
 	ResourceDataSyncItems []*types.ResourceDataSyncItem
 

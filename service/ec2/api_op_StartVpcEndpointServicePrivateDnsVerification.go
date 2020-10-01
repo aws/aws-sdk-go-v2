@@ -62,8 +62,12 @@ func (c *Client) StartVpcEndpointServicePrivateDnsVerification(ctx context.Conte
 }
 
 type StartVpcEndpointServicePrivateDnsVerificationInput struct {
+
 	// The ID of the endpoint service.
+	//
+	// This member is required.
 	ServiceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -72,6 +76,7 @@ type StartVpcEndpointServicePrivateDnsVerificationInput struct {
 }
 
 type StartVpcEndpointServicePrivateDnsVerificationOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	ReturnValue *bool
 

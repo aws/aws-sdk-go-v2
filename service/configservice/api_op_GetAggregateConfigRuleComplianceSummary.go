@@ -58,15 +58,22 @@ func (c *Client) GetAggregateConfigRuleComplianceSummary(ctx context.Context, pa
 }
 
 type GetAggregateConfigRuleComplianceSummaryInput struct {
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
+
 	// Groups the result based on ACCOUNT_ID or AWS_REGION.
 	GroupByKey types.ConfigRuleComplianceSummaryGroupKey
+
 	// Filters the results based on the ConfigRuleComplianceSummaryFilters object.
 	Filters *types.ConfigRuleComplianceSummaryFilters
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The maximum number of evaluation results returned on each page. The default is
 	// 1000. You cannot specify a number greater than 1000. If you specify 0, AWS
 	// Config uses the default.
@@ -74,11 +81,14 @@ type GetAggregateConfigRuleComplianceSummaryInput struct {
 }
 
 type GetAggregateConfigRuleComplianceSummaryOutput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// Returns a list of AggregateComplianceCounts object.
 	AggregateComplianceCounts []*types.AggregateComplianceCount
+
 	// Groups the result based on ACCOUNT_ID or AWS_REGION.
 	GroupByKey *string
 

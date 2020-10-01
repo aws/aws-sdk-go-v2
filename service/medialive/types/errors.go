@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Placeholder documentation for BadGatewayException
@@ -24,12 +23,6 @@ func (e *BadGatewayException) ErrorMessage() string {
 }
 func (e *BadGatewayException) ErrorCode() string             { return "BadGatewayException" }
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *BadGatewayException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadGatewayException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for BadRequestException
 type BadRequestException struct {
@@ -47,12 +40,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for ConflictException
 type ConflictException struct {
@@ -70,12 +57,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for ForbiddenException
 type ForbiddenException struct {
@@ -93,12 +74,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for GatewayTimeoutException
 type GatewayTimeoutException struct {
@@ -116,12 +91,6 @@ func (e *GatewayTimeoutException) ErrorMessage() string {
 }
 func (e *GatewayTimeoutException) ErrorCode() string             { return "GatewayTimeoutException" }
 func (e *GatewayTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *GatewayTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GatewayTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for InternalServerErrorException
 type InternalServerErrorException struct {
@@ -139,12 +108,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for NotFoundException
 type NotFoundException struct {
@@ -162,12 +125,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for TooManyRequestsException
 type TooManyRequestsException struct {
@@ -185,12 +142,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Placeholder documentation for UnprocessableEntityException
 type UnprocessableEntityException struct {
@@ -210,15 +161,3 @@ func (e *UnprocessableEntityException) ErrorMessage() string {
 }
 func (e *UnprocessableEntityException) ErrorCode() string             { return "UnprocessableEntityException" }
 func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnprocessableEntityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnprocessableEntityException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnprocessableEntityException) GetValidationErrors() []*ValidationError {
-	return e.ValidationErrors
-}
-func (e *UnprocessableEntityException) HasValidationErrors() bool {
-	return e.ValidationErrors != nil
-}

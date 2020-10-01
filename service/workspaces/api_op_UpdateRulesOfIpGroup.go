@@ -57,9 +57,15 @@ func (c *Client) UpdateRulesOfIpGroup(ctx context.Context, params *UpdateRulesOf
 }
 
 type UpdateRulesOfIpGroupInput struct {
+
 	// One or more rules.
+	//
+	// This member is required.
 	UserRules []*types.IpRuleItem
+
 	// The identifier of the group.
+	//
+	// This member is required.
 	GroupId *string
 }
 

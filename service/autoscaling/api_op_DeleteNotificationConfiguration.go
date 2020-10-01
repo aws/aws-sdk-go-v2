@@ -55,10 +55,16 @@ func (c *Client) DeleteNotificationConfiguration(ctx context.Context, params *De
 }
 
 type DeleteNotificationConfigurationInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
 	// SNS) topic.
+	//
+	// This member is required.
 	TopicARN *string
 }
 

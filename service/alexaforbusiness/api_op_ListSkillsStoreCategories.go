@@ -55,15 +55,19 @@ func (c *Client) ListSkillsStoreCategories(ctx context.Context, params *ListSkil
 }
 
 type ListSkillsStoreCategoriesInput struct {
+
 	// The maximum number of categories returned, per paginated calls.
 	MaxResults *int32
+
 	// The tokens used for pagination.
 	NextToken *string
 }
 
 type ListSkillsStoreCategoriesOutput struct {
+
 	// The list of categories.
 	CategoryList []*types.Category
+
 	// The tokens used for pagination.
 	NextToken *string
 

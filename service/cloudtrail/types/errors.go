@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This exception is thrown when trusted access has not been enabled between AWS
@@ -33,12 +32,6 @@ func (e *CloudTrailAccessNotEnabledException) ErrorCode() string {
 func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CloudTrailAccessNotEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudTrailAccessNotEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when an operation is called with an invalid trail ARN.
 // The format of a trail ARN is:
@@ -58,12 +51,6 @@ func (e *CloudTrailARNInvalidException) ErrorMessage() string {
 }
 func (e *CloudTrailARNInvalidException) ErrorCode() string             { return "CloudTrailARNInvalidException" }
 func (e *CloudTrailARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudTrailARNInvalidException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudTrailARNInvalidException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cannot set a CloudWatch Logs delivery for this region.
 type CloudWatchLogsDeliveryUnavailableException struct {
@@ -85,12 +72,6 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorCode() string {
 func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CloudWatchLogsDeliveryUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudWatchLogsDeliveryUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // If you run GetInsightSelectors on a trail that does not have Insights events
 // enabled, the operation throws the exception InsightNotEnabledException.
@@ -109,12 +90,6 @@ func (e *InsightNotEnabledException) ErrorMessage() string {
 }
 func (e *InsightNotEnabledException) ErrorCode() string             { return "InsightNotEnabledException" }
 func (e *InsightNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsightNotEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsightNotEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the IAM user or role that is used to create the
 // organization trail is lacking one or more required permissions for creating an
@@ -140,12 +115,6 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorCode() str
 func (e *InsufficientDependencyServiceAccessPermissionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InsufficientDependencyServiceAccessPermissionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientDependencyServiceAccessPermissionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the policy on the S3 bucket or KMS key is not
 // sufficient.
@@ -168,12 +137,6 @@ func (e *InsufficientEncryptionPolicyException) ErrorCode() string {
 func (e *InsufficientEncryptionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InsufficientEncryptionPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientEncryptionPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the policy on the S3 bucket is not sufficient.
 type InsufficientS3BucketPolicyException struct {
@@ -194,12 +157,6 @@ func (e *InsufficientS3BucketPolicyException) ErrorCode() string {
 }
 func (e *InsufficientS3BucketPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InsufficientS3BucketPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientS3BucketPolicyException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // This exception is thrown when the policy on the SNS topic is not sufficient.
@@ -222,12 +179,6 @@ func (e *InsufficientSnsTopicPolicyException) ErrorCode() string {
 func (e *InsufficientSnsTopicPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InsufficientSnsTopicPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientSnsTopicPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the provided CloudWatch log group is not valid.
 type InvalidCloudWatchLogsLogGroupArnException struct {
@@ -248,12 +199,6 @@ func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorCode() string {
 }
 func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidCloudWatchLogsLogGroupArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCloudWatchLogsLogGroupArnException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // This exception is thrown when the provided role is not valid.
@@ -276,12 +221,6 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorCode() string {
 func (e *InvalidCloudWatchLogsRoleArnException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidCloudWatchLogsRoleArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCloudWatchLogsRoleArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Occurs if an event category that is not valid is specified as a value of
 // EventCategory.
@@ -300,12 +239,6 @@ func (e *InvalidEventCategoryException) ErrorMessage() string {
 }
 func (e *InvalidEventCategoryException) ErrorCode() string             { return "InvalidEventCategoryException" }
 func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEventCategoryException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEventCategoryException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the PutEventSelectors operation is called with a
 // number of event selectors or data resources that is not valid. The combination
@@ -340,12 +273,6 @@ func (e *InvalidEventSelectorsException) ErrorMessage() string {
 }
 func (e *InvalidEventSelectorsException) ErrorCode() string             { return "InvalidEventSelectorsException" }
 func (e *InvalidEventSelectorsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEventSelectorsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEventSelectorsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when an operation is called on a trail from a region
 // other than the region in which the trail was created.
@@ -364,12 +291,6 @@ func (e *InvalidHomeRegionException) ErrorMessage() string {
 }
 func (e *InvalidHomeRegionException) ErrorCode() string             { return "InvalidHomeRegionException" }
 func (e *InvalidHomeRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidHomeRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidHomeRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The formatting or syntax of the InsightSelectors JSON statement in your
 // PutInsightSelectors or GetInsightSelectors request is not valid, or the
@@ -392,12 +313,6 @@ func (e *InvalidInsightSelectorsException) ErrorCode() string {
 	return "InvalidInsightSelectorsException"
 }
 func (e *InvalidInsightSelectorsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInsightSelectorsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInsightSelectorsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the KMS key ARN is invalid.
 type InvalidKmsKeyIdException struct {
@@ -415,12 +330,6 @@ func (e *InvalidKmsKeyIdException) ErrorMessage() string {
 }
 func (e *InvalidKmsKeyIdException) ErrorCode() string             { return "InvalidKmsKeyIdException" }
 func (e *InvalidKmsKeyIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidKmsKeyIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidKmsKeyIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Occurs when an invalid lookup attribute is specified.
 type InvalidLookupAttributesException struct {
@@ -440,12 +349,6 @@ func (e *InvalidLookupAttributesException) ErrorCode() string {
 	return "InvalidLookupAttributesException"
 }
 func (e *InvalidLookupAttributesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLookupAttributesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLookupAttributesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown if the limit specified is invalid.
 type InvalidMaxResultsException struct {
@@ -463,12 +366,6 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 }
 func (e *InvalidMaxResultsException) ErrorCode() string             { return "InvalidMaxResultsException" }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMaxResultsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMaxResultsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Invalid token or token that was previously used in a request with different
 // parameters. This exception is thrown if the token is invalid.
@@ -487,12 +384,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the combination of parameters provided is not
 // valid.
@@ -515,12 +406,6 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidParameterCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the provided S3 bucket name is not valid.
 type InvalidS3BucketNameException struct {
@@ -538,12 +423,6 @@ func (e *InvalidS3BucketNameException) ErrorMessage() string {
 }
 func (e *InvalidS3BucketNameException) ErrorCode() string             { return "InvalidS3BucketNameException" }
 func (e *InvalidS3BucketNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3BucketNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3BucketNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the provided S3 prefix is not valid.
 type InvalidS3PrefixException struct {
@@ -561,12 +440,6 @@ func (e *InvalidS3PrefixException) ErrorMessage() string {
 }
 func (e *InvalidS3PrefixException) ErrorCode() string             { return "InvalidS3PrefixException" }
 func (e *InvalidS3PrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3PrefixException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3PrefixException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the provided SNS topic name is not valid.
 type InvalidSnsTopicNameException struct {
@@ -584,12 +457,6 @@ func (e *InvalidSnsTopicNameException) ErrorMessage() string {
 }
 func (e *InvalidSnsTopicNameException) ErrorCode() string             { return "InvalidSnsTopicNameException" }
 func (e *InvalidSnsTopicNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSnsTopicNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSnsTopicNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified tag key or values are not valid. It
 // can also occur if there are duplicate tags or too many tags on the resource.
@@ -608,12 +475,6 @@ func (e *InvalidTagParameterException) ErrorMessage() string {
 }
 func (e *InvalidTagParameterException) ErrorCode() string             { return "InvalidTagParameterException" }
 func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Occurs if the timestamp values are invalid. Either the start time occurs after
 // the end time or the time range is outside the range of possible values.
@@ -632,12 +493,6 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 }
 func (e *InvalidTimeRangeException) ErrorCode() string             { return "InvalidTimeRangeException" }
 func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTimeRangeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTimeRangeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Reserved for future use.
 type InvalidTokenException struct {
@@ -655,12 +510,6 @@ func (e *InvalidTokenException) ErrorMessage() string {
 }
 func (e *InvalidTokenException) ErrorCode() string             { return "InvalidTokenException" }
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the provided trail name is not valid. Trail names
 // must meet the following requirements:
@@ -694,12 +543,6 @@ func (e *InvalidTrailNameException) ErrorMessage() string {
 }
 func (e *InvalidTrailNameException) ErrorCode() string             { return "InvalidTrailNameException" }
 func (e *InvalidTrailNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTrailNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTrailNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when there is an issue with the specified KMS key and
 // the trail can’t be updated.
@@ -718,12 +561,6 @@ func (e *KmsException) ErrorMessage() string {
 }
 func (e *KmsException) ErrorCode() string             { return "KmsException" }
 func (e *KmsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KmsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KmsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is no longer in use.
 type KmsKeyDisabledException struct {
@@ -741,12 +578,6 @@ func (e *KmsKeyDisabledException) ErrorMessage() string {
 }
 func (e *KmsKeyDisabledException) ErrorCode() string             { return "KmsKeyDisabledException" }
 func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KmsKeyDisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KmsKeyDisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the KMS key does not exist, or when the S3 bucket
 // and the KMS key are not in the same region.
@@ -765,12 +596,6 @@ func (e *KmsKeyNotFoundException) ErrorMessage() string {
 }
 func (e *KmsKeyNotFoundException) ErrorCode() string             { return "KmsKeyNotFoundException" }
 func (e *KmsKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KmsKeyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KmsKeyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the maximum number of trails is reached.
 type MaximumNumberOfTrailsExceededException struct {
@@ -791,12 +616,6 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorCode() string {
 }
 func (e *MaximumNumberOfTrailsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaximumNumberOfTrailsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumNumberOfTrailsExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // This exception is thrown when the AWS account making the request to create or
@@ -823,12 +642,6 @@ func (e *NotOrganizationMasterAccountException) ErrorCode() string {
 func (e *NotOrganizationMasterAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NotOrganizationMasterAccountException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotOrganizationMasterAccountException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the requested operation is not permitted.
 type OperationNotPermittedException struct {
@@ -846,12 +659,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when AWS Organizations is not configured to support all
 // features. All features must be enabled in AWS Organization to support creating
@@ -877,12 +684,6 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
 func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OrganizationNotInAllFeaturesModeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationNotInAllFeaturesModeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the request is made from an AWS account that is
 // not a member of an organization. To make this request, sign in using the
@@ -902,12 +703,6 @@ func (e *OrganizationsNotInUseException) ErrorMessage() string {
 }
 func (e *OrganizationsNotInUseException) ErrorCode() string             { return "OrganizationsNotInUseException" }
 func (e *OrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OrganizationsNotInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationsNotInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified resource is not found.
 type ResourceNotFoundException struct {
@@ -925,12 +720,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified resource type is not supported by
 // CloudTrail.
@@ -951,12 +740,6 @@ func (e *ResourceTypeNotSupportedException) ErrorCode() string {
 	return "ResourceTypeNotSupportedException"
 }
 func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceTypeNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceTypeNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified S3 bucket does not exist.
 type S3BucketDoesNotExistException struct {
@@ -974,12 +757,6 @@ func (e *S3BucketDoesNotExistException) ErrorMessage() string {
 }
 func (e *S3BucketDoesNotExistException) ErrorCode() string             { return "S3BucketDoesNotExistException" }
 func (e *S3BucketDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *S3BucketDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *S3BucketDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of tags per trail has exceeded the permitted amount. Currently, the
 // limit is 50.
@@ -998,12 +775,6 @@ func (e *TagsLimitExceededException) ErrorMessage() string {
 }
 func (e *TagsLimitExceededException) ErrorCode() string             { return "TagsLimitExceededException" }
 func (e *TagsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagsLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagsLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified trail already exists.
 type TrailAlreadyExistsException struct {
@@ -1021,12 +792,6 @@ func (e *TrailAlreadyExistsException) ErrorMessage() string {
 }
 func (e *TrailAlreadyExistsException) ErrorCode() string             { return "TrailAlreadyExistsException" }
 func (e *TrailAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrailAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrailAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the trail with the given name is not found.
 type TrailNotFoundException struct {
@@ -1044,12 +809,6 @@ func (e *TrailNotFoundException) ErrorMessage() string {
 }
 func (e *TrailNotFoundException) ErrorCode() string             { return "TrailNotFoundException" }
 func (e *TrailNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrailNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrailNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is no longer in use.
 type TrailNotProvidedException struct {
@@ -1067,12 +826,6 @@ func (e *TrailNotProvidedException) ErrorMessage() string {
 }
 func (e *TrailNotProvidedException) ErrorCode() string             { return "TrailNotProvidedException" }
 func (e *TrailNotProvidedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrailNotProvidedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrailNotProvidedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the requested operation is not supported.
 type UnsupportedOperationException struct {
@@ -1090,9 +843,3 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 }
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperationException) HasMessage() bool {
-	return e.Message != nil
-}

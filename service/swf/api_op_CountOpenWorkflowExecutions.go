@@ -87,19 +87,28 @@ func (c *Client) CountOpenWorkflowExecutions(ctx context.Context, params *CountO
 }
 
 type CountOpenWorkflowExecutionsInput struct {
+
 	// If specified, only workflow executions matching the WorkflowId in the filter are
 	// counted. executionFilter, typeFilter and tagFilter are mutually exclusive. You
 	// can specify at most one of these in a request.
 	ExecutionFilter *types.WorkflowExecutionFilter
+
 	// Specifies the start time criteria that workflow executions must meet in order to
 	// be counted.
+	//
+	// This member is required.
 	StartTimeFilter *types.ExecutionTimeFilter
+
 	// The name of the domain containing the workflow executions to count.
+	//
+	// This member is required.
 	Domain *string
+
 	// If specified, only executions that have a tag that matches the filter are
 	// counted. executionFilter, typeFilter and tagFilter are mutually exclusive. You
 	// can specify at most one of these in a request.
 	TagFilter *types.TagFilter
+
 	// Specifies the type of the workflow executions to be counted. executionFilter,
 	// typeFilter and tagFilter are mutually exclusive. You can specify at most one of
 	// these in a request.
@@ -109,10 +118,14 @@ type CountOpenWorkflowExecutionsInput struct {
 // Contains the count of workflow executions returned from
 // CountOpenWorkflowExecutions () or CountClosedWorkflowExecutions ()
 type CountOpenWorkflowExecutionsOutput struct {
+
 	// If set to true, indicates that the actual count was more than the maximum
 	// supported by this API and the count returned is the truncated value.
 	Truncated *bool
+
 	// The number of workflow executions.
+	//
+	// This member is required.
 	Count *int32
 
 	// Metadata pertaining to the operation's result.

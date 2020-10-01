@@ -59,34 +59,50 @@ func (c *Client) GetSlotType(ctx context.Context, params *GetSlotTypeInput, optF
 }
 
 type GetSlotTypeInput struct {
+
 	// The name of the slot type. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
+
 	// The version of the slot type.
+	//
+	// This member is required.
 	Version *string
 }
 
 type GetSlotTypeOutput struct {
+
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last update date are the same.
 	LastUpdatedDate *time.Time
+
 	// The version of the slot type.
 	Version *string
+
 	// The date that the slot type was created.
 	CreatedDate *time.Time
+
 	// Configuration information that extends the parent built-in slot type.
 	SlotTypeConfigurations []*types.SlotTypeConfiguration
+
 	// A description of the slot type.
 	Description *string
+
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
 	// information, see PutSlotType ().
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
+
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string
+
 	// The name of the slot type.
 	Name *string
+
 	// A list of EnumerationValue objects that defines the values that the slot type
 	// can take.
 	EnumerationValues []*types.EnumerationValue
+
 	// The built-in slot type used as a parent for the slot type.
 	ParentSlotTypeSignature *string
 

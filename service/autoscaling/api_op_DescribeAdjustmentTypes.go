@@ -68,6 +68,7 @@ type DescribeAdjustmentTypesInput struct {
 }
 
 type DescribeAdjustmentTypesOutput struct {
+
 	// The policy adjustment types.
 	AdjustmentTypes []*types.AdjustmentType
 

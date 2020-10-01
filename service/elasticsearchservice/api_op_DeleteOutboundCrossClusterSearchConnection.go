@@ -59,13 +59,17 @@ func (c *Client) DeleteOutboundCrossClusterSearchConnection(ctx context.Context,
 // Container for the parameters to the DeleteOutboundCrossClusterSearchConnection
 // () operation.
 type DeleteOutboundCrossClusterSearchConnectionInput struct {
+
 	// The id of the outbound connection that you want to permanently delete.
+	//
+	// This member is required.
 	CrossClusterSearchConnectionId *string
 }
 
 // The result of a DeleteOutboundCrossClusterSearchConnection () operation.
 // Contains details of deleted outbound connection.
 type DeleteOutboundCrossClusterSearchConnectionOutput struct {
+
 	// Specifies the OutboundCrossClusterSearchConnection () of deleted outbound
 	// connection.
 	CrossClusterSearchConnection *types.OutboundCrossClusterSearchConnection

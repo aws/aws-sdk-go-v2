@@ -63,14 +63,19 @@ func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourc
 }
 
 type ListResourcesForWebACLInput struct {
+
 	// The Amazon Resource Name (ARN) of the Web ACL.
+	//
+	// This member is required.
 	WebACLArn *string
+
 	// Used for web ACLs that are scoped for regional applications. A regional
 	// application can be an Application Load Balancer (ALB) or an API Gateway stage.
 	ResourceType types.ResourceType
 }
 
 type ListResourcesForWebACLOutput struct {
+
 	// The array of Amazon Resource Names (ARNs) of the associated resources.
 	ResourceArns []*string
 

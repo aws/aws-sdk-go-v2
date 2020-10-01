@@ -65,6 +65,7 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 }
 
 type CreateClusterInput struct {
+
 	// The short name of one or more capacity providers to associate with the cluster.
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created and not already associated with another
@@ -75,10 +76,12 @@ type CreateClusterInput struct {
 	// be used. The PutClusterCapacityProviders () API operation is used to update the
 	// list of available capacity providers for a cluster after the cluster is created.
 	CapacityProviders []*string
+
 	// The name of your cluster. If you do not specify a name for your cluster, you
 	// create a cluster named default. Up to 255 letters (uppercase and lowercase),
 	// numbers, and hyphens are allowed.
 	ClusterName *string
+
 	// The metadata that you apply to the cluster to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
@@ -109,6 +112,7 @@ type CreateClusterInput struct {
 	// this prefix. Tags with this prefix do not count against your tags per resource
 	// limit.
 	Tags []*types.Tag
+
 	// The capacity provider strategy to use by default for the cluster. When creating
 	// a service or running a task on a cluster, if no capacity provider or launch type
 	// is specified then the default capacity provider strategy for the cluster is
@@ -126,6 +130,7 @@ type CreateClusterInput struct {
 	// not defined for a cluster during creation, it can be defined later with the
 	// PutClusterCapacityProviders () API operation.
 	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
+
 	// The setting to use when creating a cluster. This parameter is used to enable
 	// CloudWatch Container Insights for a cluster. If this value is specified, it will
 	// override the containerInsights value set with PutAccountSetting () or
@@ -134,6 +139,7 @@ type CreateClusterInput struct {
 }
 
 type CreateClusterOutput struct {
+
 	// The full description of your new cluster.
 	Cluster *types.Cluster
 

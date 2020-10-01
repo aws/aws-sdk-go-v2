@@ -61,12 +61,16 @@ func (c *Client) DetachDisk(ctx context.Context, params *DetachDiskInput, optFns
 }
 
 type DetachDiskInput struct {
+
 	// The unique name of the disk you want to detach from your instance (e.g.,
 	// my-disk).
+	//
+	// This member is required.
 	DiskName *string
 }
 
 type DetachDiskOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

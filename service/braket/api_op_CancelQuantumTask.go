@@ -55,16 +55,28 @@ func (c *Client) CancelQuantumTask(ctx context.Context, params *CancelQuantumTas
 }
 
 type CancelQuantumTaskInput struct {
+
 	// The ARN of the task to cancel.
+	//
+	// This member is required.
 	QuantumTaskArn *string
+
 	// The client token associated with the request.
+	//
+	// This member is required.
 	ClientToken *string
 }
 
 type CancelQuantumTaskOutput struct {
+
 	// The ARN of the task.
+	//
+	// This member is required.
 	QuantumTaskArn *string
+
 	// The status of the cancellation request.
+	//
+	// This member is required.
 	CancellationStatus types.CancellationStatus
 
 	// Metadata pertaining to the operation's result.

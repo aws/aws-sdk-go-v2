@@ -57,9 +57,12 @@ func (c *Client) DeregisterWorkspaceDirectory(ctx context.Context, params *Dereg
 }
 
 type DeregisterWorkspaceDirectoryInput struct {
+
 	// The identifier of the directory. If any WorkSpaces are registered to this
 	// directory, you must remove them before you deregister the directory, or you will
 	// receive an OperationNotSupportedException error.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 

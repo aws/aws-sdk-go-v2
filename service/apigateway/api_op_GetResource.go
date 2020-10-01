@@ -58,28 +58,41 @@ func (c *Client) GetResource(ctx context.Context, params *GetResourceInput, optF
 
 // Request to list information about a resource.
 type GetResourceInput struct {
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Name      *string
-	Title     *string
+
+	Name *string
+
+	Title *string
+
 	// A query parameter to retrieve the specified resources embedded in the returned
 	// Resource () representation in the response. This embed parameter value is a list
 	// of comma-separated strings. Currently, the request supports only retrieval of
 	// the embedded Method () resources this way. The query parameter value must be a
 	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
-	Embed            []*string
+	Embed []*string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// [Required] The identifier for the Resource () resource.
+	//
+	// This member is required.
 	ResourceId *string
 }
 
 // Represents an API resource. Create an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type GetResourceOutput struct {
+
 	// The resource's identifier.
 	Id *string
+
 	// Gets an API resource's method of a given HTTP verb. The resource methods are a
 	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
 	// method map is included in the 200 OK response of the GET
@@ -160,10 +173,13 @@ type GetResourceOutput struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]*types.Method
+
 	// The parent resource's identifier.
 	ParentId *string
+
 	// The full path for this resource.
 	Path *string
+
 	// The last path segment for this resource.
 	PathPart *string
 

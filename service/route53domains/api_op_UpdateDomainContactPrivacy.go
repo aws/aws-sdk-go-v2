@@ -74,20 +74,26 @@ func (c *Client) UpdateDomainContactPrivacy(ctx context.Context, params *UpdateD
 
 // The UpdateDomainContactPrivacy request includes the following elements.
 type UpdateDomainContactPrivacyInput struct {
+
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the admin contact.
 	AdminPrivacy *bool
+
 	// The name of the domain that you want to update the privacy setting for.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact.
 	TechPrivacy *bool
+
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
@@ -99,8 +105,11 @@ type UpdateDomainContactPrivacyInput struct {
 
 // The UpdateDomainContactPrivacy response includes the following element.
 type UpdateDomainContactPrivacyOutput struct {
+
 	// Identifier for tracking the progress of the request. To use this ID to query the
 	// operation status, use GetOperationDetail.
+	//
+	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

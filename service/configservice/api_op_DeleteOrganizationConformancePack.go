@@ -62,7 +62,10 @@ func (c *Client) DeleteOrganizationConformancePack(ctx context.Context, params *
 }
 
 type DeleteOrganizationConformancePackInput struct {
+
 	// The name of organization conformance pack that you want to delete.
+	//
+	// This member is required.
 	OrganizationConformancePackName *string
 }
 

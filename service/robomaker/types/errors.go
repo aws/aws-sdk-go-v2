@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The failure percentage threshold percentage was met.
@@ -24,12 +23,6 @@ func (e *ConcurrentDeploymentException) ErrorMessage() string {
 }
 func (e *ConcurrentDeploymentException) ErrorCode() string             { return "ConcurrentDeploymentException" }
 func (e *ConcurrentDeploymentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentDeploymentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentDeploymentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request uses the same client token as a previous, but non-identical request.
 // Do not reuse a client token with different requests, unless the requests are
@@ -53,12 +46,6 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IdempotentParameterMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotentParameterMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS RoboMaker experienced a service issue. Try your call again.
 type InternalServerException struct {
@@ -76,12 +63,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A parameter specified in a request is not valid, is unsupported, or cannot be
 // used. The returned message provides an explanation of the error value.
@@ -100,12 +81,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource exceeds the maximum number allowed, or the number of
 // concurrent stream requests exceeds the maximum number allowed.
@@ -124,12 +99,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -147,12 +116,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -170,12 +133,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request has failed due to a temporary failure of the server.
 type ServiceUnavailableException struct {
@@ -193,12 +150,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS RoboMaker is temporarily unable to process the request. Try your call again.
 type ThrottlingException struct {
@@ -216,9 +167,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -59,15 +59,21 @@ func (c *Client) ConfirmPrivateVirtualInterface(ctx context.Context, params *Con
 }
 
 type ConfirmPrivateVirtualInterfaceInput struct {
+
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
+
 	// The ID of the virtual interface.
+	//
+	// This member is required.
 	VirtualInterfaceId *string
+
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 }
 
 type ConfirmPrivateVirtualInterfaceOutput struct {
+
 	// The state of the virtual interface. The following are the possible values:
 	//
 	//

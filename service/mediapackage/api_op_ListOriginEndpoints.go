@@ -55,18 +55,23 @@ func (c *Client) ListOriginEndpoints(ctx context.Context, params *ListOriginEndp
 }
 
 type ListOriginEndpointsInput struct {
+
 	// When specified, the request will return only OriginEndpoints associated with the
 	// given Channel ID.
 	ChannelId *string
+
 	// The upper bound on the number of records to return.
 	MaxResults *int32
+
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
 }
 
 type ListOriginEndpointsOutput struct {
+
 	// A list of OriginEndpoint records.
 	OriginEndpoints []*types.OriginEndpoint
+
 	// A token that can be used to resume pagination from the end of the collection.
 	NextToken *string
 

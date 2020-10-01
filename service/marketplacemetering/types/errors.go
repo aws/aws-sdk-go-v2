@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Exception thrown when the customer does not have a valid subscription for the
@@ -25,12 +24,6 @@ func (e *CustomerNotEntitledException) ErrorMessage() string {
 }
 func (e *CustomerNotEntitledException) ErrorCode() string             { return "CustomerNotEntitledException" }
 func (e *CustomerNotEntitledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CustomerNotEntitledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomerNotEntitledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The API is disabled in the Region.
 type DisabledApiException struct {
@@ -48,12 +41,6 @@ func (e *DisabledApiException) ErrorMessage() string {
 }
 func (e *DisabledApiException) ErrorCode() string             { return "DisabledApiException" }
 func (e *DisabledApiException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DisabledApiException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DisabledApiException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A metering record has already been emitted by the same EC2 instance, ECS task,
 // or EKS pod for the given {usageDimension, timestamp} with a different
@@ -73,12 +60,6 @@ func (e *DuplicateRequestException) ErrorMessage() string {
 }
 func (e *DuplicateRequestException) ErrorCode() string             { return "DuplicateRequestException" }
 func (e *DuplicateRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The submitted registration token has expired. This can happen if the buyer's
 // browser takes too long to redirect to your page, the buyer has resubmitted the
@@ -100,12 +81,6 @@ func (e *ExpiredTokenException) ErrorMessage() string {
 }
 func (e *ExpiredTokenException) ErrorCode() string             { return "ExpiredTokenException" }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal error has occurred. Retry your request. If the problem persists,
 // post a message with details on the AWS forums.
@@ -124,12 +99,6 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 }
 func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have metered usage for a CustomerIdentifier that does not exist.
 type InvalidCustomerIdentifierException struct {
@@ -151,12 +120,6 @@ func (e *InvalidCustomerIdentifierException) ErrorCode() string {
 func (e *InvalidCustomerIdentifierException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidCustomerIdentifierException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCustomerIdentifierException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The endpoint being called is in a AWS Region different from your EC2 instance,
 // ECS task, or EKS pod. The Region of the Metering Service endpoint and the AWS
@@ -176,12 +139,6 @@ func (e *InvalidEndpointRegionException) ErrorMessage() string {
 }
 func (e *InvalidEndpointRegionException) ErrorCode() string             { return "InvalidEndpointRegionException" }
 func (e *InvalidEndpointRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEndpointRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEndpointRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The product code passed does not match the product code used for publishing the
 // product.
@@ -200,12 +157,6 @@ func (e *InvalidProductCodeException) ErrorMessage() string {
 }
 func (e *InvalidProductCodeException) ErrorCode() string             { return "InvalidProductCodeException" }
 func (e *InvalidProductCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidProductCodeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidProductCodeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Public Key version is invalid.
 type InvalidPublicKeyVersionException struct {
@@ -225,12 +176,6 @@ func (e *InvalidPublicKeyVersionException) ErrorCode() string {
 	return "InvalidPublicKeyVersionException"
 }
 func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPublicKeyVersionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPublicKeyVersionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // RegisterUsage must be called in the same AWS Region the ECS task was launched
 // in. This prevents a container from hardcoding a Region (e.g.
@@ -250,12 +195,6 @@ func (e *InvalidRegionException) ErrorMessage() string {
 }
 func (e *InvalidRegionException) ErrorCode() string             { return "InvalidRegionException" }
 func (e *InvalidRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Registration token is invalid.
 type InvalidTokenException struct {
@@ -273,12 +212,6 @@ func (e *InvalidTokenException) ErrorMessage() string {
 }
 func (e *InvalidTokenException) ErrorCode() string             { return "InvalidTokenException" }
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The usage dimension does not match one of the UsageDimensions associated with
 // products.
@@ -297,12 +230,6 @@ func (e *InvalidUsageDimensionException) ErrorMessage() string {
 }
 func (e *InvalidUsageDimensionException) ErrorCode() string             { return "InvalidUsageDimensionException" }
 func (e *InvalidUsageDimensionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidUsageDimensionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidUsageDimensionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Marketplace does not support metering usage from the underlying platform.
 // Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
@@ -321,12 +248,6 @@ func (e *PlatformNotSupportedException) ErrorMessage() string {
 }
 func (e *PlatformNotSupportedException) ErrorCode() string             { return "PlatformNotSupportedException" }
 func (e *PlatformNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PlatformNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PlatformNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The calls to the API are throttled.
 type ThrottlingException struct {
@@ -344,12 +265,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The timestamp value passed in the meterUsage() is out of allowed range.
 type TimestampOutOfBoundsException struct {
@@ -367,9 +282,3 @@ func (e *TimestampOutOfBoundsException) ErrorMessage() string {
 }
 func (e *TimestampOutOfBoundsException) ErrorCode() string             { return "TimestampOutOfBoundsException" }
 func (e *TimestampOutOfBoundsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TimestampOutOfBoundsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TimestampOutOfBoundsException) HasMessage() bool {
-	return e.Message != nil
-}

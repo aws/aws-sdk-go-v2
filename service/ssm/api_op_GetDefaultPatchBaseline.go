@@ -58,13 +58,16 @@ func (c *Client) GetDefaultPatchBaseline(ctx context.Context, params *GetDefault
 }
 
 type GetDefaultPatchBaselineInput struct {
+
 	// Returns the default patch baseline for the specified operating system.
 	OperatingSystem types.OperatingSystem
 }
 
 type GetDefaultPatchBaselineOutput struct {
+
 	// The operating system for the returned patch baseline.
 	OperatingSystem types.OperatingSystem
+
 	// The ID of the default patch baseline.
 	BaselineId *string
 

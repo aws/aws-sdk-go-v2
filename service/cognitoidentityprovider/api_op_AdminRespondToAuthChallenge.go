@@ -58,6 +58,7 @@ func (c *Client) AdminRespondToAuthChallenge(ctx context.Context, params *AdminR
 
 // The request to respond to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeInput struct {
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -88,6 +89,7 @@ type AdminRespondToAuthChallengeInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
+
 	// The challenge responses. These are inputs corresponding to the value of
 	// ChallengeName, for example:
 	//
@@ -112,35 +114,51 @@ type AdminRespondToAuthChallengeInput struct {
 	// USERNAMEUSER_ID_FOR_SRP attribute, even if you specified an alias in your call
 	// to AdminInitiateAuth.
 	ChallengeResponses map[string]*string
+
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	ContextData *types.ContextDataType
+
 	// The challenge name. For more information, see .
+	//
+	// This member is required.
 	ChallengeName types.ChallengeNameType
+
 	// The analytics metadata for collecting Amazon Pinpoint metrics for
 	// AdminRespondToAuthChallenge calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If InitiateAuth or RespondToAuthChallenge API call determines that the
 	// caller needs to go through another challenge, they return a session with other
 	// challenge parameters. This session should be passed as it is to the next
 	// RespondToAuthChallenge API call.
 	Session *string
+
 	// The ID of the Amazon Cognito user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The app client ID.
+	//
+	// This member is required.
 	ClientId *string
 }
 
 // Responds to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeOutput struct {
+
 	// The challenge parameters. For more information, see .
 	ChallengeParameters map[string]*string
+
 	// The result returned by the server in response to the authentication request.
 	AuthenticationResult *types.AuthenticationResultType
+
 	// The name of the challenge. For more information, see .
 	ChallengeName types.ChallengeNameType
+
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If the or API call determines that the caller needs to go through
 	// another challenge, they return a session with other challenge parameters. This

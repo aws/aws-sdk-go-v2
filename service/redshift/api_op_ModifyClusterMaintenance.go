@@ -57,24 +57,33 @@ func (c *Client) ModifyClusterMaintenance(ctx context.Context, params *ModifyClu
 }
 
 type ModifyClusterMaintenanceInput struct {
+
 	// A timestamp indicating end time for the deferred maintenance window. If you
 	// specify an end time, you can't specify a duration.
 	DeferMaintenanceEndTime *time.Time
+
 	// A timestamp indicating the start time for the deferred maintenance window.
 	DeferMaintenanceStartTime *time.Time
+
 	// A boolean indicating whether to enable the deferred maintenance window.
 	DeferMaintenance *bool
+
 	// A unique identifier for the cluster.
+	//
+	// This member is required.
 	ClusterIdentifier *string
+
 	// An integer indicating the duration of the maintenance window in days. If you
 	// specify a duration, you can't specify an end time. The duration must be 45 days
 	// or less.
 	DeferMaintenanceDuration *int32
+
 	// A unique identifier for the deferred maintenance window.
 	DeferMaintenanceIdentifier *string
 }
 
 type ModifyClusterMaintenanceOutput struct {
+
 	// Describes a cluster.
 	Cluster *types.Cluster
 

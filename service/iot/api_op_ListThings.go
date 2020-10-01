@@ -59,23 +59,30 @@ func (c *Client) ListThings(ctx context.Context, params *ListThingsInput, optFns
 
 // The input for the ListThings operation.
 type ListThingsInput struct {
+
 	// The attribute value used to search for things.
 	AttributeValue *string
+
 	// The name of the thing type used to search for things.
 	ThingTypeName *string
+
 	// The maximum number of results to return in this operation.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// The attribute name used to search for things.
 	AttributeName *string
 }
 
 // The output from the ListThings operation.
 type ListThingsOutput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The things.
 	Things []*types.ThingAttribute
 

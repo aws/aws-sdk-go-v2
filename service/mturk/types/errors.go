@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Your request is invalid.
@@ -26,18 +25,6 @@ func (e *RequestError) ErrorMessage() string {
 }
 func (e *RequestError) ErrorCode() string             { return "RequestError" }
 func (e *RequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestError) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *RequestError) GetTurkErrorCode() string {
-	return ptr.ToString(e.TurkErrorCode)
-}
-func (e *RequestError) HasTurkErrorCode() bool {
-	return e.TurkErrorCode != nil
-}
 
 // Amazon Mechanical Turk is temporarily unable to process your request. Try your
 // call again.
@@ -58,15 +45,3 @@ func (e *ServiceFault) ErrorMessage() string {
 }
 func (e *ServiceFault) ErrorCode() string             { return "ServiceFault" }
 func (e *ServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceFault) GetTurkErrorCode() string {
-	return ptr.ToString(e.TurkErrorCode)
-}
-func (e *ServiceFault) HasTurkErrorCode() bool {
-	return e.TurkErrorCode != nil
-}
-func (e *ServiceFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceFault) HasMessage() bool {
-	return e.Message != nil
-}

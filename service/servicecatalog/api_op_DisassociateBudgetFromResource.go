@@ -55,10 +55,16 @@ func (c *Client) DisassociateBudgetFromResource(ctx context.Context, params *Dis
 }
 
 type DisassociateBudgetFromResourceInput struct {
+
 	// The name of the budget you want to disassociate.
+	//
+	// This member is required.
 	BudgetName *string
+
 	// The resource identifier you want to disassociate from. Either a portfolio-id or
 	// a product-id.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

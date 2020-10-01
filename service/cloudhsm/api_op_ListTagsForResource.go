@@ -66,12 +66,18 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// One or more tags.
+	//
+	// This member is required.
 	TagList []*types.Tag
 
 	// Metadata pertaining to the operation's result.

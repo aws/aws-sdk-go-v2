@@ -55,8 +55,10 @@ func (c *Client) DescribeTrafficMirrorTargets(ctx context.Context, params *Descr
 }
 
 type DescribeTrafficMirrorTargetsInput struct {
+
 	// The ID of the Traffic Mirror targets.
 	TrafficMirrorTargetIds []*string
+
 	// One or more filters. The possible values are:
 	//
 	//     * description: The Traffic
@@ -74,21 +76,26 @@ type DescribeTrafficMirrorTargetsInput struct {
 	//
 	//     * traffic-mirror-target-id: The ID of the Traffic Mirror target.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 }
 
 type DescribeTrafficMirrorTargetsOutput struct {
+
 	// Information about one or more Traffic Mirror targets.
 	TrafficMirrorTargets []*types.TrafficMirrorTarget
+
 	// The token to use to retrieve the next page of results. The value is null when
 	// there are no more results to return.
 	NextToken *string

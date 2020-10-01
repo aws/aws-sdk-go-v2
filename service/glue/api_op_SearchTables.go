@@ -63,9 +63,11 @@ func (c *Client) SearchTables(ctx context.Context, params *SearchTablesInput, op
 }
 
 type SearchTablesInput struct {
+
 	// A list of criteria for sorting the results by a field name, in an ascending or
 	// descending order.
 	SortCriteria []*types.SortCriterion
+
 	// A list of key-value pairs, and a comparator used to filter the search results.
 	// Returns all entities matching the predicate.  <p>The <code>Comparator</code>
 	// member of the <code>PropertyPredicate</code> struct is used only for time
@@ -79,26 +81,33 @@ type SearchTablesInput struct {
 	// <code>xx-link-yy</code> are returned, but <code>xxlinkyy</code> is not
 	// returned.</p>
 	Filters []*types.PropertyPredicate
+
 	// A unique identifier, consisting of  account_id .
 	CatalogId *string
+
 	// Allows you to specify that you want to search the tables shared with your
 	// account. The allowable values are FOREIGN or ALL.  <ul> <li> <p>If set to
 	// <code>FOREIGN</code>, will search the tables shared with your account. </p>
 	// </li> <li> <p>If set to <code>ALL</code>, will search the tables shared with
 	// your account, as well as the tables in yor local account. </p> </li> </ul>
 	ResourceShareType types.ResourceShareType
+
 	// The maximum number of tables to return in a single response.
 	MaxResults *int32
+
 	// A continuation token, included if this is a continuation call.
 	NextToken *string
+
 	// A string used for a text search. Specifying a value in quotes filters based on
 	// an exact match to the value.
 	SearchText *string
 }
 
 type SearchTablesOutput struct {
+
 	// A continuation token, present if the current list segment is not the last.
 	NextToken *string
+
 	// A list of the requested Table objects. The SearchTables response returns only
 	// the tables that you have access to.
 	TableList []*types.Table

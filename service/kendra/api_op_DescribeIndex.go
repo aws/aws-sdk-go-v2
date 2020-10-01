@@ -57,43 +57,59 @@ func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, 
 }
 
 type DescribeIndexInput struct {
+
 	// The name of the index to describe.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeIndexOutput struct {
+
 	// When th eStatus field value is FAILED, the ErrorMessage field contains a message
 	// that explains why.
 	ErrorMessage *string
+
 	// The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra
 	// permission to write to your Amazon Cloudwatch logs.
 	RoleArn *string
+
 	// Configuration settings for any metadata applied to the documents in the index.
 	DocumentMetadataConfigurations []*types.DocumentMetadataConfiguration
+
 	// the name of the index.
 	Id *string
+
 	// The description of the index.
 	Description *string
+
 	// For enterprise edtion indexes, you can choose to use additional capacity to meet
 	// the needs of your application. This contains the capacity units used for the
 	// index. A 0 for the query capacity or the storage capacity indicates that the
 	// index is using the default capacity for the index.
 	CapacityUnits *types.CapacityUnitsConfiguration
+
 	// Provides information about the number of FAQ questions and answers and the
 	// number of text documents indexed.
 	IndexStatistics *types.IndexStatistics
+
 	// The Unix datetime that the index was created.
 	CreatedAt *time.Time
+
 	// The Unix datetime that the index was last updated.
 	UpdatedAt *time.Time
+
 	// The name of the index.
 	Name *string
+
 	// The Amazon Kendra edition used for the index. You decide the edition when you
 	// create the index.
 	Edition types.IndexEdition
+
 	// The identifier of the AWS KMS customer master key (CMK) used to encrypt your
 	// data. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
+
 	// The current status of the index. When the value is ACTIVE, the index is ready
 	// for use. If the Status field value is FAILED, the ErrorMessage field contains a
 	// message that explains why.

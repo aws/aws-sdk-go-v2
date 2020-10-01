@@ -60,21 +60,28 @@ func (c *Client) ListAvailableManagementCidrRanges(ctx context.Context, params *
 }
 
 type ListAvailableManagementCidrRangesInput struct {
+
 	// The IP address range to search. Specify an IP address range that is compatible
 	// with your network and in CIDR notation (that is, specify the range as an IPv4
 	// CIDR block).
+	//
+	// This member is required.
 	ManagementCidrRangeConstraint *string
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
 	// The maximum number of items to return.
 	MaxResults *int32
 }
 
 type ListAvailableManagementCidrRangesOutput struct {
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
+
 	// The list of available IP address ranges, specified as IPv4 CIDR blocks.
 	ManagementCidrRanges []*string
 

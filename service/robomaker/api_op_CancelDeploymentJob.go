@@ -55,7 +55,10 @@ func (c *Client) CancelDeploymentJob(ctx context.Context, params *CancelDeployme
 }
 
 type CancelDeploymentJobInput struct {
+
 	// The deployment job ARN to cancel.
+	//
+	// This member is required.
 	Job *string
 }
 

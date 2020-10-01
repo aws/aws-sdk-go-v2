@@ -67,27 +67,39 @@ func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicatio
 }
 
 type AddApplicationOutputInput struct {
+
 	// The name of the application to which you want to add the output configuration.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// An array of objects, each describing one output configuration. In the output
 	// configuration, you specify the name of an in-application stream, a destination
 	// (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an
 	// AWS Lambda function), and record the formation to use when writing to the
 	// destination.
+	//
+	// This member is required.
 	Output *types.Output
+
 	// The version of the application to which you want to add the output
 	// configuration. You can use the DescribeApplication () operation to get the
 	// current application version. If the version specified is not the current
 	// version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
 }
 
 type AddApplicationOutputOutput struct {
+
 	// The updated application version ID. Kinesis Data Analytics increments this ID
 	// when the application is updated.
 	ApplicationVersionId *int64
+
 	// The application Amazon Resource Name (ARN).
 	ApplicationARN *string
+
 	// Describes the application output configuration. For more information, see
 	// Configuring Application Output
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).

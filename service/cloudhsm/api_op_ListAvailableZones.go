@@ -68,6 +68,7 @@ type ListAvailableZonesInput struct {
 }
 
 type ListAvailableZonesOutput struct {
+
 	// The list of Availability Zones that have available AWS CloudHSM capacity.
 	AZList []*string
 

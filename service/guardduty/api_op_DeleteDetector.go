@@ -55,7 +55,10 @@ func (c *Client) DeleteDetector(ctx context.Context, params *DeleteDetectorInput
 }
 
 type DeleteDetectorInput struct {
+
 	// The unique ID of the detector that you want to delete.
+	//
+	// This member is required.
 	DetectorId *string
 }
 

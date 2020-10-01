@@ -56,7 +56,10 @@ func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, 
 }
 
 type DeleteDatasetInput struct {
+
 	// The name of the data set to delete.
+	//
+	// This member is required.
 	DatasetName *string
 }
 

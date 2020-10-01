@@ -55,11 +55,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to
 	// remove tags from.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// The tag names of the tags to remove from the given AWS Cloud9 development
 	// environment.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

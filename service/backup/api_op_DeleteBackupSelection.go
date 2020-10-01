@@ -56,10 +56,16 @@ func (c *Client) DeleteBackupSelection(ctx context.Context, params *DeleteBackup
 }
 
 type DeleteBackupSelectionInput struct {
+
 	// Uniquely identifies a backup plan.
+	//
+	// This member is required.
 	BackupPlanId *string
+
 	// Uniquely identifies the body of a request to assign a set of resources to a
 	// backup plan.
+	//
+	// This member is required.
 	SelectionId *string
 }
 

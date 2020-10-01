@@ -57,16 +57,22 @@ func (c *Client) ListAssessmentRunAgents(ctx context.Context, params *ListAssess
 }
 
 type ListAssessmentRunAgentsInput struct {
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the ListAssessmentRunAgents action.
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// NextToken from the previous response to continue listing data.
 	NextToken *string
+
 	// You can use this parameter to indicate the maximum number of items that you want
 	// in the response. The default value is 10. The maximum value is 500.
 	MaxResults *int32
+
 	// The ARN that specifies the assessment run whose agents you want to list.
+	//
+	// This member is required.
 	AssessmentRunArn *string
+
 	// You can use this parameter to specify a subset of data to be included in the
 	// action's response. For a record to match a filter, all specified filter
 	// attributes must match. When multiple values are specified for a filter
@@ -75,8 +81,12 @@ type ListAssessmentRunAgentsInput struct {
 }
 
 type ListAssessmentRunAgentsOutput struct {
+
 	// A list of ARNs that specifies the agents returned by the action.
+	//
+	// This member is required.
 	AssessmentRunAgents []*types.AssessmentRunAgent
+
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to be

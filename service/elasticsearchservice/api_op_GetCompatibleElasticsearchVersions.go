@@ -59,6 +59,7 @@ func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params 
 // Container for request parameters to GetCompatibleElasticsearchVersions ()
 // operation.
 type GetCompatibleElasticsearchVersionsInput struct {
+
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or
 	// number and can contain the following characters: a-z (lowercase), 0-9, and -
@@ -69,6 +70,7 @@ type GetCompatibleElasticsearchVersionsInput struct {
 // Container for response returned by GetCompatibleElasticsearchVersions ()
 // operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
+
 	// A map of compatible Elasticsearch versions returned as part of the
 	// GetCompatibleElasticsearchVersions () operation.
 	CompatibleElasticsearchVersions []*types.CompatibleVersionsMap

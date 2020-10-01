@@ -57,9 +57,15 @@ func (c *Client) AssociateSigninDelegateGroupsWithAccount(ctx context.Context, p
 }
 
 type AssociateSigninDelegateGroupsWithAccountInput struct {
+
 	// The sign-in delegate groups.
+	//
+	// This member is required.
 	SigninDelegateGroups []*types.SigninDelegateGroup
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 

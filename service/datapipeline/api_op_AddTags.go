@@ -57,9 +57,15 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 
 // Contains the parameters for AddTags.
 type AddTagsInput struct {
+
 	// The ID of the pipeline.
+	//
+	// This member is required.
 	PipelineId *string
+
 	// The tags to add, as key/value pairs.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

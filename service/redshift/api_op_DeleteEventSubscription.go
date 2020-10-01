@@ -56,7 +56,10 @@ func (c *Client) DeleteEventSubscription(ctx context.Context, params *DeleteEven
 
 //
 type DeleteEventSubscriptionInput struct {
+
 	// The name of the Amazon Redshift event notification subscription to be deleted.
+	//
+	// This member is required.
 	SubscriptionName *string
 }
 

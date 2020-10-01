@@ -61,13 +61,17 @@ type DescribeAccountLimitsInput struct {
 }
 
 type DescribeAccountLimitsOutput struct {
+
 	// The current number of groups for your AWS account.
 	NumberOfAutoScalingGroups *int32
+
 	// The current number of launch configurations for your AWS account.
 	NumberOfLaunchConfigurations *int32
+
 	// The maximum number of groups allowed for your AWS account. The default is 200
 	// groups per AWS Region.
 	MaxNumberOfAutoScalingGroups *int32
+
 	// The maximum number of launch configurations allowed for your AWS account. The
 	// default is 200 launch configurations per AWS Region.
 	MaxNumberOfLaunchConfigurations *int32

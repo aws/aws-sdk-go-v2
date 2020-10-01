@@ -55,8 +55,12 @@ func (c *Client) DeleteSkillAuthorization(ctx context.Context, params *DeleteSki
 }
 
 type DeleteSkillAuthorizationInput struct {
+
 	// The unique identifier of a skill.
+	//
+	// This member is required.
 	SkillId *string
+
 	// The room that the skill is authorized for.
 	RoomArn *string
 }

@@ -59,14 +59,26 @@ func (c *Client) GetMethod(ctx context.Context, params *GetMethodInput, optFns .
 // Request to describe an existing Method () resource.
 type GetMethodInput struct {
 	Template *bool
+
 	// [Required] The Resource () identifier for the Method () resource.
-	ResourceId       *string
-	Title            *string
+	//
+	// This member is required.
+	ResourceId *string
+
+	Title *string
+
 	TemplateSkipList []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Name      *string
+
+	Name *string
+
 	// [Required] Specifies the method request's HTTP method type.
+	//
+	// This member is required.
 	HttpMethod *string
 }
 
@@ -161,6 +173,7 @@ type GetMethodInput struct {
 // Resource (), Set up an API's method
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html)
 type GetMethodOutput struct {
+
 	// A key-value map defining required or optional method request parameters that can
 	// be accepted by API Gateway. A key is a method request parameter name matching
 	// the pattern of method.request.{location}.{name}, where location is querystring,
@@ -170,12 +183,15 @@ type GetMethodOutput struct {
 	// here are available in Integration () to be mapped to integration request
 	// parameters or templates.
 	RequestParameters map[string]*bool
+
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
 	// COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
+
 	// The method's HTTP verb.
 	HttpMethod *string
+
 	// Gets a method response associated with a given HTTP status code. The collection
 	// of method responses are encapsulated in a key-value map, where the key is a
 	// response's HTTP status code and the value is a MethodResponse () resource that
@@ -209,11 +225,14 @@ type GetMethodOutput struct {
 	// false, "method.response.header.operand_1": false }, "statusCode": "200" }AWS CLI
 	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html)
 	MethodResponses map[string]*types.MethodResponse
+
 	// The identifier of a RequestValidator () for request validation.
 	RequestValidatorId *string
+
 	// The identifier of an Authorizer () to use on this method. The authorizationType
 	// must be CUSTOM.
 	AuthorizerId *string
+
 	// Gets the method's integration responsible for passing the client-submitted
 	// request to the back end and performing necessary transformations to make the
 	// request compliant with the back end.
@@ -269,13 +288,16 @@ type GetMethodOutput struct {
 	// CLI
 	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html)
 	MethodIntegration *types.Integration
+
 	// A human-friendly operation identifier for the method. For example, you can
 	// assign the operationName of ListPets for the GET /pets method in the PetStore
 	// example.
 	OperationName *string
+
 	// A boolean flag specifying whether a valid ApiKey () is required to invoke this
 	// method.
 	ApiKeyRequired *bool
+
 	// A list of authorization scopes configured on the method. The scopes are used
 	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation. The
 	// authorization works by matching the method scopes against the scopes parsed from
@@ -285,6 +307,7 @@ type GetMethodOutput struct {
 	// must provide an access token instead of an identity token for authorization
 	// purposes.
 	AuthorizationScopes []*string
+
 	// A key-value map specifying data schemas, represented by Model () resources, (as
 	// the mapped value) of the request payloads of given content types (as the mapping
 	// key).

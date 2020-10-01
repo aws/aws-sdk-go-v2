@@ -55,13 +55,18 @@ func (c *Client) GetImagePolicy(ctx context.Context, params *GetImagePolicyInput
 }
 
 type GetImagePolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.
+	//
+	// This member is required.
 	ImageArn *string
 }
 
 type GetImagePolicyOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The image policy object.
 	Policy *string
 

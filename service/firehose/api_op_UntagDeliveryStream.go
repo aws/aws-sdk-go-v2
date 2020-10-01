@@ -58,9 +58,15 @@ func (c *Client) UntagDeliveryStream(ctx context.Context, params *UntagDeliveryS
 }
 
 type UntagDeliveryStreamInput struct {
+
 	// A list of tag keys. Each corresponding tag is removed from the delivery stream.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The name of the delivery stream.
+	//
+	// This member is required.
 	DeliveryStreamName *string
 }
 

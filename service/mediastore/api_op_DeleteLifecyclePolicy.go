@@ -56,7 +56,10 @@ func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecy
 }
 
 type DeleteLifecyclePolicyInput struct {
+
 	// The name of the container that holds the object lifecycle policy.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

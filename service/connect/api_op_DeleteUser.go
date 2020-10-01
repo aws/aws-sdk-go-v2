@@ -55,9 +55,15 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 }
 
 type DeleteUserInput struct {
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The identifier of the user.
+	//
+	// This member is required.
 	UserId *string
 }
 

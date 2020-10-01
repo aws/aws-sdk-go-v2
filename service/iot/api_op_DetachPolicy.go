@@ -55,9 +55,15 @@ func (c *Client) DetachPolicy(ctx context.Context, params *DetachPolicyInput, op
 }
 
 type DetachPolicyInput struct {
+
 	// The target from which the policy will be detached.
+	//
+	// This member is required.
 	Target *string
+
 	// The policy to detach.
+	//
+	// This member is required.
 	PolicyName *string
 }
 

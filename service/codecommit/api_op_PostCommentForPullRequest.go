@@ -58,23 +58,40 @@ func (c *Client) PostCommentForPullRequest(ctx context.Context, params *PostComm
 }
 
 type PostCommentForPullRequestInput struct {
+
 	// The full commit ID of the commit in the destination branch that was the tip of
 	// the branch at the time the pull request was created.
+	//
+	// This member is required.
 	BeforeCommitId *string
+
 	// The content of your comment on the change.
+	//
+	// This member is required.
 	Content *string
+
 	// The name of the repository where you want to post a comment on a pull request.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The system-generated ID of the pull request. To get this ID, use
 	// ListPullRequests ().
+	//
+	// This member is required.
 	PullRequestId *string
+
 	// The location of the change where you want to post your comment. If no location
 	// is provided, the comment is posted as a general comment on the pull request
 	// difference between the before commit ID and the after commit ID.
 	Location *types.Location
+
 	// The full commit ID of the commit in the source branch that is the current tip of
 	// the branch for the pull request when you post the comment.
+	//
+	// This member is required.
 	AfterCommitId *string
+
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
 	// received with the same parameters and a token is included, the request returns
@@ -83,23 +100,31 @@ type PostCommentForPullRequestInput struct {
 }
 
 type PostCommentForPullRequestOutput struct {
+
 	// The full commit ID of the commit in the source branch used to create the pull
 	// request, or in the case of an updated pull request, the full commit ID of the
 	// commit used to update the pull request.
 	BeforeCommitId *string
+
 	// The system-generated ID of the pull request.
 	PullRequestId *string
+
 	// The name of the repository where you posted a comment on a pull request.
 	RepositoryName *string
+
 	// The full commit ID of the commit in the destination branch where the pull
 	// request is merged.
 	AfterCommitId *string
+
 	// In the directionality of the pull request, the blob ID of the before blob.
 	BeforeBlobId *string
+
 	// In the directionality of the pull request, the blob ID of the after blob.
 	AfterBlobId *string
+
 	// The content of the comment you posted.
 	Comment *types.Comment
+
 	// The location of the change where you posted your comment.
 	Location *types.Location
 

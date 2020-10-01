@@ -57,8 +57,12 @@ func (c *Client) ListSuites(ctx context.Context, params *ListSuitesInput, optFns
 
 // Represents a request to the list suites operation.
 type ListSuitesInput struct {
+
 	// The job's Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	Arn *string
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
@@ -66,10 +70,12 @@ type ListSuitesInput struct {
 
 // Represents the result of a list suites request.
 type ListSuitesOutput struct {
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.
 	NextToken *string
+
 	// Information about the suites.
 	Suites []*types.Suite
 

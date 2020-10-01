@@ -60,21 +60,30 @@ func (c *Client) ValidateConfigurationSettings(ctx context.Context, params *Vali
 
 // A list of validation messages for a specified configuration template.
 type ValidateConfigurationSettingsInput struct {
+
 	// The name of the environment to validate the settings against. Condition: You
 	// cannot specify both this and a configuration template name.
 	EnvironmentName *string
+
 	// The name of the configuration template to validate the settings against.
 	// Condition: You cannot specify both this and an environment name.
 	TemplateName *string
+
 	// The name of the application that the configuration template or environment
 	// belongs to.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// A list of the options and desired values to evaluate.
+	//
+	// This member is required.
 	OptionSettings []*types.ConfigurationOptionSetting
 }
 
 // Provides a list of validation messages.
 type ValidateConfigurationSettingsOutput struct {
+
 	// A list of ValidationMessage ().
 	Messages []*types.ValidationMessage
 

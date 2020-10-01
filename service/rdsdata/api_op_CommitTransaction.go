@@ -57,16 +57,26 @@ func (c *Client) CommitTransaction(ctx context.Context, params *CommitTransactio
 
 // The request parameters represent the input of a commit transaction request.
 type CommitTransactionInput struct {
+
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The name or ARN of the secret that enables access to the DB cluster.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The identifier of the transaction to end and commit.
+	//
+	// This member is required.
 	TransactionId *string
 }
 
 // The response elements represent the output of a commit transaction request.
 type CommitTransactionOutput struct {
+
 	// The status of the commit operation.
 	TransactionStatus *string
 

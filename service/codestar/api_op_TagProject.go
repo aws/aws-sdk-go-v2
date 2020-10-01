@@ -55,13 +55,20 @@ func (c *Client) TagProject(ctx context.Context, params *TagProjectInput, optFns
 }
 
 type TagProjectInput struct {
+
 	// The ID of the project you want to add a tag to.
+	//
+	// This member is required.
 	Id *string
+
 	// The tags you want to add to the project.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 
 type TagProjectOutput struct {
+
 	// The tags for the project.
 	Tags map[string]*string
 

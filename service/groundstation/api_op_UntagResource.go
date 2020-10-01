@@ -56,9 +56,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 //
 type UntagResourceInput struct {
+
 	// ARN of a resource.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Keys of a resource tag.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

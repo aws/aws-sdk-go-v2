@@ -62,11 +62,15 @@ func (c *Client) GetCurrentUser(ctx context.Context, params *GetCurrentUserInput
 }
 
 type GetCurrentUserInput struct {
+
 	// Amazon WorkDocs authentication token.
+	//
+	// This member is required.
 	AuthenticationToken *string
 }
 
 type GetCurrentUserOutput struct {
+
 	// Metadata of the user.
 	User *types.User
 

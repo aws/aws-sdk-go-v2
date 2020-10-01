@@ -62,22 +62,27 @@ func (c *Client) DescribeMountTargets(ctx context.Context, params *DescribeMount
 
 //
 type DescribeMountTargetsInput struct {
+
 	// (Optional) ID of the mount target that you want to have described (String). It
 	// must be included in your request if FileSystemId is not included. Accepts either
 	// a mount target ID or ARN as input.
 	MountTargetId *string
+
 	// (Optional) ID of the file system whose mount targets you want to list (String).
 	// It must be included in your request if an AccessPointId or MountTargetId is not
 	// included. Accepts either a file system ID or ARN as input.
 	FileSystemId *string
+
 	// (Optional) Maximum number of mount targets to return in the response. Currently,
 	// this number is automatically set to 10, and other values are ignored. The
 	// response is paginated at 100 per page if you have more than 100 mount targets.
 	MaxItems *int32
+
 	// (Optional) The ID of the access point whose mount targets that you want to list.
 	// It must be included in your request if a FileSystemId or MountTargetId is not
 	// included in your request. Accepts either an access point ID or ARN as input.
 	AccessPointId *string
+
 	// (Optional) Opaque pagination token returned from a previous DescribeMountTargets
 	// operation (String). If present, it specifies to continue the list from where the
 	// previous returning call left off.
@@ -86,12 +91,15 @@ type DescribeMountTargetsInput struct {
 
 //
 type DescribeMountTargetsOutput struct {
+
 	// Returns the file system's mount targets as an array of MountTargetDescription
 	// objects.
 	MountTargets []*types.MountTargetDescription
+
 	// If the request included the Marker, the response returns that value in this
 	// field.
 	Marker *string
+
 	// If a value is present, there are more mount targets to return. In a subsequent
 	// request, you can provide Marker in your request with this value to retrieve the
 	// next set of mount targets.

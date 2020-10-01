@@ -56,7 +56,10 @@ func (c *Client) DeleteConfigurationAggregator(ctx context.Context, params *Dele
 }
 
 type DeleteConfigurationAggregatorInput struct {
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
 }
 

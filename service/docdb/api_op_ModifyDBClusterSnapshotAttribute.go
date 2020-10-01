@@ -67,12 +67,19 @@ func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *M
 
 // Represents the input to ModifyDBClusterSnapshotAttribute ().
 type ModifyDBClusterSnapshotAttributeInput struct {
+
 	// The name of the cluster snapshot attribute to modify. To manage authorization
 	// for other AWS accounts to copy or restore a manual cluster snapshot, set this
 	// value to restore.
+	//
+	// This member is required.
 	AttributeName *string
+
 	// The identifier for the cluster snapshot to modify the attributes for.
+	//
+	// This member is required.
 	DBClusterSnapshotIdentifier *string
+
 	// A list of cluster snapshot attributes to remove from the attribute specified by
 	// AttributeName. To remove authorization for other AWS accounts to copy or restore
 	// a manual cluster snapshot, set this list to include one or more AWS account
@@ -81,6 +88,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// account ID is explicitly added to the restore attribute can still copy or
 	// restore a manual cluster snapshot.
 	ValuesToRemove []*string
+
 	// A list of cluster snapshot attributes to add to the attribute specified by
 	// AttributeName. To authorize other AWS accounts to copy or restore a manual
 	// cluster snapshot, set this list to include one or more AWS account IDs. To make
@@ -91,6 +99,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 }
 
 type ModifyDBClusterSnapshotAttributeOutput struct {
+
 	// Detailed information about the attributes that are associated with a cluster
 	// snapshot.
 	DBClusterSnapshotAttributesResult *types.DBClusterSnapshotAttributesResult

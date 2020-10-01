@@ -60,15 +60,20 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
 	// Must be the ARN of an Elastic Beanstalk resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The Amazon Resource Name (ARN) of the resource for which a tag list was
 	// requested.
 	ResourceArn *string
+
 	// A list of tag key-value pairs.
 	ResourceTags []*types.Tag
 

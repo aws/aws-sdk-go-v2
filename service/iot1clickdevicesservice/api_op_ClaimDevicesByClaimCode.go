@@ -56,13 +56,18 @@ func (c *Client) ClaimDevicesByClaimCode(ctx context.Context, params *ClaimDevic
 }
 
 type ClaimDevicesByClaimCodeInput struct {
+
 	// The claim code, starting with "C-", as provided by the device manufacturer.
+	//
+	// This member is required.
 	ClaimCode *string
 }
 
 type ClaimDevicesByClaimCodeOutput struct {
+
 	// The claim code provided by the device manufacturer.
 	ClaimCode *string
+
 	// The total number of devices associated with the claim code that has been
 	// processed in the claim request.
 	Total *int32

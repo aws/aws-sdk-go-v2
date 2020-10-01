@@ -57,21 +57,29 @@ func (c *Client) GetExportJobs(ctx context.Context, params *GetExportJobsInput, 
 }
 
 type GetExportJobsInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
 }
 
 type GetExportJobsOutput struct {
+
 	// Provides information about all the export jobs that are associated with an
 	// application or segment. An export job is a job that exports endpoint definitions
 	// to a file.
+	//
+	// This member is required.
 	ExportJobsResponse *types.ExportJobsResponse
 
 	// Metadata pertaining to the operation's result.

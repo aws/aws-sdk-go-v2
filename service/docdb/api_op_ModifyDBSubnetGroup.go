@@ -58,17 +58,25 @@ func (c *Client) ModifyDBSubnetGroup(ctx context.Context, params *ModifyDBSubnet
 
 // Represents the input to ModifyDBSubnetGroup ().
 type ModifyDBSubnetGroupInput struct {
+
 	// The name for the subnet group. This value is stored as a lowercase string. You
 	// can't modify the default subnet group. Constraints: Must match the name of an
 	// existing DBSubnetGroup. Must not be default. Example: mySubnetgroup
+	//
+	// This member is required.
 	DBSubnetGroupName *string
+
 	// The description for the subnet group.
 	DBSubnetGroupDescription *string
+
 	// The Amazon EC2 subnet IDs for the subnet group.
+	//
+	// This member is required.
 	SubnetIds []*string
 }
 
 type ModifyDBSubnetGroupOutput struct {
+
 	// Detailed information about a subnet group.
 	DBSubnetGroup *types.DBSubnetGroup
 

@@ -57,8 +57,12 @@ func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnh
 
 // Represents the input for EnableEnhancedMonitoring ().
 type EnableEnhancedMonitoringInput struct {
+
 	// The name of the stream for which to enable enhanced monitoring.
+	//
+	// This member is required.
 	StreamName *string
+
 	// List of shard-level metrics to enable. The following are the valid shard-level
 	// metrics. The value "ALL" enables every metric.
 	//
@@ -85,17 +89,22 @@ type EnableEnhancedMonitoringInput struct {
 	// Amazon Kinesis Data Streams Service with Amazon CloudWatch
 	// (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
+	//
+	// This member is required.
 	ShardLevelMetrics []types.MetricsName
 }
 
 // Represents the output for EnableEnhancedMonitoring () and
 // DisableEnhancedMonitoring ().
 type EnableEnhancedMonitoringOutput struct {
+
 	// The name of the Kinesis data stream.
 	StreamName *string
+
 	// Represents the current state of the metrics that are in the enhanced state
 	// before the operation.
 	CurrentShardLevelMetrics []types.MetricsName
+
 	// Represents the list of all the metrics that would be in the enhanced state after
 	// the operation.
 	DesiredShardLevelMetrics []types.MetricsName

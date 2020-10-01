@@ -56,20 +56,28 @@ func (c *Client) DescribeNamespace(ctx context.Context, params *DescribeNamespac
 }
 
 type DescribeNamespaceInput struct {
+
 	// The namespace that you want to describe.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The ID for the AWS account that contains the QuickSight namespace that you want
 	// to describe.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DescribeNamespaceOutput struct {
+
 	// The information about the namespace that you're describing. The response
 	// includes the namespace ARN, name, AWS Region, creation status, and identity
 	// store. DescribeNamespace also works for namespaces that are in the process of
 	// being created. For incomplete namespaces, this API lists the namespace error
 	// types and messages associated with the creation process.
 	Namespace *types.NamespaceInfoV2
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

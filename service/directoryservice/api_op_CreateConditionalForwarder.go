@@ -60,13 +60,22 @@ func (c *Client) CreateConditionalForwarder(ctx context.Context, params *CreateC
 // for Microsoft Active Directory. Conditional forwarders are required in order to
 // set up a trust relationship with another domain.
 type CreateConditionalForwarderInput struct {
+
 	// The directory ID of the AWS directory for which you are creating the conditional
 	// forwarder.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The IP addresses of the remote DNS server associated with RemoteDomainName.
+	//
+	// This member is required.
 	DnsIpAddrs []*string
+
 	// The fully qualified domain name (FQDN) of the remote domain with which you will
 	// set up a trust relationship.
+	//
+	// This member is required.
 	RemoteDomainName *string
 }
 

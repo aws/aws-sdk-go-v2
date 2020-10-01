@@ -56,12 +56,14 @@ func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns .
 }
 
 type ListTypesInput struct {
+
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
+
 	// The provisioning behavior of the type. AWS CloudFormation determines the
 	// provisioning type during registration, based on the types of handlers in the
 	// schema handler package submitted. Valid values include:
@@ -77,11 +79,13 @@ type ListTypesInput struct {
 	//     * NON_PROVISIONABLE: The type does not include create,
 	// read, and delete handlers, and therefore cannot actually be provisioned.
 	ProvisioningType types.ProvisioningType
+
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
 	// value that you can assign to the NextToken request parameter to get the next set
 	// of results.
 	MaxResults *int32
+
 	// The deprecation status of the types that you want to get summary information
 	// about. Valid values include:
 	//
@@ -91,6 +95,7 @@ type ListTypesInput struct {
 	//     * DEPRECATED: The type has been deregistered and
 	// can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
+
 	// The scope at which the type is visible and usable in CloudFormation operations.
 	// Valid values include:
 	//
@@ -106,9 +111,11 @@ type ListTypesInput struct {
 }
 
 type ListTypesOutput struct {
+
 	// A list of TypeSummary structures that contain information about the specified
 	// types.
 	TypeSummaries []*types.TypeSummary
+
 	// If the request doesn't return all of the remaining results, NextToken is set to
 	// a token. To retrieve the next set of results, call this action again and assign
 	// that token to the request object's NextToken parameter. If the request returns

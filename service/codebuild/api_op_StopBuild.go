@@ -56,11 +56,15 @@ func (c *Client) StopBuild(ctx context.Context, params *StopBuildInput, optFns .
 }
 
 type StopBuildInput struct {
+
 	// The ID of the build.
+	//
+	// This member is required.
 	Id *string
 }
 
 type StopBuildOutput struct {
+
 	// Information about the build.
 	Build *types.Build
 

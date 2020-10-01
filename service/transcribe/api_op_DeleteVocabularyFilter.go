@@ -55,7 +55,10 @@ func (c *Client) DeleteVocabularyFilter(ctx context.Context, params *DeleteVocab
 }
 
 type DeleteVocabularyFilterInput struct {
+
 	// The name of the vocabulary filter to remove.
+	//
+	// This member is required.
 	VocabularyFilterName *string
 }
 

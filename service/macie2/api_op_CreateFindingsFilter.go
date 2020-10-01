@@ -58,32 +58,45 @@ func (c *Client) CreateFindingsFilter(ctx context.Context, params *CreateFinding
 }
 
 type CreateFindingsFilterInput struct {
+
 	// A map of key-value pairs that specifies the tags to associate with the filter. A
 	// findings filter can have a maximum of 50 tags. Each tag consists of a required
 	// tag key and an associated tag value. The maximum length of a tag key is 128
 	// characters. The maximum length of a tag value is 256 characters.
 	Tags map[string]*string
+
 	// A custom description of the filter. The description can contain as many as 512
 	// characters. We strongly recommend that you avoid including any sensitive data in
 	// the description of a filter. Other users of your account might be able to see
 	// the filter's description, depending on the actions that they're allowed to
 	// perform in Amazon Macie.
 	Description *string
+
 	// The criteria to use to filter findings.
+	//
+	// This member is required.
 	FindingCriteria *types.FindingCriteria
+
 	// A unique, case-sensitive token that you provide to ensure the idempotency of the
 	// request.
 	ClientToken *string
+
 	// The action to perform on findings that meet the filter criteria
 	// (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive)
 	// the findings; and, NOOP, don't perform any action on the findings.
+	//
+	// This member is required.
 	Action types.FindingsFilterAction
+
 	// A custom name for the filter. The name must contain at least 3 characters and
 	// can contain as many as 64 characters. We strongly recommend that you avoid
 	// including any sensitive data in the name of a filter. Other users of your
 	// account might be able to see the filter's name, depending on the actions that
 	// they're allowed to perform in Amazon Macie.
+	//
+	// This member is required.
 	Name *string
+
 	// The position of the filter in the list of saved filters on the Amazon Macie
 	// console. This value also determines the order in which the filter is applied to
 	// findings, relative to other filters that are also applied to the findings.
@@ -91,8 +104,10 @@ type CreateFindingsFilterInput struct {
 }
 
 type CreateFindingsFilterOutput struct {
+
 	// The unique identifier for the filter that was created.
 	Id *string
+
 	// The Amazon Resource Name (ARN) of the filter that was created.
 	Arn *string
 

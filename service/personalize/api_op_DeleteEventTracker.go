@@ -57,7 +57,10 @@ func (c *Client) DeleteEventTracker(ctx context.Context, params *DeleteEventTrac
 }
 
 type DeleteEventTrackerInput struct {
+
 	// The Amazon Resource Name (ARN) of the event tracker to delete.
+	//
+	// This member is required.
 	EventTrackerArn *string
 }
 

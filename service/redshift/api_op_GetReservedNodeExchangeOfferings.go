@@ -58,17 +58,23 @@ func (c *Client) GetReservedNodeExchangeOfferings(ctx context.Context, params *G
 
 //
 type GetReservedNodeExchangeOfferingsInput struct {
+
 	// An integer setting the maximum number of ReservedNodeOfferings to retrieve.
 	MaxRecords *int32
+
 	// A value that indicates the starting point for the next set of
 	// ReservedNodeOfferings.
 	Marker *string
+
 	// A string representing the node identifier for the DC1 Reserved Node to be
 	// exchanged.
+	//
+	// This member is required.
 	ReservedNodeId *string
 }
 
 type GetReservedNodeExchangeOfferingsOutput struct {
+
 	// An optional parameter that specifies the starting point for returning a set of
 	// response records. When the results of a GetReservedNodeExchangeOfferings request
 	// exceed the value specified in MaxRecords, Amazon Redshift returns a value in the
@@ -76,6 +82,7 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 	// by providing the returned marker value in the marker parameter and retrying the
 	// request.
 	Marker *string
+
 	// Returns an array of ReservedNodeOffering () objects.
 	ReservedNodeOfferings []*types.ReservedNodeOffering
 

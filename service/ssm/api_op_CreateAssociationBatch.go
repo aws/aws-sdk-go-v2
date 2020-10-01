@@ -61,13 +61,18 @@ func (c *Client) CreateAssociationBatch(ctx context.Context, params *CreateAssoc
 }
 
 type CreateAssociationBatchInput struct {
+
 	// One or more associations.
+	//
+	// This member is required.
 	Entries []*types.CreateAssociationBatchRequestEntry
 }
 
 type CreateAssociationBatchOutput struct {
+
 	// Information about the associations that succeeded.
 	Successful []*types.AssociationDescription
+
 	// Information about the associations that failed.
 	Failed []*types.FailedCreateAssociation
 

@@ -55,8 +55,11 @@ func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *Up
 }
 
 type UpdateOrganizationConfigurationInput struct {
+
 	// Specifies whether Amazon Macie is enabled automatically for each account, when
 	// the account is added to the AWS organization.
+	//
+	// This member is required.
 	AutoEnable *bool
 }
 

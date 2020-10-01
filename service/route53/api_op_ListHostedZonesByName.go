@@ -94,6 +94,7 @@ func (c *Client) ListHostedZonesByName(ctx context.Context, params *ListHostedZo
 // Retrieves a list of the public and private hosted zones that are associated with
 // the current AWS account in ASCII order by domain name.
 type ListHostedZonesByNameInput struct {
+
 	// (Optional) For your first request to ListHostedZonesByName, include the dnsname
 	// parameter only if you want to specify the name of the first hosted zone in the
 	// response. If you don't include the dnsname parameter, Amazon Route 53 returns
@@ -102,12 +103,14 @@ type ListHostedZonesByNameInput struct {
 	// parameters. For dnsname, specify the value of NextDNSName from the previous
 	// response.
 	DNSName *string
+
 	// The maximum number of hosted zones to be included in the response body for this
 	// request. If you have more than maxitems hosted zones, then the value of the
 	// IsTruncated element in the response is true, and the values of NextDNSName and
 	// NextHostedZoneId specify the first hosted zone in the next group of maxitems
 	// hosted zones.
 	MaxItems *string
+
 	// (Optional) For your first request to ListHostedZonesByName, do not include the
 	// hostedzoneid parameter. If you have more hosted zones than the value of
 	// maxitems, ListHostedZonesByName returns only the first maxitems hosted zones. To
@@ -120,33 +123,46 @@ type ListHostedZonesByNameInput struct {
 
 // A complex type that contains the response information for the request.
 type ListHostedZonesByNameOutput struct {
+
 	// If IsTruncated is true, the value of NextHostedZoneId identifies the first
 	// hosted zone in the next group of maxitems hosted zones. Call
 	// ListHostedZonesByName again and specify the value of NextDNSName and
 	// NextHostedZoneId in the dnsname and hostedzoneid parameters, respectively. This
 	// element is present only if IsTruncated is true.
 	NextHostedZoneId *string
+
 	// The ID that Amazon Route 53 assigned to the hosted zone when you created it.
 	HostedZoneId *string
+
 	// For the second and subsequent calls to ListHostedZonesByName, DNSName is the
 	// value that you specified for the dnsname parameter in the request that produced
 	// the current response.
 	DNSName *string
+
 	// If IsTruncated is true, the value of NextDNSName is the name of the first hosted
 	// zone in the next group of maxitems hosted zones. Call ListHostedZonesByName
 	// again and specify the value of NextDNSName and NextHostedZoneId in the dnsname
 	// and hostedzoneid parameters, respectively. This element is present only if
 	// IsTruncated is true.
 	NextDNSName *string
+
 	// The value that you specified for the maxitems parameter in the call to
 	// ListHostedZonesByName that produced the current response.
+	//
+	// This member is required.
 	MaxItems *string
+
 	// A complex type that contains general information about the hosted zone.
+	//
+	// This member is required.
 	HostedZones []*types.HostedZone
+
 	// A flag that indicates whether there are more hosted zones to be listed. If the
 	// response was truncated, you can get the next group of maxitems hosted zones by
 	// calling ListHostedZonesByName again and specifying the values of NextDNSName and
 	// NextHostedZoneId elements in the dnsname and hostedzoneid parameters.
+	//
+	// This member is required.
 	IsTruncated *bool
 
 	// Metadata pertaining to the operation's result.

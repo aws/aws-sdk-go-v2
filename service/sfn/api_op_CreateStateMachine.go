@@ -71,6 +71,7 @@ func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMach
 }
 
 type CreateStateMachineInput struct {
+
 	// Tags to be added when creating a state machine. An array of key-value pairs. For
 	// more information, see Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
@@ -80,15 +81,18 @@ type CreateStateMachineInput struct {
 	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 	// = + - @.
 	Tags []*types.Tag
+
 	// Determines whether a Standard or Express state machine is created. The default
 	// is STANDARD. You cannot update the type of a state machine once it has been
 	// created.
 	Type types.StateMachineType
+
 	// Defines what execution history events are logged and where they are logged. By
 	// default, the level is set to OFF. For more information see Log Levels
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
 	// in the AWS Step Functions User Guide.
 	LoggingConfiguration *types.LoggingConfiguration
+
 	// The name of the state machine. A name must not contain:
 	//
 	//     * white space
@@ -106,19 +110,33 @@ type CreateStateMachineInput struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	//
+	// This member is required.
 	Definition *string
 }
 
 type CreateStateMachineOutput struct {
+
 	// The date the state machine is created.
+	//
+	// This member is required.
 	CreationDate *time.Time
+
 	// The Amazon Resource Name (ARN) that identifies the created state machine.
+	//
+	// This member is required.
 	StateMachineArn *string
 
 	// Metadata pertaining to the operation's result.

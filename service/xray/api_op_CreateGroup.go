@@ -56,14 +56,19 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 }
 
 type CreateGroupInput struct {
+
 	// The case-sensitive name of the new group. Default is a reserved name and names
 	// must be unique.
+	//
+	// This member is required.
 	GroupName *string
+
 	// The filter expression defining criteria by which to group traces.
 	FilterExpression *string
 }
 
 type CreateGroupOutput struct {
+
 	// The group that was created. Contains the name of the group that was created, the
 	// ARN of the group that was generated based on the group name, and the filter
 	// expression that was assigned to the group.

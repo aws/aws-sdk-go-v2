@@ -58,19 +58,26 @@ func (c *Client) DescribeEffectivePatchesForPatchBaseline(ctx context.Context, p
 }
 
 type DescribeEffectivePatchesForPatchBaselineInput struct {
+
 	// The ID of the patch baseline to retrieve the effective patches for.
+	//
+	// This member is required.
 	BaselineId *string
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of patches to return (per page).
 	MaxResults *int32
 }
 
 type DescribeEffectivePatchesForPatchBaselineOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// An array of patches and patch status.
 	EffectivePatches []*types.EffectivePatch
 

@@ -59,6 +59,7 @@ type DescribeOperatingSystemsInput struct {
 
 // The response to a DescribeOperatingSystems request.
 type DescribeOperatingSystemsOutput struct {
+
 	// Contains information in response to a DescribeOperatingSystems request.
 	OperatingSystems []*types.OperatingSystem
 

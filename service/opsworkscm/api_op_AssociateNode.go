@@ -70,6 +70,7 @@ func (c *Client) AssociateNode(ctx context.Context, params *AssociateNodeInput, 
 }
 
 type AssociateNodeInput struct {
+
 	// Engine attributes used for associating the node. Attributes accepted in a
 	// AssociateNode request for Chef
 	//
@@ -85,14 +86,23 @@ type AssociateNodeInput struct {
 	//
 	//     * PUPPET_NODE_CSR: A
 	// PEM-formatted certificate-signing request (CSR) that is created by the node.
+	//
+	// This member is required.
 	EngineAttributes []*types.EngineAttribute
+
 	// The name of the server with which to associate the node.
+	//
+	// This member is required.
 	ServerName *string
+
 	// The name of the node.
+	//
+	// This member is required.
 	NodeName *string
 }
 
 type AssociateNodeOutput struct {
+
 	// Contains a token which can be passed to the DescribeNodeAssociationStatus API
 	// call to get the status of the association request.
 	NodeAssociationStatusToken *string

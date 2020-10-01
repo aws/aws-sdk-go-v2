@@ -56,13 +56,20 @@ func (c *Client) StartMedicalTranscriptionJob(ctx context.Context, params *Start
 }
 
 type StartMedicalTranscriptionJobInput struct {
+
 	// The medical specialty of any clinician speaking in the input media.
+	//
+	// This member is required.
 	Specialty types.Specialty
+
 	// The name of the medical transcription job. You can't use the strings "." or ".."
 	// by themselves as the job name. The name must also be unique within an AWS
 	// account. If you try to create a medical transcription job with the same name as
 	// a previous medical transcription job you will receive a ConflictException error.
+	//
+	// This member is required.
 	MedicalTranscriptionJobName *string
+
 	// The Amazon S3 location where the transcription is stored. You must set
 	// OutputBucketName for Amazon Transcribe Medical to store the transcription
 	// results. Your transcript appears in the S3 location you specify. When you call
@@ -75,20 +82,31 @@ type StartMedicalTranscriptionJobInput struct {
 	// your transcription using the OutputEncryptionKMSKeyId parameter. If you don't
 	// specify a KMS key, Amazon Transcribe Medical uses the default Amazon S3 key for
 	// server-side encryption of transcripts that are placed in your S3 bucket.
+	//
+	// This member is required.
 	OutputBucketName *string
+
 	// The language code for the language spoken in the input media file. US English
 	// (en-US) is the valid value for medical transcription jobs. Any other value you
 	// enter for language code results in a BadRequestException error.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// The type of speech in the input audio. CONVERSATION refers to conversations
 	// between two or more speakers, e.g., a conversations between doctors and
 	// patients. DICTATION refers to single-speaker dictated speech, e.g., for clinical
 	// notes.
+	//
+	// This member is required.
 	Type types.Type
+
 	// The audio format of the input media file.
 	MediaFormat types.MediaFormat
+
 	// Optional settings for the medical transcription job.
 	Settings *types.MedicalTranscriptionSetting
+
 	// The sample rate, in Hertz, of the audio track in the input media file. If you do
 	// not specify the media sample rate, Amazon Transcribe Medical determines the
 	// sample rate. If you specify the sample rate, it must match the rate detected by
@@ -96,8 +114,12 @@ type StartMedicalTranscriptionJobInput struct {
 	// MediaSampleRateHertz field blank and let Amazon Transcribe Medical determine the
 	// sample rate.
 	MediaSampleRateHertz *int32
+
 	// Describes the input media file in a transcription request.
+	//
+	// This member is required.
 	Media *types.Media
+
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used
 	// to encrypt the output of the transcription job. The user calling the
 	// StartMedicalTranscriptionJob () operation must have permission to use the
@@ -128,6 +150,7 @@ type StartMedicalTranscriptionJobInput struct {
 }
 
 type StartMedicalTranscriptionJobOutput struct {
+
 	// A batch job submitted to transcribe medical speech to text.
 	MedicalTranscriptionJob *types.MedicalTranscriptionJob
 

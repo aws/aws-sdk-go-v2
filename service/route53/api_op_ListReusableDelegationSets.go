@@ -58,6 +58,7 @@ func (c *Client) ListReusableDelegationSets(ctx context.Context, params *ListReu
 // A request to get a list of the reusable delegation sets that are associated with
 // the current AWS account.
 type ListReusableDelegationSetsInput struct {
+
 	// If the value of IsTruncated in the previous response was true, you have more
 	// reusable delegation sets. To get another group, submit another
 	// ListReusableDelegationSets request. For the value of marker, specify the value
@@ -66,6 +67,7 @@ type ListReusableDelegationSetsInput struct {
 	// If the value of IsTruncated in the previous response was false, there are no
 	// more reusable delegation sets to get.
 	Marker *string
+
 	// The number of reusable delegation sets that you want Amazon Route 53 to return
 	// in the response to this request. If you specify a value greater than 100, Route
 	// 53 returns only the first 100 reusable delegation sets.
@@ -75,23 +77,36 @@ type ListReusableDelegationSetsInput struct {
 // A complex type that contains information about the reusable delegation sets that
 // are associated with the current AWS account.
 type ListReusableDelegationSetsOutput struct {
+
 	// A complex type that contains one DelegationSet element for each reusable
 	// delegation set that was created by the current AWS account.
+	//
+	// This member is required.
 	DelegationSets []*types.DelegationSet
+
 	// For the second and subsequent calls to ListReusableDelegationSets, Marker is the
 	// value that you specified for the marker parameter in the request that produced
 	// the current response.
+	//
+	// This member is required.
 	Marker *string
+
 	// If IsTruncated is true, the value of NextMarker identifies the next reusable
 	// delegation set that Amazon Route 53 will return if you submit another
 	// ListReusableDelegationSets request and specify the value of NextMarker in the
 	// marker parameter.
 	NextMarker *string
+
 	// A flag that indicates whether there are more reusable delegation sets to be
 	// listed.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// The value that you specified for the maxitems parameter in the call to
 	// ListReusableDelegationSets that produced the current response.
+	//
+	// This member is required.
 	MaxItems *string
 
 	// Metadata pertaining to the operation's result.

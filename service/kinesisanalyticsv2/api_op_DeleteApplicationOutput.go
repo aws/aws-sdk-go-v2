@@ -58,24 +58,35 @@ func (c *Client) DeleteApplicationOutput(ctx context.Context, params *DeleteAppl
 }
 
 type DeleteApplicationOutputInput struct {
+
 	// The ID of the configuration to delete. Each output configuration that is added
 	// to the application (either when the application is created or later) using the
 	// AddApplicationOutput () operation has a unique ID. You need to provide the ID to
 	// uniquely identify the output configuration that you want to delete from the
 	// application configuration. You can use the DescribeApplication () operation to
 	// get the specific OutputId.
+	//
+	// This member is required.
 	OutputId *string
+
 	// The application name.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The application version. You can use the DescribeApplication () operation to get
 	// the current application version. If the version specified is not the current
 	// version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
 }
 
 type DeleteApplicationOutputOutput struct {
+
 	// The current application version ID.
 	ApplicationVersionId *int64
+
 	// The application Amazon Resource Name (ARN).
 	ApplicationARN *string
 

@@ -56,13 +56,23 @@ func (c *Client) UpdateArchiveRule(ctx context.Context, params *UpdateArchiveRul
 
 // Updates the specified archive rule.
 type UpdateArchiveRuleInput struct {
+
 	// The name of the analyzer to update the archive rules for.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// The name of the rule to update.
+	//
+	// This member is required.
 	RuleName *string
+
 	// A filter to match for the rules to update. Only rules that match the filter are
 	// updated.
+	//
+	// This member is required.
 	Filter map[string]*types.Criterion
+
 	// A client token.
 	ClientToken *string
 }

@@ -56,6 +56,7 @@ func (c *Client) DeleteSystemInstance(ctx context.Context, params *DeleteSystemI
 }
 
 type DeleteSystemInstanceInput struct {
+
 	// The ID of the system instance to be deleted.
 	Id *string
 }

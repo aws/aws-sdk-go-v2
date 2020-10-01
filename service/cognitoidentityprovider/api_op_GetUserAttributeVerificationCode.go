@@ -54,12 +54,19 @@ func (c *Client) GetUserAttributeVerificationCode(ctx context.Context, params *G
 
 // Represents the request to get user attribute verification.
 type GetUserAttributeVerificationCodeInput struct {
+
 	// The access token returned by the server response to get the user attribute
 	// verification code.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// The attribute name returned by the server response to get the user attribute
 	// verification code.
+	//
+	// This member is required.
 	AttributeName *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -93,6 +100,7 @@ type GetUserAttributeVerificationCodeInput struct {
 // The verification code response returned by the server response to get the user
 // attribute verification code.
 type GetUserAttributeVerificationCodeOutput struct {
+
 	// The code delivery details returned by the server in response to the request to
 	// get the user attribute verification code.
 	CodeDeliveryDetails *types.CodeDeliveryDetailsType

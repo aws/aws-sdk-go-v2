@@ -60,13 +60,16 @@ func (c *Client) DescribeVirtualInterfaces(ctx context.Context, params *Describe
 }
 
 type DescribeVirtualInterfacesInput struct {
+
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
+
 	// The ID of the connection.
 	ConnectionId *string
 }
 
 type DescribeVirtualInterfacesOutput struct {
+
 	// The virtual interfaces
 	VirtualInterfaces []*types.VirtualInterface
 

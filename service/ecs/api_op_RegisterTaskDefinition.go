@@ -77,6 +77,7 @@ func (c *Client) RegisterTaskDefinition(ctx context.Context, params *RegisterTas
 }
 
 type RegisterTaskDefinitionInput struct {
+
 	// The process namespace to use for the containers in the task. The valid values
 	// are host or task. If host is specified, then all containers within the tasks
 	// that specified the host PID mode on the same container instance share the same
@@ -90,6 +91,7 @@ type RegisterTaskDefinitionInput struct {
 	// security (https://docs.docker.com/engine/security/security/). This parameter is
 	// not supported for Windows containers or tasks using the Fargate launch type.
 	PidMode types.PidMode
+
 	// The metadata that you apply to the task definition to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
@@ -120,9 +122,11 @@ type RegisterTaskDefinitionInput struct {
 	// this prefix. Tags with this prefix do not count against your tags per resource
 	// limit.
 	Tags []*types.Tag
+
 	// The launch type required by the task. If no value is specified, it defaults to
 	// EC2.
 	RequiresCompatibilities []types.Compatibility
+
 	// The amount of memory (in MiB) used by the task. It can be expressed as an
 	// integer using MiB, for example 1024, or as a string using GB, for example 1GB or
 	// 1 GB, in a task definition. String values are converted to an integer indicating
@@ -150,10 +154,12 @@ type RegisterTaskDefinitionInput struct {
 	// * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available
 	// cpu values: 4096 (4 vCPU)
 	Memory *string
+
 	// An array of placement constraint objects to use for the task. You can specify a
 	// maximum of 10 constraints per task (this limit includes constraints in the task
 	// definition and those specified at runtime).
 	PlacementConstraints []*types.TaskDefinitionPlacementConstraint
+
 	// The Docker networking mode to use for the containers in the task. The valid
 	// values are none, bridge, awsvpc, and host. The default Docker network mode is
 	// bridge. If you are using the Fargate launch type, the awsvpc network mode is
@@ -183,9 +189,13 @@ type RegisterTaskDefinitionInput struct {
 	// (https://docs.docker.com/engine/reference/run/#network-settings) in the Docker
 	// run reference.
 	NetworkMode types.NetworkMode
+
 	// A list of container definitions in JSON format that describe the different
 	// containers that make up your task.
+	//
+	// This member is required.
 	ContainerDefinitions []*types.ContainerDefinition
+
 	// The IPC resource namespace to use for the containers in the task. The valid
 	// values are host, task, or none. If host is specified, then all containers within
 	// the tasks that specified the host IPC mode on the same container instance share
@@ -215,11 +225,14 @@ type RegisterTaskDefinitionInput struct {
 	// This parameter is not supported for
 	// Windows containers or tasks using the Fargate launch type.
 	IpcMode types.IpcMode
+
 	// The Elastic Inference accelerators to use for the containers in the task.
 	InferenceAccelerators []*types.InferenceAccelerator
+
 	// A list of volume definitions in JSON format that containers in your task may
 	// use.
 	Volumes []*types.Volume
+
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
 	// ECS container agent permission to make AWS API calls on your behalf. The task
 	// execution IAM role is required depending on the requirements of your task. For
@@ -227,6 +240,7 @@ type RegisterTaskDefinitionInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
+
 	// The number of CPU units used by the task. It can be expressed as an integer
 	// using CPU units, for example 1024, or as a string using vCPUs, for example 1
 	// vCPU or 1 vcpu, in a task definition. String values are converted to an integer
@@ -256,6 +270,7 @@ type RegisterTaskDefinitionInput struct {
 	// Available memory values: Between 8192 (8 GB) and 30720 (30 GB) in increments of
 	// 1024 (1 GB)
 	Cpu *string
+
 	// The configuration details for the App Mesh proxy. For tasks using the EC2 launch
 	// type, the container instances require at least version 1.26.0 of the container
 	// agent and at least version 1.26.0-1 of the ecs-init package to enable a proxy
@@ -268,6 +283,7 @@ type RegisterTaskDefinitionInput struct {
 	// Fargate launch type, the task or service requires platform version 1.3.0 or
 	// later.
 	ProxyConfiguration *types.ProxyConfiguration
+
 	// The short name or full Amazon Resource Name (ARN) of the IAM role that
 	// containers in this task can assume. All containers in this task are granted the
 	// permissions that are specified in this role. For more information, see IAM Roles
@@ -275,16 +291,21 @@ type RegisterTaskDefinitionInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
+
 	// You must specify a family for a task definition, which allows you to track
 	// multiple versions of the same task definition. The family is used as a name for
 	// your task definition. Up to 255 letters (uppercase and lowercase), numbers, and
 	// hyphens are allowed.
+	//
+	// This member is required.
 	Family *string
 }
 
 type RegisterTaskDefinitionOutput struct {
+
 	// The list of tags associated with the task definition.
 	Tags []*types.Tag
+
 	// The full description of the registered task definition.
 	TaskDefinition *types.TaskDefinition
 

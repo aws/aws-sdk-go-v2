@@ -60,6 +60,7 @@ type DescribeLocationsInput struct {
 }
 
 type DescribeLocationsOutput struct {
+
 	// The locations.
 	Locations []*types.Location
 

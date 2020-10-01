@@ -58,19 +58,24 @@ func (c *Client) SearchSystemTemplates(ctx context.Context, params *SearchSystem
 }
 
 type SearchSystemTemplatesInput struct {
+
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
 	// An array of filters that limit the result set. The only valid filter is
 	// FLOW_TEMPLATE_ID.
 	Filters []*types.SystemTemplateFilter
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 }
 
 type SearchSystemTemplatesOutput struct {
+
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
+
 	// An array of objects that contain summary information about each system
 	// deployment in the result set.
 	Summaries []*types.SystemTemplateSummary

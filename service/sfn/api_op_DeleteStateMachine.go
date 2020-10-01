@@ -58,7 +58,10 @@ func (c *Client) DeleteStateMachine(ctx context.Context, params *DeleteStateMach
 }
 
 type DeleteStateMachineInput struct {
+
 	// The Amazon Resource Name (ARN) of the state machine to delete.
+	//
+	// This member is required.
 	StateMachineArn *string
 }
 

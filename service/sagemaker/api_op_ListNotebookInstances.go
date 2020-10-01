@@ -57,14 +57,17 @@ func (c *Client) ListNotebookInstances(ctx context.Context, params *ListNotebook
 }
 
 type ListNotebookInstancesInput struct {
+
 	// A filter that returns only notebook instances that were modified before the
 	// specified time (timestamp).
 	LastModifiedTimeBefore *time.Time
+
 	// A string in the name of a notebook instances lifecycle configuration associated
 	// with this notebook instance. This filter returns only notebook instances
 	// associated with a lifecycle configuration with a name that contains the
 	// specified string.
 	NotebookInstanceLifecycleConfigNameContains *string
+
 	// If the previous call to the ListNotebookInstances is truncated, the response
 	// includes a NextToken. You can use this token in your subsequent
 	// ListNotebookInstances request to fetch the next set of notebook instances. You
@@ -72,40 +75,52 @@ type ListNotebookInstancesInput struct {
 	// truncated, you must use the same values for the filer and sort order in the next
 	// request.
 	NextToken *string
+
 	// The field to sort results by. The default is Name.
 	SortBy types.NotebookInstanceSortKey
+
 	// The sort order for results.
 	SortOrder types.NotebookInstanceSortOrder
+
 	// A filter that returns only notebook instances that were modified after the
 	// specified time (timestamp).
 	LastModifiedTimeAfter *time.Time
+
 	// The maximum number of notebook instances to return.
 	MaxResults *int32
+
 	// A filter that returns only notebook instances that were created before the
 	// specified time (timestamp).
 	CreationTimeBefore *time.Time
+
 	// A string in the name or URL of a Git repository associated with this notebook
 	// instance. This filter returns only notebook instances associated with a git
 	// repository with a name that contains the specified string.
 	DefaultCodeRepositoryContains *string
+
 	// A filter that returns only notebook instances with the specified status.
 	StatusEquals types.NotebookInstanceStatus
+
 	// A filter that returns only notebook instances that were created after the
 	// specified time (timestamp).
 	CreationTimeAfter *time.Time
+
 	// A string in the notebook instances' name. This filter returns only notebook
 	// instances whose name contains the specified string.
 	NameContains *string
+
 	// A filter that returns only notebook instances with associated with the specified
 	// git repository.
 	AdditionalCodeRepositoryEquals *string
 }
 
 type ListNotebookInstancesOutput struct {
+
 	// If the response to the previous ListNotebookInstances request was truncated,
 	// Amazon SageMaker returns this token. To retrieve the next set of notebook
 	// instances, use the token in the next request.
 	NextToken *string
+
 	// An array of NotebookInstanceSummary objects, one for each notebook instance.
 	NotebookInstances []*types.NotebookInstanceSummary
 

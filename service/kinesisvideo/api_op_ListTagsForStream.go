@@ -55,10 +55,13 @@ func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStrea
 }
 
 type ListTagsForStreamInput struct {
+
 	// The Amazon Resource Name (ARN) of the stream that you want to list tags for.
 	StreamARN *string
+
 	// The name of the stream that you want to list tags for.
 	StreamName *string
+
 	// If you specify this parameter and the result of a ListTagsForStream call is
 	// truncated, the response includes a token that you can use in the next request to
 	// fetch the next batch of tags.
@@ -66,10 +69,12 @@ type ListTagsForStreamInput struct {
 }
 
 type ListTagsForStreamOutput struct {
+
 	// If you specify this parameter and the result of a ListTags call is truncated,
 	// the response includes a token that you can use in the next request to fetch the
 	// next set of tags.
 	NextToken *string
+
 	// A map of tag keys and values associated with the specified stream.
 	Tags map[string]*string
 

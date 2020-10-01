@@ -58,11 +58,18 @@ func (c *Client) GetUsagePlan(ctx context.Context, params *GetUsagePlanInput, op
 
 // The GET request to get a usage plan of a given plan identifier.
 type GetUsagePlanInput struct {
+
 	// [Required] The identifier of the UsagePlan () resource to be retrieved.
-	UsagePlanId      *string
-	Template         *bool
-	Name             *string
-	Title            *string
+	//
+	// This member is required.
+	UsagePlanId *string
+
+	Template *bool
+
+	Name *string
+
+	Title *string
+
 	TemplateSkipList []*string
 }
 
@@ -72,21 +79,29 @@ type GetUsagePlanInput struct {
 // customers by adding API keys to the plan. Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type GetUsagePlanOutput struct {
+
 	// The identifier of a UsagePlan () resource.
 	Id *string
+
 	// The request throttle limits of a usage plan.
 	Throttle *types.ThrottleSettings
+
 	// The name of a usage plan.
 	Name *string
+
 	// The associated API stages of a usage plan.
 	ApiStages []*types.ApiStage
+
 	// The AWS Markeplace product identifier to associate with the usage plan as a SaaS
 	// product on AWS Marketplace.
 	ProductCode *string
+
 	// The maximum number of permitted requests per a given unit time interval.
 	Quota *types.QuotaSettings
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The description of a usage plan.
 	Description *string
 

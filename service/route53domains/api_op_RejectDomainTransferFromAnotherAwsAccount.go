@@ -68,16 +68,20 @@ func (c *Client) RejectDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 // The RejectDomainTransferFromAnotherAwsAccount request includes the following
 // element.
 type RejectDomainTransferFromAnotherAwsAccountInput struct {
+
 	// The name of the domain that was specified when another AWS account submitted a
 	// TransferDomainToAnotherAwsAccount
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
 	// request.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The RejectDomainTransferFromAnotherAwsAccount response includes the following
 // element.
 type RejectDomainTransferFromAnotherAwsAccountOutput struct {
+
 	// The identifier that TransferDomainToAnotherAwsAccount returned to track the
 	// progress of the request. Because the transfer request was rejected, the value is
 	// no longer valid, and you can't use GetOperationDetail to query the operation

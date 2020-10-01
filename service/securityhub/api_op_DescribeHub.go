@@ -55,17 +55,21 @@ func (c *Client) DescribeHub(ctx context.Context, params *DescribeHubInput, optF
 }
 
 type DescribeHubInput struct {
+
 	// The ARN of the Hub resource to retrieve.
 	HubArn *string
 }
 
 type DescribeHubOutput struct {
+
 	// Whether to automatically enable new controls when they are added to standards
 	// that are enabled. If set to true, then new controls for enabled standards are
 	// enabled automatically. If set to false, then new controls are not enabled.
 	AutoEnableControls *bool
+
 	// The ARN of the Hub resource that was retrieved.
 	HubArn *string
+
 	// The date and time when Security Hub was enabled in the account.
 	SubscribedAt *string
 

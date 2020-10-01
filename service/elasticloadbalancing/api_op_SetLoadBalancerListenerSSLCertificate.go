@@ -62,11 +62,20 @@ func (c *Client) SetLoadBalancerListenerSSLCertificate(ctx context.Context, para
 
 // Contains the parameters for SetLoadBalancerListenerSSLCertificate.
 type SetLoadBalancerListenerSSLCertificateInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The Amazon Resource Name (ARN) of the SSL certificate.
+	//
+	// This member is required.
 	SSLCertificateId *string
+
 	// The port that uses the specified SSL certificate.
+	//
+	// This member is required.
 	LoadBalancerPort *int32
 }
 

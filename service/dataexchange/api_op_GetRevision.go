@@ -56,21 +56,32 @@ func (c *Client) GetRevision(ctx context.Context, params *GetRevisionInput, optF
 }
 
 type GetRevisionInput struct {
+
 	// The unique identifier for a revision.
+	//
+	// This member is required.
 	RevisionId *string
+
 	// The unique identifier for a data set.
+	//
+	// This member is required.
 	DataSetId *string
 }
 
 type GetRevisionOutput struct {
+
 	// The unique identifier for the revision.
 	Id *string
+
 	// The date and time that the revision was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
+
 	// The ARN for the revision
 	Arn *string
+
 	// The unique identifier for the data set associated with this revision.
 	DataSetId *string
+
 	// To publish a revision to a data set in a product, the revision must first be
 	// finalized. Finalizing a revision tells AWS Data Exchange that your changes to
 	// the assets in the revision are complete. After it's in this read-only state, you
@@ -79,12 +90,16 @@ type GetRevisionOutput struct {
 	// the StartChangeSet AWS Marketplace Catalog API action. When using the API,
 	// revisions are uniquely identified by their ARN.
 	Finalized *bool
+
 	// The tags for the revision.
 	Tags map[string]*string
+
 	// An optional comment about the revision.
 	Comment *string
+
 	// The date and time that the revision was created, in ISO 8601 format.
 	CreatedAt *time.Time
+
 	// The revision ID of the owned revision corresponding to the entitled revision
 	// being viewed. This parameter is returned when a revision owner is viewing the
 	// entitled copy of its owned revision.

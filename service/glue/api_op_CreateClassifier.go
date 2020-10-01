@@ -58,12 +58,16 @@ func (c *Client) CreateClassifier(ctx context.Context, params *CreateClassifierI
 }
 
 type CreateClassifierInput struct {
+
 	// A JsonClassifier object specifying the classifier to create.
 	JsonClassifier *types.CreateJsonClassifierRequest
+
 	// A CsvClassifier object specifying the classifier to create.
 	CsvClassifier *types.CreateCsvClassifierRequest
+
 	// An XMLClassifier object specifying the classifier to create.
 	XMLClassifier *types.CreateXMLClassifierRequest
+
 	// A GrokClassifier object specifying the classifier to create.
 	GrokClassifier *types.CreateGrokClassifierRequest
 }

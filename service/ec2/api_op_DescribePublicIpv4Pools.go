@@ -55,8 +55,10 @@ func (c *Client) DescribePublicIpv4Pools(ctx context.Context, params *DescribePu
 }
 
 type DescribePublicIpv4PoolsInput struct {
+
 	// The IDs of the address pools.
 	PoolIds []*string
+
 	// One or more filters.
 	//
 	//     * tag: - The key/value combination of a tag assigned
@@ -69,16 +71,20 @@ type DescribePublicIpv4PoolsInput struct {
 	// Use this filter to find all resources assigned a tag with a specific key,
 	// regardless of the tag value.
 	Filters []*types.Filter
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type DescribePublicIpv4PoolsOutput struct {
+
 	// Information about the address pools.
 	PublicIpv4Pools []*types.PublicIpv4Pool
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

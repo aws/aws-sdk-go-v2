@@ -63,9 +63,12 @@ func (c *Client) StopLogging(ctx context.Context, params *StopLoggingInput, optF
 // Passes the request to CloudTrail to stop logging AWS API calls for the specified
 // account.
 type StopLoggingInput struct {
+
 	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will
 	// stop logging AWS API calls. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	Name *string
 }
 

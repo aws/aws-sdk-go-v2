@@ -62,9 +62,15 @@ func (c *Client) AddTagsToStream(ctx context.Context, params *AddTagsToStreamInp
 
 // Represents the input for AddTagsToStream.
 type AddTagsToStreamInput struct {
+
 	// The name of the stream.
+	//
+	// This member is required.
 	StreamName *string
+
 	// A set of up to 10 key-value pairs to use to create the tags.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

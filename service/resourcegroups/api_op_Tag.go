@@ -60,16 +60,24 @@ func (c *Client) Tag(ctx context.Context, params *TagInput, optFns ...func(*Opti
 }
 
 type TagInput struct {
+
 	// The ARN of the resource group to which to add tags.
+	//
+	// This member is required.
 	Arn *string
+
 	// The tags to add to the specified resource group. A tag is a string-to-string map
 	// of key-value pairs.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 
 type TagOutput struct {
+
 	// The ARN of the tagged resource.
 	Arn *string
+
 	// The tags that have been added to the specified resource group.
 	Tags map[string]*string
 

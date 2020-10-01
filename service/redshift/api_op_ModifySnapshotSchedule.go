@@ -58,29 +58,42 @@ func (c *Client) ModifySnapshotSchedule(ctx context.Context, params *ModifySnaps
 }
 
 type ModifySnapshotScheduleInput struct {
+
 	// A unique alphanumeric identifier of the schedule to modify.
+	//
+	// This member is required.
 	ScheduleIdentifier *string
+
 	// An updated list of schedule definitions. A schedule definition is made up of
 	// schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".
+	//
+	// This member is required.
 	ScheduleDefinitions []*string
 }
 
 // Describes a snapshot schedule. You can set a regular interval for creating
 // snapshots of a cluster. You can also schedule snapshots for specific dates.
 type ModifySnapshotScheduleOutput struct {
+
 	//
 	NextInvocations []*time.Time
+
 	// A list of clusters associated with the schedule. A maximum of 100 clusters is
 	// returned.
 	AssociatedClusters []*types.ClusterAssociatedToSchedule
+
 	// The number of clusters associated with the schedule.
 	AssociatedClusterCount *int32
+
 	// A unique identifier for the schedule.
 	ScheduleIdentifier *string
+
 	// An optional set of tags describing the schedule.
 	Tags []*types.Tag
+
 	// The description of the schedule.
 	ScheduleDescription *string
+
 	// A list of ScheduleDefinitions.
 	ScheduleDefinitions []*string
 

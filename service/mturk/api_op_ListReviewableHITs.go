@@ -57,24 +57,31 @@ func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableH
 }
 
 type ListReviewableHITsInput struct {
+
 	// Can be either Reviewable or Reviewing. Reviewable is the default value.
 	Status types.ReviewableHITStatus
+
 	// The ID of the HIT type of the HITs to consider for the query. If not specified,
 	// all HITs for the Reviewer are considered
 	HITTypeId *string
+
 	// Limit the number of results returned.
 	MaxResults *int32
+
 	// Pagination Token
 	NextToken *string
 }
 
 type ListReviewableHITsOutput struct {
+
 	// The list of HIT elements returned by the query.
 	HITs []*types.HIT
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The number of HITs on this page in the filtered results list, equivalent to the
 	// number of HITs being returned by this call.
 	NumResults *int32

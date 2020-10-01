@@ -55,14 +55,26 @@ func (c *Client) UpdateCompanyNetworkConfiguration(ctx context.Context, params *
 }
 
 type UpdateCompanyNetworkConfigurationInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The VPC with connectivity to associated websites.
+	//
+	// This member is required.
 	VpcId *string
+
 	// The subnets used for X-ENI connections from Amazon WorkLink rendering
 	// containers.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// The security groups associated with access to the provided subnets.
+	//
+	// This member is required.
 	SecurityGroupIds []*string
 }
 

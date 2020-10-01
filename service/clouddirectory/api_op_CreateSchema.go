@@ -68,12 +68,16 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 }
 
 type CreateSchemaInput struct {
+
 	// The name that is associated with the schema. This is unique to each account and
 	// in each region.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateSchemaOutput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
 	SchemaArn *string

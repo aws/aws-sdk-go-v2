@@ -55,9 +55,13 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 }
 
 type UpdateGroupInput struct {
+
 	// The name of the definition.
 	Name *string
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 

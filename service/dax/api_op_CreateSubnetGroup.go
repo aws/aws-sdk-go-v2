@@ -56,15 +56,23 @@ func (c *Client) CreateSubnetGroup(ctx context.Context, params *CreateSubnetGrou
 }
 
 type CreateSubnetGroupInput struct {
+
 	// A list of VPC subnet IDs for the subnet group.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// A description for the subnet group
 	Description *string
+
 	// A name for the subnet group. This value is stored as a lowercase string.
+	//
+	// This member is required.
 	SubnetGroupName *string
 }
 
 type CreateSubnetGroupOutput struct {
+
 	// Represents the output of a CreateSubnetGroup operation.
 	SubnetGroup *types.SubnetGroup
 

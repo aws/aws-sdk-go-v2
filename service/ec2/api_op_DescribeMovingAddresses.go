@@ -58,32 +58,39 @@ func (c *Client) DescribeMovingAddresses(ctx context.Context, params *DescribeMo
 }
 
 type DescribeMovingAddressesInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1000; if
 	// MaxResults is given a value outside of this range, an error is returned.
 	// Default: If no value is provided, the default is 1000.
 	MaxResults *int32
+
 	// One or more filters.
 	//
 	//     * moving-status - The status of the Elastic IP address
 	// (MovingToVpc | RestoringToClassic).
 	Filters []*types.Filter
+
 	// One or more Elastic IP addresses.
 	PublicIps []*string
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type DescribeMovingAddressesOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The status for each Elastic IP address.
 	MovingAddressStatuses []*types.MovingAddressStatus
 

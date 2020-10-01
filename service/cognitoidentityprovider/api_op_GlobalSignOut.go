@@ -58,7 +58,10 @@ func (c *Client) GlobalSignOut(ctx context.Context, params *GlobalSignOutInput, 
 
 // Represents the request to sign out all devices.
 type GlobalSignOutInput struct {
+
 	// The access token.
+	//
+	// This member is required.
 	AccessToken *string
 }
 

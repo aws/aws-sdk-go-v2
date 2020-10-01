@@ -58,6 +58,7 @@ func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInp
 }
 
 type ModifyDBClusterInput struct {
+
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
 	//
@@ -72,38 +73,49 @@ type ModifyDBClusterInput struct {
 	//
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string
+
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled.
 	DeletionProtection *bool
+
 	// The DB cluster identifier for the cluster being modified. This parameter is not
 	// case-sensitive. Constraints:
 	//
 	//     * Must match the identifier of an existing
 	// DBCluster.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// (Not supported by Neptune)
 	OptionGroupName *string
+
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
 	// Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun. Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
 	// The port number on which the DB cluster accepts connections. Constraints: Value
 	// must be 1150-65535 Default: The same port as the original DB cluster.
 	Port *int32
+
 	// The version number of the database engine. Currently, setting this parameter has
 	// no effect. To upgrade your database engine to the most recent release, use the
 	// ApplyPendingMaintenanceAction () API.  <p>For a list of valid engine versions,
 	// see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>
 	EngineVersion *string
+
 	// The new password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints: Must contain
 	// from 8 to 41 characters.
 	MasterUserPassword *string
+
 	// A list of VPC security groups that the DB cluster will belong to.
 	VpcSecurityGroupIds []*string
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -119,16 +131,20 @@ type ModifyDBClusterInput struct {
 	//
 	//     * Must be at least 30 minutes.
 	PreferredBackupWindow *string
+
 	// The name of the DB cluster parameter group to use for the DB cluster.
 	DBClusterParameterGroupName *string
+
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
 	//
 	//     * Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
 	// database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
+
 	// A value that specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is set
@@ -140,12 +156,14 @@ type ModifyDBClusterInput struct {
 	// applied immediately, regardless of the value of the ApplyImmediately parameter.
 	// Default: false
 	ApplyImmediately *bool
+
 	// The configuration setting for the log types to be enabled for export to
 	// CloudWatch Logs for a specific DB cluster.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 }
 
 type ModifyDBClusterOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
 	// a response element in the DescribeDBClusters () action.
 	DBCluster *types.DBCluster

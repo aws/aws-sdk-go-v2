@@ -57,21 +57,30 @@ func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, 
 
 // Configuration parameters used to update the Channel.
 type UpdateChannelInput struct {
+
 	// The ID of the Channel to update.
+	//
+	// This member is required.
 	Id *string
+
 	// A short text description of the Channel.
 	Description *string
 }
 
 type UpdateChannelOutput struct {
+
 	// The ID of the Channel.
 	Id *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// A short text description of the Channel.
 	Description *string
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
+
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
 

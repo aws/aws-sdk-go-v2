@@ -56,11 +56,15 @@ func (c *Client) GetGateway(ctx context.Context, params *GetGatewayInput, optFns
 }
 
 type GetGatewayInput struct {
+
 	// The ARN of the gateway to get.
+	//
+	// This member is required.
 	GatewayArn *string
 }
 
 type GetGatewayOutput struct {
+
 	// The details of the gateway.
 	Gateway *types.Gateway
 

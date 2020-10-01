@@ -70,16 +70,22 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context,
 }
 
 type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
+
 	// The IDs of the Trusted Advisor checks to get the status of. If you specify the
 	// check ID of a check that is automatically refreshed, you might see an
 	// InvalidParameterValue error.
+	//
+	// This member is required.
 	CheckIds []*string
 }
 
 // The statuses of the Trusted Advisor checks returned by the
 // DescribeTrustedAdvisorCheckRefreshStatuses () operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
+
 	// The refresh status of the specified Trusted Advisor checks.
+	//
+	// This member is required.
 	Statuses []*types.TrustedAdvisorCheckRefreshStatus
 
 	// Metadata pertaining to the operation's result.

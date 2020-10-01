@@ -55,11 +55,13 @@ func (c *Client) GetCompatibleKafkaVersions(ctx context.Context, params *GetComp
 }
 
 type GetCompatibleKafkaVersionsInput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster check.
 	ClusterArn *string
 }
 
 type GetCompatibleKafkaVersionsOutput struct {
+
 	// A list of CompatibleKafkaVersion objects.
 	CompatibleKafkaVersions []*types.CompatibleKafkaVersion
 

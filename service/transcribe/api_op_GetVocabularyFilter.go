@@ -57,17 +57,24 @@ func (c *Client) GetVocabularyFilter(ctx context.Context, params *GetVocabularyF
 }
 
 type GetVocabularyFilterInput struct {
+
 	// The name of the vocabulary filter for which to return information.
+	//
+	// This member is required.
 	VocabularyFilterName *string
 }
 
 type GetVocabularyFilterOutput struct {
+
 	// The language code of the words in the vocabulary filter.
 	LanguageCode types.LanguageCode
+
 	// The name of the vocabulary filter.
 	VocabularyFilterName *string
+
 	// The date and time that the contents of the vocabulary filter were updated.
 	LastModifiedTime *time.Time
+
 	// The URI of the list of words in the vocabulary filter. You can use this URI to
 	// get the list of words.
 	DownloadUri *string

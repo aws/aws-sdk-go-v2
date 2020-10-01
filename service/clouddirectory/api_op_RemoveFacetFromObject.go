@@ -56,11 +56,20 @@ func (c *Client) RemoveFacetFromObject(ctx context.Context, params *RemoveFacetF
 }
 
 type RemoveFacetFromObjectInput struct {
+
 	// A reference to the object to remove the facet from.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The ARN of the directory in which the object resides.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// The facet to remove. See SchemaFacet () for details.
+	//
+	// This member is required.
 	SchemaFacet *types.SchemaFacet
 }
 

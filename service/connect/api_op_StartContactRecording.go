@@ -65,14 +65,26 @@ func (c *Client) StartContactRecording(ctx context.Context, params *StartContact
 }
 
 type StartContactRecordingInput struct {
+
 	// The identifier of the contact.
+	//
+	// This member is required.
 	ContactId *string
+
 	// The identifier of the contact. This is the identifier of the contact associated
 	// with the first interaction with the contact center.
+	//
+	// This member is required.
 	InitialContactId *string
+
 	// Who is being recorded.
+	//
+	// This member is required.
 	VoiceRecordingConfiguration *types.VoiceRecordingConfiguration
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

@@ -69,12 +69,21 @@ func (c *Client) SetLoadBalancerPoliciesForBackendServer(ctx context.Context, pa
 
 // Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
 type SetLoadBalancerPoliciesForBackendServerInput struct {
+
 	// The port number associated with the EC2 instance.
+	//
+	// This member is required.
 	InstancePort *int32
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The names of the policies. If the list is empty, then all current polices are
 	// removed from the EC2 instance.
+	//
+	// This member is required.
 	PolicyNames []*string
 }
 

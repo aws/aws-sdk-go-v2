@@ -55,7 +55,10 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 }
 
 type DeleteConfigurationSetInput struct {
+
 	// ConfigurationSetName
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 

@@ -60,13 +60,18 @@ func (c *Client) CreateStreamKey(ctx context.Context, params *CreateStreamKeyInp
 }
 
 type CreateStreamKeyInput struct {
+
 	// ARN of the channel for which to create the stream key.
+	//
+	// This member is required.
 	ChannelArn *string
+
 	// See Channel$tags ().
 	Tags map[string]*string
 }
 
 type CreateStreamKeyOutput struct {
+
 	// Stream key used to authenticate an RTMPS stream for ingestion.
 	StreamKey *types.StreamKey
 

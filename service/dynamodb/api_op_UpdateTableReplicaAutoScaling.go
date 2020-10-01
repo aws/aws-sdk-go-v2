@@ -61,20 +61,27 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 }
 
 type UpdateTableReplicaAutoScalingInput struct {
+
 	// Represents the auto scaling settings of replicas of the table that will be
 	// modified.
 	ReplicaUpdates []*types.ReplicaAutoScalingUpdate
+
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ProvisionedWriteCapacityAutoScalingUpdate *types.AutoScalingSettingsUpdate
+
 	// The name of the global table to be updated.
+	//
+	// This member is required.
 	TableName *string
+
 	// Represents the auto scaling settings of the global secondary indexes of the
 	// replica to be updated.
 	GlobalSecondaryIndexUpdates []*types.GlobalSecondaryIndexAutoScalingUpdate
 }
 
 type UpdateTableReplicaAutoScalingOutput struct {
+
 	// Returns information about the auto scaling settings of a table with replicas.
 	TableAutoScalingDescription *types.TableAutoScalingDescription
 

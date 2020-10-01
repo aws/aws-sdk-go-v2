@@ -58,20 +58,29 @@ func (c *Client) GetStages(ctx context.Context, params *GetStagesInput, optFns .
 
 // Requests API Gateway to get information about one or more Stage () resources.
 type GetStagesInput struct {
+
 	// The stages' deployment identifiers.
-	DeploymentId     *string
+	DeploymentId *string
+
 	TemplateSkipList []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Template  *bool
-	Title     *string
-	Name      *string
+
+	Template *bool
+
+	Title *string
+
+	Name *string
 }
 
 // A list of Stage () resources that are associated with the ApiKey () resource.
 // Deploying API in Stages
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html)
 type GetStagesOutput struct {
+
 	// The current page of elements from this collection.
 	Item []*types.Stage
 

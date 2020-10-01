@@ -57,29 +57,42 @@ func (c *Client) DescribeRobot(ctx context.Context, params *DescribeRobotInput, 
 }
 
 type DescribeRobotInput struct {
+
 	// The Amazon Resource Name (ARN) of the robot to be described.
+	//
+	// This member is required.
 	Robot *string
 }
 
 type DescribeRobotOutput struct {
+
 	// The time, in milliseconds since the epoch, when the robot was created.
 	CreatedAt *time.Time
+
 	// The status of the fleet.
 	Status types.RobotStatus
+
 	// The list of all tags added to the specified robot.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the last deployment job.
 	LastDeploymentJob *string
+
 	// The time of the last deployment job.
 	LastDeploymentTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	FleetArn *string
+
 	// The name of the robot.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the robot.
 	Arn *string
+
 	// The target architecture of the robot application.
 	Architecture types.Architecture
+
 	// The Greengrass group id.
 	GreengrassGroupId *string
 

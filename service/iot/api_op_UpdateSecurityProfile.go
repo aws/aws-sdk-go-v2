@@ -57,33 +57,45 @@ func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecuri
 }
 
 type UpdateSecurityProfileInput struct {
+
 	// If true, delete all behaviors defined for this security profile. If any
 	// behaviors are defined in the current invocation, an exception occurs.
 	DeleteBehaviors *bool
+
 	// A description of the security profile.
 	SecurityProfileDescription *string
+
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
 	// different from the actual version, a VersionConflictException is thrown.
 	ExpectedVersion *int64
+
 	// The name of the security profile you want to update.
+	//
+	// This member is required.
 	SecurityProfileName *string
+
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here. Note: This API field is deprecated. Please use
 	// UpdateSecurityProfileRequest$additionalMetricsToRetainV2 () instead.
 	AdditionalMetricsToRetain []*string
+
 	// If true, delete all additionalMetricsToRetain defined for this security profile.
 	// If any additionalMetricsToRetain are defined in the current invocation, an
 	// exception occurs.
 	DeleteAdditionalMetricsToRetain *bool
+
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []*types.Behavior
+
 	// If true, delete all alertTargets defined for this security profile. If any
 	// alertTargets are defined in the current invocation, an exception occurs.
 	DeleteAlertTargets *bool
+
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]*types.AlertTarget
+
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
@@ -91,29 +103,39 @@ type UpdateSecurityProfileInput struct {
 }
 
 type UpdateSecurityProfileOutput struct {
+
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the security profile's behaviors, but it is also retained
 	// for any metric specified here. Note: This API field is deprecated. Please use
 	// UpdateSecurityProfileResponse$additionalMetricsToRetainV2 () instead.
 	AdditionalMetricsToRetain []*string
+
 	// The time the security profile was created.
 	CreationDate *time.Time
+
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
 	AdditionalMetricsToRetainV2 []*types.MetricToRetain
+
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []*types.Behavior
+
 	// The name of the security profile that was updated.
 	SecurityProfileName *string
+
 	// The description of the security profile.
 	SecurityProfileDescription *string
+
 	// The ARN of the security profile that was updated.
 	SecurityProfileArn *string
+
 	// The time the security profile was last modified.
 	LastModifiedDate *time.Time
+
 	// The updated version of the security profile.
 	Version *int64
+
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]*types.AlertTarget
 

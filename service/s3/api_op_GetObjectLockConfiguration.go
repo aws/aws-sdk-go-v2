@@ -62,11 +62,15 @@ func (c *Client) GetObjectLockConfiguration(ctx context.Context, params *GetObje
 }
 
 type GetObjectLockConfigurationInput struct {
+
 	// The bucket whose Object Lock configuration you want to retrieve.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetObjectLockConfigurationOutput struct {
+
 	// The specified bucket's Object Lock configuration.
 	ObjectLockConfiguration *types.ObjectLockConfiguration
 

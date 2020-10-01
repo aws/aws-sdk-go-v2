@@ -60,18 +60,28 @@ func (c *Client) SynthesizeSpeech(ctx context.Context, params *SynthesizeSpeechI
 }
 
 type SynthesizeSpeechInput struct {
+
 	// The format in which the returned output will be encoded. For audio stream, this
 	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. When pcm
 	// is used, the content returned is audio/pcm in a signed 16-bit, 1 channel (mono),
 	// little-endian format.
+	//
+	// This member is required.
 	OutputFormat types.OutputFormat
+
 	// Input text to synthesize. If you specify ssml as the TextType, follow the SSML
 	// format for the input text.
+	//
+	// This member is required.
 	Text *string
+
 	// Voice ID to use for the synthesis. You can get a list of available voice IDs by
 	// calling the DescribeVoices
 	// (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html) operation.
+	//
+	// This member is required.
 	VoiceId types.VoiceId
+
 	// Optional language code for the Synthesize Speech request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
 	// English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language
@@ -82,23 +92,28 @@ type SynthesizeSpeechInput struct {
 	// for the LanguageCode parameter. For example, if no language code is specified,
 	// Aditi will use Indian English rather than Hindi.
 	LanguageCode types.LanguageCode
+
 	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
 	// "8000", "16000", "22050", and "24000". The default value for standard voices is
 	// "22050". The default value for neural voices is "24000". Valid values for pcm
 	// are "8000" and "16000" The default value is "16000".
 	SampleRate *string
+
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon is
 	// the same as the language of the voice. For information about storing lexicons,
 	// see PutLexicon
 	// (https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html).
 	LexiconNames []*string
+
 	// The type of speech marks returned for the input text.
 	SpeechMarkTypes []types.SpeechMarkType
+
 	// Specifies whether the input text is plain text or SSML. The default value is
 	// plain text. For more information, see Using SSML
 	// (https://docs.aws.amazon.com/polly/latest/dg/ssml.html).
 	TextType types.TextType
+
 	// Specifies the engine (standard or neural) for Amazon Polly to use when
 	// processing input text for speech synthesis. Using a voice that is not supported
 	// for the engine selected will result in an error.
@@ -106,8 +121,10 @@ type SynthesizeSpeechInput struct {
 }
 
 type SynthesizeSpeechOutput struct {
+
 	// Stream containing the synthesized speech.
 	AudioStream io.ReadCloser
+
 	// Specifies the type audio stream. This should reflect the OutputFormat parameter
 	// in your request.
 	//
@@ -126,6 +143,7 @@ type SynthesizeSpeechOutput struct {
 	//
 	//     </p>
 	ContentType *string
+
 	// Number of characters synthesized.
 	RequestCharacters *int32
 

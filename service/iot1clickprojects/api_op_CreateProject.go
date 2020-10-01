@@ -57,15 +57,21 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 }
 
 type CreateProjectInput struct {
+
 	// The name of the project to create.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// An optional description for the project.
 	Description *string
+
 	// The schema defining the placement to be created. A placement template defines
 	// placement default attributes and device templates. You cannot add or remove
 	// device templates after the project has been created. However, you can update
 	// callbackOverrides for the device templates using the UpdateProject API.
 	PlacementTemplate *types.PlacementTemplate
+
 	// Optional tags (metadata key/value pairs) to be associated with the project. For
 	// example, { {"key1": "value1", "key2": "value2"} }. For more information, see AWS
 	// Tagging Strategies

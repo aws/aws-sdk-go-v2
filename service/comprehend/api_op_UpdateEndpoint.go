@@ -55,11 +55,17 @@ func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput
 }
 
 type UpdateEndpointInput struct {
+
 	// The Amazon Resource Number (ARN) of the endpoint being updated.
+	//
+	// This member is required.
 	EndpointArn *string
+
 	// The desired number of inference units to be used by the model using this
 	// endpoint. Each inference unit represents of a throughput of 100 characters per
 	// second.
+	//
+	// This member is required.
 	DesiredInferenceUnits *int32
 }
 

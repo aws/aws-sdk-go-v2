@@ -79,73 +79,101 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 
 // Provides options for retrieving a job description.
 type DescribeJobInput struct {
+
 	// The ID of the job to describe.
+	//
+	// This member is required.
 	JobId *string
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
 }
 
 // Contains the description of an Amazon S3 Glacier job.
 type DescribeJobOutput struct {
+
 	// An opaque string that identifies an Amazon S3 Glacier job.
 	JobId *string
+
 	// The status code can be InProgress, Succeeded, or Failed, and indicates the
 	// status of the job.
 	StatusCode types.StatusCode
+
 	// Contains the job output location.
 	JobOutputPath *string
+
 	// The job description provided when initiating the job.
 	JobDescription *string
+
 	// The SHA256 tree hash of the entire archive for an archive retrieval. For
 	// inventory retrieval or select jobs, this field is null.
 	ArchiveSHA256TreeHash *string
+
 	// The retrieved byte range for archive retrieval jobs in the form
 	// StartByteValue-EndByteValue. If no range was specified in the archive retrieval,
 	// then the whole archive is retrieved. In this case, StartByteValue equals 0 and
 	// EndByteValue equals the size of the archive minus 1. For inventory retrieval or
 	// select jobs, this field is null.
 	RetrievalByteRange *string
+
 	// The archive ID requested for a select job or archive retrieval. Otherwise, this
 	// field is null.
 	ArchiveId *string
+
 	// The job status. When a job is completed, you get the job's output using Get Job
 	// Output (GET output).
 	Completed *bool
+
 	// For an archive retrieval job, this value is the size in bytes of the archive
 	// being requested for download. For an inventory retrieval or select job, this
 	// value is null.
 	ArchiveSizeInBytes *int64
+
 	// Contains the parameters used for a select.
 	SelectParameters *types.SelectParameters
+
 	// The UTC time that the job request completed. While the job is in progress, the
 	// value is null.
 	CompletionDate *string
+
 	// The UTC date when the job was created. This value is a string representation of
 	// ISO 8601 date format, for example "2012-03-20T17:03:43.221Z".
 	CreationDate *string
+
 	// A friendly message that describes the job status.
 	StatusMessage *string
+
 	// The Amazon Resource Name (ARN) of the vault from which an archive retrieval was
 	// requested.
 	VaultARN *string
+
 	// The job type. This value is either ArchiveRetrieval, InventoryRetrieval, or
 	// Select.
 	Action types.ActionCode
+
 	// The tier to use for a select or an archive retrieval. Valid values are
 	// Expedited, Standard, or Bulk. Standard is the default.
 	Tier *string
+
 	// For an inventory retrieval job, this value is the size in bytes of the inventory
 	// requested for download. For an archive retrieval or select job, this value is
 	// null.
 	InventorySizeInBytes *int64
+
 	// Parameters used for range inventory retrieval.
 	InventoryRetrievalParameters *types.InventoryRetrievalJobDescription
+
 	// For an archive retrieval job, this value is the checksum of the archive.
 	// Otherwise, this value is null. The SHA256 tree hash value for the requested
 	// range of an archive. If the InitiateJob request for an archive specified a
@@ -164,8 +192,10 @@ type DescribeJobOutput struct {
 	//
 	//     * Select jobs
 	SHA256TreeHash *string
+
 	// Contains the location where the data from the select job is stored.
 	OutputLocation *types.OutputLocation
+
 	// An Amazon SNS topic that receives notification.
 	SNSTopic *string
 

@@ -56,6 +56,7 @@ func (c *Client) ExecutePolicy(ctx context.Context, params *ExecutePolicyInput, 
 }
 
 type ExecutePolicyInput struct {
+
 	// The metric value to compare to BreachThreshold. This enables you to execute a
 	// policy of type StepScaling and determine which step adjustment to use. For
 	// example, if the breach threshold is 50 and you want to use a step adjustment
@@ -64,16 +65,22 @@ type ExecutePolicyInput struct {
 	// adjustment for the policy, the call returns an error. Required if the policy
 	// type is StepScaling and not supported otherwise.
 	MetricValue *float64
+
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before executing the policy. Valid only if the policy type is
 	// SimpleScaling. For more information, see Scaling Cooldowns for Amazon EC2 Auto
 	// Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in
 	// the Amazon EC2 Auto Scaling User Guide.
 	HonorCooldown *bool
+
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
+
 	// The name or ARN of the policy.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The breach threshold for the alarm. Required if the policy type is StepScaling
 	// and not supported otherwise.
 	BreachThreshold *float64

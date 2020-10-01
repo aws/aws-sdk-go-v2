@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified layer upload does not contain any layer parts.
@@ -24,12 +23,6 @@ func (e *EmptyUploadException) ErrorMessage() string {
 }
 func (e *EmptyUploadException) ErrorCode() string             { return "EmptyUploadException" }
 func (e *EmptyUploadException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EmptyUploadException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EmptyUploadException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified image has already been pushed, and there were no changes to the
 // manifest or image tag after the last push.
@@ -48,12 +41,6 @@ func (e *ImageAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ImageAlreadyExistsException) ErrorCode() string             { return "ImageAlreadyExistsException" }
 func (e *ImageAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ImageAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ImageAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified image digest does not match the digest that Amazon ECR calculated
 // for the image.
@@ -74,12 +61,6 @@ func (e *ImageDigestDoesNotMatchException) ErrorCode() string {
 	return "ImageDigestDoesNotMatchException"
 }
 func (e *ImageDigestDoesNotMatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ImageDigestDoesNotMatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ImageDigestDoesNotMatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The image requested does not exist in the specified repository.
 type ImageNotFoundException struct {
@@ -97,12 +78,6 @@ func (e *ImageNotFoundException) ErrorMessage() string {
 }
 func (e *ImageNotFoundException) ErrorCode() string             { return "ImageNotFoundException" }
 func (e *ImageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ImageNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ImageNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified image is tagged with a tag that already exists. The repository is
 // configured for tag immutability.
@@ -121,12 +96,6 @@ func (e *ImageTagAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ImageTagAlreadyExistsException) ErrorCode() string             { return "ImageTagAlreadyExistsException" }
 func (e *ImageTagAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ImageTagAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ImageTagAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The layer digest calculation performed by Amazon ECR upon receipt of the image
 // layer does not match the digest specified.
@@ -145,12 +114,6 @@ func (e *InvalidLayerException) ErrorMessage() string {
 }
 func (e *InvalidLayerException) ErrorCode() string             { return "InvalidLayerException" }
 func (e *InvalidLayerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLayerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLayerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The layer part size is not valid, or the first byte specified is not consecutive
 // to the last byte of a previous layer part upload.
@@ -174,36 +137,6 @@ func (e *InvalidLayerPartException) ErrorMessage() string {
 }
 func (e *InvalidLayerPartException) ErrorCode() string             { return "InvalidLayerPartException" }
 func (e *InvalidLayerPartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLayerPartException) GetUploadId() string {
-	return ptr.ToString(e.UploadId)
-}
-func (e *InvalidLayerPartException) HasUploadId() bool {
-	return e.UploadId != nil
-}
-func (e *InvalidLayerPartException) GetRegistryId() string {
-	return ptr.ToString(e.RegistryId)
-}
-func (e *InvalidLayerPartException) HasRegistryId() bool {
-	return e.RegistryId != nil
-}
-func (e *InvalidLayerPartException) GetLastValidByteReceived() int64 {
-	return ptr.ToInt64(e.LastValidByteReceived)
-}
-func (e *InvalidLayerPartException) HasLastValidByteReceived() bool {
-	return e.LastValidByteReceived != nil
-}
-func (e *InvalidLayerPartException) GetRepositoryName() string {
-	return ptr.ToString(e.RepositoryName)
-}
-func (e *InvalidLayerPartException) HasRepositoryName() bool {
-	return e.RepositoryName != nil
-}
-func (e *InvalidLayerPartException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLayerPartException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified parameter is invalid. Review the available parameters for the API
 // request.
@@ -222,12 +155,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid parameter has been specified. Tag keys can have a maximum character
 // length of 128 characters, and tag values can have a maximum length of 256
@@ -247,12 +174,6 @@ func (e *InvalidTagParameterException) ErrorMessage() string {
 }
 func (e *InvalidTagParameterException) ErrorCode() string             { return "InvalidTagParameterException" }
 func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation failed due to a KMS exception.
 type KmsException struct {
@@ -272,18 +193,6 @@ func (e *KmsException) ErrorMessage() string {
 }
 func (e *KmsException) ErrorCode() string             { return "KmsException" }
 func (e *KmsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KmsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KmsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *KmsException) GetKmsError() string {
-	return ptr.ToString(e.KmsError)
-}
-func (e *KmsException) HasKmsError() bool {
-	return e.KmsError != nil
-}
 
 // The image layer already exists in the associated repository.
 type LayerAlreadyExistsException struct {
@@ -301,12 +210,6 @@ func (e *LayerAlreadyExistsException) ErrorMessage() string {
 }
 func (e *LayerAlreadyExistsException) ErrorCode() string             { return "LayerAlreadyExistsException" }
 func (e *LayerAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LayerAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LayerAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified layer is not available because it is not associated with an image.
 // Unassociated image layers may be cleaned up at any time.
@@ -325,12 +228,6 @@ func (e *LayerInaccessibleException) ErrorMessage() string {
 }
 func (e *LayerInaccessibleException) ErrorCode() string             { return "LayerInaccessibleException" }
 func (e *LayerInaccessibleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LayerInaccessibleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LayerInaccessibleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Layer parts must be at least 5 MiB in size.
 type LayerPartTooSmallException struct {
@@ -348,12 +245,6 @@ func (e *LayerPartTooSmallException) ErrorMessage() string {
 }
 func (e *LayerPartTooSmallException) ErrorCode() string             { return "LayerPartTooSmallException" }
 func (e *LayerPartTooSmallException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LayerPartTooSmallException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LayerPartTooSmallException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified layers could not be found, or the specified layer is not valid for
 // this repository.
@@ -372,12 +263,6 @@ func (e *LayersNotFoundException) ErrorMessage() string {
 }
 func (e *LayersNotFoundException) ErrorCode() string             { return "LayersNotFoundException" }
 func (e *LayersNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LayersNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LayersNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The lifecycle policy could not be found, and no policy is set to the repository.
 type LifecyclePolicyNotFoundException struct {
@@ -397,12 +282,6 @@ func (e *LifecyclePolicyNotFoundException) ErrorCode() string {
 	return "LifecyclePolicyNotFoundException"
 }
 func (e *LifecyclePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LifecyclePolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LifecyclePolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The previous lifecycle policy preview request has not completed. Wait and try
 // again.
@@ -425,12 +304,6 @@ func (e *LifecyclePolicyPreviewInProgressException) ErrorCode() string {
 func (e *LifecyclePolicyPreviewInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *LifecyclePolicyPreviewInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LifecyclePolicyPreviewInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no dry run for this repository.
 type LifecyclePolicyPreviewNotFoundException struct {
@@ -452,12 +325,6 @@ func (e *LifecyclePolicyPreviewNotFoundException) ErrorCode() string {
 func (e *LifecyclePolicyPreviewNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *LifecyclePolicyPreviewNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LifecyclePolicyPreviewNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation did not succeed because it would have exceeded a service limit for
 // your account. For more information, see Amazon ECR Service Quotas
@@ -478,12 +345,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The manifest list is referencing an image that does not exist.
 type ReferencedImagesNotFoundException struct {
@@ -503,12 +364,6 @@ func (e *ReferencedImagesNotFoundException) ErrorCode() string {
 	return "ReferencedImagesNotFoundException"
 }
 func (e *ReferencedImagesNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReferencedImagesNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReferencedImagesNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository already exists in the specified registry.
 type RepositoryAlreadyExistsException struct {
@@ -528,12 +383,6 @@ func (e *RepositoryAlreadyExistsException) ErrorCode() string {
 	return "RepositoryAlreadyExistsException"
 }
 func (e *RepositoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository contains images. To delete a repository that contains
 // images, you must force the deletion with the force parameter.
@@ -552,12 +401,6 @@ func (e *RepositoryNotEmptyException) ErrorMessage() string {
 }
 func (e *RepositoryNotEmptyException) ErrorCode() string             { return "RepositoryNotEmptyException" }
 func (e *RepositoryNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryNotEmptyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryNotEmptyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository could not be found. Check the spelling of the specified
 // repository and ensure that you are performing operations on the correct
@@ -577,12 +420,6 @@ func (e *RepositoryNotFoundException) ErrorMessage() string {
 }
 func (e *RepositoryNotFoundException) ErrorCode() string             { return "RepositoryNotFoundException" }
 func (e *RepositoryNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository and registry combination does not have an associated
 // repository policy.
@@ -603,12 +440,6 @@ func (e *RepositoryPolicyNotFoundException) ErrorCode() string {
 	return "RepositoryPolicyNotFoundException"
 }
 func (e *RepositoryPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryPolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryPolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified image scan could not be found. Ensure that image scanning is
 // enabled on the repository and try again.
@@ -627,12 +458,6 @@ func (e *ScanNotFoundException) ErrorMessage() string {
 }
 func (e *ScanNotFoundException) ErrorCode() string             { return "ScanNotFoundException" }
 func (e *ScanNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ScanNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScanNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // These errors are usually caused by a server-side issue.
 type ServerException struct {
@@ -650,12 +475,6 @@ func (e *ServerException) ErrorMessage() string {
 }
 func (e *ServerException) ErrorCode() string             { return "ServerException" }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The list of tags on the repository is over the limit. The maximum number of tags
 // that can be applied to a repository is 50.
@@ -674,12 +493,6 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The image is of a type that cannot be scanned.
 type UnsupportedImageTypeException struct {
@@ -697,12 +510,6 @@ func (e *UnsupportedImageTypeException) ErrorMessage() string {
 }
 func (e *UnsupportedImageTypeException) ErrorCode() string             { return "UnsupportedImageTypeException" }
 func (e *UnsupportedImageTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedImageTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedImageTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The upload could not be found, or the specified upload ID is not valid for this
 // repository.
@@ -721,9 +528,3 @@ func (e *UploadNotFoundException) ErrorMessage() string {
 }
 func (e *UploadNotFoundException) ErrorCode() string             { return "UploadNotFoundException" }
 func (e *UploadNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UploadNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UploadNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

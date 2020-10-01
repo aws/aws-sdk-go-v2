@@ -57,13 +57,20 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnector(ctx context.Context,
 }
 
 type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
+
 	// List of phone numbers, in E.164 format.
+	//
+	// This member is required.
 	E164PhoneNumbers []*string
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
+
 	// If the action fails for one or more of the phone numbers in the request, a list
 	// of the phone numbers is returned, along with error codes and error messages.
 	PhoneNumberErrors []*types.PhoneNumberError

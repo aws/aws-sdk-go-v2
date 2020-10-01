@@ -57,25 +57,33 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 }
 
 type ListMembersInput struct {
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 50. The maximum value is 50.
 	MaxResults *int32
+
 	// The unique ID of the detector the member is associated with.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
 	// the action, fill nextToken in the request with the value of NextToken from the
 	// previous response to continue listing data.
 	NextToken *string
+
 	// Specifies whether to only return associated members or to return all members
 	// (including members who haven't been invited yet or have been disassociated).
 	OnlyAssociated *string
 }
 
 type ListMembersOutput struct {
+
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.
 	NextToken *string
+
 	// A list of members.
 	Members []*types.Member
 

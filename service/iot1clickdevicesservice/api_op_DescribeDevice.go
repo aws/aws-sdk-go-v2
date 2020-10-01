@@ -57,11 +57,15 @@ func (c *Client) DescribeDevice(ctx context.Context, params *DescribeDeviceInput
 }
 
 type DescribeDeviceInput struct {
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
 }
 
 type DescribeDeviceOutput struct {
+
 	// Device details.
 	DeviceDescription *types.DeviceDescription
 

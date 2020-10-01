@@ -60,22 +60,28 @@ func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEn
 
 // Request to download logs retrieved with RequestEnvironmentInfo ().
 type RetrieveEnvironmentInfoInput struct {
+
 	// The ID of the data's environment. If no such environment is found, returns an
 	// InvalidParameterValue error. Condition: You must specify either this or an
 	// EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk
 	// returns MissingRequiredParameter error.
 	EnvironmentId *string
+
 	// The name of the data's environment. If no such environment is found, returns an
 	// InvalidParameterValue error. Condition: You must specify either this or an
 	// EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk
 	// returns MissingRequiredParameter error.
 	EnvironmentName *string
+
 	// The type of information to retrieve.
+	//
+	// This member is required.
 	InfoType types.EnvironmentInfoType
 }
 
 // Result message containing a description of the requested environment info.
 type RetrieveEnvironmentInfoOutput struct {
+
 	// The EnvironmentInfoDescription () of the environment.
 	EnvironmentInfo []*types.EnvironmentInfoDescription
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // One or more parameters are not valid.
@@ -24,12 +23,6 @@ func (e *DirectConnectClientException) ErrorMessage() string {
 }
 func (e *DirectConnectClientException) ErrorCode() string             { return "DirectConnectClientException" }
 func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectConnectClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectConnectClientException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A server-side error occurred.
 type DirectConnectServerException struct {
@@ -47,12 +40,6 @@ func (e *DirectConnectServerException) ErrorMessage() string {
 }
 func (e *DirectConnectServerException) ErrorCode() string             { return "DirectConnectServerException" }
 func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectConnectServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectConnectServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
@@ -70,12 +57,6 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 }
 func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeysException" }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateTagKeysException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateTagKeysException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the limit on the number of tags that can be assigned.
 type TooManyTagsException struct {
@@ -93,9 +74,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

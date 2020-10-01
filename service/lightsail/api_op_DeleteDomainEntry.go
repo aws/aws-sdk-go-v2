@@ -59,13 +59,20 @@ func (c *Client) DeleteDomainEntry(ctx context.Context, params *DeleteDomainEntr
 }
 
 type DeleteDomainEntryInput struct {
+
 	// The name of the domain entry to delete.
+	//
+	// This member is required.
 	DomainName *string
+
 	// An array of key-value pairs containing information about your domain entries.
+	//
+	// This member is required.
 	DomainEntry *types.DomainEntry
 }
 
 type DeleteDomainEntryOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

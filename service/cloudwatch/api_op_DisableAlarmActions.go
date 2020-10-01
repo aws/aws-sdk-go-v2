@@ -56,7 +56,10 @@ func (c *Client) DisableAlarmActions(ctx context.Context, params *DisableAlarmAc
 }
 
 type DisableAlarmActionsInput struct {
+
 	// The names of the alarms.
+	//
+	// This member is required.
 	AlarmNames []*string
 }
 

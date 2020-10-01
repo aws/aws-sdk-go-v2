@@ -59,30 +59,46 @@ func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context,
 }
 
 type AddApplicationInputProcessingConfigurationInput struct {
+
 	// The version of the application to which you want to add the input processing
 	// configuration. You can use the DescribeApplication () operation to get the
 	// current application version. If the version specified is not the current
 	// version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
+
 	// The InputProcessingConfiguration () to add to the application.
+	//
+	// This member is required.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
+
 	// The ID of the input configuration to add the input processing configuration to.
 	// You can get a list of the input IDs for an application using the
 	// DescribeApplication () operation.
+	//
+	// This member is required.
 	InputId *string
+
 	// The name of the application to which you want to add the input processing
 	// configuration.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 type AddApplicationInputProcessingConfigurationOutput struct {
+
 	// The description of the preprocessor that executes on records in this input
 	// before the application's code is run.
 	InputProcessingConfigurationDescription *types.InputProcessingConfigurationDescription
+
 	// The Amazon Resource Name (ARN) of the application.
 	ApplicationARN *string
+
 	// Provides the current application version.
 	ApplicationVersionId *int64
+
 	// The input ID that is associated with the application input. This is the ID that
 	// Amazon Kinesis Data Analytics assigns to each input configuration that you add
 	// to your application.

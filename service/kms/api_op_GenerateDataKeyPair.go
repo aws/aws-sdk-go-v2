@@ -88,6 +88,7 @@ func (c *Client) GenerateDataKeyPair(ctx context.Context, params *GenerateDataKe
 }
 
 type GenerateDataKeyPairInput struct {
+
 	// Specifies the encryption context that will be used when encrypting the private
 	// key in the data key pair. An encryption context is a collection of non-secret
 	// key-value pairs that represents additional authenticated data. When you use an
@@ -98,10 +99,12 @@ type GenerateDataKeyPairInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide.
 	EncryptionContext map[string]*string
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// Specifies the symmetric CMK that encrypts the private key in the data key pair.
 	// You cannot specify an asymmetric CMK or a CMK in a custom key store. To get the
 	// type and origin of your CMK, use the DescribeKey () operation. To specify a CMK,
@@ -124,27 +127,37 @@ type GenerateDataKeyPairInput struct {
 	// To get the key ID and key
 	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
 	// alias ARN, use ListAliases ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// Determines the type of data key pair that is generated. The AWS KMS rule that
 	// restricts the use of asymmetric RSA CMKs to encrypt and decrypt or to sign and
 	// verify (but not both), and the rule that permits you to use ECC CMKs only to
 	// sign and verify, are not effective outside of AWS KMS.
+	//
+	// This member is required.
 	KeyPairSpec types.DataKeyPairSpec
 }
 
 type GenerateDataKeyPairOutput struct {
+
 	// The encrypted copy of the private key. When you use the HTTP API or the AWS CLI,
 	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	PrivateKeyCiphertextBlob []byte
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK that encrypted the private key.
 	KeyId *string
+
 	// The type of data key pair that was generated.
 	KeyPairSpec types.DataKeyPairSpec
+
 	// The plaintext copy of the private key. When you use the HTTP API or the AWS CLI,
 	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	PrivateKeyPlaintext []byte
+
 	// The public key (in plaintext).
 	PublicKey []byte
 

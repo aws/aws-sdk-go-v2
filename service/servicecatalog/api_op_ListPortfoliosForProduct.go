@@ -56,6 +56,7 @@ func (c *Client) ListPortfoliosForProduct(ctx context.Context, params *ListPortf
 }
 
 type ListPortfoliosForProductInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,18 +66,25 @@ type ListPortfoliosForProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
 }
 
 type ListPortfoliosForProductOutput struct {
+
 	// Information about the portfolios.
 	PortfolioDetails []*types.PortfolioDetail
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string

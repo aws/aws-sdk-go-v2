@@ -59,24 +59,34 @@ func (c *Client) StartTopicsDetectionJob(ctx context.Context, params *StartTopic
 }
 
 type StartTopicsDetectionJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend read access to your input data. For more
 	// information, see
 	// https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions).
+	//
+	// This member is required.
 	DataAccessRoleArn *string
+
 	// A unique identifier for the request. If you do not set the client request token,
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
+
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your topic detection job. For more
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
 	// Specifies the format and location of the input data for the job.
+	//
+	// This member is required.
 	InputDataConfig *types.InputDataConfig
+
 	// The number of topics to detect.
 	NumberOfTopics *int32
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -88,15 +98,20 @@ type StartTopicsDetectionJobInput struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// Specifies where to send the output files. The output is a compressed archive
 	// with two files, topic-terms.csv that lists the terms associated with each topic,
 	// and doc-topics.csv that lists the documents associated with each topic
+	//
+	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
+
 	// The identifier of the job.
 	JobName *string
 }
 
 type StartTopicsDetectionJobOutput struct {
+
 	// The status of the job:
 	//
 	//     * SUBMITTED - The job has been received and is
@@ -111,6 +126,7 @@ type StartTopicsDetectionJobOutput struct {
 	//     * FAILED - The job did not complete. To get details, use the
 	// DescribeTopicDetectionJob operation.
 	JobStatus types.JobStatus
+
 	// The identifier generated for the job. To get the status of the job, use this
 	// identifier with the DescribeTopicDetectionJob operation.
 	JobId *string

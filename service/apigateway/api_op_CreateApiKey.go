@@ -60,26 +60,36 @@ func (c *Client) CreateApiKey(ctx context.Context, params *CreateApiKeyInput, op
 // Request to create an ApiKey () resource.
 type CreateApiKeyInput struct {
 	TemplateSkipList []*string
-	Template         *bool
-	Title            *string
+
+	Template *bool
+
+	Title *string
+
 	// The name of the ApiKey ().
 	Name *string
+
 	// DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.
 	StageKeys []*types.StageKey
+
 	// The description of the ApiKey ().
 	Description *string
+
 	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
 	// Marketplace.
 	CustomerId *string
+
 	// Specifies whether (true) or not (false) the key identifier is distinct from the
 	// created API key value. This parameter is deprecated and should not be used.
 	GenerateDistinctId *bool
+
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
+
 	// Specifies a value of the API key.
 	Value *string
+
 	// Specifies whether the ApiKey () can be used by callers.
 	Enabled *bool
 }
@@ -90,25 +100,35 @@ type CreateApiKeyInput struct {
 // stage. Use API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type CreateApiKeyOutput struct {
+
 	// The name of the API Key.
 	Name *string
+
 	// A list of Stage () resources that are associated with the ApiKey () resource.
 	StageKeys []*string
+
 	// The timestamp when the API Key was created.
 	CreatedDate *time.Time
+
 	// The identifier of the API Key.
 	Id *string
+
 	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
 	// Marketplace.
 	CustomerId *string
+
 	// The timestamp when the API Key was last updated.
 	LastUpdatedDate *time.Time
+
 	// Specifies whether the API Key can be used by callers.
 	Enabled *bool
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The description of the API Key.
 	Description *string
+
 	// The value of the API Key.
 	Value *string
 

@@ -62,25 +62,33 @@ func (c *Client) DescribeDirectConnectGatewayAssociations(ctx context.Context, p
 }
 
 type DescribeDirectConnectGatewayAssociationsInput struct {
+
 	// The ID of the Direct Connect gateway association.
 	AssociationId *string
+
 	// The token provided in the previous call to retrieve the next page.
 	NextToken *string
+
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
+
 	// The ID of the associated gateway.
 	AssociatedGatewayId *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. If
 	// MaxResults is given a value larger than 100, only 100 results are returned.
 	MaxResults *int32
+
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
 }
 
 type DescribeDirectConnectGatewayAssociationsOutput struct {
+
 	// The token to retrieve the next page.
 	NextToken *string
+
 	// Information about the associations.
 	DirectConnectGatewayAssociations []*types.DirectConnectGatewayAssociation
 

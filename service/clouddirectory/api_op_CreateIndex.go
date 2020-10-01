@@ -58,20 +58,32 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 }
 
 type CreateIndexInput struct {
+
 	// Specifies the attributes that should be indexed on. Currently only a single
 	// attribute is supported.
+	//
+	// This member is required.
 	OrderedIndexedAttributeList []*types.AttributeKey
+
 	// A reference to the parent object that contains the index object.
 	ParentReference *types.ObjectReference
+
 	// The name of the link between the parent object and the index object.
 	LinkName *string
+
 	// The ARN of the directory where the index should be created.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// Indicates whether the attribute that is being indexed has unique values or not.
+	//
+	// This member is required.
 	IsUnique *bool
 }
 
 type CreateIndexOutput struct {
+
 	// The ObjectIdentifier of the index created by this operation.
 	ObjectIdentifier *string
 

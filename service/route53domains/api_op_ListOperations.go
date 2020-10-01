@@ -59,14 +59,17 @@ func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput
 
 // The ListOperations request includes the following elements.
 type ListOperationsInput struct {
+
 	// For an initial request for a list of operations, omit this element. If the
 	// number of operations that are not yet complete is greater than the value that
 	// you specified for MaxItems, you can use Marker to return additional operations.
 	// Get the value of NextPageMarker from the previous response, and submit another
 	// request that includes the value of NextPageMarker in the Marker element.
 	Marker *string
+
 	// Number of domains to be returned. Default: 20
 	MaxItems *int32
+
 	// An optional parameter that lets you get information about all the operations
 	// that you submitted after a specified date and time. Specify the date and time in
 	// Unix time format and Coordinated Universal time (UTC).
@@ -75,11 +78,15 @@ type ListOperationsInput struct {
 
 // The ListOperations response includes the following elements.
 type ListOperationsOutput struct {
+
 	// If there are more operations than you specified for MaxItems in the request,
 	// submit another request and include the value of NextPageMarker in the value of
 	// Marker.
 	NextPageMarker *string
+
 	// Lists summaries of the operations.
+	//
+	// This member is required.
 	Operations []*types.OperationSummary
 
 	// Metadata pertaining to the operation's result.

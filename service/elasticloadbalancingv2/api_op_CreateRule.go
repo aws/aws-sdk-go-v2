@@ -64,6 +64,7 @@ func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns
 }
 
 type CreateRuleInput struct {
+
 	// The actions. Each rule must include exactly one of the following types of
 	// actions: forward, fixed-response, or redirect, and it must be the last action to
 	// be performed. If the action type is forward, you specify one or more target
@@ -77,18 +78,30 @@ type CreateRuleInput struct {
 	// redirect specified client requests from one URL to another. [Application Load
 	// Balancer] If the action type is fixed-response, you drop specified client
 	// requests and return a custom HTTP response.
+	//
+	// This member is required.
 	Actions []*types.Action
+
 	// The conditions. Each rule can include zero or one of the following conditions:
 	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
 	// of the following conditions: http-header and query-string.
+	//
+	// This member is required.
 	Conditions []*types.RuleCondition
+
 	// The rule priority. A listener can't have multiple rules with the same priority.
+	//
+	// This member is required.
 	Priority *int32
+
 	// The Amazon Resource Name (ARN) of the listener.
+	//
+	// This member is required.
 	ListenerArn *string
 }
 
 type CreateRuleOutput struct {
+
 	// Information about the rule.
 	Rules []*types.Rule
 

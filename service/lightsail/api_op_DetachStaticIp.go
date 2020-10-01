@@ -56,11 +56,15 @@ func (c *Client) DetachStaticIp(ctx context.Context, params *DetachStaticIpInput
 }
 
 type DetachStaticIpInput struct {
+
 	// The name of the static IP to detach from the instance.
+	//
+	// This member is required.
 	StaticIpName *string
 }
 
 type DetachStaticIpOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

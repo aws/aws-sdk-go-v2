@@ -58,11 +58,15 @@ func (c *Client) DeleteDirectConnectGateway(ctx context.Context, params *DeleteD
 }
 
 type DeleteDirectConnectGatewayInput struct {
+
 	// The ID of the Direct Connect gateway.
+	//
+	// This member is required.
 	DirectConnectGatewayId *string
 }
 
 type DeleteDirectConnectGatewayOutput struct {
+
 	// The Direct Connect gateway.
 	DirectConnectGateway *types.DirectConnectGateway
 

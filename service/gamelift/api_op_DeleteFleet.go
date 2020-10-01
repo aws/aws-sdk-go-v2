@@ -79,8 +79,11 @@ func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optF
 
 // Represents the input for a request action.
 type DeleteFleetInput struct {
+
 	// A unique identifier for a fleet to be deleted. You can use either the fleet ID
 	// or ARN value.
+	//
+	// This member is required.
 	FleetId *string
 }
 

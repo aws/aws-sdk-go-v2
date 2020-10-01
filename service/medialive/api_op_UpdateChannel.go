@@ -57,28 +57,39 @@ func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, 
 
 // A request to update a channel.
 type UpdateChannelInput struct {
+
 	// channel ID
+	//
+	// This member is required.
 	ChannelId *string
+
 	// A list of output destinations for this channel.
 	Destinations []*types.OutputDestination
+
 	// The name of the channel.
 	Name *string
+
 	// An optional Amazon Resource Name (ARN) of the role to assume when running the
 	// Channel. If you do not specify this on an update call but the role was
 	// previously set that role will be removed.
 	RoleArn *string
+
 	// Placeholder documentation for __listOfInputAttachment
 	InputAttachments []*types.InputAttachment
+
 	// The log level to write to CloudWatch Logs.
 	LogLevel types.LogLevel
+
 	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
 	InputSpecification *types.InputSpecification
+
 	// The encoder settings for this channel.
 	EncoderSettings *types.EncoderSettings
 }
 
 // Placeholder documentation for UpdateChannelResponse
 type UpdateChannelOutput struct {
+
 	// Placeholder documentation for Channel
 	Channel *types.Channel
 

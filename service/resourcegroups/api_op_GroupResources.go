@@ -56,16 +56,24 @@ func (c *Client) GroupResources(ctx context.Context, params *GroupResourcesInput
 }
 
 type GroupResourcesInput struct {
+
 	// The name or the ARN of the resource group to add resources to.
+	//
+	// This member is required.
 	Group *string
+
 	// The list of ARNs for resources to be added to the group.
+	//
+	// This member is required.
 	ResourceArns []*string
 }
 
 type GroupResourcesOutput struct {
+
 	// The ARNs of the resources that were successfully added to the group by this
 	// operation.
 	Succeeded []*string
+
 	// The ARNs of the resources that failed to be added to the group by this
 	// operation.
 	Failed []*types.FailedResource

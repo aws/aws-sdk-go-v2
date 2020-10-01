@@ -55,11 +55,20 @@ func (c *Client) DeleteHostedConfigurationVersion(ctx context.Context, params *D
 }
 
 type DeleteHostedConfigurationVersionInput struct {
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The versions number to delete.
+	//
+	// This member is required.
 	VersionNumber *int32
+
 	// The configuration profile ID.
+	//
+	// This member is required.
 	ConfigurationProfileId *string
 }
 

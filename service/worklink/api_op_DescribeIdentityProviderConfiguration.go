@@ -56,15 +56,21 @@ func (c *Client) DescribeIdentityProviderConfiguration(ctx context.Context, para
 }
 
 type DescribeIdentityProviderConfigurationInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 
 type DescribeIdentityProviderConfigurationOutput struct {
+
 	// The SAML metadata document uploaded to the user’s identity provider.
 	ServiceProviderSamlMetadata *string
+
 	// The type of identity provider.
 	IdentityProviderType types.IdentityProviderType
+
 	// The SAML metadata document provided by the user’s identity provider.
 	IdentityProviderSamlMetadata *string
 

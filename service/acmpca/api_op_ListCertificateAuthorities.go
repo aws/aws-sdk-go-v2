@@ -56,11 +56,13 @@ func (c *Client) ListCertificateAuthorities(ctx context.Context, params *ListCer
 }
 
 type ListCertificateAuthoritiesInput struct {
+
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
 	// the number you specify, the NextToken element is sent in the response. Use this
 	// NextToken value in a subsequent request to retrieve additional items.
 	MaxResults *int32
+
 	// Use this parameter when paginating results in a subsequent request after you
 	// receive a response with truncated results. Set it to the value of the NextToken
 	// parameter from the response you just received.
@@ -68,9 +70,11 @@ type ListCertificateAuthoritiesInput struct {
 }
 
 type ListCertificateAuthoritiesOutput struct {
+
 	// When the list is truncated, this value is present and should be used for the
 	// NextToken parameter in a subsequent pagination request.
 	NextToken *string
+
 	// Summary information about each certificate authority you have created.
 	CertificateAuthorities []*types.CertificateAuthority
 

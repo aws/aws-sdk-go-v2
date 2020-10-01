@@ -55,20 +55,26 @@ func (c *Client) ListInfrastructureConfigurations(ctx context.Context, params *L
 }
 
 type ListInfrastructureConfigurationsInput struct {
+
 	// The maximum items to return in a request.
 	MaxResults *int32
+
 	// The filters.
 	Filters []*types.Filter
+
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
 }
 
 type ListInfrastructureConfigurationsOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The list of infrastructure configurations.
 	InfrastructureConfigurationSummaryList []*types.InfrastructureConfigurationSummary
+
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.

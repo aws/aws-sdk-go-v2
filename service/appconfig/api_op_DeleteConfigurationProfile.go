@@ -56,9 +56,15 @@ func (c *Client) DeleteConfigurationProfile(ctx context.Context, params *DeleteC
 }
 
 type DeleteConfigurationProfileInput struct {
+
 	// The application ID that includes the configuration profile you want to delete.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The ID of the configuration profile you want to delete.
+	//
+	// This member is required.
 	ConfigurationProfileId *string
 }
 

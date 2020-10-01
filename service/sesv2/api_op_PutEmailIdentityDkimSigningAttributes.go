@@ -73,6 +73,7 @@ func (c *Client) PutEmailIdentityDkimSigningAttributes(ctx context.Context, para
 
 // A request to change the DKIM attributes for an email identity.
 type PutEmailIdentityDkimSigningAttributesInput struct {
+
 	// The method that you want to use to configure DKIM for the identity. There are
 	// two possible values:
 	//
@@ -83,18 +84,25 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 	//     *
 	// EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM
 	// (BYODKIM).
+	//
+	// This member is required.
 	SigningAttributesOrigin types.DkimSigningAttributesOrigin
+
 	// An object that contains information about the private key and selector that you
 	// want to use to configure DKIM for the identity. This object is only required if
 	// you want to configure Bring Your Own DKIM (BYODKIM) for the identity.
 	SigningAttributes *types.DkimSigningAttributes
+
 	// The email identity that you want to configure DKIM for.
+	//
+	// This member is required.
 	EmailIdentity *string
 }
 
 // If the action is successful, the service sends back an HTTP 200 response. The
 // following data is returned in JSON format by the service.
 type PutEmailIdentityDkimSigningAttributesOutput struct {
+
 	// If you used Easy DKIM
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to
 	// configure DKIM authentication for the domain, then this object contains a set of
@@ -107,6 +115,7 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 	// you use, Amazon SES searches for the appropriate records in the DNS
 	// configuration of the domain for up to 72 hours.
 	DkimTokens []*string
+
 	// The DKIM authentication status of the identity. Amazon SES determines the
 	// authentication status by searching for specific records in the DNS configuration
 	// for your domain. If you used Easy DKIM

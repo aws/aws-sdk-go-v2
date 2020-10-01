@@ -58,37 +58,50 @@ func (c *Client) DescribeUsers(ctx context.Context, params *DescribeUsersInput, 
 }
 
 type DescribeUsersInput struct {
+
 	// A comma-separated list of values. Specify "STORAGE_METADATA" to include the user
 	// storage quota and utilization information.
 	Fields *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The order for the results.
 	Order types.OrderType
+
 	// The maximum number of items to return.
 	Limit *int32
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// The state of the users. Specify "ALL" to include inactive users.
 	Include types.UserFilterType
+
 	// The sorting criteria.
 	Sort types.UserSortType
+
 	// The IDs of the users.
 	UserIds *string
+
 	// A query to filter users by user name.
 	Query *string
+
 	// The ID of the organization.
 	OrganizationId *string
 }
 
 type DescribeUsersOutput struct {
+
 	// The total number of users included in the results.
 	TotalNumberOfUsers *int64
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
+
 	// The users.
 	Users []*types.User
 

@@ -68,23 +68,33 @@ func (c *Client) CreateSMBFileShare(ctx context.Context, params *CreateSMBFileSh
 
 // CreateSMBFileShareInput
 type CreateSMBFileShareInput struct {
+
 	// The ARN of the file gateway on which you want to create a file share.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	KMSEncrypted *bool
+
 	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag is
 	// a key-value pair.  <note> <p>Valid characters for key and value are letters,
 	// spaces, and numbers representable in UTF-8 format, and the following special
 	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256.</p> </note>
 	Tags []*types.Tag
+
 	// Refresh cache information.
 	CacheAttributes *types.CacheAttributes
+
 	// The ARN of the AWS Identity and Access Management (IAM) role that a file gateway
 	// assumes when it accesses the underlying storage.
+	//
+	// This member is required.
 	Role *string
+
 	// Set this value to true to enable access control list (ACL) on the SMB file
 	// share. Set it to false to map file and directory permissions to the POSIX
 	// permissions.  <p>For more information, see <a
@@ -93,6 +103,7 @@ type CreateSMBFileShareInput struct {
 	// Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	SMBACLEnabled *bool
+
 	// A list of users or groups in the Active Directory that will be granted
 	// administrator privileges on the file share. These users can do all file
 	// operations as the super-user. Acceptable formats include: DOMAIN\User1, user1,
@@ -100,48 +111,64 @@ type CreateSMBFileShareInput struct {
 	// because any user in this list can do anything they like on the file share,
 	// regardless of file permissions.</p> </important>
 	AdminUserList []*string
+
 	// The ARN of the backend storage used for storing file data. A prefix name can be
 	// added to the S3 bucket name. It must end with a "/".
+	//
+	// This member is required.
 	LocationARN *string
+
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
+
 	// A list of users or groups in the Active Directory that are allowed to access the
 	// file  () share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
 	ValidUserList []*string
+
 	// The case of an object name in an Amazon S3 bucket. For ClientSpecified, the
 	// client determines the case sensitivity. For CaseSensitive, the gateway
 	// determines the case sensitivity. The default value is ClientSpecified.
 	CaseSensitivity types.CaseSensitivity
+
 	// A value that sets the write status of a file share. Set this value to true to
 	// set the write status to read-only, otherwise set to false.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	ReadOnly *bool
+
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
+
 	// The authentication method that users use to access the file share. The default
 	// is ActiveDirectory.  <p>Valid Values: <code>ActiveDirectory</code> |
 	// <code>GuestAccess</code> </p>
 	Authentication *string
+
 	// A unique string value that you supply that is used by file gateway to ensure
 	// idempotent file share creation.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
 	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	GuessMIMETypeEnabled *bool
+
 	// A list of users or groups in the Active Directory that are not allowed to access
 	// the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
 	InvalidUserList []*string
+
 	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
 	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
 	FileShareName *string
+
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
@@ -151,9 +178,11 @@ type CreateSMBFileShareInput struct {
 	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	RequesterPays *bool
+
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL
+
 	// The default storage class for objects put into an Amazon S3 bucket by the file
 	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
 	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
@@ -163,6 +192,7 @@ type CreateSMBFileShareInput struct {
 
 // CreateSMBFileShareOutput
 type CreateSMBFileShareOutput struct {
+
 	// The Amazon Resource Name (ARN) of the newly created file share.
 	FileShareARN *string
 

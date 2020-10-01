@@ -56,11 +56,15 @@ func (c *Client) ReleaseStaticIp(ctx context.Context, params *ReleaseStaticIpInp
 }
 
 type ReleaseStaticIpInput struct {
+
 	// The name of the static IP to delete.
+	//
+	// This member is required.
 	StaticIpName *string
 }
 
 type ReleaseStaticIpOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

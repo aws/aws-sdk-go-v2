@@ -57,15 +57,25 @@ func (c *Client) AssociateDiscoveredResource(ctx context.Context, params *Associ
 }
 
 type AssociateDiscoveredResourceInput struct {
+
 	// Object representing a Resource.
+	//
+	// This member is required.
 	DiscoveredResource *types.DiscoveredResource
+
 	// The identifier given to the MigrationTask. Do not store personal data in this
 	// field.
+	//
+	// This member is required.
 	MigrationTaskName *string
+
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun *bool
+
 	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
 	ProgressUpdateStream *string
 }
 

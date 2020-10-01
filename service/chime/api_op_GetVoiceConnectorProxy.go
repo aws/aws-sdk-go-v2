@@ -57,11 +57,15 @@ func (c *Client) GetVoiceConnectorProxy(ctx context.Context, params *GetVoiceCon
 }
 
 type GetVoiceConnectorProxyInput struct {
+
 	// The Amazon Chime voice connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type GetVoiceConnectorProxyOutput struct {
+
 	// The proxy configuration details.
 	Proxy *types.Proxy
 

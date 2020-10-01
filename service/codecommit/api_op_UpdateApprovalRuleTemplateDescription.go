@@ -56,14 +56,23 @@ func (c *Client) UpdateApprovalRuleTemplateDescription(ctx context.Context, para
 }
 
 type UpdateApprovalRuleTemplateDescriptionInput struct {
+
 	// The name of the template for which you want to update the description.
+	//
+	// This member is required.
 	ApprovalRuleTemplateName *string
+
 	// The updated description of the approval rule template.
+	//
+	// This member is required.
 	ApprovalRuleTemplateDescription *string
 }
 
 type UpdateApprovalRuleTemplateDescriptionOutput struct {
+
 	// The structure and content of the updated approval rule template.
+	//
+	// This member is required.
 	ApprovalRuleTemplate *types.ApprovalRuleTemplate
 
 	// Metadata pertaining to the operation's result.

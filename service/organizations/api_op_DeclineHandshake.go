@@ -62,14 +62,18 @@ func (c *Client) DeclineHandshake(ctx context.Context, params *DeclineHandshakeI
 }
 
 type DeclineHandshakeInput struct {
+
 	// The unique identifier (ID) of the handshake that you want to decline. You can
 	// get the ID from the ListHandshakesForAccount () operation. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
 	// by from 8 to 32 lowercase letters or digits.
+	//
+	// This member is required.
 	HandshakeId *string
 }
 
 type DeclineHandshakeOutput struct {
+
 	// A structure that contains details about the declined handshake. The state is
 	// updated to show the value DECLINED.
 	Handshake *types.Handshake

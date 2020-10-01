@@ -56,31 +56,41 @@ func (c *Client) DescribeFleetInstances(ctx context.Context, params *DescribeFle
 }
 
 type DescribeFleetInstancesInput struct {
+
 	// The filters.
 	//
 	//     * instance-type - The instance type.
 	Filters []*types.Filter
+
 	// The ID of the EC2 Fleet.
+	//
+	// This member is required.
 	FleetId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
 }
 
 type DescribeFleetInstancesOutput struct {
+
 	// The running instances. This list is refreshed periodically and might be out of
 	// date.
 	ActiveInstances []*types.ActiveInstance
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The ID of the EC2 Fleet.
 	FleetId *string
 

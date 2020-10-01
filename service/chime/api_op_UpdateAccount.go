@@ -57,13 +57,18 @@ func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, 
 }
 
 type UpdateAccountInput struct {
+
 	// The new name for the specified Amazon Chime account.
 	Name *string
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type UpdateAccountOutput struct {
+
 	// The updated Amazon Chime account details.
 	Account *types.Account
 

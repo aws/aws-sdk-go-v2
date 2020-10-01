@@ -56,25 +56,34 @@ func (c *Client) DescribeScheduledAudit(ctx context.Context, params *DescribeSch
 }
 
 type DescribeScheduledAuditInput struct {
+
 	// The name of the scheduled audit whose information you want to get.
+	//
+	// This member is required.
 	ScheduledAuditName *string
 }
 
 type DescribeScheduledAuditOutput struct {
+
 	// How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY",
 	// or "MONTHLY". The start time of each audit is determined by the system.
 	Frequency types.AuditFrequency
+
 	// The day of the week on which the scheduled audit takes place. One of "SUN",
 	// "MON", "TUE", "WED", "THU", "FRI", or "SAT".
 	DayOfWeek types.DayOfWeek
+
 	// The ARN of the scheduled audit.
 	ScheduledAuditArn *string
+
 	// The day of the month on which the scheduled audit takes place. Will be "1"
 	// through "31" or "LAST". If days 29-31 are specified, and the month does not have
 	// that many days, the audit takes place on the "LAST" day of the month.
 	DayOfMonth *string
+
 	// The name of the scheduled audit.
 	ScheduledAuditName *string
+
 	// Which checks are performed during the scheduled audit. Checks must be enabled
 	// for your account. (Use DescribeAccountAuditConfiguration to see the list of all
 	// checks, including those that are enabled or use UpdateAccountAuditConfiguration

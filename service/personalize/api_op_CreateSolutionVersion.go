@@ -82,9 +82,13 @@ func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSoluti
 }
 
 type CreateSolutionVersionInput struct {
+
 	// The Amazon Resource Name (ARN) of the solution containing the training
 	// configuration information.
+	//
+	// This member is required.
 	SolutionArn *string
+
 	// The scope of training to be performed when creating the solution version. The
 	// FULL option trains the solution version based on the entirety of the input
 	// solution's training data, while the UPDATE option processes only the data that
@@ -97,6 +101,7 @@ type CreateSolutionVersionInput struct {
 }
 
 type CreateSolutionVersionOutput struct {
+
 	// The ARN of the new solution version.
 	SolutionVersionArn *string
 

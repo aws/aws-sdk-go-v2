@@ -57,11 +57,17 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 // Container for the parameters to the RemoveTags () operation. Specify the ARN for
 // the Elasticsearch domain from which you want to remove the specified TagKey.
 type RemoveTagsInput struct {
+
 	// Specifies the ARN for the Elasticsearch domain from which you want to delete the
 	// specified tags.
+	//
+	// This member is required.
 	ARN *string
+
 	// Specifies the TagKey list which you want to remove from the Elasticsearch
 	// domain.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

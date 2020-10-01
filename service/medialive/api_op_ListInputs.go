@@ -56,16 +56,20 @@ func (c *Client) ListInputs(ctx context.Context, params *ListInputsInput, optFns
 
 // Placeholder documentation for ListInputsRequest
 type ListInputsInput struct {
+
 	// Placeholder documentation for __string
 	NextToken *string
+
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
 }
 
 // Placeholder documentation for ListInputsResponse
 type ListInputsOutput struct {
+
 	// Placeholder documentation for __listOfInput
 	Inputs []*types.Input
+
 	// Placeholder documentation for __string
 	NextToken *string
 

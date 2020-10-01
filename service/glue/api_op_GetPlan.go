@@ -56,21 +56,32 @@ func (c *Client) GetPlan(ctx context.Context, params *GetPlanInput, optFns ...fu
 }
 
 type GetPlanInput struct {
+
 	// The list of mappings from a source table to target tables.
+	//
+	// This member is required.
 	Mapping []*types.MappingEntry
+
 	// The programming language of the code to perform the mapping.
 	Language types.Language
+
 	// The target tables.
 	Sinks []*types.CatalogEntry
+
 	// The source table.
+	//
+	// This member is required.
 	Source *types.CatalogEntry
+
 	// The parameters for the mapping.
 	Location *types.Location
 }
 
 type GetPlanOutput struct {
+
 	// A Python script to perform the mapping.
 	PythonScript *string
+
 	// The Scala code to perform the mapping.
 	ScalaCode *string
 

@@ -57,19 +57,25 @@ func (c *Client) ListSamples(ctx context.Context, params *ListSamplesInput, optF
 
 // Represents a request to the list samples operation.
 type ListSamplesInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the job used to list samples.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a list samples request.
 type ListSamplesOutput struct {
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.
 	NextToken *string
+
 	// Information about the samples.
 	Samples []*types.Sample
 

@@ -57,11 +57,16 @@ func (c *Client) ListArtifacts(ctx context.Context, params *ListArtifactsInput, 
 
 // Represents a request to the list artifacts operation.
 type ListArtifactsInput struct {
+
 	// The run, job, suite, or test ARN.
+	//
+	// This member is required.
 	Arn *string
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The artifacts' type. Allowed values include:
 	//
 	//     * FILE
@@ -70,13 +75,17 @@ type ListArtifactsInput struct {
 	//
 	//     *
 	// SCREENSHOT
+	//
+	// This member is required.
 	Type types.ArtifactCategory
 }
 
 // Represents the result of a list artifacts operation.
 type ListArtifactsOutput struct {
+
 	// Information about the artifacts.
 	Artifacts []*types.Artifact
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.

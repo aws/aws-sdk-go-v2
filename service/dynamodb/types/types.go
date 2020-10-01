@@ -8,15 +8,18 @@ import (
 
 // Contains details of a table archival operation.
 type ArchivalSummary struct {
+
 	// The reason DynamoDB archived the table. Currently, the only possible value is:
 	// <ul> <li> <p> <code>INACCESSIBLE_ENCRYPTION_CREDENTIALS</code> - The table was
 	// archived due to the table's AWS KMS key being inaccessible for more than seven
 	// days. An On-Demand backup was created at the archival time.</p> </li> </ul>
 	ArchivalReason *string
+
 	// The Amazon Resource Name (ARN) of the backup the table was archived to, when
 	// applicable in the archival reason. If you wish to restore this backup to the
 	// same table name, you will need to delete the original table.
 	ArchivalBackupArn *string
+
 	// The date and time when table archival was initiated by DynamoDB, in UNIX epoch
 	// time format.
 	ArchivalDateTime *time.Time
@@ -24,6 +27,7 @@ type ArchivalSummary struct {
 
 // Represents an attribute for describing the key schema for the table and indexes.
 type AttributeDefinition struct {
+
 	// The data type for the attribute, where:
 	//
 	//     * S - the attribute is of type
@@ -33,8 +37,13 @@ type AttributeDefinition struct {
 	//
 	//     * B - the attribute is of
 	// type Binary
+	//
+	// This member is required.
 	AttributeType ScalarAttributeType
+
 	// A name for the attribute.
+	//
+	// This member is required.
 	AttributeName *string
 }
 
@@ -44,32 +53,42 @@ type AttributeDefinition struct {
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 // in the Amazon DynamoDB Developer Guide.
 type AttributeValue struct {
+
 	// An attribute of type Boolean. For example: "BOOL": true
 	BOOL *bool
+
 	// An attribute of type Number Set. For example: "NS": ["42.2", "-19", "7.5",
 	// "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
 	// compatibility across languages and libraries. However, DynamoDB treats them as
 	// number type attributes for mathematical operations.
 	NS []*string
+
 	// An attribute of type Binary Set. For example: "BS": ["U3Vubnk=", "UmFpbnk=",
 	// "U25vd3k="]
 	BS [][]byte
+
 	// An attribute of type Null. For example: "NULL": true
 	NULL *bool
+
 	// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
 	// ,"Zebra"]
 	SS []*string
+
 	// An attribute of type String. For example: "S": "Hello"
 	S *string
+
 	// An attribute of type Binary. For example: "B":
 	// "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
 	B []byte
+
 	// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
 	// "35"}}
 	M map[string]*AttributeValue
+
 	// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
 	// "Coffee"}, {"N", "3.14159"}]
 	L []*AttributeValue
+
 	// An attribute of type Number. For example: "N": "123.45" Numbers are sent across
 	// the network to DynamoDB as strings, to maximize compatibility across languages
 	// and libraries. However, DynamoDB treats them as number type attributes for
@@ -85,6 +104,7 @@ type AttributeValue struct {
 // zero; and set type attributes must not be empty. Requests with empty values will
 // be rejected with a ValidationException exception.
 type AttributeValueUpdate struct {
+
 	// Specifies how to perform the update. Valid values are PUT (default), DELETE, and
 	// ADD. The behavior depends on whether the specified primary key already exists in
 	// the table.  <p> <b>If an item with the specified <i>Key</i> is found in the
@@ -135,6 +155,7 @@ type AttributeValueUpdate struct {
 	// numbers) for the attribute value. The only data types allowed are number and
 	// number set; no other data types can be specified.</p> </li> </ul>
 	Action AttributeAction
+
 	// Represents the data for an attribute. Each attribute value is described as a
 	// name-value pair. The name is the data type, and the value is the data itself.
 	// For more information, see Data Types
@@ -145,33 +166,44 @@ type AttributeValueUpdate struct {
 
 // Represents the properties of the scaling policy.
 type AutoScalingPolicyDescription struct {
+
 	// The name of the scaling policy.
 	PolicyName *string
+
 	// Represents a target tracking scaling policy configuration.
 	TargetTrackingScalingPolicyConfiguration *AutoScalingTargetTrackingScalingPolicyConfigurationDescription
 }
 
 // Represents the auto scaling policy to be modified.
 type AutoScalingPolicyUpdate struct {
+
 	// The name of the scaling policy.
 	PolicyName *string
+
 	// Represents a target tracking scaling policy configuration.
+	//
+	// This member is required.
 	TargetTrackingScalingPolicyConfiguration *AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
 }
 
 // Represents the auto scaling settings for a global table or global secondary
 // index.
 type AutoScalingSettingsDescription struct {
+
 	// Information about the scaling policies.
 	ScalingPolicies []*AutoScalingPolicyDescription
+
 	// The maximum capacity units that a global table or global secondary index should
 	// be scaled up to.
 	MaximumUnits *int64
+
 	// The minimum capacity units that a global table or global secondary index should
 	// be scaled down to.
 	MinimumUnits *int64
+
 	// Disabled auto scaling for this global table or global secondary index.
 	AutoScalingDisabled *bool
+
 	// Role ARN used for configuring the auto scaling policy.
 	AutoScalingRoleArn *string
 }
@@ -179,29 +211,36 @@ type AutoScalingSettingsDescription struct {
 // Represents the auto scaling settings to be modified for a global table or global
 // secondary index.
 type AutoScalingSettingsUpdate struct {
+
 	// Disabled auto scaling for this global table or global secondary index.
 	AutoScalingDisabled *bool
+
 	// The minimum capacity units that a global table or global secondary index should
 	// be scaled down to.
 	MinimumUnits *int64
+
 	// The scaling policy to apply for scaling target global table or global secondary
 	// index capacity units.
 	ScalingPolicyUpdate *AutoScalingPolicyUpdate
+
 	// The maximum capacity units that a global table or global secondary index should
 	// be scaled up to.
 	MaximumUnits *int64
+
 	// Role ARN used for configuring auto scaling policy.
 	AutoScalingRoleArn *string
 }
 
 // Represents the properties of a target tracking scaling policy.
 type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
+
 	// The amount of time, in seconds, after a scale out activity completes before
 	// another scale out activity can start. While the cooldown period is in effect,
 	// the capacity that has been added by the previous scale out event that initiated
 	// the cooldown is calculated as part of the desired capacity for the next scale
 	// out. You should continuously (but not excessively) scale out.
 	ScaleOutCooldown *int32
+
 	// The amount of time, in seconds, after a scale in activity completes before
 	// another scale in activity can start. The cooldown period is used to block
 	// subsequent scale in requests until it has expired. You should scale in
@@ -209,26 +248,32 @@ type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
 	// alarm triggers a scale out policy during the cooldown period after a scale-in,
 	// application auto scaling scales out your scalable target immediately.
 	ScaleInCooldown *int32
+
 	// Indicates whether scale in by the target tracking policy is disabled. If the
 	// value is true, scale in is disabled and the target tracking policy won't remove
 	// capacity from the scalable resource. Otherwise, scale in is enabled and the
 	// target tracking policy can remove capacity from the scalable resource. The
 	// default value is false.
 	DisableScaleIn *bool
+
 	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
 	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	//
+	// This member is required.
 	TargetValue *float64
 }
 
 // Represents the settings of a target tracking scaling policy that will be
 // modified.
 type AutoScalingTargetTrackingScalingPolicyConfigurationUpdate struct {
+
 	// The amount of time, in seconds, after a scale out activity completes before
 	// another scale out activity can start. While the cooldown period is in effect,
 	// the capacity that has been added by the previous scale out event that initiated
 	// the cooldown is calculated as part of the desired capacity for the next scale
 	// out. You should continuously (but not excessively) scale out.
 	ScaleOutCooldown *int32
+
 	// The amount of time, in seconds, after a scale in activity completes before
 	// another scale in activity can start. The cooldown period is used to block
 	// subsequent scale in requests until it has expired. You should scale in
@@ -236,37 +281,52 @@ type AutoScalingTargetTrackingScalingPolicyConfigurationUpdate struct {
 	// alarm triggers a scale out policy during the cooldown period after a scale-in,
 	// application auto scaling scales out your scalable target immediately.
 	ScaleInCooldown *int32
+
 	// Indicates whether scale in by the target tracking policy is disabled. If the
 	// value is true, scale in is disabled and the target tracking policy won't remove
 	// capacity from the scalable resource. Otherwise, scale in is enabled and the
 	// target tracking policy can remove capacity from the scalable resource. The
 	// default value is false.
 	DisableScaleIn *bool
+
 	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
 	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	//
+	// This member is required.
 	TargetValue *float64
 }
 
 // Contains the description of the backup created for the table.
 type BackupDescription struct {
+
 	// Contains the details of the features enabled on the table when the backup was
 	// created. For example, LSIs, GSIs, streams, TTL.
 	SourceTableFeatureDetails *SourceTableFeatureDetails
+
 	// Contains the details of the table when the backup was created.
 	SourceTableDetails *SourceTableDetails
+
 	// Contains the details of the backup created for the table.
 	BackupDetails *BackupDetails
 }
 
 // Contains the details of the backup created for the table.
 type BackupDetails struct {
+
 	// Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
+	//
+	// This member is required.
 	BackupStatus BackupStatus
+
 	// Time at which the backup was created. This is the request time of the backup.
+	//
+	// This member is required.
 	BackupCreationDateTime *time.Time
+
 	// Time at which the automatic on-demand backup created by DynamoDB will expire.
 	// This SYSTEM on-demand backup expires automatically 35 days after its creation.
 	BackupExpiryDateTime *time.Time
+
 	// BackupType:
 	//
 	//     * USER - You create and manage these using the on-demand backup
@@ -279,30 +339,46 @@ type BackupDetails struct {
 	//
 	//     * AWS_BACKUP -
 	// On-demand backup created by you from AWS Backup service.
+	//
+	// This member is required.
 	BackupType BackupType
+
 	// Name of the requested backup.
+	//
+	// This member is required.
 	BackupName *string
+
 	// ARN associated with the backup.
+	//
+	// This member is required.
 	BackupArn *string
+
 	// Size of the backup in bytes.
 	BackupSizeBytes *int64
 }
 
 // Contains details for the backup.
 type BackupSummary struct {
+
 	// Name of the specified backup.
 	BackupName *string
+
 	// Time at which the automatic on-demand backup created by DynamoDB will expire.
 	// This SYSTEM on-demand backup expires automatically 35 days after its creation.
 	BackupExpiryDateTime *time.Time
+
 	// ARN associated with the backup.
 	BackupArn *string
+
 	// Name of the table.
 	TableName *string
+
 	// Unique identifier for the table.
 	TableId *string
+
 	// ARN associated with the table.
 	TableArn *string
+
 	// BackupType:
 	//
 	//     * USER - You create and manage these using the on-demand backup
@@ -316,19 +392,24 @@ type BackupSummary struct {
 	//     * AWS_BACKUP -
 	// On-demand backup created by you from AWS Backup service.
 	BackupType BackupType
+
 	// Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
 	BackupStatus BackupStatus
+
 	// Time at which the backup was created.
 	BackupCreationDateTime *time.Time
+
 	// Size of the backup in bytes.
 	BackupSizeBytes *int64
 }
 
 // Contains the details for the read/write capacity mode.
 type BillingModeSummary struct {
+
 	// Represents the time when PAY_PER_REQUEST was last set as the read/write capacity
 	// mode.
 	LastUpdateToPayPerRequestDateTime *time.Time
+
 	// Controls how you are charged for read and write throughput and how you manage
 	// capacity. This setting can be changed later.
 	//
@@ -348,10 +429,13 @@ type BillingModeSummary struct {
 // for the associated item an error with a Null code and Null message will be
 // present.
 type CancellationReason struct {
+
 	// Cancellation reason message description.
 	Message *string
+
 	// Item in the request which caused the transaction to get cancelled.
 	Item map[string]*AttributeValue
+
 	// Status code for the result of the cancelled transaction.
 	Code *string
 }
@@ -359,10 +443,13 @@ type CancellationReason struct {
 // Represents the amount of provisioned throughput capacity consumed on a table or
 // an index.
 type Capacity struct {
+
 	// The total number of capacity units consumed on a table or an index.
 	CapacityUnits *float64
+
 	// The total number of write capacity units consumed on a table or an index.
 	WriteCapacityUnits *float64
+
 	// The total number of read capacity units consumed on a table or an index.
 	ReadCapacityUnits *float64
 }
@@ -380,6 +467,7 @@ type Capacity struct {
 // ScanFilter, which evaluates the scan results and returns only the desired
 // values.
 type Condition struct {
+
 	// One or more values to evaluate against the supplied attribute. The number of
 	// values in the list depends on the ComparisonOperator being used. For type
 	// Number, value comparisons are numeric. String value comparisons for greater
@@ -390,6 +478,7 @@ type Condition struct {
 	// DynamoDB treats each byte of the binary data as unsigned when it compares binary
 	// values.
 	AttributeValueList []*AttributeValue
+
 	// A comparator for evaluating attributes. For example, equals, greater than, less
 	// than, etc. The following comparison operators are available: EQ | NE | LE | LT |
 	// GE | GT | NOT_NULL | NULL | CONTAINS | NOT_CONTAINS | BEGINS_WITH | IN | BETWEEN
@@ -501,25 +590,39 @@ type Condition struct {
 	// AttributeValueList and ComparisonOperator, see Legacy Conditional Parameters
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html)
 	// in the Amazon DynamoDB Developer Guide.
+	//
+	// This member is required.
 	ComparisonOperator ComparisonOperator
 }
 
 // Represents a request to perform a check that an item exists or to check the
 // condition of specific attributes of the item.
 type ConditionCheck struct {
+
 	// One or more values that can be substituted in an expression.
 	ExpressionAttributeValues map[string]*AttributeValue
+
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the
 	// ConditionCheck condition fails. For ReturnValuesOnConditionCheckFailure, the
 	// valid values are: NONE and ALL_OLD.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
+
 	// A condition that must be satisfied in order for a conditional update to succeed.
+	//
+	// This member is required.
 	ConditionExpression *string
+
 	// The primary key of the item to be checked. Each element consists of an attribute
 	// name and a value for that attribute.
+	//
+	// This member is required.
 	Key map[string]*AttributeValue
+
 	// Name of the table for the check item request.
+	//
+	// This member is required.
 	TableName *string
+
 	// One or more substitution tokens for attribute names in an expression.
 	ExpressionAttributeNames map[string]*string
 }
@@ -531,19 +634,26 @@ type ConditionCheck struct {
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 // in the Amazon DynamoDB Developer Guide.
 type ConsumedCapacity struct {
+
 	// The amount of throughput consumed on the table affected by the operation.
 	Table *Capacity
+
 	// The name of the table that was affected by the operation.
 	TableName *string
+
 	// The amount of throughput consumed on each local index affected by the operation.
 	LocalSecondaryIndexes map[string]*Capacity
+
 	// The total number of capacity units consumed by the operation.
 	CapacityUnits *float64
+
 	// The amount of throughput consumed on each global index affected by the
 	// operation.
 	GlobalSecondaryIndexes map[string]*Capacity
+
 	// The total number of read capacity units consumed by the operation.
 	ReadCapacityUnits *float64
+
 	// The total number of write capacity units consumed by the operation.
 	WriteCapacityUnits *float64
 }
@@ -551,33 +661,50 @@ type ConsumedCapacity struct {
 // Represents the continuous backups and point in time recovery settings on the
 // table.
 type ContinuousBackupsDescription struct {
+
 	// ContinuousBackupsStatus can be one of the following states: ENABLED, DISABLED
+	//
+	// This member is required.
 	ContinuousBackupsStatus ContinuousBackupsStatus
+
 	// The description of the point in time recovery settings applied to the table.
 	PointInTimeRecoveryDescription *PointInTimeRecoveryDescription
 }
 
 // Represents a Contributor Insights summary entry..
 type ContributorInsightsSummary struct {
+
 	// Name of the index associated with the summary, if any.
 	IndexName *string
+
 	// Describes the current status for contributor insights for the given table and
 	// index, if applicable.
 	ContributorInsightsStatus ContributorInsightsStatus
+
 	// Name of the table associated with the summary.
 	TableName *string
 }
 
 // Represents a new global secondary index to be added to an existing table.
 type CreateGlobalSecondaryIndexAction struct {
+
 	// Represents attributes that are copied (projected) from the table into an index.
 	// These are in addition to the primary key attributes and index key attributes,
 	// which are automatically projected.
+	//
+	// This member is required.
 	Projection *Projection
+
 	// The name of the global secondary index to be created.
+	//
+	// This member is required.
 	IndexName *string
+
 	// The key schema for the global secondary index.
+	//
+	// This member is required.
 	KeySchema []*KeySchemaElement
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Limits
@@ -588,22 +715,31 @@ type CreateGlobalSecondaryIndexAction struct {
 
 // Represents a replica to be added.
 type CreateReplicaAction struct {
+
 	// The Region of the replica to be added.
+	//
+	// This member is required.
 	RegionName *string
 }
 
 // Represents a replica to be created.
 type CreateReplicationGroupMemberAction struct {
+
 	// The Region where the new replica will be created.
+	//
+	// This member is required.
 	RegionName *string
+
 	// Replica-specific global secondary index settings.
 	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndex
+
 	// The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption
 	// in the new replica. To specify a CMK, use its key ID, Amazon Resource Name
 	// (ARN), alias name, or alias ARN. Note that you should only provide this
 	// parameter if the key is different from the default DynamoDB KMS master key
 	// alias/aws/dynamodb.
 	KMSMasterKeyId *string
+
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
@@ -611,17 +747,27 @@ type CreateReplicationGroupMemberAction struct {
 
 // Represents a request to perform a DeleteItem operation.
 type Delete struct {
+
 	// Name of the table in which the item to be deleted resides.
+	//
+	// This member is required.
 	TableName *string
+
 	// One or more values that can be substituted in an expression.
 	ExpressionAttributeValues map[string]*AttributeValue
+
 	// The primary key of the item to be deleted. Each element consists of an attribute
 	// name and a value for that attribute.
+	//
+	// This member is required.
 	Key map[string]*AttributeValue
+
 	// A condition that must be satisfied in order for a conditional delete to succeed.
 	ConditionExpression *string
+
 	// One or more substitution tokens for attribute names in an expression.
 	ExpressionAttributeNames map[string]*string
+
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Delete
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
 	// NONE and ALL_OLD.
@@ -630,35 +776,53 @@ type Delete struct {
 
 // Represents a global secondary index to be deleted from an existing table.
 type DeleteGlobalSecondaryIndexAction struct {
+
 	// The name of the global secondary index to be deleted.
+	//
+	// This member is required.
 	IndexName *string
 }
 
 // Represents a replica to be removed.
 type DeleteReplicaAction struct {
+
 	// The Region of the replica to be removed.
+	//
+	// This member is required.
 	RegionName *string
 }
 
 // Represents a replica to be deleted.
 type DeleteReplicationGroupMemberAction struct {
+
 	// The Region where the replica exists.
+	//
+	// This member is required.
 	RegionName *string
 }
 
 // Represents a request to perform a DeleteItem operation on an item.
 type DeleteRequest struct {
+
 	// A map of attribute name to attribute values, representing the primary key of the
 	// item to delete. All of the table's primary key attributes must be specified, and
 	// their data types must match those of the table's key schema.
+	//
+	// This member is required.
 	Key map[string]*AttributeValue
 }
 
 // An endpoint information details.
 type Endpoint struct {
+
 	// Endpoint cache time to live (TTL) value.
+	//
+	// This member is required.
 	CachePeriodInMinutes *int64
+
 	// IP address of the endpoint.
+	//
+	// This member is required.
 	Address *string
 }
 
@@ -684,12 +848,14 @@ type Endpoint struct {
 // and ComparisonOperator. Note that if you use both sets of parameters at once,
 // DynamoDB will return a ValidationException exception.
 type ExpectedAttributeValue struct {
+
 	// Represents the data for the expected attribute. Each attribute value is
 	// described as a name-value pair. The name is the data type, and the value is the
 	// data itself. For more information, see Data Types
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
 	Value *AttributeValue
+
 	// One or more values to evaluate against the supplied attribute. The number of
 	// values in the list depends on the ComparisonOperator being used. For type
 	// Number, value comparisons are numeric. String value comparisons for greater
@@ -702,6 +868,7 @@ type ExpectedAttributeValue struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html)
 	// in the Amazon DynamoDB Developer Guide.
 	AttributeValueList []*AttributeValue
+
 	// Causes DynamoDB to evaluate the value before attempting a conditional
 	// operation:
 	//
@@ -728,6 +895,7 @@ type ExpectedAttributeValue struct {
 	// Exists is false but you also provide a Value. (You cannot expect an attribute to
 	// have a value, while also expecting it not to exist.)
 	Exists *bool
+
 	// A comparator for evaluating attributes in the AttributeValueList. For example,
 	// equals, greater than, less than, etc. The following comparison operators are
 	// available: EQ | NE | LE | LT | GE | GT | NOT_NULL | NULL | CONTAINS |
@@ -840,8 +1008,10 @@ type ExpectedAttributeValue struct {
 
 // Represents a failure a contributor insights operation.
 type FailureException struct {
+
 	// Description of the failure.
 	ExceptionDescription *string
+
 	// Exception name.
 	ExceptionName *string
 }
@@ -849,37 +1019,53 @@ type FailureException struct {
 // Specifies an item and related attribute values to retrieve in a TransactGetItem
 // object.
 type Get struct {
+
 	// One or more substitution tokens for attribute names in the ProjectionExpression
 	// parameter.
 	ExpressionAttributeNames map[string]*string
+
 	// A string that identifies one or more attributes of the specified item to
 	// retrieve from the table. The attributes in the expression must be separated by
 	// commas. If no attribute names are specified, then all attributes of the
 	// specified item are returned. If any of the requested attributes are not found,
 	// they do not appear in the result.
 	ProjectionExpression *string
+
 	// A map of attribute names to AttributeValue objects that specifies the primary
 	// key of the item to retrieve.
+	//
+	// This member is required.
 	Key map[string]*AttributeValue
+
 	// The name of the table from which to retrieve the specified item.
+	//
+	// This member is required.
 	TableName *string
 }
 
 // Represents the properties of a global secondary index.
 type GlobalSecondaryIndex struct {
+
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
+	//
+	// This member is required.
 	Projection *Projection
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Limits
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughput
+
 	// The name of the global secondary index. The name must be unique among all other
 	// indexes on this table.
+	//
+	// This member is required.
 	IndexName *string
+
 	// The complete key schema for a global secondary index, which consists of one or
 	// more pairs of attribute names and key types:
 	//
@@ -895,14 +1081,18 @@ type GlobalSecondaryIndex struct {
 	// range attribute. The term "range attribute" derives from the way DynamoDB stores
 	// items with the same partition key physically close together, in sorted order by
 	// the sort key value.
+	//
+	// This member is required.
 	KeySchema []*KeySchemaElement
 }
 
 // Represents the auto scaling settings of a global secondary index for a global
 // table that will be modified.
 type GlobalSecondaryIndexAutoScalingUpdate struct {
+
 	// The name of the global secondary index.
 	IndexName *string
+
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ProvisionedWriteCapacityAutoScalingUpdate *AutoScalingSettingsUpdate
@@ -910,20 +1100,25 @@ type GlobalSecondaryIndexAutoScalingUpdate struct {
 
 // Represents the properties of a global secondary index.
 type GlobalSecondaryIndexDescription struct {
+
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
 	Projection *Projection
+
 	// The number of items in the specified index. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
 	ItemCount *int64
+
 	// The total size of the specified index, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
 	IndexSizeBytes *int64
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the index.
 	IndexArn *string
+
 	// The complete key schema for a global secondary index, which consists of one or
 	// more pairs of attribute names and key types:
 	//
@@ -940,8 +1135,10 @@ type GlobalSecondaryIndexDescription struct {
 	// items with the same partition key physically close together, in sorted order by
 	// the sort key value.
 	KeySchema []*KeySchemaElement
+
 	// The name of the global secondary index.
 	IndexName *string
+
 	// The current state of the global secondary index:
 	//
 	//     * CREATING - The index is
@@ -954,12 +1151,14 @@ type GlobalSecondaryIndexDescription struct {
 	//
 	//     * ACTIVE - The index is ready for use.
 	IndexStatus IndexStatus
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Limits
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughputDescription
+
 	// Indicates whether the index is currently backfilling. Backfilling is the process
 	// of reading items from the table and determining whether they can be added to the
 	// index. (Not all items will qualify: For example, a partition key cannot have any
@@ -977,8 +1176,10 @@ type GlobalSecondaryIndexDescription struct {
 // Represents the properties of a global secondary index for the table when the
 // backup was created.
 type GlobalSecondaryIndexInfo struct {
+
 	// The name of the global secondary index.
 	IndexName *string
+
 	// The complete key schema for a global secondary index, which consists of one or
 	// more pairs of attribute names and key types:
 	//
@@ -995,9 +1196,11 @@ type GlobalSecondaryIndexInfo struct {
 	// items with the same partition key physically close together, in sorted order by
 	// the sort key value.
 	KeySchema []*KeySchemaElement
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index.
 	ProvisionedThroughput *ProvisionedThroughput
+
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
@@ -1015,9 +1218,11 @@ type GlobalSecondaryIndexInfo struct {
 //     * An existing global secondary index to be
 // removed from an existing table.
 type GlobalSecondaryIndexUpdate struct {
+
 	// The name of an existing global secondary index, along with new provisioned
 	// throughput settings to be applied to that index.
 	Update *UpdateGlobalSecondaryIndexAction
+
 	// The parameters required for creating a global secondary index on an existing
 	// table:
 	//
@@ -1032,24 +1237,30 @@ type GlobalSecondaryIndexUpdate struct {
 	//
 	//     * ProvisionedThroughput
 	Create *CreateGlobalSecondaryIndexAction
+
 	// The name of an existing global secondary index to be removed.
 	Delete *DeleteGlobalSecondaryIndexAction
 }
 
 // Represents the properties of a global table.
 type GlobalTable struct {
+
 	// The Regions where the global table has replicas.
 	ReplicationGroup []*Replica
+
 	// The global table name.
 	GlobalTableName *string
 }
 
 // Contains details about the global table.
 type GlobalTableDescription struct {
+
 	// The creation time of the global table.
 	CreationDateTime *time.Time
+
 	// The Regions where the global table has replicas.
 	ReplicationGroup []*ReplicaDescription
+
 	// The current state of the global table:
 	//
 	//     * CREATING - The global table is
@@ -1063,8 +1274,10 @@ type GlobalTableDescription struct {
 	//     * ACTIVE - The global table
 	// is ready for use.
 	GlobalTableStatus GlobalTableStatus
+
 	// The global table name.
 	GlobalTableName *string
+
 	// The unique identifier of the global table.
 	GlobalTableArn *string
 }
@@ -1072,12 +1285,17 @@ type GlobalTableDescription struct {
 // Represents the settings of a global secondary index for a global table that will
 // be modified.
 type GlobalTableGlobalSecondaryIndexSettingsUpdate struct {
+
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	ProvisionedWriteCapacityUnits *int64
+
 	// The name of the global secondary index. The name must be unique among all other
 	// indexes on this table.
+	//
+	// This member is required.
 	IndexName *string
+
 	// Auto scaling settings for managing a global secondary index's write capacity
 	// units.
 	ProvisionedWriteCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate
@@ -1088,9 +1306,11 @@ type GlobalTableGlobalSecondaryIndexSettingsUpdate struct {
 // does not have any local secondary indexes, this information is not returned in
 // the response.
 type ItemCollectionMetrics struct {
+
 	// The partition key value of the item collection. This value is the same as the
 	// partition key value of the item.
 	ItemCollectionKey map[string]*AttributeValue
+
 	// An estimate of item collection size, in gigabytes. This value is a two-element
 	// array containing a lower bound and an upper bound for the estimate. The estimate
 	// includes the size of all the items in the table, plus the size of all attributes
@@ -1103,6 +1323,7 @@ type ItemCollectionMetrics struct {
 
 // Details for the requested item.
 type ItemResponse struct {
+
 	// Map of attribute data consisting of the data type and attribute value.
 	Item map[string]*AttributeValue
 }
@@ -1113,6 +1334,7 @@ type ItemResponse struct {
 // partition key. For a composite primary key, you must provide both the partition
 // key and the sort key.
 type KeysAndAttributes struct {
+
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document. The
 	// attributes in the ProjectionExpression must be separated by commas. If no
@@ -1122,12 +1344,17 @@ type KeysAndAttributes struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProjectionExpression *string
+
 	// The primary key attribute values that define the items and the attributes
 	// associated with the items.
+	//
+	// This member is required.
 	Keys []map[string]*AttributeValue
+
 	// The consistency of a read operation. If set to true, then a strongly consistent
 	// read is used; otherwise, an eventually consistent read is used.
 	ConsistentRead *bool
+
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -1168,6 +1395,7 @@ type KeysAndAttributes struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
+
 	// This is a legacy parameter. Use ProjectionExpression instead. For more
 	// information, see Legacy Conditional Parameters
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html)
@@ -1185,6 +1413,7 @@ type KeysAndAttributes struct {
 // attribute). The data type must be one of String, Number, or Binary. The
 // attribute cannot be nested within a List or a Map.
 type KeySchemaElement struct {
+
 	// The role that this key attribute will assume:
 	//
 	//     * HASH - partition key
@@ -1199,17 +1428,26 @@ type KeySchemaElement struct {
 	// range attribute. The term "range attribute" derives from the way DynamoDB stores
 	// items with the same partition key physically close together, in sorted order by
 	// the sort key value.
+	//
+	// This member is required.
 	KeyType KeyType
+
 	// The name of a key attribute.
+	//
+	// This member is required.
 	AttributeName *string
 }
 
 // Represents the properties of a local secondary index.
 type LocalSecondaryIndex struct {
+
 	// Represents attributes that are copied (projected) from the table into the local
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
+	//
+	// This member is required.
 	Projection *Projection
+
 	// The complete key schema for the local secondary index, consisting of one or more
 	// pairs of attribute names and key types:
 	//
@@ -1225,30 +1463,41 @@ type LocalSecondaryIndex struct {
 	// attribute. The term "range attribute" derives from the way DynamoDB stores items
 	// with the same partition key physically close together, in sorted order by the
 	// sort key value.
+	//
+	// This member is required.
 	KeySchema []*KeySchemaElement
+
 	// The name of the local secondary index. The name must be unique among all other
 	// indexes on this table.
+	//
+	// This member is required.
 	IndexName *string
 }
 
 // Represents the properties of a local secondary index.
 type LocalSecondaryIndexDescription struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the index.
 	IndexArn *string
+
 	// Represents the name of the local secondary index.
 	IndexName *string
+
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
 	Projection *Projection
+
 	// The total size of the specified index, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
 	IndexSizeBytes *int64
+
 	// The number of items in the specified index. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
 	ItemCount *int64
+
 	// The complete key schema for the local secondary index, consisting of one or more
 	// pairs of attribute names and key types:
 	//
@@ -1270,8 +1519,10 @@ type LocalSecondaryIndexDescription struct {
 // Represents the properties of a local secondary index for the table when the
 // backup was created.
 type LocalSecondaryIndexInfo struct {
+
 	// Represents the name of the local secondary index.
 	IndexName *string
+
 	// The complete key schema for a local secondary index, which consists of one or
 	// more pairs of attribute names and key types:
 	//
@@ -1288,6 +1539,7 @@ type LocalSecondaryIndexInfo struct {
 	// items with the same partition key physically close together, in sorted order by
 	// the sort key value.
 	KeySchema []*KeySchemaElement
+
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
@@ -1296,9 +1548,11 @@ type LocalSecondaryIndexInfo struct {
 
 // The description of the point in time settings applied to the table.
 type PointInTimeRecoveryDescription struct {
+
 	// Specifies the earliest point in time you can restore your table to. You can
 	// restore your table to any point in time during the last 35 days.
 	EarliestRestorableDateTime *time.Time
+
 	// The current state of point in time recovery:
 	//
 	//     * ENABLING - Point in time
@@ -1309,14 +1563,18 @@ type PointInTimeRecoveryDescription struct {
 	//
 	// * DISABLED - Point in time recovery is disabled.
 	PointInTimeRecoveryStatus PointInTimeRecoveryStatus
+
 	// LatestRestorableDateTime is typically 5 minutes before the current time.
 	LatestRestorableDateTime *time.Time
 }
 
 // Represents the settings used to enable point in time recovery.
 type PointInTimeRecoverySpecification struct {
+
 	// Indicates whether point in time recovery is enabled (true) or disabled (false)
 	// on the table.
+	//
+	// This member is required.
 	PointInTimeRecoveryEnabled *bool
 }
 
@@ -1324,6 +1582,7 @@ type PointInTimeRecoverySpecification struct {
 // These are in addition to the primary key attributes and index key attributes,
 // which are automatically projected.
 type Projection struct {
+
 	// The set of attributes that are projected into the index:
 	//
 	//     * KEYS_ONLY - Only
@@ -1336,6 +1595,7 @@ type Projection struct {
 	//     * ALL - All of the table
 	// attributes are projected into the index.
 	ProjectionType ProjectionType
+
 	// Represents the non-key attribute names which will be projected into the index.
 	// For local secondary indexes, the total count of NonKeyAttributes summed across
 	// all of the local secondary indexes, must not exceed 20. If you project the same
@@ -1350,38 +1610,49 @@ type Projection struct {
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 // in the Amazon DynamoDB Developer Guide.
 type ProvisionedThroughput struct {
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException. For more information, see Specifying
 	// Read and Write Requirements
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide. If read/write capacity mode is
 	// PAY_PER_REQUEST the value is set to 0.
+	//
+	// This member is required.
 	ReadCapacityUnits *int64
+
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException. For more information, see Specifying Read and Write
 	// Requirements
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide. If read/write capacity mode is
 	// PAY_PER_REQUEST the value is set to 0.
+	//
+	// This member is required.
 	WriteCapacityUnits *int64
 }
 
 // Represents the provisioned throughput settings for the table, consisting of read
 // and write capacity units, along with data about increases and decreases.
 type ProvisionedThroughputDescription struct {
+
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	WriteCapacityUnits *int64
+
 	// The date and time of the last provisioned throughput increase for this table.
 	LastIncreaseDateTime *time.Time
+
 	// The number of provisioned throughput decreases for this table during this UTC
 	// calendar day. For current maximums on provisioned throughput decreases, see
 	// Limits
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	NumberOfDecreasesToday *int64
+
 	// The date and time of the last provisioned throughput decrease for this table.
 	LastDecreaseDateTime *time.Time
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException. Eventually consistent reads require less
 	// effort than strongly consistent reads, so a setting of 50 ReadCapacityUnits per
@@ -1392,6 +1663,7 @@ type ProvisionedThroughputDescription struct {
 // Replica-specific provisioned throughput settings. If not specified, uses the
 // source table's provisioned throughput settings.
 type ProvisionedThroughputOverride struct {
+
 	// Replica-specific read capacity units. If not specified, uses the source table's
 	// read capacity settings.
 	ReadCapacityUnits *int64
@@ -1399,52 +1671,70 @@ type ProvisionedThroughputOverride struct {
 
 // Represents a request to perform a PutItem operation.
 type Put struct {
+
 	// One or more values that can be substituted in an expression.
 	ExpressionAttributeValues map[string]*AttributeValue
+
 	// A condition that must be satisfied in order for a conditional update to succeed.
 	ConditionExpression *string
+
 	// Name of the table in which to write the item.
+	//
+	// This member is required.
 	TableName *string
+
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Put
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
 	// NONE and ALL_OLD.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
+
 	// One or more substitution tokens for attribute names in an expression.
 	ExpressionAttributeNames map[string]*string
+
 	// A map of attribute name to attribute values, representing the primary key of the
 	// item to be written by PutItem. All of the table's primary key attributes must be
 	// specified, and their data types must match those of the table's key schema. If
 	// any attributes are present in the item that are part of an index key schema for
 	// the table, their types must match the index key schema.
+	//
+	// This member is required.
 	Item map[string]*AttributeValue
 }
 
 // Represents a request to perform a PutItem operation on an item.
 type PutRequest struct {
+
 	// A map of attribute name to attribute values, representing the primary key of an
 	// item to be processed by PutItem. All of the table's primary key attributes must
 	// be specified, and their data types must match those of the table's key schema.
 	// If any attributes are present in the item that are part of an index key schema
 	// for the table, their types must match the index key schema.
+	//
+	// This member is required.
 	Item map[string]*AttributeValue
 }
 
 // Represents the properties of a replica.
 type Replica struct {
+
 	// The Region where the replica needs to be created.
 	RegionName *string
 }
 
 // Represents the auto scaling settings of the replica.
 type ReplicaAutoScalingDescription struct {
+
 	// The Region where the replica exists.
 	RegionName *string
+
 	// Represents the auto scaling settings for a global table or global secondary
 	// index.
 	ReplicaProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// Represents the auto scaling settings for a global table or global secondary
 	// index.
 	ReplicaProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// The current state of the replica:
 	//
 	//     * CREATING - The replica is being
@@ -1457,31 +1747,41 @@ type ReplicaAutoScalingDescription struct {
 	//
 	//     * ACTIVE - The replica is ready for use.
 	ReplicaStatus ReplicaStatus
+
 	// Replica-specific global secondary index auto scaling settings.
 	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndexAutoScalingDescription
 }
 
 // Represents the auto scaling settings of a replica that will be modified.
 type ReplicaAutoScalingUpdate struct {
+
 	// Represents the auto scaling settings of global secondary indexes that will be
 	// modified.
 	ReplicaGlobalSecondaryIndexUpdates []*ReplicaGlobalSecondaryIndexAutoScalingUpdate
+
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ReplicaProvisionedReadCapacityAutoScalingUpdate *AutoScalingSettingsUpdate
+
 	// The Region where the replica exists.
+	//
+	// This member is required.
 	RegionName *string
 }
 
 // Contains the details of the replica.
 type ReplicaDescription struct {
+
 	// The name of the Region.
 	RegionName *string
+
 	// Replica-specific global secondary index settings.
 	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndexDescription
+
 	// Replica-specific provisioned throughput. If not described, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
 	// The current state of the replica:
 	//
 	//     * CREATING - The replica is being
@@ -1494,20 +1794,27 @@ type ReplicaDescription struct {
 	//
 	//     * ACTIVE - The replica is ready for use.
 	ReplicaStatus ReplicaStatus
+
 	// Specifies the progress of a Create, Update, or Delete action on the replica as a
 	// percentage.
 	ReplicaStatusPercentProgress *string
+
 	// The AWS KMS customer master key (CMK) of the replica that will be used for AWS
 	// KMS encryption.
 	KMSMasterKeyId *string
+
 	// Detailed information about the replica status.
 	ReplicaStatusDescription *string
 }
 
 // Represents the properties of a replica global secondary index.
 type ReplicaGlobalSecondaryIndex struct {
+
 	// The name of the global secondary index.
+	//
+	// This member is required.
 	IndexName *string
+
 	// Replica table GSI-specific provisioned throughput. If not specified, uses the
 	// source table GSI's read capacity settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
@@ -1515,14 +1822,18 @@ type ReplicaGlobalSecondaryIndex struct {
 
 // Represents the auto scaling configuration for a replica global secondary index.
 type ReplicaGlobalSecondaryIndexAutoScalingDescription struct {
+
 	// Represents the auto scaling settings for a global table or global secondary
 	// index.
 	ProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// Represents the auto scaling settings for a global table or global secondary
 	// index.
 	ProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// The name of the global secondary index.
 	IndexName *string
+
 	// The current state of the replica global secondary index:
 	//
 	//     * CREATING - The
@@ -1541,26 +1852,32 @@ type ReplicaGlobalSecondaryIndexAutoScalingDescription struct {
 // Represents the auto scaling settings of a global secondary index for a replica
 // that will be modified.
 type ReplicaGlobalSecondaryIndexAutoScalingUpdate struct {
+
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ProvisionedReadCapacityAutoScalingUpdate *AutoScalingSettingsUpdate
+
 	// The name of the global secondary index.
 	IndexName *string
 }
 
 // Represents the properties of a replica global secondary index.
 type ReplicaGlobalSecondaryIndexDescription struct {
+
 	// If not described, uses the source table GSI's read capacity settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
 	// The name of the global secondary index.
 	IndexName *string
 }
 
 // Represents the properties of a global secondary index.
 type ReplicaGlobalSecondaryIndexSettingsDescription struct {
+
 	// Auto scaling settings for a global secondary index replica's write capacity
 	// units.
 	ProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// The current status of the global secondary index:
 	//
 	//     * CREATING - The global
@@ -1574,15 +1891,21 @@ type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 	//
 	//     * ACTIVE - The global secondary index is ready for use.
 	IndexStatus IndexStatus
+
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	ProvisionedWriteCapacityUnits *int64
+
 	// The name of the global secondary index. The name must be unique among all other
 	// indexes on this table.
+	//
+	// This member is required.
 	IndexName *string
+
 	// Auto scaling settings for a global secondary index replica's read capacity
 	// units.
 	ProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException.
 	ProvisionedReadCapacityUnits *int64
@@ -1591,37 +1914,50 @@ type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 // Represents the settings of a global secondary index for a global table that will
 // be modified.
 type ReplicaGlobalSecondaryIndexSettingsUpdate struct {
+
 	// Auto scaling settings for managing a global secondary index replica's read
 	// capacity units.
 	ProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException.
 	ProvisionedReadCapacityUnits *int64
+
 	// The name of the global secondary index. The name must be unique among all other
 	// indexes on this table.
+	//
+	// This member is required.
 	IndexName *string
 }
 
 // Represents the properties of a replica.
 type ReplicaSettingsDescription struct {
+
 	// Auto scaling settings for a global table replica's write capacity units.
 	ReplicaProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException. For more information, see Specifying
 	// Read and Write Requirements
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedReadCapacityUnits *int64
+
 	// Auto scaling settings for a global table replica's read capacity units.
 	ReplicaProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException. For more information, see Specifying Read and Write
 	// Requirements
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedWriteCapacityUnits *int64
+
 	// The Region name of the replica.
+	//
+	// This member is required.
 	RegionName *string
+
 	// The current state of the Region:
 	//
 	//     * CREATING - The Region is being
@@ -1634,21 +1970,29 @@ type ReplicaSettingsDescription struct {
 	//
 	//     * ACTIVE - The Region is ready for use.
 	ReplicaStatus ReplicaStatus
+
 	// The read/write capacity mode of the replica.
 	ReplicaBillingModeSummary *BillingModeSummary
+
 	// Replica global secondary index settings for the global table.
 	ReplicaGlobalSecondaryIndexSettings []*ReplicaGlobalSecondaryIndexSettingsDescription
 }
 
 // Represents the settings for a global table in a Region that will be modified.
 type ReplicaSettingsUpdate struct {
+
 	// Auto scaling settings for managing a global table replica's read capacity units.
 	ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate
+
 	// Represents the settings of a global secondary index for a global table that will
 	// be modified.
 	ReplicaGlobalSecondaryIndexSettingsUpdate []*ReplicaGlobalSecondaryIndexSettingsUpdate
+
 	// The Region of the replica to be added.
+	//
+	// This member is required.
 	RegionName *string
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException. For more information, see Specifying
 	// Read and Write Requirements
@@ -1671,10 +2015,13 @@ type ReplicaSettingsUpdate struct {
 // action in the destination Region, deleting the replica and all if its items in
 // the destination Region.
 type ReplicationGroupUpdate struct {
+
 	// The parameters required for deleting a replica for the table.
 	Delete *DeleteReplicationGroupMemberAction
+
 	// The parameters required for creating a replica for the table.
 	Create *CreateReplicationGroupMemberAction
+
 	// The parameters required for updating a replica for the table.
 	Update *UpdateReplicationGroupMemberAction
 }
@@ -1689,42 +2036,71 @@ type ReplicationGroupUpdate struct {
 //     * An existing
 // replica to be removed from an existing global table.
 type ReplicaUpdate struct {
+
 	// The parameters required for creating a replica on an existing global table.
 	Create *CreateReplicaAction
+
 	// The name of the existing replica to be removed.
 	Delete *DeleteReplicaAction
 }
 
 // Contains details for the restore.
 type RestoreSummary struct {
+
 	// The Amazon Resource Name (ARN) of the backup from which the table was restored.
 	SourceBackupArn *string
+
 	// The ARN of the source table of the backup that is being restored.
 	SourceTableArn *string
+
 	// Point in time or source backup time.
+	//
+	// This member is required.
 	RestoreDateTime *time.Time
+
 	// Indicates if a restore is in progress or not.
+	//
+	// This member is required.
 	RestoreInProgress *bool
 }
 
 // Contains the details of the table when the backup was created.
 type SourceTableDetails struct {
+
 	// Read IOPs and Write IOPS on the table when the backup was created.
+	//
+	// This member is required.
 	ProvisionedThroughput *ProvisionedThroughput
+
 	// Unique identifier for the table for which the backup was created.
+	//
+	// This member is required.
 	TableId *string
+
 	// The name of the table for which the backup was created.
+	//
+	// This member is required.
 	TableName *string
+
 	// Number of items in the table. Note that this is an approximate value.
 	ItemCount *int64
+
 	// Size of the table in bytes. Note that this is an approximate value.
 	TableSizeBytes *int64
+
 	// Time when the source table was created.
+	//
+	// This member is required.
 	TableCreationDateTime *time.Time
+
 	// ARN of the table for which backup was created.
 	TableArn *string
+
 	// Schema of the table.
+	//
+	// This member is required.
 	KeySchema []*KeySchemaElement
+
 	// Controls how you are charged for read and write throughput and how you manage
 	// capacity. This setting can be changed later.
 	//
@@ -1741,17 +2117,22 @@ type SourceTableDetails struct {
 // Contains the details of the features enabled on the table when the backup was
 // created. For example, LSIs, GSIs, streams, TTL.
 type SourceTableFeatureDetails struct {
+
 	// Represents the LSI properties for the table when the backup was created. It
 	// includes the IndexName, KeySchema and Projection for the LSIs on the table at
 	// the time of backup.
 	LocalSecondaryIndexes []*LocalSecondaryIndexInfo
+
 	// Time to Live settings on the table when the backup was created.
 	TimeToLiveDescription *TimeToLiveDescription
+
 	// The description of the server-side encryption status on the table when the
 	// backup was created.
 	SSEDescription *SSEDescription
+
 	// Stream settings on the table when the backup was created.
 	StreamDescription *StreamSpecification
+
 	// Represents the GSI properties for the table when the backup was created. It
 	// includes the IndexName, KeySchema, Projection, and ProvisionedThroughput for the
 	// GSIs on the table at the time of backup.
@@ -1760,12 +2141,14 @@ type SourceTableFeatureDetails struct {
 
 // The description of the server-side encryption status on the specified table.
 type SSEDescription struct {
+
 	// Indicates the time, in UNIX epoch date format, when DynamoDB detected that the
 	// table's AWS KMS key was inaccessible. This attribute will automatically be
 	// cleared when DynamoDB detects that the table's AWS KMS key is accessible again.
 	// DynamoDB will initiate the table archival process when table's AWS KMS key
 	// remains inaccessible for more than seven days from this date.
 	InaccessibleEncryptionDateTime *time.Time
+
 	// Represents the current state of server-side encryption. The only supported
 	// values are:
 	//
@@ -1774,8 +2157,10 @@ type SSEDescription struct {
 	//     * UPDATING
 	// - Server-side encryption is being updated.
 	Status SSEStatus
+
 	// The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
 	KMSMasterKeyArn *string
+
 	// Server-side encryption type. The only supported value is:
 	//
 	//     * KMS -
@@ -1786,17 +2171,20 @@ type SSEDescription struct {
 
 // Represents the settings used to enable server-side encryption.
 type SSESpecification struct {
+
 	// The AWS KMS customer master key (CMK) that should be used for the AWS KMS
 	// encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
 	// name, or alias ARN. Note that you should only provide this parameter if the key
 	// is different from the default DynamoDB customer master key alias/aws/dynamodb.
 	KMSMasterKeyId *string
+
 	// Server-side encryption type. The only supported value is:
 	//
 	//     * KMS -
 	// Server-side encryption that uses AWS Key Management Service. The key is stored
 	// in your account and is managed by AWS KMS (AWS KMS charges apply).
 	SSEType SSEType
+
 	// Indicates whether server-side encryption is done using an AWS managed CMK or an
 	// AWS owned CMK. If enabled (true), server-side encryption type is set to KMS and
 	// an AWS managed CMK is used (AWS KMS charges apply). If disabled (false) or not
@@ -1806,6 +2194,7 @@ type SSESpecification struct {
 
 // Represents the DynamoDB Streams configuration for a table in DynamoDB.
 type StreamSpecification struct {
+
 	// When an item in the table is modified, StreamViewType determines what
 	// information is written to the stream for this table. Valid values for
 	// StreamViewType are:
@@ -1823,13 +2212,17 @@ type StreamSpecification struct {
 	// * NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are
 	// written to the stream.
 	StreamViewType StreamViewType
+
 	// Indicates whether DynamoDB Streams is enabled (true) or disabled (false) on the
 	// table.
+	//
+	// This member is required.
 	StreamEnabled *bool
 }
 
 // Represents the auto scaling configuration for a global table.
 type TableAutoScalingDescription struct {
+
 	// The current state of the table:
 	//
 	//     * CREATING - The table is being created.
@@ -1842,23 +2235,30 @@ type TableAutoScalingDescription struct {
 	//
 	//     * ACTIVE - The table is ready for use.
 	TableStatus TableStatus
+
 	// The name of the table.
 	TableName *string
+
 	// Represents replicas of the global table.
 	Replicas []*ReplicaAutoScalingDescription
 }
 
 // Represents the properties of a table.
 type TableDescription struct {
+
 	// The description of the server-side encryption status on the specified table.
 	SSEDescription *SSEDescription
+
 	// Contains information about the table archive.
 	ArchivalSummary *ArchivalSummary
+
 	// Contains the details for the read/write capacity mode.
 	BillingModeSummary *BillingModeSummary
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the latest stream for
 	// this table.
 	LatestStreamArn *string
+
 	// The global secondary indexes, if any, on the table. Each index is scoped to a
 	// given partition key value. Each element is composed of:
 	//
@@ -1935,6 +2335,7 @@ type TableDescription struct {
 	// If the table is in the DELETING state,
 	// no information about indexes will be returned.
 	GlobalSecondaryIndexes []*GlobalSecondaryIndexDescription
+
 	// An array of AttributeDefinition objects. Each of these objects describes one
 	// attribute in the table and index key schema. Each AttributeDefinition object in
 	// this array is composed of:
@@ -1944,23 +2345,30 @@ type TableDescription struct {
 	//
 	// * AttributeType - The data type for the attribute.
 	AttributeDefinitions []*AttributeDefinition
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the table.
 	TableArn *string
+
 	// Represents the version of global tables
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html)
 	// in use, if the table is replicated across AWS Regions.
 	GlobalTableVersion *string
+
 	// The provisioned throughput settings for the table, consisting of read and write
 	// capacity units, along with data about increases and decreases.
 	ProvisionedThroughput *ProvisionedThroughputDescription
+
 	// Represents replicas of the table.
 	Replicas []*ReplicaDescription
+
 	// Unique identifier for the table for which the backup was created.
 	TableId *string
+
 	// The total size of the specified table, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
 	TableSizeBytes *int64
+
 	// The current state of the table:
 	//
 	//     * CREATING - The table is being created.
@@ -1986,8 +2394,10 @@ type TableDescription struct {
 	// ARCHIVED - The table has been archived. See the ArchivalReason for more
 	// information.
 	TableStatus TableStatus
+
 	// The current DynamoDB Streams configuration for the table.
 	StreamSpecification *StreamSpecification
+
 	// The primary key structure for the table. Each KeySchemaElement consists of:
 	//
 	//
@@ -2011,8 +2421,10 @@ type TableDescription struct {
 	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey">Primary
 	// Key</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
 	KeySchema []*KeySchemaElement
+
 	// Contains details for the restore.
 	RestoreSummary *RestoreSummary
+
 	// Represents one or more local secondary indexes on the table. Each index is
 	// scoped to a given partition key value. Tables with one or more local secondary
 	// indexes are subject to an item collection size limit, where the amount of data
@@ -2063,6 +2475,7 @@ type TableDescription struct {
 	// If the table is in the DELETING state, no information about indexes will
 	// be returned.
 	LocalSecondaryIndexes []*LocalSecondaryIndexDescription
+
 	// A timestamp, in ISO 8601 format, for this stream.  <p>Note that
 	// <code>LatestStreamLabel</code> is not a unique identifier for the stream,
 	// because it is possible that a stream from another table might have the same
@@ -2070,11 +2483,14 @@ type TableDescription struct {
 	// guaranteed to be unique:</p> <ul> <li> <p>AWS customer ID</p> </li> <li>
 	// <p>Table name</p> </li> <li> <p> <code>StreamLabel</code> </p> </li> </ul>
 	LatestStreamLabel *string
+
 	// The date and time when the table was created, in UNIX epoch time
 	// (http://www.epochconverter.com/) format.
 	CreationDateTime *time.Time
+
 	// The name of the table.
 	TableName *string
+
 	// The number of items in the specified table. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
@@ -2091,18 +2507,26 @@ type TableDescription struct {
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.
 type Tag struct {
+
 	// The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only
 	// have up to one tag with the same key. If you try to add an existing tag (same
 	// key), the existing tag value will be updated to the new value.
+	//
+	// This member is required.
 	Key *string
+
 	// The value of the tag. Tag values are case-sensitive and can be null.
+	//
+	// This member is required.
 	Value *string
 }
 
 // The description of the Time to Live (TTL) status on the specified table.
 type TimeToLiveDescription struct {
+
 	// The TTL status for the table.
 	TimeToLiveStatus TimeToLiveStatus
+
 	// The name of the TTL attribute for items in the table.
 	AttributeName *string
 }
@@ -2110,50 +2534,76 @@ type TimeToLiveDescription struct {
 // Represents the settings used to enable or disable Time to Live (TTL) for the
 // specified table.
 type TimeToLiveSpecification struct {
+
 	// Indicates whether TTL is to be enabled (true) or disabled (false) on the table.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// The name of the TTL attribute used to store the expiration time for items in the
 	// table.
+	//
+	// This member is required.
 	AttributeName *string
 }
 
 // Specifies an item to be retrieved as part of the transaction.
 type TransactGetItem struct {
+
 	// Contains the primary key that identifies the item to get, together with the name
 	// of the table that contains the item, and optionally the specific attributes of
 	// the item to retrieve.
+	//
+	// This member is required.
 	Get *Get
 }
 
 // A list of requests that can perform update, put, delete, or check operations on
 // multiple items in one or more tables atomically.
 type TransactWriteItem struct {
+
 	// A request to perform a PutItem operation.
 	Put *Put
+
 	// A request to perform a check item operation.
 	ConditionCheck *ConditionCheck
+
 	// A request to perform an UpdateItem operation.
 	Update *Update
+
 	// A request to perform a DeleteItem operation.
 	Delete *Delete
 }
 
 // Represents a request to perform an UpdateItem operation.
 type Update struct {
+
 	// One or more substitution tokens for attribute names in an expression.
 	ExpressionAttributeNames map[string]*string
+
 	// An expression that defines one or more attributes to be updated, the action to
 	// be performed on them, and new value(s) for them.
+	//
+	// This member is required.
 	UpdateExpression *string
+
 	// Name of the table for the UpdateItem request.
+	//
+	// This member is required.
 	TableName *string
+
 	// A condition that must be satisfied in order for a conditional update to succeed.
 	ConditionExpression *string
+
 	// The primary key of the item to be updated. Each element consists of an attribute
 	// name and a value for that attribute.
+	//
+	// This member is required.
 	Key map[string]*AttributeValue
+
 	// One or more values that can be substituted in an expression.
 	ExpressionAttributeValues map[string]*AttributeValue
+
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Update
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
 	// NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW.
@@ -2163,25 +2613,37 @@ type Update struct {
 // Represents the new provisioned throughput settings to be applied to a global
 // secondary index.
 type UpdateGlobalSecondaryIndexAction struct {
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Limits
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
+	//
+	// This member is required.
 	ProvisionedThroughput *ProvisionedThroughput
+
 	// The name of the global secondary index to be updated.
+	//
+	// This member is required.
 	IndexName *string
 }
 
 // Represents a replica to be modified.
 type UpdateReplicationGroupMemberAction struct {
+
 	// The Region where the replica exists.
+	//
+	// This member is required.
 	RegionName *string
+
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
 	// Replica-specific global secondary index settings.
 	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndex
+
 	// The AWS KMS customer master key (CMK) of the replica that should be used for AWS
 	// KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN),
 	// alias name, or alias ARN. Note that you should only provide this parameter if
@@ -2195,8 +2657,10 @@ type UpdateReplicationGroupMemberAction struct {
 // need to perform both of these operations, you need to provide two separate
 // WriteRequest objects.
 type WriteRequest struct {
+
 	// A request to perform a DeleteItem operation.
 	DeleteRequest *DeleteRequest
+
 	// A request to perform a PutItem operation.
 	PutRequest *PutRequest
 }

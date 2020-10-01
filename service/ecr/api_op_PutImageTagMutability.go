@@ -59,12 +59,19 @@ func (c *Client) PutImageTagMutability(ctx context.Context, params *PutImageTagM
 }
 
 type PutImageTagMutabilityInput struct {
+
 	// The tag mutability setting for the repository. If MUTABLE is specified, image
 	// tags can be overwritten. If IMMUTABLE is specified, all image tags within the
 	// repository will be immutable which will prevent them from being overwritten.
+	//
+	// This member is required.
 	ImageTagMutability types.ImageTagMutability
+
 	// The name of the repository in which to update the image tag mutability settings.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The AWS account ID associated with the registry that contains the repository in
 	// which to update the image tag mutability settings. If you do not specify a
 	// registry, the default registry is assumed.
@@ -72,10 +79,13 @@ type PutImageTagMutabilityInput struct {
 }
 
 type PutImageTagMutabilityOutput struct {
+
 	// The image tag mutability setting for the repository.
 	ImageTagMutability types.ImageTagMutability
+
 	// The repository name associated with the request.
 	RepositoryName *string
+
 	// The registry ID associated with the request.
 	RegistryId *string
 

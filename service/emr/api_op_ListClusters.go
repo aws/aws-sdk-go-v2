@@ -62,12 +62,16 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 // This input determines how the ListClusters action filters the list of clusters
 // that it returns.
 type ListClustersInput struct {
+
 	// The creation date and time beginning value filter for listing clusters.
 	CreatedAfter *time.Time
+
 	// The creation date and time end value filter for listing clusters.
 	CreatedBefore *time.Time
+
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
 	// The cluster state filters to apply when listing clusters.
 	ClusterStates []types.ClusterState
 }
@@ -75,8 +79,10 @@ type ListClustersInput struct {
 // This contains a ClusterSummaryList with the cluster details; for example, the
 // cluster IDs, names, and status.
 type ListClustersOutput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
 	// The list of clusters for the account based on the given filters.
 	Clusters []*types.ClusterSummary
 

@@ -63,8 +63,12 @@ func (c *Client) GetRateBasedStatementManagedKeys(ctx context.Context, params *G
 }
 
 type GetRateBasedStatementManagedKeysInput struct {
+
 	// The name of the rate-based rule to get the keys for.
+	//
+	// This member is required.
 	RuleName *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -75,18 +79,28 @@ type GetRateBasedStatementManagedKeysInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// The unique identifier for the Web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
 	WebACLId *string
+
 	// The name of the Web ACL. You cannot change the name of a Web ACL after you
 	// create it.
+	//
+	// This member is required.
 	WebACLName *string
 }
 
 type GetRateBasedStatementManagedKeysOutput struct {
+
 	// The keys that are of Internet Protocol version 6 (IPv6).
 	ManagedKeysIPV6 *types.RateBasedStatementManagedKeysIPSet
+
 	// The keys that are of Internet Protocol version 4 (IPv4).
 	ManagedKeysIPV4 *types.RateBasedStatementManagedKeysIPSet
 

@@ -55,11 +55,15 @@ func (c *Client) UnclaimDevice(ctx context.Context, params *UnclaimDeviceInput, 
 }
 
 type UnclaimDeviceInput struct {
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
 }
 
 type UnclaimDeviceOutput struct {
+
 	// The device's final claim state.
 	State *string
 

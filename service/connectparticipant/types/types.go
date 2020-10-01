@@ -4,30 +4,40 @@ package types
 
 // Connection credentials.
 type ConnectionCredentials struct {
+
 	// The expiration of the token. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	Expiry *string
+
 	// The connection token.
 	ConnectionToken *string
 }
 
 // An item - message or event - that has been sent.
 type Item struct {
+
 	// The ID of the sender in the session.
 	ParticipantId *string
+
 	// The type of content of the item.
 	ContentType *string
+
 	// Type of the item: message or event.
 	Type ChatItemType
+
 	// The content of the message or event.
 	Content *string
+
 	// The time when the message or event was sent. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
+
 	// The chat display name of the sender.
 	DisplayName *string
+
 	// The ID of the item.
 	Id *string
+
 	// The role of the sender. For example, is it a customer, agent, or system.
 	ParticipantRole ParticipantRole
 }
@@ -35,19 +45,24 @@ type Item struct {
 // A filtering option for where to start. For example, if you sent 100 messages,
 // start with message 50.
 type StartPosition struct {
+
 	// The time in ISO format where to start. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
+
 	// The start position of the most recent message where you want to start.
 	MostRecent *int32
+
 	// The ID of the message or event where to start.
 	Id *string
 }
 
 // The websocket for the participant's connection.
 type Websocket struct {
+
 	// The URL of the websocket.
 	Url *string
+
 	// The URL expiration timestamp in ISO date format. It's specified in ISO 8601
 	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	ConnectionExpiry *string

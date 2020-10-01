@@ -62,18 +62,24 @@ func (c *Client) CreateTapeWithBarcode(ctx context.Context, params *CreateTapeWi
 
 // CreateTapeWithBarcodeInput
 type CreateTapeWithBarcodeInput struct {
+
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	KMSEncrypted *bool
+
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
+
 	// The barcode that you want to assign to the tape.  <note> <p>Barcodes cannot be
 	// reused. This includes barcodes used for tapes that have been deleted.</p>
 	// </note>
+	//
+	// This member is required.
 	TapeBarcode *string
+
 	// The ID of the pool that you want to add your tape to for archiving. The tape in
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
@@ -81,13 +87,20 @@ type CreateTapeWithBarcodeInput struct {
 	// to the pool.  <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>
 	// </p>
 	PoolId *string
+
 	// The size, in bytes, of the virtual tape that you want to create.  <note> <p>The
 	// size must be aligned by gigabyte (1024*1024*1024 bytes).</p> </note>
+	//
+	// This member is required.
 	TapeSizeInBytes *int64
+
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
 	// the virtual tape with. Use the ListGateways () operation to return a list of
 	// gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// A list of up to 50 tags that can be assigned to a virtual tape that has a
 	// barcode. Each tag is a key-value pair.  <note> <p>Valid characters for key and
 	// value are letters, spaces, and numbers representable in UTF-8 format, and the
@@ -98,6 +111,7 @@ type CreateTapeWithBarcodeInput struct {
 
 // CreateTapeOutput
 type CreateTapeWithBarcodeOutput struct {
+
 	// A unique Amazon Resource Name (ARN) that represents the virtual tape that was
 	// created.
 	TapeARN *string

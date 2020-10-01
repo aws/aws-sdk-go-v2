@@ -72,13 +72,17 @@ func (c *Client) DeleteCertificateAuthority(ctx context.Context, params *DeleteC
 }
 
 type DeleteCertificateAuthorityInput struct {
+
 	// The number of days to make a CA restorable after it has been deleted. This can
 	// be anywhere from 7 to 30 days, with 30 being the default.
 	PermanentDeletionTimeInDays *int32
+
 	// The Amazon Resource Name (ARN) that was returned when you called
 	// CreateCertificateAuthority (). This must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
 }
 

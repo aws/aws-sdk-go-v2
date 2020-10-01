@@ -63,10 +63,14 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 
 // Specifies the tags to add to a trail.
 type AddTagsInput struct {
+
 	// Specifies the ARN of the trail to which one or more tags will be added. The
 	// format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	ResourceId *string
+
 	// Contains a list of CloudTrail tags, up to a limit of 50
 	TagsList []*types.Tag
 }

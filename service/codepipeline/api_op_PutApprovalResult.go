@@ -59,23 +59,39 @@ func (c *Client) PutApprovalResult(ctx context.Context, params *PutApprovalResul
 
 // Represents the input of a PutApprovalResult action.
 type PutApprovalResultInput struct {
+
 	// The name of the pipeline that contains the action.
+	//
+	// This member is required.
 	PipelineName *string
+
 	// Represents information about the result of the approval request.
+	//
+	// This member is required.
 	Result *types.ApprovalResult
+
 	// The name of the action for which approval is requested.
+	//
+	// This member is required.
 	ActionName *string
+
 	// The system-generated token used to identify a unique approval request. The token
 	// for each open approval request can be obtained using the GetPipelineState ()
 	// action. It is used to validate that the approval request corresponding to this
 	// token is still valid.
+	//
+	// This member is required.
 	Token *string
+
 	// The name of the stage that contains the action.
+	//
+	// This member is required.
 	StageName *string
 }
 
 // Represents the output of a PutApprovalResult action.
 type PutApprovalResultOutput struct {
+
 	// The timestamp showing when the approval or rejection was submitted.
 	ApprovedAt *time.Time
 

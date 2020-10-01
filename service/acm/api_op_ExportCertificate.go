@@ -62,23 +62,32 @@ func (c *Client) ExportCertificate(ctx context.Context, params *ExportCertificat
 }
 
 type ExportCertificateInput struct {
+
 	// An Amazon Resource Name (ARN) of the issued certificate. This must be of the
 	// form:
 	// arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// This member is required.
 	CertificateArn *string
+
 	// Passphrase to associate with the encrypted exported private key. If you want to
 	// later decrypt the private key, you must have the passphrase. You can use the
 	// following OpenSSL command to decrypt a private key: openssl rsa -in
 	// encrypted_key.pem -out decrypted_key.pem
+	//
+	// This member is required.
 	Passphrase []byte
 }
 
 type ExportCertificateOutput struct {
+
 	// The base64 PEM-encoded certificate.
 	Certificate *string
+
 	// The encrypted private key associated with the public key in the certificate. The
 	// key is output in PKCS #8 format and is base64 PEM-encoded.
 	PrivateKey *string
+
 	// The base64 PEM-encoded certificate chain. This does not include the certificate
 	// that you are exporting.
 	CertificateChain *string

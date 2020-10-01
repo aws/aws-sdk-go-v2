@@ -80,13 +80,19 @@ func (c *Client) TagUser(ctx context.Context, params *TagUserInput, optFns ...fu
 }
 
 type TagUserInput struct {
+
 	// The list of tags that you want to attach to the user. Each tag consists of a key
 	// name and an associated value.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The name of the user that you want to add tags to. This parameter accepts
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters that consist of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: =,.@-
+	//
+	// This member is required.
 	UserName *string
 }
 

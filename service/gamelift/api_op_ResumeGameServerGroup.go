@@ -83,14 +83,21 @@ func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameSe
 }
 
 type ResumeGameServerGroupInput struct {
+
 	// The action to resume for this game server group.
+	//
+	// This member is required.
 	ResumeActions []types.GameServerGroupAction
+
 	// The unique identifier of the game server group to resume activity on. Use either
 	// the GameServerGroup () name or ARN value.
+	//
+	// This member is required.
 	GameServerGroupName *string
 }
 
 type ResumeGameServerGroupOutput struct {
+
 	// An object that describes the game server group resource, with the
 	// SuspendedActions property updated to reflect the resumed activity.
 	GameServerGroup *types.GameServerGroup

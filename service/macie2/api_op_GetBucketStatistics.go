@@ -57,32 +57,42 @@ func (c *Client) GetBucketStatistics(ctx context.Context, params *GetBucketStati
 }
 
 type GetBucketStatisticsInput struct {
+
 	// The unique identifier for the AWS account.
 	AccountId *string
 }
 
 type GetBucketStatisticsOutput struct {
+
 	// The total number of buckets, grouped by server-side encryption type. This object
 	// also reports the total number of buckets that aren't encrypted.
 	BucketCountByEncryptionType *types.BucketCountByEncryptionType
+
 	// The total storage size, in bytes, of all the buckets.
 	SizeInBytes *int64
+
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last
 	// analyzed the buckets.
 	LastUpdated *time.Time
+
 	// The total number of objects that Amazon Macie can analyze in all the buckets.
 	// These objects use a file format, file extension, or content type that Amazon
 	// Macie supports.
 	ClassifiableObjectCount *int64
+
 	// The total number of buckets that are publicly accessible based on a combination
 	// of permissions settings for each bucket.
 	BucketCountByEffectivePermission *types.BucketCountByEffectivePermission
+
 	// The total number of objects in all the buckets.
 	ObjectCount *int64
+
 	// The total compressed storage size, in bytes, of all the buckets.
 	SizeInBytesCompressed *int64
+
 	// The total number of buckets that are shared with another AWS account.
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
+
 	// The total number of buckets.
 	BucketCount *int64
 

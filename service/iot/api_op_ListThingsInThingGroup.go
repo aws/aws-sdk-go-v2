@@ -55,19 +55,27 @@ func (c *Client) ListThingsInThingGroup(ctx context.Context, params *ListThingsI
 }
 
 type ListThingsInThingGroupInput struct {
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// When true, list things in this thing group and in all child groups as well.
 	Recursive *bool
+
 	// The thing group name.
+	//
+	// This member is required.
 	ThingGroupName *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListThingsInThingGroupOutput struct {
+
 	// The things in the specified thing group.
 	Things []*string
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string

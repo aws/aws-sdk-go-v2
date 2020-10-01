@@ -55,19 +55,24 @@ func (c *Client) ListTagOptions(ctx context.Context, params *ListTagOptionsInput
 }
 
 type ListTagOptionsInput struct {
+
 	// The search filters. If no search filters are specified, the output includes all
 	// TagOptions.
 	Filters *types.ListTagOptionsFilters
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
 }
 
 type ListTagOptionsOutput struct {
+
 	// Information about the TagOptions.
 	TagOptionDetails []*types.TagOptionDetail
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string

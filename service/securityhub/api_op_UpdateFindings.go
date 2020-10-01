@@ -59,11 +59,16 @@ func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput
 }
 
 type UpdateFindingsInput struct {
+
 	// The updated record state for the finding.
 	RecordState types.RecordState
+
 	// The updated note for the finding.
 	Note *types.NoteUpdate
+
 	// A collection of attributes that specify which findings you want to update.
+	//
+	// This member is required.
 	Filters *types.AwsSecurityFindingFilters
 }
 

@@ -61,12 +61,15 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 }
 
 type CreateFleetInput struct {
+
 	// The start date and time of the request, in UTC format (for example,
 	// YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request
 	// immediately.
 	ValidFrom *time.Time
+
 	// Describes the configuration of Spot Instances in an EC2 Fleet.
 	SpotOptions *types.SpotOptionsRequest
+
 	// The type of the request. By default, the EC2 Fleet places an asynchronous
 	// request for your desired capacity, and maintains it by replenishing interrupted
 	// Spot Instances (maintain). A value of instant places a synchronous one-time
@@ -77,19 +80,26 @@ type CreateFleetInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	Type types.FleetType
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// Indicates whether EC2 Fleet should replace unhealthy instances.
 	ReplaceUnhealthyInstances *bool
+
 	// The configuration for the EC2 Fleet.
+	//
+	// This member is required.
 	LaunchTemplateConfigs []*types.FleetLaunchTemplateConfigRequest
+
 	// The key-value pair for tagging the EC2 Fleet request on creation. The value for
 	// ResourceType must be fleet, otherwise the fleet request fails. To tag instances
 	// at launch, specify the tags in the launch template
@@ -97,16 +107,23 @@ type CreateFleetInput struct {
 	// For information about tagging after launch, see Tagging Your Resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
 	TagSpecifications []*types.TagSpecification
+
 	// The number of units to request.
+	//
+	// This member is required.
 	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
+
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
 	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
+
 	// Describes the configuration of On-Demand Instances in an EC2 Fleet.
 	OnDemandOptions *types.OnDemandOptionsRequest
+
 	// Indicates whether running instances should be terminated when the EC2 Fleet
 	// expires.
 	TerminateInstancesWithExpiration *bool
+
 	// The end date and time of the request, in UTC format (for example,
 	// YYYY-MM-DDTHH:MM:SSZ). At this point, no new EC2 Fleet requests are placed or
 	// able to fulfill the request. If no value is specified, the request remains until
@@ -115,11 +132,14 @@ type CreateFleetInput struct {
 }
 
 type CreateFleetOutput struct {
+
 	// Information about the instances that could not be launched by the fleet. Valid
 	// only when Type is set to instant.
 	Errors []*types.CreateFleetError
+
 	// The ID of the EC2 Fleet.
 	FleetId *string
+
 	// Information about the instances that were launched by the fleet. Valid only when
 	// Type is set to instant.
 	Instances []*types.CreateFleetInstance

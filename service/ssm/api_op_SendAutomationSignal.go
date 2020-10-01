@@ -57,9 +57,13 @@ func (c *Client) SendAutomationSignal(ctx context.Context, params *SendAutomatio
 }
 
 type SendAutomationSignalInput struct {
+
 	// The unique identifier for an existing Automation execution that you want to send
 	// the signal to.
+	//
+	// This member is required.
 	AutomationExecutionId *string
+
 	// The data sent with the signal. The data schema depends on the type of signal
 	// used in the request. For Approve and Reject signal types, the payload is an
 	// optional comment that you can send with the signal type. For example:
@@ -69,7 +73,10 @@ type SendAutomationSignalInput struct {
 	// ID as the payload. For example:
 	// StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"
 	Payload map[string][]*string
+
 	// The type of signal to send to an Automation execution.
+	//
+	// This member is required.
 	SignalType types.SignalType
 }
 

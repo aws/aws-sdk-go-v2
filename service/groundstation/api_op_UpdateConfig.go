@@ -58,22 +58,37 @@ func (c *Client) UpdateConfig(ctx context.Context, params *UpdateConfigInput, op
 
 //
 type UpdateConfigInput struct {
+
 	// Parameters of a Config.
+	//
+	// This member is required.
 	ConfigData types.ConfigTypeData
+
 	// UUID of a Config.
+	//
+	// This member is required.
 	ConfigId *string
+
 	// Type of a Config.
+	//
+	// This member is required.
 	ConfigType types.ConfigCapabilityType
+
 	// Name of a Config.
+	//
+	// This member is required.
 	Name *string
 }
 
 //
 type UpdateConfigOutput struct {
+
 	// ARN of a Config.
 	ConfigArn *string
+
 	// UUID of a Config.
 	ConfigId *string
+
 	// Type of a Config.
 	ConfigType types.ConfigCapabilityType
 

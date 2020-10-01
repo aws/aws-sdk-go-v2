@@ -56,14 +56,21 @@ func (c *Client) UpdateComment(ctx context.Context, params *UpdateCommentInput, 
 }
 
 type UpdateCommentInput struct {
+
 	// The updated content to replace the existing content of the comment.
+	//
+	// This member is required.
 	Content *string
+
 	// The system-generated ID of the comment you want to update. To get this ID, use
 	// GetCommentsForComparedCommit () or GetCommentsForPullRequest ().
+	//
+	// This member is required.
 	CommentId *string
 }
 
 type UpdateCommentOutput struct {
+
 	// Information about the updated comment.
 	Comment *types.Comment
 

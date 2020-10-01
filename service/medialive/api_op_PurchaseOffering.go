@@ -59,25 +59,36 @@ func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingI
 
 // Placeholder documentation for PurchaseOfferingRequest
 type PurchaseOfferingInput struct {
+
 	// Offering to purchase, e.g. '87654321'
+	//
+	// This member is required.
 	OfferingId *string
+
 	// A collection of key-value pairs
 	Tags map[string]*string
+
 	// Name for the new reservation
 	Name *string
+
 	// Requested reservation start time (UTC) in ISO-8601 format. The specified time
 	// must be between the first day of the current month and one year from now. If no
 	// value is given, the default is now.
 	Start *string
+
 	// Unique request ID to be specified. This is needed to prevent retries from
 	// creating multiple resources.
 	RequestId *string
+
 	// Number of resources
+	//
+	// This member is required.
 	Count *int32
 }
 
 // Placeholder documentation for PurchaseOfferingResponse
 type PurchaseOfferingOutput struct {
+
 	// Reserved resources available to use
 	Reservation *types.Reservation
 

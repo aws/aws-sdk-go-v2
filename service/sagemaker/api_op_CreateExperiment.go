@@ -72,20 +72,27 @@ func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentI
 }
 
 type CreateExperimentInput struct {
+
 	// The description of the experiment.
 	Description *string
+
 	// The name of the experiment. The name must be unique in your AWS account and is
 	// not case-sensitive.
+	//
+	// This member is required.
 	ExperimentName *string
+
 	// The name of the experiment as displayed. The name doesn't need to be unique. If
 	// you don't specify DisplayName, the value in ExperimentName is displayed.
 	DisplayName *string
+
 	// A list of tags to associate with the experiment. You can use Search () API to
 	// search on the tags.
 	Tags []*types.Tag
 }
 
 type CreateExperimentOutput struct {
+
 	// The Amazon Resource Name (ARN) of the experiment.
 	ExperimentArn *string
 

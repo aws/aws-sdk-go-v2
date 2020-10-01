@@ -98,6 +98,7 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 }
 
 type PostTextInput struct {
+
 	// The ID of the client application user. Amazon Lex uses this to identify a user's
 	// conversation with your bot. At runtime, each request must contain the userID
 	// field. To decide the user ID to use for your application, consider the following
@@ -120,17 +121,30 @@ type PostTextInput struct {
 	// BETA versions of the same bot. If you anticipate that a user will need to have
 	// conversation with two different versions, for example, while testing, include
 	// the bot alias in the user ID to separate the two conversations.
+	//
+	// This member is required.
 	UserId *string
+
 	// The text that the user entered (Amazon Lex interprets this text).
+	//
+	// This member is required.
 	InputText *string
+
 	// The name of the Amazon Lex bot.
+	//
+	// This member is required.
 	BotName *string
+
 	// The alias of the Amazon Lex bot.
+	//
+	// This member is required.
 	BotAlias *string
+
 	// Application-specific information passed between Amazon Lex and a client
 	// application. For more information, see Setting Session Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
 	SessionAttributes map[string]*string
+
 	// Request-specific information passed between Amazon Lex and a client application.
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create any
 	// request attributes with the prefix x-amz-lex:. For more information, see Setting
@@ -140,6 +154,7 @@ type PostTextInput struct {
 }
 
 type PostTextOutput struct {
+
 	// The message to convey to the user. The message can come from the bot's
 	// configuration or from a Lambda function. If the intent is not configured with a
 	// Lambda function, or if the Lambda function returned Delegate as the
@@ -153,6 +168,7 @@ type PostTextOutput struct {
 	// structure of the JSON string returned, see msg-prompts-formats (). If the Lambda
 	// function returns a message, Amazon Lex passes it to the client in its response.
 	Message *string
+
 	// The intent slots that Amazon Lex detected from the user input in the
 	// conversation. Amazon Lex creates a resolution list containing likely values for
 	// a slot. The value that it returns is determined by the valueSelectionStrategy
@@ -163,18 +179,22 @@ type PostTextOutput struct {
 	// there is no resolution list, null. If you don't specify a
 	// valueSelectionStrategy, the default is ORIGINAL_VALUE.
 	Slots map[string]*string
+
 	// Represents the options that the user has to respond to the current prompt.
 	// Response Card can come from the bot configuration (in the Amazon Lex console,
 	// choose the settings button next to a slot) or from a code hook (Lambda
 	// function).
 	ResponseCard *types.ResponseCard
+
 	// The sentiment expressed in and utterance. When the bot is configured to send
 	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
 	// result of the analysis.
 	SentimentResponse *types.SentimentResponse
+
 	// If the dialogState value is ElicitSlot, returns the name of the slot for which
 	// Amazon Lex is eliciting a value.
 	SlotToElicit *string
+
 	// The format of the response message. One of the following values:
 	//
 	//     *
@@ -190,10 +210,13 @@ type PostTextOutput struct {
 	// contains an escaped JSON object containing one or more messages from the groups
 	// that messages were assigned to when the intent was created.
 	MessageFormat types.MessageFormatType
+
 	// A unique identifier for the session.
 	SessionId *string
+
 	// A map of key-value pairs representing the session-specific context information.
 	SessionAttributes map[string]*string
+
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
 	// the following values as dialogState. The client can optionally use this
 	// information to customize the user interface.
@@ -229,6 +252,7 @@ type PostTextOutput struct {
 	// specific information), or the Lambda function failed to fulfill the intent. </p>
 	// </li> </ul>
 	DialogState types.DialogState
+
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string
 

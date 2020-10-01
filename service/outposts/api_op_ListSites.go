@@ -55,15 +55,19 @@ func (c *Client) ListSites(ctx context.Context, params *ListSitesInput, optFns .
 }
 
 type ListSitesInput struct {
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum page size.
 	MaxResults *int32
 }
 
 type ListSitesOutput struct {
+
 	// Information about the sites.
 	Sites []*types.Site
+
 	// The pagination token.
 	NextToken *string
 

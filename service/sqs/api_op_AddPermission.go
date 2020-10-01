@@ -86,10 +86,14 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 
 //
 type AddPermissionInput struct {
+
 	// The unique identification of the permission you're setting (for example,
 	// AliceSendMessage). Maximum 80 characters. Allowed characters include
 	// alphanumeric characters, hyphens (-), and underscores (_).
+	//
+	// This member is required.
 	Label *string
+
 	// The AWS account number of the principal
 	// (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P) who is given
 	// permission. The principal must have an AWS account, but does not need to be
@@ -97,10 +101,16 @@ type AddPermissionInput struct {
 	// identification, see Your AWS Identifiers
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
 	// in the Amazon Simple Queue Service Developer Guide.
+	//
+	// This member is required.
 	AWSAccountIds []*string
+
 	// The URL of the Amazon SQS queue to which permissions are added. Queue URLs and
 	// names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// The action the client wants to allow for the specified principal. Valid values:
 	// the name of any action or *. For more information about these actions, see
 	// Overview of Managing Access Permissions to Your Amazon Simple Queue Service
@@ -110,6 +120,8 @@ type AddPermissionInput struct {
 	// DeleteMessage, or ChangeMessageVisibility for ActionName.n also grants
 	// permissions for the corresponding batch versions of those actions:
 	// SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch.
+	//
+	// This member is required.
 	Actions []*string
 }
 

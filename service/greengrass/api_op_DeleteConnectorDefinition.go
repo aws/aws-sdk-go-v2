@@ -55,7 +55,10 @@ func (c *Client) DeleteConnectorDefinition(ctx context.Context, params *DeleteCo
 }
 
 type DeleteConnectorDefinitionInput struct {
+
 	// The ID of the connector definition.
+	//
+	// This member is required.
 	ConnectorDefinitionId *string
 }
 

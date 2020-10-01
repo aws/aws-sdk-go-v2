@@ -78,9 +78,15 @@ func (c *Client) AdminDisableProviderForUser(ctx context.Context, params *AdminD
 }
 
 type AdminDisableProviderForUserInput struct {
+
 	// The user to be disabled.
+	//
+	// This member is required.
 	User *types.ProviderUserIdentifierType
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

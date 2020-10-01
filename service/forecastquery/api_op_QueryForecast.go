@@ -65,28 +65,38 @@ func (c *Client) QueryForecast(ctx context.Context, params *QueryForecastInput, 
 }
 
 type QueryForecastInput struct {
+
 	// The filtering criteria to apply when retrieving the forecast. For example, to
 	// get the forecast for client_21 in the electricity usage dataset, specify the
 	// following: {"item_id" : "client_21"}
 	//     <p>To get the full forecast, use the <a
 	// href="https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html">CreateForecastExportJob</a>
 	// operation.</p>
+	//
+	// This member is required.
 	Filters map[string]*string
+
 	// If the result of the previous request was truncated, the response includes a
 	// NextToken. To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the forecast to query.
+	//
+	// This member is required.
 	ForecastArn *string
+
 	// The start date for the forecast. Specify the date using this format:
 	// yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example, 2015-01-01T08:00:00.
 	StartDate *string
+
 	// The end date for the forecast. Specify the date using this format:
 	// yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example, 2015-01-01T20:00:00.
 	EndDate *string
 }
 
 type QueryForecastOutput struct {
+
 	// The forecast.
 	Forecast *types.Forecast
 

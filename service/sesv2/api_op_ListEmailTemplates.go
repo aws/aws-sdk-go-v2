@@ -60,9 +60,11 @@ func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTempla
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type ListEmailTemplatesInput struct {
+
 	// A token returned from a previous call to ListEmailTemplates to indicate the
 	// position in the list of email templates.
 	NextToken *string
+
 	// The number of results to show in a single call to ListEmailTemplates. If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
@@ -73,10 +75,12 @@ type ListEmailTemplatesInput struct {
 
 // The following elements are returned by the service.
 type ListEmailTemplatesOutput struct {
+
 	// A token indicating that there are additional email templates available to be
 	// listed. Pass this token to a subsequent ListEmailTemplates call to retrieve the
 	// next 10 email templates.
 	NextToken *string
+
 	// An array the contains the name and creation time stamp for each template in your
 	// Amazon SES account.
 	TemplatesMetadata []*types.EmailTemplateMetadata

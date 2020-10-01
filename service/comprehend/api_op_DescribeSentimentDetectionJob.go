@@ -57,12 +57,16 @@ func (c *Client) DescribeSentimentDetectionJob(ctx context.Context, params *Desc
 }
 
 type DescribeSentimentDetectionJobInput struct {
+
 	// The identifier that Amazon Comprehend generated for the job. The operation
 	// returns this identifier in its response.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribeSentimentDetectionJobOutput struct {
+
 	// An object that contains the properties associated with a sentiment detection
 	// job.
 	SentimentDetectionJobProperties *types.SentimentDetectionJobProperties

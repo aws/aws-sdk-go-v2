@@ -57,8 +57,12 @@ func (c *Client) DeleteClientVpnEndpoint(ctx context.Context, params *DeleteClie
 }
 
 type DeleteClientVpnEndpointInput struct {
+
 	// The ID of the Client VPN to be deleted.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -67,6 +71,7 @@ type DeleteClientVpnEndpointInput struct {
 }
 
 type DeleteClientVpnEndpointOutput struct {
+
 	// The current state of the Client VPN endpoint.
 	Status *types.ClientVpnEndpointStatus
 

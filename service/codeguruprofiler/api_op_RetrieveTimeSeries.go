@@ -55,21 +55,32 @@ func (c *Client) RetrieveTimeSeries(ctx context.Context, params *RetrieveTimeSer
 }
 
 type RetrieveTimeSeriesInput struct {
-	EndTime            *time.Time
-	FrameMetrics       []*types.FrameMetric
-	Period             *string
+	EndTime *time.Time
+
+	FrameMetrics []*types.FrameMetric
+
+	Period *string
+
 	ProfilingGroupName *string
-	StartTime          *time.Time
-	TargetResolution   types.AggregationPeriod
+
+	StartTime *time.Time
+
+	TargetResolution types.AggregationPeriod
 }
 
 type RetrieveTimeSeriesOutput struct {
-	Data                [][]*float64
-	EndTime             *time.Time
-	EndTimes            []*time.Time
-	FrameMetrics        []*types.FrameMetric
-	Resolution          types.AggregationPeriod
-	StartTime           *time.Time
+	Data [][]*float64
+
+	EndTime *time.Time
+
+	EndTimes []*time.Time
+
+	FrameMetrics []*types.FrameMetric
+
+	Resolution types.AggregationPeriod
+
+	StartTime *time.Time
+
 	UnprocessedEndTimes map[string][]*time.Time
 
 	// Metadata pertaining to the operation's result.

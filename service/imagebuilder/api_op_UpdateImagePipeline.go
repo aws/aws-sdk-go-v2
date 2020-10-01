@@ -59,38 +59,59 @@ func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePip
 }
 
 type UpdateImagePipelineInput struct {
+
 	// The description of the image pipeline.
 	Description *string
+
 	// The idempotency token used to make this request idempotent.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The status of the image pipeline.
 	Status types.PipelineStatus
+
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
+
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the distribution configuration that will be
 	// used to configure and distribute images updated by this image pipeline.
 	DistributionConfigurationArn *string
+
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
 	// used to build images updated by this image pipeline.
+	//
+	// This member is required.
 	InfrastructureConfigurationArn *string
+
 	// The Amazon Resource Name (ARN) of the image pipeline that you want to update.
+	//
+	// This member is required.
 	ImagePipelineArn *string
+
 	// The schedule of the image pipeline.
 	Schedule *types.Schedule
+
 	// The Amazon Resource Name (ARN) of the image recipe that will be used to
 	// configure images updated by this image pipeline.
+	//
+	// This member is required.
 	ImageRecipeArn *string
 }
 
 type UpdateImagePipelineOutput struct {
+
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the image pipeline that was updated by this
 	// request.
 	ImagePipelineArn *string

@@ -65,11 +65,13 @@ func (c *Client) ReleaseAddress(ctx context.Context, params *ReleaseAddressInput
 }
 
 type ReleaseAddressInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The location that the IP address is released from. If you provide an incorrect
 	// network border group, you will receive an InvalidAddress.NotFound error. For
 	// more information, see Error Codes
@@ -79,8 +81,10 @@ type ReleaseAddressInput struct {
 	// For more information, see Error Codes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
 	NetworkBorderGroup *string
+
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
 	PublicIp *string
+
 	// [EC2-VPC] The allocation ID. Required for EC2-VPC.
 	AllocationId *string
 }

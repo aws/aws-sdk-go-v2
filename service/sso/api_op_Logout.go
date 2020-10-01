@@ -52,10 +52,13 @@ func (c *Client) Logout(ctx context.Context, params *LogoutInput, optFns ...func
 }
 
 type LogoutInput struct {
+
 	// The token issued by the CreateToken API call. For more information, see
 	// CreateToken
 	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html)
 	// in the AWS SSO OIDC API Reference Guide.
+	//
+	// This member is required.
 	AccessToken *string
 }
 

@@ -57,14 +57,19 @@ func (c *Client) UpdateNotebookInstanceLifecycleConfig(ctx context.Context, para
 }
 
 type UpdateNotebookInstanceLifecycleConfigInput struct {
+
 	// The shell script that runs every time you start a notebook instance, including
 	// when you create the notebook instance. The shell script must be a base64-encoded
 	// string.
 	OnStart []*types.NotebookInstanceLifecycleHook
+
 	// The shell script that runs only once, when you create a notebook instance. The
 	// shell script must be a base64-encoded string.
 	OnCreate []*types.NotebookInstanceLifecycleHook
+
 	// The name of the lifecycle configuration.
+	//
+	// This member is required.
 	NotebookInstanceLifecycleConfigName *string
 }
 

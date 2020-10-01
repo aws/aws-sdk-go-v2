@@ -56,18 +56,23 @@ func (c *Client) DeleteAttributes(ctx context.Context, params *DeleteAttributesI
 }
 
 type DeleteAttributesInput struct {
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
 	// the resource to delete attributes. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
+
 	// The attributes to delete from your resource. You can specify up to 10 attributes
 	// per request. For custom attributes, specify the attribute name and target ID,
 	// but do not specify the value. If you specify the target ID using the short form,
 	// you must also specify the target type.
+	//
+	// This member is required.
 	Attributes []*types.Attribute
 }
 
 type DeleteAttributesOutput struct {
+
 	// A list of attribute objects that were successfully deleted from your resource.
 	Attributes []*types.Attribute
 

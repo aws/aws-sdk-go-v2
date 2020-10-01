@@ -56,20 +56,38 @@ func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAsse
 }
 
 type DescribeAssetPropertyInput struct {
+
 	// The ID of the asset property.
+	//
+	// This member is required.
 	PropertyId *string
+
 	// The ID of the asset.
+	//
+	// This member is required.
 	AssetId *string
 }
 
 type DescribeAssetPropertyOutput struct {
+
 	// The ID of the asset.
+	//
+	// This member is required.
 	AssetId *string
+
 	// The ID of the asset model.
+	//
+	// This member is required.
 	AssetModelId *string
+
 	// The asset property's definition, alias, and notification state.
+	//
+	// This member is required.
 	AssetProperty *types.Property
+
 	// The name of the asset.
+	//
+	// This member is required.
 	AssetName *string
 
 	// Metadata pertaining to the operation's result.

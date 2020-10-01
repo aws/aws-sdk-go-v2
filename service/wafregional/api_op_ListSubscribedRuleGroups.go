@@ -61,11 +61,13 @@ func (c *Client) ListSubscribedRuleGroups(ctx context.Context, params *ListSubsc
 }
 
 type ListSubscribedRuleGroupsInput struct {
+
 	// Specifies the number of subscribed rule groups that you want AWS WAF to return
 	// for this request. If you have more objects than the number you specify for
 	// Limit, the response includes a NextMarker value that you can use to get another
 	// batch of objects.
 	Limit *int32
+
 	// If you specify a value for Limit and you have more ByteMatchSetssubscribed rule
 	// groups than the value of Limit, AWS WAF returns a NextMarker value in the
 	// response that allows you to list another group of subscribed rule groups. For
@@ -76,11 +78,13 @@ type ListSubscribedRuleGroupsInput struct {
 }
 
 type ListSubscribedRuleGroupsOutput struct {
+
 	// If you have more objects than the number that you specified for Limit in the
 	// request, the response includes a NextMarker value. To list more objects, submit
 	// another ListSubscribedRuleGroups request, and specify the NextMarker value from
 	// the response in the NextMarker value in the next request.
 	NextMarker *string
+
 	// An array of RuleGroup () objects.
 	RuleGroups []*types.SubscribedRuleGroupSummary
 

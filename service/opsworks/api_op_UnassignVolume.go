@@ -61,7 +61,10 @@ func (c *Client) UnassignVolume(ctx context.Context, params *UnassignVolumeInput
 }
 
 type UnassignVolumeInput struct {
+
 	// The volume ID.
+	//
+	// This member is required.
 	VolumeId *string
 }
 

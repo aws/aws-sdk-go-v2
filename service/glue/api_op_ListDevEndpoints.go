@@ -59,18 +59,23 @@ func (c *Client) ListDevEndpoints(ctx context.Context, params *ListDevEndpointsI
 }
 
 type ListDevEndpointsInput struct {
+
 	// The maximum size of a list to return.
 	MaxResults *int32
+
 	// Specifies to return only these tagged resources.
 	Tags map[string]*string
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 }
 
 type ListDevEndpointsOutput struct {
+
 	// The names of all the DevEndpoints in the account, or the DevEndpoints with the
 	// specified tags.
 	DevEndpointNames []*string
+
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
 	NextToken *string

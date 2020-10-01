@@ -60,9 +60,13 @@ func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOr
 }
 
 type DeleteOriginRequestPolicyInput struct {
+
 	// The unique identifier for the origin request policy that you are deleting. To
 	// get the identifier, you can use ListOriginRequestPolicies.
+	//
+	// This member is required.
 	Id *string
+
 	// The version of the origin request policy that you are deleting. The version is
 	// the origin request policy’s ETag value, which you can get using
 	// ListOriginRequestPolicies, GetOriginRequestPolicy, or

@@ -60,7 +60,10 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 
 // A request to delete a configuration set.
 type DeleteConfigurationSetInput struct {
+
 	// The name of the configuration set that you want to delete.
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 

@@ -58,21 +58,37 @@ func (c *Client) DescribeHumanTaskUi(ctx context.Context, params *DescribeHumanT
 }
 
 type DescribeHumanTaskUiInput struct {
+
 	// The name of the human task user interface (worker task template) you want
 	// information about.
+	//
+	// This member is required.
 	HumanTaskUiName *string
 }
 
 type DescribeHumanTaskUiOutput struct {
+
 	// The name of the human task user interface (worker task template).
+	//
+	// This member is required.
 	HumanTaskUiName *string
+
 	// The Amazon Resource Name (ARN) of the human task user interface (worker task
 	// template).
+	//
+	// This member is required.
 	HumanTaskUiArn *string
+
 	// The timestamp when the human task user interface was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// Container for user interface template information.
+	//
+	// This member is required.
 	UiTemplate *types.UiTemplateInfo
+
 	// The status of the human task user interface (worker task template). Valid values
 	// are listed below.
 	HumanTaskUiStatus types.HumanTaskUiStatus

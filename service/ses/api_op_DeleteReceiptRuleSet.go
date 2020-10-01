@@ -63,7 +63,10 @@ func (c *Client) DeleteReceiptRuleSet(ctx context.Context, params *DeleteReceipt
 // more information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type DeleteReceiptRuleSetInput struct {
+
 	// The name of the receipt rule set to delete.
+	//
+	// This member is required.
 	RuleSetName *string
 }
 

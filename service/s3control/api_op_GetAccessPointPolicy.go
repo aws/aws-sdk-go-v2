@@ -12,7 +12,16 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns the access point policy associated with the specified access point.
+// Returns the access point policy associated with the specified access point. The
+// following actions are related to GetAccessPointPolicy:
+//
+//     *
+// PutAccessPointPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
+//
+//
+// * DeleteAccessPointPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
 func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPointPolicyInput, optFns ...func(*Options)) (*GetAccessPointPolicyOutput, error) {
 	stack := middleware.NewStack("GetAccessPointPolicy", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -56,13 +65,26 @@ func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPoin
 }
 
 type GetAccessPointPolicyInput struct {
-	// The name of the access point whose policy you want to retrieve.
+
+	// The name of the access point whose policy you want to retrieve. For Amazon S3 on
+	// Outposts specify the ARN of the access point accessed in the format
+	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
+	// point reports-ap through outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
+	// The value must be URL encoded.
+	//
+	// This member is required.
 	Name *string
+
 	// The account ID for the account that owns the specified access point.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type GetAccessPointPolicyOutput struct {
+
 	// The access point policy associated with the specified access point.
 	Policy *string
 

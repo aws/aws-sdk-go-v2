@@ -56,16 +56,23 @@ func (c *Client) DetectKeyPhrases(ctx context.Context, params *DetectKeyPhrasesI
 }
 
 type DetectKeyPhrasesInput struct {
+
 	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
 	// encoded characters.
+	//
+	// This member is required.
 	Text *string
+
 	// The language of the input documents. You can specify any of the primary
 	// languages supported by Amazon Comprehend. All documents must be in the same
 	// language.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
 }
 
 type DetectKeyPhrasesOutput struct {
+
 	// A collection of key phrases that Amazon Comprehend identified in the input text.
 	// For each key phrase, the response provides the text of the key phrase, where the
 	// key phrase begins and ends, and the level of confidence that Amazon Comprehend

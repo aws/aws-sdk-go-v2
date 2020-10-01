@@ -66,15 +66,20 @@ func (c *Client) CreateLunaClient(ctx context.Context, params *CreateLunaClientI
 
 // Contains the inputs for the CreateLunaClient () action.
 type CreateLunaClientInput struct {
+
 	// The contents of a Base64-Encoded X.509 v3 certificate to be installed on the
 	// HSMs used by this client.
+	//
+	// This member is required.
 	Certificate *string
+
 	// The label for the client.
 	Label *string
 }
 
 // Contains the output of the CreateLunaClient () action.
 type CreateLunaClientOutput struct {
+
 	// The ARN of the client.
 	ClientArn *string
 

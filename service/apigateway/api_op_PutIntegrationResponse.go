@@ -58,19 +58,36 @@ func (c *Client) PutIntegrationResponse(ctx context.Context, params *PutIntegrat
 
 // Represents a put integration response request.
 type PutIntegrationResponseInput struct {
+
 	// [Required] Specifies the status code that is used to map the integration
 	// response to an existing MethodResponse ().
+	//
+	// This member is required.
 	StatusCode *string
+
 	// [Required] Specifies a put integration response request's resource identifier.
+	//
+	// This member is required.
 	ResourceId *string
-	Template   *bool
+
+	Template *bool
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
+	//
+	// This member is required.
+	RestApiId *string
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// [Required] Specifies a put integration response request's HTTP method.
+	//
+	// This member is required.
 	HttpMethod *string
-	Name       *string
+
+	Name *string
+
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -83,10 +100,13 @@ type PutIntegrationResponseInput struct {
 	// unique response header name and JSON-expression a valid JSON expression without
 	// the $ prefix.
 	ResponseParameters map[string]*string
+
 	// Specifies a put integration response's templates.
 	ResponseTemplates map[string]*string
+
 	// Specifies the selection pattern of a put integration response.
 	SelectionPattern *string
+
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:
@@ -108,6 +128,7 @@ type PutIntegrationResponseInput struct {
 // back-end response. Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type PutIntegrationResponseOutput struct {
+
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -120,13 +141,16 @@ type PutIntegrationResponseOutput struct {
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
 	ResponseParameters map[string]*string
+
 	// Specifies the templates used to transform the integration response body.
 	// Response templates are represented as a key/value map, with a content-type as
 	// the key and a template as the value.
 	ResponseTemplates map[string]*string
+
 	// Specifies the status code that is used to map the integration response to an
 	// existing MethodResponse ().
 	StatusCode *string
+
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success
 	// response returns nothing and the error response returns some string, you could
@@ -135,6 +159,7 @@ type PutIntegrationResponseOutput struct {
 	// end is an AWS Lambda function, the AWS Lambda function error header is matched.
 	// For all other HTTP and AWS back ends, the HTTP status code is matched.
 	SelectionPattern *string
+
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:

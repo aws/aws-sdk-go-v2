@@ -57,24 +57,36 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 }
 
 type ListUsersInput struct {
+
 	// Specifies the number of users to return as a response to the ListUsers request.
 	MaxResults *int32
+
 	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
 	// to the NextToken parameter to continue listing additional users.
 	NextToken *string
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// that has users assigned to it.
+	//
+	// This member is required.
 	ServerId *string
 }
 
 type ListUsersOutput struct {
+
 	// Returns the user accounts and their properties for the ServerId value that you
 	// specify.
+	//
+	// This member is required.
 	Users []*types.ListedUser
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// that the users are assigned to.
+	//
+	// This member is required.
 	ServerId *string
+
 	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
 	// to the NextToken parameter to continue listing additional users.

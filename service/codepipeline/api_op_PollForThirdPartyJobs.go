@@ -61,14 +61,19 @@ func (c *Client) PollForThirdPartyJobs(ctx context.Context, params *PollForThird
 
 // Represents the input of a PollForThirdPartyJobs action.
 type PollForThirdPartyJobsInput struct {
+
 	// Represents information about an action type.
+	//
+	// This member is required.
 	ActionTypeId *types.ActionTypeId
+
 	// The maximum number of jobs to return in a poll for jobs call.
 	MaxBatchSize *int32
 }
 
 // Represents the output of a PollForThirdPartyJobs action.
 type PollForThirdPartyJobsOutput struct {
+
 	// Information about the jobs to take action on.
 	Jobs []*types.ThirdPartyJob
 

@@ -56,24 +56,33 @@ func (c *Client) DescribeAccountCustomization(ctx context.Context, params *Descr
 }
 
 type DescribeAccountCustomizationInput struct {
+
 	// The ID for the AWS account that you want to describe QuickSight customizations
 	// for.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The status of the creation of the customization. This is an asynchronous
 	// process. A status of CREATED means that your customization is ready to use.
 	Resolved *bool
+
 	// The namespace associated with the customization that you're describing.
 	Namespace *string
 }
 
 type DescribeAccountCustomizationOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The namespace associated with the customization that you're describing.
 	Namespace *string
+
 	// The ID for the AWS account that you want to describe QuickSight customizations
 	// for.
 	AwsAccountId *string
+
 	// The customizations associated with QuickSight.
 	AccountCustomization *types.AccountCustomization
 

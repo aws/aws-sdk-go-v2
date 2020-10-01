@@ -56,25 +56,36 @@ func (c *Client) GetFunctionDefinition(ctx context.Context, params *GetFunctionD
 }
 
 type GetFunctionDefinitionInput struct {
+
 	// The ID of the Lambda function definition.
+	//
+	// This member is required.
 	FunctionDefinitionId *string
 }
 
 type GetFunctionDefinitionOutput struct {
+
 	// The ID of the definition.
 	Id *string
+
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string
+
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
+
 	// Tag(s) attached to the resource arn.
 	Tags map[string]*string
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
+
 	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string
+
 	// The name of the definition.
 	Name *string
+
 	// The ARN of the definition.
 	Arn *string
 

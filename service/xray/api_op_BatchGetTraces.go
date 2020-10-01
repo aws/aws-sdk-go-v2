@@ -58,17 +58,24 @@ func (c *Client) BatchGetTraces(ctx context.Context, params *BatchGetTracesInput
 }
 
 type BatchGetTracesInput struct {
+
 	// Pagination token.
 	NextToken *string
+
 	// Specify the trace IDs of requests for which to retrieve segments.
+	//
+	// This member is required.
 	TraceIds []*string
 }
 
 type BatchGetTracesOutput struct {
+
 	// Pagination token.
 	NextToken *string
+
 	// Trace IDs of requests that haven't been processed.
 	UnprocessedTraceIds []*string
+
 	// Full traces for the specified requests.
 	Traces []*types.Trace
 

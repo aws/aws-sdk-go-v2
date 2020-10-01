@@ -56,17 +56,25 @@ func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optF
 }
 
 type UpdateTableInput struct {
+
 	// By default, UpdateTable always creates an archived version of the table before
 	// updating it. However, if skipArchive is set to true, UpdateTable does not create
 	// the archived version.
 	SkipArchive *bool
+
 	// The name of the catalog database in which the table resides. For Hive
 	// compatibility, this name is entirely lowercase.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
 	// account ID is used by default.
 	CatalogId *string
+
 	// An updated TableInput object to define the metadata table in the catalog.
+	//
+	// This member is required.
 	TableInput *types.TableInput
 }
 

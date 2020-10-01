@@ -56,17 +56,28 @@ func (c *Client) UpdateType(ctx context.Context, params *UpdateTypeInput, optFns
 }
 
 type UpdateTypeInput struct {
+
 	// The new type format: SDL or JSON.
+	//
+	// This member is required.
 	Format types.TypeDefinitionFormat
+
 	// The new type name.
+	//
+	// This member is required.
 	TypeName *string
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The new definition.
 	Definition *string
 }
 
 type UpdateTypeOutput struct {
+
 	// The updated Type object.
 	Type *types.Type
 

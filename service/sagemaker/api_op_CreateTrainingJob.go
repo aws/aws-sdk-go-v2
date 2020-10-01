@@ -90,6 +90,7 @@ func (c *Client) CreateTrainingJob(ctx context.Context, params *CreateTrainingJo
 }
 
 type CreateTrainingJobInput struct {
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
@@ -98,6 +99,7 @@ type CreateTrainingJobInput struct {
 	// Communications Between ML Compute Instances in a Distributed Training Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html).
 	EnableInterContainerTrafficEncryption *bool
+
 	// Algorithm-specific parameters that influence the quality of the model. You set
 	// hyperparameters before you start the learning process. For a list of
 	// hyperparameters for each training algorithm provided by Amazon SageMaker, see
@@ -106,15 +108,19 @@ type CreateTrainingJobInput struct {
 	// pair. Each key and value is limited to 256 characters, as specified by the
 	// Length Constraint.
 	HyperParameters map[string]*string
+
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.  </p>
 	Tags []*types.Tag
+
 	// Configuration information for debugging rules.
 	DebugRuleConfigurations []*types.DebugRuleConfiguration
+
 	// Configuration of storage locations for TensorBoard output.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
+
 	// The registry path of the Docker image that contains the training algorithm and
 	// algorithm-specific metadata, including the input mode. For more information
 	// about algorithms provided by Amazon SageMaker, see Algorithms
@@ -122,7 +128,10 @@ type CreateTrainingJobInput struct {
 	// about providing your own algorithms, see Using Your Own Algorithms with Amazon
 	// SageMaker
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+	//
+	// This member is required.
 	AlgorithmSpecification *types.AlgorithmSpecification
+
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
@@ -133,6 +142,7 @@ type CreateTrainingJobInput struct {
 	//
 	//     * CreateTransformJob ()
 	ExperimentConfig *types.ExperimentConfig
+
 	// An array of Channel objects. Each channel is a named input source.
 	// InputDataConfig
 	//     describes the input data and its location. </p>
@@ -148,9 +158,11 @@ type CreateTrainingJobInput struct {
 	// input data files will be made available as input streams. They do not need to be
 	// downloaded.</p>
 	InputDataConfig []*types.Channel
+
 	// Configuration information for the debug hook parameters, collection
 	// configuration, and storage paths.
 	DebugHookConfig *types.DebugHookConfig
+
 	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
 	// to perform tasks on your behalf. During model training, Amazon SageMaker needs
 	// your permission to read input data from an S3 bucket, download a Docker image
@@ -161,7 +173,10 @@ type CreateTrainingJobInput struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
 	// able to pass this role to Amazon SageMaker, the caller of this API must have the
 	// iam:PassRole permission.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// To train models using managed spot training, choose True. Managed spot training
 	// provides a fully managed and scalable infrastructure for training machine
 	// learning models. this option is useful when training jobs can be interrupted and
@@ -171,6 +186,7 @@ type CreateTrainingJobInput struct {
 	// metrics and logs in CloudWatch. They can be used to see when managed spot
 	// training jobs are running, interrupted, resumed, or completed.
 	EnableManagedSpotTraining *bool
+
 	// Isolates the training container. No inbound or outbound network calls can be
 	// made, except for calls between peers within a training cluster for distributed
 	// training. If you enable network isolation for training jobs that are configured
@@ -178,39 +194,56 @@ type CreateTrainingJobInput struct {
 	// artifacts through the specified VPC, but the training container does not have
 	// network access.
 	EnableNetworkIsolation *bool
+
 	// Specifies a limit to how long a model training job can run. When the job reaches
 	// the time limit, Amazon SageMaker ends the training job. Use this API to cap
 	// model training costs. To stop a job, Amazon SageMaker sends the algorithm the
 	// SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use
 	// this 120-second window to save the model artifacts, so the results of training
 	// are not lost.
+	//
+	// This member is required.
 	StoppingCondition *types.StoppingCondition
+
 	// The resources, including the ML compute instances and ML storage volumes, to use
 	// for model training. ML storage volumes store model artifacts and incremental
 	// states. Training algorithms might also use ML storage volumes for scratch space.
 	// If you want Amazon SageMaker to use the ML storage volume to store the training
 	// data, choose File as the TrainingInputMode in the algorithm specification. For
 	// distributed training algorithms, specify an instance count greater than 1.
+	//
+	// This member is required.
 	ResourceConfig *types.ResourceConfig
+
 	// Contains information about the output location for managed spot training
 	// checkpoint data.
 	CheckpointConfig *types.CheckpointConfig
+
 	// Specifies the path to the S3 location where you want to store model artifacts.
 	// Amazon SageMaker creates subfolders for the artifacts.
+	//
+	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
+
 	// A VpcConfig () object that specifies the VPC that you want your training job to
 	// connect to. Control access to and from your training container by configuring
 	// the VPC. For more information, see Protect Training Jobs by Using an Amazon
 	// Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *types.VpcConfig
+
 	// The name of the training job. The name must be unique within an AWS Region in an
 	// AWS account.
+	//
+	// This member is required.
 	TrainingJobName *string
 }
 
 type CreateTrainingJobOutput struct {
+
 	// The Amazon Resource Name (ARN) of the training job.
+	//
+	// This member is required.
 	TrainingJobArn *string
 
 	// Metadata pertaining to the operation's result.

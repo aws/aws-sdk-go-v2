@@ -57,24 +57,39 @@ func (c *Client) ListArtifacts(ctx context.Context, params *ListArtifactsInput, 
 
 // Describes the request structure for the list artifacts request.
 type ListArtifactsInput struct {
+
 	// The name of a branch that is part of an Amplify app.
+	//
+	// This member is required.
 	BranchName *string
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// A pagination token. Set to null to start listing artifacts from start. If a
 	// non-null pagination token is returned in a result, pass its value in here to
 	// list more artifacts.
 	NextToken *string
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The unique ID for a job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 // The result structure for the list artifacts request.
 type ListArtifactsOutput struct {
+
 	// A list of artifacts.
+	//
+	// This member is required.
 	Artifacts []*types.Artifact
+
 	// A pagination token. If a non-null pagination token is returned in a result, pass
 	// its value in another request to retrieve more entries.
 	NextToken *string

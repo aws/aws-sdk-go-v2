@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified activity does not exist.
@@ -24,12 +23,6 @@ func (e *ActivityDoesNotExist) ErrorMessage() string {
 }
 func (e *ActivityDoesNotExist) ErrorCode() string             { return "ActivityDoesNotExist" }
 func (e *ActivityDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ActivityDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ActivityDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of activities has been reached. Existing activities must be
 // deleted before a new activity can be created.
@@ -48,12 +41,6 @@ func (e *ActivityLimitExceeded) ErrorMessage() string {
 }
 func (e *ActivityLimitExceeded) ErrorCode() string             { return "ActivityLimitExceeded" }
 func (e *ActivityLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ActivityLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ActivityLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of workers concurrently polling for activity tasks has been
 // reached.
@@ -72,12 +59,6 @@ func (e *ActivityWorkerLimitExceeded) ErrorMessage() string {
 }
 func (e *ActivityWorkerLimitExceeded) ErrorCode() string             { return "ActivityWorkerLimitExceeded" }
 func (e *ActivityWorkerLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ActivityWorkerLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ActivityWorkerLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The execution has the same name as another execution (but a different input).
 // Executions with the same name and input are considered idempotent.
@@ -96,12 +77,6 @@ func (e *ExecutionAlreadyExists) ErrorMessage() string {
 }
 func (e *ExecutionAlreadyExists) ErrorCode() string             { return "ExecutionAlreadyExists" }
 func (e *ExecutionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExecutionAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExecutionAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified execution does not exist.
 type ExecutionDoesNotExist struct {
@@ -119,12 +94,6 @@ func (e *ExecutionDoesNotExist) ErrorMessage() string {
 }
 func (e *ExecutionDoesNotExist) ErrorCode() string             { return "ExecutionDoesNotExist" }
 func (e *ExecutionDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExecutionDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExecutionDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of running executions has been reached. Running executions
 // must end or be stopped before a new execution can be started.
@@ -143,12 +112,6 @@ func (e *ExecutionLimitExceeded) ErrorMessage() string {
 }
 func (e *ExecutionLimitExceeded) ErrorCode() string             { return "ExecutionLimitExceeded" }
 func (e *ExecutionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExecutionLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExecutionLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided Amazon Resource Name (ARN) is invalid.
 type InvalidArn struct {
@@ -166,12 +129,6 @@ func (e *InvalidArn) ErrorMessage() string {
 }
 func (e *InvalidArn) ErrorCode() string             { return "InvalidArn" }
 func (e *InvalidArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArn) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArn) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided Amazon States Language definition is invalid.
 type InvalidDefinition struct {
@@ -189,12 +146,6 @@ func (e *InvalidDefinition) ErrorMessage() string {
 }
 func (e *InvalidDefinition) ErrorCode() string             { return "InvalidDefinition" }
 func (e *InvalidDefinition) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDefinition) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDefinition) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided JSON input data is invalid.
 type InvalidExecutionInput struct {
@@ -212,12 +163,6 @@ func (e *InvalidExecutionInput) ErrorMessage() string {
 }
 func (e *InvalidExecutionInput) ErrorCode() string             { return "InvalidExecutionInput" }
 func (e *InvalidExecutionInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidExecutionInput) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidExecutionInput) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type InvalidLoggingConfiguration struct {
@@ -235,12 +180,6 @@ func (e *InvalidLoggingConfiguration) ErrorMessage() string {
 }
 func (e *InvalidLoggingConfiguration) ErrorCode() string             { return "InvalidLoggingConfiguration" }
 func (e *InvalidLoggingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLoggingConfiguration) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLoggingConfiguration) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided name is invalid.
 type InvalidName struct {
@@ -258,12 +197,6 @@ func (e *InvalidName) ErrorMessage() string {
 }
 func (e *InvalidName) ErrorCode() string             { return "InvalidName" }
 func (e *InvalidName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidName) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidName) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided JSON output data is invalid.
 type InvalidOutput struct {
@@ -281,12 +214,6 @@ func (e *InvalidOutput) ErrorMessage() string {
 }
 func (e *InvalidOutput) ErrorCode() string             { return "InvalidOutput" }
 func (e *InvalidOutput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOutput) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOutput) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided token is invalid.
 type InvalidToken struct {
@@ -304,12 +231,6 @@ func (e *InvalidToken) ErrorMessage() string {
 }
 func (e *InvalidToken) ErrorCode() string             { return "InvalidToken" }
 func (e *InvalidToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidToken) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidToken) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Request is missing a required parameter. This error occurs if both definition
 // and roleArn are not specified.
@@ -328,12 +249,6 @@ func (e *MissingRequiredParameter) ErrorMessage() string {
 }
 func (e *MissingRequiredParameter) ErrorCode() string             { return "MissingRequiredParameter" }
 func (e *MissingRequiredParameter) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingRequiredParameter) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingRequiredParameter) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Could not find the referenced resource. Only state machine and activity ARNs are
 // supported.
@@ -354,18 +269,6 @@ func (e *ResourceNotFound) ErrorMessage() string {
 }
 func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFound) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourceNotFound) HasResourceName() bool {
-	return e.ResourceName != nil
-}
-func (e *ResourceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A state machine with the same name but a different definition or role ARN
 // already exists.
@@ -384,12 +287,6 @@ func (e *StateMachineAlreadyExists) ErrorMessage() string {
 }
 func (e *StateMachineAlreadyExists) ErrorCode() string             { return "StateMachineAlreadyExists" }
 func (e *StateMachineAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StateMachineAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StateMachineAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified state machine is being deleted.
 type StateMachineDeleting struct {
@@ -407,12 +304,6 @@ func (e *StateMachineDeleting) ErrorMessage() string {
 }
 func (e *StateMachineDeleting) ErrorCode() string             { return "StateMachineDeleting" }
 func (e *StateMachineDeleting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StateMachineDeleting) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StateMachineDeleting) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified state machine does not exist.
 type StateMachineDoesNotExist struct {
@@ -430,12 +321,6 @@ func (e *StateMachineDoesNotExist) ErrorMessage() string {
 }
 func (e *StateMachineDoesNotExist) ErrorCode() string             { return "StateMachineDoesNotExist" }
 func (e *StateMachineDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StateMachineDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StateMachineDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of state machines has been reached. Existing state machines
 // must be deleted before a new state machine can be created.
@@ -454,12 +339,6 @@ func (e *StateMachineLimitExceeded) ErrorMessage() string {
 }
 func (e *StateMachineLimitExceeded) ErrorCode() string             { return "StateMachineLimitExceeded" }
 func (e *StateMachineLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StateMachineLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StateMachineLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type StateMachineTypeNotSupported struct {
@@ -477,12 +356,6 @@ func (e *StateMachineTypeNotSupported) ErrorMessage() string {
 }
 func (e *StateMachineTypeNotSupported) ErrorCode() string             { return "StateMachineTypeNotSupported" }
 func (e *StateMachineTypeNotSupported) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StateMachineTypeNotSupported) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StateMachineTypeNotSupported) HasMessage() bool {
-	return e.Message != nil
-}
 
 type TaskDoesNotExist struct {
 	Message *string
@@ -499,12 +372,6 @@ func (e *TaskDoesNotExist) ErrorMessage() string {
 }
 func (e *TaskDoesNotExist) ErrorCode() string             { return "TaskDoesNotExist" }
 func (e *TaskDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TaskDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TaskDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}
 
 type TaskTimedOut struct {
 	Message *string
@@ -521,12 +388,6 @@ func (e *TaskTimedOut) ErrorMessage() string {
 }
 func (e *TaskTimedOut) ErrorCode() string             { return "TaskTimedOut" }
 func (e *TaskTimedOut) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TaskTimedOut) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TaskTimedOut) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've exceeded the number of tags allowed for a resource. See the  Limits Topic
 // (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html) in the AWS
@@ -548,15 +409,3 @@ func (e *TooManyTags) ErrorMessage() string {
 }
 func (e *TooManyTags) ErrorCode() string             { return "TooManyTags" }
 func (e *TooManyTags) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTags) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTags) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyTags) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *TooManyTags) HasResourceName() bool {
-	return e.ResourceName != nil
-}

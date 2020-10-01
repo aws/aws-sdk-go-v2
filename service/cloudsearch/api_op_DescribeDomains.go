@@ -64,6 +64,7 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 // shows the status of all domains. To restrict the response to particular domains,
 // specify the names of the domains you want to describe.
 type DescribeDomainsInput struct {
+
 	// The names of the domains you want to include in the response.
 	DomainNames []*string
 }
@@ -71,7 +72,10 @@ type DescribeDomainsInput struct {
 // The result of a DescribeDomains request. Contains the status of the domains
 // specified in the request or all domains owned by the account.
 type DescribeDomainsOutput struct {
+
 	// A list that contains the status of each requested domain.
+	//
+	// This member is required.
 	DomainStatusList []*types.DomainStatus
 
 	// Metadata pertaining to the operation's result.

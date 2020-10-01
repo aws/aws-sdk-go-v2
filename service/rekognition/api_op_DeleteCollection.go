@@ -58,11 +58,15 @@ func (c *Client) DeleteCollection(ctx context.Context, params *DeleteCollectionI
 }
 
 type DeleteCollectionInput struct {
+
 	// ID of the collection to delete.
+	//
+	// This member is required.
 	CollectionId *string
 }
 
 type DeleteCollectionOutput struct {
+
 	// HTTP status code that indicates the result of the operation.
 	StatusCode *int32
 

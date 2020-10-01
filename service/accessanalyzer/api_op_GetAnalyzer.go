@@ -56,13 +56,19 @@ func (c *Client) GetAnalyzer(ctx context.Context, params *GetAnalyzerInput, optF
 
 // Retrieves an analyzer.
 type GetAnalyzerInput struct {
+
 	// The name of the analyzer retrieved.
+	//
+	// This member is required.
 	AnalyzerName *string
 }
 
 // The response to the request.
 type GetAnalyzerOutput struct {
+
 	// An AnalyzerSummary object that contains information about the analyzer.
+	//
+	// This member is required.
 	Analyzer *types.AnalyzerSummary
 
 	// Metadata pertaining to the operation's result.

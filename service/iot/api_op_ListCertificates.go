@@ -58,20 +58,25 @@ func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesI
 
 // The input for the ListCertificates operation.
 type ListCertificatesInput struct {
+
 	// Specifies the order for results. If True, the results are returned in ascending
 	// order, based on the creation date.
 	AscendingOrder *bool
+
 	// The result page size.
 	PageSize *int32
+
 	// The marker for the next set of results.
 	Marker *string
 }
 
 // The output of the ListCertificates operation.
 type ListCertificatesOutput struct {
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string
+
 	// The descriptions of the certificates.
 	Certificates []*types.Certificate
 

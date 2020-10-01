@@ -55,11 +55,15 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 }
 
 type GetResourcePolicyInput struct {
+
 	// The ARN of the resource that is associated with the resource policy.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type GetResourcePolicyOutput struct {
+
 	// The resource policy for the resource identified by the input ARN parameter.
 	Policy *string
 

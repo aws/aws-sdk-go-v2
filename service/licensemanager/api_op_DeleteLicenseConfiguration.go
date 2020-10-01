@@ -56,7 +56,10 @@ func (c *Client) DeleteLicenseConfiguration(ctx context.Context, params *DeleteL
 }
 
 type DeleteLicenseConfigurationInput struct {
+
 	// ID of the license configuration.
+	//
+	// This member is required.
 	LicenseConfigurationArn *string
 }
 

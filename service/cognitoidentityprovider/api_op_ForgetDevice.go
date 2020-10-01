@@ -56,8 +56,12 @@ func (c *Client) ForgetDevice(ctx context.Context, params *ForgetDeviceInput, op
 
 // Represents the request to forget the device.
 type ForgetDeviceInput struct {
+
 	// The device key.
+	//
+	// This member is required.
 	DeviceKey *string
+
 	// The access token for the forgotten device request.
 	AccessToken *string
 }

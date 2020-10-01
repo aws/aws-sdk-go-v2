@@ -4,8 +4,10 @@ package types
 
 // The forecast value for a specific date. Part of the Forecast () object.
 type DataPoint struct {
+
 	// The forecast value.
 	Value *float64
+
 	// The timestamp of the specific forecast.
 	Timestamp *string
 }
@@ -13,6 +15,7 @@ type DataPoint struct {
 // Provides information about a forecast. Returned as part of the QueryForecast ()
 // response.
 type Forecast struct {
+
 	// The forecast. The string of the string-to-array map is one of the following
 	// values:
 	//

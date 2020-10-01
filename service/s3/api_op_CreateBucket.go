@@ -141,28 +141,40 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 }
 
 type CreateBucketInput struct {
+
 	// Allows grantee to create, overwrite, and delete any object in the bucket.
 	GrantWrite *string
+
 	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
 	ObjectLockEnabledForBucket *bool
+
 	// The canned ACL to apply to the bucket.
 	ACL types.BucketCannedACL
+
 	// Allows grantee to write the ACL for the applicable bucket.
 	GrantWriteACP *string
+
 	// Allows grantee to list the objects in the bucket.
 	GrantRead *string
+
 	// The configuration information for the bucket.
 	CreateBucketConfiguration *types.CreateBucketConfiguration
+
 	// Allows grantee to read the bucket ACL.
 	GrantReadACP *string
+
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
 	// bucket.
 	GrantFullControl *string
+
 	// The name of the bucket to create.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type CreateBucketOutput struct {
+
 	// Specifies the Region where the bucket will be created. If you are creating a
 	// bucket on the US East (N. Virginia) Region (us-east-1), you do not need to
 	// specify the location.

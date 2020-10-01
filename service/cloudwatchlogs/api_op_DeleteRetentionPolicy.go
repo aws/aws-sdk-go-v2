@@ -56,7 +56,10 @@ func (c *Client) DeleteRetentionPolicy(ctx context.Context, params *DeleteRetent
 }
 
 type DeleteRetentionPolicyInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 

@@ -62,20 +62,29 @@ func (c *Client) PutRemediationExceptions(ctx context.Context, params *PutRemedi
 }
 
 type PutRemediationExceptionsInput struct {
+
 	// The name of the AWS Config rule for which you want to create remediation
 	// exception.
+	//
+	// This member is required.
 	ConfigRuleName *string
+
 	// An exception list of resource exception keys to be processed with the current
 	// request. AWS Config adds exception for each resource key. For example, AWS
 	// Config adds 3 exceptions for 3 resource keys.
+	//
+	// This member is required.
 	ResourceKeys []*types.RemediationExceptionResourceKey
+
 	// The exception is automatically deleted after the expiration date.
 	ExpirationTime *time.Time
+
 	// The message contains an explanation of the exception.
 	Message *string
 }
 
 type PutRemediationExceptionsOutput struct {
+
 	// Returns a list of failed remediation exceptions batch objects. Each object in
 	// the batch consists of a list of failed items and failure messages.
 	FailedBatches []*types.FailedRemediationExceptionBatch

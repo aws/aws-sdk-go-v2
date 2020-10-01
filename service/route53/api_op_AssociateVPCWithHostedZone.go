@@ -72,21 +72,31 @@ func (c *Client) AssociateVPCWithHostedZone(ctx context.Context, params *Associa
 // A complex type that contains information about the request to associate a VPC
 // with a private hosted zone.
 type AssociateVPCWithHostedZoneInput struct {
+
 	// The ID of the private hosted zone that you want to associate an Amazon VPC with.
 	// Note that you can't associate a VPC with a hosted zone that doesn't have an
 	// existing VPC association.
+	//
+	// This member is required.
 	HostedZoneId *string
+
 	// Optional: A comment about the association request.
 	Comment *string
+
 	// A complex type that contains information about the VPC that you want to
 	// associate with a private hosted zone.
+	//
+	// This member is required.
 	VPC *types.VPC
 }
 
 // A complex type that contains the response information for the
 // AssociateVPCWithHostedZone request.
 type AssociateVPCWithHostedZoneOutput struct {
+
 	// A complex type that describes the changes made to your hosted zone.
+	//
+	// This member is required.
 	ChangeInfo *types.ChangeInfo
 
 	// Metadata pertaining to the operation's result.

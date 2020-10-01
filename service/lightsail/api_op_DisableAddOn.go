@@ -58,13 +58,20 @@ func (c *Client) DisableAddOn(ctx context.Context, params *DisableAddOnInput, op
 }
 
 type DisableAddOnInput struct {
+
 	// The add-on type to disable.
+	//
+	// This member is required.
 	AddOnType types.AddOnType
+
 	// The name of the source resource for which to disable the add-on.
+	//
+	// This member is required.
 	ResourceName *string
 }
 
 type DisableAddOnOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -63,6 +63,7 @@ func (c *Client) CopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput
 
 //
 type CopyDBSnapshotInput struct {
+
 	// The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon
 	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
 	// encryption key.  <p>If you copy an encrypted DB snapshot from your AWS account,
@@ -77,9 +78,11 @@ type CopyDBSnapshotInput struct {
 	// keys are specific to the AWS Region that they are created in, and you can't use
 	// encryption keys from one AWS Region in another AWS Region. </p>
 	KmsKeyId *string
+
 	// A value that indicates whether to copy all tags from the source DB snapshot to
 	// the target DB snapshot. By default, tags are not copied.
 	CopyTags *bool
+
 	// The identifier for the source DB snapshot.  <p>If the source snapshot is in the
 	// same AWS Region as the copy, specify a valid DB snapshot identifier. For
 	// example, you might specify <code>rds:mysql-instance1-snapshot-20130805</code>.
@@ -95,13 +98,19 @@ type CopyDBSnapshotInput struct {
 	// </ul> <p>Example: <code>rds:mydb-2012-04-02-00-01</code> </p> <p>Example:
 	// <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805</code>
 	// </p>
+	//
+	// This member is required.
 	SourceDBSnapshotIdentifier *string
+
 	// The identifier for the copy of the snapshot.  <p>Constraints:</p> <ul> <li>
 	// <p>Can't be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255
 	// letters, numbers, or hyphens</p> </li> <li> <p>First character must be a
 	// letter</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive
 	// hyphens</p> </li> </ul> <p>Example: <code>my-db-snapshot</code> </p>
+	//
+	// This member is required.
 	TargetDBSnapshotIdentifier *string
+
 	// The URL that contains a Signature Version 4 signed request for the
 	// CopyDBSnapshot API action in the source AWS Region that contains the source DB
 	// snapshot to copy.  <p>You must specify this parameter when you copy an encrypted
@@ -142,10 +151,12 @@ type CopyDBSnapshotInput struct {
 	// autogenerates a pre-signed URL that is a valid request for the operation that
 	// can be executed in the source AWS Region.</p> </note>
 	PreSignedUrl *string
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
+
 	// The name of an option group to associate with the copy of the snapshot.
 	// <p>Specify this option if you are copying a snapshot from one AWS Region to
 	// another, and your DB instance uses a nondefault option group. If your source DB
@@ -158,6 +169,7 @@ type CopyDBSnapshotInput struct {
 }
 
 type CopyDBSnapshotOutput struct {
+
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a
 	// response element in the DescribeDBSnapshots action.
 	DBSnapshot *types.DBSnapshot

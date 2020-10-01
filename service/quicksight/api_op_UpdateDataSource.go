@@ -56,34 +56,51 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 }
 
 type UpdateDataSourceInput struct {
+
 	// A display name for the data source.
+	//
+	// This member is required.
 	Name *string
+
 	// The credentials that QuickSight that uses to connect to your underlying source.
 	// Currently, only credentials based on user name and password are supported.
 	Credentials *types.DataSourceCredentials
+
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
+	//
+	// This member is required.
 	DataSourceId *string
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The parameters that QuickSight uses to connect to your underlying source.
 	DataSourceParameters *types.DataSourceParameters
+
 	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
 	// underlying source.
 	SslProperties *types.SslProperties
+
 	// Use this parameter only when you want QuickSight to use a VPC connection when
 	// connecting to your underlying source.
 	VpcConnectionProperties *types.VpcConnectionProperties
 }
 
 type UpdateDataSourceOutput struct {
+
 	// The update status of the data source's last update.
 	UpdateStatus types.ResourceStatus
+
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
 	DataSourceId *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the data source.
 	Arn *string
 

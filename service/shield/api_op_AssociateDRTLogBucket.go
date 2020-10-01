@@ -60,7 +60,10 @@ func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRT
 }
 
 type AssociateDRTLogBucketInput struct {
+
 	// The Amazon S3 bucket that contains your AWS WAF logs.
+	//
+	// This member is required.
 	LogBucket *string
 }
 

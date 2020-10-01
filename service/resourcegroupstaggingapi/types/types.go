@@ -5,11 +5,14 @@ package types
 // Information that shows whether a resource is compliant with the effective tag
 // policy, including details on any noncompliant tag keys.
 type ComplianceDetails struct {
+
 	// These are keys defined in the effective policy that are on the resource with
 	// either incorrect case treatment or noncompliant values.
 	KeysWithNoncompliantValues []*string
+
 	// Whether a resource is compliant with the effective tag policy.
 	ComplianceStatus *bool
+
 	// These tag keys on the resource are noncompliant with the effective tag policy.
 	NoncompliantKeys []*string
 }
@@ -40,10 +43,13 @@ type ComplianceDetails struct {
 // For more information on errors that are generated from
 // other AWS services, see the documentation for that service.
 type FailureInfo struct {
+
 	// The message of the common error.
 	ErrorMessage *string
+
 	// The HTTP status code of the common error.
 	StatusCode *int32
+
 	// The code of the common error. Valid values include InternalServiceException,
 	// InvalidParameterException, and any valid error code returned by the AWS service
 	// that hosts the resource that you want to tag.
@@ -53,10 +59,13 @@ type FailureInfo struct {
 // A list of resource ARNs and the tags (keys and values) that are associated with
 // each.
 type ResourceTagMapping struct {
+
 	// The ARN of the resource.
 	ResourceARN *string
+
 	// The tags that have been applied to one or more AWS resources.
 	Tags []*Tag
+
 	// Information that shows whether a resource is compliant with the effective tag
 	// policy, including details on any noncompliant tag keys.
 	ComplianceDetails *ComplianceDetails
@@ -64,19 +73,25 @@ type ResourceTagMapping struct {
 
 // A count of noncompliant resources.
 type Summary struct {
+
 	// The timestamp that shows when this summary was generated in this Region.
 	LastUpdated *string
+
 	// The AWS resource type.
 	ResourceType *string
+
 	// The AWS Region that the summary applies to.
 	Region *string
+
 	// Whether the target is an account, an OU, or the organization root.
 	TargetIdType TargetIdType
+
 	// The account identifier or the root identifier of the organization. If you don't
 	// know the root ID, you can call the AWS Organizations ListRoots
 	// (http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html)
 	// API.
 	TargetId *string
+
 	// The count of noncompliant resources.
 	NonCompliantResources *int64
 }
@@ -87,20 +102,28 @@ type Summary struct {
 // (http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
 // General Reference.
 type Tag struct {
+
 	// One part of a key-value pair that make up a tag. A value acts as a descriptor
 	// within a tag category (key). The value can be empty or null.
+	//
+	// This member is required.
 	Value *string
+
 	// One part of a key-value pair that makes up a tag. A key is a general label that
 	// acts like a category for more specific tag values.
+	//
+	// This member is required.
 	Key *string
 }
 
 // A list of tags (keys and values) that are used to specify the associated
 // resources.
 type TagFilter struct {
+
 	// One part of a key-value pair that makes up a tag. A key is a general label that
 	// acts like a category for more specific tag values.
 	Key *string
+
 	// One part of a key-value pair that make up a tag. A value acts as a descriptor
 	// within a tag category (key). The value can be empty or null.
 	Values []*string

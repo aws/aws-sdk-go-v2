@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have required permissions to perform this operation.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have reached the maximum limit of active signaling channels for this AWS
 // account in this region.
@@ -52,12 +45,6 @@ func (e *AccountChannelLimitExceededException) ErrorCode() string {
 func (e *AccountChannelLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AccountChannelLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountChannelLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of streams created for the account is too high.
 type AccountStreamLimitExceededException struct {
@@ -79,12 +66,6 @@ func (e *AccountStreamLimitExceededException) ErrorCode() string {
 func (e *AccountStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AccountStreamLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountStreamLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
 // limit of allowed client calls. Try making the call later.
@@ -103,12 +84,6 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 }
 func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Not implemented.
 type DeviceStreamLimitExceededException struct {
@@ -130,12 +105,6 @@ func (e *DeviceStreamLimitExceededException) ErrorCode() string {
 func (e *DeviceStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeviceStreamLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeviceStreamLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
@@ -153,12 +122,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Not implemented.
 type InvalidDeviceException struct {
@@ -176,12 +139,6 @@ func (e *InvalidDeviceException) ErrorMessage() string {
 }
 func (e *InvalidDeviceException) ErrorCode() string             { return "InvalidDeviceException" }
 func (e *InvalidDeviceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeviceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeviceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The format of the StreamARN is invalid.
 type InvalidResourceFormatException struct {
@@ -199,12 +156,6 @@ func (e *InvalidResourceFormatException) ErrorMessage() string {
 }
 func (e *InvalidResourceFormatException) ErrorCode() string             { return "InvalidResourceFormatException" }
 func (e *InvalidResourceFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceFormatException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceFormatException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
@@ -222,12 +173,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The signaling channel is currently not available for this operation.
 type ResourceInUseException struct {
@@ -245,12 +190,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Kinesis Video Streams can't find the stream that you specified.
 type ResourceNotFoundException struct {
@@ -268,12 +207,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the limit of tags that you can associate with the resource.
 // Kinesis video streams support up to 50 tags.
@@ -296,12 +229,6 @@ func (e *TagsPerResourceExceededLimitException) ErrorCode() string {
 func (e *TagsPerResourceExceededLimitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TagsPerResourceExceededLimitException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagsPerResourceExceededLimitException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The stream version that you specified is not the latest version. To get the
 // latest version, use the DescribeStream
@@ -322,9 +249,3 @@ func (e *VersionMismatchException) ErrorMessage() string {
 }
 func (e *VersionMismatchException) ErrorCode() string             { return "VersionMismatchException" }
 func (e *VersionMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *VersionMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VersionMismatchException) HasMessage() bool {
-	return e.Message != nil
-}

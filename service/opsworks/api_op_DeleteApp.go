@@ -59,7 +59,10 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 }
 
 type DeleteAppInput struct {
+
 	// The app ID.
+	//
+	// This member is required.
 	AppId *string
 }
 

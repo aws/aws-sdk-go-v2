@@ -61,6 +61,7 @@ func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLogg
 }
 
 type ListLoggingConfigurationsInput struct {
+
 	// If you specify a value for Limit and you have more LoggingConfigurations than
 	// the value of Limit, AWS WAF returns a NextMarker value in the response that
 	// allows you to list another group of LoggingConfigurations. For the second and
@@ -68,6 +69,7 @@ type ListLoggingConfigurationsInput struct {
 	// from the previous response to get information about another batch of
 	// ListLoggingConfigurations.
 	NextMarker *string
+
 	// Specifies the number of LoggingConfigurations that you want AWS WAF to return
 	// for this request. If you have more LoggingConfigurations than the number that
 	// you specify for Limit, the response includes a NextMarker value that you can use
@@ -76,8 +78,10 @@ type ListLoggingConfigurationsInput struct {
 }
 
 type ListLoggingConfigurationsOutput struct {
+
 	// An array of LoggingConfiguration () objects.
 	LoggingConfigurations []*types.LoggingConfiguration
+
 	// If you have more LoggingConfigurations than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more
 	// LoggingConfigurations, submit another ListLoggingConfigurations request, and

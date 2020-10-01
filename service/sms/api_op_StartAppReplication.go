@@ -54,6 +54,7 @@ func (c *Client) StartAppReplication(ctx context.Context, params *StartAppReplic
 }
 
 type StartAppReplicationInput struct {
+
 	// ID of the application to replicate.
 	AppId *string
 }

@@ -56,14 +56,20 @@ func (c *Client) GetApplicationSettings(ctx context.Context, params *GetApplicat
 }
 
 type GetApplicationSettingsInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetApplicationSettingsOutput struct {
+
 	// Provides information about an application, including the default settings for an
 	// application.
+	//
+	// This member is required.
 	ApplicationSettingsResource *types.ApplicationSettingsResource
 
 	// Metadata pertaining to the operation's result.

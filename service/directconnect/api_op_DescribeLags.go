@@ -55,11 +55,13 @@ func (c *Client) DescribeLags(ctx context.Context, params *DescribeLagsInput, op
 }
 
 type DescribeLagsInput struct {
+
 	// The ID of the LAG.
 	LagId *string
 }
 
 type DescribeLagsOutput struct {
+
 	// The LAGs.
 	Lags []*types.Lag
 

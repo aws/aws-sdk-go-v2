@@ -56,17 +56,28 @@ func (c *Client) UpdateProxySession(ctx context.Context, params *UpdateProxySess
 }
 
 type UpdateProxySessionInput struct {
+
 	// The proxy session ID.
+	//
+	// This member is required.
 	ProxySessionId *string
+
 	// The proxy session capabilities.
+	//
+	// This member is required.
 	Capabilities []types.Capability
+
 	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
+
 	// The Amazon Chime voice connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type UpdateProxySessionOutput struct {
+
 	// The proxy session details.
 	ProxySession *types.ProxySession
 

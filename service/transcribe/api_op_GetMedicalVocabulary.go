@@ -57,26 +57,35 @@ func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVoc
 }
 
 type GetMedicalVocabularyInput struct {
+
 	// The name of the vocabulary you are trying to get information about. The value
 	// you enter for this request is case-sensitive.
+	//
+	// This member is required.
 	VocabularyName *string
 }
 
 type GetMedicalVocabularyOutput struct {
+
 	// The Amazon S3 location where the vocabulary is stored. Use this URI to get the
 	// contents of the vocabulary. You can download your vocabulary from the URI for a
 	// limited time.
 	DownloadUri *string
+
 	// The processing state of the vocabulary.
 	VocabularyState types.VocabularyState
+
 	// The valid name that Amazon Transcribe Medical returns.
 	VocabularyName *string
+
 	// The date and time the vocabulary was last modified with a text file different
 	// from what was previously used.
 	LastModifiedTime *time.Time
+
 	// If the VocabularyState is FAILED, this field contains information about why the
 	// job failed.
 	FailureReason *string
+
 	// The valid language code returned for your vocabulary entries.
 	LanguageCode types.LanguageCode
 

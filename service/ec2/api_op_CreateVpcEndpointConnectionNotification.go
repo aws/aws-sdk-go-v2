@@ -61,19 +61,29 @@ func (c *Client) CreateVpcEndpointConnectionNotification(ctx context.Context, pa
 }
 
 type CreateVpcEndpointConnectionNotificationInput struct {
+
 	// The ID of the endpoint.
 	VpcEndpointId *string
+
 	// The ARN of the SNS topic for the notifications.
+	//
+	// This member is required.
 	ConnectionNotificationArn *string
+
 	// The ID of the endpoint service.
 	ServiceId *string
+
 	// One or more endpoint events for which to receive notifications. Valid values are
 	// Accept, Connect, Delete, and Reject.
+	//
+	// This member is required.
 	ConnectionEvents []*string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -82,8 +92,10 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 }
 
 type CreateVpcEndpointConnectionNotificationOutput struct {
+
 	// Information about the notification.
 	ConnectionNotification *types.ConnectionNotification
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string

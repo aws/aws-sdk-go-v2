@@ -59,18 +59,25 @@ func (c *Client) DescribeIdentity(ctx context.Context, params *DescribeIdentityI
 
 // Input to the DescribeIdentity action.
 type DescribeIdentityInput struct {
+
 	// A unique identifier in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityId *string
 }
 
 // A description of the identity.
 type DescribeIdentityOutput struct {
+
 	// Date on which the identity was last modified.
 	LastModifiedDate *time.Time
+
 	// Date on which the identity was created.
 	CreationDate *time.Time
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
 	// The provider names.
 	Logins []*string
 

@@ -56,28 +56,46 @@ func (c *Client) CreateModelVersion(ctx context.Context, params *CreateModelVers
 }
 
 type CreateModelVersionInput struct {
+
 	// The model type.
+	//
+	// This member is required.
 	ModelType types.ModelTypeEnum
+
 	// The training data source location in Amazon S3.
+	//
+	// This member is required.
 	TrainingDataSource types.TrainingDataSourceEnum
+
 	// A collection of key and value pairs.
 	Tags []*types.Tag
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
+
 	// The training data schema.
+	//
+	// This member is required.
 	TrainingDataSchema *types.TrainingDataSchema
+
 	// Details for the external events data used for model version training. Required
 	// if trainingDataSource is EXTERNAL_EVENTS.
 	ExternalEventsDetail *types.ExternalEventsDetail
 }
 
 type CreateModelVersionOutput struct {
+
 	// The model ID.
 	ModelId *string
+
 	// The model version status.
 	Status *string
+
 	// The model version number of the model version created.
 	ModelVersionNumber *string
+
 	// The model type.
 	ModelType types.ModelTypeEnum
 

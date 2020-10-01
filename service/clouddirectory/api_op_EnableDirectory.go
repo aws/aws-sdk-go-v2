@@ -56,12 +56,18 @@ func (c *Client) EnableDirectory(ctx context.Context, params *EnableDirectoryInp
 }
 
 type EnableDirectoryInput struct {
+
 	// The ARN of the directory to enable.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type EnableDirectoryOutput struct {
+
 	// The ARN of the enabled directory.
+	//
+	// This member is required.
 	DirectoryArn *string
 
 	// Metadata pertaining to the operation's result.

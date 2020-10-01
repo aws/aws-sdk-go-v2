@@ -79,27 +79,36 @@ func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, 
 }
 
 type DescribeCasesInput struct {
+
 	// Specifies whether to include resolved support cases in the DescribeCases
 	// response. By default, resolved cases aren't included.
 	IncludeResolvedCases *bool
+
 	// A list of ID numbers of the support cases you want returned. The maximum number
 	// of cases is 100.
 	CaseIdList []*string
+
 	// A resumption point for pagination.
 	NextToken *string
+
 	// The maximum number of results to return before paginating.
 	MaxResults *int32
+
 	// The end date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	BeforeTime *string
+
 	// The ID displayed for a case in the AWS Support Center user interface.
 	DisplayId *string
+
 	// Specifies whether to include communications in the DescribeCases response. By
 	// default, communications are incuded.
 	IncludeCommunications *bool
+
 	// The start date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	AfterTime *string
+
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
@@ -110,8 +119,10 @@ type DescribeCasesInput struct {
 // (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
 // objects and a nextToken that defines a point for pagination in the result set.
 type DescribeCasesOutput struct {
+
 	// The details for the cases that match the request.
 	Cases []*types.CaseDetails
+
 	// A resumption point for pagination.
 	NextToken *string
 

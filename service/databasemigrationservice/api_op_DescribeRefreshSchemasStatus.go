@@ -57,12 +57,16 @@ func (c *Client) DescribeRefreshSchemasStatus(ctx context.Context, params *Descr
 
 //
 type DescribeRefreshSchemasStatusInput struct {
+
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 
 //
 type DescribeRefreshSchemasStatusOutput struct {
+
 	// The status of the schema.
 	RefreshSchemasStatus *types.RefreshSchemasStatus
 

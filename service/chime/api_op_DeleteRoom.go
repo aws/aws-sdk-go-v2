@@ -55,9 +55,15 @@ func (c *Client) DeleteRoom(ctx context.Context, params *DeleteRoomInput, optFns
 }
 
 type DeleteRoomInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The chat room ID.
+	//
+	// This member is required.
 	RoomId *string
 }
 

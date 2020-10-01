@@ -55,11 +55,15 @@ func (c *Client) DeleteWorkflow(ctx context.Context, params *DeleteWorkflowInput
 }
 
 type DeleteWorkflowInput struct {
+
 	// Name of the workflow to be deleted.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DeleteWorkflowOutput struct {
+
 	// Name of the workflow specified in input.
 	Name *string
 

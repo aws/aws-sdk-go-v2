@@ -60,17 +60,22 @@ func (c *Client) GetExternalModels(ctx context.Context, params *GetExternalModel
 }
 
 type GetExternalModelsInput struct {
+
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
+
 	// The Amazon SageMaker model endpoint.
 	ModelEndpoint *string
+
 	// The next page token for the request.
 	NextToken *string
 }
 
 type GetExternalModelsOutput struct {
+
 	// The next page token to be used in subsequent requests.
 	NextToken *string
+
 	// Gets the Amazon SageMaker models.
 	ExternalModels []*types.ExternalModel
 

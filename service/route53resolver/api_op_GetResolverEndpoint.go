@@ -58,11 +58,15 @@ func (c *Client) GetResolverEndpoint(ctx context.Context, params *GetResolverEnd
 }
 
 type GetResolverEndpointInput struct {
+
 	// The ID of the resolver endpoint that you want to get information about.
+	//
+	// This member is required.
 	ResolverEndpointId *string
 }
 
 type GetResolverEndpointOutput struct {
+
 	// Information about the resolver endpoint that you specified in a
 	// GetResolverEndpoint request.
 	ResolverEndpoint *types.ResolverEndpoint

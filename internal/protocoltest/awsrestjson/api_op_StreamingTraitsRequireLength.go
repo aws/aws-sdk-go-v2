@@ -53,12 +53,14 @@ func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *Strea
 }
 
 type StreamingTraitsRequireLengthInput struct {
-	Foo  *string
+	Foo *string
+
 	Blob io.Reader
 }
 
 type StreamingTraitsRequireLengthOutput struct {
-	Foo  *string
+	Foo *string
+
 	Blob io.ReadCloser
 
 	// Metadata pertaining to the operation's result.

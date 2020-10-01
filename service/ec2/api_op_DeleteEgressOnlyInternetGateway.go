@@ -55,8 +55,12 @@ func (c *Client) DeleteEgressOnlyInternetGateway(ctx context.Context, params *De
 }
 
 type DeleteEgressOnlyInternetGatewayInput struct {
+
 	// The ID of the egress-only internet gateway.
+	//
+	// This member is required.
 	EgressOnlyInternetGatewayId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -65,6 +69,7 @@ type DeleteEgressOnlyInternetGatewayInput struct {
 }
 
 type DeleteEgressOnlyInternetGatewayOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	ReturnCode *bool
 

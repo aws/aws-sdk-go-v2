@@ -58,15 +58,23 @@ func (c *Client) AssociateSubnetCidrBlock(ctx context.Context, params *Associate
 }
 
 type AssociateSubnetCidrBlockInput struct {
+
 	// The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
+	//
+	// This member is required.
 	Ipv6CidrBlock *string
+
 	// The ID of your subnet.
+	//
+	// This member is required.
 	SubnetId *string
 }
 
 type AssociateSubnetCidrBlockOutput struct {
+
 	// The ID of the subnet.
 	SubnetId *string
+
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *types.SubnetIpv6CidrBlockAssociation
 

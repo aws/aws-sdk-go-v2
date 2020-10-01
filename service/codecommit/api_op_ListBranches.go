@@ -56,16 +56,22 @@ func (c *Client) ListBranches(ctx context.Context, params *ListBranchesInput, op
 
 // Represents the input of a list branches operation.
 type ListBranchesInput struct {
+
 	// An enumeration token that allows the operation to batch the results.
 	NextToken *string
+
 	// The name of the repository that contains the branches.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 // Represents the output of a list branches operation.
 type ListBranchesOutput struct {
+
 	// An enumeration token that returns the batch of the results.
 	NextToken *string
+
 	// The list of branch names.
 	Branches []*string
 

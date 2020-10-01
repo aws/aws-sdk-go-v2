@@ -60,8 +60,12 @@ func (c *Client) DeleteVpcEndpoints(ctx context.Context, params *DeleteVpcEndpoi
 
 // Contains the parameters for DeleteVpcEndpoints.
 type DeleteVpcEndpointsInput struct {
+
 	// One or more VPC endpoint IDs.
+	//
+	// This member is required.
 	VpcEndpointIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -71,6 +75,7 @@ type DeleteVpcEndpointsInput struct {
 
 // Contains the output of DeleteVpcEndpoints.
 type DeleteVpcEndpointsOutput struct {
+
 	// Information about the VPC endpoints that were not successfully deleted.
 	Unsuccessful []*types.UnsuccessfulItem
 

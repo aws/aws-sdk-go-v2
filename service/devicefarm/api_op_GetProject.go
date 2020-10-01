@@ -57,12 +57,16 @@ func (c *Client) GetProject(ctx context.Context, params *GetProjectInput, optFns
 
 // Represents a request to the get project operation.
 type GetProjectInput struct {
+
 	// The project's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get project request.
 type GetProjectOutput struct {
+
 	// The project to get information about.
 	Project *types.Project
 

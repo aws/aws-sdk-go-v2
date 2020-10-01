@@ -56,10 +56,14 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 }
 
 type CreateConnectionInput struct {
+
 	// The ID of the Data Catalog in which to create the connection. If none is
 	// provided, the AWS account ID is used by default.
 	CatalogId *string
+
 	// A ConnectionInput object defining the connection to create.
+	//
+	// This member is required.
 	ConnectionInput *types.ConnectionInput
 }
 

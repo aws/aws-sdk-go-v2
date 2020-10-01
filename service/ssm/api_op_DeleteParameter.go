@@ -55,7 +55,10 @@ func (c *Client) DeleteParameter(ctx context.Context, params *DeleteParameterInp
 }
 
 type DeleteParameterInput struct {
+
 	// The name of the parameter to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

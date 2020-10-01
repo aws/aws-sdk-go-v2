@@ -55,17 +55,22 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 }
 
 type ListStreamsInput struct {
+
 	// Set to true to return the list of streams in ascending order.
 	AscendingOrder *bool
+
 	// A token used to get the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at a time.
 	MaxResults *int32
 }
 
 type ListStreamsOutput struct {
+
 	// A token used to get the next set of results.
 	NextToken *string
+
 	// A list of streams.
 	Streams []*types.StreamSummary
 

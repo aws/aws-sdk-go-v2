@@ -57,11 +57,15 @@ func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeD
 }
 
 type DescribeDatasetImportJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset import job to describe.
+	//
+	// This member is required.
 	DatasetImportJobArn *string
 }
 
 type DescribeDatasetImportJobOutput struct {
+
 	// Information about the dataset import job, including the status. The status is
 	// one of the following values:
 	//

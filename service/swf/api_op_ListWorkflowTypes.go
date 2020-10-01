@@ -76,13 +76,21 @@ func (c *Client) ListWorkflowTypes(ctx context.Context, params *ListWorkflowType
 }
 
 type ListWorkflowTypesInput struct {
+
 	// Specifies the registration status of the workflow types to list.
+	//
+	// This member is required.
 	RegistrationStatus types.RegistrationStatus
+
 	// The name of the domain in which the workflow types have been registered.
+	//
+	// This member is required.
 	Domain *string
+
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in ascending alphabetical order of the name of the workflow types.
 	ReverseOrder *bool
+
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
@@ -91,17 +99,23 @@ type ListWorkflowTypesInput struct {
 	// maximum lifetime".  <p>The configured <code>maximumPageSize</code> determines
 	// how many results can be returned in a single call. </p>
 	NextPageToken *string
+
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
 	MaximumPageSize *int32
+
 	// If specified, lists the workflow type with this name.
 	Name *string
 }
 
 // Contains a paginated list of information structures about workflow types.
 type ListWorkflowTypesOutput struct {
+
 	// The list of workflow type information.
+	//
+	// This member is required.
 	TypeInfos []*types.WorkflowTypeInfo
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in nextPageToken. Keep all other arguments unchanged. The

@@ -57,14 +57,19 @@ func (c *Client) DescribeApplicationState(ctx context.Context, params *DescribeA
 }
 
 type DescribeApplicationStateInput struct {
+
 	// The configurationId in Application Discovery Service that uniquely identifies
 	// the grouped application.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DescribeApplicationStateOutput struct {
+
 	// Status of the application - Not Started, In-Progress, Complete.
 	ApplicationStatus types.ApplicationStatus
+
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time
 

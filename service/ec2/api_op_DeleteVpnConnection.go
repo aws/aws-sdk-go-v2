@@ -66,8 +66,12 @@ func (c *Client) DeleteVpnConnection(ctx context.Context, params *DeleteVpnConne
 
 // Contains the parameters for DeleteVpnConnection.
 type DeleteVpnConnectionInput struct {
+
 	// The ID of the VPN connection.
+	//
+	// This member is required.
 	VpnConnectionId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

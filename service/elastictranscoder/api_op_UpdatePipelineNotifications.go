@@ -60,9 +60,13 @@ func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *Update
 
 // The UpdatePipelineNotificationsRequest structure.
 type UpdatePipelineNotificationsInput struct {
+
 	// The identifier of the pipeline for which you want to change notification
 	// settings.
+	//
+	// This member is required.
 	Id *string
+
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that
 	// you want to notify to report job status. To receive notifications, you must also
 	// subscribe to the new topic in the Amazon SNS console.
@@ -85,11 +89,14 @@ type UpdatePipelineNotificationsInput struct {
 	//     * Error: The topic ARN for the Amazon
 	// SNS topic that you want to notify when Elastic Transcoder encounters an error
 	// condition. This is the ARN that Amazon SNS returned when you created the topic.
+	//
+	// This member is required.
 	Notifications *types.Notifications
 }
 
 // The UpdatePipelineNotificationsResponse structure.
 type UpdatePipelineNotificationsOutput struct {
+
 	// A section of the response body that provides information about the pipeline
 	// associated with this notification.
 	Pipeline *types.Pipeline

@@ -58,13 +58,16 @@ func (c *Client) ListFileShares(ctx context.Context, params *ListFileSharesInput
 
 // ListFileShareInput
 type ListFileSharesInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway whose file shares you want to
 	// list. If this field is not present, all file shares under your account are
 	// listed.
 	GatewayARN *string
+
 	// The maximum number of file shares to return in the response. The value must be
 	// an integer with a value greater than zero. Optional.
 	Limit *int32
+
 	// Opaque pagination token returned from a previous ListFileShares operation. If
 	// present, Marker specifies where to continue the list from after a previous call
 	// to ListFileShares. Optional.
@@ -73,10 +76,13 @@ type ListFileSharesInput struct {
 
 // ListFileShareOutput
 type ListFileSharesOutput struct {
+
 	// If the request includes Marker, the response returns that value in this field.
 	Marker *string
+
 	// An array of information about the file gateway's file shares.
 	FileShareInfoList []*types.FileShareInfo
+
 	// If a value is present, there are more file shares to return. In a subsequent
 	// request, use NextMarker as the value for Marker to retrieve the next set of file
 	// shares.

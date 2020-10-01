@@ -78,8 +78,11 @@ func (c *Client) DeleteMatchmakingConfiguration(ctx context.Context, params *Del
 
 // Represents the input for a request action.
 type DeleteMatchmakingConfigurationInput struct {
+
 	// A unique identifier for a matchmaking configuration. You can use either the
 	// configuration name or ARN value.
+	//
+	// This member is required.
 	Name *string
 }
 

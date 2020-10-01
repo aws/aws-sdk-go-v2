@@ -61,8 +61,12 @@ func (c *Client) UpdateRepositoryDescription(ctx context.Context, params *Update
 
 // Represents the input of an update repository description operation.
 type UpdateRepositoryDescriptionInput struct {
+
 	// The name of the repository to set or change the comment or description for.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The new comment or description for the specified repository. Repository
 	// descriptions are limited to 1,000 characters.
 	RepositoryDescription *string

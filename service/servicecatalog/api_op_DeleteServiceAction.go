@@ -55,8 +55,12 @@ func (c *Client) DeleteServiceAction(ctx context.Context, params *DeleteServiceA
 }
 
 type DeleteServiceActionInput struct {
+
 	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	//
+	// This member is required.
 	Id *string
+
 	// The language code.
 	//
 	//     * en - English (default)

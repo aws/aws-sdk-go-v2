@@ -72,13 +72,19 @@ func (c *Client) DeleteServiceLinkedRole(ctx context.Context, params *DeleteServ
 }
 
 type DeleteServiceLinkedRoleInput struct {
+
 	// The name of the service-linked role to be deleted.
+	//
+	// This member is required.
 	RoleName *string
 }
 
 type DeleteServiceLinkedRoleOutput struct {
+
 	// The deletion task identifier that you can use to check the status of the
 	// deletion. This identifier is returned in the format task/aws-service-role///.
+	//
+	// This member is required.
 	DeletionTaskId *string
 
 	// Metadata pertaining to the operation's result.

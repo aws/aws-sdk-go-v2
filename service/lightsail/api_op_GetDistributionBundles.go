@@ -60,6 +60,7 @@ type GetDistributionBundlesInput struct {
 }
 
 type GetDistributionBundlesOutput struct {
+
 	// An object that describes a distribution bundle.
 	Bundles []*types.DistributionBundle
 

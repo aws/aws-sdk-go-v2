@@ -58,20 +58,30 @@ func (c *Client) ListAnalyzedResources(ctx context.Context, params *ListAnalyzed
 
 // Retrieves a list of resources that have been analyzed.
 type ListAnalyzedResourcesInput struct {
+
 	// The ARN of the analyzer to retrieve a list of analyzed resources from.
+	//
+	// This member is required.
 	AnalyzerArn *string
+
 	// The type of resource.
 	ResourceType types.ResourceType
+
 	// A token used for pagination of results returned.
 	NextToken *string
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 }
 
 // The response to the request.
 type ListAnalyzedResourcesOutput struct {
+
 	// A list of resources that were analyzed.
+	//
+	// This member is required.
 	AnalyzedResources []*types.AnalyzedResourceSummary
+
 	// A token used for pagination of results returned.
 	NextToken *string
 

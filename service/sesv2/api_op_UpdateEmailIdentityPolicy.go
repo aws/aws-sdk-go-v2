@@ -68,15 +68,24 @@ func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEm
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html).
 type UpdateEmailIdentityPolicyInput struct {
+
 	// The name of the policy.  <p>The policy name cannot exceed 64 characters and can
 	// only include alphanumeric characters, dashes, and underscores.</p>
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The email identity for which you want to update policy.
+	//
+	// This member is required.
 	EmailIdentity *string
+
 	// The text of the policy in JSON format. The policy cannot exceed 4 KB. For
 	// information about the syntax of sending authorization policies, see the Amazon
 	// SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html).
+	//
+	// This member is required.
 	Policy *string
 }
 

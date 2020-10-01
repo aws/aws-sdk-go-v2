@@ -60,14 +60,19 @@ func (c *Client) DescribeStackProvisioningParameters(ctx context.Context, params
 }
 
 type DescribeStackProvisioningParametersInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 
 // Contains the response to a DescribeStackProvisioningParameters request.
 type DescribeStackProvisioningParametersOutput struct {
+
 	// The AWS OpsWorks Stacks agent installer's URL.
 	AgentInstallerUrl *string
+
 	// An embedded object that contains the provisioning parameters.
 	Parameters map[string]*string
 

@@ -56,7 +56,10 @@ func (c *Client) DeleteCrawler(ctx context.Context, params *DeleteCrawlerInput, 
 }
 
 type DeleteCrawlerInput struct {
+
 	// The name of the crawler to remove.
+	//
+	// This member is required.
 	Name *string
 }
 

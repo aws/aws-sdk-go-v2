@@ -63,9 +63,13 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 }
 
 type CreateIPSetInput struct {
+
 	// The name of the IP set. You cannot change the name of an IPSet after you create
 	// it.
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -76,7 +80,10 @@ type CreateIPSetInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// Contains an array of strings that specify one or more IP addresses or blocks of
 	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
 	// all address ranges for IP versions IPv4 and IPv6. Examples:
@@ -103,17 +110,25 @@ type CreateIPSetInput struct {
 	// For more information about CIDR
 	// notation, see the Wikipedia entry Classless Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
+	//
+	// This member is required.
 	Addresses []*string
+
 	// An array of key:value pairs to associate with the resource.
 	Tags []*types.Tag
+
 	// A description of the IP set that helps with identification. You cannot change
 	// the description of an IP set after you create it.
 	Description *string
+
 	// Specify IPV4 or IPV6.
+	//
+	// This member is required.
 	IPAddressVersion types.IPAddressVersion
 }
 
 type CreateIPSetOutput struct {
+
 	// High-level information about an IPSet (), returned by operations like create and
 	// list. This provides information like the ID, that you can use to retrieve and
 	// manage an IPSet, and the ARN, that you provide to the IPSetReferenceStatement ()

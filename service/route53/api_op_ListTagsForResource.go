@@ -61,21 +61,30 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 // A complex type containing information about a request for a list of the tags
 // that are associated with an individual resource.
 type ListTagsForResourceInput struct {
+
 	// The ID of the resource for which you want to retrieve tags.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The type of the resource.
 	//
 	//     * The resource type for health checks is
 	// healthcheck.
 	//
 	//     * The resource type for hosted zones is hostedzone.
+	//
+	// This member is required.
 	ResourceType types.TagResourceType
 }
 
 // A complex type that contains information about the health checks or hosted zones
 // for which you want to list tags.
 type ListTagsForResourceOutput struct {
+
 	// A ResourceTagSet containing tags associated with the specified resource.
+	//
+	// This member is required.
 	ResourceTagSet *types.ResourceTagSet
 
 	// Metadata pertaining to the operation's result.

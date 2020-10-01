@@ -57,10 +57,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Number (ARN) of a resource to which you want to apply tags.
 	// For example,
 	// arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers
 	// or backups.
 	//
@@ -80,6 +84,8 @@ type TagResourceInput struct {
 	//     * A
 	// maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or
 	// backup.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

@@ -115,6 +115,7 @@ func (c *Client) RunInstances(ctx context.Context, params *RunInstancesInput, op
 }
 
 type RunInstancesInput struct {
+
 	// [EC2-VPC] The number of IPv6 addresses to associate with the primary network
 	// interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
 	// You cannot specify this option and the option to assign specific IPv6 addresses
@@ -122,13 +123,16 @@ type RunInstancesInput struct {
 	// number of instances to launch. You cannot specify this option and the network
 	// interfaces option in the same request.
 	Ipv6AddressCount *int32
+
 	// The IAM instance profile.
 	IamInstanceProfile *types.IamInstanceProfileSpecification
+
 	// An elastic inference accelerator to associate with the instance. Elastic
 	// inference accelerators are a resource you can attach to your Amazon EC2
 	// instances to accelerate your Deep Learning (DL) inference workloads. You cannot
 	// specify accelerators from different generations in the same request.
 	ElasticInferenceAccelerators []*types.ElasticInferenceAccelerator
+
 	// If you set this parameter to true, you can't terminate the instance using the
 	// Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute
 	// after launch, use ModifyInstanceAttribute
@@ -137,25 +141,31 @@ type RunInstancesInput struct {
 	// can terminate the instance by running the shutdown command from the instance.
 	// Default: false
 	DisableApiTermination *bool
+
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, a randomly generated token is
 	// used for the request to ensure idempotency.  <p>For more information, see <a
 	// href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring
 	// Idempotency</a>.</p> <p>Constraints: Maximum 64 ASCII characters</p>
 	ClientToken *string
+
 	// The placement for the instance.
 	Placement *types.Placement
+
 	// Information about the Capacity Reservation targeting option. If you do not
 	// specify this parameter, the instance's Capacity Reservation preference defaults
 	// to open, which enables it to run in any open Capacity Reservation that has
 	// matching attributes (instance type, platform, Availability Zone).
 	CapacityReservationSpecification *types.CapacityReservationSpecification
+
 	// The metadata options for the instance. For more information, see Instance
 	// metadata and user data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
 	MetadataOptions *types.InstanceMetadataOptionsRequest
+
 	// Specifies whether detailed monitoring is enabled for the instance.
 	Monitoring *types.RunInstancesMonitoringEnabled
+
 	// The ID of the RAM disk to select. Some kernels require additional drivers at
 	// launch. Check the kernel requirements for information about whether you need to
 	// specify a RAM disk. To find kernel requirements, go to the AWS Resource Center
@@ -164,20 +174,24 @@ type RunInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	RamdiskId *string
+
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This
 	// optimization provides dedicated throughput to Amazon EBS and an optimized
 	// configuration stack to provide optimal Amazon EBS I/O performance. This
 	// optimization isn't available with all instance types. Additional usage charges
 	// apply when using an EBS-optimized instance. Default: false
 	EbsOptimized *bool
+
 	// The tags to apply to the resources during launch. You can only tag instances and
 	// volumes on launch. The specified tags are applied to all instances or volumes
 	// that are created during launch. To tag a resource after it has been created, see
 	// CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []*types.TagSpecification
+
 	// The license configurations.
 	LicenseSpecifications []*types.LicenseConfigurationRequest
+
 	// The minimum number of instances to launch. If you specify a minimum that is more
 	// instances than Amazon EC2 can launch in the target Availability Zone, Amazon EC2
 	// launches no instances. Constraints: Between 1 and the maximum number you're
@@ -186,18 +200,23 @@ type RunInstancesInput struct {
 	// Amazon EC2
 	// (http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2) in
 	// the Amazon EC2 General FAQ.
+	//
+	// This member is required.
 	MinCount *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IDs of the security groups. You can create a security group using
 	// CreateSecurityGroup
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html).
 	// If you specify a network interface, you must specify any security groups as part
 	// of the network interface.
 	SecurityGroupIds []*string
+
 	// An elastic GPU to associate with the instance. An Elastic GPU is a GPU resource
 	// that you can attach to your Windows instance to accelerate the graphics
 	// performance of your applications. For more information, see  Amazon EC2 Elastic
@@ -205,17 +224,21 @@ type RunInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	ElasticGpuSpecification []*types.ElasticGpuSpecification
+
 	// The block device mapping entries.
 	BlockDeviceMappings []*types.BlockDeviceMapping
+
 	// The CPU options for the instance. For more information, see Optimizing CPU
 	// options
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	CpuOptions *types.CpuOptionsRequest
+
 	// The market (purchasing) option for the instances. For RunInstances (),
 	// persistent Spot Instance requests are only supported when
 	// InstanceInterruptionBehavior is set to either hibernate or stop.
 	InstanceMarketOptions *types.InstanceMarketOptionsRequest
+
 	// The maximum number of instances to launch. If you specify more instances than
 	// Amazon EC2 can launch in the target Availability Zone, Amazon EC2 launches the
 	// largest possible number of instances above MinCount. Constraints: Between 1 and
@@ -224,20 +247,27 @@ type RunInstancesInput struct {
 	// many instances can I run in Amazon EC2
 	// (http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2) in
 	// the Amazon EC2 FAQ.
+	//
+	// This member is required.
 	MaxCount *int32
+
 	// The network interfaces to associate with the instance. If you specify a network
 	// interface, you must specify any security groups and subnets as part of the
 	// network interface.
 	NetworkInterfaces []*types.InstanceNetworkInterfaceSpecification
+
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
 	// Default: stop
 	InstanceInitiatedShutdownBehavior types.ShutdownBehavior
+
 	// Reserved.
 	AdditionalInfo *string
+
 	// The ID of the AMI. An AMI ID is required to launch an instance and must be
 	// specified here or in a launch template.
 	ImageId *string
+
 	// The name of the key pair. You can create a key pair using CreateKeyPair
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html)
 	// or ImportKeyPair
@@ -245,6 +275,7 @@ type RunInstancesInput struct {
 	// If you do not specify a key pair, you can't connect to the instance unless you
 	// choose an AMI that is configured to allow users another way to log in.
 	KeyName *string
+
 	// The credit option for CPU usage of the burstable performance instance. Valid
 	// values are standard and unlimited. To change this attribute after launch, use
 	// ModifyInstanceCreditSpecification
@@ -254,20 +285,24 @@ type RunInstancesInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide. Default: standard (T2 instances)
 	// or unlimited (T3/T3a instances)
 	CreditSpecification *types.CreditSpecificationRequest
+
 	// [EC2-Classic, default VPC] The names of the security groups. For a nondefault
 	// VPC, you must use security group IDs instead. If you specify a network
 	// interface, you must specify any security groups as part of the network
 	// interface. Default: Amazon EC2 uses the default security group.
 	SecurityGroups []*string
+
 	// Indicates whether an instance is enabled for hibernation. For more information,
 	// see Hibernate your instance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	HibernationOptions *types.HibernationOptionsRequest
+
 	// The instance type. For more information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Default: m1.small
 	InstanceType types.InstanceType
+
 	// [EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4
 	// address range of the subnet. Only one private IP address can be designated as
 	// primary. You can't specify this option if you've specified the option to
@@ -276,10 +311,12 @@ type RunInstancesInput struct {
 	// instance in the request. You cannot specify this option and the network
 	// interfaces option in the same request.
 	PrivateIpAddress *string
+
 	// [EC2-VPC] The ID of the subnet to launch the instance into. If you specify a
 	// network interface, you must specify any subnets as part of the network
 	// interface.
 	SubnetId *string
+
 	// The user data to make available to the instance. For more information, see
 	// Running commands on your Linux instance at launch
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) (Linux) and
@@ -289,16 +326,19 @@ type RunInstancesInput struct {
 	// for you, and you can load the text from a file. Otherwise, you must provide
 	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string
+
 	// The launch template to use to launch the instances. Any parameters that you
 	// specify in RunInstances () override the same parameters in the launch template.
 	// You can specify either the name or ID of a launch template, but not both.
 	LaunchTemplate *types.LaunchTemplateSpecification
+
 	// [EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the
 	// primary network interface. You cannot specify this option and the option to
 	// assign a number of IPv6 addresses in the same request. You cannot specify this
 	// option if you've specified a minimum number of instances to launch. You cannot
 	// specify this option and the network interfaces option in the same request.
 	Ipv6Addresses []*types.InstanceIpv6Address
+
 	// The ID of the kernel. We recommend that you use PV-GRUB instead of kernels and
 	// RAM disks. For more information, see  PV-GRUB
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
@@ -308,15 +348,20 @@ type RunInstancesInput struct {
 
 // Describes a reservation.
 type RunInstancesOutput struct {
+
 	// [EC2-Classic only] The security groups.
 	Groups []*types.GroupIdentifier
+
 	// The instances.
 	Instances []*types.Instance
+
 	// The ID of the requester that launched the instances on your behalf (for example,
 	// AWS Management Console or Auto Scaling).
 	RequesterId *string
+
 	// The ID of the reservation.
 	ReservationId *string
+
 	// The ID of the AWS account that owns the reservation.
 	OwnerId *string
 

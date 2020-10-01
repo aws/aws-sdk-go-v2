@@ -58,18 +58,27 @@ func (c *Client) ConfirmDevice(ctx context.Context, params *ConfirmDeviceInput, 
 
 // Confirms the device request.
 type ConfirmDeviceInput struct {
+
 	// The access token.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// The device name.
 	DeviceName *string
+
 	// The device key.
+	//
+	// This member is required.
 	DeviceKey *string
+
 	// The configuration of the device secret verifier.
 	DeviceSecretVerifierConfig *types.DeviceSecretVerifierConfigType
 }
 
 // Confirms the device response.
 type ConfirmDeviceOutput struct {
+
 	// Indicates whether the user confirmation is necessary to confirm the device
 	// response.
 	UserConfirmationNecessary *bool

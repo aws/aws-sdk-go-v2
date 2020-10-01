@@ -56,8 +56,12 @@ func (c *Client) DeleteInternetGateway(ctx context.Context, params *DeleteIntern
 }
 
 type DeleteInternetGatewayInput struct {
+
 	// The ID of the internet gateway.
+	//
+	// This member is required.
 	InternetGatewayId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

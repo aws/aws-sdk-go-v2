@@ -63,10 +63,17 @@ func (c *Client) ModifyReservedInstances(ctx context.Context, params *ModifyRese
 
 // Contains the parameters for ModifyReservedInstances.
 type ModifyReservedInstancesInput struct {
+
 	// The configuration settings for the Reserved Instances to modify.
+	//
+	// This member is required.
 	TargetConfigurations []*types.ReservedInstancesConfiguration
+
 	// The IDs of the Reserved Instances to modify.
+	//
+	// This member is required.
 	ReservedInstancesIds []*string
+
 	// A unique, case-sensitive token you provide to ensure idempotency of your
 	// modification request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
@@ -75,6 +82,7 @@ type ModifyReservedInstancesInput struct {
 
 // Contains the output of ModifyReservedInstances.
 type ModifyReservedInstancesOutput struct {
+
 	// The ID for the modification.
 	ReservedInstancesModificationId *string
 

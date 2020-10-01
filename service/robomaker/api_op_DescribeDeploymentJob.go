@@ -57,29 +57,42 @@ func (c *Client) DescribeDeploymentJob(ctx context.Context, params *DescribeDepl
 }
 
 type DescribeDeploymentJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the deployment job.
+	//
+	// This member is required.
 	Job *string
 }
 
 type DescribeDeploymentJobOutput struct {
+
 	// The deployment job failure code.
 	FailureCode types.DeploymentJobErrorCode
+
 	// The status of the deployment job.
 	Status types.DeploymentStatus
+
 	// A short description of the reason why the deployment job failed.
 	FailureReason *string
+
 	// The list of all tags added to the specified deployment job.
 	Tags map[string]*string
+
 	// The deployment application configuration.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+
 	// The deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Fleet *string
+
 	// The Amazon Resource Name (ARN) of the deployment job.
 	Arn *string
+
 	// A list of robot deployment summaries.
 	RobotDeploymentSummary []*types.RobotDeployment
+
 	// The time, in milliseconds since the epoch, when the deployment job was created.
 	CreatedAt *time.Time
 

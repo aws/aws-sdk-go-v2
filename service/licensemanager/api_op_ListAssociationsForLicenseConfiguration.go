@@ -59,17 +59,24 @@ func (c *Client) ListAssociationsForLicenseConfiguration(ctx context.Context, pa
 }
 
 type ListAssociationsForLicenseConfigurationInput struct {
+
 	// Amazon Resource Name (ARN) of a license configuration.
+	//
+	// This member is required.
 	LicenseConfigurationArn *string
+
 	// Token for the next set of results.
 	NextToken *string
+
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
 }
 
 type ListAssociationsForLicenseConfigurationOutput struct {
+
 	// Token for the next set of results.
 	NextToken *string
+
 	// Information about the associations for the license configuration.
 	LicenseConfigurationAssociations []*types.LicenseConfigurationAssociation
 

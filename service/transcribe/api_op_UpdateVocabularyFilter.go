@@ -57,10 +57,14 @@ func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocab
 }
 
 type UpdateVocabularyFilterInput struct {
+
 	// The name of the vocabulary filter to update. If you try to update a vocabulary
 	// filter with the same name as a previous vocabulary filter you will receive a
 	// ConflictException error.
+	//
+	// This member is required.
 	VocabularyFilterName *string
+
 	// The Amazon S3 location of a text file used as input to create the vocabulary
 	// filter. Only use characters from the character set defined for custom
 	// vocabularies. For a list of character sets, see Character Sets for Custom
@@ -70,6 +74,7 @@ type UpdateVocabularyFilterInput struct {
 	// the location of a list of words in the VocabularyFilterFileUri parameter, you
 	// can't use the Words parameter.
 	VocabularyFilterFileUri *string
+
 	// The words to use in the vocabulary filter. Only use characters from the
 	// character set defined for custom vocabularies. For a list of character sets, see
 	// Character Sets for Custom Vocabularies
@@ -80,10 +85,13 @@ type UpdateVocabularyFilterInput struct {
 }
 
 type UpdateVocabularyFilterOutput struct {
+
 	// The name of the updated vocabulary filter.
 	VocabularyFilterName *string
+
 	// The date and time that the vocabulary filter was updated.
 	LastModifiedTime *time.Time
+
 	// The language code of the words in the vocabulary filter.
 	LanguageCode types.LanguageCode
 

@@ -57,19 +57,28 @@ func (c *Client) ListPrincipals(ctx context.Context, params *ListPrincipalsInput
 }
 
 type ListPrincipalsInput struct {
+
 	// The principals.
 	Principals []*string
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The Amazon Resource Names (ARN) of the resource shares.
 	ResourceShareArns []*string
+
 	// The type of owner.
+	//
+	// This member is required.
 	ResourceOwner types.ResourceOwner
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
+
 	// The resource type. Valid values: codebuild:Project | codebuild:ReportGroup |
 	// ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet |
 	// ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component |
@@ -80,9 +89,11 @@ type ListPrincipalsInput struct {
 }
 
 type ListPrincipalsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The principals.
 	Principals []*types.Principal
 

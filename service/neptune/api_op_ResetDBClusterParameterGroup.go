@@ -64,12 +64,17 @@ func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *Reset
 }
 
 type ResetDBClusterParameterGroupInput struct {
+
 	// A value that is set to true to reset all parameters in the DB cluster parameter
 	// group to their default values, and false otherwise. You can't use this parameter
 	// if there is a list of parameter names specified for the Parameters parameter.
 	ResetAllParameters *bool
+
 	// The name of the DB cluster parameter group to reset.
+	//
+	// This member is required.
 	DBClusterParameterGroupName *string
+
 	// A list of parameter names in the DB cluster parameter group to reset to the
 	// default values. You can't use this parameter if the ResetAllParameters parameter
 	// is set to true.
@@ -77,6 +82,7 @@ type ResetDBClusterParameterGroupInput struct {
 }
 
 type ResetDBClusterParameterGroupOutput struct {
+
 	// The name of the DB cluster parameter group. Constraints:
 	//
 	//     * Must be 1 to 255

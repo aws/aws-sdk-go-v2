@@ -56,18 +56,27 @@ func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentity
 }
 
 type ListIdentityProvidersInput struct {
+
 	// A pagination token.
 	NextToken *string
+
 	// The maximum number of identity providers to return.
 	MaxResults *int32
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type ListIdentityProvidersOutput struct {
+
 	// A pagination token.
 	NextToken *string
+
 	// A list of identity provider objects.
+	//
+	// This member is required.
 	Providers []*types.ProviderDescription
 
 	// Metadata pertaining to the operation's result.

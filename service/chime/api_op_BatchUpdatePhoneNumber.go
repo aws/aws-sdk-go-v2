@@ -63,12 +63,16 @@ func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdate
 }
 
 type BatchUpdatePhoneNumberInput struct {
+
 	// The request containing the phone number IDs and product types or calling names
 	// to update.
+	//
+	// This member is required.
 	UpdatePhoneNumberRequestItems []*types.UpdatePhoneNumberRequestItem
 }
 
 type BatchUpdatePhoneNumberOutput struct {
+
 	// If the action fails for one or more of the phone numbers in the request, a list
 	// of the phone numbers is returned, along with error codes and error messages.
 	PhoneNumberErrors []*types.PhoneNumberError

@@ -65,17 +65,25 @@ func (c *Client) SendCustomVerificationEmail(ctx context.Context, params *SendCu
 // Represents a request to send a custom verification email to a specified
 // recipient.
 type SendCustomVerificationEmailInput struct {
+
 	// The email address to verify.
+	//
+	// This member is required.
 	EmailAddress *string
+
 	// Name of a configuration set to use when sending the verification email.
 	ConfigurationSetName *string
+
 	// The name of the custom verification email template to use when sending the
 	// verification email.
+	//
+	// This member is required.
 	TemplateName *string
 }
 
 // The following element is returned by the service.
 type SendCustomVerificationEmailOutput struct {
+
 	// The unique message identifier returned from the SendCustomVerificationEmail
 	// operation.
 	MessageId *string

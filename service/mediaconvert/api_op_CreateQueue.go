@@ -58,19 +58,27 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 }
 
 type CreateQueueInput struct {
+
 	// Optional. A description of the queue that you are creating.
 	Description *string
+
 	// The name of the queue that you are creating.
+	//
+	// This member is required.
 	Name *string
+
 	// Details about the pricing plan for your reserved queue. Required for reserved
 	// queues and not applicable to on-demand queues.
 	ReservationPlanSettings *types.ReservationPlanSettings
+
 	// The tags that you want to add to the resource. You can tag resources with a
 	// key-value pair or with only a key.
 	Tags map[string]*string
+
 	// Initial state of the queue. If you create a paused queue, then jobs in that
 	// queue won't begin.
 	Status types.QueueStatus
+
 	// Specifies whether the pricing plan for the queue is on-demand or reserved. For
 	// on-demand, you pay per minute, billed in increments of .01 minute. For reserved,
 	// you pay for the transcoding capacity of the entire queue, regardless of how much
@@ -80,6 +88,7 @@ type CreateQueueInput struct {
 }
 
 type CreateQueueOutput struct {
+
 	// You can use queues to manage the resources that are available to your AWS
 	// account for running multiple transcoding jobs at the same time. If you don't
 	// specify a queue, the service sends all jobs through the default queue. For more

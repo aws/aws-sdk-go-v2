@@ -56,9 +56,15 @@ func (c *Client) DeleteLogStream(ctx context.Context, params *DeleteLogStreamInp
 }
 
 type DeleteLogStreamInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
+
 	// The name of the log stream.
+	//
+	// This member is required.
 	LogStreamName *string
 }
 

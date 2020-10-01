@@ -56,21 +56,28 @@ func (c *Client) ListSchemaExtensions(ctx context.Context, params *ListSchemaExt
 }
 
 type ListSchemaExtensionsInput struct {
+
 	// The ListSchemaExtensions.NextToken value from a previous call to
 	// ListSchemaExtensions. Pass null if this is the first call.
 	NextToken *string
+
 	// The identifier of the directory from which to retrieve the schema extension
 	// information.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The maximum number of items to return.
 	Limit *int32
 }
 
 type ListSchemaExtensionsOutput struct {
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to ListSchemaExtensions to retrieve the next set
 	// of items.
 	NextToken *string
+
 	// Information about the schema extensions applied to the directory.
 	SchemaExtensionsInfo []*types.SchemaExtensionInfo
 

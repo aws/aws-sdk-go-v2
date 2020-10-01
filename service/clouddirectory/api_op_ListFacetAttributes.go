@@ -56,19 +56,29 @@ func (c *Client) ListFacetAttributes(ctx context.Context, params *ListFacetAttri
 }
 
 type ListFacetAttributesInput struct {
+
 	// The name of the facet whose attributes will be retrieved.
+	//
+	// This member is required.
 	Name *string
+
 	// The ARN of the schema where the facet resides.
+	//
+	// This member is required.
 	SchemaArn *string
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
 }
 
 type ListFacetAttributesOutput struct {
+
 	// The attributes attached to the facet.
 	Attributes []*types.FacetAttribute
+
 	// The pagination token.
 	NextToken *string
 

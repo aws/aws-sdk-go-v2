@@ -57,19 +57,23 @@ func (c *Client) ResendContactReachabilityEmail(ctx context.Context, params *Res
 }
 
 type ResendContactReachabilityEmailInput struct {
+
 	// The name of the domain for which you want Route 53 to resend a confirmation
 	// email to the registrant contact.
 	DomainName *string
 }
 
 type ResendContactReachabilityEmailOutput struct {
+
 	// True if the email address for the registrant contact has already been verified,
 	// and false otherwise. If the email address has already been verified, we don't
 	// send another confirmation email.
 	IsAlreadyVerified *bool
+
 	// The email address for the registrant contact at the time that we sent the
 	// verification email.
 	EmailAddress *string
+
 	// The domain name for which you requested a confirmation email.
 	DomainName *string
 

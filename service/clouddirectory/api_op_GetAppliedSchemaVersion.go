@@ -55,11 +55,15 @@ func (c *Client) GetAppliedSchemaVersion(ctx context.Context, params *GetApplied
 }
 
 type GetAppliedSchemaVersionInput struct {
+
 	// The ARN of the applied schema.
+	//
+	// This member is required.
 	SchemaArn *string
 }
 
 type GetAppliedSchemaVersionOutput struct {
+
 	// Current applied schema ARN, including the minor version in use if one was
 	// provided.
 	AppliedSchemaArn *string

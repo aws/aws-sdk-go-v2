@@ -80,27 +80,37 @@ func (c *Client) ModifyInstancePlacement(ctx context.Context, params *ModifyInst
 }
 
 type ModifyInstancePlacementInput struct {
+
 	// The affinity setting for the instance.
 	Affinity types.Affinity
+
 	// The ID of the instance that you are modifying.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The name of the placement group in which to place the instance. For spread
 	// placement groups, the instance must have a tenancy of default. For cluster and
 	// partition placement groups, the instance must have a tenancy of default or
 	// dedicated. To remove an instance from a placement group, specify an empty string
 	// ("").
 	GroupName *string
+
 	// The tenancy for the instance.
 	Tenancy types.HostTenancy
+
 	// Reserved for future use.
 	PartitionNumber *int32
+
 	// The ARN of the host resource group in which to place the instance.
 	HostResourceGroupArn *string
+
 	// The ID of the Dedicated Host with which to associate the instance.
 	HostId *string
 }
 
 type ModifyInstancePlacementOutput struct {
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool
 

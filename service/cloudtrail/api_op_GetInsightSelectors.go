@@ -63,6 +63,7 @@ func (c *Client) GetInsightSelectors(ctx context.Context, params *GetInsightSele
 }
 
 type GetInsightSelectorsInput struct {
+
 	// Specifies the name of the trail or trail ARN. If you specify a trail name, the
 	// string must meet the following requirements:
 	//
@@ -83,13 +84,17 @@ type GetInsightSelectorsInput struct {
 	//
 	// If you specify a trail ARN, it must
 	// be in the format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// This member is required.
 	TrailName *string
 }
 
 type GetInsightSelectorsOutput struct {
+
 	// A JSON string that contains the insight types you want to log on a trail. In
 	// this release, only ApiCallRateInsight is supported as an insight type.
 	InsightSelectors []*types.InsightSelector
+
 	// The Amazon Resource Name (ARN) of a trail for which you want to get Insights
 	// selectors.
 	TrailARN *string

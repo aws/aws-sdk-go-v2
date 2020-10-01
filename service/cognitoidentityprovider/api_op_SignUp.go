@@ -55,8 +55,12 @@ func (c *Client) SignUp(ctx context.Context, params *SignUpInput, optFns ...func
 
 // Represents the request to register a user.
 type SignUpInput struct {
+
 	// The user name of the user you wish to register.
+	//
+	// This member is required.
 	Username *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the SignUp API action,
@@ -84,33 +88,51 @@ type SignUpInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
+
 	// The password of the user you wish to register.
+	//
+	// This member is required.
 	Password *string
+
 	// The Amazon Pinpoint analytics metadata for collecting metrics for SignUp calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// An array of name-value pairs representing user attributes. For custom
 	// attributes, you must prepend the custom: prefix to the attribute name.
 	UserAttributes []*types.AttributeType
+
 	// The ID of the client associated with the user pool.
+	//
+	// This member is required.
 	ClientId *string
+
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
 	// of a user pool client and username plus the client ID in the message.
 	SecretHash *string
+
 	// The validation data in the request to register a user.
 	ValidationData []*types.AttributeType
 }
 
 // The response from the server for a registration request.
 type SignUpOutput struct {
+
 	// A response from the server indicating that a user registration has been
 	// confirmed.
+	//
+	// This member is required.
 	UserConfirmed *bool
+
 	// The UUID of the authenticated user. This is not the same as username.
+	//
+	// This member is required.
 	UserSub *string
+
 	// The code delivery details returned by the server response to the user
 	// registration request.
 	CodeDeliveryDetails *types.CodeDeliveryDetailsType

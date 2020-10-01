@@ -58,13 +58,25 @@ func (c *Client) VoteOnProposal(ctx context.Context, params *VoteOnProposalInput
 }
 
 type VoteOnProposalInput struct {
+
 	// The unique identifier of the network.
+	//
+	// This member is required.
 	NetworkId *string
+
 	// The value of the vote.
+	//
+	// This member is required.
 	Vote types.VoteValue
+
 	// The unique identifier of the member casting the vote.
+	//
+	// This member is required.
 	VoterMemberId *string
+
 	// The unique identifier of the proposal.
+	//
+	// This member is required.
 	ProposalId *string
 }
 

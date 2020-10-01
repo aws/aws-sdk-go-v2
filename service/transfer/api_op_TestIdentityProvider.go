@@ -61,31 +61,48 @@ func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityP
 }
 
 type TestIdentityProviderInput struct {
+
 	// The password of the user account to be tested.
 	UserPassword *string
+
 	// The source IP address of the user account to be tested.
 	SourceIp *string
+
 	// The type of file transfer protocol to be tested.  <p>The available protocols
 	// are:</p> <ul> <li> <p>Secure Shell (SSH) File Transfer Protocol (SFTP)</p> </li>
 	// <li> <p>File Transfer Protocol Secure (FTPS)</p> </li> <li> <p>File Transfer
 	// Protocol (FTP)</p> </li> </ul>
 	ServerProtocol types.Protocol
+
 	// A system-assigned identifier for a specific file transfer protocol-enabled
 	// server. That server's user authentication method is tested with a user name and
 	// password.
+	//
+	// This member is required.
 	ServerId *string
+
 	// The name of the user account to be tested.
+	//
+	// This member is required.
 	UserName *string
 }
 
 type TestIdentityProviderOutput struct {
+
 	// The response that is returned from your API Gateway.
 	Response *string
+
 	// A message that indicates whether the test was successful or not.
 	Message *string
+
 	// The HTTP status code that is the response from your API Gateway.
+	//
+	// This member is required.
 	StatusCode *int32
+
 	// The endpoint of the service used to authenticate a user.
+	//
+	// This member is required.
 	Url *string
 
 	// Metadata pertaining to the operation's result.

@@ -59,17 +59,22 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 }
 
 type ListJobsInput struct {
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
 	// Specifies to return only these tagged resources.
 	Tags map[string]*string
+
 	// The maximum size of a list to return.
 	MaxResults *int32
 }
 
 type ListJobsOutput struct {
+
 	// The names of all jobs in the account, or the jobs with the specified tags.
 	JobNames []*string
+
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
 	NextToken *string

@@ -69,6 +69,7 @@ func (c *Client) CreateActivity(ctx context.Context, params *CreateActivityInput
 }
 
 type CreateActivityInput struct {
+
 	// The list of tags to add to a resource. An array of key-value pairs. For more
 	// information, see Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
@@ -78,6 +79,7 @@ type CreateActivityInput struct {
 	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 	// = + - @.
 	Tags []*types.Tag
+
 	// The name of the activity to create. This name must be unique for your AWS
 	// account and region for 90 days. For more information, see  Limits Related to
 	// State Machine Executions
@@ -99,13 +101,21 @@ type CreateActivityInput struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateActivityOutput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the created activity.
+	//
+	// This member is required.
 	ActivityArn *string
+
 	// The date the activity is created.
+	//
+	// This member is required.
 	CreationDate *time.Time
 
 	// Metadata pertaining to the operation's result.

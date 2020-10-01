@@ -58,13 +58,20 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 }
 
 type DescribeUserInput struct {
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The identifier of the user account.
+	//
+	// This member is required.
 	UserId *string
 }
 
 type DescribeUserOutput struct {
+
 	// Information about the user account and configuration settings.
 	User *types.User
 

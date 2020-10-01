@@ -64,14 +64,21 @@ func (c *Client) GetFileUploadURL(ctx context.Context, params *GetFileUploadURLI
 }
 
 type GetFileUploadURLInput struct {
+
 	// The identifier of the question with a FileUploadAnswer, as specified in the
 	// QuestionForm of the HIT.
+	//
+	// This member is required.
 	QuestionIdentifier *string
+
 	// The ID of the assignment that contains the question with a FileUploadAnswer.
+	//
+	// This member is required.
 	AssignmentId *string
 }
 
 type GetFileUploadURLOutput struct {
+
 	// A temporary URL for the file that the Worker uploaded for the answer.
 	FileUploadURL *string
 

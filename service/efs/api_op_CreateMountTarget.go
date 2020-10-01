@@ -134,43 +134,69 @@ func (c *Client) CreateMountTarget(ctx context.Context, params *CreateMountTarge
 
 //
 type CreateMountTargetInput struct {
+
 	// The ID of the subnet to add the mount target in.
+	//
+	// This member is required.
 	SubnetId *string
+
 	// Valid IPv4 address within the address range of the specified subnet.
 	IpAddress *string
+
 	// Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be for
 	// the same VPC as subnet specified.
 	SecurityGroups []*string
+
 	// The ID of the file system for which to create the mount target.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
 // Provides a description of a mount target.
 type CreateMountTargetOutput struct {
+
 	// Address at which the file system can be mounted by using the mount target.
 	IpAddress *string
+
 	// AWS account ID that owns the resource.
 	OwnerId *string
+
 	// Lifecycle state of the mount target.
+	//
+	// This member is required.
 	LifeCycleState types.LifeCycleState
+
 	// The unique and consistent identifier of the Availability Zone (AZ) that the
 	// mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1
 	// Region and it has the same location in every AWS account.
 	AvailabilityZoneId *string
+
 	// The name of the Availability Zone (AZ) that the mount target resides in. AZs are
 	// independently mapped to names for each AWS account. For example, the
 	// Availability Zone us-east-1a for your AWS account might not be the same location
 	// as us-east-1a for another AWS account.
 	AvailabilityZoneName *string
+
 	// The ID of the mount target's subnet.
+	//
+	// This member is required.
 	SubnetId *string
+
 	// System-assigned mount target ID.
+	//
+	// This member is required.
 	MountTargetId *string
+
 	// The ID of the network interface that Amazon EFS created when it created the
 	// mount target.
 	NetworkInterfaceId *string
+
 	// The ID of the file system for which the mount target is intended.
+	//
+	// This member is required.
 	FileSystemId *string
+
 	// The Virtual Private Cloud (VPC) ID that the mount target is configured in.
 	VpcId *string
 

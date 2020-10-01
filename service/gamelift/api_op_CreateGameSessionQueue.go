@@ -96,6 +96,7 @@ func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameS
 
 // Represents the input for a request action.
 type CreateGameSessionQueueInput struct {
+
 	// A list of labels to assign to the new game session queue resource. Tags are
 	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
 	// management, access management and cost allocation. For more information, see
@@ -106,17 +107,23 @@ type CreateGameSessionQueueInput struct {
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag
+
 	// A descriptive label that is associated with game session queue. Queue names must
 	// be unique within each Region.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of fleets that can be used to fulfill game session placement requests in
 	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
 	// Destinations are listed in default preference order.
 	Destinations []*types.GameSessionQueueDestination
+
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
 	// changes to a TIMED_OUT status.
 	TimeoutInSeconds *int32
+
 	// A collection of latency policies to apply when processing game sessions
 	// placement requests with player latency information. Multiple policies are
 	// evaluated in order of the maximum latency value, starting with the lowest
@@ -132,6 +139,7 @@ type CreateGameSessionQueueInput struct {
 
 // Represents the returned data in response to a request action.
 type CreateGameSessionQueueOutput struct {
+
 	// An object that describes the newly created game session queue.
 	GameSessionQueue *types.GameSessionQueue
 

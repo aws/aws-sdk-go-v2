@@ -60,12 +60,16 @@ func (c *Client) CancelReservedInstancesListing(ctx context.Context, params *Can
 
 // Contains the parameters for CancelReservedInstancesListing.
 type CancelReservedInstancesListingInput struct {
+
 	// The ID of the Reserved Instance listing.
+	//
+	// This member is required.
 	ReservedInstancesListingId *string
 }
 
 // Contains the output of CancelReservedInstancesListing.
 type CancelReservedInstancesListingOutput struct {
+
 	// The Reserved Instance listing.
 	ReservedInstancesListings []*types.ReservedInstancesListing
 

@@ -56,10 +56,16 @@ func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClus
 }
 
 type AddRoleToDBClusterInput struct {
+
 	// The name of the DB cluster to associate the IAM role with.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB
 	// cluster, for example arn:aws:iam::123456789012:role/NeptuneAccessRole.
+	//
+	// This member is required.
 	RoleArn *string
 }
 

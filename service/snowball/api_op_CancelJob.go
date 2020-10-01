@@ -57,8 +57,11 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 }
 
 type CancelJobInput struct {
+
 	// The 39-character job ID for the job that you want to cancel, for example
 	// JID123e4567-e89b-12d3-a456-426655440000.
+	//
+	// This member is required.
 	JobId *string
 }
 

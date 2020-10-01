@@ -58,6 +58,7 @@ func (c *Client) PutAccountSettingDefault(ctx context.Context, params *PutAccoun
 }
 
 type PutAccountSettingDefaultInput struct {
+
 	// The resource name for which to modify the account setting. If
 	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
 	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
@@ -66,13 +67,19 @@ type PutAccountSettingDefaultInput struct {
 	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
 	// instances is affected. If containerInsights is specified, the default setting
 	// for CloudWatch Container Insights for your clusters is affected.
+	//
+	// This member is required.
 	Name types.SettingName
+
 	// The account setting value for the specified principal ARN. Accepted values are
 	// enabled and disabled.
+	//
+	// This member is required.
 	Value *string
 }
 
 type PutAccountSettingDefaultOutput struct {
+
 	// The current account setting for a resource.
 	Setting *types.Setting
 

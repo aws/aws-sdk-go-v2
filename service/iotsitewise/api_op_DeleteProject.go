@@ -57,11 +57,15 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 }
 
 type DeleteProjectInput struct {
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
 	// The ID of the project.
+	//
+	// This member is required.
 	ProjectId *string
 }
 

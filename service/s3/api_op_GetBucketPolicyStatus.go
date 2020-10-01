@@ -71,11 +71,15 @@ func (c *Client) GetBucketPolicyStatus(ctx context.Context, params *GetBucketPol
 }
 
 type GetBucketPolicyStatusInput struct {
+
 	// The name of the Amazon S3 bucket whose policy status you want to retrieve.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketPolicyStatusOutput struct {
+
 	// The policy status for the specified bucket.
 	PolicyStatus *types.PolicyStatus
 

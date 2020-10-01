@@ -56,11 +56,15 @@ func (c *Client) StopBuildBatch(ctx context.Context, params *StopBuildBatchInput
 }
 
 type StopBuildBatchInput struct {
+
 	// The identifier of the batch build to stop.
+	//
+	// This member is required.
 	Id *string
 }
 
 type StopBuildBatchOutput struct {
+
 	// Contains information about a batch build.
 	BuildBatch *types.BuildBatch
 

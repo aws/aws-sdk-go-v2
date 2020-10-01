@@ -57,11 +57,15 @@ func (c *Client) DeleteTrialComponent(ctx context.Context, params *DeleteTrialCo
 }
 
 type DeleteTrialComponentInput struct {
+
 	// The name of the component to delete.
+	//
+	// This member is required.
 	TrialComponentName *string
 }
 
 type DeleteTrialComponentOutput struct {
+
 	// The Amazon Resource Name (ARN) of the component is being deleted.
 	TrialComponentArn *string
 

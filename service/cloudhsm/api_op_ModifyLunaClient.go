@@ -66,13 +66,20 @@ func (c *Client) ModifyLunaClient(ctx context.Context, params *ModifyLunaClientI
 }
 
 type ModifyLunaClientInput struct {
+
 	// The ARN of the client.
+	//
+	// This member is required.
 	ClientArn *string
+
 	// The new certificate for the client.
+	//
+	// This member is required.
 	Certificate *string
 }
 
 type ModifyLunaClientOutput struct {
+
 	// The ARN of the client.
 	ClientArn *string
 

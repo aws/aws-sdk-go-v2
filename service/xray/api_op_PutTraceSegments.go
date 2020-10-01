@@ -102,12 +102,16 @@ func (c *Client) PutTraceSegments(ctx context.Context, params *PutTraceSegmentsI
 }
 
 type PutTraceSegmentsInput struct {
+
 	// A string containing a JSON document defining one or more segments or
 	// subsegments.
+	//
+	// This member is required.
 	TraceSegmentDocuments []*string
 }
 
 type PutTraceSegmentsOutput struct {
+
 	// Segments that failed processing.
 	UnprocessedTraceSegments []*types.UnprocessedTraceSegment
 

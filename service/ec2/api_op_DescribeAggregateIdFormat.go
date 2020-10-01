@@ -73,6 +73,7 @@ func (c *Client) DescribeAggregateIdFormat(ctx context.Context, params *Describe
 }
 
 type DescribeAggregateIdFormatInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -81,8 +82,10 @@ type DescribeAggregateIdFormatInput struct {
 }
 
 type DescribeAggregateIdFormatOutput struct {
+
 	// Information about each resource's ID format.
 	Statuses []*types.IdFormat
+
 	// Indicates whether all resource types in the Region are configured to use longer
 	// IDs. This value is only true if all users are configured to use longer IDs for
 	// all resources types in the Region.

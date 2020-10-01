@@ -59,12 +59,16 @@ func (c *Client) GetEndpointAttributes(ctx context.Context, params *GetEndpointA
 
 // Input for GetEndpointAttributes action.
 type GetEndpointAttributesInput struct {
+
 	// EndpointArn for GetEndpointAttributes input.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 
 // Response from GetEndpointAttributes of the EndpointArn.
 type GetEndpointAttributesOutput struct {
+
 	// Attributes include the following:
 	//
 	//     * CustomUserData – arbitrary user data to

@@ -61,11 +61,15 @@ func (c *Client) DescribeLoadBalancerAttributes(ctx context.Context, params *Des
 }
 
 type DescribeLoadBalancerAttributesInput struct {
+
 	// The Amazon Resource Name (ARN) of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerArn *string
 }
 
 type DescribeLoadBalancerAttributesOutput struct {
+
 	// Information about the load balancer attributes.
 	Attributes []*types.LoadBalancerAttribute
 

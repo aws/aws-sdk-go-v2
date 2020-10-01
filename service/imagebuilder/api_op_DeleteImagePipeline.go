@@ -55,13 +55,18 @@ func (c *Client) DeleteImagePipeline(ctx context.Context, params *DeleteImagePip
 }
 
 type DeleteImagePipelineInput struct {
+
 	// The Amazon Resource Name (ARN) of the image pipeline to delete.
+	//
+	// This member is required.
 	ImagePipelineArn *string
 }
 
 type DeleteImagePipelineOutput struct {
+
 	// The Amazon Resource Name (ARN) of the image pipeline that was deleted.
 	ImagePipelineArn *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

@@ -58,27 +58,37 @@ func (c *Client) DescribeNetworkInterfaceAttribute(ctx context.Context, params *
 
 // Contains the parameters for DescribeNetworkInterfaceAttribute.
 type DescribeNetworkInterfaceAttributeInput struct {
+
 	// The ID of the network interface.
+	//
+	// This member is required.
 	NetworkInterfaceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The attribute of the network interface. This parameter is required.
 	Attribute types.NetworkInterfaceAttribute
 }
 
 // Contains the output of DescribeNetworkInterfaceAttribute.
 type DescribeNetworkInterfaceAttributeOutput struct {
+
 	// The security groups associated with the network interface.
 	Groups []*types.GroupIdentifier
+
 	// The description of the network interface.
 	Description *types.AttributeValue
+
 	// The attachment (if any) of the network interface.
 	Attachment *types.NetworkInterfaceAttachment
+
 	// The ID of the network interface.
 	NetworkInterfaceId *string
+
 	// Indicates whether source/destination checking is enabled.
 	SourceDestCheck *types.AttributeBooleanValue
 

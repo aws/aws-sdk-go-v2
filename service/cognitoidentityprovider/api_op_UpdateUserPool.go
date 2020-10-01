@@ -59,20 +59,29 @@ func (c *Client) UpdateUserPool(ctx context.Context, params *UpdateUserPoolInput
 
 // Represents the request to update the user pool.
 type UpdateUserPoolInput struct {
+
 	// Used to enable advanced security risk detection. Set the key
 	// AdvancedSecurityMode to the value "AUDIT".
 	UserPoolAddOns *types.UserPoolAddOnsType
+
 	// A container with information about the SMS verification message.
 	SmsVerificationMessage *string
+
 	// Email configuration.
 	EmailConfiguration *types.EmailConfigurationType
+
 	// The subject of the email verification message.
 	EmailVerificationSubject *string
+
 	// The user pool ID for the user pool you want to update.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The AWS Lambda configuration information from the request to update the user
 	// pool.
 	LambdaConfig *types.LambdaConfigType
+
 	// Can be one of the following values:
 	//
 	//     * OFF - MFA tokens are not required and
@@ -85,19 +94,25 @@ type UpdateUserPoolInput struct {
 	//     * OPTIONAL - Users have the option when
 	// registering to create an MFA token.
 	MfaConfiguration types.UserPoolMfaType
+
 	// The contents of the email verification message.
 	EmailVerificationMessage *string
+
 	// Device configuration.
 	DeviceConfiguration *types.DeviceConfigurationType
+
 	// The tag keys and values to assign to the user pool. A tag is a label that you
 	// can use to categorize and manage user pools in different ways, such as by
 	// purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]*string
+
 	// The attributes that are automatically verified when the Amazon Cognito service
 	// makes a request to update user pools.
 	AutoVerifiedAttributes []types.VerifiedAttributeType
+
 	// The contents of the SMS authentication message.
 	SmsAuthenticationMessage *string
+
 	// Use this setting to define which verified available method a user can use to
 	// recover their password when they call ForgotPassword. It allows you to define a
 	// preferred method when a user has more than one method available. With this
@@ -106,12 +121,16 @@ type UpdateUserPoolInput struct {
 	// legacy behavior to determine the recovery method where SMS is preferred over
 	// email.
 	AccountRecoverySetting *types.AccountRecoverySettingType
+
 	// A container with the policies you wish to update in a user pool.
 	Policies *types.UserPoolPolicyType
+
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *types.AdminCreateUserConfigType
+
 	// SMS configuration.
 	SmsConfiguration *types.SmsConfigurationType
+
 	// The template for verification messages.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType
 }

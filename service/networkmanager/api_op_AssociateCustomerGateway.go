@@ -65,19 +65,30 @@ func (c *Client) AssociateCustomerGateway(ctx context.Context, params *Associate
 }
 
 type AssociateCustomerGatewayInput struct {
+
 	// The Amazon Resource Name (ARN) of the customer gateway. For more information,
 	// see Resources Defined by Amazon EC2
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies).
+	//
+	// This member is required.
 	CustomerGatewayArn *string
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The ID of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// The ID of the link.
 	LinkId *string
 }
 
 type AssociateCustomerGatewayOutput struct {
+
 	// The customer gateway association.
 	CustomerGatewayAssociation *types.CustomerGatewayAssociation
 

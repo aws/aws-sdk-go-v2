@@ -57,11 +57,15 @@ func (c *Client) RestorePhoneNumber(ctx context.Context, params *RestorePhoneNum
 }
 
 type RestorePhoneNumberInput struct {
+
 	// The phone number.
+	//
+	// This member is required.
 	PhoneNumberId *string
 }
 
 type RestorePhoneNumberOutput struct {
+
 	// The phone number details.
 	PhoneNumber *types.PhoneNumber
 

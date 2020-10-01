@@ -57,14 +57,22 @@ func (c *Client) GetJourneyExecutionMetrics(ctx context.Context, params *GetJour
 }
 
 type GetJourneyExecutionMetricsInput struct {
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
 	// The unique identifier for the journey.
+	//
+	// This member is required.
 	JourneyId *string
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The string that specifies which page of results to return in a paginated
 	// response. This parameter is not supported for application, campaign, and journey
 	// metrics.
@@ -72,8 +80,11 @@ type GetJourneyExecutionMetricsInput struct {
 }
 
 type GetJourneyExecutionMetricsOutput struct {
+
 	// Provides the results of a query that retrieved the data for a standard execution
 	// metric that applies to a journey, and provides information about that query.
+	//
+	// This member is required.
 	JourneyExecutionMetricsResponse *types.JourneyExecutionMetricsResponse
 
 	// Metadata pertaining to the operation's result.

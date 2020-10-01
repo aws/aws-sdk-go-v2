@@ -61,16 +61,24 @@ func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceCo
 }
 
 type CreateVoiceConnectorInput struct {
+
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default
 	// value: us-east-1.
 	AwsRegion types.VoiceConnectorAwsRegion
+
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
+	//
+	// This member is required.
 	RequireEncryption *bool
+
 	// The name of the Amazon Chime Voice Connector.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateVoiceConnectorOutput struct {
+
 	// The Amazon Chime Voice Connector details.
 	VoiceConnector *types.VoiceConnector
 

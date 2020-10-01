@@ -74,11 +74,14 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html).
 type SendEmailInput struct {
+
 	// The "Reply-to" email addresses for the message. When the recipient replies to
 	// the message, each Reply-to address receives the reply.
 	ReplyToAddresses []*string
+
 	// The name of the configuration set that you want to use when sending the email.
 	ConfigurationSetName *string
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the FromEmailAddress parameter. For
@@ -94,11 +97,14 @@ type SendEmailInput struct {
 	// X-SES-SOURCE-ARN and X-SES-FROM-ARN headers specified in raw email message
 	// content.
 	FromEmailAddressIdentityArn *string
+
 	// The address that you want bounce and complaint notifications to be sent to.
 	FeedbackForwardingEmailAddress *string
+
 	// The email address that you want to use as the "From" address for the email. The
 	// address that you specify has to be verified.
 	FromEmailAddress *string
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the FeedbackForwardingEmailAddress
@@ -111,11 +117,16 @@ type SendEmailInput struct {
 	// about sending authorization, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	FeedbackForwardingEmailAddressIdentityArn *string
+
 	// An object that contains the recipients of the email message.
 	Destination *types.Destination
+
 	// An object that contains the body of the message. You can send either a Simple
 	// message Raw message or a template Message.
+	//
+	// This member is required.
 	Content *types.EmailContent
+
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using the SendEmail operation. Tags correspond to characteristics of the
 	// email that you define, so that you can publish email sending events.
@@ -124,6 +135,7 @@ type SendEmailInput struct {
 
 // A unique message ID that you receive when an email is accepted for sending.
 type SendEmailOutput struct {
+
 	// A unique identifier for the message that is generated when the message is
 	// accepted. It's possible for Amazon SES to accept a message without sending it.
 	// This can happen when the message that you're trying to send has an attachment

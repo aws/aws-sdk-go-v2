@@ -55,25 +55,33 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 }
 
 type DescribeScalingActivitiesInput struct {
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The activity IDs of the desired scaling activities. You can specify up to 50
 	// IDs. If you omit this parameter, all activities for the past six weeks are
 	// described. If unknown activities are requested, they are ignored with no error.
 	// If you specify an Auto Scaling group, the results are limited to that group.
 	ActivityIds []*string
+
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
+
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100.
 	MaxRecords *int32
 }
 
 type DescribeScalingActivitiesOutput struct {
+
 	// The scaling activities. Activities are sorted by start time. Activities still in
 	// progress are described first.
+	//
+	// This member is required.
 	Activities []*types.Activity
+
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is

@@ -58,11 +58,15 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 }
 
 type GetTemplateInput struct {
+
 	// The name of the template you want to retrieve.
+	//
+	// This member is required.
 	TemplateName *string
 }
 
 type GetTemplateOutput struct {
+
 	// The content of the email, composed of a subject line, an HTML part, and a
 	// text-only part.
 	Template *types.Template

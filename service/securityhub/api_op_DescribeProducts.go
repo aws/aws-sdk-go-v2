@@ -56,8 +56,10 @@ func (c *Client) DescribeProducts(ctx context.Context, params *DescribeProductsI
 }
 
 type DescribeProductsInput struct {
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The token that is required for pagination. On your first call to the
 	// DescribeProducts operation, set the value of this parameter to NULL. For
 	// subsequent calls to the operation, to continue listing data, set the value of
@@ -66,8 +68,12 @@ type DescribeProductsInput struct {
 }
 
 type DescribeProductsOutput struct {
+
 	// A list of products, including details for each product.
+	//
+	// This member is required.
 	Products []*types.Product
+
 	// The pagination token to use to request the next page of results.
 	NextToken *string
 

@@ -81,9 +81,11 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 }
 
 type PutResourcePolicyInput struct {
+
 	// Makes an optional API call to Zelkova to validate the Resource Policy to prevent
 	// broad access to your secret.
 	BlockPublicPolicy *bool
+
 	// A JSON-formatted string that's constructed according to the grammar and syntax
 	// for an AWS resource-based policy. The policy in the string identifies who can
 	// access or manage this secret and its versions. For information on how to format
@@ -91,7 +93,10 @@ type PutResourcePolicyInput struct {
 	// for Parameters
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
 	// in the AWS CLI User Guide.
+	//
+	// This member is required.
 	ResourcePolicy *string
+
 	// Specifies the secret that you want to attach the resource-based policy to. You
 	// can specify either the ARN or the friendly name of the secret. If you specify an
 	// ARN, we generally recommend that you specify a complete ARN. You can specify a
@@ -109,12 +114,16 @@ type PutResourcePolicyInput struct {
 	// you do include the random suffix added by Secrets Manager, you receive either a
 	// ResourceNotFoundException or an AccessDeniedException error, depending on your
 	// permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type PutResourcePolicyOutput struct {
+
 	// The friendly name of the secret that the retrieved by the resource-based policy.
 	Name *string
+
 	// The ARN of the secret retrieved by the resource-based policy.
 	ARN *string
 

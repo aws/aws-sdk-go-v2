@@ -58,30 +58,43 @@ func (c *Client) StartMultiplex(ctx context.Context, params *StartMultiplexInput
 
 // Placeholder documentation for StartMultiplexRequest
 type StartMultiplexInput struct {
+
 	// The ID of the multiplex.
+	//
+	// This member is required.
 	MultiplexId *string
 }
 
 // Placeholder documentation for StartMultiplexResponse
 type StartMultiplexOutput struct {
+
 	// Configuration for a multiplex event.
 	MultiplexSettings *types.MultiplexSettings
+
 	// The unique id of the multiplex.
 	Id *string
+
 	// The current state of the multiplex.
 	State types.MultiplexState
+
 	// A list of availability zones for the multiplex.
 	AvailabilityZones []*string
+
 	// The number of currently healthy pipelines.
 	PipelinesRunningCount *int32
+
 	// The name of the multiplex.
 	Name *string
+
 	// A list of the multiplex output destinations.
 	Destinations []*types.MultiplexOutputDestination
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
+
 	// The unique arn of the multiplex.
 	Arn *string
+
 	// The number of programs in the multiplex.
 	ProgramCount *int32
 

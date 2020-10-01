@@ -55,7 +55,10 @@ func (c *Client) DeleteGraphqlApi(ctx context.Context, params *DeleteGraphqlApiI
 }
 
 type DeleteGraphqlApiInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
 }
 

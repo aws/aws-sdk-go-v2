@@ -57,21 +57,35 @@ func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecy
 }
 
 type CreateLifecyclePolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
 	// specified by the lifecycle policy.
+	//
+	// This member is required.
 	ExecutionRoleArn *string
+
 	// A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are
 	// supported.
+	//
+	// This member is required.
 	Description *string
+
 	// The desired activation state of the lifecycle policy after creation.
+	//
+	// This member is required.
 	State types.SettablePolicyStateValues
+
 	// The configuration details of the lifecycle policy.
+	//
+	// This member is required.
 	PolicyDetails *types.PolicyDetails
+
 	// The tags to apply to the lifecycle policy during creation.
 	Tags map[string]*string
 }
 
 type CreateLifecyclePolicyOutput struct {
+
 	// The identifier of the lifecycle policy.
 	PolicyId *string
 

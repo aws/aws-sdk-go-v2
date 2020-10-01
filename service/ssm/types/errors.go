@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Error returned if an attempt is made to register a patch group with a patch
@@ -25,12 +24,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You must disassociate a document from all instances before you can delete it.
 type AssociatedInstances struct {
@@ -82,12 +75,6 @@ func (e *AssociationDoesNotExist) ErrorMessage() string {
 }
 func (e *AssociationDoesNotExist) ErrorCode() string             { return "AssociationDoesNotExist" }
 func (e *AssociationDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AssociationDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AssociationDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified execution ID does not exist. Verify the ID number and try again.
 type AssociationExecutionDoesNotExist struct {
@@ -107,12 +94,6 @@ func (e *AssociationExecutionDoesNotExist) ErrorCode() string {
 	return "AssociationExecutionDoesNotExist"
 }
 func (e *AssociationExecutionDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AssociationExecutionDoesNotExist) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AssociationExecutionDoesNotExist) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can have at most 2,000 active associations.
 type AssociationLimitExceeded struct {
@@ -150,12 +131,6 @@ func (e *AssociationVersionLimitExceeded) ErrorCode() string {
 	return "AssociationVersionLimitExceeded"
 }
 func (e *AssociationVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AssociationVersionLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AssociationVersionLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Automation document with the specified name could not be found.
 type AutomationDefinitionNotFoundException struct {
@@ -177,12 +152,6 @@ func (e *AutomationDefinitionNotFoundException) ErrorCode() string {
 func (e *AutomationDefinitionNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AutomationDefinitionNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationDefinitionNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Automation document with the specified name and version could not be found.
 type AutomationDefinitionVersionNotFoundException struct {
@@ -203,12 +172,6 @@ func (e *AutomationDefinitionVersionNotFoundException) ErrorCode() string {
 }
 func (e *AutomationDefinitionVersionNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *AutomationDefinitionVersionNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationDefinitionVersionNotFoundException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The number of simultaneously running Automation executions exceeded the
@@ -232,12 +195,6 @@ func (e *AutomationExecutionLimitExceededException) ErrorCode() string {
 func (e *AutomationExecutionLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AutomationExecutionLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationExecutionLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no automation execution information for the requested automation
 // execution ID.
@@ -260,12 +217,6 @@ func (e *AutomationExecutionNotFoundException) ErrorCode() string {
 func (e *AutomationExecutionNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AutomationExecutionNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationExecutionNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified step name and execution ID don't exist. Verify the information and
 // try again.
@@ -286,12 +237,6 @@ func (e *AutomationStepNotFoundException) ErrorCode() string {
 	return "AutomationStepNotFoundException"
 }
 func (e *AutomationStepNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AutomationStepNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AutomationStepNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified too many custom compliance types. You can specify a maximum of 10
 // different types.
@@ -313,12 +258,6 @@ func (e *ComplianceTypeCountLimitExceededException) ErrorCode() string {
 }
 func (e *ComplianceTypeCountLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ComplianceTypeCountLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ComplianceTypeCountLimitExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You have exceeded the limit for custom schemas. Delete one or more custom
@@ -342,12 +281,6 @@ func (e *CustomSchemaCountLimitExceededException) ErrorCode() string {
 func (e *CustomSchemaCountLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CustomSchemaCountLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomSchemaCountLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified document already exists.
 type DocumentAlreadyExists struct {
@@ -365,12 +298,6 @@ func (e *DocumentAlreadyExists) ErrorMessage() string {
 }
 func (e *DocumentAlreadyExists) ErrorCode() string             { return "DocumentAlreadyExists" }
 func (e *DocumentAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DocumentAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DocumentAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can have at most 500 active Systems Manager documents.
 type DocumentLimitExceeded struct {
@@ -388,12 +315,6 @@ func (e *DocumentLimitExceeded) ErrorMessage() string {
 }
 func (e *DocumentLimitExceeded) ErrorCode() string             { return "DocumentLimitExceeded" }
 func (e *DocumentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DocumentLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DocumentLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The document cannot be shared with more AWS user accounts. You can share a
 // document with a maximum of 20 accounts. You can publicly share up to five
@@ -413,12 +334,6 @@ func (e *DocumentPermissionLimit) ErrorMessage() string {
 }
 func (e *DocumentPermissionLimit) ErrorCode() string             { return "DocumentPermissionLimit" }
 func (e *DocumentPermissionLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DocumentPermissionLimit) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DocumentPermissionLimit) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The document has too many versions. Delete one or more document versions and try
 // again.
@@ -437,12 +352,6 @@ func (e *DocumentVersionLimitExceeded) ErrorMessage() string {
 }
 func (e *DocumentVersionLimitExceeded) ErrorCode() string             { return "DocumentVersionLimitExceeded" }
 func (e *DocumentVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DocumentVersionLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DocumentVersionLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Error returned when the ID specified for a resource, such as a maintenance
 // window or Patch baseline, doesn't exist. For information about resource quotas
@@ -464,12 +373,6 @@ func (e *DoesNotExistException) ErrorMessage() string {
 }
 func (e *DoesNotExistException) ErrorCode() string             { return "DoesNotExistException" }
 func (e *DoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The content of the association document matches another document. Change the
 // content of the document and try again.
@@ -488,12 +391,6 @@ func (e *DuplicateDocumentContent) ErrorMessage() string {
 }
 func (e *DuplicateDocumentContent) ErrorCode() string             { return "DuplicateDocumentContent" }
 func (e *DuplicateDocumentContent) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateDocumentContent) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateDocumentContent) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The version name has already been used in this document. Specify a different
 // version name, and then try again.
@@ -512,12 +409,6 @@ func (e *DuplicateDocumentVersionName) ErrorMessage() string {
 }
 func (e *DuplicateDocumentVersionName) ErrorCode() string             { return "DuplicateDocumentVersionName" }
 func (e *DuplicateDocumentVersionName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateDocumentVersionName) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateDocumentVersionName) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot specify an instance ID in more than one association.
 type DuplicateInstanceId struct {
@@ -553,12 +444,6 @@ func (e *FeatureNotAvailableException) ErrorMessage() string {
 }
 func (e *FeatureNotAvailableException) ErrorCode() string             { return "FeatureNotAvailableException" }
 func (e *FeatureNotAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FeatureNotAvailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FeatureNotAvailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A hierarchy can have a maximum of 15 levels. For more information, see
 // Requirements and constraints for parameter names
@@ -583,12 +468,6 @@ func (e *HierarchyLevelLimitExceededException) ErrorCode() string {
 func (e *HierarchyLevelLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *HierarchyLevelLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HierarchyLevelLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Parameter Store does not support changing a parameter type in a hierarchy. For
 // example, you can't change a parameter from a String type to a SecureString type.
@@ -608,12 +487,6 @@ func (e *HierarchyTypeMismatchException) ErrorMessage() string {
 }
 func (e *HierarchyTypeMismatchException) ErrorCode() string             { return "HierarchyTypeMismatchException" }
 func (e *HierarchyTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HierarchyTypeMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HierarchyTypeMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Error returned when an idempotent operation is retried and the parameters don't
 // match the original call to the API with the same idempotency token.
@@ -632,12 +505,6 @@ func (e *IdempotentParameterMismatch) ErrorMessage() string {
 }
 func (e *IdempotentParameterMismatch) ErrorCode() string             { return "IdempotentParameterMismatch" }
 func (e *IdempotentParameterMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IdempotentParameterMismatch) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotentParameterMismatch) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is a conflict in the policies specified for this parameter. You can't, for
 // example, specify two Expiration policies for a parameter. Review your policies,
@@ -657,12 +524,6 @@ func (e *IncompatiblePolicyException) ErrorMessage() string {
 }
 func (e *IncompatiblePolicyException) ErrorCode() string             { return "IncompatiblePolicyException" }
 func (e *IncompatiblePolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatiblePolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatiblePolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occurred on the server side.
 type InternalServerError struct {
@@ -680,12 +541,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The activation is not valid. The activation might have been deleted, or the
 // ActivationId and the ActivationCode do not match.
@@ -704,12 +559,6 @@ func (e *InvalidActivation) ErrorMessage() string {
 }
 func (e *InvalidActivation) ErrorCode() string             { return "InvalidActivation" }
 func (e *InvalidActivation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidActivation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidActivation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The activation ID is not valid. Verify the you entered the correct ActivationId
 // or ActivationCode and try again.
@@ -728,12 +577,6 @@ func (e *InvalidActivationId) ErrorMessage() string {
 }
 func (e *InvalidActivationId) ErrorCode() string             { return "InvalidActivationId" }
 func (e *InvalidActivationId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidActivationId) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidActivationId) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified aggregator is not valid for inventory groups. Verify that the
 // aggregator uses a valid inventory type such as AWS:Application or
@@ -753,12 +596,6 @@ func (e *InvalidAggregatorException) ErrorMessage() string {
 }
 func (e *InvalidAggregatorException) ErrorCode() string             { return "InvalidAggregatorException" }
 func (e *InvalidAggregatorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAggregatorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAggregatorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request does not meet the regular expression requirement.
 type InvalidAllowedPatternException struct {
@@ -776,12 +613,6 @@ func (e *InvalidAllowedPatternException) ErrorMessage() string {
 }
 func (e *InvalidAllowedPatternException) ErrorCode() string             { return "InvalidAllowedPatternException" }
 func (e *InvalidAllowedPatternException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAllowedPatternException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAllowedPatternException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The association is not valid or does not exist.
 type InvalidAssociation struct {
@@ -799,12 +630,6 @@ func (e *InvalidAssociation) ErrorMessage() string {
 }
 func (e *InvalidAssociation) ErrorCode() string             { return "InvalidAssociation" }
 func (e *InvalidAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAssociation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAssociation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The version you specified is not valid. Use ListAssociationVersions to view all
 // versions of an association according to the association ID. Or, use the $LATEST
@@ -824,12 +649,6 @@ func (e *InvalidAssociationVersion) ErrorMessage() string {
 }
 func (e *InvalidAssociationVersion) ErrorCode() string             { return "InvalidAssociationVersion" }
 func (e *InvalidAssociationVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAssociationVersion) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAssociationVersion) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The supplied parameters for invoking the specified Automation document are
 // incorrect. For example, they may not match the set of parameters permitted for
@@ -853,12 +672,6 @@ func (e *InvalidAutomationExecutionParametersException) ErrorCode() string {
 func (e *InvalidAutomationExecutionParametersException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidAutomationExecutionParametersException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAutomationExecutionParametersException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The signal is not valid for the current Automation execution.
 type InvalidAutomationSignalException struct {
@@ -878,12 +691,6 @@ func (e *InvalidAutomationSignalException) ErrorCode() string {
 	return "InvalidAutomationSignalException"
 }
 func (e *InvalidAutomationSignalException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAutomationSignalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAutomationSignalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified update status operation is not valid.
 type InvalidAutomationStatusUpdateException struct {
@@ -904,12 +711,6 @@ func (e *InvalidAutomationStatusUpdateException) ErrorCode() string {
 }
 func (e *InvalidAutomationStatusUpdateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidAutomationStatusUpdateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAutomationStatusUpdateException) HasMessage() bool {
-	return e.Message != nil
 }
 
 type InvalidCommandId struct {
@@ -949,12 +750,6 @@ func (e *InvalidDeleteInventoryParametersException) ErrorCode() string {
 func (e *InvalidDeleteInventoryParametersException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDeleteInventoryParametersException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeleteInventoryParametersException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The ID specified for the delete operation does not exist or is not valid. Verify
 // the ID and try again.
@@ -973,12 +768,6 @@ func (e *InvalidDeletionIdException) ErrorMessage() string {
 }
 func (e *InvalidDeletionIdException) ErrorCode() string             { return "InvalidDeletionIdException" }
 func (e *InvalidDeletionIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeletionIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeletionIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified document does not exist.
 type InvalidDocument struct {
@@ -996,12 +785,6 @@ func (e *InvalidDocument) ErrorMessage() string {
 }
 func (e *InvalidDocument) ErrorCode() string             { return "InvalidDocument" }
 func (e *InvalidDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDocument) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDocument) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The content for the document is not valid.
 type InvalidDocumentContent struct {
@@ -1019,12 +802,6 @@ func (e *InvalidDocumentContent) ErrorMessage() string {
 }
 func (e *InvalidDocumentContent) ErrorCode() string             { return "InvalidDocumentContent" }
 func (e *InvalidDocumentContent) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDocumentContent) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDocumentContent) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You attempted to delete a document while it is still shared. You must stop
 // sharing the document before you can delete it.
@@ -1043,12 +820,6 @@ func (e *InvalidDocumentOperation) ErrorMessage() string {
 }
 func (e *InvalidDocumentOperation) ErrorCode() string             { return "InvalidDocumentOperation" }
 func (e *InvalidDocumentOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDocumentOperation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDocumentOperation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The version of the document schema is not supported.
 type InvalidDocumentSchemaVersion struct {
@@ -1066,12 +837,6 @@ func (e *InvalidDocumentSchemaVersion) ErrorMessage() string {
 }
 func (e *InvalidDocumentSchemaVersion) ErrorCode() string             { return "InvalidDocumentSchemaVersion" }
 func (e *InvalidDocumentSchemaVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDocumentSchemaVersion) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDocumentSchemaVersion) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The document type is not valid. Valid document types are described in the
 // DocumentType property.
@@ -1090,12 +855,6 @@ func (e *InvalidDocumentType) ErrorMessage() string {
 }
 func (e *InvalidDocumentType) ErrorCode() string             { return "InvalidDocumentType" }
 func (e *InvalidDocumentType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDocumentType) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDocumentType) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The document version is not valid or does not exist.
 type InvalidDocumentVersion struct {
@@ -1113,12 +872,6 @@ func (e *InvalidDocumentVersion) ErrorMessage() string {
 }
 func (e *InvalidDocumentVersion) ErrorCode() string             { return "InvalidDocumentVersion" }
 func (e *InvalidDocumentVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDocumentVersion) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDocumentVersion) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The filter name is not valid. Verify the you entered the correct name and try
 // again.
@@ -1137,12 +890,6 @@ func (e *InvalidFilter) ErrorMessage() string {
 }
 func (e *InvalidFilter) ErrorCode() string             { return "InvalidFilter" }
 func (e *InvalidFilter) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFilter) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFilter) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified key is not valid.
 type InvalidFilterKey struct {
@@ -1178,12 +925,6 @@ func (e *InvalidFilterOption) ErrorMessage() string {
 }
 func (e *InvalidFilterOption) ErrorCode() string             { return "InvalidFilterOption" }
 func (e *InvalidFilterOption) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFilterOption) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFilterOption) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The filter value is not valid. Verify the value and try again.
 type InvalidFilterValue struct {
@@ -1201,12 +942,6 @@ func (e *InvalidFilterValue) ErrorMessage() string {
 }
 func (e *InvalidFilterValue) ErrorCode() string             { return "InvalidFilterValue" }
 func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFilterValue) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFilterValue) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The following problems can cause this exception: You do not have permission to
 // access the instance. SSM Agent is not running. Verify that SSM Agent is running.
@@ -1228,12 +963,6 @@ func (e *InvalidInstanceId) ErrorMessage() string {
 }
 func (e *InvalidInstanceId) ErrorCode() string             { return "InvalidInstanceId" }
 func (e *InvalidInstanceId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInstanceId) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInstanceId) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified filter value is not valid.
 type InvalidInstanceInformationFilterValue struct {
@@ -1255,12 +984,6 @@ func (e *InvalidInstanceInformationFilterValue) ErrorCode() string {
 func (e *InvalidInstanceInformationFilterValue) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidInstanceInformationFilterValue) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInstanceInformationFilterValue) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified inventory group is not valid.
 type InvalidInventoryGroupException struct {
@@ -1278,12 +1001,6 @@ func (e *InvalidInventoryGroupException) ErrorMessage() string {
 }
 func (e *InvalidInventoryGroupException) ErrorCode() string             { return "InvalidInventoryGroupException" }
 func (e *InvalidInventoryGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInventoryGroupException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInventoryGroupException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified invalid keys or values in the Context attribute for InventoryItem.
 // Verify the keys and values, and try again.
@@ -1306,12 +1023,6 @@ func (e *InvalidInventoryItemContextException) ErrorCode() string {
 func (e *InvalidInventoryItemContextException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidInventoryItemContextException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInventoryItemContextException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is not valid.
 type InvalidInventoryRequestException struct {
@@ -1331,12 +1042,6 @@ func (e *InvalidInventoryRequestException) ErrorCode() string {
 	return "InvalidInventoryRequestException"
 }
 func (e *InvalidInventoryRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInventoryRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInventoryRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more content items is not valid.
 type InvalidItemContentException struct {
@@ -1356,18 +1061,6 @@ func (e *InvalidItemContentException) ErrorMessage() string {
 }
 func (e *InvalidItemContentException) ErrorCode() string             { return "InvalidItemContentException" }
 func (e *InvalidItemContentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidItemContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidItemContentException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidItemContentException) GetTypeName() string {
-	return ptr.ToString(e.TypeName)
-}
-func (e *InvalidItemContentException) HasTypeName() bool {
-	return e.TypeName != nil
-}
 
 // The query key ID is not valid.
 type InvalidKeyId struct {
@@ -1385,12 +1078,6 @@ func (e *InvalidKeyId) ErrorMessage() string {
 }
 func (e *InvalidKeyId) ErrorCode() string             { return "InvalidKeyId" }
 func (e *InvalidKeyId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidKeyId) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidKeyId) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified token is not valid.
 type InvalidNextToken struct {
@@ -1408,12 +1095,6 @@ func (e *InvalidNextToken) ErrorMessage() string {
 }
 func (e *InvalidNextToken) ErrorCode() string             { return "InvalidNextToken" }
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextToken) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextToken) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more configuration items is not valid. Verify that a valid Amazon
 // Resource Name (ARN) was provided for an Amazon SNS topic.
@@ -1432,12 +1113,6 @@ func (e *InvalidNotificationConfig) ErrorMessage() string {
 }
 func (e *InvalidNotificationConfig) ErrorCode() string             { return "InvalidNotificationConfig" }
 func (e *InvalidNotificationConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNotificationConfig) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNotificationConfig) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The delete inventory option specified is not valid. Verify the option and try
 // again.
@@ -1456,12 +1131,6 @@ func (e *InvalidOptionException) ErrorMessage() string {
 }
 func (e *InvalidOptionException) ErrorCode() string             { return "InvalidOptionException" }
 func (e *InvalidOptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The S3 bucket does not exist.
 type InvalidOutputFolder struct {
@@ -1515,12 +1184,6 @@ func (e *InvalidParameters) ErrorMessage() string {
 }
 func (e *InvalidParameters) ErrorCode() string             { return "InvalidParameters" }
 func (e *InvalidParameters) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameters) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameters) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The permission type is not supported. Share is the only supported permission
 // type.
@@ -1539,12 +1202,6 @@ func (e *InvalidPermissionType) ErrorMessage() string {
 }
 func (e *InvalidPermissionType) ErrorCode() string             { return "InvalidPermissionType" }
 func (e *InvalidPermissionType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPermissionType) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPermissionType) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The plugin name is not valid.
 type InvalidPluginName struct {
@@ -1581,12 +1238,6 @@ func (e *InvalidPolicyAttributeException) ErrorCode() string {
 	return "InvalidPolicyAttributeException"
 }
 func (e *InvalidPolicyAttributeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPolicyAttributeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPolicyAttributeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The policy type is not supported. Parameter Store supports the following policy
 // types: Expiration, ExpirationNotification, and NoChangeNotification.
@@ -1605,12 +1256,6 @@ func (e *InvalidPolicyTypeException) ErrorMessage() string {
 }
 func (e *InvalidPolicyTypeException) ErrorCode() string             { return "InvalidPolicyTypeException" }
 func (e *InvalidPolicyTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPolicyTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPolicyTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource ID is not valid. Verify that you entered the correct ID and try
 // again.
@@ -1666,12 +1311,6 @@ func (e *InvalidResultAttributeException) ErrorCode() string {
 	return "InvalidResultAttributeException"
 }
 func (e *InvalidResultAttributeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResultAttributeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResultAttributeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The role name can't contain invalid characters. Also verify that you specified
 // an IAM role for notifications that includes the required trust policy. For
@@ -1694,12 +1333,6 @@ func (e *InvalidRole) ErrorMessage() string {
 }
 func (e *InvalidRole) ErrorCode() string             { return "InvalidRole" }
 func (e *InvalidRole) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRole) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRole) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The schedule is invalid. Verify your cron or rate expression and try again.
 type InvalidSchedule struct {
@@ -1717,12 +1350,6 @@ func (e *InvalidSchedule) ErrorMessage() string {
 }
 func (e *InvalidSchedule) ErrorCode() string             { return "InvalidSchedule" }
 func (e *InvalidSchedule) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSchedule) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSchedule) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target is not valid or does not exist. It might not be configured for
 // Systems Manager or you might not have permission to perform the operation.
@@ -1741,12 +1368,6 @@ func (e *InvalidTarget) ErrorMessage() string {
 }
 func (e *InvalidTarget) ErrorCode() string             { return "InvalidTarget" }
 func (e *InvalidTarget) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTarget) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTarget) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter type name is not valid.
 type InvalidTypeNameException struct {
@@ -1764,12 +1385,6 @@ func (e *InvalidTypeNameException) ErrorMessage() string {
 }
 func (e *InvalidTypeNameException) ErrorCode() string             { return "InvalidTypeNameException" }
 func (e *InvalidTypeNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTypeNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTypeNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The update is not valid.
 type InvalidUpdate struct {
@@ -1787,12 +1402,6 @@ func (e *InvalidUpdate) ErrorMessage() string {
 }
 func (e *InvalidUpdate) ErrorCode() string             { return "InvalidUpdate" }
 func (e *InvalidUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidUpdate) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidUpdate) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The command ID and instance ID you specified did not match any invocations.
 // Verify the command ID and the instance ID and try again.
@@ -1830,18 +1439,6 @@ func (e *ItemContentMismatchException) ErrorMessage() string {
 }
 func (e *ItemContentMismatchException) ErrorCode() string             { return "ItemContentMismatchException" }
 func (e *ItemContentMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ItemContentMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ItemContentMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ItemContentMismatchException) GetTypeName() string {
-	return ptr.ToString(e.TypeName)
-}
-func (e *ItemContentMismatchException) HasTypeName() bool {
-	return e.TypeName != nil
-}
 
 // The inventory item size has exceeded the size limit.
 type ItemSizeLimitExceededException struct {
@@ -1861,18 +1458,6 @@ func (e *ItemSizeLimitExceededException) ErrorMessage() string {
 }
 func (e *ItemSizeLimitExceededException) ErrorCode() string             { return "ItemSizeLimitExceededException" }
 func (e *ItemSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ItemSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ItemSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ItemSizeLimitExceededException) GetTypeName() string {
-	return ptr.ToString(e.TypeName)
-}
-func (e *ItemSizeLimitExceededException) HasTypeName() bool {
-	return e.TypeName != nil
-}
 
 // The size limit of a document is 64 KB.
 type MaxDocumentSizeExceeded struct {
@@ -1890,12 +1475,6 @@ func (e *MaxDocumentSizeExceeded) ErrorMessage() string {
 }
 func (e *MaxDocumentSizeExceeded) ErrorCode() string             { return "MaxDocumentSizeExceeded" }
 func (e *MaxDocumentSizeExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MaxDocumentSizeExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxDocumentSizeExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The OpsItem already exists.
 type OpsItemAlreadyExistsException struct {
@@ -1915,18 +1494,6 @@ func (e *OpsItemAlreadyExistsException) ErrorMessage() string {
 }
 func (e *OpsItemAlreadyExistsException) ErrorCode() string             { return "OpsItemAlreadyExistsException" }
 func (e *OpsItemAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OpsItemAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OpsItemAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *OpsItemAlreadyExistsException) GetOpsItemId() string {
-	return ptr.ToString(e.OpsItemId)
-}
-func (e *OpsItemAlreadyExistsException) HasOpsItemId() bool {
-	return e.OpsItemId != nil
-}
 
 // A specified parameter argument isn't valid. Verify the available arguments and
 // try again.
@@ -1949,18 +1516,6 @@ func (e *OpsItemInvalidParameterException) ErrorCode() string {
 	return "OpsItemInvalidParameterException"
 }
 func (e *OpsItemInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OpsItemInvalidParameterException) GetParameterNames() []*string {
-	return e.ParameterNames
-}
-func (e *OpsItemInvalidParameterException) HasParameterNames() bool {
-	return e.ParameterNames != nil
-}
-func (e *OpsItemInvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OpsItemInvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request caused OpsItems to exceed one or more quotas. For information about
 // OpsItem quotas, see What are the resource limits for OpsCenter?
@@ -1984,30 +1539,6 @@ func (e *OpsItemLimitExceededException) ErrorMessage() string {
 }
 func (e *OpsItemLimitExceededException) ErrorCode() string             { return "OpsItemLimitExceededException" }
 func (e *OpsItemLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OpsItemLimitExceededException) GetLimit() int32 {
-	return ptr.ToInt32(e.Limit)
-}
-func (e *OpsItemLimitExceededException) HasLimit() bool {
-	return e.Limit != nil
-}
-func (e *OpsItemLimitExceededException) GetResourceTypes() []*string {
-	return e.ResourceTypes
-}
-func (e *OpsItemLimitExceededException) HasResourceTypes() bool {
-	return e.ResourceTypes != nil
-}
-func (e *OpsItemLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OpsItemLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *OpsItemLimitExceededException) GetLimitType() string {
-	return ptr.ToString(e.LimitType)
-}
-func (e *OpsItemLimitExceededException) HasLimitType() bool {
-	return e.LimitType != nil
-}
 
 // The specified OpsItem ID doesn't exist. Verify the ID and try again.
 type OpsItemNotFoundException struct {
@@ -2025,12 +1556,6 @@ func (e *OpsItemNotFoundException) ErrorMessage() string {
 }
 func (e *OpsItemNotFoundException) ErrorCode() string             { return "OpsItemNotFoundException" }
 func (e *OpsItemNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OpsItemNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OpsItemNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter already exists. You can't create duplicate parameters.
 type ParameterAlreadyExists struct {
@@ -2048,12 +1573,6 @@ func (e *ParameterAlreadyExists) ErrorMessage() string {
 }
 func (e *ParameterAlreadyExists) ErrorCode() string             { return "ParameterAlreadyExists" }
 func (e *ParameterAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the number of parameters for this AWS account. Delete one or
 // more parameters and try again.
@@ -2072,12 +1591,6 @@ func (e *ParameterLimitExceeded) ErrorMessage() string {
 }
 func (e *ParameterLimitExceeded) ErrorCode() string             { return "ParameterLimitExceeded" }
 func (e *ParameterLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter exceeded the maximum number of allowed versions.
 type ParameterMaxVersionLimitExceeded struct {
@@ -2097,12 +1610,6 @@ func (e *ParameterMaxVersionLimitExceeded) ErrorCode() string {
 	return "ParameterMaxVersionLimitExceeded"
 }
 func (e *ParameterMaxVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterMaxVersionLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterMaxVersionLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter could not be found. Verify the name and try again.
 type ParameterNotFound struct {
@@ -2120,12 +1627,6 @@ func (e *ParameterNotFound) ErrorMessage() string {
 }
 func (e *ParameterNotFound) ErrorCode() string             { return "ParameterNotFound" }
 func (e *ParameterNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter name is not valid.
 type ParameterPatternMismatchException struct {
@@ -2145,12 +1646,6 @@ func (e *ParameterPatternMismatchException) ErrorCode() string {
 	return "ParameterPatternMismatchException"
 }
 func (e *ParameterPatternMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterPatternMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterPatternMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A parameter version can have a maximum of ten labels.
 type ParameterVersionLabelLimitExceeded struct {
@@ -2172,12 +1667,6 @@ func (e *ParameterVersionLabelLimitExceeded) ErrorCode() string {
 func (e *ParameterVersionLabelLimitExceeded) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ParameterVersionLabelLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterVersionLabelLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified parameter version was not found. Verify the parameter name and
 // version, and try again.
@@ -2196,12 +1685,6 @@ func (e *ParameterVersionNotFound) ErrorMessage() string {
 }
 func (e *ParameterVersionNotFound) ErrorCode() string             { return "ParameterVersionNotFound" }
 func (e *ParameterVersionNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterVersionNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterVersionNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified more than the maximum number of allowed policies for the
 // parameter. The maximum is 10.
@@ -2220,12 +1703,6 @@ func (e *PoliciesLimitExceededException) ErrorMessage() string {
 }
 func (e *PoliciesLimitExceededException) ErrorCode() string             { return "PoliciesLimitExceededException" }
 func (e *PoliciesLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PoliciesLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PoliciesLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A sync configuration with the same name already exists.
 type ResourceDataSyncAlreadyExistsException struct {
@@ -2249,12 +1726,6 @@ func (e *ResourceDataSyncAlreadyExistsException) ErrorCode() string {
 func (e *ResourceDataSyncAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceDataSyncAlreadyExistsException) GetSyncName() string {
-	return ptr.ToString(e.SyncName)
-}
-func (e *ResourceDataSyncAlreadyExistsException) HasSyncName() bool {
-	return e.SyncName != nil
-}
 
 // Another UpdateResourceDataSync request is being processed. Wait a few minutes
 // and try again.
@@ -2275,12 +1746,6 @@ func (e *ResourceDataSyncConflictException) ErrorCode() string {
 	return "ResourceDataSyncConflictException"
 }
 func (e *ResourceDataSyncConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceDataSyncConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceDataSyncConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the allowed maximum sync configurations.
 type ResourceDataSyncCountExceededException struct {
@@ -2302,12 +1767,6 @@ func (e *ResourceDataSyncCountExceededException) ErrorCode() string {
 func (e *ResourceDataSyncCountExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceDataSyncCountExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceDataSyncCountExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified sync configuration is invalid.
 type ResourceDataSyncInvalidConfigurationException struct {
@@ -2328,12 +1787,6 @@ func (e *ResourceDataSyncInvalidConfigurationException) ErrorCode() string {
 }
 func (e *ResourceDataSyncInvalidConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ResourceDataSyncInvalidConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceDataSyncInvalidConfigurationException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The specified sync name was not found.
@@ -2357,24 +1810,6 @@ func (e *ResourceDataSyncNotFoundException) ErrorCode() string {
 	return "ResourceDataSyncNotFoundException"
 }
 func (e *ResourceDataSyncNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceDataSyncNotFoundException) GetSyncType() string {
-	return ptr.ToString(e.SyncType)
-}
-func (e *ResourceDataSyncNotFoundException) HasSyncType() bool {
-	return e.SyncType != nil
-}
-func (e *ResourceDataSyncNotFoundException) GetSyncName() string {
-	return ptr.ToString(e.SyncName)
-}
-func (e *ResourceDataSyncNotFoundException) HasSyncName() bool {
-	return e.SyncName != nil
-}
-func (e *ResourceDataSyncNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceDataSyncNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Error returned if an attempt is made to delete a patch baseline that is
 // registered for a patch group.
@@ -2393,12 +1828,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Error returned when the caller has exceeded the default resource quotas. For
 // example, too many maintenance windows or patch baselines have been created. For
@@ -2421,12 +1850,6 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 }
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified service setting was not found. Either the service name or the
 // setting has not been provisioned by the AWS service team.
@@ -2445,12 +1868,6 @@ func (e *ServiceSettingNotFound) ErrorMessage() string {
 }
 func (e *ServiceSettingNotFound) ErrorCode() string             { return "ServiceSettingNotFound" }
 func (e *ServiceSettingNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceSettingNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceSettingNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The updated status is the same as the current status.
 type StatusUnchanged struct {
@@ -2489,12 +1906,6 @@ func (e *SubTypeCountLimitExceededException) ErrorCode() string {
 func (e *SubTypeCountLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SubTypeCountLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubTypeCountLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You specified the Safe option for the DeregisterTargetFromMaintenanceWindow
 // operation, but the target is still referenced in a task.
@@ -2513,12 +1924,6 @@ func (e *TargetInUseException) ErrorMessage() string {
 }
 func (e *TargetInUseException) ErrorCode() string             { return "TargetInUseException" }
 func (e *TargetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified target instance for the session is not fully configured for use
 // with Session Manager. For more information, see Getting started with Session
@@ -2540,12 +1945,6 @@ func (e *TargetNotConnected) ErrorMessage() string {
 }
 func (e *TargetNotConnected) ErrorCode() string             { return "TargetNotConnected" }
 func (e *TargetNotConnected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetNotConnected) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetNotConnected) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Targets parameter includes too many tags. Remove one or more tags and try
 // the command again.
@@ -2581,12 +1980,6 @@ func (e *TooManyUpdates) ErrorMessage() string {
 }
 func (e *TooManyUpdates) ErrorCode() string             { return "TooManyUpdates" }
 func (e *TooManyUpdates) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyUpdates) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyUpdates) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The size of inventory data has exceeded the total size limit for the resource.
 type TotalSizeLimitExceededException struct {
@@ -2606,12 +1999,6 @@ func (e *TotalSizeLimitExceededException) ErrorCode() string {
 	return "TotalSizeLimitExceededException"
 }
 func (e *TotalSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TotalSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TotalSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The calendar entry contained in the specified Systems Manager document is not
 // supported.
@@ -2630,12 +2017,6 @@ func (e *UnsupportedCalendarException) ErrorMessage() string {
 }
 func (e *UnsupportedCalendarException) ErrorCode() string             { return "UnsupportedCalendarException" }
 func (e *UnsupportedCalendarException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedCalendarException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedCalendarException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Microsoft application patching is only available on EC2 instances and advanced
 // instances. To patch Microsoft applications on on-premises servers and VMs, you
@@ -2662,12 +2043,6 @@ func (e *UnsupportedFeatureRequiredException) ErrorCode() string {
 func (e *UnsupportedFeatureRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *UnsupportedFeatureRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedFeatureRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Context attribute that you specified for the InventoryItem is not allowed
 // for this inventory type. You can only use the Context attribute with inventory
@@ -2693,18 +2068,6 @@ func (e *UnsupportedInventoryItemContextException) ErrorCode() string {
 func (e *UnsupportedInventoryItemContextException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *UnsupportedInventoryItemContextException) GetTypeName() string {
-	return ptr.ToString(e.TypeName)
-}
-func (e *UnsupportedInventoryItemContextException) HasTypeName() bool {
-	return e.TypeName != nil
-}
-func (e *UnsupportedInventoryItemContextException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedInventoryItemContextException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Inventory item type schema version has to match supported versions in the
 // service. Check output of GetInventorySchema to see the available schema version
@@ -2728,12 +2091,6 @@ func (e *UnsupportedInventorySchemaVersionException) ErrorCode() string {
 func (e *UnsupportedInventorySchemaVersionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *UnsupportedInventorySchemaVersionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedInventorySchemaVersionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operating systems you specified is not supported, or the operation is not
 // supported for the operating system. Valid operating systems include: Windows,
@@ -2753,12 +2110,6 @@ func (e *UnsupportedOperatingSystem) ErrorMessage() string {
 }
 func (e *UnsupportedOperatingSystem) ErrorCode() string             { return "UnsupportedOperatingSystem" }
 func (e *UnsupportedOperatingSystem) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperatingSystem) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperatingSystem) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter type is not supported.
 type UnsupportedParameterType struct {
@@ -2776,12 +2127,6 @@ func (e *UnsupportedParameterType) ErrorMessage() string {
 }
 func (e *UnsupportedParameterType) ErrorCode() string             { return "UnsupportedParameterType" }
 func (e *UnsupportedParameterType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedParameterType) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedParameterType) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The document does not support the platform type of the given instance ID(s). For
 // example, you sent an document for a Windows instance to a Linux instance.
@@ -2800,9 +2145,3 @@ func (e *UnsupportedPlatformType) ErrorMessage() string {
 }
 func (e *UnsupportedPlatformType) ErrorCode() string             { return "UnsupportedPlatformType" }
 func (e *UnsupportedPlatformType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedPlatformType) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedPlatformType) HasMessage() bool {
-	return e.Message != nil
-}

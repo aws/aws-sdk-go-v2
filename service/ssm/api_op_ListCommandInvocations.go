@@ -60,29 +60,37 @@ func (c *Client) ListCommandInvocations(ctx context.Context, params *ListCommand
 }
 
 type ListCommandInvocationsInput struct {
+
 	// (Optional) If set this returns the response of the command executions and any
 	// command output. By default this is set to False.
 	Details *bool
+
 	// (Optional) The invocations for a specific command ID.
 	CommandId *string
+
 	// (Optional) The maximum number of items to return for this call. The call also
 	// returns a token that you can specify in a subsequent call to get the next set of
 	// results.
 	MaxResults *int32
+
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
 	NextToken *string
+
 	// (Optional) One or more filters. Use a filter to return a more specific list of
 	// results.
 	Filters []*types.CommandFilter
+
 	// (Optional) The command execution details for a specific instance ID.
 	InstanceId *string
 }
 
 type ListCommandInvocationsOutput struct {
+
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
 	NextToken *string
+
 	// (Optional) A list of all invocations.
 	CommandInvocations []*types.CommandInvocation
 

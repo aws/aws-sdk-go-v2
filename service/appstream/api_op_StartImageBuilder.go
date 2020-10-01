@@ -56,14 +56,19 @@ func (c *Client) StartImageBuilder(ctx context.Context, params *StartImageBuilde
 }
 
 type StartImageBuilderInput struct {
+
 	// The name of the image builder.
+	//
+	// This member is required.
 	Name *string
+
 	// The version of the AppStream 2.0 agent to use for this image builder. To use the
 	// latest version of the AppStream 2.0 agent, specify [LATEST].
 	AppstreamAgentVersion *string
 }
 
 type StartImageBuilderOutput struct {
+
 	// Information about the image builder.
 	ImageBuilder *types.ImageBuilder
 

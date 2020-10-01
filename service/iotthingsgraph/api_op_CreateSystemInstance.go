@@ -68,23 +68,34 @@ func (c *Client) CreateSystemInstance(ctx context.Context, params *CreateSystemI
 }
 
 type CreateSystemInstanceInput struct {
+
 	// The name of the Amazon Simple Storage Service bucket that will be used to store
 	// and deploy the system instance's resource file. This value is required if the
 	// value of the target parameter is GREENGRASS.
 	S3BucketName *string
+
 	// An object that specifies whether cloud metrics are collected in a deployment
 	// and, if so, what role is used to collect metrics.
 	MetricsConfiguration *types.MetricsConfiguration
+
 	// The name of the Greengrass group where the system instance will be deployed.
 	// This value is required if the value of the target parameter is GREENGRASS.
 	GreengrassGroupName *string
+
 	// Metadata, consisting of key-value pairs, that can be used to categorize your
 	// system instances.
 	Tags []*types.Tag
+
 	// The target type of the deployment. Valid values are GREENGRASS and CLOUD.
+	//
+	// This member is required.
 	Target types.DeploymentTarget
+
 	// A document that defines an entity.
+	//
+	// This member is required.
 	Definition *types.DefinitionDocument
+
 	// The ARN of the IAM role that AWS IoT Things Graph will assume when it executes
 	// the flow. This role must have read and write access to AWS Lambda and AWS IoT
 	// and any other AWS services that the flow uses when it executes. This value is
@@ -93,6 +104,7 @@ type CreateSystemInstanceInput struct {
 }
 
 type CreateSystemInstanceOutput struct {
+
 	// The summary object that describes the new system instance.
 	Summary *types.SystemInstanceSummary
 

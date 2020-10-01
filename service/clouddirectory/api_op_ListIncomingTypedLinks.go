@@ -59,29 +59,42 @@ func (c *Client) ListIncomingTypedLinks(ctx context.Context, params *ListIncomin
 }
 
 type ListIncomingTypedLinksInput struct {
+
 	// Provides range filters for multiple attributes. When providing ranges to typed
 	// link selection, any inexact ranges must be specified at the end. Any attributes
 	// that do not have a range specified are presumed to match the entire range.
 	FilterAttributeRanges []*types.TypedLinkAttributeRange
+
 	// Reference that identifies the object whose attributes will be listed.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The consistency level to execute the request at.
 	ConsistencyLevel types.ConsistencyLevel
+
 	// The pagination token.
 	NextToken *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
 	// Filters are interpreted in the order of the attributes on the typed link facet,
 	// not the order in which they are supplied to any API calls.
 	FilterTypedLink *types.TypedLinkSchemaAndFacetName
+
 	// The Amazon Resource Name (ARN) of the directory where you want to list the typed
 	// links.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type ListIncomingTypedLinksOutput struct {
+
 	// Returns one or more typed link specifiers as output.
 	LinkSpecifiers []*types.TypedLinkSpecifier
+
 	// The pagination token.
 	NextToken *string
 

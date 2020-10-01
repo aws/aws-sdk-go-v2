@@ -58,19 +58,29 @@ func (c *Client) CreateHumanTaskUi(ctx context.Context, params *CreateHumanTaskU
 }
 
 type CreateHumanTaskUiInput struct {
+
 	// The name of the user interface you are creating.
+	//
+	// This member is required.
 	HumanTaskUiName *string
+
 	// An array of key-value pairs that contain metadata to help you categorize and
 	// organize a human review workflow user interface. Each tag consists of a key and
 	// a value, both of which you define.
 	Tags []*types.Tag
+
 	// The Liquid template for the worker user interface.
+	//
+	// This member is required.
 	UiTemplate *types.UiTemplate
 }
 
 type CreateHumanTaskUiOutput struct {
+
 	// The Amazon Resource Name (ARN) of the human review workflow user interface you
 	// create.
+	//
+	// This member is required.
 	HumanTaskUiArn *string
 
 	// Metadata pertaining to the operation's result.

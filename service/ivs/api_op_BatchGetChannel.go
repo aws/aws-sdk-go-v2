@@ -56,13 +56,18 @@ func (c *Client) BatchGetChannel(ctx context.Context, params *BatchGetChannelInp
 }
 
 type BatchGetChannelInput struct {
+
 	// Array of ARNs, one per channel.
+	//
+	// This member is required.
 	Arns []*string
 }
 
 type BatchGetChannelOutput struct {
+
 	// Each error object is related to a specific ARN in the request.
-	Errors   []*types.BatchError
+	Errors []*types.BatchError
+
 	Channels []*types.Channel
 
 	// Metadata pertaining to the operation's result.

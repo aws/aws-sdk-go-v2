@@ -56,20 +56,25 @@ func (c *Client) DeregisterTransitGatewayMulticastGroupMembers(ctx context.Conte
 }
 
 type DeregisterTransitGatewayMulticastGroupMembersInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IP address assigned to the transit gateway multicast group.
 	GroupIpAddress *string
+
 	// The IDs of the group members' network interfaces.
 	NetworkInterfaceIds []*string
+
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
 }
 
 type DeregisterTransitGatewayMulticastGroupMembersOutput struct {
+
 	// Information about the deregistered members.
 	DeregisteredMulticastGroupMembers *types.TransitGatewayMulticastDeregisteredGroupMembers
 

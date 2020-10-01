@@ -70,21 +70,29 @@ func (c *Client) ListAssignmentsForHIT(ctx context.Context, params *ListAssignme
 
 type ListAssignmentsForHITInput struct {
 	MaxResults *int32
+
 	// The status of the assignments to return: Submitted | Approved | Rejected
 	AssignmentStatuses []types.AssignmentStatus
+
 	// The ID of the HIT.
+	//
+	// This member is required.
 	HITId *string
+
 	// Pagination token
 	NextToken *string
 }
 
 type ListAssignmentsForHITOutput struct {
+
 	// The collection of Assignment data structures returned by this call.
 	Assignments []*types.Assignment
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The number of assignments on the page in the filtered results list, equivalent
 	// to the number of assignments returned by this call.
 	NumResults *int32

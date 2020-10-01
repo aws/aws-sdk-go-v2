@@ -76,20 +76,30 @@ func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomK
 }
 
 type CreateCustomKeyStoreInput struct {
+
 	// Identifies the AWS CloudHSM cluster for the custom key store. Enter the cluster
 	// ID of any active AWS CloudHSM cluster that is not already associated with a
 	// custom key store. To find the cluster ID, use the DescribeClusters
 	// (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
 	// operation.
+	//
+	// This member is required.
 	CloudHsmClusterId *string
+
 	// Specifies a friendly name for the custom key store. The name must be unique in
 	// your AWS account.
+	//
+	// This member is required.
 	CustomKeyStoreName *string
+
 	// Enter the content of the trust anchor certificate for the cluster. This is the
 	// content of the customerCA.crt file that you created when you initialized the
 	// cluster
 	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html).
+	//
+	// This member is required.
 	TrustAnchorCertificate *string
+
 	// Enter the password of the kmsuser crypto user (CU) account
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
 	// in the specified AWS CloudHSM cluster. AWS KMS logs into the cluster as this
@@ -97,10 +107,13 @@ type CreateCustomKeyStoreInput struct {
 	// to 32 characters. Its value is case sensitive. This parameter tells AWS KMS the
 	// kmsuser account password; it does not change the password in the AWS CloudHSM
 	// cluster.
+	//
+	// This member is required.
 	KeyStorePassword *string
 }
 
 type CreateCustomKeyStoreOutput struct {
+
 	// A unique identifier for the new custom key store.
 	CustomKeyStoreId *string
 

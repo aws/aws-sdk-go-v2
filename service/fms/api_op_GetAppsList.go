@@ -56,17 +56,23 @@ func (c *Client) GetAppsList(ctx context.Context, params *GetAppsListInput, optF
 }
 
 type GetAppsListInput struct {
+
 	// The ID of the AWS Firewall Manager applications list that you want the details
 	// for.
+	//
+	// This member is required.
 	ListId *string
+
 	// Specifies whether the list to retrieve is a default list owned by AWS Firewall
 	// Manager.
 	DefaultList *bool
 }
 
 type GetAppsListOutput struct {
+
 	// Information about the specified AWS Firewall Manager applications list.
 	AppsList *types.AppsListData
+
 	// The Amazon Resource Name (ARN) of the applications list.
 	AppsListArn *string
 

@@ -56,6 +56,7 @@ func (c *Client) DescribeBatchPredictions(ctx context.Context, params *DescribeB
 }
 
 type DescribeBatchPredictionsInput struct {
+
 	// A two-value parameter that determines the sequence of the resulting list of
 	// MLModels.
 	//
@@ -67,9 +68,11 @@ type DescribeBatchPredictionsInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
 	// The not equal to operator. The BatchPrediction results will have FilterVariable
 	// values not equal to the value specified with NE.
 	NE *string
+
 	// A string that is found at the beginning of a variable, such as Name or Id. For
 	// example, a Batch Prediction operation could have the
 	// Name2014-09-09-HolidayGiftMailer. To search for this BatchPrediction, select
@@ -77,22 +80,28 @@ type DescribeBatchPredictionsInput struct {
 	// <ul> <li> <p>2014-09</p> </li> <li> <p>2014-09-09</p> </li> <li>
 	// <p>2014-09-09-Holiday</p> </li> </ul>
 	Prefix *string
+
 	// The number of pages of information to include in the result. The range of
 	// acceptable values is 1 through 100. The default value is 100.
 	Limit *int32
+
 	// The less than or equal to operator. The BatchPrediction results will have
 	// FilterVariable values that are less than or equal to the value specified with
 	// LE.
 	LE *string
+
 	// The less than operator. The BatchPrediction results will have FilterVariable
 	// values that are less than the value specified with LT.
 	LT *string
+
 	// An ID of the page in the paginated results.
 	NextToken *string
+
 	// The greater than or equal to operator. The BatchPrediction results will have
 	// FilterVariable values that are greater than or equal to the value specified with
 	// GE.
 	GE *string
+
 	// Use one of the following variables to filter a list of BatchPrediction:
 	//
 	//     *
@@ -119,9 +128,11 @@ type DescribeBatchPredictionsInput struct {
 	// identify either a file or an Amazon Simple Storage Solution (Amazon S3) bucket
 	// or directory.
 	FilterVariable types.BatchPredictionFilterVariable
+
 	// The equal to operator. The BatchPrediction results will have FilterVariable
 	// values that exactly match the value specified with EQ.
 	EQ *string
+
 	// The greater than operator. The BatchPrediction results will have FilterVariable
 	// values that are greater than the value specified with GT.
 	GT *string
@@ -130,8 +141,10 @@ type DescribeBatchPredictionsInput struct {
 // Represents the output of a DescribeBatchPredictions operation. The content is
 // essentially a list of BatchPredictions.
 type DescribeBatchPredictionsOutput struct {
+
 	// A list of BatchPrediction objects that meet the search criteria.
 	Results []*types.BatchPrediction
+
 	// The ID of the next page in the paginated results that indicates at least one
 	// more page follows.
 	NextToken *string

@@ -59,8 +59,12 @@ func (c *Client) UpdateServiceSpecificCredential(ctx context.Context, params *Up
 }
 
 type UpdateServiceSpecificCredentialInput struct {
+
 	// The status to be assigned to the service-specific credential.
+	//
+	// This member is required.
 	Status types.StatusType
+
 	// The name of the IAM user associated with the service-specific credential. If you
 	// do not specify this value, then the operation assumes the user whose credentials
 	// are used to call the operation. This parameter allows (through its regex pattern
@@ -68,9 +72,12 @@ type UpdateServiceSpecificCredentialInput struct {
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
 	UserName *string
+
 	// The unique identifier of the service-specific credential. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters that can consist of any upper or lowercased letter or digit.
+	//
+	// This member is required.
 	ServiceSpecificCredentialId *string
 }
 

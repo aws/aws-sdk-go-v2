@@ -57,10 +57,12 @@ func (c *Client) DescribeProjects(ctx context.Context, params *DescribeProjectsI
 }
 
 type DescribeProjectsInput struct {
+
 	// If the previous response was incomplete (because there is more results to
 	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
 	// response. You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
@@ -68,9 +70,11 @@ type DescribeProjectsInput struct {
 }
 
 type DescribeProjectsOutput struct {
+
 	// A list of project descriptions. The list is sorted by the date and time the
 	// projects are created.
 	ProjectDescriptions []*types.ProjectDescription
+
 	// If the previous response was incomplete (because there is more results to
 	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
 	// response. You can use this pagination token to retrieve the next set of results.

@@ -77,18 +77,25 @@ func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncry
 }
 
 type PutBucketEncryptionInput struct {
+
 	// Specifies the default server-side-encryption configuration.
+	//
+	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
+
 	// The base64-encoded 128-bit MD5 digest of the server-side encryption
 	// configuration. This parameter is auto-populated when using the command from the
 	// CLI.
 	ContentMD5 *string
+
 	// Specifies default encryption for a bucket using server-side encryption with
 	// Amazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS
 	// (SSE-KMS). For information about the Amazon S3 default encryption feature, see
 	// Amazon S3 Default Bucket Encryption
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
 	// Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
 }
 

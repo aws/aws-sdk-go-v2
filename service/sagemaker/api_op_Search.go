@@ -60,30 +60,40 @@ func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func
 }
 
 type SearchInput struct {
+
 	// The name of the Amazon SageMaker resource to search for.
+	//
+	// This member is required.
 	Resource types.ResourceType
+
 	// How SearchResults are ordered. Valid values are Ascending or Descending. The
 	// default is Descending.
 	SortOrder types.SearchSortOrder
+
 	// A Boolean conditional statement. Resources must satisfy this condition to be
 	// included in search results. You must provide at least one subexpression, filter,
 	// or nested filter. The maximum number of recursive SubExpressions, NestedFilters,
 	// and Filters that can be included in a SearchExpression object is 50.
 	SearchExpression *types.SearchExpression
+
 	// The name of the resource property used to sort the SearchResults. The default is
 	// LastModifiedTime.
 	SortBy *string
+
 	// If more than MaxResults resources match the specified SearchExpression, the
 	// response includes a NextToken. The NextToken can be passed to the next
 	// SearchRequest to continue retrieving results.
 	NextToken *string
+
 	// The maximum number of results to return.
 	MaxResults *int32
 }
 
 type SearchOutput struct {
+
 	// A list of SearchRecord objects.
 	Results []*types.SearchRecord
+
 	// If the result of the previous Search request was truncated, the response
 	// includes a NextToken. To retrieve the next set of results, use the token in the
 	// next request.

@@ -61,12 +61,16 @@ func (c *Client) DescribeStackSummary(ctx context.Context, params *DescribeStack
 }
 
 type DescribeStackSummaryInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 
 // Contains the response to a DescribeStackSummary request.
 type DescribeStackSummaryOutput struct {
+
 	// A StackSummary object that contains the results.
 	StackSummary *types.StackSummary
 

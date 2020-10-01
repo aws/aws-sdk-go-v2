@@ -56,12 +56,16 @@ func (c *Client) GetSigningCertificate(ctx context.Context, params *GetSigningCe
 
 // Request to get a signing certificate from Cognito.
 type GetSigningCertificateInput struct {
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 // Response from Cognito for a signing certificate request.
 type GetSigningCertificateOutput struct {
+
 	// The signing certificate.
 	Certificate *string
 

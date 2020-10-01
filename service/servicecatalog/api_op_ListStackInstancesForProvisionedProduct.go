@@ -58,13 +58,19 @@ func (c *Client) ListStackInstancesForProvisionedProduct(ctx context.Context, pa
 }
 
 type ListStackInstancesForProvisionedProductInput struct {
+
 	// The identifier of the provisioned product.
+	//
+	// This member is required.
 	ProvisionedProductId *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -77,8 +83,10 @@ type ListStackInstancesForProvisionedProductInput struct {
 }
 
 type ListStackInstancesForProvisionedProductOutput struct {
+
 	// List of stack instances.
 	StackInstances []*types.StackInstance
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string

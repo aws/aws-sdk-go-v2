@@ -57,15 +57,21 @@ func (c *Client) DescribeSecurityConfiguration(ctx context.Context, params *Desc
 }
 
 type DescribeSecurityConfigurationInput struct {
+
 	// The name of the security configuration.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DescribeSecurityConfigurationOutput struct {
+
 	// The name of the security configuration.
 	Name *string
+
 	// The security configuration details in JSON format.
 	SecurityConfiguration *string
+
 	// The date and time the security configuration was created
 	CreationDateTime *time.Time
 

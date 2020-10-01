@@ -52,13 +52,17 @@ func (c *Client) NullAndEmptyHeadersServer(ctx context.Context, params *NullAndE
 
 type NullAndEmptyHeadersServerInput struct {
 	A *string
+
 	B *string
+
 	C []*string
 }
 
 type NullAndEmptyHeadersServerOutput struct {
 	A *string
+
 	B *string
+
 	C []*string
 
 	// Metadata pertaining to the operation's result.

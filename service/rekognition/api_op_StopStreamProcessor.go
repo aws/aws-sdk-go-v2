@@ -55,7 +55,10 @@ func (c *Client) StopStreamProcessor(ctx context.Context, params *StopStreamProc
 }
 
 type StopStreamProcessorInput struct {
+
 	// The name of a stream processor created by CreateStreamProcessor ().
+	//
+	// This member is required.
 	Name *string
 }
 

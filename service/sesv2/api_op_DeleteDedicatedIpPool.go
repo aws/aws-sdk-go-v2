@@ -56,7 +56,10 @@ func (c *Client) DeleteDedicatedIpPool(ctx context.Context, params *DeleteDedica
 
 // A request to delete a dedicated IP pool.
 type DeleteDedicatedIpPoolInput struct {
+
 	// The name of the dedicated IP pool that you want to delete.
+	//
+	// This member is required.
 	PoolName *string
 }
 

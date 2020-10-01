@@ -57,11 +57,15 @@ func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointI
 }
 
 type DescribeEndpointInput struct {
+
 	// The name of the endpoint.
+	//
+	// This member is required.
 	EndpointName *string
 }
 
 type DescribeEndpointOutput struct {
+
 	// The status of the endpoint.
 	//
 	//     * OutOfService: Endpoint is not available to
@@ -97,22 +101,42 @@ type DescribeEndpointOutput struct {
 	// updated, or re-scaled. Use DescribeEndpointOutput$FailureReason () for
 	// information about the failure. DeleteEndpoint () is the only operation that can
 	// be performed on a failed endpoint.
+	//
+	// This member is required.
 	EndpointStatus types.EndpointStatus
+
 	// An array of ProductionVariantSummary () objects, one for each model hosted
 	// behind this endpoint.
 	ProductionVariants []*types.ProductionVariantSummary
+
 	// The name of the endpoint configuration associated with this endpoint.
+	//
+	// This member is required.
 	EndpointConfigName *string
+
 	// Name of the endpoint.
+	//
+	// This member is required.
 	EndpointName *string
+
 	// If the status of the endpoint is Failed, the reason why it failed.
 	FailureReason *string
+
 	// A timestamp that shows when the endpoint was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// A timestamp that shows when the endpoint was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
+
 	//
 	DataCaptureConfig *types.DataCaptureConfigSummary
 

@@ -96,6 +96,7 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 
 //
 type CreateQueueInput struct {
+
 	// Add cost allocation tags to the specified Amazon SQS queue. For an overview, see
 	// Tagging Your Amazon SQS Queues
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html)
@@ -116,6 +117,7 @@ type CreateQueueInput struct {
 	// Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple
 	// Queue Service Developer Guide</i>.</p> </note>
 	Tags map[string]*string
+
 	// The name of the new queue. The following limits apply to this name:
 	//
 	//     * A
@@ -128,7 +130,10 @@ type CreateQueueInput struct {
 	// with the .fifo suffix.
 	//
 	// Queue URLs and names are case-sensitive.
+	//
+	// This member is required.
 	QueueName *string
+
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
 	// CreateQueue action uses:
@@ -247,6 +252,7 @@ type CreateQueueInput struct {
 
 // Returns the QueueUrl attribute of the created queue.
 type CreateQueueOutput struct {
+
 	// The URL of the created Amazon SQS queue.
 	QueueUrl *string
 

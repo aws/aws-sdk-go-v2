@@ -58,25 +58,35 @@ func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, 
 }
 
 type CreateContactInput struct {
+
 	// The first name of the contact that is used to call the contact on the device.
+	//
+	// This member is required.
 	FirstName *string
+
 	// A unique, user-specified identifier for this request that ensures idempotency.
 	ClientRequestToken *string
+
 	// The list of phone numbers for the contact.
 	PhoneNumbers []*types.PhoneNumber
+
 	// The last name of the contact that is used to call the contact on the device.
 	LastName *string
+
 	// The name of the contact to display on the console.
 	DisplayName *string
+
 	// The phone number of the contact in E.164 format. The phone number type defaults
 	// to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you use
 	// PhoneNumbers, which lets you specify the phone number type and multiple numbers.
 	PhoneNumber *string
+
 	// The list of SIP addresses for the contact.
 	SipAddresses []*types.SipAddress
 }
 
 type CreateContactOutput struct {
+
 	// The ARN of the newly created address book.
 	ContactArn *string
 

@@ -56,17 +56,28 @@ func (c *Client) DescribeThemeAlias(ctx context.Context, params *DescribeThemeAl
 }
 
 type DescribeThemeAliasInput struct {
+
 	// The ID of the AWS account that contains the theme alias that you're describing.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the theme.
+	//
+	// This member is required.
 	ThemeId *string
+
 	// The name of the theme alias that you want to describe.
+	//
+	// This member is required.
 	AliasName *string
 }
 
 type DescribeThemeAliasOutput struct {
+
 	// Information about the theme alias.
 	ThemeAlias *types.ThemeAlias
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

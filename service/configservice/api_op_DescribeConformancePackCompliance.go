@@ -57,25 +57,38 @@ func (c *Client) DescribeConformancePackCompliance(ctx context.Context, params *
 }
 
 type DescribeConformancePackComplianceInput struct {
+
 	// A ConformancePackComplianceFilters object.
 	Filters *types.ConformancePackComplianceFilters
+
 	// Name of the conformance pack.
+	//
+	// This member is required.
 	ConformancePackName *string
+
 	// The maximum number of AWS Config rules within a conformance pack are returned on
 	// each page.
 	Limit *int32
+
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
 }
 
 type DescribeConformancePackComplianceOutput struct {
+
 	// Returns a list of ConformancePackRuleCompliance objects.
+	//
+	// This member is required.
 	ConformancePackRuleComplianceList []*types.ConformancePackRuleCompliance
+
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
+
 	// Name of the conformance pack.
+	//
+	// This member is required.
 	ConformancePackName *string
 
 	// Metadata pertaining to the operation's result.

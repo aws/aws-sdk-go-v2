@@ -56,21 +56,30 @@ func (c *Client) DescribeDetector(ctx context.Context, params *DescribeDetectorI
 }
 
 type DescribeDetectorInput struct {
+
 	// The detector ID.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The maximum number of results to return for the request.
 	MaxResults *int32
+
 	// The next token from the previous response.
 	NextToken *string
 }
 
 type DescribeDetectorOutput struct {
+
 	// The status and description for each detector version.
 	DetectorVersionSummaries []*types.DetectorVersionSummary
+
 	// The detector ARN.
 	Arn *string
+
 	// The detector ID.
 	DetectorId *string
+
 	// The next token to be used for subsequent requests.
 	NextToken *string
 

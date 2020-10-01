@@ -55,19 +55,24 @@ func (c *Client) GetReplicationJobs(ctx context.Context, params *GetReplicationJ
 }
 
 type GetReplicationJobsInput struct {
+
 	// The maximum number of results to return in a single call. The default value is
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
 	MaxResults *int32
+
 	// The identifier of the replication job.
 	ReplicationJobId *string
+
 	// The token for the next set of results.
 	NextToken *string
 }
 
 type GetReplicationJobsOutput struct {
+
 	// Information about the replication jobs.
 	ReplicationJobList []*types.ReplicationJob
+
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

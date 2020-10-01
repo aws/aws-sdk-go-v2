@@ -55,10 +55,15 @@ func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmen
 }
 
 type UpdateEnvironmentInput struct {
+
 	// The ID of the environment to change settings.
+	//
+	// This member is required.
 	EnvironmentId *string
+
 	// Any new or replacement description for the environment.
 	Description *string
+
 	// A replacement name for the environment.
 	Name *string
 }

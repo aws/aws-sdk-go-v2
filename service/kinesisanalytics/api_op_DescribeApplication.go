@@ -67,15 +67,21 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 
 //
 type DescribeApplicationInput struct {
+
 	// Name of the application.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 //
 type DescribeApplicationOutput struct {
+
 	// Provides a description of the application, such as the application Amazon
 	// Resource Name (ARN), status, latest version, and input and output configuration
 	// details.
+	//
+	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
 
 	// Metadata pertaining to the operation's result.

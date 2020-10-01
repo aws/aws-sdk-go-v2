@@ -61,11 +61,15 @@ func (c *Client) TerminateWorkspaces(ctx context.Context, params *TerminateWorks
 }
 
 type TerminateWorkspacesInput struct {
+
 	// The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
+	//
+	// This member is required.
 	TerminateWorkspaceRequests []*types.TerminateRequest
 }
 
 type TerminateWorkspacesOutput struct {
+
 	// Information about the WorkSpaces that could not be terminated.
 	FailedRequests []*types.FailedWorkspaceChangeRequest
 

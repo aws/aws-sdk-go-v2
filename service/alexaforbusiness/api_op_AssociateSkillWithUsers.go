@@ -55,7 +55,10 @@ func (c *Client) AssociateSkillWithUsers(ctx context.Context, params *AssociateS
 }
 
 type AssociateSkillWithUsersInput struct {
+
 	// The private skill ID you want to make available to enrolled users.
+	//
+	// This member is required.
 	SkillId *string
 }
 

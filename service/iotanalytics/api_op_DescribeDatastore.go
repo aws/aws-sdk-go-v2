@@ -56,8 +56,12 @@ func (c *Client) DescribeDatastore(ctx context.Context, params *DescribeDatastor
 }
 
 type DescribeDatastoreInput struct {
+
 	// The name of the data store
+	//
+	// This member is required.
 	DatastoreName *string
+
 	// If true, additional statistical information about the data store is included in
 	// the response. This feature cannot be used with a data store whose S3 storage is
 	// customer-managed.
@@ -65,8 +69,10 @@ type DescribeDatastoreInput struct {
 }
 
 type DescribeDatastoreOutput struct {
+
 	// Information about the data store.
 	Datastore *types.Datastore
+
 	// Additional statistical information about the data store. Included if the
 	// 'includeStatistics' parameter is set to true in the request.
 	Statistics *types.DatastoreStatistics

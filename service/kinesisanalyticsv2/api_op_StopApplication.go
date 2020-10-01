@@ -57,7 +57,10 @@ func (c *Client) StopApplication(ctx context.Context, params *StopApplicationInp
 }
 
 type StopApplicationInput struct {
+
 	// The name of the running application to stop.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 

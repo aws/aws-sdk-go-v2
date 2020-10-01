@@ -60,17 +60,29 @@ func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput
 }
 
 type UpdateEndpointInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies the channel type and other settings for an endpoint.
+	//
+	// This member is required.
 	EndpointRequest *types.EndpointRequest
+
 	// The unique identifier for the endpoint.
+	//
+	// This member is required.
 	EndpointId *string
 }
 
 type UpdateEndpointOutput struct {
+
 	// Provides information about an API request or response.
+	//
+	// This member is required.
 	MessageBody *types.MessageBody
 
 	// Metadata pertaining to the operation's result.

@@ -67,12 +67,18 @@ func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingI
 }
 
 type GetBucketTaggingInput struct {
+
 	// The name of the bucket for which to get the tagging information.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketTaggingOutput struct {
+
 	// Contains the tag set.
+	//
+	// This member is required.
 	TagSet []*types.Tag
 
 	// Metadata pertaining to the operation's result.

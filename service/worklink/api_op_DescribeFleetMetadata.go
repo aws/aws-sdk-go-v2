@@ -58,26 +58,37 @@ func (c *Client) DescribeFleetMetadata(ctx context.Context, params *DescribeFlee
 }
 
 type DescribeFleetMetadataInput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 
 type DescribeFleetMetadataOutput struct {
+
 	// The time that the fleet was created.
 	CreatedTime *time.Time
+
 	// The name of the fleet.
 	FleetName *string
+
 	// The current state of the fleet.
 	FleetStatus types.FleetStatus
+
 	// The time that the fleet was last updated.
 	LastUpdatedTime *time.Time
+
 	// The option to optimize for better performance by routing traffic through the
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool
+
 	// The name to display.
 	DisplayName *string
+
 	// The tags attached to the resource. A tag is a key-value pair.
 	Tags map[string]*string
+
 	// The identifier used by users to sign in to the Amazon WorkLink app.
 	CompanyCode *string
 

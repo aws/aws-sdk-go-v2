@@ -57,14 +57,19 @@ func (c *Client) ListPipelineExecutions(ctx context.Context, params *ListPipelin
 
 // Represents the input of a ListPipelineExecutions action.
 type ListPipelineExecutionsInput struct {
+
 	// The name of the pipeline for which you want to get execution summary
 	// information.
+	//
+	// This member is required.
 	PipelineName *string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Pipeline
 	// history is limited to the most recent 12 months, based on pipeline execution
 	// start times. Default value is 100.
 	MaxResults *int32
+
 	// The token that was returned from the previous ListPipelineExecutions call, which
 	// can be used to return the next set of pipeline executions in the list.
 	NextToken *string
@@ -72,8 +77,10 @@ type ListPipelineExecutionsInput struct {
 
 // Represents the output of a ListPipelineExecutions action.
 type ListPipelineExecutionsOutput struct {
+
 	// A list of executions in the history of a pipeline.
 	PipelineExecutionSummaries []*types.PipelineExecutionSummary
+
 	// A token that can be used in the next ListPipelineExecutions call. To view all
 	// items in the list, continue to call this operation with each subsequent token
 	// until no more nextToken values are returned.

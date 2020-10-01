@@ -61,14 +61,19 @@ func (c *Client) DescribeInstanceHealth(ctx context.Context, params *DescribeIns
 
 // Contains the parameters for DescribeInstanceHealth.
 type DescribeInstanceHealthInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The IDs of the instances.
 	Instances []*types.Instance
 }
 
 // Contains the output for DescribeInstanceHealth.
 type DescribeInstanceHealthOutput struct {
+
 	// Information about the health of the instances.
 	InstanceStates []*types.InstanceState
 

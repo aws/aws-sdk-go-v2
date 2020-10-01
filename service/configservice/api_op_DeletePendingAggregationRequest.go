@@ -56,9 +56,15 @@ func (c *Client) DeletePendingAggregationRequest(ctx context.Context, params *De
 }
 
 type DeletePendingAggregationRequestInput struct {
+
 	// The 12-digit account ID of the account requesting to aggregate data.
+	//
+	// This member is required.
 	RequesterAccountId *string
+
 	// The region requesting to aggregate data.
+	//
+	// This member is required.
 	RequesterAwsRegion *string
 }
 

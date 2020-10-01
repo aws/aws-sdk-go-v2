@@ -56,12 +56,16 @@ func (c *Client) GetSubscriptionAttributes(ctx context.Context, params *GetSubsc
 
 // Input for GetSubscriptionAttributes.
 type GetSubscriptionAttributesInput struct {
+
 	// The ARN of the subscription whose properties you want to get.
+	//
+	// This member is required.
 	SubscriptionArn *string
 }
 
 // Response for GetSubscriptionAttributes action.
 type GetSubscriptionAttributesOutput struct {
+
 	// A map of the subscription's attributes. Attributes in this map include the
 	// following:
 	//

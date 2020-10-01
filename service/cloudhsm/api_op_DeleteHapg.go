@@ -66,13 +66,19 @@ func (c *Client) DeleteHapg(ctx context.Context, params *DeleteHapgInput, optFns
 
 // Contains the inputs for the DeleteHapg () action.
 type DeleteHapgInput struct {
+
 	// The ARN of the high-availability partition group to delete.
+	//
+	// This member is required.
 	HapgArn *string
 }
 
 // Contains the output of the DeleteHapg () action.
 type DeleteHapgOutput struct {
+
 	// The status of the action.
+	//
+	// This member is required.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

@@ -57,15 +57,23 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 }
 
 type UpdateBotInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The bot ID.
+	//
+	// This member is required.
 	BotId *string
+
 	// When true, stops the specified bot from running in your account.
 	Disabled *bool
 }
 
 type UpdateBotOutput struct {
+
 	// The updated bot details.
 	Bot *types.Bot
 

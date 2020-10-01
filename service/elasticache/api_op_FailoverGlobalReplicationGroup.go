@@ -58,15 +58,25 @@ func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *Fai
 }
 
 type FailoverGlobalReplicationGroupInput struct {
+
 	// The name of the primary replication group
+	//
+	// This member is required.
 	PrimaryReplicationGroupId *string
+
 	// The name of the Global Datastore
+	//
+	// This member is required.
 	GlobalReplicationGroupId *string
+
 	// The AWS region of the primary cluster of the Global Datastore
+	//
+	// This member is required.
 	PrimaryRegion *string
 }
 
 type FailoverGlobalReplicationGroupOutput struct {
+
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the

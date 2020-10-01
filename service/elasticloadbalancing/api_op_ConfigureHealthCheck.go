@@ -61,14 +61,21 @@ func (c *Client) ConfigureHealthCheck(ctx context.Context, params *ConfigureHeal
 
 // Contains the parameters for ConfigureHealthCheck.
 type ConfigureHealthCheckInput struct {
+
 	// The configuration information.
+	//
+	// This member is required.
 	HealthCheck *types.HealthCheck
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 // Contains the output of ConfigureHealthCheck.
 type ConfigureHealthCheckOutput struct {
+
 	// The updated health check.
 	HealthCheck *types.HealthCheck
 

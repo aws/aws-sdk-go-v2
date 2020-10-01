@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified Amazon Resource Name (ARN) does not exist in the AWS account.
@@ -24,12 +23,6 @@ func (e *ActorDoesNotExistException) ErrorMessage() string {
 }
 func (e *ActorDoesNotExistException) ErrorCode() string             { return "ActorDoesNotExistException" }
 func (e *ActorDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ActorDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ActorDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The content for the approval rule is empty. You must provide some content for an
 // approval rule. The content cannot be null.
@@ -52,12 +45,6 @@ func (e *ApprovalRuleContentRequiredException) ErrorCode() string {
 func (e *ApprovalRuleContentRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ApprovalRuleContentRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleContentRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified approval rule does not exist.
 type ApprovalRuleDoesNotExistException struct {
@@ -77,12 +64,6 @@ func (e *ApprovalRuleDoesNotExistException) ErrorCode() string {
 	return "ApprovalRuleDoesNotExistException"
 }
 func (e *ApprovalRuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApprovalRuleDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An approval rule with that name already exists. Approval rule names must be
 // unique within the scope of a pull request.
@@ -105,12 +86,6 @@ func (e *ApprovalRuleNameAlreadyExistsException) ErrorCode() string {
 func (e *ApprovalRuleNameAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ApprovalRuleNameAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleNameAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An approval rule name is required, but was not specified.
 type ApprovalRuleNameRequiredException struct {
@@ -130,12 +105,6 @@ func (e *ApprovalRuleNameRequiredException) ErrorCode() string {
 	return "ApprovalRuleNameRequiredException"
 }
 func (e *ApprovalRuleNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApprovalRuleNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The content for the approval rule template is empty. You must provide some
 // content for an approval rule template. The content cannot be null.
@@ -157,12 +126,6 @@ func (e *ApprovalRuleTemplateContentRequiredException) ErrorCode() string {
 }
 func (e *ApprovalRuleTemplateContentRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ApprovalRuleTemplateContentRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleTemplateContentRequiredException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The specified approval rule template does not exist. Verify that the name is
@@ -187,12 +150,6 @@ func (e *ApprovalRuleTemplateDoesNotExistException) ErrorCode() string {
 func (e *ApprovalRuleTemplateDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ApprovalRuleTemplateDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleTemplateDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The approval rule template is associated with one or more repositories. You
 // cannot delete a template that is associated with a repository. Remove all
@@ -215,12 +172,6 @@ func (e *ApprovalRuleTemplateInUseException) ErrorCode() string {
 }
 func (e *ApprovalRuleTemplateInUseException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ApprovalRuleTemplateInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleTemplateInUseException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You cannot create an approval rule template with that name because a template
@@ -245,12 +196,6 @@ func (e *ApprovalRuleTemplateNameAlreadyExistsException) ErrorCode() string {
 func (e *ApprovalRuleTemplateNameAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ApprovalRuleTemplateNameAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleTemplateNameAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An approval rule template name is required, but was not specified.
 type ApprovalRuleTemplateNameRequiredException struct {
@@ -272,12 +217,6 @@ func (e *ApprovalRuleTemplateNameRequiredException) ErrorCode() string {
 func (e *ApprovalRuleTemplateNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ApprovalRuleTemplateNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalRuleTemplateNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An approval state is required, but was not specified.
 type ApprovalStateRequiredException struct {
@@ -295,12 +234,6 @@ func (e *ApprovalStateRequiredException) ErrorMessage() string {
 }
 func (e *ApprovalStateRequiredException) ErrorCode() string             { return "ApprovalStateRequiredException" }
 func (e *ApprovalStateRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApprovalStateRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApprovalStateRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon Resource Name (ARN) does not exist in the AWS account.
 type AuthorDoesNotExistException struct {
@@ -318,12 +251,6 @@ func (e *AuthorDoesNotExistException) ErrorMessage() string {
 }
 func (e *AuthorDoesNotExistException) ErrorCode() string             { return "AuthorDoesNotExistException" }
 func (e *AuthorDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The before commit ID and the after commit ID are the same, which is not valid.
 // The before commit ID and the after commit ID must be different commit IDs.
@@ -346,12 +273,6 @@ func (e *BeforeCommitIdAndAfterCommitIdAreSameException) ErrorCode() string {
 func (e *BeforeCommitIdAndAfterCommitIdAreSameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *BeforeCommitIdAndAfterCommitIdAreSameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BeforeCommitIdAndAfterCommitIdAreSameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified blob does not exist.
 type BlobIdDoesNotExistException struct {
@@ -369,12 +290,6 @@ func (e *BlobIdDoesNotExistException) ErrorMessage() string {
 }
 func (e *BlobIdDoesNotExistException) ErrorCode() string             { return "BlobIdDoesNotExistException" }
 func (e *BlobIdDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BlobIdDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BlobIdDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A blob ID is required, but was not specified.
 type BlobIdRequiredException struct {
@@ -392,12 +307,6 @@ func (e *BlobIdRequiredException) ErrorMessage() string {
 }
 func (e *BlobIdRequiredException) ErrorCode() string             { return "BlobIdRequiredException" }
 func (e *BlobIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BlobIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BlobIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified branch does not exist.
 type BranchDoesNotExistException struct {
@@ -415,12 +324,6 @@ func (e *BranchDoesNotExistException) ErrorMessage() string {
 }
 func (e *BranchDoesNotExistException) ErrorCode() string             { return "BranchDoesNotExistException" }
 func (e *BranchDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BranchDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BranchDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cannot create the branch with the specified name because the commit conflicts
 // with an existing branch with the same name. Branch names must be unique.
@@ -439,12 +342,6 @@ func (e *BranchNameExistsException) ErrorMessage() string {
 }
 func (e *BranchNameExistsException) ErrorCode() string             { return "BranchNameExistsException" }
 func (e *BranchNameExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BranchNameExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BranchNameExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified branch name is not valid because it is a tag name. Enter the name
 // of a branch in the repository. For a list of valid branch names, use
@@ -464,12 +361,6 @@ func (e *BranchNameIsTagNameException) ErrorMessage() string {
 }
 func (e *BranchNameIsTagNameException) ErrorCode() string             { return "BranchNameIsTagNameException" }
 func (e *BranchNameIsTagNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BranchNameIsTagNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BranchNameIsTagNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A branch name is required, but was not specified.
 type BranchNameRequiredException struct {
@@ -487,12 +378,6 @@ func (e *BranchNameRequiredException) ErrorMessage() string {
 }
 func (e *BranchNameRequiredException) ErrorCode() string             { return "BranchNameRequiredException" }
 func (e *BranchNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BranchNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BranchNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The approval rule cannot be deleted from the pull request because it was created
 // by an approval rule template and applied to the pull request automatically.
@@ -515,12 +400,6 @@ func (e *CannotDeleteApprovalRuleFromTemplateException) ErrorCode() string {
 func (e *CannotDeleteApprovalRuleFromTemplateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CannotDeleteApprovalRuleFromTemplateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CannotDeleteApprovalRuleFromTemplateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The approval rule cannot be modified for the pull request because it was created
 // by an approval rule template and applied to the pull request automatically.
@@ -542,12 +421,6 @@ func (e *CannotModifyApprovalRuleFromTemplateException) ErrorCode() string {
 }
 func (e *CannotModifyApprovalRuleFromTemplateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CannotModifyApprovalRuleFromTemplateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CannotModifyApprovalRuleFromTemplateException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // A client request token is required. A client request token is an unique,
@@ -574,12 +447,6 @@ func (e *ClientRequestTokenRequiredException) ErrorCode() string {
 func (e *ClientRequestTokenRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClientRequestTokenRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientRequestTokenRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The comment is empty. You must provide some content for a comment. The content
 // cannot be null.
@@ -600,12 +467,6 @@ func (e *CommentContentRequiredException) ErrorCode() string {
 	return "CommentContentRequiredException"
 }
 func (e *CommentContentRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommentContentRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommentContentRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The comment is too large. Comments are limited to 1,000 characters.
 type CommentContentSizeLimitExceededException struct {
@@ -627,12 +488,6 @@ func (e *CommentContentSizeLimitExceededException) ErrorCode() string {
 func (e *CommentContentSizeLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CommentContentSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommentContentSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This comment has already been deleted. You cannot edit or delete a deleted
 // comment.
@@ -651,12 +506,6 @@ func (e *CommentDeletedException) ErrorMessage() string {
 }
 func (e *CommentDeletedException) ErrorCode() string             { return "CommentDeletedException" }
 func (e *CommentDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommentDeletedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommentDeletedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No comment exists with the provided ID. Verify that you have used the correct
 // ID, and then try again.
@@ -675,12 +524,6 @@ func (e *CommentDoesNotExistException) ErrorMessage() string {
 }
 func (e *CommentDoesNotExistException) ErrorCode() string             { return "CommentDoesNotExistException" }
 func (e *CommentDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommentDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommentDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The comment ID is missing or null. A comment ID is required.
 type CommentIdRequiredException struct {
@@ -698,12 +541,6 @@ func (e *CommentIdRequiredException) ErrorMessage() string {
 }
 func (e *CommentIdRequiredException) ErrorCode() string             { return "CommentIdRequiredException" }
 func (e *CommentIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommentIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommentIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot modify or delete this comment. Only comment authors can modify or
 // delete their comments.
@@ -726,12 +563,6 @@ func (e *CommentNotCreatedByCallerException) ErrorCode() string {
 func (e *CommentNotCreatedByCallerException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CommentNotCreatedByCallerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommentNotCreatedByCallerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified commit does not exist or no commit was specified, and the
 // specified repository has no default branch.
@@ -750,12 +581,6 @@ func (e *CommitDoesNotExistException) ErrorMessage() string {
 }
 func (e *CommitDoesNotExistException) ErrorCode() string             { return "CommitDoesNotExistException" }
 func (e *CommitDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommitDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified commit ID does not exist.
 type CommitIdDoesNotExistException struct {
@@ -773,12 +598,6 @@ func (e *CommitIdDoesNotExistException) ErrorMessage() string {
 }
 func (e *CommitIdDoesNotExistException) ErrorCode() string             { return "CommitIdDoesNotExistException" }
 func (e *CommitIdDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommitIdDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitIdDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A commit ID was not specified.
 type CommitIdRequiredException struct {
@@ -796,12 +615,6 @@ func (e *CommitIdRequiredException) ErrorMessage() string {
 }
 func (e *CommitIdRequiredException) ErrorCode() string             { return "CommitIdRequiredException" }
 func (e *CommitIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommitIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of allowed commit IDs in a batch request is 100. Verify that
 // your batch requests contains no more than 100 commit IDs, and then try again.
@@ -822,12 +635,6 @@ func (e *CommitIdsLimitExceededException) ErrorCode() string {
 	return "CommitIdsLimitExceededException"
 }
 func (e *CommitIdsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommitIdsLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitIdsLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A list of commit IDs is required, but was either not specified or the list was
 // empty.
@@ -846,12 +653,6 @@ func (e *CommitIdsListRequiredException) ErrorMessage() string {
 }
 func (e *CommitIdsListRequiredException) ErrorCode() string             { return "CommitIdsListRequiredException" }
 func (e *CommitIdsListRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommitIdsListRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitIdsListRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit message is too long. Provide a shorter string.
 type CommitMessageLengthExceededException struct {
@@ -873,12 +674,6 @@ func (e *CommitMessageLengthExceededException) ErrorCode() string {
 func (e *CommitMessageLengthExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CommitMessageLengthExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitMessageLengthExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A commit was not specified.
 type CommitRequiredException struct {
@@ -896,12 +691,6 @@ func (e *CommitRequiredException) ErrorMessage() string {
 }
 func (e *CommitRequiredException) ErrorCode() string             { return "CommitRequiredException" }
 func (e *CommitRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CommitRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CommitRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The merge cannot be completed because the target branch has been modified.
 // Another user might have modified the target branch while the merge was in
@@ -924,12 +713,6 @@ func (e *ConcurrentReferenceUpdateException) ErrorCode() string {
 }
 func (e *ConcurrentReferenceUpdateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ConcurrentReferenceUpdateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentReferenceUpdateException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The specified branch is the default branch for the repository, and cannot be
@@ -954,12 +737,6 @@ func (e *DefaultBranchCannotBeDeletedException) ErrorCode() string {
 func (e *DefaultBranchCannotBeDeletedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DefaultBranchCannotBeDeletedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DefaultBranchCannotBeDeletedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A file cannot be added to the repository because the specified path name has the
 // same name as a file that already exists in this repository. Either provide a
@@ -983,12 +760,6 @@ func (e *DirectoryNameConflictsWithFileNameException) ErrorCode() string {
 func (e *DirectoryNameConflictsWithFileNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DirectoryNameConflictsWithFileNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryNameConflictsWithFileNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An encryption integrity check failed.
 type EncryptionIntegrityChecksFailedException struct {
@@ -1009,12 +780,6 @@ func (e *EncryptionIntegrityChecksFailedException) ErrorCode() string {
 }
 func (e *EncryptionIntegrityChecksFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
-}
-func (e *EncryptionIntegrityChecksFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EncryptionIntegrityChecksFailedException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // An encryption key could not be accessed.
@@ -1037,12 +802,6 @@ func (e *EncryptionKeyAccessDeniedException) ErrorCode() string {
 func (e *EncryptionKeyAccessDeniedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *EncryptionKeyAccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EncryptionKeyAccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The encryption key is disabled.
 type EncryptionKeyDisabledException struct {
@@ -1060,12 +819,6 @@ func (e *EncryptionKeyDisabledException) ErrorMessage() string {
 }
 func (e *EncryptionKeyDisabledException) ErrorCode() string             { return "EncryptionKeyDisabledException" }
 func (e *EncryptionKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EncryptionKeyDisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EncryptionKeyDisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No encryption key was found.
 type EncryptionKeyNotFoundException struct {
@@ -1083,12 +836,6 @@ func (e *EncryptionKeyNotFoundException) ErrorMessage() string {
 }
 func (e *EncryptionKeyNotFoundException) ErrorCode() string             { return "EncryptionKeyNotFoundException" }
 func (e *EncryptionKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EncryptionKeyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EncryptionKeyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The encryption key is not available.
 type EncryptionKeyUnavailableException struct {
@@ -1108,12 +855,6 @@ func (e *EncryptionKeyUnavailableException) ErrorCode() string {
 	return "EncryptionKeyUnavailableException"
 }
 func (e *EncryptionKeyUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EncryptionKeyUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EncryptionKeyUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because both a source file and file content have
 // been specified for the same file. You cannot provide both. Either specify a
@@ -1137,12 +878,6 @@ func (e *FileContentAndSourceFileSpecifiedException) ErrorCode() string {
 func (e *FileContentAndSourceFileSpecifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FileContentAndSourceFileSpecifiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileContentAndSourceFileSpecifiedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The file cannot be added because it is empty. Empty files cannot be added to the
 // repository with this API.
@@ -1161,12 +896,6 @@ func (e *FileContentRequiredException) ErrorMessage() string {
 }
 func (e *FileContentRequiredException) ErrorCode() string             { return "FileContentRequiredException" }
 func (e *FileContentRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileContentRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileContentRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The file cannot be added because it is too large. The maximum file size is 6 MB,
 // and the combined file content change size is 7 MB. Consider making these changes
@@ -1190,12 +919,6 @@ func (e *FileContentSizeLimitExceededException) ErrorCode() string {
 func (e *FileContentSizeLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FileContentSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileContentSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified file does not exist. Verify that you have used the correct file
 // name, full path, and extension.
@@ -1214,12 +937,6 @@ func (e *FileDoesNotExistException) ErrorMessage() string {
 }
 func (e *FileDoesNotExistException) ErrorCode() string             { return "FileDoesNotExistException" }
 func (e *FileDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because no files have been specified as added,
 // updated, or changed (PutFile or DeleteFile) for the commit.
@@ -1238,12 +955,6 @@ func (e *FileEntryRequiredException) ErrorMessage() string {
 }
 func (e *FileEntryRequiredException) ErrorCode() string             { return "FileEntryRequiredException" }
 func (e *FileEntryRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileEntryRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileEntryRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because no file mode has been specified. A file
 // mode is required to update mode permissions for a file.
@@ -1262,12 +973,6 @@ func (e *FileModeRequiredException) ErrorMessage() string {
 }
 func (e *FileModeRequiredException) ErrorCode() string             { return "FileModeRequiredException" }
 func (e *FileModeRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileModeRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileModeRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A file cannot be added to the repository because the specified file name has the
 // same name as a directory in this repository. Either provide another name for the
@@ -1290,12 +995,6 @@ func (e *FileNameConflictsWithDirectoryNameException) ErrorCode() string {
 }
 func (e *FileNameConflictsWithDirectoryNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *FileNameConflictsWithDirectoryNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileNameConflictsWithDirectoryNameException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The commit cannot be created because a specified file path points to a
@@ -1320,12 +1019,6 @@ func (e *FilePathConflictsWithSubmodulePathException) ErrorCode() string {
 func (e *FilePathConflictsWithSubmodulePathException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FilePathConflictsWithSubmodulePathException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FilePathConflictsWithSubmodulePathException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified file exceeds the file size limit for AWS CodeCommit. For more
 // information about limits in AWS CodeCommit, see AWS CodeCommit User Guide
@@ -1345,12 +1038,6 @@ func (e *FileTooLargeException) ErrorMessage() string {
 }
 func (e *FileTooLargeException) ErrorCode() string             { return "FileTooLargeException" }
 func (e *FileTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FileTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FileTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because at least one of the overall changes in the
 // commit results in a folder whose contents exceed the limit of 6 MB. Either
@@ -1375,12 +1062,6 @@ func (e *FolderContentSizeLimitExceededException) ErrorCode() string {
 func (e *FolderContentSizeLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FolderContentSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FolderContentSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified folder does not exist. Either the folder name is not correct, or
 // you did not enter the full path to the folder.
@@ -1399,12 +1080,6 @@ func (e *FolderDoesNotExistException) ErrorMessage() string {
 }
 func (e *FolderDoesNotExistException) ErrorCode() string             { return "FolderDoesNotExistException" }
 func (e *FolderDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FolderDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FolderDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The client request token is not valid. Either the token is not in a valid
 // format, or the token has been used in a previous request and cannot be reused.
@@ -1427,12 +1102,6 @@ func (e *IdempotencyParameterMismatchException) ErrorCode() string {
 func (e *IdempotencyParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IdempotencyParameterMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotencyParameterMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Resource Name (ARN) is not valid. Make sure that you have provided
 // the full ARN for the user who initiated the change for the pull request, and
@@ -1452,12 +1121,6 @@ func (e *InvalidActorArnException) ErrorMessage() string {
 }
 func (e *InvalidActorArnException) ErrorCode() string             { return "InvalidActorArnException" }
 func (e *InvalidActorArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidActorArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidActorArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The content for the approval rule is not valid.
 type InvalidApprovalRuleContentException struct {
@@ -1479,12 +1142,6 @@ func (e *InvalidApprovalRuleContentException) ErrorCode() string {
 func (e *InvalidApprovalRuleContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidApprovalRuleContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApprovalRuleContentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The name for the approval rule is not valid.
 type InvalidApprovalRuleNameException struct {
@@ -1504,12 +1161,6 @@ func (e *InvalidApprovalRuleNameException) ErrorCode() string {
 	return "InvalidApprovalRuleNameException"
 }
 func (e *InvalidApprovalRuleNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidApprovalRuleNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApprovalRuleNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The content of the approval rule template is not valid.
 type InvalidApprovalRuleTemplateContentException struct {
@@ -1530,12 +1181,6 @@ func (e *InvalidApprovalRuleTemplateContentException) ErrorCode() string {
 }
 func (e *InvalidApprovalRuleTemplateContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidApprovalRuleTemplateContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApprovalRuleTemplateContentException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The description for the approval rule template is not valid because it exceeds
@@ -1561,12 +1206,6 @@ func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorCode() string {
 func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidApprovalRuleTemplateDescriptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApprovalRuleTemplateDescriptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The name of the approval rule template is not valid. Template names must be
 // between 1 and 100 valid characters in length. For more information about limits
@@ -1591,12 +1230,6 @@ func (e *InvalidApprovalRuleTemplateNameException) ErrorCode() string {
 func (e *InvalidApprovalRuleTemplateNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidApprovalRuleTemplateNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApprovalRuleTemplateNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The state for the approval is not valid. Valid values include APPROVE and
 // REVOKE.
@@ -1615,12 +1248,6 @@ func (e *InvalidApprovalStateException) ErrorMessage() string {
 }
 func (e *InvalidApprovalStateException) ErrorCode() string             { return "InvalidApprovalStateException" }
 func (e *InvalidApprovalStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidApprovalStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApprovalStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Resource Name (ARN) is not valid. Make sure that you have provided
 // the full ARN for the author of the pull request, and then try again.
@@ -1639,12 +1266,6 @@ func (e *InvalidAuthorArnException) ErrorMessage() string {
 }
 func (e *InvalidAuthorArnException) ErrorCode() string             { return "InvalidAuthorArnException" }
 func (e *InvalidAuthorArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAuthorArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAuthorArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified blob is not valid.
 type InvalidBlobIdException struct {
@@ -1662,12 +1283,6 @@ func (e *InvalidBlobIdException) ErrorMessage() string {
 }
 func (e *InvalidBlobIdException) ErrorCode() string             { return "InvalidBlobIdException" }
 func (e *InvalidBlobIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidBlobIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidBlobIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified reference name is not valid.
 type InvalidBranchNameException struct {
@@ -1685,12 +1300,6 @@ func (e *InvalidBranchNameException) ErrorMessage() string {
 }
 func (e *InvalidBranchNameException) ErrorCode() string             { return "InvalidBranchNameException" }
 func (e *InvalidBranchNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidBranchNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidBranchNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The client request token is not valid.
 type InvalidClientRequestTokenException struct {
@@ -1712,12 +1321,6 @@ func (e *InvalidClientRequestTokenException) ErrorCode() string {
 func (e *InvalidClientRequestTokenException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidClientRequestTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClientRequestTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The comment ID is not in a valid format. Make sure that you have provided the
 // full comment ID.
@@ -1736,12 +1339,6 @@ func (e *InvalidCommentIdException) ErrorMessage() string {
 }
 func (e *InvalidCommentIdException) ErrorCode() string             { return "InvalidCommentIdException" }
 func (e *InvalidCommentIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCommentIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCommentIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified commit is not valid.
 type InvalidCommitException struct {
@@ -1759,12 +1356,6 @@ func (e *InvalidCommitException) ErrorMessage() string {
 }
 func (e *InvalidCommitException) ErrorCode() string             { return "InvalidCommitException" }
 func (e *InvalidCommitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCommitException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCommitException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified commit ID is not valid.
 type InvalidCommitIdException struct {
@@ -1782,12 +1373,6 @@ func (e *InvalidCommitIdException) ErrorMessage() string {
 }
 func (e *InvalidCommitIdException) ErrorCode() string             { return "InvalidCommitIdException" }
 func (e *InvalidCommitIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCommitIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCommitIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified conflict detail level is not valid.
 type InvalidConflictDetailLevelException struct {
@@ -1808,12 +1393,6 @@ func (e *InvalidConflictDetailLevelException) ErrorCode() string {
 }
 func (e *InvalidConflictDetailLevelException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidConflictDetailLevelException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConflictDetailLevelException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The specified conflict resolution list is not valid.
@@ -1836,12 +1415,6 @@ func (e *InvalidConflictResolutionException) ErrorCode() string {
 func (e *InvalidConflictResolutionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidConflictResolutionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConflictResolutionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified conflict resolution strategy is not valid.
 type InvalidConflictResolutionStrategyException struct {
@@ -1863,12 +1436,6 @@ func (e *InvalidConflictResolutionStrategyException) ErrorCode() string {
 func (e *InvalidConflictResolutionStrategyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidConflictResolutionStrategyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConflictResolutionStrategyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified continuation token is not valid.
 type InvalidContinuationTokenException struct {
@@ -1888,12 +1455,6 @@ func (e *InvalidContinuationTokenException) ErrorCode() string {
 	return "InvalidContinuationTokenException"
 }
 func (e *InvalidContinuationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidContinuationTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidContinuationTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified deletion parameter is not valid.
 type InvalidDeletionParameterException struct {
@@ -1913,12 +1474,6 @@ func (e *InvalidDeletionParameterException) ErrorCode() string {
 	return "InvalidDeletionParameterException"
 }
 func (e *InvalidDeletionParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeletionParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeletionParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request description is not valid. Descriptions cannot be more than
 // 1,000 characters.
@@ -1937,12 +1492,6 @@ func (e *InvalidDescriptionException) ErrorMessage() string {
 }
 func (e *InvalidDescriptionException) ErrorCode() string             { return "InvalidDescriptionException" }
 func (e *InvalidDescriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDescriptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDescriptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The destination commit specifier is not valid. You must provide a valid branch
 // name, tag, or full commit ID.
@@ -1965,12 +1514,6 @@ func (e *InvalidDestinationCommitSpecifierException) ErrorCode() string {
 func (e *InvalidDestinationCommitSpecifierException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDestinationCommitSpecifierException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDestinationCommitSpecifierException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified email address either contains one or more characters that are not
 // allowed, or it exceeds the maximum number of characters allowed for an email
@@ -1990,12 +1533,6 @@ func (e *InvalidEmailException) ErrorMessage() string {
 }
 func (e *InvalidEmailException) ErrorCode() string             { return "InvalidEmailException" }
 func (e *InvalidEmailException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEmailException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEmailException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The location of the file is not valid. Make sure that you include the file name
 // and extension.
@@ -2014,12 +1551,6 @@ func (e *InvalidFileLocationException) ErrorMessage() string {
 }
 func (e *InvalidFileLocationException) ErrorCode() string             { return "InvalidFileLocationException" }
 func (e *InvalidFileLocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFileLocationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFileLocationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified file mode permission is not valid. For a list of valid file mode
 // permissions, see PutFile ().
@@ -2038,12 +1569,6 @@ func (e *InvalidFileModeException) ErrorMessage() string {
 }
 func (e *InvalidFileModeException) ErrorCode() string             { return "InvalidFileModeException" }
 func (e *InvalidFileModeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFileModeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFileModeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The position is not valid. Make sure that the line number exists in the version
 // of the file you want to comment on.
@@ -2062,12 +1587,6 @@ func (e *InvalidFilePositionException) ErrorMessage() string {
 }
 func (e *InvalidFilePositionException) ErrorCode() string             { return "InvalidFilePositionException" }
 func (e *InvalidFilePositionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFilePositionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFilePositionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified value for the number of conflict files to return is not valid.
 type InvalidMaxConflictFilesException struct {
@@ -2087,12 +1606,6 @@ func (e *InvalidMaxConflictFilesException) ErrorCode() string {
 	return "InvalidMaxConflictFilesException"
 }
 func (e *InvalidMaxConflictFilesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMaxConflictFilesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMaxConflictFilesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified value for the number of merge hunks to return is not valid.
 type InvalidMaxMergeHunksException struct {
@@ -2110,12 +1623,6 @@ func (e *InvalidMaxMergeHunksException) ErrorMessage() string {
 }
 func (e *InvalidMaxMergeHunksException) ErrorCode() string             { return "InvalidMaxMergeHunksException" }
 func (e *InvalidMaxMergeHunksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMaxMergeHunksException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMaxMergeHunksException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified number of maximum results is not valid.
 type InvalidMaxResultsException struct {
@@ -2133,12 +1640,6 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 }
 func (e *InvalidMaxResultsException) ErrorCode() string             { return "InvalidMaxResultsException" }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMaxResultsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMaxResultsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified merge option is not valid for this operation. Not all merge
 // strategies are supported for all operations.
@@ -2157,12 +1658,6 @@ func (e *InvalidMergeOptionException) ErrorMessage() string {
 }
 func (e *InvalidMergeOptionException) ErrorCode() string             { return "InvalidMergeOptionException" }
 func (e *InvalidMergeOptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMergeOptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMergeOptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified sort order is not valid.
 type InvalidOrderException struct {
@@ -2180,12 +1675,6 @@ func (e *InvalidOrderException) ErrorMessage() string {
 }
 func (e *InvalidOrderException) ErrorCode() string             { return "InvalidOrderException" }
 func (e *InvalidOrderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOrderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOrderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The override status is not valid. Valid statuses are OVERRIDE and REVOKE.
 type InvalidOverrideStatusException struct {
@@ -2203,12 +1692,6 @@ func (e *InvalidOverrideStatusException) ErrorMessage() string {
 }
 func (e *InvalidOverrideStatusException) ErrorCode() string             { return "InvalidOverrideStatusException" }
 func (e *InvalidOverrideStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOverrideStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOverrideStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parent commit ID is not valid. The commit ID cannot be empty, and must match
 // the head commit ID for the branch of the repository where you want to add or
@@ -2228,12 +1711,6 @@ func (e *InvalidParentCommitIdException) ErrorMessage() string {
 }
 func (e *InvalidParentCommitIdException) ErrorCode() string             { return "InvalidParentCommitIdException" }
 func (e *InvalidParentCommitIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParentCommitIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParentCommitIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified path is not valid.
 type InvalidPathException struct {
@@ -2251,12 +1728,6 @@ func (e *InvalidPathException) ErrorMessage() string {
 }
 func (e *InvalidPathException) ErrorCode() string             { return "InvalidPathException" }
 func (e *InvalidPathException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPathException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPathException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request event type is not valid.
 type InvalidPullRequestEventTypeException struct {
@@ -2278,12 +1749,6 @@ func (e *InvalidPullRequestEventTypeException) ErrorCode() string {
 func (e *InvalidPullRequestEventTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidPullRequestEventTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPullRequestEventTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request ID is not valid. Make sure that you have provided the full ID
 // and that the pull request is in the specified repository, and then try again.
@@ -2302,12 +1767,6 @@ func (e *InvalidPullRequestIdException) ErrorMessage() string {
 }
 func (e *InvalidPullRequestIdException) ErrorCode() string             { return "InvalidPullRequestIdException" }
 func (e *InvalidPullRequestIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPullRequestIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPullRequestIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request status is not valid. The only valid values are OPEN and CLOSED.
 type InvalidPullRequestStatusException struct {
@@ -2327,12 +1786,6 @@ func (e *InvalidPullRequestStatusException) ErrorCode() string {
 	return "InvalidPullRequestStatusException"
 }
 func (e *InvalidPullRequestStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPullRequestStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPullRequestStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request status update is not valid. The only valid update is from OPEN
 // to CLOSED.
@@ -2355,12 +1808,6 @@ func (e *InvalidPullRequestStatusUpdateException) ErrorCode() string {
 func (e *InvalidPullRequestStatusUpdateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidPullRequestStatusUpdateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPullRequestStatusUpdateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Resource Name (ARN) of the user or identity is not valid.
 type InvalidReactionUserArnException struct {
@@ -2380,12 +1827,6 @@ func (e *InvalidReactionUserArnException) ErrorCode() string {
 	return "InvalidReactionUserArnException"
 }
 func (e *InvalidReactionUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidReactionUserArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReactionUserArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of the reaction is not valid. For more information, see the AWS
 // CodeCommit User Guide
@@ -2405,12 +1846,6 @@ func (e *InvalidReactionValueException) ErrorMessage() string {
 }
 func (e *InvalidReactionValueException) ErrorCode() string             { return "InvalidReactionValueException" }
 func (e *InvalidReactionValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidReactionValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReactionValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified reference name format is not valid. Reference names must conform
 // to the Git references format (for example, refs/heads/master). For more
@@ -2432,12 +1867,6 @@ func (e *InvalidReferenceNameException) ErrorMessage() string {
 }
 func (e *InvalidReferenceNameException) ErrorCode() string             { return "InvalidReferenceNameException" }
 func (e *InvalidReferenceNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidReferenceNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReferenceNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Either the enum is not in a valid format, or the specified file version enum is
 // not valid in respect to the current file version.
@@ -2459,12 +1888,6 @@ func (e *InvalidRelativeFileVersionEnumException) ErrorCode() string {
 }
 func (e *InvalidRelativeFileVersionEnumException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidRelativeFileVersionEnumException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRelativeFileVersionEnumException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Automerge was specified for resolving the conflict, but the replacement type is
@@ -2488,12 +1911,6 @@ func (e *InvalidReplacementContentException) ErrorCode() string {
 func (e *InvalidReplacementContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidReplacementContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReplacementContentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Automerge was specified for resolving the conflict, but the specified
 // replacement type is not valid.
@@ -2514,12 +1931,6 @@ func (e *InvalidReplacementTypeException) ErrorCode() string {
 	return "InvalidReplacementTypeException"
 }
 func (e *InvalidReplacementTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidReplacementTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReplacementTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository description is not valid.
 type InvalidRepositoryDescriptionException struct {
@@ -2541,12 +1952,6 @@ func (e *InvalidRepositoryDescriptionException) ErrorCode() string {
 func (e *InvalidRepositoryDescriptionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidRepositoryDescriptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryDescriptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified repository name is not valid.  <note> <p>This exception occurs only
 // when a specified repository name is not valid. Other exceptions occur when a
@@ -2567,12 +1972,6 @@ func (e *InvalidRepositoryNameException) ErrorMessage() string {
 }
 func (e *InvalidRepositoryNameException) ErrorCode() string             { return "InvalidRepositoryNameException" }
 func (e *InvalidRepositoryNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRepositoryNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more branch names specified for the trigger is not valid.
 type InvalidRepositoryTriggerBranchNameException struct {
@@ -2594,12 +1993,6 @@ func (e *InvalidRepositoryTriggerBranchNameException) ErrorCode() string {
 func (e *InvalidRepositoryTriggerBranchNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidRepositoryTriggerBranchNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryTriggerBranchNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The custom data provided for the trigger is not valid.
 type InvalidRepositoryTriggerCustomDataException struct {
@@ -2620,12 +2013,6 @@ func (e *InvalidRepositoryTriggerCustomDataException) ErrorCode() string {
 }
 func (e *InvalidRepositoryTriggerCustomDataException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidRepositoryTriggerCustomDataException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryTriggerCustomDataException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The Amazon Resource Name (ARN) for the trigger is not valid for the specified
@@ -2650,12 +2037,6 @@ func (e *InvalidRepositoryTriggerDestinationArnException) ErrorCode() string {
 func (e *InvalidRepositoryTriggerDestinationArnException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidRepositoryTriggerDestinationArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryTriggerDestinationArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more events specified for the trigger is not valid. Check to make sure
 // that all events specified match the requirements for allowed events.
@@ -2678,12 +2059,6 @@ func (e *InvalidRepositoryTriggerEventsException) ErrorCode() string {
 func (e *InvalidRepositoryTriggerEventsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidRepositoryTriggerEventsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryTriggerEventsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The name of the trigger is not valid.
 type InvalidRepositoryTriggerNameException struct {
@@ -2704,12 +2079,6 @@ func (e *InvalidRepositoryTriggerNameException) ErrorCode() string {
 }
 func (e *InvalidRepositoryTriggerNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidRepositoryTriggerNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryTriggerNameException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The AWS Region for the trigger target does not match the AWS Region for the
@@ -2734,12 +2103,6 @@ func (e *InvalidRepositoryTriggerRegionException) ErrorCode() string {
 func (e *InvalidRepositoryTriggerRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidRepositoryTriggerRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRepositoryTriggerRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value for the resource ARN is not valid. For more information about
 // resources in AWS CodeCommit, see CodeCommit Resources and Operations
@@ -2760,12 +2123,6 @@ func (e *InvalidResourceArnException) ErrorMessage() string {
 }
 func (e *InvalidResourceArnException) ErrorCode() string             { return "InvalidResourceArnException" }
 func (e *InvalidResourceArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The revision ID is not valid. Use GetPullRequest to determine the value.
 type InvalidRevisionIdException struct {
@@ -2783,12 +2140,6 @@ func (e *InvalidRevisionIdException) ErrorMessage() string {
 }
 func (e *InvalidRevisionIdException) ErrorCode() string             { return "InvalidRevisionIdException" }
 func (e *InvalidRevisionIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRevisionIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRevisionIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The SHA-256 hash signature for the rule content is not valid.
 type InvalidRuleContentSha256Exception struct {
@@ -2808,12 +2159,6 @@ func (e *InvalidRuleContentSha256Exception) ErrorCode() string {
 	return "InvalidRuleContentSha256Exception"
 }
 func (e *InvalidRuleContentSha256Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRuleContentSha256Exception) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRuleContentSha256Exception) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified sort by value is not valid.
 type InvalidSortByException struct {
@@ -2831,12 +2176,6 @@ func (e *InvalidSortByException) ErrorMessage() string {
 }
 func (e *InvalidSortByException) ErrorCode() string             { return "InvalidSortByException" }
 func (e *InvalidSortByException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSortByException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSortByException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The source commit specifier is not valid. You must provide a valid branch name,
 // tag, or full commit ID.
@@ -2859,12 +2198,6 @@ func (e *InvalidSourceCommitSpecifierException) ErrorCode() string {
 func (e *InvalidSourceCommitSpecifierException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidSourceCommitSpecifierException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSourceCommitSpecifierException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified tag is not valid. Key names cannot be prefixed with aws:.
 type InvalidSystemTagUsageException struct {
@@ -2882,12 +2215,6 @@ func (e *InvalidSystemTagUsageException) ErrorMessage() string {
 }
 func (e *InvalidSystemTagUsageException) ErrorCode() string             { return "InvalidSystemTagUsageException" }
 func (e *InvalidSystemTagUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSystemTagUsageException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSystemTagUsageException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The list of tags is not valid.
 type InvalidTagKeysListException struct {
@@ -2905,12 +2232,6 @@ func (e *InvalidTagKeysListException) ErrorMessage() string {
 }
 func (e *InvalidTagKeysListException) ErrorCode() string             { return "InvalidTagKeysListException" }
 func (e *InvalidTagKeysListException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagKeysListException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagKeysListException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The map of tags is not valid.
 type InvalidTagsMapException struct {
@@ -2928,12 +2249,6 @@ func (e *InvalidTagsMapException) ErrorMessage() string {
 }
 func (e *InvalidTagsMapException) ErrorCode() string             { return "InvalidTagsMapException" }
 func (e *InvalidTagsMapException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagsMapException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagsMapException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified target branch is not valid.
 type InvalidTargetBranchException struct {
@@ -2951,12 +2266,6 @@ func (e *InvalidTargetBranchException) ErrorMessage() string {
 }
 func (e *InvalidTargetBranchException) ErrorCode() string             { return "InvalidTargetBranchException" }
 func (e *InvalidTargetBranchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetBranchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetBranchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target for the pull request is not valid. A target must contain the full
 // values for the repository name, source branch, and destination branch for the
@@ -2976,12 +2285,6 @@ func (e *InvalidTargetException) ErrorMessage() string {
 }
 func (e *InvalidTargetException) ErrorCode() string             { return "InvalidTargetException" }
 func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The targets for the pull request is not valid or not in a valid format. Targets
 // are a list of target objects. Each target object must contain the full values
@@ -3002,12 +2305,6 @@ func (e *InvalidTargetsException) ErrorMessage() string {
 }
 func (e *InvalidTargetsException) ErrorCode() string             { return "InvalidTargetsException" }
 func (e *InvalidTargetsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The title of the pull request is not valid. Pull request titles cannot exceed
 // 100 characters in length.
@@ -3026,12 +2323,6 @@ func (e *InvalidTitleException) ErrorMessage() string {
 }
 func (e *InvalidTitleException) ErrorCode() string             { return "InvalidTitleException" }
 func (e *InvalidTitleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTitleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTitleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request cannot be merged automatically into the destination branch. You
 // must manually merge the branches and resolve any conflicts.
@@ -3050,12 +2341,6 @@ func (e *ManualMergeRequiredException) ErrorMessage() string {
 }
 func (e *ManualMergeRequiredException) ErrorCode() string             { return "ManualMergeRequiredException" }
 func (e *ManualMergeRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ManualMergeRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ManualMergeRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of branches for the trigger was exceeded.
 type MaximumBranchesExceededException struct {
@@ -3075,12 +2360,6 @@ func (e *MaximumBranchesExceededException) ErrorCode() string {
 	return "MaximumBranchesExceededException"
 }
 func (e *MaximumBranchesExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MaximumBranchesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumBranchesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of allowed conflict resolution entries was exceeded.
 type MaximumConflictResolutionEntriesExceededException struct {
@@ -3102,12 +2381,6 @@ func (e *MaximumConflictResolutionEntriesExceededException) ErrorCode() string {
 func (e *MaximumConflictResolutionEntriesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaximumConflictResolutionEntriesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumConflictResolutionEntriesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of files to load exceeds the allowed limit.
 type MaximumFileContentToLoadExceededException struct {
@@ -3128,12 +2401,6 @@ func (e *MaximumFileContentToLoadExceededException) ErrorCode() string {
 }
 func (e *MaximumFileContentToLoadExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaximumFileContentToLoadExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumFileContentToLoadExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The number of specified files to change as part of this commit exceeds the
@@ -3158,12 +2425,6 @@ func (e *MaximumFileEntriesExceededException) ErrorCode() string {
 func (e *MaximumFileEntriesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaximumFileEntriesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumFileEntriesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of items to compare between the source or destination branches and
 // the merge base has exceeded the maximum allowed.
@@ -3186,12 +2447,6 @@ func (e *MaximumItemsToCompareExceededException) ErrorCode() string {
 func (e *MaximumItemsToCompareExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaximumItemsToCompareExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumItemsToCompareExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of approvals required for the approval rule exceeds the maximum
 // number allowed.
@@ -3213,12 +2468,6 @@ func (e *MaximumNumberOfApprovalsExceededException) ErrorCode() string {
 }
 func (e *MaximumNumberOfApprovalsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaximumNumberOfApprovalsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumNumberOfApprovalsExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You cannot create the pull request because the repository has too many open pull
@@ -3243,12 +2492,6 @@ func (e *MaximumOpenPullRequestsExceededException) ErrorCode() string {
 func (e *MaximumOpenPullRequestsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaximumOpenPullRequestsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumOpenPullRequestsExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of allowed repository names was exceeded. Currently, this
 // number is 100.
@@ -3271,12 +2514,6 @@ func (e *MaximumRepositoryNamesExceededException) ErrorCode() string {
 func (e *MaximumRepositoryNamesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaximumRepositoryNamesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumRepositoryNamesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of triggers allowed for the repository was exceeded.
 type MaximumRepositoryTriggersExceededException struct {
@@ -3297,12 +2534,6 @@ func (e *MaximumRepositoryTriggersExceededException) ErrorCode() string {
 }
 func (e *MaximumRepositoryTriggersExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MaximumRepositoryTriggersExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumRepositoryTriggersExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of approval rule templates for a repository has been
@@ -3327,12 +2558,6 @@ func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) ErrorCode() stri
 func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A merge option or stategy is required, and none was provided.
 type MergeOptionRequiredException struct {
@@ -3350,12 +2575,6 @@ func (e *MergeOptionRequiredException) ErrorMessage() string {
 }
 func (e *MergeOptionRequiredException) ErrorCode() string             { return "MergeOptionRequiredException" }
 func (e *MergeOptionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MergeOptionRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MergeOptionRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // More than one conflict resolution entries exists for the conflict. A conflict
 // can have only one conflict resolution entry.
@@ -3377,12 +2596,6 @@ func (e *MultipleConflictResolutionEntriesException) ErrorCode() string {
 }
 func (e *MultipleConflictResolutionEntriesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *MultipleConflictResolutionEntriesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MultipleConflictResolutionEntriesException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You cannot include more than one repository in a pull request. Make sure you
@@ -3406,12 +2619,6 @@ func (e *MultipleRepositoriesInPullRequestException) ErrorCode() string {
 func (e *MultipleRepositoriesInPullRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MultipleRepositoriesInPullRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MultipleRepositoriesInPullRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The user name is not valid because it has exceeded the character limit for
 // author names.
@@ -3430,12 +2637,6 @@ func (e *NameLengthExceededException) ErrorMessage() string {
 }
 func (e *NameLengthExceededException) ErrorCode() string             { return "NameLengthExceededException" }
 func (e *NameLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NameLengthExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NameLengthExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because no changes will be made to the repository
 // as a result of this commit. A commit must contain at least one change.
@@ -3454,12 +2655,6 @@ func (e *NoChangeException) ErrorMessage() string {
 }
 func (e *NoChangeException) ErrorCode() string             { return "NoChangeException" }
 func (e *NoChangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoChangeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoChangeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The approval rule cannot be added. The pull request has the maximum number of
 // approval rules associated with it.
@@ -3478,12 +2673,6 @@ func (e *NumberOfRulesExceededException) ErrorMessage() string {
 }
 func (e *NumberOfRulesExceededException) ErrorCode() string             { return "NumberOfRulesExceededException" }
 func (e *NumberOfRulesExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NumberOfRulesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NumberOfRulesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of approval rule templates has been exceeded for this AWS
 // Region.
@@ -3506,12 +2695,6 @@ func (e *NumberOfRuleTemplatesExceededException) ErrorCode() string {
 func (e *NumberOfRuleTemplatesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NumberOfRuleTemplatesExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NumberOfRuleTemplatesExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request has already had its approval rules set to override.
 type OverrideAlreadySetException struct {
@@ -3529,12 +2712,6 @@ func (e *OverrideAlreadySetException) ErrorMessage() string {
 }
 func (e *OverrideAlreadySetException) ErrorCode() string             { return "OverrideAlreadySetException" }
 func (e *OverrideAlreadySetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OverrideAlreadySetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OverrideAlreadySetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An override status is required, but no value was provided. Valid values include
 // OVERRIDE and REVOKE.
@@ -3555,12 +2732,6 @@ func (e *OverrideStatusRequiredException) ErrorCode() string {
 	return "OverrideStatusRequiredException"
 }
 func (e *OverrideStatusRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OverrideStatusRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OverrideStatusRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parent commit ID is not valid because it does not exist. The specified
 // parent commit ID does not exist in the specified branch of the repository.
@@ -3581,12 +2752,6 @@ func (e *ParentCommitDoesNotExistException) ErrorCode() string {
 	return "ParentCommitDoesNotExistException"
 }
 func (e *ParentCommitDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParentCommitDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParentCommitDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The file could not be added because the provided parent commit ID is not the
 // current tip of the specified branch. To view the full commit ID of the current
@@ -3608,12 +2773,6 @@ func (e *ParentCommitIdOutdatedException) ErrorCode() string {
 	return "ParentCommitIdOutdatedException"
 }
 func (e *ParentCommitIdOutdatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParentCommitIdOutdatedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParentCommitIdOutdatedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A parent commit ID is required. To view the full commit ID of a branch in a
 // repository, use GetBranch () or a Git command (for example, git pull or git
@@ -3635,12 +2794,6 @@ func (e *ParentCommitIdRequiredException) ErrorCode() string {
 	return "ParentCommitIdRequiredException"
 }
 func (e *ParentCommitIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParentCommitIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParentCommitIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified path does not exist.
 type PathDoesNotExistException struct {
@@ -3658,12 +2811,6 @@ func (e *PathDoesNotExistException) ErrorMessage() string {
 }
 func (e *PathDoesNotExistException) ErrorCode() string             { return "PathDoesNotExistException" }
 func (e *PathDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PathDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PathDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The folderPath for a location cannot be null.
 type PathRequiredException struct {
@@ -3681,12 +2828,6 @@ func (e *PathRequiredException) ErrorMessage() string {
 }
 func (e *PathRequiredException) ErrorCode() string             { return "PathRequiredException" }
 func (e *PathRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PathRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PathRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request status cannot be updated because it is already closed.
 type PullRequestAlreadyClosedException struct {
@@ -3706,12 +2847,6 @@ func (e *PullRequestAlreadyClosedException) ErrorCode() string {
 	return "PullRequestAlreadyClosedException"
 }
 func (e *PullRequestAlreadyClosedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PullRequestAlreadyClosedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PullRequestAlreadyClosedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request cannot be merged because one or more approval rules applied to
 // the pull request have conditions that have not been met.
@@ -3733,12 +2868,6 @@ func (e *PullRequestApprovalRulesNotSatisfiedException) ErrorCode() string {
 }
 func (e *PullRequestApprovalRulesNotSatisfiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *PullRequestApprovalRulesNotSatisfiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PullRequestApprovalRulesNotSatisfiedException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The approval cannot be applied because the user approving the pull request
@@ -3763,12 +2892,6 @@ func (e *PullRequestCannotBeApprovedByAuthorException) ErrorCode() string {
 func (e *PullRequestCannotBeApprovedByAuthorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *PullRequestCannotBeApprovedByAuthorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PullRequestCannotBeApprovedByAuthorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pull request ID could not be found. Make sure that you have specified the
 // correct repository name and pull request ID, and then try again.
@@ -3789,12 +2912,6 @@ func (e *PullRequestDoesNotExistException) ErrorCode() string {
 	return "PullRequestDoesNotExistException"
 }
 func (e *PullRequestDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PullRequestDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PullRequestDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A pull request ID is required, but none was provided.
 type PullRequestIdRequiredException struct {
@@ -3812,12 +2929,6 @@ func (e *PullRequestIdRequiredException) ErrorMessage() string {
 }
 func (e *PullRequestIdRequiredException) ErrorCode() string             { return "PullRequestIdRequiredException" }
 func (e *PullRequestIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PullRequestIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PullRequestIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A pull request status is required, but none was provided.
 type PullRequestStatusRequiredException struct {
@@ -3839,12 +2950,6 @@ func (e *PullRequestStatusRequiredException) ErrorCode() string {
 func (e *PullRequestStatusRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *PullRequestStatusRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PullRequestStatusRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because one or more files specified in the commit
 // reference both a file and a folder.
@@ -3863,12 +2968,6 @@ func (e *PutFileEntryConflictException) ErrorMessage() string {
 }
 func (e *PutFileEntryConflictException) ErrorCode() string             { return "PutFileEntryConflictException" }
 func (e *PutFileEntryConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PutFileEntryConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PutFileEntryConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of reactions has been exceeded. Reactions are limited to one reaction
 // per user for each individual comment ID.
@@ -3887,12 +2986,6 @@ func (e *ReactionLimitExceededException) ErrorMessage() string {
 }
 func (e *ReactionLimitExceededException) ErrorCode() string             { return "ReactionLimitExceededException" }
 func (e *ReactionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReactionLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReactionLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A reaction value is required.
 type ReactionValueRequiredException struct {
@@ -3910,12 +3003,6 @@ func (e *ReactionValueRequiredException) ErrorMessage() string {
 }
 func (e *ReactionValueRequiredException) ErrorCode() string             { return "ReactionValueRequiredException" }
 func (e *ReactionValueRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReactionValueRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReactionValueRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified reference does not exist. You must provide a full commit ID.
 type ReferenceDoesNotExistException struct {
@@ -3933,12 +3020,6 @@ func (e *ReferenceDoesNotExistException) ErrorMessage() string {
 }
 func (e *ReferenceDoesNotExistException) ErrorCode() string             { return "ReferenceDoesNotExistException" }
 func (e *ReferenceDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReferenceDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReferenceDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A reference name is required, but none was provided.
 type ReferenceNameRequiredException struct {
@@ -3956,12 +3037,6 @@ func (e *ReferenceNameRequiredException) ErrorMessage() string {
 }
 func (e *ReferenceNameRequiredException) ErrorCode() string             { return "ReferenceNameRequiredException" }
 func (e *ReferenceNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReferenceNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReferenceNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified reference is not a supported type.
 type ReferenceTypeNotSupportedException struct {
@@ -3982,12 +3057,6 @@ func (e *ReferenceTypeNotSupportedException) ErrorCode() string {
 }
 func (e *ReferenceTypeNotSupportedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ReferenceTypeNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReferenceTypeNotSupportedException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // USE_NEW_CONTENT was specified, but no replacement content has been provided.
@@ -4010,12 +3079,6 @@ func (e *ReplacementContentRequiredException) ErrorCode() string {
 func (e *ReplacementContentRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReplacementContentRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplacementContentRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A replacement type is required.
 type ReplacementTypeRequiredException struct {
@@ -4035,12 +3098,6 @@ func (e *ReplacementTypeRequiredException) ErrorCode() string {
 	return "ReplacementTypeRequiredException"
 }
 func (e *ReplacementTypeRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReplacementTypeRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplacementTypeRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository does not exist.
 type RepositoryDoesNotExistException struct {
@@ -4060,12 +3117,6 @@ func (e *RepositoryDoesNotExistException) ErrorCode() string {
 	return "RepositoryDoesNotExistException"
 }
 func (e *RepositoryDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A repository resource limit was exceeded.
 type RepositoryLimitExceededException struct {
@@ -4085,12 +3136,6 @@ func (e *RepositoryLimitExceededException) ErrorCode() string {
 	return "RepositoryLimitExceededException"
 }
 func (e *RepositoryLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified repository name already exists.
 type RepositoryNameExistsException struct {
@@ -4108,12 +3153,6 @@ func (e *RepositoryNameExistsException) ErrorMessage() string {
 }
 func (e *RepositoryNameExistsException) ErrorCode() string             { return "RepositoryNameExistsException" }
 func (e *RepositoryNameExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryNameExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryNameExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A repository name is required, but was not specified.
 type RepositoryNameRequiredException struct {
@@ -4133,12 +3172,6 @@ func (e *RepositoryNameRequiredException) ErrorCode() string {
 	return "RepositoryNameRequiredException"
 }
 func (e *RepositoryNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // At least one repository name object is required, but was not specified.
 type RepositoryNamesRequiredException struct {
@@ -4158,12 +3191,6 @@ func (e *RepositoryNamesRequiredException) ErrorCode() string {
 	return "RepositoryNamesRequiredException"
 }
 func (e *RepositoryNamesRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RepositoryNamesRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryNamesRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The repository does not contain any pull requests with that pull request ID. Use
 // GetPullRequest to verify the correct repository name for the pull request ID.
@@ -4185,12 +3212,6 @@ func (e *RepositoryNotAssociatedWithPullRequestException) ErrorCode() string {
 }
 func (e *RepositoryNotAssociatedWithPullRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *RepositoryNotAssociatedWithPullRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryNotAssociatedWithPullRequestException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // At least one branch name is required, but was not specified in the trigger
@@ -4214,12 +3235,6 @@ func (e *RepositoryTriggerBranchNameListRequiredException) ErrorCode() string {
 func (e *RepositoryTriggerBranchNameListRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *RepositoryTriggerBranchNameListRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryTriggerBranchNameListRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A destination ARN for the target service for the trigger is required, but was
 // not specified.
@@ -4242,12 +3257,6 @@ func (e *RepositoryTriggerDestinationArnRequiredException) ErrorCode() string {
 func (e *RepositoryTriggerDestinationArnRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *RepositoryTriggerDestinationArnRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryTriggerDestinationArnRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // At least one event for the trigger is required, but was not specified.
 type RepositoryTriggerEventsListRequiredException struct {
@@ -4268,12 +3277,6 @@ func (e *RepositoryTriggerEventsListRequiredException) ErrorCode() string {
 }
 func (e *RepositoryTriggerEventsListRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *RepositoryTriggerEventsListRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryTriggerEventsListRequiredException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // A name for the trigger is required, but was not specified.
@@ -4296,12 +3299,6 @@ func (e *RepositoryTriggerNameRequiredException) ErrorCode() string {
 func (e *RepositoryTriggerNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *RepositoryTriggerNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryTriggerNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The list of triggers for the repository is required, but was not specified.
 type RepositoryTriggersListRequiredException struct {
@@ -4322,12 +3319,6 @@ func (e *RepositoryTriggersListRequiredException) ErrorCode() string {
 }
 func (e *RepositoryTriggersListRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *RepositoryTriggersListRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RepositoryTriggersListRequiredException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // A valid Amazon Resource Name (ARN) for an AWS CodeCommit resource is required.
@@ -4350,12 +3341,6 @@ func (e *ResourceArnRequiredException) ErrorMessage() string {
 }
 func (e *ResourceArnRequiredException) ErrorCode() string             { return "ResourceArnRequiredException" }
 func (e *ResourceArnRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceArnRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceArnRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because one of the changes specifies copying or
 // moving a .gitkeep file.
@@ -4374,12 +3359,6 @@ func (e *RestrictedSourceFileException) ErrorMessage() string {
 }
 func (e *RestrictedSourceFileException) ErrorCode() string             { return "RestrictedSourceFileException" }
 func (e *RestrictedSourceFileException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RestrictedSourceFileException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RestrictedSourceFileException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A revision ID is required, but was not provided.
 type RevisionIdRequiredException struct {
@@ -4397,12 +3376,6 @@ func (e *RevisionIdRequiredException) ErrorMessage() string {
 }
 func (e *RevisionIdRequiredException) ErrorCode() string             { return "RevisionIdRequiredException" }
 func (e *RevisionIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RevisionIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RevisionIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The revision ID provided in the request does not match the current revision ID.
 // Use GetPullRequest to retrieve the current revision ID.
@@ -4421,12 +3394,6 @@ func (e *RevisionNotCurrentException) ErrorMessage() string {
 }
 func (e *RevisionNotCurrentException) ErrorCode() string             { return "RevisionNotCurrentException" }
 func (e *RevisionNotCurrentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RevisionNotCurrentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RevisionNotCurrentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The file was not added or updated because the content of the file is exactly the
 // same as the content of that file in the repository and branch that you
@@ -4446,12 +3413,6 @@ func (e *SameFileContentException) ErrorMessage() string {
 }
 func (e *SameFileContentException) ErrorCode() string             { return "SameFileContentException" }
 func (e *SameFileContentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SameFileContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SameFileContentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The commit cannot be created because one or more changes in this commit
 // duplicate actions in the same file path. For example, you cannot make the same
@@ -4472,12 +3433,6 @@ func (e *SamePathRequestException) ErrorMessage() string {
 }
 func (e *SamePathRequestException) ErrorCode() string             { return "SamePathRequestException" }
 func (e *SamePathRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SamePathRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SamePathRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The source branch and destination branch for the pull request are the same. You
 // must specify different branches for the source and destination.
@@ -4499,12 +3454,6 @@ func (e *SourceAndDestinationAreSameException) ErrorCode() string {
 }
 func (e *SourceAndDestinationAreSameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *SourceAndDestinationAreSameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SourceAndDestinationAreSameException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The commit cannot be created because no source files or file content have been
@@ -4528,12 +3477,6 @@ func (e *SourceFileOrContentRequiredException) ErrorCode() string {
 func (e *SourceFileOrContentRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SourceFileOrContentRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SourceFileOrContentRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A list of tag keys is required. The list cannot be empty or null.
 type TagKeysListRequiredException struct {
@@ -4551,12 +3494,6 @@ func (e *TagKeysListRequiredException) ErrorMessage() string {
 }
 func (e *TagKeysListRequiredException) ErrorCode() string             { return "TagKeysListRequiredException" }
 func (e *TagKeysListRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagKeysListRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagKeysListRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag policy is not valid.
 type TagPolicyException struct {
@@ -4574,12 +3511,6 @@ func (e *TagPolicyException) ErrorMessage() string {
 }
 func (e *TagPolicyException) ErrorCode() string             { return "TagPolicyException" }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A map of tags is required.
 type TagsMapRequiredException struct {
@@ -4597,12 +3528,6 @@ func (e *TagsMapRequiredException) ErrorMessage() string {
 }
 func (e *TagsMapRequiredException) ErrorCode() string             { return "TagsMapRequiredException" }
 func (e *TagsMapRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagsMapRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagsMapRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A pull request target is required. It cannot be empty or null. A pull request
 // target must contain the full values for the repository name, source branch, and
@@ -4622,12 +3547,6 @@ func (e *TargetRequiredException) ErrorMessage() string {
 }
 func (e *TargetRequiredException) ErrorCode() string             { return "TargetRequiredException" }
 func (e *TargetRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An array of target objects is required. It cannot be empty or null.
 type TargetsRequiredException struct {
@@ -4645,12 +3564,6 @@ func (e *TargetsRequiredException) ErrorMessage() string {
 }
 func (e *TargetsRequiredException) ErrorCode() string             { return "TargetsRequiredException" }
 func (e *TargetsRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetsRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetsRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tip of the source branch in the destination repository does not match the
 // tip of the source branch specified in your request. The pull request might have
@@ -4674,12 +3587,6 @@ func (e *TipOfSourceReferenceIsDifferentException) ErrorCode() string {
 func (e *TipOfSourceReferenceIsDifferentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TipOfSourceReferenceIsDifferentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TipOfSourceReferenceIsDifferentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The divergence between the tips of the provided commit specifiers is too great
 // to determine whether there might be any merge conflicts. Locally compare the
@@ -4701,12 +3608,6 @@ func (e *TipsDivergenceExceededException) ErrorCode() string {
 	return "TipsDivergenceExceededException"
 }
 func (e *TipsDivergenceExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TipsDivergenceExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TipsDivergenceExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A pull request title is required. It cannot be empty or null.
 type TitleRequiredException struct {
@@ -4724,12 +3625,6 @@ func (e *TitleRequiredException) ErrorMessage() string {
 }
 func (e *TitleRequiredException) ErrorCode() string             { return "TitleRequiredException" }
 func (e *TitleRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TitleRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TitleRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of tags for an AWS CodeCommit resource has been exceeded.
 type TooManyTagsException struct {
@@ -4747,9 +3642,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

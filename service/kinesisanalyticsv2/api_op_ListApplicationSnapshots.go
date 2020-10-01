@@ -56,20 +56,27 @@ func (c *Client) ListApplicationSnapshots(ctx context.Context, params *ListAppli
 }
 
 type ListApplicationSnapshotsInput struct {
+
 	// The maximum number of application snapshots to list.
 	Limit *int32
+
 	// Use this parameter if you receive a NextToken response in a previous request
 	// that indicates that there is more output available. Set it to the value of the
 	// previous call's NextToken response to indicate where the output should continue
 	// from.
 	NextToken *string
+
 	// The name of an existing application.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 type ListApplicationSnapshotsOutput struct {
+
 	// A collection of objects containing information about the application snapshots.
 	SnapshotSummaries []*types.SnapshotDetails
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

@@ -58,6 +58,7 @@ type EnableSharingWithAwsOrganizationInput struct {
 }
 
 type EnableSharingWithAwsOrganizationOutput struct {
+
 	// Indicates whether the request succeeded.
 	ReturnValue *bool
 

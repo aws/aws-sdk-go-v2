@@ -55,11 +55,15 @@ func (c *Client) StopTrigger(ctx context.Context, params *StopTriggerInput, optF
 }
 
 type StopTriggerInput struct {
+
 	// The name of the trigger to stop.
+	//
+	// This member is required.
 	Name *string
 }
 
 type StopTriggerOutput struct {
+
 	// The name of the trigger that was stopped.
 	Name *string
 

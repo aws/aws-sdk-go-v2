@@ -56,21 +56,30 @@ func (c *Client) CreateDeviceDefinitionVersion(ctx context.Context, params *Crea
 }
 
 type CreateDeviceDefinitionVersionInput struct {
+
 	// The ID of the device definition.
+	//
+	// This member is required.
 	DeviceDefinitionId *string
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
 	// A list of devices in the definition version.
 	Devices []*types.Device
 }
 
 type CreateDeviceDefinitionVersionOutput struct {
+
 	// The ID of the version.
 	Version *string
+
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string
+
 	// The ID of the parent definition that the version is associated with.
 	Id *string
+
 	// The ARN of the version.
 	Arn *string
 

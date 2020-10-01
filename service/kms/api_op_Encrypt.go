@@ -113,10 +113,12 @@ func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...fu
 }
 
 type EncryptInput struct {
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// A unique identifier for the customer master key (CMK). To specify a CMK, use its
 	// key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an
 	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
@@ -137,13 +139,17 @@ type EncryptInput struct {
 	// To get the key ID and key
 	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
 	// alias ARN, use ListAliases ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// Specifies the encryption algorithm that AWS KMS will use to encrypt the
 	// plaintext message. The algorithm must be compatible with the CMK that you
 	// specify. This parameter is required only for asymmetric CMKs. The default value,
 	// SYMMETRIC_DEFAULT, is the algorithm used for symmetric CMKs. If you are using an
 	// asymmetric CMK, we recommend RSAES_OAEP_SHA_256.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
+
 	// Specifies the encryption context that will be used to encrypt the data. An
 	// encryption context is valid only for cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
@@ -157,18 +163,24 @@ type EncryptInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide.
 	EncryptionContext map[string]*string
+
 	// Data to be encrypted.
+	//
+	// This member is required.
 	Plaintext []byte
 }
 
 type EncryptOutput struct {
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK that was used to encrypt the plaintext.
 	KeyId *string
+
 	// The encrypted plaintext. When you use the HTTP API or the AWS CLI, the value is
 	// Base64-encoded. Otherwise, it is not Base64-encoded.
 	CiphertextBlob []byte
+
 	// The encryption algorithm that was used to encrypt the plaintext.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
 

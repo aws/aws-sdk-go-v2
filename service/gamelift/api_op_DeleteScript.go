@@ -74,8 +74,11 @@ func (c *Client) DeleteScript(ctx context.Context, params *DeleteScriptInput, op
 }
 
 type DeleteScriptInput struct {
+
 	// A unique identifier for a Realtime script to delete. You can use either the
 	// script ID or ARN value.
+	//
+	// This member is required.
 	ScriptId *string
 }
 

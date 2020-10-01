@@ -56,9 +56,13 @@ func (c *Client) ListFargateProfiles(ctx context.Context, params *ListFargatePro
 }
 
 type ListFargateProfilesInput struct {
+
 	// The name of the Amazon EKS cluster that you would like to listFargate profiles
 	// in.
+	//
+	// This member is required.
 	ClusterName *string
+
 	// The maximum number of Fargate profile results returned by ListFargateProfiles in
 	// paginated output. When you use this parameter, ListFargateProfiles returns only
 	// maxResults results in a single page along with a nextToken response element. You
@@ -67,6 +71,7 @@ type ListFargateProfilesInput struct {
 	// between 1 and 100. If you don't use this parameter, ListFargateProfiles returns
 	// up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated ListFargateProfiles
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -75,11 +80,13 @@ type ListFargateProfilesInput struct {
 }
 
 type ListFargateProfilesOutput struct {
+
 	// The nextToken value to include in a future ListFargateProfiles request. When the
 	// results of a ListFargateProfiles request exceed maxResults, you can use this
 	// value to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
+
 	// A list of all of the Fargate profiles associated with the specified cluster.
 	FargateProfileNames []*string
 

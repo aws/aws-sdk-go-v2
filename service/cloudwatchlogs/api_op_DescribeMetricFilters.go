@@ -57,28 +57,36 @@ func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetr
 }
 
 type DescribeMetricFiltersInput struct {
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The name of the log group.
 	LogGroupName *string
+
 	// Filters results to include only those with the specified metric name. If you
 	// include this parameter in your request, you must also include the
 	// metricNamespace parameter.
 	MetricName *string
+
 	// The prefix to match.
 	FilterNamePrefix *string
+
 	// The maximum number of items returned. If you don't specify a value, the default
 	// is up to 50 items.
 	Limit *int32
+
 	// Filters results to include only those in the specified namespace. If you include
 	// this parameter in your request, you must also include the metricName parameter.
 	MetricNamespace *string
 }
 
 type DescribeMetricFiltersOutput struct {
+
 	// The metric filters.
 	MetricFilters []*types.MetricFilter
+
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 

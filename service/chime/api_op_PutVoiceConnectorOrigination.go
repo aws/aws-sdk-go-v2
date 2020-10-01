@@ -58,13 +58,20 @@ func (c *Client) PutVoiceConnectorOrigination(ctx context.Context, params *PutVo
 }
 
 type PutVoiceConnectorOriginationInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
+
 	// The origination setting details to add.
+	//
+	// This member is required.
 	Origination *types.Origination
 }
 
 type PutVoiceConnectorOriginationOutput struct {
+
 	// The updated origination setting details.
 	Origination *types.Origination
 

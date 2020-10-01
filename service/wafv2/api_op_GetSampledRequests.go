@@ -68,23 +68,36 @@ func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledReque
 }
 
 type GetSampledRequestsInput struct {
+
 	// The Amazon resource name (ARN) of the WebACL for which you want a sample of
 	// requests.
+	//
+	// This member is required.
 	WebAclArn *string
+
 	// The start date and time and the end date and time of the range for which you
 	// want GetSampledRequests to return a sample of requests. You must specify the
 	// times in Coordinated Universal Time (UTC) format. UTC format includes the
 	// special designator, Z. For example, "2016-09-27T14:50Z". You can specify any
 	// time range in the previous three hours.
+	//
+	// This member is required.
 	TimeWindow *types.TimeWindow
+
 	// The number of requests that you want AWS WAF to return from among the first
 	// 5,000 requests that your AWS resource received during the time range. If your
 	// resource received fewer requests than the value of MaxItems, GetSampledRequests
 	// returns information about all of them.
+	//
+	// This member is required.
 	MaxItems *int64
+
 	// The metric name assigned to the Rule or RuleGroup for which you want a sample of
 	// requests.
+	//
+	// This member is required.
 	RuleMetricName *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -95,20 +108,25 @@ type GetSampledRequestsInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
 }
 
 type GetSampledRequestsOutput struct {
+
 	// Usually, TimeWindow is the time range that you specified in the
 	// GetSampledRequests request. However, if your AWS resource received more than
 	// 5,000 requests during the time range that you specified in the request,
 	// GetSampledRequests returns the time range for the first 5,000 requests. Times
 	// are in Coordinated Universal Time (UTC) format.
 	TimeWindow *types.TimeWindow
+
 	// The total number of requests from which GetSampledRequests got a sample of
 	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
 	// every request that your AWS resource received during the specified time range.
 	PopulationSize *int64
+
 	// A complex type that contains detailed information about each of the requests in
 	// the sample.
 	SampledRequests []*types.SampledHTTPRequest

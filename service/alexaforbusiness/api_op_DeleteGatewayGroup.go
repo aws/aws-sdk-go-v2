@@ -55,7 +55,10 @@ func (c *Client) DeleteGatewayGroup(ctx context.Context, params *DeleteGatewayGr
 }
 
 type DeleteGatewayGroupInput struct {
+
 	// The ARN of the gateway group to delete.
+	//
+	// This member is required.
 	GatewayGroupArn *string
 }
 

@@ -61,20 +61,29 @@ func (c *Client) ListDeadLetterSourceQueues(ctx context.Context, params *ListDea
 
 //
 type ListDeadLetterSourceQueuesInput struct {
+
 	// The URL of a dead-letter queue. Queue URLs and names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// Maximum number of results to include in the response.
 	MaxResults *int32
+
 	// Pagination token to request the next set of results.
 	NextToken *string
 }
 
 // A list of your dead letter source queues.
 type ListDeadLetterSourceQueuesOutput struct {
+
 	// Pagination token to include in the next request.
 	NextToken *string
+
 	// A list of source queue URLs that have the RedrivePolicy queue attribute
 	// configured with a dead-letter queue.
+	//
+	// This member is required.
 	QueueUrls []*string
 
 	// Metadata pertaining to the operation's result.

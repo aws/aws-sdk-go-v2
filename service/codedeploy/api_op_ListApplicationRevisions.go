@@ -57,14 +57,20 @@ func (c *Client) ListApplicationRevisions(ctx context.Context, params *ListAppli
 
 // Represents the input of a ListApplicationRevisions operation.
 type ListApplicationRevisionsInput struct {
+
 	// An Amazon S3 bucket name to limit the search for revisions. If set to null, all
 	// of the user's buckets are searched.
 	S3Bucket *string
+
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
 	S3KeyPrefix *string
+
 	// The column name to use to sort the list results:
 	//
 	//     * registerTime: Sort by
@@ -80,6 +86,7 @@ type ListApplicationRevisionsInput struct {
 	// If not specified or set to null, the results are returned in an
 	// arbitrary order.
 	SortBy types.ApplicationRevisionSortBy
+
 	// Whether to list revisions based on whether the revision is the target revision
 	// of a deployment group:
 	//
@@ -91,9 +98,11 @@ type ListApplicationRevisionsInput struct {
 	//
 	//     * ignore: List all revisions.
 	Deployed types.ListStateFilterAction
+
 	// An identifier returned from the previous ListApplicationRevisions call. It can
 	// be used to return the next set of applications in the list.
 	NextToken *string
+
 	// The order in which to sort the list results:
 	//
 	//     * ascending: ascending
@@ -109,10 +118,12 @@ type ListApplicationRevisionsInput struct {
 
 // Represents the output of a ListApplicationRevisions operation.
 type ListApplicationRevisionsOutput struct {
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list application revisions call to return the next
 	// set of application revisions in the list.
 	NextToken *string
+
 	// A list of locations that contain the matching revisions.
 	Revisions []*types.RevisionLocation
 

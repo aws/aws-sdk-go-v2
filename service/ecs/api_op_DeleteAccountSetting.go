@@ -57,12 +57,14 @@ func (c *Client) DeleteAccountSetting(ctx context.Context, params *DeleteAccount
 }
 
 type DeleteAccountSettingInput struct {
+
 	// The ARN of the principal, which can be an IAM user, IAM role, or the root user.
 	// If you specify the root user, it disables the account setting for all IAM users,
 	// IAM roles, and the root user of the account unless an IAM user or role
 	// explicitly overrides these settings. If this field is omitted, the setting is
 	// changed only for the authenticated user.
 	PrincipalArn *string
+
 	// The resource name for which to disable the account setting. If
 	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
 	// affected. If taskLongArnFormat is specified, the ARN and resource ID for your
@@ -70,10 +72,13 @@ type DeleteAccountSettingInput struct {
 	// the ARN and resource ID for your Amazon ECS container instances is affected. If
 	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
 	// instances is affected.
+	//
+	// This member is required.
 	Name types.SettingName
 }
 
 type DeleteAccountSettingOutput struct {
+
 	// The account setting for the specified principal ARN.
 	Setting *types.Setting
 

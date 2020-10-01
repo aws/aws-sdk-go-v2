@@ -57,10 +57,16 @@ func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optF
 }
 
 type DisableUserInput struct {
+
 	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// This member is required.
 	AuthenticationType types.AuthenticationType
+
 	// The email address of the user.  <note> <p>Users' email addresses are
 	// case-sensitive.</p> </note>
+	//
+	// This member is required.
 	UserName *string
 }
 

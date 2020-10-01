@@ -57,34 +57,46 @@ func (c *Client) GetApiKeys(ctx context.Context, params *GetApiKeysInput, optFns
 
 // A request to get information about the current ApiKeys () resource.
 type GetApiKeysInput struct {
+
 	// The name of queried API keys.
 	NameQuery *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	// The identifier of a customer in AWS Marketplace or an external system, such as a
 	// developer portal.
-	CustomerId       *string
+	CustomerId *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// A boolean flag to specify whether (true) or not (false) the result contains key
 	// values.
 	IncludeValues *bool
-	Title         *string
+
+	Title *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
-	Name  *string
+
+	Name *string
 }
 
 // Represents a collection of API keys as represented by an ApiKeys () resource.
 // Use API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type GetApiKeysOutput struct {
+
 	// A list of warning messages logged during the import of API keys when the
 	// failOnWarnings option is set to true.
 	Warnings []*string
+
 	// The current page of elements from this collection.
 	Items []*types.ApiKey
+
 	// The current pagination position in the paged result set.
 	Position *string
 

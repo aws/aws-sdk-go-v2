@@ -58,11 +58,18 @@ func (c *Client) ImportMigrationTask(ctx context.Context, params *ImportMigratio
 }
 
 type ImportMigrationTaskInput struct {
+
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
+	//
+	// This member is required.
 	MigrationTaskName *string
+
 	// The name of the ProgressUpdateStream. >
+	//
+	// This member is required.
 	ProgressUpdateStream *string
+
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun *bool

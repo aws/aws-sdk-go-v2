@@ -56,10 +56,15 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 }
 
 type ListDataSourcesInput struct {
+
 	// The identifier of the index that contains the data source.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The maximum number of data sources to return.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
 	// this pagination token to retrieve the next set of data sources
@@ -68,9 +73,11 @@ type ListDataSourcesInput struct {
 }
 
 type ListDataSourcesOutput struct {
+
 	// If the response is truncated, Amazon Kendra returns this token that you can use
 	// in the subsequent request to retrieve the next set of data sources.
 	NextToken *string
+
 	// An array of summary information for one or more data sources.
 	SummaryItems []*types.DataSourceSummary
 

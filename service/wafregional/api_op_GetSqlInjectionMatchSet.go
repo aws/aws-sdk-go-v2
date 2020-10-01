@@ -64,14 +64,18 @@ func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInje
 
 // A request to get a SqlInjectionMatchSet ().
 type GetSqlInjectionMatchSetInput struct {
+
 	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet () that you want to get.
 	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet () and by
 	// ListSqlInjectionMatchSets ().
+	//
+	// This member is required.
 	SqlInjectionMatchSetId *string
 }
 
 // The response to a GetSqlInjectionMatchSet () request.
 type GetSqlInjectionMatchSetOutput struct {
+
 	// Information about the SqlInjectionMatchSet () that you specified in the
 	// GetSqlInjectionMatchSet request. For more information, see the following
 	// topics:

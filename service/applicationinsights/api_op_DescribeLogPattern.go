@@ -56,17 +56,28 @@ func (c *Client) DescribeLogPattern(ctx context.Context, params *DescribeLogPatt
 }
 
 type DescribeLogPatternInput struct {
+
 	// The name of the log pattern.
+	//
+	// This member is required.
 	PatternName *string
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The name of the log pattern set.
+	//
+	// This member is required.
 	PatternSetName *string
 }
 
 type DescribeLogPatternOutput struct {
+
 	// The successfully created log pattern.
 	LogPattern *types.LogPattern
+
 	// The name of the resource group.
 	ResourceGroupName *string
 

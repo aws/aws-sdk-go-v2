@@ -55,11 +55,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The keys of the tags to be removed.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The Amazon Resource Name (ARN) of the resource from which to delete tags.
 	// Currently, the supported resources are Amazon ECS capacity providers, tasks,
 	// services, task definitions, clusters, and container instances.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

@@ -57,11 +57,15 @@ func (c *Client) DescribeEntityRecognizer(ctx context.Context, params *DescribeE
 }
 
 type DescribeEntityRecognizerInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
+	//
+	// This member is required.
 	EntityRecognizerArn *string
 }
 
 type DescribeEntityRecognizerOutput struct {
+
 	// Describes information associated with an entity recognizer.
 	EntityRecognizerProperties *types.EntityRecognizerProperties
 

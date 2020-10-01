@@ -56,15 +56,22 @@ func (c *Client) DeregisterInstance(ctx context.Context, params *DeregisterInsta
 }
 
 type DeregisterInstanceInput struct {
+
 	// The value that you specified for Id in the RegisterInstance
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 	// request.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The ID of the service that the instance is associated with.
+	//
+	// This member is required.
 	ServiceId *string
 }
 
 type DeregisterInstanceOutput struct {
+
 	// A value that you can use to determine whether the request completed
 	// successfully. For more information, see GetOperation
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).

@@ -59,11 +59,15 @@ func (c *Client) GetCanary(ctx context.Context, params *GetCanaryInput, optFns .
 }
 
 type GetCanaryInput struct {
+
 	// The name of the canary that you want details for.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetCanaryOutput struct {
+
 	// A strucure that contains the full information about the canary.
 	Canary *types.Canary
 

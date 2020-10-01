@@ -55,10 +55,12 @@ func (c *Client) DescribeRepositories(ctx context.Context, params *DescribeRepos
 }
 
 type DescribeRepositoriesInput struct {
+
 	// The AWS account ID associated with the registry that contains the repositories
 	// to be described. If you do not specify a registry, the default registry is
 	// assumed.
 	RegistryId *string
+
 	// The nextToken value returned from a previous paginated DescribeRepositories
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -68,9 +70,11 @@ type DescribeRepositoriesInput struct {
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
 	// A list of repositories to describe. If this parameter is omitted, then all
 	// repositories in a registry are described.
 	RepositoryNames []*string
+
 	// The maximum number of repository results returned by DescribeRepositories in
 	// paginated output. When this parameter is used, DescribeRepositories only returns
 	// maxResults results in a single page along with a nextToken response element. The
@@ -83,8 +87,10 @@ type DescribeRepositoriesInput struct {
 }
 
 type DescribeRepositoriesOutput struct {
+
 	// A list of repository objects corresponding to valid repositories.
 	Repositories []*types.Repository
+
 	// The nextToken value to include in a future DescribeRepositories request. When
 	// the results of a DescribeRepositories request exceed maxResults, this value can
 	// be used to retrieve the next page of results. This value is null when there are

@@ -84,10 +84,13 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 }
 
 type DeleteUserInput struct {
+
 	// The name of the user to delete. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
 }
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The event was already logged.
@@ -26,18 +25,6 @@ func (e *DataAlreadyAcceptedException) ErrorMessage() string {
 }
 func (e *DataAlreadyAcceptedException) ErrorCode() string             { return "DataAlreadyAcceptedException" }
 func (e *DataAlreadyAcceptedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DataAlreadyAcceptedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DataAlreadyAcceptedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DataAlreadyAcceptedException) GetExpectedSequenceToken() string {
-	return ptr.ToString(e.ExpectedSequenceToken)
-}
-func (e *DataAlreadyAcceptedException) HasExpectedSequenceToken() bool {
-	return e.ExpectedSequenceToken != nil
-}
 
 // The operation is not valid on the specified resource.
 type InvalidOperationException struct {
@@ -55,12 +42,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 }
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A parameter is specified incorrectly.
 type InvalidParameterException struct {
@@ -78,12 +59,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The sequence token is not valid. You can get the correct sequence token in the
 // expectedSequenceToken field in the InvalidSequenceTokenException message.
@@ -104,18 +79,6 @@ func (e *InvalidSequenceTokenException) ErrorMessage() string {
 }
 func (e *InvalidSequenceTokenException) ErrorCode() string             { return "InvalidSequenceTokenException" }
 func (e *InvalidSequenceTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSequenceTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSequenceTokenException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidSequenceTokenException) GetExpectedSequenceToken() string {
-	return ptr.ToString(e.ExpectedSequenceToken)
-}
-func (e *InvalidSequenceTokenException) HasExpectedSequenceToken() bool {
-	return e.ExpectedSequenceToken != nil
-}
 
 // You have reached the maximum number of resources that can be created.
 type LimitExceededException struct {
@@ -133,12 +96,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The query string is not valid. Details about this error are displayed in a
 // QueryCompileError object. For more information, see QueryCompileError
@@ -163,18 +120,6 @@ func (e *MalformedQueryException) ErrorMessage() string {
 }
 func (e *MalformedQueryException) ErrorCode() string             { return "MalformedQueryException" }
 func (e *MalformedQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedQueryException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedQueryException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *MalformedQueryException) GetQueryCompileError() *QueryCompileError {
-	return e.QueryCompileError
-}
-func (e *MalformedQueryException) HasQueryCompileError() bool {
-	return e.QueryCompileError != nil
-}
 
 // Multiple requests to update the same resource were in conflict.
 type OperationAbortedException struct {
@@ -192,12 +137,6 @@ func (e *OperationAbortedException) ErrorMessage() string {
 }
 func (e *OperationAbortedException) ErrorCode() string             { return "OperationAbortedException" }
 func (e *OperationAbortedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationAbortedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationAbortedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -215,12 +154,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -238,12 +171,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service cannot complete the request.
 type ServiceUnavailableException struct {
@@ -261,12 +188,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The most likely cause is an invalid AWS access key ID or secret key.
 type UnrecognizedClientException struct {
@@ -284,9 +205,3 @@ func (e *UnrecognizedClientException) ErrorMessage() string {
 }
 func (e *UnrecognizedClientException) ErrorCode() string             { return "UnrecognizedClientException" }
 func (e *UnrecognizedClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnrecognizedClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnrecognizedClientException) HasMessage() bool {
-	return e.Message != nil
-}

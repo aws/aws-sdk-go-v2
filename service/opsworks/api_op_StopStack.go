@@ -59,7 +59,10 @@ func (c *Client) StopStack(ctx context.Context, params *StopStackInput, optFns .
 }
 
 type StopStackInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 

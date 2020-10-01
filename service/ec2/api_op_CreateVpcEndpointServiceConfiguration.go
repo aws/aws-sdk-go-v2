@@ -66,22 +66,30 @@ func (c *Client) CreateVpcEndpointServiceConfiguration(ctx context.Context, para
 }
 
 type CreateVpcEndpointServiceConfigurationInput struct {
+
 	// The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your
 	// service.
+	//
+	// This member is required.
 	NetworkLoadBalancerArns []*string
+
 	// The private DNS name to assign to the VPC endpoint service.
 	PrivateDnsName *string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to associate with the service.
 	TagSpecifications []*types.TagSpecification
+
 	// Indicates whether requests from service consumers to create an endpoint to your
 	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections
 	// ().
@@ -89,9 +97,11 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 }
 
 type CreateVpcEndpointServiceConfigurationOutput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string
+
 	// Information about the service configuration.
 	ServiceConfiguration *types.ServiceConfiguration
 

@@ -58,6 +58,7 @@ func (c *Client) UpdateProvisionedProductProperties(ctx context.Context, params 
 }
 
 type UpdateProvisionedProductPropertiesInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -67,6 +68,7 @@ type UpdateProvisionedProductPropertiesInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// A map that contains the provisioned product properties to be updated. The OWNER
 	// key accepts user ARNs and role ARNs. The owner is the user that is allowed to
 	// see, update, terminate, and execute service actions in the provisioned product.
@@ -82,21 +84,33 @@ type UpdateProvisionedProductPropertiesInput struct {
 	// provisions a product and the owner is updated to someone else, they will no
 	// longer be able to see or perform any actions through API or the Service Catalog
 	// console on that provisioned product.
+	//
+	// This member is required.
 	ProvisionedProductProperties map[string]*string
+
 	// The identifier of the provisioned product.
+	//
+	// This member is required.
 	ProvisionedProductId *string
+
 	// The idempotency token that uniquely identifies the provisioning product update
 	// request.
+	//
+	// This member is required.
 	IdempotencyToken *string
 }
 
 type UpdateProvisionedProductPropertiesOutput struct {
+
 	// A map that contains the properties updated.
 	ProvisionedProductProperties map[string]*string
+
 	// The provisioned product identifier.
 	ProvisionedProductId *string
+
 	// The identifier of the record.
 	RecordId *string
+
 	// The status of the request.
 	Status types.RecordStatus
 

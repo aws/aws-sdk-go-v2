@@ -65,11 +65,15 @@ func (c *Client) DescribeConfigurations(ctx context.Context, params *DescribeCon
 }
 
 type DescribeConfigurationsInput struct {
+
 	// One or more configuration IDs.
+	//
+	// This member is required.
 	ConfigurationIds []*string
 }
 
 type DescribeConfigurationsOutput struct {
+
 	// A key in the response map. The value is an array of data.
 	Configurations []map[string]*string
 

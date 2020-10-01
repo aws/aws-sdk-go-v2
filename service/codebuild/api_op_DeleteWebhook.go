@@ -57,7 +57,10 @@ func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, 
 }
 
 type DeleteWebhookInput struct {
+
 	// The name of the AWS CodeBuild project.
+	//
+	// This member is required.
 	ProjectName *string
 }
 

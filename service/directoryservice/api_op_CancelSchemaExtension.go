@@ -58,9 +58,15 @@ func (c *Client) CancelSchemaExtension(ctx context.Context, params *CancelSchema
 }
 
 type CancelSchemaExtensionInput struct {
+
 	// The identifier of the directory whose schema extension will be canceled.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The identifier of the schema extension that will be canceled.
+	//
+	// This member is required.
 	SchemaExtensionId *string
 }
 

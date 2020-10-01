@@ -61,14 +61,23 @@ func (c *Client) PutNotificationConfiguration(ctx context.Context, params *PutNo
 }
 
 type PutNotificationConfigurationInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
 	// SNS) topic.
+	//
+	// This member is required.
 	TopicARN *string
+
 	// The type of event that causes the notification to be sent. To query the
 	// notification types supported by Amazon EC2 Auto Scaling, call the
 	// DescribeAutoScalingNotificationTypes () API.
+	//
+	// This member is required.
 	NotificationTypes []*string
 }
 

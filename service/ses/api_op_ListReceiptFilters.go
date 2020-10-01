@@ -67,6 +67,7 @@ type ListReceiptFiltersInput struct {
 
 // A list of IP address filters that exist under your AWS account.
 type ListReceiptFiltersOutput struct {
+
 	// A list of IP address filter data structures, which each consist of a name, an IP
 	// address range, and whether to allow or block mail from it.
 	Filters []*types.ReceiptFilter

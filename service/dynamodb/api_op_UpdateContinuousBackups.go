@@ -66,13 +66,20 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 }
 
 type UpdateContinuousBackupsInput struct {
+
 	// The name of the table.
+	//
+	// This member is required.
 	TableName *string
+
 	// Represents the settings used to enable point in time recovery.
+	//
+	// This member is required.
 	PointInTimeRecoverySpecification *types.PointInTimeRecoverySpecification
 }
 
 type UpdateContinuousBackupsOutput struct {
+
 	// Represents the continuous backups and point in time recovery settings on the
 	// table.
 	ContinuousBackupsDescription *types.ContinuousBackupsDescription

@@ -56,23 +56,30 @@ func (c *Client) DescribeNotificationConfigurations(ctx context.Context, params 
 }
 
 type DescribeNotificationConfigurationsInput struct {
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
+
 	// The name of the Auto Scaling group.
 	AutoScalingGroupNames []*string
 }
 
 type DescribeNotificationConfigurationsOutput struct {
+
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is
 	// null when there are no more items to return.
 	NextToken *string
+
 	// The notification configurations.
+	//
+	// This member is required.
 	NotificationConfigurations []*types.NotificationConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -56,19 +56,28 @@ func (c *Client) CreateExportJob(ctx context.Context, params *CreateExportJobInp
 }
 
 type CreateExportJobInput struct {
+
 	// Specifies the settings for a job that exports endpoint definitions to an Amazon
 	// Simple Storage Service (Amazon S3) bucket.
+	//
+	// This member is required.
 	ExportJobRequest *types.ExportJobRequest
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type CreateExportJobOutput struct {
+
 	// Provides information about the status and settings of a job that exports
 	// endpoint definitions to a file. The file can be added directly to an Amazon
 	// Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or
 	// downloaded directly to a computer by using the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ExportJobResponse *types.ExportJobResponse
 
 	// Metadata pertaining to the operation's result.

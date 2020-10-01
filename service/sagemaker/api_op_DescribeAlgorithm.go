@@ -57,33 +57,59 @@ func (c *Client) DescribeAlgorithm(ctx context.Context, params *DescribeAlgorith
 }
 
 type DescribeAlgorithmInput struct {
+
 	// The name of the algorithm to describe.
+	//
+	// This member is required.
 	AlgorithmName *string
 }
 
 type DescribeAlgorithmOutput struct {
+
 	// Whether the algorithm is certified to be listed in AWS Marketplace.
 	CertifyForMarketplace *bool
+
 	// Details about training jobs run by this algorithm.
+	//
+	// This member is required.
 	TrainingSpecification *types.TrainingSpecification
+
 	// The product identifier of the algorithm.
 	ProductId *string
+
 	// Details about inference jobs that the algorithm runs.
 	InferenceSpecification *types.InferenceSpecification
+
 	// The current status of the algorithm.
+	//
+	// This member is required.
 	AlgorithmStatus types.AlgorithmStatus
+
 	// Details about configurations for one or more training jobs that Amazon SageMaker
 	// runs to test the algorithm.
 	ValidationSpecification *types.AlgorithmValidationSpecification
+
 	// Details about the current status of the algorithm.
+	//
+	// This member is required.
 	AlgorithmStatusDetails *types.AlgorithmStatusDetails
+
 	// A brief summary about the algorithm.
 	AlgorithmDescription *string
+
 	// A timestamp specifying when the algorithm was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the algorithm.
+	//
+	// This member is required.
 	AlgorithmArn *string
+
 	// The name of the algorithm being described.
+	//
+	// This member is required.
 	AlgorithmName *string
 
 	// Metadata pertaining to the operation's result.

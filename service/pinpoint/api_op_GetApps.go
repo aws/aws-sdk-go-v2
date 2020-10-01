@@ -56,16 +56,21 @@ func (c *Client) GetApps(ctx context.Context, params *GetAppsInput, optFns ...fu
 }
 
 type GetAppsInput struct {
+
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
 }
 
 type GetAppsOutput struct {
+
 	// Provides information about all of your applications.
+	//
+	// This member is required.
 	ApplicationsResponse *types.ApplicationsResponse
 
 	// Metadata pertaining to the operation's result.

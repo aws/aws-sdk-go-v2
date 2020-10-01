@@ -68,13 +68,19 @@ func (c *Client) DeleteIdentityPolicy(ctx context.Context, params *DeleteIdentit
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 type DeleteIdentityPolicyInput struct {
+
 	// The identity that is associated with the policy that you want to delete. You can
 	// specify the identity by using its name or by using its Amazon Resource Name
 	// (ARN). Examples: user@example.com, example.com,
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com. To successfully call
 	// this API, you must own the identity.
+	//
+	// This member is required.
 	Identity *string
+
 	// The name of the policy to be deleted.
+	//
+	// This member is required.
 	PolicyName *string
 }
 

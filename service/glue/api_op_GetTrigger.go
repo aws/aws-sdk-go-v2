@@ -56,11 +56,15 @@ func (c *Client) GetTrigger(ctx context.Context, params *GetTriggerInput, optFns
 }
 
 type GetTriggerInput struct {
+
 	// The name of the trigger to retrieve.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetTriggerOutput struct {
+
 	// The requested trigger definition.
 	Trigger *types.Trigger
 

@@ -56,20 +56,25 @@ func (c *Client) ListBatchInferenceJobs(ctx context.Context, params *ListBatchIn
 }
 
 type ListBatchInferenceJobsInput struct {
+
 	// The maximum number of batch inference job results to return in each page. The
 	// default value is 100.
 	MaxResults *int32
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the solution version from which the batch
 	// inference jobs were created.
 	SolutionVersionArn *string
 }
 
 type ListBatchInferenceJobsOutput struct {
+
 	// The token to use to retreive the next page of results. The value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// A list containing information on each job that is returned.
 	BatchInferenceJobs []*types.BatchInferenceJobSummary
 

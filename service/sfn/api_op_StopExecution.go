@@ -56,16 +56,24 @@ func (c *Client) StopExecution(ctx context.Context, params *StopExecutionInput, 
 }
 
 type StopExecutionInput struct {
+
 	// A more detailed explanation of the cause of the failure.
 	Cause *string
+
 	// The error code of the failure.
 	Error *string
+
 	// The Amazon Resource Name (ARN) of the execution to stop.
+	//
+	// This member is required.
 	ExecutionArn *string
 }
 
 type StopExecutionOutput struct {
+
 	// The date the execution is stopped.
+	//
+	// This member is required.
 	StopDate *time.Time
 
 	// Metadata pertaining to the operation's result.

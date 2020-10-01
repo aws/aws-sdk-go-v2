@@ -56,8 +56,10 @@ func (c *Client) DeregisterInstanceEventNotificationAttributes(ctx context.Conte
 }
 
 type DeregisterInstanceEventNotificationAttributesInput struct {
+
 	// Information about the tag keys to deregister.
 	InstanceTagAttribute *types.DeregisterInstanceTagAttributeRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -66,6 +68,7 @@ type DeregisterInstanceEventNotificationAttributesInput struct {
 }
 
 type DeregisterInstanceEventNotificationAttributesOutput struct {
+
 	// The resulting set of tag keys.
 	InstanceTagAttribute *types.InstanceTagNotificationAttribute
 

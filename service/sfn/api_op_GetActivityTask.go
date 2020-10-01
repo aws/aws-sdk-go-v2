@@ -66,19 +66,25 @@ func (c *Client) GetActivityTask(ctx context.Context, params *GetActivityTaskInp
 }
 
 type GetActivityTaskInput struct {
+
 	// The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned
 	// when you create the task using CreateActivity ().)
+	//
+	// This member is required.
 	ActivityArn *string
+
 	// You can provide an arbitrary name in order to identify the worker that the task
 	// is assigned to. This name is used when it is logged in the execution history.
 	WorkerName *string
 }
 
 type GetActivityTaskOutput struct {
+
 	// A token that identifies the scheduled task. This token must be copied and
 	// included in subsequent calls to SendTaskHeartbeat (), SendTaskSuccess () or
 	// SendTaskFailure () in order to report the progress or completion of the task.
 	TaskToken *string
+
 	// The string that contains the JSON input data for the task.
 	Input *string
 

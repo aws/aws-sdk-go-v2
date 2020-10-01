@@ -57,32 +57,46 @@ func (c *Client) ModifyTrafficMirrorFilterRule(ctx context.Context, params *Modi
 }
 
 type ModifyTrafficMirrorFilterRuleInput struct {
+
 	// The number of the Traffic Mirror rule. This number must be unique for each
 	// Traffic Mirror rule in a given direction. The rules are processed in ascending
 	// order by rule number.
 	RuleNumber *int32
+
 	// The protocol, for example TCP, to assign to the Traffic Mirror rule.
 	Protocol *int32
+
 	// The source CIDR block to assign to the Traffic Mirror rule.
 	SourceCidrBlock *string
+
 	// The type of traffic (ingress | egress) to assign to the rule.
 	TrafficDirection types.TrafficDirection
+
 	// The description to assign to the Traffic Mirror rule.
 	Description *string
+
 	// The action to assign to the rule.
 	RuleAction types.TrafficMirrorRuleAction
+
 	// The destination ports that are associated with the Traffic Mirror rule.
 	DestinationPortRange *types.TrafficMirrorPortRangeRequest
+
 	// The ID of the Traffic Mirror rule.
+	//
+	// This member is required.
 	TrafficMirrorFilterRuleId *string
+
 	// The port range to assign to the Traffic Mirror rule.
 	SourcePortRange *types.TrafficMirrorPortRangeRequest
+
 	// The destination CIDR block to assign to the Traffic Mirror rule.
 	DestinationCidrBlock *string
+
 	// The properties that you want to remove from the Traffic Mirror filter rule. When
 	// you remove a property from a Traffic Mirror filter rule, the property is set to
 	// the default.
 	RemoveFields []types.TrafficMirrorFilterRuleField
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -91,6 +105,7 @@ type ModifyTrafficMirrorFilterRuleInput struct {
 }
 
 type ModifyTrafficMirrorFilterRuleOutput struct {
+
 	// Modifies a Traffic Mirror rule.
 	TrafficMirrorFilterRule *types.TrafficMirrorFilterRule
 

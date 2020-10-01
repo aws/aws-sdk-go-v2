@@ -63,13 +63,21 @@ func (c *Client) StartReplicationTaskAssessmentRun(ctx context.Context, params *
 
 //
 type StartReplicationTaskAssessmentRunInput struct {
+
 	// ARN of a service role needed to start the assessment run.
+	//
+	// This member is required.
 	ServiceAccessRoleArn *string
+
 	// Unique name to identify the assessment run.
+	//
+	// This member is required.
 	AssessmentRunName *string
+
 	// Folder within an Amazon S3 bucket where you want AWS DMS to store the results of
 	// this assessment run.
 	ResultLocationFolder *string
+
 	// Encryption mode that you can specify to encrypt the results of this assessment
 	// run. If you don't specify this request parameter, AWS DMS stores the assessment
 	// run results without encryption. You can specify one of the options following:
@@ -82,6 +90,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// can use either a custom KMS encryption key that you specify or the default KMS
 	// encryption key that DMS provides.
 	ResultEncryptionMode *string
+
 	// Space-separated list of names for specific individual assessments that you want
 	// to include. These names come from the default list of individual assessments
 	// that AWS DMS supports for the associated migration task. This task is specified
@@ -91,6 +100,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// run the DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
 	IncludeOnly []*string
+
 	// Space-separated list of names for specific individual assessments that you want
 	// to exclude. These names come from the default list of individual assessments
 	// that AWS DMS supports for the associated migration task. This task is specified
@@ -100,12 +110,19 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// run the DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
 	Exclude []*string
+
 	// Amazon S3 bucket where you want AWS DMS to store the results of this assessment
 	// run.
+	//
+	// This member is required.
 	ResultLocationBucket *string
+
 	// Amazon Resource Name (ARN) of the migration task associated with the
 	// premigration assessment run that you want to start.
+	//
+	// This member is required.
 	ReplicationTaskArn *string
+
 	// ARN of a custom KMS encryption key that you specify when you set
 	// ResultEncryptionMode to "SSE_KMS".
 	ResultKmsKeyArn *string
@@ -113,6 +130,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 
 //
 type StartReplicationTaskAssessmentRunOutput struct {
+
 	// The premigration assessment run that was started.
 	ReplicationTaskAssessmentRun *types.ReplicationTaskAssessmentRun
 

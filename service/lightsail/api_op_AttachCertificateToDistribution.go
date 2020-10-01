@@ -65,6 +65,7 @@ func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *At
 }
 
 type AttachCertificateToDistributionInput struct {
+
 	// The name of the certificate to attach to a distribution.  <p>Only certificates
 	// with a status of <code>ISSUED</code> can be attached to a distribution.</p>
 	// <p>Use the <code>GetCertificates</code> action to get a list of certificate
@@ -74,14 +75,20 @@ type AttachCertificateToDistributionInput struct {
 	// example, your certificate name might be <code>WordPress-Blog-Certificate</code>
 	// and the domain name of the certificate might be <code>example.com</code>.</p>
 	// </note>
+	//
+	// This member is required.
 	CertificateName *string
+
 	// The name of the distribution that the certificate will be attached to.  <p>Use
 	// the <code>GetDistributions</code> action to get a list of distribution names
 	// that you can specify.</p>
+	//
+	// This member is required.
 	DistributionName *string
 }
 
 type AttachCertificateToDistributionOutput struct {
+
 	// An object that describes the result of the action, such as the status of the
 	// request, the timestamp of the request, and the resources affected by the
 	// request.

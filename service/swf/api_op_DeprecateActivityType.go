@@ -85,9 +85,15 @@ func (c *Client) DeprecateActivityType(ctx context.Context, params *DeprecateAct
 }
 
 type DeprecateActivityTypeInput struct {
+
 	// The activity type to deprecate.
+	//
+	// This member is required.
 	ActivityType *types.ActivityType
+
 	// The name of the domain in which the activity type is registered.
+	//
+	// This member is required.
 	Domain *string
 }
 

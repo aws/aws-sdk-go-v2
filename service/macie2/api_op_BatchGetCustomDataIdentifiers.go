@@ -55,15 +55,18 @@ func (c *Client) BatchGetCustomDataIdentifiers(ctx context.Context, params *Batc
 }
 
 type BatchGetCustomDataIdentifiersInput struct {
+
 	// An array of strings that lists the unique identifiers for the custom data
 	// identifiers to retrieve information about.
 	Ids []*string
 }
 
 type BatchGetCustomDataIdentifiersOutput struct {
+
 	// An array of objects, one for each custom data identifier that meets the criteria
 	// specified in the request.
 	CustomDataIdentifiers []*types.BatchGetCustomDataIdentifierSummary
+
 	// An array of identifiers, one for each identifier that was specified in the
 	// request, but doesn't correlate to an existing custom data identifier.
 	NotFoundIdentifierIds []*string

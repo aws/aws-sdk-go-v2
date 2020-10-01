@@ -60,12 +60,14 @@ func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, 
 }
 
 type InviteMembersInput struct {
+
 	// The list of account IDs of the AWS accounts to invite to Security Hub as
 	// members.
 	AccountIds []*string
 }
 
 type InviteMembersOutput struct {
+
 	// The list of AWS accounts that could not be processed. For each account, the list
 	// includes the account ID and the email address.
 	UnprocessedAccounts []*types.Result

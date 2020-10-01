@@ -56,15 +56,23 @@ func (c *Client) RevokeFlowEntitlement(ctx context.Context, params *RevokeFlowEn
 }
 
 type RevokeFlowEntitlementInput struct {
+
 	// The ARN of the entitlement that you want to revoke.
+	//
+	// This member is required.
 	EntitlementArn *string
+
 	// The flow that you want to revoke an entitlement from.
+	//
+	// This member is required.
 	FlowArn *string
 }
 
 type RevokeFlowEntitlementOutput struct {
+
 	// The ARN of the flow that the entitlement was revoked from.
 	FlowArn *string
+
 	// The ARN of the entitlement that was revoked.
 	EntitlementArn *string
 

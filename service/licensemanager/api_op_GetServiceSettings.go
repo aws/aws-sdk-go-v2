@@ -58,17 +58,22 @@ type GetServiceSettingsInput struct {
 }
 
 type GetServiceSettingsOutput struct {
+
 	// Indicates whether AWS Organizations has been integrated with License Manager for
 	// cross-account discovery.
 	OrganizationConfiguration *types.OrganizationConfiguration
+
 	// Regional S3 bucket path for storing reports, license trail event data, discovery
 	// data, and so on.
 	S3BucketArn *string
+
 	// Amazon Resource Name (ARN) of the AWS resource share. The License Manager master
 	// account will provide member accounts with access to this share.
 	LicenseManagerResourceShareArn *string
+
 	// SNS topic configured to receive notifications from License Manager.
 	SnsTopicArn *string
+
 	// Indicates whether cross-account discovery has been enabled.
 	EnableCrossAccountsDiscovery *bool
 

@@ -56,10 +56,17 @@ func (c *Client) DisassociateProductFromPortfolio(ctx context.Context, params *D
 }
 
 type DisassociateProductFromPortfolioInput struct {
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
+
 	// The language code.
 	//
 	//     * en - English (default)

@@ -67,9 +67,11 @@ func (c *Client) RequestCertificate(ctx context.Context, params *RequestCertific
 }
 
 type RequestCertificateInput struct {
+
 	// The domain name that you want ACM to use to send you emails so that you can
 	// validate domain ownership.
 	DomainValidationOptions []*types.DomainValidationOption
+
 	// Customer chosen string that can be used to distinguish between calls to
 	// RequestCertificate. Idempotency tokens time out after one hour. Therefore, if
 	// you call RequestCertificate multiple times with the same idempotency token
@@ -77,6 +79,7 @@ type RequestCertificateInput struct {
 	// will issue only one. If you change the idempotency token for each call, ACM
 	// recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string
+
 	// The method you want to use if you are requesting a public certificate to
 	// validate that you own or control domain. You can validate with DNS
 	// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html) or
@@ -84,6 +87,7 @@ type RequestCertificateInput struct {
 	// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 	// We recommend that you use DNS validation.
 	ValidationMethod types.ValidationMethod
+
 	// Currently, you can use this parameter to specify whether to add the certificate
 	// to a certificate transparency log. Certificate transparency makes it possible to
 	// detect SSL/TLS certificates that have been mistakenly or maliciously issued.
@@ -92,8 +96,10 @@ type RequestCertificateInput struct {
 	// Logging
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
 	Options *types.CertificateOptions
+
 	// One or more resource tags to associate with the certificate.
 	Tags []*types.Tag
+
 	// Fully qualified domain name (FQDN), such as www.example.com, that you want to
 	// secure with an ACM certificate. Use an asterisk (*) to create a wildcard
 	// certificate that protects several sites in the same domain. For example,
@@ -101,7 +107,10 @@ type RequestCertificateInput struct {
 	// images.example.com.  <p> The first domain name you enter cannot exceed 64
 	// octets, including periods. Each subsequent Subject Alternative Name (SAN),
 	// however, can be up to 253 octets in length. </p>
+	//
+	// This member is required.
 	DomainName *string
+
 	// The Amazon Resource Name (ARN) of the private certificate authority (CA) that
 	// will be used to issue the certificate. If you do not provide an ARN and you are
 	// trying to request a private certificate, ACM will attempt to issue a public
@@ -112,6 +121,7 @@ type RequestCertificateInput struct {
 	// <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>
 	// </p>
 	CertificateAuthorityArn *string
+
 	// Additional FQDNs to be included in the Subject Alternative Name extension of the
 	// ACM certificate. For example, add the name www.example.net to a certificate for
 	// which the DomainName field is www.example.com if users can reach your site by
@@ -133,6 +143,7 @@ type RequestCertificateInput struct {
 }
 
 type RequestCertificateOutput struct {
+
 	// String that contains the ARN of the issued certificate. This must be of the
 	// form:
 	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012

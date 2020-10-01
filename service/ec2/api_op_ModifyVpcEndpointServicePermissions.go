@@ -61,23 +61,30 @@ func (c *Client) ModifyVpcEndpointServicePermissions(ctx context.Context, params
 }
 
 type ModifyVpcEndpointServicePermissionsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
 	// granted to the principals in this list. To grant permissions to all principals,
 	// specify an asterisk (*).
 	AddAllowedPrincipals []*string
+
 	// The ID of the service.
+	//
+	// This member is required.
 	ServiceId *string
+
 	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
 	// revoked for principals in this list.
 	RemoveAllowedPrincipals []*string
 }
 
 type ModifyVpcEndpointServicePermissionsOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	ReturnValue *bool
 

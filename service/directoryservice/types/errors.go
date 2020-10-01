@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -26,18 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *AccessDeniedException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An authentication error occurred.
 type AuthenticationFailedException struct {
@@ -57,18 +44,6 @@ func (e *AuthenticationFailedException) ErrorMessage() string {
 }
 func (e *AuthenticationFailedException) ErrorCode() string             { return "AuthenticationFailedException" }
 func (e *AuthenticationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthenticationFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthenticationFailedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *AuthenticationFailedException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *AuthenticationFailedException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The certificate has already been registered into the system.
 type CertificateAlreadyExistsException struct {
@@ -90,18 +65,6 @@ func (e *CertificateAlreadyExistsException) ErrorCode() string {
 	return "CertificateAlreadyExistsException"
 }
 func (e *CertificateAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CertificateAlreadyExistsException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *CertificateAlreadyExistsException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The certificate is not present in the system for describe or deregister
 // activities.
@@ -124,18 +87,6 @@ func (e *CertificateDoesNotExistException) ErrorCode() string {
 	return "CertificateDoesNotExistException"
 }
 func (e *CertificateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CertificateDoesNotExistException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *CertificateDoesNotExistException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The certificate is being used for the LDAP security connection and cannot be
 // removed without disabling LDAP security.
@@ -156,18 +107,6 @@ func (e *CertificateInUseException) ErrorMessage() string {
 }
 func (e *CertificateInUseException) ErrorCode() string             { return "CertificateInUseException" }
 func (e *CertificateInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateInUseException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CertificateInUseException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *CertificateInUseException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The certificate could not be added because the certificate limit has been
 // reached.
@@ -190,18 +129,6 @@ func (e *CertificateLimitExceededException) ErrorCode() string {
 	return "CertificateLimitExceededException"
 }
 func (e *CertificateLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CertificateLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *CertificateLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // A client exception has occurred.
 type ClientException struct {
@@ -221,18 +148,6 @@ func (e *ClientException) ErrorMessage() string {
 }
 func (e *ClientException) ErrorCode() string             { return "ClientException" }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ClientException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *ClientException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The specified directory has already been shared with this AWS account.
 type DirectoryAlreadySharedException struct {
@@ -254,18 +169,6 @@ func (e *DirectoryAlreadySharedException) ErrorCode() string {
 	return "DirectoryAlreadySharedException"
 }
 func (e *DirectoryAlreadySharedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectoryAlreadySharedException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *DirectoryAlreadySharedException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *DirectoryAlreadySharedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryAlreadySharedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified directory does not exist in the system.
 type DirectoryDoesNotExistException struct {
@@ -285,18 +188,6 @@ func (e *DirectoryDoesNotExistException) ErrorMessage() string {
 }
 func (e *DirectoryDoesNotExistException) ErrorCode() string             { return "DirectoryDoesNotExistException" }
 func (e *DirectoryDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectoryDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DirectoryDoesNotExistException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *DirectoryDoesNotExistException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The maximum number of directories in the region has been reached. You can use
 // the GetDirectoryLimits () operation to determine your directory limits in the
@@ -320,18 +211,6 @@ func (e *DirectoryLimitExceededException) ErrorCode() string {
 	return "DirectoryLimitExceededException"
 }
 func (e *DirectoryLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectoryLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DirectoryLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *DirectoryLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The specified directory has not been shared with this AWS account.
 type DirectoryNotSharedException struct {
@@ -351,18 +230,6 @@ func (e *DirectoryNotSharedException) ErrorMessage() string {
 }
 func (e *DirectoryNotSharedException) ErrorCode() string             { return "DirectoryNotSharedException" }
 func (e *DirectoryNotSharedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectoryNotSharedException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *DirectoryNotSharedException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *DirectoryNotSharedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryNotSharedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified directory is unavailable or could not be found.
 type DirectoryUnavailableException struct {
@@ -382,18 +249,6 @@ func (e *DirectoryUnavailableException) ErrorMessage() string {
 }
 func (e *DirectoryUnavailableException) ErrorCode() string             { return "DirectoryUnavailableException" }
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectoryUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DirectoryUnavailableException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *DirectoryUnavailableException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The maximum allowed number of domain controllers per directory was exceeded. The
 // default limit per directory is 20 domain controllers.
@@ -418,18 +273,6 @@ func (e *DomainControllerLimitExceededException) ErrorCode() string {
 func (e *DomainControllerLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DomainControllerLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DomainControllerLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DomainControllerLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *DomainControllerLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The specified entity already exists.
 type EntityAlreadyExistsException struct {
@@ -449,18 +292,6 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 }
 func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExistsException" }
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *EntityAlreadyExistsException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *EntityAlreadyExistsException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The specified entity could not be found.
 type EntityDoesNotExistException struct {
@@ -480,18 +311,6 @@ func (e *EntityDoesNotExistException) ErrorMessage() string {
 }
 func (e *EntityDoesNotExistException) ErrorCode() string             { return "EntityDoesNotExistException" }
 func (e *EntityDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityDoesNotExistException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *EntityDoesNotExistException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *EntityDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The account does not have sufficient permission to perform the operation.
 type InsufficientPermissionsException struct {
@@ -513,18 +332,6 @@ func (e *InsufficientPermissionsException) ErrorCode() string {
 	return "InsufficientPermissionsException"
 }
 func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientPermissionsException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InsufficientPermissionsException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *InsufficientPermissionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientPermissionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The certificate PEM that was provided has incorrect encoding.
 type InvalidCertificateException struct {
@@ -544,18 +351,6 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 }
 func (e *InvalidCertificateException) ErrorCode() string             { return "InvalidCertificateException" }
 func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCertificateException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InvalidCertificateException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *InvalidCertificateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCertificateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The LDAP activities could not be performed because they are limited by the LDAPS
 // status.
@@ -576,18 +371,6 @@ func (e *InvalidLDAPSStatusException) ErrorMessage() string {
 }
 func (e *InvalidLDAPSStatusException) ErrorCode() string             { return "InvalidLDAPSStatusException" }
 func (e *InvalidLDAPSStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLDAPSStatusException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InvalidLDAPSStatusException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *InvalidLDAPSStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLDAPSStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The NextToken value is not valid.
 type InvalidNextTokenException struct {
@@ -607,18 +390,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidNextTokenException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InvalidNextTokenException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // One or more parameters are not valid.
 type InvalidParameterException struct {
@@ -638,18 +409,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidParameterException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InvalidParameterException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The new password provided by the user does not meet the password complexity
 // requirements defined in your directory.
@@ -670,18 +429,6 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 }
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPasswordException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InvalidPasswordException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *InvalidPasswordException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPasswordException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified shared target is not valid.
 type InvalidTargetException struct {
@@ -701,18 +448,6 @@ func (e *InvalidTargetException) ErrorMessage() string {
 }
 func (e *InvalidTargetException) ErrorCode() string             { return "InvalidTargetException" }
 func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *InvalidTargetException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *InvalidTargetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum allowed number of IP addresses was exceeded. The default limit is
 // 100 IP address blocks.
@@ -733,18 +468,6 @@ func (e *IpRouteLimitExceededException) ErrorMessage() string {
 }
 func (e *IpRouteLimitExceededException) ErrorCode() string             { return "IpRouteLimitExceededException" }
 func (e *IpRouteLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IpRouteLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IpRouteLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *IpRouteLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *IpRouteLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The LDAP activities could not be performed because at least one valid
 // certificate must be registered with the system.
@@ -767,18 +490,6 @@ func (e *NoAvailableCertificateException) ErrorCode() string {
 	return "NoAvailableCertificateException"
 }
 func (e *NoAvailableCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoAvailableCertificateException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *NoAvailableCertificateException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *NoAvailableCertificateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoAvailableCertificateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception encountered while trying to access your AWS organization.
 type OrganizationsException struct {
@@ -798,18 +509,6 @@ func (e *OrganizationsException) ErrorMessage() string {
 }
 func (e *OrganizationsException) ErrorCode() string             { return "OrganizationsException" }
 func (e *OrganizationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OrganizationsException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *OrganizationsException) HasRequestId() bool {
-	return e.RequestId != nil
-}
-func (e *OrganizationsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception has occurred in AWS Directory Service.
 type ServiceException struct {
@@ -829,18 +528,6 @@ func (e *ServiceException) ErrorMessage() string {
 }
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *ServiceException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The maximum number of AWS accounts that you can share with this directory has
 // been reached.
@@ -861,18 +548,6 @@ func (e *ShareLimitExceededException) ErrorMessage() string {
 }
 func (e *ShareLimitExceededException) ErrorCode() string             { return "ShareLimitExceededException" }
 func (e *ShareLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ShareLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ShareLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ShareLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *ShareLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The maximum number of manual snapshots for the directory has been reached. You
 // can use the GetSnapshotLimits () operation to determine the snapshot limits for
@@ -894,18 +569,6 @@ func (e *SnapshotLimitExceededException) ErrorMessage() string {
 }
 func (e *SnapshotLimitExceededException) ErrorCode() string             { return "SnapshotLimitExceededException" }
 func (e *SnapshotLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *SnapshotLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *SnapshotLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The maximum allowed number of tags was exceeded.
 type TagLimitExceededException struct {
@@ -925,18 +588,6 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 }
 func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TagLimitExceededException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *TagLimitExceededException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The operation is not supported.
 type UnsupportedOperationException struct {
@@ -956,18 +607,6 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 }
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnsupportedOperationException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *UnsupportedOperationException) HasRequestId() bool {
-	return e.RequestId != nil
-}
 
 // The user provided a username that does not exist in your directory.
 type UserDoesNotExistException struct {
@@ -987,15 +626,3 @@ func (e *UserDoesNotExistException) ErrorMessage() string {
 }
 func (e *UserDoesNotExistException) ErrorCode() string             { return "UserDoesNotExistException" }
 func (e *UserDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UserDoesNotExistException) GetRequestId() string {
-	return ptr.ToString(e.RequestId)
-}
-func (e *UserDoesNotExistException) HasRequestId() bool {
-	return e.RequestId != nil
-}

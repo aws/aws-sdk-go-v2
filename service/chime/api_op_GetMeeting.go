@@ -59,11 +59,15 @@ func (c *Client) GetMeeting(ctx context.Context, params *GetMeetingInput, optFns
 }
 
 type GetMeetingInput struct {
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
 }
 
 type GetMeetingOutput struct {
+
 	// The Amazon Chime SDK meeting information.
 	Meeting *types.Meeting
 

@@ -56,13 +56,18 @@ func (c *Client) ResetJobBookmark(ctx context.Context, params *ResetJobBookmarkI
 }
 
 type ResetJobBookmarkInput struct {
+
 	// The unique run identifier associated with this job run.
 	RunId *string
+
 	// The name of the job in question.
+	//
+	// This member is required.
 	JobName *string
 }
 
 type ResetJobBookmarkOutput struct {
+
 	// The reset bookmark entry.
 	JobBookmarkEntry *types.JobBookmarkEntry
 

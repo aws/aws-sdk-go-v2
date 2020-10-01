@@ -62,6 +62,7 @@ type GetAccountSummaryInput struct {
 
 // Contains the response to a successful GetAccountSummary () request.
 type GetAccountSummaryOutput struct {
+
 	// A set of key–value pairs containing information about IAM entity usage and IAM
 	// quotas.
 	SummaryMap map[string]*int32

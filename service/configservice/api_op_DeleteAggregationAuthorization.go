@@ -56,9 +56,15 @@ func (c *Client) DeleteAggregationAuthorization(ctx context.Context, params *Del
 }
 
 type DeleteAggregationAuthorizationInput struct {
+
 	// The region authorized to collect aggregated data.
+	//
+	// This member is required.
 	AuthorizedAwsRegion *string
+
 	// The 12-digit account ID of the account authorized to aggregate data.
+	//
+	// This member is required.
 	AuthorizedAccountId *string
 }
 

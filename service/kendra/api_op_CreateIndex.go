@@ -62,25 +62,36 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 }
 
 type CreateIndexInput struct {
+
 	// The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data
 	// indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
+
 	// The name for the new index.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of key-value pairs that identify the index. You can use the tags to
 	// identify and organize your resources and to control access to resources.
 	Tags []*types.Tag
+
 	// The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for
 	// indexes intended for development, testing, or proof of concept. Use
 	// ENTERPRISE_EDITION for your production databases. Once you set the edition for
 	// an index, it can't be changed.
 	Edition types.IndexEdition
+
 	// A description for the index.
 	Description *string
+
 	// An IAM role that gives Amazon Kendra permissions to access your Amazon
 	// CloudWatch logs and metrics. This is also the role used when you use the
 	// BatchPutDocument operation to index documents from an Amazon S3 bucket.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// A token that you provide to identify the request to create an index. Multiple
 	// calls to the CreateIndex operation with the same client token will create only
 	// one index.”
@@ -88,6 +99,7 @@ type CreateIndexInput struct {
 }
 
 type CreateIndexOutput struct {
+
 	// The unique identifier of the index. Use this identifier when you query an index,
 	// set up a data source, or index a document.
 	Id *string

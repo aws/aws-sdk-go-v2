@@ -59,11 +59,15 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 }
 
 type DeleteProjectInput struct {
+
 	// The Amazon Resource Name (ARN) of the project that you want to delete.
+	//
+	// This member is required.
 	ProjectArn *string
 }
 
 type DeleteProjectOutput struct {
+
 	// The current status of the delete project operation.
 	Status types.ProjectStatus
 

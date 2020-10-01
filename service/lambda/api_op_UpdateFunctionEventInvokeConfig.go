@@ -59,6 +59,7 @@ func (c *Client) UpdateFunctionEventInvokeConfig(ctx context.Context, params *Up
 }
 
 type UpdateFunctionEventInvokeConfigInput struct {
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -73,13 +74,19 @@ type UpdateFunctionEventInvokeConfigInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The maximum age of a request that Lambda sends to a function for processing.
 	MaximumEventAgeInSeconds *int32
+
 	// A version number or alias name.
 	Qualifier *string
+
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
+
 	// A destination for events after they have been sent to a function for processing.
 	// Destinations
 	//
@@ -96,8 +103,10 @@ type UpdateFunctionEventInvokeConfigInput struct {
 }
 
 type UpdateFunctionEventInvokeConfigOutput struct {
+
 	// The maximum age of a request that Lambda sends to a function for processing.
 	MaximumEventAgeInSeconds *int32
+
 	// A destination for events after they have been sent to a function for processing.
 	// Destinations
 	//
@@ -111,10 +120,13 @@ type UpdateFunctionEventInvokeConfigOutput struct {
 	//
 	//     * Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
+
 	// The date and time that the configuration was last updated.
 	LastModified *time.Time
+
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
+
 	// The Amazon Resource Name (ARN) of the function.
 	FunctionArn *string
 

@@ -58,16 +58,27 @@ func (c *Client) CreateComputer(ctx context.Context, params *CreateComputerInput
 
 // Contains the inputs for the CreateComputer () operation.
 type CreateComputerInput struct {
+
 	// The fully-qualified distinguished name of the organizational unit to place the
 	// computer account in.
 	OrganizationalUnitDistinguishedName *string
+
 	// The identifier of the directory in which to create the computer account.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The name of the computer account.
+	//
+	// This member is required.
 	ComputerName *string
+
 	// A one-time password that is used to join the computer to the directory. You
 	// should generate a random, strong password to use for this parameter.
+	//
+	// This member is required.
 	Password *string
+
 	// An array of Attribute () objects that contain any LDAP attributes to apply to
 	// the computer account.
 	ComputerAttributes []*types.Attribute
@@ -75,6 +86,7 @@ type CreateComputerInput struct {
 
 // Contains the results for the CreateComputer () operation.
 type CreateComputerOutput struct {
+
 	// A Computer () object that represents the computer account.
 	Computer *types.Computer
 

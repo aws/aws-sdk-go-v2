@@ -78,18 +78,25 @@ func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAcces
 
 // Represents the input for a request action.
 type GetInstanceAccessInput struct {
+
 	// A unique identifier for a fleet that contains the instance you want access to.
 	// You can use either the fleet ID or ARN value. The fleet can be in any of the
 	// following statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR status
 	// may be accessible for a short time before they are deleted.
+	//
+	// This member is required.
 	FleetId *string
+
 	// A unique identifier for an instance you want to get access to. You can access an
 	// instance in any status.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 // Represents the returned data in response to a request action.
 type GetInstanceAccessOutput struct {
+
 	// The connection information for a fleet instance, including IP address and access
 	// credentials.
 	InstanceAccess *types.InstanceAccess

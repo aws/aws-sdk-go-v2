@@ -59,12 +59,16 @@ func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, 
 }
 
 type StopDBClusterInput struct {
+
 	// The DB cluster identifier of the Neptune DB cluster to be stopped. This
 	// parameter is stored as a lowercase string.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type StopDBClusterOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
 	// a response element in the DescribeDBClusters () action.
 	DBCluster *types.DBCluster

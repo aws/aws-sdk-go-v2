@@ -62,7 +62,10 @@ func (c *Client) DeleteLoadBalancer(ctx context.Context, params *DeleteLoadBalan
 
 // Contains the parameters for DeleteLoadBalancer.
 type DeleteLoadBalancerInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 

@@ -58,28 +58,40 @@ func (c *Client) UpdateDimension(ctx context.Context, params *UpdateDimensionInp
 }
 
 type UpdateDimensionInput struct {
+
 	// A unique identifier for the dimension. Choose something that describes the type
 	// and value to make it easy to remember what it does.
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies the value or list of values for the dimension. For TOPIC_FILTER
 	// dimensions, this is a pattern used to match the MQTT topic (for example,
 	// "admin/#").
+	//
+	// This member is required.
 	StringValues []*string
 }
 
 type UpdateDimensionOutput struct {
+
 	// The value or list of values used to scope the dimension. For example, for topic
 	// filters, this is the pattern used to match the MQTT topic name.
 	StringValues []*string
+
 	// The type of the dimension.
 	Type types.DimensionType
+
 	// The date and time, in milliseconds since epoch, when the dimension was initially
 	// created.
 	CreationDate *time.Time
+
 	// A unique identifier for the dimension.
 	Name *string
+
 	// The ARN (Amazon resource name) of the created dimension.
 	Arn *string
+
 	// The date and time, in milliseconds since epoch, when the dimension was most
 	// recently updated.
 	LastModifiedDate *time.Time

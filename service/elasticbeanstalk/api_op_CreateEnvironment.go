@@ -59,14 +59,17 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 
 //
 type CreateEnvironmentInput struct {
+
 	// If specified, AWS Elastic Beanstalk sets the specified configuration options to
 	// the requested value in the configuration set for the new environment. These
 	// override the values obtained from the solution stack or the configuration
 	// template.
 	OptionSettings []*types.ConfigurationOptionSetting
+
 	// The name of the Elastic Beanstalk configuration template to use with the
 	// environment. If you specify TemplateName, then don't specify SolutionStackName.
 	TemplateName *string
+
 	// The name of an Elastic Beanstalk solution stack (platform version) to use with
 	// the environment. If specified, Elastic Beanstalk sets the configuration values
 	// to the default values associated with the specified solution stack. For a list
@@ -75,21 +78,26 @@ type CreateEnvironmentInput struct {
 	// in the AWS Elastic Beanstalk Platforms guide. If you specify SolutionStackName,
 	// don't specify PlatformArn or TemplateName.
 	SolutionStackName *string
+
 	// If specified, the environment attempts to use this value as the prefix for the
 	// CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is
 	// generated automatically by appending a random alphanumeric string to the
 	// environment name.
 	CNAMEPrefix *string
+
 	// Specifies the tags applied to resources in the environment.
 	Tags []*types.Tag
+
 	// The name of the group to which the target environment belongs. Specify a group
 	// name only if the environment's name is specified in an environment manifest and
 	// not with the environment name parameter. See Environment Manifest (env.yaml)
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
 	// for details.
 	GroupName *string
+
 	// Your description for this environment.
 	Description *string
+
 	// The Amazon Resource Name (ARN) of the custom platform to use with the
 	// environment. For more information, see Custom Platforms
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html)
@@ -97,6 +105,7 @@ type CreateEnvironmentInput struct {
 	// <code>PlatformArn</code>, don't specify <code>SolutionStackName</code>.</p>
 	// </note>
 	PlatformArn *string
+
 	// A unique name for the environment. Constraint: Must be from 4 to 40 characters
 	// in length. The name can contain only letters, numbers, and hyphens. It can't
 	// start or end with a hyphen. This name must be unique within a region in your
@@ -105,14 +114,20 @@ type CreateEnvironmentInput struct {
 	// parameter, the environment name becomes part of the CNAME, and therefore part of
 	// the visible URL for your application.
 	EnvironmentName *string
+
 	// The name of the application that is associated with this environment.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The name of the application version to deploy. Default: If not specified,
 	// Elastic Beanstalk attempts to deploy the sample application.
 	VersionLabel *string
+
 	// A list of custom user-defined configuration options to remove from the
 	// configuration set for this new environment.
 	OptionsToRemove []*types.OptionSpecification
+
 	// The Amazon Resource Name (ARN) of an existing IAM role to be used as the
 	// environment's operations role. If specified, Elastic Beanstalk uses the
 	// operations role for permissions to downstream services during this call and
@@ -122,6 +137,7 @@ type CreateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
 	// in the AWS Elastic Beanstalk Developer Guide.
 	OperationsRole *string
+
 	// Specifies the tier to use in creating this environment. The environment tier
 	// that you choose determines whether Elastic Beanstalk provisions resources to
 	// support a web application that handles HTTP(S) requests or a web application
@@ -131,40 +147,54 @@ type CreateEnvironmentInput struct {
 
 // Describes the properties of an environment.
 type CreateEnvironmentOutput struct {
+
 	// A list of links to other environments in the same group.
 	EnvironmentLinks []*types.EnvironmentLink
+
 	// Returns the health status of the application running in your environment. For
 	// more information, see Health Colors and Statuses
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
 	HealthStatus types.EnvironmentHealthStatus
+
 	// For load-balanced, autoscaling environments, the URL to the LoadBalancer. For
 	// single-instance environments, the IP address of the instance.
 	EndpointURL *string
+
 	// The ARN of the platform version.
 	PlatformArn *string
+
 	// The ID of this environment.
 	EnvironmentId *string
+
 	// The name of the application associated with this environment.
 	ApplicationName *string
+
 	// Indicates if there is an in-progress environment configuration update or
 	// application version deployment that you can cancel. true: There is an update in
 	// progress. false: There are no updates currently in progress.
 	AbortableOperationInProgress *bool
+
 	// The creation date for this environment.
 	DateCreated *time.Time
+
 	// The Amazon Resource Name (ARN) of the environment's operations role. For more
 	// information, see Operations roles
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
 	// in the AWS Elastic Beanstalk Developer Guide.
 	OperationsRole *string
+
 	// Describes the current tier of this environment.
 	Tier *types.EnvironmentTier
+
 	// The URL to the CNAME for this environment.
 	CNAME *string
+
 	// Describes this environment.
 	Description *string
+
 	// The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
+
 	// The current operational status of the environment:  <ul> <li> <p>
 	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
 	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
@@ -174,11 +204,14 @@ type CreateEnvironmentOutput struct {
 	// Environment is in the shut-down process.</p> </li> <li> <p>
 	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
 	Status types.EnvironmentStatus
+
 	// The environment's Amazon Resource Name (ARN), which can be used in other API
 	// requests that require an ARN.
 	EnvironmentArn *string
+
 	// The last modified date for this environment.
 	DateUpdated *time.Time
+
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
 	//
@@ -199,12 +232,16 @@ type CreateEnvironmentOutput struct {
 	//
 	// Default: Grey
 	Health types.EnvironmentHealth
+
 	// The application version deployed in this environment.
 	VersionLabel *string
+
 	// The name of this environment.
 	EnvironmentName *string
+
 	// The description of the AWS resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
+
 	// The name of the configuration template used to originally launch this
 	// environment.
 	TemplateName *string

@@ -57,14 +57,19 @@ func (c *Client) DescribeCACertificate(ctx context.Context, params *DescribeCACe
 
 // The input for the DescribeCACertificate operation.
 type DescribeCACertificateInput struct {
+
 	// The CA certificate identifier.
+	//
+	// This member is required.
 	CertificateId *string
 }
 
 // The output from the DescribeCACertificate operation.
 type DescribeCACertificateOutput struct {
+
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
+
 	// The CA certificate description.
 	CertificateDescription *types.CACertificateDescription
 

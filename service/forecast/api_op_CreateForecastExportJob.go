@@ -66,16 +66,26 @@ func (c *Client) CreateForecastExportJob(ctx context.Context, params *CreateFore
 }
 
 type CreateForecastExportJobInput struct {
+
 	// The name for the forecast export job.
+	//
+	// This member is required.
 	ForecastExportJobName *string
+
 	// The Amazon Resource Name (ARN) of the forecast that you want to export.
+	//
+	// This member is required.
 	ForecastArn *string
+
 	// The location where you want to save the forecast and an AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the location.
 	// The forecast must be exported to an Amazon S3 bucket. If encryption is used,
 	// Destination must include an AWS Key Management Service (KMS) key. The IAM role
 	// must allow Amazon Forecast permission to access the key.
+	//
+	// This member is required.
 	Destination *types.DataDestination
+
 	// The optional metadata that you apply to the forecast export job to help you
 	// categorize and organize them. Each tag consists of a key and an optional value,
 	// both of which you define. The following basic restrictions apply to tags:
@@ -111,6 +121,7 @@ type CreateForecastExportJobInput struct {
 }
 
 type CreateForecastExportJobOutput struct {
+
 	// The Amazon Resource Name (ARN) of the export job.
 	ForecastExportJobArn *string
 

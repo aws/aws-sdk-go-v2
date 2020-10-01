@@ -60,8 +60,12 @@ func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput
 
 // The UpdatePipelineRequest structure.
 type UpdatePipelineInput struct {
+
 	// The ID of the pipeline that you want to update.
+	//
+	// This member is required.
 	Id *string
+
 	// The AWS Key Management Service (AWS KMS) key that you want to use with this
 	// pipeline. If you use either s3 or s3-aws-kms as your Encryption:Mode, you don't
 	// need to provide a key with your job because a default key, known as an AWS-KMS
@@ -69,6 +73,7 @@ type UpdatePipelineInput struct {
 	// if you want to use a non-default AWS-KMS key, or if you are using an
 	// Encryption:Mode of aes-cbc-pkcs7, aes-ctr, or aes-gcm.
 	AwsKmsKeyArn *string
+
 	// The ThumbnailConfig object specifies several values, including the Amazon S3
 	// bucket in which you want Elastic Transcoder to save thumbnail files, which users
 	// you want to have access to the files, the type of access you want users to have,
@@ -131,6 +136,7 @@ type UpdatePipelineInput struct {
 	// storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder
 	// to assign to the thumbnails that it stores in your Amazon S3 bucket.
 	ThumbnailConfig *types.PipelineOutputConfig
+
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that
 	// you want to notify to report job status. To receive notifications, you must also
 	// subscribe to the new topic in the Amazon SNS console.
@@ -154,9 +160,11 @@ type UpdatePipelineInput struct {
 	// SNS topic that you want to notify when Elastic Transcoder encounters an error
 	// condition. This is the ARN that Amazon SNS returned when you created the topic.
 	Notifications *types.Notifications
+
 	// The Amazon S3 bucket in which you saved the media files that you want to
 	// transcode and the graphics that you want to use as watermarks.
 	InputBucket *string
+
 	// The optional ContentConfig object specifies information about the Amazon S3
 	// bucket in which you want Elastic Transcoder to save transcoded files and
 	// playlists: which bucket to use, which users you want to have access to the
@@ -224,9 +232,11 @@ type UpdatePipelineInput struct {
 	// Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the
 	// video files and playlists that it stores in your Amazon S3 bucket.
 	ContentConfig *types.PipelineOutputConfig
+
 	// The name of the pipeline. We recommend that the name be unique within the AWS
 	// account, but uniqueness is not enforced. Constraints: Maximum 40 characters
 	Name *string
+
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
 	// to use to transcode jobs for this pipeline.
 	Role *string
@@ -235,11 +245,13 @@ type UpdatePipelineInput struct {
 // When you update a pipeline, Elastic Transcoder returns the values that you
 // specified in the request.
 type UpdatePipelineOutput struct {
+
 	// Elastic Transcoder returns a warning if the resources used by your pipeline are
 	// not in the same region as the pipeline. Using resources in the same region, such
 	// as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key,
 	// reduces processing time and prevents cross-regional charges.
 	Warnings []*types.Warning
+
 	// The pipeline updated by this UpdatePipelineResponse call.
 	Pipeline *types.Pipeline
 

@@ -56,7 +56,10 @@ func (c *Client) StopCrawlerSchedule(ctx context.Context, params *StopCrawlerSch
 }
 
 type StopCrawlerScheduleInput struct {
+
 	// Name of the crawler whose schedule state to set.
+	//
+	// This member is required.
 	CrawlerName *string
 }
 

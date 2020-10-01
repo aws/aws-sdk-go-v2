@@ -57,6 +57,7 @@ type IsVpcPeeredInput struct {
 }
 
 type IsVpcPeeredOutput struct {
+
 	// Returns true if the Lightsail VPC is peered; otherwise, false.
 	IsPeered *bool
 

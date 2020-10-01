@@ -59,11 +59,18 @@ func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, par
 
 // UpdateConfigurationSetEventDestinationRequest
 type UpdateConfigurationSetEventDestinationInput struct {
+
 	// An object that defines a single event destination.
 	EventDestination *types.EventDestinationDefinition
+
 	// EventDestinationName
+	//
+	// This member is required.
 	EventDestinationName *string
+
 	// ConfigurationSetName
+	//
+	// This member is required.
 	ConfigurationSetName *string
 }
 

@@ -57,7 +57,10 @@ func (c *Client) DeleteEventBus(ctx context.Context, params *DeleteEventBusInput
 }
 
 type DeleteEventBusInput struct {
+
 	// The name of the event bus to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

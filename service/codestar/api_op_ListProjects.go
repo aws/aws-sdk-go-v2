@@ -55,16 +55,22 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 }
 
 type ListProjectsInput struct {
+
 	// The continuation token to be used to return the next set of results, if the
 	// results cannot be returned in one response.
 	NextToken *string
+
 	// The maximum amount of data that can be contained in a single set of results.
 	MaxResults *int32
 }
 
 type ListProjectsOutput struct {
+
 	// A list of projects.
+	//
+	// This member is required.
 	Projects []*types.ProjectSummary
+
 	// The continuation token to use when requesting the next set of results, if there
 	// are more results to be returned.
 	NextToken *string

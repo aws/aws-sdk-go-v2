@@ -83,15 +83,21 @@ func (c *Client) CreateDataSourceFromS3(ctx context.Context, params *CreateDataS
 }
 
 type CreateDataSourceFromS3Input struct {
+
 	// A user-supplied identifier that uniquely identifies the DataSource.
+	//
+	// This member is required.
 	DataSourceId *string
+
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string
+
 	// The compute statistics for a DataSource. The statistics are generated from the
 	// observation data referenced by a DataSource. Amazon ML uses the statistics
 	// internally during MLModel training. This parameter must be set to true if the
 	// DataSource needs to be used for MLModel training.
 	ComputeStatistics *bool
+
 	// The data specification of a DataSource:
 	//
 	//     * DataLocationS3 - The Amazon S3
@@ -107,6 +113,8 @@ type CreateDataSourceFromS3Input struct {
 	// DataRearrangement - A JSON string that represents the splitting and
 	// rearrangement requirements for the Datasource. Sample -
 	// "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//
+	// This member is required.
 	DataSpec *types.S3DataSpec
 }
 
@@ -115,6 +123,7 @@ type CreateDataSourceFromS3Input struct {
 // operation is asynchronous. You can poll for updates by using the
 // GetBatchPrediction operation and checking the Status parameter.
 type CreateDataSourceFromS3Output struct {
+
 	// A user-supplied ID that uniquely identifies the DataSource. This value should be
 	// identical to the value of the DataSourceID in the request.
 	DataSourceId *string

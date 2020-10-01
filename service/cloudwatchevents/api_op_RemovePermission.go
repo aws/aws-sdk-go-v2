@@ -58,9 +58,13 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 }
 
 type RemovePermissionInput struct {
+
 	// The statement ID corresponding to the account that is no longer allowed to put
 	// events to the default event bus.
+	//
+	// This member is required.
 	StatementId *string
+
 	// The name of the event bus to revoke permissions for. If you omit this, the
 	// default event bus is used.
 	EventBusName *string

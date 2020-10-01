@@ -60,12 +60,17 @@ func (c *Client) ModifyRule(ctx context.Context, params *ModifyRuleInput, optFns
 }
 
 type ModifyRuleInput struct {
+
 	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
 	RuleArn *string
+
 	// The conditions. Each rule can include zero or one of the following conditions:
 	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
 	// of the following conditions: http-header and query-string.
 	Conditions []*types.RuleCondition
+
 	// The actions. Each rule must include exactly one of the following types of
 	// actions: forward, fixed-response, or redirect, and it must be the last action to
 	// be performed. If the action type is forward, you specify one or more target
@@ -83,6 +88,7 @@ type ModifyRuleInput struct {
 }
 
 type ModifyRuleOutput struct {
+
 	// Information about the modified rule.
 	Rules []*types.Rule
 

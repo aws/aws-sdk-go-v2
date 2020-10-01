@@ -57,11 +57,15 @@ func (c *Client) GetPhoneNumberOrder(ctx context.Context, params *GetPhoneNumber
 }
 
 type GetPhoneNumberOrderInput struct {
+
 	// The ID for the phone number order.
+	//
+	// This member is required.
 	PhoneNumberOrderId *string
 }
 
 type GetPhoneNumberOrderOutput struct {
+
 	// The phone number order details.
 	PhoneNumberOrder *types.PhoneNumberOrder
 

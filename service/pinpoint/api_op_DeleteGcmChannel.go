@@ -57,16 +57,22 @@ func (c *Client) DeleteGcmChannel(ctx context.Context, params *DeleteGcmChannelI
 }
 
 type DeleteGcmChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteGcmChannelOutput struct {
+
 	// Provides information about the status and settings of the GCM channel for an
 	// application. The GCM channel enables Amazon Pinpoint to send push notifications
 	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
 	// (GCM), service.
+	//
+	// This member is required.
 	GCMChannelResponse *types.GCMChannelResponse
 
 	// Metadata pertaining to the operation's result.

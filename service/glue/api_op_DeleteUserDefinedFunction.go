@@ -55,12 +55,19 @@ func (c *Client) DeleteUserDefinedFunction(ctx context.Context, params *DeleteUs
 }
 
 type DeleteUserDefinedFunctionInput struct {
+
 	// The ID of the Data Catalog where the function to be deleted is located. If none
 	// is supplied, the AWS account ID is used by default.
 	CatalogId *string
+
 	// The name of the function definition to be deleted.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The name of the catalog database where the function is located.
+	//
+	// This member is required.
 	DatabaseName *string
 }
 

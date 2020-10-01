@@ -85,12 +85,16 @@ func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *Validat
 
 // Represents the input for a request action.
 type ValidateMatchmakingRuleSetInput struct {
+
 	// A collection of matchmaking rules to validate, formatted as a JSON string.
+	//
+	// This member is required.
 	RuleSetBody *string
 }
 
 // Represents the returned data in response to a request action.
 type ValidateMatchmakingRuleSetOutput struct {
+
 	// A response indicating whether the rule set is valid.
 	Valid *bool
 

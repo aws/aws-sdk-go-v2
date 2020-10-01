@@ -59,32 +59,40 @@ func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetE
 }
 
 type GetEC2InstanceRecommendationsInput struct {
+
 	// The token to advance to the next page of instance recommendations.
 	NextToken *string
+
 	// The maximum number of instance recommendations to return with a single request.
 	// To retrieve the remaining results, make another request with the returned
 	// NextToken value.
 	MaxResults *int32
+
 	// The IDs of the AWS accounts for which to return instance recommendations. If
 	// your account is the master account of an organization, use this parameter to
 	// specify the member accounts for which you want to return instance
 	// recommendations. Only one account ID can be specified per request.
 	AccountIds []*string
+
 	// The Amazon Resource Name (ARN) of the instances for which to return
 	// recommendations.
 	InstanceArns []*string
+
 	// An array of objects that describe a filter that returns a more specific list of
 	// instance recommendations.
 	Filters []*types.Filter
 }
 
 type GetEC2InstanceRecommendationsOutput struct {
+
 	// An array of objects that describe instance recommendations.
 	InstanceRecommendations []*types.InstanceRecommendation
+
 	// An array of objects that describe errors of the request. For example, an error
 	// is returned if you request recommendations for an instance of an unsupported
 	// instance family.
 	Errors []*types.GetRecommendationError
+
 	// The token to use to advance to the next page of instance recommendations. This
 	// value is null when there are no more pages of instance recommendations to
 	// return.

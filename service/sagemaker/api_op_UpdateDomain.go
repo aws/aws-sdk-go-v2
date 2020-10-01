@@ -56,13 +56,18 @@ func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, op
 }
 
 type UpdateDomainInput struct {
+
 	// The ID of the domain to be updated.
+	//
+	// This member is required.
 	DomainId *string
+
 	// A collection of settings.
 	DefaultUserSettings *types.UserSettings
 }
 
 type UpdateDomainOutput struct {
+
 	// The Amazon Resource Name (ARN) of the domain.
 	DomainArn *string
 

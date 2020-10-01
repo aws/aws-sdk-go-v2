@@ -56,14 +56,20 @@ func (c *Client) CreateRecommenderConfiguration(ctx context.Context, params *Cre
 }
 
 type CreateRecommenderConfigurationInput struct {
+
 	// Specifies Amazon Pinpoint configuration settings for retrieving and processing
 	// recommendation data from a recommender model.
+	//
+	// This member is required.
 	CreateRecommenderConfiguration *types.CreateRecommenderConfigurationShape
 }
 
 type CreateRecommenderConfigurationOutput struct {
+
 	// Provides information about Amazon Pinpoint configuration settings for retrieving
 	// and processing data from a recommender model.
+	//
+	// This member is required.
 	RecommenderConfigurationResponse *types.RecommenderConfigurationResponse
 
 	// Metadata pertaining to the operation's result.

@@ -56,10 +56,17 @@ func (c *Client) UpdatePlacement(ctx context.Context, params *UpdatePlacementInp
 }
 
 type UpdatePlacementInput struct {
+
 	// The name of the placement to update.
+	//
+	// This member is required.
 	PlacementName *string
+
 	// The name of the project containing the placement to be updated.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The user-defined object of attributes used to update the placement. The maximum
 	// number of key/value pairs is 50.
 	Attributes map[string]*string

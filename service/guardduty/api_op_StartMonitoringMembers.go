@@ -58,16 +58,25 @@ func (c *Client) StartMonitoringMembers(ctx context.Context, params *StartMonito
 }
 
 type StartMonitoringMembersInput struct {
+
 	// A list of account IDs of the GuardDuty member accounts to start monitoring.
+	//
+	// This member is required.
 	AccountIds []*string
+
 	// The unique ID of the detector of the GuardDuty master account associated with
 	// the member accounts to monitor.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type StartMonitoringMembersOutput struct {
+
 	// A list of objects that contain the unprocessed account and a result string that
 	// explains why it was unprocessed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

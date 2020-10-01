@@ -61,11 +61,17 @@ func (c *Client) UntagCertificateAuthority(ctx context.Context, params *UntagCer
 }
 
 type UntagCertificateAuthorityInput struct {
+
 	// The Amazon Resource Name (ARN) that was returned when you called
 	// CreateCertificateAuthority (). This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
+
 	// List of tags to be removed from the CA.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

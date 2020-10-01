@@ -59,11 +59,15 @@ func (c *Client) BatchDisableStandards(ctx context.Context, params *BatchDisable
 }
 
 type BatchDisableStandardsInput struct {
+
 	// The ARNs of the standards subscriptions to disable.
+	//
+	// This member is required.
 	StandardsSubscriptionArns []*string
 }
 
 type BatchDisableStandardsOutput struct {
+
 	// The details of the standards subscriptions that were disabled.
 	StandardsSubscriptions []*types.StandardsSubscription
 

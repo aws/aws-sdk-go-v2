@@ -59,9 +59,11 @@ func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersion
 }
 
 type ListVersionsByFunctionInput struct {
+
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
 	Marker *string
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -76,14 +78,19 @@ type ListVersionsByFunctionInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The maximum number of versions to return.
 	MaxItems *int32
 }
 
 type ListVersionsByFunctionOutput struct {
+
 	// A list of Lambda function versions.
 	Versions []*types.FunctionConfiguration
+
 	// The pagination token that's included if more results are available.
 	NextMarker *string
 

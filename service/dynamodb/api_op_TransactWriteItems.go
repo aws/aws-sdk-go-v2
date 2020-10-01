@@ -99,11 +99,15 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 }
 
 type TransactWriteItemsInput struct {
+
 	// An ordered array of up to 25 TransactWriteItem objects, each of which contains a
 	// ConditionCheck, Put, Update, or Delete object. These can operate on items in
 	// different tables, but the tables must reside in the same AWS account and Region,
 	// and no two of them can operate on the same item.
+	//
+	// This member is required.
 	TransactItems []*types.TransactWriteItem
+
 	// Providing a ClientRequestToken makes the call to TransactWriteItems idempotent,
 	// meaning that multiple identical calls have the same effect as one single call.
 	// Although multiple identical calls using the same client request token produce
@@ -120,6 +124,7 @@ type TransactWriteItemsInput struct {
 	// other parameters within the 10-minute idempotency window, DynamoDB returns an
 	// IdempotentParameterMismatch exception.
 	ClientRequestToken *string
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -136,6 +141,7 @@ type TransactWriteItemsInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// Determines whether item collection metrics are returned. If set to SIZE, the
 	// response includes statistics about item collections (if any), that were modified
 	// during the operation and are returned in the response. If set to NONE (the
@@ -144,10 +150,12 @@ type TransactWriteItemsInput struct {
 }
 
 type TransactWriteItemsOutput struct {
+
 	// The capacity units consumed by the entire TransactWriteItems operation. The
 	// values of the list are ordered according to the ordering of the TransactItems
 	// request parameter.
 	ConsumedCapacity []*types.ConsumedCapacity
+
 	// A list of tables that were processed by TransactWriteItems and, for each table,
 	// information about any item collections that were affected by individual
 	// UpdateItem, PutItem, or DeleteItem operations.

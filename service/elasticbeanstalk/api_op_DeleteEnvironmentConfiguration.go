@@ -62,9 +62,15 @@ func (c *Client) DeleteEnvironmentConfiguration(ctx context.Context, params *Del
 
 // Request to delete a draft environment configuration.
 type DeleteEnvironmentConfigurationInput struct {
+
 	// The name of the application the environment is associated with.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The name of the environment to delete the draft configuration from.
+	//
+	// This member is required.
 	EnvironmentName *string
 }
 

@@ -56,9 +56,15 @@ func (c *Client) SignOutUser(ctx context.Context, params *SignOutUserInput, optF
 }
 
 type SignOutUserInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The name of the user.
+	//
+	// This member is required.
 	Username *string
 }
 

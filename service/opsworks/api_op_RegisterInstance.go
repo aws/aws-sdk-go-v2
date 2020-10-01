@@ -74,25 +74,35 @@ func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceI
 }
 
 type RegisterInstanceInput struct {
+
 	// The instances public RSA key. This key is used to encrypt communication between
 	// the instance and the service.
 	RsaPublicKey *string
+
 	// The instance's private IP address.
 	PrivateIp *string
+
 	// The instances public RSA key fingerprint.
 	RsaPublicKeyFingerprint *string
+
 	// The ID of the stack that the instance is to be registered with.
+	//
+	// This member is required.
 	StackId *string
+
 	// The instance's hostname.
 	Hostname *string
+
 	// An InstanceIdentity object that contains the instance's identity.
 	InstanceIdentity *types.InstanceIdentity
+
 	// The instance's public IP address.
 	PublicIp *string
 }
 
 // Contains the response to a RegisterInstanceResult request.
 type RegisterInstanceOutput struct {
+
 	// The registered instance's AWS OpsWorks Stacks ID.
 	InstanceId *string
 

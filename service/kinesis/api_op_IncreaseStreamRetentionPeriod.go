@@ -64,10 +64,16 @@ func (c *Client) IncreaseStreamRetentionPeriod(ctx context.Context, params *Incr
 
 // Represents the input for IncreaseStreamRetentionPeriod ().
 type IncreaseStreamRetentionPeriodInput struct {
+
 	// The new retention period of the stream, in hours. Must be more than the current
 	// retention period.
+	//
+	// This member is required.
 	RetentionPeriodHours *int32
+
 	// The name of the stream to modify.
+	//
+	// This member is required.
 	StreamName *string
 }
 

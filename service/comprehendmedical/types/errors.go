@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An internal server error occurred. Retry your request.
@@ -24,12 +23,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input text was not in valid UTF-8 character encoding. Check your text then
 // retry your request.
@@ -48,12 +41,6 @@ func (e *InvalidEncodingException) ErrorMessage() string {
 }
 func (e *InvalidEncodingException) ErrorCode() string             { return "InvalidEncodingException" }
 func (e *InvalidEncodingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEncodingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEncodingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request that you made is invalid. Check your request to determine why it's
 // invalid and then retry the request.
@@ -72,12 +59,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource identified by the specified Amazon Resource Name (ARN) was not
 // found. Check the ARN and try your request again.
@@ -96,12 +77,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Comprehend Medical service is temporarily unavailable. Please wait
 // and then retry your request.
@@ -120,12 +95,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The size of the text you submitted exceeds the size limit. Reduce the size of
 // the text or use a smaller document and then retry your request.
@@ -144,12 +113,6 @@ func (e *TextSizeLimitExceededException) ErrorMessage() string {
 }
 func (e *TextSizeLimitExceededException) ErrorCode() string             { return "TextSizeLimitExceededException" }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TextSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TextSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have made too many requests within a short period of time. Wait for a short
 // time and then try your request again. Contact customer support for more
@@ -169,12 +132,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The filter that you specified for the operation is invalid. Check the filter
 // values that you entered and try your request again.
@@ -193,9 +150,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

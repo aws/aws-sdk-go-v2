@@ -56,18 +56,29 @@ func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, 
 }
 
 type DescribeGroupInput struct {
+
 	// The name of the group that you want to describe.
+	//
+	// This member is required.
 	GroupName *string
+
 	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The ID for the AWS account that the group is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DescribeGroupOutput struct {
+
 	// The name of the group.
 	Group *types.Group
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

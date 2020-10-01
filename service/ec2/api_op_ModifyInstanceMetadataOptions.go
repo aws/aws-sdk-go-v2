@@ -63,16 +63,19 @@ func (c *Client) ModifyInstanceMetadataOptions(ctx context.Context, params *Modi
 }
 
 type ModifyInstanceMetadataOptionsInput struct {
+
 	// This parameter enables or disables the HTTP metadata endpoint on your instances.
 	// If the parameter is not specified, the existing state is maintained. If you
 	// specify a value of disabled, you will not be able to access your instance
 	// metadata.
 	HttpEndpoint types.InstanceMetadataEndpointState
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The state of token usage for your instance metadata requests. If the parameter
 	// is not specified in the request, the default state is optional. If the state is
 	// optional, you can choose to retrieve instance metadata with or without a signed
@@ -84,18 +87,24 @@ type ModifyInstanceMetadataOptionsInput struct {
 	// credential always returns the version 2.0 credentials; the version 1.0
 	// credentials are not available.
 	HttpTokens types.HttpTokensState
+
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. If no
 	// parameter is specified, the existing state is maintained. Possible values:
 	// Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 type ModifyInstanceMetadataOptionsOutput struct {
+
 	// The metadata options for the instance.
 	InstanceMetadataOptions *types.InstanceMetadataOptionsResponse
+
 	// The ID of the instance.
 	InstanceId *string
 

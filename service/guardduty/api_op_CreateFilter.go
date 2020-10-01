@@ -58,11 +58,16 @@ func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, op
 }
 
 type CreateFilterInput struct {
+
 	// The unique ID of the detector of the GuardDuty account that you want to create a
 	// filter for.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The idempotency token for the create request.
 	ClientToken *string
+
 	// Represents the criteria to be used in the filter for querying findings. You can
 	// only use the following attributes to query findings:
 	//
@@ -208,23 +213,35 @@ type CreateFilterInput struct {
 	//
 	//     * updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
 	// YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.
+	//
+	// This member is required.
 	FindingCriteria *types.FindingCriteria
+
 	// The description of the filter.
 	Description *string
+
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
 	Action types.FilterAction
+
 	// The name of the filter.
+	//
+	// This member is required.
 	Name *string
+
 	// The tags to be added to a new filter resource.
 	Tags map[string]*string
+
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
 	Rank *int32
 }
 
 type CreateFilterOutput struct {
+
 	// The name of the successfully created filter.
+	//
+	// This member is required.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

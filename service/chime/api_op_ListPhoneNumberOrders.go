@@ -55,15 +55,19 @@ func (c *Client) ListPhoneNumberOrders(ctx context.Context, params *ListPhoneNum
 }
 
 type ListPhoneNumberOrdersInput struct {
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
 }
 
 type ListPhoneNumberOrdersOutput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The phone number order details.
 	PhoneNumberOrders []*types.PhoneNumberOrder
 

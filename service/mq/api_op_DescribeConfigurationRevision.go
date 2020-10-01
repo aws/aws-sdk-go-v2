@@ -56,19 +56,29 @@ func (c *Client) DescribeConfigurationRevision(ctx context.Context, params *Desc
 }
 
 type DescribeConfigurationRevisionInput struct {
+
 	// The revision of the configuration.
+	//
+	// This member is required.
 	ConfigurationRevision *string
+
 	// The unique ID that Amazon MQ generates for the configuration.
+	//
+	// This member is required.
 	ConfigurationId *string
 }
 
 type DescribeConfigurationRevisionOutput struct {
+
 	// Required. The unique ID that Amazon MQ generates for the configuration.
 	ConfigurationId *string
+
 	// Required. The base64-encoded XML configuration.
 	Data *string
+
 	// The description of the configuration.
 	Description *string
+
 	// Required. The date and time of the configuration.
 	Created *time.Time
 

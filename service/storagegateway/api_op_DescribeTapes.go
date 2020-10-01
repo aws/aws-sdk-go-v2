@@ -60,17 +60,23 @@ func (c *Client) DescribeTapes(ctx context.Context, params *DescribeTapesInput, 
 
 // DescribeTapesInput
 type DescribeTapesInput struct {
+
 	// A marker value, obtained in a previous call to DescribeTapes. This marker
 	// indicates which page of results to retrieve.  <p>If not specified, the first
 	// page of results is retrieved.</p>
 	Marker *string
+
 	// Specifies that the number of virtual tapes described be limited to the specified
 	// number.  <note> <p>Amazon Web Services may impose its own limit, if this field
 	// is not set.</p> </note>
 	Limit *int32
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// Specifies one or more unique Amazon Resource Names (ARNs) that represent the
 	// virtual tapes you want to describe. If this parameter is not specified, Tape
 	// gateway returns a description of all virtual tapes associated with the specified
@@ -80,8 +86,10 @@ type DescribeTapesInput struct {
 
 // DescribeTapesOutput
 type DescribeTapesOutput struct {
+
 	// An array of virtual tape descriptions.
 	Tapes []*types.Tape
+
 	// An opaque string which can be used as part of a subsequent DescribeTapes call to
 	// retrieve the next page of results.  <p>If a response does not contain a marker,
 	// then there are no more results to be retrieved.</p>

@@ -56,9 +56,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// A list of tags to apply to the function.
+	//
+	// This member is required.
 	Tags map[string]*string
+
 	// The function's Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	Resource *string
 }
 

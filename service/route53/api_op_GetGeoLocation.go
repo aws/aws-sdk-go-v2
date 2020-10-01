@@ -67,6 +67,7 @@ func (c *Client) GetGeoLocation(ctx context.Context, params *GetGeoLocationInput
 // A request for information about whether a specified geographic location is
 // supported for Amazon Route 53 geolocation resource record sets.
 type GetGeoLocationInput struct {
+
 	// For geolocation resource record sets, a two-letter abbreviation that identifies
 	// a continent. Amazon Route 53 supports the following continent codes:
 	//
@@ -86,12 +87,14 @@ type GetGeoLocationInput struct {
 	//
 	//     * SA: South America
 	ContinentCode *string
+
 	// For SubdivisionCode, Amazon Route 53 supports only states of the United States.
 	// For a list of state abbreviations, see Appendix B: Two–Letter State and
 	// Possession Abbreviations (https://pe.usps.com/text/pub28/28apb.htm) on the
 	// United States Postal Service website. If you specify subdivisioncode, you must
 	// also specify US for CountryCode.
 	SubdivisionCode *string
+
 	// Amazon Route 53 uses the two-letter country codes that are specified in ISO
 	// standard 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 	CountryCode *string
@@ -100,8 +103,11 @@ type GetGeoLocationInput struct {
 // A complex type that contains the response information for the specified
 // geolocation code.
 type GetGeoLocationOutput struct {
+
 	// A complex type that contains the codes and full continent, country, and
 	// subdivision names for the specified geolocation code.
+	//
+	// This member is required.
 	GeoLocationDetails *types.GeoLocationDetails
 
 	// Metadata pertaining to the operation's result.

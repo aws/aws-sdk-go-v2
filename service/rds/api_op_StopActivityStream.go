@@ -60,20 +60,27 @@ func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStr
 }
 
 type StopActivityStreamInput struct {
+
 	// Specifies whether or not the database activity stream is to stop as soon as
 	// possible, regardless of the maintenance window for the database.
 	ApplyImmediately *bool
+
 	// The Amazon Resource Name (ARN) of the DB cluster for the database activity
 	// stream. For example, arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type StopActivityStreamOutput struct {
+
 	// The AWS KMS key identifier used for encrypting messages in the database activity
 	// stream.
 	KmsKeyId *string
+
 	// The status of the database activity stream.
 	Status types.ActivityStreamStatus
+
 	// The name of the Amazon Kinesis data stream used for the database activity
 	// stream.
 	KinesisStreamName *string

@@ -59,14 +59,18 @@ func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlot
 }
 
 type GetBuiltinSlotTypesInput struct {
+
 	// A list of locales that the slot type supports.
 	Locale types.Locale
+
 	// Substring to match in built-in slot type signatures. A slot type will be
 	// returned if any part of its signature matches the substring. For example, "xyz"
 	// matches both "xyzabc" and "abcxyz."
 	SignatureContains *string
+
 	// The maximum number of slot types to return in the response. The default is 10.
 	MaxResults *int32
+
 	// A pagination token that fetches the next page of slot types. If the response to
 	// this API call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of slot types, specify the pagination token in
@@ -75,9 +79,11 @@ type GetBuiltinSlotTypesInput struct {
 }
 
 type GetBuiltinSlotTypesOutput struct {
+
 	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
 	// returned.
 	SlotTypes []*types.BuiltinSlotTypeMetadata
+
 	// If the response is truncated, the response includes a pagination token that you
 	// can use in your next request to fetch the next page of slot types.
 	NextToken *string

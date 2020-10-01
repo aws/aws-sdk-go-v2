@@ -56,13 +56,19 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 }
 
 type DeleteAppInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteAppOutput struct {
+
 	// Provides information about an application.
+	//
+	// This member is required.
 	ApplicationResponse *types.ApplicationResponse
 
 	// Metadata pertaining to the operation's result.

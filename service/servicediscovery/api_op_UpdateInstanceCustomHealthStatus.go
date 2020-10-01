@@ -62,12 +62,21 @@ func (c *Client) UpdateInstanceCustomHealthStatus(ctx context.Context, params *U
 }
 
 type UpdateInstanceCustomHealthStatusInput struct {
+
 	// The new status of the instance, HEALTHY or UNHEALTHY.
+	//
+	// This member is required.
 	Status types.CustomHealthStatus
+
 	// The ID of the service that includes the configuration for the custom health
 	// check that you want to change the status for.
+	//
+	// This member is required.
 	ServiceId *string
+
 	// The ID of the instance that you want to change the health status for.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

@@ -55,9 +55,15 @@ func (c *Client) DeleteProvisioningTemplateVersion(ctx context.Context, params *
 }
 
 type DeleteProvisioningTemplateVersionInput struct {
+
 	// The name of the fleet provisioning template version to delete.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// The fleet provisioning template version ID to delete.
+	//
+	// This member is required.
 	VersionId *int32
 }
 

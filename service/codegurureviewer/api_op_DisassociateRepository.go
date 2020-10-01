@@ -56,13 +56,17 @@ func (c *Client) DisassociateRepository(ctx context.Context, params *Disassociat
 }
 
 type DisassociateRepositoryInput struct {
+
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
 	// object.
+	//
+	// This member is required.
 	AssociationArn *string
 }
 
 type DisassociateRepositoryOutput struct {
+
 	// Information about the disassociated repository.
 	RepositoryAssociation *types.RepositoryAssociation
 

@@ -55,15 +55,19 @@ func (c *Client) GetApp(ctx context.Context, params *GetAppInput, optFns ...func
 }
 
 type GetAppInput struct {
+
 	// ID of the application whose information is being retrieved.
 	AppId *string
 }
 
 type GetAppOutput struct {
+
 	// List of server groups belonging to the application.
 	ServerGroups []*types.ServerGroup
+
 	// Information about the application.
 	AppSummary *types.AppSummary
+
 	// List of tags associated with the application.
 	Tags []*types.Tag
 

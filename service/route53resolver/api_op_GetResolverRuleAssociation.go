@@ -57,11 +57,15 @@ func (c *Client) GetResolverRuleAssociation(ctx context.Context, params *GetReso
 }
 
 type GetResolverRuleAssociationInput struct {
+
 	// The ID of the resolver rule association that you want to get information about.
+	//
+	// This member is required.
 	ResolverRuleAssociationId *string
 }
 
 type GetResolverRuleAssociationOutput struct {
+
 	// Information about the resolver rule association that you specified in a
 	// GetResolverRuleAssociation request.
 	ResolverRuleAssociation *types.ResolverRuleAssociation

@@ -59,9 +59,15 @@ func (c *Client) SetDefaultPolicyVersion(ctx context.Context, params *SetDefault
 
 // The input for the SetDefaultPolicyVersion operation.
 type SetDefaultPolicyVersionInput struct {
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The policy version ID.
+	//
+	// This member is required.
 	PolicyVersionId *string
 }
 

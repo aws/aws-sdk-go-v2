@@ -58,21 +58,29 @@ func (c *Client) DescribeLocationNfs(ctx context.Context, params *DescribeLocati
 
 // DescribeLocationNfsRequest
 type DescribeLocationNfsInput struct {
+
 	// The Amazon Resource Name (ARN) of the NFS location to describe.
+	//
+	// This member is required.
 	LocationArn *string
 }
 
 // DescribeLocationNfsResponse
 type DescribeLocationNfsOutput struct {
+
 	// The URL of the source NFS location that was described.
 	LocationUri *string
+
 	// The NFS mount options that DataSync used to mount your NFS share.
 	MountOptions *types.NfsMountOptions
+
 	// The Amazon Resource Name (ARN) of the NFS location that was described.
 	LocationArn *string
+
 	// A list of Amazon Resource Names (ARNs) of agents to use for a Network File
 	// System (NFS) location.
 	OnPremConfig *types.OnPremConfig
+
 	// The time that the NFS location was created.
 	CreationTime *time.Time
 

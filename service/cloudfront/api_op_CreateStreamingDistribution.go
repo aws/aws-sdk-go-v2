@@ -79,16 +79,22 @@ func (c *Client) CreateStreamingDistribution(ctx context.Context, params *Create
 
 // The request to create a new streaming distribution.
 type CreateStreamingDistributionInput struct {
+
 	// The streaming distribution's configuration information.
+	//
+	// This member is required.
 	StreamingDistributionConfig *types.StreamingDistributionConfig
 }
 
 // The returned result of the corresponding request.
 type CreateStreamingDistributionOutput struct {
+
 	// The fully qualified URI of the new streaming distribution resource just created.
 	Location *string
+
 	// The streaming distribution's information.
 	StreamingDistribution *types.StreamingDistribution
+
 	// The current version of the streaming distribution created.
 	ETag *string
 

@@ -55,13 +55,16 @@ func (c *Client) GetGroups(ctx context.Context, params *GetGroupsInput, optFns .
 }
 
 type GetGroupsInput struct {
+
 	// Pagination token.
 	NextToken *string
 }
 
 type GetGroupsOutput struct {
+
 	// The collection of all active groups.
 	Groups []*types.GroupSummary
+
 	// Pagination token.
 	NextToken *string
 

@@ -56,19 +56,26 @@ func (c *Client) ListAssociationVersions(ctx context.Context, params *ListAssoci
 }
 
 type ListAssociationVersionsInput struct {
+
 	// The association ID for which you want to view all versions.
+	//
+	// This member is required.
 	AssociationId *string
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
 }
 
 type ListAssociationVersionsOutput struct {
+
 	// Information about all versions of the association for the specified association
 	// ID.
 	AssociationVersions []*types.AssociationVersionInfo
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string

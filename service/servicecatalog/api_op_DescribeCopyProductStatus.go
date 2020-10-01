@@ -56,9 +56,13 @@ func (c *Client) DescribeCopyProductStatus(ctx context.Context, params *Describe
 }
 
 type DescribeCopyProductStatusInput struct {
+
 	// The token for the copy product operation. This token is returned by CopyProduct
 	// ().
+	//
+	// This member is required.
 	CopyProductToken *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -71,10 +75,13 @@ type DescribeCopyProductStatusInput struct {
 }
 
 type DescribeCopyProductStatusOutput struct {
+
 	// The identifier of the copied product.
 	TargetProductId *string
+
 	// The status of the copy product operation.
 	CopyProductStatus types.CopyProductStatus
+
 	// The status message.
 	StatusDetail *string
 

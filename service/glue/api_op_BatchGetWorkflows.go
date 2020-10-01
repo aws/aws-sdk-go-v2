@@ -59,17 +59,23 @@ func (c *Client) BatchGetWorkflows(ctx context.Context, params *BatchGetWorkflow
 }
 
 type BatchGetWorkflowsInput struct {
+
 	// A list of workflow names, which may be the names returned from the ListWorkflows
 	// operation.
+	//
+	// This member is required.
 	Names []*string
+
 	// Specifies whether to include a graph when returning the workflow resource
 	// metadata.
 	IncludeGraph *bool
 }
 
 type BatchGetWorkflowsOutput struct {
+
 	// A list of workflow resource metadata.
 	Workflows []*types.Workflow
+
 	// A list of names of workflows not found.
 	MissingWorkflows []*string
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The resource with the name requested already exists.
@@ -24,12 +23,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occurred during a CloudFormation registry operation.
 type CFNRegistryException struct {
@@ -47,12 +40,6 @@ func (e *CFNRegistryException) ErrorMessage() string {
 }
 func (e *CFNRegistryException) ErrorCode() string             { return "CFNRegistryException" }
 func (e *CFNRegistryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CFNRegistryException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CFNRegistryException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified change set name or ID doesn't exit. To view valid change sets for
 // a stack, use the ListChangeSets action.
@@ -71,12 +58,6 @@ func (e *ChangeSetNotFoundException) ErrorMessage() string {
 }
 func (e *ChangeSetNotFoundException) ErrorCode() string             { return "ChangeSetNotFoundException" }
 func (e *ChangeSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ChangeSetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ChangeSetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource exists, but has been changed.
 type CreatedButModifiedException struct {
@@ -94,12 +75,6 @@ func (e *CreatedButModifiedException) ErrorMessage() string {
 }
 func (e *CreatedButModifiedException) ErrorCode() string             { return "CreatedButModifiedException" }
 func (e *CreatedButModifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CreatedButModifiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CreatedButModifiedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The template contains resources with capabilities that weren't specified in the
 // Capabilities parameter.
@@ -120,12 +95,6 @@ func (e *InsufficientCapabilitiesException) ErrorCode() string {
 	return "InsufficientCapabilitiesException"
 }
 func (e *InsufficientCapabilitiesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientCapabilitiesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientCapabilitiesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified change set can't be used to update the stack. For example, the
 // change set status might be CREATE_IN_PROGRESS, or the stack status might be
@@ -147,12 +116,6 @@ func (e *InvalidChangeSetStatusException) ErrorCode() string {
 	return "InvalidChangeSetStatusException"
 }
 func (e *InvalidChangeSetStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidChangeSetStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidChangeSetStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified operation isn't valid.
 type InvalidOperationException struct {
@@ -170,12 +133,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 }
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Error reserved for use by the CloudFormation CLI
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
@@ -197,12 +154,6 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 	return "InvalidStateTransitionException"
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateTransitionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateTransitionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for the resource has already been reached. For information on resource
 // and stack limitations, see Limits
@@ -223,12 +174,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified name is already in use.
 type NameAlreadyExistsException struct {
@@ -246,12 +191,6 @@ func (e *NameAlreadyExistsException) ErrorMessage() string {
 }
 func (e *NameAlreadyExistsException) ErrorCode() string             { return "NameAlreadyExistsException" }
 func (e *NameAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NameAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NameAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified operation ID already exists.
 type OperationIdAlreadyExistsException struct {
@@ -271,12 +210,6 @@ func (e *OperationIdAlreadyExistsException) ErrorCode() string {
 	return "OperationIdAlreadyExistsException"
 }
 func (e *OperationIdAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationIdAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationIdAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Another operation is currently in progress for this stack set. Only one
 // operation can be performed for a stack set at a given time.
@@ -295,12 +228,6 @@ func (e *OperationInProgressException) ErrorMessage() string {
 }
 func (e *OperationInProgressException) ErrorCode() string             { return "OperationInProgressException" }
 func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ID refers to an operation that doesn't exist.
 type OperationNotFoundException struct {
@@ -318,12 +245,6 @@ func (e *OperationNotFoundException) ErrorMessage() string {
 }
 func (e *OperationNotFoundException) ErrorCode() string             { return "OperationNotFoundException" }
 func (e *OperationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Error reserved for use by the CloudFormation CLI
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
@@ -347,12 +268,6 @@ func (e *OperationStatusCheckFailedException) ErrorCode() string {
 func (e *OperationStatusCheckFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OperationStatusCheckFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationStatusCheckFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified stack instance doesn't exist.
 type StackInstanceNotFoundException struct {
@@ -370,12 +285,6 @@ func (e *StackInstanceNotFoundException) ErrorMessage() string {
 }
 func (e *StackInstanceNotFoundException) ErrorCode() string             { return "StackInstanceNotFoundException" }
 func (e *StackInstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StackInstanceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StackInstanceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't yet delete this stack set, because it still contains one or more stack
 // instances. Delete all stack instances from the stack set before deleting the
@@ -395,12 +304,6 @@ func (e *StackSetNotEmptyException) ErrorMessage() string {
 }
 func (e *StackSetNotEmptyException) ErrorCode() string             { return "StackSetNotEmptyException" }
 func (e *StackSetNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StackSetNotEmptyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StackSetNotEmptyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified stack set doesn't exist.
 type StackSetNotFoundException struct {
@@ -418,12 +321,6 @@ func (e *StackSetNotFoundException) ErrorMessage() string {
 }
 func (e *StackSetNotFoundException) ErrorCode() string             { return "StackSetNotFoundException" }
 func (e *StackSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StackSetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StackSetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Another operation has been performed on this stack set since the specified
 // operation was performed.
@@ -442,12 +339,6 @@ func (e *StaleRequestException) ErrorMessage() string {
 }
 func (e *StaleRequestException) ErrorCode() string             { return "StaleRequestException" }
 func (e *StaleRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StaleRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StaleRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A client request token already exists.
 type TokenAlreadyExistsException struct {
@@ -465,12 +356,6 @@ func (e *TokenAlreadyExistsException) ErrorMessage() string {
 }
 func (e *TokenAlreadyExistsException) ErrorCode() string             { return "TokenAlreadyExistsException" }
 func (e *TokenAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TokenAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TokenAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified type does not exist in the CloudFormation registry.
 type TypeNotFoundException struct {
@@ -488,9 +373,3 @@ func (e *TypeNotFoundException) ErrorMessage() string {
 }
 func (e *TypeNotFoundException) ErrorCode() string             { return "TypeNotFoundException" }
 func (e *TypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TypeNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TypeNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

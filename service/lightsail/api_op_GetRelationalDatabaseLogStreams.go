@@ -56,11 +56,15 @@ func (c *Client) GetRelationalDatabaseLogStreams(ctx context.Context, params *Ge
 }
 
 type GetRelationalDatabaseLogStreamsInput struct {
+
 	// The name of your database for which to get log streams.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
 }
 
 type GetRelationalDatabaseLogStreamsOutput struct {
+
 	// An object describing the result of your get relational database log streams
 	// request.
 	LogStreams []*string

@@ -58,30 +58,43 @@ func (c *Client) StopMultiplex(ctx context.Context, params *StopMultiplexInput, 
 
 // Placeholder documentation for StopMultiplexRequest
 type StopMultiplexInput struct {
+
 	// The ID of the multiplex.
+	//
+	// This member is required.
 	MultiplexId *string
 }
 
 // Placeholder documentation for StopMultiplexResponse
 type StopMultiplexOutput struct {
+
 	// A list of the multiplex output destinations.
 	Destinations []*types.MultiplexOutputDestination
+
 	// The number of programs in the multiplex.
 	ProgramCount *int32
+
 	// The current state of the multiplex.
 	State types.MultiplexState
+
 	// The name of the multiplex.
 	Name *string
+
 	// The unique id of the multiplex.
 	Id *string
+
 	// Configuration for a multiplex event.
 	MultiplexSettings *types.MultiplexSettings
+
 	// The unique arn of the multiplex.
 	Arn *string
+
 	// The number of currently healthy pipelines.
 	PipelinesRunningCount *int32
+
 	// A list of availability zones for the multiplex.
 	AvailabilityZones []*string
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
 

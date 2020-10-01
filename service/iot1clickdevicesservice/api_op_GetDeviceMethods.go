@@ -56,11 +56,15 @@ func (c *Client) GetDeviceMethods(ctx context.Context, params *GetDeviceMethodsI
 }
 
 type GetDeviceMethodsInput struct {
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
 }
 
 type GetDeviceMethodsOutput struct {
+
 	// List of available device APIs.
 	DeviceMethods []*types.DeviceMethod
 

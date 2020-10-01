@@ -65,12 +65,18 @@ func (c *Client) DeleteLunaClient(ctx context.Context, params *DeleteLunaClientI
 }
 
 type DeleteLunaClientInput struct {
+
 	// The ARN of the client to delete.
+	//
+	// This member is required.
 	ClientArn *string
 }
 
 type DeleteLunaClientOutput struct {
+
 	// The status of the action.
+	//
+	// This member is required.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

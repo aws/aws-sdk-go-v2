@@ -60,7 +60,10 @@ func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput
 
 // Input for DeleteEndpoint action.
 type DeleteEndpointInput struct {
+
 	// EndpointArn of endpoint to delete.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 

@@ -73,16 +73,19 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 }
 
 type DescribeServicesInput struct {
+
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
 	Language *string
+
 	// A JSON-formatted list of service codes available for AWS services.
 	ServiceCodeList []*string
 }
 
 // The list of AWS services returned by the DescribeServices () operation.
 type DescribeServicesOutput struct {
+
 	// A JSON-formatted list of AWS services.
 	Services []*types.Service
 

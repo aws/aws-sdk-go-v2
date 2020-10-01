@@ -59,9 +59,11 @@ func (c *Client) ListElasticsearchVersions(ctx context.Context, params *ListElas
 // response does not contain a NextToken, then there are no more results to
 // retrieve.
 type ListElasticsearchVersionsInput struct {
+
 	// Set this value to limit the number of results returned. Value provided must be
 	// greater than 10 else it wont be honored.
 	MaxResults *int32
+
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
 	// more results.
@@ -71,10 +73,12 @@ type ListElasticsearchVersionsInput struct {
 // Container for the parameters for response received from
 // ListElasticsearchVersions () operation.
 type ListElasticsearchVersionsOutput struct {
+
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
 	// more results.
 	NextToken *string
+
 	// List of supported elastic search versions.
 	ElasticsearchVersions []*string
 

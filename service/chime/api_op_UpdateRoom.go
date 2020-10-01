@@ -57,15 +57,23 @@ func (c *Client) UpdateRoom(ctx context.Context, params *UpdateRoomInput, optFns
 }
 
 type UpdateRoomInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The room ID.
+	//
+	// This member is required.
 	RoomId *string
+
 	// The room name.
 	Name *string
 }
 
 type UpdateRoomOutput struct {
+
 	// The room details.
 	Room *types.Room
 

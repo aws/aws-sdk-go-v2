@@ -57,8 +57,12 @@ func (c *Client) ListRuns(ctx context.Context, params *ListRunsInput, optFns ...
 
 // Represents a request to the list runs operation.
 type ListRunsInput struct {
+
 	// The Amazon Resource Name (ARN) of the project for which you want to list runs.
+	//
+	// This member is required.
 	Arn *string
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
@@ -66,10 +70,12 @@ type ListRunsInput struct {
 
 // Represents the result of a list runs request.
 type ListRunsOutput struct {
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.
 	NextToken *string
+
 	// Information about the runs.
 	Runs []*types.Run
 

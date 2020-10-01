@@ -55,22 +55,33 @@ func (c *Client) GetModel(ctx context.Context, params *GetModelInput, optFns ...
 }
 
 type GetModelInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
 }
 
 type GetModelOutput struct {
+
 	// The name of the model. Must be alphanumeric.
 	Name *string
+
 	// The description of the model.
 	Description *string
+
 	// The content-type for the model, for example, "application/json".
 	ContentType *string
+
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.
 	Schema *string
+
 	// The model identifier.
 	ModelId *string
 

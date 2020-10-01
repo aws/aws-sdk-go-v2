@@ -57,19 +57,31 @@ func (c *Client) GetMembers(ctx context.Context, params *GetMembersInput, optFns
 }
 
 type GetMembersInput struct {
+
 	// The unique ID of the detector of the GuardDuty account whose members you want to
 	// retrieve.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// A list of account IDs of the GuardDuty member accounts that you want to
 	// describe.
+	//
+	// This member is required.
 	AccountIds []*string
 }
 
 type GetMembersOutput struct {
+
 	// A list of members.
+	//
+	// This member is required.
 	Members []*types.Member
+
 	// A list of objects that contain the unprocessed account and a result string that
 	// explains why it was unprocessed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

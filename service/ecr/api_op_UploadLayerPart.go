@@ -60,29 +60,49 @@ func (c *Client) UploadLayerPart(ctx context.Context, params *UploadLayerPartInp
 }
 
 type UploadLayerPartInput struct {
+
 	// The name of the repository to which you are uploading layer parts.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The position of the first byte of the layer part witin the overall image layer.
+	//
+	// This member is required.
 	PartFirstByte *int64
+
 	// The position of the last byte of the layer part within the overall image layer.
+	//
+	// This member is required.
 	PartLastByte *int64
+
 	// The AWS account ID associated with the registry to which you are uploading layer
 	// parts. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The upload ID from a previous InitiateLayerUpload () operation to associate with
 	// the layer part upload.
+	//
+	// This member is required.
 	UploadId *string
+
 	// The base64-encoded layer part payload.
+	//
+	// This member is required.
 	LayerPartBlob []byte
 }
 
 type UploadLayerPartOutput struct {
+
 	// The registry ID associated with the request.
 	RegistryId *string
+
 	// The upload ID associated with the request.
 	UploadId *string
+
 	// The integer value of the last byte received in the request.
 	LastByteReceived *int64
+
 	// The repository name associated with the request.
 	RepositoryName *string
 

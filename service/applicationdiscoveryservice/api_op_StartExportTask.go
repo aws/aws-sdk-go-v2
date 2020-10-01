@@ -65,26 +65,31 @@ func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInp
 }
 
 type StartExportTaskInput struct {
+
 	// The start timestamp for exported data from the single Application Discovery
 	// Agent selected in the filters. If no value is specified, data is exported
 	// starting from the first data collected by the agent.
 	StartTime *time.Time
+
 	// The end timestamp for exported data from the single Application Discovery Agent
 	// selected in the filters. If no value is specified, exported data includes the
 	// most recent data collected by the agent.
 	EndTime *time.Time
+
 	// If a filter is present, it selects the single agentId of the Application
 	// Discovery Agent for which data is exported. The agentId can be found in the
 	// results of the DescribeAgents API or CLI. If no filter is present, startTime and
 	// endTime are ignored and exported data includes both Agentless Discovery
 	// Connector data and summary data from Application Discovery agents.
 	Filters []*types.ExportFilter
+
 	// The file format for the returned export data. Default value is CSV. Note: The
 	// GRAPHML option has been deprecated.
 	ExportDataFormat []types.ExportDataFormat
 }
 
 type StartExportTaskOutput struct {
+
 	// A unique identifier used to query the status of an export request.
 	ExportId *string
 

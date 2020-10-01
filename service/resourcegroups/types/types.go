@@ -4,10 +4,13 @@ package types
 
 // A resource that failed to be added to or removed from a group.
 type FailedResource struct {
+
 	// The error code associated with the failure.
 	ErrorCode *string
+
 	// The error message text associated with the failure.
 	ErrorMessage *string
+
 	// The ARN of the resource that failed to be added or removed.
 	ResourceArn *string
 }
@@ -25,10 +28,17 @@ type FailedResource struct {
 // associate the group with an AWS service. The configuration specifies which
 // resource types can be included in the group.
 type Group struct {
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	Name *string
+
 	// The ARN of the resource group.
+	//
+	// This member is required.
 	GroupArn *string
+
 	// The description of the resource group.
 	Description *string
 }
@@ -38,13 +48,17 @@ type Group struct {
 // which resources can be included in the group. You can add a service
 // configuration when you create the group.
 type GroupConfiguration struct {
+
 	// The current status of an attempt to update the group configuration.
 	Status GroupConfigurationStatus
+
 	// If present, the new configuration that is in the process of being applied to the
 	// group.
 	ProposedConfiguration []*GroupConfigurationItem
+
 	// If present, the reason why a request to update the group configuration failed.
 	FailureReason *string
+
 	// The configuration currently associated with the group and in effect.
 	Configuration []*GroupConfigurationItem
 }
@@ -52,6 +66,7 @@ type GroupConfiguration struct {
 // An item in a group configuration. A group configuration can have one or more
 // items.
 type GroupConfigurationItem struct {
+
 	// Specifies the type of group configuration item. Each item must have a unique
 	// value for type. You can specify the following string values:
 	//
@@ -63,13 +78,17 @@ type GroupConfigurationItem struct {
 	//
 	//     * AWS::ResourceGroups::Generic - Supports
 	// parameters that configure the behavior of resource groups of any type.
+	//
+	// This member is required.
 	Type *string
+
 	// A collection of parameters for this group configuration item.
 	Parameters []*GroupConfigurationParameter
 }
 
 // A parameter for a group configuration item.
 type GroupConfigurationParameter struct {
+
 	// The name of the group configuration parameter. You can specify the following
 	// string values:
 	//
@@ -90,7 +109,10 @@ type GroupConfigurationParameter struct {
 	// capacity reservation groups, see Working with capacity reservation groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
 	// in the EC2 Users Guide.
+	//
+	// This member is required.
 	Name *string
+
 	// The values of for this parameter. You can specify the following string value:
 	//
 	//
@@ -102,17 +124,25 @@ type GroupConfigurationParameter struct {
 // A filter collection that you can use to restrict the results from a List
 // operation to only those you want to include.
 type GroupFilter struct {
+
 	// The name of the filter. Filter names are case-sensitive.
+	//
+	// This member is required.
 	Name GroupFilterName
+
 	// One or more filter values. Allowed filter values vary by group filter name, and
 	// are case-sensitive.
+	//
+	// This member is required.
 	Values []*string
 }
 
 // The unique identifiers for a resource group.
 type GroupIdentifier struct {
+
 	// The name of the resource group.
 	GroupName *string
+
 	// The ARN of the resource group.
 	GroupArn *string
 }
@@ -120,11 +150,17 @@ type GroupIdentifier struct {
 // A mapping of a query attached to a resource group that determines the AWS
 // resources that are members of the group.
 type GroupQuery struct {
+
 	// The name of the resource group that is associated with the specified resource
 	// query.
+	//
+	// This member is required.
 	GroupName *string
+
 	// The resource query that determines which AWS resources are members of the
 	// associated resource group.
+	//
+	// This member is required.
 	ResourceQuery *ResourceQuery
 }
 
@@ -135,12 +171,14 @@ type GroupQuery struct {
 // does not necessarily mean that AWS Resource Groups could not complete the
 // operation, but the resulting group might have no member resources.
 type QueryError struct {
+
 	// A message that explains the ErrorCode value. Messages might state that the
 	// specified CloudFormation stack does not exist (or no longer exists). For
 	// CLOUDFORMATION_STACK_INACTIVE, the message typically states that the
 	// CloudFormation stack has a status that is not (or no longer) active, such as
 	// CREATE_FAILED.
 	Message *string
+
 	// Possible values are CLOUDFORMATION_STACK_INACTIVE and
 	// CLOUDFORMATION_STACK_NOT_EXISTING.
 	ErrorCode QueryErrorCode
@@ -149,25 +187,37 @@ type QueryError struct {
 // A filter name and value pair that is used to obtain more specific results from a
 // list of resources.
 type ResourceFilter struct {
+
 	// The name of the filter. Filter names are case-sensitive.
+	//
+	// This member is required.
 	Name ResourceFilterName
+
 	// One or more filter values. Allowed filter values vary by resource filter name,
 	// and are case-sensitive.
+	//
+	// This member is required.
 	Values []*string
 }
 
 // The ARN of a resource, and its resource type.
 type ResourceIdentifier struct {
+
 	// The resource type of a resource, such as AWS::EC2::Instance.
 	ResourceType *string
+
 	// The ARN of a resource.
 	ResourceArn *string
 }
 
 // The query that is used to define a resource group or a search for resources.
 type ResourceQuery struct {
+
 	// The query that defines a group or a search.
+	//
+	// This member is required.
 	Query *string
+
 	// The type of the query. You can use the following values:
 	//
 	//     *
@@ -207,5 +257,7 @@ type ResourceQuery struct {
 	// and {"Key":"Version","Value":"4"} The database has all of the tag keys, but none
 	// of those keys has an associated value that matches at least one of the specified
 	// values in the filter.
+	//
+	// This member is required.
 	Type QueryType
 }

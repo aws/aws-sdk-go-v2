@@ -56,12 +56,18 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the classification job, custom data
 	// identifier, findings filter, or member account.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The key of the tag to remove from the resource. To remove multiple tags, append
 	// the tagKeys parameter and argument for each additional tag to remove, separated
 	// by an ampersand (&).
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

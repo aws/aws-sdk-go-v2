@@ -57,12 +57,21 @@ func (c *Client) UnsubscribeFromEvent(ctx context.Context, params *UnsubscribeFr
 }
 
 type UnsubscribeFromEventInput struct {
+
 	// The ARN of the assessment template that is used during the event for which you
 	// want to stop receiving SNS notifications.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The event for which you want to stop receiving SNS notifications.
+	//
+	// This member is required.
 	Event types.InspectorEvent
+
 	// The ARN of the SNS topic to which SNS notifications are sent.
+	//
+	// This member is required.
 	TopicArn *string
 }
 

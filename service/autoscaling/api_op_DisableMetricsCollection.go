@@ -55,8 +55,12 @@ func (c *Client) DisableMetricsCollection(ctx context.Context, params *DisableMe
 }
 
 type DisableMetricsCollectionInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// Specifies one or more of the following metrics:
 	//
 	//     * GroupMinSize

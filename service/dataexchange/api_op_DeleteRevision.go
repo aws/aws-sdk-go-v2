@@ -55,9 +55,15 @@ func (c *Client) DeleteRevision(ctx context.Context, params *DeleteRevisionInput
 }
 
 type DeleteRevisionInput struct {
+
 	// The unique identifier for a data set.
+	//
+	// This member is required.
 	DataSetId *string
+
 	// The unique identifier for a revision.
+	//
+	// This member is required.
 	RevisionId *string
 }
 

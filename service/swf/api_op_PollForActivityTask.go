@@ -85,14 +85,21 @@ func (c *Client) PollForActivityTask(ctx context.Context, params *PollForActivit
 }
 
 type PollForActivityTaskInput struct {
+
 	// The name of the domain that contains the task lists being polled.
+	//
+	// This member is required.
 	Domain *string
+
 	// Specifies the task list to poll for activity tasks.  <p>The specified string
 	// must not start or end with whitespace. It must not contain a <code>:</code>
 	// (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control
 	// characters (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it
 	// must not <i>be</i> the literal string <code>arn</code>.</p>
+	//
+	// This member is required.
 	TaskList *types.TaskList
+
 	// Identity of the worker making the request, recorded in the ActivityTaskStarted
 	// event in the workflow history. This enables diagnostic tracing when problems
 	// arise. The form of this identity is user defined.
@@ -101,19 +108,35 @@ type PollForActivityTaskInput struct {
 
 // Unit of work sent to an activity worker.
 type PollForActivityTaskOutput struct {
+
 	// The unique ID of the task.
+	//
+	// This member is required.
 	ActivityId *string
+
 	// The inputs provided when the activity task was scheduled. The form of the input
 	// is user defined and should be meaningful to the activity implementation.
 	Input *string
+
 	// The workflow execution that started this activity task.
+	//
+	// This member is required.
 	WorkflowExecution *types.WorkflowExecution
+
 	// The ID of the ActivityTaskStarted event recorded in the history.
+	//
+	// This member is required.
 	StartedEventId *int64
+
 	// The type of this activity task.
+	//
+	// This member is required.
 	ActivityType *types.ActivityType
+
 	// The opaque string used as a handle on the task. This token is used by workers to
 	// communicate progress and response information back to the system about the task.
+	//
+	// This member is required.
 	TaskToken *string
 
 	// Metadata pertaining to the operation's result.

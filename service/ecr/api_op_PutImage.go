@@ -62,27 +62,38 @@ func (c *Client) PutImage(ctx context.Context, params *PutImageInput, optFns ...
 }
 
 type PutImageInput struct {
+
 	// The media type of the image manifest. If you push an image manifest that does
 	// not contain the mediaType field, you must specify the imageManifestMediaType in
 	// the request.
 	ImageManifestMediaType *string
+
 	// The AWS account ID associated with the registry that contains the repository in
 	// which to put the image. If you do not specify a registry, the default registry
 	// is assumed.
 	RegistryId *string
+
 	// The image manifest corresponding to the image to be uploaded.
+	//
+	// This member is required.
 	ImageManifest *string
+
 	// The name of the repository in which to put the image.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The tag to associate with the image. This parameter is required for images that
 	// use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI)
 	// formats.
 	ImageTag *string
+
 	// The image digest of the image manifest corresponding to the image.
 	ImageDigest *string
 }
 
 type PutImageOutput struct {
+
 	// Details of the image uploaded.
 	Image *types.Image
 

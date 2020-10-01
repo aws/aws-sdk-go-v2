@@ -56,12 +56,18 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the container.
+	//
+	// This member is required.
 	Resource *string
+
 	// A comma-separated list of keys for tags that you want to remove from the
 	// container. For example, if your container has two tags (customer:CompanyA and
 	// priority:High) and you want to remove one of the tags (priority:High), you
 	// specify the key for the tag that you want to remove (priority).
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

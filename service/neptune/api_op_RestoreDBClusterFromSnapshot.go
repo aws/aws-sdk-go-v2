@@ -62,28 +62,36 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 }
 
 type RestoreDBClusterFromSnapshotInput struct {
+
 	// The tags to be assigned to the restored DB cluster.
 	Tags []*types.Tag
+
 	// The name of the DB cluster parameter group to associate with the new DB cluster.
 	// Constraints:
 	//
 	//     * If supplied, must match the name of an existing
 	// DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
+
 	// A list of VPC security groups that the new DB cluster will belong to.
 	VpcSecurityGroupIds []*string
+
 	// (Not supported by Neptune)
 	OptionGroupName *string
+
 	// Not supported.
 	DatabaseName *string
+
 	// The name of the DB subnet group to use for the new DB cluster. Constraints: If
 	// supplied, must match the name of an existing DBSubnetGroup. Example:
 	// mySubnetgroup
 	DBSubnetGroupName *string
+
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled.
 	DeletionProtection *bool
+
 	// The name of the DB cluster to create from the DB snapshot or DB cluster
 	// snapshot. This parameter isn't case-sensitive. Constraints:
 	//
@@ -97,19 +105,27 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// hyphens
 	//
 	// Example: my-snapshot-id
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The version of the database engine to use for the new DB cluster.
 	EngineVersion *string
+
 	// The identifier for the DB snapshot or DB cluster snapshot to restore from. You
 	// can use either the name or the Amazon Resource Name (ARN) to specify a DB
 	// cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
 	// Constraints:
 	//
 	//     * Must match the identifier of an existing Snapshot.
+	//
+	// This member is required.
 	SnapshotIdentifier *string
+
 	// The port number on which the new DB cluster accepts connections. Constraints:
 	// Value must be 1150-65535 Default: The same port as the original DB cluster.
 	Port *int32
+
 	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from a
 	// DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon
 	// Resource Name (ARN) for the KMS encryption key. If you are restoring a DB
@@ -127,21 +143,28 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// SnapshotIdentifier is not encrypted, then the restored DB cluster is not
 	// encrypted.
 	KmsKeyId *string
+
 	// Provides the list of EC2 Availability Zones that instances in the restored DB
 	// cluster can be created in.
 	AvailabilityZones []*string
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
 	// database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
+
 	// The database engine to use for the new DB cluster. Default: The same as source
 	// Constraint: Must be compatible with the engine of the source
+	//
+	// This member is required.
 	Engine *string
+
 	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []*string
 }
 
 type RestoreDBClusterFromSnapshotOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
 	// a response element in the DescribeDBClusters () action.
 	DBCluster *types.DBCluster

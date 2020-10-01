@@ -58,24 +58,31 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 }
 
 type ListJobsInput struct {
+
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
+
 	// Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or
 	// ERROR.
 	Status types.JobStatus
+
 	// Optional. Use this string, provided with the response to a previous request, to
 	// request the next batch of jobs.
 	NextToken *string
+
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
 	MaxResults *int32
+
 	// Optional. Provide a queue name to get back only jobs from that queue.
 	Queue *string
 }
 
 type ListJobsOutput struct {
+
 	// Use this string to request the next batch of jobs.
 	NextToken *string
+
 	// List of jobs
 	Jobs []*types.Job
 

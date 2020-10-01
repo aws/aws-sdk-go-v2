@@ -58,9 +58,15 @@ func (c *Client) UpdateHITTypeOfHIT(ctx context.Context, params *UpdateHITTypeOf
 }
 
 type UpdateHITTypeOfHITInput struct {
+
 	// The ID of the new HIT type.
+	//
+	// This member is required.
 	HITTypeId *string
+
 	// The HIT to update.
+	//
+	// This member is required.
 	HITId *string
 }
 

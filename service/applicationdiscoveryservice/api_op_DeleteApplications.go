@@ -55,7 +55,10 @@ func (c *Client) DeleteApplications(ctx context.Context, params *DeleteApplicati
 }
 
 type DeleteApplicationsInput struct {
+
 	// Configuration ID of an application to be deleted.
+	//
+	// This member is required.
 	ConfigurationIds []*string
 }
 

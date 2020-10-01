@@ -55,17 +55,26 @@ func (c *Client) GetGroupCertificateAuthority(ctx context.Context, params *GetGr
 }
 
 type GetGroupCertificateAuthorityInput struct {
+
 	// The ID of the certificate authority.
+	//
+	// This member is required.
 	CertificateAuthorityId *string
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type GetGroupCertificateAuthorityOutput struct {
+
 	// The ARN of the certificate authority for the group.
 	GroupCertificateAuthorityArn *string
+
 	// The PEM encoded certificate for the group.
 	PemEncodedCertificate *string
+
 	// The ID of the certificate authority for the group.
 	GroupCertificateAuthorityId *string
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteApi(ctx context.Context, params *DeleteApiInput, optFns .
 }
 
 type DeleteApiInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 

@@ -57,13 +57,16 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 }
 
 type DeleteGroupInput struct {
+
 	// Don't use this parameter. Use Group instead.
 	GroupName *string
+
 	// The name or the ARN of the resource group to delete.
 	Group *string
 }
 
 type DeleteGroupOutput struct {
+
 	// A full description of the deleted resource group.
 	Group *types.Group
 

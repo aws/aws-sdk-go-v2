@@ -57,18 +57,34 @@ func (c *Client) GetMethodResponse(ctx context.Context, params *GetMethodRespons
 
 // Request to describe a MethodResponse () resource.
 type GetMethodResponseInput struct {
+
 	// [Required] The Resource () identifier for the MethodResponse () resource.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// [Required] The status code for the MethodResponse () resource.
+	//
+	// This member is required.
 	StatusCode *string
-	Title      *string
+
+	Title *string
+
 	// [Required] The HTTP verb of the Method () resource.
-	HttpMethod       *string
-	Name             *string
+	//
+	// This member is required.
+	HttpMethod *string
+
+	Name *string
+
 	TemplateSkipList []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Template  *bool
+
+	Template *bool
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -103,12 +119,15 @@ type GetMethodResponseInput struct {
 // IntegrationResponse (), Integration ()Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type GetMethodResponseOutput struct {
+
 	// Specifies the Model () resources used for the response's content-type. Response
 	// models are represented as a key/value map, with a content-type as the key and a
 	// Model () name as the value.
 	ResponseModels map[string]*string
+
 	// The method response's status code.
 	StatusCode *string
+
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or

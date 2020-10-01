@@ -59,7 +59,10 @@ func (c *Client) DeleteForecast(ctx context.Context, params *DeleteForecastInput
 }
 
 type DeleteForecastInput struct {
+
 	// The Amazon Resource Name (ARN) of the forecast to delete.
+	//
+	// This member is required.
 	ForecastArn *string
 }
 

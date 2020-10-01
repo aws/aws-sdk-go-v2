@@ -56,19 +56,31 @@ func (c *Client) CreateScalingPlan(ctx context.Context, params *CreateScalingPla
 }
 
 type CreateScalingPlanInput struct {
+
 	// The name of the scaling plan. Names cannot contain vertical bars, colons, or
 	// forward slashes.
+	//
+	// This member is required.
 	ScalingPlanName *string
+
 	// The scaling instructions.
+	//
+	// This member is required.
 	ScalingInstructions []*types.ScalingInstruction
+
 	// A CloudFormation stack or set of tags. You can create one scaling plan per
 	// application source.
+	//
+	// This member is required.
 	ApplicationSource *types.ApplicationSource
 }
 
 type CreateScalingPlanOutput struct {
+
 	// The version number of the scaling plan. This value is always 1. Currently, you
 	// cannot specify multiple scaling plan versions.
+	//
+	// This member is required.
 	ScalingPlanVersion *int64
 
 	// Metadata pertaining to the operation's result.

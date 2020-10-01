@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The user is not authorized to access a resource.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameter values are not valid.
 type InvalidParameterValuesException struct {
@@ -49,12 +42,6 @@ func (e *InvalidParameterValuesException) ErrorCode() string {
 	return "InvalidParameterValuesException"
 }
 func (e *InvalidParameterValuesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValuesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValuesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The state of the resource is not valid for this operation.
 type InvalidResourceStateException struct {
@@ -72,12 +59,6 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 }
 func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The properties of this WorkSpace are currently being modified. Try again in a
 // moment.
@@ -96,12 +77,6 @@ func (e *OperationInProgressException) ErrorMessage() string {
 }
 func (e *OperationInProgressException) ErrorCode() string             { return "OperationInProgressException" }
 func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation is not supported.
 type OperationNotSupportedException struct {
@@ -119,12 +94,6 @@ func (e *OperationNotSupportedException) ErrorMessage() string {
 }
 func (e *OperationNotSupportedException) ErrorCode() string             { return "OperationNotSupportedException" }
 func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -142,12 +111,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is associated with a directory.
 type ResourceAssociatedException struct {
@@ -165,12 +128,6 @@ func (e *ResourceAssociatedException) ErrorMessage() string {
 }
 func (e *ResourceAssociatedException) ErrorCode() string             { return "ResourceAssociatedException" }
 func (e *ResourceAssociatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAssociatedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAssociatedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource could not be created.
 type ResourceCreationFailedException struct {
@@ -190,12 +147,6 @@ func (e *ResourceCreationFailedException) ErrorCode() string {
 	return "ResourceCreationFailedException"
 }
 func (e *ResourceCreationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceCreationFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceCreationFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your resource limits have been exceeded.
 type ResourceLimitExceededException struct {
@@ -213,12 +164,6 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 }
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource could not be found.
 type ResourceNotFoundException struct {
@@ -238,18 +183,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceNotFoundException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
 
 // The specified resource is not available.
 type ResourceUnavailableException struct {
@@ -269,18 +202,6 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 }
 func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceUnavailableException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceUnavailableException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
 
 // The configuration of this network is not supported for this operation, or your
 // network configuration conflicts with the Amazon WorkSpaces management network IP
@@ -304,12 +225,6 @@ func (e *UnsupportedNetworkConfigurationException) ErrorCode() string {
 }
 func (e *UnsupportedNetworkConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *UnsupportedNetworkConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedNetworkConfigurationException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The configuration of this WorkSpace is not supported for this operation. For
@@ -335,12 +250,6 @@ func (e *UnsupportedWorkspaceConfigurationException) ErrorCode() string {
 func (e *UnsupportedWorkspaceConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *UnsupportedWorkspaceConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedWorkspaceConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The workspaces_DefaultRole role could not be found. If this is the first time
 // you are registering a directory, you will need to create the
@@ -365,10 +274,4 @@ func (e *WorkspacesDefaultRoleNotFoundException) ErrorCode() string {
 }
 func (e *WorkspacesDefaultRoleNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *WorkspacesDefaultRoleNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WorkspacesDefaultRoleNotFoundException) HasMessage() bool {
-	return e.Message != nil
 }

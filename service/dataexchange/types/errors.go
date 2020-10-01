@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Access to the resource is denied.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request couldn't be completed because it conflicted with the current state
 // of the resource.
@@ -51,21 +44,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ConflictException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ConflictException) GetResourceType() ResourceType {
-	return e.ResourceType
-}
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception occurred with the service.
 type InternalServerException struct {
@@ -83,12 +61,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource couldn't be found.
 type ResourceNotFoundException struct {
@@ -109,21 +81,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetResourceType() ResourceType {
-	return e.ResourceType
-}
-func (e *ResourceNotFoundException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceNotFoundException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
 
 // The request has exceeded the quotas imposed by the service.
 type ServiceLimitExceededException struct {
@@ -144,21 +101,6 @@ func (e *ServiceLimitExceededException) ErrorMessage() string {
 }
 func (e *ServiceLimitExceededException) ErrorCode() string             { return "ServiceLimitExceededException" }
 func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceLimitExceededException) GetLimitName() LimitName {
-	return e.LimitName
-}
-func (e *ServiceLimitExceededException) GetLimitValue() float64 {
-	return ptr.ToFloat64(e.LimitValue)
-}
-func (e *ServiceLimitExceededException) HasLimitValue() bool {
-	return e.LimitValue != nil
-}
 
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
@@ -176,12 +118,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was invalid.
 type ValidationException struct {
@@ -199,9 +135,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}

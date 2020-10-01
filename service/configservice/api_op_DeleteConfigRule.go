@@ -61,7 +61,10 @@ func (c *Client) DeleteConfigRule(ctx context.Context, params *DeleteConfigRuleI
 
 //
 type DeleteConfigRuleInput struct {
+
 	// The name of the AWS Config rule that you want to delete.
+	//
+	// This member is required.
 	ConfigRuleName *string
 }
 

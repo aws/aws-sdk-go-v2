@@ -57,25 +57,36 @@ func (c *Client) ListPullRequests(ctx context.Context, params *ListPullRequestsI
 }
 
 type ListPullRequestsInput struct {
+
 	// The name of the repository for which you want to list pull requests.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// Optional. The Amazon Resource Name (ARN) of the user who created the pull
 	// request. If used, this filters the results to pull requests created by that
 	// user.
 	AuthorArn *string
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
+
 	// Optional. The status of the pull request. If used, this refines the results to
 	// the pull requests that match the specified status.
 	PullRequestStatus types.PullRequestStatusEnum
 }
 
 type ListPullRequestsOutput struct {
+
 	// The system-generated IDs of the pull requests.
+	//
+	// This member is required.
 	PullRequestIds []*string
+
 	// An enumeration token that allows the operation to batch the next results of the
 	// operation.
 	NextToken *string

@@ -60,6 +60,7 @@ type DescribeVirtualGatewaysInput struct {
 }
 
 type DescribeVirtualGatewaysOutput struct {
+
 	// The virtual private gateways.
 	VirtualGateways []*types.VirtualGateway
 

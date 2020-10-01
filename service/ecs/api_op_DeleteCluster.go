@@ -62,11 +62,15 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 }
 
 type DeleteClusterInput struct {
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster to delete.
+	//
+	// This member is required.
 	Cluster *string
 }
 
 type DeleteClusterOutput struct {
+
 	// The full description of the deleted cluster.
 	Cluster *types.Cluster
 

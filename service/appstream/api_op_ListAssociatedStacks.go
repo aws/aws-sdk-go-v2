@@ -55,16 +55,22 @@ func (c *Client) ListAssociatedStacks(ctx context.Context, params *ListAssociate
 }
 
 type ListAssociatedStacksInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	FleetName *string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListAssociatedStacksOutput struct {
+
 	// The name of the stack.
 	Names []*string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

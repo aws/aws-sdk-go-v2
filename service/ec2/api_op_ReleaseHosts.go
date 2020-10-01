@@ -64,13 +64,18 @@ func (c *Client) ReleaseHosts(ctx context.Context, params *ReleaseHostsInput, op
 }
 
 type ReleaseHostsInput struct {
+
 	// The IDs of the Dedicated Hosts to release.
+	//
+	// This member is required.
 	HostIds []*string
 }
 
 type ReleaseHostsOutput struct {
+
 	// The IDs of the Dedicated Hosts that were successfully released.
 	Successful []*string
+
 	// The IDs of the Dedicated Hosts that could not be released, including an error
 	// message.
 	Unsuccessful []*types.UnsuccessfulItem

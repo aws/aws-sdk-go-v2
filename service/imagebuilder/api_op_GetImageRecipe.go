@@ -56,13 +56,18 @@ func (c *Client) GetImageRecipe(ctx context.Context, params *GetImageRecipeInput
 }
 
 type GetImageRecipeInput struct {
+
 	// The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.
+	//
+	// This member is required.
 	ImageRecipeArn *string
 }
 
 type GetImageRecipeOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The image recipe object.
 	ImageRecipe *types.ImageRecipe
 

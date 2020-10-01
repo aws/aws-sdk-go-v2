@@ -58,6 +58,7 @@ func (c *Client) GetExportSnapshotRecords(ctx context.Context, params *GetExport
 }
 
 type GetExportSnapshotRecordsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetExportSnapshotRecords request. If your results
 	// are paginated, the response will return a next page token that you can specify
@@ -66,8 +67,10 @@ type GetExportSnapshotRecordsInput struct {
 }
 
 type GetExportSnapshotRecordsOutput struct {
+
 	// A list of objects describing the export snapshot records.
 	ExportSnapshotRecords []*types.ExportSnapshotRecord
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetExportSnapshotRecords request and specify

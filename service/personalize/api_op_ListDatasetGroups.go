@@ -57,16 +57,20 @@ func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroup
 }
 
 type ListDatasetGroupsInput struct {
+
 	// A token returned from the previous call to ListDatasetGroups for getting the
 	// next set of dataset groups (if they exist).
 	NextToken *string
+
 	// The maximum number of dataset groups to return.
 	MaxResults *int32
 }
 
 type ListDatasetGroupsOutput struct {
+
 	// The list of your dataset groups.
 	DatasetGroups []*types.DatasetGroupSummary
+
 	// A token for getting the next set of dataset groups (if they exist).
 	NextToken *string
 

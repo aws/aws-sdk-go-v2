@@ -59,13 +59,18 @@ func (c *Client) PutEvaluations(ctx context.Context, params *PutEvaluationsInput
 
 //
 type PutEvaluationsInput struct {
+
 	// The assessments that the AWS Lambda function performs. Each evaluation
 	// identifies an AWS resource and indicates whether it complies with the AWS Config
 	// rule that invokes the AWS Lambda function.
 	Evaluations []*types.Evaluation
+
 	// An encrypted token that associates an evaluation with an AWS Config rule.
 	// Identifies the rule and the event that triggered the evaluation.
+	//
+	// This member is required.
 	ResultToken *string
+
 	// Use this parameter to specify a test run for PutEvaluations. You can verify
 	// whether your AWS Lambda function will deliver evaluation results to AWS Config.
 	// No updates occur to your existing evaluations, and evaluation results are not
@@ -77,6 +82,7 @@ type PutEvaluationsInput struct {
 
 //
 type PutEvaluationsOutput struct {
+
 	// Requests that failed because of a client or server error.
 	FailedEvaluations []*types.Evaluation
 

@@ -61,35 +61,52 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 }
 
 type CreateDistributionInput struct {
+
 	// The tag keys and optional values to add to the distribution during create.
 	// <p>Use the <code>TagResource</code> action to tag a resource after it's
 	// created.</p>
 	Tags []*types.Tag
+
 	// The name for the distribution.
+	//
+	// This member is required.
 	DistributionName *string
+
 	// An array of objects that describe the per-path cache behavior for the
 	// distribution.
 	CacheBehaviors []*types.CacheBehaviorPerPath
+
 	// An object that describes the cache behavior settings for the distribution.
 	CacheBehaviorSettings *types.CacheSettings
+
 	// An object that describes the default cache behavior for the distribution.
+	//
+	// This member is required.
 	DefaultCacheBehavior *types.CacheBehavior
+
 	// An object that describes the origin resource for the distribution, such as a
 	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
 	// serves content from the origin.</p>
+	//
+	// This member is required.
 	Origin *types.InputOrigin
+
 	// The bundle ID to use for the distribution.  <p>A distribution bundle describes
 	// the specifications of your distribution, such as the monthly cost and monthly
 	// network transfer quota.</p> <p>Use the <code>GetDistributionBundles</code>
 	// action to get a list of distribution bundle IDs that you can specify.</p>
+	//
+	// This member is required.
 	BundleId *string
 }
 
 type CreateDistributionOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
 	Operation *types.Operation
+
 	// An object that describes the distribution created.
 	Distribution *types.LightsailDistribution
 

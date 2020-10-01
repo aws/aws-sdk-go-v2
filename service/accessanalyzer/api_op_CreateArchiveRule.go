@@ -57,12 +57,22 @@ func (c *Client) CreateArchiveRule(ctx context.Context, params *CreateArchiveRul
 
 // Creates an archive rule.
 type CreateArchiveRuleInput struct {
+
 	// The name of the created analyzer.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// The name of the rule to create.
+	//
+	// This member is required.
 	RuleName *string
+
 	// The criteria for the rule.
+	//
+	// This member is required.
 	Filter map[string]*types.Criterion
+
 	// A client token.
 	ClientToken *string
 }

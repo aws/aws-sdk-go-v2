@@ -58,7 +58,10 @@ func (c *Client) DeleteWorkforce(ctx context.Context, params *DeleteWorkforceInp
 }
 
 type DeleteWorkforceInput struct {
+
 	// The name of the workforce.
+	//
+	// This member is required.
 	WorkforceName *string
 }
 

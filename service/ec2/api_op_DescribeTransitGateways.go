@@ -56,13 +56,16 @@ func (c *Client) DescribeTransitGateways(ctx context.Context, params *DescribeTr
 }
 
 type DescribeTransitGatewaysInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IDs of the transit gateways.
 	TransitGatewayIds []*string
+
 	// One or more filters. The possible values are:
 	//
 	//     *
@@ -105,16 +108,20 @@ type DescribeTransitGatewaysInput struct {
 	//     * transit-gateway-id - The ID of the transit
 	// gateway.
 	Filters []*types.Filter
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type DescribeTransitGatewaysOutput struct {
+
 	// Information about the transit gateways.
 	TransitGateways []*types.TransitGateway
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

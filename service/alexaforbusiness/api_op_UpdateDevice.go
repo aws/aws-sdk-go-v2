@@ -54,8 +54,10 @@ func (c *Client) UpdateDevice(ctx context.Context, params *UpdateDeviceInput, op
 }
 
 type UpdateDeviceInput struct {
+
 	// The ARN of the device to update. Required.
 	DeviceArn *string
+
 	// The updated device name. Required.
 	DeviceName *string
 }

@@ -57,18 +57,22 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 }
 
 type DescribeExportTasksInput struct {
+
 	// An optional pagination token provided by a previous DescribeExportTasks request.
 	// If you specify this parameter, the response includes only records beyond the
 	// marker, up to the value specified by the MaxRecords parameter.
 	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified value, a pagination token called a marker is included in the
 	// response. You can use the marker in a later DescribeExportTasks request to
 	// retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum
 	// 100.
 	MaxRecords *int32
+
 	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
 	SourceArn *string
+
 	// Filters specify one or more snapshot exports to describe. The filters are
 	// specified as name-value pairs that define what to include in the output.
 	// Supported filters include the following:
@@ -85,15 +89,18 @@ type DescribeExportTasksInput struct {
 	//     * status - The status of the export
 	// task.
 	Filters []*types.Filter
+
 	// The identifier of the snapshot export task to be described.
 	ExportTaskIdentifier *string
 }
 
 type DescribeExportTasksOutput struct {
+
 	// A pagination token that can be used in a later DescribeExportTasks request. A
 	// marker is used for pagination to identify the location to begin output for the
 	// next response of DescribeExportTasks.
 	Marker *string
+
 	// Information about an export of a snapshot to Amazon S3.
 	ExportTasks []*types.ExportTask
 

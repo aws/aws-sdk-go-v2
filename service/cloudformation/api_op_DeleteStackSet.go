@@ -57,8 +57,11 @@ func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput
 }
 
 type DeleteStackSetInput struct {
+
 	// The name or unique ID of the stack set that you're deleting. You can obtain this
 	// value by running ListStackSets ().
+	//
+	// This member is required.
 	StackSetName *string
 }
 

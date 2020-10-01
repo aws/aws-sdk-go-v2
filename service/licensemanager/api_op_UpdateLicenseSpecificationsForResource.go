@@ -60,10 +60,15 @@ func (c *Client) UpdateLicenseSpecificationsForResource(ctx context.Context, par
 }
 
 type UpdateLicenseSpecificationsForResourceInput struct {
+
 	// ARNs of the license configurations to add.
 	AddLicenseSpecifications []*types.LicenseSpecification
+
 	// Amazon Resource Name (ARN) of the AWS resource.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// ARNs of the license configurations to remove.
 	RemoveLicenseSpecifications []*types.LicenseSpecification
 }

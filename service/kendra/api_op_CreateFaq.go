@@ -56,24 +56,39 @@ func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns .
 }
 
 type CreateFaqInput struct {
+
 	// The name that should be associated with the FAQ.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of key-value pairs that identify the FAQ. You can use the tags to
 	// identify and organize your resources and to control access to resources.
 	Tags []*types.Tag
+
 	// The identifier of the index that contains the FAQ.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The S3 location of the FAQ input data.
+	//
+	// This member is required.
 	S3Path *types.S3Path
+
 	// A description of the FAQ.
 	Description *string
+
 	// The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket
 	// that contains the FAQs. For more information, see IAM Roles for Amazon Kendra
 	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	//
+	// This member is required.
 	RoleArn *string
 }
 
 type CreateFaqOutput struct {
+
 	// The unique identifier of the FAQ.
 	Id *string
 

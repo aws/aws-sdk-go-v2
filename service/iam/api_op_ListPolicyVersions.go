@@ -60,11 +60,13 @@ func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersi
 }
 
 type ListPolicyVersionsInput struct {
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
 	// should start.
 	Marker *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -73,16 +75,20 @@ type ListPolicyVersionsInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
 	// The Amazon Resource Name (ARN) of the IAM policy for which you want the
 	// versions. For more information about ARNs, see Amazon Resource Names (ARNs) and
 	// AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	PolicyArn *string
 }
 
 // Contains the response to a successful ListPolicyVersions () request.
 type ListPolicyVersionsOutput struct {
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -90,11 +96,13 @@ type ListPolicyVersionsOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
 	// A list of policy versions. For more information about managed policy versions,
 	// see Versioning for Managed Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	Versions []*types.PolicyVersion
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string

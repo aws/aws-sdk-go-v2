@@ -56,15 +56,25 @@ func (c *Client) GetType(ctx context.Context, params *GetTypeInput, optFns ...fu
 }
 
 type GetTypeInput struct {
+
 	// The type name.
+	//
+	// This member is required.
 	TypeName *string
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The type format: SDL or JSON.
+	//
+	// This member is required.
 	Format types.TypeDefinitionFormat
 }
 
 type GetTypeOutput struct {
+
 	// The Type object.
 	Type *types.Type
 

@@ -65,17 +65,24 @@ func (c *Client) CreateIpGroup(ctx context.Context, params *CreateIpGroupInput, 
 }
 
 type CreateIpGroupInput struct {
+
 	// The rules to add to the group.
 	UserRules []*types.IpRuleItem
+
 	// The name of the group.
+	//
+	// This member is required.
 	GroupName *string
+
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	Tags []*types.Tag
+
 	// The description of the group.
 	GroupDesc *string
 }
 
 type CreateIpGroupOutput struct {
+
 	// The identifier of the group.
 	GroupId *string
 

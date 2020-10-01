@@ -55,9 +55,15 @@ func (c *Client) DeleteScheduledAction(ctx context.Context, params *DeleteSchedu
 }
 
 type DeleteScheduledActionInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The name of the action to delete.
+	//
+	// This member is required.
 	ScheduledActionName *string
 }
 

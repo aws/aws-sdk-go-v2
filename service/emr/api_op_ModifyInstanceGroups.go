@@ -60,8 +60,10 @@ func (c *Client) ModifyInstanceGroups(ctx context.Context, params *ModifyInstanc
 
 // Change the size of some instance groups.
 type ModifyInstanceGroupsInput struct {
+
 	// The ID of the cluster to which the instance group belongs.
 	ClusterId *string
+
 	// Instance groups to change.
 	InstanceGroups []*types.InstanceGroupModifyConfig
 }

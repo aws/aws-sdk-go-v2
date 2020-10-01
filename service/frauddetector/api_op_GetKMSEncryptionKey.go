@@ -59,6 +59,7 @@ type GetKMSEncryptionKeyInput struct {
 }
 
 type GetKMSEncryptionKeyOutput struct {
+
 	// The KMS encryption key.
 	KmsKey *types.KMSKey
 

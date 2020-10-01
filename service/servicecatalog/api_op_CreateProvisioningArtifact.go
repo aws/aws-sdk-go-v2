@@ -60,12 +60,19 @@ func (c *Client) CreateProvisioningArtifact(ctx context.Context, params *CreateP
 }
 
 type CreateProvisioningArtifactInput struct {
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
+	//
+	// This member is required.
 	IdempotencyToken *string
+
 	// The configuration for the provisioning artifact.
+	//
+	// This member is required.
 	Parameters *types.ProvisioningArtifactProperties
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -75,15 +82,21 @@ type CreateProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
 }
 
 type CreateProvisioningArtifactOutput struct {
+
 	// The URL of the CloudFormation template in Amazon S3, in JSON format.
 	Info map[string]*string
+
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
+
 	// The status of the current request.
 	Status types.Status
 

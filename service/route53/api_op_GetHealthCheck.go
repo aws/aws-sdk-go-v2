@@ -57,16 +57,22 @@ func (c *Client) GetHealthCheck(ctx context.Context, params *GetHealthCheckInput
 
 // A request to get information about a specified health check.
 type GetHealthCheckInput struct {
+
 	// The identifier that Amazon Route 53 assigned to the health check when you
 	// created it. When you add or update a resource record set, you use this value to
 	// specify which health check to use. The value can be up to 64 characters long.
+	//
+	// This member is required.
 	HealthCheckId *string
 }
 
 // A complex type that contains the response to a GetHealthCheck request.
 type GetHealthCheckOutput struct {
+
 	// A complex type that contains information about one health check that is
 	// associated with the current AWS account.
+	//
+	// This member is required.
 	HealthCheck *types.HealthCheck
 
 	// Metadata pertaining to the operation's result.

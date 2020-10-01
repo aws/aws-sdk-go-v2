@@ -58,16 +58,23 @@ func (c *Client) CancelRetrieval(ctx context.Context, params *CancelRetrievalInp
 
 // CancelRetrievalInput
 type CancelRetrievalInput struct {
+
 	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel retrieval
 	// for.
+	//
+	// This member is required.
 	TapeARN *string
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // CancelRetrievalOutput
 type CancelRetrievalOutput struct {
+
 	// The Amazon Resource Name (ARN) of the virtual tape for which retrieval was
 	// canceled.
 	TapeARN *string

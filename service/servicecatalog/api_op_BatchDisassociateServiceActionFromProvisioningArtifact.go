@@ -57,6 +57,7 @@ func (c *Client) BatchDisassociateServiceActionFromProvisioningArtifact(ctx cont
 }
 
 type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -66,12 +67,16 @@ type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// One or more associations, each consisting of the Action ID, the Product ID, and
 	// the Provisioning Artifact ID.
+	//
+	// This member is required.
 	ServiceActionAssociations []*types.ServiceActionAssociation
 }
 
 type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
+
 	// An object that contains a list of errors, along with information to help you
 	// identify the self-service action.
 	FailedServiceActionAssociations []*types.FailedServiceActionAssociation

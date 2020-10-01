@@ -61,24 +61,36 @@ func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput
 }
 
 type GetEnvironmentInput struct {
+
 	// The ID of the environment you wnat to get.
+	//
+	// This member is required.
 	EnvironmentId *string
+
 	// The ID of the application that includes the environment you want to get.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetEnvironmentOutput struct {
+
 	// The name of the environment.
 	Name *string
+
 	// The application ID.
 	ApplicationId *string
+
 	// The description of the environment.
 	Description *string
+
 	// The state of the environment. An environment can be in one of the following
 	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
 	State types.EnvironmentState
+
 	// The environment ID.
 	Id *string
+
 	// Amazon CloudWatch alarms monitored during the deployment.
 	Monitors []*types.Monitor
 

@@ -57,20 +57,26 @@ func (c *Client) ListRemoteAccessSessions(ctx context.Context, params *ListRemot
 
 // Represents the request to return information about the remote access session.
 type ListRemoteAccessSessionsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the project about which you are requesting
 	// information.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the response from the server after AWS Device Farm makes a request to
 // return information about the remote access session.
 type ListRemoteAccessSessionsOutput struct {
+
 	// A container that represents the metadata from the service about each remote
 	// access session you are requesting.
 	RemoteAccessSessions []*types.RemoteAccessSession
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string

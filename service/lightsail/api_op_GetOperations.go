@@ -58,6 +58,7 @@ func (c *Client) GetOperations(ctx context.Context, params *GetOperationsInput, 
 }
 
 type GetOperationsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetOperations request. If your results are
 	// paginated, the response will return a next page token that you can specify as
@@ -66,10 +67,12 @@ type GetOperationsInput struct {
 }
 
 type GetOperationsOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
 	Operations []*types.Operation
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetOperations request and specify the next page

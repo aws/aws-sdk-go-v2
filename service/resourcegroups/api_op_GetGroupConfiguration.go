@@ -63,11 +63,13 @@ func (c *Client) GetGroupConfiguration(ctx context.Context, params *GetGroupConf
 }
 
 type GetGroupConfigurationInput struct {
+
 	// The name or the ARN of the resource group.
 	Group *string
 }
 
 type GetGroupConfigurationOutput struct {
+
 	// The configuration associated with the specified group.
 	GroupConfiguration *types.GroupConfiguration
 

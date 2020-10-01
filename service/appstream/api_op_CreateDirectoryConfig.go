@@ -58,16 +58,26 @@ func (c *Client) CreateDirectoryConfig(ctx context.Context, params *CreateDirect
 }
 
 type CreateDirectoryConfigInput struct {
+
 	// The fully qualified name of the directory (for example, corp.example.com).
+	//
+	// This member is required.
 	DirectoryName *string
+
 	// The distinguished names of the organizational units for computer accounts.
+	//
+	// This member is required.
 	OrganizationalUnitDistinguishedNames []*string
+
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
+	//
+	// This member is required.
 	ServiceAccountCredentials *types.ServiceAccountCredentials
 }
 
 type CreateDirectoryConfigOutput struct {
+
 	// Information about the directory configuration.
 	DirectoryConfig *types.DirectoryConfig
 

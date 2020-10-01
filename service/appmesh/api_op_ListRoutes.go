@@ -56,15 +56,23 @@ func (c *Client) ListRoutes(ctx context.Context, params *ListRoutesInput, optFns
 
 //
 type ListRoutesInput struct {
+
 	// The name of the service mesh to list routes in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual router to list routes in.
+	//
+	// This member is required.
 	VirtualRouterName *string
+
 	// The nextToken value returned from a previous paginated ListRoutes request where
 	// limit was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
 	// value.
 	NextToken *string
+
 	// The maximum number of results returned by ListRoutes in paginated output. When
 	// you use this parameter, ListRoutes returns only limit results in a single page
 	// along with a nextToken response element. You can see the remaining results of
@@ -73,6 +81,7 @@ type ListRoutesInput struct {
 	// parameter, ListRoutes returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit *int32
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -82,8 +91,12 @@ type ListRoutesInput struct {
 
 //
 type ListRoutesOutput struct {
+
 	// The list of existing routes for the specified service mesh and virtual router.
+	//
+	// This member is required.
 	Routes []*types.RouteRef
+
 	// The nextToken value to include in a future ListRoutes request. When the results
 	// of a ListRoutes request exceed limit, you can use this value to retrieve the
 	// next page of results. This value is null when there are no more results to

@@ -59,14 +59,22 @@ func (c *Client) DescribeObjects(ctx context.Context, params *DescribeObjectsInp
 
 // Contains the parameters for DescribeObjects.
 type DescribeObjectsInput struct {
+
 	// The ID of the pipeline that contains the object definitions.
+	//
+	// This member is required.
 	PipelineId *string
+
 	// The IDs of the pipeline objects that contain the definitions to be described.
 	// You can pass as many as 25 identifiers in a single call to DescribeObjects.
+	//
+	// This member is required.
 	ObjectIds []*string
+
 	// Indicates whether any expressions in the object should be evaluated when the
 	// object descriptions are returned.
 	EvaluateExpressions *bool
+
 	// The starting point for the results to be returned. For the first call, this
 	// value should be empty. As long as there are more results, continue to call
 	// DescribeObjects with the marker value from the previous call to retrieve the
@@ -76,12 +84,17 @@ type DescribeObjectsInput struct {
 
 // Contains the output of DescribeObjects.
 type DescribeObjectsOutput struct {
+
 	// The starting point for the next page of results. To view the next page of
 	// results, call DescribeObjects again with this marker value. If the value is
 	// null, there are no more results.
 	Marker *string
+
 	// An array of object definitions.
+	//
+	// This member is required.
 	PipelineObjects []*types.PipelineObject
+
 	// Indicates whether there are more results to return.
 	HasMoreResults *bool
 

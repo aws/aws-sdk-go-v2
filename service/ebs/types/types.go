@@ -4,8 +4,10 @@ package types
 
 // A block of data in an Amazon Elastic Block Store snapshot.
 type Block struct {
+
 	// The block index.
 	BlockIndex *int32
+
 	// The block token for the block index.
 	BlockToken *string
 }
@@ -13,12 +15,15 @@ type Block struct {
 // A block of data in an Amazon Elastic Block Store snapshot that is different from
 // another snapshot of the same volume/snapshot lineage.
 type ChangedBlock struct {
+
 	// The block index.
 	BlockIndex *int32
+
 	// The block token for the block index of the FirstSnapshotId specified in the
 	// ListChangedBlocks operation. This value is absent if the first snapshot does not
 	// have the changed block that is on the second snapshot.
 	FirstBlockToken *string
+
 	// The block token for the block index of the SecondSnapshotId specified in the
 	// ListChangedBlocks operation.
 	SecondBlockToken *string
@@ -26,8 +31,10 @@ type ChangedBlock struct {
 
 // Describes a tag.
 type Tag struct {
+
 	// The value of the tag.
 	Value *string
+
 	// The key of the tag.
 	Key *string
 }

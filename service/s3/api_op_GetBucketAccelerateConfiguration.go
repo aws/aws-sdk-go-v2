@@ -79,11 +79,15 @@ func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *G
 }
 
 type GetBucketAccelerateConfigurationInput struct {
+
 	// Name of the bucket for which the accelerate configuration is retrieved.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketAccelerateConfigurationOutput struct {
+
 	// The accelerate configuration of the bucket.
 	Status types.BucketAccelerateStatus
 

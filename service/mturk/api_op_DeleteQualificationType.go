@@ -64,7 +64,10 @@ func (c *Client) DeleteQualificationType(ctx context.Context, params *DeleteQual
 }
 
 type DeleteQualificationTypeInput struct {
+
 	// The ID of the QualificationType to dispose.
+	//
+	// This member is required.
 	QualificationTypeId *string
 }
 

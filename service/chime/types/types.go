@@ -9,23 +9,37 @@ import (
 // The Amazon Chime account details. An AWS account can have multiple Amazon Chime
 // accounts.
 type Account struct {
+
 	// The default license for the Amazon Chime account.
 	DefaultLicense License
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The Amazon Chime account type. For more information about different account
 	// types, see Managing Your Amazon Chime Accounts
 	// (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html) in the
 	// Amazon Chime Administration Guide.
 	AccountType AccountType
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The Amazon Chime account name.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Chime account creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
 	// Supported licenses for the Amazon Chime account.
 	SupportedLicenses []License
+
 	// The sign-in delegate groups associated with the account.
 	SigninDelegateGroups []*SigninDelegateGroup
 }
@@ -37,8 +51,10 @@ type Account struct {
 // (https://docs.aws.amazon.com/chime/latest/ag/policies.html) in the Amazon Chime
 // Administration Guide.
 type AccountSettings struct {
+
 	// Setting that stops or starts remote control of shared screens during meetings.
 	DisableRemoteControl *bool
+
 	// Setting that allows meeting participants to choose the Call me at a phone number
 	// option. For more information, see Join a Meeting without the Amazon Chime App
 	// (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html).
@@ -48,8 +64,10 @@ type AccountSettings struct {
 // The Alexa for Business metadata associated with an Amazon Chime user, used to
 // integrate Alexa for Business with a device.
 type AlexaForBusinessMetadata struct {
+
 	// Starts or stops Alexa for Business.
 	IsAlexaForBusinessEnabled *bool
+
 	// The ARN of the room resource.
 	AlexaForBusinessRoomArn *string
 }
@@ -62,10 +80,13 @@ type AlexaForBusinessMetadata struct {
 // application to the client so that no other client has access to the token except
 // for the one authorized to represent the attendee.
 type Attendee struct {
+
 	// The Amazon Chime SDK attendee ID.
 	AttendeeId *string
+
 	// The join token used by the Amazon Chime SDK attendee.
 	JoinToken *string
+
 	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
 	// by a builder application.
 	ExternalUserId *string
@@ -74,23 +95,32 @@ type Attendee struct {
 // A resource that allows Enterprise account administrators to configure an
 // interface to receive events from Amazon Chime.
 type Bot struct {
+
 	// When true, the bot is stopped from running in your account.
 	Disabled *bool
+
 	// The security token used to authenticate Amazon Chime with the outgoing event
 	// endpoint.
 	SecurityToken *string
+
 	// The bot creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
 	// The bot type.
 	BotType BotType
+
 	// The unique ID for the bot user.
 	UserId *string
+
 	// The bot display name.
 	DisplayName *string
+
 	// The updated bot timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The bot ID.
 	BotId *string
+
 	// The bot email address.
 	BotEmail *string
 }
@@ -98,6 +128,7 @@ type Bot struct {
 // The Amazon Chime Business Calling settings for the administrator's AWS account.
 // Includes any Amazon S3 buckets designated for storing call detail records.
 type BusinessCallingSettings struct {
+
 	// The Amazon S3 bucket designated for call detail record storage.
 	CdrBucket *string
 }
@@ -105,6 +136,7 @@ type BusinessCallingSettings struct {
 // The retention settings that determine how long to retain chat conversation
 // messages for an Amazon Chime Enterprise account.
 type ConversationRetentionSettings struct {
+
 	// The number of days for which to retain chat conversation messages.
 	RetentionDays *int32
 }
@@ -113,11 +145,14 @@ type ConversationRetentionSettings struct {
 // BatchCreateAttendee and CreateAttendee actions. This includes external user IDs,
 // error codes, and error messages.
 type CreateAttendeeError struct {
+
 	// The error code.
 	ErrorCode *string
+
 	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
 	// by a builder application.
 	ExternalUserId *string
+
 	// The error message.
 	ErrorMessage *string
 }
@@ -125,9 +160,13 @@ type CreateAttendeeError struct {
 // The Amazon Chime SDK attendee fields to create, used with the
 // BatchCreateAttendee action.
 type CreateAttendeeRequestItem struct {
+
 	// The Amazon Chime SDK external user ID. Links the attendee to an identity managed
 	// by a builder application.
+	//
+	// This member is required.
 	ExternalUserId *string
+
 	// The tag key-value pairs.
 	Tags []*Tag
 }
@@ -135,9 +174,11 @@ type CreateAttendeeRequestItem struct {
 // The SIP credentials used to authenticate requests to your Amazon Chime Voice
 // Connector.
 type Credential struct {
+
 	// The RFC2617 compliant password associated with the SIP credentials, in US-ASCII
 	// format.
 	Password *string
+
 	// The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII
 	// format.
 	Username *string
@@ -147,18 +188,26 @@ type Credential struct {
 // details associated with an Amazon Chime Voice Connector's emergency calling
 // configuration.
 type DNISEmergencyCallingConfiguration struct {
+
 	// The country from which emergency calls are allowed, in ISO 3166-1 alpha-2
 	// format.
+	//
+	// This member is required.
 	CallingCountry *string
+
 	// The DNIS phone number to route test emergency calls to, in E.164 format.
 	TestPhoneNumber *string
+
 	// The DNIS phone number to route emergency calls to, in E.164 format.
+	//
+	// This member is required.
 	EmergencyPhoneNumber *string
 }
 
 // The emergency calling configuration details associated with an Amazon Chime
 // Voice Connector.
 type EmergencyCallingConfiguration struct {
+
 	// The Dialed Number Identification Service (DNIS) emergency calling configuration
 	// details.
 	DNIS []*DNISEmergencyCallingConfiguration
@@ -167,31 +216,44 @@ type EmergencyCallingConfiguration struct {
 // The configuration that allows a bot to receive outgoing events. Can be either an
 // HTTPS endpoint or a Lambda function ARN.
 type EventsConfiguration struct {
+
 	// Lambda function ARN that allows a bot to receive outgoing events.
 	LambdaFunctionArn *string
+
 	// HTTPS endpoint that allows a bot to receive outgoing events.
 	OutboundEventsHTTPSEndpoint *string
+
 	// The bot ID.
 	BotId *string
 }
 
 // The country and area code for a proxy phone number in a proxy phone session.
 type GeoMatchParams struct {
+
 	// The area code.
+	//
+	// This member is required.
 	AreaCode *string
+
 	// The country.
+	//
+	// This member is required.
 	Country *string
 }
 
 // Invitation object returned after emailing users to invite them to join the
 // Amazon Chime Team account.
 type Invite struct {
+
 	// The status of the invite email.
 	EmailStatus EmailStatus
+
 	// The status of the invite.
 	Status InviteStatus
+
 	// The invite ID.
 	InviteId *string
+
 	// The email address to which the invite is sent.
 	EmailAddress *string
 }
@@ -200,6 +262,7 @@ type Invite struct {
 // Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch
 // Logs.
 type LoggingConfiguration struct {
+
 	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
 	EnableSIPLogs *bool
 }
@@ -207,30 +270,41 @@ type LoggingConfiguration struct {
 // A set of endpoints used by clients to connect to the media service group for a
 // Amazon Chime SDK meeting.
 type MediaPlacement struct {
+
 	// The screen viewing URL.
 	ScreenViewingUrl *string
+
 	// The audio fallback URL.
 	AudioFallbackUrl *string
+
 	// The turn control URL.
 	TurnControlUrl *string
+
 	// The screen data URL.
 	ScreenDataUrl *string
+
 	// The screen sharing URL.
 	ScreenSharingUrl *string
+
 	// The audio host URL.
 	AudioHostUrl *string
+
 	// The signaling URL.
 	SignalingUrl *string
 }
 
 // A meeting created using the Amazon Chime SDK.
 type Meeting struct {
+
 	// The external meeting ID.
 	ExternalMeetingId *string
+
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement
+
 	// The Amazon Chime SDK meeting ID.
 	MeetingId *string
+
 	// The Region in which to create the meeting. Available values: ap-northeast-1,
 	// ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1,
 	// eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1,
@@ -242,48 +316,62 @@ type Meeting struct {
 // Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports
 // resource targets located in the US East (N. Virginia) AWS Region (us-east-1).
 type MeetingNotificationConfiguration struct {
+
 	// The SQS queue ARN.
 	SqsQueueArn *string
+
 	// The SNS topic ARN.
 	SnsTopicArn *string
 }
 
 // The member details, such as email address, name, member ID, and member type.
 type Member struct {
+
 	// The member email address.
 	Email *string
+
 	// The member ID (user ID or bot ID).
 	MemberId *string
+
 	// The Amazon Chime account ID.
 	AccountId *string
+
 	// The member name.
 	FullName *string
+
 	// The member type.
 	MemberType MemberType
 }
 
 // The list of errors returned when a member action results in an error.
 type MemberError struct {
+
 	// The error code.
 	ErrorCode ErrorCode
+
 	// The member ID.
 	MemberId *string
+
 	// The error message.
 	ErrorMessage *string
 }
 
 // Membership details, such as member ID and member role.
 type MembershipItem struct {
+
 	// The member ID.
 	MemberId *string
+
 	// The member role.
 	Role RoomMembershipRole
 }
 
 // A phone number for which an order has been placed.
 type OrderedPhoneNumber struct {
+
 	// The phone number status.
 	Status OrderedPhoneNumberStatus
+
 	// The phone number, in E.164 format.
 	E164PhoneNumber *string
 }
@@ -291,9 +379,11 @@ type OrderedPhoneNumber struct {
 // Origination settings enable your SIP hosts to receive inbound calls using your
 // Amazon Chime Voice Connector.
 type Origination struct {
+
 	// The call distribution properties defined for your SIP hosts. Valid range:
 	// Minimum value of 1. Maximum value of 20.
 	Routes []*OriginationRoute
+
 	// When origination settings are disabled, inbound calls are not enabled for your
 	// Amazon Chime Voice Connector.
 	Disabled *bool
@@ -303,16 +393,21 @@ type Origination struct {
 // receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten
 // origination routes for each Amazon Chime Voice Connector.
 type OriginationRoute struct {
+
 	// The weight associated with the host. If hosts are equal in priority, calls are
 	// distributed among them based on their relative weight.
 	Weight *int32
+
 	// The priority associated with the host, with 1 being the highest priority. Higher
 	// priority hosts are attempted first.
 	Priority *int32
+
 	// The designated origination route port. Defaults to 5060.
 	Port *int32
+
 	// The FQDN or IP address to contact for origination traffic.
 	Host *string
+
 	// The protocol to use for the origination route. Encryption-enabled Amazon Chime
 	// Voice Connectors use TCP protocol by default.
 	Protocol OriginationRouteProtocol
@@ -321,8 +416,10 @@ type OriginationRoute struct {
 // The phone number and proxy phone number for a participant in an Amazon Chime
 // Voice Connector proxy session.
 type Participant struct {
+
 	// The participant's proxy phone number.
 	ProxyPhoneNumber *string
+
 	// The participant's phone number.
 	PhoneNumber *string
 }
@@ -330,28 +427,40 @@ type Participant struct {
 // A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice
 // Connector.
 type PhoneNumber struct {
+
 	// The phone number creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
 	// The updated phone number timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The phone number type.
 	Type PhoneNumberType
+
 	// The outbound calling name associated with the phone number.
 	CallingName *string
+
 	// The phone number ID.
 	PhoneNumberId *string
+
 	// The phone number associations.
 	Associations []*PhoneNumberAssociation
+
 	// The phone number, in E.164 format.
 	E164PhoneNumber *string
+
 	// The phone number product type.
 	ProductType PhoneNumberProductType
+
 	// The outbound calling name status.
 	CallingNameStatus CallingNameStatus
+
 	// The phone number capabilities.
 	Capabilities *PhoneNumberCapabilities
+
 	// The phone number status.
 	Status PhoneNumberStatus
+
 	// The deleted phone number timestamp, in ISO 8601 format.
 	DeletionTimestamp *time.Time
 }
@@ -360,10 +469,13 @@ type PhoneNumber struct {
 // user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group
 // ID.
 type PhoneNumberAssociation struct {
+
 	// The timestamp of the phone number association, in ISO 8601 format.
 	AssociatedTimestamp *time.Time
+
 	// Contains the ID for the entity specified in Name.
 	Value *string
+
 	// Defines the association with an Amazon Chime account ID, user ID, Amazon Chime
 	// Voice Connector ID, or Amazon Chime Voice Connector group ID.
 	Name PhoneNumberAssociationName
@@ -372,16 +484,22 @@ type PhoneNumberAssociation struct {
 // The phone number capabilities for Amazon Chime Business Calling phone numbers,
 // such as enabled inbound and outbound calling and text messaging.
 type PhoneNumberCapabilities struct {
+
 	// Allows or denies outbound calling for the specified phone number.
 	OutboundCall *bool
+
 	// Allows or denies inbound SMS messaging for the specified phone number.
 	InboundSMS *bool
+
 	// Allows or denies inbound calling for the specified phone number.
 	InboundCall *bool
+
 	// Allows or denies outbound SMS messaging for the specified phone number.
 	OutboundSMS *bool
+
 	// Allows or denies outbound MMS messaging for the specified phone number.
 	OutboundMMS *bool
+
 	// Allows or denies inbound MMS messaging for the specified phone number.
 	InboundMMS *bool
 }
@@ -390,72 +508,98 @@ type PhoneNumberCapabilities struct {
 // request, a list of the phone numbers is returned, along with error codes and
 // error messages.
 type PhoneNumberError struct {
+
 	// The phone number ID for which the action failed.
 	PhoneNumberId *string
+
 	// The error code.
 	ErrorCode ErrorCode
+
 	// The error message.
 	ErrorMessage *string
 }
 
 // The details of a phone number order created for Amazon Chime.
 type PhoneNumberOrder struct {
+
 	// The ordered phone number details, such as the phone number in E.164 format and
 	// the phone number status.
 	OrderedPhoneNumbers []*OrderedPhoneNumber
+
 	// The updated phone number order timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The phone number order creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
 	// The phone number order product type.
 	ProductType PhoneNumberProductType
+
 	// The phone number order ID.
 	PhoneNumberOrderId *string
+
 	// The status of the phone number order.
 	Status PhoneNumberOrderStatus
 }
 
 // The proxy configuration for an Amazon Chime Voice Connector.
 type Proxy struct {
+
 	// The phone number to route calls to after a proxy session expires.
 	FallBackPhoneNumber *string
+
 	// When true, stops proxy sessions from being created on the specified Amazon Chime
 	// Voice Connector.
 	Disabled *bool
+
 	// The default number of minutes allowed for proxy sessions.
 	DefaultSessionExpiryMinutes *int32
+
 	// The countries for proxy phone numbers to be selected from.
 	PhoneNumberCountries []*string
 }
 
 // The proxy session for an Amazon Chime Voice Connector.
 type ProxySession struct {
+
 	// The preference for proxy phone number reuse, or stickiness, between the same
 	// participants across sessions.
 	NumberSelectionBehavior NumberSelectionBehavior
+
 	// The name of the proxy session.
 	Name *string
+
 	// The updated timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The status of the proxy session.
 	Status ProxySessionStatus
+
 	// The preference for matching the country or area code of the proxy phone number
 	// with that of the first participant.
 	GeoMatchLevel GeoMatchLevel
+
 	// The proxy session ID.
 	ProxySessionId *string
+
 	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
+
 	// The Amazon Chime voice connector ID.
 	VoiceConnectorId *string
+
 	// The proxy session participants.
 	Participants []*Participant
+
 	// The country and area code for the proxy phone number.
 	GeoMatchParams *GeoMatchParams
+
 	// The proxy session capabilities.
 	Capabilities []Capability
+
 	// The ended timestamp, in ISO 8601 format.
 	EndedTimestamp *time.Time
+
 	// The created timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 }
@@ -463,38 +607,51 @@ type ProxySession struct {
 // The retention settings for an Amazon Chime Enterprise account that determine how
 // long to retain items such as chat room messages and chat conversation messages.
 type RetentionSettings struct {
+
 	// The chat room retention settings.
 	RoomRetentionSettings *RoomRetentionSettings
+
 	// The chat conversation retention settings.
 	ConversationRetentionSettings *ConversationRetentionSettings
 }
 
 // The Amazon Chime chat room details.
 type Room struct {
+
 	// The room creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
 	// The Amazon Chime account ID.
 	AccountId *string
+
 	// The room update timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The room name.
 	Name *string
+
 	// The room ID.
 	RoomId *string
+
 	// The identifier of the room creator.
 	CreatedBy *string
 }
 
 // The room membership details.
 type RoomMembership struct {
+
 	// The membership role.
 	Role RoomMembershipRole
+
 	// The member details, such as email address, name, member ID, and member type.
 	Member *Member
+
 	// The room ID.
 	RoomId *string
+
 	// The room membership update timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The identifier of the user that invited the room member.
 	InvitedBy *string
 }
@@ -502,6 +659,7 @@ type RoomMembership struct {
 // The retention settings that determine how long to retain chat room messages for
 // an Amazon Chime Enterprise account.
 type RoomRetentionSettings struct {
+
 	// The number of days for which to retain chat room messages.
 	RetentionDays *int32
 }
@@ -509,6 +667,7 @@ type RoomRetentionSettings struct {
 // An Active Directory (AD) group whose members are granted permission to act as
 // delegates.
 type SigninDelegateGroup struct {
+
 	// The group name.
 	GroupName *string
 }
@@ -517,52 +676,80 @@ type SigninDelegateGroup struct {
 // Specifies whether media streaming is enabled for sending to Amazon Kinesis, and
 // shows the retention period for the Amazon Kinesis data, in hours.
 type StreamingConfiguration struct {
+
 	// The retention period, in hours, for the Amazon Kinesis data.
+	//
+	// This member is required.
 	DataRetentionInHours *int32
+
 	// When true, media streaming to Amazon Kinesis is turned off.
 	Disabled *bool
+
 	// The streaming notification targets.
 	StreamingNotificationTargets []*StreamingNotificationTarget
 }
 
 // The targeted recipient for a streaming configuration notification.
 type StreamingNotificationTarget struct {
+
 	// The streaming notification target.
+	//
+	// This member is required.
 	NotificationTarget NotificationTarget
 }
 
 // Describes a tag applied to a resource.
 type Tag struct {
+
 	// The value of the tag.
+	//
+	// This member is required.
 	Value *string
+
 	// The key of the tag.
+	//
+	// This member is required.
 	Key *string
 }
 
 // Settings that allow management of telephony permissions for an Amazon Chime
 // user, such as inbound and outbound calling and text messaging.
 type TelephonySettings struct {
+
 	// Allows or denies SMS messaging.
+	//
+	// This member is required.
 	SMS *bool
+
 	// Allows or denies inbound calling.
+	//
+	// This member is required.
 	InboundCalling *bool
+
 	// Allows or denies outbound calling.
+	//
+	// This member is required.
 	OutboundCalling *bool
 }
 
 // Termination settings enable your SIP hosts to make outbound calls using your
 // Amazon Chime Voice Connector.
 type Termination struct {
+
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
 	// Required.
 	CallingRegions []*string
+
 	// The default caller ID phone number.
 	DefaultPhoneNumber *string
+
 	// When termination settings are disabled, outbound calls can not be made.
 	Disabled *bool
+
 	// The limit on calls per second. Max value based on account service quota. Default
 	// value of 1.
 	CpsLimit *int32
+
 	// The IP addresses allowed to make calls, in CIDR format. Required.
 	CidrAllowedList []*string
 }
@@ -570,8 +757,10 @@ type Termination struct {
 // The termination health details, including the source IP address and timestamp of
 // the last successful SIP OPTIONS message from your SIP infrastructure.
 type TerminationHealth struct {
+
 	// The source IP address.
 	Source *string
+
 	// The timestamp, in ISO 8601 format.
 	Timestamp *time.Time
 }
@@ -579,53 +768,79 @@ type TerminationHealth struct {
 // The phone number ID, product type, or calling name fields to update, used with
 // the BatchUpdatePhoneNumber () and UpdatePhoneNumber () actions.
 type UpdatePhoneNumberRequestItem struct {
+
 	// The product type to update.
 	ProductType PhoneNumberProductType
+
 	// The phone number ID to update.
+	//
+	// This member is required.
 	PhoneNumberId *string
+
 	// The outbound calling name to update.
 	CallingName *string
 }
 
 // The user ID and user fields to update, used with the BatchUpdateUser () action.
 type UpdateUserRequestItem struct {
+
 	// The user license type.
 	LicenseType License
+
 	// The user type.
 	UserType UserType
+
 	// The Alexa for Business metadata.
 	AlexaForBusinessMetadata *AlexaForBusinessMetadata
+
 	// The user ID.
+	//
+	// This member is required.
 	UserId *string
 }
 
 // The user on the Amazon Chime account.
 type User struct {
+
 	// Date and time when the user is invited to the Amazon Chime account, in ISO 8601
 	// format.
 	InvitedOn *time.Time
+
 	// The display name of the user.
 	DisplayName *string
+
 	// Date and time when the user is registered, in ISO 8601 format.
 	RegisteredOn *time.Time
+
 	// The user's personal meeting PIN.
 	PersonalPIN *string
+
 	// The user registration status.
 	UserRegistrationStatus RegistrationStatus
+
 	// The Amazon Chime account ID.
 	AccountId *string
+
 	// The user ID.
+	//
+	// This member is required.
 	UserId *string
+
 	// The license type for the user.
 	LicenseType License
+
 	// The primary phone number associated with the user.
 	PrimaryProvisionedNumber *string
+
 	// The primary email address of the user.
 	PrimaryEmail *string
+
 	// The Alexa for Business metadata.
 	AlexaForBusinessMetadata *AlexaForBusinessMetadata
+
 	// The user type.
 	UserType UserType
+
 	// The user invite status.
 	UserInvitationStatus InviteStatus
 }
@@ -634,10 +849,13 @@ type User struct {
 // BatchSuspendUser (), BatchUnsuspendUser (), or BatchUpdateUser () actions. This
 // includes user IDs, error codes, and error messages.
 type UserError struct {
+
 	// The error message.
 	ErrorMessage *string
+
 	// The error code.
 	ErrorCode ErrorCode
+
 	// The user ID for which the action failed.
 	UserId *string
 }
@@ -645,26 +863,36 @@ type UserError struct {
 // Settings associated with an Amazon Chime user, including inbound and outbound
 // calling and text messaging.
 type UserSettings struct {
+
 	// The telephony settings associated with the user.
+	//
+	// This member is required.
 	Telephony *TelephonySettings
 }
 
 // The Amazon Chime Voice Connector configuration, including outbound host name and
 // encryption settings.
 type VoiceConnector struct {
+
 	// The Amazon Chime Voice Connector ID.
 	VoiceConnectorId *string
+
 	// The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
+
 	// The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// Designates whether encryption is required for the Amazon Chime Voice Connector.
 	RequireEncryption *bool
+
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default:
 	// us-east-1.
 	AwsRegion VoiceConnectorAwsRegion
+
 	// The name of the Amazon Chime Voice Connector.
 	Name *string
+
 	// The outbound host name for the Amazon Chime Voice Connector.
 	OutboundHostName *string
 }
@@ -674,14 +902,19 @@ type VoiceConnector struct {
 // from different AWS Regions in your group. This creates a fault tolerant
 // mechanism for fallback in case of availability events.
 type VoiceConnectorGroup struct {
+
 	// The Amazon Chime Voice Connector group ID.
 	VoiceConnectorGroupId *string
+
 	// The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
 	// The name of the Amazon Chime Voice Connector group.
 	Name *string
+
 	// The Amazon Chime Voice Connectors to which to route inbound calls.
 	VoiceConnectorItems []*VoiceConnectorItem
+
 	// The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 }
@@ -690,17 +923,24 @@ type VoiceConnectorGroup struct {
 // which to route inbound calls. Includes priority configuration settings. Limit: 3
 // VoiceConnectorItems per Amazon Chime Voice Connector group.
 type VoiceConnectorItem struct {
+
 	// The priority associated with the Amazon Chime Voice Connector, with 1 being the
 	// highest priority. Higher priority Amazon Chime Voice Connectors are attempted
 	// first.
+	//
+	// This member is required.
 	Priority *int32
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 // The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets
 // designated for storing call detail records.
 type VoiceConnectorSettings struct {
+
 	// The Amazon S3 bucket designated for call detail record storage.
 	CdrBucket *string
 }

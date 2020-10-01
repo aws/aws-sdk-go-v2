@@ -56,7 +56,10 @@ func (c *Client) DeleteUserPool(ctx context.Context, params *DeleteUserPoolInput
 
 // Represents the request to delete a user pool.
 type DeleteUserPoolInput struct {
+
 	// The user pool ID for the user pool you want to delete.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

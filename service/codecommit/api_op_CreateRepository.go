@@ -57,6 +57,7 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 // Represents the input of a create repository operation.
 type CreateRepositoryInput struct {
+
 	// A comment or description about the new repository. The description field for a
 	// repository accepts all HTML characters and all valid Unicode characters.
 	// Applications that do not HTML-encode the description and display it in a webpage
@@ -64,19 +65,24 @@ type CreateRepositoryInput struct {
 	// the description field in any application that uses this API to display the
 	// repository description on a webpage.
 	RepositoryDescription *string
+
 	// The name of the new repository to be created. The repository name must be unique
 	// across the calling AWS account. Repository names are limited to 100
 	// alphanumeric, dash, and underscore characters, and cannot include certain
 	// characters. For more information about the limits on repository names, see
 	// Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html) in
 	// the AWS CodeCommit User Guide. The suffix .git is prohibited.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// One or more tag key-value pairs to use when tagging this repository.
 	Tags map[string]*string
 }
 
 // Represents the output of a create repository operation.
 type CreateRepositoryOutput struct {
+
 	// Information about the newly created repository.
 	RepositoryMetadata *types.RepositoryMetadata
 

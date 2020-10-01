@@ -57,11 +57,15 @@ func (c *Client) StartWorkspaces(ctx context.Context, params *StartWorkspacesInp
 }
 
 type StartWorkspacesInput struct {
+
 	// The WorkSpaces to start. You can specify up to 25 WorkSpaces.
+	//
+	// This member is required.
 	StartWorkspaceRequests []*types.StartRequest
 }
 
 type StartWorkspacesOutput struct {
+
 	// Information about the WorkSpaces that could not be started.
 	FailedRequests []*types.FailedWorkspaceChangeRequest
 

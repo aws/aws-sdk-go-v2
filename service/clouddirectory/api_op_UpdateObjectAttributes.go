@@ -56,16 +56,26 @@ func (c *Client) UpdateObjectAttributes(ctx context.Context, params *UpdateObjec
 }
 
 type UpdateObjectAttributesInput struct {
+
 	// The reference that identifies the object.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The attributes update structure.
+	//
+	// This member is required.
 	AttributeUpdates []*types.ObjectAttributeUpdate
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// the object resides. For more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type UpdateObjectAttributesOutput struct {
+
 	// The ObjectIdentifier of the updated object.
 	ObjectIdentifier *string
 

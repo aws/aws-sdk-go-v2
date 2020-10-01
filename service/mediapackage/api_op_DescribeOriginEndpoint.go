@@ -56,47 +56,66 @@ func (c *Client) DescribeOriginEndpoint(ctx context.Context, params *DescribeOri
 }
 
 type DescribeOriginEndpointInput struct {
+
 	// The ID of the OriginEndpoint.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeOriginEndpointOutput struct {
+
 	// Maximum duration (seconds) of content to retain for startover playback. If not
 	// specified, startover playback will be disabled for the OriginEndpoint.
 	StartoverWindowSeconds *int32
+
 	// A Common Media Application Format (CMAF) packaging configuration.
 	CmafPackage *types.CmafPackage
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
 	// A short string appended to the end of the OriginEndpoint URL.
 	ManifestName *string
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
+
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
+
 	// The ID of the OriginEndpoint.
 	Id *string
+
 	// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
 	Arn *string
+
 	// A short text description of the OriginEndpoint.
 	Description *string
+
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
+
 	// A list of source IP CIDR blocks that will be allowed to access the
 	// OriginEndpoint.
 	Whitelist []*string
+
 	// Control whether origination of video is allowed for this OriginEndpoint. If set
 	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
 	// access control. If set to DENY, the OriginEndpoint may not be requested. This
 	// can be helpful for Live to VOD harvesting, or for temporarily disabling
 	// origination
 	Origination types.Origination
+
 	// The URL of the packaged OriginEndpoint for consumption.
 	Url *string
+
 	// The ID of the Channel the OriginEndpoint is associated with.
 	ChannelId *string
+
 	// Amount of delay (seconds) to enforce on the playback of live content. If not
 	// specified, there will be no time delay in effect for the OriginEndpoint.
 	TimeDelaySeconds *int32

@@ -78,13 +78,18 @@ func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput
 }
 
 type CreateLogGroupInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
+
 	// The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For
 	// more information, see Amazon Resource Names - AWS Key Management Service (AWS
 	// KMS)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms).
 	KmsKeyId *string
+
 	// The key-value pairs to use for the tags.
 	Tags map[string]*string
 }

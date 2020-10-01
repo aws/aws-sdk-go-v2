@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Access to a resource was denied.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
@@ -47,12 +40,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
@@ -72,12 +59,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Too many jobs are being run concurrently.
 type ConcurrentRunsExceededException struct {
@@ -97,12 +78,6 @@ func (e *ConcurrentRunsExceededException) ErrorCode() string {
 	return "ConcurrentRunsExceededException"
 }
 func (e *ConcurrentRunsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentRunsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentRunsExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified condition was not satisfied.
 type ConditionCheckFailureException struct {
@@ -120,12 +95,6 @@ func (e *ConditionCheckFailureException) ErrorMessage() string {
 }
 func (e *ConditionCheckFailureException) ErrorCode() string             { return "ConditionCheckFailureException" }
 func (e *ConditionCheckFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConditionCheckFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConditionCheckFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified crawler is not running.
 type CrawlerNotRunningException struct {
@@ -143,12 +112,6 @@ func (e *CrawlerNotRunningException) ErrorMessage() string {
 }
 func (e *CrawlerNotRunningException) ErrorCode() string             { return "CrawlerNotRunningException" }
 func (e *CrawlerNotRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CrawlerNotRunningException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CrawlerNotRunningException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation cannot be performed because the crawler is already running.
 type CrawlerRunningException struct {
@@ -166,12 +129,6 @@ func (e *CrawlerRunningException) ErrorMessage() string {
 }
 func (e *CrawlerRunningException) ErrorCode() string             { return "CrawlerRunningException" }
 func (e *CrawlerRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CrawlerRunningException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CrawlerRunningException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified crawler is stopping.
 type CrawlerStoppingException struct {
@@ -189,12 +146,6 @@ func (e *CrawlerStoppingException) ErrorMessage() string {
 }
 func (e *CrawlerStoppingException) ErrorCode() string             { return "CrawlerStoppingException" }
 func (e *CrawlerStoppingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CrawlerStoppingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CrawlerStoppingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified entity does not exist
 type EntityNotFoundException struct {
@@ -212,12 +163,6 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 }
 func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An encryption operation failed.
 type GlueEncryptionException struct {
@@ -235,12 +180,6 @@ func (e *GlueEncryptionException) ErrorMessage() string {
 }
 func (e *GlueEncryptionException) ErrorCode() string             { return "GlueEncryptionException" }
 func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *GlueEncryptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GlueEncryptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The same unique identifier was associated with two different records.
 type IdempotentParameterMismatchException struct {
@@ -262,12 +201,6 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IdempotentParameterMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotentParameterMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The workflow is in an invalid state to perform a requested operation.
 type IllegalWorkflowStateException struct {
@@ -285,12 +218,6 @@ func (e *IllegalWorkflowStateException) ErrorMessage() string {
 }
 func (e *IllegalWorkflowStateException) ErrorCode() string             { return "IllegalWorkflowStateException" }
 func (e *IllegalWorkflowStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IllegalWorkflowStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IllegalWorkflowStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal service error occurred.
 type InternalServiceException struct {
@@ -308,12 +235,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input provided was not valid.
 type InvalidInputException struct {
@@ -331,12 +252,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The machine learning transform is not ready to run.
 type MLTransformNotReadyException struct {
@@ -354,12 +269,6 @@ func (e *MLTransformNotReadyException) ErrorMessage() string {
 }
 func (e *MLTransformNotReadyException) ErrorCode() string             { return "MLTransformNotReadyException" }
 func (e *MLTransformNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MLTransformNotReadyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MLTransformNotReadyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no applicable schedule.
 type NoScheduleException struct {
@@ -377,12 +286,6 @@ func (e *NoScheduleException) ErrorMessage() string {
 }
 func (e *NoScheduleException) ErrorCode() string             { return "NoScheduleException" }
 func (e *NoScheduleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoScheduleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoScheduleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation timed out.
 type OperationTimeoutException struct {
@@ -400,12 +303,6 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 }
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
@@ -427,12 +324,6 @@ func (e *ResourceNumberLimitExceededException) ErrorCode() string {
 func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceNumberLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNumberLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified scheduler is not running.
 type SchedulerNotRunningException struct {
@@ -450,12 +341,6 @@ func (e *SchedulerNotRunningException) ErrorMessage() string {
 }
 func (e *SchedulerNotRunningException) ErrorCode() string             { return "SchedulerNotRunningException" }
 func (e *SchedulerNotRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SchedulerNotRunningException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SchedulerNotRunningException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified scheduler is already running.
 type SchedulerRunningException struct {
@@ -473,12 +358,6 @@ func (e *SchedulerRunningException) ErrorMessage() string {
 }
 func (e *SchedulerRunningException) ErrorCode() string             { return "SchedulerRunningException" }
 func (e *SchedulerRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SchedulerRunningException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SchedulerRunningException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified scheduler is transitioning.
 type SchedulerTransitioningException struct {
@@ -498,12 +377,6 @@ func (e *SchedulerTransitioningException) ErrorCode() string {
 	return "SchedulerTransitioningException"
 }
 func (e *SchedulerTransitioningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SchedulerTransitioningException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SchedulerTransitioningException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A value could not be validated.
 type ValidationException struct {
@@ -521,12 +394,6 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There was a version conflict.
 type VersionMismatchException struct {
@@ -544,9 +411,3 @@ func (e *VersionMismatchException) ErrorMessage() string {
 }
 func (e *VersionMismatchException) ErrorCode() string             { return "VersionMismatchException" }
 func (e *VersionMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *VersionMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VersionMismatchException) HasMessage() bool {
-	return e.Message != nil
-}

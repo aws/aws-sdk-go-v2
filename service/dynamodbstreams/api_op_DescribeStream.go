@@ -64,10 +64,15 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 
 // Represents the input of a DescribeStream operation.
 type DescribeStreamInput struct {
+
 	// The Amazon Resource Name (ARN) for the stream.
+	//
+	// This member is required.
 	StreamArn *string
+
 	// The maximum number of shard objects to return. The upper limit is 100.
 	Limit *int32
+
 	// The shard ID of the first item that this operation will evaluate. Use the value
 	// that was returned for LastEvaluatedShardId in the previous operation.
 	ExclusiveStartShardId *string
@@ -75,6 +80,7 @@ type DescribeStreamInput struct {
 
 // Represents the output of a DescribeStream operation.
 type DescribeStreamOutput struct {
+
 	// A complete description of the stream, including its creation date and time, the
 	// DynamoDB table associated with the stream, the shard IDs within the stream, and
 	// the beginning and ending sequence numbers of stream records within the shards.

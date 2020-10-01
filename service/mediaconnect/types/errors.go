@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -26,12 +25,6 @@ func (e *AddFlowOutputs420Exception) ErrorMessage() string {
 }
 func (e *AddFlowOutputs420Exception) ErrorCode() string             { return "AddFlowOutputs420Exception" }
 func (e *AddFlowOutputs420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AddFlowOutputs420Exception) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AddFlowOutputs420Exception) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -51,12 +44,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -76,12 +63,6 @@ func (e *CreateFlow420Exception) ErrorMessage() string {
 }
 func (e *CreateFlow420Exception) ErrorCode() string             { return "CreateFlow420Exception" }
 func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CreateFlow420Exception) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CreateFlow420Exception) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -101,12 +82,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -128,12 +103,6 @@ func (e *GrantFlowEntitlements420Exception) ErrorCode() string {
 	return "GrantFlowEntitlements420Exception"
 }
 func (e *GrantFlowEntitlements420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *GrantFlowEntitlements420Exception) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GrantFlowEntitlements420Exception) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -153,12 +122,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -178,12 +141,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -203,12 +160,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
 // documentation for the operation for more information on the cause of this
@@ -228,9 +179,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -61,14 +61,19 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 
 // CreateTapesInput
 type CreateTapesInput struct {
+
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
 	// the virtual tapes with. Use the ListGateways () operation to return a list of
 	// gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
+
 	// The ID of the pool that you want to add your tape to for archiving. The tape in
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
@@ -76,25 +81,39 @@ type CreateTapesInput struct {
 	// corresponds to the pool.  <p>Valid Values: <code>GLACIER</code> |
 	// <code>DEEP_ARCHIVE</code> </p>
 	PoolId *string
+
 	// A prefix that you append to the barcode of the virtual tape you are creating.
 	// This prefix makes the barcode unique.  <note> <p>The prefix must be 1 to 4
 	// characters in length and must be one of the uppercase letters from A to Z.</p>
 	// </note>
+	//
+	// This member is required.
 	TapeBarcodePrefix *string
+
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	KMSEncrypted *bool
+
 	// The number of virtual tapes that you want to create.
+	//
+	// This member is required.
 	NumTapesToCreate *int32
+
 	// The size, in bytes, of the virtual tapes that you want to create.  <note> <p>The
 	// size must be aligned by gigabyte (1024*1024*1024 bytes).</p> </note>
+	//
+	// This member is required.
 	TapeSizeInBytes *int64
+
 	// A unique identifier that you use to retry a request. If you retry a request, use
 	// the same ClientToken you specified in the initial request.  <note> <p>Using the
 	// same <code>ClientToken</code> prevents creating the tape multiple times.</p>
 	// </note>
+	//
+	// This member is required.
 	ClientToken *string
+
 	// A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a
 	// key-value pair.  <note> <p>Valid characters for key and value are letters,
 	// spaces, and numbers representable in UTF-8 format, and the following special
@@ -105,6 +124,7 @@ type CreateTapesInput struct {
 
 // CreateTapeOutput
 type CreateTapesOutput struct {
+
 	// A list of unique Amazon Resource Names (ARNs) that represents the virtual tapes
 	// that were created.
 	TapeARNs []*string

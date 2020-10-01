@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised to indicate that authorization of an action was successful,
 // when the DryRun flag is set to true.
@@ -48,12 +41,6 @@ func (e *DryRunOperation) ErrorMessage() string {
 }
 func (e *DryRunOperation) ErrorCode() string             { return "DryRunOperation" }
 func (e *DryRunOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DryRunOperation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DryRunOperation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when an internal, configuration, or dependency error is
 // encountered.
@@ -72,12 +59,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when the provided input violates a policy constraint or is
 // entered in the wrong format or data type.
@@ -96,12 +77,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when a request fails due to temporary unavailability of the
 // service.
@@ -120,12 +95,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -145,15 +114,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetRetryAfterSeconds() int32 {
-	return ptr.ToInt32(e.RetryAfterSeconds)
-}
-func (e *ThrottlingException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -58,12 +58,20 @@ func (c *Client) UpdateUsagePlan(ctx context.Context, params *UpdateUsagePlanInp
 
 // The PATCH request to update a usage plan of a given plan Id.
 type UpdateUsagePlanInput struct {
+
 	// [Required] The Id of the to-be-updated usage plan.
-	UsagePlanId      *string
-	Title            *string
+	//
+	// This member is required.
+	UsagePlanId *string
+
+	Title *string
+
 	TemplateSkipList []*string
-	Name             *string
-	Template         *bool
+
+	Name *string
+
+	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -75,21 +83,29 @@ type UpdateUsagePlanInput struct {
 // customers by adding API keys to the plan. Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type UpdateUsagePlanOutput struct {
+
 	// The identifier of a UsagePlan () resource.
 	Id *string
+
 	// The request throttle limits of a usage plan.
 	Throttle *types.ThrottleSettings
+
 	// The name of a usage plan.
 	Name *string
+
 	// The associated API stages of a usage plan.
 	ApiStages []*types.ApiStage
+
 	// The AWS Markeplace product identifier to associate with the usage plan as a SaaS
 	// product on AWS Marketplace.
 	ProductCode *string
+
 	// The maximum number of permitted requests per a given unit time interval.
 	Quota *types.QuotaSettings
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The description of a usage plan.
 	Description *string
 

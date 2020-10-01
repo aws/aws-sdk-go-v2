@@ -56,11 +56,15 @@ func (c *Client) DescribeBackupPolicy(ctx context.Context, params *DescribeBacku
 }
 
 type DescribeBackupPolicyInput struct {
+
 	// Specifies which EFS file system to retrieve the BackupPolicy for.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
 type DescribeBackupPolicyOutput struct {
+
 	// Describes the file system's backup policy, indicating whether automatic backups
 	// are turned on or off..
 	BackupPolicy *types.BackupPolicy

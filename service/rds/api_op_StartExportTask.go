@@ -57,9 +57,13 @@ func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInp
 }
 
 type StartExportTaskInput struct {
+
 	// A unique identifier for the snapshot export task. This ID isn't an identifier
 	// for the Amazon S3 bucket where the snapshot is to be exported to.
+	//
+	// This member is required.
 	ExportTaskIdentifier *string
+
 	// The data to be exported from the snapshot. If this parameter is not provided,
 	// all the snapshot data is exported. Valid values are the following:
 	//
@@ -78,18 +82,31 @@ type StartExportTaskInput struct {
 	// Export a table of the database schema. This format is valid only for RDS for
 	// PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []*string
+
 	// The name of the Amazon S3 bucket to export the snapshot to.
+	//
+	// This member is required.
 	S3BucketName *string
+
 	// The ID of the AWS KMS key to use to encrypt the snapshot exported to Amazon S3.
 	// The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the
 	// KMS key alias for the KMS encryption key. The IAM role used for the snapshot
 	// export must have encryption and decryption permissions to use this KMS key.
+	//
+	// This member is required.
 	KmsKeyId *string
+
 	// The Amazon Resource Name (ARN) of the snapshot to export to Amazon S3.
+	//
+	// This member is required.
 	SourceArn *string
+
 	// The name of the IAM role to use for writing to the Amazon S3 bucket when
 	// exporting a snapshot.
+	//
+	// This member is required.
 	IamRoleArn *string
+
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported
 	// snapshot.
 	S3Prefix *string
@@ -98,37 +115,50 @@ type StartExportTaskInput struct {
 // Contains the details of a snapshot export to Amazon S3. This data type is used
 // as a response element in the DescribeExportTasks action.
 type StartExportTaskOutput struct {
+
 	// The name of the IAM role that is used to write to Amazon S3 when exporting a
 	// snapshot.
 	IamRoleArn *string
+
 	// The total amount of data exported, in gigabytes.
 	TotalExtractedDataInGB *int32
+
 	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
 	SourceArn *string
+
 	// The Amazon S3 bucket that the snapshot is exported to.
 	S3Bucket *string
+
 	// The time that the snapshot was created.
 	SnapshotTime *time.Time
+
 	// The progress status of the export task.
 	Status *string
+
 	// A unique identifier for the snapshot export task. This ID isn't an identifier
 	// for the Amazon S3 bucket where the snapshot is exported to.
 	ExportTaskIdentifier *string
+
 	// The reason the export failed, if it failed.
 	FailureCause *string
+
 	// The progress of the snapshot export task as a percentage.
 	PercentProgress *int32
+
 	// The Amazon S3 bucket prefix that is the file name and path of the exported
 	// snapshot.
 	S3Prefix *string
+
 	// The ID of the AWS KMS key that is used to encrypt the snapshot when it's
 	// exported to Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
 	// key identifier, or the KMS key alias for the KMS encryption key. The IAM role
 	// used for the snapshot export must have encryption and decryption permissions to
 	// use this KMS key.
 	KmsKeyId *string
+
 	// The time that the snapshot export task completed.
 	TaskEndTime *time.Time
+
 	// The data exported from the snapshot. Valid values are the following:
 	//
 	//     *
@@ -146,8 +176,10 @@ type StartExportTaskOutput struct {
 	// Export a table of the database schema. This format is valid only for RDS for
 	// PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []*string
+
 	// A warning about the snapshot export task.
 	WarningMessage *string
+
 	// The time that the snapshot export task started.
 	TaskStartTime *time.Time
 

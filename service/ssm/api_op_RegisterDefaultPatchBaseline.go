@@ -59,11 +59,15 @@ func (c *Client) RegisterDefaultPatchBaseline(ctx context.Context, params *Regis
 }
 
 type RegisterDefaultPatchBaselineInput struct {
+
 	// The ID of the patch baseline that should be the default patch baseline.
+	//
+	// This member is required.
 	BaselineId *string
 }
 
 type RegisterDefaultPatchBaselineOutput struct {
+
 	// The ID of the default patch baseline.
 	BaselineId *string
 

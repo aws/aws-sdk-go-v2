@@ -55,25 +55,36 @@ func (c *Client) GetDeviceDefinition(ctx context.Context, params *GetDeviceDefin
 }
 
 type GetDeviceDefinitionInput struct {
+
 	// The ID of the device definition.
+	//
+	// This member is required.
 	DeviceDefinitionId *string
 }
 
 type GetDeviceDefinitionOutput struct {
+
 	// The ID of the definition.
 	Id *string
+
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string
+
 	// The ARN of the definition.
 	Arn *string
+
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
+
 	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string
+
 	// Tag(s) attached to the resource arn.
 	Tags map[string]*string
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
+
 	// The name of the definition.
 	Name *string
 

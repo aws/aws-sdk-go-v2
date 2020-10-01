@@ -56,6 +56,7 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 
 // Represents the input of a ListPipelines action.
 type ListPipelinesInput struct {
+
 	// An identifier that was returned from the previous list pipelines call. It can be
 	// used to return the next set of pipelines in the list.
 	NextToken *string
@@ -63,8 +64,10 @@ type ListPipelinesInput struct {
 
 // Represents the output of a ListPipelines action.
 type ListPipelinesOutput struct {
+
 	// The list of pipelines.
 	Pipelines []*types.PipelineSummary
+
 	// If the amount of returned information is significantly large, an identifier is
 	// also returned. It can be used in a subsequent list pipelines call to return the
 	// next set of pipelines in the list.

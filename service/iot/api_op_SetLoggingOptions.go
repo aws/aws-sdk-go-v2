@@ -58,7 +58,10 @@ func (c *Client) SetLoggingOptions(ctx context.Context, params *SetLoggingOption
 
 // The input for the SetLoggingOptions operation.
 type SetLoggingOptionsInput struct {
+
 	// The logging options payload.
+	//
+	// This member is required.
 	LoggingOptionsPayload *types.LoggingOptionsPayload
 }
 

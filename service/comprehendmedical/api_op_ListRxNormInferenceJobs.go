@@ -55,19 +55,24 @@ func (c *Client) ListRxNormInferenceJobs(ctx context.Context, params *ListRxNorm
 }
 
 type ListRxNormInferenceJobsInput struct {
+
 	// Filters the jobs that are returned. You can filter jobs based on their names,
 	// status, or the date and time that they were submitted. You can only set one
 	// filter at a time.
 	Filter *types.ComprehendMedicalAsyncJobFilter
+
 	// Identifies the next page of results to return.
 	MaxResults *int32
+
 	// Identifies the next page of results to return.
 	NextToken *string
 }
 
 type ListRxNormInferenceJobsOutput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// The maximum number of results to return in each page. The default is 100.
 	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
 

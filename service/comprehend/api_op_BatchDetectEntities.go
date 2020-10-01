@@ -58,26 +58,38 @@ func (c *Client) BatchDetectEntities(ctx context.Context, params *BatchDetectEnt
 }
 
 type BatchDetectEntitiesInput struct {
+
 	// The language of the input documents. You can specify any of the primary
 	// languages supported by Amazon Comprehend. All documents must be in the same
 	// language.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// A list containing the text of the input documents. The list can contain a
 	// maximum of 25 documents. Each document must contain fewer than 5,000 bytes of
 	// UTF-8 encoded characters.
+	//
+	// This member is required.
 	TextList []*string
 }
 
 type BatchDetectEntitiesOutput struct {
+
 	// A list containing one object for each document that contained an error. The
 	// results are sorted in ascending order by the Index field and match the order of
 	// the documents in the input list. If there are no errors in the batch, the
 	// ErrorList is empty.
+	//
+	// This member is required.
 	ErrorList []*types.BatchItemError
+
 	// A list of objects containing the results of the operation. The results are
 	// sorted in ascending order by the Index field and match the order of the
 	// documents in the input list. If all of the documents contain an error, the
 	// ResultList is empty.
+	//
+	// This member is required.
 	ResultList []*types.BatchDetectEntitiesItemResult
 
 	// Metadata pertaining to the operation's result.

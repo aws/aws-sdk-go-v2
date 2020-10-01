@@ -55,9 +55,15 @@ func (c *Client) DeleteRoute(ctx context.Context, params *DeleteRouteInput, optF
 }
 
 type DeleteRouteInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The route ID.
+	//
+	// This member is required.
 	RouteId *string
 }
 

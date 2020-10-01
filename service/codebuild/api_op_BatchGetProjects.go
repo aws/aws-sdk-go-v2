@@ -56,15 +56,20 @@ func (c *Client) BatchGetProjects(ctx context.Context, params *BatchGetProjectsI
 }
 
 type BatchGetProjectsInput struct {
+
 	// The names or ARNs of the build projects. To get information about a project
 	// shared with your AWS account, its ARN must be specified. You cannot specify a
 	// shared project using its name.
+	//
+	// This member is required.
 	Names []*string
 }
 
 type BatchGetProjectsOutput struct {
+
 	// Information about the requested build projects.
 	Projects []*types.Project
+
 	// The names of build projects for which information could not be found.
 	ProjectsNotFound []*string
 

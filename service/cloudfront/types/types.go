@@ -18,23 +18,34 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 // in the Amazon CloudFront Developer Guide.
 type ActiveTrustedSigners struct {
+
 	// Enabled is true if any of the AWS accounts listed in the TrustedSigners complex
 	// type for this distribution have active CloudFront key pairs. If not, Enabled is
 	// false.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// A complex type that contains one Signer complex type for each trusted signer
 	// that is specified in the TrustedSigners complex type.
 	Items []*Signer
+
 	// The number of trusted signers specified in the TrustedSigners complex type.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // A complex type that contains information about CNAMEs (alternate domain names),
 // if any, for this distribution.
 type Aliases struct {
+
 	// The number of CNAME aliases, if any, that you want to associate with this
 	// distribution.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that contains the CNAME aliases, if any, that you want to
 	// associate with this distribution.
 	Items []*string
@@ -49,6 +60,7 @@ type Aliases struct {
 // (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 // in Getting Started with AWS services in China.
 type AliasICPRecordal struct {
+
 	// The Internet Content Provider (ICP) recordal status for a CNAME. The
 	// ICPRecordalStatus is set to APPROVED for all CNAMEs (aliases) in regions outside
 	// of China. The status values returned are the following:
@@ -69,6 +81,7 @@ type AliasICPRecordal struct {
 	// error is resolved in which case CloudFront returns an APPROVED or SUSPENDED
 	// status.
 	ICPRecordalStatus ICPRecordalStatus
+
 	// A domain name associated with a distribution.
 	CNAME *string
 }
@@ -91,10 +104,14 @@ type AliasICPRecordal struct {
 // to. For example, you might not want users to have permissions to delete objects
 // from your origin.
 type AllowedMethods struct {
+
 	// The number of HTTP methods that you want CloudFront to forward to your origin.
 	// Valid values are 2 (for GET and HEAD requests), 3 (for GET, HEAD, and OPTIONS
 	// requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests).
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that controls whether CloudFront caches the response to requests
 	// using the specified HTTP methods. There are two choices:
 	//
@@ -109,8 +126,11 @@ type AllowedMethods struct {
 	// Access-Control-Request-Headers, and Origin headers for the responses to be
 	// cached correctly.
 	CachedMethods *CachedMethods
+
 	// A complex type that contains the HTTP methods that you want CloudFront to
 	// process and forward to your origin.
+	//
+	// This member is required.
 	Items []Method
 }
 
@@ -135,6 +155,7 @@ type AllowedMethods struct {
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 // in the Amazon CloudFront Developer Guide.
 type CacheBehavior struct {
+
 	// This field is deprecated. We recommend that you use the DefaultTTL field in a
 	// cache policy instead of this field. For more information, see Creating cache
 	// policies
@@ -151,6 +172,7 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultTTL *int64
+
 	// The unique identifier of the origin request policy that is attached to this
 	// cache behavior. For more information, see Creating origin request policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy)
@@ -158,6 +180,7 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)
 	// in the Amazon CloudFront Developer Guide.
 	OriginRequestPolicyId *string
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. For more information, see Working with
 	// policies
@@ -176,16 +199,19 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide. A complex type that specifies how
 	// CloudFront handles query strings, cookies, and HTTP headers.
 	ForwardedValues *ForwardedValues
+
 	// The value of ID for the field-level encryption configuration that you want
 	// CloudFront to use for encrypting specific fields of data for this cache
 	// behavior.
 	FieldLevelEncryptionId *string
+
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
 	// If so, specify true; if not, specify false. If you specify true for
 	// SmoothStreaming, you can still distribute other content using this cache
 	// behavior if the content matches the value of PathPattern.
 	SmoothStreaming *bool
+
 	// This field is deprecated. We recommend that you use the MinTTL field in a cache
 	// policy instead of this field. For more information, see Creating cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
@@ -201,6 +227,7 @@ type CacheBehavior struct {
 	// configure CloudFront to forward all headers to your origin (under Headers, if
 	// you specify 1 for Quantity and * for Name).
 	MinTTL *int64
+
 	// The protocol that viewers can use to access the files in the origin specified by
 	// TargetOriginId when a request matches the path pattern in PathPattern. You can
 	// specify the following options:
@@ -228,7 +255,10 @@ type CacheBehavior struct {
 	// protocol used previously. For more information, see Managing Cache Expiration
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	ViewerProtocolPolicy ViewerProtocolPolicy
+
 	// This field is deprecated. We recommend that you use the MaxTTL field in a cache
 	// policy instead of this field. For more information, see Creating cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
@@ -243,6 +273,7 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	MaxTTL *int64
+
 	// A complex type that specifies the AWS accounts, if any, that you want to allow
 	// to create signed URLs for private content. If you want to require signed URLs in
 	// requests for objects in the target origin that match the PathPattern for this
@@ -256,7 +287,10 @@ type CacheBehavior struct {
 	// signers, change Enabled to true (if it’s currently false), change Quantity as
 	// applicable, and specify all of the trusted signers that you want to include in
 	// the updated distribution.
+	//
+	// This member is required.
 	TrustedSigners *TrustedSigners
+
 	// A complex type that controls which HTTP methods CloudFront processes and
 	// forwards to your Amazon S3 bucket or your custom origin. There are three
 	// choices:
@@ -275,15 +309,20 @@ type CacheBehavior struct {
 	// to. For example, you might not want users to have permissions to delete objects
 	// from your origin.
 	AllowedMethods *AllowedMethods
+
 	// The value of ID for the origin that you want CloudFront to route requests to
 	// when they match this cache behavior.
+	//
+	// This member is required.
 	TargetOriginId *string
+
 	// Whether you want CloudFront to automatically compress certain files for this
 	// cache behavior. If so, specify true; if not, specify false. For more
 	// information, see Serving Compressed Files
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
 	// in the Amazon CloudFront Developer Guide.
 	Compress *bool
+
 	// The unique identifier of the cache policy that is attached to this cache
 	// behavior. For more information, see Creating cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
@@ -291,6 +330,7 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html)
 	// in the Amazon CloudFront Developer Guide.
 	CachePolicyId *string
+
 	// The pattern (for example, images/*.jpg) that specifies which requests to apply
 	// the behavior to. When CloudFront receives a viewer request, the requested path
 	// is compared with path patterns in the order in which cache behaviors are listed
@@ -302,7 +342,10 @@ type CacheBehavior struct {
 	// cache behavior. For more information, see Path Pattern
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	PathPattern *string
+
 	// A complex type that contains zero or more Lambda function associations for a
 	// cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations
@@ -310,10 +353,14 @@ type CacheBehavior struct {
 
 // A complex type that contains zero or more CacheBehavior elements.
 type CacheBehaviors struct {
+
 	// Optional: A complex type that contains cache behaviors for this distribution. If
 	// Quantity is 0, you can omit Items.
 	Items []*CacheBehavior
+
 	// The number of cache behaviors for this distribution.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
@@ -331,12 +378,18 @@ type CacheBehaviors struct {
 // Access-Control-Request-Headers, and Origin headers for the responses to be
 // cached correctly.
 type CachedMethods struct {
+
 	// The number of HTTP methods for which you want CloudFront to cache responses.
 	// Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for
 	// caching responses to GET, HEAD, and OPTIONS requests).
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that contains the HTTP methods that you want CloudFront to cache
 	// responses to.
+	//
+	// This member is required.
 	Items []Method
 }
 
@@ -358,11 +411,20 @@ type CachedMethods struct {
 // matches the request’s cache key. If you want to send values to the origin but
 // not include them in the cache key, use OriginRequestPolicy.
 type CachePolicy struct {
+
 	// The date and time when the cache policy was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The unique identifier for the cache policy.
+	//
+	// This member is required.
 	Id *string
+
 	// The cache policy configuration.
+	//
+	// This member is required.
 	CachePolicyConfig *CachePolicyConfig
 }
 
@@ -384,13 +446,17 @@ type CachePolicy struct {
 // values to the origin but not include them in the cache key, use
 // OriginRequestPolicy.
 type CachePolicyConfig struct {
+
 	// The minimum amount of time, in seconds, that you want objects to stay in the
 	// CloudFront cache before CloudFront sends another request to the origin to see if
 	// the object has been updated. For more information, see Managing How Long Content
 	// Stays in an Edge Cache (Expiration)
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	MinTTL *int64
+
 	// The maximum amount of time, in seconds, that objects stay in the CloudFront
 	// cache before CloudFront sends another request to the origin to see if the object
 	// has been updated. CloudFront uses this value only when the origin sends
@@ -402,14 +468,20 @@ type CachePolicyConfig struct {
 	// 31536000 seconds, then the default value for this field is the same as the value
 	// of DefaultTTL.
 	MaxTTL *int64
+
 	// A comment to describe the cache policy.
 	Comment *string
+
 	// A unique name to identify the cache policy.
+	//
+	// This member is required.
 	Name *string
+
 	// The HTTP headers, cookies, and URL query strings to include in the cache key.
 	// The values included in the cache key are automatically included in requests that
 	// CloudFront sends to the origin.
 	ParametersInCacheKeyAndForwardedToOrigin *ParametersInCacheKeyAndForwardedToOrigin
+
 	// The default amount of time, in seconds, that you want objects to stay in the
 	// CloudFront cache before CloudFront sends another request to the origin to see if
 	// the object has been updated. CloudFront uses this value as the object’s time to
@@ -427,6 +499,7 @@ type CachePolicyConfig struct {
 // which cookies) are included in the cache key and automatically included in
 // requests that CloudFront sends to the origin.
 type CachePolicyCookiesConfig struct {
+
 	// Determines whether any cookies in viewer requests are included in the cache key
 	// and automatically included in requests that CloudFront sends to the origin.
 	// Valid values are:
@@ -449,7 +522,10 @@ type CachePolicyCookiesConfig struct {
 	//     * all – All cookies in viewer requests are included in the cache
 	// key and are automatically included in requests that CloudFront sends to the
 	// origin.
+	//
+	// This member is required.
 	CookieBehavior CachePolicyCookieBehavior
+
 	// Contains a list of cookie names.
 	Cookies *CookieNames
 }
@@ -458,6 +534,7 @@ type CachePolicyCookiesConfig struct {
 // are included in the cache key and automatically included in requests that
 // CloudFront sends to the origin.
 type CachePolicyHeadersConfig struct {
+
 	// Determines whether any HTTP headers are included in the cache key and
 	// automatically included in requests that CloudFront sends to the origin. Valid
 	// values are:
@@ -470,21 +547,32 @@ type CachePolicyHeadersConfig struct {
 	//     * whitelist – The HTTP
 	// headers that are listed in the Headers type are included in the cache key and
 	// are automatically included in requests that CloudFront sends to the origin.
+	//
+	// This member is required.
 	HeaderBehavior CachePolicyHeaderBehavior
+
 	// Contains a list of HTTP header names.
 	Headers *Headers
 }
 
 // A list of cache policies.
 type CachePolicyList struct {
+
 	// If there are more items in the list than are in this response, this element is
 	// present. It contains the value that you should use in the Marker field of a
 	// subsequent request to continue listing cache policies where you left off.
 	NextMarker *string
+
 	// The total number of cache policies returned in the response.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// The maximum number of cache policies requested.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// Contains the cache policies in the list.
 	Items []*CachePolicySummary
 }
@@ -493,6 +581,7 @@ type CachePolicyList struct {
 // if so, which query strings) are included in the cache key and automatically
 // included in requests that CloudFront sends to the origin.
 type CachePolicyQueryStringsConfig struct {
+
 	// Contains the specific query strings in viewer requests that either are or are
 	// not included in the cache key and automatically included in requests that
 	// CloudFront sends to the origin. The behavior depends on whether the
@@ -500,6 +589,7 @@ type CachePolicyQueryStringsConfig struct {
 	// whitelist (the listed query strings are included) or allExcept (the listed query
 	// strings are not included, but all other query strings are).
 	QueryStrings *QueryStringNames
+
 	// Determines whether any URL query strings in viewer requests are included in the
 	// cache key and automatically included in requests that CloudFront sends to the
 	// origin. Valid values are:
@@ -522,34 +612,53 @@ type CachePolicyQueryStringsConfig struct {
 	//     * all – All query strings
 	// in viewer requests are included in the cache key and are automatically included
 	// in requests that CloudFront sends to the origin.
+	//
+	// This member is required.
 	QueryStringBehavior CachePolicyQueryStringBehavior
 }
 
 // Contains a cache policy.
 type CachePolicySummary struct {
+
 	// The type of cache policy, either managed (created by AWS) or custom (created in
 	// this AWS account).
+	//
+	// This member is required.
 	Type CachePolicyType
+
 	// The cache policy.
+	//
+	// This member is required.
 	CachePolicy *CachePolicy
 }
 
 // CloudFront origin access identity.
 type CloudFrontOriginAccessIdentity struct {
+
 	// The ID for the origin access identity, for example, E74FTE3AJFJ256A.
+	//
+	// This member is required.
 	Id *string
+
 	// The current configuration information for the identity.
 	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig
+
 	// The Amazon S3 canonical user ID for the origin access identity, used when giving
 	// the origin access identity read permission to an object in Amazon S3.
+	//
+	// This member is required.
 	S3CanonicalUserId *string
 }
 
 // Origin access identity configuration. Send a GET request to the /CloudFront API
 // version/CloudFront/identity ID/config resource.
 type CloudFrontOriginAccessIdentityConfig struct {
+
 	// Any comments you want to include about the origin access identity.
+	//
+	// This member is required.
 	Comment *string
+
 	// A unique value (for example, a date-time stamp) that ensures that the request
 	// can't be replayed. If the value of CallerReference is new (regardless of the
 	// content of the CloudFrontOriginAccessIdentityConfig object), a new origin access
@@ -561,6 +670,8 @@ type CloudFrontOriginAccessIdentityConfig struct {
 	// previous request to create an identity, but the content of the
 	// CloudFrontOriginAccessIdentityConfig is different from the original request,
 	// CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error.
+	//
+	// This member is required.
 	CallerReference *string
 }
 
@@ -571,24 +682,38 @@ type CloudFrontOriginAccessIdentityConfig struct {
 // list of origin access identities is returned in one single page. If the list is
 // long, you can paginate it using the MaxItems and Marker parameters.
 type CloudFrontOriginAccessIdentityList struct {
+
 	// The maximum number of origin access identities you want in the response body.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// A complex type that contains one CloudFrontOriginAccessIdentitySummary element
 	// for each origin access identity that was created by the current AWS account.
 	Items []*CloudFrontOriginAccessIdentitySummary
+
 	// A flag that indicates whether more origin access identities remain to be listed.
 	// If your results were truncated, you can make a follow-up pagination request
 	// using the Marker request parameter to retrieve more items in the list.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// Use this when paginating results to indicate where to begin in your list of
 	// origin access identities. The results include identities in the list that occur
 	// after the marker. To get the next page of results, set the Marker to the value
 	// of the NextMarker from the current page's response (which is also the ID of the
 	// last identity on that page).
+	//
+	// This member is required.
 	Marker *string
+
 	// The number of CloudFront origin access identities that were created by the
 	// current AWS account.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// If IsTruncated is true, this element is present and contains the value you can
 	// use for the Marker request parameter to continue listing your origin access
 	// identities where they left off.
@@ -597,51 +722,79 @@ type CloudFrontOriginAccessIdentityList struct {
 
 // Summary of the information about a CloudFront origin access identity.
 type CloudFrontOriginAccessIdentitySummary struct {
+
 	// The Amazon S3 canonical user ID for the origin access identity, which you use
 	// when giving the origin access identity read permission to an object in Amazon
 	// S3.
+	//
+	// This member is required.
 	S3CanonicalUserId *string
+
 	// The comment for this origin access identity, as originally specified when
 	// created.
+	//
+	// This member is required.
 	Comment *string
+
 	// The ID for the origin access identity. For example: E74FTE3AJFJ256A.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A field-level encryption content type profile.
 type ContentTypeProfile struct {
+
 	// The content type for a field-level encryption content type-profile mapping.
+	//
+	// This member is required.
 	ContentType *string
+
 	// The profile ID for a field-level encryption content type-profile mapping.
 	ProfileId *string
+
 	// The format for a field-level encryption content type-profile mapping.
+	//
+	// This member is required.
 	Format Format
 }
 
 // The configuration for a field-level encryption content type-profile mapping.
 type ContentTypeProfileConfig struct {
+
 	// The setting in a field-level encryption content type-profile mapping that
 	// specifies what to do when an unknown content type is provided for the profile.
 	// If true, content is forwarded without being encrypted when the content type is
 	// unknown. If false (the default), an error is returned when the content type is
 	// unknown.
+	//
+	// This member is required.
 	ForwardWhenContentTypeIsUnknown *bool
+
 	// The configuration for a field-level encryption content type-profile.
 	ContentTypeProfiles *ContentTypeProfiles
 }
 
 // Field-level encryption content type-profile.
 type ContentTypeProfiles struct {
+
 	// Items in a field-level encryption content type-profile mapping.
 	Items []*ContentTypeProfile
+
 	// The number of field-level encryption content type-profile mappings.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // Contains a list of cookie names.
 type CookieNames struct {
+
 	// The number of cookie names in the Items list.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A list of cookie names.
 	Items []*string
 }
@@ -657,6 +810,7 @@ type CookieNames struct {
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 // in the Amazon CloudFront Developer Guide.
 type CookiePreference struct {
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. If you want to include cookies in the
 	// cache key, use a cache policy. For more information, see Creating cache policies
@@ -670,7 +824,10 @@ type CookiePreference struct {
 	// in the WhitelistedNames complex type. Amazon S3 doesn't process cookies. When
 	// the cache behavior is forwarding requests to an Amazon S3 origin, specify none
 	// for the Forward element.
+	//
+	// This member is required.
 	Forward ItemSelection
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. If you want to include cookies in the
 	// cache key, use a cache policy. For more information, see Creating cache policies
@@ -707,9 +864,13 @@ type CookiePreference struct {
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
 type CustomErrorResponse struct {
+
 	// The HTTP status code for which you want to specify a custom error page and/or a
 	// caching duration.
+	//
+	// This member is required.
 	ErrorCode *int32
+
 	// The minimum amount of time, in seconds, that you want CloudFront to cache the
 	// HTTP status code specified in ErrorCode. When this time period has elapsed,
 	// CloudFront queries your origin to see whether the problem that caused the error
@@ -718,6 +879,7 @@ type CustomErrorResponse struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 	// in the Amazon CloudFront Developer Guide.
 	ErrorCachingMinTTL *int64
+
 	// The HTTP status code that you want CloudFront to return to the viewer along with
 	// the custom error page. There are a variety of reasons that you might want
 	// CloudFront to return a status code different from the status code that your
@@ -739,6 +901,7 @@ type CustomErrorResponse struct {
 	// If you specify a value for ResponseCode, you must
 	// also specify a value for ResponsePagePath.
 	ResponseCode *string
+
 	// The path to the custom error page that you want CloudFront to return to a viewer
 	// when your origin returns the HTTP status code specified by ErrorCode, for
 	// example, /4xx-errors/403-forbidden.html. If you want to store your objects and
@@ -778,9 +941,13 @@ type CustomErrorResponse struct {
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
 type CustomErrorResponses struct {
+
 	// The number of HTTP status codes for which you want to specify a custom error
 	// page and/or a caching duration. If Quantity is 0, you can omit Items.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that contains a CustomErrorResponse element for each HTTP status
 	// code for which you want to specify a custom error page and/or a caching
 	// duration.
@@ -789,8 +956,12 @@ type CustomErrorResponses struct {
 
 // A complex type that contains the list of Custom Headers for each origin.
 type CustomHeaders struct {
+
 	// The number of custom headers, if any, for this distribution.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// Optional: A list that contains one OriginCustomHeader element for each custom
 	// header that you want CloudFront to forward to the origin. If Quantity is 0, omit
 	// Items.
@@ -802,6 +973,7 @@ type CustomHeaders struct {
 // hosting (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) is
 // a custom origin.
 type CustomOriginConfig struct {
+
 	// Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the
 	// origin. Valid values are:
 	//
@@ -813,13 +985,22 @@ type CustomOriginConfig struct {
 	//
 	//     *
 	// https-only – CloudFront always uses HTTPS to connect to the origin.
+	//
+	// This member is required.
 	OriginProtocolPolicy OriginProtocolPolicy
+
 	// The HTTP port that CloudFront uses to connect to the origin. Specify the HTTP
 	// port that the origin listens on.
+	//
+	// This member is required.
 	HTTPPort *int32
+
 	// The HTTPS port that CloudFront uses to connect to the origin. Specify the HTTPS
 	// port that the origin listens on.
+	//
+	// This member is required.
 	HTTPSPort *int32
+
 	// Specifies how long, in seconds, CloudFront persists its connection to the
 	// origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the
 	// default (if you don’t specify otherwise) is 5 seconds. For more information, see
@@ -827,12 +1008,14 @@ type CustomOriginConfig struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout)
 	// in the Amazon CloudFront Developer Guide.
 	OriginKeepaliveTimeout *int32
+
 	// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to
 	// your origin over HTTPS. Valid values include SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
 	// For more information, see Minimum Origin SSL Protocol
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols)
 	// in the Amazon CloudFront Developer Guide.
 	OriginSslProtocols *OriginSslProtocols
+
 	// Specifies how long, in seconds, CloudFront waits for a response from the origin.
 	// This is also known as the origin response timeout. The minimum timeout is 1
 	// second, the maximum is 60 seconds, and the default (if you don’t specify
@@ -847,6 +1030,7 @@ type CustomOriginConfig struct {
 // PathPattern in CacheBehavior elements. You must create exactly one default cache
 // behavior.
 type DefaultCacheBehavior struct {
+
 	// The unique identifier of the cache policy that is attached to the default cache
 	// behavior. For more information, see Creating cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
@@ -854,6 +1038,7 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html)
 	// in the Amazon CloudFront Developer Guide.
 	CachePolicyId *string
+
 	// A complex type that specifies the AWS accounts, if any, that you want to allow
 	// to create signed URLs for private content. If you want to require signed URLs in
 	// requests for objects in the target origin that match the PathPattern for this
@@ -867,7 +1052,10 @@ type DefaultCacheBehavior struct {
 	// signers, change Enabled to true (if it’s currently false), change Quantity as
 	// applicable, and specify all of the trusted signers that you want to include in
 	// the updated distribution.
+	//
+	// This member is required.
 	TrustedSigners *TrustedSigners
+
 	// This field is deprecated. We recommend that you use the MinTTL field in a cache
 	// policy instead of this field. For more information, see Creating cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
@@ -883,6 +1071,7 @@ type DefaultCacheBehavior struct {
 	// configure CloudFront to forward all headers to your origin (under Headers, if
 	// you specify 1 for Quantity and * for Name).
 	MinTTL *int64
+
 	// This field is deprecated. We recommend that you use the MaxTTL field in a cache
 	// policy instead of this field. For more information, see Creating cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
@@ -897,12 +1086,14 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	MaxTTL *int64
+
 	// Whether you want CloudFront to automatically compress certain files for this
 	// cache behavior. If so, specify true; if not, specify false. For more
 	// information, see Serving Compressed Files
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
 	// in the Amazon CloudFront Developer Guide.
 	Compress *bool
+
 	// A complex type that controls which HTTP methods CloudFront processes and
 	// forwards to your Amazon S3 bucket or your custom origin. There are three
 	// choices:
@@ -921,9 +1112,11 @@ type DefaultCacheBehavior struct {
 	// to. For example, you might not want users to have permissions to delete objects
 	// from your origin.
 	AllowedMethods *AllowedMethods
+
 	// A complex type that contains zero or more Lambda function associations for a
 	// cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations
+
 	// The unique identifier of the origin request policy that is attached to the
 	// default cache behavior. For more information, see Creating origin request
 	// policies
@@ -932,9 +1125,13 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)
 	// in the Amazon CloudFront Developer Guide.
 	OriginRequestPolicyId *string
+
 	// The value of ID for the origin that you want CloudFront to route requests to
 	// when they use the default cache behavior.
+	//
+	// This member is required.
 	TargetOriginId *string
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. For more information, see Working with
 	// policies
@@ -953,6 +1150,7 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide. A complex type that specifies how
 	// CloudFront handles query strings, cookies, and HTTP headers.
 	ForwardedValues *ForwardedValues
+
 	// This field is deprecated. We recommend that you use the DefaultTTL field in a
 	// cache policy instead of this field. For more information, see Creating cache
 	// policies
@@ -969,10 +1167,12 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultTTL *int64
+
 	// The value of ID for the field-level encryption configuration that you want
 	// CloudFront to use for encrypting specific fields of data for the default cache
 	// behavior.
 	FieldLevelEncryptionId *string
+
 	// The protocol that viewers can use to access the files in the origin specified by
 	// TargetOriginId when a request matches the path pattern in PathPattern. You can
 	// specify the following options:
@@ -1000,7 +1200,10 @@ type DefaultCacheBehavior struct {
 	// protocol used previously. For more information, see Managing Cache Expiration
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	ViewerProtocolPolicy ViewerProtocolPolicy
+
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
 	// If so, specify true; if not, specify false. If you specify true for
@@ -1012,11 +1215,18 @@ type DefaultCacheBehavior struct {
 // A distribution tells CloudFront where you want content to be delivered from, and
 // the details about how to track and manage content delivery.
 type Distribution struct {
+
 	// The domain name corresponding to the distribution, for example,
 	// d111111abcdef8.cloudfront.net.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The date and time the distribution was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// CloudFront automatically adds this element to the response only if you've set up
 	// the distribution to serve private content with signed URLs. The element lists
 	// the key pair IDs that CloudFront is aware of for each trusted signer. The Signer
@@ -1025,9 +1235,15 @@ type Distribution struct {
 	// any active key pairs associated with the trusted signer's AWS account. If no
 	// KeyPairId element appears for a Signer, that signer can't create working signed
 	// URLs.
+	//
+	// This member is required.
 	ActiveTrustedSigners *ActiveTrustedSigners
+
 	// The number of invalidation batches currently in progress.
+	//
+	// This member is required.
 	InProgressInvalidationBatches *int32
+
 	// AWS services in China customers must file for an Internet Content Provider (ICP)
 	// recordal if they want to serve content publicly on an alternate domain name,
 	// also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
@@ -1036,39 +1252,60 @@ type Distribution struct {
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 	// in Getting Started with AWS services in China.
 	AliasICPRecordals []*AliasICPRecordal
+
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
 	// 123456789012 is your AWS account ID.
+	//
+	// This member is required.
 	ARN *string
+
 	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	//
+	// This member is required.
 	Id *string
+
 	// This response element indicates the current status of the distribution. When the
 	// status is Deployed, the distribution's information is fully propagated to all
 	// CloudFront edge locations.
+	//
+	// This member is required.
 	Status *string
+
 	// The current configuration information for the distribution. Send a GET request
 	// to the /CloudFront API version/distribution ID/config resource.
+	//
+	// This member is required.
 	DistributionConfig *DistributionConfig
 }
 
 // A distribution configuration.
 type DistributionConfig struct {
+
 	// A complex type that determines the distribution’s SSL/TLS configuration for
 	// communicating with viewers.
 	ViewerCertificate *ViewerCertificate
+
 	// A complex type that contains information about origins for this distribution.
+	//
+	// This member is required.
 	Origins *Origins
+
 	// A complex type that controls whether access logs are written for the
 	// distribution. For more information about logging, see Access Logs
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html)
 	// in the Amazon CloudFront Developer Guide.
 	Logging *LoggingConfig
+
 	// Any comments you want to include about the distribution. If you don't want to
 	// specify a comment, include an empty Comment element. To delete an existing
 	// comment, update the distribution configuration and include an empty Comment
 	// element. To add or change a comment, update the distribution configuration and
 	// specify the new comment.
+	//
+	// This member is required.
 	Comment *string
+
 	// The object that you want CloudFront to request from your origin (for example,
 	// index.html) when a viewer requests the root URL for your distribution
 	// (http://www.example.com) instead of an object in your distribution
@@ -1084,6 +1321,7 @@ type DistributionConfig struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultRootObject *string
+
 	// (Optional) Specify the maximum HTTP version that you want viewers to use to
 	// communicate with CloudFront. The default value for new web distributions is
 	// http2. Viewers that don't support HTTP/2 automatically use an earlier HTTP
@@ -1093,6 +1331,7 @@ type DistributionConfig struct {
 	// You can improve performance by optimizing for HTTP/2. For more information, do
 	// an Internet search for "http/2 optimization."
 	HttpVersion HttpVersion
+
 	// The price class that corresponds with the maximum price that you want to pay for
 	// CloudFront service. If you specify PriceClass_All, CloudFront responds to
 	// requests for your objects from all CloudFront edge locations. If you specify a
@@ -1108,8 +1347,10 @@ type DistributionConfig struct {
 	// (http://aws.amazon.com/cloudfront/pricing/). For price class information, scroll
 	// down to see the table at the bottom of the page.
 	PriceClass PriceClass
+
 	// A complex type that contains zero or more CacheBehavior elements.
 	CacheBehaviors *CacheBehaviors
+
 	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
 	// with this distribution. To specify a web ACL created using the latest version of
 	// AWS WAF, use the ACL ARN, for example
@@ -1125,9 +1366,11 @@ type DistributionConfig struct {
 	// about AWS WAF, see the AWS WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).
 	WebACLId *string
+
 	// A complex type that contains information about CNAMEs (alternate domain names),
 	// if any, for this distribution.
 	Aliases *Aliases
+
 	// A complex type that controls the following:
 	//
 	//     * Whether CloudFront replaces
@@ -1142,25 +1385,37 @@ type DistributionConfig struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 	// in the Amazon CloudFront Developer Guide.
 	CustomErrorResponses *CustomErrorResponses
+
 	// A complex type that contains information about origin groups for this
 	// distribution.
 	OriginGroups *OriginGroups
+
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
 	Restrictions *Restrictions
+
 	// From this field, you can enable or disable the selected distribution.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// A complex type that describes the default cache behavior if you don't specify a
 	// CacheBehavior element or if files don't match any of the values of PathPattern
 	// in CacheBehavior elements. You must create exactly one default cache behavior.
+	//
+	// This member is required.
 	DefaultCacheBehavior *DefaultCacheBehavior
+
 	// A unique value (for example, a date-time stamp) that ensures that the request
 	// can't be replayed. If the value of CallerReference is new (regardless of the
 	// content of the DistributionConfig object), CloudFront creates a new
 	// distribution. If CallerReference is a value that you already sent in a previous
 	// request to create a distribution, CloudFront returns a DistributionAlreadyExists
 	// error.
+	//
+	// This member is required.
 	CallerReference *string
+
 	// If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for
 	// your distribution, specify true. If you specify false, CloudFront responds to
 	// IPv6 DNS requests with the DNS response code NOERROR and with no IP addresses.
@@ -1197,92 +1452,167 @@ type DistributionConfig struct {
 // A distribution Configuration and a list of tags to be associated with the
 // distribution.
 type DistributionConfigWithTags struct {
+
 	// A distribution configuration.
+	//
+	// This member is required.
 	DistributionConfig *DistributionConfig
+
 	// A complex type that contains zero or more Tag elements.
+	//
+	// This member is required.
 	Tags *Tags
 }
 
 // A list of distribution IDs.
 type DistributionIdList struct {
+
 	// The total number of distribution IDs returned in the response.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// Contains the value that you should use in the Marker field of a subsequent
 	// request to continue listing distribution IDs where you left off.
 	NextMarker *string
+
 	// Contains the distribution IDs in the list.
 	Items []*string
+
 	// The value provided in the Marker request field.
+	//
+	// This member is required.
 	Marker *string
+
 	// A flag that indicates whether more distribution IDs remain to be listed. If your
 	// results were truncated, you can make a subsequent request using the Marker
 	// request field to retrieve more distribution IDs in the list.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// The maximum number of distribution IDs requested.
+	//
+	// This member is required.
 	MaxItems *int32
 }
 
 // A distribution list.
 type DistributionList struct {
+
 	// The value you provided for the MaxItems request parameter.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// A flag that indicates whether more distributions remain to be listed. If your
 	// results were truncated, you can make a follow-up pagination request using the
 	// Marker request parameter to retrieve more distributions in the list.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// A complex type that contains one DistributionSummary element for each
 	// distribution that was created by the current AWS account.
 	Items []*DistributionSummary
+
 	// If IsTruncated is true, this element is present and contains the value you can
 	// use for the Marker request parameter to continue listing your distributions
 	// where they left off.
 	NextMarker *string
+
 	// The value you provided for the Marker request parameter.
+	//
+	// This member is required.
 	Marker *string
+
 	// The number of distributions that were created by the current AWS account.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // A summary of the information about a CloudFront distribution.
 type DistributionSummary struct {
+
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
 	// 123456789012 is your AWS account ID.
+	//
+	// This member is required.
 	ARN *string
+
 	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	//
+	// This member is required.
 	Id *string
+
 	// A complex type that contains information about origin groups for this
 	// distribution.
 	OriginGroups *OriginGroups
+
 	// A complex type that describes the default cache behavior if you don't specify a
 	// CacheBehavior element or if files don't match any of the values of PathPattern
 	// in CacheBehavior elements. You must create exactly one default cache behavior.
+	//
+	// This member is required.
 	DefaultCacheBehavior *DefaultCacheBehavior
+
 	// Whether the distribution is enabled to accept user requests for content.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// A complex type that contains zero or more CustomErrorResponses elements.
+	//
+	// This member is required.
 	CustomErrorResponses *CustomErrorResponses
+
 	// The comment originally specified when this distribution was created.
+	//
+	// This member is required.
 	Comment *string
+
 	// The date and time the distribution was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// A complex type that contains information about origins for this distribution.
+	//
+	// This member is required.
 	Origins *Origins
+
 	// A complex type that contains zero or more CacheBehavior elements.
+	//
+	// This member is required.
 	CacheBehaviors *CacheBehaviors
+
 	// A complex type that contains information about price class for this streaming
 	// distribution.
+	//
+	// This member is required.
 	PriceClass PriceClass
+
 	// Specify the maximum HTTP version that you want viewers to use to communicate
 	// with CloudFront. The default value for new web distributions is http2. Viewers
 	// that don't support HTTP/2 will automatically use an earlier version.
+	//
+	// This member is required.
 	HttpVersion HttpVersion
+
 	// Whether CloudFront responds to IPv6 DNS requests with an IPv6 address for your
 	// distribution.
+	//
+	// This member is required.
 	IsIPV6Enabled *bool
+
 	// A complex type that determines the distribution’s SSL/TLS configuration for
 	// communicating with viewers.
+	//
+	// This member is required.
 	ViewerCertificate *ViewerCertificate
+
 	// AWS services in China customers must file for an Internet Content Provider (ICP)
 	// recordal if they want to serve content publicly on an alternate domain name,
 	// also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
@@ -1291,28 +1621,47 @@ type DistributionSummary struct {
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 	// in Getting Started with AWS services in China.
 	AliasICPRecordals []*AliasICPRecordal
+
 	// The current status of the distribution. When the status is Deployed, the
 	// distribution's information is propagated to all CloudFront edge locations.
+	//
+	// This member is required.
 	Status *string
+
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
+	//
+	// This member is required.
 	Restrictions *Restrictions
+
 	// The Web ACL Id (if any) associated with the distribution.
+	//
+	// This member is required.
 	WebACLId *string
+
 	// The domain name that corresponds to the distribution, for example,
 	// d111111abcdef8.cloudfront.net.
+	//
+	// This member is required.
 	DomainName *string
+
 	// A complex type that contains information about CNAMEs (alternate domain names),
 	// if any, for this distribution.
+	//
+	// This member is required.
 	Aliases *Aliases
 }
 
 // Complex data type for field-level encryption profiles that includes all of the
 // encryption entities.
 type EncryptionEntities struct {
+
 	// Number of field pattern items in a field-level encryption content type-profile
 	// mapping.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// An array of field patterns in a field-level encryption content type-profile
 	// mapping.
 	Items []*EncryptionEntity
@@ -1321,45 +1670,69 @@ type EncryptionEntities struct {
 // Complex data type for field-level encryption profiles that includes the
 // encryption key and field pattern specifications.
 type EncryptionEntity struct {
+
 	// The provider associated with the public key being used for encryption. This
 	// value must also be provided with the private key for applications to be able to
 	// decrypt data.
+	//
+	// This member is required.
 	ProviderId *string
+
 	// Field patterns in a field-level encryption content type profile specify the
 	// fields that you want to be encrypted. You can provide the full field name, or
 	// any beginning characters followed by a wildcard (*). You can't overlap field
 	// patterns. For example, you can't have both ABC* and AB*. Note that field
 	// patterns are case-sensitive.
+	//
+	// This member is required.
 	FieldPatterns *FieldPatterns
+
 	// The public key associated with a set of field-level encryption patterns, to be
 	// used when encrypting the fields that match the patterns.
+	//
+	// This member is required.
 	PublicKeyId *string
 }
 
 // A complex data type that includes the profile configurations and other options
 // specified for field-level encryption.
 type FieldLevelEncryption struct {
+
 	// The last time the field-level encryption configuration was changed.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// A complex data type that includes the profile configurations specified for
 	// field-level encryption.
+	//
+	// This member is required.
 	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig
+
 	// The configuration ID for a field-level encryption configuration which includes a
 	// set of profiles that specify certain selected data fields to be encrypted by
 	// specific public keys.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex data type that includes the profile configurations specified for
 // field-level encryption.
 type FieldLevelEncryptionConfig struct {
+
 	// A unique number that ensures the request can't be replayed.
+	//
+	// This member is required.
 	CallerReference *string
+
 	// An optional comment about the configuration.
 	Comment *string
+
 	// A complex data type that specifies when to forward content if a profile isn't
 	// found and the profile that can be provided as a query argument in a request.
 	QueryArgProfileConfig *QueryArgProfileConfig
+
 	// A complex data type that specifies when to forward content if a content type
 	// isn't recognized and profiles to use as by default in a request if a query
 	// argument doesn't specify a profile to use.
@@ -1368,12 +1741,20 @@ type FieldLevelEncryptionConfig struct {
 
 // List of field-level encrpytion configurations.
 type FieldLevelEncryptionList struct {
+
 	// The maximum number of elements you want in the response body.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// The number of field-level encryption items.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// An array of field-level encryption items.
 	Items []*FieldLevelEncryptionSummary
+
 	// If there are more elements to be listed, this element is present and contains
 	// the value that you can use for the Marker request parameter to continue listing
 	// your configurations where you left off.
@@ -1382,81 +1763,134 @@ type FieldLevelEncryptionList struct {
 
 // A complex data type for field-level encryption profiles.
 type FieldLevelEncryptionProfile struct {
+
 	// A complex data type that includes the profile name and the encryption entities
 	// for the field-level encryption profile.
+	//
+	// This member is required.
 	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig
+
 	// The last time the field-level encryption profile was updated.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// The ID for a field-level encryption profile configuration which includes a set
 	// of profiles that specify certain selected data fields to be encrypted by
 	// specific public keys.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex data type of profiles for the field-level encryption.
 type FieldLevelEncryptionProfileConfig struct {
+
 	// A complex data type of encryption entities for the field-level encryption
 	// profile that include the public key ID, provider, and field patterns for
 	// specifying which fields to encrypt with this key.
+	//
+	// This member is required.
 	EncryptionEntities *EncryptionEntities
+
 	// A unique number that ensures that the request can't be replayed.
+	//
+	// This member is required.
 	CallerReference *string
+
 	// Profile name for the field-level encryption profile.
+	//
+	// This member is required.
 	Name *string
+
 	// An optional comment for the field-level encryption profile.
 	Comment *string
 }
 
 // List of field-level encryption profiles.
 type FieldLevelEncryptionProfileList struct {
+
 	// If there are more elements to be listed, this element is present and contains
 	// the value that you can use for the Marker request parameter to continue listing
 	// your profiles where you left off.
 	NextMarker *string
+
 	// The number of field-level encryption profiles.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// The field-level encryption profile items.
 	Items []*FieldLevelEncryptionProfileSummary
+
 	// The maximum number of field-level encryption profiles you want in the response
 	// body.
+	//
+	// This member is required.
 	MaxItems *int32
 }
 
 // The field-level encryption profile summary.
 type FieldLevelEncryptionProfileSummary struct {
+
 	// ID for the field-level encryption profile summary.
+	//
+	// This member is required.
 	Id *string
+
 	// A complex data type of encryption entities for the field-level encryption
 	// profile that include the public key ID, provider, and field patterns for
 	// specifying which fields to encrypt with this key.
+	//
+	// This member is required.
 	EncryptionEntities *EncryptionEntities
+
 	// The time when the the field-level encryption profile summary was last updated.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// Name for the field-level encryption profile summary.
+	//
+	// This member is required.
 	Name *string
+
 	// An optional comment for the field-level encryption profile summary.
 	Comment *string
 }
 
 // A summary of a field-level encryption item.
 type FieldLevelEncryptionSummary struct {
+
 	// An optional comment about the field-level encryption item.
 	Comment *string
+
 	// The unique ID of a field-level encryption item.
+	//
+	// This member is required.
 	Id *string
+
 	// A summary of a content type-profile mapping.
 	ContentTypeProfileConfig *ContentTypeProfileConfig
+
 	// A summary of a query argument-profile mapping.
 	QueryArgProfileConfig *QueryArgProfileConfig
+
 	// The last time that the summary of field-level encryption items was modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
 }
 
 // A complex data type that includes the field patterns to match for field-level
 // encryption.
 type FieldPatterns struct {
+
 	// The number of field-level encryption field patterns.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// An array of the field-level encryption field patterns.
 	Items []*string
 }
@@ -1472,6 +1906,7 @@ type FieldPatterns struct {
 // in the Amazon CloudFront Developer Guide. A complex type that specifies how
 // CloudFront handles query strings, cookies, and HTTP headers.
 type ForwardedValues struct {
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. If you want to include cookies in the
 	// cache key, use a cache policy. For more information, see Creating cache policies
@@ -1486,7 +1921,10 @@ type ForwardedValues struct {
 	// Forwards, Caches, and Logs Cookies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	Cookies *CookiePreference
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. If you want to include query strings in
 	// the cache key, use a cache policy. For more information, see Creating cache
@@ -1500,6 +1938,7 @@ type ForwardedValues struct {
 	// information about the query string parameters that you want CloudFront to use
 	// for caching for this cache behavior.
 	QueryStringCacheKeys *QueryStringCacheKeys
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. If you want to include query strings in
 	// the cache key, use a cache policy. For more information, see Creating cache
@@ -1527,7 +1966,10 @@ type ForwardedValues struct {
 	// Query String Parameters
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	QueryString *bool
+
 	// This field is deprecated. We recommend that you use a cache policy or an origin
 	// request policy instead of this field. If you want to include headers in the
 	// cache key, use a cache policy. For more information, see Creating cache policies
@@ -1550,10 +1992,14 @@ type ForwardedValues struct {
 // A complex type that controls the countries in which your content is distributed.
 // CloudFront determines the location of your users using MaxMind GeoIP databases.
 type GeoRestriction struct {
+
 	// When geo restriction is enabled, this is the number of countries in your
 	// whitelist or blacklist. Otherwise, when it is not enabled, Quantity is 0, and
 	// you can omit Items.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that contains a Location element for each country in which you
 	// want CloudFront either to distribute your content (whitelist) or not distribute
 	// your content (blacklist). The Location element is a two-letter, uppercase
@@ -1564,6 +2010,7 @@ type GeoRestriction struct {
 	// Organization for Standardization website. You can also refer to the country list
 	// on the CloudFront console, which includes both country names and codes.
 	Items []*string
+
 	// The method that you want to use to restrict distribution of your content by
 	// country:
 	//
@@ -1576,37 +2023,59 @@ type GeoRestriction struct {
 	//
 	//     * whitelist: The Location elements specify the countries in
 	// which you want CloudFront to distribute your content.
+	//
+	// This member is required.
 	RestrictionType GeoRestrictionType
 }
 
 // Contains a list of HTTP header names.
 type Headers struct {
+
 	// A list of HTTP header names.
 	Items []*string
+
 	// The number of header names in the Items list.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // An invalidation.
 type Invalidation struct {
+
 	// The identifier for the invalidation request. For example: IDFDVBD632BHDS5.
+	//
+	// This member is required.
 	Id *string
+
 	// The current invalidation information for the batch request.
+	//
+	// This member is required.
 	InvalidationBatch *InvalidationBatch
+
 	// The date and time the invalidation request was first made.
+	//
+	// This member is required.
 	CreateTime *time.Time
+
 	// The status of the invalidation request. When the invalidation batch is finished,
 	// the status is Completed.
+	//
+	// This member is required.
 	Status *string
 }
 
 // An invalidation batch.
 type InvalidationBatch struct {
+
 	// A complex type that contains information about the objects that you want to
 	// invalidate. For more information, see Specifying the Objects to Invalidate
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	Paths *Paths
+
 	// A value that you specify to uniquely identify an invalidation request.
 	// CloudFront uses the value to prevent you from accidentally resubmitting an
 	// identical request. Whenever you create a new invalidation request, you must
@@ -1620,6 +2089,8 @@ type InvalidationBatch struct {
 	// you already sent in a previous invalidation batch request but the content of any
 	// Path is different from the original request, CloudFront returns an
 	// InvalidationBatchAlreadyExists error.
+	//
+	// This member is required.
 	CallerReference *string
 }
 
@@ -1629,20 +2100,34 @@ type InvalidationBatch struct {
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html)
 // in the Amazon CloudFront Developer Guide.
 type InvalidationList struct {
+
 	// A flag that indicates whether more invalidation batch requests remain to be
 	// listed. If your results were truncated, you can make a follow-up pagination
 	// request using the Marker request parameter to retrieve more invalidation batches
 	// in the list.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// The value that you provided for the Marker request parameter.
+	//
+	// This member is required.
 	Marker *string
+
 	// A complex type that contains one InvalidationSummary element for each
 	// invalidation batch created by the current AWS account.
 	Items []*InvalidationSummary
+
 	// The value that you provided for the MaxItems request parameter.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// The number of invalidation batches that were created by the current AWS account.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// If IsTruncated is true, this element is present and contains the value that you
 	// can use for the Marker request parameter to continue listing your invalidation
 	// batches where they left off.
@@ -1651,11 +2136,20 @@ type InvalidationList struct {
 
 // A summary of an invalidation request.
 type InvalidationSummary struct {
+
 	// The status of an invalidation request.
+	//
+	// This member is required.
 	Status *string
+
 	// The unique ID for an invalidation request.
+	//
+	// This member is required.
 	Id *string
+
 	// The time that an invalidation request was created.
+	//
+	// This member is required.
 	CreateTime *time.Time
 }
 
@@ -1663,10 +2157,14 @@ type InvalidationSummary struct {
 // associated with AwsAccountNumber. For more information, see ActiveTrustedSigners
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
 type KeyPairIds struct {
+
 	// The number of active CloudFront key pairs for AwsAccountNumber. For more
 	// information, see ActiveTrustedSigners
 	// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that lists the active CloudFront key pairs, if any, that are
 	// associated with AwsAccountNumber. For more information, see ActiveTrustedSigners
 	// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
@@ -1675,12 +2173,14 @@ type KeyPairIds struct {
 
 // A complex type that contains a Lambda function association.
 type LambdaFunctionAssociation struct {
+
 	// A flag that allows a Lambda function to have read access to the body content.
 	// For more information, see Accessing the Request Body by Choosing the Include
 	// Body Option
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html)
 	// in the Amazon CloudFront Developer Guide.
 	IncludeBody *bool
+
 	// Specifies the event type that triggers a Lambda function invocation. You can
 	// specify the following values:
 	//
@@ -1702,9 +2202,14 @@ type LambdaFunctionAssociation struct {
 	// object to the viewer. The function executes regardless of whether the object was
 	// already in the edge cache. If the origin returns an HTTP status code other than
 	// HTTP 200 (OK), the function doesn't execute.
+	//
+	// This member is required.
 	EventType EventType
+
 	// The ARN of the Lambda function. You must specify the ARN of a function version;
 	// you can't specify a Lambda alias or $LATEST.
+	//
+	// This member is required.
 	LambdaFunctionARN *string
 }
 
@@ -1719,8 +2224,12 @@ type LambdaFunctionAssociation struct {
 // <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and
 // omit <code>Items</code>. </p>
 type LambdaFunctionAssociations struct {
+
 	// The number of Lambda function associations for this cache behavior.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// Optional: A complex type that contains LambdaFunctionAssociation items for this
 	// cache behavior. If Quantity is 0, you can omit Items.
 	Items []*LambdaFunctionAssociation
@@ -1729,27 +2238,39 @@ type LambdaFunctionAssociations struct {
 // A complex type that controls whether access logs are written for the
 // distribution.
 type LoggingConfig struct {
+
 	// Specifies whether you want CloudFront to include cookies in access logs, specify
 	// true for IncludeCookies. If you choose to include cookies in logs, CloudFront
 	// logs all cookies regardless of how you configure the cache behaviors for this
 	// distribution. If you don't want to include cookies when you create a
 	// distribution or if you want to disable include cookies for an existing
 	// distribution, specify false for IncludeCookies.
+	//
+	// This member is required.
 	IncludeCookies *bool
+
 	// The Amazon S3 bucket to store the access logs in, for example,
 	// myawslogbucket.s3.amazonaws.com.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
 	// bucket. If you don't want to enable logging when you create a distribution or if
 	// you want to disable logging for an existing distribution, specify false for
 	// Enabled, and specify empty Bucket and Prefix elements. If you specify false for
 	// Enabled but you specify values for Bucket, prefix, and IncludeCookies, the
 	// values are automatically deleted.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// An optional string that you want CloudFront to prefix to the access log
 	// filenames for this distribution, for example, myprefix/. If you want to enable
 	// logging, but you don't want to specify a prefix, you still must include an empty
 	// Prefix element in the Logging element.
+	//
+	// This member is required.
 	Prefix *string
 }
 
@@ -1784,26 +2305,33 @@ type LoggingConfig struct {
 // in the Amazon CloudFront Developer Guide (quotas were formerly referred to as
 // limits).
 type Origin struct {
+
 	// The domain name for the origin. For more information, see Origin Domain Name
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Use this type to specify an origin that is an Amazon S3 bucket that is not
 	// configured with static website hosting. To specify any other type of origin,
 	// including an Amazon S3 bucket that is configured with static website hosting,
 	// use the CustomOriginConfig type instead.
 	S3OriginConfig *S3OriginConfig
+
 	// Use this type to specify an origin that is a content container or HTTP server,
 	// including an Amazon S3 bucket that is configured with static website hosting. To
 	// specify an Amazon S3 bucket that is not configured with static website hosting,
 	// use the S3OriginConfig type instead.
 	CustomOriginConfig *CustomOriginConfig
+
 	// An optional path that CloudFront appends to the origin domain name when
 	// CloudFront requests content from the origin. For more information, see Origin
 	// Path
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath)
 	// in the Amazon CloudFront Developer Guide.
 	OriginPath *string
+
 	// The number of times that CloudFront attempts to connect to the origin. The
 	// minimum number is 1, the maximum is 3, and the default (if you don’t specify
 	// otherwise) is 3. For a custom origin (including an Amazon S3 bucket that’s
@@ -1815,16 +2343,21 @@ type Origin struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts)
 	// in the Amazon CloudFront Developer Guide.
 	ConnectionAttempts *int32
+
 	// A unique identifier for the origin. This value must be unique within the
 	// distribution. Use this value to specify the TargetOriginId in a CacheBehavior or
 	// DefaultCacheBehavior.
+	//
+	// This member is required.
 	Id *string
+
 	// A list of HTTP header names and values that CloudFront adds to requests it sends
 	// to the origin. For more information, see Adding Custom Headers to Origin
 	// Requests
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html)
 	// in the Amazon CloudFront Developer Guide.
 	CustomHeaders *CustomHeaders
+
 	// The number of seconds that CloudFront waits when trying to establish a
 	// connection to the origin. The minimum timeout is 1 second, the maximum is 10
 	// seconds, and the default (if you don’t specify otherwise) is 10 seconds. For
@@ -1837,12 +2370,18 @@ type Origin struct {
 // A complex type that contains HeaderName and HeaderValue elements, if any, for
 // this distribution.
 type OriginCustomHeader struct {
+
 	// The value for the header that you specified in the HeaderName field.
+	//
+	// This member is required.
 	HeaderValue *string
+
 	// The name of a header that you want CloudFront to send to your origin. For more
 	// information, see Adding Custom Headers to Origin Requests
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	HeaderName *string
 }
 
@@ -1853,12 +2392,21 @@ type OriginCustomHeader struct {
 // CloudFront will failover from the primary origin to the second origin under the
 // failover conditions that you've chosen.
 type OriginGroup struct {
+
 	// The origin group's ID.
+	//
+	// This member is required.
 	Id *string
+
 	// A complex type that contains information about the origins in an origin group.
+	//
+	// This member is required.
 	Members *OriginGroupMembers
+
 	// A complex type that contains information about the failover criteria for an
 	// origin group.
+	//
+	// This member is required.
 	FailoverCriteria *OriginGroupFailoverCriteria
 }
 
@@ -1866,30 +2414,46 @@ type OriginGroup struct {
 // origin group, including the status codes for which CloudFront will failover from
 // the primary origin to the second origin.
 type OriginGroupFailoverCriteria struct {
+
 	// The status codes that, when returned from the primary origin, will trigger
 	// CloudFront to failover to the second origin.
+	//
+	// This member is required.
 	StatusCodes *StatusCodes
 }
 
 // An origin in an origin group.
 type OriginGroupMember struct {
+
 	// The ID for an origin in an origin group.
+	//
+	// This member is required.
 	OriginId *string
 }
 
 // A complex data type for the origins included in an origin group.
 type OriginGroupMembers struct {
+
 	// The number of origins in an origin group.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// Items (origins) in an origin group.
+	//
+	// This member is required.
 	Items []*OriginGroupMember
 }
 
 // A complex data type for the origin groups specified for a distribution.
 type OriginGroups struct {
+
 	// The items (origin groups) in a distribution.
 	Items []*OriginGroup
+
 	// The number of origin groups.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
@@ -1914,11 +2478,20 @@ type OriginGroups struct {
 // object in its cache that matches the request. If you want to send values to the
 // origin and also include them in the cache key, use CreateCachePolicy.
 type OriginRequestPolicy struct {
+
 	// The unique identifier for the origin request policy.
+	//
+	// This member is required.
 	Id *string
+
 	// The origin request policy configuration.
+	//
+	// This member is required.
 	OriginRequestPolicyConfig *OriginRequestPolicyConfig
+
 	// The date and time when the origin request policy was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
 }
 
@@ -1943,22 +2516,36 @@ type OriginRequestPolicy struct {
 // you want to send values to the origin and also include them in the cache key,
 // use CreateCachePolicy.
 type OriginRequestPolicyConfig struct {
+
 	// The cookies from viewer requests to include in origin requests.
+	//
+	// This member is required.
 	CookiesConfig *OriginRequestPolicyCookiesConfig
+
 	// The HTTP headers to include in origin requests. These can include headers from
 	// viewer requests and additional headers added by CloudFront.
+	//
+	// This member is required.
 	HeadersConfig *OriginRequestPolicyHeadersConfig
+
 	// A comment to describe the origin request policy.
 	Comment *string
+
 	// The URL query strings from viewer requests to include in origin requests.
+	//
+	// This member is required.
 	QueryStringsConfig *OriginRequestPolicyQueryStringsConfig
+
 	// A unique name to identify the origin request policy.
+	//
+	// This member is required.
 	Name *string
 }
 
 // An object that determines whether any cookies in viewer requests (and if so,
 // which cookies) are included in requests that CloudFront sends to the origin.
 type OriginRequestPolicyCookiesConfig struct {
+
 	// Determines whether cookies in viewer requests are included in requests that
 	// CloudFront sends to the origin. Valid values are:
 	//
@@ -1973,7 +2560,10 @@ type OriginRequestPolicyCookiesConfig struct {
 	//
 	//     * all – All cookies in viewer requests
 	// are included in requests that CloudFront sends to the origin.
+	//
+	// This member is required.
 	CookieBehavior OriginRequestPolicyCookieBehavior
+
 	// Contains a list of cookie names.
 	Cookies *CookieNames
 }
@@ -1981,6 +2571,7 @@ type OriginRequestPolicyCookiesConfig struct {
 // An object that determines whether any HTTP headers (and if so, which headers)
 // are included in requests that CloudFront sends to the origin.
 type OriginRequestPolicyHeadersConfig struct {
+
 	// Determines whether any HTTP headers are included in requests that CloudFront
 	// sends to the origin. Valid values are:
 	//
@@ -2000,22 +2591,33 @@ type OriginRequestPolicyHeadersConfig struct {
 	// HTTP headers in viewer requests and the additional CloudFront headers that are
 	// listed in the Headers type are included in requests that CloudFront sends to the
 	// origin. The additional headers are added by CloudFront.
+	//
+	// This member is required.
 	HeaderBehavior OriginRequestPolicyHeaderBehavior
+
 	// Contains a list of HTTP header names.
 	Headers *Headers
 }
 
 // A list of origin request policies.
 type OriginRequestPolicyList struct {
+
 	// The total number of origin request policies returned in the response.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// If there are more items in the list than are in this response, this element is
 	// present. It contains the value that you should use in the Marker field of a
 	// subsequent request to continue listing origin request policies where you left
 	// off.
 	NextMarker *string
+
 	// The maximum number of origin request policies requested.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// Contains the origin request policies in the list.
 	Items []*OriginRequestPolicySummary
 }
@@ -2024,9 +2626,11 @@ type OriginRequestPolicyList struct {
 // if so, which query strings) are included in requests that CloudFront sends to
 // the origin.
 type OriginRequestPolicyQueryStringsConfig struct {
+
 	// Contains a list of the query strings in viewer requests that are included in
 	// requests that CloudFront sends to the origin.
 	QueryStrings *QueryStringNames
+
 	// Determines whether any URL query strings in viewer requests are included in
 	// requests that CloudFront sends to the origin. Valid values are:
 	//
@@ -2042,34 +2646,54 @@ type OriginRequestPolicyQueryStringsConfig struct {
 	//     * all –
 	// All query strings in viewer requests are included in requests that CloudFront
 	// sends to the origin.
+	//
+	// This member is required.
 	QueryStringBehavior OriginRequestPolicyQueryStringBehavior
 }
 
 // Contains an origin request policy.
 type OriginRequestPolicySummary struct {
+
 	// The origin request policy.
+	//
+	// This member is required.
 	OriginRequestPolicy *OriginRequestPolicy
+
 	// The type of origin request policy, either managed (created by AWS) or custom
 	// (created in this AWS account).
+	//
+	// This member is required.
 	Type OriginRequestPolicyType
 }
 
 // A complex type that contains information about origins and origin groups for
 // this distribution.
 type Origins struct {
+
 	// The number of origins or origin groups for this distribution.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A complex type that contains origins or origin groups for this distribution.
+	//
+	// This member is required.
 	Items []*Origin
 }
 
 // A complex type that contains information about the SSL/TLS protocols that
 // CloudFront can use when establishing an HTTPS connection with your origin.
 type OriginSslProtocols struct {
+
 	// The number of SSL/TLS protocols that you want to allow CloudFront to use when
 	// establishing an HTTPS connection with this origin.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A list that contains allowed SSL/TLS protocols for this distribution.
+	//
+	// This member is required.
 	Items []SslProtocol
 }
 
@@ -2082,14 +2706,21 @@ type OriginSslProtocols struct {
 // that matches the request’s cache key. If you want to send values to the origin
 // but not include them in the cache key, use CreateOriginRequestPolicy.
 type ParametersInCacheKeyAndForwardedToOrigin struct {
+
 	// An object that determines whether any cookies in viewer requests (and if so,
 	// which cookies) are included in the cache key and automatically included in
 	// requests that CloudFront sends to the origin.
+	//
+	// This member is required.
 	CookiesConfig *CachePolicyCookiesConfig
+
 	// An object that determines whether any URL query strings in viewer requests (and
 	// if so, which query strings) are included in the cache key and automatically
 	// included in requests that CloudFront sends to the origin.
+	//
+	// This member is required.
 	QueryStringsConfig *CachePolicyQueryStringsConfig
+
 	// A flag that determines whether the Accept-Encoding HTTP header is included in
 	// the cache key and included in requests that CloudFront sends to the origin. If
 	// this field is true and the viewer request includes the Accept-Encoding header,
@@ -2113,10 +2744,15 @@ type ParametersInCacheKeyAndForwardedToOrigin struct {
 	// cache behavior. For more information, see Cache compressed objects
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-policy-compressed-objects)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	EnableAcceptEncodingGzip *bool
+
 	// An object that determines whether any HTTP headers (and if so, which headers)
 	// are included in the cache key and automatically included in requests that
 	// CloudFront sends to the origin.
+	//
+	// This member is required.
 	HeadersConfig *CachePolicyHeadersConfig
 }
 
@@ -2125,85 +2761,139 @@ type ParametersInCacheKeyAndForwardedToOrigin struct {
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
 // in the Amazon CloudFront Developer Guide.
 type Paths struct {
+
 	// A complex type that contains a list of the paths that you want to invalidate.
 	Items []*string
+
 	// The number of invalidation paths specified for the objects that you want to
 	// invalidate.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // A complex data type of public keys you add to CloudFront to use with features
 // like field-level encryption.
 type PublicKey struct {
+
 	// A complex data type for a public key you add to CloudFront to use with features
 	// like field-level encryption.
+	//
+	// This member is required.
 	PublicKeyConfig *PublicKeyConfig
+
 	// A time you added a public key to CloudFront.
+	//
+	// This member is required.
 	CreatedTime *time.Time
+
 	// A unique ID assigned to a public key you've added to CloudFront.
+	//
+	// This member is required.
 	Id *string
 }
 
 // Information about a public key you add to CloudFront to use with features like
 // field-level encryption.
 type PublicKeyConfig struct {
+
 	// An optional comment about a public key.
 	Comment *string
+
 	// The encoded public key that you want to add to CloudFront to use with features
 	// like field-level encryption.
+	//
+	// This member is required.
 	EncodedKey *string
+
 	// The name for a public key you add to CloudFront to use with features like
 	// field-level encryption.
+	//
+	// This member is required.
 	Name *string
+
 	// A unique number that ensures that the request can't be replayed.
+	//
+	// This member is required.
 	CallerReference *string
 }
 
 // A list of public keys you've added to CloudFront to use with features like
 // field-level encryption.
 type PublicKeyList struct {
+
 	// If there are more elements to be listed, this element is present and contains
 	// the value that you can use for the Marker request parameter to continue listing
 	// your public keys where you left off.
 	NextMarker *string
+
 	// The maximum number of public keys you want in the response body.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// An array of information about a public key you add to CloudFront to use with
 	// features like field-level encryption.
 	Items []*PublicKeySummary
+
 	// The number of public keys you added to CloudFront to use with features like
 	// field-level encryption.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // A complex data type for public key information.
 type PublicKeySummary struct {
+
 	// Name for public key information summary.
+	//
+	// This member is required.
 	Name *string
+
 	// Creation time for public key information summary.
+	//
+	// This member is required.
 	CreatedTime *time.Time
+
 	// Encoded key for public key information summary.
+	//
+	// This member is required.
 	EncodedKey *string
+
 	// ID for public key information summary.
+	//
+	// This member is required.
 	Id *string
+
 	// Comment for public key information summary.
 	Comment *string
 }
 
 // Query argument-profile mapping for field-level encryption.
 type QueryArgProfile struct {
+
 	// ID of profile to use for field-level encryption query argument-profile mapping
+	//
+	// This member is required.
 	ProfileId *string
+
 	// Query argument for field-level encryption query argument-profile mapping.
+	//
+	// This member is required.
 	QueryArg *string
 }
 
 // Configuration for query argument-profile mapping for field-level encryption.
 type QueryArgProfileConfig struct {
+
 	// Flag to set if you want a request to be forwarded to the origin even if the
 	// profile specified by the field-level encryption query argument, fle-profile, is
 	// unknown.
+	//
+	// This member is required.
 	ForwardWhenQueryArgProfileIsUnknown *bool
+
 	// Profiles specified for query argument-profile mapping for field-level
 	// encryption.
 	QueryArgProfiles *QueryArgProfiles
@@ -2211,9 +2901,13 @@ type QueryArgProfileConfig struct {
 
 // Query argument-profile mapping for field-level encryption.
 type QueryArgProfiles struct {
+
 	// Number of profiles for query argument-profile mapping for field-level
 	// encryption.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// Number of items for query argument-profile mapping for field-level encryption.
 	Items []*QueryArgProfile
 }
@@ -2227,8 +2921,12 @@ type QueryArgProfiles struct {
 // query string parameters that you want CloudFront to use for caching for a cache
 // behavior.
 type QueryStringCacheKeys struct {
+
 	// The number of whitelisted query string parameters for a cache behavior.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// A list that contains the query string parameters that you want CloudFront to use
 	// as a basis for caching for a cache behavior. If Quantity is 0, you can omit
 	// Items.
@@ -2237,23 +2935,31 @@ type QueryStringCacheKeys struct {
 
 // Contains a list of query string names.
 type QueryStringNames struct {
+
 	// A list of query string names.
 	Items []*string
+
 	// The number of query string names in the Items list.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // A complex type that identifies ways in which you want to restrict distribution
 // of your content.
 type Restrictions struct {
+
 	// A complex type that controls the countries in which your content is distributed.
 	// CloudFront determines the location of your users using MaxMind GeoIP databases.
+	//
+	// This member is required.
 	GeoRestriction *GeoRestriction
 }
 
 // A complex type that contains information about the Amazon S3 bucket from which
 // you want CloudFront to get your media files for distribution.
 type S3Origin struct {
+
 	// The CloudFront origin access identity to associate with the distribution. Use an
 	// origin access identity to configure the distribution so that end users can only
 	// access objects in an Amazon S3 bucket through CloudFront. If you want end users
@@ -2266,8 +2972,13 @@ type S3Origin struct {
 	// Restrict Access to Your Amazon S3 Content
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	OriginAccessIdentity *string
+
 	// The DNS name of the Amazon S3 origin.
+	//
+	// This member is required.
 	DomainName *string
 }
 
@@ -2275,6 +2986,7 @@ type S3Origin struct {
 // origin is a custom origin or an S3 bucket that is configured as a website
 // endpoint, use the CustomOriginConfig element instead.
 type S3OriginConfig struct {
+
 	// The CloudFront origin access identity to associate with the origin. Use an
 	// origin access identity to configure the origin so that viewers can only access
 	// objects in an Amazon S3 bucket through CloudFront. The format of the value is:
@@ -2290,6 +3002,8 @@ type S3OriginConfig struct {
 	// Serving Private Content through CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	OriginAccessIdentity *string
 }
 
@@ -2297,9 +3011,11 @@ type S3OriginConfig struct {
 // TrustedSigners complex type, as well as their active CloudFront key pair IDs, if
 // any.
 type Signer struct {
+
 	// A complex type that lists the active CloudFront key pairs, if any, that are
 	// associated with AwsAccountNumber.
 	KeyPairIds *KeyPairIds
+
 	// An AWS account that is included in the TrustedSigners complex type for this
 	// distribution. Valid values include:
 	//
@@ -2313,27 +3029,47 @@ type Signer struct {
 // A complex data type for the status codes that you specify that, when returned by
 // a primary origin, trigger CloudFront to failover to a second origin.
 type StatusCodes struct {
+
 	// The items (status codes) for an origin group.
+	//
+	// This member is required.
 	Items []*int32
+
 	// The number of status codes.
+	//
+	// This member is required.
 	Quantity *int32
 }
 
 // A streaming distribution tells CloudFront where you want RTMP content to be
 // delivered from, and the details about how to track and manage content delivery.
 type StreamingDistribution struct {
+
 	// The date and time that the distribution was last modified.
 	LastModifiedTime *time.Time
+
 	// The current configuration information for the RTMP distribution.
+	//
+	// This member is required.
 	StreamingDistributionConfig *StreamingDistributionConfig
+
 	// The domain name that corresponds to the streaming distribution, for example,
 	// s5c39gqb8ow64r.cloudfront.net.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The identifier for the RTMP distribution. For example: EGTXBD79EXAMPLE.
+	//
+	// This member is required.
 	Id *string
+
 	// The current status of the RTMP distribution. When the status is Deployed, the
 	// distribution's information is propagated to all CloudFront edge locations.
+	//
+	// This member is required.
 	Status *string
+
 	// A complex type that lists the AWS accounts, if any, that you included in the
 	// TrustedSigners complex type for this distribution. These are the accounts that
 	// you want to allow to create signed URLs for private content. The Signer complex
@@ -2345,18 +3081,25 @@ type StreamingDistribution struct {
 	// through CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	ActiveTrustedSigners *ActiveTrustedSigners
+
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
 	// 123456789012 is your AWS account ID.
+	//
+	// This member is required.
 	ARN *string
 }
 
 // The RTMP distribution's configuration information.
 type StreamingDistributionConfig struct {
+
 	// A complex type that contains information about CNAMEs (alternate domain names),
 	// if any, for this streaming distribution.
 	Aliases *Aliases
+
 	// A complex type that specifies any AWS accounts that you want to permit to create
 	// signed URLs for private content. If you want the distribution to use signed
 	// URLs, include this element; if you want the distribution to use public URLs,
@@ -2364,55 +3107,91 @@ type StreamingDistributionConfig struct {
 	// CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	TrustedSigners *TrustedSigners
+
 	// A unique value (for example, a date-time stamp) that ensures that the request
 	// can't be replayed. If the value of CallerReference is new (regardless of the
 	// content of the StreamingDistributionConfig object), CloudFront creates a new
 	// distribution. If CallerReference is a value that you already sent in a previous
 	// request to create a distribution, CloudFront returns a DistributionAlreadyExists
 	// error.
+	//
+	// This member is required.
 	CallerReference *string
+
 	// Whether the streaming distribution is enabled to accept user requests for
 	// content.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// A complex type that controls whether access logs are written for the streaming
 	// distribution.
 	Logging *StreamingLoggingConfig
+
 	// A complex type that contains information about the Amazon S3 bucket from which
 	// you want CloudFront to get your media files for distribution.
+	//
+	// This member is required.
 	S3Origin *S3Origin
+
 	// A complex type that contains information about price class for this streaming
 	// distribution.
 	PriceClass PriceClass
+
 	// Any comments you want to include about the streaming distribution.
+	//
+	// This member is required.
 	Comment *string
 }
 
 // A streaming distribution Configuration and a list of tags to be associated with
 // the streaming distribution.
 type StreamingDistributionConfigWithTags struct {
+
 	// A streaming distribution Configuration.
+	//
+	// This member is required.
 	StreamingDistributionConfig *StreamingDistributionConfig
+
 	// A complex type that contains zero or more Tag elements.
+	//
+	// This member is required.
 	Tags *Tags
 }
 
 // A streaming distribution list.
 type StreamingDistributionList struct {
+
 	// A flag that indicates whether more streaming distributions remain to be listed.
 	// If your results were truncated, you can make a follow-up pagination request
 	// using the Marker request parameter to retrieve more distributions in the list.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// The value you provided for the Marker request parameter.
+	//
+	// This member is required.
 	Marker *string
+
 	// The value you provided for the MaxItems request parameter.
+	//
+	// This member is required.
 	MaxItems *int32
+
 	// A complex type that contains one StreamingDistributionSummary element for each
 	// distribution that was created by the current AWS account.
 	Items []*StreamingDistributionSummary
+
 	// The number of streaming distributions that were created by the current AWS
 	// account.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// If IsTruncated is true, this element is present and contains the value you can
 	// use for the Marker request parameter to continue listing your RTMP distributions
 	// where they left off.
@@ -2421,31 +3200,59 @@ type StreamingDistributionList struct {
 
 // A summary of the information for a CloudFront streaming distribution.
 type StreamingDistributionSummary struct {
+
 	// The identifier for the distribution, for example, EDFDVBD632BHDS5.
+	//
+	// This member is required.
 	Id *string
+
 	// The ARN (Amazon Resource Name) for the streaming distribution. For example:
 	// arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where
 	// 123456789012 is your AWS account ID.
+	//
+	// This member is required.
 	ARN *string
+
 	// Indicates the current status of the distribution. When the status is Deployed,
 	// the distribution's information is fully propagated throughout the Amazon
 	// CloudFront system.
+	//
+	// This member is required.
 	Status *string
+
 	// The date and time the distribution was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// A complex type that contains information about CNAMEs (alternate domain names),
 	// if any, for this streaming distribution.
+	//
+	// This member is required.
 	Aliases *Aliases
+
 	// A complex type that contains information about price class for this streaming
 	// distribution.
+	//
+	// This member is required.
 	PriceClass PriceClass
+
 	// The comment originally specified when this distribution was created.
+	//
+	// This member is required.
 	Comment *string
+
 	// A complex type that contains information about the Amazon S3 bucket from which
 	// you want CloudFront to get your media files for distribution.
+	//
+	// This member is required.
 	S3Origin *S3Origin
+
 	// Whether the distribution is enabled to accept end user requests for content.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// A complex type that specifies the AWS accounts, if any, that you want to allow
 	// to create signed URLs for private content. If you want to require signed URLs in
 	// requests for objects in the target origin that match the PathPattern for this
@@ -2459,38 +3266,56 @@ type StreamingDistributionSummary struct {
 	// CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
+	//
+	// This member is required.
 	TrustedSigners *TrustedSigners
+
 	// The domain name corresponding to the distribution, for example,
 	// d111111abcdef8.cloudfront.net.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // A complex type that controls whether access logs are written for this streaming
 // distribution.
 type StreamingLoggingConfig struct {
+
 	// An optional string that you want CloudFront to prefix to the access log
 	// filenames for this streaming distribution, for example, myprefix/. If you want
 	// to enable logging, but you don't want to specify a prefix, you still must
 	// include an empty Prefix element in the Logging element.
+	//
+	// This member is required.
 	Prefix *string
+
 	// The Amazon S3 bucket to store the access logs in, for example,
 	// myawslogbucket.s3.amazonaws.com.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
 	// bucket. If you don't want to enable logging when you create a streaming
 	// distribution or if you want to disable logging for an existing streaming
 	// distribution, specify false for Enabled, and specify empty Bucket and Prefix
 	// elements. If you specify false for Enabled but you specify values for Bucket and
 	// Prefix, the values are automatically deleted.
+	//
+	// This member is required.
 	Enabled *bool
 }
 
 // A complex type that contains Tag key and Tag value.
 type Tag struct {
+
 	// A string that contains Tag key. The string length should be between 1 and 128
 	// characters. Valid characters include a-z, A-Z, 0-9, space, and the special
 	// characters _ - . : / = + @.
+	//
+	// This member is required.
 	Key *string
+
 	// A string that contains an optional Tag value. The string length should be
 	// between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and
 	// the special characters _ - . : / = + @.
@@ -2499,12 +3324,14 @@ type Tag struct {
 
 // A complex type that contains zero or more Tag elements.
 type TagKeys struct {
+
 	// A complex type that contains Tag key elements.
 	Items []*string
 }
 
 // A complex type that contains zero or more Tag elements.
 type Tags struct {
+
 	// A complex type that contains Tag elements.
 	Items []*Tag
 }
@@ -2526,11 +3353,18 @@ type Tags struct {
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html)
 // in the Amazon CloudFront API Reference.
 type TrustedSigners struct {
+
 	// Specifies whether you want to require viewers to use signed URLs to access the
 	// files specified by PathPattern and TargetOriginId.
+	//
+	// This member is required.
 	Enabled *bool
+
 	// The number of trusted signers for this cache behavior.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// Optional: A complex type that contains trusted signers for this cache behavior.
 	// If Quantity is 0, you can omit Items.
 	Items []*string
@@ -2580,12 +3414,14 @@ type TrustedSigners struct {
 // Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer
 // Guide</i>.</p>
 type ViewerCertificate struct {
+
 	// This field is deprecated. Use one of the following fields instead:
 	//
 	//     *
 	// ACMCertificateArn </p> </li> <li> <p> <code>IAMCertificateId</code> </p> </li>
 	// <li> <p> <code>CloudFrontDefaultCertificate</code> </p> </li> </ul>
 	Certificate *string
+
 	// If the distribution uses Aliases (alternate domain names or CNAMEs), specify
 	// which viewers the distribution accepts HTTPS connections from.
 	//
@@ -2601,18 +3437,21 @@ type ViewerCertificate struct {
 	// domain name such as <code>d111111abcdef8.cloudfront.net</code>, don’t set a
 	// value for this field.</p>
 	SSLSupportMethod SSLSupportMethod
+
 	// This field is deprecated. Use one of the following fields instead:
 	//
 	//     *
 	// ACMCertificateArn </p> </li> <li> <p> <code>IAMCertificateId</code> </p> </li>
 	// <li> <p> <code>CloudFrontDefaultCertificate</code> </p> </li> </ul>
 	CertificateSource CertificateSource
+
 	// If the distribution uses Aliases (alternate domain names or CNAMEs) and the
 	// SSL/TLS certificate is stored in AWS Identity and Access Management (AWS IAM)
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html),
 	// provide the ID of the IAM certificate. If you specify an IAM certificate ID, you
 	// must also specify values for MinimumProtocolVerison and SSLSupportMethod.
 	IAMCertificateId *string
+
 	// If the distribution uses Aliases (alternate domain names or CNAMEs) and the
 	// SSL/TLS certificate is stored in AWS Certificate Manager (ACM)
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html), provide
@@ -2621,6 +3460,7 @@ type ViewerCertificate struct {
 	// an ACM certificate ARN, you must also specify values for MinimumProtocolVerison
 	// and SSLSupportMethod.
 	ACMCertificateArn *string
+
 	// If the distribution uses the CloudFront domain name such as
 	// d111111abcdef8.cloudfront.net, set this field to true. If the distribution uses
 	// Aliases (alternate domain names or CNAMEs), set this field to false and specify
@@ -2631,6 +3471,7 @@ type ViewerCertificate struct {
 	// <code>MinimumProtocolVersion</code> </p> </li> <li> <p>
 	// <code>SSLSupportMethod</code> </p> </li> </ul>
 	CloudFrontDefaultCertificate *bool
+
 	// If the distribution uses Aliases (alternate domain names or CNAMEs), specify the
 	// security policy that you want CloudFront to use for HTTPS connections with
 	// viewers. The security policy determines two settings:

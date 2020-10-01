@@ -55,10 +55,12 @@ func (c *Client) DescribeDefaultParameters(ctx context.Context, params *Describe
 }
 
 type DescribeDefaultParametersInput struct {
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved. The value for MaxResults must be between
@@ -67,8 +69,10 @@ type DescribeDefaultParametersInput struct {
 }
 
 type DescribeDefaultParametersOutput struct {
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string
+
 	// A list of parameters. Each element in the list represents one parameter.
 	Parameters []*types.Parameter
 

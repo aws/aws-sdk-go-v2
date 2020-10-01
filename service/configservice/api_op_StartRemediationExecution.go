@@ -60,17 +60,25 @@ func (c *Client) StartRemediationExecution(ctx context.Context, params *StartRem
 }
 
 type StartRemediationExecutionInput struct {
+
 	// A list of resource keys to be processed with the current request. Each element
 	// in the list consists of the resource type and resource ID.
+	//
+	// This member is required.
 	ResourceKeys []*types.ResourceKey
+
 	// The list of names of AWS Config rules that you want to run remediation execution
 	// for.
+	//
+	// This member is required.
 	ConfigRuleName *string
 }
 
 type StartRemediationExecutionOutput struct {
+
 	// Returns a failure message. For example, the resource is already compliant.
 	FailureMessage *string
+
 	// For resources that have failed to start execution, the API returns a resource
 	// key object.
 	FailedItems []*types.ResourceKey

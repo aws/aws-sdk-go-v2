@@ -77,10 +77,16 @@ func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGam
 }
 
 type DeregisterGameServerInput struct {
+
 	// An identifier for the game server group where the game server to be
 	// de-registered is running. Use either the GameServerGroup () name or ARN value.
+	//
+	// This member is required.
 	GameServerGroupName *string
+
 	// The identifier for the game server to be de-registered.
+	//
+	// This member is required.
 	GameServerId *string
 }
 

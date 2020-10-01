@@ -57,47 +57,71 @@ func (c *Client) CreateBranch(ctx context.Context, params *CreateBranchInput, op
 
 // The request structure for the create branch request.
 type CreateBranchInput struct {
+
 	// Enables pull request preview for this branch.
 	EnablePullRequestPreview *bool
+
 	// Enables basic authorization for the branch.
 	EnableBasicAuth *bool
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// Describes the current stage for the branch.
 	Stage types.Stage
+
 	// Enables notifications for the branch.
 	EnableNotification *bool
+
 	// The basic authorization credentials for the branch.
 	BasicAuthCredentials *string
+
 	// The build specification (build spec) for the branch.
 	BuildSpec *string
+
 	// The content Time To Live (TTL) for the website in seconds.
 	Ttl *string
+
 	// The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string
+
 	// The name for the branch.
+	//
+	// This member is required.
 	BranchName *string
+
 	// The Amazon Resource Name (ARN) for a backend environment that is part of an
 	// Amplify app.
 	BackendEnvironmentArn *string
+
 	// The framework for the branch.
 	Framework *string
+
 	// The tag for the branch.
 	Tags map[string]*string
+
 	// The environment variables for the branch.
 	EnvironmentVariables map[string]*string
+
 	// The display name for a branch. This is used as the default domain prefix.
 	DisplayName *string
+
 	// The description for the branch.
 	Description *string
+
 	// Enables auto building for the branch.
 	EnableAutoBuild *bool
 }
 
 // The result structure for create branch request.
 type CreateBranchOutput struct {
+
 	// Describes the branch for an Amplify app, which maps to a third-party repository
 	// branch.
+	//
+	// This member is required.
 	Branch *types.Branch
 
 	// Metadata pertaining to the operation's result.

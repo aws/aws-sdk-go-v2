@@ -56,10 +56,16 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 
 // Represents the input to RemoveTagsFromResource ().
 type RemoveTagsFromResourceInput struct {
+
 	// The Amazon DocumentDB resource that the tags are removed from. This value is an
 	// Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	ResourceName *string
+
 	// The tag key (name) of the tag to be removed.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

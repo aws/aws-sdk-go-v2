@@ -56,6 +56,7 @@ func (c *Client) DescribeReservedCacheNodesOfferings(ctx context.Context, params
 
 // Represents the input of a DescribeReservedCacheNodesOfferings operation.
 type DescribeReservedCacheNodesOfferingsInput struct {
+
 	// The cache node type filter value. Use this parameter to show only the available
 	// offerings matching the specified cache node type.  <p>The following node types
 	// are supported by ElastiCache. Generally speaking, the current generation types
@@ -101,26 +102,32 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 	// <code>appendfsync</code> are not supported on Redis version 2.8.22 and
 	// later.</p> </li> </ul>
 	CacheNodeType *string
+
 	// The offering type filter value. Use this parameter to show only the available
 	// offerings matching the specified offering type. Valid Values: "Light
 	// Utilization"|"Medium Utilization"|"Heavy Utilization"
 	OfferingType *string
+
 	// The offering identifier filter value. Use this parameter to show only the
 	// available offering that matches the specified reservation identifier. Example:
 	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	ReservedCacheNodesOfferingId *string
+
 	// Duration filter value, specified in years or seconds. Use this parameter to show
 	// only reservations for a given duration. Valid Values: 1 | 3 | 31536000 |
 	// 94608000
 	Duration *string
+
 	// The product description filter value. Use this parameter to show only the
 	// available offerings matching the specified product description.
 	ProductDescription *string
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
@@ -130,8 +137,10 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 
 // Represents the output of a DescribeReservedCacheNodesOfferings operation.
 type DescribeReservedCacheNodesOfferingsOutput struct {
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
+
 	// A list of reserved cache node offerings. Each element in the list contains
 	// detailed information about one offering.
 	ReservedCacheNodesOfferings []*types.ReservedCacheNodesOffering

@@ -56,16 +56,24 @@ func (c *Client) GetRoomSkillParameter(ctx context.Context, params *GetRoomSkill
 }
 
 type GetRoomSkillParameterInput struct {
+
 	// The room skill parameter key for which to get details. Required.
+	//
+	// This member is required.
 	ParameterKey *string
+
 	// The ARN of the skill from which to get the room skill parameter details.
 	// Required.
+	//
+	// This member is required.
 	SkillId *string
+
 	// The ARN of the room from which to get the room skill parameter details.
 	RoomArn *string
 }
 
 type GetRoomSkillParameterOutput struct {
+
 	// The details of the room skill parameter requested. Required.
 	RoomSkillParameter *types.RoomSkillParameter
 

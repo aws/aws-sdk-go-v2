@@ -57,14 +57,21 @@ func (c *Client) UpdateParameterGroup(ctx context.Context, params *UpdateParamet
 }
 
 type UpdateParameterGroupInput struct {
+
 	// The name of the parameter group.
+	//
+	// This member is required.
 	ParameterGroupName *string
+
 	// An array of name-value pairs for the parameters in the group. Each element in
 	// the array represents a single parameter.
+	//
+	// This member is required.
 	ParameterNameValues []*types.ParameterNameValue
 }
 
 type UpdateParameterGroupOutput struct {
+
 	// The parameter group that has been modified.
 	ParameterGroup *types.ParameterGroup
 

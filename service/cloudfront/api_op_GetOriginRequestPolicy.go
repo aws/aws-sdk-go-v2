@@ -68,17 +68,22 @@ func (c *Client) GetOriginRequestPolicy(ctx context.Context, params *GetOriginRe
 }
 
 type GetOriginRequestPolicyInput struct {
+
 	// The unique identifier for the origin request policy. If the origin request
 	// policy is attached to a distribution’s cache behavior, you can get the policy’s
 	// identifier using ListDistributions or GetDistribution. If the origin request
 	// policy is not attached to a cache behavior, you can get the identifier using
 	// ListOriginRequestPolicies.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetOriginRequestPolicyOutput struct {
+
 	// The origin request policy.
 	OriginRequestPolicy *types.OriginRequestPolicy
+
 	// The current version of the origin request policy.
 	ETag *string
 

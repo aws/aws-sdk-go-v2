@@ -57,6 +57,7 @@ func (c *Client) StartNextPendingJobExecution(ctx context.Context, params *Start
 }
 
 type StartNextPendingJobExecutionInput struct {
+
 	// Specifies the amount of time this device has to finish execution of this job. If
 	// the job execution status is not set to a terminal state before this timer
 	// expires, or before the timer is reset (by calling UpdateJobExecution, setting
@@ -66,14 +67,19 @@ type StartNextPendingJobExecutionInput struct {
 	// timeout which may have been specified when the job was created (CreateJob using
 	// field timeoutConfig).
 	StepTimeoutInMinutes *int64
+
 	// The name of the thing associated with the device.
+	//
+	// This member is required.
 	ThingName *string
+
 	// A collection of name/value pairs that describe the status of the job execution.
 	// If not specified, the statusDetails are unchanged.
 	StatusDetails map[string]*string
 }
 
 type StartNextPendingJobExecutionOutput struct {
+
 	// A JobExecution object.
 	Execution *types.JobExecution
 

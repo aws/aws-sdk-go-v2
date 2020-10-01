@@ -68,13 +68,18 @@ func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, op
 }
 
 type DetachVolumeInput struct {
+
 	// The ID of the volume.
+	//
+	// This member is required.
 	VolumeId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// Forces detachment if the previous detachment attempt did not occur cleanly (for
 	// example, logging into an instance, unmounting the volume, and detaching
 	// normally). This option can lead to data loss or a corrupted file system. Use
@@ -83,25 +88,33 @@ type DetachVolumeInput struct {
 	// metadata. If you use this option, you must perform file system check and repair
 	// procedures.
 	Force *bool
+
 	// The ID of the instance. If you are detaching a Multi-Attach enabled volume, you
 	// must specify an instance ID.
 	InstanceId *string
+
 	// The device name.
 	Device *string
 }
 
 // Describes volume attachment details.
 type DetachVolumeOutput struct {
+
 	// The ID of the volume.
 	VolumeId *string
+
 	// The ID of the instance.
 	InstanceId *string
+
 	// The time stamp when the attachment initiated.
 	AttachTime *time.Time
+
 	// The device name.
 	Device *string
+
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool
+
 	// The attachment state of the volume.
 	State types.VolumeAttachmentState
 

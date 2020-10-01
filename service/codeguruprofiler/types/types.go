@@ -8,8 +8,10 @@ import (
 
 // Information about the time range of the latest available aggregated profile.
 type AggregatedProfileTime struct {
+
 	// The time period.
 	Period AggregationPeriod
+
 	// The start time.
 	Start *time.Time
 }
@@ -17,31 +19,47 @@ type AggregatedProfileTime struct {
 //
 type AgentConfiguration struct {
 	AgentParameters map[string]*string
+
 	//
+	//
+	// This member is required.
 	PeriodInSeconds *int32
+
 	//
+	//
+	// This member is required.
 	ShouldProfile *bool
 }
 
 //
 type AgentOrchestrationConfig struct {
+
 	//
+	//
+	// This member is required.
 	ProfilingEnabled *bool
 }
 
 // The description of a profiling group.
 type ProfilingGroupDescription struct {
+
 	//
 	AgentOrchestrationConfig *AgentOrchestrationConfig
+
 	// The Amazon Resource Name (ARN) identifying the profiling group.
-	Arn             *string
+	Arn *string
+
 	ComputePlatform ComputePlatform
+
 	// The time, in milliseconds since the epoch, when the profiling group was created.
 	CreatedAt *time.Time
+
 	// The name of the profiling group.
 	Name *string
+
 	// The status of the profiling group.
 	ProfilingStatus *ProfilingStatus
+
 	// The time, in milliseconds since the epoch, when the profiling group was last
 	// updated.
 	UpdatedAt *time.Time
@@ -49,23 +67,29 @@ type ProfilingGroupDescription struct {
 
 // Information about the profiling status.
 type ProfilingStatus struct {
+
 	// The time, in milliseconds since the epoch, when the latest agent was
 	// orchestrated.
 	LatestAgentOrchestratedAt *time.Time
+
 	// The time, in milliseconds since the epoch, when the latest agent was reported..
 	LatestAgentProfileReportedAt *time.Time
+
 	// The latest aggregated profile
 	LatestAggregatedProfile *AggregatedProfileTime
 }
 
 // Information about the profile time.
 type ProfileTime struct {
+
 	// The start time of the profile.
 	Start *time.Time
 }
 
 type FrameMetric struct {
-	FrameName    *string
+	FrameName *string
+
 	ThreadStates []*string
-	Type         MetricType
+
+	Type MetricType
 }

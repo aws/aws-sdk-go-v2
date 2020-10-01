@@ -61,6 +61,7 @@ func (c *Client) GetDistributionMetricData(ctx context.Context, params *GetDistr
 }
 
 type GetDistributionMetricDataInput struct {
+
 	// The metric for which you want to return information.  <p>Valid distribution
 	// metric names are listed below, along with the most useful
 	// <code>statistics</code> to include in your request, and the published
@@ -94,7 +95,10 @@ type GetDistributionMetricDataInput struct {
 	// is currently unavailable.</p> <p> <code>Statistics</code>: The most useful
 	// statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit
 	// is <code>Percent</code>.</p> </li> </ul>
+	//
+	// This member is required.
 	MetricName types.DistributionMetricName
+
 	// The end of the time interval for which to get metric data. Constraints:
 	//
 	//     *
@@ -107,7 +111,10 @@ type GetDistributionMetricDataInput struct {
 	// You can convert a human-friendly time
 	// to Unix time format using a converter like Epoch converter
 	// (https://www.epochconverter.com/).
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// The statistic for the metric. The following statistics are available:
 	//
 	//     *
@@ -130,7 +137,10 @@ type GetDistributionMetricDataInput struct {
 	//
 	//     * SampleCount - The
 	// count, or number, of data points used for the statistical calculation.
+	//
+	// This member is required.
 	Statistics []types.MetricStatistic
+
 	// The start of the time interval for which to get metric data. Constraints:
 	//
 	//     *
@@ -143,22 +153,35 @@ type GetDistributionMetricDataInput struct {
 	// You can convert a human-friendly
 	// time to Unix time format using a converter like Epoch converter
 	// (https://www.epochconverter.com/).
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// The unit for the metric data request.  <p>Valid units depend on the metric data
 	// being requested. For the valid units with each available metric, see the
 	// <code>metricName</code> parameter.</p>
+	//
+	// This member is required.
 	Unit types.MetricUnit
+
 	// The granularity, in seconds, for the metric data points that will be returned.
+	//
+	// This member is required.
 	Period *int32
+
 	// The name of the distribution for which to get metric data.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p>
+	//
+	// This member is required.
 	DistributionName *string
 }
 
 type GetDistributionMetricDataOutput struct {
+
 	// An array of objects that describe the metric data returned.
 	MetricData []*types.MetricDatapoint
+
 	// The name of the metric returned.
 	MetricName types.DistributionMetricName
 

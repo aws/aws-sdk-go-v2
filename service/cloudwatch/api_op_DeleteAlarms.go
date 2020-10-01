@@ -68,7 +68,10 @@ func (c *Client) DeleteAlarms(ctx context.Context, params *DeleteAlarmsInput, op
 }
 
 type DeleteAlarmsInput struct {
+
 	// The alarms to be deleted.
+	//
+	// This member is required.
 	AlarmNames []*string
 }
 

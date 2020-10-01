@@ -56,19 +56,26 @@ func (c *Client) DescribeInstanceAssociationsStatus(ctx context.Context, params 
 }
 
 type DescribeInstanceAssociationsStatusInput struct {
+
 	// The instance IDs for which you want association status information.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
 }
 
 type DescribeInstanceAssociationsStatusOutput struct {
+
 	// Status information about the association.
 	InstanceAssociationStatusInfos []*types.InstanceAssociationStatusInfo
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string

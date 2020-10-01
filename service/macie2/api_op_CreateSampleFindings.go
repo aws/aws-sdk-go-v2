@@ -55,6 +55,7 @@ func (c *Client) CreateSampleFindings(ctx context.Context, params *CreateSampleF
 }
 
 type CreateSampleFindingsInput struct {
+
 	// An array that lists one or more types of findings to include in the set of
 	// sample findings. Currently, the only supported value is
 	// Policy:IAMUser/S3BucketEncryptionDisabled.

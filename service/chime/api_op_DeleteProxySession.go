@@ -56,9 +56,15 @@ func (c *Client) DeleteProxySession(ctx context.Context, params *DeleteProxySess
 }
 
 type DeleteProxySessionInput struct {
+
 	// The Amazon Chime voice connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
+
 	// The proxy session ID.
+	//
+	// This member is required.
 	ProxySessionId *string
 }
 

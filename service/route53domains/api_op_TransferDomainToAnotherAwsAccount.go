@@ -89,20 +89,28 @@ func (c *Client) TransferDomainToAnotherAwsAccount(ctx context.Context, params *
 
 // The TransferDomainToAnotherAwsAccount request includes the following elements.
 type TransferDomainToAnotherAwsAccountInput struct {
+
 	// The account ID of the AWS account that you want to transfer the domain to, for
 	// example, 111122223333.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The name of the domain that you want to transfer from the current AWS account to
 	// another account.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The TransferDomainToAnotherAwsAccount response includes the following elements.
 type TransferDomainToAnotherAwsAccountOutput struct {
+
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
 	OperationId *string
+
 	// To finish transferring a domain to another AWS account, the account that the
 	// domain is being transferred to must submit an
 	// AcceptDomainTransferFromAnotherAwsAccount

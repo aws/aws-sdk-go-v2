@@ -56,11 +56,15 @@ func (c *Client) DescribeTagOption(ctx context.Context, params *DescribeTagOptio
 }
 
 type DescribeTagOptionInput struct {
+
 	// The TagOption identifier.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeTagOptionOutput struct {
+
 	// Information about the TagOption.
 	TagOptionDetail *types.TagOptionDetail
 

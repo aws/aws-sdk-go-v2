@@ -55,11 +55,15 @@ func (c *Client) GetJobDocument(ctx context.Context, params *GetJobDocumentInput
 }
 
 type GetJobDocumentInput struct {
+
 	// The unique identifier you assigned to this job when it was created.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type GetJobDocumentOutput struct {
+
 	// The job document content.
 	Document *string
 

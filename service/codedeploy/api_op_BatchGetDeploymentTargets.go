@@ -71,6 +71,7 @@ func (c *Client) BatchGetDeploymentTargets(ctx context.Context, params *BatchGet
 }
 
 type BatchGetDeploymentTargetsInput struct {
+
 	// The unique IDs of the deployment targets. The compute platform of the deployment
 	// determines the type of the targets and their formats. The maximum number of
 	// deployment target IDs you can specify is 25.
@@ -92,11 +93,13 @@ type BatchGetDeploymentTargetsInput struct {
 	// target IDs are CloudFormation stack IDs. Their target type is
 	// cloudFormationTarget.
 	TargetIds []*string
+
 	// The unique ID of a deployment.
 	DeploymentId *string
 }
 
 type BatchGetDeploymentTargetsOutput struct {
+
 	// A list of target objects for a deployment. Each target object contains details
 	// about the target, such as its status and lifecycle events. The type of the
 	// target objects depends on the deployment' compute platform.

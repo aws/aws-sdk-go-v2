@@ -13,8 +13,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates or modifies the PublicAccessBlock configuration for an Amazon Web
-// Services account.
+// Creates or modifies the PublicAccessBlock configuration for an AWS account. For
+// more information, see  Using Amazon S3 block public access
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
+// Related actions include:
+//
+//     * GetPublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
+//
+//
+// * DeletePublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html)
 func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAccessBlockInput, optFns ...func(*Options)) (*PutPublicAccessBlockOutput, error) {
 	stack := middleware.NewStack("PutPublicAccessBlock", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -58,11 +67,17 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 }
 
 type PutPublicAccessBlockInput struct {
-	// The PublicAccessBlock configuration that you want to apply to the specified
-	// Amazon Web Services account.
+
+	// The PublicAccessBlock configuration that you want to apply to the specified AWS
+	// account.
+	//
+	// This member is required.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
-	// The account ID for the Amazon Web Services account whose PublicAccessBlock
-	// configuration you want to set.
+
+	// The account ID for the AWS account whose PublicAccessBlock configuration you
+	// want to set.
+	//
+	// This member is required.
 	AccountId *string
 }
 

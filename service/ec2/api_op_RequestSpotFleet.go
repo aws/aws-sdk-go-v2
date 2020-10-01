@@ -74,8 +74,12 @@ func (c *Client) RequestSpotFleet(ctx context.Context, params *RequestSpotFleetI
 
 // Contains the parameters for RequestSpotFleet.
 type RequestSpotFleetInput struct {
+
 	// The configuration for the Spot Fleet request.
+	//
+	// This member is required.
 	SpotFleetRequestConfig *types.SpotFleetRequestConfigData
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -85,6 +89,7 @@ type RequestSpotFleetInput struct {
 
 // Contains the output of RequestSpotFleet.
 type RequestSpotFleetOutput struct {
+
 	// The ID of the Spot Fleet request.
 	SpotFleetRequestId *string
 

@@ -69,16 +69,22 @@ func (c *Client) DescribeTrustedAdvisorChecks(ctx context.Context, params *Descr
 }
 
 type DescribeTrustedAdvisorChecksInput struct {
+
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
+	//
+	// This member is required.
 	Language *string
 }
 
 // Information about the Trusted Advisor checks returned by the
 // DescribeTrustedAdvisorChecks () operation.
 type DescribeTrustedAdvisorChecksOutput struct {
+
 	// Information about all available Trusted Advisor checks.
+	//
+	// This member is required.
 	Checks []*types.TrustedAdvisorCheckDescription
 
 	// Metadata pertaining to the operation's result.

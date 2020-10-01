@@ -63,16 +63,23 @@ func (c *Client) ResetInstanceAttribute(ctx context.Context, params *ResetInstan
 }
 
 type ResetInstanceAttributeInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The attribute to reset. You can only reset the following attributes: kernel |
 	// ramdisk | sourceDestCheck. To change an instance attribute, use
 	// ModifyInstanceAttribute ().
+	//
+	// This member is required.
 	Attribute types.InstanceAttributeName
 }
 

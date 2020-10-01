@@ -56,13 +56,18 @@ func (c *Client) StopContinuousExport(ctx context.Context, params *StopContinuou
 }
 
 type StopContinuousExportInput struct {
+
 	// The unique ID assigned to this export.
+	//
+	// This member is required.
 	ExportId *string
 }
 
 type StopContinuousExportOutput struct {
+
 	// Timestamp that represents when this continuous export started collecting data.
 	StartTime *time.Time
+
 	// Timestamp that represents when this continuous export was stopped.
 	StopTime *time.Time
 

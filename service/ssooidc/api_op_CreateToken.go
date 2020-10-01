@@ -54,43 +54,64 @@ func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optF
 }
 
 type CreateTokenInput struct {
+
 	// The list of scopes that is defined by the client. Upon authorization, this list
 	// is used to restrict permissions when granting an access token.
 	Scope []*string
+
 	// The unique identifier string for each client. This value should come from the
 	// persisted result of the RegisterClient () API.
+	//
+	// This member is required.
 	ClientId *string
+
 	// The location of the application that will receive the authorization code. Users
 	// authorize the service to send the request to this location.
 	RedirectUri *string
+
 	// Supports grant types for authorization code, refresh token, and device code
 	// request.
+	//
+	// This member is required.
 	GrantType *string
+
 	// The token used to obtain an access token in the event that the access token is
 	// invalid or expired. This token is not issued by the service.
 	RefreshToken *string
+
 	// Used only when calling this API for the device code grant type. This short-term
 	// code is used to identify this authentication attempt. This should come from an
 	// in-memory reference to the result of the StartDeviceAuthorization () API.
+	//
+	// This member is required.
 	DeviceCode *string
+
 	// The authorization code received from the authorization service. This parameter
 	// is required to perform an authorization grant request to get access to a token.
 	Code *string
+
 	// A secret string generated for the client. This value should come from the
 	// persisted result of the RegisterClient () API.
+	//
+	// This member is required.
 	ClientSecret *string
 }
 
 type CreateTokenOutput struct {
+
 	// Indicates the time in seconds when an access token will expire.
 	ExpiresIn *int32
+
 	// A token that, if present, can be used to refresh a previously issued access
 	// token that might have expired.
 	RefreshToken *string
+
 	// An opaque token to access AWS SSO resources assigned to a user.
 	AccessToken *string
+
 	// The identifier of the user that associated with the access token, if present.
 	IdToken *string
+
 	// Used to notify the client that the returned token is an access token. The
 	// supported type is BearerToken.
 	TokenType *string

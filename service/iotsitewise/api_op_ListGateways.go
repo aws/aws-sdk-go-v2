@@ -55,15 +55,21 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 }
 
 type ListGatewaysInput struct {
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
 }
 
 type ListGatewaysOutput struct {
+
 	// A list that summarizes each gateway.
+	//
+	// This member is required.
 	GatewaySummaries []*types.GatewaySummary
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

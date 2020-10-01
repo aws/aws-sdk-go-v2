@@ -71,16 +71,22 @@ func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *Refresh
 
 //
 type RefreshTrustedAdvisorCheckInput struct {
+
 	// The unique identifier for the Trusted Advisor check to refresh. Note: Specifying
 	// the check ID of a check that is automatically refreshed causes an
 	// InvalidParameterValue error.
+	//
+	// This member is required.
 	CheckId *string
 }
 
 // The current refresh status of a Trusted Advisor check.
 type RefreshTrustedAdvisorCheckOutput struct {
+
 	// The current refresh status for a check, including the amount of time until the
 	// check is eligible for refresh.
+	//
+	// This member is required.
 	Status *types.TrustedAdvisorCheckRefreshStatus
 
 	// Metadata pertaining to the operation's result.

@@ -56,28 +56,45 @@ func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns .
 }
 
 type GetExportInput struct {
+
 	// The format of the exported data.
+	//
+	// This member is required.
 	ExportType types.ExportType
+
 	// The version of the bot to export.
+	//
+	// This member is required.
 	Version *string
+
 	// The name of the bot to export.
+	//
+	// This member is required.
 	Name *string
+
 	// The type of resource to export.
+	//
+	// This member is required.
 	ResourceType types.ResourceType
 }
 
 type GetExportOutput struct {
+
 	// The name of the bot being exported.
 	Name *string
+
 	// The format of the exported data.
 	ExportType types.ExportType
+
 	// An S3 pre-signed URL that provides the location of the exported resource. The
 	// exported resource is a ZIP archive that contains the exported resource in JSON
 	// format. The structure of the archive may change. Your code should not rely on
 	// the archive structure.
 	Url *string
+
 	// The type of the exported resource.
 	ResourceType types.ResourceType
+
 	// The status of the export.
 	//
 	//     * IN_PROGRESS - The export is in progress.
@@ -88,8 +105,10 @@ type GetExportOutput struct {
 	//     * FAILED - The export could not be
 	// completed.
 	ExportStatus types.ExportStatus
+
 	// The version of the bot being exported.
 	Version *string
+
 	// If status is FAILED, Amazon Lex provides the reason that it failed to export the
 	// resource.
 	FailureReason *string

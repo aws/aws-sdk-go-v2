@@ -57,13 +57,23 @@ func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, 
 
 // The structure representing the putPermissionRequest.
 type PutPermissionInput struct {
+
 	// The list of actions that the users and roles can perform on the profiling group.
+	//
+	// This member is required.
 	ActionGroup types.ActionGroup
+
 	// The list of role and user ARNs or the accountId that needs access (wildcards are
 	// not allowed).
+	//
+	// This member is required.
 	Principals []*string
+
 	// The name of the profiling group.
+	//
+	// This member is required.
 	ProfilingGroupName *string
+
 	// A unique identifier for the current revision of the policy. This is required, if
 	// a policy exists for the profiling group. This is not required when creating the
 	// policy for the first time.
@@ -72,9 +82,15 @@ type PutPermissionInput struct {
 
 // The structure representing the putPermissionResponse.
 type PutPermissionOutput struct {
+
 	// The resource-based policy.
+	//
+	// This member is required.
 	Policy *string
+
 	// A unique identifier for the current revision of the policy.
+	//
+	// This member is required.
 	RevisionId *string
 
 	// Metadata pertaining to the operation's result.

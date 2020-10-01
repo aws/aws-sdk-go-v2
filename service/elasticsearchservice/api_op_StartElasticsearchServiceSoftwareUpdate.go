@@ -59,13 +59,17 @@ func (c *Client) StartElasticsearchServiceSoftwareUpdate(ctx context.Context, pa
 // operation. Specifies the name of the Elasticsearch domain that you wish to
 // schedule a service software update on.
 type StartElasticsearchServiceSoftwareUpdateInput struct {
+
 	// The name of the domain that you want to update to the latest service software.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains the
 // status of the update.
 type StartElasticsearchServiceSoftwareUpdateOutput struct {
+
 	// The current status of the Elasticsearch service software update.
 	ServiceSoftwareOptions *types.ServiceSoftwareOptions
 

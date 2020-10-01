@@ -56,11 +56,15 @@ func (c *Client) GetDomain(ctx context.Context, params *GetDomainInput, optFns .
 }
 
 type GetDomainInput struct {
+
 	// The domain name for which your want to return information about.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 type GetDomainOutput struct {
+
 	// An array of key-value pairs containing information about your get domain
 	// request.
 	Domain *types.Domain

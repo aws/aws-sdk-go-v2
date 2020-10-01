@@ -60,16 +60,22 @@ func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput
 }
 
 type UpdateInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// For load-based or time-based instances, the type. Windows stacks can use only
 	// time-based instances.
 	AutoScalingType types.AutoScalingType
+
 	// The instance architecture. Instance types do not necessarily support both
 	// architectures. For a list of the architectures that are supported by the
 	// different instance types, see Instance Families and Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
 	Architecture types.Architecture
+
 	// The instance type, such as t2.micro. For a list of supported instance types,
 	// open the stack in the console, choose Instances, and choose + Instance. The Size
 	// list contains the currently supported types. For more information, see Instance
@@ -78,6 +84,7 @@ type UpdateInstanceInput struct {
 	// parameter values that you use to specify the various types are in the API Name
 	// column of the Available Instance Types table.
 	InstanceType *string
+
 	// The default AWS OpsWorks Stacks agent version. You have the following options:
 	//
 	//
@@ -94,6 +101,7 @@ type UpdateInstanceInput struct {
 	// shown on the console. For a list of available agent version numbers, call
 	// DescribeAgentVersions (). AgentVersion cannot be set to Chef 12.2.
 	AgentVersion *string
+
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
@@ -102,17 +110,22 @@ type UpdateInstanceInput struct {
 	// the default value of true, to ensure that your instances have the latest
 	// security updates.
 	InstallUpdatesOnBoot *bool
+
 	// The instance host name.
 	Hostname *string
+
 	// This property cannot be updated.
 	EbsOptimized *bool
+
 	// The instance's layer IDs.
 	LayerIds []*string
+
 	// The ID of the AMI that was used to create the instance. The value of this
 	// parameter must be the same AMI ID that the instance is already using. You cannot
 	// apply a new AMI to an instance by running UpdateInstance. UpdateInstance does
 	// not work on instances that are using custom AMIs.
 	AmiId *string
+
 	// The instance's operating system, which must be set to one of the following. You
 	// cannot update an instance that is using a custom AMI.
 	//
@@ -149,6 +162,7 @@ type UpdateInstanceInput struct {
 	// You can specify a different Linux operating system for the updated stack, but
 	// you cannot change from Linux to Windows or Windows to Linux.
 	Os *string
+
 	// The instance's Amazon EC2 key name.
 	SshKeyName *string
 }

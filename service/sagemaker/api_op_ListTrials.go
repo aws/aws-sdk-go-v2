@@ -60,29 +60,39 @@ func (c *Client) ListTrials(ctx context.Context, params *ListTrialsInput, optFns
 }
 
 type ListTrialsInput struct {
+
 	// A filter that returns only trials that are part of the specified experiment.
 	ExperimentName *string
+
 	// If the previous call to ListTrials didn't return the full set of trials, the
 	// call returns a token for getting the next set of trials.
 	NextToken *string
+
 	// The maximum number of trials to return in the response. The default value is 10.
 	MaxResults *int32
+
 	// The property used to sort results. The default value is CreationTime.
 	SortBy types.SortTrialsBy
+
 	// The sort order. The default value is Descending.
 	SortOrder types.SortOrder
+
 	// A filter that returns only trials created after the specified time.
 	CreatedAfter *time.Time
+
 	// A filter that returns only trials that are associated with the specified trial
 	// component.
 	TrialComponentName *string
+
 	// A filter that returns only trials created before the specified time.
 	CreatedBefore *time.Time
 }
 
 type ListTrialsOutput struct {
+
 	// A token for getting the next set of trials, if there are any.
 	NextToken *string
+
 	// A list of the summaries of your trials.
 	TrialSummaries []*types.TrialSummary
 

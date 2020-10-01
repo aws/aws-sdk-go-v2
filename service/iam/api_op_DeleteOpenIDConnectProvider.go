@@ -60,9 +60,12 @@ func (c *Client) DeleteOpenIDConnectProvider(ctx context.Context, params *Delete
 }
 
 type DeleteOpenIDConnectProviderInput struct {
+
 	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource
 	// object to delete. You can get a list of OpenID Connect provider resource ARNs by
 	// using the ListOpenIDConnectProviders () operation.
+	//
+	// This member is required.
 	OpenIDConnectProviderArn *string
 }
 

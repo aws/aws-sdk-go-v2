@@ -57,13 +57,20 @@ func (c *Client) GetAWSDefaultServiceQuota(ctx context.Context, params *GetAWSDe
 }
 
 type GetAWSDefaultServiceQuotaInput struct {
+
 	// Identifies the service quota you want to select.
+	//
+	// This member is required.
 	QuotaCode *string
+
 	// Specifies the service that you want to use.
+	//
+	// This member is required.
 	ServiceCode *string
 }
 
 type GetAWSDefaultServiceQuotaOutput struct {
+
 	// Returns the ServiceQuota () object which contains all values for a quota.
 	Quota *types.ServiceQuota
 

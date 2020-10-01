@@ -56,10 +56,17 @@ func (c *Client) AssociatePrincipalWithPortfolio(ctx context.Context, params *As
 }
 
 type AssociatePrincipalWithPortfolioInput struct {
+
 	// The principal type. The supported value is IAM.
+	//
+	// This member is required.
 	PrincipalType types.PrincipalType
+
 	// The ARN of the principal (IAM user, role, or group).
+	//
+	// This member is required.
 	PrincipalARN *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -69,7 +76,10 @@ type AssociatePrincipalWithPortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
 }
 

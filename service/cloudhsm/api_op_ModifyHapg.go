@@ -65,16 +65,22 @@ func (c *Client) ModifyHapg(ctx context.Context, params *ModifyHapgInput, optFns
 }
 
 type ModifyHapgInput struct {
+
 	// The list of partition serial numbers to make members of the high-availability
 	// partition group.
 	PartitionSerialList []*string
+
 	// The new label for the high-availability partition group.
 	Label *string
+
 	// The ARN of the high-availability partition group to modify.
+	//
+	// This member is required.
 	HapgArn *string
 }
 
 type ModifyHapgOutput struct {
+
 	// The ARN of the high-availability partition group.
 	HapgArn *string
 

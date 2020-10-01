@@ -61,12 +61,16 @@ func (c *Client) DescribeLoadBasedAutoScaling(ctx context.Context, params *Descr
 }
 
 type DescribeLoadBasedAutoScalingInput struct {
+
 	// An array of layer IDs.
+	//
+	// This member is required.
 	LayerIds []*string
 }
 
 // Contains the response to a DescribeLoadBasedAutoScaling request.
 type DescribeLoadBasedAutoScalingOutput struct {
+
 	// An array of LoadBasedAutoScalingConfiguration objects that describe each layer's
 	// configuration.
 	LoadBasedAutoScalingConfigurations []*types.LoadBasedAutoScalingConfiguration

@@ -55,11 +55,20 @@ func (c *Client) DeleteSchemaVersion(ctx context.Context, params *DeleteSchemaVe
 }
 
 type DeleteSchemaVersionInput struct {
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The version number of the schema
+	//
+	// This member is required.
 	SchemaVersion *string
 }
 

@@ -68,7 +68,10 @@ func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns
 }
 
 type HeadBucketInput struct {
+
 	// The bucket name.
+	//
+	// This member is required.
 	Bucket *string
 }
 

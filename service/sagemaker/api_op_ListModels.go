@@ -56,31 +56,42 @@ func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns
 }
 
 type ListModelsInput struct {
+
 	// A filter that returns only models with a creation time greater than or equal to
 	// the specified time (timestamp).
 	CreationTimeAfter *time.Time
+
 	// If the response to a previous ListModels request was truncated, the response
 	// includes a NextToken. To retrieve the next set of models, use the token in the
 	// next request.
 	NextToken *string
+
 	// A string in the training job name. This filter returns only models in the
 	// training job whose name contains the specified string.
 	NameContains *string
+
 	// A filter that returns only models created before the specified time (timestamp).
 	CreationTimeBefore *time.Time
+
 	// The maximum number of models to return in the response.
 	MaxResults *int32
+
 	// Sorts the list of results. The default is CreationTime.
 	SortBy types.ModelSortKey
+
 	// The sort order for results. The default is Descending.
 	SortOrder types.OrderKey
 }
 
 type ListModelsOutput struct {
+
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of models, use it in the subsequent request.
 	NextToken *string
+
 	// An array of ModelSummary objects, each of which lists a model.
+	//
+	// This member is required.
 	Models []*types.ModelSummary
 
 	// Metadata pertaining to the operation's result.

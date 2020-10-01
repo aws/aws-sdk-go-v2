@@ -61,14 +61,18 @@ func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshot
 
 // Contains the inputs for the DescribeSnapshots () operation.
 type DescribeSnapshotsInput struct {
+
 	// The identifier of the directory for which to retrieve snapshot information.
 	DirectoryId *string
+
 	// The maximum number of objects to return.
 	Limit *int32
+
 	// A list of identifiers of the snapshots to obtain the information for. If this
 	// member is null or empty, all snapshots are returned using the Limit and
 	// NextToken members.
 	SnapshotIds []*string
+
 	// The DescribeSnapshotsResult.NextToken value from a previous call to
 	// DescribeSnapshots (). Pass null if this is the first call.
 	NextToken *string
@@ -76,9 +80,11 @@ type DescribeSnapshotsInput struct {
 
 // Contains the results of the DescribeSnapshots () operation.
 type DescribeSnapshotsOutput struct {
+
 	// If not null, more results are available. Pass this value in the NextToken member
 	// of a subsequent call to DescribeSnapshots ().
 	NextToken *string
+
 	// The list of Snapshot () objects that were retrieved. It is possible that this
 	// list contains less than the number of items specified in the Limit member of the
 	// request. This occurs if there are less than the requested number of items left

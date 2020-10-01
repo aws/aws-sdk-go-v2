@@ -69,6 +69,7 @@ func (c *Client) DescribeStackResources(ctx context.Context, params *DescribeSta
 
 // The input for DescribeStackResources () action.
 type DescribeStackResourcesInput struct {
+
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation. For example, for an Amazon Elastic
 	// Compute Cloud (EC2) instance, PhysicalResourceId corresponds to the InstanceId.
@@ -77,9 +78,11 @@ type DescribeStackResourcesInput struct {
 	// Required: Conditional. If you do not specify PhysicalResourceId, you must
 	// specify StackName. Default: There is no default value.
 	PhysicalResourceId *string
+
 	// The logical name of the resource as specified in the template. Default: There is
 	// no default value.
 	LogicalResourceId *string
+
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
@@ -96,6 +99,7 @@ type DescribeStackResourcesInput struct {
 
 // The output for a DescribeStackResources () action.
 type DescribeStackResourcesOutput struct {
+
 	// A list of StackResource structures.
 	StackResources []*types.StackResource
 

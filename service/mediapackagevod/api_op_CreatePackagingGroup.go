@@ -57,23 +57,33 @@ func (c *Client) CreatePackagingGroup(ctx context.Context, params *CreatePackagi
 
 // A new MediaPackage VOD PackagingGroup resource configuration.
 type CreatePackagingGroupInput struct {
+
 	// The ID of the PackagingGroup.
+	//
+	// This member is required.
 	Id *string
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
 }
 
 type CreatePackagingGroupOutput struct {
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
+
 	// The ARN of the PackagingGroup.
 	Arn *string
+
 	// The ID of the PackagingGroup.
 	Id *string
 

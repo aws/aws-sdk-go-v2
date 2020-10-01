@@ -55,15 +55,19 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 }
 
 type ListApplicationsInput struct {
+
 	// A token to specify where to start paginating.
 	NextToken *string
+
 	// The total number of items to return.
 	MaxItems *int32
 }
 
 type ListApplicationsOutput struct {
+
 	// An array of application summaries.
 	Applications []*types.ApplicationSummary
+
 	// The token to request the next page of results.
 	NextToken *string
 

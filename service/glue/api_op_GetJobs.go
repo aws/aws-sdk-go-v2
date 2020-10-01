@@ -55,15 +55,19 @@ func (c *Client) GetJobs(ctx context.Context, params *GetJobsInput, optFns ...fu
 }
 
 type GetJobsInput struct {
+
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
 	// The maximum size of the response.
 	MaxResults *int32
 }
 
 type GetJobsOutput struct {
+
 	// A list of job definitions.
 	Jobs []*types.Job
+
 	// A continuation token, if not all job definitions have yet been returned.
 	NextToken *string
 

@@ -56,16 +56,19 @@ func (c *Client) RegisterInstanceEventNotificationAttributes(ctx context.Context
 }
 
 type RegisterInstanceEventNotificationAttributesInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// Information about the tag keys to register.
 	InstanceTagAttribute *types.RegisterInstanceTagAttributeRequest
 }
 
 type RegisterInstanceEventNotificationAttributesOutput struct {
+
 	// The resulting set of tag keys.
 	InstanceTagAttribute *types.InstanceTagNotificationAttribute
 

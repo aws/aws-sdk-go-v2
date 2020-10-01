@@ -82,19 +82,29 @@ func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFin
 }
 
 type BatchImportFindingsInput struct {
+
 	// A list of findings to import. To successfully import a finding, it must follow
 	// the AWS Security Finding Format
 	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html).
 	// Maximum of 100 findings per request.
+	//
+	// This member is required.
 	Findings []*types.AwsSecurityFinding
 }
 
 type BatchImportFindingsOutput struct {
+
 	// The number of findings that failed to import.
+	//
+	// This member is required.
 	FailedCount *int32
+
 	// The list of findings that failed to import.
 	FailedFindings []*types.ImportFindingsError
+
 	// The number of findings that were successfully imported.
+	//
+	// This member is required.
 	SuccessCount *int32
 
 	// Metadata pertaining to the operation's result.

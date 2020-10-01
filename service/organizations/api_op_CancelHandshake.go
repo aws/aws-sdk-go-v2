@@ -62,14 +62,18 @@ func (c *Client) CancelHandshake(ctx context.Context, params *CancelHandshakeInp
 }
 
 type CancelHandshakeInput struct {
+
 	// The unique identifier (ID) of the handshake that you want to cancel. You can get
 	// the ID from the ListHandshakesForOrganization () operation. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
 	// by from 8 to 32 lowercase letters or digits.
+	//
+	// This member is required.
 	HandshakeId *string
 }
 
 type CancelHandshakeOutput struct {
+
 	// A structure that contains details about the handshake that you canceled.
 	Handshake *types.Handshake
 

@@ -57,12 +57,19 @@ func (c *Client) CreateMonitoringSchedule(ctx context.Context, params *CreateMon
 }
 
 type CreateMonitoringScheduleInput struct {
+
 	// The name of the monitoring schedule. The name must be unique within an AWS
 	// Region within an AWS account.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
+
 	// The configuration object that specifies the monitoring schedule and defines the
 	// monitoring job.
+	//
+	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
+
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
@@ -71,7 +78,10 @@ type CreateMonitoringScheduleInput struct {
 }
 
 type CreateMonitoringScheduleOutput struct {
+
 	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleArn *string
 
 	// Metadata pertaining to the operation's result.

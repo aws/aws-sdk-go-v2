@@ -55,7 +55,10 @@ func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optF
 }
 
 type DeleteFleetInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	Name *string
 }
 

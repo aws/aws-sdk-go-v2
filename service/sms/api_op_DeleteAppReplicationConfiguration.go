@@ -54,6 +54,7 @@ func (c *Client) DeleteAppReplicationConfiguration(ctx context.Context, params *
 }
 
 type DeleteAppReplicationConfigurationInput struct {
+
 	// ID of the application associated with the replication configuration.
 	AppId *string
 }

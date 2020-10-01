@@ -55,9 +55,15 @@ func (c *Client) DeleteEvent(ctx context.Context, params *DeleteEventInput, optF
 }
 
 type DeleteEventInput struct {
+
 	// The ID of the event to delete.
+	//
+	// This member is required.
 	EventId *string
+
 	// The name of the event type.
+	//
+	// This member is required.
 	EventTypeName *string
 }
 

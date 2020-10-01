@@ -57,29 +57,50 @@ func (c *Client) DescribeHumanLoop(ctx context.Context, params *DescribeHumanLoo
 }
 
 type DescribeHumanLoopInput struct {
+
 	// The name of the human loop that you want information about.
+	//
+	// This member is required.
 	HumanLoopName *string
 }
 
 type DescribeHumanLoopOutput struct {
+
 	// The status of the human loop.
+	//
+	// This member is required.
 	HumanLoopStatus types.HumanLoopStatus
+
 	// A failure code that identifies the type of failure.
 	FailureCode *string
+
 	// An object that contains information about the output of the human loop.
 	HumanLoopOutput *types.HumanLoopOutput
+
 	// The Amazon Resource Name (ARN) of the human loop.
+	//
+	// This member is required.
 	HumanLoopArn *string
+
 	// The creation time when Amazon Augmented AI created the human loop.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The reason why a human loop failed. The failure reason is returned when the
 	// status of the human loop is Failed.
 	FailureReason *string
+
 	// The name of the human loop. The name must be lowercase, unique within the Region
 	// in your account, and can have up to 63 characters. Valid characters: a-z, 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	HumanLoopName *string
+
 	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// This member is required.
 	FlowDefinitionArn *string
 
 	// Metadata pertaining to the operation's result.

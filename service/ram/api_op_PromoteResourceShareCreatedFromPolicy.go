@@ -60,11 +60,15 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 }
 
 type PromoteResourceShareCreatedFromPolicyInput struct {
+
 	// The ARN of the resource share to promote.
+	//
+	// This member is required.
 	ResourceShareArn *string
 }
 
 type PromoteResourceShareCreatedFromPolicyOutput struct {
+
 	// Indicates whether the request succeeded.
 	ReturnValue *bool
 

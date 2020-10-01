@@ -62,14 +62,21 @@ func (c *Client) GetComplianceDetail(ctx context.Context, params *GetComplianceD
 }
 
 type GetComplianceDetailInput struct {
+
 	// The ID of the policy that you want to get the details for. PolicyId is returned
 	// by PutPolicy and by ListPolicies.
+	//
+	// This member is required.
 	PolicyId *string
+
 	// The AWS account that owns the resources that you want to get the details for.
+	//
+	// This member is required.
 	MemberAccount *string
 }
 
 type GetComplianceDetailOutput struct {
+
 	// Information about the resources and the policy that you specified in the
 	// GetComplianceDetail request.
 	PolicyComplianceDetail *types.PolicyComplianceDetail

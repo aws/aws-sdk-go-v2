@@ -88,10 +88,12 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 
 // Represents the input for a request action.
 type CreateFleetInput struct {
+
 	// A unique identifier for the AWS account with the VPC that you want to peer your
 	// Amazon GameLift fleet with. You can find your account ID in the AWS Management
 	// Console under account settings.
 	PeerVpcAwsAccountId *string
+
 	// Instructions for launching server processes on each instance in the fleet.
 	// Server processes run either a custom game build executable or a Realtime script.
 	// The runtime configuration defines the server executables or launch script file,
@@ -105,6 +107,7 @@ type CreateFleetInput struct {
 	// ServerLaunchParameters are defined. Runtime configuration replaced these
 	// parameters, but fleets that use them will continue to work.
 	RuntimeConfiguration *types.RuntimeConfiguration
+
 	// A unique identifier for an AWS IAM role that manages access to your AWS
 	// services. With an instance role ARN set, any application that runs on an
 	// instance in this fleet can assume the role, including install scripts, server
@@ -114,6 +117,7 @@ type CreateFleetInput struct {
 	// servers at  Access external resources from a game server
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
 	InstanceRoleArn *string
+
 	// A list of labels to assign to the new fleet resource. Tags are developer-defined
 	// key-value pairs. Tagging AWS resources are useful for resource management,
 	// access management and cost allocation. For more information, see  Tagging AWS
@@ -123,19 +127,23 @@ type CreateFleetInput struct {
 	// The maximum tag limit may be lower than stated. See the AWS General Reference
 	// for actual tagging limits.
 	Tags []*types.Tag
+
 	// The name of an Amazon CloudWatch metric group to add this fleet to. A metric
 	// group aggregates the metrics for all fleets in the group. Specify an existing
 	// metric group name, or provide a new name to create a new metric group. A fleet
 	// can only be included in one metric group at a time.
 	MetricGroups []*string
+
 	// A policy that limits the number of game sessions an individual player can create
 	// over a span of time for this fleet.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
+
 	// A unique identifier for a build to be deployed on the new fleet. You can use
 	// either the build ID or ARN value. The custom game server build must have been
 	// successfully uploaded to Amazon GameLift and be in a READY status. This fleet
 	// setting cannot be changed once the fleet is created.
 	BuildId *string
+
 	// A game session protection policy to apply to all instances in this fleet. If
 	// this parameter is not set, instances in this fleet default to no protection. You
 	// can change a fleet's protection policy using UpdateFleetAttributes (), but this
@@ -149,11 +157,13 @@ type CreateFleetInput struct {
 	// * FullProtection - If the game session is in an ACTIVE status, it cannot be
 	// terminated during a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
+
 	// A unique identifier for a Realtime script to be deployed on the new fleet. You
 	// can use either the script ID or ARN value. The Realtime script must have been
 	// successfully uploaded to Amazon GameLift. This fleet setting cannot be changed
 	// once the fleet is created.
 	ScriptId *string
+
 	// Range of IP addresses and port settings that permit inbound traffic to access
 	// game sessions that are running on the fleet. For fleets using a custom game
 	// build, this parameter is required before game sessions running on the fleet can
@@ -161,24 +171,31 @@ type CreateFleetInput struct {
 	// sets TCP and UDP ranges for use by the Realtime servers. You can specify
 	// multiple permission settings or add more by updating the fleet.
 	EC2InboundPermissions []*types.IpPermission
+
 	// The name of an EC2 instance type that is supported in Amazon GameLift. A fleet
 	// instance type determines the computing resources of each instance in the fleet,
 	// including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
+	//
+	// This member is required.
 	EC2InstanceType types.EC2InstanceType
+
 	// A human-readable description of a fleet.
 	Description *string
+
 	// This parameter is no longer used. Instead, specify server launch parameters in
 	// the RuntimeConfiguration parameter. (Requests that specify a server launch path
 	// and launch parameters instead of a runtime configuration will continue to work.)
 	ServerLaunchParameters *string
+
 	// Indicates whether to use On-Demand instances or Spot instances for this fleet.
 	// If empty, the default is ON_DEMAND. Both categories of instances use identical
 	// hardware and configurations based on the instance type selected for this fleet.
 	// Learn more about  On-Demand versus Spot Instances
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot).
 	FleetType types.FleetType
+
 	// Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS
 	// certificates are used for encrypting traffic between game clients and game
 	// servers running on GameLift. If this parameter is not specified, the default
@@ -197,19 +214,25 @@ type CreateFleetInput struct {
 	//     * DISABLED - (default) Do not generate a TLS/SSL
 	// certificate for this fleet.
 	CertificateConfiguration *types.CertificateConfiguration
+
 	// This parameter is no longer used. Instead, specify a server launch path using
 	// the RuntimeConfiguration parameter. Requests that specify a server launch path
 	// and launch parameters instead of a runtime configuration will continue to work.
 	ServerLaunchPath *string
+
 	// A descriptive label that is associated with a fleet. Fleet names do not need to
 	// be unique.
+	//
+	// This member is required.
 	Name *string
+
 	// This parameter is no longer used. Instead, to specify where Amazon GameLift
 	// should store log files once a server process shuts down, use the Amazon GameLift
 	// server API ProcessReady() and specify one or more directory paths in
 	// logParameters. See more information in the Server API Reference
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process).
 	LogPaths []*string
+
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
 	// GameLift fleet. The VPC must be in the same Region as your fleet. To look up a
 	// VPC ID, use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the AWS
@@ -221,6 +244,7 @@ type CreateFleetInput struct {
 
 // Represents the returned data in response to a request action.
 type CreateFleetOutput struct {
+
 	// Properties for the newly created fleet.
 	FleetAttributes *types.FleetAttributes
 

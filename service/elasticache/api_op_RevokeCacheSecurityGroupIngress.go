@@ -58,17 +58,27 @@ func (c *Client) RevokeCacheSecurityGroupIngress(ctx context.Context, params *Re
 
 // Represents the input of a RevokeCacheSecurityGroupIngress operation.
 type RevokeCacheSecurityGroupIngressInput struct {
+
 	// The name of the cache security group to revoke ingress from.
+	//
+	// This member is required.
 	CacheSecurityGroupName *string
+
 	// The name of the Amazon EC2 security group to revoke access from.
+	//
+	// This member is required.
 	EC2SecurityGroupName *string
+
 	// The AWS account number of the Amazon EC2 security group owner. Note that this is
 	// not the same thing as an AWS access key ID - you must provide a valid AWS
 	// account number for this parameter.
+	//
+	// This member is required.
 	EC2SecurityGroupOwnerId *string
 }
 
 type RevokeCacheSecurityGroupIngressOutput struct {
+
 	// Represents the output of one of the following operations:
 	//
 	//     *

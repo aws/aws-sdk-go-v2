@@ -62,39 +62,50 @@ func (c *Client) CreateLaunchTemplateVersion(ctx context.Context, params *Create
 }
 
 type CreateLaunchTemplateVersionInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The version number of the launch template version on which to base the new
 	// version. The new version inherits the same launch parameters as the source
 	// version, except for parameters that you specify in LaunchTemplateData. Snapshots
 	// applied to the block device mapping are ignored when creating a new version
 	// unless they are explicitly included.
 	SourceVersion *string
+
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	// Constraint: Maximum 128 ASCII characters.
 	ClientToken *string
+
 	// The name of the launch template. You must specify either the launch template ID
 	// or launch template name in the request.
 	LaunchTemplateName *string
+
 	// The information for the launch template.
+	//
+	// This member is required.
 	LaunchTemplateData *types.RequestLaunchTemplateData
+
 	// A description for the version of the launch template.
 	VersionDescription *string
+
 	// The ID of the launch template. You must specify either the launch template ID or
 	// launch template name in the request.
 	LaunchTemplateId *string
 }
 
 type CreateLaunchTemplateVersionOutput struct {
+
 	// If the new version of the launch template contains parameters or parameter
 	// combinations that are not valid, an error code and an error message are returned
 	// for each issue that's found.
 	Warning *types.ValidationWarning
+
 	// Information about the launch template version.
 	LaunchTemplateVersion *types.LaunchTemplateVersion
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteCorsConfiguration(ctx context.Context, params *DeleteCors
 }
 
 type DeleteCorsConfigurationInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 

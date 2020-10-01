@@ -60,14 +60,19 @@ func (c *Client) GetHostnameSuggestion(ctx context.Context, params *GetHostnameS
 }
 
 type GetHostnameSuggestionInput struct {
+
 	// The layer ID.
+	//
+	// This member is required.
 	LayerId *string
 }
 
 // Contains the response to a GetHostnameSuggestion request.
 type GetHostnameSuggestionOutput struct {
+
 	// The layer ID.
 	LayerId *string
+
 	// The generated host name.
 	Hostname *string
 

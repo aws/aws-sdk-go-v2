@@ -58,19 +58,25 @@ func (c *Client) UpdateEnrollmentStatus(ctx context.Context, params *UpdateEnrol
 }
 
 type UpdateEnrollmentStatusInput struct {
+
 	// The new enrollment status of the account. Accepted options are Active or
 	// Inactive. You will get an error if Pending or Failed are specified.
+	//
+	// This member is required.
 	Status types.Status
+
 	// Indicates whether to enroll member accounts of the organization if the your
 	// account is the master account of an organization.
 	IncludeMemberAccounts *bool
 }
 
 type UpdateEnrollmentStatusOutput struct {
+
 	// The reason for the enrollment status of the account. For example, an account
 	// might show a status of Pending because member accounts of an organization
 	// require more time to be enrolled in the service.
 	StatusReason *string
+
 	// The enrollment status of the account.
 	Status types.Status
 

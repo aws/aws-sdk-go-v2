@@ -57,16 +57,24 @@ func (c *Client) UpdateTeamMember(ctx context.Context, params *UpdateTeamMemberI
 }
 
 type UpdateTeamMemberInput struct {
+
 	// The ID of the project.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// The role assigned to the user in the project. Project roles have different
 	// levels of access. For more information, see Working with Teams
 	// (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
 	// in the AWS CodeStar User Guide.
 	ProjectRole *string
+
 	// The Amazon Resource Name (ARN) of the user for whom you want to change team
 	// membership attributes.
+	//
+	// This member is required.
 	UserArn *string
+
 	// Whether a team member is allowed to remotely access project resources using the
 	// SSH public key associated with the user's profile. Even if this is set to True,
 	// the user must associate a public key with their profile before the user can
@@ -75,11 +83,14 @@ type UpdateTeamMemberInput struct {
 }
 
 type UpdateTeamMemberOutput struct {
+
 	// The project role granted to the user.
 	ProjectRole *string
+
 	// Whether a team member is allowed to remotely access project resources using the
 	// SSH public key associated with the user's profile.
 	RemoteAccessAllowed *bool
+
 	// The Amazon Resource Name (ARN) of the user whose team membership attributes were
 	// updated.
 	UserArn *string

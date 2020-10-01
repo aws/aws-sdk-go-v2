@@ -59,7 +59,10 @@ func (c *Client) DeleteLexicon(ctx context.Context, params *DeleteLexiconInput, 
 }
 
 type DeleteLexiconInput struct {
+
 	// The name of the lexicon to delete. Must be an existing lexicon in the region.
+	//
+	// This member is required.
 	Name *string
 }
 

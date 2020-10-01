@@ -55,7 +55,10 @@ func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, 
 }
 
 type DeleteChannelInput struct {
+
 	// The ID of the Channel to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

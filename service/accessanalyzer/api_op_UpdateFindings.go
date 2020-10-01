@@ -59,16 +59,25 @@ func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput
 
 // Updates findings with the new values provided in the request.
 type UpdateFindingsInput struct {
+
 	// The ARN of the analyzer that generated the findings to update.
+	//
+	// This member is required.
 	AnalyzerArn *string
+
 	// The state represents the action to take to update the finding Status. Use
 	// ARCHIVE to change an Active finding to an Archived finding. Use ACTIVE to change
 	// an Archived finding to an Active finding.
+	//
+	// This member is required.
 	Status types.FindingStatusUpdate
+
 	// The IDs of the findings to update.
 	Ids []*string
+
 	// The ARN of the resource identified in the finding.
 	ResourceArn *string
+
 	// A client token.
 	ClientToken *string
 }

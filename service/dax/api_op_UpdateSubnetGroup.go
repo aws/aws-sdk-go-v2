@@ -56,15 +56,21 @@ func (c *Client) UpdateSubnetGroup(ctx context.Context, params *UpdateSubnetGrou
 }
 
 type UpdateSubnetGroupInput struct {
+
 	// A description of the subnet group.
 	Description *string
+
 	// A list of subnet IDs in the subnet group.
 	SubnetIds []*string
+
 	// The name of the subnet group.
+	//
+	// This member is required.
 	SubnetGroupName *string
 }
 
 type UpdateSubnetGroupOutput struct {
+
 	// The subnet group that has been modified.
 	SubnetGroup *types.SubnetGroup
 

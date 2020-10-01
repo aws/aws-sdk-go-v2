@@ -57,15 +57,23 @@ func (c *Client) AssociateTrialComponent(ctx context.Context, params *AssociateT
 }
 
 type AssociateTrialComponentInput struct {
+
 	// The name of the component to associated with the trial.
+	//
+	// This member is required.
 	TrialComponentName *string
+
 	// The name of the trial to associate with.
+	//
+	// This member is required.
 	TrialName *string
 }
 
 type AssociateTrialComponentOutput struct {
+
 	// The ARN of the trial component.
 	TrialComponentArn *string
+
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
 

@@ -72,8 +72,11 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 
 // Represents the input for a request action.
 type DeleteAliasInput struct {
+
 	// A unique identifier of the alias that you want to delete. You can use either the
 	// alias ID or ARN value.
+	//
+	// This member is required.
 	AliasId *string
 }
 

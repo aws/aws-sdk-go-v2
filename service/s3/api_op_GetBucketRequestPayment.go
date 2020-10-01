@@ -65,11 +65,15 @@ func (c *Client) GetBucketRequestPayment(ctx context.Context, params *GetBucketR
 }
 
 type GetBucketRequestPaymentInput struct {
+
 	// The name of the bucket for which to get the payment request configuration
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketRequestPaymentOutput struct {
+
 	// Specifies who pays for the download and request fees.
 	Payer types.Payer
 

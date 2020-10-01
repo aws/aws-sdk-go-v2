@@ -57,11 +57,16 @@ func (c *Client) ListUserPoolClients(ctx context.Context, params *ListUserPoolCl
 
 // Represents the request to list the user pool clients.
 type ListUserPoolClientsInput struct {
+
 	// The user pool ID for the user pool where you want to list user pool clients.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The maximum number of results you want the request to return when listing the
 	// user pool clients.
 	MaxResults *int32
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
@@ -69,9 +74,11 @@ type ListUserPoolClientsInput struct {
 
 // Represents the response from the server that lists user pool clients.
 type ListUserPoolClientsOutput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The user pool clients in the response that lists user pool clients.
 	UserPoolClients []*types.UserPoolClientDescription
 

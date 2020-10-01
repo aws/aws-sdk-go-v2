@@ -55,13 +55,18 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 }
 
 type CreateApplicationInput struct {
+
 	// Name of the application to be created.
+	//
+	// This member is required.
 	Name *string
+
 	// Description of the application to be created.
 	Description *string
 }
 
 type CreateApplicationOutput struct {
+
 	// Configuration ID of an application to be created.
 	ConfigurationId *string
 

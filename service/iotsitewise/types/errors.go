@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Your request has conflicting operations. This can occur if you're trying to
@@ -28,24 +27,6 @@ func (e *ConflictingOperationException) ErrorMessage() string {
 }
 func (e *ConflictingOperationException) ErrorCode() string             { return "ConflictingOperationException" }
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictingOperationException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ConflictingOperationException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ConflictingOperationException) GetResourceArn() string {
-	return ptr.ToString(e.ResourceArn)
-}
-func (e *ConflictingOperationException) HasResourceArn() bool {
-	return e.ResourceArn != nil
-}
-func (e *ConflictingOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictingOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS IoT SiteWise can't process your request right now. Try again later.
 type InternalFailureException struct {
@@ -63,12 +44,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request isn't valid. This can occur if your request contains malformed JSON
 // or unsupported characters. Check your request and try again.
@@ -87,12 +62,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit for a resource. For example, this can occur if you're
 // trying to associate more than the allowed number of child assets or attempting
@@ -115,12 +84,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -141,24 +104,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceAlreadyExistsException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ResourceAlreadyExistsException) GetResourceArn() string {
-	return ptr.ToString(e.ResourceArn)
-}
-func (e *ResourceAlreadyExistsException) HasResourceArn() bool {
-	return e.ResourceArn != nil
-}
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource can't be found.
 type ResourceNotFoundException struct {
@@ -176,12 +121,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested service is unavailable.
 type ServiceUnavailableException struct {
@@ -199,12 +138,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request exceeded a rate limit. For example, you might have exceeded the
 // number of AWS IoT SiteWise assets that can be created per second, the allowed
@@ -226,12 +159,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit for the number of tags allowed for a resource. For more
 // information, see Tag naming limits and requirements
@@ -254,15 +181,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyTagsException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *TooManyTagsException) HasResourceName() bool {
-	return e.ResourceName != nil
-}

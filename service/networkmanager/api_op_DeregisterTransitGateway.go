@@ -58,13 +58,20 @@ func (c *Client) DeregisterTransitGateway(ctx context.Context, params *Deregiste
 }
 
 type DeregisterTransitGatewayInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The Amazon Resource Name (ARN) of the transit gateway.
+	//
+	// This member is required.
 	TransitGatewayArn *string
 }
 
 type DeregisterTransitGatewayOutput struct {
+
 	// The transit gateway registration information.
 	TransitGatewayRegistration *types.TransitGatewayRegistration
 

@@ -63,15 +63,20 @@ func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourc
 }
 
 type ListResourcesForWebACLInput struct {
+
 	// The unique identifier (ID) of the web ACL for which to list the associated
 	// resources.
+	//
+	// This member is required.
 	WebACLId *string
+
 	// The type of resource to list, either an application load balancer or Amazon API
 	// Gateway.
 	ResourceType types.ResourceType
 }
 
 type ListResourcesForWebACLOutput struct {
+
 	// An array of ARNs (Amazon Resource Names) of the resources associated with the
 	// specified web ACL. An array with zero elements is returned if there are no
 	// resources associated with the web ACL.

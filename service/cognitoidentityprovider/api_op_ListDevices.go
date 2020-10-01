@@ -57,18 +57,25 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 
 // Represents the request to list the devices.
 type ListDevicesInput struct {
+
 	// The pagination token for the list request.
 	PaginationToken *string
+
 	// The limit of the device request.
 	Limit *int32
+
 	// The access tokens for the request to list devices.
+	//
+	// This member is required.
 	AccessToken *string
 }
 
 // Represents the response to list devices.
 type ListDevicesOutput struct {
+
 	// The pagination token for the list device response.
 	PaginationToken *string
+
 	// The devices returned in the list devices response.
 	Devices []*types.DeviceType
 

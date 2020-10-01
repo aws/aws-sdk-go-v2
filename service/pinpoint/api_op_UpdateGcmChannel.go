@@ -57,20 +57,29 @@ func (c *Client) UpdateGcmChannel(ctx context.Context, params *UpdateGcmChannelI
 }
 
 type UpdateGcmChannelInput struct {
+
 	// Specifies the status and settings of the GCM channel for an application. This
 	// channel enables Amazon Pinpoint to send push notifications through the Firebase
 	// Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
+	//
+	// This member is required.
 	GCMChannelRequest *types.GCMChannelRequest
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type UpdateGcmChannelOutput struct {
+
 	// Provides information about the status and settings of the GCM channel for an
 	// application. The GCM channel enables Amazon Pinpoint to send push notifications
 	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
 	// (GCM), service.
+	//
+	// This member is required.
 	GCMChannelResponse *types.GCMChannelResponse
 
 	// Metadata pertaining to the operation's result.

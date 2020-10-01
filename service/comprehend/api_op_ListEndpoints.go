@@ -55,10 +55,13 @@ func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, 
 }
 
 type ListEndpointsInput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
 	// Filters the endpoints that are returned. You can filter endpoints on their name,
 	// model, status, or the date and time that they were created. You can only set one
 	// filter at a time.
@@ -66,8 +69,10 @@ type ListEndpointsInput struct {
 }
 
 type ListEndpointsOutput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// Displays a list of endpoint properties being retrieved by the service in
 	// response to the request.
 	EndpointPropertiesList []*types.EndpointProperties

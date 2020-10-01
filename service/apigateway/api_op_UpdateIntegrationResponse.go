@@ -59,18 +59,34 @@ func (c *Client) UpdateIntegrationResponse(ctx context.Context, params *UpdateIn
 // Represents an update integration response request.
 type UpdateIntegrationResponseInput struct {
 	Template *bool
+
 	// [Required] Specifies an update integration response request's status code.
+	//
+	// This member is required.
 	StatusCode *string
+
 	// [Required] Specifies an update integration response request's HTTP method.
+	//
+	// This member is required.
 	HttpMethod *string
+
 	// [Required] Specifies an update integration response request's resource
 	// identifier.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
-	Name             *string
-	Title            *string
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
+
+	Title *string
+
 	TemplateSkipList []*string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -81,6 +97,7 @@ type UpdateIntegrationResponseInput struct {
 // back-end response. Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateIntegrationResponseOutput struct {
+
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -93,13 +110,16 @@ type UpdateIntegrationResponseOutput struct {
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
 	ResponseParameters map[string]*string
+
 	// Specifies the templates used to transform the integration response body.
 	// Response templates are represented as a key/value map, with a content-type as
 	// the key and a template as the value.
 	ResponseTemplates map[string]*string
+
 	// Specifies the status code that is used to map the integration response to an
 	// existing MethodResponse ().
 	StatusCode *string
+
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success
 	// response returns nothing and the error response returns some string, you could
@@ -108,6 +128,7 @@ type UpdateIntegrationResponseOutput struct {
 	// end is an AWS Lambda function, the AWS Lambda function error header is matched.
 	// For all other HTTP and AWS back ends, the HTTP status code is matched.
 	SelectionPattern *string
+
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:

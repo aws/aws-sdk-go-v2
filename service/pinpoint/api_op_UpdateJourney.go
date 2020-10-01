@@ -56,18 +56,30 @@ func (c *Client) UpdateJourney(ctx context.Context, params *UpdateJourneyInput, 
 }
 
 type UpdateJourneyInput struct {
+
 	// Specifies the configuration and other settings for a journey.
+	//
+	// This member is required.
 	WriteJourneyRequest *types.WriteJourneyRequest
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The unique identifier for the journey.
+	//
+	// This member is required.
 	JourneyId *string
 }
 
 type UpdateJourneyOutput struct {
+
 	// Provides information about the status, configuration, and other settings for a
 	// journey.
+	//
+	// This member is required.
 	JourneyResponse *types.JourneyResponse
 
 	// Metadata pertaining to the operation's result.

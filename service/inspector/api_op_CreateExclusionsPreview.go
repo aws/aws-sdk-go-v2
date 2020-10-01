@@ -57,15 +57,21 @@ func (c *Client) CreateExclusionsPreview(ctx context.Context, params *CreateExcl
 }
 
 type CreateExclusionsPreviewInput struct {
+
 	// The ARN that specifies the assessment template for which you want to create an
 	// exclusions preview.
+	//
+	// This member is required.
 	AssessmentTemplateArn *string
 }
 
 type CreateExclusionsPreviewOutput struct {
+
 	// Specifies the unique identifier of the requested exclusions preview. You can use
 	// the unique identifier to retrieve the exclusions preview when running the
 	// GetExclusionsPreview API.
+	//
+	// This member is required.
 	PreviewToken *string
 
 	// Metadata pertaining to the operation's result.

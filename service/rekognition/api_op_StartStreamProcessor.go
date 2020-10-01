@@ -58,7 +58,10 @@ func (c *Client) StartStreamProcessor(ctx context.Context, params *StartStreamPr
 }
 
 type StartStreamProcessorInput struct {
+
 	// The name of the stream processor to start processing.
+	//
+	// This member is required.
 	Name *string
 }
 

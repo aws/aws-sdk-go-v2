@@ -59,8 +59,12 @@ func (c *Client) GetInstancesHealthStatus(ctx context.Context, params *GetInstan
 }
 
 type GetInstancesHealthStatusInput struct {
+
 	// The ID of the service that the instance is associated with.
+	//
+	// This member is required.
 	ServiceId *string
+
 	// An array that contains the IDs of all the instances that you want to get the
 	// health status for. If you omit Instances, AWS Cloud Map returns the health
 	// status for all the instances that are associated with the specified service. To
@@ -69,11 +73,13 @@ type GetInstancesHealthStatusInput struct {
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
 	// request.
 	Instances []*string
+
 	// For the first GetInstancesHealthStatus request, omit this value. If more than
 	// MaxResults instances match the specified criteria, you can submit another
 	// GetInstancesHealthStatus request to get the next group of results. Specify the
 	// value of NextToken from the previous response in the next request.
 	NextToken *string
+
 	// The maximum number of instances that you want AWS Cloud Map to return in the
 	// response to a GetInstancesHealthStatus request. If you don't specify a value for
 	// MaxResults, AWS Cloud Map returns up to 100 instances.
@@ -81,9 +87,11 @@ type GetInstancesHealthStatusInput struct {
 }
 
 type GetInstancesHealthStatusOutput struct {
+
 	// A complex type that contains the IDs and the health status of the instances that
 	// you specified in the GetInstancesHealthStatus request.
 	Status map[string]types.HealthStatus
+
 	// If more than MaxResults instances match the specified criteria, you can submit
 	// another GetInstancesHealthStatus request to get the next group of results.
 	// Specify the value of NextToken from the previous response in the next request.

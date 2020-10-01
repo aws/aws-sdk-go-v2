@@ -56,21 +56,26 @@ func (c *Client) DescribeNetworkInterfaces(ctx context.Context, params *Describe
 
 // Contains the parameters for DescribeNetworkInterfaces.
 type DescribeNetworkInterfacesInput struct {
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// One or more network interface IDs. Default: Describes all your network
 	// interfaces.
 	NetworkInterfaceIds []*string
+
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	// You cannot specify this parameter and the network interface IDs parameter in the
 	// same request.
 	MaxResults *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * addresses.private-ip-address - The private IPv4
@@ -196,8 +201,10 @@ type DescribeNetworkInterfacesInput struct {
 
 // Contains the output of DescribeNetworkInterfaces.
 type DescribeNetworkInterfacesOutput struct {
+
 	// Information about one or more network interfaces.
 	NetworkInterfaces []*types.NetworkInterface
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

@@ -56,10 +56,13 @@ func (c *Client) ListProvisionedProductPlans(ctx context.Context, params *ListPr
 }
 
 type ListProvisionedProductPlansInput struct {
+
 	// The access level to use to obtain results. The default is User.
 	AccessLevelFilter *types.AccessLevelFilter
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -69,17 +72,21 @@ type ListProvisionedProductPlansInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
 	// The product identifier.
 	ProvisionProductId *string
 }
 
 type ListProvisionedProductPlansOutput struct {
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Information about the plans.
 	ProvisionedProductPlans []*types.ProvisionedProductPlanSummary
 

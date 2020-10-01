@@ -61,12 +61,15 @@ func (c *Client) DescribeAvailabilityZones(ctx context.Context, params *Describe
 }
 
 type DescribeAvailabilityZonesInput struct {
+
 	// Include all Availability Zones and Local Zones regardless of your opt in status.
 	// If you do not use this parameter, the results include only the zones for the
 	// Regions where you have chosen the option to opt in.
 	AllAvailabilityZones *bool
+
 	// The names of the Zones.
 	ZoneNames []*string
+
 	// The filters.
 	//
 	//     * group-name - For Availability Zones, use the Region name.
@@ -101,16 +104,19 @@ type DescribeAvailabilityZonesInput struct {
 	//
 	//     * zone-type - The type of zone, for example, local-zone.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IDs of the Zones.
 	ZoneIds []*string
 }
 
 type DescribeAvailabilityZonesOutput struct {
+
 	// Information about the Zones.
 	AvailabilityZones []*types.AvailabilityZone
 

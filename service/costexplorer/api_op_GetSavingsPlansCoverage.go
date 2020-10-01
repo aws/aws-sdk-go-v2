@@ -72,10 +72,14 @@ func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavings
 }
 
 type GetSavingsPlansCoverageInput struct {
+
 	// The time period that you want the usage and costs for. The Start date must be
 	// within 13 months. The End date must be after the Start date, and before the
 	// current date. Future dates can't be used as an End date.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// Filters Savings Plans coverage data by dimensions. You can filter data for
 	// Savings Plans usage with the following dimensions:
 	//
@@ -95,18 +99,23 @@ type GetSavingsPlansCoverageInput struct {
 	// If there are multiple values for a dimension, they are OR'd together. Cost
 	// category is also supported.
 	Filter *types.Expression
+
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
 	// page size.
 	NextToken *string
+
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
 	MaxResults *int32
+
 	// You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
 	GroupBy []*types.GroupDefinition
+
 	// The measurement that you want your Savings Plans coverage reported in. The only
 	// valid value is SpendCoveredBySavingsPlans.
 	Metrics []*string
+
 	// The granularity of the Amazon Web Services cost data for your Savings Plans.
 	// Granularity can't be set if GroupBy is set. The GetSavingsPlansCoverage
 	// operation supports only DAILY and MONTHLY granularities.
@@ -114,8 +123,12 @@ type GetSavingsPlansCoverageInput struct {
 }
 
 type GetSavingsPlansCoverageOutput struct {
+
 	// The amount of spend that your Savings Plans covered.
+	//
+	// This member is required.
 	SavingsPlansCoverages []*types.SavingsPlansCoverage
+
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
 	// page size.

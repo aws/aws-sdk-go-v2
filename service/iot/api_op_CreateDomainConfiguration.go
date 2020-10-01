@@ -57,23 +57,32 @@ func (c *Client) CreateDomainConfiguration(ctx context.Context, params *CreateDo
 }
 
 type CreateDomainConfigurationInput struct {
+
 	// The name of the domain configuration. This value must be unique to a region.
+	//
+	// This member is required.
 	DomainConfigurationName *string
+
 	// The name of the domain.
 	DomainName *string
+
 	// The certificate used to validate the server certificate and prove domain name
 	// ownership. This certificate must be signed by a public certificate authority.
 	// This value is not required for AWS-managed domains.
 	ValidationCertificateArn *string
+
 	// The ARNs of the certificates that AWS IoT passes to the device during the TLS
 	// handshake. Currently you can specify only one certificate ARN. This value is not
 	// required for AWS-managed domains.
 	ServerCertificateArns []*string
+
 	// An object that specifies the authorization service for a domain.
 	AuthorizerConfig *types.AuthorizerConfig
+
 	// The type of service delivered by the endpoint. AWS IoT Core currently supports
 	// only the DATA service type.
 	ServiceType types.ServiceType
+
 	// Metadata which can be used to manage the domain configuration. For URI Request
 	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
@@ -82,8 +91,10 @@ type CreateDomainConfigurationInput struct {
 }
 
 type CreateDomainConfigurationOutput struct {
+
 	// The name of the domain configuration.
 	DomainConfigurationName *string
+
 	// The ARN of the domain configuration.
 	DomainConfigurationArn *string
 

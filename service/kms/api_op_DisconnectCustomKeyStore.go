@@ -72,8 +72,11 @@ func (c *Client) DisconnectCustomKeyStore(ctx context.Context, params *Disconnec
 }
 
 type DisconnectCustomKeyStoreInput struct {
+
 	// Enter the ID of the custom key store you want to disconnect. To find the ID of a
 	// custom key store, use the DescribeCustomKeyStores () operation.
+	//
+	// This member is required.
 	CustomKeyStoreId *string
 }
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteCodeRepository(ctx context.Context, params *DeleteCodeRep
 }
 
 type DeleteCodeRepositoryInput struct {
+
 	// The name of the Git repository to delete.
+	//
+	// This member is required.
 	CodeRepositoryName *string
 }
 

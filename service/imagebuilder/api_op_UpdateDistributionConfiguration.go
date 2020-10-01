@@ -59,23 +59,36 @@ func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *Up
 }
 
 type UpdateDistributionConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the distribution configuration that you want
 	// to update.
+	//
+	// This member is required.
 	DistributionConfigurationArn *string
+
 	// The description of the distribution configuration.
 	Description *string
+
 	// The distributions of the distribution configuration.
+	//
+	// This member is required.
 	Distributions []*types.Distribution
+
 	// The idempotency token of the distribution configuration.
+	//
+	// This member is required.
 	ClientToken *string
 }
 
 type UpdateDistributionConfigurationOutput struct {
+
 	// The Amazon Resource Name (ARN) of the distribution configuration that was
 	// updated by this request.
 	DistributionConfigurationArn *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 

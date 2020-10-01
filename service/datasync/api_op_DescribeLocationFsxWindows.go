@@ -57,24 +57,33 @@ func (c *Client) DescribeLocationFsxWindows(ctx context.Context, params *Describ
 }
 
 type DescribeLocationFsxWindowsInput struct {
+
 	// The Amazon Resource Name (ARN) of the FSx for Windows location to describe.
+	//
+	// This member is required.
 	LocationArn *string
 }
 
 type DescribeLocationFsxWindowsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the FSx for Windows location that was
 	// described.
 	LocationArn *string
+
 	// The user who has the permissions to access files and folders in the FSx for
 	// Windows file system.
 	User *string
+
 	// The name of the Windows domain that the FSx for Windows server belongs to.
 	Domain *string
+
 	// The Amazon Resource Names (ARNs) of the security groups that are configured for
 	// the FSx for Windows file system.
 	SecurityGroupArns []*string
+
 	// The time that the FSx for Windows location was created.
 	CreationTime *time.Time
+
 	// The URL of the FSx for Windows location that was described.
 	LocationUri *string
 

@@ -55,8 +55,12 @@ func (c *Client) UpdateCrawlerSchedule(ctx context.Context, params *UpdateCrawle
 }
 
 type UpdateCrawlerScheduleInput struct {
+
 	// The name of the crawler whose schedule to update.
+	//
+	// This member is required.
 	CrawlerName *string
+
 	// The updated cron expression used to specify the schedule (see Time-Based
 	// Schedules for Jobs and Crawlers
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).

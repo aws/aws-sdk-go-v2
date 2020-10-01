@@ -55,6 +55,7 @@ func (c *Client) ListBuilds(ctx context.Context, params *ListBuildsInput, optFns
 }
 
 type ListBuildsInput struct {
+
 	// The order to list build IDs. Valid values include:
 	//
 	//     * ASCENDING: List the
@@ -63,6 +64,7 @@ type ListBuildsInput struct {
 	//     * DESCENDING: List the build IDs
 	// in descending order by build ID.
 	SortOrder types.SortOrderType
+
 	// During a previous call, if there are more than 100 items in the list, only the
 	// first 100 items are returned, along with a unique string called a nextToken. To
 	// get the next batch of items in the list, call this operation again, adding the
@@ -73,8 +75,10 @@ type ListBuildsInput struct {
 }
 
 type ListBuildsOutput struct {
+
 	// A list of build IDs, with each build ID representing a single build.
 	Ids []*string
+
 	// If there are more than 100 items in the list, only the first 100 items are
 	// returned, along with a unique string called a nextToken. To get the next batch
 	// of items in the list, call this operation again, adding the next token to the

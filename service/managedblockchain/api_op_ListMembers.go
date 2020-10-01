@@ -57,26 +57,36 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 }
 
 type ListMembersInput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// The unique identifier of the network for which to list members.
+	//
+	// This member is required.
 	NetworkId *string
+
 	// An optional Boolean value. If provided, the request is limited either to members
 	// that the current AWS account owns (true) or that other AWS accounts own (false).
 	// If omitted, all members are listed.
 	IsOwned *bool
+
 	// The optional name of the member to list.
 	Name *string
+
 	// The maximum number of members to return in the request.
 	MaxResults *int32
+
 	// An optional status specifier. If provided, only members currently in this status
 	// are listed.
 	Status types.MemberStatus
 }
 
 type ListMembersOutput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// An array of MemberSummary objects. Each object contains details about a network
 	// member.
 	Members []*types.MemberSummary

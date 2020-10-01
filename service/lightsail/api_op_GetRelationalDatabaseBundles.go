@@ -57,6 +57,7 @@ func (c *Client) GetRelationalDatabaseBundles(ctx context.Context, params *GetRe
 }
 
 type GetRelationalDatabaseBundlesInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetRelationalDatabaseBundles request. If your
 	// results are paginated, the response will return a next page token that you can
@@ -65,11 +66,13 @@ type GetRelationalDatabaseBundlesInput struct {
 }
 
 type GetRelationalDatabaseBundlesOutput struct {
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetRelationalDatabaseBundles request and
 	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
+
 	// An object describing the result of your get relational database bundles request.
 	Bundles []*types.RelationalDatabaseBundle
 

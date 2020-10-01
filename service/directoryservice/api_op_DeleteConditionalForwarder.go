@@ -56,10 +56,16 @@ func (c *Client) DeleteConditionalForwarder(ctx context.Context, params *DeleteC
 
 // Deletes a conditional forwarder.
 type DeleteConditionalForwarderInput struct {
+
 	// The directory ID for which you are deleting the conditional forwarder.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The fully qualified domain name (FQDN) of the remote domain with which you are
 	// deleting the conditional forwarder.
+	//
+	// This member is required.
 	RemoteDomainName *string
 }
 

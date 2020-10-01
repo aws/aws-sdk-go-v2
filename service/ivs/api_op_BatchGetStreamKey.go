@@ -56,13 +56,17 @@ func (c *Client) BatchGetStreamKey(ctx context.Context, params *BatchGetStreamKe
 }
 
 type BatchGetStreamKeyInput struct {
+
 	// Array of ARNs, one per channel.
+	//
+	// This member is required.
 	Arns []*string
 }
 
 type BatchGetStreamKeyOutput struct {
 	StreamKeys []*types.StreamKey
-	Errors     []*types.BatchError
+
+	Errors []*types.BatchError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

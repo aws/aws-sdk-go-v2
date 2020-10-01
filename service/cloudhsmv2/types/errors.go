@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The request was rejected because the requester does not have permission to
@@ -25,12 +24,6 @@ func (e *CloudHsmAccessDeniedException) ErrorMessage() string {
 }
 func (e *CloudHsmAccessDeniedException) ErrorCode() string             { return "CloudHsmAccessDeniedException" }
 func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmAccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmAccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because of an AWS CloudHSM internal failure. The
 // request can be retried.
@@ -51,12 +44,6 @@ func (e *CloudHsmInternalFailureException) ErrorCode() string {
 	return "CloudHsmInternalFailureException"
 }
 func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *CloudHsmInternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmInternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because it is not a valid request.
 type CloudHsmInvalidRequestException struct {
@@ -76,12 +63,6 @@ func (e *CloudHsmInvalidRequestException) ErrorCode() string {
 	return "CloudHsmInvalidRequestException"
 }
 func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmInvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmInvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because it refers to a resource that cannot be found.
 type CloudHsmResourceNotFoundException struct {
@@ -101,12 +82,6 @@ func (e *CloudHsmResourceNotFoundException) ErrorCode() string {
 	return "CloudHsmResourceNotFoundException"
 }
 func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because an error occurred.
 type CloudHsmServiceException struct {
@@ -124,12 +99,6 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 }
 func (e *CloudHsmServiceException) ErrorCode() string             { return "CloudHsmServiceException" }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because of a tagging failure. Verify the tag conditions
 // in all applicable policies, and then retry the request.
@@ -148,9 +117,3 @@ func (e *CloudHsmTagException) ErrorMessage() string {
 }
 func (e *CloudHsmTagException) ErrorCode() string             { return "CloudHsmTagException" }
 func (e *CloudHsmTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmTagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmTagException) HasMessage() bool {
-	return e.Message != nil
-}

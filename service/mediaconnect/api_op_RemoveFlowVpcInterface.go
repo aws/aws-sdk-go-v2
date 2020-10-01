@@ -58,17 +58,26 @@ func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowV
 }
 
 type RemoveFlowVpcInterfaceInput struct {
+
 	// The flow that you want to remove a VPC interface from.
+	//
+	// This member is required.
 	FlowArn *string
+
 	// The name of the VPC interface that you want to remove.
+	//
+	// This member is required.
 	VpcInterfaceName *string
 }
 
 type RemoveFlowVpcInterfaceOutput struct {
+
 	// The ARN of the flow that is associated with the VPC interface you removed.
 	FlowArn *string
+
 	// The name of the VPC interface that was removed.
 	VpcInterfaceName *string
+
 	// IDs of network interfaces associated with the removed VPC interface that Media
 	// Connect was unable to remove.
 	NonDeletedNetworkInterfaceIds []*string

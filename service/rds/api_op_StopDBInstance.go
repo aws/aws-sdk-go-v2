@@ -64,14 +64,19 @@ func (c *Client) StopDBInstance(ctx context.Context, params *StopDBInstanceInput
 }
 
 type StopDBInstanceInput struct {
+
 	// The user-supplied instance identifier.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// The user-supplied instance identifier of the DB Snapshot created immediately
 	// before the DB instance is stopped.
 	DBSnapshotIdentifier *string
 }
 
 type StopDBInstanceOutput struct {
+
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
 	// response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance

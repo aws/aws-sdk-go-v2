@@ -55,9 +55,15 @@ func (c *Client) AssociateDeviceWithNetworkProfile(ctx context.Context, params *
 }
 
 type AssociateDeviceWithNetworkProfileInput struct {
+
 	// The ARN of the network profile to associate with a device.
+	//
+	// This member is required.
 	NetworkProfileArn *string
+
 	// The device ARN.
+	//
+	// This member is required.
 	DeviceArn *string
 }
 

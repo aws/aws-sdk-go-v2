@@ -61,23 +61,41 @@ func (c *Client) CreateCustomVerificationEmailTemplate(ctx context.Context, para
 
 // Represents a request to create a custom verification email template.
 type CreateCustomVerificationEmailTemplateInput struct {
+
 	// The content of the custom verification email. The total size of the email must
 	// be less than 10 MB. The message body may contain HTML, with some limitations.
 	// For more information, see Custom Verification Email Frequently Asked Questions
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq)
 	// in the Amazon SES Developer Guide.
+	//
+	// This member is required.
 	TemplateContent *string
+
 	// The subject line of the custom verification email.
+	//
+	// This member is required.
 	TemplateSubject *string
+
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is not successfully verified.
+	//
+	// This member is required.
 	FailureRedirectionURL *string
+
 	// The name of the custom verification email template.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// The email address that the custom verification email is sent from.
+	//
+	// This member is required.
 	FromEmailAddress *string
+
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is successfully verified.
+	//
+	// This member is required.
 	SuccessRedirectionURL *string
 }
 

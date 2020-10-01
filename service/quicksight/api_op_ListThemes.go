@@ -56,12 +56,18 @@ func (c *Client) ListThemes(ctx context.Context, params *ListThemesInput, optFns
 }
 
 type ListThemesInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
 	// The ID of the AWS account that contains the themes that you're listing.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The type of themes that you want to list. Valid options include the following:
 	//
 	//
@@ -76,10 +82,13 @@ type ListThemesInput struct {
 }
 
 type ListThemesOutput struct {
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// Information about the themes in the list.
 	ThemeSummaryList []*types.ThemeSummary
 

@@ -73,8 +73,11 @@ func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optF
 
 // Represents the input for a request action.
 type DeleteBuildInput struct {
+
 	// A unique identifier for a build to delete. You can use either the build ID or
 	// ARN value.
+	//
+	// This member is required.
 	BuildId *string
 }
 

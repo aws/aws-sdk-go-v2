@@ -57,22 +57,30 @@ func (c *Client) ListPolicyPrincipals(ctx context.Context, params *ListPolicyPri
 
 // The input for the ListPolicyPrincipals operation.
 type ListPolicyPrincipalsInput struct {
+
 	// The result page size.
 	PageSize *int32
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// Specifies the order for results. If true, the results are returned in ascending
 	// creation order.
 	AscendingOrder *bool
+
 	// The marker for the next set of results.
 	Marker *string
 }
 
 // The output from the ListPolicyPrincipals operation.
 type ListPolicyPrincipalsOutput struct {
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string
+
 	// The descriptions of the principals.
 	Principals []*string
 

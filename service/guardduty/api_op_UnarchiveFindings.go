@@ -55,9 +55,15 @@ func (c *Client) UnarchiveFindings(ctx context.Context, params *UnarchiveFinding
 }
 
 type UnarchiveFindingsInput struct {
+
 	// The IDs of the findings to unarchive.
+	//
+	// This member is required.
 	FindingIds []*string
+
 	// The ID of the detector associated with the findings to unarchive.
+	//
+	// This member is required.
 	DetectorId *string
 }
 

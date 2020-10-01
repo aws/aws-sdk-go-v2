@@ -56,20 +56,31 @@ func (c *Client) DecreaseNodeGroupsInGlobalReplicationGroup(ctx context.Context,
 }
 
 type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
+
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
 	// ElastiCache for Redis will attempt to remove all node groups listed by
 	// NodeGroupsToRemove from the cluster. </p>
 	GlobalNodeGroupsToRemove []*string
+
 	// The name of the Global Datastore
+	//
+	// This member is required.
 	GlobalReplicationGroupId *string
+
 	// Indicates that the shard reconfiguration process begins immediately. At present,
 	// the only permitted value for this parameter is true.
+	//
+	// This member is required.
 	ApplyImmediately *bool
+
 	// The number of node groups (shards) that results from the modification of the
 	// shard configuration
+	//
+	// This member is required.
 	NodeGroupCount *int32
+
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
@@ -79,6 +90,7 @@ type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
 }
 
 type DecreaseNodeGroupsInGlobalReplicationGroupOutput struct {
+
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the

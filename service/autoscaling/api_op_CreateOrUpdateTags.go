@@ -61,7 +61,10 @@ func (c *Client) CreateOrUpdateTags(ctx context.Context, params *CreateOrUpdateT
 }
 
 type CreateOrUpdateTagsInput struct {
+
 	// One or more tags.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

@@ -56,9 +56,11 @@ func (c *Client) DescribeCanariesLastRun(ctx context.Context, params *DescribeCa
 }
 
 type DescribeCanariesLastRunInput struct {
+
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent DescribeCanaries operation to retrieve the next set of results.
 	NextToken *string
+
 	// Specify this parameter to limit how many runs are returned each time you use the
 	// DescribeLastRun operation. If you omit this parameter, the default of 100 is
 	// used.
@@ -66,8 +68,10 @@ type DescribeCanariesLastRunInput struct {
 }
 
 type DescribeCanariesLastRunOutput struct {
+
 	// An array that contains the information from the most recent run of each canary.
 	CanariesLastRun []*types.CanaryLastRun
+
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent DescribeCanariesLastRun operation to retrieve the next set of
 	// results.

@@ -56,6 +56,7 @@ func (c *Client) DeregisterWebhookWithThirdParty(ctx context.Context, params *De
 }
 
 type DeregisterWebhookWithThirdPartyInput struct {
+
 	// The name of the webhook you want to deregister.
 	WebhookName *string
 }

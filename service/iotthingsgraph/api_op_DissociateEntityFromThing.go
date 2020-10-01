@@ -58,9 +58,15 @@ func (c *Client) DissociateEntityFromThing(ctx context.Context, params *Dissocia
 }
 
 type DissociateEntityFromThingInput struct {
+
 	// The entity type from which to disassociate the thing.
+	//
+	// This member is required.
 	EntityType types.EntityType
+
 	// The name of the thing to disassociate.
+	//
+	// This member is required.
 	ThingName *string
 }
 

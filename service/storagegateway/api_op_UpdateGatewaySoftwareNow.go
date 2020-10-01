@@ -69,14 +69,18 @@ func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGat
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway to
 // update.
 type UpdateGatewaySoftwareNowInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
 // updated.
 type UpdateGatewaySoftwareNowOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

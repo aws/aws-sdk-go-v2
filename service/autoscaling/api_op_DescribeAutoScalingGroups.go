@@ -55,26 +55,33 @@ func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *Describe
 }
 
 type DescribeAutoScalingGroupsInput struct {
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
+
 	// The names of the Auto Scaling groups. Each name can be a maximum of 1600
 	// characters. By default, you can only specify up to 50 names. You can optionally
 	// increase this limit using the MaxRecords parameter. If you omit this parameter,
 	// all Auto Scaling groups are described.
 	AutoScalingGroupNames []*string
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 }
 
 type DescribeAutoScalingGroupsOutput struct {
+
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is
 	// null when there are no more items to return.
 	NextToken *string
+
 	// The groups.
+	//
+	// This member is required.
 	AutoScalingGroups []*types.AutoScalingGroup
 
 	// Metadata pertaining to the operation's result.

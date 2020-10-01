@@ -60,23 +60,30 @@ func (c *Client) DescribeTargetGroups(ctx context.Context, params *DescribeTarge
 }
 
 type DescribeTargetGroupsInput struct {
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// The names of the target groups.
 	Names []*string
+
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string
+
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
 	// The Amazon Resource Names (ARN) of the target groups.
 	TargetGroupArns []*string
 }
 
 type DescribeTargetGroupsOutput struct {
+
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.
 	NextMarker *string
+
 	// Information about the target groups.
 	TargetGroups []*types.TargetGroup
 

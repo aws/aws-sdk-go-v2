@@ -55,8 +55,11 @@ func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, op
 }
 
 type DeleteMemberInput struct {
+
 	// The unique identifier for the Amazon Macie resource or account that the request
 	// applies to.
+	//
+	// This member is required.
 	Id *string
 }
 

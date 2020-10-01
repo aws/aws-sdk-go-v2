@@ -56,10 +56,15 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 }
 
 type ListTagsInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Maximum number of tags to return.
 	MaxResults *int32
+
 	// If the response to the previous ListTags request is truncated, Amazon SageMaker
 	// returns this token. To retrieve the next set of tags, use it in the subsequent
 	// request.
@@ -67,9 +72,11 @@ type ListTagsInput struct {
 }
 
 type ListTagsOutput struct {
+
 	// If response is truncated, Amazon SageMaker includes a token in the response. You
 	// can use this token in your subsequent request to fetch next set of tokens.
 	NextToken *string
+
 	// An array of Tag objects, each with a tag key and a value.
 	Tags []*types.Tag
 

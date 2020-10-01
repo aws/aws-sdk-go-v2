@@ -59,9 +59,13 @@ func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, 
 // resource.
 type UpdateAccountInput struct {
 	TemplateSkipList []*string
-	Title            *string
-	Name             *string
-	Template         *bool
+
+	Title *string
+
+	Name *string
+
+	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -114,13 +118,17 @@ type UpdateAccountInput struct {
 // CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html)
 type UpdateAccountOutput struct {
+
 	// A list of features supported for the account. When usage plans are enabled, the
 	// features list will include an entry of "UsagePlans".
 	Features []*string
+
 	// The version of the API keys used for the account.
 	ApiKeyVersion *string
+
 	// Specifies the API request limits configured for the current Account ().
 	ThrottleSettings *types.ThrottleSettings
+
 	// The ARN of an Amazon CloudWatch role for the current Account ().
 	CloudwatchRoleArn *string
 

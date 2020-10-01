@@ -58,17 +58,33 @@ func (c *Client) PutMethodResponse(ctx context.Context, params *PutMethodRespons
 // Request to add a MethodResponse () to an existing Method () resource.
 type PutMethodResponseInput struct {
 	Name *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// [Required] The Resource () identifier for the Method () resource.
+	//
+	// This member is required.
 	ResourceId *string
-	Template   *bool
+
+	Template *bool
+
 	// [Required] The method response's status code.
-	StatusCode       *string
-	Title            *string
+	//
+	// This member is required.
+	StatusCode *string
+
+	Title *string
+
 	TemplateSkipList []*string
+
 	// [Required] The HTTP verb of the Method () resource.
+	//
+	// This member is required.
 	HttpMethod *string
+
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header name
 	// and the associated value is a Boolean flag indicating whether the method
@@ -82,6 +98,7 @@ type PutMethodResponseInput struct {
 	// integration.response.body.{JSON-expression}, where JSON-expression is a valid
 	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
+
 	// Specifies the Model () resources used for the response's content type. Response
 	// models are represented as a key/value map, with a content type as the key and a
 	// Model () name as the value.
@@ -120,12 +137,15 @@ type PutMethodResponseInput struct {
 // IntegrationResponse (), Integration ()Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type PutMethodResponseOutput struct {
+
 	// Specifies the Model () resources used for the response's content-type. Response
 	// models are represented as a key/value map, with a content-type as the key and a
 	// Model () name as the value.
 	ResponseModels map[string]*string
+
 	// The method response's status code.
 	StatusCode *string
+
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or

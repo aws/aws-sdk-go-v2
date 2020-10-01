@@ -56,20 +56,30 @@ func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, op
 }
 
 type CreateFilterInput struct {
+
 	// The filter expression that designates the interaction types that the filter will
 	// filter out. A filter expression must follow the following format: EXCLUDE itemId
 	// WHERE INTERACTIONS.event_type in ("EVENT_TYPE") Where "EVENT_TYPE" is the type
 	// of event to filter out. To filter out all items with any interactions history,
 	// set "*" as the EVENT_TYPE. For more information, see Using Filters with Amazon
 	// Personalize.
+	//
+	// This member is required.
 	FilterExpression *string
+
 	// The ARN of the dataset group that the filter will belong to.
+	//
+	// This member is required.
 	DatasetGroupArn *string
+
 	// The name of the filter to create.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateFilterOutput struct {
+
 	// The ARN of the new filter.
 	FilterArn *string
 

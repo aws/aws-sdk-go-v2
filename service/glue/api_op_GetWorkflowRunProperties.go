@@ -55,13 +55,20 @@ func (c *Client) GetWorkflowRunProperties(ctx context.Context, params *GetWorkfl
 }
 
 type GetWorkflowRunPropertiesInput struct {
+
 	// Name of the workflow which was run.
+	//
+	// This member is required.
 	Name *string
+
 	// The ID of the workflow run whose run properties should be returned.
+	//
+	// This member is required.
 	RunId *string
 }
 
 type GetWorkflowRunPropertiesOutput struct {
+
 	// The workflow run properties which were set during the specified run.
 	RunProperties map[string]*string
 

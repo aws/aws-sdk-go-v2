@@ -64,9 +64,13 @@ func (c *Client) PutFileSystemPolicy(ctx context.Context, params *PutFileSystemP
 }
 
 type PutFileSystemPolicyInput struct {
+
 	// The ID of the EFS file system that you want to create or update the
 	// FileSystemPolicy for.
+	//
+	// This member is required.
 	FileSystemId *string
+
 	// (Optional) A flag to indicate whether to bypass the FileSystemPolicy lockout
 	// safety check. The policy lockout safety check determines whether the policy in
 	// the request will prevent the principal making the request will be locked out
@@ -75,16 +79,21 @@ type PutFileSystemPolicyInput struct {
 	// principal that is making the request from making a subsequent
 	// PutFileSystemPolicy request on the file system. The default value is False.
 	BypassPolicyLockoutSafetyCheck *bool
+
 	// The FileSystemPolicy that you're creating. Accepts a JSON formatted policy
 	// definition. To find out more about the elements that make up a file system
 	// policy, see EFS Resource-based Policies
 	// (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies).
+	//
+	// This member is required.
 	Policy *string
 }
 
 type PutFileSystemPolicyOutput struct {
+
 	// Specifies the EFS file system to which the FileSystemPolicy applies.
 	FileSystemId *string
+
 	// The JSON formatted FileSystemPolicy for the EFS file system.
 	Policy *string
 

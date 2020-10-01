@@ -63,6 +63,7 @@ func (c *Client) SetActiveReceiptRuleSet(ctx context.Context, params *SetActiveR
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type SetActiveReceiptRuleSetInput struct {
+
 	// The name of the receipt rule set to make active. Setting this value to null
 	// disables all email receiving.
 	RuleSetName *string

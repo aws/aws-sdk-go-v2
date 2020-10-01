@@ -61,7 +61,10 @@ func (c *Client) RestoreWorkspace(ctx context.Context, params *RestoreWorkspaceI
 }
 
 type RestoreWorkspaceInput struct {
+
 	// The identifier of the WorkSpace.
+	//
+	// This member is required.
 	WorkspaceId *string
 }
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteSite(ctx context.Context, params *DeleteSiteInput, optFns
 }
 
 type DeleteSiteInput struct {
+
 	// The ID of the site.
+	//
+	// This member is required.
 	SiteId *string
 }
 

@@ -59,22 +59,30 @@ func (c *Client) UpdateCanary(ctx context.Context, params *UpdateCanaryInput, op
 }
 
 type UpdateCanaryInput struct {
+
 	// The number of days to retain data about successful runs of this canary.
 	SuccessRetentionPeriodInDays *int32
+
 	// A structure that includes the entry point from which the canary should start
 	// running your script. If the script is stored in an S3 bucket, the bucket name,
 	// key, and version are also included.
 	Code *types.CanaryCodeInput
+
 	// The name of the canary that you want to update. To find the names of your
 	// canaries, use DescribeCanaries
 	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
 	// You cannot change the name of a canary that has already been created.
+	//
+	// This member is required.
 	Name *string
+
 	// A structure that contains the timeout value that is used for each individual run
 	// of the canary.
 	RunConfig *types.CanaryRunConfigInput
+
 	// The number of days to retain data about failed runs of this canary.
 	FailureRetentionPeriodInDays *int32
+
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust policy.
 	// The role must also have the following permissions:
@@ -96,14 +104,17 @@ type UpdateCanaryInput struct {
 	//
 	//     * logs:CreateLogStream
 	ExecutionRoleArn *string
+
 	// Specifies the runtime version to use for the canary. Currently, the only valid
 	// value is syn-1.0. For more information about runtime versions, see  Canary
 	// Runtime Versions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
 	RuntimeVersion *string
+
 	// A structure that contains information about how often the canary is to run, and
 	// when these runs are to stop.
 	Schedule *types.CanaryScheduleInput
+
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnet and security groups of the VPC endpoint. For more
 	// information, see  Running a Canary in a VPC

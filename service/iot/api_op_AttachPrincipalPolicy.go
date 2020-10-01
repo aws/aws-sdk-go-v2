@@ -57,10 +57,16 @@ func (c *Client) AttachPrincipalPolicy(ctx context.Context, params *AttachPrinci
 
 // The input for the AttachPrincipalPolicy operation.
 type AttachPrincipalPolicyInput struct {
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The principal, which can be a certificate ARN (as returned from the
 	// CreateCertificate operation) or an Amazon Cognito ID.
+	//
+	// This member is required.
 	Principal *string
 }
 

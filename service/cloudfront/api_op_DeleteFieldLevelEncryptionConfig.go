@@ -55,8 +55,12 @@ func (c *Client) DeleteFieldLevelEncryptionConfig(ctx context.Context, params *D
 }
 
 type DeleteFieldLevelEncryptionConfigInput struct {
+
 	// The ID of the configuration you want to delete from CloudFront.
+	//
+	// This member is required.
 	Id *string
+
 	// The value of the ETag header that you received when retrieving the configuration
 	// identity to delete. For example: E2QWRUHAPOMQZL.
 	IfMatch *string

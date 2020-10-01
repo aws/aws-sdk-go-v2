@@ -57,11 +57,15 @@ func (c *Client) DescribeClassificationJob(ctx context.Context, params *Describe
 }
 
 type DescribeClassificationJobInput struct {
+
 	// The unique identifier for the classification job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribeClassificationJobOutput struct {
+
 	// The schedule for running the job. Possible values are:
 	//
 	//     * ONE_TIME - The job
@@ -71,25 +75,34 @@ type DescribeClassificationJobOutput struct {
 	// or monthly basis. The scheduleFrequency property indicates the recurrence
 	// pattern for the job.
 	JobType types.JobType
+
 	// The token that was provided to ensure the idempotency of the request to create
 	// the job.
 	ClientToken *string
+
 	// The custom data identifiers that the job uses to analyze data.
 	CustomDataIdentifierIds []*string
+
 	// The date and time, in UTC and extended ISO 8601 format, when the job last ran.
 	LastRunTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
+
 	// The custom description of the job.
 	Description *string
+
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the classification job.
 	Tags map[string]*string
+
 	// The sampling depth, as a percentage, that the job applies when it processes
 	// objects.
 	SamplingPercentage *int32
+
 	// Specifies whether the job has run for the first time.
 	InitialRun *bool
+
 	// The current status of the job. Possible values are:
 	//
 	//     * CANCELLED - The job
@@ -111,19 +124,25 @@ type DescribeClassificationJobOutput struct {
 	//     * RUNNING - The
 	// job is in progress.
 	JobStatus types.JobStatus
+
 	// The S3 buckets that the job is configured to analyze, and the scope of that
 	// analysis.
 	S3JobDefinition *types.S3JobDefinition
+
 	// The date and time, in UTC and extended ISO 8601 format, when the job was
 	// created.
 	CreatedAt *time.Time
+
 	// The recurrence pattern for running the job. If the job is configured to run only
 	// once, this value is null.
 	ScheduleFrequency *types.JobScheduleFrequency
+
 	// The unique identifier for the job.
 	JobId *string
+
 	// The custom name of the job.
 	Name *string
+
 	// The number of times that the job has run and processing statistics for the job's
 	// most recent run.
 	Statistics *types.Statistics

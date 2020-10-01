@@ -56,14 +56,19 @@ func (c *Client) GetDistributionConfiguration(ctx context.Context, params *GetDi
 }
 
 type GetDistributionConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the distribution configuration that you want
 	// to retrieve.
+	//
+	// This member is required.
 	DistributionConfigurationArn *string
 }
 
 type GetDistributionConfigurationOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The distribution configuration object.
 	DistributionConfiguration *types.DistributionConfiguration
 

@@ -58,11 +58,13 @@ func (c *Client) DescribeKeyPairs(ctx context.Context, params *DescribeKeyPairsI
 }
 
 type DescribeKeyPairsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The filters.
 	//
 	//     * key-pair-id - The ID of the key pair.
@@ -82,13 +84,16 @@ type DescribeKeyPairsInput struct {
 	// to find all resources that have a tag with the key Owner and the value TeamA,
 	// specify tag:Owner for the filter name and TeamA for the filter value.
 	Filters []*types.Filter
+
 	// The IDs of the key pairs.
 	KeyPairIds []*string
+
 	// The key pair names. Default: Describes all your key pairs.
 	KeyNames []*string
 }
 
 type DescribeKeyPairsOutput struct {
+
 	// Information about the key pairs.
 	KeyPairs []*types.KeyPairInfo
 

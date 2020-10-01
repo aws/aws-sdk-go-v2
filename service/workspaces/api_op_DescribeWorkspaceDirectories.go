@@ -55,20 +55,25 @@ func (c *Client) DescribeWorkspaceDirectories(ctx context.Context, params *Descr
 }
 
 type DescribeWorkspaceDirectoriesInput struct {
+
 	// The maximum number of directories to return.
 	Limit *int32
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
 	// The identifiers of the directories. If the value is null, all directories are
 	// retrieved.
 	DirectoryIds []*string
 }
 
 type DescribeWorkspaceDirectoriesOutput struct {
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
+
 	// Information about the directories.
 	Directories []*types.WorkspaceDirectory
 

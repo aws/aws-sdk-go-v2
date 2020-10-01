@@ -64,6 +64,7 @@ func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionI
 }
 
 type CreateProtectionInput struct {
+
 	// The ARN (Amazon Resource Name) of the resource to be protected. The ARN should
 	// be in one of the following formats:
 	//
@@ -87,12 +88,18 @@ type CreateProtectionInput struct {
 	//
 	//     * For an
 	// Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Friendly name for the Protection you are creating.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateProtectionOutput struct {
+
 	// The unique identifier (ID) for the Protection () object that is created.
 	ProtectionId *string
 

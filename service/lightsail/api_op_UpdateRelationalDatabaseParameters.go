@@ -66,13 +66,20 @@ func (c *Client) UpdateRelationalDatabaseParameters(ctx context.Context, params 
 }
 
 type UpdateRelationalDatabaseParametersInput struct {
+
 	// The name of your database for which to update parameters.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
+
 	// The database parameters to update.
+	//
+	// This member is required.
 	Parameters []*types.RelationalDatabaseParameter
 }
 
 type UpdateRelationalDatabaseParametersOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -55,16 +55,20 @@ func (c *Client) GetVpcLinks(ctx context.Context, params *GetVpcLinksInput, optF
 }
 
 type GetVpcLinksInput struct {
+
 	// The maximum number of elements to be returned for this resource.
 	MaxResults *string
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
 }
 
 type GetVpcLinksOutput struct {
+
 	// A collection of VPC links.
 	Items []*types.VpcLink
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string

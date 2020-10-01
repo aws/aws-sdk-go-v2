@@ -69,26 +69,37 @@ func (c *Client) DescribeForecastExportJob(ctx context.Context, params *Describe
 }
 
 type DescribeForecastExportJobInput struct {
+
 	// The Amazon Resource Name (ARN) of the forecast export job.
+	//
+	// This member is required.
 	ForecastExportJobArn *string
 }
 
 type DescribeForecastExportJobOutput struct {
+
 	// The Amazon Resource Name (ARN) of the exported forecast.
 	ForecastArn *string
+
 	// When the forecast export job was created.
 	CreationTime *time.Time
+
 	// The name of the forecast export job.
 	ForecastExportJobName *string
+
 	// If an error occurred, an informational message about the error.
 	Message *string
+
 	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
 	// forecast is exported.
 	Destination *types.DataDestination
+
 	// When the last successful export job finished.
 	LastModificationTime *time.Time
+
 	// The ARN of the forecast export job.
 	ForecastExportJobArn *string
+
 	// The status of the forecast export job. States include:
 	//
 	//     * ACTIVE

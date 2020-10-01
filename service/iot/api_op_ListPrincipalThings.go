@@ -58,19 +58,26 @@ func (c *Client) ListPrincipalThings(ctx context.Context, params *ListPrincipalT
 
 // The input for the ListPrincipalThings operation.
 type ListPrincipalThingsInput struct {
+
 	// The principal.
+	//
+	// This member is required.
 	Principal *string
+
 	// The maximum number of results to return in this operation.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 }
 
 // The output from the ListPrincipalThings operation.
 type ListPrincipalThingsOutput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The things.
 	Things []*string
 

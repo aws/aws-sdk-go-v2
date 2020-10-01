@@ -57,18 +57,29 @@ func (c *Client) UpdateClusterConfiguration(ctx context.Context, params *UpdateC
 }
 
 type UpdateClusterConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
 	ClusterArn *string
+
 	// The version of the cluster that needs to be updated.
+	//
+	// This member is required.
 	CurrentVersion *string
+
 	// Represents the configuration that you want MSK to use for the brokers in a
 	// cluster.
+	//
+	// This member is required.
 	ConfigurationInfo *types.ConfigurationInfo
 }
 
 type UpdateClusterConfigurationOutput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster operation.
 	ClusterOperationArn *string
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 

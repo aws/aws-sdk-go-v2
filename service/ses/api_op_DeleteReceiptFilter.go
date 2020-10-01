@@ -62,7 +62,10 @@ func (c *Client) DeleteReceiptFilter(ctx context.Context, params *DeleteReceiptF
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type DeleteReceiptFilterInput struct {
+
 	// The name of the IP address filter to delete.
+	//
+	// This member is required.
 	FilterName *string
 }
 

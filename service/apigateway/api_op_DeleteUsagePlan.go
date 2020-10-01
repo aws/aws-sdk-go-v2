@@ -58,11 +58,17 @@ func (c *Client) DeleteUsagePlan(ctx context.Context, params *DeleteUsagePlanInp
 // The DELETE request to delete a usage plan of a given plan Id.
 type DeleteUsagePlanInput struct {
 	Name *string
+
 	// [Required] The Id of the to-be-deleted usage plan.
-	UsagePlanId      *string
-	Template         *bool
+	//
+	// This member is required.
+	UsagePlanId *string
+
+	Template *bool
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
 }
 
 type DeleteUsagePlanOutput struct {

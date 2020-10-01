@@ -61,14 +61,17 @@ func (c *Client) ListActivatedRulesInRuleGroup(ctx context.Context, params *List
 }
 
 type ListActivatedRulesInRuleGroupInput struct {
+
 	// The RuleGroupId of the RuleGroup () for which you want to get a list of
 	// ActivatedRule () objects.
 	RuleGroupId *string
+
 	// Specifies the number of ActivatedRules that you want AWS WAF to return for this
 	// request. If you have more ActivatedRules than the number that you specify for
 	// Limit, the response includes a NextMarker value that you can use to get another
 	// batch of ActivatedRules.
 	Limit *int32
+
 	// If you specify a value for Limit and you have more ActivatedRules than the value
 	// of Limit, AWS WAF returns a NextMarker value in the response that allows you to
 	// list another group of ActivatedRules. For the second and subsequent
@@ -78,8 +81,10 @@ type ListActivatedRulesInRuleGroupInput struct {
 }
 
 type ListActivatedRulesInRuleGroupOutput struct {
+
 	// An array of ActivatedRules objects.
 	ActivatedRules []*types.ActivatedRule
+
 	// If you have more ActivatedRules than the number that you specified for Limit in
 	// the request, the response includes a NextMarker value. To list more
 	// ActivatedRules, submit another ListActivatedRulesInRuleGroup request, and

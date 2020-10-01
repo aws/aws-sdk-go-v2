@@ -55,7 +55,10 @@ func (c *Client) StopAutoMLJob(ctx context.Context, params *StopAutoMLJobInput, 
 }
 
 type StopAutoMLJobInput struct {
+
 	// The name of the object you are requesting.
+	//
+	// This member is required.
 	AutoMLJobName *string
 }
 

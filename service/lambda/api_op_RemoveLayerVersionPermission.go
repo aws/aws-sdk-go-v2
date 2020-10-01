@@ -57,12 +57,22 @@ func (c *Client) RemoveLayerVersionPermission(ctx context.Context, params *Remov
 }
 
 type RemoveLayerVersionPermissionInput struct {
+
 	// The version number.
+	//
+	// This member is required.
 	VersionNumber *int64
+
 	// The name or Amazon Resource Name (ARN) of the layer.
+	//
+	// This member is required.
 	LayerName *string
+
 	// The identifier that was specified when the statement was added.
+	//
+	// This member is required.
 	StatementId *string
+
 	// Only update the policy if the revision ID matches the ID specified. Use this
 	// option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string

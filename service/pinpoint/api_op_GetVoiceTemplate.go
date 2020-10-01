@@ -57,6 +57,7 @@ func (c *Client) GetVoiceTemplate(ctx context.Context, params *GetVoiceTemplateI
 }
 
 type GetVoiceTemplateInput struct {
+
 	// The unique identifier for the version of the message template to update,
 	// retrieve information about, or delete. To retrieve identifiers and other
 	// information for all the versions of a template, use the Template Versions
@@ -77,16 +78,22 @@ type GetVoiceTemplateInput struct {
 	//     * For a delete operation, deletes the template, including all
 	// versions of the template.
 	Version *string
+
 	// The name of the message template. A template name must start with an
 	// alphanumeric character and can contain a maximum of 128 characters. The
 	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
 	// Template names are case sensitive.
+	//
+	// This member is required.
 	TemplateName *string
 }
 
 type GetVoiceTemplateOutput struct {
+
 	// Provides information about the content and settings for a message template that
 	// can be used in messages that are sent through the voice channel.
+	//
+	// This member is required.
 	VoiceTemplateResponse *types.VoiceTemplateResponse
 
 	// Metadata pertaining to the operation's result.

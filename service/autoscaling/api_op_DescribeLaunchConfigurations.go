@@ -55,20 +55,27 @@ func (c *Client) DescribeLaunchConfigurations(ctx context.Context, params *Descr
 }
 
 type DescribeLaunchConfigurationsInput struct {
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The launch configuration names. If you omit this parameter, all launch
 	// configurations are described.
 	LaunchConfigurationNames []*string
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
 }
 
 type DescribeLaunchConfigurationsOutput struct {
+
 	// The launch configurations.
+	//
+	// This member is required.
 	LaunchConfigurations []*types.LaunchConfiguration
+
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is

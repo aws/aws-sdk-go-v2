@@ -67,16 +67,21 @@ func (c *Client) ListHapgs(ctx context.Context, params *ListHapgsInput, optFns .
 }
 
 type ListHapgsInput struct {
+
 	// The NextToken value from a previous call to ListHapgs. Pass null if this is the
 	// first call.
 	NextToken *string
 }
 
 type ListHapgsOutput struct {
+
 	// If not null, more results are available. Pass this value to ListHapgs to
 	// retrieve the next set of items.
 	NextToken *string
+
 	// The list of high-availability partition groups.
+	//
+	// This member is required.
 	HapgList []*string
 
 	// Metadata pertaining to the operation's result.

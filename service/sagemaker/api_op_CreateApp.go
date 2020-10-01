@@ -60,23 +60,38 @@ func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns .
 }
 
 type CreateAppInput struct {
+
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
 	// created on the instance.
 	ResourceSpec *types.ResourceSpec
+
 	// The name of the app.
+	//
+	// This member is required.
 	AppName *string
+
 	// The type of app.
+	//
+	// This member is required.
 	AppType types.AppType
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
+
 	// The user profile name.
+	//
+	// This member is required.
 	UserProfileName *string
+
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
 	Tags []*types.Tag
 }
 
 type CreateAppOutput struct {
+
 	// The App's Amazon Resource Name (ARN).
 	AppArn *string
 

@@ -56,17 +56,24 @@ func (c *Client) ResetDeployments(ctx context.Context, params *ResetDeploymentsI
 
 // Information needed to reset deployments.
 type ResetDeploymentsInput struct {
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// If true, performs a best-effort only core reset.
 	Force *bool
 }
 
 type ResetDeploymentsOutput struct {
+
 	// The ID of the deployment.
 	DeploymentId *string
+
 	// The ARN of the deployment.
 	DeploymentArn *string
 

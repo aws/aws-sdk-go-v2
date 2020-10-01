@@ -56,17 +56,25 @@ func (c *Client) UpdateBillingGroup(ctx context.Context, params *UpdateBillingGr
 }
 
 type UpdateBillingGroupInput struct {
+
 	// The properties of the billing group.
+	//
+	// This member is required.
 	BillingGroupProperties *types.BillingGroupProperties
+
 	// The expected version of the billing group. If the version of the billing group
 	// does not match the expected version specified in the request, the
 	// UpdateBillingGroup request is rejected with a VersionConflictException.
 	ExpectedVersion *int64
+
 	// The name of the billing group.
+	//
+	// This member is required.
 	BillingGroupName *string
 }
 
 type UpdateBillingGroupOutput struct {
+
 	// The latest version of the billing group.
 	Version *int64
 

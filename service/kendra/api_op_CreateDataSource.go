@@ -62,34 +62,55 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 }
 
 type CreateDataSourceInput struct {
+
 	// A description for the data source.
 	Description *string
+
 	// The type of repository that contains the data source.
+	//
+	// This member is required.
 	Type types.DataSourceType
+
 	// A list of key-value pairs that identify the data source. You can use the tags to
 	// identify and organize your resources and to control access to resources.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source. For more information, see IAM Roles for Amazon Kendra
 	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	//
+	// This member is required.
 	RoleArn *string
+
 	// A unique name for the data source. A data source name can't be changed without
 	// deleting and recreating the data source.
+	//
+	// This member is required.
 	Name *string
+
 	// Sets the frequency that Amazon Kendra will check the documents in your
 	// repository and update the index. If you don't set a schedule Amazon Kendra will
 	// not periodically update the index. You can call the StartDataSourceSyncJob
 	// operation to update the index.
 	Schedule *string
+
 	// The identifier of the index that should be associated with this data source.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The connector configuration information that is required to access the
 	// repository.
+	//
+	// This member is required.
 	Configuration *types.DataSourceConfiguration
 }
 
 type CreateDataSourceOutput struct {
+
 	// A unique identifier for the data source.
+	//
+	// This member is required.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

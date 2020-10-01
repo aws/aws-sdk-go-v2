@@ -56,7 +56,10 @@ func (c *Client) DeleteIpGroup(ctx context.Context, params *DeleteIpGroupInput, 
 }
 
 type DeleteIpGroupInput struct {
+
 	// The identifier of the IP access control group.
+	//
+	// This member is required.
 	GroupId *string
 }
 

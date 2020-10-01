@@ -59,12 +59,16 @@ func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryI
 
 // Represents the input of a delete repository operation.
 type DeleteRepositoryInput struct {
+
 	// The name of the repository to delete.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 // Represents the output of a delete repository operation.
 type DeleteRepositoryOutput struct {
+
 	// The ID of the repository that was deleted.
 	RepositoryId *string
 

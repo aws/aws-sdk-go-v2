@@ -56,19 +56,27 @@ func (c *Client) GetWorkflowRuns(ctx context.Context, params *GetWorkflowRunsInp
 }
 
 type GetWorkflowRunsInput struct {
+
 	// Name of the workflow whose metadata of runs should be returned.
+	//
+	// This member is required.
 	Name *string
+
 	// The maximum size of the response.
 	NextToken *string
+
 	// Specifies whether to include the workflow graph in response or not.
 	IncludeGraph *bool
+
 	// The maximum number of workflow runs to be included in the response.
 	MaxResults *int32
 }
 
 type GetWorkflowRunsOutput struct {
+
 	// A continuation token, if not all requested workflow runs have been returned.
 	NextToken *string
+
 	// A list of workflow run metadata objects.
 	Runs []*types.WorkflowRun
 

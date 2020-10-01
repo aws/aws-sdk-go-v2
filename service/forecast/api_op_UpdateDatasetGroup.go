@@ -57,10 +57,16 @@ func (c *Client) UpdateDatasetGroup(ctx context.Context, params *UpdateDatasetGr
 }
 
 type UpdateDatasetGroupInput struct {
+
 	// An array of the Amazon Resource Names (ARNs) of the datasets to add to the
 	// dataset group.
+	//
+	// This member is required.
 	DatasetArns []*string
+
 	// The ARN of the dataset group.
+	//
+	// This member is required.
 	DatasetGroupArn *string
 }
 

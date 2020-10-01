@@ -55,21 +55,26 @@ func (c *Client) DescribeMLModels(ctx context.Context, params *DescribeMLModelsI
 }
 
 type DescribeMLModelsInput struct {
+
 	// The not equal to operator. The MLModel results will have FilterVariable values
 	// not equal to the value specified with NE.
 	NE *string
+
 	// The less than operator. The MLModel results will have FilterVariable values that
 	// are less than the value specified with LT.
 	LT *string
+
 	// A string that is found at the beginning of a variable, such as Name or Id. For
 	// example, an MLModel could have the Name2014-09-09-HolidayGiftMailer. To search
 	// for this MLModel, select Name for the FilterVariable and any of the following
 	// strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li> <p>2014-09-09</p>
 	// </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
 	Prefix *string
+
 	// The less than or equal to operator. The MLModel results will have FilterVariable
 	// values that are less than or equal to the value specified with LE.
 	LE *string
+
 	// A two-value parameter that determines the sequence of the resulting list of
 	// MLModel.
 	//
@@ -81,14 +86,18 @@ type DescribeMLModelsInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
 	// The ID of the page in the paginated results.
 	NextToken *string
+
 	// The number of pages of information to include in the result. The range of
 	// acceptable values is 1 through 100. The default value is 100.
 	Limit *int32
+
 	// The equal to operator. The MLModel results will have FilterVariable values that
 	// exactly match the value specified with EQ.
 	EQ *string
+
 	// Use one of the following variables to filter a list of MLModel:
 	//
 	//     * CreatedAt
@@ -121,9 +130,11 @@ type DescribeMLModelsInput struct {
 	// either a file or an Amazon Simple Storage Service (Amazon S3) bucket or
 	// directory.
 	FilterVariable types.MLModelFilterVariable
+
 	// The greater than operator. The MLModel results will have FilterVariable values
 	// that are greater than the value specified with GT.
 	GT *string
+
 	// The greater than or equal to operator. The MLModel results will have
 	// FilterVariable values that are greater than or equal to the value specified with
 	// GE.
@@ -133,8 +144,10 @@ type DescribeMLModelsInput struct {
 // Represents the output of a DescribeMLModels operation. The content is
 // essentially a list of MLModel.
 type DescribeMLModelsOutput struct {
+
 	// A list of MLModel that meet the search criteria.
 	Results []*types.MLModel
+
 	// The ID of the next page in the paginated results that indicates at least one
 	// more page follows.
 	NextToken *string

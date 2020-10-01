@@ -64,23 +64,29 @@ func (c *Client) CreatePlacementGroup(ctx context.Context, params *CreatePlaceme
 }
 
 type CreatePlacementGroupInput struct {
+
 	// A name for the placement group. Must be unique within the scope of your account
 	// for the Region. Constraints: Up to 255 ASCII characters
 	GroupName *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to apply to the new placement group.
 	TagSpecifications []*types.TagSpecification
+
 	// The placement strategy.
 	Strategy types.PlacementStrategy
+
 	// The number of partitions. Valid only when Strategy is set to partition.
 	PartitionCount *int32
 }
 
 type CreatePlacementGroupOutput struct {
+
 	// Describes a placement group.
 	PlacementGroup *types.PlacementGroup
 

@@ -61,18 +61,24 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 }
 
 type ListImportsInput struct {
+
 	// The name of the exported output value. AWS CloudFormation returns the stack
 	// names that are importing this value.
+	//
+	// This member is required.
 	ExportName *string
+
 	// A string (provided by the ListImports () response output) that identifies the
 	// next page of stacks that are importing the specified exported output value.
 	NextToken *string
 }
 
 type ListImportsOutput struct {
+
 	// A string that identifies the next page of exports. If there is no additional
 	// page, this value is null.
 	NextToken *string
+
 	// A list of stack names that are importing the specified exported output value.
 	Imports []*string
 

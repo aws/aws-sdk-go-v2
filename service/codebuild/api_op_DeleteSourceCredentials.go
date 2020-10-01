@@ -55,11 +55,15 @@ func (c *Client) DeleteSourceCredentials(ctx context.Context, params *DeleteSour
 }
 
 type DeleteSourceCredentialsInput struct {
+
 	// The Amazon Resource Name (ARN) of the token.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type DeleteSourceCredentialsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the token.
 	Arn *string
 

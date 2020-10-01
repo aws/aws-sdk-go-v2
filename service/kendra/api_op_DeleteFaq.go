@@ -55,9 +55,15 @@ func (c *Client) DeleteFaq(ctx context.Context, params *DeleteFaqInput, optFns .
 }
 
 type DeleteFaqInput struct {
+
 	// The index to remove the FAQ from.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The identifier of the FAQ to remove.
+	//
+	// This member is required.
 	Id *string
 }
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteCoreDefinition(ctx context.Context, params *DeleteCoreDef
 }
 
 type DeleteCoreDefinitionInput struct {
+
 	// The ID of the core definition.
+	//
+	// This member is required.
 	CoreDefinitionId *string
 }
 

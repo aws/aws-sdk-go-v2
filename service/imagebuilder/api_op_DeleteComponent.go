@@ -55,13 +55,18 @@ func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInp
 }
 
 type DeleteComponentInput struct {
+
 	// The Amazon Resource Name (ARN) of the component build version to delete.
+	//
+	// This member is required.
 	ComponentBuildVersionArn *string
 }
 
 type DeleteComponentOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the component build version that was deleted.
 	ComponentBuildVersionArn *string
 

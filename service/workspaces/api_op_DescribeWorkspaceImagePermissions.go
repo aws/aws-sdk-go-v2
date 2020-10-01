@@ -57,20 +57,28 @@ func (c *Client) DescribeWorkspaceImagePermissions(ctx context.Context, params *
 }
 
 type DescribeWorkspaceImagePermissionsInput struct {
+
 	// The maximum number of items to return.
 	MaxResults *int32
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
 	// The identifier of the image.
+	//
+	// This member is required.
 	ImageId *string
 }
 
 type DescribeWorkspaceImagePermissionsOutput struct {
+
 	// The identifiers of the AWS accounts that the image has been shared with.
 	ImagePermissions []*types.ImagePermission
+
 	// The identifier of the image.
 	ImageId *string
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string

@@ -61,17 +61,24 @@ func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *Atta
 }
 
 type AttachInstancesToLoadBalancerInput struct {
+
 	// An array of strings representing the instance name(s) you want to attach to your
 	// load balancer. An instance must be running before you can attach it to your load
 	// balancer. There are no additional limits on the number of instances you can
 	// attach to your load balancer, aside from the limit of Lightsail instances you
 	// can create in your account (20).
+	//
+	// This member is required.
 	InstanceNames []*string
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 type AttachInstancesToLoadBalancerOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

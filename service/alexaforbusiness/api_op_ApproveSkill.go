@@ -57,7 +57,10 @@ func (c *Client) ApproveSkill(ctx context.Context, params *ApproveSkillInput, op
 }
 
 type ApproveSkillInput struct {
+
 	// The unique identifier of the skill.
+	//
+	// This member is required.
 	SkillId *string
 }
 

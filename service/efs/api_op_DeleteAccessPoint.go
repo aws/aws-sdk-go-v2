@@ -59,7 +59,10 @@ func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPoin
 }
 
 type DeleteAccessPointInput struct {
+
 	// The ID of the access point that you want to delete.
+	//
+	// This member is required.
 	AccessPointId *string
 }
 

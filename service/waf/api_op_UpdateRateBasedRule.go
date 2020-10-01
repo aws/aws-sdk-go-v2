@@ -91,22 +91,35 @@ func (c *Client) UpdateRateBasedRule(ctx context.Context, params *UpdateRateBase
 }
 
 type UpdateRateBasedRuleInput struct {
+
 	// The maximum number of requests, which have an identical value in the field
 	// specified by the RateKey, allowed in a five-minute period. If the number of
 	// requests exceeds the RateLimit and the other predicates specified in the rule
 	// are also met, AWS WAF triggers the action that is specified for this rule.
+	//
+	// This member is required.
 	RateLimit *int64
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// The RuleId of the RateBasedRule that you want to update. RuleId is returned by
 	// CreateRateBasedRule and by ListRateBasedRules ().
+	//
+	// This member is required.
 	RuleId *string
+
 	// An array of RuleUpdate objects that you want to insert into or delete from a
 	// RateBasedRule ().
+	//
+	// This member is required.
 	Updates []*types.RuleUpdate
 }
 
 type UpdateRateBasedRuleOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateRateBasedRule request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

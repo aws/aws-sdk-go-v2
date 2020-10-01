@@ -93,21 +93,31 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 }
 
 type CreateEndpointInput struct {
+
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)in
 	// the AWS Billing and Cost Management User Guide.  </p>
 	Tags []*types.Tag
+
 	// The name of the endpoint. The name must be unique within an AWS Region in your
 	// AWS account.
+	//
+	// This member is required.
 	EndpointName *string
+
 	// The name of an endpoint configuration. For more information, see
 	// CreateEndpointConfig ().
+	//
+	// This member is required.
 	EndpointConfigName *string
 }
 
 type CreateEndpointOutput struct {
+
 	// The Amazon Resource Name (ARN) of the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
 
 	// Metadata pertaining to the operation's result.

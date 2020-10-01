@@ -59,19 +59,26 @@ func (c *Client) ListConnectorDefinitionVersions(ctx context.Context, params *Li
 }
 
 type ListConnectorDefinitionVersionsInput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The ID of the connector definition.
+	//
+	// This member is required.
 	ConnectorDefinitionId *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
 }
 
 type ListConnectorDefinitionVersionsOutput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// Information about a version.
 	Versions []*types.VersionInformation
 

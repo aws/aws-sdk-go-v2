@@ -88,8 +88,11 @@ func (c *Client) ConnectCustomKeyStore(ctx context.Context, params *ConnectCusto
 }
 
 type ConnectCustomKeyStoreInput struct {
+
 	// Enter the key store ID of the custom key store that you want to connect. To find
 	// the ID of a custom key store, use the DescribeCustomKeyStores () operation.
+	//
+	// This member is required.
 	CustomKeyStoreId *string
 }
 

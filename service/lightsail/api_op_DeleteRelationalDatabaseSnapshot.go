@@ -60,11 +60,15 @@ func (c *Client) DeleteRelationalDatabaseSnapshot(ctx context.Context, params *D
 }
 
 type DeleteRelationalDatabaseSnapshotInput struct {
+
 	// The name of the database snapshot that you are deleting.
+	//
+	// This member is required.
 	RelationalDatabaseSnapshotName *string
 }
 
 type DeleteRelationalDatabaseSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

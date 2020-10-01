@@ -57,6 +57,7 @@ func (c *Client) UpdateIntegrationResponse(ctx context.Context, params *UpdateIn
 
 // Updates an IntegrationResponses.
 type UpdateIntegrationResponseInput struct {
+
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the backend. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -69,17 +70,26 @@ type UpdateIntegrationResponseInput struct {
 	// response header name and {JSON-expression} is a valid JSON expression without
 	// the $ prefix.
 	ResponseParameters map[string]*string
+
 	// The collection of response templates for the integration response as a
 	// string-to-string map of key-value pairs. Response templates are represented as a
 	// key/value map, with a content-type as the key and a template as the value.
 	ResponseTemplates map[string]*string
+
 	// The template selection expression for the integration response. Supported only
 	// for WebSocket APIs.
 	TemplateSelectionExpression *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The integration response ID.
+	//
+	// This member is required.
 	IntegrationResponseId *string
+
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
 	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
@@ -89,15 +99,21 @@ type UpdateIntegrationResponseInput struct {
 	// will be passed through from the integration response to the route response or
 	// method response without modification.
 	ContentHandlingStrategy types.ContentHandlingStrategy
+
 	// The integration ID.
+	//
+	// This member is required.
 	IntegrationId *string
+
 	// The integration response key.
 	IntegrationResponseKey *string
 }
 
 type UpdateIntegrationResponseOutput struct {
+
 	// The template selection expressions for the integration response.
 	TemplateSelectionExpression *string
+
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the backend. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -110,14 +126,18 @@ type UpdateIntegrationResponseOutput struct {
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
 	ResponseParameters map[string]*string
+
 	// The integration response key.
 	IntegrationResponseKey *string
+
 	// The collection of response templates for the integration response as a
 	// string-to-string map of key-value pairs. Response templates are represented as a
 	// key/value map, with a content-type as the key and a template as the value.
 	ResponseTemplates map[string]*string
+
 	// The integration response ID.
 	IntegrationResponseId *string
+
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
 	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a

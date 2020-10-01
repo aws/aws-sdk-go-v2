@@ -63,8 +63,12 @@ func (c *Client) GetHostedZoneLimit(ctx context.Context, params *GetHostedZoneLi
 // A complex type that contains information about the request to create a hosted
 // zone.
 type GetHostedZoneLimitInput struct {
+
 	// The ID of the hosted zone that you want to get a limit for.
+	//
+	// This member is required.
 	HostedZoneId *string
+
 	// The limit that you want to get. Valid values include the following:
 	//
 	//     *
@@ -73,19 +77,27 @@ type GetHostedZoneLimitInput struct {
 	//
 	//     * MAX_VPCS_ASSOCIATED_BY_ZONE: The maximum number of
 	// Amazon VPCs that you can associate with the specified private hosted zone.
+	//
+	// This member is required.
 	Type types.HostedZoneLimitType
 }
 
 // A complex type that contains the requested limit.
 type GetHostedZoneLimitOutput struct {
+
 	// The current setting for the specified limit. For example, if you specified
 	// MAX_RRSETS_BY_ZONE for the value of Type in the request, the value of Limit is
 	// the maximum number of records that you can create in the specified hosted zone.
+	//
+	// This member is required.
 	Limit *types.HostedZoneLimit
+
 	// The current number of entities that you have created of the specified type. For
 	// example, if you specified MAX_RRSETS_BY_ZONE for the value of Type in the
 	// request, the value of Count is the current number of records that you have
 	// created in the specified hosted zone.
+	//
+	// This member is required.
 	Count *int64
 
 	// Metadata pertaining to the operation's result.

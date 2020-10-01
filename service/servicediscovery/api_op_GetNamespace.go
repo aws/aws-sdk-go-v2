@@ -56,11 +56,15 @@ func (c *Client) GetNamespace(ctx context.Context, params *GetNamespaceInput, op
 }
 
 type GetNamespaceInput struct {
+
 	// The ID of the namespace that you want to get information about.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetNamespaceOutput struct {
+
 	// A complex type that contains information about the specified namespace.
 	Namespace *types.Namespace
 

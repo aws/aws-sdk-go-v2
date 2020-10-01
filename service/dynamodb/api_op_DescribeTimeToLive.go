@@ -58,11 +58,15 @@ func (c *Client) DescribeTimeToLive(ctx context.Context, params *DescribeTimeToL
 }
 
 type DescribeTimeToLiveInput struct {
+
 	// The name of the table to be described.
+	//
+	// This member is required.
 	TableName *string
 }
 
 type DescribeTimeToLiveOutput struct {
+
 	//
 	TimeToLiveDescription *types.TimeToLiveDescription
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The health check for the instance that is specified by ServiceId and InstanceId
@@ -25,12 +24,6 @@ func (e *CustomHealthNotFound) ErrorMessage() string {
 }
 func (e *CustomHealthNotFound) ErrorCode() string             { return "CustomHealthNotFound" }
 func (e *CustomHealthNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CustomHealthNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomHealthNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation is already in progress.
 type DuplicateRequest struct {
@@ -50,18 +43,6 @@ func (e *DuplicateRequest) ErrorMessage() string {
 }
 func (e *DuplicateRequest) ErrorCode() string             { return "DuplicateRequest" }
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateRequest) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateRequest) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DuplicateRequest) GetDuplicateOperationId() string {
-	return ptr.ToString(e.DuplicateOperationId)
-}
-func (e *DuplicateRequest) HasDuplicateOperationId() bool {
-	return e.DuplicateOperationId != nil
-}
 
 // No instance exists with the specified ID, or the instance was recently
 // registered, and information about the instance hasn't propagated yet.
@@ -80,12 +61,6 @@ func (e *InstanceNotFound) ErrorMessage() string {
 }
 func (e *InstanceNotFound) ErrorCode() string             { return "InstanceNotFound" }
 func (e *InstanceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more specified values aren't valid. For example, a required value might
 // be missing, a numeric value might be outside the allowed range, or a string
@@ -105,12 +80,6 @@ func (e *InvalidInput) ErrorMessage() string {
 }
 func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInput) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInput) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The namespace that you're trying to create already exists.
 type NamespaceAlreadyExists struct {
@@ -131,24 +100,6 @@ func (e *NamespaceAlreadyExists) ErrorMessage() string {
 }
 func (e *NamespaceAlreadyExists) ErrorCode() string             { return "NamespaceAlreadyExists" }
 func (e *NamespaceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NamespaceAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NamespaceAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *NamespaceAlreadyExists) GetNamespaceId() string {
-	return ptr.ToString(e.NamespaceId)
-}
-func (e *NamespaceAlreadyExists) HasNamespaceId() bool {
-	return e.NamespaceId != nil
-}
-func (e *NamespaceAlreadyExists) GetCreatorRequestId() string {
-	return ptr.ToString(e.CreatorRequestId)
-}
-func (e *NamespaceAlreadyExists) HasCreatorRequestId() bool {
-	return e.CreatorRequestId != nil
-}
 
 // No namespace exists with the specified ID.
 type NamespaceNotFound struct {
@@ -166,12 +117,6 @@ func (e *NamespaceNotFound) ErrorMessage() string {
 }
 func (e *NamespaceNotFound) ErrorCode() string             { return "NamespaceNotFound" }
 func (e *NamespaceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NamespaceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NamespaceNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No operation exists with the specified ID.
 type OperationNotFound struct {
@@ -189,12 +134,6 @@ func (e *OperationNotFound) ErrorMessage() string {
 }
 func (e *OperationNotFound) ErrorCode() string             { return "OperationNotFound" }
 func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation can't be completed because you've reached the limit on the number
 // of requests.
@@ -213,12 +152,6 @@ func (e *RequestLimitExceeded) ErrorMessage() string {
 }
 func (e *RequestLimitExceeded) ErrorCode() string             { return "RequestLimitExceeded" }
 func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource can't be deleted because it contains other resources. For
 // example, you can't delete a service that contains any instances.
@@ -237,12 +170,6 @@ func (e *ResourceInUse) ErrorMessage() string {
 }
 func (e *ResourceInUse) ErrorCode() string             { return "ResourceInUse" }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource can't be created because you've reached the limit on the number of
 // resources.
@@ -261,12 +188,6 @@ func (e *ResourceLimitExceeded) ErrorMessage() string {
 }
 func (e *ResourceLimitExceeded) ErrorCode() string             { return "ResourceLimitExceeded" }
 func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation can't be completed because the resource was not found.
 type ResourceNotFoundException struct {
@@ -284,12 +205,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service can't be created because a service with the same name already
 // exists.
@@ -311,24 +226,6 @@ func (e *ServiceAlreadyExists) ErrorMessage() string {
 }
 func (e *ServiceAlreadyExists) ErrorCode() string             { return "ServiceAlreadyExists" }
 func (e *ServiceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceAlreadyExists) GetCreatorRequestId() string {
-	return ptr.ToString(e.CreatorRequestId)
-}
-func (e *ServiceAlreadyExists) HasCreatorRequestId() bool {
-	return e.CreatorRequestId != nil
-}
-func (e *ServiceAlreadyExists) GetServiceId() string {
-	return ptr.ToString(e.ServiceId)
-}
-func (e *ServiceAlreadyExists) HasServiceId() bool {
-	return e.ServiceId != nil
-}
-func (e *ServiceAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No service exists with the specified ID.
 type ServiceNotFound struct {
@@ -346,12 +243,6 @@ func (e *ServiceNotFound) ErrorMessage() string {
 }
 func (e *ServiceNotFound) ErrorCode() string             { return "ServiceNotFound" }
 func (e *ServiceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The list of tags on the resource is over the limit. The maximum number of tags
 // that can be applied to a resource is 50.
@@ -372,15 +263,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyTagsException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *TooManyTagsException) HasResourceName() bool {
-	return e.ResourceName != nil
-}

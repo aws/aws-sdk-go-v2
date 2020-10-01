@@ -57,17 +57,26 @@ func (c *Client) UpdateAdmChannel(ctx context.Context, params *UpdateAdmChannelI
 }
 
 type UpdateAdmChannelInput struct {
+
 	// Specifies the status and settings of the ADM (Amazon Device Messaging) channel
 	// for an application.
+	//
+	// This member is required.
 	ADMChannelRequest *types.ADMChannelRequest
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type UpdateAdmChannelOutput struct {
+
 	// Provides information about the status and settings of the ADM (Amazon Device
 	// Messaging) channel for an application.
+	//
+	// This member is required.
 	ADMChannelResponse *types.ADMChannelResponse
 
 	// Metadata pertaining to the operation's result.

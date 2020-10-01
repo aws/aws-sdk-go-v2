@@ -62,7 +62,10 @@ func (c *Client) RebootInstance(ctx context.Context, params *RebootInstanceInput
 }
 
 type RebootInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

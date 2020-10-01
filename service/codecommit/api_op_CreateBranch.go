@@ -58,11 +58,20 @@ func (c *Client) CreateBranch(ctx context.Context, params *CreateBranchInput, op
 
 // Represents the input of a create branch operation.
 type CreateBranchInput struct {
+
 	// The ID of the commit to point the new branch to.
+	//
+	// This member is required.
 	CommitId *string
+
 	// The name of the new branch to create.
+	//
+	// This member is required.
 	BranchName *string
+
 	// The name of the repository in which you want to create the new branch.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 

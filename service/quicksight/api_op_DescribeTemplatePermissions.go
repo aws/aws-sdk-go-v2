@@ -56,19 +56,29 @@ func (c *Client) DescribeTemplatePermissions(ctx context.Context, params *Descri
 }
 
 type DescribeTemplatePermissionsInput struct {
+
 	// The ID for the template.
+	//
+	// This member is required.
 	TemplateId *string
+
 	// The ID of the AWS account that contains the template that you're describing.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DescribeTemplatePermissionsOutput struct {
+
 	// A list of resource permissions to be set on the template.
 	Permissions []*types.ResourcePermission
+
 	// The ID for the template.
 	TemplateId *string
+
 	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

@@ -58,6 +58,7 @@ type DisassociateServiceRoleFromAccountInput struct {
 }
 
 type DisassociateServiceRoleFromAccountOutput struct {
+
 	// The time when the service role was disassociated from the account.
 	DisassociatedAt *string
 

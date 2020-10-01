@@ -56,19 +56,34 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 
 // The structure representing the removePermissionRequest.
 type RemovePermissionInput struct {
+
 	// The list of actions that the users and roles can perform on the profiling group.
+	//
+	// This member is required.
 	ActionGroup types.ActionGroup
+
 	// The name of the profiling group.
+	//
+	// This member is required.
 	ProfilingGroupName *string
+
 	// A unique identifier for the current revision of the policy.
+	//
+	// This member is required.
 	RevisionId *string
 }
 
 // The structure representing the removePermissionResponse.
 type RemovePermissionOutput struct {
+
 	// The resource-based policy.
+	//
+	// This member is required.
 	Policy *string
+
 	// A unique identifier for the current revision of the policy.
+	//
+	// This member is required.
 	RevisionId *string
 
 	// Metadata pertaining to the operation's result.

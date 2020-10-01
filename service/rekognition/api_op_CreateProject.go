@@ -58,11 +58,15 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 }
 
 type CreateProjectInput struct {
+
 	// The name of the project to create.
+	//
+	// This member is required.
 	ProjectName *string
 }
 
 type CreateProjectOutput struct {
+
 	// The Amazon Resource Name (ARN) of the new project. You can use the ARN to
 	// configure IAM access to the project.
 	ProjectArn *string

@@ -59,8 +59,11 @@ func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optF
 
 // DeleteAgentRequest
 type DeleteAgentInput struct {
+
 	// The Amazon Resource Name (ARN) of the agent to delete. Use the ListAgents
 	// operation to return a list of agents for your account and AWS Region.
+	//
+	// This member is required.
 	AgentArn *string
 }
 

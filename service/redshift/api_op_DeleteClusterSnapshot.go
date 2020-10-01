@@ -63,18 +63,23 @@ func (c *Client) DeleteClusterSnapshot(ctx context.Context, params *DeleteCluste
 
 //
 type DeleteClusterSnapshotInput struct {
+
 	// The unique identifier of the cluster the snapshot was created from. This
 	// parameter is required if your IAM user has a policy containing a snapshot
 	// resource element that specifies anything other than * for the cluster name.
 	// Constraints: Must be the name of valid cluster.
 	SnapshotClusterIdentifier *string
+
 	// The unique identifier of the manual snapshot to be deleted. Constraints: Must be
 	// the name of an existing snapshot that is in the available, failed, or cancelled
 	// state.
+	//
+	// This member is required.
 	SnapshotIdentifier *string
 }
 
 type DeleteClusterSnapshotOutput struct {
+
 	// Describes a snapshot.
 	Snapshot *types.Snapshot
 

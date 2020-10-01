@@ -64,24 +64,34 @@ func (c *Client) InitiateJob(ctx context.Context, params *InitiateJobInput, optF
 
 // Provides options for initiating an Amazon S3 Glacier job.
 type InitiateJobInput struct {
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// Provides options for specifying job information.
 	JobParameters *types.JobParameters
 }
 
 // Contains the Amazon S3 Glacier response to your request.
 type InitiateJobOutput struct {
+
 	// The relative URI path of the job.
 	Location *string
+
 	// The ID of the job.
 	JobId *string
+
 	// The path to the location of where the select results are stored.
 	JobOutputPath *string
 

@@ -95,11 +95,13 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 
 // Represents the input of a Query operation.
 type QueryInput struct {
+
 	// This is a legacy parameter. Use KeyConditionExpression instead. For more
 	// information, see KeyConditions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	KeyConditions map[string]*types.Condition
+
 	// Specifies the order for index traversal: If true (default), the traversal is
 	// performed in ascending order; if false, the traversal is performed in descending
 	// order. Items with the same partition key value are stored in sorted order by
@@ -111,17 +113,23 @@ type QueryInput struct {
 	// ScanIndexForward is false, DynamoDB reads the results in reverse order by sort
 	// key value, and then returns the results to the client.
 	ScanIndexForward *bool
+
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see QueryFilter
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html)
 	// in the Amazon DynamoDB Developer Guide.
 	QueryFilter map[string]*types.Condition
+
 	// The name of the table containing the requested items.
+	//
+	// This member is required.
 	TableName *string
+
 	// The name of an index to query. This index can be any local secondary index or
 	// global secondary index on the table. Note that if you use the IndexName
 	// parameter, you must also provide TableName.
 	IndexName *string
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -138,6 +146,7 @@ type QueryInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -178,11 +187,13 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
+
 	// This is a legacy parameter. Use ProjectionExpression instead. For more
 	// information, see AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
 	AttributesToGet []*string
+
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
 	// suppose that you wanted to check whether the value of the ProductStatus
@@ -195,6 +206,7 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]*types.AttributeValue
+
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document. The
 	// attributes in the expression must be separated by commas. If no attribute names
@@ -204,17 +216,20 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProjectionExpression *string
+
 	// Determines the read consistency model: If set to true, then the operation uses
 	// strongly consistent reads; otherwise, the operation uses eventually consistent
 	// reads. Strongly consistent reads are not supported on global secondary indexes.
 	// If you query a global secondary index with ConsistentRead set to true, you will
 	// receive a ValidationException.
 	ConsistentRead *bool
+
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionalOperator types.ConditionalOperator
+
 	// The attributes to be returned in the result. You can retrieve all item
 	// attributes, specific item attributes, the count of matching items, or in the
 	// case of an index, some or all of the attributes projected into the index.
@@ -256,6 +271,7 @@ type QueryInput struct {
 	// then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for
 	// Select will return an error.
 	Select types.Select
+
 	// The maximum number of items to evaluate (not necessarily the number of matching
 	// items). If DynamoDB processes the number of items up to the limit while
 	// processing the results, it stops the operation and returns the matching values
@@ -268,6 +284,7 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
 	// in the Amazon DynamoDB Developer Guide.
 	Limit *int32
+
 	// A string that contains conditions that DynamoDB applies after the Query
 	// operation, but before the data is returned to you. Items that do not satisfy the
 	// FilterExpression criteria are not returned. A FilterExpression does not allow
@@ -278,11 +295,13 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults)
 	// in the Amazon DynamoDB Developer Guide.
 	FilterExpression *string
+
 	// The primary key of the first item that this operation will evaluate. Use the
 	// value that was returned for LastEvaluatedKey in the previous operation. The data
 	// type for ExclusiveStartKey must be String, Number, or Binary. No set data types
 	// are allowed.
 	ExclusiveStartKey map[string]*types.AttributeValue
+
 	// The condition that specifies the key values for items to be retrieved by the
 	// Query action.  <p>The condition must perform an equality test on a single
 	// partition key value.</p> <p>The condition can optionally perform one of several
@@ -341,6 +360,7 @@ type QueryInput struct {
 
 // Represents the output of a Query operation.
 type QueryOutput struct {
+
 	// The number of items evaluated, before any QueryFilter is applied. A high
 	// ScannedCount value with few, or no, Count results indicates an inefficient Query
 	// operation. For more information, see Count and ScannedCount
@@ -348,15 +368,18 @@ type QueryOutput struct {
 	// in the Amazon DynamoDB Developer Guide. If you did not use a filter in the
 	// request, then ScannedCount is the same as Count.
 	ScannedCount *int32
+
 	// The number of items in the response. If you used a QueryFilter in the request,
 	// then Count is the number of items returned after the filter was applied, and
 	// ScannedCount is the number of matching items before the filter was applied. If
 	// you did not use a filter in the request, then Count and ScannedCount are the
 	// same.
 	Count *int32
+
 	// An array of item attributes that match the query criteria. Each element in this
 	// array consists of an attribute name and the value for that attribute.
 	Items []map[string]*types.AttributeValue
+
 	// The capacity units consumed by the Query operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the table
 	// and any indexes involved in the operation. ConsumedCapacity is only returned if
@@ -365,6 +388,7 @@ type QueryOutput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *types.ConsumedCapacity
+
 	// The primary key of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
 	// value in the new request. If LastEvaluatedKey is empty, then the "last page" of

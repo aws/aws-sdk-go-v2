@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // AWS CodeBuild is not available in the specified region.
@@ -28,12 +27,6 @@ func (e *CodeBuildNotInServiceRegionException) ErrorCode() string {
 func (e *CodeBuildNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CodeBuildNotInServiceRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CodeBuildNotInServiceRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A generic service exception has occurred.
 type ElasticBeanstalkServiceException struct {
@@ -53,12 +46,6 @@ func (e *ElasticBeanstalkServiceException) ErrorCode() string {
 	return "ElasticBeanstalkServiceException"
 }
 func (e *ElasticBeanstalkServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ElasticBeanstalkServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ElasticBeanstalkServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account does not have sufficient privileges for one or more AWS
 // services.
@@ -79,12 +66,6 @@ func (e *InsufficientPrivilegesException) ErrorCode() string {
 	return "InsufficientPrivilegesException"
 }
 func (e *InsufficientPrivilegesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientPrivilegesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientPrivilegesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more input parameters is not valid. Please correct the input parameters
 // and try the operation again.
@@ -103,12 +84,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cannot modify the managed action in its current state.
 type ManagedActionInvalidStateException struct {
@@ -130,12 +105,6 @@ func (e *ManagedActionInvalidStateException) ErrorCode() string {
 func (e *ManagedActionInvalidStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ManagedActionInvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ManagedActionInvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Unable to perform the specified operation because another operation that effects
 // an element in this activity is already in progress.
@@ -154,12 +123,6 @@ func (e *OperationInProgressException) ErrorMessage() string {
 }
 func (e *OperationInProgressException) ErrorCode() string             { return "OperationInProgressException" }
 func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot delete the platform version because there are still environments
 // running on it.
@@ -182,12 +145,6 @@ func (e *PlatformVersionStillReferencedException) ErrorCode() string {
 func (e *PlatformVersionStillReferencedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *PlatformVersionStillReferencedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PlatformVersionStillReferencedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource doesn't exist for the specified Amazon Resource Name (ARN).
 type ResourceNotFoundException struct {
@@ -205,12 +162,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The type of the specified Amazon Resource Name (ARN) isn't supported for this
 // operation.
@@ -231,12 +182,6 @@ func (e *ResourceTypeNotSupportedException) ErrorCode() string {
 	return "ResourceTypeNotSupportedException"
 }
 func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceTypeNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceTypeNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified S3 bucket does not belong to the S3 region in which the service is
 // running. The following regions are supported:
@@ -266,12 +211,6 @@ func (e *S3LocationNotInServiceRegionException) ErrorCode() string {
 func (e *S3LocationNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *S3LocationNotInServiceRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *S3LocationNotInServiceRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account does not have a subscription to Amazon S3.
 type S3SubscriptionRequiredException struct {
@@ -291,12 +230,6 @@ func (e *S3SubscriptionRequiredException) ErrorCode() string {
 	return "S3SubscriptionRequiredException"
 }
 func (e *S3SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *S3SubscriptionRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *S3SubscriptionRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Unable to delete the Amazon S3 source bundle associated with the application
 // version. The application version was deleted successfully.
@@ -315,12 +248,6 @@ func (e *SourceBundleDeletionException) ErrorMessage() string {
 }
 func (e *SourceBundleDeletionException) ErrorCode() string             { return "SourceBundleDeletionException" }
 func (e *SourceBundleDeletionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SourceBundleDeletionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SourceBundleDeletionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account has reached its limit of applications.
 type TooManyApplicationsException struct {
@@ -338,12 +265,6 @@ func (e *TooManyApplicationsException) ErrorMessage() string {
 }
 func (e *TooManyApplicationsException) ErrorCode() string             { return "TooManyApplicationsException" }
 func (e *TooManyApplicationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyApplicationsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyApplicationsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account has reached its limit of application versions.
 type TooManyApplicationVersionsException struct {
@@ -365,12 +286,6 @@ func (e *TooManyApplicationVersionsException) ErrorCode() string {
 func (e *TooManyApplicationVersionsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyApplicationVersionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyApplicationVersionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account has reached its limit of Amazon S3 buckets.
 type TooManyBucketsException struct {
@@ -388,12 +303,6 @@ func (e *TooManyBucketsException) ErrorMessage() string {
 }
 func (e *TooManyBucketsException) ErrorCode() string             { return "TooManyBucketsException" }
 func (e *TooManyBucketsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyBucketsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyBucketsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account has reached its limit of configuration templates.
 type TooManyConfigurationTemplatesException struct {
@@ -415,12 +324,6 @@ func (e *TooManyConfigurationTemplatesException) ErrorCode() string {
 func (e *TooManyConfigurationTemplatesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyConfigurationTemplatesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyConfigurationTemplatesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account has reached its limit of environments.
 type TooManyEnvironmentsException struct {
@@ -438,12 +341,6 @@ func (e *TooManyEnvironmentsException) ErrorMessage() string {
 }
 func (e *TooManyEnvironmentsException) ErrorCode() string             { return "TooManyEnvironmentsException" }
 func (e *TooManyEnvironmentsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyEnvironmentsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyEnvironmentsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the maximum number of allowed platforms associated with the
 // account.
@@ -462,12 +359,6 @@ func (e *TooManyPlatformsException) ErrorMessage() string {
 }
 func (e *TooManyPlatformsException) ErrorCode() string             { return "TooManyPlatformsException" }
 func (e *TooManyPlatformsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyPlatformsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyPlatformsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of tags in the resource would exceed the number of tags that each
 // resource can have. To calculate this, the operation considers both the number of
@@ -488,9 +379,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -86,19 +86,27 @@ func (c *Client) CreateSqlInjectionMatchSet(ctx context.Context, params *CreateS
 
 // A request to create a SqlInjectionMatchSet ().
 type CreateSqlInjectionMatchSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// A friendly name or description for the SqlInjectionMatchSet () that you're
 	// creating. You can't change Name after you create the SqlInjectionMatchSet.
+	//
+	// This member is required.
 	Name *string
 }
 
 // The response to a CreateSqlInjectionMatchSet request.
 type CreateSqlInjectionMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the CreateSqlInjectionMatchSet request.
 	// You can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// A SqlInjectionMatchSet ().
 	SqlInjectionMatchSet *types.SqlInjectionMatchSet
 

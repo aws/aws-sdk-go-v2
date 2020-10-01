@@ -58,24 +58,34 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 
 // The input for the GetPolicy operation.
 type GetPolicyInput struct {
+
 	// The name of the policy.
+	//
+	// This member is required.
 	PolicyName *string
 }
 
 // The output from the GetPolicy operation.
 type GetPolicyOutput struct {
+
 	// The date the policy was created.
 	CreationDate *time.Time
+
 	// The policy name.
 	PolicyName *string
+
 	// The date the policy was last modified.
 	LastModifiedDate *time.Time
+
 	// The policy ARN.
 	PolicyArn *string
+
 	// The generation ID of the policy.
 	GenerationId *string
+
 	// The default policy version ID.
 	DefaultVersionId *string
+
 	// The JSON document that describes the policy.
 	PolicyDocument *string
 

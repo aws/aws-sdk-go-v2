@@ -63,27 +63,39 @@ func (c *Client) ImportKeyPair(ctx context.Context, params *ImportKeyPairInput, 
 }
 
 type ImportKeyPairInput struct {
+
 	// A unique name for the key pair.
+	//
+	// This member is required.
 	KeyName *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to apply to the imported key pair.
 	TagSpecifications []*types.TagSpecification
+
 	// The public key. For API calls, the text must be base64-encoded. For command line
 	// tools, base64 encoding is performed for you.
+	//
+	// This member is required.
 	PublicKeyMaterial []byte
 }
 
 type ImportKeyPairOutput struct {
+
 	// The key pair name you provided.
 	KeyName *string
+
 	// The tags applied to the imported key pair.
 	Tags []*types.Tag
+
 	// The ID of the resulting key pair.
 	KeyPairId *string
+
 	// The MD5 public key fingerprint as specified in section 4 of RFC 4716.
 	KeyFingerprint *string
 

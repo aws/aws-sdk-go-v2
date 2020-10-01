@@ -98,6 +98,7 @@ func (c *Client) BatchGetItem(ctx context.Context, params *BatchGetItemInput, op
 
 // Represents the input of a BatchGetItem operation.
 type BatchGetItemInput struct {
+
 	// A map of one or more table names and, for each table, a map that describes one
 	// or more items to retrieve from that table. Each table name can be used only once
 	// per BatchGetItem request. Each element in the map of items to retrieve consists
@@ -169,7 +170,10 @@ type BatchGetItemInput struct {
 	// AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.  </p> </li> </ul>
+	//
+	// This member is required.
 	RequestItems map[string]*types.KeysAndAttributes
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -190,10 +194,12 @@ type BatchGetItemInput struct {
 
 // Represents the output of a BatchGetItem operation.
 type BatchGetItemOutput struct {
+
 	// A map of table name to a list of items. Each object in Responses consists of a
 	// table name, along with a map of attribute data consisting of the data type and
 	// attribute value.
 	Responses map[string][]map[string]*types.AttributeValue
+
 	// The read capacity units consumed by the entire BatchGetItem operation. Each
 	// element consists of:
 	//
@@ -202,6 +208,7 @@ type BatchGetItemOutput struct {
 	//
 	//     * CapacityUnits - The total number of capacity units consumed.
 	ConsumedCapacity []*types.ConsumedCapacity
+
 	// A map of tables and their respective keys that were not processed with the
 	// current response. The UnprocessedKeys value is in the same form as RequestItems,
 	// so the value can be provided directly to a subsequent BatchGetItem operation.

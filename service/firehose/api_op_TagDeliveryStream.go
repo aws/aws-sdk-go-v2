@@ -65,9 +65,15 @@ func (c *Client) TagDeliveryStream(ctx context.Context, params *TagDeliveryStrea
 }
 
 type TagDeliveryStreamInput struct {
+
 	// The name of the delivery stream to which you want to add the tags.
+	//
+	// This member is required.
 	DeliveryStreamName *string
+
 	// A set of key-value pairs to use to create the tags.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

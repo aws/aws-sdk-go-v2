@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have authorization to perform the requested action.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can apply up to 10 custom attributes per resource. You can view the
 // attributes of a resource with ListAttributes (). You can remove existing
@@ -51,12 +44,6 @@ func (e *AttributeLimitExceededException) ErrorCode() string {
 	return "AttributeLimitExceededException"
 }
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AttributeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AttributeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your AWS account has been blocked. For more information, contact AWS Support
 // (http://aws.amazon.com/contact-us/).
@@ -75,12 +62,6 @@ func (e *BlockedException) ErrorMessage() string {
 }
 func (e *BlockedException) ErrorCode() string             { return "BlockedException" }
 func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BlockedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BlockedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // These errors are usually caused by a client action, such as using an action or
 // resource on behalf of a user that doesn't have permissions to use the action or
@@ -100,12 +81,6 @@ func (e *ClientException) ErrorMessage() string {
 }
 func (e *ClientException) ErrorCode() string             { return "ClientException" }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot delete a cluster that has registered container instances. First,
 // deregister the container instances before you can delete the cluster. For more
@@ -129,12 +104,6 @@ func (e *ClusterContainsContainerInstancesException) ErrorCode() string {
 func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterContainsContainerInstancesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterContainsContainerInstancesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot delete a cluster that contains services. First, update the service to
 // reduce its desired task count to 0 and then delete the service. For more
@@ -156,12 +125,6 @@ func (e *ClusterContainsServicesException) ErrorCode() string {
 	return "ClusterContainsServicesException"
 }
 func (e *ClusterContainsServicesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterContainsServicesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterContainsServicesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You cannot delete a cluster that has active tasks.
 type ClusterContainsTasksException struct {
@@ -179,12 +142,6 @@ func (e *ClusterContainsTasksException) ErrorMessage() string {
 }
 func (e *ClusterContainsTasksException) ErrorCode() string             { return "ClusterContainsTasksException" }
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterContainsTasksException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterContainsTasksException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified cluster could not be found. You can view your available clusters
 // with ListClusters (). Amazon ECS clusters are Region-specific.
@@ -203,12 +160,6 @@ func (e *ClusterNotFoundException) ErrorMessage() string {
 }
 func (e *ClusterNotFoundException) ErrorCode() string             { return "ClusterNotFoundException" }
 func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified parameter is invalid. Review the available parameters for the API
 // request.
@@ -227,12 +178,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit for the resource has been exceeded.
 type LimitExceededException struct {
@@ -250,12 +195,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon ECS is unable to determine the current version of the Amazon ECS
 // container agent on the container instance and does not have enough information
@@ -277,12 +216,6 @@ func (e *MissingVersionException) ErrorMessage() string {
 }
 func (e *MissingVersionException) ErrorCode() string             { return "MissingVersionException" }
 func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingVersionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingVersionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no update available for this Amazon ECS container agent. This could be
 // because the agent is already running the latest version, or it is so old that
@@ -302,12 +235,6 @@ func (e *NoUpdateAvailableException) ErrorMessage() string {
 }
 func (e *NoUpdateAvailableException) ErrorCode() string             { return "NoUpdateAvailableException" }
 func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoUpdateAvailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoUpdateAvailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified platform version does not satisfy the task definition's required
 // capabilities.
@@ -330,12 +257,6 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorCode() string {
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *PlatformTaskDefinitionIncompatibilityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PlatformTaskDefinitionIncompatibilityException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified platform version does not exist.
 type PlatformUnknownException struct {
@@ -353,12 +274,6 @@ func (e *PlatformUnknownException) ErrorMessage() string {
 }
 func (e *PlatformUnknownException) ErrorCode() string             { return "PlatformUnknownException" }
 func (e *PlatformUnknownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PlatformUnknownException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PlatformUnknownException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource is in-use and cannot be removed.
 type ResourceInUseException struct {
@@ -376,12 +291,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
@@ -399,12 +308,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // These errors are usually caused by a server issue.
 type ServerException struct {
@@ -422,12 +325,6 @@ func (e *ServerException) ErrorMessage() string {
 }
 func (e *ServerException) ErrorCode() string             { return "ServerException" }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified service is not active. You can't update a service that is
 // inactive. If you have previously deleted a service, you can re-create it with
@@ -447,12 +344,6 @@ func (e *ServiceNotActiveException) ErrorMessage() string {
 }
 func (e *ServiceNotActiveException) ErrorCode() string             { return "ServiceNotActiveException" }
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceNotActiveException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceNotActiveException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified service could not be found. You can view your available services
 // with ListServices (). Amazon ECS services are cluster-specific and
@@ -472,12 +363,6 @@ func (e *ServiceNotFoundException) ErrorMessage() string {
 }
 func (e *ServiceNotFoundException) ErrorCode() string             { return "ServiceNotFoundException" }
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified target could not be found. You can view your available container
 // instances with ListContainerInstances (). Amazon ECS container instances are
@@ -497,12 +382,6 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 }
 func (e *TargetNotFoundException) ErrorCode() string             { return "TargetNotFoundException" }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified task set could not be found. You can view your available task sets
 // with DescribeTaskSets (). Task sets are specific to each cluster, service and
@@ -522,12 +401,6 @@ func (e *TaskSetNotFoundException) ErrorMessage() string {
 }
 func (e *TaskSetNotFoundException) ErrorCode() string             { return "TaskSetNotFoundException" }
 func (e *TaskSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TaskSetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TaskSetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified task is not supported in this Region.
 type UnsupportedFeatureException struct {
@@ -545,12 +418,6 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 }
 func (e *UnsupportedFeatureException) ErrorCode() string             { return "UnsupportedFeatureException" }
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedFeatureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedFeatureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is already a current Amazon ECS container agent update in progress on the
 // specified container instance. If the container agent becomes disconnected while
@@ -572,9 +439,3 @@ func (e *UpdateInProgressException) ErrorMessage() string {
 }
 func (e *UpdateInProgressException) ErrorCode() string             { return "UpdateInProgressException" }
 func (e *UpdateInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UpdateInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UpdateInProgressException) HasMessage() bool {
-	return e.Message != nil
-}

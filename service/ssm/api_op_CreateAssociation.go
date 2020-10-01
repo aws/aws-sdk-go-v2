@@ -66,16 +66,20 @@ func (c *Client) CreateAssociation(ctx context.Context, params *CreateAssociatio
 }
 
 type CreateAssociationInput struct {
+
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
 	// it.
 	ApplyOnlyAtCronInterval *bool
+
 	// The document version you want to associate with the target(s). Can be a specific
 	// version or the default version.
 	DocumentVersion *string
+
 	// The severity level to assign to the association.
 	ComplianceSeverity types.AssociationComplianceSeverity
+
 	// The instance ID. InstanceId has been deprecated. To specify an instance ID for
 	// an association, use the Targets parameter. Requests that include the parameter
 	// InstanceID with SSM documents that use schema version 2.0 or later will fail. In
@@ -83,6 +87,7 @@ type CreateAssociationInput struct {
 	// AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or
 	// ScheduleExpression. To use these parameters, you must use the Targets parameter.
 	InstanceId *string
+
 	// The targets for the association. You can target instances by using tags, AWS
 	// Resource Groups, all instances in an AWS account, or individual instance IDs.
 	// For more information about choosing targets for an association, see Using
@@ -90,6 +95,7 @@ type CreateAssociationInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the AWS Systems Manager User Guide.
 	Targets []*types.Target
+
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to
 	// determine the compliance status. If the association execution runs successfully,
@@ -100,8 +106,10 @@ type CreateAssociationInput struct {
 	// your direct call to the PutComplianceItems () API action. By default, all
 	// associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
+
 	// A cron expression when the association will be applied to the target(s).
 	ScheduleExpression *string
+
 	// The number of errors that are allowed before the system stops sending requests
 	// to run the association on additional targets. You can specify either an absolute
 	// number of errors, for example 10, or a percentage of the target set, for example
@@ -115,9 +123,11 @@ type CreateAssociationInput struct {
 	// max-errors failed executions, set MaxConcurrency to 1 so that executions proceed
 	// one at a time.
 	MaxErrors *string
+
 	// Specify the target for the association. This target is required for associations
 	// that use an Automation document and target resources by using rate controls.
 	AutomationTargetParameterName *string
+
 	// The name of the SSM document that contains the configuration information for the
 	// instance. You can specify Command or Automation documents. You can specify
 	// AWS-predefined documents, documents you created, or a document that is shared
@@ -128,13 +138,19 @@ type CreateAssociationInput struct {
 	// AWS-predefined documents and SSM documents you created in your account, you only
 	// need to specify the document name. For example, AWS-ApplyPatchBaseline or
 	// My-Document.
+	//
+	// This member is required.
 	Name *string
+
 	// The parameters for the runtime configuration of the document.
 	Parameters map[string][]*string
+
 	// An S3 bucket where you want to store the output details of the request.
 	OutputLocation *types.InstanceAssociationOutputLocation
+
 	// Specify a descriptive name for the association.
 	AssociationName *string
+
 	// The maximum number of targets allowed to run the association at the same time.
 	// You can specify a number, for example 10, or a percentage of the target set, for
 	// example 10%. The default value is 100%, which means all targets run the
@@ -147,6 +163,7 @@ type CreateAssociationInput struct {
 }
 
 type CreateAssociationOutput struct {
+
 	// Information about the association.
 	AssociationDescription *types.AssociationDescription
 

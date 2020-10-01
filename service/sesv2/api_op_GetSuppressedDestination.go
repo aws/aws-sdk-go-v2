@@ -59,13 +59,19 @@ func (c *Client) GetSuppressedDestination(ctx context.Context, params *GetSuppre
 // A request to retrieve information about an email address that's on the
 // suppression list for your account.
 type GetSuppressedDestinationInput struct {
+
 	// The email address that's on the account suppression list.
+	//
+	// This member is required.
 	EmailAddress *string
 }
 
 // Information about the suppressed email address.
 type GetSuppressedDestinationOutput struct {
+
 	// An object containing information about the suppressed email address.
+	//
+	// This member is required.
 	SuppressedDestination *types.SuppressedDestination
 
 	// Metadata pertaining to the operation's result.

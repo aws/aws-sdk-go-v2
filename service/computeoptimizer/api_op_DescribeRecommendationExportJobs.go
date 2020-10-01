@@ -59,26 +59,32 @@ func (c *Client) DescribeRecommendationExportJobs(ctx context.Context, params *D
 }
 
 type DescribeRecommendationExportJobsInput struct {
+
 	// The token to advance to the next page of export jobs.
 	NextToken *string
+
 	// An array of objects that describe a filter to return a more specific list of
 	// export jobs.
 	Filters []*types.JobFilter
+
 	// The identification numbers of the export jobs to return.  <p>An export job ID is
 	// returned when you create an export using the
 	// <code>ExportAutoScalingGroupRecommendations</code> or
 	// <code>ExportEC2InstanceRecommendations</code> actions.</p> <p>All export jobs
 	// created in the last seven days are returned if this parameter is omitted.</p>
 	JobIds []*string
+
 	// The maximum number of export jobs to return with a single request. To retrieve
 	// the remaining results, make another request with the returned NextToken value.
 	MaxResults *int32
 }
 
 type DescribeRecommendationExportJobsOutput struct {
+
 	// The token to use to advance to the next page of export jobs. This value is null
 	// when there are no more pages of export jobs to return.
 	NextToken *string
+
 	// An array of objects that describe recommendation export jobs.
 	RecommendationExportJobs []*types.RecommendationExportJob
 

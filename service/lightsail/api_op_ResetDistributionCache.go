@@ -59,6 +59,7 @@ func (c *Client) ResetDistributionCache(ctx context.Context, params *ResetDistri
 }
 
 type ResetDistributionCacheInput struct {
+
 	// The name of the distribution for which to reset cache.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p>
@@ -66,13 +67,16 @@ type ResetDistributionCacheInput struct {
 }
 
 type ResetDistributionCacheOutput struct {
+
 	// The timestamp of the reset cache request (e.g., 1479734909.17) in Unix time
 	// format.
 	CreateTime *time.Time
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
 	Operation *types.Operation
+
 	// The status of the reset cache request.
 	Status *string
 

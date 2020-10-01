@@ -57,11 +57,17 @@ func (c *Client) PutRetentionPolicy(ctx context.Context, params *PutRetentionPol
 }
 
 type PutRetentionPolicyInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
+
 	// The number of days to retain the log events in the specified log group. Possible
 	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
 	// and 3653.
+	//
+	// This member is required.
 	RetentionInDays *int32
 }
 

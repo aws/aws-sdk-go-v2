@@ -57,21 +57,28 @@ func (c *Client) DescribeModelVersions(ctx context.Context, params *DescribeMode
 }
 
 type DescribeModelVersionsInput struct {
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The model version number.
 	ModelVersionNumber *string
+
 	// The model type.
 	ModelType types.ModelTypeEnum
+
 	// The model ID.
 	ModelId *string
+
 	// The next token from the previous results.
 	NextToken *string
 }
 
 type DescribeModelVersionsOutput struct {
+
 	// The next token.
 	NextToken *string
+
 	// The model version details.
 	ModelVersionDetails []*types.ModelVersionDetail
 

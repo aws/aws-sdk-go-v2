@@ -56,9 +56,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The ARN of the EventBridge resource from which you are removing tags.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// The list of tag keys to remove from the resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

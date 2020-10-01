@@ -12,19 +12,27 @@ type AbortTransactionResult struct {
 
 // Contains the details of the transaction to commit.
 type CommitTransactionRequest struct {
+
 	// Specifies the transaction ID of the transaction to commit.
+	//
+	// This member is required.
 	TransactionId *string
+
 	// Specifies the commit digest for the transaction to commit. For every active
 	// transaction, the commit digest must be passed. QLDB validates CommitDigest and
 	// rejects the commit with an error if the digest computed on the client does not
 	// match the digest computed by QLDB.
+	//
+	// This member is required.
 	CommitDigest []byte
 }
 
 // Contains the details of the committed transaction.
 type CommitTransactionResult struct {
+
 	// The transaction ID of the committed transaction.
 	TransactionId *string
+
 	// The commit digest of the committed transaction.
 	CommitDigest []byte
 }
@@ -39,50 +47,71 @@ type EndSessionResult struct {
 
 // Specifies a request to execute a statement.
 type ExecuteStatementRequest struct {
+
 	// Specifies the parameters for the parameterized statement in the request.
 	Parameters []*ValueHolder
+
 	// Specifies the transaction ID of the request.
+	//
+	// This member is required.
 	TransactionId *string
+
 	// Specifies the statement of the request.
+	//
+	// This member is required.
 	Statement *string
 }
 
 // Contains the details of the executed statement.
 type ExecuteStatementResult struct {
+
 	// Contains the details of the first fetched page.
 	FirstPage *Page
 }
 
 // Specifies the details of the page to be fetched.
 type FetchPageRequest struct {
+
 	// Specifies the next page token of the page to be fetched.
+	//
+	// This member is required.
 	NextPageToken *string
+
 	// Specifies the transaction ID of the page to be fetched.
+	//
+	// This member is required.
 	TransactionId *string
 }
 
 // Contains the page that was fetched.
 type FetchPageResult struct {
+
 	// Contains details of the fetched page.
 	Page *Page
 }
 
 // Contains details of the fetched page.
 type Page struct {
+
 	// The token of the next page.
 	NextPageToken *string
+
 	// A structure that contains values in multiple encoding formats.
 	Values []*ValueHolder
 }
 
 // Specifies a request to start a new session.
 type StartSessionRequest struct {
+
 	// The name of the ledger to start a new session against.
+	//
+	// This member is required.
 	LedgerName *string
 }
 
 // Contains the details of the started session.
 type StartSessionResult struct {
+
 	// Session token of the started session. This SessionToken is required for every
 	// subsequent command that is issued during the current session.
 	SessionToken *string
@@ -94,14 +123,17 @@ type StartTransactionRequest struct {
 
 // Contains the details of the started transaction.
 type StartTransactionResult struct {
+
 	// The transaction ID of the started transaction.
 	TransactionId *string
 }
 
 // A structure that can contain an Amazon Ion value in multiple encoding formats.
 type ValueHolder struct {
+
 	// An Amazon Ion binary value contained in a ValueHolder structure.
 	IonBinary []byte
+
 	// An Amazon Ion plaintext value contained in a ValueHolder structure.
 	IonText *string
 }

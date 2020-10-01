@@ -56,23 +56,31 @@ func (c *Client) DescribeMaintenanceWindowTasks(ctx context.Context, params *Des
 }
 
 type DescribeMaintenanceWindowTasksInput struct {
+
 	// Optional filters used to narrow down the scope of the returned tasks. The
 	// supported filter keys are WindowTaskId, TaskArn, Priority, and TaskType.
 	Filters []*types.MaintenanceWindowFilter
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The ID of the maintenance window whose tasks should be retrieved.
+	//
+	// This member is required.
 	WindowId *string
 }
 
 type DescribeMaintenanceWindowTasksOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// Information about the tasks in the maintenance window.
 	Tasks []*types.MaintenanceWindowTask
 

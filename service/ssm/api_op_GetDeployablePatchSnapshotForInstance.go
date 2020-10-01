@@ -56,21 +56,31 @@ func (c *Client) GetDeployablePatchSnapshotForInstance(ctx context.Context, para
 }
 
 type GetDeployablePatchSnapshotForInstanceInput struct {
+
 	// The ID of the instance for which the appropriate patch snapshot should be
 	// retrieved.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The user-defined snapshot ID.
+	//
+	// This member is required.
 	SnapshotId *string
 }
 
 type GetDeployablePatchSnapshotForInstanceOutput struct {
+
 	// The user-defined snapshot ID.
 	SnapshotId *string
+
 	// The ID of the instance.
 	InstanceId *string
+
 	// Returns the specific operating system (for example Windows Server 2012 or Amazon
 	// Linux 2015.09) on the instance for the specified patch snapshot.
 	Product *string
+
 	// A pre-signed Amazon S3 URL that can be used to download the patch snapshot.
 	SnapshotDownloadUrl *string
 

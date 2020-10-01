@@ -56,13 +56,21 @@ func (c *Client) CreateRoleAlias(ctx context.Context, params *CreateRoleAliasInp
 }
 
 type CreateRoleAliasInput struct {
+
 	// The role ARN.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// How long (in seconds) the credentials will be valid.
 	CredentialDurationSeconds *int32
+
 	// The role alias that points to a role ARN. This allows you to change the role
 	// without having to update the device.
+	//
+	// This member is required.
 	RoleAlias *string
+
 	// Metadata which can be used to manage the role alias. For URI Request parameters
 	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use
 	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
@@ -71,8 +79,10 @@ type CreateRoleAliasInput struct {
 }
 
 type CreateRoleAliasOutput struct {
+
 	// The role alias ARN.
 	RoleAliasArn *string
+
 	// The role alias.
 	RoleAlias *string
 

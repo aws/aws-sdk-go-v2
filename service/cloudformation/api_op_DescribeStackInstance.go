@@ -58,16 +58,26 @@ func (c *Client) DescribeStackInstance(ctx context.Context, params *DescribeStac
 }
 
 type DescribeStackInstanceInput struct {
+
 	// The name or the unique stack ID of the stack set that you want to get stack
 	// instance information for.
+	//
+	// This member is required.
 	StackSetName *string
+
 	// The ID of an AWS account that's associated with this stack instance.
+	//
+	// This member is required.
 	StackInstanceAccount *string
+
 	// The name of a Region that's associated with this stack instance.
+	//
+	// This member is required.
 	StackInstanceRegion *string
 }
 
 type DescribeStackInstanceOutput struct {
+
 	// The stack instance that matches the specified request parameters.
 	StackInstance *types.StackInstance
 

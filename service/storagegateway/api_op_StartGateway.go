@@ -64,14 +64,18 @@ func (c *Client) StartGateway(ctx context.Context, params *StartGatewayInput, op
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway to start.
 type StartGatewayInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
 // restarted.
 type StartGatewayOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

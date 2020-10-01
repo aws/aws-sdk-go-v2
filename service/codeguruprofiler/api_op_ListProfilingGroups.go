@@ -55,14 +55,17 @@ func (c *Client) ListProfilingGroups(ctx context.Context, params *ListProfilingG
 
 // The structure representing the listProfilingGroupsRequest.
 type ListProfilingGroupsInput struct {
+
 	// A Boolean value indicating whether to include a description.
 	IncludeDescription *bool
+
 	// The maximum number of profiling groups results returned by ListProfilingGroups
 	// in paginated output. When this parameter is used, ListProfilingGroups only
 	// returns maxResults results in a single page along with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
 	// another ListProfilingGroups request with the returned nextToken value.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated ListProfilingGroups
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -74,13 +77,18 @@ type ListProfilingGroupsInput struct {
 
 // The structure representing the listProfilingGroupsResponse.
 type ListProfilingGroupsOutput struct {
+
 	// The nextToken value to include in a future ListProfilingGroups request. When the
 	// results of a ListProfilingGroups request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
+
 	// Information about profiling group names.
+	//
+	// This member is required.
 	ProfilingGroupNames []*string
+
 	// Information about profiling groups.
 	ProfilingGroups []*types.ProfilingGroupDescription
 

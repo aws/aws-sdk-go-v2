@@ -56,15 +56,21 @@ func (c *Client) GetUserPoolMfaConfig(ctx context.Context, params *GetUserPoolMf
 }
 
 type GetUserPoolMfaConfigInput struct {
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type GetUserPoolMfaConfigOutput struct {
+
 	// The SMS text message multi-factor (MFA) configuration.
 	SmsMfaConfiguration *types.SmsMfaConfigType
+
 	// The software token multi-factor (MFA) configuration.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
+
 	// The multi-factor (MFA) configuration. Valid values include:
 	//
 	//     * OFF MFA will

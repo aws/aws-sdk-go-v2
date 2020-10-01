@@ -55,27 +55,35 @@ func (c *Client) ListVirtualInterfaceTestHistory(ctx context.Context, params *Li
 }
 
 type ListVirtualInterfaceTestHistoryInput struct {
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. If
 	// MaxResults is given a value larger than 100, only 100 results are returned.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The ID of the virtual interface failover test.
 	TestId *string
+
 	// The status of the virtual interface failover test.
 	Status *string
+
 	// The BGP peers that were placed in the DOWN state during the virtual interface
 	// failover test.
 	BgpPeers []*string
+
 	// The ID of the virtual interface that was tested.
 	VirtualInterfaceId *string
 }
 
 type ListVirtualInterfaceTestHistoryOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The ID of the tested virtual interface.
 	VirtualInterfaceTestHistory []*types.VirtualInterfaceTestHistory
 

@@ -153,6 +153,7 @@ func (c *Client) AssumeRole(ctx context.Context, params *AssumeRoleInput, optFns
 }
 
 type AssumeRoleInput struct {
+
 	// A unique identifier that might be required when you assume a role in another
 	// account. If the administrator of the account to which the role belongs provided
 	// you with an external ID, then provide that value in the ExternalId parameter.
@@ -169,6 +170,7 @@ type AssumeRoleInput struct {
 	// spaces. You can also include underscores or any of the following characters:
 	// =,.@:/-
 	ExternalId *string
+
 	// The identification number of the MFA device that is associated with the user who
 	// is making the AssumeRole call. Specify this value if the trust policy of the
 	// role being assumed includes a condition that requires MFA authentication. The
@@ -179,6 +181,7 @@ type AssumeRoleInput struct {
 	// characters with no spaces. You can also include underscores or any of the
 	// following characters: =,.@-
 	SerialNumber *string
+
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
 	// use as managed session policies. The policies must exist in the same account as
 	// the role. This parameter is optional. You can provide up to 10 managed policy
@@ -201,6 +204,7 @@ type AssumeRoleInput struct {
 	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
 	// Policies</a> in the <i>IAM User Guide</i>.</p>
 	PolicyArns []*types.PolicyDescriptorType
+
 	// A list of keys for session tags that you want to set as transitive. If you set a
 	// tag key as transitive, the corresponding key and value passes to subsequent
 	// sessions in a role chain. For more information, see Chaining Roles with Session
@@ -211,6 +215,7 @@ type AssumeRoleInput struct {
 	// affected. If you choose not to specify a transitive tag key, then no tags are
 	// passed from this session to any subsequent sessions.
 	TransitiveTagKeys []*string
+
 	// An identifier for the assumed role session. Use the role session name to
 	// uniquely identify a session when the same role is assumed by different
 	// principals or for different reasons. In cross-account scenarios, the role
@@ -222,7 +227,10 @@ type AssumeRoleInput struct {
 	// string of characters consisting of upper- and lower-case alphanumeric characters
 	// with no spaces. You can also include underscores or any of the following
 	// characters: =,.@-
+	//
+	// This member is required.
 	RoleSessionName *string
+
 	// The value provided by the MFA device, if the trust policy of the role being
 	// assumed requires MFA (that is, if the policy includes a condition that tests for
 	// MFA). If the role being assumed requires MFA and if the TokenCode value is
@@ -230,6 +238,7 @@ type AssumeRoleInput struct {
 	// format for this parameter, as described by its regex pattern, is a sequence of
 	// six numeric digits.
 	TokenCode *string
+
 	// An IAM policy in JSON format that you want to use as an inline session policy.
 	// This parameter is optional. Passing policies to this operation returns new
 	// temporary credentials. The resulting session's permissions are the intersection
@@ -250,6 +259,7 @@ type AssumeRoleInput struct {
 	// <code>PackedPolicySize</code> response element indicates by percentage how close
 	// the policies and tags for your request are to the upper size limit. </p> </note>
 	Policy *string
+
 	// The duration, in seconds, of the role session. The value can range from 900
 	// seconds (15 minutes) up to the maximum session duration setting for the role.
 	// This setting can have a value from 1 hour to 12 hours. If you specify a value
@@ -268,6 +278,7 @@ type AssumeRoleInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html)
 	// in the IAM User Guide.
 	DurationSeconds *int32
+
 	// A list of session tags that you want to pass. Each session tag consists of a key
 	// name and an associated value. For more information about session tags, see
 	// Tagging AWS STS Sessions
@@ -299,24 +310,30 @@ type AssumeRoleInput struct {
 	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs">Viewing
 	// Session Tags in CloudTrail</a> in the <i>IAM User Guide</i>.</p>
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the role to assume.
+	//
+	// This member is required.
 	RoleArn *string
 }
 
 // Contains the response to a successful AssumeRole () request, including temporary
 // AWS credentials that can be used to make AWS requests.
 type AssumeRoleOutput struct {
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security (or session) token. The size of the security token
 	// that STS API operations return is not fixed. We strongly recommend that you make
 	// no assumptions about the maximum size.
 	Credentials *types.Credentials
+
 	// The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers
 	// that you can use to refer to the resulting temporary security credentials. For
 	// example, you can reference these credentials as a principal in a resource-based
 	// policy by using the ARN or assumed role ID. The ARN and ID include the
 	// RoleSessionName that you specified when you called AssumeRole.
 	AssumedRoleUser *types.AssumedRoleUser
+
 	// A percentage value that indicates the packed size of the session policies and
 	// session tags combined passed in the request. The request fails if the packed
 	// size is greater than 100 percent, which means the policies and tags exceeded the

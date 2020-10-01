@@ -57,19 +57,28 @@ func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput
 }
 
 type ListDashboardsInput struct {
+
 	// The ID of the project.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 }
 
 type ListDashboardsOutput struct {
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// A list that summarizes each dashboard in the project.
+	//
+	// This member is required.
 	DashboardSummaries []*types.DashboardSummary
 
 	// Metadata pertaining to the operation's result.

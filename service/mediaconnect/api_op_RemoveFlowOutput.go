@@ -58,15 +58,23 @@ func (c *Client) RemoveFlowOutput(ctx context.Context, params *RemoveFlowOutputI
 }
 
 type RemoveFlowOutputInput struct {
+
 	// The flow that you want to remove an output from.
+	//
+	// This member is required.
 	FlowArn *string
+
 	// The ARN of the output that you want to remove.
+	//
+	// This member is required.
 	OutputArn *string
 }
 
 type RemoveFlowOutputOutput struct {
+
 	// The ARN of the flow that is associated with the output you removed.
 	FlowArn *string
+
 	// The ARN of the output that was removed.
 	OutputArn *string
 

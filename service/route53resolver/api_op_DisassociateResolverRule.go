@@ -58,14 +58,21 @@ func (c *Client) DisassociateResolverRule(ctx context.Context, params *Disassoci
 }
 
 type DisassociateResolverRuleInput struct {
+
 	// The ID of the resolver rule that you want to disassociate from the specified
 	// VPC.
+	//
+	// This member is required.
 	ResolverRuleId *string
+
 	// The ID of the VPC that you want to disassociate the resolver rule from.
+	//
+	// This member is required.
 	VPCId *string
 }
 
 type DisassociateResolverRuleOutput struct {
+
 	// Information about the DisassociateResolverRule request, including the status of
 	// the request.
 	ResolverRuleAssociation *types.ResolverRuleAssociation

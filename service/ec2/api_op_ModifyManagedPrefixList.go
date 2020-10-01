@@ -59,24 +59,33 @@ func (c *Client) ModifyManagedPrefixList(ctx context.Context, params *ModifyMana
 }
 
 type ModifyManagedPrefixListInput struct {
+
 	// One or more entries to add to the prefix list.
 	AddEntries []*types.AddPrefixListEntry
+
 	// The ID of the prefix list.
+	//
+	// This member is required.
 	PrefixListId *string
+
 	// The current version of the prefix list.
 	CurrentVersion *int64
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// A name for the prefix list.
 	PrefixListName *string
+
 	// One or more entries to remove from the prefix list.
 	RemoveEntries []*types.RemovePrefixListEntry
 }
 
 type ModifyManagedPrefixListOutput struct {
+
 	// Information about the prefix list.
 	PrefixList *types.ManagedPrefixList
 

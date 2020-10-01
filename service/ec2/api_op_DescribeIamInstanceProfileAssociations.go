@@ -55,13 +55,17 @@ func (c *Client) DescribeIamInstanceProfileAssociations(ctx context.Context, par
 }
 
 type DescribeIamInstanceProfileAssociationsInput struct {
+
 	// The IAM instance profile associations.
 	AssociationIds []*string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// The filters.
 	//
 	//     * instance-id - The ID of the instance.
@@ -72,8 +76,10 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 }
 
 type DescribeIamInstanceProfileAssociationsOutput struct {
+
 	// Information about the IAM instance profile associations.
 	IamInstanceProfileAssociations []*types.IamInstanceProfileAssociation
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

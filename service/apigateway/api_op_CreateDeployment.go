@@ -60,31 +60,45 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 
 // Requests API Gateway to create a Deployment () resource.
 type CreateDeploymentInput struct {
-	Template         *bool
+	Template *bool
+
 	TemplateSkipList []*string
-	Title            *string
-	Name             *string
+
+	Title *string
+
+	Name *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// Specifies whether active tracing with X-ray is enabled for the Stage ().
 	TracingEnabled *bool
+
 	// The input configuration for the canary deployment when the deployment is a
 	// canary release deployment.
 	CanarySettings *types.DeploymentCanarySettings
+
 	// A map that defines the stage variables for the Stage () resource that is
 	// associated with the new deployment. Variable names can have alphanumeric and
 	// underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]*string
+
 	// Specifies the cache cluster size for the Stage () resource specified in the
 	// input, if a cache cluster is enabled.
 	CacheClusterSize types.CacheClusterSize
+
 	// The description of the Stage () resource for the Deployment () resource to
 	// create.
 	StageDescription *string
+
 	// Enables a cache cluster for the Stage () resource specified in the input.
 	CacheClusterEnabled *bool
+
 	// The name of the Stage () resource for the Deployment () resource to create.
 	StageName *string
+
 	// The description for the Deployment () resource to create.
 	Description *string
 }
@@ -99,13 +113,17 @@ type CreateDeploymentInput struct {
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
 // AWS SDKs (https://aws.amazon.com/tools/)
 type CreateDeploymentOutput struct {
+
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time
+
 	// A summary of the RestApi () at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
+
 	// The identifier for the deployment resource.
 	Id *string
+
 	// The description for the deployment resource.
 	Description *string
 

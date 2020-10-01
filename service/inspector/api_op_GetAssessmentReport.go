@@ -57,22 +57,35 @@ func (c *Client) GetAssessmentReport(ctx context.Context, params *GetAssessmentR
 }
 
 type GetAssessmentReportInput struct {
+
 	// Specifies the file format (html or pdf) of the assessment report that you want
 	// to generate.
+	//
+	// This member is required.
 	ReportFileFormat types.ReportFileFormat
+
 	// The ARN that specifies the assessment run for which you want to generate a
 	// report.
+	//
+	// This member is required.
 	AssessmentRunArn *string
+
 	// Specifies the type of the assessment report that you want to generate. There are
 	// two types of assessment reports: a finding report and a full report. For more
 	// information, see Assessment Reports
 	// (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
+	//
+	// This member is required.
 	ReportType types.ReportType
 }
 
 type GetAssessmentReportOutput struct {
+
 	// Specifies the status of the request to generate an assessment report.
+	//
+	// This member is required.
 	Status types.ReportStatus
+
 	// Specifies the URL where you can find the generated assessment report. This
 	// parameter is only returned if the report is successfully generated.
 	Url *string

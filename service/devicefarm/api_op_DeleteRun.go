@@ -57,7 +57,10 @@ func (c *Client) DeleteRun(ctx context.Context, params *DeleteRunInput, optFns .
 
 // Represents a request to the delete run operation.
 type DeleteRunInput struct {
+
 	// The Amazon Resource Name (ARN) for the run to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

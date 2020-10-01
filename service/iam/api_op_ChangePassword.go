@@ -60,8 +60,12 @@ func (c *Client) ChangePassword(ctx context.Context, params *ChangePasswordInput
 }
 
 type ChangePasswordInput struct {
+
 	// The IAM user's current password.
+	//
+	// This member is required.
 	OldPassword *string
+
 	// The new password. The new password must conform to the AWS account's password
 	// policy, if one exists. The regex pattern (http://wikipedia.org/wiki/regex) that
 	// is used to validate this parameter is a string of characters. That string can
@@ -71,6 +75,8 @@ type ChangePasswordInput struct {
 	// these characters are valid in a password. However, many tools, such as the AWS
 	// Management Console, might restrict the ability to type certain characters
 	// because they have special meaning within that tool.
+	//
+	// This member is required.
 	NewPassword *string
 }
 

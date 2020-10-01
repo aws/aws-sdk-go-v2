@@ -55,11 +55,13 @@ func (c *Client) GetSkillGroup(ctx context.Context, params *GetSkillGroupInput, 
 }
 
 type GetSkillGroupInput struct {
+
 	// The ARN of the skill group for which to get details. Required.
 	SkillGroupArn *string
 }
 
 type GetSkillGroupOutput struct {
+
 	// The details of the skill group requested. Required.
 	SkillGroup *types.SkillGroup
 

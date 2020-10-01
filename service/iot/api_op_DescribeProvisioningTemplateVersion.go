@@ -56,19 +56,29 @@ func (c *Client) DescribeProvisioningTemplateVersion(ctx context.Context, params
 }
 
 type DescribeProvisioningTemplateVersionInput struct {
+
 	// The template name.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// The fleet provisioning template version ID.
+	//
+	// This member is required.
 	VersionId *int32
 }
 
 type DescribeProvisioningTemplateVersionOutput struct {
+
 	// The JSON formatted contents of the fleet provisioning template version.
 	TemplateBody *string
+
 	// The date when the fleet provisioning template version was created.
 	CreationDate *time.Time
+
 	// True if the fleet provisioning template version is the default version.
 	IsDefaultVersion *bool
+
 	// The fleet provisioning template version ID.
 	VersionId *int32
 

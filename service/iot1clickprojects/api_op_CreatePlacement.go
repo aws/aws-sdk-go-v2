@@ -55,10 +55,17 @@ func (c *Client) CreatePlacement(ctx context.Context, params *CreatePlacementInp
 }
 
 type CreatePlacementInput struct {
+
 	// The name of the project in which to create the placement.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The name of the placement to be created.
+	//
+	// This member is required.
 	PlacementName *string
+
 	// Optional user-defined key/value pairs providing contextual data (such as
 	// location or function) for the placement.
 	Attributes map[string]*string

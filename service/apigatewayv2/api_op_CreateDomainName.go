@@ -57,21 +57,30 @@ func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameI
 
 // Creates a new DomainName resource to represent a domain name.
 type CreateDomainNameInput struct {
+
 	// The domain name.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The domain name configurations.
 	DomainNameConfigurations []*types.DomainNameConfiguration
+
 	// The collection of tags associated with a domain name.
 	Tags map[string]*string
 }
 
 type CreateDomainNameOutput struct {
+
 	// The collection of tags associated with a domain name.
 	Tags map[string]*string
+
 	// The domain name configurations.
 	DomainNameConfigurations []*types.DomainNameConfiguration
+
 	// The name of the DomainName resource.
 	DomainName *string
+
 	// The API mapping selection expression.
 	ApiMappingSelectionExpression *string
 

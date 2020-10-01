@@ -56,17 +56,21 @@ func (c *Client) ListApprovalRuleTemplates(ctx context.Context, params *ListAppr
 }
 
 type ListApprovalRuleTemplatesInput struct {
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
 }
 
 type ListApprovalRuleTemplatesOutput struct {
+
 	// An enumeration token that allows the operation to batch the next results of the
 	// operation.
 	NextToken *string
+
 	// The names of all the approval rule templates found in the AWS Region for your
 	// AWS account.
 	ApprovalRuleTemplateNames []*string

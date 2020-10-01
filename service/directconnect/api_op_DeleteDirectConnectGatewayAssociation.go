@@ -59,15 +59,19 @@ func (c *Client) DeleteDirectConnectGatewayAssociation(ctx context.Context, para
 }
 
 type DeleteDirectConnectGatewayAssociationInput struct {
+
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
+
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
+
 	// The ID of the Direct Connect gateway association.
 	AssociationId *string
 }
 
 type DeleteDirectConnectGatewayAssociationOutput struct {
+
 	// Information about the deleted association.
 	DirectConnectGatewayAssociation *types.DirectConnectGatewayAssociation
 

@@ -55,7 +55,10 @@ func (c *Client) StartJob(ctx context.Context, params *StartJobInput, optFns ...
 }
 
 type StartJobInput struct {
+
 	// The unique identifier for a job.
+	//
+	// This member is required.
 	JobId *string
 }
 

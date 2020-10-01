@@ -88,19 +88,28 @@ func (c *Client) LabelParameterVersion(ctx context.Context, params *LabelParamet
 }
 
 type LabelParameterVersionInput struct {
+
 	// The specific version of the parameter on which you want to attach one or more
 	// labels. If no version is specified, the system attaches the label to the latest
 	// version.
 	ParameterVersion *int64
+
 	// One or more labels to attach to the specified parameter version.
+	//
+	// This member is required.
 	Labels []*string
+
 	// The parameter name on which you want to attach one or more labels.
+	//
+	// This member is required.
 	Name *string
 }
 
 type LabelParameterVersionOutput struct {
+
 	// The version of the parameter that has been labeled.
 	ParameterVersion *int64
+
 	// The label does not meet the requirements. For information about parameter label
 	// requirements, see Labeling parameters
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)

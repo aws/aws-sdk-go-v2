@@ -56,11 +56,15 @@ func (c *Client) DescribeRoleAlias(ctx context.Context, params *DescribeRoleAlia
 }
 
 type DescribeRoleAliasInput struct {
+
 	// The role alias to describe.
+	//
+	// This member is required.
 	RoleAlias *string
 }
 
 type DescribeRoleAliasOutput struct {
+
 	// The role alias description.
 	RoleAliasDescription *types.RoleAliasDescription
 

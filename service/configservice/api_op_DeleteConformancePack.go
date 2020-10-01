@@ -58,7 +58,10 @@ func (c *Client) DeleteConformancePack(ctx context.Context, params *DeleteConfor
 }
 
 type DeleteConformancePackInput struct {
+
 	// Name of the conformance pack you want to delete.
+	//
+	// This member is required.
 	ConformancePackName *string
 }
 

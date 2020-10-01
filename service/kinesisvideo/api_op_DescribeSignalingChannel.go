@@ -57,13 +57,16 @@ func (c *Client) DescribeSignalingChannel(ctx context.Context, params *DescribeS
 }
 
 type DescribeSignalingChannelInput struct {
+
 	// The ARN of the signaling channel that you want to describe.
 	ChannelARN *string
+
 	// The name of the signaling channel that you want to describe.
 	ChannelName *string
 }
 
 type DescribeSignalingChannelOutput struct {
+
 	// A structure that encapsulates the specified signaling channel's metadata and
 	// properties.
 	ChannelInfo *types.ChannelInfo

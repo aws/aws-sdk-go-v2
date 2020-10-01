@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The shard iterator has expired and can no longer be used to retrieve stream
@@ -26,12 +25,6 @@ func (e *ExpiredIteratorException) ErrorMessage() string {
 }
 func (e *ExpiredIteratorException) ErrorCode() string             { return "ExpiredIteratorException" }
 func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredIteratorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredIteratorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occurred on the server side.
 type InternalServerError struct {
@@ -49,12 +42,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
 // requests that receive this exception. Your request is eventually successful,
@@ -78,12 +65,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation tried to access a nonexistent stream.
 type ResourceNotFoundException struct {
@@ -101,12 +82,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation attempted to read past the oldest stream record in a shard. In
 // DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
@@ -135,9 +110,3 @@ func (e *TrimmedDataAccessException) ErrorMessage() string {
 }
 func (e *TrimmedDataAccessException) ErrorCode() string             { return "TrimmedDataAccessException" }
 func (e *TrimmedDataAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrimmedDataAccessException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrimmedDataAccessException) HasMessage() bool {
-	return e.Message != nil
-}

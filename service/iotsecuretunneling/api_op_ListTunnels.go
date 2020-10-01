@@ -56,17 +56,22 @@ func (c *Client) ListTunnels(ctx context.Context, params *ListTunnelsInput, optF
 }
 
 type ListTunnelsInput struct {
+
 	// The name of the IoT thing associated with the destination device.
 	ThingName *string
+
 	// The maximum number of results to return at once.
 	MaxResults *int32
+
 	// A token to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListTunnelsOutput struct {
+
 	// A token to used to retrieve the next set of results.
 	NextToken *string
+
 	// A short description of the tunnels in an AWS account.
 	TunnelSummaries []*types.TunnelSummary
 

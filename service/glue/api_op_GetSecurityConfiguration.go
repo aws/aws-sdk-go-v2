@@ -56,11 +56,15 @@ func (c *Client) GetSecurityConfiguration(ctx context.Context, params *GetSecuri
 }
 
 type GetSecurityConfigurationInput struct {
+
 	// The name of the security configuration to retrieve.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetSecurityConfigurationOutput struct {
+
 	// The requested security configuration.
 	SecurityConfiguration *types.SecurityConfiguration
 

@@ -57,20 +57,30 @@ func (c *Client) DescribeMultiplexProgram(ctx context.Context, params *DescribeM
 
 // Placeholder documentation for DescribeMultiplexProgramRequest
 type DescribeMultiplexProgramInput struct {
+
 	// The ID of the multiplex that the program belongs to.
+	//
+	// This member is required.
 	MultiplexId *string
+
 	// The name of the program.
+	//
+	// This member is required.
 	ProgramName *string
 }
 
 // Placeholder documentation for DescribeMultiplexProgramResponse
 type DescribeMultiplexProgramOutput struct {
+
 	// The MediaLive channel associated with the program.
 	ChannelId *string
+
 	// The name of the multiplex program.
 	ProgramName *string
+
 	// The settings for this multiplex program.
 	MultiplexProgramSettings *types.MultiplexProgramSettings
+
 	// The packet identifier map for this multiplex program.
 	PacketIdentifiersMap *types.MultiplexProgramPacketIdentifiersMap
 

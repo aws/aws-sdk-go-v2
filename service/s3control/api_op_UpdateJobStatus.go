@@ -14,19 +14,26 @@ import (
 )
 
 // Updates the status for the specified job. Use this operation to confirm that you
-// want to run a job or to cancel an existing job. For more information, see Amazon
-// S3 Batch Operations
+// want to run a job or to cancel an existing job. For more information, see S3
+// Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
 // Amazon Simple Storage Service Developer Guide. Related actions include:
 //
 //     *
-// CreateJob ()
+// CreateJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//     * ListJobs ()
 //
-//     * DescribeJob ()
+// * ListJobs
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
 //
-//     * UpdateJobStatus ()
+//
+// * DescribeJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
+//
+//
+// * UpdateJobStatus
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInput, optFns ...func(*Options)) (*UpdateJobStatusOutput, error) {
 	stack := middleware.NewStack("UpdateJobStatus", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -70,24 +77,37 @@ func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInp
 }
 
 type UpdateJobStatusInput struct {
+
 	// The ID of the job whose status you want to update.
+	//
+	// This member is required.
 	JobId *string
+
+	// The status that you want to move the specified job to.
+	//
+	// This member is required.
+	RequestedJobStatus types.RequestedJobStatus
+
 	// A description of the reason why you want to change the specified job's status.
 	// This field can be any string up to the maximum length.
 	StatusUpdateReason *string
-	// The status that you want to move the specified job to.
-	RequestedJobStatus types.RequestedJobStatus
+
 	//
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type UpdateJobStatusOutput struct {
-	// The reason that the specified job's status was updated.
-	StatusUpdateReason *string
-	// The ID for the job whose status was updated.
-	JobId *string
+
 	// The current status for the specified job.
 	Status types.JobStatus
+
+	// The reason that the specified job's status was updated.
+	StatusUpdateReason *string
+
+	// The ID for the job whose status was updated.
+	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

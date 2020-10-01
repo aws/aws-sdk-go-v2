@@ -61,25 +61,39 @@ func (c *Client) TestRole(ctx context.Context, params *TestRoleInput, optFns ...
 
 // The TestRoleRequest structure.
 type TestRoleInput struct {
+
 	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
 	// to test.
+	//
+	// This member is required.
 	Role *string
+
 	// The Amazon S3 bucket that Elastic Transcoder writes transcoded media files to.
 	// The action attempts to read from this bucket.
+	//
+	// This member is required.
 	OutputBucket *string
+
 	// The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics
 	// that you want the action to send a test notification to.
+	//
+	// This member is required.
 	Topics []*string
+
 	// The Amazon S3 bucket that contains media files to be transcoded. The action
 	// attempts to read from this bucket.
+	//
+	// This member is required.
 	InputBucket *string
 }
 
 // The TestRoleResponse structure.
 type TestRoleOutput struct {
+
 	// If the operation is successful, this value is true; otherwise, the value is
 	// false.
 	Success *string
+
 	// If the Success element contains false, this value is an array of one or more
 	// error messages that were generated during the test process.
 	Messages []*string

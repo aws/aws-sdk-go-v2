@@ -55,12 +55,16 @@ func (c *Client) CancelContact(ctx context.Context, params *CancelContactInput, 
 
 //
 type CancelContactInput struct {
+
 	// UUID of a contact.
+	//
+	// This member is required.
 	ContactId *string
 }
 
 //
 type CancelContactOutput struct {
+
 	// UUID of a contact.
 	ContactId *string
 

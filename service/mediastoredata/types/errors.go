@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified container was not found for the specified account.
@@ -24,12 +23,6 @@ func (e *ContainerNotFoundException) ErrorMessage() string {
 }
 func (e *ContainerNotFoundException) ErrorCode() string             { return "ContainerNotFoundException" }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ContainerNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ContainerNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable.
 type InternalServerError struct {
@@ -47,12 +40,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Could not perform an operation on an object that does not exist.
 type ObjectNotFoundException struct {
@@ -70,12 +57,6 @@ func (e *ObjectNotFoundException) ErrorMessage() string {
 }
 func (e *ObjectNotFoundException) ErrorCode() string             { return "ObjectNotFoundException" }
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ObjectNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ObjectNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested content range is not valid.
 type RequestedRangeNotSatisfiableException struct {
@@ -96,10 +77,4 @@ func (e *RequestedRangeNotSatisfiableException) ErrorCode() string {
 }
 func (e *RequestedRangeNotSatisfiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *RequestedRangeNotSatisfiableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestedRangeNotSatisfiableException) HasMessage() bool {
-	return e.Message != nil
 }

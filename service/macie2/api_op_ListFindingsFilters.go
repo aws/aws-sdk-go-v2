@@ -55,17 +55,21 @@ func (c *Client) ListFindingsFilters(ctx context.Context, params *ListFindingsFi
 }
 
 type ListFindingsFiltersInput struct {
+
 	// The maximum number of items to include in each page of a paginated response.
 	MaxResults *int32
+
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
 }
 
 type ListFindingsFiltersOutput struct {
+
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
 	// An array of objects, one for each filter that's associated with the account.
 	FindingsFilterListItems []*types.FindingsFilterListItem
 

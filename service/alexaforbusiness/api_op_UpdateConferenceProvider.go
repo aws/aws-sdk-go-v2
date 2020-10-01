@@ -56,14 +56,25 @@ func (c *Client) UpdateConferenceProvider(ctx context.Context, params *UpdateCon
 }
 
 type UpdateConferenceProviderInput struct {
+
 	// The ARN of the conference provider.
+	//
+	// This member is required.
 	ConferenceProviderArn *string
+
 	// The IP endpoint and protocol for calling.
 	IPDialIn *types.IPDialIn
+
 	// The meeting settings for the conference provider.
+	//
+	// This member is required.
 	MeetingSetting *types.MeetingSetting
+
 	// The type of the conference provider.
+	//
+	// This member is required.
 	ConferenceProviderType types.ConferenceProviderType
+
 	// The information for PSTN conferencing.
 	PSTNDialIn *types.PSTNDialIn
 }

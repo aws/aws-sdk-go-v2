@@ -56,7 +56,10 @@ func (c *Client) FlushApiCache(ctx context.Context, params *FlushApiCacheInput, 
 
 // Represents the input of a FlushApiCache operation.
 type FlushApiCacheInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
 }
 

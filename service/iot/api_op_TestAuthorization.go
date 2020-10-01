@@ -58,24 +58,33 @@ func (c *Client) TestAuthorization(ctx context.Context, params *TestAuthorizatio
 }
 
 type TestAuthorizationInput struct {
+
 	// When testing custom authorization, the policies specified here are treated as if
 	// they are attached to the principal being authorized.
 	PolicyNamesToAdd []*string
+
 	// When testing custom authorization, the policies specified here are treated as if
 	// they are not attached to the principal being authorized.
 	PolicyNamesToSkip []*string
+
 	// The principal.
 	Principal *string
+
 	// The Cognito identity pool ID.
 	CognitoIdentityPoolId *string
+
 	// The MQTT client ID.
 	ClientId *string
+
 	// A list of authorization info objects. Simulating authorization will create a
 	// response for each authInfo object in the list.
+	//
+	// This member is required.
 	AuthInfos []*types.AuthInfo
 }
 
 type TestAuthorizationOutput struct {
+
 	// The authentication results.
 	AuthResults []*types.AuthResult
 

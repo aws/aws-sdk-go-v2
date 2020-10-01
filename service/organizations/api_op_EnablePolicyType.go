@@ -65,6 +65,7 @@ func (c *Client) EnablePolicyType(ctx context.Context, params *EnablePolicyTypeI
 }
 
 type EnablePolicyTypeInput struct {
+
 	// The policy type that you want to enable. You can specify one of the following
 	// values:
 	//
@@ -82,15 +83,21 @@ type EnablePolicyTypeInput struct {
 	//
 	// * TAG_POLICY
 	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//
+	// This member is required.
 	PolicyType types.PolicyType
+
 	// The unique identifier (ID) of the root in which you want to enable a policy
 	// type. You can get the ID from the ListRoots () operation. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a root ID string requires "r-" followed by
 	// from 4 to 32 lowercase letters or digits.
+	//
+	// This member is required.
 	RootId *string
 }
 
 type EnablePolicyTypeOutput struct {
+
 	// A structure that shows the root with the updated list of enabled policy types.
 	Root *types.Root
 

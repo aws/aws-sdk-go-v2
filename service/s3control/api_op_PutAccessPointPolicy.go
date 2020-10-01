@@ -14,7 +14,22 @@ import (
 
 // Associates an access policy with the specified access point. Each access point
 // can have only one policy, so a request made to this API replaces any existing
-// policy associated with the specified access point.
+// policy associated with the specified access point. All Amazon S3 on Outposts
+// REST API requests for this action require an additional parameter of outpost-id
+// to be passed with the request and an S3 on Outposts endpoint hostname prefix
+// instead of s3-control. For an example of the request syntax for Amazon S3 on
+// Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+// outpost-id derived using the access point ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples)
+// section below. The following actions are related to PutAccessPointPolicy:
+//
+//     *
+// GetAccessPointPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html)
+//
+//
+// * DeleteAccessPointPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
 func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPointPolicyInput, optFns ...func(*Options)) (*PutAccessPointPolicyOutput, error) {
 	stack := middleware.NewStack("PutAccessPointPolicy", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -58,18 +73,32 @@ func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPoin
 }
 
 type PutAccessPointPolicyInput struct {
+
+	// The name of the access point that you want to associate with the specified
+	// policy. For Amazon S3 on Outposts specify the ARN of the access point accessed
+	// in the format arn:aws:s3-outposts:::outpost//accesspoint/. For example, to
+	// access the access point reports-ap through outpost my-outpost owned by account
+	// 123456789012 in Region us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
+	// The value must be URL encoded.
+	//
+	// This member is required.
+	Name *string
+
 	// The policy that you want to apply to the specified access point. For more
 	// information about access point policies, see Managing Data Access with Amazon S3
 	// Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html) in the
 	// Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Policy *string
+
 	// The AWS account ID for owner of the bucket associated with the specified access
 	// point.
+	//
+	// This member is required.
 	AccountId *string
-	// The name of the access point that you want to associate with the specified
-	// policy.
-	Name *string
 }
 
 type PutAccessPointPolicyOutput struct {

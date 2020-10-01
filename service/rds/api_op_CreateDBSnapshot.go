@@ -57,15 +57,20 @@ func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotI
 
 //
 type CreateDBSnapshotInput struct {
+
 	// The identifier of the DB instance that you want to create the snapshot of.
 	// Constraints:
 	//
 	//     * Must match the identifier of an existing DBInstance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
+
 	// The identifier for the DB snapshot. Constraints:
 	//
 	//     * Can't be null, empty, or
@@ -80,10 +85,13 @@ type CreateDBSnapshotInput struct {
 	// consecutive hyphens
 	//
 	// Example: my-snapshot-id
+	//
+	// This member is required.
 	DBSnapshotIdentifier *string
 }
 
 type CreateDBSnapshotOutput struct {
+
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a
 	// response element in the DescribeDBSnapshots action.
 	DBSnapshot *types.DBSnapshot

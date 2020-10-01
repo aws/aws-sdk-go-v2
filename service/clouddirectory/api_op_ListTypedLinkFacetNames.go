@@ -57,18 +57,25 @@ func (c *Client) ListTypedLinkFacetNames(ctx context.Context, params *ListTypedL
 }
 
 type ListTypedLinkFacetNamesInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
 	// The pagination token.
 	NextToken *string
 }
 
 type ListTypedLinkFacetNamesOutput struct {
+
 	// The names of typed link facets that exist within the schema.
 	FacetNames []*string
+
 	// The pagination token.
 	NextToken *string
 

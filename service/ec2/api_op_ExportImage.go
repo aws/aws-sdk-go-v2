@@ -61,52 +61,76 @@ func (c *Client) ExportImage(ctx context.Context, params *ExportImageInput, optF
 }
 
 type ExportImageInput struct {
+
 	// The name of the role that grants VM Import/Export permission to export images to
 	// your Amazon S3 bucket. If this parameter is not specified, the default role is
 	// named 'vmimport'.
 	RoleName *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to apply to the image being exported.
 	TagSpecifications []*types.TagSpecification
+
 	// The ID of the image.
+	//
+	// This member is required.
 	ImageId *string
+
 	// A description of the image being exported. The maximum length is 255 characters.
 	Description *string
+
 	// The disk image format.
+	//
+	// This member is required.
 	DiskImageFormat types.DiskImageFormat
+
 	// Information about the destination Amazon S3 bucket. The bucket must exist and
 	// grant WRITE and READ_ACP permissions to the AWS account
 	// vm-import-export@amazon.com.
+	//
+	// This member is required.
 	S3ExportLocation *types.ExportTaskS3LocationRequest
+
 	// Token to enable idempotency for export image requests.
 	ClientToken *string
 }
 
 type ExportImageOutput struct {
+
 	// The disk image format for the exported image.
 	DiskImageFormat types.DiskImageFormat
+
 	// The status message for the export image task.
 	StatusMessage *string
+
 	// The percent complete of the export image task.
 	Progress *string
+
 	// A description of the image being exported.
 	Description *string
+
 	// The ID of the export image task.
 	ExportImageTaskId *string
+
 	// The status of the export image task. The possible values are active, completed,
 	// deleting, and deleted.
 	Status *string
+
 	// Any tags assigned to the image being exported.
 	Tags []*types.Tag
+
 	// The ID of the image.
 	ImageId *string
+
 	// The name of the role that grants VM Import/Export permission to export images to
 	// your Amazon S3 bucket.
 	RoleName *string
+
 	// Information about the destination Amazon S3 bucket.
 	S3ExportLocation *types.ExportTaskS3Location
 

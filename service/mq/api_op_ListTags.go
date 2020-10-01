@@ -55,11 +55,15 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 }
 
 type ListTagsInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource tag.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsOutput struct {
+
 	// The key-value pair for the resource tag.
 	Tags map[string]*string
 

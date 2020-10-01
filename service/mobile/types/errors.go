@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Account Action is required in order to continue the request.
@@ -24,12 +23,6 @@ func (e *AccountActionRequiredException) ErrorMessage() string {
 }
 func (e *AccountActionRequiredException) ErrorCode() string             { return "AccountActionRequiredException" }
 func (e *AccountActionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountActionRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountActionRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because some parameter is not valid or the
 // project state prevents the operation from being performed.
@@ -48,12 +41,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service has encountered an unexpected error condition which prevents it from
 // servicing the request.
@@ -72,12 +59,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There are too many AWS Mobile Hub projects in the account or the account has
 // exceeded the maximum number of resources in some AWS service. You should create
@@ -100,18 +81,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *LimitExceededException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
 
 // No entity can be found with the specified identifier.
 type NotFoundException struct {
@@ -129,12 +98,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable. The request should be retried after some
 // time delay.
@@ -155,18 +118,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceUnavailableException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *ServiceUnavailableException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
 
 // Too many requests have been received for this AWS account in too short a time.
 // The request should be retried after some time delay.
@@ -187,18 +138,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *TooManyRequestsException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Credentials of the caller are insufficient to authorize the request.
 type UnauthorizedException struct {
@@ -216,9 +155,3 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}

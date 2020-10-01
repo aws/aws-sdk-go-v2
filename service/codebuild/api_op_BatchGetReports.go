@@ -56,14 +56,19 @@ func (c *Client) BatchGetReports(ctx context.Context, params *BatchGetReportsInp
 }
 
 type BatchGetReportsInput struct {
+
 	// An array of ARNs that identify the Report objects to return.
+	//
+	// This member is required.
 	ReportArns []*string
 }
 
 type BatchGetReportsOutput struct {
+
 	// An array of ARNs passed to BatchGetReportGroups that are not associated with a
 	// Report.
 	ReportsNotFound []*string
+
 	// The array of Report objects returned by BatchGetReports.
 	Reports []*types.Report
 

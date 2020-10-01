@@ -60,10 +60,12 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 }
 
 type ListInvitationsInput struct {
+
 	// For requests to retrieve the next page of results, the pagination token that was
 	// returned with the previous page of results. The initial request does not include
 	// a pagination token.
 	NextToken *string
+
 	// The maximum number of behavior graph invitations to return in the response. The
 	// total must be less than the overall limit on the number of results to return,
 	// which is currently 200.
@@ -71,9 +73,11 @@ type ListInvitationsInput struct {
 }
 
 type ListInvitationsOutput struct {
+
 	// The list of behavior graphs for which the member account has open or accepted
 	// invitations.
 	Invitations []*types.MemberDetail
+
 	// If there are more behavior graphs remaining in the results, then this is the
 	// pagination token to use to request the next page of behavior graphs.
 	NextToken *string

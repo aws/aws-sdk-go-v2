@@ -56,19 +56,26 @@ func (c *Client) GetIntegrations(ctx context.Context, params *GetIntegrationsInp
 }
 
 type GetIntegrationsInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
 	// The maximum number of elements to be returned for this resource.
 	MaxResults *string
 }
 
 type GetIntegrationsOutput struct {
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
 	// The elements from this collection.
 	Items []*types.Integration
 

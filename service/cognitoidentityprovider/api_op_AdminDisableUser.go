@@ -56,9 +56,15 @@ func (c *Client) AdminDisableUser(ctx context.Context, params *AdminDisableUserI
 
 // Represents the request to disable any user as an administrator.
 type AdminDisableUserInput struct {
+
 	// The user pool ID for the user pool where you want to disable the user.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The user name of the user you wish to disable.
+	//
+	// This member is required.
 	Username *string
 }
 

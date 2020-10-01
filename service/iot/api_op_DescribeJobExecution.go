@@ -56,16 +56,24 @@ func (c *Client) DescribeJobExecution(ctx context.Context, params *DescribeJobEx
 }
 
 type DescribeJobExecutionInput struct {
+
 	// The unique identifier you assigned to this job when it was created.
+	//
+	// This member is required.
 	JobId *string
+
 	// The name of the thing on which the job execution is running.
+	//
+	// This member is required.
 	ThingName *string
+
 	// A string (consisting of the digits "0" through "9" which is used to specify a
 	// particular job execution on a particular device.
 	ExecutionNumber *int64
 }
 
 type DescribeJobExecutionOutput struct {
+
 	// Information about the job execution.
 	Execution *types.JobExecution
 

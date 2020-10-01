@@ -66,14 +66,19 @@ func (c *Client) BatchGetResourceConfig(ctx context.Context, params *BatchGetRes
 }
 
 type BatchGetResourceConfigInput struct {
+
 	// A list of resource keys to be processed with the current request. Each element
 	// in the list consists of the resource type and resource ID.
+	//
+	// This member is required.
 	ResourceKeys []*types.ResourceKey
 }
 
 type BatchGetResourceConfigOutput struct {
+
 	// A list that contains the current configuration of one or more resources.
 	BaseConfigurationItems []*types.BaseConfigurationItem
+
 	// A list of resource keys that were not processed with the current response. The
 	// unprocessesResourceKeys value is in the same form as ResourceKeys, so the value
 	// can be directly provided to a subsequent BatchGetResourceConfig operation.  If

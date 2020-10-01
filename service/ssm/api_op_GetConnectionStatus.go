@@ -57,14 +57,19 @@ func (c *Client) GetConnectionStatus(ctx context.Context, params *GetConnectionS
 }
 
 type GetConnectionStatusInput struct {
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	Target *string
 }
 
 type GetConnectionStatusOutput struct {
+
 	// The status of the connection to the instance. For example, 'Connected' or 'Not
 	// Connected'.
 	Status types.ConnectionStatus
+
 	// The ID of the instance to check connection status.
 	Target *string
 

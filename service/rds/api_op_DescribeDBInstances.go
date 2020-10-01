@@ -59,6 +59,7 @@ func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInst
 
 //
 type DescribeDBInstancesInput struct {
+
 	// The user-supplied instance identifier. If this parameter is specified,
 	// information from only the specific DB instance is returned. This parameter isn't
 	// case-sensitive. Constraints:
@@ -66,11 +67,13 @@ type DescribeDBInstancesInput struct {
 	//     * If supplied, must match the identifier of an
 	// existing DBInstance.
 	DBInstanceIdentifier *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// A filter that specifies one or more DB instances to describe. Supported
 	// filters:
 	//
@@ -95,6 +98,7 @@ type DescribeDBInstancesInput struct {
 	//     * engine - Accepts engine names. The results list will only
 	// include information about the DB instances for these engines.
 	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous DescribeDBInstances request.
 	// If this parameter is specified, the response includes only records beyond the
 	// marker, up to the value specified by MaxRecords.
@@ -104,10 +108,12 @@ type DescribeDBInstancesInput struct {
 // Contains the result of a successful invocation of the DescribeDBInstances
 // action.
 type DescribeDBInstancesOutput struct {
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
+
 	// A list of DBInstance instances.
 	DBInstances []*types.DBInstance
 

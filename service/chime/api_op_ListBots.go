@@ -57,17 +57,24 @@ func (c *Client) ListBots(ctx context.Context, params *ListBotsInput, optFns ...
 }
 
 type ListBotsInput struct {
+
 	// The maximum number of results to return in a single call. The default is 10.
 	MaxResults *int32
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type ListBotsOutput struct {
+
 	// List of bots and bot details.
 	Bots []*types.Bot
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
 

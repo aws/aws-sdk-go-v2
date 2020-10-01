@@ -51,12 +51,14 @@ func (c *Client) InlineDocument(ctx context.Context, params *InlineDocumentInput
 }
 
 type InlineDocumentInput struct {
-	StringValue   *string
+	StringValue *string
+
 	DocumentValue smithy.Document
 }
 
 type InlineDocumentOutput struct {
-	StringValue   *string
+	StringValue *string
+
 	DocumentValue smithy.Document
 
 	// Metadata pertaining to the operation's result.

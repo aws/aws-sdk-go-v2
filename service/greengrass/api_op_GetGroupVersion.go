@@ -56,25 +56,36 @@ func (c *Client) GetGroupVersion(ctx context.Context, params *GetGroupVersionInp
 }
 
 type GetGroupVersionInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// The ID of the group version. This value maps to the ''Version'' property of the
 	// corresponding ''VersionInformation'' object, which is returned by
 	// ''ListGroupVersions'' requests. If the version is the last one that was
 	// associated with a group, the value also maps to the ''LatestVersion'' property
 	// of the corresponding ''GroupInformation'' object.
+	//
+	// This member is required.
 	GroupVersionId *string
 }
 
 type GetGroupVersionOutput struct {
+
 	// The ID of the group version.
 	Version *string
+
 	// Information about the group version definition.
 	Definition *types.GroupVersion
+
 	// The ARN of the group version.
 	Arn *string
+
 	// The time, in milliseconds since the epoch, when the group version was created.
 	CreationTimestamp *string
+
 	// The ID of the group that the version is associated with.
 	Id *string
 

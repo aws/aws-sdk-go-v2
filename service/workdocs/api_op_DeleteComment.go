@@ -55,12 +55,22 @@ func (c *Client) DeleteComment(ctx context.Context, params *DeleteCommentInput, 
 }
 
 type DeleteCommentInput struct {
+
 	// The ID of the comment.
+	//
+	// This member is required.
 	CommentId *string
+
 	// The ID of the document version.
+	//
+	// This member is required.
 	VersionId *string
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string

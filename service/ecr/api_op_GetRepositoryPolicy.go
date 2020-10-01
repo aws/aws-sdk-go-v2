@@ -55,18 +55,25 @@ func (c *Client) GetRepositoryPolicy(ctx context.Context, params *GetRepositoryP
 }
 
 type GetRepositoryPolicyInput struct {
+
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
 	// The name of the repository with the policy to retrieve.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type GetRepositoryPolicyOutput struct {
+
 	// The registry ID associated with the request.
 	RegistryId *string
+
 	// The JSON repository policy text associated with the repository.
 	PolicyText *string
+
 	// The repository name associated with the request.
 	RepositoryName *string
 

@@ -57,20 +57,28 @@ func (c *Client) ListContactFlows(ctx context.Context, params *ListContactFlowsI
 }
 
 type ListContactFlowsInput struct {
+
 	// The type of contact flow.
 	ContactFlowTypes []types.ContactFlowType
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The maximimum number of results to return per page.
 	MaxResults *int32
 }
 
 type ListContactFlowsOutput struct {
+
 	// Information about the contact flows.
 	ContactFlowSummaryList []*types.ContactFlowSummary
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 

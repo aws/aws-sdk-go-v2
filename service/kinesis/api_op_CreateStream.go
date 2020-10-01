@@ -89,15 +89,21 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 
 // Represents the input for CreateStream.
 type CreateStreamInput struct {
+
 	// The number of shards that the stream will use. The throughput of the stream is a
 	// function of the number of shards; more shards are required for greater
 	// provisioned throughput. DefaultShardLimit;
+	//
+	// This member is required.
 	ShardCount *int32
+
 	// A name to identify the stream. The stream name is scoped to the AWS account used
 	// by the application that creates the stream. It is also scoped by AWS Region.
 	// That is, two streams in two different AWS accounts can have the same name. Two
 	// streams in the same AWS account but in two different Regions can also have the
 	// same name.
+	//
+	// This member is required.
 	StreamName *string
 }
 

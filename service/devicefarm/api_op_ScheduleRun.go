@@ -57,30 +57,43 @@ func (c *Client) ScheduleRun(ctx context.Context, params *ScheduleRunInput, optF
 
 // Represents a request to the schedule run operation.
 type ScheduleRunInput struct {
+
 	// The ARN of the project for the run to be scheduled.
+	//
+	// This member is required.
 	ProjectArn *string
+
 	// Information about the settings for the run to be scheduled.
 	Configuration *types.ScheduleRunConfiguration
+
 	// The ARN of the device pool for the run to be scheduled.
 	DevicePoolArn *string
+
 	// The name for the run to be scheduled.
 	Name *string
+
 	// Specifies configuration information about a test run, such as the execution
 	// timeout (in minutes).
 	ExecutionConfiguration *types.ExecutionConfiguration
+
 	// The filter criteria used to dynamically select a set of devices for a test run
 	// and the maximum number of devices to be included in the run. Either
 	// devicePoolArn or deviceSelectionConfiguration is required in a request.
 	DeviceSelectionConfiguration *types.DeviceSelectionConfiguration
+
 	// The ARN of an application package to run tests against, created with
 	// CreateUpload (). See ListUploads ().
 	AppArn *string
+
 	// Information about the test for the run to be scheduled.
+	//
+	// This member is required.
 	Test *types.ScheduleRunTest
 }
 
 // Represents the result of a schedule run request.
 type ScheduleRunOutput struct {
+
 	// Information about the scheduled run.
 	Run *types.Run
 

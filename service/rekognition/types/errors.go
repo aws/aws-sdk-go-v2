@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You are not authorized to perform the action.
@@ -27,24 +26,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *AccessDeniedException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *AccessDeniedException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *AccessDeniedException) HasCode() bool {
-	return e.Code != nil
-}
 
 // The number of in-progress human reviews you have has exceeded the number
 // allowed.
@@ -71,42 +52,6 @@ func (e *HumanLoopQuotaExceededException) ErrorCode() string {
 	return "HumanLoopQuotaExceededException"
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HumanLoopQuotaExceededException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *HumanLoopQuotaExceededException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *HumanLoopQuotaExceededException) GetQuotaCode() string {
-	return ptr.ToString(e.QuotaCode)
-}
-func (e *HumanLoopQuotaExceededException) HasQuotaCode() bool {
-	return e.QuotaCode != nil
-}
-func (e *HumanLoopQuotaExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HumanLoopQuotaExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *HumanLoopQuotaExceededException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *HumanLoopQuotaExceededException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *HumanLoopQuotaExceededException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *HumanLoopQuotaExceededException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *HumanLoopQuotaExceededException) GetServiceCode() string {
-	return ptr.ToString(e.ServiceCode)
-}
-func (e *HumanLoopQuotaExceededException) HasServiceCode() bool {
-	return e.ServiceCode != nil
-}
 
 // A ClientRequestToken input parameter was reused with an operation, but at least
 // one of the other input parameters is different from the previous call to the
@@ -133,24 +78,6 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IdempotentParameterMismatchException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *IdempotentParameterMismatchException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *IdempotentParameterMismatchException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *IdempotentParameterMismatchException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *IdempotentParameterMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotentParameterMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input image size exceeds the allowed limit. For more information, see Limits
 // in Amazon Rekognition in the Amazon Rekognition Developer Guide.
@@ -172,24 +99,6 @@ func (e *ImageTooLargeException) ErrorMessage() string {
 }
 func (e *ImageTooLargeException) ErrorCode() string             { return "ImageTooLargeException" }
 func (e *ImageTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ImageTooLargeException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ImageTooLargeException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ImageTooLargeException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ImageTooLargeException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ImageTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ImageTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Rekognition experienced a service issue. Try your call again.
 type InternalServerError struct {
@@ -210,24 +119,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalServerError) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *InternalServerError) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *InternalServerError) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InternalServerError) HasCode() bool {
-	return e.Code != nil
-}
 
 // The provided image format is not supported.
 type InvalidImageFormatException struct {
@@ -248,24 +139,6 @@ func (e *InvalidImageFormatException) ErrorMessage() string {
 }
 func (e *InvalidImageFormatException) ErrorCode() string             { return "InvalidImageFormatException" }
 func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidImageFormatException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidImageFormatException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidImageFormatException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidImageFormatException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidImageFormatException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *InvalidImageFormatException) HasLogref() bool {
-	return e.Logref != nil
-}
 
 // Pagination token in the request is not valid.
 type InvalidPaginationTokenException struct {
@@ -288,24 +161,6 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 	return "InvalidPaginationTokenException"
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPaginationTokenException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidPaginationTokenException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidPaginationTokenException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *InvalidPaginationTokenException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *InvalidPaginationTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPaginationTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Input parameter violated a constraint. Validate your parameter before calling
 // the API operation again.
@@ -327,24 +182,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidParameterException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidParameterException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *InvalidParameterException) HasLogref() bool {
-	return e.Logref != nil
-}
 
 // Amazon Rekognition is unable to access the S3 object specified in the request.
 type InvalidS3ObjectException struct {
@@ -365,24 +202,6 @@ func (e *InvalidS3ObjectException) ErrorMessage() string {
 }
 func (e *InvalidS3ObjectException) ErrorCode() string             { return "InvalidS3ObjectException" }
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3ObjectException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InvalidS3ObjectException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InvalidS3ObjectException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *InvalidS3ObjectException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *InvalidS3ObjectException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3ObjectException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Amazon Rekognition service limit was exceeded. For example, if you start too
 // many Amazon Rekognition Video jobs concurrently, calls to start operations
@@ -407,24 +226,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *LimitExceededException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *LimitExceededException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *LimitExceededException) HasCode() bool {
-	return e.Code != nil
-}
 
 // The number of requests exceeded your throughput limit. If you want to increase
 // this limit, contact Amazon Rekognition.
@@ -450,24 +251,6 @@ func (e *ProvisionedThroughputExceededException) ErrorCode() string {
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ProvisionedThroughputExceededException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ProvisionedThroughputExceededException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ProvisionedThroughputExceededException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ProvisionedThroughputExceededException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ProvisionedThroughputExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProvisionedThroughputExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A collection with the specified ID already exists.
 type ResourceAlreadyExistsException struct {
@@ -488,24 +271,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceAlreadyExistsException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceAlreadyExistsException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ResourceAlreadyExistsException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource is already being used.
 type ResourceInUseException struct {
@@ -526,24 +291,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceInUseException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceInUseException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ResourceInUseException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The collection specified in the request cannot be found.
 type ResourceNotFoundException struct {
@@ -564,24 +311,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ResourceNotFoundException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceNotFoundException) HasCode() bool {
-	return e.Code != nil
-}
 
 // The requested resource isn't ready. For example, this exception occurs when you
 // call DetectCustomLabels with a model version that isn't deployed.
@@ -603,24 +332,6 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 }
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotReadyException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ResourceNotReadyException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ResourceNotReadyException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ResourceNotReadyException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ResourceNotReadyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotReadyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Rekognition is temporarily unable to process the request. Try your call
 // again.
@@ -642,24 +353,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ThrottlingException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *ThrottlingException) HasLogref() bool {
-	return e.Logref != nil
-}
-func (e *ThrottlingException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ThrottlingException) HasCode() bool {
-	return e.Code != nil
-}
 
 // The file size or duration of the supplied media is too large. The maximum file
 // size is 10GB. The maximum duration is 6 hours.
@@ -681,21 +374,3 @@ func (e *VideoTooLargeException) ErrorMessage() string {
 }
 func (e *VideoTooLargeException) ErrorCode() string             { return "VideoTooLargeException" }
 func (e *VideoTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *VideoTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VideoTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *VideoTooLargeException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *VideoTooLargeException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *VideoTooLargeException) GetLogref() string {
-	return ptr.ToString(e.Logref)
-}
-func (e *VideoTooLargeException) HasLogref() bool {
-	return e.Logref != nil
-}

@@ -57,20 +57,30 @@ func (c *Client) DescribeDataSetPermissions(ctx context.Context, params *Describ
 }
 
 type DescribeDataSetPermissionsInput struct {
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
+	//
+	// This member is required.
 	DataSetId *string
 }
 
 type DescribeDataSetPermissionsOutput struct {
+
 	// A list of resource permissions on the dataset.
 	Permissions []*types.ResourcePermission
+
 	// The Amazon Resource Name (ARN) of the dataset.
 	DataSetArn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
 	DataSetId *string

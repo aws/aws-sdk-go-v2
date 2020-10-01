@@ -56,11 +56,13 @@ func (c *Client) DescribeInterconnects(ctx context.Context, params *DescribeInte
 }
 
 type DescribeInterconnectsInput struct {
+
 	// The ID of the interconnect.
 	InterconnectId *string
 }
 
 type DescribeInterconnectsOutput struct {
+
 	// The interconnects.
 	Interconnects []*types.Interconnect
 

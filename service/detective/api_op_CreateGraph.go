@@ -70,6 +70,7 @@ type CreateGraphInput struct {
 }
 
 type CreateGraphOutput struct {
+
 	// The ARN of the new behavior graph.
 	GraphArn *string
 

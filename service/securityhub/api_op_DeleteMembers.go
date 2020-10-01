@@ -55,11 +55,13 @@ func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, 
 }
 
 type DeleteMembersInput struct {
+
 	// The list of account IDs for the member accounts to delete.
 	AccountIds []*string
 }
 
 type DeleteMembersOutput struct {
+
 	// The list of AWS accounts that were not deleted. For each account, the list
 	// includes the account ID and the email address.
 	UnprocessedAccounts []*types.Result

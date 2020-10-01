@@ -57,14 +57,19 @@ func (c *Client) UpdateReservation(ctx context.Context, params *UpdateReservatio
 
 // Request to update a reservation
 type UpdateReservationInput struct {
+
 	// Unique reservation ID, e.g. '1234567'
+	//
+	// This member is required.
 	ReservationId *string
+
 	// Name of the reservation
 	Name *string
 }
 
 // Placeholder documentation for UpdateReservationResponse
 type UpdateReservationOutput struct {
+
 	// Reserved resources available to use
 	Reservation *types.Reservation
 

@@ -55,9 +55,15 @@ func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdent
 }
 
 type DeleteIdentityProviderInput struct {
+
 	// The identity provider name.
+	//
+	// This member is required.
 	ProviderName *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

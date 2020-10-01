@@ -63,14 +63,21 @@ func (c *Client) RegisterEcsCluster(ctx context.Context, params *RegisterEcsClus
 }
 
 type RegisterEcsClusterInput struct {
+
 	// The cluster's ARN.
+	//
+	// This member is required.
 	EcsClusterArn *string
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 
 // Contains the response to a RegisterEcsCluster request.
 type RegisterEcsClusterOutput struct {
+
 	// The cluster's ARN.
 	EcsClusterArn *string
 

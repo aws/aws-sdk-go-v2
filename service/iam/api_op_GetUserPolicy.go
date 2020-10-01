@@ -66,28 +66,43 @@ func (c *Client) GetUserPolicy(ctx context.Context, params *GetUserPolicyInput, 
 }
 
 type GetUserPolicyInput struct {
+
 	// The name of the policy document to get. This parameter allows (through its regex
 	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
 	// upper and lowercase alphanumeric characters with no spaces. You can also include
 	// any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The name of the user who the policy is associated with. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
 }
 
 // Contains the response to a successful GetUserPolicy () request.
 type GetUserPolicyOutput struct {
+
 	// The policy document. IAM stores policies in JSON format. However, resources that
 	// were created using AWS CloudFormation templates can be formatted in YAML. AWS
 	// CloudFormation always converts a YAML policy to JSON format before submitting it
 	// to IAM.
+	//
+	// This member is required.
 	PolicyDocument *string
+
 	// The name of the policy.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The user the policy is associated with.
+	//
+	// This member is required.
 	UserName *string
 
 	// Metadata pertaining to the operation's result.

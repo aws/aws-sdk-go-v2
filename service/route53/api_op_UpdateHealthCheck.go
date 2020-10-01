@@ -62,6 +62,7 @@ func (c *Client) UpdateHealthCheck(ctx context.Context, params *UpdateHealthChec
 // A complex type that contains information about a request to update a health
 // check.
 type UpdateHealthCheckInput struct {
+
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:
 	//
@@ -85,6 +86,7 @@ type UpdateHealthCheckInput struct {
 	// disabled. For more information, see <a
 	// href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p>
 	Disabled *bool
+
 	// The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to
 	// perform health checks on. If you don't specify a value for IPAddress, Route 53
 	// sends a DNS request to resolve the domain name that you specify in
@@ -136,14 +138,17 @@ type UpdateHealthCheckInput struct {
 	//     * RFC 5156,
 	// Special-Use IPv6 Addresses (https://tools.ietf.org/html/rfc5156)
 	IPAddress *string
+
 	// A complex type that identifies the CloudWatch alarm that you want Amazon Route
 	// 53 health checkers to use to determine whether the specified health check is
 	// healthy.
 	AlarmIdentifier *types.AlarmIdentifier
+
 	// The port on the endpoint that you want Amazon Route 53 to perform health checks
 	// on. Don't specify a value for Port when you specify a value for Type of
 	// CLOUDWATCH_METRIC or CALCULATED.
 	Port *int32
+
 	// The path that you want Amazon Route 53 to request when performing health checks.
 	// The path can be any value for which your endpoint will return an HTTP status
 	// code of 2xx or 3xx when the endpoint is healthy, for example the file
@@ -151,10 +156,12 @@ type UpdateHealthCheckInput struct {
 	// for example, /welcome.html?language=jp&login=y. Specify this value only if you
 	// want to change it.
 	ResourcePath *string
+
 	// Specify whether you want Amazon Route 53 to invert the status of a health check,
 	// for example, to consider a health check unhealthy when it otherwise would be
 	// considered healthy.
 	Inverted *bool
+
 	// Specify whether you want Amazon Route 53 to send the value of
 	// FullyQualifiedDomainName to the endpoint in the client_hello message during TLS
 	// negotiation. This allows the endpoint to respond to HTTPS health check requests
@@ -173,6 +180,7 @@ type UpdateHealthCheckInput struct {
 	// second attempt, the health checker will omit FullyQualifiedDomainName from the
 	// client_hello message.
 	EnableSNI *bool
+
 	// The number of consecutive health checks that an endpoint must pass or fail for
 	// Amazon Route 53 to change the current status of the endpoint from unhealthy to
 	// healthy or vice versa. For more information, see How Amazon Route 53 Determines
@@ -181,9 +189,11 @@ type UpdateHealthCheckInput struct {
 	// in the Amazon Route 53 Developer Guide. If you don't specify a value for
 	// FailureThreshold, the default value is three health checks.
 	FailureThreshold *int32
+
 	// A complex type that contains one Region element for each region that you want
 	// Amazon Route 53 health checkers to check the specified endpoint from.
 	Regions []types.HealthCheckRegion
+
 	// Amazon Route 53 behavior depends on whether you specify a value for IPAddress.
 	// <note> <p>If a health check already has a value for <code>IPAddress</code>, you
 	// can change the value. However, you can't update an existing health check to add
@@ -237,6 +247,7 @@ type UpdateHealthCheckInput struct {
 	// <code>Type</code> is <code>TCP</code>, Route 53 doesn't pass a <code>Host</code>
 	// header.</p>
 	FullyQualifiedDomainName *string
+
 	// When CloudWatch has insufficient data about the metric to determine the alarm
 	// state, the status that you want Amazon Route 53 to assign to the health check:
 	//
@@ -251,16 +262,21 @@ type UpdateHealthCheckInput struct {
 	// sufficient data to determine the alarm state. For new health checks that have no
 	// last known status, the default status for the health check is healthy.
 	InsufficientDataHealthStatus types.InsufficientDataHealthStatus
+
 	// If the value of Type is HTTP_STR_MATCH or HTTPS_STR_MATCH, the string that you
 	// want Amazon Route 53 to search for in the response body from the specified
 	// resource. If the string appears in the response body, Route 53 considers the
 	// resource healthy. (You can't change the value of Type when you update a health
 	// check.)
 	SearchString *string
+
 	// The ID for the health check for which you want detailed information. When you
 	// created the health check, CreateHealthCheck returned the ID in the response, in
 	// the HealthCheckId element.
+	//
+	// This member is required.
 	HealthCheckId *string
+
 	// A sequential counter that Amazon Route 53 sets to 1 when you create a health
 	// check and increments by 1 each time you update settings for the health check. We
 	// recommend that you use GetHealthCheck or ListHealthChecks to get the current
@@ -277,6 +293,7 @@ type UpdateHealthCheckInput struct {
 	// changed after you got the version number. Route 53 does not update the health
 	// check, and it returns a HealthCheckVersionMismatch error.
 	HealthCheckVersion *int64
+
 	// The number of child health checks that are associated with a CALCULATED health
 	// that Amazon Route 53 must consider healthy for the CALCULATED health check to be
 	// considered healthy. To specify the child health checks that you want to
@@ -290,6 +307,7 @@ type UpdateHealthCheckInput struct {
 	//     * If you specify 0, Route 53 always considers
 	// this health check to be healthy.
 	HealthThreshold *int32
+
 	// A complex type that contains one ResettableElementName element for each element
 	// that you want to reset to the default value. Valid values for
 	// ResettableElementName include the following:
@@ -313,6 +331,7 @@ type UpdateHealthCheckInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath)
 	// to null.
 	ResetElements []types.ResettableElementName
+
 	// A complex type that contains one ChildHealthCheck element for each health check
 	// that you want to associate with a CALCULATED health check.
 	ChildHealthChecks []*string
@@ -320,7 +339,10 @@ type UpdateHealthCheckInput struct {
 
 // A complex type that contains the response to the UpdateHealthCheck request.
 type UpdateHealthCheckOutput struct {
+
 	// A complex type that contains the response to an UpdateHealthCheck request.
+	//
+	// This member is required.
 	HealthCheck *types.HealthCheck
 
 	// Metadata pertaining to the operation's result.

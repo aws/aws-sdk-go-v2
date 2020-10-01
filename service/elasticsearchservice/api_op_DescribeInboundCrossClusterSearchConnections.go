@@ -57,12 +57,15 @@ func (c *Client) DescribeInboundCrossClusterSearchConnections(ctx context.Contex
 // Container for the parameters to the DescribeInboundCrossClusterSearchConnections
 // () operation.
 type DescribeInboundCrossClusterSearchConnectionsInput struct {
+
 	// NextToken is sent in case the earlier API call results contain the NextToken. It
 	// is used for pagination.
 	NextToken *string
+
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	MaxResults *int32
+
 	// A list of filters used to match properties for inbound cross-cluster search
 	// connection. Available Filter () names for this operation are:
 	//
@@ -84,9 +87,11 @@ type DescribeInboundCrossClusterSearchConnectionsInput struct {
 // The result of a DescribeInboundCrossClusterSearchConnections () request.
 // Contains the list of connections matching the filter criteria.
 type DescribeInboundCrossClusterSearchConnectionsOutput struct {
+
 	// If more results are available and NextToken is present, make the next request to
 	// the same API with the received NextToken to paginate the remaining results.
 	NextToken *string
+
 	// Consists of list of InboundCrossClusterSearchConnection () matching the
 	// specified filter criteria.
 	CrossClusterSearchConnections []*types.InboundCrossClusterSearchConnection

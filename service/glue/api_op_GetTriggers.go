@@ -55,18 +55,23 @@ func (c *Client) GetTriggers(ctx context.Context, params *GetTriggersInput, optF
 }
 
 type GetTriggersInput struct {
+
 	// The name of the job to retrieve triggers for. The trigger that can start this
 	// job is returned, and if there is no such trigger, all triggers are returned.
 	DependentJobName *string
+
 	// The maximum size of the response.
 	MaxResults *int32
+
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 }
 
 type GetTriggersOutput struct {
+
 	// A list of triggers for the specified job.
 	Triggers []*types.Trigger
+
 	// A continuation token, if not all the requested triggers have yet been returned.
 	NextToken *string
 

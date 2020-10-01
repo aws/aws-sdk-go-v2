@@ -56,11 +56,15 @@ func (c *Client) GetClassifier(ctx context.Context, params *GetClassifierInput, 
 }
 
 type GetClassifierInput struct {
+
 	// Name of the classifier to retrieve.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetClassifierOutput struct {
+
 	// The requested classifier.
 	Classifier *types.Classifier
 

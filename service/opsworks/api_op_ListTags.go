@@ -55,11 +55,16 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 }
 
 type ListTagsInput struct {
+
 	// The stack or layer's Amazon Resource Number (ARN).
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Do not use. A validation exception occurs if you add a NextToken parameter to a
 	// ListTagsRequest call.
 	NextToken *string
+
 	// Do not use. A validation exception occurs if you add a MaxResults parameter to a
 	// ListTagsRequest call.
 	MaxResults *int32
@@ -67,9 +72,11 @@ type ListTagsInput struct {
 
 // Contains the response to a ListTags request.
 type ListTagsOutput struct {
+
 	// A set of key-value pairs that contain tag keys and tag values that are attached
 	// to a stack or layer.
 	Tags map[string]*string
+
 	// If a paginated request does not return all of the remaining results, this
 	// parameter is set to a token that you can assign to the request object's
 	// NextToken parameter to get the next set of results. If the previous paginated

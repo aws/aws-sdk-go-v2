@@ -58,11 +58,15 @@ func (c *Client) ConfirmPublicVirtualInterface(ctx context.Context, params *Conf
 }
 
 type ConfirmPublicVirtualInterfaceInput struct {
+
 	// The ID of the virtual interface.
+	//
+	// This member is required.
 	VirtualInterfaceId *string
 }
 
 type ConfirmPublicVirtualInterfaceOutput struct {
+
 	// The state of the virtual interface. The following are the possible values:
 	//
 	//

@@ -61,22 +61,30 @@ func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, op
 }
 
 type SearchThingsInput struct {
+
 	// The ID of the entity to which the things are associated. The IDs should be in
 	// the following format. urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	//
+	// This member is required.
 	EntityId *string
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
 }
 
 type SearchThingsOutput struct {
+
 	// An array of things in the result set.
 	Things []*types.Thing
+
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
 

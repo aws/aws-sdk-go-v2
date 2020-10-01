@@ -70,8 +70,12 @@ func (c *Client) GetPasswordData(ctx context.Context, params *GetPasswordDataInp
 }
 
 type GetPasswordDataInput struct {
+
 	// The ID of the Windows instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -80,10 +84,13 @@ type GetPasswordDataInput struct {
 }
 
 type GetPasswordDataOutput struct {
+
 	// The ID of the Windows instance.
 	InstanceId *string
+
 	// The time the data was last updated.
 	Timestamp *time.Time
+
 	// The password of the instance. Returns an empty string if the password is not
 	// available.
 	PasswordData *string

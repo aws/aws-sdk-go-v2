@@ -58,12 +58,18 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// Key-value pairs assigned to ARNs that you can use to group and search for
 	// resources by type. You can attach this metadata to user accounts for any
 	// purpose.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// An Amazon Resource Name (ARN) for a specific AWS resource, such as a server,
 	// user, or role.
+	//
+	// This member is required.
 	Arn *string
 }
 

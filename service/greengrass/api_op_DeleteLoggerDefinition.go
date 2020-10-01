@@ -55,7 +55,10 @@ func (c *Client) DeleteLoggerDefinition(ctx context.Context, params *DeleteLogge
 }
 
 type DeleteLoggerDefinitionInput struct {
+
 	// The ID of the logger definition.
+	//
+	// This member is required.
 	LoggerDefinitionId *string
 }
 

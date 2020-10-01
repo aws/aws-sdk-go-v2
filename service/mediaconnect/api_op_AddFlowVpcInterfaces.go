@@ -57,15 +57,23 @@ func (c *Client) AddFlowVpcInterfaces(ctx context.Context, params *AddFlowVpcInt
 
 // A request to add VPC interfaces to the flow.
 type AddFlowVpcInterfacesInput struct {
+
 	// The flow that you want to mutate.
+	//
+	// This member is required.
 	FlowArn *string
+
 	// A list of VPC interfaces that you want to add.
+	//
+	// This member is required.
 	VpcInterfaces []*types.VpcInterfaceRequest
 }
 
 type AddFlowVpcInterfacesOutput struct {
+
 	// The details of the newly added VPC interfaces.
 	VpcInterfaces []*types.VpcInterface
+
 	// The ARN of the flow that these VPC interfaces were added to.
 	FlowArn *string
 

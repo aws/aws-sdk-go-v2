@@ -55,13 +55,18 @@ func (c *Client) DeleteOTAUpdate(ctx context.Context, params *DeleteOTAUpdateInp
 }
 
 type DeleteOTAUpdateInput struct {
+
 	// Specifies if the stream associated with an OTA update should be deleted when the
 	// OTA update is deleted.
 	DeleteStream *bool
+
 	// Specifies if the AWS Job associated with the OTA update should be deleted when
 	// the OTA update is deleted.
 	ForceDeleteAWSJob *bool
+
 	// The ID of the OTA update to delete.
+	//
+	// This member is required.
 	OtaUpdateId *string
 }
 

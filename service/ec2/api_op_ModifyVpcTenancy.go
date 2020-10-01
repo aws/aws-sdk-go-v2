@@ -64,10 +64,17 @@ func (c *Client) ModifyVpcTenancy(ctx context.Context, params *ModifyVpcTenancyI
 }
 
 type ModifyVpcTenancyInput struct {
+
 	// The instance tenancy attribute for the VPC.
+	//
+	// This member is required.
 	InstanceTenancy types.VpcTenancy
+
 	// The ID of the VPC.
+	//
+	// This member is required.
 	VpcId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -76,6 +83,7 @@ type ModifyVpcTenancyInput struct {
 }
 
 type ModifyVpcTenancyOutput struct {
+
 	// Returns true if the request succeeds; otherwise, returns an error.
 	ReturnValue *bool
 

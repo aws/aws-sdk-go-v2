@@ -63,8 +63,12 @@ func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositor
 }
 
 type GetRepositoryEndpointInput struct {
+
 	// The name of the domain that contains the repository.
+	//
+	// This member is required.
 	Domain *string
+
 	// Returns which endpoint of a repository to return. A repository has one endpoint
 	// for each package format:
 	//
@@ -73,15 +77,22 @@ type GetRepositoryEndpointInput struct {
 	//     * pypi
 	//
 	//     * maven
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// The 12-digit account number of the AWS account that owns the domain that
 	// contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
+
 	// The name of the repository.
+	//
+	// This member is required.
 	Repository *string
 }
 
 type GetRepositoryEndpointOutput struct {
+
 	// A string that specifies the URL of the returned endpoint.
 	RepositoryEndpoint *string
 

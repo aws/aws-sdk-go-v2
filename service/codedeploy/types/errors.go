@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The maximum number of alarms for a deployment group (10) was exceeded.
@@ -24,12 +23,6 @@ func (e *AlarmsLimitExceededException) ErrorMessage() string {
 }
 func (e *AlarmsLimitExceededException) ErrorCode() string             { return "AlarmsLimitExceededException" }
 func (e *AlarmsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlarmsLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlarmsLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An application with the specified name with the IAM user or AWS account already
 // exists.
@@ -50,12 +43,6 @@ func (e *ApplicationAlreadyExistsException) ErrorCode() string {
 	return "ApplicationAlreadyExistsException"
 }
 func (e *ApplicationAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApplicationAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApplicationAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The application does not exist with the IAM user or AWS account.
 type ApplicationDoesNotExistException struct {
@@ -75,12 +62,6 @@ func (e *ApplicationDoesNotExistException) ErrorCode() string {
 	return "ApplicationDoesNotExistException"
 }
 func (e *ApplicationDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApplicationDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApplicationDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // More applications were attempted to be created than are allowed.
 type ApplicationLimitExceededException struct {
@@ -100,12 +81,6 @@ func (e *ApplicationLimitExceededException) ErrorCode() string {
 	return "ApplicationLimitExceededException"
 }
 func (e *ApplicationLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApplicationLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApplicationLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The minimum number of required application names was not specified.
 type ApplicationNameRequiredException struct {
@@ -125,12 +100,6 @@ func (e *ApplicationNameRequiredException) ErrorCode() string {
 	return "ApplicationNameRequiredException"
 }
 func (e *ApplicationNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ApplicationNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ApplicationNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ARN is not supported. For example, it might be an ARN for a
 // resource that is not expected.
@@ -149,12 +118,6 @@ func (e *ArnNotSupportedException) ErrorMessage() string {
 }
 func (e *ArnNotSupportedException) ErrorCode() string             { return "ArnNotSupportedException" }
 func (e *ArnNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ArnNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ArnNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of names or IDs allowed for this request (100) was exceeded.
 type BatchLimitExceededException struct {
@@ -172,12 +135,6 @@ func (e *BatchLimitExceededException) ErrorMessage() string {
 }
 func (e *BatchLimitExceededException) ErrorCode() string             { return "BatchLimitExceededException" }
 func (e *BatchLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BatchLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BatchLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A bucket name is required, but was not provided.
 type BucketNameFilterRequiredException struct {
@@ -197,12 +154,6 @@ func (e *BucketNameFilterRequiredException) ErrorCode() string {
 	return "BucketNameFilterRequiredException"
 }
 func (e *BucketNameFilterRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BucketNameFilterRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BucketNameFilterRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment is already complete.
 type DeploymentAlreadyCompletedException struct {
@@ -223,12 +174,6 @@ func (e *DeploymentAlreadyCompletedException) ErrorCode() string {
 }
 func (e *DeploymentAlreadyCompletedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *DeploymentAlreadyCompletedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentAlreadyCompletedException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // A deployment configuration with the specified name with the IAM user or AWS
@@ -252,12 +197,6 @@ func (e *DeploymentConfigAlreadyExistsException) ErrorCode() string {
 func (e *DeploymentConfigAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentConfigAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentConfigAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment configuration does not exist with the IAM user or AWS account.
 type DeploymentConfigDoesNotExistException struct {
@@ -279,12 +218,6 @@ func (e *DeploymentConfigDoesNotExistException) ErrorCode() string {
 func (e *DeploymentConfigDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentConfigDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentConfigDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment configuration is still in use.
 type DeploymentConfigInUseException struct {
@@ -302,12 +235,6 @@ func (e *DeploymentConfigInUseException) ErrorMessage() string {
 }
 func (e *DeploymentConfigInUseException) ErrorCode() string             { return "DeploymentConfigInUseException" }
 func (e *DeploymentConfigInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DeploymentConfigInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentConfigInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment configurations limit was exceeded.
 type DeploymentConfigLimitExceededException struct {
@@ -328,12 +255,6 @@ func (e *DeploymentConfigLimitExceededException) ErrorCode() string {
 }
 func (e *DeploymentConfigLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *DeploymentConfigLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentConfigLimitExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The deployment configuration name was not specified.
@@ -356,12 +277,6 @@ func (e *DeploymentConfigNameRequiredException) ErrorCode() string {
 func (e *DeploymentConfigNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentConfigNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentConfigNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment with the IAM user or AWS account does not exist.
 type DeploymentDoesNotExistException struct {
@@ -381,12 +296,6 @@ func (e *DeploymentDoesNotExistException) ErrorCode() string {
 	return "DeploymentDoesNotExistException"
 }
 func (e *DeploymentDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DeploymentDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A deployment group with the specified name with the IAM user or AWS account
 // already exists.
@@ -409,12 +318,6 @@ func (e *DeploymentGroupAlreadyExistsException) ErrorCode() string {
 func (e *DeploymentGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentGroupAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentGroupAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The named deployment group with the IAM user or AWS account does not exist.
 type DeploymentGroupDoesNotExistException struct {
@@ -435,12 +338,6 @@ func (e *DeploymentGroupDoesNotExistException) ErrorCode() string {
 }
 func (e *DeploymentGroupDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *DeploymentGroupDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentGroupDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The deployment groups limit was exceeded.
@@ -463,12 +360,6 @@ func (e *DeploymentGroupLimitExceededException) ErrorCode() string {
 func (e *DeploymentGroupLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentGroupLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentGroupLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment group name was not specified.
 type DeploymentGroupNameRequiredException struct {
@@ -490,12 +381,6 @@ func (e *DeploymentGroupNameRequiredException) ErrorCode() string {
 func (e *DeploymentGroupNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentGroupNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentGroupNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // At least one deployment ID must be specified.
 type DeploymentIdRequiredException struct {
@@ -513,12 +398,6 @@ func (e *DeploymentIdRequiredException) ErrorMessage() string {
 }
 func (e *DeploymentIdRequiredException) ErrorCode() string             { return "DeploymentIdRequiredException" }
 func (e *DeploymentIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DeploymentIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment does not have a status of Ready and can't continue yet.
 type DeploymentIsNotInReadyStateException struct {
@@ -540,12 +419,6 @@ func (e *DeploymentIsNotInReadyStateException) ErrorCode() string {
 func (e *DeploymentIsNotInReadyStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentIsNotInReadyStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentIsNotInReadyStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of allowed deployments was exceeded.
 type DeploymentLimitExceededException struct {
@@ -565,12 +438,6 @@ func (e *DeploymentLimitExceededException) ErrorCode() string {
 	return "DeploymentLimitExceededException"
 }
 func (e *DeploymentLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DeploymentLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified deployment has not started.
 type DeploymentNotStartedException struct {
@@ -588,12 +455,6 @@ func (e *DeploymentNotStartedException) ErrorMessage() string {
 }
 func (e *DeploymentNotStartedException) ErrorCode() string             { return "DeploymentNotStartedException" }
 func (e *DeploymentNotStartedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DeploymentNotStartedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentNotStartedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided target ID does not belong to the attempted deployment.
 type DeploymentTargetDoesNotExistException struct {
@@ -615,12 +476,6 @@ func (e *DeploymentTargetDoesNotExistException) ErrorCode() string {
 func (e *DeploymentTargetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentTargetDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentTargetDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A deployment target ID was not provided.
 type DeploymentTargetIdRequiredException struct {
@@ -641,12 +496,6 @@ func (e *DeploymentTargetIdRequiredException) ErrorCode() string {
 }
 func (e *DeploymentTargetIdRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *DeploymentTargetIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentTargetIdRequiredException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The maximum number of targets that can be associated with an Amazon ECS or AWS
@@ -672,12 +521,6 @@ func (e *DeploymentTargetListSizeExceededException) ErrorCode() string {
 func (e *DeploymentTargetListSizeExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeploymentTargetListSizeExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeploymentTargetListSizeExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The description is too long.
 type DescriptionTooLongException struct {
@@ -695,12 +538,6 @@ func (e *DescriptionTooLongException) ErrorMessage() string {
 }
 func (e *DescriptionTooLongException) ErrorCode() string             { return "DescriptionTooLongException" }
 func (e *DescriptionTooLongException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DescriptionTooLongException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DescriptionTooLongException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon ECS service is associated with more than one deployment groups. An
 // Amazon ECS service can be associated with only one deployment group.
@@ -723,12 +560,6 @@ func (e *ECSServiceMappingLimitExceededException) ErrorCode() string {
 func (e *ECSServiceMappingLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ECSServiceMappingLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ECSServiceMappingLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No GitHub account connection exists with the named specified in the call.
 type GitHubAccountTokenDoesNotExistException struct {
@@ -749,12 +580,6 @@ func (e *GitHubAccountTokenDoesNotExistException) ErrorCode() string {
 }
 func (e *GitHubAccountTokenDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *GitHubAccountTokenDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GitHubAccountTokenDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The call is missing a required GitHub account connection name.
@@ -777,12 +602,6 @@ func (e *GitHubAccountTokenNameRequiredException) ErrorCode() string {
 func (e *GitHubAccountTokenNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *GitHubAccountTokenNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GitHubAccountTokenNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No IAM ARN was included in the request. You must use an IAM session ARN or IAM
 // user ARN in the request.
@@ -801,12 +620,6 @@ func (e *IamArnRequiredException) ErrorMessage() string {
 }
 func (e *IamArnRequiredException) ErrorCode() string             { return "IamArnRequiredException" }
 func (e *IamArnRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IamArnRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IamArnRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request included an IAM session ARN that has already been used to register a
 // different instance.
@@ -829,12 +642,6 @@ func (e *IamSessionArnAlreadyRegisteredException) ErrorCode() string {
 func (e *IamSessionArnAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IamSessionArnAlreadyRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IamSessionArnAlreadyRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified IAM user ARN is already registered with an on-premises instance.
 type IamUserArnAlreadyRegisteredException struct {
@@ -856,12 +663,6 @@ func (e *IamUserArnAlreadyRegisteredException) ErrorCode() string {
 func (e *IamUserArnAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IamUserArnAlreadyRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IamUserArnAlreadyRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An IAM user ARN was not specified.
 type IamUserArnRequiredException struct {
@@ -879,12 +680,6 @@ func (e *IamUserArnRequiredException) ErrorMessage() string {
 }
 func (e *IamUserArnRequiredException) ErrorCode() string             { return "IamUserArnRequiredException" }
 func (e *IamUserArnRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IamUserArnRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IamUserArnRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified instance does not exist in the deployment group.
 type InstanceDoesNotExistException struct {
@@ -902,12 +697,6 @@ func (e *InstanceDoesNotExistException) ErrorMessage() string {
 }
 func (e *InstanceDoesNotExistException) ErrorCode() string             { return "InstanceDoesNotExistException" }
 func (e *InstanceDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The instance ID was not specified.
 type InstanceIdRequiredException struct {
@@ -925,12 +714,6 @@ func (e *InstanceIdRequiredException) ErrorMessage() string {
 }
 func (e *InstanceIdRequiredException) ErrorCode() string             { return "InstanceIdRequiredException" }
 func (e *InstanceIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceIdRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceIdRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of allowed on-premises instances in a single call was
 // exceeded.
@@ -949,12 +732,6 @@ func (e *InstanceLimitExceededException) ErrorMessage() string {
 }
 func (e *InstanceLimitExceededException) ErrorCode() string             { return "InstanceLimitExceededException" }
 func (e *InstanceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified on-premises instance name is already registered.
 type InstanceNameAlreadyRegisteredException struct {
@@ -976,12 +753,6 @@ func (e *InstanceNameAlreadyRegisteredException) ErrorCode() string {
 func (e *InstanceNameAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InstanceNameAlreadyRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceNameAlreadyRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An on-premises instance name was not specified.
 type InstanceNameRequiredException struct {
@@ -999,12 +770,6 @@ func (e *InstanceNameRequiredException) ErrorMessage() string {
 }
 func (e *InstanceNameRequiredException) ErrorCode() string             { return "InstanceNameRequiredException" }
 func (e *InstanceNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceNameRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceNameRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified on-premises instance is not registered.
 type InstanceNotRegisteredException struct {
@@ -1022,12 +787,6 @@ func (e *InstanceNotRegisteredException) ErrorMessage() string {
 }
 func (e *InstanceNotRegisteredException) ErrorCode() string             { return "InstanceNotRegisteredException" }
 func (e *InstanceNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InstanceNotRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InstanceNotRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The format of the alarm configuration is invalid. Possible causes include:
 //
@@ -1059,12 +818,6 @@ func (e *InvalidAlarmConfigException) ErrorMessage() string {
 }
 func (e *InvalidAlarmConfigException) ErrorCode() string             { return "InvalidAlarmConfigException" }
 func (e *InvalidAlarmConfigException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAlarmConfigException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAlarmConfigException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The application name was specified in an invalid format.
 type InvalidApplicationNameException struct {
@@ -1084,12 +837,6 @@ func (e *InvalidApplicationNameException) ErrorCode() string {
 	return "InvalidApplicationNameException"
 }
 func (e *InvalidApplicationNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidApplicationNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApplicationNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ARN is not in a valid format.
 type InvalidArnException struct {
@@ -1107,12 +854,6 @@ func (e *InvalidArnException) ErrorMessage() string {
 }
 func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The automatic rollback configuration was specified in an invalid format. For
 // example, automatic rollback is enabled, but an invalid triggering event type or
@@ -1136,12 +877,6 @@ func (e *InvalidAutoRollbackConfigException) ErrorCode() string {
 func (e *InvalidAutoRollbackConfigException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidAutoRollbackConfigException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAutoRollbackConfigException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Auto Scaling group was specified in an invalid format or does not exist.
 type InvalidAutoScalingGroupException struct {
@@ -1161,12 +896,6 @@ func (e *InvalidAutoScalingGroupException) ErrorCode() string {
 	return "InvalidAutoScalingGroupException"
 }
 func (e *InvalidAutoScalingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAutoScalingGroupException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAutoScalingGroupException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The configuration for the blue/green deployment group was provided in an invalid
 // format. For information about deployment configuration format, see
@@ -1190,12 +919,6 @@ func (e *InvalidBlueGreenDeploymentConfigurationException) ErrorCode() string {
 func (e *InvalidBlueGreenDeploymentConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidBlueGreenDeploymentConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidBlueGreenDeploymentConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The bucket name either doesn't exist or was specified in an invalid format.
 type InvalidBucketNameFilterException struct {
@@ -1215,12 +938,6 @@ func (e *InvalidBucketNameFilterException) ErrorCode() string {
 	return "InvalidBucketNameFilterException"
 }
 func (e *InvalidBucketNameFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidBucketNameFilterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidBucketNameFilterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The computePlatform is invalid. The computePlatform should be Lambda, Server, or
 // ECS.
@@ -1241,12 +958,6 @@ func (e *InvalidComputePlatformException) ErrorCode() string {
 	return "InvalidComputePlatformException"
 }
 func (e *InvalidComputePlatformException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidComputePlatformException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidComputePlatformException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployed state filter was specified in an invalid format.
 type InvalidDeployedStateFilterException struct {
@@ -1267,12 +978,6 @@ func (e *InvalidDeployedStateFilterException) ErrorCode() string {
 }
 func (e *InvalidDeployedStateFilterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidDeployedStateFilterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeployedStateFilterException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The deployment configuration name was specified in an invalid format.
@@ -1295,12 +1000,6 @@ func (e *InvalidDeploymentConfigNameException) ErrorCode() string {
 func (e *InvalidDeploymentConfigNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDeploymentConfigNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentConfigNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The deployment group name was specified in an invalid format.
 type InvalidDeploymentGroupNameException struct {
@@ -1322,12 +1021,6 @@ func (e *InvalidDeploymentGroupNameException) ErrorCode() string {
 func (e *InvalidDeploymentGroupNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDeploymentGroupNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentGroupNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // At least one of the deployment IDs was specified in an invalid format.
 type InvalidDeploymentIdException struct {
@@ -1345,12 +1038,6 @@ func (e *InvalidDeploymentIdException) ErrorMessage() string {
 }
 func (e *InvalidDeploymentIdException) ErrorCode() string             { return "InvalidDeploymentIdException" }
 func (e *InvalidDeploymentIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeploymentIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An instance type was specified for an in-place deployment. Instance types are
 // supported for blue/green deployments only.
@@ -1373,12 +1060,6 @@ func (e *InvalidDeploymentInstanceTypeException) ErrorCode() string {
 func (e *InvalidDeploymentInstanceTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDeploymentInstanceTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentInstanceTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified deployment status doesn't exist or cannot be determined.
 type InvalidDeploymentStatusException struct {
@@ -1398,12 +1079,6 @@ func (e *InvalidDeploymentStatusException) ErrorCode() string {
 	return "InvalidDeploymentStatusException"
 }
 func (e *InvalidDeploymentStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeploymentStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid deployment style was specified. Valid deployment types include
 // "IN_PLACE" and "BLUE_GREEN." Valid deployment options include
@@ -1425,12 +1100,6 @@ func (e *InvalidDeploymentStyleException) ErrorCode() string {
 	return "InvalidDeploymentStyleException"
 }
 func (e *InvalidDeploymentStyleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeploymentStyleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentStyleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target ID provided was not valid.
 type InvalidDeploymentTargetIdException struct {
@@ -1451,12 +1120,6 @@ func (e *InvalidDeploymentTargetIdException) ErrorCode() string {
 }
 func (e *InvalidDeploymentTargetIdException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidDeploymentTargetIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentTargetIdException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The wait type is invalid.
@@ -1479,12 +1142,6 @@ func (e *InvalidDeploymentWaitTypeException) ErrorCode() string {
 func (e *InvalidDeploymentWaitTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidDeploymentWaitTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeploymentWaitTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but only
 // one of these data types can be used in a single call.
@@ -1505,12 +1162,6 @@ func (e *InvalidEC2TagCombinationException) ErrorCode() string {
 	return "InvalidEC2TagCombinationException"
 }
 func (e *InvalidEC2TagCombinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEC2TagCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEC2TagCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag was specified in an invalid format.
 type InvalidEC2TagException struct {
@@ -1528,12 +1179,6 @@ func (e *InvalidEC2TagException) ErrorMessage() string {
 }
 func (e *InvalidEC2TagException) ErrorCode() string             { return "InvalidEC2TagException" }
 func (e *InvalidEC2TagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEC2TagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEC2TagException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon ECS service identifier is not valid.
 type InvalidECSServiceException struct {
@@ -1551,12 +1196,6 @@ func (e *InvalidECSServiceException) ErrorMessage() string {
 }
 func (e *InvalidECSServiceException) ErrorCode() string             { return "InvalidECSServiceException" }
 func (e *InvalidECSServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidECSServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidECSServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The external ID was specified in an invalid format.
 type InvalidExternalIdException struct {
@@ -1574,12 +1213,6 @@ func (e *InvalidExternalIdException) ErrorMessage() string {
 }
 func (e *InvalidExternalIdException) ErrorCode() string             { return "InvalidExternalIdException" }
 func (e *InvalidExternalIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidExternalIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidExternalIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid fileExistsBehavior option was specified to determine how AWS
 // CodeDeploy handles files or directories that already exist in a deployment
@@ -1604,12 +1237,6 @@ func (e *InvalidFileExistsBehaviorException) ErrorCode() string {
 func (e *InvalidFileExistsBehaviorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidFileExistsBehaviorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFileExistsBehaviorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The GitHub token is not valid.
 type InvalidGitHubAccountTokenException struct {
@@ -1630,12 +1257,6 @@ func (e *InvalidGitHubAccountTokenException) ErrorCode() string {
 }
 func (e *InvalidGitHubAccountTokenException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidGitHubAccountTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGitHubAccountTokenException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The format of the specified GitHub account connection name is invalid.
@@ -1658,12 +1279,6 @@ func (e *InvalidGitHubAccountTokenNameException) ErrorCode() string {
 func (e *InvalidGitHubAccountTokenNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidGitHubAccountTokenNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGitHubAccountTokenNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The IAM session ARN was specified in an invalid format.
 type InvalidIamSessionArnException struct {
@@ -1681,12 +1296,6 @@ func (e *InvalidIamSessionArnException) ErrorMessage() string {
 }
 func (e *InvalidIamSessionArnException) ErrorCode() string             { return "InvalidIamSessionArnException" }
 func (e *InvalidIamSessionArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidIamSessionArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidIamSessionArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The IAM user ARN was specified in an invalid format.
 type InvalidIamUserArnException struct {
@@ -1704,12 +1313,6 @@ func (e *InvalidIamUserArnException) ErrorMessage() string {
 }
 func (e *InvalidIamUserArnException) ErrorCode() string             { return "InvalidIamUserArnException" }
 func (e *InvalidIamUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidIamUserArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidIamUserArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The IgnoreApplicationStopFailures value is invalid. For AWS Lambda deployments,
 // false is expected. For EC2/On-premises deployments, true or false is expected.
@@ -1732,12 +1335,6 @@ func (e *InvalidIgnoreApplicationStopFailuresValueException) ErrorCode() string 
 func (e *InvalidIgnoreApplicationStopFailuresValueException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidIgnoreApplicationStopFailuresValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidIgnoreApplicationStopFailuresValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input was specified in an invalid format.
 type InvalidInputException struct {
@@ -1755,12 +1352,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The on-premises instance name was specified in an invalid format.
 type InvalidInstanceNameException struct {
@@ -1778,12 +1369,6 @@ func (e *InvalidInstanceNameException) ErrorMessage() string {
 }
 func (e *InvalidInstanceNameException) ErrorCode() string             { return "InvalidInstanceNameException" }
 func (e *InvalidInstanceNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInstanceNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInstanceNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified instance status does not exist.
 type InvalidInstanceStatusException struct {
@@ -1801,12 +1386,6 @@ func (e *InvalidInstanceStatusException) ErrorMessage() string {
 }
 func (e *InvalidInstanceStatusException) ErrorCode() string             { return "InvalidInstanceStatusException" }
 func (e *InvalidInstanceStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInstanceStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInstanceStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid instance type was specified for instances in a blue/green deployment.
 // Valid values include "Blue" for an original environment and "Green" for a
@@ -1826,12 +1405,6 @@ func (e *InvalidInstanceTypeException) ErrorMessage() string {
 }
 func (e *InvalidInstanceTypeException) ErrorCode() string             { return "InvalidInstanceTypeException" }
 func (e *InvalidInstanceTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInstanceTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInstanceTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified key prefix filter was specified in an invalid format.
 type InvalidKeyPrefixFilterException struct {
@@ -1851,12 +1424,6 @@ func (e *InvalidKeyPrefixFilterException) ErrorCode() string {
 	return "InvalidKeyPrefixFilterException"
 }
 func (e *InvalidKeyPrefixFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidKeyPrefixFilterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidKeyPrefixFilterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A lifecycle event hook is invalid. Review the hooks section in your AppSpec file
 // to ensure the lifecycle events and hooks functions are valid.
@@ -1878,12 +1445,6 @@ func (e *InvalidLifecycleEventHookExecutionIdException) ErrorCode() string {
 }
 func (e *InvalidLifecycleEventHookExecutionIdException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidLifecycleEventHookExecutionIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLifecycleEventHookExecutionIdException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The result of a Lambda validation function that verifies a lifecycle event is
@@ -1907,12 +1468,6 @@ func (e *InvalidLifecycleEventHookExecutionStatusException) ErrorCode() string {
 func (e *InvalidLifecycleEventHookExecutionStatusException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidLifecycleEventHookExecutionStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLifecycleEventHookExecutionStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid load balancer name, or no load balancer name, was specified.
 type InvalidLoadBalancerInfoException struct {
@@ -1932,12 +1487,6 @@ func (e *InvalidLoadBalancerInfoException) ErrorCode() string {
 	return "InvalidLoadBalancerInfoException"
 }
 func (e *InvalidLoadBalancerInfoException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLoadBalancerInfoException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLoadBalancerInfoException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The minimum healthy instance value was specified in an invalid format.
 type InvalidMinimumHealthyHostValueException struct {
@@ -1959,12 +1508,6 @@ func (e *InvalidMinimumHealthyHostValueException) ErrorCode() string {
 func (e *InvalidMinimumHealthyHostValueException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidMinimumHealthyHostValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMinimumHealthyHostValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The next token was specified in an invalid format.
 type InvalidNextTokenException struct {
@@ -1982,12 +1525,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A call was submitted that specified both OnPremisesTagFilters and
 // OnPremisesTagSet, but only one of these data types can be used in a single call.
@@ -2010,12 +1547,6 @@ func (e *InvalidOnPremisesTagCombinationException) ErrorCode() string {
 func (e *InvalidOnPremisesTagCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidOnPremisesTagCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOnPremisesTagCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid operation was detected.
 type InvalidOperationException struct {
@@ -2033,12 +1564,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 }
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The registration status was specified in an invalid format.
 type InvalidRegistrationStatusException struct {
@@ -2060,12 +1585,6 @@ func (e *InvalidRegistrationStatusException) ErrorCode() string {
 func (e *InvalidRegistrationStatusException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidRegistrationStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRegistrationStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The revision was specified in an invalid format.
 type InvalidRevisionException struct {
@@ -2083,12 +1602,6 @@ func (e *InvalidRevisionException) ErrorMessage() string {
 }
 func (e *InvalidRevisionException) ErrorCode() string             { return "InvalidRevisionException" }
 func (e *InvalidRevisionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRevisionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRevisionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service role ARN was specified in an invalid format. Or, if an Auto Scaling
 // group was specified, the specified service role does not grant the appropriate
@@ -2108,12 +1621,6 @@ func (e *InvalidRoleException) ErrorMessage() string {
 }
 func (e *InvalidRoleException) ErrorCode() string             { return "InvalidRoleException" }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRoleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRoleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The column name to sort by is either not present or was specified in an invalid
 // format.
@@ -2132,12 +1639,6 @@ func (e *InvalidSortByException) ErrorMessage() string {
 }
 func (e *InvalidSortByException) ErrorCode() string             { return "InvalidSortByException" }
 func (e *InvalidSortByException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSortByException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSortByException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The sort order was specified in an invalid format.
 type InvalidSortOrderException struct {
@@ -2155,12 +1656,6 @@ func (e *InvalidSortOrderException) ErrorMessage() string {
 }
 func (e *InvalidSortOrderException) ErrorCode() string             { return "InvalidSortOrderException" }
 func (e *InvalidSortOrderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSortOrderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSortOrderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag was specified in an invalid format.
 type InvalidTagException struct {
@@ -2178,12 +1673,6 @@ func (e *InvalidTagException) ErrorMessage() string {
 }
 func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag filter was specified in an invalid format.
 type InvalidTagFilterException struct {
@@ -2201,12 +1690,6 @@ func (e *InvalidTagFilterException) ErrorMessage() string {
 }
 func (e *InvalidTagFilterException) ErrorCode() string             { return "InvalidTagFilterException" }
 func (e *InvalidTagFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagFilterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagFilterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified tags are not valid.
 type InvalidTagsToAddException struct {
@@ -2224,12 +1707,6 @@ func (e *InvalidTagsToAddException) ErrorMessage() string {
 }
 func (e *InvalidTagsToAddException) ErrorCode() string             { return "InvalidTagsToAddException" }
 func (e *InvalidTagsToAddException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagsToAddException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagsToAddException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target filter name is invalid.
 type InvalidTargetFilterNameException struct {
@@ -2249,12 +1726,6 @@ func (e *InvalidTargetFilterNameException) ErrorCode() string {
 	return "InvalidTargetFilterNameException"
 }
 func (e *InvalidTargetFilterNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetFilterNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetFilterNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A target group pair associated with this deployment is not valid.
 type InvalidTargetGroupPairException struct {
@@ -2274,12 +1745,6 @@ func (e *InvalidTargetGroupPairException) ErrorCode() string {
 	return "InvalidTargetGroupPairException"
 }
 func (e *InvalidTargetGroupPairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetGroupPairException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetGroupPairException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target instance configuration is invalid. Possible causes include:
 //
@@ -2311,12 +1776,6 @@ func (e *InvalidTargetInstancesException) ErrorCode() string {
 	return "InvalidTargetInstancesException"
 }
 func (e *InvalidTargetInstancesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetInstancesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetInstancesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified time range was specified in an invalid format.
 type InvalidTimeRangeException struct {
@@ -2334,12 +1793,6 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 }
 func (e *InvalidTimeRangeException) ErrorCode() string             { return "InvalidTimeRangeException" }
 func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTimeRangeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTimeRangeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The configuration that specifies how traffic is routed during a deployment is
 // invalid.
@@ -2362,12 +1815,6 @@ func (e *InvalidTrafficRoutingConfigurationException) ErrorCode() string {
 func (e *InvalidTrafficRoutingConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidTrafficRoutingConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTrafficRoutingConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The trigger was specified in an invalid format.
 type InvalidTriggerConfigException struct {
@@ -2385,12 +1832,6 @@ func (e *InvalidTriggerConfigException) ErrorMessage() string {
 }
 func (e *InvalidTriggerConfigException) ErrorCode() string             { return "InvalidTriggerConfigException" }
 func (e *InvalidTriggerConfigException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTriggerConfigException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTriggerConfigException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda deployments,
 // false is expected. For EC2/On-premises deployments, true or false is expected.
@@ -2412,12 +1853,6 @@ func (e *InvalidUpdateOutdatedInstancesOnlyValueException) ErrorCode() string {
 }
 func (e *InvalidUpdateOutdatedInstancesOnlyValueException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidUpdateOutdatedInstancesOnlyValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidUpdateOutdatedInstancesOnlyValueException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // An attempt to return the status of an already completed lifecycle event
@@ -2441,12 +1876,6 @@ func (e *LifecycleEventAlreadyCompletedException) ErrorCode() string {
 func (e *LifecycleEventAlreadyCompletedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *LifecycleEventAlreadyCompletedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LifecycleEventAlreadyCompletedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit for lifecycle hooks was exceeded.
 type LifecycleHookLimitExceededException struct {
@@ -2468,12 +1897,6 @@ func (e *LifecycleHookLimitExceededException) ErrorCode() string {
 func (e *LifecycleHookLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *LifecycleHookLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LifecycleHookLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Both an IAM user ARN and an IAM session ARN were included in the request. Use
 // only one ARN type.
@@ -2494,12 +1917,6 @@ func (e *MultipleIamArnsProvidedException) ErrorCode() string {
 	return "MultipleIamArnsProvidedException"
 }
 func (e *MultipleIamArnsProvidedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MultipleIamArnsProvidedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MultipleIamArnsProvidedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The API used does not support the deployment.
 type OperationNotSupportedException struct {
@@ -2517,12 +1934,6 @@ func (e *OperationNotSupportedException) ErrorMessage() string {
 }
 func (e *OperationNotSupportedException) ErrorCode() string             { return "OperationNotSupportedException" }
 func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The ARN of a resource is required, but was not found.
 type ResourceArnRequiredException struct {
@@ -2540,12 +1951,6 @@ func (e *ResourceArnRequiredException) ErrorMessage() string {
 }
 func (e *ResourceArnRequiredException) ErrorCode() string             { return "ResourceArnRequiredException" }
 func (e *ResourceArnRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceArnRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceArnRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource could not be validated.
 type ResourceValidationException struct {
@@ -2563,12 +1968,6 @@ func (e *ResourceValidationException) ErrorMessage() string {
 }
 func (e *ResourceValidationException) ErrorCode() string             { return "ResourceValidationException" }
 func (e *ResourceValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The named revision does not exist with the IAM user or AWS account.
 type RevisionDoesNotExistException struct {
@@ -2586,12 +1985,6 @@ func (e *RevisionDoesNotExistException) ErrorMessage() string {
 }
 func (e *RevisionDoesNotExistException) ErrorCode() string             { return "RevisionDoesNotExistException" }
 func (e *RevisionDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RevisionDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RevisionDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The revision ID was not specified.
 type RevisionRequiredException struct {
@@ -2609,12 +2002,6 @@ func (e *RevisionRequiredException) ErrorMessage() string {
 }
 func (e *RevisionRequiredException) ErrorCode() string             { return "RevisionRequiredException" }
 func (e *RevisionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RevisionRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RevisionRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The role ID was not specified.
 type RoleRequiredException struct {
@@ -2632,12 +2019,6 @@ func (e *RoleRequiredException) ErrorMessage() string {
 }
 func (e *RoleRequiredException) ErrorCode() string             { return "RoleRequiredException" }
 func (e *RoleRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RoleRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RoleRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum allowed number of tags was exceeded.
 type TagLimitExceededException struct {
@@ -2655,12 +2036,6 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 }
 func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A tag was not specified.
 type TagRequiredException struct {
@@ -2678,12 +2053,6 @@ func (e *TagRequiredException) ErrorMessage() string {
 }
 func (e *TagRequiredException) ErrorCode() string             { return "TagRequiredException" }
 func (e *TagRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of tag groups included in the tag set list exceeded the maximum
 // allowed limit of 3.
@@ -2704,12 +2073,6 @@ func (e *TagSetListLimitExceededException) ErrorCode() string {
 	return "TagSetListLimitExceededException"
 }
 func (e *TagSetListLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagSetListLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagSetListLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An API function was called too frequently.
 type ThrottlingException struct {
@@ -2727,12 +2090,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum allowed number of triggers was exceeded.
 type TriggerTargetsLimitExceededException struct {
@@ -2754,12 +2111,6 @@ func (e *TriggerTargetsLimitExceededException) ErrorCode() string {
 func (e *TriggerTargetsLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TriggerTargetsLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TriggerTargetsLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A call was submitted that is not supported for the specified deployment type.
 type UnsupportedActionForDeploymentTypeException struct {
@@ -2780,10 +2131,4 @@ func (e *UnsupportedActionForDeploymentTypeException) ErrorCode() string {
 }
 func (e *UnsupportedActionForDeploymentTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *UnsupportedActionForDeploymentTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedActionForDeploymentTypeException) HasMessage() bool {
-	return e.Message != nil
 }

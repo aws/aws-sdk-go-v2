@@ -56,13 +56,20 @@ func (c *Client) UpdateDocumentDefaultVersion(ctx context.Context, params *Updat
 }
 
 type UpdateDocumentDefaultVersionInput struct {
+
 	// The version of a custom document that you want to set as the default version.
+	//
+	// This member is required.
 	DocumentVersion *string
+
 	// The name of a custom document that you want to set as the default version.
+	//
+	// This member is required.
 	Name *string
 }
 
 type UpdateDocumentDefaultVersionOutput struct {
+
 	// The description of a custom document that you want to set as the default
 	// version.
 	Description *types.DocumentDefaultVersionDescription

@@ -83,11 +83,15 @@ func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *Ge
 }
 
 type GetBucketLifecycleConfigurationInput struct {
+
 	// The name of the bucket for which to get the lifecycle information.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketLifecycleConfigurationOutput struct {
+
 	// Container for a lifecycle rule.
 	Rules []*types.LifecycleRule
 

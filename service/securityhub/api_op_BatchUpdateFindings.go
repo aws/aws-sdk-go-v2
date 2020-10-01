@@ -85,6 +85,7 @@ func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFin
 }
 
 type BatchUpdateFindingsInput struct {
+
 	// Indicates the veracity of a finding. The available values for VerificationState
 	// are as follows.
 	//
@@ -100,18 +101,24 @@ type BatchUpdateFindingsInput struct {
 	// special case of TRUE_POSITIVE where the finding doesn't pose any threat, is
 	// expected, or both
 	VerificationState types.VerificationState
+
 	// A list of findings that are related to the updated findings.
 	RelatedFindings []*types.RelatedFinding
+
 	// The list of findings to update. BatchUpdateFindings can be used to update up to
 	// 100 findings at a time. For each finding, the list provides the finding
 	// identifier and the ARN of the finding provider.
+	//
+	// This member is required.
 	FindingIdentifiers []*types.AwsSecurityFindingIdentifier
+
 	// The updated value for the finding confidence. Confidence is defined as the
 	// likelihood that a finding accurately identifies the behavior or issue that it
 	// was intended to identify. Confidence is scored on a 0-100 basis using a ratio
 	// scale, where 0 means zero percent confidence and 100 means 100 percent
 	// confidence.
 	Confidence *int32
+
 	// One or more finding types in the format of namespace/category/classifier that
 	// classify a finding. Valid namespace values are as follows.
 	//
@@ -127,27 +134,38 @@ type BatchUpdateFindingsInput struct {
 	//     *
 	// Sensitive Data Identifications
 	Types []*string
+
 	// The updated note.
 	Note *types.NoteUpdate
+
 	// The updated value for the level of importance assigned to the resources
 	// associated with the findings. A score of 0 means that the underlying resources
 	// have no criticality, and a score of 100 is reserved for the most critical
 	// resources.
 	Criticality *int32
+
 	// A list of name/value string pairs associated with the finding. These are custom,
 	// user-defined fields added to a finding.
 	UserDefinedFields map[string]*string
+
 	// Used to update the workflow status of a finding. The workflow status indicates
 	// the progress of the investigation into the finding.
 	Workflow *types.WorkflowUpdate
+
 	// Used to update the finding severity.
 	Severity *types.SeverityUpdate
 }
 
 type BatchUpdateFindingsOutput struct {
+
 	// The list of findings that were updated successfully.
+	//
+	// This member is required.
 	ProcessedFindings []*types.AwsSecurityFindingIdentifier
+
 	// The list of findings that were not updated.
+	//
+	// This member is required.
 	UnprocessedFindings []*types.BatchUpdateFindingsUnprocessedFinding
 
 	// Metadata pertaining to the operation's result.

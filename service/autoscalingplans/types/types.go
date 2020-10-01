@@ -8,8 +8,10 @@ import (
 
 // Represents an application source.
 type ApplicationSource struct {
+
 	// A set of tags (up to 50).
 	TagFilters []*TagFilter
+
 	// The Amazon Resource Name (ARN) of a AWS CloudFormation stack.
 	CloudFormationStackARN *string
 }
@@ -32,16 +34,27 @@ type ApplicationSource struct {
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
 // in the Amazon CloudWatch User Guide.
 type CustomizedLoadMetricSpecification struct {
+
 	// The namespace of the metric.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The statistic of the metric. Currently, the value must always be Sum.
+	//
+	// This member is required.
 	Statistic MetricStatistic
+
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your customized load metric
 	// specification.
 	Dimensions []*MetricDimension
+
 	// The name of the metric.
+	//
+	// This member is required.
 	MetricName *string
+
 	// The unit of the metric.
 	Unit *string
 }
@@ -66,40 +79,63 @@ type CustomizedLoadMetricSpecification struct {
 // information about CloudWatch, see Amazon CloudWatch Concepts
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
 type CustomizedScalingMetricSpecification struct {
+
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your customized scaling
 	// metric specification.
 	Dimensions []*MetricDimension
+
 	// The unit of the metric.
 	Unit *string
+
 	// The namespace of the metric.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The name of the metric.
+	//
+	// This member is required.
 	MetricName *string
+
 	// The statistic of the metric.
+	//
+	// This member is required.
 	Statistic MetricStatistic
 }
 
 // Represents a single value in the forecast data used for predictive scaling.
 type Datapoint struct {
+
 	// The value of the data point.
 	Value *float64
+
 	// The time stamp for the data point in UTC format.
 	Timestamp *time.Time
 }
 
 // Represents a dimension for a customized metric.
 type MetricDimension struct {
+
 	// The name of the dimension.
+	//
+	// This member is required.
 	Name *string
+
 	// The value of the dimension.
+	//
+	// This member is required.
 	Value *string
 }
 
 // Represents a predefined metric that can be used for predictive scaling.
 type PredefinedLoadMetricSpecification struct {
+
 	// The metric type.
+	//
+	// This member is required.
 	PredefinedLoadMetricType LoadMetricType
+
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
 	// target group for an Application Load Balancer attached to the Auto Scaling
@@ -116,9 +152,13 @@ type PredefinedLoadMetricSpecification struct {
 // Represents a predefined metric that can be used for dynamic scaling as part of a
 // target tracking scaling policy.
 type PredefinedScalingMetricSpecification struct {
+
 	// The metric type. The ALBRequestCountPerTarget metric type applies only to Auto
 	// Scaling groups, Spot Fleet requests, and ECS services.
+	//
+	// This member is required.
 	PredefinedScalingMetricType ScalingMetricType
+
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
 	// target group for an Application Load Balancer attached to the Auto Scaling
@@ -153,8 +193,12 @@ type PredefinedScalingMetricSpecification struct {
 // Scaling
 // (https://docs.aws.amazon.com/autoscaling/plans/userguide/auto-scaling-getting-started.html).
 type ScalingInstruction struct {
+
 	// The minimum capacity of the resource.
+	//
+	// This member is required.
 	MinCapacity *int32
+
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
 	//
@@ -181,7 +225,10 @@ type ScalingInstruction struct {
 	//     * Aurora DB cluster - The
 	// resource type is cluster and the unique identifier is the cluster name. Example:
 	// cluster:my-db-cluster.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The amount of time, in seconds, to buffer the run time of scheduled scaling
 	// actions when scaling out. For example, if the forecast says to add capacity at
 	// 10:00 AM, and the buffer time is 5 minutes, then the run time of the
@@ -193,8 +240,12 @@ type ScalingInstruction struct {
 	// seconds (60 minutes). The default is 300 seconds. Only valid when configuring
 	// predictive scaling.
 	ScheduledActionBufferTime *int32
+
 	// The namespace of the AWS service.
+	//
+	// This member is required.
 	ServiceNamespace ServiceNamespace
+
 	// Defines the behavior that should be applied if the forecast capacity approaches
 	// or exceeds the maximum capacity specified for the resource. The default value is
 	// SetForecastCapacityToMaxCapacity. The following are possible values:
@@ -216,10 +267,12 @@ type ScalingInstruction struct {
 	// Only valid when configuring predictive
 	// scaling.
 	PredictiveScalingMaxCapacityBehavior PredictiveScalingMaxCapacityBehavior
+
 	// The customized load metric to use for predictive scaling. This parameter or a
 	// PredefinedLoadMetricSpecification is required when configuring predictive
 	// scaling, and cannot be used otherwise.
 	CustomizedLoadMetricSpecification *CustomizedLoadMetricSpecification
+
 	// Controls whether a resource's externally created scaling policies are kept or
 	// replaced. The default value is KeepExternalPolicies. If the parameter is set to
 	// ReplaceExternalPolicies, any scaling policies that are external to AWS Auto
@@ -229,6 +282,7 @@ type ScalingInstruction struct {
 	// to be replaced, AWS Auto Scaling keeps all existing policies and does not create
 	// new ones.
 	ScalingPolicyUpdateBehavior ScalingPolicyUpdateBehavior
+
 	// The structure that defines new target tracking configurations (up to 10). Each
 	// of these structures includes a specific scaling metric and a target value for
 	// the metric, along with various parameters to use with dynamic scaling. With
@@ -236,7 +290,10 @@ type ScalingInstruction struct {
 	// tracking configuration that provides the largest capacity for both scale in and
 	// scale out. Condition: The scaling metric must be unique across target tracking
 	// configurations.
+	//
+	// This member is required.
 	TargetTrackingConfigurations []*TargetTrackingConfiguration
+
 	// The scalable dimension associated with the resource.
 	//
 	//     *
@@ -266,11 +323,15 @@ type ScalingInstruction struct {
 	//     * rds:cluster:ReadReplicaCount - The count
 	// of Aurora Replicas in an Aurora DB cluster. Available for Aurora
 	// MySQL-compatible edition and Aurora PostgreSQL-compatible edition.
+	//
+	// This member is required.
 	ScalableDimension ScalableDimension
+
 	// The predefined load metric to use for predictive scaling. This parameter or a
 	// CustomizedLoadMetricSpecification is required when configuring predictive
 	// scaling, and cannot be used otherwise.
 	PredefinedLoadMetricSpecification *PredefinedLoadMetricSpecification
+
 	// The size of the capacity buffer to use when the forecast capacity is close to or
 	// exceeds the maximum capacity. The value is specified as a percentage relative to
 	// the forecast capacity. For example, if the buffer is 10, this means a 10 percent
@@ -280,30 +341,48 @@ type ScalingInstruction struct {
 	// to SetMaxCapacityAboveForecastCapacity, and cannot be used otherwise. The range
 	// is 1-100.
 	PredictiveScalingMaxCapacityBuffer *int32
+
 	// Controls whether dynamic scaling by AWS Auto Scaling is disabled. When dynamic
 	// scaling is enabled, AWS Auto Scaling creates target tracking scaling policies
 	// based on the specified target tracking configurations. The default is enabled
 	// (false).
 	DisableDynamicScaling *bool
+
 	// The predictive scaling mode. The default value is ForecastAndScale. Otherwise,
 	// AWS Auto Scaling forecasts capacity but does not create any scheduled scaling
 	// actions based on the capacity forecast.
 	PredictiveScalingMode PredictiveScalingMode
+
 	// The maximum capacity of the resource. The exception to this upper limit is if
 	// you specify a non-default setting for PredictiveScalingMaxCapacityBehavior.
+	//
+	// This member is required.
 	MaxCapacity *int32
 }
 
 // Represents a scaling plan.
 type ScalingPlan struct {
+
 	// The scaling instructions.
+	//
+	// This member is required.
 	ScalingInstructions []*ScalingInstruction
+
 	// The version number of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanVersion *int64
+
 	// The name of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanName *string
+
 	// The application source.
+	//
+	// This member is required.
 	ApplicationSource *ApplicationSource
+
 	// The status of the scaling plan.
 	//
 	//     * Active - The scaling plan is active.
@@ -328,21 +407,31 @@ type ScalingPlan struct {
 	//
 	//     * UpdateFailed - The
 	// scaling plan could not be updated.
+	//
+	// This member is required.
 	StatusCode ScalingPlanStatusCode
+
 	// The Unix time stamp when the scaling plan entered the current status.
 	StatusStartTime *time.Time
+
 	// A simple message about the current status of the scaling plan.
 	StatusMessage *string
+
 	// The Unix time stamp when the scaling plan was created.
 	CreationTime *time.Time
 }
 
 // Represents a scalable resource.
 type ScalingPlanResource struct {
+
 	// The name of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanName *string
+
 	// A simple message about the current scaling status of the resource.
 	ScalingStatusMessage *string
+
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
 	//
@@ -369,11 +458,20 @@ type ScalingPlanResource struct {
 	//     * Aurora DB cluster - The
 	// resource type is cluster and the unique identifier is the cluster name. Example:
 	// cluster:my-db-cluster.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The namespace of the AWS service.
+	//
+	// This member is required.
 	ServiceNamespace ServiceNamespace
+
 	// The version number of the scaling plan.
+	//
+	// This member is required.
 	ScalingPlanVersion *int64
+
 	// The scalable dimension for the resource.
 	//
 	//     *
@@ -403,7 +501,10 @@ type ScalingPlanResource struct {
 	//     * rds:cluster:ReadReplicaCount - The count
 	// of Aurora Replicas in an Aurora DB cluster. Available for Aurora
 	// MySQL-compatible edition and Aurora PostgreSQL-compatible edition.
+	//
+	// This member is required.
 	ScalableDimension ScalableDimension
+
 	// The scaling status of the resource.
 	//
 	//     * Active - The scaling configuration is
@@ -417,26 +518,38 @@ type ScalingPlanResource struct {
 	// scaling configuration is partially active because the scaling plan is being
 	// created or deleted or the scaling configuration could not be fully applied.
 	// Check the status message for more information.
+	//
+	// This member is required.
 	ScalingStatusCode ScalingStatusCode
+
 	// The scaling policies.
 	ScalingPolicies []*ScalingPolicy
 }
 
 // Represents a scaling policy.
 type ScalingPolicy struct {
+
 	// The target tracking scaling policy. Includes support for predefined or
 	// customized metrics.
 	TargetTrackingConfiguration *TargetTrackingConfiguration
+
 	// The name of the scaling policy.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The type of scaling policy.
+	//
+	// This member is required.
 	PolicyType PolicyType
 }
 
 // Represents a tag.
 type TagFilter struct {
+
 	// The tag values (0 to 20).
 	Values []*string
+
 	// The tag key.
 	Key *string
 }
@@ -444,6 +557,7 @@ type TagFilter struct {
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used
 // with ScalingInstruction () and ScalingPolicy ().
 type TargetTrackingConfiguration struct {
+
 	// The amount of time, in seconds, after a scale-out activity completes before
 	// another scale-out activity can start. This value is not used if the scalable
 	// resource is an Auto Scaling group. While the cooldown period is in effect, the
@@ -451,19 +565,25 @@ type TargetTrackingConfiguration struct {
 	// cooldown is calculated as part of the desired capacity for the next scale out.
 	// The intention is to continuously (but not excessively) scale out.
 	ScaleOutCooldown *int32
+
 	// The estimated time, in seconds, until a newly launched instance can contribute
 	// to the CloudWatch metrics. This value is used only if the resource is an Auto
 	// Scaling group.
 	EstimatedInstanceWarmup *int32
+
 	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
 	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	//
+	// This member is required.
 	TargetValue *float64
+
 	// Indicates whether scale in by the target tracking scaling policy is disabled. If
 	// the value is true, scale in is disabled and the target tracking scaling policy
 	// doesn't remove capacity from the scalable resource. Otherwise, scale in is
 	// enabled and the target tracking scaling policy can remove capacity from the
 	// scalable resource. The default value is false.
 	DisableScaleIn *bool
+
 	// The amount of time, in seconds, after a scale in activity completes before
 	// another scale in activity can start. This value is not used if the scalable
 	// resource is an Auto Scaling group. The cooldown period is used to block
@@ -472,9 +592,11 @@ type TargetTrackingConfiguration struct {
 	// alarm triggers a scale-out policy during the cooldown period after a scale-in,
 	// AWS Auto Scaling scales out your scalable target immediately.
 	ScaleInCooldown *int32
+
 	// A customized metric. You can specify either a predefined metric or a customized
 	// metric.
 	CustomizedScalingMetricSpecification *CustomizedScalingMetricSpecification
+
 	// A predefined metric. You can specify either a predefined metric or a customized
 	// metric.
 	PredefinedScalingMetricSpecification *PredefinedScalingMetricSpecification

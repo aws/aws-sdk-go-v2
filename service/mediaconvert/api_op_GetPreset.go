@@ -56,11 +56,15 @@ func (c *Client) GetPreset(ctx context.Context, params *GetPresetInput, optFns .
 }
 
 type GetPresetInput struct {
+
 	// The name of the preset.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetPresetOutput struct {
+
 	// A preset is a collection of preconfigured media conversion settings that you
 	// want MediaConvert to apply to the output during the conversion process.
 	Preset *types.Preset

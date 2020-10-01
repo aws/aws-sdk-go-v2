@@ -65,17 +65,27 @@ func (c *Client) SubscribeToShard(ctx context.Context, params *SubscribeToShardI
 }
 
 type SubscribeToShardInput struct {
+
 	// For this parameter, use the value you obtained when you called
 	// RegisterStreamConsumer ().
+	//
+	// This member is required.
 	ConsumerARN *string
+
 	// The ID of the shard you want to subscribe to. To see a list of all the shards
 	// for a given stream, use ListShards ().
-	ShardId          *string
+	//
+	// This member is required.
+	ShardId *string
+
 	StartingPosition *types.StartingPosition
 }
 
 type SubscribeToShardOutput struct {
+
 	// The event stream that your consumer can use to read records from the shard.
+	//
+	// This member is required.
 	EventStream types.SubscribeToShardEventStream
 
 	// Metadata pertaining to the operation's result.

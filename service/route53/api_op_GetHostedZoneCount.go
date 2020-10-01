@@ -61,8 +61,11 @@ type GetHostedZoneCountInput struct {
 
 // A complex type that contains the response to a GetHostedZoneCount request.
 type GetHostedZoneCountOutput struct {
+
 	// The total number of public and private hosted zones that are associated with the
 	// current AWS account.
+	//
+	// This member is required.
 	HostedZoneCount *int64
 
 	// Metadata pertaining to the operation's result.

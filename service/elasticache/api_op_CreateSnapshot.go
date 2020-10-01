@@ -58,19 +58,26 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 
 // Represents the input of a CreateSnapshot operation.
 type CreateSnapshotInput struct {
+
 	// The identifier of an existing cluster. The snapshot is created from this
 	// cluster.
 	CacheClusterId *string
+
 	// A name for the snapshot being created.
+	//
+	// This member is required.
 	SnapshotName *string
+
 	// The ID of the KMS key used to encrypt the snapshot.
 	KmsKeyId *string
+
 	// The identifier of an existing replication group. The snapshot is created from
 	// this replication group.
 	ReplicationGroupId *string
 }
 
 type CreateSnapshotOutput struct {
+
 	// Represents a copy of an entire Redis cluster as of the time when the snapshot
 	// was taken.
 	Snapshot *types.Snapshot

@@ -57,12 +57,16 @@ func (c *Client) DescribeAcceleratorAttributes(ctx context.Context, params *Desc
 }
 
 type DescribeAcceleratorAttributesInput struct {
+
 	// The Amazon Resource Name (ARN) of the accelerator with the attributes that you
 	// want to describe.
+	//
+	// This member is required.
 	AcceleratorArn *string
 }
 
 type DescribeAcceleratorAttributesOutput struct {
+
 	// The attributes of the accelerator.
 	AcceleratorAttributes *types.AcceleratorAttributes
 

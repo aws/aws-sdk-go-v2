@@ -56,31 +56,44 @@ func (c *Client) CreateScheduledAudit(ctx context.Context, params *CreateSchedul
 }
 
 type CreateScheduledAuditInput struct {
+
 	// The day of the week on which the scheduled audit takes place. Can be one of
 	// "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if
 	// the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
 	DayOfWeek types.DayOfWeek
+
 	// Metadata that can be used to manage the scheduled audit.
 	Tags []*types.Tag
+
 	// How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY",
 	// "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the
 	// system.
+	//
+	// This member is required.
 	Frequency types.AuditFrequency
+
 	// The day of the month on which the scheduled audit takes place. Can be "1"
 	// through "31" or "LAST". This field is required if the "frequency" parameter is
 	// set to "MONTHLY". If days 29-31 are specified, and the month does not have that
 	// many days, the audit takes place on the "LAST" day of the month.
 	DayOfMonth *string
+
 	// The name you want to give to the scheduled audit. (Max. 128 chars)
+	//
+	// This member is required.
 	ScheduledAuditName *string
+
 	// Which checks are performed during the scheduled audit. Checks must be enabled
 	// for your account. (Use DescribeAccountAuditConfiguration to see the list of all
 	// checks, including those that are enabled or use UpdateAccountAuditConfiguration
 	// to select which checks are enabled.)
+	//
+	// This member is required.
 	TargetCheckNames []*string
 }
 
 type CreateScheduledAuditOutput struct {
+
 	// The ARN of the scheduled audit.
 	ScheduledAuditArn *string
 

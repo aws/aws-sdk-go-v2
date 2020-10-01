@@ -57,22 +57,31 @@ func (c *Client) DescribeAuditTask(ctx context.Context, params *DescribeAuditTas
 }
 
 type DescribeAuditTaskInput struct {
+
 	// The ID of the audit whose information you want to get.
+	//
+	// This member is required.
 	TaskId *string
 }
 
 type DescribeAuditTaskOutput struct {
+
 	// Detailed information about each check performed during this audit.
 	AuditDetails map[string]*types.AuditCheckDetails
+
 	// The status of the audit: one of "IN_PROGRESS", "COMPLETED", "FAILED", or
 	// "CANCELED".
 	TaskStatus types.AuditTaskStatus
+
 	// The name of the scheduled audit (only if the audit was a scheduled audit).
 	ScheduledAuditName *string
+
 	// The type of audit: "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
 	TaskType types.AuditTaskType
+
 	// Statistical information about the audit.
 	TaskStatistics *types.TaskStatistics
+
 	// The time the audit started.
 	TaskStartTime *time.Time
 

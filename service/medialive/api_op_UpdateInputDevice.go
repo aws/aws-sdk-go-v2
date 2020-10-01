@@ -57,38 +57,53 @@ func (c *Client) UpdateInputDevice(ctx context.Context, params *UpdateInputDevic
 
 // A request to update an input device.
 type UpdateInputDeviceInput struct {
+
 	// The settings that you want to apply to the input device.
 	HdDeviceSettings *types.InputDeviceConfigurableSettings
+
 	// The unique ID of the input device. For example, hd-123456789abcdef.
+	//
+	// This member is required.
 	InputDeviceId *string
+
 	// The name that you assigned to this input device (not the unique ID).
 	Name *string
 }
 
 // Placeholder documentation for UpdateInputDeviceResponse
 type UpdateInputDeviceOutput struct {
+
 	// The unique ARN of the input device.
 	Arn *string
+
 	// The network MAC address of the input device.
 	MacAddress *string
+
 	// Settings that describe an input device that is type HD.
 	HdDeviceSettings *types.InputDeviceHdSettings
+
 	// The type of the input device.
 	Type types.InputDeviceType
+
 	// The status of the action to synchronize the device configuration. If you change
 	// the configuration of the input device (for example, the maximum bitrate),
 	// MediaLive sends the new data to the device. The device might not update itself
 	// immediately. SYNCED means the device has updated its configuration. SYNCING
 	// means that it has not updated its configuration.
 	DeviceSettingsSyncState types.DeviceSettingsSyncState
+
 	// The network settings for the input device.
 	NetworkSettings *types.InputDeviceNetworkSettings
+
 	// The unique serial number of the input device.
 	SerialNumber *string
+
 	// A name that you specify for the input device.
 	Name *string
+
 	// The unique ID of the input device.
 	Id *string
+
 	// The state of the connection between the input device and AWS.
 	ConnectionState types.InputDeviceConnectionState
 

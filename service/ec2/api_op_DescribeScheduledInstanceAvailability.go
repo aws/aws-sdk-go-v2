@@ -63,22 +63,30 @@ func (c *Client) DescribeScheduledInstanceAvailability(ctx context.Context, para
 
 // Contains the parameters for DescribeScheduledInstanceAvailability.
 type DescribeScheduledInstanceAvailabilityInput struct {
+
 	// The time period for the first schedule to start.
+	//
+	// This member is required.
 	FirstSlotStartTimeRange *types.SlotDateTimeRangeRequest
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum available duration, in hours. This value must be greater than
 	// MinSlotDurationInHours and less than 1,720.
 	MaxSlotDurationInHours *int32
+
 	// The maximum number of results to return in a single call. This value can be
 	// between 5 and 300. The default value is 300. To retrieve the remaining results,
 	// make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The filters.
 	//
 	//     * availability-zone - The Availability Zone (for example,
@@ -92,18 +100,24 @@ type DescribeScheduledInstanceAvailabilityInput struct {
 	//     *
 	// platform - The platform (Linux/UNIX or Windows).
 	Filters []*types.Filter
+
 	// The minimum available duration, in hours. The minimum required duration is 1,200
 	// hours per year. For example, the minimum daily schedule is 4 hours, the minimum
 	// weekly schedule is 24 hours, and the minimum monthly schedule is 100 hours.
 	MinSlotDurationInHours *int32
+
 	// The schedule recurrence.
+	//
+	// This member is required.
 	Recurrence *types.ScheduledInstanceRecurrenceRequest
 }
 
 // Contains the output of DescribeScheduledInstanceAvailability.
 type DescribeScheduledInstanceAvailabilityOutput struct {
+
 	// Information about the available Scheduled Instances.
 	ScheduledInstanceAvailabilitySet []*types.ScheduledInstanceAvailability
+
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

@@ -57,26 +57,35 @@ func (c *Client) DescribeAutomationStepExecutions(ctx context.Context, params *D
 }
 
 type DescribeAutomationStepExecutionsInput struct {
+
 	// The Automation execution ID for which you want step execution descriptions.
+	//
+	// This member is required.
 	AutomationExecutionId *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// One or more filters to limit the number of step executions returned by the
 	// request.
 	Filters []*types.StepExecutionFilter
+
 	// A boolean that indicates whether to list step executions in reverse order by
 	// start time. The default value is false.
 	ReverseOrder *bool
 }
 
 type DescribeAutomationStepExecutionsOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// A list of details about the current state of all steps that make up an
 	// execution.
 	StepExecutions []*types.StepExecution

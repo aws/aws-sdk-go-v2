@@ -56,20 +56,28 @@ func (c *Client) DescribeThing(ctx context.Context, params *DescribeThingInput, 
 
 // The input for the DescribeThing operation.
 type DescribeThingInput struct {
+
 	// The name of the thing.
+	//
+	// This member is required.
 	ThingName *string
 }
 
 // The output from the DescribeThing operation.
 type DescribeThingOutput struct {
+
 	// The ARN of the thing to describe.
 	ThingArn *string
+
 	// The thing type name.
 	ThingTypeName *string
+
 	// The name of the billing group the thing belongs to.
 	BillingGroupName *string
+
 	// The name of the thing.
 	ThingName *string
+
 	// The default MQTT client ID. For a typical device, the thing name is also used as
 	// the default MQTT client ID. Although we don’t require a mapping between a
 	// thing's registry name and its use of MQTT client IDs, certificates, or shadow
@@ -78,12 +86,15 @@ type DescribeThingOutput struct {
 	// your AWS IoT fleet without removing the flexibility of the underlying device
 	// certificate model or shadows.
 	DefaultClientId *string
+
 	// The thing attributes.
 	Attributes map[string]*string
+
 	// The current version of the thing record in the registry. To avoid unintentional
 	// changes to the information in the registry, you can pass the version information
 	// in the expectedVersion parameter of the UpdateThing and DeleteThing calls.
 	Version *int64
+
 	// The ID of the thing to describe.
 	ThingId *string
 

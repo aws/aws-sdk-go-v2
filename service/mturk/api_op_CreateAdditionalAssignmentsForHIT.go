@@ -68,10 +68,17 @@ func (c *Client) CreateAdditionalAssignmentsForHIT(ctx context.Context, params *
 }
 
 type CreateAdditionalAssignmentsForHITInput struct {
+
 	// The number of additional assignments to request for this HIT.
+	//
+	// This member is required.
 	NumberOfAdditionalAssignments *int32
+
 	// The ID of the HIT to extend.
+	//
+	// This member is required.
 	HITId *string
+
 	// A unique identifier for this request, which allows you to retry the call on
 	// error without extending the HIT multiple times. This is useful in cases such as
 	// network timeouts where it is unclear whether or not the call succeeded on the

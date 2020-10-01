@@ -61,10 +61,13 @@ func (c *Client) DeleteInstanceProfile(ctx context.Context, params *DeleteInstan
 }
 
 type DeleteInstanceProfileInput struct {
+
 	// The name of the instance profile to delete. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	InstanceProfileName *string
 }
 

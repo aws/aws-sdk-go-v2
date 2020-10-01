@@ -57,31 +57,44 @@ func (c *Client) CreateSimulationApplicationVersion(ctx context.Context, params 
 }
 
 type CreateSimulationApplicationVersionInput struct {
+
 	// The current revision id for the simulation application. If you provide a value
 	// and it matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
+
 	// The application information for the simulation application.
+	//
+	// This member is required.
 	Application *string
 }
 
 type CreateSimulationApplicationVersionOutput struct {
+
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
 	// The version of the simulation application.
 	Version *string
+
 	// The name of the simulation application.
 	Name *string
+
 	// Information about the robot software suite (ROS distribution).
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The Amazon Resource Name (ARN) of the simulation application.
 	Arn *string
+
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
 	LastUpdatedAt *time.Time
+
 	// The sources of the simulation application.
 	Sources []*types.Source
+
 	// The revision ID of the simulation application.
 	RevisionId *string
+
 	// The simulation software suite used by the simulation application.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 

@@ -59,7 +59,10 @@ func (c *Client) DeregisterRdsDbInstance(ctx context.Context, params *Deregister
 }
 
 type DeregisterRdsDbInstanceInput struct {
+
 	// The Amazon RDS instance's ARN.
+	//
+	// This member is required.
 	RdsDbInstanceArn *string
 }
 

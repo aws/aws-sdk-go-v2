@@ -56,15 +56,24 @@ func (c *Client) UpdateProfilingGroup(ctx context.Context, params *UpdateProfili
 
 // The structure representing the updateProfilingGroupRequest.
 type UpdateProfilingGroupInput struct {
+
 	//
+	//
+	// This member is required.
 	AgentOrchestrationConfig *types.AgentOrchestrationConfig
+
 	// The name of the profiling group to update.
+	//
+	// This member is required.
 	ProfilingGroupName *string
 }
 
 // The structure representing the updateProfilingGroupResponse.
 type UpdateProfilingGroupOutput struct {
+
 	// Updated information about the profiling group.
+	//
+	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription
 
 	// Metadata pertaining to the operation's result.

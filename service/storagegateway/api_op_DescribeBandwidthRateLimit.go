@@ -62,19 +62,25 @@ func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *Describ
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeBandwidthRateLimitInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // A JSON object containing the following fields:
 type DescribeBandwidthRateLimitOutput struct {
+
 	// The average upload bandwidth rate limit in bits per second. This field does not
 	// appear in the response if the upload rate limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
 	// The average download bandwidth rate limit in bits per second. This field does
 	// not appear in the response if the download rate limit is not set.
 	AverageDownloadRateLimitInBitsPerSec *int64

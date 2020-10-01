@@ -56,9 +56,11 @@ func (c *Client) DiscoverPollEndpoint(ctx context.Context, params *DiscoverPollE
 }
 
 type DiscoverPollEndpointInput struct {
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster to which the
 	// container instance belongs.
 	Cluster *string
+
 	// The container instance ID or full ARN of the container instance. The ARN
 	// contains the arn:aws:ecs namespace, followed by the Region of the container
 	// instance, the AWS account ID of the container instance owner, the
@@ -68,8 +70,10 @@ type DiscoverPollEndpointInput struct {
 }
 
 type DiscoverPollEndpointOutput struct {
+
 	// The endpoint for the Amazon ECS agent to poll.
 	Endpoint *string
+
 	// The telemetry endpoint for the Amazon ECS agent.
 	TelemetryEndpoint *string
 

@@ -62,19 +62,25 @@ func (c *Client) ListDistributionsByOriginRequestPolicyId(ctx context.Context, p
 }
 
 type ListDistributionsByOriginRequestPolicyIdInput struct {
+
 	// Use this field when paginating results to indicate where to begin in your list
 	// of distribution IDs. The response includes distribution IDs in the list that
 	// occur after the marker. To get the next page of the list, set this field’s value
 	// to the value of NextMarker from the current page’s response.
 	Marker *string
+
 	// The ID of the origin request policy whose associated distribution IDs you want
 	// to list.
+	//
+	// This member is required.
 	OriginRequestPolicyId *string
+
 	// The maximum number of distribution IDs that you want in the response.
 	MaxItems *string
 }
 
 type ListDistributionsByOriginRequestPolicyIdOutput struct {
+
 	// A list of distribution IDs.
 	DistributionIdList *types.DistributionIdList
 

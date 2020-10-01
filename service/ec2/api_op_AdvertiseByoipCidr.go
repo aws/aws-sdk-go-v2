@@ -66,9 +66,13 @@ func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipC
 }
 
 type AdvertiseByoipCidrInput struct {
+
 	// The address range, in CIDR notation. This must be the exact range that you
 	// provisioned. You can't advertise only a portion of the provisioned range.
+	//
+	// This member is required.
 	Cidr *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -77,6 +81,7 @@ type AdvertiseByoipCidrInput struct {
 }
 
 type AdvertiseByoipCidrOutput struct {
+
 	// Information about the address range.
 	ByoipCidr *types.ByoipCidr
 

@@ -56,22 +56,39 @@ func (c *Client) ReserveContact(ctx context.Context, params *ReserveContactInput
 
 //
 type ReserveContactInput struct {
+
 	// End time of a contact.
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// Name of a ground station.
+	//
+	// This member is required.
 	GroundStation *string
+
 	// ARN of a mission profile.
+	//
+	// This member is required.
 	MissionProfileArn *string
+
 	// ARN of a satellite
+	//
+	// This member is required.
 	SatelliteArn *string
+
 	// Start time of a contact.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// Tags assigned to a contact.
 	Tags map[string]*string
 }
 
 //
 type ReserveContactOutput struct {
+
 	// UUID of a contact.
 	ContactId *string
 

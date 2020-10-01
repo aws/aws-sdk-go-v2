@@ -59,6 +59,7 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 
 //
 type DescribeEventCategoriesInput struct {
+
 	// The source type, such as cluster or parameter group, to which the described
 	// event categories apply. Valid values: cluster, cluster-snapshot,
 	// cluster-parameter-group, cluster-security-group, and scheduled-action.
@@ -67,6 +68,7 @@ type DescribeEventCategoriesInput struct {
 
 //
 type DescribeEventCategoriesOutput struct {
+
 	// A list of event categories descriptions.
 	EventCategoriesMapList []*types.EventCategoriesMap
 

@@ -117,19 +117,28 @@ func (c *Client) ChangeResourceRecordSets(ctx context.Context, params *ChangeRes
 
 // A complex type that contains change information for the resource record set.
 type ChangeResourceRecordSetsInput struct {
+
 	// A complex type that contains an optional comment and the Changes element.
+	//
+	// This member is required.
 	ChangeBatch *types.ChangeBatch
+
 	// The ID of the hosted zone that contains the resource record sets that you want
 	// to change.
+	//
+	// This member is required.
 	HostedZoneId *string
 }
 
 // A complex type containing the response for the request.
 type ChangeResourceRecordSetsOutput struct {
+
 	// A complex type that contains information about changes made to your hosted zone.
 	// This element contains an ID that you use when performing a GetChange
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
 	// action to get detailed information about the change.
+	//
+	// This member is required.
 	ChangeInfo *types.ChangeInfo
 
 	// Metadata pertaining to the operation's result.

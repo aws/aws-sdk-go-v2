@@ -13,21 +13,27 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists current Amazon S3 Batch Operations jobs and jobs that have ended within
-// the last 30 days for the AWS account making the request. For more information,
-// see Amazon S3 Batch Operations
+// Lists current S3 Batch Operations jobs and jobs that have ended within the last
+// 30 days for the AWS account making the request. For more information, see S3
+// Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
 // Amazon Simple Storage Service Developer Guide. Related actions include:
 //
 //     *
-// CreateJob ()
+// CreateJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//     * DescribeJob ()
 //
-//     * UpdateJobPriority ()
+// * DescribeJob
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
 //
-//     *
-// UpdateJobStatus ()
+//
+// * UpdateJobPriority
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
+//
+//
+// * UpdateJobStatus
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	stack := middleware.NewStack("ListJobs", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -71,25 +77,33 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 }
 
 type ListJobsInput struct {
+
 	// The List Jobs request returns jobs that match the statuses listed in this
 	// element.
 	JobStatuses []types.JobStatus
-	// A pagination token to request the next page of results. Use the token that
-	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
-	// previous List Jobs request.
-	NextToken *string
+
 	// The maximum number of jobs that Amazon S3 will include in the List Jobs
 	// response. If there are more jobs than this number, the response will include a
 	// pagination token in the NextToken field to enable you to retrieve the next page
 	// of results.
 	MaxResults *int32
+
+	// A pagination token to request the next page of results. Use the token that
+	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
+	// previous List Jobs request.
+	NextToken *string
+
 	//
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type ListJobsOutput struct {
+
 	// The list of current jobs and jobs that have ended within the last 30 days.
 	Jobs []*types.JobListDescriptor
+
 	// If the List Jobs request produced more than the maximum number of results, you
 	// can pass this value into a subsequent List Jobs request in order to retrieve the
 	// next page of results.

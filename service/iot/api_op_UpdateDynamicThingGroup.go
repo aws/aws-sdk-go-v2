@@ -56,17 +56,27 @@ func (c *Client) UpdateDynamicThingGroup(ctx context.Context, params *UpdateDyna
 }
 
 type UpdateDynamicThingGroupInput struct {
+
 	// The name of the dynamic thing group to update.
+	//
+	// This member is required.
 	ThingGroupName *string
+
 	// The dynamic thing group properties to update.
+	//
+	// This member is required.
 	ThingGroupProperties *types.ThingGroupProperties
+
 	// The expected version of the dynamic thing group to update.
 	ExpectedVersion *int64
+
 	// The dynamic thing group index to update. Currently one index is supported:
 	// 'AWS_Things'.
 	IndexName *string
+
 	// The dynamic thing group search query string to update.
 	QueryString *string
+
 	// The dynamic thing group query version to update. Currently one query version is
 	// supported: "2017-09-30". If not specified, the query version defaults to this
 	// value.
@@ -74,6 +84,7 @@ type UpdateDynamicThingGroupInput struct {
 }
 
 type UpdateDynamicThingGroupOutput struct {
+
 	// The dynamic thing group version.
 	Version *int64
 

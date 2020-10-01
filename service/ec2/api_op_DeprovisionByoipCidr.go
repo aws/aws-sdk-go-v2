@@ -60,9 +60,13 @@ func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionBy
 }
 
 type DeprovisionByoipCidrInput struct {
+
 	// The address range, in CIDR notation. The prefix must be the same prefix that you
 	// specified when you provisioned the address range.
+	//
+	// This member is required.
 	Cidr *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -71,6 +75,7 @@ type DeprovisionByoipCidrInput struct {
 }
 
 type DeprovisionByoipCidrOutput struct {
+
 	// Information about the address range.
 	ByoipCidr *types.ByoipCidr
 

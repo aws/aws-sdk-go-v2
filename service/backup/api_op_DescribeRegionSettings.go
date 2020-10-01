@@ -61,6 +61,7 @@ type DescribeRegionSettingsInput struct {
 }
 
 type DescribeRegionSettingsOutput struct {
+
 	// Returns a list of all services along with the opt-in preferences in the region.
 	ResourceTypeOptInPreference map[string]*bool
 

@@ -95,21 +95,28 @@ func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCap
 
 // Represents the input for a request action.
 type UpdateFleetCapacityInput struct {
+
 	// The maximum value allowed for the fleet's instance count. Default if not set is
 	// 1.
 	MaxSize *int32
+
 	// A unique identifier for a fleet to update capacity for. You can use either the
 	// fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
+
 	// The minimum value allowed for the fleet's instance count. Default if not set is
 	// 0.
 	MinSize *int32
+
 	// Number of EC2 instances you want this fleet to host.
 	DesiredInstances *int32
 }
 
 // Represents the returned data in response to a request action.
 type UpdateFleetCapacityOutput struct {
+
 	// A unique identifier for a fleet that was updated.
 	FleetId *string
 

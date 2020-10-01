@@ -57,12 +57,16 @@ func (c *Client) AcceptSharedDirectory(ctx context.Context, params *AcceptShared
 }
 
 type AcceptSharedDirectoryInput struct {
+
 	// Identifier of the shared directory in the directory consumer account. This
 	// identifier is different for each directory owner account.
+	//
+	// This member is required.
 	SharedDirectoryId *string
 }
 
 type AcceptSharedDirectoryOutput struct {
+
 	// The shared directory in the directory consumer account.
 	SharedDirectory *types.SharedDirectory
 

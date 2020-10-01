@@ -56,19 +56,27 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 }
 
 type CreateFleetInput struct {
+
 	// The name of the fleet.
+	//
+	// This member is required.
 	Name *string
+
 	// A map that contains tag keys and tag values that are attached to the fleet.
 	Tags map[string]*string
 }
 
 type CreateFleetOutput struct {
+
 	// The time, in milliseconds since the epoch, when the fleet was created.
 	CreatedAt *time.Time
+
 	// The list of all tags added to the fleet.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Arn *string
+
 	// The name of the fleet.
 	Name *string
 

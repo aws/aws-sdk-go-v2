@@ -101,15 +101,18 @@ func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optF
 
 // Represents the input for a request action.
 type CreateBuildInput struct {
+
 	// Information indicating where your game build files are stored. Use this
 	// parameter only when creating a build with files stored in an S3 bucket that you
 	// own. The storage location must specify an S3 bucket name and key. The location
 	// must also specify a role ARN that you set up to allow Amazon GameLift to access
 	// your S3 bucket. The S3 bucket and your new build must be in the same Region.
 	StorageLocation *types.S3Location
+
 	// A descriptive label that is associated with a build. Build names do not need to
 	// be unique. You can use UpdateBuild () to change this value later.
 	Name *string
+
 	// The operating system that the game server binaries are built to run on. This
 	// value determines the type of fleet resources that you can use for this build. If
 	// your game build contains multiple executables, they all must run on the same
@@ -117,6 +120,7 @@ type CreateBuildInput struct {
 	// Amazon GameLift uses the default value (WINDOWS_2012). This value cannot be
 	// changed later.
 	OperatingSystem types.OperatingSystem
+
 	// A list of labels to assign to the new build resource. Tags are developer-defined
 	// key-value pairs. Tagging AWS resources are useful for resource management,
 	// access management and cost allocation. For more information, see  Tagging AWS
@@ -126,6 +130,7 @@ type CreateBuildInput struct {
 	// The maximum tag limit may be lower than stated. See the AWS General Reference
 	// for actual tagging limits.
 	Tags []*types.Tag
+
 	// Version information that is associated with a build or script. Version strings
 	// do not need to be unique. You can use UpdateBuild () to change this value later.
 	Version *string
@@ -133,10 +138,13 @@ type CreateBuildInput struct {
 
 // Represents the returned data in response to a request action.
 type CreateBuildOutput struct {
+
 	// Amazon S3 location for your game build file, including bucket name and key.
 	StorageLocation *types.S3Location
+
 	// The newly created build resource, including a unique build IDs and status.
 	Build *types.Build
+
 	// This element is returned only when the operation is called without a storage
 	// location. It contains credentials to use when you are uploading a build file to
 	// an S3 bucket that is owned by Amazon GameLift. Credentials have a limited life

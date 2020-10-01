@@ -56,16 +56,25 @@ func (c *Client) UpdateMonitoringSchedule(ctx context.Context, params *UpdateMon
 }
 
 type UpdateMonitoringScheduleInput struct {
+
 	// The name of the monitoring schedule. The name must be unique within an AWS
 	// Region within an AWS account.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
+
 	// The configuration object that specifies the monitoring schedule and defines the
 	// monitoring job.
+	//
+	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
 }
 
 type UpdateMonitoringScheduleOutput struct {
+
 	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	//
+	// This member is required.
 	MonitoringScheduleArn *string
 
 	// Metadata pertaining to the operation's result.

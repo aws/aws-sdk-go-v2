@@ -56,14 +56,20 @@ func (c *Client) DeleteRecommenderConfiguration(ctx context.Context, params *Del
 }
 
 type DeleteRecommenderConfigurationInput struct {
+
 	// The unique identifier for the recommender model configuration. This identifier
 	// is displayed as the Recommender ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	RecommenderId *string
 }
 
 type DeleteRecommenderConfigurationOutput struct {
+
 	// Provides information about Amazon Pinpoint configuration settings for retrieving
 	// and processing data from a recommender model.
+	//
+	// This member is required.
 	RecommenderConfigurationResponse *types.RecommenderConfigurationResponse
 
 	// Metadata pertaining to the operation's result.

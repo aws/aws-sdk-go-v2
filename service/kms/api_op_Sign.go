@@ -93,6 +93,7 @@ func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Op
 }
 
 type SignInput struct {
+
 	// Identifies an asymmetric CMK. AWS KMS uses the private key in the asymmetric CMK
 	// to sign the message. The KeyUsage type of the CMK must be SIGN_VERIFY. To find
 	// the KeyUsage of a CMK, use the DescribeKey () operation.  <p>To specify a CMK,
@@ -107,28 +108,40 @@ type SignInput struct {
 	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
 	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
 	// <a>ListAliases</a>.</p>
+	//
+	// This member is required.
 	KeyId *string
+
 	// Specifies the signing algorithm to use when signing the message. Choose an
 	// algorithm that is compatible with the type and size of the specified asymmetric
 	// CMK.
+	//
+	// This member is required.
 	SigningAlgorithm types.SigningAlgorithmSpec
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// Tells AWS KMS whether the value of the Message parameter is a message or message
 	// digest. The default value, RAW, indicates a message. To indicate a message
 	// digest, enter DIGEST.
 	MessageType types.MessageType
+
 	// Specifies the message or message digest to sign. Messages can be 0-4096 bytes.
 	// To sign a larger message, provide the message digest. If you provide a message,
 	// AWS KMS generates a hash digest of the message and then signs it.
+	//
+	// This member is required.
 	Message []byte
 }
 
 type SignOutput struct {
+
 	// The signing algorithm that was used to sign the message.
 	SigningAlgorithm types.SigningAlgorithmSpec
+
 	// The cryptographic signature that was generated for the message.
 	//
 	//     * When used
@@ -145,6 +158,7 @@ type SignOutput struct {
 	// the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not
 	// Base64-encoded.
 	Signature []byte
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the asymmetric CMK that was used to sign the message.

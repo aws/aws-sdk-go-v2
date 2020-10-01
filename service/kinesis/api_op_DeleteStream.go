@@ -68,8 +68,12 @@ func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, op
 
 // Represents the input for DeleteStream ().
 type DeleteStreamInput struct {
+
 	// The name of the stream to delete.
+	//
+	// This member is required.
 	StreamName *string
+
 	// If this parameter is unset (null) or if you set it to false, and the stream has
 	// registered consumers, the call to DeleteStream fails with a
 	// ResourceInUseException.

@@ -57,15 +57,23 @@ func (c *Client) PutAggregationAuthorization(ctx context.Context, params *PutAgg
 }
 
 type PutAggregationAuthorizationInput struct {
+
 	// The 12-digit account ID of the account authorized to aggregate data.
+	//
+	// This member is required.
 	AuthorizedAccountId *string
+
 	// The region authorized to collect aggregated data.
+	//
+	// This member is required.
 	AuthorizedAwsRegion *string
+
 	// An array of tag object.
 	Tags []*types.Tag
 }
 
 type PutAggregationAuthorizationOutput struct {
+
 	// Returns an AggregationAuthorization object.  </p>
 	AggregationAuthorization *types.AggregationAuthorization
 

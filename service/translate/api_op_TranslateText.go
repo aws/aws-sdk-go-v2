@@ -57,6 +57,7 @@ func (c *Client) TranslateText(ctx context.Context, params *TranslateTextInput, 
 }
 
 type TranslateTextInput struct {
+
 	// The language code for the language of the source text. The language must be a
 	// language supported by Amazon Translate. For a list of language codes, see
 	// what-is-languages (). To have Amazon Translate determine the source language of
@@ -64,13 +65,22 @@ type TranslateTextInput struct {
 	// auto, Amazon Translate will call Amazon Comprehend
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html) to
 	// determine the source language.
+	//
+	// This member is required.
 	SourceLanguageCode *string
+
 	// The text to translate. The text string can be a maximum of 5,000 bytes long.
 	// Depending on your character set, this may be fewer than 5,000 characters.
+	//
+	// This member is required.
 	Text *string
+
 	// The language code requested for the language of the target text. The language
 	// must be a language supported by Amazon Translate.
+	//
+	// This member is required.
 	TargetLanguageCode *string
+
 	// The name of the terminology list file to be used in the TranslateText request.
 	// You can use 1 terminology list at most in a TranslateText request. Terminology
 	// lists can contain a maximum of 256 terms.
@@ -78,12 +88,22 @@ type TranslateTextInput struct {
 }
 
 type TranslateTextOutput struct {
+
 	// The language code for the language of the source text.
+	//
+	// This member is required.
 	SourceLanguageCode *string
+
 	// The language code for the language of the target text.
+	//
+	// This member is required.
 	TargetLanguageCode *string
+
 	// The translated text.
+	//
+	// This member is required.
 	TranslatedText *string
+
 	// The names of the custom terminologies applied to the input text by Amazon
 	// Translate for the translated text response.
 	AppliedTerminologies []*types.AppliedTerminology

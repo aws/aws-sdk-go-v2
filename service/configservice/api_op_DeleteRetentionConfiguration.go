@@ -55,7 +55,10 @@ func (c *Client) DeleteRetentionConfiguration(ctx context.Context, params *Delet
 }
 
 type DeleteRetentionConfigurationInput struct {
+
 	// The name of the retention configuration to delete.
+	//
+	// This member is required.
 	RetentionConfigurationName *string
 }
 

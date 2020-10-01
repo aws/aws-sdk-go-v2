@@ -58,13 +58,20 @@ func (c *Client) BatchPutScheduledUpdateGroupAction(ctx context.Context, params 
 }
 
 type BatchPutScheduledUpdateGroupActionInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// One or more scheduled actions. The maximum number allowed is 50.
+	//
+	// This member is required.
 	ScheduledUpdateGroupActions []*types.ScheduledUpdateGroupActionRequest
 }
 
 type BatchPutScheduledUpdateGroupActionOutput struct {
+
 	// The names of the scheduled actions that could not be created or updated,
 	// including an error message.
 	FailedScheduledUpdateGroupActions []*types.FailedScheduledUpdateGroupActionRequest

@@ -56,19 +56,27 @@ func (c *Client) DescribePackagingGroup(ctx context.Context, params *DescribePac
 }
 
 type DescribePackagingGroupInput struct {
+
 	// The ID of a MediaPackage VOD PackagingGroup resource.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribePackagingGroupOutput struct {
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
+
 	// The ARN of the PackagingGroup.
 	Arn *string
+
 	// The ID of the PackagingGroup.
 	Id *string
 

@@ -66,6 +66,7 @@ func (c *Client) CreateDefaultVpc(ctx context.Context, params *CreateDefaultVpcI
 }
 
 type CreateDefaultVpcInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -74,6 +75,7 @@ type CreateDefaultVpcInput struct {
 }
 
 type CreateDefaultVpcOutput struct {
+
 	// Information about the VPC.
 	Vpc *types.Vpc
 

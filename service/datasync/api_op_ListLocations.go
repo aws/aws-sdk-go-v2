@@ -59,18 +59,22 @@ func (c *Client) ListLocations(ctx context.Context, params *ListLocationsInput, 
 
 // ListLocationsRequest
 type ListLocationsInput struct {
+
 	// An opaque string that indicates the position at which to begin the next list of
 	// locations.
 	NextToken *string
+
 	// The maximum number of locations to return.
 	MaxResults *int32
 }
 
 // ListLocationsResponse
 type ListLocationsOutput struct {
+
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of locations.
 	NextToken *string
+
 	// An array that contains a list of locations.
 	Locations []*types.LocationListEntry
 

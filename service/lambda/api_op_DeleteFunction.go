@@ -60,6 +60,7 @@ func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput
 }
 
 type DeleteFunctionInput struct {
+
 	// The name of the Lambda function or version. Name formats
 	//
 	//     * Function name -
@@ -74,7 +75,10 @@ type DeleteFunctionInput struct {
 	// You can append a version number or alias to
 	// any of the formats. The length constraint applies only to the full ARN. If you
 	// specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// Specify a version to delete. You can't delete a version that's referenced by an
 	// alias.
 	Qualifier *string

@@ -56,16 +56,24 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 }
 
 type DescribeDataSourceInput struct {
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
+	//
+	// This member is required.
 	DataSourceId *string
 }
 
 type DescribeDataSourceOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The information on the data source.
 	DataSource *types.DataSource
 

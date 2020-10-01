@@ -57,7 +57,10 @@ func (c *Client) StopAccessLogging(ctx context.Context, params *StopAccessLoggin
 }
 
 type StopAccessLoggingInput struct {
+
 	// The name of the container that you want to stop access logging on.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

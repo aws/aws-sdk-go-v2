@@ -83,11 +83,20 @@ func (c *Client) MergeShards(ctx context.Context, params *MergeShardsInput, optF
 
 // Represents the input for MergeShards.
 type MergeShardsInput struct {
+
 	// The shard ID of the adjacent shard for the merge.
+	//
+	// This member is required.
 	AdjacentShardToMerge *string
+
 	// The shard ID of the shard to combine with the adjacent shard for the merge.
+	//
+	// This member is required.
 	ShardToMerge *string
+
 	// The name of the stream for the merge.
+	//
+	// This member is required.
 	StreamName *string
 }
 

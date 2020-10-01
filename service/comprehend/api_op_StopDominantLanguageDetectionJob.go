@@ -63,14 +63,19 @@ func (c *Client) StopDominantLanguageDetectionJob(ctx context.Context, params *S
 }
 
 type StopDominantLanguageDetectionJobInput struct {
+
 	// The identifier of the dominant language detection job to stop.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopDominantLanguageDetectionJobOutput struct {
+
 	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
 	// previously stopped with the StopDominantLanguageDetectionJob operation.
 	JobStatus types.JobStatus
+
 	// The identifier of the dominant language detection job to stop.
 	JobId *string
 

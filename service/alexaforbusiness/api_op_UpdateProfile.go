@@ -55,32 +55,45 @@ func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, 
 }
 
 type UpdateProfileInput struct {
+
 	// The updated name for the room profile.
 	ProfileName *string
+
 	// The updated distance unit for the room profile.
 	DistanceUnit types.DistanceUnit
+
 	// The updated temperature unit for the room profile.
 	TemperatureUnit types.TemperatureUnit
+
 	// The updated locale for the room profile. (This is currently only available to a
 	// limited preview audience.)
 	Locale *string
+
 	// The updated meeting room settings of a room profile.
 	MeetingRoomConfiguration *types.UpdateMeetingRoomConfiguration
+
 	// The updated timezone for the room profile.
 	Timezone *string
+
 	// Sets the profile as default if selected. If this is missing, no update is done
 	// to the default status.
 	IsDefault *bool
+
 	// The ARN of the room profile to update. Required.
 	ProfileArn *string
+
 	// The updated maximum volume limit for the room profile.
 	MaxVolumeLimit *int32
+
 	// The updated address for the room profile.
 	Address *string
+
 	// Whether the PSTN setting of the room profile is enabled.
 	PSTNEnabled *bool
+
 	// The updated wake word for the room profile.
 	WakeWord types.WakeWord
+
 	// Whether the setup mode of the profile is enabled.
 	SetupModeDisabled *bool
 }

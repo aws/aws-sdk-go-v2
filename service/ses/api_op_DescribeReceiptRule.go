@@ -63,14 +63,21 @@ func (c *Client) DescribeReceiptRule(ctx context.Context, params *DescribeReceip
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type DescribeReceiptRuleInput struct {
+
 	// The name of the receipt rule.
+	//
+	// This member is required.
 	RuleName *string
+
 	// The name of the receipt rule set that the receipt rule belongs to.
+	//
+	// This member is required.
 	RuleSetName *string
 }
 
 // Represents the details of a receipt rule.
 type DescribeReceiptRuleOutput struct {
+
 	// A data structure that contains the specified receipt rule's name, actions,
 	// recipients, domains, enabled status, scan status, and Transport Layer Security
 	// (TLS) policy.

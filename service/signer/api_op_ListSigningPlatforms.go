@@ -60,24 +60,31 @@ func (c *Client) ListSigningPlatforms(ctx context.Context, params *ListSigningPl
 }
 
 type ListSigningPlatformsInput struct {
+
 	// Value for specifying the next set of paginated results to return. After you
 	// receive a response with truncated results, use this parameter in a subsequent
 	// request. Set it to the value of nextToken from the response that you just
 	// received.
 	NextToken *string
+
 	// The maximum number of results to be returned by this operation.
 	MaxResults *int32
+
 	// Any partner entities connected to a signing platform.
 	Partner *string
+
 	// The validation template that is used by the target signing platform.
 	Target *string
+
 	// The category type of a signing platform.
 	Category *string
 }
 
 type ListSigningPlatformsOutput struct {
+
 	// Value for specifying the next set of paginated results to return.
 	NextToken *string
+
 	// A list of all platforms that match the request parameters.
 	Platforms []*types.SigningPlatform
 

@@ -57,11 +57,15 @@ func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointI
 }
 
 type DescribeEndpointInput struct {
+
 	// The Amazon Resource Number (ARN) of the endpoint being described.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 
 type DescribeEndpointOutput struct {
+
 	// Describes information associated with the specific endpoint.
 	EndpointProperties *types.EndpointProperties
 

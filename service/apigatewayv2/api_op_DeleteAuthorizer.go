@@ -55,9 +55,15 @@ func (c *Client) DeleteAuthorizer(ctx context.Context, params *DeleteAuthorizerI
 }
 
 type DeleteAuthorizerInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The authorizer identifier.
+	//
+	// This member is required.
 	AuthorizerId *string
 }
 

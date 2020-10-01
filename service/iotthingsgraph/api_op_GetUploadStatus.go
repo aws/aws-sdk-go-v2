@@ -57,27 +57,43 @@ func (c *Client) GetUploadStatus(ctx context.Context, params *GetUploadStatusInp
 }
 
 type GetUploadStatusInput struct {
+
 	// The ID of the upload. This value is returned by the UploadEntityDefinitions
 	// action.
+	//
+	// This member is required.
 	UploadId *string
 }
 
 type GetUploadStatusOutput struct {
+
 	// The ARN of the upload.
 	NamespaceArn *string
+
 	// The reason for an upload failure.
 	FailureReason []*string
+
 	// The ID of the upload.
+	//
+	// This member is required.
 	UploadId *string
+
 	// The name of the upload's namespace.
 	NamespaceName *string
+
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
+
 	// The status of the upload. The initial status is IN_PROGRESS. The response show
 	// all validation failures if the upload fails.
+	//
+	// This member is required.
 	UploadStatus types.UploadStatus
+
 	// The date at which the upload was created.
+	//
+	// This member is required.
 	CreatedDate *time.Time
 
 	// Metadata pertaining to the operation's result.

@@ -56,21 +56,30 @@ func (c *Client) GetDevices(ctx context.Context, params *GetDevicesInput, optFns
 }
 
 type GetDevicesInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// One or more device IDs. The maximum is 10.
 	DeviceIds []*string
+
 	// The ID of the site.
 	SiteId *string
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type GetDevicesOutput struct {
+
 	// The devices.
 	Devices []*types.Device
+
 	// The token for the next page of results.
 	NextToken *string
 

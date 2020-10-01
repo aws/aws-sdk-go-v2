@@ -58,21 +58,31 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 }
 
 type UpdateGroupInput struct {
+
 	// The name of the group.
+	//
+	// This member is required.
 	GroupName *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The new precedence value for the group. For more information about this
 	// parameter, see .
 	Precedence *int32
+
 	// The new role ARN for the group. This is used for setting the cognito:roles and
 	// cognito:preferred_role claims in the token.
 	RoleArn *string
+
 	// A string containing the new description of the group.
 	Description *string
 }
 
 type UpdateGroupOutput struct {
+
 	// The group object for the group.
 	Group *types.GroupType
 

@@ -58,18 +58,26 @@ func (c *Client) UpdateSystemTemplate(ctx context.Context, params *UpdateSystemT
 }
 
 type UpdateSystemTemplateInput struct {
+
 	// The DefinitionDocument that contains the updated system definition.
+	//
+	// This member is required.
 	Definition *types.DefinitionDocument
+
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace. If no value is specified, the latest version is used by
 	// default.
 	CompatibleNamespaceVersion *int64
+
 	// The ID of the system to be updated. The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
+	//
+	// This member is required.
 	Id *string
 }
 
 type UpdateSystemTemplateOutput struct {
+
 	// An object containing summary information about the updated system.
 	Summary *types.SystemTemplateSummary
 

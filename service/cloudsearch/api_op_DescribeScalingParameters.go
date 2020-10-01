@@ -62,17 +62,23 @@ func (c *Client) DescribeScalingParameters(ctx context.Context, params *Describe
 // Container for the parameters to the DescribeScalingParameters () operation.
 // Specifies the name of the domain you want to describe.
 type DescribeScalingParametersInput struct {
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DescribeScalingParameters request. Contains the scaling
 // parameters configured for the domain specified in the request.
 type DescribeScalingParametersOutput struct {
+
 	// The status and configuration of a search domain's scaling parameters.
+	//
+	// This member is required.
 	ScalingParameters *types.ScalingParametersStatus
 
 	// Metadata pertaining to the operation's result.

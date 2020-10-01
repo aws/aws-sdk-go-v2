@@ -57,20 +57,30 @@ func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *
 }
 
 type DescribeOrganizationConfigurationInput struct {
+
 	// The ID of the detector to retrieve information about the delegated administrator
 	// from.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type DescribeOrganizationConfigurationOutput struct {
+
 	// Indicates whether GuardDuty is automatically enabled for accounts added to the
 	// organization.
+	//
+	// This member is required.
 	AutoEnable *bool
+
 	// An object that describes which data sources are enabled automatically for member
 	// accounts.
 	DataSources *types.OrganizationDataSourceConfigurationsResult
+
 	// Indicates whether the maximum number of allowed member accounts are already
 	// associated with the delegated administrator master account.
+	//
+	// This member is required.
 	MemberAccountLimitReached *bool
 
 	// Metadata pertaining to the operation's result.

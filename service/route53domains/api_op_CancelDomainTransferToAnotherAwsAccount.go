@@ -71,14 +71,18 @@ func (c *Client) CancelDomainTransferToAnotherAwsAccount(ctx context.Context, pa
 // The CancelDomainTransferToAnotherAwsAccount request includes the following
 // element.
 type CancelDomainTransferToAnotherAwsAccountInput struct {
+
 	// The name of the domain for which you want to cancel the transfer to another AWS
 	// account.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The CancelDomainTransferToAnotherAwsAccount response includes the following
 // element.
 type CancelDomainTransferToAnotherAwsAccountOutput struct {
+
 	// The identifier that TransferDomainToAnotherAwsAccount returned to track the
 	// progress of the request. Because the transfer request was canceled, the value is
 	// no longer valid, and you can't use GetOperationDetail to query the operation

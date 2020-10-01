@@ -56,15 +56,23 @@ func (c *Client) CreateCustomMetadata(ctx context.Context, params *CreateCustomM
 }
 
 type CreateCustomMetadataInput struct {
+
 	// Custom metadata in the form of name-value pairs.
+	//
+	// This member is required.
 	CustomMetadata map[string]*string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The ID of the version, if the custom metadata is being added to a document
 	// version.
 	VersionId *string
+
 	// The ID of the resource.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

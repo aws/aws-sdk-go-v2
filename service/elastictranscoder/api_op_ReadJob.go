@@ -57,12 +57,16 @@ func (c *Client) ReadJob(ctx context.Context, params *ReadJobInput, optFns ...fu
 
 // The ReadJobRequest structure.
 type ReadJobInput struct {
+
 	// The identifier of the job for which you want to get detailed information.
+	//
+	// This member is required.
 	Id *string
 }
 
 // The ReadJobResponse structure.
 type ReadJobOutput struct {
+
 	// A section of the response body that provides information about the job.
 	Job *types.Job
 

@@ -56,13 +56,18 @@ func (c *Client) BatchGetBuilds(ctx context.Context, params *BatchGetBuildsInput
 }
 
 type BatchGetBuildsInput struct {
+
 	// The IDs of the builds.
+	//
+	// This member is required.
 	Ids []*string
 }
 
 type BatchGetBuildsOutput struct {
+
 	// Information about the requested builds.
 	Builds []*types.Build
+
 	// The IDs of builds for which information could not be found.
 	BuildsNotFound []*string
 

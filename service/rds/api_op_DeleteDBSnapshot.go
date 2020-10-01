@@ -58,12 +58,16 @@ func (c *Client) DeleteDBSnapshot(ctx context.Context, params *DeleteDBSnapshotI
 
 //
 type DeleteDBSnapshotInput struct {
+
 	// The DB snapshot identifier. Constraints: Must be the name of an existing DB
 	// snapshot in the available state.
+	//
+	// This member is required.
 	DBSnapshotIdentifier *string
 }
 
 type DeleteDBSnapshotOutput struct {
+
 	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a
 	// response element in the DescribeDBSnapshots action.
 	DBSnapshot *types.DBSnapshot

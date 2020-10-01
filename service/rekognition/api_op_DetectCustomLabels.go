@@ -77,15 +77,18 @@ func (c *Client) DetectCustomLabels(ctx context.Context, params *DetectCustomLab
 }
 
 type DetectCustomLabelsInput struct {
+
 	// Specifies the minimum confidence level for the labels to return. Amazon
 	// Rekognition doesn't return any labels with a confidence lower than this
 	// specified value. If you specify a value of 0, all labels are return, regardless
 	// of the default thresholds that the model version applies.
 	MinConfidence *float32
+
 	// Maximum number of results you want the service to return in the response. The
 	// service returns the specified number of highest confidence labels ranked from
 	// highest confidence to lowest.
 	MaxResults *int32
+
 	// Provides the input image either as bytes or an S3 object. You pass image bytes
 	// to an Amazon Rekognition API operation by using the Bytes property. For example,
 	// you would use the Bytes property to pass an image loaded from a local file
@@ -103,12 +106,18 @@ type DetectCustomLabelsInput struct {
 	// S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the
 	// user must have permission to access the S3 object. For more information, see
 	// Resource Based Policies in the Amazon Rekognition Developer Guide. </p>
+	//
+	// This member is required.
 	Image *types.Image
+
 	// The ARN of the model version that you want to use.
+	//
+	// This member is required.
 	ProjectVersionArn *string
 }
 
 type DetectCustomLabelsOutput struct {
+
 	// An array of custom labels detected in the input image.
 	CustomLabels []*types.CustomLabel
 

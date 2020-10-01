@@ -58,10 +58,15 @@ func (c *Client) CreatePortfolio(ctx context.Context, params *CreatePortfolioInp
 }
 
 type CreatePortfolioInput struct {
+
 	// The name of the portfolio provider.
+	//
+	// This member is required.
 	ProviderName *string
+
 	// The description of the portfolio.
 	Description *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -71,19 +76,28 @@ type CreatePortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The name to use for display purposes.
+	//
+	// This member is required.
 	DisplayName *string
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
+	//
+	// This member is required.
 	IdempotencyToken *string
+
 	// One or more tags.
 	Tags []*types.Tag
 }
 
 type CreatePortfolioOutput struct {
+
 	// Information about the portfolio.
 	PortfolioDetail *types.PortfolioDetail
+
 	// Information about the tags associated with the portfolio.
 	Tags []*types.Tag
 

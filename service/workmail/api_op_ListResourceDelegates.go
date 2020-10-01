@@ -57,22 +57,32 @@ func (c *Client) ListResourceDelegates(ctx context.Context, params *ListResource
 }
 
 type ListResourceDelegatesInput struct {
+
 	// The number of maximum results in a page.
 	MaxResults *int32
+
 	// The identifier for the organization that contains the resource for which
 	// delegates are listed.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier for the resource whose delegates are listed.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The token used to paginate through the delegates associated with a resource.
 	NextToken *string
 }
 
 type ListResourceDelegatesOutput struct {
+
 	// The token used to paginate through the delegates associated with a resource.
 	// While results are still available, it has an associated value. When the last
 	// page is reached, the token is empty.
 	NextToken *string
+
 	// One page of the resource's delegates.
 	Delegates []*types.Delegate
 

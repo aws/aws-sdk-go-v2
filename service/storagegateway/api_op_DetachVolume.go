@@ -61,8 +61,12 @@ func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, op
 
 // AttachVolumeInput
 type DetachVolumeInput struct {
+
 	// The Amazon Resource Name (ARN) of the volume to detach from the gateway.
+	//
+	// This member is required.
 	VolumeARN *string
+
 	// Set to true to forcibly remove the iSCSI connection of the target volume and
 	// detach the volume. The default is false. If this value is set to false, you must
 	// manually disconnect the iSCSI connection from the target volume.  <p>Valid
@@ -72,6 +76,7 @@ type DetachVolumeInput struct {
 
 // AttachVolumeOutput
 type DetachVolumeOutput struct {
+
 	// The Amazon Resource Name (ARN) of the volume that was detached.
 	VolumeARN *string
 

@@ -62,6 +62,7 @@ func (c *Client) ListOrganizationalUnitsForParent(ctx context.Context, params *L
 }
 
 type ListOrganizationalUnitsForParentInput struct {
+
 	// The unique identifier (ID) of the root or OU whose child OUs you want to list.
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
 	// requires one of the following:
@@ -74,12 +75,16 @@ type ListOrganizationalUnitsForParentInput struct {
 	// letters or digits (the ID of the root that the OU is in). This string is
 	// followed by a second "-" dash and from 8 to 32 additional lowercase letters or
 	// digits.
+	//
+	// This member is required.
 	ParentId *string
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -93,11 +98,13 @@ type ListOrganizationalUnitsForParentInput struct {
 }
 
 type ListOrganizationalUnitsForParentOutput struct {
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// A list of the OUs in the specified root or parent OU.
 	OrganizationalUnits []*types.OrganizationalUnit
 

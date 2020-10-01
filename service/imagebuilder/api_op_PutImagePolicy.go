@@ -62,16 +62,24 @@ func (c *Client) PutImagePolicy(ctx context.Context, params *PutImagePolicyInput
 }
 
 type PutImagePolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the image that this policy should be applied
 	// to.
+	//
+	// This member is required.
 	ImageArn *string
+
 	// The policy to apply.
+	//
+	// This member is required.
 	Policy *string
 }
 
 type PutImagePolicyOutput struct {
+
 	// The Amazon Resource Name (ARN) of the image that this policy was applied to.
 	ImageArn *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

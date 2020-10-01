@@ -58,13 +58,20 @@ func (c *Client) UpdateRoleDescription(ctx context.Context, params *UpdateRoleDe
 }
 
 type UpdateRoleDescriptionInput struct {
+
 	// The name of the role that you want to modify.
+	//
+	// This member is required.
 	RoleName *string
+
 	// The new description that you want to apply to the specified role.
+	//
+	// This member is required.
 	Description *string
 }
 
 type UpdateRoleDescriptionOutput struct {
+
 	// A structure that contains details about the modified role.
 	Role *types.Role
 

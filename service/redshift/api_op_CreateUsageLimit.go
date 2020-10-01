@@ -57,39 +57,59 @@ func (c *Client) CreateUsageLimit(ctx context.Context, params *CreateUsageLimitI
 }
 
 type CreateUsageLimitInput struct {
+
 	// The Amazon Redshift feature that you want to limit.
+	//
+	// This member is required.
 	FeatureType types.UsageLimitFeatureType
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// The identifier of the cluster that you want to limit usage.
+	//
+	// This member is required.
 	ClusterIdentifier *string
+
 	// The action that Amazon Redshift takes when the limit is reached. The default is
 	// log. For more information about this parameter, see UsageLimit ().
 	BreachAction types.UsageLimitBreachAction
+
 	// The time period that the amount applies to. A weekly period begins on Sunday.
 	// The default is monthly.
 	Period types.UsageLimitPeriod
+
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this
 	// amount is in terabytes (TB). The value must be a positive number.
+	//
+	// This member is required.
 	Amount *int64
+
 	// The type of limit. Depending on the feature type, this can be based on a time
 	// duration or data size. If FeatureType is spectrum, then LimitType must be
 	// data-scanned. If FeatureType is concurrency-scaling, then LimitType must be
 	// time.
+	//
+	// This member is required.
 	LimitType types.UsageLimitLimitType
 }
 
 // Describes a usage limit object for a cluster.
 type CreateUsageLimitOutput struct {
+
 	// The identifier of the cluster with a usage limit.
 	ClusterIdentifier *string
+
 	// The Amazon Redshift feature to which the limit applies.
 	FeatureType types.UsageLimitFeatureType
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// The type of limit. Depending on the feature type, this can be based on a time
 	// duration or data size.
 	LimitType types.UsageLimitLimitType
+
 	// The action that Amazon Redshift takes when the limit is reached. Possible values
 	// are:
 	//
@@ -101,11 +121,14 @@ type CreateUsageLimitOutput struct {
 	//     * disable - To disable the
 	// feature until the next usage period begins.
 	BreachAction types.UsageLimitBreachAction
+
 	// The time period that the amount applies to. A weekly period begins on Sunday.
 	// The default is monthly.
 	Period types.UsageLimitPeriod
+
 	// The identifier of the usage limit.
 	UsageLimitId *string
+
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this
 	// amount is in terabytes (TB).
 	Amount *int64

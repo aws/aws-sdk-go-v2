@@ -58,9 +58,11 @@ func (c *Client) DescribeEventTopics(ctx context.Context, params *DescribeEventT
 
 // Describes event topics.
 type DescribeEventTopicsInput struct {
+
 	// The Directory ID for which to get the list of associated SNS topics. If this
 	// member is null, associations for all Directory IDs are returned.
 	DirectoryId *string
+
 	// A list of SNS topic names for which to obtain the information. If this member is
 	// null, all associations for the specified Directory ID are returned. An empty
 	// list results in an InvalidParameterException being thrown.
@@ -69,6 +71,7 @@ type DescribeEventTopicsInput struct {
 
 // The result of a DescribeEventTopic request.
 type DescribeEventTopicsOutput struct {
+
 	// A list of SNS topic names that receive status messages from the specified
 	// Directory ID.
 	EventTopics []*types.EventTopic

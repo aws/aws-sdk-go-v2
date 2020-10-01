@@ -58,18 +58,31 @@ func (c *Client) UpdateResourceServer(ctx context.Context, params *UpdateResourc
 }
 
 type UpdateResourceServerInput struct {
+
 	// The identifier for the resource server.
+	//
+	// This member is required.
 	Identifier *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The name of the resource server.
+	//
+	// This member is required.
 	Name *string
+
 	// The scope values to be set for the resource server.
 	Scopes []*types.ResourceServerScopeType
 }
 
 type UpdateResourceServerOutput struct {
+
 	// The resource server.
+	//
+	// This member is required.
 	ResourceServer *types.ResourceServerType
 
 	// Metadata pertaining to the operation's result.

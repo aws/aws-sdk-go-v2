@@ -56,19 +56,26 @@ func (c *Client) ListAssociatedApprovalRuleTemplatesForRepository(ctx context.Co
 }
 
 type ListAssociatedApprovalRuleTemplatesForRepositoryInput struct {
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults *int32
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
 	// The name of the repository for which you want to list all associated approval
 	// rule templates.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type ListAssociatedApprovalRuleTemplatesForRepositoryOutput struct {
+
 	// The names of all approval rule templates associated with the repository.
 	ApprovalRuleTemplateNames []*string
+
 	// An enumeration token that allows the operation to batch the next results of the
 	// operation.
 	NextToken *string

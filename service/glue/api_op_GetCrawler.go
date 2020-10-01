@@ -56,11 +56,15 @@ func (c *Client) GetCrawler(ctx context.Context, params *GetCrawlerInput, optFns
 }
 
 type GetCrawlerInput struct {
+
 	// The name of the crawler to retrieve metadata for.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetCrawlerOutput struct {
+
 	// The metadata for the specified crawler.
 	Crawler *types.Crawler
 

@@ -4,9 +4,11 @@ package types
 
 // An object that identifies an item. The and APIs return a list of PredictedItems.
 type PredictedItem struct {
+
 	// A numeric representation of the model's certainty that the item will be the next
 	// user selection. For more information on scoring logic, see how-scores-work ().
 	Score *float64
+
 	// The recommended item ID.
 	ItemId *string
 }

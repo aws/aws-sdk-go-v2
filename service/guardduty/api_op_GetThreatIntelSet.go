@@ -56,23 +56,42 @@ func (c *Client) GetThreatIntelSet(ctx context.Context, params *GetThreatIntelSe
 }
 
 type GetThreatIntelSetInput struct {
+
 	// The unique ID of the threatIntelSet that you want to get.
+	//
+	// This member is required.
 	ThreatIntelSetId *string
+
 	// The unique ID of the detector that the threatIntelSet is associated with.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type GetThreatIntelSetOutput struct {
+
 	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
+	//
+	// This member is required.
 	Name *string
+
 	// The format of the threatIntelSet.
+	//
+	// This member is required.
 	Format types.ThreatIntelSetFormat
+
 	// The status of threatIntelSet file uploaded.
+	//
+	// This member is required.
 	Status types.ThreatIntelSetStatus
+
 	// The URI of the file that contains the ThreatIntelSet. For example:
 	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	//
+	// This member is required.
 	Location *string
+
 	// The tags of the threat list resource.
 	Tags map[string]*string
 

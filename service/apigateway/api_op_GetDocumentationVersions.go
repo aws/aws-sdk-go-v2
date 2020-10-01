@@ -57,17 +57,26 @@ func (c *Client) GetDocumentationVersions(ctx context.Context, params *GetDocume
 
 // Gets the documentation versions of an API.
 type GetDocumentationVersionsInput struct {
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Name      *string
+
+	Name *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
-	Limit            *int32
-	Title            *string
+	Limit *int32
+
+	Title *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
 }
 
 // The collection of documentation snapshots of an API. Use the
@@ -76,8 +85,10 @@ type GetDocumentationVersionsInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
 // DocumentationPart (), DocumentationVersion ()
 type GetDocumentationVersionsOutput struct {
+
 	// The current page of elements from this collection.
 	Items []*types.DocumentationVersion
+
 	// The current pagination position in the paged result set.
 	Position *string
 

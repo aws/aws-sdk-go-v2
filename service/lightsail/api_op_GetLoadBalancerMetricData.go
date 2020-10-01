@@ -60,8 +60,12 @@ func (c *Client) GetLoadBalancerMetricData(ctx context.Context, params *GetLoadB
 }
 
 type GetLoadBalancerMetricDataInput struct {
+
 	// The granularity, in seconds, of the returned data points.
+	//
+	// This member is required.
 	Period *int32
+
 	// The metric for which you want to return information. Valid load balancer metric
 	// names are listed below, along with the most useful statistics to include in your
 	// request, and the published unit value.
@@ -137,9 +141,15 @@ type GetLoadBalancerMetricDataInput struct {
 	//     * UnhealthyHostCount - The number of
 	// target instances that are considered unhealthy. Statistics: The most useful
 	// statistic are Average, Minimum, and Maximum. Unit: The published unit is Count.
+	//
+	// This member is required.
 	MetricName types.LoadBalancerMetricName
+
 	// The start time of the period.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// The statistic for the metric. The following statistics are available:
 	//
 	//     *
@@ -162,20 +172,33 @@ type GetLoadBalancerMetricDataInput struct {
 	//
 	//     * SampleCount - The
 	// count, or number, of data points used for the statistical calculation.
+	//
+	// This member is required.
 	Statistics []types.MetricStatistic
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The end time of the period.
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// The unit for the metric data request. Valid units depend on the metric data
 	// being requested. For the valid units with each available metric, see the
 	// metricName parameter.
+	//
+	// This member is required.
 	Unit types.MetricUnit
 }
 
 type GetLoadBalancerMetricDataOutput struct {
+
 	// An array of objects that describe the metric data returned.
 	MetricData []*types.MetricDatapoint
+
 	// The name of the metric returned.
 	MetricName types.LoadBalancerMetricName
 

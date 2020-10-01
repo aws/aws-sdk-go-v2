@@ -57,28 +57,44 @@ func (c *Client) DeleteFile(ctx context.Context, params *DeleteFileInput, optFns
 }
 
 type DeleteFileInput struct {
+
 	// The email address for the commit that deletes the file. If no email address is
 	// specified, the email address is left blank.
 	Email *string
+
 	// The fully qualified path to the file that to be deleted, including the full name
 	// and extension of that file. For example, /examples/file.md is a fully qualified
 	// path to a file named file.md in a folder named examples.
+	//
+	// This member is required.
 	FilePath *string
+
 	// The name of the repository that contains the file to delete.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The commit message you want to include as part of deleting the file. Commit
 	// messages are limited to 256 KB. If no message is specified, a default message is
 	// used.
 	CommitMessage *string
+
 	// The name of the author of the commit that deletes the file. If no name is
 	// specified, the user's ARN is used as the author name and committer name.
 	Name *string
+
 	// The name of the branch where the commit that deletes the file is made.
+	//
+	// This member is required.
 	BranchName *string
+
 	// The ID of the commit that is the tip of the branch where you want to create the
 	// commit that deletes the file. This must be the HEAD commit for the branch. The
 	// commit that deletes the file is created from this commit ID.
+	//
+	// This member is required.
 	ParentCommitId *string
+
 	// If a file is the only object in the folder or directory, specifies whether to
 	// delete the folder or directory that contains the file. By default, empty folders
 	// are deleted. This includes empty folders that are part of the directory
@@ -89,15 +105,27 @@ type DeleteFileInput struct {
 }
 
 type DeleteFileOutput struct {
+
 	// The blob ID removed from the tree as part of deleting the file.
+	//
+	// This member is required.
 	BlobId *string
+
 	// The full commit ID of the commit that contains the change that deletes the file.
+	//
+	// This member is required.
 	CommitId *string
+
 	// The fully qualified path to the file to be deleted, including the full name and
 	// extension of that file.
+	//
+	// This member is required.
 	FilePath *string
+
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// delete file change.
+	//
+	// This member is required.
 	TreeId *string
 
 	// Metadata pertaining to the operation's result.

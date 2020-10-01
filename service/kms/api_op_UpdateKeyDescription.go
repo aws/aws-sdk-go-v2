@@ -61,8 +61,12 @@ func (c *Client) UpdateKeyDescription(ctx context.Context, params *UpdateKeyDesc
 }
 
 type UpdateKeyDescriptionInput struct {
+
 	// New description for the CMK.
+	//
+	// This member is required.
 	Description *string
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -74,6 +78,8 @@ type UpdateKeyDescriptionInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 

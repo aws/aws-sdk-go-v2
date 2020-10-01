@@ -60,11 +60,15 @@ func (c *Client) RebootRelationalDatabase(ctx context.Context, params *RebootRel
 }
 
 type RebootRelationalDatabaseInput struct {
+
 	// The name of your database to reboot.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
 }
 
 type RebootRelationalDatabaseOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

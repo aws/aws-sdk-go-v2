@@ -56,8 +56,11 @@ func (c *Client) DeleteRemoteAccessSession(ctx context.Context, params *DeleteRe
 
 // Represents the request to delete the specified remote access session.
 type DeleteRemoteAccessSessionInput struct {
+
 	// The Amazon Resource Name (ARN) of the session for which you want to delete
 	// remote access.
+	//
+	// This member is required.
 	Arn *string
 }
 

@@ -57,17 +57,26 @@ func (c *Client) UpdateApnsSandboxChannel(ctx context.Context, params *UpdateApn
 }
 
 type UpdateApnsSandboxChannelInput struct {
+
 	// Specifies the status and settings of the APNs (Apple Push Notification service)
 	// sandbox channel for an application.
+	//
+	// This member is required.
 	APNSSandboxChannelRequest *types.APNSSandboxChannelRequest
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type UpdateApnsSandboxChannelOutput struct {
+
 	// Provides information about the status and settings of the APNs (Apple Push
 	// Notification service) sandbox channel for an application.
+	//
+	// This member is required.
 	APNSSandboxChannelResponse *types.APNSSandboxChannelResponse
 
 	// Metadata pertaining to the operation's result.

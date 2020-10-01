@@ -56,10 +56,16 @@ func (c *Client) DeleteFacet(ctx context.Context, params *DeleteFacetInput, optF
 }
 
 type DeleteFacetInput struct {
+
 	// The name of the facet to delete.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) that is associated with the Facet (). For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
 }
 

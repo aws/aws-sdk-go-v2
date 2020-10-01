@@ -160,6 +160,7 @@ func (c *Client) CreateGovCloudAccount(ctx context.Context, params *CreateGovClo
 }
 
 type CreateGovCloudAccountInput struct {
+
 	// The email address of the owner to assign to the new member account in the
 	// commercial Region. This email address must not already be associated with
 	// another AWS account. You must use a valid email address to complete account
@@ -168,7 +169,10 @@ type CreateGovCloudAccountInput struct {
 	// CreateGovCloudAccount, the request for the email address for the AWS GovCloud
 	// (US) account originates from the commercial Region, not from the AWS GovCloud
 	// (US) Region.
+	//
+	// This member is required.
 	Email *string
+
 	// If set to ALLOW, the new linked account in the commercial Region enables IAM
 	// users to access account billing information if they have the required
 	// permissions. If set to DENY, only the root user of the new account can access
@@ -179,6 +183,7 @@ type CreateGovCloudAccountInput struct {
 	// parameter, the value defaults to ALLOW, and IAM users and roles with the
 	// required permissions can access billing information for the new account.
 	IamUserAccessToBilling types.IAMUserAccessToBilling
+
 	// (Optional) The name of an IAM role that AWS Organizations automatically
 	// preconfigures in the new member accounts in both the AWS GovCloud (US) Region
 	// and in the commercial Region. This role trusts the master account, allowing
@@ -197,11 +202,15 @@ type CreateGovCloudAccountInput struct {
 	// lowercase letters, digits with no spaces, and any of the following characters:
 	// =,.@-
 	RoleName *string
+
 	// The friendly name of the member account.
+	//
+	// This member is required.
 	AccountName *string
 }
 
 type CreateGovCloudAccountOutput struct {
+
 	// Contains the status about a CreateAccount () or CreateGovCloudAccount () request
 	// to create an AWS account or an AWS GovCloud (US) account in an organization.
 	CreateAccountStatus *types.CreateAccountStatus

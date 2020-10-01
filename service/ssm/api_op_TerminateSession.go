@@ -57,11 +57,15 @@ func (c *Client) TerminateSession(ctx context.Context, params *TerminateSessionI
 }
 
 type TerminateSessionInput struct {
+
 	// The ID of the session to terminate.
+	//
+	// This member is required.
 	SessionId *string
 }
 
 type TerminateSessionOutput struct {
+
 	// The ID of the session that has been terminated.
 	SessionId *string
 

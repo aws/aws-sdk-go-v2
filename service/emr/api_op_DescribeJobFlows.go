@@ -73,18 +73,23 @@ func (c *Client) DescribeJobFlows(ctx context.Context, params *DescribeJobFlowsI
 
 // The input for the DescribeJobFlows () operation.
 type DescribeJobFlowsInput struct {
+
 	// Return only job flows whose state is contained in this list.
 	JobFlowStates []types.JobFlowExecutionState
+
 	// Return only job flows created before this date and time.
 	CreatedBefore *time.Time
+
 	// Return only job flows whose job flow ID is contained in this list.
 	JobFlowIds []*string
+
 	// Return only job flows created after this date and time.
 	CreatedAfter *time.Time
 }
 
 // The output for the DescribeJobFlows () operation.
 type DescribeJobFlowsOutput struct {
+
 	// A list of job flows matching the parameters supplied.
 	JobFlows []*types.JobFlowDetail
 

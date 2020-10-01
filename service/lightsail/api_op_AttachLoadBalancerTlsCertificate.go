@@ -65,14 +65,21 @@ func (c *Client) AttachLoadBalancerTlsCertificate(ctx context.Context, params *A
 }
 
 type AttachLoadBalancerTlsCertificateInput struct {
+
 	// The name of the load balancer to which you want to associate the SSL/TLS
 	// certificate.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The name of your SSL/TLS certificate.
+	//
+	// This member is required.
 	CertificateName *string
 }
 
 type AttachLoadBalancerTlsCertificateOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request. These SSL/TLS certificates are only usable by Lightsail load balancers.

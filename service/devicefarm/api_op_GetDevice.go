@@ -57,12 +57,16 @@ func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns .
 
 // Represents a request to the get device request.
 type GetDeviceInput struct {
+
 	// The device type's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get device request.
 type GetDeviceOutput struct {
+
 	// An object that contains information about the requested device.
 	Device *types.Device
 

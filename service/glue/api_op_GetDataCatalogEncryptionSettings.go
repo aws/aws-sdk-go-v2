@@ -55,12 +55,14 @@ func (c *Client) GetDataCatalogEncryptionSettings(ctx context.Context, params *G
 }
 
 type GetDataCatalogEncryptionSettingsInput struct {
+
 	// The ID of the Data Catalog to retrieve the security configuration for. If none
 	// is provided, the AWS account ID is used by default.
 	CatalogId *string
 }
 
 type GetDataCatalogEncryptionSettingsOutput struct {
+
 	// The requested security configuration.
 	DataCatalogEncryptionSettings *types.DataCatalogEncryptionSettings
 

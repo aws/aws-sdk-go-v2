@@ -56,8 +56,12 @@ func (c *Client) UpdateAgent(ctx context.Context, params *UpdateAgentInput, optF
 
 // UpdateAgentRequest
 type UpdateAgentInput struct {
+
 	// The Amazon Resource Name (ARN) of the agent to update.
+	//
+	// This member is required.
 	AgentArn *string
+
 	// The name that you want to use to configure the agent.
 	Name *string
 }

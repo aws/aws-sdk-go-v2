@@ -58,13 +58,16 @@ func (c *Client) ListSecurityConfigurations(ctx context.Context, params *ListSec
 }
 
 type ListSecurityConfigurationsInput struct {
+
 	// The pagination token that indicates the set of results to retrieve.
 	Marker *string
 }
 
 type ListSecurityConfigurationsOutput struct {
+
 	// The creation date and time, and name, of each security configuration.
 	SecurityConfigurations []*types.SecurityConfigurationSummary
+
 	// A pagination token that indicates the next set of results to retrieve. Include
 	// the marker in the next ListSecurityConfiguration call to retrieve the next page
 	// of results, if required.

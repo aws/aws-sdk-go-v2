@@ -57,12 +57,16 @@ func (c *Client) DescribeSMBSettings(ctx context.Context, params *DescribeSMBSet
 }
 
 type DescribeSMBSettingsInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 type DescribeSMBSettingsOutput struct {
+
 	// Indicates the status of a gateway that is a member of the Active Directory
 	// domain.  <ul> <li> <p> <code>ACCESS_DENIED</code>: Indicates that the
 	// <code>JoinDomain</code> operation failed due to an authentication error.</p>
@@ -77,12 +81,15 @@ type DescribeSMBSettingsOutput struct {
 	// <li> <p> <code>UNKNOWN_ERROR</code>: Indicates that the <code>JoinDomain</code>
 	// operation failed due to another type of error.</p> </li> </ul>
 	ActiveDirectoryStatus types.ActiveDirectoryStatus
+
 	// This value is true if a password for the guest user smbguest is set, otherwise
 	// false.  <p>Valid Values: <code>true</code> | <code>false</code> </p>
 	SMBGuestPasswordSet *bool
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
 	// The type of security strategy that was specified for file gateway.  <ul> <li>
 	// <p> <code>ClientSpecified</code>: If you use this option, requests are
 	// established based on what is negotiated by the client. This option is
@@ -97,6 +104,7 @@ type DescribeSMBSettingsOutput struct {
 	// works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.</p>
 	// </li> </ul>
 	SMBSecurityStrategy types.SMBSecurityStrategy
+
 	// The name of the domain that the gateway is joined to.
 	DomainName *string
 

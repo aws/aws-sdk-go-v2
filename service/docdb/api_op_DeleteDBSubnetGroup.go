@@ -57,9 +57,12 @@ func (c *Client) DeleteDBSubnetGroup(ctx context.Context, params *DeleteDBSubnet
 
 // Represents the input to DeleteDBSubnetGroup ().
 type DeleteDBSubnetGroupInput struct {
+
 	// The name of the database subnet group to delete. You can't delete the default
 	// subnet group. Constraints: Must match the name of an existing DBSubnetGroup.
 	// Must not be default. Example: mySubnetgroup
+	//
+	// This member is required.
 	DBSubnetGroupName *string
 }
 

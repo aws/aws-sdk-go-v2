@@ -58,14 +58,22 @@ func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDoc
 // Import documentation parts from an external (e.g., OpenAPI) definition file.
 type ImportDocumentationPartsInput struct {
 	Name *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Title     *string
+
+	Title *string
+
 	// A query parameter to specify whether to rollback the documentation importation
 	// (true) or not (false) when a warning is encountered. The default value is false.
-	FailOnWarnings   *bool
+	FailOnWarnings *bool
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// A query parameter to indicate whether to overwrite (OVERWRITE) any existing
 	// DocumentationParts () definition or to merge (MERGE) the new definition into the
 	// existing one. The default value is MERGE.
@@ -80,8 +88,10 @@ type ImportDocumentationPartsInput struct {
 // (https://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/),
 // DocumentationPart ()
 type ImportDocumentationPartsOutput struct {
+
 	// A list of the returned documentation part identifiers.
 	Ids []*string
+
 	// A list of warning messages reported during import of documentation parts.
 	Warnings []*string
 

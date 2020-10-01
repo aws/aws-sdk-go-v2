@@ -60,13 +60,16 @@ type DescribeAccountAuditConfigurationInput struct {
 }
 
 type DescribeAccountAuditConfigurationOutput struct {
+
 	// The ARN of the role that grants permission to AWS IoT to access information
 	// about your devices, policies, certificates, and other items as required when
 	// performing an audit. On the first call to UpdateAccountAuditConfiguration, this
 	// parameter is required.
 	RoleArn *string
+
 	// Which audit checks are enabled and disabled for this account.
 	AuditCheckConfigurations map[string]*types.AuditCheckConfiguration
+
 	// Information about the targets to which audit notifications are sent for this
 	// account.
 	AuditNotificationTargetConfigurations map[string]*types.AuditNotificationTarget

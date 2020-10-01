@@ -67,19 +67,23 @@ func (c *Client) GetAssetPropertyValue(ctx context.Context, params *GetAssetProp
 }
 
 type GetAssetPropertyValueInput struct {
+
 	// The ID of the asset.
 	AssetId *string
+
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
 	// information, see Mapping Industrial Data Streams to Asset Properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string
+
 	// The ID of the asset property.
 	PropertyId *string
 }
 
 type GetAssetPropertyValueOutput struct {
+
 	// The current asset property value.
 	PropertyValue *types.AssetPropertyValue
 

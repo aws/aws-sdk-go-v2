@@ -55,12 +55,22 @@ func (c *Client) DescribeGatewayRoute(ctx context.Context, params *DescribeGatew
 }
 
 type DescribeGatewayRouteInput struct {
+
 	// The name of the gateway route to describe.
+	//
+	// This member is required.
 	GatewayRouteName *string
+
 	// The name of the service mesh that the gateway route resides in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual gateway that the gateway route is associated with.
+	//
+	// This member is required.
 	VirtualGatewayName *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -69,7 +79,10 @@ type DescribeGatewayRouteInput struct {
 }
 
 type DescribeGatewayRouteOutput struct {
+
 	// The full description of your gateway route.
+	//
+	// This member is required.
 	GatewayRoute *types.GatewayRouteData
 
 	// Metadata pertaining to the operation's result.

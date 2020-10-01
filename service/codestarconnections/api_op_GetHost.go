@@ -57,19 +57,27 @@ func (c *Client) GetHost(ctx context.Context, params *GetHostInput, optFns ...fu
 }
 
 type GetHostInput struct {
+
 	// The Amazon Resource Name (ARN) of the requested host.
+	//
+	// This member is required.
 	HostArn *string
 }
 
 type GetHostOutput struct {
+
 	// The provider type of the requested host, such as GitHub Enterprise Server.
 	ProviderType types.ProviderType
+
 	// The VPC configuration of the requested host.
 	VpcConfiguration *types.VpcConfiguration
+
 	// The endpoint of the infrastructure represented by the requested host.
 	ProviderEndpoint *string
+
 	// The status of the requested host.
 	Status *string
+
 	// The name of the requested host.
 	Name *string
 

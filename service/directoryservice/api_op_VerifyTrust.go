@@ -59,12 +59,16 @@ func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optF
 // Initiates the verification of an existing trust relationship between an AWS
 // Managed Microsoft AD directory and an external domain.
 type VerifyTrustInput struct {
+
 	// The unique Trust ID of the trust relationship to verify.
+	//
+	// This member is required.
 	TrustId *string
 }
 
 // Result of a VerifyTrust request.
 type VerifyTrustOutput struct {
+
 	// The unique Trust ID of the trust relationship that was verified.
 	TrustId *string
 

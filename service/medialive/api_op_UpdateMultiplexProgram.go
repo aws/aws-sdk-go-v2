@@ -57,16 +57,24 @@ func (c *Client) UpdateMultiplexProgram(ctx context.Context, params *UpdateMulti
 
 // A request to update a program in a multiplex.
 type UpdateMultiplexProgramInput struct {
+
 	// The name of the program to update.
+	//
+	// This member is required.
 	ProgramName *string
+
 	// The new settings for a multiplex program.
 	MultiplexProgramSettings *types.MultiplexProgramSettings
+
 	// The ID of the multiplex of the program to update.
+	//
+	// This member is required.
 	MultiplexId *string
 }
 
 // Placeholder documentation for UpdateMultiplexProgramResponse
 type UpdateMultiplexProgramOutput struct {
+
 	// The updated multiplex program.
 	MultiplexProgram *types.MultiplexProgram
 

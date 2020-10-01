@@ -56,12 +56,15 @@ func (c *Client) DescribeEvaluations(ctx context.Context, params *DescribeEvalua
 }
 
 type DescribeEvaluationsInput struct {
+
 	// The ID of the page in the paginated results.
 	NextToken *string
+
 	// The greater than or equal to operator. The Evaluation results will have
 	// FilterVariable values that are greater than or equal to the value specified with
 	// GE.
 	GE *string
+
 	// A two-value parameter that determines the sequence of the resulting list of
 	// Evaluation.
 	//
@@ -73,9 +76,11 @@ type DescribeEvaluationsInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
 	// The greater than operator. The Evaluation results will have FilterVariable
 	// values that are greater than the value specified with GT.
 	GT *string
+
 	// Use one of the following variable to filter a list of Evaluation objects:
 	//
 	//     *
@@ -101,24 +106,30 @@ type DescribeEvaluationsInput struct {
 	// URL can identify either a file or an Amazon Simple Storage Solution (Amazon S3)
 	// bucket or directory.
 	FilterVariable types.EvaluationFilterVariable
+
 	// A string that is found at the beginning of a variable, such as Name or Id. For
 	// example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer. To
 	// search for this Evaluation, select Name for the FilterVariable and any of the
 	// following strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li>
 	// <p>2014-09-09</p> </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
 	Prefix *string
+
 	// The equal to operator. The Evaluation results will have FilterVariable values
 	// that exactly match the value specified with EQ.
 	EQ *string
+
 	// The maximum number of Evaluation to include in the result.
 	Limit *int32
+
 	// The less than or equal to operator. The Evaluation results will have
 	// FilterVariable values that are less than or equal to the value specified with
 	// LE.
 	LE *string
+
 	// The less than operator. The Evaluation results will have FilterVariable values
 	// that are less than the value specified with LT.
 	LT *string
+
 	// The not equal to operator. The Evaluation results will have FilterVariable
 	// values not equal to the value specified with NE.
 	NE *string
@@ -127,8 +138,10 @@ type DescribeEvaluationsInput struct {
 // Represents the query results from a DescribeEvaluations operation. The content
 // is essentially a list of Evaluation.
 type DescribeEvaluationsOutput struct {
+
 	// A list of Evaluation that meet the search criteria.
 	Results []*types.Evaluation
+
 	// The ID of the next page in the paginated results that indicates at least one
 	// more page follows.
 	NextToken *string

@@ -11,11 +11,17 @@ import (
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html).
 type AddHeaderAction struct {
+
 	// The name of the header to add. Must be between 1 and 50 characters, inclusive,
 	// and consist of alphanumeric (a-z, A-Z, 0-9) characters and dashes only.
+	//
+	// This member is required.
 	HeaderName *string
+
 	// Must be less than 2048 characters, and must not contain newline characters ("\r"
 	// or "\n").
+	//
+	// This member is required.
 	HeaderValue *string
 }
 
@@ -23,9 +29,11 @@ type AddHeaderAction struct {
 // use both, then the message should display correctly in the widest variety of
 // email clients.
 type Body struct {
+
 	// The content of the message, in text format. Use this for text-based email
 	// clients, or clients on high-latency networks (such as mobile devices).
 	Text *Content
+
 	// The content of the message, in HTML format. Use this for email clients that can
 	// process HTML. You can include clickable links, formatted text, and much more in
 	// an HTML message.
@@ -39,20 +47,31 @@ type Body struct {
 // SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html).
 type BounceAction struct {
+
 	// The SMTP reply code, as defined by RFC 5321
 	// (https://tools.ietf.org/html/rfc5321).
+	//
+	// This member is required.
 	SmtpReplyCode *string
+
 	// Human-readable text to include in the bounce message.
+	//
+	// This member is required.
 	Message *string
+
 	// The email address of the sender of the bounced email. This is the address from
 	// which the bounce message will be sent.
+	//
+	// This member is required.
 	Sender *string
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the bounce
 	// action is taken. An example of an Amazon SNS topic ARN is
 	// arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
 	// The SMTP enhanced status code, as defined by RFC 3463
 	// (https://tools.ietf.org/html/rfc3463).
 	StatusCode *string
@@ -64,17 +83,23 @@ type BounceAction struct {
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
 type BouncedRecipientInfo struct {
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to receive email for the recipient of the bounced email. For more
 	// information about sending authorization, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	RecipientArn *string
+
 	// The email address of the recipient of the bounced email.
+	//
+	// This member is required.
 	Recipient *string
+
 	// The reason for the bounce. You must provide either this parameter or
 	// RecipientDsnFields.
 	BounceType BounceType
+
 	// Recipient-related DSN fields, most of which would normally be filled in
 	// automatically when provided with a BounceType. You must provide either this
 	// parameter or BounceType.
@@ -84,10 +109,12 @@ type BouncedRecipientInfo struct {
 // An array that contains one or more Destinations, as well as the tags and
 // replacement data associated with each of those Destinations.
 type BulkEmailDestination struct {
+
 	// A list of replacement values to apply to the template. This parameter is a JSON
 	// object, typically consisting of key-value pairs in which the keys correspond to
 	// replacement tags in the email template.
 	ReplacementTemplateData *string
+
 	// Represents the destination of the message, consisting of To:, CC:, and BCC:
 	// fields. Amazon SES does not support the SMTPUTF8 extension, as described in
 	// RFC6531 (https://tools.ietf.org/html/rfc6531). For this reason, the local part
@@ -97,7 +124,10 @@ type BulkEmailDestination struct {
 	// an address (the part after the @ sign) contains non-ASCII characters, they must
 	// be encoded using Punycode, as described in RFC3492
 	// (https://tools.ietf.org/html/rfc3492.html).
+	//
+	// This member is required.
 	Destination *Destination
+
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendBulkTemplatedEmail. Tags correspond to characteristics of the
 	// email that you define, so that you can publish email sending events.
@@ -106,12 +136,15 @@ type BulkEmailDestination struct {
 
 // An object that contains the response from the SendBulkTemplatedEmail operation.
 type BulkEmailDestinationStatus struct {
+
 	// A description of an error that prevented a message being sent using the
 	// SendBulkTemplatedEmail operation.
 	Error *string
+
 	// The unique message identifier returned from the SendBulkTemplatedEmail
 	// operation.
 	MessageId *string
+
 	// The status of a message sent using the SendBulkTemplatedEmail operation.
 	// Possible values for this parameter include:
 	//
@@ -173,8 +206,11 @@ type BulkEmailDestinationStatus struct {
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type CloudWatchDestination struct {
+
 	// A list of dimensions upon which to categorize your emails when you publish email
 	// sending events to Amazon CloudWatch.
+	//
+	// This member is required.
 	DimensionConfigurations []*CloudWatchDimensionConfiguration
 }
 
@@ -183,6 +219,7 @@ type CloudWatchDestination struct {
 // events to Amazon CloudWatch, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type CloudWatchDimensionConfiguration struct {
+
 	// The default value of the dimension that is published to Amazon CloudWatch if you
 	// do not provide the value of the dimension when you send an email. The default
 	// value must:
@@ -191,13 +228,19 @@ type CloudWatchDimensionConfiguration struct {
 	// (0-9), underscores (_), or dashes (-).
 	//
 	//     * Contain less than 256 characters.
+	//
+	// This member is required.
 	DefaultDimensionValue *string
+
 	// The place where Amazon SES finds the value of a dimension to publish to Amazon
 	// CloudWatch. If you want Amazon SES to use the message tags that you specify
 	// using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail/SendRawEmail
 	// API, choose messageTag. If you want Amazon SES to use your own email headers,
 	// choose emailHeader.
+	//
+	// This member is required.
 	DimensionValueSource DimensionValueSource
+
 	// The name of an Amazon CloudWatch dimension associated with an email sending
 	// metric. The name must:
 	//
@@ -206,6 +249,8 @@ type CloudWatchDimensionConfiguration struct {
 	//
 	//     * Contain less than
 	// 256 characters.
+	//
+	// This member is required.
 	DimensionName *string
 }
 
@@ -217,6 +262,7 @@ type CloudWatchDimensionConfiguration struct {
 // in the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/).
 type ConfigurationSet struct {
+
 	// The name of the configuration set. The name must meet the following
 	// requirements:
 	//
@@ -224,6 +270,8 @@ type ConfigurationSet struct {
 	// (_), or dashes (-).
 	//
 	//     * Contain 64 characters or fewer.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -232,23 +280,32 @@ type ConfigurationSet struct {
 // protocol. If the text must contain any other characters, then you must also
 // specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.
 type Content struct {
+
 	// The textual data of the content.
+	//
+	// This member is required.
 	Data *string
+
 	// The character set of the content.
 	Charset *string
 }
 
 // Contains information about a custom verification email template.
 type CustomVerificationEmailTemplate struct {
+
 	// The email address that the custom verification email is sent from.
 	FromEmailAddress *string
+
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is not successfully verified.
 	FailureRedirectionURL *string
+
 	// The subject line of the custom verification email.
 	TemplateSubject *string
+
 	// The name of the custom verification email template.
 	TemplateName *string
+
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is successfully verified.
 	SuccessRedirectionURL *string
@@ -257,6 +314,7 @@ type CustomVerificationEmailTemplate struct {
 // Specifies whether messages that use the configuration set are required to use
 // Transport Layer Security (TLS).
 type DeliveryOptions struct {
+
 	// Specifies whether messages that use the configuration set are required to use
 	// Transport Layer Security (TLS). If the value is Require, messages are only
 	// delivered if a TLS connection can be established. If the value is Optional,
@@ -275,10 +333,13 @@ type DeliveryOptions struct {
 // be encoded using Punycode, as described in RFC3492
 // (https://tools.ietf.org/html/rfc3492.html).
 type Destination struct {
+
 	// The recipients to place on the CC: line of the message.
 	CcAddresses []*string
+
 	// The recipients to place on the To: line of the message.
 	ToAddresses []*string
+
 	// The recipients to place on the BCC: line of the message.
 	BccAddresses []*string
 }
@@ -293,17 +354,21 @@ type Destination struct {
 // information about using configuration sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type EventDestination struct {
+
 	// An object that contains the names, default values, and sources of the dimensions
 	// associated with an Amazon CloudWatch event destination.
 	CloudWatchDestination *CloudWatchDestination
+
 	// An object that contains the delivery stream ARN and the IAM role ARN associated
 	// with an Amazon Kinesis Firehose event destination.
 	KinesisFirehoseDestination *KinesisFirehoseDestination
+
 	// Sets whether Amazon SES publishes events to this destination when you send an
 	// email with the associated configuration set. Set to true to enable publishing to
 	// this destination; set to false to prevent publishing to this destination. The
 	// default value is false.
 	Enabled *bool
+
 	// The name of the event destination. The name must:
 	//
 	//     * This value can only
@@ -311,9 +376,15 @@ type EventDestination struct {
 	// (-).
 	//
 	//     * Contain less than 64 characters.
+	//
+	// This member is required.
 	Name *string
+
 	// The type of email sending events to publish to the event destination.
+	//
+	// This member is required.
 	MatchingEventTypes []EventType
+
 	// An object that contains the topic ARN associated with an Amazon Simple
 	// Notification Service (Amazon SNS) event destination.
 	SNSDestination *SNSDestination
@@ -324,16 +395,23 @@ type EventDestination struct {
 // receiving email through Amazon SES, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
 type ExtensionField struct {
+
 	// The value of the header to add. Must be less than 2048 characters, and must not
 	// contain newline characters ("\r" or "\n").
+	//
+	// This member is required.
 	Value *string
+
 	// The name of the header to add. Must be between 1 and 50 characters, inclusive,
 	// and consist of alphanumeric (a-z, A-Z, 0-9) characters and dashes only.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Represents the DKIM attributes of a verified email address or a domain.
 type IdentityDkimAttributes struct {
+
 	// A set of character strings that represent the domain's identity. Using these
 	// tokens, you need to create DNS CNAME records that point to DKIM public keys that
 	// are hosted by Amazon SES. Amazon Web Services eventually detects that you've
@@ -344,26 +422,39 @@ type IdentityDkimAttributes struct {
 	// see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 	DkimTokens []*string
+
 	// Describes whether Amazon SES has successfully verified the DKIM DNS records
 	// (tokens) published in the domain name's DNS. (This only applies to domain
 	// identities, not email address identities.)
+	//
+	// This member is required.
 	DkimVerificationStatus VerificationStatus
+
 	// Is true if DKIM signing is enabled for email sent from the identity. It's false
 	// otherwise. The default value is true.
+	//
+	// This member is required.
 	DkimEnabled *bool
 }
 
 // Represents the custom MAIL FROM domain attributes of a verified identity (email
 // address or domain).
 type IdentityMailFromDomainAttributes struct {
+
 	// The state that indicates whether Amazon SES has successfully read the MX record
 	// required for custom MAIL FROM domain setup. If the state is Success, Amazon SES
 	// uses the specified custom MAIL FROM domain when the verified identity sends an
 	// email. All other states indicate that Amazon SES takes the action described by
 	// BehaviorOnMXFailure.
+	//
+	// This member is required.
 	MailFromDomainStatus CustomMailFromStatus
+
 	// The custom MAIL FROM domain that the identity is configured to use.
+	//
+	// This member is required.
 	MailFromDomain *string
+
 	// The action that Amazon SES takes if it cannot successfully read the required MX
 	// record when you send an email. A value of UseDefaultValue indicates that if
 	// Amazon SES cannot read the required MX record, it uses amazonses.com (or a
@@ -372,6 +463,8 @@ type IdentityMailFromDomainAttributes struct {
 	// MailFromDomainNotVerified error and does not send the email. The custom MAIL
 	// FROM setup states that result in this behavior are Pending, Failed, and
 	// TemporaryFailure.
+	//
+	// This member is required.
 	BehaviorOnMXFailure BehaviorOnMXFailure
 }
 
@@ -380,31 +473,46 @@ type IdentityMailFromDomainAttributes struct {
 // bounce, complaint, and/or delivery notifications, and whether feedback
 // forwarding is enabled for bounce and complaint notifications.
 type IdentityNotificationAttributes struct {
+
 	// Describes whether Amazon SES will forward bounce and complaint notifications as
 	// email. true indicates that Amazon SES will forward bounce and complaint
 	// notifications as email, while false indicates that bounce and complaint
 	// notifications will be published only to the specified bounce and complaint
 	// Amazon SNS topics.
+	//
+	// This member is required.
 	ForwardingEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon SES will
 	// publish delivery notifications.
+	//
+	// This member is required.
 	DeliveryTopic *string
+
 	// Describes whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of type Delivery. A value of true specifies that Amazon SES will
 	// include headers in delivery notifications, and a value of false specifies that
 	// Amazon SES will not include headers in delivery notifications.
 	HeadersInDeliveryNotificationsEnabled *bool
+
 	// Describes whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of type Bounce. A value of true specifies that Amazon SES will
 	// include headers in bounce notifications, and a value of false specifies that
 	// Amazon SES will not include headers in bounce notifications.
 	HeadersInBounceNotificationsEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon SES will
 	// publish bounce notifications.
+	//
+	// This member is required.
 	BounceTopic *string
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon SES will
 	// publish complaint notifications.
+	//
+	// This member is required.
 	ComplaintTopic *string
+
 	// Describes whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of type Complaint. A value of true specifies that Amazon SES will
 	// include headers in complaint notifications, and a value of false specifies that
@@ -414,9 +522,13 @@ type IdentityNotificationAttributes struct {
 
 // Represents the verification attributes of a single identity.
 type IdentityVerificationAttributes struct {
+
 	// The verification status of the identity: "Pending", "Success", "Failed", or
 	// "TemporaryFailure".
+	//
+	// This member is required.
 	VerificationStatus VerificationStatus
+
 	// The verification token for a domain identity. Null for email address identities.
 	VerificationToken *string
 }
@@ -428,11 +540,17 @@ type IdentityVerificationAttributes struct {
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type KinesisFirehoseDestination struct {
+
 	// The ARN of the Amazon Kinesis Firehose stream that email sending events should
 	// be published to.
+	//
+	// This member is required.
 	DeliveryStreamARN *string
+
 	// The ARN of the IAM role under which Amazon SES publishes email sending events to
 	// the Amazon Kinesis Firehose stream.
+	//
+	// This member is required.
 	IAMRoleARN *string
 }
 
@@ -447,6 +565,7 @@ type KinesisFirehoseDestination struct {
 // SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html).
 type LambdaAction struct {
+
 	// The invocation type of the AWS Lambda function. An invocation type of
 	// RequestResponse means that the execution of the function will immediately result
 	// in a response, and a value of Event means that the function will be invoked
@@ -457,11 +576,15 @@ type LambdaAction struct {
 	// invocation in most cases. Use RequestResponse only when you want to make a mail
 	// flow decision, such as whether to stop the receipt rule or the receipt rule set.
 	InvocationType InvocationType
+
 	// The Amazon Resource Name (ARN) of the AWS Lambda function. An example of an AWS
 	// Lambda function ARN is arn:aws:lambda:us-west-2:account-id:function:MyFunction.
 	// For more information about AWS Lambda, see the AWS Lambda Developer Guide
 	// (https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
+	//
+	// This member is required.
 	FunctionArn *string
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the Lambda
 	// action is taken. An example of an Amazon SNS topic ARN is
 	// arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon
@@ -472,10 +595,16 @@ type LambdaAction struct {
 
 // Represents the message to be sent, composed of a subject and a body.
 type Message struct {
+
 	// The subject of the message: A short summary of the content, which will appear in
 	// the recipient's inbox.
+	//
+	// This member is required.
 	Subject *Content
+
 	// The message body.
+	//
+	// This member is required.
 	Body *Body
 }
 
@@ -484,12 +613,17 @@ type Message struct {
 // about receiving email through Amazon SES, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
 type MessageDsn struct {
+
 	// The reporting MTA that attempted to deliver the message, formatted as specified
 	// in RFC 3464 (https://tools.ietf.org/html/rfc3464) (mta-name-type; mta-name). The
 	// default value is dns; inbound-smtp.[region].amazonaws.com.
+	//
+	// This member is required.
 	ReportingMta *string
+
 	// Additional X-headers to include in the DSN.
 	ExtensionFields []*ExtensionField
+
 	// When the message was received by the reporting mail transfer agent (MTA), in RFC
 	// 822 (https://www.ietf.org/rfc/rfc0822.txt) date-time format.
 	ArrivalDate *time.Time
@@ -501,6 +635,7 @@ type MessageDsn struct {
 // about using configuration sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type MessageTag struct {
+
 	// The value of the tag. The value must:
 	//
 	//     * This value can only contain ASCII
@@ -508,7 +643,10 @@ type MessageTag struct {
 	//
 	//     *
 	// Contain less than 256 characters.
+	//
+	// This member is required.
 	Value *string
+
 	// The name of the tag. The name must:
 	//
 	//     * This value can only contain ASCII
@@ -516,11 +654,14 @@ type MessageTag struct {
 	//
 	//     *
 	// Contain less than 256 characters.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Represents the raw data of the message.
 type RawMessage struct {
+
 	// The raw data of the message. This data needs to base64-encoded if you are
 	// accessing Amazon SES directly through the HTTPS interface. If you are accessing
 	// Amazon SES using an AWS SDK, the SDK takes care of the base 64-encoding for you.
@@ -534,6 +675,8 @@ type RawMessage struct {
 	// Amazon SES before sending the email. For more information, go to the Amazon SES
 	// Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
+	//
+	// This member is required.
 	Data []byte
 }
 
@@ -543,22 +686,29 @@ type RawMessage struct {
 // the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html).
 type ReceiptAction struct {
+
 	// Calls Amazon WorkMail and, optionally, publishes a notification to Amazon Amazon
 	// SNS.
 	WorkmailAction *WorkmailAction
+
 	// Publishes the email content within a notification to Amazon SNS.
 	SNSAction *SNSAction
+
 	// Adds a header to the received email.
 	AddHeaderAction *AddHeaderAction
+
 	// Calls an AWS Lambda function, and optionally, publishes a notification to Amazon
 	// SNS.
 	LambdaAction *LambdaAction
+
 	// Saves the received message to an Amazon Simple Storage Service (Amazon S3)
 	// bucket and, optionally, publishes a notification to Amazon SNS.
 	S3Action *S3Action
+
 	// Terminates the evaluation of the receipt rule set and optionally publishes a
 	// notification to Amazon SNS.
 	StopAction *StopAction
+
 	// Rejects the received email by returning a bounce response to the sender and,
 	// optionally, publishes a notification to Amazon Simple Notification Service
 	// (Amazon SNS).
@@ -570,9 +720,13 @@ type ReceiptAction struct {
 // about setting up IP address filters, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
 type ReceiptFilter struct {
+
 	// A structure that provides the IP addresses to block or allow, and whether to
 	// block or allow incoming mail from them.
+	//
+	// This member is required.
 	IpFilter *ReceiptIpFilter
+
 	// The name of the IP address filter. The name must:
 	//
 	//     * This value can only
@@ -583,6 +737,8 @@ type ReceiptFilter struct {
 	//
 	//     * Contain less than 64
 	// characters.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -591,14 +747,20 @@ type ReceiptFilter struct {
 // about setting up IP address filters, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
 type ReceiptIpFilter struct {
+
 	// A single IP address or a range of IP addresses that you want to block or allow,
 	// specified in Classless Inter-Domain Routing (CIDR) notation. An example of a
 	// single email address is 10.0.0.1. An example of a range of IP addresses is
 	// 10.0.0.1/24. For more information about CIDR notation, see RFC 2317
 	// (https://tools.ietf.org/html/rfc2317).
+	//
+	// This member is required.
 	Cidr *string
+
 	// Indicates whether to block or allow incoming mail from the specified IP
 	// addresses.
+	//
+	// This member is required.
 	Policy ReceiptFilterPolicy
 }
 
@@ -611,23 +773,29 @@ type ReceiptIpFilter struct {
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html).
 type ReceiptRule struct {
+
 	// An ordered list of actions to perform on messages that match at least one of the
 	// recipient email addresses or domains specified in the receipt rule.
 	Actions []*ReceiptAction
+
 	// If true, the receipt rule is active. The default value is false.
 	Enabled *bool
+
 	// If true, then messages that this receipt rule applies to are scanned for spam
 	// and viruses. The default value is false.
 	ScanEnabled *bool
+
 	// The recipient domains and email addresses that the receipt rule applies to. If
 	// this field is not specified, this rule will match all recipients under all
 	// verified domains.
 	Recipients []*string
+
 	// Specifies whether Amazon SES should require that incoming email is delivered
 	// over a connection encrypted with Transport Layer Security (TLS). If this
 	// parameter is set to Require, Amazon SES will bounce emails that are not received
 	// over TLS. The default is Optional.
 	TlsPolicy TlsPolicy
+
 	// The name of the receipt rule. The name must:
 	//
 	//     * This value can only contain
@@ -637,6 +805,8 @@ type ReceiptRule struct {
 	// Start and end with a letter or number.
 	//
 	//     * Contain less than 64 characters.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -646,6 +816,7 @@ type ReceiptRule struct {
 // sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
 type ReceiptRuleSetMetadata struct {
+
 	// The name of the receipt rule set. The name must:
 	//
 	//     * This value can only
@@ -657,6 +828,7 @@ type ReceiptRuleSetMetadata struct {
 	//     * Contain less than 64
 	// characters.
 	Name *string
+
 	// The date and time the receipt rule set was created.
 	CreatedTimestamp *time.Time
 }
@@ -667,12 +839,17 @@ type ReceiptRuleSetMetadata struct {
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
 type RecipientDsnFields struct {
+
 	// The time the final delivery attempt was made, in RFC 822
 	// (https://www.ietf.org/rfc/rfc0822.txt) date-time format.
 	LastAttemptDate *time.Time
+
 	// The status code that indicates what went wrong. This is required by RFC 3464
 	// (https://tools.ietf.org/html/rfc3464).
+	//
+	// This member is required.
 	Status *string
+
 	// The email address that the message was ultimately delivered to. This corresponds
 	// to the Final-Recipient in the DSN. If not specified, FinalRecipient will be set
 	// to the Recipient specified in the BouncedRecipientInfo structure. Either
@@ -680,31 +857,39 @@ type RecipientDsnFields struct {
 	// the original bounced message. Do not prepend the FinalRecipient email address
 	// with rfc 822;, as described in RFC 3798 (https://tools.ietf.org/html/rfc3798).
 	FinalRecipient *string
+
 	// An extended explanation of what went wrong; this is usually an SMTP response.
 	// See RFC 3463 (https://tools.ietf.org/html/rfc3463) for the correct formatting of
 	// this parameter.
 	DiagnosticCode *string
+
 	// Additional X-headers to include in the DSN.
 	ExtensionFields []*ExtensionField
+
 	// The MTA to which the remote MTA attempted to deliver the message, formatted as
 	// specified in RFC 3464 (https://tools.ietf.org/html/rfc3464) (mta-name-type;
 	// mta-name). This parameter typically applies only to propagating synchronous
 	// bounces.
 	RemoteMta *string
+
 	// The action performed by the reporting mail transfer agent (MTA) as a result of
 	// its attempt to deliver the message to the recipient address. This is required by
 	// RFC 3464 (https://tools.ietf.org/html/rfc3464).
+	//
+	// This member is required.
 	Action DsnAction
 }
 
 // Contains information about the reputation settings for a configuration set.
 type ReputationOptions struct {
+
 	// Describes whether email sending is enabled or disabled for the configuration
 	// set. If the value is true, then Amazon SES will send emails that use the
 	// configuration set. If the value is false, Amazon SES will not send emails that
 	// use the configuration set. The default value is true. You can change this
 	// setting using UpdateConfigurationSetSendingEnabled ().
 	SendingEnabled *bool
+
 	// The date and time at which the reputation metrics for the configuration set were
 	// last reset. Resetting these metrics is known as a fresh start. When you disable
 	// email sending for a configuration set using UpdateConfigurationSetSendingEnabled
@@ -713,6 +898,7 @@ type ReputationOptions struct {
 	// configuration set has never been disabled and later re-enabled, the value of
 	// this attribute is null.
 	LastFreshStart *time.Time
+
 	// Describes whether or not Amazon SES publishes reputation metrics for the
 	// configuration set, such as bounce and complaint rates, to Amazon CloudWatch. If
 	// the value is true, reputation metrics are published. If the value is false,
@@ -734,8 +920,12 @@ type ReputationOptions struct {
 // SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html).
 type S3Action struct {
+
 	// The name of the Amazon S3 bucket that incoming email will be saved to.
+	//
+	// This member is required.
 	BucketName *string
+
 	// The customer master key that Amazon SES should use to encrypt your emails before
 	// saving them to the Amazon S3 bucket. You can use the default master key or a
 	// custom master key you created in AWS KMS as follows:
@@ -771,12 +961,14 @@ type S3Action struct {
 	// Guide
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html).
 	KmsKeyArn *string
+
 	// The ARN of the Amazon SNS topic to notify when the message is saved to the
 	// Amazon S3 bucket. An example of an Amazon SNS topic ARN is
 	// arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
 	// The key prefix of the Amazon S3 bucket. The key prefix is similar to a directory
 	// name that enables you to store similar data under the same directory in a
 	// bucket.
@@ -786,14 +978,19 @@ type S3Action struct {
 // Represents sending statistics data. Each SendDataPoint contains statistics for a
 // 15-minute period of sending activity.
 type SendDataPoint struct {
+
 	// Number of emails rejected by Amazon SES.
 	Rejects *int64
+
 	// Number of emails that have been sent.
 	DeliveryAttempts *int64
+
 	// Number of emails that have bounced.
 	Bounces *int64
+
 	// Time of the data point.
 	Timestamp *time.Time
+
 	// Number of unwanted emails that were rejected by recipients.
 	Complaints *int64
 }
@@ -814,11 +1011,15 @@ type SendDataPoint struct {
 // publish an Amazon SNS notification, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html).
 type SNSAction struct {
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example of
 	// an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic. For more
 	// information about Amazon SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
+	//
+	// This member is required.
 	TopicArn *string
+
 	// The encoding to use for the email within the Amazon SNS notification. UTF-8 is
 	// easier to use, but may not preserve all special characters when a message was
 	// encoded with a different encoding format. Base64 preserves all special
@@ -833,11 +1034,14 @@ type SNSAction struct {
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type SNSDestination struct {
+
 	// The ARN of the Amazon SNS topic that email sending events will be published to.
 	// An example of an Amazon SNS topic ARN is
 	// arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
+	//
+	// This member is required.
 	TopicARN *string
 }
 
@@ -847,8 +1051,12 @@ type SNSDestination struct {
 // in a receipt rule, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html).
 type StopAction struct {
+
 	// The scope of the StopAction. The only acceptable value is RuleSet.
+	//
+	// This member is required.
 	Scope StopScope
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the stop
 	// action is taken. An example of an Amazon SNS topic ARN is
 	// arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon
@@ -860,22 +1068,30 @@ type StopAction struct {
 // The content of the email, composed of a subject line, an HTML part, and a
 // text-only part.
 type Template struct {
+
 	// The HTML body of the email.
 	HtmlPart *string
+
 	// The subject line of the email.
 	SubjectPart *string
+
 	// The email body that will be visible to recipients whose email clients do not
 	// display HTML.
 	TextPart *string
+
 	// The name of the template. You will refer to this name when you send email using
 	// the SendTemplatedEmail or SendBulkTemplatedEmail operations.
+	//
+	// This member is required.
 	TemplateName *string
 }
 
 // Contains information about an email template.
 type TemplateMetadata struct {
+
 	// The time and date the template was created.
 	CreatedTimestamp *time.Time
+
 	// The name of the template.
 	Name *string
 }
@@ -887,6 +1103,7 @@ type TemplateMetadata struct {
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
 // in the Amazon SES Developer Guide.
 type TrackingOptions struct {
+
 	// The custom subdomain that will be used to redirect email recipients to the
 	// Amazon SES event tracking domain.
 	CustomRedirectDomain *string
@@ -899,13 +1116,17 @@ type TrackingOptions struct {
 // using a receipt rule to call Amazon WorkMail, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html).
 type WorkmailAction struct {
+
 	// The ARN of the Amazon WorkMail organization. An example of an Amazon WorkMail
 	// organization ARN is
 	// arn:aws:workmail:us-west-2:123456789012:organization/m-68755160c4cb4e29a2b2f8fb58f359d7.
 	// For information about Amazon WorkMail organizations, see the Amazon WorkMail
 	// Administrator Guide
 	// (https://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html).
+	//
+	// This member is required.
 	OrganizationArn *string
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
 	// WorkMail action is called. An example of an Amazon SNS topic ARN is
 	// arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon

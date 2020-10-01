@@ -61,15 +61,20 @@ func (c *Client) ListUniqueProblems(ctx context.Context, params *ListUniqueProbl
 
 // Represents a request to the list unique problems operation.
 type ListUniqueProblemsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The unique problems' ARNs.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a list unique problems request.
 type ListUniqueProblemsOutput struct {
+
 	// Information about the unique problems. Allowed values include:
 	//
 	//     * PENDING
@@ -88,6 +93,7 @@ type ListUniqueProblemsOutput struct {
 	//     *
 	// STOPPED
 	UniqueProblems map[string][]*types.UniqueProblem
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.

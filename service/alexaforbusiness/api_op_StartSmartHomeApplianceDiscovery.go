@@ -55,7 +55,10 @@ func (c *Client) StartSmartHomeApplianceDiscovery(ctx context.Context, params *S
 }
 
 type StartSmartHomeApplianceDiscoveryInput struct {
+
 	// The room where smart home appliance discovery was initiated.
+	//
+	// This member is required.
 	RoomArn *string
 }
 

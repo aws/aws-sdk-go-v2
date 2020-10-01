@@ -55,19 +55,24 @@ func (c *Client) ListDominantLanguageDetectionJobs(ctx context.Context, params *
 }
 
 type ListDominantLanguageDetectionJobsInput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// Filters that jobs that are returned. You can filter jobs on their name, status,
 	// or the date and time that they were submitted. You can only set one filter at a
 	// time.
 	Filter *types.DominantLanguageDetectionJobFilter
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
 }
 
 type ListDominantLanguageDetectionJobsOutput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// A list containing the properties of each job that is returned.
 	DominantLanguageDetectionJobPropertiesList []*types.DominantLanguageDetectionJobProperties
 

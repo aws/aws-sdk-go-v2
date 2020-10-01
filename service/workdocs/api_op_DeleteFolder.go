@@ -55,8 +55,12 @@ func (c *Client) DeleteFolder(ctx context.Context, params *DeleteFolderInput, op
 }
 
 type DeleteFolderInput struct {
+
 	// The ID of the folder.
+	//
+	// This member is required.
 	FolderId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string

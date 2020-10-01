@@ -102,6 +102,7 @@ func (c *Client) ReceiveMessage(ctx context.Context, params *ReceiveMessageInput
 
 //
 type ReceiveMessageInput struct {
+
 	// The name of the message attribute, where N is the index.
 	//
 	//     * The name can
@@ -126,6 +127,7 @@ type ReceiveMessageInput struct {
 	// <code>.*</code> in your request. You can also use all message attributes
 	// starting with a prefix, for example <code>bar.*</code>.</p>
 	MessageAttributeNames []*string
+
 	// The duration (in seconds) for which the call waits for a message to arrive in
 	// the queue before returning. If a message is available, the call returns sooner
 	// than WaitTimeSeconds. If no messages are available and the wait time expires,
@@ -138,9 +140,13 @@ type ReceiveMessageInput struct {
 	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html)
 	// for synchronous clients.
 	WaitTimeSeconds *int32
+
 	// The URL of the Amazon SQS queue from which messages are received. Queue URLs and
 	// names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// A list of attributes that need to be returned along with each message. These
 	// attributes include:
 	//
@@ -181,13 +187,16 @@ type ReceiveMessageInput struct {
 	//     * SequenceNumber – Returns the
 	// value provided by Amazon SQS.
 	AttributeNames []types.QueueAttributeName
+
 	// The maximum number of messages to return. Amazon SQS never returns more messages
 	// than this value (however, fewer messages might be returned). Valid values: 1 to
 	// 10. Default: 1.
 	MaxNumberOfMessages *int32
+
 	// The duration (in seconds) that the received messages are hidden from subsequent
 	// retrieve requests after being retrieved by a ReceiveMessage request.
 	VisibilityTimeout *int32
+
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of ReceiveMessage calls. If a networking issue occurs after a
 	// ReceiveMessage action, and instead of a response you receive a generic error, it
@@ -247,6 +256,7 @@ type ReceiveMessageInput struct {
 
 // A list of received messages.
 type ReceiveMessageOutput struct {
+
 	// A list of messages.
 	Messages []*types.Message
 

@@ -58,12 +58,16 @@ func (c *Client) DeleteReplicationInstance(ctx context.Context, params *DeleteRe
 
 //
 type DeleteReplicationInstanceInput struct {
+
 	// The Amazon Resource Name (ARN) of the replication instance to be deleted.
+	//
+	// This member is required.
 	ReplicationInstanceArn *string
 }
 
 //
 type DeleteReplicationInstanceOutput struct {
+
 	// The replication instance that was deleted.
 	ReplicationInstance *types.ReplicationInstance
 

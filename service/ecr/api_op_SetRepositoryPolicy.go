@@ -58,28 +58,39 @@ func (c *Client) SetRepositoryPolicy(ctx context.Context, params *SetRepositoryP
 }
 
 type SetRepositoryPolicyInput struct {
+
 	// The JSON repository policy text to apply to the repository. For more
 	// information, see Amazon ECR Repository Policies
 	// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html)
 	// in the Amazon Elastic Container Registry User Guide.
+	//
+	// This member is required.
 	PolicyText *string
+
 	// If the policy you are attempting to set on a repository policy would prevent you
 	// from setting another policy in the future, you must force the
 	// SetRepositoryPolicy () operation. This is intended to prevent accidental
 	// repository lock outs.
 	Force *bool
+
 	// The name of the repository to receive the policy.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.
 	RegistryId *string
 }
 
 type SetRepositoryPolicyOutput struct {
+
 	// The repository name associated with the request.
 	RepositoryName *string
+
 	// The JSON repository policy text applied to the repository.
 	PolicyText *string
+
 	// The registry ID associated with the request.
 	RegistryId *string
 

@@ -56,10 +56,15 @@ func (c *Client) UpdateMesh(ctx context.Context, params *UpdateMeshInput, optFns
 
 //
 type UpdateMeshInput struct {
+
 	// The name of the service mesh to update.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The service mesh specification to apply.
 	Spec *types.MeshSpec
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
@@ -67,7 +72,10 @@ type UpdateMeshInput struct {
 
 //
 type UpdateMeshOutput struct {
+
 	// An object that represents a service mesh returned by a describe operation.
+	//
+	// This member is required.
 	Mesh *types.MeshData
 
 	// Metadata pertaining to the operation's result.

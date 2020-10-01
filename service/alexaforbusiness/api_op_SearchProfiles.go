@@ -56,16 +56,20 @@ func (c *Client) SearchProfiles(ctx context.Context, params *SearchProfilesInput
 }
 
 type SearchProfilesInput struct {
+
 	// The filters to use to list a specified set of room profiles. Supported filter
 	// keys are ProfileName and Address. Required.
 	Filters []*types.Filter
+
 	// The sort order to use in listing the specified set of room profiles. Supported
 	// sort keys are ProfileName and Address.
 	SortCriteria []*types.Sort
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
 	MaxResults *int32
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
@@ -73,10 +77,13 @@ type SearchProfilesInput struct {
 }
 
 type SearchProfilesOutput struct {
+
 	// The token returned to indicate that there is more data available.
 	NextToken *string
+
 	// The total number of room profiles returned.
 	TotalCount *int32
+
 	// The profiles that meet the specified set of filter criteria, in sort order.
 	Profiles []*types.ProfileData
 

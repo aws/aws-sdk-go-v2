@@ -62,11 +62,15 @@ func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optF
 
 //
 type GetQueueUrlInput struct {
+
 	// The AWS account ID of the account that created the queue.
 	QueueOwnerAWSAccountId *string
+
 	// The name of the queue whose URL must be fetched. Maximum 80 characters. Valid
 	// values: alphanumeric characters, hyphens (-), and underscores (_). Queue URLs
 	// and names are case-sensitive.
+	//
+	// This member is required.
 	QueueName *string
 }
 
@@ -74,6 +78,7 @@ type GetQueueUrlInput struct {
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
 // in the Amazon Simple Queue Service Developer Guide.
 type GetQueueUrlOutput struct {
+
 	// The URL of the queue.
 	QueueUrl *string
 

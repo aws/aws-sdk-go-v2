@@ -56,11 +56,15 @@ func (c *Client) DeleteTrigger(ctx context.Context, params *DeleteTriggerInput, 
 }
 
 type DeleteTriggerInput struct {
+
 	// The name of the trigger to delete.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DeleteTriggerOutput struct {
+
 	// The name of the trigger that was deleted.
 	Name *string
 

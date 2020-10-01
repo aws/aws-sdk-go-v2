@@ -80,7 +80,10 @@ func (c *Client) DeprecateDomain(ctx context.Context, params *DeprecateDomainInp
 }
 
 type DeprecateDomainInput struct {
+
 	// The name of the domain to deprecate.
+	//
+	// This member is required.
 	Name *string
 }
 

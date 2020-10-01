@@ -57,12 +57,16 @@ func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersi
 
 // The input for the ListPolicyVersions operation.
 type ListPolicyVersionsInput struct {
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
 }
 
 // The output from the ListPolicyVersions operation.
 type ListPolicyVersionsOutput struct {
+
 	// The policy versions.
 	PolicyVersions []*types.PolicyVersion
 

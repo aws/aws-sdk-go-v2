@@ -64,11 +64,18 @@ func (c *Client) RenewDomain(ctx context.Context, params *RenewDomainInput, optF
 // A RenewDomain request includes the number of years that you want to renew for
 // and the current expiration year.
 type RenewDomainInput struct {
+
 	// The name of the domain that you want to renew.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The year when the registration for the domain is set to expire. This value must
 	// match the current expiration date for the domain.
+	//
+	// This member is required.
 	CurrentExpiryYear *int32
+
 	// The number of years that you want to renew the domain for. The maximum number of
 	// years depends on the top-level domain. For the range of valid values for your
 	// domain, see Domains that You Can Register with Amazon Route 53
@@ -78,9 +85,12 @@ type RenewDomainInput struct {
 }
 
 type RenewDomainOutput struct {
+
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
+	//
+	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -55,9 +55,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The list of tags to remove from the Elastic Inference Accelerator.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The ARN of the Elastic Inference Accelerator to untag.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

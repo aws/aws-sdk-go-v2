@@ -57,10 +57,13 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 }
 
 type ListResourcesInput struct {
+
 	// The Amazon Resource Names (ARN) of the resource shares.
 	ResourceShareArns []*string
+
 	// The principal.
 	Principal *string
+
 	// The resource type. Valid values: codebuild:Project | codebuild:ReportGroup |
 	// ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet |
 	// ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component |
@@ -68,20 +71,28 @@ type ListResourcesInput struct {
 	// license-manager:LicenseConfiguration I resource-groups:Group | rds:Cluster |
 	// route53resolver:ResolverRule
 	ResourceType *string
+
 	// The type of owner.
+	//
+	// This member is required.
 	ResourceOwner types.ResourceOwner
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The Amazon Resource Names (ARN) of the resources.
 	ResourceArns []*string
 }
 
 type ListResourcesOutput struct {
+
 	// Information about the resources.
 	Resources []*types.Resource
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

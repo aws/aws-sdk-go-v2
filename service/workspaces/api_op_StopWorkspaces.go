@@ -58,11 +58,15 @@ func (c *Client) StopWorkspaces(ctx context.Context, params *StopWorkspacesInput
 }
 
 type StopWorkspacesInput struct {
+
 	// The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
+	//
+	// This member is required.
 	StopWorkspaceRequests []*types.StopRequest
 }
 
 type StopWorkspacesOutput struct {
+
 	// Information about the WorkSpaces that could not be stopped.
 	FailedRequests []*types.FailedWorkspaceChangeRequest
 

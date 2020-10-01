@@ -82,19 +82,26 @@ func (c *Client) CreateVault(ctx context.Context, params *CreateVaultInput, optF
 
 // Provides options to create a vault.
 type CreateVaultInput struct {
+
 	// The AccountId value is the AWS account ID. This value must match the AWS account
 	// ID associated with the credentials used to sign the request. You can either
 	// specify an AWS account ID or optionally a single '-' (hyphen), in which case
 	// Amazon S3 Glacier uses the AWS account ID associated with the credentials used
 	// to sign the request. If you specify your account ID, do not include any hyphens
 	// ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
 }
 
 // Contains the Amazon S3 Glacier response to your request.
 type CreateVaultOutput struct {
+
 	// The URI of the vault that was created.
 	Location *string
 

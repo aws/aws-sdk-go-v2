@@ -61,21 +61,26 @@ func (c *Client) DescribeOrganizationConfigRules(ctx context.Context, params *De
 }
 
 type DescribeOrganizationConfigRulesInput struct {
+
 	// The names of organization config rules for which you want details. If you do not
 	// specify any names, AWS Config returns details for all your organization config
 	// rules.
 	OrganizationConfigRuleNames []*string
+
 	// The maximum number of organization config rules returned on each page. If you do
 	// no specify a number, AWS Config uses the default. The default is 100.
 	Limit *int32
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 }
 
 type DescribeOrganizationConfigRulesOutput struct {
+
 	// Returns a list of OrganizationConfigRule objects.
 	OrganizationConfigRules []*types.OrganizationConfigRule
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string

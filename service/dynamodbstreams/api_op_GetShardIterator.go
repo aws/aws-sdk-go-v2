@@ -60,12 +60,20 @@ func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorI
 
 // Represents the input of a GetShardIterator operation.
 type GetShardIteratorInput struct {
+
 	// The Amazon Resource Name (ARN) for the stream.
+	//
+	// This member is required.
 	StreamArn *string
+
 	// The sequence number of a stream record in the shard from which to start reading.
 	SequenceNumber *string
+
 	// The identifier of the shard. The iterator will be returned for this shard ID.
+	//
+	// This member is required.
 	ShardId *string
+
 	// Determines how the shard iterator is used to start reading stream records from
 	// the shard:
 	//
@@ -84,11 +92,14 @@ type GetShardIteratorInput struct {
 	//     * LATEST - Start reading just after the
 	// most recent stream record in the shard, so that you always read the most recent
 	// data in the shard.
+	//
+	// This member is required.
 	ShardIteratorType types.ShardIteratorType
 }
 
 // Represents the output of a GetShardIterator operation.
 type GetShardIteratorOutput struct {
+
 	// The position in the shard from which to start reading stream records
 	// sequentially. A shard iterator specifies this position using the sequence number
 	// of a stream record in a shard.

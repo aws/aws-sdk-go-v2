@@ -56,18 +56,25 @@ func (c *Client) ListLoggerDefinitionVersions(ctx context.Context, params *ListL
 }
 
 type ListLoggerDefinitionVersionsInput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The ID of the logger definition.
+	//
+	// This member is required.
 	LoggerDefinitionId *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
 }
 
 type ListLoggerDefinitionVersionsOutput struct {
+
 	// Information about a version.
 	Versions []*types.VersionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

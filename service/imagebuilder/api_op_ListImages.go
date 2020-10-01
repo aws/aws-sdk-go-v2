@@ -55,25 +55,32 @@ func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns
 }
 
 type ListImagesInput struct {
+
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
+
 	// The maximum items to return in a request.
 	MaxResults *int32
+
 	// The owner defines which images you want to list. By default, this request will
 	// only show images owned by your account. You can use this field to specify if you
 	// want to view images owned by yourself, by Amazon, or those images that have been
 	// shared with you by other customers.
 	Owner types.Ownership
+
 	// The filters.
 	Filters []*types.Filter
 }
 
 type ListImagesOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The list of image semantic versions.
 	ImageVersionList []*types.ImageVersion
+
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.

@@ -88,9 +88,13 @@ func (c *Client) StartDeliveryStreamEncryption(ctx context.Context, params *Star
 }
 
 type StartDeliveryStreamEncryptionInput struct {
+
 	// The name of the delivery stream for which you want to enable server-side
 	// encryption (SSE).
+	//
+	// This member is required.
 	DeliveryStreamName *string
+
 	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
 	// for Server-Side Encryption (SSE).
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput

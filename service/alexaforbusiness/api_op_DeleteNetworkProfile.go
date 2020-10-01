@@ -55,7 +55,10 @@ func (c *Client) DeleteNetworkProfile(ctx context.Context, params *DeleteNetwork
 }
 
 type DeleteNetworkProfileInput struct {
+
 	// The ARN of the network profile associated with a device.
+	//
+	// This member is required.
 	NetworkProfileArn *string
 }
 

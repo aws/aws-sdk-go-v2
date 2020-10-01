@@ -57,12 +57,16 @@ func (c *Client) GetTopicAttributes(ctx context.Context, params *GetTopicAttribu
 
 // Input for GetTopicAttributes action.
 type GetTopicAttributesInput struct {
+
 	// The ARN of the topic whose properties you want to get.
+	//
+	// This member is required.
 	TopicArn *string
 }
 
 // Response for GetTopicAttributes action.
 type GetTopicAttributesOutput struct {
+
 	// A map of the topic's attributes. Attributes in this map include the following:
 	//
 	//

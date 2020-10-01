@@ -55,16 +55,20 @@ func (c *Client) ListConnectorDefinitions(ctx context.Context, params *ListConne
 }
 
 type ListConnectorDefinitionsInput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
 }
 
 type ListConnectorDefinitionsOutput struct {
+
 	// Information about a definition.
 	Definitions []*types.DefinitionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

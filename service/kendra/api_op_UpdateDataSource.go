@@ -56,21 +56,32 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 }
 
 type UpdateDataSourceInput struct {
+
 	// The unique identifier of the data source to update.
+	//
+	// This member is required.
 	Id *string
+
 	// The Amazon Resource Name (ARN) of the new role to use when the data source is
 	// accessing resources on your behalf.
 	RoleArn *string
+
 	// The name of the data source to update. The name of the data source can't be
 	// updated. To rename a data source you must delete the data source and re-create
 	// it.
 	Name *string
+
 	// The identifier of the index that contains the data source to update.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The new description for the data source.
 	Description *string
+
 	// Configuration information for a Amazon Kendra data source.
 	Configuration *types.DataSourceConfiguration
+
 	// The new update schedule for the data source.
 	Schedule *string
 }

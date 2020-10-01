@@ -56,8 +56,10 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 
 // The request structure for the list apps request.
 type ListAppsInput struct {
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// A pagination token. If non-null, the pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.
 	NextToken *string
@@ -65,11 +67,15 @@ type ListAppsInput struct {
 
 // The result structure for an Amplify app list request.
 type ListAppsOutput struct {
+
 	// A pagination token. Set to null to start listing apps from start. If non-null,
 	// the pagination token is returned in a result. Pass its value in here to list
 	// more projects.
 	NextToken *string
+
 	// A list of Amplify apps.
+	//
+	// This member is required.
 	Apps []*types.App
 
 	// Metadata pertaining to the operation's result.

@@ -59,17 +59,25 @@ func (c *Client) TestRepositoryTriggers(ctx context.Context, params *TestReposit
 
 // Represents the input of a test repository triggers operation.
 type TestRepositoryTriggersInput struct {
+
 	// The name of the repository in which to test the triggers.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The list of triggers to test.
+	//
+	// This member is required.
 	Triggers []*types.RepositoryTrigger
 }
 
 // Represents the output of a test repository triggers operation.
 type TestRepositoryTriggersOutput struct {
+
 	// The list of triggers that were successfully tested. This list provides the names
 	// of the triggers that were successfully tested, separated by commas.
 	SuccessfulExecutions []*string
+
 	// The list of triggers that were not tested. This list provides the names of the
 	// triggers that could not be tested, separated by commas.
 	FailedExecutions []*types.RepositoryTriggerExecutionFailure

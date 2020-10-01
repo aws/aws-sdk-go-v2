@@ -57,6 +57,7 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 }
 
 type PutResourcePolicyInput struct {
+
 	// Details of the new policy, including the identity of the principal that is
 	// enabled to put logs to this account. This is formatted as a JSON string. This
 	// parameter is required. The following example creates a resource policy enabling
@@ -68,11 +69,13 @@ type PutResourcePolicyInput struct {
 	// } ] }
 	//     </p>
 	PolicyDocument *string
+
 	// Name of the new policy. This parameter is required.
 	PolicyName *string
 }
 
 type PutResourcePolicyOutput struct {
+
 	// The new policy.
 	ResourcePolicy *types.ResourcePolicy
 

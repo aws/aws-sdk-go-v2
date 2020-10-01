@@ -71,6 +71,7 @@ func (c *Client) UploadSigningCertificate(ctx context.Context, params *UploadSig
 }
 
 type UploadSigningCertificateInput struct {
+
 	// The contents of the signing certificate. The regex pattern
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
@@ -84,7 +85,10 @@ type UploadSigningCertificateInput struct {
 	//
 	//     * The special characters tab (\u0009), line
 	// feed (\u000A), and carriage return (\u000D)
+	//
+	// This member is required.
 	CertificateBody *string
+
 	// The name of the user the signing certificate is for. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
@@ -94,7 +98,10 @@ type UploadSigningCertificateInput struct {
 
 // Contains the response to a successful UploadSigningCertificate () request.
 type UploadSigningCertificateOutput struct {
+
 	// Information about the certificate.
+	//
+	// This member is required.
 	Certificate *types.SigningCertificate
 
 	// Metadata pertaining to the operation's result.

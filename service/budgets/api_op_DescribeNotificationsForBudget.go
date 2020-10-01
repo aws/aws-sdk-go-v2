@@ -57,24 +57,34 @@ func (c *Client) DescribeNotificationsForBudget(ctx context.Context, params *Des
 
 // Request of DescribeNotificationsForBudget
 type DescribeNotificationsForBudgetInput struct {
+
 	// The accountId that is associated with the budget whose notifications you want
 	// descriptions of.
+	//
+	// This member is required.
 	AccountId *string
+
 	// An optional integer that represents how many entries a paginated response
 	// contains. The maximum is 100.
 	MaxResults *int32
+
 	// The pagination token that you include in your request to indicate the next set
 	// of results that you want to retrieve.
 	NextToken *string
+
 	// The name of the budget whose notifications you want descriptions of.
+	//
+	// This member is required.
 	BudgetName *string
 }
 
 // Response of GetNotificationsForBudget
 type DescribeNotificationsForBudgetOutput struct {
+
 	// The pagination token in the service response that indicates the next set of
 	// results that you can retrieve.
 	NextToken *string
+
 	// A list of notifications that are associated with a budget.
 	Notifications []*types.Notification
 

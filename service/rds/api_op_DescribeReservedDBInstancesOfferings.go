@@ -57,34 +57,43 @@ func (c *Client) DescribeReservedDBInstancesOfferings(ctx context.Context, param
 
 //
 type DescribeReservedDBInstancesOfferingsInput struct {
+
 	// The DB instance class filter value. Specify this parameter to show only the
 	// available offerings matching the specified DB instance class.
 	DBInstanceClass *string
+
 	// The offering identifier filter value. Specify this parameter to show only the
 	// available offering that matches the specified reservation identifier. Example:
 	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	ReservedDBInstancesOfferingId *string
+
 	// A value that indicates whether to show only those reservations that support
 	// Multi-AZ.
 	MultiAZ *bool
+
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
+
 	// Product description filter value. Specify this parameter to show only the
 	// available offerings that contain the specified product description. The results
 	// show offerings that partially match the filter value.
 	ProductDescription *string
+
 	// Duration filter value, specified in years or seconds. Specify this parameter to
 	// show only reservations for this duration. Valid Values: 1 | 3 | 31536000 |
 	// 94608000
 	Duration *string
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
 	// The offering type filter value. Specify this parameter to show only the
 	// available offerings matching the specified offering type. Valid Values: "Partial
 	// Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
+
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
 	// the response so you can retrieve the remaining results. Default: 100
@@ -95,8 +104,10 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 // Contains the result of a successful invocation of the
 // DescribeReservedDBInstancesOfferings action.
 type DescribeReservedDBInstancesOfferingsOutput struct {
+
 	// A list of reserved DB instance offerings.
 	ReservedDBInstancesOfferings []*types.ReservedDBInstancesOffering
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.

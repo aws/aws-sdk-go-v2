@@ -62,17 +62,24 @@ func (c *Client) PutConfigurationAggregator(ctx context.Context, params *PutConf
 }
 
 type PutConfigurationAggregatorInput struct {
+
 	// A list of AccountAggregationSource object.  </p>
 	AccountAggregationSources []*types.AccountAggregationSource
+
 	// An array of tag object.
 	Tags []*types.Tag
+
 	// An OrganizationAggregationSource object.
 	OrganizationAggregationSource *types.OrganizationAggregationSource
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
 }
 
 type PutConfigurationAggregatorOutput struct {
+
 	// Returns a ConfigurationAggregator object.
 	ConfigurationAggregator *types.ConfigurationAggregator
 

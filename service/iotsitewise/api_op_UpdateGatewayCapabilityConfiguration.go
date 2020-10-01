@@ -62,21 +62,31 @@ func (c *Client) UpdateGatewayCapabilityConfiguration(ctx context.Context, param
 }
 
 type UpdateGatewayCapabilityConfigurationInput struct {
+
 	// The namespace of the gateway capability configuration to be updated. For
 	// example, if you configure OPC-UA sources from the AWS IoT SiteWise console, your
 	// OPC-UA capability configuration has the namespace
 	// iotsitewise:opcuacollector:version, where version is a number such as 1.
+	//
+	// This member is required.
 	CapabilityNamespace *string
+
 	// The JSON document that defines the configuration for the gateway capability. For
 	// more information, see Configuring data sources (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
 	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
 	CapabilityConfiguration *string
+
 	// The ID of the gateway to be updated.
+	//
+	// This member is required.
 	GatewayId *string
 }
 
 type UpdateGatewayCapabilityConfigurationOutput struct {
+
 	// The synchronization status of the capability configuration. The sync status can
 	// be one of the following:
 	//
@@ -92,8 +102,13 @@ type UpdateGatewayCapabilityConfigurationOutput struct {
 	// After you update a capability configuration, its sync status is
 	// OUT_OF_SYNC until the gateway receives and applies or rejects the updated
 	// configuration.
+	//
+	// This member is required.
 	CapabilitySyncStatus types.CapabilitySyncStatus
+
 	// The namespace of the gateway capability.
+	//
+	// This member is required.
 	CapabilityNamespace *string
 
 	// Metadata pertaining to the operation's result.

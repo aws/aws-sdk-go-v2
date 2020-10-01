@@ -8,6 +8,7 @@ import (
 
 // An Auto Scaling group that is associated with an Amazon EKS managed node group.
 type AutoScalingGroup struct {
+
 	// The name of the Auto Scaling group associated with an Amazon EKS managed node
 	// group.
 	Name *string
@@ -15,6 +16,7 @@ type AutoScalingGroup struct {
 
 // An object representing the certificate-authority-data for your cluster.
 type Certificate struct {
+
 	// The Base64-encoded certificate data required to communicate with your cluster.
 	// Add this to the certificate-authority-data section of the kubeconfig file for
 	// your cluster.
@@ -23,27 +25,36 @@ type Certificate struct {
 
 // An object representing an Amazon EKS cluster.
 type Cluster struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
 	// The identity provider information for the cluster.
 	Identity *Identity
+
 	// The platform version of your Amazon EKS cluster. For more information, see
 	// Platform Versions
 	// (https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html) in the
 	// Amazon EKS User Guide .
 	PlatformVersion *string
+
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for the
 	// Kubernetes control plane to make calls to AWS API operations on your behalf.
 	RoleArn *string
+
 	// The Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *time.Time
+
 	// The logging configuration for your cluster.
 	Logging *Logging
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	Arn *string
+
 	// The name of the cluster.
 	Name *string
+
 	// The VPC configuration used by the cluster control plane. Amazon EKS VPC
 	// resources have specific requirements to work properly with Kubernetes. For more
 	// information, see Cluster VPC Considerations
@@ -52,38 +63,49 @@ type Cluster struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the
 	// Amazon EKS User Guide.
 	ResourcesVpcConfig *VpcConfigResponse
+
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string
+
 	// The certificate-authority-data for your cluster.
 	CertificateAuthority *Certificate
+
 	// The current status of the cluster.
 	Status ClusterStatus
+
 	// The metadata that you apply to the cluster to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Cluster tags do not propagate to any other resources associated with
 	// the cluster.
 	Tags map[string]*string
+
 	// The encryption configuration for the cluster.
 	EncryptionConfig []*EncryptionConfig
+
 	// The Kubernetes server version for the cluster.
 	Version *string
 }
 
 // The encryption configuration for the cluster.
 type EncryptionConfig struct {
+
 	// AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN
 	// or the alias can be used.
 	Provider *Provider
+
 	// Specifies the resources to be encrypted. The only supported value is "secrets".
 	Resources []*string
 }
 
 // An object representing an error when an asynchronous operation fails.
 type ErrorDetail struct {
+
 	// An optional field that contains the resource IDs associated with the error.
 	ResourceIds []*string
+
 	// A more complete description of the error.
 	ErrorMessage *string
+
 	// A brief description of the error.
 	//
 	//     * SubnetNotFound: We couldn't find one of
@@ -113,38 +135,49 @@ type ErrorDetail struct {
 
 // An object representing an AWS Fargate profile.
 type FargateProfile struct {
+
 	// The full Amazon Resource Name (ARN) of the Fargate profile.
 	FargateProfileArn *string
+
 	// The IDs of subnets to launch pods into.
 	Subnets []*string
+
 	// The name of the Fargate profile.
 	FargateProfileName *string
+
 	// The Unix epoch timestamp in seconds for when the Fargate profile was created.
 	CreatedAt *time.Time
+
 	// The name of the Amazon EKS cluster that the Fargate profile belongs to.
 	ClusterName *string
+
 	// The metadata applied to the Fargate profile to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Fargate profile tags do not propagate to any other resources
 	// associated with the Fargate profile, such as the pods that are scheduled with
 	// it.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the pod execution role to use for pods that
 	// match the selectors in the Fargate profile. For more information, see Pod
 	// Execution Role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html) in
 	// the Amazon EKS User Guide.
 	PodExecutionRoleArn *string
+
 	// The current status of the Fargate profile.
 	Status FargateProfileStatus
+
 	// The selectors to match for pods to use this Fargate profile.
 	Selectors []*FargateProfileSelector
 }
 
 // An object representing an AWS Fargate profile selector.
 type FargateProfileSelector struct {
+
 	// The Kubernetes namespace that the selector should match.
 	Namespace *string
+
 	// The Kubernetes labels that the selector should match. A pod must contain all of
 	// the labels that are specified in the selector for it to be considered a match.
 	Labels map[string]*string
@@ -152,6 +185,7 @@ type FargateProfileSelector struct {
 
 // An object representing an identity provider for authentication credentials.
 type Identity struct {
+
 	// The OpenID Connect (https://openid.net/connect/) identity provider information
 	// for the cluster.
 	Oidc *OIDC
@@ -159,6 +193,7 @@ type Identity struct {
 
 // An object representing an issue with an Amazon EKS resource.
 type Issue struct {
+
 	// A brief description of the error.
 	//
 	//     * AutoScalingGroupNotFound: We couldn't
@@ -217,14 +252,17 @@ type Issue struct {
 	//     * InternalFailure: These errors are usually caused by an Amazon EKS
 	// server-side issue.
 	Code NodegroupIssueCode
+
 	// The error message associated with the issue.
 	Message *string
+
 	// The AWS resources that are afflicted by this issue.
 	ResourceIds []*string
 }
 
 // An object representing the logging configuration for resources in your cluster.
 type Logging struct {
+
 	// The cluster control plane logging configuration for your cluster.
 	ClusterLogging []*LogSetup
 }
@@ -232,42 +270,53 @@ type Logging struct {
 // An object representing the enabled or disabled Kubernetes control plane logs for
 // your cluster.
 type LogSetup struct {
+
 	// If a log type is enabled, that log type exports its control plane logs to
 	// CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its
 	// control plane logs. Each individual log type can be enabled or disabled
 	// independently.
 	Enabled *bool
+
 	// The available cluster control plane log types.
 	Types []LogType
 }
 
 // An object representing an Amazon EKS managed node group.
 type Nodegroup struct {
+
 	// The resources associated with the node group, such as Auto Scaling groups and
 	// security groups for remote access.
 	Resources *NodegroupResources
+
 	// The AMI version of the managed node group. For more information, see Amazon
 	// EKS-Optimized Linux AMI Versions
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
 	// in the Amazon EKS User Guide.
 	ReleaseVersion *string
+
 	// The root device disk size (in GiB) for your node group instances. The default
 	// disk size is 20 GiB.
 	DiskSize *int32
+
 	// The remote access (SSH) configuration that is associated with the node group.
 	RemoteAccess *RemoteAccessConfig
+
 	// The Kubernetes labels applied to the nodes in the node group. Only labels that
 	// are applied with the Amazon EKS API are shown here. There may be other
 	// Kubernetes labels applied to the nodes in this group.
 	Labels map[string]*string
+
 	// The name of the cluster that the managed node group resides in.
 	ClusterName *string
+
 	// The Unix epoch timestamp in seconds for when the managed node group was last
 	// modified.
 	ModifiedAt *time.Time
+
 	// The scaling configuration details for the Auto Scaling group that is associated
 	// with your node group.
 	ScalingConfig *NodegroupScalingConfig
+
 	// The IAM role associated with your node group. The Amazon EKS worker node kubelet
 	// daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions
 	// for these API calls through an IAM instance profile and associated policies.
@@ -277,40 +326,51 @@ type Nodegroup struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html) in
 	// the Amazon EKS User Guide .
 	NodeRole *string
+
 	// The current status of the managed node group.
 	Status NodegroupStatus
+
 	// The health status of the node group. If there are issues with your node group's
 	// health, they are listed here.
 	Health *NodegroupHealth
+
 	// The metadata applied to the node group to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Node group tags do not propagate to any other resources associated
 	// with the node group, such as the Amazon EC2 instances or subnets.
 	Tags map[string]*string
+
 	// The Kubernetes version of the managed node group.
 	Version *string
+
 	// The Amazon Resource Name (ARN) associated with the managed node group.
 	NodegroupArn *string
+
 	// The AMI type associated with your node group. GPU instance types should use the
 	// AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU
 	// support. Non-GPU instances should use the AL2_x86_64 AMI type, which uses the
 	// Amazon EKS-optimized Linux AMI.
 	AmiType AMITypes
+
 	// The subnets allowed for the Auto Scaling group that is associated with your node
 	// group. These subnets must have the following tag:
 	// kubernetes.io/cluster/CLUSTER_NAME, where CLUSTER_NAME is replaced with the name
 	// of your cluster.
 	Subnets []*string
+
 	// The name associated with an Amazon EKS managed node group.
 	NodegroupName *string
+
 	// The Unix epoch timestamp in seconds for when the managed node group was created.
 	CreatedAt *time.Time
+
 	// The instance types associated with your node group.
 	InstanceTypes []*string
 }
 
 // An object representing the health status of the node group.
 type NodegroupHealth struct {
+
 	// Any issues that are associated with the node group.
 	Issues []*Issue
 }
@@ -318,8 +378,10 @@ type NodegroupHealth struct {
 // An object representing the resources associated with the node group, such as
 // Auto Scaling groups and security groups for remote access.
 type NodegroupResources struct {
+
 	// The Auto Scaling groups associated with the node group.
 	AutoScalingGroups []*AutoScalingGroup
+
 	// The remote access security group associated with the node group. This security
 	// group controls SSH access to the worker nodes.
 	RemoteAccessSecurityGroup *string
@@ -328,11 +390,14 @@ type NodegroupResources struct {
 // An object representing the scaling configuration details for the Auto Scaling
 // group that is associated with your node group.
 type NodegroupScalingConfig struct {
+
 	// The maximum number of worker nodes that the managed node group can scale out to.
 	// Managed node groups can support up to 100 nodes by default.
 	MaxSize *int32
+
 	// The current number of worker nodes that the managed node group should maintain.
 	DesiredSize *int32
+
 	// The minimum number of worker nodes that the managed node group can scale in to.
 	// This number must be greater than zero.
 	MinSize *int32
@@ -341,6 +406,7 @@ type NodegroupScalingConfig struct {
 // An object representing the OpenID Connect (https://openid.net/connect/) identity
 // provider information for the cluster.
 type OIDC struct {
+
 	// The issuer URL for the OpenID Connect identity provider.
 	Issuer *string
 }
@@ -348,6 +414,7 @@ type OIDC struct {
 // Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK)
 // used to encrypt the secrets.
 type Provider struct {
+
 	// Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK
 	// must be symmetric, created in the same region as the cluster, and if the CMK was
 	// created in a different account, the user must have access to the CMK. For more
@@ -360,6 +427,7 @@ type Provider struct {
 // An object representing the remote access configuration for the managed node
 // group.
 type RemoteAccessConfig struct {
+
 	// The security groups that are allowed SSH access (port 22) to the worker nodes.
 	// If you specify an Amazon EC2 SSH key but do not specify a source security group
 	// when you create a managed node group, then port 22 on the worker nodes is opened
@@ -367,6 +435,7 @@ type RemoteAccessConfig struct {
 	// VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
 	// in the Amazon Virtual Private Cloud User Guide.
 	SourceSecurityGroups []*string
+
 	// The Amazon EC2 SSH key that provides access for SSH communication with the
 	// worker nodes in the managed node group. For more information, see Amazon EC2 Key
 	// Pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
@@ -376,38 +445,49 @@ type RemoteAccessConfig struct {
 
 // An object representing an asynchronous update.
 type Update struct {
+
 	// A key-value map that contains the parameters associated with the update.
 	Params []*UpdateParam
+
 	// A UUID that is used to track the update.
 	Id *string
+
 	// The current status of the update.
 	Status UpdateStatus
+
 	// The type of the update.
 	Type UpdateType
+
 	// Any errors associated with a Failed update.
 	Errors []*ErrorDetail
+
 	// The Unix epoch timestamp in seconds for when the update was created.
 	CreatedAt *time.Time
 }
 
 // An object representing a Kubernetes label change for a managed node group.
 type UpdateLabelsPayload struct {
+
 	// Kubernetes labels to be removed.
 	RemoveLabels []*string
+
 	// Kubernetes labels to be added or updated.
 	AddOrUpdateLabels map[string]*string
 }
 
 // An object representing the details of an update request.
 type UpdateParam struct {
+
 	// The keys associated with an update request.
 	Type UpdateParamType
+
 	// The value of the keys submitted as part of an update request.
 	Value *string
 }
 
 // An object representing the VPC configuration to use for an Amazon EKS cluster.
 type VpcConfigRequest struct {
+
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
 	// server endpoint. Communication to the endpoint from addresses outside of the
 	// CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If
@@ -417,6 +497,7 @@ type VpcConfigRequest struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	PublicAccessCidrs []*string
+
 	// Set this value to true to enable private access for your cluster's Kubernetes
 	// API server endpoint. If you enable private access, Kubernetes API requests from
 	// within your cluster's VPC use the private VPC endpoint. The default value for
@@ -428,15 +509,18 @@ type VpcConfigRequest struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	EndpointPrivateAccess *bool
+
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between your
 	// worker nodes and the Kubernetes control plane. If you don't specify a security
 	// group, the default security group for your VPC is used.
 	SecurityGroupIds []*string
+
 	// Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates
 	// cross-account elastic network interfaces in these subnets to allow communication
 	// between your worker nodes and the Kubernetes control plane.
 	SubnetIds []*string
+
 	// Set this value to false to disable public access to your cluster's Kubernetes
 	// API server endpoint. If you disable public access, your cluster's Kubernetes API
 	// server can only receive requests from within the cluster VPC. The default value
@@ -449,6 +533,7 @@ type VpcConfigRequest struct {
 
 // An object representing an Amazon EKS cluster VPC configuration response.
 type VpcConfigResponse struct {
+
 	// This parameter indicates whether the Amazon EKS private API server endpoint is
 	// enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes
 	// API requests that originate from within your cluster's VPC use the private VPC
@@ -460,12 +545,15 @@ type VpcConfigResponse struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	EndpointPrivateAccess *bool
+
 	// The security groups associated with the cross-account elastic network interfaces
 	// that are used to allow communication between your worker nodes and the
 	// Kubernetes control plane.
 	SecurityGroupIds []*string
+
 	// The VPC associated with your cluster.
 	VpcId *string
+
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
 	// server endpoint. Communication to the endpoint from addresses outside of the
 	// listed CIDR blocks is denied. The default value is 0.0.0.0/0. If you've disabled
@@ -475,15 +563,18 @@ type VpcConfigResponse struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	PublicAccessCidrs []*string
+
 	// This parameter indicates whether the Amazon EKS public API server endpoint is
 	// enabled. If the Amazon EKS public API server endpoint is disabled, your
 	// cluster's Kubernetes API server can only receive requests that originate from
 	// within the cluster VPC.
 	EndpointPublicAccess *bool
+
 	// The cluster security group that was created by Amazon EKS for the cluster.
 	// Managed node groups use this security group for control-plane-to-data-plane
 	// communication.
 	ClusterSecurityGroupId *string
+
 	// The subnets associated with your cluster.
 	SubnetIds []*string
 }

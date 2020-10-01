@@ -59,18 +59,26 @@ func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSele
 }
 
 type PutInsightSelectorsInput struct {
+
 	// The name of the CloudTrail trail for which you want to change or add Insights
 	// selectors.
+	//
+	// This member is required.
 	TrailName *string
+
 	// A JSON string that contains the insight types you want to log on a trail. In
 	// this release, only ApiCallRateInsight is supported as an insight type.
+	//
+	// This member is required.
 	InsightSelectors []*types.InsightSelector
 }
 
 type PutInsightSelectorsOutput struct {
+
 	// A JSON string that contains the insight types you want to log on a trail. In
 	// this release, only ApiCallRateInsight is supported as an insight type.
 	InsightSelectors []*types.InsightSelector
+
 	// The Amazon Resource Name (ARN) of a trail for which you want to change or add
 	// Insights selectors.
 	TrailARN *string

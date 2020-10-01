@@ -54,10 +54,13 @@ func (c *Client) UpdateSkillGroup(ctx context.Context, params *UpdateSkillGroupI
 }
 
 type UpdateSkillGroupInput struct {
+
 	// The updated name for the skill group.
 	SkillGroupName *string
+
 	// The ARN of the skill group to update.
 	SkillGroupArn *string
+
 	// The updated description for the skill group.
 	Description *string
 }

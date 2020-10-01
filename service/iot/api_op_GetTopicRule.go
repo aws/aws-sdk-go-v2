@@ -57,14 +57,19 @@ func (c *Client) GetTopicRule(ctx context.Context, params *GetTopicRuleInput, op
 
 // The input for the GetTopicRule operation.
 type GetTopicRuleInput struct {
+
 	// The name of the rule.
+	//
+	// This member is required.
 	RuleName *string
 }
 
 // The output from the GetTopicRule operation.
 type GetTopicRuleOutput struct {
+
 	// The rule.
 	Rule *types.TopicRule
+
 	// The rule ARN.
 	RuleArn *string
 

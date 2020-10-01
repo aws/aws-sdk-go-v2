@@ -12,7 +12,21 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the specified access point.
+// Deletes the specified access point.  <p>All Amazon S3 on Outposts REST API
+// requests for this action require an additional parameter of outpost-id to be
+// passed with the request and an S3 on Outposts endpoint hostname prefix instead
+// of s3-control. For an example of the request syntax for Amazon S3 on Outposts
+// that uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
+// using the access point ARN, see the ARN, see the <a
+// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples">
+// Example</a> section below.</p> <p>The following actions are related to
+// <code>DeleteAccessPoint</code>:</p> <ul> <li> <p> <a
+// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html">CreateAccessPoint</a>
+// </p> </li> <li> <p> <a
+// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html">GetAccessPoint</a>
+// </p> </li> <li> <p> <a
+// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html">ListAccessPoints</a>
+// </p> </li> </ul>
 func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPointInput, optFns ...func(*Options)) (*DeleteAccessPointOutput, error) {
 	stack := middleware.NewStack("DeleteAccessPoint", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -56,9 +70,21 @@ func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPoin
 }
 
 type DeleteAccessPointInput struct {
+
 	// The account ID for the account that owns the specified access point.
+	//
+	// This member is required.
 	AccountId *string
-	// The name of the access point you want to delete.
+
+	// The name of the access point you want to delete. For Amazon S3 on Outposts
+	// specify the ARN of the access point accessed in the format
+	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
+	// point reports-ap through outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
+	// The value must be URL encoded.
+	//
+	// This member is required.
 	Name *string
 }
 

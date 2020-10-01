@@ -85,18 +85,26 @@ func (c *Client) CreateGeoMatchSet(ctx context.Context, params *CreateGeoMatchSe
 }
 
 type CreateGeoMatchSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// A friendly name or description of the GeoMatchSet (). You can't change Name
 	// after you create the GeoMatchSet.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateGeoMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the CreateGeoMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// The GeoMatchSet () returned in the CreateGeoMatchSet response. The GeoMatchSet
 	// contains no GeoMatchConstraints.
 	GeoMatchSet *types.GeoMatchSet

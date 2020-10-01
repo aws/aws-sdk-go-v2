@@ -56,14 +56,23 @@ func (c *Client) UpdateApprovalRuleTemplateName(ctx context.Context, params *Upd
 }
 
 type UpdateApprovalRuleTemplateNameInput struct {
+
 	// The new name you want to apply to the approval rule template.
+	//
+	// This member is required.
 	NewApprovalRuleTemplateName *string
+
 	// The current name of the approval rule template.
+	//
+	// This member is required.
 	OldApprovalRuleTemplateName *string
 }
 
 type UpdateApprovalRuleTemplateNameOutput struct {
+
 	// The structure and content of the updated approval rule template.
+	//
+	// This member is required.
 	ApprovalRuleTemplate *types.ApprovalRuleTemplate
 
 	// Metadata pertaining to the operation's result.

@@ -55,6 +55,7 @@ func (c *Client) ListTrails(ctx context.Context, params *ListTrailsInput, optFns
 }
 
 type ListTrailsInput struct {
+
 	// The token to use to get the next page of results after a previous API call. This
 	// token must be passed in with the same parameters that were specified in the the
 	// original call. For example, if the original call specified an AttributeKey of
@@ -64,8 +65,10 @@ type ListTrailsInput struct {
 }
 
 type ListTrailsOutput struct {
+
 	// Returns the name, ARN, and home region of trails in the current account.
 	Trails []*types.TrailInfo
+
 	// The token to use to get the next page of results after a previous API call. If
 	// the token does not appear, there are no more results to return. The token must
 	// be passed in with the same parameters as the previous call. For example, if the

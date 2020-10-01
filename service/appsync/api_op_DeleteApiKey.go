@@ -55,9 +55,15 @@ func (c *Client) DeleteApiKey(ctx context.Context, params *DeleteApiKeyInput, op
 }
 
 type DeleteApiKeyInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The ID for the API key.
+	//
+	// This member is required.
 	Id *string
 }
 

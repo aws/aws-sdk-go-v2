@@ -93,6 +93,7 @@ func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackf
 
 // Represents the input for a request action.
 type StartMatchBackfillInput struct {
+
 	// Match information on all players that are currently assigned to the game
 	// session. This information is used by the matchmaker to find new players and add
 	// them to the existing game.
@@ -107,17 +108,26 @@ type StartMatchBackfillInput struct {
 	// * LatencyInMs -\\- If the matchmaker uses player latency, include a latency
 	// value, in milliseconds, for the Region that the game session is currently in. Do
 	// not include latency values for any other Region.
+	//
+	// This member is required.
 	Players []*types.Player
+
 	// Name of the matchmaker to use for this request. You can use either the
 	// configuration name or ARN value. The ARN of the matchmaker that was used with
 	// the original game session is listed in the GameSession () object, MatchmakerData
 	// property.
+	//
+	// This member is required.
 	ConfigurationName *string
+
 	// Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// that is assigned to a game session and uniquely identifies it. This is the same
 	// as the game session ID.
+	//
+	// This member is required.
 	GameSessionArn *string
+
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
 	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
 	// track the match backfill ticket status and retrieve match results.
@@ -126,6 +136,7 @@ type StartMatchBackfillInput struct {
 
 // Represents the returned data in response to a request action.
 type StartMatchBackfillOutput struct {
+
 	// Ticket representing the backfill matchmaking request. This object includes the
 	// information in the request, ticket status, and match results as generated during
 	// the matchmaking process.

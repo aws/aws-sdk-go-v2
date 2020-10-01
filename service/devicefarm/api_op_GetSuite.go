@@ -57,12 +57,16 @@ func (c *Client) GetSuite(ctx context.Context, params *GetSuiteInput, optFns ...
 
 // Represents a request to the get suite operation.
 type GetSuiteInput struct {
+
 	// The suite's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get suite request.
 type GetSuiteOutput struct {
+
 	// A collection of one or more tests.
 	Suite *types.Suite
 

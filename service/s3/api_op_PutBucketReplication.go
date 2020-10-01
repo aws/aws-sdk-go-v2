@@ -101,16 +101,24 @@ func (c *Client) PutBucketReplication(ctx context.Context, params *PutBucketRepl
 }
 
 type PutBucketReplicationInput struct {
+
 	// The name of the bucket
+	//
+	// This member is required.
 	Bucket *string
+
 	// A container for replication rules. You can add up to 1,000 rules. The maximum
 	// size of a replication configuration is 2 MB.
+	//
+	// This member is required.
 	ReplicationConfiguration *types.ReplicationConfiguration
+
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
+
 	//
 	Token *string
 }

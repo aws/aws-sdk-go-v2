@@ -72,8 +72,11 @@ func (c *Client) DeleteBucketEncryption(ctx context.Context, params *DeleteBucke
 }
 
 type DeleteBucketEncryptionInput struct {
+
 	// The name of the bucket containing the server-side encryption configuration to
 	// delete.
+	//
+	// This member is required.
 	Bucket *string
 }
 

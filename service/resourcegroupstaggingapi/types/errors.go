@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The target of the operation is currently being modified by a different request.
@@ -27,12 +26,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was denied because performing this operation violates a constraint.
 // Some of the reasons in the following list might not apply to this specific
@@ -66,12 +59,6 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 }
 func (e *ConstraintViolationException) ErrorCode() string             { return "ConstraintViolationException" }
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConstraintViolationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConstraintViolationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request processing failed because of an unknown error, exception, or
 // failure. You can retry the request.
@@ -90,12 +77,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This error indicates one of the following:
 //
@@ -130,12 +111,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A PaginationToken is valid for a maximum of 15 minutes. Your request was denied
 // because the specified PaginationToken has expired.
@@ -156,12 +131,6 @@ func (e *PaginationTokenExpiredException) ErrorCode() string {
 	return "PaginationTokenExpiredException"
 }
 func (e *PaginationTokenExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PaginationTokenExpiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PaginationTokenExpiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was denied to limit the frequency of submitted requests.
 type ThrottledException struct {
@@ -179,9 +148,3 @@ func (e *ThrottledException) ErrorMessage() string {
 }
 func (e *ThrottledException) ErrorCode() string             { return "ThrottledException" }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottledException) HasMessage() bool {
-	return e.Message != nil
-}

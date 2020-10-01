@@ -62,13 +62,17 @@ func (c *Client) GetSizeConstraintSet(ctx context.Context, params *GetSizeConstr
 }
 
 type GetSizeConstraintSetInput struct {
+
 	// The SizeConstraintSetId of the SizeConstraintSet () that you want to get.
 	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
 	// ListSizeConstraintSets ().
+	//
+	// This member is required.
 	SizeConstraintSetId *string
 }
 
 type GetSizeConstraintSetOutput struct {
+
 	// Information about the SizeConstraintSet () that you specified in the
 	// GetSizeConstraintSet request. For more information, see the following topics:
 	//

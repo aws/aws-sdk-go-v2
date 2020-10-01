@@ -56,19 +56,26 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 }
 
 type ListDataSourcesInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The maximum number of results you want the request to return.
 	MaxResults *int32
 }
 
 type ListDataSourcesOutput struct {
+
 	// An identifier to be passed in the next request to this operation to return the
 	// next set of items in the list.
 	NextToken *string
+
 	// The DataSource objects.
 	DataSources []*types.DataSource
 

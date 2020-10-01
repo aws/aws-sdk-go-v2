@@ -64,21 +64,32 @@ func (c *Client) GetBlock(ctx context.Context, params *GetBlockInput, optFns ...
 }
 
 type GetBlockInput struct {
+
 	// The location of the block that you want to request. An address is an Amazon Ion
 	// structure that has two fields: strandId and sequenceNo. For example:
 	// {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}
+	//
+	// This member is required.
 	BlockAddress *types.ValueHolder
+
 	// The latest block location covered by the digest for which to request a proof. An
 	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
 	DigestTipAddress *types.ValueHolder
+
 	// The name of the ledger.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetBlockOutput struct {
+
 	// The block data object in Amazon Ion format.
+	//
+	// This member is required.
 	Block *types.ValueHolder
+
 	// The proof object in Amazon Ion format returned by a GetBlock request. A proof
 	// contains the list of hash values required to recalculate the specified digest
 	// using a Merkle tree, starting with the specified block.

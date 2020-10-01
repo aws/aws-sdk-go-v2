@@ -71,6 +71,7 @@ func (c *Client) DescribeUsageLimits(ctx context.Context, params *DescribeUsageL
 }
 
 type DescribeUsageLimitsInput struct {
+
 	// A tag key or keys for which you want to return all matching usage limit objects
 	// that are associated with the specified key or keys. For example, suppose that
 	// you have parameter groups that are tagged with keys called owner and
@@ -78,24 +79,30 @@ type DescribeUsageLimitsInput struct {
 	// Redshift returns a response with the usage limit objects have either or both of
 	// these tag keys associated with them.
 	TagKeys []*string
+
 	// The feature type for which you want to describe usage limits.
 	FeatureType types.UsageLimitFeatureType
+
 	// The identifier of the usage limit to describe.
 	UsageLimitId *string
+
 	// The identifier of the cluster for which you want to describe usage limits.
 	ClusterIdentifier *string
+
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeUsageLimits () request exceed
 	// the value specified in MaxRecords, AWS returns a value in the Marker field of
 	// the response. You can retrieve the next set of response records by providing the
 	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
+
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
 	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// A tag value or values for which you want to return all matching usage limit
 	// objects that are associated with the specified tag value or values. For example,
 	// suppose that you have parameter groups that are tagged with values called admin
@@ -106,12 +113,14 @@ type DescribeUsageLimitsInput struct {
 }
 
 type DescribeUsageLimitsOutput struct {
+
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
 	// the next set of records by providing this returned marker value in the Marker
 	// parameter and retrying the command. If the Marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
+
 	// Contains the output from the DescribeUsageLimits () action.
 	UsageLimits []*types.UsageLimit
 

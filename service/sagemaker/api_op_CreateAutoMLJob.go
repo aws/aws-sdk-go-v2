@@ -62,36 +62,56 @@ func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInp
 }
 
 type CreateAutoMLJobInput struct {
+
 	// Identifies an AutoPilot job. Must be unique to your account and is
 	// case-insensitive.
+	//
+	// This member is required.
 	AutoMLJobName *string
+
 	// Defines the job's objective. You provide a MetricName and AutoML will infer
 	// minimize or maximize. If this is not provided, the most commonly used
 	// ObjectiveMetric for problem type will be selected.
 	AutoMLJobObjective *types.AutoMLJobObjective
+
 	// Defines the kind of preprocessing and algorithms intended for the candidates.
 	// Options include: BinaryClassification, MulticlassClassification, and Regression.
 	ProblemType types.ProblemType
+
 	// Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV.
 	// Minimum of 1000 rows.
+	//
+	// This member is required.
 	InputDataConfig []*types.AutoMLChannel
+
 	// The ARN of the role that will be used to access the data.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// Contains CompletionCriteria and SecurityConfig.
 	AutoMLJobConfig *types.AutoMLJobConfig
+
 	// This will generate possible candidates without training a model. A candidate is
 	// a combination of data preprocessors, algorithms, and algorithm parameter
 	// settings.
 	GenerateCandidateDefinitionsOnly *bool
+
 	// Similar to OutputDataConfig supported by Tuning. Format(s) supported: CSV.
+	//
+	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
+
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
 	Tags []*types.Tag
 }
 
 type CreateAutoMLJobOutput struct {
+
 	// When a job is created, it is assigned a unique ARN.
+	//
+	// This member is required.
 	AutoMLJobArn *string
 
 	// Metadata pertaining to the operation's result.

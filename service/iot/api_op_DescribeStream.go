@@ -56,11 +56,15 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 }
 
 type DescribeStreamInput struct {
+
 	// The stream ID.
+	//
+	// This member is required.
 	StreamId *string
 }
 
 type DescribeStreamOutput struct {
+
 	// Information about the stream.
 	StreamInfo *types.StreamInfo
 

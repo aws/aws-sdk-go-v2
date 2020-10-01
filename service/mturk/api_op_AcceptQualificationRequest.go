@@ -58,11 +58,15 @@ func (c *Client) AcceptQualificationRequest(ctx context.Context, params *AcceptQ
 }
 
 type AcceptQualificationRequestInput struct {
+
 	// The value of the Qualification. You can omit this value if you are using the
 	// presence or absence of the Qualification as the basis for a HIT requirement.
 	IntegerValue *int32
+
 	// The ID of the Qualification request, as returned by the GetQualificationRequests
 	// operation.
+	//
+	// This member is required.
 	QualificationRequestId *string
 }
 

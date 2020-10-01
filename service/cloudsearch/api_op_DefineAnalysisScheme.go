@@ -62,22 +62,31 @@ func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysi
 // Container for the parameters to the DefineAnalysisScheme () operation. Specifies
 // the name of the domain you want to update and the analysis scheme configuration.
 type DefineAnalysisSchemeInput struct {
+
 	// Configuration information for an analysis scheme. Each analysis scheme has a
 	// unique name and specifies the language of the text to be processed. The
 	// following options can be configured for an analysis scheme: Synonyms, Stopwords,
 	// StemmingDictionary, JapaneseTokenizationDictionary and AlgorithmicStemming.
+	//
+	// This member is required.
 	AnalysisScheme *types.AnalysisScheme
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DefineAnalysisScheme () request. Contains the status of the
 // newly-configured analysis scheme.
 type DefineAnalysisSchemeOutput struct {
+
 	// The status and configuration of an AnalysisScheme.
+	//
+	// This member is required.
 	AnalysisScheme *types.AnalysisSchemeStatus
 
 	// Metadata pertaining to the operation's result.

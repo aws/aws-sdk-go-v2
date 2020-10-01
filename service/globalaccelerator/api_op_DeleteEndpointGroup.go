@@ -55,7 +55,10 @@ func (c *Client) DeleteEndpointGroup(ctx context.Context, params *DeleteEndpoint
 }
 
 type DeleteEndpointGroupInput struct {
+
 	// The Amazon Resource Name (ARN) of the endpoint group to delete.
+	//
+	// This member is required.
 	EndpointGroupArn *string
 }
 

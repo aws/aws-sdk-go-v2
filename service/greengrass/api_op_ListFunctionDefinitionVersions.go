@@ -56,18 +56,25 @@ func (c *Client) ListFunctionDefinitionVersions(ctx context.Context, params *Lis
 }
 
 type ListFunctionDefinitionVersionsInput struct {
+
 	// The ID of the Lambda function definition.
+	//
+	// This member is required.
 	FunctionDefinitionId *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 }
 
 type ListFunctionDefinitionVersionsOutput struct {
+
 	// Information about a version.
 	Versions []*types.VersionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

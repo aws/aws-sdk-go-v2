@@ -61,20 +61,25 @@ func (c *Client) DescribeDirectoryConfigs(ctx context.Context, params *DescribeD
 }
 
 type DescribeDirectoryConfigsInput struct {
+
 	// The directory names.
 	DirectoryNames []*string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
 	// The maximum size of each page of results.
 	MaxResults *int32
 }
 
 type DescribeDirectoryConfigsOutput struct {
+
 	// Information about the directory configurations. Note that although the response
 	// syntax in this topic includes the account password, this password is not
 	// returned in the actual response.
 	DirectoryConfigs []*types.DirectoryConfig
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

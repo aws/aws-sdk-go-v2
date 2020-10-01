@@ -58,13 +58,22 @@ func (c *Client) PutThirdPartyJobFailureResult(ctx context.Context, params *PutT
 
 // Represents the input of a PutThirdPartyJobFailureResult action.
 type PutThirdPartyJobFailureResultInput struct {
+
 	// The clientToken portion of the clientId and clientToken pair used to verify that
 	// the calling entity is allowed access to the job and its details.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The ID of the job that failed. This is the same ID returned from
 	// PollForThirdPartyJobs.
+	//
+	// This member is required.
 	JobId *string
+
 	// Represents information about failure details.
+	//
+	// This member is required.
 	FailureDetails *types.FailureDetails
 }
 

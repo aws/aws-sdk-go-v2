@@ -59,14 +59,21 @@ func (c *Client) DetachLoadBalancerFromSubnets(ctx context.Context, params *Deta
 
 // Contains the parameters for DetachLoadBalancerFromSubnets.
 type DetachLoadBalancerFromSubnetsInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The IDs of the subnets.
+	//
+	// This member is required.
 	Subnets []*string
 }
 
 // Contains the output of DetachLoadBalancerFromSubnets.
 type DetachLoadBalancerFromSubnetsOutput struct {
+
 	// The IDs of the remaining subnets for the load balancer.
 	Subnets []*string
 

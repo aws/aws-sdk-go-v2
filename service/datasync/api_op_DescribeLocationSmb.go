@@ -58,27 +58,37 @@ func (c *Client) DescribeLocationSmb(ctx context.Context, params *DescribeLocati
 
 // DescribeLocationSmbRequest
 type DescribeLocationSmbInput struct {
+
 	// The Amazon Resource Name (ARN) of the SMB location to describe.
+	//
+	// This member is required.
 	LocationArn *string
 }
 
 // DescribeLocationSmbResponse
 type DescribeLocationSmbOutput struct {
+
 	// The Amazon Resource Name (ARN) of the SMB location that was described.
 	LocationArn *string
+
 	// The Amazon Resource Name (ARN) of the source SMB file system location that is
 	// created.
 	AgentArns []*string
+
 	// The time that the SMB location was created.
 	CreationTime *time.Time
+
 	// The user who can mount the share, has the permissions to access files and
 	// folders in the SMB share.
 	User *string
+
 	// The name of the Windows domain that the SMB server belongs to.
 	Domain *string
+
 	// The mount options that are available for DataSync to use to access an SMB
 	// location.
 	MountOptions *types.SmbMountOptions
+
 	// The URL of the source SBM location that was described.
 	LocationUri *string
 

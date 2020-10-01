@@ -59,11 +59,15 @@ func (c *Client) GetOperation(ctx context.Context, params *GetOperationInput, op
 }
 
 type GetOperationInput struct {
+
 	// The ID of the operation that you want to get more information about.
+	//
+	// This member is required.
 	OperationId *string
 }
 
 type GetOperationOutput struct {
+
 	// A complex type that contains information about the operation.
 	Operation *types.Operation
 

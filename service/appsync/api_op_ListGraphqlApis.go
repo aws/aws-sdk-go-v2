@@ -55,17 +55,21 @@ func (c *Client) ListGraphqlApis(ctx context.Context, params *ListGraphqlApisInp
 }
 
 type ListGraphqlApisInput struct {
+
 	// The maximum number of results you want the request to return.
 	MaxResults *int32
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
 }
 
 type ListGraphqlApisOutput struct {
+
 	// An identifier to be passed in the next request to this operation to return the
 	// next set of items in the list.
 	NextToken *string
+
 	// The GraphqlApi objects.
 	GraphqlApis []*types.GraphqlApi
 

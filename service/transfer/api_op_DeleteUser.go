@@ -57,11 +57,17 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 }
 
 type DeleteUserInput struct {
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// instance that has the user assigned to it.
+	//
+	// This member is required.
 	ServerId *string
+
 	// A unique string that identifies a user that is being deleted from a file
 	// transfer protocol-enabled server.
+	//
+	// This member is required.
 	UserName *string
 }
 

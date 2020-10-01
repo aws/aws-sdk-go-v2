@@ -56,18 +56,25 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 // The name of the policy.
 type PutResourcePolicyInput struct {
+
 	// The revision ID of the policy.
 	RevisionId *string
+
 	// The resource-based policy.
 	// This value conforms to the media type: application/json
+	//
+	// This member is required.
 	Policy *string
+
 	// The name of the registry.
 	RegistryName *string
 }
 
 type PutResourcePolicyOutput struct {
+
 	// The revision ID of the policy.
 	RevisionId *string
+
 	// The resource-based policy.
 	// This value conforms to the media type: application/json
 	Policy *string

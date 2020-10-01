@@ -60,15 +60,18 @@ func (c *Client) ListSubscriptions(ctx context.Context, params *ListSubscription
 
 // Input for ListSubscriptions action.
 type ListSubscriptionsInput struct {
+
 	// Token returned by the previous ListSubscriptions request.
 	NextToken *string
 }
 
 // Response for ListSubscriptions action
 type ListSubscriptionsOutput struct {
+
 	// Token to pass along to the next ListSubscriptions request. This element is
 	// returned if there are more subscriptions to retrieve.
 	NextToken *string
+
 	// A list of subscriptions.
 	Subscriptions []*types.Subscription
 

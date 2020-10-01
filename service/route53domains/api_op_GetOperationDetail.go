@@ -60,23 +60,32 @@ func (c *Client) GetOperationDetail(ctx context.Context, params *GetOperationDet
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // request includes the following element.
 type GetOperationDetailInput struct {
+
 	// The identifier for the operation for which you want to get the status. Route 53
 	// returned the identifier in the response to the original request.
+	//
+	// This member is required.
 	OperationId *string
 }
 
 // The GetOperationDetail response includes the following elements.
 type GetOperationDetailOutput struct {
+
 	// Detailed information on the status including possible errors.
 	Message *string
+
 	// The type of operation that was requested.
 	Type types.OperationType
+
 	// The name of a domain.
 	DomainName *string
+
 	// The date when the request was submitted.
 	SubmittedDate *time.Time
+
 	// The identifier for the operation.
 	OperationId *string
+
 	// The current status of the requested operation in the system.
 	Status types.OperationStatus
 

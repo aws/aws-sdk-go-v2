@@ -61,13 +61,17 @@ func (c *Client) DescribeStorediSCSIVolumes(ctx context.Context, params *Describ
 // A JSON object containing a list of DescribeStorediSCSIVolumesInput$VolumeARNs
 // ().
 type DescribeStorediSCSIVolumesInput struct {
+
 	// An array of strings where each string represents the Amazon Resource Name (ARN)
 	// of a stored volume. All of the specified stored volumes must be from the same
 	// gateway. Use ListVolumes () to get volume ARNs for a gateway.
+	//
+	// This member is required.
 	VolumeARNs []*string
 }
 
 type DescribeStorediSCSIVolumesOutput struct {
+
 	// Describes a single unit of output from DescribeStorediSCSIVolumes (). The
 	// following fields are returned:  <ul> <li> <p> <code>ChapEnabled</code>:
 	// Indicates whether mutual CHAP is enabled for the iSCSI target.</p> </li> <li>

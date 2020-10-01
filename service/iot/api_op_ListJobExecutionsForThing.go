@@ -56,20 +56,28 @@ func (c *Client) ListJobExecutionsForThing(ctx context.Context, params *ListJobE
 }
 
 type ListJobExecutionsForThingInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// The thing name.
+	//
+	// This member is required.
 	ThingName *string
+
 	// An optional filter that lets you search for jobs that have the specified status.
 	Status types.JobExecutionStatus
 }
 
 type ListJobExecutionsForThingOutput struct {
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// A list of job execution summaries.
 	ExecutionSummaries []*types.JobExecutionSummaryForThing
 

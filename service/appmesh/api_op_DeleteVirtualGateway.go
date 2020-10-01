@@ -56,10 +56,17 @@ func (c *Client) DeleteVirtualGateway(ctx context.Context, params *DeleteVirtual
 }
 
 type DeleteVirtualGatewayInput struct {
+
 	// The name of the virtual gateway to delete.
+	//
+	// This member is required.
 	VirtualGatewayName *string
+
 	// The name of the service mesh to delete the virtual gateway from.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -68,7 +75,10 @@ type DeleteVirtualGatewayInput struct {
 }
 
 type DeleteVirtualGatewayOutput struct {
+
 	// The virtual gateway that was deleted.
+	//
+	// This member is required.
 	VirtualGateway *types.VirtualGatewayData
 
 	// Metadata pertaining to the operation's result.

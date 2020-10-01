@@ -56,19 +56,31 @@ func (c *Client) CopyWorkspaceImage(ctx context.Context, params *CopyWorkspaceIm
 }
 
 type CopyWorkspaceImageInput struct {
+
 	// The name of the image.
+	//
+	// This member is required.
 	Name *string
+
 	// The identifier of the source image.
+	//
+	// This member is required.
 	SourceImageId *string
+
 	// The tags for the image.
 	Tags []*types.Tag
+
 	// The identifier of the source Region.
+	//
+	// This member is required.
 	SourceRegion *string
+
 	// A description of the image.
 	Description *string
 }
 
 type CopyWorkspaceImageOutput struct {
+
 	// The identifier of the image.
 	ImageId *string
 

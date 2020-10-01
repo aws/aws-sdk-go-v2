@@ -56,31 +56,47 @@ func (c *Client) DescribeSchema(ctx context.Context, params *DescribeSchemaInput
 }
 
 type DescribeSchemaInput struct {
+
 	// Specifying this limits the results to only this schema version.
 	SchemaVersion *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
 }
 
 type DescribeSchemaOutput struct {
+
 	// The version number of the schema
 	SchemaVersion *string
+
 	// The type of the schema.
 	Type *string
+
 	// Tags associated with the resource.
 	Tags map[string]*string
+
 	// The ARN of the schema.
 	SchemaArn *string
+
 	// The name of the schema.
 	SchemaName *string
+
 	// The date and time that schema was modified.
 	LastModified *time.Time
+
 	// The description of the schema.
 	Description *string
+
 	// The source of the schema definition.
 	Content *string
+
 	// The date the schema version was created.
 	VersionCreatedDate *time.Time
 

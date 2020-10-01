@@ -57,12 +57,16 @@ func (c *Client) ReadPreset(ctx context.Context, params *ReadPresetInput, optFns
 
 // The ReadPresetRequest structure.
 type ReadPresetInput struct {
+
 	// The identifier of the preset for which you want to get detailed information.
+	//
+	// This member is required.
 	Id *string
 }
 
 // The ReadPresetResponse structure.
 type ReadPresetOutput struct {
+
 	// A section of the response body that provides information about the preset.
 	Preset *types.Preset
 

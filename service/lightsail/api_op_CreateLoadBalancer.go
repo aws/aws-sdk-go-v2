@@ -65,33 +65,45 @@ func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalan
 }
 
 type CreateLoadBalancerInput struct {
+
 	// The instance port where you're creating your load balancer.
+	//
+	// This member is required.
 	InstancePort *int32
+
 	// The path you provided to perform the load balancer health check. If you didn't
 	// specify a health check path, Lightsail uses the root path of your website (e.g.,
 	// "/"). You may want to specify a custom health check path other than the root of
 	// your application if your home page loads slowly or has a lot of media or
 	// scripting on it.
 	HealthCheckPath *string
+
 	// The domain name with which your certificate is associated (e.g., example.com).
 	// If you specify certificateDomainName, then certificateName is required (and
 	// vice-versa).
 	CertificateDomainName *string
+
 	// The name of your load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The name of the SSL/TLS certificate. If you specify certificateName, then
 	// certificateDomainName is required (and vice-versa).
 	CertificateName *string
+
 	// The optional alternative domains and subdomains to use with your SSL/TLS
 	// certificate (e.g., www.example.com, example.com, m.example.com,
 	// blog.example.com).
 	CertificateAlternativeNames []*string
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
 }
 
 type CreateLoadBalancerOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

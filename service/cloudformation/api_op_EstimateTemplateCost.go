@@ -58,14 +58,17 @@ func (c *Client) EstimateTemplateCost(ctx context.Context, params *EstimateTempl
 
 // The input for an EstimateTemplateCost () action.
 type EstimateTemplateCostInput struct {
+
 	// A list of Parameter structures that specify input parameters.
 	Parameters []*types.Parameter
+
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody
 	// or TemplateURL. If both are passed, only TemplateBody is used.
 	TemplateBody *string
+
 	// Location of file containing the template body. The URL must point to a template
 	// that is located in an Amazon S3 bucket. For more information, go to Template
 	// Anatomy
@@ -77,6 +80,7 @@ type EstimateTemplateCostInput struct {
 
 // The output for a EstimateTemplateCost () action.
 type EstimateTemplateCostOutput struct {
+
 	// An AWS Simple Monthly Calculator URL with a query string that describes the
 	// resources required to run the template.
 	Url *string

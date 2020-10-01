@@ -56,8 +56,12 @@ func (c *Client) DescribeMesh(ctx context.Context, params *DescribeMeshInput, op
 
 //
 type DescribeMeshInput struct {
+
 	// The name of the service mesh to describe.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -67,7 +71,10 @@ type DescribeMeshInput struct {
 
 //
 type DescribeMeshOutput struct {
+
 	// The full description of your service mesh.
+	//
+	// This member is required.
 	Mesh *types.MeshData
 
 	// Metadata pertaining to the operation's result.

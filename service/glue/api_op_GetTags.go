@@ -55,11 +55,15 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 }
 
 type GetTagsInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource for which to retrieve tags.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type GetTagsOutput struct {
+
 	// The requested tags.
 	Tags map[string]*string
 

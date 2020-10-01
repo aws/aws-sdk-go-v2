@@ -55,13 +55,18 @@ func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optF
 }
 
 type DeleteImageInput struct {
+
 	// The Amazon Resource Name (ARN) of the image to delete.
+	//
+	// This member is required.
 	ImageBuildVersionArn *string
 }
 
 type DeleteImageOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the image that was deleted.
 	ImageBuildVersionArn *string
 

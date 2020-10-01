@@ -56,12 +56,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 // Placeholder documentation for ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
+
 	// Placeholder documentation for __string
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 // Placeholder documentation for ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
+
 	// Placeholder documentation for Tags
 	Tags map[string]*string
 

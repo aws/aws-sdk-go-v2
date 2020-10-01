@@ -62,6 +62,7 @@ func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInp
 
 //
 type ModifyDBClusterInput struct {
+
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
 	//
@@ -76,6 +77,7 @@ type ModifyDBClusterInput struct {
 	//
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string
+
 	// A value that indicates whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is
@@ -88,6 +90,7 @@ type ModifyDBClusterInput struct {
 	// applied immediately, regardless of the value of the ApplyImmediately parameter.
 	// By default, this parameter is disabled.
 	ApplyImmediately *bool
+
 	// The name of the DB parameter group to apply to all instances of the DB cluster.
 	// When you apply a parameter group using the DBInstanceParameterGroupName
 	// parameter, the DB cluster isn't rebooted automatically. Also, parameter changes
@@ -101,6 +104,7 @@ type ModifyDBClusterInput struct {
 	//     * The DBInstanceParameterGroupName parameter is only valid in
 	// combination with the AllowMajorVersionUpgrade parameter.
 	DBInstanceParameterGroupName *string
+
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
 	// maintenance window unless ApplyImmediately is enabled. To list all of the
@@ -114,6 +118,7 @@ type ModifyDBClusterInput struct {
 	// describe-db-engine-versions --engine aurora-postgresql --query
 	// "DBEngineVersions[].EngineVersion"
 	EngineVersion *string
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -133,8 +138,10 @@ type ModifyDBClusterInput struct {
 	//     * Must be at least 30
 	// minutes.
 	PreferredBackupWindow *string
+
 	// The name of the DB cluster parameter group to use for the DB cluster.
 	DBClusterParameterGroupName *string
+
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -144,26 +151,32 @@ type ModifyDBClusterInput struct {
 	// in the Amazon Aurora User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
 	// The scaling properties of the DB cluster. You can only modify scaling properties
 	// for DB clusters in serverless DB engine mode.
 	ScalingConfiguration *types.ScalingConfiguration
+
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled.
 	DeletionProtection *bool
+
 	// The new password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints: Must contain
 	// from 8 to 41 characters.
 	MasterUserPassword *string
+
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
 	//
 	//     * Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
+
 	// The Active Directory directory ID to move the DB cluster to. Specify none to
 	// remove the cluster from its current domain. The domain must be created prior to
 	// this operation.
 	Domain *string
+
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
@@ -171,23 +184,28 @@ type ModifyDBClusterInput struct {
 	//     * If specified, this value must be set to a number
 	// from 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
+
 	// A value that indicates whether major version upgrades are allowed. Constraints:
 	// You must allow major version upgrades when specifying a value for the
 	// EngineVersion parameter that is a different major version than the DB cluster's
 	// current version.
 	AllowMajorVersionUpgrade *bool
+
 	// Specify the name of the IAM role to be used when making API calls to the
 	// Directory Service.
 	DomainIAMRoleName *string
+
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	// <p>For more information, see <a
 	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
 	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
 	EnableIAMDatabaseAuthentication *bool
+
 	// The port number on which the DB cluster accepts connections. Constraints: Value
 	// must be 1150-65535 Default: The same port as the original DB cluster.
 	Port *int32
+
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
 	// Serverless DB cluster. By default, the HTTP endpoint is disabled. When enabled,
 	// the HTTP endpoint provides a connectionless web service API for running SQL
@@ -197,18 +215,22 @@ type ModifyDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
 	// the Amazon Aurora User Guide.
 	EnableHttpEndpoint *bool
+
 	// A value that indicates whether to enable write operations to be forwarded from
 	// this cluster to the primary cluster in an Aurora global database. The resulting
 	// changes are replicated back to this cluster. This parameter only applies to DB
 	// clusters that are secondary clusters in an Aurora global database. By default,
 	// Aurora disallows write operations for secondary clusters.
 	EnableGlobalWriteForwarding *bool
+
 	// The configuration setting for the log types to be enabled for export to
 	// CloudWatch Logs for a specific DB cluster.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
+
 	// A value that indicates whether to copy all tags from the DB cluster to snapshots
 	// of the DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool
+
 	// A value that indicates that the DB cluster should be associated with the
 	// specified option group. Changing this parameter doesn't result in an outage
 	// except in the following case, and the change is applied during the next
@@ -219,15 +241,20 @@ type ModifyDBClusterInput struct {
 	// from an option group. The option group can't be removed from a DB cluster once
 	// it is associated with a DB cluster.
 	OptionGroupName *string
+
 	// The DB cluster identifier for the cluster being modified. This parameter isn't
 	// case-sensitive. Constraints: This identifier must match the identifier of an
 	// existing DB cluster.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// A list of VPC security groups that the DB cluster will belong to.
 	VpcSecurityGroupIds []*string
 }
 
 type ModifyDBClusterOutput struct {
+
 	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
 	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
 	// actions.

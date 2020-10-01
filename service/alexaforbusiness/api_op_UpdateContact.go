@@ -56,21 +56,30 @@ func (c *Client) UpdateContact(ctx context.Context, params *UpdateContactInput, 
 }
 
 type UpdateContactInput struct {
+
 	// The list of SIP addresses for the contact.
 	SipAddresses []*types.SipAddress
+
 	// The updated first name of the contact.
 	FirstName *string
+
 	// The list of phone numbers for the contact.
 	PhoneNumbers []*types.PhoneNumber
+
 	// The updated last name of the contact.
 	LastName *string
+
 	// The updated display name of the contact.
 	DisplayName *string
+
 	// The updated phone number of the contact. The phone number type defaults to WORK.
 	// You can either specify PhoneNumber or PhoneNumbers. We recommend that you use
 	// PhoneNumbers, which lets you specify the phone number type and multiple numbers.
 	PhoneNumber *string
+
 	// The ARN of the contact to update.
+	//
+	// This member is required.
 	ContactArn *string
 }
 

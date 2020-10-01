@@ -55,12 +55,22 @@ func (c *Client) DeletePartition(ctx context.Context, params *DeletePartitionInp
 }
 
 type DeletePartitionInput struct {
+
 	// The name of the table that contains the partition to be deleted.
+	//
+	// This member is required.
 	TableName *string
+
 	// The values that define the partition.
+	//
+	// This member is required.
 	PartitionValues []*string
+
 	// The name of the catalog database in which the table in question resides.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The ID of the Data Catalog where the partition to be deleted resides. If none is
 	// provided, the AWS account ID is used by default.
 	CatalogId *string

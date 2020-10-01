@@ -68,10 +68,15 @@ func (c *Client) RegisterResource(ctx context.Context, params *RegisterResourceI
 }
 
 type RegisterResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource that you want to register.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The identifier for the role that registers the resource.
 	RoleArn *string
+
 	// Designates an AWS Identity and Access Management (IAM) service-linked role by
 	// registering this role with the Data Catalog. A service-linked role is a unique
 	// type of IAM role that is linked directly to Lake Formation.  <p>For more

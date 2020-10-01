@@ -60,10 +60,14 @@ func (c *Client) DeleteWorkerBlock(ctx context.Context, params *DeleteWorkerBloc
 }
 
 type DeleteWorkerBlockInput struct {
+
 	// A message that explains the reason for unblocking the Worker. The Worker does
 	// not see this message.
 	Reason *string
+
 	// The ID of the Worker to unblock.
+	//
+	// This member is required.
 	WorkerId *string
 }
 

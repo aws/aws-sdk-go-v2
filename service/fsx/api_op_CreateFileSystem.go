@@ -81,8 +81,10 @@ func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemI
 
 // The request object used to create a new Amazon FSx file system.
 type CreateFileSystemInput struct {
+
 	// The Microsoft Windows configuration for the file system being created.
 	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration
+
 	// Specifies the IDs of the subnets that the file system will be accessible from.
 	// For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet
 	// IDs, one for the preferred file server and one for the standby file server. You
@@ -91,19 +93,28 @@ type CreateFileSystemInput struct {
 	// SINGLE_AZ_2 file system deployment types and Lustre file systems, provide
 	// exactly one subnet ID. The file server is launched in that subnet's Availability
 	// Zone.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// A list of IDs specifying the security groups to apply to all network interfaces
 	// created for file system access. This list isn't returned in later requests to
 	// describe the file system.
 	SecurityGroupIds []*string
+
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
 	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
+
 	// The Lustre configuration for the file system being created.
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
+
 	// The type of Amazon FSx file system to create, either WINDOWS or LUSTRE.
+	//
+	// This member is required.
 	FileSystemType types.FileSystemType
+
 	// Sets the storage capacity of the file system that you're creating. For Lustre
 	// file systems:
 	//
@@ -121,7 +132,10 @@ type CreateFileSystemInput struct {
 	//
 	//     * If StorageType=HDD, valid values are 2000 GiB - 65,536 GiB (64
 	// TiB).
+	//
+	// This member is required.
 	StorageCapacity *int32
+
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
 	// system's data for Amazon FSx for Windows File Server file systems and Amazon FSx
 	// for Lustre PERSISTENT_1 file systems at rest. In either case, if not specified,
@@ -131,6 +145,7 @@ type CreateFileSystemInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
 	// AWS Key Management Service API Reference.
 	KmsKeyId *string
+
 	// Sets the storage type for the Amazon FSx for Windows file system you're
 	// creating. Valid values are SSD and HDD.
 	//
@@ -146,6 +161,7 @@ type CreateFileSystemInput struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options)
 	// in the Amazon FSx for Windows User Guide.
 	StorageType types.StorageType
+
 	// The tags to apply to the file system being created. The key value of the Name
 	// tag appears in the console as the file system name.
 	Tags []*types.Tag
@@ -153,6 +169,7 @@ type CreateFileSystemInput struct {
 
 // The response object returned after the file system is created.
 type CreateFileSystemOutput struct {
+
 	// The configuration of the file system that was created.
 	FileSystem *types.FileSystem
 

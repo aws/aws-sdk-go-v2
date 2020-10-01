@@ -86,9 +86,15 @@ func (c *Client) DeprecateWorkflowType(ctx context.Context, params *DeprecateWor
 }
 
 type DeprecateWorkflowTypeInput struct {
+
 	// The name of the domain in which the workflow type is registered.
+	//
+	// This member is required.
 	Domain *string
+
 	// The workflow type to deprecate.
+	//
+	// This member is required.
 	WorkflowType *types.WorkflowType
 }
 

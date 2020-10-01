@@ -64,27 +64,40 @@ func (c *Client) ProvisionProduct(ctx context.Context, params *ProvisionProductI
 }
 
 type ProvisionProductInput struct {
+
 	// An idempotency token that uniquely identifies the provisioning request.
+	//
+	// This member is required.
 	ProvisionToken *string
+
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
 	NotificationArns []*string
+
 	// The name of the product. You must provide the name or ID, but not both.
 	ProductName *string
+
 	// Parameters specified by the administrator that are required for provisioning the
 	// product.
 	ProvisioningParameters []*types.ProvisioningParameter
+
 	// An object that contains information about the provisioning preferences for a
 	// stack set.
 	ProvisioningPreferences *types.ProvisioningPreferences
+
 	// A user-friendly name for the provisioned product. This value must be unique for
 	// the AWS account and cannot be updated after the product is provisioned.
+	//
+	// This member is required.
 	ProvisionedProductName *string
+
 	// The identifier of the provisioning artifact. You must provide the name or ID,
 	// but not both.
 	ProvisioningArtifactId *string
+
 	// One or more tags.
 	Tags []*types.Tag
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -94,13 +107,17 @@ type ProvisionProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The name of the path. You must provide the name or ID, but not both.
 	PathName *string
+
 	// The name of the provisioning artifact. You must provide the name or ID, but not
 	// both.
 	ProvisioningArtifactName *string
+
 	// The product identifier. You must provide the name or ID, but not both.
 	ProductId *string
+
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
 	// paths for a product, use ListLaunchPaths (). You must provide the name or ID,
@@ -109,6 +126,7 @@ type ProvisionProductInput struct {
 }
 
 type ProvisionProductOutput struct {
+
 	// Information about the result of provisioning the product.
 	RecordDetail *types.RecordDetail
 

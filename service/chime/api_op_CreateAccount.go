@@ -60,11 +60,15 @@ func (c *Client) CreateAccount(ctx context.Context, params *CreateAccountInput, 
 }
 
 type CreateAccountInput struct {
+
 	// The name of the Amazon Chime account.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateAccountOutput struct {
+
 	// The Amazon Chime account details.
 	Account *types.Account
 

@@ -57,24 +57,34 @@ func (c *Client) SearchFlowExecutions(ctx context.Context, params *SearchFlowExe
 }
 
 type SearchFlowExecutionsInput struct {
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// The date and time of the earliest flow execution to return.
 	StartTime *time.Time
+
 	// The ID of a flow execution.
 	FlowExecutionId *string
+
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
 	// The ID of the system instance that contains the flow.
+	//
+	// This member is required.
 	SystemInstanceId *string
+
 	// The date and time of the latest flow execution to return.
 	EndTime *time.Time
 }
 
 type SearchFlowExecutionsOutput struct {
+
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
+
 	// An array of objects that contain summary information about each workflow
 	// execution in the result set.
 	Summaries []*types.FlowExecutionSummary

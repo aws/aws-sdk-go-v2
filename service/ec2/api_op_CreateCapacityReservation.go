@@ -78,19 +78,25 @@ func (c *Client) CreateCapacityReservation(ctx context.Context, params *CreateCa
 }
 
 type CreateCapacityReservationInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// Indicates whether the Capacity Reservation supports instances with temporary,
 	// block-level storage.
 	EphemeralStorage *bool
+
 	// The instance type for which to reserve capacity. For more information, see
 	// Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
+	//
+	// This member is required.
 	InstanceType *string
+
 	// Indicates the type of instance launches that the Capacity Reservation accepts.
 	// The options include:
 	//
@@ -107,24 +113,33 @@ type CreateCapacityReservationInput struct {
 	//
 	// Default: open
 	InstanceMatchCriteria types.InstanceMatchCriteria
+
 	// The type of operating system for which to reserve capacity.
+	//
+	// This member is required.
 	InstancePlatform types.CapacityReservationInstancePlatform
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// The ID of the Availability Zone in which to create the Capacity Reservation.
 	AvailabilityZoneId *string
+
 	// Indicates whether the Capacity Reservation supports EBS-optimized instances.
 	// This optimization provides dedicated throughput to Amazon EBS and an optimized
 	// configuration stack to provide optimal I/O performance. This optimization isn't
 	// available with all instance types. Additional usage charges apply when using an
 	// EBS- optimized instance.
 	EbsOptimized *bool
+
 	// The tags to apply to the Capacity Reservation during launch.
 	TagSpecifications []*types.TagSpecification
+
 	// The Availability Zone in which to create the Capacity Reservation.
 	AvailabilityZone *string
+
 	// The date and time at which the Capacity Reservation expires. When a Capacity
 	// Reservation expires, the reserved capacity is released and you can no longer
 	// launch instances into it. The Capacity Reservation's state changes to expired
@@ -135,6 +150,7 @@ type CreateCapacityReservationInput struct {
 	// 5/31/2019, 13:30:55, the Capacity Reservation is guaranteed to end between
 	// 13:30:55 and 14:30:55 on 5/31/2019.</p>
 	EndDate *time.Time
+
 	// Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can
 	// have one of the following tenancy settings:
 	//
@@ -145,6 +161,7 @@ type CreateCapacityReservationInput struct {
 	// * dedicated - The Capacity Reservation is created on single-tenant hardware that
 	// is dedicated to a single AWS account.
 	Tenancy types.CapacityReservationTenancy
+
 	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
 	// can have one of the following end types:
 	//
@@ -156,11 +173,15 @@ type CreateCapacityReservationInput struct {
 	// Reservation expires automatically at a specified date and time. You must provide
 	// an EndDate value if the EndDateType value is limited.
 	EndDateType types.EndDateType
+
 	// The number of instances for which to reserve capacity.
+	//
+	// This member is required.
 	InstanceCount *int32
 }
 
 type CreateCapacityReservationOutput struct {
+
 	// Information about the Capacity Reservation.
 	CapacityReservation *types.CapacityReservation
 

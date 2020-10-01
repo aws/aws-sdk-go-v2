@@ -64,19 +64,23 @@ func (c *Client) AuthorizeSecurityGroupIngress(ctx context.Context, params *Auth
 }
 
 type AuthorizeSecurityGroupIngressInput struct {
+
 	// The end of port range for the TCP and UDP protocols, or an ICMP code number. For
 	// the ICMP code number, use -1 to specify all codes. If you specify all ICMP
 	// types, you must specify all codes. Alternatively, use a set of IP permissions to
 	// specify multiple rules and a description for the rule.
 	ToPort *int32
+
 	// [EC2-Classic, default VPC] The name of the security group. You must specify
 	// either the security group ID or the security group name in the request.
 	GroupName *string
+
 	// The start of port range for the TCP and UDP protocols, or an ICMP type number.
 	// For the ICMP type number, use -1 to specify all types. If you specify all ICMP
 	// types, you must specify all codes. Alternatively, use a set of IP permissions to
 	// specify multiple rules and a description for the rule.
 	FromPort *int32
+
 	// [nondefault VPC] The AWS account ID for the source security group, if the source
 	// security group is in a different account. You can't specify this parameter in
 	// combination with the following parameters: the CIDR IP address range, the IP
@@ -84,6 +88,7 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// rules that grant full ICMP, UDP, and TCP access. To create a rule with a
 	// specific IP protocol and port range, use a set of IP permissions instead.
 	SourceSecurityGroupOwnerId *string
+
 	// [EC2-Classic, default VPC] The name of the source security group. You can't
 	// specify this parameter in combination with the following parameters: the CIDR IP
 	// address range, the start of the port range, the IP protocol, and the end of the
@@ -91,11 +96,13 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// rule with a specific IP protocol and port range, use a set of IP permissions
 	// instead. For EC2-VPC, the source security group must be in the same VPC.
 	SourceSecurityGroupName *string
+
 	// The IPv4 address range, in CIDR format. You can't specify this parameter when
 	// specifying a source security group. To specify an IPv6 address range, use a set
 	// of IP permissions. Alternatively, use a set of IP permissions to specify
 	// multiple rules and a description for the rule.
 	CidrIp *string
+
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers
 	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). To
 	// specify icmpv6, use a set of IP permissions. [VPC only] Use -1 to specify all
@@ -104,13 +111,16 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// a set of IP permissions to specify multiple rules and a description for the
 	// rule.
 	IpProtocol *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The sets of IP permissions.
 	IpPermissions []*types.IpPermission
+
 	// The ID of the security group. You must specify either the security group ID or
 	// the security group name in the request. For security groups in a nondefault VPC,
 	// you must specify the security group ID.

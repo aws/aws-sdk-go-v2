@@ -57,18 +57,26 @@ func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentI
 }
 
 type ClassifyDocumentInput struct {
+
 	// The document text to be analyzed.
+	//
+	// This member is required.
 	Text *string
+
 	// The Amazon Resource Number (ARN) of the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
 }
 
 type ClassifyDocumentOutput struct {
+
 	// The classes used by the document being analyzed. These are used for multi-class
 	// trained models. Individual classes are mutually exclusive and each document is
 	// expected to have only a single class assigned to it. For example, an animal can
 	// be a dog or a cat, but not both at the same time.
 	Classes []*types.DocumentClass
+
 	// The labels used the document being analyzed. These are used for multi-label
 	// trained models. Individual labels represent different categories that are
 	// related in some manner and are not multually exclusive. For example, a movie can

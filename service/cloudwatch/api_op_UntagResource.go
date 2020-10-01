@@ -55,6 +55,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The ARN of the CloudWatch resource that you're removing tags from. The ARN
 	// format of an alarm is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name  The
 	// ARN format of a Contributor Insights rule is
@@ -62,8 +63,13 @@ type UntagResourceInput struct {
 	// information about ARN format, see  Resource Types Defined by Amazon CloudWatch
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies)
 	// in the Amazon Web Services General Reference.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// The list of tag keys to remove from the resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

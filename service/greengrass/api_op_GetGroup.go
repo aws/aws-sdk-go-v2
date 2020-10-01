@@ -55,25 +55,36 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 }
 
 type GetGroupInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type GetGroupOutput struct {
+
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string
+
 	// The ID of the definition.
 	Id *string
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
+
 	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string
+
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
+
 	// Tag(s) attached to the resource arn.
 	Tags map[string]*string
+
 	// The ARN of the definition.
 	Arn *string
+
 	// The name of the definition.
 	Name *string
 

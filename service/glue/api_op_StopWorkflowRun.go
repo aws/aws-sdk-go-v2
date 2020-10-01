@@ -55,9 +55,15 @@ func (c *Client) StopWorkflowRun(ctx context.Context, params *StopWorkflowRunInp
 }
 
 type StopWorkflowRunInput struct {
+
 	// The ID of the workflow run to stop.
+	//
+	// This member is required.
 	RunId *string
+
 	// The name of the workflow to stop.
+	//
+	// This member is required.
 	Name *string
 }
 

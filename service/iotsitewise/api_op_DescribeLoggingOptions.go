@@ -58,7 +58,10 @@ type DescribeLoggingOptionsInput struct {
 }
 
 type DescribeLoggingOptionsOutput struct {
+
 	// The current logging options.
+	//
+	// This member is required.
 	LoggingOptions *types.LoggingOptions
 
 	// Metadata pertaining to the operation's result.

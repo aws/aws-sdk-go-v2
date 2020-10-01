@@ -55,7 +55,10 @@ func (c *Client) ExpireSession(ctx context.Context, params *ExpireSessionInput, 
 }
 
 type ExpireSessionInput struct {
+
 	// The identifier of the streaming session.
+	//
+	// This member is required.
 	SessionId *string
 }
 

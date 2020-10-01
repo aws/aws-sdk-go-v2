@@ -59,21 +59,29 @@ func (c *Client) ModifyAvailabilityZoneGroup(ctx context.Context, params *Modify
 }
 
 type ModifyAvailabilityZoneGroupInput struct {
+
 	// Indicates whether to enable or disable membership. The valid values are
 	// opted-in. You must contact AWS Support
 	// (https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services)
 	// to disable an Availability Zone group.
+	//
+	// This member is required.
 	OptInStatus types.ModifyAvailabilityZoneOptInStatus
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The name of the Availability Zone Group.
+	//
+	// This member is required.
 	GroupName *string
 }
 
 type ModifyAvailabilityZoneGroupOutput struct {
+
 	// Is true if the request succeeds, and an error otherwise.
 	Return *bool
 

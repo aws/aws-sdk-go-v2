@@ -57,6 +57,7 @@ func (c *Client) CreateAlgorithm(ctx context.Context, params *CreateAlgorithmInp
 }
 
 type CreateAlgorithmInput struct {
+
 	// Specifies details about training jobs run by this algorithm, including the
 	// following:
 	//
@@ -80,7 +81,10 @@ type CreateAlgorithmInput struct {
 	//     * The input
 	// channels that the algorithm supports for training data. For example, an
 	// algorithm might support train, validation, and test channels.
+	//
+	// This member is required.
 	TrainingSpecification *types.TrainingSpecification
+
 	// Specifies details about inference jobs that the algorithm runs, including the
 	// following:
 	//
@@ -93,12 +97,18 @@ type CreateAlgorithmInput struct {
 	//     * The input
 	// and output content formats that the algorithm supports for inference.
 	InferenceSpecification *types.InferenceSpecification
+
 	// A description of the algorithm.
 	AlgorithmDescription *string
+
 	// Whether to certify the algorithm so that it can be listed in AWS Marketplace.
 	CertifyForMarketplace *bool
+
 	// The name of the algorithm.
+	//
+	// This member is required.
 	AlgorithmName *string
+
 	// Specifies configurations for one or more training jobs and that Amazon SageMaker
 	// runs to test the algorithm's training code and, optionally, one or more batch
 	// transform jobs that Amazon SageMaker runs to test the algorithm's inference
@@ -107,7 +117,10 @@ type CreateAlgorithmInput struct {
 }
 
 type CreateAlgorithmOutput struct {
+
 	// The Amazon Resource Name (ARN) of the new algorithm.
+	//
+	// This member is required.
 	AlgorithmArn *string
 
 	// Metadata pertaining to the operation's result.

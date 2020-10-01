@@ -57,26 +57,37 @@ func (c *Client) DescribeDomainConfiguration(ctx context.Context, params *Descri
 }
 
 type DescribeDomainConfigurationInput struct {
+
 	// The name of the domain configuration.
+	//
+	// This member is required.
 	DomainConfigurationName *string
 }
 
 type DescribeDomainConfigurationOutput struct {
+
 	// An object that specifies the authorization service for a domain.
 	AuthorizerConfig *types.AuthorizerConfig
+
 	// The name of the domain.
 	DomainName *string
+
 	// A Boolean value that specifies the current state of the domain configuration.
 	DomainConfigurationStatus types.DomainConfigurationStatus
+
 	// A list containing summary information about the server certificate included in
 	// the domain configuration.
 	ServerCertificates []*types.ServerCertificateSummary
+
 	// The ARN of the domain configuration.
 	DomainConfigurationArn *string
+
 	// The type of the domain.
 	DomainType types.DomainType
+
 	// The type of service delivered by the endpoint.
 	ServiceType types.ServiceType
+
 	// The name of the domain configuration.
 	DomainConfigurationName *string
 

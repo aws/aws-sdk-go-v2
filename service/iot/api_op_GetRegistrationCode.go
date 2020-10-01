@@ -59,6 +59,7 @@ type GetRegistrationCodeInput struct {
 
 // The output from the GetRegistrationCode operation.
 type GetRegistrationCodeOutput struct {
+
 	// The CA certificate registration code.
 	RegistrationCode *string
 

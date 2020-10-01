@@ -62,16 +62,24 @@ func (c *Client) PutComponentPolicy(ctx context.Context, params *PutComponentPol
 }
 
 type PutComponentPolicyInput struct {
+
 	// The policy to apply.
+	//
+	// This member is required.
 	Policy *string
+
 	// The Amazon Resource Name (ARN) of the component that this policy should be
 	// applied to.
+	//
+	// This member is required.
 	ComponentArn *string
 }
 
 type PutComponentPolicyOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the component that this policy was applied to.
 	ComponentArn *string
 

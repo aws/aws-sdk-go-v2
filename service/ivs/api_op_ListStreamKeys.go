@@ -56,18 +56,27 @@ func (c *Client) ListStreamKeys(ctx context.Context, params *ListStreamKeysInput
 }
 
 type ListStreamKeysInput struct {
+
 	// Channel ARN used to filter the list.
+	//
+	// This member is required.
 	ChannelArn *string
+
 	// Maximum number of streamKeys to return.
 	MaxResults *int32
+
 	// The first stream key to retrieve. This is used for pagination; see the nextToken
 	// response field.
 	NextToken *string
 }
 
 type ListStreamKeysOutput struct {
+
 	// List of stream keys.
+	//
+	// This member is required.
 	StreamKeys []*types.StreamKeySummary
+
 	// If there are more stream keys than maxResults, use nextToken in the request to
 	// get the next set.
 	NextToken *string

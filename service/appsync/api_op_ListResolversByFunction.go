@@ -56,20 +56,30 @@ func (c *Client) ListResolversByFunction(ctx context.Context, params *ListResolv
 }
 
 type ListResolversByFunctionInput struct {
+
 	// The Function ID.
+	//
+	// This member is required.
 	FunctionId *string
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// An identifier that was returned from the previous call to this operation, which
 	// you can use to return the next set of items in the list.
 	NextToken *string
+
 	// The maximum number of results you want the request to return.
 	MaxResults *int32
 }
 
 type ListResolversByFunctionOutput struct {
+
 	// The list of resolvers.
 	Resolvers []*types.Resolver
+
 	// An identifier that can be used to return the next set of items in the list.
 	NextToken *string
 

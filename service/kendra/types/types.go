@@ -8,6 +8,7 @@ import (
 
 // Access Control List files for the documents in a data source.
 type AccessControlListConfiguration struct {
+
 	// Path to the AWS S3 bucket that contains the ACL files.
 	KeyPath *string
 }
@@ -15,24 +16,37 @@ type AccessControlListConfiguration struct {
 // Provides information about the column that should be used for filtering the
 // query response by groups.
 type AclConfiguration struct {
+
 	// A list of groups, separated by semi-colons, that filters a query response based
 	// on user context. The document is only returned to users that are in one of the
 	// groups specified in the UserContext field of the Query () operation.
+	//
+	// This member is required.
 	AllowedGroupsColumnName *string
 }
 
 // An attribute returned from an index query.
 type AdditionalResultAttribute struct {
+
 	// The key that identifies the attribute.
+	//
+	// This member is required.
 	Key *string
+
 	// An object that contains the attribute value.
+	//
+	// This member is required.
 	Value *AdditionalResultAttributeValue
+
 	// The data type of the Value property.
+	//
+	// This member is required.
 	ValueType AdditionalResultAttributeValueType
 }
 
 // An attribute returned with a document from a search.
 type AdditionalResultAttributeValue struct {
+
 	// The text associated with the attribute and information about the highlight to
 	// apply to the text.
 	TextWithHighlightsValue *TextWithHighlights
@@ -46,29 +60,39 @@ type AdditionalResultAttributeValue struct {
 // receive a ValidationException exception with the message "AttributeFilter cannot
 // have a depth of more than 2."
 type AttributeFilter struct {
+
 	// Performs an equals operation on two document attributes.
 	EqualsTo *DocumentAttribute
+
 	// Performs a logical AND operation on all supplied filters.
 	AndAllFilters []*AttributeFilter
+
 	// Performs a greater than operation on two document attributes. Use with a
 	// document attribute of type Integer or Long.
 	GreaterThan *DocumentAttribute
+
 	// Returns true when a document contains any of the specified document
 	// attributes.This filter is only appicable to StringListValue metadata.
 	ContainsAny *DocumentAttribute
+
 	// Performs a less than or equals operation on two document attributes. Use with a
 	// document attribute of type Integer or Long.
 	LessThanOrEquals *DocumentAttribute
+
 	// Performs a logical NOT operation on all supplied filters.
 	NotFilter *AttributeFilter
+
 	// Performs a greater or equals than operation on two document attributes. Use with
 	// a document attribute of type Integer or Long.
 	GreaterThanOrEquals *DocumentAttribute
+
 	// Performs a logical OR operation on all supplied filters.
 	OrAllFilters []*AttributeFilter
+
 	// Returns true when a document contains all of the specified document attributes.
 	// This filter is only appicable to StringListValue metadata.
 	ContainsAll *DocumentAttribute
+
 	// Performs a less than operation on two document attributes. Use with a document
 	// attribute of type Integer or Long.
 	LessThan *DocumentAttribute
@@ -77,20 +101,26 @@ type AttributeFilter struct {
 // Provides information about documents that could not be removed from an index by
 // the BatchDeleteDocument () operation.
 type BatchDeleteDocumentResponseFailedDocument struct {
+
 	// The error code for why the document couldn't be removed from the index.
 	ErrorCode ErrorCode
+
 	// An explanation for why the document couldn't be removed from the index.
 	ErrorMessage *string
+
 	// The identifier of the document that couldn't be removed from the index.
 	Id *string
 }
 
 // Provides information about a document that could not be indexed.
 type BatchPutDocumentResponseFailedDocument struct {
+
 	// The type of error that caused the document to fail to be indexed.
 	ErrorCode ErrorCode
+
 	// A description of the reason why the document could not be indexed.
 	ErrorMessage *string
+
 	// The unique identifier of the document.
 	Id *string
 }
@@ -98,34 +128,57 @@ type BatchPutDocumentResponseFailedDocument struct {
 // Specifies capacity units configured for your index. You can add and remove
 // capacity units to tune an index to your requirements.
 type CapacityUnitsConfiguration struct {
+
 	// The amount of extra query capacity for an index. Each capacity unit provides 0.5
 	// queries per second and 40,000 queries per day.
+	//
+	// This member is required.
 	QueryCapacityUnits *int32
+
 	// The amount of extra storage capacity for an index. Each capacity unit provides
 	// 150 Gb of storage space or 500,000 documents, whichever is reached first.
+	//
+	// This member is required.
 	StorageCapacityUnits *int32
 }
 
 // Gathers information about when a particular result was clicked by a user. Your
 // application uses the SubmitFeedback () operation to provide click information.
 type ClickFeedback struct {
+
 	// The Unix timestamp of the date and time that the result was clicked.
+	//
+	// This member is required.
 	ClickTime *time.Time
+
 	// The unique identifier of the search result that was clicked.
+	//
+	// This member is required.
 	ResultId *string
 }
 
 // Provides information about how Amazon Kendra should use the columns of a
 // database in an index.
 type ColumnConfiguration struct {
+
 	// One to five columns that indicate when a document in the database has changed.
+	//
+	// This member is required.
 	ChangeDetectingColumns []*string
+
 	// The column that contains the contents of the document.
+	//
+	// This member is required.
 	DocumentDataColumnName *string
+
 	// The column that contains the title of the document.
 	DocumentTitleColumnName *string
+
 	// The column that provides the document's unique identifier.
+	//
+	// This member is required.
 	DocumentIdColumnName *string
+
 	// An array of objects that map database column names to the corresponding fields
 	// in an index. You must first create the fields in the index using the UpdateIndex
 	// () operation.
@@ -134,6 +187,7 @@ type ColumnConfiguration struct {
 
 // Provides the information necessary to connect to a database.
 type ConnectionConfiguration struct {
+
 	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The
 	// credentials should be a user/password pair. For more information, see Using a
 	// Database Data Source
@@ -141,32 +195,58 @@ type ConnectionConfiguration struct {
 	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
 	// AWS Secrets Manager user guide.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The name of the database containing the document data.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The port that the database uses for connections.
+	//
+	// This member is required.
 	DatabasePort *int32
+
 	// The name of the host for the database. Can be either a string
 	// (host.subdomain.domain.tld) or an IPv4 or IPv6 address.
+	//
+	// This member is required.
 	DatabaseHost *string
+
 	// The name of the table that contains the document data.
+	//
+	// This member is required.
 	TableName *string
 }
 
 // Provides the information necessary to connect a database to an index.
 type DatabaseConfiguration struct {
+
 	// The information necessary to connect to a database.
+	//
+	// This member is required.
 	ConnectionConfiguration *ConnectionConfiguration
+
 	// Information about where the index should get the document information from the
 	// database.
+	//
+	// This member is required.
 	ColumnConfiguration *ColumnConfiguration
+
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
+
 	// Information about the database column that provides information for user context
 	// filtering.
 	AclConfiguration *AclConfiguration
+
 	// The type of database engine that runs the database.
+	//
+	// This member is required.
 	DatabaseEngineType DatabaseEngineType
+
 	// Provides information about how Amazon Kendra uses quote marks around SQL
 	// identifiers when querying a database data source.
 	SqlConfiguration *SqlConfiguration
@@ -174,18 +254,24 @@ type DatabaseConfiguration struct {
 
 // Configuration information for a Amazon Kendra data source.
 type DataSourceConfiguration struct {
+
 	// Provides information necessary to create a connector for a Microsoft SharePoint
 	// site.
 	SharePointConfiguration *SharePointConfiguration
+
 	// Provides configuration information for data sources that connect to a Salesforce
 	// site.
 	SalesforceConfiguration *SalesforceConfiguration
+
 	// Provides configuration for data sources that connect to ServiceNow instances.
 	ServiceNowConfiguration *ServiceNowConfiguration
+
 	// Provided configuration for data sources that connect to Microsoft OneDrive.
 	OneDriveConfiguration *OneDriveConfiguration
+
 	// Provides information necessary to create a connector for a database.
 	DatabaseConfiguration *DatabaseConfiguration
+
 	// Provides information to create a connector for a document repository in an
 	// Amazon S3 bucket.
 	S3Configuration *S3DataSourceConfiguration
@@ -193,42 +279,56 @@ type DataSourceConfiguration struct {
 
 // Summary information for a Amazon Kendra data source. Returned in a call to .
 type DataSourceSummary struct {
+
 	// The unique identifier for the data source.
 	Id *string
+
 	// The UNIX datetime that the data source was lasted updated.
 	UpdatedAt *time.Time
+
 	// The name of the data source.
 	Name *string
+
 	// The type of the data source.
 	Type DataSourceType
+
 	// The status of the data source. When the status is ATIVE the data source is ready
 	// to use.
 	Status DataSourceStatus
+
 	// The UNIX datetime that the data source was created.
 	CreatedAt *time.Time
 }
 
 // Provides information about a synchronization job.
 type DataSourceSyncJob struct {
+
 	// The UNIX datetime that the synchronization job was started.
 	StartTime *time.Time
+
 	// A unique identifier for the synchronization job.
 	ExecutionId *string
+
 	// If the reason that the synchronization failed is due to an error with the
 	// underlying data source, this field contains a code that identifies the error.
 	DataSourceErrorCode *string
+
 	// If the Status field is set to ERROR, the ErrorMessage field contains a
 	// description of the error that caused the synchronization to fail.
 	ErrorMessage *string
+
 	// Maps a batch delete document request to a specific data source sync job. This is
 	// optional and should only be supplied when documents are deleted by a connector.
 	Metrics *DataSourceSyncJobMetrics
+
 	// The execution status of the synchronization job. When the Status field is set to
 	// SUCCEEDED, the synchronization job is done. If the status code is set to FAILED,
 	// the ErrorCode and ErrorMessage fields give you the reason for the failure.
 	Status DataSourceSyncJobStatus
+
 	// The UNIX datetime that the synchronization job was completed.
 	EndTime *time.Time
+
 	// If the Status field is set to FAILED, the ErrorCode field contains a the reason
 	// that the synchronization failed.
 	ErrorCode ErrorCode
@@ -237,18 +337,23 @@ type DataSourceSyncJob struct {
 // Maps a batch delete document request to a specific data source sync job. This is
 // optional and should only be supplied when documents are deleted by a connector.
 type DataSourceSyncJobMetrics struct {
+
 	// The number of documents that failed to sync from the data source up to now in
 	// the data source sync run.
 	DocumentsFailed *string
+
 	// The number of documents modified in the data source up to now in the data source
 	// sync run.
 	DocumentsModified *string
+
 	// The current number of documents crawled by the current sync job in the data
 	// source.
 	DocumentsScanned *string
+
 	// The number of documents deleted from the data source up to now in the data
 	// source sync run.
 	DocumentsDeleted *string
+
 	// The number of documents added from the data source up to now in the data source
 	// sync.
 	DocumentsAdded *string
@@ -256,75 +361,113 @@ type DataSourceSyncJobMetrics struct {
 
 // Maps a particular data source sync job to a particular data source.
 type DataSourceSyncJobMetricTarget struct {
+
 	// The ID of the data source that is running the sync job.
+	//
+	// This member is required.
 	DataSourceId *string
+
 	// The ID of the sync job that is running on the data source.
+	//
+	// This member is required.
 	DataSourceSyncJobId *string
 }
 
 // Maps a column or attribute in the data source to an index field. You must first
 // create the fields in the index using the UpdateIndex () operation.
 type DataSourceToIndexFieldMapping struct {
+
 	// The name of the column or attribute in the data source.
+	//
+	// This member is required.
 	DataSourceFieldName *string
+
 	// The type of data stored in the column or attribute.
 	DateFieldFormat *string
+
 	// The name of the field in the index.
+	//
+	// This member is required.
 	IndexFieldName *string
 }
 
 // Provides information for connecting to an Amazon VPC.
 type DataSourceVpcConfiguration struct {
+
 	// A list of identifiers of security groups within your Amazon VPC. The security
 	// groups should enable Amazon Kendra to connect to the data source.
+	//
+	// This member is required.
 	SecurityGroupIds []*string
+
 	// A list of identifiers for subnets within your Amazon VPC. The subnets should be
 	// able to connect to each other in the VPC, and they should have outgoing access
 	// to the Internet through a NAT device.
+	//
+	// This member is required.
 	SubnetIds []*string
 }
 
 // A document in an index.
 type Document struct {
+
 	// Information to use for user context filtering.
 	AccessControlList []*Principal
+
 	// The file type of the document in the Blob field.
 	ContentType ContentType
+
 	// A unique identifier of the document in the index.
+	//
+	// This member is required.
 	Id *string
+
 	// Information required to find a specific file in an Amazon S3 bucket.
 	S3Path *S3Path
+
 	// The contents of the document. Documents passed to the Blob parameter must be
 	// base64 encoded. Your code might not need to encode the document file bytes if
 	// you're using an AWS SDK to call Amazon Kendra operations. If you are calling the
 	// Amazon Kendra endpoint directly using REST, you must base64 encode the contents
 	// before sending.
 	Blob []byte
+
 	// Custom attributes to apply to the document. Use the custom attributes to provide
 	// additional information for searching, to provide facets for refining searches,
 	// and to provide additional information in the query response.
 	Attributes []*DocumentAttribute
+
 	// The title of the document.
 	Title *string
 }
 
 // A custom attribute value assigned to a document.
 type DocumentAttribute struct {
+
 	// The value of the attribute.
+	//
+	// This member is required.
 	Value *DocumentAttributeValue
+
 	// The identifier for the attribute.
+	//
+	// This member is required.
 	Key *string
 }
 
 // The value of a custom document attribute. You can only provide one value for a
 // custom attribute.
 type DocumentAttributeValue struct {
+
 	// A string, such as "department".
 	StringValue *string
+
 	// A date expressed as an ISO 8601 string.
 	DateValue *time.Time
+
 	// A long integer value.
 	LongValue *int64
+
 	// A list of strings.
 	StringListValue []*string
 }
@@ -332,23 +475,33 @@ type DocumentAttributeValue struct {
 // Provides the count of documents that match a particular attribute when doing a
 // faceted search.
 type DocumentAttributeValueCountPair struct {
+
 	// The number of documents in the response that have the attribute value for the
 	// key.
 	Count *int32
+
 	// The value of the attribute. For example, "HR."
 	DocumentAttributeValue *DocumentAttributeValue
 }
 
 // Specifies the properties of a custom index field.
 type DocumentMetadataConfiguration struct {
+
 	// Provides information about how the field is used during a search.
 	Search *Search
+
 	// The name of the index field.
+	//
+	// This member is required.
 	Name *string
+
 	// Provides manual tuning parameters to determine how the field affects the search
 	// results.
 	Relevance *Relevance
+
 	// The data type of the index field.
+	//
+	// This member is required.
 	Type DocumentAttributeValueType
 }
 
@@ -356,6 +509,7 @@ type DocumentMetadataConfiguration struct {
 // control information, source URI, document author, and custom attributes. Each
 // metadata file contains metadata about a single document.
 type DocumentsMetadataConfiguration struct {
+
 	// A prefix used to filter metadata configuration files in the AWS S3 bucket. The
 	// S3 bucket might contain multiple metadata files. Use S3Prefix to include only
 	// the desired metadata files.
@@ -364,15 +518,18 @@ type DocumentsMetadataConfiguration struct {
 
 // Information about a document attribute
 type Facet struct {
+
 	// The unique key for the document attribute.
 	DocumentAttributeKey *string
 }
 
 // The facet values for the documents in the response.
 type FacetResult struct {
+
 	// An array of key/value pairs, where the key is the value of the attribute and the
 	// count is the number of documents that share the key value.
 	DocumentAttributeValueCountPairs []*DocumentAttributeValueCountPair
+
 	// The key for the facet values. This is the same as the DocumentAttributeKey
 	// provided in the query.
 	DocumentAttributeKey *string
@@ -381,22 +538,30 @@ type FacetResult struct {
 // Provides statistical information about the FAQ questions and answers contained
 // in an index.
 type FaqStatistics struct {
+
 	// The total number of FAQ questions and answers contained in the index.
+	//
+	// This member is required.
 	IndexedQuestionAnswersCount *int32
 }
 
 // Provides information about a frequently asked questions and answer contained in
 // an index.
 type FaqSummary struct {
+
 	// The UNIX datetime that the FAQ was last updated.
 	UpdatedAt *time.Time
+
 	// The unique identifier of the FAQ.
 	Id *string
+
 	// The name that you assigned the FAQ when you created or updated the FAQ.
 	Name *string
+
 	// The current status of the FAQ. When the status is ACTIVE the FAQ is ready for
 	// use.
 	Status FaqStatus
+
 	// The UNIX datetime that the FAQ was added to the index.
 	CreatedAt *time.Time
 }
@@ -404,65 +569,102 @@ type FaqSummary struct {
 // Provides information that you can use to highlight a search result so that your
 // users can quickly identify terms in the response.
 type Highlight struct {
+
 	// Indicates whether the response is the best response. True if this is the best
 	// response; otherwise, false.
 	TopAnswer *bool
+
 	// The zero-based location in the response string where the highlight ends.
+	//
+	// This member is required.
 	EndOffset *int32
+
 	// The zero-based location in the response string where the highlight starts.
+	//
+	// This member is required.
 	BeginOffset *int32
 }
 
 // A summary of information about an index.
 type IndexConfigurationSummary struct {
+
 	// A unique identifier for the index. Use this to identify the index when you are
 	// using operations such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
 	Id *string
+
 	// The Unix timestamp when the index was last updated by the UpdateIndex operation.
+	//
+	// This member is required.
 	UpdatedAt *time.Time
+
 	// Indicates whether the index is a enterprise edition index or a developer edition
 	// index.
 	Edition IndexEdition
+
 	// The name of the index.
 	Name *string
+
 	// The Unix timestamp when the index was created.
+	//
+	// This member is required.
 	CreatedAt *time.Time
+
 	// The current status of the index. When the status is ACTIVE, the index is ready
 	// to search.
+	//
+	// This member is required.
 	Status IndexStatus
 }
 
 // Provides information about the number of documents and the number of questions
 // and answers in an index.
 type IndexStatistics struct {
+
 	// The number of question and answer topics in the index.
+	//
+	// This member is required.
 	FaqStatistics *FaqStatistics
+
 	// The number of text documents indexed.
+	//
+	// This member is required.
 	TextDocumentStatistics *TextDocumentStatistics
 }
 
 // Provides configuration information for data sources that connect to OneDrive.
 type OneDriveConfiguration struct {
+
 	// The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains
 	// the user name and password to connect to OneDrive. The user namd should be the
 	// application ID for the OneDrive application, and the password is the application
 	// key for the OneDrive application.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// Tha Azure Active Directory domain of the organization.
+	//
+	// This member is required.
 	TenantDomain *string
+
 	// List of regular expressions applied to documents. Items that match the exclusion
 	// pattern are not indexed. If you provide both an inclusion pattern and an
 	// exclusion pattern, any item that matches the exclusion pattern isn't indexed.
 	// The exclusion pattern is applied to the file name.
 	ExclusionPatterns []*string
+
 	// A list of user accounts whose documents should be indexed.
+	//
+	// This member is required.
 	OneDriveUsers *OneDriveUsers
+
 	// A list of regular expression patterns. Documents that match the pattern are
 	// included in the index. Documents that don't match the pattern are excluded from
 	// the index. If a document matches both an inclusion pattern and an exclusion
 	// pattern, the document is not included in the index. The exclusion pattern is
 	// applied to the file name.
 	InclusionPatterns []*string
+
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft OneDrive
 	// fields to custom fields in the Amazon Kendra index. You must first create the
 	// index fields before you map OneDrive fields.
@@ -471,11 +673,13 @@ type OneDriveConfiguration struct {
 
 // User accounts whose documents should be indexed.
 type OneDriveUsers struct {
+
 	// A list of users whose documents should be indexed. Specify the user names in
 	// email format, for example, username@tenantdomain. If you need to index the
 	// documents of more than 100 users, use the OneDriveUserS3Path field to specify
 	// the location of a file containing a list of users.
 	OneDriveUserList []*string
+
 	// The S3 bucket location of a file containing a list of users whose documents
 	// should be indexed.
 	OneDriveUserS3Path *S3Path
@@ -483,11 +687,20 @@ type OneDriveUsers struct {
 
 // Provides user and group information for document access filtering.
 type Principal struct {
+
 	// The type of principal.
+	//
+	// This member is required.
 	Type PrincipalType
+
 	// The name of the user or group.
+	//
+	// This member is required.
 	Name *string
+
 	// Whether to allow or deny access to the principal.
+	//
+	// This member is required.
 	Access ReadAccessType
 }
 
@@ -496,23 +709,31 @@ type Principal struct {
 // list of attributes assigned to the document, and relevant text from the document
 // that satisfies the query.
 type QueryResultItem struct {
+
 	// The unique identifier for the query result.
 	Id *string
+
 	// The title of the document. Contains the text of the title and information for
 	// highlighting the relevant terms in the title.
 	DocumentTitle *TextWithHighlights
+
 	// The URI of the original location of the document.
 	DocumentURI *string
+
 	// An array of document attributes for the document that the query result maps to.
 	// For example, the document author (Author) or the source URI (SourceUri) of the
 	// document.
 	DocumentAttributes []*DocumentAttribute
+
 	// The type of document.
 	Type QueryResultType
+
 	// The unique identifier for the document.
 	DocumentId *string
+
 	// One or more additional attribues associated with the query result.
 	AdditionalAttributes []*AdditionalResultAttribute
+
 	// An extract of the text in the document. Contains information about highlighting
 	// the relevant terms in the excerpt.
 	DocumentExcerpt *TextWithHighlights
@@ -522,11 +743,13 @@ type QueryResultItem struct {
 // When a query includes terms that match the field, the results are given a boost
 // in the response based on these tuning parameters.
 type Relevance struct {
+
 	// Indicates that this field determines how "fresh" a document is. For example, if
 	// document 1 was created on November 5, and document 2 was created on October 31,
 	// document 1 is "fresher" than document 2. You can only set the Freshness field on
 	// one DATE type field. Only applies to DATE fields.
 	Freshness *bool
+
 	// A list of values that should be given a different boost when they appear in the
 	// result list. For example, if you are boosting a field called "department," query
 	// terms that match the department field are boosted in the result. However, you
@@ -536,6 +759,7 @@ type Relevance struct {
 	// when they appear in the metadata of a document. When those terms appear they are
 	// given the specified importance instead of the regular importance for the boost.
 	ValueImportanceMap map[string]*int32
+
 	// Specifies the time period that the boost applies to. For example, to make the
 	// boost apply to documents with the field value within the last month, you would
 	// use "2628000s". Once the field value is beyond the specified range, the effect
@@ -544,6 +768,7 @@ type Relevance struct {
 	// field is a numeric string followed by the character "s", for example "86400s"
 	// for one day, or "604800s" for one week. Only applies to DATE fields.
 	Duration *string
+
 	// Determines how values should be interpreted. When the RankOrder field is
 	// ASCENDING, higher numbers are better. For example, a document with a rating
 	// score of 10 is higher ranking than a document with a rating score of 1. When the
@@ -551,6 +776,7 @@ type Relevance struct {
 	// tracking application, a priority 1 task is more important than a priority 5
 	// task. Only applies to LONG and DOUBLE fields.
 	RankOrder Order
+
 	// The relative importance of the field in the search. Larger numbers provide more
 	// of a boost than smaller numbers.
 	Importance *int32
@@ -559,28 +785,41 @@ type Relevance struct {
 // Provides feedback on how relevant a document is to a search. Your application
 // uses the SubmitFeedback () operation to provide relevance information.
 type RelevanceFeedback struct {
+
 	// The unique identifier of the search result that the user provided relevance
 	// feedback for.
+	//
+	// This member is required.
 	ResultId *string
+
 	// Whether to document was relevant or not relevant to the search.
+	//
+	// This member is required.
 	RelevanceValue RelevanceType
 }
 
 // Provides configuration information for a data source to index documents in an
 // Amazon S3 bucket.
 type S3DataSourceConfiguration struct {
+
 	// A list of glob patterns for documents that should not be indexed. If a document
 	// that matches an inclusion prefix also matches an exclusion pattern, the document
 	// is not indexed. For more information about glob patterns, see glob (programming)
 	// (https://en.wikipedia.org/wiki/Glob_(programming)) in Wikipedia.
 	ExclusionPatterns []*string
+
 	// A list of S3 prefixes for the documents that should be included in the index.
 	InclusionPrefixes []*string
+
 	// Provides the path to the S3 bucket that contains the user context filtering
 	// files for the data source.
 	AccessControlListConfiguration *AccessControlListConfiguration
+
 	// The name of the bucket that contains the documents.
+	//
+	// This member is required.
 	BucketName *string
+
 	// Document metadata files that contain information such as the document access
 	// control information, source URI, document author, and custom attributes. Each
 	// metadata file contains metadata about a single document.
@@ -589,38 +828,52 @@ type S3DataSourceConfiguration struct {
 
 // Information required to find a specific file in an Amazon S3 bucket.
 type S3Path struct {
+
 	// The name of the file.
+	//
+	// This member is required.
 	Key *string
+
 	// The name of the S3 bucket that contains the file.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 // Defines configuration for syncing a Salesforce chatter feed. The contents of the
 // object comes from the Salesforce FeedItem table.
 type SalesforceChatterFeedConfiguration struct {
+
 	// Filters the documents in the feed based on status of the user. When you specify
 	// ACTIVE_USERS only documents from users who have an active account are indexed.
 	// When you specify STANDARD_USER only documents for Salesforce standard users are
 	// documented. You can specify both.
 	IncludeFilterTypes []SalesforceChatterFeedIncludeFilterType
+
 	// The name of the column in the Salesforce FeedItem table that contains the
 	// content to index. Typically this is the Body column.
+	//
+	// This member is required.
 	DocumentDataFieldName *string
+
 	// The name of the column in the Salesforce FeedItem table that contains the title
 	// of the document. This is typically the Title collumn.
 	DocumentTitleFieldName *string
+
 	// Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
 	FieldMappings []*DataSourceToIndexFieldMapping
 }
 
 // Provides configuration information for connecting to a Salesforce data source.
 type SalesforceConfiguration struct {
+
 	// A list of regular expression patterns. Documents that match the patterns are
 	// included in the index. Documents that don't match the patterns are excluded from
 	// the index. If a document matches both an inclusion pattern and an exclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// name of the attached file.
 	IncludeAttachmentFilePatterns []*string
+
 	// The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains
 	// the key/value pairs required to connect to your Salesforce instance. The secret
 	// must contain a JSON structure with the following keys:
@@ -644,41 +897,60 @@ type SalesforceConfiguration struct {
 	//
 	//     * username - The user name of the user logging in to
 	// the Salesforce instance.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The instance URL for the Salesforce site that you want to index.
+	//
+	// This member is required.
 	ServerUrl *string
+
 	// Indicates whether Amazon Kendra should index attachments to Salesforce objects.
 	CrawlAttachments *bool
+
 	// Specifies configuration information for the knowlege article types that Amazon
 	// Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
 	// standard fields of knowledge articles, or the custom fields of custom knowledge
 	// articles, but not both.
 	KnowledgeArticleConfiguration *SalesforceKnowledgeArticleConfiguration
+
 	// Provides configuration information for processing attachments to Salesforce
 	// standard objects.
 	StandardObjectAttachmentConfiguration *SalesforceStandardObjectAttachmentConfiguration
+
 	// A list of regular expression patterns. Documents that match the patterns are
 	// excluded from the index. Documents that don't match the patterns are included in
 	// the index. If a document matches both an exclusion pattern and an inclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// name of the attached file.
 	ExcludeAttachmentFilePatterns []*string
+
 	// Specifies the Salesforce standard objects that Amazon Kendra indexes.
 	StandardObjectConfigurations []*SalesforceStandardObjectConfiguration
+
 	// Specifies configuration information for Salesforce chatter feeds.
 	ChatterFeedConfiguration *SalesforceChatterFeedConfiguration
 }
 
 // Provides configuration information for indexing Salesforce custom articles.
 type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
+
 	// One or more objects that map fields in the custom knowledge article to fields in
 	// the Amazon Kendra index.
 	FieldMappings []*DataSourceToIndexFieldMapping
+
 	// The name of the field in the custom knowledge article that contains the document
 	// data to index.
+	//
+	// This member is required.
 	DocumentDataFieldName *string
+
 	// The name of the configuration.
+	//
+	// This member is required.
 	Name *string
+
 	// The name of the field in the custom knowledge article that contains the document
 	// title.
 	DocumentTitleFieldName *string
@@ -689,32 +961,44 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 // standard fields of knowledge articles, or the custom fields of custom knowledge
 // articles, but not both
 type SalesforceKnowledgeArticleConfiguration struct {
+
 	// Provides configuration information for standard Salesforce knowledge articles.
 	StandardKnowledgeArticleTypeConfiguration *SalesforceStandardKnowledgeArticleTypeConfiguration
+
 	// Specifies the document states that should be included when Amazon Kendra indexes
 	// knowledge articles. You must specify at least one state.
+	//
+	// This member is required.
 	IncludedStates []SalesforceKnowledgeArticleState
+
 	// Provides configuration information for custom Salesforce knowledge articles.
 	CustomKnowledgeArticleTypeConfigurations []*SalesforceCustomKnowledgeArticleTypeConfiguration
 }
 
 // Provides configuration information for standard Salesforce knowledge articles.
 type SalesforceStandardKnowledgeArticleTypeConfiguration struct {
+
 	// The name of the field that contains the document title.
 	DocumentTitleFieldName *string
+
 	// One or more objects that map fields in the knowledge article to Amazon Kendra
 	// index fields. The index field must exist before you can map a Salesforce field
 	// to it.
 	FieldMappings []*DataSourceToIndexFieldMapping
+
 	// The name of the field that contains the document data to index.
+	//
+	// This member is required.
 	DocumentDataFieldName *string
 }
 
 // Provides configuration information for processing attachments to Salesforce
 // standard objects.
 type SalesforceStandardObjectAttachmentConfiguration struct {
+
 	// The name of the field used for the document title.
 	DocumentTitleFieldName *string
+
 	// One or more objects that map fields in attachments to Amazon Kendra index
 	// fields.
 	FieldMappings []*DataSourceToIndexFieldMapping
@@ -722,32 +1006,44 @@ type SalesforceStandardObjectAttachmentConfiguration struct {
 
 // Specifies confguration information for indexing a single standard object.
 type SalesforceStandardObjectConfiguration struct {
+
 	// The name of the field in the standard object table that contains the document
 	// titleB.
 	DocumentTitleFieldName *string
+
 	// One or more objects that map fields in the standard object to Amazon Kendra
 	// index fields. The index field must exist before you can map a Salesforce field
 	// to it.
 	FieldMappings []*DataSourceToIndexFieldMapping
+
 	// The name of the standard object.
+	//
+	// This member is required.
 	Name SalesforceStandardObjectName
+
 	// The name of the field in the standard object table that contains the document
 	// contents.
+	//
+	// This member is required.
 	DocumentDataFieldName *string
 }
 
 // Provides information about how a custom index field is used during a search.
 type Search struct {
+
 	// Indicates that the field can be used to create search facets, a count of results
 	// for each value in the field. The default is false .
 	Facetable *bool
+
 	// Determines whether the field is returned in the query response. The default is
 	// true.
 	Displayable *bool
+
 	// Determines whether the field can be used to sort the results of a query. If you
 	// specify sorting on a field that does not have Sortable set to true, Amazon
 	// Kendra returns an exception. The default is false.
 	Sortable *bool
+
 	// Determines whether the field is used in the search. If the Searchable field is
 	// true, you can use relevance tuning to manually tune how Amazon Kendra weights
 	// the field in the search. The default is true for string fields and false for
@@ -758,6 +1054,7 @@ type Search struct {
 // Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
 // data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
 type ServerSideEncryptionConfiguration struct {
+
 	// The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't
 	// support asymmetric CMKs.
 	KmsKeyId *string
@@ -766,18 +1063,29 @@ type ServerSideEncryptionConfiguration struct {
 // Provides configuration information required to connect to a ServiceNow data
 // source.
 type ServiceNowConfiguration struct {
+
 	// The identifier of the release that the ServiceNow host is running. If the host
 	// is not running the LONDON release, use OTHERS.
+	//
+	// This member is required.
 	ServiceNowBuildVersion ServiceNowBuildVersionType
+
 	// Provides configuration information for crawling service catalogs in the
 	// ServiceNow site.
 	ServiceCatalogConfiguration *ServiceNowServiceCatalogConfiguration
+
 	// The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains
 	// the user name and password required to connect to the ServiceNow instance.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The ServiceNow instance that the data source connects to. The host endpoint
 	// should look like the following: {instance}.service-now.com.
+	//
+	// This member is required.
 	HostUrl *string
+
 	// Provides configuration information for crawling knowledge articles in the
 	// ServiceNow site.
 	KnowledgeArticleConfiguration *ServiceNowKnowledgeArticleConfiguration
@@ -786,21 +1094,29 @@ type ServiceNowConfiguration struct {
 // Provides configuration information for crawling knowledge articles in the
 // ServiceNow site.
 type ServiceNowKnowledgeArticleConfiguration struct {
+
 	// The name of the ServiceNow field that is mapped to the index document title
 	// field.
 	DocumentTitleFieldName *string
+
 	// List of regular expressions applied to knowledge articles. Items that don't
 	// match the inclusion pattern are not indexed. The regex is applied to the field
 	// specified in the PatternTargetField
 	ExcludeAttachmentFilePatterns []*string
+
 	// The name of the ServiceNow field that is mapped to the index document contents
 	// field in the Amazon Kendra index.
+	//
+	// This member is required.
 	DocumentDataFieldName *string
+
 	// Indicates whether Amazon Kendra should index attachments to knowledge articles.
 	CrawlAttachments *bool
+
 	// Mapping between ServiceNow fields and Amazon Kendra index fields. You must
 	// create the index field before you map the field.
 	FieldMappings []*DataSourceToIndexFieldMapping
+
 	// List of regular expressions applied to knowledge articles. Items that don't
 	// match the inclusion pattern are not indexed. The regex is applied to the field
 	// specified in the PatternTargetField.
@@ -810,19 +1126,27 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 // Provides configuration information for crawling service catalog items in the
 // ServiceNow site
 type ServiceNowServiceCatalogConfiguration struct {
+
 	// The name of the ServiceNow field that is mapped to the index document title
 	// field.
 	DocumentTitleFieldName *string
+
 	// The name of the ServiceNow field that is mapped to the index document contents
 	// field in the Amazon Kendra index.
+	//
+	// This member is required.
 	DocumentDataFieldName *string
+
 	// Indicates whether Amazon Kendra should crawl attachments to the service catalog
 	// items.
 	CrawlAttachments *bool
+
 	// Determines the types of file attachments that are excluded from the index.
 	ExcludeAttachmentFilePatterns []*string
+
 	// Determines the types of file attachments that are included in the index.
 	IncludeAttachmentFilePatterns []*string
+
 	// Mapping between ServiceNow fields and Amazon Kendra index fields. You must
 	// create the index field before you map the field.
 	FieldMappings []*DataSourceToIndexFieldMapping
@@ -831,12 +1155,14 @@ type ServiceNowServiceCatalogConfiguration struct {
 // Provides configuration information for connecting to a Microsoft SharePoint data
 // source.
 type SharePointConfiguration struct {
+
 	// A list of regular expression patterns. Documents that match the patterns are
 	// excluded from the index. Documents that don't match the patterns are included in
 	// the index. If a document matches both an exclusion pattern and an inclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// display URL of the SharePoint document.
 	ExclusionPatterns []*string
+
 	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The
 	// credentials should be a user/password pair. For more information, see Using a
 	// Microsoft SharePoint Data Source
@@ -844,32 +1170,46 @@ type SharePointConfiguration struct {
 	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
 	// AWS Secrets Manager user guide.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The URLs of the Microsoft SharePoint site that contains the documents that
 	// should be indexed.
+	//
+	// This member is required.
 	Urls []*string
+
 	// TRUE to include attachments to documents stored in your Microsoft SharePoint
 	// site in the index; otherwise, FALSE.
 	CrawlAttachments *bool
+
 	// Set to TRUE to use the Microsoft SharePoint change log to determine the
 	// documents that need to be updated in the index. Depending on the size of the
 	// SharePoint change log, it may take longer for Amazon Kendra to use the change
 	// log than it takes it to determine the changed documents using the Amazon Kendra
 	// document crawler.
 	UseChangeLog *bool
+
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint
 	// attributes to custom fields in the Amazon Kendra index. You must first create
 	// the index fields using the operation before you map SharePoint attributes. For
 	// more information, see Mapping Data Source Fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
 	FieldMappings []*DataSourceToIndexFieldMapping
+
 	// The version of Microsoft SharePoint that you are using as a data source.
+	//
+	// This member is required.
 	SharePointVersion SharePointVersion
+
 	// The Microsoft SharePoint attribute field that contains the title of the
 	// document.
 	DocumentTitleFieldName *string
+
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
+
 	// A list of regular expression patterns. Documents that match the patterns are
 	// included in the index. Documents that don't match the patterns are excluded from
 	// the index. If a document matches both an inclusion pattern and an exclusion
@@ -882,9 +1222,13 @@ type SharePointConfiguration struct {
 // query. You can specify a single attribute for sorting. The attribute must have
 // the Sortable flag set to true, otherwise Amazon Kendra returns an exception.
 type SortingConfiguration struct {
+
 	// The order that the results should be returned in. In case of ties, the relevance
 	// assigned to the result by Amazon Kendra is used as the tie-breaker.
+	//
+	// This member is required.
 	SortOrder SortOrder
+
 	// The name of the document attribute used to sort the response. You can use any
 	// field that has the Sortable flag set to true. You can also sort by any of the
 	// following built-in attributes:
@@ -899,11 +1243,14 @@ type SortingConfiguration struct {
 	//     * _version
 	//
 	//     * _view_count
+	//
+	// This member is required.
 	DocumentAttributeKey *string
 }
 
 // Provides information that configures Amazon Kendra to use a SQL database.
 type SqlConfiguration struct {
+
 	// Determines whether Amazon Kendra encloses SQL identifiers in double quotes (")
 	// when making a database query. By default, Amazon Kendra passes SQL identifiers
 	// the way that they are entered into the data source configuration. It does not
@@ -919,34 +1266,50 @@ type SqlConfiguration struct {
 // and values can consist of Unicode letters, digits, white space, and any of the
 // following symbols: _ . : / = + - @.
 type Tag struct {
+
 	// The value associated with the tag. The value may be an empty string but it can't
 	// be null.
+	//
+	// This member is required.
 	Value *string
+
 	// The key for the tag. Keys are not case sensitive and must be unique for the
 	// index, FAQ, or data source.
+	//
+	// This member is required.
 	Key *string
 }
 
 // Provides information about text documents indexed in an index.
 type TextDocumentStatistics struct {
+
 	// The number of text documents indexed.
+	//
+	// This member is required.
 	IndexedTextDocumentsCount *int32
+
 	// The total size, in bytes, of the indexed documents.
+	//
+	// This member is required.
 	IndexedTextBytes *int64
 }
 
 // Provides text and information about where to highlight the text.
 type TextWithHighlights struct {
+
 	// The beginning and end of the text that should be highlighted.
 	Highlights []*Highlight
+
 	// The text to display to the user.
 	Text *string
 }
 
 // Provides a range of time.
 type TimeRange struct {
+
 	// The UNIX datetime of the beginning of the time range.
 	StartTime *time.Time
+
 	// The UNIX datetime of the end of the time range.
 	EndTime *time.Time
 }

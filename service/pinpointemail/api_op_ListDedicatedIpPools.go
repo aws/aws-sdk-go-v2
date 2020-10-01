@@ -56,9 +56,11 @@ func (c *Client) ListDedicatedIpPools(ctx context.Context, params *ListDedicated
 
 // A request to obtain a list of dedicated IP pools.
 type ListDedicatedIpPoolsInput struct {
+
 	// A token returned from a previous call to ListDedicatedIpPools to indicate the
 	// position in the list of dedicated IP pools.
 	NextToken *string
+
 	// The number of results to show in a single call to ListDedicatedIpPools. If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
@@ -68,10 +70,12 @@ type ListDedicatedIpPoolsInput struct {
 
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
+
 	// A token that indicates that there are additional IP pools to list. To view
 	// additional IP pools, issue another request to ListDedicatedIpPools, passing this
 	// token in the NextToken parameter.
 	NextToken *string
+
 	// A list of all of the dedicated IP pools that are associated with your Amazon
 	// Pinpoint account.
 	DedicatedIpPools []*string

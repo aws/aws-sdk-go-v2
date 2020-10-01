@@ -55,19 +55,25 @@ func (c *Client) ListAuthorizers(ctx context.Context, params *ListAuthorizersInp
 }
 
 type ListAuthorizersInput struct {
+
 	// The status of the list authorizers request.
 	Status types.AuthorizerStatus
+
 	// A marker used to get the next set of results.
 	Marker *string
+
 	// The maximum number of results to return at one time.
 	PageSize *int32
+
 	// Return the list of authorizers in ascending alphabetical order.
 	AscendingOrder *bool
 }
 
 type ListAuthorizersOutput struct {
+
 	// The authorizers.
 	Authorizers []*types.AuthorizerSummary
+
 	// A marker used to get the next set of results.
 	NextMarker *string
 

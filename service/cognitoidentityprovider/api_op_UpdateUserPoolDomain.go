@@ -75,22 +75,32 @@ func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoo
 
 // The UpdateUserPoolDomain request input.
 type UpdateUserPoolDomainInput struct {
+
 	// The domain name for the custom domain that hosts the sign-up and sign-in pages
 	// for your application. For example: auth.example.com. This string can include
 	// only lowercase letters, numbers, and hyphens. Do not use a hyphen for the first
 	// or last character. Use periods to separate subdomain names.
+	//
+	// This member is required.
 	Domain *string
+
 	// The configuration for a custom domain that hosts the sign-up and sign-in pages
 	// for your application. Use this object to specify an SSL certificate that is
 	// managed by ACM.
+	//
+	// This member is required.
 	CustomDomainConfig *types.CustomDomainConfigType
+
 	// The ID of the user pool that is associated with the custom domain that you are
 	// updating the certificate for.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 // The UpdateUserPoolDomain response output.
 type UpdateUserPoolDomainOutput struct {
+
 	// The Amazon CloudFront endpoint that Amazon Cognito set up when you added the
 	// custom domain to your user pool.
 	CloudFrontDomain *string

@@ -55,21 +55,26 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 }
 
 type ListClustersInput struct {
+
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
+
 	// Specify a prefix of the name of the clusters that you want to list. The service
 	// lists all the clusters whose names start with this prefix.
 	ClusterNameFilter *string
+
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
 	MaxResults *int32
 }
 
 type ListClustersOutput struct {
+
 	// Information on each of the MSK clusters in the response.
 	ClusterInfoList []*types.ClusterInfo
+
 	// The paginated results marker. When the result of a ListClusters operation is
 	// truncated, the call returns NextToken in the response. To get another batch of
 	// clusters, provide this token in your next request.

@@ -56,12 +56,22 @@ func (c *Client) DeleteRoute(ctx context.Context, params *DeleteRouteInput, optF
 
 //
 type DeleteRouteInput struct {
+
 	// The name of the route to delete.
+	//
+	// This member is required.
 	RouteName *string
+
 	// The name of the service mesh to delete the route in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual router to delete the route in.
+	//
+	// This member is required.
 	VirtualRouterName *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -71,7 +81,10 @@ type DeleteRouteInput struct {
 
 //
 type DeleteRouteOutput struct {
+
 	// The route that was deleted.
+	//
+	// This member is required.
 	Route *types.RouteData
 
 	// Metadata pertaining to the operation's result.

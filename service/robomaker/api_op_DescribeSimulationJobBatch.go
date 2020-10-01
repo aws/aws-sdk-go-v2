@@ -57,22 +57,30 @@ func (c *Client) DescribeSimulationJobBatch(ctx context.Context, params *Describ
 }
 
 type DescribeSimulationJobBatchInput struct {
+
 	// The id of the batch to describe.
+	//
+	// This member is required.
 	Batch *string
 }
 
 type DescribeSimulationJobBatchOutput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
 	// The reason the simulation job batch failed.
 	FailureReason *string
+
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// last updated.
 	LastUpdatedAt *time.Time
+
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// created.
 	CreatedAt *time.Time
+
 	// The status of the batch. Pending The simulation job batch request is pending.
 	// InProgress The simulation job batch is in progress. Failed The simulation job
 	// batch failed. One or more simulation job requests could not be completed due to
@@ -89,20 +97,27 @@ type DescribeSimulationJobBatchOutput struct {
 	// status will be Failed. If there are no such failing request, the batch status
 	// will be TimedOut. TimedOut The simulation batch job timed out.
 	Status types.SimulationJobBatchStatus
+
 	// A list of pending simulation job requests. These requests have not yet been
 	// created into simulation jobs.
 	PendingRequests []*types.SimulationJobRequest
+
 	// A list of created simulation job summaries.
 	CreatedRequests []*types.SimulationJobSummary
+
 	// The Amazon Resource Name (ARN) of the batch.
 	Arn *string
+
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job batch.
 	Tags map[string]*string
+
 	// The failure code of the simulation job batch.
 	FailureCode types.SimulationJobBatchErrorCode
+
 	// The batch policy.
 	BatchPolicy *types.BatchPolicy
+
 	// A list of failed create simulation job requests. The request failed to be
 	// created into a simulation job. Failed requests do not have a simulation job ID.
 	FailedRequests []*types.FailedCreateSimulationJobRequest

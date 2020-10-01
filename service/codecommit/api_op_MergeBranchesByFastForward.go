@@ -55,21 +55,33 @@ func (c *Client) MergeBranchesByFastForward(ctx context.Context, params *MergeBr
 }
 
 type MergeBranchesByFastForwardInput struct {
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
 	DestinationCommitSpecifier *string
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
 	SourceCommitSpecifier *string
+
 	// The branch where the merge is applied.
 	TargetBranch *string
+
 	// The name of the repository where you want to merge two branches.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type MergeBranchesByFastForwardOutput struct {
+
 	// The commit ID of the merge in the destination or target branch.
 	CommitId *string
+
 	// The tree ID of the merge in the destination or target branch.
 	TreeId *string
 

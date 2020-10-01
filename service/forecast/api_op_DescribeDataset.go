@@ -66,16 +66,21 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 }
 
 type DescribeDatasetInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset.
+	//
+	// This member is required.
 	DatasetArn *string
 }
 
 type DescribeDatasetOutput struct {
+
 	// When you create a dataset, LastModificationTime is the same as CreationTime.
 	// While data is being imported to the dataset, LastModificationTime is the current
 	// time of the DescribeDataset call. After a CreateDatasetImportJob () operation
 	// has finished, LastModificationTime is when the import job completed or failed.
 	LastModificationTime *time.Time
+
 	// The status of the dataset. States include:
 	//
 	//     * ACTIVE
@@ -95,25 +100,33 @@ type DescribeDatasetOutput struct {
 	// of the dataset is UPDATE_IN_PROGRESS. The Status of the dataset must be ACTIVE
 	// before you can import training data.
 	Status *string
+
 	// The name of the dataset.
 	DatasetName *string
+
 	// The Amazon Resource Name (ARN) of the dataset.
 	DatasetArn *string
+
 	// The AWS Key Management Service (KMS) key and the AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *types.EncryptionConfig
+
 	// When the dataset was created.
 	CreationTime *time.Time
+
 	// The domain associated with the dataset.
 	Domain types.Domain
+
 	// An array of SchemaAttribute objects that specify the dataset fields. Each
 	// SchemaAttribute specifies the name and data type of a field.
 	Schema *types.Schema
+
 	// The frequency of data collection. Valid intervals are Y (Year), M (Month), W
 	// (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10
 	// minutes), 5min (5 minutes), and 1min (1 minute). For example, "M" indicates
 	// every month and "30min" indicates every 30 minutes.
 	DataFrequency *string
+
 	// The dataset type.
 	DatasetType types.DatasetType
 

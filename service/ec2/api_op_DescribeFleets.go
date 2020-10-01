@@ -55,6 +55,7 @@ func (c *Client) DescribeFleets(ctx context.Context, params *DescribeFleetsInput
 }
 
 type DescribeFleetsInput struct {
+
 	// The filters.
 	//
 	//     * activity-status - The progress of the EC2 Fleet ( error |
@@ -75,14 +76,18 @@ type DescribeFleetsInput struct {
 	//     * type - The type of
 	// request (instant | request | maintain).
 	Filters []*types.Filter
+
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The ID of the EC2 Fleets.
 	FleetIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -91,8 +96,10 @@ type DescribeFleetsInput struct {
 }
 
 type DescribeFleetsOutput struct {
+
 	// Information about the EC2 Fleets.
 	Fleets []*types.FleetData
+
 	// The token for the next set of results.
 	NextToken *string
 

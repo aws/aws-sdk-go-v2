@@ -57,18 +57,27 @@ func (c *Client) EvaluatePullRequestApprovalRules(ctx context.Context, params *E
 }
 
 type EvaluatePullRequestApprovalRulesInput struct {
+
 	// The system-generated ID for the pull request revision. To retrieve the most
 	// recent revision ID for a pull request, use GetPullRequest ().
+	//
+	// This member is required.
 	RevisionId *string
+
 	// The system-generated ID of the pull request you want to evaluate.
+	//
+	// This member is required.
 	PullRequestId *string
 }
 
 type EvaluatePullRequestApprovalRulesOutput struct {
+
 	// The result of the evaluation, including the names of the rules whose conditions
 	// have been met (if any), the names of the rules whose conditions have not been
 	// met (if any), whether the pull request is in the approved state, and whether the
 	// pull request approval rule has been set aside by an override.
+	//
+	// This member is required.
 	Evaluation *types.Evaluation
 
 	// Metadata pertaining to the operation's result.

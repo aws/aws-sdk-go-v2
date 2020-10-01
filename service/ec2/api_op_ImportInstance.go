@@ -63,22 +63,30 @@ func (c *Client) ImportInstance(ctx context.Context, params *ImportInstanceInput
 }
 
 type ImportInstanceInput struct {
+
 	// A description for the instance being imported.
 	Description *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The launch specification.
 	LaunchSpecification *types.ImportInstanceLaunchSpecification
+
 	// The disk image.
 	DiskImages []*types.DiskImage
+
 	// The instance operating system.
+	//
+	// This member is required.
 	Platform types.PlatformValues
 }
 
 type ImportInstanceOutput struct {
+
 	// Information about the conversion task.
 	ConversionTask *types.ConversionTask
 

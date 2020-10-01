@@ -58,11 +58,18 @@ func (c *Client) ResetImageAttribute(ctx context.Context, params *ResetImageAttr
 
 // Contains the parameters for ResetImageAttribute.
 type ResetImageAttributeInput struct {
+
 	// The attribute to reset (currently you can only reset the launch permission
 	// attribute).
+	//
+	// This member is required.
 	Attribute types.ResetImageAttributeName
+
 	// The ID of the AMI.
+	//
+	// This member is required.
 	ImageId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

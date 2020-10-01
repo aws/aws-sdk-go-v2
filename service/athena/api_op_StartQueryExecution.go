@@ -63,8 +63,10 @@ func (c *Client) StartQueryExecution(ctx context.Context, params *StartQueryExec
 }
 
 type StartQueryExecutionInput struct {
+
 	// The database within which the query executes.
 	QueryExecutionContext *types.QueryExecutionContext
+
 	// Specifies information about where and how to save the results of the query
 	// execution. If the query runs in a workgroup, then workgroup's settings may
 	// override query settings. This affects the query results location. The workgroup
@@ -72,8 +74,12 @@ type StartQueryExecutionInput struct {
 	// the WorkGroupConfiguration. See
 	// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
 	ResultConfiguration *types.ResultConfiguration
+
 	// The SQL query statements to be executed.
+	//
+	// This member is required.
 	QueryString *string
+
 	// A unique case-sensitive string used to ensure the request to create the query is
 	// idempotent (executes only once). If another StartQueryExecution request is
 	// received, the same response is returned and another query is not created. If a
@@ -82,11 +88,13 @@ type StartQueryExecutionInput struct {
 	// Java) auto-generate the token for users. If you are not using the AWS SDK or the
 	// AWS CLI, you must provide this token or the action will fail.
 	ClientRequestToken *string
+
 	// The name of the workgroup in which the query is being started.
 	WorkGroup *string
 }
 
 type StartQueryExecutionOutput struct {
+
 	// The unique ID of the query that ran as a result of this request.
 	QueryExecutionId *string
 

@@ -55,9 +55,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// An array of tag keys to delete
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

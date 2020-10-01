@@ -65,8 +65,11 @@ func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChan
 
 // The input for the PutDeliveryChannel () action.
 type PutDeliveryChannelInput struct {
+
 	// The configuration delivery channel object that delivers the configuration
 	// information to an Amazon S3 bucket and to an Amazon SNS topic.
+	//
+	// This member is required.
 	DeliveryChannel *types.DeliveryChannel
 }
 

@@ -56,10 +56,16 @@ func (c *Client) DeleteTypedLinkFacet(ctx context.Context, params *DeleteTypedLi
 }
 
 type DeleteTypedLinkFacetInput struct {
+
 	// The unique name of the typed link facet.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
 }
 

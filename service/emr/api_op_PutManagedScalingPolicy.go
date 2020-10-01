@@ -60,9 +60,15 @@ func (c *Client) PutManagedScalingPolicy(ctx context.Context, params *PutManaged
 }
 
 type PutManagedScalingPolicyInput struct {
+
 	// Specifies the constraints for the managed scaling policy.
+	//
+	// This member is required.
 	ManagedScalingPolicy *types.ManagedScalingPolicy
+
 	// Specifies the ID of an EMR cluster where the managed scaling policy is attached.
+	//
+	// This member is required.
 	ClusterId *string
 }
 

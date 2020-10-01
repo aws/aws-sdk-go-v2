@@ -57,10 +57,16 @@ func (c *Client) CreateTypedLinkFacet(ctx context.Context, params *CreateTypedLi
 }
 
 type CreateTypedLinkFacetInput struct {
+
 	// Facet () structure that is associated with the typed link facet.
+	//
+	// This member is required.
 	Facet *types.TypedLinkFacet
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
+	//
+	// This member is required.
 	SchemaArn *string
 }
 

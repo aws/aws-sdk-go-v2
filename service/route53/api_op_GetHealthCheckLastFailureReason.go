@@ -57,20 +57,26 @@ func (c *Client) GetHealthCheckLastFailureReason(ctx context.Context, params *Ge
 
 // A request for the reason that a health check failed most recently.
 type GetHealthCheckLastFailureReasonInput struct {
+
 	// The ID for the health check for which you want the last failure reason. When you
 	// created the health check, CreateHealthCheck returned the ID in the response, in
 	// the HealthCheckId element. If you want to get the last failure reason for a
 	// calculated health check, you must use the Amazon Route 53 console or the
 	// CloudWatch console. You can't use GetHealthCheckLastFailureReason for a
 	// calculated health check.
+	//
+	// This member is required.
 	HealthCheckId *string
 }
 
 // A complex type that contains the response to a GetHealthCheckLastFailureReason
 // request.
 type GetHealthCheckLastFailureReasonOutput struct {
+
 	// A list that contains one Observation element for each Amazon Route 53 health
 	// checker that is reporting a last failure reason.
+	//
+	// This member is required.
 	HealthCheckObservations []*types.HealthCheckObservation
 
 	// Metadata pertaining to the operation's result.

@@ -57,22 +57,32 @@ func (c *Client) GetCommentReactions(ctx context.Context, params *GetCommentReac
 }
 
 type GetCommentReactionsInput struct {
+
 	// The ID of the comment for which you want to get reactions information.
+	//
+	// This member is required.
 	CommentId *string
+
 	// Optional. The Amazon Resource Name (ARN) of the user or identity for which you
 	// want to get reaction information.
 	ReactionUserArn *string
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	// The default is the same as the allowed maximum, 1,000.
 	MaxResults *int32
+
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
 }
 
 type GetCommentReactionsOutput struct {
+
 	// An array of reactions to the specified comment.
+	//
+	// This member is required.
 	ReactionsForComment []*types.ReactionForComment
+
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string

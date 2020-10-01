@@ -58,17 +58,27 @@ func (c *Client) CreateCacheSubnetGroup(ctx context.Context, params *CreateCache
 
 // Represents the input of a CreateCacheSubnetGroup operation.
 type CreateCacheSubnetGroupInput struct {
+
 	// A list of VPC subnet IDs for the cache subnet group.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// A description for the cache subnet group.
+	//
+	// This member is required.
 	CacheSubnetGroupDescription *string
+
 	// A name for the cache subnet group. This value is stored as a lowercase string.
 	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
 	// Example: mysubnetgroup
+	//
+	// This member is required.
 	CacheSubnetGroupName *string
 }
 
 type CreateCacheSubnetGroupOutput struct {
+
 	// Represents the output of one of the following operations:
 	//
 	//     *

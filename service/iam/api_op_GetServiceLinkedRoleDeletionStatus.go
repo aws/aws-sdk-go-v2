@@ -61,15 +61,22 @@ func (c *Client) GetServiceLinkedRoleDeletionStatus(ctx context.Context, params 
 }
 
 type GetServiceLinkedRoleDeletionStatusInput struct {
+
 	// The deletion task identifier. This identifier is returned by the
 	// DeleteServiceLinkedRole () operation in the format task/aws-service-role///.
+	//
+	// This member is required.
 	DeletionTaskId *string
 }
 
 type GetServiceLinkedRoleDeletionStatusOutput struct {
+
 	// An object that contains details about the reason the deletion failed.
 	Reason *types.DeletionTaskFailureReasonType
+
 	// The status of the deletion.
+	//
+	// This member is required.
 	Status types.DeletionTaskStatusType
 
 	// Metadata pertaining to the operation's result.

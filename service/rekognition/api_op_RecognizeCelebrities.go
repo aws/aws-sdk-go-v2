@@ -78,17 +78,22 @@ func (c *Client) RecognizeCelebrities(ctx context.Context, params *RecognizeCele
 }
 
 type RecognizeCelebritiesInput struct {
+
 	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
 	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
 	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
 	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
 	Image *types.Image
 }
 
 type RecognizeCelebritiesOutput struct {
+
 	// Details about each unrecognized face in the image.
 	UnrecognizedFaces []*types.ComparedFace
+
 	// The orientation of the input image (counterclockwise direction). If your
 	// application displays the image, you can use this value to correct the
 	// orientation. The bounding box coordinates returned in CelebrityFaces and
@@ -100,6 +105,7 @@ type RecognizeCelebritiesOutput struct {
 	// box coordinates represent face locations after Exif metadata is used to correct
 	// the image orientation. Images in .png format don't contain Exif metadata.
 	OrientationCorrection types.OrientationCorrection
+
 	// Details about each celebrity found in the image. Amazon Rekognition can detect a
 	// maximum of 15 celebrities in an image.
 	CelebrityFaces []*types.Celebrity

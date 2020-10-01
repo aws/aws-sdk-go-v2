@@ -56,14 +56,21 @@ func (c *Client) DescribeMigrationTask(ctx context.Context, params *DescribeMigr
 }
 
 type DescribeMigrationTaskInput struct {
+
 	// The identifier given to the MigrationTask. Do not store personal data in this
 	// field.
+	//
+	// This member is required.
 	MigrationTaskName *string
+
 	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
 	ProgressUpdateStream *string
 }
 
 type DescribeMigrationTaskOutput struct {
+
 	// Object encapsulating information about the migration task.
 	MigrationTask *types.MigrationTask
 

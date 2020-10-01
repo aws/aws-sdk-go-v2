@@ -130,6 +130,7 @@ func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput
 }
 
 type PutSecretValueInput struct {
+
 	// Specifies the secret to which you want to add a new version. You can specify
 	// either the Amazon Resource Name (ARN) or the friendly name of the secret. The
 	// secret must already exist. If you specify an ARN, we generally recommend that
@@ -147,7 +148,10 @@ type PutSecretValueInput struct {
 	// name', you must not include the random suffix. If you do include the random
 	// suffix added by Secrets Manager, you receive either a ResourceNotFoundException
 	// or an AccessDeniedException error, depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
+
 	// (Optional) Specifies binary data that you want to encrypt and store in the new
 	// version of the secret. To use this parameter in the command-line tools, we
 	// recommend that you store your binary data in a file and then use the appropriate
@@ -156,6 +160,7 @@ type PutSecretValueInput struct {
 	// be empty.  <p>This parameter is not accessible if the secret using the Secrets
 	// Manager console.</p> <p></p>
 	SecretBinary []byte
+
 	// (Optional) Specifies text data that you want to encrypt and store in this new
 	// version of the secret. Either SecretString or SecretBinary must have a value,
 	// but not both. They cannot both be empty.  <p>If you create this secret by using
@@ -173,6 +178,7 @@ type PutSecretValueInput struct {
 	// parameter, you should use single quotes to avoid confusion with the double
 	// quotes required in the JSON text.</p>
 	SecretString *string
+
 	// (Optional) Specifies a unique identifier for the new version of the secret. If
 	// you use the AWS CLI or one of the AWS SDK to call this operation, then you can
 	// leave this parameter empty. The CLI or SDK generates a random UUID for you and
@@ -202,6 +208,7 @@ type PutSecretValueInput struct {
 	// This
 	// value becomes the VersionId of the new version.
 	ClientRequestToken *string
+
 	// (Optional) Specifies a list of staging labels that are attached to this version
 	// of the secret. These staging labels are used to track the versions through the
 	// rotation process by the Lambda rotation function. A staging label must be unique
@@ -214,15 +221,19 @@ type PutSecretValueInput struct {
 }
 
 type PutSecretValueOutput struct {
+
 	// The unique identifier of the version of the secret you just created or updated.
 	VersionId *string
+
 	// The Amazon Resource Name (ARN) for the secret for which you just created a
 	// version.
 	ARN *string
+
 	// The list of staging labels that are currently attached to this version of the
 	// secret. Staging labels are used to track a version as it progresses through the
 	// secret rotation process.
 	VersionStages []*string
+
 	// The friendly name of the secret for which you just created or updated a version.
 	Name *string
 

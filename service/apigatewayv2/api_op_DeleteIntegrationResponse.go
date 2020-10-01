@@ -55,11 +55,20 @@ func (c *Client) DeleteIntegrationResponse(ctx context.Context, params *DeleteIn
 }
 
 type DeleteIntegrationResponseInput struct {
+
 	// The integration ID.
+	//
+	// This member is required.
 	IntegrationId *string
+
 	// The integration response ID.
+	//
+	// This member is required.
 	IntegrationResponseId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 

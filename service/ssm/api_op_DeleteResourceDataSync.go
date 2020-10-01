@@ -57,9 +57,13 @@ func (c *Client) DeleteResourceDataSync(ctx context.Context, params *DeleteResou
 }
 
 type DeleteResourceDataSyncInput struct {
+
 	// Specify the type of resource data sync to delete.
 	SyncType *string
+
 	// The name of the configuration to delete.
+	//
+	// This member is required.
 	SyncName *string
 }
 

@@ -9,37 +9,51 @@ import (
 // Attributes of the data specified by the customer. Use these to describe the data
 // to be labeled.
 type HumanLoopDataAttributes struct {
+
 	// Declares that your content is free of personally identifiable information or
 	// adult content. Amazon SageMaker can restrict the Amazon Mechanical Turk workers
 	// who can view your task based on this information.
+	//
+	// This member is required.
 	ContentClassifiers []ContentClassifier
 }
 
 // An object containing the human loop input in JSON format.
 type HumanLoopInput struct {
+
 	// Serialized input from the human loop. The input must be a string representation
 	// of a file in JSON format.
+	//
+	// This member is required.
 	InputContent *string
 }
 
 // Information about where the human output will be stored.
 type HumanLoopOutput struct {
+
 	// The location of the Amazon S3 object where Amazon Augmented AI stores your human
 	// loop output.
+	//
+	// This member is required.
 	OutputS3Uri *string
 }
 
 // Summary information about the human loop.
 type HumanLoopSummary struct {
+
 	// The name of the human loop.
 	HumanLoopName *string
+
 	// The Amazon Resource Name (ARN) of the flow definition used to configure the
 	// human loop.
 	FlowDefinitionArn *string
+
 	// The status of the human loop.
 	HumanLoopStatus HumanLoopStatus
+
 	// When Amazon Augmented AI created the human loop.
 	CreationTime *time.Time
+
 	// The reason why the human loop failed. A failure reason is returned when the
 	// status of the human loop is Failed.
 	FailureReason *string

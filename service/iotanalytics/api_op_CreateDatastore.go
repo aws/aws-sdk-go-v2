@@ -56,13 +56,19 @@ func (c *Client) CreateDatastore(ctx context.Context, params *CreateDatastoreInp
 }
 
 type CreateDatastoreInput struct {
+
 	// How long, in days, message data is kept for the data store. When
 	// "customerManagedS3" storage is selected, this parameter is ignored.
 	RetentionPeriod *types.RetentionPeriod
+
 	// The name of the data store.
+	//
+	// This member is required.
 	DatastoreName *string
+
 	// Metadata which can be used to manage the data store.
 	Tags []*types.Tag
+
 	// Where data store data is stored. You may choose one of "serviceManagedS3" or
 	// "customerManagedS3" storage. If not specified, the default is
 	// "serviceManagedS3". This cannot be changed after the data store is created.
@@ -70,10 +76,13 @@ type CreateDatastoreInput struct {
 }
 
 type CreateDatastoreOutput struct {
+
 	// The ARN of the data store.
 	DatastoreArn *string
+
 	// How long, in days, message data is kept for the data store.
 	RetentionPeriod *types.RetentionPeriod
+
 	// The name of the data store.
 	DatastoreName *string
 

@@ -59,13 +59,20 @@ func (c *Client) GetAttendee(ctx context.Context, params *GetAttendeeInput, optF
 }
 
 type GetAttendeeInput struct {
+
 	// The Amazon Chime SDK attendee ID.
+	//
+	// This member is required.
 	AttendeeId *string
+
 	// The Amazon Chime SDK meeting ID.
+	//
+	// This member is required.
 	MeetingId *string
 }
 
 type GetAttendeeOutput struct {
+
 	// The Amazon Chime SDK attendee information.
 	Attendee *types.Attendee
 

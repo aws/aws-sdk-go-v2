@@ -74,12 +74,16 @@ func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceI
 
 //
 type DeleteDBInstanceInput struct {
+
 	// The DB instance identifier for the DB instance to be deleted. This parameter
 	// isn't case-sensitive. Constraints:
 	//
 	//     * Must match the name of an existing DB
 	// instance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// A value that indicates whether to skip the creation of a final DB snapshot
 	// before the DB instance is deleted. If skip is specified, no DB snapshot is
 	// created. If skip isn't specified, a DB snapshot is created before the DB
@@ -89,10 +93,12 @@ type DeleteDBInstanceInput struct {
 	// skip is specified. Specify skip when deleting a read replica. The
 	// FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
 	SkipFinalSnapshot *bool
+
 	// A value that indicates whether to remove automated backups immediately after the
 	// DB instance is deleted. This parameter isn't case-sensitive. The default is to
 	// remove automated backups immediately after the DB instance is deleted.
 	DeleteAutomatedBackups *bool
+
 	// The DBSnapshotIdentifier of the new DBSnapshot created when the
 	// SkipFinalSnapshot parameter is disabled. Specifying this parameter and also
 	// specifying to skip final DB snapshot creation in SkipFinalShapshot results in an
@@ -111,6 +117,7 @@ type DeleteDBInstanceInput struct {
 }
 
 type DeleteDBInstanceOutput struct {
+
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
 	// response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance

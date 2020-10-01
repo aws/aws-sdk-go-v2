@@ -55,11 +55,20 @@ func (c *Client) DeleteLogPattern(ctx context.Context, params *DeleteLogPatternI
 }
 
 type DeleteLogPatternInput struct {
+
 	// The name of the log pattern.
+	//
+	// This member is required.
 	PatternName *string
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The name of the log pattern set.
+	//
+	// This member is required.
 	PatternSetName *string
 }
 

@@ -82,17 +82,22 @@ func (c *Client) ListVaults(ctx context.Context, params *ListVaultsInput, optFns
 // Provides options to retrieve the vault list owned by the calling user's account.
 // The list provides metadata information for each vault.
 type ListVaultsInput struct {
+
 	// The AccountId value is the AWS account ID. This value must match the AWS account
 	// ID associated with the credentials used to sign the request. You can either
 	// specify an AWS account ID or optionally a single '-' (hyphen), in which case
 	// Amazon Glacier uses the AWS account ID associated with the credentials used to
 	// sign the request. If you specify your account ID, do not include any hyphens
 	// ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The maximum number of vaults to be returned. The default limit is 10. The number
 	// of vaults returned might be fewer than the specified limit, but the number of
 	// returned vaults never exceeds the limit.
 	Limit *string
+
 	// A string used for pagination. The marker specifies the vault ARN after which the
 	// listing of vaults should begin.
 	Marker *string
@@ -100,8 +105,10 @@ type ListVaultsInput struct {
 
 // Contains the Amazon S3 Glacier response to your request.
 type ListVaultsOutput struct {
+
 	// List of vaults.
 	VaultList []*types.DescribeVaultOutput
+
 	// The vault ARN at which to continue pagination of the results. You use the marker
 	// in another List Vaults request to obtain more vaults in the list.
 	Marker *string

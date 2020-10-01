@@ -56,7 +56,10 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 }
 
 type DeleteApplicationInput struct {
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
 }
 

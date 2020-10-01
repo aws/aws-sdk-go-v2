@@ -58,6 +58,7 @@ func (c *Client) SetInstanceHealth(ctx context.Context, params *SetInstanceHealt
 }
 
 type SetInstanceHealthInput struct {
+
 	// If the Auto Scaling group of the specified instance has a HealthCheckGracePeriod
 	// specified for the group, by default, this call respects the grace period. Set
 	// this to False, to have the call not respect the grace period associated with the
@@ -65,11 +66,17 @@ type SetInstanceHealthInput struct {
 	// href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html">CreateAutoScalingGroup</a>
 	// in the <i>Amazon EC2 Auto Scaling API Reference</i>.</p>
 	ShouldRespectGracePeriod *bool
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The health status of the instance. Set to Healthy to have the instance remain in
 	// service. Set to Unhealthy to have the instance be out of service. Amazon EC2
 	// Auto Scaling terminates and replaces the unhealthy instance.
+	//
+	// This member is required.
 	HealthStatus *string
 }
 

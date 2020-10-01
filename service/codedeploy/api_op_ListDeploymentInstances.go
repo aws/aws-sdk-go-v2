@@ -60,15 +60,21 @@ func (c *Client) ListDeploymentInstances(ctx context.Context, params *ListDeploy
 
 // Represents the input of a ListDeploymentInstances operation.
 type ListDeploymentInstancesInput struct {
+
 	// The unique ID of a deployment.
+	//
+	// This member is required.
 	DeploymentId *string
+
 	// An identifier returned from the previous list deployment instances call. It can
 	// be used to return the next set of deployment instances in the list.
 	NextToken *string
+
 	// The set of instances in a blue/green deployment, either those in the original
 	// environment ("BLUE") or those in the replacement environment ("GREEN"), for
 	// which you want to view instance information.
 	InstanceTypeFilter []types.InstanceType
+
 	// A subset of instances to list by status:
 	//
 	//     * Pending: Include those instances
@@ -92,10 +98,12 @@ type ListDeploymentInstancesInput struct {
 
 // Represents the output of a ListDeploymentInstances operation.
 type ListDeploymentInstancesOutput struct {
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list deployment instances call to return the next
 	// set of deployment instances in the list.
 	NextToken *string
+
 	// A list of instance IDs.
 	InstancesList []*string
 

@@ -63,6 +63,7 @@ func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWeb
 }
 
 type DisassociateWebACLInput struct {
+
 	// The ARN (Amazon Resource Name) of the resource from which the web ACL is being
 	// removed, either an application load balancer or Amazon API Gateway stage. The
 	// ARN should be in one of the following formats:
@@ -74,6 +75,8 @@ type DisassociateWebACLInput struct {
 	//
 	// * For an Amazon API Gateway stage:
 	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

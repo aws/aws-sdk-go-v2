@@ -57,12 +57,16 @@ func (c *Client) DescribeEntitiesDetectionJob(ctx context.Context, params *Descr
 }
 
 type DescribeEntitiesDetectionJobInput struct {
+
 	// The identifier that Amazon Comprehend generated for the job. The operation
 	// returns this identifier in its response.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribeEntitiesDetectionJobOutput struct {
+
 	// An object that contains the properties associated with an entities detection
 	// job.
 	EntitiesDetectionJobProperties *types.EntitiesDetectionJobProperties

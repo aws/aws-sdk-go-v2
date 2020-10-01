@@ -58,6 +58,7 @@ func (c *Client) UpdateMyUserProfile(ctx context.Context, params *UpdateMyUserPr
 }
 
 type UpdateMyUserProfileInput struct {
+
 	// The user's SSH public key.
 	SshPublicKey *string
 }

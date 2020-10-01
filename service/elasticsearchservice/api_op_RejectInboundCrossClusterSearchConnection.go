@@ -59,13 +59,17 @@ func (c *Client) RejectInboundCrossClusterSearchConnection(ctx context.Context, 
 // Container for the parameters to the RejectInboundCrossClusterSearchConnection ()
 // operation.
 type RejectInboundCrossClusterSearchConnectionInput struct {
+
 	// The id of the inbound connection that you want to reject.
+	//
+	// This member is required.
 	CrossClusterSearchConnectionId *string
 }
 
 // The result of a RejectInboundCrossClusterSearchConnection () operation. Contains
 // details of rejected inbound connection.
 type RejectInboundCrossClusterSearchConnectionOutput struct {
+
 	// Specifies the InboundCrossClusterSearchConnection () of rejected inbound
 	// connection.
 	CrossClusterSearchConnection *types.InboundCrossClusterSearchConnection

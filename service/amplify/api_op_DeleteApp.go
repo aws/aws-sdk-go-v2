@@ -57,14 +57,20 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 
 // Describes the request structure for the delete app request.
 type DeleteAppInput struct {
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
 }
 
 // The result structure for the delete app request.
 type DeleteAppOutput struct {
+
 	// Represents the different branches of a repository for building, deploying, and
 	// hosting an Amplify app.
+	//
+	// This member is required.
 	App *types.App
 
 	// Metadata pertaining to the operation's result.

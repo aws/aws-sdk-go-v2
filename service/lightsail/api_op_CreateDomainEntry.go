@@ -62,15 +62,22 @@ func (c *Client) CreateDomainEntry(ctx context.Context, params *CreateDomainEntr
 }
 
 type CreateDomainEntryInput struct {
+
 	// An array of key-value pairs containing information about the domain entry
 	// request.
+	//
+	// This member is required.
 	DomainEntry *types.DomainEntry
+
 	// The domain name (e.g., example.com) for which you want to create the domain
 	// entry.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 type CreateDomainEntryOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

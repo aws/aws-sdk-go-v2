@@ -57,6 +57,7 @@ func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParamet
 
 //
 type CopyDBParameterGroupInput struct {
+
 	// The identifier or ARN for the source DB parameter group. For information about
 	// creating an ARN, see  Constructing an ARN for Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
@@ -67,11 +68,15 @@ type CopyDBParameterGroupInput struct {
 	//
 	//     * Must specify a valid DB parameter group identifier, for
 	// example my-db-param-group, or a valid ARN.
+	//
+	// This member is required.
 	SourceDBParameterGroupIdentifier *string
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
+
 	// The identifier for the copied DB parameter group. Constraints:
 	//
 	//     * Can't be
@@ -86,12 +91,18 @@ type CopyDBParameterGroupInput struct {
 	// or contain two consecutive hyphens
 	//
 	// Example: my-db-parameter-group
+	//
+	// This member is required.
 	TargetDBParameterGroupIdentifier *string
+
 	// A description for the copied DB parameter group.
+	//
+	// This member is required.
 	TargetDBParameterGroupDescription *string
 }
 
 type CopyDBParameterGroupOutput struct {
+
 	// Contains the details of an Amazon RDS DB parameter group. This data type is used
 	// as a response element in the DescribeDBParameterGroups action.
 	DBParameterGroup *types.DBParameterGroup

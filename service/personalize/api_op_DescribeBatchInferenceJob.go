@@ -58,11 +58,15 @@ func (c *Client) DescribeBatchInferenceJob(ctx context.Context, params *Describe
 }
 
 type DescribeBatchInferenceJobInput struct {
+
 	// The ARN of the batch inference job to describe.
+	//
+	// This member is required.
 	BatchInferenceJobArn *string
 }
 
 type DescribeBatchInferenceJobOutput struct {
+
 	// Information on the specified batch inference job.
 	BatchInferenceJob *types.BatchInferenceJob
 

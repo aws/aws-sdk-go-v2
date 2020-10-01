@@ -55,9 +55,15 @@ func (c *Client) CancelPipelineReprocessing(ctx context.Context, params *CancelP
 }
 
 type CancelPipelineReprocessingInput struct {
+
 	// The name of pipeline for which data reprocessing is canceled.
+	//
+	// This member is required.
 	PipelineName *string
+
 	// The ID of the reprocessing task (returned by "StartPipelineReprocessing").
+	//
+	// This member is required.
 	ReprocessingId *string
 }
 

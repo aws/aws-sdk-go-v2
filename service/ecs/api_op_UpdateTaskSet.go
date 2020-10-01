@@ -59,20 +59,33 @@ func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, 
 }
 
 type UpdateTaskSetInput struct {
+
 	// The short name or full Amazon Resource Name (ARN) of the task set to update.
+	//
+	// This member is required.
 	TaskSet *string
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// service that the task set exists in.
+	//
+	// This member is required.
 	Cluster *string
+
 	// The short name or full Amazon Resource Name (ARN) of the service that the task
 	// set exists in.
+	//
+	// This member is required.
 	Service *string
+
 	// A floating-point percentage of the desired number of tasks to place and keep
 	// running in the task set.
+	//
+	// This member is required.
 	Scale *types.Scale
 }
 
 type UpdateTaskSetOutput struct {
+
 	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
 	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
 	// number of tasks, how many tasks are running, and whether the task set serves

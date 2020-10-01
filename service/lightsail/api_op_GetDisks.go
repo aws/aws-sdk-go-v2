@@ -56,6 +56,7 @@ func (c *Client) GetDisks(ctx context.Context, params *GetDisksInput, optFns ...
 }
 
 type GetDisksInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetDisks request. If your results are paginated,
 	// the response will return a next page token that you can specify as the page
@@ -64,8 +65,10 @@ type GetDisksInput struct {
 }
 
 type GetDisksOutput struct {
+
 	// An array of objects containing information about all block storage disks.
 	Disks []*types.Disk
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetDisks request and specify the next page

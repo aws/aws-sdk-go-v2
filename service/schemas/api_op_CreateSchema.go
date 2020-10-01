@@ -57,35 +57,57 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 }
 
 type CreateSchemaInput struct {
+
 	// The source of the schema definition.
+	//
+	// This member is required.
 	Content *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
+
 	// Tags associated with the schema.
 	Tags map[string]*string
+
 	// The type of schema.
+	//
+	// This member is required.
 	Type types.Type
+
 	// A description of the schema.
 	Description *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
 }
 
 type CreateSchemaOutput struct {
+
 	// The name of the schema.
 	SchemaName *string
+
 	// The ARN of the schema.
 	SchemaArn *string
+
 	// The date the schema version was created.
 	VersionCreatedDate *time.Time
+
 	// The version number of the schema
 	SchemaVersion *string
+
 	// The description of the schema.
 	Description *string
+
 	// The date and time that schema was modified.
 	LastModified *time.Time
+
 	// The type of the schema.
 	Type *string
+
 	// Key-value pairs associated with a resource.
 	Tags map[string]*string
 

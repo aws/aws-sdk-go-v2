@@ -74,11 +74,18 @@ func (c *Client) PutResourceAttributes(ctx context.Context, params *PutResourceA
 }
 
 type PutResourceAttributesInput struct {
+
 	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
 	ProgressUpdateStream *string
+
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
+	//
+	// This member is required.
 	MigrationTaskName *string
+
 	// Information about the resource that is being migrated. This data will be used to
 	// map the task to a resource in the Application Discovery Service repository.
 	// Takes the object array of ResourceAttribute where the Type field is reserved for
@@ -99,7 +106,10 @@ type PutResourceAttributesInput struct {
 	// should provide as many as you know in separate type/value pairs passed to the
 	// <code>ResourceAttributeList</code> parameter to maximize the chances of
 	// matching.</p> </li> </ul> </important>
+	//
+	// This member is required.
 	ResourceAttributeList []*types.ResourceAttribute
+
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun *bool

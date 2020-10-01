@@ -57,22 +57,27 @@ func (c *Client) ListApplicationStates(ctx context.Context, params *ListApplicat
 }
 
 type ListApplicationStatesInput struct {
+
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
 	// Maximum number of results to be returned per page.
 	MaxResults *int32
+
 	// The configurationIds from the Application Discovery Service that uniquely
 	// identifies your applications.
 	ApplicationIds []*string
 }
 
 type ListApplicationStatesOutput struct {
+
 	// If a NextToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
 	// A list of Applications that exist in Application Discovery Service.
 	ApplicationStateList []*types.ApplicationState
 

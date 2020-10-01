@@ -57,23 +57,32 @@ func (c *Client) GetVocabulary(ctx context.Context, params *GetVocabularyInput, 
 }
 
 type GetVocabularyInput struct {
+
 	// The name of the vocabulary to return information about. The name is
 	// case-sensitive.
+	//
+	// This member is required.
 	VocabularyName *string
 }
 
 type GetVocabularyOutput struct {
+
 	// The date and time that the vocabulary was last modified.
 	LastModifiedTime *time.Time
+
 	// The S3 location where the vocabulary is stored. Use this URI to get the contents
 	// of the vocabulary. The URI is available for a limited time.
 	DownloadUri *string
+
 	// The processing state of the vocabulary.
 	VocabularyState types.VocabularyState
+
 	// The name of the vocabulary to return.
 	VocabularyName *string
+
 	// The language code of the vocabulary entries.
 	LanguageCode types.LanguageCode
+
 	// If the VocabularyState field is FAILED, this field contains information about
 	// why the job failed.
 	FailureReason *string

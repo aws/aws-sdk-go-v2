@@ -71,23 +71,33 @@ func (c *Client) StartSegmentDetection(ctx context.Context, params *StartSegment
 }
 
 type StartSegmentDetectionInput struct {
+
 	// An array of segment types to detect in the video. Valid values are TECHNICAL_CUE
 	// and SHOT.
+	//
+	// This member is required.
 	SegmentTypes []types.SegmentType
+
 	// Idempotent token used to identify the start request. If you use the same token
 	// with multiple StartSegmentDetection requests, the same JobId is returned. Use
 	// ClientRequestToken to prevent the same job from being accidently started more
 	// than once.
 	ClientRequestToken *string
+
 	// The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to
 	// publish the completion status of the segment detection operation.
 	NotificationChannel *types.NotificationChannel
+
 	// Filters for technical cue or shot detection.
 	Filters *types.StartSegmentDetectionFilters
+
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
 	// operations such as StartLabelDetection () use Video to specify a video for
 	// analysis. The supported file formats are .mp4, .mov and .avi.
+	//
+	// This member is required.
 	Video *types.Video
+
 	// An identifier you specify that's returned in the completion notification that's
 	// published to your Amazon Simple Notification Service topic. For example, you can
 	// use JobTag to group related jobs and identify them in the completion
@@ -96,6 +106,7 @@ type StartSegmentDetectionInput struct {
 }
 
 type StartSegmentDetectionOutput struct {
+
 	// Unique identifier for the segment detection job. The JobId is returned from
 	// StartSegmentDetection.
 	JobId *string

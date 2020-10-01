@@ -58,10 +58,15 @@ func (c *Client) PutLabel(ctx context.Context, params *PutLabelInput, optFns ...
 }
 
 type PutLabelInput struct {
+
 	//
 	Tags []*types.Tag
+
 	// The label name.
+	//
+	// This member is required.
 	Name *string
+
 	// The label description.
 	Description *string
 }

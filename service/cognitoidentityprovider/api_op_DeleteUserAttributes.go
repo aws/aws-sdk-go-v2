@@ -53,11 +53,17 @@ func (c *Client) DeleteUserAttributes(ctx context.Context, params *DeleteUserAtt
 
 // Represents the request to delete user attributes.
 type DeleteUserAttributesInput struct {
+
 	// The access token used in the request to delete user attributes.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// An array of strings representing the user attribute names you wish to delete.
 	// For custom attributes, you must prepend the custom: prefix to the attribute
 	// name.
+	//
+	// This member is required.
 	UserAttributeNames []*string
 }
 

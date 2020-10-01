@@ -57,10 +57,17 @@ func (c *Client) ConfirmProductInstance(ctx context.Context, params *ConfirmProd
 }
 
 type ConfirmProductInstanceInput struct {
+
 	// The product code. This must be a product code that you own.
+	//
+	// This member is required.
 	ProductCode *string
+
 	// The ID of the instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -69,9 +76,11 @@ type ConfirmProductInstanceInput struct {
 }
 
 type ConfirmProductInstanceOutput struct {
+
 	// The AWS account ID of the instance owner. This is only present if the product
 	// code is attached to the instance.
 	OwnerId *string
+
 	// The return value of the request. Returns true if the specified product code is
 	// owned by the requester and associated with the specified instance.
 	Return *bool

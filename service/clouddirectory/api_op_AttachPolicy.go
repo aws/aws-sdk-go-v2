@@ -57,12 +57,21 @@ func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, op
 }
 
 type AttachPolicyInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// both objects reside. For more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// The reference that is associated with the policy object.
+	//
+	// This member is required.
 	PolicyReference *types.ObjectReference
+
 	// The reference that identifies the object to which the policy will be attached.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
 }
 

@@ -60,25 +60,40 @@ func (c *Client) UpdateModelVersion(ctx context.Context, params *UpdateModelVers
 }
 
 type UpdateModelVersionInput struct {
+
 	// A collection of key and value pairs.
 	Tags []*types.Tag
+
 	// The major version number.
+	//
+	// This member is required.
 	MajorVersionNumber *string
+
 	// The model ID.
+	//
+	// This member is required.
 	ModelId *string
+
 	// The model type.
+	//
+	// This member is required.
 	ModelType types.ModelTypeEnum
+
 	// The event details.
 	ExternalEventsDetail *types.ExternalEventsDetail
 }
 
 type UpdateModelVersionOutput struct {
+
 	// The model type.
 	ModelType types.ModelTypeEnum
+
 	// The status of the updated model version.
 	Status *string
+
 	// The model ID.
 	ModelId *string
+
 	// The model version number of the model version updated.
 	ModelVersionNumber *string
 

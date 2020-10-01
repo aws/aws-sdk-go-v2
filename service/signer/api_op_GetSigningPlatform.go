@@ -56,26 +56,37 @@ func (c *Client) GetSigningPlatform(ctx context.Context, params *GetSigningPlatf
 }
 
 type GetSigningPlatformInput struct {
+
 	// The ID of the target signing platform.
+	//
+	// This member is required.
 	PlatformId *string
 }
 
 type GetSigningPlatformOutput struct {
+
 	// A list of partner entities that use the target signing platform.
 	Partner *string
+
 	// The ID of the target signing platform.
 	PlatformId *string
+
 	// A list of configurations applied to the target platform at signing.
 	SigningConfiguration *types.SigningConfiguration
+
 	// The category type of the target signing platform.
 	Category types.Category
+
 	// The format of the target platform's signing image.
 	SigningImageFormat *types.SigningImageFormat
+
 	// The maximum size (in MB) of the payload that can be signed by the target
 	// platform.
 	MaxSizeInMB *int32
+
 	// The validation template that is used by the target signing platform.
 	Target *string
+
 	// The display name of the target signing platform.
 	DisplayName *string
 

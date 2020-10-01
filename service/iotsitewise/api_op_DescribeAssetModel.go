@@ -57,34 +57,64 @@ func (c *Client) DescribeAssetModel(ctx context.Context, params *DescribeAssetMo
 }
 
 type DescribeAssetModelInput struct {
+
 	// The ID of the asset model.
+	//
+	// This member is required.
 	AssetModelId *string
 }
 
 type DescribeAssetModelOutput struct {
+
 	// A list of asset model hierarchies that each contain a childAssetModelId and a
 	// hierarchyId (named id). A hierarchy specifies allowed parent/child asset
 	// relationships for an asset model.
+	//
+	// This member is required.
 	AssetModelHierarchies []*types.AssetModelHierarchy
+
 	// The ID of the asset model.
+	//
+	// This member is required.
 	AssetModelId *string
+
 	// The name of the asset model.
+	//
+	// This member is required.
 	AssetModelName *string
+
 	// The date the asset model was last updated, in Unix epoch time.
+	//
+	// This member is required.
 	AssetModelLastUpdateDate *time.Time
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the asset model, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	//
+	// This member is required.
 	AssetModelArn *string
+
 	// The list of asset properties for the asset model.
+	//
+	// This member is required.
 	AssetModelProperties []*types.AssetModelProperty
+
 	// The asset model's description.
+	//
+	// This member is required.
 	AssetModelDescription *string
+
 	// The current status of the asset model, which contains a state and any error
 	// message.
+	//
+	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
+
 	// The date the asset model was created, in Unix epoch time.
+	//
+	// This member is required.
 	AssetModelCreationDate *time.Time
 
 	// Metadata pertaining to the operation's result.

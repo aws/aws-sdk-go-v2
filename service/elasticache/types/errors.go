@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The customer has exceeded the allowed rate of API calls.
@@ -28,12 +27,6 @@ func (e *APICallRateForCustomerExceededFault) ErrorCode() string {
 func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *APICallRateForCustomerExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *APICallRateForCustomerExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon EC2 security group is already authorized for the specified
 // cache security group.
@@ -54,12 +47,6 @@ func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
 	return "AuthorizationAlreadyExistsFault"
 }
 func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon EC2 security group is not authorized for the specified
 // cache security group.
@@ -78,12 +65,6 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 }
 func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFoundFault" }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You already have a cluster with the given identifier.
 type CacheClusterAlreadyExistsFault struct {
@@ -101,12 +82,6 @@ func (e *CacheClusterAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *CacheClusterAlreadyExistsFault) ErrorCode() string             { return "CacheClusterAlreadyExistsFault" }
 func (e *CacheClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheClusterAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheClusterAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cluster ID does not refer to an existing cluster.
 type CacheClusterNotFoundFault struct {
@@ -124,12 +99,6 @@ func (e *CacheClusterNotFoundFault) ErrorMessage() string {
 }
 func (e *CacheClusterNotFoundFault) ErrorCode() string             { return "CacheClusterNotFoundFault" }
 func (e *CacheClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheClusterNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheClusterNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A cache parameter group with the requested name already exists.
 type CacheParameterGroupAlreadyExistsFault struct {
@@ -151,12 +120,6 @@ func (e *CacheParameterGroupAlreadyExistsFault) ErrorCode() string {
 func (e *CacheParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CacheParameterGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheParameterGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cache parameter group name does not refer to an existing cache
 // parameter group.
@@ -177,12 +140,6 @@ func (e *CacheParameterGroupNotFoundFault) ErrorCode() string {
 	return "CacheParameterGroupNotFoundFault"
 }
 func (e *CacheParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheParameterGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheParameterGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the maximum number of
 // cache security groups.
@@ -205,12 +162,6 @@ func (e *CacheParameterGroupQuotaExceededFault) ErrorCode() string {
 func (e *CacheParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CacheParameterGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheParameterGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A cache security group with the specified name already exists.
 type CacheSecurityGroupAlreadyExistsFault struct {
@@ -232,12 +183,6 @@ func (e *CacheSecurityGroupAlreadyExistsFault) ErrorCode() string {
 func (e *CacheSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CacheSecurityGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSecurityGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cache security group name does not refer to an existing cache
 // security group.
@@ -258,12 +203,6 @@ func (e *CacheSecurityGroupNotFoundFault) ErrorCode() string {
 	return "CacheSecurityGroupNotFoundFault"
 }
 func (e *CacheSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheSecurityGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSecurityGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // cache security groups.
@@ -285,12 +224,6 @@ func (e *CacheSecurityGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *CacheSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CacheSecurityGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSecurityGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The requested cache subnet group name is already in use by an existing cache
@@ -314,12 +247,6 @@ func (e *CacheSubnetGroupAlreadyExistsFault) ErrorCode() string {
 func (e *CacheSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CacheSubnetGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSubnetGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cache subnet group is currently in use.
 type CacheSubnetGroupInUse struct {
@@ -337,12 +264,6 @@ func (e *CacheSubnetGroupInUse) ErrorMessage() string {
 }
 func (e *CacheSubnetGroupInUse) ErrorCode() string             { return "CacheSubnetGroupInUse" }
 func (e *CacheSubnetGroupInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheSubnetGroupInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSubnetGroupInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cache subnet group name does not refer to an existing cache subnet
 // group.
@@ -361,12 +282,6 @@ func (e *CacheSubnetGroupNotFoundFault) ErrorMessage() string {
 }
 func (e *CacheSubnetGroupNotFoundFault) ErrorCode() string             { return "CacheSubnetGroupNotFoundFault" }
 func (e *CacheSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheSubnetGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSubnetGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // cache subnet groups.
@@ -389,12 +304,6 @@ func (e *CacheSubnetGroupQuotaExceededFault) ErrorCode() string {
 func (e *CacheSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CacheSubnetGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSubnetGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // subnets in a cache subnet group.
@@ -413,12 +322,6 @@ func (e *CacheSubnetQuotaExceededFault) ErrorMessage() string {
 }
 func (e *CacheSubnetQuotaExceededFault) ErrorCode() string             { return "CacheSubnetQuotaExceededFault" }
 func (e *CacheSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CacheSubnetQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CacheSubnetQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // clusters per customer.
@@ -441,12 +344,6 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorCode() string {
 func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterQuotaForCustomerExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterQuotaForCustomerExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Global Datastore name already exists.
 type GlobalReplicationGroupAlreadyExistsFault struct {
@@ -468,12 +365,6 @@ func (e *GlobalReplicationGroupAlreadyExistsFault) ErrorCode() string {
 func (e *GlobalReplicationGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *GlobalReplicationGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GlobalReplicationGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Global Datastore does not exist
 type GlobalReplicationGroupNotFoundFault struct {
@@ -494,12 +385,6 @@ func (e *GlobalReplicationGroupNotFoundFault) ErrorCode() string {
 }
 func (e *GlobalReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *GlobalReplicationGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GlobalReplicationGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The requested cache node type is not available in the specified Availability
@@ -525,12 +410,6 @@ func (e *InsufficientCacheClusterCapacityFault) ErrorCode() string {
 func (e *InsufficientCacheClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InsufficientCacheClusterCapacityFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientCacheClusterCapacityFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidARNFault struct {
@@ -548,12 +427,6 @@ func (e *InvalidARNFault) ErrorMessage() string {
 }
 func (e *InvalidARNFault) ErrorCode() string             { return "InvalidARNFault" }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidARNFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidARNFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cluster is not in the available state.
 type InvalidCacheClusterStateFault struct {
@@ -571,12 +444,6 @@ func (e *InvalidCacheClusterStateFault) ErrorMessage() string {
 }
 func (e *InvalidCacheClusterStateFault) ErrorCode() string             { return "InvalidCacheClusterStateFault" }
 func (e *InvalidCacheClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCacheClusterStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCacheClusterStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The current state of the cache parameter group does not allow the requested
 // operation to occur.
@@ -599,12 +466,6 @@ func (e *InvalidCacheParameterGroupStateFault) ErrorCode() string {
 func (e *InvalidCacheParameterGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidCacheParameterGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCacheParameterGroupStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The current state of the cache security group does not allow deletion.
 type InvalidCacheSecurityGroupStateFault struct {
@@ -625,12 +486,6 @@ func (e *InvalidCacheSecurityGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidCacheSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidCacheSecurityGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCacheSecurityGroupStateFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The Global Datastore is not available or in primary-only state.
@@ -653,12 +508,6 @@ func (e *InvalidGlobalReplicationGroupStateFault) ErrorCode() string {
 func (e *InvalidGlobalReplicationGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidGlobalReplicationGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGlobalReplicationGroupStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The KMS key supplied is not valid.
 type InvalidKMSKeyFault struct {
@@ -676,12 +525,6 @@ func (e *InvalidKMSKeyFault) ErrorMessage() string {
 }
 func (e *InvalidKMSKeyFault) ErrorCode() string             { return "InvalidKMSKeyFault" }
 func (e *InvalidKMSKeyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidKMSKeyFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidKMSKeyFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Two or more incompatible parameters were specified.
 type InvalidParameterCombinationException struct {
@@ -703,12 +546,6 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidParameterCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value for a parameter is invalid.
 type InvalidParameterValueException struct {
@@ -726,12 +563,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested replication group is not in the available state.
 type InvalidReplicationGroupStateFault struct {
@@ -751,12 +582,6 @@ func (e *InvalidReplicationGroupStateFault) ErrorCode() string {
 	return "InvalidReplicationGroupStateFault"
 }
 func (e *InvalidReplicationGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidReplicationGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReplicationGroupStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The current state of the snapshot does not allow the requested operation to
 // occur.
@@ -775,12 +600,6 @@ func (e *InvalidSnapshotStateFault) ErrorMessage() string {
 }
 func (e *InvalidSnapshotStateFault) ErrorCode() string             { return "InvalidSnapshotStateFault" }
 func (e *InvalidSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSnapshotStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSnapshotStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid subnet identifier was specified.
 type InvalidSubnet struct {
@@ -798,12 +617,6 @@ func (e *InvalidSubnet) ErrorMessage() string {
 }
 func (e *InvalidSubnet) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSubnet) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubnet) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The VPC network is in an invalid state.
 type InvalidVPCNetworkStateFault struct {
@@ -821,12 +634,6 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 }
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidVPCNetworkStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidVPCNetworkStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The node group specified by the NodeGroupId parameter could not be found. Please
 // verify that the node group exists and that you spelled the NodeGroupId value
@@ -846,12 +653,6 @@ func (e *NodeGroupNotFoundFault) ErrorMessage() string {
 }
 func (e *NodeGroupNotFoundFault) ErrorCode() string             { return "NodeGroupNotFoundFault" }
 func (e *NodeGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NodeGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the maximum allowed
 // number of node groups (shards) in a single replication group. The default
@@ -875,12 +676,6 @@ func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorCode() string {
 func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // cache nodes in a single cluster.
@@ -901,12 +696,6 @@ func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
 	return "NodeQuotaForClusterExceededFault"
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NodeQuotaForClusterExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeQuotaForClusterExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // cache nodes per customer.
@@ -927,12 +716,6 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
 	return "NodeQuotaForCustomerExceededFault"
 }
 func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NodeQuotaForCustomerExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeQuotaForCustomerExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation was not performed because no changes were required.
 type NoOperationFault struct {
@@ -950,12 +733,6 @@ func (e *NoOperationFault) ErrorMessage() string {
 }
 func (e *NoOperationFault) ErrorCode() string             { return "NoOperationFault" }
 func (e *NoOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoOperationFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoOperationFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified replication group already exists.
 type ReplicationGroupAlreadyExistsFault struct {
@@ -976,12 +753,6 @@ func (e *ReplicationGroupAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ReplicationGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ReplicationGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The targeted replication group is not available.
@@ -1004,12 +775,6 @@ func (e *ReplicationGroupAlreadyUnderMigrationFault) ErrorCode() string {
 func (e *ReplicationGroupAlreadyUnderMigrationFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReplicationGroupAlreadyUnderMigrationFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationGroupAlreadyUnderMigrationFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified replication group does not exist.
 type ReplicationGroupNotFoundFault struct {
@@ -1027,12 +792,6 @@ func (e *ReplicationGroupNotFoundFault) ErrorMessage() string {
 }
 func (e *ReplicationGroupNotFoundFault) ErrorCode() string             { return "ReplicationGroupNotFoundFault" }
 func (e *ReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReplicationGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The designated replication group is not available for data migration.
 type ReplicationGroupNotUnderMigrationFault struct {
@@ -1053,12 +812,6 @@ func (e *ReplicationGroupNotUnderMigrationFault) ErrorCode() string {
 }
 func (e *ReplicationGroupNotUnderMigrationFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ReplicationGroupNotUnderMigrationFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReplicationGroupNotUnderMigrationFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // You already have a reservation with the given identifier.
@@ -1081,12 +834,6 @@ func (e *ReservedCacheNodeAlreadyExistsFault) ErrorCode() string {
 func (e *ReservedCacheNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReservedCacheNodeAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedCacheNodeAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested reserved cache node was not found.
 type ReservedCacheNodeNotFoundFault struct {
@@ -1104,12 +851,6 @@ func (e *ReservedCacheNodeNotFoundFault) ErrorMessage() string {
 }
 func (e *ReservedCacheNodeNotFoundFault) ErrorCode() string             { return "ReservedCacheNodeNotFoundFault" }
 func (e *ReservedCacheNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedCacheNodeNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedCacheNodeNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the user's cache node
 // quota.
@@ -1132,12 +873,6 @@ func (e *ReservedCacheNodeQuotaExceededFault) ErrorCode() string {
 func (e *ReservedCacheNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReservedCacheNodeQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedCacheNodeQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cache node offering does not exist.
 type ReservedCacheNodesOfferingNotFoundFault struct {
@@ -1159,12 +894,6 @@ func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorCode() string {
 func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ReservedCacheNodesOfferingNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedCacheNodesOfferingNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified service linked role (SLR) was not found.
 type ServiceLinkedRoleNotFoundFault struct {
@@ -1182,12 +911,6 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorMessage() string {
 }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string             { return "ServiceLinkedRoleNotFoundFault" }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceLinkedRoleNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceLinkedRoleNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service update doesn't exist
 type ServiceUpdateNotFoundFault struct {
@@ -1205,12 +928,6 @@ func (e *ServiceUpdateNotFoundFault) ErrorMessage() string {
 }
 func (e *ServiceUpdateNotFoundFault) ErrorCode() string             { return "ServiceUpdateNotFoundFault" }
 func (e *ServiceUpdateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceUpdateNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUpdateNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You already have a snapshot with the given name.
 type SnapshotAlreadyExistsFault struct {
@@ -1228,12 +945,6 @@ func (e *SnapshotAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *SnapshotAlreadyExistsFault) ErrorCode() string             { return "SnapshotAlreadyExistsFault" }
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You attempted one of the following operations:
 //
@@ -1262,12 +973,6 @@ func (e *SnapshotFeatureNotSupportedFault) ErrorCode() string {
 	return "SnapshotFeatureNotSupportedFault"
 }
 func (e *SnapshotFeatureNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotFeatureNotSupportedFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotFeatureNotSupportedFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested snapshot name does not refer to an existing snapshot.
 type SnapshotNotFoundFault struct {
@@ -1285,12 +990,6 @@ func (e *SnapshotNotFoundFault) ErrorMessage() string {
 }
 func (e *SnapshotNotFoundFault) ErrorCode() string             { return "SnapshotNotFoundFault" }
 func (e *SnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the maximum number of
 // snapshots.
@@ -1309,12 +1008,6 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 }
 func (e *SnapshotQuotaExceededFault) ErrorCode() string             { return "SnapshotQuotaExceededFault" }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested subnet is being used by another cache subnet group.
 type SubnetInUse struct {
@@ -1332,12 +1025,6 @@ func (e *SubnetInUse) ErrorMessage() string {
 }
 func (e *SubnetInUse) ErrorCode() string             { return "SubnetInUse" }
 func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested tag was not found on this resource.
 type TagNotFoundFault struct {
@@ -1355,12 +1042,6 @@ func (e *TagNotFoundFault) ErrorMessage() string {
 }
 func (e *TagNotFoundFault) ErrorCode() string             { return "TagNotFoundFault" }
 func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would cause the resource to have more
 // than the allowed number of tags. The maximum number of tags permitted on a
@@ -1380,12 +1061,6 @@ func (e *TagQuotaPerResourceExceeded) ErrorMessage() string {
 }
 func (e *TagQuotaPerResourceExceeded) ErrorCode() string             { return "TagQuotaPerResourceExceeded" }
 func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagQuotaPerResourceExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagQuotaPerResourceExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The TestFailover action is not available.
 type TestFailoverNotAvailableFault struct {
@@ -1403,9 +1078,3 @@ func (e *TestFailoverNotAvailableFault) ErrorMessage() string {
 }
 func (e *TestFailoverNotAvailableFault) ErrorCode() string             { return "TestFailoverNotAvailableFault" }
 func (e *TestFailoverNotAvailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TestFailoverNotAvailableFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TestFailoverNotAvailableFault) HasMessage() bool {
-	return e.Message != nil
-}

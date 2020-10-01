@@ -58,45 +58,61 @@ func (c *Client) GetEvaluation(ctx context.Context, params *GetEvaluationInput, 
 }
 
 type GetEvaluationInput struct {
+
 	// The ID of the Evaluation to retrieve. The evaluation of each MLModel is recorded
 	// and cataloged. The ID provides the means to access the information.
+	//
+	// This member is required.
 	EvaluationId *string
 }
 
 // Represents the output of a GetEvaluation operation and describes an Evaluation.
 type GetEvaluationOutput struct {
+
 	// The evaluation ID which is same as the EvaluationId in the request.
 	EvaluationId *string
+
 	// The epoch time when Amazon Machine Learning marked the Evaluation as INPROGRESS.
 	// StartedAt isn't available if the Evaluation is in the PENDING state.
 	StartedAt *time.Time
+
 	// A user-supplied name or description of the Evaluation.
 	Name *string
+
 	// The AWS user account that invoked the evaluation. The account type can be either
 	// an AWS root account or an AWS Identity and Access Management (IAM) user account.
 	CreatedByIamUser *string
+
 	// A description of the most recent details about evaluating the MLModel.
 	Message *string
+
 	// The DataSource used for this evaluation.
 	EvaluationDataSourceId *string
+
 	// The epoch time when Amazon Machine Learning marked the Evaluation as COMPLETED
 	// or FAILED. FinishedAt is only available when the Evaluation is in the COMPLETED
 	// or FAILED state.
 	FinishedAt *time.Time
+
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the Evaluation, normalized and scaled on computation resources.
 	// ComputeTime is only available if the Evaluation is in the COMPLETED state.
 	ComputeTime *int64
+
 	// The time that the Evaluation was created. The time is expressed in epoch time.
 	CreatedAt *time.Time
+
 	// The time of the most recent edit to the Evaluation. The time is expressed in
 	// epoch time.
 	LastUpdatedAt *time.Time
+
 	// The ID of the MLModel that was the focus of the evaluation.
 	MLModelId *string
+
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
 	InputDataLocationS3 *string
+
 	// Measurements of how well the MLModel performed using observations referenced by
 	// the DataSource. One of the following metric is returned based on the type of the
 	// MLModel:
@@ -116,6 +132,7 @@ type GetEvaluationOutput struct {
 	// metrics, please see the Amazon Machine Learning Developer Guide
 	// (https://docs.aws.amazon.com/machine-learning/latest/dg).
 	PerformanceMetrics *types.PerformanceMetrics
+
 	// The status of the evaluation. This element can have one of the following
 	// values:
 	//
@@ -133,6 +150,7 @@ type GetEvaluationOutput struct {
 	//     *
 	// DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status types.EntityStatus
+
 	// A link to the file that contains logs of the CreateEvaluation operation.
 	LogUri *string
 

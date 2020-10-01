@@ -68,12 +68,19 @@ func (c *Client) StartSupportDataExport(ctx context.Context, params *StartSuppor
 
 // Container for the parameters to the StartSupportDataExport operation.
 type StartSupportDataExportInput struct {
+
 	// The start date from which to retrieve the data set in UTC. This parameter only
 	// affects the customer_support_contacts_data data set type.
+	//
+	// This member is required.
 	FromDate *time.Time
+
 	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data
 	// set has been published or if an error has occurred.
+	//
+	// This member is required.
 	SnsTopicArn *string
+
 	// Specifies the data set type to be written to the output csv file. The data set
 	// types customer_support_contacts_data and test_customer_support_contacts_data
 	// both result in a csv file containing the following fields: Product Id, Product
@@ -89,10 +96,14 @@ type StartSupportDataExportInput struct {
 	//     *
 	// test_customer_support_contacts_data An example data set containing static test
 	// data in the same format as customer_support_contacts_data
+	//
+	// This member is required.
 	DataSetType types.SupportDataSetType
+
 	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS
 	// notification message and the data set metadata file.
 	CustomerDefinedValues map[string]*string
+
 	// (Optional) The desired S3 prefix for the published data set, similar to a
 	// directory path in standard file systems. For example, if given the bucket name
 	// "mybucket" and the prefix "myprefix/mydatasets", the output file "outputfile"
@@ -100,15 +111,22 @@ type StartSupportDataExportInput struct {
 	// prefix directory structure does not exist, it will be created. If no prefix is
 	// provided, the data set will be published to the S3 bucket root.
 	DestinationS3Prefix *string
+
 	// The name (friendly name, not ARN) of the destination S3 bucket.
+	//
+	// This member is required.
 	DestinationS3BucketName *string
+
 	// The Amazon Resource Name (ARN) of the Role with an attached permissions policy
 	// to interact with the provided AWS services.
+	//
+	// This member is required.
 	RoleNameArn *string
 }
 
 // Container for the result of the StartSupportDataExport operation.
 type StartSupportDataExportOutput struct {
+
 	// A unique identifier representing a specific request to the
 	// StartSupportDataExport operation. This identifier can be used to correlate a
 	// request with notifications from the SNS topic.

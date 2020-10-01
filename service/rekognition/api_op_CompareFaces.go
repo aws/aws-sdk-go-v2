@@ -94,12 +94,16 @@ func (c *Client) CompareFaces(ctx context.Context, params *CompareFacesInput, op
 }
 
 type CompareFacesInput struct {
+
 	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
 	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
 	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
 	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
 	SourceImage *types.Image
+
 	// A filter that specifies a quality bar for how much filtering is done to identify
 	// faces. Filtered faces aren't compared. If you specify AUTO, Amazon Rekognition
 	// chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes
@@ -111,18 +115,23 @@ type CompareFacesInput struct {
 	// <code>NONE</code>. </p> <p>To use quality filtering, the collection you are
 	// using must be associated with version 3 of the face model or higher.</p>
 	QualityFilter types.QualityFilter
+
 	// The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI
 	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
 	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
 	// need to base64-encode image bytes passed using the Bytes field. For more
 	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
 	TargetImage *types.Image
+
 	// The minimum level of confidence in the face matches that a match must meet to be
 	// included in the FaceMatches array.
 	SimilarityThreshold *float32
 }
 
 type CompareFacesOutput struct {
+
 	// The value of TargetImageOrientationCorrection is always null. If the input image
 	// is in .jpeg format, it might contain exchangeable image file format (Exif)
 	// metadata that includes the image's orientation. Amazon Rekognition uses this
@@ -135,15 +144,19 @@ type CompareFacesOutput struct {
 	// aren't translated and represent the object locations before the image is
 	// rotated.
 	TargetImageOrientationCorrection types.OrientationCorrection
+
 	// The face in the source image that was used for comparison.
 	SourceImageFace *types.ComparedSourceImageFace
+
 	// An array of faces in the target image that match the source image face. Each
 	// CompareFacesMatch object provides the bounding box, the confidence level that
 	// the bounding box contains a face, and the similarity score for the face in the
 	// bounding box and the face in the source image.
 	FaceMatches []*types.CompareFacesMatch
+
 	// An array of faces in the target image that did not match the source image face.
 	UnmatchedFaces []*types.ComparedFace
+
 	// The value of SourceImageOrientationCorrection is always null. If the input image
 	// is in .jpeg format, it might contain exchangeable image file format (Exif)
 	// metadata that includes the image's orientation. Amazon Rekognition uses this

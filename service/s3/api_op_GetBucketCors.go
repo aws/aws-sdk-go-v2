@@ -66,11 +66,15 @@ func (c *Client) GetBucketCors(ctx context.Context, params *GetBucketCorsInput, 
 }
 
 type GetBucketCorsInput struct {
+
 	// The bucket name for which to get the cors configuration.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketCorsOutput struct {
+
 	// A set of origins and methods (cross-origin access that you want to allow). You
 	// can add up to 100 rules to the configuration.
 	CORSRules []*types.CORSRule

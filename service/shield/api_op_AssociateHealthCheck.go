@@ -63,11 +63,17 @@ func (c *Client) AssociateHealthCheck(ctx context.Context, params *AssociateHeal
 }
 
 type AssociateHealthCheckInput struct {
+
 	// The Amazon Resource Name (ARN) of the health check to associate with the
 	// protection.
+	//
+	// This member is required.
 	HealthCheckArn *string
+
 	// The unique identifier (ID) for the Protection () object to add the health check
 	// association to.
+	//
+	// This member is required.
 	ProtectionId *string
 }
 

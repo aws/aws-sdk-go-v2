@@ -63,16 +63,23 @@ func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS
 }
 
 type ExportJournalToS3Input struct {
+
 	// The inclusive start date and time for the range of journal contents that you
 	// want to export. The InclusiveStartTime must be in ISO 8601 date and time format
 	// and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
 	// InclusiveStartTime must be before ExclusiveEndTime. If you provide an
 	// InclusiveStartTime that is before the ledger's CreationDateTime, Amazon QLDB
 	// defaults it to the ledger's CreationDateTime.
+	//
+	// This member is required.
 	InclusiveStartTime *time.Time
+
 	// The configuration settings of the Amazon S3 bucket destination for your export
 	// request.
+	//
+	// This member is required.
 	S3ExportConfiguration *types.S3ExportConfiguration
+
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal export job to do the following:
 	//
@@ -82,20 +89,31 @@ type ExportJournalToS3Input struct {
 	//     * (Optional) Use your customer
 	// master key (CMK) in AWS Key Management Service (AWS KMS) for server-side
 	// encryption of your exported data.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The name of the ledger.
+	//
+	// This member is required.
 	Name *string
+
 	// The exclusive end date and time for the range of journal contents that you want
 	// to export. The ExclusiveEndTime must be in ISO 8601 date and time format and in
 	// Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
 	// ExclusiveEndTime must be less than or equal to the current UTC date and time.
+	//
+	// This member is required.
 	ExclusiveEndTime *time.Time
 }
 
 type ExportJournalToS3Output struct {
+
 	// The unique ID that QLDB assigns to each journal export job. To describe your
 	// export request and check the status of the job, you can use ExportId to call
 	// DescribeJournalS3Export.
+	//
+	// This member is required.
 	ExportId *string
 
 	// Metadata pertaining to the operation's result.

@@ -59,6 +59,7 @@ func (c *Client) UpdateLoginProfile(ctx context.Context, params *UpdateLoginProf
 }
 
 type UpdateLoginProfileInput struct {
+
 	// The new password for the specified IAM user. The regex pattern
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
@@ -77,13 +78,17 @@ type UpdateLoginProfileInput struct {
 	// restricted by the account administrator by setting a password policy on the AWS
 	// account. For more information, see UpdateAccountPasswordPolicy ().
 	Password *string
+
 	// Allows this new password to be used only once by requiring the specified IAM
 	// user to set a new password on next sign-in.
 	PasswordResetRequired *bool
+
 	// The name of the user whose password you want to update. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
 }
 

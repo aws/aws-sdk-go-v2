@@ -55,7 +55,10 @@ func (c *Client) DisassociateMemberAccount(ctx context.Context, params *Disassoc
 }
 
 type DisassociateMemberAccountInput struct {
+
 	// The ID of the member account that you want to remove from Amazon Macie Classic.
+	//
+	// This member is required.
 	MemberAccountId *string
 }
 

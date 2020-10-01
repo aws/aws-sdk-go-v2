@@ -63,14 +63,19 @@ func (c *Client) ListServiceQuotas(ctx context.Context, params *ListServiceQuota
 }
 
 type ListServiceQuotasInput struct {
+
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request that indicates that there's more output available. In a
 	// subsequent call, set it to the value of the previous call's NextToken response
 	// to indicate where the output should continue from.
 	NextToken *string
+
 	// The identifier for a service. When performing an operation, use the ServiceCode
 	// to specify a particular service.
+	//
+	// This member is required.
 	ServiceCode *string
+
 	// (Optional) Limits the number of results that you want to include in the
 	// response. If you don't include this parameter, the response defaults to a value
 	// that's specific to the operation. If additional items exist beyond the specified
@@ -82,6 +87,7 @@ type ListServiceQuotasInput struct {
 }
 
 type ListServiceQuotasOutput struct {
+
 	// If present in the response, this value indicates there's more output available
 	// that what's included in the current response. This can occur even when the
 	// response includes no values at all, such as when you ask for a filtered view of
@@ -90,6 +96,7 @@ type ListServiceQuotasOutput struct {
 	// the output. You should repeat this until the NextToken response element comes
 	// back empty (as null).
 	NextToken *string
+
 	// The response information for a quota lists all attribute information for the
 	// quota.
 	Quotas []*types.ServiceQuota

@@ -63,16 +63,23 @@ func (c *Client) RetrieveTapeRecoveryPoint(ctx context.Context, params *Retrieve
 
 // RetrieveTapeRecoveryPointInput
 type RetrieveTapeRecoveryPointInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// The Amazon Resource Name (ARN) of the virtual tape for which you want to
 	// retrieve the recovery point.
+	//
+	// This member is required.
 	TapeARN *string
 }
 
 // RetrieveTapeRecoveryPointOutput
 type RetrieveTapeRecoveryPointOutput struct {
+
 	// The Amazon Resource Name (ARN) of the virtual tape for which the recovery point
 	// was retrieved.
 	TapeARN *string

@@ -56,18 +56,27 @@ func (c *Client) DeleteConfig(ctx context.Context, params *DeleteConfigInput, op
 
 //
 type DeleteConfigInput struct {
+
 	// UUID of a Config.
+	//
+	// This member is required.
 	ConfigId *string
+
 	// Type of a Config.
+	//
+	// This member is required.
 	ConfigType types.ConfigCapabilityType
 }
 
 //
 type DeleteConfigOutput struct {
+
 	// ARN of a Config.
 	ConfigArn *string
+
 	// UUID of a Config.
 	ConfigId *string
+
 	// Type of a Config.
 	ConfigType types.ConfigCapabilityType
 

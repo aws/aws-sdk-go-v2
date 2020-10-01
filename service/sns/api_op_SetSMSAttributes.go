@@ -61,6 +61,7 @@ func (c *Client) SetSMSAttributes(ctx context.Context, params *SetSMSAttributesI
 
 // The input for the SetSMSAttributes action.
 type SetSMSAttributesInput struct {
+
 	// The default settings for sending SMS messages from your account. You can set
 	// values for the following attribute names: MonthlySpendLimit – The maximum amount
 	// in USD that you are willing to spend each month to send SMS messages. When
@@ -128,6 +129,8 @@ type SetSMSAttributesInput struct {
 	// For an example bucket policy and usage report, see Monitoring SMS Activity
 	// (https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html) in the Amazon SNS
 	// Developer Guide.
+	//
+	// This member is required.
 	Attributes map[string]*string
 }
 

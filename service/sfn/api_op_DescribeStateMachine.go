@@ -58,27 +58,47 @@ func (c *Client) DescribeStateMachine(ctx context.Context, params *DescribeState
 }
 
 type DescribeStateMachineInput struct {
+
 	// The Amazon Resource Name (ARN) of the state machine to describe.
+	//
+	// This member is required.
 	StateMachineArn *string
 }
 
 type DescribeStateMachineOutput struct {
+
 	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
 	// machine. (The IAM role maintains security by granting Step Functions access to
 	// AWS resources.)
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The Amazon Resource Name (ARN) that identifies the state machine.
+	//
+	// This member is required.
 	StateMachineArn *string
+
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
+
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	//
+	// This member is required.
 	Definition *string
+
 	// The date the state machine is created.
+	//
+	// This member is required.
 	CreationDate *time.Time
+
 	// The type of the state machine (STANDARD or EXPRESS).
+	//
+	// This member is required.
 	Type types.StateMachineType
+
 	// The name of the state machine. A name must not contain:
 	//
 	//     * white space
@@ -96,7 +116,10 @@ type DescribeStateMachineOutput struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
+	//
+	// This member is required.
 	Name *string
+
 	// The current status of the state machine.
 	Status types.StateMachineStatus
 

@@ -58,9 +58,13 @@ func (c *Client) PutConfigurationSetSendingOptions(ctx context.Context, params *
 // A request to enable or disable the ability of Amazon Pinpoint to send emails
 // that use a specific configuration set.
 type PutConfigurationSetSendingOptionsInput struct {
+
 	// The name of the configuration set that you want to enable or disable email
 	// sending for.
+	//
+	// This member is required.
 	ConfigurationSetName *string
+
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
 	SendingEnabled *bool

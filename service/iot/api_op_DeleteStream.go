@@ -55,7 +55,10 @@ func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, op
 }
 
 type DeleteStreamInput struct {
+
 	// The stream ID.
+	//
+	// This member is required.
 	StreamId *string
 }
 

@@ -61,17 +61,25 @@ func (c *Client) BatchGetDeploymentInstances(ctx context.Context, params *BatchG
 
 // Represents the input of a BatchGetDeploymentInstances operation.
 type BatchGetDeploymentInstancesInput struct {
+
 	// The unique IDs of instances used in the deployment. The maximum number of
 	// instance IDs you can specify is 25.
+	//
+	// This member is required.
 	InstanceIds []*string
+
 	// The unique ID of a deployment.
+	//
+	// This member is required.
 	DeploymentId *string
 }
 
 // Represents the output of a BatchGetDeploymentInstances operation.
 type BatchGetDeploymentInstancesOutput struct {
+
 	// Information about the instance.
 	InstancesSummary []*types.InstanceSummary
+
 	// Information about errors that might have occurred during the API call.
 	ErrorMessage *string
 

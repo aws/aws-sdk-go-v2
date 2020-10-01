@@ -83,16 +83,24 @@ func (c *Client) CreateEventTracker(ctx context.Context, params *CreateEventTrac
 }
 
 type CreateEventTrackerInput struct {
+
 	// The name for the event tracker.
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the dataset group that receives the event
 	// data.
+	//
+	// This member is required.
 	DatasetGroupArn *string
 }
 
 type CreateEventTrackerOutput struct {
+
 	// The ARN of the event tracker.
 	EventTrackerArn *string
+
 	// The ID of the event tracker. Include this ID in requests to the PutEvents
 	// (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html) API.
 	TrackingId *string

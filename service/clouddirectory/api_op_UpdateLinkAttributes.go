@@ -58,13 +58,22 @@ func (c *Client) UpdateLinkAttributes(ctx context.Context, params *UpdateLinkAtt
 }
 
 type UpdateLinkAttributesInput struct {
+
 	// The attributes update structure.
+	//
+	// This member is required.
 	AttributeUpdates []*types.LinkAttributeUpdate
+
 	// Allows a typed link specifier to be accepted as input.
+	//
+	// This member is required.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// updated typed link resides. For more information, see arns () or Typed Links
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 

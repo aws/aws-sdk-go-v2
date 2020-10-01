@@ -56,13 +56,18 @@ func (c *Client) CreateGroupCertificateAuthority(ctx context.Context, params *Cr
 }
 
 type CreateGroupCertificateAuthorityInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 }
 
 type CreateGroupCertificateAuthorityOutput struct {
+
 	// The ARN of the group certificate authority.
 	GroupCertificateAuthorityArn *string
 

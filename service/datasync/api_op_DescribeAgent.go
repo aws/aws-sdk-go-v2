@@ -60,29 +60,39 @@ func (c *Client) DescribeAgent(ctx context.Context, params *DescribeAgentInput, 
 
 // DescribeAgent
 type DescribeAgentInput struct {
+
 	// The Amazon Resource Name (ARN) of the agent to describe.
+	//
+	// This member is required.
 	AgentArn *string
 }
 
 // DescribeAgentResponse
 type DescribeAgentOutput struct {
+
 	// The time that the agent was activated (that is, created in your account).
 	CreationTime *time.Time
+
 	// The name of the agent.
 	Name *string
+
 	// The type of endpoint that your agent is connected to. If the endpoint is a VPC
 	// endpoint, the agent is not accessible over the public internet.
 	EndpointType types.EndpointType
+
 	// The time that the agent last connected to DataSyc.
 	LastConnectionTime *time.Time
+
 	// The status of the agent. If the status is ONLINE, then the agent is configured
 	// properly and is available to use. The Running status is the normal running
 	// status for an agent. If the status is OFFLINE, the agent's VM is turned off or
 	// the agent is in an unhealthy state. When the issue that caused the unhealthy
 	// state is resolved, the agent returns to ONLINE status.
 	Status types.AgentStatus
+
 	// The subnet and the security group that DataSync used to access a VPC endpoint.
 	PrivateLinkConfig *types.PrivateLinkConfig
+
 	// The Amazon Resource Name (ARN) of the agent.
 	AgentArn *string
 

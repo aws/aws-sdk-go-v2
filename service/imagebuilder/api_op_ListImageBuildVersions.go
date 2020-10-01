@@ -56,25 +56,34 @@ func (c *Client) ListImageBuildVersions(ctx context.Context, params *ListImageBu
 }
 
 type ListImageBuildVersionsInput struct {
+
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
+
 	// The filters.
 	Filters []*types.Filter
+
 	// The Amazon Resource Name (ARN) of the image whose build versions you want to
 	// retrieve.
+	//
+	// This member is required.
 	ImageVersionArn *string
+
 	// The maximum items to return in a request.
 	MaxResults *int32
 }
 
 type ListImageBuildVersionsOutput struct {
+
 	// The list of image build versions.
 	ImageSummaryList []*types.ImageSummary
+
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.
 	NextToken *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

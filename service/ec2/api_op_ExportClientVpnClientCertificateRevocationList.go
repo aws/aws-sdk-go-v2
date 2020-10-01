@@ -57,8 +57,12 @@ func (c *Client) ExportClientVpnClientCertificateRevocationList(ctx context.Cont
 }
 
 type ExportClientVpnClientCertificateRevocationListInput struct {
+
 	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -67,8 +71,10 @@ type ExportClientVpnClientCertificateRevocationListInput struct {
 }
 
 type ExportClientVpnClientCertificateRevocationListOutput struct {
+
 	// The current state of the client certificate revocation list.
 	Status *types.ClientCertificateRevocationListStatus
+
 	// Information about the client certificate revocation list.
 	CertificateRevocationList *string
 

@@ -8,17 +8,25 @@ import (
 
 // An AWS account that is the master of or a member of a behavior graph.
 type Account struct {
+
 	// The AWS account root user email address for the AWS account.
+	//
+	// This member is required.
 	EmailAddress *string
+
 	// The account identifier of the AWS account.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 // A behavior graph in Detective.
 type Graph struct {
+
 	// The date and time that the behavior graph was created. The value is in
 	// milliseconds since the epoch.
 	CreatedTime *time.Time
+
 	// The ARN of the behavior graph.
 	Arn *string
 }
@@ -26,14 +34,18 @@ type Graph struct {
 // Details about a member account that was invited to contribute to a behavior
 // graph.
 type MemberDetail struct {
+
 	// The date and time that the member account was last updated. The value is in
 	// milliseconds since the epoch.
 	UpdatedTime *time.Time
+
 	// The ARN of the behavior graph that the member account was invited to.
 	GraphArn *string
+
 	// The date and time that Detective sent the invitation to the member account. The
 	// value is in milliseconds since the epoch.
 	InvitedTime *time.Time
+
 	// For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that the
 	// member account is not enabled. The reason can have one of the following
 	// values:
@@ -46,10 +58,13 @@ type MemberDetail struct {
 	// for the member account. This is usually because the member account is not
 	// enrolled in Amazon GuardDuty.
 	DisabledReason MemberDisabledReason
+
 	// The AWS account root user email address for the member account.
 	EmailAddress *string
+
 	// The AWS account identifier for the member account.
 	AccountId *string
+
 	// The member account data volume as a percentage of the maximum allowed data
 	// volume. 0 indicates 0 percent, and 100 indicates 100 percent. Note that this is
 	// not the percentage of the behavior graph data volume. For example, the data
@@ -58,10 +73,13 @@ type MemberDetail struct {
 	// PercentOfGraphUtilization is 25. It represents 25% of the maximum allowed data
 	// volume.
 	PercentOfGraphUtilization *float64
+
 	// The AWS account identifier of the master account for the behavior graph.
 	MasterId *string
+
 	// The date and time when the graph utilization percentage was last updated.
 	PercentOfGraphUtilizationUpdatedTime *time.Time
+
 	// The current membership status of the member account. The status can have one of
 	// the following values:
 	//
@@ -95,8 +113,10 @@ type MemberDetail struct {
 // A member account that was included in a request but for which the request could
 // not be processed.
 type UnprocessedAccount struct {
+
 	// The AWS account identifier of the member account that was not processed.
 	AccountId *string
+
 	// The reason that the member account request could not be processed.
 	Reason *string
 }

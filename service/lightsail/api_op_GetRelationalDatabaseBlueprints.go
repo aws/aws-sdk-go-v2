@@ -57,6 +57,7 @@ func (c *Client) GetRelationalDatabaseBlueprints(ctx context.Context, params *Ge
 }
 
 type GetRelationalDatabaseBlueprintsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetRelationalDatabaseBlueprints request. If your
 	// results are paginated, the response will return a next page token that you can
@@ -65,9 +66,11 @@ type GetRelationalDatabaseBlueprintsInput struct {
 }
 
 type GetRelationalDatabaseBlueprintsOutput struct {
+
 	// An object describing the result of your get relational database blueprints
 	// request.
 	Blueprints []*types.RelationalDatabaseBlueprint
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetRelationalDatabaseBlueprints request and

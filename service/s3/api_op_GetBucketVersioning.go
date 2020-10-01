@@ -66,15 +66,20 @@ func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersi
 }
 
 type GetBucketVersioningInput struct {
+
 	// The name of the bucket for which to get the versioning information.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketVersioningOutput struct {
+
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
 	// This element is only returned if the bucket has been configured with MFA delete.
 	// If the bucket has never been so configured, this element is not returned.
 	MFADelete types.MFADeleteStatus
+
 	// The versioning state of the bucket.
 	Status types.BucketVersioningStatus
 

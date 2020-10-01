@@ -59,6 +59,7 @@ func (c *Client) CreateRelationalDatabase(ctx context.Context, params *CreateRel
 }
 
 type CreateRelationalDatabaseInput struct {
+
 	// The daily time range during which automated backups are created for your new
 	// database if automated backups are enabled. The default is a 30-minute window
 	// selected at random from an 8-hour block of time for each AWS Region. For more
@@ -79,6 +80,7 @@ type CreateRelationalDatabaseInput struct {
 	//     * Must be at least 30
 	// minutes.
 	PreferredBackupWindow *string
+
 	// The name to use for your new database. Constraints:
 	//
 	//     * Must contain from 2
@@ -86,11 +88,15 @@ type CreateRelationalDatabaseInput struct {
 	//
 	//     * The first and last character
 	// must be a letter or number.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
+
 	// The password for the master user of your new database. The password can include
 	// any printable ASCII character except "/", """, or "@". Constraints: Must contain
 	// 8 to 41 characters.
 	MasterUserPassword *string
+
 	// The name of the master database created when the Lightsail database resource is
 	// created. Constraints:
 	//
@@ -98,19 +104,27 @@ type CreateRelationalDatabaseInput struct {
 	// characters.
 	//
 	//     * Cannot be a word reserved by the specified database engine
+	//
+	// This member is required.
 	MasterDatabaseName *string
+
 	// The bundle ID for your new database. A bundle describes the performance
 	// specifications for your database. You can get a list of database bundle IDs by
 	// using the get relational database bundles operation.
+	//
+	// This member is required.
 	RelationalDatabaseBundleId *string
+
 	// Specifies the accessibility options for your new database. A value of true
 	// specifies a database that is available to resources outside of your Lightsail
 	// account. A value of false specifies a database that is available only to your
 	// Lightsail resources in the same region as your database.
 	PubliclyAccessible *bool
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// The master user name for your new database. Constraints:
 	//
 	//     * Master user name
@@ -126,16 +140,23 @@ type CreateRelationalDatabaseInput struct {
 	// 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6
 	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html) or MySQL 5.7
 	// (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) respectively.
+	//
+	// This member is required.
 	MasterUsername *string
+
 	// The blueprint ID for your new database. A blueprint describes the major engine
 	// version of a database. You can get a list of database blueprints IDs by using
 	// the get relational database blueprints operation.
+	//
+	// This member is required.
 	RelationalDatabaseBlueprintId *string
+
 	// The Availability Zone in which to create your new database. Use the us-east-2a
 	// case-sensitive format. You can get a list of Availability Zones by using the get
 	// regions operation. Be sure to add the include relational database Availability
 	// Zones parameter to your request.
 	AvailabilityZone *string
+
 	// The weekly time range during which system maintenance can occur on your new
 	// database. The default is a 30-minute window selected at random from an 8-hour
 	// block of time for each AWS Region, occurring on a random day of the week.
@@ -157,6 +178,7 @@ type CreateRelationalDatabaseInput struct {
 }
 
 type CreateRelationalDatabaseOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

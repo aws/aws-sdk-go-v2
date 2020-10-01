@@ -65,11 +65,15 @@ func (c *Client) StartInstance(ctx context.Context, params *StartInstanceInput, 
 }
 
 type StartInstanceInput struct {
+
 	// The name of the instance (a virtual private server) to start.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type StartInstanceOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

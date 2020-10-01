@@ -57,8 +57,12 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 }
 
 type ListTagsInput struct {
+
 	// The name of the DAX resource to which the tags belong.
+	//
+	// This member is required.
 	ResourceName *string
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token.
@@ -66,9 +70,11 @@ type ListTagsInput struct {
 }
 
 type ListTagsOutput struct {
+
 	// If this value is present, there are additional results to be displayed. To
 	// retrieve them, call ListTags again, with NextToken set to this value.
 	NextToken *string
+
 	// A list of tags currently associated with the DAX cluster.
 	Tags []*types.Tag
 

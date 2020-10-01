@@ -57,18 +57,25 @@ func (c *Client) ListTargetsForSecurityProfile(ctx context.Context, params *List
 }
 
 type ListTargetsForSecurityProfileInput struct {
+
 	// The security profile.
+	//
+	// This member is required.
 	SecurityProfileName *string
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 }
 
 type ListTargetsForSecurityProfileOutput struct {
+
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
+
 	// The thing groups to which the security profile is attached.
 	SecurityProfileTargets []*types.SecurityProfileTarget
 

@@ -57,12 +57,16 @@ func (c *Client) DeleteReplicationTask(ctx context.Context, params *DeleteReplic
 
 //
 type DeleteReplicationTaskInput struct {
+
 	// The Amazon Resource Name (ARN) of the replication task to be deleted.
+	//
+	// This member is required.
 	ReplicationTaskArn *string
 }
 
 //
 type DeleteReplicationTaskOutput struct {
+
 	// The deleted replication task.
 	ReplicationTask *types.ReplicationTask
 

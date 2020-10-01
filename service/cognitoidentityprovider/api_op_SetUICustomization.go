@@ -63,18 +63,27 @@ func (c *Client) SetUICustomization(ctx context.Context, params *SetUICustomizat
 }
 
 type SetUICustomizationInput struct {
+
 	// The client ID for the client app.
 	ClientId *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The CSS values in the UI customization.
 	CSS *string
+
 	// The uploaded logo image for the UI customization.
 	ImageFile []byte
 }
 
 type SetUICustomizationOutput struct {
+
 	// The UI customization information.
+	//
+	// This member is required.
 	UICustomization *types.UICustomizationType
 
 	// Metadata pertaining to the operation's result.

@@ -65,24 +65,37 @@ func (c *Client) CreateTrafficPolicyVersion(ctx context.Context, params *CreateT
 // A complex type that contains information about the traffic policy that you want
 // to create a new version for.
 type CreateTrafficPolicyVersionInput struct {
+
 	// The definition of this version of the traffic policy, in JSON format. You
 	// specified the JSON in the CreateTrafficPolicyVersion request. For more
 	// information about the JSON format, see CreateTrafficPolicy
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateTrafficPolicy.html).
+	//
+	// This member is required.
 	Document *string
+
 	// The comment that you specified in the CreateTrafficPolicyVersion request, if
 	// any.
 	Comment *string
+
 	// The ID of the traffic policy for which you want to create a new version.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains the response information for the
 // CreateTrafficPolicyVersion request.
 type CreateTrafficPolicyVersionOutput struct {
+
 	// A unique URL that represents a new traffic policy version.
+	//
+	// This member is required.
 	Location *string
+
 	// A complex type that contains settings for the new version of the traffic policy.
+	//
+	// This member is required.
 	TrafficPolicy *types.TrafficPolicy
 
 	// Metadata pertaining to the operation's result.

@@ -55,8 +55,12 @@ func (c *Client) DeleteJobExecution(ctx context.Context, params *DeleteJobExecut
 }
 
 type DeleteJobExecutionInput struct {
+
 	// The ID of the job whose execution on a particular device will be deleted.
+	//
+	// This member is required.
 	JobId *string
+
 	// (Optional) When true, you can delete a job execution which is "IN_PROGRESS".
 	// Otherwise, you can only delete a job execution which is in a terminal state
 	// ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception
@@ -65,12 +69,18 @@ type DeleteJobExecutionInput struct {
 	// update the job execution status. Use caution and ensure that the device is able
 	// to recover to a valid state.
 	Force *bool
+
 	// The name of the thing whose job execution will be deleted.
+	//
+	// This member is required.
 	ThingName *string
+
 	// The ID of the job execution to be deleted. The executionNumber refers to the
 	// execution of a particular job on a particular device. Note that once a job
 	// execution is deleted, the executionNumber may be reused by IoT, so be sure you
 	// get and use the correct value here.
+	//
+	// This member is required.
 	ExecutionNumber *int64
 }
 

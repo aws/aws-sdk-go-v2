@@ -87,6 +87,7 @@ func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessio
 
 // Represents the input for a request action.
 type UpdateGameSessionInput struct {
+
 	// Game session protection policy to apply to this game session only.
 	//
 	//     *
@@ -96,20 +97,27 @@ type UpdateGameSessionInput struct {
 	// * FullProtection -- If the game session is in an ACTIVE status, it cannot be
 	// terminated during a scale-down event.
 	ProtectionPolicy types.ProtectionPolicy
+
 	// Policy determining whether or not the game session accepts new players.
 	PlayerSessionCreationPolicy types.PlayerSessionCreationPolicy
+
 	// A descriptive label that is associated with a game session. Session names do not
 	// need to be unique.
 	Name *string
+
 	// The maximum number of players that can be connected simultaneously to the game
 	// session.
 	MaximumPlayerSessionCount *int32
+
 	// A unique identifier for the game session to update.
+	//
+	// This member is required.
 	GameSessionId *string
 }
 
 // Represents the returned data in response to a request action.
 type UpdateGameSessionOutput struct {
+
 	// The updated game session metadata.
 	GameSession *types.GameSession
 

@@ -58,8 +58,12 @@ func (c *Client) PutMetricPolicy(ctx context.Context, params *PutMetricPolicyInp
 }
 
 type PutMetricPolicyInput struct {
+
 	// The name of the container that you want to add the metric policy to.
+	//
+	// This member is required.
 	ContainerName *string
+
 	// The metric policy that you want to associate with the container. In the policy,
 	// you must indicate whether you want MediaStore to send container-level metrics.
 	// You can also include up to five rules to define groups of objects that you want
@@ -76,6 +80,8 @@ type PutMetricPolicyInput struct {
 	// * An object group name that allows you to refer to the object group. The name
 	// can't have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _
 	// (underscore).
+	//
+	// This member is required.
 	MetricPolicy *types.MetricPolicy
 }
 

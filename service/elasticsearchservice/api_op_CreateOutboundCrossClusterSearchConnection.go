@@ -59,28 +59,42 @@ func (c *Client) CreateOutboundCrossClusterSearchConnection(ctx context.Context,
 // Container for the parameters to the CreateOutboundCrossClusterSearchConnection
 // () operation.
 type CreateOutboundCrossClusterSearchConnectionInput struct {
+
 	// Specifies the DomainInformation () for the source Elasticsearch domain.
+	//
+	// This member is required.
 	SourceDomainInfo *types.DomainInformation
+
 	// Specifies the connection alias that will be used by the customer for this
 	// connection.
+	//
+	// This member is required.
 	ConnectionAlias *string
+
 	// Specifies the DomainInformation () for the destination Elasticsearch domain.
+	//
+	// This member is required.
 	DestinationDomainInfo *types.DomainInformation
 }
 
 // The result of a CreateOutboundCrossClusterSearchConnection () request. Contains
 // the details of the newly created cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {
+
 	// Specifies the DomainInformation () for the source Elasticsearch domain.
 	SourceDomainInfo *types.DomainInformation
+
 	// Specifies the DomainInformation () for the destination Elasticsearch domain.
 	DestinationDomainInfo *types.DomainInformation
+
 	// Specifies the OutboundCrossClusterSearchConnectionStatus () for the newly
 	// created connection.
 	ConnectionStatus *types.OutboundCrossClusterSearchConnectionStatus
+
 	// Unique id for the created outbound connection, which is used for subsequent
 	// operations on connection.
 	CrossClusterSearchConnectionId *string
+
 	// Specifies the connection alias provided during the create connection request.
 	ConnectionAlias *string
 

@@ -70,33 +70,53 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 }
 
 type XmlListsInput struct {
-	StringList    []*string
-	StringSet     []*string
-	IntegerList   []*int32
-	BooleanList   []*bool
+	StringList []*string
+
+	StringSet []*string
+
+	IntegerList []*int32
+
+	BooleanList []*bool
+
 	TimestampList []*time.Time
-	EnumList      []types.FooEnum
+
+	EnumList []types.FooEnum
+
 	// A list of lists of strings.
-	NestedStringList   [][]*string
+	NestedStringList [][]*string
+
 	RenamedListMembers []*string
-	FlattenedList      []*string
-	FlattenedList2     []*string
-	StructureList      []*types.StructureListMember
+
+	FlattenedList []*string
+
+	FlattenedList2 []*string
+
+	StructureList []*types.StructureListMember
 }
 
 type XmlListsOutput struct {
-	StringList    []*string
-	StringSet     []*string
-	IntegerList   []*int32
-	BooleanList   []*bool
+	StringList []*string
+
+	StringSet []*string
+
+	IntegerList []*int32
+
+	BooleanList []*bool
+
 	TimestampList []*time.Time
-	EnumList      []types.FooEnum
+
+	EnumList []types.FooEnum
+
 	// A list of lists of strings.
-	NestedStringList   [][]*string
+	NestedStringList [][]*string
+
 	RenamedListMembers []*string
-	FlattenedList      []*string
-	FlattenedList2     []*string
-	StructureList      []*types.StructureListMember
+
+	FlattenedList []*string
+
+	FlattenedList2 []*string
+
+	StructureList []*types.StructureListMember
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

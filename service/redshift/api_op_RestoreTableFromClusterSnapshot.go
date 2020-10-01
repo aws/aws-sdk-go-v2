@@ -67,28 +67,47 @@ func (c *Client) RestoreTableFromClusterSnapshot(ctx context.Context, params *Re
 
 //
 type RestoreTableFromClusterSnapshotInput struct {
+
 	// The name of the schema to restore the table to.
 	TargetSchemaName *string
+
 	// The name of the source schema that contains the table to restore from. If you do
 	// not specify a SourceSchemaName value, the default is public.
 	SourceSchemaName *string
+
 	// The identifier of the snapshot to restore the table from. This snapshot must
 	// have been created from the Amazon Redshift cluster specified by the
 	// ClusterIdentifier parameter.
+	//
+	// This member is required.
 	SnapshotIdentifier *string
+
 	// The name of the source database that contains the table to restore from.
+	//
+	// This member is required.
 	SourceDatabaseName *string
+
 	// The name of the database to restore the table to.
 	TargetDatabaseName *string
+
 	// The name of the source table to restore from.
+	//
+	// This member is required.
 	SourceTableName *string
+
 	// The identifier of the Amazon Redshift cluster to restore the table to.
+	//
+	// This member is required.
 	ClusterIdentifier *string
+
 	// The name of the table to create as a result of the current request.
+	//
+	// This member is required.
 	NewTableName *string
 }
 
 type RestoreTableFromClusterSnapshotOutput struct {
+
 	// Describes the status of a RestoreTableFromClusterSnapshot () operation.
 	TableRestoreStatus *types.TableRestoreStatus
 

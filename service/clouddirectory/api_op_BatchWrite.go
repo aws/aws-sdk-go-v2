@@ -57,14 +57,21 @@ func (c *Client) BatchWrite(ctx context.Context, params *BatchWriteInput, optFns
 }
 
 type BatchWriteInput struct {
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory (). For
 	// more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// A list of operations that are part of the batch.
+	//
+	// This member is required.
 	Operations []*types.BatchWriteOperation
 }
 
 type BatchWriteOutput struct {
+
 	// A list of all the responses for each batch write.
 	Responses []*types.BatchWriteOperationResponse
 

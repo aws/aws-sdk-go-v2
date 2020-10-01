@@ -61,16 +61,22 @@ func (c *Client) DescribeEngineDefaultClusterParameters(ctx context.Context, par
 
 //
 type DescribeEngineDefaultClusterParametersInput struct {
+
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultClusterParameters request. If this parameter is specified,
 	// the response includes only records beyond the marker, up to the value specified
 	// by MaxRecords.
 	Marker *string
+
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
+
 	// The name of the DB cluster parameter group family to return engine parameter
 	// information for.
+	//
+	// This member is required.
 	DBParameterGroupFamily *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
@@ -79,6 +85,7 @@ type DescribeEngineDefaultClusterParametersInput struct {
 }
 
 type DescribeEngineDefaultClusterParametersOutput struct {
+
 	// Contains the result of a successful invocation of the
 	// DescribeEngineDefaultParameters action.
 	EngineDefaults *types.EngineDefaults

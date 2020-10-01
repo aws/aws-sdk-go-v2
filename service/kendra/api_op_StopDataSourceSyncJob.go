@@ -56,9 +56,15 @@ func (c *Client) StopDataSourceSyncJob(ctx context.Context, params *StopDataSour
 }
 
 type StopDataSourceSyncJobInput struct {
+
 	// The identifier of the data source for which to stop the synchronization jobs.
+	//
+	// This member is required.
 	Id *string
+
 	// The identifier of the index that contains the data source.
+	//
+	// This member is required.
 	IndexId *string
 }
 

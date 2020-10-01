@@ -81,13 +81,18 @@ func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, op
 
 // RefreshCacheInput
 type RefreshCacheInput struct {
+
 	// The Amazon Resource Name (ARN) of the file share you want to refresh.
+	//
+	// This member is required.
 	FileShareARN *string
+
 	// A comma-separated list of the paths of folders to refresh in the cache. The
 	// default is ["/"]. The default refreshes objects and folders at the root of the
 	// Amazon S3 bucket. If Recursive is set to true, the entire S3 bucket that the
 	// file share has access to is refreshed.
 	FolderList []*string
+
 	// A value that specifies whether to recursively refresh folders in the cache. The
 	// refresh includes folders that were in the cache the last time the gateway listed
 	// the folder's contents. If this value set to true, each folder that is listed in
@@ -100,9 +105,11 @@ type RefreshCacheInput struct {
 
 // RefreshCacheOutput
 type RefreshCacheOutput struct {
+
 	// The randomly generated ID of the notification that was sent. This ID is in UUID
 	// format.
 	NotificationId *string
+
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string
 

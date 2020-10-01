@@ -58,7 +58,10 @@ func (c *Client) VerifyEmailAddress(ctx context.Context, params *VerifyEmailAddr
 // information about email address verification, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
 type VerifyEmailAddressInput struct {
+
 	// The email address to be verified.
+	//
+	// This member is required.
 	EmailAddress *string
 }
 

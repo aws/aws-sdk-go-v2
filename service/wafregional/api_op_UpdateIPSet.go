@@ -116,9 +116,13 @@ func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optF
 }
 
 type UpdateIPSetInput struct {
+
 	// The IPSetId of the IPSet () that you want to update. IPSetId is returned by
 	// CreateIPSet () and by ListIPSets ().
+	//
+	// This member is required.
 	IPSetId *string
+
 	// An array of IPSetUpdate objects that you want to insert into or delete from an
 	// IPSet (). For more information, see the applicable data types:
 	//
@@ -130,12 +134,18 @@ type UpdateIPSetInput struct {
 	//
 	// You can insert a maximum of 1000 addresses in a single
 	// request.
+	//
+	// This member is required.
 	Updates []*types.IPSetUpdate
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type UpdateIPSetOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateIPSet request. You can also
 	// use this value to query the status of the request. For more information, see
 	// GetChangeTokenStatus ().

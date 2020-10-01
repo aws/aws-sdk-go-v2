@@ -56,21 +56,30 @@ func (c *Client) CreateLoggerDefinitionVersion(ctx context.Context, params *Crea
 }
 
 type CreateLoggerDefinitionVersionInput struct {
+
 	// The ID of the logger definition.
+	//
+	// This member is required.
 	LoggerDefinitionId *string
+
 	// A list of loggers.
 	Loggers []*types.Logger
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 }
 
 type CreateLoggerDefinitionVersionOutput struct {
+
 	// The ARN of the version.
 	Arn *string
+
 	// The ID of the version.
 	Version *string
+
 	// The ID of the parent definition that the version is associated with.
 	Id *string
+
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string
 

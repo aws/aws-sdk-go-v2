@@ -60,7 +60,10 @@ func (c *Client) StopQueryExecution(ctx context.Context, params *StopQueryExecut
 }
 
 type StopQueryExecutionInput struct {
+
 	// The unique ID of the query execution to stop.
+	//
+	// This member is required.
 	QueryExecutionId *string
 }
 

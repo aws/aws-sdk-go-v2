@@ -64,19 +64,28 @@ func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, param
 }
 
 type DeleteApplicationReferenceDataSourceInput struct {
+
 	// Name of an existing application.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// ID of the reference data source. When you add a reference data source to your
 	// application using the AddApplicationReferenceDataSource
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html),
 	// Amazon Kinesis Analytics assigns an ID. You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the reference ID.
+	//
+	// This member is required.
 	ReferenceId *string
+
 	// Version of the application. You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
 	// not the current version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
 }
 

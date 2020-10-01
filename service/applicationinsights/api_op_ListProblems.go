@@ -56,24 +56,31 @@ func (c *Client) ListProblems(ctx context.Context, params *ListProblemsInput, op
 }
 
 type ListProblemsInput struct {
+
 	// The time when the problem was detected, in epoch seconds. If you don't specify a
 	// time frame for the request, problems within the past seven days are returned.
 	StartTime *time.Time
+
 	// The name of the resource group.
 	ResourceGroupName *string
+
 	// The time when the problem ended, in epoch seconds. If not specified, problems
 	// within the past seven days are returned.
 	EndTime *time.Time
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
 }
 
 type ListProblemsOutput struct {
+
 	// The list of problems.
 	ProblemList []*types.Problem
+
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

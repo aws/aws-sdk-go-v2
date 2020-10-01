@@ -56,11 +56,15 @@ func (c *Client) DescribeSolution(ctx context.Context, params *DescribeSolutionI
 }
 
 type DescribeSolutionInput struct {
+
 	// The Amazon Resource Name (ARN) of the solution to describe.
+	//
+	// This member is required.
 	SolutionArn *string
 }
 
 type DescribeSolutionOutput struct {
+
 	// An object that describes the solution.
 	Solution *types.Solution
 

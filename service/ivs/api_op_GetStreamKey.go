@@ -56,11 +56,15 @@ func (c *Client) GetStreamKey(ctx context.Context, params *GetStreamKeyInput, op
 }
 
 type GetStreamKeyInput struct {
+
 	// ARN for the stream key to be retrieved.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetStreamKeyOutput struct {
+
 	// Object specifying a stream key.
 	StreamKey *types.StreamKey
 

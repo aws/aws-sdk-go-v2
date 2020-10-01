@@ -72,10 +72,13 @@ func (c *Client) ListMetrics(ctx context.Context, params *ListMetricsInput, optF
 }
 
 type ListMetricsInput struct {
+
 	// The name of the metric to filter against.
 	MetricName *string
+
 	// The namespace to filter against.
 	Namespace *string
+
 	// To filter the results to show only metrics that have had data points published
 	// in the past three hours, specify this parameter with a value of PT3H. This is
 	// the only valid value for this parameter. The results that are returned are an
@@ -83,16 +86,20 @@ type ListMetricsInput struct {
 	// returned results include metrics with last published data as much as 40 minutes
 	// more than the specified time interval.
 	RecentlyActive types.RecentlyActive
+
 	// The dimensions to filter against.
 	Dimensions []*types.DimensionFilter
+
 	// The token returned by a previous call to indicate that there is more data
 	// available.
 	NextToken *string
 }
 
 type ListMetricsOutput struct {
+
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string
+
 	// The metrics that match your request.
 	Metrics []*types.Metric
 

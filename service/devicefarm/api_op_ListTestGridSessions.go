@@ -57,27 +57,39 @@ func (c *Client) ListTestGridSessions(ctx context.Context, params *ListTestGridS
 }
 
 type ListTestGridSessionsInput struct {
+
 	// Return only sessions created before this time.
 	CreationTimeBefore *time.Time
+
 	// Return only sessions that ended after this time.
 	EndTimeAfter *time.Time
+
 	// Return only sessions in this state.
 	Status types.TestGridSessionStatus
+
 	// Pagination token.
 	NextToken *string
+
 	// Return only sessions created after this time.
 	CreationTimeAfter *time.Time
+
 	// ARN of a TestGridProject ().
+	//
+	// This member is required.
 	ProjectArn *string
+
 	// Return only sessions that ended before this time.
 	EndTimeBefore *time.Time
+
 	// Return only this many results at a time.
 	MaxResult *int32
 }
 
 type ListTestGridSessionsOutput struct {
+
 	// Pagination token.
 	NextToken *string
+
 	// The sessions that match the criteria in a ListTestGridSessionsRequest ().
 	TestGridSessions []*types.TestGridSession
 

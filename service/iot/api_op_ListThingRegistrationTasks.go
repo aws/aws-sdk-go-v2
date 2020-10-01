@@ -55,17 +55,22 @@ func (c *Client) ListThingRegistrationTasks(ctx context.Context, params *ListThi
 }
 
 type ListThingRegistrationTasksInput struct {
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// The status of the bulk thing provisioning task.
 	Status types.Status
 }
 
 type ListThingRegistrationTasksOutput struct {
+
 	// A list of bulk thing provisioning task IDs.
 	TaskIds []*string
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string

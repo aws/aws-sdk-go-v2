@@ -59,10 +59,17 @@ func (c *Client) InvokeScreenAutomation(ctx context.Context, params *InvokeScree
 }
 
 type InvokeScreenAutomationInput struct {
+
 	// The ID of the automation action to be performed.
+	//
+	// This member is required.
 	ScreenAutomationId *string
+
 	// The ID of the app that contains the screen automation.
+	//
+	// This member is required.
 	AppId *string
+
 	// The request token for performing the automation action. Request tokens help to
 	// identify duplicate requests. If a call times out or fails due to a transient
 	// error like a failed network connection, you can retry the call with the same
@@ -72,23 +79,34 @@ type InvokeScreenAutomationInput struct {
 	// are valid only for a few minutes. You cannot use request tokens to dedupe
 	// requests spanning hours or days.
 	ClientRequestToken *string
+
 	// The ID of the workbook that contains the screen automation.
+	//
+	// This member is required.
 	WorkbookId *string
+
 	// Variables are optional and are needed only if the screen requires them to render
 	// correctly. Variables are specified as a map where the key is the name of the
 	// variable as defined on the screen. The value is an object which currently has
 	// only one property, rawValue, which holds the value of the variable to be passed
 	// to the screen.
 	Variables map[string]*types.VariableValue
+
 	// The row ID for the automation if the automation is defined inside a block with
 	// source or list.
 	RowId *string
+
 	// The ID of the screen that contains the screen automation.
+	//
+	// This member is required.
 	ScreenId *string
 }
 
 type InvokeScreenAutomationOutput struct {
+
 	// The updated workbook cursor after performing the automation action.
+	//
+	// This member is required.
 	WorkbookCursor *int64
 
 	// Metadata pertaining to the operation's result.

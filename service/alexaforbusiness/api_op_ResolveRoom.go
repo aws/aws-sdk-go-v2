@@ -57,17 +57,26 @@ func (c *Client) ResolveRoom(ctx context.Context, params *ResolveRoomInput, optF
 }
 
 type ResolveRoomInput struct {
+
 	// The ARN of the skill that was requested. Required.
+	//
+	// This member is required.
 	SkillId *string
+
 	// The ARN of the user. Required.
+	//
+	// This member is required.
 	UserId *string
 }
 
 type ResolveRoomOutput struct {
+
 	// The name of the room from which the skill request was invoked.
 	RoomName *string
+
 	// The ARN of the room from which the skill request was invoked.
 	RoomArn *string
+
 	// Response to get the room profile request. Required.
 	RoomSkillParameters []*types.RoomSkillParameter
 

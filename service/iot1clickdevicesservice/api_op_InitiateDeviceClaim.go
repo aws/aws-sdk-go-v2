@@ -58,11 +58,15 @@ func (c *Client) InitiateDeviceClaim(ctx context.Context, params *InitiateDevice
 }
 
 type InitiateDeviceClaimInput struct {
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
 }
 
 type InitiateDeviceClaimOutput struct {
+
 	// The device's final claim state.
 	State *string
 

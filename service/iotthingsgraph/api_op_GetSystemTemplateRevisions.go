@@ -59,20 +59,27 @@ func (c *Client) GetSystemTemplateRevisions(ctx context.Context, params *GetSyst
 }
 
 type GetSystemTemplateRevisionsInput struct {
+
 	// The ID of the system template. The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
+	//
+	// This member is required.
 	Id *string
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
 }
 
 type GetSystemTemplateRevisionsOutput struct {
+
 	// An array of objects that contain summary data about the system template
 	// revisions.
 	Summaries []*types.SystemTemplateSummary
+
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
 

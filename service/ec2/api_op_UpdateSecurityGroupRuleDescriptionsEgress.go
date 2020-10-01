@@ -60,23 +60,30 @@ func (c *Client) UpdateSecurityGroupRuleDescriptionsEgress(ctx context.Context, 
 }
 
 type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the security group. You must specify either the security group ID or
 	// the security group name in the request. For security groups in a nondefault VPC,
 	// you must specify the security group ID.
 	GroupId *string
+
 	// The IP permissions for the security group rule.
+	//
+	// This member is required.
 	IpPermissions []*types.IpPermission
+
 	// [Default VPC] The name of the security group. You must specify either the
 	// security group ID or the security group name in the request.
 	GroupName *string
 }
 
 type UpdateSecurityGroupRuleDescriptionsEgressOutput struct {
+
 	// Returns true if the request succeeds; otherwise, returns an error.
 	Return *bool
 

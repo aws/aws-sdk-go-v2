@@ -55,6 +55,7 @@ func (c *Client) GetLoadBalancers(ctx context.Context, params *GetLoadBalancersI
 }
 
 type GetLoadBalancersInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetLoadBalancers request. If your results are
 	// paginated, the response will return a next page token that you can specify as
@@ -63,8 +64,10 @@ type GetLoadBalancersInput struct {
 }
 
 type GetLoadBalancersOutput struct {
+
 	// An array of LoadBalancer objects describing your load balancers.
 	LoadBalancers []*types.LoadBalancer
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetLoadBalancers request and specify the next

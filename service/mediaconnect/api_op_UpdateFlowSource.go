@@ -57,42 +57,60 @@ func (c *Client) UpdateFlowSource(ctx context.Context, params *UpdateFlowSourceI
 
 // A request to update the source of a flow.
 type UpdateFlowSourceInput struct {
+
 	// The name of the VPC Interface to configure this Source with.
 	VpcInterfaceName *string
+
 	// A description for the source. This value is not used or seen outside of the
 	// current AWS Elemental MediaConnect account.
 	Description *string
+
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int32
+
 	// The ARN of the source that you want to update.
+	//
+	// This member is required.
 	SourceArn *string
+
 	// The type of encryption used on the content ingested from this source.
 	Decryption *types.UpdateEncryption
+
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string
+
 	// The protocol that is used by the source.
 	Protocol types.Protocol
+
 	// The ARN of the entitlement that allows you to subscribe to this flow. The
 	// entitlement is set by the flow originator, and the ARN is generated as part of
 	// the originator's flow.
 	EntitlementArn *string
+
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
 	MaxLatency *int32
+
 	// The range of IP addresses that should be allowed to contribute content to your
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
+
 	// The port that the flow will be listening on for incoming content.
 	IngestPort *int32
+
 	// The flow that is associated with the source that you want to update.
+	//
+	// This member is required.
 	FlowArn *string
 }
 
 type UpdateFlowSourceOutput struct {
+
 	// The ARN of the flow that you want to update.
 	FlowArn *string
+
 	// The settings for the source of the flow.
 	Source *types.Source
 

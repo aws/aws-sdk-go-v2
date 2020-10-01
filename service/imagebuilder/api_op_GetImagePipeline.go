@@ -56,13 +56,18 @@ func (c *Client) GetImagePipeline(ctx context.Context, params *GetImagePipelineI
 }
 
 type GetImagePipelineInput struct {
+
 	// The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.
+	//
+	// This member is required.
 	ImagePipelineArn *string
 }
 
 type GetImagePipelineOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The image pipeline object.
 	ImagePipeline *types.ImagePipeline
 

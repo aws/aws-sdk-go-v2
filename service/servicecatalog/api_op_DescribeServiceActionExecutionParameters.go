@@ -57,8 +57,12 @@ func (c *Client) DescribeServiceActionExecutionParameters(ctx context.Context, p
 }
 
 type DescribeServiceActionExecutionParametersInput struct {
+
 	// The self-service action identifier.
+	//
+	// This member is required.
 	ServiceActionId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -68,11 +72,15 @@ type DescribeServiceActionExecutionParametersInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The identifier of the provisioned product.
+	//
+	// This member is required.
 	ProvisionedProductId *string
 }
 
 type DescribeServiceActionExecutionParametersOutput struct {
+
 	// The parameters of the self-service action.
 	ServiceActionParameters []*types.ExecutionParameter
 

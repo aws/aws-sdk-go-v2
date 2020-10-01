@@ -58,44 +58,57 @@ func (c *Client) ModifyTargetGroup(ctx context.Context, params *ModifyTargetGrou
 }
 
 type ModifyTargetGroupInput struct {
+
 	// The number of consecutive health check failures required before considering the
 	// target unhealthy. For Network Load Balancers, this value must be the same as the
 	// healthy threshold count.
 	UnhealthyThresholdCount *int32
+
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no
 	// response means a failed health check. With Network Load Balancers, you can't
 	// modify this setting.
 	HealthCheckTimeoutSeconds *int32
+
 	// The approximate amount of time, in seconds, between health checks of an
 	// individual target. For Application Load Balancers, the range is 5 to 300
 	// seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.
 	// With Network Load Balancers, you can't modify this setting.
 	HealthCheckIntervalSeconds *int32
+
 	// Indicates whether health checks are enabled.
 	HealthCheckEnabled *bool
+
 	// [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful
 	// response from a target. With Network Load Balancers, you can't modify this
 	// setting.
 	Matcher *types.Matcher
+
 	// The number of consecutive health checks successes required before considering an
 	// unhealthy target healthy.
 	HealthyThresholdCount *int32
+
 	// [HTTP/HTTPS health checks] The ping path that is the destination for the health
 	// check request.
 	HealthCheckPath *string
+
 	// The Amazon Resource Name (ARN) of the target group.
+	//
+	// This member is required.
 	TargetGroupArn *string
+
 	// The protocol the load balancer uses when performing health checks on targets.
 	// The TCP protocol is supported for health checks only if the protocol of the
 	// target group is TCP, TLS, UDP, or TCP_UDP. The TLS, UDP, and TCP_UDP protocols
 	// are not supported for health checks. With Network Load Balancers, you can't
 	// modify this setting.
 	HealthCheckProtocol types.ProtocolEnum
+
 	// The port the load balancer uses when performing health checks on targets.
 	HealthCheckPort *string
 }
 
 type ModifyTargetGroupOutput struct {
+
 	// Information about the modified target group.
 	TargetGroups []*types.TargetGroup
 

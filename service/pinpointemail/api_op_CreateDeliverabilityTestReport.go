@@ -71,28 +71,42 @@ func (c *Client) CreateDeliverabilityTestReport(ctx context.Context, params *Cre
 // 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport
 // operation to view the results of the test.
 type CreateDeliverabilityTestReportInput struct {
+
 	// The HTML body of the message that you sent when you performed the predictive
 	// inbox placement test.
+	//
+	// This member is required.
 	Content *types.EmailContent
+
 	// A unique name that helps you to identify the predictive inbox placement test
 	// when you retrieve the results.
 	ReportName *string
+
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the predictive inbox placement test.
 	Tags []*types.Tag
+
 	// The email address that the predictive inbox placement test email was sent from.
+	//
+	// This member is required.
 	FromEmailAddress *string
 }
 
 // Information about the predictive inbox placement test that you created.
 type CreateDeliverabilityTestReportOutput struct {
+
 	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
 	// then the predictive inbox placement test is currently running. Predictive inbox
 	// placement tests are usually complete within 24 hours of creating the test. If
 	// the status is COMPLETE, then the test is finished, and you can use the
 	// GetDeliverabilityTestReport to view the results of the test.
+	//
+	// This member is required.
 	DeliverabilityTestStatus types.DeliverabilityTestStatus
+
 	// A unique string that identifies the predictive inbox placement test.
+	//
+	// This member is required.
 	ReportId *string
 
 	// Metadata pertaining to the operation's result.

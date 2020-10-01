@@ -57,20 +57,26 @@ func (c *Client) ModifyClusterSnapshot(ctx context.Context, params *ModifyCluste
 }
 
 type ModifyClusterSnapshotInput struct {
+
 	// The number of days that a manual snapshot is retained. If the value is -1, the
 	// manual snapshot is retained indefinitely. If the manual snapshot falls outside
 	// of the new retention period, you can specify the force option to immediately
 	// delete the snapshot. The value must be either -1 or an integer between 1 and
 	// 3,653.
 	ManualSnapshotRetentionPeriod *int32
+
 	// A Boolean option to override an exception if the retention period has already
 	// passed.
 	Force *bool
+
 	// The identifier of the snapshot whose setting you want to modify.
+	//
+	// This member is required.
 	SnapshotIdentifier *string
 }
 
 type ModifyClusterSnapshotOutput struct {
+
 	// Describes a snapshot.
 	Snapshot *types.Snapshot
 

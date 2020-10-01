@@ -59,8 +59,12 @@ func (c *Client) GetDefaultCreditSpecification(ctx context.Context, params *GetD
 }
 
 type GetDefaultCreditSpecificationInput struct {
+
 	// The instance family.
+	//
+	// This member is required.
 	InstanceFamily types.UnlimitedSupportedInstanceFamily
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -69,6 +73,7 @@ type GetDefaultCreditSpecificationInput struct {
 }
 
 type GetDefaultCreditSpecificationOutput struct {
+
 	// The default credit option for CPU usage of the instance family.
 	InstanceFamilyCreditSpecification *types.InstanceFamilyCreditSpecification
 

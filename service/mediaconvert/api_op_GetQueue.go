@@ -56,11 +56,15 @@ func (c *Client) GetQueue(ctx context.Context, params *GetQueueInput, optFns ...
 }
 
 type GetQueueInput struct {
+
 	// The name of the queue that you want information about.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetQueueOutput struct {
+
 	// You can use queues to manage the resources that are available to your AWS
 	// account for running multiple transcoding jobs at the same time. If you don't
 	// specify a queue, the service sends all jobs through the default queue. For more

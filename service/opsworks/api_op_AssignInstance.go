@@ -71,10 +71,16 @@ func (c *Client) AssignInstance(ctx context.Context, params *AssignInstanceInput
 }
 
 type AssignInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The layer ID, which must correspond to a custom layer. You cannot assign a
 	// registered instance to a built-in layer.
+	//
+	// This member is required.
 	LayerIds []*string
 }
 

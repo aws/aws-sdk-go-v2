@@ -59,13 +59,17 @@ func (c *Client) AcceptInboundCrossClusterSearchConnection(ctx context.Context, 
 // Container for the parameters to the AcceptInboundCrossClusterSearchConnection ()
 // operation.
 type AcceptInboundCrossClusterSearchConnectionInput struct {
+
 	// The id of the inbound connection that you want to accept.
+	//
+	// This member is required.
 	CrossClusterSearchConnectionId *string
 }
 
 // The result of a AcceptInboundCrossClusterSearchConnection () operation. Contains
 // details of accepted inbound connection.
 type AcceptInboundCrossClusterSearchConnectionOutput struct {
+
 	// Specifies the InboundCrossClusterSearchConnection () of accepted inbound
 	// connection.
 	CrossClusterSearchConnection *types.InboundCrossClusterSearchConnection

@@ -58,13 +58,19 @@ func (c *Client) DeleteMesh(ctx context.Context, params *DeleteMeshInput, optFns
 
 //
 type DeleteMeshInput struct {
+
 	// The name of the service mesh to delete.
+	//
+	// This member is required.
 	MeshName *string
 }
 
 //
 type DeleteMeshOutput struct {
+
 	// The service mesh that was deleted.
+	//
+	// This member is required.
 	Mesh *types.MeshData
 
 	// Metadata pertaining to the operation's result.

@@ -58,8 +58,12 @@ func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVer
 }
 
 type ListPackageVersionsInput struct {
+
 	// The name of the repository that contains the package.
+	//
+	// This member is required.
 	Repository *string
+
 	// A string that specifies the status of the package versions to include in the
 	// returned list. It can be one of the following:
 	//
@@ -74,11 +78,18 @@ type ListPackageVersionsInput struct {
 	//
 	//     * Disposed
 	Status types.PackageVersionStatus
+
 	// The name of the domain that contains the repository that contains the returned
 	// package versions.
+	//
+	// This member is required.
 	Domain *string
+
 	// The name of the package for which you want to return a list of package versions.
+	//
+	// This member is required.
 	Package *string
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -91,9 +102,11 @@ type ListPackageVersionsInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The format of the returned packages. The valid package types are:
 	//
 	//     * npm: A
@@ -104,21 +117,28 @@ type ListPackageVersionsInput struct {
 	//
 	//     * maven: A Maven package that contains compiled code in a
 	// distributable format, such as a JAR file.
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// How to sort the returned list of package versions.
 	SortBy types.PackageVersionSortType
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 }
 
 type ListPackageVersionsOutput struct {
+
 	// The returned list of PackageVersionSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 	// objects.
 	Versions []*types.PackageVersionSummary
+
 	// A format of the package. Valid package format values are:
 	//
 	//     * npm
@@ -128,8 +148,10 @@ type ListPackageVersionsOutput struct {
 	//
 	//     * maven
 	Format types.PackageFormat
+
 	// The name of the package.
 	Package *string
+
 	// The default package version to display. This depends on the package format:
 	//
 	//
@@ -139,8 +161,10 @@ type ListPackageVersionsOutput struct {
 	//     * For npm packages, it's the version referenced by the latest tag.
 	// If the latest tag is not set, it's the most recently published package version.
 	DefaultDisplayVersion *string
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//

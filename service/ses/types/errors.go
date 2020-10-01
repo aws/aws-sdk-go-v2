@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Indicates that email sending is disabled for your entire Amazon SES account. You
@@ -26,12 +25,6 @@ func (e *AccountSendingPausedException) ErrorMessage() string {
 }
 func (e *AccountSendingPausedException) ErrorCode() string             { return "AccountSendingPausedException" }
 func (e *AccountSendingPausedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountSendingPausedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountSendingPausedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that a resource could not be created because of a naming conflict.
 type AlreadyExistsException struct {
@@ -51,18 +44,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetName() string {
-	return ptr.ToString(e.Name)
-}
-func (e *AlreadyExistsException) HasName() bool {
-	return e.Name != nil
-}
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the delete operation could not be completed.
 type CannotDeleteException struct {
@@ -82,18 +63,6 @@ func (e *CannotDeleteException) ErrorMessage() string {
 }
 func (e *CannotDeleteException) ErrorCode() string             { return "CannotDeleteException" }
 func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CannotDeleteException) GetName() string {
-	return ptr.ToString(e.Name)
-}
-func (e *CannotDeleteException) HasName() bool {
-	return e.Name != nil
-}
-func (e *CannotDeleteException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CannotDeleteException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the configuration set could not be created because of a naming
 // conflict.
@@ -118,18 +87,6 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorCode() string {
 func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ConfigurationSetAlreadyExistsException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *ConfigurationSetAlreadyExistsException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *ConfigurationSetAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConfigurationSetAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the configuration set does not exist.
 type ConfigurationSetDoesNotExistException struct {
@@ -152,18 +109,6 @@ func (e *ConfigurationSetDoesNotExistException) ErrorCode() string {
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ConfigurationSetDoesNotExistException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *ConfigurationSetDoesNotExistException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *ConfigurationSetDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConfigurationSetDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Indicates that email sending is disabled for the configuration set. You can
@@ -190,18 +135,6 @@ func (e *ConfigurationSetSendingPausedException) ErrorCode() string {
 func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ConfigurationSetSendingPausedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConfigurationSetSendingPausedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ConfigurationSetSendingPausedException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *ConfigurationSetSendingPausedException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
 
 // Indicates that custom verification email template provided content is invalid.
 type CustomVerificationEmailInvalidContentException struct {
@@ -222,12 +155,6 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorCode() string {
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CustomVerificationEmailInvalidContentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomVerificationEmailInvalidContentException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Indicates that a custom verification email template with the name you specified
@@ -253,18 +180,6 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorCode() stri
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *CustomVerificationEmailTemplateAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomVerificationEmailTemplateAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CustomVerificationEmailTemplateAlreadyExistsException) GetCustomVerificationEmailTemplateName() string {
-	return ptr.ToString(e.CustomVerificationEmailTemplateName)
-}
-func (e *CustomVerificationEmailTemplateAlreadyExistsException) HasCustomVerificationEmailTemplateName() bool {
-	return e.CustomVerificationEmailTemplateName != nil
-}
 
 // Indicates that a custom verification email template with the name you specified
 // does not exist.
@@ -288,18 +203,6 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorCode() strin
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CustomVerificationEmailTemplateDoesNotExistException) GetCustomVerificationEmailTemplateName() string {
-	return ptr.ToString(e.CustomVerificationEmailTemplateName)
-}
-func (e *CustomVerificationEmailTemplateDoesNotExistException) HasCustomVerificationEmailTemplateName() bool {
-	return e.CustomVerificationEmailTemplateName != nil
-}
-func (e *CustomVerificationEmailTemplateDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomVerificationEmailTemplateDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Indicates that the event destination could not be created because of a naming
@@ -326,24 +229,6 @@ func (e *EventDestinationAlreadyExistsException) ErrorCode() string {
 func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *EventDestinationAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EventDestinationAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *EventDestinationAlreadyExistsException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *EventDestinationAlreadyExistsException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *EventDestinationAlreadyExistsException) GetEventDestinationName() string {
-	return ptr.ToString(e.EventDestinationName)
-}
-func (e *EventDestinationAlreadyExistsException) HasEventDestinationName() bool {
-	return e.EventDestinationName != nil
-}
 
 // Indicates that the event destination does not exist.
 type EventDestinationDoesNotExistException struct {
@@ -367,24 +252,6 @@ func (e *EventDestinationDoesNotExistException) ErrorCode() string {
 }
 func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *EventDestinationDoesNotExistException) GetEventDestinationName() string {
-	return ptr.ToString(e.EventDestinationName)
-}
-func (e *EventDestinationDoesNotExistException) HasEventDestinationName() bool {
-	return e.EventDestinationName != nil
-}
-func (e *EventDestinationDoesNotExistException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *EventDestinationDoesNotExistException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *EventDestinationDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EventDestinationDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // Indicates that the sender address specified for a custom verification email is
@@ -411,18 +278,6 @@ func (e *FromEmailAddressNotVerifiedException) ErrorCode() string {
 func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *FromEmailAddressNotVerifiedException) GetFromEmailAddress() string {
-	return ptr.ToString(e.FromEmailAddress)
-}
-func (e *FromEmailAddressNotVerifiedException) HasFromEmailAddress() bool {
-	return e.FromEmailAddress != nil
-}
-func (e *FromEmailAddressNotVerifiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FromEmailAddressNotVerifiedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the Amazon CloudWatch destination is invalid. See the error
 // message for details.
@@ -448,24 +303,6 @@ func (e *InvalidCloudWatchDestinationException) ErrorCode() string {
 func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidCloudWatchDestinationException) GetEventDestinationName() string {
-	return ptr.ToString(e.EventDestinationName)
-}
-func (e *InvalidCloudWatchDestinationException) HasEventDestinationName() bool {
-	return e.EventDestinationName != nil
-}
-func (e *InvalidCloudWatchDestinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCloudWatchDestinationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidCloudWatchDestinationException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *InvalidCloudWatchDestinationException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
 
 // Indicates that the configuration set is invalid. See the error message for
 // details.
@@ -486,12 +323,6 @@ func (e *InvalidConfigurationSetException) ErrorCode() string {
 	return "InvalidConfigurationSetException"
 }
 func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidConfigurationSetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConfigurationSetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that provided delivery option is invalid.
 type InvalidDeliveryOptionsException struct {
@@ -511,12 +342,6 @@ func (e *InvalidDeliveryOptionsException) ErrorCode() string {
 	return "InvalidDeliveryOptionsException"
 }
 func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDeliveryOptionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDeliveryOptionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the Amazon Kinesis Firehose destination is invalid. See the error
 // message for details.
@@ -542,24 +367,6 @@ func (e *InvalidFirehoseDestinationException) ErrorCode() string {
 func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidFirehoseDestinationException) GetEventDestinationName() string {
-	return ptr.ToString(e.EventDestinationName)
-}
-func (e *InvalidFirehoseDestinationException) HasEventDestinationName() bool {
-	return e.EventDestinationName != nil
-}
-func (e *InvalidFirehoseDestinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFirehoseDestinationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidFirehoseDestinationException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *InvalidFirehoseDestinationException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
 
 // Indicates that the provided AWS Lambda function is invalid, or that Amazon SES
 // could not execute the provided function, possibly due to permissions issues. For
@@ -582,18 +389,6 @@ func (e *InvalidLambdaFunctionException) ErrorMessage() string {
 }
 func (e *InvalidLambdaFunctionException) ErrorCode() string             { return "InvalidLambdaFunctionException" }
 func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLambdaFunctionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLambdaFunctionException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidLambdaFunctionException) GetFunctionArn() string {
-	return ptr.ToString(e.FunctionArn)
-}
-func (e *InvalidLambdaFunctionException) HasFunctionArn() bool {
-	return e.FunctionArn != nil
-}
 
 // Indicates that the provided policy is invalid. Check the error stack for more
 // information about what caused the error.
@@ -612,12 +407,6 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 }
 func (e *InvalidPolicyException) ErrorCode() string             { return "InvalidPolicyException" }
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that one or more of the replacement values you provided is invalid.
 // This error may occur when the TemplateData object contains invalid JSON.
@@ -641,18 +430,6 @@ func (e *InvalidRenderingParameterException) ErrorCode() string {
 }
 func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidRenderingParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRenderingParameterException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidRenderingParameterException) GetTemplateName() string {
-	return ptr.ToString(e.TemplateName)
-}
-func (e *InvalidRenderingParameterException) HasTemplateName() bool {
-	return e.TemplateName != nil
 }
 
 // Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is
@@ -679,18 +456,6 @@ func (e *InvalidS3ConfigurationException) ErrorCode() string {
 	return "InvalidS3ConfigurationException"
 }
 func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3ConfigurationException) GetBucket() string {
-	return ptr.ToString(e.Bucket)
-}
-func (e *InvalidS3ConfigurationException) HasBucket() bool {
-	return e.Bucket != nil
-}
-func (e *InvalidS3ConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3ConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the Amazon Simple Notification Service (Amazon SNS) destination
 // is invalid. See the error message for details.
@@ -712,24 +477,6 @@ func (e *InvalidSNSDestinationException) ErrorMessage() string {
 }
 func (e *InvalidSNSDestinationException) ErrorCode() string             { return "InvalidSNSDestinationException" }
 func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSNSDestinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSNSDestinationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidSNSDestinationException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *InvalidSNSDestinationException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *InvalidSNSDestinationException) GetEventDestinationName() string {
-	return ptr.ToString(e.EventDestinationName)
-}
-func (e *InvalidSNSDestinationException) HasEventDestinationName() bool {
-	return e.EventDestinationName != nil
-}
 
 // Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES
 // could not publish to the topic, possibly due to permissions issues. For
@@ -752,18 +499,6 @@ func (e *InvalidSnsTopicException) ErrorMessage() string {
 }
 func (e *InvalidSnsTopicException) ErrorCode() string             { return "InvalidSnsTopicException" }
 func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSnsTopicException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSnsTopicException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidSnsTopicException) GetTopic() string {
-	return ptr.ToString(e.Topic)
-}
-func (e *InvalidSnsTopicException) HasTopic() bool {
-	return e.Topic != nil
-}
 
 // Indicates that the template that you specified could not be rendered. This issue
 // may occur when a template refers to a partial that does not exist.
@@ -784,18 +519,6 @@ func (e *InvalidTemplateException) ErrorMessage() string {
 }
 func (e *InvalidTemplateException) ErrorCode() string             { return "InvalidTemplateException" }
 func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTemplateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTemplateException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidTemplateException) GetTemplateName() string {
-	return ptr.ToString(e.TemplateName)
-}
-func (e *InvalidTemplateException) HasTemplateName() bool {
-	return e.TemplateName != nil
-}
 
 // Indicates that the custom domain to be used for open and click tracking
 // redirects is invalid. This error appears most often in the following
@@ -823,12 +546,6 @@ func (e *InvalidTrackingOptionsException) ErrorCode() string {
 	return "InvalidTrackingOptionsException"
 }
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTrackingOptionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTrackingOptionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that a resource could not be created because of service limits. For a
 // list of Amazon SES limits, see the Amazon SES Developer Guide
@@ -848,12 +565,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the message could not be sent because Amazon SES could not read
 // the MX record required to use the specified MAIL FROM domain. For information
@@ -879,12 +590,6 @@ func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
 func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MailFromDomainNotVerifiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MailFromDomainNotVerifiedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the action failed, and the message could not be sent. Check the
 // error stack for more information about what caused the error.
@@ -903,12 +608,6 @@ func (e *MessageRejected) ErrorMessage() string {
 }
 func (e *MessageRejected) ErrorCode() string             { return "MessageRejected" }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MessageRejected) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MessageRejected) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that one or more of the replacement values for the specified template
 // was not specified. Ensure that the TemplateData object contains references to
@@ -934,18 +633,6 @@ func (e *MissingRenderingAttributeException) ErrorCode() string {
 func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MissingRenderingAttributeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingRenderingAttributeException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *MissingRenderingAttributeException) GetTemplateName() string {
-	return ptr.ToString(e.TemplateName)
-}
-func (e *MissingRenderingAttributeException) HasTemplateName() bool {
-	return e.TemplateName != nil
-}
 
 // Indicates that the account has not been granted production access.
 type ProductionAccessNotGrantedException struct {
@@ -967,12 +654,6 @@ func (e *ProductionAccessNotGrantedException) ErrorCode() string {
 func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ProductionAccessNotGrantedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProductionAccessNotGrantedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the provided receipt rule does not exist.
 type RuleDoesNotExistException struct {
@@ -992,18 +673,6 @@ func (e *RuleDoesNotExistException) ErrorMessage() string {
 }
 func (e *RuleDoesNotExistException) ErrorCode() string             { return "RuleDoesNotExistException" }
 func (e *RuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RuleDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RuleDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *RuleDoesNotExistException) GetName() string {
-	return ptr.ToString(e.Name)
-}
-func (e *RuleDoesNotExistException) HasName() bool {
-	return e.Name != nil
-}
 
 // Indicates that the provided receipt rule set does not exist.
 type RuleSetDoesNotExistException struct {
@@ -1023,18 +692,6 @@ func (e *RuleSetDoesNotExistException) ErrorMessage() string {
 }
 func (e *RuleSetDoesNotExistException) ErrorCode() string             { return "RuleSetDoesNotExistException" }
 func (e *RuleSetDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RuleSetDoesNotExistException) GetName() string {
-	return ptr.ToString(e.Name)
-}
-func (e *RuleSetDoesNotExistException) HasName() bool {
-	return e.Name != nil
-}
-func (e *RuleSetDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RuleSetDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the Template object you specified does not exist in your Amazon
 // SES account.
@@ -1055,18 +712,6 @@ func (e *TemplateDoesNotExistException) ErrorMessage() string {
 }
 func (e *TemplateDoesNotExistException) ErrorCode() string             { return "TemplateDoesNotExistException" }
 func (e *TemplateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TemplateDoesNotExistException) GetTemplateName() string {
-	return ptr.ToString(e.TemplateName)
-}
-func (e *TemplateDoesNotExistException) HasTemplateName() bool {
-	return e.TemplateName != nil
-}
-func (e *TemplateDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TemplateDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the configuration set you specified already contains a
 // TrackingOptions object.
@@ -1091,18 +736,6 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorCode() string {
 func (e *TrackingOptionsAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TrackingOptionsAlreadyExistsException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *TrackingOptionsAlreadyExistsException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *TrackingOptionsAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrackingOptionsAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the TrackingOptions object you specified does not exist.
 type TrackingOptionsDoesNotExistException struct {
@@ -1125,16 +758,4 @@ func (e *TrackingOptionsDoesNotExistException) ErrorCode() string {
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *TrackingOptionsDoesNotExistException) GetConfigurationSetName() string {
-	return ptr.ToString(e.ConfigurationSetName)
-}
-func (e *TrackingOptionsDoesNotExistException) HasConfigurationSetName() bool {
-	return e.ConfigurationSetName != nil
-}
-func (e *TrackingOptionsDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrackingOptionsDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
 }

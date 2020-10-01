@@ -55,11 +55,20 @@ func (c *Client) UpdateUserRoutingProfile(ctx context.Context, params *UpdateUse
 }
 
 type UpdateUserRoutingProfileInput struct {
+
 	// The identifier of the user account.
+	//
+	// This member is required.
 	UserId *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The identifier of the routing profile for the user.
+	//
+	// This member is required.
 	RoutingProfileId *string
 }
 

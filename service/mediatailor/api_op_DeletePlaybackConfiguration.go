@@ -55,7 +55,10 @@ func (c *Client) DeletePlaybackConfiguration(ctx context.Context, params *Delete
 }
 
 type DeletePlaybackConfigurationInput struct {
+
 	// The identifier for the playback configuration.
+	//
+	// This member is required.
 	Name *string
 }
 

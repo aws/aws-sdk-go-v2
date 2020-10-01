@@ -57,22 +57,31 @@ func (c *Client) DescribeConfiguration(ctx context.Context, params *DescribeConf
 }
 
 type DescribeConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and
 	// all of its revisions.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type DescribeConfigurationOutput struct {
+
 	// The versions of Apache Kafka with which you can use this MSK configuration.
 	KafkaVersions []*string
+
 	// Latest revision of the configuration.
 	LatestRevision *types.ConfigurationRevision
+
 	// The description of the configuration.
 	Description *string
+
 	// The Amazon Resource Name (ARN) of the configuration.
 	Arn *string
+
 	// The name of the configuration.
 	Name *string
+
 	// The time when the configuration was created.
 	CreationTime *time.Time
 

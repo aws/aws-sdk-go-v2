@@ -61,10 +61,12 @@ func (c *Client) ListHostedZones(ctx context.Context, params *ListHostedZonesInp
 // A request to retrieve a list of the public and private hosted zones that are
 // associated with the current AWS account.
 type ListHostedZonesInput struct {
+
 	// If you're using reusable delegation sets and you want to list all of the hosted
 	// zones that are associated with a reusable delegation set, specify the ID of that
 	// reusable delegation set.
 	DelegationSetId *string
+
 	// If the value of IsTruncated in the previous response was true, you have more
 	// hosted zones. To get more hosted zones, submit another ListHostedZones request.
 	// For the value of marker, specify the value of NextMarker from the previous
@@ -72,6 +74,7 @@ type ListHostedZonesInput struct {
 	// return if you submit another request. If the value of IsTruncated in the
 	// previous response was false, there are no more hosted zones to get.
 	Marker *string
+
 	// (Optional) The maximum number of hosted zones that you want Amazon Route 53 to
 	// return. If you have more than maxitems hosted zones, the value of IsTruncated in
 	// the response is true, and the value of NextMarker is the hosted zone ID of the
@@ -80,24 +83,37 @@ type ListHostedZonesInput struct {
 }
 
 type ListHostedZonesOutput struct {
+
 	// If IsTruncated is true, the value of NextMarker identifies the first hosted zone
 	// in the next group of hosted zones. Submit another ListHostedZones request, and
 	// specify the value of NextMarker from the response in the marker parameter. This
 	// element is present only if IsTruncated is true.
 	NextMarker *string
+
 	// A complex type that contains general information about the hosted zone.
+	//
+	// This member is required.
 	HostedZones []*types.HostedZone
+
 	// A flag indicating whether there are more hosted zones to be listed. If the
 	// response was truncated, you can get more hosted zones by submitting another
 	// ListHostedZones request and specifying the value of NextMarker in the marker
 	// parameter.
+	//
+	// This member is required.
 	IsTruncated *bool
+
 	// The value that you specified for the maxitems parameter in the call to
 	// ListHostedZones that produced the current response.
+	//
+	// This member is required.
 	MaxItems *string
+
 	// For the second and subsequent calls to ListHostedZones, Marker is the value that
 	// you specified for the marker parameter in the request that produced the current
 	// response.
+	//
+	// This member is required.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

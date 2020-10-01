@@ -57,19 +57,25 @@ func (c *Client) GetHealthCheckStatus(ctx context.Context, params *GetHealthChec
 
 // A request to get the status for a health check.
 type GetHealthCheckStatusInput struct {
+
 	// The ID for the health check that you want the current status for. When you
 	// created the health check, CreateHealthCheck returned the ID in the response, in
 	// the HealthCheckId element. If you want to check the status of a calculated
 	// health check, you must use the Amazon Route 53 console or the CloudWatch
 	// console. You can't use GetHealthCheckStatus to get the status of a calculated
 	// health check.
+	//
+	// This member is required.
 	HealthCheckId *string
 }
 
 // A complex type that contains the response to a GetHealthCheck request.
 type GetHealthCheckStatusOutput struct {
+
 	// A list that contains one HealthCheckObservation element for each Amazon Route 53
 	// health checker that is reporting a status about the health check endpoint.
+	//
+	// This member is required.
 	HealthCheckObservations []*types.HealthCheckObservation
 
 	// Metadata pertaining to the operation's result.

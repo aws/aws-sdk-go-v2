@@ -56,13 +56,19 @@ func (c *Client) DeleteApprovalRuleTemplate(ctx context.Context, params *DeleteA
 }
 
 type DeleteApprovalRuleTemplateInput struct {
+
 	// The name of the approval rule template to delete.
+	//
+	// This member is required.
 	ApprovalRuleTemplateName *string
 }
 
 type DeleteApprovalRuleTemplateOutput struct {
+
 	// The system-generated ID of the deleted approval rule template. If the template
 	// has been previously deleted, the only response is a 200 OK.
+	//
+	// This member is required.
 	ApprovalRuleTemplateId *string
 
 	// Metadata pertaining to the operation's result.

@@ -131,6 +131,7 @@ func (c *Client) SearchGameSessions(ctx context.Context, params *SearchGameSessi
 
 // Represents the input for a request action.
 type SearchGameSessionsInput struct {
+
 	// String containing the search criteria for the session search. If no filter
 	// expression is included, the request returns results for all game sessions in the
 	// fleet that are in ACTIVE status. A filter expression can contain one or multiple
@@ -172,6 +173,7 @@ type SearchGameSessionsInput struct {
 	// retrieves game sessions hosting at least ten players that have an open player
 	// slot: "maximumSessions>=10 AND hasAvailablePlayerSessions=true".
 	FilterExpression *string
+
 	// Instructions on how to sort the search results. If no sort expression is
 	// included, the request returns results in random order. A sort expression
 	// consists of the following elements:
@@ -189,18 +191,22 @@ type SearchGameSessionsInput struct {
 	// Results with a null value for the sort operand are returned at the end of the
 	// list.
 	SortExpression *string
+
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. The maximum number of results returned
 	// is 20, even if this value is not set or is set higher than 20.
 	Limit *int32
+
 	// A unique identifier for a fleet to search for active game sessions. You can use
 	// either the fleet ID or ARN value. Each request must reference either a fleet ID
 	// or alias ID, but not both.
 	FleetId *string
+
 	// A unique identifier for an alias associated with the fleet to search for active
 	// game sessions. You can use either the alias ID or ARN value. Each request must
 	// reference either a fleet ID or alias ID, but not both.
@@ -209,9 +215,11 @@ type SearchGameSessionsInput struct {
 
 // Represents the returned data in response to a request action.
 type SearchGameSessionsOutput struct {
+
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string
+
 	// A collection of objects containing game session properties for each session
 	// matching the request.
 	GameSessions []*types.GameSession

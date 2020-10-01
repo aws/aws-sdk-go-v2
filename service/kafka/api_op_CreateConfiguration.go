@@ -57,26 +57,38 @@ func (c *Client) CreateConfiguration(ctx context.Context, params *CreateConfigur
 }
 
 type CreateConfigurationInput struct {
+
 	// Contents of the server.properties file. When using the API, you must ensure that
 	// the contents of the file are base64 encoded. When using the AWS Management
 	// Console, the SDK, or the AWS CLI, the contents of server.properties can be in
 	// plaintext.
+	//
+	// This member is required.
 	ServerProperties []byte
+
 	// The versions of Apache Kafka with which you can use this MSK configuration.
 	KafkaVersions []*string
+
 	// The description of the configuration.
 	Description *string
+
 	// The name of the configuration.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateConfigurationOutput struct {
+
 	// The name of the configuration.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the configuration.
 	Arn *string
+
 	// The time when the configuration was created.
 	CreationTime *time.Time
+
 	// Latest revision of the configuration.
 	LatestRevision *types.ConfigurationRevision
 

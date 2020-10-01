@@ -102,8 +102,12 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 }
 
 type CompleteMultipartUploadInput struct {
+
 	// ID for the initiated multipart upload.
+	//
+	// This member is required.
 	UploadId *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -111,37 +115,52 @@ type CompleteMultipartUploadInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// The container for the multipart upload request information.
 	MultipartUpload *types.CompletedMultipartUpload
+
 	// Name of the bucket to which the multipart upload was initiated.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Object key for which the multipart upload was initiated.
+	//
+	// This member is required.
 	Key *string
 }
 
 type CompleteMultipartUploadOutput struct {
+
 	// The object key of the newly created object.
 	Key *string
+
 	// Version ID of the newly created object, in case the bucket has versioning turned
 	// on.
 	VersionId *string
+
 	// The URI that identifies the newly created object.
 	Location *string
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
 	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
 	// symmetric customer managed customer master key (CMK) that was used for the
 	// object.
 	SSEKMSKeyId *string
+
 	// If you specified server-side encryption either with an Amazon S3-managed
 	// encryption key or an AWS KMS customer master key (CMK) in your initiate
 	// multipart upload request, the response includes this header. It confirms the
 	// encryption algorithm that Amazon S3 used to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
+
 	// If the object expiration is configured, this will contain the expiration date
 	// (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
 	Expiration *string
+
 	// Entity tag that identifies the newly created object's data. Objects with
 	// different object data will have different entity tags. The entity tag is an
 	// opaque string. The entity tag may or may not be an MD5 digest of the object
@@ -149,6 +168,7 @@ type CompleteMultipartUploadOutput struct {
 	// one or more nonhexadecimal characters and/or will consist of less than 32 or
 	// more than 32 hexadecimal digits.
 	ETag *string
+
 	// The name of the bucket that contains the newly created object.
 	Bucket *string
 

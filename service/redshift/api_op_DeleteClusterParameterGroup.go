@@ -57,6 +57,7 @@ func (c *Client) DeleteClusterParameterGroup(ctx context.Context, params *Delete
 
 //
 type DeleteClusterParameterGroupInput struct {
+
 	// The name of the parameter group to be deleted. Constraints:
 	//
 	//     * Must be the
@@ -64,6 +65,8 @@ type DeleteClusterParameterGroupInput struct {
 	//
 	//     * Cannot delete a default
 	// cluster parameter group.
+	//
+	// This member is required.
 	ParameterGroupName *string
 }
 

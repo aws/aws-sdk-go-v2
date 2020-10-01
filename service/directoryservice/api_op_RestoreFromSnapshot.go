@@ -62,7 +62,10 @@ func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSna
 
 // An object representing the inputs for the RestoreFromSnapshot () operation.
 type RestoreFromSnapshotInput struct {
+
 	// The identifier of the snapshot to restore from.
+	//
+	// This member is required.
 	SnapshotId *string
 }
 

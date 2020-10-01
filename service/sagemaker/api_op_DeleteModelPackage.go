@@ -57,8 +57,11 @@ func (c *Client) DeleteModelPackage(ctx context.Context, params *DeleteModelPack
 }
 
 type DeleteModelPackageInput struct {
+
 	// The name of the model package. The name must have 1 to 63 characters. Valid
 	// characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// This member is required.
 	ModelPackageName *string
 }
 

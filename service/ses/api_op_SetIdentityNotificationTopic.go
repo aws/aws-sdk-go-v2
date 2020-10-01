@@ -69,18 +69,25 @@ func (c *Client) SetIdentityNotificationTopic(ctx context.Context, params *SetId
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
 type SetIdentityNotificationTopicInput struct {
+
 	// The type of notifications that will be published to the specified Amazon SNS
 	// topic.
+	//
+	// This member is required.
 	NotificationType types.NotificationType
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter is
 	// omitted from the request or a null value is passed, SnsTopic is cleared and
 	// publishing is disabled.
 	SnsTopic *string
+
 	// The identity (email address or domain) that you want to set the Amazon SNS topic
 	// for. You can only specify a verified identity for this parameter. You can
 	// specify an identity by using its name or by using its Amazon Resource Name
 	// (ARN). The following examples are all valid identities: sender@example.com,
 	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	//
+	// This member is required.
 	Identity *string
 }
 

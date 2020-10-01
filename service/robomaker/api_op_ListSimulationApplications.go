@@ -56,10 +56,12 @@ func (c *Client) ListSimulationApplications(ctx context.Context, params *ListSim
 }
 
 type ListSimulationApplicationsInput struct {
+
 	// Optional list of filters to limit results. The filter name name is supported.
 	// When filtering, you must use the complete value of the filtered item. You can
 	// use up to three filters.
 	Filters []*types.Filter
+
 	// When this parameter is used, ListSimulationApplications only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another
@@ -68,21 +70,25 @@ type ListSimulationApplicationsInput struct {
 	// ListSimulationApplications returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated
 	// ListSimulationApplications request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the nextToken value.
 	NextToken *string
+
 	// The version qualifier of the simulation application.
 	VersionQualifier *string
 }
 
 type ListSimulationApplicationsOutput struct {
+
 	// The nextToken value to include in a future ListSimulationApplications request.
 	// When the results of a ListRobot request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
+
 	// A list of simulation application summaries that meet the criteria of the
 	// request.
 	SimulationApplicationSummaries []*types.SimulationApplicationSummary

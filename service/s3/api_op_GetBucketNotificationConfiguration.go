@@ -72,19 +72,25 @@ func (c *Client) GetBucketNotificationConfiguration(ctx context.Context, params 
 }
 
 type GetBucketNotificationConfigurationInput struct {
+
 	// Name of the bucket for which to get the notification configuration.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 // A container for specifying the notification configuration of the bucket. If this
 // element is empty, notifications are turned off for the bucket.
 type GetBucketNotificationConfigurationOutput struct {
+
 	// Describes the AWS Lambda functions to invoke and the events for which to invoke
 	// them.
 	LambdaFunctionConfigurations []*types.LambdaFunctionConfiguration
+
 	// The Amazon Simple Queue Service queues to publish messages to and the events for
 	// which to publish messages.
 	QueueConfigurations []*types.QueueConfiguration
+
 	// The topic to which notifications are sent and the events for which notifications
 	// are generated.
 	TopicConfigurations []*types.TopicConfiguration

@@ -95,14 +95,21 @@ func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingI
 }
 
 type PutBucketTaggingInput struct {
+
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
+
 	// The bucket name.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Container for the TagSet and Tag elements.
+	//
+	// This member is required.
 	Tagging *types.Tagging
 }
 

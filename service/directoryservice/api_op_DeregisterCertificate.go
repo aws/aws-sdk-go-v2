@@ -56,9 +56,15 @@ func (c *Client) DeregisterCertificate(ctx context.Context, params *DeregisterCe
 }
 
 type DeregisterCertificateInput struct {
+
 	// The identifier of the directory.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The identifier of the certificate.
+	//
+	// This member is required.
 	CertificateId *string
 }
 

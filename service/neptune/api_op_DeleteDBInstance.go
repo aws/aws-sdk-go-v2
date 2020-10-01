@@ -67,6 +67,7 @@ func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceI
 }
 
 type DeleteDBInstanceInput struct {
+
 	// The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is
 	// set to false. Specifying this parameter and also setting the SkipFinalShapshot
 	// parameter to true results in an error. Constraints:
@@ -82,6 +83,7 @@ type DeleteDBInstanceInput struct {
 	//     * Cannot be specified when
 	// deleting a Read Replica.
 	FinalDBSnapshotIdentifier *string
+
 	// Determines whether a final DB snapshot is created before the DB instance is
 	// deleted. If true is specified, no DBSnapshot is created. If false is specified,
 	// a DB snapshot is created before the DB instance is deleted. Note that when a DB
@@ -91,15 +93,19 @@ type DeleteDBInstanceInput struct {
 	// Read Replica. The FinalDBSnapshotIdentifier parameter must be specified if
 	// SkipFinalSnapshot is false. Default: false
 	SkipFinalSnapshot *bool
+
 	// The DB instance identifier for the DB instance to be deleted. This parameter
 	// isn't case-sensitive. Constraints:
 	//
 	//     * Must match the name of an existing DB
 	// instance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
 }
 
 type DeleteDBInstanceOutput struct {
+
 	// Contains the details of an Amazon Neptune DB instance. This data type is used as
 	// a response element in the DescribeDBInstances () action.
 	DBInstance *types.DBInstance

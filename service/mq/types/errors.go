@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Returns information about an error.
@@ -26,18 +25,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetErrorAttribute() string {
-	return ptr.ToString(e.ErrorAttribute)
-}
-func (e *BadRequestException) HasErrorAttribute() bool {
-	return e.ErrorAttribute != nil
-}
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type ConflictException struct {
@@ -57,18 +44,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ConflictException) GetErrorAttribute() string {
-	return ptr.ToString(e.ErrorAttribute)
-}
-func (e *ConflictException) HasErrorAttribute() bool {
-	return e.ErrorAttribute != nil
-}
 
 // Returns information about an error.
 type ForbiddenException struct {
@@ -88,18 +63,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetErrorAttribute() string {
-	return ptr.ToString(e.ErrorAttribute)
-}
-func (e *ForbiddenException) HasErrorAttribute() bool {
-	return e.ErrorAttribute != nil
-}
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type InternalServerErrorException struct {
@@ -119,18 +82,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetErrorAttribute() string {
-	return ptr.ToString(e.ErrorAttribute)
-}
-func (e *InternalServerErrorException) HasErrorAttribute() bool {
-	return e.ErrorAttribute != nil
-}
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type NotFoundException struct {
@@ -150,18 +101,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetErrorAttribute() string {
-	return ptr.ToString(e.ErrorAttribute)
-}
-func (e *NotFoundException) HasErrorAttribute() bool {
-	return e.ErrorAttribute != nil
-}
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Returns information about an error.
 type UnauthorizedException struct {
@@ -181,15 +120,3 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetErrorAttribute() string {
-	return ptr.ToString(e.ErrorAttribute)
-}
-func (e *UnauthorizedException) HasErrorAttribute() bool {
-	return e.ErrorAttribute != nil
-}
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}

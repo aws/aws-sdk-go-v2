@@ -80,11 +80,15 @@ func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLogging
 }
 
 type PutLoggingConfigurationInput struct {
+
 	//
+	//
+	// This member is required.
 	LoggingConfiguration *types.LoggingConfiguration
 }
 
 type PutLoggingConfigurationOutput struct {
+
 	//
 	LoggingConfiguration *types.LoggingConfiguration
 

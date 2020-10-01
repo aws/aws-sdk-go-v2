@@ -58,25 +58,42 @@ func (c *Client) CreateResolver(ctx context.Context, params *CreateResolverInput
 }
 
 type CreateResolverInput struct {
+
 	// The ID for the GraphQL API for which the resolver is being created.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The name of the data source for which the resolver is being created.
 	DataSourceName *string
+
 	// The name of the field to attach the resolver to.
+	//
+	// This member is required.
 	FieldName *string
+
 	// The mapping template to be used for responses from the data source.
 	ResponseMappingTemplate *string
+
 	// The caching configuration for the resolver.
 	CachingConfig *types.CachingConfig
+
 	// The mapping template to be used for requests. A resolver uses a request mapping
 	// template to convert a GraphQL expression into a format that a data source can
 	// understand. Mapping templates are written in Apache Velocity Template Language
 	// (VTL).
+	//
+	// This member is required.
 	RequestMappingTemplate *string
+
 	// The SyncConfig for a resolver attached to a versioned datasource.
 	SyncConfig *types.SyncConfig
+
 	// The name of the Type.
+	//
+	// This member is required.
 	TypeName *string
+
 	// The resolver type.
 	//
 	//     * UNIT: A UNIT resolver type. A UNIT resolver is the
@@ -88,11 +105,13 @@ type CreateResolverInput struct {
 	// manner. You can use a pipeline resolver to execute a GraphQL query against
 	// multiple data sources.
 	Kind types.ResolverKind
+
 	// The PipelineConfig.
 	PipelineConfig *types.PipelineConfig
 }
 
 type CreateResolverOutput struct {
+
 	// The Resolver object.
 	Resolver *types.Resolver
 

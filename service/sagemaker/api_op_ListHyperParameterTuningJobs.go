@@ -57,42 +57,56 @@ func (c *Client) ListHyperParameterTuningJobs(ctx context.Context, params *ListH
 }
 
 type ListHyperParameterTuningJobsInput struct {
+
 	// A filter that returns only tuning jobs that were created after the specified
 	// time.
 	CreationTimeAfter *time.Time
+
 	// If the result of the previous ListHyperParameterTuningJobs request was
 	// truncated, the response includes a NextToken. To retrieve the next set of tuning
 	// jobs, use the token in the next request.
 	NextToken *string
+
 	// A string in the tuning job name. This filter returns only tuning jobs whose name
 	// contains the specified string.
 	NameContains *string
+
 	// A filter that returns only tuning jobs that were created before the specified
 	// time.
 	CreationTimeBefore *time.Time
+
 	// A filter that returns only tuning jobs that were modified before the specified
 	// time.
 	LastModifiedTimeBefore *time.Time
+
 	// The maximum number of tuning jobs to return. The default value is 10.
 	MaxResults *int32
+
 	// A filter that returns only tuning jobs with the specified status.
 	StatusEquals types.HyperParameterTuningJobStatus
+
 	// A filter that returns only tuning jobs that were modified after the specified
 	// time.
 	LastModifiedTimeAfter *time.Time
+
 	// The field to sort results by. The default is Name.
 	SortBy types.HyperParameterTuningJobSortByOptions
+
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
 }
 
 type ListHyperParameterTuningJobsOutput struct {
+
 	// If the result of this ListHyperParameterTuningJobs request was truncated, the
 	// response includes a NextToken. To retrieve the next set of tuning jobs, use the
 	// token in the next request.
 	NextToken *string
+
 	// A list of HyperParameterTuningJobSummary () objects that describe the tuning
 	// jobs that the ListHyperParameterTuningJobs request returned.
+	//
+	// This member is required.
 	HyperParameterTuningJobSummaries []*types.HyperParameterTuningJobSummary
 
 	// Metadata pertaining to the operation's result.

@@ -56,8 +56,12 @@ func (c *Client) DeactivateUser(ctx context.Context, params *DeactivateUserInput
 }
 
 type DeactivateUserInput struct {
+
 	// The ID of the user.
+	//
+	// This member is required.
 	UserId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string

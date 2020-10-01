@@ -59,15 +59,26 @@ func (c *Client) UpdateDeployment(ctx context.Context, params *UpdateDeploymentI
 
 // Requests API Gateway to change information about a Deployment () resource.
 type UpdateDeploymentInput struct {
+
 	// The replacement identifier for the Deployment () resource to change information
 	// about.
+	//
+	// This member is required.
 	DeploymentId *string
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
-	Name             *string
-	Title            *string
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
+
+	Title *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -83,13 +94,17 @@ type UpdateDeploymentInput struct {
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
 // AWS SDKs (https://aws.amazon.com/tools/)
 type UpdateDeploymentOutput struct {
+
 	// The date and time that the deployment resource was created.
 	CreatedDate *time.Time
+
 	// A summary of the RestApi () at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
+
 	// The identifier for the deployment resource.
 	Id *string
+
 	// The description for the deployment resource.
 	Description *string
 

@@ -57,8 +57,12 @@ func (c *Client) UpdateApiCache(ctx context.Context, params *UpdateApiCacheInput
 
 // Represents the input of a UpdateApiCache operation.
 type UpdateApiCacheInput struct {
+
 	// The GraphQL API Id.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The cache instance type.
 	//
 	//     * T2_SMALL: A t2.small instance type.
@@ -78,20 +82,29 @@ type UpdateApiCacheInput struct {
 	//
 	//     *
 	// R4_8XLARGE: A r4.8xlarge instance type.
+	//
+	// This member is required.
 	Type types.ApiCacheType
+
 	// Caching behavior.
 	//
 	//     * FULL_REQUEST_CACHING: All requests are fully cached.
 	//
 	//
 	// * PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.
+	//
+	// This member is required.
 	ApiCachingBehavior types.ApiCachingBehavior
+
 	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+	//
+	// This member is required.
 	Ttl *int64
 }
 
 // Represents the output of a UpdateApiCache operation.
 type UpdateApiCacheOutput struct {
+
 	// The ApiCache object.
 	ApiCache *types.ApiCache
 

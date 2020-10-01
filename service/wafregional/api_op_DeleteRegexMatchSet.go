@@ -75,15 +75,22 @@ func (c *Client) DeleteRegexMatchSet(ctx context.Context, params *DeleteRegexMat
 }
 
 type DeleteRegexMatchSetInput struct {
+
 	// The RegexMatchSetId of the RegexMatchSet () that you want to delete.
 	// RegexMatchSetId is returned by CreateRegexMatchSet () and by ListRegexMatchSets
 	// ().
+	//
+	// This member is required.
 	RegexMatchSetId *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type DeleteRegexMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteRegexMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

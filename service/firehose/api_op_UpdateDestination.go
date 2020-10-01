@@ -81,28 +81,43 @@ func (c *Client) UpdateDestination(ctx context.Context, params *UpdateDestinatio
 }
 
 type UpdateDestinationInput struct {
+
 	// Describes an update to the specified HTTP endpoint destination.
 	HttpEndpointDestinationUpdate *types.HttpEndpointDestinationUpdate
+
 	// The name of the delivery stream.
+	//
+	// This member is required.
 	DeliveryStreamName *string
+
 	// Describes an update for a destination in Amazon ES.
 	ElasticsearchDestinationUpdate *types.ElasticsearchDestinationUpdate
+
 	// Describes an update for a destination in Amazon S3.
 	ExtendedS3DestinationUpdate *types.ExtendedS3DestinationUpdate
+
 	// [Deprecated] Describes an update for a destination in Amazon S3.
 	S3DestinationUpdate *types.S3DestinationUpdate
+
 	// Describes an update for a destination in Amazon Redshift.
 	RedshiftDestinationUpdate *types.RedshiftDestinationUpdate
+
 	// Obtain this value from the VersionId result of DeliveryStreamDescription ().
 	// This value is required, and helps the service perform conditional operations.
 	// For example, if there is an interleaving update and this value is null, then the
 	// update destination fails. After the update is successful, the VersionId value is
 	// updated. The service then performs a merge of the old configuration with the new
 	// configuration.
+	//
+	// This member is required.
 	CurrentDeliveryStreamVersionId *string
+
 	// Describes an update for a destination in Splunk.
 	SplunkDestinationUpdate *types.SplunkDestinationUpdate
+
 	// The ID of the destination.
+	//
+	// This member is required.
 	DestinationId *string
 }
 

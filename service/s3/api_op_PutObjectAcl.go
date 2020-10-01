@@ -130,20 +130,28 @@ func (c *Client) PutObjectAcl(ctx context.Context, params *PutObjectAclInput, op
 }
 
 type PutObjectAclInput struct {
+
 	// The base64-encoded 128-bit MD5 digest of the data. This header must be used as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, go to RFC 1864.>
 	// (http://www.ietf.org/rfc/rfc1864.txt)
 	ContentMD5 *string
+
 	// Allows grantee to read the bucket ACL.
 	GrantReadACP *string
+
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
 	// Key for which the PUT operation was initiated.
+	//
+	// This member is required.
 	Key *string
+
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
 	// bucket.
 	GrantFullControl *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -151,12 +159,16 @@ type PutObjectAclInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// Contains the elements that set the ACL permissions for an object per grantee.
 	AccessControlPolicy *types.AccessControlPolicy
+
 	// Allows grantee to list the objects in the bucket.
 	GrantRead *string
+
 	// Allows grantee to write the ACL for the applicable bucket.
 	GrantWriteACP *string
+
 	// The bucket name that contains the object to which you want to attach the ACL.
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
@@ -166,15 +178,20 @@ type PutObjectAclInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Allows grantee to create, overwrite, and delete any object in the bucket.
 	GrantWrite *string
+
 	// The canned ACL to apply to the object. For more information, see Canned ACL
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 	ACL types.ObjectCannedACL
 }
 
 type PutObjectAclOutput struct {
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged

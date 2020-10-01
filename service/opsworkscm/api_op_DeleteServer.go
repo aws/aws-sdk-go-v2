@@ -62,7 +62,10 @@ func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, op
 }
 
 type DeleteServerInput struct {
+
 	// The ID of the server to delete.
+	//
+	// This member is required.
 	ServerName *string
 }
 

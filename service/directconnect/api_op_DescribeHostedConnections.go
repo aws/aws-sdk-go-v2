@@ -58,11 +58,15 @@ func (c *Client) DescribeHostedConnections(ctx context.Context, params *Describe
 }
 
 type DescribeHostedConnectionsInput struct {
+
 	// The ID of the interconnect or LAG.
+	//
+	// This member is required.
 	ConnectionId *string
 }
 
 type DescribeHostedConnectionsOutput struct {
+
 	// The connections.
 	Connections []*types.Connection
 

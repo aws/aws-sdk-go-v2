@@ -56,12 +56,14 @@ func (c *Client) ListDeploymentJobs(ctx context.Context, params *ListDeploymentJ
 }
 
 type ListDeploymentJobsInput struct {
+
 	// Optional filters to limit results. The filter names status and fleetName are
 	// supported. When filtering, you must use the complete value of the filtered item.
 	// You can use up to three filters, but they must be for the same named item. For
 	// example, if you are looking for items with the status InProgress or the status
 	// Pending.
 	Filters []*types.Filter
+
 	// When this parameter is used, ListDeploymentJobs only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
 	// of the initial request can be seen by sending another ListDeploymentJobs request
@@ -69,6 +71,7 @@ type ListDeploymentJobsInput struct {
 	// parameter is not used, then ListDeploymentJobs returns up to 200 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated ListDeploymentJobs
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -77,8 +80,10 @@ type ListDeploymentJobsInput struct {
 }
 
 type ListDeploymentJobsOutput struct {
+
 	// A list of deployment jobs that meet the criteria of the request.
 	DeploymentJobs []*types.DeploymentJob
+
 	// The nextToken value to include in a future ListDeploymentJobs request. When the
 	// results of a ListDeploymentJobs request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no

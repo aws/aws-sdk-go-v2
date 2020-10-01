@@ -55,15 +55,19 @@ func (c *Client) ListConferenceProviders(ctx context.Context, params *ListConfer
 }
 
 type ListConferenceProvidersInput struct {
+
 	// The tokens used for pagination.
 	NextToken *string
+
 	// The maximum number of conference providers to be returned, per paginated calls.
 	MaxResults *int32
 }
 
 type ListConferenceProvidersOutput struct {
+
 	// The tokens used for pagination.
 	NextToken *string
+
 	// The conference providers.
 	ConferenceProviders []*types.ConferenceProvider
 

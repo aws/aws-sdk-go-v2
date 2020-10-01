@@ -61,14 +61,19 @@ func (c *Client) CancelConversionTask(ctx context.Context, params *CancelConvers
 }
 
 type CancelConversionTaskInput struct {
+
 	// The reason for canceling the conversion task.
 	ReasonMessage *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the conversion task.
+	//
+	// This member is required.
 	ConversionTaskId *string
 }
 

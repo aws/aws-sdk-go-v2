@@ -64,17 +64,26 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 }
 
 type CreateMembersInput struct {
+
 	// A list of account ID and email address pairs of the accounts that you want to
 	// associate with the master GuardDuty account.
+	//
+	// This member is required.
 	AccountDetails []*types.AccountDetail
+
 	// The unique ID of the detector of the GuardDuty account that you want to
 	// associate member accounts with.
+	//
+	// This member is required.
 	DetectorId *string
 }
 
 type CreateMembersOutput struct {
+
 	// A list of objects that include the accountIds of the unprocessed accounts and a
 	// result string that explains why each was unprocessed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

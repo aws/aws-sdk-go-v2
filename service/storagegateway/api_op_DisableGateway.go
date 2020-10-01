@@ -61,13 +61,17 @@ func (c *Client) DisableGateway(ctx context.Context, params *DisableGatewayInput
 
 // DisableGatewayInput
 type DisableGatewayInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // DisableGatewayOutput
 type DisableGatewayOutput struct {
+
 	// The unique Amazon Resource Name (ARN) of the disabled gateway.
 	GatewayARN *string
 

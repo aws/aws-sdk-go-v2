@@ -64,16 +64,23 @@ func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipC
 }
 
 type ProvisionByoipCidrInput struct {
+
 	// The public IPv4 address range, in CIDR notation. The most specific IP prefix
 	// that you can specify is /24. The address range cannot overlap with another
 	// address range that you've brought to this or another Region.
+	//
+	// This member is required.
 	Cidr *string
+
 	// A signed document that proves that you are authorized to bring the specified IP
 	// address range to Amazon using BYOIP.
+	//
+	// This member is required.
 	CidrAuthorizationContext *types.CidrAuthorizationContext
 }
 
 type ProvisionByoipCidrOutput struct {
+
 	// Information about the address range.
 	ByoipCidr *types.ByoipCidr
 

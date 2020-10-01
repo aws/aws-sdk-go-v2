@@ -56,17 +56,24 @@ func (c *Client) ListApplicationVersions(ctx context.Context, params *ListApplic
 }
 
 type ListApplicationVersionsInput struct {
+
 	// The total number of items to return.
 	MaxItems *int32
+
 	// The Amazon Resource Name (ARN) of the application.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// A token to specify where to start paginating.
 	NextToken *string
 }
 
 type ListApplicationVersionsOutput struct {
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// An array of version summaries for the application.
 	Versions []*types.VersionSummary
 

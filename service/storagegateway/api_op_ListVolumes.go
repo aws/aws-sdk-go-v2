@@ -67,12 +67,15 @@ func (c *Client) ListVolumes(ctx context.Context, params *ListVolumesInput, optF
 // <a>ListVolumesInput$Limit</a> </p> </li> <li> <p> <a>ListVolumesInput$Marker</a>
 // </p> </li> </ul>
 type ListVolumesInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
 	// Specifies that the list of volumes returned be limited to the specified number
 	// of items.
 	Limit *int32
+
 	// A string that indicates the position at which to begin the returned list of
 	// volumes. Obtain the marker from the response of a previous List iSCSI Volumes
 	// request.
@@ -83,13 +86,16 @@ type ListVolumesInput struct {
 // <a>ListVolumesOutput$Marker</a> </p> </li> <li> <p>
 // <a>ListVolumesOutput$VolumeInfos</a> </p> </li> </ul>
 type ListVolumesOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
 	// An array of VolumeInfo () objects, where each object describes an iSCSI volume.
 	// If no volumes are defined for the gateway, then VolumeInfos is an empty array
 	// "[]".
 	VolumeInfos []*types.VolumeInfo
+
 	// Use the marker in your next request to continue pagination of iSCSI volumes. If
 	// there are no more volumes to list, this field does not appear in the response
 	// body.

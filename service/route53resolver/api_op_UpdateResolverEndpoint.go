@@ -56,13 +56,18 @@ func (c *Client) UpdateResolverEndpoint(ctx context.Context, params *UpdateResol
 }
 
 type UpdateResolverEndpointInput struct {
+
 	// The ID of the resolver endpoint that you want to update.
+	//
+	// This member is required.
 	ResolverEndpointId *string
+
 	// The name of the resolver endpoint that you want to update.
 	Name *string
 }
 
 type UpdateResolverEndpointOutput struct {
+
 	// The response to an UpdateResolverEndpoint request.
 	ResolverEndpoint *types.ResolverEndpoint
 

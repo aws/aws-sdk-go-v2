@@ -55,11 +55,20 @@ func (c *Client) AssociateDelegateToResource(ctx context.Context, params *Associ
 }
 
 type AssociateDelegateToResourceInput struct {
+
 	// The organization under which the resource exists.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The member (user or group) to associate to the resource.
+	//
+	// This member is required.
 	EntityId *string
+
 	// The resource for which members (users or groups) are associated.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

@@ -56,14 +56,18 @@ func (c *Client) DescribeScheduledInstances(ctx context.Context, params *Describ
 
 // Contains the parameters for DescribeScheduledInstances.
 type DescribeScheduledInstancesInput struct {
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call. This value can be
 	// between 5 and 300. The default value is 100. To retrieve the remaining results,
 	// make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The Scheduled Instance IDs.
 	ScheduledInstanceIds []*string
+
 	// The filters.
 	//
 	//     * availability-zone - The Availability Zone (for example,
@@ -77,20 +81,24 @@ type DescribeScheduledInstancesInput struct {
 	//     *
 	// platform - The platform (Linux/UNIX or Windows).
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The time period for the first schedule to start.
 	SlotStartTimeRange *types.SlotStartTimeRangeRequest
 }
 
 // Contains the output of DescribeScheduledInstances.
 type DescribeScheduledInstancesOutput struct {
+
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the Scheduled Instances.
 	ScheduledInstanceSet []*types.ScheduledInstance
 

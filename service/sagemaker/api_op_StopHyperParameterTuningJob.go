@@ -60,7 +60,10 @@ func (c *Client) StopHyperParameterTuningJob(ctx context.Context, params *StopHy
 }
 
 type StopHyperParameterTuningJobInput struct {
+
 	// The name of the tuning job to stop.
+	//
+	// This member is required.
 	HyperParameterTuningJobName *string
 }
 

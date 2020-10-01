@@ -56,27 +56,48 @@ func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput
 }
 
 type UpdateFunctionInput struct {
+
 	// The GraphQL API ID.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The Function description.
 	Description *string
+
 	// The Function request mapping template. Functions support only the 2018-05-29
 	// version of the request mapping template.
+	//
+	// This member is required.
 	RequestMappingTemplate *string
+
 	// The Function name.
+	//
+	// This member is required.
 	Name *string
+
 	// The FunctionDataSource name.
+	//
+	// This member is required.
 	DataSourceName *string
+
 	// The function ID.
+	//
+	// This member is required.
 	FunctionId *string
+
 	// The Function request mapping template.
 	ResponseMappingTemplate *string
+
 	// The version of the request mapping template. Currently the supported value is
 	// 2018-05-29.
+	//
+	// This member is required.
 	FunctionVersion *string
 }
 
 type UpdateFunctionOutput struct {
+
 	// The Function object.
 	FunctionConfiguration *types.FunctionConfiguration
 

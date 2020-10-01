@@ -61,9 +61,11 @@ func (c *Client) CreateLicenseConfiguration(ctx context.Context, params *CreateL
 }
 
 type CreateLicenseConfigurationInput struct {
+
 	// Indicates whether hard or soft license enforcement is used. Exceeding a hard
 	// limit blocks the launch of new instances.
 	LicenseCountHardLimit *bool
+
 	// License rules. The syntax is #name=value (for example,
 	// #allowedTenancy=EC2-DedicatedHost). Available rules vary by dimension.
 	//
@@ -80,21 +82,32 @@ type CreateLicenseConfigurationInput struct {
 	//     * vCPUs dimension:
 	// allowedTenancy | honorVcpuOptimization | maximumVcpus | minimumVcpus
 	LicenseRules []*string
+
 	// Product information.
 	ProductInformationList []*types.ProductInformation
+
 	// Description of the license configuration.
 	Description *string
+
 	// Number of licenses managed by the license configuration.
 	LicenseCount *int64
+
 	// Name of the license configuration.
+	//
+	// This member is required.
 	Name *string
+
 	// Dimension used to track the license inventory.
+	//
+	// This member is required.
 	LicenseCountingType types.LicenseCountingType
+
 	// Tags to add to the license configuration.
 	Tags []*types.Tag
 }
 
 type CreateLicenseConfigurationOutput struct {
+
 	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string
 

@@ -55,8 +55,10 @@ func (c *Client) RetryBuild(ctx context.Context, params *RetryBuildInput, optFns
 }
 
 type RetryBuildInput struct {
+
 	// Specifies the identifier of the build to restart.
 	Id *string
+
 	// A unique, case sensitive identifier you provide to ensure the idempotency of the
 	// RetryBuild request. The token is included in the RetryBuild request and is valid
 	// for five minutes. If you repeat the RetryBuild request with the same token, but
@@ -65,6 +67,7 @@ type RetryBuildInput struct {
 }
 
 type RetryBuildOutput struct {
+
 	// Information about a build.
 	Build *types.Build
 

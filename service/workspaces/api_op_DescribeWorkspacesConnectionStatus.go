@@ -55,16 +55,20 @@ func (c *Client) DescribeWorkspacesConnectionStatus(ctx context.Context, params 
 }
 
 type DescribeWorkspacesConnectionStatusInput struct {
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
 	// The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
 	WorkspaceIds []*string
 }
 
 type DescribeWorkspacesConnectionStatusOutput struct {
+
 	// Information about the connection status of the WorkSpace.
 	WorkspacesConnectionStatus []*types.WorkspaceConnectionStatus
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string

@@ -58,26 +58,39 @@ func (c *Client) DeleteStackInstances(ctx context.Context, params *DeleteStackIn
 }
 
 type DeleteStackInstancesInput struct {
+
 	// The name or unique ID of the stack set that you want to delete stack instances
 	// for.
+	//
+	// This member is required.
 	StackSetName *string
+
 	// The Regions where you want to delete stack set instances.
+	//
+	// This member is required.
 	Regions []*string
+
 	// [Self-managed permissions] The names of the AWS accounts that you want to delete
 	// stack instances for. You can specify Accounts or DeploymentTargets, but not
 	// both.
 	Accounts []*string
+
 	// Removes the stack instances from the specified stack set, but doesn't delete the
 	// stacks. You can't reassociate a retained stack or add an existing, saved stack
 	// to a new stack set. For more information, see Stack set operation options
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
+	//
+	// This member is required.
 	RetainStacks *bool
+
 	// Preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
+
 	// [Service-managed permissions] The AWS Organizations accounts from which to
 	// delete stack instances. You can specify Accounts or DeploymentTargets, but not
 	// both.
 	DeploymentTargets *types.DeploymentTargets
+
 	// The unique identifier for this stack set operation. If you don't specify an
 	// operation ID, the SDK generates one automatically. The operation ID also
 	// functions as an idempotency token, to ensure that AWS CloudFormation performs
@@ -89,6 +102,7 @@ type DeleteStackInstancesInput struct {
 }
 
 type DeleteStackInstancesOutput struct {
+
 	// The unique identifier for this stack set operation.
 	OperationId *string
 

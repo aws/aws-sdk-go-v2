@@ -56,22 +56,32 @@ func (c *Client) CreateAnalyzer(ctx context.Context, params *CreateAnalyzerInput
 
 // Creates an analyzer.
 type CreateAnalyzerInput struct {
+
 	// The name of the analyzer to create.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// The type of analyzer to create. Only ACCOUNT analyzers are supported. You can
 	// create only one analyzer per account per Region.
+	//
+	// This member is required.
 	Type types.Type
+
 	// Specifies the archive rules to add for the analyzer. Archive rules automatically
 	// archive findings that meet the criteria you define for the rule.
 	ArchiveRules []*types.InlineArchiveRule
+
 	// The tags to apply to the analyzer.
 	Tags map[string]*string
+
 	// A client token.
 	ClientToken *string
 }
 
 // The response to the request to create an analyzer.
 type CreateAnalyzerOutput struct {
+
 	// The ARN of the analyzer that was created by the request.
 	Arn *string
 

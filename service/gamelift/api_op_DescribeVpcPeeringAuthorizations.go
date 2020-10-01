@@ -75,6 +75,7 @@ type DescribeVpcPeeringAuthorizationsInput struct {
 }
 
 type DescribeVpcPeeringAuthorizationsOutput struct {
+
 	// A collection of objects that describe all valid VPC peering operations for the
 	// current AWS account.
 	VpcPeeringAuthorizations []*types.VpcPeeringAuthorization

@@ -56,18 +56,25 @@ func (c *Client) ListLicenseSpecificationsForResource(ctx context.Context, param
 }
 
 type ListLicenseSpecificationsForResourceInput struct {
+
 	// Amazon Resource Name (ARN) of a resource that has an associated license
 	// configuration.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// Token for the next set of results.
 	NextToken *string
 }
 
 type ListLicenseSpecificationsForResourceOutput struct {
+
 	// Token for the next set of results.
 	NextToken *string
+
 	// License configurations associated with a resource.
 	LicenseSpecifications []*types.LicenseSpecification
 

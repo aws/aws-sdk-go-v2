@@ -60,6 +60,7 @@ func (c *Client) CreateEntityRecognizer(ctx context.Context, params *CreateEntit
 }
 
 type CreateEntityRecognizerInput struct {
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -71,28 +72,43 @@ type CreateEntityRecognizerInput struct {
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
 	// The name given to the newly created recognizer. Recognizer names can be a
 	// maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores
 	// (_) are allowed. The name must be unique in the account/region.
+	//
+	// This member is required.
 	RecognizerName *string
+
 	// Specifies the format and location of the input data. The S3 bucket containing
 	// the input data must be located in the same region as the entity recognizer being
 	// created.
+	//
+	// This member is required.
 	InputDataConfig *types.EntityRecognizerInputDataConfig
+
 	// Tags to be associated with the entity recognizer being created. A tag is a
 	// key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
 	// For example, a tag with "Sales" as the key might be added to a resource to
 	// indicate its use by the sales department.
 	Tags []*types.Tag
+
 	// A unique identifier for the request. If you don't set the client request token,
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
+
 	// The language of the input documents. All documents must be in the same language.
 	// Only English ("en") is currently supported.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
 	// that grants Amazon Comprehend read access to your input data.
+	//
+	// This member is required.
 	DataAccessRoleArn *string
+
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your custom entity recognizer. For
 	// more information, see Amazon VPC
@@ -101,6 +117,7 @@ type CreateEntityRecognizerInput struct {
 }
 
 type CreateEntityRecognizerOutput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
 	EntityRecognizerArn *string
 

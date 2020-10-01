@@ -56,6 +56,7 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 }
 
 type RemovePermissionInput struct {
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -70,12 +71,19 @@ type RemovePermissionInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// Statement ID of the permission to remove.
+	//
+	// This member is required.
 	StatementId *string
+
 	// Specify a version or alias to remove permissions from a published version of the
 	// function.
 	Qualifier *string
+
 	// Only update the policy if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string

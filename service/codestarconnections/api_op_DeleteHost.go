@@ -57,7 +57,10 @@ func (c *Client) DeleteHost(ctx context.Context, params *DeleteHostInput, optFns
 }
 
 type DeleteHostInput struct {
+
 	// The Amazon Resource Name (ARN) of the host to be deleted.
+	//
+	// This member is required.
 	HostArn *string
 }
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified allocation ID does not exist.
@@ -24,12 +23,6 @@ func (e *AllocationIdNotFoundException) ErrorMessage() string {
 }
 func (e *AllocationIdNotFoundException) ErrorCode() string             { return "AllocationIdNotFoundException" }
 func (e *AllocationIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AllocationIdNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AllocationIdNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ALPN policy is not supported.
 type ALPNPolicyNotSupportedException struct {
@@ -49,12 +42,6 @@ func (e *ALPNPolicyNotSupportedException) ErrorCode() string {
 	return "ALPNPolicyNotSupportedException"
 }
 func (e *ALPNPolicyNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ALPNPolicyNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ALPNPolicyNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Availability Zone is not supported.
 type AvailabilityZoneNotSupportedException struct {
@@ -76,12 +63,6 @@ func (e *AvailabilityZoneNotSupportedException) ErrorCode() string {
 func (e *AvailabilityZoneNotSupportedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AvailabilityZoneNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AvailabilityZoneNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified certificate does not exist.
 type CertificateNotFoundException struct {
@@ -99,12 +80,6 @@ func (e *CertificateNotFoundException) ErrorMessage() string {
 }
 func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFoundException" }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A listener with the specified port already exists.
 type DuplicateListenerException struct {
@@ -122,12 +97,6 @@ func (e *DuplicateListenerException) ErrorMessage() string {
 }
 func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListenerException" }
 func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateListenerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateListenerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A load balancer with the specified name already exists.
 type DuplicateLoadBalancerNameException struct {
@@ -149,12 +118,6 @@ func (e *DuplicateLoadBalancerNameException) ErrorCode() string {
 func (e *DuplicateLoadBalancerNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DuplicateLoadBalancerNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateLoadBalancerNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
@@ -172,12 +135,6 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 }
 func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeysException" }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateTagKeysException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateTagKeysException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A target group with the specified name already exists.
 type DuplicateTargetGroupNameException struct {
@@ -197,12 +154,6 @@ func (e *DuplicateTargetGroupNameException) ErrorCode() string {
 	return "DuplicateTargetGroupNameException"
 }
 func (e *DuplicateTargetGroupNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateTargetGroupNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateTargetGroupNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The health of the specified targets could not be retrieved due to an internal
 // error.
@@ -221,12 +172,6 @@ func (e *HealthUnavailableException) ErrorMessage() string {
 }
 func (e *HealthUnavailableException) ErrorCode() string             { return "HealthUnavailableException" }
 func (e *HealthUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *HealthUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HealthUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration is not valid with this protocol.
 type IncompatibleProtocolsException struct {
@@ -244,12 +189,6 @@ func (e *IncompatibleProtocolsException) ErrorMessage() string {
 }
 func (e *IncompatibleProtocolsException) ErrorCode() string             { return "IncompatibleProtocolsException" }
 func (e *IncompatibleProtocolsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatibleProtocolsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatibleProtocolsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested configuration is not valid.
 type InvalidConfigurationRequestException struct {
@@ -270,12 +209,6 @@ func (e *InvalidConfigurationRequestException) ErrorCode() string {
 }
 func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidConfigurationRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConfigurationRequestException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The requested action is not valid.
@@ -298,12 +231,6 @@ func (e *InvalidLoadBalancerActionException) ErrorCode() string {
 func (e *InvalidLoadBalancerActionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidLoadBalancerActionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLoadBalancerActionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested scheme is not valid.
 type InvalidSchemeException struct {
@@ -321,12 +248,6 @@ func (e *InvalidSchemeException) ErrorMessage() string {
 }
 func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidSchemeException" }
 func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSchemeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSchemeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified security group does not exist.
 type InvalidSecurityGroupException struct {
@@ -344,12 +265,6 @@ func (e *InvalidSecurityGroupException) ErrorMessage() string {
 }
 func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroupException" }
 func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSecurityGroupException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSecurityGroupException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified subnet is out of available addresses.
 type InvalidSubnetException struct {
@@ -367,12 +282,6 @@ func (e *InvalidSubnetException) ErrorMessage() string {
 }
 func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnetException" }
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSubnetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubnetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified target does not exist, is not in the same VPC as the target group,
 // or has an unsupported instance type.
@@ -391,12 +300,6 @@ func (e *InvalidTargetException) ErrorMessage() string {
 }
 func (e *InvalidTargetException) ErrorCode() string             { return "InvalidTargetException" }
 func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTargetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTargetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified listener does not exist.
 type ListenerNotFoundException struct {
@@ -414,12 +317,6 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 }
 func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ListenerNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ListenerNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified load balancer does not exist.
 type LoadBalancerNotFoundException struct {
@@ -437,12 +334,6 @@ func (e *LoadBalancerNotFoundException) ErrorMessage() string {
 }
 func (e *LoadBalancerNotFoundException) ErrorCode() string             { return "LoadBalancerNotFoundException" }
 func (e *LoadBalancerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LoadBalancerNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LoadBalancerNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
@@ -460,12 +351,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified priority is in use.
 type PriorityInUseException struct {
@@ -483,12 +368,6 @@ func (e *PriorityInUseException) ErrorMessage() string {
 }
 func (e *PriorityInUseException) ErrorCode() string             { return "PriorityInUseException" }
 func (e *PriorityInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PriorityInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PriorityInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified resource is in use.
 type ResourceInUseException struct {
@@ -506,12 +385,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified rule does not exist.
 type RuleNotFoundException struct {
@@ -529,12 +402,6 @@ func (e *RuleNotFoundException) ErrorMessage() string {
 }
 func (e *RuleNotFoundException) ErrorCode() string             { return "RuleNotFoundException" }
 func (e *RuleNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RuleNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RuleNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified SSL policy does not exist.
 type SSLPolicyNotFoundException struct {
@@ -552,12 +419,6 @@ func (e *SSLPolicyNotFoundException) ErrorMessage() string {
 }
 func (e *SSLPolicyNotFoundException) ErrorCode() string             { return "SSLPolicyNotFoundException" }
 func (e *SSLPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SSLPolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SSLPolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified subnet does not exist.
 type SubnetNotFoundException struct {
@@ -575,12 +436,6 @@ func (e *SubnetNotFoundException) ErrorMessage() string {
 }
 func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFoundException" }
 func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of load balancers per target group.
 type TargetGroupAssociationLimitException struct {
@@ -602,12 +457,6 @@ func (e *TargetGroupAssociationLimitException) ErrorCode() string {
 func (e *TargetGroupAssociationLimitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TargetGroupAssociationLimitException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetGroupAssociationLimitException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified target group does not exist.
 type TargetGroupNotFoundException struct {
@@ -625,12 +474,6 @@ func (e *TargetGroupNotFoundException) ErrorMessage() string {
 }
 func (e *TargetGroupNotFoundException) ErrorCode() string             { return "TargetGroupNotFoundException" }
 func (e *TargetGroupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetGroupNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetGroupNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of actions per rule.
 type TooManyActionsException struct {
@@ -648,12 +491,6 @@ func (e *TooManyActionsException) ErrorMessage() string {
 }
 func (e *TooManyActionsException) ErrorCode() string             { return "TooManyActionsException" }
 func (e *TooManyActionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyActionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyActionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of certificates per load balancer.
 type TooManyCertificatesException struct {
@@ -671,12 +508,6 @@ func (e *TooManyCertificatesException) ErrorMessage() string {
 }
 func (e *TooManyCertificatesException) ErrorCode() string             { return "TooManyCertificatesException" }
 func (e *TooManyCertificatesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyCertificatesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyCertificatesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of listeners per load balancer.
 type TooManyListenersException struct {
@@ -694,12 +525,6 @@ func (e *TooManyListenersException) ErrorMessage() string {
 }
 func (e *TooManyListenersException) ErrorCode() string             { return "TooManyListenersException" }
 func (e *TooManyListenersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyListenersException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyListenersException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of load balancers for your AWS account.
 type TooManyLoadBalancersException struct {
@@ -717,12 +542,6 @@ func (e *TooManyLoadBalancersException) ErrorMessage() string {
 }
 func (e *TooManyLoadBalancersException) ErrorCode() string             { return "TooManyLoadBalancersException" }
 func (e *TooManyLoadBalancersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyLoadBalancersException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyLoadBalancersException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of times a target can be registered with
 // a load balancer.
@@ -745,12 +564,6 @@ func (e *TooManyRegistrationsForTargetIdException) ErrorCode() string {
 func (e *TooManyRegistrationsForTargetIdException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyRegistrationsForTargetIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRegistrationsForTargetIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of rules per load balancer.
 type TooManyRulesException struct {
@@ -768,12 +581,6 @@ func (e *TooManyRulesException) ErrorMessage() string {
 }
 func (e *TooManyRulesException) ErrorCode() string             { return "TooManyRulesException" }
 func (e *TooManyRulesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRulesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRulesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of tags per load balancer.
 type TooManyTagsException struct {
@@ -791,12 +598,6 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of target groups for your AWS account.
 type TooManyTargetGroupsException struct {
@@ -814,12 +615,6 @@ func (e *TooManyTargetGroupsException) ErrorMessage() string {
 }
 func (e *TooManyTargetGroupsException) ErrorCode() string             { return "TooManyTargetGroupsException" }
 func (e *TooManyTargetGroupsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTargetGroupsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTargetGroupsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of targets.
 type TooManyTargetsException struct {
@@ -837,12 +632,6 @@ func (e *TooManyTargetsException) ErrorMessage() string {
 }
 func (e *TooManyTargetsException) ErrorCode() string             { return "TooManyTargetsException" }
 func (e *TooManyTargetsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTargetsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTargetsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of unique target groups per load balancer
 // across all listeners. If a target group is used by multiple actions for a load
@@ -866,12 +655,6 @@ func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorCode() string {
 func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified protocol is not supported.
 type UnsupportedProtocolException struct {
@@ -889,9 +672,3 @@ func (e *UnsupportedProtocolException) ErrorMessage() string {
 }
 func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocolException" }
 func (e *UnsupportedProtocolException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedProtocolException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedProtocolException) HasMessage() bool {
-	return e.Message != nil
-}

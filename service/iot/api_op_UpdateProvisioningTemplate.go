@@ -56,18 +56,27 @@ func (c *Client) UpdateProvisioningTemplate(ctx context.Context, params *UpdateP
 }
 
 type UpdateProvisioningTemplateInput struct {
+
 	// The name of the fleet provisioning template.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// True to enable the fleet provisioning template, otherwise false.
 	Enabled *bool
+
 	// Removes pre-provisioning hook template.
 	RemovePreProvisioningHook *bool
+
 	// Updates the pre-provisioning hook template.
 	PreProvisioningHook *types.ProvisioningHook
+
 	// The ID of the default provisioning template version.
 	DefaultVersionId *int32
+
 	// The description of the fleet provisioning template.
 	Description *string
+
 	// The ARN of the role associated with the provisioning template. This IoT role
 	// grants permission to provision a device.
 	ProvisioningRoleArn *string

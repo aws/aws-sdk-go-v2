@@ -64,19 +64,28 @@ func (c *Client) CreateNatGateway(ctx context.Context, params *CreateNatGatewayI
 }
 
 type CreateNatGatewayInput struct {
+
 	// The allocation ID of an Elastic IP address to associate with the NAT gateway. If
 	// the Elastic IP address is associated with another resource, you must first
 	// disassociate it.
+	//
+	// This member is required.
 	AllocationId *string
+
 	// The tags to assign to the NAT gateway.
 	TagSpecifications []*types.TagSpecification
+
 	// The subnet in which to create the NAT gateway.
+	//
+	// This member is required.
 	SubnetId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
@@ -85,8 +94,10 @@ type CreateNatGatewayInput struct {
 }
 
 type CreateNatGatewayOutput struct {
+
 	// Information about the NAT gateway.
 	NatGateway *types.NatGateway
+
 	// Unique, case-sensitive identifier to ensure the idempotency of the request. Only
 	// returned if a client token was provided in the request.
 	ClientToken *string

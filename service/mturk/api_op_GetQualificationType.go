@@ -57,11 +57,15 @@ func (c *Client) GetQualificationType(ctx context.Context, params *GetQualificat
 }
 
 type GetQualificationTypeInput struct {
+
 	// The ID of the QualificationType.
+	//
+	// This member is required.
 	QualificationTypeId *string
 }
 
 type GetQualificationTypeOutput struct {
+
 	// The returned Qualification Type
 	QualificationType *types.QualificationType
 

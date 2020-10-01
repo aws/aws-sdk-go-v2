@@ -91,19 +91,28 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 
 // Represents the input for a request action.
 type CreateVpcPeeringConnectionInput struct {
+
 	// A unique identifier for a fleet. You can use either the fleet ID or ARN value.
 	// This tells Amazon GameLift which GameLift VPC to peer with.
+	//
+	// This member is required.
 	FleetId *string
+
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
 	// GameLift fleet. The VPC must be in the same Region where your fleet is deployed.
 	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
 	// in the AWS Management Console. Learn more about VPC peering in VPC Peering with
 	// Amazon GameLift Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
+	//
+	// This member is required.
 	PeerVpcId *string
+
 	// A unique identifier for the AWS account with the VPC that you want to peer your
 	// Amazon GameLift fleet with. You can find your Account ID in the AWS Management
 	// Console under account settings.
+	//
+	// This member is required.
 	PeerVpcAwsAccountId *string
 }
 

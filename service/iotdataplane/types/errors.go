@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified version does not match the version of the document.
@@ -24,12 +23,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An unexpected error has occurred.
 type InternalFailureException struct {
@@ -47,12 +40,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is not valid.
 type InvalidRequestException struct {
@@ -70,12 +57,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified combination of HTTP verb and URI is not supported.
 type MethodNotAllowedException struct {
@@ -93,12 +74,6 @@ func (e *MethodNotAllowedException) ErrorMessage() string {
 }
 func (e *MethodNotAllowedException) ErrorCode() string             { return "MethodNotAllowedException" }
 func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MethodNotAllowedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MethodNotAllowedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The payload exceeds the maximum size allowed.
 type RequestEntityTooLargeException struct {
@@ -116,12 +91,6 @@ func (e *RequestEntityTooLargeException) ErrorMessage() string {
 }
 func (e *RequestEntityTooLargeException) ErrorCode() string             { return "RequestEntityTooLargeException" }
 func (e *RequestEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestEntityTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestEntityTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -139,12 +108,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
@@ -162,12 +125,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The rate exceeds the limit.
 type ThrottlingException struct {
@@ -185,12 +142,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You are not authorized to perform this operation.
 type UnauthorizedException struct {
@@ -208,12 +159,6 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The document encoding is not supported.
 type UnsupportedDocumentEncodingException struct {
@@ -234,10 +179,4 @@ func (e *UnsupportedDocumentEncodingException) ErrorCode() string {
 }
 func (e *UnsupportedDocumentEncodingException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *UnsupportedDocumentEncodingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedDocumentEncodingException) HasMessage() bool {
-	return e.Message != nil
 }

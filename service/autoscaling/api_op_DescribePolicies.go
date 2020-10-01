@@ -55,30 +55,37 @@ func (c *Client) DescribePolicies(ctx context.Context, params *DescribePoliciesI
 }
 
 type DescribePoliciesInput struct {
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
+
 	// The names of one or more policies. If you omit this parameter, all policies are
 	// described. If a group name is provided, the results are limited to that group.
 	// This list is limited to 50 items. If you specify an unknown policy name, it is
 	// ignored with no error.
 	PolicyNames []*string
+
 	// The maximum number of items to be returned with each call. The default value is
 	// 50 and the maximum value is 100.
 	MaxRecords *int32
+
 	// One or more policy types. The valid values are SimpleScaling, StepScaling, and
 	// TargetTrackingScaling.
 	PolicyTypes []*string
 }
 
 type DescribePoliciesOutput struct {
+
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is
 	// null when there are no more items to return.
 	NextToken *string
+
 	// The scaling policies.
 	ScalingPolicies []*types.ScalingPolicy
 

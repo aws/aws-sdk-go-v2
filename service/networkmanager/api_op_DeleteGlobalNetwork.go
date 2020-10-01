@@ -57,11 +57,15 @@ func (c *Client) DeleteGlobalNetwork(ctx context.Context, params *DeleteGlobalNe
 }
 
 type DeleteGlobalNetworkInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
 }
 
 type DeleteGlobalNetworkOutput struct {
+
 	// Information about the global network.
 	GlobalNetwork *types.GlobalNetwork
 

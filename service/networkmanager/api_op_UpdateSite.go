@@ -57,10 +57,17 @@ func (c *Client) UpdateSite(ctx context.Context, params *UpdateSiteInput, optFns
 }
 
 type UpdateSiteInput struct {
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The ID of your site.
+	//
+	// This member is required.
 	SiteId *string
+
 	// The site location:
 	//
 	//     * Address: The physical address of the site.
@@ -70,12 +77,14 @@ type UpdateSiteInput struct {
 	//
 	//     * Longitude: The longitude of the site.
 	Location *types.Location
+
 	// A description of your site. Length Constraints: Maximum length of 256
 	// characters.
 	Description *string
 }
 
 type UpdateSiteOutput struct {
+
 	// Information about the site.
 	Site *types.Site
 

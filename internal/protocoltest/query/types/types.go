@@ -7,28 +7,34 @@ type ComplexNestedErrorData struct {
 }
 
 type RecursiveXmlShapesOutputNested1 struct {
-	Foo    *string
+	Foo *string
+
 	Nested *RecursiveXmlShapesOutputNested2
 }
 
 type RecursiveXmlShapesOutputNested2 struct {
-	Bar             *string
+	Bar *string
+
 	RecursiveMember *RecursiveXmlShapesOutputNested1
 }
 
 type StructArg struct {
-	StringArg    *string
-	OtherArg     *bool
+	StringArg *string
+
+	OtherArg *bool
+
 	RecursiveArg *StructArg
 }
 
 type StructureListMember struct {
 	A *string
+
 	B *string
 }
 
 type XmlNamespaceNested struct {
-	Foo    *string
+	Foo *string
+
 	Values []*string
 }
 

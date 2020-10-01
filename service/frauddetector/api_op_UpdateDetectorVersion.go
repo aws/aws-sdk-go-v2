@@ -58,18 +58,33 @@ func (c *Client) UpdateDetectorVersion(ctx context.Context, params *UpdateDetect
 }
 
 type UpdateDetectorVersionInput struct {
+
 	// The detector version ID.
+	//
+	// This member is required.
 	DetectorVersionId *string
+
 	// The model versions to include in the detector version.
 	ModelVersions []*types.ModelVersion
+
 	// The parent detector ID for the detector version you want to update.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The detector version description.
 	Description *string
+
 	// The rules to include in the detector version.
+	//
+	// This member is required.
 	Rules []*types.Rule
+
 	// The Amazon SageMaker model endpoints to include in the detector version.
+	//
+	// This member is required.
 	ExternalModelEndpoints []*string
+
 	// The rule execution mode to add to the detector. If you specify FIRST_MATCHED,
 	// Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at
 	// the first matched rule. Amazon Fraud dectector then provides the outcomes for

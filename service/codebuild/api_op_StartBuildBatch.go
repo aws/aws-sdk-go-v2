@@ -56,6 +56,7 @@ func (c *Client) StartBuildBatch(ctx context.Context, params *StartBuildBatchInp
 }
 
 type StartBuildBatchInput struct {
+
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that
 	// overrides the one specified in the batch build project. The CMK key encrypts the
 	// build output artifacts. You can use a cross-account KMS key to encrypt the build
@@ -63,9 +64,11 @@ type StartBuildBatchInput struct {
 	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
 	// CMK's alias (using the format alias/alias-name ).
 	EncryptionKeyOverride *string
+
 	// The name of a certificate for this batch build that overrides the one specified
 	// in the batch build project.
 	CertificateOverride *string
+
 	// A buildspec file declaration that overrides, for this build only, the latest one
 	// already defined in the build project. If this value is set, it can be either an
 	// inline buildspec definition, the path to an alternate buildspec file relative to
@@ -78,6 +81,7 @@ type StartBuildBatchInput struct {
 	// Location
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage).
 	BuildspecOverride *string
+
 	// The version of the batch build input to be built, for this build only. If not
 	// specified, the latest version is used. If specified, the contents depends on the
 	// source provider: AWS CodeCommit The commit ID, branch, or Git tag to use. GitHub
@@ -96,71 +100,94 @@ type StartBuildBatchInput struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string
+
 	// An array of ProjectArtifacts objects that contains information about the build
 	// output artifact overrides for the build project.
 	ArtifactsOverride *types.ProjectArtifacts
+
 	// A unique, case sensitive identifier you provide to ensure the idempotency of the
 	// StartBuildBatch request. The token is included in the StartBuildBatch request
 	// and is valid for five minutes. If you repeat the StartBuildBatch request with
 	// the same token, but change a parameter, AWS CodeBuild returns a parameter
 	// mismatch error.
 	IdempotencyToken *string
+
 	// Set to true to report to your source provider the status of a batch build's
 	// start and completion. If you use this option with a source provider other than
 	// GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. The
 	// status of a build triggered by a webhook is always reported to your source
 	// provider.
 	ReportBuildBatchStatusOverride *bool
+
 	// An array of ProjectArtifacts objects that override the secondary artifacts
 	// defined in the batch build project.
 	SecondaryArtifactsOverride []*types.ProjectArtifacts
+
 	// Enable this flag to override the insecure SSL setting that is specified in the
 	// batch build project. The insecure SSL setting determines whether to ignore SSL
 	// warnings while connecting to the project source code. This override applies only
 	// if the build's source is GitHub Enterprise.
 	InsecureSslOverride *bool
+
 	// A GitSubmodulesConfig object that overrides the Git submodules configuration for
 	// this batch build.
 	GitSubmodulesConfigOverride *types.GitSubmodulesConfig
+
 	// A BuildBatchConfigOverride object that contains batch build configuration
 	// overrides.
 	BuildBatchConfigOverride *types.ProjectBuildBatchConfig
+
 	// An array of ProjectSourceVersion objects that override the secondary source
 	// versions in the batch build project.
 	SecondarySourcesVersionOverride []*types.ProjectSourceVersion
+
 	// An array of ProjectSource objects that override the secondary sources defined in
 	// the batch build project.
 	SecondarySourcesOverride []*types.ProjectSource
+
 	// The user-defined depth of history, with a minimum value of 0, that overrides,
 	// for this batch build only, any previous depth of history defined in the batch
 	// build project.
 	GitCloneDepthOverride *int32
+
 	// The name of the project.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// A SourceAuth object that overrides the one defined in the batch build project.
 	// This override applies only if the build project's source is BitBucket or GitHub.
 	SourceAuthOverride *types.SourceAuth
+
 	// A RegistryCredential object that overrides credentials for access to a private
 	// registry.
 	RegistryCredentialOverride *types.RegistryCredential
+
 	// Overrides the build timeout specified in the batch build project.
 	BuildTimeoutInMinutesOverride *int32
+
 	// A container type for this batch build that overrides the one specified in the
 	// batch build project.
 	EnvironmentTypeOverride types.EnvironmentType
+
 	// The name of a compute type for this batch build that overrides the one specified
 	// in the batch build project.
 	ComputeTypeOverride types.ComputeType
+
 	// Enable this flag to override privileged mode in the batch build project.
 	PrivilegedModeOverride *bool
+
 	// The name of an image for this batch build that overrides the one specified in
 	// the batch build project.
 	ImageOverride *string
+
 	// The name of a service role for this batch build that overrides the one specified
 	// in the batch build project.
 	ServiceRoleOverride *string
+
 	// A ProjectCache object that specifies cache overrides.
 	CacheOverride *types.ProjectCache
+
 	// The type of credentials AWS CodeBuild uses to pull images in your batch build.
 	// There are two valid values: CODEBUILD Specifies that AWS CodeBuild uses its own
 	// credentials. This requires that you modify your ECR repository policy to trust
@@ -169,23 +196,29 @@ type StartBuildBatchInput struct {
 	// registry image, you must use SERVICE_ROLE credentials. When using an AWS
 	// CodeBuild curated image, you must use CODEBUILD credentials.
 	ImagePullCredentialsTypeOverride types.ImagePullCredentialsType
+
 	// The number of minutes a batch build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutesOverride *int32
+
 	// A location that overrides, for this batch build, the source location defined in
 	// the batch build project.
 	SourceLocationOverride *string
+
 	// A LogsConfig object that override the log settings defined in the batch build
 	// project.
 	LogsConfigOverride *types.LogsConfig
+
 	// The source input type that overrides the source input defined in the batch build
 	// project.
 	SourceTypeOverride types.SourceType
+
 	// An array of EnvironmentVariable objects that override, or add to, the
 	// environment variables defined in the batch build project.
 	EnvironmentVariablesOverride []*types.EnvironmentVariable
 }
 
 type StartBuildBatchOutput struct {
+
 	// A BuildBatch object that contains information about the batch build.
 	BuildBatch *types.BuildBatch
 

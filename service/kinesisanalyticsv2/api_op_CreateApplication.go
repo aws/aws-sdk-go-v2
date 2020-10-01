@@ -58,20 +58,33 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 }
 
 type CreateApplicationInput struct {
+
 	// The name of your application (for example, sample-app).
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
+	//
+	// This member is required.
 	RuntimeEnvironment types.RuntimeEnvironment
+
 	// A summary description of the application.
 	ApplicationDescription *string
+
 	// Use this parameter to configure the application.
 	ApplicationConfiguration *types.ApplicationConfiguration
+
 	// The IAM role used by the application to access Kinesis data streams, Kinesis
 	// Data Firehose delivery streams, Amazon S3 objects, and other external resources.
+	//
+	// This member is required.
 	ServiceExecutionRole *string
+
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
 	// application configuration errors.
 	CloudWatchLoggingOptions []*types.CloudWatchLoggingOption
+
 	// A list of one or more tags to assign to the application. A tag is a key-value
 	// pair that identifies an application. Note that the maximum number of application
 	// tags includes system tags. The maximum number of user-defined application tags
@@ -81,8 +94,11 @@ type CreateApplicationInput struct {
 }
 
 type CreateApplicationOutput struct {
+
 	// In response to your CreateApplication request, Kinesis Data Analytics returns a
 	// response with details of the application it created.
+	//
+	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
 
 	// Metadata pertaining to the operation's result.

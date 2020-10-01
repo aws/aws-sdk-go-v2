@@ -58,35 +58,54 @@ func (c *Client) CreateNetworkProfile(ctx context.Context, params *CreateNetwork
 }
 
 type CreateNetworkProfileInput struct {
+
 	// The authentication standard that is used in the EAP framework. Currently,
 	// EAP_TLS is supported.
 	EapMethod types.NetworkEapMethod
+
 	// Detailed information about a device's network profile.
 	Description *string
+
 	// The root certificates of your authentication server that is installed on your
 	// devices and used to trust your authentication server during EAP negotiation.
 	TrustAnchors []*string
+
 	// The next, or subsequent, password of the Wi-Fi network. This password is
 	// asynchronously transmitted to the device and is used when the password of the
 	// network changes to NextPassword.
 	NextPassword *string
+
 	// The SSID of the Wi-Fi network.
+	//
+	// This member is required.
 	Ssid *string
+
 	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
 	// WPA_PSK, WEP, or OPEN.
+	//
+	// This member is required.
 	SecurityType types.NetworkSecurityType
+
 	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
 	// Manager (ACM). This is used to issue certificates to the devices.
 	CertificateAuthorityArn *string
+
 	// The current password of the Wi-Fi network.
 	CurrentPassword *string
+
 	// The name of the network profile associated with a device.
+	//
+	// This member is required.
 	NetworkProfileName *string
+
 	// A unique, user-specified identifier for the request that ensures idempotency.
+	//
+	// This member is required.
 	ClientRequestToken *string
 }
 
 type CreateNetworkProfileOutput struct {
+
 	// The ARN of the network profile associated with a device.
 	NetworkProfileArn *string
 

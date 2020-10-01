@@ -55,10 +55,15 @@ func (c *Client) GetId(ctx context.Context, params *GetIdInput, optFns ...func(*
 
 // Input to the GetId action.
 type GetIdInput struct {
+
 	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// A standard AWS account ID (9+ digits).
 	AccountId *string
+
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// The available provider names for Logins are as follows:
 	//
@@ -82,6 +87,7 @@ type GetIdInput struct {
 
 // Returned in response to a GetId request.
 type GetIdOutput struct {
+
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
 

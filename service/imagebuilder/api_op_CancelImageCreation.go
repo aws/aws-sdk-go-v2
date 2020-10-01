@@ -58,17 +58,26 @@ func (c *Client) CancelImageCreation(ctx context.Context, params *CancelImageCre
 }
 
 type CancelImageCreationInput struct {
+
 	// The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
+	//
+	// This member is required.
 	ImageBuildVersionArn *string
+
 	// The idempotency token used to make this request idempotent.
+	//
+	// This member is required.
 	ClientToken *string
 }
 
 type CancelImageCreationOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
+
 	// The Amazon Resource Name (ARN) of the image whose creation has been cancelled.
 	ImageBuildVersionArn *string
 

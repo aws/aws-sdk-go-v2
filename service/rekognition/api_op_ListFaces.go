@@ -61,10 +61,15 @@ func (c *Client) ListFaces(ctx context.Context, params *ListFacesInput, optFns .
 }
 
 type ListFacesInput struct {
+
 	// ID of the collection from which to list the faces.
+	//
+	// This member is required.
 	CollectionId *string
+
 	// Maximum number of faces to return.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Rekognition returns a pagination token in the response. You
 	// can use this pagination token to retrieve the next set of faces.
@@ -72,12 +77,15 @@ type ListFacesInput struct {
 }
 
 type ListFacesOutput struct {
+
 	// If the response is truncated, Amazon Rekognition returns this token that you can
 	// use in the subsequent request to retrieve the next set of faces.
 	NextToken *string
+
 	// Version number of the face detection model associated with the input collection
 	// (CollectionId).
 	FaceModelVersion *string
+
 	// An array of Face objects.
 	Faces []*types.Face
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You don't have permissions to perform the requested operation. The user or role
@@ -28,12 +27,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation that you attempted requires you to have the
 // iam:CreateServiceLinkedRole for organizations.amazonaws.com permission so that
@@ -60,15 +53,6 @@ func (e *AccessDeniedForDependencyException) ErrorCode() string {
 func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AccessDeniedForDependencyException) GetReason() AccessDeniedForDependencyExceptionReason {
-	return e.Reason
-}
-func (e *AccessDeniedForDependencyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedForDependencyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account is already a delegated administrator for this AWS service.
 type AccountAlreadyRegisteredException struct {
@@ -88,12 +72,6 @@ func (e *AccountAlreadyRegisteredException) ErrorCode() string {
 	return "AccountAlreadyRegisteredException"
 }
 func (e *AccountAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountAlreadyRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountAlreadyRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find an AWS account with the AccountId that you specified, or the
 // account whose credentials you used to make this request isn't a member of an
@@ -113,12 +91,6 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 }
 func (e *AccountNotFoundException) ErrorCode() string             { return "AccountNotFoundException" }
 func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified account is not a delegated administrator for this AWS service.
 type AccountNotRegisteredException struct {
@@ -136,12 +108,6 @@ func (e *AccountNotRegisteredException) ErrorMessage() string {
 }
 func (e *AccountNotRegisteredException) ErrorCode() string             { return "AccountNotRegisteredException" }
 func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountNotRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountNotRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't invite an existing account to your organization until you verify that
 // you own the email address associated with the master account. For more
@@ -165,12 +131,6 @@ func (e *AccountOwnerNotVerifiedException) ErrorCode() string {
 	return "AccountOwnerNotVerifiedException"
 }
 func (e *AccountOwnerNotVerifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountOwnerNotVerifiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountOwnerNotVerifiedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This account is already a member of an organization. An account can belong to
 // only one organization at a time.
@@ -189,12 +149,6 @@ func (e *AlreadyInOrganizationException) ErrorMessage() string {
 }
 func (e *AlreadyInOrganizationException) ErrorCode() string             { return "AlreadyInOrganizationException" }
 func (e *AlreadyInOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyInOrganizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyInOrganizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your account isn't a member of an organization. To make this request, you must
 // use the credentials of an account that belongs to an organization.
@@ -215,12 +169,6 @@ func (e *AWSOrganizationsNotInUseException) ErrorCode() string {
 	return "AWSOrganizationsNotInUseException"
 }
 func (e *AWSOrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AWSOrganizationsNotInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AWSOrganizationsNotInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find an organizational unit (OU) or AWS account with the ChildId that
 // you specified.
@@ -239,12 +187,6 @@ func (e *ChildNotFoundException) ErrorMessage() string {
 }
 func (e *ChildNotFoundException) ErrorCode() string             { return "ChildNotFoundException" }
 func (e *ChildNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ChildNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ChildNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target of the operation is currently being modified by a different request.
 // Try again later.
@@ -265,12 +207,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Performing this operation violates a minimum or maximum value limit. For
 // example, attempting to remove the last service control policy (SCP) from an OU
@@ -442,15 +378,6 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 }
 func (e *ConstraintViolationException) ErrorCode() string             { return "ConstraintViolationException" }
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConstraintViolationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConstraintViolationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ConstraintViolationException) GetReason() ConstraintViolationExceptionReason {
-	return e.Reason
-}
 
 // We can't find an create account request with the CreateAccountRequestId that you
 // specified.
@@ -472,12 +399,6 @@ func (e *CreateAccountStatusNotFoundException) ErrorCode() string {
 }
 func (e *CreateAccountStatusNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CreateAccountStatusNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CreateAccountStatusNotFoundException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // We can't find the destination container (a root or OU) with the ParentId that
@@ -501,12 +422,6 @@ func (e *DestinationParentNotFoundException) ErrorCode() string {
 func (e *DestinationParentNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DestinationParentNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DestinationParentNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // That account is already present in the specified destination.
 type DuplicateAccountException struct {
@@ -524,12 +439,6 @@ func (e *DuplicateAccountException) ErrorMessage() string {
 }
 func (e *DuplicateAccountException) ErrorCode() string             { return "DuplicateAccountException" }
 func (e *DuplicateAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateAccountException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateAccountException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A handshake with the same action and target already exists. For example, if you
 // invited an account to join your organization, the invited account might already
@@ -551,12 +460,6 @@ func (e *DuplicateHandshakeException) ErrorMessage() string {
 }
 func (e *DuplicateHandshakeException) ErrorCode() string             { return "DuplicateHandshakeException" }
 func (e *DuplicateHandshakeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateHandshakeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateHandshakeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An OU with the same name already exists.
 type DuplicateOrganizationalUnitException struct {
@@ -577,12 +480,6 @@ func (e *DuplicateOrganizationalUnitException) ErrorCode() string {
 }
 func (e *DuplicateOrganizationalUnitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *DuplicateOrganizationalUnitException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateOrganizationalUnitException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The selected policy is already attached to the specified target.
@@ -605,12 +502,6 @@ func (e *DuplicatePolicyAttachmentException) ErrorCode() string {
 func (e *DuplicatePolicyAttachmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DuplicatePolicyAttachmentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicatePolicyAttachmentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A policy with the same name already exists.
 type DuplicatePolicyException struct {
@@ -628,12 +519,6 @@ func (e *DuplicatePolicyException) ErrorMessage() string {
 }
 func (e *DuplicatePolicyException) ErrorCode() string             { return "DuplicatePolicyException" }
 func (e *DuplicatePolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicatePolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicatePolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // If you ran this action on the master account, this policy type is not enabled.
 // If you ran the action on a member account, the account doesn't have an effective
@@ -656,12 +541,6 @@ func (e *EffectivePolicyNotFoundException) ErrorCode() string {
 	return "EffectivePolicyNotFoundException"
 }
 func (e *EffectivePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EffectivePolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EffectivePolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Organizations couldn't perform the operation because your organization
 // hasn't finished initializing. This can take up to an hour. Try again later. If
@@ -684,12 +563,6 @@ func (e *FinalizingOrganizationException) ErrorCode() string {
 	return "FinalizingOrganizationException"
 }
 func (e *FinalizingOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FinalizingOrganizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FinalizingOrganizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified handshake is already in the requested state. For example, you
 // can't accept a handshake that was already accepted.
@@ -710,12 +583,6 @@ func (e *HandshakeAlreadyInStateException) ErrorCode() string {
 	return "HandshakeAlreadyInStateException"
 }
 func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HandshakeAlreadyInStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HandshakeAlreadyInStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation would violate the constraint identified in the reason
 // code. Some of the reasons in the following list might not be applicable to this
@@ -780,15 +647,6 @@ func (e *HandshakeConstraintViolationException) ErrorCode() string {
 func (e *HandshakeConstraintViolationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *HandshakeConstraintViolationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HandshakeConstraintViolationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *HandshakeConstraintViolationException) GetReason() HandshakeConstraintViolationExceptionReason {
-	return e.Reason
-}
 
 // We can't find a handshake with the HandshakeId that you specified.
 type HandshakeNotFoundException struct {
@@ -806,12 +664,6 @@ func (e *HandshakeNotFoundException) ErrorMessage() string {
 }
 func (e *HandshakeNotFoundException) ErrorCode() string             { return "HandshakeNotFoundException" }
 func (e *HandshakeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HandshakeNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HandshakeNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't perform the operation on the handshake in its current state. For
 // example, you can't cancel a handshake that was already accepted or accept a
@@ -834,12 +686,6 @@ func (e *InvalidHandshakeTransitionException) ErrorCode() string {
 }
 func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidHandshakeTransitionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidHandshakeTransitionException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The requested operation failed because you provided invalid values for one or
@@ -928,15 +774,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetReason() InvalidInputExceptionReason {
-	return e.Reason
-}
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided policy document doesn't meet the requirements of the specified
 // policy type. For example, the syntax might be incorrect. For details about
@@ -960,12 +797,6 @@ func (e *MalformedPolicyDocumentException) ErrorCode() string {
 	return "MalformedPolicyDocumentException"
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedPolicyDocumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedPolicyDocumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't remove a master account from an organization. If you want the master
 // account to become a member account in another organization, you must first
@@ -989,12 +820,6 @@ func (e *MasterCannotLeaveOrganizationException) ErrorCode() string {
 func (e *MasterCannotLeaveOrganizationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MasterCannotLeaveOrganizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MasterCannotLeaveOrganizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified OU is not empty. Move all accounts to another root or to other
 // OUs, remove all child OUs, and try the operation again.
@@ -1017,12 +842,6 @@ func (e *OrganizationalUnitNotEmptyException) ErrorCode() string {
 func (e *OrganizationalUnitNotEmptyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OrganizationalUnitNotEmptyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationalUnitNotEmptyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find an OU with the OrganizationalUnitId that you specified.
 type OrganizationalUnitNotFoundException struct {
@@ -1044,12 +863,6 @@ func (e *OrganizationalUnitNotFoundException) ErrorCode() string {
 func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OrganizationalUnitNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationalUnitNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The organization isn't empty. To delete an organization, you must first remove
 // all accounts except the master account, delete all OUs, and delete all policies.
@@ -1068,12 +881,6 @@ func (e *OrganizationNotEmptyException) ErrorMessage() string {
 }
 func (e *OrganizationNotEmptyException) ErrorCode() string             { return "OrganizationNotEmptyException" }
 func (e *OrganizationNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OrganizationNotEmptyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationNotEmptyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find a root or OU with the ParentId that you specified.
 type ParentNotFoundException struct {
@@ -1091,12 +898,6 @@ func (e *ParentNotFoundException) ErrorMessage() string {
 }
 func (e *ParentNotFoundException) ErrorCode() string             { return "ParentNotFoundException" }
 func (e *ParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParentNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParentNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Changes to the effective policy are in progress, and its contents can't be
 // returned. Try the operation again later.
@@ -1117,12 +918,6 @@ func (e *PolicyChangesInProgressException) ErrorCode() string {
 	return "PolicyChangesInProgressException"
 }
 func (e *PolicyChangesInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyChangesInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyChangesInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The policy is attached to one or more entities. You must detach it from all
 // roots, OUs, and accounts before performing this operation.
@@ -1141,12 +936,6 @@ func (e *PolicyInUseException) ErrorMessage() string {
 }
 func (e *PolicyInUseException) ErrorCode() string             { return "PolicyInUseException" }
 func (e *PolicyInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The policy isn't attached to the specified target in the specified root.
 type PolicyNotAttachedException struct {
@@ -1164,12 +953,6 @@ func (e *PolicyNotAttachedException) ErrorMessage() string {
 }
 func (e *PolicyNotAttachedException) ErrorCode() string             { return "PolicyNotAttachedException" }
 func (e *PolicyNotAttachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyNotAttachedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyNotAttachedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find a policy with the PolicyId that you specified.
 type PolicyNotFoundException struct {
@@ -1187,12 +970,6 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 }
 func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFoundException" }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified policy type is already enabled in the specified root.
 type PolicyTypeAlreadyEnabledException struct {
@@ -1212,12 +989,6 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorCode() string {
 	return "PolicyTypeAlreadyEnabledException"
 }
 func (e *PolicyTypeAlreadyEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyTypeAlreadyEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyTypeAlreadyEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't use the specified policy type with the feature set currently enabled
 // for this organization. For example, you can enable SCPs only after you enable
@@ -1244,12 +1015,6 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorCode() string {
 func (e *PolicyTypeNotAvailableForOrganizationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *PolicyTypeNotAvailableForOrganizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyTypeNotAvailableForOrganizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified policy type isn't currently enabled in this root. You can't attach
 // policies of the specified type to entities in a root until you enable that type
@@ -1272,12 +1037,6 @@ func (e *PolicyTypeNotEnabledException) ErrorMessage() string {
 }
 func (e *PolicyTypeNotEnabledException) ErrorCode() string             { return "PolicyTypeNotEnabledException" }
 func (e *PolicyTypeNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyTypeNotEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyTypeNotEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find a root with the RootId that you specified.
 type RootNotFoundException struct {
@@ -1295,12 +1054,6 @@ func (e *RootNotFoundException) ErrorMessage() string {
 }
 func (e *RootNotFoundException) ErrorCode() string             { return "RootNotFoundException" }
 func (e *RootNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RootNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RootNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS Organizations can't complete your request because of an internal service
 // error. Try again later.
@@ -1319,12 +1072,6 @@ func (e *ServiceException) ErrorMessage() string {
 }
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find a source root or OU with the ParentId that you specified.
 type SourceParentNotFoundException struct {
@@ -1342,12 +1089,6 @@ func (e *SourceParentNotFoundException) ErrorMessage() string {
 }
 func (e *SourceParentNotFoundException) ErrorCode() string             { return "SourceParentNotFoundException" }
 func (e *SourceParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SourceParentNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SourceParentNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We can't find a root, OU, or account with the TargetId that you specified.
 type TargetNotFoundException struct {
@@ -1365,12 +1106,6 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 }
 func (e *TargetNotFoundException) ErrorCode() string             { return "TargetNotFoundException" }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TargetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TargetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have sent too many requests in too short a period of time. The quota helps
 // protect against denial-of-service attacks. Try again later. For information
@@ -1394,18 +1129,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *TooManyRequestsException) HasType() bool {
-	return e.Type != nil
-}
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This action isn't available in the current AWS Region.
 type UnsupportedAPIEndpointException struct {
@@ -1425,9 +1148,3 @@ func (e *UnsupportedAPIEndpointException) ErrorCode() string {
 	return "UnsupportedAPIEndpointException"
 }
 func (e *UnsupportedAPIEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedAPIEndpointException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedAPIEndpointException) HasMessage() bool {
-	return e.Message != nil
-}

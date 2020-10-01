@@ -56,31 +56,49 @@ func (c *Client) CreateFlowDefinition(ctx context.Context, params *CreateFlowDef
 }
 
 type CreateFlowDefinitionInput struct {
+
 	// An object containing information about the tasks the human reviewers will
 	// perform.
+	//
+	// This member is required.
 	HumanLoopConfig *types.HumanLoopConfig
+
 	// Container for configuring the source of human task requests. Use to specify if
 	// Amazon Rekognition or Amazon Textract is used as an integration source.
 	HumanLoopRequestSource *types.HumanLoopRequestSource
+
 	// The name of your flow definition.
+	//
+	// This member is required.
 	FlowDefinitionName *string
+
 	// An object containing information about the events that trigger a human workflow.
 	HumanLoopActivationConfig *types.HumanLoopActivationConfig
+
 	// An array of key-value pairs that contain metadata to help you categorize and
 	// organize a flow definition. Each tag consists of a key and a value, both of
 	// which you define.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the role needed to call other services on your
 	// behalf. For example,
 	// arn:aws:iam::1234567890:role/service-role/AmazonSageMaker-ExecutionRole-20180111T151298.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// An object containing information about where the human review results will be
 	// uploaded.
+	//
+	// This member is required.
 	OutputConfig *types.FlowDefinitionOutputConfig
 }
 
 type CreateFlowDefinitionOutput struct {
+
 	// The Amazon Resource Name (ARN) of the flow definition you create.
+	//
+	// This member is required.
 	FlowDefinitionArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -64,11 +64,13 @@ func (c *Client) ListAWSServiceAccessForOrganization(ctx context.Context, params
 }
 
 type ListAWSServiceAccessForOrganizationInput struct {
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -82,11 +84,13 @@ type ListAWSServiceAccessForOrganizationInput struct {
 }
 
 type ListAWSServiceAccessForOrganizationOutput struct {
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// A list of the service principals for the services that are enabled to integrate
 	// with your organization. Each principal is a structure that includes the name and
 	// the date that it was enabled for integration with AWS Organizations.

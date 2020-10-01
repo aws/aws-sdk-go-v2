@@ -57,15 +57,25 @@ func (c *Client) DisassociateLink(ctx context.Context, params *DisassociateLinkI
 }
 
 type DisassociateLinkInput struct {
+
 	// The ID of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// The ID of the link.
+	//
+	// This member is required.
 	LinkId *string
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
 }
 
 type DisassociateLinkOutput struct {
+
 	// Information about the link association.
 	LinkAssociation *types.LinkAssociation
 

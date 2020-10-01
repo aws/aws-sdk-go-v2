@@ -55,16 +55,28 @@ func (c *Client) AssociateDeviceWithPlacement(ctx context.Context, params *Assoc
 }
 
 type AssociateDeviceWithPlacementInput struct {
+
 	// The name of the project containing the placement in which to associate the
 	// device.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The name of the placement in which to associate the device.
+	//
+	// This member is required.
 	PlacementName *string
+
 	// The ID of the physical device to be associated with the given placement in the
 	// project. Note that a mandatory 4 character prefix is required for all deviceId
 	// values.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// The device template name to associate with the device ID.
+	//
+	// This member is required.
 	DeviceTemplateName *string
 }
 

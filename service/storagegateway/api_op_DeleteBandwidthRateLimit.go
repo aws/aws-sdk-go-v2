@@ -62,18 +62,25 @@ func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBan
 // A JSON object containing the following fields:  <ul> <li> <p>
 // <a>DeleteBandwidthRateLimitInput$BandwidthType</a> </p> </li> </ul>
 type DeleteBandwidthRateLimitInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
+
 	// One of the BandwidthType values that indicates the gateway bandwidth rate limit
 	// to delete.  <p>Valid Values: <code>Upload</code> | <code>Download</code> |
 	// <code>All</code> </p>
+	//
+	// This member is required.
 	BandwidthType *string
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // bandwidth rate information was deleted.
 type DeleteBandwidthRateLimitOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

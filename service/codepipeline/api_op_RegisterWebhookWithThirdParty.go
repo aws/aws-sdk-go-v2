@@ -55,6 +55,7 @@ func (c *Client) RegisterWebhookWithThirdParty(ctx context.Context, params *Regi
 }
 
 type RegisterWebhookWithThirdPartyInput struct {
+
 	// The name of an existing webhook created with PutWebhook to register with a
 	// supported third party.
 	WebhookName *string

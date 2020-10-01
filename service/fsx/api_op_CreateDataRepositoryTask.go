@@ -69,8 +69,12 @@ func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDat
 }
 
 type CreateDataRepositoryTaskInput struct {
+
 	// The globally unique ID of the file system, assigned by Amazon FSx.
+	//
+	// This member is required.
 	FileSystemId *string
+
 	// (Optional) The path or paths on the Amazon FSx file system to use when the data
 	// repository task is processed. The default path is the file system root
 	// directory. The paths you provide need to be relative to the mount point of the
@@ -78,23 +82,32 @@ type CreateDataRepositoryTaskInput struct {
 	// file on the file system you want to export, then the path to provide is path1.
 	// If a path that you provide isn't valid, the task fails.
 	Paths []*string
+
 	// Specifies the type of data repository task to create.
+	//
+	// This member is required.
 	Type types.DataRepositoryTaskType
+
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []*types.Tag
+
 	// (Optional) An idempotency token for resource creation, in a string of up to 64
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
+
 	// Defines whether or not Amazon FSx provides a CompletionReport once the task has
 	// completed. A CompletionReport provides a detailed report on the files that
 	// Amazon FSx processed that meet the criteria specified by the Scope parameter.
 	// For more information, see Working with Task Completion Reports
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html).
+	//
+	// This member is required.
 	Report *types.CompletionReport
 }
 
 type CreateDataRepositoryTaskOutput struct {
+
 	// The description of the data repository task that you just created.
 	DataRepositoryTask *types.DataRepositoryTask
 

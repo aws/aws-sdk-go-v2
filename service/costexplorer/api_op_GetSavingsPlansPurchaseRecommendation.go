@@ -57,13 +57,18 @@ func (c *Client) GetSavingsPlansPurchaseRecommendation(ctx context.Context, para
 }
 
 type GetSavingsPlansPurchaseRecommendationInput struct {
+
 	// The savings plan recommendation term used to generate these recommendations.
+	//
+	// This member is required.
 	TermInYears types.TermInYears
+
 	// The account scope that you want your recommendations for. Amazon Web Services
 	// calculates recommendations including the payer account and linked accounts if
 	// the value is set to PAYER. If the value is LINKED, recommendations are
 	// calculated for individual linked accounts only.
 	AccountScope types.AccountScope
+
 	// You can filter your recommendations by Account ID with the LINKED_ACCOUNT
 	// dimension. To filter your recommendations by Account ID, specify Key as
 	// LINKED_ACCOUNT and Value as the comma-separated Acount ID(s) for which you want
@@ -74,28 +79,42 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	// comma-separated Account IDs for which you want to see Savings Plans Purchase
 	// Recommendations. AND and OR operators are not supported.
 	Filter *types.Expression
+
 	// The payment option used to generate these recommendations.
+	//
+	// This member is required.
 	PaymentOption types.PaymentOption
+
 	// The number of recommendations that you want returned in a single response
 	// object.
 	PageSize *int32
+
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
 	// page size.
 	NextPageToken *string
+
 	// The Savings Plans recommendation type requested.
+	//
+	// This member is required.
 	SavingsPlansType types.SupportedSavingsPlansType
+
 	// The lookback period used to generate the recommendation.
+	//
+	// This member is required.
 	LookbackPeriodInDays types.LookbackPeriodInDays
 }
 
 type GetSavingsPlansPurchaseRecommendationOutput struct {
+
 	// Contains your request parameters, Savings Plan Recommendations Summary, and
 	// Details.
 	SavingsPlansPurchaseRecommendation *types.SavingsPlansPurchaseRecommendation
+
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
 	// Information regarding this specific recommendation set.
 	Metadata *types.SavingsPlansPurchaseRecommendationMetadata
 

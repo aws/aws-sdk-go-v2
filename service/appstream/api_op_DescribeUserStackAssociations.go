@@ -62,25 +62,32 @@ func (c *Client) DescribeUserStackAssociations(ctx context.Context, params *Desc
 }
 
 type DescribeUserStackAssociationsInput struct {
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
 	// The email address of the user who is associated with the stack.  <note>
 	// <p>Users' email addresses are case-sensitive.</p> </note>
 	UserName *string
+
 	// The maximum size of each page of results.
 	MaxResults *int32
+
 	// The name of the stack that is associated with the user.
 	StackName *string
+
 	// The authentication type for the user who is associated with the stack. You must
 	// specify USERPOOL.
 	AuthenticationType types.AuthenticationType
 }
 
 type DescribeUserStackAssociationsOutput struct {
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
+
 	// The UserStackAssociation objects.
 	UserStackAssociations []*types.UserStackAssociation
 

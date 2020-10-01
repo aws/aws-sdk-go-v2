@@ -78,10 +78,17 @@ func (c *Client) RequestCancelWorkflowExecution(ctx context.Context, params *Req
 }
 
 type RequestCancelWorkflowExecutionInput struct {
+
 	// The name of the domain containing the workflow execution to cancel.
+	//
+	// This member is required.
 	Domain *string
+
 	// The workflowId of the workflow execution to cancel.
+	//
+	// This member is required.
 	WorkflowId *string
+
 	// The runId of the workflow execution to cancel.
 	RunId *string
 }

@@ -57,10 +57,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the index, FAQ, or data source to tag.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// A list of tag keys to add to the index, FAQ, or data source. If a tag already
 	// exists, the existing value is replaced with the new value.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

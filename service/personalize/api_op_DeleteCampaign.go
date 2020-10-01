@@ -59,7 +59,10 @@ func (c *Client) DeleteCampaign(ctx context.Context, params *DeleteCampaignInput
 }
 
 type DeleteCampaignInput struct {
+
 	// The Amazon Resource Name (ARN) of the campaign to delete.
+	//
+	// This member is required.
 	CampaignArn *string
 }
 

@@ -54,6 +54,7 @@ func (c *Client) StopAppReplication(ctx context.Context, params *StopAppReplicat
 }
 
 type StopAppReplicationInput struct {
+
 	// ID of the application to stop replicating.
 	AppId *string
 }

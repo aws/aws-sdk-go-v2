@@ -81,35 +81,46 @@ func (c *Client) GetFaceSearch(ctx context.Context, params *GetFaceSearchInput, 
 }
 
 type GetFaceSearchInput struct {
+
 	// Sort to use for grouping faces in the response. Use TIMESTAMP to group faces by
 	// the time that they are recognized. Use INDEX to sort by recognized faces.
 	SortBy types.FaceSearchSortBy
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
 	// results is returned. The default value is 1000.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there is more search results to
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of search results.
 	NextToken *string
+
 	// The job identifer for the search request. You get the job identifier from an
 	// initial call to StartFaceSearch.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type GetFaceSearchOutput struct {
+
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
 	// Information about a video that Amazon Rekognition analyzed. Videometadata is
 	// returned in every page of paginated responses from a Amazon Rekognition Video
 	// operation.
 	VideoMetadata *types.VideoMetadata
+
 	// The current status of the face search job.
 	JobStatus types.VideoJobStatus
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of search
 	// results.
 	NextToken *string
+
 	// An array of persons, PersonMatch (), in the video whose face(s) match the
 	// face(s) in an Amazon Rekognition collection. It also includes time information
 	// for when persons are matched in the video. You specify the input collection in

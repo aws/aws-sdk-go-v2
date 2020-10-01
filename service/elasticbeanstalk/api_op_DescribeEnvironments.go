@@ -57,31 +57,39 @@ func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvir
 
 // Request to describe one or more environments.
 type DescribeEnvironmentsInput struct {
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified names.
 	EnvironmentNames []*string
+
 	// Indicates whether to include deleted environments: true: Environments that have
 	// been deleted after IncludedDeletedBackTo are displayed. false: Do not include
 	// deleted environments.
 	IncludeDeleted *bool
+
 	// For a paginated request. Specify a maximum number of environments to include in
 	// each response. If no MaxRecords is specified, all available environments are
 	// retrieved in a single response.
 	MaxRecords *int32
+
 	// If specified when IncludeDeleted is set to true, then environments deleted after
 	// this date are displayed.
 	IncludedDeletedBackTo *time.Time
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified IDs.
 	EnvironmentIds []*string
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that are associated with this application.
 	ApplicationName *string
+
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
 	// the ones specified in the initial request. If no NextToken is specified, the
 	// first page is retrieved.
 	NextToken *string
+
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that are associated with this application version.
 	VersionLabel *string
@@ -89,8 +97,10 @@ type DescribeEnvironmentsInput struct {
 
 // Result message containing a list of environment descriptions.
 type DescribeEnvironmentsOutput struct {
+
 	// Returns an EnvironmentDescription () list.
 	Environments []*types.EnvironmentDescription
+
 	// In a paginated request, the token that you can pass in a subsequent request to
 	// get the next response page.
 	NextToken *string

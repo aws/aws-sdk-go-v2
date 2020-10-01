@@ -55,15 +55,23 @@ func (c *Client) DeregisterRobot(ctx context.Context, params *DeregisterRobotInp
 }
 
 type DeregisterRobotInput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// This member is required.
 	Fleet *string
+
 	// The Amazon Resource Name (ARN) of the robot.
+	//
+	// This member is required.
 	Robot *string
 }
 
 type DeregisterRobotOutput struct {
+
 	// The Amazon Resource Name (ARN) of the robot.
 	Robot *string
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Fleet *string
 

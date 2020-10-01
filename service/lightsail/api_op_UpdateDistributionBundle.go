@@ -63,10 +63,12 @@ func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDis
 }
 
 type UpdateDistributionBundleInput struct {
+
 	// The bundle ID of the new bundle to apply to your distribution. Use the
 	// GetDistributionBundles action to get a list of distribution bundle IDs that you
 	// can specify.
 	BundleId *string
+
 	// The name of the distribution for which to update the bundle.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p>
@@ -74,6 +76,7 @@ type UpdateDistributionBundleInput struct {
 }
 
 type UpdateDistributionBundleOutput struct {
+
 	// Describes the API operation.
 	Operation *types.Operation
 

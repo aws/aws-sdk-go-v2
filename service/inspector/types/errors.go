@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have required permissions to access the requested resource.
@@ -27,21 +26,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *AccessDeniedException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
-func (e *AccessDeniedException) GetErrorCode_() AccessDeniedErrorCode {
-	return e.ErrorCode_
-}
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You started an assessment run, but one of the instances is already participating
 // in another assessment run.
@@ -68,30 +52,6 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorCode() string {
 func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AgentsAlreadyRunningAssessmentException) GetAgents() []*AgentAlreadyRunningAssessment {
-	return e.Agents
-}
-func (e *AgentsAlreadyRunningAssessmentException) HasAgents() bool {
-	return e.Agents != nil
-}
-func (e *AgentsAlreadyRunningAssessmentException) GetAgentsTruncated() bool {
-	return ptr.ToBool(e.AgentsTruncated)
-}
-func (e *AgentsAlreadyRunningAssessmentException) HasAgentsTruncated() bool {
-	return e.AgentsTruncated != nil
-}
-func (e *AgentsAlreadyRunningAssessmentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AgentsAlreadyRunningAssessmentException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *AgentsAlreadyRunningAssessmentException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *AgentsAlreadyRunningAssessmentException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
 
 // You cannot perform a specified action if an assessment run is currently in
 // progress.
@@ -116,30 +76,6 @@ func (e *AssessmentRunInProgressException) ErrorCode() string {
 	return "AssessmentRunInProgressException"
 }
 func (e *AssessmentRunInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AssessmentRunInProgressException) GetAssessmentRunArns() []*string {
-	return e.AssessmentRunArns
-}
-func (e *AssessmentRunInProgressException) HasAssessmentRunArns() bool {
-	return e.AssessmentRunArns != nil
-}
-func (e *AssessmentRunInProgressException) GetAssessmentRunArnsTruncated() bool {
-	return ptr.ToBool(e.AssessmentRunArnsTruncated)
-}
-func (e *AssessmentRunInProgressException) HasAssessmentRunArnsTruncated() bool {
-	return e.AssessmentRunArnsTruncated != nil
-}
-func (e *AssessmentRunInProgressException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *AssessmentRunInProgressException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
-func (e *AssessmentRunInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AssessmentRunInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Internal server error.
 type InternalException struct {
@@ -159,18 +95,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *InternalException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
 
 // Amazon Inspector cannot assume the cross-account role that it needs to list your
 // EC2 instances during the assessment run.
@@ -194,21 +118,6 @@ func (e *InvalidCrossAccountRoleException) ErrorCode() string {
 	return "InvalidCrossAccountRoleException"
 }
 func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCrossAccountRoleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCrossAccountRoleException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidCrossAccountRoleException) GetErrorCode_() InvalidCrossAccountRoleErrorCode {
-	return e.ErrorCode_
-}
-func (e *InvalidCrossAccountRoleException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *InvalidCrossAccountRoleException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
 
 // The request was rejected because an invalid or out-of-range value was supplied
 // for an input parameter.
@@ -230,21 +139,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *InvalidInputException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidInputException) GetErrorCode_() InvalidInputErrorCode {
-	return e.ErrorCode_
-}
 
 // The request was rejected because it attempted to create resources beyond the
 // current AWS account limits. The error code describes the limit exceeded.
@@ -266,21 +160,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetErrorCode_() LimitExceededErrorCode {
-	return e.ErrorCode_
-}
-func (e *LimitExceededException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *LimitExceededException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
 
 // The request was rejected because it referenced an entity that does not exist.
 // The error code describes the entity.
@@ -302,21 +181,6 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 }
 func (e *NoSuchEntityException) ErrorCode() string             { return "NoSuchEntityException" }
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchEntityException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *NoSuchEntityException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
-func (e *NoSuchEntityException) GetErrorCode_() NoSuchEntityErrorCode {
-	return e.ErrorCode_
-}
-func (e *NoSuchEntityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchEntityException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is rejected. The specified assessment template is currently
 // generating an exclusions preview.
@@ -338,12 +202,6 @@ func (e *PreviewGenerationInProgressException) ErrorCode() string {
 }
 func (e *PreviewGenerationInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *PreviewGenerationInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PreviewGenerationInProgressException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The serice is temporary unavailable.
@@ -368,18 +226,6 @@ func (e *ServiceTemporarilyUnavailableException) ErrorCode() string {
 func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
-func (e *ServiceTemporarilyUnavailableException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *ServiceTemporarilyUnavailableException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
-func (e *ServiceTemporarilyUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceTemporarilyUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Used by the GetAssessmentReport () API. The request was rejected because you
 // tried to generate a report for an assessment run that existed before reporting
@@ -403,15 +249,3 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 }
 func (e *UnsupportedFeatureException) ErrorCode() string             { return "UnsupportedFeatureException" }
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedFeatureException) GetCanRetry() bool {
-	return ptr.ToBool(e.CanRetry)
-}
-func (e *UnsupportedFeatureException) HasCanRetry() bool {
-	return e.CanRetry != nil
-}
-func (e *UnsupportedFeatureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedFeatureException) HasMessage() bool {
-	return e.Message != nil
-}

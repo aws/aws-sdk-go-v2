@@ -55,7 +55,10 @@ func (c *Client) DeletePackagingGroup(ctx context.Context, params *DeletePackagi
 }
 
 type DeletePackagingGroupInput struct {
+
 	// The ID of the MediaPackage VOD PackagingGroup resource to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

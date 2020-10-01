@@ -56,16 +56,22 @@ func (c *Client) GetProtocolsList(ctx context.Context, params *GetProtocolsListI
 }
 
 type GetProtocolsListInput struct {
+
 	// The ID of the AWS Firewall Manager protocols list that you want the details for.
+	//
+	// This member is required.
 	ListId *string
+
 	// Specifies whether the list to retrieve is a default list owned by AWS Firewall
 	// Manager.
 	DefaultList *bool
 }
 
 type GetProtocolsListOutput struct {
+
 	// Information about the specified AWS Firewall Manager protocols list.
 	ProtocolsList *types.ProtocolsListData
+
 	// The Amazon Resource Name (ARN) of the specified protocols list.
 	ProtocolsListArn *string
 

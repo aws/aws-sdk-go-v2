@@ -55,7 +55,10 @@ func (c *Client) DeleteRegistry(ctx context.Context, params *DeleteRegistryInput
 }
 
 type DeleteRegistryInput struct {
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
 }
 

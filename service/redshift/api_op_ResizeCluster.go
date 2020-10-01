@@ -80,22 +80,30 @@ func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, 
 }
 
 type ResizeClusterInput struct {
+
 	// The new node type for the nodes you are adding. If not specified, the cluster's
 	// current node type is used.
 	NodeType *string
+
 	// A boolean value indicating whether the resize operation is using the classic
 	// resize process. If you don't provide this parameter or set the value to false,
 	// the resize type is elastic.
 	Classic *bool
+
 	// The new number of nodes for the cluster.
 	NumberOfNodes *int32
+
 	// The unique identifier for the cluster to resize.
+	//
+	// This member is required.
 	ClusterIdentifier *string
+
 	// The new cluster type for the specified cluster.
 	ClusterType *string
 }
 
 type ResizeClusterOutput struct {
+
 	// Describes a cluster.
 	Cluster *types.Cluster
 

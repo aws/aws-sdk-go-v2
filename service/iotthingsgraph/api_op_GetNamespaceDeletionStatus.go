@@ -58,14 +58,19 @@ type GetNamespaceDeletionStatusInput struct {
 }
 
 type GetNamespaceDeletionStatusOutput struct {
+
 	// The name of the namespace that is being deleted.
 	NamespaceName *string
+
 	// An error code returned by the namespace deletion task.
 	ErrorCode types.NamespaceDeletionStatusErrorCodes
+
 	// The status of the deletion request.
 	Status types.NamespaceDeletionStatus
+
 	// The ARN of the namespace that is being deleted.
 	NamespaceArn *string
+
 	// An error code returned by the namespace deletion task.
 	ErrorMessage *string
 

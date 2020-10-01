@@ -55,10 +55,13 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 }
 
 type CreateChannelInput struct {
+
 	// Channel name.
 	Name *string
+
 	// See Channel$tags ().
 	Tags map[string]*string
+
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
 	// immediately. Valid values:
@@ -75,13 +78,16 @@ type CreateChannelInput struct {
 	//
 	// Default: STANDARD.
 	Type types.ChannelType
+
 	// Channel latency mode. Default: LOW.
 	LatencyMode types.ChannelLatencyMode
 }
 
 type CreateChannelOutput struct {
+
 	// Object specifying a channel.
 	Channel *types.Channel
+
 	// Object specifying a stream key.
 	StreamKey *types.StreamKey
 

@@ -59,26 +59,37 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 
 // The input for the CreatePolicy operation.
 type CreatePolicyInput struct {
+
 	// Metadata which can be used to manage the policy. For URI Request parameters use
 	// format: ...key1=value1&key2=value2... For the CLI command-line parameter use
 	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
 	// format: "tags": "key1=value1&key2=value2..."
 	Tags []*types.Tag
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The JSON document that describes the policy. policyDocument must have a minimum
 	// length of 1, with a maximum length of 2048, excluding whitespace.
+	//
+	// This member is required.
 	PolicyDocument *string
 }
 
 // The output from the CreatePolicy operation.
 type CreatePolicyOutput struct {
+
 	// The JSON document that describes the policy.
 	PolicyDocument *string
+
 	// The policy name.
 	PolicyName *string
+
 	// The policy version ID.
 	PolicyVersionId *string
+
 	// The policy ARN.
 	PolicyArn *string
 

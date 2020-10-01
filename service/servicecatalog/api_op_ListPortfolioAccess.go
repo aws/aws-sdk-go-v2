@@ -58,10 +58,15 @@ func (c *Client) ListPortfolioAccess(ctx context.Context, params *ListPortfolioA
 }
 
 type ListPortfolioAccessInput struct {
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -71,18 +76,22 @@ type ListPortfolioAccessInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The ID of an organization node the portfolio is shared with. All children of
 	// this node with an inherited portfolio share will be returned.
 	OrganizationParentId *string
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
 }
 
 type ListPortfolioAccessOutput struct {
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
 	// Information about the AWS accounts with access to the portfolio.
 	AccountIds []*string
 

@@ -55,8 +55,12 @@ func (c *Client) UpdateSubscriptionDefinition(ctx context.Context, params *Updat
 }
 
 type UpdateSubscriptionDefinitionInput struct {
+
 	// The ID of the subscription definition.
+	//
+	// This member is required.
 	SubscriptionDefinitionId *string
+
 	// The name of the definition.
 	Name *string
 }

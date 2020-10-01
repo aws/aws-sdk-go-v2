@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The AWS user account does not have permission to perform the action. Check the
@@ -25,12 +24,6 @@ func (e *AuthorizationErrorException) ErrorMessage() string {
 }
 func (e *AuthorizationErrorException) ErrorCode() string             { return "AuthorizationErrorException" }
 func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type ConflictErrorException struct {
@@ -48,12 +41,6 @@ func (e *ConflictErrorException) ErrorMessage() string {
 }
 func (e *ConflictErrorException) ErrorCode() string             { return "ConflictErrorException" }
 func (e *ConflictErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The home region is not set. Set the home region to continue.
 type HomeRegionNotSetException struct {
@@ -71,12 +58,6 @@ func (e *HomeRegionNotSetException) ErrorMessage() string {
 }
 func (e *HomeRegionNotSetException) ErrorCode() string             { return "HomeRegionNotSetException" }
 func (e *HomeRegionNotSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HomeRegionNotSetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HomeRegionNotSetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameters are not valid. Verify the parameters and try again.
 type InvalidParameterException struct {
@@ -94,12 +75,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of one or more parameters are either invalid or out of range. Verify
 // the parameter values and try again.
@@ -118,12 +93,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation is not permitted.
 type OperationNotPermittedException struct {
@@ -141,12 +110,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This issue occurs when the same clientRequestToken is used with the
 // StartImportTask action, but with different parameters. For example, you use the
@@ -168,12 +131,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified configuration ID was not located. Verify the configuration ID and
 // try again.
@@ -192,12 +149,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The server experienced an internal error. Try again.
 type ServerInternalErrorException struct {
@@ -215,9 +166,3 @@ func (e *ServerInternalErrorException) ErrorMessage() string {
 }
 func (e *ServerInternalErrorException) ErrorCode() string             { return "ServerInternalErrorException" }
 func (e *ServerInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServerInternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerInternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}

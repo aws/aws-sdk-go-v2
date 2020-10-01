@@ -58,12 +58,15 @@ type GetInvitationConfigurationInput struct {
 }
 
 type GetInvitationConfigurationOutput struct {
+
 	// The email ID of the organization or individual contact that the enrolled user
 	// can use.
 	ContactEmail *string
+
 	// The list of private skill IDs that you want to recommend to the user to enable
 	// in the invitation.
 	PrivateSkillIds []*string
+
 	// The name of the organization sending the enrollment invite to a user.
 	OrganizationName *string
 

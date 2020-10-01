@@ -56,11 +56,15 @@ func (c *Client) DescribeProblemObservations(ctx context.Context, params *Descri
 }
 
 type DescribeProblemObservationsInput struct {
+
 	// The ID of the problem.
+	//
+	// This member is required.
 	ProblemId *string
 }
 
 type DescribeProblemObservationsOutput struct {
+
 	// Observations related to the problem.
 	RelatedObservations *types.RelatedObservations
 

@@ -58,11 +58,15 @@ func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput
 }
 
 type StartDBClusterInput struct {
+
 	// The identifier of the cluster to restart. Example: docdb-2019-05-28-15-24-52
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type StartDBClusterOutput struct {
+
 	// Detailed information about a cluster.
 	DBCluster *types.DBCluster
 

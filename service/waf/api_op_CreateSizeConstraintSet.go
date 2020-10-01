@@ -87,16 +87,24 @@ func (c *Client) CreateSizeConstraintSet(ctx context.Context, params *CreateSize
 }
 
 type CreateSizeConstraintSetInput struct {
+
 	// A friendly name or description of the SizeConstraintSet (). You can't change
 	// Name after you create a SizeConstraintSet.
+	//
+	// This member is required.
 	Name *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type CreateSizeConstraintSetOutput struct {
+
 	// A SizeConstraintSet () that contains no SizeConstraint objects.
 	SizeConstraintSet *types.SizeConstraintSet
+
 	// The ChangeToken that you used to submit the CreateSizeConstraintSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().

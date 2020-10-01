@@ -59,14 +59,19 @@ func (c *Client) BatchGetDevEndpoints(ctx context.Context, params *BatchGetDevEn
 }
 
 type BatchGetDevEndpointsInput struct {
+
 	// The list of DevEndpoint names, which might be the names returned from the
 	// ListDevEndpoint operation.
+	//
+	// This member is required.
 	DevEndpointNames []*string
 }
 
 type BatchGetDevEndpointsOutput struct {
+
 	// A list of DevEndpoint definitions.
 	DevEndpoints []*types.DevEndpoint
+
 	// A list of DevEndpoints not found.
 	DevEndpointsNotFound []*string
 

@@ -56,19 +56,24 @@ func (c *Client) ModifyDBProxy(ctx context.Context, params *ModifyDBProxyInput, 
 }
 
 type ModifyDBProxyInput struct {
+
 	// Whether Transport Layer Security (TLS) encryption is required for connections to
 	// the proxy. By enabling this setting, you can enforce encrypted TLS connections
 	// to the proxy, even if the associated database doesn't use TLS.
 	RequireTLS *bool
+
 	// The new list of security groups for the DBProxy.
 	SecurityGroups []*string
+
 	// The new identifier for the DBProxy. An identifier must begin with a letter and
 	// must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen
 	// or contain two consecutive hyphens.
 	NewDBProxyName *string
+
 	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
 	// secrets in AWS Secrets Manager.
 	RoleArn *string
+
 	// Whether the proxy includes detailed information about SQL statements in its
 	// logs. This information helps you to debug issues involving SQL behavior or the
 	// performance and scalability of the proxy connections. The debug information
@@ -77,17 +82,23 @@ type ModifyDBProxyInput struct {
 	// security measures in place to safeguard any sensitive information that appears
 	// in the logs.
 	DebugLogging *bool
+
 	// The number of seconds that a connection to the proxy can be inactive before the
 	// proxy disconnects it. You can set this value higher or lower than the connection
 	// timeout limit for the associated database.
 	IdleClientTimeout *int32
+
 	// The identifier for the DBProxy to modify.
+	//
+	// This member is required.
 	DBProxyName *string
+
 	// The new authentication settings for the DBProxy.
 	Auth []*types.UserAuthConfig
 }
 
 type ModifyDBProxyOutput struct {
+
 	// The DBProxy object representing the new settings for the proxy.
 	DBProxy *types.DBProxy
 

@@ -56,10 +56,16 @@ func (c *Client) StartResourceScan(ctx context.Context, params *StartResourceSca
 
 // Starts a scan of the policies applied to the specified resource.
 type StartResourceScanInput struct {
+
 	// The ARN of the analyzer to use to scan the policies applied to the specified
 	// resource.
+	//
+	// This member is required.
 	AnalyzerArn *string
+
 	// The ARN of the resource to scan.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

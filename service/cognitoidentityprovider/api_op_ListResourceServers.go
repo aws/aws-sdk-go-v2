@@ -56,17 +56,26 @@ func (c *Client) ListResourceServers(ctx context.Context, params *ListResourceSe
 }
 
 type ListResourceServersInput struct {
+
 	// A pagination token.
 	NextToken *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The maximum number of resource servers to return.
 	MaxResults *int32
 }
 
 type ListResourceServersOutput struct {
+
 	// The resource servers.
+	//
+	// This member is required.
 	ResourceServers []*types.ResourceServerType
+
 	// A pagination token.
 	NextToken *string
 

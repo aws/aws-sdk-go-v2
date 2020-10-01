@@ -59,14 +59,24 @@ func (c *Client) CreateLoadBalancerPolicy(ctx context.Context, params *CreateLoa
 
 // Contains the parameters for CreateLoadBalancerPolicy.
 type CreateLoadBalancerPolicyInput struct {
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The name of the load balancer policy to be created. This name must be unique
 	// within the set of policies for this load balancer.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The name of the base policy type. To get the list of policy types, use
 	// DescribeLoadBalancerPolicyTypes ().
+	//
+	// This member is required.
 	PolicyTypeName *string
+
 	// The policy attributes.
 	PolicyAttributes []*types.PolicyAttribute
 }

@@ -56,17 +56,24 @@ func (c *Client) GetJobRuns(ctx context.Context, params *GetJobRunsInput, optFns
 }
 
 type GetJobRunsInput struct {
+
 	// The name of the job definition for which to retrieve all job runs.
+	//
+	// This member is required.
 	JobName *string
+
 	// The maximum size of the response.
 	MaxResults *int32
+
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 }
 
 type GetJobRunsOutput struct {
+
 	// A continuation token, if not all requested job runs have been returned.
 	NextToken *string
+
 	// A list of job-run metadata objects.
 	JobRuns []*types.JobRun
 

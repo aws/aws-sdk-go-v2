@@ -57,14 +57,19 @@ func (c *Client) RebootReplicationInstance(ctx context.Context, params *RebootRe
 }
 
 type RebootReplicationInstanceInput struct {
+
 	// The Amazon Resource Name (ARN) of the replication instance.
+	//
+	// This member is required.
 	ReplicationInstanceArn *string
+
 	// If this parameter is true, the reboot is conducted through a Multi-AZ failover.
 	// (If the instance isn't configured for Multi-AZ, then you can't specify true.)
 	ForceFailover *bool
 }
 
 type RebootReplicationInstanceOutput struct {
+
 	// The replication instance that is being rebooted.
 	ReplicationInstance *types.ReplicationInstance
 

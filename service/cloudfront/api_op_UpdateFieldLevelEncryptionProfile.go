@@ -56,18 +56,27 @@ func (c *Client) UpdateFieldLevelEncryptionProfile(ctx context.Context, params *
 }
 
 type UpdateFieldLevelEncryptionProfileInput struct {
+
 	// The value of the ETag header that you received when retrieving the profile
 	// identity to update. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
 	// Request to update a field-level encryption profile.
+	//
+	// This member is required.
 	FieldLevelEncryptionProfileConfig *types.FieldLevelEncryptionProfileConfig
+
 	// The ID of the field-level encryption profile request.
+	//
+	// This member is required.
 	Id *string
 }
 
 type UpdateFieldLevelEncryptionProfileOutput struct {
+
 	// The result of the field-level encryption profile request.
 	ETag *string
+
 	// Return the results of updating the profile.
 	FieldLevelEncryptionProfile *types.FieldLevelEncryptionProfile
 

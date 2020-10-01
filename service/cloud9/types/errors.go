@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The target request is invalid.
@@ -27,24 +26,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *BadRequestException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *BadRequestException) HasClassName() bool {
-	return e.ClassName != nil
-}
-func (e *BadRequestException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *BadRequestException) HasCode() bool {
-	return e.Code != nil
-}
 
 // A conflict occurred.
 type ConflictException struct {
@@ -65,24 +46,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ConflictException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *ConflictException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ConflictException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *ConflictException) HasClassName() bool {
-	return e.ClassName != nil
-}
 
 // An access permissions issue occurred.
 type ForbiddenException struct {
@@ -103,24 +66,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *ForbiddenException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ForbiddenException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *ForbiddenException) HasClassName() bool {
-	return e.ClassName != nil
-}
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal server error occurred.
 type InternalServerErrorException struct {
@@ -141,24 +86,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalServerErrorException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *InternalServerErrorException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *InternalServerErrorException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *InternalServerErrorException) HasClassName() bool {
-	return e.ClassName != nil
-}
 
 // A service limit was exceeded.
 type LimitExceededException struct {
@@ -179,24 +106,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *LimitExceededException) HasClassName() bool {
-	return e.ClassName != nil
-}
-func (e *LimitExceededException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *LimitExceededException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The target resource cannot be found.
 type NotFoundException struct {
@@ -217,24 +126,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *NotFoundException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *NotFoundException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *NotFoundException) HasClassName() bool {
-	return e.ClassName != nil
-}
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Too many service requests were made over the given time period.
 type TooManyRequestsException struct {
@@ -255,21 +146,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyRequestsException) GetClassName() string {
-	return ptr.ToString(e.ClassName)
-}
-func (e *TooManyRequestsException) HasClassName() bool {
-	return e.ClassName != nil
-}
-func (e *TooManyRequestsException) GetCode() int32 {
-	return ptr.ToInt32(e.Code)
-}
-func (e *TooManyRequestsException) HasCode() bool {
-	return e.Code != nil
-}

@@ -68,6 +68,7 @@ func (c *Client) GetContextKeysForPrincipalPolicy(ctx context.Context, params *G
 }
 
 type GetContextKeysForPrincipalPolicyInput struct {
+
 	// The ARN of a user, group, or role whose policies contain the context keys that
 	// you want listed. If you specify a user, the list includes context keys that are
 	// found in all policies that are attached to the user. The list also includes all
@@ -79,7 +80,10 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	PolicySourceArn *string
+
 	// An optional list of additional policies for which you want the list of context
 	// keys that are referenced. The regex pattern (http://wikipedia.org/wiki/regex)
 	// used to validate this parameter is a string of characters consisting of the
@@ -100,6 +104,7 @@ type GetContextKeysForPrincipalPolicyInput struct {
 // Contains the response to a successful GetContextKeysForPrincipalPolicy () or
 // GetContextKeysForCustomPolicy () request.
 type GetContextKeysForPrincipalPolicyOutput struct {
+
 	// The list of context keys that are referenced in the input policies.
 	ContextKeyNames []*string
 

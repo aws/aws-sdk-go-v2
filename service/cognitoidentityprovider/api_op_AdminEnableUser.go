@@ -57,9 +57,15 @@ func (c *Client) AdminEnableUser(ctx context.Context, params *AdminEnableUserInp
 
 // Represents the request that enables the user as an administrator.
 type AdminEnableUserInput struct {
+
 	// The user name of the user you wish to enable.
+	//
+	// This member is required.
 	Username *string
+
 	// The user pool ID for the user pool where you want to enable the user.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

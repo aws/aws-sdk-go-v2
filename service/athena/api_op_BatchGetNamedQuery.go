@@ -64,13 +64,18 @@ func (c *Client) BatchGetNamedQuery(ctx context.Context, params *BatchGetNamedQu
 }
 
 type BatchGetNamedQueryInput struct {
+
 	// An array of query IDs.
+	//
+	// This member is required.
 	NamedQueryIds []*string
 }
 
 type BatchGetNamedQueryOutput struct {
+
 	// Information about the named query IDs submitted.
 	NamedQueries []*types.NamedQuery
+
 	// Information about provided query IDs.
 	UnprocessedNamedQueryIds []*types.UnprocessedNamedQueryId
 

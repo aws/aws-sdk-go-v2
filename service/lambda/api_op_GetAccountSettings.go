@@ -60,8 +60,10 @@ type GetAccountSettingsInput struct {
 }
 
 type GetAccountSettingsOutput struct {
+
 	// Limits that are related to concurrency and code storage.
 	AccountLimit *types.AccountLimit
+
 	// The number of functions and amount of storage in use.
 	AccountUsage *types.AccountUsage
 

@@ -64,20 +64,28 @@ func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns
 
 // The structure representing the getProfileRequest.
 type GetProfileInput struct {
+
 	// The format of the profile to return. You can choose application/json or the
 	// default application/x-amzn-ion.
 	Accept *string
+
 	// You must specify exactly two of the following parameters: startTime, period, and
 	// endTime.
 	EndTime *time.Time
+
 	// The maximum depth of the graph.
 	MaxDepth *int32
+
 	// The period of the profile to get. The time range must be in the past and not
 	// longer than one week. You must specify exactly two of the following parameters:
 	// startTime, period, and endTime.
 	Period *string
+
 	// The name of the profiling group to get.
+	//
+	// This member is required.
 	ProfilingGroupName *string
+
 	// The start time of the profile to get. You must specify exactly two of the
 	// following parameters: startTime, period, and endTime.
 	StartTime *time.Time
@@ -85,12 +93,19 @@ type GetProfileInput struct {
 
 // The structure representing the getProfileResponse.
 type GetProfileOutput struct {
+
 	// The content encoding of the profile.
 	ContentEncoding *string
+
 	// The content type of the profile in the payload. It is either application/json or
 	// the default application/x-amzn-ion.
+	//
+	// This member is required.
 	ContentType *string
+
 	// Information about the profile.
+	//
+	// This member is required.
 	Profile []byte
 
 	// Metadata pertaining to the operation's result.

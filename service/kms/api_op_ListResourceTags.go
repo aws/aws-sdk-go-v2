@@ -57,12 +57,14 @@ func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsI
 }
 
 type ListResourceTagsInput struct {
+
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, AWS KMS does not return more than the specified number of
 	// items, but it might return fewer. This value is optional. If you include a
 	// value, it must be between 1 and 50, inclusive. If you do not include a value, it
 	// defaults to 50.
 	Limit *int32
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -74,7 +76,10 @@ type ListResourceTagsInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// Use this parameter in a subsequent request after you receive a response with
 	// truncated results. Set it to the value of NextMarker from the truncated response
 	// you just received. Do not attempt to construct this value. Use only the value of
@@ -83,15 +88,18 @@ type ListResourceTagsInput struct {
 }
 
 type ListResourceTagsOutput struct {
+
 	// When Truncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent request. Do not assume or infer any
 	// information from this value.
 	NextMarker *string
+
 	// A flag that indicates whether there are more items in the list. When this value
 	// is true, the list in this response is truncated. To get more items, pass the
 	// value of the NextMarker element in thisresponse to the Marker parameter in a
 	// subsequent request.
 	Truncated *bool
+
 	// A list of tags. Each tag consists of a tag key and a tag value.
 	Tags []*types.Tag
 

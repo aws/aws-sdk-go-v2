@@ -56,24 +56,37 @@ func (c *Client) DeleteTemplateAlias(ctx context.Context, params *DeleteTemplate
 }
 
 type DeleteTemplateAliasInput struct {
+
 	// The name for the template alias. To delete a specific alias, you delete the
 	// version that the alias points to. You can specify the alias name, or specify the
 	// latest version of the template by providing the keyword $LATEST in the AliasName
 	// parameter.
+	//
+	// This member is required.
 	AliasName *string
+
 	// The ID for the template that the specified alias is for.
+	//
+	// This member is required.
 	TemplateId *string
+
 	// The ID of the AWS account that contains the item to delete.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DeleteTemplateAliasOutput struct {
+
 	// The name for the template alias.
 	AliasName *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the template you want to delete.
 	Arn *string
+
 	// An ID for the template associated with the deletion.
 	TemplateId *string
 

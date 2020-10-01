@@ -55,17 +55,21 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 }
 
 type ListPipelinesInput struct {
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return in this request. The default value is
 	// 100.
 	MaxResults *int32
 }
 
 type ListPipelinesOutput struct {
+
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
+
 	// A list of "PipelineSummary" objects.
 	PipelineSummaries []*types.PipelineSummary
 

@@ -74,14 +74,21 @@ func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInp
 }
 
 type DeleteRuleGroupInput struct {
+
 	// The RuleGroupId of the RuleGroup () that you want to delete. RuleGroupId is
 	// returned by CreateRuleGroup () and by ListRuleGroups ().
+	//
+	// This member is required.
 	RuleGroupId *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type DeleteRuleGroupOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteRuleGroup request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().

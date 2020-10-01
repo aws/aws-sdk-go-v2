@@ -66,8 +66,12 @@ func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunction
 }
 
 type PutFunctionConcurrencyInput struct {
+
 	// The number of simultaneous executions to reserve for the function.
+	//
+	// This member is required.
 	ReservedConcurrentExecutions *int32
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -82,10 +86,13 @@ type PutFunctionConcurrencyInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
 }
 
 type PutFunctionConcurrencyOutput struct {
+
 	// The number of concurrent executions that are reserved for this function. For
 	// more information, see Managing Concurrency
 	// (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).

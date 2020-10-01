@@ -62,20 +62,27 @@ func (c *Client) UpdatePipelineStatus(ctx context.Context, params *UpdatePipelin
 
 // The UpdatePipelineStatusRequest structure.
 type UpdatePipelineStatusInput struct {
+
 	// The identifier of the pipeline to update.
+	//
+	// This member is required.
 	Id *string
+
 	// The desired status of the pipeline:
 	//
 	//     * Active: The pipeline is processing
 	// jobs.
 	//
 	//     * Paused: The pipeline is not currently processing jobs.
+	//
+	// This member is required.
 	Status *string
 }
 
 // When you update status for a pipeline, Elastic Transcoder returns the values
 // that you specified in the request.
 type UpdatePipelineStatusOutput struct {
+
 	// A section of the response body that provides information about the pipeline.
 	Pipeline *types.Pipeline
 

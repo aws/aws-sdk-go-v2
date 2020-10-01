@@ -55,7 +55,10 @@ func (c *Client) DeleteDatastore(ctx context.Context, params *DeleteDatastoreInp
 }
 
 type DeleteDatastoreInput struct {
+
 	// The name of the data store to delete.
+	//
+	// This member is required.
 	DatastoreName *string
 }
 

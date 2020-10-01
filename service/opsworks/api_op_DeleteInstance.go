@@ -63,10 +63,15 @@ func (c *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceInput
 }
 
 type DeleteInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// Whether to delete the instance Elastic IP address.
 	DeleteElasticIp *bool
+
 	// Whether to delete the instance's Amazon EBS volumes.
 	DeleteVolumes *bool
 }

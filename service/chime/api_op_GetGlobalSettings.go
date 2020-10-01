@@ -59,8 +59,10 @@ type GetGlobalSettingsInput struct {
 }
 
 type GetGlobalSettingsOutput struct {
+
 	// The Amazon Chime Business Calling settings.
 	BusinessCalling *types.BusinessCallingSettings
+
 	// The Amazon Chime Voice Connector settings.
 	VoiceConnector *types.VoiceConnectorSettings
 

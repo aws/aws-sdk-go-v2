@@ -110,6 +110,7 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 
 // Represents the input of a BatchWriteItem operation.
 type BatchWriteItemInput struct {
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -126,6 +127,7 @@ type BatchWriteItemInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// A map of one or more table names and, for each table, a list of operations to be
 	// performed (DeleteRequest or PutRequest). Each element in the map consists of the
 	// following:
@@ -152,7 +154,10 @@ type BatchWriteItemInput struct {
 	// rejected with a ValidationException exception. If you specify any attributes
 	// that are part of an index key, then the data types for those attributes must
 	// match those of the schema in the table's attribute definition.
+	//
+	// This member is required.
 	RequestItems map[string][]*types.WriteRequest
+
 	// Determines whether item collection metrics are returned. If set to SIZE, the
 	// response includes statistics about item collections, if any, that were modified
 	// during the operation are returned in the response. If set to NONE (the default),
@@ -162,6 +167,7 @@ type BatchWriteItemInput struct {
 
 // Represents the output of a BatchWriteItem operation.
 type BatchWriteItemOutput struct {
+
 	// A map of tables and requests against those tables that were not processed. The
 	// UnprocessedItems value is in the same form as RequestItems, so you can provide
 	// this value directly to a subsequent BatchGetItem operation. For more
@@ -193,6 +199,7 @@ type BatchWriteItemOutput struct {
 	// If there are no unprocessed items remaining, the response contains
 	// an empty UnprocessedItems map.
 	UnprocessedItems map[string][]*types.WriteRequest
+
 	// The capacity units consumed by the entire BatchWriteItem operation. Each element
 	// consists of:
 	//
@@ -201,6 +208,7 @@ type BatchWriteItemOutput struct {
 	//
 	//     * CapacityUnits - The total number of capacity units consumed.
 	ConsumedCapacity []*types.ConsumedCapacity
+
 	// A list of tables that were processed by BatchWriteItem and, for each table,
 	// information about any item collections that were affected by individual
 	// DeleteItem or PutItem operations. Each entry consists of the following

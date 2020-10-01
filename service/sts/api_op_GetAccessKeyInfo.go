@@ -74,13 +74,17 @@ func (c *Client) GetAccessKeyInfo(ctx context.Context, params *GetAccessKeyInfoI
 }
 
 type GetAccessKeyInfoInput struct {
+
 	// The identifier of an access key. This parameter allows (through its regex
 	// pattern) a string of characters that can consist of any upper- or lowercase
 	// letter or digit.
+	//
+	// This member is required.
 	AccessKeyId *string
 }
 
 type GetAccessKeyInfoOutput struct {
+
 	// The number used to identify the AWS account.
 	Account *string
 

@@ -57,17 +57,21 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 }
 
 type DescribeExportTasksInput struct {
+
 	// One or more filters.
 	//
 	//     * AgentId - ID of the agent whose collected data will
 	// be exported
 	Filters []*types.ExportFilter
+
 	// One or more unique identifiers used to query the status of an export request.
 	ExportIds []*string
+
 	// The maximum number of volume results returned by DescribeExportTasks in
 	// paginated output. When this parameter is used, DescribeExportTasks only returns
 	// maxResults results in a single page along with a nextToken response element.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated DescribeExportTasks
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -77,11 +81,13 @@ type DescribeExportTasksInput struct {
 }
 
 type DescribeExportTasksOutput struct {
+
 	// The nextToken value to include in a future DescribeExportTasks request. When the
 	// results of a DescribeExportTasks request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
+
 	// Contains one or more sets of export request details. When the status of a
 	// request is SUCCEEDED, the response includes a URL for an Amazon S3 bucket where
 	// you can view the data in a CSV file.

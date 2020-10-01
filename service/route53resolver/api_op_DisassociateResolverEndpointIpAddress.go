@@ -59,14 +59,21 @@ func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, para
 }
 
 type DisassociateResolverEndpointIpAddressInput struct {
+
 	// The ID of the resolver endpoint that you want to disassociate an IP address
 	// from.
+	//
+	// This member is required.
 	ResolverEndpointId *string
+
 	// The IPv4 address that you want to remove from a resolver endpoint.
+	//
+	// This member is required.
 	IpAddress *types.IpAddressUpdate
 }
 
 type DisassociateResolverEndpointIpAddressOutput struct {
+
 	// The response to an DisassociateResolverEndpointIpAddress request.
 	ResolverEndpoint *types.ResolverEndpoint
 

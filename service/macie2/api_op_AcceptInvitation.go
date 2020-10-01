@@ -56,9 +56,15 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 }
 
 type AcceptInvitationInput struct {
+
 	// The unique identifier for the invitation to accept.
+	//
+	// This member is required.
 	InvitationId *string
+
 	// The AWS account ID for the account that sent the invitation.
+	//
+	// This member is required.
 	MasterAccount *string
 }
 

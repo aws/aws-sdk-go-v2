@@ -58,6 +58,7 @@ type GetEncryptionConfigInput struct {
 }
 
 type GetEncryptionConfigOutput struct {
+
 	// The encryption configuration document.
 	EncryptionConfig *types.EncryptionConfig
 

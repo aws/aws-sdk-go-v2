@@ -65,18 +65,27 @@ func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePr
 }
 
 type CreatePrivateDnsNamespaceInput struct {
+
 	// The name that you want to assign to this namespace. When you create a private
 	// DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private
 	// hosted zone that has the same name as the namespace.
+	//
+	// This member is required.
 	Name *string
+
 	// The ID of the Amazon VPC that you want to associate the namespace with.
+	//
+	// This member is required.
 	Vpc *string
+
 	// A description for the namespace.
 	Description *string
+
 	// The tags to add to the namespace. Each tag consists of a key and an optional
 	// value, both of which you define. Tag keys can have a maximum character length of
 	// 128 characters, and tag values can have a maximum length of 256 characters.
 	Tags []*types.Tag
+
 	// A unique string that identifies the request and that allows failed
 	// CreatePrivateDnsNamespace requests to be retried without the risk of executing
 	// the operation twice. CreatorRequestId can be any unique string, for example, a
@@ -85,6 +94,7 @@ type CreatePrivateDnsNamespaceInput struct {
 }
 
 type CreatePrivateDnsNamespaceOutput struct {
+
 	// A value that you can use to determine whether the request completed
 	// successfully. To get the status of the operation, see GetOperation
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).

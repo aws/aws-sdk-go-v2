@@ -55,11 +55,15 @@ func (c *Client) DeleteBroker(ctx context.Context, params *DeleteBrokerInput, op
 }
 
 type DeleteBrokerInput struct {
+
 	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
 	BrokerId *string
 }
 
 type DeleteBrokerOutput struct {
+
 	// The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
 

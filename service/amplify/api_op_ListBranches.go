@@ -57,22 +57,31 @@ func (c *Client) ListBranches(ctx context.Context, params *ListBranchesInput, op
 
 // The request structure for the list branches request.
 type ListBranchesInput struct {
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// A pagination token. Set to null to start listing branches from the start. If a
 	// non-null pagination token is returned in a result, pass its value in here to
 	// list more branches.
 	NextToken *string
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
 }
 
 // The result structure for the list branches request.
 type ListBranchesOutput struct {
+
 	// A pagination token. If a non-null pagination token is returned in a result, pass
 	// its value in another request to retrieve more entries.
 	NextToken *string
+
 	// A list of branches for an Amplify app.
+	//
+	// This member is required.
 	Branches []*types.Branch
 
 	// Metadata pertaining to the operation's result.

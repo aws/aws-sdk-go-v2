@@ -56,11 +56,15 @@ func (c *Client) DescribeFilter(ctx context.Context, params *DescribeFilterInput
 }
 
 type DescribeFilterInput struct {
+
 	// The ARN of the filter to describe.
+	//
+	// This member is required.
 	FilterArn *string
 }
 
 type DescribeFilterOutput struct {
+
 	// The filter's details.
 	Filter *types.Filter
 

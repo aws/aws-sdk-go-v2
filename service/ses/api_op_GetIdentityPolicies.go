@@ -68,21 +68,30 @@ func (c *Client) GetIdentityPolicies(ctx context.Context, params *GetIdentityPol
 // SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 type GetIdentityPoliciesInput struct {
+
 	// A list of the names of policies to be retrieved. You can retrieve a maximum of
 	// 20 policies at a time. If you do not know the names of the policies that are
 	// attached to the identity, you can use ListIdentityPolicies.
+	//
+	// This member is required.
 	PolicyNames []*string
+
 	// The identity for which the policies will be retrieved. You can specify an
 	// identity by using its name or by using its Amazon Resource Name (ARN). Examples:
 	// user@example.com, example.com,
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com. To successfully call
 	// this API, you must own the identity.
+	//
+	// This member is required.
 	Identity *string
 }
 
 // Represents the requested sending authorization policies.
 type GetIdentityPoliciesOutput struct {
+
 	// A map of policy names to policies.
+	//
+	// This member is required.
 	Policies map[string]*string
 
 	// Metadata pertaining to the operation's result.

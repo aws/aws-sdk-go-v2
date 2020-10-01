@@ -58,11 +58,15 @@ func (c *Client) BatchAssociateUserStack(ctx context.Context, params *BatchAssoc
 }
 
 type BatchAssociateUserStackInput struct {
+
 	// The list of UserStackAssociation objects.
+	//
+	// This member is required.
 	UserStackAssociations []*types.UserStackAssociation
 }
 
 type BatchAssociateUserStackOutput struct {
+
 	// The list of UserStackAssociationError objects.
 	Errors []*types.UserStackAssociationError
 

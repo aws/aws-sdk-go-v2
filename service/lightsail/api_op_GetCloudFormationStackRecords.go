@@ -57,6 +57,7 @@ func (c *Client) GetCloudFormationStackRecords(ctx context.Context, params *GetC
 }
 
 type GetCloudFormationStackRecordsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetClouFormationStackRecords request. If your
 	// results are paginated, the response will return a next page token that you can
@@ -65,8 +66,10 @@ type GetCloudFormationStackRecordsInput struct {
 }
 
 type GetCloudFormationStackRecordsOutput struct {
+
 	// A list of objects describing the CloudFormation stack records.
 	CloudFormationStackRecords []*types.CloudFormationStackRecord
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetCloudFormationStackRecords request and

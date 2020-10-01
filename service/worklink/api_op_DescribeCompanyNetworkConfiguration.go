@@ -56,16 +56,22 @@ func (c *Client) DescribeCompanyNetworkConfiguration(ctx context.Context, params
 }
 
 type DescribeCompanyNetworkConfigurationInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 
 type DescribeCompanyNetworkConfigurationOutput struct {
+
 	// The subnets used for X-ENI connections from Amazon WorkLink rendering
 	// containers.
 	SubnetIds []*string
+
 	// The VPC with connectivity to associated websites.
 	VpcId *string
+
 	// The security groups associated with access to the provided subnets.
 	SecurityGroupIds []*string
 

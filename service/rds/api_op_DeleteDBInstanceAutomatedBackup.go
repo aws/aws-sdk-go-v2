@@ -58,12 +58,16 @@ func (c *Client) DeleteDBInstanceAutomatedBackup(ctx context.Context, params *De
 
 // Parameter input for the DeleteDBInstanceAutomatedBackup operation.
 type DeleteDBInstanceAutomatedBackupInput struct {
+
 	// The identifier for the source DB instance, which can't be changed and which is
 	// unique to an AWS Region.
+	//
+	// This member is required.
 	DbiResourceId *string
 }
 
 type DeleteDBInstanceAutomatedBackupOutput struct {
+
 	// An automated backup of a DB instance. It it consists of system backups,
 	// transaction logs, and the database instance properties that existed at the time
 	// you deleted the source instance.

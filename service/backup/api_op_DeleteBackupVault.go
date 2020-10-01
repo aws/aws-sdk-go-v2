@@ -56,10 +56,13 @@ func (c *Client) DeleteBackupVault(ctx context.Context, params *DeleteBackupVaul
 }
 
 type DeleteBackupVaultInput struct {
+
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
 	// AWS Region where they are created. They consist of lowercase letters, numbers,
 	// and hyphens.
+	//
+	// This member is required.
 	BackupVaultName *string
 }
 

@@ -73,6 +73,7 @@ func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optF
 }
 
 type UpdateAliasInput struct {
+
 	// Identifies the CMK to associate with the alias. When the update operation
 	// completes, the alias will point to this CMK. The CMK must be in the same AWS
 	// account and Region as the alias. Also, the new target CMK must be the same type
@@ -89,10 +90,15 @@ type UpdateAliasInput struct {
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey (). To
 	// verify that the alias is mapped to the correct CMK, use ListAliases ().
+	//
+	// This member is required.
 	TargetKeyId *string
+
 	// Identifies the alias that is changing its CMK. This value must begin with alias/
 	// followed by the alias name, such as alias/ExampleAlias. You cannot use
 	// UpdateAlias to change the alias name.
+	//
+	// This member is required.
 	AliasName *string
 }
 

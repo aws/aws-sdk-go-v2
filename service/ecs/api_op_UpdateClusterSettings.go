@@ -56,16 +56,23 @@ func (c *Client) UpdateClusterSettings(ctx context.Context, params *UpdateCluste
 }
 
 type UpdateClusterSettingsInput struct {
+
 	// The name of the cluster to modify the settings for.
+	//
+	// This member is required.
 	Cluster *string
+
 	// The setting to use by default for a cluster. This parameter is used to enable
 	// CloudWatch Container Insights for a cluster. If this value is specified, it will
 	// override the containerInsights value set with PutAccountSetting () or
 	// PutAccountSettingDefault ().
+	//
+	// This member is required.
 	Settings []*types.ClusterSetting
 }
 
 type UpdateClusterSettingsOutput struct {
+
 	// A regional grouping of one or more container instances on which you can run task
 	// requests. Each account receives a default cluster the first time you use the
 	// Amazon ECS service, but you may also create other clusters. Clusters may contain

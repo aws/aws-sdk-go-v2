@@ -90,22 +90,30 @@ func (c *Client) ModifyVpnConnection(ctx context.Context, params *ModifyVpnConne
 }
 
 type ModifyVpnConnectionInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the customer gateway at your end of the VPN connection.
 	CustomerGatewayId *string
+
 	// The ID of the VPN connection.
+	//
+	// This member is required.
 	VpnConnectionId *string
+
 	// The ID of the transit gateway.
 	TransitGatewayId *string
+
 	// The ID of the virtual private gateway at the AWS side of the VPN connection.
 	VpnGatewayId *string
 }
 
 type ModifyVpnConnectionOutput struct {
+
 	// Describes a VPN connection.
 	VpnConnection *types.VpnConnection
 

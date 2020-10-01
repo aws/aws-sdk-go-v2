@@ -57,13 +57,20 @@ func (c *Client) GetAggregateResourceConfig(ctx context.Context, params *GetAggr
 }
 
 type GetAggregateResourceConfigInput struct {
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
+
 	// An object that identifies aggregate resource.
+	//
+	// This member is required.
 	ResourceIdentifier *types.AggregateResourceIdentifier
 }
 
 type GetAggregateResourceConfigOutput struct {
+
 	// Returns a ConfigurationItem object.
 	ConfigurationItem *types.ConfigurationItem
 

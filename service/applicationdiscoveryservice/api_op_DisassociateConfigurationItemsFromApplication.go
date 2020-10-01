@@ -55,9 +55,15 @@ func (c *Client) DisassociateConfigurationItemsFromApplication(ctx context.Conte
 }
 
 type DisassociateConfigurationItemsFromApplicationInput struct {
+
 	// Configuration ID of an application from which each item is disassociated.
+	//
+	// This member is required.
 	ApplicationConfigurationId *string
+
 	// Configuration ID of each item to be disassociated from an application.
+	//
+	// This member is required.
 	ConfigurationIds []*string
 }
 

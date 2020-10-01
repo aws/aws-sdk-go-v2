@@ -56,14 +56,23 @@ func (c *Client) DescribeResourceServer(ctx context.Context, params *DescribeRes
 }
 
 type DescribeResourceServerInput struct {
+
 	// The identifier for the resource server
+	//
+	// This member is required.
 	Identifier *string
+
 	// The user pool ID for the user pool that hosts the resource server.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type DescribeResourceServerOutput struct {
+
 	// The resource server.
+	//
+	// This member is required.
 	ResourceServer *types.ResourceServerType
 
 	// Metadata pertaining to the operation's result.

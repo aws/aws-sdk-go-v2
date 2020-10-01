@@ -64,13 +64,22 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 }
 
 type UpdateApplicationInput struct {
+
 	// Name of the Amazon Kinesis Analytics application to update.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// Describes application updates.
+	//
+	// This member is required.
 	ApplicationUpdate *types.ApplicationUpdate
+
 	// The current application version ID. You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get this value.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
 }
 

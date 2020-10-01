@@ -83,6 +83,7 @@ func (c *Client) CancelRotateSecret(ctx context.Context, params *CancelRotateSec
 }
 
 type CancelRotateSecretInput struct {
+
 	// Specifies the secret to cancel a rotation request. You can specify either the
 	// Amazon Resource Name (ARN) or the friendly name of the secret. If you specify an
 	// ARN, we generally recommend that you specify a complete ARN. You can specify a
@@ -100,18 +101,23 @@ type CancelRotateSecretInput struct {
 	// you do include the random suffix added by Secrets Manager, you receive either a
 	// ResourceNotFoundException or an AccessDeniedException error, depending on your
 	// permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type CancelRotateSecretOutput struct {
+
 	// The unique identifier of the version of the secret created during the rotation.
 	// This version might not be complete, and should be evaluated for possible
 	// deletion. At the very least, you should remove the VersionStage value AWSPENDING
 	// to enable this version to be deleted. Failing to clean up a cancelled rotation
 	// can block you from successfully starting future rotations.
 	VersionId *string
+
 	// The ARN of the secret for which rotation was canceled.
 	ARN *string
+
 	// The friendly name of the secret for which rotation was canceled.
 	Name *string
 

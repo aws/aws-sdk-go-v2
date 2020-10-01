@@ -57,13 +57,19 @@ func (c *Client) GetAssociatedIpv6PoolCidrs(ctx context.Context, params *GetAsso
 }
 
 type GetAssociatedIpv6PoolCidrsInput struct {
+
 	// The ID of the IPv6 address pool.
+	//
+	// This member is required.
 	PoolId *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -72,9 +78,11 @@ type GetAssociatedIpv6PoolCidrsInput struct {
 }
 
 type GetAssociatedIpv6PoolCidrsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the IPv6 CIDR block associations.
 	Ipv6CidrAssociations []*types.Ipv6CidrAssociation
 

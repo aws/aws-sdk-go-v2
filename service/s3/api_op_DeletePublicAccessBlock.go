@@ -70,7 +70,10 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 }
 
 type DeletePublicAccessBlockInput struct {
+
 	// The Amazon S3 bucket whose PublicAccessBlock configuration you want to delete.
+	//
+	// This member is required.
 	Bucket *string
 }
 

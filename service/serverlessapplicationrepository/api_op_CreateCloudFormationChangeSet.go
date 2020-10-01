@@ -56,34 +56,43 @@ func (c *Client) CreateCloudFormationChangeSet(ctx context.Context, params *Crea
 }
 
 type CreateCloudFormationChangeSetInput struct {
+
 	// The UUID returned by CreateCloudFormationTemplate.Pattern:
 	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
 	TemplateId *string
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	ChangeSetName *string
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
+	//
+	// This member is required.
 	StackName *string
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	Tags []*types.Tag
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	RollbackConfiguration *types.RollbackConfiguration
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	ResourceTypes []*string
+
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
 	// permissions in your AWS account, for example, by creating new AWS Identity and
@@ -120,23 +129,31 @@ type CreateCloudFormationChangeSetInput struct {
 	// application before deploying. If you don't specify this parameter for an
 	// application that requires capabilities, the call will fail.
 	Capabilities []*string
+
 	// A list of parameter values for the parameters of the application.
 	ParameterOverrides []*types.ParameterValue
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	Description *string
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	SemanticVersion *string
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	ClientToken *string
+
 	// The Amazon Resource Name (ARN) of the application.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
@@ -145,13 +162,17 @@ type CreateCloudFormationChangeSetInput struct {
 }
 
 type CreateCloudFormationChangeSetOutput struct {
+
 	// The Amazon Resource Name (ARN) of the change set.Length constraints: Minimum
 	// length of 1.Pattern: ARN:[-a-zA-Z0-9:/]*
 	ChangeSetId *string
+
 	// The application Amazon Resource Name (ARN).
 	ApplicationId *string
+
 	// The unique ID of the stack.
 	StackId *string
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	SemanticVersion *string

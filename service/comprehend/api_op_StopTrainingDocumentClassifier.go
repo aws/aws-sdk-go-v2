@@ -60,8 +60,11 @@ func (c *Client) StopTrainingDocumentClassifier(ctx context.Context, params *Sto
 }
 
 type StopTrainingDocumentClassifierInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the document classifier currently
 	// being trained.
+	//
+	// This member is required.
 	DocumentClassifierArn *string
 }
 

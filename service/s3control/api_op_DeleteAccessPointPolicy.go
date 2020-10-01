@@ -12,7 +12,22 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the access point policy for the specified access point.
+// Deletes the access point policy for the specified access point. All Amazon S3 on
+// Outposts REST API requests for this action require an additional parameter of
+// outpost-id to be passed with the request and an S3 on Outposts endpoint hostname
+// prefix instead of s3-control. For an example of the request syntax for Amazon S3
+// on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+// outpost-id derived using the access point ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPointPolicy.html#API_control_DeleteAccessPointPolicy_Examples)
+// section below. The following actions are related to DeleteAccessPointPolicy:
+//
+//
+// * PutAccessPointPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
+//
+//
+// * GetAccessPointPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html)
 func (c *Client) DeleteAccessPointPolicy(ctx context.Context, params *DeleteAccessPointPolicyInput, optFns ...func(*Options)) (*DeleteAccessPointPolicyOutput, error) {
 	stack := middleware.NewStack("DeleteAccessPointPolicy", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -56,9 +71,21 @@ func (c *Client) DeleteAccessPointPolicy(ctx context.Context, params *DeleteAcce
 }
 
 type DeleteAccessPointPolicyInput struct {
+
 	// The account ID for the account that owns the specified access point.
+	//
+	// This member is required.
 	AccountId *string
-	// The name of the access point whose policy you want to delete.
+
+	// The name of the access point whose policy you want to delete. For Amazon S3 on
+	// Outposts specify the ARN of the access point accessed in the format
+	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
+	// point reports-ap through outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
+	// The value must be URL encoded.
+	//
+	// This member is required.
 	Name *string
 }
 

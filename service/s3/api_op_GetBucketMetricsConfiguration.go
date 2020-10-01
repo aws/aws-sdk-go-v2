@@ -77,13 +77,20 @@ func (c *Client) GetBucketMetricsConfiguration(ctx context.Context, params *GetB
 }
 
 type GetBucketMetricsConfigurationInput struct {
+
 	// The name of the bucket containing the metrics configuration to retrieve.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The ID used to identify the metrics configuration.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetBucketMetricsConfigurationOutput struct {
+
 	// Specifies the metrics configuration.
 	MetricsConfiguration *types.MetricsConfiguration
 

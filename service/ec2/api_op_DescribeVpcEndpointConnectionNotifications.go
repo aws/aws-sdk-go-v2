@@ -56,6 +56,7 @@ func (c *Client) DescribeVpcEndpointConnectionNotifications(ctx context.Context,
 }
 
 type DescribeVpcEndpointConnectionNotificationsInput struct {
+
 	// One or more filters.
 	//
 	//     * connection-notification-arn - The ARN of the SNS
@@ -75,13 +76,17 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 	//
 	//     * vpc-endpoint-id - The ID of the VPC endpoint.
 	Filters []*types.Filter
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another request with the returned NextToken value.
 	MaxResults *int32
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// The ID of the notification.
 	ConnectionNotificationId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -90,8 +95,10 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 }
 
 type DescribeVpcEndpointConnectionNotificationsOutput struct {
+
 	// One or more notifications.
 	ConnectionNotificationSet []*types.ConnectionNotification
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

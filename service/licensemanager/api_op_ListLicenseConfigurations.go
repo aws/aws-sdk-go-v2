@@ -55,8 +55,10 @@ func (c *Client) ListLicenseConfigurations(ctx context.Context, params *ListLice
 }
 
 type ListLicenseConfigurationsInput struct {
+
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
 	//
@@ -71,15 +73,19 @@ type ListLicenseConfigurationsInput struct {
 	// usagelimitExceeded - A Boolean value that indicates whether the available
 	// licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.
 	Filters []*types.Filter
+
 	// Amazon Resource Names (ARN) of the license configurations.
 	LicenseConfigurationArns []*string
+
 	// Token for the next set of results.
 	NextToken *string
 }
 
 type ListLicenseConfigurationsOutput struct {
+
 	// Token for the next set of results.
 	NextToken *string
+
 	// Information about the license configurations.
 	LicenseConfigurations []*types.LicenseConfiguration
 

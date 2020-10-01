@@ -57,28 +57,44 @@ func (c *Client) CreateRobot(ctx context.Context, params *CreateRobotInput, optF
 }
 
 type CreateRobotInput struct {
+
 	// The Greengrass group id.
+	//
+	// This member is required.
 	GreengrassGroupId *string
+
 	// The name for the robot.
+	//
+	// This member is required.
 	Name *string
+
 	// A map that contains tag keys and tag values that are attached to the robot.
 	Tags map[string]*string
+
 	// The target architecture of the robot.
+	//
+	// This member is required.
 	Architecture types.Architecture
 }
 
 type CreateRobotOutput struct {
+
 	// The target architecture of the robot.
 	Architecture types.Architecture
+
 	// The name of the robot.
 	Name *string
+
 	// The time, in milliseconds since the epoch, when the robot was created.
 	CreatedAt *time.Time
+
 	// The list of all tags added to the robot.
 	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the Greengrass group associated with the
 	// robot.
 	GreengrassGroupId *string
+
 	// The Amazon Resource Name (ARN) of the robot.
 	Arn *string
 

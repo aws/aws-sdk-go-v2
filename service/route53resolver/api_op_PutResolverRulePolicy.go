@@ -56,16 +56,23 @@ func (c *Client) PutResolverRulePolicy(ctx context.Context, params *PutResolverR
 }
 
 type PutResolverRulePolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the account that you want to grant permissions
 	// to.
+	//
+	// This member is required.
 	Arn *string
+
 	// An AWS Identity and Access Management policy statement that lists the
 	// permissions that you want to grant to another AWS account.
+	//
+	// This member is required.
 	ResolverRulePolicy *string
 }
 
 // The response to a PutResolverRulePolicy request.
 type PutResolverRulePolicyOutput struct {
+
 	// Whether the PutResolverRulePolicy request was successful.
 	ReturnValue *bool
 

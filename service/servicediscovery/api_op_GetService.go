@@ -56,11 +56,15 @@ func (c *Client) GetService(ctx context.Context, params *GetServiceInput, optFns
 }
 
 type GetServiceInput struct {
+
 	// The ID of the service that you want to get settings for.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetServiceOutput struct {
+
 	// A complex type that contains information about the service.
 	Service *types.Service
 

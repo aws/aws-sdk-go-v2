@@ -55,7 +55,10 @@ func (c *Client) DeleteHumanLoop(ctx context.Context, params *DeleteHumanLoopInp
 }
 
 type DeleteHumanLoopInput struct {
+
 	// The name of the human loop that you want to delete.
+	//
+	// This member is required.
 	HumanLoopName *string
 }
 

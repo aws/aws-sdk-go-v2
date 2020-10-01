@@ -56,15 +56,22 @@ func (c *Client) DisassociateCustomerGateway(ctx context.Context, params *Disass
 }
 
 type DisassociateCustomerGatewayInput struct {
+
 	// The Amazon Resource Name (ARN) of the customer gateway. For more information,
 	// see Resources Defined by Amazon EC2
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies).
+	//
+	// This member is required.
 	CustomerGatewayArn *string
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
 }
 
 type DisassociateCustomerGatewayOutput struct {
+
 	// Information about the customer gateway association.
 	CustomerGatewayAssociation *types.CustomerGatewayAssociation
 

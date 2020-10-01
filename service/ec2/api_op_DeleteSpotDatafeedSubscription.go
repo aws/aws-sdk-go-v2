@@ -55,6 +55,7 @@ func (c *Client) DeleteSpotDatafeedSubscription(ctx context.Context, params *Del
 
 // Contains the parameters for DeleteSpotDatafeedSubscription.
 type DeleteSpotDatafeedSubscriptionInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

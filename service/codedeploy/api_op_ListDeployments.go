@@ -57,23 +57,29 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 
 // Represents the input of a ListDeployments operation.
 type ListDeploymentsInput struct {
+
 	// A time range (start and end) for returning a subset of the list of deployments.
 	CreateTimeRange *types.TimeRange
+
 	// The unique ID of an external resource for returning deployments linked to the
 	// external resource.
 	ExternalId *string
+
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account. If applicationName is specified, then deploymentGroupName must be
 	// specified. If it is not specified, then deploymentGroupName must not be
 	// specified.
 	ApplicationName *string
+
 	// An identifier returned from the previous list deployments call. It can be used
 	// to return the next set of deployments in the list.
 	NextToken *string
+
 	// The name of a deployment group for the specified application. If
 	// deploymentGroupName is specified, then applicationName must be specified. If it
 	// is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string
+
 	// A subset of deployments to list by status:
 	//
 	//     * Created: Include created
@@ -97,8 +103,10 @@ type ListDeploymentsInput struct {
 
 // Represents the output of a ListDeployments operation.
 type ListDeploymentsOutput struct {
+
 	// A list of deployment IDs.
 	Deployments []*string
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list deployments call to return the next set of
 	// deployments in the list.

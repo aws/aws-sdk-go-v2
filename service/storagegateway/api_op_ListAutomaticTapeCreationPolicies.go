@@ -57,12 +57,14 @@ func (c *Client) ListAutomaticTapeCreationPolicies(ctx context.Context, params *
 }
 
 type ListAutomaticTapeCreationPoliciesInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 }
 
 type ListAutomaticTapeCreationPoliciesOutput struct {
+
 	// Gets a listing of information about the gateway's automatic tape creation
 	// policies, including the automatic tape creation rules and the gateway that is
 	// using the policies.

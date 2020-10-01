@@ -56,34 +56,52 @@ func (c *Client) CreateOTAUpdate(ctx context.Context, params *CreateOTAUpdateInp
 }
 
 type CreateOTAUpdateInput struct {
+
 	// Configuration for the rollout of OTA updates.
 	AwsJobExecutionsRolloutConfig *types.AwsJobExecutionsRolloutConfig
+
 	// The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and AWS
 	// Code Signing resources to create an OTA update job.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The devices targeted to receive OTA updates.
+	//
+	// This member is required.
 	Targets []*string
+
 	// The protocol used to transfer the OTA update image. Valid values are [HTTP],
 	// [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device
 	// can choose the protocol.
 	Protocols []types.Protocol
+
 	// Configuration information for pre-signed URLs.
 	AwsJobPresignedUrlConfig *types.AwsJobPresignedUrlConfig
+
 	// The criteria that determine when and how a job abort takes place.
 	AwsJobAbortConfig *types.AwsJobAbortConfig
+
 	// A list of additional OTA update parameters which are name-value pairs.
 	AdditionalParameters map[string]*string
+
 	// The description of the OTA update.
 	Description *string
+
 	// Specifies the amount of time each device has to finish its execution of the job.
 	// A timer is started when the job execution status is set to IN_PROGRESS. If the
 	// job execution status is not set to another terminal state before the timer
 	// expires, it will be automatically set to TIMED_OUT.
 	AwsJobTimeoutConfig *types.AwsJobTimeoutConfig
+
 	// The files to be streamed by the OTA update.
+	//
+	// This member is required.
 	Files []*types.OTAUpdateFile
+
 	// Metadata which can be used to manage updates.
 	Tags []*types.Tag
+
 	// Specifies whether the update will continue to run (CONTINUOUS), or will be
 	// complete after all the things specified as targets have completed the update
 	// (SNAPSHOT). If continuous, the update may also be run on a thing when a change
@@ -91,19 +109,27 @@ type CreateOTAUpdateInput struct {
 	// thing is added to a target group, even after the update was completed by all
 	// things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
 	TargetSelection types.TargetSelection
+
 	// The ID of the OTA update to be created.
+	//
+	// This member is required.
 	OtaUpdateId *string
 }
 
 type CreateOTAUpdateOutput struct {
+
 	// The OTA update ID.
 	OtaUpdateId *string
+
 	// The AWS IoT job ID associated with the OTA update.
 	AwsIotJobId *string
+
 	// The OTA update ARN.
 	OtaUpdateArn *string
+
 	// The OTA update status.
 	OtaUpdateStatus types.OTAUpdateStatus
+
 	// The AWS IoT job ARN associated with the OTA update.
 	AwsIotJobArn *string
 

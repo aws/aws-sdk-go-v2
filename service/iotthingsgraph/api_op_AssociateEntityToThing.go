@@ -57,13 +57,20 @@ func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEn
 }
 
 type AssociateEntityToThingInput struct {
+
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
+
 	// The name of the thing to which the entity is to be associated.
+	//
+	// This member is required.
 	ThingName *string
+
 	// The ID of the device to be associated with the thing. The ID should be in the
 	// following format. urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	//
+	// This member is required.
 	EntityId *string
 }
 

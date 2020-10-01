@@ -57,17 +57,21 @@ func (c *Client) SearchSkillGroups(ctx context.Context, params *SearchSkillGroup
 }
 
 type SearchSkillGroupsInput struct {
+
 	// The filters to use to list a specified set of skill groups. The supported filter
 	// key is SkillGroupName.
 	Filters []*types.Filter
+
 	// The sort order to use in listing the specified set of skill groups. The
 	// supported sort key is SkillGroupName.
 	SortCriteria []*types.Sort
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	// Required.
 	NextToken *string
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
@@ -75,10 +79,13 @@ type SearchSkillGroupsInput struct {
 }
 
 type SearchSkillGroupsOutput struct {
+
 	// The total number of skill groups returned.
 	TotalCount *int32
+
 	// The skill groups that meet the filter criteria, in sort order.
 	SkillGroups []*types.SkillGroupData
+
 	// The token returned to indicate that there is more data available.
 	NextToken *string
 

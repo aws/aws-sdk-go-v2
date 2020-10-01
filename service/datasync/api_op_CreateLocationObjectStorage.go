@@ -57,41 +57,57 @@ func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *Create
 
 // CreateLocationObjectStorageRequest
 type CreateLocationObjectStorageInput struct {
+
 	// The protocol that the object storage server uses to communicate. Valid values
 	// are HTTP or HTTPS.
 	ServerProtocol types.ObjectStorageServerProtocol
+
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []*types.TagListEntry
+
 	// The subdirectory in the self-managed object storage server that is used to read
 	// data from.
 	Subdirectory *string
+
 	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
 	// object storage server location.
+	//
+	// This member is required.
 	AgentArns []*string
+
 	// The bucket on the self-managed object storage server that is used to read data
 	// from.
+	//
+	// This member is required.
 	BucketName *string
+
 	// Optional. The access key is used if credentials are required to access the
 	// self-managed object storage server.
 	AccessKey *string
+
 	// Optional. The secret key is used if credentials are required to access the
 	// self-managed object storage server.
 	SecretKey *string
+
 	// The port that your self-managed object storage server accepts inbound network
 	// traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443
 	// (HTTPS). You can specify a custom port if your self-managed object storage
 	// server requires one.
 	ServerPort *int32
+
 	// The name of the self-managed object storage server. This value is the IP address
 	// or Domain Name Service (DNS) name of the object storage server. An agent uses
 	// this host name to mount the object storage server in a network.
+	//
+	// This member is required.
 	ServerHostname *string
 }
 
 // CreateLocationObjectStorageResponse
 type CreateLocationObjectStorageOutput struct {
+
 	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
 	// object storage server location.
 	LocationArn *string

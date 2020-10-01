@@ -56,8 +56,11 @@ func (c *Client) CancelAuditTask(ctx context.Context, params *CancelAuditTaskInp
 }
 
 type CancelAuditTaskInput struct {
+
 	// The ID of the audit you want to cancel. You can only cancel an audit that is
 	// "IN_PROGRESS".
+	//
+	// This member is required.
 	TaskId *string
 }
 

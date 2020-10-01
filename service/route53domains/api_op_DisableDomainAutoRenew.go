@@ -56,7 +56,10 @@ func (c *Client) DisableDomainAutoRenew(ctx context.Context, params *DisableDoma
 }
 
 type DisableDomainAutoRenewInput struct {
+
 	// The name of the domain that you want to disable automatic renewal for.
+	//
+	// This member is required.
 	DomainName *string
 }
 

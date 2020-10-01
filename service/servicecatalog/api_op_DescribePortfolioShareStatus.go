@@ -57,21 +57,29 @@ func (c *Client) DescribePortfolioShareStatus(ctx context.Context, params *Descr
 }
 
 type DescribePortfolioShareStatusInput struct {
+
 	// The token for the portfolio share operation. This token is returned either by
 	// CreatePortfolioShare or by DeletePortfolioShare.
+	//
+	// This member is required.
 	PortfolioShareToken *string
 }
 
 type DescribePortfolioShareStatusOutput struct {
+
 	// Organization node identifier. It can be either account id, organizational unit
 	// id or organization id.
 	OrganizationNodeValue *string
+
 	// The portfolio identifier.
 	PortfolioId *string
+
 	// Information about the portfolio share operation.
 	ShareDetails *types.ShareDetails
+
 	// The token for the portfolio share operation. For example, share-6v24abcdefghi.
 	PortfolioShareToken *string
+
 	// Status of the portfolio share operation.
 	Status types.ShareStatus
 

@@ -58,6 +58,7 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 }
 
 type GetUserInput struct {
+
 	// The name of the user to get information about. This parameter is optional. If it
 	// is not included, it defaults to the user making the request. This parameter
 	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
@@ -68,6 +69,7 @@ type GetUserInput struct {
 
 // Contains the response to a successful GetUser () request.
 type GetUserOutput struct {
+
 	// A structure containing details about the IAM user. Due to a service issue,
 	// password last used data does not include password use from May 3, 2018 22:50 PDT
 	// to May 23, 2018 14:08 PDT. This affects last sign-in
@@ -85,6 +87,8 @@ type GetUserOutput struct {
 	// 23, 2018. Alternatively, if your users use access keys to access AWS
 	// programmatically you can refer to access key last used information because it is
 	// accurate for all dates.
+	//
+	// This member is required.
 	User *types.User
 
 	// Metadata pertaining to the operation's result.

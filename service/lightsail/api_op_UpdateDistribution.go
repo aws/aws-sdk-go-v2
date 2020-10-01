@@ -58,28 +58,37 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 }
 
 type UpdateDistributionInput struct {
+
 	// An object that describes the default cache behavior for the distribution.
 	DefaultCacheBehavior *types.CacheBehavior
+
 	// An object that describes the cache behavior settings for the distribution. The
 	// cacheBehaviorSettings specified in your UpdateDistributionRequest will replace
 	// your distribution's existing settings.
 	CacheBehaviorSettings *types.CacheSettings
+
 	// An array of objects that describe the per-path cache behavior for the
 	// distribution.
 	CacheBehaviors []*types.CacheBehaviorPerPath
+
 	// Indicates whether to enable the distribution.
 	IsEnabled *bool
+
 	// An object that describes the origin resource for the distribution, such as a
 	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
 	// serves content from the origin.</p>
 	Origin *types.InputOrigin
+
 	// The name of the distribution to update.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p>
+	//
+	// This member is required.
 	DistributionName *string
 }
 
 type UpdateDistributionOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -57,30 +57,41 @@ func (c *Client) GetFindingsFilter(ctx context.Context, params *GetFindingsFilte
 }
 
 type GetFindingsFilterInput struct {
+
 	// The unique identifier for the Amazon Macie resource or account that the request
 	// applies to.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetFindingsFilterOutput struct {
+
 	// The Amazon Resource Name (ARN) of the filter.
 	Arn *string
+
 	// The unique identifier for the filter.
 	Id *string
+
 	// The action that's performed on findings that meet the filter criteria
 	// (findingCriteria). Possible values are: ARCHIVE, suppress (automatically
 	// archive) the findings; and, NOOP, don't perform any action on the findings.
 	Action types.FindingsFilterAction
+
 	// The custom description of the filter.
 	Description *string
+
 	// The position of the filter in the list of saved filters on the Amazon Macie
 	// console. This value also determines the order in which the filter is applied to
 	// findings, relative to other filters that are also applied to the findings.
 	Position *int32
+
 	// The criteria that's used to filter findings.
 	FindingCriteria *types.FindingCriteria
+
 	// The custom name of the filter.
 	Name *string
+
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the filter.
 	Tags map[string]*string

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The container that you specified in the request already exists or is being
@@ -25,12 +24,6 @@ func (e *ContainerInUseException) ErrorMessage() string {
 }
 func (e *ContainerInUseException) ErrorCode() string             { return "ContainerInUseException" }
 func (e *ContainerInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ContainerInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ContainerInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The container that you specified in the request does not exist.
 type ContainerNotFoundException struct {
@@ -48,12 +41,6 @@ func (e *ContainerNotFoundException) ErrorMessage() string {
 }
 func (e *ContainerNotFoundException) ErrorCode() string             { return "ContainerNotFoundException" }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ContainerNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ContainerNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The CORS policy that you specified in the request does not exist.
 type CorsPolicyNotFoundException struct {
@@ -71,12 +58,6 @@ func (e *CorsPolicyNotFoundException) ErrorMessage() string {
 }
 func (e *CorsPolicyNotFoundException) ErrorCode() string             { return "CorsPolicyNotFoundException" }
 func (e *CorsPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CorsPolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CorsPolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable.
 type InternalServerError struct {
@@ -94,12 +75,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A service limit has been exceeded.
 type LimitExceededException struct {
@@ -117,12 +92,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The policy that you specified in the request does not exist.
 type PolicyNotFoundException struct {
@@ -140,9 +109,3 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 }
 func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFoundException" }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

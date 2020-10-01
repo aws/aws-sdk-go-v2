@@ -60,23 +60,34 @@ func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput
 }
 
 type StartImageScanInput struct {
+
 	// An object with identifying information for an Amazon ECR image.
+	//
+	// This member is required.
 	ImageId *types.ImageIdentifier
+
 	// The AWS account ID associated with the registry that contains the repository in
 	// which to start an image scan request. If you do not specify a registry, the
 	// default registry is assumed.
 	RegistryId *string
+
 	// The name of the repository that contains the images to scan.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type StartImageScanOutput struct {
+
 	// An object with identifying information for an Amazon ECR image.
 	ImageId *types.ImageIdentifier
+
 	// The current state of the scan.
 	ImageScanStatus *types.ImageScanStatus
+
 	// The registry ID associated with the request.
 	RegistryId *string
+
 	// The repository name associated with the request.
 	RepositoryName *string
 

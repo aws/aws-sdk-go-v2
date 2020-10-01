@@ -57,22 +57,33 @@ func (c *Client) GetSegmentVersions(ctx context.Context, params *GetSegmentVersi
 }
 
 type GetSegmentVersionsInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
 	// The unique identifier for the segment.
+	//
+	// This member is required.
 	SegmentId *string
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
 }
 
 type GetSegmentVersionsOutput struct {
+
 	// Provides information about all the segments that are associated with an
 	// application.
+	//
+	// This member is required.
 	SegmentsResponse *types.SegmentsResponse
 
 	// Metadata pertaining to the operation's result.

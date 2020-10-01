@@ -59,15 +59,19 @@ func (c *Client) SendBulkEmail(ctx context.Context, params *SendBulkEmailInput, 
 // Amazon SES. For more information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type SendBulkEmailInput struct {
+
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using the SendEmail operation. Tags correspond to characteristics of the
 	// email that you define, so that you can publish email sending events.
 	DefaultEmailTags []*types.MessageTag
+
 	// The name of the configuration set that you want to use when sending the email.
 	ConfigurationSetName *string
+
 	// The "Reply-to" email addresses for the message. When the recipient replies to
 	// the message, each Reply-to address receives the reply.
 	ReplyToAddresses []*string
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the FromEmailAddress parameter. For
@@ -80,11 +84,18 @@ type SendBulkEmailInput struct {
 	// authorization, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	FromEmailAddressIdentityArn *string
+
 	// The list of bulk email entry objects.
+	//
+	// This member is required.
 	BulkEmailEntries []*types.BulkEmailEntry
+
 	// An object that contains the body of the message. You can specify a template
 	// message.
+	//
+	// This member is required.
 	DefaultContent *types.BulkEmailContent
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the FeedbackForwardingEmailAddress
@@ -97,8 +108,10 @@ type SendBulkEmailInput struct {
 	// about sending authorization, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	FeedbackForwardingEmailAddressIdentityArn *string
+
 	// The address that you want bounce and complaint notifications to be sent to.
 	FeedbackForwardingEmailAddress *string
+
 	// The email address that you want to use as the "From" address for the email. The
 	// address that you specify has to be verified.
 	FromEmailAddress *string
@@ -106,7 +119,10 @@ type SendBulkEmailInput struct {
 
 // The following data is returned in JSON format by the service.
 type SendBulkEmailOutput struct {
+
 	// A list of BulkMailEntry objects.
+	//
+	// This member is required.
 	BulkEmailEntryResults []*types.BulkEmailEntryResult
 
 	// Metadata pertaining to the operation's result.

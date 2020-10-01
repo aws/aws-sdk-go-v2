@@ -53,7 +53,8 @@ func (c *Client) ConstantAndVariableQueryString(ctx context.Context, params *Con
 }
 
 type ConstantAndVariableQueryStringInput struct {
-	Baz      *string
+	Baz *string
+
 	MaybeSet *string
 }
 

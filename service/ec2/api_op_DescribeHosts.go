@@ -58,8 +58,10 @@ func (c *Client) DescribeHosts(ctx context.Context, params *DescribeHostsInput, 
 }
 
 type DescribeHostsInput struct {
+
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
 	// The filters.
 	//
 	//     * auto-placement - Whether auto-placement is enabled or
@@ -85,19 +87,23 @@ type DescribeHostsInput struct {
 	// resource. Use this filter to find all resources assigned a tag with a specific
 	// key, regardless of the tag value.
 	Filter []*types.Filter
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
 	// nextToken value. This value can be between 5 and 500. If maxResults is given a
 	// larger value than 500, you receive an error. You cannot specify this parameter
 	// and the host IDs parameter in the same request.
 	MaxResults *int32
+
 	// The IDs of the Dedicated Hosts. The IDs are used for targeted instance launches.
 	HostIds []*string
 }
 
 type DescribeHostsOutput struct {
+
 	// Information about the Dedicated Hosts.
 	Hosts []*types.Host
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

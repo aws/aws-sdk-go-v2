@@ -57,7 +57,10 @@ func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, op
 
 // The DeletePresetRequest structure.
 type DeletePresetInput struct {
+
 	// The identifier of the preset for which you want to get detailed information.
+	//
+	// This member is required.
 	Id *string
 }
 

@@ -57,13 +57,20 @@ func (c *Client) GetProxySession(ctx context.Context, params *GetProxySessionInp
 }
 
 type GetProxySessionInput struct {
+
 	// The proxy session ID.
+	//
+	// This member is required.
 	ProxySessionId *string
+
 	// The Amazon Chime voice connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type GetProxySessionOutput struct {
+
 	// The proxy session details.
 	ProxySession *types.ProxySession
 

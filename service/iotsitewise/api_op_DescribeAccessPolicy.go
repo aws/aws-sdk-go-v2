@@ -58,29 +58,53 @@ func (c *Client) DescribeAccessPolicy(ctx context.Context, params *DescribeAcces
 }
 
 type DescribeAccessPolicyInput struct {
+
 	// The ID of the access policy.
+	//
+	// This member is required.
 	AccessPolicyId *string
 }
 
 type DescribeAccessPolicyOutput struct {
+
 	// The date the access policy was created, in Unix epoch time.
+	//
+	// This member is required.
 	AccessPolicyCreationDate *time.Time
+
 	// The date the access policy was last updated, in Unix epoch time.
+	//
+	// This member is required.
 	AccessPolicyLastUpdateDate *time.Time
+
 	// The access policy permission. Note that a project ADMINISTRATOR is also known as
 	// a project owner.
+	//
+	// This member is required.
 	AccessPolicyPermission types.Permission
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the access policy, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
+	//
+	// This member is required.
 	AccessPolicyArn *string
+
 	// The AWS IoT SiteWise Monitor resource (portal or project) to which this access
 	// policy provides access.
+	//
+	// This member is required.
 	AccessPolicyResource *types.Resource
+
 	// The ID of the access policy.
+	//
+	// This member is required.
 	AccessPolicyId *string
+
 	// The AWS SSO identity (user or group) to which this access policy applies.
+	//
+	// This member is required.
 	AccessPolicyIdentity *types.Identity
 
 	// Metadata pertaining to the operation's result.

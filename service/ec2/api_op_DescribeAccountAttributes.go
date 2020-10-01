@@ -80,8 +80,10 @@ func (c *Client) DescribeAccountAttributes(ctx context.Context, params *Describe
 }
 
 type DescribeAccountAttributesInput struct {
+
 	// The account attribute names.
 	AttributeNames []types.AccountAttributeName
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -90,6 +92,7 @@ type DescribeAccountAttributesInput struct {
 }
 
 type DescribeAccountAttributesOutput struct {
+
 	// Information about the account attributes.
 	AccountAttributes []*types.AccountAttribute
 

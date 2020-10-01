@@ -56,15 +56,23 @@ func (c *Client) UpdateUserProfile(ctx context.Context, params *UpdateUserProfil
 }
 
 type UpdateUserProfileInput struct {
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
+
 	// The user profile name.
+	//
+	// This member is required.
 	UserProfileName *string
+
 	// A collection of settings.
 	UserSettings *types.UserSettings
 }
 
 type UpdateUserProfileOutput struct {
+
 	// The user profile Amazon Resource Name (ARN).
 	UserProfileArn *string
 

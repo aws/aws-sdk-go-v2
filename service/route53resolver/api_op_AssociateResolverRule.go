@@ -60,17 +60,25 @@ func (c *Client) AssociateResolverRule(ctx context.Context, params *AssociateRes
 }
 
 type AssociateResolverRuleInput struct {
+
 	// The ID of the resolver rule that you want to associate with the VPC. To list the
 	// existing resolver rules, use ListResolverRules ().
+	//
+	// This member is required.
 	ResolverRuleId *string
+
 	// A name for the association that you're creating between a resolver rule and a
 	// VPC.
 	Name *string
+
 	// The ID of the VPC that you want to associate the resolver rule with.
+	//
+	// This member is required.
 	VPCId *string
 }
 
 type AssociateResolverRuleOutput struct {
+
 	// Information about the AssociateResolverRule request, including the status of the
 	// request.
 	ResolverRuleAssociation *types.ResolverRuleAssociation

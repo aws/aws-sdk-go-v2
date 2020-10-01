@@ -59,14 +59,19 @@ func (c *Client) BatchGetTriggers(ctx context.Context, params *BatchGetTriggersI
 }
 
 type BatchGetTriggersInput struct {
+
 	// A list of trigger names, which may be the names returned from the ListTriggers
 	// operation.
+	//
+	// This member is required.
 	TriggerNames []*string
 }
 
 type BatchGetTriggersOutput struct {
+
 	// A list of trigger definitions.
 	Triggers []*types.Trigger
+
 	// A list of names of triggers not found.
 	TriggersNotFound []*string
 

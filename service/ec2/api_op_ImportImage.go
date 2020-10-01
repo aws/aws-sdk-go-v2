@@ -59,8 +59,10 @@ func (c *Client) ImportImage(ctx context.Context, params *ImportImageInput, optF
 }
 
 type ImportImageInput struct {
+
 	// The ARNs of the license configurations.
 	LicenseSpecifications []*types.ImportImageLicenseConfigurationRequest
+
 	// An identifier for the symmetric AWS Key Management Service (AWS KMS) customer
 	// master key (CMK) to use when creating the encrypted AMI. This parameter is only
 	// required if you want to use a non-default CMK; if this parameter is not
@@ -93,27 +95,37 @@ type ImportImageInput struct {
 	// failure. The specified CMK must exist in the Region that the AMI is being copied
 	// to. Amazon EBS does not support asymmetric CMKs.
 	KmsKeyId *string
+
 	// The operating system of the virtual machine. Valid values: Windows | Linux
 	Platform *string
+
 	// The tags to apply to the image being imported.
 	TagSpecifications []*types.TagSpecification
+
 	// The architecture of the virtual machine. Valid values: i386 | x86_64 | arm64
 	Architecture *string
+
 	// The token to enable idempotency for VM import requests.
 	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// A description string for the import image task.
 	Description *string
+
 	// The client-specific data.
 	ClientData *types.ClientData
+
 	// The name of the role to use when not using the default role, 'vmimport'.
 	RoleName *string
+
 	// Information about the disk containers.
 	DiskContainers []*types.ImageDiskContainer
+
 	// The license type to be used for the Amazon Machine Image (AMI) after importing.
 	// By default, we detect the source-system operating system (OS) and apply the
 	// appropriate license. Specify AWS to replace the source-system license with an
@@ -124,6 +136,7 @@ type ImportImageInput struct {
 	// (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image)
 	// in the VM Import/Export User Guide.
 	LicenseType *string
+
 	// Specifies whether the destination AMI of the imported image should be encrypted.
 	// The default CMK for EBS is used unless you specify a non-default AWS Key
 	// Management Service (AWS KMS) CMK using KmsKeyId. For more information, see
@@ -131,40 +144,56 @@ type ImportImageInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	Encrypted *bool
+
 	// The target hypervisor platform. Valid values: xen
 	Hypervisor *string
 }
 
 type ImportImageOutput struct {
+
 	// The ID of the Amazon Machine Image (AMI) created by the import task.
 	ImageId *string
+
 	// Any tags assigned to the image being imported.
 	Tags []*types.Tag
+
 	// The ARNs of the license configurations.
 	LicenseSpecifications []*types.ImportImageLicenseConfigurationResponse
+
 	// The architecture of the virtual machine.
 	Architecture *string
+
 	// A brief status of the task.
 	Status *string
+
 	// A description of the import task.
 	Description *string
+
 	// The target hypervisor of the import task.
 	Hypervisor *string
+
 	// The identifier for the symmetric AWS Key Management Service (AWS KMS) customer
 	// master key (CMK) that was used to create the encrypted AMI.
 	KmsKeyId *string
+
 	// The license type of the virtual machine.
 	LicenseType *string
+
 	// The operating system of the virtual machine.
 	Platform *string
+
 	// Indicates whether the AMI is encrypted.
 	Encrypted *bool
+
 	// Information about the snapshots.
 	SnapshotDetails []*types.SnapshotDetail
+
 	// The progress of the task.
 	Progress *string
+
 	// A detailed status message of the import task.
 	StatusMessage *string
+
 	// The task ID of the import image task.
 	ImportTaskId *string
 

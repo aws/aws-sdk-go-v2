@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 type BadRequestException struct {
@@ -25,18 +24,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *BadRequestException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type ConflictException struct {
 	Message *string
@@ -55,18 +42,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ConflictException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type ForbiddenException struct {
 	Message *string
@@ -85,18 +60,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ForbiddenException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ForbiddenException) HasCode() bool {
-	return e.Code != nil
-}
 
 type GoneException struct {
 	Message *string
@@ -115,18 +78,6 @@ func (e *GoneException) ErrorMessage() string {
 }
 func (e *GoneException) ErrorCode() string             { return "GoneException" }
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *GoneException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *GoneException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *GoneException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GoneException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type InternalServerErrorException struct {
 	Message *string
@@ -145,18 +96,6 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 }
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerErrorException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalServerErrorException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *InternalServerErrorException) HasCode() bool {
-	return e.Code != nil
-}
 
 type NotFoundException struct {
 	Message *string
@@ -175,18 +114,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *NotFoundException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type PreconditionFailedException struct {
 	Message *string
@@ -205,18 +132,6 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 }
 func (e *PreconditionFailedException) ErrorCode() string             { return "PreconditionFailedException" }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PreconditionFailedException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *PreconditionFailedException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *PreconditionFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PreconditionFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type ServiceUnavailableException struct {
 	Message *string
@@ -235,18 +150,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceUnavailableException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ServiceUnavailableException) HasCode() bool {
-	return e.Code != nil
-}
 
 type TooManyRequestsException struct {
 	Message *string
@@ -265,18 +168,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *TooManyRequestsException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *TooManyRequestsException) HasCode() bool {
-	return e.Code != nil
-}
 
 type UnauthorizedException struct {
 	Message *string
@@ -295,15 +186,3 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnauthorizedException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *UnauthorizedException) HasCode() bool {
-	return e.Code != nil
-}

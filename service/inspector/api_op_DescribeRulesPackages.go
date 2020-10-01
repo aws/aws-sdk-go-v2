@@ -57,17 +57,27 @@ func (c *Client) DescribeRulesPackages(ctx context.Context, params *DescribeRule
 }
 
 type DescribeRulesPackagesInput struct {
+
 	// The locale that you want to translate a rules package description into.
 	Locale types.Locale
+
 	// The ARN that specifies the rules package that you want to describe.
+	//
+	// This member is required.
 	RulesPackageArns []*string
 }
 
 type DescribeRulesPackagesOutput struct {
+
 	// Information about the rules package.
+	//
+	// This member is required.
 	RulesPackages []*types.RulesPackage
+
 	// Rules package details that cannot be described. An error code is provided for
 	// each failed item.
+	//
+	// This member is required.
 	FailedItems map[string]*types.FailedItemDetails
 
 	// Metadata pertaining to the operation's result.

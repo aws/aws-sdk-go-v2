@@ -59,22 +59,32 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 
 //
 type GetComplianceDetailsByResourceInput struct {
+
 	// The ID of the AWS resource for which you want compliance information.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// Filters the results by compliance. The allowed values are COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE.
 	ComplianceTypes []types.ComplianceType
+
 	// The type of the AWS resource for which you want compliance information.
+	//
+	// This member is required.
 	ResourceType *string
 }
 
 //
 type GetComplianceDetailsByResourceOutput struct {
+
 	// Indicates whether the specified AWS resource complies each AWS Config rule.
 	EvaluationResults []*types.EvaluationResult
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string

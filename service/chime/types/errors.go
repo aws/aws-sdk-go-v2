@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You don't have permissions to perform the requested operation.
@@ -26,15 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetCode() ErrorCode {
-	return e.Code
-}
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input parameters don't match the service's restrictions.
 type BadRequestException struct {
@@ -54,15 +44,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetCode() ErrorCode {
-	return e.Code
-}
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request could not be processed because of conflict in the current state of
 // the resource.
@@ -83,15 +64,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ConflictException) GetCode() ErrorCode {
-	return e.Code
-}
 
 // The client is permanently forbidden from making the request. For example, when a
 // user tries to create an account from an unsupported Region.
@@ -112,15 +84,6 @@ func (e *ForbiddenException) ErrorMessage() string {
 }
 func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ForbiddenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ForbiddenException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ForbiddenException) GetCode() ErrorCode {
-	return e.Code
-}
 
 // One or more of the resources in the request does not exist in the system.
 type NotFoundException struct {
@@ -140,15 +103,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *NotFoundException) GetCode() ErrorCode {
-	return e.Code
-}
 
 // The request exceeds the resource limit.
 type ResourceLimitExceededException struct {
@@ -168,15 +122,6 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 }
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceLimitExceededException) GetCode() ErrorCode {
-	return e.Code
-}
 
 // The service encountered an unexpected error.
 type ServiceFailureException struct {
@@ -196,15 +141,6 @@ func (e *ServiceFailureException) ErrorMessage() string {
 }
 func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailureException" }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceFailureException) GetCode() ErrorCode {
-	return e.Code
-}
-func (e *ServiceFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is currently unavailable.
 type ServiceUnavailableException struct {
@@ -224,15 +160,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceUnavailableException) GetCode() ErrorCode {
-	return e.Code
-}
 
 // The client exceeded its request rate limit.
 type ThrottledClientException struct {
@@ -252,15 +179,6 @@ func (e *ThrottledClientException) ErrorMessage() string {
 }
 func (e *ThrottledClientException) ErrorCode() string             { return "ThrottledClientException" }
 func (e *ThrottledClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottledClientException) GetCode() ErrorCode {
-	return e.Code
-}
-func (e *ThrottledClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottledClientException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The client is not currently authorized to make the request.
 type UnauthorizedClientException struct {
@@ -280,15 +198,6 @@ func (e *UnauthorizedClientException) ErrorMessage() string {
 }
 func (e *UnauthorizedClientException) ErrorCode() string             { return "UnauthorizedClientException" }
 func (e *UnauthorizedClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedClientException) GetCode() ErrorCode {
-	return e.Code
-}
-func (e *UnauthorizedClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedClientException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was well-formed but was unable to be followed due to semantic
 // errors.
@@ -309,12 +218,3 @@ func (e *UnprocessableEntityException) ErrorMessage() string {
 }
 func (e *UnprocessableEntityException) ErrorCode() string             { return "UnprocessableEntityException" }
 func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnprocessableEntityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnprocessableEntityException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnprocessableEntityException) GetCode() ErrorCode {
-	return e.Code
-}

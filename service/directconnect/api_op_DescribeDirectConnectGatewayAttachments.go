@@ -61,21 +61,27 @@ func (c *Client) DescribeDirectConnectGatewayAttachments(ctx context.Context, pa
 }
 
 type DescribeDirectConnectGatewayAttachmentsInput struct {
+
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. If
 	// MaxResults is given a value larger than 100, only 100 results are returned.
 	MaxResults *int32
+
 	// The token provided in the previous call to retrieve the next page.
 	NextToken *string
+
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
 }
 
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
+
 	// The token to retrieve the next page.
 	NextToken *string
+
 	// The attachments.
 	DirectConnectGatewayAttachments []*types.DirectConnectGatewayAttachment
 

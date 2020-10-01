@@ -59,13 +59,20 @@ func (c *Client) ModifyLoadBalancerAttributes(ctx context.Context, params *Modif
 }
 
 type ModifyLoadBalancerAttributesInput struct {
+
 	// The load balancer attributes.
+	//
+	// This member is required.
 	Attributes []*types.LoadBalancerAttribute
+
 	// The Amazon Resource Name (ARN) of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerArn *string
 }
 
 type ModifyLoadBalancerAttributesOutput struct {
+
 	// Information about the load balancer attributes.
 	Attributes []*types.LoadBalancerAttribute
 

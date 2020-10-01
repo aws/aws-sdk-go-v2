@@ -59,7 +59,10 @@ func (c *Client) DeleteIdentity(ctx context.Context, params *DeleteIdentityInput
 // Represents a request to delete one of your Amazon SES identities (an email
 // address or domain).
 type DeleteIdentityInput struct {
+
 	// The identity to be removed from the list of identities for the AWS Account.
+	//
+	// This member is required.
 	Identity *string
 }
 

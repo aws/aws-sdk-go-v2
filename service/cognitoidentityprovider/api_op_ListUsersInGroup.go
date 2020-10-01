@@ -57,21 +57,31 @@ func (c *Client) ListUsersInGroup(ctx context.Context, params *ListUsersInGroupI
 }
 
 type ListUsersInGroupInput struct {
+
 	// The name of the group.
+	//
+	// This member is required.
 	GroupName *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The limit of the request to list users.
 	Limit *int32
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
 }
 
 type ListUsersInGroupOutput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The users returned in the request to list users.
 	Users []*types.UserType
 

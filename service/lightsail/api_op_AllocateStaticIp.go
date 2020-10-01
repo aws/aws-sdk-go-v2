@@ -56,11 +56,15 @@ func (c *Client) AllocateStaticIp(ctx context.Context, params *AllocateStaticIpI
 }
 
 type AllocateStaticIpInput struct {
+
 	// The name of the static IP address.
+	//
+	// This member is required.
 	StaticIpName *string
 }
 
 type AllocateStaticIpOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

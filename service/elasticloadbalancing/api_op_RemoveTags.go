@@ -57,10 +57,16 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 
 // Contains the parameters for RemoveTags.
 type RemoveTagsInput struct {
+
 	// The name of the load balancer. You can specify a maximum of one load balancer
 	// name.
+	//
+	// This member is required.
 	LoadBalancerNames []*string
+
 	// The list of tag keys to remove.
+	//
+	// This member is required.
 	Tags []*types.TagKeyOnly
 }
 

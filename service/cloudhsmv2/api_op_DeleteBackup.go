@@ -58,12 +58,16 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 }
 
 type DeleteBackupInput struct {
+
 	// The ID of the backup to be deleted. To find the ID of a backup, use the
 	// DescribeBackups () operation.
+	//
+	// This member is required.
 	BackupId *string
 }
 
 type DeleteBackupOutput struct {
+
 	// Information on the Backup object deleted.
 	Backup *types.Backup
 

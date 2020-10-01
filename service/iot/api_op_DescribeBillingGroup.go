@@ -56,21 +56,30 @@ func (c *Client) DescribeBillingGroup(ctx context.Context, params *DescribeBilli
 }
 
 type DescribeBillingGroupInput struct {
+
 	// The name of the billing group.
+	//
+	// This member is required.
 	BillingGroupName *string
 }
 
 type DescribeBillingGroupOutput struct {
+
 	// The version of the billing group.
 	Version *int64
+
 	// The properties of the billing group.
 	BillingGroupProperties *types.BillingGroupProperties
+
 	// Additional information about the billing group.
 	BillingGroupMetadata *types.BillingGroupMetadata
+
 	// The ID of the billing group.
 	BillingGroupId *string
+
 	// The name of the billing group.
 	BillingGroupName *string
+
 	// The ARN of the billing group.
 	BillingGroupArn *string
 

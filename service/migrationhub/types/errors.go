@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised to indicate a successfully authorized action when the DryRun
 // flag is set to "true".
@@ -48,12 +41,6 @@ func (e *DryRunOperation) ErrorMessage() string {
 }
 func (e *DryRunOperation) ErrorCode() string             { return "DryRunOperation" }
 func (e *DryRunOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DryRunOperation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DryRunOperation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The home region is not set. Set the home region to continue.
 type HomeRegionNotSetException struct {
@@ -71,12 +58,6 @@ func (e *HomeRegionNotSetException) ErrorMessage() string {
 }
 func (e *HomeRegionNotSetException) ErrorCode() string             { return "HomeRegionNotSetException" }
 func (e *HomeRegionNotSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HomeRegionNotSetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HomeRegionNotSetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when an internal, configuration, or dependency error is
 // encountered.
@@ -95,12 +76,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when the provided input violates a policy constraint or is
 // entered in the wrong format or data type.
@@ -119,12 +94,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when there are problems accessing Application Discovery Service
 // (Application Discovery Service); most likely due to a misconfigured policy or
@@ -144,12 +113,6 @@ func (e *PolicyErrorException) ErrorMessage() string {
 }
 func (e *PolicyErrorException) ErrorCode() string             { return "PolicyErrorException" }
 func (e *PolicyErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when the request references a resource (Application Discovery
 // Service configuration, update stream, migration task, etc.) that does not exist
@@ -170,12 +133,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception raised when there is an internal, configuration, or dependency error
 // encountered.
@@ -194,12 +151,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -219,18 +170,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ThrottlingException) GetRetryAfterSeconds() int32 {
-	return ptr.ToInt32(e.RetryAfterSeconds)
-}
-func (e *ThrottlingException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
 
 // Exception raised to indicate a request was not authorized when the DryRun flag
 // is set to "true".
@@ -249,9 +188,3 @@ func (e *UnauthorizedOperation) ErrorMessage() string {
 }
 func (e *UnauthorizedOperation) ErrorCode() string             { return "UnauthorizedOperation" }
 func (e *UnauthorizedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedOperation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedOperation) HasMessage() bool {
-	return e.Message != nil
-}

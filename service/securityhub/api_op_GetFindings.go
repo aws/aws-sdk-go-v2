@@ -55,14 +55,18 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 }
 
 type GetFindingsInput struct {
+
 	// The finding attributes used to define a condition to filter the returned
 	// findings. Note that in the available filter fields, WorkflowState is deprecated.
 	// To search for a finding based on its workflow status, use WorkflowStatus.
 	Filters *types.AwsSecurityFindingFilters
+
 	// The finding attributes used to sort the list of returned findings.
 	SortCriteria []*types.SortCriterion
+
 	// The maximum number of findings to return.
 	MaxResults *int32
+
 	// The token that is required for pagination. On your first call to the GetFindings
 	// operation, set the value of this parameter to NULL. For subsequent calls to the
 	// operation, to continue listing data, set the value of this parameter to the
@@ -71,9 +75,13 @@ type GetFindingsInput struct {
 }
 
 type GetFindingsOutput struct {
+
 	// The pagination token to use to request the next page of results.
 	NextToken *string
+
 	// The findings that matched the filters specified in the request.
+	//
+	// This member is required.
 	Findings []*types.AwsSecurityFinding
 
 	// Metadata pertaining to the operation's result.

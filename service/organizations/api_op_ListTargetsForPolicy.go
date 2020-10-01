@@ -63,11 +63,13 @@ func (c *Client) ListTargetsForPolicy(ctx context.Context, params *ListTargetsFo
 }
 
 type ListTargetsForPolicyInput struct {
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -78,19 +80,24 @@ type ListTargetsForPolicyInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
 	// The unique identifier (ID) of the policy whose attachments you want to know. The
 	// regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string requires
 	// "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the
 	// underscore character (_).
+	//
+	// This member is required.
 	PolicyId *string
 }
 
 type ListTargetsForPolicyOutput struct {
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// A list of structures, each of which contains details about one of the entities
 	// to which the specified policy is attached.
 	Targets []*types.PolicyTargetSummary

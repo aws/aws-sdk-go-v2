@@ -55,9 +55,15 @@ func (c *Client) DeleteFilter(ctx context.Context, params *DeleteFilterInput, op
 }
 
 type DeleteFilterInput struct {
+
 	// The unique ID of the detector that the filter is associated with.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The name of the filter that you want to delete.
+	//
+	// This member is required.
 	FilterName *string
 }
 

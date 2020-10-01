@@ -58,9 +58,13 @@ func (c *Client) AcceptCertificateTransfer(ctx context.Context, params *AcceptCe
 
 // The input for the AcceptCertificateTransfer operation.
 type AcceptCertificateTransferInput struct {
+
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
+
 	// Specifies whether the certificate is active.
 	SetAsActive *bool
 }

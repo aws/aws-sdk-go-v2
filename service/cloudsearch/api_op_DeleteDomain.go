@@ -62,13 +62,17 @@ func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, op
 // Container for the parameters to the DeleteDomain () operation. Specifies the
 // name of the domain you want to delete.
 type DeleteDomainInput struct {
+
 	// The name of the domain you want to permanently delete.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a DeleteDomain request. Contains the status of a newly deleted
 // domain, or no status if the domain has already been completely deleted.
 type DeleteDomainOutput struct {
+
 	// The current status of the search domain.
 	DomainStatus *types.DomainStatus
 

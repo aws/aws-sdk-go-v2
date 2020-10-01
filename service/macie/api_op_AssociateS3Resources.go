@@ -60,15 +60,20 @@ func (c *Client) AssociateS3Resources(ctx context.Context, params *AssociateS3Re
 }
 
 type AssociateS3ResourcesInput struct {
+
 	// The S3 resources that you want to associate with Amazon Macie Classic for
 	// monitoring and data classification.
+	//
+	// This member is required.
 	S3Resources []*types.S3ResourceClassification
+
 	// The ID of the Amazon Macie Classic member account whose resources you want to
 	// associate with Macie Classic.
 	MemberAccountId *string
 }
 
 type AssociateS3ResourcesOutput struct {
+
 	// S3 resources that couldn't be associated with Amazon Macie Classic. An error
 	// code and an error message are provided for each failed item.
 	FailedS3Resources []*types.FailedS3Resource

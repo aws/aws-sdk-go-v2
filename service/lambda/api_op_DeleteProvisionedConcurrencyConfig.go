@@ -55,6 +55,7 @@ func (c *Client) DeleteProvisionedConcurrencyConfig(ctx context.Context, params 
 }
 
 type DeleteProvisionedConcurrencyConfigInput struct {
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -69,8 +70,13 @@ type DeleteProvisionedConcurrencyConfigInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The version number or alias name.
+	//
+	// This member is required.
 	Qualifier *string
 }
 

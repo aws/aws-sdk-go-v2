@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An API error occurred. Wait a few minutes and try again.
@@ -26,12 +25,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The image does not support storage connectors.
 type IncompatibleImageException struct {
@@ -49,12 +42,6 @@ func (e *IncompatibleImageException) ErrorMessage() string {
 }
 func (e *IncompatibleImageException) ErrorCode() string             { return "IncompatibleImageException" }
 func (e *IncompatibleImageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatibleImageException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatibleImageException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource cannot be created because your AWS account is suspended. For
 // assistance, contact AWS Support.
@@ -73,12 +60,6 @@ func (e *InvalidAccountStatusException) ErrorMessage() string {
 }
 func (e *InvalidAccountStatusException) ErrorCode() string             { return "InvalidAccountStatusException" }
 func (e *InvalidAccountStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAccountStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAccountStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates an incorrect combination of parameters, or a missing parameter.
 type InvalidParameterCombinationException struct {
@@ -100,12 +81,6 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidParameterCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified role is invalid.
 type InvalidRoleException struct {
@@ -123,12 +98,6 @@ func (e *InvalidRoleException) ErrorMessage() string {
 }
 func (e *InvalidRoleException) ErrorCode() string             { return "InvalidRoleException" }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRoleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRoleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested limit exceeds the permitted limit for an account.
 type LimitExceededException struct {
@@ -146,12 +115,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The attempted operation is not permitted.
 type OperationNotPermittedException struct {
@@ -169,12 +132,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -192,12 +149,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource is in use.
 type ResourceInUseException struct {
@@ -215,12 +166,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource exists and is not in use, but isn't available.
 type ResourceNotAvailableException struct {
@@ -238,12 +183,6 @@ func (e *ResourceNotAvailableException) ErrorMessage() string {
 }
 func (e *ResourceNotAvailableException) ErrorCode() string             { return "ResourceNotAvailableException" }
 func (e *ResourceNotAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotAvailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotAvailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -261,9 +200,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

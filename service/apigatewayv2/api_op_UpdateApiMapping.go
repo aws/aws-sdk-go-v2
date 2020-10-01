@@ -56,25 +56,40 @@ func (c *Client) UpdateApiMapping(ctx context.Context, params *UpdateApiMappingI
 
 // Updates an ApiMapping.
 type UpdateApiMappingInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The domain name.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The API stage.
 	Stage *string
+
 	// The API mapping key.
 	ApiMappingKey *string
+
 	// The API mapping identifier.
+	//
+	// This member is required.
 	ApiMappingId *string
 }
 
 type UpdateApiMappingOutput struct {
+
 	// The API stage.
 	Stage *string
+
 	// The API identifier.
 	ApiId *string
+
 	// The API mapping key.
 	ApiMappingKey *string
+
 	// The API mapping identifier.
 	ApiMappingId *string
 

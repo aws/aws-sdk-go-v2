@@ -57,15 +57,21 @@ func (c *Client) UpdateTrust(ctx context.Context, params *UpdateTrustInput, optF
 }
 
 type UpdateTrustInput struct {
+
 	// Updates selective authentication for the trust.
 	SelectiveAuth types.SelectiveAuth
+
 	// Identifier of the trust relationship.
+	//
+	// This member is required.
 	TrustId *string
 }
 
 type UpdateTrustOutput struct {
+
 	// The AWS request identifier.
 	RequestId *string
+
 	// Identifier of the trust relationship.
 	TrustId *string
 

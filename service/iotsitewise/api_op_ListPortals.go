@@ -55,16 +55,20 @@ func (c *Client) ListPortals(ctx context.Context, params *ListPortalsInput, optF
 }
 
 type ListPortalsInput struct {
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 }
 
 type ListPortalsOutput struct {
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
 	// A list that summarizes each portal.
 	PortalSummaries []*types.PortalSummary
 

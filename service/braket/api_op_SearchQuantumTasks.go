@@ -55,20 +55,29 @@ func (c *Client) SearchQuantumTasks(ctx context.Context, params *SearchQuantumTa
 }
 
 type SearchQuantumTasksInput struct {
+
 	// A token used for pagination of results returned in the response. Use the token
 	// returned from the previous request continue results where the previous request
 	// ended.
 	NextToken *string
+
 	// Maximum number of results to return in the response.
 	MaxResults *int32
+
 	// Array of SearchQuantumTasksFilter objects.
+	//
+	// This member is required.
 	Filters []*types.SearchQuantumTasksFilter
 }
 
 type SearchQuantumTasksOutput struct {
+
 	// An array of QuantumTaskSummary objects for tasks that match the specified
 	// filters.
+	//
+	// This member is required.
 	QuantumTasks []*types.QuantumTaskSummary
+
 	// A token used for pagination of results, or null if there are no additional
 	// results. Use the token value in a subsequent request to continue results where
 	// the previous request ended.

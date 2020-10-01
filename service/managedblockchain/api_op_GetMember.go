@@ -56,13 +56,20 @@ func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns .
 }
 
 type GetMemberInput struct {
+
 	// The unique identifier of the member.
+	//
+	// This member is required.
 	MemberId *string
+
 	// The unique identifier of the network to which the member belongs.
+	//
+	// This member is required.
 	NetworkId *string
 }
 
 type GetMemberOutput struct {
+
 	// The properties of a member.
 	Member *types.Member
 

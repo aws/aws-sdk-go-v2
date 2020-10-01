@@ -57,16 +57,21 @@ func (c *Client) DescribeSecurityGroupReferences(ctx context.Context, params *De
 }
 
 type DescribeSecurityGroupReferencesInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IDs of the security groups in your account.
+	//
+	// This member is required.
 	GroupId []*string
 }
 
 type DescribeSecurityGroupReferencesOutput struct {
+
 	// Information about the VPCs with the referencing security groups.
 	SecurityGroupReferenceSet []*types.SecurityGroupReference
 

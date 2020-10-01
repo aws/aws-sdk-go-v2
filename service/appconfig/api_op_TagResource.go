@@ -57,11 +57,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The ARN of the resource for which to retrieve tags.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag
 	// key can be up to 128 characters and must not start with aws:. The tag value can
 	// be up to 256 characters.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

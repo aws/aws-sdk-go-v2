@@ -59,16 +59,26 @@ func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCom
 }
 
 type DescribeCompilationJobInput struct {
+
 	// The name of the model compilation job that you want information about.
+	//
+	// This member is required.
 	CompilationJobName *string
 }
 
 type DescribeCompilationJobOutput struct {
+
 	// Information about the location in Amazon S3 that has been configured for storing
 	// the model artifacts used in the compilation job.
+	//
+	// This member is required.
 	ModelArtifacts *types.ModelArtifacts
+
 	// The Amazon Resource Name (ARN) of the model compilation job.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The time when the model compilation job started the CompilationJob instances.
 	// You are billed for the time between this timestamp and the timestamp in the
 	// DescribeCompilationJobResponse$CompilationEndTime () field. In Amazon CloudWatch
@@ -76,30 +86,58 @@ type DescribeCompilationJobOutput struct {
 	// to download the compilation job, which depends on the size of the compilation
 	// job container.
 	CompilationStartTime *time.Time
+
 	// The name of the model compilation job.
+	//
+	// This member is required.
 	CompilationJobName *string
+
 	// The time that the model compilation job was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The time that the status of the model compilation job was last modified.
+	//
+	// This member is required.
 	LastModifiedTime *time.Time
+
 	// If a model compilation job failed, the reason it failed.
+	//
+	// This member is required.
 	FailureReason *string
+
 	// Information about the location in Amazon S3 of the input model artifacts, the
 	// name and shape of the expected data inputs, and the framework in which the model
 	// was trained.
+	//
+	// This member is required.
 	InputConfig *types.InputConfig
+
 	// Information about the output location for the compiled model and the target
 	// device that the model runs on.
+	//
+	// This member is required.
 	OutputConfig *types.OutputConfig
+
 	// The status of the model compilation job.
+	//
+	// This member is required.
 	CompilationJobStatus types.CompilationJobStatus
+
 	// Specifies a limit to how long a model compilation job can run. When the job
 	// reaches the time limit, Amazon SageMaker ends the compilation job. Use this API
 	// to cap model training costs.
+	//
+	// This member is required.
 	StoppingCondition *types.StoppingCondition
+
 	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker assumes to
 	// perform the model compilation job.
+	//
+	// This member is required.
 	CompilationJobArn *string
+
 	// The time when the model compilation job on a compilation job instance ended. For
 	// a successful or stopped job, this is when the job's model artifacts have
 	// finished uploading. For a failed job, this is when Amazon SageMaker detected

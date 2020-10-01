@@ -71,13 +71,20 @@ func (c *Client) DeleteGlobalReplicationGroup(ctx context.Context, params *Delet
 }
 
 type DeleteGlobalReplicationGroupInput struct {
+
 	// The name of the Global Datastore
+	//
+	// This member is required.
 	GlobalReplicationGroupId *string
+
 	// The primary replication group is retained as a standalone replication group.
+	//
+	// This member is required.
 	RetainPrimaryReplicationGroup *bool
 }
 
 type DeleteGlobalReplicationGroupOutput struct {
+
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the

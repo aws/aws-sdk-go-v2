@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Unable to verify the CA certificate used to sign the device certificate you are
@@ -26,12 +25,6 @@ func (e *CertificateConflictException) ErrorMessage() string {
 }
 func (e *CertificateConflictException) ErrorCode() string             { return "CertificateConflictException" }
 func (e *CertificateConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The certificate operation is not allowed.
 type CertificateStateException struct {
@@ -49,12 +42,6 @@ func (e *CertificateStateException) ErrorMessage() string {
 }
 func (e *CertificateStateException) ErrorCode() string             { return "CertificateStateException" }
 func (e *CertificateStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The certificate is invalid.
 type CertificateValidationException struct {
@@ -72,12 +59,6 @@ func (e *CertificateValidationException) ErrorMessage() string {
 }
 func (e *CertificateValidationException) ErrorCode() string             { return "CertificateValidationException" }
 func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A conflicting resource update exception. This exception is thrown when two
 // pending updates cause a conflict.
@@ -100,12 +81,6 @@ func (e *ConflictingResourceUpdateException) ErrorCode() string {
 func (e *ConflictingResourceUpdateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ConflictingResourceUpdateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictingResourceUpdateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't delete the resource because it is attached to one or more resources.
 type DeleteConflictException struct {
@@ -123,12 +98,6 @@ func (e *DeleteConflictException) ErrorMessage() string {
 }
 func (e *DeleteConflictException) ErrorCode() string             { return "DeleteConflictException" }
 func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DeleteConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeleteConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The index is not ready.
 type IndexNotReadyException struct {
@@ -146,12 +115,6 @@ func (e *IndexNotReadyException) ErrorMessage() string {
 }
 func (e *IndexNotReadyException) ErrorCode() string             { return "IndexNotReadyException" }
 func (e *IndexNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IndexNotReadyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IndexNotReadyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An unexpected error has occurred.
 type InternalException struct {
@@ -169,12 +132,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An unexpected error has occurred.
 type InternalFailureException struct {
@@ -192,12 +149,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The aggregation is invalid.
 type InvalidAggregationException struct {
@@ -215,12 +166,6 @@ func (e *InvalidAggregationException) ErrorMessage() string {
 }
 func (e *InvalidAggregationException) ErrorCode() string             { return "InvalidAggregationException" }
 func (e *InvalidAggregationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAggregationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAggregationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The query is invalid.
 type InvalidQueryException struct {
@@ -238,12 +183,6 @@ func (e *InvalidQueryException) ErrorMessage() string {
 }
 func (e *InvalidQueryException) ErrorCode() string             { return "InvalidQueryException" }
 func (e *InvalidQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidQueryException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidQueryException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is not valid.
 type InvalidRequestException struct {
@@ -261,12 +200,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The response is invalid.
 type InvalidResponseException struct {
@@ -284,12 +217,6 @@ func (e *InvalidResponseException) ErrorMessage() string {
 }
 func (e *InvalidResponseException) ErrorCode() string             { return "InvalidResponseException" }
 func (e *InvalidResponseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResponseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResponseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An attempt was made to change to an invalid state, for example by deleting a job
 // or a job execution which is "IN_PROGRESS" without setting the force parameter.
@@ -310,12 +237,6 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 	return "InvalidStateTransitionException"
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateTransitionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateTransitionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A limit has been exceeded.
 type LimitExceededException struct {
@@ -333,12 +254,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The policy documentation is not valid.
 type MalformedPolicyException struct {
@@ -356,12 +271,6 @@ func (e *MalformedPolicyException) ErrorMessage() string {
 }
 func (e *MalformedPolicyException) ErrorCode() string             { return "MalformedPolicyException" }
 func (e *MalformedPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is not configured.
 type NotConfiguredException struct {
@@ -379,12 +288,6 @@ func (e *NotConfiguredException) ErrorMessage() string {
 }
 func (e *NotConfiguredException) ErrorCode() string             { return "NotConfiguredException" }
 func (e *NotConfiguredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotConfiguredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotConfiguredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The registration code is invalid.
 type RegistrationCodeValidationException struct {
@@ -406,12 +309,6 @@ func (e *RegistrationCodeValidationException) ErrorCode() string {
 func (e *RegistrationCodeValidationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *RegistrationCodeValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RegistrationCodeValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -432,24 +329,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceAlreadyExistsException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceAlreadyExistsException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ResourceAlreadyExistsException) GetResourceArn() string {
-	return ptr.ToString(e.ResourceArn)
-}
-func (e *ResourceAlreadyExistsException) HasResourceArn() bool {
-	return e.ResourceArn != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -467,12 +346,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource registration failed.
 type ResourceRegistrationFailureException struct {
@@ -494,12 +367,6 @@ func (e *ResourceRegistrationFailureException) ErrorCode() string {
 func (e *ResourceRegistrationFailureException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceRegistrationFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceRegistrationFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
@@ -517,12 +384,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Rule-SQL expression can't be parsed correctly.
 type SqlParseException struct {
@@ -540,12 +401,6 @@ func (e *SqlParseException) ErrorMessage() string {
 }
 func (e *SqlParseException) ErrorCode() string             { return "SqlParseException" }
 func (e *SqlParseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SqlParseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SqlParseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception occurs if you attempt to start a task with the same task-id as an
 // existing task but with a different clientRequestToken.
@@ -564,12 +419,6 @@ func (e *TaskAlreadyExistsException) ErrorMessage() string {
 }
 func (e *TaskAlreadyExistsException) ErrorCode() string             { return "TaskAlreadyExistsException" }
 func (e *TaskAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TaskAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TaskAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The rate exceeds the limit.
 type ThrottlingException struct {
@@ -587,12 +436,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't revert the certificate transfer because the transfer is already
 // complete.
@@ -613,12 +456,6 @@ func (e *TransferAlreadyCompletedException) ErrorCode() string {
 	return "TransferAlreadyCompletedException"
 }
 func (e *TransferAlreadyCompletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TransferAlreadyCompletedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TransferAlreadyCompletedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't transfer the certificate because authorization policies are still
 // attached.
@@ -637,12 +474,6 @@ func (e *TransferConflictException) ErrorMessage() string {
 }
 func (e *TransferConflictException) ErrorCode() string             { return "TransferConflictException" }
 func (e *TransferConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TransferConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TransferConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You are not authorized to perform this operation.
 type UnauthorizedException struct {
@@ -660,12 +491,6 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An exception thrown when the version of an entity specified with the
 // expectedVersion parameter does not match the latest version in the system.
@@ -684,12 +509,6 @@ func (e *VersionConflictException) ErrorMessage() string {
 }
 func (e *VersionConflictException) ErrorCode() string             { return "VersionConflictException" }
 func (e *VersionConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *VersionConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VersionConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of policy versions exceeds the limit.
 type VersionsLimitExceededException struct {
@@ -707,9 +526,3 @@ func (e *VersionsLimitExceededException) ErrorMessage() string {
 }
 func (e *VersionsLimitExceededException) ErrorCode() string             { return "VersionsLimitExceededException" }
 func (e *VersionsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *VersionsLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VersionsLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}

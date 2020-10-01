@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There was a conflict processing the request. Updating or deleting the resource
 // can cause an inconsistent state.
@@ -51,24 +44,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ConflictException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ConflictException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ConflictException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
 
 // The request has failed due to an internal error.
 type InternalServerException struct {
@@ -88,18 +63,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetRetryAfterSeconds() int32 {
-	return ptr.ToInt32(e.RetryAfterSeconds)
-}
-func (e *InternalServerException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
@@ -120,24 +83,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ResourceNotFoundException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ResourceNotFoundException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceNotFoundException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A service limit was exceeded.
 type ServiceQuotaExceededException struct {
@@ -160,36 +105,6 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceQuotaExceededException) GetLimitCode() string {
-	return ptr.ToString(e.LimitCode)
-}
-func (e *ServiceQuotaExceededException) HasLimitCode() bool {
-	return e.LimitCode != nil
-}
-func (e *ServiceQuotaExceededException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ServiceQuotaExceededException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ServiceQuotaExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceQuotaExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ServiceQuotaExceededException) GetResourceId() string {
-	return ptr.ToString(e.ResourceId)
-}
-func (e *ServiceQuotaExceededException) HasResourceId() bool {
-	return e.ResourceId != nil
-}
-func (e *ServiceQuotaExceededException) GetServiceCode() string {
-	return ptr.ToString(e.ServiceCode)
-}
-func (e *ServiceQuotaExceededException) HasServiceCode() bool {
-	return e.ServiceCode != nil
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -209,18 +124,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetRetryAfterSeconds() int32 {
-	return ptr.ToInt32(e.RetryAfterSeconds)
-}
-func (e *ThrottlingException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input fails to satisfy the constraints.
 type ValidationException struct {
@@ -241,18 +144,3 @@ func (e *ValidationException) ErrorMessage() string {
 }
 func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ValidationException) GetFields() []*ValidationExceptionField {
-	return e.Fields
-}
-func (e *ValidationException) HasFields() bool {
-	return e.Fields != nil
-}
-func (e *ValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ValidationException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ValidationException) GetReason() ValidationExceptionReason {
-	return e.Reason
-}

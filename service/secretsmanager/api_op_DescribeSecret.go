@@ -76,6 +76,7 @@ func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput
 }
 
 type DescribeSecretInput struct {
+
 	// The identifier of the secret whose details you want to retrieve. You can specify
 	// either the Amazon Resource Name (ARN) or the friendly name of the secret. If you
 	// specify an ARN, we generally recommend that you specify a complete ARN. You can
@@ -93,57 +94,74 @@ type DescribeSecretInput struct {
 	// you do include the random suffix added by Secrets Manager, you receive either a
 	// ResourceNotFoundException or an AccessDeniedException error, depending on your
 	// permissions.
+	//
+	// This member is required.
 	SecretId *string
 }
 
 type DescribeSecretOutput struct {
+
 	// The ARN of a Lambda function that's invoked by Secrets Manager to rotate the
 	// secret either automatically per the schedule or manually by a call to
 	// RotateSecret.
 	RotationLambdaARN *string
+
 	// The last date that this secret was accessed. This value is truncated to midnight
 	// of the date and therefore shows only the date, not the time.
 	LastAccessedDate *time.Time
+
 	// The list of user-defined tags that are associated with the secret. To add tags
 	// to a secret, use TagResource (). To remove tags, use UntagResource ().
 	Tags []*types.Tag
+
 	// Returns the name of the service that created this secret.
 	OwningService *string
+
 	// This value exists if the secret is scheduled for deletion. Some time after the
 	// specified date and time, Secrets Manager deletes the secret and all of its
 	// versions. If a secret is scheduled for deletion, then its details, including the
 	// encrypted secret information, is not accessible. To cancel a scheduled deletion
 	// and restore access, use RestoreSecret ().
 	DeletedDate *time.Time
+
 	// A list of all of the currently assigned VersionStage staging labels and the
 	// VersionId that each is attached to. Staging labels are used to keep track of the
 	// different versions during the rotation process. A version that does not have any
 	// staging labels attached is considered deprecated and subject to deletion. Such
 	// versions are not included in this list.
 	VersionIdsToStages map[string][]*string
+
 	// The ARN of the secret.
 	ARN *string
+
 	// The date that the secret was created.
 	CreatedDate *time.Time
+
 	// The most recent date and time that the Secrets Manager rotation process was
 	// successfully completed. This value is null if the secret has never rotated.
 	LastRotatedDate *time.Time
+
 	// The user-provided friendly name of the secret.
 	Name *string
+
 	// The user-provided description of the secret.
 	Description *string
+
 	// A structure that contains the rotation configuration for this secret.
 	RotationRules *types.RotationRulesType
+
 	// Specifies whether automatic rotation is enabled for this secret. To enable
 	// rotation, use RotateSecret () with AutomaticallyRotateAfterDays set to a value
 	// greater than 0. To disable rotation, use CancelRotateSecret ().
 	RotationEnabled *bool
+
 	// The ARN or alias of the AWS KMS customer master key (CMK) that's used to encrypt
 	// the SecretString or SecretBinary fields in each version of the secret. If you
 	// don't provide a key, then Secrets Manager defaults to encrypting the secret
 	// fields with the default AWS KMS CMK (the one named awssecretsmanager) for this
 	// account.
 	KmsKeyId *string
+
 	// The last date and time that this secret was modified in any way.
 	LastChangedDate *time.Time
 

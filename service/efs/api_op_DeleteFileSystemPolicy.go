@@ -61,7 +61,10 @@ func (c *Client) DeleteFileSystemPolicy(ctx context.Context, params *DeleteFileS
 }
 
 type DeleteFileSystemPolicyInput struct {
+
 	// Specifies the EFS file system for which to delete the FileSystemPolicy.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 

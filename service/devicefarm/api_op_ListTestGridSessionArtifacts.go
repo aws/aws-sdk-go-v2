@@ -56,19 +56,27 @@ func (c *Client) ListTestGridSessionArtifacts(ctx context.Context, params *ListT
 }
 
 type ListTestGridSessionArtifactsInput struct {
+
 	// The ARN of a TestGridSession ().
+	//
+	// This member is required.
 	SessionArn *string
+
 	// Pagination token.
 	NextToken *string
+
 	// Limit results to a specified type of artifact.
 	Type types.TestGridSessionArtifactCategory
+
 	// The maximum number of results to be returned by a request.
 	MaxResult *int32
 }
 
 type ListTestGridSessionArtifactsOutput struct {
+
 	// Pagination token.
 	NextToken *string
+
 	// A list of test grid session artifacts for a TestGridSession ().
 	Artifacts []*types.TestGridSessionArtifact
 

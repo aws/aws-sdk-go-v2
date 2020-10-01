@@ -12,7 +12,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes the PublicAccessBlock configuration for an Amazon Web Services account.
+// Removes the PublicAccessBlock configuration for an AWS account. For more
+// information, see  Using Amazon S3 block public access
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
+// Related actions include:
+//
+//     * GetPublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
+//
+//
+// * PutPublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html)
 func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePublicAccessBlockInput, optFns ...func(*Options)) (*DeletePublicAccessBlockOutput, error) {
 	stack := middleware.NewStack("DeletePublicAccessBlock", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
@@ -56,8 +66,11 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 }
 
 type DeletePublicAccessBlockInput struct {
-	// The account ID for the Amazon Web Services account whose PublicAccessBlock
-	// configuration you want to remove.
+
+	// The account ID for the AWS account whose PublicAccessBlock configuration you
+	// want to remove.
+	//
+	// This member is required.
 	AccountId *string
 }
 

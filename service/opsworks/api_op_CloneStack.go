@@ -62,6 +62,7 @@ func (c *Client) CloneStack(ctx context.Context, params *CloneStackInput, optFns
 }
 
 type CloneStackInput struct {
+
 	// The default AWS OpsWorks Stacks agent version. You have the following options:
 	//
 	//
@@ -81,8 +82,10 @@ type CloneStackInput struct {
 	// specify an agent version when you create or update an instance, which overrides
 	// the stack's default setting.
 	AgentVersion *string
+
 	// Whether to use custom cookbooks.
 	UseCustomCookbooks *bool
+
 	// The stack's operating system, which must be set to one of the following.
 	//
 	//     *
@@ -116,6 +119,7 @@ type CloneStackInput struct {
 	// You can specify a different Linux operating system for the cloned stack, but you
 	// cannot change from Linux to Windows or Windows to Linux.
 	DefaultOs *string
+
 	// The stack AWS Identity and Access Management (IAM) role, which allows AWS
 	// OpsWorks Stacks to work with AWS resources on your behalf. You must set this
 	// parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you
@@ -127,15 +131,20 @@ type CloneStackInput struct {
 	// must set this parameter to a valid service role ARN or the action will fail;
 	// there is no default value. You can specify the source stack's service role ARN,
 	// if you prefer, but you must do so explicitly.
+	//
+	// This member is required.
 	ServiceRoleArn *string
+
 	// The Amazon Resource Name (ARN) of an IAM profile that is the default profile for
 	// all of the stack's EC2 instances. For more information about IAM ARNs, see Using
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	DefaultInstanceProfileArn *string
+
 	// A list of stack attributes and values as key/value pairs to be added to the
 	// cloned stack.
 	Attributes map[string]*string
+
 	// Whether to associate the AWS OpsWorks Stacks built-in security groups with the
 	// stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security
 	// groups, one for each layer, which are associated with layers by default. With
@@ -158,6 +167,7 @@ type CloneStackInput struct {
 	// For more information, see Create a New Stack
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
 	UseOpsworksSecurityGroups *bool
+
 	// A string that contains user-defined, custom JSON. It is used to override the
 	// corresponding default stack configuration JSON values. The string should be in
 	// the following format: "{\"key1\": \"value1\", \"key2\": \"value2\",...}" For
@@ -165,10 +175,12 @@ type CloneStackInput struct {
 	// Configuration Attributes
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
 	CustomJson *string
+
 	// The cloned stack AWS region, such as "ap-northeast-2". For more information
 	// about AWS regions, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	Region *string
+
 	// A default Amazon EC2 key pair name. The default value is none. If you specify a
 	// key pair name, AWS OpsWorks installs the public key on the instance and you can
 	// use the private key with an SSH client to log in to the instance. For more
@@ -180,6 +192,7 @@ type CloneStackInput struct {
 	// pair, when you  create an instance
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
 	DefaultSshKeyName *string
+
 	// The stack's default VPC subnet ID. This parameter is required if you specify a
 	// value for the VpcId parameter. All instances are launched into this subnet
 	// unless you specify otherwise when you create the instance. If you also specify a
@@ -187,24 +200,29 @@ type CloneStackInput struct {
 	// information on default values and when this parameter is required, see the VpcId
 	// parameter description.
 	DefaultSubnetId *string
+
 	// Contains the information required to retrieve an app or cookbook from a
 	// repository. For more information, see Adding Apps
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
 	// or Cookbooks and Recipes
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
 	CustomCookbooksSource *types.Source
+
 	// The configuration manager. When you clone a stack we recommend that you use the
 	// configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux
 	// stacks, or 12.2 for Windows stacks. The default value for Linux stacks is
 	// currently 12.
 	ConfigurationManager *types.StackConfigurationManager
+
 	// A list of source stack app IDs to be included in the cloned stack.
 	CloneAppIds []*string
+
 	// The default root device type. This value is used by default for all instances in
 	// the cloned stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
 	DefaultRootDeviceType types.RootDeviceType
+
 	// The ID of the VPC that the cloned stack is to be launched into. It must be in
 	// the specified region. All instances are launched into this VPC, and you cannot
 	// change the ID later.
@@ -236,6 +254,7 @@ type CloneStackInput struct {
 	// For more information about default VPC and EC2 Classic, see Supported Platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
 	VpcId *string
+
 	// The stack's host name theme, with spaces are replaced by underscores. The theme
 	// is used to generate host names for the stack's instances. By default,
 	// HostnameTheme is set to Layer_Dependent, which creates host names by appending
@@ -270,17 +289,24 @@ type CloneStackInput struct {
 	// name, call GetHostNameSuggestion, which returns a host name based on the current
 	// theme.
 	HostnameTheme *string
+
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version on Chef 11.10 stacks. For more information, see Create a New
 	// Stack
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
 	ChefConfiguration *types.ChefConfiguration
+
 	// The cloned stack name.
 	Name *string
+
 	// Whether to clone the source stack's permissions.
 	ClonePermissions *bool
+
 	// The source stack ID.
+	//
+	// This member is required.
 	SourceStackId *string
+
 	// The cloned stack's default Availability Zone, which must be in the specified
 	// region. For more information, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html). If you also specify
@@ -291,6 +317,7 @@ type CloneStackInput struct {
 
 // Contains the response to a CloneStack request.
 type CloneStackOutput struct {
+
 	// The cloned stack ID.
 	StackId *string
 

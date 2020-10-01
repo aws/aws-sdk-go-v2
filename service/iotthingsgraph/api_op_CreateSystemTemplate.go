@@ -58,14 +58,19 @@ func (c *Client) CreateSystemTemplate(ctx context.Context, params *CreateSystemT
 }
 
 type CreateSystemTemplateInput struct {
+
 	// The DefinitionDocument used to create the system.
+	//
+	// This member is required.
 	Definition *types.DefinitionDocument
+
 	// The namespace version in which the system is to be created. If no value is
 	// specified, the latest version is used by default.
 	CompatibleNamespaceVersion *int64
 }
 
 type CreateSystemTemplateOutput struct {
+
 	// The summary object that describes the created system.
 	Summary *types.SystemTemplateSummary
 

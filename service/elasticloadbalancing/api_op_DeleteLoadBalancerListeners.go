@@ -56,9 +56,15 @@ func (c *Client) DeleteLoadBalancerListeners(ctx context.Context, params *Delete
 
 // Contains the parameters for DeleteLoadBalancerListeners.
 type DeleteLoadBalancerListenersInput struct {
+
 	// The client port numbers of the listeners.
+	//
+	// This member is required.
 	LoadBalancerPorts []*int32
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 

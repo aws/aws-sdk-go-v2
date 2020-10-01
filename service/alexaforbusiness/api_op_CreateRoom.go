@@ -58,21 +58,30 @@ func (c *Client) CreateRoom(ctx context.Context, params *CreateRoomInput, optFns
 }
 
 type CreateRoomInput struct {
+
 	// The calendar ARN for the room.
 	ProviderCalendarId *string
+
 	// The name for the room.
+	//
+	// This member is required.
 	RoomName *string
+
 	// A unique, user-specified identifier for this request that ensures idempotency.
 	ClientRequestToken *string
+
 	// The profile ARN for the room. This is required.
 	ProfileArn *string
+
 	// The description for the room.
 	Description *string
+
 	// The tags for the room.
 	Tags []*types.Tag
 }
 
 type CreateRoomOutput struct {
+
 	// The ARN of the newly created room in the response.
 	RoomArn *string
 

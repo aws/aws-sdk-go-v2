@@ -58,15 +58,23 @@ func (c *Client) CreateRoom(ctx context.Context, params *CreateRoomInput, optFns
 }
 
 type CreateRoomInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The room name.
+	//
+	// This member is required.
 	Name *string
+
 	// The idempotency token for the request.
 	ClientRequestToken *string
 }
 
 type CreateRoomOutput struct {
+
 	// The room details.
 	Room *types.Room
 

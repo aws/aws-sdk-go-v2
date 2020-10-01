@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // There was a conflict when you attempted to modify an experiment, trial, or trial
@@ -25,12 +24,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Resource being accessed is in use.
 type ResourceInUse struct {
@@ -48,12 +41,6 @@ func (e *ResourceInUse) ErrorMessage() string {
 }
 func (e *ResourceInUse) ErrorCode() string             { return "ResourceInUse" }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded an Amazon SageMaker resource limit. For example, you might
 // have too many training jobs created.
@@ -72,12 +59,6 @@ func (e *ResourceLimitExceeded) ErrorMessage() string {
 }
 func (e *ResourceLimitExceeded) ErrorCode() string             { return "ResourceLimitExceeded" }
 func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Resource being access is not found.
 type ResourceNotFound struct {
@@ -95,9 +76,3 @@ func (e *ResourceNotFound) ErrorMessage() string {
 }
 func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFound) HasMessage() bool {
-	return e.Message != nil
-}

@@ -56,7 +56,10 @@ func (c *Client) DeleteUpload(ctx context.Context, params *DeleteUploadInput, op
 
 // Represents a request to the delete upload operation.
 type DeleteUploadInput struct {
+
 	// Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

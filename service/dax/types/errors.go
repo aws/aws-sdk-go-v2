@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You already have a DAX cluster with the given identifier.
@@ -24,12 +23,6 @@ func (e *ClusterAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *ClusterAlreadyExistsFault) ErrorCode() string             { return "ClusterAlreadyExistsFault" }
 func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested cluster ID does not refer to an existing DAX cluster.
 type ClusterNotFoundFault struct {
@@ -47,12 +40,6 @@ func (e *ClusterNotFoundFault) ErrorMessage() string {
 }
 func (e *ClusterNotFoundFault) ErrorCode() string             { return "ClusterNotFoundFault" }
 func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have attempted to exceed the maximum number of DAX clusters for your AWS
 // account.
@@ -75,12 +62,6 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorCode() string {
 func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterQuotaForCustomerExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterQuotaForCustomerExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There are not enough system resources to create the cluster you requested (or to
 // resize an already-existing cluster).
@@ -101,12 +82,6 @@ func (e *InsufficientClusterCapacityFault) ErrorCode() string {
 	return "InsufficientClusterCapacityFault"
 }
 func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientClusterCapacityFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientClusterCapacityFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Resource Name (ARN) supplied in the request is not valid.
 type InvalidARNFault struct {
@@ -124,12 +99,6 @@ func (e *InvalidARNFault) ErrorMessage() string {
 }
 func (e *InvalidARNFault) ErrorCode() string             { return "InvalidARNFault" }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidARNFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidARNFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested DAX cluster is not in the available state.
 type InvalidClusterStateFault struct {
@@ -147,12 +116,6 @@ func (e *InvalidClusterStateFault) ErrorMessage() string {
 }
 func (e *InvalidClusterStateFault) ErrorCode() string             { return "InvalidClusterStateFault" }
 func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClusterStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Two or more incompatible parameters were specified.
 type InvalidParameterCombinationException struct {
@@ -174,12 +137,6 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidParameterCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameters in a parameter group are in an invalid state.
 type InvalidParameterGroupStateFault struct {
@@ -199,12 +156,6 @@ func (e *InvalidParameterGroupStateFault) ErrorCode() string {
 	return "InvalidParameterGroupStateFault"
 }
 func (e *InvalidParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterGroupStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value for a parameter is invalid.
 type InvalidParameterValueException struct {
@@ -222,12 +173,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An invalid subnet identifier was specified.
 type InvalidSubnet struct {
@@ -245,12 +190,6 @@ func (e *InvalidSubnet) ErrorMessage() string {
 }
 func (e *InvalidSubnet) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSubnet) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubnet) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The VPC network is in an invalid state.
 type InvalidVPCNetworkStateFault struct {
@@ -268,12 +207,6 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 }
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidVPCNetworkStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidVPCNetworkStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // None of the nodes in the cluster have the given node ID.
 type NodeNotFoundFault struct {
@@ -291,12 +224,6 @@ func (e *NodeNotFoundFault) ErrorMessage() string {
 }
 func (e *NodeNotFoundFault) ErrorCode() string             { return "NodeNotFoundFault" }
 func (e *NodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NodeNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have attempted to exceed the maximum number of nodes for a DAX cluster.
 type NodeQuotaForClusterExceededFault struct {
@@ -316,12 +243,6 @@ func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
 	return "NodeQuotaForClusterExceededFault"
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NodeQuotaForClusterExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeQuotaForClusterExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have attempted to exceed the maximum number of nodes for your AWS account.
 type NodeQuotaForCustomerExceededFault struct {
@@ -341,12 +262,6 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
 	return "NodeQuotaForCustomerExceededFault"
 }
 func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NodeQuotaForCustomerExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NodeQuotaForCustomerExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified parameter group already exists.
 type ParameterGroupAlreadyExistsFault struct {
@@ -366,12 +281,6 @@ func (e *ParameterGroupAlreadyExistsFault) ErrorCode() string {
 	return "ParameterGroupAlreadyExistsFault"
 }
 func (e *ParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified parameter group does not exist.
 type ParameterGroupNotFoundFault struct {
@@ -389,12 +298,6 @@ func (e *ParameterGroupNotFoundFault) ErrorMessage() string {
 }
 func (e *ParameterGroupNotFoundFault) ErrorCode() string             { return "ParameterGroupNotFoundFault" }
 func (e *ParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have attempted to exceed the maximum number of parameter groups.
 type ParameterGroupQuotaExceededFault struct {
@@ -414,12 +317,6 @@ func (e *ParameterGroupQuotaExceededFault) ErrorCode() string {
 	return "ParameterGroupQuotaExceededFault"
 }
 func (e *ParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ParameterGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ParameterGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified service linked role (SLR) was not found.
 type ServiceLinkedRoleNotFoundFault struct {
@@ -437,12 +334,6 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorMessage() string {
 }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string             { return "ServiceLinkedRoleNotFoundFault" }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceLinkedRoleNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceLinkedRoleNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified subnet group already exists.
 type SubnetGroupAlreadyExistsFault struct {
@@ -460,12 +351,6 @@ func (e *SubnetGroupAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *SubnetGroupAlreadyExistsFault) ErrorCode() string             { return "SubnetGroupAlreadyExistsFault" }
 func (e *SubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified subnet group is currently in use.
 type SubnetGroupInUseFault struct {
@@ -483,12 +368,6 @@ func (e *SubnetGroupInUseFault) ErrorMessage() string {
 }
 func (e *SubnetGroupInUseFault) ErrorCode() string             { return "SubnetGroupInUseFault" }
 func (e *SubnetGroupInUseFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetGroupInUseFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetGroupInUseFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested subnet group name does not refer to an existing subnet group.
 type SubnetGroupNotFoundFault struct {
@@ -506,12 +385,6 @@ func (e *SubnetGroupNotFoundFault) ErrorMessage() string {
 }
 func (e *SubnetGroupNotFoundFault) ErrorCode() string             { return "SubnetGroupNotFoundFault" }
 func (e *SubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // subnets in a subnet group.
@@ -530,12 +403,6 @@ func (e *SubnetGroupQuotaExceededFault) ErrorMessage() string {
 }
 func (e *SubnetGroupQuotaExceededFault) ErrorCode() string             { return "SubnetGroupQuotaExceededFault" }
 func (e *SubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested subnet is being used by another subnet group.
 type SubnetInUse struct {
@@ -553,12 +420,6 @@ func (e *SubnetInUse) ErrorMessage() string {
 }
 func (e *SubnetInUse) ErrorCode() string             { return "SubnetInUse" }
 func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be processed because it would exceed the allowed number of
 // subnets in a subnet group.
@@ -577,12 +438,6 @@ func (e *SubnetQuotaExceededFault) ErrorMessage() string {
 }
 func (e *SubnetQuotaExceededFault) ErrorCode() string             { return "SubnetQuotaExceededFault" }
 func (e *SubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag does not exist.
 type TagNotFoundFault struct {
@@ -600,12 +455,6 @@ func (e *TagNotFoundFault) ErrorMessage() string {
 }
 func (e *TagNotFoundFault) ErrorCode() string             { return "TagNotFoundFault" }
 func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the maximum number of tags for this DAX cluster.
 type TagQuotaPerResourceExceeded struct {
@@ -623,9 +472,3 @@ func (e *TagQuotaPerResourceExceeded) ErrorMessage() string {
 }
 func (e *TagQuotaPerResourceExceeded) ErrorCode() string             { return "TagQuotaPerResourceExceeded" }
 func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagQuotaPerResourceExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagQuotaPerResourceExceeded) HasMessage() bool {
-	return e.Message != nil
-}

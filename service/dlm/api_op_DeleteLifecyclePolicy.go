@@ -56,7 +56,10 @@ func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecy
 }
 
 type DeleteLifecyclePolicyInput struct {
+
 	// The identifier of the lifecycle policy.
+	//
+	// This member is required.
 	PolicyId *string
 }
 

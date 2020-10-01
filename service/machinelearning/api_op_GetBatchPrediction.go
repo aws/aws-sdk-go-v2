@@ -58,19 +58,25 @@ func (c *Client) GetBatchPrediction(ctx context.Context, params *GetBatchPredict
 }
 
 type GetBatchPredictionInput struct {
+
 	// An ID assigned to the BatchPrediction at creation.
+	//
+	// This member is required.
 	BatchPredictionId *string
 }
 
 // Represents the output of a GetBatchPrediction operation and describes a
 // BatchPrediction.
 type GetBatchPredictionOutput struct {
+
 	// The ID of the MLModel that generated predictions for the BatchPrediction
 	// request.
 	MLModelId *string
+
 	// The time when the BatchPrediction was created. The time is expressed in epoch
 	// time.
 	CreatedAt *time.Time
+
 	// The status of the BatchPrediction, which can be one of the following values:
 	//
 	//
@@ -89,46 +95,60 @@ type GetBatchPredictionOutput struct {
 	//     * DELETED - The BatchPrediction is marked as deleted. It is
 	// not usable.
 	Status types.EntityStatus
+
 	// The time of the most recent edit to BatchPrediction. The time is expressed in
 	// epoch time.
 	LastUpdatedAt *time.Time
+
 	// The number of total records that Amazon Machine Learning saw while processing
 	// the BatchPrediction.
 	TotalRecordCount *int64
+
 	// The number of invalid records that Amazon Machine Learning saw while processing
 	// the BatchPrediction.
 	InvalidRecordCount *int64
+
 	// The epoch time when Amazon Machine Learning marked the BatchPrediction as
 	// INPROGRESS. StartedAt isn't available if the BatchPrediction is in the PENDING
 	// state.
 	StartedAt *time.Time
+
 	// An ID assigned to the BatchPrediction at creation. This value should be
 	// identical to the value of the BatchPredictionID in the request.
 	BatchPredictionId *string
+
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the BatchPrediction, normalized and scaled on computation resources.
 	// ComputeTime is only available if the BatchPrediction is in the COMPLETED state.
 	ComputeTime *int64
+
 	// The AWS user account that invoked the BatchPrediction. The account type can be
 	// either an AWS root account or an AWS Identity and Access Management (IAM) user
 	// account.
 	CreatedByIamUser *string
+
 	// The epoch time when Amazon Machine Learning marked the BatchPrediction as
 	// COMPLETED or FAILED. FinishedAt is only available when the BatchPrediction is in
 	// the COMPLETED or FAILED state.
 	FinishedAt *time.Time
+
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
 	InputDataLocationS3 *string
+
 	// A link to the file that contains logs of the CreateBatchPrediction operation.
 	LogUri *string
+
 	// A description of the most recent details about processing the batch prediction
 	// request.
 	Message *string
+
 	// The ID of the DataSource that was used to create the BatchPrediction.
 	BatchPredictionDataSourceId *string
+
 	// A user-supplied name or description of the BatchPrediction.
 	Name *string
+
 	// The location of an Amazon S3 bucket or directory to receive the operation
 	// results.
 	OutputUri *string

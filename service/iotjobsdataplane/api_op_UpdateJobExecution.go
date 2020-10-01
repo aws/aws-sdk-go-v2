@@ -56,14 +56,22 @@ func (c *Client) UpdateJobExecution(ctx context.Context, params *UpdateJobExecut
 }
 
 type UpdateJobExecutionInput struct {
+
 	// The unique identifier assigned to this job when it was created.
+	//
+	// This member is required.
 	JobId *string
+
 	// The new status for the job execution (IN_PROGRESS, FAILED, SUCCESS, or
 	// REJECTED). This must be specified on every update.
+	//
+	// This member is required.
 	Status types.JobExecutionStatus
+
 	// Optional. A collection of name/value pairs that describe the status of the job
 	// execution. If not specified, the statusDetails are unchanged.
 	StatusDetails map[string]*string
+
 	// Optional. The expected current version of the job execution. Each time you
 	// update the job execution, its version is incremented. If the version of the job
 	// execution stored in Jobs does not match, the update is rejected with a
@@ -72,12 +80,15 @@ type UpdateJobExecutionInput struct {
 	// separate DescribeJobExecution request in order to obtain the job execution
 	// status data.)
 	ExpectedVersion *int64
+
 	// Optional. When included and set to true, the response contains the
 	// JobExecutionState data. The default is false.
 	IncludeJobExecutionState *bool
+
 	// Optional. When set to true, the response contains the job document. The default
 	// is false.
 	IncludeJobDocument *bool
+
 	// Specifies the amount of time this device has to finish execution of this job. If
 	// the job execution status is not set to a terminal state before this timer
 	// expires, or before the timer is reset (by again calling UpdateJobExecution,
@@ -87,16 +98,22 @@ type UpdateJobExecutionInput struct {
 	// timeout which may have been specified when the job was created (CreateJob using
 	// field timeoutConfig).
 	StepTimeoutInMinutes *int64
+
 	// Optional. A number that identifies a particular job execution on a particular
 	// device.
 	ExecutionNumber *int64
+
 	// The name of the thing associated with the device.
+	//
+	// This member is required.
 	ThingName *string
 }
 
 type UpdateJobExecutionOutput struct {
+
 	// A JobExecutionState object.
 	ExecutionState *types.JobExecutionState
+
 	// The contents of the Job Documents.
 	JobDocument *string
 

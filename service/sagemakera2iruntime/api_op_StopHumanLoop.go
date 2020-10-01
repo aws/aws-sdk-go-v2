@@ -55,7 +55,10 @@ func (c *Client) StopHumanLoop(ctx context.Context, params *StopHumanLoopInput, 
 }
 
 type StopHumanLoopInput struct {
+
 	// The name of the human loop that you want to stop.
+	//
+	// This member is required.
 	HumanLoopName *string
 }
 

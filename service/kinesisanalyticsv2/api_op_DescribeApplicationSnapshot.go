@@ -56,14 +56,23 @@ func (c *Client) DescribeApplicationSnapshot(ctx context.Context, params *Descri
 }
 
 type DescribeApplicationSnapshotInput struct {
+
 	// The name of an existing application.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The identifier of an application snapshot. You can retrieve this value using .
+	//
+	// This member is required.
 	SnapshotName *string
 }
 
 type DescribeApplicationSnapshotOutput struct {
+
 	// An object containing information about the application snapshot.
+	//
+	// This member is required.
 	SnapshotDetails *types.SnapshotDetails
 
 	// Metadata pertaining to the operation's result.

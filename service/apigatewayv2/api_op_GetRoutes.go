@@ -56,19 +56,26 @@ func (c *Client) GetRoutes(ctx context.Context, params *GetRoutesInput, optFns .
 }
 
 type GetRoutesInput struct {
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The maximum number of elements to be returned for this resource.
 	MaxResults *string
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
 }
 
 type GetRoutesOutput struct {
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
 	// The elements from this collection.
 	Items []*types.Route
 

@@ -59,9 +59,11 @@ func (c *Client) ListCompatibleImages(ctx context.Context, params *ListCompatibl
 }
 
 type ListCompatibleImagesInput struct {
+
 	// The maximum number of results for the list of compatible images. Currently, a
 	// Snowball Edge device can store 10 AMIs.
 	MaxResults *int32
+
 	// HTTP requests are stateless. To identify what object comes "next" in the list of
 	// compatible images, you can specify a value for NextToken as the starting point
 	// for your list of returned images.
@@ -69,9 +71,11 @@ type ListCompatibleImagesInput struct {
 }
 
 type ListCompatibleImagesOutput struct {
+
 	// A JSON-formatted object that describes a compatible AMI, including the ID and
 	// name for a Snowball Edge AMI.
 	CompatibleImages []*types.CompatibleImage
+
 	// Because HTTP requests are stateless, this is the starting point for your next
 	// list of returned images.
 	NextToken *string

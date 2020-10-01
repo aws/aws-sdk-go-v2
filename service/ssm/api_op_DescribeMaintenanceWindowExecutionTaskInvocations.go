@@ -57,26 +57,37 @@ func (c *Client) DescribeMaintenanceWindowExecutionTaskInvocations(ctx context.C
 }
 
 type DescribeMaintenanceWindowExecutionTaskInvocationsInput struct {
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The ID of the specific task in the maintenance window task that should be
 	// retrieved.
+	//
+	// This member is required.
 	TaskId *string
+
 	// Optional filters used to scope down the returned task invocations. The supported
 	// filter key is STATUS with the corresponding values PENDING, IN_PROGRESS,
 	// SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
 	Filters []*types.MaintenanceWindowFilter
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The ID of the maintenance window execution the task is part of.
+	//
+	// This member is required.
 	WindowExecutionId *string
 }
 
 type DescribeMaintenanceWindowExecutionTaskInvocationsOutput struct {
+
 	// Information about the task invocation results per invocation.
 	WindowExecutionTaskInvocationIdentities []*types.MaintenanceWindowExecutionTaskInvocationIdentity
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string

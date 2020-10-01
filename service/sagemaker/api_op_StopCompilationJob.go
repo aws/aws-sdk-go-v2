@@ -61,7 +61,10 @@ func (c *Client) StopCompilationJob(ctx context.Context, params *StopCompilation
 }
 
 type StopCompilationJobInput struct {
+
 	// The name of the model compilation job to stop.
+	//
+	// This member is required.
 	CompilationJobName *string
 }
 

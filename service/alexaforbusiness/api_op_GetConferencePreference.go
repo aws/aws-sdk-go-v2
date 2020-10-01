@@ -58,6 +58,7 @@ type GetConferencePreferenceInput struct {
 }
 
 type GetConferencePreferenceOutput struct {
+
 	// The conference preference.
 	Preference *types.ConferencePreference
 

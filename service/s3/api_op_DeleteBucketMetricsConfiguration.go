@@ -76,9 +76,15 @@ func (c *Client) DeleteBucketMetricsConfiguration(ctx context.Context, params *D
 }
 
 type DeleteBucketMetricsConfigurationInput struct {
+
 	// The name of the bucket containing the metrics configuration to delete.
+	//
+	// This member is required.
 	Bucket *string
+
 	// The ID used to identify the metrics configuration.
+	//
+	// This member is required.
 	Id *string
 }
 

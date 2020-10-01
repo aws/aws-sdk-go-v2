@@ -62,17 +62,25 @@ func (c *Client) TransferCertificate(ctx context.Context, params *TransferCertif
 
 // The input for the TransferCertificate operation.
 type TransferCertificateInput struct {
+
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
+
 	// The transfer message.
 	TransferMessage *string
+
 	// The AWS account.
+	//
+	// This member is required.
 	TargetAwsAccount *string
 }
 
 // The output from the TransferCertificate operation.
 type TransferCertificateOutput struct {
+
 	// The ARN of the certificate.
 	TransferredCertificateArn *string
 

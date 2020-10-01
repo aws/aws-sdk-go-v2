@@ -57,15 +57,22 @@ func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageI
 
 // Container for request parameters to AssociatePackage () operation.
 type AssociatePackageInput struct {
+
 	// Name of the domain that you want to associate the package with.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Internal ID of the package that you want to associate with a domain. Use
 	// DescribePackages to find this value.
+	//
+	// This member is required.
 	PackageID *string
 }
 
 // Container for response returned by AssociatePackage () operation.
 type AssociatePackageOutput struct {
+
 	// DomainPackageDetails
 	DomainPackageDetails *types.DomainPackageDetails
 

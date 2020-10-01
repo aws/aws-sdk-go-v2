@@ -72,7 +72,10 @@ func (c *Client) DeleteBucketWebsite(ctx context.Context, params *DeleteBucketWe
 }
 
 type DeleteBucketWebsiteInput struct {
+
 	// The bucket name for which you want to remove the website configuration.
+	//
+	// This member is required.
 	Bucket *string
 }
 

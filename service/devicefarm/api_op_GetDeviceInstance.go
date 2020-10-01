@@ -57,12 +57,16 @@ func (c *Client) GetDeviceInstance(ctx context.Context, params *GetDeviceInstanc
 }
 
 type GetDeviceInstanceInput struct {
+
 	// The Amazon Resource Name (ARN) of the instance you're requesting information
 	// about.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetDeviceInstanceOutput struct {
+
 	// An object that contains information about your device instance.
 	DeviceInstance *types.DeviceInstance
 

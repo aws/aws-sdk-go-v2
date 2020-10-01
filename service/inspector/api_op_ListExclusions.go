@@ -55,22 +55,31 @@ func (c *Client) ListExclusions(ctx context.Context, params *ListExclusionsInput
 }
 
 type ListExclusionsInput struct {
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 100. The maximum value is 500.
 	MaxResults *int32
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the ListExclusionsRequest action.
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
+
 	// The ARN of the assessment run that generated the exclusions that you want to
 	// list.
+	//
+	// This member is required.
 	AssessmentRunArn *string
 }
 
 type ListExclusionsOutput struct {
+
 	// A list of exclusions' ARNs returned by the action.
+	//
+	// This member is required.
 	ExclusionArns []*string
+
 	// When a response is generated, if there is more data to be listed, this
 	// parameters is present in the response and contains the value to use for the
 	// nextToken parameter in a subsequent pagination request. If there is no more data

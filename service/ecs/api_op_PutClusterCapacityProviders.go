@@ -68,6 +68,7 @@ func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClu
 }
 
 type PutClusterCapacityProvidersInput struct {
+
 	// The capacity provider strategy to use by default for the cluster. When creating
 	// a service or running a task on a cluster, if no capacity provider or launch type
 	// is specified then the default capacity provider strategy for the cluster is
@@ -82,7 +83,10 @@ type PutClusterCapacityProvidersInput struct {
 	// provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS
 	// Fargate capacity providers are available to all accounts and only need to be
 	// associated with a cluster to be used.
+	//
+	// This member is required.
 	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
+
 	// The name of one or more capacity providers to associate with the cluster. If
 	// specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
@@ -90,14 +94,20 @@ type PutClusterCapacityProvidersInput struct {
 	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
 	// capacity providers are available to all accounts and only need to be associated
 	// with a cluster to be used.
+	//
+	// This member is required.
 	CapacityProviders []*string
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster to modify the
 	// capacity provider settings for. If you do not specify a cluster, the default
 	// cluster is assumed.
+	//
+	// This member is required.
 	Cluster *string
 }
 
 type PutClusterCapacityProvidersOutput struct {
+
 	// A regional grouping of one or more container instances on which you can run task
 	// requests. Each account receives a default cluster the first time you use the
 	// Amazon ECS service, but you may also create other clusters. Clusters may contain

@@ -55,11 +55,20 @@ func (c *Client) DisassociateDeviceFromPlacement(ctx context.Context, params *Di
 }
 
 type DisassociateDeviceFromPlacementInput struct {
+
 	// The name of the project that contains the placement.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The device ID that should be removed from the placement.
+	//
+	// This member is required.
 	DeviceTemplateName *string
+
 	// The name of the placement that the device should be removed from.
+	//
+	// This member is required.
 	PlacementName *string
 }
 

@@ -61,12 +61,19 @@ func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapac
 }
 
 type CreateCapacityProviderInput struct {
+
 	// The details of the Auto Scaling group for the capacity provider.
+	//
+	// This member is required.
 	AutoScalingGroupProvider *types.AutoScalingGroupProvider
+
 	// The name of the capacity provider. Up to 255 characters are allowed, including
 	// letters (upper and lowercase), numbers, underscores, and hyphens. The name
 	// cannot be prefixed with "aws", "ecs", or "fargate".
+	//
+	// This member is required.
 	Name *string
+
 	// The metadata that you apply to the capacity provider to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
@@ -100,6 +107,7 @@ type CreateCapacityProviderInput struct {
 }
 
 type CreateCapacityProviderOutput struct {
+
 	// The full description of the new capacity provider.
 	CapacityProvider *types.CapacityProvider
 

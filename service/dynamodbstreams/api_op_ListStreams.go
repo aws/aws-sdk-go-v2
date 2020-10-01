@@ -59,12 +59,15 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 
 // Represents the input of a ListStreams operation.
 type ListStreamsInput struct {
+
 	// The maximum number of streams to return. The upper limit is 100.
 	Limit *int32
+
 	// The ARN (Amazon Resource Name) of the first item that this operation will
 	// evaluate. Use the value that was returned for LastEvaluatedStreamArn in the
 	// previous operation.
 	ExclusiveStartStreamArn *string
+
 	// If this parameter is provided, then only the streams associated with this table
 	// name are returned.
 	TableName *string
@@ -72,6 +75,7 @@ type ListStreamsInput struct {
 
 // Represents the output of a ListStreams operation.
 type ListStreamsOutput struct {
+
 	// The stream ARN of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
 	// value in the new request. If LastEvaluatedStreamArn is empty, then the "last
@@ -80,6 +84,7 @@ type ListStreamsOutput struct {
 	// is more data in the result set. The only way to know when you have reached the
 	// end of the result set is when LastEvaluatedStreamArn is empty.
 	LastEvaluatedStreamArn *string
+
 	// A list of stream descriptors associated with the current account and endpoint.
 	Streams []*types.Stream
 

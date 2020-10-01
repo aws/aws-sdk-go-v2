@@ -59,6 +59,7 @@ func (c *Client) PutKeyPolicy(ctx context.Context, params *PutKeyPolicyInput, op
 }
 
 type PutKeyPolicyInput struct {
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -70,7 +71,10 @@ type PutKeyPolicyInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// A flag to indicate whether to bypass the key policy lockout safety check.
 	// Setting this value to true increases the risk that the CMK becomes unmanageable.
 	// Do not set this value to true indiscriminately. For more information, refer to
@@ -80,6 +84,7 @@ type PutKeyPolicyInput struct {
 	// only when you intend to prevent the principal that is making the request from
 	// making a subsequent PutKeyPolicy request on the CMK. The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool
+
 	// The key policy to attach to the CMK. The key policy must meet the following
 	// criteria:
 	//
@@ -105,8 +110,13 @@ type PutKeyPolicyInput struct {
 	// exceed 32 kilobytes (32768 bytes). For more information, see Resource Quotas
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html) in
 	// the AWS Key Management Service Developer Guide.
+	//
+	// This member is required.
 	Policy *string
+
 	// The name of the key policy. The only valid value is default.
+	//
+	// This member is required.
 	PolicyName *string
 }
 

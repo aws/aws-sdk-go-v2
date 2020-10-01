@@ -58,6 +58,7 @@ func (c *Client) ListFunctionEventInvokeConfigs(ctx context.Context, params *Lis
 }
 
 type ListFunctionEventInvokeConfigsInput struct {
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -72,17 +73,23 @@ type ListFunctionEventInvokeConfigsInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The maximum number of configurations to return.
 	MaxItems *int32
+
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
 	Marker *string
 }
 
 type ListFunctionEventInvokeConfigsOutput struct {
+
 	// The pagination token that's included if more results are available.
 	NextMarker *string
+
 	// A list of configurations.
 	FunctionEventInvokeConfigs []*types.FunctionEventInvokeConfig
 

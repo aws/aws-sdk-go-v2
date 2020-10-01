@@ -57,14 +57,19 @@ func (c *Client) GetCloudFrontOriginAccessIdentity(ctx context.Context, params *
 
 // The request to get an origin access identity's information.
 type GetCloudFrontOriginAccessIdentityInput struct {
+
 	// The identity's ID.
+	//
+	// This member is required.
 	Id *string
 }
 
 // The returned result of the corresponding request.
 type GetCloudFrontOriginAccessIdentityOutput struct {
+
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *types.CloudFrontOriginAccessIdentity
+
 	// The current version of the origin access identity's information. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string

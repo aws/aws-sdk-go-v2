@@ -56,29 +56,39 @@ func (c *Client) ListStackSetOperationResults(ctx context.Context, params *ListS
 }
 
 type ListStackSetOperationResultsInput struct {
+
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
 	// value that you can assign to the NextToken request parameter to get the next set
 	// of results.
 	MaxResults *int32
+
 	// The name or unique ID of the stack set that you want to get operation results
 	// for.
+	//
+	// This member is required.
 	StackSetName *string
+
 	// If the previous request didn't return all of the remaining results, the response
 	// object's NextToken parameter value is set to a token. To retrieve the next set
 	// of results, call ListStackSetOperationResults again and assign that token to the
 	// request object's NextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
+
 	// The ID of the stack set operation.
+	//
+	// This member is required.
 	OperationId *string
 }
 
 type ListStackSetOperationResultsOutput struct {
+
 	// A list of StackSetOperationResultSummary structures that contain information
 	// about the specified operation results, for accounts and Regions that are
 	// included in the operation.
 	Summaries []*types.StackSetOperationResultSummary
+
 	// If the request doesn't return all results, NextToken is set to a token. To
 	// retrieve the next set of results, call ListOperationResults again and assign
 	// that token to the request object's NextToken parameter. If there are no

@@ -58,17 +58,23 @@ func (c *Client) GetSamplingTargets(ctx context.Context, params *GetSamplingTarg
 }
 
 type GetSamplingTargetsInput struct {
+
 	// Information about rules that the service is using to sample requests.
+	//
+	// This member is required.
 	SamplingStatisticsDocuments []*types.SamplingStatisticsDocument
 }
 
 type GetSamplingTargetsOutput struct {
+
 	// The last time a user changed the sampling rule configuration. If the sampling
 	// rule configuration changed since the service last retrieved it, the service
 	// should call GetSamplingRules () to get the latest version.
 	LastRuleModification *time.Time
+
 	// Information about SamplingStatisticsDocument () that X-Ray could not process.
 	UnprocessedStatistics []*types.UnprocessedStatistics
+
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []*types.SamplingTargetDocument
 

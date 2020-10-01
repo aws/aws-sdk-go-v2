@@ -57,9 +57,15 @@ func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInp
 }
 
 type DeleteComponentInput struct {
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The name of the component.
+	//
+	// This member is required.
 	ComponentName *string
 }
 

@@ -63,25 +63,38 @@ func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOut
 }
 
 type StartOutboundVoiceContactInput struct {
+
 	// The queue for the call. If you specify a queue, the phone displayed for caller
 	// ID is the phone number specified in the queue. If you do not specify a queue,
 	// the queue defined in the contact flow is used. If you do not specify a queue,
 	// you must specify a source phone number.
 	QueueId *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. The token is valid for 7 days after creation. If a contact is
 	// already started, the contact ID is returned. If the contact is disconnected, a
 	// new contact is started.
 	ClientToken *string
+
 	// The phone number of the customer, in E.164 format.
+	//
+	// This member is required.
 	DestinationPhoneNumber *string
+
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.
 	SourcePhoneNumber *string
+
 	// The identifier of the contact flow for the outbound call.
+	//
+	// This member is required.
 	ContactFlowId *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// A custom key-value pair using an attribute map. The attributes are standard
 	// Amazon Connect attributes, and can be accessed in contact flows just like any
 	// other contact attributes. There can be up to 32,768 UTF-8 bytes across all
@@ -91,6 +104,7 @@ type StartOutboundVoiceContactInput struct {
 }
 
 type StartOutboundVoiceContactOutput struct {
+
 	// The identifier of this contact within the Amazon Connect instance.
 	ContactId *string
 

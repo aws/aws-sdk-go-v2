@@ -58,8 +58,10 @@ func (c *Client) UpdateApi(ctx context.Context, params *UpdateApiInput, optFns .
 
 // Updates an Api.
 type UpdateApiInput struct {
+
 	// A CORS configuration. Supported only for HTTP APIs.
 	CorsConfiguration *types.Cors
+
 	// This property is part of quick create. It specifies the credentials required for
 	// the integration, if any. For a Lambda integration, three options are available.
 	// To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource
@@ -69,77 +71,102 @@ type UpdateApiInput struct {
 	// HTTP integrations. If provided, this value replaces the credentials associated
 	// with the quick create integration. Supported only for HTTP APIs.
 	CredentialsArn *string
+
 	// A version identifier for the API.
 	Version *string
+
 	// The description of the API.
 	Description *string
+
 	// This property is part of quick create. If not specified, the route created using
 	// quick create is kept. Otherwise, this value replaces the route key of the quick
 	// create route. Additional routes may still be added after the API is updated.
 	// Supported only for HTTP APIs.
 	RouteKey *string
+
 	// This property is part of quick create. For HTTP integrations, specify a fully
 	// qualified URL. For Lambda integrations, specify a function ARN. The type of the
 	// integration will be HTTP_PROXY or AWS_PROXY, respectively. The value provided
 	// updates the integration URI and integration type. You can update a quick-created
 	// target, but you can't remove it from an API. Supported only for HTTP APIs.
 	Target *string
+
 	// The route selection expression for the API. For HTTP APIs, the
 	// routeSelectionExpression must be ${request.method} ${request.path}. If not
 	// provided, this will be the default for HTTP APIs. This property is required for
 	// WebSocket APIs.
 	RouteSelectionExpression *string
+
 	// An API key selection expression. Supported only for WebSocket APIs. See API Key
 	// Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
 	ApiKeySelectionExpression *string
+
 	// The name of the API.
 	Name *string
+
 	// Avoid validating models when creating a deployment. Supported only for WebSocket
 	// APIs.
 	DisableSchemaValidation *bool
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type UpdateApiOutput struct {
+
 	// The description of the API.
 	Description *string
+
 	// An API key selection expression. Supported only for WebSocket APIs. See API Key
 	// Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
 	ApiKeySelectionExpression *string
+
 	// The validation information during API import. This may include particular
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
 	ImportInfo []*string
+
 	// Avoid validating models when creating a deployment. Supported only for WebSocket
 	// APIs.
 	DisableSchemaValidation *bool
+
 	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
 	// stage name is typically appended to this URI to form a complete path to a
 	// deployed API stage.
 	ApiEndpoint *string
+
 	// The API protocol.
 	ProtocolType types.ProtocolType
+
 	// The route selection expression for the API. For HTTP APIs, the
 	// routeSelectionExpression must be ${request.method} ${request.path}. If not
 	// provided, this will be the default for HTTP APIs. This property is required for
 	// WebSocket APIs.
 	RouteSelectionExpression *string
+
 	// A CORS configuration. Supported only for HTTP APIs.
 	CorsConfiguration *types.Cors
+
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
 	Warnings []*string
+
 	// The name of the API.
 	Name *string
+
 	// The API ID.
 	ApiId *string
+
 	// A collection of tags associated with the API.
 	Tags map[string]*string
+
 	// The timestamp when the API was created.
 	CreatedDate *time.Time
+
 	// A version identifier for the API.
 	Version *string
 

@@ -57,14 +57,22 @@ func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput
 }
 
 type SubmitFeedbackInput struct {
+
 	// The identifier of the index that was queried.
+	//
+	// This member is required.
 	IndexId *string
+
 	// The identifier of the specific query for which you are submitting feedback. The
 	// query ID is returned in the response to the operation.
+	//
+	// This member is required.
 	QueryId *string
+
 	// Provides Amazon Kendra with relevant or not relevant feedback for whether a
 	// particular item was relevant to the search.
 	RelevanceFeedbackItems []*types.RelevanceFeedback
+
 	// Tells Amazon Kendra that a particular search result link was chosen by the user.
 	ClickFeedbackItems []*types.ClickFeedback
 }

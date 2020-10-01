@@ -56,18 +56,31 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 }
 
 type CreateUserInput struct {
+
 	// The password for the new user.
+	//
+	// This member is required.
 	Password *string
+
 	// The name for the new user. Simple AD or AD Connector user names have a maximum
 	// length of 20. All others have a maximum length of 64.
+	//
+	// This member is required.
 	Name *string
+
 	// The display name for the new user.
+	//
+	// This member is required.
 	DisplayName *string
+
 	// The identifier of the organization for which the user is created.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type CreateUserOutput struct {
+
 	// The identifier for the new user.
 	UserId *string
 

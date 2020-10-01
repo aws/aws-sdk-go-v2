@@ -62,11 +62,15 @@ func (c *Client) DeleteLoadBalancer(ctx context.Context, params *DeleteLoadBalan
 }
 
 type DeleteLoadBalancerInput struct {
+
 	// The name of the load balancer you want to delete.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 type DeleteLoadBalancerOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

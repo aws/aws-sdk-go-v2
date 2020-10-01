@@ -57,6 +57,7 @@ func (c *Client) DescribePortfolio(ctx context.Context, params *DescribePortfoli
 }
 
 type DescribePortfolioInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -66,17 +67,24 @@ type DescribePortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribePortfolioOutput struct {
+
 	// Information about the associated budgets.
 	Budgets []*types.BudgetDetail
+
 	// Information about the TagOptions associated with the portfolio.
 	TagOptions []*types.TagOptionDetail
+
 	// Information about the tags associated with the portfolio.
 	Tags []*types.Tag
+
 	// Information about the portfolio.
 	PortfolioDetail *types.PortfolioDetail
 

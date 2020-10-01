@@ -55,15 +55,19 @@ func (c *Client) StartOnDemandAuditTask(ctx context.Context, params *StartOnDema
 }
 
 type StartOnDemandAuditTaskInput struct {
+
 	// Which checks are performed during the audit. The checks you specify must be
 	// enabled for your account or an exception occurs. Use
 	// DescribeAccountAuditConfiguration to see the list of all checks, including those
 	// that are enabled or UpdateAccountAuditConfiguration to select which checks are
 	// enabled.
+	//
+	// This member is required.
 	TargetCheckNames []*string
 }
 
 type StartOnDemandAuditTaskOutput struct {
+
 	// The ID of the on-demand audit you started.
 	TaskId *string
 

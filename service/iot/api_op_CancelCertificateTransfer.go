@@ -62,8 +62,11 @@ func (c *Client) CancelCertificateTransfer(ctx context.Context, params *CancelCe
 
 // The input for the CancelCertificateTransfer operation.
 type CancelCertificateTransferInput struct {
+
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
 }
 

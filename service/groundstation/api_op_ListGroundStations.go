@@ -55,19 +55,24 @@ func (c *Client) ListGroundStations(ctx context.Context, params *ListGroundStati
 
 //
 type ListGroundStationsInput struct {
+
 	// Maximum number of ground stations returned.
 	MaxResults *int32
+
 	// Next token that can be supplied in the next call to get the next page of ground
 	// stations.
 	NextToken *string
+
 	// Satellite ID to retrieve on-boarded ground stations.
 	SatelliteId *string
 }
 
 //
 type ListGroundStationsOutput struct {
+
 	// List of ground stations.
 	GroundStationList []*types.GroundStationData
+
 	// Next token that can be supplied in the next call to get the next page of ground
 	// stations.
 	NextToken *string

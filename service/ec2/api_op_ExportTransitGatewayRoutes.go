@@ -61,13 +61,18 @@ func (c *Client) ExportTransitGatewayRoutes(ctx context.Context, params *ExportT
 }
 
 type ExportTransitGatewayRoutesInput struct {
+
 	// The name of the S3 bucket.
+	//
+	// This member is required.
 	S3Bucket *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters. The possible values are:
 	//
 	//     *
@@ -102,11 +107,15 @@ type ExportTransitGatewayRoutesInput struct {
 	//     * type - The
 	// type of route (active | blackhole).
 	Filters []*types.Filter
+
 	// The ID of the route table.
+	//
+	// This member is required.
 	TransitGatewayRouteTableId *string
 }
 
 type ExportTransitGatewayRoutesOutput struct {
+
 	// The URL of the exported file in Amazon S3. For example,
 	// s3://bucket_name/VPCTransitGateway/TransitGatewayRouteTables/file_name.
 	S3Location *string

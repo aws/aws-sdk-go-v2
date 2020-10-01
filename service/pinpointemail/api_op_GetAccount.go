@@ -63,12 +63,15 @@ type GetAccountInput struct {
 // A list of details about the email-sending capabilities of your Amazon Pinpoint
 // account in the current AWS Region.
 type GetAccountOutput struct {
+
 	// An object that contains information about the per-day and per-second sending
 	// limits for your Amazon Pinpoint account in the current AWS Region.
 	SendQuota *types.SendQuota
+
 	// Indicates whether or not email sending is enabled for your Amazon Pinpoint
 	// account in the current AWS Region.
 	SendingEnabled *bool
+
 	// Indicates whether or not your account has production access in the current AWS
 	// Region. If the value is false, then your account is in the sandbox. When your
 	// account is in the sandbox, you can only send email to verified identities.
@@ -79,6 +82,7 @@ type GetAccountOutput struct {
 	// email to any address. The sending quota and maximum sending rate for your
 	// account vary based on your specific use case.
 	ProductionAccessEnabled *bool
+
 	// The reputation status of your Amazon Pinpoint account. The status can be one of
 	// the following:
 	//
@@ -94,6 +98,7 @@ type GetAccountOutput struct {
 	// account. When you correct the issue, you can contact us and request that your
 	// account's ability to send email is resumed.
 	EnforcementStatus *string
+
 	// Indicates whether or not the automatic warm-up feature is enabled for dedicated
 	// IP addresses that are associated with your account.
 	DedicatedIpAutoWarmupEnabled *bool

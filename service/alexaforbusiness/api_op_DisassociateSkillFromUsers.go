@@ -56,7 +56,10 @@ func (c *Client) DisassociateSkillFromUsers(ctx context.Context, params *Disasso
 }
 
 type DisassociateSkillFromUsersInput struct {
+
 	// The private skill ID you want to make unavailable for enrolled users.
+	//
+	// This member is required.
 	SkillId *string
 }
 

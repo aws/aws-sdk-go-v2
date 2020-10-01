@@ -55,10 +55,16 @@ func (c *Client) DeletePublishingDestination(ctx context.Context, params *Delete
 }
 
 type DeletePublishingDestinationInput struct {
+
 	// The ID of the publishing destination to delete.
+	//
+	// This member is required.
 	DestinationId *string
+
 	// The unique ID of the detector associated with the publishing destination to
 	// delete.
+	//
+	// This member is required.
 	DetectorId *string
 }
 

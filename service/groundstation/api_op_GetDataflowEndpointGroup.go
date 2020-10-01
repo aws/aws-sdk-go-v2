@@ -56,18 +56,25 @@ func (c *Client) GetDataflowEndpointGroup(ctx context.Context, params *GetDatafl
 
 //
 type GetDataflowEndpointGroupInput struct {
+
 	// UUID of a dataflow endpoint group.
+	//
+	// This member is required.
 	DataflowEndpointGroupId *string
 }
 
 //
 type GetDataflowEndpointGroupOutput struct {
+
 	// ARN of a dataflow endpoint group.
 	DataflowEndpointGroupArn *string
+
 	// UUID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string
+
 	// Details of a dataflow endpoint.
 	EndpointsDetails []*types.EndpointDetails
+
 	// Tags assigned to a dataflow endpoint group.
 	Tags map[string]*string
 

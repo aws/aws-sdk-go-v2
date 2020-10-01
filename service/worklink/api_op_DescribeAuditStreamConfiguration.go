@@ -56,11 +56,15 @@ func (c *Client) DescribeAuditStreamConfiguration(ctx context.Context, params *D
 }
 
 type DescribeAuditStreamConfigurationInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 
 type DescribeAuditStreamConfigurationOutput struct {
+
 	// The ARN of the Amazon Kinesis data stream that will receive the audit events.
 	AuditStreamArn *string
 

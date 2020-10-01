@@ -56,7 +56,10 @@ func (c *Client) DeleteAssessmentTemplate(ctx context.Context, params *DeleteAss
 }
 
 type DeleteAssessmentTemplateInput struct {
+
 	// The ARN that specifies the assessment template that you want to delete.
+	//
+	// This member is required.
 	AssessmentTemplateArn *string
 }
 

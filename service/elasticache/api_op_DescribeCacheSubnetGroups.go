@@ -59,25 +59,30 @@ func (c *Client) DescribeCacheSubnetGroups(ctx context.Context, params *Describe
 
 // Represents the input of a DescribeCacheSubnetGroups operation.
 type DescribeCacheSubnetGroupsInput struct {
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
 	// <p>Constraints: minimum 20; maximum 100.</p>
 	MaxRecords *int32
+
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
 	// The name of the cache subnet group to return details for.
 	CacheSubnetGroupName *string
 }
 
 // Represents the output of a DescribeCacheSubnetGroups operation.
 type DescribeCacheSubnetGroupsOutput struct {
+
 	// A list of cache subnet groups. Each element in the list contains detailed
 	// information about one group.
 	CacheSubnetGroups []*types.CacheSubnetGroup
+
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
 

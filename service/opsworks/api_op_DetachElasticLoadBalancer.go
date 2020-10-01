@@ -59,9 +59,15 @@ func (c *Client) DetachElasticLoadBalancer(ctx context.Context, params *DetachEl
 }
 
 type DetachElasticLoadBalancerInput struct {
+
 	// The ID of the layer that the Elastic Load Balancing instance is attached to.
+	//
+	// This member is required.
 	LayerId *string
+
 	// The Elastic Load Balancing instance's name.
+	//
+	// This member is required.
 	ElasticLoadBalancerName *string
 }
 

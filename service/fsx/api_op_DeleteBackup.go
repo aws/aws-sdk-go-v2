@@ -63,8 +63,12 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 
 // The request object for DeleteBackup operation.
 type DeleteBackupInput struct {
+
 	// The ID of the backup you want to delete.
+	//
+	// This member is required.
 	BackupId *string
+
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// deletion. This is automatically filled on your behalf when using the AWS CLI or
 	// SDK.
@@ -73,8 +77,10 @@ type DeleteBackupInput struct {
 
 // The response object for DeleteBackup operation.
 type DeleteBackupOutput struct {
+
 	// The lifecycle of the backup. Should be DELETED.
 	Lifecycle types.BackupLifecycle
+
 	// The ID of the backup deleted.
 	BackupId *string
 

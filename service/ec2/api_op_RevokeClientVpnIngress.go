@@ -56,16 +56,25 @@ func (c *Client) RevokeClientVpnIngress(ctx context.Context, params *RevokeClien
 }
 
 type RevokeClientVpnIngressInput struct {
+
 	// The ID of the Client VPN endpoint with which the authorization rule is
 	// associated.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
+
 	// The IPv4 address range, in CIDR notation, of the network for which access is
 	// being removed.
+	//
+	// This member is required.
 	TargetNetworkCidr *string
+
 	// Indicates whether access should be revoked for all clients.
 	RevokeAllGroups *bool
+
 	// The ID of the Active Directory group for which to revoke access.
 	AccessGroupId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -74,6 +83,7 @@ type RevokeClientVpnIngressInput struct {
 }
 
 type RevokeClientVpnIngressOutput struct {
+
 	// The current state of the authorization rule.
 	Status *types.ClientVpnAuthorizationRuleStatus
 

@@ -57,12 +57,16 @@ func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAc
 }
 
 type DescribeAccountSettingsInput struct {
+
 	// The ID for the AWS account that contains the QuickSight namespaces that you want
 	// to list.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type DescribeAccountSettingsOutput struct {
+
 	// The settings associated with the QuickSight subscription associated with this
 	// AWS account. This information includes the edition of Amazon QuickSight that you
 	// subscribed to (Standard or Enterprise) and the notification email for the
@@ -70,6 +74,7 @@ type DescribeAccountSettingsOutput struct {
 	// sometimes referred to as a QuickSight "account" even though it is technically
 	// not an account, but a subscription in your AWS account.
 	AccountSettings *types.AccountSettings
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

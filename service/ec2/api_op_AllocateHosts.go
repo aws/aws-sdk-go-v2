@@ -58,6 +58,7 @@ func (c *Client) AllocateHosts(ctx context.Context, params *AllocateHostsInput, 
 }
 
 type AllocateHostsInput struct {
+
 	// Indicates whether the host accepts any untargeted instance launches that match
 	// its instance type configuration, or if it only accepts Host tenancy instance
 	// launches that specify its unique host ID. For more information, see
@@ -66,8 +67,12 @@ type AllocateHostsInput struct {
 	// in the Amazon EC2 User Guide for Linux Instances.  <p>Default: <code>on</code>
 	// </p>
 	AutoPlacement types.AutoPlacement
+
 	// The Availability Zone in which to allocate the Dedicated Host.
+	//
+	// This member is required.
 	AvailabilityZone *string
+
 	// Specifies the instance family to be supported by the Dedicated Hosts. If you
 	// specify an instance family, the Dedicated Hosts support multiple instance types
 	// within that instance family.  <p>If you want the Dedicated Hosts to support a
@@ -75,19 +80,26 @@ type AllocateHostsInput struct {
 	// instead. You cannot specify <b>InstanceFamily</b> and <b>InstanceType</b> in the
 	// same request.</p>
 	InstanceFamily *string
+
 	// The number of Dedicated Hosts to allocate to your account with these parameters.
+	//
+	// This member is required.
 	Quantity *int32
+
 	// The tags to apply to the Dedicated Host during creation.
 	TagSpecifications []*types.TagSpecification
+
 	// Indicates whether to enable or disable host recovery for the Dedicated Host.
 	// Host recovery is disabled by default. For more information, see  Host Recovery
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)
 	// in the Amazon Elastic Compute Cloud User Guide. Default: off
 	HostRecovery types.HostRecovery
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Specifies the instance type to be supported by the Dedicated Hosts. If you
 	// specify an instance type, the Dedicated Hosts support instances of the specified
 	// instance type only.  <p>If you want the Dedicated Hosts to support multiple
@@ -99,6 +111,7 @@ type AllocateHostsInput struct {
 
 // Contains the output of AllocateHosts.
 type AllocateHostsOutput struct {
+
 	// The ID of the allocated Dedicated Host. This is used to launch an instance onto
 	// a specific host.
 	HostIds []*string

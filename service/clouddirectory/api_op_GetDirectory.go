@@ -56,12 +56,18 @@ func (c *Client) GetDirectory(ctx context.Context, params *GetDirectoryInput, op
 }
 
 type GetDirectoryInput struct {
+
 	// The ARN of the directory.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type GetDirectoryOutput struct {
+
 	// Metadata about the directory.
+	//
+	// This member is required.
 	Directory *types.Directory
 
 	// Metadata pertaining to the operation's result.

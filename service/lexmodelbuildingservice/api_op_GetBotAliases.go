@@ -57,24 +57,32 @@ func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, 
 }
 
 type GetBotAliasesInput struct {
+
 	// A pagination token for fetching the next page of aliases. If the response to
 	// this call is truncated, Amazon Lex returns a pagination token in the response.
 	// To fetch the next page of aliases, specify the pagination token in the next
 	// request.
 	NextToken *string
+
 	// Substring to match in bot alias names. An alias will be returned if any part of
 	// its name matches the substring. For example, "xyz" matches both "xyzabc" and
 	// "abcxyz."
 	NameContains *string
+
 	// The maximum number of aliases to return in the response. The default is 50. .
 	MaxResults *int32
+
 	// The name of the bot.
+	//
+	// This member is required.
 	BotName *string
 }
 
 type GetBotAliasesOutput struct {
+
 	// An array of BotAliasMetadata objects, each describing a bot alias.
 	BotAliases []*types.BotAliasMetadata
+
 	// A pagination token for fetching next page of aliases. If the response to this
 	// call is truncated, Amazon Lex returns a pagination token in the response. To
 	// fetch the next page of aliases, specify the pagination token in the next

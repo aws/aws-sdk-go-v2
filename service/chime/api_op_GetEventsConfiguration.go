@@ -57,13 +57,20 @@ func (c *Client) GetEventsConfiguration(ctx context.Context, params *GetEventsCo
 }
 
 type GetEventsConfigurationInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The bot ID.
+	//
+	// This member is required.
 	BotId *string
 }
 
 type GetEventsConfigurationOutput struct {
+
 	// The events configuration details.
 	EventsConfiguration *types.EventsConfiguration
 

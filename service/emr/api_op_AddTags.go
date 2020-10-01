@@ -60,13 +60,19 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 
 // This input identifies a cluster and a list of tags to attach.
 type AddTagsInput struct {
+
 	// A list of tags to associate with a cluster and propagate to EC2 instances. Tags
 	// are user-defined key/value pairs that consist of a required key string with a
 	// maximum of 128 characters, and an optional value string with a maximum of 256
 	// characters.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon EMR resource identifier to which tags will be added. This value must
 	// be a cluster identifier.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

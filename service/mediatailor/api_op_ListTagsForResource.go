@@ -56,12 +56,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the playback configuration. You can get this
 	// from the response to any playback configuration request.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// A comma-separated list of tag key:value pairs. For example: { "Key1": "Value1",
 	// "Key2": "Value2" }
 	Tags map[string]*string

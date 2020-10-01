@@ -60,17 +60,22 @@ func (c *Client) GetDetectors(ctx context.Context, params *GetDetectorsInput, op
 }
 
 type GetDetectorsInput struct {
+
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
+
 	// The detector ID.
 	DetectorId *string
+
 	// The next token for the subsequent request.
 	NextToken *string
 }
 
 type GetDetectorsOutput struct {
+
 	// The detectors.
 	Detectors []*types.Detector
+
 	// The next page token.
 	NextToken *string
 

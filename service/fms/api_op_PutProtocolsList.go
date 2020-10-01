@@ -56,15 +56,21 @@ func (c *Client) PutProtocolsList(ctx context.Context, params *PutProtocolsListI
 }
 
 type PutProtocolsListInput struct {
+
 	// The details of the AWS Firewall Manager protocols list to be created.
+	//
+	// This member is required.
 	ProtocolsList *types.ProtocolsListData
+
 	// The tags associated with the resource.
 	TagList []*types.Tag
 }
 
 type PutProtocolsListOutput struct {
+
 	// The Amazon Resource Name (ARN) of the protocols list.
 	ProtocolsListArn *string
+
 	// The details of the AWS Firewall Manager protocols list.
 	ProtocolsList *types.ProtocolsListData
 

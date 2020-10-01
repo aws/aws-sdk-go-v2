@@ -58,14 +58,19 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 }
 
 type DescribeDomainInput struct {
+
 	// A string that specifies the name of the requested domain.
+	//
+	// This member is required.
 	Domain *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
 }
 
 type DescribeDomainOutput struct {
+
 	// Information about a domain. A domain is a container for repositories. When you
 	// create a domain, it is empty until you add one or more repositories.
 	Domain *types.DomainDescription

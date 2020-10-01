@@ -59,20 +59,28 @@ func (c *Client) RegisterCertificate(ctx context.Context, params *RegisterCertif
 
 // The input to the RegisterCertificate operation.
 type RegisterCertificateInput struct {
+
 	// The status of the register certificate request.
 	Status types.CertificateStatus
+
 	// A boolean value that specifies if the certificate is set to active.
 	SetAsActive *bool
+
 	// The CA certificate used to sign the device certificate being registered.
 	CaCertificatePem *string
+
 	// The certificate data, in PEM format.
+	//
+	// This member is required.
 	CertificatePem *string
 }
 
 // The output from the RegisterCertificate operation.
 type RegisterCertificateOutput struct {
+
 	// The certificate ARN.
 	CertificateArn *string
+
 	// The certificate identifier.
 	CertificateId *string
 

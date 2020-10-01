@@ -65,22 +65,29 @@ func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetect
 }
 
 type StartTextDetectionInput struct {
+
 	// Optional parameters that let you set criteria the text must meet to be included
 	// in your response.
 	Filters *types.StartTextDetectionFilters
+
 	// Idempotent token used to identify the start request. If you use the same token
 	// with multiple StartTextDetection requests, the same JobId is returned. Use
 	// ClientRequestToken to prevent the same job from being accidentaly started more
 	// than once.
 	ClientRequestToken *string
+
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
 	// operations such as StartLabelDetection () use Video to specify a video for
 	// analysis. The supported file formats are .mp4, .mov and .avi.
+	//
+	// This member is required.
 	Video *types.Video
+
 	// An identifier returned in the completion status published by your Amazon Simple
 	// Notification Service topic. For example, you can use JobTag to group related
 	// jobs and identify them in the completion notification.
 	JobTag *string
+
 	// The Amazon Simple Notification Service topic to which Amazon Rekognition
 	// publishes the completion status of a video analysis operation. For more
 	// information, see api-video ().
@@ -88,6 +95,7 @@ type StartTextDetectionInput struct {
 }
 
 type StartTextDetectionOutput struct {
+
 	// Identifier for the text detection job. Use JobId to identify the job in a
 	// subsequent call to GetTextDetection.
 	JobId *string

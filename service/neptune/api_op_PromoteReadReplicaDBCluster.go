@@ -56,11 +56,15 @@ func (c *Client) PromoteReadReplicaDBCluster(ctx context.Context, params *Promot
 }
 
 type PromoteReadReplicaDBClusterInput struct {
+
 	// Not supported.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
 }
 
 type PromoteReadReplicaDBClusterOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
 	// a response element in the DescribeDBClusters () action.
 	DBCluster *types.DBCluster

@@ -59,12 +59,18 @@ func (c *Client) DescribeStreamSummary(ctx context.Context, params *DescribeStre
 }
 
 type DescribeStreamSummaryInput struct {
+
 	// The name of the stream to describe.
+	//
+	// This member is required.
 	StreamName *string
 }
 
 type DescribeStreamSummaryOutput struct {
+
 	// A StreamDescriptionSummary () containing information about the stream.
+	//
+	// This member is required.
 	StreamDescriptionSummary *types.StreamDescriptionSummary
 
 	// Metadata pertaining to the operation's result.

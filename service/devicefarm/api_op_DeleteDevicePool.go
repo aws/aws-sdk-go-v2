@@ -57,8 +57,11 @@ func (c *Client) DeleteDevicePool(ctx context.Context, params *DeleteDevicePoolI
 
 // Represents a request to the delete device pool operation.
 type DeleteDevicePoolInput struct {
+
 	// Represents the Amazon Resource Name (ARN) of the Device Farm device pool to
 	// delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

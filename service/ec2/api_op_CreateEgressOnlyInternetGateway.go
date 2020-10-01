@@ -59,25 +59,33 @@ func (c *Client) CreateEgressOnlyInternetGateway(ctx context.Context, params *Cr
 }
 
 type CreateEgressOnlyInternetGatewayInput struct {
+
 	// The ID of the VPC for which to create the egress-only internet gateway.
+	//
+	// This member is required.
 	VpcId *string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
 	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to assign to the egress-only internet gateway.
 	TagSpecifications []*types.TagSpecification
 }
 
 type CreateEgressOnlyInternetGatewayOutput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string
+
 	// Information about the egress-only internet gateway.
 	EgressOnlyInternetGateway *types.EgressOnlyInternetGateway
 

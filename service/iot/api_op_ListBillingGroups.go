@@ -55,18 +55,23 @@ func (c *Client) ListBillingGroups(ctx context.Context, params *ListBillingGroup
 }
 
 type ListBillingGroupsInput struct {
+
 	// The maximum number of results to return per request.
 	MaxResults *int32
+
 	// Limit the results to billing groups whose names have the given prefix.
 	NamePrefixFilter *string
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListBillingGroupsOutput struct {
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
 	// The list of billing groups.
 	BillingGroups []*types.GroupNameAndArn
 

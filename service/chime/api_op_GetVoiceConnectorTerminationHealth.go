@@ -57,11 +57,15 @@ func (c *Client) GetVoiceConnectorTerminationHealth(ctx context.Context, params 
 }
 
 type GetVoiceConnectorTerminationHealthInput struct {
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type GetVoiceConnectorTerminationHealthOutput struct {
+
 	// The termination health details.
 	TerminationHealth *types.TerminationHealth
 

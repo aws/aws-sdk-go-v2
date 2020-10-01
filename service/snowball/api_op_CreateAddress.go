@@ -59,11 +59,15 @@ func (c *Client) CreateAddress(ctx context.Context, params *CreateAddressInput, 
 }
 
 type CreateAddressInput struct {
+
 	// The address that you want the Snowball shipped to.
+	//
+	// This member is required.
 	Address *types.Address
 }
 
 type CreateAddressOutput struct {
+
 	// The automatically generated ID for a specific address. You'll use this ID when
 	// you create a job to specify which address you want the Snowball for that job
 	// shipped to.

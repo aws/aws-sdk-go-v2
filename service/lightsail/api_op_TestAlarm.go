@@ -63,6 +63,7 @@ func (c *Client) TestAlarm(ctx context.Context, params *TestAlarmInput, optFns .
 }
 
 type TestAlarmInput struct {
+
 	// The alarm state to test. An alarm has the following possible states that can be
 	// tested:
 	//
@@ -74,12 +75,18 @@ type TestAlarmInput struct {
 	//
 	//     *
 	// OK - The metric is within the defined threshold.
+	//
+	// This member is required.
 	State types.AlarmState
+
 	// The name of the alarm to test.
+	//
+	// This member is required.
 	AlarmName *string
 }
 
 type TestAlarmOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

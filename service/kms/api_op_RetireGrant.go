@@ -71,12 +71,15 @@ func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optF
 }
 
 type RetireGrantInput struct {
+
 	// Token that identifies the grant to be retired.
 	GrantToken *string
+
 	// The Amazon Resource Name (ARN) of the CMK associated with the grant. For
 	// example:
 	// arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	KeyId *string
+
 	// Unique identifier of the grant to retire. The grant ID is returned in the
 	// response to a CreateGrant operation.
 	//

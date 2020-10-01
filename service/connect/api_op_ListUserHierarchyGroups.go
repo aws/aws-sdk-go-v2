@@ -57,18 +57,25 @@ func (c *Client) ListUserHierarchyGroups(ctx context.Context, params *ListUserHi
 }
 
 type ListUserHierarchyGroupsInput struct {
+
 	// The maximimum number of results to return per page.
 	MaxResults *int32
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 type ListUserHierarchyGroupsOutput struct {
+
 	// Information about the hierarchy groups.
 	UserHierarchyGroupSummaryList []*types.HierarchyGroupSummary
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 

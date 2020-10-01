@@ -55,7 +55,10 @@ func (c *Client) DeleteDevice(ctx context.Context, params *DeleteDeviceInput, op
 }
 
 type DeleteDeviceInput struct {
+
 	// The ARN of the device for which to request details.
+	//
+	// This member is required.
 	DeviceArn *string
 }
 

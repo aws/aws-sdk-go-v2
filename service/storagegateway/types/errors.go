@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An internal server error has occurred during the request. For more information,
@@ -27,18 +26,6 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalServerError) GetError_() *StorageGatewayError {
-	return e.Error_
-}
-func (e *InternalServerError) HasError_() bool {
-	return e.Error_ != nil
-}
 
 // An exception occurred because an invalid gateway request was issued to the
 // service. For more information, see the error and message fields.
@@ -59,18 +46,6 @@ func (e *InvalidGatewayRequestException) ErrorMessage() string {
 }
 func (e *InvalidGatewayRequestException) ErrorCode() string             { return "InvalidGatewayRequestException" }
 func (e *InvalidGatewayRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGatewayRequestException) GetError_() *StorageGatewayError {
-	return e.Error_
-}
-func (e *InvalidGatewayRequestException) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *InvalidGatewayRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGatewayRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal server error has occurred because the service is unavailable. For
 // more information, see the error and message fields.
@@ -91,15 +66,3 @@ func (e *ServiceUnavailableError) ErrorMessage() string {
 }
 func (e *ServiceUnavailableError) ErrorCode() string             { return "ServiceUnavailableError" }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableError) GetError_() *StorageGatewayError {
-	return e.Error_
-}
-func (e *ServiceUnavailableError) HasError_() bool {
-	return e.Error_ != nil
-}
-func (e *ServiceUnavailableError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableError) HasMessage() bool {
-	return e.Message != nil
-}

@@ -79,18 +79,22 @@ func (c *Client) RunJobFlow(ctx context.Context, params *RunJobFlowInput, optFns
 
 // Input to the RunJobFlow () operation.
 type RunJobFlowInput struct {
+
 	// The AWS KMS customer master key (CMK) used for encrypting log files. If a value
 	// is not provided, the logs will remain encrypted by AES-256. This attribute is
 	// only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
+
 	// Attributes for Kerberos configuration when Kerberos authentication is enabled
 	// using a security configuration. For more information see Use Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html) in
 	// the EMR Management Guide.
 	KerberosAttributes *types.KerberosAttributes
+
 	// A JSON string for selecting additional features.
 	AdditionalInfo *string
+
 	// Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon
 	// EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches
 	// cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see
@@ -105,17 +109,20 @@ type RunJobFlowInput struct {
 	// information about finding an AMI ID, see Finding a Linux AMI
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
 	CustomAmiId *string
+
 	// An IAM role for automatic scaling policies. The default role is
 	// EMR_AutoScaling_DefaultRole. The IAM role provides permissions that the
 	// automatic scaling feature requires to launch and terminate EC2 instances in an
 	// instance group.
 	AutoScalingRole *string
+
 	// Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of
 	// applications for Amazon EMR to install and configure when launching the cluster.
 	// For a list of applications available for each Amazon EMR release version, see
 	// the Amazon EMR Release Guide
 	// (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/).
 	Applications []*types.Application
+
 	// Specifies the way that individual Amazon EC2 instances terminate when an
 	// automatic scale-in activity occurs or an instance group is resized.
 	// TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the
@@ -130,23 +137,30 @@ type RunJobFlowInput struct {
 	// 4.1.0 and later, and is the default for versions of Amazon EMR earlier than
 	// 5.1.0.
 	ScaleDownBehavior types.ScaleDownBehavior
+
 	// Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0
 	// and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
 	AmiVersion *string
+
 	// A list of tags to associate with a cluster and propagate to Amazon EC2
 	// instances.
 	Tags []*types.Tag
+
 	// The IAM role that will be assumed by the Amazon EMR service to access AWS
 	// resources on your behalf.
 	ServiceRole *string
+
 	// The location in Amazon S3 to write the log files of the job flow. If a value is
 	// not provided, logs are not created.
 	LogUri *string
+
 	// The specified managed scaling policy for an Amazon EMR cluster.
 	ManagedScalingPolicy *types.ManagedScalingPolicy
+
 	// For Amazon EMR releases 4.0 and later. The list of configurations supplied for
 	// the EMR cluster you are creating.
 	Configurations []*types.Configuration
+
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the form
 	// emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0. For
@@ -156,6 +170,7 @@ type RunJobFlowInput struct {
 	// applies only to Amazon EMR releases version 4.0 and later. Earlier versions use
 	// AmiVersion.
 	ReleaseLabel *string
+
 	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use
 	// Applications. A list of strings that indicates third-party software to use. For
 	// more information, see the Amazon EMR Developer Guide
@@ -167,25 +182,37 @@ type RunJobFlowInput struct {
 	//
 	//     * "mapr-m5" - launch the job flow using MapR M5 Edition.
 	SupportedProducts []*string
+
 	// A list of steps to run.
 	Steps []*types.StepConfig
+
 	// A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
 	BootstrapActions []*types.BootstrapActionConfig
+
 	// The name of the job flow.
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies the number of steps that can be executed concurrently. The default
 	// value is 1. The maximum value is 256.
 	StepConcurrencyLevel *int32
+
 	// The size, in GiB, of the EBS root device volume of the Linux AMI that is used
 	// for each EC2 instance. Available in Amazon EMR version 4.x and later.
 	EbsRootVolumeSize *int32
+
 	// A specification of the number and type of Amazon EC2 instances.
+	//
+	// This member is required.
 	Instances *types.JobFlowInstancesConfig
+
 	// A value of true indicates that all IAM users in the AWS account can perform
 	// cluster actions if they have the proper IAM policy permissions. This is the
 	// default. A value of false indicates that only the IAM user who created the
 	// cluster can perform actions.
 	VisibleToAllUsers *bool
+
 	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use
 	// Applications. A list of strings that indicates third-party software to use with
 	// the job flow that accepts a user argument list. EMR accepts and forwards the
@@ -218,13 +245,16 @@ type RunJobFlowInput struct {
 	//     * "ganglia" -
 	// launch the cluster with the Ganglia Monitoring System installed.
 	NewSupportedProducts []*types.SupportedProductConfig
+
 	// The name of a security configuration to apply to the cluster.
 	SecurityConfiguration *string
+
 	// Also called instance profile and EC2 role. An IAM role for an EMR cluster. The
 	// EC2 instances of the cluster assume this role. The default role is
 	// EMR_EC2_DefaultRole. In order to use the default role, you must have already
 	// created it using the CLI or console.
 	JobFlowRole *string
+
 	// Applies only when CustomAmiID is used. Specifies which updates from the Amazon
 	// Linux AMI package repositories to apply automatically when the instance boots
 	// using the AMI. If omitted, the default is SECURITY, which indicates that only
@@ -235,8 +265,10 @@ type RunJobFlowInput struct {
 
 // The result of the RunJobFlow () operation.
 type RunJobFlowOutput struct {
+
 	// The Amazon Resource Name of the cluster.
 	ClusterArn *string
+
 	// An unique identifier for the job flow.
 	JobFlowId *string
 

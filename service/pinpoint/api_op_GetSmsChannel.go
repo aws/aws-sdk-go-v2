@@ -57,14 +57,20 @@ func (c *Client) GetSmsChannel(ctx context.Context, params *GetSmsChannelInput, 
 }
 
 type GetSmsChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetSmsChannelOutput struct {
+
 	// Provides information about the status and settings of the SMS channel for an
 	// application.
+	//
+	// This member is required.
 	SMSChannelResponse *types.SMSChannelResponse
 
 	// Metadata pertaining to the operation's result.

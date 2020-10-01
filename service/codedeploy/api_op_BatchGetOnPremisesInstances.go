@@ -58,13 +58,17 @@ func (c *Client) BatchGetOnPremisesInstances(ctx context.Context, params *BatchG
 
 // Represents the input of a BatchGetOnPremisesInstances operation.
 type BatchGetOnPremisesInstancesInput struct {
+
 	// The names of the on-premises instances about which to get information. The
 	// maximum number of instance names you can specify is 25.
+	//
+	// This member is required.
 	InstanceNames []*string
 }
 
 // Represents the output of a BatchGetOnPremisesInstances operation.
 type BatchGetOnPremisesInstancesOutput struct {
+
 	// Information about the on-premises instances.
 	InstanceInfos []*types.InstanceInfo
 

@@ -64,13 +64,16 @@ func (c *Client) DescribeOrderableClusterOptions(ctx context.Context, params *De
 
 //
 type DescribeOrderableClusterOptionsInput struct {
+
 	// The node type filter value. Specify this parameter to show only the available
 	// offerings matching the specified node type.
 	NodeType *string
+
 	// The version filter value. Specify this parameter to show only the available
 	// offerings matching the specified version. Default: All versions. Constraints:
 	// Must be one of the version returned from DescribeClusterVersions ().
 	ClusterVersion *string
+
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeOrderableClusterOptions ()
 	// request exceed the value specified in MaxRecords, AWS returns a value in the
@@ -78,6 +81,7 @@ type DescribeOrderableClusterOptionsInput struct {
 	// by providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
+
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
@@ -88,9 +92,11 @@ type DescribeOrderableClusterOptionsInput struct {
 
 // Contains the output from the DescribeOrderableClusterOptions () action.
 type DescribeOrderableClusterOptionsOutput struct {
+
 	// An OrderableClusterOption structure containing information about orderable
 	// options for the cluster.
 	OrderableClusterOptions []*types.OrderableClusterOption
+
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
 	// the next set of records by providing this returned marker value in the Marker

@@ -56,15 +56,25 @@ func (c *Client) DetachFromIndex(ctx context.Context, params *DetachFromIndexInp
 }
 
 type DetachFromIndexInput struct {
+
 	// The Amazon Resource Name (ARN) of the directory the index and object exist in.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// A reference to the object being detached from the index.
+	//
+	// This member is required.
 	TargetReference *types.ObjectReference
+
 	// A reference to the index object.
+	//
+	// This member is required.
 	IndexReference *types.ObjectReference
 }
 
 type DetachFromIndexOutput struct {
+
 	// The ObjectIdentifier of the object that was detached from the index.
 	DetachedObjectIdentifier *string
 

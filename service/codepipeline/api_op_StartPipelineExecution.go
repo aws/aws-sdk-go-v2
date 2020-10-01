@@ -59,14 +59,19 @@ func (c *Client) StartPipelineExecution(ctx context.Context, params *StartPipeli
 
 // Represents the input of a StartPipelineExecution action.
 type StartPipelineExecutionInput struct {
+
 	// The name of the pipeline to start.
+	//
+	// This member is required.
 	Name *string
+
 	// The system-generated unique ID used to identify a unique execution request.
 	ClientRequestToken *string
 }
 
 // Represents the output of a StartPipelineExecution action.
 type StartPipelineExecutionOutput struct {
+
 	// The unique system-generated ID of the pipeline execution that was started.
 	PipelineExecutionId *string
 

@@ -62,17 +62,23 @@ func (c *Client) CreateCollection(ctx context.Context, params *CreateCollectionI
 }
 
 type CreateCollectionInput struct {
+
 	// ID for the collection that you are creating.
+	//
+	// This member is required.
 	CollectionId *string
 }
 
 type CreateCollectionOutput struct {
+
 	// Version number of the face detection model associated with the collection you
 	// are creating.
 	FaceModelVersion *string
+
 	// Amazon Resource Name (ARN) of the collection. You can use this to manage
 	// permissions on your resources.
 	CollectionArn *string
+
 	// HTTP status code indicating the result of the operation.
 	StatusCode *int32
 

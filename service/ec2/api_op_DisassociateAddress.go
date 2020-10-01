@@ -59,13 +59,16 @@ func (c *Client) DisassociateAddress(ctx context.Context, params *DisassociateAd
 }
 
 type DisassociateAddressInput struct {
+
 	// [EC2-VPC] The association ID. Required for EC2-VPC.
 	AssociationId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
 	PublicIp *string
 }

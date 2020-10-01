@@ -56,16 +56,26 @@ func (c *Client) DescribeComponentConfigurationRecommendation(ctx context.Contex
 }
 
 type DescribeComponentConfigurationRecommendationInput struct {
+
 	// The name of the component.
+	//
+	// This member is required.
 	ComponentName *string
+
 	// The tier of the application component. Supported tiers include DOT_NET_CORE,
 	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT.
+	//
+	// This member is required.
 	Tier types.Tier
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
 }
 
 type DescribeComponentConfigurationRecommendationOutput struct {
+
 	// The recommended configuration settings of the component. The value is the
 	// escaped JSON of the configuration.
 	ComponentConfiguration *string

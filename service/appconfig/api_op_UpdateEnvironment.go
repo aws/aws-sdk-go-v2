@@ -56,30 +56,45 @@ func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmen
 }
 
 type UpdateEnvironmentInput struct {
+
 	// A description of the environment.
 	Description *string
+
 	// Amazon CloudWatch alarms to monitor during the deployment process.
 	Monitors []*types.Monitor
+
 	// The environment ID.
+	//
+	// This member is required.
 	EnvironmentId *string
+
 	// The name of the environment.
 	Name *string
+
 	// The application ID.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type UpdateEnvironmentOutput struct {
+
 	// The name of the environment.
 	Name *string
+
 	// The application ID.
 	ApplicationId *string
+
 	// The description of the environment.
 	Description *string
+
 	// The state of the environment. An environment can be in one of the following
 	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
 	State types.EnvironmentState
+
 	// The environment ID.
 	Id *string
+
 	// Amazon CloudWatch alarms monitored during the deployment.
 	Monitors []*types.Monitor
 

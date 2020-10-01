@@ -56,23 +56,42 @@ func (c *Client) GetIPSet(ctx context.Context, params *GetIPSetInput, optFns ...
 }
 
 type GetIPSetInput struct {
+
 	// The unique ID of the detector that the IPSet is associated with.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The unique ID of the IPSet to retrieve.
+	//
+	// This member is required.
 	IpSetId *string
 }
 
 type GetIPSetOutput struct {
+
 	// The URI of the file that contains the IPSet. For example:
 	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	//
+	// This member is required.
 	Location *string
+
 	// The status of IPSet file that was uploaded.
+	//
+	// This member is required.
 	Status types.IpSetStatus
+
 	// The tags of the IPSet resource.
 	Tags map[string]*string
+
 	// The user-friendly name for the IPSet.
+	//
+	// This member is required.
 	Name *string
+
 	// The format of the file that contains the IPSet.
+	//
+	// This member is required.
 	Format types.IpSetFormat
 
 	// Metadata pertaining to the operation's result.

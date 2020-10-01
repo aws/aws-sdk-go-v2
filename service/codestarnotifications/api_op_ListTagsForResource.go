@@ -55,11 +55,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the notification rule.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The tags associated with the notification rule.
 	Tags map[string]*string
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This exception is thrown when a user tries to confirm the account with an email
@@ -27,12 +26,6 @@ func (e *AliasExistsException) ErrorMessage() string {
 }
 func (e *AliasExistsException) ErrorCode() string             { return "AliasExistsException" }
 func (e *AliasExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AliasExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AliasExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a verification code fails to deliver successfully.
 type CodeDeliveryFailureException struct {
@@ -50,12 +43,6 @@ func (e *CodeDeliveryFailureException) ErrorMessage() string {
 }
 func (e *CodeDeliveryFailureException) ErrorCode() string             { return "CodeDeliveryFailureException" }
 func (e *CodeDeliveryFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CodeDeliveryFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CodeDeliveryFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown if the provided code does not match what the server was
 // expecting.
@@ -74,12 +61,6 @@ func (e *CodeMismatchException) ErrorMessage() string {
 }
 func (e *CodeMismatchException) ErrorCode() string             { return "CodeMismatchException" }
 func (e *CodeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CodeMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CodeMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown if two or more modifications are happening
 // concurrently.
@@ -100,12 +81,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the provider is already supported by the user
 // pool.
@@ -124,12 +99,6 @@ func (e *DuplicateProviderException) ErrorMessage() string {
 }
 func (e *DuplicateProviderException) ErrorCode() string             { return "DuplicateProviderException" }
 func (e *DuplicateProviderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateProviderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateProviderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when there is a code mismatch and the service fails to
 // configure the software token TOTP multi-factor authentication (MFA).
@@ -150,12 +119,6 @@ func (e *EnableSoftwareTokenMFAException) ErrorCode() string {
 	return "EnableSoftwareTokenMFAException"
 }
 func (e *EnableSoftwareTokenMFAException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EnableSoftwareTokenMFAException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EnableSoftwareTokenMFAException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown if a code has expired.
 type ExpiredCodeException struct {
@@ -173,12 +136,6 @@ func (e *ExpiredCodeException) ErrorMessage() string {
 }
 func (e *ExpiredCodeException) ErrorCode() string             { return "ExpiredCodeException" }
 func (e *ExpiredCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredCodeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredCodeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when Amazon Cognito encounters a group that already
 // exists in the user pool.
@@ -197,12 +154,6 @@ func (e *GroupExistsException) ErrorMessage() string {
 }
 func (e *GroupExistsException) ErrorCode() string             { return "GroupExistsException" }
 func (e *GroupExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *GroupExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GroupExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when Amazon Cognito encounters an internal error.
 type InternalErrorException struct {
@@ -220,12 +171,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when Amazon Cognito is not allowed to use your email
 // identity. HTTP status code: 400.
@@ -248,12 +193,6 @@ func (e *InvalidEmailRoleAccessPolicyException) ErrorCode() string {
 func (e *InvalidEmailRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidEmailRoleAccessPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEmailRoleAccessPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the Amazon Cognito service encounters an invalid
 // AWS Lambda response.
@@ -272,12 +211,6 @@ func (e *InvalidLambdaResponseException) ErrorMessage() string {
 }
 func (e *InvalidLambdaResponseException) ErrorCode() string             { return "InvalidLambdaResponseException" }
 func (e *InvalidLambdaResponseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLambdaResponseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLambdaResponseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified OAuth flow is invalid.
 type InvalidOAuthFlowException struct {
@@ -295,12 +228,6 @@ func (e *InvalidOAuthFlowException) ErrorMessage() string {
 }
 func (e *InvalidOAuthFlowException) ErrorCode() string             { return "InvalidOAuthFlowException" }
 func (e *InvalidOAuthFlowException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOAuthFlowException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOAuthFlowException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the Amazon Cognito service encounters an invalid
 // parameter.
@@ -319,12 +246,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the Amazon Cognito service encounters an invalid
 // password.
@@ -343,12 +264,6 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 }
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPasswordException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPasswordException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is returned when the role provided for SMS configuration does not
 // have permission to publish using Amazon SNS.
@@ -370,12 +285,6 @@ func (e *InvalidSmsRoleAccessPolicyException) ErrorCode() string {
 }
 func (e *InvalidSmsRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidSmsRoleAccessPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSmsRoleAccessPolicyException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // This exception is thrown when the trust relationship is invalid for the role
@@ -401,12 +310,6 @@ func (e *InvalidSmsRoleTrustRelationshipException) ErrorCode() string {
 func (e *InvalidSmsRoleTrustRelationshipException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidSmsRoleTrustRelationshipException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSmsRoleTrustRelationshipException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the user pool configuration is invalid.
 type InvalidUserPoolConfigurationException struct {
@@ -428,12 +331,6 @@ func (e *InvalidUserPoolConfigurationException) ErrorCode() string {
 func (e *InvalidUserPoolConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidUserPoolConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidUserPoolConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a user exceeds the limit for a requested AWS
 // resource.
@@ -452,12 +349,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when Amazon Cognito cannot find a multi-factor
 // authentication (MFA) method.
@@ -476,12 +367,6 @@ func (e *MFAMethodNotFoundException) ErrorMessage() string {
 }
 func (e *MFAMethodNotFoundException) ErrorCode() string             { return "MFAMethodNotFoundException" }
 func (e *MFAMethodNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MFAMethodNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MFAMethodNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a user is not authorized.
 type NotAuthorizedException struct {
@@ -499,12 +384,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a password reset is required.
 type PasswordResetRequiredException struct {
@@ -522,12 +401,6 @@ func (e *PasswordResetRequiredException) ErrorMessage() string {
 }
 func (e *PasswordResetRequiredException) ErrorCode() string             { return "PasswordResetRequiredException" }
 func (e *PasswordResetRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PasswordResetRequiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PasswordResetRequiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a precondition is not met.
 type PreconditionNotMetException struct {
@@ -545,12 +418,6 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 }
 func (e *PreconditionNotMetException) ErrorCode() string             { return "PreconditionNotMetException" }
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PreconditionNotMetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PreconditionNotMetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the Amazon Cognito service cannot find the
 // requested resource.
@@ -569,12 +436,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified scope does not exist.
 type ScopeDoesNotExistException struct {
@@ -592,12 +453,6 @@ func (e *ScopeDoesNotExistException) ErrorMessage() string {
 }
 func (e *ScopeDoesNotExistException) ErrorCode() string             { return "ScopeDoesNotExistException" }
 func (e *ScopeDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ScopeDoesNotExistException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScopeDoesNotExistException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the software token TOTP multi-factor
 // authentication (MFA) is not enabled for the user pool.
@@ -618,12 +473,6 @@ func (e *SoftwareTokenMFANotFoundException) ErrorCode() string {
 	return "SoftwareTokenMFANotFoundException"
 }
 func (e *SoftwareTokenMFANotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SoftwareTokenMFANotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SoftwareTokenMFANotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the user has made too many failed attempts for a
 // given action (e.g., sign in).
@@ -642,12 +491,6 @@ func (e *TooManyFailedAttemptsException) ErrorMessage() string {
 }
 func (e *TooManyFailedAttemptsException) ErrorCode() string             { return "TooManyFailedAttemptsException" }
 func (e *TooManyFailedAttemptsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyFailedAttemptsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyFailedAttemptsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the user has made too many requests for a given
 // operation.
@@ -666,12 +509,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the Amazon Cognito service encounters an
 // unexpected exception with the AWS Lambda service.
@@ -690,12 +527,6 @@ func (e *UnexpectedLambdaException) ErrorMessage() string {
 }
 func (e *UnexpectedLambdaException) ErrorCode() string             { return "UnexpectedLambdaException" }
 func (e *UnexpectedLambdaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnexpectedLambdaException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnexpectedLambdaException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the specified identifier is not supported.
 type UnsupportedIdentityProviderException struct {
@@ -717,12 +548,6 @@ func (e *UnsupportedIdentityProviderException) ErrorCode() string {
 func (e *UnsupportedIdentityProviderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *UnsupportedIdentityProviderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedIdentityProviderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request failed because the user is in an unsupported state.
 type UnsupportedUserStateException struct {
@@ -740,12 +565,6 @@ func (e *UnsupportedUserStateException) ErrorMessage() string {
 }
 func (e *UnsupportedUserStateException) ErrorCode() string             { return "UnsupportedUserStateException" }
 func (e *UnsupportedUserStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedUserStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedUserStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when you are trying to modify a user pool while a user
 // import job is in progress for that pool.
@@ -764,12 +583,6 @@ func (e *UserImportInProgressException) ErrorMessage() string {
 }
 func (e *UserImportInProgressException) ErrorCode() string             { return "UserImportInProgressException" }
 func (e *UserImportInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserImportInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserImportInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the Amazon Cognito service encounters a user
 // validation exception with the AWS Lambda service.
@@ -788,12 +601,6 @@ func (e *UserLambdaValidationException) ErrorMessage() string {
 }
 func (e *UserLambdaValidationException) ErrorCode() string             { return "UserLambdaValidationException" }
 func (e *UserLambdaValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserLambdaValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserLambdaValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when Amazon Cognito encounters a user name that already
 // exists in the user pool.
@@ -812,12 +619,6 @@ func (e *UsernameExistsException) ErrorMessage() string {
 }
 func (e *UsernameExistsException) ErrorCode() string             { return "UsernameExistsException" }
 func (e *UsernameExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UsernameExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UsernameExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a user is not confirmed successfully.
 type UserNotConfirmedException struct {
@@ -835,12 +636,6 @@ func (e *UserNotConfirmedException) ErrorMessage() string {
 }
 func (e *UserNotConfirmedException) ErrorCode() string             { return "UserNotConfirmedException" }
 func (e *UserNotConfirmedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserNotConfirmedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserNotConfirmedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a user is not found.
 type UserNotFoundException struct {
@@ -858,12 +653,6 @@ func (e *UserNotFoundException) ErrorMessage() string {
 }
 func (e *UserNotFoundException) ErrorCode() string             { return "UserNotFoundException" }
 func (e *UserNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when user pool add-ons are not enabled.
 type UserPoolAddOnNotEnabledException struct {
@@ -883,12 +672,6 @@ func (e *UserPoolAddOnNotEnabledException) ErrorCode() string {
 	return "UserPoolAddOnNotEnabledException"
 }
 func (e *UserPoolAddOnNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserPoolAddOnNotEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserPoolAddOnNotEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a user pool tag cannot be set or updated.
 type UserPoolTaggingException struct {
@@ -906,9 +689,3 @@ func (e *UserPoolTaggingException) ErrorMessage() string {
 }
 func (e *UserPoolTaggingException) ErrorCode() string             { return "UserPoolTaggingException" }
 func (e *UserPoolTaggingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserPoolTaggingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserPoolTaggingException) HasMessage() bool {
-	return e.Message != nil
-}

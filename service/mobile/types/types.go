@@ -8,59 +8,80 @@ import (
 
 // The details of the bundle.
 type BundleDetails struct {
+
 	// Developer desktop or mobile app or website platforms.
 	AvailablePlatforms []Platform
+
 	// Description of the download bundle.
 	Description *string
+
 	// Unique bundle identifier.
 	BundleId *string
+
 	// Title of the download bundle.
 	Title *string
+
 	// Icon for the download bundle.
 	IconUrl *string
+
 	// Version of the download bundle.
 	Version *string
 }
 
 // Detailed information about an AWS Mobile Hub project.
 type ProjectDetails struct {
+
 	// List of AWS resources associated with a project.
 	Resources []*Resource
+
 	// Name of the project.
 	Name *string
+
 	// Unique project identifier.
 	ProjectId *string
+
 	// Synchronization state for a project.
 	State ProjectState
+
 	// Default region to use for AWS resource creation in the AWS Mobile Hub project.
 	Region *string
+
 	// Date the project was created.
 	CreatedDate *time.Time
+
 	// Website URL for this project in the AWS Mobile Hub console.
 	ConsoleUrl *string
+
 	// Date of the last modification of the project.
 	LastUpdatedDate *time.Time
 }
 
 // Summary information about an AWS Mobile Hub project.
 type ProjectSummary struct {
+
 	// Unique project identifier.
 	ProjectId *string
+
 	// Name of the project.
 	Name *string
 }
 
 // Information about an instance of an AWS resource associated with a project.
 type Resource struct {
+
 	// Identifies which feature in AWS Mobile Hub is associated with this AWS resource.
 	Feature *string
+
 	// Key-value attribute pairs.
 	Attributes map[string]*string
+
 	// Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of the
 	// bucket).
 	Name *string
+
 	// AWS resource name which uniquely identifies the resource in AWS systems.
 	Arn *string
+
 	// Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket).
 	Type *string
 }

@@ -57,18 +57,23 @@ func (c *Client) ListJobTemplates(ctx context.Context, params *ListJobTemplatesI
 }
 
 type ListJobTemplatesInput struct {
+
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of job templates.
 	NextToken *string
+
 	// Optionally, specify a job template category to limit responses to only job
 	// templates from that category.
 	Category *string
+
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
+
 	// Optional. Number of job templates, up to twenty, that will be returned at one
 	// time.
 	MaxResults *int32
+
 	// Optional. When you request a list of job templates, you can choose to list them
 	// alphabetically by NAME or chronologically by CREATION_DATE. If you don't
 	// specify, the service will list them by name.
@@ -76,8 +81,10 @@ type ListJobTemplatesInput struct {
 }
 
 type ListJobTemplatesOutput struct {
+
 	// List of Job templates.
 	JobTemplates []*types.JobTemplate
+
 	// Use this string to request the next batch of job templates.
 	NextToken *string
 

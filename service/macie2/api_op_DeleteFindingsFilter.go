@@ -55,8 +55,11 @@ func (c *Client) DeleteFindingsFilter(ctx context.Context, params *DeleteFinding
 }
 
 type DeleteFindingsFilterInput struct {
+
 	// The unique identifier for the Amazon Macie resource or account that the request
 	// applies to.
+	//
+	// This member is required.
 	Id *string
 }
 

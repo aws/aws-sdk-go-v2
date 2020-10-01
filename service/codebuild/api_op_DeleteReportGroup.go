@@ -61,7 +61,10 @@ func (c *Client) DeleteReportGroup(ctx context.Context, params *DeleteReportGrou
 }
 
 type DeleteReportGroupInput struct {
+
 	// The ARN of the report group to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

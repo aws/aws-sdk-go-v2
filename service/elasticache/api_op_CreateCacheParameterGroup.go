@@ -71,17 +71,27 @@ func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCa
 
 // Represents the input of a CreateCacheParameterGroup operation.
 type CreateCacheParameterGroupInput struct {
+
 	// A user-specified name for the cache parameter group.
+	//
+	// This member is required.
 	CacheParameterGroupName *string
+
 	// The name of the cache parameter group family that the cache parameter group can
 	// be used with. Valid values are: memcached1.4 | memcached1.5 | redis2.6 |
 	// redis2.8 | redis3.2 | redis4.0 | redis5.0 |
+	//
+	// This member is required.
 	CacheParameterGroupFamily *string
+
 	// A user-specified description for the cache parameter group.
+	//
+	// This member is required.
 	Description *string
 }
 
 type CreateCacheParameterGroupOutput struct {
+
 	// Represents the output of a CreateCacheParameterGroup operation.
 	CacheParameterGroup *types.CacheParameterGroup
 

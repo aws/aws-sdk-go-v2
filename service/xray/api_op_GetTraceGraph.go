@@ -56,15 +56,21 @@ func (c *Client) GetTraceGraph(ctx context.Context, params *GetTraceGraphInput, 
 }
 
 type GetTraceGraphInput struct {
+
 	// Trace IDs of requests for which to generate a service graph.
+	//
+	// This member is required.
 	TraceIds []*string
+
 	// Pagination token.
 	NextToken *string
 }
 
 type GetTraceGraphOutput struct {
+
 	// The services that have processed one of the specified requests.
 	Services []*types.Service
+
 	// Pagination token.
 	NextToken *string
 

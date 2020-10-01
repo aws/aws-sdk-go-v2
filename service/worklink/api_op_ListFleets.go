@@ -55,16 +55,20 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 }
 
 type ListFleetsInput struct {
+
 	// The maximum number of results to be included in the next page.
 	MaxResults *int32
+
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListFleetsOutput struct {
+
 	// The summary list of the fleets.
 	FleetSummaryList []*types.FleetSummary
+
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string

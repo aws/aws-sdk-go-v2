@@ -63,24 +63,36 @@ func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context,
 }
 
 type AddApplicationInputProcessingConfigurationInput struct {
+
 	// Version of the application to which you want to add the input processing
 	// configuration. You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
 	// not the current version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
+
 	// Name of the application to which you want to add the input processing
 	// configuration.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The ID of the input configuration to add the input processing configuration to.
 	// You can get a list of the input IDs for an application using the
 	// DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation.
+	//
+	// This member is required.
 	InputId *string
+
 	// The InputProcessingConfiguration
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
 	// to add to the application.
+	//
+	// This member is required.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
 }
 

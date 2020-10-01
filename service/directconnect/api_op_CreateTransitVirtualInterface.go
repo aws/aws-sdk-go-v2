@@ -70,13 +70,20 @@ func (c *Client) CreateTransitVirtualInterface(ctx context.Context, params *Crea
 }
 
 type CreateTransitVirtualInterfaceInput struct {
+
 	// Information about the transit virtual interface.
+	//
+	// This member is required.
 	NewTransitVirtualInterface *types.NewTransitVirtualInterface
+
 	// The ID of the connection.
+	//
+	// This member is required.
 	ConnectionId *string
 }
 
 type CreateTransitVirtualInterfaceOutput struct {
+
 	// Information about a virtual interface.
 	VirtualInterface *types.VirtualInterface
 

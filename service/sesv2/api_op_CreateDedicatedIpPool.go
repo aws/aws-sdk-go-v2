@@ -61,8 +61,12 @@ func (c *Client) CreateDedicatedIpPool(ctx context.Context, params *CreateDedica
 
 // A request to create a new dedicated IP pool.
 type CreateDedicatedIpPoolInput struct {
+
 	// The name of the dedicated IP pool.
+	//
+	// This member is required.
 	PoolName *string
+
 	// An object that defines the tags (keys and values) that you want to associate
 	// with the pool.
 	Tags []*types.Tag

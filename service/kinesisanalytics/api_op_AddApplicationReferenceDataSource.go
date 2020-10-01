@@ -72,20 +72,29 @@ func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *
 
 //
 type AddApplicationReferenceDataSourceInput struct {
+
 	// Version of the application for which you are adding the reference data source.
 	// You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified is
 	// not the current version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
+
 	// The reference data source can be an object in your Amazon S3 bucket. Amazon
 	// Kinesis Analytics reads the object and copies the data into the in-application
 	// table that is created. You provide an S3 bucket, object key name, and the
 	// resulting in-application table that is created. You must also provide an IAM
 	// role with the necessary permissions that Amazon Kinesis Analytics can assume to
 	// read the object from your S3 bucket on your behalf.
+	//
+	// This member is required.
 	ReferenceDataSource *types.ReferenceDataSource
+
 	// Name of an existing application.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 

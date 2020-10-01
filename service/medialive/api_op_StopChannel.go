@@ -57,43 +57,61 @@ func (c *Client) StopChannel(ctx context.Context, params *StopChannelInput, optF
 
 // Placeholder documentation for StopChannelRequest
 type StopChannelInput struct {
+
 	// A request to stop a running channel
+	//
+	// This member is required.
 	ChannelId *string
 }
 
 // Placeholder documentation for StopChannelResponse
 type StopChannelOutput struct {
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
+
 	// The log level being written to CloudWatch Logs.
 	LogLevel types.LogLevel
+
 	// The endpoints where outgoing connections initiate from
 	EgressEndpoints []*types.ChannelEgressEndpoint
+
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
+
 	// Placeholder documentation for ChannelState
 	State types.ChannelState
+
 	// The name of the channel. (user-mutable)
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
 	RoleArn *string
+
 	// A list of destinations of the channel. For UDP outputs, there is one destination
 	// per output. For other types (HLS, for example), there is one destination per
 	// packager.
 	Destinations []*types.OutputDestination
+
 	// Placeholder documentation for InputSpecification
 	InputSpecification *types.InputSpecification
+
 	// The number of currently healthy pipelines.
 	PipelinesRunningCount *int32
+
 	// The unique arn of the channel.
 	Arn *string
+
 	// Runtime details for the pipelines of a running channel.
 	PipelineDetails []*types.PipelineDetail
+
 	// List of input attachments for channel.
 	InputAttachments []*types.InputAttachment
+
 	// The unique id of the channel.
 	Id *string
+
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings
 

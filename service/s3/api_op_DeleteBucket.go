@@ -61,7 +61,10 @@ func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, op
 }
 
 type DeleteBucketInput struct {
+
 	// Specifies the bucket being deleted.
+	//
+	// This member is required.
 	Bucket *string
 }
 

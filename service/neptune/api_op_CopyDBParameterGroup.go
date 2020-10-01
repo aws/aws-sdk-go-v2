@@ -56,8 +56,12 @@ func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParamet
 }
 
 type CopyDBParameterGroupInput struct {
+
 	// A description for the copied DB parameter group.
+	//
+	// This member is required.
 	TargetDBParameterGroupDescription *string
+
 	// The identifier for the copied DB parameter group. Constraints:
 	//
 	//     * Cannot be
@@ -73,19 +77,26 @@ type CopyDBParameterGroupInput struct {
 	//
 	//     <p>Example:
 	// <code>my-db-parameter-group</code> </p>
+	//
+	// This member is required.
 	TargetDBParameterGroupIdentifier *string
+
 	// The tags to be assigned to the copied DB parameter group.
 	Tags []*types.Tag
+
 	// The identifier or ARN for the source DB parameter group. For information about
 	// creating an ARN, see  Constructing an Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
 	// <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB parameter group.</p>
 	// </li> <li> <p>Must specify a valid DB parameter group identifier, for example
 	// <code>my-db-param-group</code>, or a valid ARN.</p> </li> </ul>
+	//
+	// This member is required.
 	SourceDBParameterGroupIdentifier *string
 }
 
 type CopyDBParameterGroupOutput struct {
+
 	// Contains the details of an Amazon Neptune DB parameter group. This data type is
 	// used as a response element in the DescribeDBParameterGroups () action.
 	DBParameterGroup *types.DBParameterGroup

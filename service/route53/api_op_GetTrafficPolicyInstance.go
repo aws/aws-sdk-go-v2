@@ -62,14 +62,20 @@ func (c *Client) GetTrafficPolicyInstance(ctx context.Context, params *GetTraffi
 
 // Gets information about a specified traffic policy instance.
 type GetTrafficPolicyInstanceInput struct {
+
 	// The ID of the traffic policy instance that you want to get information about.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
 type GetTrafficPolicyInstanceOutput struct {
+
 	// A complex type that contains settings for the traffic policy instance.
+	//
+	// This member is required.
 	TrafficPolicyInstance *types.TrafficPolicyInstance
 
 	// Metadata pertaining to the operation's result.

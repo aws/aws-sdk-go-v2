@@ -77,7 +77,10 @@ func (c *Client) UndeprecateDomain(ctx context.Context, params *UndeprecateDomai
 }
 
 type UndeprecateDomainInput struct {
+
 	// The name of the domain of the deprecated workflow type.
+	//
+	// This member is required.
 	Name *string
 }
 

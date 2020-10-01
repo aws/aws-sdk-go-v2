@@ -60,11 +60,15 @@ func (c *Client) StopJob(ctx context.Context, params *StopJobInput, optFns ...fu
 }
 
 type StopJobInput struct {
+
 	// Represents the Amazon Resource Name (ARN) of the Device Farm job to stop.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type StopJobOutput struct {
+
 	// The job that was stopped.
 	Job *types.Job
 

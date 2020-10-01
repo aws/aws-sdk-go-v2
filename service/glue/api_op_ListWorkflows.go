@@ -54,15 +54,19 @@ func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, 
 }
 
 type ListWorkflowsInput struct {
+
 	// The maximum size of a list to return.
 	MaxResults *int32
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 }
 
 type ListWorkflowsOutput struct {
+
 	// A continuation token, if not all workflow names have been returned.
 	NextToken *string
+
 	// List of names of workflows in the account.
 	Workflows []*string
 

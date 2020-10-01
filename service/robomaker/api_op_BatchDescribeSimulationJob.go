@@ -56,13 +56,18 @@ func (c *Client) BatchDescribeSimulationJob(ctx context.Context, params *BatchDe
 }
 
 type BatchDescribeSimulationJobInput struct {
+
 	// A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
+	//
+	// This member is required.
 	Jobs []*string
 }
 
 type BatchDescribeSimulationJobOutput struct {
+
 	// A list of simulation jobs.
 	Jobs []*types.SimulationJob
+
 	// A list of unprocessed simulation job Amazon Resource Names (ARNs).
 	UnprocessedJobs []*string
 

@@ -57,14 +57,19 @@ func (c *Client) GetRepositoryTriggers(ctx context.Context, params *GetRepositor
 
 // Represents the input of a get repository triggers operation.
 type GetRepositoryTriggersInput struct {
+
 	// The name of the repository for which the trigger is configured.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 // Represents the output of a get repository triggers operation.
 type GetRepositoryTriggersOutput struct {
+
 	// The system-generated unique ID for the trigger.
 	ConfigurationId *string
+
 	// The JSON block of configuration information for each trigger.
 	Triggers []*types.RepositoryTrigger
 

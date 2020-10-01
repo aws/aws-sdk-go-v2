@@ -55,7 +55,10 @@ func (c *Client) DeleteDomainName(ctx context.Context, params *DeleteDomainNameI
 }
 
 type DeleteDomainNameInput struct {
+
 	// The domain name.
+	//
+	// This member is required.
 	DomainName *string
 }
 

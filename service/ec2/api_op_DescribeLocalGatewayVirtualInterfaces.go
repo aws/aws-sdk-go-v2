@@ -55,25 +55,32 @@ func (c *Client) DescribeLocalGatewayVirtualInterfaces(ctx context.Context, para
 }
 
 type DescribeLocalGatewayVirtualInterfacesInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// One or more filters.
 	Filters []*types.Filter
+
 	// The IDs of the virtual interfaces.
 	LocalGatewayVirtualInterfaceIds []*string
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type DescribeLocalGatewayVirtualInterfacesOutput struct {
+
 	// Information about the virtual interfaces.
 	LocalGatewayVirtualInterfaces []*types.LocalGatewayVirtualInterface
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

@@ -60,29 +60,45 @@ func (c *Client) StartEntitiesDetectionV2Job(ctx context.Context, params *StartE
 }
 
 type StartEntitiesDetectionV2JobInput struct {
+
 	// The identifier of the job.
 	JobName *string
+
 	// The language of the input documents. All documents must be in the same language.
+	//
+	// This member is required.
 	LanguageCode types.LanguageCode
+
 	// A unique identifier for the request. If you don't set the client request token,
 	// Amazon Comprehend Medical generates one.
 	ClientRequestToken *string
+
 	// An AWS Key Management Service key to encrypt your output files. If you do not
 	// specify a key, the files are written in plain text.
 	KMSKey *string
+
 	// Specifies where to send the output files.
+	//
+	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend Medical read access to your input data. For
 	// more information, see  Role-Based Permissions Required for Asynchronous
 	// Operations
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med).
+	//
+	// This member is required.
 	DataAccessRoleArn *string
+
 	// Specifies the format and location of the input data for the job.
+	//
+	// This member is required.
 	InputDataConfig *types.InputDataConfig
 }
 
 type StartEntitiesDetectionV2JobOutput struct {
+
 	// The identifier generated for the job. To get the status of a job, use this
 	// identifier with the DescribeEntitiesDetectionV2Job operation.
 	JobId *string

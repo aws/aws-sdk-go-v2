@@ -55,13 +55,22 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 }
 
 type DeleteAliasInput struct {
+
 	// The identifier for the organization under which the user exists.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier for the member (user or group) from which to have the aliases
 	// removed.
+	//
+	// This member is required.
 	EntityId *string
+
 	// The aliases to be removed from the user's set of aliases. Duplicate entries in
 	// the list are collapsed into single entries (the list is transformed into a set).
+	//
+	// This member is required.
 	Alias *string
 }
 

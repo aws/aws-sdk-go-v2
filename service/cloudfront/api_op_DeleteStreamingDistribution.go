@@ -83,10 +83,14 @@ func (c *Client) DeleteStreamingDistribution(ctx context.Context, params *Delete
 
 // The request to delete a streaming distribution.
 type DeleteStreamingDistributionInput struct {
+
 	// The value of the ETag header that you received when you disabled the streaming
 	// distribution. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
 	// The distribution ID.
+	//
+	// This member is required.
 	Id *string
 }
 

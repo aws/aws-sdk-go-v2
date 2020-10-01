@@ -8,9 +8,13 @@ import (
 
 // Represents user interaction event information sent using the PutEvents API.
 type Event struct {
+
 	// The type of event. This property corresponds to the EVENT_TYPE field of the
 	// Interactions schema.
+	//
+	// This member is required.
 	EventType *string
+
 	// A string map of event-specific data that you might choose to record. For
 	// example, if a user rates a movie on your site, you might send the movie ID and
 	// rating, and the number of movie ratings made by the user. Each item in the map
@@ -25,9 +29,15 @@ type Event struct {
 	// 'MovieRating' with eventValue being the rating. The numberOfRatings would match
 	// the 'NUMBER_OF_RATINGS' field defined in the Interactions schema.
 	// This value conforms to the media type: application/json
+	//
+	// This member is required.
 	Properties *string
+
 	// The timestamp on the client side when the event occurred.
+	//
+	// This member is required.
 	SentAt *time.Time
+
 	// An ID associated with the event. If an event ID is not provided, Amazon
 	// Personalize generates a unique ID for the event. An event ID is not used as an
 	// input to the model. Amazon Personalize uses the event ID to distinquish unique

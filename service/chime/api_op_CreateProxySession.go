@@ -57,27 +57,42 @@ func (c *Client) CreateProxySession(ctx context.Context, params *CreateProxySess
 }
 
 type CreateProxySessionInput struct {
+
 	// The proxy session capabilities.
+	//
+	// This member is required.
 	Capabilities []types.Capability
+
 	// The preference for proxy phone number reuse, or stickiness, between the same
 	// participants across sessions.
 	NumberSelectionBehavior types.NumberSelectionBehavior
+
 	// The name of the proxy session.
 	Name *string
+
 	// The country and area code for the proxy phone number.
 	GeoMatchParams *types.GeoMatchParams
+
 	// The preference for matching the country or area code of the proxy phone number
 	// with that of the first participant.
 	GeoMatchLevel types.GeoMatchLevel
+
 	// The participant phone numbers.
+	//
+	// This member is required.
 	ParticipantPhoneNumbers []*string
+
 	// The Amazon Chime voice connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
+
 	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
 }
 
 type CreateProxySessionOutput struct {
+
 	// The proxy session details.
 	ProxySession *types.ProxySession
 

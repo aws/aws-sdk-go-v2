@@ -57,19 +57,31 @@ func (c *Client) CreateSecurityConfiguration(ctx context.Context, params *Create
 }
 
 type CreateSecurityConfigurationInput struct {
+
 	// The security configuration details in JSON format. For JSON parameters and
 	// examples, see Use Security Configurations to Set Up Cluster Security
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html)
 	// in the Amazon EMR Management Guide.
+	//
+	// This member is required.
 	SecurityConfiguration *string
+
 	// The name of the security configuration.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateSecurityConfigurationOutput struct {
+
 	// The date and time the security configuration was created.
+	//
+	// This member is required.
 	CreationDateTime *time.Time
+
 	// The name of the security configuration.
+	//
+	// This member is required.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

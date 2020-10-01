@@ -64,7 +64,10 @@ func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfi
 // sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type CreateConfigurationSetInput struct {
+
 	// A data structure that contains the name of the configuration set.
+	//
+	// This member is required.
 	ConfigurationSet *types.ConfigurationSet
 }
 

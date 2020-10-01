@@ -70,8 +70,11 @@ func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameS
 
 // Represents the input for a request action.
 type DeleteGameSessionQueueInput struct {
+
 	// A descriptive label that is associated with game session queue. Queue names must
 	// be unique within each Region. You can use either the queue ID or ARN value.
+	//
+	// This member is required.
 	Name *string
 }
 

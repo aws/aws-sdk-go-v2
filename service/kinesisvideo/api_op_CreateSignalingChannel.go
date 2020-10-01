@@ -57,19 +57,26 @@ func (c *Client) CreateSignalingChannel(ctx context.Context, params *CreateSigna
 }
 
 type CreateSignalingChannelInput struct {
+
 	// A name for the signaling channel that you are creating. It must be unique for
 	// each AWS account and AWS Region.
+	//
+	// This member is required.
 	ChannelName *string
+
 	// A set of tags (key-value pairs) that you want to associate with this channel.
 	Tags []*types.Tag
+
 	// A structure containing the configuration for the SINGLE_MASTER channel type.
 	SingleMasterConfiguration *types.SingleMasterConfiguration
+
 	// A type of the signaling channel that you are creating. Currently, SINGLE_MASTER
 	// is the only supported channel type.
 	ChannelType types.ChannelType
 }
 
 type CreateSignalingChannelOutput struct {
+
 	// The Amazon Resource Name (ARN) of the created channel.
 	ChannelARN *string
 

@@ -55,7 +55,10 @@ func (c *Client) DeleteDevEndpoint(ctx context.Context, params *DeleteDevEndpoin
 }
 
 type DeleteDevEndpointInput struct {
+
 	// The name of the DevEndpoint.
+	//
+	// This member is required.
 	EndpointName *string
 }
 

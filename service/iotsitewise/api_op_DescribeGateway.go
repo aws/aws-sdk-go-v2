@@ -57,31 +57,53 @@ func (c *Client) DescribeGateway(ctx context.Context, params *DescribeGatewayInp
 }
 
 type DescribeGatewayInput struct {
+
 	// The ID of the gateway device.
+	//
+	// This member is required.
 	GatewayId *string
 }
 
 type DescribeGatewayOutput struct {
+
 	// The name of the gateway.
+	//
+	// This member is required.
 	GatewayName *string
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the gateway, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	//
+	// This member is required.
 	GatewayArn *string
+
 	// The ID of the gateway device.
+	//
+	// This member is required.
 	GatewayId *string
+
 	// The date the gateway was last updated, in Unix epoch time.
+	//
+	// This member is required.
 	LastUpdateDate *time.Time
+
 	// The gateway's platform.
 	GatewayPlatform *types.GatewayPlatform
+
 	// The date the gateway was created, in Unix epoch time.
+	//
+	// This member is required.
 	CreationDate *time.Time
+
 	// A list of gateway capability summaries that each contain a namespace and status.
 	// Each gateway capability defines data sources for the gateway. To retrieve a
 	// capability configuration's definition, use
 	// DescribeGatewayCapabilityConfiguration
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
+	//
+	// This member is required.
 	GatewayCapabilitySummaries []*types.GatewayCapabilitySummary
 
 	// Metadata pertaining to the operation's result.

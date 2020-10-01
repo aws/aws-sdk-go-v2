@@ -96,13 +96,18 @@ func (c *Client) GetDocumentAnalysis(ctx context.Context, params *GetDocumentAna
 }
 
 type GetDocumentAnalysisInput struct {
+
 	// A unique identifier for the text-detection job. The JobId is returned from
 	// StartDocumentAnalysis. A JobId value is only valid for 7 days.
+	//
+	// This member is required.
 	JobId *string
+
 	// The maximum number of results to return per paginated call. The largest value
 	// that you can specify is 1,000. If you specify a value greater than 1,000, a
 	// maximum of 1,000 results is returned. The default value is 1,000.
 	MaxResults *int32
+
 	// If the previous response was incomplete (because there are more blocks to
 	// retrieve), Amazon Textract returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of blocks.
@@ -110,20 +115,27 @@ type GetDocumentAnalysisInput struct {
 }
 
 type GetDocumentAnalysisOutput struct {
+
 	// The results of the text-analysis operation.
 	Blocks []*types.Block
+
 	// The current status of the text detection job.
 	JobStatus types.JobStatus
+
 	//
 	AnalyzeDocumentModelVersion *string
+
 	// A list of warnings that occurred during the document-analysis operation.
 	Warnings []*types.Warning
+
 	// The current status of an asynchronous document-analysis operation.
 	StatusMessage *string
+
 	// If the response is truncated, Amazon Textract returns this token. You can use
 	// this token in the subsequent request to retrieve the next set of text detection
 	// results.
 	NextToken *string
+
 	// Information about a document that Amazon Textract processed. DocumentMetadata is
 	// returned in every page of paginated responses from an Amazon Textract video
 	// operation.

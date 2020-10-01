@@ -58,16 +58,20 @@ func (c *Client) DescribePlacementGroups(ctx context.Context, params *DescribePl
 }
 
 type DescribePlacementGroupsInput struct {
+
 	// The IDs of the placement groups.
 	GroupIds []*string
+
 	// The names of the placement groups. Default: Describes all your placement groups,
 	// or only those otherwise specified.
 	GroupNames []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The filters.
 	//
 	//     * group-name - The name of the placement group.
@@ -92,6 +96,7 @@ type DescribePlacementGroupsInput struct {
 }
 
 type DescribePlacementGroupsOutput struct {
+
 	// Information about the placement groups.
 	PlacementGroups []*types.PlacementGroup
 

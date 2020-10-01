@@ -56,18 +56,23 @@ func (c *Client) ListThingTypes(ctx context.Context, params *ListThingTypesInput
 
 // The input for the ListThingTypes operation.
 type ListThingTypesInput struct {
+
 	// The name of the thing type.
 	ThingTypeName *string
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return in this operation.
 	MaxResults *int32
 }
 
 // The output for the ListThingTypes operation.
 type ListThingTypesOutput struct {
+
 	// The thing types.
 	ThingTypes []*types.ThingTypeDefinition
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

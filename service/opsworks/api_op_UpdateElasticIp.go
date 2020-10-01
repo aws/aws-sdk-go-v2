@@ -61,9 +61,13 @@ func (c *Client) UpdateElasticIp(ctx context.Context, params *UpdateElasticIpInp
 }
 
 type UpdateElasticIpInput struct {
+
 	// The new name.
 	Name *string
+
 	// The IP address for which you want to update the name.
+	//
+	// This member is required.
 	ElasticIp *string
 }
 

@@ -61,15 +61,22 @@ func (c *Client) GetThirdPartyJobDetails(ctx context.Context, params *GetThirdPa
 
 // Represents the input of a GetThirdPartyJobDetails action.
 type GetThirdPartyJobDetailsInput struct {
+
 	// The unique system-generated ID used for identifying the job.
+	//
+	// This member is required.
 	JobId *string
+
 	// The clientToken portion of the clientId and clientToken pair used to verify that
 	// the calling entity is allowed access to the job and its details.
+	//
+	// This member is required.
 	ClientToken *string
 }
 
 // Represents the output of a GetThirdPartyJobDetails action.
 type GetThirdPartyJobDetailsOutput struct {
+
 	// The details of the job, including any protected values defined for the job.
 	JobDetails *types.ThirdPartyJobDetails
 

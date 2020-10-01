@@ -81,24 +81,32 @@ func (c *Client) DescribeInstanceRefreshes(ctx context.Context, params *Describe
 }
 
 type DescribeInstanceRefreshesInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// One or more instance refresh IDs.
 	InstanceRefreshIds []*string
 }
 
 type DescribeInstanceRefreshesOutput struct {
+
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is
 	// null when there are no more items to return.
 	NextToken *string
+
 	// The instance refreshes for the specified group.
 	InstanceRefreshes []*types.InstanceRefresh
 

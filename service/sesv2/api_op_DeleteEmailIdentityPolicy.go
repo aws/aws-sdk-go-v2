@@ -68,10 +68,16 @@ func (c *Client) DeleteEmailIdentityPolicy(ctx context.Context, params *DeleteEm
 // Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html).
 type DeleteEmailIdentityPolicyInput struct {
+
 	// The email identity for which you want to delete a policy.
+	//
+	// This member is required.
 	EmailIdentity *string
+
 	// The name of the policy.  <p>The policy name cannot exceed 64 characters and can
 	// only include alphanumeric characters, dashes, and underscores.</p>
+	//
+	// This member is required.
 	PolicyName *string
 }
 

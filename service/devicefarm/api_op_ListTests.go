@@ -57,19 +57,25 @@ func (c *Client) ListTests(ctx context.Context, params *ListTestsInput, optFns .
 
 // Represents a request to the list tests operation.
 type ListTestsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The test suite's Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a list tests request.
 type ListTestsOutput struct {
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.
 	NextToken *string
+
 	// Information about the tests.
 	Tests []*types.Test
 

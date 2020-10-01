@@ -62,12 +62,16 @@ type GetBlockPublicAccessConfigurationInput struct {
 }
 
 type GetBlockPublicAccessConfigurationOutput struct {
+
 	// Properties that describe the AWS principal that created the
 	// BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration
 	// action as well as the date and time that the configuration was created. Each
 	// time a configuration for block public access is updated, Amazon EMR updates this
 	// metadata.
+	//
+	// This member is required.
 	BlockPublicAccessConfigurationMetadata *types.BlockPublicAccessConfigurationMetadata
+
 	// A configuration for Amazon EMR block public access. The configuration applies to
 	// all clusters created in your account for the current Region. The configuration
 	// specifies whether block public access is enabled. If block public access is
@@ -81,6 +85,8 @@ type GetBlockPublicAccessConfigurationOutput struct {
 	// by default in that Region. To use this feature, you must manually enable and
 	// configure it. For accounts that did not create an EMR cluster in a Region before
 	// this date, block public access is enabled by default in that Region.
+	//
+	// This member is required.
 	BlockPublicAccessConfiguration *types.BlockPublicAccessConfiguration
 
 	// Metadata pertaining to the operation's result.

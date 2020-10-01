@@ -56,13 +56,18 @@ func (c *Client) BatchGetBuildBatches(ctx context.Context, params *BatchGetBuild
 }
 
 type BatchGetBuildBatchesInput struct {
+
 	// An array that contains the batch build identifiers to retrieve.
+	//
+	// This member is required.
 	Ids []*string
 }
 
 type BatchGetBuildBatchesOutput struct {
+
 	// An array that contains the identifiers of any batch builds that are not found.
 	BuildBatchesNotFound []*string
+
 	// An array of BuildBatch objects that represent the retrieved batch builds.
 	BuildBatches []*types.BuildBatch
 

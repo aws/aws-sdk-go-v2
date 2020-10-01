@@ -61,16 +61,22 @@ func (c *Client) InitiateLayerUpload(ctx context.Context, params *InitiateLayerU
 }
 
 type InitiateLayerUploadInput struct {
+
 	// The name of the repository to which you intend to upload layers.
+	//
+	// This member is required.
 	RepositoryName *string
+
 	// The AWS account ID associated with the registry to which you intend to upload
 	// layers. If you do not specify a registry, the default registry is assumed.
 	RegistryId *string
 }
 
 type InitiateLayerUploadOutput struct {
+
 	// The size, in bytes, that Amazon ECR expects future layer part uploads to be.
 	PartSize *int64
+
 	// The upload ID for the layer upload. This parameter is passed to further
 	// UploadLayerPart () and CompleteLayerUpload () operations.
 	UploadId *string

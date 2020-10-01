@@ -57,7 +57,10 @@ func (c *Client) DeregisterResource(ctx context.Context, params *DeregisterResou
 }
 
 type DeregisterResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource that you want to deregister.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

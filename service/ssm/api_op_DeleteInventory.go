@@ -60,9 +60,13 @@ func (c *Client) DeleteInventory(ctx context.Context, params *DeleteInventoryInp
 }
 
 type DeleteInventoryInput struct {
+
 	// The name of the custom inventory type for which you want to delete either all
 	// previously collected data, or the inventory type itself.
+	//
+	// This member is required.
 	TypeName *string
+
 	// Use the SchemaDeleteOption to delete a custom inventory type (schema). If you
 	// don't choose this option, the system only deletes existing inventory data
 	// associated with the custom inventory type. Choose one of the following options:
@@ -72,27 +76,32 @@ type DeleteInventoryInput struct {
 	// disabled version. DeleteSchema: This option deletes the specified custom type
 	// from the Inventory service. You can recreate the schema later, if you want.
 	SchemaDeleteOption types.InventorySchemaDeleteOption
+
 	// Use this option to view a summary of the deletion request without deleting any
 	// data or the data type. This option is useful when you only want to understand
 	// what will be deleted. Once you validate that the data to be deleted is what you
 	// intend to delete, you can run the same command without specifying the DryRun
 	// option.
 	DryRun *bool
+
 	// User-provided idempotency token.
 	ClientToken *string
 }
 
 type DeleteInventoryOutput struct {
+
 	// Every DeleteInventory action is assigned a unique ID. This option returns a
 	// unique ID. You can use this ID to query the status of a delete operation. This
 	// option is useful for ensuring that a delete operation has completed before you
 	// begin other actions.
 	DeletionId *string
+
 	// A summary of the delete operation. For more information about this summary, see
 	// Deleting custom inventory
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary)
 	// in the AWS Systems Manager User Guide.
 	DeletionSummary *types.InventoryDeletionSummary
+
 	// The name of the inventory data type specified in the request.
 	TypeName *string
 

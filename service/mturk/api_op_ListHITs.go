@@ -58,18 +58,22 @@ func (c *Client) ListHITs(ctx context.Context, params *ListHITsInput, optFns ...
 
 type ListHITsInput struct {
 	MaxResults *int32
+
 	// Pagination token
 	NextToken *string
 }
 
 type ListHITsOutput struct {
+
 	// The number of HITs on this page in the filtered results list, equivalent to the
 	// number of HITs being returned by this call.
 	NumResults *int32
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The list of HIT elements returned by the query.
 	HITs []*types.HIT
 

@@ -58,11 +58,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing
 	// tags.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A map that contains tag keys and tag values that will be unattached from the
 	// resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

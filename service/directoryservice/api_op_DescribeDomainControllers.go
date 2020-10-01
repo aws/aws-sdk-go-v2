@@ -56,22 +56,30 @@ func (c *Client) DescribeDomainControllers(ctx context.Context, params *Describe
 }
 
 type DescribeDomainControllersInput struct {
+
 	// The DescribeDomainControllers.NextToken value from a previous call to
 	// DescribeDomainControllers (). Pass null if this is the first call.
 	NextToken *string
+
 	// Identifier of the directory for which to retrieve the domain controller
 	// information.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// A list of identifiers for the domain controllers whose information will be
 	// provided.
 	DomainControllerIds []*string
+
 	// The maximum number of items to return.
 	Limit *int32
 }
 
 type DescribeDomainControllersOutput struct {
+
 	// List of the DomainController () objects that were retrieved.
 	DomainControllers []*types.DomainController
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeDomainControllers () retrieve the next
 	// set of items.

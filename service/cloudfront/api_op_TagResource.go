@@ -57,9 +57,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 // The request to add tags to a CloudFront resource.
 type TagResourceInput struct {
+
 	// An ARN of a CloudFront resource.
+	//
+	// This member is required.
 	Resource *string
+
 	// A complex type that contains zero or more Tag elements.
+	//
+	// This member is required.
 	Tags *types.Tags
 }
 

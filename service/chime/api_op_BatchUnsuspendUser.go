@@ -63,13 +63,20 @@ func (c *Client) BatchUnsuspendUser(ctx context.Context, params *BatchUnsuspendU
 }
 
 type BatchUnsuspendUserInput struct {
+
 	// The request containing the user IDs to unsuspend.
+	//
+	// This member is required.
 	UserIdList []*string
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 type BatchUnsuspendUserOutput struct {
+
 	// If the BatchUnsuspendUser () action fails for one or more of the user IDs in the
 	// request, a list of the user IDs is returned, along with error codes and error
 	// messages.

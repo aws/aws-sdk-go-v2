@@ -56,11 +56,15 @@ func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, 
 }
 
 type GetConnectionInput struct {
+
 	// The Amazon Resource Name (ARN) of a connection.
+	//
+	// This member is required.
 	ConnectionArn *string
 }
 
 type GetConnectionOutput struct {
+
 	// The connection details, such as status, owner, and provider type.
 	Connection *types.Connection
 

@@ -56,10 +56,15 @@ func (c *Client) AssociateProductWithPortfolio(ctx context.Context, params *Asso
 }
 
 type AssociateProductWithPortfolioInput struct {
+
 	// The identifier of the source portfolio.
 	SourcePortfolioId *string
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -69,7 +74,10 @@ type AssociateProductWithPortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
 }
 

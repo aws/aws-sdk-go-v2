@@ -55,14 +55,19 @@ func (c *Client) GetComponentPolicy(ctx context.Context, params *GetComponentPol
 }
 
 type GetComponentPolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the component whose policy you want to
 	// retrieve.
+	//
+	// This member is required.
 	ComponentArn *string
 }
 
 type GetComponentPolicyOutput struct {
+
 	// The component policy.
 	Policy *string
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
 

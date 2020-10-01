@@ -61,14 +61,21 @@ func (c *Client) DetachInstancesFromLoadBalancer(ctx context.Context, params *De
 }
 
 type DetachInstancesFromLoadBalancerInput struct {
+
 	// An array of strings containing the names of the instances you want to detach
 	// from the load balancer.
+	//
+	// This member is required.
 	InstanceNames []*string
+
 	// The name of the Lightsail load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 type DetachInstancesFromLoadBalancerOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

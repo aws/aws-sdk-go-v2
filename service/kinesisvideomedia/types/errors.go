@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
@@ -25,12 +24,6 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 }
 func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
 // limit of allowed client connections.
@@ -51,12 +44,6 @@ func (e *ConnectionLimitExceededException) ErrorCode() string {
 	return "ConnectionLimitExceededException"
 }
 func (e *ConnectionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConnectionLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConnectionLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
@@ -74,12 +61,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Status Code: 400, Caller used wrong endpoint to write data to a stream. On
 // receiving such an exception, the user must call GetDataEndpoint with AccessMode
@@ -100,12 +81,6 @@ func (e *InvalidEndpointException) ErrorMessage() string {
 }
 func (e *InvalidEndpointException) ErrorCode() string             { return "InvalidEndpointException" }
 func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEndpointException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEndpointException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Status Code: 403, The caller is not authorized to perform an operation on the
 // given stream, or the token has expired.
@@ -124,12 +99,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Status Code: 404, The stream with the given name does not exist.
 type ResourceNotFoundException struct {
@@ -147,9 +116,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

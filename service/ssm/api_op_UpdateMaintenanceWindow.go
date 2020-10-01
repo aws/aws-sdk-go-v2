@@ -61,43 +61,58 @@ func (c *Client) UpdateMaintenanceWindow(ctx context.Context, params *UpdateMain
 }
 
 type UpdateMaintenanceWindowInput struct {
+
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
+
 	// The duration of the maintenance window in hours.
 	Duration *int32
+
 	// Whether the maintenance window is enabled.
 	Enabled *bool
+
 	// Whether targets must be registered with the maintenance window before tasks can
 	// be defined for those targets.
 	AllowUnassociatedTargets *bool
+
 	// An optional description for the update request.
 	Description *string
+
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
+
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	Cutoff *int32
+
 	// If True, then all fields that are required by the CreateMaintenanceWindow action
 	// are also required for this API request. Optional fields that are not specified
 	// are set to null.
 	Replace *bool
+
 	// The number of days to wait after the date and time specified by a CRON
 	// expression before running the maintenance window. For example, the following
 	// cron expression schedules a maintenance window to run the third Tuesday of every
 	// month at 11:30 PM. cron(0 30 23 ? * TUE#3 *) If the schedule offset is 2, the
 	// maintenance window won't run until two days later.
 	ScheduleOffset *int32
+
 	// The name of the maintenance window.
 	Name *string
+
 	// The ID of the maintenance window to update.
+	//
+	// This member is required.
 	WindowId *string
+
 	// The date and time, in ISO-8601 Extended format, for when you want the
 	// maintenance window to become inactive. EndDate allows you to set a date and time
 	// in the future when the maintenance window will no longer run.
 	EndDate *string
+
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
@@ -106,37 +121,49 @@ type UpdateMaintenanceWindowInput struct {
 }
 
 type UpdateMaintenanceWindowOutput struct {
+
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
+
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
 	// is scheduled to become active. The maintenance window will not run before this
 	// specified time.
 	StartDate *string
+
 	// The duration of the maintenance window in hours.
 	Duration *int32
+
 	// The name of the maintenance window.
 	Name *string
+
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
+
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
 	// is scheduled to become inactive. The maintenance window will not run after this
 	// specified time.
 	EndDate *string
+
 	// Whether the maintenance window is enabled.
 	Enabled *bool
+
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	Cutoff *int32
+
 	// Whether targets must be registered with the maintenance window before tasks can
 	// be defined for those targets.
 	AllowUnassociatedTargets *bool
+
 	// The ID of the created maintenance window.
 	WindowId *string
+
 	// An optional description of the update.
 	Description *string
+
 	// The number of days to wait to run a maintenance window after the scheduled CRON
 	// expression date and time.
 	ScheduleOffset *int32

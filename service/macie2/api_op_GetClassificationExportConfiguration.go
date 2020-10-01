@@ -58,6 +58,7 @@ type GetClassificationExportConfigurationInput struct {
 }
 
 type GetClassificationExportConfigurationOutput struct {
+
 	// The location where data classification results are stored, and the encryption
 	// settings that are used when storing results in that location.
 	Configuration *types.ClassificationExportConfiguration

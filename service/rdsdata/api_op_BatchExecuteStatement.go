@@ -63,8 +63,10 @@ func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecute
 // The request parameters represent the input of a SQL statement over an array of
 // data.
 type BatchExecuteStatementInput struct {
+
 	// The name of the database.
 	Database *string
+
 	// The parameter set for the batch operation. The SQL statement is executed as many
 	// times as the number of parameter sets provided. To execute a SQL statement with
 	// no parameters, use one of the following options:
@@ -77,14 +79,25 @@ type BatchExecuteStatementInput struct {
 	//
 	// Array parameters are not supported.
 	ParameterSets [][]*types.SqlParameter
+
 	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The name of the database schema.
 	Schema *string
+
 	// The name or ARN of the secret that enables access to the DB cluster.
+	//
+	// This member is required.
 	SecretArn *string
+
 	// The SQL statement to run.
+	//
+	// This member is required.
 	Sql *string
+
 	// The identifier of a transaction that was started by using the BeginTransaction
 	// operation. Specify the transaction ID of the transaction that you want to
 	// include the SQL statement in. If the SQL statement is not part of a transaction,
@@ -95,6 +108,7 @@ type BatchExecuteStatementInput struct {
 // The response elements represent the output of a SQL statement over an array of
 // data.
 type BatchExecuteStatementOutput struct {
+
 	// The execution results of each batch entry.
 	UpdateResults []*types.UpdateResult
 

@@ -55,12 +55,16 @@ func (c *Client) DeleteDataflowEndpointGroup(ctx context.Context, params *Delete
 
 //
 type DeleteDataflowEndpointGroupInput struct {
+
 	// UUID of a dataflow endpoint group.
+	//
+	// This member is required.
 	DataflowEndpointGroupId *string
 }
 
 //
 type DeleteDataflowEndpointGroupOutput struct {
+
 	// UUID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string
 

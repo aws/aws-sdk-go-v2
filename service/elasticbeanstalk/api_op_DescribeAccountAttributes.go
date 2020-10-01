@@ -60,6 +60,7 @@ type DescribeAccountAttributesInput struct {
 }
 
 type DescribeAccountAttributesOutput struct {
+
 	// The Elastic Beanstalk resource quotas associated with the calling AWS account.
 	ResourceQuotas *types.ResourceQuotas
 

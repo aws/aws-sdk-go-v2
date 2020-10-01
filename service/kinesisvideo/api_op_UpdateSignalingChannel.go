@@ -60,12 +60,19 @@ func (c *Client) UpdateSignalingChannel(ctx context.Context, params *UpdateSigna
 }
 
 type UpdateSignalingChannelInput struct {
+
 	// The structure containing the configuration for the SINGLE_MASTER type of the
 	// signaling channel that you want to update.
 	SingleMasterConfiguration *types.SingleMasterConfiguration
+
 	// The Amazon Resource Name (ARN) of the signaling channel that you want to update.
+	//
+	// This member is required.
 	ChannelARN *string
+
 	// The current version of the signaling channel that you want to update.
+	//
+	// This member is required.
 	CurrentVersion *string
 }
 

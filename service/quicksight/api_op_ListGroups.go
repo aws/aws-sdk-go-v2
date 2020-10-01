@@ -56,22 +56,33 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 }
 
 type ListGroupsInput struct {
+
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The ID for the AWS account that the group is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
 	Namespace *string
 }
 
 type ListGroupsOutput struct {
+
 	// The list of the groups.
 	GroupList []*types.Group
+
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

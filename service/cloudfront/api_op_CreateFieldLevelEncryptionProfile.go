@@ -56,16 +56,22 @@ func (c *Client) CreateFieldLevelEncryptionProfile(ctx context.Context, params *
 }
 
 type CreateFieldLevelEncryptionProfileInput struct {
+
 	// The request to create a field-level encryption profile.
+	//
+	// This member is required.
 	FieldLevelEncryptionProfileConfig *types.FieldLevelEncryptionProfileConfig
 }
 
 type CreateFieldLevelEncryptionProfileOutput struct {
+
 	// Returned when you create a new field-level encryption profile.
 	FieldLevelEncryptionProfile *types.FieldLevelEncryptionProfile
+
 	// The current version of the field level encryption profile. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
+
 	// The fully qualified URI of the new profile resource just created.
 	Location *string
 

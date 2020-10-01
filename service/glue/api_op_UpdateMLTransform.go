@@ -61,14 +61,18 @@ func (c *Client) UpdateMLTransform(ctx context.Context, params *UpdateMLTransfor
 }
 
 type UpdateMLTransformInput struct {
+
 	// The unique name that you gave the transform when you created it.
 	Name *string
+
 	// The timeout for a task run for this transform in minutes. This is the maximum
 	// time that a task run for this transform can consume resources before it is
 	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
 	Timeout *int32
+
 	// A description of the transform. The default is an empty string.
 	Description *string
+
 	// The number of AWS Glue data processing units (DPUs) that are allocated to task
 	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
 	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
@@ -78,18 +82,23 @@ type UpdateMLTransformInput struct {
 	// <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically
 	// and becomes read-only.</p>
 	MaxCapacity *float64
+
 	// The number of workers of a defined workerType that are allocated when this task
 	// runs.
 	NumberOfWorkers *int32
+
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions.
 	Role *string
+
 	// The maximum number of times to retry a task for this transform after a task run
 	// fails.
 	MaxRetries *int32
+
 	// The configuration parameters that are specific to the transform type (algorithm)
 	// used. Conditionally dependent on the transform type.
 	Parameters *types.TransformParameters
+
 	// This value determines which version of AWS Glue this machine learning transform
 	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
 	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
@@ -97,6 +106,7 @@ type UpdateMLTransformInput struct {
 	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
 	// in the developer guide.
 	GlueVersion *string
+
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
 	//
@@ -111,11 +121,15 @@ type UpdateMLTransformInput struct {
 	// type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1
 	// executor per worker.
 	WorkerType types.WorkerType
+
 	// A unique identifier that was generated when the transform was created.
+	//
+	// This member is required.
 	TransformId *string
 }
 
 type UpdateMLTransformOutput struct {
+
 	// The unique identifier for the transform that was updated.
 	TransformId *string
 

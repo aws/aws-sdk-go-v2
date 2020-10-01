@@ -55,10 +55,15 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 }
 
 type UpdateProjectInput struct {
+
 	// The ID of the project you want to update.
+	//
+	// This member is required.
 	Id *string
+
 	// The name of the project you want to update.
 	Name *string
+
 	// The description of the project, if any.
 	Description *string
 }

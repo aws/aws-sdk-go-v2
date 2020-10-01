@@ -60,12 +60,16 @@ func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificat
 }
 
 type DeleteCertificateInput struct {
+
 	// The name of the certificate to delete.  <p>Use the <code>GetCertificates</code>
 	// action to get a list of certificate names that you can specify.</p>
+	//
+	// This member is required.
 	CertificateName *string
 }
 
 type DeleteCertificateOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

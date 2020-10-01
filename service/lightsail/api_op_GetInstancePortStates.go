@@ -58,11 +58,15 @@ func (c *Client) GetInstancePortStates(ctx context.Context, params *GetInstanceP
 }
 
 type GetInstancePortStatesInput struct {
+
 	// The name of the instance for which to return firewall port states.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type GetInstancePortStatesOutput struct {
+
 	// An array of objects that describe the firewall port states for the specified
 	// instance.
 	PortStates []*types.InstancePortState

@@ -57,12 +57,16 @@ func (c *Client) StopQuery(ctx context.Context, params *StopQueryInput, optFns .
 }
 
 type StopQueryInput struct {
+
 	// The ID number of the query to stop. If necessary, you can use DescribeQueries to
 	// find this ID number.
+	//
+	// This member is required.
 	QueryId *string
 }
 
 type StopQueryOutput struct {
+
 	// This is true if the query was stopped by the StopQuery operation.
 	Success *bool
 

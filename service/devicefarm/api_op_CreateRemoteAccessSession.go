@@ -57,9 +57,13 @@ func (c *Client) CreateRemoteAccessSession(ctx context.Context, params *CreateRe
 
 // Creates and submits a request to start a remote access session.
 type CreateRemoteAccessSessionInput struct {
+
 	// The Amazon Resource Name (ARN) of the project for which you want to create a
 	// remote access session.
+	//
+	// This member is required.
 	ProjectArn *string
+
 	// The interaction mode of the remote access session. Valid values are:
 	//
 	//     *
@@ -75,36 +79,48 @@ type CreateRemoteAccessSessionInput struct {
 	// the screen, but cannot touch or rotate it. You can run XCUITest framework-based
 	// tests and watch the screen in this mode.
 	InteractionMode types.InteractionMode
+
 	// Set to true to enable remote recording for the remote access session.
 	RemoteRecordEnabled *bool
+
 	// Ignored. The public key of the ssh key pair you want to use for connecting to
 	// remote devices in your remote debugging session. This key is required only if
 	// remoteDebugEnabled is set to true. Remote debugging is no longer supported
 	// (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	SshPublicKey *string
+
 	// Unique identifier for the client. If you want access to multiple devices on the
 	// same client, you should pass the same clientId value in each call to
 	// CreateRemoteAccessSession. This identifier is required only if
 	// remoteDebugEnabled is set to true. Remote debugging is no longer supported
 	// (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	ClientId *string
+
 	// The configuration information for the remote access session request.
 	Configuration *types.CreateRemoteAccessSessionConfiguration
+
 	// The ARN of the device for which you want to create a remote access session.
+	//
+	// This member is required.
 	DeviceArn *string
+
 	// When set to true, for private devices, Device Farm does not sign your app again.
 	// For public devices, Device Farm always signs your apps again. For more
 	// information on how Device Farm modifies your uploads during tests, see Do you
 	// modify my app? (https://aws.amazon.com/device-farm/faq/)
 	SkipAppResign *bool
+
 	// The name of the remote access session to create.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the device instance for which you want to
 	// create a remote access session.
 	InstanceArn *string
+
 	// The Amazon Resource Name (ARN) for the app to be recorded in the remote access
 	// session.
 	RemoteRecordAppArn *string
+
 	// Set to true if you want to access devices remotely for debugging in your remote
 	// access session. Remote debugging is no longer supported
 	// (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
@@ -113,6 +129,7 @@ type CreateRemoteAccessSessionInput struct {
 
 // Represents the server response from a request to create a remote access session.
 type CreateRemoteAccessSessionOutput struct {
+
 	// A container that describes the remote access session when the request to create
 	// a remote access session is sent.
 	RemoteAccessSession *types.RemoteAccessSession

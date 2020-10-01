@@ -56,12 +56,15 @@ func (c *Client) DeleteLaunchTemplate(ctx context.Context, params *DeleteLaunchT
 }
 
 type DeleteLaunchTemplateInput struct {
+
 	// The name of the launch template. You must specify either the launch template ID
 	// or launch template name in the request.
 	LaunchTemplateName *string
+
 	// The ID of the launch template. You must specify either the launch template ID or
 	// launch template name in the request.
 	LaunchTemplateId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -70,6 +73,7 @@ type DeleteLaunchTemplateInput struct {
 }
 
 type DeleteLaunchTemplateOutput struct {
+
 	// Information about the launch template.
 	LaunchTemplate *types.LaunchTemplate
 

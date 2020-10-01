@@ -69,16 +69,23 @@ func (c *Client) DescribeStackDriftDetectionStatus(ctx context.Context, params *
 }
 
 type DescribeStackDriftDetectionStatusInput struct {
+
 	// The ID of the drift detection results of this operation. AWS CloudFormation
 	// generates new results, with a new drift detection ID, each time this operation
 	// is run. However, the number of drift results AWS CloudFormation retains for any
 	// given stack, and for how long, may vary.
+	//
+	// This member is required.
 	StackDriftDetectionId *string
 }
 
 type DescribeStackDriftDetectionStatusOutput struct {
+
 	// Time at which the stack drift detection operation was initiated.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// The status of the stack drift detection operation.
 	//
 	//     * DETECTION_COMPLETE:
@@ -96,9 +103,15 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	//     *
 	// DETECTION_IN_PROGRESS: The stack drift detection operation is currently in
 	// progress.
+	//
+	// This member is required.
 	DetectionStatus types.StackDriftDetectionStatus
+
 	// The ID of the stack.
+	//
+	// This member is required.
 	StackId *string
+
 	// Status of the stack's actual configuration compared to its expected
 	// configuration.
 	//
@@ -115,15 +128,20 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	//
 	// * UNKNOWN: This value is reserved for future use.
 	StackDriftStatus types.StackDriftStatus
+
 	// The ID of the drift detection results of this operation. AWS CloudFormation
 	// generates new results, with a new drift detection ID, each time this operation
 	// is run. However, the number of reports AWS CloudFormation retains for any given
 	// stack, and for how long, may vary.
+	//
+	// This member is required.
 	StackDriftDetectionId *string
+
 	// Total number of stack resources that have drifted. This is NULL until the drift
 	// detection operation reaches a status of DETECTION_COMPLETE. This value will be 0
 	// for stacks whose drift status is IN_SYNC.
 	DriftedStackResourceCount *int32
+
 	// The reason the stack drift detection operation has its current status.
 	DetectionStatusReason *string
 

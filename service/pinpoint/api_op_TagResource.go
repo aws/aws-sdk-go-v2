@@ -57,10 +57,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// Specifies the tags (keys and values) for an application, campaign, message
 	// template, or segment.
+	//
+	// This member is required.
 	TagsModel *types.TagsModel
+
 	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

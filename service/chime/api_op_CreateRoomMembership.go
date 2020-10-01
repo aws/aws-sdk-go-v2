@@ -58,17 +58,28 @@ func (c *Client) CreateRoomMembership(ctx context.Context, params *CreateRoomMem
 }
 
 type CreateRoomMembershipInput struct {
+
 	// The role of the member.
 	Role types.RoomMembershipRole
+
 	// The Amazon Chime member ID (user ID or bot ID).
+	//
+	// This member is required.
 	MemberId *string
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The room ID.
+	//
+	// This member is required.
 	RoomId *string
 }
 
 type CreateRoomMembershipOutput struct {
+
 	// The room membership details.
 	RoomMembership *types.RoomMembership
 

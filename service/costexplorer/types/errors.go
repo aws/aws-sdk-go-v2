@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The requested report expired. Update the date interval and try again.
@@ -24,12 +23,6 @@ func (e *BillExpirationException) ErrorMessage() string {
 }
 func (e *BillExpirationException) ErrorCode() string             { return "BillExpirationException" }
 func (e *BillExpirationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BillExpirationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BillExpirationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested data is unavailable.
 type DataUnavailableException struct {
@@ -47,12 +40,6 @@ func (e *DataUnavailableException) ErrorMessage() string {
 }
 func (e *DataUnavailableException) ErrorCode() string             { return "DataUnavailableException" }
 func (e *DataUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DataUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DataUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
@@ -70,12 +57,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You made too many calls in a short period of time. Try again later.
 type LimitExceededException struct {
@@ -93,12 +74,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request parameters changed between pages. Try again with the old parameters
 // or without a pagination token.
@@ -117,12 +92,6 @@ func (e *RequestChangedException) ErrorMessage() string {
 }
 func (e *RequestChangedException) ErrorCode() string             { return "RequestChangedException" }
 func (e *RequestChangedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestChangedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestChangedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ARN in the request doesn't exist.
 type ResourceNotFoundException struct {
@@ -140,12 +109,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of resources you can create, or exceeded
 // the size of an individual resources.
@@ -164,12 +127,6 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceQuotaExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceQuotaExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cost Explorer was unable to identify the usage unit. Provide
 // UsageType/UsageTypeGroup filter selections that contain matching units, for
@@ -189,9 +146,3 @@ func (e *UnresolvableUsageUnitException) ErrorMessage() string {
 }
 func (e *UnresolvableUsageUnitException) ErrorCode() string             { return "UnresolvableUsageUnitException" }
 func (e *UnresolvableUsageUnitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnresolvableUsageUnitException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnresolvableUsageUnitException) HasMessage() bool {
-	return e.Message != nil
-}

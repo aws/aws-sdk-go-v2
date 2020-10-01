@@ -57,18 +57,25 @@ func (c *Client) UpdateTask(ctx context.Context, params *UpdateTaskInput, optFns
 
 // UpdateTaskResponse
 type UpdateTaskInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource name of the task to update.
+	//
+	// This member is required.
 	TaskArn *string
+
 	// Specifies a schedule used to periodically transfer files from a source to a
 	// destination location. You can configure your task to execute hourly, daily,
 	// weekly or on specific days of the week. You control when in the day or hour you
 	// want the task to execute. The time you specify is UTC time. For more
 	// information, see task-scheduling ().
 	Schedule *types.TaskSchedule
+
 	// The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
 	CloudWatchLogGroupArn *string
+
 	// The name of the task to update.
 	Name *string
+
 	// Represents the options that are available to control the behavior of a
 	// StartTaskExecution () operation. Behavior includes preserving metadata such as
 	// user ID (UID), group ID (GID), and file permissions, and also overwriting files
@@ -78,6 +85,7 @@ type UpdateTaskInput struct {
 	// options on each task execution by specifying an overriding Options value to
 	// StartTaskExecution ().
 	Options *types.Options
+
 	// A list of filter rules that determines which files to exclude from a task. The
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:

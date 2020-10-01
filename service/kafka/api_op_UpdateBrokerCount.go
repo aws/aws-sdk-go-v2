@@ -55,19 +55,30 @@ func (c *Client) UpdateBrokerCount(ctx context.Context, params *UpdateBrokerCoun
 }
 
 type UpdateBrokerCountInput struct {
+
 	// The version of cluster to update from. A successful operation will then generate
 	// a new version.
+	//
+	// This member is required.
 	CurrentVersion *string
+
 	// The number of broker nodes that you want the cluster to have after this
 	// operation completes successfully.
+	//
+	// This member is required.
 	TargetNumberOfBrokerNodes *int32
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
 	ClusterArn *string
 }
 
 type UpdateBrokerCountOutput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
+
 	// The Amazon Resource Name (ARN) of the cluster operation.
 	ClusterOperationArn *string
 

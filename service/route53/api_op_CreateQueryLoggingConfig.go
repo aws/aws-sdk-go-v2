@@ -134,6 +134,7 @@ func (c *Client) CreateQueryLoggingConfig(ctx context.Context, params *CreateQue
 }
 
 type CreateQueryLoggingConfigInput struct {
+
 	// The Amazon Resource Name (ARN) for the log group that you want to Amazon Route
 	// 53 to send query logs to. This is the format of the ARN:
 	// <p>arn:aws:logs:<i>region</i>:<i>account-id</i>:log-group:<i>log_group_name</i>
@@ -143,18 +144,29 @@ type CreateQueryLoggingConfigInput struct {
 	// API action, the <a
 	// href="https://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html">describe-log-groups</a>
 	// command, or the applicable command in one of the AWS SDKs.</p>
+	//
+	// This member is required.
 	CloudWatchLogsLogGroupArn *string
+
 	// The ID of the hosted zone that you want to log queries for. You can log queries
 	// only for public hosted zones.
+	//
+	// This member is required.
 	HostedZoneId *string
 }
 
 type CreateQueryLoggingConfigOutput struct {
+
 	// A complex type that contains the ID for a query logging configuration, the ID of
 	// the hosted zone that you want to log queries for, and the ARN for the log group
 	// that you want Amazon Route 53 to send query logs to.
+	//
+	// This member is required.
 	QueryLoggingConfig *types.QueryLoggingConfig
+
 	// The unique URL representing the new query logging configuration.
+	//
+	// This member is required.
 	Location *string
 
 	// Metadata pertaining to the operation's result.

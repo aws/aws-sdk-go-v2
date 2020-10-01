@@ -61,11 +61,15 @@ func (c *Client) DescribeTargetGroupAttributes(ctx context.Context, params *Desc
 }
 
 type DescribeTargetGroupAttributesInput struct {
+
 	// The Amazon Resource Name (ARN) of the target group.
+	//
+	// This member is required.
 	TargetGroupArn *string
 }
 
 type DescribeTargetGroupAttributesOutput struct {
+
 	// Information about the target group attributes
 	Attributes []*types.TargetGroupAttribute
 

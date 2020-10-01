@@ -71,13 +71,16 @@ func (c *Client) CreateWorkforce(ctx context.Context, params *CreateWorkforceInp
 }
 
 type CreateWorkforceInput struct {
+
 	// An array of key-value pairs that contain metadata to help you categorize and
 	// organize our workforce. Each tag consists of a key and a value, both of which
 	// you define.
 	Tags []*types.Tag
+
 	// Use this parameter to configure a private workforce using your own OIDC Identity
 	// Provider. Do not use CognitoConfig if you specify values for OidcConfig.
 	OidcConfig *types.OidcConfig
+
 	// Use this parameter to configure an Amazon Cognito private workforce. A single
 	// Cognito workforce is created using and corresponds to a single  Amazon Cognito
 	// user pool
@@ -85,17 +88,24 @@ type CreateWorkforceInput struct {
 	// <p>Do not use <code>OidcConfig</code> if you specify values for
 	// <code>CognitoConfig</code>.</p>
 	CognitoConfig *types.CognitoConfig
+
 	// A list of IP address ranges (CIDRs
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)). Used to
 	// create an allow list of IP addresses for a private workforce. For more
 	// information, see .
 	SourceIpConfig *types.SourceIpConfig
+
 	// The name of the private workforce.
+	//
+	// This member is required.
 	WorkforceName *string
 }
 
 type CreateWorkforceOutput struct {
+
 	// The Amazon Resource Name (ARN) of the workforce.
+	//
+	// This member is required.
 	WorkforceArn *string
 
 	// Metadata pertaining to the operation's result.

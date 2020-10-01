@@ -56,13 +56,18 @@ func (c *Client) BatchDeleteClusterSnapshots(ctx context.Context, params *BatchD
 }
 
 type BatchDeleteClusterSnapshotsInput struct {
+
 	// A list of identifiers for the snapshots that you want to delete.
+	//
+	// This member is required.
 	Identifiers []*types.DeleteClusterSnapshotMessage
 }
 
 type BatchDeleteClusterSnapshotsOutput struct {
+
 	// A list of the snapshot identifiers that were deleted.
 	Resources []*string
+
 	// A list of any errors returned.
 	Errors []*types.SnapshotErrorMessage
 

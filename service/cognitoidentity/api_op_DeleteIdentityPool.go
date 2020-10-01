@@ -58,7 +58,10 @@ func (c *Client) DeleteIdentityPool(ctx context.Context, params *DeleteIdentityP
 
 // Input to the DeleteIdentityPool action.
 type DeleteIdentityPoolInput struct {
+
 	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 

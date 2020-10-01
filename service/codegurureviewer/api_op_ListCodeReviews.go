@@ -56,18 +56,25 @@ func (c *Client) ListCodeReviews(ctx context.Context, params *ListCodeReviewsInp
 }
 
 type ListCodeReviewsInput struct {
+
 	// The maximum number of results that are returned per call. The default is 100.
 	MaxResults *int32
+
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
+
 	// List of repository names for filtering that needs to be applied before
 	// displaying the result.
 	RepositoryNames []*string
+
 	// The type of code reviews to list in the response.
+	//
+	// This member is required.
 	Type types.Type
+
 	// List of states for filtering that needs to be applied before displaying the
 	// result. For example, states=[Pending] lists code reviews in the Pending state.
 	// The valid code review states are:
@@ -83,14 +90,17 @@ type ListCodeReviewsInput struct {
 	//     * Deleting: The code review
 	// is being deleted.
 	States []types.JobState
+
 	// List of provider types for filtering that needs to be applied before displaying
 	// the result. For example, providerTypes=[GitHub] lists code reviews from GitHub.
 	ProviderTypes []types.ProviderType
 }
 
 type ListCodeReviewsOutput struct {
+
 	// Pagination token.
 	NextToken *string
+
 	// A list of code reviews that meet the criteria of the request.
 	CodeReviewSummaries []*types.CodeReviewSummary
 

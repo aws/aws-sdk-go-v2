@@ -57,16 +57,24 @@ func (c *Client) UpdateChannelClass(ctx context.Context, params *UpdateChannelCl
 
 // Channel class that the channel should be updated to.
 type UpdateChannelClassInput struct {
+
 	// The channel class that you wish to update this channel to use.
+	//
+	// This member is required.
 	ChannelClass types.ChannelClass
+
 	// Channel Id of the channel whose class should be updated.
+	//
+	// This member is required.
 	ChannelId *string
+
 	// A list of output destinations for this channel.
 	Destinations []*types.OutputDestination
 }
 
 // Placeholder documentation for UpdateChannelClassResponse
 type UpdateChannelClassOutput struct {
+
 	// Placeholder documentation for Channel
 	Channel *types.Channel
 

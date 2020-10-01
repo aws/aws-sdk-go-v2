@@ -62,24 +62,35 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 
 // Request for a list of datasets for an identity.
 type ListDatasetsInput struct {
+
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// The maximum number of results to be returned.
 	MaxResults *string
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityId *string
 }
 
 // Returned for a successful ListDatasets request.
 type ListDatasetsOutput struct {
+
 	// Number of datasets returned.
 	Count *int32
+
 	// A set of datasets.
 	Datasets []*types.Dataset
+
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
 

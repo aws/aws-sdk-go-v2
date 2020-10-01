@@ -80,14 +80,18 @@ func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLogging
 }
 
 type PutLoggingConfigurationInput struct {
+
 	// The Amazon Kinesis Data Firehose that contains the inspected traffic
 	// information, the redacted fields details, and the Amazon Resource Name (ARN) of
 	// the web ACL to monitor. When specifying Type in RedactedFields, you must use one
 	// of the following values: URI, QUERY_STRING, HEADER, or METHOD.
+	//
+	// This member is required.
 	LoggingConfiguration *types.LoggingConfiguration
 }
 
 type PutLoggingConfigurationOutput struct {
+
 	// The LoggingConfiguration () that you submitted in the request.
 	LoggingConfiguration *types.LoggingConfiguration
 

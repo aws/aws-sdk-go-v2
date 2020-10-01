@@ -59,17 +59,25 @@ func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, 
 }
 
 type DeleteMembersInput struct {
+
 	// The ARN of the behavior graph to delete members from.
+	//
+	// This member is required.
 	GraphArn *string
+
 	// The list of AWS account identifiers for the member accounts to delete from the
 	// behavior graph.
+	//
+	// This member is required.
 	AccountIds []*string
 }
 
 type DeleteMembersOutput struct {
+
 	// The list of AWS account identifiers for the member accounts that Detective
 	// successfully deleted from the behavior graph.
 	AccountIds []*string
+
 	// The list of member accounts that Detective was not able to delete from the
 	// behavior graph. For each member account, provides the reason that the deletion
 	// could not be processed.

@@ -57,38 +57,61 @@ func (c *Client) DescribeApp(ctx context.Context, params *DescribeAppInput, optF
 }
 
 type DescribeAppInput struct {
+
 	// The type of app.
+	//
+	// This member is required.
 	AppType types.AppType
+
 	// The name of the app.
+	//
+	// This member is required.
 	AppName *string
+
 	// The user profile name.
+	//
+	// This member is required.
 	UserProfileName *string
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
 }
 
 type DescribeAppOutput struct {
+
 	// The status.
 	Status types.AppStatus
+
 	// The user profile name.
 	UserProfileName *string
+
 	// The app's Amazon Resource Name (ARN).
 	AppArn *string
+
 	// The failure reason.
 	FailureReason *string
+
 	// The domain ID.
 	DomainId *string
+
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
 	// created on the instance.
 	ResourceSpec *types.ResourceSpec
+
 	// The name of the app.
 	AppName *string
+
 	// The timestamp of the last health check.
 	LastHealthCheckTimestamp *time.Time
+
 	// The timestamp of the last user's activity.
 	LastUserActivityTimestamp *time.Time
+
 	// The creation time.
 	CreationTime *time.Time
+
 	// The type of app.
 	AppType types.AppType
 

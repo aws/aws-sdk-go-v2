@@ -64,25 +64,36 @@ func (c *Client) ListAggregateDiscoveredResources(ctx context.Context, params *L
 }
 
 type ListAggregateDiscoveredResourcesInput struct {
+
 	// Filters the results based on the ResourceFilters object.
 	Filters *types.ResourceFilters
+
 	// The type of resources that you want AWS Config to list in the response.
+	//
+	// This member is required.
 	ResourceType types.ResourceType
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// The maximum number of resource identifiers returned on each page. The default is
 	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
 	Limit *int32
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
 }
 
 type ListAggregateDiscoveredResourcesOutput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// Returns a list of ResourceIdentifiers objects.
 	ResourceIdentifiers []*types.AggregateResourceIdentifier
 

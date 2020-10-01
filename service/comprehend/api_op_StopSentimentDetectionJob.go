@@ -62,14 +62,19 @@ func (c *Client) StopSentimentDetectionJob(ctx context.Context, params *StopSent
 }
 
 type StopSentimentDetectionJobInput struct {
+
 	// The identifier of the sentiment detection job to stop.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopSentimentDetectionJobOutput struct {
+
 	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
 	// previously stopped with the StopSentimentDetectionJob operation.
 	JobStatus types.JobStatus
+
 	// The identifier of the sentiment detection job to stop.
 	JobId *string
 

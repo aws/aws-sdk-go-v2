@@ -92,8 +92,12 @@ func (c *Client) CreatePredictor(ctx context.Context, params *CreatePredictorInp
 }
 
 type CreatePredictorInput struct {
+
 	// A name for the predictor.
+	//
+	// This member is required.
 	PredictorName *string
+
 	// Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates
 	// the algorithms it provides and chooses the best algorithm and configuration for
 	// your training dataset. The default value is false. In this case, you are
@@ -102,10 +106,12 @@ type CreatePredictorInput struct {
 	// algorithm is suitable for your training data. In this case, PerformHPO must be
 	// false.
 	PerformAutoML *bool
+
 	// The hyperparameters to override for model training. The hyperparameters that you
 	// can override are listed in the individual algorithms. For the list of supported
 	// algorithms, see aws-forecast-choosing-recipes ().
 	TrainingParameters map[string]*string
+
 	// The optional metadata that you apply to the predictor to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
@@ -138,9 +144,11 @@ type CreatePredictorInput struct {
 	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
 	// resource limit.
 	Tags []*types.Tag
+
 	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *types.EncryptionConfig
+
 	// The Amazon Resource Name (ARN) of the algorithm to use for model training.
 	// Required if PerformAutoML is not set to true. Supported algorithms:
 	//
@@ -158,6 +166,7 @@ type CreatePredictorInput struct {
 	//
 	//     * arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
+
 	// Whether to perform hyperparameter optimization (HPO). HPO finds optimal
 	// hyperparameter values for your training data. The process of performing HPO is
 	// known as running a hyperparameter tuning job. The default value is false. In
@@ -171,23 +180,34 @@ type CreatePredictorInput struct {
 	//
 	//     * DeepAR+
 	PerformHPO *bool
+
 	// Used to override the default evaluation parameters of the specified algorithm.
 	// Amazon Forecast evaluates a predictor by splitting a dataset into training data
 	// and testing data. The evaluation parameters define how to perform the split and
 	// the number of iterations.
 	EvaluationParameters *types.EvaluationParameters
+
 	// Describes the dataset group that contains the data to use to train the
 	// predictor.
+	//
+	// This member is required.
 	InputDataConfig *types.InputDataConfig
+
 	// The featurization configuration.
+	//
+	// This member is required.
 	FeaturizationConfig *types.FeaturizationConfig
+
 	// Specifies the number of time-steps that the model is trained to predict. The
 	// forecast horizon is also called the prediction length. For example, if you
 	// configure a dataset for daily data collection (using the DataFrequency parameter
 	// of the CreateDataset () operation) and set the forecast horizon to 10, the model
 	// returns predictions for 10 days. The maximum forecast horizon is the lesser of
 	// 500 time-steps or 1/3 of the TARGET_TIME_SERIES dataset length.
+	//
+	// This member is required.
 	ForecastHorizon *int32
+
 	// Provides hyperparameter override values for the algorithm. If you don't provide
 	// this parameter, Amazon Forecast uses default values. The individual algorithms
 	// specify which hyperparameters support hyperparameter optimization (HPO). For
@@ -197,6 +217,7 @@ type CreatePredictorInput struct {
 }
 
 type CreatePredictorOutput struct {
+
 	// The Amazon Resource Name (ARN) of the predictor.
 	PredictorArn *string
 

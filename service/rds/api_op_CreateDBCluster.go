@@ -65,20 +65,25 @@ func (c *Client) CreateDBCluster(ctx context.Context, params *CreateDBClusterInp
 
 //
 type CreateDBClusterInput struct {
+
 	// A list of EC2 VPC security groups to associate with this DB cluster.
 	VpcSecurityGroupIds []*string
+
 	// A DB subnet group to associate with this DB cluster. Constraints: Must match the
 	// name of an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup
 	DBSubnetGroupName *string
+
 	// A value that indicates whether to copy all tags from the DB cluster to snapshots
 	// of the DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool
+
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []*string
+
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// you do not specify a value, then the default DB cluster parameter group for the
 	// specified DB engine and version is used. Constraints:
@@ -86,15 +91,20 @@ type CreateDBClusterInput struct {
 	//     * If supplied, must
 	// match the name of an existing DB cluster parameter group.
 	DBClusterParameterGroupName *string
+
 	// The number of days for which automated backups are retained. Default: 1
 	// Constraints:
 	//
 	//     * Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
+
 	// The name of the database engine to be used for this DB cluster. Valid Values:
 	// aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible
 	// Aurora), and aurora-postgresql
+	//
+	// This member is required.
 	Engine *string
+
 	// The name of the master user for the DB cluster. Constraints:
 	//
 	//     * Must be 1 to
@@ -105,6 +115,7 @@ type CreateDBClusterInput struct {
 	//     * Can't be
 	// a reserved word for the chosen database engine.
 	MasterUsername *string
+
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
@@ -112,19 +123,23 @@ type CreateDBClusterInput struct {
 	//     * If specified, this value must be set to a number
 	// from 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
+
 	// The global cluster ID of an Aurora cluster that becomes the primary cluster in
 	// the new global database cluster.
 	GlobalClusterIdentifier *string
+
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled.
 	DeletionProtection *bool
+
 	// A list of Availability Zones (AZs) where instances in the DB cluster can be
 	// created. For information on AWS Regions and Availability Zones, see Choosing the
 	// Regions and Availability Zones
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
 	// in the Amazon Aurora User Guide.
 	AvailabilityZones []*string
+
 	// The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier
 	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
 	// creating a DB cluster with the same AWS account that owns the KMS encryption key
@@ -147,10 +162,12 @@ type CreateDBClusterInput struct {
 	// to a KMS key ID that is valid in the destination AWS Region. This key is used to
 	// encrypt the read replica in that AWS Region.
 	KmsKeyId *string
+
 	// The name for your database of up to 64 alphanumeric characters. If you do not
 	// provide a name, Amazon RDS doesn't create a database in the DB cluster you are
 	// creating.
 	DatabaseName *string
+
 	// A URL that contains a Signature Version 4 signed request for the CreateDBCluster
 	// action to be called in the source AWS Region where the DB cluster is replicated
 	// from. You only need to specify PreSignedUrl when you are performing cross-region
@@ -183,6 +200,7 @@ type CreateDBClusterInput struct {
 	// autogenerates a pre-signed URL that is a valid request for the operation that
 	// can be executed in the source AWS Region.</p> </note>
 	PreSignedUrl *string
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -202,6 +220,7 @@ type CreateDBClusterInput struct {
 	//     * Must be at least 30
 	// minutes.
 	PreferredBackupWindow *string
+
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -211,30 +230,37 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
 	// A value that indicates whether to enable write operations to be forwarded from
 	// this cluster to the primary cluster in an Aurora global database. The resulting
 	// changes are replicated back to this cluster. This parameter only applies to DB
 	// clusters that are secondary clusters in an Aurora global database. By default,
 	// Aurora disallows write operations for secondary clusters.
 	EnableGlobalWriteForwarding *bool
+
 	// The password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints: Must contain
 	// from 8 to 41 characters.
 	MasterUserPassword *string
+
 	// Tags to assign to the DB cluster.
 	Tags []*types.Tag
+
 	// The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this
 	// DB cluster is created as a read replica.
 	ReplicationSourceIdentifier *string
+
 	// Specify the name of the IAM role to be used when making API calls to the
 	// Directory Service.
 	DomainIAMRoleName *string
+
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	// <p>For more information, see <a
 	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
 	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
 	EnableIAMDatabaseAuthentication *bool
+
 	// The Active Directory directory ID to create the DB cluster in. For Amazon Aurora
 	// DB clusters, Amazon RDS can use Kerberos Authentication to authenticate users
 	// that connect to the DB cluster. For more information, see Kerberos
@@ -242,11 +268,14 @@ type CreateDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
 	// in the Amazon Aurora User Guide.
 	Domain *string
+
 	// A value that indicates whether the DB cluster is encrypted.
 	StorageEncrypted *bool
+
 	// A value that indicates that the DB cluster should be associated with the
 	// specified CharacterSet.
 	CharacterSetName *string
+
 	// The DB engine mode of the DB cluster, either provisioned, serverless,
 	// parallelquery, global, or multimaster. global engine mode only applies for
 	// global database clusters created with Aurora MySQL version 5.6.10a. For higher
@@ -270,9 +299,11 @@ type CreateDBClusterInput struct {
 	// * Limitations of Multi-Master Clusters
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations)
 	EngineMode *string
+
 	// The port number on which the instances in the DB cluster accept connections.
 	// Default: 3306 if engine is set as aurora or 5432 if set to aurora-postgresql.
 	Port *int32
+
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
 	// Serverless DB cluster. By default, the HTTP endpoint is disabled. When enabled,
 	// the HTTP endpoint provides a connectionless web service API for running SQL
@@ -282,9 +313,11 @@ type CreateDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
 	// the Amazon Aurora User Guide.
 	EnableHttpEndpoint *bool
+
 	// For DB clusters in serverless DB engine mode, the scaling properties of the DB
 	// cluster.
 	ScalingConfiguration *types.ScalingConfiguration
+
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
@@ -297,12 +330,16 @@ type CreateDBClusterInput struct {
 	// two consecutive hyphens.
 	//
 	// Example: my-cluster1
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// A value that indicates that the DB cluster should be associated with the
 	// specified option group. Permanent options can't be removed from an option group.
 	// The option group can't be removed from a DB cluster once it is associated with a
 	// DB cluster.
 	OptionGroupName *string
+
 	// The version number of the database engine to use. To list all of the available
 	// engine versions for aurora (for MySQL 5.6-compatible Aurora), use the following
 	// command: aws rds describe-db-engine-versions --engine aurora --query
@@ -319,6 +356,7 @@ type CreateDBClusterInput struct {
 }
 
 type CreateDBClusterOutput struct {
+
 	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
 	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
 	// actions.

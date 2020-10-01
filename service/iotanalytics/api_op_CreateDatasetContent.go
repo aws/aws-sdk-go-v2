@@ -56,11 +56,15 @@ func (c *Client) CreateDatasetContent(ctx context.Context, params *CreateDataset
 }
 
 type CreateDatasetContentInput struct {
+
 	// The name of the data set.
+	//
+	// This member is required.
 	DatasetName *string
 }
 
 type CreateDatasetContentOutput struct {
+
 	// The version ID of the data set contents which are being created.
 	VersionId *string
 

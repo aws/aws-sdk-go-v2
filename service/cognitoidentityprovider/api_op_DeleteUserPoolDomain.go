@@ -55,9 +55,15 @@ func (c *Client) DeleteUserPoolDomain(ctx context.Context, params *DeleteUserPoo
 }
 
 type DeleteUserPoolDomainInput struct {
+
 	// The domain string.
+	//
+	// This member is required.
 	Domain *string
+
 	// The user pool ID.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

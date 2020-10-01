@@ -62,11 +62,14 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 
 // Represents the input to CopyDBClusterSnapshot ().
 type CopyDBClusterSnapshotInput struct {
+
 	// The tags to be assigned to the cluster snapshot.
 	Tags []*types.Tag
+
 	// Set to true to copy all tags from the source cluster snapshot to the target
 	// cluster snapshot, and otherwise false. The default is false.
 	CopyTags *bool
+
 	// The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS key ID is the
 	// Amazon Resource Name (ARN), AWS KMS key identifier, or the AWS KMS key alias for
 	// the AWS KMS encryption key. If you copy an encrypted cluster snapshot from your
@@ -82,6 +85,7 @@ type CopyDBClusterSnapshotInput struct {
 	// another Region. If you copy an unencrypted cluster snapshot and specify a value
 	// for the KmsKeyId parameter, an error is returned.
 	KmsKeyId *string
+
 	// The identifier of the cluster snapshot to copy. This parameter is not case
 	// sensitive. You can't copy an encrypted, shared cluster snapshot from one AWS
 	// Region to another. Constraints:
@@ -97,7 +101,10 @@ type CopyDBClusterSnapshotInput struct {
 	// ARN.
 	//
 	// Example: my-cluster-snapshot1
+	//
+	// This member is required.
 	SourceDBClusterSnapshotIdentifier *string
+
 	// The URL that contains a Signature Version 4 signed request for the
 	// CopyDBClusterSnapshot API action in the AWS Region that contains the source
 	// cluster snapshot to copy. You must use the PreSignedUrl parameter when copying
@@ -124,6 +131,7 @@ type CopyDBClusterSnapshotInput struct {
 	// example:
 	// arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115.
 	PreSignedUrl *string
+
 	// The identifier of the new cluster snapshot to create from the source cluster
 	// snapshot. This parameter is not case sensitive. Constraints:
 	//
@@ -137,10 +145,13 @@ type CopyDBClusterSnapshotInput struct {
 	// hyphens.
 	//
 	// Example: my-cluster-snapshot2
+	//
+	// This member is required.
 	TargetDBClusterSnapshotIdentifier *string
 }
 
 type CopyDBClusterSnapshotOutput struct {
+
 	// Detailed information about a cluster snapshot.
 	DBClusterSnapshot *types.DBClusterSnapshot
 

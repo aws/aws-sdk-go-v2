@@ -57,12 +57,20 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 }
 
 type UpdateProjectInput struct {
+
 	// A new description for the project.
 	ProjectDescription *string
+
 	// A new friendly name for the project.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The ID of the project to update.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.

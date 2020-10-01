@@ -55,12 +55,18 @@ func (c *Client) DeleteInsight(ctx context.Context, params *DeleteInsightInput, 
 }
 
 type DeleteInsightInput struct {
+
 	// The ARN of the insight to delete.
+	//
+	// This member is required.
 	InsightArn *string
 }
 
 type DeleteInsightOutput struct {
+
 	// The ARN of the insight that was deleted.
+	//
+	// This member is required.
 	InsightArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -58,14 +58,19 @@ func (c *Client) ListProfileTimes(ctx context.Context, params *ListProfileTimesI
 
 // The structure representing the listProfileTimesRequest.
 type ListProfileTimesInput struct {
+
 	// The end time of the time range from which to list the profiles.
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// The maximum number of profile time results returned by ListProfileTimes in
 	// paginated output. When this parameter is used, ListProfileTimes only returns
 	// maxResults results in a single page with a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// ListProfileTimes request with the returned nextToken value.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated ListProfileTimes request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
@@ -73,26 +78,40 @@ type ListProfileTimesInput struct {
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
 	// The order (ascending or descending by start time of the profile) to use when
 	// listing profiles. Defaults to TIMESTAMP_DESCENDING.
 	OrderBy types.OrderBy
+
 	// The aggregation period.
+	//
+	// This member is required.
 	Period types.AggregationPeriod
+
 	// The name of the profiling group.
+	//
+	// This member is required.
 	ProfilingGroupName *string
+
 	// The start time of the time range from which to list the profiles.
+	//
+	// This member is required.
 	StartTime *time.Time
 }
 
 // The structure representing the listProfileTimesResponse.
 type ListProfileTimesOutput struct {
+
 	// The nextToken value to include in a future ListProfileTimes request. When the
 	// results of a ListProfileTimes request exceed maxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
+
 	// The list of start times of the available profiles for the aggregation period in
 	// the specified time range.
+	//
+	// This member is required.
 	ProfileTimes []*types.ProfileTime
 
 	// Metadata pertaining to the operation's result.

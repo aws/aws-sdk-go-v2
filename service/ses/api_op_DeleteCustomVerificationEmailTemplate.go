@@ -61,7 +61,10 @@ func (c *Client) DeleteCustomVerificationEmailTemplate(ctx context.Context, para
 
 // Represents a request to delete an existing custom verification email template.
 type DeleteCustomVerificationEmailTemplateInput struct {
+
 	// The name of the custom verification email template that you want to delete.
+	//
+	// This member is required.
 	TemplateName *string
 }
 

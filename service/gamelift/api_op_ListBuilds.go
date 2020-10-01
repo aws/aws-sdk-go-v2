@@ -73,9 +73,11 @@ func (c *Client) ListBuilds(ctx context.Context, params *ListBuildsInput, optFns
 
 // Represents the input for a request action.
 type ListBuildsInput struct {
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
+
 	// Build status to filter results by. To retrieve all builds, leave this parameter
 	// empty. Possible build statuses include the following:
 	//
@@ -91,6 +93,7 @@ type ListBuildsInput struct {
 	// FAILED -- The game build upload failed. You cannot create new fleets for this
 	// build.
 	Status types.BuildStatus
+
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
@@ -99,8 +102,10 @@ type ListBuildsInput struct {
 
 // Represents the returned data in response to a request action.
 type ListBuildsOutput struct {
+
 	// A collection of build resources that match the request.
 	Builds []*types.Build
+
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string

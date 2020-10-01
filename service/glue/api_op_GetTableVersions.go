@@ -57,24 +57,35 @@ func (c *Client) GetTableVersions(ctx context.Context, params *GetTableVersionsI
 }
 
 type GetTableVersionsInput struct {
+
 	// The ID of the Data Catalog where the tables reside. If none is provided, the AWS
 	// account ID is used by default.
 	CatalogId *string
+
 	// The maximum number of table versions to return in one response.
 	MaxResults *int32
+
 	// The database in the catalog in which the table resides. For Hive compatibility,
 	// this name is entirely lowercase.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The name of the table. For Hive compatibility, this name is entirely lowercase.
+	//
+	// This member is required.
 	TableName *string
+
 	// A continuation token, if this is not the first call.
 	NextToken *string
 }
 
 type GetTableVersionsOutput struct {
+
 	// A continuation token, if the list of available versions does not include the
 	// last one.
 	NextToken *string
+
 	// A list of strings identifying available versions of the specified table.
 	TableVersions []*types.TableVersion
 

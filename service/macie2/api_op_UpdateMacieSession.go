@@ -56,10 +56,12 @@ func (c *Client) UpdateMacieSession(ctx context.Context, params *UpdateMacieSess
 }
 
 type UpdateMacieSessionInput struct {
+
 	// Specifies how often to publish updates to policy findings for the account. This
 	// includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly
 	// called Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
+
 	// Specifies whether to change the status of the account. Valid values are:
 	// ENABLED, resume all Amazon Macie activities for the account; and, PAUSED,
 	// suspend all Macie activities for the account.

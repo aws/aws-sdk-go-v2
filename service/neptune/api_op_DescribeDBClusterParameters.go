@@ -56,33 +56,42 @@ func (c *Client) DescribeDBClusterParameters(ctx context.Context, params *Descri
 }
 
 type DescribeDBClusterParametersInput struct {
+
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
+
 	// A value that indicates to return only parameters for a specific source.
 	// Parameter sources can be engine, service, or customer.
 	Source *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// This parameter is not currently supported.
 	Filters []*types.Filter
+
 	// The name of a specific DB cluster parameter group to return parameter details
 	// for. Constraints:
 	//
 	//     * If supplied, must match the name of an existing
 	// DBClusterParameterGroup.
+	//
+	// This member is required.
 	DBClusterParameterGroupName *string
 }
 
 type DescribeDBClusterParametersOutput struct {
+
 	// An optional pagination token provided by a previous DescribeDBClusterParameters
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
+
 	// Provides a list of parameters for the DB cluster parameter group.
 	Parameters []*types.Parameter
 

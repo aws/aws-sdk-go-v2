@@ -56,12 +56,16 @@ func (c *Client) DeleteSubnet(ctx context.Context, params *DeleteSubnetInput, op
 }
 
 type DeleteSubnetInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The ID of the subnet.
+	//
+	// This member is required.
 	SubnetId *string
 }
 

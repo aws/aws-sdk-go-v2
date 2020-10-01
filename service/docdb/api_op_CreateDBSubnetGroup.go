@@ -58,19 +58,30 @@ func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnet
 
 // Represents the input to CreateDBSubnetGroup ().
 type CreateDBSubnetGroupInput struct {
+
 	// The description for the subnet group.
+	//
+	// This member is required.
 	DBSubnetGroupDescription *string
+
 	// The tags to be assigned to the subnet group.
 	Tags []*types.Tag
+
 	// The name for the subnet group. This value is stored as a lowercase string.
 	// Constraints: Must contain no more than 255 letters, numbers, periods,
 	// underscores, spaces, or hyphens. Must not be default. Example: mySubnetgroup
+	//
+	// This member is required.
 	DBSubnetGroupName *string
+
 	// The Amazon EC2 subnet IDs for the subnet group.
+	//
+	// This member is required.
 	SubnetIds []*string
 }
 
 type CreateDBSubnetGroupOutput struct {
+
 	// Detailed information about a subnet group.
 	DBSubnetGroup *types.DBSubnetGroup
 

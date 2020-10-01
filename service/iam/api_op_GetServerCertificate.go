@@ -61,16 +61,22 @@ func (c *Client) GetServerCertificate(ctx context.Context, params *GetServerCert
 }
 
 type GetServerCertificateInput struct {
+
 	// The name of the server certificate you want to retrieve information about. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
 	// string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	ServerCertificateName *string
 }
 
 // Contains the response to a successful GetServerCertificate () request.
 type GetServerCertificateOutput struct {
+
 	// A structure containing details about the server certificate.
+	//
+	// This member is required.
 	ServerCertificate *types.ServerCertificate
 
 	// Metadata pertaining to the operation's result.

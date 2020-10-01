@@ -57,8 +57,12 @@ func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optF
 }
 
 type InvokeAsyncInput struct {
+
 	// The JSON that you want to provide to your Lambda function as input.
+	//
+	// This member is required.
 	InvokeArgs io.Reader
+
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -73,6 +77,8 @@ type InvokeAsyncInput struct {
 	// The length constraint applies only to the
 	// full ARN. If you specify only the function name, it is limited to 64 characters
 	// in length.
+	//
+	// This member is required.
 	FunctionName *string
 }
 

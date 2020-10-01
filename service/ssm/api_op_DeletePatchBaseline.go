@@ -55,11 +55,15 @@ func (c *Client) DeletePatchBaseline(ctx context.Context, params *DeletePatchBas
 }
 
 type DeletePatchBaselineInput struct {
+
 	// The ID of the patch baseline to delete.
+	//
+	// This member is required.
 	BaselineId *string
 }
 
 type DeletePatchBaselineOutput struct {
+
 	// The ID of the deleted patch baseline.
 	BaselineId *string
 

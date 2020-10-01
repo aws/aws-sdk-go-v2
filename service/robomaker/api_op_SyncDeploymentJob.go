@@ -60,20 +60,30 @@ func (c *Client) SyncDeploymentJob(ctx context.Context, params *SyncDeploymentJo
 }
 
 type SyncDeploymentJobInput struct {
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// This member is required.
 	ClientRequestToken *string
+
 	// The target fleet for the synchronization.
+	//
+	// This member is required.
 	Fleet *string
 }
 
 type SyncDeploymentJobOutput struct {
+
 	// The status of the synchronization job.
 	Status types.DeploymentStatus
+
 	// The failure reason if the job fails.
 	FailureReason *string
+
 	// Information about the deployment application configurations.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+
 	// The failure code if the job fails: InternalServiceError Internal service error.
 	// RobotApplicationCrash Robot application exited abnormally.
 	// SimulationApplicationCrash Simulation application exited abnormally.
@@ -91,12 +101,16 @@ type SyncDeploymentJobOutput struct {
 	// value during version creation. SimulationApplicationVersionMismatchedEtag Etag
 	// for SimulationApplication does not match value during version creation.
 	FailureCode types.DeploymentJobErrorCode
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Fleet *string
+
 	// Information about the deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
+
 	// The Amazon Resource Name (ARN) of the synchronization request.
 	Arn *string
+
 	// The time, in milliseconds since the epoch, when the fleet was created.
 	CreatedAt *time.Time
 

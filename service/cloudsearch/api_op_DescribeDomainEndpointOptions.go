@@ -63,8 +63,12 @@ func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *Desc
 // Specify the name of the domain you want to describe. To show the active
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeDomainEndpointOptionsInput struct {
+
 	// A string that represents the name of a domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Whether to retrieve the latest configuration (which might be in a Processing
 	// state) or the current, active configuration. Defaults to false.
 	Deployed *bool
@@ -73,6 +77,7 @@ type DescribeDomainEndpointOptionsInput struct {
 // The result of a DescribeDomainEndpointOptions request. Contains the status and
 // configuration of a search domain's endpoint options.
 type DescribeDomainEndpointOptionsOutput struct {
+
 	// The status and configuration of a search domain's endpoint options.
 	DomainEndpointOptions *types.DomainEndpointOptionsStatus
 

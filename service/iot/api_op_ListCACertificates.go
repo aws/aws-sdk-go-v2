@@ -58,18 +58,23 @@ func (c *Client) ListCACertificates(ctx context.Context, params *ListCACertifica
 
 // Input for the ListCACertificates operation.
 type ListCACertificatesInput struct {
+
 	// Determines the order of the results.
 	AscendingOrder *bool
+
 	// The marker for the next set of results.
 	Marker *string
+
 	// The result page size.
 	PageSize *int32
 }
 
 // The output from the ListCACertificates operation.
 type ListCACertificatesOutput struct {
+
 	// The CA certificates registered in your AWS account.
 	Certificates []*types.CACertificate
+
 	// The current position within the list of CA certificates.
 	NextMarker *string
 

@@ -56,10 +56,13 @@ func (c *Client) CreateWorkGroup(ctx context.Context, params *CreateWorkGroupInp
 }
 
 type CreateWorkGroupInput struct {
+
 	// A list of comma separated tags to add to the workgroup that is created.
 	Tags []*types.Tag
+
 	// The workgroup description.
 	Description *string
+
 	// The configuration for the workgroup, which includes the location in Amazon S3
 	// where query results are stored, the encryption configuration, if any, used for
 	// encrypting query results, whether the Amazon CloudWatch Metrics are enabled for
@@ -69,7 +72,10 @@ type CreateWorkGroupInput struct {
 	// client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration
 	// ().
 	Configuration *types.WorkGroupConfiguration
+
 	// The workgroup name.
+	//
+	// This member is required.
 	Name *string
 }
 

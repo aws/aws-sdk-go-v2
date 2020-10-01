@@ -61,11 +61,15 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 }
 
 type DescribeTableReplicaAutoScalingInput struct {
+
 	// The name of the table.
+	//
+	// This member is required.
 	TableName *string
 }
 
 type DescribeTableReplicaAutoScalingOutput struct {
+
 	// Represents the auto scaling properties of the table.
 	TableAutoScalingDescription *types.TableAutoScalingDescription
 

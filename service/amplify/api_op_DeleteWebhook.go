@@ -57,13 +57,19 @@ func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, 
 
 // The request structure for the delete webhook request.
 type DeleteWebhookInput struct {
+
 	// The unique ID for a webhook.
+	//
+	// This member is required.
 	WebhookId *string
 }
 
 // The result structure for the delete webhook request.
 type DeleteWebhookOutput struct {
+
 	// Describes a webhook that connects repository events to an Amplify app.
+	//
+	// This member is required.
 	Webhook *types.Webhook
 
 	// Metadata pertaining to the operation's result.

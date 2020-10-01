@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // AWS WAF couldn’t perform the operation because your resource is being used by
@@ -25,12 +24,6 @@ func (e *WAFAssociatedItemException) ErrorMessage() string {
 }
 func (e *WAFAssociatedItemException) ErrorCode() string             { return "WAFAssociatedItemException" }
 func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFAssociatedItemException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFAssociatedItemException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t perform the operation because the resource that you tried to
 // save is a duplicate of an existing one.
@@ -49,12 +42,6 @@ func (e *WAFDuplicateItemException) ErrorMessage() string {
 }
 func (e *WAFDuplicateItemException) ErrorCode() string             { return "WAFDuplicateItemException" }
 func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFDuplicateItemException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFDuplicateItemException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request is valid, but AWS WAF couldn’t perform the operation because of a
 // system problem. Retry your request.
@@ -73,12 +60,6 @@ func (e *WAFInternalErrorException) ErrorMessage() string {
 }
 func (e *WAFInternalErrorException) ErrorCode() string             { return "WAFInternalErrorException" }
 func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *WAFInternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFInternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation isn't valid.
 type WAFInvalidOperationException struct {
@@ -96,12 +77,6 @@ func (e *WAFInvalidOperationException) ErrorMessage() string {
 }
 func (e *WAFInvalidOperationException) ErrorCode() string             { return "WAFInvalidOperationException" }
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFInvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFInvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation failed because AWS WAF didn't recognize a parameter in the
 // request. For example:
@@ -137,27 +112,6 @@ func (e *WAFInvalidParameterException) ErrorMessage() string {
 }
 func (e *WAFInvalidParameterException) ErrorCode() string             { return "WAFInvalidParameterException" }
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFInvalidParameterException) GetReason() string {
-	return ptr.ToString(e.Reason)
-}
-func (e *WAFInvalidParameterException) HasReason() bool {
-	return e.Reason != nil
-}
-func (e *WAFInvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFInvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *WAFInvalidParameterException) GetField() ParameterExceptionField {
-	return e.Field
-}
-func (e *WAFInvalidParameterException) GetParameter() string {
-	return ptr.ToString(e.Parameter)
-}
-func (e *WAFInvalidParameterException) HasParameter() bool {
-	return e.Parameter != nil
-}
 
 // The operation failed because the specified policy isn't in the proper format.
 // <p>The policy specifications must conform to the following:</p> <ul> <li> <p>The
@@ -192,12 +146,6 @@ func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
 func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *WAFInvalidPermissionPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFInvalidPermissionPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t perform the operation because the resource that you requested
 // isn’t valid. Check the resource, and try again.
@@ -216,12 +164,6 @@ func (e *WAFInvalidResourceException) ErrorMessage() string {
 }
 func (e *WAFInvalidResourceException) ErrorCode() string             { return "WAFInvalidResourceException" }
 func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFInvalidResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFInvalidResourceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t perform the operation because you exceeded your resource limit.
 // For example, the maximum number of WebACL objects that you can create for an AWS
@@ -243,12 +185,6 @@ func (e *WAFLimitsExceededException) ErrorMessage() string {
 }
 func (e *WAFLimitsExceededException) ErrorCode() string             { return "WAFLimitsExceededException" }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFLimitsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFLimitsExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t perform the operation because your resource doesn’t exist.
 type WAFNonexistentItemException struct {
@@ -266,12 +202,6 @@ func (e *WAFNonexistentItemException) ErrorMessage() string {
 }
 func (e *WAFNonexistentItemException) ErrorCode() string             { return "WAFNonexistentItemException" }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFNonexistentItemException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFNonexistentItemException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t save your changes because you tried to update or delete a
 // resource that has changed since you last retrieved it. Get the resource again,
@@ -291,12 +221,6 @@ func (e *WAFOptimisticLockException) ErrorMessage() string {
 }
 func (e *WAFOptimisticLockException) ErrorCode() string             { return "WAFOptimisticLockException" }
 func (e *WAFOptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFOptimisticLockException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFOptimisticLockException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF is not able to access the service linked role. This can be caused by a
 // previous PutLoggingConfiguration request, which can lock the service linked role
@@ -325,12 +249,6 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
 func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *WAFServiceLinkedRoleErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFServiceLinkedRoleErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type WAFSubscriptionNotFoundException struct {
@@ -350,12 +268,6 @@ func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
 	return "WAFSubscriptionNotFoundException"
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFSubscriptionNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFSubscriptionNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An error occurred during the tagging operation. Retry your request.
 type WAFTagOperationException struct {
@@ -373,12 +285,6 @@ func (e *WAFTagOperationException) ErrorMessage() string {
 }
 func (e *WAFTagOperationException) ErrorCode() string             { return "WAFTagOperationException" }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFTagOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFTagOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t perform your tagging operation because of an internal error.
 // Retry your request.
@@ -401,12 +307,6 @@ func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
 func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
-func (e *WAFTagOperationInternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFTagOperationInternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // AWS WAF couldn’t retrieve the resource that you requested. Retry your request.
 type WAFUnavailableEntityException struct {
@@ -424,9 +324,3 @@ func (e *WAFUnavailableEntityException) ErrorMessage() string {
 }
 func (e *WAFUnavailableEntityException) ErrorCode() string             { return "WAFUnavailableEntityException" }
 func (e *WAFUnavailableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *WAFUnavailableEntityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *WAFUnavailableEntityException) HasMessage() bool {
-	return e.Message != nil
-}

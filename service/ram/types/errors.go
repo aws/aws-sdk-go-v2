@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // A client token input parameter was reused with an operation, but at least one of
@@ -29,12 +28,6 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IdempotentParameterMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotentParameterMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A client token is not valid.
 type InvalidClientTokenException struct {
@@ -52,12 +45,6 @@ func (e *InvalidClientTokenException) ErrorMessage() string {
 }
 func (e *InvalidClientTokenException) ErrorCode() string             { return "InvalidClientTokenException" }
 func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClientTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClientTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified value for MaxResults is not valid.
 type InvalidMaxResultsException struct {
@@ -75,12 +62,6 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 }
 func (e *InvalidMaxResultsException) ErrorCode() string             { return "InvalidMaxResultsException" }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMaxResultsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMaxResultsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified value for NextToken is not valid.
 type InvalidNextTokenException struct {
@@ -98,12 +79,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A parameter is not valid.
 type InvalidParameterException struct {
@@ -121,12 +96,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource type is not valid.
 type InvalidResourceTypeException struct {
@@ -144,12 +113,6 @@ func (e *InvalidResourceTypeException) ErrorMessage() string {
 }
 func (e *InvalidResourceTypeException) ErrorCode() string             { return "InvalidResourceTypeException" }
 func (e *InvalidResourceTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested state transition is not valid.
 type InvalidStateTransitionException struct {
@@ -169,12 +132,6 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 	return "InvalidStateTransitionException"
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateTransitionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateTransitionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The format of an Amazon Resource Name (ARN) is not valid.
 type MalformedArnException struct {
@@ -192,12 +149,6 @@ func (e *MalformedArnException) ErrorMessage() string {
 }
 func (e *MalformedArnException) ErrorCode() string             { return "MalformedArnException" }
 func (e *MalformedArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A required input parameter is missing.
 type MissingRequiredParameterException struct {
@@ -217,12 +168,6 @@ func (e *MissingRequiredParameterException) ErrorCode() string {
 	return "MissingRequiredParameterException"
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingRequiredParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingRequiredParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation is not permitted.
 type OperationNotPermittedException struct {
@@ -240,12 +185,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Amazon Resource Name (ARN) was not found.
 type ResourceArnNotFoundException struct {
@@ -263,12 +202,6 @@ func (e *ResourceArnNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceArnNotFoundException) ErrorCode() string             { return "ResourceArnNotFoundException" }
 func (e *ResourceArnNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceArnNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceArnNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The invitation was already accepted.
 type ResourceShareInvitationAlreadyAcceptedException struct {
@@ -289,12 +222,6 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorCode() string {
 }
 func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ResourceShareInvitationAlreadyAcceptedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceShareInvitationAlreadyAcceptedException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The invitation was already rejected.
@@ -317,12 +244,6 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorCode() string {
 func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceShareInvitationAlreadyRejectedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceShareInvitationAlreadyRejectedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Resource Name (ARN) for an invitation was not found.
 type ResourceShareInvitationArnNotFoundException struct {
@@ -343,12 +264,6 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorCode() string {
 }
 func (e *ResourceShareInvitationArnNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ResourceShareInvitationArnNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceShareInvitationArnNotFoundException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The invitation is expired.
@@ -371,12 +286,6 @@ func (e *ResourceShareInvitationExpiredException) ErrorCode() string {
 func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceShareInvitationExpiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceShareInvitationExpiredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource share exceeds the limit for your account.
 type ResourceShareLimitExceededException struct {
@@ -398,12 +307,6 @@ func (e *ResourceShareLimitExceededException) ErrorCode() string {
 func (e *ResourceShareLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceShareLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceShareLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service could not respond to the request due to an internal problem.
 type ServerInternalException struct {
@@ -421,12 +324,6 @@ func (e *ServerInternalException) ErrorMessage() string {
 }
 func (e *ServerInternalException) ErrorCode() string             { return "ServerInternalException" }
 func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServerInternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServerInternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is not available.
 type ServiceUnavailableException struct {
@@ -444,12 +341,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested tags exceed the limit for your account.
 type TagLimitExceededException struct {
@@ -467,12 +358,6 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 }
 func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified tag is a reserved word and cannot be used.
 type TagPolicyViolationException struct {
@@ -490,12 +375,6 @@ func (e *TagPolicyViolationException) ErrorMessage() string {
 }
 func (e *TagPolicyViolationException) ErrorCode() string             { return "TagPolicyViolationException" }
 func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagPolicyViolationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagPolicyViolationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified resource was not found.
 type UnknownResourceException struct {
@@ -513,9 +392,3 @@ func (e *UnknownResourceException) ErrorMessage() string {
 }
 func (e *UnknownResourceException) ErrorCode() string             { return "UnknownResourceException" }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnknownResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnknownResourceException) HasMessage() bool {
-	return e.Message != nil
-}

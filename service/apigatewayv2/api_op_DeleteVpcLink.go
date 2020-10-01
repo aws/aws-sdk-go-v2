@@ -55,7 +55,10 @@ func (c *Client) DeleteVpcLink(ctx context.Context, params *DeleteVpcLinkInput, 
 }
 
 type DeleteVpcLinkInput struct {
+
 	// The ID of the VPC link.
+	//
+	// This member is required.
 	VpcLinkId *string
 }
 

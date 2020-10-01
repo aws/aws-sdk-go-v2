@@ -57,19 +57,25 @@ func (c *Client) GetBuiltinIntent(ctx context.Context, params *GetBuiltinIntentI
 }
 
 type GetBuiltinIntentInput struct {
+
 	// The unique identifier for a built-in intent. To find the signature for an
 	// intent, see Standard Built-in Intents
 	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
+	//
+	// This member is required.
 	Signature *string
 }
 
 type GetBuiltinIntentOutput struct {
+
 	// An array of BuiltinIntentSlot objects, one entry for each slot type in the
 	// intent.
 	Slots []*types.BuiltinIntentSlot
+
 	// The unique identifier for a built-in intent.
 	Signature *string
+
 	// A list of locales that the intent supports.
 	SupportedLocales []types.Locale
 

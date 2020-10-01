@@ -62,29 +62,45 @@ func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput
 }
 
 type CreateJobQueueInput struct {
+
 	// The name of the job queue.
+	//
+	// This member is required.
 	JobQueueName *string
+
 	// The set of compute environments mapped to a job queue and their order relative
 	// to each other. The job scheduler uses this parameter to determine which compute
 	// environment should execute a given job. Compute environments must be in the
 	// VALID state before you can associate them with a job queue. You can associate up
 	// to three compute environments with a job queue.
+	//
+	// This member is required.
 	ComputeEnvironmentOrder []*types.ComputeEnvironmentOrder
+
 	// The state of the job queue. If the job queue state is ENABLED, it is able to
 	// accept jobs.
 	State types.JQState
+
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
 	// with the same compute environment. Priority is determined in descending order,
 	// for example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1.
+	//
+	// This member is required.
 	Priority *int32
 }
 
 type CreateJobQueueOutput struct {
+
 	// The name of the job queue.
+	//
+	// This member is required.
 	JobQueueName *string
+
 	// The Amazon Resource Name (ARN) of the job queue.
+	//
+	// This member is required.
 	JobQueueArn *string
 
 	// Metadata pertaining to the operation's result.

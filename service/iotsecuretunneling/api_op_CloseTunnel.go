@@ -57,8 +57,12 @@ func (c *Client) CloseTunnel(ctx context.Context, params *CloseTunnelInput, optF
 }
 
 type CloseTunnelInput struct {
+
 	// The ID of the tunnel to close.
+	//
+	// This member is required.
 	TunnelId *string
+
 	// When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.
 	Delete *bool
 }

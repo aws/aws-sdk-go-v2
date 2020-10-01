@@ -57,33 +57,46 @@ func (c *Client) DescribeRule(ctx context.Context, params *DescribeRuleInput, op
 }
 
 type DescribeRuleInput struct {
+
 	// The event bus associated with the rule. If you omit this, the default event bus
 	// is used.
 	EventBusName *string
+
 	// The name of the rule.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DescribeRuleOutput struct {
+
 	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
 	ScheduleExpression *string
+
 	// The name of the rule.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 	RoleArn *string
+
 	// The event bus associated with the rule.
 	EventBusName *string
+
 	// Specifies whether the rule is enabled or disabled.
 	State types.RuleState
+
 	// The Amazon Resource Name (ARN) of the rule.
 	Arn *string
+
 	// The event pattern. For more information, see Events and Event Patterns
 	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
 	EventPattern *string
+
 	// If this is a managed rule, created by an AWS service on your behalf, this field
 	// displays the principal name of the AWS service that created the rule.
 	ManagedBy *string
+
 	// The description of the rule.
 	Description *string
 

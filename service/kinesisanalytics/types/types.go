@@ -13,38 +13,58 @@ import (
 // including the application Amazon Resource Name (ARN), status, latest version,
 // and input and output configuration.
 type ApplicationDetail struct {
+
 	// Describes the application input configuration. For more information, see
 	// Configuring Application Input
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	// </p>
 	InputDescriptions []*InputDescription
+
 	// Name of the application.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// Time stamp when the application version was created.
 	CreateTimestamp *time.Time
+
 	// Provides the current application version.
+	//
+	// This member is required.
 	ApplicationVersionId *int64
+
 	// Time stamp when the application was last updated.
 	LastUpdateTimestamp *time.Time
+
 	// Status of the application.
+	//
+	// This member is required.
 	ApplicationStatus ApplicationStatus
+
 	// Returns the application code that you provided to perform data analysis on any
 	// of the in-application streams in your application.
 	ApplicationCode *string
+
 	// Description of the application.
 	ApplicationDescription *string
+
 	// Describes reference data sources configured for the application.  For more
 	// information, see <a
 	// href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring
 	// Application Input</a>. </p>
 	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription
+
 	// ARN of the application.
+	//
+	// This member is required.
 	ApplicationARN *string
+
 	// Describes the CloudWatch log streams that are configured to receive application
 	// messages. For more information about using CloudWatch log streams with Amazon
 	// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
 	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription
+
 	// Describes the application output configuration. For more information, see
 	// Configuring Application Output
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
@@ -58,24 +78,38 @@ type ApplicationDetail struct {
 // Analytics API V2 Documentation (). Provides application summary information,
 // including the application Amazon Resource Name (ARN), name, and status.
 type ApplicationSummary struct {
+
 	// ARN of the application.
+	//
+	// This member is required.
 	ApplicationARN *string
+
 	// Status of the application.
+	//
+	// This member is required.
 	ApplicationStatus ApplicationStatus
+
 	// Name of the application.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 // Describes updates to apply to an existing Amazon Kinesis Analytics application.
 type ApplicationUpdate struct {
+
 	// Describes application input configuration updates.
 	InputUpdates []*InputUpdate
+
 	// Describes application code updates.
 	ApplicationCodeUpdate *string
+
 	// Describes application CloudWatch logging option updates.
 	CloudWatchLoggingOptionUpdates []*CloudWatchLoggingOptionUpdate
+
 	// Describes application reference data source updates.
 	ReferenceDataSourceUpdates []*ReferenceDataSourceUpdate
+
 	// Describes application output configuration updates.
 	OutputUpdates []*OutputUpdate
 }
@@ -83,35 +117,53 @@ type ApplicationUpdate struct {
 // Provides a description of CloudWatch logging options, including the log stream
 // Amazon Resource Name (ARN) and the role ARN.
 type CloudWatchLoggingOption struct {
+
 	// ARN of the CloudWatch log to receive application messages.
+	//
+	// This member is required.
 	LogStreamARN *string
+
 	// IAM ARN of the role to use to send application messages. Note: To write
 	// application messages to CloudWatch, the IAM role that is used must have the
 	// PutLogEvents policy action enabled.
+	//
+	// This member is required.
 	RoleARN *string
 }
 
 // Description of the CloudWatch logging option.
 type CloudWatchLoggingOptionDescription struct {
+
 	// ARN of the CloudWatch log to receive application messages.
+	//
+	// This member is required.
 	LogStreamARN *string
+
 	// ID of the CloudWatch logging option description.
 	CloudWatchLoggingOptionId *string
+
 	// IAM ARN of the role to use to send application messages. Note: To write
 	// application messages to CloudWatch, the IAM role used must have the PutLogEvents
 	// policy action enabled.
+	//
+	// This member is required.
 	RoleARN *string
 }
 
 // Describes CloudWatch logging option updates.
 type CloudWatchLoggingOptionUpdate struct {
+
 	// IAM ARN of the role to use to send application messages. Note: To write
 	// application messages to CloudWatch, the IAM role used must have the PutLogEvents
 	// policy action enabled.
 	RoleARNUpdate *string
+
 	// ARN of the CloudWatch log to receive application messages.
 	LogStreamARNUpdate *string
+
 	// ID of the CloudWatch logging option to update
+	//
+	// This member is required.
 	CloudWatchLoggingOptionId *string
 }
 
@@ -121,10 +173,16 @@ type CloudWatchLoggingOptionUpdate struct {
 // delimiter:  <p> <code>"name1", "address1"</code> </p> <p> <code>"name2",
 // "address2"</code> </p>
 type CSVMappingParameters struct {
+
 	// Column delimiter. For example, in a CSV format, a comma (",") is the typical
 	// column delimiter.
+	//
+	// This member is required.
 	RecordColumnDelimiter *string
+
 	// Row delimiter. For example, in a CSV format, '\n' is the typical row delimiter.
+	//
+	// This member is required.
 	RecordRowDelimiter *string
 }
 
@@ -133,7 +191,10 @@ type CSVMappingParameters struct {
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 // </p>
 type DestinationSchema struct {
+
 	// Specifies the format of the records on the output stream.
+	//
+	// This member is required.
 	RecordFormatType RecordFormatType
 }
 
@@ -142,31 +203,41 @@ type DestinationSchema struct {
 // more information, see Configuring Application Input
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 type Input struct {
+
 	// Describes the number of in-application streams to create. Data from your source
 	// is routed to these in-application input streams. (see Configuring Application
 	// Input
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	InputParallelism *InputParallelism
+
 	// If the streaming source is an Amazon Kinesis stream, identifies the stream's
 	// Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics
 	// to access the stream on your behalf. Note: Either KinesisStreamsInput or
 	// KinesisFirehoseInput is required.
 	KinesisStreamsInput *KinesisStreamsInput
+
 	// Name prefix to use when creating an in-application stream. Suppose that you
 	// specify a prefix "MyInApplicationStream." Amazon Kinesis Analytics then creates
 	// one or more (as per the InputParallelism count you specified) in-application
 	// streams with names "MyInApplicationStream_001," "MyInApplicationStream_002," and
 	// so on.
+	//
+	// This member is required.
 	NamePrefix *string
+
 	// If the streaming source is an Amazon Kinesis Firehose delivery stream,
 	// identifies the delivery stream's ARN and an IAM role that enables Amazon Kinesis
 	// Analytics to access the stream on your behalf. Note: Either KinesisStreamsInput
 	// or KinesisFirehoseInput is required.
 	KinesisFirehoseInput *KinesisFirehoseInput
+
 	// Describes the format of the data in the streaming source, and how each data
 	// element maps to corresponding columns in the in-application stream that is being
 	// created. Also used to describe the format of the reference data source.
+	//
+	// This member is required.
 	InputSchema *SourceSchema
+
 	// The InputProcessingConfiguration
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
 	// for the input. An input processor transforms records as they are received from
@@ -180,12 +251,18 @@ type Input struct {
 // identifies the input source and the point in the input source at which you want
 // the application to start processing records.
 type InputConfiguration struct {
+
 	// Input source ID. You can get this ID by calling the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation.
+	//
+	// This member is required.
 	Id *string
+
 	// Point at which you want the application to start processing records from the
 	// streaming source.
+	//
+	// This member is required.
 	InputStartingPositionConfiguration *InputStartingPositionConfiguration
 }
 
@@ -193,31 +270,40 @@ type InputConfiguration struct {
 // Configuring Application Input
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 type InputDescription struct {
+
 	// If an Amazon Kinesis stream is configured as streaming source, provides Amazon
 	// Kinesis stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon
 	// Kinesis Analytics to access the stream on your behalf.
 	KinesisStreamsInputDescription *KinesisStreamsInputDescription
+
 	// Point at which the application is configured to read from the input stream.
 	InputStartingPositionConfiguration *InputStartingPositionConfiguration
+
 	// If an Amazon Kinesis Firehose delivery stream is configured as a streaming
 	// source, provides the delivery stream's ARN and an IAM role that enables Amazon
 	// Kinesis Analytics to access the stream on your behalf.
 	KinesisFirehoseInputDescription *KinesisFirehoseInputDescription
+
 	// Returns the in-application stream names that are mapped to the stream source.
 	InAppStreamNames []*string
+
 	// In-application name prefix.
 	NamePrefix *string
+
 	// The description of the preprocessor that executes on records in this input
 	// before the application's code is run.
 	InputProcessingConfigurationDescription *InputProcessingConfigurationDescription
+
 	// Describes the format of the data in the streaming source, and how each data
 	// element maps to corresponding columns in the in-application stream that is being
 	// created.
 	InputSchema *SourceSchema
+
 	// Input ID associated with the application input. This is the ID that Amazon
 	// Kinesis Analytics assigns to each input configuration you add to your
 	// application.
 	InputId *string
+
 	// Describes the configured parallelism (number of in-application streams mapped to
 	// the streaming source).
 	InputParallelism *InputParallelism
@@ -228,13 +314,19 @@ type InputDescription struct {
 // records in the stream, and the ARN of the IAM role that is used to access the
 // AWS Lambda function.
 type InputLambdaProcessor struct {
+
 	// The ARN of the AWS Lambda (https://docs.aws.amazon.com/lambda/) function that
 	// operates on records in the stream. To specify an earlier version of the Lambda
 	// function than the latest, include the Lambda function version in the Lambda
 	// function ARN. For more information about Lambda ARNs, see Example ARNs: AWS
 	// Lambda ()
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// The ARN of the IAM role that is used to access the AWS Lambda function.
+	//
+	// This member is required.
 	RoleARN *string
 }
 
@@ -243,9 +335,11 @@ type InputLambdaProcessor struct {
 // records in the stream, and the ARN of the IAM role that is used to access the
 // AWS Lambda expression.
 type InputLambdaProcessorDescription struct {
+
 	// The ARN of the AWS Lambda (https://docs.aws.amazon.com/lambda/) function that is
 	// used to preprocess the records in the stream.
 	ResourceARN *string
+
 	// The ARN of the IAM role that is used to access the AWS Lambda function.
 	RoleARN *string
 }
@@ -254,8 +348,10 @@ type InputLambdaProcessorDescription struct {
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html)
 // that is used to preprocess the records in the stream.
 type InputLambdaProcessorUpdate struct {
+
 	// The ARN of the new IAM role that is used to access the AWS Lambda function.
 	RoleARNUpdate *string
+
 	// The Amazon Resource Name (ARN) of the new AWS Lambda
 	// (https://docs.aws.amazon.com/lambda/) function that is used to preprocess the
 	// records in the stream. To specify an earlier version of the Lambda function than
@@ -268,6 +364,7 @@ type InputLambdaProcessorUpdate struct {
 // source. For information about parallelism, see Configuring Application Input
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 type InputParallelism struct {
+
 	// Number of in-application streams to create. For more information, see Limits
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
 	Count *int32
@@ -275,6 +372,7 @@ type InputParallelism struct {
 
 // Provides updates to the parallelism count.
 type InputParallelismUpdate struct {
+
 	// Number of in-application streams to create for the specified streaming source.
 	CountUpdate *int32
 }
@@ -283,16 +381,20 @@ type InputParallelismUpdate struct {
 // the stream before being processed by your application code. Currently, the only
 // input processor available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
 type InputProcessingConfiguration struct {
+
 	// The InputLambdaProcessor
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html)
 	// that is used to preprocess the records in the stream before being processed by
 	// your application code.
+	//
+	// This member is required.
 	InputLambdaProcessor *InputLambdaProcessor
 }
 
 // Provides configuration information about an input processor. Currently, the only
 // input processor available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
 type InputProcessingConfigurationDescription struct {
+
 	// Provides configuration information about the associated
 	// InputLambdaProcessorDescription
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html).
@@ -302,18 +404,24 @@ type InputProcessingConfigurationDescription struct {
 // Describes updates to an InputProcessingConfiguration
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html).
 type InputProcessingConfigurationUpdate struct {
+
 	// Provides update information for an InputLambdaProcessor
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html).
+	//
+	// This member is required.
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate
 }
 
 // Describes updates for the application's input schema.
 type InputSchemaUpdate struct {
+
 	// Specifies the encoding of the records in the streaming source. For example,
 	// UTF-8.
 	RecordEncodingUpdate *string
+
 	// Specifies the format of the records on the streaming source.
 	RecordFormatUpdate *RecordFormat
+
 	// A list of RecordColumn objects. Each object describes the mapping of the
 	// streaming source element to the corresponding column in the in-application
 	// stream.
@@ -322,6 +430,7 @@ type InputSchemaUpdate struct {
 
 // Describes the point at which the application reads from the streaming source.
 type InputStartingPositionConfiguration struct {
+
 	// The starting position on the stream.
 	//
 	//     * NOW - Start reading just after the
@@ -337,23 +446,32 @@ type InputStartingPositionConfiguration struct {
 // Describes updates to a specific input configuration (identified by the InputId
 // of an application).
 type InputUpdate struct {
+
 	// Name prefix for in-application streams that Amazon Kinesis Analytics creates for
 	// the specific streaming source.
 	NamePrefixUpdate *string
+
 	// Input ID of the application input to be updated.
+	//
+	// This member is required.
 	InputId *string
+
 	// If an Amazon Kinesis stream is the streaming source to be updated, provides an
 	// updated stream Amazon Resource Name (ARN) and IAM role ARN.
 	KinesisStreamsInputUpdate *KinesisStreamsInputUpdate
+
 	// Describes updates for an input processing configuration.
 	InputProcessingConfigurationUpdate *InputProcessingConfigurationUpdate
+
 	// Describes the data format on the streaming source, and how record elements on
 	// the streaming source map to columns of the in-application stream that is
 	// created.
 	InputSchemaUpdate *InputSchemaUpdate
+
 	// If an Amazon Kinesis Firehose delivery stream is the streaming source to be
 	// updated, provides an updated stream ARN and IAM role ARN.
 	KinesisFirehoseInputUpdate *KinesisFirehoseInputUpdate
+
 	// Describes the parallelism updates (the number in-application streams Amazon
 	// Kinesis Analytics creates for the specific streaming source).
 	InputParallelismUpdate *InputParallelismUpdate
@@ -362,7 +480,10 @@ type InputUpdate struct {
 // Provides additional mapping information when JSON is the record format on the
 // streaming source.
 type JSONMappingParameters struct {
+
 	// Path to the top-level parent that contains the records.
+	//
+	// This member is required.
 	RecordRowPath *string
 }
 
@@ -370,19 +491,27 @@ type JSONMappingParameters struct {
 // You provide the delivery stream's Amazon Resource Name (ARN) and an IAM role ARN
 // that enables Amazon Kinesis Analytics to access the stream on your behalf.
 type KinesisFirehoseInput struct {
+
 	// ARN of the input delivery stream.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream on your behalf. You need to make sure that the role has the necessary
 	// permissions to access the stream.
+	//
+	// This member is required.
 	RoleARN *string
 }
 
 // Describes the Amazon Kinesis Firehose delivery stream that is configured as the
 // streaming source in the application input configuration.
 type KinesisFirehoseInputDescription struct {
+
 	// Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream.
 	ResourceARN *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics assumes to access the stream.
 	RoleARN *string
 }
@@ -390,9 +519,11 @@ type KinesisFirehoseInputDescription struct {
 // When updating application input configuration, provides information about an
 // Amazon Kinesis Firehose delivery stream as the streaming source.
 type KinesisFirehoseInputUpdate struct {
+
 	// Amazon Resource Name (ARN) of the input Amazon Kinesis Firehose delivery stream
 	// to read.
 	ResourceARNUpdate *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream on your behalf. You need to grant the necessary permissions to this role.
 	RoleARNUpdate *string
@@ -403,20 +534,28 @@ type KinesisFirehoseInputUpdate struct {
 // (ARN) and an IAM role that enables Amazon Kinesis Analytics to write to the
 // stream on your behalf.
 type KinesisFirehoseOutput struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the
 	// destination stream on your behalf. You need to grant the necessary permissions
 	// to this role.
+	//
+	// This member is required.
 	RoleARN *string
+
 	// ARN of the destination Amazon Kinesis Firehose delivery stream to write to.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 // For an application output, describes the Amazon Kinesis Firehose delivery stream
 // configured as its destination.
 type KinesisFirehoseOutputDescription struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream.
 	RoleARN *string
+
 	// Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream.
 	ResourceARN *string
 }
@@ -426,9 +565,11 @@ type KinesisFirehoseOutputDescription struct {
 // operation, provides information about an Amazon Kinesis Firehose delivery stream
 // configured as the destination.
 type KinesisFirehoseOutputUpdate struct {
+
 	// Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream to
 	// write to.
 	ResourceARNUpdate *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream on your behalf. You need to grant the necessary permissions to this role.
 	RoleARNUpdate *string
@@ -438,19 +579,27 @@ type KinesisFirehoseOutputUpdate struct {
 // stream's Amazon Resource Name (ARN) and an IAM role ARN that enables Amazon
 // Kinesis Analytics to access the stream on your behalf.
 type KinesisStreamsInput struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream on your behalf. You need to grant the necessary permissions to this role.
+	//
+	// This member is required.
 	RoleARN *string
+
 	// ARN of the input Amazon Kinesis stream to read.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 // Describes the Amazon Kinesis stream that is configured as the streaming source
 // in the application input configuration.
 type KinesisStreamsInputDescription struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream.
 	RoleARN *string
+
 	// Amazon Resource Name (ARN) of the Amazon Kinesis stream.
 	ResourceARN *string
 }
@@ -458,9 +607,11 @@ type KinesisStreamsInputDescription struct {
 // When updating application input configuration, provides information about an
 // Amazon Kinesis stream as the streaming source.
 type KinesisStreamsInputUpdate struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream on your behalf. You need to grant the necessary permissions to this role.
 	RoleARNUpdate *string
+
 	// Amazon Resource Name (ARN) of the input Amazon Kinesis stream to read.
 	ResourceARNUpdate *string
 }
@@ -470,20 +621,28 @@ type KinesisStreamsInputUpdate struct {
 // role ARN that Amazon Kinesis Analytics can use to write to the stream on your
 // behalf.
 type KinesisStreamsOutput struct {
+
 	// ARN of the destination Amazon Kinesis stream to write to.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the
 	// destination stream on your behalf. You need to grant the necessary permissions
 	// to this role.
+	//
+	// This member is required.
 	RoleARN *string
 }
 
 // For an application output, describes the Amazon Kinesis stream configured as its
 // destination.
 type KinesisStreamsOutputDescription struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream.
 	RoleARN *string
+
 	// Amazon Resource Name (ARN) of the Amazon Kinesis stream.
 	ResourceARN *string
 }
@@ -493,9 +652,11 @@ type KinesisStreamsOutputDescription struct {
 // operation, provides information about an Amazon Kinesis stream configured as the
 // destination.
 type KinesisStreamsOutputUpdate struct {
+
 	// Amazon Resource Name (ARN) of the Amazon Kinesis stream where you want to write
 	// the output.
 	ResourceARNUpdate *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
 	// stream on your behalf. You need to grant the necessary permissions to this role.
 	RoleARNUpdate *string
@@ -506,22 +667,30 @@ type KinesisStreamsOutputUpdate struct {
 // role ARN that Amazon Kinesis Analytics can use to write to the function on your
 // behalf.
 type LambdaOutput struct {
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the
 	// destination function on your behalf. You need to grant the necessary permissions
 	// to this role.
+	//
+	// This member is required.
 	RoleARN *string
+
 	// Amazon Resource Name (ARN) of the destination Lambda function to write to. To
 	// specify an earlier version of the Lambda function than the latest, include the
 	// Lambda function version in the Lambda function ARN. For more information about
 	// Lambda ARNs, see Example ARNs: AWS Lambda ()
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 // For an application output, describes the AWS Lambda function configured as its
 // destination.
 type LambdaOutputDescription struct {
+
 	// Amazon Resource Name (ARN) of the destination Lambda function.
 	ResourceARN *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the
 	// destination function.
 	RoleARN *string
@@ -532,11 +701,13 @@ type LambdaOutputDescription struct {
 // operation, provides information about an AWS Lambda function configured as the
 // destination.
 type LambdaOutputUpdate struct {
+
 	// Amazon Resource Name (ARN) of the destination Lambda function. To specify an
 	// earlier version of the Lambda function than the latest, include the Lambda
 	// function version in the Lambda function ARN. For more information about Lambda
 	// ARNs, see Example ARNs: AWS Lambda ()
 	ResourceARNUpdate *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the
 	// destination function on your behalf. You need to grant the necessary permissions
 	// to this role.
@@ -548,9 +719,11 @@ type LambdaOutputUpdate struct {
 // format (such as JSON, CSV, or record fields delimited by some delimiter) on the
 // streaming source.
 type MappingParameters struct {
+
 	// Provides additional mapping information when JSON is the record format on the
 	// streaming source.
 	JSONMappingParameters *JSONMappingParameters
+
 	// Provides additional mapping information when the record format uses delimiters
 	// (for example, CSV).
 	CSVMappingParameters *CSVMappingParameters
@@ -564,17 +737,26 @@ type MappingParameters struct {
 // href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>.
 // </p>
 type Output struct {
+
 	// Name of the in-application stream.
+	//
+	// This member is required.
 	Name *string
+
 	// Identifies an Amazon Kinesis Firehose delivery stream as the destination.
 	KinesisFirehoseOutput *KinesisFirehoseOutput
+
 	// Identifies an AWS Lambda function as the destination.
 	LambdaOutput *LambdaOutput
+
 	// Identifies an Amazon Kinesis stream as the destination.
 	KinesisStreamsOutput *KinesisStreamsOutput
+
 	// Describes the data format when records are written to the destination. For more
 	// information, see Configuring Application Output
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+	//
+	// This member is required.
 	DestinationSchema *DestinationSchema
 }
 
@@ -583,18 +765,24 @@ type Output struct {
 // The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose
 // delivery stream.
 type OutputDescription struct {
+
 	// Describes the Amazon Kinesis Firehose delivery stream configured as the
 	// destination where output is written.
 	KinesisFirehoseOutputDescription *KinesisFirehoseOutputDescription
+
 	// Name of the in-application stream configured as output.
 	Name *string
+
 	// Describes the AWS Lambda function configured as the destination where output is
 	// written.
 	LambdaOutputDescription *LambdaOutputDescription
+
 	// Data format used for writing data to the destination.
 	DestinationSchema *DestinationSchema
+
 	// A unique identifier for the output configuration.
 	OutputId *string
+
 	// Describes Amazon Kinesis stream configured as the destination where output is
 	// written.
 	KinesisStreamsOutputDescription *KinesisStreamsOutputDescription
@@ -602,21 +790,29 @@ type OutputDescription struct {
 
 // Describes updates to the output configuration identified by the OutputId.
 type OutputUpdate struct {
+
 	// If you want to specify a different in-application stream for this output
 	// configuration, use this field to specify the new in-application stream name.
 	NameUpdate *string
+
 	// Describes an Amazon Kinesis Firehose delivery stream as the destination for the
 	// output.
 	KinesisFirehoseOutputUpdate *KinesisFirehoseOutputUpdate
+
 	// Describes the data format when records are written to the destination. For more
 	// information, see Configuring Application Output
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 	DestinationSchemaUpdate *DestinationSchema
+
 	// Describes an AWS Lambda function as the destination for the output.
 	LambdaOutputUpdate *LambdaOutputUpdate
+
 	// Describes an Amazon Kinesis stream as the destination for the output.
 	KinesisStreamsOutputUpdate *KinesisStreamsOutputUpdate
+
 	// Identifies the specific output configuration that you want to update.
+	//
+	// This member is required.
 	OutputId *string
 }
 
@@ -624,27 +820,38 @@ type OutputUpdate struct {
 // corresponding column in the in-application stream. Also used to describe the
 // format of the reference data source.
 type RecordColumn struct {
+
 	// Reference to the data element in the streaming input or the reference data
 	// source. This element is required if the RecordFormatType
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel)
 	// is JSON.
 	Mapping *string
+
 	// Name of the column created in the in-application input stream or reference
 	// table.
+	//
+	// This member is required.
 	Name *string
+
 	// Type of column created in the in-application input stream or reference table.
+	//
+	// This member is required.
 	SqlType *string
 }
 
 // Describes the record format and relevant mapping information that should be
 // applied to schematize the records on the stream.
 type RecordFormat struct {
+
 	// When configuring application input at the time of creating or updating an
 	// application, provides additional mapping information specific to the record
 	// format (such as JSON, CSV, or record fields delimited by some delimiter) on the
 	// streaming source.
 	MappingParameters *MappingParameters
+
 	// The type of record format.
+	//
+	// This member is required.
 	RecordFormatType RecordFormatType
 }
 
@@ -653,37 +860,54 @@ type RecordFormat struct {
 // is created, and the necessary schema to map the data elements in the Amazon S3
 // object to the in-application table.
 type ReferenceDataSource struct {
+
 	// Identifies the S3 bucket and object that contains the reference data. Also
 	// identifies the IAM role Amazon Kinesis Analytics can assume to read this object
 	// on your behalf.  An Amazon Kinesis Analytics application loads reference data
 	// only once. If the data changes, you call the <code>UpdateApplication</code>
 	// operation to trigger reloading of data into your application. </p>
 	S3ReferenceDataSource *S3ReferenceDataSource
+
 	// Name of the in-application table to create.
+	//
+	// This member is required.
 	TableName *string
+
 	// Describes the format of the data in the streaming source, and how each data
 	// element maps to corresponding columns created in the in-application stream.
+	//
+	// This member is required.
 	ReferenceSchema *SourceSchema
 }
 
 // Describes the reference data source configured for an application.
 type ReferenceDataSourceDescription struct {
+
 	// Describes the format of the data in the streaming source, and how each data
 	// element maps to corresponding columns created in the in-application stream.
 	ReferenceSchema *SourceSchema
+
 	// The in-application table name created by the specific reference data source
 	// configuration.
+	//
+	// This member is required.
 	TableName *string
+
 	// ID of the reference data source. This is the ID that Amazon Kinesis Analytics
 	// assigns when you add the reference data source to your application using the
 	// AddApplicationReferenceDataSource
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
 	// operation.
+	//
+	// This member is required.
 	ReferenceId *string
+
 	// Provides the S3 bucket name, the object key name that contains the reference
 	// data. It also provides the Amazon Resource Name (ARN) of the IAM role that
 	// Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate
 	// the in-application reference table.
+	//
+	// This member is required.
 	S3ReferenceDataSourceDescription *S3ReferenceDataSourceDescription
 }
 
@@ -693,17 +917,23 @@ type ReferenceDataSourceDescription struct {
 // mapping information that maps the data in the Amazon S3 object to the
 // in-application reference table that is created.
 type ReferenceDataSourceUpdate struct {
+
 	// ID of the reference data source being updated. You can use the
 	// DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get this value.
+	//
+	// This member is required.
 	ReferenceId *string
+
 	// In-application table name that is created by this update.
 	TableNameUpdate *string
+
 	// Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis
 	// Analytics can assume to read the Amazon S3 object on your behalf and populate
 	// the in-application reference table.
 	S3ReferenceDataSourceUpdate *S3ReferenceDataSourceUpdate
+
 	// Describes the format of the data in the streaming source, and how each data
 	// element maps to corresponding columns created in the in-application stream.
 	ReferenceSchemaUpdate *SourceSchema
@@ -713,11 +943,20 @@ type ReferenceDataSourceUpdate struct {
 // Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to
 // access the bucket, and the name of the Amazon S3 object that contains the data.
 type S3Configuration struct {
+
 	// ARN of the S3 bucket that contains the data.
+	//
+	// This member is required.
 	BucketARN *string
+
 	// The name of the object that contains the data.
+	//
+	// This member is required.
 	FileKey *string
+
 	// IAM ARN of the role used to access the data.
+	//
+	// This member is required.
 	RoleARN *string
 }
 
@@ -728,25 +967,43 @@ type S3Configuration struct {
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
 // operation to trigger reloading of data into your application.
 type S3ReferenceDataSource struct {
+
 	// Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// This member is required.
 	BucketARN *string
+
 	// Object key name containing reference data.
+	//
+	// This member is required.
 	FileKey *string
+
 	// ARN of the IAM role that the service can assume to read data on your behalf.
 	// This role must have permission for the s3:GetObject action on the object and
 	// trust policy that allows Amazon Kinesis Analytics service principal to assume
 	// this role.
+	//
+	// This member is required.
 	ReferenceRoleARN *string
 }
 
 // Provides the bucket name and object key name that stores the reference data.
 type S3ReferenceDataSourceDescription struct {
+
 	// Amazon S3 object key name.
+	//
+	// This member is required.
 	FileKey *string
+
 	// Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// This member is required.
 	BucketARN *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon
 	// S3 object on your behalf to populate the in-application reference table.
+	//
+	// This member is required.
 	ReferenceRoleARN *string
 }
 
@@ -754,10 +1011,13 @@ type S3ReferenceDataSourceDescription struct {
 // Analytics can assume to read the Amazon S3 object on your behalf and populate
 // the in-application reference table.
 type S3ReferenceDataSourceUpdate struct {
+
 	// Amazon Resource Name (ARN) of the S3 bucket.
 	BucketARNUpdate *string
+
 	// Object key name.
 	FileKeyUpdate *string
+
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon
 	// S3 object and populate the in-application.
 	ReferenceRoleARNUpdate *string
@@ -766,12 +1026,19 @@ type S3ReferenceDataSourceUpdate struct {
 // Describes the format of the data in the streaming source, and how each data
 // element maps to corresponding columns created in the in-application stream.
 type SourceSchema struct {
+
 	// Specifies the encoding of the records in the streaming source. For example,
 	// UTF-8.
 	RecordEncoding *string
+
 	// A list of RecordColumn objects.
+	//
+	// This member is required.
 	RecordColumns []*RecordColumn
+
 	// Specifies the format of the records on the streaming source.
+	//
+	// This member is required.
 	RecordFormat *RecordFormat
 }
 
@@ -782,8 +1049,12 @@ type SourceSchema struct {
 // application tags is 50. For more information, see Using Tagging
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 type Tag struct {
+
 	// The key of the key-value tag.
+	//
+	// This member is required.
 	Key *string
+
 	// The value of the key-value tag. The value is optional.
 	Value *string
 }

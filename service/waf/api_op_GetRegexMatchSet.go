@@ -62,13 +62,17 @@ func (c *Client) GetRegexMatchSet(ctx context.Context, params *GetRegexMatchSetI
 }
 
 type GetRegexMatchSetInput struct {
+
 	// The RegexMatchSetId of the RegexMatchSet () that you want to get.
 	// RegexMatchSetId is returned by CreateRegexMatchSet () and by ListRegexMatchSets
 	// ().
+	//
+	// This member is required.
 	RegexMatchSetId *string
 }
 
 type GetRegexMatchSetOutput struct {
+
 	// Information about the RegexMatchSet () that you specified in the
 	// GetRegexMatchSet request. For more information, see RegexMatchTuple ().
 	RegexMatchSet *types.RegexMatchSet

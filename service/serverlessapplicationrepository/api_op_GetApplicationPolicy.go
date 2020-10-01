@@ -56,11 +56,15 @@ func (c *Client) GetApplicationPolicy(ctx context.Context, params *GetApplicatio
 }
 
 type GetApplicationPolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the application.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetApplicationPolicyOutput struct {
+
 	// An array of policy statements applied to the application.
 	Statements []*types.ApplicationPolicyStatement
 

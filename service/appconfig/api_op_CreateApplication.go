@@ -59,21 +59,29 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 }
 
 type CreateApplicationInput struct {
+
 	// A name for the application.
+	//
+	// This member is required.
 	Name *string
+
 	// Metadata to assign to the application. Tags help organize and categorize your
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
 	Tags map[string]*string
+
 	// A description of the application.
 	Description *string
 }
 
 type CreateApplicationOutput struct {
+
 	// The application name.
 	Name *string
+
 	// The application ID.
 	Id *string
+
 	// The description of the application.
 	Description *string
 

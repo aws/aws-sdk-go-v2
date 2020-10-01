@@ -7,21 +7,27 @@ package types
 // CLI, or the SDK is in `PENDING` status by default. You can make its status
 // `AVAILABLE` by updating the connection in the console.
 type Connection struct {
+
 	// The Amazon Resource Name (ARN) of the connection. The ARN is used as the
 	// connection reference when the connection is shared between AWS services. The ARN
 	// is never reused if the connection is deleted.
 	ConnectionArn *string
+
 	// The Amazon Resource Name (ARN) of the host associated with the connection.
 	HostArn *string
+
 	// The current status of the connection.
 	ConnectionStatus ConnectionStatus
+
 	// The name of the external provider where your third-party code repository is
 	// configured. The valid provider type is Bitbucket.
 	ProviderType ProviderType
+
 	// The identifier of the external provider where your third-party code repository
 	// is configured. For Bitbucket, this is the account ID of the owner of the
 	// Bitbucket repository.
 	OwnerAccountId *string
+
 	// The name of the connection. Connection names must be unique in an AWS user
 	// account.
 	ConnectionName *string
@@ -34,19 +40,26 @@ type Connection struct {
 // is in `PENDING` status by default. You can make its status `AVAILABLE` by
 // setting up the host in the console.
 type Host struct {
+
 	// The VPC configuration provisioned for the host.
 	VpcConfiguration *VpcConfiguration
+
 	// The name of the host.
 	Name *string
+
 	// The endpoint of the infrastructure where your provider type is installed.
 	ProviderEndpoint *string
+
 	// The Amazon Resource Name (ARN) of the host.
 	HostArn *string
+
 	// The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING,
 	// VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.
 	Status *string
+
 	// The status description for the host.
 	StatusMessage *string
+
 	// The name of the installed provider to be associated with your connection. The
 	// host resource represents the infrastructure where your provider type is
 	// installed. The valid provider type is GitHub Enterprise Server.
@@ -56,23 +69,39 @@ type Host struct {
 // A tag is a key-value pair that is used to manage the resource. This tag is
 // available for use by AWS services that support tags.
 type Tag struct {
+
 	// The tag's value.
+	//
+	// This member is required.
 	Value *string
+
 	// The tag's key.
+	//
+	// This member is required.
 	Key *string
 }
 
 // The VPC configuration provisioned for the host.
 type VpcConfiguration struct {
+
 	// The ID of the security group or security groups associated with the Amazon VPC
 	// connected to the infrastructure where your provider type is installed.
+	//
+	// This member is required.
 	SecurityGroupIds []*string
+
 	// The ID of the Amazon VPC connected to the infrastructure where your provider
 	// type is installed.
+	//
+	// This member is required.
 	VpcId *string
+
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the
 	// infrastructure where your provider type is installed.
+	//
+	// This member is required.
 	SubnetIds []*string
+
 	// The value of the Transport Layer Security (TLS) certificate associated with the
 	// infrastructure where your provider type is installed.
 	TlsCertificate *string

@@ -59,35 +59,53 @@ func (c *Client) UpdateSchema(ctx context.Context, params *UpdateSchemaInput, op
 }
 
 type UpdateSchemaInput struct {
+
 	// The source of the schema definition.
 	Content *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
+
 	// The description of the schema.
 	Description *string
+
 	// The schema type for the events schema.
 	Type types.Type
+
 	// The ID of the client token.
 	ClientTokenId *string
 }
 
 type UpdateSchemaOutput struct {
+
 	// The description of the schema.
 	Description *string
+
 	// The date and time that schema was modified.
 	LastModified *time.Time
+
 	// The ARN of the schema.
 	SchemaArn *string
+
 	// The name of the schema.
 	SchemaName *string
+
 	// The version number of the schema
 	SchemaVersion *string
+
 	// The date the schema version was created.
 	VersionCreatedDate *time.Time
+
 	// Key-value pairs associated with a resource.
 	Tags map[string]*string
+
 	// The type of the schema.
 	Type *string
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The contact with the specified ID is not active or does not exist.
@@ -24,12 +23,6 @@ func (e *ContactNotFoundException) ErrorMessage() string {
 }
 func (e *ContactNotFoundException) ErrorCode() string             { return "ContactNotFoundException" }
 func (e *ContactNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ContactNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ContactNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Outbound calls to the destination number are not allowed.
 type DestinationNotAllowedException struct {
@@ -47,12 +40,6 @@ func (e *DestinationNotAllowedException) ErrorMessage() string {
 }
 func (e *DestinationNotAllowedException) ErrorCode() string             { return "DestinationNotAllowedException" }
 func (e *DestinationNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DestinationNotAllowedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DestinationNotAllowedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource with the specified name already exists.
 type DuplicateResourceException struct {
@@ -70,12 +57,6 @@ func (e *DuplicateResourceException) ErrorMessage() string {
 }
 func (e *DuplicateResourceException) ErrorCode() string             { return "DuplicateResourceException" }
 func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateResourceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Request processing failed due to an error or failure with the service.
 type InternalServiceException struct {
@@ -93,12 +74,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified parameters are not valid.
 type InvalidParameterException struct {
@@ -116,12 +91,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request is not valid.
 type InvalidRequestException struct {
@@ -139,12 +108,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The allowed limit for the resource has been exceeded.
 type LimitExceededException struct {
@@ -162,12 +125,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The contact is not permitted.
 type OutboundContactNotPermittedException struct {
@@ -189,12 +146,6 @@ func (e *OutboundContactNotPermittedException) ErrorCode() string {
 func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OutboundContactNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OutboundContactNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -212,12 +163,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The throttling limit has been exceeded.
 type ThrottlingException struct {
@@ -235,12 +180,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No user with the specified credentials was found in the Amazon Connect instance.
 type UserNotFoundException struct {
@@ -258,9 +197,3 @@ func (e *UserNotFoundException) ErrorMessage() string {
 }
 func (e *UserNotFoundException) ErrorCode() string             { return "UserNotFoundException" }
 func (e *UserNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UserNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UserNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

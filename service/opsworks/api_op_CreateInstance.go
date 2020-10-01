@@ -63,20 +63,27 @@ func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput
 }
 
 type CreateInstanceInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
+
 	// An array of BlockDeviceMapping objects that specify the instance's block
 	// devices. For more information, see Block Device Mapping
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html).
 	// Note that block device mappings are not supported for custom AMIs.
 	BlockDeviceMappings []*types.BlockDeviceMapping
+
 	// The ID of the instance's subnet. If the stack is running in a VPC, you can use
 	// this parameter to override the stack's default subnet ID value and direct AWS
 	// OpsWorks Stacks to launch the instance in a different subnet.
 	SubnetId *string
+
 	// For load-based or time-based instances, the type. Windows stacks can use only
 	// time-based instances.
 	AutoScalingType types.AutoScalingType
+
 	// The instance's operating system, which must be set to one of the following.
 	//
 	//
@@ -113,12 +120,15 @@ type CreateInstanceInput struct {
 	// Using Custom AMIs
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
 	Os *string
+
 	// The instance root device type. For more information, see Storage for the Root
 	// Device
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
 	RootDeviceType types.RootDeviceType
+
 	// The instance's Amazon EC2 key-pair name.
 	SshKeyName *string
+
 	// The instance's tenancy option. The default option is no tenancy, or if the
 	// instance is running in a VPC, inherit tenancy settings from the VPC. The
 	// following are valid values for this parameter: dedicated, default, or host.
@@ -132,6 +142,7 @@ type CreateInstanceInput struct {
 	// and Amazon EC2 Dedicated Instances
 	// (http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/).
 	Tenancy *string
+
 	// The instance type, such as t2.micro. For a list of supported instance types,
 	// open the stack in the console, choose Instances, and choose + Instance. The Size
 	// list contains the currently supported types. For more information, see Instance
@@ -139,15 +150,22 @@ type CreateInstanceInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html). The
 	// parameter values that you use to specify the various types are in the API Name
 	// column of the Available Instance Types table.
+	//
+	// This member is required.
 	InstanceType *string
+
 	// An array that contains the instance's layer IDs.
+	//
+	// This member is required.
 	LayerIds []*string
+
 	// A custom AMI ID to be used to create the instance. The AMI should be based on
 	// one of the supported operating systems. For more information, see Using Custom
 	// AMIs
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
 	// If you specify a custom AMI, you must set Os to Custom.
 	AmiId *string
+
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
@@ -156,11 +174,14 @@ type CreateInstanceInput struct {
 	// the default value of true to ensure that your instances have the latest security
 	// updates.
 	InstallUpdatesOnBoot *bool
+
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	AvailabilityZone *string
+
 	// The instance's virtualization type, paravirtual or hvm.
 	VirtualizationType *string
+
 	// The default AWS OpsWorks Stacks agent version. You have the following options:
 	//
 	//
@@ -177,19 +198,23 @@ type CreateInstanceInput struct {
 	// shown on the console. For a list of available agent version numbers, call
 	// DescribeAgentVersions (). AgentVersion cannot be set to Chef 12.2.
 	AgentVersion *string
+
 	// The instance architecture. The default option is x86_64. Instance types do not
 	// necessarily support both architectures. For a list of the architectures that are
 	// supported by the different instance types, see Instance Families and Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
 	Architecture types.Architecture
+
 	// Whether to create an Amazon EBS-optimized instance.
 	EbsOptimized *bool
+
 	// The instance host name.
 	Hostname *string
 }
 
 // Contains the response to a CreateInstance request.
 type CreateInstanceOutput struct {
+
 	// The instance ID.
 	InstanceId *string
 

@@ -73,10 +73,15 @@ func (c *Client) StartInstances(ctx context.Context, params *StartInstancesInput
 }
 
 type StartInstancesInput struct {
+
 	// The IDs of the instances.
+	//
+	// This member is required.
 	InstanceIds []*string
+
 	// Reserved.
 	AdditionalInfo *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -85,6 +90,7 @@ type StartInstancesInput struct {
 }
 
 type StartInstancesOutput struct {
+
 	// Information about the started instances.
 	StartingInstances []*types.InstanceStateChange
 

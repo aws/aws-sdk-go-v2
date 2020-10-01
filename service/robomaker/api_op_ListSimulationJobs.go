@@ -56,6 +56,7 @@ func (c *Client) ListSimulationJobs(ctx context.Context, params *ListSimulationJ
 }
 
 type ListSimulationJobsInput struct {
+
 	// The nextToken value returned from a previous paginated ListSimulationJobs
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -63,6 +64,7 @@ type ListSimulationJobsInput struct {
 	// identifier that is only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
+
 	// When this parameter is used, ListSimulationJobs only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
 	// of the initial request can be seen by sending another ListSimulationJobs request
@@ -70,6 +72,7 @@ type ListSimulationJobsInput struct {
 	// parameter is not used, then ListSimulationJobs returns up to 1000 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
+
 	// Optional filters to limit results. The filter names status and
 	// simulationApplicationName and robotApplicationName are supported. When
 	// filtering, you must use the complete value of the filtered item. You can use up
@@ -79,8 +82,12 @@ type ListSimulationJobsInput struct {
 }
 
 type ListSimulationJobsOutput struct {
+
 	// A list of simulation job summaries that meet the criteria of the request.
+	//
+	// This member is required.
 	SimulationJobSummaries []*types.SimulationJobSummary
+
 	// The nextToken value to include in a future ListSimulationJobs request. When the
 	// results of a ListRobot request exceed maxResults, this value can be used to
 	// retrieve the next page of results. This value is null when there are no more

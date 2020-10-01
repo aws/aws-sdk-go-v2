@@ -68,9 +68,11 @@ func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCo
 }
 
 type GetCostAndUsageWithResourcesInput struct {
+
 	// You can group Amazon Web Services costs using up to two different groups: either
 	// dimensions, tag keys, or both.
 	GroupBy []*types.GroupDefinition
+
 	// Filters Amazon Web Services costs by different dimensions. For example, you can
 	// specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with
 	// that account's usage of that service. You can nest Expression objects to define
@@ -79,6 +81,7 @@ type GetCostAndUsageWithResourcesInput struct {
 	// The GetCostAndUsageWithResources operation requires that you either group by or
 	// filter by a ResourceId.
 	Filter *types.Expression
+
 	// Which metrics are returned in the query. For more information about blended and
 	// unblended rates, see Why does the "blended" annotation appear on some line items
 	// in my bill?
@@ -92,16 +95,21 @@ type GetCostAndUsageWithResourcesInput struct {
 	// To get more meaningful UsageQuantity metrics, filter by UsageType or
 	// UsageTypeGroups. Metrics is required for GetCostAndUsageWithResources requests.
 	Metrics []*string
+
 	// Sets the start and end dates for retrieving Amazon Web Services costs. The range
 	// must be within the last 14 days (the start date cannot be earlier than 14 days
 	// ago). The start date is inclusive, but the end date is exclusive. For example,
 	// if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is
 	// retrieved from 2017-01-01 up to and including 2017-04-30 but not including
 	// 2017-05-01.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
 	// Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't
 	// set, the response object doesn't include the Granularity, MONTHLY, DAILY, or
 	// HOURLY.
@@ -109,12 +117,15 @@ type GetCostAndUsageWithResourcesInput struct {
 }
 
 type GetCostAndUsageWithResourcesOutput struct {
+
 	// The groups that are specified by the Filter or GroupBy parameters in the
 	// request.
 	GroupDefinitions []*types.GroupDefinition
+
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
 	// The time period that is covered by the results in the response.
 	ResultsByTime []*types.ResultByTime
 

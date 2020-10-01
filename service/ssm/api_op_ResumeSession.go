@@ -58,13 +58,18 @@ func (c *Client) ResumeSession(ctx context.Context, params *ResumeSessionInput, 
 }
 
 type ResumeSessionInput struct {
+
 	// The ID of the disconnected session to resume.
+	//
+	// This member is required.
 	SessionId *string
 }
 
 type ResumeSessionOutput struct {
+
 	// The ID of the session.
 	SessionId *string
+
 	// A URL back to SSM Agent on the instance that the Session Manager client uses to
 	// send commands and receive output from the instance. Format:
 	// wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).
@@ -75,6 +80,7 @@ type ResumeSessionOutput struct {
 	// the AWS General Reference. session-id represents the ID of a Session Manager
 	// session, such as 1a2b3c4dEXAMPLE.
 	StreamUrl *string
+
 	// An encrypted token value containing session and caller information. Used to
 	// authenticate the connection to the instance.
 	TokenValue *string

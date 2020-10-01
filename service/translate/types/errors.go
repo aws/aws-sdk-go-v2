@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The confidence that Amazon Comprehend accurately detected the source language is
@@ -35,18 +34,6 @@ func (e *DetectedLanguageLowConfidenceException) ErrorCode() string {
 func (e *DetectedLanguageLowConfidenceException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DetectedLanguageLowConfidenceException) GetDetectedLanguageCode() string {
-	return ptr.ToString(e.DetectedLanguageCode)
-}
-func (e *DetectedLanguageLowConfidenceException) HasDetectedLanguageCode() bool {
-	return e.DetectedLanguageCode != nil
-}
-func (e *DetectedLanguageLowConfidenceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DetectedLanguageLowConfidenceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
@@ -64,12 +51,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The filter specified for the operation is invalid. Specify a different filter.
 type InvalidFilterException struct {
@@ -87,12 +68,6 @@ func (e *InvalidFilterException) ErrorMessage() string {
 }
 func (e *InvalidFilterException) ErrorCode() string             { return "InvalidFilterException" }
 func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFilterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFilterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of the parameter is invalid. Review the value of the parameter you are
 // using to correct it, and then retry your operation.
@@ -111,12 +86,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 }
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterValueException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterValueException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request that you made is invalid. Check your request to determine why it's
 // invalid and then retry the request.
@@ -135,12 +104,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified limit has been exceeded. Review your request and retry it with a
 // quantity below the stated limit.
@@ -159,12 +122,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you are looking for has not been found. Review the resource you're
 // looking for and see if a different resource will accomplish your needs before
@@ -184,12 +141,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Amazon Translate service is temporarily unavailable. Please wait a bit and
 // then retry your request.
@@ -208,12 +159,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The size of the text you submitted exceeds the size limit. Reduce the size of
 // the text or use a smaller document and then retry your request.
@@ -232,12 +177,6 @@ func (e *TextSizeLimitExceededException) ErrorMessage() string {
 }
 func (e *TextSizeLimitExceededException) ErrorCode() string             { return "TextSizeLimitExceededException" }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TextSizeLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TextSizeLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have made too many requests within a short period of time. Wait for a short
 // time and then try your request again.
@@ -256,12 +195,6 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Translate does not support translation from the language of the source
 // text into the requested target language. For more information, see
@@ -286,21 +219,3 @@ func (e *UnsupportedLanguagePairException) ErrorCode() string {
 	return "UnsupportedLanguagePairException"
 }
 func (e *UnsupportedLanguagePairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedLanguagePairException) GetSourceLanguageCode() string {
-	return ptr.ToString(e.SourceLanguageCode)
-}
-func (e *UnsupportedLanguagePairException) HasSourceLanguageCode() bool {
-	return e.SourceLanguageCode != nil
-}
-func (e *UnsupportedLanguagePairException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedLanguagePairException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *UnsupportedLanguagePairException) GetTargetLanguageCode() string {
-	return ptr.ToString(e.TargetLanguageCode)
-}
-func (e *UnsupportedLanguagePairException) HasTargetLanguageCode() bool {
-	return e.TargetLanguageCode != nil
-}

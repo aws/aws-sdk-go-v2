@@ -56,23 +56,32 @@ func (c *Client) DescribeResourcePermissions(ctx context.Context, params *Descri
 }
 
 type DescribeResourcePermissionsInput struct {
+
 	// The ID of the principal to filter permissions by.
 	PrincipalId *string
+
 	// The ID of the resource.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The maximum number of items to return with this call.
 	Limit *int32
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call)
 	Marker *string
 }
 
 type DescribeResourcePermissionsOutput struct {
+
 	// The principals.
 	Principals []*types.Principal
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string

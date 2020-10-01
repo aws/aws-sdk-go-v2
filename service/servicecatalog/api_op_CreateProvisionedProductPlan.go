@@ -64,30 +64,49 @@ func (c *Client) CreateProvisionedProductPlan(ctx context.Context, params *Creat
 }
 
 type CreateProvisionedProductPlanInput struct {
+
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
+	//
+	// This member is required.
 	IdempotencyToken *string
+
 	// A user-friendly name for the provisioned product. This value must be unique for
 	// the AWS account and cannot be updated after the product is provisioned.
+	//
+	// This member is required.
 	ProvisionedProductName *string
+
 	// One or more tags. If the plan is for an existing provisioned product, the
 	// product must have a RESOURCE_UPDATE constraint with
 	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
 	Tags []*types.Tag
+
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
 	// paths for a product, use ListLaunchPaths ().
 	PathId *string
+
 	// Parameters specified by the administrator that are required for provisioning the
 	// product.
 	ProvisioningParameters []*types.UpdateProvisioningParameter
+
 	// The product identifier.
+	//
+	// This member is required.
 	ProductId *string
+
 	// The name of the plan.
+	//
+	// This member is required.
 	PlanName *string
+
 	// The plan type.
+	//
+	// This member is required.
 	PlanType types.ProvisionedProductPlanType
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -97,22 +116,31 @@ type CreateProvisionedProductPlanInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The identifier of the provisioning artifact.
+	//
+	// This member is required.
 	ProvisioningArtifactId *string
+
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
 	NotificationArns []*string
 }
 
 type CreateProvisionedProductPlanOutput struct {
+
 	// The name of the plan.
 	PlanName *string
+
 	// The user-friendly name of the provisioned product.
 	ProvisionedProductName *string
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
 	// The plan identifier.
 	PlanId *string
+
 	// The product identifier.
 	ProvisionProductId *string
 

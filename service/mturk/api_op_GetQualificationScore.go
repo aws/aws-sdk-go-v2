@@ -60,13 +60,20 @@ func (c *Client) GetQualificationScore(ctx context.Context, params *GetQualifica
 }
 
 type GetQualificationScoreInput struct {
+
 	// The ID of the Worker whose Qualification is being updated.
+	//
+	// This member is required.
 	WorkerId *string
+
 	// The ID of the QualificationType.
+	//
+	// This member is required.
 	QualificationTypeId *string
 }
 
 type GetQualificationScoreOutput struct {
+
 	// The Qualification data structure of the Qualification assigned to a user,
 	// including the Qualification type and the value (score).
 	Qualification *types.Qualification

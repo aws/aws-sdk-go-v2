@@ -59,14 +59,19 @@ func (c *Client) GetThingShadow(ctx context.Context, params *GetThingShadowInput
 
 // The input for the GetThingShadow operation.
 type GetThingShadowInput struct {
+
 	// The name of the thing.
+	//
+	// This member is required.
 	ThingName *string
+
 	// The name of the shadow.
 	ShadowName *string
 }
 
 // The output from the GetThingShadow operation.
 type GetThingShadowOutput struct {
+
 	// The state information, in JSON format.
 	Payload []byte
 

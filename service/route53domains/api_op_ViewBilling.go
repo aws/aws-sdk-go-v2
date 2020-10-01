@@ -58,12 +58,15 @@ func (c *Client) ViewBilling(ctx context.Context, params *ViewBillingInput, optF
 
 // The ViewBilling request includes the following elements.
 type ViewBillingInput struct {
+
 	// The number of billing records to be returned. Default: 20
 	MaxItems *int32
+
 	// The end date and time for the time period for which you want a list of billing
 	// records. Specify the date and time in Unix time format and Coordinated Universal
 	// time (UTC).
 	End *time.Time
+
 	// For an initial request for a list of billing records, omit this element. If the
 	// number of billing records that are associated with the current AWS account
 	// during the specified period is greater than the value that you specified for
@@ -73,6 +76,7 @@ type ViewBillingInput struct {
 	// marker must match the value of NextPageMarker that was returned in the previous
 	// response.
 	Marker *string
+
 	// The beginning date and time for the time period for which you want a list of
 	// billing records. Specify the date and time in Unix time format and Coordinated
 	// Universal time (UTC).
@@ -81,8 +85,10 @@ type ViewBillingInput struct {
 
 // The ViewBilling response includes the following elements.
 type ViewBillingOutput struct {
+
 	// A summary of billing records.
 	BillingRecords []*types.BillingRecord
+
 	// If there are more billing records than you specified for MaxItems in the
 	// request, submit another request and include the value of NextPageMarker in the
 	// value of Marker.

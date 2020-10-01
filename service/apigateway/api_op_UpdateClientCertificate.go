@@ -60,11 +60,18 @@ func (c *Client) UpdateClientCertificate(ctx context.Context, params *UpdateClie
 // A request to change information about an ClientCertificate () resource.
 type UpdateClientCertificateInput struct {
 	TemplateSkipList []*string
+
 	// [Required] The identifier of the ClientCertificate () resource to be updated.
+	//
+	// This member is required.
 	ClientCertificateId *string
-	Name                *string
-	Title               *string
-	Template            *bool
+
+	Name *string
+
+	Title *string
+
+	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -77,17 +84,23 @@ type UpdateClientCertificateInput struct {
 // user pool. Use Client-Side Certificate
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type UpdateClientCertificateOutput struct {
+
 	// The timestamp when the client certificate was created.
 	CreatedDate *time.Time
+
 	// The PEM-encoded public key of the client certificate, which can be used to
 	// configure certificate authentication in the integration endpoint .
 	PemEncodedCertificate *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
 	// The timestamp when the client certificate will expire.
 	ExpirationDate *time.Time
+
 	// The description of the client certificate.
 	Description *string
+
 	// The identifier of the client certificate.
 	ClientCertificateId *string
 

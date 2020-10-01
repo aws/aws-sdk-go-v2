@@ -56,19 +56,27 @@ func (c *Client) GetSites(ctx context.Context, params *GetSitesInput, optFns ...
 }
 
 type GetSitesInput struct {
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// One or more site IDs. The maximum is 10.
 	SiteIds []*string
 }
 
 type GetSitesOutput struct {
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The sites.
 	Sites []*types.Site
 

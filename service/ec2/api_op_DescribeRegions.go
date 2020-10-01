@@ -60,17 +60,21 @@ func (c *Client) DescribeRegions(ctx context.Context, params *DescribeRegionsInp
 }
 
 type DescribeRegionsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The names of the Regions. You can specify any Regions, whether they are enabled
 	// and disabled for your account.
 	RegionNames []*string
+
 	// Indicates whether to display all Regions, including Regions that are disabled
 	// for your account.
 	AllRegions *bool
+
 	// The filters.
 	//
 	//     * endpoint - The endpoint of the Region (for example,
@@ -85,6 +89,7 @@ type DescribeRegionsInput struct {
 }
 
 type DescribeRegionsOutput struct {
+
 	// Information about the Regions.
 	Regions []*types.Region
 

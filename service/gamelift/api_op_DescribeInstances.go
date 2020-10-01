@@ -71,16 +71,22 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 
 // Represents the input for a request action.
 type DescribeInstancesInput struct {
+
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
+
 	// A unique identifier for a fleet to retrieve instance information for. You can
 	// use either the fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
+
 	// A unique identifier for an instance to retrieve. Specify an instance ID or leave
 	// blank to retrieve all instances in the fleet.
 	InstanceId *string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
@@ -88,8 +94,10 @@ type DescribeInstancesInput struct {
 
 // Represents the returned data in response to a request action.
 type DescribeInstancesOutput struct {
+
 	// A collection of objects containing properties for each instance returned.
 	Instances []*types.Instance
+
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string

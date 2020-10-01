@@ -56,11 +56,20 @@ func (c *Client) UnlinkIdentity(ctx context.Context, params *UnlinkIdentityInput
 
 // Input to the UnlinkIdentity action.
 type UnlinkIdentityInput struct {
+
 	// A set of optional name-value pairs that map provider names to provider tokens.
+	//
+	// This member is required.
 	Logins map[string]*string
+
 	// A unique identifier in the format REGION:GUID.
+	//
+	// This member is required.
 	IdentityId *string
+
 	// Provider names to unlink from this identity.
+	//
+	// This member is required.
 	LoginsToRemove []*string
 }
 

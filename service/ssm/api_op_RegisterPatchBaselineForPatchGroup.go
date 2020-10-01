@@ -55,15 +55,23 @@ func (c *Client) RegisterPatchBaselineForPatchGroup(ctx context.Context, params 
 }
 
 type RegisterPatchBaselineForPatchGroupInput struct {
+
 	// The name of the patch group that should be registered with the patch baseline.
+	//
+	// This member is required.
 	PatchGroup *string
+
 	// The ID of the patch baseline to register the patch group with.
+	//
+	// This member is required.
 	BaselineId *string
 }
 
 type RegisterPatchBaselineForPatchGroupOutput struct {
+
 	// The ID of the patch baseline the patch group was registered with.
 	BaselineId *string
+
 	// The name of the patch group registered with the patch baseline.
 	PatchGroup *string
 

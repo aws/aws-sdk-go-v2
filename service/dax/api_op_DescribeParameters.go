@@ -56,15 +56,21 @@ func (c *Client) DescribeParameters(ctx context.Context, params *DescribeParamet
 }
 
 type DescribeParametersInput struct {
+
 	// How the parameter is defined. For example, system denotes a system-defined
 	// parameter.
 	Source *string
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The name of the parameter group.
+	//
+	// This member is required.
 	ParameterGroupName *string
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved. The value for MaxResults must be between
@@ -73,8 +79,10 @@ type DescribeParametersInput struct {
 }
 
 type DescribeParametersOutput struct {
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string
+
 	// A list of parameters within a parameter group. Each element in the list
 	// represents one parameter.
 	Parameters []*types.Parameter

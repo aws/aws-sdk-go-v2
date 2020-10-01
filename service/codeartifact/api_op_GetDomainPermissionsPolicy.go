@@ -60,14 +60,19 @@ func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDoma
 }
 
 type GetDomainPermissionsPolicyInput struct {
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The name of the domain to which the resource policy is attached.
+	//
+	// This member is required.
 	Domain *string
 }
 
 type GetDomainPermissionsPolicyOutput struct {
+
 	// The returned resource policy.
 	Policy *types.ResourcePolicy
 

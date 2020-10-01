@@ -55,8 +55,10 @@ func (c *Client) ListDataflowEndpointGroups(ctx context.Context, params *ListDat
 
 //
 type ListDataflowEndpointGroupsInput struct {
+
 	// Maximum number of dataflow endpoint groups returned.
 	MaxResults *int32
+
 	// Next token returned in the request of a previous ListDataflowEndpointGroups
 	// call. Used to get the next page of results.
 	NextToken *string
@@ -64,8 +66,10 @@ type ListDataflowEndpointGroupsInput struct {
 
 //
 type ListDataflowEndpointGroupsOutput struct {
+
 	// A list of dataflow endpoint groups.
 	DataflowEndpointGroupList []*types.DataflowEndpointListItem
+
 	// Next token returned in the response of a previous ListDataflowEndpointGroups
 	// call. Used to get the next page of results.
 	NextToken *string

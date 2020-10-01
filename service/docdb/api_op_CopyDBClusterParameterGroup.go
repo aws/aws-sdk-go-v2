@@ -57,8 +57,10 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 
 // Represents the input to CopyDBClusterParameterGroup ().
 type CopyDBClusterParameterGroupInput struct {
+
 	// The tags that are to be assigned to the parameter group.
 	Tags []*types.Tag
+
 	// The identifier or Amazon Resource Name (ARN) for the source cluster parameter
 	// group. Constraints:
 	//
@@ -73,7 +75,10 @@ type CopyDBClusterParameterGroupInput struct {
 	// is in a different AWS Region than the copy, specify a valid cluster parameter
 	// group ARN; for example,
 	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
+	//
+	// This member is required.
 	SourceDBClusterParameterGroupIdentifier *string
+
 	// The identifier for the copied cluster parameter group. Constraints:
 	//
 	//     *
@@ -89,12 +94,18 @@ type CopyDBClusterParameterGroupInput struct {
 	//
 	// Example:
 	// my-cluster-param-group1
+	//
+	// This member is required.
 	TargetDBClusterParameterGroupIdentifier *string
+
 	// A description for the copied cluster parameter group.
+	//
+	// This member is required.
 	TargetDBClusterParameterGroupDescription *string
 }
 
 type CopyDBClusterParameterGroupOutput struct {
+
 	// Detailed information about a cluster parameter group.
 	DBClusterParameterGroup *types.DBClusterParameterGroup
 

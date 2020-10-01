@@ -60,34 +60,43 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 }
 
 type DescribeEventsInput struct {
+
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
 	SourceType types.SourceType
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The number of minutes' worth of events to retrieve.
 	Duration *int32
+
 	// The end of the time interval for which to retrieve events, specified in ISO 8601
 	// format.
 	EndTime *time.Time
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved. The value for MaxResults must be between
 	// 20 and 100.
 	MaxResults *int32
+
 	// The beginning of the time interval to retrieve events for, specified in ISO 8601
 	// format.
 	StartTime *time.Time
+
 	// The identifier of the event source for which events will be returned. If not
 	// specified, then all sources are included in the response.
 	SourceName *string
 }
 
 type DescribeEventsOutput struct {
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string
+
 	// An array of events. Each element in the array represents one event.
 	Events []*types.Event
 

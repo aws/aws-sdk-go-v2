@@ -55,19 +55,32 @@ func (c *Client) StartThingRegistrationTask(ctx context.Context, params *StartTh
 }
 
 type StartThingRegistrationTaskInput struct {
+
 	// The IAM role ARN that grants permission the input file.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The name of input file within the S3 bucket. This file contains a newline
 	// delimited JSON file. Each line contains the parameter values to provision one
 	// device (thing).
+	//
+	// This member is required.
 	InputFileKey *string
+
 	// The S3 bucket that contains the input file.
+	//
+	// This member is required.
 	InputFileBucket *string
+
 	// The provisioning template.
+	//
+	// This member is required.
 	TemplateBody *string
 }
 
 type StartThingRegistrationTaskOutput struct {
+
 	// The bulk thing provisioning task ID.
 	TaskId *string
 

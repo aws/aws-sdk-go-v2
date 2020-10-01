@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Indicates that an internal error occurred.
@@ -26,18 +25,6 @@ func (e *CloudHsmInternalException) ErrorMessage() string {
 }
 func (e *CloudHsmInternalException) ErrorCode() string             { return "CloudHsmInternalException" }
 func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *CloudHsmInternalException) GetRetryable() bool {
-	return ptr.ToBool(e.Retryable)
-}
-func (e *CloudHsmInternalException) HasRetryable() bool {
-	return e.Retryable != nil
-}
-func (e *CloudHsmInternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmInternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that an exception occurred in the AWS CloudHSM service.
 type CloudHsmServiceException struct {
@@ -57,18 +44,6 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 }
 func (e *CloudHsmServiceException) ErrorCode() string             { return "CloudHsmServiceException" }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CloudHsmServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CloudHsmServiceException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *CloudHsmServiceException) GetRetryable() bool {
-	return ptr.ToBool(e.Retryable)
-}
-func (e *CloudHsmServiceException) HasRetryable() bool {
-	return e.Retryable != nil
-}
 
 // Indicates that one or more of the request parameters are not valid.
 type InvalidRequestException struct {
@@ -88,15 +63,3 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidRequestException) GetRetryable() bool {
-	return ptr.ToBool(e.Retryable)
-}
-func (e *InvalidRequestException) HasRetryable() bool {
-	return e.Retryable != nil
-}

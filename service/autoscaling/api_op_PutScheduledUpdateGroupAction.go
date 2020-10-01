@@ -61,6 +61,7 @@ func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutS
 }
 
 type PutScheduledUpdateGroupActionInput struct {
+
 	// The recurring schedule for this action, in Unix cron syntax format. This format
 	// consists of five fields separated by white spaces: [Minute] [Hour]
 	// [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for
@@ -68,21 +69,32 @@ type PutScheduledUpdateGroupActionInput struct {
 	// (http://crontab.org). When StartTime and EndTime are specified with Recurrence,
 	// they form the boundaries of when the recurring action starts and stops.
 	Recurrence *string
+
 	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
 	// does not perform the action after this time.
 	EndTime *time.Time
+
 	// The maximum size of the Auto Scaling group.
 	MaxSize *int32
+
 	// The minimum size of the Auto Scaling group.
 	MinSize *int32
+
 	// The name of this scaling action.
+	//
+	// This member is required.
 	ScheduledActionName *string
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The desired capacity is the initial capacity of the Auto Scaling group after the
 	// scheduled action runs and the capacity it attempts to maintain. It can scale
 	// beyond this capacity if you add more scaling conditions.
 	DesiredCapacity *int32
+
 	// The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in
 	// UTC/GMT only and in quotes (for example, "2019-06-01T00:00:00Z"). If you specify
 	// Recurrence and StartTime, Amazon EC2 Auto Scaling performs the action at this
@@ -90,6 +102,7 @@ type PutScheduledUpdateGroupActionInput struct {
 	// to schedule your action in the past, Amazon EC2 Auto Scaling returns an error
 	// message.
 	StartTime *time.Time
+
 	// This parameter is no longer used.
 	Time *time.Time
 }

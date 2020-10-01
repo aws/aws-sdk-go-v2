@@ -62,12 +62,14 @@ func (c *Client) ListXssMatchSets(ctx context.Context, params *ListXssMatchSetsI
 
 // A request to list the XssMatchSet () objects created by the current AWS account.
 type ListXssMatchSetsInput struct {
+
 	// If you specify a value for Limit and you have more XssMatchSet () objects than
 	// the value of Limit, AWS WAF returns a NextMarker value in the response that
 	// allows you to list another group of XssMatchSets. For the second and subsequent
 	// ListXssMatchSets requests, specify the value of NextMarker from the previous
 	// response to get information about another batch of XssMatchSets.
 	NextMarker *string
+
 	// Specifies the number of XssMatchSet () objects that you want AWS WAF to return
 	// for this request. If you have more XssMatchSet objects than the number you
 	// specify for Limit, the response includes a NextMarker value that you can use to
@@ -77,11 +79,13 @@ type ListXssMatchSetsInput struct {
 
 // The response to a ListXssMatchSets () request.
 type ListXssMatchSetsOutput struct {
+
 	// If you have more XssMatchSet () objects than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more
 	// XssMatchSet objects, submit another ListXssMatchSets request, and specify the
 	// NextMarker value from the response in the NextMarker value in the next request.
 	NextMarker *string
+
 	// An array of XssMatchSetSummary () objects.
 	XssMatchSets []*types.XssMatchSetSummary
 

@@ -63,11 +63,14 @@ func (c *Client) PutObjectRetention(ctx context.Context, params *PutObjectRetent
 }
 
 type PutObjectRetentionInput struct {
+
 	// The version ID for the object that you want to apply this Object Retention
 	// configuration to.
 	VersionId *string
+
 	// The MD5 hash for the request body.
 	ContentMD5 *string
+
 	// The bucket name that contains the object you want to apply this Object Retention
 	// configuration to. When using this API with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
@@ -77,7 +80,10 @@ type PutObjectRetentionInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -85,16 +91,22 @@ type PutObjectRetentionInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// Indicates whether this operation should bypass Governance-mode restrictions.
 	BypassGovernanceRetention *bool
+
 	// The key name for the object that you want to apply this Object Retention
 	// configuration to.
+	//
+	// This member is required.
 	Key *string
+
 	// The container element for the Object Retention configuration.
 	Retention *types.ObjectLockRetention
 }
 
 type PutObjectRetentionOutput struct {
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged

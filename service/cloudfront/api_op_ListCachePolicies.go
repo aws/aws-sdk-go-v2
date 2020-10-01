@@ -61,13 +61,16 @@ func (c *Client) ListCachePolicies(ctx context.Context, params *ListCachePolicie
 }
 
 type ListCachePoliciesInput struct {
+
 	// Use this field when paginating results to indicate where to begin in your list
 	// of cache policies. The response includes cache policies in the list that occur
 	// after the marker. To get the next page of the list, set this field’s value to
 	// the value of NextMarker from the current page’s response.
 	Marker *string
+
 	// The maximum number of cache policies that you want in the response.
 	MaxItems *string
+
 	// A filter to return only the specified kinds of cache policies. Valid values
 	// are:
 	//
@@ -79,6 +82,7 @@ type ListCachePoliciesInput struct {
 }
 
 type ListCachePoliciesOutput struct {
+
 	// A list of cache policies.
 	CachePolicyList *types.CachePolicyList
 

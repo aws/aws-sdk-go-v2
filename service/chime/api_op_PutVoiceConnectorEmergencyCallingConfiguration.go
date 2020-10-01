@@ -59,13 +59,20 @@ func (c *Client) PutVoiceConnectorEmergencyCallingConfiguration(ctx context.Cont
 }
 
 type PutVoiceConnectorEmergencyCallingConfigurationInput struct {
+
 	// The emergency calling configuration details.
+	//
+	// This member is required.
 	EmergencyCallingConfiguration *types.EmergencyCallingConfiguration
+
 	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
 	VoiceConnectorId *string
 }
 
 type PutVoiceConnectorEmergencyCallingConfigurationOutput struct {
+
 	// The emergency calling configuration details.
 	EmergencyCallingConfiguration *types.EmergencyCallingConfiguration
 

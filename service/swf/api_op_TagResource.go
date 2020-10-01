@@ -57,10 +57,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) for the Amazon SWF domain.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The list of tags to add to a domain. Tags may only contain unicode letters,
 	// digits, whitespace, or these symbols: _ . : / = + - @.
+	//
+	// This member is required.
 	Tags []*types.ResourceTag
 }
 

@@ -61,9 +61,15 @@ func (c *Client) DeleteBotAlias(ctx context.Context, params *DeleteBotAliasInput
 }
 
 type DeleteBotAliasInput struct {
+
 	// The name of the bot that the alias points to.
+	//
+	// This member is required.
 	BotName *string
+
 	// The name of the alias to delete. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 

@@ -55,7 +55,10 @@ func (c *Client) StopThingRegistrationTask(ctx context.Context, params *StopThin
 }
 
 type StopThingRegistrationTaskInput struct {
+
 	// The bulk thing provisioning task ID.
+	//
+	// This member is required.
 	TaskId *string
 }
 

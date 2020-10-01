@@ -56,20 +56,26 @@ func (c *Client) DescribeEnvironmentManagedActionHistory(ctx context.Context, pa
 
 // Request to list completed and failed managed actions.
 type DescribeEnvironmentManagedActionHistoryInput struct {
+
 	// The environment ID of the target environment.
 	EnvironmentId *string
+
 	// The name of the target environment.
 	EnvironmentName *string
+
 	// The pagination token returned by a previous request.
 	NextToken *string
+
 	// The maximum number of items to return for a single request.
 	MaxItems *int32
 }
 
 // A result message containing a list of completed and failed managed actions.
 type DescribeEnvironmentManagedActionHistoryOutput struct {
+
 	// A list of completed and failed managed actions.
 	ManagedActionHistoryItems []*types.ManagedActionHistoryItem
+
 	// A pagination token that you pass to DescribeEnvironmentManagedActionHistory ()
 	// to get the next page of results.
 	NextToken *string

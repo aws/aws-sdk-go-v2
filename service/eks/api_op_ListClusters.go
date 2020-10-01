@@ -54,6 +54,7 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 }
 
 type ListClustersInput struct {
+
 	// The maximum number of cluster results returned by ListClusters in paginated
 	// output. When you use this parameter, ListClusters returns only maxResults
 	// results in a single page along with a nextToken response element. You can see
@@ -62,6 +63,7 @@ type ListClustersInput struct {
 	// If you don't use this parameter, ListClusters returns up to 100 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
+
 	// The nextToken value returned from a previous paginated ListClusters request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
@@ -72,8 +74,10 @@ type ListClustersInput struct {
 }
 
 type ListClustersOutput struct {
+
 	// A list of all of the clusters for your account in the specified Region.
 	Clusters []*string
+
 	// The nextToken value to include in a future ListClusters request. When the
 	// results of a ListClusters request exceed maxResults, you can use this value to
 	// retrieve the next page of results. This value is null when there are no more

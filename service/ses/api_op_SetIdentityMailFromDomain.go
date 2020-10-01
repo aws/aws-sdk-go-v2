@@ -67,9 +67,13 @@ func (c *Client) SetIdentityMailFromDomain(ctx context.Context, params *SetIdent
 // domain, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
 type SetIdentityMailFromDomainInput struct {
+
 	// The verified identity for which you want to enable or disable the specified
 	// custom MAIL FROM domain.
+	//
+	// This member is required.
 	Identity *string
+
 	// The action that you want Amazon SES to take if it cannot successfully read the
 	// required MX record when you send an email. If you choose UseDefaultValue, Amazon
 	// SES will use amazonses.com (or a subdomain of that) as the MAIL FROM domain. If
@@ -78,6 +82,7 @@ type SetIdentityMailFromDomainInput struct {
 	// taken when the custom MAIL FROM domain setup is in the Pending, Failed, and
 	// TemporaryFailure states.
 	BehaviorOnMXFailure types.BehaviorOnMXFailure
+
 	// The custom MAIL FROM domain that you want the verified identity to use. The MAIL
 	// FROM domain must 1) be a subdomain of the verified identity, 2) not be used in a
 	// "From" address if the MAIL FROM domain is the destination of email feedback

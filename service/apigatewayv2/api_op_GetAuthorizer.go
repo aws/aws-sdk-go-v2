@@ -56,20 +56,29 @@ func (c *Client) GetAuthorizer(ctx context.Context, params *GetAuthorizerInput, 
 }
 
 type GetAuthorizerInput struct {
+
 	// The authorizer identifier.
+	//
+	// This member is required.
 	AuthorizerId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetAuthorizerOutput struct {
+
 	// The name of the authorizer.
 	Name *string
+
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
 	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, specify null. Supported only for REQUEST authorizers.
 	AuthorizerCredentialsArn *string
+
 	// The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this
 	// must be a well-formed Lambda function URI, for example,
 	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
@@ -81,13 +90,17 @@ type GetAuthorizerOutput struct {
 	// /2015-03-31/functions/[FunctionARN]/invocations. Supported only for REQUEST
 	// authorizers.
 	AuthorizerUri *string
+
 	// The authorizer identifier.
 	AuthorizerId *string
+
 	// The validation expression does not apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
+
 	// Authorizer caching is not currently supported. Don't specify this value for
 	// authorizers.
 	AuthorizerResultTtlInSeconds *int32
+
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
 	// expressions of the specified request parameters. Currently, the identity source
@@ -104,10 +117,12 @@ type GetAuthorizerOutput struct {
 	// parameter-based selections are supported, for example
 	// "$request.header.Authorization".
 	IdentitySource []*string
+
 	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
 	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web
 	// Tokens.
 	AuthorizerType types.AuthorizerType
+
 	// Represents the configuration of a JWT authorizer. Required for the JWT
 	// authorizer type. Supported only for HTTP APIs.
 	JwtConfiguration *types.JWTConfiguration

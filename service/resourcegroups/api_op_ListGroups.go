@@ -56,11 +56,13 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 }
 
 type ListGroupsInput struct {
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value provided by a previous call's
 	// NextToken response to indicate where the output should continue from.
 	NextToken *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -71,6 +73,7 @@ type ListGroupsInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
 	// Filters, formatted as GroupFilter () objects, that you want to apply to a
 	// ListGroups operation.
 	//
@@ -88,14 +91,17 @@ type ListGroupsInput struct {
 }
 
 type ListGroupsOutput struct {
+
 	// A list of GroupIdentifier () objects. Each identifier is an object that contains
 	// both the Name and the GroupArn.
 	GroupIdentifiers []*types.GroupIdentifier
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// This output element is deprecated and shouldn't be used. Refer to
 	// GroupIdentifiers instead.
 	Groups []*types.Group

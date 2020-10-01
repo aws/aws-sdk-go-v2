@@ -60,15 +60,22 @@ func (c *Client) UpdateAutomaticTapeCreationPolicy(ctx context.Context, params *
 }
 
 type UpdateAutomaticTapeCreationPolicyInput struct {
+
 	// An automatic tape creation policy consists of a list of automatic tape creation
 	// rules. The rules determine when and how to automatically create new tapes.
+	//
+	// This member is required.
 	AutomaticTapeCreationRules []*types.AutomaticTapeCreationRule
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 type UpdateAutomaticTapeCreationPolicyOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

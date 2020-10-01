@@ -63,14 +63,19 @@ func (c *Client) RegisterVolume(ctx context.Context, params *RegisterVolumeInput
 }
 
 type RegisterVolumeInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
+
 	// The Amazon EBS volume ID.
 	Ec2VolumeId *string
 }
 
 // Contains the response to a RegisterVolume request.
 type RegisterVolumeOutput struct {
+
 	// The volume ID.
 	VolumeId *string
 

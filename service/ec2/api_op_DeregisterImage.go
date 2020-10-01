@@ -63,8 +63,12 @@ func (c *Client) DeregisterImage(ctx context.Context, params *DeregisterImageInp
 
 // Contains the parameters for DeregisterImage.
 type DeregisterImageInput struct {
+
 	// The ID of the AMI.
+	//
+	// This member is required.
 	ImageId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is

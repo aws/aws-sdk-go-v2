@@ -60,11 +60,16 @@ func (c *Client) DescribeBudgets(ctx context.Context, params *DescribeBudgetsInp
 
 // Request of DescribeBudgets
 type DescribeBudgetsInput struct {
+
 	// The accountId that is associated with the budgets that you want descriptions of.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The pagination token that you include in your request to indicate the next set
 	// of results that you want to retrieve.
 	NextToken *string
+
 	// An optional integer that represents how many entries a paginated response
 	// contains. The maximum is 100.
 	MaxResults *int32
@@ -72,9 +77,11 @@ type DescribeBudgetsInput struct {
 
 // Response of DescribeBudgets
 type DescribeBudgetsOutput struct {
+
 	// The pagination token in the service response that indicates the next set of
 	// results that you can retrieve.
 	NextToken *string
+
 	// A list of budgets.
 	Budgets []*types.Budget
 

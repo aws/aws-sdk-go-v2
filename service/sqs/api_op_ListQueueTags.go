@@ -62,11 +62,15 @@ func (c *Client) ListQueueTags(ctx context.Context, params *ListQueueTagsInput, 
 }
 
 type ListQueueTagsInput struct {
+
 	// The URL of the queue.
+	//
+	// This member is required.
 	QueueUrl *string
 }
 
 type ListQueueTagsOutput struct {
+
 	// The list of all tags added to the specified queue.
 	Tags map[string]*string
 

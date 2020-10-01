@@ -57,8 +57,10 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 }
 
 type ListClustersInput struct {
+
 	// The number of ClusterListEntry objects to return.
 	MaxResults *int32
+
 	// HTTP requests are stateless. To identify what object comes "next" in the list of
 	// ClusterListEntry objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
@@ -66,10 +68,12 @@ type ListClustersInput struct {
 }
 
 type ListClustersOutput struct {
+
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ClusterListEntry call, your list of returned clusters will
 	// start from this point in the array.
 	NextToken *string
+
 	// Each ClusterListEntry object contains a cluster's state, a cluster's ID, and
 	// other important status information.
 	ClusterListEntries []*types.ClusterListEntry

@@ -61,7 +61,10 @@ func (c *Client) DisassociateElasticIp(ctx context.Context, params *Disassociate
 }
 
 type DisassociateElasticIpInput struct {
+
 	// The Elastic IP address.
+	//
+	// This member is required.
 	ElasticIp *string
 }
 

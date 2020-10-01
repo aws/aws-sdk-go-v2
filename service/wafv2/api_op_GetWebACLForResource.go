@@ -60,11 +60,15 @@ func (c *Client) GetWebACLForResource(ctx context.Context, params *GetWebACLForR
 }
 
 type GetWebACLForResourceInput struct {
+
 	// The ARN (Amazon Resource Name) of the resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type GetWebACLForResourceOutput struct {
+
 	// The Web ACL that is associated with the resource. If there is no associated
 	// resource, AWS WAF returns a null Web ACL.
 	WebACL *types.WebACL

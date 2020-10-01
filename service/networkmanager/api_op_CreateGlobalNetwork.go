@@ -55,14 +55,17 @@ func (c *Client) CreateGlobalNetwork(ctx context.Context, params *CreateGlobalNe
 }
 
 type CreateGlobalNetworkInput struct {
+
 	// The tags to apply to the resource during creation.
 	Tags []*types.Tag
+
 	// A description of the global network. Length Constraints: Maximum length of 256
 	// characters.
 	Description *string
 }
 
 type CreateGlobalNetworkOutput struct {
+
 	// Information about the global network object.
 	GlobalNetwork *types.GlobalNetwork
 

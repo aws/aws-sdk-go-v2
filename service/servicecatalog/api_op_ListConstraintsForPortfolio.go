@@ -56,6 +56,7 @@ func (c *Client) ListConstraintsForPortfolio(ctx context.Context, params *ListCo
 }
 
 type ListConstraintsForPortfolioInput struct {
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,20 +66,28 @@ type ListConstraintsForPortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The portfolio identifier.
+	//
+	// This member is required.
 	PortfolioId *string
+
 	// The product identifier.
 	ProductId *string
+
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
 }
 
 type ListConstraintsForPortfolioOutput struct {
+
 	// Information about the constraints.
 	ConstraintDetails []*types.ConstraintDetail
+
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string

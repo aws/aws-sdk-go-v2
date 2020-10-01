@@ -55,6 +55,7 @@ func (c *Client) ListDeploymentConfigs(ctx context.Context, params *ListDeployme
 
 // Represents the input of a ListDeploymentConfigs operation.
 type ListDeploymentConfigsInput struct {
+
 	// An identifier returned from the previous ListDeploymentConfigs call. It can be
 	// used to return the next set of deployment configurations in the list.
 	NextToken *string
@@ -62,9 +63,11 @@ type ListDeploymentConfigsInput struct {
 
 // Represents the output of a ListDeploymentConfigs operation.
 type ListDeploymentConfigsOutput struct {
+
 	// A list of deployment configurations, including built-in configurations such as
 	// CodeDeployDefault.OneAtATime.
 	DeploymentConfigsList []*string
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list deployment configurations call to return the
 	// next set of deployment configurations in the list.

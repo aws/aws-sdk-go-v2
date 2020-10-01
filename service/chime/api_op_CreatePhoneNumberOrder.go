@@ -58,13 +58,20 @@ func (c *Client) CreatePhoneNumberOrder(ctx context.Context, params *CreatePhone
 }
 
 type CreatePhoneNumberOrderInput struct {
+
 	// List of phone numbers, in E.164 format.
+	//
+	// This member is required.
 	E164PhoneNumbers []*string
+
 	// The phone number product type.
+	//
+	// This member is required.
 	ProductType types.PhoneNumberProductType
 }
 
 type CreatePhoneNumberOrderOutput struct {
+
 	// The phone number order details.
 	PhoneNumberOrder *types.PhoneNumberOrder
 

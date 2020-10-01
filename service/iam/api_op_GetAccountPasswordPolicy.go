@@ -61,7 +61,10 @@ type GetAccountPasswordPolicyInput struct {
 
 // Contains the response to a successful GetAccountPasswordPolicy () request.
 type GetAccountPasswordPolicyOutput struct {
+
 	// A structure that contains details about the account's password policy.
+	//
+	// This member is required.
 	PasswordPolicy *types.PasswordPolicy
 
 	// Metadata pertaining to the operation's result.

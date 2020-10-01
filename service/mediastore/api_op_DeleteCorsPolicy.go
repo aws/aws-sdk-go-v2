@@ -58,7 +58,10 @@ func (c *Client) DeleteCorsPolicy(ctx context.Context, params *DeleteCorsPolicyI
 }
 
 type DeleteCorsPolicyInput struct {
+
 	// The name of the container to remove the policy from.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

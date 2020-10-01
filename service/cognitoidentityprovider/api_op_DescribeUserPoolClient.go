@@ -58,15 +58,22 @@ func (c *Client) DescribeUserPoolClient(ctx context.Context, params *DescribeUse
 
 // Represents the request to describe a user pool client.
 type DescribeUserPoolClientInput struct {
+
 	// The app client ID of the app associated with the user pool.
+	//
+	// This member is required.
 	ClientId *string
+
 	// The user pool ID for the user pool you want to describe.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 // Represents the response from the server from a request to describe the user pool
 // client.
 type DescribeUserPoolClientOutput struct {
+
 	// The user pool client from a server response to describe the user pool client.
 	UserPoolClient *types.UserPoolClientType
 

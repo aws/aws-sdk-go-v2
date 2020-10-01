@@ -56,20 +56,34 @@ func (c *Client) SendSSHPublicKey(ctx context.Context, params *SendSSHPublicKeyI
 }
 
 type SendSSHPublicKeyInput struct {
+
 	// The availability zone the EC2 instance was launched in.
+	//
+	// This member is required.
 	AvailabilityZone *string
+
 	// The EC2 instance you wish to publish the SSH key to.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The public key to be published to the instance. To use it after publication you
 	// must have the matching private key.
+	//
+	// This member is required.
 	SSHPublicKey *string
+
 	// The OS user on the EC2 instance whom the key may be used to authenticate as.
+	//
+	// This member is required.
 	InstanceOSUser *string
 }
 
 type SendSSHPublicKeyOutput struct {
+
 	// Indicates request success.
 	Success *bool
+
 	// The request ID as logged by EC2 Connect. Please provide this when contacting AWS
 	// Support.
 	RequestId *string

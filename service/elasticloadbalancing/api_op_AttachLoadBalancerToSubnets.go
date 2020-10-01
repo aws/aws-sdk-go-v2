@@ -61,15 +61,22 @@ func (c *Client) AttachLoadBalancerToSubnets(ctx context.Context, params *Attach
 
 // Contains the parameters for AttachLoaBalancerToSubnets.
 type AttachLoadBalancerToSubnetsInput struct {
+
 	// The IDs of the subnets to add. You can add only one subnet per Availability
 	// Zone.
+	//
+	// This member is required.
 	Subnets []*string
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 // Contains the output of AttachLoadBalancerToSubnets.
 type AttachLoadBalancerToSubnetsOutput struct {
+
 	// The IDs of the subnets attached to the load balancer.
 	Subnets []*string
 

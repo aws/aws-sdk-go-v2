@@ -58,8 +58,11 @@ func (c *Client) DeleteHumanTaskUi(ctx context.Context, params *DeleteHumanTaskU
 }
 
 type DeleteHumanTaskUiInput struct {
+
 	// The name of the human task user interface (work task template) you want to
 	// delete.
+	//
+	// This member is required.
 	HumanTaskUiName *string
 }
 

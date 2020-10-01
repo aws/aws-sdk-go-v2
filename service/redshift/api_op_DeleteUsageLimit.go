@@ -55,7 +55,10 @@ func (c *Client) DeleteUsageLimit(ctx context.Context, params *DeleteUsageLimitI
 }
 
 type DeleteUsageLimitInput struct {
+
 	// The identifier of the usage limit to delete.
+	//
+	// This member is required.
 	UsageLimitId *string
 }
 

@@ -58,10 +58,16 @@ func (c *Client) UpdateRadius(ctx context.Context, params *UpdateRadiusInput, op
 
 // Contains the inputs for the UpdateRadius () operation.
 type UpdateRadiusInput struct {
+
 	// A RadiusSettings () object that contains information about the RADIUS server.
+	//
+	// This member is required.
 	RadiusSettings *types.RadiusSettings
+
 	// The identifier of the directory for which to update the RADIUS server
 	// information.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 

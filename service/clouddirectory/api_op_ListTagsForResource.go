@@ -58,21 +58,28 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The MaxResults parameter sets the maximum number of results returned in a single
 	// page. This is for future use and is not supported currently.
 	MaxResults *int32
+
 	// The pagination token. This is for future use. Currently pagination is not
 	// supported for tagging.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the resource. Tagging is only supported for
 	// directories.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// A list of tag key value pairs that are associated with the response.
 	Tags []*types.Tag
 

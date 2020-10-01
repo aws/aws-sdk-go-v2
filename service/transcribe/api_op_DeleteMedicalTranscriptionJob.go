@@ -56,8 +56,11 @@ func (c *Client) DeleteMedicalTranscriptionJob(ctx context.Context, params *Dele
 }
 
 type DeleteMedicalTranscriptionJobInput struct {
+
 	// The name you provide to the DeleteMedicalTranscriptionJob object to delete a
 	// transcription job.
+	//
+	// This member is required.
 	MedicalTranscriptionJobName *string
 }
 

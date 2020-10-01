@@ -55,7 +55,10 @@ func (c *Client) DeleteConferenceProvider(ctx context.Context, params *DeleteCon
 }
 
 type DeleteConferenceProviderInput struct {
+
 	// The ARN of the conference provider.
+	//
+	// This member is required.
 	ConferenceProviderArn *string
 }
 

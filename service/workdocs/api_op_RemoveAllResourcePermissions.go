@@ -55,10 +55,14 @@ func (c *Client) RemoveAllResourcePermissions(ctx context.Context, params *Remov
 }
 
 type RemoveAllResourcePermissionsInput struct {
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
 	// The ID of the resource.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

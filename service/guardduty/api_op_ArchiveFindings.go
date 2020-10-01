@@ -57,10 +57,16 @@ func (c *Client) ArchiveFindings(ctx context.Context, params *ArchiveFindingsInp
 }
 
 type ArchiveFindingsInput struct {
+
 	// The ID of the detector that specifies the GuardDuty service whose findings you
 	// want to archive.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The IDs of the findings that you want to archive.
+	//
+	// This member is required.
 	FindingIds []*string
 }
 

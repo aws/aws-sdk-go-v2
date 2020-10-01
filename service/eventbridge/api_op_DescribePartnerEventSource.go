@@ -58,13 +58,18 @@ func (c *Client) DescribePartnerEventSource(ctx context.Context, params *Describ
 }
 
 type DescribePartnerEventSourceInput struct {
+
 	// The name of the event source to display.
+	//
+	// This member is required.
 	Name *string
 }
 
 type DescribePartnerEventSourceOutput struct {
+
 	// The ARN of the event source.
 	Arn *string
+
 	// The name of the event source.
 	Name *string
 

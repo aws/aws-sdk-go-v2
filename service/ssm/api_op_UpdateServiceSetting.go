@@ -68,6 +68,7 @@ func (c *Client) UpdateServiceSetting(ctx context.Context, params *UpdateService
 
 // The request body of the UpdateServiceSetting API action.
 type UpdateServiceSettingInput struct {
+
 	// The Amazon Resource Name (ARN) of the service setting to reset. For example,
 	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
 	// The setting ID can be one of the following.
@@ -80,7 +81,10 @@ type UpdateServiceSettingInput struct {
 	//
 	//     *
 	// /ssm/managed-instance/activation-tier
+	//
+	// This member is required.
 	SettingId *string
+
 	// The new value to specify for the service setting. For the
 	// /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be
 	// one of the following.
@@ -95,6 +99,8 @@ type UpdateServiceSettingInput struct {
 	// For the /ssm/parameter-store/high-throughput-enabled, and
 	// /ssm/managed-instance/activation-tier setting IDs, the setting value can be true
 	// or false.
+	//
+	// This member is required.
 	SettingValue *string
 }
 

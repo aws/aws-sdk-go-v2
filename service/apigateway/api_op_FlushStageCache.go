@@ -57,13 +57,23 @@ func (c *Client) FlushStageCache(ctx context.Context, params *FlushStageCacheInp
 
 // Requests API Gateway to flush a stage's cache.
 type FlushStageCacheInput struct {
+
 	// [Required] The name of the stage to flush its cache.
-	StageName        *string
-	Name             *string
-	Title            *string
+	//
+	// This member is required.
+	StageName *string
+
+	Name *string
+
+	Title *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
 }
 

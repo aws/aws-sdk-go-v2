@@ -58,16 +58,30 @@ func (c *Client) UpdateIntegration(ctx context.Context, params *UpdateIntegratio
 
 // Represents an update integration request.
 type UpdateIntegrationInput struct {
+
 	// [Required] Represents an update integration request's HTTP method.
+	//
+	// This member is required.
 	HttpMethod *string
-	Name       *string
+
+	Name *string
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
-	Title            *string
+	//
+	// This member is required.
+	RestApiId *string
+
+	Title *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
+
 	// [Required] Represents an update integration request's resource identifier.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -78,13 +92,16 @@ type UpdateIntegrationInput struct {
 // an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateIntegrationOutput struct {
+
 	// Specifies a group of related cached parameters. By default, API Gateway uses the
 	// resource ID as the cacheNamespace. You can specify the same cacheNamespace
 	// across resources to return the same cached data for requests to different
 	// resources.
 	CacheNamespace *string
+
 	// Specifies the integration's HTTP method type.
 	HttpMethod *string
+
 	// Specifies an API method integration type. The valid value is one of the
 	// following:
 	//
@@ -118,9 +135,11 @@ type UpdateIntegrationOutput struct {
 	// of VPC_LINK is referred to as a private integration and uses a VpcLink () to
 	// connect API Gateway to a network load balancer of a VPC.
 	Type types.IntegrationType
+
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds.
 	TimeoutInMillis *int32
+
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
 	//
 	//     *
@@ -148,11 +167,13 @@ type UpdateIntegrationOutput struct {
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string
+
 	// The type of the network connection to the integration endpoint. The valid value
 	// is INTERNET for connections through the public routable internet or VPC_LINK for
 	// private connections between API Gateway and a network load balancer in a VPC.
 	// The default value is INTERNET.
 	ConnectionType types.ConnectionType
+
 	// A key-value map specifying request parameters that are passed from the method
 	// request to the back end. The key is an integration request parameter name and
 	// the associated value is a method request parameter value or static value that
@@ -161,19 +182,23 @@ type UpdateIntegrationOutput struct {
 	// method.request.{location}.{name}, where location is querystring, path, or header
 	// and name must be a valid and unique method request parameter name.
 	RequestParameters map[string]*string
+
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
 	RequestTemplates map[string]*string
+
 	// A list of request parameters whose values API Gateway caches. To be valid values
 	// for cacheKeyParameters, these parameters must also be specified for Method
 	// ()requestParameters.
 	CacheKeyParameters []*string
+
 	// The (id
 	// (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id)) of
 	// the VpcLink () used for the integration when connectionType=VPC_LINK and
 	// undefined, otherwise.
 	ConnectionId *string
+
 	// Specifies how the method request body of an unmapped content type will be passed
 	// through the integration request to the back end without transformation. A
 	// content type is unmapped if no mapping template is defined in the integration or
@@ -198,8 +223,10 @@ type UpdateIntegrationOutput struct {
 	// the mapping templates defined in the integration request or no mapping template
 	// is defined in the integration request.
 	PassthroughBehavior *string
+
 	// Specifies the TLS configuration for an integration.
 	TlsConfig *types.TlsConfig
+
 	// Specifies the credentials required for the integration, if any. For AWS
 	// integrations, three options are available. To specify an IAM Role for API
 	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
@@ -207,6 +234,7 @@ type UpdateIntegrationOutput struct {
 	// arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS
 	// services, specify null.
 	Credentials *string
+
 	// Specifies how to handle request payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:
@@ -222,6 +250,7 @@ type UpdateIntegrationOutput struct {
 	// the method request to integration request without modification, provided that
 	// the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling types.ContentHandlingStrategy
+
 	// Specifies the integration's responses.
 	// Example: Get integration responses of a
 	// method

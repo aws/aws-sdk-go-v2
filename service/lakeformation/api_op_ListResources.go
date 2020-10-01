@@ -55,18 +55,23 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 }
 
 type ListResourcesInput struct {
+
 	// The maximum number of resource results.
 	MaxResults *int32
+
 	// A continuation token, if this is not the first call to retrieve these resources.
 	NextToken *string
+
 	// Any applicable row-level and/or column-level filtering conditions for the
 	// resources.
 	FilterConditionList []*types.FilterCondition
 }
 
 type ListResourcesOutput struct {
+
 	// A summary of the data lake resources.
 	ResourceInfoList []*types.ResourceInfo
+
 	// A continuation token, if this is not the first call to retrieve these resources.
 	NextToken *string
 

@@ -56,12 +56,16 @@ func (c *Client) CheckDNSAvailability(ctx context.Context, params *CheckDNSAvail
 
 // Results message indicating whether a CNAME is available.
 type CheckDNSAvailabilityInput struct {
+
 	// The prefix used when this CNAME is reserved.
+	//
+	// This member is required.
 	CNAMEPrefix *string
 }
 
 // Indicates if the specified CNAME is available.
 type CheckDNSAvailabilityOutput struct {
+
 	// Indicates if the specified CNAME is available:
 	//
 	//     * true : The CNAME is
@@ -69,6 +73,7 @@ type CheckDNSAvailabilityOutput struct {
 	//
 	//     * false : The CNAME is not available.
 	Available *bool
+
 	// The fully qualified CNAME to reserve when CreateEnvironment () is called with
 	// the provided prefix.
 	FullyQualifiedCNAME *string

@@ -57,17 +57,25 @@ func (c *Client) BatchGetDeploymentGroups(ctx context.Context, params *BatchGetD
 
 // Represents the input of a BatchGetDeploymentGroups operation.
 type BatchGetDeploymentGroupsInput struct {
+
 	// The names of the deployment groups.
+	//
+	// This member is required.
 	DeploymentGroupNames []*string
+
 	// The name of an AWS CodeDeploy application associated with the applicable IAM
 	// user or AWS account.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 // Represents the output of a BatchGetDeploymentGroups operation.
 type BatchGetDeploymentGroupsOutput struct {
+
 	// Information about errors that might have occurred during the API call.
 	ErrorMessage *string
+
 	// Information about the deployment groups.
 	DeploymentGroupsInfo []*types.DeploymentGroupInfo
 

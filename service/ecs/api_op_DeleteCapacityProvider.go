@@ -68,12 +68,16 @@ func (c *Client) DeleteCapacityProvider(ctx context.Context, params *DeleteCapac
 }
 
 type DeleteCapacityProviderInput struct {
+
 	// The short name or full Amazon Resource Name (ARN) of the capacity provider to
 	// delete.
+	//
+	// This member is required.
 	CapacityProvider *string
 }
 
 type DeleteCapacityProviderOutput struct {
+
 	// The details of a capacity provider.
 	CapacityProvider *types.CapacityProvider
 

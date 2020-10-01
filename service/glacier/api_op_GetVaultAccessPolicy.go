@@ -68,18 +68,25 @@ func (c *Client) GetVaultAccessPolicy(ctx context.Context, params *GetVaultAcces
 
 // Input for GetVaultAccessPolicy.
 type GetVaultAccessPolicyInput struct {
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 
 // Output for GetVaultAccessPolicy.
 type GetVaultAccessPolicyOutput struct {
+
 	// Contains the returned vault access policy as a JSON string.
 	Policy *types.VaultAccessPolicy
 

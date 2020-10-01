@@ -58,8 +58,10 @@ type GetAccountBalanceInput struct {
 }
 
 type GetAccountBalanceOutput struct {
+
 	// A string representing a currency amount.
 	OnHoldBalance *string
+
 	// A string representing a currency amount.
 	AvailableBalance *string
 

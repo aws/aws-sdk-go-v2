@@ -87,18 +87,26 @@ func (c *Client) CreateRegexMatchSet(ctx context.Context, params *CreateRegexMat
 }
 
 type CreateRegexMatchSetInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// A friendly name or description of the RegexMatchSet (). You can't change Name
 	// after you create a RegexMatchSet.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateRegexMatchSetOutput struct {
+
 	// The ChangeToken that you used to submit the CreateRegexMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
+
 	// A RegexMatchSet () that contains no RegexMatchTuple objects.
 	RegexMatchSet *types.RegexMatchSet
 

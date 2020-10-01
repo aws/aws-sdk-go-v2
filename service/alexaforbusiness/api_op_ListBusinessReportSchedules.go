@@ -57,15 +57,19 @@ func (c *Client) ListBusinessReportSchedules(ctx context.Context, params *ListBu
 }
 
 type ListBusinessReportSchedulesInput struct {
+
 	// The token used to list the remaining schedules from the previous API call.
 	NextToken *string
+
 	// The maximum number of schedules listed in the call.
 	MaxResults *int32
 }
 
 type ListBusinessReportSchedulesOutput struct {
+
 	// The schedule of the reports.
 	BusinessReportSchedules []*types.BusinessReportSchedule
+
 	// The token used to list the remaining schedules from the previous API call.
 	NextToken *string
 

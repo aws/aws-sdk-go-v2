@@ -58,9 +58,11 @@ func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optF
 }
 
 type GetFunctionInput struct {
+
 	// Specify a version or alias to get details about a published version of the
 	// function.
 	Qualifier *string
+
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -75,17 +77,23 @@ type GetFunctionInput struct {
 	// You can append a version number or alias
 	// to any of the formats. The length constraint applies only to the full ARN. If
 	// you specify only the function name, it is limited to 64 characters in length.
+	//
+	// This member is required.
 	FunctionName *string
 }
 
 type GetFunctionOutput struct {
+
 	// The function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html).
 	Tags map[string]*string
+
 	// The deployment package of the function or version.
 	Code *types.FunctionCodeLocation
+
 	// The function's reserved concurrency
 	// (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
 	Concurrency *types.Concurrency
+
 	// The configuration of the function or version.
 	Configuration *types.FunctionConfiguration
 

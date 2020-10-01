@@ -127,18 +127,27 @@ func (c *Client) PutTargets(ctx context.Context, params *PutTargetsInput, optFns
 }
 
 type PutTargetsInput struct {
+
 	// The name of the event bus associated with the rule. If you omit this, the
 	// default event bus is used.
 	EventBusName *string
+
 	// The name of the rule.
+	//
+	// This member is required.
 	Rule *string
+
 	// The targets to update or add to the rule.
+	//
+	// This member is required.
 	Targets []*types.Target
 }
 
 type PutTargetsOutput struct {
+
 	// The failed target entries.
 	FailedEntries []*types.PutTargetsResultEntry
+
 	// The number of failed entries.
 	FailedEntryCount *int32
 

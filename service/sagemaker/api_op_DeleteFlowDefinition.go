@@ -55,7 +55,10 @@ func (c *Client) DeleteFlowDefinition(ctx context.Context, params *DeleteFlowDef
 }
 
 type DeleteFlowDefinitionInput struct {
+
 	// The name of the flow definition you are deleting.
+	//
+	// This member is required.
 	FlowDefinitionName *string
 }
 

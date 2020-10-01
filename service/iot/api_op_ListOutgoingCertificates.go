@@ -56,19 +56,24 @@ func (c *Client) ListOutgoingCertificates(ctx context.Context, params *ListOutgo
 
 // The input to the ListOutgoingCertificates operation.
 type ListOutgoingCertificatesInput struct {
+
 	// Specifies the order for results. If True, the results are returned in ascending
 	// order, based on the creation date.
 	AscendingOrder *bool
+
 	// The marker for the next set of results.
 	Marker *string
+
 	// The result page size.
 	PageSize *int32
 }
 
 // The output from the ListOutgoingCertificates operation.
 type ListOutgoingCertificatesOutput struct {
+
 	// The marker for the next set of results.
 	NextMarker *string
+
 	// The certificates that are being transferred but not yet accepted.
 	OutgoingCertificates []*types.OutgoingCertificate
 

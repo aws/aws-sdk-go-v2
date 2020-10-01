@@ -56,13 +56,18 @@ func (c *Client) GetFieldLevelEncryptionProfile(ctx context.Context, params *Get
 }
 
 type GetFieldLevelEncryptionProfileInput struct {
+
 	// Get the ID for the field-level encryption profile information.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetFieldLevelEncryptionProfileOutput struct {
+
 	// Return the field-level encryption profile information.
 	FieldLevelEncryptionProfile *types.FieldLevelEncryptionProfile
+
 	// The current version of the field level encryption profile. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string

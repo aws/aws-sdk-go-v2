@@ -60,13 +60,20 @@ func (c *Client) CloseInstancePublicPorts(ctx context.Context, params *CloseInst
 }
 
 type CloseInstancePublicPortsInput struct {
+
 	// An object to describe the ports to close for the specified instance.
+	//
+	// This member is required.
 	PortInfo *types.PortInfo
+
 	// The name of the instance for which to close ports.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type CloseInstancePublicPortsOutput struct {
+
 	// An object that describes the result of the action, such as the status of the
 	// request, the timestamp of the request, and the resources affected by the
 	// request.

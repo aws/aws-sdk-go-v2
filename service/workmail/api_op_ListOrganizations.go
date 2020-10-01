@@ -55,17 +55,21 @@ func (c *Client) ListOrganizations(ctx context.Context, params *ListOrganization
 }
 
 type ListOrganizationsInput struct {
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.
 	NextToken *string
 }
 
 type ListOrganizationsOutput struct {
+
 	// The token to use to retrieve the next page of results. The value is "null" when
 	// there are no more results to return.
 	NextToken *string
+
 	// The overview of owned organizations presented as a list of organization
 	// summaries.
 	OrganizationSummaries []*types.OrganizationSummary

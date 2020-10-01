@@ -58,26 +58,37 @@ func (c *Client) GetLayerVersionByArn(ctx context.Context, params *GetLayerVersi
 }
 
 type GetLayerVersionByArnInput struct {
+
 	// The ARN of the layer version.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetLayerVersionByArnOutput struct {
+
 	// The layer's software license.
 	LicenseInfo *string
+
 	// The layer's compatible runtimes.
 	CompatibleRuntimes []types.Runtime
+
 	// The description of the version.
 	Description *string
+
 	// The ARN of the layer version.
 	LayerVersionArn *string
+
 	// The version number.
 	Version *int64
+
 	// Details about the layer version.
 	Content *types.LayerVersionContentOutput
+
 	// The date that the layer version was created, in ISO-8601 format
 	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
 	CreatedDate *string
+
 	// The ARN of the layer.
 	LayerArn *string
 

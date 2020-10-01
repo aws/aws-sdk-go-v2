@@ -125,6 +125,7 @@ func (c *Client) CreateAccount(ctx context.Context, params *CreateAccountInput, 
 }
 
 type CreateAccountInput struct {
+
 	// (Optional) The name of an IAM role that AWS Organizations automatically
 	// preconfigures in the new member account. This role trusts the master account,
 	// allowing users in the master account to assume the role, as permitted by the
@@ -148,6 +149,7 @@ type CreateAccountInput struct {
 	// lowercase letters, digits with no spaces, and any of the following characters:
 	// =,.@-
 	RoleName *string
+
 	// If set to ALLOW, the new account enables IAM users to access account billing
 	// information if they have the required permissions. If set to DENY, only the root
 	// user of the new account can access account billing information. For more
@@ -157,17 +159,24 @@ type CreateAccountInput struct {
 	// parameter, the value defaults to ALLOW, and IAM users and roles with the
 	// required permissions can access billing information for the new account.
 	IamUserAccessToBilling types.IAMUserAccessToBilling
+
 	// The email address of the owner to assign to the new member account. This email
 	// address must not already be associated with another AWS account. You must use a
 	// valid email address to complete account creation. You can't access the root user
 	// of the account or remove an account that was created with an invalid email
 	// address.
+	//
+	// This member is required.
 	Email *string
+
 	// The friendly name of the member account.
+	//
+	// This member is required.
 	AccountName *string
 }
 
 type CreateAccountOutput struct {
+
 	// A structure that contains details about the request to create an account. This
 	// response structure might not be fully populated when you first receive it
 	// because account creation is an asynchronous process. You can pass the returned

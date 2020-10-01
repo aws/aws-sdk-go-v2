@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This exception is thrown when an error occurs in the AWS DataSync service.
@@ -26,18 +25,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InternalException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the client submits a malformed request.
 type InvalidRequestException struct {
@@ -57,15 +44,3 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidRequestException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InvalidRequestException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}

@@ -65,6 +65,7 @@ func (c *Client) DescribeClusterSubnetGroups(ctx context.Context, params *Descri
 
 //
 type DescribeClusterSubnetGroupsInput struct {
+
 	// A tag value or values for which you want to return all matching cluster subnet
 	// groups that are associated with the specified tag value or values. For example,
 	// suppose that you have subnet groups that are tagged with values called admin and
@@ -72,12 +73,14 @@ type DescribeClusterSubnetGroupsInput struct {
 	// returns a response with the subnet groups that have either or both of these tag
 	// values associated with them.
 	TagValues []*string
+
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
 	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// A tag key or keys for which you want to return all matching cluster subnet
 	// groups that are associated with the specified key or keys. For example, suppose
 	// that you have subnet groups that are tagged with keys called owner and
@@ -85,6 +88,7 @@ type DescribeClusterSubnetGroupsInput struct {
 	// Redshift returns a response with the subnet groups that have either or both of
 	// these tag keys associated with them.
 	TagKeys []*string
+
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterSubnetGroups () request
 	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
@@ -92,18 +96,21 @@ type DescribeClusterSubnetGroupsInput struct {
 	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
+
 	// The name of the cluster subnet group for which information is requested.
 	ClusterSubnetGroupName *string
 }
 
 // Contains the output from the DescribeClusterSubnetGroups () action.
 type DescribeClusterSubnetGroupsOutput struct {
+
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
 	// the next set of records by providing this returned marker value in the Marker
 	// parameter and retrying the command. If the Marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
+
 	// A list of ClusterSubnetGroup () instances.
 	ClusterSubnetGroups []*types.ClusterSubnetGroup
 

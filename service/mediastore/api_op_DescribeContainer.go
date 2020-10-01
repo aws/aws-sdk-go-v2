@@ -60,11 +60,13 @@ func (c *Client) DescribeContainer(ctx context.Context, params *DescribeContaine
 }
 
 type DescribeContainerInput struct {
+
 	// The name of the container to query.
 	ContainerName *string
 }
 
 type DescribeContainerOutput struct {
+
 	// The name of the queried container.
 	Container *types.Container
 

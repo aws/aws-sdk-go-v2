@@ -63,11 +63,15 @@ func (c *Client) BatchDeleteImportData(ctx context.Context, params *BatchDeleteI
 }
 
 type BatchDeleteImportDataInput struct {
+
 	// The IDs for the import tasks that you want to delete.
+	//
+	// This member is required.
 	ImportTaskIds []*string
 }
 
 type BatchDeleteImportDataOutput struct {
+
 	// Error messages returned for each import task that you deleted as a response for
 	// this command.
 	Errors []*types.BatchDeleteImportDataError

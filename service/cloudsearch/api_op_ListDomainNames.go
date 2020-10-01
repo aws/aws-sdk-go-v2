@@ -59,6 +59,7 @@ type ListDomainNamesInput struct {
 // The result of a ListDomainNames request. Contains a list of the domains owned by
 // an account.
 type ListDomainNamesOutput struct {
+
 	// The names of the search domains owned by an account.
 	DomainNames map[string]*string
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // There is concurrent modification on a rule or target.
@@ -26,12 +25,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception occurs due to unexpected causes.
 type InternalException struct {
@@ -49,12 +42,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The event pattern is not valid.
 type InvalidEventPatternException struct {
@@ -72,12 +59,6 @@ func (e *InvalidEventPatternException) ErrorMessage() string {
 }
 func (e *InvalidEventPatternException) ErrorCode() string             { return "InvalidEventPatternException" }
 func (e *InvalidEventPatternException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEventPatternException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEventPatternException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified state is not a valid state for an event source.
 type InvalidStateException struct {
@@ -95,12 +76,6 @@ func (e *InvalidStateException) ErrorMessage() string {
 }
 func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You tried to create more rules or add more targets to a rule than is allowed.
 type LimitExceededException struct {
@@ -118,12 +93,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This rule was created by an AWS service on behalf of your account. It is managed
 // by that service. If you see this error in response to DeleteRule or
@@ -145,12 +114,6 @@ func (e *ManagedRuleException) ErrorMessage() string {
 }
 func (e *ManagedRuleException) ErrorCode() string             { return "ManagedRuleException" }
 func (e *ManagedRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ManagedRuleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ManagedRuleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation you are attempting is not available in this region.
 type OperationDisabledException struct {
@@ -168,12 +131,6 @@ func (e *OperationDisabledException) ErrorMessage() string {
 }
 func (e *OperationDisabledException) ErrorCode() string             { return "OperationDisabledException" }
 func (e *OperationDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationDisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationDisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The event bus policy is too long. For more information, see the limits.
 type PolicyLengthExceededException struct {
@@ -191,12 +148,6 @@ func (e *PolicyLengthExceededException) ErrorMessage() string {
 }
 func (e *PolicyLengthExceededException) ErrorCode() string             { return "PolicyLengthExceededException" }
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyLengthExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyLengthExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you are trying to create already exists.
 type ResourceAlreadyExistsException struct {
@@ -214,12 +165,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An entity that you specified does not exist.
 type ResourceNotFoundException struct {
@@ -237,9 +182,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

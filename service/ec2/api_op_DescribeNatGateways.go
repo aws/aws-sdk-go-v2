@@ -55,8 +55,10 @@ func (c *Client) DescribeNatGateways(ctx context.Context, params *DescribeNatGat
 }
 
 type DescribeNatGatewaysInput struct {
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// One or more filters.
 	//
 	//     * nat-gateway-id - The ID of the NAT gateway.
@@ -81,22 +83,27 @@ type DescribeNatGatewaysInput struct {
 	//     * vpc-id - The ID of the VPC in which the NAT gateway
 	// resides.
 	Filter []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// One or more NAT gateway IDs.
 	NatGatewayIds []*string
 }
 
 type DescribeNatGatewaysOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the NAT gateways.
 	NatGateways []*types.NatGateway
 

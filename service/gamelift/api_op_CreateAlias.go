@@ -83,9 +83,13 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 
 // Represents the input for a request action.
 type CreateAliasInput struct {
+
 	// A descriptive label that is associated with an alias. Alias names do not need to
 	// be unique.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of labels to assign to the new alias resource. Tags are developer-defined
 	// key-value pairs. Tagging AWS resources are useful for resource management,
 	// access management and cost allocation. For more information, see  Tagging AWS
@@ -95,15 +99,20 @@ type CreateAliasInput struct {
 	// The maximum tag limit may be lower than stated. See the AWS General Reference
 	// for actual tagging limits.
 	Tags []*types.Tag
+
 	// A human-readable description of the alias.
 	Description *string
+
 	// The routing configuration, including routing type and fleet target, for the
 	// alias.
+	//
+	// This member is required.
 	RoutingStrategy *types.RoutingStrategy
 }
 
 // Represents the returned data in response to a request action.
 type CreateAliasOutput struct {
+
 	// The newly created alias resource.
 	Alias *types.Alias
 

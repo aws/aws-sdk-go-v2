@@ -57,13 +57,20 @@ func (c *Client) GetUserSettings(ctx context.Context, params *GetUserSettingsInp
 }
 
 type GetUserSettingsInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The user ID.
+	//
+	// This member is required.
 	UserId *string
 }
 
 type GetUserSettingsOutput struct {
+
 	// The user settings.
 	UserSettings *types.UserSettings
 

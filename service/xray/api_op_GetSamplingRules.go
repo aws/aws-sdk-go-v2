@@ -55,13 +55,16 @@ func (c *Client) GetSamplingRules(ctx context.Context, params *GetSamplingRulesI
 }
 
 type GetSamplingRulesInput struct {
+
 	// Pagination token.
 	NextToken *string
 }
 
 type GetSamplingRulesOutput struct {
+
 	// Rule definitions and metadata.
 	SamplingRuleRecords []*types.SamplingRuleRecord
+
 	// Pagination token.
 	NextToken *string
 

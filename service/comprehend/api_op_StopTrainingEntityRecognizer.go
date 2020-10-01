@@ -60,8 +60,11 @@ func (c *Client) StopTrainingEntityRecognizer(ctx context.Context, params *StopT
 }
 
 type StopTrainingEntityRecognizerInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer currently
 	// being trained.
+	//
+	// This member is required.
 	EntityRecognizerArn *string
 }
 

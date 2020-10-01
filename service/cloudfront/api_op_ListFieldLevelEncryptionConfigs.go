@@ -56,18 +56,21 @@ func (c *Client) ListFieldLevelEncryptionConfigs(ctx context.Context, params *Li
 }
 
 type ListFieldLevelEncryptionConfigsInput struct {
+
 	// Use this when paginating results to indicate where to begin in your list of
 	// configurations. The results include configurations in the list that occur after
 	// the marker. To get the next page of results, set the Marker to the value of the
 	// NextMarker from the current page's response (which is also the ID of the last
 	// configuration on that page).
 	Marker *string
+
 	// The maximum number of field-level encryption configurations you want in the
 	// response body.
 	MaxItems *string
 }
 
 type ListFieldLevelEncryptionConfigsOutput struct {
+
 	// Returns a list of all field-level encryption configurations that have been
 	// created in CloudFront for this account.
 	FieldLevelEncryptionList *types.FieldLevelEncryptionList

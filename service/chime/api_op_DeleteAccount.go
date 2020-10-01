@@ -62,7 +62,10 @@ func (c *Client) DeleteAccount(ctx context.Context, params *DeleteAccountInput, 
 }
 
 type DeleteAccountInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
 }
 

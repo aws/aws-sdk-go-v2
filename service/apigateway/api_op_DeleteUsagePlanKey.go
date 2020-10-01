@@ -59,16 +59,26 @@ func (c *Client) DeleteUsagePlanKey(ctx context.Context, params *DeleteUsagePlan
 // The DELETE request to delete a usage plan key and remove the underlying API key
 // from the associated usage plan.
 type DeleteUsagePlanKeyInput struct {
+
 	// [Required] The Id of the UsagePlanKey () resource to be deleted.
-	KeyId            *string
-	Name             *string
-	Title            *string
+	//
+	// This member is required.
+	KeyId *string
+
+	Name *string
+
+	Title *string
+
 	TemplateSkipList []*string
+
 	// [Required] The Id of the UsagePlan () resource representing the usage plan
 	// containing the to-be-deleted UsagePlanKey () resource representing a plan
 	// customer.
+	//
+	// This member is required.
 	UsagePlanId *string
-	Template    *bool
+
+	Template *bool
 }
 
 type DeleteUsagePlanKeyOutput struct {

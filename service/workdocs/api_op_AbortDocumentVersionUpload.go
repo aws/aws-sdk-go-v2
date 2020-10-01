@@ -58,10 +58,17 @@ func (c *Client) AbortDocumentVersionUpload(ctx context.Context, params *AbortDo
 }
 
 type AbortDocumentVersionUploadInput struct {
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
+
 	// The ID of the version.
+	//
+	// This member is required.
 	VersionId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string

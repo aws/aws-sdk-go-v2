@@ -59,10 +59,15 @@ func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, op
 // Request structure used to request generation of custom SDK and tool packages
 // required to integrate mobile web or app clients with backed AWS resources.
 type ExportBundleInput struct {
+
 	// Unique project identifier.
 	ProjectId *string
+
 	// Unique bundle identifier.
+	//
+	// This member is required.
 	BundleId *string
+
 	// Developer desktop or target application platform.
 	Platform types.Platform
 }
@@ -70,6 +75,7 @@ type ExportBundleInput struct {
 // Result structure which contains link to download custom-generated SDK and tool
 // packages used to integrate mobile web or app clients with backed AWS resources.
 type ExportBundleOutput struct {
+
 	// URL which contains the custom-generated SDK and tool packages used to integrate
 	// the client mobile app or web app with the AWS resources created by the AWS
 	// Mobile Hub project.

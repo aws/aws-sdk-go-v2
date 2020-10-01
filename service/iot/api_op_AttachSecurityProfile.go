@@ -57,9 +57,15 @@ func (c *Client) AttachSecurityProfile(ctx context.Context, params *AttachSecuri
 }
 
 type AttachSecurityProfileInput struct {
+
 	// The ARN of the target (thing group) to which the security profile is attached.
+	//
+	// This member is required.
 	SecurityProfileTargetArn *string
+
 	// The security profile that is attached.
+	//
+	// This member is required.
 	SecurityProfileName *string
 }
 

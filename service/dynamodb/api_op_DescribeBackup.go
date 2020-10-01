@@ -59,11 +59,15 @@ func (c *Client) DescribeBackup(ctx context.Context, params *DescribeBackupInput
 }
 
 type DescribeBackupInput struct {
+
 	// The Amazon Resource Name (ARN) associated with the backup.
+	//
+	// This member is required.
 	BackupArn *string
 }
 
 type DescribeBackupOutput struct {
+
 	// Contains the description of the backup created for the table.
 	BackupDescription *types.BackupDescription
 

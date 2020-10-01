@@ -58,12 +58,18 @@ func (c *Client) AddClientIDToOpenIDConnectProvider(ctx context.Context, params 
 }
 
 type AddClientIDToOpenIDConnectProviderInput struct {
+
 	// The client ID (also known as audience) to add to the IAM OpenID Connect provider
 	// resource.
+	//
+	// This member is required.
 	ClientID *string
+
 	// The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider
 	// resource to add the client ID to. You can get a list of OIDC provider ARNs by
 	// using the ListOpenIDConnectProviders () operation.
+	//
+	// This member is required.
 	OpenIDConnectProviderArn *string
 }
 

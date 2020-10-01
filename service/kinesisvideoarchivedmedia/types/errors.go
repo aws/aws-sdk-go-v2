@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
@@ -25,12 +24,6 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 }
 func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified parameter exceeds its restrictions, is not supported, or can't be
 // used.
@@ -49,12 +42,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The codec private data in at least one of the tracks of the video stream is not
 // valid for this operation.
@@ -75,12 +62,6 @@ func (e *InvalidCodecPrivateDataException) ErrorCode() string {
 	return "InvalidCodecPrivateDataException"
 }
 func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCodecPrivateDataException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCodecPrivateDataException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more frames in the requested clip could not be parsed based on the
 // specified codec.
@@ -99,12 +80,6 @@ func (e *InvalidMediaFrameException) ErrorMessage() string {
 }
 func (e *InvalidMediaFrameException) ErrorCode() string             { return "InvalidMediaFrameException" }
 func (e *InvalidMediaFrameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidMediaFrameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidMediaFrameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No codec private data was found in at least one of tracks of the video stream.
 type MissingCodecPrivateDataException struct {
@@ -124,12 +99,6 @@ func (e *MissingCodecPrivateDataException) ErrorCode() string {
 	return "MissingCodecPrivateDataException"
 }
 func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MissingCodecPrivateDataException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MissingCodecPrivateDataException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A streaming session was requested for a stream that does not retain data (that
 // is, has a DataRetentionInHours of 0).
@@ -148,12 +117,6 @@ func (e *NoDataRetentionException) ErrorMessage() string {
 }
 func (e *NoDataRetentionException) ErrorCode() string             { return "NoDataRetentionException" }
 func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoDataRetentionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoDataRetentionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Status Code: 403, The caller is not authorized to perform an operation on the
 // given stream, or the token has expired.
@@ -172,12 +135,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // GetMedia throws this error when Kinesis Video Streams can't find the stream that
 // you specified. GetHLSStreamingSessionURL and GetDASHStreamingSessionURL throw
@@ -200,12 +157,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio)
 // could not be determined from the codec IDs of the tracks in the first fragment
@@ -229,10 +180,4 @@ func (e *UnsupportedStreamMediaTypeException) ErrorCode() string {
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *UnsupportedStreamMediaTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedStreamMediaTypeException) HasMessage() bool {
-	return e.Message != nil
 }

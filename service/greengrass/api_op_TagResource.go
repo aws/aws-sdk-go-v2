@@ -59,8 +59,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 // A map of the key-value pairs for the resource tag.
 type TagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The key-value pair for the resource tag.
 	Tags map[string]*string
 }

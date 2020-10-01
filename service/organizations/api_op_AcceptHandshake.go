@@ -84,13 +84,17 @@ func (c *Client) AcceptHandshake(ctx context.Context, params *AcceptHandshakeInp
 }
 
 type AcceptHandshakeInput struct {
+
 	// The unique identifier (ID) of the handshake that you want to accept. The regex
 	// pattern (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-"
 	// followed by from 8 to 32 lowercase letters or digits.
+	//
+	// This member is required.
 	HandshakeId *string
 }
 
 type AcceptHandshakeOutput struct {
+
 	// A structure that contains details about the accepted handshake.
 	Handshake *types.Handshake
 

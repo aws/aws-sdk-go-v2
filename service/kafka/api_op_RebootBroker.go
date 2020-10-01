@@ -56,15 +56,23 @@ func (c *Client) RebootBroker(ctx context.Context, params *RebootBrokerInput, op
 
 // Reboots a node.
 type RebootBrokerInput struct {
+
 	// The list of broker IDs to be rebooted.
+	//
+	// This member is required.
 	BrokerIds []*string
+
 	// The Amazon Resource Name (ARN) of the cluster to be updated.
+	//
+	// This member is required.
 	ClusterArn *string
 }
 
 type RebootBrokerOutput struct {
+
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
+
 	// The Amazon Resource Name (ARN) of the cluster operation.
 	ClusterOperationArn *string
 

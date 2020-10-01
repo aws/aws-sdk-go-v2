@@ -57,12 +57,16 @@ func (c *Client) StopReplicationTask(ctx context.Context, params *StopReplicatio
 
 //
 type StopReplicationTaskInput struct {
+
 	// The Amazon Resource Name(ARN) of the replication task to be stopped.
+	//
+	// This member is required.
 	ReplicationTaskArn *string
 }
 
 //
 type StopReplicationTaskOutput struct {
+
 	// The replication task stopped.
 	ReplicationTask *types.ReplicationTask
 

@@ -57,14 +57,20 @@ func (c *Client) DeleteAdmChannel(ctx context.Context, params *DeleteAdmChannelI
 }
 
 type DeleteAdmChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteAdmChannelOutput struct {
+
 	// Provides information about the status and settings of the ADM (Amazon Device
 	// Messaging) channel for an application.
+	//
+	// This member is required.
 	ADMChannelResponse *types.ADMChannelResponse
 
 	// Metadata pertaining to the operation's result.

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An attachment with the specified ID could not be found.
@@ -24,12 +23,6 @@ func (e *AttachmentIdNotFound) ErrorMessage() string {
 }
 func (e *AttachmentIdNotFound) ErrorCode() string             { return "AttachmentIdNotFound" }
 func (e *AttachmentIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AttachmentIdNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AttachmentIdNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit for the number of attachment sets created in a short period of time
 // has been exceeded.
@@ -48,12 +41,6 @@ func (e *AttachmentLimitExceeded) ErrorMessage() string {
 }
 func (e *AttachmentLimitExceeded) ErrorCode() string             { return "AttachmentLimitExceeded" }
 func (e *AttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AttachmentLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AttachmentLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The expiration time of the attachment set has passed. The set expires 1 hour
 // after it is created.
@@ -72,12 +59,6 @@ func (e *AttachmentSetExpired) ErrorMessage() string {
 }
 func (e *AttachmentSetExpired) ErrorCode() string             { return "AttachmentSetExpired" }
 func (e *AttachmentSetExpired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AttachmentSetExpired) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AttachmentSetExpired) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An attachment set with the specified ID could not be found.
 type AttachmentSetIdNotFound struct {
@@ -95,12 +76,6 @@ func (e *AttachmentSetIdNotFound) ErrorMessage() string {
 }
 func (e *AttachmentSetIdNotFound) ErrorCode() string             { return "AttachmentSetIdNotFound" }
 func (e *AttachmentSetIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AttachmentSetIdNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AttachmentSetIdNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A limit for the size of an attachment set has been exceeded. The limits are
 // three attachments and 5 MB per attachment.
@@ -119,12 +94,6 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorMessage() string {
 }
 func (e *AttachmentSetSizeLimitExceeded) ErrorCode() string             { return "AttachmentSetSizeLimitExceeded" }
 func (e *AttachmentSetSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AttachmentSetSizeLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AttachmentSetSizeLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The case creation limit for the account has been exceeded.
 type CaseCreationLimitExceeded struct {
@@ -142,12 +111,6 @@ func (e *CaseCreationLimitExceeded) ErrorMessage() string {
 }
 func (e *CaseCreationLimitExceeded) ErrorCode() string             { return "CaseCreationLimitExceeded" }
 func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CaseCreationLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CaseCreationLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested caseId could not be located.
 type CaseIdNotFound struct {
@@ -165,12 +128,6 @@ func (e *CaseIdNotFound) ErrorMessage() string {
 }
 func (e *CaseIdNotFound) ErrorCode() string             { return "CaseIdNotFound" }
 func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CaseIdNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CaseIdNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit for the number of DescribeAttachment () requests in a short period of
 // time has been exceeded.
@@ -191,12 +148,6 @@ func (e *DescribeAttachmentLimitExceeded) ErrorCode() string {
 	return "DescribeAttachmentLimitExceeded"
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DescribeAttachmentLimitExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DescribeAttachmentLimitExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal server error occurred.
 type InternalServerError struct {
@@ -214,9 +165,3 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerError) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerError) HasMessage() bool {
-	return e.Message != nil
-}

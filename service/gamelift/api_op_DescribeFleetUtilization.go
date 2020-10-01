@@ -101,15 +101,18 @@ func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeF
 
 // Represents the input for a request action.
 type DescribeFleetUtilizationInput struct {
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
 	// request specifies one or a list of fleet IDs.
 	Limit *int32
+
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
 	NextToken *string
+
 	// A unique identifier for a fleet(s) to retrieve utilization data for. You can use
 	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
 	// do not include this parameter. If the list of fleet identifiers includes fleets
@@ -120,9 +123,11 @@ type DescribeFleetUtilizationInput struct {
 
 // Represents the returned data in response to a request action.
 type DescribeFleetUtilizationOutput struct {
+
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string
+
 	// A collection of objects containing utilization information for each requested
 	// fleet ID.
 	FleetUtilization []*types.FleetUtilization

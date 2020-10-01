@@ -59,34 +59,51 @@ func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotCha
 }
 
 type GetBotChannelAssociationInput struct {
+
 	// The name of the association between the bot and the channel. The name is case
 	// sensitive.
+	//
+	// This member is required.
 	Name *string
+
 	// An alias pointing to the specific version of the Amazon Lex bot to which this
 	// association is being made.
+	//
+	// This member is required.
 	BotAlias *string
+
 	// The name of the Amazon Lex bot.
+	//
+	// This member is required.
 	BotName *string
 }
 
 type GetBotChannelAssociationOutput struct {
+
 	// An alias pointing to the specific version of the Amazon Lex bot to which this
 	// association is being made.
 	BotAlias *string
+
 	// A description of the association between the bot and the channel.
 	Description *string
+
 	// The name of the Amazon Lex bot.
 	BotName *string
+
 	// If status is FAILED, Amazon Lex provides the reason that it failed to create the
 	// association.
 	FailureReason *string
+
 	// The date that the association between the bot and the channel was created.
 	CreatedDate *time.Time
+
 	// The type of the messaging platform.
 	Type types.ChannelType
+
 	// Provides information that the messaging platform needs to communicate with the
 	// Amazon Lex bot.
 	BotConfiguration map[string]*string
+
 	// The status of the bot channel.
 	//
 	//     * CREATED - The channel has been created and
@@ -98,6 +115,7 @@ type GetBotChannelAssociationOutput struct {
 	// FAILED - There was an error creating the channel. For information about the
 	// reason for the failure, see the failureReason field.
 	Status types.ChannelStatus
+
 	// The name of the association between the bot and the channel.
 	Name *string
 

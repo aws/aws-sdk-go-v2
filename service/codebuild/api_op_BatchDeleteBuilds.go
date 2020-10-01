@@ -56,13 +56,18 @@ func (c *Client) BatchDeleteBuilds(ctx context.Context, params *BatchDeleteBuild
 }
 
 type BatchDeleteBuildsInput struct {
+
 	// The IDs of the builds to delete.
+	//
+	// This member is required.
 	Ids []*string
 }
 
 type BatchDeleteBuildsOutput struct {
+
 	// The IDs of the builds that were successfully deleted.
 	BuildsDeleted []*string
+
 	// Information about any builds that could not be successfully deleted.
 	BuildsNotDeleted []*types.BuildNotDeleted
 

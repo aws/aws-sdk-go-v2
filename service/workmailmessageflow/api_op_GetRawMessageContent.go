@@ -55,12 +55,18 @@ func (c *Client) GetRawMessageContent(ctx context.Context, params *GetRawMessage
 }
 
 type GetRawMessageContentInput struct {
+
 	// The identifier of the email message to retrieve.
+	//
+	// This member is required.
 	MessageId *string
 }
 
 type GetRawMessageContentOutput struct {
+
 	// The raw content of the email message, in MIME format.
+	//
+	// This member is required.
 	MessageContent io.ReadCloser
 
 	// Metadata pertaining to the operation's result.

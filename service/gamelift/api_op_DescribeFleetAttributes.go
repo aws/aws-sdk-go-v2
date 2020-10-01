@@ -98,16 +98,19 @@ func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFl
 
 // Represents the input for a request action.
 type DescribeFleetAttributesInput struct {
+
 	// A list of unique fleet identifiers to retrieve attributes for. You can use
 	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
 	// do not include this parameter. If the list of fleet identifiers includes fleets
 	// that don't currently exist, the request succeeds but no attributes for that
 	// fleet are returned.
 	FleetIds []*string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
 	// request specifies one or a list of fleet IDs.
 	Limit *int32
+
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
@@ -117,9 +120,11 @@ type DescribeFleetAttributesInput struct {
 
 // Represents the returned data in response to a request action.
 type DescribeFleetAttributesOutput struct {
+
 	// A collection of objects containing attribute metadata for each requested fleet
 	// ID. Attribute objects are returned only for fleets that currently exist.
 	FleetAttributes []*types.FleetAttributes
+
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string

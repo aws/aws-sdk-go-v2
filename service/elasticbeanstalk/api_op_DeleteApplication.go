@@ -58,8 +58,12 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 
 // Request to delete an application.
 type DeleteApplicationInput struct {
+
 	// The name of the application to delete.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// When set to true, running environments will be terminated before deleting the
 	// application.
 	TerminateEnvByForce *bool

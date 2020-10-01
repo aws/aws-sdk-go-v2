@@ -55,6 +55,7 @@ func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistribut
 }
 
 type DeleteDistributionInput struct {
+
 	// The name of the distribution to delete.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p>
@@ -62,6 +63,7 @@ type DeleteDistributionInput struct {
 }
 
 type DeleteDistributionOutput struct {
+
 	// An object that describes the result of the action, such as the status of the
 	// request, the timestamp of the request, and the resources affected by the
 	// request.

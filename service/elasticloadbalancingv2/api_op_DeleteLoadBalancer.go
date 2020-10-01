@@ -61,7 +61,10 @@ func (c *Client) DeleteLoadBalancer(ctx context.Context, params *DeleteLoadBalan
 }
 
 type DeleteLoadBalancerInput struct {
+
 	// The Amazon Resource Name (ARN) of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerArn *string
 }
 

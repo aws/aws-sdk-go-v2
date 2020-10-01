@@ -57,28 +57,47 @@ func (c *Client) DescribeModel(ctx context.Context, params *DescribeModelInput, 
 }
 
 type DescribeModelInput struct {
+
 	// The name of the model.
+	//
+	// This member is required.
 	ModelName *string
 }
 
 type DescribeModelOutput struct {
+
 	// A VpcConfig () object that specifies the VPC that this model has access to. For
 	// more information, see Protect Endpoints by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	VpcConfig *types.VpcConfig
+
 	// The Amazon Resource Name (ARN) of the model.
+	//
+	// This member is required.
 	ModelArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
+	//
+	// This member is required.
 	ExecutionRoleArn *string
+
 	// The containers in the inference pipeline.
 	Containers []*types.ContainerDefinition
+
 	// Name of the Amazon SageMaker model.
+	//
+	// This member is required.
 	ModelName *string
+
 	// The location of the primary inference code, associated artifacts, and custom
 	// environment map that the inference code uses when it is deployed in production.
 	PrimaryContainer *types.ContainerDefinition
+
 	// A timestamp that shows when the model was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// If True, no inbound or outbound network calls can be made to or from the model
 	// container.
 	EnableNetworkIsolation *bool

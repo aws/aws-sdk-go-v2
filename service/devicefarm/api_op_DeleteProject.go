@@ -57,7 +57,10 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 
 // Represents a request to the delete project operation.
 type DeleteProjectInput struct {
+
 	// Represents the Amazon Resource Name (ARN) of the Device Farm project to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

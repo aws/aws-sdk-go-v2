@@ -62,7 +62,10 @@ func (c *Client) DeleteReusableDelegationSet(ctx context.Context, params *Delete
 
 // A request to delete a reusable delegation set.
 type DeleteReusableDelegationSetInput struct {
+
 	// The ID of the reusable delegation set that you want to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

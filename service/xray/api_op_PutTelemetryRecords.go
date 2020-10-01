@@ -56,12 +56,18 @@ func (c *Client) PutTelemetryRecords(ctx context.Context, params *PutTelemetryRe
 }
 
 type PutTelemetryRecordsInput struct {
+
 	//
+	//
+	// This member is required.
 	TelemetryRecords []*types.TelemetryRecord
+
 	//
 	EC2InstanceId *string
+
 	//
 	Hostname *string
+
 	//
 	ResourceARN *string
 }

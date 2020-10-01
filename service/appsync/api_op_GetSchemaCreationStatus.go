@@ -56,13 +56,18 @@ func (c *Client) GetSchemaCreationStatus(ctx context.Context, params *GetSchemaC
 }
 
 type GetSchemaCreationStatusInput struct {
+
 	// The API ID.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetSchemaCreationStatusOutput struct {
+
 	// Detailed information about the status of the schema creation operation.
 	Details *string
+
 	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or
 	// NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.
 	Status types.SchemaStatus

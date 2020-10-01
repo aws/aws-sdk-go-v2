@@ -56,26 +56,34 @@ func (c *Client) GetProducts(ctx context.Context, params *GetProductsInput, optF
 }
 
 type GetProductsInput struct {
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// The list of filters that limit the returned products. only products that match
 	// all filters are returned.
 	Filters []*types.Filter
+
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
 	NextToken *string
+
 	// The code for the service whose products you want to retrieve.
 	ServiceCode *string
+
 	// The format version that you want the response to be in. Valid values are: aws_v1
 	FormatVersion *string
 }
 
 type GetProductsOutput struct {
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// The list of products that match your filters. The list contains both the product
 	// metadata and the price information.
 	PriceList []*string
+
 	// The format version of the response. For example, aws_v1.
 	FormatVersion *string
 

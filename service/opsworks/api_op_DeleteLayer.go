@@ -63,7 +63,10 @@ func (c *Client) DeleteLayer(ctx context.Context, params *DeleteLayerInput, optF
 }
 
 type DeleteLayerInput struct {
+
 	// The layer ID.
+	//
+	// This member is required.
 	LayerId *string
 }
 

@@ -55,11 +55,15 @@ func (c *Client) StopEntitiesDetectionV2Job(ctx context.Context, params *StopEnt
 }
 
 type StopEntitiesDetectionV2JobInput struct {
+
 	// The identifier of the medical entities job to stop.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopEntitiesDetectionV2JobOutput struct {
+
 	// The identifier of the medical entities detection job that was stopped.
 	JobId *string
 

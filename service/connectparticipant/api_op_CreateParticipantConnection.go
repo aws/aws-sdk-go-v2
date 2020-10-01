@@ -66,18 +66,26 @@ func (c *Client) CreateParticipantConnection(ctx context.Context, params *Create
 }
 
 type CreateParticipantConnectionInput struct {
+
 	// Participant Token as obtained from StartChatContact
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html)
 	// API response.
+	//
+	// This member is required.
 	ParticipantToken *string
+
 	// Type of connection information required.
+	//
+	// This member is required.
 	Type []types.ConnectionType
 }
 
 type CreateParticipantConnectionOutput struct {
+
 	// Creates the participant's connection credentials. The authentication token
 	// associated with the participant's connection.
 	ConnectionCredentials *types.ConnectionCredentials
+
 	// Creates the participant's websocket connection.
 	Websocket *types.Websocket
 

@@ -59,14 +59,19 @@ func (c *Client) BatchGetJobs(ctx context.Context, params *BatchGetJobsInput, op
 }
 
 type BatchGetJobsInput struct {
+
 	// A list of job names, which might be the names returned from the ListJobs
 	// operation.
+	//
+	// This member is required.
 	JobNames []*string
 }
 
 type BatchGetJobsOutput struct {
+
 	// A list of names of jobs not found.
 	JobsNotFound []*string
+
 	// A list of job definitions.
 	Jobs []*types.Job
 

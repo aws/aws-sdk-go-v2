@@ -77,6 +77,7 @@ func (c *Client) InviteAccountToOrganization(ctx context.Context, params *Invite
 }
 
 type InviteAccountToOrganizationInput struct {
+
 	// The identifier (ID) of the AWS account that you want to invite to join your
 	// organization. This is a JSON object that contains the following elements: {
 	// "Type": "ACCOUNT", "Id": "< account id number >" } If you use the AWS CLI, you
@@ -85,13 +86,17 @@ type InviteAccountToOrganizationInput struct {
 	// the AWS account ID number as the Id. If you specify "Type": "EMAIL", you must
 	// specify the email address that is associated with the account. --target
 	// Id=diego@example.com,Type=EMAIL
+	//
+	// This member is required.
 	Target *types.HandshakeParty
+
 	// Additional information that you want to include in the generated email to the
 	// recipient account owner.
 	Notes *string
 }
 
 type InviteAccountToOrganizationOutput struct {
+
 	// A structure that contains details about the handshake that is created to support
 	// this invitation request.
 	Handshake *types.Handshake

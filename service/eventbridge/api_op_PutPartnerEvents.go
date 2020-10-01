@@ -57,14 +57,19 @@ func (c *Client) PutPartnerEvents(ctx context.Context, params *PutPartnerEventsI
 }
 
 type PutPartnerEventsInput struct {
+
 	// The list of events to write to the event bus.
+	//
+	// This member is required.
 	Entries []*types.PutPartnerEventsRequestEntry
 }
 
 type PutPartnerEventsOutput struct {
+
 	// The number of events from this operation that could not be written to the
 	// partner event bus.
 	FailedEntryCount *int32
+
 	// The list of events from this operation that were successfully written to the
 	// partner event bus.
 	Entries []*types.PutPartnerEventsResultEntry

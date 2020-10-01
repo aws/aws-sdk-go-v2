@@ -65,10 +65,16 @@ func (c *Client) PutRolePermissionsBoundary(ctx context.Context, params *PutRole
 }
 
 type PutRolePermissionsBoundaryInput struct {
+
 	// The ARN of the policy that is used to set the permissions boundary for the role.
+	//
+	// This member is required.
 	PermissionsBoundary *string
+
 	// The name (friendly name, not ARN) of the IAM role for which you want to set the
 	// permissions boundary.
+	//
+	// This member is required.
 	RoleName *string
 }
 

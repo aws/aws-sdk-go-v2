@@ -60,6 +60,7 @@ func (c *Client) ResetEbsDefaultKmsKeyId(ctx context.Context, params *ResetEbsDe
 }
 
 type ResetEbsDefaultKmsKeyIdInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -68,6 +69,7 @@ type ResetEbsDefaultKmsKeyIdInput struct {
 }
 
 type ResetEbsDefaultKmsKeyIdOutput struct {
+
 	// The Amazon Resource Name (ARN) of the default CMK for EBS encryption by default.
 	KmsKeyId *string
 

@@ -56,19 +56,29 @@ func (c *Client) DescribeThemePermissions(ctx context.Context, params *DescribeT
 }
 
 type DescribeThemePermissionsInput struct {
+
 	// The ID of the AWS account that contains the theme that you're describing.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the theme that you want to describe permissions for.
+	//
+	// This member is required.
 	ThemeId *string
 }
 
 type DescribeThemePermissionsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the theme.
 	ThemeArn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// A list of resource permissions set on the theme.
 	Permissions []*types.ResourcePermission
+
 	// The ID for the theme.
 	ThemeId *string
 

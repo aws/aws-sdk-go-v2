@@ -57,11 +57,15 @@ func (c *Client) StartTrigger(ctx context.Context, params *StartTriggerInput, op
 }
 
 type StartTriggerInput struct {
+
 	// The name of the trigger to start.
+	//
+	// This member is required.
 	Name *string
 }
 
 type StartTriggerOutput struct {
+
 	// The name of the trigger that was started.
 	Name *string
 

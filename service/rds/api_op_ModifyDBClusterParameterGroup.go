@@ -79,14 +79,21 @@ func (c *Client) ModifyDBClusterParameterGroup(ctx context.Context, params *Modi
 
 //
 type ModifyDBClusterParameterGroupInput struct {
+
 	// A list of parameters in the DB cluster parameter group to modify.
+	//
+	// This member is required.
 	Parameters []*types.Parameter
+
 	// The name of the DB cluster parameter group to modify.
+	//
+	// This member is required.
 	DBClusterParameterGroupName *string
 }
 
 //
 type ModifyDBClusterParameterGroupOutput struct {
+
 	// The name of the DB cluster parameter group. Constraints:
 	//
 	//     * Must be 1 to 255

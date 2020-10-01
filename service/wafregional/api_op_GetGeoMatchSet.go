@@ -62,12 +62,16 @@ func (c *Client) GetGeoMatchSet(ctx context.Context, params *GetGeoMatchSetInput
 }
 
 type GetGeoMatchSetInput struct {
+
 	// The GeoMatchSetId of the GeoMatchSet () that you want to get. GeoMatchSetId is
 	// returned by CreateGeoMatchSet () and by ListGeoMatchSets ().
+	//
+	// This member is required.
 	GeoMatchSetId *string
 }
 
 type GetGeoMatchSetOutput struct {
+
 	// Information about the GeoMatchSet () that you specified in the GetGeoMatchSet
 	// request. This includes the Type, which for a GeoMatchContraint is always
 	// Country, as well as the Value, which is the identifier for a specific country.

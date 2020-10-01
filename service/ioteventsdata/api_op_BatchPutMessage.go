@@ -60,12 +60,16 @@ func (c *Client) BatchPutMessage(ctx context.Context, params *BatchPutMessageInp
 }
 
 type BatchPutMessageInput struct {
+
 	// The list of messages to send. Each message has the following format: '{
 	// "messageId": "string", "inputName": "string", "payload": "string"}'
+	//
+	// This member is required.
 	Messages []*types.Message
 }
 
 type BatchPutMessageOutput struct {
+
 	// A list of any errors encountered when sending the messages.
 	BatchPutMessageErrorEntries []*types.BatchPutMessageErrorEntry
 

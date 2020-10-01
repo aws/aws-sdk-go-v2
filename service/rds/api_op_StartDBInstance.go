@@ -63,11 +63,15 @@ func (c *Client) StartDBInstance(ctx context.Context, params *StartDBInstanceInp
 }
 
 type StartDBInstanceInput struct {
+
 	// The user-supplied instance identifier.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
 }
 
 type StartDBInstanceOutput struct {
+
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
 	// response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance

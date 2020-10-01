@@ -56,24 +56,44 @@ func (c *Client) GetConfig(ctx context.Context, params *GetConfigInput, optFns .
 
 //
 type GetConfigInput struct {
+
 	// UUID of a Config.
+	//
+	// This member is required.
 	ConfigId *string
+
 	// Type of a Config.
+	//
+	// This member is required.
 	ConfigType types.ConfigCapabilityType
 }
 
 //
 type GetConfigOutput struct {
+
 	// ARN of a Config
+	//
+	// This member is required.
 	ConfigArn *string
+
 	// Data elements in a Config.
+	//
+	// This member is required.
 	ConfigData types.ConfigTypeData
+
 	// UUID of a Config.
+	//
+	// This member is required.
 	ConfigId *string
+
 	// Type of a Config.
 	ConfigType types.ConfigCapabilityType
+
 	// Name of a Config.
+	//
+	// This member is required.
 	Name *string
+
 	// Tags assigned to a Config.
 	Tags map[string]*string
 

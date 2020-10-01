@@ -59,15 +59,26 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 }
 
 type PutSessionInput struct {
+
 	// The ID of the client application user. Amazon Lex uses this to identify a user's
 	// conversation with your bot.
+	//
+	// This member is required.
 	UserId *string
+
 	// The name of the bot that contains the session data.
+	//
+	// This member is required.
 	BotName *string
+
 	// The alias in use for the bot that contains the session data.
+	//
+	// This member is required.
 	BotAlias *string
+
 	// Sets the next action that the bot should take to fulfill the conversation.
 	DialogAction *types.DialogAction
+
 	// A summary of the recent intents for the bot. You can use the intent summary view
 	// to set a checkpoint label on an intent and modify attributes of intents. You can
 	// also use it to remove or add intent summary objects to the list. An intent that
@@ -88,6 +99,7 @@ type PutSessionInput struct {
 	// one intent in the summary view, the next call to GetSession will only return one
 	// intent.
 	RecentIntentSummaryView []*types.IntentSummary
+
 	// The message that Amazon Lex returns in the response can be either text or speech
 	// based depending on the value of this field.
 	//
@@ -117,6 +129,7 @@ type PutSessionInput struct {
 	//
 	//         * text/plain; charset=utf-8
 	Accept *string
+
 	// Map of key/value pairs representing the session-specific context information. It
 	// contains application information passed between Amazon Lex and a client
 	// application.
@@ -124,6 +137,7 @@ type PutSessionInput struct {
 }
 
 type PutSessionOutput struct {
+
 	// Map of zero or more intent slots Amazon Lex detected from the user input during
 	// the conversation. Amazon Lex creates a resolution list containing likely values
 	// for a slot. The value that it returns is determined by the
@@ -135,6 +149,7 @@ type PutSessionOutput struct {
 	// don't specify a valueSelectionStrategy the default is ORIGINAL_VALUE.
 	// This value conforms to the media type: application/json
 	Slots *string
+
 	// The format of the response message. One of the following values:
 	//
 	//     *
@@ -150,13 +165,17 @@ type PutSessionOutput struct {
 	// escaped JSON object containing one or more messages from the groups that
 	// messages were assigned to when the intent was created.
 	MessageFormat types.MessageFormatType
+
 	// The name of the current intent.
 	IntentName *string
+
 	// A unique identifier for the session.
 	SessionId *string
+
 	// Map of key/value pairs representing session-specific context information.
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
+
 	// * ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response to confirm
 	// the intent before fulfilling an intent.
 	//
@@ -177,12 +196,16 @@ type PutSessionOutput struct {
 	//     *
 	// ReadyForFulfillment - Conveys that the client has to fulfill the intent.
 	DialogState types.DialogState
+
 	// The audio version of the message to convey to the user.
 	AudioStream io.ReadCloser
+
 	// The next message that should be presented to the user.
 	Message *string
+
 	// Content type as specified in the Accept HTTP header in the request.
 	ContentType *string
+
 	// If the dialogState is ElicitSlot, returns the name of the slot for which Amazon
 	// Lex is eliciting a value.
 	SlotToElicit *string

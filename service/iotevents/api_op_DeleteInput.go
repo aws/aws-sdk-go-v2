@@ -55,7 +55,10 @@ func (c *Client) DeleteInput(ctx context.Context, params *DeleteInputInput, optF
 }
 
 type DeleteInputInput struct {
+
 	// The name of the input to delete.
+	//
+	// This member is required.
 	InputName *string
 }
 

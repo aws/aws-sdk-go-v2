@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The resource hierarchy is changing.
@@ -26,12 +25,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Another operation is in progress on the resource that conflicts with the current
 // operation.
@@ -50,12 +43,6 @@ func (e *ConflictingOperationException) ErrorMessage() string {
 }
 func (e *ConflictingOperationException) ErrorCode() string             { return "ConflictingOperationException" }
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictingOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictingOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit has been reached on the number of custom properties for the specified
 // resource.
@@ -77,12 +64,6 @@ func (e *CustomMetadataLimitExceededException) ErrorCode() string {
 }
 func (e *CustomMetadataLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *CustomMetadataLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CustomMetadataLimitExceededException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The last user in the organization is being deactivated.
@@ -107,18 +88,6 @@ func (e *DeactivatingLastSystemUserException) ErrorCode() string {
 func (e *DeactivatingLastSystemUserException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DeactivatingLastSystemUserException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *DeactivatingLastSystemUserException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *DeactivatingLastSystemUserException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DeactivatingLastSystemUserException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when the document is locked for comments and user tries
 // to create or delete a comment on that document.
@@ -141,12 +110,6 @@ func (e *DocumentLockedForCommentsException) ErrorCode() string {
 func (e *DocumentLockedForCommentsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DocumentLockedForCommentsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DocumentLockedForCommentsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception is thrown when a valid checkout ID is not presented on document
 // version upload calls for a document that has been checked out from Web client.
@@ -165,12 +128,6 @@ func (e *DraftUploadOutOfSyncException) ErrorMessage() string {
 }
 func (e *DraftUploadOutOfSyncException) ErrorCode() string             { return "DraftUploadOutOfSyncException" }
 func (e *DraftUploadOutOfSyncException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DraftUploadOutOfSyncException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DraftUploadOutOfSyncException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource already exists.
 type EntityAlreadyExistsException struct {
@@ -188,12 +145,6 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 }
 func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExistsException" }
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource does not exist.
 type EntityNotExistsException struct {
@@ -213,18 +164,6 @@ func (e *EntityNotExistsException) ErrorMessage() string {
 }
 func (e *EntityNotExistsException) ErrorCode() string             { return "EntityNotExistsException" }
 func (e *EntityNotExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityNotExistsException) GetEntityIds() []*string {
-	return e.EntityIds
-}
-func (e *EntityNotExistsException) HasEntityIds() bool {
-	return e.EntityIds != nil
-}
-func (e *EntityNotExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityNotExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The AWS Directory Service cannot reach an on-premises instance. Or a dependency
 // under the control of the organization is failing, such as a connected Active
@@ -244,12 +183,6 @@ func (e *FailedDependencyException) ErrorMessage() string {
 }
 func (e *FailedDependencyException) ErrorCode() string             { return "FailedDependencyException" }
 func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FailedDependencyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FailedDependencyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The user is undergoing transfer of ownership.
 type IllegalUserStateException struct {
@@ -267,12 +200,6 @@ func (e *IllegalUserStateException) ErrorMessage() string {
 }
 func (e *IllegalUserStateException) ErrorCode() string             { return "IllegalUserStateException" }
 func (e *IllegalUserStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IllegalUserStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IllegalUserStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pagination marker or limit fields are not valid.
 type InvalidArgumentException struct {
@@ -290,12 +217,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation is not allowed on the specified comment object.
 type InvalidCommentOperationException struct {
@@ -315,12 +236,6 @@ func (e *InvalidCommentOperationException) ErrorCode() string {
 	return "InvalidCommentOperationException"
 }
 func (e *InvalidCommentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidCommentOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidCommentOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation is invalid.
 type InvalidOperationException struct {
@@ -338,12 +253,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 }
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The password is invalid.
 type InvalidPasswordException struct {
@@ -361,12 +270,6 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 }
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPasswordException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPasswordException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum of 100,000 folders under the parent folder has been exceeded.
 type LimitExceededException struct {
@@ -384,12 +287,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified document version is not in the INITIALIZED state.
 type ProhibitedStateException struct {
@@ -407,12 +304,6 @@ func (e *ProhibitedStateException) ErrorMessage() string {
 }
 func (e *ProhibitedStateException) ErrorCode() string             { return "ProhibitedStateException" }
 func (e *ProhibitedStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ProhibitedStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProhibitedStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The response is too large to return. The request must include a filter to reduce
 // the size of the response.
@@ -433,12 +324,6 @@ func (e *RequestedEntityTooLargeException) ErrorCode() string {
 	return "RequestedEntityTooLargeException"
 }
 func (e *RequestedEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestedEntityTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestedEntityTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is already checked out.
 type ResourceAlreadyCheckedOutException struct {
@@ -460,12 +345,6 @@ func (e *ResourceAlreadyCheckedOutException) ErrorCode() string {
 func (e *ResourceAlreadyCheckedOutException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceAlreadyCheckedOutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyCheckedOutException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the dependencies is unavailable.
 type ServiceUnavailableException struct {
@@ -483,12 +362,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The storage limit has been exceeded.
 type StorageLimitExceededException struct {
@@ -506,12 +379,6 @@ func (e *StorageLimitExceededException) ErrorMessage() string {
 }
 func (e *StorageLimitExceededException) ErrorCode() string             { return "StorageLimitExceededException" }
 func (e *StorageLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StorageLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StorageLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The storage limit will be exceeded.
 type StorageLimitWillExceedException struct {
@@ -531,12 +398,6 @@ func (e *StorageLimitWillExceedException) ErrorCode() string {
 	return "StorageLimitWillExceedException"
 }
 func (e *StorageLimitWillExceedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *StorageLimitWillExceedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *StorageLimitWillExceedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit has been reached on the number of labels for the specified resource.
 type TooManyLabelsException struct {
@@ -554,12 +415,6 @@ func (e *TooManyLabelsException) ErrorMessage() string {
 }
 func (e *TooManyLabelsException) ErrorCode() string             { return "TooManyLabelsException" }
 func (e *TooManyLabelsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyLabelsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyLabelsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've reached the limit on the number of subscriptions for the WorkDocs
 // instance.
@@ -578,12 +433,6 @@ func (e *TooManySubscriptionsException) ErrorMessage() string {
 }
 func (e *TooManySubscriptionsException) ErrorCode() string             { return "TooManySubscriptionsException" }
 func (e *TooManySubscriptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManySubscriptionsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManySubscriptionsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation is not permitted.
 type UnauthorizedOperationException struct {
@@ -603,18 +452,6 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 }
 func (e *UnauthorizedOperationException) ErrorCode() string             { return "UnauthorizedOperationException" }
 func (e *UnauthorizedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedOperationException) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *UnauthorizedOperationException) HasCode() bool {
-	return e.Code != nil
-}
-func (e *UnauthorizedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The caller does not have access to perform the action on the resource.
 type UnauthorizedResourceAccessException struct {
@@ -635,10 +472,4 @@ func (e *UnauthorizedResourceAccessException) ErrorCode() string {
 }
 func (e *UnauthorizedResourceAccessException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *UnauthorizedResourceAccessException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedResourceAccessException) HasMessage() bool {
-	return e.Message != nil
 }

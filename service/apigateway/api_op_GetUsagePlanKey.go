@@ -58,15 +58,24 @@ func (c *Client) GetUsagePlanKey(ctx context.Context, params *GetUsagePlanKeyInp
 // The GET request to get a usage plan key of a given key identifier.
 type GetUsagePlanKeyInput struct {
 	Template *bool
-	Name     *string
+
+	Name *string
+
 	// [Required] The key Id of the to-be-retrieved UsagePlanKey () resource
 	// representing a plan customer.
-	KeyId            *string
+	//
+	// This member is required.
+	KeyId *string
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// [Required] The Id of the UsagePlan () resource representing the usage plan
 	// containing the to-be-retrieved UsagePlanKey () resource representing a plan
 	// customer.
+	//
+	// This member is required.
 	UsagePlanId *string
 }
 
@@ -75,12 +84,16 @@ type GetUsagePlanKeyInput struct {
 // resource to represent the selected ApiKey (). " Create and Use Usage Plans
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type GetUsagePlanKeyOutput struct {
+
 	// The name of a usage plan key.
 	Name *string
+
 	// The value of a usage plan key.
 	Value *string
+
 	// The Id of a usage plan key.
 	Id *string
+
 	// The type of a usage plan key. Currently, the valid key type is API_KEY.
 	Type *string
 

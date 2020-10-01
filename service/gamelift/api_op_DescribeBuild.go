@@ -72,13 +72,17 @@ func (c *Client) DescribeBuild(ctx context.Context, params *DescribeBuildInput, 
 
 // Represents the input for a request action.
 type DescribeBuildInput struct {
+
 	// A unique identifier for a build to retrieve properties for. You can use either
 	// the build ID or ARN value.
+	//
+	// This member is required.
 	BuildId *string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeBuildOutput struct {
+
 	// Set of properties describing the requested build.
 	Build *types.Build
 

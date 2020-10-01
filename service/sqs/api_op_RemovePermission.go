@@ -69,11 +69,17 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 
 //
 type RemovePermissionInput struct {
+
 	// The URL of the Amazon SQS queue from which permissions are removed. Queue URLs
 	// and names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// The identification of the permission to remove. This is the label added using
 	// the AddPermission () action.
+	//
+	// This member is required.
 	Label *string
 }
 

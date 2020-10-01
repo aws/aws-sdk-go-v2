@@ -56,13 +56,20 @@ func (c *Client) ModifyTargetGroupAttributes(ctx context.Context, params *Modify
 }
 
 type ModifyTargetGroupAttributesInput struct {
+
 	// The Amazon Resource Name (ARN) of the target group.
+	//
+	// This member is required.
 	TargetGroupArn *string
+
 	// The attributes.
+	//
+	// This member is required.
 	Attributes []*types.TargetGroupAttribute
 }
 
 type ModifyTargetGroupAttributesOutput struct {
+
 	// Information about the attributes.
 	Attributes []*types.TargetGroupAttribute
 

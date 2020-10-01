@@ -57,15 +57,20 @@ func (c *Client) GetDistributionConfig(ctx context.Context, params *GetDistribut
 
 // The request to get a distribution configuration.
 type GetDistributionConfigInput struct {
+
 	// The distribution's ID. If the ID is empty, an empty distribution configuration
 	// is returned.
+	//
+	// This member is required.
 	Id *string
 }
 
 // The returned result of the corresponding request.
 type GetDistributionConfigOutput struct {
+
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string
+
 	// The distribution's configuration information.
 	DistributionConfig *types.DistributionConfig
 

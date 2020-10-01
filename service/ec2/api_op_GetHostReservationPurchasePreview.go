@@ -59,21 +59,31 @@ func (c *Client) GetHostReservationPurchasePreview(ctx context.Context, params *
 }
 
 type GetHostReservationPurchasePreviewInput struct {
+
 	// The IDs of the Dedicated Hosts with which the reservation is associated.
+	//
+	// This member is required.
 	HostIdSet []*string
+
 	// The offering ID of the reservation.
+	//
+	// This member is required.
 	OfferingId *string
 }
 
 type GetHostReservationPurchasePreviewOutput struct {
+
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts are
 	// specified. At this time, the only supported currency is USD.
 	CurrencyCode types.CurrencyCodeValues
+
 	// The potential total hourly price of the reservation per hour.
 	TotalHourlyPrice *string
+
 	// The purchase information of the Dedicated Host reservation and the Dedicated
 	// Hosts associated with it.
 	Purchase []*types.Purchase
+
 	// The potential total upfront price. This is billed immediately.
 	TotalUpfrontPrice *string
 

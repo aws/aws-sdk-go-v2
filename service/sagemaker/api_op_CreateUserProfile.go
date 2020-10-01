@@ -62,28 +62,39 @@ func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfil
 }
 
 type CreateUserProfileInput struct {
+
 	// The username of the associated AWS Single Sign-On User for this UserProfile. If
 	// the Domain's AuthMode is SSO, this field is required, and must match a valid
 	// username of a user in your directory. If the Domain's AuthMode is not SSO, this
 	// field cannot be specified.
 	SingleSignOnUserValue *string
+
 	// A collection of settings.
 	UserSettings *types.UserSettings
+
 	// The ID of the associated Domain.
+	//
+	// This member is required.
 	DomainId *string
+
 	// A specifier for the type of value specified in SingleSignOnUserValue. Currently,
 	// the only supported value is "UserName". If the Domain's AuthMode is SSO, this
 	// field is required. If the Domain's AuthMode is not SSO, this field cannot be
 	// specified.
 	SingleSignOnUserIdentifier *string
+
 	// A name for the UserProfile.
+	//
+	// This member is required.
 	UserProfileName *string
+
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
 	Tags []*types.Tag
 }
 
 type CreateUserProfileOutput struct {
+
 	// The user profile Amazon Resource Name (ARN).
 	UserProfileArn *string
 

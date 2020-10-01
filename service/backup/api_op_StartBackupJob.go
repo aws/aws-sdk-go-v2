@@ -57,6 +57,7 @@ func (c *Client) StartBackupJob(ctx context.Context, params *StartBackupJobInput
 }
 
 type StartBackupJobInput struct {
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup will transition and expire backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
@@ -65,37 +66,53 @@ type StartBackupJobInput struct {
 	// days” setting. The “transition to cold after days” setting cannot be changed
 	// after a backup has been transitioned to cold.
 	Lifecycle *types.Lifecycle
+
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional.
 	StartWindowMinutes *int64
+
 	// A value in minutes after a backup job is successfully started before it must be
 	// completed or it will be canceled by AWS Backup. This value is optional.
 	CompleteWindowMinutes *int64
+
 	// Specifies the IAM role ARN used to create the target recovery point; for
 	// example, arn:aws:iam::123456789012:role/S3Access.
+	//
+	// This member is required.
 	IamRoleArn *string
+
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
 	RecoveryPointTags map[string]*string
+
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
 	// AWS Region where they are created. They consist of lowercase letters, numbers,
 	// and hyphens.
+	//
+	// This member is required.
 	BackupVaultName *string
+
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
 	// the ARN depends on the resource type.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// A customer chosen string that can be used to distinguish between calls to
 	// StartBackupJob.
 	IdempotencyToken *string
 }
 
 type StartBackupJobOutput struct {
+
 	// An ARN that uniquely identifies a recovery point; for example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
 	RecoveryPointArn *string
+
 	// Uniquely identifies a request to AWS Backup to back up a resource.
 	BackupJobId *string
+
 	// The date and time that a backup job is started, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
 	// example, the value 1516925490.087 represents Friday, January 26, 2018

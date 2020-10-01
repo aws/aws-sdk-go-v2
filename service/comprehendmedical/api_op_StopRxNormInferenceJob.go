@@ -55,11 +55,15 @@ func (c *Client) StopRxNormInferenceJob(ctx context.Context, params *StopRxNormI
 }
 
 type StopRxNormInferenceJobInput struct {
+
 	// The identifier of the job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type StopRxNormInferenceJobOutput struct {
+
 	// The identifier generated for the job. To get the status of job, use this
 	// identifier with the DescribeRxNormInferenceJob operation.
 	JobId *string

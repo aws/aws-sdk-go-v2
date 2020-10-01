@@ -58,6 +58,7 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 }
 
 type DescribeScalingActivitiesInput struct {
+
 	// The identifier of the resource associated with the scaling activity. This string
 	// consists of the resource type and unique identifier. If you specify a scalable
 	// dimension, you must also specify a resource ID.
@@ -117,6 +118,7 @@ type DescribeScalingActivitiesInput struct {
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
 	ResourceId *string
+
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property. If you specify a scalable dimension, you must also
 	// specify a resource ID.
@@ -175,11 +177,16 @@ type DescribeScalingActivitiesInput struct {
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
 	ScalableDimension types.ScalableDimension
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The namespace of the AWS service that provides the resource. For a resource
 	// provided by your own application or service, use custom-resource instead.
+	//
+	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
 	// The maximum number of scalable targets. This value can be between 1 and 50. The
 	// default value is 50. If this parameter is used, the operation returns up to
 	// MaxResults results at a time, along with a NextToken value. To get the next set
@@ -190,8 +197,10 @@ type DescribeScalingActivitiesInput struct {
 }
 
 type DescribeScalingActivitiesOutput struct {
+
 	// A list of scaling activity objects.
 	ScalingActivities []*types.ScalingActivity
+
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string

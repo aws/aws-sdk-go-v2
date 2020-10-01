@@ -67,9 +67,13 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 }
 
 type UpdateWebACLInput struct {
+
 	// The name of the Web ACL. You cannot change the name of a Web ACL after you
 	// create it.
+	//
+	// This member is required.
 	Name *string
+
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to
@@ -77,7 +81,10 @@ type UpdateWebACLInput struct {
 	// changes have been made to the entity since you last retrieved it. If a change
 	// has been made, the update fails with a WAFOptimisticLockException. If this
 	// happens, perform another get, and use the new token returned by that operation.
+	//
+	// This member is required.
 	LockToken *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -88,25 +95,39 @@ type UpdateWebACLInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// The action to perform if none of the Rules contained in the WebACL match.
+	//
+	// This member is required.
 	DefaultAction *types.DefaultAction
+
 	// The Rule () statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
 	Rules []*types.Rule
+
 	// A description of the Web ACL that helps with identification. You cannot change
 	// the description of a Web ACL after you create it.
 	Description *string
+
 	// The unique identifier for the Web ACL. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
 	Id *string
+
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//
+	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 }
 
 type UpdateWebACLOutput struct {
+
 	// A token used for optimistic locking. AWS WAF returns this token to your update
 	// requests. You use NextLockToken in the same manner as you use LockToken.
 	NextLockToken *string

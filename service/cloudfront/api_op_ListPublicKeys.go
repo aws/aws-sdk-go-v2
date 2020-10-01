@@ -55,8 +55,10 @@ func (c *Client) ListPublicKeys(ctx context.Context, params *ListPublicKeysInput
 }
 
 type ListPublicKeysInput struct {
+
 	// The maximum number of public keys you want in the response body.
 	MaxItems *string
+
 	// Use this when paginating results to indicate where to begin in your list of
 	// public keys. The results include public keys in the list that occur after the
 	// marker. To get the next page of results, set the Marker to the value of the
@@ -66,6 +68,7 @@ type ListPublicKeysInput struct {
 }
 
 type ListPublicKeysOutput struct {
+
 	// Returns a list of all public keys that have been added to CloudFront for this
 	// account.
 	PublicKeyList *types.PublicKeyList

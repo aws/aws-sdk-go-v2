@@ -57,11 +57,15 @@ func (c *Client) GetChannel(ctx context.Context, params *GetChannelInput, optFns
 }
 
 type GetChannelInput struct {
+
 	// ARN of the channel for which the configuration is to be retrieved.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetChannelOutput struct {
+
 	// Object specifying a channel.
 	Channel *types.Channel
 

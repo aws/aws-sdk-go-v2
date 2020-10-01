@@ -59,14 +59,21 @@ func (c *Client) GetUICustomization(ctx context.Context, params *GetUICustomizat
 }
 
 type GetUICustomizationInput struct {
+
 	// The client ID for the client app.
 	ClientId *string
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 
 type GetUICustomizationOutput struct {
+
 	// The UI customization information.
+	//
+	// This member is required.
 	UICustomization *types.UICustomizationType
 
 	// Metadata pertaining to the operation's result.

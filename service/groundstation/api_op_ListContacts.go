@@ -58,29 +58,45 @@ func (c *Client) ListContacts(ctx context.Context, params *ListContactsInput, op
 
 //
 type ListContactsInput struct {
+
 	// End time of a contact.
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// Name of a ground station.
 	GroundStation *string
+
 	// Maximum number of contacts returned.
 	MaxResults *int32
+
 	// ARN of a mission profile.
 	MissionProfileArn *string
+
 	// Next token returned in the request of a previous ListContacts call. Used to get
 	// the next page of results.
 	NextToken *string
+
 	// ARN of a satellite.
 	SatelliteArn *string
+
 	// Start time of a contact.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// Status of a contact reservation.
+	//
+	// This member is required.
 	StatusList []types.ContactStatus
 }
 
 //
 type ListContactsOutput struct {
+
 	// List of contacts.
 	ContactList []*types.ContactData
+
 	// Next token returned in the response of a previous ListContacts call. Used to get
 	// the next page of results.
 	NextToken *string

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // EnableHealthServiceAccessForOrganization () is already in progress. Wait for the
@@ -28,12 +27,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified pagination token (nextToken) is not valid.
 type InvalidPaginationToken struct {
@@ -51,12 +44,6 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 }
 func (e *InvalidPaginationToken) ErrorCode() string             { return "InvalidPaginationToken" }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPaginationToken) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPaginationToken) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified locale is not supported.
 type UnsupportedLocale struct {
@@ -74,9 +61,3 @@ func (e *UnsupportedLocale) ErrorMessage() string {
 }
 func (e *UnsupportedLocale) ErrorCode() string             { return "UnsupportedLocale" }
 func (e *UnsupportedLocale) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedLocale) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedLocale) HasMessage() bool {
-	return e.Message != nil
-}

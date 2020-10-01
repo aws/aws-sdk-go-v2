@@ -61,11 +61,13 @@ func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optF
 
 //
 type SendMessageInput struct {
+
 	// Each message attribute consists of a Name, Type, and Value. For more
 	// information, see Amazon SQS Message Attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]*types.MessageAttributeValue
+
 	// This parameter applies only to FIFO (first-in-first-out) queues. The tag that
 	// specifies that a message belongs to a specific message group. Messages that
 	// belong to the same message group are processed in a FIFO manner (however,
@@ -91,6 +93,7 @@ type SendMessageInput struct {
 	// in the Amazon Simple Queue Service Developer Guide. MessageGroupId is required
 	// for FIFO queues. You can't use it for Standard queues.
 	MessageGroupId *string
+
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of sent messages. If a message with a particular
 	// MessageDeduplicationId is sent successfully, any messages sent with the same
@@ -142,6 +145,7 @@ type SendMessageInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageDeduplicationId *string
+
 	// The length of time, in seconds, for which to delay a specific message. Valid
 	// values: 0 to 900. Maximum: 15 minutes. Messages with a positive DelaySeconds
 	// value become available for processing after the delay period is finished. If you
@@ -149,9 +153,13 @@ type SendMessageInput struct {
 	// FifoQueue, you can't set DelaySeconds per message. You can set this parameter
 	// only on a queue level.
 	DelaySeconds *int32
+
 	// The URL of the Amazon SQS queue to which a message is sent. Queue URLs and names
 	// are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// The message system attribute to send. Each message system attribute consists of
 	// a Name, Type, and Value.
 	//
@@ -162,36 +170,44 @@ type SendMessageInput struct {
 	//     * The size of a message
 	// system attribute doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]*types.MessageSystemAttributeValue
+
 	// The message to send. The maximum string size is 256 KB. A message can include
 	// only XML, JSON, and unformatted text. The following Unicode characters are
 	// allowed: #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to #xFFFD | #x10000 to
 	// #x10FFFF Any characters not included in this list will be rejected. For more
 	// information, see the W3C specification for characters
 	// (http://www.w3.org/TR/REC-xml/#charsets).
+	//
+	// This member is required.
 	MessageBody *string
 }
 
 // The MD5OfMessageBody and MessageId elements.
 type SendMessageOutput struct {
+
 	// An MD5 digest of the non-URL-encoded message system attribute string. You can
 	// use this attribute to verify that Amazon SQS received the message correctly.
 	// Amazon SQS URL-decodes the message before creating the MD5 digest.
 	MD5OfMessageSystemAttributes *string
+
 	// This parameter applies only to FIFO (first-in-first-out) queues. The large,
 	// non-consecutive number that Amazon SQS assigns to each message. The length of
 	// SequenceNumber is 128 bits. SequenceNumber continues to increase for a
 	// particular MessageGroupId.
 	SequenceNumber *string
+
 	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
 	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
 	// URL-decodes the message before creating the MD5 digest. For information about
 	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
 	MD5OfMessageAttributes *string
+
 	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
 	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
 	// URL-decodes the message before creating the MD5 digest. For information about
 	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
 	MD5OfMessageBody *string
+
 	// An attribute containing the MessageId of the message sent to the queue. For more
 	// information, see Queue and Message Identifiers
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)

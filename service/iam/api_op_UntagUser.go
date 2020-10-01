@@ -58,13 +58,19 @@ func (c *Client) UntagUser(ctx context.Context, params *UntagUserInput, optFns .
 }
 
 type UntagUserInput struct {
+
 	// The name of the IAM user from which you want to remove tags. This parameter
 	// accepts (through its regex pattern (http://wikipedia.org/wiki/regex)) a string
 	// of characters that consist of upper and lowercase alphanumeric characters with
 	// no spaces. You can also include any of the following characters: =,.@-
+	//
+	// This member is required.
 	UserName *string
+
 	// A list of key names as a simple array of strings. The tags with matching keys
 	// are removed from the specified user.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

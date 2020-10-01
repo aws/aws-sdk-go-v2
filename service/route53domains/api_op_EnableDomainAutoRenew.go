@@ -62,7 +62,10 @@ func (c *Client) EnableDomainAutoRenew(ctx context.Context, params *EnableDomain
 }
 
 type EnableDomainAutoRenewInput struct {
+
 	// The name of the domain that you want to enable automatic renewal for.
+	//
+	// This member is required.
 	DomainName *string
 }
 

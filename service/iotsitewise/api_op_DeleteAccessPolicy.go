@@ -59,8 +59,12 @@ func (c *Client) DeleteAccessPolicy(ctx context.Context, params *DeleteAccessPol
 }
 
 type DeleteAccessPolicyInput struct {
+
 	// The ID of the access policy to be deleted.
+	//
+	// This member is required.
 	AccessPolicyId *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.

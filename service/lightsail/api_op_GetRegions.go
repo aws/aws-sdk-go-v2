@@ -56,10 +56,12 @@ func (c *Client) GetRegions(ctx context.Context, params *GetRegionsInput, optFns
 }
 
 type GetRegionsInput struct {
+
 	// A Boolean value indicating whether to also include Availability Zones in your
 	// get regions request. Availability Zones are indicated with a letter: e.g.,
 	// us-east-2a.
 	IncludeAvailabilityZones *bool
+
 	// >A Boolean value indicating whether to also include Availability Zones for
 	// databases in your get regions request. Availability Zones are indicated with a
 	// letter (e.g., us-east-2a).
@@ -67,6 +69,7 @@ type GetRegionsInput struct {
 }
 
 type GetRegionsOutput struct {
+
 	// An array of key-value pairs containing information about your get regions
 	// request.
 	Regions []*types.Region

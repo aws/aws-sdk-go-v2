@@ -60,21 +60,29 @@ func (c *Client) GetDocumentPath(ctx context.Context, params *GetDocumentPathInp
 }
 
 type GetDocumentPathInput struct {
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
+
 	// The maximum number of levels in the hierarchy to return.
 	Limit *int32
+
 	// This value is not supported.
 	Marker *string
+
 	// A comma-separated list of values. Specify NAME to include the names of the
 	// parent folders.
 	Fields *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
 }
 
 type GetDocumentPathOutput struct {
+
 	// The path information.
 	Path *types.ResourcePath
 

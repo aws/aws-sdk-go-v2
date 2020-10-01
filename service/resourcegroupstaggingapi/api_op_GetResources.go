@@ -72,6 +72,7 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 }
 
 type GetResourcesInput struct {
+
 	// AWS recommends using ResourcesPerPage instead of this parameter. A limit that
 	// restricts the number of tags (key and value pairs) returned by GetResources in
 	// paginated output. A resource with no tags is counted as having one tag (one key
@@ -86,14 +87,17 @@ type GetResourcesInput struct {
 	// third page displays the remaining 2 resources, each with its 10 tags. You can
 	// set TagsPerPage to a minimum of 100 items and the maximum of 500 items.
 	TagsPerPage *int32
+
 	// A limit that restricts the number of resources returned by GetResources in
 	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and the
 	// maximum of 100 items.
 	ResourcesPerPage *int32
+
 	// A string that indicates that additional data is available. Leave this value
 	// empty for your initial request. If the response includes a PaginationToken, use
 	// that string for this value to request an additional page of data.
 	PaginationToken *string
+
 	// A list of TagFilters (keys and values). Each TagFilter specified must contain a
 	// key with values as optional. A request can include up to 50 keys, and each key
 	// can include up to 20 values. Note the following when deciding how to use
@@ -135,11 +139,13 @@ type GetResourcesInput struct {
 	// tagged with ( key1=value1) and ( key2=value2 or key2=value3 or key2=value4) and
 	// (key3, irrespective of the value)
 	TagFilters []*types.TagFilter
+
 	// Specifies whether to exclude resources that are compliant with the tag policy.
 	// Set this to true if you are interested in retrieving information on noncompliant
 	// resources only. You can use this parameter only if the IncludeComplianceDetails
 	// parameter is also set to true.
 	ExcludeCompliantResources *bool
+
 	// The constraints on the resources that you want returned. The format of each
 	// resource type is service[:resourceType]. For example, specifying a resource type
 	// of ec2 returns all Amazon EC2 resources (which includes EC2 instances).
@@ -165,6 +171,7 @@ type GetResourcesInput struct {
 	// to 100 items. Note that the length constraint requirement applies to each
 	// resource type filter.
 	ResourceTypeFilters []*string
+
 	// Specifies whether to include details regarding the compliance with the effective
 	// tag policy. Set this to true to determine whether resources are compliant with
 	// the tag policy and to get details.
@@ -172,8 +179,10 @@ type GetResourcesInput struct {
 }
 
 type GetResourcesOutput struct {
+
 	// A list of resource ARNs and the tags (keys and values) associated with each.
 	ResourceTagMappingList []*types.ResourceTagMapping
+
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.

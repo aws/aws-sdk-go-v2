@@ -56,19 +56,26 @@ func (c *Client) GetAuthorizers(ctx context.Context, params *GetAuthorizersInput
 }
 
 type GetAuthorizersInput struct {
+
 	// The maximum number of elements to be returned for this resource.
 	MaxResults *string
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetAuthorizersOutput struct {
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
 	// The elements from this collection.
 	Items []*types.Authorizer
 

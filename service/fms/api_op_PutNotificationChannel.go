@@ -56,11 +56,17 @@ func (c *Client) PutNotificationChannel(ctx context.Context, params *PutNotifica
 }
 
 type PutNotificationChannelInput struct {
+
 	// The Amazon Resource Name (ARN) of the SNS topic that collects notifications from
 	// AWS Firewall Manager.
+	//
+	// This member is required.
 	SnsTopicArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record
 	// AWS Firewall Manager activity.
+	//
+	// This member is required.
 	SnsRoleName *string
 }
 

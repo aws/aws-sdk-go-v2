@@ -65,23 +65,36 @@ func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeployme
 }
 
 type CreateDeploymentJobInput struct {
+
 	// The requested deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
+
 	// The Amazon Resource Name (ARN) of the fleet to deploy.
+	//
+	// This member is required.
 	Fleet *string
+
 	// The deployment application configuration.
+	//
+	// This member is required.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
+	//
+	// This member is required.
 	ClientRequestToken *string
+
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job.
 	Tags map[string]*string
 }
 
 type CreateDeploymentJobOutput struct {
+
 	// The deployment application configuration.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+
 	// The failure code of the simulation job if it failed: BadPermissionError  <p>AWS
 	// Greengrass requires a service-level role permission to access other services.
 	// The role must include the <a
@@ -108,18 +121,25 @@ type CreateDeploymentJobOutput struct {
 	// <dt>RobotDeploymentNoResponse</dt> <dd> <p>There is no response from the robot.
 	// It might not be powered on or connected to the internet.</p> </dd> </dl>
 	FailureCode types.DeploymentJobErrorCode
+
 	// The list of all tags added to the deployment job.
 	Tags map[string]*string
+
 	// The deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
+
 	// The time, in milliseconds since the epoch, when the fleet was created.
 	CreatedAt *time.Time
+
 	// The target fleet for the deployment job.
 	Fleet *string
+
 	// The status of the deployment job.
 	Status types.DeploymentStatus
+
 	// The Amazon Resource Name (ARN) of the deployment job.
 	Arn *string
+
 	// The failure reason of the deployment job if it failed.
 	FailureReason *string
 

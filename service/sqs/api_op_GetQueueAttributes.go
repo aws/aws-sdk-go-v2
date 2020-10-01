@@ -59,9 +59,13 @@ func (c *Client) GetQueueAttributes(ctx context.Context, params *GetQueueAttribu
 
 //
 type GetQueueAttributesInput struct {
+
 	// The URL of the Amazon SQS queue whose attribute information is retrieved. Queue
 	// URLs and names are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// A list of attributes for which to retrieve information. In the future, new
 	// attributes might be added. If you write code that calls this action, we
 	// recommend that you structure your code so that it can handle new attributes
@@ -172,6 +176,7 @@ type GetQueueAttributesInput struct {
 
 // A list of returned queue attributes.
 type GetQueueAttributesOutput struct {
+
 	// A map of attributes to their respective values.
 	Attributes map[string]*string
 

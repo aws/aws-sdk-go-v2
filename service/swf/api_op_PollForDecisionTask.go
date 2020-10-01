@@ -92,15 +92,21 @@ func (c *Client) PollForDecisionTask(ctx context.Context, params *PollForDecisio
 }
 
 type PollForDecisionTaskInput struct {
+
 	// When set to true, returns the events in reverse order. By default the results
 	// are returned in ascending order of the eventTimestamp of the events.
 	ReverseOrder *bool
+
 	// Identity of the decider making the request, which is recorded in the
 	// DecisionTaskStarted event in the workflow history. This enables diagnostic
 	// tracing when problems arise. The form of this identity is user defined.
 	Identity *string
+
 	// The name of the domain containing the task lists to poll.
+	//
+	// This member is required.
 	Domain *string
+
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
@@ -115,38 +121,59 @@ type PollForDecisionTaskInput struct {
 	// with a <code>nextPageToken</code> doesn't return a new decision task.</p>
 	// </note>
 	NextPageToken *string
+
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results. This is an upper limit only; the actual number
 	// of results returned per call may be fewer than the specified maximum.
 	MaximumPageSize *int32
+
 	// Specifies the task list to poll for decision tasks.  <p>The specified string
 	// must not start or end with whitespace. It must not contain a <code>:</code>
 	// (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control
 	// characters (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it
 	// must not <i>be</i> the literal string <code>arn</code>.</p>
+	//
+	// This member is required.
 	TaskList *types.TaskList
 }
 
 // A structure that represents a decision task. Decision tasks are sent to deciders
 // in order for them to make decisions.
 type PollForDecisionTaskOutput struct {
+
 	// The ID of the DecisionTaskStarted event of the previous decision task of this
 	// workflow execution that was processed by the decider. This can be used to
 	// determine the events in the history new since the last decision task received by
 	// the decider.
 	PreviousStartedEventId *int64
+
 	// The type of the workflow execution for which this decision task was created.
+	//
+	// This member is required.
 	WorkflowType *types.WorkflowType
+
 	// The opaque string used as a handle on the task. This token is used by workers to
 	// communicate progress and response information back to the system about the task.
+	//
+	// This member is required.
 	TaskToken *string
+
 	// A paginated list of history events of the workflow execution. The decider uses
 	// this during the processing of the decision task.
+	//
+	// This member is required.
 	Events []*types.HistoryEvent
+
 	// The workflow execution for which this decision task was created.
+	//
+	// This member is required.
 	WorkflowExecution *types.WorkflowExecution
+
 	// The ID of the DecisionTaskStarted event recorded in the history.
+	//
+	// This member is required.
 	StartedEventId *int64
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in nextPageToken. Keep all other arguments unchanged. The

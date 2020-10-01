@@ -57,28 +57,40 @@ func (c *Client) DescribeTrial(ctx context.Context, params *DescribeTrialInput, 
 }
 
 type DescribeTrialInput struct {
+
 	// The name of the trial to describe.
+	//
+	// This member is required.
 	TrialName *string
 }
 
 type DescribeTrialOutput struct {
+
 	// When the trial was last modified.
 	LastModifiedTime *time.Time
+
 	// The name of the trial as displayed. If DisplayName isn't specified, TrialName is
 	// displayed.
 	DisplayName *string
+
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
+
 	// When the trial was created.
 	CreationTime *time.Time
+
 	// The name of the experiment the trial is part of.
 	ExperimentName *string
+
 	// The name of the trial.
 	TrialName *string
+
 	// Who created the trial.
 	CreatedBy *types.UserContext
+
 	// Who last modified the trial.
 	LastModifiedBy *types.UserContext
+
 	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
 	Source *types.TrialSource
 

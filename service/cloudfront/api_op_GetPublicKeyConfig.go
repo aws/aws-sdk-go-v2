@@ -56,14 +56,19 @@ func (c *Client) GetPublicKeyConfig(ctx context.Context, params *GetPublicKeyCon
 }
 
 type GetPublicKeyConfigInput struct {
+
 	// Request the ID for the public key configuration.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetPublicKeyConfigOutput struct {
+
 	// The current version of the public key configuration. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
+
 	// Return the result for the public key configuration.
 	PublicKeyConfig *types.PublicKeyConfig
 

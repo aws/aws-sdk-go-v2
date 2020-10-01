@@ -57,18 +57,26 @@ func (c *Client) GetMembers(ctx context.Context, params *GetMembersInput, optFns
 }
 
 type GetMembersInput struct {
+
 	// The ARN of the behavior graph for which to request the member details.
+	//
+	// This member is required.
 	GraphArn *string
+
 	// The list of AWS account identifiers for the member account for which to return
 	// member details. You cannot use GetMembers to retrieve information about member
 	// accounts that were removed from the behavior graph.
+	//
+	// This member is required.
 	AccountIds []*string
 }
 
 type GetMembersOutput struct {
+
 	// The member account details that Detective is returning in response to the
 	// request.
 	MemberDetails []*types.MemberDetail
+
 	// The requested member accounts for which Detective was unable to return member
 	// details. For each account, provides the reason why the request could not be
 	// processed.

@@ -66,11 +66,15 @@ func (c *Client) DescribeCampaign(ctx context.Context, params *DescribeCampaignI
 }
 
 type DescribeCampaignInput struct {
+
 	// The Amazon Resource Name (ARN) of the campaign.
+	//
+	// This member is required.
 	CampaignArn *string
 }
 
 type DescribeCampaignOutput struct {
+
 	// The properties of the campaign.
 	Campaign *types.Campaign
 

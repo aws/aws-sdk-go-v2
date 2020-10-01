@@ -56,12 +56,14 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 
 // A shared structure that contains a single union member.
 type JsonUnionsInput struct {
+
 	// A union with a representative set of types for members.
 	Contents types.MyUnion
 }
 
 // A shared structure that contains a single union member.
 type JsonUnionsOutput struct {
+
 	// A union with a representative set of types for members.
 	Contents types.MyUnion
 

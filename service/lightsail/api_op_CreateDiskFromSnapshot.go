@@ -62,6 +62,7 @@ func (c *Client) CreateDiskFromSnapshot(ctx context.Context, params *CreateDiskF
 }
 
 type CreateDiskFromSnapshotInput struct {
+
 	// The name of the source disk from which the source automatic snapshot was
 	// created. Constraints:
 	//
@@ -74,12 +75,20 @@ type CreateDiskFromSnapshotInput struct {
 	// Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	SourceDiskName *string
+
 	// The unique Lightsail disk name (e.g., my-disk).
+	//
+	// This member is required.
 	DiskName *string
+
 	// The size of the disk in GB (e.g., 32).
+	//
+	// This member is required.
 	SizeInGb *int32
+
 	// An array of objects that represent the add-ons to enable for the new disk.
 	AddOns []*types.AddOnRequest
+
 	// The name of the disk snapshot (e.g., my-snapshot) from which to create the new
 	// storage disk. Constraint:
 	//
@@ -87,6 +96,7 @@ type CreateDiskFromSnapshotInput struct {
 	// the source disk name parameter. The disk snapshot name and source disk name
 	// parameters are mutually exclusive.
 	DiskSnapshotName *string
+
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot. Constraints:
 	//
@@ -99,14 +109,19 @@ type CreateDiskFromSnapshotInput struct {
 	// Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []*types.Tag
+
 	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
 	// Choose the same Availability Zone as the Lightsail instance where you want to
 	// create the disk. Use the GetRegions operation to list the Availability Zones
 	// where Lightsail is currently available.
+	//
+	// This member is required.
 	AvailabilityZone *string
+
 	// The date of the automatic snapshot to use for the new disk. Use the get auto
 	// snapshots operation to identify the dates of the available automatic snapshots.
 	// Constraints:
@@ -126,6 +141,7 @@ type CreateDiskFromSnapshotInput struct {
 }
 
 type CreateDiskFromSnapshotOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

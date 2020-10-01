@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 //
@@ -24,12 +23,42 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
+
+// The requested Outposts bucket name is not available. The bucket namespace is
+// shared by all users of the AWS Outposts in this Region. Select a different name
+// and try again.
+type BucketAlreadyExists struct {
+	Message *string
 }
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
+
+func (e *BucketAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
 }
+func (e *BucketAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BucketAlreadyExists) ErrorCode() string             { return "BucketAlreadyExists" }
+func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Outposts bucket you tried to create already exists, and you own it.
+type BucketAlreadyOwnedByYou struct {
+	Message *string
+}
+
+func (e *BucketAlreadyOwnedByYou) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BucketAlreadyOwnedByYou) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BucketAlreadyOwnedByYou) ErrorCode() string             { return "BucketAlreadyOwnedByYou" }
+func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 //
 type IdempotencyException struct {
@@ -47,12 +76,6 @@ func (e *IdempotencyException) ErrorMessage() string {
 }
 func (e *IdempotencyException) ErrorCode() string             { return "IdempotencyException" }
 func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IdempotencyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotencyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type InternalServiceException struct {
@@ -70,12 +93,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type InvalidNextTokenException struct {
@@ -93,12 +110,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type InvalidRequestException struct {
@@ -116,12 +127,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type JobStatusException struct {
@@ -139,12 +144,6 @@ func (e *JobStatusException) ErrorMessage() string {
 }
 func (e *JobStatusException) ErrorCode() string             { return "JobStatusException" }
 func (e *JobStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *JobStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *JobStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon S3 throws this exception if you make a GetPublicAccessBlock request
 // against an account that doesn't have a PublicAccessBlockConfiguration set.
@@ -167,12 +166,6 @@ func (e *NoSuchPublicAccessBlockConfiguration) ErrorCode() string {
 func (e *NoSuchPublicAccessBlockConfiguration) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *NoSuchPublicAccessBlockConfiguration) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchPublicAccessBlockConfiguration) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type NotFoundException struct {
@@ -190,12 +183,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 //
 type TooManyRequestsException struct {
@@ -213,14 +200,8 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}
 
-//
+// Amazon S3 throws this exception if you have too many tags in your tag set.
 type TooManyTagsException struct {
 	Message *string
 }
@@ -236,9 +217,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

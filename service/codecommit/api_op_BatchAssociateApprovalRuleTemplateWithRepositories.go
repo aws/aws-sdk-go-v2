@@ -57,19 +57,31 @@ func (c *Client) BatchAssociateApprovalRuleTemplateWithRepositories(ctx context.
 }
 
 type BatchAssociateApprovalRuleTemplateWithRepositoriesInput struct {
+
 	// The name of the template you want to associate with one or more repositories.
+	//
+	// This member is required.
 	ApprovalRuleTemplateName *string
+
 	// The names of the repositories you want to associate with the template. The
 	// length constraint limit is for each string in the array. The array itself can be
 	// empty.
+	//
+	// This member is required.
 	RepositoryNames []*string
 }
 
 type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
+
 	// A list of any errors that might have occurred while attempting to create the
 	// association between the template and the repositories.
+	//
+	// This member is required.
 	Errors []*types.BatchAssociateApprovalRuleTemplateWithRepositoriesError
+
 	// A list of names of the repositories that have been associated with the template.
+	//
+	// This member is required.
 	AssociatedRepositoryNames []*string
 
 	// Metadata pertaining to the operation's result.

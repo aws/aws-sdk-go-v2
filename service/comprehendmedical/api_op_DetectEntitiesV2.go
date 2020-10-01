@@ -64,26 +64,37 @@ func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2I
 }
 
 type DetectEntitiesV2Input struct {
+
 	// A UTF-8 string containing the clinical content being examined for entities. Each
 	// string must contain fewer than 20,000 bytes of characters.
+	//
+	// This member is required.
 	Text *string
 }
 
 type DetectEntitiesV2Output struct {
+
 	// Attributes extracted from the input text that couldn't be related to an entity.
 	UnmappedAttributes []*types.UnmappedAttribute
+
 	// If the result to the DetectEntitiesV2 operation was truncated, include the
 	// PaginationToken to fetch the next page of entities.
 	PaginationToken *string
+
 	// The collection of medical entities extracted from the input text and their
 	// associated information. For each entity, the response provides the entity text,
 	// the entity category, where the entity text begins and ends, and the level of
 	// confidence in the detection and analysis. Attributes and traits of the entity
 	// are also returned.
+	//
+	// This member is required.
 	Entities []*types.Entity
+
 	// The version of the model used to analyze the documents. The version number looks
 	// like X.X.X. You can use this information to track the model used for a
 	// particular batch of documents.
+	//
+	// This member is required.
 	ModelVersion *string
 
 	// Metadata pertaining to the operation's result.

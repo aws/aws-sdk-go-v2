@@ -55,22 +55,32 @@ func (c *Client) AssociateResourceSharePermission(ctx context.Context, params *A
 }
 
 type AssociateResourceSharePermissionInput struct {
+
 	// The ARN of the AWS RAM permission to associate with the resource share.
+	//
+	// This member is required.
 	PermissionArn *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
 	// Indicates whether the permission should replace the permissions that are
 	// currently associated with the resource share. Use true to replace the current
 	// permissions. Use false to add the permission to the current permission.
 	Replace *bool
+
 	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
 	ResourceShareArn *string
 }
 
 type AssociateResourceSharePermissionOutput struct {
+
 	// Indicates whether the request succeeded.
 	ReturnValue *bool
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string

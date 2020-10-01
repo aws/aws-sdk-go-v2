@@ -58,6 +58,7 @@ func (c *Client) RegisterTargetWithMaintenanceWindow(ctx context.Context, params
 }
 
 type RegisterTargetWithMaintenanceWindowInput struct {
+
 	// The targets to register with the maintenance window. In other words, the
 	// instances to run commands on when the maintenance window runs.  <p>You can
 	// specify targets using instance IDs, resource group names, or tags that have been
@@ -78,23 +79,36 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// maintenance window
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
 	// in the AWS Systems Manager User Guide.
+	//
+	// This member is required.
 	Targets []*types.Target
+
 	// User-provided value that will be included in any CloudWatch events raised while
 	// running tasks for these targets in this maintenance window.
 	OwnerInformation *string
+
 	// An optional description for the target.
 	Description *string
+
 	// The type of target being registered with the maintenance window.
+	//
+	// This member is required.
 	ResourceType types.MaintenanceWindowResourceType
+
 	// The ID of the maintenance window the target should be registered with.
+	//
+	// This member is required.
 	WindowId *string
+
 	// An optional name for the target.
 	Name *string
+
 	// User-provided idempotency token.
 	ClientToken *string
 }
 
 type RegisterTargetWithMaintenanceWindowOutput struct {
+
 	// The ID of the target definition in this maintenance window.
 	WindowTargetId *string
 

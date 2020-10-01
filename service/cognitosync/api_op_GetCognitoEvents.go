@@ -59,12 +59,16 @@ func (c *Client) GetCognitoEvents(ctx context.Context, params *GetCognitoEventsI
 
 // A request for a list of the configured Cognito Events
 type GetCognitoEventsInput struct {
+
 	// The Cognito Identity Pool ID for the request
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 
 // The response from the GetCognitoEvents request
 type GetCognitoEventsOutput struct {
+
 	// The Cognito Events returned from the GetCognitoEvents request
 	Events map[string]*string
 

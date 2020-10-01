@@ -57,12 +57,19 @@ func (c *Client) UpdateAssessmentTarget(ctx context.Context, params *UpdateAsses
 }
 
 type UpdateAssessmentTargetInput struct {
+
 	// The ARN of the assessment target that you want to update.
+	//
+	// This member is required.
 	AssessmentTargetArn *string
+
 	// The ARN of the resource group that is used to specify the new resource group to
 	// associate with the assessment target.
 	ResourceGroupArn *string
+
 	// The name of the assessment target that you want to update.
+	//
+	// This member is required.
 	AssessmentTargetName *string
 }
 

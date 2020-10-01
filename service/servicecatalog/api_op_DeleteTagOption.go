@@ -56,7 +56,10 @@ func (c *Client) DeleteTagOption(ctx context.Context, params *DeleteTagOptionInp
 }
 
 type DeleteTagOptionInput struct {
+
 	// The TagOption identifier.
+	//
+	// This member is required.
 	Id *string
 }
 

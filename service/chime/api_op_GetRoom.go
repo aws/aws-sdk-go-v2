@@ -57,13 +57,20 @@ func (c *Client) GetRoom(ctx context.Context, params *GetRoomInput, optFns ...fu
 }
 
 type GetRoomInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The room ID.
+	//
+	// This member is required.
 	RoomId *string
 }
 
 type GetRoomOutput struct {
+
 	// The room details.
 	Room *types.Room
 

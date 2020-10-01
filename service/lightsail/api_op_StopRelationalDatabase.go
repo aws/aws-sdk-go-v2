@@ -60,14 +60,19 @@ func (c *Client) StopRelationalDatabase(ctx context.Context, params *StopRelatio
 }
 
 type StopRelationalDatabaseInput struct {
+
 	// The name of your new database snapshot to be created before stopping your
 	// database.
 	RelationalDatabaseSnapshotName *string
+
 	// The name of your database to stop.
+	//
+	// This member is required.
 	RelationalDatabaseName *string
 }
 
 type StopRelationalDatabaseOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

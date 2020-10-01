@@ -56,12 +56,16 @@ func (c *Client) DescribeClusterOperation(ctx context.Context, params *DescribeC
 }
 
 type DescribeClusterOperationInput struct {
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster
 	// operation.
+	//
+	// This member is required.
 	ClusterOperationArn *string
 }
 
 type DescribeClusterOperationOutput struct {
+
 	// Cluster operation information
 	ClusterOperationInfo *types.ClusterOperationInfo
 

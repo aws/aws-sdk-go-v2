@@ -55,8 +55,10 @@ func (c *Client) ListConfigs(ctx context.Context, params *ListConfigsInput, optF
 
 //
 type ListConfigsInput struct {
+
 	// Maximum number of Configs returned.
 	MaxResults *int32
+
 	// Next token returned in the request of a previous ListConfigs call. Used to get
 	// the next page of results.
 	NextToken *string
@@ -64,8 +66,10 @@ type ListConfigsInput struct {
 
 //
 type ListConfigsOutput struct {
+
 	// List of Config items.
 	ConfigList []*types.ConfigListItem
+
 	// Next token returned in the response of a previous ListConfigs call. Used to get
 	// the next page of results.
 	NextToken *string

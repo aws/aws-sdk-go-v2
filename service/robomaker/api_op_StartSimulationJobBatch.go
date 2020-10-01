@@ -60,37 +60,51 @@ func (c *Client) StartSimulationJobBatch(ctx context.Context, params *StartSimul
 }
 
 type StartSimulationJobBatchInput struct {
+
 	// The batch policy.
 	BatchPolicy *types.BatchPolicy
+
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job batch.
 	Tags map[string]*string
+
 	// A list of simulation job requests to create in the batch.
+	//
+	// This member is required.
 	CreateSimulationJobRequests []*types.SimulationJobRequest
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
 }
 
 type StartSimulationJobBatchOutput struct {
+
 	// A list of failed simulation job requests. The request failed to be created into
 	// a simulation job. Failed requests do not have a simulation job ID.
 	FailedRequests []*types.FailedCreateSimulationJobRequest
+
 	// The reason the simulation job batch failed.
 	FailureReason *string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
 	// A list of pending simulation job requests. These requests have not yet been
 	// created into simulation jobs.
 	PendingRequests []*types.SimulationJobRequest
+
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// created.
 	CreatedAt *time.Time
+
 	// A list of created simulation job request summaries.
 	CreatedRequests []*types.SimulationJobSummary
+
 	// The failure code if the simulation job batch failed.
 	FailureCode types.SimulationJobBatchErrorCode
+
 	// The status of the simulation job batch. Pending The simulation job batch request
 	// is pending. InProgress The simulation job batch is in progress. Failed The
 	// simulation job batch failed. One or more simulation job requests could not be
@@ -108,10 +122,13 @@ type StartSimulationJobBatchOutput struct {
 	// failing request, the batch status will be TimedOut. TimedOut The simulation
 	// batch job timed out.
 	Status types.SimulationJobBatchStatus
+
 	// The Amazon Resource Name (arn) of the batch.
 	Arn *string
+
 	// The batch policy.
 	BatchPolicy *types.BatchPolicy
+
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job batch.
 	Tags map[string]*string

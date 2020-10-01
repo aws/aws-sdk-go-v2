@@ -56,16 +56,22 @@ func (c *Client) RegisterCertificateWithoutCA(ctx context.Context, params *Regis
 }
 
 type RegisterCertificateWithoutCAInput struct {
+
 	// The certificate data, in PEM format.
+	//
+	// This member is required.
 	CertificatePem *string
+
 	// The status of the register certificate request.
 	Status types.CertificateStatus
 }
 
 type RegisterCertificateWithoutCAOutput struct {
+
 	// The ID of the registered certificate. (The last part of the certificate ARN
 	// contains the certificate ID.
 	CertificateId *string
+
 	// The Amazon Resource Name (ARN) of the registered certificate.
 	CertificateArn *string
 

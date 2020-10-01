@@ -59,17 +59,22 @@ func (c *Client) ListLayers(ctx context.Context, params *ListLayersInput, optFns
 }
 
 type ListLayersInput struct {
+
 	// The maximum number of layers to return.
 	MaxItems *int32
+
 	// A runtime identifier. For example, go1.x.
 	CompatibleRuntime types.Runtime
+
 	// A pagination token returned by a previous call.
 	Marker *string
 }
 
 type ListLayersOutput struct {
+
 	// A pagination token returned when the response doesn't contain all layers.
 	NextMarker *string
+
 	// A list of function layers.
 	Layers []*types.LayersListItem
 

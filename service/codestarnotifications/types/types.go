@@ -4,12 +4,16 @@ package types
 
 // Returns information about an event that has triggered a notification rule.
 type EventTypeSummary struct {
+
 	// The system-generated ID of the event.
 	EventTypeId *string
+
 	// The resource type of the event.
 	ResourceType *string
+
 	// The name of the service for which the event applies.
 	ServiceName *string
+
 	// The name of the event.
 	EventTypeName *string
 }
@@ -17,22 +21,34 @@ type EventTypeSummary struct {
 // Information about a filter to apply to the list of returned event types. You can
 // filter by resource type or service name.
 type ListEventTypesFilter struct {
+
 	// The name of the resource type (for example, pipeline) or service name (for
 	// example, CodePipeline) that you want to filter by.
+	//
+	// This member is required.
 	Value *string
+
 	// The system-generated name of the filter type you want to filter by.
+	//
+	// This member is required.
 	Name ListEventTypesFilterName
 }
 
 // Information about a filter to apply to the list of returned notification rules.
 // You can filter by event type, owner, resource, or target.
 type ListNotificationRulesFilter struct {
+
 	// The value of the attribute you want to use to filter the returned notification
 	// rules. For example, if you specify filtering by RESOURCE in Name, you might
 	// specify the ARN of a pipeline in AWS CodePipeline for the value.
+	//
+	// This member is required.
 	Value *string
+
 	// The name of the attribute you want to use to filter the returned notification
 	// rules.
+	//
+	// This member is required.
 	Name ListNotificationRulesFilterName
 }
 
@@ -42,36 +58,49 @@ type ListNotificationRulesFilter struct {
 // specify a ListTargetsFilter Name as TargetType and a Value of SNS, and a Name of
 // TARGET_STATUS and a Value of ACTIVE.
 type ListTargetsFilter struct {
+
 	// The name of the attribute you want to use to filter the returned targets.
+	//
+	// This member is required.
 	Name ListTargetsFilterName
+
 	// The value of the attribute you want to use to filter the returned targets. For
 	// example, if you specify SNS for the Target type, you could specify an Amazon
 	// Resource Name (ARN) for a topic as the value.
+	//
+	// This member is required.
 	Value *string
 }
 
 // Information about a specified notification rule.
 type NotificationRuleSummary struct {
+
 	// The unique ID of the notification rule.
 	Id *string
+
 	// The Amazon Resource Name (ARN) of the notification rule.
 	Arn *string
 }
 
 // Information about the SNS topics associated with a notification rule.
 type Target struct {
+
 	// The Amazon Resource Name (ARN) of the SNS topic.
 	TargetAddress *string
+
 	// The target type. Can be an Amazon SNS topic.
 	TargetType *string
 }
 
 // Information about the targets specified for a notification rule.
 type TargetSummary struct {
+
 	// The Amazon Resource Name (ARN) of the SNS topic.
 	TargetAddress *string
+
 	// The status of the target.
 	TargetStatus TargetStatus
+
 	// The type of the target (for example, SNS).
 	TargetType *string
 }

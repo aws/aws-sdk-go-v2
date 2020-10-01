@@ -57,13 +57,17 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 //
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) string that uniquely identifies the AWS DMS
 	// resource.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 //
 type ListTagsForResourceOutput struct {
+
 	// A list of tags for the resource.
 	TagList []*types.Tag
 

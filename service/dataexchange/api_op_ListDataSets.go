@@ -57,19 +57,24 @@ func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, op
 }
 
 type ListDataSetsInput struct {
+
 	// The maximum number of results returned by a single call.
 	MaxResults *int32
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string
+
 	// A property that defines the data set as OWNED by the account (for providers) or
 	// ENTITLED to the account (for subscribers).
 	Origin *string
 }
 
 type ListDataSetsOutput struct {
+
 	// The data set objects listed by the request.
 	DataSets []*types.DataSetEntry
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string

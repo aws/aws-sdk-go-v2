@@ -56,11 +56,15 @@ func (c *Client) GetConferenceProvider(ctx context.Context, params *GetConferenc
 }
 
 type GetConferenceProviderInput struct {
+
 	// The ARN of the newly created conference provider.
+	//
+	// This member is required.
 	ConferenceProviderArn *string
 }
 
 type GetConferenceProviderOutput struct {
+
 	// The conference provider.
 	ConferenceProvider *types.ConferenceProvider
 

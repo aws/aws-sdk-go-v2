@@ -55,14 +55,19 @@ func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteA
 }
 
 type DeleteAccountCustomizationInput struct {
+
 	// The ID for the AWS account that you want to delete QuickSight customizations
 	// from.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The namespace associated with the customization that you're deleting.
 	Namespace *string
 }
 
 type DeleteAccountCustomizationOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

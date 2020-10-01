@@ -57,11 +57,15 @@ func (c *Client) DeleteInterconnect(ctx context.Context, params *DeleteInterconn
 }
 
 type DeleteInterconnectInput struct {
+
 	// The ID of the interconnect.
+	//
+	// This member is required.
 	InterconnectId *string
 }
 
 type DeleteInterconnectOutput struct {
+
 	// The state of the interconnect. The following are the possible values:
 	//
 	//     *

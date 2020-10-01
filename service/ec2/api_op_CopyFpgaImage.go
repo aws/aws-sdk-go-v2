@@ -55,19 +55,29 @@ func (c *Client) CopyFpgaImage(ctx context.Context, params *CopyFpgaImageInput, 
 }
 
 type CopyFpgaImageInput struct {
+
 	// The ID of the source AFI.
+	//
+	// This member is required.
 	SourceFpgaImageId *string
+
 	// The name for the new AFI. The default is the name of the source AFI.
 	Name *string
+
 	// The description for the new AFI.
 	Description *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The Region that contains the source AFI.
+	//
+	// This member is required.
 	SourceRegion *string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
@@ -75,6 +85,7 @@ type CopyFpgaImageInput struct {
 }
 
 type CopyFpgaImageOutput struct {
+
 	// The ID of the new AFI.
 	FpgaImageId *string
 

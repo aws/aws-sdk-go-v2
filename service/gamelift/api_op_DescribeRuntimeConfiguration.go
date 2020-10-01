@@ -97,13 +97,17 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 
 // Represents the input for a request action.
 type DescribeRuntimeConfigurationInput struct {
+
 	// A unique identifier for a fleet to get the runtime configuration for. You can
 	// use either the fleet ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeRuntimeConfigurationOutput struct {
+
 	// Instructions describing how server processes should be launched and maintained
 	// on each instance in the fleet.
 	RuntimeConfiguration *types.RuntimeConfiguration

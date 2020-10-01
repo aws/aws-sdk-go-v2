@@ -69,39 +69,62 @@ func (c *Client) GetAssetPropertyAggregates(ctx context.Context, params *GetAsse
 }
 
 type GetAssetPropertyAggregatesInput struct {
+
 	// The ID of the asset property.
 	PropertyId *string
+
 	// The exclusive start of the range from which to query historical data, expressed
 	// in seconds in Unix epoch time.
+	//
+	// This member is required.
 	StartDate *time.Time
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
+
 	// The inclusive end of the range from which to query historical data, expressed in
 	// seconds in Unix epoch time.
+	//
+	// This member is required.
 	EndDate *time.Time
+
 	// The data aggregating function.
+	//
+	// This member is required.
 	AggregateTypes []types.AggregateType
+
 	// The ID of the asset.
 	AssetId *string
+
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
 	// information, see Mapping Industrial Data Streams to Asset Properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string
+
 	// The time interval over which to aggregate data.
+	//
+	// This member is required.
 	Resolution *string
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
 	// The chronological sorting order of the requested information.
 	TimeOrdering types.TimeOrdering
+
 	// The quality by which to filter asset data.
 	Qualities []types.Quality
 }
 
 type GetAssetPropertyAggregatesOutput struct {
+
 	// The requested aggregated values.
+	//
+	// This member is required.
 	AggregatedValues []*types.AggregatedValue
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

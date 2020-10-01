@@ -60,21 +60,28 @@ func (c *Client) CreateCustomAvailabilityZone(ctx context.Context, params *Creat
 
 //
 type CreateCustomAvailabilityZoneInput struct {
+
 	// The ID of an existing virtual private network (VPN) between the Amazon RDS
 	// website and the VMware vSphere cluster.
 	ExistingVpnId *string
+
 	// The IP address of network traffic from your on-premises data center. A custom AZ
 	// receives the network traffic. Specify this parameter only if ExistingVpnId isn't
 	// specified.
 	VpnTunnelOriginatorIP *string
+
 	// The name of the custom Availability Zone (AZ).
+	//
+	// This member is required.
 	CustomAvailabilityZoneName *string
+
 	// The name of a new VPN tunnel between the Amazon RDS website and the VMware
 	// vSphere cluster. Specify this parameter only if ExistingVpnId isn't specified.
 	NewVpnTunnelName *string
 }
 
 type CreateCustomAvailabilityZoneOutput struct {
+
 	// A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a
 	// VMware vSphere cluster. For more information about RDS on VMware, see the  RDS
 	// on VMware User Guide.

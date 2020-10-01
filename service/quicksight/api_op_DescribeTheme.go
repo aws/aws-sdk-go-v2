@@ -56,23 +56,33 @@ func (c *Client) DescribeTheme(ctx context.Context, params *DescribeThemeInput, 
 }
 
 type DescribeThemeInput struct {
+
 	// The ID for the theme.
+	//
+	// This member is required.
 	ThemeId *string
+
 	// The alias of the theme that you want to describe. If you name a specific alias,
 	// you describe the version that the alias points to. You can specify the latest
 	// version of the theme by providing the keyword $LATEST in the AliasName
 	// parameter. The keyword $PUBLISHED doesn't apply to themes.
 	AliasName *string
+
 	// The ID of the AWS account that contains the theme that you're describing.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The version number for the version to describe. If a VersionNumber parameter
 	// value isn't provided, the latest version of the theme is described.
 	VersionNumber *int64
 }
 
 type DescribeThemeOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The information about the theme that you are describing.
 	Theme *types.Theme
 

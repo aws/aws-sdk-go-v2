@@ -59,19 +59,23 @@ func (c *Client) DescribeCanaries(ctx context.Context, params *DescribeCanariesI
 }
 
 type DescribeCanariesInput struct {
+
 	// Specify this parameter to limit how many canaries are returned each time you use
 	// the DescribeCanaries operation. If you omit this parameter, the default of 100
 	// is used.
 	MaxResults *int32
+
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent operation to retrieve the next set of results.
 	NextToken *string
 }
 
 type DescribeCanariesOutput struct {
+
 	// Returns an array. Each item in the array contains the full information about one
 	// canary.
 	Canaries []*types.Canary
+
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent DescribeCanaries operation to retrieve the next set of results.
 	NextToken *string

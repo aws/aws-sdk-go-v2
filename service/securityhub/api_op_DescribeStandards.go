@@ -56,8 +56,10 @@ func (c *Client) DescribeStandards(ctx context.Context, params *DescribeStandard
 }
 
 type DescribeStandardsInput struct {
+
 	// The maximum number of standards to return.
 	MaxResults *int32
+
 	// The token that is required for pagination. On your first call to the
 	// DescribeStandards operation, set the value of this parameter to NULL. For
 	// subsequent calls to the operation, to continue listing data, set the value of
@@ -66,8 +68,10 @@ type DescribeStandardsInput struct {
 }
 
 type DescribeStandardsOutput struct {
+
 	// A list of available standards.
 	Standards []*types.Standard
+
 	// The pagination token to use to request the next page of results.
 	NextToken *string
 

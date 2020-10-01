@@ -60,13 +60,16 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 }
 
 type DescribeInstancesInput struct {
+
 	// A layer ID. If you use this parameter, DescribeInstances returns descriptions of
 	// the instances associated with the specified layer.
 	LayerId *string
+
 	// An array of instance IDs to be described. If you use this parameter,
 	// DescribeInstances returns a description of the specified instances. Otherwise,
 	// it returns a description of every instance.
 	InstanceIds []*string
+
 	// A stack ID. If you use this parameter, DescribeInstances returns descriptions of
 	// the instances associated with the specified stack.
 	StackId *string
@@ -74,6 +77,7 @@ type DescribeInstancesInput struct {
 
 // Contains the response to a DescribeInstances request.
 type DescribeInstancesOutput struct {
+
 	// An array of Instance objects that describe the instances.
 	Instances []*types.Instance
 

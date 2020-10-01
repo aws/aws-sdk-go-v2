@@ -57,8 +57,12 @@ func (c *Client) CreateDeploymentConfig(ctx context.Context, params *CreateDeplo
 
 // Represents the input of a CreateDeploymentConfig operation.
 type CreateDeploymentConfigInput struct {
+
 	// The name of the deployment configuration to create.
+	//
+	// This member is required.
 	DeploymentConfigName *string
+
 	// The minimum number of healthy instances that should be available at any time
 	// during the deployment. There are two parameters expected in the input: type and
 	// value. The type parameter takes either of the following values:
@@ -77,14 +81,17 @@ type CreateDeploymentConfigInput struct {
 	// parameter takes an integer. For example, to set a minimum of 95% healthy
 	// instance, specify a type of FLEET_PERCENT and a value of 95.
 	MinimumHealthyHosts *types.MinimumHealthyHosts
+
 	// The configuration that specifies how the deployment traffic is routed.
 	TrafficRoutingConfig *types.TrafficRoutingConfig
+
 	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform types.ComputePlatform
 }
 
 // Represents the output of a CreateDeploymentConfig operation.
 type CreateDeploymentConfigOutput struct {
+
 	// A unique deployment configuration ID.
 	DeploymentConfigId *string
 

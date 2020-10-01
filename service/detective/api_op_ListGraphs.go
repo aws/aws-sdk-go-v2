@@ -58,9 +58,11 @@ func (c *Client) ListGraphs(ctx context.Context, params *ListGraphsInput, optFns
 }
 
 type ListGraphsInput struct {
+
 	// The maximum number of graphs to return at a time. The total must be less than
 	// the overall limit on the number of results to return, which is currently 200.
 	MaxResults *int32
+
 	// For requests to get the next page of results, the pagination token that was
 	// returned with the previous set of results. The initial request does not include
 	// a pagination token.
@@ -68,8 +70,10 @@ type ListGraphsInput struct {
 }
 
 type ListGraphsOutput struct {
+
 	// A list of behavior graphs that the account is a master for.
 	GraphList []*types.Graph
+
 	// If there are more behavior graphs remaining in the results, then this is the
 	// pagination token to use to request the next page of behavior graphs.
 	NextToken *string

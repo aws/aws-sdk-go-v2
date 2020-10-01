@@ -57,20 +57,25 @@ func (c *Client) ListSignalingChannels(ctx context.Context, params *ListSignalin
 }
 
 type ListSignalingChannelsInput struct {
+
 	// Optional: Returns only the channels that satisfy a specific condition.
 	ChannelNameCondition *types.ChannelNameCondition
+
 	// If you specify this parameter, when the result of a ListSignalingChannels
 	// operation is truncated, the call returns the NextToken in the response. To get
 	// another batch of channels, provide this token in your next request.
 	NextToken *string
+
 	// The maximum number of channels to return in the response. The default is 500.
 	MaxResults *int32
 }
 
 type ListSignalingChannelsOutput struct {
+
 	// If the response is truncated, the call returns this element with a token. To get
 	// the next batch of streams, use this token in your next request.
 	NextToken *string
+
 	// An array of ChannelInfo objects.
 	ChannelInfoList []*types.ChannelInfo
 

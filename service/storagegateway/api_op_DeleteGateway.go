@@ -69,13 +69,17 @@ func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, 
 
 // A JSON object containing the ID of the gateway to delete.
 type DeleteGatewayInput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // A JSON object containing the ID of the deleted gateway.
 type DeleteGatewayOutput struct {
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

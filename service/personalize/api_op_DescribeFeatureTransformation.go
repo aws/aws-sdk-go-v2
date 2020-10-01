@@ -56,11 +56,15 @@ func (c *Client) DescribeFeatureTransformation(ctx context.Context, params *Desc
 }
 
 type DescribeFeatureTransformationInput struct {
+
 	// The Amazon Resource Name (ARN) of the feature transformation to describe.
+	//
+	// This member is required.
 	FeatureTransformationArn *string
 }
 
 type DescribeFeatureTransformationOutput struct {
+
 	// A listing of the FeatureTransformation properties.
 	FeatureTransformation *types.FeatureTransformation
 

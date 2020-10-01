@@ -59,6 +59,7 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 }
 
 type DescribeStacksInput struct {
+
 	// An array of stack IDs that specify the stacks to be described. If you omit this
 	// parameter, DescribeStacks returns a description of every stack.
 	StackIds []*string
@@ -66,6 +67,7 @@ type DescribeStacksInput struct {
 
 // Contains the response to a DescribeStacks request.
 type DescribeStacksOutput struct {
+
 	// An array of Stack objects that describe the stacks.
 	Stacks []*types.Stack
 

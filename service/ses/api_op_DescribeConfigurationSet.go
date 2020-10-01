@@ -63,8 +63,12 @@ func (c *Client) DescribeConfigurationSet(ctx context.Context, params *DescribeC
 // configuration sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type DescribeConfigurationSetInput struct {
+
 	// The name of the configuration set to describe.
+	//
+	// This member is required.
 	ConfigurationSetName *string
+
 	// A list of configuration set attributes to return.
 	ConfigurationSetAttributeNames []types.ConfigurationSetAttribute
 }
@@ -74,15 +78,20 @@ type DescribeConfigurationSetInput struct {
 // see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type DescribeConfigurationSetOutput struct {
+
 	// An object that represents the reputation settings for the configuration set.
 	ReputationOptions *types.ReputationOptions
+
 	// The name of the custom open and click tracking domain associated with the
 	// configuration set.
 	TrackingOptions *types.TrackingOptions
+
 	// The configuration set object associated with the specified configuration set.
 	ConfigurationSet *types.ConfigurationSet
+
 	// A list of event destinations associated with the configuration set.
 	EventDestinations []*types.EventDestination
+
 	// Specifies whether messages that use the configuration set are required to use
 	// Transport Layer Security (TLS).
 	DeliveryOptions *types.DeliveryOptions

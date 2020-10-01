@@ -57,27 +57,39 @@ func (c *Client) GetVpcLink(ctx context.Context, params *GetVpcLinkInput, optFns
 }
 
 type GetVpcLinkInput struct {
+
 	// The ID of the VPC link.
+	//
+	// This member is required.
 	VpcLinkId *string
 }
 
 type GetVpcLinkOutput struct {
+
 	// A list of security group IDs for the VPC link.
 	SecurityGroupIds []*string
+
 	// A list of subnet IDs to include in the VPC link.
 	SubnetIds []*string
+
 	// The name of the VPC link.
 	Name *string
+
 	// A message summarizing the cause of the status of the VPC link.
 	VpcLinkStatusMessage *string
+
 	// The ID of the VPC link.
 	VpcLinkId *string
+
 	// Tags for the VPC link.
 	Tags map[string]*string
+
 	// The status of the VPC link.
 	VpcLinkStatus types.VpcLinkStatus
+
 	// The timestamp when the VPC link was created.
 	CreatedDate *time.Time
+
 	// The version of the VPC link.
 	VpcLinkVersion types.VpcLinkVersion
 

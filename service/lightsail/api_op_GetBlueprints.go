@@ -62,19 +62,23 @@ func (c *Client) GetBlueprints(ctx context.Context, params *GetBlueprintsInput, 
 }
 
 type GetBlueprintsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetBlueprints request. If your results are
 	// paginated, the response will return a next page token that you can specify as
 	// the page token in a subsequent request.
 	PageToken *string
+
 	// A Boolean value indicating whether to include inactive results in your request.
 	IncludeInactive *bool
 }
 
 type GetBlueprintsOutput struct {
+
 	// An array of key-value pairs that contains information about the available
 	// blueprints.
 	Blueprints []*types.Blueprint
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetBlueprints request and specify the next page

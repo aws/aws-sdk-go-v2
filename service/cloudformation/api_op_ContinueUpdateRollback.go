@@ -68,11 +68,15 @@ func (c *Client) ContinueUpdateRollback(ctx context.Context, params *ContinueUpd
 
 // The input for the ContinueUpdateRollback () action.
 type ContinueUpdateRollbackInput struct {
+
 	// The name or the unique ID of the stack that you want to continue rolling back.
 	// Don't specify the name of a nested stack (a stack that was created by using the
 	// AWS::CloudFormation::Stack resource). Instead, use this operation on the parent
 	// stack (the stack that contains the AWS::CloudFormation::Stack resource).
+	//
+	// This member is required.
 	StackName *string
+
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to roll back the stack. AWS CloudFormation
 	// uses the role's credentials to make calls on your behalf. AWS CloudFormation
@@ -84,6 +88,7 @@ type ContinueUpdateRollbackInput struct {
 	// CloudFormation uses a temporary session that is generated from your user
 	// credentials.
 	RoleARN *string
+
 	// A list of the logical IDs of the resources that AWS CloudFormation skips during
 	// the continue update rollback operation. You can specify only resources that are
 	// in the UPDATE_FAILED state because a rollback failed. You can't specify
@@ -113,6 +118,7 @@ type ContinueUpdateRollbackInput struct {
 	// to recover a nested stacks hierarchy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks).
 	ResourcesToSkip []*string
+
 	// A unique identifier for this ContinueUpdateRollback request. Specify this token
 	// if you plan to retry requests so that AWS CloudFormation knows that you're not
 	// attempting to continue the rollback to a stack with the same name. You might

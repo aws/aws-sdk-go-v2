@@ -61,6 +61,7 @@ func (c *Client) SuspendProcesses(ctx context.Context, params *SuspendProcessesI
 }
 
 type SuspendProcessesInput struct {
+
 	// One or more of the following processes:
 	//
 	//     * Launch
@@ -86,7 +87,10 @@ type SuspendProcessesInput struct {
 	//
 	// If you omit this parameter, all processes are specified.
 	ScalingProcesses []*string
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
 }
 

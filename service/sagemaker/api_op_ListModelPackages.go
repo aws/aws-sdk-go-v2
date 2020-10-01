@@ -56,30 +56,41 @@ func (c *Client) ListModelPackages(ctx context.Context, params *ListModelPackage
 }
 
 type ListModelPackagesInput struct {
+
 	// The maximum number of model packages to return in the response.
 	MaxResults *int32
+
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.SortOrder
+
 	// The parameter by which to sort the results. The default is CreationTime.
 	SortBy types.ModelPackageSortBy
+
 	// A filter that returns only model packages created after the specified time
 	// (timestamp).
 	CreationTimeAfter *time.Time
+
 	// A filter that returns only model packages created before the specified time
 	// (timestamp).
 	CreationTimeBefore *time.Time
+
 	// If the response to a previous ListModelPackages request was truncated, the
 	// response includes a NextToken. To retrieve the next set of model packages, use
 	// the token in the next request.
 	NextToken *string
+
 	// A string in the model package name. This filter returns only model packages
 	// whose name contains the specified string.
 	NameContains *string
 }
 
 type ListModelPackagesOutput struct {
+
 	// An array of ModelPackageSummary objects, each of which lists a model package.
+	//
+	// This member is required.
 	ModelPackageSummaryList []*types.ModelPackageSummary
+
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of model packages, use it in the subsequent request.
 	NextToken *string

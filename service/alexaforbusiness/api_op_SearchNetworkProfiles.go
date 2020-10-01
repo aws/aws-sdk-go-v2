@@ -57,16 +57,20 @@ func (c *Client) SearchNetworkProfiles(ctx context.Context, params *SearchNetwor
 }
 
 type SearchNetworkProfilesInput struct {
+
 	// The sort order to use to list the specified set of network profiles. Valid sort
 	// criteria includes NetworkProfileName, Ssid, and SecurityType.
 	SortCriteria []*types.Sort
+
 	// The filters to use to list a specified set of network profiles. Valid filters
 	// are NetworkProfileName, Ssid, and SecurityType.
 	Filters []*types.Filter
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
@@ -74,12 +78,15 @@ type SearchNetworkProfilesInput struct {
 }
 
 type SearchNetworkProfilesOutput struct {
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The total number of network profiles returned.
 	TotalCount *int32
+
 	// The network profiles that meet the specified set of filter criteria, in sort
 	// order. It is a list of NetworkProfileData objects.
 	NetworkProfiles []*types.NetworkProfileData

@@ -55,16 +55,20 @@ func (c *Client) ListCoreDefinitions(ctx context.Context, params *ListCoreDefini
 }
 
 type ListCoreDefinitionsInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 }
 
 type ListCoreDefinitionsOutput struct {
+
 	// Information about a definition.
 	Definitions []*types.DefinitionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string

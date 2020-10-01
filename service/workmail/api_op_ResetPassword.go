@@ -55,12 +55,21 @@ func (c *Client) ResetPassword(ctx context.Context, params *ResetPasswordInput, 
 }
 
 type ResetPasswordInput struct {
+
 	// The identifier of the organization that contains the user for which the password
 	// is reset.
+	//
+	// This member is required.
 	OrganizationId *string
+
 	// The identifier of the user for whom the password is reset.
+	//
+	// This member is required.
 	UserId *string
+
 	// The new password for the user.
+	//
+	// This member is required.
 	Password *string
 }
 

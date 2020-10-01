@@ -55,11 +55,15 @@ func (c *Client) DescribeDevicePolicyConfiguration(ctx context.Context, params *
 }
 
 type DescribeDevicePolicyConfigurationInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 
 type DescribeDevicePolicyConfigurationOutput struct {
+
 	// The certificate chain, including intermediate certificates and the root
 	// certificate authority certificate used to issue device certificates.
 	DeviceCaCertificate *string

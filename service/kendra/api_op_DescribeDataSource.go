@@ -57,40 +57,58 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 }
 
 type DescribeDataSourceInput struct {
+
 	// The unique identifier of the data source to describe.
+	//
+	// This member is required.
 	Id *string
+
 	// The identifier of the index that contains the data source.
+	//
+	// This member is required.
 	IndexId *string
 }
 
 type DescribeDataSourceOutput struct {
+
 	// The identifier of the index that contains the data source.
 	IndexId *string
+
 	// The current status of the data source. When the status is ACTIVE the data source
 	// is ready to use. When the status is FAILED, the ErrorMessage field contains the
 	// reason that the data source failed.
 	Status types.DataSourceStatus
+
 	// The description of the data source.
 	Description *string
+
 	// The identifier of the data source.
 	Id *string
+
 	// The schedule that Amazon Kendra will update the data source.
 	Schedule *string
+
 	// The Unix timestamp of when the data source was created.
 	CreatedAt *time.Time
+
 	// Information that describes where the data source is located and how the data
 	// source is configured. The specific information in the description depends on the
 	// data source provider.
 	Configuration *types.DataSourceConfiguration
+
 	// When the Status field value is FAILED, the ErrorMessage field contains a
 	// description of the error that caused the data source to fail.
 	ErrorMessage *string
+
 	// The Unix timestamp of when the data source was last updated.
 	UpdatedAt *time.Time
+
 	// The name that you gave the data source when it was created.
 	Name *string
+
 	// The type of the data source.
 	Type types.DataSourceType
+
 	// The Amazon Resource Name (ARN) of the role that enables the data source to
 	// access its resources.
 	RoleArn *string

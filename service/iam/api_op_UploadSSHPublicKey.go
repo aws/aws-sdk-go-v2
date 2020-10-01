@@ -62,11 +62,15 @@ func (c *Client) UploadSSHPublicKey(ctx context.Context, params *UploadSSHPublic
 }
 
 type UploadSSHPublicKeyInput struct {
+
 	// The name of the IAM user to associate the SSH public key with. This parameter
 	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
+
 	// The SSH public key. The public key must be encoded in ssh-rsa format or PEM
 	// format. The minimum bit-length of the public key is 2048 bits. For example, you
 	// can generate a 2048-bit key, and the resulting PEM file is 1679 bytes long. The
@@ -82,11 +86,14 @@ type UploadSSHPublicKeyInput struct {
 	//
 	//     * The special characters
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+	//
+	// This member is required.
 	SSHPublicKeyBody *string
 }
 
 // Contains the response to a successful UploadSSHPublicKey () request.
 type UploadSSHPublicKeyOutput struct {
+
 	// Contains information about the SSH public key.
 	SSHPublicKey *types.SSHPublicKey
 

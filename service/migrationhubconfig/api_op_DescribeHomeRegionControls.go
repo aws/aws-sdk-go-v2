@@ -56,27 +56,34 @@ func (c *Client) DescribeHomeRegionControls(ctx context.Context, params *Describ
 }
 
 type DescribeHomeRegionControlsInput struct {
+
 	// The target parameter specifies the identifier to which the home region is
 	// applied, which is always of type ACCOUNT. It applies the home region to the
 	// current ACCOUNT.
 	Target *types.Target
+
 	// The maximum number of filtering results to display per page.
 	MaxResults *int32
+
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token
 	// in NextToken.
 	NextToken *string
+
 	// The name of the home region you'd like to view.
 	HomeRegion *string
+
 	// The ControlID is a unique identifier string of your HomeRegionControl object.
 	ControlId *string
 }
 
 type DescribeHomeRegionControlsOutput struct {
+
 	// If a NextToken was returned by a previous call, more results are available. To
 	// retrieve the next page of results, make the call again using the returned token
 	// in NextToken.
 	NextToken *string
+
 	// An array that contains your HomeRegionControl objects.
 	HomeRegionControls []*types.HomeRegionControl
 

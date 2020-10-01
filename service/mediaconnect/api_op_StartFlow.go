@@ -56,13 +56,18 @@ func (c *Client) StartFlow(ctx context.Context, params *StartFlowInput, optFns .
 }
 
 type StartFlowInput struct {
+
 	// The ARN of the flow that you want to start.
+	//
+	// This member is required.
 	FlowArn *string
 }
 
 type StartFlowOutput struct {
+
 	// The ARN of the flow that you started.
 	FlowArn *string
+
 	// The status of the flow when the StartFlow process begins.
 	Status types.Status
 

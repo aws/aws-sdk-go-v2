@@ -60,7 +60,10 @@ func (c *Client) DeleteLedger(ctx context.Context, params *DeleteLedgerInput, op
 }
 
 type DeleteLedgerInput struct {
+
 	// The name of the ledger that you want to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

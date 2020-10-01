@@ -61,23 +61,34 @@ func (c *Client) CreateHost(ctx context.Context, params *CreateHostInput, optFns
 }
 
 type CreateHostInput struct {
+
 	// The name of the installed provider to be associated with your connection. The
 	// host resource represents the infrastructure where your provider type is
 	// installed. The valid provider type is GitHub Enterprise Server.
+	//
+	// This member is required.
 	ProviderType types.ProviderType
+
 	// The VPC configuration to be provisioned for the host. A VPC must be configured
 	// and the infrastructure to be represented by the host must already be connected
 	// to the VPC.
 	VpcConfiguration *types.VpcConfiguration
+
 	// The endpoint of the infrastructure to be represented by the host after it is
 	// created.
+	//
+	// This member is required.
 	ProviderEndpoint *string
+
 	// The name of the host to be created. The name must be unique in the calling AWS
 	// account.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateHostOutput struct {
+
 	// The Amazon Resource Name (ARN) of the host to be created.
 	HostArn *string
 

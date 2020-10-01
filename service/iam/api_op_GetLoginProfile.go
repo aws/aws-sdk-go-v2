@@ -58,16 +58,22 @@ func (c *Client) GetLoginProfile(ctx context.Context, params *GetLoginProfileInp
 }
 
 type GetLoginProfileInput struct {
+
 	// The name of the user whose login profile you want to retrieve. This parameter
 	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	UserName *string
 }
 
 // Contains the response to a successful GetLoginProfile () request.
 type GetLoginProfileOutput struct {
+
 	// A structure containing the user name and password create date for the user.
+	//
+	// This member is required.
 	LoginProfile *types.LoginProfile
 
 	// Metadata pertaining to the operation's result.

@@ -57,18 +57,25 @@ func (c *Client) ListWebsiteAuthorizationProviders(ctx context.Context, params *
 }
 
 type ListWebsiteAuthorizationProvidersInput struct {
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The maximum number of results to be included in the next page.
 	MaxResults *int32
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListWebsiteAuthorizationProvidersOutput struct {
+
 	// The website authorization providers.
 	WebsiteAuthorizationProviders []*types.WebsiteAuthorizationProviderSummary
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string

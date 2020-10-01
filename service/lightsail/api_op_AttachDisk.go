@@ -61,15 +61,25 @@ func (c *Client) AttachDisk(ctx context.Context, params *AttachDiskInput, optFns
 }
 
 type AttachDiskInput struct {
+
 	// The disk path to expose to the instance (e.g., /dev/xvdf).
+	//
+	// This member is required.
 	DiskPath *string
+
 	// The name of the Lightsail instance where you want to utilize the storage disk.
+	//
+	// This member is required.
 	InstanceName *string
+
 	// The unique Lightsail disk name (e.g., my-disk).
+	//
+	// This member is required.
 	DiskName *string
 }
 
 type AttachDiskOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

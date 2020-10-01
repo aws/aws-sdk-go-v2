@@ -78,11 +78,14 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 }
 
 type DeletePolicyInput struct {
+
 	// The Amazon Resource Name (ARN) of the IAM policy you want to delete. For more
 	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	PolicyArn *string
 }
 

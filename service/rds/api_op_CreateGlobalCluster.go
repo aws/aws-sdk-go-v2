@@ -62,27 +62,35 @@ func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalCl
 }
 
 type CreateGlobalClusterInput struct {
+
 	// The name for your database of up to 64 alpha-numeric characters. If you do not
 	// provide a name, Amazon Aurora will not create a database in the global database
 	// cluster you are creating.
 	DatabaseName *string
+
 	// The deletion protection setting for the new global database. The global database
 	// can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
+
 	// Provides the name of the database engine to be used for this DB cluster.
 	Engine *string
+
 	// The storage encryption setting for the new global database cluster.
 	StorageEncrypted *bool
+
 	// The engine version of the Aurora global database.
 	EngineVersion *string
+
 	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
 	// database. This parameter is optional.
 	SourceDBClusterIdentifier *string
+
 	// The cluster identifier of the new global database cluster.
 	GlobalClusterIdentifier *string
 }
 
 type CreateGlobalClusterOutput struct {
+
 	// A data type representing an Aurora global database.
 	GlobalCluster *types.GlobalCluster
 

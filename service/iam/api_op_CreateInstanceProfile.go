@@ -62,11 +62,15 @@ func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstan
 }
 
 type CreateInstanceProfileInput struct {
+
 	// The name of the instance profile to create. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	InstanceProfileName *string
+
 	// The path to the instance profile. For more information about paths, see IAM
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -82,7 +86,10 @@ type CreateInstanceProfileInput struct {
 
 // Contains the response to a successful CreateInstanceProfile () request.
 type CreateInstanceProfileOutput struct {
+
 	// A structure containing details about the new instance profile.
+	//
+	// This member is required.
 	InstanceProfile *types.InstanceProfile
 
 	// Metadata pertaining to the operation's result.

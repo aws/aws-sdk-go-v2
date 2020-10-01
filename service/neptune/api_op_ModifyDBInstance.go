@@ -59,17 +59,22 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 }
 
 type ModifyDBInstanceInput struct {
+
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled. See Deleting a DB Instance
 	// (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
 	DeletionProtection *bool
+
 	// (Not supported by Neptune)
 	OptionGroupName *string
+
 	// Not supported.
 	StorageType *string
+
 	// Not supported.
 	LicenseModel *string
+
 	// The weekly time range (in UTC) during which system maintenance can occur, which
 	// might result in an outage. Changing this parameter doesn't result in an outage,
 	// except in the following situation, and the change is asynchronously applied as
@@ -81,28 +86,36 @@ type ModifyDBInstanceInput struct {
 	// setting Format: ddd:hh24:mi-ddd:hh24:mi Valid Days: Mon | Tue | Wed | Thu | Fri
 	// | Sat | Sun Constraints: Must be at least 30 minutes
 	PreferredMaintenanceWindow *string
+
 	// The configuration setting for the log types to be enabled for export to
 	// CloudWatch Logs for a specific DB instance or DB cluster.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
+
 	// The password for the given ARN from the key store in order to access the device.
 	TdeCredentialPassword *string
+
 	// The new amount of storage (in gibibytes) to allocate for the DB instance. Not
 	// applicable. Storage is managed by the DB Cluster.
 	AllocatedStorage *int32
+
 	// This flag should no longer be used.
 	PubliclyAccessible *bool
+
 	// The version number of the database engine to upgrade to. Currently, setting this
 	// parameter has no effect. To upgrade your database engine to the most recent
 	// release, use the ApplyPendingMaintenanceAction () API.
 	EngineVersion *string
+
 	// (Not supported by Neptune)
 	EnablePerformanceInsights *bool
+
 	// The new compute and memory capacity of the DB instance, for example,
 	// db.m4.large. Not all DB instance classes are available in all AWS Regions. If
 	// you modify the DB instance class, an outage occurs during the change. The change
 	// is applied during the next maintenance window, unless ApplyImmediately is
 	// specified as true for this request. Default: Uses existing setting
 	DBInstanceClass *string
+
 	// The new DB subnet group for the DB instance. You can use this parameter to move
 	// your DB instance to a different VPC. Changing the subnet group causes an outage
 	// during the change. The change is applied during the next maintenance window,
@@ -110,14 +123,17 @@ type ModifyDBInstanceInput struct {
 	// supplied, must match the name of an existing DBSubnetGroup. Example:
 	// mySubnetGroup
 	DBSubnetGroupName *string
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
 	// database accounts, and otherwise false. You can enable IAM database
 	// authentication for the following database engines Not applicable. Mapping AWS
 	// IAM accounts to database accounts is managed by the DB cluster. For more
 	// information, see ModifyDBCluster (). Default: false
 	EnableIAMDatabaseAuthentication *bool
+
 	// Not supported.
 	Domain *string
+
 	// Indicates that minor version upgrades are applied automatically to the DB
 	// instance during the maintenance window. Changing this parameter doesn't result
 	// in an outage except in the following case and the change is asynchronously
@@ -125,13 +141,16 @@ type ModifyDBInstanceInput struct {
 	// true during the maintenance window, and a newer minor version is available, and
 	// Neptune has enabled auto patching for that engine version.
 	AutoMinorVersionUpgrade *bool
+
 	// The new Provisioned IOPS (I/O operations per second) value for the instance.
 	// Changing this setting doesn't result in an outage and the change is applied
 	// during the next maintenance window unless the ApplyImmediately parameter is set
 	// to true for this request. Default: Uses existing setting
 	Iops *int32
+
 	// Not applicable.
 	MasterUserPassword *string
+
 	// The name of the DB parameter group to apply to the DB instance. Changing this
 	// setting doesn't result in an outage. The parameter group name itself is changed
 	// immediately, but the actual parameter changes are not applied until you reboot
@@ -140,6 +159,7 @@ type ModifyDBInstanceInput struct {
 	// maintenance window. Default: Uses existing setting Constraints: The DB parameter
 	// group must be in the same DB parameter group family as this DB instance.
 	DBParameterGroupName *string
+
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB instance. If this parameter is set
@@ -147,11 +167,13 @@ type ModifyDBInstanceInput struct {
 	// window. Some parameter changes can cause an outage and are applied on the next
 	// call to RebootDBInstance (), or the next failure reboot. Default: false
 	ApplyImmediately *bool
+
 	// The ARN for the IAM role that permits Neptune to send enhanced monitoring
 	// metrics to Amazon CloudWatch Logs. For example,
 	// arn:aws:iam:123456789012:role/emaccess. If MonitoringInterval is set to a value
 	// other than 0, then you must supply a MonitoringRoleArn value.
 	MonitoringRoleArn *string
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled. Not applicable. The daily time range for creating automated
 	// backups is managed by the DB cluster. For more information, see ModifyDBCluster
@@ -167,8 +189,10 @@ type ModifyDBInstanceInput struct {
 	//
 	//     * Must be at least 30 minutes
 	PreferredBackupWindow *string
+
 	// Indicates the certificate that needs to be associated with the instance.
 	CACertificateIdentifier *string
+
 	// A list of DB security groups to authorize on this DB instance. Changing this
 	// setting doesn't result in an outage and the change is asynchronously applied as
 	// soon as possible. Constraints:
@@ -176,32 +200,39 @@ type ModifyDBInstanceInput struct {
 	//     * If supplied, must match existing
 	// DBSecurityGroups.
 	DBSecurityGroups []*string
+
 	// Indicates that major version upgrades are allowed. Changing this parameter
 	// doesn't result in an outage and the change is asynchronously applied as soon as
 	// possible.
 	AllowMajorVersionUpgrade *bool
+
 	// Not applicable. The retention period for automated backups is managed by the DB
 	// cluster. For more information, see ModifyDBCluster (). Default: Uses existing
 	// setting
 	BackupRetentionPeriod *int32
+
 	// Specifies if the DB instance is a Multi-AZ deployment. Changing this parameter
 	// doesn't result in an outage and the change is applied during the next
 	// maintenance window unless the ApplyImmediately parameter is set to true for this
 	// request.
 	MultiAZ *bool
+
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
 	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, then
 	// you must also set MonitoringInterval to a value other than 0. Valid Values: 0,
 	// 1, 5, 10, 15, 30, 60
 	MonitoringInterval *int32
+
 	// A value that specifies the order in which a Read Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. Default: 1
 	// Valid Values: 0 - 15
 	PromotionTier *int32
+
 	// True to copy all tags from the DB instance to snapshots of the DB instance, and
 	// otherwise false. The default is false.
 	CopyTagsToSnapshot *bool
+
 	// The new DB instance identifier for the DB instance when renaming a DB instance.
 	// When you change the DB instance identifier, an instance reboot will occur
 	// immediately if you set Apply Immediately to true, or will occur during the next
@@ -218,24 +249,32 @@ type ModifyDBInstanceInput struct {
 	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
+
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
 	//
 	//     * Must match the identifier of an existing DBInstance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// The port number on which the database accepts connections. The value of the
 	// DBPortNumber parameter must not match any of the port values specified for
 	// options in the option group for the DB instance. Your database will restart when
 	// you change the DBPortNumber value regardless of the value of the
 	// ApplyImmediately parameter. Default: 8182
 	DBPortNumber *int32
+
 	// (Not supported by Neptune)
 	PerformanceInsightsKMSKeyId *string
+
 	// Not supported
 	DomainIAMRoleName *string
+
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
 	TdeCredentialArn *string
+
 	// A list of EC2 VPC security groups to authorize on this DB instance. This change
 	// is asynchronously applied as soon as possible. Not applicable. The associated
 	// list of EC2 VPC security groups is managed by the DB cluster. For more
@@ -247,6 +286,7 @@ type ModifyDBInstanceInput struct {
 }
 
 type ModifyDBInstanceOutput struct {
+
 	// Contains the details of an Amazon Neptune DB instance. This data type is used as
 	// a response element in the DescribeDBInstances () action.
 	DBInstance *types.DBInstance

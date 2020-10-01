@@ -58,8 +58,11 @@ func (c *Client) StartConfigurationRecorder(ctx context.Context, params *StartCo
 
 // The input for the StartConfigurationRecorder () action.
 type StartConfigurationRecorderInput struct {
+
 	// The name of the recorder object that records each configuration change made to
 	// the resources.
+	//
+	// This member is required.
 	ConfigurationRecorderName *string
 }
 

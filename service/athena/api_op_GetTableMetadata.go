@@ -56,16 +56,26 @@ func (c *Client) GetTableMetadata(ctx context.Context, params *GetTableMetadataI
 }
 
 type GetTableMetadataInput struct {
+
 	// The name of the data catalog that contains the database and table metadata to
 	// return.
+	//
+	// This member is required.
 	CatalogName *string
+
 	// The name of the table for which metadata is returned.
+	//
+	// This member is required.
 	TableName *string
+
 	// The name of the database that contains the table metadata to return.
+	//
+	// This member is required.
 	DatabaseName *string
 }
 
 type GetTableMetadataOutput struct {
+
 	// An object that contains table metadata.
 	TableMetadata *types.TableMetadata
 

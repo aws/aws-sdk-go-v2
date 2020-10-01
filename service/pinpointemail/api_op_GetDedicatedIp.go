@@ -59,14 +59,18 @@ func (c *Client) GetDedicatedIp(ctx context.Context, params *GetDedicatedIpInput
 
 // A request to obtain more information about a dedicated IP address.
 type GetDedicatedIpInput struct {
+
 	// The IP address that you want to obtain more information about. The value you
 	// specify has to be a dedicated IP address that's assocaited with your Amazon
 	// Pinpoint account.
+	//
+	// This member is required.
 	Ip *string
 }
 
 // Information about a dedicated IP address.
 type GetDedicatedIpOutput struct {
+
 	// An object that contains information about a dedicated IP address.
 	DedicatedIp *types.DedicatedIp
 

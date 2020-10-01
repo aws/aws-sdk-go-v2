@@ -55,7 +55,10 @@ func (c *Client) DeleteRoleAlias(ctx context.Context, params *DeleteRoleAliasInp
 }
 
 type DeleteRoleAliasInput struct {
+
 	// The role alias to delete.
+	//
+	// This member is required.
 	RoleAlias *string
 }
 

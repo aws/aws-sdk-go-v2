@@ -60,12 +60,17 @@ func (c *Client) SetSubnets(ctx context.Context, params *SetSubnetsInput, optFns
 }
 
 type SetSubnetsInput struct {
+
 	// The Amazon Resource Name (ARN) of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerArn *string
+
 	// The IDs of the public subnets. You must specify subnets from at least two
 	// Availability Zones. You can specify only one subnet per Availability Zone. You
 	// must specify either subnets or subnet mappings.
 	Subnets []*string
+
 	// The IDs of the public subnets. You can specify only one subnet per Availability
 	// Zone. You must specify either subnets or subnet mappings. [Application Load
 	// Balancers] You must specify subnets from at least two Availability Zones. You
@@ -78,6 +83,7 @@ type SetSubnetsInput struct {
 }
 
 type SetSubnetsOutput struct {
+
 	// Information about the subnet and Availability Zone.
 	AvailabilityZones []*types.AvailabilityZone
 

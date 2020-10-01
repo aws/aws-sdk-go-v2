@@ -62,14 +62,23 @@ func (c *Client) SetPermission(ctx context.Context, params *SetPermissionInput, 
 }
 
 type SetPermissionInput struct {
+
 	// The user's IAM ARN. This can also be a federated user's ARN.
+	//
+	// This member is required.
 	IamUserArn *string
+
 	// The user is allowed to use SSH to communicate with the instance.
 	AllowSsh *bool
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
+
 	// The user is allowed to use sudo to elevate privileges.
 	AllowSudo *bool
+
 	// The user's permission level, which must be set to one of the following strings.
 	// You cannot set your own permissions level.
 	//

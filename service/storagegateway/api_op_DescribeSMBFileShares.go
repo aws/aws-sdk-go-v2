@@ -58,13 +58,17 @@ func (c *Client) DescribeSMBFileShares(ctx context.Context, params *DescribeSMBF
 
 // DescribeSMBFileSharesInput
 type DescribeSMBFileSharesInput struct {
+
 	// An array containing the Amazon Resource Name (ARN) of each file share to be
 	// described.
+	//
+	// This member is required.
 	FileShareARNList []*string
 }
 
 // DescribeSMBFileSharesOutput
 type DescribeSMBFileSharesOutput struct {
+
 	// An array containing a description for each requested file share.
 	SMBFileShareInfoList []*types.SMBFileShareInfo
 

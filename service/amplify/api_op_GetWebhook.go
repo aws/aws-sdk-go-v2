@@ -57,13 +57,19 @@ func (c *Client) GetWebhook(ctx context.Context, params *GetWebhookInput, optFns
 
 // The request structure for the get webhook request.
 type GetWebhookInput struct {
+
 	// The unique ID for a webhook.
+	//
+	// This member is required.
 	WebhookId *string
 }
 
 // The result structure for the get webhook request.
 type GetWebhookOutput struct {
+
 	// Describes the structure of a webhook.
+	//
+	// This member is required.
 	Webhook *types.Webhook
 
 	// Metadata pertaining to the operation's result.

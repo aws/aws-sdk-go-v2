@@ -65,21 +65,28 @@ func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAv
 // Specifies the name of the domain you want to update and the Multi-AZ
 // availability option.
 type UpdateAvailabilityOptionsInput struct {
+
 	// You expand an existing search domain to a second Availability Zone by setting
 	// the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to
 	// downgrade the domain to a single Availability Zone by setting the Multi-AZ
 	// option to false.
+	//
+	// This member is required.
 	MultiAZ *bool
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of a UpdateAvailabilityOptions request. Contains the status of the
 // domain's availability options.
 type UpdateAvailabilityOptionsOutput struct {
+
 	// The newly-configured availability options. Indicates whether Multi-AZ is enabled
 	// for the domain.
 	AvailabilityOptions *types.AvailabilityOptionsStatus

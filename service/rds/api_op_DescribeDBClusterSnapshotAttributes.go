@@ -66,11 +66,15 @@ func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params
 
 //
 type DescribeDBClusterSnapshotAttributesInput struct {
+
 	// The identifier for the DB cluster snapshot to describe the attributes for.
+	//
+	// This member is required.
 	DBClusterSnapshotIdentifier *string
 }
 
 type DescribeDBClusterSnapshotAttributesOutput struct {
+
 	// Contains the results of a successful call to the
 	// DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
 	// attributes are used to authorize other AWS accounts to copy or restore a manual

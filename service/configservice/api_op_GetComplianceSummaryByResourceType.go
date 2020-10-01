@@ -58,6 +58,7 @@ func (c *Client) GetComplianceSummaryByResourceType(ctx context.Context, params 
 
 //
 type GetComplianceSummaryByResourceTypeInput struct {
+
 	// Specify one or more resource types to get the number of resources that are
 	// compliant and the number that are noncompliant for each resource type. For this
 	// request, you can specify an AWS resource type such as AWS::EC2::Instance. You
@@ -68,6 +69,7 @@ type GetComplianceSummaryByResourceTypeInput struct {
 
 //
 type GetComplianceSummaryByResourceTypeOutput struct {
+
 	// The number of resources that are compliant and the number that are noncompliant.
 	// If one or more resource types were provided with the request, the numbers are
 	// returned for each resource type. The maximum number returned is 100.

@@ -56,18 +56,27 @@ func (c *Client) ListArchiveRules(ctx context.Context, params *ListArchiveRulesI
 
 // Retrieves a list of archive rules created for the specified analyzer.
 type ListArchiveRulesInput struct {
+
 	// The name of the analyzer to retrieve rules from.
+	//
+	// This member is required.
 	AnalyzerName *string
+
 	// A token used for pagination of results returned.
 	NextToken *string
+
 	// The maximum number of results to return in the request.
 	MaxResults *int32
 }
 
 // The response to the request.
 type ListArchiveRulesOutput struct {
+
 	// A list of archive rules created for the specified analyzer.
+	//
+	// This member is required.
 	ArchiveRules []*types.ArchiveRuleSummary
+
 	// A token used for pagination of results returned.
 	NextToken *string
 

@@ -57,16 +57,20 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 }
 
 type ListSchemasInput struct {
+
 	// The maximum number of schemas to return.
 	MaxResults *int32
+
 	// A token returned from the previous call to ListSchemas for getting the next set
 	// of schemas (if they exist).
 	NextToken *string
 }
 
 type ListSchemasOutput struct {
+
 	// A list of schemas.
 	Schemas []*types.DatasetSchemaSummary
+
 	// A token used to get the next set of schemas (if they exist).
 	NextToken *string
 

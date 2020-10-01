@@ -58,10 +58,13 @@ func (c *Client) DeleteAssociation(ctx context.Context, params *DeleteAssociatio
 }
 
 type DeleteAssociationInput struct {
+
 	// The ID of the instance.
 	InstanceId *string
+
 	// The association ID that you want to delete.
 	AssociationId *string
+
 	// The name of the Systems Manager document.
 	Name *string
 }

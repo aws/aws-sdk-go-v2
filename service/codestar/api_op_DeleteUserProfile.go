@@ -58,12 +58,18 @@ func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfil
 }
 
 type DeleteUserProfileInput struct {
+
 	// The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.
+	//
+	// This member is required.
 	UserArn *string
 }
 
 type DeleteUserProfileOutput struct {
+
 	// The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.
+	//
+	// This member is required.
 	UserArn *string
 
 	// Metadata pertaining to the operation's result.

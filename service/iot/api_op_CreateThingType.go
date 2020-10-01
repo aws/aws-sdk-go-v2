@@ -57,22 +57,30 @@ func (c *Client) CreateThingType(ctx context.Context, params *CreateThingTypeInp
 
 // The input for the CreateThingType operation.
 type CreateThingTypeInput struct {
+
 	// The ThingTypeProperties for the thing type to create. It contains information
 	// about the new thing type including a description, and a list of searchable thing
 	// attribute names.
 	ThingTypeProperties *types.ThingTypeProperties
+
 	// The name of the thing type.
+	//
+	// This member is required.
 	ThingTypeName *string
+
 	// Metadata which can be used to manage the thing type.
 	Tags []*types.Tag
 }
 
 // The output of the CreateThingType operation.
 type CreateThingTypeOutput struct {
+
 	// The thing type ID.
 	ThingTypeId *string
+
 	// The name of the thing type.
 	ThingTypeName *string
+
 	// The Amazon Resource Name (ARN) of the thing type.
 	ThingTypeArn *string
 

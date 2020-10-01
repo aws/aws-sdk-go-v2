@@ -56,44 +56,66 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 }
 
 type CreateDataSourceInput struct {
+
 	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
 	// underlying source.
 	SslProperties *types.SslProperties
+
 	// A display name for the data source.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of resource permissions on the data source.
 	Permissions []*types.ResourcePermission
+
 	// The parameters that QuickSight uses to connect to your underlying source.
 	DataSourceParameters *types.DataSourceParameters
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The credentials QuickSight that uses to connect to your underlying source.
 	// Currently, only credentials based on user name and password are supported.
 	Credentials *types.DataSourceCredentials
+
 	// An ID for the data source. This ID is unique per AWS Region for each AWS
 	// account.
+	//
+	// This member is required.
 	DataSourceId *string
+
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the data source.
 	Tags []*types.Tag
+
 	// The type of the data source. Currently, the supported types for this operation
 	// are: ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO,
 	// REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA. Use ListDataSources to
 	// return a list of all data sources.
+	//
+	// This member is required.
 	Type types.DataSourceType
+
 	// Use this parameter only when you want QuickSight to use a VPC connection when
 	// connecting to your underlying source.
 	VpcConnectionProperties *types.VpcConnectionProperties
 }
 
 type CreateDataSourceOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
 	DataSourceId *string
+
 	// The Amazon Resource Name (ARN) of the data source.
 	Arn *string
+
 	// The status of creating the data source.
 	CreationStatus types.ResourceStatus
 

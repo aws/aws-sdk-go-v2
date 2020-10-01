@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This engine is not compatible with the voice that you have designated. Choose a
@@ -26,12 +25,6 @@ func (e *EngineNotSupportedException) ErrorMessage() string {
 }
 func (e *EngineNotSupportedException) ErrorCode() string             { return "EngineNotSupportedException" }
 func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EngineNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EngineNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Polly can't find the specified lexicon. Verify that the lexicon's name is
 // spelled correctly, and then try again.
@@ -50,12 +43,6 @@ func (e *InvalidLexiconException) ErrorMessage() string {
 }
 func (e *InvalidLexiconException) ErrorCode() string             { return "InvalidLexiconException" }
 func (e *InvalidLexiconException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidLexiconException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidLexiconException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The NextToken is invalid. Verify that it's spelled correctly, and then try
 // again.
@@ -74,12 +61,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided Amazon S3 bucket name is invalid. Please check your input with S3
 // bucket naming requirements and try again.
@@ -98,12 +79,6 @@ func (e *InvalidS3BucketException) ErrorMessage() string {
 }
 func (e *InvalidS3BucketException) ErrorCode() string             { return "InvalidS3BucketException" }
 func (e *InvalidS3BucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3BucketException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3BucketException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided Amazon S3 key prefix is invalid. Please provide a valid S3 object
 // key name.
@@ -122,12 +97,6 @@ func (e *InvalidS3KeyException) ErrorMessage() string {
 }
 func (e *InvalidS3KeyException) ErrorCode() string             { return "InvalidS3KeyException" }
 func (e *InvalidS3KeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3KeyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3KeyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified sample rate is not valid.
 type InvalidSampleRateException struct {
@@ -145,12 +114,6 @@ func (e *InvalidSampleRateException) ErrorMessage() string {
 }
 func (e *InvalidSampleRateException) ErrorCode() string             { return "InvalidSampleRateException" }
 func (e *InvalidSampleRateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSampleRateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSampleRateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and
 // try again.
@@ -169,12 +132,6 @@ func (e *InvalidSnsTopicArnException) ErrorMessage() string {
 }
 func (e *InvalidSnsTopicArnException) ErrorCode() string             { return "InvalidSnsTopicArnException" }
 func (e *InvalidSnsTopicArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSnsTopicArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSnsTopicArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The SSML you provided is invalid. Verify the SSML syntax, spelling of tags and
 // values, and then try again.
@@ -193,12 +150,6 @@ func (e *InvalidSsmlException) ErrorMessage() string {
 }
 func (e *InvalidSsmlException) ErrorCode() string             { return "InvalidSsmlException" }
 func (e *InvalidSsmlException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSsmlException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSsmlException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided Task ID is not valid. Please provide a valid Task ID and try again.
 type InvalidTaskIdException struct {
@@ -216,12 +167,6 @@ func (e *InvalidTaskIdException) ErrorMessage() string {
 }
 func (e *InvalidTaskIdException) ErrorCode() string             { return "InvalidTaskIdException" }
 func (e *InvalidTaskIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTaskIdException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTaskIdException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The language specified is not currently supported by Amazon Polly in this
 // capacity.
@@ -240,12 +185,6 @@ func (e *LanguageNotSupportedException) ErrorMessage() string {
 }
 func (e *LanguageNotSupportedException) ErrorCode() string             { return "LanguageNotSupportedException" }
 func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LanguageNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LanguageNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Polly can't find the specified lexicon. This could be caused by a lexicon
 // that is missing, its name is misspelled or specifying a lexicon that is in a
@@ -267,12 +206,6 @@ func (e *LexiconNotFoundException) ErrorMessage() string {
 }
 func (e *LexiconNotFoundException) ErrorCode() string             { return "LexiconNotFoundException" }
 func (e *LexiconNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LexiconNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LexiconNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum size of the specified lexicon would be exceeded by this operation.
 type LexiconSizeExceededException struct {
@@ -290,12 +223,6 @@ func (e *LexiconSizeExceededException) ErrorMessage() string {
 }
 func (e *LexiconSizeExceededException) ErrorCode() string             { return "LexiconSizeExceededException" }
 func (e *LexiconSizeExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LexiconSizeExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LexiconSizeExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Speech marks are not supported for the OutputFormat selected. Speech marks are
 // only available for content in json format.
@@ -318,12 +245,6 @@ func (e *MarksNotSupportedForFormatException) ErrorCode() string {
 func (e *MarksNotSupportedForFormatException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MarksNotSupportedForFormatException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MarksNotSupportedForFormatException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum size of the lexeme would be exceeded by this operation.
 type MaxLexemeLengthExceededException struct {
@@ -343,12 +264,6 @@ func (e *MaxLexemeLengthExceededException) ErrorCode() string {
 	return "MaxLexemeLengthExceededException"
 }
 func (e *MaxLexemeLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MaxLexemeLengthExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxLexemeLengthExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number of lexicons would be exceeded by this operation.
 type MaxLexiconsNumberExceededException struct {
@@ -370,12 +285,6 @@ func (e *MaxLexiconsNumberExceededException) ErrorCode() string {
 func (e *MaxLexiconsNumberExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MaxLexiconsNumberExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MaxLexiconsNumberExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An unknown condition has caused a service failure.
 type ServiceFailureException struct {
@@ -393,12 +302,6 @@ func (e *ServiceFailureException) ErrorMessage() string {
 }
 func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailureException" }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // SSML speech marks are not supported for plain text-type input.
 type SsmlMarksNotSupportedForTextTypeException struct {
@@ -420,12 +323,6 @@ func (e *SsmlMarksNotSupportedForTextTypeException) ErrorCode() string {
 func (e *SsmlMarksNotSupportedForTextTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SsmlMarksNotSupportedForTextTypeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SsmlMarksNotSupportedForTextTypeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Speech Synthesis task with requested Task ID cannot be found.
 type SynthesisTaskNotFoundException struct {
@@ -443,12 +340,6 @@ func (e *SynthesisTaskNotFoundException) ErrorMessage() string {
 }
 func (e *SynthesisTaskNotFoundException) ErrorCode() string             { return "SynthesisTaskNotFoundException" }
 func (e *SynthesisTaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SynthesisTaskNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SynthesisTaskNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of the "Text" parameter is longer than the accepted limits. For the
 // SynthesizeSpeech API, the limit for input text is a maximum of 6000 characters
@@ -471,12 +362,6 @@ func (e *TextLengthExceededException) ErrorMessage() string {
 }
 func (e *TextLengthExceededException) ErrorCode() string             { return "TextLengthExceededException" }
 func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TextLengthExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TextLengthExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The alphabet specified by the lexicon is not a supported alphabet. Valid values
 // are x-sampa and ipa.
@@ -497,12 +382,6 @@ func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
 	return "UnsupportedPlsAlphabetException"
 }
 func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedPlsAlphabetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedPlsAlphabetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The language specified in the lexicon is unsupported. For a list of supported
 // languages, see Lexicon Attributes
@@ -524,9 +403,3 @@ func (e *UnsupportedPlsLanguageException) ErrorCode() string {
 	return "UnsupportedPlsLanguageException"
 }
 func (e *UnsupportedPlsLanguageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedPlsLanguageException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedPlsLanguageException) HasMessage() bool {
-	return e.Message != nil
-}

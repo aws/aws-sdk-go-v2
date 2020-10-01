@@ -58,20 +58,30 @@ func (c *Client) DisassociateAssets(ctx context.Context, params *DisassociateAss
 }
 
 type DisassociateAssetsInput struct {
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
 	// The ID of a hierarchy in the parent asset's model. Hierarchies allow different
 	// groupings of assets to be formed that all come from the same asset model. You
 	// can use the hierarchy ID to identify the correct asset to disassociate. For more
 	// information, see Asset Hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
 	HierarchyId *string
+
 	// The ID of the parent asset from which to disassociate the child asset.
+	//
+	// This member is required.
 	AssetId *string
+
 	// The ID of the child asset to disassociate.
+	//
+	// This member is required.
 	ChildAssetId *string
 }
 

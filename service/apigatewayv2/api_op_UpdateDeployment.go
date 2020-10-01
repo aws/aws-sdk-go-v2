@@ -58,25 +58,38 @@ func (c *Client) UpdateDeployment(ctx context.Context, params *UpdateDeploymentI
 
 // Updates a Deployment.
 type UpdateDeploymentInput struct {
+
 	// The deployment ID.
+	//
+	// This member is required.
 	DeploymentId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The description for the deployment resource.
 	Description *string
 }
 
 type UpdateDeploymentOutput struct {
+
 	// The identifier for the deployment.
 	DeploymentId *string
+
 	// The description for the deployment.
 	Description *string
+
 	// The status of the deployment: PENDING, FAILED, or SUCCEEDED.
 	DeploymentStatus types.DeploymentStatus
+
 	// Specifies whether a deployment was automatically released.
 	AutoDeployed *bool
+
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time
+
 	// May contain additional feedback on the status of an API deployment.
 	DeploymentStatusMessage *string
 

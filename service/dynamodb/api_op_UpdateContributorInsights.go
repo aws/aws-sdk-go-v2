@@ -58,19 +58,29 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 }
 
 type UpdateContributorInsightsInput struct {
+
 	// Represents the contributor insights action.
+	//
+	// This member is required.
 	ContributorInsightsAction types.ContributorInsightsAction
+
 	// The name of the table.
+	//
+	// This member is required.
 	TableName *string
+
 	// The global secondary index name, if applicable.
 	IndexName *string
 }
 
 type UpdateContributorInsightsOutput struct {
+
 	// The status of contributor insights
 	ContributorInsightsStatus types.ContributorInsightsStatus
+
 	// The name of the table.
 	TableName *string
+
 	// The name of the global secondary index, if applicable.
 	IndexName *string
 

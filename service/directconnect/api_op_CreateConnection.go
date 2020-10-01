@@ -66,40 +66,62 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 }
 
 type CreateConnectionInput struct {
+
 	// The name of the service provider associated with the requested connection.
 	ProviderName *string
+
 	// The bandwidth of the connection.
+	//
+	// This member is required.
 	Bandwidth *string
+
 	// The location of the connection.
+	//
+	// This member is required.
 	Location *string
+
 	// The tags to associate with the lag.
 	Tags []*types.Tag
+
 	// The name of the connection.
+	//
+	// This member is required.
 	ConnectionName *string
+
 	// The ID of the LAG.
 	LagId *string
 }
 
 // Information about an AWS Direct Connect connection.
 type CreateConnectionOutput struct {
+
 	// Indicates whether jumbo frames (9001 MTU) are supported.
 	JumboFrameCapable *bool
+
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
 	// The ID of the VLAN.
 	Vlan *int32
+
 	// The name of the connection.
 	ConnectionName *string
+
 	// The AWS Region where the connection is located.
 	Region *string
+
 	// The ID of the LAG.
 	LagId *string
+
 	// The ID of the connection.
 	ConnectionId *string
+
 	// The tags associated with the connection.
 	Tags []*types.Tag
+
 	// The ID of the AWS account that owns the connection.
 	OwnerAccount *string
+
 	// The state of the connection. The following are the possible values:
 	//
 	//     *
@@ -132,20 +154,27 @@ type CreateConnectionOutput struct {
 	//     * unknown: The state of the connection is
 	// not available.
 	ConnectionState types.ConnectionState
+
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDevice *string
+
 	// The name of the AWS Direct Connect service provider associated with the
 	// connection.
 	PartnerName *string
+
 	// The time of the most recent call to DescribeLoa () for this connection.
 	LoaIssueTime *time.Time
+
 	// Indicates whether the connection supports a secondary BGP peer in the same
 	// address family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string
+
 	// The bandwidth of the connection.
 	Bandwidth *string
+
 	// The location of the connection.
 	Location *string
 

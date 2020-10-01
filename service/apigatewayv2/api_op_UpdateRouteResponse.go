@@ -57,33 +57,51 @@ func (c *Client) UpdateRouteResponse(ctx context.Context, params *UpdateRouteRes
 
 // Updates a RouteResponse.
 type UpdateRouteResponseInput struct {
+
 	// The model selection expression for the route response. Supported only for
 	// WebSocket APIs.
 	ModelSelectionExpression *string
+
 	// The route response key.
 	RouteResponseKey *string
+
 	// The route ID.
+	//
+	// This member is required.
 	RouteId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
+
 	// The response models for the route response.
 	ResponseModels map[string]*string
+
 	// The route response parameters.
 	ResponseParameters map[string]*types.ParameterConstraints
+
 	// The route response ID.
+	//
+	// This member is required.
 	RouteResponseId *string
 }
 
 type UpdateRouteResponseOutput struct {
+
 	// Represents the response models of a route response.
 	ResponseModels map[string]*string
+
 	// Represents the model selection expression of a route response. Supported only
 	// for WebSocket APIs.
 	ModelSelectionExpression *string
+
 	// Represents the response parameters of a route response.
 	ResponseParameters map[string]*types.ParameterConstraints
+
 	// Represents the route response key of a route response.
 	RouteResponseKey *string
+
 	// Represents the identifier of a route response.
 	RouteResponseId *string
 

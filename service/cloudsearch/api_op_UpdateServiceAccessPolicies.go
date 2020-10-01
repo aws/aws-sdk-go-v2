@@ -62,19 +62,28 @@ func (c *Client) UpdateServiceAccessPolicies(ctx context.Context, params *Update
 // Specifies the name of the domain you want to update and the access rules you
 // want to configure.
 type UpdateServiceAccessPoliciesInput struct {
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
+
 	// The access rules you want to configure. These rules replace any existing rules.
+	//
+	// This member is required.
 	AccessPolicies *string
 }
 
 // The result of an UpdateServiceAccessPolicies request. Contains the new access
 // policies.
 type UpdateServiceAccessPoliciesOutput struct {
+
 	// The access rules configured for the domain.
+	//
+	// This member is required.
 	AccessPolicies *types.AccessPoliciesStatus
 
 	// Metadata pertaining to the operation's result.

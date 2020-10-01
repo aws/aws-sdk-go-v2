@@ -55,10 +55,13 @@ func (c *Client) ListKeyPhrasesDetectionJobs(ctx context.Context, params *ListKe
 }
 
 type ListKeyPhrasesDetectionJobsInput struct {
+
 	// Identifies the next page of results to return.
 	NextToken *string
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
 	// Filters the jobs that are returned. You can filter jobs on their name, status,
 	// or the date and time that they were submitted. You can only set one filter at a
 	// time.
@@ -66,8 +69,10 @@ type ListKeyPhrasesDetectionJobsInput struct {
 }
 
 type ListKeyPhrasesDetectionJobsOutput struct {
+
 	// A list containing the properties of each job that is returned.
 	KeyPhrasesDetectionJobPropertiesList []*types.KeyPhrasesDetectionJobProperties
+
 	// Identifies the next page of results to return.
 	NextToken *string
 

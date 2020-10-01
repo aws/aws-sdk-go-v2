@@ -56,18 +56,29 @@ func (c *Client) GetPartition(ctx context.Context, params *GetPartitionInput, op
 }
 
 type GetPartitionInput struct {
+
 	// The values that define the partition.
+	//
+	// This member is required.
 	PartitionValues []*string
+
 	// The ID of the Data Catalog where the partition in question resides. If none is
 	// provided, the AWS account ID is used by default.
 	CatalogId *string
+
 	// The name of the catalog database where the partition resides.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The name of the partition's table.
+	//
+	// This member is required.
 	TableName *string
 }
 
 type GetPartitionOutput struct {
+
 	// The requested information, in the form of a Partition object.
 	Partition *types.Partition
 

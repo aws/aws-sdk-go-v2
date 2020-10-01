@@ -56,15 +56,21 @@ func (c *Client) UpdateTagOption(ctx context.Context, params *UpdateTagOptionInp
 }
 
 type UpdateTagOptionInput struct {
+
 	// The TagOption identifier.
+	//
+	// This member is required.
 	Id *string
+
 	// The updated active state.
 	Active *bool
+
 	// The updated value.
 	Value *string
 }
 
 type UpdateTagOptionOutput struct {
+
 	// Information about the TagOption.
 	TagOptionDetail *types.TagOptionDetail
 

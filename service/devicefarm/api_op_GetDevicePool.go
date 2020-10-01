@@ -57,12 +57,16 @@ func (c *Client) GetDevicePool(ctx context.Context, params *GetDevicePoolInput, 
 
 // Represents a request to the get device pool operation.
 type GetDevicePoolInput struct {
+
 	// The device pool's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get device pool request.
 type GetDevicePoolOutput struct {
+
 	// An object that contains information about the requested device pool.
 	DevicePool *types.DevicePool
 

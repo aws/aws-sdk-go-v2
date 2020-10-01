@@ -56,11 +56,15 @@ func (c *Client) GetStaticIp(ctx context.Context, params *GetStaticIpInput, optF
 }
 
 type GetStaticIpInput struct {
+
 	// The name of the static IP in Lightsail.
+	//
+	// This member is required.
 	StaticIpName *string
 }
 
 type GetStaticIpOutput struct {
+
 	// An array of key-value pairs containing information about the requested static
 	// IP.
 	StaticIp *types.StaticIp

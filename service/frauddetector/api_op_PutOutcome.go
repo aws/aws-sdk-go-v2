@@ -56,11 +56,16 @@ func (c *Client) PutOutcome(ctx context.Context, params *PutOutcomeInput, optFns
 }
 
 type PutOutcomeInput struct {
+
 	// The outcome description.
 	Description *string
+
 	// A collection of key and value pairs.
 	Tags []*types.Tag
+
 	// The name of the outcome.
+	//
+	// This member is required.
 	Name *string
 }
 

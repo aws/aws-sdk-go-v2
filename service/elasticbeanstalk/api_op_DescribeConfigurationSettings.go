@@ -67,13 +67,18 @@ func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *Desc
 // Result message containing all of the configuration settings for a specified
 // solution stack or configuration template.
 type DescribeConfigurationSettingsInput struct {
+
 	// The application for the environment or configuration template.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The name of the environment to describe. Condition: You must specify either this
 	// or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk
 	// returns an InvalidParameterCombination error. If you do not specify either, AWS
 	// Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
+
 	// The name of the configuration template to describe. Conditional: You must
 	// specify either this parameter or an EnvironmentName, but not both. If you
 	// specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
@@ -85,6 +90,7 @@ type DescribeConfigurationSettingsInput struct {
 // The results from a request to change the configuration settings of an
 // environment.
 type DescribeConfigurationSettingsOutput struct {
+
 	// A list of ConfigurationSettingsDescription ().
 	ConfigurationSettings []*types.ConfigurationSettingsDescription
 

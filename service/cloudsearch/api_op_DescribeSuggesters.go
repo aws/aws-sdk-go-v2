@@ -68,18 +68,26 @@ func (c *Client) DescribeSuggesters(ctx context.Context, params *DescribeSuggest
 // To show the active configuration and exclude any pending changes, set the
 // Deployed option to true.
 type DescribeSuggestersInput struct {
+
 	// The name of the domain you want to describe.
+	//
+	// This member is required.
 	DomainName *string
+
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
+
 	// The suggesters you want to describe.
 	SuggesterNames []*string
 }
 
 // The result of a DescribeSuggesters request.
 type DescribeSuggestersOutput struct {
+
 	// The suggesters configured for the domain specified in the request.
+	//
+	// This member is required.
 	Suggesters []*types.SuggesterStatus
 
 	// Metadata pertaining to the operation's result.

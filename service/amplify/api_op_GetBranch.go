@@ -57,14 +57,23 @@ func (c *Client) GetBranch(ctx context.Context, params *GetBranchInput, optFns .
 
 // The request structure for the get branch request.
 type GetBranchInput struct {
+
 	// The name for the branch.
+	//
+	// This member is required.
 	BranchName *string
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
 }
 
 type GetBranchOutput struct {
+
 	// The branch for an Amplify app, which maps to a third-party repository branch.
+	//
+	// This member is required.
 	Branch *types.Branch
 
 	// Metadata pertaining to the operation's result.

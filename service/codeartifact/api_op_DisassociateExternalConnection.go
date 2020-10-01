@@ -56,19 +56,30 @@ func (c *Client) DisassociateExternalConnection(ctx context.Context, params *Dis
 }
 
 type DisassociateExternalConnectionInput struct {
+
 	// The name of the repository from which the external connection will be removed.
+	//
+	// This member is required.
 	Repository *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The name of the external connection to be removed from the repository.
+	//
+	// This member is required.
 	ExternalConnection *string
+
 	// The name of the domain that contains the repository from which to remove the
 	// external repository.
+	//
+	// This member is required.
 	Domain *string
 }
 
 type DisassociateExternalConnectionOutput struct {
+
 	// The repository associated with the removed external connection.
 	Repository *types.RepositoryDescription
 

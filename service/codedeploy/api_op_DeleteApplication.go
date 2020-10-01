@@ -56,8 +56,11 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 
 // Represents the input of a DeleteApplication operation.
 type DeleteApplicationInput struct {
+
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 

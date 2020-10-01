@@ -57,15 +57,21 @@ func (c *Client) CreateAddressBook(ctx context.Context, params *CreateAddressBoo
 }
 
 type CreateAddressBookInput struct {
+
 	// The description of the address book.
 	Description *string
+
 	// A unique, user-specified identifier for the request that ensures idempotency.
 	ClientRequestToken *string
+
 	// The name of the address book.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateAddressBookOutput struct {
+
 	// The ARN of the newly created address book.
 	AddressBookArn *string
 

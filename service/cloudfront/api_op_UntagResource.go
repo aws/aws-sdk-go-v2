@@ -57,9 +57,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 // The request to remove tags from a CloudFront resource.
 type UntagResourceInput struct {
+
 	// An ARN of a CloudFront resource.
+	//
+	// This member is required.
 	Resource *string
+
 	// A complex type that contains zero or more Tag key elements.
+	//
+	// This member is required.
 	TagKeys *types.TagKeys
 }
 

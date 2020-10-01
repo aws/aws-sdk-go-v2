@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The input fails to satisfy the constraints specified by an AWS service.
@@ -24,12 +23,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request could not be processed because of conflict in the current state of
 // the resource.
@@ -48,12 +41,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There was an internal failure in the AppConfig service.
 type InternalServerException struct {
@@ -71,12 +58,6 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The configuration size is too large.
 type PayloadTooLargeException struct {
@@ -98,27 +79,6 @@ func (e *PayloadTooLargeException) ErrorMessage() string {
 }
 func (e *PayloadTooLargeException) ErrorCode() string             { return "PayloadTooLargeException" }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PayloadTooLargeException) GetLimit() float32 {
-	return ptr.ToFloat32(e.Limit)
-}
-func (e *PayloadTooLargeException) HasLimit() bool {
-	return e.Limit != nil
-}
-func (e *PayloadTooLargeException) GetSize() float32 {
-	return ptr.ToFloat32(e.Size)
-}
-func (e *PayloadTooLargeException) HasSize() bool {
-	return e.Size != nil
-}
-func (e *PayloadTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PayloadTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *PayloadTooLargeException) GetMeasure() BytesMeasure {
-	return e.Measure
-}
 
 // The requested resource could not be found.
 type ResourceNotFoundException struct {
@@ -138,18 +98,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourceNotFoundException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of hosted configuration versions exceeds the limit for the AppConfig
 // configuration store. Delete one or more versions and try again.
@@ -168,9 +116,3 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ServiceQuotaExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceQuotaExceededException) HasMessage() bool {
-	return e.Message != nil
-}

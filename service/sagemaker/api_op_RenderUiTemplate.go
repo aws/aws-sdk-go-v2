@@ -56,24 +56,38 @@ func (c *Client) RenderUiTemplate(ctx context.Context, params *RenderUiTemplateI
 }
 
 type RenderUiTemplateInput struct {
+
 	// A Template object containing the worker UI template to render.
 	UiTemplate *types.UiTemplate
+
 	// The HumanTaskUiArn of the worker UI that you want to render. Do not provide a
 	// HumanTaskUiArn if you use the UiTemplate parameter. See a list of available
 	// Human Ui Amazon Resource Names (ARNs) in UiConfig ().
 	HumanTaskUiArn *string
+
 	// A RenderableTask object containing a representative task to render.
+	//
+	// This member is required.
 	Task *types.RenderableTask
+
 	// The Amazon Resource Name (ARN) that has access to the S3 objects that are used
 	// by the template.
+	//
+	// This member is required.
 	RoleArn *string
 }
 
 type RenderUiTemplateOutput struct {
+
 	// A Liquid template that renders the HTML for the worker UI.
+	//
+	// This member is required.
 	RenderedContent *string
+
 	// A list of one or more RenderingError objects if any were encountered while
 	// rendering the template. If there were no errors, the list is empty.
+	//
+	// This member is required.
 	Errors []*types.RenderingError
 
 	// Metadata pertaining to the operation's result.

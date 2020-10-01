@@ -55,13 +55,20 @@ func (c *Client) GetContactAttributes(ctx context.Context, params *GetContactAtt
 }
 
 type GetContactAttributesInput struct {
+
 	// The identifier of the initial contact.
+	//
+	// This member is required.
 	InitialContactId *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 type GetContactAttributesOutput struct {
+
 	// Information about the attributes.
 	Attributes map[string]*string
 

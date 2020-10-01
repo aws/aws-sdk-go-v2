@@ -4,11 +4,17 @@ package types
 
 // Represents an option to be shown on the client platform (Facebook, Slack, etc.)
 type Button struct {
+
 	// The value sent to Amazon Lex when a user chooses the button. For example,
 	// consider button text "NYC." When the user chooses the button, the value sent can
 	// be "New York City."
+	//
+	// This member is required.
 	Value *string
+
 	// Text that is visible to the user on the button.
+	//
+	// This member is required.
 	Text *string
 }
 
@@ -17,11 +23,14 @@ type Button struct {
 // Use the DialogAction data type to set the interaction to a specific state, or to
 // return the interaction to a previous state.
 type DialogAction struct {
+
 	// The name of the slot that should be elicited from the user.
 	SlotToElicit *string
+
 	// The message that should be shown to the user. If you don't specify a message,
 	// Amazon Lex will use the message configured for the intent.
 	Message *string
+
 	// The next action that the bot should take in its interaction with the user. The
 	// possible values are:
 	//
@@ -41,7 +50,10 @@ type DialogAction struct {
 	//
 	//     * ElicitSlot - The next action is to elicit
 	// a slot value from the user.
+	//
+	// This member is required.
 	Type DialogActionType
+
 	// The fulfillment state of the intent. The possible values are:
 	//
 	//     * Failed -
@@ -55,10 +67,13 @@ type DialogAction struct {
 	// the intent is present and the intent ready to be fulfilled by the client
 	// application.
 	FulfillmentState FulfillmentState
+
 	// Map of the slots that have been gathered and their values.
 	Slots map[string]*string
+
 	// The name of the intent.
 	IntentName *string
+
 	// * PlainText - The message contains plain UTF-8 text.
 	//
 	//     * CustomPayload - The
@@ -77,14 +92,19 @@ type DialogAction struct {
 // Represents an option rendered to the user when a prompt is shown. It could be an
 // image, a button, a link, or text.
 type GenericAttachment struct {
+
 	// The title of the option.
 	Title *string
+
 	// The URL of an attachment to the response card.
 	AttachmentLinkUrl *string
+
 	// The URL of an image that is displayed to the user.
 	ImageUrl *string
+
 	// The list of options to show to the user.
 	Buttons []*Button
+
 	// The subtitle shown below the title.
 	SubTitle *string
 }
@@ -93,6 +113,7 @@ type GenericAttachment struct {
 // to get the current state of an intent so that you can process the intent, or so
 // that you can return the intent to its previous state.
 type IntentSummary struct {
+
 	// The fulfillment state of the intent. The possible values are:
 	//
 	//     * Failed -
@@ -106,6 +127,7 @@ type IntentSummary struct {
 	// the intent is present and the intent ready to be fulfilled by the client
 	// application.
 	FulfillmentState FulfillmentState
+
 	// The next action that the bot should take in its interaction with the user. The
 	// possible values are:
 	//
@@ -122,17 +144,23 @@ type IntentSummary struct {
 	//
 	//     * ElicitSlot - The
 	// next action is to elicit a slot value from the user.
+	//
+	// This member is required.
 	DialogActionType DialogActionType
+
 	// A user-defined label that identifies a particular intent. You can use this label
 	// to return to a previous intent. Use the checkpointLabelFilter parameter of the
 	// GetSessionRequest operation to filter the intents returned by the operation to
 	// those with only the specified label.
 	CheckpointLabel *string
+
 	// The next slot to elicit from the user. If there is not slot to elicit, the field
 	// is blank.
 	SlotToElicit *string
+
 	// Map of the slots that have been gathered and their values.
 	Slots map[string]*string
+
 	// The status of the intent after the user responds to the confirmation prompt. If
 	// the user confirms the intent, Amazon Lex sets this field to Confirmed. If the
 	// user denies the intent, Amazon Lex sets this value to Denied. The possible
@@ -148,6 +176,7 @@ type IntentSummary struct {
 	//     * None - The user has never been prompted for confirmation; or, the
 	// user was prompted but did not confirm or deny the prompt.
 	ConfirmationStatus ConfirmationStatus
+
 	// The name of the intent.
 	IntentName *string
 }
@@ -157,10 +186,13 @@ type IntentSummary struct {
 // The response card can also come from a Lambda function ( dialogCodeHook and
 // fulfillmentActivity on an intent).
 type ResponseCard struct {
+
 	// The version of the response card format.
 	Version *string
+
 	// An array of attachment objects representing options.
 	GenericAttachments []*GenericAttachment
+
 	// The content type of the response.
 	ContentType ContentType
 }
@@ -169,8 +201,10 @@ type ResponseCard struct {
 // utterances to Amazon Comprehend for sentiment analysis, this field structure
 // contains the result of the analysis.
 type SentimentResponse struct {
+
 	// The likelihood that the sentiment was correctly inferred.
 	SentimentScore *string
+
 	// The inferred sentiment that Amazon Comprehend has the highest confidence in.
 	SentimentLabel *string
 }

@@ -100,18 +100,28 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 }
 
 type UpdateRegexPatternSetInput struct {
+
 	// An array of RegexPatternSetUpdate objects that you want to insert into or delete
 	// from a RegexPatternSet ().
+	//
+	// This member is required.
 	Updates []*types.RegexPatternSetUpdate
+
 	// The RegexPatternSetId of the RegexPatternSet () that you want to update.
 	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
 	// ListRegexPatternSets ().
+	//
+	// This member is required.
 	RegexPatternSetId *string
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
 }
 
 type UpdateRegexPatternSetOutput struct {
+
 	// The ChangeToken that you used to submit the UpdateRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().

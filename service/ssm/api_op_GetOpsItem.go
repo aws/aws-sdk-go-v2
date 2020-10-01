@@ -65,11 +65,15 @@ func (c *Client) GetOpsItem(ctx context.Context, params *GetOpsItemInput, optFns
 }
 
 type GetOpsItemInput struct {
+
 	// The ID of the OpsItem that you want to get.
+	//
+	// This member is required.
 	OpsItemId *string
 }
 
 type GetOpsItemOutput struct {
+
 	// The OpsItem.
 	OpsItem *types.OpsItem
 

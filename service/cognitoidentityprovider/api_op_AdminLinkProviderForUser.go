@@ -68,6 +68,7 @@ func (c *Client) AdminLinkProviderForUser(ctx context.Context, params *AdminLink
 }
 
 type AdminLinkProviderForUserInput struct {
+
 	// The existing user in the user pool to be linked to the external identity
 	// provider user account. Can be a native (Username + Password) Cognito User Pools
 	// user or a federated user (for example, a SAML or Facebook user). If the user
@@ -78,9 +79,15 @@ type AdminLinkProviderForUserInput struct {
 	// it should be the provider-specific user_id. The ProviderAttributeName of the
 	// DestinationUser is ignored. The ProviderName should be set to Cognito for users
 	// in Cognito user pools.
+	//
+	// This member is required.
 	DestinationUser *types.ProviderUserIdentifierType
+
 	// The user pool ID for the user pool.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// An external identity provider account for a user who does not currently exist
 	// yet in the user pool. This user must be a federated user (for example, a SAML or
 	// Facebook user), not another native user. If the SourceUser is a federated social
@@ -97,6 +104,8 @@ type AdminLinkProviderForUserInput struct {
 	// ProviderAttributeName. If you set ProviderAttributeName to Cognito_Subject,
 	// Cognito will automatically parse the default unique identifier found in the
 	// subject from the SAML token.
+	//
+	// This member is required.
 	SourceUser *types.ProviderUserIdentifierType
 }
 

@@ -61,6 +61,7 @@ func (c *Client) ListOfferingTransactions(ctx context.Context, params *ListOffer
 
 // Represents the request to list the offering transaction history.
 type ListOfferingTransactionsInput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
@@ -68,9 +69,11 @@ type ListOfferingTransactionsInput struct {
 
 // Returns the transaction log of the specified offerings.
 type ListOfferingTransactionsOutput struct {
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
 	// The audit log of subscriptions you have purchased and modified through AWS
 	// Device Farm.
 	OfferingTransactions []*types.OfferingTransaction

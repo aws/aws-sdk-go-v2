@@ -55,15 +55,19 @@ func (c *Client) ListProvisioningTemplates(ctx context.Context, params *ListProv
 }
 
 type ListProvisioningTemplatesInput struct {
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
 	// A token to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListProvisioningTemplatesOutput struct {
+
 	// A token to retrieve the next set of results.
 	NextToken *string
+
 	// A list of fleet provisioning templates
 	Templates []*types.ProvisioningTemplateSummary
 

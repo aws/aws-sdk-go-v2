@@ -60,11 +60,15 @@ func (c *Client) DeleteMLTransform(ctx context.Context, params *DeleteMLTransfor
 }
 
 type DeleteMLTransformInput struct {
+
 	// The unique identifier of the transform to delete.
+	//
+	// This member is required.
 	TransformId *string
 }
 
 type DeleteMLTransformOutput struct {
+
 	// The unique identifier of the transform that was deleted.
 	TransformId *string
 

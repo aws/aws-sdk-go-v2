@@ -58,12 +58,18 @@ func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamI
 }
 
 type DescribeWorkteamInput struct {
+
 	// The name of the work team to return a description of.
+	//
+	// This member is required.
 	WorkteamName *string
 }
 
 type DescribeWorkteamOutput struct {
+
 	// A Workteam instance that contains information about the work team.
+	//
+	// This member is required.
 	Workteam *types.Workteam
 
 	// Metadata pertaining to the operation's result.

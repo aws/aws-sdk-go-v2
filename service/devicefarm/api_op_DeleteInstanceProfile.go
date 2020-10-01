@@ -55,8 +55,11 @@ func (c *Client) DeleteInstanceProfile(ctx context.Context, params *DeleteInstan
 }
 
 type DeleteInstanceProfileInput struct {
+
 	// The Amazon Resource Name (ARN) of the instance profile you are requesting to
 	// delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

@@ -58,17 +58,20 @@ func (c *Client) GetContactReachabilityStatus(ctx context.Context, params *GetCo
 }
 
 type GetContactReachabilityStatusInput struct {
+
 	// The name of the domain for which you want to know whether the registrant contact
 	// has confirmed that the email address is valid.
 	DomainName *string
 }
 
 type GetContactReachabilityStatusOutput struct {
+
 	// Whether the registrant contact has responded. Values include the following:
 	// PENDING We sent the confirmation email and haven't received a response yet. DONE
 	// We sent the email and got confirmation from the registrant contact. EXPIRED The
 	// time limit expired before the registrant contact responded.
 	Status types.ReachabilityStatus
+
 	// The domain name for which you requested the reachability status.
 	DomainName *string
 

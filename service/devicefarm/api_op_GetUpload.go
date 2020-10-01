@@ -57,12 +57,16 @@ func (c *Client) GetUpload(ctx context.Context, params *GetUploadInput, optFns .
 
 // Represents a request to the get upload operation.
 type GetUploadInput struct {
+
 	// The upload's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get upload request.
 type GetUploadOutput struct {
+
 	// An app or a set of one or more tests to upload or that have been uploaded.
 	Upload *types.Upload
 

@@ -60,21 +60,30 @@ func (c *Client) ImportApiKeys(ctx context.Context, params *ImportApiKeysInput, 
 // CSV-formatted file.
 type ImportApiKeysInput struct {
 	Name *string
+
 	// A query parameter to specify the input format to imported API keys. Currently,
 	// only the csv format is supported.
-	Format           types.ApiKeysFormat
-	Template         *bool
+	//
+	// This member is required.
+	Format types.ApiKeysFormat
+
+	Template *bool
+
 	TemplateSkipList []*string
+
 	// A query parameter to indicate whether to rollback ApiKey () importation (true)
 	// or not (false) when error is encountered.
 	FailOnWarnings *bool
-	Title          *string
+
+	Title *string
 }
 
 // The identifier of an ApiKey () used in a UsagePlan ().
 type ImportApiKeysOutput struct {
+
 	// A list of all the ApiKey () identifiers.
 	Ids []*string
+
 	// A list of warning messages.
 	Warnings []*string
 

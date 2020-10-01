@@ -60,23 +60,30 @@ func (c *Client) ListJournalKinesisStreamsForLedger(ctx context.Context, params 
 }
 
 type ListJournalKinesisStreamsForLedgerInput struct {
+
 	// The maximum number of results to return in a single
 	// ListJournalKinesisStreamsForLedger request. (The actual number of results
 	// returned might be fewer.)
 	MaxResults *int32
+
 	// A pagination token, indicating that you want to retrieve the next page of
 	// results. If you received a value for NextToken in the response from a previous
 	// ListJournalKinesisStreamsForLedger call, you should use that value as input
 	// here.
 	NextToken *string
+
 	// The name of the ledger.
+	//
+	// This member is required.
 	LedgerName *string
 }
 
 type ListJournalKinesisStreamsForLedgerOutput struct {
+
 	// The array of QLDB journal stream descriptors that are associated with the given
 	// ledger.
 	Streams []*types.JournalKinesisStreamDescription
+
 	// * If NextToken is empty, the last page of results has been processed and there
 	// are no more results to be retrieved.
 	//

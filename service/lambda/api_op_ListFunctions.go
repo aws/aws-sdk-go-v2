@@ -59,15 +59,19 @@ func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, 
 }
 
 type ListFunctionsInput struct {
+
 	// Set to ALL to include entries for all published versions of each function.
 	FunctionVersion types.FunctionVersion
+
 	// The maximum number of functions to return.
 	MaxItems *int32
+
 	// For Lambda@Edge functions, the AWS Region of the master function. For example,
 	// us-east-1 filters the list of functions to only include Lambda@Edge functions
 	// replicated from a master function in US East (N. Virginia). If specified, you
 	// must set FunctionVersion to ALL.
 	MasterRegion *string
+
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
 	Marker *string
@@ -75,8 +79,10 @@ type ListFunctionsInput struct {
 
 // A list of Lambda functions.
 type ListFunctionsOutput struct {
+
 	// A list of Lambda functions.
 	Functions []*types.FunctionConfiguration
+
 	// The pagination token that's included if more results are available.
 	NextMarker *string
 

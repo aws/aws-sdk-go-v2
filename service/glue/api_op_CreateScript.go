@@ -56,17 +56,22 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 }
 
 type CreateScriptInput struct {
+
 	// A list of the nodes in the DAG.
 	DagNodes []*types.CodeGenNode
+
 	// The programming language of the resulting code from the DAG.
 	Language types.Language
+
 	// A list of the edges in the DAG.
 	DagEdges []*types.CodeGenEdge
 }
 
 type CreateScriptOutput struct {
+
 	// The Scala code generated from the DAG.
 	ScalaCode *string
+
 	// The Python script generated from the DAG.
 	PythonScript *string
 

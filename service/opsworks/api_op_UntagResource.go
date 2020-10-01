@@ -55,9 +55,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// A list of the keys of tags to be removed from a stack or layer.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The stack or layer's Amazon Resource Number (ARN).
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

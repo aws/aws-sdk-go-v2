@@ -80,11 +80,16 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 }
 
 type ListDomainsInput struct {
+
 	// Specifies the registration status of the domains to list.
+	//
+	// This member is required.
 	RegistrationStatus types.RegistrationStatus
+
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
 	MaximumPageSize *int32
+
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
@@ -93,6 +98,7 @@ type ListDomainsInput struct {
 	// maximum lifetime".  <p>The configured <code>maximumPageSize</code> determines
 	// how many results can be returned in a single call. </p>
 	NextPageToken *string
+
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the domains.
 	ReverseOrder *bool
@@ -100,8 +106,12 @@ type ListDomainsInput struct {
 
 // Contains a paginated collection of DomainInfo structures.
 type ListDomainsOutput struct {
+
 	// A list of DomainInfo structures.
+	//
+	// This member is required.
 	DomainInfos []*types.DomainInfo
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in nextPageToken. Keep all other arguments unchanged. The

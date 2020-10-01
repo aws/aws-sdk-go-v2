@@ -57,10 +57,14 @@ func (c *Client) DeprecateThingType(ctx context.Context, params *DeprecateThingT
 
 // The input for the DeprecateThingType operation.
 type DeprecateThingTypeInput struct {
+
 	// Whether to undeprecate a deprecated thing type. If true, the thing type will not
 	// be deprecated anymore and you can associate it with things.
 	UndoDeprecate *bool
+
 	// The name of the thing type to deprecate.
+	//
+	// This member is required.
 	ThingTypeName *string
 }
 

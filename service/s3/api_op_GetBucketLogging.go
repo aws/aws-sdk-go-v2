@@ -63,11 +63,15 @@ func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingI
 }
 
 type GetBucketLoggingInput struct {
+
 	// The bucket name for which to get the logging information.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetBucketLoggingOutput struct {
+
 	// Describes where logs are stored and the prefix that Amazon S3 assigns to all log
 	// object keys for a bucket. For more information, see PUT Bucket logging
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) in

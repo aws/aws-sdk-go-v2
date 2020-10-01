@@ -56,16 +56,24 @@ func (c *Client) GetUserDefinedFunction(ctx context.Context, params *GetUserDefi
 }
 
 type GetUserDefinedFunctionInput struct {
+
 	// The name of the catalog database where the function is located.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The name of the function.
+	//
+	// This member is required.
 	FunctionName *string
+
 	// The ID of the Data Catalog where the function to be retrieved is located. If
 	// none is provided, the AWS account ID is used by default.
 	CatalogId *string
 }
 
 type GetUserDefinedFunctionOutput struct {
+
 	// The requested function definition.
 	UserDefinedFunction *types.UserDefinedFunction
 

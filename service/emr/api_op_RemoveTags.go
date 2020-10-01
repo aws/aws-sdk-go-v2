@@ -60,10 +60,16 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 
 // This input identifies a cluster and a list of tags to remove.
 type RemoveTagsInput struct {
+
 	// The Amazon EMR resource identifier from which tags will be removed. This value
 	// must be a cluster identifier.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// A list of tag keys to remove from a resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

@@ -57,31 +57,45 @@ func (c *Client) DescribeTrialComponent(ctx context.Context, params *DescribeTri
 }
 
 type DescribeTrialComponentInput struct {
+
 	// The name of the trial component to describe.
+	//
+	// This member is required.
 	TrialComponentName *string
 }
 
 type DescribeTrialComponentOutput struct {
+
 	// When the component started.
 	StartTime *time.Time
+
 	// The metrics for the component.
 	Metrics []*types.TrialComponentMetricSummary
+
 	// The hyperparameters of the component.
 	Parameters map[string]*types.TrialComponentParameterValue
+
 	// Who last modified the component.
 	LastModifiedBy *types.UserContext
+
 	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
 	Source *types.TrialComponentSource
+
 	// The name of the trial component.
 	TrialComponentName *string
+
 	// When the component ended.
 	EndTime *time.Time
+
 	// The input artifacts of the component.
 	InputArtifacts map[string]*types.TrialComponentArtifact
+
 	// The output artifacts of the component.
 	OutputArtifacts map[string]*types.TrialComponentArtifact
+
 	// Who created the component.
 	CreatedBy *types.UserContext
+
 	// The status of the component. States include:
 	//
 	//     * InProgress
@@ -91,13 +105,17 @@ type DescribeTrialComponentOutput struct {
 	//
 	//     * Failed
 	Status *types.TrialComponentStatus
+
 	// The name of the component as displayed. If DisplayName isn't specified,
 	// TrialComponentName is displayed.
 	DisplayName *string
+
 	// When the component was last modified.
 	LastModifiedTime *time.Time
+
 	// When the component was created.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the trial component.
 	TrialComponentArn *string
 

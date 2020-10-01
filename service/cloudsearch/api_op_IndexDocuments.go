@@ -59,16 +59,20 @@ func (c *Client) IndexDocuments(ctx context.Context, params *IndexDocumentsInput
 // Container for the parameters to the IndexDocuments () operation. Specifies the
 // name of the domain you want to re-index.
 type IndexDocumentsInput struct {
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result of an IndexDocuments request. Contains the status of the indexing
 // operation, including the fields being indexed.
 type IndexDocumentsOutput struct {
+
 	// The names of the fields that are currently being indexed.
 	FieldNames []*string
 

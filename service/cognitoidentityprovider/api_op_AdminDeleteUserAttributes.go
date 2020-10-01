@@ -57,13 +57,22 @@ func (c *Client) AdminDeleteUserAttributes(ctx context.Context, params *AdminDel
 
 // Represents the request to delete user attributes as an administrator.
 type AdminDeleteUserAttributesInput struct {
+
 	// An array of strings representing the user attribute names you wish to delete.
 	// For custom attributes, you must prepend the custom: prefix to the attribute
 	// name.
+	//
+	// This member is required.
 	UserAttributeNames []*string
+
 	// The user pool ID for the user pool where you want to delete user attributes.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The user name of the user from which you would like to delete attributes.
+	//
+	// This member is required.
 	Username *string
 }
 

@@ -55,14 +55,23 @@ func (c *Client) GetDevicesInPlacement(ctx context.Context, params *GetDevicesIn
 }
 
 type GetDevicesInPlacementInput struct {
+
 	// The name of the project containing the placement.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The name of the placement to get the devices from.
+	//
+	// This member is required.
 	PlacementName *string
 }
 
 type GetDevicesInPlacementOutput struct {
+
 	// An object containing the devices (zero or more) within the placement.
+	//
+	// This member is required.
 	Devices map[string]*string
 
 	// Metadata pertaining to the operation's result.

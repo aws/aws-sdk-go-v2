@@ -90,10 +90,15 @@ func (c *Client) DetectStackSetDrift(ctx context.Context, params *DetectStackSet
 }
 
 type DetectStackSetDriftInput struct {
+
 	// The name of the stack set on which to perform the drift detection operation.
+	//
+	// This member is required.
 	StackSetName *string
+
 	// The ID of the stack set operation.
 	OperationId *string
+
 	// The user-specified preferences for how AWS CloudFormation performs a stack set
 	// operation. For more information on maximum concurrent accounts and failure
 	// tolerance, see Stack set operation options
@@ -102,6 +107,7 @@ type DetectStackSetDriftInput struct {
 }
 
 type DetectStackSetDriftOutput struct {
+
 	// The ID of the drift detection stack set operation. you can use this operation id
 	// with DescribeStackSetOperation () to monitor the progress of the drift detection
 	// operation.

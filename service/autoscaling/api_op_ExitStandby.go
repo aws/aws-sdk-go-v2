@@ -60,13 +60,18 @@ func (c *Client) ExitStandby(ctx context.Context, params *ExitStandbyInput, optF
 }
 
 type ExitStandbyInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
+
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []*string
 }
 
 type ExitStandbyOutput struct {
+
 	// The activities related to moving instances out of Standby mode.
 	Activities []*types.Activity
 

@@ -57,8 +57,12 @@ func (c *Client) ListComplianceStatus(ctx context.Context, params *ListComplianc
 }
 
 type ListComplianceStatusInput struct {
+
 	// The ID of the AWS Firewall Manager policy that you want the details for.
+	//
+	// This member is required.
 	PolicyId *string
+
 	// If you specify a value for MaxResults and you have more PolicyComplianceStatus
 	// objects than the number that you specify for MaxResults, AWS Firewall Manager
 	// returns a NextToken value in the response that allows you to list another group
@@ -67,6 +71,7 @@ type ListComplianceStatusInput struct {
 	// response to get information about another batch of PolicyComplianceStatus
 	// objects.
 	NextToken *string
+
 	// Specifies the number of PolicyComplianceStatus objects that you want AWS
 	// Firewall Manager to return for this request. If you have more
 	// PolicyComplianceStatus objects than the number that you specify for MaxResults,
@@ -76,12 +81,14 @@ type ListComplianceStatusInput struct {
 }
 
 type ListComplianceStatusOutput struct {
+
 	// If you have more PolicyComplianceStatus objects than the number that you
 	// specified for MaxResults in the request, the response includes a NextToken
 	// value. To list more PolicyComplianceStatus objects, submit another
 	// ListComplianceStatus request, and specify the NextToken value from the response
 	// in the NextToken value in the next request.
 	NextToken *string
+
 	// An array of PolicyComplianceStatus objects.
 	PolicyComplianceStatusList []*types.PolicyComplianceStatus
 

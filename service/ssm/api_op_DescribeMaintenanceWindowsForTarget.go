@@ -57,23 +57,33 @@ func (c *Client) DescribeMaintenanceWindowsForTarget(ctx context.Context, params
 }
 
 type DescribeMaintenanceWindowsForTargetInput struct {
+
 	// The instance ID or key/value pair to retrieve information about.
+	//
+	// This member is required.
 	Targets []*types.Target
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The type of resource you want to retrieve information about. For example,
 	// "INSTANCE".
+	//
+	// This member is required.
 	ResourceType types.MaintenanceWindowResourceType
 }
 
 type DescribeMaintenanceWindowsForTargetOutput struct {
+
 	// Information about the maintenance window targets and tasks an instance is
 	// associated with.
 	WindowIdentities []*types.MaintenanceWindowIdentityForTarget
+
 	// The token for the next set of items to return. (You use this token in the next
 	// call.)
 	NextToken *string

@@ -67,43 +67,56 @@ func (c *Client) UpdateSMBFileShare(ctx context.Context, params *UpdateSMBFileSh
 
 // UpdateSMBFileShareInput
 type UpdateSMBFileShareInput struct {
+
 	// The default storage class for objects put into an Amazon S3 bucket by the file
 	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
 	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
 	// <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>
 	DefaultStorageClass *string
+
 	// A list of users or groups in the Active Directory that are allowed to access the
 	// file share. A group must be prefixed with the @ character. Acceptable formats
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
 	ValidUserList []*string
+
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	KMSEncrypted *bool
+
 	// A list of users or groups in the Active Directory that are not allowed to access
 	// the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
 	InvalidUserList []*string
+
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
+
 	// A value that sets the write status of a file share. Set this value to true to
 	// set write status to read-only, otherwise set to false.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	ReadOnly *bool
+
 	// Refresh cache information.
 	CacheAttributes *types.CacheAttributes
+
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
+
 	// The case of an object name in an Amazon S3 bucket. For ClientSpecified, the
 	// client determines the case sensitivity. For CaseSensitive, the gateway
 	// determines the case sensitivity. The default value is ClientSpecified.
 	CaseSensitivity types.CaseSensitivity
+
 	// The Amazon Resource Name (ARN) of the SMB file share that you want to update.
+	//
+	// This member is required.
 	FileShareARN *string
+
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
@@ -113,11 +126,13 @@ type UpdateSMBFileShareInput struct {
 	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	RequesterPays *bool
+
 	// A list of users or groups in the Active Directory that have administrator rights
 	// to the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
 	AdminUserList []*string
+
 	// Set this value to true to enable access control list (ACL) on the SMB file
 	// share. Set it to false to map file and directory permissions to the POSIX
 	// permissions.  <p>For more information, see <a
@@ -126,14 +141,17 @@ type UpdateSMBFileShareInput struct {
 	// Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	SMBACLEnabled *bool
+
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
 	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	GuessMIMETypeEnabled *bool
+
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL
+
 	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
 	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
 	FileShareName *string
@@ -141,6 +159,7 @@ type UpdateSMBFileShareInput struct {
 
 // UpdateSMBFileShareOutput
 type UpdateSMBFileShareOutput struct {
+
 	// The Amazon Resource Name (ARN) of the updated SMB file share.
 	FileShareARN *string
 

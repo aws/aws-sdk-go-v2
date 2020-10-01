@@ -55,18 +55,29 @@ func (c *Client) DeleteApplicationVpcConfiguration(ctx context.Context, params *
 }
 
 type DeleteApplicationVpcConfigurationInput struct {
+
 	// The current application version ID. You can retrieve the application version ID
 	// using DescribeApplication ().
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
+
 	// The ID of the VPC configuration to delete.
+	//
+	// This member is required.
 	VpcConfigurationId *string
+
 	// The name of an existing application.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 type DeleteApplicationVpcConfigurationOutput struct {
+
 	// The ARN of the Kinesis Data Analytics application.
 	ApplicationARN *string
+
 	// The updated version ID of the application.
 	ApplicationVersionId *int64
 

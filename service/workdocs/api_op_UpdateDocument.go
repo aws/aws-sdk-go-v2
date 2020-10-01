@@ -57,14 +57,21 @@ func (c *Client) UpdateDocument(ctx context.Context, params *UpdateDocumentInput
 }
 
 type UpdateDocumentInput struct {
+
 	// The ID of the document.
+	//
+	// This member is required.
 	DocumentId *string
+
 	// The resource state of the document. Only ACTIVE and RECYCLED are supported.
 	ResourceState types.ResourceStateType
+
 	// The ID of the parent folder.
 	ParentFolderId *string
+
 	// The name of the document.
 	Name *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string

@@ -56,13 +56,18 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 }
 
 type GetPolicyInput struct {
+
 	// The ID of the AWS Firewall Manager policy that you want the details for.
+	//
+	// This member is required.
 	PolicyId *string
 }
 
 type GetPolicyOutput struct {
+
 	// Information about the specified AWS Firewall Manager policy.
 	Policy *types.Policy
+
 	// The Amazon Resource Name (ARN) of the specified policy.
 	PolicyArn *string
 

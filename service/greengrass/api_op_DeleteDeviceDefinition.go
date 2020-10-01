@@ -55,7 +55,10 @@ func (c *Client) DeleteDeviceDefinition(ctx context.Context, params *DeleteDevic
 }
 
 type DeleteDeviceDefinitionInput struct {
+
 	// The ID of the device definition.
+	//
+	// This member is required.
 	DeviceDefinitionId *string
 }
 

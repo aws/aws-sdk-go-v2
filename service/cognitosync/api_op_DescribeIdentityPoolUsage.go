@@ -59,13 +59,17 @@ func (c *Client) DescribeIdentityPoolUsage(ctx context.Context, params *Describe
 
 // A request for usage information about the identity pool.
 type DescribeIdentityPoolUsageInput struct {
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityPoolId *string
 }
 
 // Response to a successful DescribeIdentityPoolUsage request.
 type DescribeIdentityPoolUsageOutput struct {
+
 	// Information about the usage of the identity pool.
 	IdentityPoolUsage *types.IdentityPoolUsage
 

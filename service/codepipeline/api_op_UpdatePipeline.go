@@ -60,12 +60,16 @@ func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput
 
 // Represents the input of an UpdatePipeline action.
 type UpdatePipelineInput struct {
+
 	// The name of the pipeline to be updated.
+	//
+	// This member is required.
 	Pipeline *types.PipelineDeclaration
 }
 
 // Represents the output of an UpdatePipeline action.
 type UpdatePipelineOutput struct {
+
 	// The structure of the updated pipeline.
 	Pipeline *types.PipelineDeclaration
 

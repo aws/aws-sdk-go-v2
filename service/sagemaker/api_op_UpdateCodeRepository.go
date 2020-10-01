@@ -56,8 +56,12 @@ func (c *Client) UpdateCodeRepository(ctx context.Context, params *UpdateCodeRep
 }
 
 type UpdateCodeRepositoryInput struct {
+
 	// The name of the Git repository to update.
+	//
+	// This member is required.
 	CodeRepositoryName *string
+
 	// The configuration of the git repository, including the URL and the Amazon
 	// Resource Name (ARN) of the AWS Secrets Manager secret that contains the
 	// credentials used to access the repository. The secret must have a staging label
@@ -67,7 +71,10 @@ type UpdateCodeRepositoryInput struct {
 }
 
 type UpdateCodeRepositoryOutput struct {
+
 	// The ARN of the Git repository.
+	//
+	// This member is required.
 	CodeRepositoryArn *string
 
 	// Metadata pertaining to the operation's result.

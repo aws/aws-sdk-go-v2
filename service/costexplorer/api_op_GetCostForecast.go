@@ -57,14 +57,19 @@ func (c *Client) GetCostForecast(ctx context.Context, params *GetCostForecastInp
 }
 
 type GetCostForecastInput struct {
+
 	// Cost Explorer always returns the mean forecast as a single point. You can
 	// request a prediction interval around the mean by specifying a confidence level.
 	// The higher the confidence level, the more confident Cost Explorer is about the
 	// actual value falling in the prediction interval. Higher confidence levels result
 	// in wider prediction intervals.
 	PredictionIntervalLevel *int32
+
 	// The period of time that you want the forecast to cover.
+	//
+	// This member is required.
 	TimePeriod *types.DateInterval
+
 	// Which metric Cost Explorer uses to create your forecast. For more information
 	// about blended and unblended rates, see Why does the "blended" annotation appear
 	// on some line items in my bill?
@@ -82,20 +87,28 @@ type GetCostForecastInput struct {
 	// NET_UNBLENDED_COST
 	//
 	//     * UNBLENDED_COST
+	//
+	// This member is required.
 	Metric types.Metric
+
 	// The filters that you want to use to filter your forecast. Cost Explorer API
 	// supports all of the Cost Explorer filters.
 	Filter *types.Expression
+
 	// How granular you want the forecast to be. You can get 3 months of DAILY
 	// forecasts or 12 months of MONTHLY forecasts. The GetCostForecast operation
 	// supports only DAILY and MONTHLY granularities.
+	//
+	// This member is required.
 	Granularity types.Granularity
 }
 
 type GetCostForecastOutput struct {
+
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of
 	// days. For MONTHLY forecasts, this is a list of months.
 	ForecastResultsByTime []*types.ForecastResult
+
 	// How much you are forecasted to spend over the forecast period, in USD.
 	Total *types.MetricValue
 

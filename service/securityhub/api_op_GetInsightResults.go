@@ -56,12 +56,18 @@ func (c *Client) GetInsightResults(ctx context.Context, params *GetInsightResult
 }
 
 type GetInsightResultsInput struct {
+
 	// The ARN of the insight for which to return results.
+	//
+	// This member is required.
 	InsightArn *string
 }
 
 type GetInsightResultsOutput struct {
+
 	// The insight results returned by the operation.
+	//
+	// This member is required.
 	InsightResults *types.InsightResults
 
 	// Metadata pertaining to the operation's result.

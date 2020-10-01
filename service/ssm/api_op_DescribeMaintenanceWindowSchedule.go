@@ -55,29 +55,37 @@ func (c *Client) DescribeMaintenanceWindowSchedule(ctx context.Context, params *
 }
 
 type DescribeMaintenanceWindowScheduleInput struct {
+
 	// Filters used to limit the range of results. For example, you can limit
 	// maintenance window executions to only those scheduled before or after a certain
 	// date and time.
 	Filters []*types.PatchOrchestratorFilter
+
 	// The instance ID or key/value pair to retrieve information about.
 	Targets []*types.Target
+
 	// The type of resource you want to retrieve information about. For example,
 	// "INSTANCE".
 	ResourceType types.MaintenanceWindowResourceType
+
 	// The ID of the maintenance window to retrieve information about.
 	WindowId *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 }
 
 type DescribeMaintenanceWindowScheduleOutput struct {
+
 	// Information about maintenance window executions scheduled for the specified time
 	// range.
 	ScheduledWindowExecutions []*types.ScheduledWindowExecution
+
 	// The token for the next set of items to return. (You use this token in the next
 	// call.)
 	NextToken *string

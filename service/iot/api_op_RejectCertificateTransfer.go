@@ -61,10 +61,14 @@ func (c *Client) RejectCertificateTransfer(ctx context.Context, params *RejectCe
 
 // The input for the RejectCertificateTransfer operation.
 type RejectCertificateTransferInput struct {
+
 	// The reason the certificate transfer was rejected.
 	RejectReason *string
+
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
+	//
+	// This member is required.
 	CertificateId *string
 }
 

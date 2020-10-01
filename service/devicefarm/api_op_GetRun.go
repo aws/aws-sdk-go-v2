@@ -57,12 +57,16 @@ func (c *Client) GetRun(ctx context.Context, params *GetRunInput, optFns ...func
 
 // Represents a request to the get run operation.
 type GetRunInput struct {
+
 	// The run's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get run request.
 type GetRunOutput struct {
+
 	// The run to get results from.
 	Run *types.Run
 

@@ -63,15 +63,24 @@ func (c *Client) DescribeJournalS3Export(ctx context.Context, params *DescribeJo
 }
 
 type DescribeJournalS3ExportInput struct {
+
 	// The name of the ledger.
+	//
+	// This member is required.
 	Name *string
+
 	// The unique ID of the journal export job that you want to describe.
+	//
+	// This member is required.
 	ExportId *string
 }
 
 type DescribeJournalS3ExportOutput struct {
+
 	// Information about the journal export job returned by a DescribeJournalS3Export
 	// request.
+	//
+	// This member is required.
 	ExportDescription *types.JournalS3ExportDescription
 
 	// Metadata pertaining to the operation's result.

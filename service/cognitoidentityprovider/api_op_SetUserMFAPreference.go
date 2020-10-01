@@ -61,10 +61,15 @@ func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPre
 }
 
 type SetUserMFAPreferenceInput struct {
+
 	// The access token for the user.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// The time-based one-time password software token MFA settings.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
+
 	// The SMS text message multi-factor authentication (MFA) settings.
 	SMSMfaSettings *types.SMSMfaSettingsType
 }

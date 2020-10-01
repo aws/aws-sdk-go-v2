@@ -78,7 +78,10 @@ func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInp
 
 // Represents the input for a request action.
 type StopMatchmakingInput struct {
+
 	// A unique identifier for a matchmaking ticket.
+	//
+	// This member is required.
 	TicketId *string
 }
 

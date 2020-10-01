@@ -56,21 +56,30 @@ func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerI
 }
 
 type UpdateAuthorizerInput struct {
+
 	// The ARN of the authorizer's Lambda function.
 	AuthorizerFunctionArn *string
+
 	// The key used to extract the token from the HTTP headers.
 	TokenKeyName *string
+
 	// The public keys used to verify the token signature.
 	TokenSigningPublicKeys map[string]*string
+
 	// The status of the update authorizer request.
 	Status types.AuthorizerStatus
+
 	// The authorizer name.
+	//
+	// This member is required.
 	AuthorizerName *string
 }
 
 type UpdateAuthorizerOutput struct {
+
 	// The authorizer name.
 	AuthorizerName *string
+
 	// The authorizer ARN.
 	AuthorizerArn *string
 

@@ -54,12 +54,16 @@ func (c *Client) AddThingToBillingGroup(ctx context.Context, params *AddThingToB
 }
 
 type AddThingToBillingGroupInput struct {
+
 	// The ARN of the billing group.
 	BillingGroupArn *string
+
 	// The name of the thing to be added to the billing group.
 	ThingName *string
+
 	// The ARN of the thing to be added to the billing group.
 	ThingArn *string
+
 	// The name of the billing group.
 	BillingGroupName *string
 }

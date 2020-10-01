@@ -69,7 +69,10 @@ func (c *Client) DeleteHealthCheck(ctx context.Context, params *DeleteHealthChec
 
 // This action deletes a health check.
 type DeleteHealthCheckInput struct {
+
 	// The ID of the health check that you want to delete.
+	//
+	// This member is required.
 	HealthCheckId *string
 }
 

@@ -65,54 +65,74 @@ func (c *Client) CreateIntentVersion(ctx context.Context, params *CreateIntentVe
 }
 
 type CreateIntentVersionInput struct {
+
 	// Checksum of the $LATEST version of the intent that should be used to create the
 	// new version. If you specify a checksum and the $LATEST version of the intent has
 	// a different checksum, Amazon Lex returns a PreconditionFailedException exception
 	// and doesn't publish a new version. If you don't specify a checksum, Amazon Lex
 	// publishes the $LATEST version.
 	Checksum *string
+
 	// The name of the intent that you want to create a new version of. The name is
 	// case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateIntentVersionOutput struct {
+
 	// Configuration information, if any, for connectin an Amazon Kendra index with the
 	// AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
+
 	// Checksum of the intent version created.
 	Checksum *string
+
 	// A description of the intent.
 	Description *string
+
 	// Describes how the intent is fulfilled.
 	FulfillmentActivity *types.FulfillmentActivity
+
 	// If defined, the prompt that Amazon Lex uses to confirm the user's intent before
 	// fulfilling it.
 	ConfirmationPrompt *types.Prompt
+
 	// The date that the intent was created.
 	CreatedDate *time.Time
+
 	// If the user answers "no" to the question defined in confirmationPrompt, Amazon
 	// Lex responds with this statement to acknowledge that the intent was canceled.
 	RejectionStatement *types.Statement
+
 	// A unique identifier for a built-in intent.
 	ParentIntentSignature *string
+
 	// An array of sample utterances configured for the intent.
 	SampleUtterances []*string
+
 	// If defined, Amazon Lex invokes this Lambda function for each user input.
 	DialogCodeHook *types.CodeHook
+
 	// An array of slot types that defines the information required to fulfill the
 	// intent.
 	Slots []*types.Slot
+
 	// The name of the intent.
 	Name *string
+
 	// After the Lambda function specified in the fulfillmentActivity field fulfills
 	// the intent, Amazon Lex conveys this statement to the user.
 	ConclusionStatement *types.Statement
+
 	// The date that the intent was updated.
 	LastUpdatedDate *time.Time
+
 	// If defined, Amazon Lex uses this prompt to solicit additional user activity
 	// after the intent is fulfilled.
 	FollowUpPrompt *types.FollowUpPrompt
+
 	// The version number assigned to the new version of the intent.
 	Version *string
 

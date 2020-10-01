@@ -56,20 +56,30 @@ func (c *Client) DescribeDashboard(ctx context.Context, params *DescribeDashboar
 }
 
 type DescribeDashboardInput struct {
+
 	// The ID for the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// The alias name.
 	AliasName *string
+
 	// The ID of the AWS account that contains the dashboard that you're describing.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The version number for the dashboard. If a version number isn't passed, the
 	// latest published dashboard version is described.
 	VersionNumber *int64
 }
 
 type DescribeDashboardOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// Information about the dashboard.
 	Dashboard *types.Dashboard
 

@@ -55,7 +55,10 @@ func (c *Client) CancelSimulationJob(ctx context.Context, params *CancelSimulati
 }
 
 type CancelSimulationJobInput struct {
+
 	// The simulation job ARN to cancel.
+	//
+	// This member is required.
 	Job *string
 }
 

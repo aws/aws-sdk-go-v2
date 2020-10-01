@@ -61,15 +61,22 @@ func (c *Client) ApplySecurityGroupsToLoadBalancer(ctx context.Context, params *
 
 // Contains the parameters for ApplySecurityGroupsToLoadBalancer.
 type ApplySecurityGroupsToLoadBalancerInput struct {
+
 	// The IDs of the security groups to associate with the load balancer. Note that
 	// you cannot specify the name of the security group.
+	//
+	// This member is required.
 	SecurityGroups []*string
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 
 // Contains the output of ApplySecurityGroupsToLoadBalancer.
 type ApplySecurityGroupsToLoadBalancerOutput struct {
+
 	// The IDs of the security groups associated with the load balancer.
 	SecurityGroups []*string
 

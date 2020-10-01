@@ -57,15 +57,24 @@ func (c *Client) DeleteBackendEnvironment(ctx context.Context, params *DeleteBac
 
 // The request structure for the delete backend environment request.
 type DeleteBackendEnvironmentInput struct {
+
 	// The unique ID of an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The name of a backend environment of an Amplify app.
+	//
+	// This member is required.
 	EnvironmentName *string
 }
 
 // The result structure of the delete backend environment result.
 type DeleteBackendEnvironmentOutput struct {
+
 	// Describes the backend environment for an Amplify app.
+	//
+	// This member is required.
 	BackendEnvironment *types.BackendEnvironment
 
 	// Metadata pertaining to the operation's result.

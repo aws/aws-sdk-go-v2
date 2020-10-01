@@ -56,40 +56,55 @@ func (c *Client) UpdateNetworkProfile(ctx context.Context, params *UpdateNetwork
 }
 
 type UpdateNetworkProfileInput struct {
+
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
 	DownlinkLossPercent *int32
+
 	// The Amazon Resource Name (ARN) of the project for which you want to update
 	// network profile settings.
+	//
+	// This member is required.
 	Arn *string
+
 	// Delay time for all packets to destination in milliseconds as an integer from 0
 	// to 2000.
 	UplinkDelayMs *int64
+
 	// The description of the network profile about which you are returning
 	// information.
 	Description *string
+
 	// Time variation in the delay of received packets in milliseconds as an integer
 	// from 0 to 2000.
 	DownlinkJitterMs *int64
+
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	DownlinkBandwidthBits *int64
+
 	// Time variation in the delay of received packets in milliseconds as an integer
 	// from 0 to 2000.
 	UplinkJitterMs *int64
+
 	// Proportion of transmitted packets that fail to arrive from 0 to 100 percent.
 	UplinkLossPercent *int32
+
 	// The type of network profile to return information about. Valid values are listed
 	// here.
 	Type types.NetworkProfileType
+
 	// Delay time for all packets to destination in milliseconds as an integer from 0
 	// to 2000.
 	DownlinkDelayMs *int64
+
 	// The name of the network profile about which you are returning information.
 	Name *string
+
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64
 }
 
 type UpdateNetworkProfileOutput struct {
+
 	// A list of the available network profiles.
 	NetworkProfile *types.NetworkProfile
 

@@ -65,28 +65,40 @@ func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCr
 // <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </p> </li> <li>
 // <p> <a>UpdateChapCredentialsInput$TargetARN</a> </p> </li> </ul>
 type UpdateChapCredentialsInput struct {
+
 	// The secret key that the initiator (for example, the Windows client) must provide
 	// to participate in mutual CHAP with the target.  <note> <p>The secret key must be
 	// between 12 and 16 bytes when encoded in UTF-8.</p> </note>
+	//
+	// This member is required.
 	SecretToAuthenticateInitiator *string
+
 	// The secret key that the target must provide to participate in mutual CHAP with
 	// the initiator (e.g. Windows client).  <p>Byte constraints: Minimum bytes of 12.
 	// Maximum bytes of 16.</p> <note> <p>The secret key must be between 12 and 16
 	// bytes when encoded in UTF-8.</p> </note>
 	SecretToAuthenticateTarget *string
+
 	// The iSCSI initiator that connects to the target.
+	//
+	// This member is required.
 	InitiatorName *string
+
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
 	// DescribeStorediSCSIVolumes () operation to return the TargetARN for specified
 	// VolumeARN.
+	//
+	// This member is required.
 	TargetARN *string
 }
 
 // A JSON object containing the following fields:
 type UpdateChapCredentialsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the target. This is the same target specified
 	// in the request.
 	TargetARN *string
+
 	// The iSCSI initiator that connects to the target. This is the same initiator name
 	// specified in the request.
 	InitiatorName *string

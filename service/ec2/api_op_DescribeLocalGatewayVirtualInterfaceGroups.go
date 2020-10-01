@@ -55,6 +55,7 @@ func (c *Client) DescribeLocalGatewayVirtualInterfaceGroups(ctx context.Context,
 }
 
 type DescribeLocalGatewayVirtualInterfaceGroupsInput struct {
+
 	// One or more filters.
 	//
 	//     * local-gateway-id - The ID of a local gateway.
@@ -66,13 +67,17 @@ type DescribeLocalGatewayVirtualInterfaceGroupsInput struct {
 	// local-gateway-virtual-interface-group-id - The ID of the virtual interface
 	// group.
 	Filters []*types.Filter
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The IDs of the virtual interface groups.
 	LocalGatewayVirtualInterfaceGroupIds []*string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -81,9 +86,11 @@ type DescribeLocalGatewayVirtualInterfaceGroupsInput struct {
 }
 
 type DescribeLocalGatewayVirtualInterfaceGroupsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The virtual interface groups.
 	LocalGatewayVirtualInterfaceGroups []*types.LocalGatewayVirtualInterfaceGroup
 

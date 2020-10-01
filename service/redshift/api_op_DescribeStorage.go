@@ -57,8 +57,10 @@ type DescribeStorageInput struct {
 }
 
 type DescribeStorageOutput struct {
+
 	// The total amount of storage currently provisioned.
 	TotalProvisionedStorageInMegaBytes *float64
+
 	// The total amount of storage currently used for snapshots.
 	TotalBackupSizeInMegaBytes *float64
 

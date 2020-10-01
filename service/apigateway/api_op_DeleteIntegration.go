@@ -58,15 +58,27 @@ func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegratio
 // Represents a delete integration request.
 type DeleteIntegrationInput struct {
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// [Required] Specifies a delete integration request's HTTP method.
+	//
+	// This member is required.
 	HttpMethod *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
+
 	// [Required] Specifies a delete integration request's resource identifier.
+	//
+	// This member is required.
 	ResourceId *string
-	Template   *bool
-	Name       *string
+
+	Template *bool
+
+	Name *string
 }
 
 type DeleteIntegrationOutput struct {

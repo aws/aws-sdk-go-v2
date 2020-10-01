@@ -56,27 +56,36 @@ func (c *Client) ListFlowDefinitions(ctx context.Context, params *ListFlowDefini
 }
 
 type ListFlowDefinitionsInput struct {
+
 	// A token to resume pagination.
 	NextToken *string
+
 	// An optional value that specifies whether you want the results sorted in
 	// Ascending or Descending order.
 	SortOrder types.SortOrder
+
 	// A filter that returns only flow definitions with a creation time greater than or
 	// equal to the specified timestamp.
 	CreationTimeAfter *time.Time
+
 	// The total number of items to return. If the total number of available items is
 	// more than the value specified in MaxResults, then a NextToken will be provided
 	// in the output that you can use to resume pagination.
 	MaxResults *int32
+
 	// A filter that returns only flow definitions that were created before the
 	// specified timestamp.
 	CreationTimeBefore *time.Time
 }
 
 type ListFlowDefinitionsOutput struct {
+
 	// A token to resume pagination.
 	NextToken *string
+
 	// An array of objects describing the flow definitions.
+	//
+	// This member is required.
 	FlowDefinitionSummaries []*types.FlowDefinitionSummary
 
 	// Metadata pertaining to the operation's result.

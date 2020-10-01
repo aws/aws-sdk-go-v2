@@ -59,13 +59,19 @@ func (c *Client) DescribeServer(ctx context.Context, params *DescribeServerInput
 }
 
 type DescribeServerInput struct {
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server.
+	//
+	// This member is required.
 	ServerId *string
 }
 
 type DescribeServerOutput struct {
+
 	// An array containing the properties of a file transfer protocol-enabled server
 	// with the ServerID you specified.
+	//
+	// This member is required.
 	Server *types.DescribedServer
 
 	// Metadata pertaining to the operation's result.

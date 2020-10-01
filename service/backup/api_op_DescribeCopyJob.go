@@ -56,11 +56,15 @@ func (c *Client) DescribeCopyJob(ctx context.Context, params *DescribeCopyJobInp
 }
 
 type DescribeCopyJobInput struct {
+
 	// Uniquely identifies a copy job.
+	//
+	// This member is required.
 	CopyJobId *string
 }
 
 type DescribeCopyJobOutput struct {
+
 	// Contains detailed information about a copy job.
 	CopyJob *types.CopyJob
 

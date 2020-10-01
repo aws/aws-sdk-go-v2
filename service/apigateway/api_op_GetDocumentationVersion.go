@@ -57,14 +57,24 @@ func (c *Client) GetDocumentationVersion(ctx context.Context, params *GetDocumen
 
 // Gets a documentation snapshot of an API.
 type GetDocumentationVersionInput struct {
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Template  *bool
+
+	Template *bool
+
 	// [Required] The version identifier of the to-be-retrieved documentation snapshot.
+	//
+	// This member is required.
 	DocumentationVersion *string
-	Title                *string
-	TemplateSkipList     []*string
-	Name                 *string
+
+	Title *string
+
+	TemplateSkipList []*string
+
+	Name *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -73,10 +83,13 @@ type GetDocumentationVersionInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
 // DocumentationPart (), DocumentationVersions ()
 type GetDocumentationVersionOutput struct {
+
 	// The description of the API documentation snapshot.
 	Description *string
+
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
 	// The version identifier of the API documentation snapshot.
 	Version *string
 

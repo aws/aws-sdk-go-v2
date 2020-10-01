@@ -60,16 +60,25 @@ func (c *Client) UpdateEndpointsBatch(ctx context.Context, params *UpdateEndpoin
 }
 
 type UpdateEndpointsBatchInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// Specifies a batch of endpoints to create or update and the settings and
 	// attributes to set or change for each endpoint.
+	//
+	// This member is required.
 	EndpointBatchRequest *types.EndpointBatchRequest
 }
 
 type UpdateEndpointsBatchOutput struct {
+
 	// Provides information about an API request or response.
+	//
+	// This member is required.
 	MessageBody *types.MessageBody
 
 	// Metadata pertaining to the operation's result.

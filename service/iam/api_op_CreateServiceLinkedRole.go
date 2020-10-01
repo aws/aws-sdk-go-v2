@@ -65,6 +65,7 @@ func (c *Client) CreateServiceLinkedRole(ctx context.Context, params *CreateServ
 }
 
 type CreateServiceLinkedRoleInput struct {
+
 	// The service principal for the AWS service to which this role is attached. You
 	// use a string similar to a URL but without the http:// in front. For example:
 	// elasticbeanstalk.amazonaws.com. Service principals are unique and
@@ -74,9 +75,13 @@ type CreateServiceLinkedRoleInput struct {
 	// in the IAM User Guide. Look for the services that have Yes in the Service-Linked
 	// Role column. Choose the Yes link to view the service-linked role documentation
 	// for that service.
+	//
+	// This member is required.
 	AWSServiceName *string
+
 	// The description of the role.
 	Description *string
+
 	// A string that you provide, which is combined with the service-provided prefix to
 	// form the complete role name. If you make multiple requests for the same service,
 	// then you must supply a different CustomSuffix for each request. Otherwise the
@@ -88,6 +93,7 @@ type CreateServiceLinkedRoleInput struct {
 }
 
 type CreateServiceLinkedRoleOutput struct {
+
 	// A Role () object that contains details about the newly created role.
 	Role *types.Role
 

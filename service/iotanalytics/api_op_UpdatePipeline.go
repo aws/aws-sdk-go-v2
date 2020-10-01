@@ -58,8 +58,12 @@ func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput
 }
 
 type UpdatePipelineInput struct {
+
 	// The name of the pipeline to update.
+	//
+	// This member is required.
 	PipelineName *string
+
 	// A list of "PipelineActivity" objects. Activities perform transformations on your
 	// messages, such as removing, renaming or adding message attributes; filtering
 	// messages based on attribute values; invoking your Lambda functions on messages
@@ -68,6 +72,8 @@ type UpdatePipelineInput struct {
 	// a channel and a datastore activity. Each entry in the list must contain only one
 	// activity, for example: pipelineActivities = [ { "channel": { ... } }, {
 	// "lambda": { ... } }, ... ]
+	//
+	// This member is required.
 	PipelineActivities []*types.PipelineActivity
 }
 

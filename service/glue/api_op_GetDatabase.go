@@ -56,15 +56,20 @@ func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optF
 }
 
 type GetDatabaseInput struct {
+
 	// The name of the database to retrieve. For Hive compatibility, this should be all
 	// lowercase.
+	//
+	// This member is required.
 	Name *string
+
 	// The ID of the Data Catalog in which the database resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string
 }
 
 type GetDatabaseOutput struct {
+
 	// The definition of the specified database in the Data Catalog.
 	Database *types.Database
 

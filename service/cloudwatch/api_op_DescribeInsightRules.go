@@ -59,16 +59,20 @@ func (c *Client) DescribeInsightRules(ctx context.Context, params *DescribeInsig
 }
 
 type DescribeInsightRulesInput struct {
+
 	// Reserved for future use.
 	NextToken *string
+
 	// This parameter is not currently used. Reserved for future use. If it is used in
 	// the future, the maximum value might be different.
 	MaxResults *int32
 }
 
 type DescribeInsightRulesOutput struct {
+
 	// The rules returned by the operation.
 	InsightRules []*types.InsightRule
+
 	// Reserved for future use.
 	NextToken *string
 

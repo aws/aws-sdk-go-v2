@@ -57,6 +57,7 @@ type GetSupportedResourceTypesInput struct {
 }
 
 type GetSupportedResourceTypesOutput struct {
+
 	// Contains a string with the supported AWS resource types:
 	//
 	//     * DynamoDB for

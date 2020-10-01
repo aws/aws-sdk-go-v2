@@ -72,12 +72,18 @@ func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, param
 
 //
 type AuthorizeClusterSecurityGroupIngressInput struct {
+
 	// The name of the security group to which the ingress rule is added.
+	//
+	// This member is required.
 	ClusterSecurityGroupName *string
+
 	// The IP range to be added the Amazon Redshift security group.
 	CIDRIP *string
+
 	// The EC2 security group to be added the Amazon Redshift security group.
 	EC2SecurityGroupName *string
+
 	// The AWS account number of the owner of the security group specified by the
 	// EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable
 	// value. Example: 111122223333
@@ -85,6 +91,7 @@ type AuthorizeClusterSecurityGroupIngressInput struct {
 }
 
 type AuthorizeClusterSecurityGroupIngressOutput struct {
+
 	// Describes a security group.
 	ClusterSecurityGroup *types.ClusterSecurityGroup
 

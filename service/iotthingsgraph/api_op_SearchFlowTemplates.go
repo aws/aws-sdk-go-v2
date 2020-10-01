@@ -56,20 +56,25 @@ func (c *Client) SearchFlowTemplates(ctx context.Context, params *SearchFlowTemp
 }
 
 type SearchFlowTemplatesInput struct {
+
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// An array of objects that limit the result set. The only valid filter is
 	// DEVICE_MODEL_ID.
 	Filters []*types.FlowTemplateFilter
 }
 
 type SearchFlowTemplatesOutput struct {
+
 	// An array of objects that contain summary information about each workflow in the
 	// result set.
 	Summaries []*types.FlowTemplateSummary
+
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
 

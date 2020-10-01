@@ -57,15 +57,24 @@ func (c *Client) GetTrafficPolicy(ctx context.Context, params *GetTrafficPolicyI
 
 // Gets information about a specific traffic policy version.
 type GetTrafficPolicyInput struct {
+
 	// The version number of the traffic policy that you want to get information about.
+	//
+	// This member is required.
 	Version *int32
+
 	// The ID of the traffic policy that you want to get information about.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains the response information for the request.
 type GetTrafficPolicyOutput struct {
+
 	// A complex type that contains settings for the specified traffic policy.
+	//
+	// This member is required.
 	TrafficPolicy *types.TrafficPolicy
 
 	// Metadata pertaining to the operation's result.

@@ -55,9 +55,15 @@ func (c *Client) RestoreDomainAccess(ctx context.Context, params *RestoreDomainA
 }
 
 type RestoreDomainAccessInput struct {
+
 	// The name of the domain.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
 }
 

@@ -61,11 +61,18 @@ func (c *Client) DeleteFleets(ctx context.Context, params *DeleteFleetsInput, op
 }
 
 type DeleteFleetsInput struct {
+
 	// The IDs of the EC2 Fleets.
+	//
+	// This member is required.
 	FleetIds []*string
+
 	// Indicates whether to terminate instances for an EC2 Fleet if it is deleted
 	// successfully.
+	//
+	// This member is required.
 	TerminateInstances *bool
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -74,8 +81,10 @@ type DeleteFleetsInput struct {
 }
 
 type DeleteFleetsOutput struct {
+
 	// Information about the EC2 Fleets that are not successfully deleted.
 	UnsuccessfulFleetDeletions []*types.DeleteFleetErrorItem
+
 	// Information about the EC2 Fleets that are successfully deleted.
 	SuccessfulFleetDeletions []*types.DeleteFleetSuccessItem
 

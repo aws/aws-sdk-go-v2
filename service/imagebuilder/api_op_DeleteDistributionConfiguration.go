@@ -55,13 +55,18 @@ func (c *Client) DeleteDistributionConfiguration(ctx context.Context, params *De
 }
 
 type DeleteDistributionConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the distribution configuration to delete.
+	//
+	// This member is required.
 	DistributionConfigurationArn *string
 }
 
 type DeleteDistributionConfigurationOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the distribution configuration that was
 	// deleted.
 	DistributionConfigurationArn *string

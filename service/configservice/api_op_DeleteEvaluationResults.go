@@ -59,8 +59,11 @@ func (c *Client) DeleteEvaluationResults(ctx context.Context, params *DeleteEval
 
 //
 type DeleteEvaluationResultsInput struct {
+
 	// The name of the AWS Config rule for which you want to delete the evaluation
 	// results.
+	//
+	// This member is required.
 	ConfigRuleName *string
 }
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The certificate is invalid.
@@ -24,12 +23,6 @@ func (e *CertificateValidationException) ErrorMessage() string {
 }
 func (e *CertificateValidationException) ErrorCode() string             { return "CertificateValidationException" }
 func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The contents of the request were invalid. For example, this code is returned
 // when an UpdateJobExecution request contains invalid status details. The message
@@ -49,12 +42,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An update attempted to change the job execution to a state that is invalid
 // because of the job execution's current state (for example, an attempt to change
@@ -77,12 +64,6 @@ func (e *InvalidStateTransitionException) ErrorCode() string {
 	return "InvalidStateTransitionException"
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateTransitionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateTransitionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -100,12 +81,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
@@ -123,12 +98,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The job is in a terminal state.
 type TerminalStateException struct {
@@ -146,12 +115,6 @@ func (e *TerminalStateException) ErrorMessage() string {
 }
 func (e *TerminalStateException) ErrorCode() string             { return "TerminalStateException" }
 func (e *TerminalStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TerminalStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TerminalStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The rate exceeds the limit.
 type ThrottlingException struct {
@@ -171,15 +134,3 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ThrottlingException) GetPayload() []byte {
-	return e.Payload
-}
-func (e *ThrottlingException) HasPayload() bool {
-	return e.Payload != nil
-}

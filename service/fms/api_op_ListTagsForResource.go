@@ -56,13 +56,17 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource to return tags for. The AWS
 	// Firewall Manager resources that support tagging are policies, applications
 	// lists, and protocols lists.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The tags associated with the resource.
 	TagList []*types.Tag
 

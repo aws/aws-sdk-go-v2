@@ -62,6 +62,7 @@ type DescribeOrganizationInput struct {
 }
 
 type DescribeOrganizationOutput struct {
+
 	// A structure that contains information about the organization. The
 	// AvailablePolicyTypes part of the response is deprecated, and you shouldn't use
 	// it in your apps. It doesn't include any policy type supported by Organizations

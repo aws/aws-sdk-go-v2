@@ -59,11 +59,17 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 }
 
 type CancelJobInput struct {
+
 	// The AWS Batch job ID of the job to cancel.
+	//
+	// This member is required.
 	JobId *string
+
 	// A message to attach to the job that explains the reason for canceling it. This
 	// message is returned by future DescribeJobs () operations on the job. This
 	// message is also recorded in the AWS Batch activity logs.
+	//
+	// This member is required.
 	Reason *string
 }
 

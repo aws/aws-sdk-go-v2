@@ -56,6 +56,7 @@ func (c *Client) SearchTransitGatewayRoutes(ctx context.Context, params *SearchT
 }
 
 type SearchTransitGatewayRoutesInput struct {
+
 	// One or more filters. The possible values are:
 	//
 	//     *
@@ -87,11 +88,18 @@ type SearchTransitGatewayRoutesInput struct {
 	// blackhole).
 	//
 	//     * type - The type of route (propagated | static).
+	//
+	// This member is required.
 	Filters []*types.Filter
+
 	// The ID of the transit gateway route table.
+	//
+	// This member is required.
 	TransitGatewayRouteTableId *string
+
 	// The maximum number of routes to return.
 	MaxResults *int32
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -100,8 +108,10 @@ type SearchTransitGatewayRoutesInput struct {
 }
 
 type SearchTransitGatewayRoutesOutput struct {
+
 	// Information about the routes.
 	Routes []*types.TransitGatewayRoute
+
 	// Indicates whether there are additional routes available.
 	AdditionalRoutesAvailable *bool
 

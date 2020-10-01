@@ -59,6 +59,7 @@ func (c *Client) ListTaskDefinitionFamilies(ctx context.Context, params *ListTas
 }
 
 type ListTaskDefinitionFamiliesInput struct {
+
 	// The nextToken value returned from a ListTaskDefinitionFamilies request
 	// indicating that more results are available to fulfill the request and further
 	// calls will be needed. If maxResults was provided, it is possible the number of
@@ -66,10 +67,12 @@ type ListTaskDefinitionFamiliesInput struct {
 	// identifier that is only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
+
 	// The familyPrefix is a string that is used to filter the results of
 	// ListTaskDefinitionFamilies. If you specify a familyPrefix, only task definition
 	// family names that begin with the familyPrefix string are returned.
 	FamilyPrefix *string
+
 	// The maximum number of task definition family results returned by
 	// ListTaskDefinitionFamilies in paginated output. When this parameter is used,
 	// ListTaskDefinitions only returns maxResults results in a single page along with
@@ -79,6 +82,7 @@ type ListTaskDefinitionFamiliesInput struct {
 	// used, then ListTaskDefinitionFamilies returns up to 100 results and a nextToken
 	// value if applicable.
 	MaxResults *int32
+
 	// The task definition family status with which to filter the
 	// ListTaskDefinitionFamilies results. By default, both ACTIVE and INACTIVE task
 	// definition families are listed. If this parameter is set to ACTIVE, only task
@@ -91,11 +95,13 @@ type ListTaskDefinitionFamiliesInput struct {
 }
 
 type ListTaskDefinitionFamiliesOutput struct {
+
 	// The nextToken value to include in a future ListTaskDefinitionFamilies request.
 	// When the results of a ListTaskDefinitionFamilies request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// The list of task definition family names that match the
 	// ListTaskDefinitionFamilies request.
 	Families []*string

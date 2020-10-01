@@ -58,15 +58,23 @@ func (c *Client) InviteUsers(ctx context.Context, params *InviteUsersInput, optF
 }
 
 type InviteUsersInput struct {
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The user type.
 	UserType types.UserType
+
 	// The user email addresses to which to send the email invitation.
+	//
+	// This member is required.
 	UserEmailList []*string
 }
 
 type InviteUsersOutput struct {
+
 	// The email invitation details.
 	Invites []*types.Invite
 

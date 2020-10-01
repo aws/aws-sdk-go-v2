@@ -55,11 +55,13 @@ func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns
 }
 
 type GetProfileInput struct {
+
 	// The ARN of the room profile for which to request details. Required.
 	ProfileArn *string
 }
 
 type GetProfileOutput struct {
+
 	// The details of the room profile requested. Required.
 	Profile *types.Profile
 

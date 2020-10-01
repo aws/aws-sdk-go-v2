@@ -58,15 +58,24 @@ func (c *Client) RemoveAttributesFromFindings(ctx context.Context, params *Remov
 }
 
 type RemoveAttributesFromFindingsInput struct {
+
 	// The ARNs that specify the findings that you want to remove attributes from.
+	//
+	// This member is required.
 	FindingArns []*string
+
 	// The array of attribute keys that you want to remove from specified findings.
+	//
+	// This member is required.
 	AttributeKeys []*string
 }
 
 type RemoveAttributesFromFindingsOutput struct {
+
 	// Attributes details that cannot be described. An error code is provided for each
 	// failed item.
+	//
+	// This member is required.
 	FailedItems map[string]*types.FailedItemDetails
 
 	// Metadata pertaining to the operation's result.

@@ -55,27 +55,34 @@ func (c *Client) ListImageRecipes(ctx context.Context, params *ListImageRecipesI
 }
 
 type ListImageRecipesInput struct {
+
 	// The maximum items to return in a request.
 	MaxResults *int32
+
 	// The owner defines which image recipes you want to list. By default, this request
 	// will only show image recipes owned by your account. You can use this field to
 	// specify if you want to view image recipes owned by yourself, by Amazon, or those
 	// image recipes that have been shared with you by other customers.
 	Owner types.Ownership
+
 	// The filters.
 	Filters []*types.Filter
+
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
 }
 
 type ListImageRecipesOutput struct {
+
 	// The request ID that uniquely identifies this request.
 	RequestId *string
+
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.
 	NextToken *string
+
 	// The list of image pipelines.
 	ImageRecipeSummaryList []*types.ImageRecipeSummary
 

@@ -60,13 +60,18 @@ func (c *Client) DescribeCostCategoryDefinition(ctx context.Context, params *Des
 }
 
 type DescribeCostCategoryDefinitionInput struct {
+
 	// The unique identifier for your Cost Category.
+	//
+	// This member is required.
 	CostCategoryArn *string
+
 	// The date when the Cost Category was effective.
 	EffectiveOn *string
 }
 
 type DescribeCostCategoryDefinitionOutput struct {
+
 	// The structure of Cost Categories. This includes detailed metadata and the set of
 	// rules for the CostCategory object.
 	CostCategory *types.CostCategory

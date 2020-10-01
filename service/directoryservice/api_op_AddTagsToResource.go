@@ -58,9 +58,15 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 }
 
 type AddTagsToResourceInput struct {
+
 	// Identifier (ID) for the directory to which to add the tag.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The tags to be assigned to the directory.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

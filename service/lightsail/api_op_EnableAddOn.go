@@ -58,13 +58,20 @@ func (c *Client) EnableAddOn(ctx context.Context, params *EnableAddOnInput, optF
 }
 
 type EnableAddOnInput struct {
+
 	// An array of strings representing the add-on to enable or modify.
+	//
+	// This member is required.
 	AddOnRequest *types.AddOnRequest
+
 	// The name of the source resource for which to enable or modify the add-on.
+	//
+	// This member is required.
 	ResourceName *string
 }
 
 type EnableAddOnOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

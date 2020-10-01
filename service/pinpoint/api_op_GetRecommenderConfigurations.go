@@ -56,17 +56,22 @@ func (c *Client) GetRecommenderConfigurations(ctx context.Context, params *GetRe
 }
 
 type GetRecommenderConfigurationsInput struct {
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
 }
 
 type GetRecommenderConfigurationsOutput struct {
+
 	// Provides information about all the recommender model configurations that are
 	// associated with your Amazon Pinpoint account.
+	//
+	// This member is required.
 	ListRecommenderConfigurationsResponse *types.ListRecommenderConfigurationsResponse
 
 	// Metadata pertaining to the operation's result.

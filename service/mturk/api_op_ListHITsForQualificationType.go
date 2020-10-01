@@ -59,22 +59,30 @@ func (c *Client) ListHITsForQualificationType(ctx context.Context, params *ListH
 }
 
 type ListHITsForQualificationTypeInput struct {
+
 	// The ID of the Qualification type to use when querying HITs.
+	//
+	// This member is required.
 	QualificationTypeId *string
+
 	// Pagination Token
 	NextToken *string
+
 	// Limit the number of results returned.
 	MaxResults *int32
 }
 
 type ListHITsForQualificationTypeOutput struct {
+
 	// The number of HITs on this page in the filtered results list, equivalent to the
 	// number of HITs being returned by this call.
 	NumResults *int32
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The list of HIT elements returned by the query.
 	HITs []*types.HIT
 

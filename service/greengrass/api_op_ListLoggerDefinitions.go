@@ -55,17 +55,21 @@ func (c *Client) ListLoggerDefinitions(ctx context.Context, params *ListLoggerDe
 }
 
 type ListLoggerDefinitionsInput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
 }
 
 type ListLoggerDefinitionsOutput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// Information about a definition.
 	Definitions []*types.DefinitionInformation
 

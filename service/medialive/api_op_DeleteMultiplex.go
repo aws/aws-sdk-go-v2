@@ -57,30 +57,43 @@ func (c *Client) DeleteMultiplex(ctx context.Context, params *DeleteMultiplexInp
 
 // Placeholder documentation for DeleteMultiplexRequest
 type DeleteMultiplexInput struct {
+
 	// The ID of the multiplex.
+	//
+	// This member is required.
 	MultiplexId *string
 }
 
 // Placeholder documentation for DeleteMultiplexResponse
 type DeleteMultiplexOutput struct {
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
+
 	// A list of availability zones for the multiplex.
 	AvailabilityZones []*string
+
 	// The name of the multiplex.
 	Name *string
+
 	// A list of the multiplex output destinations.
 	Destinations []*types.MultiplexOutputDestination
+
 	// The current state of the multiplex.
 	State types.MultiplexState
+
 	// The unique arn of the multiplex.
 	Arn *string
+
 	// The number of programs in the multiplex.
 	ProgramCount *int32
+
 	// The number of currently healthy pipelines.
 	PipelinesRunningCount *int32
+
 	// Configuration for a multiplex event.
 	MultiplexSettings *types.MultiplexSettings
+
 	// The unique id of the multiplex.
 	Id *string
 

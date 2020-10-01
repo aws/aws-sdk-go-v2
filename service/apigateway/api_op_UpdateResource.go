@@ -59,13 +59,23 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 // Request to change information about a Resource () resource.
 type UpdateResourceInput struct {
 	TemplateSkipList []*string
-	Template         *bool
-	Title            *string
+
+	Template *bool
+
+	Title *string
+
 	// [Required] The identifier of the Resource () resource.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Name      *string
+
+	Name *string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -74,8 +84,10 @@ type UpdateResourceInput struct {
 // Represents an API resource. Create an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateResourceOutput struct {
+
 	// The resource's identifier.
 	Id *string
+
 	// Gets an API resource's method of a given HTTP verb. The resource methods are a
 	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
 	// method map is included in the 200 OK response of the GET
@@ -156,10 +168,13 @@ type UpdateResourceOutput struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]*types.Method
+
 	// The parent resource's identifier.
 	ParentId *string
+
 	// The full path for this resource.
 	Path *string
+
 	// The last path segment for this resource.
 	PathPart *string
 

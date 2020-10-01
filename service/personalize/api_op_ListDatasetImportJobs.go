@@ -60,19 +60,24 @@ func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetI
 }
 
 type ListDatasetImportJobsInput struct {
+
 	// A token returned from the previous call to ListDatasetImportJobs for getting the
 	// next set of dataset import jobs (if they exist).
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the dataset to list the dataset import jobs
 	// for.
 	DatasetArn *string
+
 	// The maximum number of dataset import jobs to return.
 	MaxResults *int32
 }
 
 type ListDatasetImportJobsOutput struct {
+
 	// A token for getting the next set of dataset import jobs (if they exist).
 	NextToken *string
+
 	// The list of dataset import jobs.
 	DatasetImportJobs []*types.DatasetImportJobSummary
 

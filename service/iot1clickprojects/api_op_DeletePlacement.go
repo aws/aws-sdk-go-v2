@@ -57,9 +57,15 @@ func (c *Client) DeletePlacement(ctx context.Context, params *DeletePlacementInp
 }
 
 type DeletePlacementInput struct {
+
 	// The name of the empty placement to delete.
+	//
+	// This member is required.
 	PlacementName *string
+
 	// The project containing the empty placement to delete.
+	//
+	// This member is required.
 	ProjectName *string
 }
 

@@ -55,19 +55,25 @@ func (c *Client) DescribeNamespace(ctx context.Context, params *DescribeNamespac
 }
 
 type DescribeNamespaceInput struct {
+
 	// The name of the user's namespace. Set this to aws to get the public namespace.
 	NamespaceName *string
 }
 
 type DescribeNamespaceOutput struct {
+
 	// The version of the public namespace that the latest version is tracking.
 	TrackingNamespaceVersion *int64
+
 	// The name of the public namespace that the latest namespace version is tracking.
 	TrackingNamespaceName *string
+
 	// The version of the user's namespace to describe.
 	NamespaceVersion *int64
+
 	// The name of the namespace.
 	NamespaceName *string
+
 	// The ARN of the namespace.
 	NamespaceArn *string
 

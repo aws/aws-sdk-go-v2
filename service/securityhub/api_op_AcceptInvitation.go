@@ -58,9 +58,15 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 }
 
 type AcceptInvitationInput struct {
+
 	// The account ID of the Security Hub master account that sent the invitation.
+	//
+	// This member is required.
 	MasterId *string
+
 	// The ID of the invitation sent from the Security Hub master account.
+	//
+	// This member is required.
 	InvitationId *string
 }
 

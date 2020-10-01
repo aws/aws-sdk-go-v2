@@ -59,27 +59,39 @@ func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns
 }
 
 type MeterUsageInput struct {
+
 	// Timestamp, in UTC, for which the usage is being reported. Your application can
 	// meter usage for up to one hour in the past. Make sure the timestamp value is not
 	// before the start of the software usage.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// Checks whether you have the permissions required for the action, but does not
 	// make the request. If you have the permissions, the request returns
 	// DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to false
 	// if not specified.
 	DryRun *bool
+
 	// Product code is used to uniquely identify a product in AWS Marketplace. The
 	// product code should be the same as the one used during the publishing of a new
 	// product.
+	//
+	// This member is required.
 	ProductCode *string
+
 	// Consumption value for the hour. Defaults to 0 if not specified.
 	UsageQuantity *int32
+
 	// It will be one of the fcp dimension name provided during the publishing of the
 	// product.
+	//
+	// This member is required.
 	UsageDimension *string
 }
 
 type MeterUsageOutput struct {
+
 	// Metering record id.
 	MeteringRecordId *string
 

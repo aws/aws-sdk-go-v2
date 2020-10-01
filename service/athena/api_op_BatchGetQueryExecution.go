@@ -61,13 +61,18 @@ func (c *Client) BatchGetQueryExecution(ctx context.Context, params *BatchGetQue
 }
 
 type BatchGetQueryExecutionInput struct {
+
 	// An array of query execution IDs.
+	//
+	// This member is required.
 	QueryExecutionIds []*string
 }
 
 type BatchGetQueryExecutionOutput struct {
+
 	// Information about the query executions that failed to run.
 	UnprocessedQueryExecutionIds []*types.UnprocessedQueryExecutionId
+
 	// Information about a query execution.
 	QueryExecutions []*types.QueryExecution
 

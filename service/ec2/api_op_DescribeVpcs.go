@@ -55,11 +55,13 @@ func (c *Client) DescribeVpcs(ctx context.Context, params *DescribeVpcsInput, op
 }
 
 type DescribeVpcsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * cidr - The primary IPv4 CIDR block of the VPC. The
@@ -114,18 +116,23 @@ type DescribeVpcsInput struct {
 	//
 	//     * vpc-id - The ID of the VPC.
 	Filters []*types.Filter
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// One or more VPC IDs. Default: Describes all your VPCs.
 	VpcIds []*string
 }
 
 type DescribeVpcsOutput struct {
+
 	// Information about one or more VPCs.
 	Vpcs []*types.Vpc
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

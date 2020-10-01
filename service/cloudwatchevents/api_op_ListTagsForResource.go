@@ -57,11 +57,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The ARN of the EventBridge resource for which you want to view tags.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// The list of tag keys and values associated with the resource you specified
 	Tags []*types.Tag
 

@@ -56,20 +56,25 @@ func (c *Client) ListTaskExecutions(ctx context.Context, params *ListTaskExecuti
 
 // ListTaskExecutions
 type ListTaskExecutionsInput struct {
+
 	// The maximum number of executed tasks to list.
 	MaxResults *int32
+
 	// An opaque string that indicates the position at which to begin the next list of
 	// the executed tasks.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the task whose tasks you want to list.
 	TaskArn *string
 }
 
 // ListTaskExecutionsResponse
 type ListTaskExecutionsOutput struct {
+
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of executed tasks.
 	NextToken *string
+
 	// A list of executed tasks.
 	TaskExecutions []*types.TaskExecutionListEntry
 

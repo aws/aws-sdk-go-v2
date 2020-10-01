@@ -55,6 +55,7 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 }
 
 type GetResourcePolicyInput struct {
+
 	// The ARN of the AWS Glue resource for the resource policy to be retrieved. For
 	// more information about AWS Glue resource ARNs, see the AWS Glue ARN string
 	// pattern
@@ -63,12 +64,16 @@ type GetResourcePolicyInput struct {
 }
 
 type GetResourcePolicyOutput struct {
+
 	// Contains the hash value associated with this policy.
 	PolicyHash *string
+
 	// The date and time at which the policy was last updated.
 	UpdateTime *time.Time
+
 	// Contains the requested policy document, in JSON format.
 	PolicyInJson *string
+
 	// The date and time at which the policy was created.
 	CreateTime *time.Time
 

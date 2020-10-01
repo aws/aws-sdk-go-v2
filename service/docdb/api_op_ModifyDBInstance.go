@@ -59,6 +59,7 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 
 // Represents the input to ModifyDBInstance ().
 type ModifyDBInstanceInput struct {
+
 	// The weekly time range (in UTC) during which system maintenance can occur, which
 	// might result in an outage. Changing this parameter doesn't result in an outage
 	// except in the following situation, and the change is asynchronously applied as
@@ -70,16 +71,19 @@ type ModifyDBInstanceInput struct {
 	// setting. Format: ddd:hh24:mi-ddd:hh24:mi Valid days: Mon, Tue, Wed, Thu, Fri,
 	// Sat, Sun Constraints: Must be at least 30 minutes.
 	PreferredMaintenanceWindow *string
+
 	// A value that specifies the order in which an Amazon DocumentDB replica is
 	// promoted to the primary instance after a failure of the existing primary
 	// instance. Default: 1 Valid values: 0-15
 	PromotionTier *int32
+
 	// The new compute and memory capacity of the instance; for example, db.r5.large.
 	// Not all instance classes are available in all AWS Regions. If you modify the
 	// instance class, an outage occurs during the change. The change is applied during
 	// the next maintenance window, unless ApplyImmediately is specified as true for
 	// this request. Default: Uses existing setting.
 	DBInstanceClass *string
+
 	// The new instance identifier for the instance when renaming an instance. When you
 	// change the instance identifier, an instance reboot occurs immediately if you set
 	// Apply Immediately to true. It occurs during the next maintenance window if you
@@ -96,11 +100,15 @@ type ModifyDBInstanceInput struct {
 	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
+
 	// The instance identifier. This value is stored as a lowercase string.
 	// Constraints:
 	//
 	//     * Must match the identifier of an existing DBInstance.
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// Indicates that minor version upgrades are applied automatically to the instance
 	// during the maintenance window. Changing this parameter doesn't result in an
 	// outage except in the following case, and the change is asynchronously applied as
@@ -108,6 +116,7 @@ type ModifyDBInstanceInput struct {
 	// maintenance window, and a newer minor version is available, and Amazon
 	// DocumentDB has enabled automatic patching for that engine version.
 	AutoMinorVersionUpgrade *bool
+
 	// Specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the instance. If this parameter is set to
@@ -115,11 +124,13 @@ type ModifyDBInstanceInput struct {
 	// Some parameter changes can cause an outage and are applied on the next reboot.
 	// Default: false
 	ApplyImmediately *bool
+
 	// Indicates the certificate that needs to be associated with the instance.
 	CACertificateIdentifier *string
 }
 
 type ModifyDBInstanceOutput struct {
+
 	// Detailed information about an instance.
 	DBInstance *types.DBInstance
 

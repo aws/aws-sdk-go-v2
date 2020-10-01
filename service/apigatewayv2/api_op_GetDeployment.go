@@ -57,23 +57,35 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 }
 
 type GetDeploymentInput struct {
+
 	// The deployment ID.
+	//
+	// This member is required.
 	DeploymentId *string
+
 	// The API identifier.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type GetDeploymentOutput struct {
+
 	// The identifier for the deployment.
 	DeploymentId *string
+
 	// The date and time when the Deployment resource was created.
 	CreatedDate *time.Time
+
 	// The status of the deployment: PENDING, FAILED, or SUCCEEDED.
 	DeploymentStatus types.DeploymentStatus
+
 	// Specifies whether a deployment was automatically released.
 	AutoDeployed *bool
+
 	// May contain additional feedback on the status of an API deployment.
 	DeploymentStatusMessage *string
+
 	// The description for the deployment.
 	Description *string
 

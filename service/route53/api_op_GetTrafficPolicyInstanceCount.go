@@ -62,8 +62,11 @@ type GetTrafficPolicyInstanceCountInput struct {
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
 type GetTrafficPolicyInstanceCountOutput struct {
+
 	// The number of traffic policy instances that are associated with the current AWS
 	// account.
+	//
+	// This member is required.
 	TrafficPolicyInstanceCount *int32
 
 	// Metadata pertaining to the operation's result.

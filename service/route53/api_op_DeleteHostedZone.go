@@ -94,14 +94,20 @@ func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneI
 
 // A request to delete a hosted zone.
 type DeleteHostedZoneInput struct {
+
 	// The ID of the hosted zone you want to delete.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains the response to a DeleteHostedZone request.
 type DeleteHostedZoneOutput struct {
+
 	// A complex type that contains the ID, the status, and the date and time of a
 	// request to delete a hosted zone.
+	//
+	// This member is required.
 	ChangeInfo *types.ChangeInfo
 
 	// Metadata pertaining to the operation's result.

@@ -55,7 +55,10 @@ func (c *Client) StopMonitoringSchedule(ctx context.Context, params *StopMonitor
 }
 
 type StopMonitoringScheduleInput struct {
+
 	// The name of the schedule to stop.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
 }
 

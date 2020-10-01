@@ -59,20 +59,33 @@ func (c *Client) CreatePublishingDestination(ctx context.Context, params *Create
 }
 
 type CreatePublishingDestinationInput struct {
+
 	// The type of resource for the publishing destination. Currently only Amazon S3
 	// buckets are supported.
+	//
+	// This member is required.
 	DestinationType types.DestinationType
+
 	// The ID of the GuardDuty detector associated with the publishing destination.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The idempotency token for the request.
 	ClientToken *string
+
 	// The properties of the publishing destination, including the ARNs for the
 	// destination and the KMS key used for encryption.
+	//
+	// This member is required.
 	DestinationProperties *types.DestinationProperties
 }
 
 type CreatePublishingDestinationOutput struct {
+
 	// The ID of the publishing destination that is created.
+	//
+	// This member is required.
 	DestinationId *string
 
 	// Metadata pertaining to the operation's result.

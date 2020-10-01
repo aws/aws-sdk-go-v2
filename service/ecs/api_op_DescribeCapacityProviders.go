@@ -55,6 +55,7 @@ func (c *Client) DescribeCapacityProviders(ctx context.Context, params *Describe
 }
 
 type DescribeCapacityProvidersInput struct {
+
 	// The nextToken value returned from a previous paginated DescribeCapacityProviders
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
@@ -62,10 +63,12 @@ type DescribeCapacityProvidersInput struct {
 	// identifier that is only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
+
 	// Specifies whether or not you want to see the resource tags for the capacity
 	// provider. If TAGS is specified, the tags are included in the response. If this
 	// field is omitted, tags are not included in the response.
 	Include []types.CapacityProviderField
+
 	// The maximum number of account setting results returned by
 	// DescribeCapacityProviders in paginated output. When this parameter is used,
 	// DescribeCapacityProviders only returns maxResults results in a single page along
@@ -75,16 +78,20 @@ type DescribeCapacityProvidersInput struct {
 	// is not used, then DescribeCapacityProviders returns up to 10 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
+
 	// The short name or full Amazon Resource Name (ARN) of one or more capacity
 	// providers. Up to 100 capacity providers can be described in an action.
 	CapacityProviders []*string
 }
 
 type DescribeCapacityProvidersOutput struct {
+
 	// Any failures associated with the call.
 	Failures []*types.Failure
+
 	// The list of capacity providers.
 	CapacityProviders []*types.CapacityProvider
+
 	// The nextToken value to include in a future DescribeCapacityProviders request.
 	// When the results of a DescribeCapacityProviders request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null when

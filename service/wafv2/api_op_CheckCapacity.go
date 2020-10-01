@@ -68,8 +68,12 @@ func (c *Client) CheckCapacity(ctx context.Context, params *CheckCapacityInput, 
 }
 
 type CheckCapacityInput struct {
+
 	// An array of Rule () that you're configuring to use in a rule group or web ACL.
+	//
+	// This member is required.
 	Rules []*types.Rule
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -80,10 +84,13 @@ type CheckCapacityInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
 }
 
 type CheckCapacityOutput struct {
+
 	// The capacity required by the rules and scope.
 	Capacity *int64
 

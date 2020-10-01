@@ -58,19 +58,26 @@ func (c *Client) DeleteHsm(ctx context.Context, params *DeleteHsmInput, optFns .
 }
 
 type DeleteHsmInput struct {
+
 	// The IP address of the elastic network interface (ENI) of the HSM that you are
 	// deleting.
 	EniIp *string
+
 	// The identifier (ID) of the elastic network interface (ENI) of the HSM that you
 	// are deleting.
 	EniId *string
+
 	// The identifier (ID) of the HSM that you are deleting.
 	HsmId *string
+
 	// The identifier (ID) of the cluster that contains the HSM that you are deleting.
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 type DeleteHsmOutput struct {
+
 	// The identifier (ID) of the HSM that was deleted.
 	HsmId *string
 

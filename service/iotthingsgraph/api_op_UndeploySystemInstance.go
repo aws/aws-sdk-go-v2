@@ -55,11 +55,13 @@ func (c *Client) UndeploySystemInstance(ctx context.Context, params *UndeploySys
 }
 
 type UndeploySystemInstanceInput struct {
+
 	// The ID of the system instance to remove from its target.
 	Id *string
 }
 
 type UndeploySystemInstanceOutput struct {
+
 	// An object that contains summary information about the system instance that was
 	// removed from its target.
 	Summary *types.SystemInstanceSummary

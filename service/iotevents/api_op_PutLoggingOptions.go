@@ -60,7 +60,10 @@ func (c *Client) PutLoggingOptions(ctx context.Context, params *PutLoggingOption
 }
 
 type PutLoggingOptionsInput struct {
+
 	// The new values of the AWS IoT Events logging options.
+	//
+	// This member is required.
 	LoggingOptions *types.LoggingOptions
 }
 

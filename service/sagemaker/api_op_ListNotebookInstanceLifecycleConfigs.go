@@ -57,37 +57,48 @@ func (c *Client) ListNotebookInstanceLifecycleConfigs(ctx context.Context, param
 }
 
 type ListNotebookInstanceLifecycleConfigsInput struct {
+
 	// The maximum number of lifecycle configurations to return in the response.
 	MaxResults *int32
+
 	// A filter that returns only lifecycle configurations that were modified after the
 	// specified time (timestamp).
 	LastModifiedTimeAfter *time.Time
+
 	// A filter that returns only lifecycle configurations that were created before the
 	// specified time (timestamp).
 	CreationTimeBefore *time.Time
+
 	// A filter that returns only lifecycle configurations that were modified before
 	// the specified time (timestamp).
 	LastModifiedTimeBefore *time.Time
+
 	// If the result of a ListNotebookInstanceLifecycleConfigs request was truncated,
 	// the response includes a NextToken. To get the next set of lifecycle
 	// configurations, use the token in the next request.
 	NextToken *string
+
 	// A filter that returns only lifecycle configurations that were created after the
 	// specified time (timestamp).
 	CreationTimeAfter *time.Time
+
 	// A string in the lifecycle configuration name. This filter returns only lifecycle
 	// configurations whose name contains the specified string.
 	NameContains *string
+
 	// Sorts the list of results. The default is CreationTime.
 	SortBy types.NotebookInstanceLifecycleConfigSortKey
+
 	// The sort order for results.
 	SortOrder types.NotebookInstanceLifecycleConfigSortOrder
 }
 
 type ListNotebookInstanceLifecycleConfigsOutput struct {
+
 	// An array of NotebookInstanceLifecycleConfiguration objects, each listing a
 	// lifecycle configuration.
 	NotebookInstanceLifecycleConfigs []*types.NotebookInstanceLifecycleConfigSummary
+
 	// If the response is truncated, Amazon SageMaker returns this token. To get the
 	// next set of lifecycle configurations, use it in the next request.
 	NextToken *string

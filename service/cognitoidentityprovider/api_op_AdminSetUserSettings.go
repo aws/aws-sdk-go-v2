@@ -60,12 +60,21 @@ func (c *Client) AdminSetUserSettings(ctx context.Context, params *AdminSetUserS
 // You can use this parameter to set an MFA configuration that uses the SMS
 // delivery medium.
 type AdminSetUserSettingsInput struct {
+
 	// The user name of the user that you are setting options for.
+	//
+	// This member is required.
 	Username *string
+
 	// You can use this parameter only to set an SMS configuration that uses SMS for
 	// delivery.
+	//
+	// This member is required.
 	MFAOptions []*types.MFAOptionType
+
 	// The ID of the user pool that contains the user that you are setting options for.
+	//
+	// This member is required.
 	UserPoolId *string
 }
 

@@ -56,14 +56,19 @@ func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optF
 }
 
 type GetWorkflowInput struct {
+
 	// Specifies whether to include a graph when returning the workflow resource
 	// metadata.
 	IncludeGraph *bool
+
 	// The name of the workflow to retrieve.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetWorkflowOutput struct {
+
 	// The resource metadata for the workflow.
 	Workflow *types.Workflow
 

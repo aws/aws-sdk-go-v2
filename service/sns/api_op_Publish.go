@@ -70,6 +70,7 @@ func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...fu
 
 // Input for Publish action.
 type PublishInput struct {
+
 	// The message you want to send. If you are publishing to a topic and you want to
 	// send the same message to all transport protocols, include the text of the
 	// message as a String value. If you want to send different messages for each
@@ -119,7 +120,10 @@ type PublishInput struct {
 	//     * Failure to parse or
 	// validate any key or value in the message will cause the Publish call to return
 	// an error (no partial delivery).
+	//
+	// This member is required.
 	Message *string
+
 	// Optional parameter to be used as the "Subject" line when the message is
 	// delivered to email endpoints. This field will also be included, if present, in
 	// the standard JSON messages delivered to other endpoints. Constraints: Subjects
@@ -127,15 +131,19 @@ type PublishInput struct {
 	// not include line breaks or control characters; and must be less than 100
 	// characters long.
 	Subject *string
+
 	// If you don't specify a value for the TargetArn parameter, you must specify a
 	// value for the PhoneNumber or TopicArn parameters.
 	TargetArn *string
+
 	// Message attributes for Publish action.
 	MessageAttributes map[string]*types.MessageAttributeValue
+
 	// The phone number to which you want to deliver an SMS message. Use E.164 format.
 	// If you don't specify a value for the PhoneNumber parameter, you must specify a
 	// value for the TargetArn or TopicArn parameters.
 	PhoneNumber *string
+
 	// Set MessageStructure to json if you want to send a different message for each
 	// protocol. For example, using one publish action, you can send a short message to
 	// your SMS subscribers and a longer message to your email subscribers. If you set
@@ -151,6 +159,7 @@ type PublishInput struct {
 	// keys that define the message you want to send to a specific transport protocol
 	// (e.g., "http"). Valid value: json
 	MessageStructure *string
+
 	// The topic you want to publish to. If you don't specify a value for the TopicArn
 	// parameter, you must specify a value for the PhoneNumber or TargetArn parameters.
 	TopicArn *string
@@ -158,6 +167,7 @@ type PublishInput struct {
 
 // Response for Publish action.
 type PublishOutput struct {
+
 	// Unique identifier assigned to the published message. Length Constraint: Maximum
 	// 100 characters
 	MessageId *string

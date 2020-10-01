@@ -56,7 +56,10 @@ func (c *Client) StartMonitoringSchedule(ctx context.Context, params *StartMonit
 }
 
 type StartMonitoringScheduleInput struct {
+
 	// The name of the schedule to start.
+	//
+	// This member is required.
 	MonitoringScheduleName *string
 }
 

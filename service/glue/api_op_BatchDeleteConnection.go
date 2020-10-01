@@ -56,17 +56,23 @@ func (c *Client) BatchDeleteConnection(ctx context.Context, params *BatchDeleteC
 }
 
 type BatchDeleteConnectionInput struct {
+
 	// A list of names of the connections to delete.
+	//
+	// This member is required.
 	ConnectionNameList []*string
+
 	// The ID of the Data Catalog in which the connections reside. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string
 }
 
 type BatchDeleteConnectionOutput struct {
+
 	// A map of the names of connections that were not successfully deleted to error
 	// details.
 	Errors map[string]*types.ErrorDetail
+
 	// A list of names of the connection definitions that were successfully deleted.
 	Succeeded []*string
 

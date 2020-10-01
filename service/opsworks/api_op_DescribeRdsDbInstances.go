@@ -61,15 +61,20 @@ func (c *Client) DescribeRdsDbInstances(ctx context.Context, params *DescribeRds
 }
 
 type DescribeRdsDbInstancesInput struct {
+
 	// The ID of the stack with which the instances are registered. The operation
 	// returns descriptions of all registered Amazon RDS instances.
+	//
+	// This member is required.
 	StackId *string
+
 	// An array containing the ARNs of the instances to be described.
 	RdsDbInstanceArns []*string
 }
 
 // Contains the response to a DescribeRdsDbInstances request.
 type DescribeRdsDbInstancesOutput struct {
+
 	// An a array of RdsDbInstance objects that describe the instances.
 	RdsDbInstances []*types.RdsDbInstance
 

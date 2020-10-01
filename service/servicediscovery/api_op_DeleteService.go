@@ -56,7 +56,10 @@ func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, 
 }
 
 type DeleteServiceInput struct {
+
 	// The ID of the service that you want to delete.
+	//
+	// This member is required.
 	Id *string
 }
 

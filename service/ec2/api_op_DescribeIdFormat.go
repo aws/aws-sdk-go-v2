@@ -72,6 +72,7 @@ func (c *Client) DescribeIdFormat(ctx context.Context, params *DescribeIdFormatI
 }
 
 type DescribeIdFormatInput struct {
+
 	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
 	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log |
 	// image | import-task | instance | internet-gateway | network-acl |
@@ -84,6 +85,7 @@ type DescribeIdFormatInput struct {
 }
 
 type DescribeIdFormatOutput struct {
+
 	// Information about the ID format for the resource.
 	Statuses []*types.IdFormat
 

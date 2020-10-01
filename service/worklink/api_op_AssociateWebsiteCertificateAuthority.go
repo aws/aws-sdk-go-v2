@@ -56,15 +56,23 @@ func (c *Client) AssociateWebsiteCertificateAuthority(ctx context.Context, param
 }
 
 type AssociateWebsiteCertificateAuthorityInput struct {
+
 	// The root certificate of the CA.
+	//
+	// This member is required.
 	Certificate *string
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The certificate name to display.
 	DisplayName *string
 }
 
 type AssociateWebsiteCertificateAuthorityOutput struct {
+
 	// A unique identifier for the CA.
 	WebsiteCaId *string
 

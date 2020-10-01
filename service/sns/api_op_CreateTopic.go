@@ -61,9 +61,11 @@ func (c *Client) CreateTopic(ctx context.Context, params *CreateTopicInput, optF
 
 // Input for CreateTopic action.
 type CreateTopicInput struct {
+
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,
 	// you must have the sns:CreateTopic and sns:TagResource permissions.
 	Tags []*types.Tag
+
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
 	// CreateTopic action uses:
@@ -101,15 +103,19 @@ type CreateTopicInput struct {
 	// <code>MessageDeduplicationId</code> overrides the generated one. </p> </li>
 	// </ul>
 	Attributes map[string]*string
+
 	// The name of the topic you want to create. Constraints: Topic names must be made
 	// up of only uppercase and lowercase ASCII letters, numbers, underscores, and
 	// hyphens, and must be between 1 and 256 characters long. For a FIFO
 	// (first-in-first-out) topic, the name must end with the .fifo suffix.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Response from CreateTopic action.
 type CreateTopicOutput struct {
+
 	// The Amazon Resource Name (ARN) assigned to the created topic.
 	TopicArn *string
 

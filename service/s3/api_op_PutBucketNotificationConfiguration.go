@@ -95,10 +95,16 @@ func (c *Client) PutBucketNotificationConfiguration(ctx context.Context, params 
 }
 
 type PutBucketNotificationConfigurationInput struct {
+
 	// A container for specifying the notification configuration of the bucket. If this
 	// element is empty, notifications are turned off for the bucket.
+	//
+	// This member is required.
 	NotificationConfiguration *types.NotificationConfiguration
+
 	// The name of the bucket.
+	//
+	// This member is required.
 	Bucket *string
 }
 

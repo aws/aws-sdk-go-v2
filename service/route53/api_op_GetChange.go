@@ -65,15 +65,21 @@ func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns .
 
 // The input for a GetChange request.
 type GetChangeInput struct {
+
 	// The ID of the change batch request. The value that you specify here is the value
 	// that ChangeResourceRecordSets returned in the Id element when you submitted the
 	// request.
+	//
+	// This member is required.
 	Id *string
 }
 
 // A complex type that contains the ChangeInfo element.
 type GetChangeOutput struct {
+
 	// A complex type that contains information about the specified change batch.
+	//
+	// This member is required.
 	ChangeInfo *types.ChangeInfo
 
 	// Metadata pertaining to the operation's result.

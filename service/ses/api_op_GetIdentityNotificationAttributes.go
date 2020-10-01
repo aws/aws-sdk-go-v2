@@ -65,15 +65,21 @@ func (c *Client) GetIdentityNotificationAttributes(ctx context.Context, params *
 // notifications, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
 type GetIdentityNotificationAttributesInput struct {
+
 	// A list of one or more identities. You can specify an identity by using its name
 	// or by using its Amazon Resource Name (ARN). Examples: user@example.com,
 	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	//
+	// This member is required.
 	Identities []*string
 }
 
 // Represents the notification attributes for a list of identities.
 type GetIdentityNotificationAttributesOutput struct {
+
 	// A map of Identity to IdentityNotificationAttributes.
+	//
+	// This member is required.
 	NotificationAttributes map[string]*types.IdentityNotificationAttributes
 
 	// Metadata pertaining to the operation's result.

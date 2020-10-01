@@ -55,13 +55,18 @@ func (c *Client) GetAssociatedRole(ctx context.Context, params *GetAssociatedRol
 }
 
 type GetAssociatedRoleInput struct {
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type GetAssociatedRoleOutput struct {
+
 	// The ARN of the role that is associated with the group.
 	RoleArn *string
+
 	// The time when the role was associated with the group.
 	AssociatedAt *string
 

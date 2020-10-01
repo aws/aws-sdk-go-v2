@@ -59,28 +59,41 @@ func (c *Client) GetBot(ctx context.Context, params *GetBotInput, optFns ...func
 }
 
 type GetBotInput struct {
+
 	// The version or alias of the bot.
+	//
+	// This member is required.
 	VersionOrAlias *string
+
 	// The name of the bot. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetBotOutput struct {
+
 	// The message that Amazon Lex returns when the user elects to end the conversation
 	// without completing it. For more information, see PutBot ().
 	AbortStatement *types.Statement
+
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string
+
 	// An array of intent objects. For more information, see PutBot ().
 	Intents []*types.Intent
+
 	// Checksum of the bot used to identify a specific revision of the bot's $LATEST
 	// version.
 	Checksum *string
+
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
 	// conversation. For more information, see PutBot ().
 	IdleSessionTTLInSeconds *int32
+
 	// The name of the bot.
 	Name *string
+
 	// The status of the bot. When the status is BUILDING Amazon Lex is building the
 	// bot for testing and use. If the status of the bot is READY_BASIC_TESTING, you
 	// can test the bot using the exact utterances specified in the bot's intents. When
@@ -89,11 +102,14 @@ type GetBotOutput struct {
 	// explains why the bot did not build. If the bot was saved but not built, the
 	// status is NOT_BUILT.
 	Status types.Status
+
 	// If status is FAILED, Amazon Lex explains why it failed to build the bot.
 	FailureReason *string
+
 	// The message Amazon Lex uses when it doesn't understand the user's request. For
 	// more information, see PutBot ().
 	ClarificationPrompt *types.Prompt
+
 	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
 	// must specify whether your use of Amazon Lex is related to a website, program, or
 	// other application that is directed or targeted, in whole or in part, to children
@@ -116,18 +132,24 @@ type GetBotOutput struct {
 	// whole or in part, to children under age 13, see the Amazon Lex FAQ.
 	// (https://aws.amazon.com/lex/faqs#data-security)
 	ChildDirected *bool
+
 	// The date that the bot was created.
 	CreatedDate *time.Time
+
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user. For more information, see PutBot ().
 	VoiceId *string
+
 	// A description of the bot.
 	Description *string
+
 	// The target locale for the bot.
 	Locale types.Locale
+
 	// Indicates whether user utterances should be sent to Amazon Comprehend for
 	// sentiment analysis.
 	DetectSentiment *bool
+
 	// The date that the bot was updated. When you create a resource, the creation date
 	// and last updated date are the same.
 	LastUpdatedDate *time.Time

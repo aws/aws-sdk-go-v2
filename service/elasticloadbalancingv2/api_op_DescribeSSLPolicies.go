@@ -58,18 +58,23 @@ func (c *Client) DescribeSSLPolicies(ctx context.Context, params *DescribeSSLPol
 }
 
 type DescribeSSLPoliciesInput struct {
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
 	// The names of the policies.
 	Names []*string
 }
 
 type DescribeSSLPoliciesOutput struct {
+
 	// Information about the security policies.
 	SslPolicies []*types.SslPolicy
+
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.
 	NextMarker *string

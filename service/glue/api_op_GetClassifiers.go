@@ -55,15 +55,19 @@ func (c *Client) GetClassifiers(ctx context.Context, params *GetClassifiersInput
 }
 
 type GetClassifiersInput struct {
+
 	// An optional continuation token.
 	NextToken *string
+
 	// The size of the list to return (optional).
 	MaxResults *int32
 }
 
 type GetClassifiersOutput struct {
+
 	// The requested list of classifier objects.
 	Classifiers []*types.Classifier
+
 	// A continuation token.
 	NextToken *string
 

@@ -55,15 +55,21 @@ func (c *Client) ListAssetModels(ctx context.Context, params *ListAssetModelsInp
 }
 
 type ListAssetModelsInput struct {
+
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
 }
 
 type ListAssetModelsOutput struct {
+
 	// A list that summarizes each asset model.
+	//
+	// This member is required.
 	AssetModelSummaries []*types.AssetModelSummary
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string

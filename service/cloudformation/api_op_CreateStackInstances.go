@@ -61,12 +61,19 @@ func (c *Client) CreateStackInstances(ctx context.Context, params *CreateStackIn
 }
 
 type CreateStackInstancesInput struct {
+
 	// The names of one or more Regions where you want to create stack instances using
 	// the specified AWS account(s).
+	//
+	// This member is required.
 	Regions []*string
+
 	// The name or unique ID of the stack set that you want to create stack instances
 	// from.
+	//
+	// This member is required.
 	StackSetName *string
+
 	// The unique identifier for this stack set operation. The operation ID also
 	// functions as an idempotency token, to ensure that AWS CloudFormation performs
 	// the stack set operation only once, even if you retry the request multiple times.
@@ -75,16 +82,20 @@ type CreateStackInstancesInput struct {
 	// generates one automatically. Repeating this stack set operation with a new
 	// operation ID retries all stack instances whose status is OUTDATED.
 	OperationId *string
+
 	// [Self-managed permissions] The names of one or more AWS accounts that you want
 	// to create stack instances in the specified Region(s) for. You can specify
 	// Accounts or DeploymentTargets, but not both.
 	Accounts []*string
+
 	// [Service-managed permissions] The AWS Organizations accounts for which to create
 	// stack instances in the specified Regions. You can specify Accounts or
 	// DeploymentTargets, but not both.
 	DeploymentTargets *types.DeploymentTargets
+
 	// Preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
+
 	// A list of stack set parameters whose values you want to override in the selected
 	// stack instances. Any overridden parameter values will be applied to all stack
 	// instances in the specified accounts and Regions. When specifying parameters and
@@ -121,6 +132,7 @@ type CreateStackInstancesInput struct {
 }
 
 type CreateStackInstancesOutput struct {
+
 	// The unique identifier for this stack set operation.
 	OperationId *string
 

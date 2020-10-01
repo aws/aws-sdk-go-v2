@@ -56,15 +56,21 @@ func (c *Client) PutAppsList(ctx context.Context, params *PutAppsListInput, optF
 }
 
 type PutAppsListInput struct {
+
 	// The details of the AWS Firewall Manager applications list to be created.
+	//
+	// This member is required.
 	AppsList *types.AppsListData
+
 	// The tags associated with the resource.
 	TagList []*types.Tag
 }
 
 type PutAppsListOutput struct {
+
 	// The details of the AWS Firewall Manager applications list.
 	AppsList *types.AppsListData
+
 	// The Amazon Resource Name (ARN) of the applications list.
 	AppsListArn *string
 

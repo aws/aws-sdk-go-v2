@@ -81,17 +81,27 @@ func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput
 }
 
 type CreateCampaignInput struct {
+
 	// Specifies the requested minimum provisioned transactions (recommendations) per
 	// second that Amazon Personalize will support.
+	//
+	// This member is required.
 	MinProvisionedTPS *int32
+
 	// The Amazon Resource Name (ARN) of the solution version to deploy.
+	//
+	// This member is required.
 	SolutionVersionArn *string
+
 	// A name for the new campaign. The campaign name must be unique within your
 	// account.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateCampaignOutput struct {
+
 	// The Amazon Resource Name (ARN) of the campaign.
 	CampaignArn *string
 

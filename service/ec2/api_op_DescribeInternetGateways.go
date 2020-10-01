@@ -55,14 +55,17 @@ func (c *Client) DescribeInternetGateways(ctx context.Context, params *DescribeI
 }
 
 type DescribeInternetGatewaysInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// One or more filters.
 	//
 	//     * attachment.state - The current state of the
@@ -87,15 +90,19 @@ type DescribeInternetGatewaysInput struct {
 	// tag assigned to the resource. Use this filter to find all resources assigned a
 	// tag with a specific key, regardless of the tag value.
 	Filters []*types.Filter
+
 	// One or more internet gateway IDs. Default: Describes all your internet gateways.
 	InternetGatewayIds []*string
+
 	// The token for the next page of results.
 	NextToken *string
 }
 
 type DescribeInternetGatewaysOutput struct {
+
 	// Information about one or more internet gateways.
 	InternetGateways []*types.InternetGateway
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

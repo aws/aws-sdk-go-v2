@@ -56,10 +56,14 @@ func (c *Client) DeleteCloudFrontOriginAccessIdentity(ctx context.Context, param
 
 // Deletes a origin access identity.
 type DeleteCloudFrontOriginAccessIdentityInput struct {
+
 	// The value of the ETag header you received from a previous GET or PUT request.
 	// For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
 	// The origin access identity's ID.
+	//
+	// This member is required.
 	Id *string
 }
 

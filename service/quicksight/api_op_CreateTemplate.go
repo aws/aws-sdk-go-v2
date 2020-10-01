@@ -63,11 +63,14 @@ func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput
 }
 
 type CreateTemplateInput struct {
+
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the resource.
 	Tags []*types.Tag
+
 	// A display name for the template.
 	Name *string
+
 	// The entity that you are using as a source when you create the template. In
 	// SourceEntity, you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
@@ -77,15 +80,25 @@ type CreateTemplateInput struct {
 	// AWS Region. Use the DataSetReferences entity within SourceTemplate or
 	// SourceAnalysis to list the replacement datasets for the placeholders listed in
 	// the original. The schema in each dataset must match its placeholder.
+	//
+	// This member is required.
 	SourceEntity *types.TemplateSourceEntity
+
 	// The ID for the AWS account that the group is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// An ID for the template that you want to create. This template is unique per AWS
 	// Region in each AWS account.
+	//
+	// This member is required.
 	TemplateId *string
+
 	// A list of resource permissions to be set on the template.
 	Permissions []*types.ResourcePermission
+
 	// A description of the current template version being created. This API operation
 	// creates the first version of the template. Every time UpdateTemplate is called,
 	// a new version is created. Each version of the template maintains a description
@@ -94,15 +107,20 @@ type CreateTemplateInput struct {
 }
 
 type CreateTemplateOutput struct {
+
 	// The template creation status.
 	CreationStatus types.ResourceStatus
+
 	// The ID of the template.
 	TemplateId *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ARN for the template, including the version information of the first
 	// version.
 	VersionArn *string
+
 	// The ARN for the template.
 	Arn *string
 

@@ -55,19 +55,24 @@ func (c *Client) ListICD10CMInferenceJobs(ctx context.Context, params *ListICD10
 }
 
 type ListICD10CMInferenceJobsInput struct {
+
 	// Filters the jobs that are returned. You can filter jobs based on their names,
 	// status, or the date and time that they were submitted. You can only set one
 	// filter at a time.
 	Filter *types.ComprehendMedicalAsyncJobFilter
+
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
 	// Identifies the next page of results to return.
 	NextToken *string
 }
 
 type ListICD10CMInferenceJobsOutput struct {
+
 	// A list containing the properties of each job that is returned.
 	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+
 	// Identifies the next page of results to return.
 	NextToken *string
 

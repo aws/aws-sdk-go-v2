@@ -66,9 +66,11 @@ func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransfor
 }
 
 type CreateMLTransformInput struct {
+
 	// The maximum number of times to retry a task for this transform after a task run
 	// fails.
 	MaxRetries *int32
+
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions. The required permissions include both AWS Glue service role
 	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
@@ -79,7 +81,10 @@ type CreateMLTransformInput struct {
 	// needs permission to your Amazon Simple Storage Service (Amazon S3) sources,
 	// targets, temporary directory, scripts, and any libraries used by the task run
 	// for this transform.</p> </li> </ul>
+	//
+	// This member is required.
 	Role *string
+
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
 	//
@@ -104,18 +109,27 @@ type CreateMLTransformInput struct {
 	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
 	// both be at least 1.</p> </li> </ul>
 	WorkerType types.WorkerType
+
 	// A description of the machine learning transform that is being defined. The
 	// default is an empty string.
 	Description *string
+
 	// The algorithmic parameters that are specific to the transform type used.
 	// Conditionally dependent on the transform type.
+	//
+	// This member is required.
 	Parameters *types.TransformParameters
+
 	// The number of workers of a defined workerType that are allocated when this task
 	// runs.  <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code>
 	// is required (and vice versa).</p>
 	NumberOfWorkers *int32
+
 	// A list of AWS Glue table definitions used by the transform.
+	//
+	// This member is required.
 	InputRecordTables []*types.GlueTable
+
 	// The number of AWS Glue data processing units (DPUs) that are allocated to task
 	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
 	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
@@ -136,18 +150,24 @@ type CreateMLTransformInput struct {
 	// <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically
 	// and becomes read-only.</p>
 	MaxCapacity *float64
+
 	// The tags to use with this machine learning transform. You may use tags to limit
 	// access to the machine learning transform. For more information about tags in AWS
 	// Glue, see AWS Tags in AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
 	// guide.
 	Tags map[string]*string
+
 	// The unique name that you give the transform when you create it.
+	//
+	// This member is required.
 	Name *string
+
 	// The timeout of the task run for this transform in minutes. This is the maximum
 	// time that a task run for this transform can consume resources before it is
 	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
 	Timeout *int32
+
 	// This value determines which version of AWS Glue this machine learning transform
 	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
 	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
@@ -158,6 +178,7 @@ type CreateMLTransformInput struct {
 }
 
 type CreateMLTransformOutput struct {
+
 	// A unique identifier that is generated for the transform.
 	TransformId *string
 

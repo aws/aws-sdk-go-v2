@@ -56,16 +56,24 @@ func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryI
 }
 
 type DeleteRepositoryInput struct {
+
 	// The name of the repository to delete.
+	//
+	// This member is required.
 	Repository *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The name of the domain that contains the repository to delete.
+	//
+	// This member is required.
 	Domain *string
 }
 
 type DeleteRepositoryOutput struct {
+
 	// Information about the deleted repository after processing the request.
 	Repository *types.RepositoryDescription
 

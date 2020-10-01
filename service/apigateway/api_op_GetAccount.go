@@ -57,10 +57,13 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 
 // Requests API Gateway to get information about the current Account () resource.
 type GetAccountInput struct {
-	Name             *string
-	Title            *string
+	Name *string
+
+	Title *string
+
 	TemplateSkipList []*string
-	Template         *bool
+
+	Template *bool
 }
 
 // Represents an AWS account that is associated with API Gateway. To view the
@@ -110,13 +113,17 @@ type GetAccountInput struct {
 // CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html)
 type GetAccountOutput struct {
+
 	// A list of features supported for the account. When usage plans are enabled, the
 	// features list will include an entry of "UsagePlans".
 	Features []*string
+
 	// The version of the API keys used for the account.
 	ApiKeyVersion *string
+
 	// Specifies the API request limits configured for the current Account ().
 	ThrottleSettings *types.ThrottleSettings
+
 	// The ARN of an Amazon CloudWatch role for the current Account ().
 	CloudwatchRoleArn *string
 

@@ -57,9 +57,13 @@ func (c *Client) ListDeploymentGroups(ctx context.Context, params *ListDeploymen
 
 // Represents the input of a ListDeploymentGroups operation.
 type ListDeploymentGroupsInput struct {
+
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// An identifier returned from the previous list deployment groups call. It can be
 	// used to return the next set of deployment groups in the list.
 	NextToken *string
@@ -67,12 +71,15 @@ type ListDeploymentGroupsInput struct {
 
 // Represents the output of a ListDeploymentGroups operation.
 type ListDeploymentGroupsOutput struct {
+
 	// The application name.
 	ApplicationName *string
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list deployment groups call to return the next set
 	// of deployment groups in the list.
 	NextToken *string
+
 	// A list of deployment group names.
 	DeploymentGroups []*string
 

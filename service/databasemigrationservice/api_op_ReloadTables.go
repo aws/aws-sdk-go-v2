@@ -56,10 +56,17 @@ func (c *Client) ReloadTables(ctx context.Context, params *ReloadTablesInput, op
 }
 
 type ReloadTablesInput struct {
+
 	// The Amazon Resource Name (ARN) of the replication task.
+	//
+	// This member is required.
 	ReplicationTaskArn *string
+
 	// The name and schema of the table to be reloaded.
+	//
+	// This member is required.
 	TablesToReload []*types.TableToReload
+
 	// Options for reload. Specify data-reload to reload the data and re-validate it if
 	// validation is enabled. Specify validate-only to re-validate the table. This
 	// option applies only when validation is enabled for the task. Valid values:
@@ -68,6 +75,7 @@ type ReloadTablesInput struct {
 }
 
 type ReloadTablesOutput struct {
+
 	// The Amazon Resource Name (ARN) of the replication task.
 	ReplicationTaskArn *string
 

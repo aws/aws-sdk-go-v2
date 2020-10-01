@@ -63,15 +63,20 @@ func (c *Client) DescribeReceiptRuleSet(ctx context.Context, params *DescribeRec
 // the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type DescribeReceiptRuleSetInput struct {
+
 	// The name of the receipt rule set to describe.
+	//
+	// This member is required.
 	RuleSetName *string
 }
 
 // Represents the details of the specified receipt rule set.
 type DescribeReceiptRuleSetOutput struct {
+
 	// The metadata for the receipt rule set, which consists of the rule set name and
 	// the timestamp of when the rule set was created.
 	Metadata *types.ReceiptRuleSetMetadata
+
 	// A list of the receipt rules that belong to the specified receipt rule set.
 	Rules []*types.ReceiptRule
 

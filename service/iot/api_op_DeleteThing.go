@@ -57,8 +57,12 @@ func (c *Client) DeleteThing(ctx context.Context, params *DeleteThingInput, optF
 
 // The input for the DeleteThing operation.
 type DeleteThingInput struct {
+
 	// The name of the thing to delete.
+	//
+	// This member is required.
 	ThingName *string
+
 	// The expected version of the thing record in the registry. If the version of the
 	// record in the registry does not match the expected version specified in the
 	// request, the DeleteThing request is rejected with a VersionConflictException.

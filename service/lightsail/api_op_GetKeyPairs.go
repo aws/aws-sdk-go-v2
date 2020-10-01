@@ -55,6 +55,7 @@ func (c *Client) GetKeyPairs(ctx context.Context, params *GetKeyPairsInput, optF
 }
 
 type GetKeyPairsInput struct {
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetKeyPairs request. If your results are
 	// paginated, the response will return a next page token that you can specify as
@@ -63,8 +64,10 @@ type GetKeyPairsInput struct {
 }
 
 type GetKeyPairsOutput struct {
+
 	// An array of key-value pairs containing information about the key pairs.
 	KeyPairs []*types.KeyPair
+
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetKeyPairs request and specify the next page

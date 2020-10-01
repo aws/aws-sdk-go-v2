@@ -55,15 +55,24 @@ func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optF
 }
 
 type UpdateIPSetInput struct {
+
 	// The unique ID that specifies the IPSet that you want to update.
 	Name *string
+
 	// The unique ID that specifies the IPSet that you want to update.
+	//
+	// This member is required.
 	IpSetId *string
+
 	// The updated Boolean value that specifies whether the IPSet is active or not.
 	Activate *bool
+
 	// The detectorID that specifies the GuardDuty service whose IPSet you want to
 	// update.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The updated URI of the file that contains the IPSet. For example:
 	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	Location *string

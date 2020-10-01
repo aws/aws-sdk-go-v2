@@ -57,7 +57,10 @@ func (c *Client) DeleteLaunchConfiguration(ctx context.Context, params *DeleteLa
 }
 
 type DeleteLaunchConfigurationInput struct {
+
 	// The name of the launch configuration.
+	//
+	// This member is required.
 	LaunchConfigurationName *string
 }
 

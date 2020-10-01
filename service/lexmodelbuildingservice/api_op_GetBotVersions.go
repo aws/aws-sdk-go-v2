@@ -62,21 +62,28 @@ func (c *Client) GetBotVersions(ctx context.Context, params *GetBotVersionsInput
 }
 
 type GetBotVersionsInput struct {
+
 	// A pagination token for fetching the next page of bot versions. If the response
 	// to this call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of versions, specify the pagination token in
 	// the next request.
 	NextToken *string
+
 	// The maximum number of bot versions to return in the response. The default is 10.
 	MaxResults *int32
+
 	// The name of the bot for which versions should be returned.
+	//
+	// This member is required.
 	Name *string
 }
 
 type GetBotVersionsOutput struct {
+
 	// An array of BotMetadata objects, one for each numbered version of the bot plus
 	// one for the $LATEST version.
 	Bots []*types.BotMetadata
+
 	// A pagination token for fetching the next page of bot versions. If the response
 	// to this call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of versions, specify the pagination token in

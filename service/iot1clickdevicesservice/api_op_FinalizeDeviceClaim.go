@@ -58,8 +58,12 @@ func (c *Client) FinalizeDeviceClaim(ctx context.Context, params *FinalizeDevice
 }
 
 type FinalizeDeviceClaimInput struct {
+
 	// The unique identifier of the device.
+	//
+	// This member is required.
 	DeviceId *string
+
 	// A collection of key/value pairs defining the resource tags. For example, {
 	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
 	// Tagging Strategies
@@ -68,6 +72,7 @@ type FinalizeDeviceClaimInput struct {
 }
 
 type FinalizeDeviceClaimOutput struct {
+
 	// The device's final claim state.
 	State *string
 

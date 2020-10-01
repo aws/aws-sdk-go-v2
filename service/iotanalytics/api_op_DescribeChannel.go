@@ -56,8 +56,12 @@ func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInp
 }
 
 type DescribeChannelInput struct {
+
 	// The name of the channel whose information is retrieved.
+	//
+	// This member is required.
 	ChannelName *string
+
 	// If true, additional statistical information about the channel is included in the
 	// response. This feature cannot be used with a channel whose S3 storage is
 	// customer-managed.
@@ -65,9 +69,11 @@ type DescribeChannelInput struct {
 }
 
 type DescribeChannelOutput struct {
+
 	// Statistics about the channel. Included if the 'includeStatistics' parameter is
 	// set to true in the request.
 	Statistics *types.ChannelStatistics
+
 	// An object that contains information about the channel.
 	Channel *types.Channel
 

@@ -72,7 +72,10 @@ func (c *Client) DeleteBucketReplication(ctx context.Context, params *DeleteBuck
 }
 
 type DeleteBucketReplicationInput struct {
+
 	// The bucket name.
+	//
+	// This member is required.
 	Bucket *string
 }
 

@@ -63,10 +63,17 @@ func (c *Client) DeletePackageVersions(ctx context.Context, params *DeletePackag
 }
 
 type DeletePackageVersionsInput struct {
+
 	// The name of the domain that contains the package to delete.
+	//
+	// This member is required.
 	Domain *string
+
 	// The name of the repository that contains the package versions to delete.
+	//
+	// This member is required.
 	Repository *string
+
 	// The format of the package versions to delete. The valid values are:
 	//
 	//     * npm
@@ -75,10 +82,14 @@ type DeletePackageVersionsInput struct {
 	// * pypi
 	//
 	//     * maven
+	//
+	// This member is required.
 	Format types.PackageFormat
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
@@ -91,6 +102,7 @@ type DeletePackageVersionsInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+
 	// The expected status of the package version to delete. Valid values are:
 	//
 	//     *
@@ -104,13 +116,20 @@ type DeletePackageVersionsInput struct {
 	//
 	//     * Disposed
 	ExpectedStatus types.PackageVersionStatus
+
 	// An array of strings that specify the versions of the package to delete.
+	//
+	// This member is required.
 	Versions []*string
+
 	// The name of the package with the versions to delete.
+	//
+	// This member is required.
 	Package *string
 }
 
 type DeletePackageVersionsOutput struct {
+
 	// A PackageVersionError object that contains a map of errors codes for the deleted
 	// package that failed. The possible error codes are:
 	//
@@ -128,6 +147,7 @@ type DeletePackageVersionsOutput struct {
 	//
 	//     * SKIPPED
 	FailedVersions map[string]*types.PackageVersionError
+
 	// A list of the package versions that were successfully deleted.
 	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
 

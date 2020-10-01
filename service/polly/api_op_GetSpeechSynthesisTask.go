@@ -58,11 +58,15 @@ func (c *Client) GetSpeechSynthesisTask(ctx context.Context, params *GetSpeechSy
 }
 
 type GetSpeechSynthesisTaskInput struct {
+
 	// The Amazon Polly generated identifier for a speech synthesis task.
+	//
+	// This member is required.
 	TaskId *string
 }
 
 type GetSpeechSynthesisTaskOutput struct {
+
 	// SynthesisTask object that provides information from the requested task,
 	// including output format, creation time, task status, and so on.
 	SynthesisTask *types.SynthesisTask

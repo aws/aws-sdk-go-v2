@@ -56,38 +56,49 @@ func (c *Client) ListCodeRepositories(ctx context.Context, params *ListCodeRepos
 }
 
 type ListCodeRepositoriesInput struct {
+
 	// A filter that returns only Git repositories that were last modified after the
 	// specified time.
 	LastModifiedTimeAfter *time.Time
+
 	// A string in the Git repositories name. This filter returns only repositories
 	// whose name contains the specified string.
 	NameContains *string
+
 	// A filter that returns only Git repositories that were last modified before the
 	// specified time.
 	LastModifiedTimeBefore *time.Time
+
 	// A filter that returns only Git repositories that were created before the
 	// specified time.
 	CreationTimeBefore *time.Time
+
 	// A filter that returns only Git repositories that were created after the
 	// specified time.
 	CreationTimeAfter *time.Time
+
 	// The sort order for results. The default is Ascending.
 	SortOrder types.CodeRepositorySortOrder
+
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
 	// response includes a NextToken. To get the next set of Git repositories, use the
 	// token in the next request.
 	NextToken *string
+
 	// The maximum number of Git repositories to return in the response.
 	MaxResults *int32
+
 	// The field to sort results by. The default is Name.
 	SortBy types.CodeRepositorySortBy
 }
 
 type ListCodeRepositoriesOutput struct {
+
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
 	// response includes a NextToken. To get the next set of Git repositories, use the
 	// token in the next request.
 	NextToken *string
+
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
 	// following values for the repository:
 	//
@@ -104,6 +115,8 @@ type ListCodeRepositoriesOutput struct {
 	// information, including the URL location of the repository and the ARN of the AWS
 	// Secrets Manager secret that contains the credentials used to access the
 	// repository.
+	//
+	// This member is required.
 	CodeRepositorySummaryList []*types.CodeRepositorySummary
 
 	// Metadata pertaining to the operation's result.

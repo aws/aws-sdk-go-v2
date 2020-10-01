@@ -57,40 +57,58 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 }
 
 type DescribeDomainInput struct {
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
 }
 
 type DescribeDomainOutput struct {
+
 	// Settings which are applied to all UserProfile in this domain, if settings are
 	// not explicitly specified in a given UserProfile.
 	DefaultUserSettings *types.UserSettings
+
 	// The AWS Key Management Service encryption key ID.
 	HomeEfsFileSystemKmsKeyId *string
+
 	// The domain's URL.
 	Url *string
+
 	// Security setting to limit to a set of subnets.
 	SubnetIds []*string
+
 	// The domain's Amazon Resource Name (ARN).
 	DomainArn *string
+
 	// The ID of the Amazon Virtual Private Cloud.
 	VpcId *string
+
 	// The domain name.
 	DomainName *string
+
 	// The domain's authentication mode.
 	AuthMode types.AuthMode
+
 	// The creation time.
 	CreationTime *time.Time
+
 	// The last modified time.
 	LastModifiedTime *time.Time
+
 	// The SSO managed application instance ID.
 	SingleSignOnManagedApplicationInstanceId *string
+
 	// The domain ID.
 	DomainId *string
+
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
 	HomeEfsFileSystemId *string
+
 	// The status.
 	Status types.DomainStatus
+
 	// The failure reason.
 	FailureReason *string
 

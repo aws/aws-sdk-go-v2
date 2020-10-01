@@ -62,10 +62,16 @@ func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns
 
 //
 type CreateTagsInput struct {
+
 	// The ID of the file system whose tags you want to modify (String). This operation
 	// modifies the tags only, not the file system.
+	//
+	// This member is required.
 	FileSystemId *string
+
 	// An array of Tag objects to add. Each Tag object is a key-value pair.
+	//
+	// This member is required.
 	Tags []*types.Tag
 }
 

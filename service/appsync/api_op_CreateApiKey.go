@@ -57,18 +57,24 @@ func (c *Client) CreateApiKey(ctx context.Context, params *CreateApiKeyInput, op
 }
 
 type CreateApiKeyInput struct {
+
 	// The time from creation time after which the API key expires. The date is
 	// represented as seconds since the epoch, rounded down to the nearest hour. The
 	// default value for this parameter is 7 days from creation time. For more
 	// information, see .
 	Expires *int64
+
 	// A description of the purpose of the API key.
 	Description *string
+
 	// The ID for your GraphQL API.
+	//
+	// This member is required.
 	ApiId *string
 }
 
 type CreateApiKeyOutput struct {
+
 	// The API key.
 	ApiKey *types.ApiKey
 

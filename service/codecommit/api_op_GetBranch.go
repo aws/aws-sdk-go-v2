@@ -57,15 +57,18 @@ func (c *Client) GetBranch(ctx context.Context, params *GetBranchInput, optFns .
 
 // Represents the input of a get branch operation.
 type GetBranchInput struct {
+
 	// The name of the repository that contains the branch for which you want to
 	// retrieve information.
 	RepositoryName *string
+
 	// The name of the branch for which you want to retrieve information.
 	BranchName *string
 }
 
 // Represents the output of a get branch operation.
 type GetBranchOutput struct {
+
 	// The name of the branch.
 	Branch *types.BranchInfo
 

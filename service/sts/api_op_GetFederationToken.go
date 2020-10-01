@@ -132,6 +132,7 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 }
 
 type GetFederationTokenInput struct {
+
 	// The duration, in seconds, that the session should last. Acceptable durations for
 	// federation sessions range from 900 seconds (15 minutes) to 129,600 seconds (36
 	// hours), with 43,200 seconds (12 hours) as the default. Sessions obtained using
@@ -139,13 +140,17 @@ type GetFederationTokenInput struct {
 	// (one hour). If the specified duration is longer than one hour, the session
 	// obtained by using root user credentials defaults to one hour.
 	DurationSeconds *int32
+
 	// The name of the federated user. The name is used as an identifier for the
 	// temporary security credentials (such as Bob). For example, you can reference the
 	// federated user name in a resource-based policy, such as in an Amazon S3 bucket
 	// policy. The regex used to validate this parameter is a string of characters
 	// consisting of upper- and lower-case alphanumeric characters with no spaces. You
 	// can also include underscores or any of the following characters: =,.@-
+	//
+	// This member is required.
 	Name *string
+
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
 	// use as a managed session policy. The policies must exist in the same account as
 	// the IAM user that is requesting federated access. You must pass an inline or
@@ -178,6 +183,7 @@ type GetFederationTokenInput struct {
 	// response element indicates by percentage how close the policies and tags for
 	// your request are to the upper size limit.
 	PolicyArns []*types.PolicyDescriptorType
+
 	// A list of session tags. Each session tag consists of a key name and an
 	// associated value. For more information about session tags, see Passing Session
 	// Tags in STS
@@ -203,6 +209,7 @@ type GetFederationTokenInput struct {
 	// tags, and the session tag passed in the request takes precedence over the role
 	// tag.</p>
 	Tags []*types.Tag
+
 	// An IAM policy in JSON format that you want to use as an inline session policy.
 	// You must pass an inline or managed session policy
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
@@ -237,16 +244,19 @@ type GetFederationTokenInput struct {
 // Contains the response to a successful GetFederationToken () request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type GetFederationTokenOutput struct {
+
 	// Identifiers for the federated user associated with the credentials (such as
 	// arn:aws:sts::123456789012:federated-user/Bob or 123456789012:Bob). You can use
 	// the federated user's ARN in your resource-based policies, such as an Amazon S3
 	// bucket policy.
 	FederatedUser *types.FederatedUser
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security (or session) token. The size of the security token
 	// that STS API operations return is not fixed. We strongly recommend that you make
 	// no assumptions about the maximum size.
 	Credentials *types.Credentials
+
 	// A percentage value that indicates the packed size of the session policies and
 	// session tags combined passed in the request. The request fails if the packed
 	// size is greater than 100 percent, which means the policies and tags exceeded the

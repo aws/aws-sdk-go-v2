@@ -56,12 +56,18 @@ func (c *Client) GetApprovalRuleTemplate(ctx context.Context, params *GetApprova
 }
 
 type GetApprovalRuleTemplateInput struct {
+
 	// The name of the approval rule template for which you want to get information.
+	//
+	// This member is required.
 	ApprovalRuleTemplateName *string
 }
 
 type GetApprovalRuleTemplateOutput struct {
+
 	// The content and structure of the approval rule template.
+	//
+	// This member is required.
 	ApprovalRuleTemplate *types.ApprovalRuleTemplate
 
 	// Metadata pertaining to the operation's result.

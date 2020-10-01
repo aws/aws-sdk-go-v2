@@ -55,14 +55,19 @@ func (c *Client) UpdateTrial(ctx context.Context, params *UpdateTrialInput, optF
 }
 
 type UpdateTrialInput struct {
+
 	// The name of the trial to update.
+	//
+	// This member is required.
 	TrialName *string
+
 	// The name of the trial as displayed. The name doesn't need to be unique. If
 	// DisplayName isn't specified, TrialName is displayed.
 	DisplayName *string
 }
 
 type UpdateTrialOutput struct {
+
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
 

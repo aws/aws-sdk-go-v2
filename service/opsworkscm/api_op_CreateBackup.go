@@ -64,8 +64,12 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 }
 
 type CreateBackupInput struct {
+
 	// The name of the server that you want to back up.
+	//
+	// This member is required.
 	ServerName *string
+
 	// A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM
 	// server backup.
 	//
@@ -86,11 +90,13 @@ type CreateBackupInput struct {
 	// maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM
 	// resources.
 	Tags []*types.Tag
+
 	// A user-defined description of the backup.
 	Description *string
 }
 
 type CreateBackupOutput struct {
+
 	// Backup created by request.
 	Backup *types.Backup
 

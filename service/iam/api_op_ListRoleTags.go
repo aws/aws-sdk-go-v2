@@ -59,12 +59,16 @@ func (c *Client) ListRoleTags(ctx context.Context, params *ListRoleTagsInput, op
 }
 
 type ListRoleTagsInput struct {
+
 	// The name of the IAM role for which you want to see the list of tags. This
 	// parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters that consist of upper and lowercase alphanumeric
 	// characters with no spaces. You can also include any of the following characters:
 	// _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
+
 	// (Optional) Use this only when paginating results to indicate the maximum number
 	// of items that you want in the response. If additional items exist beyond the
 	// maximum that you specify, the IsTruncated response element is true. If you do
@@ -73,6 +77,7 @@ type ListRoleTagsInput struct {
 	// response element returns true, and Marker contains a value to include in the
 	// subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -81,18 +86,23 @@ type ListRoleTagsInput struct {
 }
 
 type ListRoleTagsOutput struct {
+
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can use the Marker request parameter to make a subsequent
 	// pagination request that retrieves more items. Note that IAM might return fewer
 	// than the MaxItems number of results even when more results are available. Check
 	// IsTruncated after every call to ensure that you receive all of your results.
 	IsTruncated *bool
+
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
+
 	// The list of tags currently that is attached to the role. Each tag consists of a
 	// key name and an associated value. If no tags are attached to the specified role,
 	// the response contains an empty list.
+	//
+	// This member is required.
 	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.

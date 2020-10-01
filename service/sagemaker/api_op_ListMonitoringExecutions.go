@@ -56,40 +56,57 @@ func (c *Client) ListMonitoringExecutions(ctx context.Context, params *ListMonit
 }
 
 type ListMonitoringExecutionsInput struct {
+
 	// Whether to sort the results in Ascending or Descending order. The default is
 	// Descending.
 	SortOrder types.SortOrder
+
 	// A filter that returns only jobs modified after a specified time.
 	LastModifiedTimeBefore *time.Time
+
 	// A filter that returns only jobs modified before a specified time.
 	LastModifiedTimeAfter *time.Time
+
 	// Filter for jobs scheduled after a specified time.
 	ScheduledTimeAfter *time.Time
+
 	// The maximum number of jobs to return in the response. The default value is 10.
 	MaxResults *int32
+
 	// Filter for jobs scheduled before a specified time.
 	ScheduledTimeBefore *time.Time
+
 	// Whether to sort results by Status, CreationTime, ScheduledTime field. The
 	// default is CreationTime.
 	SortBy types.MonitoringExecutionSortKey
+
 	// The token returned if the response is truncated. To retrieve the next set of job
 	// executions, use it in the next request.
 	NextToken *string
+
 	// Name of a specific endpoint to fetch jobs for.
 	EndpointName *string
+
 	// Name of a specific schedule to fetch jobs for.
 	MonitoringScheduleName *string
+
 	// A filter that returns only jobs created before a specified time.
 	CreationTimeBefore *time.Time
+
 	// A filter that retrieves only jobs with a specific status.
 	StatusEquals types.ExecutionStatus
+
 	// A filter that returns only jobs created after a specified time.
 	CreationTimeAfter *time.Time
 }
 
 type ListMonitoringExecutionsOutput struct {
+
 	// A JSON array in which each element is a summary for a monitoring execution.
+	//
+	// This member is required.
 	MonitoringExecutionSummaries []*types.MonitoringExecutionSummary
+
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of jobs, use it in the subsequent reques
 	NextToken *string

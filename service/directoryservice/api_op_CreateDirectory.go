@@ -64,28 +64,42 @@ func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInp
 
 // Contains the inputs for the CreateDirectory () operation.
 type CreateDirectoryInput struct {
+
 	// A description for the directory.
 	Description *string
+
 	// The size of the directory.
+	//
+	// This member is required.
 	Size types.DirectorySize
+
 	// The fully qualified name for the directory, such as corp.example.com.
+	//
+	// This member is required.
 	Name *string
+
 	// The password for the directory administrator. The directory creation process
 	// creates a directory administrator account with the user name Administrator and
 	// this password. If you need to change the password for the administrator account,
 	// you can use the ResetUserPassword () API call.
+	//
+	// This member is required.
 	Password *string
+
 	// A DirectoryVpcSettings () object that contains additional information for the
 	// operation.
 	VpcSettings *types.DirectoryVpcSettings
+
 	// The NetBIOS name of the directory, such as CORP.
 	ShortName *string
+
 	// The tags to be assigned to the Simple AD directory.
 	Tags []*types.Tag
 }
 
 // Contains the results of the CreateDirectory () operation.
 type CreateDirectoryOutput struct {
+
 	// The identifier of the directory that was created.
 	DirectoryId *string
 

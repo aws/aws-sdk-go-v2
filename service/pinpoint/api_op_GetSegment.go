@@ -57,16 +57,25 @@ func (c *Client) GetSegment(ctx context.Context, params *GetSegmentInput, optFns
 }
 
 type GetSegmentInput struct {
+
 	// The unique identifier for the segment.
+	//
+	// This member is required.
 	SegmentId *string
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetSegmentOutput struct {
+
 	// Provides information about the configuration, dimension, and other settings for
 	// a segment.
+	//
+	// This member is required.
 	SegmentResponse *types.SegmentResponse
 
 	// Metadata pertaining to the operation's result.

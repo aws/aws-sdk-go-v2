@@ -56,20 +56,28 @@ func (c *Client) ListAppliedSchemaArns(ctx context.Context, params *ListAppliedS
 }
 
 type ListAppliedSchemaArnsInput struct {
+
 	// The response for ListAppliedSchemaArns when this parameter is used will list all
 	// minor version ARNs for a major version.
 	SchemaArn *string
+
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
 	// The pagination token.
 	NextToken *string
+
 	// The ARN of the directory you are listing.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type ListAppliedSchemaArnsOutput struct {
+
 	// The ARNs of schemas that are applied to the directory.
 	SchemaArns []*string
+
 	// The pagination token.
 	NextToken *string
 

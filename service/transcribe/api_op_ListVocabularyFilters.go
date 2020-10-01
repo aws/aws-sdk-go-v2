@@ -55,24 +55,29 @@ func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabula
 }
 
 type ListVocabularyFiltersInput struct {
+
 	// If the result of the previous request to ListVocabularyFilters was truncated,
 	// include the NextToken to fetch the next set of collections.
 	NextToken *string
+
 	// Filters the response so that it only contains vocabulary filters whose name
 	// contains the specified string.
 	NameContains *string
+
 	// The maximum number of filters to return in the response. If there are fewer
 	// results in the list, this response contains only the actual results.
 	MaxResults *int32
 }
 
 type ListVocabularyFiltersOutput struct {
+
 	// The ListVocabularyFilters operation returns a page of collections at a time. The
 	// maximum size of the page is set by the MaxResults parameter. If there are more
 	// jobs in the list than the page size, Amazon Transcribe returns the NextPage
 	// token. Include the token in the next request to the ListVocabularyFilters
 	// operation to return in the next page of jobs.
 	NextToken *string
+
 	// The list of vocabulary filters. It contains at most MaxResults number of
 	// filters. If there are more filters, call the ListVocabularyFilters operation
 	// again with the NextToken parameter in the request set to the value of the

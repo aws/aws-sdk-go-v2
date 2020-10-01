@@ -68,16 +68,24 @@ func (c *Client) CreateForecast(ctx context.Context, params *CreateForecastInput
 }
 
 type CreateForecastInput struct {
+
 	// A name for the forecast.
+	//
+	// This member is required.
 	ForecastName *string
+
 	// The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.
+	//
+	// This member is required.
 	PredictorArn *string
+
 	// The quantiles at which probabilistic forecasts are generated. You can currently
 	// specify up to 5 quantiles per forecast. Accepted values include 0.01 to 0.99
 	// (increments of .01 only) and mean. The mean forecast is different from the
 	// median (0.50) when the distribution is not symmetric (for example, Beta and
 	// Negative Binomial). The default value is ["0.1", "0.5", "0.9"].
 	ForecastTypes []*string
+
 	// The optional metadata that you apply to the forecast to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
@@ -113,6 +121,7 @@ type CreateForecastInput struct {
 }
 
 type CreateForecastOutput struct {
+
 	// The Amazon Resource Name (ARN) of the forecast.
 	ForecastArn *string
 

@@ -62,13 +62,23 @@ func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserP
 }
 
 type AdminSetUserPasswordInput struct {
+
 	// The user pool ID for the user pool where you want to set the user's password.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// The password for the user.
+	//
+	// This member is required.
 	Password *string
+
 	// True if the password is permanent, False if it is temporary.
 	Permanent *bool
+
 	// The user name of the user whose password you wish to set.
+	//
+	// This member is required.
 	Username *string
 }
 

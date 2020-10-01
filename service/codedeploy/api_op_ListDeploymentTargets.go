@@ -54,6 +54,7 @@ func (c *Client) ListDeploymentTargets(ctx context.Context, params *ListDeployme
 }
 
 type ListDeploymentTargetsInput struct {
+
 	// A key used to filter the returned targets. The two valid values are:
 	//
 	//     *
@@ -63,18 +64,22 @@ type ListDeploymentTargetsInput struct {
 	//     * ServerInstanceLabel - A
 	// ServerInstanceLabel filter string can be Blue or Green.
 	TargetFilters map[string][]*string
+
 	// A token identifier returned from the previous ListDeploymentTargets call. It can
 	// be used to return the next set of deployment targets in the list.
 	NextToken *string
+
 	// The unique ID of a deployment.
 	DeploymentId *string
 }
 
 type ListDeploymentTargetsOutput struct {
+
 	// If a large amount of information is returned, a token identifier is also
 	// returned. It can be used in a subsequent ListDeploymentTargets call to return
 	// the next set of deployment targets in the list.
 	NextToken *string
+
 	// The unique IDs of deployment targets.
 	TargetIds []*string
 

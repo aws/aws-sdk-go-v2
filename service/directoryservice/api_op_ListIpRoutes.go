@@ -56,22 +56,29 @@ func (c *Client) ListIpRoutes(ctx context.Context, params *ListIpRoutesInput, op
 }
 
 type ListIpRoutesInput struct {
+
 	// Identifier (ID) of the directory for which you want to retrieve the IP
 	// addresses.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// Maximum number of items to return. If this value is zero, the maximum number of
 	// items is specified by the limitations of the operation.
 	Limit *int32
+
 	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes (). Pass
 	// null if this is the first call.
 	NextToken *string
 }
 
 type ListIpRoutesOutput struct {
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to ListIpRoutes () to retrieve the next set of
 	// items.
 	NextToken *string
+
 	// A list of IpRoute ()s.
 	IpRoutesInfo []*types.IpRouteInfo
 

@@ -59,11 +59,15 @@ func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstan
 }
 
 type CancelInstanceRefreshInput struct {
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
 }
 
 type CancelInstanceRefreshOutput struct {
+
 	// The instance refresh ID.
 	InstanceRefreshId *string
 

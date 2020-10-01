@@ -57,43 +57,67 @@ func (c *Client) CreateHarvestJob(ctx context.Context, params *CreateHarvestJobI
 
 // Configuration parameters used to create a new HarvestJob.
 type CreateHarvestJobInput struct {
+
 	// The end of the time-window which will be harvested
+	//
+	// This member is required.
 	EndTime *string
+
 	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
 	// be changed after the HarvestJob is submitted.
+	//
+	// This member is required.
 	OriginEndpointId *string
+
 	// The start of the time-window which will be harvested
+	//
+	// This member is required.
 	StartTime *string
+
 	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
 	// be changed after the HarvestJob is submitted
+	//
+	// This member is required.
 	Id *string
+
 	// Configuration parameters for where in an S3 bucket to place the harvested
 	// content
+	//
+	// This member is required.
 	S3Destination *types.S3Destination
 }
 
 type CreateHarvestJobOutput struct {
+
 	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
 	// be changed after the HarvestJob is submitted.
 	Id *string
+
 	// The start of the time-window which will be harvested.
 	StartTime *string
+
 	// The end of the time-window which will be harvested.
 	EndTime *string
+
 	// The Amazon Resource Name (ARN) assigned to the HarvestJob.
 	Arn *string
+
 	// The time the HarvestJob was submitted
 	CreatedAt *string
+
 	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
 	// be changed after the HarvestJob is submitted.
 	OriginEndpointId *string
+
 	// Configuration parameters for where in an S3 bucket to place the harvested
 	// content
 	S3Destination *types.S3Destination
+
 	// The current status of the HarvestJob. Consider setting up a CloudWatch Event to
 	// listen for HarvestJobs as they succeed or fail. In the event of failure, the
 	// CloudWatch Event will include an explanation of why the HarvestJob failed.
 	Status types.Status
+
 	// The ID of the Channel that the HarvestJob will harvest from.
 	ChannelId *string
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The requested operation would cause a conflict with the current state of a
@@ -26,12 +25,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified fleet has no available instances to fulfill a CreateGameSession
 // request. Clients can retry such requests immediately or after a waiting period.
@@ -50,12 +43,6 @@ func (e *FleetCapacityExceededException) ErrorMessage() string {
 }
 func (e *FleetCapacityExceededException) ErrorCode() string             { return "FleetCapacityExceededException" }
 func (e *FleetCapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *FleetCapacityExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *FleetCapacityExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The game instance is currently full and cannot allow the requested player(s) to
 // join. Clients can retry such requests immediately or after a waiting period.
@@ -74,12 +61,6 @@ func (e *GameSessionFullException) ErrorMessage() string {
 }
 func (e *GameSessionFullException) ErrorCode() string             { return "GameSessionFullException" }
 func (e *GameSessionFullException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *GameSessionFullException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *GameSessionFullException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A game session with this custom ID string already exists in this fleet. Resolve
 // this conflict before retrying this request.
@@ -102,12 +83,6 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *IdempotentParameterMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IdempotentParameterMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service encountered an unrecoverable internal failure while processing the
 // request. Clients can retry such requests immediately or after a waiting period.
@@ -126,12 +101,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation would cause a conflict with the current state of a
 // resource associated with the request and/or the fleet. Resolve the conflict
@@ -151,12 +120,6 @@ func (e *InvalidFleetStatusException) ErrorMessage() string {
 }
 func (e *InvalidFleetStatusException) ErrorCode() string             { return "InvalidFleetStatusException" }
 func (e *InvalidFleetStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidFleetStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidFleetStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation would cause a conflict with the current state of a
 // resource associated with the request and/or the game instance. Resolve the
@@ -178,12 +141,6 @@ func (e *InvalidGameSessionStatusException) ErrorCode() string {
 	return "InvalidGameSessionStatusException"
 }
 func (e *InvalidGameSessionStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGameSessionStatusException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGameSessionStatusException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameter values in the request are invalid. Correct the invalid
 // parameter values before retrying.
@@ -202,12 +159,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation would cause the resource to exceed the allowed service
 // limit. Resolve the issue before retrying.
@@ -226,12 +177,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A service resource associated with the request could not be found. Clients
 // should not retry such requests.
@@ -250,12 +195,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified game server group has no available game servers to fulfill a
 // ClaimGameServer request. Clients can retry such requests immediately or after a
@@ -275,12 +214,6 @@ func (e *OutOfCapacityException) ErrorMessage() string {
 }
 func (e *OutOfCapacityException) ErrorCode() string             { return "OutOfCapacityException" }
 func (e *OutOfCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OutOfCapacityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OutOfCapacityException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested tagging operation did not succeed. This may be due to invalid tag
 // format or the maximum tag limit may have been exceeded. Resolve the issue before
@@ -300,12 +233,6 @@ func (e *TaggingFailedException) ErrorMessage() string {
 }
 func (e *TaggingFailedException) ErrorCode() string             { return "TaggingFailedException" }
 func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TaggingFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TaggingFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service is unable to resolve the routing for a particular alias because it
 // has a terminal RoutingStrategy () associated with it. The message returned in
@@ -329,12 +256,6 @@ func (e *TerminalRoutingStrategyException) ErrorCode() string {
 	return "TerminalRoutingStrategyException"
 }
 func (e *TerminalRoutingStrategyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TerminalRoutingStrategyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TerminalRoutingStrategyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The client failed authentication. Clients should not retry such requests.
 type UnauthorizedException struct {
@@ -352,12 +273,6 @@ func (e *UnauthorizedException) ErrorMessage() string {
 }
 func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation is not supported in the Region specified.
 type UnsupportedRegionException struct {
@@ -375,9 +290,3 @@ func (e *UnsupportedRegionException) ErrorMessage() string {
 }
 func (e *UnsupportedRegionException) ErrorCode() string             { return "UnsupportedRegionException" }
 func (e *UnsupportedRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedRegionException) HasMessage() bool {
-	return e.Message != nil
-}

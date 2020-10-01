@@ -65,9 +65,15 @@ func (c *Client) DeleteConfigurationSetEventDestination(ctx context.Context, par
 // configuration sets, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type DeleteConfigurationSetEventDestinationInput struct {
+
 	// The name of the configuration set from which to delete the event destination.
+	//
+	// This member is required.
 	ConfigurationSetName *string
+
 	// The name of the event destination to delete.
+	//
+	// This member is required.
 	EventDestinationName *string
 }
 

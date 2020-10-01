@@ -57,7 +57,10 @@ func (c *Client) PutConferencePreference(ctx context.Context, params *PutConfere
 }
 
 type PutConferencePreferenceInput struct {
+
 	// The conference preference of a specific conference provider.
+	//
+	// This member is required.
 	ConferencePreference *types.ConferencePreference
 }
 

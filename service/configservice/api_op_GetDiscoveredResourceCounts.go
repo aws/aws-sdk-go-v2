@@ -80,6 +80,7 @@ func (c *Client) GetDiscoveredResourceCounts(ctx context.Context, params *GetDis
 }
 
 type GetDiscoveredResourceCountsInput struct {
+
 	// The comma-separated list that specifies the resource types that you want AWS
 	// Config to return (for example, "AWS::EC2::Instance", "AWS::IAM::User").  <p>If a
 	// value for <code>resourceTypes</code> is not specified, AWS Config returns all
@@ -89,19 +90,23 @@ type GetDiscoveredResourceCountsInput struct {
 	// recording a specific resource type (for example, S3 buckets), that resource type
 	// is not returned in the list of <a>ResourceCount</a> objects.</p> </note>
 	ResourceTypes []*string
+
 	// The maximum number of ResourceCount () objects returned on each page. The
 	// default is 100. You cannot specify a number greater than 100. If you specify 0,
 	// AWS Config uses the default.
 	Limit *int32
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 }
 
 type GetDiscoveredResourceCountsOutput struct {
+
 	// The list of ResourceCount objects. Each object is listed in descending order by
 	// the number of resources.
 	ResourceCounts []*types.ResourceCount
+
 	// The total number of resources that AWS Config is recording in the region for
 	// your account. If you specify resource types in the request, AWS Config returns
 	// only the total number of resources for those resource types.  <p class="title">
@@ -112,6 +117,7 @@ type GetDiscoveredResourceCountsOutput struct {
 	// type, <code>"AWS::EC2::Instances"</code>, in the request.</p> </li> <li> <p>AWS
 	// Config returns 25 for <code>totalDiscoveredResources</code>.</p> </li> </ol>
 	TotalDiscoveredResources *int64
+
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.
 	NextToken *string

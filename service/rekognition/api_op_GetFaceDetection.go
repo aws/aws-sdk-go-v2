@@ -72,13 +72,18 @@ func (c *Client) GetFaceDetection(ctx context.Context, params *GetFaceDetectionI
 }
 
 type GetFaceDetectionInput struct {
+
 	// If the previous response was incomplete (because there are more faces to
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of faces.
 	NextToken *string
+
 	// Unique identifier for the face detection job. The JobId is returned from
 	// StartFaceDetection.
+	//
+	// This member is required.
 	JobId *string
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
 	// results is returned. The default value is 1000.
@@ -86,18 +91,23 @@ type GetFaceDetectionInput struct {
 }
 
 type GetFaceDetectionOutput struct {
+
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
 	// is returned in every page of paginated responses from a Amazon Rekognition video
 	// operation.
 	VideoMetadata *types.VideoMetadata
+
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
+
 	// An array of faces detected in the video. Each element contains a detected face's
 	// details and the time, in milliseconds from the start of the video, the face was
 	// detected.
 	Faces []*types.FaceDetection
+
 	// The current status of the face detection job.
 	JobStatus types.VideoJobStatus
+
 	// If the response is truncated, Amazon Rekognition returns this token that you can
 	// use in the subsequent request to retrieve the next set of faces.
 	NextToken *string

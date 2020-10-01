@@ -57,9 +57,15 @@ func (c *Client) DeleteLoadBalancerPolicy(ctx context.Context, params *DeleteLoa
 
 // Contains the parameters for DeleteLoadBalancerPolicy.
 type DeleteLoadBalancerPolicyInput struct {
+
 	// The name of the policy.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
 }
 

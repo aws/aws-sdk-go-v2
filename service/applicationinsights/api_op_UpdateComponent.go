@@ -56,12 +56,20 @@ func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInp
 }
 
 type UpdateComponentInput struct {
+
 	// The new name of the component.
 	NewComponentName *string
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The name of the component.
+	//
+	// This member is required.
 	ComponentName *string
+
 	// The list of resource ARNs that belong to the component.
 	ResourceList []*string
 }

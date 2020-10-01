@@ -61,8 +61,10 @@ func (c *Client) DescribeStackEvents(ctx context.Context, params *DescribeStackE
 
 // The input for DescribeStackEvents () action.
 type DescribeStackEventsInput struct {
+
 	// A string that identifies the next page of events that you want to retrieve.
 	NextToken *string
+
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
@@ -78,9 +80,11 @@ type DescribeStackEventsInput struct {
 
 // The output for a DescribeStackEvents () action.
 type DescribeStackEventsOutput struct {
+
 	// If the output exceeds 1 MB in size, a string that identifies the next page of
 	// events. If no additional page exists, this value is null.
 	NextToken *string
+
 	// A list of StackEvents structures.
 	StackEvents []*types.StackEvent
 

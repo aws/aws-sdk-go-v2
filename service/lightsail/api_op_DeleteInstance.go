@@ -59,13 +59,18 @@ func (c *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceInput
 }
 
 type DeleteInstanceInput struct {
+
 	// The name of the instance to delete.
+	//
+	// This member is required.
 	InstanceName *string
+
 	// A Boolean value to indicate whether to delete the enabled add-ons for the disk.
 	ForceDeleteAddOns *bool
 }
 
 type DeleteInstanceOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

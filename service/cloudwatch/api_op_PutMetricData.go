@@ -96,10 +96,16 @@ func (c *Client) PutMetricData(ctx context.Context, params *PutMetricDataInput, 
 }
 
 type PutMetricDataInput struct {
+
 	// The namespace for the metric data. To avoid conflicts with AWS service
 	// namespaces, you should not specify a namespace that begins with AWS/
+	//
+	// This member is required.
 	Namespace *string
+
 	// The data for the metric. The array can include no more than 20 metrics per call.
+	//
+	// This member is required.
 	MetricData []*types.MetricDatum
 }
 

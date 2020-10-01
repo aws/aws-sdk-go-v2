@@ -83,11 +83,13 @@ func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func
 
 // Container for the parameters to the Search request.
 type SearchInput struct {
+
 	// Specifies one or more fields for which to get statistics information. Each
 	// specified field must be facet-enabled in the domain configuration. The fields
 	// are specified in JSON using the form: {"FIELD-A":{},"FIELD-B":{}} There are
 	// currently no options supported for statistics.
 	Stats *string
+
 	// Specifies the search criteria for the request. How you specify the search
 	// criteria depends on the query parser used for the request and the parser options
 	// specified in the queryOptions parameter. By default, the simple query parser is
@@ -96,7 +98,10 @@ type SearchInput struct {
 	// specifying search criteria, see Searching Your Data
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html) in
 	// the Amazon CloudSearch Developer Guide.
+	//
+	// This member is required.
 	Query *string
+
 	// Specifies which query parser to use to process the request. If queryParser is
 	// not specified, Amazon CloudSearch uses the simple query parser. Amazon
 	// CloudSearch supports four query parsers:
@@ -134,6 +139,7 @@ type SearchInput struct {
 	// (http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax).
 	//      </ul>
 	QueryParser types.QueryParser
+
 	// Specifies the offset of the first search hit you want to return. Note that the
 	// result set is zero-based; the first result is at index 0. You can specify either
 	// the start or cursor parameter in a request, they are mutually exclusive. For
@@ -141,6 +147,7 @@ type SearchInput struct {
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html)
 	// in the Amazon CloudSearch Developer Guide.
 	Start *int64
+
 	// Retrieves a cursor value you can use to page through large result sets. Use the
 	// size parameter to control the number of hits to include in each response. You
 	// can specify either the cursor or start parameter in a request; they are mutually
@@ -150,6 +157,7 @@ type SearchInput struct {
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html)
 	// in the Amazon CloudSearch Developer Guide.
 	Cursor *string
+
 	// Specifies the fields or custom expressions to use to sort the search results.
 	// Multiple fields or expressions are specified as a comma-separated list. You must
 	// specify the sort direction (asc or desc) for each field; for example, year
@@ -161,6 +169,7 @@ type SearchInput struct {
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/sorting-results.html)
 	// in the Amazon CloudSearch Developer Guide.
 	Sort *string
+
 	// Defines one or more numeric expressions that can be used to sort results or
 	// specify search criteria. You can also specify expressions as return fields. You
 	// specify the expressions in JSON using the form {"EXPRESSIONNAME":"EXPRESSION"}.
@@ -171,6 +180,7 @@ type SearchInput struct {
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions)
 	// in the Amazon CloudSearch Developer Guide.
 	Expr *string
+
 	// Configures options for the query parser specified in the queryParser parameter.
 	// You specify the options in JSON using the following form
 	// {"OPTION1":"VALUE1","OPTION2":VALUE2"..."OPTIONN":"VALUEN"}.
@@ -263,6 +273,7 @@ type SearchInput struct {
 	// fields (pure sum): <code>"tieBreaker":1</code>. Valid values: 0.0 to 1.0.
 	// Default: 0.0. Valid for: <code>dismax</code>. </li> </ul>
 	QueryOptions *string
+
 	// Specifies one or more fields for which to get facet information, and options
 	// that control how the facet information is returned. Each specified field must be
 	// facet-enabled in the domain configuration. The fields and options are specified
@@ -312,8 +323,10 @@ type SearchInput struct {
 	// and Using Facet Information</a> in the <i>Amazon CloudSearch Developer
 	// Guide</i>.</p>
 	Facet *string
+
 	// Specifies the maximum number of search hits to include in the response.
 	Size *int64
+
 	// Retrieves highlights for matches in the specified text or text-array fields.
 	// Each specified field must be highlight enabled in the domain configuration. The
 	// fields and options are specified in JSON using the form
@@ -343,6 +356,7 @@ type SearchInput struct {
 	// for the actors and title fields. { "actors": {}, "title": {"format":
 	// "text","max_phrases": 2,"pre_tag": "","post_tag": ""} }
 	Highlight *string
+
 	// Specifies a structured query that filters the results of a search without
 	// affecting how the results are scored and sorted. You use filterQuery in
 	// conjunction with the query parameter to filter the documents that match the
@@ -354,12 +368,14 @@ type SearchInput struct {
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/filtering-results.html)
 	// in the Amazon CloudSearch Developer Guide.
 	FilterQuery *string
+
 	// Specifies the field and expression values to include in the response. Multiple
 	// fields or expressions are specified as a comma-separated list. By default, a
 	// search response includes all return enabled fields (_all_fields). To return only
 	// the document IDs for the matching documents, specify _no_fields. To retrieve the
 	// relevance score calculated for each document, specify _score.
 	Return *string
+
 	// Enables partial results to be returned if one or more index partitions are
 	// unavailable. When your search index is partitioned across multiple search
 	// instances, by default Amazon CloudSearch only returns results if every partition
@@ -377,12 +393,16 @@ type SearchInput struct {
 // The result of a Search request. Contains the documents that match the specified
 // search criteria and any requested fields, highlights, and facet information.
 type SearchOutput struct {
+
 	// The requested facet information.
 	Facets map[string]*types.BucketInfo
+
 	// The requested field statistics information.
 	Stats map[string]*types.FieldStats
+
 	// The status information returned for the search request.
 	Status *types.SearchStatus
+
 	// The documents that match the search criteria.
 	Hits *types.Hits
 

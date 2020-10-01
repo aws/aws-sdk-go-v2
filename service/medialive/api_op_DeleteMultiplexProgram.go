@@ -57,20 +57,30 @@ func (c *Client) DeleteMultiplexProgram(ctx context.Context, params *DeleteMulti
 
 // Placeholder documentation for DeleteMultiplexProgramRequest
 type DeleteMultiplexProgramInput struct {
+
 	// The multiplex program name.
+	//
+	// This member is required.
 	ProgramName *string
+
 	// The ID of the multiplex that the program belongs to.
+	//
+	// This member is required.
 	MultiplexId *string
 }
 
 // Placeholder documentation for DeleteMultiplexProgramResponse
 type DeleteMultiplexProgramOutput struct {
+
 	// The settings for this multiplex program.
 	MultiplexProgramSettings *types.MultiplexProgramSettings
+
 	// The MediaLive channel associated with the program.
 	ChannelId *string
+
 	// The name of the multiplex program.
 	ProgramName *string
+
 	// The packet identifier map for this multiplex program.
 	PacketIdentifiersMap *types.MultiplexProgramPacketIdentifiersMap
 

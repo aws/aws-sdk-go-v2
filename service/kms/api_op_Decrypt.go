@@ -100,6 +100,7 @@ func (c *Client) Decrypt(ctx context.Context, params *DecryptInput, optFns ...fu
 }
 
 type DecryptInput struct {
+
 	// Specifies the customer master key (CMK) that AWS KMS will use to decrypt the
 	// ciphertext. Enter a key ID of the CMK that was used to encrypt the ciphertext.
 	// If you specify a KeyId value, the Decrypt operation succeeds only if the
@@ -127,6 +128,7 @@ type DecryptInput struct {
 	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
 	// alias ARN, use ListAliases ().
 	KeyId *string
+
 	// Specifies the encryption algorithm that will be used to decrypt the ciphertext.
 	// Specify the same algorithm that was used to encrypt the data. If you specify a
 	// different algorithm, the Decrypt operation fails. This parameter is required
@@ -134,12 +136,17 @@ type DecryptInput struct {
 	// value, SYMMETRIC_DEFAULT, represents the only supported algorithm that is valid
 	// for symmetric CMKs.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// Ciphertext to be decrypted. The blob includes metadata.
+	//
+	// This member is required.
 	CiphertextBlob []byte
+
 	// Specifies the encryption context to use when decrypting the data. An encryption
 	// context is valid only for cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
@@ -156,11 +163,14 @@ type DecryptInput struct {
 }
 
 type DecryptOutput struct {
+
 	// The encryption algorithm that was used to decrypt the ciphertext.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
+
 	// Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value is
 	// Base64-encoded. Otherwise, it is not Base64-encoded.
 	Plaintext []byte
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK that was used to decrypt the ciphertext.

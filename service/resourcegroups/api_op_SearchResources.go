@@ -58,9 +58,13 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 }
 
 type SearchResourcesInput struct {
+
 	// The search query, using the same formats that are supported for resource group
 	// definition. For more information, see CreateGroup ().
+	//
+	// This member is required.
 	ResourceQuery *types.ResourceQuery
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -71,6 +75,7 @@ type SearchResourcesInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value provided by a previous call's
@@ -79,15 +84,18 @@ type SearchResourcesInput struct {
 }
 
 type SearchResourcesOutput struct {
+
 	// A list of QueryError objects. Each error is an object that contains ErrorCode
 	// and Message structures. Possible values for ErrorCode are
 	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
 	QueryErrors []*types.QueryError
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
 	// The ARNs and resource types of resources that are members of the group that you
 	// specified.
 	ResourceIdentifiers []*types.ResourceIdentifier

@@ -59,7 +59,10 @@ func (c *Client) StartStack(ctx context.Context, params *StartStackInput, optFns
 }
 
 type StartStackInput struct {
+
 	// The stack ID.
+	//
+	// This member is required.
 	StackId *string
 }
 

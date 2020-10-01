@@ -58,9 +58,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+
 	//
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The ID specifying the EFS resource that you want to create a tag for.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

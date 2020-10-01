@@ -63,22 +63,31 @@ func (c *Client) EnableFastSnapshotRestores(ctx context.Context, params *EnableF
 }
 
 type EnableFastSnapshotRestoresInput struct {
+
 	// One or more Availability Zones. For example, us-east-2a.
+	//
+	// This member is required.
 	AvailabilityZones []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The IDs of one or more snapshots. For example, snap-1234567890abcdef0. You can
 	// specify a snapshot that was shared with you from another AWS account.
+	//
+	// This member is required.
 	SourceSnapshotIds []*string
 }
 
 type EnableFastSnapshotRestoresOutput struct {
+
 	// Information about the snapshots for which fast snapshot restores were
 	// successfully enabled.
 	Successful []*types.EnableFastSnapshotRestoreSuccessItem
+
 	// Information about the snapshots for which fast snapshot restores could not be
 	// enabled.
 	Unsuccessful []*types.EnableFastSnapshotRestoreErrorItem

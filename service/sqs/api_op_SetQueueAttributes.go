@@ -73,9 +73,13 @@ func (c *Client) SetQueueAttributes(ctx context.Context, params *SetQueueAttribu
 
 //
 type SetQueueAttributesInput struct {
+
 	// The URL of the Amazon SQS queue whose attributes are set. Queue URLs and names
 	// are case-sensitive.
+	//
+	// This member is required.
 	QueueUrl *string
+
 	// A map of attributes to set. The following lists the names, descriptions, and
 	// values of the special request parameters that the SetQueueAttributes action
 	// uses:
@@ -179,6 +183,8 @@ type SetQueueAttributesInput struct {
 	// as the one generated for the first <code>MessageDeduplicationId</code>, the two
 	// messages are treated as duplicates and only one copy of the message is
 	// delivered. </p> </li> </ul> </li> </ul>
+	//
+	// This member is required.
 	Attributes map[string]*string
 }
 

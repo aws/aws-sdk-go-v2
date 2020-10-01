@@ -57,35 +57,53 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 }
 
 type CreateDashboardInput struct {
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
 	// The dashboard definition specified in a JSON literal. For detailed information,
 	// see Creating Dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
 	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
 	DashboardDefinition *string
+
 	// A list of key-value pairs that contain metadata for the dashboard. For more
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
 	Tags map[string]*string
+
 	// A friendly name for the dashboard.
+	//
+	// This member is required.
 	DashboardName *string
+
 	// The ID of the project in which to create the dashboard.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// A description for the dashboard.
 	DashboardDescription *string
 }
 
 type CreateDashboardOutput struct {
+
 	// The ID of the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the dashboard, which has the following format.
 	// arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	//
+	// This member is required.
 	DashboardArn *string
 
 	// Metadata pertaining to the operation's result.

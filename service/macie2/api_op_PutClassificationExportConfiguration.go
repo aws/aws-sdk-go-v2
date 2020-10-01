@@ -57,12 +57,16 @@ func (c *Client) PutClassificationExportConfiguration(ctx context.Context, param
 }
 
 type PutClassificationExportConfigurationInput struct {
+
 	// The location to store data classification results in, and the encryption
 	// settings to use when storing results in that location.
+	//
+	// This member is required.
 	Configuration *types.ClassificationExportConfiguration
 }
 
 type PutClassificationExportConfigurationOutput struct {
+
 	// The location where the data classification results are stored, and the
 	// encryption settings that are used when storing results in that location.
 	Configuration *types.ClassificationExportConfiguration

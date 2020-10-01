@@ -57,16 +57,21 @@ func (c *Client) CreateWorkspaces(ctx context.Context, params *CreateWorkspacesI
 }
 
 type CreateWorkspacesInput struct {
+
 	// The WorkSpaces to create. You can specify up to 25 WorkSpaces.
+	//
+	// This member is required.
 	Workspaces []*types.WorkspaceRequest
 }
 
 type CreateWorkspacesOutput struct {
+
 	// Information about the WorkSpaces that were created. Because this operation is
 	// asynchronous, the identifier returned is not immediately available for use with
 	// other operations. For example, if you call DescribeWorkspaces () before the
 	// WorkSpace is created, the information returned can be incomplete.
 	PendingRequests []*types.Workspace
+
 	// Information about the WorkSpaces that could not be created.
 	FailedRequests []*types.FailedCreateWorkspaceRequest
 

@@ -55,15 +55,19 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 }
 
 type ListInvitationsInput struct {
+
 	// The maximum number of invitations to return.
 	MaxResults *int32
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 }
 
 type ListInvitationsOutput struct {
+
 	// The invitations for the network.
 	Invitations []*types.Invitation
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 

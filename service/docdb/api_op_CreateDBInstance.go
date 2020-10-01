@@ -57,34 +57,49 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 
 // Represents the input to CreateDBInstance ().
 type CreateDBInstanceInput struct {
+
 	// A value that specifies the order in which an Amazon DocumentDB replica is
 	// promoted to the primary instance after a failure of the existing primary
 	// instance. Default: 1 Valid values: 0-15
 	PromotionTier *int32
+
 	// The compute and memory capacity of the instance; for example, db.r5.large.
+	//
+	// This member is required.
 	DBInstanceClass *string
+
 	// Indicates that minor engine upgrades are applied automatically to the instance
 	// during the maintenance window. Default: true
 	AutoMinorVersionUpgrade *bool
+
 	// The tags to be assigned to the instance. You can assign up to 10 tags to an
 	// instance.
 	Tags []*types.Tag
+
 	// The name of the database engine to be used for this instance. Valid value: docdb
+	//
+	// This member is required.
 	Engine *string
+
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
 	// Region, occurring on a random day of the week. Valid days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
 	// The identifier of the cluster that the instance will belong to.
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The Amazon EC2 Availability Zone that the instance is created in. Default: A
 	// random, system-chosen Availability Zone in the endpoint's AWS Region. Example:
 	// us-east-1d Constraint: The AvailabilityZone parameter can't be specified if the
 	// MultiAZ parameter is set to true. The specified Availability Zone must be in the
 	// same AWS Region as the current endpoint.
 	AvailabilityZone *string
+
 	// The instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
@@ -97,10 +112,13 @@ type CreateDBInstanceInput struct {
 	// contain two consecutive hyphens.
 	//
 	// Example: mydbinstance
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
 }
 
 type CreateDBInstanceOutput struct {
+
 	// Detailed information about an instance.
 	DBInstance *types.DBInstance
 

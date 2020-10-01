@@ -56,14 +56,20 @@ func (c *Client) GetEventStream(ctx context.Context, params *GetEventStreamInput
 }
 
 type GetEventStreamInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type GetEventStreamOutput struct {
+
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream or
 	// an Amazon Kinesis Data Firehose delivery stream.
+	//
+	// This member is required.
 	EventStream *types.EventStream
 
 	// Metadata pertaining to the operation's result.

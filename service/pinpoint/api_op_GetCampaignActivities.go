@@ -56,21 +56,32 @@ func (c *Client) GetCampaignActivities(ctx context.Context, params *GetCampaignA
 }
 
 type GetCampaignActivitiesInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
+
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
 	// The unique identifier for the campaign.
+	//
+	// This member is required.
 	CampaignId *string
+
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
 }
 
 type GetCampaignActivitiesOutput struct {
+
 	// Provides information about the activities that were performed by a campaign.
+	//
+	// This member is required.
 	ActivitiesResponse *types.ActivitiesResponse
 
 	// Metadata pertaining to the operation's result.

@@ -56,32 +56,44 @@ func (c *Client) DescribeHarvestJob(ctx context.Context, params *DescribeHarvest
 }
 
 type DescribeHarvestJobInput struct {
+
 	// The ID of the HarvestJob.
+	//
+	// This member is required.
 	Id *string
 }
 
 type DescribeHarvestJobOutput struct {
+
 	// The Amazon Resource Name (ARN) assigned to the HarvestJob.
 	Arn *string
+
 	// Configuration parameters for where in an S3 bucket to place the harvested
 	// content
 	S3Destination *types.S3Destination
+
 	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
 	// be changed after the HarvestJob is submitted.
 	Id *string
+
 	// The current status of the HarvestJob. Consider setting up a CloudWatch Event to
 	// listen for HarvestJobs as they succeed or fail. In the event of failure, the
 	// CloudWatch Event will include an explanation of why the HarvestJob failed.
 	Status types.Status
+
 	// The end of the time-window which will be harvested.
 	EndTime *string
+
 	// The start of the time-window which will be harvested.
 	StartTime *string
+
 	// The time the HarvestJob was submitted
 	CreatedAt *string
+
 	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
 	// be changed after the HarvestJob is submitted.
 	OriginEndpointId *string
+
 	// The ID of the Channel that the HarvestJob will harvest from.
 	ChannelId *string
 

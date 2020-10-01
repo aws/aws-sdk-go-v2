@@ -57,49 +57,70 @@ func (c *Client) DescribeReservation(ctx context.Context, params *DescribeReserv
 
 // Placeholder documentation for DescribeReservationRequest
 type DescribeReservationInput struct {
+
 	// Unique reservation ID, e.g. '1234567'
+	//
+	// This member is required.
 	ReservationId *string
 }
 
 // Placeholder documentation for DescribeReservationResponse
 type DescribeReservationOutput struct {
+
 	// Number of reserved resources
 	Count *int32
+
 	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
 	FixedPrice *float64
+
 	// Current state of reservation, e.g. 'ACTIVE'
 	State types.ReservationState
+
 	// Units for duration, e.g. 'MONTHS'
 	DurationUnits types.OfferingDurationUnits
+
 	// User specified reservation name
 	Name *string
+
 	// AWS region, e.g. 'us-west-2'
 	Region *string
+
 	// Offering type, e.g. 'NO_UPFRONT'
 	OfferingType types.OfferingType
+
 	// Unique offering ID, e.g. '87654321'
 	OfferingId *string
+
 	// A collection of key-value pairs
 	Tags map[string]*string
+
 	// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ
 	// in US West (Oregon)'
 	OfferingDescription *string
+
 	// Unique reservation ID, e.g. '1234567'
 	ReservationId *string
+
 	// Reservation UTC start date and time in ISO-8601 format, e.g.
 	// '2018-03-01T00:00:00'
 	Start *string
+
 	// Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
 	End *string
+
 	// Unique reservation ARN, e.g.
 	// 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
 	Arn *string
+
 	// Resource configuration details
 	ResourceSpecification *types.ReservationResourceSpecification
+
 	// Lease duration, e.g. '12'
 	Duration *int32
+
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
 	UsagePrice *float64
+
 	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
 	CurrencyCode *string
 

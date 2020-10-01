@@ -56,19 +56,27 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 }
 
 type ListDataSourcesInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type ListDataSourcesOutput struct {
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// A list of data sources.
 	DataSources []*types.DataSource
 

@@ -66,14 +66,21 @@ func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketR
 }
 
 type PutBucketRequestPaymentInput struct {
+
 	// Container for Payer.
+	//
+	// This member is required.
 	RequestPaymentConfiguration *types.RequestPaymentConfiguration
+
 	// >The base64-encoded 128-bit MD5 digest of the data. You must use this header as
 	// a message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
+
 	// The bucket name.
+	//
+	// This member is required.
 	Bucket *string
 }
 

@@ -60,10 +60,14 @@ func (c *Client) IssueCertificate(ctx context.Context, params *IssueCertificateI
 }
 
 type IssueCertificateInput struct {
+
 	// The Amazon Resource Name (ARN) that was returned when you called
 	// CreateCertificateAuthority (). This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
+
 	// The certificate signing request (CSR) for the certificate you want to issue. You
 	// can use the following OpenSSL command to create the CSR and a 2048 bit RSA
 	// private key. openssl req -new -newkey rsa:2048 -days 365 -keyout
@@ -72,7 +76,10 @@ type IssueCertificateInput struct {
 	// block in the configuration file contains your X509 version 3 extensions. openssl
 	// req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days
 	// -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr
+	//
+	// This member is required.
 	Csr []byte
+
 	// Specifies a custom configuration template to use when issuing a certificate. If
 	// this parameter is not provided, ACM Private CA defaults to the
 	// EndEntityCertificate/V1 template. The following service-owned TemplateArn values
@@ -100,8 +107,12 @@ type IssueCertificateInput struct {
 	// Templates
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html).
 	TemplateArn *string
+
 	// The type of the validity period.
+	//
+	// This member is required.
 	Validity *types.Validity
+
 	// Custom string that can be used to distinguish between calls to the
 	// IssueCertificate action. Idempotency tokens time out after one hour. Therefore,
 	// if you call IssueCertificate multiple times with the same idempotency token
@@ -109,12 +120,16 @@ type IssueCertificateInput struct {
 	// certificate and will issue only one. If you change the idempotency token for
 	// each call, PCA recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string
+
 	// The name of the algorithm that will be used to sign the certificate to be
 	// issued.
+	//
+	// This member is required.
 	SigningAlgorithm types.SigningAlgorithm
 }
 
 type IssueCertificateOutput struct {
+
 	// The Amazon Resource Name (ARN) of the issued certificate and the certificate
 	// serial number. This is of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245

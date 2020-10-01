@@ -57,14 +57,21 @@ func (c *Client) DescribeStep(ctx context.Context, params *DescribeStepInput, op
 
 // This input determines which step to describe.
 type DescribeStepInput struct {
+
 	// The identifier of the step to describe.
+	//
+	// This member is required.
 	StepId *string
+
 	// The identifier of the cluster with steps to describe.
+	//
+	// This member is required.
 	ClusterId *string
 }
 
 // This output contains the description of the cluster step.
 type DescribeStepOutput struct {
+
 	// The step details for the requested step identifier.
 	Step *types.Step
 

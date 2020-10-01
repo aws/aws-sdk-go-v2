@@ -55,9 +55,13 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the signaling channel for which you want to
 	// list tags.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// If you specify this parameter and the result of a ListTagsForResource call is
 	// truncated, the response includes a token that you can use in the next request to
 	// fetch the next batch of tags.
@@ -65,8 +69,10 @@ type ListTagsForResourceInput struct {
 }
 
 type ListTagsForResourceOutput struct {
+
 	// A map of tag keys and values associated with the specified signaling channel.
 	Tags map[string]*string
+
 	// If you specify this parameter and the result of a ListTagsForResource call is
 	// truncated, the response includes a token that you can use in the next request to
 	// fetch the next set of tags.

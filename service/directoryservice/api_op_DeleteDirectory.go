@@ -61,12 +61,16 @@ func (c *Client) DeleteDirectory(ctx context.Context, params *DeleteDirectoryInp
 
 // Contains the inputs for the DeleteDirectory () operation.
 type DeleteDirectoryInput struct {
+
 	// The identifier of the directory to delete.
+	//
+	// This member is required.
 	DirectoryId *string
 }
 
 // Contains the results of the DeleteDirectory () operation.
 type DeleteDirectoryOutput struct {
+
 	// The directory identifier.
 	DirectoryId *string
 

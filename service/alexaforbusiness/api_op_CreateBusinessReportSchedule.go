@@ -59,28 +59,41 @@ func (c *Client) CreateBusinessReportSchedule(ctx context.Context, params *Creat
 }
 
 type CreateBusinessReportScheduleInput struct {
+
 	// The S3 key where the report is delivered.
 	S3KeyPrefix *string
+
 	// The S3 bucket name of the output reports. If this isn't specified, the report
 	// can be retrieved from a download link by calling ListBusinessReportSchedule.
 	S3BucketName *string
+
 	// The content range of the reports.
+	//
+	// This member is required.
 	ContentRange *types.BusinessReportContentRange
+
 	// The client request token.
 	ClientRequestToken *string
+
 	// The recurrence of the reports. If this isn't specified, the report will only be
 	// delivered one time when the API is called.
 	Recurrence *types.BusinessReportRecurrence
+
 	// The tags for the business report schedule.
 	Tags []*types.Tag
+
 	// The name identifier of the schedule.
 	ScheduleName *string
+
 	// The format of the generated report (individual CSV files or zipped files of
 	// individual files).
+	//
+	// This member is required.
 	Format types.BusinessReportFormat
 }
 
 type CreateBusinessReportScheduleOutput struct {
+
 	// The ARN of the business report schedule.
 	ScheduleArn *string
 

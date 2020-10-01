@@ -55,9 +55,11 @@ func (c *Client) ListKafkaVersions(ctx context.Context, params *ListKafkaVersion
 }
 
 type ListKafkaVersionsInput struct {
+
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
 	MaxResults *int32
+
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
@@ -65,7 +67,8 @@ type ListKafkaVersionsInput struct {
 }
 
 type ListKafkaVersionsOutput struct {
-	NextToken     *string
+	NextToken *string
+
 	KafkaVersions []*types.KafkaVersion
 
 	// Metadata pertaining to the operation's result.

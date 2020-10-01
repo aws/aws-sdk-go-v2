@@ -55,19 +55,24 @@ func (c *Client) DescribeIpGroups(ctx context.Context, params *DescribeIpGroupsI
 }
 
 type DescribeIpGroupsInput struct {
+
 	// The identifiers of one or more IP access control groups.
 	GroupIds []*string
+
 	// The maximum number of items to return.
 	MaxResults *int32
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
 }
 
 type DescribeIpGroupsOutput struct {
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
+
 	// Information about the IP access control groups.
 	Result []*types.WorkspacesIpGroup
 

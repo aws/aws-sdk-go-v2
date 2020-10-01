@@ -58,40 +58,62 @@ func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optF
 
 // The request body for UpdateAsset.
 type UpdateAssetInput struct {
+
 	// The unique identifier for an asset.
+	//
+	// This member is required.
 	AssetId *string
+
 	// The name of the asset. When importing from Amazon S3, the S3 object key is used
 	// as the asset name. When exporting to Amazon S3, the asset name is used as
 	// default target S3 object key.
+	//
+	// This member is required.
 	Name *string
+
 	// The unique identifier for a revision.
+	//
+	// This member is required.
 	RevisionId *string
+
 	// The unique identifier for a data set.
+	//
+	// This member is required.
 	DataSetId *string
 }
 
 type UpdateAssetOutput struct {
+
 	// The date and time that the asset was created, in ISO 8601 format.
 	CreatedAt *time.Time
+
 	// The unique identifier for the revision associated with this asset.
 	RevisionId *string
+
 	// The date and time that the asset was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time
+
 	// The type of file your data is stored in. Currently, the supported asset type is
 	// S3_SNAPSHOT.
 	AssetType types.AssetType
+
 	// The ARN for the asset.
 	Arn *string
+
 	// Information about the asset, including its size.
 	AssetDetails *types.AssetDetails
+
 	// The name of the asset When importing from Amazon S3, the S3 object key is used
 	// as the asset name. When exporting to Amazon S3, the asset name is used as
 	// default target S3 object key.
 	Name *string
+
 	// The unique identifier for the data set associated with this asset.
 	DataSetId *string
+
 	// The unique identifier for the asset.
 	Id *string
+
 	// The asset ID of the owned asset corresponding to the entitled asset being
 	// viewed. This parameter is returned when an asset owner is viewing the entitled
 	// copy of its owned asset.

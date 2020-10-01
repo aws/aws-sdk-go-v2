@@ -58,17 +58,22 @@ func (c *Client) CancelSpotInstanceRequests(ctx context.Context, params *CancelS
 
 // Contains the parameters for CancelSpotInstanceRequests.
 type CancelSpotInstanceRequestsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more Spot Instance request IDs.
+	//
+	// This member is required.
 	SpotInstanceRequestIds []*string
 }
 
 // Contains the output of CancelSpotInstanceRequests.
 type CancelSpotInstanceRequestsOutput struct {
+
 	// One or more Spot Instance requests.
 	CancelledSpotInstanceRequests []*types.CancelledSpotInstanceRequest
 

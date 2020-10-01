@@ -56,11 +56,13 @@ func (c *Client) DescribeVpcEndpointServiceConfigurations(ctx context.Context, p
 }
 
 type DescribeVpcEndpointServiceConfigurationsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * service-name - The name of the service.
@@ -81,21 +83,26 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 	// The key of a tag assigned to the resource. Use this filter to find all resources
 	// assigned a tag with a specific key, regardless of the tag value.
 	Filters []*types.Filter
+
 	// The IDs of one or more services.
 	ServiceIds []*string
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
 	MaxResults *int32
+
 	// The token to retrieve the next page of results.
 	NextToken *string
 }
 
 type DescribeVpcEndpointServiceConfigurationsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about one or more services.
 	ServiceConfigurations []*types.ServiceConfiguration
 

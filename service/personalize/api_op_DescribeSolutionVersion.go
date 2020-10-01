@@ -57,11 +57,15 @@ func (c *Client) DescribeSolutionVersion(ctx context.Context, params *DescribeSo
 }
 
 type DescribeSolutionVersionInput struct {
+
 	// The Amazon Resource Name (ARN) of the solution version.
+	//
+	// This member is required.
 	SolutionVersionArn *string
 }
 
 type DescribeSolutionVersionOutput struct {
+
 	// The solution version.
 	SolutionVersion *types.SolutionVersion
 

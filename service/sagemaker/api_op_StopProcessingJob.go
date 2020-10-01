@@ -55,7 +55,10 @@ func (c *Client) StopProcessingJob(ctx context.Context, params *StopProcessingJo
 }
 
 type StopProcessingJobInput struct {
+
 	// The name of the processing job to stop.
+	//
+	// This member is required.
 	ProcessingJobName *string
 }
 

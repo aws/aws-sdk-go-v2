@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Exception that indicates the specified AttackId does not exist, or the requester
@@ -25,12 +24,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // In order to grant the necessary access to the DDoS Response Team (DRT), the user
 // submitting the request must have the iam:PassRole permission. This error
@@ -56,12 +49,6 @@ func (e *AccessDeniedForDependencyException) ErrorCode() string {
 func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AccessDeniedForDependencyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedForDependencyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that a problem occurred with the service
 // infrastructure. You can retry the request.
@@ -80,12 +67,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalErrorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalErrorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that the operation would not cause any change to occur.
 type InvalidOperationException struct {
@@ -103,12 +84,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 }
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidOperationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that the NextToken specified in the request is invalid.
 // Submit the request using the NextToken value that was returned in the response.
@@ -129,12 +104,6 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 	return "InvalidPaginationTokenException"
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPaginationTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPaginationTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that the parameters passed to the API are invalid.
 type InvalidParameterException struct {
@@ -152,12 +121,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that the resource is invalid. You might not have access
 // to the resource, or the resource might not exist.
@@ -176,12 +139,6 @@ func (e *InvalidResourceException) ErrorMessage() string {
 }
 func (e *InvalidResourceException) ErrorCode() string             { return "InvalidResourceException" }
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that the operation would exceed a limit. Type is the
 // type of limit that would be exceeded. Limit is the threshold that would be
@@ -204,24 +161,6 @@ func (e *LimitsExceededException) ErrorMessage() string {
 }
 func (e *LimitsExceededException) ErrorCode() string             { return "LimitsExceededException" }
 func (e *LimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitsExceededException) GetLimit() int64 {
-	return ptr.ToInt64(e.Limit)
-}
-func (e *LimitsExceededException) HasLimit() bool {
-	return e.Limit != nil
-}
-func (e *LimitsExceededException) GetType() string {
-	return ptr.ToString(e.Type)
-}
-func (e *LimitsExceededException) HasType() bool {
-	return e.Type != nil
-}
-func (e *LimitsExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitsExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You are trying to update a subscription that has not yet completed the 1-year
 // commitment. You can change the AutoRenew parameter during the last 30 days of
@@ -242,12 +181,6 @@ func (e *LockedSubscriptionException) ErrorMessage() string {
 }
 func (e *LockedSubscriptionException) ErrorCode() string             { return "LockedSubscriptionException" }
 func (e *LockedSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LockedSubscriptionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LockedSubscriptionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The ARN of the role that you specifed does not exist.
 type NoAssociatedRoleException struct {
@@ -265,12 +198,6 @@ func (e *NoAssociatedRoleException) ErrorMessage() string {
 }
 func (e *NoAssociatedRoleException) ErrorCode() string             { return "NoAssociatedRoleException" }
 func (e *NoAssociatedRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoAssociatedRoleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoAssociatedRoleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception that indicates that the resource state has been modified by another
 // client. Retrieve the resource and then retry your request.
@@ -289,12 +216,6 @@ func (e *OptimisticLockException) ErrorMessage() string {
 }
 func (e *OptimisticLockException) ErrorCode() string             { return "OptimisticLockException" }
 func (e *OptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OptimisticLockException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OptimisticLockException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception indicating the specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -312,12 +233,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception indicating the specified resource does not exist.
 type ResourceNotFoundException struct {
@@ -335,9 +250,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

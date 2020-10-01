@@ -60,30 +60,53 @@ func (c *Client) DescribeModelPackage(ctx context.Context, params *DescribeModel
 }
 
 type DescribeModelPackageInput struct {
+
 	// The name of the model package to describe.
+	//
+	// This member is required.
 	ModelPackageName *string
 }
 
 type DescribeModelPackageOutput struct {
+
 	// The name of the model package being described.
+	//
+	// This member is required.
 	ModelPackageName *string
+
 	// A timestamp specifying when the model package was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the model package.
+	//
+	// This member is required.
 	ModelPackageArn *string
+
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+
 	// Details about the current status of the model package.
+	//
+	// This member is required.
 	ModelPackageStatusDetails *types.ModelPackageStatusDetails
+
 	// Configurations for one or more transform jobs that Amazon SageMaker runs to test
 	// the model package.
 	ValidationSpecification *types.ModelPackageValidationSpecification
+
 	// A brief summary of the model package.
 	ModelPackageDescription *string
+
 	// Whether the model package is certified for listing on AWS Marketplace.
 	CertifyForMarketplace *bool
+
 	// The current status of the model package.
+	//
+	// This member is required.
 	ModelPackageStatus types.ModelPackageStatus
+
 	// Details about inference jobs that can be run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification

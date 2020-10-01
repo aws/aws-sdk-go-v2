@@ -57,33 +57,41 @@ func (c *Client) DescribeOptionGroups(ctx context.Context, params *DescribeOptio
 
 //
 type DescribeOptionGroupsInput struct {
+
 	// Filters the list of option groups to only include groups associated with a
 	// specific database engine version. If specified, then EngineName must also be
 	// specified.
 	MajorEngineVersion *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
 	// An optional pagination token provided by a previous DescribeOptionGroups
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
+
 	// The name of the option group to describe. Can't be supplied together with
 	// EngineName or MajorEngineVersion.
 	OptionGroupName *string
+
 	// Filters the list of option groups to only include groups associated with a
 	// specific database engine.
 	EngineName *string
+
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
 }
 
 // List of option groups.
 type DescribeOptionGroupsOutput struct {
+
 	// List of option groups.
 	OptionGroupsList []*types.OptionGroup
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.

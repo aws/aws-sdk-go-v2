@@ -57,21 +57,30 @@ func (c *Client) DisableFastSnapshotRestores(ctx context.Context, params *Disabl
 }
 
 type DisableFastSnapshotRestoresInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more Availability Zones. For example, us-east-2a.
+	//
+	// This member is required.
 	AvailabilityZones []*string
+
 	// The IDs of one or more snapshots. For example, snap-1234567890abcdef0.
+	//
+	// This member is required.
 	SourceSnapshotIds []*string
 }
 
 type DisableFastSnapshotRestoresOutput struct {
+
 	// Information about the snapshots for which fast snapshot restores could not be
 	// disabled.
 	Unsuccessful []*types.DisableFastSnapshotRestoreErrorItem
+
 	// Information about the snapshots for which fast snapshot restores were
 	// successfully disabled.
 	Successful []*types.DisableFastSnapshotRestoreSuccessItem

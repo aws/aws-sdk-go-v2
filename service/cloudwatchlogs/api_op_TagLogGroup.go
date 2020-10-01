@@ -62,9 +62,15 @@ func (c *Client) TagLogGroup(ctx context.Context, params *TagLogGroupInput, optF
 }
 
 type TagLogGroupInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
+
 	// The key-value pairs to use for the tags.
+	//
+	// This member is required.
 	Tags map[string]*string
 }
 

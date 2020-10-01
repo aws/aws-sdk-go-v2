@@ -59,7 +59,10 @@ func (c *Client) DeleteEvaluation(ctx context.Context, params *DeleteEvaluationI
 }
 
 type DeleteEvaluationInput struct {
+
 	// A user-supplied ID that uniquely identifies the Evaluation to delete.
+	//
+	// This member is required.
 	EvaluationId *string
 }
 
@@ -68,6 +71,7 @@ type DeleteEvaluationInput struct {
 // GetEvaluation operation and check the value of the Status parameter to see
 // whether an Evaluation is marked as DELETED.
 type DeleteEvaluationOutput struct {
+
 	// A user-supplied ID that uniquely identifies the Evaluation. This value should be
 	// identical to the value of the EvaluationId in the request.
 	EvaluationId *string

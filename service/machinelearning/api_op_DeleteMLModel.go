@@ -58,7 +58,10 @@ func (c *Client) DeleteMLModel(ctx context.Context, params *DeleteMLModelInput, 
 }
 
 type DeleteMLModelInput struct {
+
 	// A user-supplied ID that uniquely identifies the MLModel.
+	//
+	// This member is required.
 	MLModelId *string
 }
 
@@ -66,6 +69,7 @@ type DeleteMLModelInput struct {
 // operation and check the value of the Status parameter to see whether an MLModel
 // is marked as DELETED.
 type DeleteMLModelOutput struct {
+
 	// A user-supplied ID that uniquely identifies the MLModel. This value should be
 	// identical to the value of the MLModelID in the request.
 	MLModelId *string

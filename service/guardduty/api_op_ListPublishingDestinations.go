@@ -57,10 +57,15 @@ func (c *Client) ListPublishingDestinations(ctx context.Context, params *ListPub
 }
 
 type ListPublishingDestinationsInput struct {
+
 	// The ID of the detector to retrieve publishing destinations for.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
 	// A token to use for paginating results that are returned in the response. Set the
 	// value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to
@@ -69,9 +74,13 @@ type ListPublishingDestinationsInput struct {
 }
 
 type ListPublishingDestinationsOutput struct {
+
 	// A Destinations object that includes information about each publishing
 	// destination returned.
+	//
+	// This member is required.
 	Destinations []*types.Destination
+
 	// A token to use for paginating results that are returned in the response. Set the
 	// value of this parameter to null for the first request to a list action. For
 	// subsequent calls, use the NextToken value returned from the previous request to

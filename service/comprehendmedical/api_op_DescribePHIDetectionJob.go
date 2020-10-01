@@ -57,12 +57,16 @@ func (c *Client) DescribePHIDetectionJob(ctx context.Context, params *DescribePH
 }
 
 type DescribePHIDetectionJobInput struct {
+
 	// The identifier that Amazon Comprehend Medical generated for the job. The
 	// StartPHIDetectionJob operation returns this identifier in its response.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribePHIDetectionJobOutput struct {
+
 	// An object that contains the properties associated with a detection job.
 	ComprehendMedicalAsyncJobProperties *types.ComprehendMedicalAsyncJobProperties
 

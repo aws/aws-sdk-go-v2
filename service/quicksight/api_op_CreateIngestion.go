@@ -62,21 +62,34 @@ func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInp
 }
 
 type CreateIngestionInput struct {
+
 	// The ID of the dataset used in the ingestion.
+	//
+	// This member is required.
 	DataSetId *string
+
 	// An ID for the ingestion.
+	//
+	// This member is required.
 	IngestionId *string
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
 }
 
 type CreateIngestionOutput struct {
+
 	// An ID for the ingestion.
 	IngestionId *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ingestion status.
 	IngestionStatus types.IngestionStatus
+
 	// The Amazon Resource Name (ARN) for the data ingestion.
 	Arn *string
 

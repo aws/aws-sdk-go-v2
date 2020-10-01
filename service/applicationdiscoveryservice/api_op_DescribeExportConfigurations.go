@@ -57,18 +57,23 @@ func (c *Client) DescribeExportConfigurations(ctx context.Context, params *Descr
 }
 
 type DescribeExportConfigurationsInput struct {
+
 	// A list of continuous export IDs to search for.
 	ExportIds []*string
+
 	// The token from the previous call to describe-export-tasks.
 	NextToken *string
+
 	// A number between 1 and 100 specifying the maximum number of continuous export
 	// descriptions returned.
 	MaxResults *int32
 }
 
 type DescribeExportConfigurationsOutput struct {
+
 	// The token from the previous call to describe-export-tasks.
 	NextToken *string
+
 	//
 	ExportsInfo []*types.ExportInfo
 

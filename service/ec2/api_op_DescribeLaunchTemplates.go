@@ -55,12 +55,15 @@ func (c *Client) DescribeLaunchTemplates(ctx context.Context, params *DescribeLa
 }
 
 type DescribeLaunchTemplatesInput struct {
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
 	// value can be between 1 and 200.
 	MaxResults *int32
+
 	// One or more launch template names.
 	LaunchTemplateNames []*string
+
 	// One or more filters.
 	//
 	//     * create-time - The time the launch template was
@@ -78,21 +81,26 @@ type DescribeLaunchTemplatesInput struct {
 	// tag-key - The key of a tag assigned to the resource. Use this filter to find all
 	// resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []*types.Filter
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more launch template IDs.
 	LaunchTemplateIds []*string
+
 	// The token to request the next page of results.
 	NextToken *string
 }
 
 type DescribeLaunchTemplatesOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the launch templates.
 	LaunchTemplates []*types.LaunchTemplate
 

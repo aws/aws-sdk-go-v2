@@ -55,17 +55,24 @@ func (c *Client) ListTargetsForPolicy(ctx context.Context, params *ListTargetsFo
 }
 
 type ListTargetsForPolicyInput struct {
+
 	// The policy name.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The maximum number of results to return at one time.
 	PageSize *int32
+
 	// A marker used to get the next set of results.
 	Marker *string
 }
 
 type ListTargetsForPolicyOutput struct {
+
 	// The policy targets.
 	Targets []*string
+
 	// A marker used to get the next set of results.
 	NextMarker *string
 

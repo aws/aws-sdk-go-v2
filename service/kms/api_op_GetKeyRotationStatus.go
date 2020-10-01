@@ -78,6 +78,7 @@ func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotatio
 }
 
 type GetKeyRotationStatusInput struct {
+
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS
 	// account, you must use the key ARN. For example:
@@ -90,10 +91,13 @@ type GetKeyRotationStatusInput struct {
 	//
 	// To
 	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	//
+	// This member is required.
 	KeyId *string
 }
 
 type GetKeyRotationStatusOutput struct {
+
 	// A Boolean value that specifies whether key rotation is enabled.
 	KeyRotationEnabled *bool
 

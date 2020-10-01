@@ -56,11 +56,15 @@ func (c *Client) GetInstanceState(ctx context.Context, params *GetInstanceStateI
 }
 
 type GetInstanceStateInput struct {
+
 	// The name of the instance to get state information about.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type GetInstanceStateOutput struct {
+
 	// The state of the instance.
 	State *types.InstanceState
 

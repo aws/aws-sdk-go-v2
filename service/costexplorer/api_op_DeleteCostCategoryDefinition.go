@@ -56,13 +56,18 @@ func (c *Client) DeleteCostCategoryDefinition(ctx context.Context, params *Delet
 }
 
 type DeleteCostCategoryDefinitionInput struct {
+
 	// The unique identifier for your Cost Category.
+	//
+	// This member is required.
 	CostCategoryArn *string
 }
 
 type DeleteCostCategoryDefinitionOutput struct {
+
 	// The unique identifier for your Cost Category.
 	CostCategoryArn *string
+
 	// The effective end date of the Cost Category as a result of deleting it. No costs
 	// after this date will be categorized by the deleted Cost Category.
 	EffectiveEnd *string

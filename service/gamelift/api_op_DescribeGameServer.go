@@ -77,14 +77,21 @@ func (c *Client) DescribeGameServer(ctx context.Context, params *DescribeGameSer
 }
 
 type DescribeGameServerInput struct {
+
 	// The identifier for the game server to be retrieved.
+	//
+	// This member is required.
 	GameServerId *string
+
 	// An identifier for the game server group where the game server is running. Use
 	// either the GameServerGroup () name or ARN value.
+	//
+	// This member is required.
 	GameServerGroupName *string
 }
 
 type DescribeGameServerOutput struct {
+
 	// Object that describes the requested game server resource.
 	GameServer *types.GameServer
 

@@ -66,12 +66,16 @@ func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionBy
 }
 
 type DeprovisionByoipCidrInput struct {
+
 	// The address range, in CIDR notation. The prefix must be the same prefix that you
 	// specified when you provisioned the address range.
+	//
+	// This member is required.
 	Cidr *string
 }
 
 type DeprovisionByoipCidrOutput struct {
+
 	// Information about the address range.
 	ByoipCidr *types.ByoipCidr
 

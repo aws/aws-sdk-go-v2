@@ -56,13 +56,18 @@ func (c *Client) GetAssignment(ctx context.Context, params *GetAssignmentInput, 
 }
 
 type GetAssignmentInput struct {
+
 	// The ID of the Assignment to be retrieved.
+	//
+	// This member is required.
 	AssignmentId *string
 }
 
 type GetAssignmentOutput struct {
+
 	// The HIT associated with this assignment. The response includes one HIT element.
 	HIT *types.HIT
+
 	// The assignment. The response includes one Assignment element.
 	Assignment *types.Assignment
 

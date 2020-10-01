@@ -56,27 +56,38 @@ func (c *Client) GetSigningProfile(ctx context.Context, params *GetSigningProfil
 }
 
 type GetSigningProfileInput struct {
+
 	// The name of the target signing profile.
+	//
+	// This member is required.
 	ProfileName *string
 }
 
 type GetSigningProfileOutput struct {
+
 	// A list of overrides applied by the target signing profile for signing
 	// operations.
 	Overrides *types.SigningPlatformOverrides
+
 	// The Amazon Resource Name (ARN) for the signing profile.
 	Arn *string
+
 	// A map of key-value pairs for signing operations that is attached to the target
 	// signing profile.
 	SigningParameters map[string]*string
+
 	// The ARN of the certificate that the target profile uses for signing operations.
 	SigningMaterial *types.SigningMaterial
+
 	// The ID of the platform that is used by the target signing profile.
 	PlatformId *string
+
 	// A list of tags associated with the signing profile.
 	Tags map[string]*string
+
 	// The status of the target signing profile.
 	Status types.SigningProfileStatus
+
 	// The name of the target signing profile.
 	ProfileName *string
 

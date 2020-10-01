@@ -61,22 +61,32 @@ func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, pa
 }
 
 type DescribeCertificateAuthorityAuditReportInput struct {
+
 	// The report ID returned by calling the CreateCertificateAuthorityAuditReport ()
 	// action.
+	//
+	// This member is required.
 	AuditReportId *string
+
 	// The Amazon Resource Name (ARN) of the private CA. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// This member is required.
 	CertificateAuthorityArn *string
 }
 
 type DescribeCertificateAuthorityAuditReportOutput struct {
+
 	// Specifies whether report creation is in progress, has succeeded, or has failed.
 	AuditReportStatus types.AuditReportStatus
+
 	// Name of the S3 bucket that contains the report.
 	S3BucketName *string
+
 	// S3 key that uniquely identifies the report file in your S3 bucket.
 	S3Key *string
+
 	// The date and time at which the report was created.
 	CreatedAt *time.Time
 

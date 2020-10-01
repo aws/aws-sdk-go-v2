@@ -60,10 +60,16 @@ func (c *Client) UpdateNumberOfDomainControllers(ctx context.Context, params *Up
 }
 
 type UpdateNumberOfDomainControllersInput struct {
+
 	// Identifier of the directory to which the domain controllers will be added or
 	// removed.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The number of domain controllers desired in the directory.
+	//
+	// This member is required.
 	DesiredNumber *int32
 }
 

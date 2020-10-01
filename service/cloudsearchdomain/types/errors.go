@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Information about any problems encountered while processing an upload request.
@@ -26,18 +25,6 @@ func (e *DocumentServiceException) ErrorMessage() string {
 }
 func (e *DocumentServiceException) ErrorCode() string             { return "DocumentServiceException" }
 func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DocumentServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DocumentServiceException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *DocumentServiceException) GetStatus() string {
-	return ptr.ToString(e.Status)
-}
-func (e *DocumentServiceException) HasStatus() bool {
-	return e.Status != nil
-}
 
 // Information about any problems encountered while processing a search request.
 type SearchException struct {
@@ -55,9 +42,3 @@ func (e *SearchException) ErrorMessage() string {
 }
 func (e *SearchException) ErrorCode() string             { return "SearchException" }
 func (e *SearchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SearchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SearchException) HasMessage() bool {
-	return e.Message != nil
-}

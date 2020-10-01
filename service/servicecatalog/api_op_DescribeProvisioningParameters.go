@@ -62,9 +62,11 @@ func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *Des
 }
 
 type DescribeProvisioningParametersInput struct {
+
 	// The identifier of the provisioning artifact. You must provide the name or ID,
 	// but not both.
 	ProvisioningArtifactId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -74,15 +76,20 @@ type DescribeProvisioningParametersInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
 	// The name of the path. You must provide the name or ID, but not both.
 	PathName *string
+
 	// The name of the provisioning artifact. You must provide the name or ID, but not
 	// both.
 	ProvisioningArtifactName *string
+
 	// The product identifier. You must provide the product name or ID, but not both.
 	ProductId *string
+
 	// The name of the product. You must provide the name or ID, but not both.
 	ProductName *string
+
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
 	// paths for a product, use ListLaunchPaths (). You must provide the name or ID,
@@ -91,17 +98,23 @@ type DescribeProvisioningParametersInput struct {
 }
 
 type DescribeProvisioningParametersOutput struct {
+
 	// Information about the constraints used to provision the product.
 	ConstraintSummaries []*types.ConstraintSummary
+
 	// Information about the parameters used to provision the product.
 	ProvisioningArtifactParameters []*types.ProvisioningArtifactParameter
+
 	// An object that contains information about preferences, such as regions and
 	// accounts, for the provisioning artifact.
 	ProvisioningArtifactPreferences *types.ProvisioningArtifactPreferences
+
 	// Information about the TagOptions associated with the resource.
 	TagOptions []*types.TagOptionSummary
+
 	// The output of the provisioning artifact.
 	ProvisioningArtifactOutputs []*types.ProvisioningArtifactOutput
+
 	// Any additional metadata specifically related to the provisioning of the product.
 	// For example, see the Version field of the CloudFormation template.
 	UsageInstructions []*types.UsageInstruction

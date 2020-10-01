@@ -61,12 +61,16 @@ func (c *Client) DescribeLifecycleConfiguration(ctx context.Context, params *Des
 }
 
 type DescribeLifecycleConfigurationInput struct {
+
 	// The ID of the file system whose LifecycleConfiguration object you want to
 	// retrieve (String).
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
 type DescribeLifecycleConfigurationOutput struct {
+
 	// An array of lifecycle management policies. Currently, EFS supports a maximum of
 	// one policy per file system.
 	LifecyclePolicies []*types.LifecyclePolicy

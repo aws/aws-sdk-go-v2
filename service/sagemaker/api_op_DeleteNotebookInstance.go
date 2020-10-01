@@ -59,7 +59,10 @@ func (c *Client) DeleteNotebookInstance(ctx context.Context, params *DeleteNoteb
 }
 
 type DeleteNotebookInstanceInput struct {
+
 	// The name of the Amazon SageMaker notebook instance to delete.
+	//
+	// This member is required.
 	NotebookInstanceName *string
 }
 

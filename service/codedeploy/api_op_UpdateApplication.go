@@ -55,8 +55,10 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 // Represents the input of an UpdateApplication operation.
 type UpdateApplicationInput struct {
+
 	// The current name of the application you want to change.
 	ApplicationName *string
+
 	// The new name to give the application.
 	NewApplicationName *string
 }

@@ -58,12 +58,17 @@ func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStrea
 
 // Represents the input for ListTagsForStream.
 type ListTagsForStreamInput struct {
+
 	// The name of the stream.
+	//
+	// This member is required.
 	StreamName *string
+
 	// The number of tags to return. If this number is less than the total number of
 	// tags associated with the stream, HasMoreTags is set to true. To list additional
 	// tags, set ExclusiveStartTagKey to the last key in the response.
 	Limit *int32
+
 	// The key to use as the starting point for the list of tags. If this parameter is
 	// set, ListTagsForStream gets all tags that occur after ExclusiveStartTagKey.
 	ExclusiveStartTagKey *string
@@ -71,11 +76,17 @@ type ListTagsForStreamInput struct {
 
 // Represents the output for ListTagsForStream.
 type ListTagsForStreamOutput struct {
+
 	// If set to true, more tags are available. To request additional tags, set
 	// ExclusiveStartTagKey to the key of the last tag returned.
+	//
+	// This member is required.
 	HasMoreTags *bool
+
 	// A list of tags associated with StreamName, starting with the first tag after
 	// ExclusiveStartTagKey and up to the specified Limit.
+	//
+	// This member is required.
 	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.

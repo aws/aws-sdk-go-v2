@@ -58,11 +58,15 @@ func (c *Client) GetQueryExecution(ctx context.Context, params *GetQueryExecutio
 }
 
 type GetQueryExecutionInput struct {
+
 	// The unique ID of the query execution.
+	//
+	// This member is required.
 	QueryExecutionId *string
 }
 
 type GetQueryExecutionOutput struct {
+
 	// Information about the query execution.
 	QueryExecution *types.QueryExecution
 

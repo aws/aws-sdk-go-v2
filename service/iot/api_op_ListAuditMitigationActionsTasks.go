@@ -57,29 +57,42 @@ func (c *Client) ListAuditMitigationActionsTasks(ctx context.Context, params *Li
 }
 
 type ListAuditMitigationActionsTasksInput struct {
+
 	// Specify this filter to limit results to tasks that were applied to results for a
 	// specific audit.
 	AuditTaskId *string
+
 	// Specify this filter to limit results to tasks that are in a specific state.
 	TaskStatus types.AuditMitigationActionsTaskStatus
+
 	// The token for the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
+
 	// Specify this filter to limit results to tasks that began on or after a specific
 	// date and time.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// Specify this filter to limit results to tasks that were applied to a specific
 	// audit finding.
 	FindingId *string
+
 	// Specify this filter to limit results to tasks that were completed or canceled on
 	// or before a specific date and time.
+	//
+	// This member is required.
 	EndTime *time.Time
 }
 
 type ListAuditMitigationActionsTasksOutput struct {
+
 	// The collection of audit mitigation tasks that matched the filter criteria.
 	Tasks []*types.AuditMitigationActionsTaskMetadata
+
 	// The token for the next set of results.
 	NextToken *string
 

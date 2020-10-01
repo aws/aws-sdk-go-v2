@@ -135,12 +135,17 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 
 // Represents the input for a request action.
 type PutScalingPolicyInput struct {
+
 	// Amount of adjustment to make, based on the scaling adjustment type.
 	ScalingAdjustment *int32
+
 	// A descriptive label that is associated with a scaling policy. Policy names do
 	// not need to be unique. A fleet can have only one scaling policy with the same
 	// name.
+	//
+	// This member is required.
 	Name *string
+
 	// The type of adjustment to make to a fleet's instance count (see FleetCapacity
 	// ()):
 	//
@@ -156,22 +161,28 @@ type PutScalingPolicyInput struct {
 	// values scale up while negative values scale down; for example, a value of "-10"
 	// scales the fleet down by 10%.
 	ScalingAdjustmentType types.ScalingAdjustmentType
+
 	// Metric value used to trigger a scaling event.
 	Threshold *float64
+
 	// Comparison operator to use when measuring the metric against the threshold
 	// value.
 	ComparisonOperator types.ComparisonOperatorType
+
 	// The type of scaling policy to create. For a target-based policy, set the
 	// parameter MetricName to 'PercentAvailableGameSessions' and specify a
 	// TargetConfiguration. For a rule-based policy set the following parameters:
 	// MetricName, ComparisonOperator, Threshold, EvaluationPeriods,
 	// ScalingAdjustmentType, and ScalingAdjustment.
 	PolicyType types.PolicyType
+
 	// The settings for a target-based scaling policy.
 	TargetConfiguration *types.TargetConfiguration
+
 	// Length of time (in minutes) the metric must be at or beyond the threshold before
 	// a scaling event is triggered.
 	EvaluationPeriods *int32
+
 	// Name of the Amazon GameLift-defined metric that is used to trigger a scaling
 	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
 	// GameLift with Amazon CloudWatch
@@ -217,15 +228,21 @@ type PutScalingPolicyInput struct {
 	//     * WaitTime -- Current wait time for pending game session
 	// placement requests, in any queue, where the current fleet is the top-priority
 	// destination.
+	//
+	// This member is required.
 	MetricName types.MetricName
+
 	// A unique identifier for a fleet to apply this policy to. You can use either the
 	// fleet ID or ARN value. The fleet cannot be in any of the following statuses:
 	// ERROR or DELETING.
+	//
+	// This member is required.
 	FleetId *string
 }
 
 // Represents the returned data in response to a request action.
 type PutScalingPolicyOutput struct {
+
 	// A descriptive label that is associated with a scaling policy. Policy names do
 	// not need to be unique.
 	Name *string

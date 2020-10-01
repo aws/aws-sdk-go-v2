@@ -56,12 +56,15 @@ func (c *Client) DescribeReservedElasticsearchInstances(ctx context.Context, par
 
 // Container for parameters to DescribeReservedElasticsearchInstances
 type DescribeReservedElasticsearchInstancesInput struct {
+
 	// NextToken should be sent in case if earlier API call produced result containing
 	// NextToken. It is used for pagination.
 	NextToken *string
+
 	// The reserved instance identifier filter value. Use this parameter to show only
 	// the reservation that matches the specified reserved Elasticsearch instance ID.
 	ReservedElasticsearchInstanceId *string
+
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	MaxResults *int32
@@ -69,8 +72,10 @@ type DescribeReservedElasticsearchInstancesInput struct {
 
 // Container for results from DescribeReservedElasticsearchInstances
 type DescribeReservedElasticsearchInstancesOutput struct {
+
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string
+
 	// List of reserved Elasticsearch instances.
 	ReservedElasticsearchInstances []*types.ReservedElasticsearchInstance
 

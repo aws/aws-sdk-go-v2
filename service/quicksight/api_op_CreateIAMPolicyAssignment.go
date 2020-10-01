@@ -58,9 +58,13 @@ func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIA
 }
 
 type CreateIAMPolicyAssignmentInput struct {
+
 	// The ID of the AWS account where you want to assign an IAM policy to QuickSight
 	// users or groups.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The status of the assignment. Possible values are as follows:
 	//
 	//     * ENABLED -
@@ -72,22 +76,34 @@ type CreateIAMPolicyAssignmentInput struct {
 	//     *
 	// DRAFT - This assignment is an unfinished draft and isn't used when creating the
 	// data source.
+	//
+	// This member is required.
 	AssignmentStatus types.AssignmentStatus
+
 	// The QuickSight users, groups, or both that you want to assign the policy to.
 	Identities map[string][]*string
+
 	// The namespace that contains the assignment.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
 	// in this assignment.
 	PolicyArn *string
+
 	// The name of the assignment. It must be unique within an AWS account.
+	//
+	// This member is required.
 	AssignmentName *string
 }
 
 type CreateIAMPolicyAssignmentOutput struct {
+
 	// The ARN for the IAM policy that is applied to the QuickSight users and groups
 	// specified in this assignment.
 	PolicyArn *string
+
 	// The status of the assignment. Possible values are as follows:
 	//
 	//     * ENABLED -
@@ -100,12 +116,16 @@ type CreateIAMPolicyAssignmentOutput struct {
 	// DRAFT - This assignment is an unfinished draft and isn't used when creating the
 	// data source.
 	AssignmentStatus types.AssignmentStatus
+
 	// The name of the assignment. This name must be unique within the AWS account.
 	AssignmentName *string
+
 	// The ID for the assignment.
 	AssignmentId *string
+
 	// The QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]*string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

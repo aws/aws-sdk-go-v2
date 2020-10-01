@@ -58,6 +58,7 @@ type DescribeLoggingOptionsInput struct {
 }
 
 type DescribeLoggingOptionsOutput struct {
+
 	// The current settings of the AWS IoT Analytics logging options.
 	LoggingOptions *types.LoggingOptions
 

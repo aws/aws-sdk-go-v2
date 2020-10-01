@@ -58,18 +58,22 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 }
 
 type ListDomainsInput struct {
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 }
 
 type ListDomainsOutput struct {
+
 	// The returned list of DomainSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html)
 	// objects.
 	Domains []*types.DomainSummary
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string

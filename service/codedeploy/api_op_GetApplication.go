@@ -57,13 +57,17 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 // Represents the input of a GetApplication operation.
 type GetApplicationInput struct {
+
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 // Represents the output of a GetApplication operation.
 type GetApplicationOutput struct {
+
 	// Information about the application.
 	Application *types.ApplicationInfo
 

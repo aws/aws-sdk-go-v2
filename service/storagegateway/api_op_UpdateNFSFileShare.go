@@ -65,26 +65,33 @@ func (c *Client) UpdateNFSFileShare(ctx context.Context, params *UpdateNFSFileSh
 
 // UpdateNFSFileShareInput
 type UpdateNFSFileShareInput struct {
+
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL
+
 	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
 	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
 	FileShareName *string
+
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
 	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	GuessMIMETypeEnabled *bool
+
 	// The list of clients that are allowed to access the file gateway. The list must
 	// contain either valid IP addresses or valid CIDR blocks.
 	ClientList []*string
+
 	// The default values for the file share. Optional.
 	NFSFileShareDefaults *types.NFSFileShareDefaults
+
 	// A value that sets the write status of a file share. Set this value to true to
 	// set the write status to read-only, otherwise set to false.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	ReadOnly *bool
+
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
@@ -94,24 +101,32 @@ type UpdateNFSFileShareInput struct {
 	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
 	// <code>false</code> </p>
 	RequesterPays *bool
+
 	// Refresh cache information.
 	CacheAttributes *types.CacheAttributes
+
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
+
 	// The Amazon Resource Name (ARN) of the file share to be updated.
+	//
+	// This member is required.
 	FileShareARN *string
+
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
 	// <code>true</code> | <code>false</code> </p>
 	KMSEncrypted *bool
+
 	// The user mapped to anonymous user.  <p>Valid values are the following:</p> <ul>
 	// <li> <p> <code>RootSquash</code>: Only root is mapped to anonymous user.</p>
 	// </li> <li> <p> <code>NoSquash</code>: No one is mapped to anonymous user.</p>
 	// </li> <li> <p> <code>AllSquash</code>: Everyone is mapped to anonymous user.</p>
 	// </li> </ul>
 	Squash *string
+
 	// The default storage class for objects put into an Amazon S3 bucket by the file
 	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
 	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
@@ -121,6 +136,7 @@ type UpdateNFSFileShareInput struct {
 
 // UpdateNFSFileShareOutput
 type UpdateNFSFileShareOutput struct {
+
 	// The Amazon Resource Name (ARN) of the updated file share.
 	FileShareARN *string
 

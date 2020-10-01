@@ -64,13 +64,16 @@ func (c *Client) CreateBGPPeer(ctx context.Context, params *CreateBGPPeerInput, 
 }
 
 type CreateBGPPeerInput struct {
+
 	// Information about the BGP peer.
 	NewBGPPeer *types.NewBGPPeer
+
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
 }
 
 type CreateBGPPeerOutput struct {
+
 	// The virtual interface.
 	VirtualInterface *types.VirtualInterface
 

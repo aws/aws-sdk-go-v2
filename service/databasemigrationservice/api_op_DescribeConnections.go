@@ -59,13 +59,16 @@ func (c *Client) DescribeConnections(ctx context.Context, params *DescribeConnec
 
 //
 type DescribeConnectionsInput struct {
+
 	// The filters applied to the connection. Valid filter names: endpoint-arn |
 	// replication-instance-arn
 	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
@@ -75,8 +78,10 @@ type DescribeConnectionsInput struct {
 
 //
 type DescribeConnectionsOutput struct {
+
 	// A description of the connections.
 	Connections []*types.Connection
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.

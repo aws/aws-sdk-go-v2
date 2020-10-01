@@ -59,11 +59,15 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 }
 
 type DeleteClusterInput struct {
+
 	// The name of the cluster to be deleted.
+	//
+	// This member is required.
 	ClusterName *string
 }
 
 type DeleteClusterOutput struct {
+
 	// A description of the DAX cluster that is being deleted.
 	Cluster *types.Cluster
 

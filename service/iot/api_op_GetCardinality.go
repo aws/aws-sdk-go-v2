@@ -55,17 +55,24 @@ func (c *Client) GetCardinality(ctx context.Context, params *GetCardinalityInput
 }
 
 type GetCardinalityInput struct {
+
 	// The query version.
 	QueryVersion *string
+
 	// The search query.
+	//
+	// This member is required.
 	QueryString *string
+
 	// The field to aggregate.
 	AggregationField *string
+
 	// The name of the index to search.
 	IndexName *string
 }
 
 type GetCardinalityOutput struct {
+
 	// The approximate count of unique values that match the query.
 	Cardinality *int32
 

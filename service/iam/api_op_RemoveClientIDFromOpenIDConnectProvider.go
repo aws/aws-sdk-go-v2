@@ -58,16 +58,22 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProvider(ctx context.Context, pa
 }
 
 type RemoveClientIDFromOpenIDConnectProviderInput struct {
+
 	// The client ID (also known as audience) to remove from the IAM OIDC provider
 	// resource. For more information about client IDs, see CreateOpenIDConnectProvider
 	// ().
+	//
+	// This member is required.
 	ClientID *string
+
 	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource to remove the
 	// client ID from. You can get a list of OIDC provider ARNs by using the
 	// ListOpenIDConnectProviders () operation. For more information about ARNs, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	OpenIDConnectProviderArn *string
 }
 

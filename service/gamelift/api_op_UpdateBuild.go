@@ -73,12 +73,17 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 
 // Represents the input for a request action.
 type UpdateBuildInput struct {
+
 	// A unique identifier for a build to update. You can use either the build ID or
 	// ARN value.
+	//
+	// This member is required.
 	BuildId *string
+
 	// Version information that is associated with a build or script. Version strings
 	// do not need to be unique.
 	Version *string
+
 	// A descriptive label that is associated with a build. Build names do not need to
 	// be unique.
 	Name *string
@@ -86,6 +91,7 @@ type UpdateBuildInput struct {
 
 // Represents the returned data in response to a request action.
 type UpdateBuildOutput struct {
+
 	// The updated build resource.
 	Build *types.Build
 

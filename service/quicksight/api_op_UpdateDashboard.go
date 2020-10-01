@@ -56,6 +56,7 @@ func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInp
 }
 
 type UpdateDashboardInput struct {
+
 	// The entity that you are using as a source when you update the dashboard. In
 	// SourceEntity, you specify the type of object you're using as source. You can
 	// only update a dashboard from a template, so you use a SourceTemplate entity. If
@@ -66,7 +67,10 @@ type UpdateDashboardInput struct {
 	// Region. Use the DataSetReferences entity within SourceTemplate to list the
 	// replacement datasets for the placeholders listed in the original. The schema in
 	// each dataset must match its placeholder.
+	//
+	// This member is required.
 	SourceEntity *types.DashboardSourceEntity
+
 	// Options for publishing the dashboard when you create it:
 	//
 	//     *
@@ -84,36 +88,54 @@ type UpdateDashboardInput struct {
 	// SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED.
 	// This option is COLLAPSED by default.
 	DashboardPublishOptions *types.DashboardPublishOptions
+
 	// The Amazon Resource Name (ARN) of the theme that is being used for this
 	// dashboard. If you add a value for this field, it overrides the value that was
 	// originally associated with the entity. The theme ARN must exist in the same AWS
 	// account where you create the dashboard.
 	ThemeArn *string
+
 	// A structure that contains the parameters of the dashboard. These are parameter
 	// overrides for a dashboard. A dashboard can have any type of parameters, and some
 	// parameters might accept multiple values.
 	Parameters *types.Parameters
+
 	// The ID for the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// A description for the first version of the dashboard being created.
 	VersionDescription *string
+
 	// The ID of the AWS account that contains the dashboard that you're updating.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The display name of the dashboard.
+	//
+	// This member is required.
 	Name *string
 }
 
 type UpdateDashboardOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string
+
 	// The ARN of the dashboard, including the version number.
 	VersionArn *string
+
 	// The HTTP status of the request.
 	Status *int32
+
 	// The ID for the dashboard.
 	DashboardId *string
+
 	// The creation status of the request.
 	CreationStatus types.ResourceStatus
 

@@ -56,14 +56,19 @@ func (c *Client) ModifyCluster(ctx context.Context, params *ModifyClusterInput, 
 }
 
 type ModifyClusterInput struct {
+
 	// The unique identifier of the cluster.
+	//
+	// This member is required.
 	ClusterId *string
+
 	// The number of steps that can be executed concurrently. You can specify a maximum
 	// of 256 steps.
 	StepConcurrencyLevel *int32
 }
 
 type ModifyClusterOutput struct {
+
 	// The number of steps that can be executed concurrently.
 	StepConcurrencyLevel *int32
 

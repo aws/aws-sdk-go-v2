@@ -59,11 +59,15 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 }
 
 type DeleteBackupInput struct {
+
 	// The ARN associated with the backup.
+	//
+	// This member is required.
 	BackupArn *string
 }
 
 type DeleteBackupOutput struct {
+
 	// Contains the description of the backup created for the table.
 	BackupDescription *types.BackupDescription
 

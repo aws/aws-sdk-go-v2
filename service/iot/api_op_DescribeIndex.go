@@ -56,15 +56,21 @@ func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, 
 }
 
 type DescribeIndexInput struct {
+
 	// The index name.
+	//
+	// This member is required.
 	IndexName *string
 }
 
 type DescribeIndexOutput struct {
+
 	// The index status.
 	IndexStatus types.IndexStatus
+
 	// The index name.
 	IndexName *string
+
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:
 	//

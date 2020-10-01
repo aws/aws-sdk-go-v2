@@ -61,7 +61,10 @@ func (c *Client) DisassociateKmsKey(ctx context.Context, params *DisassociateKms
 }
 
 type DisassociateKmsKeyInput struct {
+
 	// The name of the log group.
+	//
+	// This member is required.
 	LogGroupName *string
 }
 

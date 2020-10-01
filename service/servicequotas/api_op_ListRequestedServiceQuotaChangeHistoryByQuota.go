@@ -59,12 +59,20 @@ func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuota(ctx context.Conte
 }
 
 type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
+
 	// Specifies the service that you want to use.
+	//
+	// This member is required.
 	ServiceCode *string
+
 	// Specifies the status value of the quota increase request.
 	Status types.RequestStatus
+
 	// Specifies the service quota that you want to use
+	//
+	// This member is required.
 	QuotaCode *string
+
 	// (Optional) Limits the number of results that you want to include in the
 	// response. If you don't include this parameter, the response defaults to a value
 	// that's specific to the operation. If additional items exist beyond the specified
@@ -73,6 +81,7 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
 	// get the next part of the results. You should check NextToken after every
 	// operation to ensure that you receive all of the results.
 	MaxResults *int32
+
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request that indicates that there's more output available. In a
 	// subsequent call, set it to the value of the previous call's NextToken response
@@ -81,6 +90,7 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
 }
 
 type ListRequestedServiceQuotaChangeHistoryByQuotaOutput struct {
+
 	// If present in the response, this value indicates there's more output available
 	// that what's included in the current response. This can occur even when the
 	// response includes no values at all, such as when you ask for a filtered view of
@@ -89,6 +99,7 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaOutput struct {
 	// the output. You should repeat this until the NextToken response element comes
 	// back empty (as null).
 	NextToken *string
+
 	// Returns a list of service quota requests.
 	RequestedQuotas []*types.RequestedServiceQuotaChange
 

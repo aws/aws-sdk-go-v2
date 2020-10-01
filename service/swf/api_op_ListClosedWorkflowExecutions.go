@@ -89,46 +89,58 @@ func (c *Client) ListClosedWorkflowExecutions(ctx context.Context, params *ListC
 }
 
 type ListClosedWorkflowExecutionsInput struct {
+
 	// If specified, only executions of the type specified in the filter are returned.
 	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	TypeFilter *types.WorkflowTypeFilter
+
 	// If specified, the workflow executions are included in the returned results based
 	// on whether their close times are within the range specified by this filter.
 	// Also, if this parameter is specified, the returned results are ordered by their
 	// close times. startTimeFilter and closeTimeFilter are mutually exclusive. You
 	// must specify one of these in a request but not both.
 	CloseTimeFilter *types.ExecutionTimeFilter
+
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
 	MaximumPageSize *int32
+
 	// If specified, only executions that have the matching tag are listed.
 	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	TagFilter *types.TagFilter
+
 	// If specified, only workflow executions that match this close status are listed.
 	// For example, if TERMINATED is specified, then only TERMINATED workflow
 	// executions are listed. closeStatusFilter, executionFilter, typeFilter and
 	// tagFilter are mutually exclusive. You can specify at most one of these in a
 	// request.
 	CloseStatusFilter *types.CloseStatusFilter
+
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in descending order of the start or the close time of the
 	// executions.
 	ReverseOrder *bool
+
 	// If specified, the workflow executions are included in the returned results based
 	// on whether their start times are within the range specified by this filter.
 	// Also, if this parameter is specified, the returned results are ordered by their
 	// start times. startTimeFilter and closeTimeFilter are mutually exclusive. You
 	// must specify one of these in a request but not both.
 	StartTimeFilter *types.ExecutionTimeFilter
+
 	// If specified, only workflow executions matching the workflow ID specified in the
 	// filter are returned. closeStatusFilter, executionFilter, typeFilter and
 	// tagFilter are mutually exclusive. You can specify at most one of these in a
 	// request.
 	ExecutionFilter *types.WorkflowExecutionFilter
+
 	// The name of the domain that contains the workflow executions to list.
+	//
+	// This member is required.
 	Domain *string
+
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
 	// using the returned token to retrieve the next page. Keep all other arguments
@@ -141,8 +153,12 @@ type ListClosedWorkflowExecutionsInput struct {
 
 // Contains a paginated list of information about workflow executions.
 type ListClosedWorkflowExecutionsOutput struct {
+
 	// The list of workflow information structures.
+	//
+	// This member is required.
 	ExecutionInfos []*types.WorkflowExecutionInfo
+
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in nextPageToken. Keep all other arguments unchanged. The

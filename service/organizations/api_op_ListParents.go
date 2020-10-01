@@ -65,11 +65,13 @@ func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optF
 }
 
 type ListParentsInput struct {
+
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
 	// The unique identifier (ID) of the OU or account whose parent containers you want
 	// to list. Don't specify a root. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a child ID string requires one of the
@@ -82,7 +84,10 @@ type ListParentsInput struct {
 	// 32 lowercase letters or digits (the ID of the root that contains the OU). This
 	// string is followed by a second "-" dash and from 8 to 32 additional lowercase
 	// letters or digits.
+	//
+	// This member is required.
 	ChildId *string
+
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -96,8 +101,10 @@ type ListParentsInput struct {
 }
 
 type ListParentsOutput struct {
+
 	// A list of parents for the specified child account or OU.
 	Parents []*types.Parent
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should

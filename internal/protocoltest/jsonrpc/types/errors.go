@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // This error is thrown when a request is invalid.
@@ -27,18 +26,6 @@ func (e *ComplexError) ErrorMessage() string {
 }
 func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ComplexError) GetTopLevel() string {
-	return ptr.ToString(e.TopLevel)
-}
-func (e *ComplexError) HasTopLevel() bool {
-	return e.TopLevel != nil
-}
-func (e *ComplexError) GetNested() *ComplexNestedErrorData {
-	return e.Nested
-}
-func (e *ComplexError) HasNested() bool {
-	return e.Nested != nil
-}
 
 type ErrorWithMembers struct {
 	Message *string
@@ -62,48 +49,6 @@ func (e *ErrorWithMembers) ErrorMessage() string {
 }
 func (e *ErrorWithMembers) ErrorCode() string             { return "ErrorWithMembers" }
 func (e *ErrorWithMembers) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ErrorWithMembers) GetCode() string {
-	return ptr.ToString(e.Code)
-}
-func (e *ErrorWithMembers) HasCode() bool {
-	return e.Code != nil
-}
-func (e *ErrorWithMembers) GetComplexData() *KitchenSink {
-	return e.ComplexData
-}
-func (e *ErrorWithMembers) HasComplexData() bool {
-	return e.ComplexData != nil
-}
-func (e *ErrorWithMembers) GetIntegerField() int32 {
-	return ptr.ToInt32(e.IntegerField)
-}
-func (e *ErrorWithMembers) HasIntegerField() bool {
-	return e.IntegerField != nil
-}
-func (e *ErrorWithMembers) GetListField() []*string {
-	return e.ListField
-}
-func (e *ErrorWithMembers) HasListField() bool {
-	return e.ListField != nil
-}
-func (e *ErrorWithMembers) GetMapField() map[string]*string {
-	return e.MapField
-}
-func (e *ErrorWithMembers) HasMapField() bool {
-	return e.MapField != nil
-}
-func (e *ErrorWithMembers) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ErrorWithMembers) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ErrorWithMembers) GetStringField() string {
-	return ptr.ToString(e.StringField)
-}
-func (e *ErrorWithMembers) HasStringField() bool {
-	return e.StringField != nil
-}
 
 type ErrorWithoutMembers struct {
 	Message *string
@@ -155,9 +100,3 @@ func (e *InvalidGreeting) ErrorMessage() string {
 }
 func (e *InvalidGreeting) ErrorCode() string             { return "InvalidGreeting" }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidGreeting) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidGreeting) HasMessage() bool {
-	return e.Message != nil
-}

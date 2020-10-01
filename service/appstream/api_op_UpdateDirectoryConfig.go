@@ -58,16 +58,22 @@ func (c *Client) UpdateDirectoryConfig(ctx context.Context, params *UpdateDirect
 }
 
 type UpdateDirectoryConfigInput struct {
+
 	// The distinguished names of the organizational units for computer accounts.
 	OrganizationalUnitDistinguishedNames []*string
+
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
 	ServiceAccountCredentials *types.ServiceAccountCredentials
+
 	// The name of the Directory Config object.
+	//
+	// This member is required.
 	DirectoryName *string
 }
 
 type UpdateDirectoryConfigOutput struct {
+
 	// Information about the Directory Config object.
 	DirectoryConfig *types.DirectoryConfig
 

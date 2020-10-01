@@ -57,15 +57,24 @@ func (c *Client) Unsubscribe(ctx context.Context, params *UnsubscribeInput, optF
 }
 
 type UnsubscribeInput struct {
+
 	// The Amazon Resource Name (ARN) of the notification rule.
+	//
+	// This member is required.
 	Arn *string
+
 	// The ARN of the SNS topic to unsubscribe from the notification rule.
+	//
+	// This member is required.
 	TargetAddress *string
 }
 
 type UnsubscribeOutput struct {
+
 	// The Amazon Resource Name (ARN) of the the notification rule from which you have
 	// removed a subscription.
+	//
+	// This member is required.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

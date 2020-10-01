@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // A resource to be created or added already exists.
@@ -24,12 +23,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
@@ -49,12 +42,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified entity does not exist
 type EntityNotFoundException struct {
@@ -72,12 +59,6 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 }
 func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal service error occurred.
 type InternalServiceException struct {
@@ -95,12 +76,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 }
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input provided was not valid.
 type InvalidInputException struct {
@@ -118,12 +93,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation timed out.
 type OperationTimeoutException struct {
@@ -141,9 +110,3 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 }
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationTimeoutException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationTimeoutException) HasMessage() bool {
-	return e.Message != nil
-}

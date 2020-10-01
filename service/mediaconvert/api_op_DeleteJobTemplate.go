@@ -55,7 +55,10 @@ func (c *Client) DeleteJobTemplate(ctx context.Context, params *DeleteJobTemplat
 }
 
 type DeleteJobTemplateInput struct {
+
 	// The name of the job template to be deleted.
+	//
+	// This member is required.
 	Name *string
 }
 

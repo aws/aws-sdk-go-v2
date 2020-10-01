@@ -59,28 +59,44 @@ func (c *Client) CreateScheduledAction(ctx context.Context, params *CreateSchedu
 }
 
 type CreateScheduledActionInput struct {
+
 	// If true, the schedule is enabled. If false, the scheduled action does not
 	// trigger. For more information about state of the scheduled action, see
 	// ScheduledAction ().
 	Enable *bool
+
 	// A JSON format string of the Amazon Redshift API operation with input parameters.
 	// For more information about this parameter, see ScheduledAction ().
+	//
+	// This member is required.
 	TargetAction *types.ScheduledActionType
+
 	// The IAM role to assume to run the target action. For more information about this
 	// parameter, see ScheduledAction ().
+	//
+	// This member is required.
 	IamRole *string
+
 	// The description of the scheduled action.
 	ScheduledActionDescription *string
+
 	// The name of the scheduled action. The name must be unique within an account. For
 	// more information about this parameter, see ScheduledAction ().
+	//
+	// This member is required.
 	ScheduledActionName *string
+
 	// The end time in UTC of the scheduled action. After this time, the scheduled
 	// action does not trigger. For more information about this parameter, see
 	// ScheduledAction ().
 	EndTime *time.Time
+
 	// The schedule in at( ) or cron( ) format. For more information about this
 	// parameter, see ScheduledAction ().
+	//
+	// This member is required.
 	Schedule *string
+
 	// The start time in UTC of the scheduled action. Before this time, the scheduled
 	// action does not trigger. For more information about this parameter, see
 	// ScheduledAction ().
@@ -91,12 +107,16 @@ type CreateScheduledActionInput struct {
 // Amazon Redshift API operations on a schedule. For information about which API
 // operations can be scheduled, see ScheduledActionType ().
 type CreateScheduledActionOutput struct {
+
 	// List of times when the scheduled action will run.
 	NextInvocations []*time.Time
+
 	// The description of the scheduled action.
 	ScheduledActionDescription *string
+
 	// The name of the scheduled action.
 	ScheduledActionName *string
+
 	// The IAM role to assume to run the scheduled action. This IAM role must have
 	// permission to run the Amazon Redshift API operation in the scheduled action.
 	// This IAM role must allow the Amazon Redshift scheduler (Principal
@@ -106,14 +126,18 @@ type CreateScheduledActionOutput struct {
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	IamRole *string
+
 	// A JSON format string of the Amazon Redshift API operation with input parameters.
 	// "{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}".
 	TargetAction *types.ScheduledActionType
+
 	// The end time in UTC when the schedule is no longer active. After this time, the
 	// scheduled action does not trigger.
 	EndTime *time.Time
+
 	// The state of the scheduled action. For example, DISABLED.
 	State types.ScheduledActionState
+
 	// The schedule for a one-time (at format) or recurring (cron format) scheduled
 	// action. Schedule invocations must be separated by at least one hour. Format of
 	// at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example,
@@ -123,6 +147,7 @@ type CreateScheduledActionOutput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch Events User Guide.
 	Schedule *string
+
 	// The start time in UTC when the schedule is active. Before this time, the
 	// scheduled action does not trigger.
 	StartTime *time.Time

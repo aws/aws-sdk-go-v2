@@ -56,7 +56,10 @@ func (c *Client) DeleteDomainConfiguration(ctx context.Context, params *DeleteDo
 }
 
 type DeleteDomainConfigurationInput struct {
+
 	// The name of the domain configuration to be deleted.
+	//
+	// This member is required.
 	DomainConfigurationName *string
 }
 

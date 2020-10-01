@@ -64,13 +64,18 @@ func (c *Client) PurchaseReservedNodeOffering(ctx context.Context, params *Purch
 
 //
 type PurchaseReservedNodeOfferingInput struct {
+
 	// The unique identifier of the reserved node offering you want to purchase.
+	//
+	// This member is required.
 	ReservedNodeOfferingId *string
+
 	// The number of reserved nodes that you want to purchase. Default: 1
 	NodeCount *int32
 }
 
 type PurchaseReservedNodeOfferingOutput struct {
+
 	// Describes a reserved node. You can call the DescribeReservedNodeOfferings () API
 	// to obtain the available reserved node offerings.
 	ReservedNode *types.ReservedNode

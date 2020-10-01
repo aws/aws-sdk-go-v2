@@ -56,8 +56,12 @@ func (c *Client) DeleteTrafficMirrorTarget(ctx context.Context, params *DeleteTr
 }
 
 type DeleteTrafficMirrorTargetInput struct {
+
 	// The ID of the Traffic Mirror target.
+	//
+	// This member is required.
 	TrafficMirrorTargetId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -66,6 +70,7 @@ type DeleteTrafficMirrorTargetInput struct {
 }
 
 type DeleteTrafficMirrorTargetOutput struct {
+
 	// The ID of the deleted Traffic Mirror target.
 	TrafficMirrorTargetId *string
 

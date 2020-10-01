@@ -61,7 +61,10 @@ func (c *Client) DeregisterInstance(ctx context.Context, params *DeregisterInsta
 }
 
 type DeregisterInstanceInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
 }
 

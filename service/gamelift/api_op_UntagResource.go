@@ -90,16 +90,22 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
 	// assigned to and uniquely identifies the GameLift resource that you want to
 	// remove tags from. GameLift resource ARNs are included in the data object for the
 	// resource, which can be retrieved by calling a List or Describe action for the
 	// resource type.
+	//
+	// This member is required.
 	ResourceARN *string
+
 	// A list of one or more tag keys to remove from the specified GameLift resource.
 	// An AWS resource can have only one tag with a specific tag key, so specifying the
 	// tag key identifies which tag to remove.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

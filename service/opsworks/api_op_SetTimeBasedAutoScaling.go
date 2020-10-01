@@ -63,8 +63,12 @@ func (c *Client) SetTimeBasedAutoScaling(ctx context.Context, params *SetTimeBas
 }
 
 type SetTimeBasedAutoScalingInput struct {
+
 	// The instance ID.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// An AutoScalingSchedule with the instance schedule.
 	AutoScalingSchedule *types.WeeklyAutoScalingSchedule
 }

@@ -57,14 +57,19 @@ func (c *Client) GetFlowTemplate(ctx context.Context, params *GetFlowTemplateInp
 }
 
 type GetFlowTemplateInput struct {
+
 	// The ID of the workflow. The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
+	//
+	// This member is required.
 	Id *string
+
 	// The number of the workflow revision to retrieve.
 	RevisionNumber *int64
 }
 
 type GetFlowTemplateOutput struct {
+
 	// The object that describes the specified workflow.
 	Description *types.FlowTemplateDescription
 

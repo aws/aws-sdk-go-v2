@@ -63,7 +63,10 @@ func (c *Client) DeleteDatasetGroup(ctx context.Context, params *DeleteDatasetGr
 }
 
 type DeleteDatasetGroupInput struct {
+
 	// The ARN of the dataset group to delete.
+	//
+	// This member is required.
 	DatasetGroupArn *string
 }
 

@@ -60,16 +60,22 @@ func (c *Client) GetInstanceProfile(ctx context.Context, params *GetInstanceProf
 }
 
 type GetInstanceProfileInput struct {
+
 	// The name of the instance profile to get information about. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
 	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	InstanceProfileName *string
 }
 
 // Contains the response to a successful GetInstanceProfile () request.
 type GetInstanceProfileOutput struct {
+
 	// A structure containing details about the instance profile.
+	//
+	// This member is required.
 	InstanceProfile *types.InstanceProfile
 
 	// Metadata pertaining to the operation's result.

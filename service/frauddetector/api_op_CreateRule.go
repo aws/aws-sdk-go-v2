@@ -56,23 +56,41 @@ func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns
 }
 
 type CreateRuleInput struct {
+
 	// The language of the rule.
+	//
+	// This member is required.
 	Language types.Language
+
 	// The rule description.
 	Description *string
+
 	// A collection of key and value pairs.
 	Tags []*types.Tag
+
 	// The outcome or outcomes returned when the rule expression matches.
+	//
+	// This member is required.
 	Outcomes []*string
+
 	// The detector ID for the rule's parent detector.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The rule ID.
+	//
+	// This member is required.
 	RuleId *string
+
 	// The rule expression.
+	//
+	// This member is required.
 	Expression *string
 }
 
 type CreateRuleOutput struct {
+
 	// The created rule.
 	Rule *types.Rule
 

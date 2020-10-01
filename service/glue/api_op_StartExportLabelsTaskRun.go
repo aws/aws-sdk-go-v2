@@ -63,13 +63,20 @@ func (c *Client) StartExportLabelsTaskRun(ctx context.Context, params *StartExpo
 }
 
 type StartExportLabelsTaskRunInput struct {
+
 	// The Amazon S3 path where you export the labels.
+	//
+	// This member is required.
 	OutputS3Path *string
+
 	// The unique identifier of the machine learning transform.
+	//
+	// This member is required.
 	TransformId *string
 }
 
 type StartExportLabelsTaskRunOutput struct {
+
 	// The unique identifier for the task run.
 	TaskRunId *string
 

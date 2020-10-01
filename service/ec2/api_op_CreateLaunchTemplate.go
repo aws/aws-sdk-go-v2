@@ -61,29 +61,41 @@ func (c *Client) CreateLaunchTemplate(ctx context.Context, params *CreateLaunchT
 }
 
 type CreateLaunchTemplateInput struct {
+
 	// The tags to apply to the launch template during creation.
 	TagSpecifications []*types.TagSpecification
+
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	// Constraint: Maximum 128 ASCII characters.
 	ClientToken *string
+
 	// A name for the launch template.
+	//
+	// This member is required.
 	LaunchTemplateName *string
+
 	// The information for the launch template.
+	//
+	// This member is required.
 	LaunchTemplateData *types.RequestLaunchTemplateData
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// A description for the first version of the launch template.
 	VersionDescription *string
 }
 
 type CreateLaunchTemplateOutput struct {
+
 	// Information about the launch template.
 	LaunchTemplate *types.LaunchTemplate
+
 	// If the launch template contains parameters or parameter combinations that are
 	// not valid, an error code and an error message are returned for each issue that's
 	// found.

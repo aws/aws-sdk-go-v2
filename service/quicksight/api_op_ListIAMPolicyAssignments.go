@@ -56,23 +56,35 @@ func (c *Client) ListIAMPolicyAssignments(ctx context.Context, params *ListIAMPo
 }
 
 type ListIAMPolicyAssignmentsInput struct {
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The status of the assignments.
 	AssignmentStatus types.AssignmentStatus
+
 	// The ID of the AWS account that contains these IAM policy assignments.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The namespace for the assignments.
+	//
+	// This member is required.
 	Namespace *string
 }
 
 type ListIAMPolicyAssignmentsOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// Information describing the IAM policy assignments.
 	IAMPolicyAssignments []*types.IAMPolicyAssignmentSummary
 

@@ -57,14 +57,20 @@ func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitati
 }
 
 type DeclineInvitationsInput struct {
+
 	// A list of account IDs of the AWS accounts that sent invitations to the current
 	// member account that you want to decline invitations from.
+	//
+	// This member is required.
 	AccountIds []*string
 }
 
 type DeclineInvitationsOutput struct {
+
 	// A list of objects that contain the unprocessed account and a result string that
 	// explains why it was unprocessed.
+	//
+	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.

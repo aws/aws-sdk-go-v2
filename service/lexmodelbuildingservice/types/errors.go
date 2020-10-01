@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The request is not well formed. For example, a value is invalid or a required
@@ -25,12 +24,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There was a conflict processing the request. Try your request again.
 type ConflictException struct {
@@ -48,12 +41,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An internal Amazon Lex error occurred. Try your request again.
 type InternalFailureException struct {
@@ -71,12 +58,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request exceeded a limit. Try your request again.
 type LimitExceededException struct {
@@ -96,18 +77,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetRetryAfterSeconds() string {
-	return ptr.ToString(e.RetryAfterSeconds)
-}
-func (e *LimitExceededException) HasRetryAfterSeconds() bool {
-	return e.RetryAfterSeconds != nil
-}
 
 // The resource specified in the request was not found. Check the resource and try
 // again.
@@ -126,12 +95,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The checksum of the resource that you are trying to change does not match the
 // checksum in the request. Check the resource's checksum and try again.
@@ -150,12 +113,6 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 }
 func (e *PreconditionFailedException) ErrorCode() string             { return "PreconditionFailedException" }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PreconditionFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PreconditionFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource that you are attempting to delete is referred to by another
 // resource. Use this information to remove references to the resource that you are
@@ -183,12 +140,3 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetReferenceType() ReferenceType {
-	return e.ReferenceType
-}
-func (e *ResourceInUseException) GetExampleReference() *ResourceReference {
-	return e.ExampleReference
-}
-func (e *ResourceInUseException) HasExampleReference() bool {
-	return e.ExampleReference != nil
-}

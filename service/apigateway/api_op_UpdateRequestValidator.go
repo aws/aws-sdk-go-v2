@@ -58,14 +58,24 @@ func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateReque
 
 // Updates a RequestValidator () of a given RestApi ().
 type UpdateRequestValidatorInput struct {
-	Name             *string
+	Name *string
+
 	TemplateSkipList []*string
+
 	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
 	RestApiId *string
-	Title     *string
+
+	Title *string
+
 	// [Required] The identifier of RequestValidator () to be updated.
+	//
+	// This member is required.
 	RequestValidatorId *string
-	Template           *bool
+
+	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -80,14 +90,18 @@ type UpdateRequestValidatorInput struct {
 // property. Enable Basic Request Validation in API Gateway
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
 type UpdateRequestValidatorOutput struct {
+
 	// The identifier of this RequestValidator ().
 	Id *string
+
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model () schema.
 	ValidateRequestBody *bool
+
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters *bool
+
 	// The name of this RequestValidator ()
 	Name *string
 

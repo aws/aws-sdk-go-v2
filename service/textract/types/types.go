@@ -15,14 +15,18 @@ package types
 // more responses. For more information, see How Amazon Textract Works
 // (https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html).
 type Block struct {
+
 	// The word or line of text that's recognized by Amazon Textract.
 	Text *string
+
 	// The row in which a table cell is located. The first row position is 1. RowIndex
 	// isn't returned by DetectDocumentText and GetDocumentTextDetection.
 	RowIndex *int32
+
 	// The confidence score that Amazon Textract has in the accuracy of the recognized
 	// text and the accuracy of the geometry points around the recognized text.
 	Confidence *float32
+
 	// The type of entity. The following can be returned:
 	//
 	//     * KEY - An identifier
@@ -33,12 +37,15 @@ type Block struct {
 	// EntityTypes isn't
 	// returned by DetectDocumentText and GetDocumentTextDetection.
 	EntityTypes []EntityType
+
 	// The column in which a table cell appears. The first column position is 1.
 	// ColumnIndex isn't returned by DetectDocumentText and GetDocumentTextDetection.
 	ColumnIndex *int32
+
 	// The selection status of a selection element, such as an option button or check
 	// box.
 	SelectionStatus SelectionStatus
+
 	// A list of child blocks of the current block. For example, a LINE object has
 	// child blocks for each WORD block that's part of the line of text. There aren't
 	// Relationship objects in the list for relationships that don't exist, such as
@@ -50,14 +57,17 @@ type Block struct {
 	//     * 1 - The block has
 	// child blocks.
 	Relationships []*Relationship
+
 	// The number of columns that a table cell spans. Currently this value is always 1,
 	// even if the number of columns spanned is greater than 1. ColumnSpan isn't
 	// returned by DetectDocumentText and GetDocumentTextDetection.
 	ColumnSpan *int32
+
 	// The location of the recognized text on the image. It includes an axis-aligned,
 	// coarse bounding box that surrounds the text, and a finer-grain polygon for more
 	// accurate spatial information.
 	Geometry *Geometry
+
 	// The page on which a block was detected. Page is returned by asynchronous
 	// operations. Page values greater than 1 are only returned for multipage documents
 	// that are in PDF format. A scanned image (JPEG/PNG), even if it contains multiple
@@ -65,10 +75,12 @@ type Block struct {
 	// always 1. Synchronous operations don't return Page because every input document
 	// is considered to be a single-page document.
 	Page *int32
+
 	// The number of rows that a table cell spans. Currently this value is always 1,
 	// even if the number of rows spanned is greater than 1. RowSpan isn't returned by
 	// DetectDocumentText and GetDocumentTextDetection.
 	RowSpan *int32
+
 	// The type of text item that's recognized. In operations for text detection, the
 	// following types are returned:
 	//
@@ -113,6 +125,7 @@ type Block struct {
 	// document page. Use the value of SelectionStatus to determine the status of the
 	// selection element.
 	BlockType BlockType
+
 	// The identifier for the recognized text. The identifier is only unique for a
 	// single operation.
 	Id *string
@@ -130,14 +143,18 @@ type Block struct {
 // page dimension. For example, if the document page size is 700 x 200 pixels, and
 // the bounding box width is 70 pixels, the width returned is 0.1.
 type BoundingBox struct {
+
 	// The top coordinate of the bounding box as a ratio of overall document page
 	// height.
 	Top *float32
+
 	// The left coordinate of the bounding box as a ratio of overall document page
 	// width.
 	Left *float32
+
 	// The width of the bounding box as a ratio of the overall document page width.
 	Width *float32
+
 	// The height of the bounding box as a ratio of the overall document page height.
 	Height *float32
 }
@@ -157,9 +174,11 @@ type BoundingBox struct {
 // operation using the S3Object property.  <p>For Amazon Textract to process an S3
 // object, the user must have permission to access the S3 object. </p>
 type Document struct {
+
 	// Identifies an S3 object as the document source. The maximum size of a document
 	// that's stored in an S3 bucket is 5 MB.
 	S3Object *S3Object
+
 	// A blob of base64-encoded document bytes. The maximum size of a document that's
 	// provided in a blob of bytes is 5 MB. The document bytes must be in PNG or JPEG
 	// format. If you're using an AWS SDK to call Amazon Textract, you might not need
@@ -172,12 +191,14 @@ type Document struct {
 // document can be an image file in JPEG or PNG format. It can also be a file in
 // PDF format.
 type DocumentLocation struct {
+
 	// The Amazon S3 bucket that contains the input document.
 	S3Object *S3Object
 }
 
 // Information about the input document.
 type DocumentMetadata struct {
+
 	// The number of pages that are detected in the document.
 	Pages *int32
 }
@@ -186,8 +207,10 @@ type DocumentMetadata struct {
 // detected page, text, key-value pairs, tables, table cells, and selection
 // elements.
 type Geometry struct {
+
 	// Within the bounding box, a fine-grained polygon around the recognized item.
 	Polygon []*Point
+
 	// An axis-aligned coarse representation of the location of the recognized item on
 	// the document page.
 	BoundingBox *BoundingBox
@@ -196,12 +219,15 @@ type Geometry struct {
 // Shows the results of the human in the loop evaluation. If there is no
 // HumanLoopArn, the input did not trigger human review.
 type HumanLoopActivationOutput struct {
+
 	// Shows the result of condition evaluations, including those conditions which
 	// activated a human review.
 	// This value conforms to the media type: application/json
 	HumanLoopActivationConditionsEvaluationResults *string
+
 	// Shows if and why human review was needed.
 	HumanLoopActivationReasons []*string
+
 	// The Amazon Resource Name (ARN) of the HumanLoop created.
 	HumanLoopArn *string
 }
@@ -210,18 +236,26 @@ type HumanLoopActivationOutput struct {
 // conditions is met. You can also set certain attributes of the image before
 // review.
 type HumanLoopConfig struct {
+
 	// Sets attributes of the input data.
 	DataAttributes *HumanLoopDataAttributes
+
 	// The name of the human workflow used for this image. This should be kept unique
 	// within a region.
+	//
+	// This member is required.
 	HumanLoopName *string
+
 	// The Amazon Resource Name (ARN) of the flow definition.
+	//
+	// This member is required.
 	FlowDefinitionArn *string
 }
 
 // Allows you to set attributes of the image. Currently, you can declare an image
 // as free of personally identifiable information and adult content.
 type HumanLoopDataAttributes struct {
+
 	// Sets whether the input image is free of personally identifiable information or
 	// adult content.
 	ContentClassifiers []ContentClassifier
@@ -231,10 +265,16 @@ type HumanLoopDataAttributes struct {
 // Textract publishes the completion status of an asynchronous document operation,
 // such as StartDocumentTextDetection ().
 type NotificationChannel struct {
+
 	// The Amazon SNS topic that Amazon Textract posts the completion status to.
+	//
+	// This member is required.
 	SNSTopicArn *string
+
 	// The Amazon Resource Name (ARN) of an IAM role that gives Amazon Textract
 	// publishing permissions to the Amazon SNS topic.
+	//
+	// This member is required.
 	RoleArn *string
 }
 
@@ -247,8 +287,10 @@ type NotificationChannel struct {
 // polygon around detected text. For more information, see Geometry in the Amazon
 // Textract Developer Guide. </p>
 type Point struct {
+
 	// The value of the X coordinate for a point on a Polygon.
 	X *float32
+
 	// The value of the Y coordinate for a point on a Polygon.
 	Y *float32
 }
@@ -258,12 +300,14 @@ type Point struct {
 // Block (). The Type element provides the type of the relationship for all blocks
 // in the IDs array.
 type Relationship struct {
+
 	// The type of relationship that the blocks in the IDs array have with the current
 	// block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a
 	// list that contains the ID of the VALUE block that's associated with the KEY of a
 	// key-value pair. A relationship of type CHILD is a list of IDs that identify WORD
 	// blocks.
 	Type RelationshipType
+
 	// An array of IDs for related blocks. You can get the type of the relationship
 	// from the Type element.
 	Ids []*string
@@ -274,12 +318,15 @@ type Relationship struct {
 // for Amazon Textract operations.  <p>For Amazon Textract to process a file in an
 // S3 bucket, the user must have permission to access the S3 bucket and file. </p>
 type S3Object struct {
+
 	// The file name of the input document. Synchronous operations can use image files
 	// that are in JPEG or PNG format. Asynchronous operations also support PDF format
 	// files.
 	Name *string
+
 	// If the bucket has versioning enabled, you can specify the object version.
 	Version *string
+
 	// The name of the S3 bucket.
 	Bucket *string
 }
@@ -288,8 +335,10 @@ type S3Object struct {
 // (StartDocumentAnalysis ()) or asynchronous document text detection
 // (StartDocumentTextDetection ()).
 type Warning struct {
+
 	// The error code for the warning.
 	ErrorCode *string
+
 	// A list of the pages that the warning applies to.
 	Pages []*int32
 }

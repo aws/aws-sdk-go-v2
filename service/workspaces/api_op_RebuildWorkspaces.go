@@ -62,11 +62,15 @@ func (c *Client) RebuildWorkspaces(ctx context.Context, params *RebuildWorkspace
 }
 
 type RebuildWorkspacesInput struct {
+
 	// The WorkSpace to rebuild. You can specify a single WorkSpace.
+	//
+	// This member is required.
 	RebuildWorkspaceRequests []*types.RebuildRequest
 }
 
 type RebuildWorkspacesOutput struct {
+
 	// Information about the WorkSpace that could not be rebuilt.
 	FailedRequests []*types.FailedWorkspaceChangeRequest
 

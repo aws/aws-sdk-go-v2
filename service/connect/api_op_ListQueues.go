@@ -56,20 +56,28 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 }
 
 type ListQueuesInput struct {
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// The maximimum number of results to return per page.
 	MaxResults *int32
+
 	// The type of queue.
 	QueueTypes []types.QueueType
 }
 
 type ListQueuesOutput struct {
+
 	// Information about the queues.
 	QueueSummaryList []*types.QueueSummary
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 

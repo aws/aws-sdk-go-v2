@@ -57,15 +57,22 @@ func (c *Client) TestRenderTemplate(ctx context.Context, params *TestRenderTempl
 }
 
 type TestRenderTemplateInput struct {
+
 	// The name of the template that you want to render.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// A list of replacement values to apply to the template. This parameter is a JSON
 	// object, typically consisting of key-value pairs in which the keys correspond to
 	// replacement tags in the email template.
+	//
+	// This member is required.
 	TemplateData *string
 }
 
 type TestRenderTemplateOutput struct {
+
 	// The complete MIME message rendered by applying the data in the TemplateData
 	// parameter to the template specified in the TemplateName parameter.
 	RenderedTemplate *string

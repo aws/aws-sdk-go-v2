@@ -9,86 +9,111 @@ import (
 // Contains metadata about an ACM certificate. This structure is returned in the
 // response to a DescribeCertificate () request.
 type CertificateDetail struct {
+
 	// Specifies whether the certificate is eligible for renewal. At this time, only
 	// exported private certificates can be renewed with the RenewCertificate ()
 	// command.
 	RenewalEligibility RenewalEligibility
+
 	// The algorithm that was used to sign the certificate.
 	SignatureAlgorithm *string
+
 	// A list of ARNs for the AWS resources that are using the certificate. A
 	// certificate can be used by multiple AWS resources.
 	InUseBy []*string
+
 	// The time at which the certificate was revoked. This value exists only when the
 	// certificate status is REVOKED.
 	RevokedAt *time.Time
+
 	// Value that specifies whether to add the certificate to a transparency log.
 	// Certificate transparency makes it possible to detect SSL certificates that have
 	// been mistakenly or maliciously issued. A browser might respond to certificate
 	// that has not been logged by showing an error message. The logs are
 	// cryptographically secure.
 	Options *CertificateOptions
+
 	// The date and time at which the certificate was imported. This value exists only
 	// when the certificate type is IMPORTED.
 	ImportedAt *time.Time
+
 	// The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA)
 	// that issued the certificate. This has the following format:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
+
 	// The serial number of the certificate.
 	Serial *string
+
 	// The name of the certificate authority that issued and signed the certificate.
 	Issuer *string
+
 	// The time at which the certificate was requested. This value exists only when the
 	// certificate type is AMAZON_ISSUED.
 	CreatedAt *time.Time
+
 	// Contains information about the initial validation of each domain name that
 	// occurs as a result of the RequestCertificate () request. This field exists only
 	// when the certificate type is AMAZON_ISSUED.
 	DomainValidationOptions []*DomainValidation
+
 	// The name of the entity that is associated with the public key contained in the
 	// certificate.
 	Subject *string
+
 	// The reason the certificate was revoked. This value exists only when the
 	// certificate status is REVOKED.
 	RevocationReason RevocationReason
+
 	// One or more domain names (subject alternative names) included in the
 	// certificate. This list contains the domain names that are bound to the public
 	// key that is contained in the certificate. The subject alternative names include
 	// the canonical domain name (CN) of the certificate and additional domain names
 	// that can be used to connect to the website.
 	SubjectAlternativeNames []*string
+
 	// The time at which the certificate was issued. This value exists only when the
 	// certificate type is AMAZON_ISSUED.
 	IssuedAt *time.Time
+
 	// The algorithm that was used to generate the public-private key pair.
 	KeyAlgorithm KeyAlgorithm
+
 	// The fully qualified domain name for the certificate, such as www.example.com or
 	// example.com.
 	DomainName *string
+
 	// A list of Key Usage X.509 v3 extension objects. Each object is a string value
 	// that identifies the purpose of the public key contained in the certificate.
 	// Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT,
 	// NON_REPUDIATION, and more.
 	KeyUsages []*KeyUsage
+
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
 	// ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	CertificateArn *string
+
 	// The time before which the certificate is not valid.
 	NotBefore *time.Time
+
 	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
 	// specifies a purpose for which the certificate public key can be used and
 	// consists of a name and an object identifier (OID).
 	ExtendedKeyUsages []*ExtendedKeyUsage
+
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time
+
 	// The status of the certificate.
 	Status CertificateStatus
+
 	// Contains information about the status of ACM's managed renewal
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html) for the
 	// certificate. This field exists only when the certificate type is AMAZON_ISSUED.
 	RenewalSummary *RenewalSummary
+
 	// The source of the certificate. For certificates provided by ACM, this value is
 	// AMAZON_ISSUED. For certificates that you imported with ImportCertificate (),
 	// this value is IMPORTED. ACM does not provide managed renewal
@@ -98,6 +123,7 @@ type CertificateDetail struct {
 	// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
 	// the AWS Certificate Manager User Guide.
 	Type CertificateType
+
 	// The reason the certificate request failed. This value exists only when the
 	// certificate status is FAILED. For more information, see Certificate Request
 	// Failed
@@ -115,6 +141,7 @@ type CertificateDetail struct {
 // For general information, see Certificate Transparency Logging
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency).
 type CertificateOptions struct {
+
 	// You can opt out of certificate transparency logging by specifying the DISABLED
 	// option. Opt in by specifying ENABLED.
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
@@ -122,12 +149,14 @@ type CertificateOptions struct {
 
 // This structure is returned in the response object of ListCertificates () action.
 type CertificateSummary struct {
+
 	// Amazon Resource Name (ARN) of the certificate. This is of the form:  <p>
 	// <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>
 	// </p> <p>For more information about ARNs, see <a
 	// href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon
 	// Resource Names (ARNs) and AWS Service Namespaces</a>. </p>
 	CertificateArn *string
+
 	// Fully qualified domain name (FQDN), such as www.example.com or example.com, for
 	// the certificate.
 	DomainName *string
@@ -136,6 +165,7 @@ type CertificateSummary struct {
 // Contains information about the validation of each domain name in the
 // certificate.
 type DomainValidation struct {
+
 	// Contains the CNAME record that you add to your DNS database for domain
 	// validation. For more information, see Use DNS to Validate Domain Ownership
 	// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html).
@@ -145,15 +175,22 @@ type DomainValidation struct {
 	// "_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
 	// "_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
 	ResourceRecord *ResourceRecord
+
 	// A fully qualified domain name (FQDN) in the certificate. For example,
 	// www.example.com or example.com.
+	//
+	// This member is required.
 	DomainName *string
+
 	// The domain name that ACM used to send domain validation emails.
 	ValidationDomain *string
+
 	// Specifies the domain validation method.
 	ValidationMethod ValidationMethod
+
 	// A list of email addresses that ACM used to send domain validation emails.
 	ValidationEmails []*string
+
 	// The validation status of the domain name. This can be one of the following
 	// values:  <ul> <li> <p> <code>PENDING_VALIDATION</code> </p> </li> <li> <p>
 	// <code></code>SUCCESS</p> </li> <li> <p> <code></code>FAILED</p> </li> </ul>
@@ -163,6 +200,7 @@ type DomainValidation struct {
 // Contains information about the domain names that you want ACM to use to send you
 // emails that enable you to validate domain ownership.
 type DomainValidationOption struct {
+
 	// The domain name that you want ACM to use to send you validation emails. This
 	// domain name is the suffix of the email addresses that you want ACM to use. This
 	// must be the same as the DomainName value or a superdomain of the DomainName
@@ -181,8 +219,13 @@ type DomainValidationOption struct {
 	// postmaster@example.com
 	//
 	//     * webmaster@example.com
+	//
+	// This member is required.
 	ValidationDomain *string
+
 	// A fully qualified domain name (FQDN) in the certificate request.
+	//
+	// This member is required.
 	DomainName *string
 }
 
@@ -190,8 +233,10 @@ type DomainValidationOption struct {
 // the public key can be used. This is in addition to or in place of the basic
 // purposes specified by the Key Usage extension.
 type ExtendedKeyUsage struct {
+
 	// The name of an Extended Key Usage value.
 	Name ExtendedKeyUsageName
+
 	// An object identifier (OID) for the extension value. OIDs are strings of numbers
 	// separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280.
 	// <ul> <li> <p> <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code>
@@ -210,14 +255,17 @@ type ExtendedKeyUsage struct {
 // This structure can be used in the ListCertificates () action to filter the
 // output of the certificate list.
 type Filters struct {
+
 	// Specify one or more KeyUsage () extension values.
 	KeyUsage []KeyUsageName
+
 	// Specify one or more algorithms that can be used to generate key pairs. Default
 	// filtering returns only RSA_2048 certificates. To return other certificate types,
 	// provide the desired type signatures in a comma-separated list. For example,
 	// "keyTypes": ["RSA_2048,RSA_4096"] returns both RSA_2048 and RSA_4096
 	// certificates.
 	KeyTypes []KeyAlgorithm
+
 	// Specify one or more ExtendedKeyUsage () extension values.
 	ExtendedKeyUsage []ExtendedKeyUsageName
 }
@@ -225,6 +273,7 @@ type Filters struct {
 // The Key Usage X.509 v3 extension defines the purpose of the public key contained
 // in the certificate.
 type KeyUsage struct {
+
 	// A string value that contains a Key Usage extension name.
 	Name KeyUsageName
 }
@@ -234,39 +283,62 @@ type KeyUsage struct {
 // certificate. This structure exists only when the certificate type is
 // AMAZON_ISSUED.
 type RenewalSummary struct {
+
 	// The reason that a renewal request was unsuccessful.
 	RenewalStatusReason FailureReason
+
 	// The status of ACM's managed renewal
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html) of the
 	// certificate.
+	//
+	// This member is required.
 	RenewalStatus RenewalStatus
+
 	// Contains information about the validation of each domain name in the
 	// certificate, as it pertains to ACM's managed renewal
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html). This is
 	// different from the initial validation that occurs as a result of the
 	// RequestCertificate () request. This field exists only when the certificate type
 	// is AMAZON_ISSUED.
+	//
+	// This member is required.
 	DomainValidationOptions []*DomainValidation
+
 	// The time at which the renewal summary was last updated.
+	//
+	// This member is required.
 	UpdatedAt *time.Time
 }
 
 // Contains a DNS record value that you can use to can use to validate ownership or
 // control of a domain. This is used by the DescribeCertificate () action.
 type ResourceRecord struct {
+
 	// The value of the CNAME record to add to your DNS database. This is supplied by
 	// ACM.
+	//
+	// This member is required.
 	Value *string
+
 	// The type of DNS record. Currently this can be CNAME.
+	//
+	// This member is required.
 	Type RecordType
+
 	// The name of the DNS record to create in your domain. This is supplied by ACM.
+	//
+	// This member is required.
 	Name *string
 }
 
 // A key-value pair that identifies or specifies metadata about an ACM resource.
 type Tag struct {
+
 	// The value of the tag.
 	Value *string
+
 	// The key of the tag.
+	//
+	// This member is required.
 	Key *string
 }

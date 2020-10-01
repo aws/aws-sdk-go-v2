@@ -57,12 +57,16 @@ func (c *Client) UpdateClassifier(ctx context.Context, params *UpdateClassifierI
 }
 
 type UpdateClassifierInput struct {
+
 	// A GrokClassifier object with updated fields.
 	GrokClassifier *types.UpdateGrokClassifierRequest
+
 	// A CsvClassifier object with updated fields.
 	CsvClassifier *types.UpdateCsvClassifierRequest
+
 	// An XMLClassifier object with updated fields.
 	XMLClassifier *types.UpdateXMLClassifierRequest
+
 	// A JsonClassifier object with updated fields.
 	JsonClassifier *types.UpdateJsonClassifierRequest
 }

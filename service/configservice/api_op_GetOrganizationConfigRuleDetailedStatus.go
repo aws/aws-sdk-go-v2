@@ -60,24 +60,32 @@ func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, pa
 }
 
 type GetOrganizationConfigRuleDetailedStatusInput struct {
+
 	// A StatusDetailFilters object.
 	Filters *types.StatusDetailFilters
+
 	// The name of organization config rule for which you want status details for
 	// member accounts.
+	//
+	// This member is required.
 	OrganizationConfigRuleName *string
+
 	// The maximum number of OrganizationConfigRuleDetailedStatus returned on each
 	// page. If you do not specify a number, AWS Config uses the default. The default
 	// is 100.
 	Limit *int32
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 }
 
 type GetOrganizationConfigRuleDetailedStatusOutput struct {
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
 	// A list of MemberAccountStatus objects.
 	OrganizationConfigRuleDetailedStatus []*types.MemberAccountStatus
 

@@ -56,16 +56,26 @@ func (c *Client) CreateResource(ctx context.Context, params *CreateResourceInput
 }
 
 type CreateResourceInput struct {
+
 	// The type of the new resource. The available types are equipment and room.
+	//
+	// This member is required.
 	Type types.ResourceType
+
 	// The name of the new resource.
+	//
+	// This member is required.
 	Name *string
+
 	// The identifier associated with the organization for which the resource is
 	// created.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type CreateResourceOutput struct {
+
 	// The identifier of the new resource.
 	ResourceId *string
 

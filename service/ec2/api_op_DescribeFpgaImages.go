@@ -57,10 +57,12 @@ func (c *Client) DescribeFpgaImages(ctx context.Context, params *DescribeFpgaIma
 }
 
 type DescribeFpgaImagesInput struct {
+
 	// Filters the AFI by owner. Specify an AWS account ID, self (owner is the sender
 	// of the request), or an AWS owner alias (valid values are amazon |
 	// aws-marketplace).
 	Owners []*string
+
 	// The filters.
 	//
 	//     * create-time - The creation time of the AFI.
@@ -98,12 +100,16 @@ type DescribeFpgaImagesInput struct {
 	//     * update-time - The time of the
 	// most recent update.
 	Filters []*types.Filter
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The AFI IDs.
 	FpgaImageIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -112,9 +118,11 @@ type DescribeFpgaImagesInput struct {
 }
 
 type DescribeFpgaImagesOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the FPGA images.
 	FpgaImages []*types.FpgaImage
 

@@ -55,10 +55,12 @@ func (c *Client) ListSharedReportGroups(ctx context.Context, params *ListSharedR
 }
 
 type ListSharedReportGroupsInput struct {
+
 	// The maximum number of paginated shared report groups per response. Use nextToken
 	// to iterate pages in the list of returned ReportGroup objects. The default value
 	// is 100.
 	MaxResults *int32
+
 	// The criterion to be used to list report groups shared with the current AWS
 	// account or user. Valid values include:
 	//
@@ -68,6 +70,7 @@ type ListSharedReportGroupsInput struct {
 	// MODIFIED_TIME: List based on when information about the shared report group was
 	// last changed.
 	SortBy types.SharedResourceSortByType
+
 	// The order in which to list shared report groups. Valid values include:
 	//
 	//     *
@@ -75,6 +78,7 @@ type ListSharedReportGroupsInput struct {
 	//
 	//     * DESCENDING: List in descending order.
 	SortOrder types.SortOrderType
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -85,9 +89,11 @@ type ListSharedReportGroupsInput struct {
 }
 
 type ListSharedReportGroupsOutput struct {
+
 	// The list of ARNs for the report groups shared with the current AWS account or
 	// user.
 	ReportGroups []*string
+
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the

@@ -64,18 +64,27 @@ func (c *Client) GetGatewayResponses(ctx context.Context, params *GetGatewayResp
 // be the API Gateway-generated default GatewayResponses () collection for the
 // supported response types.
 type GetGatewayResponsesInput struct {
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500. The GatewayResponses () collection does not support
 	// pagination and the limit does not apply here.
 	Limit *int32
+
 	// [Required] The string identifier of the associated RestApi ().
-	RestApiId        *string
-	Name             *string
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// The current pagination position in the paged result set. The GatewayResponse ()
 	// collection does not support pagination and the position does not apply here.
 	Position *string
+
 	Template *bool
 }
 
@@ -295,8 +304,10 @@ type GetGatewayResponsesInput struct {
 // href="https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html">Customize
 // Gateway Responses</a> </div>
 type GetGatewayResponsesOutput struct {
+
 	// Returns the entire collection, because of no pagination support.
 	Items []*types.GatewayResponse
+
 	// The current pagination position in the paged result set. The GatewayResponse ()
 	// collection does not support pagination and the position does not apply here.
 	Position *string

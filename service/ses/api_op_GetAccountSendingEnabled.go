@@ -60,6 +60,7 @@ type GetAccountSendingEnabledInput struct {
 // Represents a request to return the email sending status for your Amazon SES
 // account in the current AWS Region.
 type GetAccountSendingEnabledOutput struct {
+
 	// Describes whether email sending is enabled or disabled for your Amazon SES
 	// account in the current AWS Region.
 	Enabled *bool

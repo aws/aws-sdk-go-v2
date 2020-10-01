@@ -52,12 +52,14 @@ func (c *Client) HttpPayloadTraits(ctx context.Context, params *HttpPayloadTrait
 }
 
 type HttpPayloadTraitsInput struct {
-	Foo  *string
+	Foo *string
+
 	Blob []byte
 }
 
 type HttpPayloadTraitsOutput struct {
-	Foo  *string
+	Foo *string
+
 	Blob []byte
 
 	// Metadata pertaining to the operation's result.

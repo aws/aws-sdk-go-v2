@@ -66,18 +66,26 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 
 // Represents the input for ListStreams.
 type ListStreamsInput struct {
+
 	// The name of the stream to start the list with.
 	ExclusiveStartStreamName *string
+
 	// The maximum number of streams to list.
 	Limit *int32
 }
 
 // Represents the output for ListStreams.
 type ListStreamsOutput struct {
+
 	// If set to true, there are more streams available to list.
+	//
+	// This member is required.
 	HasMoreStreams *bool
+
 	// The names of the streams that are associated with the AWS account making the
 	// ListStreams request.
+	//
+	// This member is required.
 	StreamNames []*string
 
 	// Metadata pertaining to the operation's result.

@@ -57,14 +57,19 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 //
 type ListTagsForResourceInput struct {
+
 	// The Amazon Resource Name (ARN) that identifies the resource to list the tags
 	// for.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// The nextToken value returned from a previous paginated ListTagsForResource
 	// request where limit was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	NextToken *string
+
 	// The maximum number of tag results returned by ListTagsForResource in paginated
 	// output. When this parameter is used, ListTagsForResource returns only limit
 	// results in a single page along with a nextToken response element. You can see
@@ -77,8 +82,12 @@ type ListTagsForResourceInput struct {
 
 //
 type ListTagsForResourceOutput struct {
+
 	// The tags for the resource.
+	//
+	// This member is required.
 	Tags []*types.TagRef
+
 	// The nextToken value to include in a future ListTagsForResource request. When the
 	// results of a ListTagsForResource request exceed limit, you can use this value to
 	// retrieve the next page of results. This value is null when there are no more

@@ -55,10 +55,15 @@ func (c *Client) UpdateFleetMetadata(ctx context.Context, params *UpdateFleetMet
 }
 
 type UpdateFleetMetadataInput struct {
+
 	// The fleet name to display. The existing DisplayName is unset if null is passed.
 	DisplayName *string
+
 	// The ARN of the fleet.
+	//
+	// This member is required.
 	FleetArn *string
+
 	// The option to optimize for better performance by routing traffic through the
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool

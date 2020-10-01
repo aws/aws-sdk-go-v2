@@ -66,27 +66,36 @@ func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendati
 }
 
 type GetRecommendationsInput struct {
+
 	// The contextual metadata to use when getting recommendations. Contextual metadata
 	// includes any interaction information that might be relevant when getting a
 	// user's recommendations, such as the user's current location or device type.
 	Context map[string]*string
+
 	// The user ID to provide recommendations for. Required for USER_PERSONALIZATION
 	// recipe type.
 	UserId *string
+
 	// The Amazon Resource Name (ARN) of the campaign to use for getting
 	// recommendations.
+	//
+	// This member is required.
 	CampaignArn *string
+
 	// The ARN of the filter to apply to the returned recommendations. For more
 	// information, see Using Filters with Amazon Personalize.
 	FilterArn *string
+
 	// The item ID to provide recommendations for. Required for RELATED_ITEMS recipe
 	// type.
 	ItemId *string
+
 	// The number of results to return. The default is 25. The maximum is 500.
 	NumResults *int32
 }
 
 type GetRecommendationsOutput struct {
+
 	// A list of recommendations sorted in ascending order by prediction score. There
 	// can be a maximum of 500 items in the list.
 	ItemList []*types.PredictedItem

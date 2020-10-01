@@ -64,10 +64,16 @@ func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderRecei
 // see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type ReorderReceiptRuleSetInput struct {
+
 	// The name of the receipt rule set to reorder.
+	//
+	// This member is required.
 	RuleSetName *string
+
 	// A list of the specified receipt rule set's receipt rules in the order that you
 	// want to put them.
+	//
+	// This member is required.
 	RuleNames []*string
 }
 

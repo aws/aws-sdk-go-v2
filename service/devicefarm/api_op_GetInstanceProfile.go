@@ -56,11 +56,15 @@ func (c *Client) GetInstanceProfile(ctx context.Context, params *GetInstanceProf
 }
 
 type GetInstanceProfileInput struct {
+
 	// The Amazon Resource Name (ARN) of an instance profile.
+	//
+	// This member is required.
 	Arn *string
 }
 
 type GetInstanceProfileOutput struct {
+
 	// An object that contains information about an instance profile.
 	InstanceProfile *types.InstanceProfile
 

@@ -57,19 +57,27 @@ func (c *Client) RotateChannelCredentials(ctx context.Context, params *RotateCha
 }
 
 type RotateChannelCredentialsInput struct {
+
 	// The ID of the channel to update.
+	//
+	// This member is required.
 	Id *string
 }
 
 type RotateChannelCredentialsOutput struct {
+
 	// A short text description of the Channel.
 	Description *string
+
 	// The ID of the Channel.
 	Id *string
+
 	// A collection of tags associated with a resource
 	Tags map[string]*string
+
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
+
 	// The Amazon Resource Name (ARN) assigned to the Channel.
 	Arn *string
 

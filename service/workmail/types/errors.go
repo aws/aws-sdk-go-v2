@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The directory service doesn't recognize the credentials supplied by WorkMail.
@@ -28,12 +27,6 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorCode() string {
 func (e *DirectoryServiceAuthenticationFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DirectoryServiceAuthenticationFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryServiceAuthenticationFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The directory on which you are trying to perform operations isn't available.
 type DirectoryUnavailableException struct {
@@ -51,12 +44,6 @@ func (e *DirectoryUnavailableException) ErrorMessage() string {
 }
 func (e *DirectoryUnavailableException) ErrorCode() string             { return "DirectoryUnavailableException" }
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DirectoryUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DirectoryUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The email address that you're trying to assign is already created for a
 // different user, group, or resource.
@@ -75,12 +62,6 @@ func (e *EmailAddressInUseException) ErrorMessage() string {
 }
 func (e *EmailAddressInUseException) ErrorCode() string             { return "EmailAddressInUseException" }
 func (e *EmailAddressInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EmailAddressInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EmailAddressInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The user, group, or resource that you're trying to register is already
 // registered.
@@ -101,12 +82,6 @@ func (e *EntityAlreadyRegisteredException) ErrorCode() string {
 	return "EntityAlreadyRegisteredException"
 }
 func (e *EntityAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityAlreadyRegisteredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityAlreadyRegisteredException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The identifier supplied for the user, group, or resource does not exist in your
 // organization.
@@ -125,12 +100,6 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 }
 func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You are performing an operation on a user, group, or resource that isn't in the
 // expected state, such as trying to delete an active user.
@@ -149,12 +118,6 @@ func (e *EntityStateException) ErrorMessage() string {
 }
 func (e *EntityStateException) ErrorCode() string             { return "EntityStateException" }
 func (e *EntityStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *EntityStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EntityStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The configuration for a resource isn't valid. A resource must either be able to
 // auto-respond to requests or have at least one delegate associated that can do so
@@ -174,12 +137,6 @@ func (e *InvalidConfigurationException) ErrorMessage() string {
 }
 func (e *InvalidConfigurationException) ErrorCode() string             { return "InvalidConfigurationException" }
 func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the input parameters don't match the service's restrictions.
 type InvalidParameterException struct {
@@ -197,12 +154,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The supplied password doesn't match the minimum security constraints, such as
 // length or use of special characters.
@@ -221,12 +172,6 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 }
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPasswordException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPasswordException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // For an email or alias to be created in Amazon WorkMail, the included domain must
 // be defined in the organization.
@@ -245,12 +190,6 @@ func (e *MailDomainNotFoundException) ErrorMessage() string {
 }
 func (e *MailDomainNotFoundException) ErrorCode() string             { return "MailDomainNotFoundException" }
 func (e *MailDomainNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MailDomainNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MailDomainNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // After a domain has been added to the organization, it must be verified. The
 // domain is not yet verified.
@@ -269,12 +208,6 @@ func (e *MailDomainStateException) ErrorMessage() string {
 }
 func (e *MailDomainStateException) ErrorCode() string             { return "MailDomainStateException" }
 func (e *MailDomainStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MailDomainStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MailDomainStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The user, group, or resource name isn't unique in Amazon WorkMail.
 type NameAvailabilityException struct {
@@ -292,12 +225,6 @@ func (e *NameAvailabilityException) ErrorMessage() string {
 }
 func (e *NameAvailabilityException) ErrorCode() string             { return "NameAvailabilityException" }
 func (e *NameAvailabilityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NameAvailabilityException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NameAvailabilityException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An operation received a valid organization identifier that either doesn't belong
 // or exist in the system.
@@ -316,12 +243,6 @@ func (e *OrganizationNotFoundException) ErrorMessage() string {
 }
 func (e *OrganizationNotFoundException) ErrorCode() string             { return "OrganizationNotFoundException" }
 func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OrganizationNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The organization must have a valid state (Active or Synchronizing) to perform
 // certain operations on the organization or its members.
@@ -340,12 +261,6 @@ func (e *OrganizationStateException) ErrorMessage() string {
 }
 func (e *OrganizationStateException) ErrorCode() string             { return "OrganizationStateException" }
 func (e *OrganizationStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OrganizationStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This user, group, or resource name is not allowed in Amazon WorkMail.
 type ReservedNameException struct {
@@ -363,12 +278,6 @@ func (e *ReservedNameException) ErrorMessage() string {
 }
 func (e *ReservedNameException) ErrorCode() string             { return "ReservedNameException" }
 func (e *ReservedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't perform a write operation against a read-only directory.
 type UnsupportedOperationException struct {
@@ -386,9 +295,3 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 }
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperationException) HasMessage() bool {
-	return e.Message != nil
-}

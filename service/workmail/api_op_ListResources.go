@@ -56,18 +56,25 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 }
 
 type ListResourcesInput struct {
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.
 	NextToken *string
+
 	// The identifier for the organization under which the resources exist.
+	//
+	// This member is required.
 	OrganizationId *string
 }
 
 type ListResourcesOutput struct {
+
 	// One page of the organization's resource representation.
 	Resources []*types.Resource
+
 	// The token used to paginate through all the organization's resources. While
 	// results are still available, it has an associated value. When the last page is
 	// reached, the token is empty.

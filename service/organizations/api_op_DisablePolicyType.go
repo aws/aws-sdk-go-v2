@@ -69,11 +69,15 @@ func (c *Client) DisablePolicyType(ctx context.Context, params *DisablePolicyTyp
 }
 
 type DisablePolicyTypeInput struct {
+
 	// The unique identifier (ID) of the root in which you want to disable a policy
 	// type. You can get the ID from the ListRoots () operation. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a root ID string requires "r-" followed by
 	// from 4 to 32 lowercase letters or digits.
+	//
+	// This member is required.
 	RootId *string
+
 	// The policy type that you want to disable in this root. You can specify one of
 	// the following values:
 	//
@@ -91,10 +95,13 @@ type DisablePolicyTypeInput struct {
 	//
 	// * TAG_POLICY
 	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//
+	// This member is required.
 	PolicyType types.PolicyType
 }
 
 type DisablePolicyTypeOutput struct {
+
 	// A structure that shows the root with the updated list of enabled policy types.
 	Root *types.Root
 

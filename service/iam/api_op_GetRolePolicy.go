@@ -68,28 +68,43 @@ func (c *Client) GetRolePolicy(ctx context.Context, params *GetRolePolicyInput, 
 }
 
 type GetRolePolicyInput struct {
+
 	// The name of the policy document to get. This parameter allows (through its regex
 	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
 	// upper and lowercase alphanumeric characters with no spaces. You can also include
 	// any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The name of the role associated with the policy. This parameter allows (through
 	// its regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
 	RoleName *string
 }
 
 // Contains the response to a successful GetRolePolicy () request.
 type GetRolePolicyOutput struct {
+
 	// The name of the policy.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The policy document. IAM stores policies in JSON format. However, resources that
 	// were created using AWS CloudFormation templates can be formatted in YAML. AWS
 	// CloudFormation always converts a YAML policy to JSON format before submitting it
 	// to IAM.
+	//
+	// This member is required.
 	PolicyDocument *string
+
 	// The role the policy is associated with.
+	//
+	// This member is required.
 	RoleName *string
 
 	// Metadata pertaining to the operation's result.

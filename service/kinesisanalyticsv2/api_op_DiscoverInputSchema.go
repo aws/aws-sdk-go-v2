@@ -63,30 +63,41 @@ func (c *Client) DiscoverInputSchema(ctx context.Context, params *DiscoverInputS
 }
 
 type DiscoverInputSchemaInput struct {
+
 	// The Amazon Resource Name (ARN) of the streaming source.
 	ResourceARN *string
+
 	// Specify this parameter to discover a schema from data in an Amazon S3 object.
 	S3Configuration *types.S3Configuration
+
 	// The ARN of the role that is used to access the streaming source.
+	//
+	// This member is required.
 	ServiceExecutionRole *string
+
 	// The InputProcessingConfiguration () to use to preprocess the records before
 	// discovering the schema of the records.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
+
 	// The point at which you want Kinesis Data Analytics to start reading records from
 	// the specified streaming source discovery purposes.
 	InputStartingPositionConfiguration *types.InputStartingPositionConfiguration
 }
 
 type DiscoverInputSchemaOutput struct {
+
 	// The schema inferred from the streaming source. It identifies the format of the
 	// data in the streaming source and how each data element maps to corresponding
 	// columns in the in-application stream that you can create.
 	InputSchema *types.SourceSchema
+
 	// The stream data that was modified by the processor specified in the
 	// InputProcessingConfiguration parameter.
 	ProcessedInputRecords []*string
+
 	// The raw stream data that was sampled to infer the schema.
 	RawInputRecords []*string
+
 	// An array of elements, where each element corresponds to a row in a stream record
 	// (a stream record can have more than one row).
 	ParsedInputRecords [][]*string

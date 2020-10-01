@@ -60,19 +60,26 @@ func (c *Client) AssignTapePool(ctx context.Context, params *AssignTapePoolInput
 }
 
 type AssignTapePoolInput struct {
+
 	// The ID of the pool that you want to add your tape to for archiving. The tape in
 	// this pool is archived in the S3 storage class that is associated with the pool.
 	// When you use your backup application to eject the tape, the tape is archived
 	// directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that
 	// corresponds to the pool.  <p>Valid Values: <code>GLACIER</code> |
 	// <code>DEEP_ARCHIVE</code> </p>
+	//
+	// This member is required.
 	PoolId *string
+
 	// The unique Amazon Resource Name (ARN) of the virtual tape that you want to add
 	// to the tape pool.
+	//
+	// This member is required.
 	TapeARN *string
 }
 
 type AssignTapePoolOutput struct {
+
 	// The unique Amazon Resource Names (ARN) of the virtual tape that was added to the
 	// tape pool.
 	TapeARN *string

@@ -57,28 +57,40 @@ func (c *Client) DescribeRobotApplication(ctx context.Context, params *DescribeR
 }
 
 type DescribeRobotApplicationInput struct {
+
 	// The version of the robot application to describe.
 	ApplicationVersion *string
+
 	// The Amazon Resource Name (ARN) of the robot application.
+	//
+	// This member is required.
 	Application *string
 }
 
 type DescribeRobotApplicationOutput struct {
+
 	// The list of all tags added to the specified robot application.
 	Tags map[string]*string
+
 	// The version of the robot application.
 	Version *string
+
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
 	LastUpdatedAt *time.Time
+
 	// The sources of the robot application.
 	Sources []*types.Source
+
 	// The revision id of the robot application.
 	RevisionId *string
+
 	// The robot software suite (ROS distribution) used by the robot application.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
+
 	// The name of the robot application.
 	Name *string
+
 	// The Amazon Resource Name (ARN) of the robot application.
 	Arn *string
 

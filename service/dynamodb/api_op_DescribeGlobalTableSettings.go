@@ -61,13 +61,18 @@ func (c *Client) DescribeGlobalTableSettings(ctx context.Context, params *Descri
 }
 
 type DescribeGlobalTableSettingsInput struct {
+
 	// The name of the global table to describe.
+	//
+	// This member is required.
 	GlobalTableName *string
 }
 
 type DescribeGlobalTableSettingsOutput struct {
+
 	// The Region-specific settings for the global table.
 	ReplicaSettings []*types.ReplicaSettingsDescription
+
 	// The name of the global table.
 	GlobalTableName *string
 

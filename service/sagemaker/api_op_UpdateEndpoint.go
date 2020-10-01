@@ -68,8 +68,12 @@ func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput
 }
 
 type UpdateEndpointInput struct {
+
 	// The name of the new endpoint configuration.
+	//
+	// This member is required.
 	EndpointConfigName *string
+
 	// When updating endpoint resources, enables or disables the retention of variant
 	// properties, such as the instance count or the variant weight. To retain the
 	// variant properties of an endpoint when updating it, set
@@ -77,18 +81,25 @@ type UpdateEndpointInput struct {
 	// new EndpointConfig call when updating an endpoint, set
 	// RetainAllVariantProperties to false.
 	RetainAllVariantProperties *bool
+
 	// When you are updating endpoint resources with
 	// UpdateEndpointInput$RetainAllVariantProperties (), whose value is set to true,
 	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty ()
 	// to override with the values provided by EndpointConfig. If you don't specify a
 	// value for ExcludeAllVariantProperties, no variant properties are overridden.
 	ExcludeRetainedVariantProperties []*types.VariantProperty
+
 	// The name of the endpoint whose configuration you want to update.
+	//
+	// This member is required.
 	EndpointName *string
 }
 
 type UpdateEndpointOutput struct {
+
 	// The Amazon Resource Name (ARN) of the endpoint.
+	//
+	// This member is required.
 	EndpointArn *string
 
 	// Metadata pertaining to the operation's result.

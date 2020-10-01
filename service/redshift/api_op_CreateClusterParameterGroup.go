@@ -65,6 +65,7 @@ func (c *Client) CreateClusterParameterGroup(ctx context.Context, params *Create
 
 //
 type CreateClusterParameterGroupInput struct {
+
 	// The name of the cluster parameter group. Constraints:
 	//
 	//     * Must be 1 to 255
@@ -79,7 +80,10 @@ type CreateClusterParameterGroupInput struct {
 	// unique withing your AWS account.
 	//
 	// This value is stored as a lower-case string.
+	//
+	// This member is required.
 	ParameterGroupName *string
+
 	// The Amazon Redshift engine version to which the cluster parameter group applies.
 	// The cluster engine version determines the set of parameters. To get a list of
 	// valid parameter group family names, you can call DescribeClusterParameterGroups
@@ -88,14 +92,21 @@ type CreateClusterParameterGroupInput struct {
 	// Amazon Redshift engine version. The parameter group family names associated with
 	// the default parameter groups provide you the valid values. For example, a valid
 	// family name is "redshift-1.0".
+	//
+	// This member is required.
 	ParameterGroupFamily *string
+
 	// A list of tag instances.
 	Tags []*types.Tag
+
 	// A description of the parameter group.
+	//
+	// This member is required.
 	Description *string
 }
 
 type CreateClusterParameterGroupOutput struct {
+
 	// Describes a parameter group.
 	ClusterParameterGroup *types.ClusterParameterGroup
 

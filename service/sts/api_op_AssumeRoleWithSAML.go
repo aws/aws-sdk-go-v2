@@ -150,9 +150,13 @@ func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithS
 }
 
 type AssumeRoleWithSAMLInput struct {
+
 	// The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the
 	// IdP.
+	//
+	// This member is required.
 	PrincipalArn *string
+
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
 	// use as managed session policies. The policies must exist in the same account as
 	// the role. This parameter is optional. You can provide up to 10 managed policy
@@ -175,6 +179,7 @@ type AssumeRoleWithSAMLInput struct {
 	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
 	// Policies</a> in the <i>IAM User Guide</i>.</p>
 	PolicyArns []*types.PolicyDescriptorType
+
 	// An IAM policy in JSON format that you want to use as an inline session policy.
 	// This parameter is optional. Passing policies to this operation returns new
 	// temporary credentials. The resulting session's permissions are the intersection
@@ -195,13 +200,20 @@ type AssumeRoleWithSAMLInput struct {
 	// element indicates by percentage how close the policies and tags for your request
 	// are to the upper size limit.
 	Policy *string
+
 	// The Amazon Resource Name (ARN) of the role that the caller is assuming.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// The base-64 encoded SAML authentication response provided by the IdP. For more
 	// information, see Configuring a Relying Party and Adding Claims
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html)
 	// in the IAM User Guide.
+	//
+	// This member is required.
 	SAMLAssertion *string
+
 	// The duration, in seconds, of the role session. Your role session lasts for the
 	// duration that you specify for the DurationSeconds parameter, or until the time
 	// specified in the SAML authentication response's SessionNotOnOrAfter value,
@@ -228,14 +240,17 @@ type AssumeRoleWithSAMLInput struct {
 // Contains the response to a successful AssumeRoleWithSAML () request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type AssumeRoleWithSAMLOutput struct {
+
 	// The value of the Recipient attribute of the SubjectConfirmationData element of
 	// the SAML assertion.
 	Audience *string
+
 	// A percentage value that indicates the packed size of the session policies and
 	// session tags combined passed in the request. The request fails if the packed
 	// size is greater than 100 percent, which means the policies and tags exceeded the
 	// allowed space.
 	PackedPolicySize *int32
+
 	// The format of the name ID, as defined by the Format attribute in the NameID
 	// element of the SAML assertion. Typical examples of the format are transient or
 	// persistent. If the format includes the prefix
@@ -244,11 +259,14 @@ type AssumeRoleWithSAMLOutput struct {
 	// the format includes any other prefix, the format is returned with no
 	// modifications.
 	SubjectType *string
+
 	// The identifiers for the temporary security credentials that the operation
 	// returns.
 	AssumedRoleUser *types.AssumedRoleUser
+
 	// The value of the Issuer element of the SAML assertion.
 	Issuer *string
+
 	// A hash value based on the concatenation of the Issuer response value, the AWS
 	// account ID, and the friendly name (the last part of the ARN) of the SAML
 	// provider in IAM. The combination of NameQualifier and Subject can be used to
@@ -256,11 +274,13 @@ type AssumeRoleWithSAMLOutput struct {
 	// value is calculated: BASE64 ( SHA1 ( "https://example.com/saml" + "123456789012"
 	// + "/MySAMLIdP" ) )
 	NameQualifier *string
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security (or session) token. The size of the security token
 	// that STS API operations return is not fixed. We strongly recommend that you make
 	// no assumptions about the maximum size.
 	Credentials *types.Credentials
+
 	// The value of the NameID element in the Subject element of the SAML assertion.
 	Subject *string
 

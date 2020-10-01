@@ -57,13 +57,20 @@ func (c *Client) RebalanceSlotsInGlobalReplicationGroup(ctx context.Context, par
 }
 
 type RebalanceSlotsInGlobalReplicationGroupInput struct {
+
 	// The name of the Global Datastore
+	//
+	// This member is required.
 	GlobalReplicationGroupId *string
+
 	// If True, redistribution is applied immediately.
+	//
+	// This member is required.
 	ApplyImmediately *bool
 }
 
 type RebalanceSlotsInGlobalReplicationGroupOutput struct {
+
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the

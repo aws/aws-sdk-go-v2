@@ -59,18 +59,26 @@ func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApp
 
 //
 type UpdateApplicationVersionInput struct {
+
 	// A new description for this version.
 	Description *string
+
 	// The name of the application associated with this version. If no application is
 	// found with this name, UpdateApplication returns an InvalidParameterValue error.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The name of the version to update. If no application version is found with this
 	// label, UpdateApplication returns an InvalidParameterValue error.
+	//
+	// This member is required.
 	VersionLabel *string
 }
 
 // Result message wrapping a single description of an application version.
 type UpdateApplicationVersionOutput struct {
+
 	// The ApplicationVersionDescription () of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 

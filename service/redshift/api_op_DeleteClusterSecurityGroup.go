@@ -61,7 +61,10 @@ func (c *Client) DeleteClusterSecurityGroup(ctx context.Context, params *DeleteC
 
 //
 type DeleteClusterSecurityGroupInput struct {
+
 	// The name of the cluster security group to be deleted.
+	//
+	// This member is required.
 	ClusterSecurityGroupName *string
 }
 

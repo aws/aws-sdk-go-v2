@@ -58,6 +58,7 @@ type ListCuratedEnvironmentImagesInput struct {
 }
 
 type ListCuratedEnvironmentImagesOutput struct {
+
 	// Information about supported platforms for Docker images that are managed by AWS
 	// CodeBuild.
 	Platforms []*types.EnvironmentPlatform

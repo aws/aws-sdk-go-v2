@@ -72,13 +72,17 @@ func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchm
 
 // Represents the input for a request action.
 type DescribeMatchmakingInput struct {
+
 	// A unique identifier for a matchmaking ticket. You can include up to 10 ID
 	// values.
+	//
+	// This member is required.
 	TicketIds []*string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeMatchmakingOutput struct {
+
 	// A collection of existing matchmaking ticket objects matching the request.
 	TicketList []*types.MatchmakingTicket
 

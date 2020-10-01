@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The message can't be sent because the account's ability to send email has been
@@ -25,12 +24,6 @@ func (e *AccountSuspendedException) ErrorMessage() string {
 }
 func (e *AccountSuspendedException) ErrorCode() string             { return "AccountSuspendedException" }
 func (e *AccountSuspendedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountSuspendedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountSuspendedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource specified in your request already exists.
 type AlreadyExistsException struct {
@@ -48,12 +41,6 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 }
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input you provided is invalid.
 type BadRequestException struct {
@@ -71,12 +58,6 @@ func (e *BadRequestException) ErrorMessage() string {
 }
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BadRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is being modified by another operation or thread.
 type ConcurrentModificationException struct {
@@ -96,12 +77,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // If there is already an ongoing account details update under review.
 type ConflictException struct {
@@ -119,12 +94,6 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified request includes an invalid or expired token.
 type InvalidNextTokenException struct {
@@ -142,12 +111,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There are too many instances of the specified resource type.
 type LimitExceededException struct {
@@ -165,12 +128,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The message can't be sent because the sending domain isn't verified.
 type MailFromDomainNotVerifiedException struct {
@@ -192,12 +149,6 @@ func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
 func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *MailFromDomainNotVerifiedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MailFromDomainNotVerifiedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The message can't be sent because it contains invalid content.
 type MessageRejected struct {
@@ -215,12 +166,6 @@ func (e *MessageRejected) ErrorMessage() string {
 }
 func (e *MessageRejected) ErrorCode() string             { return "MessageRejected" }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MessageRejected) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MessageRejected) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you attempted to access doesn't exist.
 type NotFoundException struct {
@@ -238,12 +183,6 @@ func (e *NotFoundException) ErrorMessage() string {
 }
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The message can't be sent because the account's ability to send email is
 // currently paused.
@@ -262,12 +201,6 @@ func (e *SendingPausedException) ErrorMessage() string {
 }
 func (e *SendingPausedException) ErrorCode() string             { return "SendingPausedException" }
 func (e *SendingPausedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SendingPausedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SendingPausedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Too many requests have been made to the operation.
 type TooManyRequestsException struct {
@@ -285,9 +218,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

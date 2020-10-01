@@ -60,27 +60,38 @@ func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, 
 
 // This input determines which instances to list.
 type ListInstancesInput struct {
+
 	// The node type of the instance fleet. For example MASTER, CORE, or TASK.
 	InstanceFleetType types.InstanceFleetType
+
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
 	// The type of instance group for which to list the instances.
 	InstanceGroupTypes []types.InstanceGroupType
+
 	// The identifier of the instance group for which to list the instances.
 	InstanceGroupId *string
+
 	// A list of instance states that will filter the instances returned with this
 	// request.
 	InstanceStates []types.InstanceState
+
 	// The identifier of the cluster for which to list the instances.
+	//
+	// This member is required.
 	ClusterId *string
+
 	// The unique identifier of the instance fleet.
 	InstanceFleetId *string
 }
 
 // This output contains the list of instances.
 type ListInstancesOutput struct {
+
 	// The list of instances for the cluster and given filters.
 	Instances []*types.Instance
+
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
 

@@ -57,33 +57,50 @@ func (c *Client) DescribeUserProfile(ctx context.Context, params *DescribeUserPr
 }
 
 type DescribeUserProfileInput struct {
+
 	// The user profile name.
+	//
+	// This member is required.
 	UserProfileName *string
+
 	// The domain ID.
+	//
+	// This member is required.
 	DomainId *string
 }
 
 type DescribeUserProfileOutput struct {
+
 	// The user profile Amazon Resource Name (ARN).
 	UserProfileArn *string
+
 	// The SSO user value.
 	SingleSignOnUserValue *string
+
 	// The ID of the user's profile in the Amazon Elastic File System (EFS) volume.
 	HomeEfsFileSystemUid *string
+
 	// The failure reason.
 	FailureReason *string
+
 	// A collection of settings.
 	UserSettings *types.UserSettings
+
 	// The SSO user identifier.
 	SingleSignOnUserIdentifier *string
+
 	// The ID of the domain that contains the profile.
 	DomainId *string
+
 	// The status.
 	Status types.UserProfileStatus
+
 	// The user profile name.
 	UserProfileName *string
+
 	// The last modified time.
 	LastModifiedTime *time.Time
+
 	// The creation time.
 	CreationTime *time.Time
 

@@ -63,13 +63,17 @@ func (c *Client) GetXssMatchSet(ctx context.Context, params *GetXssMatchSetInput
 
 // A request to get an XssMatchSet ().
 type GetXssMatchSetInput struct {
+
 	// The XssMatchSetId of the XssMatchSet () that you want to get. XssMatchSetId is
 	// returned by CreateXssMatchSet () and by ListXssMatchSets ().
+	//
+	// This member is required.
 	XssMatchSetId *string
 }
 
 // The response to a GetXssMatchSet () request.
 type GetXssMatchSetOutput struct {
+
 	// Information about the XssMatchSet () that you specified in the GetXssMatchSet
 	// request. For more information, see the following topics:
 	//

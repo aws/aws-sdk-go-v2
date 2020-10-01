@@ -60,10 +60,16 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 
 // Represents the input to AddTagsToResource ().
 type AddTagsToResourceInput struct {
+
 	// The tags to be assigned to the Amazon DocumentDB resource.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The Amazon DocumentDB resource that the tags are added to. This value is an
 	// Amazon Resource Name (ARN).
+	//
+	// This member is required.
 	ResourceName *string
 }
 

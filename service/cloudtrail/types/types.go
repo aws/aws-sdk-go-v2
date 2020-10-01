@@ -53,6 +53,7 @@ import (
 // MyOtherLambdaFunction does not match the function specified for the trail. The
 // trail doesn’t log the event.
 type DataResource struct {
+
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
 	// specified objects.
 	//
@@ -85,6 +86,7 @@ type DataResource struct {
 	// will not be logged for
 	// arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
 	Values []*string
+
 	// The resource type in which you want to log data events. You can specify
 	// AWS::S3::Object or AWS::Lambda::Function resources.
 	Type *string
@@ -93,25 +95,34 @@ type DataResource struct {
 // Contains information about an event that was returned by a lookup request. The
 // result includes a representation of a CloudTrail event.
 type Event struct {
+
 	// A user name or role name of the requester that called the API in the event
 	// returned.
 	Username *string
+
 	// Information about whether the event is a write event or a read event.
 	ReadOnly *string
+
 	// The AWS service that the request was made to.
 	EventSource *string
+
 	// A JSON string that contains a representation of the event returned.
 	CloudTrailEvent *string
+
 	// The CloudTrail ID of the event returned.
 	EventId *string
+
 	// The name of the event returned.
 	EventName *string
+
 	// A list of resources referenced by the event returned.
 	Resources []*Resource
+
 	// The AWS access key ID that was used to sign the request. If the request was made
 	// with temporary security credentials, this is the access key ID of the temporary
 	// credentials.
 	AccessKeyId *string
+
 	// The date and time of the event returned.
 	EventTime *time.Time
 }
@@ -125,6 +136,7 @@ type Event struct {
 // selector, the trail doesn't log the event. You can configure up to five event
 // selectors for a trail.
 type EventSelector struct {
+
 	// CloudTrail supports data event logging for Amazon S3 objects and AWS Lambda
 	// functions. You can specify up to 250 resources for an individual event selector,
 	// but the total number of data resources cannot exceed 250 across all event
@@ -135,16 +147,19 @@ type EventSelector struct {
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 	// in the AWS CloudTrail User Guide.
 	DataResources []*DataResource
+
 	// An optional list of service event sources from which you do not want management
 	// events to be logged on your trail. In this release, the list can be empty
 	// (disables the filter), or it can filter out AWS Key Management Service events by
 	// containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is
 	// empty, and AWS KMS events are included in events that are logged to your trail.
 	ExcludeManagementEventSources []*string
+
 	// Specify if you want your trail to log read-only events, write-only events, or
 	// all. For example, the EC2 GetConsoleOutput is a read-only API operation and
 	// RunInstances is a write-only API operation. By default, the value is All.
 	ReadWriteType ReadWriteType
+
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
@@ -155,6 +170,7 @@ type EventSelector struct {
 
 // A JSON string that contains a list of insight types that are logged on a trail.
 type InsightSelector struct {
+
 	// The type of insights to log on a trail. In this release, only ApiCallRateInsight
 	// is supported as an insight type.
 	InsightType InsightType
@@ -162,31 +178,43 @@ type InsightSelector struct {
 
 // Specifies an attribute and value that filter the events returned.
 type LookupAttribute struct {
+
 	// Specifies an attribute on which to filter the events returned.
+	//
+	// This member is required.
 	AttributeKey LookupAttributeKey
+
 	// Specifies a value for the specified AttributeKey.
+	//
+	// This member is required.
 	AttributeValue *string
 }
 
 // Contains information about a returned public key.
 type PublicKey struct {
+
 	// The fingerprint of the public key.
 	Fingerprint *string
+
 	// The DER encoded public key value in PKCS#1 format.
 	Value []byte
+
 	// The ending time of validity of the public key.
 	ValidityEndTime *time.Time
+
 	// The starting time of validity of the public key.
 	ValidityStartTime *time.Time
 }
 
 // Specifies the type and name of a resource referenced by an event.
 type Resource struct {
+
 	// The name of the resource referenced by the event returned. These are
 	// user-created names whose values will depend on the environment. For example, the
 	// resource name might be "auto-scaling-test-group" for an Auto Scaling Group or
 	// "i-1234567" for an EC2 Instance.
 	ResourceName *string
+
 	// The type of a resource referenced by the event returned. When the resource type
 	// cannot be determined, null is returned. Some examples of resource types are:
 	// Instance for EC2, Trail for CloudTrail, DBInstance for RDS, and AccessKey for
@@ -198,69 +226,91 @@ type Resource struct {
 
 // A resource tag.
 type ResourceTag struct {
+
 	// Specifies the ARN of the resource.
 	ResourceId *string
+
 	// A list of tags.
 	TagsList []*Tag
 }
 
 // A custom key-value pair associated with a resource such as a CloudTrail trail.
 type Tag struct {
+
 	// The value in a key-value pair of a tag. The value must be no longer than 256
 	// Unicode characters.
 	Value *string
+
 	// The key in a key-value pair. The key must be must be no longer than 128 Unicode
 	// characters. The key must be unique for the resource to which it applies.
+	//
+	// This member is required.
 	Key *string
 }
 
 // The settings for a trail.
 type Trail struct {
+
 	// Specifies the ARN of the trail. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	TrailARN *string
+
 	// Specifies whether the trail exists only in one region or exists in all regions.
 	IsMultiRegionTrail *bool
+
 	// Specifies if the trail has custom event selectors.
 	HasCustomEventSelectors *bool
+
 	// Name of the trail set by calling CreateTrail (). The maximum length is 128
 	// characters.
 	Name *string
+
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to a
 	// user's log group.
 	CloudWatchLogsRoleArn *string
+
 	// Specifies whether the trail is an organization trail.
 	IsOrganizationTrail *bool
+
 	// This field is no longer in use. Use SnsTopicARN.
 	SnsTopicName *string
+
 	// Set to True to include AWS API calls from AWS global services such as IAM.
 	// Otherwise, False.
 	IncludeGlobalServiceEvents *bool
+
 	// Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The
 	// value is a fully specified ARN to a KMS key in the format:
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
+
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
 	// have designated for log file delivery. For more information, see Finding Your
 	// CloudTrail Log Files
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).The
 	// maximum length is 200 characters.
 	S3KeyPrefix *string
+
 	// The region in which the trail was created.
 	HomeRegion *string
+
 	// Specifies whether a trail has insight types specified in an InsightSelector
 	// list.
 	HasInsightSelectors *bool
+
 	// Name of the Amazon S3 bucket into which CloudTrail delivers your trail files.
 	// See Amazon S3 Bucket Naming Requirements
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html).
 	S3BucketName *string
+
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send
 	// notifications when log files are delivered. The format of a topic ARN is:
 	// arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string
+
 	// Specifies whether log file validation is enabled.
 	LogFileValidationEnabled *bool
+
 	// Specifies an Amazon Resource Name (ARN), a unique identifier that represents the
 	// log group to which CloudTrail logs will be delivered.
 	CloudWatchLogsLogGroupArn *string
@@ -269,10 +319,13 @@ type Trail struct {
 // Information about a CloudTrail trail, including the trail's name, home region,
 // and Amazon Resource Name (ARN).
 type TrailInfo struct {
+
 	// The ARN of a trail.
 	TrailARN *string
+
 	// The name of a trail.
 	Name *string
+
 	// The AWS region in which a trail was created.
 	HomeRegion *string
 }

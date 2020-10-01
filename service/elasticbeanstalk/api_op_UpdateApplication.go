@@ -59,16 +59,21 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 // Request to update an application.
 type UpdateApplicationInput struct {
+
 	// A new description for the application. Default: If not specified, AWS Elastic
 	// Beanstalk does not update the description.
 	Description *string
+
 	// The name of the application to update. If no such application is found,
 	// UpdateApplication returns an InvalidParameterValue error.
+	//
+	// This member is required.
 	ApplicationName *string
 }
 
 // Result message containing a single description of an application.
 type UpdateApplicationOutput struct {
+
 	// The ApplicationDescription () of the application.
 	Application *types.ApplicationDescription
 

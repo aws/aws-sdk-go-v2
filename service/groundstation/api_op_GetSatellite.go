@@ -55,18 +55,25 @@ func (c *Client) GetSatellite(ctx context.Context, params *GetSatelliteInput, op
 
 //
 type GetSatelliteInput struct {
+
 	// UUID of a satellite.
+	//
+	// This member is required.
 	SatelliteId *string
 }
 
 //
 type GetSatelliteOutput struct {
+
 	// A list of ground stations to which the satellite is on-boarded.
 	GroundStations []*string
+
 	// NORAD satellite ID number.
 	NoradSatelliteID *int32
+
 	// ARN of a satellite.
 	SatelliteArn *string
+
 	// UUID of a satellite.
 	SatelliteId *string
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified load balancer does not exist.
@@ -24,12 +23,6 @@ func (e *AccessPointNotFoundException) ErrorMessage() string {
 }
 func (e *AccessPointNotFoundException) ErrorCode() string             { return "AccessPointNotFoundException" }
 func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessPointNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessPointNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified ARN does not refer to a valid SSL certificate in AWS Identity and
 // Access Management (IAM) or AWS Certificate Manager (ACM). Note that if you
@@ -50,12 +43,6 @@ func (e *CertificateNotFoundException) ErrorMessage() string {
 }
 func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFoundException" }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A request made by Elastic Load Balancing to another service exceeds the maximum
 // request rate permitted for your account.
@@ -74,12 +61,6 @@ func (e *DependencyThrottleException) ErrorMessage() string {
 }
 func (e *DependencyThrottleException) ErrorCode() string             { return "DependencyThrottleException" }
 func (e *DependencyThrottleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DependencyThrottleException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyThrottleException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified load balancer name already exists for this account.
 type DuplicateAccessPointNameException struct {
@@ -99,12 +80,6 @@ func (e *DuplicateAccessPointNameException) ErrorCode() string {
 	return "DuplicateAccessPointNameException"
 }
 func (e *DuplicateAccessPointNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateAccessPointNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateAccessPointNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A listener already exists for the specified load balancer name and port, but
 // with a different instance port, protocol, or SSL certificate.
@@ -123,12 +98,6 @@ func (e *DuplicateListenerException) ErrorMessage() string {
 }
 func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListenerException" }
 func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateListenerException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateListenerException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A policy with the specified name already exists for this load balancer.
 type DuplicatePolicyNameException struct {
@@ -146,12 +115,6 @@ func (e *DuplicatePolicyNameException) ErrorMessage() string {
 }
 func (e *DuplicatePolicyNameException) ErrorCode() string             { return "DuplicatePolicyNameException" }
 func (e *DuplicatePolicyNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicatePolicyNameException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicatePolicyNameException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
@@ -169,12 +132,6 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 }
 func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeysException" }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateTagKeysException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateTagKeysException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested configuration change is not valid.
 type InvalidConfigurationRequestException struct {
@@ -196,12 +153,6 @@ func (e *InvalidConfigurationRequestException) ErrorCode() string {
 func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidConfigurationRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidConfigurationRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified endpoint is not valid.
 type InvalidEndPointException struct {
@@ -219,12 +170,6 @@ func (e *InvalidEndPointException) ErrorMessage() string {
 }
 func (e *InvalidEndPointException) ErrorCode() string             { return "InvalidEndPointException" }
 func (e *InvalidEndPointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidEndPointException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidEndPointException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified value for the schema is not valid. You can only specify a scheme
 // for load balancers in a VPC.
@@ -243,12 +188,6 @@ func (e *InvalidSchemeException) ErrorMessage() string {
 }
 func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidSchemeException" }
 func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSchemeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSchemeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified security groups do not exist.
 type InvalidSecurityGroupException struct {
@@ -266,12 +205,6 @@ func (e *InvalidSecurityGroupException) ErrorMessage() string {
 }
 func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroupException" }
 func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSecurityGroupException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSecurityGroupException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified VPC has no associated Internet gateway.
 type InvalidSubnetException struct {
@@ -289,12 +222,6 @@ func (e *InvalidSubnetException) ErrorMessage() string {
 }
 func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnetException" }
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSubnetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubnetException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The load balancer does not have a listener configured at the specified port.
 type ListenerNotFoundException struct {
@@ -312,12 +239,6 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 }
 func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ListenerNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ListenerNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified load balancer attribute does not exist.
 type LoadBalancerAttributeNotFoundException struct {
@@ -339,12 +260,6 @@ func (e *LoadBalancerAttributeNotFoundException) ErrorCode() string {
 func (e *LoadBalancerAttributeNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *LoadBalancerAttributeNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LoadBalancerAttributeNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
@@ -362,12 +277,6 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 }
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotPermittedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotPermittedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified policies do not exist.
 type PolicyNotFoundException struct {
@@ -385,12 +294,6 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 }
 func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFoundException" }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified policy types do not exist.
 type PolicyTypeNotFoundException struct {
@@ -408,12 +311,6 @@ func (e *PolicyTypeNotFoundException) ErrorMessage() string {
 }
 func (e *PolicyTypeNotFoundException) ErrorCode() string             { return "PolicyTypeNotFoundException" }
 func (e *PolicyTypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PolicyTypeNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PolicyTypeNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified subnets do not exist.
 type SubnetNotFoundException struct {
@@ -431,12 +328,6 @@ func (e *SubnetNotFoundException) ErrorMessage() string {
 }
 func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFoundException" }
 func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for the number of load balancers has been reached.
 type TooManyAccessPointsException struct {
@@ -454,12 +345,6 @@ func (e *TooManyAccessPointsException) ErrorMessage() string {
 }
 func (e *TooManyAccessPointsException) ErrorCode() string             { return "TooManyAccessPointsException" }
 func (e *TooManyAccessPointsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyAccessPointsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyAccessPointsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for the number of policies for this load balancer has been reached.
 type TooManyPoliciesException struct {
@@ -477,12 +362,6 @@ func (e *TooManyPoliciesException) ErrorMessage() string {
 }
 func (e *TooManyPoliciesException) ErrorCode() string             { return "TooManyPoliciesException" }
 func (e *TooManyPoliciesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyPoliciesException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyPoliciesException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for the number of tags that can be assigned to a load balancer has
 // been reached.
@@ -501,12 +380,6 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified protocol or signature version is not supported.
 type UnsupportedProtocolException struct {
@@ -524,9 +397,3 @@ func (e *UnsupportedProtocolException) ErrorMessage() string {
 }
 func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocolException" }
 func (e *UnsupportedProtocolException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedProtocolException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedProtocolException) HasMessage() bool {
-	return e.Message != nil
-}

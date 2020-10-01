@@ -57,26 +57,37 @@ func (c *Client) DescribeMitigationAction(ctx context.Context, params *DescribeM
 }
 
 type DescribeMitigationActionInput struct {
+
 	// The friendly name that uniquely identifies the mitigation action.
+	//
+	// This member is required.
 	ActionName *string
 }
 
 type DescribeMitigationActionOutput struct {
+
 	// The ARN of the IAM role used to apply this action.
 	RoleArn *string
+
 	// The ARN that identifies this migration action.
 	ActionArn *string
+
 	// The date and time when the mitigation action was last changed.
 	LastModifiedDate *time.Time
+
 	// Parameters that control how the mitigation action is applied, specific to the
 	// type of mitigation action.
 	ActionParams *types.MitigationActionParams
+
 	// The friendly name that uniquely identifies the mitigation action.
 	ActionName *string
+
 	// The type of mitigation action.
 	ActionType types.MitigationActionType
+
 	// The date and time when the mitigation action was added to your AWS account.
 	CreationDate *time.Time
+
 	// A unique identifier for this action.
 	ActionId *string
 

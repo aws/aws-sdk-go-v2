@@ -65,11 +65,15 @@ func (c *Client) DescribeDBSnapshotAttributes(ctx context.Context, params *Descr
 
 //
 type DescribeDBSnapshotAttributesInput struct {
+
 	// The identifier for the DB snapshot to describe the attributes for.
+	//
+	// This member is required.
 	DBSnapshotIdentifier *string
 }
 
 type DescribeDBSnapshotAttributesOutput struct {
+
 	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
 	// API action. Manual DB snapshot attributes are used to authorize other AWS
 	// accounts to copy or restore a manual DB snapshot. For more information, see the

@@ -57,13 +57,18 @@ func (c *Client) CreateTestGridProject(ctx context.Context, params *CreateTestGr
 }
 
 type CreateTestGridProjectInput struct {
+
 	// Human-readable name of the Selenium testing project.
+	//
+	// This member is required.
 	Name *string
+
 	// Human-readable description of the project.
 	Description *string
 }
 
 type CreateTestGridProjectOutput struct {
+
 	// ARN of the Selenium testing project that was created.
 	TestGridProject *types.TestGridProject
 

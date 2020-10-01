@@ -55,11 +55,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The keys of tags that you want to remove.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The Amazon Resource Number (ARN) of a resource from which you want to remove
 	// tags. For example,
 	// arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 

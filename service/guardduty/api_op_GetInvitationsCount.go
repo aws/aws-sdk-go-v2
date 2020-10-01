@@ -58,6 +58,7 @@ type GetInvitationsCountInput struct {
 }
 
 type GetInvitationsCountOutput struct {
+
 	// The number of received invitations.
 	InvitationsCount *int32
 

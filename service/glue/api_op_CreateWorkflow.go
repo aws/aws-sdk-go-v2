@@ -55,18 +55,25 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 }
 
 type CreateWorkflowInput struct {
+
 	// The name to be assigned to the workflow. It should be unique within your
 	// account.
+	//
+	// This member is required.
 	Name *string
+
 	// The tags to be used with this workflow.
 	Tags map[string]*string
+
 	// A description of the workflow.
 	Description *string
+
 	// A collection of properties to be used as part of each execution of the workflow.
 	DefaultRunProperties map[string]*string
 }
 
 type CreateWorkflowOutput struct {
+
 	// The name of the workflow which was provided as part of the request.
 	Name *string
 

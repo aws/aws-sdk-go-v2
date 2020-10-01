@@ -56,10 +56,16 @@ func (c *Client) SetUserSettings(ctx context.Context, params *SetUserSettingsInp
 
 // Represents the request to set user settings.
 type SetUserSettingsInput struct {
+
 	// The access token for the set user settings request.
+	//
+	// This member is required.
 	AccessToken *string
+
 	// You can use this parameter only to set an SMS configuration that uses SMS for
 	// delivery.
+	//
+	// This member is required.
 	MFAOptions []*types.MFAOptionType
 }
 

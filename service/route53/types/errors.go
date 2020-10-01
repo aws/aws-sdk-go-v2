@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Another user submitted a request to create, update, or delete the object at the
@@ -25,12 +24,6 @@ func (e *ConcurrentModification) ErrorMessage() string {
 }
 func (e *ConcurrentModification) ErrorCode() string             { return "ConcurrentModification" }
 func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModification) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModification) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cause of this error depends on the operation that you're performing:
 //
@@ -66,12 +59,6 @@ func (e *ConflictingDomainExists) ErrorMessage() string {
 }
 func (e *ConflictingDomainExists) ErrorCode() string             { return "ConflictingDomainExists" }
 func (e *ConflictingDomainExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictingDomainExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictingDomainExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You tried to update a traffic policy instance by using a traffic policy version
 // that has a different DNS type than the current type for the instance. You
@@ -92,12 +79,6 @@ func (e *ConflictingTypes) ErrorMessage() string {
 }
 func (e *ConflictingTypes) ErrorCode() string             { return "ConflictingTypes" }
 func (e *ConflictingTypes) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConflictingTypes) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConflictingTypes) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A delegation set with the same owner and caller reference combination has
 // already been created.
@@ -116,12 +97,6 @@ func (e *DelegationSetAlreadyCreated) ErrorMessage() string {
 }
 func (e *DelegationSetAlreadyCreated) ErrorCode() string             { return "DelegationSetAlreadyCreated" }
 func (e *DelegationSetAlreadyCreated) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DelegationSetAlreadyCreated) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DelegationSetAlreadyCreated) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified delegation set has already been marked as reusable.
 type DelegationSetAlreadyReusable struct {
@@ -139,12 +114,6 @@ func (e *DelegationSetAlreadyReusable) ErrorMessage() string {
 }
 func (e *DelegationSetAlreadyReusable) ErrorCode() string             { return "DelegationSetAlreadyReusable" }
 func (e *DelegationSetAlreadyReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DelegationSetAlreadyReusable) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DelegationSetAlreadyReusable) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified delegation contains associated hosted zones which must be deleted
 // before the reusable delegation set can be deleted.
@@ -163,12 +132,6 @@ func (e *DelegationSetInUse) ErrorMessage() string {
 }
 func (e *DelegationSetInUse) ErrorCode() string             { return "DelegationSetInUse" }
 func (e *DelegationSetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DelegationSetInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DelegationSetInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can create a hosted zone that has the same name as an existing hosted zone
 // (example.com is common), but there is a limit to the number of hosted zones that
@@ -190,12 +153,6 @@ func (e *DelegationSetNotAvailable) ErrorMessage() string {
 }
 func (e *DelegationSetNotAvailable) ErrorCode() string             { return "DelegationSetNotAvailable" }
 func (e *DelegationSetNotAvailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DelegationSetNotAvailable) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DelegationSetNotAvailable) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A reusable delegation set with the specified ID does not exist.
 type DelegationSetNotReusable struct {
@@ -213,12 +170,6 @@ func (e *DelegationSetNotReusable) ErrorMessage() string {
 }
 func (e *DelegationSetNotReusable) ErrorCode() string             { return "DelegationSetNotReusable" }
 func (e *DelegationSetNotReusable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DelegationSetNotReusable) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DelegationSetNotReusable) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The health check you're attempting to create already exists. Amazon Route 53
 // returns this error when you submit a request that has the following values:
@@ -245,12 +196,6 @@ func (e *HealthCheckAlreadyExists) ErrorMessage() string {
 }
 func (e *HealthCheckAlreadyExists) ErrorCode() string             { return "HealthCheckAlreadyExists" }
 func (e *HealthCheckAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HealthCheckAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HealthCheckAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This error code is not in use.
 type HealthCheckInUse struct {
@@ -268,12 +213,6 @@ func (e *HealthCheckInUse) ErrorMessage() string {
 }
 func (e *HealthCheckInUse) ErrorCode() string             { return "HealthCheckInUse" }
 func (e *HealthCheckInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HealthCheckInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HealthCheckInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value of HealthCheckVersion in the request doesn't match the value of
 // HealthCheckVersion in the health check.
@@ -292,12 +231,6 @@ func (e *HealthCheckVersionMismatch) ErrorMessage() string {
 }
 func (e *HealthCheckVersionMismatch) ErrorCode() string             { return "HealthCheckVersionMismatch" }
 func (e *HealthCheckVersionMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HealthCheckVersionMismatch) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HealthCheckVersionMismatch) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The hosted zone you're trying to create already exists. Amazon Route 53 returns
 // this error when a hosted zone has already been created with the specified
@@ -317,12 +250,6 @@ func (e *HostedZoneAlreadyExists) ErrorMessage() string {
 }
 func (e *HostedZoneAlreadyExists) ErrorCode() string             { return "HostedZoneAlreadyExists" }
 func (e *HostedZoneAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HostedZoneAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HostedZoneAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The hosted zone contains resource records that are not SOA or NS records.
 type HostedZoneNotEmpty struct {
@@ -340,12 +267,6 @@ func (e *HostedZoneNotEmpty) ErrorMessage() string {
 }
 func (e *HostedZoneNotEmpty) ErrorCode() string             { return "HostedZoneNotEmpty" }
 func (e *HostedZoneNotEmpty) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HostedZoneNotEmpty) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HostedZoneNotEmpty) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified HostedZone can't be found.
 type HostedZoneNotFound struct {
@@ -363,12 +284,6 @@ func (e *HostedZoneNotFound) ErrorMessage() string {
 }
 func (e *HostedZoneNotFound) ErrorCode() string             { return "HostedZoneNotFound" }
 func (e *HostedZoneNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HostedZoneNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HostedZoneNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified hosted zone is a public hosted zone, not a private hosted zone.
 type HostedZoneNotPrivate struct {
@@ -386,12 +301,6 @@ func (e *HostedZoneNotPrivate) ErrorMessage() string {
 }
 func (e *HostedZoneNotPrivate) ErrorCode() string             { return "HostedZoneNotPrivate" }
 func (e *HostedZoneNotPrivate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HostedZoneNotPrivate) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HostedZoneNotPrivate) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource you're trying to access is unsupported on this Amazon Route 53
 // endpoint.
@@ -410,12 +319,6 @@ func (e *IncompatibleVersion) ErrorMessage() string {
 }
 func (e *IncompatibleVersion) ErrorCode() string             { return "IncompatibleVersion" }
 func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatibleVersion) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatibleVersion) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Route 53 doesn't have the permissions required to create log streams and
 // send query logs to log streams. Possible causes include the following:
@@ -448,12 +351,6 @@ func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorCode() string {
 func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InsufficientCloudWatchLogsResourcePolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientCloudWatchLogsResourcePolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Parameter name is invalid.
 type InvalidArgument struct {
@@ -471,12 +368,6 @@ func (e *InvalidArgument) ErrorMessage() string {
 }
 func (e *InvalidArgument) ErrorCode() string             { return "InvalidArgument" }
 func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgument) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgument) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This exception contains a list of messages that might contain one or more error
 // messages. Each error message indicates one error in the change batch.
@@ -497,18 +388,6 @@ func (e *InvalidChangeBatch) ErrorMessage() string {
 }
 func (e *InvalidChangeBatch) ErrorCode() string             { return "InvalidChangeBatch" }
 func (e *InvalidChangeBatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidChangeBatch) GetMessages() []*string {
-	return e.Messages
-}
-func (e *InvalidChangeBatch) HasMessages() bool {
-	return e.Messages != nil
-}
-func (e *InvalidChangeBatch) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidChangeBatch) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified domain name is not valid.
 type InvalidDomainName struct {
@@ -526,12 +405,6 @@ func (e *InvalidDomainName) ErrorMessage() string {
 }
 func (e *InvalidDomainName) ErrorCode() string             { return "InvalidDomainName" }
 func (e *InvalidDomainName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidDomainName) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidDomainName) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input is not valid.
 type InvalidInput struct {
@@ -549,12 +422,6 @@ func (e *InvalidInput) ErrorMessage() string {
 }
 func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInput) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInput) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value that you specified to get the second or subsequent page of results is
 // invalid.
@@ -573,12 +440,6 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 }
 func (e *InvalidPaginationToken) ErrorCode() string             { return "InvalidPaginationToken" }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPaginationToken) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPaginationToken) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The format of the traffic policy document that you specified in the Document
 // element is invalid.
@@ -597,12 +458,6 @@ func (e *InvalidTrafficPolicyDocument) ErrorMessage() string {
 }
 func (e *InvalidTrafficPolicyDocument) ErrorCode() string             { return "InvalidTrafficPolicyDocument" }
 func (e *InvalidTrafficPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTrafficPolicyDocument) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTrafficPolicyDocument) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The VPC ID that you specified either isn't a valid ID or the current account is
 // not authorized to access this VPC.
@@ -621,12 +476,6 @@ func (e *InvalidVPCId) ErrorMessage() string {
 }
 func (e *InvalidVPCId) ErrorCode() string             { return "InvalidVPCId" }
 func (e *InvalidVPCId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidVPCId) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidVPCId) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The VPC that you're trying to disassociate from the private hosted zone is the
 // last VPC that is associated with the hosted zone. Amazon Route 53 doesn't
@@ -646,12 +495,6 @@ func (e *LastVPCAssociation) ErrorMessage() string {
 }
 func (e *LastVPCAssociation) ErrorCode() string             { return "LastVPCAssociation" }
 func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LastVPCAssociation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LastVPCAssociation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation can't be completed either because the current account has reached
 // the limit on reusable delegation sets that it can create or because you've
@@ -679,12 +522,6 @@ func (e *LimitsExceeded) ErrorMessage() string {
 }
 func (e *LimitsExceeded) ErrorCode() string             { return "LimitsExceeded" }
 func (e *LimitsExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitsExceeded) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitsExceeded) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A change with the specified change ID does not exist.
 type NoSuchChange struct {
@@ -702,12 +539,6 @@ func (e *NoSuchChange) ErrorMessage() string {
 }
 func (e *NoSuchChange) ErrorCode() string             { return "NoSuchChange" }
 func (e *NoSuchChange) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchChange) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchChange) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no CloudWatch Logs log group with the specified ARN.
 type NoSuchCloudWatchLogsLogGroup struct {
@@ -725,12 +556,6 @@ func (e *NoSuchCloudWatchLogsLogGroup) ErrorMessage() string {
 }
 func (e *NoSuchCloudWatchLogsLogGroup) ErrorCode() string             { return "NoSuchCloudWatchLogsLogGroup" }
 func (e *NoSuchCloudWatchLogsLogGroup) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchCloudWatchLogsLogGroup) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchCloudWatchLogsLogGroup) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A reusable delegation set with the specified ID does not exist.
 type NoSuchDelegationSet struct {
@@ -748,12 +573,6 @@ func (e *NoSuchDelegationSet) ErrorMessage() string {
 }
 func (e *NoSuchDelegationSet) ErrorCode() string             { return "NoSuchDelegationSet" }
 func (e *NoSuchDelegationSet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchDelegationSet) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchDelegationSet) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon Route 53 doesn't support the specified geographic location. For a list of
 // supported geolocation codes, see the GeoLocation
@@ -774,12 +593,6 @@ func (e *NoSuchGeoLocation) ErrorMessage() string {
 }
 func (e *NoSuchGeoLocation) ErrorCode() string             { return "NoSuchGeoLocation" }
 func (e *NoSuchGeoLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchGeoLocation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchGeoLocation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No health check exists with the specified ID.
 type NoSuchHealthCheck struct {
@@ -797,12 +610,6 @@ func (e *NoSuchHealthCheck) ErrorMessage() string {
 }
 func (e *NoSuchHealthCheck) ErrorCode() string             { return "NoSuchHealthCheck" }
 func (e *NoSuchHealthCheck) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchHealthCheck) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchHealthCheck) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No hosted zone exists with the ID that you specified.
 type NoSuchHostedZone struct {
@@ -820,12 +627,6 @@ func (e *NoSuchHostedZone) ErrorMessage() string {
 }
 func (e *NoSuchHostedZone) ErrorCode() string             { return "NoSuchHostedZone" }
 func (e *NoSuchHostedZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchHostedZone) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchHostedZone) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no DNS query logging configuration with the specified ID.
 type NoSuchQueryLoggingConfig struct {
@@ -843,12 +644,6 @@ func (e *NoSuchQueryLoggingConfig) ErrorMessage() string {
 }
 func (e *NoSuchQueryLoggingConfig) ErrorCode() string             { return "NoSuchQueryLoggingConfig" }
 func (e *NoSuchQueryLoggingConfig) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchQueryLoggingConfig) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchQueryLoggingConfig) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No traffic policy exists with the specified ID.
 type NoSuchTrafficPolicy struct {
@@ -866,12 +661,6 @@ func (e *NoSuchTrafficPolicy) ErrorMessage() string {
 }
 func (e *NoSuchTrafficPolicy) ErrorCode() string             { return "NoSuchTrafficPolicy" }
 func (e *NoSuchTrafficPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchTrafficPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchTrafficPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // No traffic policy instance exists with the specified ID.
 type NoSuchTrafficPolicyInstance struct {
@@ -889,12 +678,6 @@ func (e *NoSuchTrafficPolicyInstance) ErrorMessage() string {
 }
 func (e *NoSuchTrafficPolicyInstance) ErrorCode() string             { return "NoSuchTrafficPolicyInstance" }
 func (e *NoSuchTrafficPolicyInstance) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchTrafficPolicyInstance) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchTrafficPolicyInstance) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Associating the specified VPC with the specified hosted zone has not been
 // authorized.
@@ -913,12 +696,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // If Amazon Route 53 can't process a request before the next request arrives, it
 // will reject subsequent requests for the same hosted zone and return an HTTP 400
@@ -940,12 +717,6 @@ func (e *PriorRequestNotComplete) ErrorMessage() string {
 }
 func (e *PriorRequestNotComplete) ErrorCode() string             { return "PriorRequestNotComplete" }
 func (e *PriorRequestNotComplete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PriorRequestNotComplete) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PriorRequestNotComplete) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You're trying to associate a VPC with a public hosted zone. Amazon Route 53
 // doesn't support associating a VPC with a public hosted zone.
@@ -964,12 +735,6 @@ func (e *PublicZoneVPCAssociation) ErrorMessage() string {
 }
 func (e *PublicZoneVPCAssociation) ErrorCode() string             { return "PublicZoneVPCAssociation" }
 func (e *PublicZoneVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PublicZoneVPCAssociation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PublicZoneVPCAssociation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can create only one query logging configuration for a hosted zone, and a
 // query logging configuration already exists for this hosted zone.
@@ -990,12 +755,6 @@ func (e *QueryLoggingConfigAlreadyExists) ErrorCode() string {
 	return "QueryLoggingConfigAlreadyExists"
 }
 func (e *QueryLoggingConfigAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *QueryLoggingConfigAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *QueryLoggingConfigAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
@@ -1013,12 +772,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This health check can't be created because the current account has reached the
 // limit on the number of active health checks. For information about default
@@ -1047,12 +800,6 @@ func (e *TooManyHealthChecks) ErrorMessage() string {
 }
 func (e *TooManyHealthChecks) ErrorCode() string             { return "TooManyHealthChecks" }
 func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyHealthChecks) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyHealthChecks) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This operation can't be completed either because the current account has reached
 // the limit on the number of hosted zones or because you've reached the limit on
@@ -1082,12 +829,6 @@ func (e *TooManyHostedZones) ErrorMessage() string {
 }
 func (e *TooManyHostedZones) ErrorCode() string             { return "TooManyHostedZones" }
 func (e *TooManyHostedZones) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyHostedZones) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyHostedZones) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This traffic policy can't be created because the current account has reached the
 // limit on the number of traffic policies. For information about default limits,
@@ -1113,12 +854,6 @@ func (e *TooManyTrafficPolicies) ErrorMessage() string {
 }
 func (e *TooManyTrafficPolicies) ErrorCode() string             { return "TooManyTrafficPolicies" }
 func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTrafficPolicies) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTrafficPolicies) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This traffic policy instance can't be created because the current account has
 // reached the limit on the number of traffic policy instances. For information
@@ -1144,12 +879,6 @@ func (e *TooManyTrafficPolicyInstances) ErrorMessage() string {
 }
 func (e *TooManyTrafficPolicyInstances) ErrorCode() string             { return "TooManyTrafficPolicyInstances" }
 func (e *TooManyTrafficPolicyInstances) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTrafficPolicyInstances) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTrafficPolicyInstances) HasMessage() bool {
-	return e.Message != nil
-}
 
 // This traffic policy version can't be created because you've reached the limit of
 // 1000 on the number of versions that you can create for the current traffic
@@ -1178,12 +907,6 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorCode() string {
 func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You've created the maximum number of authorizations that can be created for the
 // specified hosted zone. To authorize another VPC to be associated with the hosted
@@ -1209,12 +932,6 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorCode() string {
 func (e *TooManyVPCAssociationAuthorizations) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TooManyVPCAssociationAuthorizations) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyVPCAssociationAuthorizations) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A traffic policy that has the same value for Name already exists.
 type TrafficPolicyAlreadyExists struct {
@@ -1232,12 +949,6 @@ func (e *TrafficPolicyAlreadyExists) ErrorMessage() string {
 }
 func (e *TrafficPolicyAlreadyExists) ErrorCode() string             { return "TrafficPolicyAlreadyExists" }
 func (e *TrafficPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrafficPolicyAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrafficPolicyAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is already a traffic policy instance with the specified ID.
 type TrafficPolicyInstanceAlreadyExists struct {
@@ -1259,12 +970,6 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorCode() string {
 func (e *TrafficPolicyInstanceAlreadyExists) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TrafficPolicyInstanceAlreadyExists) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrafficPolicyInstanceAlreadyExists) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more traffic policy instances were created by using the specified traffic
 // policy.
@@ -1283,12 +988,6 @@ func (e *TrafficPolicyInUse) ErrorMessage() string {
 }
 func (e *TrafficPolicyInUse) ErrorCode() string             { return "TrafficPolicyInUse" }
 func (e *TrafficPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TrafficPolicyInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TrafficPolicyInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The VPC that you specified is not authorized to be associated with the hosted
 // zone.
@@ -1311,12 +1010,6 @@ func (e *VPCAssociationAuthorizationNotFound) ErrorCode() string {
 func (e *VPCAssociationAuthorizationNotFound) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *VPCAssociationAuthorizationNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VPCAssociationAuthorizationNotFound) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified VPC and hosted zone are not currently associated.
 type VPCAssociationNotFound struct {
@@ -1334,9 +1027,3 @@ func (e *VPCAssociationNotFound) ErrorMessage() string {
 }
 func (e *VPCAssociationNotFound) ErrorCode() string             { return "VPCAssociationNotFound" }
 func (e *VPCAssociationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *VPCAssociationNotFound) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *VPCAssociationNotFound) HasMessage() bool {
-	return e.Message != nil
-}

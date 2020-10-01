@@ -55,7 +55,10 @@ func (c *Client) DeleteTerminology(ctx context.Context, params *DeleteTerminolog
 }
 
 type DeleteTerminologyInput struct {
+
 	// The name of the custom terminology being deleted.
+	//
+	// This member is required.
 	Name *string
 }
 

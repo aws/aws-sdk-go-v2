@@ -56,18 +56,23 @@ func (c *Client) ListRecipes(ctx context.Context, params *ListRecipesInput, optF
 }
 
 type ListRecipesInput struct {
+
 	// The default is SERVICE.
 	RecipeProvider types.RecipeProvider
+
 	// A token returned from the previous call to ListRecipes for getting the next set
 	// of recipes (if they exist).
 	NextToken *string
+
 	// The maximum number of recipes to return.
 	MaxResults *int32
 }
 
 type ListRecipesOutput struct {
+
 	// A token for getting the next set of recipes.
 	NextToken *string
+
 	// The list of available recipes.
 	Recipes []*types.RecipeSummary
 

@@ -56,30 +56,47 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 }
 
 type CreateDataSourceInput struct {
+
 	// The type of the DataSource.
+	//
+	// This member is required.
 	Type types.DataSourceType
+
 	// Relational database settings.
 	RelationalDatabaseConfig *types.RelationalDatabaseDataSourceConfig
+
 	// AWS Lambda settings.
 	LambdaConfig *types.LambdaDataSourceConfig
+
 	// A description of the DataSource.
 	Description *string
+
 	// Amazon DynamoDB settings.
 	DynamodbConfig *types.DynamodbDataSourceConfig
+
 	// The AWS IAM service role ARN for the data source. The system assumes this role
 	// when accessing the data source.
 	ServiceRoleArn *string
+
 	// HTTP endpoint settings.
 	HttpConfig *types.HttpDataSourceConfig
+
 	// The API ID for the GraphQL API for the DataSource.
+	//
+	// This member is required.
 	ApiId *string
+
 	// A user-supplied name for the DataSource.
+	//
+	// This member is required.
 	Name *string
+
 	// Amazon Elasticsearch Service settings.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 }
 
 type CreateDataSourceOutput struct {
+
 	// The DataSource object.
 	DataSource *types.DataSource
 

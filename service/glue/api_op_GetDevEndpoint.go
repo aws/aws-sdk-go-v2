@@ -60,11 +60,15 @@ func (c *Client) GetDevEndpoint(ctx context.Context, params *GetDevEndpointInput
 }
 
 type GetDevEndpointInput struct {
+
 	// Name of the DevEndpoint to retrieve information for.
+	//
+	// This member is required.
 	EndpointName *string
 }
 
 type GetDevEndpointOutput struct {
+
 	// A DevEndpoint definition.
 	DevEndpoint *types.DevEndpoint
 

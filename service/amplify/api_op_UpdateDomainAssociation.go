@@ -57,25 +57,40 @@ func (c *Client) UpdateDomainAssociation(ctx context.Context, params *UpdateDoma
 
 // The request structure for the update domain association request.
 type UpdateDomainAssociationInput struct {
+
 	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
+
 	// Sets the branch patterns for automatic subdomain creation.
 	AutoSubDomainCreationPatterns []*string
+
 	// The required AWS Identity and Access Management (IAM) service role for the
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// Describes the settings for the subdomain.
+	//
+	// This member is required.
 	SubDomainSettings []*types.SubDomainSetting
+
 	// The name of the domain.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 // The result structure for the update domain association request.
 type UpdateDomainAssociationOutput struct {
+
 	// Describes a domain association, which associates a custom domain with an Amplify
 	// app.
+	//
+	// This member is required.
 	DomainAssociation *types.DomainAssociation
 
 	// Metadata pertaining to the operation's result.

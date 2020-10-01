@@ -55,8 +55,12 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 }
 
 type DeleteUserInput struct {
+
 	// The ARN of the user's enrollment in the organization. Required.
+	//
+	// This member is required.
 	EnrollmentId *string
+
 	// The ARN of the user to delete in the organization. Required.
 	UserArn *string
 }

@@ -59,7 +59,10 @@ func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, 
 }
 
 type DeleteWebhookInput struct {
+
 	// The name of the webhook you want to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

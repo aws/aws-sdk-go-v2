@@ -68,13 +68,22 @@ func (c *Client) CreateAppCookieStickinessPolicy(ctx context.Context, params *Cr
 
 // Contains the parameters for CreateAppCookieStickinessPolicy.
 type CreateAppCookieStickinessPolicyInput struct {
+
 	// The name of the application cookie used for stickiness.
+	//
+	// This member is required.
 	CookieName *string
+
 	// The name of the load balancer.
+	//
+	// This member is required.
 	LoadBalancerName *string
+
 	// The name of the policy being created. Policy names must consist of alphanumeric
 	// characters and dashes (-). This name must be unique within the set of policies
 	// for this load balancer.
+	//
+	// This member is required.
 	PolicyName *string
 }
 

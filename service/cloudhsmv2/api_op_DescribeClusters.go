@@ -60,6 +60,7 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 }
 
 type DescribeClustersInput struct {
+
 	// One or more filters to limit the items returned in the response. Use the
 	// clusterIds filter to return only the specified clusters. Specify clusters by
 	// their cluster identifier (ID). Use the vpcIds filter to return only the clusters
@@ -67,19 +68,23 @@ type DescribeClustersInput struct {
 	// identifier (ID). Use the states filter to return only clusters that match the
 	// specified state.
 	Filters map[string][]*string
+
 	// The NextToken value that you received in the previous response. Use this value
 	// to get more clusters.
 	NextToken *string
+
 	// The maximum number of clusters to return in the response. When there are more
 	// clusters than the number you specify, the response contains a NextToken value.
 	MaxResults *int32
 }
 
 type DescribeClustersOutput struct {
+
 	// An opaque string that indicates that the response contains only a subset of
 	// clusters. Use this value in a subsequent DescribeClusters request to get more
 	// clusters.
 	NextToken *string
+
 	// A list of clusters.
 	Clusters []*types.Cluster
 

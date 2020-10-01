@@ -59,11 +59,15 @@ func (c *Client) RebootInstance(ctx context.Context, params *RebootInstanceInput
 }
 
 type RebootInstanceInput struct {
+
 	// The name of the instance to reboot.
+	//
+	// This member is required.
 	InstanceName *string
 }
 
 type RebootInstanceOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

@@ -57,7 +57,10 @@ func (c *Client) DeleteContainer(ctx context.Context, params *DeleteContainerInp
 }
 
 type DeleteContainerInput struct {
+
 	// The name of the container to delete.
+	//
+	// This member is required.
 	ContainerName *string
 }
 

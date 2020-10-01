@@ -78,12 +78,16 @@ func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAcce
 }
 
 type GetPublicAccessBlockInput struct {
+
 	// The name of the Amazon S3 bucket whose PublicAccessBlock configuration you want
 	// to retrieve.
+	//
+	// This member is required.
 	Bucket *string
 }
 
 type GetPublicAccessBlockOutput struct {
+
 	// The PublicAccessBlock configuration currently in effect for this Amazon S3
 	// bucket.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration

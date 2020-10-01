@@ -62,43 +62,65 @@ func (c *Client) ListRecords(ctx context.Context, params *ListRecordsInput, optF
 
 // A request for a list of records.
 type ListRecordsInput struct {
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityPoolId *string
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
 	IdentityId *string
+
 	// The maximum number of results to be returned.
 	MaxResults *int32
+
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
+
 	// The last server sync count for this record.
 	LastSyncCount *int64
+
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
+	//
+	// This member is required.
 	DatasetName *string
+
 	// A token containing a session ID, identity ID, and expiration.
 	SyncSessionToken *string
 }
 
 // Returned for a successful ListRecordsRequest.
 type ListRecordsOutput struct {
+
 	// Total number of records.
 	Count *int32
+
 	// Server sync count for this dataset.
 	DatasetSyncCount *int64
+
 	// Names of merged datasets.
 	MergedDatasetNames []*string
+
 	// A token containing a session ID, identity ID, and expiration.
 	SyncSessionToken *string
+
 	// The user/device that made the last change to this record.
 	LastModifiedBy *string
+
 	// A boolean value specifying whether to delete the dataset locally.
 	DatasetDeletedAfterRequestedSyncCount *bool
+
 	// A list of all records.
 	Records []*types.Record
+
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
+
 	// Indicates whether the dataset exists.
 	DatasetExists *bool
 

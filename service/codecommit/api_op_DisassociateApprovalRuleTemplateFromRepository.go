@@ -58,10 +58,16 @@ func (c *Client) DisassociateApprovalRuleTemplateFromRepository(ctx context.Cont
 }
 
 type DisassociateApprovalRuleTemplateFromRepositoryInput struct {
+
 	// The name of the approval rule template to disassociate from a specified
 	// repository.
+	//
+	// This member is required.
 	ApprovalRuleTemplateName *string
+
 	// The name of the repository you want to disassociate from the template.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 

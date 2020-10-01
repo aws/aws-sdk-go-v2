@@ -56,7 +56,10 @@ func (c *Client) DeleteSnapshotCopyGrant(ctx context.Context, params *DeleteSnap
 
 // The result of the DeleteSnapshotCopyGrant action.
 type DeleteSnapshotCopyGrantInput struct {
+
 	// The name of the snapshot copy grant to delete.
+	//
+	// This member is required.
 	SnapshotCopyGrantName *string
 }
 

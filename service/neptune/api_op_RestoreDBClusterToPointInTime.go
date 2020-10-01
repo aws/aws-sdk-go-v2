@@ -66,8 +66,10 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 }
 
 type RestoreDBClusterToPointInTimeInput struct {
+
 	// The tags to be applied to the restored DB cluster.
 	Tags []*types.Tag
+
 	// The type of restore to be performed. You can specify one of the following
 	// values:
 	//
@@ -80,23 +82,30 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// If you don't specify a RestoreType value, then
 	// the new DB cluster is restored as a full copy of the source DB cluster.
 	RestoreType *string
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
 	// database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
+
 	// The identifier of the source DB cluster from which to restore. Constraints:
 	//
 	//
 	// * Must match the identifier of an existing DBCluster.
+	//
+	// This member is required.
 	SourceDBClusterIdentifier *string
+
 	// The name of the DB cluster parameter group to associate with the new DB cluster.
 	// Constraints:
 	//
 	//     * If supplied, must match the name of an existing
 	// DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
+
 	// The port number on which the new DB cluster accepts connections. Constraints:
 	// Value must be 1150-65535 Default: The same port as the original DB cluster.
 	Port *int32
+
 	// The date and time to restore the DB cluster to. Valid Values: Value must be a
 	// time in Universal Coordinated Time (UTC) format Constraints:
 	//
@@ -114,22 +123,28 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time
+
 	// The list of logs that the restored DB cluster is to export to CloudWatch Logs.
 	EnableCloudwatchLogsExports []*string
+
 	// A value that is set to true to restore the DB cluster to the latest restorable
 	// backup time, and false otherwise. Default: false Constraints: Cannot be
 	// specified if RestoreToTime parameter is provided.
 	UseLatestRestorableTime *bool
+
 	// The DB subnet group name to use for the new DB cluster. Constraints: If
 	// supplied, must match the name of an existing DBSubnetGroup. Example:
 	// mySubnetgroup
 	DBSubnetGroupName *string
+
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled.
 	DeletionProtection *bool
+
 	// (Not supported by Neptune)
 	OptionGroupName *string
+
 	// The name of the new DB cluster to be created. Constraints:
 	//
 	//     * Must contain
@@ -139,7 +154,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// letter
 	//
 	//     * Cannot end with a hyphen or contain two consecutive hyphens
+	//
+	// This member is required.
 	DBClusterIdentifier *string
+
 	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from an
 	// encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN)
 	// for the KMS encryption key. If you are restoring a DB cluster with the same AWS
@@ -161,11 +179,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// If DBClusterIdentifier refers to a DB cluster that
 	// is not encrypted, then the restore request is rejected.
 	KmsKeyId *string
+
 	// A list of VPC security groups that the new DB cluster belongs to.
 	VpcSecurityGroupIds []*string
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {
+
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
 	// a response element in the DescribeDBClusters () action.
 	DBCluster *types.DBCluster

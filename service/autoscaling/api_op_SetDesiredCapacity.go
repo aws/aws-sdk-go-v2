@@ -60,15 +60,22 @@ func (c *Client) SetDesiredCapacity(ctx context.Context, params *SetDesiredCapac
 }
 
 type SetDesiredCapacityInput struct {
+
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before initiating a scaling activity to set your Auto Scaling group to
 	// its new capacity. By default, Amazon EC2 Auto Scaling does not honor the
 	// cooldown period during manual scaling activities.
 	HonorCooldown *bool
+
 	// The desired capacity is the initial capacity of the Auto Scaling group after
 	// this operation completes and the capacity it attempts to maintain.
+	//
+	// This member is required.
 	DesiredCapacity *int32
+
 	// The name of the Auto Scaling group.
+	//
+	// This member is required.
 	AutoScalingGroupName *string
 }
 

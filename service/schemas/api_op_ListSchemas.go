@@ -56,21 +56,29 @@ func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optF
 }
 
 type ListSchemasInput struct {
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
+
 	// Specifying this limits the results to only those schema names that start with
 	// the specified prefix.
 	SchemaNamePrefix *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
-	Limit        *int32
+
+	Limit *int32
 }
 
 type ListSchemasOutput struct {
+
 	// An array of schema summaries.
 	Schemas []*types.SchemaSummary
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.

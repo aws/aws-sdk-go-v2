@@ -56,23 +56,34 @@ func (c *Client) ListNodes(ctx context.Context, params *ListNodesInput, optFns .
 }
 
 type ListNodesInput struct {
+
 	// The unique identifier of the member who owns the nodes to list.
+	//
+	// This member is required.
 	MemberId *string
+
 	// An optional status specifier. If provided, only nodes currently in this status
 	// are listed.
 	Status types.NodeStatus
+
 	// The unique identifier of the network for which to list nodes.
+	//
+	// This member is required.
 	NetworkId *string
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
 	// The maximum number of nodes to list.
 	MaxResults *int32
 }
 
 type ListNodesOutput struct {
+
 	// An array of NodeSummary objects that contain configuration properties for each
 	// node.
 	Nodes []*types.NodeSummary
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 

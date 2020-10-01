@@ -56,6 +56,7 @@ func (c *Client) GetSMSAttributes(ctx context.Context, params *GetSMSAttributesI
 
 // The input for the GetSMSAttributes request.
 type GetSMSAttributesInput struct {
+
 	// A list of the individual attribute names, such as MonthlySpendLimit, for which
 	// you want values. For all attribute names, see SetSMSAttributes
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html). If you
@@ -65,6 +66,7 @@ type GetSMSAttributesInput struct {
 
 // The response from the GetSMSAttributes request.
 type GetSMSAttributesOutput struct {
+
 	// The SMS attribute names and their values.
 	Attributes map[string]*string
 

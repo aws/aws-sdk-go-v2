@@ -55,18 +55,27 @@ func (c *Client) DeleteDataSet(ctx context.Context, params *DeleteDataSetInput, 
 }
 
 type DeleteDataSetInput struct {
+
 	// The AWS account ID.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
+	//
+	// This member is required.
 	DataSetId *string
 }
 
 type DeleteDataSetOutput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
 	DataSetId *string

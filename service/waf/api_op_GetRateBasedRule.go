@@ -63,12 +63,16 @@ func (c *Client) GetRateBasedRule(ctx context.Context, params *GetRateBasedRuleI
 }
 
 type GetRateBasedRuleInput struct {
+
 	// The RuleId of the RateBasedRule () that you want to get. RuleId is returned by
 	// CreateRateBasedRule () and by ListRateBasedRules ().
+	//
+	// This member is required.
 	RuleId *string
 }
 
 type GetRateBasedRuleOutput struct {
+
 	// Information about the RateBasedRule () that you specified in the
 	// GetRateBasedRule request.
 	Rule *types.RateBasedRule

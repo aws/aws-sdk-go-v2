@@ -56,15 +56,21 @@ func (c *Client) DescribeClientVpnRoutes(ctx context.Context, params *DescribeCl
 }
 
 type DescribeClientVpnRoutesInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
 	ClientVpnEndpointId *string
+
 	// One or more filters. Filter names and values are case-sensitive.
 	//
 	//     *
@@ -76,6 +82,7 @@ type DescribeClientVpnRoutesInput struct {
 	//
 	// * target-subnet - The ID of the subnet through which traffic is routed.
 	Filters []*types.Filter
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the nextToken
 	// value.
@@ -83,9 +90,11 @@ type DescribeClientVpnRoutesInput struct {
 }
 
 type DescribeClientVpnRoutesOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about the Client VPN endpoint routes.
 	Routes []*types.ClientVpnRoute
 

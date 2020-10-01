@@ -57,15 +57,24 @@ func (c *Client) GetBackendEnvironment(ctx context.Context, params *GetBackendEn
 
 // The request structure for the get backend environment request.
 type GetBackendEnvironmentInput struct {
+
 	// The unique id for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The name for the backend environment.
+	//
+	// This member is required.
 	EnvironmentName *string
 }
 
 // The result structure for the get backend environment result.
 type GetBackendEnvironmentOutput struct {
+
 	// Describes the backend environment for an Amplify app.
+	//
+	// This member is required.
 	BackendEnvironment *types.BackendEnvironment
 
 	// Metadata pertaining to the operation's result.

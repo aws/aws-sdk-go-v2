@@ -56,30 +56,41 @@ func (c *Client) GetResourceShareAssociations(ctx context.Context, params *GetRe
 }
 
 type GetResourceShareAssociationsInput struct {
+
 	// The association status.
 	AssociationStatus types.ResourceShareAssociationStatus
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The Amazon Resource Names (ARN) of the resource shares.
 	ResourceShareArns []*string
+
 	// The association type. Specify PRINCIPAL to list the principals that are
 	// associated with the specified resource share. Specify RESOURCE to list the
 	// resources that are associated with the specified resource share.
+	//
+	// This member is required.
 	AssociationType types.ResourceShareAssociationType
+
 	// The principal. You cannot specify this parameter if the association type is
 	// RESOURCE.
 	Principal *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The Amazon Resource Name (ARN) of the resource. You cannot specify this
 	// parameter if the association type is PRINCIPAL.
 	ResourceArn *string
 }
 
 type GetResourceShareAssociationsOutput struct {
+
 	// Information about the associations.
 	ResourceShareAssociations []*types.ResourceShareAssociation
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

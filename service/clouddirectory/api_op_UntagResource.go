@@ -55,10 +55,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 }
 
 type UntagResourceInput struct {
+
 	// The Amazon Resource Name (ARN) of the resource. Tagging is only supported for
 	// directories.
+	//
+	// This member is required.
 	ResourceArn *string
+
 	// Keys of the tag that need to be removed from the resource.
+	//
+	// This member is required.
 	TagKeys []*string
 }
 

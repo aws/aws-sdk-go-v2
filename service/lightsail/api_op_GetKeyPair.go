@@ -56,11 +56,15 @@ func (c *Client) GetKeyPair(ctx context.Context, params *GetKeyPairInput, optFns
 }
 
 type GetKeyPairInput struct {
+
 	// The name of the key pair for which you are requesting information.
+	//
+	// This member is required.
 	KeyPairName *string
 }
 
 type GetKeyPairOutput struct {
+
 	// An array of key-value pairs containing information about the key pair.
 	KeyPair *types.KeyPair
 

@@ -55,8 +55,12 @@ func (c *Client) UpdateCoreDefinition(ctx context.Context, params *UpdateCoreDef
 }
 
 type UpdateCoreDefinitionInput struct {
+
 	// The ID of the core definition.
+	//
+	// This member is required.
 	CoreDefinitionId *string
+
 	// The name of the definition.
 	Name *string
 }

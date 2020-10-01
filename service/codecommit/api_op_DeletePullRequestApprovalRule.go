@@ -60,16 +60,25 @@ func (c *Client) DeletePullRequestApprovalRule(ctx context.Context, params *Dele
 }
 
 type DeletePullRequestApprovalRuleInput struct {
+
 	// The system-generated ID of the pull request that contains the approval rule you
 	// want to delete.
+	//
+	// This member is required.
 	PullRequestId *string
+
 	// The name of the approval rule you want to delete.
+	//
+	// This member is required.
 	ApprovalRuleName *string
 }
 
 type DeletePullRequestApprovalRuleOutput struct {
+
 	// The ID of the deleted approval rule. If the approval rule was deleted in an
 	// earlier API call, the response is 200 OK without content.
+	//
+	// This member is required.
 	ApprovalRuleId *string
 
 	// Metadata pertaining to the operation's result.

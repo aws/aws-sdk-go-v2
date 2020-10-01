@@ -56,25 +56,39 @@ func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns
 }
 
 type CreateLinkInput struct {
+
 	// The tags to apply to the resource during creation.
 	Tags []*types.Tag
+
 	// The ID of the site.
+	//
+	// This member is required.
 	SiteId *string
+
 	// The type of the link. Constraints: Cannot include the following characters: | \
 	// ^ Length Constraints: Maximum length of 128 characters.
 	Type *string
+
 	// The ID of the global network.
+	//
+	// This member is required.
 	GlobalNetworkId *string
+
 	// The provider of the link. Constraints: Cannot include the following characters:
 	// | \ ^ Length Constraints: Maximum length of 128 characters.
 	Provider *string
+
 	// A description of the link. Length Constraints: Maximum length of 256 characters.
 	Description *string
+
 	// The upload speed and download speed in Mbps.
+	//
+	// This member is required.
 	Bandwidth *types.Bandwidth
 }
 
 type CreateLinkOutput struct {
+
 	// Information about the link.
 	Link *types.Link
 

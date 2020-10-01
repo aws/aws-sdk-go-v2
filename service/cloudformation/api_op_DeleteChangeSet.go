@@ -58,9 +58,13 @@ func (c *Client) DeleteChangeSet(ctx context.Context, params *DeleteChangeSetInp
 
 // The input for the DeleteChangeSet () action.
 type DeleteChangeSetInput struct {
+
 	// The name or Amazon Resource Name (ARN) of the change set that you want to
 	// delete.
+	//
+	// This member is required.
 	ChangeSetName *string
+
 	// If you specified the name of a change set to delete, specify the stack name or
 	// ID (ARN) that is associated with it.
 	StackName *string

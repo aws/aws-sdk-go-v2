@@ -62,23 +62,36 @@ func (c *Client) DescribeGatewayCapabilityConfiguration(ctx context.Context, par
 }
 
 type DescribeGatewayCapabilityConfigurationInput struct {
+
 	// The namespace of the capability configuration. For example, if you configure
 	// OPC-UA sources from the AWS IoT SiteWise console, your OPC-UA capability
 	// configuration has the namespace iotsitewise:opcuacollector:version, where
 	// version is a number such as 1.
+	//
+	// This member is required.
 	CapabilityNamespace *string
+
 	// The ID of the gateway that defines the capability configuration.
+	//
+	// This member is required.
 	GatewayId *string
 }
 
 type DescribeGatewayCapabilityConfigurationOutput struct {
+
 	// The namespace of the gateway capability.
+	//
+	// This member is required.
 	CapabilityNamespace *string
+
 	// The JSON document that defines the gateway capability's configuration. For more
 	// information, see Configuring data sources (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
 	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
 	CapabilityConfiguration *string
+
 	// The synchronization status of the capability configuration. The sync status can
 	// be one of the following:
 	//
@@ -90,8 +103,13 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	//
 	//     * SYNC_FAILED – The gateway rejected the capability
 	// configuration.
+	//
+	// This member is required.
 	CapabilitySyncStatus types.CapabilitySyncStatus
+
 	// The ID of the gateway that defines the capability configuration.
+	//
+	// This member is required.
 	GatewayId *string
 
 	// Metadata pertaining to the operation's result.

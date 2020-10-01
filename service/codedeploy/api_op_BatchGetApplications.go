@@ -58,13 +58,17 @@ func (c *Client) BatchGetApplications(ctx context.Context, params *BatchGetAppli
 
 // Represents the input of a BatchGetApplications operation.
 type BatchGetApplicationsInput struct {
+
 	// A list of application names separated by spaces. The maximum number of
 	// application names you can specify is 100.
+	//
+	// This member is required.
 	ApplicationNames []*string
 }
 
 // Represents the output of a BatchGetApplications operation.
 type BatchGetApplicationsOutput struct {
+
 	// Information about the applications.
 	ApplicationsInfo []*types.ApplicationInfo
 

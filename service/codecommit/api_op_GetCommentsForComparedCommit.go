@@ -59,25 +59,36 @@ func (c *Client) GetCommentsForComparedCommit(ctx context.Context, params *GetCo
 }
 
 type GetCommentsForComparedCommitInput struct {
+
 	// To establish the directionality of the comparison, the full commit ID of the
 	// before commit.
 	BeforeCommitId *string
+
 	// An enumeration token that when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	// The default is 100 comments, but you can configure up to 500.
 	MaxResults *int32
+
 	// To establish the directionality of the comparison, the full commit ID of the
 	// after commit.
+	//
+	// This member is required.
 	AfterCommitId *string
+
 	// The name of the repository where you want to compare commits.
+	//
+	// This member is required.
 	RepositoryName *string
 }
 
 type GetCommentsForComparedCommitOutput struct {
+
 	// A list of comment objects on the compared commit.
 	CommentsForComparedCommitData []*types.CommentsForComparedCommit
+
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string

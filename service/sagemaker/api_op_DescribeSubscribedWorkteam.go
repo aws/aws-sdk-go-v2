@@ -57,12 +57,18 @@ func (c *Client) DescribeSubscribedWorkteam(ctx context.Context, params *Describ
 }
 
 type DescribeSubscribedWorkteamInput struct {
+
 	// The Amazon Resource Name (ARN) of the subscribed work team to describe.
+	//
+	// This member is required.
 	WorkteamArn *string
 }
 
 type DescribeSubscribedWorkteamOutput struct {
+
 	// A Workteam instance that contains information about the work team.
+	//
+	// This member is required.
 	SubscribedWorkteam *types.SubscribedWorkteam
 
 	// Metadata pertaining to the operation's result.

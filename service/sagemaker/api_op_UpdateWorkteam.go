@@ -56,18 +56,27 @@ func (c *Client) UpdateWorkteam(ctx context.Context, params *UpdateWorkteamInput
 }
 
 type UpdateWorkteamInput struct {
+
 	// A list of MemberDefinition objects that contain the updated work team members.
 	MemberDefinitions []*types.MemberDefinition
+
 	// The name of the work team to update.
+	//
+	// This member is required.
 	WorkteamName *string
+
 	// An updated description for the work team.
 	Description *string
+
 	// Configures SNS topic notifications for available or expiring work items
 	NotificationConfiguration *types.NotificationConfiguration
 }
 
 type UpdateWorkteamOutput struct {
+
 	// A Workteam object that describes the updated work team.
+	//
+	// This member is required.
 	Workteam *types.Workteam
 
 	// Metadata pertaining to the operation's result.

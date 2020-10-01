@@ -59,11 +59,13 @@ func (c *Client) DisableVpcClassicLinkDnsSupport(ctx context.Context, params *Di
 }
 
 type DisableVpcClassicLinkDnsSupportInput struct {
+
 	// The ID of the VPC.
 	VpcId *string
 }
 
 type DisableVpcClassicLinkDnsSupportOutput struct {
+
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
 

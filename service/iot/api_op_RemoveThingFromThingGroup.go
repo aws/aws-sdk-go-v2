@@ -56,12 +56,16 @@ func (c *Client) RemoveThingFromThingGroup(ctx context.Context, params *RemoveTh
 }
 
 type RemoveThingFromThingGroupInput struct {
+
 	// The ARN of the thing to remove from the group.
 	ThingArn *string
+
 	// The name of the thing to remove from the group.
 	ThingName *string
+
 	// The group name.
 	ThingGroupName *string
+
 	// The group ARN.
 	ThingGroupArn *string
 }

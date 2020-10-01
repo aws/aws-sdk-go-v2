@@ -55,31 +55,38 @@ func (c *Client) ListTranscriptionJobs(ctx context.Context, params *ListTranscri
 }
 
 type ListTranscriptionJobsInput struct {
+
 	// When specified, the jobs returned in the list are limited to jobs whose name
 	// contains the specified string.
 	JobNameContains *string
+
 	// When specified, returns only transcription jobs with the specified status. Jobs
 	// are ordered by creation date, with the newest jobs returned first. If you don’t
 	// specify a status, Amazon Transcribe returns all transcription jobs ordered by
 	// creation date.
 	Status types.TranscriptionJobStatus
+
 	// If the result of the previous request to ListTranscriptionJobs was truncated,
 	// include the NextToken to fetch the next set of jobs.
 	NextToken *string
+
 	// The maximum number of jobs to return in the response. If there are fewer results
 	// in the list, this response contains only the actual results.
 	MaxResults *int32
 }
 
 type ListTranscriptionJobsOutput struct {
+
 	// The ListTranscriptionJobs operation returns a page of jobs at a time. The
 	// maximum size of the page is set by the MaxResults parameter. If there are more
 	// jobs in the list than the page size, Amazon Transcribe returns the NextPage
 	// token. Include the token in the next request to the ListTranscriptionJobs
 	// operation to return in the next page of jobs.
 	NextToken *string
+
 	// The requested status of the jobs returned.
 	Status types.TranscriptionJobStatus
+
 	// A list of objects containing summary information for a transcription job.
 	TranscriptionJobSummaries []*types.TranscriptionJobSummary
 

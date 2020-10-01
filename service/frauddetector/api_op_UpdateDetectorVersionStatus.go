@@ -58,11 +58,20 @@ func (c *Client) UpdateDetectorVersionStatus(ctx context.Context, params *Update
 }
 
 type UpdateDetectorVersionStatusInput struct {
+
 	// The detector ID.
+	//
+	// This member is required.
 	DetectorId *string
+
 	// The new status.
+	//
+	// This member is required.
 	Status types.DetectorVersionStatus
+
 	// The detector version ID.
+	//
+	// This member is required.
 	DetectorVersionId *string
 }
 

@@ -55,21 +55,30 @@ func (c *Client) CreateRegistry(ctx context.Context, params *CreateRegistryInput
 }
 
 type CreateRegistryInput struct {
+
 	// Tags to associate with the registry.
 	Tags map[string]*string
+
 	// A description of the registry to be created.
 	Description *string
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
 }
 
 type CreateRegistryOutput struct {
+
 	// The description of the registry.
 	Description *string
+
 	// The ARN of the registry.
 	RegistryArn *string
+
 	// Tags associated with the registry.
 	Tags map[string]*string
+
 	// The name of the registry.
 	RegistryName *string
 

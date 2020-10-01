@@ -54,6 +54,7 @@ func (c *Client) DeleteRoom(ctx context.Context, params *DeleteRoomInput, optFns
 }
 
 type DeleteRoomInput struct {
+
 	// The ARN of the room to delete. Required.
 	RoomArn *string
 }

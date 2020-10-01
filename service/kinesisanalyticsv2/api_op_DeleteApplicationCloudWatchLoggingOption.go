@@ -57,24 +57,36 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOption(ctx context.Context, p
 }
 
 type DeleteApplicationCloudWatchLoggingOptionInput struct {
+
 	// The application name.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The CloudWatchLoggingOptionId of the Amazon CloudWatch logging option to delete.
 	// You can get the CloudWatchLoggingOptionId by using the DescribeApplication ()
 	// operation.
+	//
+	// This member is required.
 	CloudWatchLoggingOptionId *string
+
 	// The version ID of the application. You can retrieve the application version ID
 	// using DescribeApplication ().
+	//
+	// This member is required.
 	CurrentApplicationVersionId *int64
 }
 
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
+
 	// The version ID of the application. Kinesis Data Analytics updates the
 	// ApplicationVersionId each time you change the CloudWatch logging options.
 	ApplicationVersionId *int64
+
 	// The descriptions of the remaining CloudWatch logging options for the
 	// application.
 	CloudWatchLoggingOptionDescriptions []*types.CloudWatchLoggingOptionDescription
+
 	// The application's Amazon Resource Name (ARN).
 	ApplicationARN *string
 

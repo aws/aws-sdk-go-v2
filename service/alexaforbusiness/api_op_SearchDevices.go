@@ -56,19 +56,23 @@ func (c *Client) SearchDevices(ctx context.Context, params *SearchDevicesInput, 
 }
 
 type SearchDevicesInput struct {
+
 	// The sort order to use in listing the specified set of devices. Supported sort
 	// keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber,
 	// ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and
 	// FailureCode.
 	SortCriteria []*types.Sort
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
 	MaxResults *int32
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
 	// The filters to use to list a specified set of devices. Supported filter keys are
 	// DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType,
 	// DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE),
@@ -77,10 +81,13 @@ type SearchDevicesInput struct {
 }
 
 type SearchDevicesOutput struct {
+
 	// The devices that meet the specified set of filter criteria, in sort order.
 	Devices []*types.DeviceData
+
 	// The token returned to indicate that there is more data available.
 	NextToken *string
+
 	// The total number of devices returned.
 	TotalCount *int32
 

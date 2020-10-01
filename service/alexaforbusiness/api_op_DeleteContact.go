@@ -55,7 +55,10 @@ func (c *Client) DeleteContact(ctx context.Context, params *DeleteContactInput, 
 }
 
 type DeleteContactInput struct {
+
 	// The ARN of the contact to delete.
+	//
+	// This member is required.
 	ContactArn *string
 }
 

@@ -57,27 +57,34 @@ func (c *Client) GetOpenIDConnectProvider(ctx context.Context, params *GetOpenID
 }
 
 type GetOpenIDConnectProviderInput struct {
+
 	// The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to
 	// get information for. You can get a list of OIDC provider resource ARNs by using
 	// the ListOpenIDConnectProviders () operation. For more information about ARNs,
 	// see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	OpenIDConnectProviderArn *string
 }
 
 // Contains the response to a successful GetOpenIDConnectProvider () request.
 type GetOpenIDConnectProviderOutput struct {
+
 	// A list of certificate thumbprints that are associated with the specified IAM
 	// OIDC provider resource object. For more information, see
 	// CreateOpenIDConnectProvider ().
 	ThumbprintList []*string
+
 	// The URL that the IAM OIDC provider resource object is associated with. For more
 	// information, see CreateOpenIDConnectProvider ().
 	Url *string
+
 	// The date and time when the IAM OIDC provider resource object was created in the
 	// AWS account.
 	CreateDate *time.Time
+
 	// A list of client IDs (also known as audiences) that are associated with the
 	// specified IAM OIDC provider resource object. For more information, see
 	// CreateOpenIDConnectProvider ().

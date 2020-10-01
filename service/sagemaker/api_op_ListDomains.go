@@ -55,16 +55,20 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 }
 
 type ListDomainsInput struct {
+
 	// Returns a list up to a specified limit.
 	MaxResults *int32
+
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
 	NextToken *string
 }
 
 type ListDomainsOutput struct {
+
 	// The list of domains.
 	Domains []*types.DomainDetails
+
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
 	NextToken *string

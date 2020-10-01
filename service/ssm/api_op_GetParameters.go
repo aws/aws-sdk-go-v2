@@ -57,17 +57,23 @@ func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, 
 }
 
 type GetParametersInput struct {
+
 	// Return decrypted secure string value. Return decrypted values for secure string
 	// parameters. This flag is ignored for String and StringList parameter types.
 	WithDecryption *bool
+
 	// Names of the parameters for which you want to query information.
+	//
+	// This member is required.
 	Names []*string
 }
 
 type GetParametersOutput struct {
+
 	// A list of parameters that are not formatted correctly or do not run during an
 	// execution.
 	InvalidParameters []*string
+
 	// A list of details for a parameter.
 	Parameters []*types.Parameter
 

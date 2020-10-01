@@ -57,11 +57,15 @@ func (c *Client) DescribeTopicsDetectionJob(ctx context.Context, params *Describ
 }
 
 type DescribeTopicsDetectionJobInput struct {
+
 	// The identifier assigned by the user to the detection job.
+	//
+	// This member is required.
 	JobId *string
 }
 
 type DescribeTopicsDetectionJobOutput struct {
+
 	// The list of properties for the requested job.
 	TopicsDetectionJobProperties *types.TopicsDetectionJobProperties
 

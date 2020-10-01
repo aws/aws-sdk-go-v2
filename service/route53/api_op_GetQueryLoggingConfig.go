@@ -61,16 +61,22 @@ func (c *Client) GetQueryLoggingConfig(ctx context.Context, params *GetQueryLogg
 }
 
 type GetQueryLoggingConfigInput struct {
+
 	// The ID of the configuration for DNS query logging that you want to get
 	// information about.
+	//
+	// This member is required.
 	Id *string
 }
 
 type GetQueryLoggingConfigOutput struct {
+
 	// A complex type that contains information about the query logging configuration
 	// that you specified in a GetQueryLoggingConfig
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html)
 	// request.
+	//
+	// This member is required.
 	QueryLoggingConfig *types.QueryLoggingConfig
 
 	// Metadata pertaining to the operation's result.

@@ -61,9 +61,13 @@ func (c *Client) DescribeManagedRuleGroup(ctx context.Context, params *DescribeM
 }
 
 type DescribeManagedRuleGroupInput struct {
+
 	// The name of the managed rule group. You use this, along with the vendor name, to
 	// identify the rule group.
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -74,13 +78,19 @@ type DescribeManagedRuleGroupInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// The name of the managed rule group vendor. You use this, along with the rule
 	// group name, to identify the rule group.
+	//
+	// This member is required.
 	VendorName *string
 }
 
 type DescribeManagedRuleGroupOutput struct {
+
 	// The web ACL capacity units (WCUs) required for this rule group. AWS WAF uses web
 	// ACL capacity units (WCU) to calculate and control the operating resources that
 	// are used to run your rules, rule groups, and web ACLs. AWS WAF calculates
@@ -88,6 +98,7 @@ type DescribeManagedRuleGroupOutput struct {
 	// Rule group capacity is fixed at creation, so users can plan their web ACL WCU
 	// usage when they use a rule group. The WCU limit for web ACLs is 1,500.
 	Capacity *int64
+
 	//
 	Rules []*types.RuleSummary
 

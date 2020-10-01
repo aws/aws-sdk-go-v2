@@ -57,30 +57,43 @@ func (c *Client) ListObjectParents(ctx context.Context, params *ListObjectParent
 }
 
 type ListObjectParentsInput struct {
+
 	// Represents the manner and timing in which the successful write or update of an
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
+
 	// The reference that identifies the object for which parent objects are being
 	// listed.
+	//
+	// This member is required.
 	ObjectReference *types.ObjectReference
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int32
+
 	// The pagination token.
 	NextToken *string
+
 	// When set to True, returns all ListObjectParentsResponse$ParentLinks (). There
 	// could be multiple links between a parent-child pair.
 	IncludeAllLinksToEachParent *bool
+
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// the object resides. For more information, see arns ().
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type ListObjectParentsOutput struct {
+
 	// Returns a list of parent reference and LinkName Tuples.
 	ParentLinks []*types.ObjectIdentifierAndLinkNameTuple
+
 	// The pagination token.
 	NextToken *string
+
 	// The parent structure, which is a map with key as the ObjectIdentifier and
 	// LinkName as the value.
 	Parents map[string]*string

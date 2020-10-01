@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Job creation failed. Currently, clusters support five nodes. If you have less
@@ -26,12 +25,6 @@ func (e *ClusterLimitExceededException) ErrorMessage() string {
 }
 func (e *ClusterLimitExceededException) ErrorCode() string             { return "ClusterLimitExceededException" }
 func (e *ClusterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your IAM user lacks the necessary Amazon EC2 permissions to perform the
 // attempted action.
@@ -50,12 +43,6 @@ func (e *Ec2RequestFailedException) ErrorMessage() string {
 }
 func (e *Ec2RequestFailedException) ErrorCode() string             { return "Ec2RequestFailedException" }
 func (e *Ec2RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *Ec2RequestFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *Ec2RequestFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The address provided was invalid. Check the address with your region's carrier,
 // and try again.
@@ -74,12 +61,6 @@ func (e *InvalidAddressException) ErrorMessage() string {
 }
 func (e *InvalidAddressException) ErrorCode() string             { return "InvalidAddressException" }
 func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidAddressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidAddressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Job or cluster creation failed. One or more inputs were invalid. Confirm that
 // the CreateClusterRequest$SnowballType () value supports your
@@ -101,12 +82,6 @@ func (e *InvalidInputCombinationException) ErrorCode() string {
 	return "InvalidInputCombinationException"
 }
 func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputCombinationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputCombinationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The action can't be performed because the job's current state doesn't allow that
 // action to be performed.
@@ -125,12 +100,6 @@ func (e *InvalidJobStateException) ErrorMessage() string {
 }
 func (e *InvalidJobStateException) ErrorCode() string             { return "InvalidJobStateException" }
 func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidJobStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidJobStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The NextToken string was altered unexpectedly, and the operation has stopped.
 // Run the operation without changing the NextToken string, and try again.
@@ -149,12 +118,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource can't be found. Check the information you provided in
 // your last request, and try again.
@@ -175,18 +138,6 @@ func (e *InvalidResourceException) ErrorMessage() string {
 }
 func (e *InvalidResourceException) ErrorCode() string             { return "InvalidResourceException" }
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidResourceException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *InvalidResourceException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
 
 // The provided AWS Key Management Service key lacks the permissions to perform the
 // specified CreateJob () or UpdateJob () action.
@@ -205,12 +156,6 @@ func (e *KMSRequestFailedException) ErrorMessage() string {
 }
 func (e *KMSRequestFailedException) ErrorCode() string             { return "KMSRequestFailedException" }
 func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSRequestFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSRequestFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The address is either outside the serviceable area for your region, or an error
 // occurred. Check the address with your region's carrier and try again. If the
@@ -230,9 +175,3 @@ func (e *UnsupportedAddressException) ErrorMessage() string {
 }
 func (e *UnsupportedAddressException) ErrorCode() string             { return "UnsupportedAddressException" }
 func (e *UnsupportedAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedAddressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedAddressException) HasMessage() bool {
-	return e.Message != nil
-}

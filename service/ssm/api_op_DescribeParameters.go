@@ -62,21 +62,27 @@ func (c *Client) DescribeParameters(ctx context.Context, params *DescribeParamet
 }
 
 type DescribeParametersInput struct {
+
 	// This data type is deprecated. Instead, use ParameterFilters.
 	Filters []*types.ParametersFilter
+
 	// Filters to limit the request results.
 	ParameterFilters []*types.ParameterStringFilter
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
 }
 
 type DescribeParametersOutput struct {
+
 	// Parameters returned by the request.
 	Parameters []*types.ParameterMetadata
+
 	// The token to use when requesting the next set of items.
 	NextToken *string
 

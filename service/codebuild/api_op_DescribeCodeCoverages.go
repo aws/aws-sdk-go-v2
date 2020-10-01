@@ -56,20 +56,29 @@ func (c *Client) DescribeCodeCoverages(ctx context.Context, params *DescribeCode
 }
 
 type DescribeCodeCoveragesInput struct {
+
 	// The minimum line coverage percentage to report.
 	MinLineCoveragePercentage *float64
+
 	// The maximum number of results to return.
 	MaxResults *int32
+
 	// The maximum line coverage percentage to report.
 	MaxLineCoveragePercentage *float64
+
 	// The ARN of the report for which test cases are returned.
+	//
+	// This member is required.
 	ReportArn *string
+
 	// Specifies if the results are sorted in ascending or descending order.
 	SortOrder types.SortOrderType
+
 	// Specifies how the results are sorted. Possible values are: FILE_PATH The results
 	// are sorted by file path. LINE_COVERAGE_PERCENTAGE The results are sorted by the
 	// percentage of lines that are covered.
 	SortBy types.ReportCodeCoverageSortByType
+
 	// The nextToken value returned from a previous call to DescribeCodeCoverages. This
 	// specifies the next item to return. To return the beginning of the list, exclude
 	// this parameter.
@@ -77,8 +86,10 @@ type DescribeCodeCoveragesInput struct {
 }
 
 type DescribeCodeCoveragesOutput struct {
+
 	// An array of CodeCoverage objects that contain the results.
 	CodeCoverages []*types.CodeCoverage
+
 	// If there are more items to return, this contains a token that is passed to a
 	// subsequent call to DescribeCodeCoverages to retrieve the next set of items.
 	NextToken *string

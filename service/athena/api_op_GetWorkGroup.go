@@ -56,11 +56,15 @@ func (c *Client) GetWorkGroup(ctx context.Context, params *GetWorkGroupInput, op
 }
 
 type GetWorkGroupInput struct {
+
 	// The name of the workgroup.
+	//
+	// This member is required.
 	WorkGroup *string
 }
 
 type GetWorkGroupOutput struct {
+
 	// Information about the workgroup.
 	WorkGroup *types.WorkGroup
 

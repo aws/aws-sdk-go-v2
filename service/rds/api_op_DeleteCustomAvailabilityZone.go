@@ -59,11 +59,15 @@ func (c *Client) DeleteCustomAvailabilityZone(ctx context.Context, params *Delet
 }
 
 type DeleteCustomAvailabilityZoneInput struct {
+
 	// The custom AZ identifier.
+	//
+	// This member is required.
 	CustomAvailabilityZoneId *string
 }
 
 type DeleteCustomAvailabilityZoneOutput struct {
+
 	// A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a
 	// VMware vSphere cluster. For more information about RDS on VMware, see the  RDS
 	// on VMware User Guide.

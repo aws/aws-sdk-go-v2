@@ -59,14 +59,17 @@ func (c *Client) DescribeVpnGateways(ctx context.Context, params *DescribeVpnGat
 
 // Contains the parameters for DescribeVpnGateways.
 type DescribeVpnGatewaysInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more virtual private gateway IDs. Default: Describes all your virtual
 	// private gateways.
 	VpnGatewayIds []*string
+
 	// One or more filters.
 	//
 	//     * amazon-side-asn - The Autonomous System Number (ASN)
@@ -105,6 +108,7 @@ type DescribeVpnGatewaysInput struct {
 
 // Contains the output of DescribeVpnGateways.
 type DescribeVpnGatewaysOutput struct {
+
 	// Information about one or more virtual private gateways.
 	VpnGateways []*types.VpnGateway
 

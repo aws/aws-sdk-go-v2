@@ -63,6 +63,7 @@ func (c *Client) ExportEC2InstanceRecommendations(ctx context.Context, params *E
 }
 
 type ExportEC2InstanceRecommendationsInput struct {
+
 	// The IDs of the AWS accounts for which to export instance recommendations. If
 	// your account is the master account of an organization, use this parameter to
 	// specify the member accounts for which you want to export recommendations. This
@@ -72,11 +73,14 @@ type ExportEC2InstanceRecommendationsInput struct {
 	// accounts parameter, is omitted. You can specify multiple account IDs per
 	// request.
 	AccountIds []*string
+
 	// The format of the export file. The only export file format currently supported
 	// is Csv.
 	FileFormat types.FileFormat
+
 	// The recommendations data to include in the export file.
 	FieldsToExport []types.ExportableInstanceField
+
 	// Indicates whether to include recommendations for resources in all member
 	// accounts of the organization if your account is the master account of an
 	// organization. The member accounts must also be opted in to Compute Optimizer.
@@ -85,9 +89,11 @@ type ExportEC2InstanceRecommendationsInput struct {
 	// are not included in the export if this parameter, or the account IDs parameter,
 	// is omitted.
 	IncludeMemberAccounts *bool
+
 	// An array of objects that describe a filter to export a more specific set of
 	// instance recommendations.
 	Filters []*types.Filter
+
 	// An object to specify the destination Amazon Simple Storage Service (Amazon S3)
 	// bucket name and key prefix for the export job. You must create the destination
 	// Amazon S3 bucket for your recommendations export before you create the export
@@ -99,14 +105,18 @@ type ExportEC2InstanceRecommendationsInput struct {
 	// Bucket Policy for Compute Optimizer
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
 	// in the Compute Optimizer user guide.
+	//
+	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 }
 
 type ExportEC2InstanceRecommendationsOutput struct {
+
 	// The identification number of the export job. Use the
 	// DescribeRecommendationExportJobs action, and specify the job ID to view the
 	// status of an export job.
 	JobId *string
+
 	// An object that describes the destination Amazon S3 bucket of a recommendations
 	// export file.
 	S3Destination *types.S3Destination

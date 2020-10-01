@@ -86,6 +86,7 @@ func (c *Client) PutMetricAlarm(ctx context.Context, params *PutMetricAlarmInput
 }
 
 type PutMetricAlarmInput struct {
+
 	// The unit of measure for the statistic. For example, the units for the Amazon EC2
 	// NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an
 	// instance receives on all network interfaces. You can also specify a unit when
@@ -100,6 +101,7 @@ type PutMetricAlarmInput struct {
 	// an incorrect unit that is not published for this metric. Doing so causes the
 	// alarm to be stuck in the INSUFFICIENT DATA state.
 	Unit types.StandardUnit
+
 	// The length, in seconds, used each time the metric specified in MetricName is
 	// evaluated. Valid values are 10, 30, and any multiple of 60. Period is required
 	// for alarms based on static thresholds. If you are creating an alarm based on a
@@ -117,21 +119,27 @@ type PutMetricAlarmInput struct {
 	// evaluation period can be no longer than one day, so Period multiplied by
 	// EvaluationPeriods cannot be more than 86,400 seconds.
 	Period *int32
+
 	// If this is an alarm based on an anomaly detection model, make this value match
 	// the ID of the ANOMALY_DETECTION_BAND function. For an example of how to use this
 	// parameter, see the Anomaly Detection Model Alarm example on this page. If your
 	// alarm uses this parameter, it cannot have Auto Scaling actions.
 	ThresholdMetricId *string
+
 	// The value against which the specified statistic is compared. This parameter is
 	// required for alarms based on static thresholds, but should not be used for
 	// alarms based on anomaly detection models.
 	Threshold *float64
+
 	// The arithmetic operation to use when comparing the specified statistic and
 	// threshold. The specified statistic value is used as the first operand. The
 	// values LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, and
 	// GreaterThanUpperThreshold are used only for alarms based on anomaly detection
 	// models.
+	//
+	// This member is required.
 	ComparisonOperator types.ComparisonOperator
+
 	// Used only for alarms based on percentiles. If you specify ignore, the alarm
 	// state does not change during periods with too few data points to be
 	// statistically significant. If you specify evaluate or omit this parameter, the
@@ -141,40 +149,51 @@ type PutMetricAlarmInput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples).
 	// Valid Values: evaluate | ignore
 	EvaluateLowSampleCountPercentile *string
+
 	// The percentile statistic for the metric specified in MetricName. Specify a value
 	// between p0.0 and p100. When you call PutMetricAlarm and specify a MetricName,
 	// you must specify either Statistic or ExtendedStatistic, but not both.
 	ExtendedStatistic *string
+
 	// The number of data points that must be breaching to trigger the alarm. This is
 	// used only if you are setting an "M out of N" alarm. In that case, this value is
 	// the M. For more information, see Evaluating an Alarm
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation)
 	// in the Amazon CloudWatch User Guide.
 	DatapointsToAlarm *int32
+
 	// Sets how this alarm is to handle missing data points. If TreatMissingData is
 	// omitted, the default behavior of missing is used. For more information, see
 	// Configuring How CloudWatch Alarms Treats Missing Data
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data).
 	// Valid Values: breaching | notBreaching | ignore | missing
 	TreatMissingData *string
+
 	// A list of key-value pairs to associate with the alarm. You can associate as many
 	// as 50 tags with an alarm. Tags can help you organize and categorize your
 	// resources. You can also use them to scope user permissions by granting a user
 	// permission to access or change only resources with certain tag values.
 	Tags []*types.Tag
+
 	// The name for the alarm. This name must be unique within the Region.
+	//
+	// This member is required.
 	AlarmName *string
+
 	// The name for the metric associated with the alarm. For each PutMetricAlarm
 	// operation, you must specify either MetricName or a Metrics array. If you are
 	// creating an alarm based on a math expression, you cannot specify this parameter,
 	// or any of the Dimensions, Period, Namespace, Statistic, or ExtendedStatistic
 	// parameters. Instead, you specify all this information in the Metrics array.
 	MetricName *string
+
 	// The description for the alarm.
 	AlarmDescription *string
+
 	// Indicates whether actions should be executed during any changes to the alarm
 	// state. The default is TRUE.
 	ActionsEnabled *bool
+
 	// The actions to execute when this alarm transitions to the ALARM state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN).
 	// <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
@@ -192,8 +211,10 @@ type PutMetricAlarmInput struct {
 	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
 	// </p>
 	AlarmActions []*string
+
 	// The dimensions for the metric specified in MetricName.
 	Dimensions []*types.Dimension
+
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
 	// (ARN).  <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
@@ -211,6 +232,7 @@ type PutMetricAlarmInput struct {
 	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
 	// </p>
 	InsufficientDataActions []*string
+
 	// The actions to execute when this alarm transitions to an OK state from any other
 	// state. Each action is specified as an Amazon Resource Name (ARN).  <p>Valid
 	// Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
@@ -228,15 +250,20 @@ type PutMetricAlarmInput struct {
 	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
 	// </p>
 	OKActions []*string
+
 	// The namespace for the metric associated specified in MetricName.
 	Namespace *string
+
 	// The number of periods over which data is compared to the specified threshold. If
 	// you are setting an alarm that requires that a number of consecutive data points
 	// be breaching to trigger the alarm, this value specifies that number. If you are
 	// setting an "M out of N" alarm, this value is the N. An alarm's total current
 	// evaluation period can be no longer than one day, so this number multiplied by
 	// Period cannot be more than 86,400 seconds.
+	//
+	// This member is required.
 	EvaluationPeriods *int32
+
 	// An array of MetricDataQuery structures that enable you to create an alarm based
 	// on the result of a metric math expression. For each PutMetricAlarm operation,
 	// you must specify either MetricName or a Metrics array. Each item in the Metrics
@@ -250,6 +277,7 @@ type PutMetricAlarmInput struct {
 	// in the same operation. Instead, you retrieve the metrics you are using in your
 	// math expression as part of the Metrics array.
 	Metrics []*types.MetricDataQuery
+
 	// The statistic for the metric specified in MetricName, other than percentile. For
 	// percentile statistics, use ExtendedStatistic. When you call PutMetricAlarm and
 	// specify a MetricName, you must specify either Statistic or ExtendedStatistic,

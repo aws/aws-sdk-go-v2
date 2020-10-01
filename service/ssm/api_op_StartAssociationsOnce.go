@@ -56,7 +56,10 @@ func (c *Client) StartAssociationsOnce(ctx context.Context, params *StartAssocia
 }
 
 type StartAssociationsOnceInput struct {
+
 	// The association IDs that you want to run immediately and only one time.
+	//
+	// This member is required.
 	AssociationIds []*string
 }
 

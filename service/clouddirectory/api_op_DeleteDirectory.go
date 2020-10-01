@@ -56,12 +56,18 @@ func (c *Client) DeleteDirectory(ctx context.Context, params *DeleteDirectoryInp
 }
 
 type DeleteDirectoryInput struct {
+
 	// The ARN of the directory to delete.
+	//
+	// This member is required.
 	DirectoryArn *string
 }
 
 type DeleteDirectoryOutput struct {
+
 	// The ARN of the deleted directory.
+	//
+	// This member is required.
 	DirectoryArn *string
 
 	// Metadata pertaining to the operation's result.

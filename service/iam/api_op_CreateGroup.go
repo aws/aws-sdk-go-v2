@@ -59,11 +59,15 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 }
 
 type CreateGroupInput struct {
+
 	// The name of the group to create. Do not include the path in this value. IAM
 	// user, group, role, and policy names must be unique within the account. Names are
 	// not distinguished by case. For example, you cannot create resources named both
 	// "MyResource" and "myresource".
+	//
+	// This member is required.
 	GroupName *string
+
 	// The path to the group. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
@@ -78,7 +82,10 @@ type CreateGroupInput struct {
 
 // Contains the response to a successful CreateGroup () request.
 type CreateGroupOutput struct {
+
 	// A structure containing details about the new group.
+	//
+	// This member is required.
 	Group *types.Group
 
 	// Metadata pertaining to the operation's result.

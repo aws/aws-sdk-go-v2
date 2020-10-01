@@ -74,12 +74,17 @@ func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, 
 }
 
 type PutPermissionInput struct {
+
 	// The action that you are enabling the other account to perform. Currently, this
 	// must be events:PutEvents.
+	//
+	// This member is required.
 	Action *string
+
 	// The event bus associated with the rule. If you omit this, the default event bus
 	// is used.
 	EventBusName *string
+
 	// The 12-digit AWS account ID that you are permitting to put events to your
 	// default event bus. Specify "*" to permit any account to put events to your
 	// default event bus.  <p>If you specify "*" without specifying
@@ -88,7 +93,10 @@ type PutPermissionInput struct {
 	// contains an <code>account</code> field with a specific account ID from which to
 	// receive events. Rules with an account field do not match any events sent from
 	// other accounts.</p>
+	//
+	// This member is required.
 	Principal *string
+
 	// This parameter enables you to limit the permission to accounts that fulfill a
 	// certain condition, such as being a member of a certain AWS organization. For
 	// more information about AWS Organizations, see What Is AWS Organizations
@@ -99,9 +107,12 @@ type PutPermissionInput struct {
 	// <code>Condition</code> is a JSON string which must contain <code>Type</code>,
 	// <code>Key</code>, and <code>Value</code> fields.</p>
 	Condition *types.Condition
+
 	// An identifier string for the external account that you are granting permissions
 	// to. If you later want to revoke the permission for this external account,
 	// specify this StatementId when you run RemovePermission ().
+	//
+	// This member is required.
 	StatementId *string
 }
 

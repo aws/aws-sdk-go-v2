@@ -61,13 +61,18 @@ func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput
 
 // Represents the request to reset a user's password.
 type ForgotPasswordInput struct {
+
 	// The user name of the user for whom you want to enter a code to reset a forgotten
 	// password.
+	//
+	// This member is required.
 	Username *string
+
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the ForgotPassword API
@@ -95,19 +100,25 @@ type ForgotPasswordInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
+
 	// The Amazon Pinpoint analytics metadata for collecting metrics for ForgotPassword
 	// calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
 	// of a user pool client and username plus the client ID in the message.
 	SecretHash *string
+
 	// The ID of the client associated with the user pool.
+	//
+	// This member is required.
 	ClientId *string
 }
 
 // Respresents the response from the server regarding the request to reset a
 // password.
 type ForgotPasswordOutput struct {
+
 	// The code delivery details returned by the server in response to the request to
 	// reset a password.
 	CodeDeliveryDetails *types.CodeDeliveryDetailsType

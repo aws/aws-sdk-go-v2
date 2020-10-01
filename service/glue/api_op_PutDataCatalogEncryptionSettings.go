@@ -58,8 +58,12 @@ func (c *Client) PutDataCatalogEncryptionSettings(ctx context.Context, params *P
 }
 
 type PutDataCatalogEncryptionSettingsInput struct {
+
 	// The security configuration to set.
+	//
+	// This member is required.
 	DataCatalogEncryptionSettings *types.DataCatalogEncryptionSettings
+
 	// The ID of the Data Catalog to set the security configuration for. If none is
 	// provided, the AWS account ID is used by default.
 	CatalogId *string

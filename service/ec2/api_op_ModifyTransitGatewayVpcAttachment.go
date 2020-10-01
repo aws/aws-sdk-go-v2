@@ -56,15 +56,22 @@ func (c *Client) ModifyTransitGatewayVpcAttachment(ctx context.Context, params *
 }
 
 type ModifyTransitGatewayVpcAttachmentInput struct {
+
 	// The ID of the attachment.
+	//
+	// This member is required.
 	TransitGatewayAttachmentId *string
+
 	// The new VPC attachment options. You cannot modify the IPv6 options.
 	Options *types.ModifyTransitGatewayVpcAttachmentRequestOptions
+
 	// The IDs of one or more subnets to add. You can specify at most one subnet per
 	// Availability Zone.
 	AddSubnetIds []*string
+
 	// The IDs of one or more subnets to remove.
 	RemoveSubnetIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -73,6 +80,7 @@ type ModifyTransitGatewayVpcAttachmentInput struct {
 }
 
 type ModifyTransitGatewayVpcAttachmentOutput struct {
+
 	// Information about the modified attachment.
 	TransitGatewayVpcAttachment *types.TransitGatewayVpcAttachment
 

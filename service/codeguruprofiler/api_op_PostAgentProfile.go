@@ -55,13 +55,23 @@ func (c *Client) PostAgentProfile(ctx context.Context, params *PostAgentProfileI
 
 // The structure representing the postAgentProfileRequest.
 type PostAgentProfileInput struct {
+
 	//
+	//
+	// This member is required.
 	AgentProfile []byte
+
 	//
+	//
+	// This member is required.
 	ContentType *string
+
 	//
 	ProfileToken *string
+
 	//
+	//
+	// This member is required.
 	ProfilingGroupName *string
 }
 

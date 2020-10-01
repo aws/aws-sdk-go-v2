@@ -60,15 +60,26 @@ func (c *Client) UpdateUsage(ctx context.Context, params *UpdateUsageInput, optF
 // The PATCH request to grant a temporary extension to the remaining quota of a
 // usage plan associated with a specified API key.
 type UpdateUsageInput struct {
+
 	// [Required] The Id of the usage plan associated with the usage data.
-	UsagePlanId      *string
+	//
+	// This member is required.
+	UsagePlanId *string
+
 	TemplateSkipList []*string
-	Title            *string
+
+	Title *string
+
 	// [Required] The identifier of the API key associated with the usage plan in which
 	// a temporary extension is granted to the remaining quota.
-	KeyId    *string
-	Name     *string
+	//
+	// This member is required.
+	KeyId *string
+
+	Name *string
+
 	Template *bool
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
@@ -79,18 +90,23 @@ type UpdateUsageInput struct {
 // Manage Usage in a Usage Plan
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
 type UpdateUsageOutput struct {
+
 	// The ending date of the usage data.
 	EndDate *string
+
 	// The plan Id associated with this usage data.
 	UsagePlanId *string
+
 	// The starting date of the usage data.
 	StartDate *string
+
 	// The usage data, as daily logs of used and remaining quotas, over the specified
 	// time interval indexed over the API keys in a usage plan. For example, {...,
 	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
 	// stands for an API key value and the daily log entry is of the format [used
 	// quota, remaining quota].
 	Items map[string][][]*int64
+
 	// The current pagination position in the paged result set.
 	Position *string
 

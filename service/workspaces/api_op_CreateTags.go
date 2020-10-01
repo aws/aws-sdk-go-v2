@@ -56,13 +56,19 @@ func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns
 }
 
 type CreateTagsInput struct {
+
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags. If you want to
 	// add new tags to a set of existing tags, you must submit all of the existing tags
 	// along with the new ones.
+	//
+	// This member is required.
 	Tags []*types.Tag
+
 	// The identifier of the WorkSpaces resource. The supported resource types are
 	// WorkSpaces, registered directories, images, custom bundles, and IP access
 	// control groups.
+	//
+	// This member is required.
 	ResourceId *string
 }
 

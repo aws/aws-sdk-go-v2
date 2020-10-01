@@ -89,6 +89,7 @@ func (c *Client) GenerateDataKeyWithoutPlaintext(ctx context.Context, params *Ge
 }
 
 type GenerateDataKeyWithoutPlaintextInput struct {
+
 	// Specifies the encryption context that will be used when encrypting the data key.
 	// An encryption context is a collection of non-secret key-value pairs that
 	// represents additional authenticated data. When you use an encryption context to
@@ -99,6 +100,7 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide.
 	EncryptionContext map[string]*string
+
 	// The identifier of the symmetric customer master key (CMK) that encrypts the data
 	// key. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
 	// or alias ARN. When using an alias name, prefix it with "alias/". To specify a
@@ -119,14 +121,19 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// To get the key ID and key
 	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
 	// alias ARN, use ListAliases ().
+	//
+	// This member is required.
 	KeyId *string
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []*string
+
 	// The length of the data key. Use AES_128 to generate a 128-bit symmetric key, or
 	// AES_256 to generate a 256-bit symmetric key.
 	KeySpec types.DataKeySpec
+
 	// The length of the data key in bytes. For example, use the value 64 to generate a
 	// 512-bit data key (64 bytes is 512 bits). For common key lengths (128-bit and
 	// 256-bit symmetric keys), we recommend that you use the KeySpec field instead of
@@ -135,10 +142,12 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 }
 
 type GenerateDataKeyWithoutPlaintextOutput struct {
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK that encrypted the data key.
 	KeyId *string
+
 	// The encrypted data key. When you use the HTTP API or the AWS CLI, the value is
 	// Base64-encoded. Otherwise, it is not Base64-encoded.
 	CiphertextBlob []byte

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // An AWS service limit was exceeded for the calling AWS account.
@@ -24,12 +23,6 @@ func (e *AccountLimitExceededException) ErrorMessage() string {
 }
 func (e *AccountLimitExceededException) ErrorCode() string             { return "AccountLimitExceededException" }
 func (e *AccountLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccountLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccountLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The input value that was provided is not valid.
 type InvalidInputException struct {
@@ -47,12 +40,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There was a problem with the underlying OAuth provider.
 type OAuthProviderException struct {
@@ -70,12 +57,6 @@ func (e *OAuthProviderException) ErrorMessage() string {
 }
 func (e *OAuthProviderException) ErrorCode() string             { return "OAuthProviderException" }
 func (e *OAuthProviderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OAuthProviderException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OAuthProviderException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified AWS resource cannot be created, because an AWS resource with the
 // same settings already exists.
@@ -94,12 +75,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified AWS resource cannot be found.
 type ResourceNotFoundException struct {
@@ -117,9 +92,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

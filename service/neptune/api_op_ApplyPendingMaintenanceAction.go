@@ -57,9 +57,13 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 }
 
 type ApplyPendingMaintenanceActionInput struct {
+
 	// The pending maintenance action to apply to this resource. Valid values:
 	// system-update, db-upgrade
+	//
+	// This member is required.
 	ApplyAction *string
+
 	// A value that specifies the type of opt-in request, or undoes an opt-in request.
 	// An opt-in request of type immediate can't be undone. Valid values:
 	//
@@ -72,15 +76,21 @@ type ApplyPendingMaintenanceActionInput struct {
 	//
 	//     * undo-opt-in - Cancel any existing next-maintenance opt-in
 	// requests.
+	//
+	// This member is required.
 	OptInType *string
+
 	// The Amazon Resource Name (ARN) of the resource that the pending maintenance
 	// action applies to. For information about creating an ARN, see  Constructing an
 	// Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
+	//
+	// This member is required.
 	ResourceIdentifier *string
 }
 
 type ApplyPendingMaintenanceActionOutput struct {
+
 	// Describes the pending maintenance actions for a resource.
 	ResourcePendingMaintenanceActions *types.ResourcePendingMaintenanceActions
 

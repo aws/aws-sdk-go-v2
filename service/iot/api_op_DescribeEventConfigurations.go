@@ -59,10 +59,13 @@ type DescribeEventConfigurationsInput struct {
 }
 
 type DescribeEventConfigurationsOutput struct {
+
 	// The date the event configurations were last modified.
 	LastModifiedDate *time.Time
+
 	// The event configurations.
 	EventConfigurations map[string]*types.Configuration
+
 	// The creation date of the event configuration.
 	CreationDate *time.Time
 

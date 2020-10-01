@@ -62,7 +62,10 @@ func (c *Client) DisassociateDRTLogBucket(ctx context.Context, params *Disassoci
 }
 
 type DisassociateDRTLogBucketInput struct {
+
 	// The Amazon S3 bucket that contains your AWS WAF logs.
+	//
+	// This member is required.
 	LogBucket *string
 }
 

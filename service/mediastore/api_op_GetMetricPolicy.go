@@ -56,12 +56,18 @@ func (c *Client) GetMetricPolicy(ctx context.Context, params *GetMetricPolicyInp
 }
 
 type GetMetricPolicyInput struct {
+
 	// The name of the container that is associated with the metric policy.
+	//
+	// This member is required.
 	ContainerName *string
 }
 
 type GetMetricPolicyOutput struct {
+
 	// The metric policy that is associated with the specific container.
+	//
+	// This member is required.
 	MetricPolicy *types.MetricPolicy
 
 	// Metadata pertaining to the operation's result.

@@ -57,16 +57,23 @@ func (c *Client) UpdateCACertificate(ctx context.Context, params *UpdateCACertif
 
 // The input to the UpdateCACertificate operation.
 type UpdateCACertificateInput struct {
+
 	// If true, removes auto registration.
 	RemoveAutoRegistration *bool
+
 	// The CA certificate identifier.
+	//
+	// This member is required.
 	CertificateId *string
+
 	// The updated status of the CA certificate. Note: The status value
 	// REGISTER_INACTIVE is deprecated and should not be used.
 	NewStatus types.CACertificateStatus
+
 	// The new value for the auto registration status. Valid values are: "ENABLE" or
 	// "DISABLE".
 	NewAutoRegistrationStatus types.AutoRegistrationStatus
+
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
 }

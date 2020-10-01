@@ -57,6 +57,7 @@ func (c *Client) DescribeVpcEndpointServicePermissions(ctx context.Context, para
 }
 
 type DescribeVpcEndpointServicePermissionsInput struct {
+
 	// One or more filters.
 	//
 	//     * principal - The ARN of the principal.
@@ -65,15 +66,21 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	// principal-type - The principal type (All | Service | OrganizationUnit | Account
 	// | User | Role).
 	Filters []*types.Filter
+
 	// The ID of the service.
+	//
+	// This member is required.
 	ServiceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
@@ -82,9 +89,11 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 }
 
 type DescribeVpcEndpointServicePermissionsOutput struct {
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
 	// Information about one or more allowed principals.
 	AllowedPrincipals []*types.AllowedPrincipal
 

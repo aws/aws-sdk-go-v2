@@ -57,8 +57,12 @@ func (c *Client) GetDatasetContent(ctx context.Context, params *GetDatasetConten
 }
 
 type GetDatasetContentInput struct {
+
 	// The name of the data set whose contents are retrieved.
+	//
+	// This member is required.
 	DatasetName *string
+
 	// The version of the data set whose contents are retrieved. You can also use the
 	// strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the latest
 	// or latest successfully completed data set. If not specified, "$LATEST_SUCCEEDED"
@@ -67,10 +71,13 @@ type GetDatasetContentInput struct {
 }
 
 type GetDatasetContentOutput struct {
+
 	// A list of "DatasetEntry" objects.
 	Entries []*types.DatasetEntry
+
 	// The time when the request was made.
 	Timestamp *time.Time
+
 	// The status of the data set content.
 	Status *types.DatasetContentStatus
 

@@ -59,11 +59,15 @@ func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, 
 }
 
 type DeleteKeyPairInput struct {
+
 	// The name of the key pair to delete.
+	//
+	// This member is required.
 	KeyPairName *string
 }
 
 type DeleteKeyPairOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

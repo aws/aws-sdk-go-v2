@@ -60,8 +60,12 @@ func (c *Client) GetInstanceMetricData(ctx context.Context, params *GetInstanceM
 }
 
 type GetInstanceMetricDataInput struct {
+
 	// The start time of the time period.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// The statistic for the metric. The following statistics are available:
 	//
 	//     *
@@ -84,20 +88,35 @@ type GetInstanceMetricDataInput struct {
 	//
 	//     * SampleCount - The
 	// count, or number, of data points used for the statistical calculation.
+	//
+	// This member is required.
 	Statistics []types.MetricStatistic
+
 	// The end time of the time period.
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// The unit for the metric data request. Valid units depend on the metric data
 	// being requested. For the valid units to specify with each available metric, see
 	// the metricName parameter.
+	//
+	// This member is required.
 	Unit types.MetricUnit
+
 	// The name of the instance for which you want to get metrics data.
+	//
+	// This member is required.
 	InstanceName *string
+
 	// The granularity, in seconds, of the returned data points. The StatusCheckFailed,
 	// StatusCheckFailed_Instance, and StatusCheckFailed_System instance metric data is
 	// available in 1-minute (60 seconds) granularity. All other instance metric data
 	// is available in 5-minute (300 seconds) granularity.
+	//
+	// This member is required.
 	Period *int32
+
 	// The metric for which you want to return information. Valid instance metric names
 	// are listed below, along with the most useful statistics to include in your
 	// request, and the published unit value.
@@ -166,12 +185,16 @@ type GetInstanceMetricDataInput struct {
 	// or 1 (failed). This metric data is available in 1-minute (60 seconds)
 	// granularity. Statistics: The most useful statistic is Sum. Unit: The published
 	// unit is Count.
+	//
+	// This member is required.
 	MetricName types.InstanceMetricName
 }
 
 type GetInstanceMetricDataOutput struct {
+
 	// An array of objects that describe the metric data returned.
 	MetricData []*types.MetricDatapoint
+
 	// The name of the metric returned.
 	MetricName types.InstanceMetricName
 

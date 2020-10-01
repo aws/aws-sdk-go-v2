@@ -57,13 +57,16 @@ func (c *Client) DescribeNetworkAcls(ctx context.Context, params *DescribeNetwor
 }
 
 type DescribeNetworkAclsInput struct {
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// One or more network ACL IDs. Default: Describes all your network ACLs.
 	NetworkAclIds []*string
+
 	// One or more filters.
 	//
 	//     * association.association-id - The ID of an
@@ -123,16 +126,20 @@ type DescribeNetworkAclsInput struct {
 	//
 	//     * vpc-id - The ID of the VPC for the network ACL.
 	Filters []*types.Filter
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 }
 
 type DescribeNetworkAclsOutput struct {
+
 	// Information about one or more network ACLs.
 	NetworkAcls []*types.NetworkAcl
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

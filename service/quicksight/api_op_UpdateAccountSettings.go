@@ -55,18 +55,26 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 }
 
 type UpdateAccountSettingsInput struct {
+
 	// The ID for the AWS account that contains the QuickSight namespaces that you want
 	// to list.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// Email address used to send notifications regarding administration of QuickSight.
 	NotificationEmail *string
+
 	// The default namespace for this AWS Account. Currently, the default is default.
 	// IAM users who register for the first time with QuickSight provide an email that
 	// becomes associated with the default namespace.
+	//
+	// This member is required.
 	DefaultNamespace *string
 }
 
 type UpdateAccountSettingsOutput struct {
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

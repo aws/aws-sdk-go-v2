@@ -59,6 +59,7 @@ func (c *Client) ListPlatformBranches(ctx context.Context, params *ListPlatformB
 }
 
 type ListPlatformBranchesInput struct {
+
 	// Criteria for restricting the resulting list of platform branches. The filter is
 	// evaluated as a logical conjunction (AND) of the separate SearchFilter terms. The
 	// following list shows valid attribute values for each of the SearchFilter terms.
@@ -94,18 +95,22 @@ type ListPlatformBranchesInput struct {
 	// Array size: limited to 10 SearchFilter
 	// objects. Within each SearchFilter item, the Values array is limited to 10 items.
 	Filters []*types.SearchFilter
+
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
 	// the ones specified in the initial request. If no NextToken is specified, the
 	// first page is retrieved.
 	NextToken *string
+
 	// The maximum number of platform branch values returned in one call.
 	MaxRecords *int32
 }
 
 type ListPlatformBranchesOutput struct {
+
 	// Summary information about the platform branches.
 	PlatformBranchSummaryList []*types.PlatformBranchSummary
+
 	// In a paginated request, if this value isn't null, it's the token that you can
 	// pass in a subsequent request to get the next response page.
 	NextToken *string

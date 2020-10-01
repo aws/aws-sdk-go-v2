@@ -60,8 +60,10 @@ type DescribeMetricCollectionTypesInput struct {
 }
 
 type DescribeMetricCollectionTypesOutput struct {
+
 	// One or more metrics.
 	Metrics []*types.MetricCollectionType
+
 	// The granularities for the metrics.
 	Granularities []*types.MetricGranularityType
 

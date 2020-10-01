@@ -53,24 +53,41 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 }
 
 type AllQueryStringTypesInput struct {
-	QueryString        *string
-	QueryStringList    []*string
-	QueryStringSet     []*string
-	QueryByte          *int8
-	QueryShort         *int16
-	QueryInteger       *int32
-	QueryIntegerList   []*int32
-	QueryIntegerSet    []*int32
-	QueryLong          *int64
-	QueryFloat         *float32
-	QueryDouble        *float64
-	QueryDoubleList    []*float64
-	QueryBoolean       *bool
-	QueryBooleanList   []*bool
-	QueryTimestamp     *time.Time
+	QueryString *string
+
+	QueryStringList []*string
+
+	QueryStringSet []*string
+
+	QueryByte *int8
+
+	QueryShort *int16
+
+	QueryInteger *int32
+
+	QueryIntegerList []*int32
+
+	QueryIntegerSet []*int32
+
+	QueryLong *int64
+
+	QueryFloat *float32
+
+	QueryDouble *float64
+
+	QueryDoubleList []*float64
+
+	QueryBoolean *bool
+
+	QueryBooleanList []*bool
+
+	QueryTimestamp *time.Time
+
 	QueryTimestampList []*time.Time
-	QueryEnum          types.FooEnum
-	QueryEnumList      []types.FooEnum
+
+	QueryEnum types.FooEnum
+
+	QueryEnumList []types.FooEnum
 }
 
 type AllQueryStringTypesOutput struct {

@@ -55,13 +55,16 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 }
 
 type GetGroupInput struct {
+
 	// Don't use this parameter. Use Group instead.
 	GroupName *string
+
 	// The name or the ARN of the resource group to retrieve.
 	Group *string
 }
 
 type GetGroupOutput struct {
+
 	// A full description of the resource group.
 	Group *types.Group
 

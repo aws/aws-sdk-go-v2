@@ -71,11 +71,16 @@ func (c *Client) CreateConfigurationTemplate(ctx context.Context, params *Create
 
 // Request to create a configuration template.
 type CreateConfigurationTemplateInput struct {
+
 	// Specifies the tags applied to the configuration template.
 	Tags []*types.Tag
+
 	// The name of the Elastic Beanstalk application to associate with this
 	// configuration template.
+	//
+	// This member is required.
 	ApplicationName *string
+
 	// The Amazon Resource Name (ARN) of the custom platform. For more information, see
 	// Custom Platforms
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html)
@@ -83,12 +88,15 @@ type CreateConfigurationTemplateInput struct {
 	// <code>PlatformArn</code>, then don't specify <code>SolutionStackName</code>.</p>
 	// </note>
 	PlatformArn *string
+
 	// The ID of an environment whose settings you want to use to create the
 	// configuration template. You must specify EnvironmentId if you don't specify
 	// PlatformArn, SolutionStackName, or SourceConfiguration.
 	EnvironmentId *string
+
 	// An optional description for this configuration.
 	Description *string
+
 	// An Elastic Beanstalk configuration template to base this one on. If specified,
 	// Elastic Beanstalk uses the configuration values from the specified configuration
 	// template to create a new configuration. Values specified in OptionSettings
@@ -98,6 +106,7 @@ type CreateConfigurationTemplateInput struct {
 	// configuration are specified, the solution stack of the source configuration
 	// template must match the specified solution stack name.
 	SourceConfiguration *types.SourceConfiguration
+
 	// The name of an Elastic Beanstalk solution stack (platform version) that this
 	// configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7
 	// Java 7. A solution stack specifies the operating system, runtime, and
@@ -111,9 +120,13 @@ type CreateConfigurationTemplateInput struct {
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html)
 	// API to obtain a list of available solution stacks.
 	SolutionStackName *string
+
 	// The name of the configuration template. Constraint: This name must be unique per
 	// application.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// Option values for the Elastic Beanstalk configuration, such as the instance
 	// type. If specified, these values override the values obtained from the solution
 	// stack or the source configuration template. For a complete list of Elastic
@@ -125,22 +138,31 @@ type CreateConfigurationTemplateInput struct {
 
 // Describes the settings for a configuration set.
 type CreateConfigurationTemplateOutput struct {
+
 	// The name of the application associated with this configuration set.
 	ApplicationName *string
+
 	// If not null, the name of the environment for this configuration set.
 	EnvironmentName *string
+
 	// The ARN of the platform version.
 	PlatformArn *string
+
 	// The date (in UTC time) when this configuration set was last modified.
 	DateUpdated *time.Time
+
 	// The date (in UTC time) when this configuration set was created.
 	DateCreated *time.Time
+
 	// The name of the solution stack this configuration set uses.
 	SolutionStackName *string
+
 	// Describes this configuration set.
 	Description *string
+
 	// A list of the configuration options and their values in this configuration set.
 	OptionSettings []*types.ConfigurationOptionSetting
+
 	// If this configuration set is associated with an environment, the
 	// DeploymentStatus parameter indicates the deployment status of this configuration
 	// set:
@@ -158,6 +180,7 @@ type CreateConfigurationTemplateOutput struct {
 	//     * failed: This is a draft configuration that failed to
 	// successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
+
 	// If not null, the name of the configuration template for this configuration set.
 	TemplateName *string
 

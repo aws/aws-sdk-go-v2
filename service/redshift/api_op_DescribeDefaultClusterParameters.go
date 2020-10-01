@@ -61,8 +61,12 @@ func (c *Client) DescribeDefaultClusterParameters(ctx context.Context, params *D
 
 //
 type DescribeDefaultClusterParametersInput struct {
+
 	// The name of the cluster parameter group family.
+	//
+	// This member is required.
 	ParameterGroupFamily *string
+
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDefaultClusterParameters ()
 	// request exceed the value specified in MaxRecords, AWS returns a value in the
@@ -70,6 +74,7 @@ type DescribeDefaultClusterParametersInput struct {
 	// by providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
+
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
@@ -79,6 +84,7 @@ type DescribeDefaultClusterParametersInput struct {
 }
 
 type DescribeDefaultClusterParametersOutput struct {
+
 	// Describes the default cluster parameters for a parameter group family.
 	DefaultClusterParameters *types.DefaultClusterParameters
 

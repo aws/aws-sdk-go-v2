@@ -8,21 +8,27 @@ import (
 
 // Contains information about the errors encountered.
 type BatchPutMessageErrorEntry struct {
+
 	// The ID of the message that caused the error. (See the value corresponding to the
 	// "messageId" key in the "message" object.)
 	MessageId *string
+
 	// The code associated with the error.
 	ErrorCode ErrorCode
+
 	// More information about the error.
 	ErrorMessage *string
 }
 
 // Information about the error that occured when attempting to update a detector.
 type BatchUpdateDetectorErrorEntry struct {
+
 	// A message describing the error.
 	ErrorMessage *string
+
 	// The code of the error.
 	ErrorCode ErrorCode
+
 	// The "messageId" of the update request that caused the error. (The value of the
 	// "messageId" in the update request "Detector" object.)
 	MessageId *string
@@ -30,120 +36,194 @@ type BatchUpdateDetectorErrorEntry struct {
 
 // Information about the detector (instance).
 type Detector struct {
+
 	// The time the detector (instance) was last updated.
 	LastUpdateTime *time.Time
+
 	// The current state of the detector (instance).
 	State *DetectorState
+
 	// The value of the key (identifying the device or system) that caused the creation
 	// of this detector (instance).
 	KeyValue *string
+
 	// The time the detector (instance) was created.
 	CreationTime *time.Time
+
 	// The name of the detector model that created this detector (instance).
 	DetectorModelName *string
+
 	// The version of the detector model that created this detector (instance).
 	DetectorModelVersion *string
 }
 
 // Information about the current state of the detector instance.
 type DetectorState struct {
+
 	// The name of the state.
+	//
+	// This member is required.
 	StateName *string
+
 	// The current state of the detector's timers.
+	//
+	// This member is required.
 	Timers []*Timer
+
 	// The current values of the detector's variables.
+	//
+	// This member is required.
 	Variables []*Variable
 }
 
 // The new state, variable values, and timer settings of the detector (instance).
 type DetectorStateDefinition struct {
+
 	// The new values of the detector's variables. Any variable whose value isn't
 	// specified is cleared.
+	//
+	// This member is required.
 	Variables []*VariableDefinition
+
 	// The new values of the detector's timers. Any timer whose value isn't specified
 	// is cleared, and its timeout event won't occur.
+	//
+	// This member is required.
 	Timers []*TimerDefinition
+
 	// The name of the new state of the detector (instance).
+	//
+	// This member is required.
 	StateName *string
 }
 
 // Information about the detector state.
 type DetectorStateSummary struct {
+
 	// The name of the state.
 	StateName *string
 }
 
 // Information about the detector (instance).
 type DetectorSummary struct {
+
 	// The time the detector (instance) was created.
 	CreationTime *time.Time
+
 	// The current state of the detector (instance).
 	State *DetectorStateSummary
+
 	// The value of the key (identifying the device or system) that caused the creation
 	// of this detector (instance).
 	KeyValue *string
+
 	// The time the detector (instance) was last updated.
 	LastUpdateTime *time.Time
+
 	// The name of the detector model that created this detector (instance).
 	DetectorModelName *string
+
 	// The version of the detector model that created this detector (instance).
 	DetectorModelVersion *string
 }
 
 // Information about a message.
 type Message struct {
+
 	// The ID to assign to the message. Within each batch sent, each "messageId" must
 	// be unique.
+	//
+	// This member is required.
 	MessageId *string
+
 	// The payload of the message. This can be a JSON string or a Base-64-encoded
 	// string representing binary data (in which case you must decode it).
+	//
+	// This member is required.
 	Payload []byte
+
 	// The name of the input into which the message payload is transformed.
+	//
+	// This member is required.
 	InputName *string
 }
 
 // The current state of a timer.
 type Timer struct {
+
 	// The number of seconds which have elapsed on the timer.
+	//
+	// This member is required.
 	Timestamp *time.Time
+
 	// The name of the timer.
+	//
+	// This member is required.
 	Name *string
 }
 
 // The new setting of a timer.
 type TimerDefinition struct {
+
 	// The new setting of the timer (the number of seconds before the timer elapses).
+	//
+	// This member is required.
 	Seconds *int32
+
 	// The name of the timer.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Information used to update the detector (instance).
 type UpdateDetectorRequest struct {
+
 	// The ID to assign to the detector update "message". Each "messageId" must be
 	// unique within each batch sent.
+	//
+	// This member is required.
 	MessageId *string
+
 	// The new state, variable values, and timer settings of the detector (instance).
+	//
+	// This member is required.
 	State *DetectorStateDefinition
+
 	// The value of the input key attribute (identifying the device or system) that
 	// caused the creation of this detector (instance).
 	KeyValue *string
+
 	// The name of the detector model that created the detectors (instances).
+	//
+	// This member is required.
 	DetectorModelName *string
 }
 
 // The current state of the variable.
 type Variable struct {
+
 	// The name of the variable.
+	//
+	// This member is required.
 	Name *string
+
 	// The current value of the variable.
+	//
+	// This member is required.
 	Value *string
 }
 
 // The new value of the variable.
 type VariableDefinition struct {
+
 	// The new value of the variable.
+	//
+	// This member is required.
 	Value *string
+
 	// The name of the variable.
+	//
+	// This member is required.
 	Name *string
 }

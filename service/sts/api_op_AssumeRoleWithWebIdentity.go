@@ -172,8 +172,12 @@ func (c *Client) AssumeRoleWithWebIdentity(ctx context.Context, params *AssumeRo
 }
 
 type AssumeRoleWithWebIdentityInput struct {
+
 	// The Amazon Resource Name (ARN) of the role that the caller is assuming.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// An IAM policy in JSON format that you want to use as an inline session policy.
 	// This parameter is optional. Passing policies to this operation returns new
 	// temporary credentials. The resulting session's permissions are the intersection
@@ -194,6 +198,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	// element indicates by percentage how close the policies and tags for your request
 	// are to the upper size limit.
 	Policy *string
+
 	// An identifier for the assumed role session. Typically, you pass the name or
 	// identifier that is associated with the user who is using your application. That
 	// way, the temporary security credentials that your application will use are
@@ -202,7 +207,10 @@ type AssumeRoleWithWebIdentityInput struct {
 	// validate this parameter is a string of characters consisting of upper- and
 	// lower-case alphanumeric characters with no spaces. You can also include
 	// underscores or any of the following characters: =,.@-
+	//
+	// This member is required.
 	RoleSessionName *string
+
 	// The duration, in seconds, of the role session. The value can range from 900
 	// seconds (15 minutes) up to the maximum session duration setting for the role.
 	// This setting can have a value from 1 hour to 12 hours. If you specify a value
@@ -221,6 +229,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html)
 	// in the IAM User Guide.
 	DurationSeconds *int32
+
 	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
 	// use as managed session policies. The policies must exist in the same account as
 	// the role. This parameter is optional. You can provide up to 10 managed policy
@@ -243,11 +252,15 @@ type AssumeRoleWithWebIdentityInput struct {
 	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
 	// Policies</a> in the <i>IAM User Guide</i>.</p>
 	PolicyArns []*types.PolicyDescriptorType
+
 	// The OAuth 2.0 access token or OpenID Connect ID token that is provided by the
 	// identity provider. Your application must get this token by authenticating the
 	// user who is using your application with a web identity provider before the
 	// application makes an AssumeRoleWithWebIdentity call.
+	//
+	// This member is required.
 	WebIdentityToken *string
+
 	// The fully qualified host component of the domain name of the identity provider.
 	// Specify this value only for OAuth 2.0 access tokens. Currently www.amazon.com
 	// and graph.facebook.com are the only supported identity providers for OAuth 2.0
@@ -259,31 +272,37 @@ type AssumeRoleWithWebIdentityInput struct {
 // Contains the response to a successful AssumeRoleWithWebIdentity () request,
 // including temporary AWS credentials that can be used to make AWS requests.
 type AssumeRoleWithWebIdentityOutput struct {
+
 	// A percentage value that indicates the packed size of the session policies and
 	// session tags combined passed in the request. The request fails if the packed
 	// size is greater than 100 percent, which means the policies and tags exceeded the
 	// allowed space.
 	PackedPolicySize *int32
+
 	// The intended audience (also known as client ID) of the web identity token. This
 	// is traditionally the client identifier issued to the application that requested
 	// the web identity token.
 	Audience *string
+
 	// The issuing authority of the web identity token presented. For OpenID Connect ID
 	// tokens, this contains the value of the iss field. For OAuth 2.0 access tokens,
 	// this contains the value of the ProviderId parameter that was passed in the
 	// AssumeRoleWithWebIdentity request.
 	Provider *string
+
 	// The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers
 	// that you can use to refer to the resulting temporary security credentials. For
 	// example, you can reference these credentials as a principal in a resource-based
 	// policy by using the ARN or assumed role ID. The ARN and ID include the
 	// RoleSessionName that you specified when you called AssumeRole.
 	AssumedRoleUser *types.AssumedRoleUser
+
 	// The temporary security credentials, which include an access key ID, a secret
 	// access key, and a security token. The size of the security token that STS API
 	// operations return is not fixed. We strongly recommend that you make no
 	// assumptions about the maximum size.
 	Credentials *types.Credentials
+
 	// The unique user identifier that is returned by the identity provider. This
 	// identifier is associated with the WebIdentityToken that was submitted with the
 	// AssumeRoleWithWebIdentity call. The identifier is typically unique to the user

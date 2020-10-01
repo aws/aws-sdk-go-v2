@@ -56,11 +56,15 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 }
 
 type DescribeDatasetInput struct {
+
 	// The name of the data set whose information is retrieved.
+	//
+	// This member is required.
 	DatasetName *string
 }
 
 type DescribeDatasetOutput struct {
+
 	// An object that contains information about the data set.
 	Dataset *types.Dataset
 

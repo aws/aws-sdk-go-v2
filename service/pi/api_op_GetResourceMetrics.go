@@ -59,6 +59,7 @@ func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetr
 }
 
 type GetResourceMetricsInput struct {
+
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:  <ul> <li> <p> <code>1</code> (one second)</p> </li>
@@ -68,55 +69,77 @@ type GetResourceMetricsInput struct {
 	// <code>PeriodInSeconds</code>, then Performance Insights will choose a value for
 	// you, with a goal of returning roughly 100-200 data points in the response.</p>
 	PeriodInSeconds *int32
+
 	// The maximum number of items to return in the response. If more items exist than
 	// the specified MaxRecords value, a pagination token is included in the response
 	// so that the remaining results can be retrieved.
 	MaxResults *int32
+
 	// The AWS service for which Performance Insights will return metrics. The only
 	// valid value for ServiceType is: RDS
+	//
+	// This member is required.
 	ServiceType types.ServiceType
+
 	// The date and time specifying the beginning of the requested time series data.
 	// You can't specify a StartTime that's earlier than 7 days ago. The value
 	// specified is inclusive - data points equal to or greater than StartTime will be
 	// returned. The value for StartTime must be earlier than the value for EndTime.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
 	// value specified by MaxRecords.
 	NextToken *string
+
 	// An array of one or more queries to perform. Each query must specify a
 	// Performance Insights metric, and can optionally specify aggregation and
 	// filtering criteria.
+	//
+	// This member is required.
 	MetricQueries []*types.MetricQuery
+
 	// The date and time specifiying the end of the requested time series data. The
 	// value specified is exclusive - data points less than (but not equal to) EndTime
 	// will be returned. The value for EndTime must be later than the value for
 	// StartTime.
+	//
+	// This member is required.
 	EndTime *time.Time
+
 	// An immutable, AWS Region-unique identifier for a data source. Performance
 	// Insights gathers metrics from this data source. To use an Amazon RDS instance as
 	// a data source, you specify its DbiResourceId value - for example:
 	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
+	//
+	// This member is required.
 	Identifier *string
 }
 
 type GetResourceMetricsOutput struct {
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
 	// value specified by MaxRecords.
 	NextToken *string
+
 	// An array of metric results,, where each array element contains all of the data
 	// points for a particular dimension.
 	MetricList []*types.MetricKeyDataPoints
+
 	// An immutable, AWS Region-unique identifier for a data source. Performance
 	// Insights gathers metrics from this data source. To use an Amazon RDS instance as
 	// a data source, you specify its DbiResourceId value - for example:
 	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
 	Identifier *string
+
 	// The start time for the returned metrics, after alignment to a granular boundary
 	// (as specified by PeriodInSeconds). AlignedStartTime will be less than or equal
 	// to the value of the user-specified StartTime.
 	AlignedStartTime *time.Time
+
 	// The end time for the returned metrics, after alignment to a granular boundary
 	// (as specified by PeriodInSeconds). AlignedEndTime will be greater than or equal
 	// to the value of the user-specified Endtime.

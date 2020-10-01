@@ -76,15 +76,21 @@ func (c *Client) CreateCachePolicy(ctx context.Context, params *CreateCachePolic
 }
 
 type CreateCachePolicyInput struct {
+
 	// A cache policy configuration.
+	//
+	// This member is required.
 	CachePolicyConfig *types.CachePolicyConfig
 }
 
 type CreateCachePolicyOutput struct {
+
 	// The current version of the cache policy.
 	ETag *string
+
 	// The fully qualified URI of the cache policy just created.
 	Location *string
+
 	// A cache policy.
 	CachePolicy *types.CachePolicy
 

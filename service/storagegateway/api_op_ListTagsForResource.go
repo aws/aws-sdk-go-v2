@@ -58,22 +58,30 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 // ListTagsForResourceInput
 type ListTagsForResourceInput struct {
+
 	// An opaque string that indicates the position at which to begin returning the
 	// list of tags.
 	Marker *string
+
 	// Specifies that the list of tags returned be limited to the specified number of
 	// items.
 	Limit *int32
+
 	// The Amazon Resource Name (ARN) of the resource for which you want to list tags.
+	//
+	// This member is required.
 	ResourceARN *string
 }
 
 // ListTagsForResourceOutput
 type ListTagsForResourceOutput struct {
+
 	// he Amazon Resource Name (ARN) of the resource for which you want to list tags.
 	ResourceARN *string
+
 	// An array that contains the tags for the specified resource.
 	Tags []*types.Tag
+
 	// An opaque string that indicates the position at which to stop returning the list
 	// of tags.
 	Marker *string

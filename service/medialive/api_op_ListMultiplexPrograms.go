@@ -57,18 +57,25 @@ func (c *Client) ListMultiplexPrograms(ctx context.Context, params *ListMultiple
 
 // Placeholder documentation for ListMultiplexProgramsRequest
 type ListMultiplexProgramsInput struct {
+
 	// The ID of the multiplex that the programs belong to.
+	//
+	// This member is required.
 	MultiplexId *string
+
 	// The token to retrieve the next page of results.
 	NextToken *string
+
 	// The maximum number of items to return.
 	MaxResults *int32
 }
 
 // Placeholder documentation for ListMultiplexProgramsResponse
 type ListMultiplexProgramsOutput struct {
+
 	// List of multiplex programs.
 	MultiplexPrograms []*types.MultiplexProgramSummary
+
 	// Token for the next ListMultiplexProgram request.
 	NextToken *string
 

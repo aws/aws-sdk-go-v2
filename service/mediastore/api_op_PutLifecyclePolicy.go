@@ -60,10 +60,16 @@ func (c *Client) PutLifecyclePolicy(ctx context.Context, params *PutLifecyclePol
 }
 
 type PutLifecyclePolicyInput struct {
+
 	// The name of the container that you want to assign the object lifecycle policy
 	// to.
+	//
+	// This member is required.
 	ContainerName *string
+
 	// The object lifecycle policy to apply to the container.
+	//
+	// This member is required.
 	LifecyclePolicy *string
 }
 

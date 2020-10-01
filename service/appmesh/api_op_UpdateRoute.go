@@ -56,17 +56,31 @@ func (c *Client) UpdateRoute(ctx context.Context, params *UpdateRouteInput, optF
 
 //
 type UpdateRouteInput struct {
+
 	// The name of the route to update.
+	//
+	// This member is required.
 	RouteName *string
+
 	// The name of the service mesh that the route resides in.
+	//
+	// This member is required.
 	MeshName *string
+
 	// The name of the virtual router that the route is associated with.
+	//
+	// This member is required.
 	VirtualRouterName *string
+
 	// The new route specification to apply. This overwrites the existing data.
+	//
+	// This member is required.
 	Spec *types.RouteSpec
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
+
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
@@ -76,7 +90,10 @@ type UpdateRouteInput struct {
 
 //
 type UpdateRouteOutput struct {
+
 	// A full description of the route that was updated.
+	//
+	// This member is required.
 	Route *types.RouteData
 
 	// Metadata pertaining to the operation's result.

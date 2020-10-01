@@ -59,33 +59,52 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 }
 
 type CreateProjectInput struct {
+
 	// The description of the project, if any.
 	Description *string
+
 	// The display name for the project to be created in AWS CodeStar.
+	//
+	// This member is required.
 	Name *string
+
 	// The tags created for the project.
 	Tags map[string]*string
+
 	// A list of the Code objects submitted with the project request. If this parameter
 	// is specified, the request must also include the toolchain parameter.
 	SourceCode []*types.Code
+
 	// The name of the toolchain template file submitted with the project request. If
 	// this parameter is specified, the request must also include the sourceCode
 	// parameter.
 	Toolchain *types.Toolchain
+
 	// The ID of the project to be created in AWS CodeStar.
+	//
+	// This member is required.
 	Id *string
+
 	// A user- or system-generated token that identifies the entity that requested
 	// project creation. This token can be used to repeat the request.
 	ClientRequestToken *string
 }
 
 type CreateProjectOutput struct {
+
 	// The ID of the project.
+	//
+	// This member is required.
 	Id *string
+
 	// The Amazon Resource Name (ARN) of the created project.
+	//
+	// This member is required.
 	Arn *string
+
 	// Reserved for future use.
 	ProjectTemplateId *string
+
 	// A user- or system-generated token that identifies the entity that requested
 	// project creation.
 	ClientRequestToken *string

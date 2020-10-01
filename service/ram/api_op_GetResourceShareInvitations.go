@@ -55,20 +55,26 @@ func (c *Client) GetResourceShareInvitations(ctx context.Context, params *GetRes
 }
 
 type GetResourceShareInvitationsInput struct {
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The Amazon Resource Names (ARN) of the invitations.
 	ResourceShareInvitationArns []*string
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// The Amazon Resource Names (ARN) of the resource shares.
 	ResourceShareArns []*string
 }
 
 type GetResourceShareInvitationsOutput struct {
+
 	// Information about the invitations.
 	ResourceShareInvitations []*types.ResourceShareInvitation
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

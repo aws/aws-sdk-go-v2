@@ -59,10 +59,15 @@ func (c *Client) PutEntityType(ctx context.Context, params *PutEntityTypeInput, 
 }
 
 type PutEntityTypeInput struct {
+
 	// The name of the entity type.
+	//
+	// This member is required.
 	Name *string
+
 	// The description.
 	Description *string
+
 	// A collection of key and value pairs.
 	Tags []*types.Tag
 }

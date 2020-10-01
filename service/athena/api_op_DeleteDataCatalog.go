@@ -55,7 +55,10 @@ func (c *Client) DeleteDataCatalog(ctx context.Context, params *DeleteDataCatalo
 }
 
 type DeleteDataCatalogInput struct {
+
 	// The name of the data catalog to delete.
+	//
+	// This member is required.
 	Name *string
 }
 

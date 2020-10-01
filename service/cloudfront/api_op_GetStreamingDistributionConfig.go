@@ -57,14 +57,19 @@ func (c *Client) GetStreamingDistributionConfig(ctx context.Context, params *Get
 
 // To request to get a streaming distribution configuration.
 type GetStreamingDistributionConfigInput struct {
+
 	// The streaming distribution's ID.
+	//
+	// This member is required.
 	Id *string
 }
 
 // The returned result of the corresponding request.
 type GetStreamingDistributionConfigOutput struct {
+
 	// The streaming distribution's configuration information.
 	StreamingDistributionConfig *types.StreamingDistributionConfig
+
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string
 

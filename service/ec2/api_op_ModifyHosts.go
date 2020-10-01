@@ -64,8 +64,10 @@ func (c *Client) ModifyHosts(ctx context.Context, params *ModifyHostsInput, optF
 }
 
 type ModifyHostsInput struct {
+
 	// Specify whether to enable or disable auto-placement.
 	AutoPlacement types.AutoPlacement
+
 	// Specifies the instance family to be supported by the Dedicated Host. Specify
 	// this parameter to modify a Dedicated Host to support multiple instance types
 	// within its current instance family.  <p>If you want to modify a Dedicated Host
@@ -73,6 +75,7 @@ type ModifyHostsInput struct {
 	// <b>InstanceType</b> instead. You cannot specify <b>InstanceFamily</b> and
 	// <b>InstanceType</b> in the same request.</p>
 	InstanceFamily *string
+
 	// Specifies the instance type to be supported by the Dedicated Host. Specify this
 	// parameter to modify a Dedicated Host to support only a specific instance type.
 	// <p>If you want to modify a Dedicated Host to support multiple instance types in
@@ -80,19 +83,25 @@ type ModifyHostsInput struct {
 	// <b>InstanceFamily</b> instead. You cannot specify <b>InstanceType</b> and
 	// <b>InstanceFamily</b> in the same request.</p>
 	InstanceType *string
+
 	// Indicates whether to enable or disable host recovery for the Dedicated Host. For
 	// more information, see  Host Recovery
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	HostRecovery types.HostRecovery
+
 	// The IDs of the Dedicated Hosts to modify.
+	//
+	// This member is required.
 	HostIds []*string
 }
 
 type ModifyHostsOutput struct {
+
 	// The IDs of the Dedicated Hosts that could not be modified. Check whether the
 	// setting you requested can be used.
 	Unsuccessful []*types.UnsuccessfulItem
+
 	// The IDs of the Dedicated Hosts that were successfully modified.
 	Successful []*string
 

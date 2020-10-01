@@ -55,6 +55,7 @@ func (c *Client) GetTagKeys(ctx context.Context, params *GetTagKeysInput, optFns
 
 type GetTagKeysInput struct {
 	MaxResults *int32
+
 	// A string that indicates that additional data is available. Leave this value
 	// empty for your initial request. If the response includes a PaginationToken, use
 	// that string for this value to request an additional page of data.
@@ -62,10 +63,12 @@ type GetTagKeysInput struct {
 }
 
 type GetTagKeysOutput struct {
+
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.
 	PaginationToken *string
+
 	// A list of all tag keys in the AWS account.
 	TagKeys []*string
 

@@ -56,41 +56,60 @@ func (c *Client) GetLicenseConfiguration(ctx context.Context, params *GetLicense
 }
 
 type GetLicenseConfigurationInput struct {
+
 	// Amazon Resource Name (ARN) of the license configuration.
+	//
+	// This member is required.
 	LicenseConfigurationArn *string
 }
 
 type GetLicenseConfigurationOutput struct {
+
 	// Summaries of the managed resources.
 	ManagedResourceSummaryList []*types.ManagedResourceSummary
+
 	// Product information.
 	ProductInformationList []*types.ProductInformation
+
 	// Number of available licenses.
 	LicenseCount *int64
+
 	// Tags for the license configuration.
 	Tags []*types.Tag
+
 	// Dimension on which the licenses are counted.
 	LicenseCountingType types.LicenseCountingType
+
 	// Account ID of the owner of the license configuration.
 	OwnerAccountId *string
+
 	// Name of the license configuration.
 	Name *string
+
 	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string
+
 	// Unique ID for the license configuration.
 	LicenseConfigurationId *string
+
 	// Summaries of the licenses consumed by resources.
 	ConsumedLicenseSummaryList []*types.ConsumedLicenseSummary
+
 	// License configuration status.
 	Status *string
+
 	// Description of the license configuration.
 	Description *string
+
 	// Number of licenses assigned to resources.
 	ConsumedLicenses *int64
+
 	// Automated discovery information.
 	AutomatedDiscoveryInformation *types.AutomatedDiscoveryInformation
+
 	// License rules.
 	LicenseRules []*string
+
 	// Sets the number of available licenses as a hard limit.
 	LicenseCountHardLimit *bool
 

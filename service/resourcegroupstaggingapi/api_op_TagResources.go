@@ -75,18 +75,25 @@ func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, op
 }
 
 type TagResourcesInput struct {
+
 	// The tags that you want to add to the specified resources. A tag consists of a
 	// key and a value that you define.
+	//
+	// This member is required.
 	Tags map[string]*string
+
 	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
 	// For more information, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
+	//
+	// This member is required.
 	ResourceARNList []*string
 }
 
 type TagResourcesOutput struct {
+
 	// A map containing a key-value pair for each failed item that couldn't be tagged.
 	// The key is the ARN of the failed resource. The value is a FailureInfo object
 	// that contains an error code, a status code, and an error message. If there are

@@ -56,23 +56,30 @@ func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput
 }
 
 type ListBackupJobsInput struct {
+
 	// The account ID to list the jobs from. Returns only backup jobs associated with
 	// the specified account ID.
 	ByAccountId *string
+
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
 	// Returns only backup jobs that were created after the specified date.
 	ByCreatedAfter *time.Time
+
 	// Returns only backup jobs that match the specified resource Amazon Resource Name
 	// (ARN).
 	ByResourceArn *string
+
 	// Returns only backup jobs that are in the specified state.
 	ByState types.BackupJobState
+
 	// The maximum number of items to be returned.
 	MaxResults *int32
+
 	// Returns only backup jobs for the specified resources:
 	//
 	//     * DynamoDB for Amazon
@@ -90,8 +97,10 @@ type ListBackupJobsInput struct {
 	//
 	//     * Storage Gateway for AWS Storage Gateway
 	ByResourceType *string
+
 	// Returns only backup jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
+
 	// Returns only backup jobs that will be stored in the specified backup vault.
 	// Backup vaults are identified by names that are unique to the account used to
 	// create them and the AWS Region where they are created. They consist of lowercase
@@ -100,9 +109,11 @@ type ListBackupJobsInput struct {
 }
 
 type ListBackupJobsOutput struct {
+
 	// An array of structures containing metadata about your backup jobs returned in
 	// JSON format.
 	BackupJobs []*types.BackupJob
+
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next

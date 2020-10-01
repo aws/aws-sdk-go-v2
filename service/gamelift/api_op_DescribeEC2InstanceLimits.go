@@ -83,6 +83,7 @@ func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *Describe
 
 // Represents the input for a request action.
 type DescribeEC2InstanceLimitsInput struct {
+
 	// Name of an EC2 instance type that is supported in Amazon GameLift. A fleet
 	// instance type determines the computing resources of each instance in the fleet,
 	// including CPU, memory, storage, and networking capacity. Amazon GameLift
@@ -94,6 +95,7 @@ type DescribeEC2InstanceLimitsInput struct {
 
 // Represents the returned data in response to a request action.
 type DescribeEC2InstanceLimitsOutput struct {
+
 	// The maximum number of instances for the specified instance type.
 	EC2InstanceLimits []*types.EC2InstanceLimit
 

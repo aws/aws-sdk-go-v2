@@ -79,10 +79,16 @@ func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsI
 }
 
 type StopFleetActionsInput struct {
+
 	// List of actions to suspend on the fleet.
+	//
+	// This member is required.
 	Actions []types.FleetAction
+
 	// A unique identifier for a fleet to stop actions on. You can use either the fleet
 	// ID or ARN value.
+	//
+	// This member is required.
 	FleetId *string
 }
 

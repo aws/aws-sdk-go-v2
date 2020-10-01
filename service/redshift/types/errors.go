@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The owner of the specified snapshot has not authorized your account to access
@@ -25,12 +24,6 @@ func (e *AccessToSnapshotDeniedFault) ErrorMessage() string {
 }
 func (e *AccessToSnapshotDeniedFault) ErrorCode() string             { return "AccessToSnapshotDeniedFault" }
 func (e *AccessToSnapshotDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessToSnapshotDeniedFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessToSnapshotDeniedFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified CIDR block or EC2 security group is already authorized for the
 // specified cluster security group.
@@ -51,12 +44,6 @@ func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
 	return "AuthorizationAlreadyExistsFault"
 }
 func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified CIDR IP range or EC2 security group is not authorized for the
 // specified cluster security group.
@@ -75,12 +62,6 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 }
 func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFoundFault" }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The authorization quota for the cluster security group has been reached.
 type AuthorizationQuotaExceededFault struct {
@@ -100,12 +81,6 @@ func (e *AuthorizationQuotaExceededFault) ErrorCode() string {
 	return "AuthorizationQuotaExceededFault"
 }
 func (e *AuthorizationQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AuthorizationQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AuthorizationQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number for a batch delete of snapshots has been reached. The limit
 // is 100.
@@ -128,12 +103,6 @@ func (e *BatchDeleteRequestSizeExceededFault) ErrorCode() string {
 func (e *BatchDeleteRequestSizeExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *BatchDeleteRequestSizeExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BatchDeleteRequestSizeExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The maximum number for snapshot identifiers has been reached. The limit is 100.
 type BatchModifyClusterSnapshotsLimitExceededFault struct {
@@ -155,12 +124,6 @@ func (e *BatchModifyClusterSnapshotsLimitExceededFault) ErrorCode() string {
 func (e *BatchModifyClusterSnapshotsLimitExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *BatchModifyClusterSnapshotsLimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BatchModifyClusterSnapshotsLimitExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Could not find the specified S3 bucket.
 type BucketNotFoundFault struct {
@@ -178,12 +141,6 @@ func (e *BucketNotFoundFault) ErrorMessage() string {
 }
 func (e *BucketNotFoundFault) ErrorCode() string             { return "BucketNotFoundFault" }
 func (e *BucketNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *BucketNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BucketNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The account already has a cluster with the given identifier.
 type ClusterAlreadyExistsFault struct {
@@ -201,12 +158,6 @@ func (e *ClusterAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *ClusterAlreadyExistsFault) ErrorCode() string             { return "ClusterAlreadyExistsFault" }
 func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The ClusterIdentifier parameter does not refer to an existing cluster.
 type ClusterNotFoundFault struct {
@@ -224,12 +175,6 @@ func (e *ClusterNotFoundFault) ErrorMessage() string {
 }
 func (e *ClusterNotFoundFault) ErrorCode() string             { return "ClusterNotFoundFault" }
 func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cluster is already on the latest database revision.
 type ClusterOnLatestRevisionFault struct {
@@ -247,12 +192,6 @@ func (e *ClusterOnLatestRevisionFault) ErrorMessage() string {
 }
 func (e *ClusterOnLatestRevisionFault) ErrorCode() string             { return "ClusterOnLatestRevisionFault" }
 func (e *ClusterOnLatestRevisionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterOnLatestRevisionFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterOnLatestRevisionFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A cluster parameter group with the same name already exists.
 type ClusterParameterGroupAlreadyExistsFault struct {
@@ -274,12 +213,6 @@ func (e *ClusterParameterGroupAlreadyExistsFault) ErrorCode() string {
 func (e *ClusterParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterParameterGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterParameterGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The parameter group name does not refer to an existing parameter group.
 type ClusterParameterGroupNotFoundFault struct {
@@ -300,12 +233,6 @@ func (e *ClusterParameterGroupNotFoundFault) ErrorCode() string {
 }
 func (e *ClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ClusterParameterGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterParameterGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The request would result in the user exceeding the allowed number of cluster
@@ -332,12 +259,6 @@ func (e *ClusterParameterGroupQuotaExceededFault) ErrorCode() string {
 func (e *ClusterParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterParameterGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterParameterGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request would exceed the allowed number of cluster instances for this
 // account. For information about increasing your quota, go to Limits in Amazon
@@ -359,12 +280,6 @@ func (e *ClusterQuotaExceededFault) ErrorMessage() string {
 }
 func (e *ClusterQuotaExceededFault) ErrorCode() string             { return "ClusterQuotaExceededFault" }
 func (e *ClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A cluster security group with the same name already exists.
 type ClusterSecurityGroupAlreadyExistsFault struct {
@@ -386,12 +301,6 @@ func (e *ClusterSecurityGroupAlreadyExistsFault) ErrorCode() string {
 func (e *ClusterSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterSecurityGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSecurityGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster security group name does not refer to an existing cluster security
 // group.
@@ -412,12 +321,6 @@ func (e *ClusterSecurityGroupNotFoundFault) ErrorCode() string {
 	return "ClusterSecurityGroupNotFoundFault"
 }
 func (e *ClusterSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterSecurityGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSecurityGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request would result in the user exceeding the allowed number of cluster
 // security groups. For information about increasing your quota, go to Limits in
@@ -443,12 +346,6 @@ func (e *ClusterSecurityGroupQuotaExceededFault) ErrorCode() string {
 func (e *ClusterSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterSecurityGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSecurityGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value specified as a snapshot identifier is already used by an existing
 // snapshot.
@@ -469,12 +366,6 @@ func (e *ClusterSnapshotAlreadyExistsFault) ErrorCode() string {
 	return "ClusterSnapshotAlreadyExistsFault"
 }
 func (e *ClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterSnapshotAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSnapshotAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The snapshot identifier does not refer to an existing cluster snapshot.
 type ClusterSnapshotNotFoundFault struct {
@@ -492,12 +383,6 @@ func (e *ClusterSnapshotNotFoundFault) ErrorMessage() string {
 }
 func (e *ClusterSnapshotNotFoundFault) ErrorCode() string             { return "ClusterSnapshotNotFoundFault" }
 func (e *ClusterSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterSnapshotNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSnapshotNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request would result in the user exceeding the allowed number of cluster
 // snapshots.
@@ -518,12 +403,6 @@ func (e *ClusterSnapshotQuotaExceededFault) ErrorCode() string {
 	return "ClusterSnapshotQuotaExceededFault"
 }
 func (e *ClusterSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterSnapshotQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSnapshotQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A ClusterSubnetGroupName is already used by an existing cluster subnet group.
 type ClusterSubnetGroupAlreadyExistsFault struct {
@@ -545,12 +424,6 @@ func (e *ClusterSubnetGroupAlreadyExistsFault) ErrorCode() string {
 func (e *ClusterSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterSubnetGroupAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSubnetGroupAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster subnet group name does not refer to an existing cluster subnet
 // group.
@@ -571,12 +444,6 @@ func (e *ClusterSubnetGroupNotFoundFault) ErrorCode() string {
 	return "ClusterSubnetGroupNotFoundFault"
 }
 func (e *ClusterSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterSubnetGroupNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSubnetGroupNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request would result in user exceeding the allowed number of cluster subnet
 // groups. For information about increasing your quota, go to Limits in Amazon
@@ -602,12 +469,6 @@ func (e *ClusterSubnetGroupQuotaExceededFault) ErrorCode() string {
 func (e *ClusterSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ClusterSubnetGroupQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSubnetGroupQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request would result in user exceeding the allowed number of subnets in a
 // cluster subnet groups. For information about increasing your quota, go to Limits
@@ -631,12 +492,6 @@ func (e *ClusterSubnetQuotaExceededFault) ErrorCode() string {
 	return "ClusterSubnetQuotaExceededFault"
 }
 func (e *ClusterSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClusterSubnetQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClusterSubnetQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cross-region snapshot copy was temporarily disabled. Try your request again.
 type CopyToRegionDisabledFault struct {
@@ -654,12 +509,6 @@ func (e *CopyToRegionDisabledFault) ErrorMessage() string {
 }
 func (e *CopyToRegionDisabledFault) ErrorCode() string             { return "CopyToRegionDisabledFault" }
 func (e *CopyToRegionDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CopyToRegionDisabledFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CopyToRegionDisabledFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request cannot be completed because a dependent service is throttling
 // requests made by Amazon Redshift on your behalf. Wait and retry the request.
@@ -682,12 +531,6 @@ func (e *DependentServiceRequestThrottlingFault) ErrorCode() string {
 func (e *DependentServiceRequestThrottlingFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *DependentServiceRequestThrottlingFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependentServiceRequestThrottlingFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request cannot be completed because a dependent internal service is
 // temporarily unavailable. Wait 30 to 60 seconds and try again.
@@ -708,12 +551,6 @@ func (e *DependentServiceUnavailableFault) ErrorCode() string {
 	return "DependentServiceUnavailableFault"
 }
 func (e *DependentServiceUnavailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DependentServiceUnavailableFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependentServiceUnavailableFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request would exceed the allowed number of event subscriptions for this
 // account. For information about increasing your quota, go to Limits in Amazon
@@ -739,12 +576,6 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorCode() string {
 func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *EventSubscriptionQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *EventSubscriptionQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is already an existing Amazon Redshift HSM client certificate with the
 // specified identifier.
@@ -767,12 +598,6 @@ func (e *HsmClientCertificateAlreadyExistsFault) ErrorCode() string {
 func (e *HsmClientCertificateAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *HsmClientCertificateAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HsmClientCertificateAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no Amazon Redshift HSM client certificate with the specified
 // identifier.
@@ -793,12 +618,6 @@ func (e *HsmClientCertificateNotFoundFault) ErrorCode() string {
 	return "HsmClientCertificateNotFoundFault"
 }
 func (e *HsmClientCertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HsmClientCertificateNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HsmClientCertificateNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for HSM client certificates has been reached. For information about
 // increasing your quota, go to Limits in Amazon Redshift
@@ -823,12 +642,6 @@ func (e *HsmClientCertificateQuotaExceededFault) ErrorCode() string {
 func (e *HsmClientCertificateQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *HsmClientCertificateQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HsmClientCertificateQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is already an existing Amazon Redshift HSM configuration with the
 // specified identifier.
@@ -851,12 +664,6 @@ func (e *HsmConfigurationAlreadyExistsFault) ErrorCode() string {
 func (e *HsmConfigurationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *HsmConfigurationAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HsmConfigurationAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is no Amazon Redshift HSM configuration with the specified identifier.
 type HsmConfigurationNotFoundFault struct {
@@ -874,12 +681,6 @@ func (e *HsmConfigurationNotFoundFault) ErrorMessage() string {
 }
 func (e *HsmConfigurationNotFoundFault) ErrorCode() string             { return "HsmConfigurationNotFoundFault" }
 func (e *HsmConfigurationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *HsmConfigurationNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HsmConfigurationNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for HSM configurations has been reached. For information about
 // increasing your quota, go to Limits in Amazon Redshift
@@ -904,12 +705,6 @@ func (e *HsmConfigurationQuotaExceededFault) ErrorCode() string {
 func (e *HsmConfigurationQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *HsmConfigurationQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *HsmConfigurationQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified options are incompatible.
 type IncompatibleOrderableOptions struct {
@@ -927,12 +722,6 @@ func (e *IncompatibleOrderableOptions) ErrorMessage() string {
 }
 func (e *IncompatibleOrderableOptions) ErrorCode() string             { return "IncompatibleOrderableOptions" }
 func (e *IncompatibleOrderableOptions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IncompatibleOrderableOptions) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IncompatibleOrderableOptions) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the allowed number of table restore requests. Wait for your
 // current table restore requests to complete before making a new request.
@@ -955,12 +744,6 @@ func (e *InProgressTableRestoreQuotaExceededFault) ErrorCode() string {
 func (e *InProgressTableRestoreQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InProgressTableRestoreQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InProgressTableRestoreQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of nodes specified exceeds the allotted capacity of the cluster.
 type InsufficientClusterCapacityFault struct {
@@ -980,12 +763,6 @@ func (e *InsufficientClusterCapacityFault) ErrorCode() string {
 	return "InsufficientClusterCapacityFault"
 }
 func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientClusterCapacityFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientClusterCapacityFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster does not have read bucket or put object permissions on the S3 bucket
 // specified when enabling logging.
@@ -1006,12 +783,6 @@ func (e *InsufficientS3BucketPolicyFault) ErrorCode() string {
 	return "InsufficientS3BucketPolicyFault"
 }
 func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InsufficientS3BucketPolicyFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InsufficientS3BucketPolicyFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster parameter group action can not be completed because another task is
 // in progress that involves the parameter group. Wait a few moments and try the
@@ -1035,12 +806,6 @@ func (e *InvalidClusterParameterGroupStateFault) ErrorCode() string {
 func (e *InvalidClusterParameterGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidClusterParameterGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterParameterGroupStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The state of the cluster security group is not available.
 type InvalidClusterSecurityGroupStateFault struct {
@@ -1061,12 +826,6 @@ func (e *InvalidClusterSecurityGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidClusterSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *InvalidClusterSecurityGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterSecurityGroupStateFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The cluster snapshot schedule state is not valid.
@@ -1089,12 +848,6 @@ func (e *InvalidClusterSnapshotScheduleStateFault) ErrorCode() string {
 func (e *InvalidClusterSnapshotScheduleStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidClusterSnapshotScheduleStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterSnapshotScheduleStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified cluster snapshot is not in the available state, or other accounts
 // are authorized to access the snapshot.
@@ -1115,12 +868,6 @@ func (e *InvalidClusterSnapshotStateFault) ErrorCode() string {
 	return "InvalidClusterSnapshotStateFault"
 }
 func (e *InvalidClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClusterSnapshotStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterSnapshotStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified cluster is not in the available state.
 type InvalidClusterStateFault struct {
@@ -1138,12 +885,6 @@ func (e *InvalidClusterStateFault) ErrorMessage() string {
 }
 func (e *InvalidClusterStateFault) ErrorCode() string             { return "InvalidClusterStateFault" }
 func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClusterStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster subnet group cannot be deleted because it is in use.
 type InvalidClusterSubnetGroupStateFault struct {
@@ -1165,12 +906,6 @@ func (e *InvalidClusterSubnetGroupStateFault) ErrorCode() string {
 func (e *InvalidClusterSubnetGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidClusterSubnetGroupStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterSubnetGroupStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The state of the subnet is invalid.
 type InvalidClusterSubnetStateFault struct {
@@ -1188,12 +923,6 @@ func (e *InvalidClusterSubnetStateFault) ErrorMessage() string {
 }
 func (e *InvalidClusterSubnetStateFault) ErrorCode() string             { return "InvalidClusterSubnetStateFault" }
 func (e *InvalidClusterSubnetStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClusterSubnetStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterSubnetStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The provided cluster track name is not valid.
 type InvalidClusterTrackFault struct {
@@ -1211,12 +940,6 @@ func (e *InvalidClusterTrackFault) ErrorMessage() string {
 }
 func (e *InvalidClusterTrackFault) ErrorCode() string             { return "InvalidClusterTrackFault" }
 func (e *InvalidClusterTrackFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClusterTrackFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClusterTrackFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The Elastic IP (EIP) is invalid or cannot be found.
 type InvalidElasticIpFault struct {
@@ -1234,12 +957,6 @@ func (e *InvalidElasticIpFault) ErrorMessage() string {
 }
 func (e *InvalidElasticIpFault) ErrorCode() string             { return "InvalidElasticIpFault" }
 func (e *InvalidElasticIpFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidElasticIpFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidElasticIpFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified HSM client certificate is not in the available state, or it is
 // still in use by one or more Amazon Redshift clusters.
@@ -1262,12 +979,6 @@ func (e *InvalidHsmClientCertificateStateFault) ErrorCode() string {
 func (e *InvalidHsmClientCertificateStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidHsmClientCertificateStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidHsmClientCertificateStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified HSM configuration is not in the available state, or it is still in
 // use by one or more Amazon Redshift clusters.
@@ -1288,12 +999,6 @@ func (e *InvalidHsmConfigurationStateFault) ErrorCode() string {
 	return "InvalidHsmConfigurationStateFault"
 }
 func (e *InvalidHsmConfigurationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidHsmConfigurationStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidHsmConfigurationStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the Reserved Node being exchanged is not in an active state.
 type InvalidReservedNodeStateFault struct {
@@ -1311,12 +1016,6 @@ func (e *InvalidReservedNodeStateFault) ErrorMessage() string {
 }
 func (e *InvalidReservedNodeStateFault) ErrorCode() string             { return "InvalidReservedNodeStateFault" }
 func (e *InvalidReservedNodeStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidReservedNodeStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidReservedNodeStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The restore is invalid.
 type InvalidRestoreFault struct {
@@ -1334,12 +1033,6 @@ func (e *InvalidRestoreFault) ErrorMessage() string {
 }
 func (e *InvalidRestoreFault) ErrorCode() string             { return "InvalidRestoreFault" }
 func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRestoreFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRestoreFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The retention period specified is either in the past or is not a valid value.
 // The value must be either -1 or an integer between 1 and 3,653.
@@ -1358,12 +1051,6 @@ func (e *InvalidRetentionPeriodFault) ErrorMessage() string {
 }
 func (e *InvalidRetentionPeriodFault) ErrorCode() string             { return "InvalidRetentionPeriodFault" }
 func (e *InvalidRetentionPeriodFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRetentionPeriodFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRetentionPeriodFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The S3 bucket name is invalid. For more information about naming rules, go to
 // Bucket Restrictions and Limitations
@@ -1384,12 +1071,6 @@ func (e *InvalidS3BucketNameFault) ErrorMessage() string {
 }
 func (e *InvalidS3BucketNameFault) ErrorCode() string             { return "InvalidS3BucketNameFault" }
 func (e *InvalidS3BucketNameFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3BucketNameFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3BucketNameFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The string specified for the logging S3 key prefix does not comply with the
 // documented constraints.
@@ -1408,12 +1089,6 @@ func (e *InvalidS3KeyPrefixFault) ErrorMessage() string {
 }
 func (e *InvalidS3KeyPrefixFault) ErrorCode() string             { return "InvalidS3KeyPrefixFault" }
 func (e *InvalidS3KeyPrefixFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidS3KeyPrefixFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidS3KeyPrefixFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The scheduled action is not valid.
 type InvalidScheduledActionFault struct {
@@ -1431,12 +1106,6 @@ func (e *InvalidScheduledActionFault) ErrorMessage() string {
 }
 func (e *InvalidScheduledActionFault) ErrorCode() string             { return "InvalidScheduledActionFault" }
 func (e *InvalidScheduledActionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidScheduledActionFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidScheduledActionFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The schedule you submitted isn't valid.
 type InvalidScheduleFault struct {
@@ -1454,12 +1123,6 @@ func (e *InvalidScheduleFault) ErrorMessage() string {
 }
 func (e *InvalidScheduleFault) ErrorCode() string             { return "InvalidScheduleFault" }
 func (e *InvalidScheduleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidScheduleFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidScheduleFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The snapshot copy grant can't be deleted because it is used by one or more
 // clusters.
@@ -1482,12 +1145,6 @@ func (e *InvalidSnapshotCopyGrantStateFault) ErrorCode() string {
 func (e *InvalidSnapshotCopyGrantStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidSnapshotCopyGrantStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSnapshotCopyGrantStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested subnet is not valid, or not all of the subnets are in the same
 // VPC.
@@ -1506,12 +1163,6 @@ func (e *InvalidSubnet) ErrorMessage() string {
 }
 func (e *InvalidSubnet) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSubnet) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubnet) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The subscription request is invalid because it is a duplicate request. This
 // subscription request is already in progress.
@@ -1530,12 +1181,6 @@ func (e *InvalidSubscriptionStateFault) ErrorMessage() string {
 }
 func (e *InvalidSubscriptionStateFault) ErrorCode() string             { return "InvalidSubscriptionStateFault" }
 func (e *InvalidSubscriptionStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidSubscriptionStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidSubscriptionStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value specified for the sourceDatabaseName, sourceSchemaName, or
 // sourceTableName parameter, or a combination of these, doesn't exist in the
@@ -1557,12 +1202,6 @@ func (e *InvalidTableRestoreArgumentFault) ErrorCode() string {
 	return "InvalidTableRestoreArgumentFault"
 }
 func (e *InvalidTableRestoreArgumentFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTableRestoreArgumentFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTableRestoreArgumentFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag is invalid.
 type InvalidTagFault struct {
@@ -1580,12 +1219,6 @@ func (e *InvalidTagFault) ErrorMessage() string {
 }
 func (e *InvalidTagFault) ErrorCode() string             { return "InvalidTagFault" }
 func (e *InvalidTagFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The usage limit is not valid.
 type InvalidUsageLimitFault struct {
@@ -1603,12 +1236,6 @@ func (e *InvalidUsageLimitFault) ErrorMessage() string {
 }
 func (e *InvalidUsageLimitFault) ErrorCode() string             { return "InvalidUsageLimitFault" }
 func (e *InvalidUsageLimitFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidUsageLimitFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidUsageLimitFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster subnet group does not cover all Availability Zones.
 type InvalidVPCNetworkStateFault struct {
@@ -1626,12 +1253,6 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 }
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidVPCNetworkStateFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidVPCNetworkStateFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The encryption key has exceeded its grant limit in AWS KMS.
 type LimitExceededFault struct {
@@ -1649,12 +1270,6 @@ func (e *LimitExceededFault) ErrorMessage() string {
 }
 func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceededFault" }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation would exceed the number of nodes allowed for a cluster.
 type NumberOfNodesPerClusterLimitExceededFault struct {
@@ -1675,12 +1290,6 @@ func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorCode() string {
 }
 func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *NumberOfNodesPerClusterLimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NumberOfNodesPerClusterLimitExceededFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The operation would exceed the number of nodes allotted to the account. For
@@ -1704,12 +1313,6 @@ func (e *NumberOfNodesQuotaExceededFault) ErrorCode() string {
 	return "NumberOfNodesQuotaExceededFault"
 }
 func (e *NumberOfNodesQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NumberOfNodesQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NumberOfNodesQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // User already has a reservation with the given identifier.
 type ReservedNodeAlreadyExistsFault struct {
@@ -1727,12 +1330,6 @@ func (e *ReservedNodeAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *ReservedNodeAlreadyExistsFault) ErrorCode() string             { return "ReservedNodeAlreadyExistsFault" }
 func (e *ReservedNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedNodeAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedNodeAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Indicates that the reserved node has already been exchanged.
 type ReservedNodeAlreadyMigratedFault struct {
@@ -1752,12 +1349,6 @@ func (e *ReservedNodeAlreadyMigratedFault) ErrorCode() string {
 	return "ReservedNodeAlreadyMigratedFault"
 }
 func (e *ReservedNodeAlreadyMigratedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedNodeAlreadyMigratedFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedNodeAlreadyMigratedFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified reserved compute node not found.
 type ReservedNodeNotFoundFault struct {
@@ -1775,12 +1366,6 @@ func (e *ReservedNodeNotFoundFault) ErrorMessage() string {
 }
 func (e *ReservedNodeNotFoundFault) ErrorCode() string             { return "ReservedNodeNotFoundFault" }
 func (e *ReservedNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedNodeNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedNodeNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Specified offering does not exist.
 type ReservedNodeOfferingNotFoundFault struct {
@@ -1800,12 +1385,6 @@ func (e *ReservedNodeOfferingNotFoundFault) ErrorCode() string {
 	return "ReservedNodeOfferingNotFoundFault"
 }
 func (e *ReservedNodeOfferingNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedNodeOfferingNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedNodeOfferingNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Request would exceed the user's compute node quota. For information about
 // increasing your quota, go to Limits in Amazon Redshift
@@ -1826,12 +1405,6 @@ func (e *ReservedNodeQuotaExceededFault) ErrorMessage() string {
 }
 func (e *ReservedNodeQuotaExceededFault) ErrorCode() string             { return "ReservedNodeQuotaExceededFault" }
 func (e *ReservedNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ReservedNodeQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ReservedNodeQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resize operation for the specified cluster is not found.
 type ResizeNotFoundFault struct {
@@ -1849,12 +1422,6 @@ func (e *ResizeNotFoundFault) ErrorMessage() string {
 }
 func (e *ResizeNotFoundFault) ErrorCode() string             { return "ResizeNotFoundFault" }
 func (e *ResizeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResizeNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResizeNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource could not be found.
 type ResourceNotFoundFault struct {
@@ -1872,12 +1439,6 @@ func (e *ResourceNotFoundFault) ErrorMessage() string {
 }
 func (e *ResourceNotFoundFault) ErrorCode() string             { return "ResourceNotFoundFault" }
 func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The scheduled action already exists.
 type ScheduledActionAlreadyExistsFault struct {
@@ -1897,12 +1458,6 @@ func (e *ScheduledActionAlreadyExistsFault) ErrorCode() string {
 	return "ScheduledActionAlreadyExistsFault"
 }
 func (e *ScheduledActionAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ScheduledActionAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScheduledActionAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The scheduled action cannot be found.
 type ScheduledActionNotFoundFault struct {
@@ -1920,12 +1475,6 @@ func (e *ScheduledActionNotFoundFault) ErrorMessage() string {
 }
 func (e *ScheduledActionNotFoundFault) ErrorCode() string             { return "ScheduledActionNotFoundFault" }
 func (e *ScheduledActionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ScheduledActionNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScheduledActionNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota for scheduled actions exceeded.
 type ScheduledActionQuotaExceededFault struct {
@@ -1945,12 +1494,6 @@ func (e *ScheduledActionQuotaExceededFault) ErrorCode() string {
 	return "ScheduledActionQuotaExceededFault"
 }
 func (e *ScheduledActionQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ScheduledActionQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScheduledActionQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The action type specified for a scheduled action is not supported.
 type ScheduledActionTypeUnsupportedFault struct {
@@ -1971,12 +1514,6 @@ func (e *ScheduledActionTypeUnsupportedFault) ErrorCode() string {
 }
 func (e *ScheduledActionTypeUnsupportedFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ScheduledActionTypeUnsupportedFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScheduledActionTypeUnsupportedFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The definition you submitted is not supported.
@@ -1999,12 +1536,6 @@ func (e *ScheduleDefinitionTypeUnsupportedFault) ErrorCode() string {
 func (e *ScheduleDefinitionTypeUnsupportedFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ScheduleDefinitionTypeUnsupportedFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ScheduleDefinitionTypeUnsupportedFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster already has cross-region snapshot copy disabled.
 type SnapshotCopyAlreadyDisabledFault struct {
@@ -2024,12 +1555,6 @@ func (e *SnapshotCopyAlreadyDisabledFault) ErrorCode() string {
 	return "SnapshotCopyAlreadyDisabledFault"
 }
 func (e *SnapshotCopyAlreadyDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotCopyAlreadyDisabledFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotCopyAlreadyDisabledFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The cluster already has cross-region snapshot copy enabled.
 type SnapshotCopyAlreadyEnabledFault struct {
@@ -2049,12 +1574,6 @@ func (e *SnapshotCopyAlreadyEnabledFault) ErrorCode() string {
 	return "SnapshotCopyAlreadyEnabledFault"
 }
 func (e *SnapshotCopyAlreadyEnabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotCopyAlreadyEnabledFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotCopyAlreadyEnabledFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Cross-region snapshot copy was temporarily disabled. Try your request again.
 type SnapshotCopyDisabledFault struct {
@@ -2072,12 +1591,6 @@ func (e *SnapshotCopyDisabledFault) ErrorMessage() string {
 }
 func (e *SnapshotCopyDisabledFault) ErrorCode() string             { return "SnapshotCopyDisabledFault" }
 func (e *SnapshotCopyDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotCopyDisabledFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotCopyDisabledFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The snapshot copy grant can't be created because a grant with the same name
 // already exists.
@@ -2100,12 +1613,6 @@ func (e *SnapshotCopyGrantAlreadyExistsFault) ErrorCode() string {
 func (e *SnapshotCopyGrantAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SnapshotCopyGrantAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotCopyGrantAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified snapshot copy grant can't be found. Make sure that the name is
 // typed correctly and that the grant exists in the destination region.
@@ -2124,12 +1631,6 @@ func (e *SnapshotCopyGrantNotFoundFault) ErrorMessage() string {
 }
 func (e *SnapshotCopyGrantNotFoundFault) ErrorCode() string             { return "SnapshotCopyGrantNotFoundFault" }
 func (e *SnapshotCopyGrantNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotCopyGrantNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotCopyGrantNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The AWS account has exceeded the maximum number of snapshot copy grants in this
 // region.
@@ -2152,12 +1653,6 @@ func (e *SnapshotCopyGrantQuotaExceededFault) ErrorCode() string {
 func (e *SnapshotCopyGrantQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SnapshotCopyGrantQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotCopyGrantQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified snapshot schedule already exists.
 type SnapshotScheduleAlreadyExistsFault struct {
@@ -2179,12 +1674,6 @@ func (e *SnapshotScheduleAlreadyExistsFault) ErrorCode() string {
 func (e *SnapshotScheduleAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SnapshotScheduleAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotScheduleAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // We could not find the specified snapshot schedule.
 type SnapshotScheduleNotFoundFault struct {
@@ -2202,12 +1691,6 @@ func (e *SnapshotScheduleNotFoundFault) ErrorMessage() string {
 }
 func (e *SnapshotScheduleNotFoundFault) ErrorCode() string             { return "SnapshotScheduleNotFoundFault" }
 func (e *SnapshotScheduleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SnapshotScheduleNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotScheduleNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the quota of snapshot schedules.
 type SnapshotScheduleQuotaExceededFault struct {
@@ -2228,12 +1711,6 @@ func (e *SnapshotScheduleQuotaExceededFault) ErrorCode() string {
 }
 func (e *SnapshotScheduleQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *SnapshotScheduleQuotaExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotScheduleQuotaExceededFault) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The specified snapshot schedule is already being updated.
@@ -2256,12 +1733,6 @@ func (e *SnapshotScheduleUpdateInProgressFault) ErrorCode() string {
 func (e *SnapshotScheduleUpdateInProgressFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *SnapshotScheduleUpdateInProgressFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SnapshotScheduleUpdateInProgressFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Amazon SNS has responded that there is a problem with the specified Amazon SNS
 // topic.
@@ -2280,12 +1751,6 @@ func (e *SNSInvalidTopicFault) ErrorMessage() string {
 }
 func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopicFault" }
 func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SNSInvalidTopicFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SNSInvalidTopicFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You do not have permission to publish to the specified Amazon SNS topic.
 type SNSNoAuthorizationFault struct {
@@ -2303,12 +1768,6 @@ func (e *SNSNoAuthorizationFault) ErrorMessage() string {
 }
 func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorizationFault" }
 func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SNSNoAuthorizationFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SNSNoAuthorizationFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Amazon SNS topic with the specified Amazon Resource Name (ARN) does not
 // exist.
@@ -2327,12 +1786,6 @@ func (e *SNSTopicArnNotFoundFault) ErrorMessage() string {
 }
 func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFoundFault" }
 func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SNSTopicArnNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SNSTopicArnNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified Amazon Redshift event source could not be found.
 type SourceNotFoundFault struct {
@@ -2350,12 +1803,6 @@ func (e *SourceNotFoundFault) ErrorMessage() string {
 }
 func (e *SourceNotFoundFault) ErrorCode() string             { return "SourceNotFoundFault" }
 func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SourceNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SourceNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified subnet is already in use by another cluster.
 type SubnetAlreadyInUse struct {
@@ -2373,12 +1820,6 @@ func (e *SubnetAlreadyInUse) ErrorMessage() string {
 }
 func (e *SubnetAlreadyInUse) ErrorCode() string             { return "SubnetAlreadyInUse" }
 func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubnetAlreadyInUse) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubnetAlreadyInUse) HasMessage() bool {
-	return e.Message != nil
-}
 
 // There is already an existing event notification subscription with the specified
 // name.
@@ -2397,12 +1838,6 @@ func (e *SubscriptionAlreadyExistFault) ErrorMessage() string {
 }
 func (e *SubscriptionAlreadyExistFault) ErrorCode() string             { return "SubscriptionAlreadyExistFault" }
 func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubscriptionAlreadyExistFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubscriptionAlreadyExistFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value specified for the event category was not one of the allowed values, or
 // it specified a category that does not apply to the specified source type. The
@@ -2424,12 +1859,6 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string {
 	return "SubscriptionCategoryNotFoundFault"
 }
 func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubscriptionCategoryNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubscriptionCategoryNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Amazon Redshift event with the specified event ID does not exist.
 type SubscriptionEventIdNotFoundFault struct {
@@ -2449,12 +1878,6 @@ func (e *SubscriptionEventIdNotFoundFault) ErrorCode() string {
 	return "SubscriptionEventIdNotFoundFault"
 }
 func (e *SubscriptionEventIdNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubscriptionEventIdNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubscriptionEventIdNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An Amazon Redshift event notification subscription with the specified name does
 // not exist.
@@ -2473,12 +1896,6 @@ func (e *SubscriptionNotFoundFault) ErrorMessage() string {
 }
 func (e *SubscriptionNotFoundFault) ErrorCode() string             { return "SubscriptionNotFoundFault" }
 func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubscriptionNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubscriptionNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value specified for the event severity was not one of the allowed values, or
 // it specified a severity that does not apply to the specified source type. The
@@ -2500,12 +1917,6 @@ func (e *SubscriptionSeverityNotFoundFault) ErrorCode() string {
 	return "SubscriptionSeverityNotFoundFault"
 }
 func (e *SubscriptionSeverityNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SubscriptionSeverityNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SubscriptionSeverityNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of tables in the cluster exceeds the limit for the requested new
 // cluster node type.
@@ -2524,12 +1935,6 @@ func (e *TableLimitExceededFault) ErrorMessage() string {
 }
 func (e *TableLimitExceededFault) ErrorCode() string             { return "TableLimitExceededFault" }
 func (e *TableLimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TableLimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TableLimitExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified TableRestoreRequestId value was not found.
 type TableRestoreNotFoundFault struct {
@@ -2547,12 +1952,6 @@ func (e *TableRestoreNotFoundFault) ErrorMessage() string {
 }
 func (e *TableRestoreNotFoundFault) ErrorCode() string             { return "TableRestoreNotFoundFault" }
 func (e *TableRestoreNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TableRestoreNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TableRestoreNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded the number of tags allowed.
 type TagLimitExceededFault struct {
@@ -2570,12 +1969,6 @@ func (e *TagLimitExceededFault) ErrorMessage() string {
 }
 func (e *TagLimitExceededFault) ErrorCode() string             { return "TagLimitExceededFault" }
 func (e *TagLimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagLimitExceededFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagLimitExceededFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your account is not authorized to perform the requested operation.
 type UnauthorizedOperation struct {
@@ -2593,12 +1986,6 @@ func (e *UnauthorizedOperation) ErrorMessage() string {
 }
 func (e *UnauthorizedOperation) ErrorCode() string             { return "UnauthorizedOperation" }
 func (e *UnauthorizedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnauthorizedOperation) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnauthorizedOperation) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified region is incorrect or does not exist.
 type UnknownSnapshotCopyRegionFault struct {
@@ -2616,12 +2003,6 @@ func (e *UnknownSnapshotCopyRegionFault) ErrorMessage() string {
 }
 func (e *UnknownSnapshotCopyRegionFault) ErrorCode() string             { return "UnknownSnapshotCopyRegionFault" }
 func (e *UnknownSnapshotCopyRegionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnknownSnapshotCopyRegionFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnknownSnapshotCopyRegionFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested operation isn't supported.
 type UnsupportedOperationFault struct {
@@ -2639,12 +2020,6 @@ func (e *UnsupportedOperationFault) ErrorMessage() string {
 }
 func (e *UnsupportedOperationFault) ErrorCode() string             { return "UnsupportedOperationFault" }
 func (e *UnsupportedOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperationFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperationFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A request option was specified that is not supported.
 type UnsupportedOptionFault struct {
@@ -2662,12 +2037,6 @@ func (e *UnsupportedOptionFault) ErrorMessage() string {
 }
 func (e *UnsupportedOptionFault) ErrorCode() string             { return "UnsupportedOptionFault" }
 func (e *UnsupportedOptionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOptionFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOptionFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The usage limit already exists.
 type UsageLimitAlreadyExistsFault struct {
@@ -2685,12 +2054,6 @@ func (e *UsageLimitAlreadyExistsFault) ErrorMessage() string {
 }
 func (e *UsageLimitAlreadyExistsFault) ErrorCode() string             { return "UsageLimitAlreadyExistsFault" }
 func (e *UsageLimitAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UsageLimitAlreadyExistsFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UsageLimitAlreadyExistsFault) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The usage limit identifier can't be found.
 type UsageLimitNotFoundFault struct {
@@ -2708,9 +2071,3 @@ func (e *UsageLimitNotFoundFault) ErrorMessage() string {
 }
 func (e *UsageLimitNotFoundFault) ErrorCode() string             { return "UsageLimitNotFoundFault" }
 func (e *UsageLimitNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UsageLimitNotFoundFault) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UsageLimitNotFoundFault) HasMessage() bool {
-	return e.Message != nil
-}

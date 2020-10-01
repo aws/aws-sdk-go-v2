@@ -67,11 +67,14 @@ func (c *Client) ListTapes(ctx context.Context, params *ListTapesInput, optFns .
 // <a>ListTapesInput$Limit</a> </p> </li> <li> <p> <a>ListTapesInput$Marker</a>
 // </p> </li> <li> <p> <a>ListTapesInput$TapeARNs</a> </p> </li> </ul>
 type ListTapesInput struct {
+
 	// The Amazon Resource Name (ARN) of each of the tapes you want to list. If you
 	// don't specify a tape ARN, the response lists all tapes in both your VTL and VTS.
 	TapeARNs []*string
+
 	// An optional number limit for the tapes in the list returned by this call.
 	Limit *int32
+
 	// A string that indicates the position at which to begin the returned list of
 	// tapes.
 	Marker *string
@@ -81,10 +84,12 @@ type ListTapesInput struct {
 // <a>ListTapesOutput$Marker</a> </p> </li> <li> <p>
 // <a>ListTapesOutput$VolumeInfos</a> </p> </li> </ul>
 type ListTapesOutput struct {
+
 	// An array of TapeInfo () objects, where each object describes a single tape. If
 	// there are no tapes in the tape library or VTS, then the TapeInfos is an empty
 	// array.
 	TapeInfos []*types.TapeInfo
+
 	// A string that indicates the position at which to begin returning the next list
 	// of tapes. Use the marker in your next request to continue pagination of tapes.
 	// If there are no more tapes to list, this element does not appear in the response

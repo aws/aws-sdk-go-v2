@@ -55,8 +55,11 @@ func (c *Client) DeleteVPCEConfiguration(ctx context.Context, params *DeleteVPCE
 }
 
 type DeleteVPCEConfigurationInput struct {
+
 	// The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to
 	// delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

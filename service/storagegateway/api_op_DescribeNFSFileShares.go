@@ -58,13 +58,17 @@ func (c *Client) DescribeNFSFileShares(ctx context.Context, params *DescribeNFSF
 
 // DescribeNFSFileSharesInput
 type DescribeNFSFileSharesInput struct {
+
 	// An array containing the Amazon Resource Name (ARN) of each file share to be
 	// described.
+	//
+	// This member is required.
 	FileShareARNList []*string
 }
 
 // DescribeNFSFileSharesOutput
 type DescribeNFSFileSharesOutput struct {
+
 	// An array containing a description for each requested file share.
 	NFSFileShareInfoList []*types.NFSFileShareInfo
 

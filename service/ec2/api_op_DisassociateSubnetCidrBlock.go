@@ -58,13 +58,18 @@ func (c *Client) DisassociateSubnetCidrBlock(ctx context.Context, params *Disass
 }
 
 type DisassociateSubnetCidrBlockInput struct {
+
 	// The association ID for the CIDR block.
+	//
+	// This member is required.
 	AssociationId *string
 }
 
 type DisassociateSubnetCidrBlockOutput struct {
+
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *types.SubnetIpv6CidrBlockAssociation
+
 	// The ID of the subnet.
 	SubnetId *string
 

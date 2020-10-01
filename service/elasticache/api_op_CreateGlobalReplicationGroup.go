@@ -67,17 +67,25 @@ func (c *Client) CreateGlobalReplicationGroup(ctx context.Context, params *Creat
 }
 
 type CreateGlobalReplicationGroupInput struct {
+
 	// The suffix name of a Global Datastore. The suffix guarantees uniqueness of the
 	// Global Datastore name across multiple regions.
+	//
+	// This member is required.
 	GlobalReplicationGroupIdSuffix *string
+
 	// The name of the primary cluster that accepts writes and will replicate updates
 	// to the secondary cluster.
+	//
+	// This member is required.
 	PrimaryReplicationGroupId *string
+
 	// Provides details of the Global Datastore
 	GlobalReplicationGroupDescription *string
 }
 
 type CreateGlobalReplicationGroupOutput struct {
+
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the

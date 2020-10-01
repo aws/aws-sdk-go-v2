@@ -56,6 +56,7 @@ func (c *Client) PutParameter(ctx context.Context, params *PutParameterInput, op
 }
 
 type PutParameterInput struct {
+
 	// The type of parameter that you want to add to the system. SecureString is not
 	// currently supported for AWS CloudFormation templates or in the China Regions.
 	// Items in a StringList must be separated by a comma (,). You can't use other
@@ -64,6 +65,7 @@ type PutParameterInput struct {
 	// a parameter type is not required when updating a parameter. You must specify a
 	// parameter type when creating a parameter.
 	Type types.ParameterType
+
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag a Systems Manager parameter to identify the type
@@ -75,6 +77,7 @@ type PutParameterInput struct {
 	// add tags to an existing Systems Manager parameter, use the
 	// <a>AddTagsToResource</a> action.</p> </note>
 	Tags []*types.Tag
+
 	// One or more policies to apply to a parameter. This action takes a JSON array.
 	// Parameter Store supports the following policy types:  <p>Expiration: This policy
 	// deletes the parameter after it expires. When you create the policy,  you specify
@@ -92,15 +95,21 @@ type PutParameterInput struct {
 	// parameter policies, see Assigning parameter policies
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html).
 	Policies *string
+
 	// Overwrite an existing parameter. If not specified, will default to "false".
 	Overwrite *bool
+
 	// A regular expression used to validate the parameter value. For example, for
 	// String types with values restricted to numbers, you can specify the following:
 	// AllowedPattern=^\d+$
 	AllowedPattern *string
+
 	// The parameter value that you want to add to the system. Standard parameters have
 	// a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
+	//
+	// This member is required.
 	Value *string
+
 	// The KMS Key ID that you want to use to encrypt a parameter. Either the default
 	// AWS Key Management Service (AWS KMS) key automatically assigned to your AWS
 	// account or a custom key. Required for parameters that use the SecureString data
@@ -115,6 +124,7 @@ type PutParameterInput struct {
 	//     * To use a custom KMS key, choose the SecureString data type with the
 	// Key ID parameter.
 	KeyId *string
+
 	// The data type for a String parameter. Supported data types include plain text
 	// and Amazon Machine Image IDs. The following data type values are supported.
 	//
@@ -131,6 +141,7 @@ type PutParameterInput struct {
 	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
 	// in the AWS Systems Manager User Guide.
 	DataType *string
+
 	// The fully qualified name of the parameter that you want to add to the system.
 	// The fully qualified name includes the complete hierarchy of the parameter path
 	// and name. For parameters in a hierarchy, you must include a leading forward
@@ -164,7 +175,10 @@ type PutParameterInput struct {
 	// the parameter ARN, is 1011 characters. For example, the length of the following
 	// parameter name is 65 characters, not 20 characters:
 	// arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName
+	//
+	// This member is required.
 	Name *string
+
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard
 	// tier and an advanced tier for parameters. Standard parameters have a content
 	// size limit of 4 KB and can't be configured to use parameter policies. You can
@@ -222,14 +236,17 @@ type PutParameterInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
 	// in the AWS Systems Manager User Guide.
 	Tier types.ParameterTier
+
 	// Information about the parameter that you want to add to the system. Optional but
 	// recommended. Do not enter personally identifiable information in this field.
 	Description *string
 }
 
 type PutParameterOutput struct {
+
 	// The tier assigned to the parameter.
 	Tier types.ParameterTier
+
 	// The new version number of a parameter. If you edit a parameter value, Parameter
 	// Store automatically creates a new version and assigns this new version a unique
 	// ID. You can reference a parameter version ID in API actions or in Systems

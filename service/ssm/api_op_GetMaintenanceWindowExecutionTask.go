@@ -58,38 +58,56 @@ func (c *Client) GetMaintenanceWindowExecutionTask(ctx context.Context, params *
 }
 
 type GetMaintenanceWindowExecutionTaskInput struct {
+
 	// The ID of the specific task execution in the maintenance window task that should
 	// be retrieved.
+	//
+	// This member is required.
 	TaskId *string
+
 	// The ID of the maintenance window execution that includes the task.
+	//
+	// This member is required.
 	WindowExecutionId *string
 }
 
 type GetMaintenanceWindowExecutionTaskOutput struct {
+
 	// The defined maximum number of task executions that could be run in parallel.
 	MaxConcurrency *string
+
 	// The time the task execution started.
 	StartTime *time.Time
+
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string
+
 	// The role that was assumed when running the task.
 	ServiceRole *string
+
 	// The defined maximum number of task execution errors allowed before scheduling of
 	// the task execution would have been stopped.
 	MaxErrors *string
+
 	// The type of task that was run.
 	Type types.MaintenanceWindowTaskType
+
 	// The ID of the specific task execution in the maintenance window task that was
 	// retrieved.
 	TaskExecutionId *string
+
 	// The status of the task.
 	Status types.MaintenanceWindowExecutionStatus
+
 	// The ID of the maintenance window execution that includes the task.
 	WindowExecutionId *string
+
 	// The time the task execution completed.
 	EndTime *time.Time
+
 	// The priority of the task.
 	Priority *int32
+
 	// The parameters passed to the task when it was run. TaskParameters has been
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
 	// the Parameters option in the TaskInvocationParameters structure. For information
@@ -98,6 +116,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// the following format: Key: string, between 1 and 255 characters Value: an array
 	// of strings, each string is between 1 and 255 characters
 	TaskParameters []map[string]*types.MaintenanceWindowTaskParameterValueExpression
+
 	// The ARN of the task that ran.
 	TaskArn *string
 

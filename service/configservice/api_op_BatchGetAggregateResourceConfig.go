@@ -61,16 +61,24 @@ func (c *Client) BatchGetAggregateResourceConfig(ctx context.Context, params *Ba
 }
 
 type BatchGetAggregateResourceConfigInput struct {
+
 	// A list of aggregate ResourceIdentifiers objects.
+	//
+	// This member is required.
 	ResourceIdentifiers []*types.AggregateResourceIdentifier
+
 	// The name of the configuration aggregator.
+	//
+	// This member is required.
 	ConfigurationAggregatorName *string
 }
 
 type BatchGetAggregateResourceConfigOutput struct {
+
 	// A list of resource identifiers that were not processed with current scope. The
 	// list is empty if all the resources are processed.
 	UnprocessedResourceIdentifiers []*types.AggregateResourceIdentifier
+
 	// A list that contains the current configuration of one or more resources.
 	BaseConfigurationItems []*types.BaseConfigurationItem
 

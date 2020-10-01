@@ -58,21 +58,31 @@ func (c *Client) CreateClassificationJob(ctx context.Context, params *CreateClas
 }
 
 type CreateClassificationJobInput struct {
+
 	// A map of key-value pairs that specifies the tags to associate with the job. A
 	// job can have a maximum of 50 tags. Each tag consists of a required tag key and
 	// an associated tag value. The maximum length of a tag key is 128 characters. The
 	// maximum length of a tag value is 256 characters.
 	Tags map[string]*string
+
 	// The S3 buckets that contain the objects to analyze, and the scope of that
 	// analysis.
+	//
+	// This member is required.
 	S3JobDefinition *types.S3JobDefinition
+
 	// A custom description of the job. The description can contain as many as 200
 	// characters.
 	Description *string
+
 	// A custom name for the job. The name can contain as many as 500 characters.
+	//
+	// This member is required.
 	Name *string
+
 	// Specifies whether to run the job immediately, after it's created.
 	InitialRun *bool
+
 	// The schedule for running the job. Valid values are:
 	//
 	//     * ONE_TIME - Run the
@@ -82,16 +92,24 @@ type CreateClassificationJobInput struct {
 	//     * SCHEDULED - Run the job on a daily, weekly,
 	// or monthly basis. If you specify this value, use the scheduleFrequency property
 	// to define the recurrence pattern for the job.
+	//
+	// This member is required.
 	JobType types.JobType
+
 	// A unique, case-sensitive token that you provide to ensure the idempotency of the
 	// request.
+	//
+	// This member is required.
 	ClientToken *string
+
 	// The recurrence pattern for running the job. To run the job only once, don't
 	// specify a value for this property and set the value of the jobType property to
 	// ONE_TIME.
 	ScheduleFrequency *types.JobScheduleFrequency
+
 	// The custom data identifiers to use for data analysis and classification.
 	CustomDataIdentifierIds []*string
+
 	// The sampling depth, as a percentage, to apply when processing objects. This
 	// value determines the percentage of eligible objects that the job analyzes. If
 	// the value is less than 100, Amazon Macie randomly selects the objects to
@@ -100,8 +118,10 @@ type CreateClassificationJobInput struct {
 }
 
 type CreateClassificationJobOutput struct {
+
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
+
 	// The unique identifier for the job.
 	JobId *string
 

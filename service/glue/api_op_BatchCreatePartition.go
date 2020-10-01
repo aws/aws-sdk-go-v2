@@ -56,18 +56,29 @@ func (c *Client) BatchCreatePartition(ctx context.Context, params *BatchCreatePa
 }
 
 type BatchCreatePartitionInput struct {
+
 	// The ID of the catalog in which the partition is to be created. Currently, this
 	// should be the AWS account ID.
 	CatalogId *string
+
 	// The name of the metadata database in which the partition is to be created.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// The name of the metadata table in which the partition is to be created.
+	//
+	// This member is required.
 	TableName *string
+
 	// A list of PartitionInput structures that define the partitions to be created.
+	//
+	// This member is required.
 	PartitionInputList []*types.PartitionInput
 }
 
 type BatchCreatePartitionOutput struct {
+
 	// The errors encountered when trying to create the requested partitions.
 	Errors []*types.PartitionError
 

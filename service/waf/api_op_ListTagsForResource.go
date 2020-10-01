@@ -69,17 +69,24 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	//
 	NextMarker *string
+
 	//
+	//
+	// This member is required.
 	ResourceARN *string
+
 	//
 	Limit *int32
 }
 
 type ListTagsForResourceOutput struct {
+
 	//
 	TagInfoForResource *types.TagInfoForResource
+
 	//
 	NextMarker *string
 

@@ -59,6 +59,7 @@ type DescribeScalingProcessTypesInput struct {
 }
 
 type DescribeScalingProcessTypesOutput struct {
+
 	// The names of the process types.
 	Processes []*types.ProcessType
 

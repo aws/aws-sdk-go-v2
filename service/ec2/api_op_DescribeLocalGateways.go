@@ -56,8 +56,10 @@ func (c *Client) DescribeLocalGateways(ctx context.Context, params *DescribeLoca
 }
 
 type DescribeLocalGatewaysInput struct {
+
 	// One or more filters.
 	Filters []*types.Filter
+
 	// One or more filters.
 	//
 	//     * local-gateway-id - The ID of a local gateway.
@@ -77,11 +79,14 @@ type DescribeLocalGatewaysInput struct {
 	//
 	//     * state - The state of the association.
 	LocalGatewayIds []*string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -90,8 +95,10 @@ type DescribeLocalGatewaysInput struct {
 }
 
 type DescribeLocalGatewaysOutput struct {
+
 	// Information about the local gateways.
 	LocalGateways []*types.LocalGateway
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string

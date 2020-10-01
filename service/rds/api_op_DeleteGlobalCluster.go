@@ -58,11 +58,15 @@ func (c *Client) DeleteGlobalCluster(ctx context.Context, params *DeleteGlobalCl
 }
 
 type DeleteGlobalClusterInput struct {
+
 	// The cluster identifier of the global database cluster being deleted.
+	//
+	// This member is required.
 	GlobalClusterIdentifier *string
 }
 
 type DeleteGlobalClusterOutput struct {
+
 	// A data type representing an Aurora global database.
 	GlobalCluster *types.GlobalCluster
 

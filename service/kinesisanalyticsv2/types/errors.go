@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The user-provided application code (query) is not valid. This can be a simple
@@ -25,12 +24,6 @@ func (e *CodeValidationException) ErrorMessage() string {
 }
 func (e *CodeValidationException) ErrorCode() string             { return "CodeValidationException" }
 func (e *CodeValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CodeValidationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CodeValidationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Exception thrown as a result of concurrent modifications to an application. This
 // error can be the result of attempting to modify an application without using the
@@ -52,12 +45,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The user-provided application configuration is not valid.
 type InvalidApplicationConfigurationException struct {
@@ -79,12 +66,6 @@ func (e *InvalidApplicationConfigurationException) ErrorCode() string {
 func (e *InvalidApplicationConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *InvalidApplicationConfigurationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidApplicationConfigurationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified input parameter value is not valid.
 type InvalidArgumentException struct {
@@ -102,12 +83,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request JSON is not valid for the operation.
 type InvalidRequestException struct {
@@ -125,12 +100,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The number of allowed resources has been exceeded.
 type LimitExceededException struct {
@@ -148,12 +117,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The application is not available for this operation.
 type ResourceInUseException struct {
@@ -171,12 +134,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Specified application can't be found.
 type ResourceNotFoundException struct {
@@ -194,12 +151,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Discovery failed to get a record from the streaming source because of the Amazon
 // Kinesis Streams ProvisionedThroughputExceededException. For more information,
@@ -225,12 +176,6 @@ func (e *ResourceProvisionedThroughputExceededException) ErrorCode() string {
 func (e *ResourceProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ResourceProvisionedThroughputExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceProvisionedThroughputExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The service cannot complete the request.
 type ServiceUnavailableException struct {
@@ -248,12 +193,6 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 }
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceUnavailableException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceUnavailableException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Application created with too many tags, or too many tags added to an
 // application. Note that the maximum number of application tags includes system
@@ -273,12 +212,6 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The data format is not valid. Amazon Kinesis Data Analytics cannot detect the
 // schema for the given streaming source.
@@ -300,24 +233,6 @@ func (e *UnableToDetectSchemaException) ErrorMessage() string {
 }
 func (e *UnableToDetectSchemaException) ErrorCode() string             { return "UnableToDetectSchemaException" }
 func (e *UnableToDetectSchemaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnableToDetectSchemaException) GetRawInputRecords() []*string {
-	return e.RawInputRecords
-}
-func (e *UnableToDetectSchemaException) HasRawInputRecords() bool {
-	return e.RawInputRecords != nil
-}
-func (e *UnableToDetectSchemaException) GetProcessedInputRecords() []*string {
-	return e.ProcessedInputRecords
-}
-func (e *UnableToDetectSchemaException) HasProcessedInputRecords() bool {
-	return e.ProcessedInputRecords != nil
-}
-func (e *UnableToDetectSchemaException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnableToDetectSchemaException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because a specified parameter is not supported or a
 // specified resource is not valid for this operation.
@@ -336,9 +251,3 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 }
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *UnsupportedOperationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *UnsupportedOperationException) HasMessage() bool {
-	return e.Message != nil
-}

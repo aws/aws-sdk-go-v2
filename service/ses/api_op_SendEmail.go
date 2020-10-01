@@ -86,9 +86,11 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html).
 type SendEmailInput struct {
+
 	// The reply-to email address(es) for the message. If the recipient replies to the
 	// message, each reply-to address will receive the reply.
 	ReplyToAddresses []*string
+
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
 	// with Amazon SES. For information about verifying identities, see the Amazon SES
@@ -111,7 +113,10 @@ type SendEmailInput struct {
 	// encoded using MIME encoded-word syntax, as described in RFC 2047
 	// (https://tools.ietf.org/html/rfc2047). MIME encoded-word syntax uses the
 	// following form: =?charset?encoding?encoded-text?=.
+	//
+	// This member is required.
 	Source *string
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to send for the email address specified in the Source parameter. For
@@ -123,12 +128,15 @@ type SendEmailInput struct {
 	// see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	SourceArn *string
+
 	// The name of the configuration set to use when you send an email using SendEmail.
 	ConfigurationSetName *string
+
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendEmail. Tags correspond to characteristics of the email that you
 	// define, so that you can publish email sending events.
 	Tags []*types.MessageTag
+
 	// The email address that bounces and complaints will be forwarded to when feedback
 	// forwarding is enabled. If the message cannot be delivered to the recipient, then
 	// an error message will be returned from the recipient's ISP; this message will
@@ -137,8 +145,12 @@ type SendEmailInput struct {
 	// individually verified with Amazon SES, or from a domain that has been verified
 	// with Amazon SES.
 	ReturnPath *string
+
 	// The message to be sent.
+	//
+	// This member is required.
 	Message *types.Message
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the ReturnPath parameter. For example,
@@ -150,13 +162,19 @@ type SendEmailInput struct {
 	// authorization, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	ReturnPathArn *string
+
 	// The destination for this email, composed of To:, CC:, and BCC: fields.
+	//
+	// This member is required.
 	Destination *types.Destination
 }
 
 // Represents a unique message ID.
 type SendEmailOutput struct {
+
 	// The unique message identifier returned from the SendEmail action.
+	//
+	// This member is required.
 	MessageId *string
 
 	// Metadata pertaining to the operation's result.

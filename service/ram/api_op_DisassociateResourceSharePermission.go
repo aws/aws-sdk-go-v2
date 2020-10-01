@@ -55,18 +55,27 @@ func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params
 }
 
 type DisassociateResourceSharePermissionInput struct {
+
 	// The ARN of the permission to disassociate from the resource share.
+	//
+	// This member is required.
 	PermissionArn *string
+
 	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
 	ResourceShareArn *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 }
 
 type DisassociateResourceSharePermissionOutput struct {
+
 	// Indicates whether the request succeeded.
 	ReturnValue *bool
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string

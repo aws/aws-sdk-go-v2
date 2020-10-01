@@ -58,11 +58,15 @@ func (c *Client) GetResolverRule(ctx context.Context, params *GetResolverRuleInp
 }
 
 type GetResolverRuleInput struct {
+
 	// The ID of the resolver rule that you want to get information about.
+	//
+	// This member is required.
 	ResolverRuleId *string
 }
 
 type GetResolverRuleOutput struct {
+
 	// Information about the resolver rule that you specified in a GetResolverRule
 	// request.
 	ResolverRule *types.ResolverRule

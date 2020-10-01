@@ -57,10 +57,16 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 // Contains the output from the DeleteTags action.
 type DeleteTagsInput struct {
+
 	// The tag key that you want to delete.
+	//
+	// This member is required.
 	TagKeys []*string
+
 	// The Amazon Resource Name (ARN) from which you want to remove the tag or tags.
 	// For example, arn:aws:redshift:us-east-2:123456789:cluster:t1.
+	//
+	// This member is required.
 	ResourceName *string
 }
 

@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // One or more parameters in the request aren't valid.
@@ -26,18 +25,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParameterException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParameterException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidParameterException) GetParameterName() string {
-	return ptr.ToString(e.ParameterName)
-}
-func (e *InvalidParameterException) HasParameterName() bool {
-	return e.ParameterName != nil
-}
 
 // You have reached the limit on the maximum number of resources allowed.
 type LimitExceededException struct {
@@ -57,18 +44,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *LimitExceededException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -89,24 +64,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourceAlreadyExistsException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
-func (e *ResourceAlreadyExistsException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceAlreadyExistsException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource can't be modified at this time.
 type ResourceInUseException struct {
@@ -127,24 +84,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceInUseException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceInUseException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourceInUseException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
 
 // The specified resource doesn't exist.
 type ResourceNotFoundException struct {
@@ -165,24 +104,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourceNotFoundException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *ResourceNotFoundException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourceNotFoundException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
 
 // The operation failed because a condition wasn't satisfied in advance.
 type ResourcePreconditionNotMetException struct {
@@ -206,22 +127,4 @@ func (e *ResourcePreconditionNotMetException) ErrorCode() string {
 }
 func (e *ResourcePreconditionNotMetException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ResourcePreconditionNotMetException) GetResourceName() string {
-	return ptr.ToString(e.ResourceName)
-}
-func (e *ResourcePreconditionNotMetException) HasResourceName() bool {
-	return e.ResourceName != nil
-}
-func (e *ResourcePreconditionNotMetException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *ResourcePreconditionNotMetException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *ResourcePreconditionNotMetException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourcePreconditionNotMetException) HasMessage() bool {
-	return e.Message != nil
 }

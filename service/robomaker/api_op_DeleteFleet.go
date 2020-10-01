@@ -55,7 +55,10 @@ func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optF
 }
 
 type DeleteFleetInput struct {
+
 	// The Amazon Resource Name (ARN) of the fleet.
+	//
+	// This member is required.
 	Fleet *string
 }
 

@@ -56,15 +56,19 @@ func (c *Client) GetEffectivePolicies(ctx context.Context, params *GetEffectiveP
 }
 
 type GetEffectivePoliciesInput struct {
+
 	// The thing name.
 	ThingName *string
+
 	// The Cognito identity pool ID.
 	CognitoIdentityPoolId *string
+
 	// The principal.
 	Principal *string
 }
 
 type GetEffectivePoliciesOutput struct {
+
 	// The effective policies.
 	EffectivePolicies []*types.EffectivePolicy
 

@@ -56,11 +56,15 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 }
 
 type GetFederationTokenInput struct {
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
 }
 
 type GetFederationTokenOutput struct {
+
 	// The credentials to use for federation.
 	Credentials *types.Credentials
 

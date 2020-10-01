@@ -56,11 +56,15 @@ func (c *Client) PauseCluster(ctx context.Context, params *PauseClusterInput, op
 }
 
 type PauseClusterInput struct {
+
 	// The identifier of the cluster to be paused.
+	//
+	// This member is required.
 	ClusterIdentifier *string
 }
 
 type PauseClusterOutput struct {
+
 	// Describes a cluster.
 	Cluster *types.Cluster
 

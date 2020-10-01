@@ -57,11 +57,15 @@ func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatas
 }
 
 type DescribeDatasetGroupInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset group to describe.
+	//
+	// This member is required.
 	DatasetGroupArn *string
 }
 
 type DescribeDatasetGroupOutput struct {
+
 	// A listing of the dataset group's properties.
 	DatasetGroup *types.DatasetGroup
 

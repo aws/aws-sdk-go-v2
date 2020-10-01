@@ -65,6 +65,7 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 }
 
 type UpdateGroupInput struct {
+
 	// New path for the IAM group. Only include this if changing the group's path. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
 	// string of characters consisting of either a forward slash (/) by itself or a
@@ -72,12 +73,16 @@ type UpdateGroupInput struct {
 	// any ASCII character from the ! (\u0021) through the DEL character (\u007F),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	NewPath *string
+
 	// Name of the IAM group to update. If you're changing the name of the group, this
 	// is the original name. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
+	//
+	// This member is required.
 	GroupName *string
+
 	// New name for the IAM group. Only include this if changing the group's name. IAM
 	// user, group, role, and policy names must be unique within the account. Names are
 	// not distinguished by case. For example, you cannot create resources named both

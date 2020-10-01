@@ -66,14 +66,20 @@ func (c *Client) SetLoadBasedAutoScaling(ctx context.Context, params *SetLoadBas
 }
 
 type SetLoadBasedAutoScalingInput struct {
+
 	// An AutoScalingThresholds object with the upscaling threshold configuration. If
 	// the load exceeds these thresholds for a specified amount of time, AWS OpsWorks
 	// Stacks starts a specified number of instances.
 	UpScaling *types.AutoScalingThresholds
+
 	// The layer ID.
+	//
+	// This member is required.
 	LayerId *string
+
 	// Enables load-based auto scaling for the layer.
 	Enable *bool
+
 	// An AutoScalingThresholds object with the downscaling threshold configuration. If
 	// the load falls below these thresholds for a specified amount of time, AWS
 	// OpsWorks Stacks stops a specified number of instances.

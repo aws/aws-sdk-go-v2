@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The provided iterator exceeds the maximum age allowed.
@@ -24,12 +23,6 @@ func (e *ExpiredIteratorException) ErrorMessage() string {
 }
 func (e *ExpiredIteratorException) ErrorCode() string             { return "ExpiredIteratorException" }
 func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredIteratorException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredIteratorException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The pagination token passed to the operation is expired.
 type ExpiredNextTokenException struct {
@@ -47,12 +40,6 @@ func (e *ExpiredNextTokenException) ErrorMessage() string {
 }
 func (e *ExpiredNextTokenException) ErrorCode() string             { return "ExpiredNextTokenException" }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ExpiredNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ExpiredNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 type InternalFailureException struct {
 	Message *string
@@ -69,12 +56,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 }
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalFailureException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalFailureException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A specified parameter exceeds its restrictions, is not supported, or can't be
 // used. For more information, see the returned message.
@@ -93,12 +74,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The ciphertext references a key that doesn't exist or that you don't have access
 // to.
@@ -117,12 +92,6 @@ func (e *KMSAccessDeniedException) ErrorMessage() string {
 }
 func (e *KMSAccessDeniedException) ErrorCode() string             { return "KMSAccessDeniedException" }
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSAccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSAccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified customer master key (CMK) isn't
 // enabled.
@@ -141,12 +110,6 @@ func (e *KMSDisabledException) ErrorMessage() string {
 }
 func (e *KMSDisabledException) ErrorCode() string             { return "KMSDisabledException" }
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSDisabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSDisabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the state of the specified resource isn't valid
 // for this request. For more information, see How Key State Affects Use of a
@@ -168,12 +131,6 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 }
 func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidStateException" }
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSInvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSInvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was rejected because the specified entity or resource can't be
 // found.
@@ -192,12 +149,6 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 }
 func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFoundException" }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The AWS access key ID needs a subscription for the service.
 type KMSOptInRequired struct {
@@ -215,12 +166,6 @@ func (e *KMSOptInRequired) ErrorMessage() string {
 }
 func (e *KMSOptInRequired) ErrorCode() string             { return "KMSOptInRequired" }
 func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSOptInRequired) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSOptInRequired) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request was denied due to request throttling. For more information about
 // throttling, see Limits
@@ -241,12 +186,6 @@ func (e *KMSThrottlingException) ErrorMessage() string {
 }
 func (e *KMSThrottlingException) ErrorCode() string             { return "KMSThrottlingException" }
 func (e *KMSThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *KMSThrottlingException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *KMSThrottlingException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource exceeds the maximum number allowed, or the number of
 // concurrent stream requests exceeds the maximum number allowed.
@@ -265,12 +204,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request rate for the stream is too high, or the requested data is too large
 // for the available throughput. Reduce the frequency or size of your requests. For
@@ -299,12 +232,6 @@ func (e *ProvisionedThroughputExceededException) ErrorCode() string {
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *ProvisionedThroughputExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ProvisionedThroughputExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The resource is not available for this operation. For successful operation, the
 // resource must be in the ACTIVE state.
@@ -323,12 +250,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested resource could not be found. The stream might not be specified
 // correctly.
@@ -347,9 +268,3 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}

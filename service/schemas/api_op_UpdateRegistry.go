@@ -56,19 +56,27 @@ func (c *Client) UpdateRegistry(ctx context.Context, params *UpdateRegistryInput
 
 // Updates the registry.
 type UpdateRegistryInput struct {
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The description of the registry to update.
 	Description *string
 }
 
 type UpdateRegistryOutput struct {
+
 	// The name of the registry.
 	RegistryName *string
+
 	// Tags associated with the registry.
 	Tags map[string]*string
+
 	// The description of the registry.
 	Description *string
+
 	// The ARN of the registry.
 	RegistryArn *string
 

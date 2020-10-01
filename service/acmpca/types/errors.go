@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The certificate authority certificate you are importing does not comply with
@@ -25,12 +24,6 @@ func (e *CertificateMismatchException) ErrorMessage() string {
 }
 func (e *CertificateMismatchException) ErrorCode() string             { return "CertificateMismatchException" }
 func (e *CertificateMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *CertificateMismatchException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *CertificateMismatchException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A previous update to your private CA is still ongoing.
 type ConcurrentModificationException struct {
@@ -50,12 +43,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return "ConcurrentModificationException"
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ConcurrentModificationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ConcurrentModificationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more of the specified arguments was not valid.
 type InvalidArgsException struct {
@@ -73,12 +60,6 @@ func (e *InvalidArgsException) ErrorMessage() string {
 }
 func (e *InvalidArgsException) ErrorCode() string             { return "InvalidArgsException" }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidArnException struct {
@@ -96,12 +77,6 @@ func (e *InvalidArnException) ErrorMessage() string {
 }
 func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArnException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArnException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The token specified in the NextToken argument is not valid. Use the token
 // returned from your previous call to ListCertificateAuthorities ().
@@ -120,12 +95,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 }
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidNextTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidNextTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The S3 bucket policy is not valid. The policy must give ACM Private CA rights to
 // read from and write to the bucket and find the bucket location.
@@ -144,12 +113,6 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 }
 func (e *InvalidPolicyException) ErrorCode() string             { return "InvalidPolicyException" }
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPolicyException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPolicyException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request action cannot be performed or is prohibited.
 type InvalidRequestException struct {
@@ -167,12 +130,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidRequestException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidRequestException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The private CA is in a state during which a report or certificate cannot be
 // generated.
@@ -191,12 +148,6 @@ func (e *InvalidStateException) ErrorMessage() string {
 }
 func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The tag associated with the CA is not valid. The invalid argument is contained
 // in the message field.
@@ -215,12 +166,6 @@ func (e *InvalidTagException) ErrorMessage() string {
 }
 func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidTagException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidTagException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An ACM Private CA limit has been exceeded. See the exception message returned to
 // determine the limit that was exceeded.
@@ -239,12 +184,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more fields in the certificate are invalid.
 type MalformedCertificateException struct {
@@ -262,12 +201,6 @@ func (e *MalformedCertificateException) ErrorMessage() string {
 }
 func (e *MalformedCertificateException) ErrorCode() string             { return "MalformedCertificateException" }
 func (e *MalformedCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedCertificateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedCertificateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The certificate signing request is invalid.
 type MalformedCSRException struct {
@@ -285,12 +218,6 @@ func (e *MalformedCSRException) ErrorMessage() string {
 }
 func (e *MalformedCSRException) ErrorCode() string             { return "MalformedCSRException" }
 func (e *MalformedCSRException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *MalformedCSRException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *MalformedCSRException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The designated permission has already been given to the user.
 type PermissionAlreadyExistsException struct {
@@ -310,12 +237,6 @@ func (e *PermissionAlreadyExistsException) ErrorCode() string {
 	return "PermissionAlreadyExistsException"
 }
 func (e *PermissionAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PermissionAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PermissionAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request has already been completed.
 type RequestAlreadyProcessedException struct {
@@ -335,12 +256,6 @@ func (e *RequestAlreadyProcessedException) ErrorCode() string {
 	return "RequestAlreadyProcessedException"
 }
 func (e *RequestAlreadyProcessedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestAlreadyProcessedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestAlreadyProcessedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The request has failed for an unspecified reason.
 type RequestFailedException struct {
@@ -358,12 +273,6 @@ func (e *RequestFailedException) ErrorMessage() string {
 }
 func (e *RequestFailedException) ErrorCode() string             { return "RequestFailedException" }
 func (e *RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestFailedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Your request is already in progress.
 type RequestInProgressException struct {
@@ -381,12 +290,6 @@ func (e *RequestInProgressException) ErrorMessage() string {
 }
 func (e *RequestInProgressException) ErrorCode() string             { return "RequestInProgressException" }
 func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *RequestInProgressException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *RequestInProgressException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource such as a private CA, S3 bucket, certificate, or audit report cannot
 // be found.
@@ -405,12 +308,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can associate up to 50 tags with a private CA. Exception information is
 // contained in the exception message field.
@@ -429,9 +326,3 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyTagsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyTagsException) HasMessage() bool {
-	return e.Message != nil
-}

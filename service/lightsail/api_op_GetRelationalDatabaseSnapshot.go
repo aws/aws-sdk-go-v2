@@ -56,11 +56,15 @@ func (c *Client) GetRelationalDatabaseSnapshot(ctx context.Context, params *GetR
 }
 
 type GetRelationalDatabaseSnapshotInput struct {
+
 	// The name of the database snapshot for which to get information.
+	//
+	// This member is required.
 	RelationalDatabaseSnapshotName *string
 }
 
 type GetRelationalDatabaseSnapshotOutput struct {
+
 	// An object describing the specified database snapshot.
 	RelationalDatabaseSnapshot *types.RelationalDatabaseSnapshot
 

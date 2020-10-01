@@ -56,19 +56,26 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 }
 
 type ListDeploymentsInput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *string
+
 	// The ID of the Greengrass group.
+	//
+	// This member is required.
 	GroupId *string
 }
 
 type ListDeploymentsOutput struct {
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
 	// A list of deployments for the requested groups.
 	Deployments []*types.Deployment
 

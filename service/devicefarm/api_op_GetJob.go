@@ -57,12 +57,16 @@ func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func
 
 // Represents a request to the get job operation.
 type GetJobInput struct {
+
 	// The job's ARN.
+	//
+	// This member is required.
 	Arn *string
 }
 
 // Represents the result of a get job request.
 type GetJobOutput struct {
+
 	// An object that contains information about the requested job.
 	Job *types.Job
 

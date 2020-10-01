@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // Your request was throttled because you have exceeded the limit of allowed client
@@ -25,12 +24,6 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 }
 func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ClientLimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ClientLimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
@@ -48,12 +41,6 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 }
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified client is invalid.
 type InvalidClientException struct {
@@ -71,12 +58,6 @@ func (e *InvalidClientException) ErrorMessage() string {
 }
 func (e *InvalidClientException) ErrorCode() string             { return "InvalidClientException" }
 func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidClientException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidClientException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
@@ -94,12 +75,6 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 }
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NotAuthorizedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NotAuthorizedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource is not found.
 type ResourceNotFoundException struct {
@@ -117,12 +92,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // If the client session is expired. Once the client is connected, the session is
 // valid for 45 minutes. Client should reconnect to the channel to continue
@@ -142,9 +111,3 @@ func (e *SessionExpiredException) ErrorMessage() string {
 }
 func (e *SessionExpiredException) ErrorCode() string             { return "SessionExpiredException" }
 func (e *SessionExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *SessionExpiredException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *SessionExpiredException) HasMessage() bool {
-	return e.Message != nil
-}

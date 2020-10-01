@@ -55,8 +55,12 @@ func (c *Client) DeleteSimulationApplication(ctx context.Context, params *Delete
 }
 
 type DeleteSimulationApplicationInput struct {
+
 	// The application information for the simulation application to delete.
+	//
+	// This member is required.
 	Application *string
+
 	// The version of the simulation application to delete.
 	ApplicationVersion *string
 }

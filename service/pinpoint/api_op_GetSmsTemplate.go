@@ -57,11 +57,15 @@ func (c *Client) GetSmsTemplate(ctx context.Context, params *GetSmsTemplateInput
 }
 
 type GetSmsTemplateInput struct {
+
 	// The name of the message template. A template name must start with an
 	// alphanumeric character and can contain a maximum of 128 characters. The
 	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
 	// Template names are case sensitive.
+	//
+	// This member is required.
 	TemplateName *string
+
 	// The unique identifier for the version of the message template to update,
 	// retrieve information about, or delete. To retrieve identifiers and other
 	// information for all the versions of a template, use the Template Versions
@@ -85,8 +89,11 @@ type GetSmsTemplateInput struct {
 }
 
 type GetSmsTemplateOutput struct {
+
 	// Provides information about the content and settings for a message template that
 	// can be used in text messages that are sent through the SMS channel.
+	//
+	// This member is required.
 	SMSTemplateResponse *types.SMSTemplateResponse
 
 	// Metadata pertaining to the operation's result.

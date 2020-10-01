@@ -57,42 +57,61 @@ func (c *Client) UpdateFlowOutput(ctx context.Context, params *UpdateFlowOutputI
 
 // The fields that you want to update in the output.
 type UpdateFlowOutputInput struct {
+
 	// The range of IP addresses that should be allowed to initiate output requests to
 	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []*string
+
 	// The IP address where you want to send the output.
 	Destination *string
+
 	// A description of the output. This description appears only on the AWS Elemental
 	// MediaConnect console and will not be seen by the end user.
 	Description *string
+
 	// The ARN of the output that you want to update.
+	//
+	// This member is required.
 	OutputArn *string
+
 	// The type of key used for the encryption. If no keyType is provided, the service
 	// will use the default setting (static-key).
 	Encryption *types.UpdateEncryption
+
 	// The port to use when content is distributed to this output.
 	Port *int32
+
 	// The flow that is associated with the output that you want to update.
+	//
+	// This member is required.
 	FlowArn *string
+
 	// The remote ID for the Zixi-pull stream.
 	RemoteId *string
+
 	// The maximum latency in milliseconds for Zixi-based streams.
 	MaxLatency *int32
+
 	// The protocol to use for the output.
 	Protocol types.Protocol
+
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *types.VpcInterfaceAttachment
+
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency *int32
+
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string
 }
 
 type UpdateFlowOutputOutput struct {
+
 	// The settings for an output.
 	Output *types.Output
+
 	// The ARN of the flow that is associated with the updated output.
 	FlowArn *string
 

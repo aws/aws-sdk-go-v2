@@ -56,18 +56,25 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 }
 
 type ListResourcesInput struct {
+
 	// The ID of the project.
+	//
+	// This member is required.
 	ProjectId *string
+
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.
 	NextToken *string
+
 	// The maximum amount of data that can be contained in a single set of results.
 	MaxResults *int32
 }
 
 type ListResourcesOutput struct {
+
 	// An array of resources associated with the project.
 	Resources []*types.Resource
+
 	// The continuation token to use when requesting the next set of results, if there
 	// are more results to be returned.
 	NextToken *string

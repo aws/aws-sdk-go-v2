@@ -56,16 +56,26 @@ func (c *Client) AttachToIndex(ctx context.Context, params *AttachToIndexInput, 
 }
 
 type AttachToIndexInput struct {
+
 	// The Amazon Resource Name (ARN) of the directory where the object and index
 	// exist.
+	//
+	// This member is required.
 	DirectoryArn *string
+
 	// A reference to the object that you are attaching to the index.
+	//
+	// This member is required.
 	TargetReference *types.ObjectReference
+
 	// A reference to the index that you are attaching the object to.
+	//
+	// This member is required.
 	IndexReference *types.ObjectReference
 }
 
 type AttachToIndexOutput struct {
+
 	// The ObjectIdentifier of the object that was attached to the index.
 	AttachedObjectIdentifier *string
 

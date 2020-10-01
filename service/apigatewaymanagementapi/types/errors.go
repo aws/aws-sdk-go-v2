@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The caller is not authorized to invoke this operation.
@@ -76,9 +75,3 @@ func (e *PayloadTooLargeException) ErrorMessage() string {
 }
 func (e *PayloadTooLargeException) ErrorCode() string             { return "PayloadTooLargeException" }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *PayloadTooLargeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *PayloadTooLargeException) HasMessage() bool {
-	return e.Message != nil
-}

@@ -57,23 +57,31 @@ func (c *Client) DescribeInstancePatches(ctx context.Context, params *DescribeIn
 }
 
 type DescribeInstancePatchesInput struct {
+
 	// The ID of the instance whose patch state information should be retrieved.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The maximum number of patches to return (per page).
 	MaxResults *int32
+
 	// An array of structures. Each entry in the array is a structure containing a Key,
 	// Value combination. Valid values for Key are Classification | KBId | Severity |
 	// State.
 	Filters []*types.PatchOrchestratorFilter
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
 }
 
 type DescribeInstancePatchesOutput struct {
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
 	// Each entry in the array is a structure containing: Title (string) KBId (string)
 	// Classification (string) Severity (string) State (string, such as "INSTALLED" or
 	// "FAILED") InstalledTime (DateTime) InstalledBy (string)

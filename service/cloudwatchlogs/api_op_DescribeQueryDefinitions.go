@@ -55,14 +55,18 @@ func (c *Client) DescribeQueryDefinitions(ctx context.Context, params *DescribeQ
 
 type DescribeQueryDefinitionsInput struct {
 	QueryDefinitionNamePrefix *string
-	MaxResults                *int32
+
+	MaxResults *int32
+
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 }
 
 type DescribeQueryDefinitionsOutput struct {
+
 	// The token for the next set of items to return. The token expires after 24 hours.
-	NextToken        *string
+	NextToken *string
+
 	QueryDefinitions []*types.QueryDefinition
 
 	// Metadata pertaining to the operation's result.

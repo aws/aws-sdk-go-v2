@@ -55,23 +55,31 @@ func (c *Client) ImportSnapshot(ctx context.Context, params *ImportSnapshotInput
 }
 
 type ImportSnapshotInput struct {
+
 	// The name of the role to use when not using the default role, 'vmimport'.
 	RoleName *string
+
 	// The description string for the import snapshot task.
 	Description *string
+
 	// Token to enable idempotency for VM import requests.
 	ClientToken *string
+
 	// Information about the disk container.
 	DiskContainer *types.SnapshotDiskContainer
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The tags to apply to the snapshot being imported.
 	TagSpecifications []*types.TagSpecification
+
 	// The client-specific data.
 	ClientData *types.ClientData
+
 	// Specifies whether the destination snapshot of the imported image should be
 	// encrypted. The default CMK for EBS is used unless you specify a non-default AWS
 	// Key Management Service (AWS KMS) CMK using KmsKeyId. For more information, see
@@ -79,6 +87,7 @@ type ImportSnapshotInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	Encrypted *bool
+
 	// An identifier for the symmetric AWS Key Management Service (AWS KMS) customer
 	// master key (CMK) to use when creating the encrypted snapshot. This parameter is
 	// only required if you want to use a non-default CMK; if this parameter is not
@@ -114,12 +123,16 @@ type ImportSnapshotInput struct {
 }
 
 type ImportSnapshotOutput struct {
+
 	// A description of the import snapshot task.
 	Description *string
+
 	// Any tags assigned to the snapshot being imported.
 	Tags []*types.Tag
+
 	// Information about the import snapshot task.
 	SnapshotTaskDetail *types.SnapshotTaskDetail
+
 	// The ID of the import snapshot task.
 	ImportTaskId *string
 

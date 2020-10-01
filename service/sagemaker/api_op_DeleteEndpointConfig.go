@@ -62,7 +62,10 @@ func (c *Client) DeleteEndpointConfig(ctx context.Context, params *DeleteEndpoin
 }
 
 type DeleteEndpointConfigInput struct {
+
 	// The name of the endpoint configuration that you want to delete.
+	//
+	// This member is required.
 	EndpointConfigName *string
 }
 

@@ -58,11 +58,15 @@ func (c *Client) DescribeConnectionsOnInterconnect(ctx context.Context, params *
 }
 
 type DescribeConnectionsOnInterconnectInput struct {
+
 	// The ID of the interconnect.
+	//
+	// This member is required.
 	InterconnectId *string
 }
 
 type DescribeConnectionsOnInterconnectOutput struct {
+
 	// The connections.
 	Connections []*types.Connection
 

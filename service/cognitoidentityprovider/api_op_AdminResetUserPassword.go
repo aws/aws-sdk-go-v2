@@ -65,8 +65,12 @@ func (c *Client) AdminResetUserPassword(ctx context.Context, params *AdminResetU
 
 // Represents the request to reset a user's password as an administrator.
 type AdminResetUserPasswordInput struct {
+
 	// The user pool ID for the user pool where you want to reset the user's password.
+	//
+	// This member is required.
 	UserPoolId *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -94,7 +98,10 @@ type AdminResetUserPasswordInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
+
 	// The user name of the user whose password you wish to reset.
+	//
+	// This member is required.
 	Username *string
 }
 

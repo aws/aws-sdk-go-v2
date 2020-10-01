@@ -71,21 +71,25 @@ func (*MyUnionMemberStructureValue) isMyUnion() {}
 
 type NestedPayload struct {
 	Greeting *string
-	Name     *string
+
+	Name *string
 }
 
 type RecursiveShapesInputOutputNested1 struct {
-	Foo    *string
+	Foo *string
+
 	Nested *RecursiveShapesInputOutputNested2
 }
 
 type RecursiveShapesInputOutputNested2 struct {
-	Bar             *string
+	Bar *string
+
 	RecursiveMember *RecursiveShapesInputOutputNested1
 }
 
 type StructureListMember struct {
 	A *string
+
 	B *string
 }
 

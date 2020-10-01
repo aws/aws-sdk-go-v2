@@ -56,13 +56,16 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 }
 
 type DescribeStreamInput struct {
+
 	// The Amazon Resource Name (ARN) of the stream.
 	StreamARN *string
+
 	// The name of the stream.
 	StreamName *string
 }
 
 type DescribeStreamOutput struct {
+
 	// An object that describes the stream.
 	StreamInfo *types.StreamInfo
 

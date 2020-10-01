@@ -57,20 +57,30 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 }
 
 type UpdateUserInput struct {
+
 	// The user ID.
+	//
+	// This member is required.
 	UserId *string
+
 	// The user license type to update. This must be a supported license type for the
 	// Amazon Chime account that the user belongs to.
 	LicenseType types.License
+
 	// The Alexa for Business metadata.
 	AlexaForBusinessMetadata *types.AlexaForBusinessMetadata
+
 	// The Amazon Chime account ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The user type.
 	UserType types.UserType
 }
 
 type UpdateUserOutput struct {
+
 	// The updated user details.
 	User *types.User
 

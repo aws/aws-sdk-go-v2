@@ -65,32 +65,43 @@ func (c *Client) AssociateVpcCidrBlock(ctx context.Context, params *AssociateVpc
 }
 
 type AssociateVpcCidrBlockInput struct {
+
 	// The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
 	Ipv6Pool *string
+
 	// An IPv4 CIDR block to associate with the VPC.
 	CidrBlock *string
+
 	// The name of the location from which we advertise the IPV6 CIDR block. Use this
 	// parameter to limit the CiDR block to this location. You must set
 	// AmazonProvidedIpv6CidrBlock to true to use this parameter. You can have one IPv6
 	// CIDR block association per network border group.
 	Ipv6CidrBlockNetworkBorderGroup *string
+
 	// An IPv6 CIDR block from the IPv6 address pool. You must also specify Ipv6Pool in
 	// the request. To let Amazon choose the IPv6 CIDR block for you, omit this
 	// parameter.
 	Ipv6CidrBlock *string
+
 	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the
 	// VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR
 	// block.
 	AmazonProvidedIpv6CidrBlock *bool
+
 	// The ID of the VPC.
+	//
+	// This member is required.
 	VpcId *string
 }
 
 type AssociateVpcCidrBlockOutput struct {
+
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *types.VpcIpv6CidrBlockAssociation
+
 	// Information about the IPv4 CIDR block association.
 	CidrBlockAssociation *types.VpcCidrBlockAssociation
+
 	// The ID of the VPC.
 	VpcId *string
 

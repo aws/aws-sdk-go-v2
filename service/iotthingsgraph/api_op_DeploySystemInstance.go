@@ -65,6 +65,7 @@ func (c *Client) DeploySystemInstance(ctx context.Context, params *DeploySystemI
 }
 
 type DeploySystemInstanceInput struct {
+
 	// The ID of the system instance. This value is returned by the
 	// CreateSystemInstance action. The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
@@ -72,10 +73,14 @@ type DeploySystemInstanceInput struct {
 }
 
 type DeploySystemInstanceOutput struct {
+
 	// The ID of the Greengrass deployment used to deploy the system instance.
 	GreengrassDeploymentId *string
+
 	// An object that contains summary information about a system instance that was
 	// deployed.
+	//
+	// This member is required.
 	Summary *types.SystemInstanceSummary
 
 	// Metadata pertaining to the operation's result.

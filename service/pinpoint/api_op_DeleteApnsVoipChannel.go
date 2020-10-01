@@ -57,14 +57,20 @@ func (c *Client) DeleteApnsVoipChannel(ctx context.Context, params *DeleteApnsVo
 }
 
 type DeleteApnsVoipChannelInput struct {
+
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
 	ApplicationId *string
 }
 
 type DeleteApnsVoipChannelOutput struct {
+
 	// Provides information about the status and settings of the APNs (Apple Push
 	// Notification service) VoIP channel for an application.
+	//
+	// This member is required.
 	APNSVoipChannelResponse *types.APNSVoipChannelResponse
 
 	// Metadata pertaining to the operation's result.

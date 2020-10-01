@@ -62,17 +62,30 @@ func (c *Client) SendBonus(ctx context.Context, params *SendBonusInput, optFns .
 }
 
 type SendBonusInput struct {
+
 	// The ID of the assignment for which this bonus is paid.
+	//
+	// This member is required.
 	AssignmentId *string
+
 	// A message that explains the reason for the bonus payment. The Worker receiving
 	// the bonus can see this message.
+	//
+	// This member is required.
 	Reason *string
+
 	// The ID of the Worker being paid the bonus.
+	//
+	// This member is required.
 	WorkerId *string
+
 	// The Bonus amount is a US Dollar amount specified using a string (for example,
 	// "5" represents $5.00 USD and "101.42" represents $101.42 USD). Do not include
 	// currency symbols or currency codes.
+	//
+	// This member is required.
 	BonusAmount *string
+
 	// A unique identifier for this request, which allows you to retry the call on
 	// error without granting multiple bonuses. This is useful in cases such as network
 	// timeouts where it is unclear whether or not the call succeeded on the server. If

@@ -57,22 +57,31 @@ func (c *Client) ListDomainAssociations(ctx context.Context, params *ListDomainA
 
 // The request structure for the list domain associations request.
 type ListDomainAssociationsInput struct {
+
 	// A pagination token. Set to null to start listing apps from the start. If
 	// non-null, a pagination token is returned in a result. Pass its value in here to
 	// list more projects.
 	NextToken *string
+
 	// The maximum number of records to list in a single response.
 	MaxResults *int32
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
 }
 
 // The result structure for the list domain association request.
 type ListDomainAssociationsOutput struct {
+
 	// A pagination token. If non-null, a pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.
 	NextToken *string
+
 	// A list of domain associations.
+	//
+	// This member is required.
 	DomainAssociations []*types.DomainAssociation
 
 	// Metadata pertaining to the operation's result.

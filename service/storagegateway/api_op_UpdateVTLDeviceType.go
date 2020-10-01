@@ -58,15 +58,22 @@ func (c *Client) UpdateVTLDeviceType(ctx context.Context, params *UpdateVTLDevic
 }
 
 type UpdateVTLDeviceTypeInput struct {
+
 	// The Amazon Resource Name (ARN) of the medium changer you want to select.
+	//
+	// This member is required.
 	VTLDeviceARN *string
+
 	// The type of medium changer you want to select.  <p>Valid Values:
 	// <code>STK-L700</code> | <code>AWS-Gateway-VTL</code> </p>
+	//
+	// This member is required.
 	DeviceType *string
 }
 
 // UpdateVTLDeviceTypeOutput
 type UpdateVTLDeviceTypeOutput struct {
+
 	// The Amazon Resource Name (ARN) of the medium changer you have selected.
 	VTLDeviceARN *string
 

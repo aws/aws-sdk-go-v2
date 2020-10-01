@@ -56,7 +56,10 @@ func (c *Client) DeleteInput(ctx context.Context, params *DeleteInputInput, optF
 
 // Placeholder documentation for DeleteInputRequest
 type DeleteInputInput struct {
+
 	// Unique ID of the input
+	//
+	// This member is required.
 	InputId *string
 }
 

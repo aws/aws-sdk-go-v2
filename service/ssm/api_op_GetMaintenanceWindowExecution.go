@@ -57,21 +57,30 @@ func (c *Client) GetMaintenanceWindowExecution(ctx context.Context, params *GetM
 }
 
 type GetMaintenanceWindowExecutionInput struct {
+
 	// The ID of the maintenance window execution that includes the task.
+	//
+	// This member is required.
 	WindowExecutionId *string
 }
 
 type GetMaintenanceWindowExecutionOutput struct {
+
 	// The time the maintenance window started running.
 	StartTime *time.Time
+
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string
+
 	// The ID of the maintenance window execution.
 	WindowExecutionId *string
+
 	// The ID of the task executions from the maintenance window execution.
 	TaskIds []*string
+
 	// The time the maintenance window finished running.
 	EndTime *time.Time
+
 	// The status of the maintenance window execution.
 	Status types.MaintenanceWindowExecutionStatus
 

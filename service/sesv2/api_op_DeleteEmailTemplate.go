@@ -59,7 +59,10 @@ func (c *Client) DeleteEmailTemplate(ctx context.Context, params *DeleteEmailTem
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type DeleteEmailTemplateInput struct {
+
 	// The name of the template to be deleted.
+	//
+	// This member is required.
 	TemplateName *string
 }
 

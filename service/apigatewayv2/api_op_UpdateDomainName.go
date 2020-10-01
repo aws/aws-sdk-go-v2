@@ -57,19 +57,27 @@ func (c *Client) UpdateDomainName(ctx context.Context, params *UpdateDomainNameI
 
 // Updates a DomainName.
 type UpdateDomainNameInput struct {
+
 	// The domain name configurations.
 	DomainNameConfigurations []*types.DomainNameConfiguration
+
 	// The domain name.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 type UpdateDomainNameOutput struct {
+
 	// The domain name configurations.
 	DomainNameConfigurations []*types.DomainNameConfiguration
+
 	// The collection of tags associated with a domain name.
 	Tags map[string]*string
+
 	// The API mapping selection expression.
 	ApiMappingSelectionExpression *string
+
 	// The name of the DomainName resource.
 	DomainName *string
 

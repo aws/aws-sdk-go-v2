@@ -56,13 +56,18 @@ func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...
 }
 
 type StopFlowInput struct {
+
 	// The ARN of the flow that you want to stop.
+	//
+	// This member is required.
 	FlowArn *string
 }
 
 type StopFlowOutput struct {
+
 	// The ARN of the flow that you stopped.
 	FlowArn *string
+
 	// The status of the flow when the StopFlow process begins.
 	Status types.Status
 

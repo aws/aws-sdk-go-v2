@@ -56,20 +56,29 @@ func (c *Client) ListPlacements(ctx context.Context, params *ListPlacementsInput
 }
 
 type ListPlacementsInput struct {
+
 	// The project containing the placements to be listed.
+	//
+	// This member is required.
 	ProjectName *string
+
 	// The token to retrieve the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
 	MaxResults *int32
 }
 
 type ListPlacementsOutput struct {
+
 	// The token used to retrieve the next set of results - will be effectively empty
 	// if there are no further results.
 	NextToken *string
+
 	// An object listing the requested placements.
+	//
+	// This member is required.
 	Placements []*types.PlacementSummary
 
 	// Metadata pertaining to the operation's result.

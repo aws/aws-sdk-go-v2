@@ -57,18 +57,25 @@ func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingPro
 }
 
 type ListRoutingProfilesInput struct {
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
 	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
 	InstanceId *string
+
 	// The maximimum number of results to return per page.
 	MaxResults *int32
 }
 
 type ListRoutingProfilesOutput struct {
+
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
+
 	// Information about the routing profiles.
 	RoutingProfileSummaryList []*types.RoutingProfileSummary
 

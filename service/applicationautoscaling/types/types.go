@@ -8,9 +8,15 @@ import (
 
 // Represents a CloudWatch alarm associated with a scaling policy.
 type Alarm struct {
+
 	// The Amazon Resource Name (ARN) of the alarm.
+	//
+	// This member is required.
 	AlarmARN *string
+
 	// The name of the alarm.
+	//
+	// This member is required.
 	AlarmName *string
 }
 
@@ -38,24 +44,41 @@ type Alarm struct {
 // CloudWatch Concepts
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
 type CustomizedMetricSpecification struct {
+
 	// The statistic of the metric.
+	//
+	// This member is required.
 	Statistic MetricStatistic
+
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your scaling policy.
 	Dimensions []*MetricDimension
+
 	// The unit of the metric.
 	Unit *string
+
 	// The name of the metric.
+	//
+	// This member is required.
 	MetricName *string
+
 	// The namespace of the metric.
+	//
+	// This member is required.
 	Namespace *string
 }
 
 // Describes the dimension names and values associated with a metric.
 type MetricDimension struct {
+
 	// The value of the dimension.
+	//
+	// This member is required.
 	Value *string
+
 	// The name of the dimension.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -67,9 +90,13 @@ type MetricDimension struct {
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)
 // in the Application Auto Scaling User Guide.
 type PredefinedMetricSpecification struct {
+
 	// The metric type. The ALBRequestCountPerTarget metric type applies only to Spot
 	// Fleet requests and ECS services.
+	//
+	// This member is required.
 	PredefinedMetricType MetricType
+
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
 	// target group attached to the Spot Fleet request or ECS service.  <p>Elastic Load
@@ -91,9 +118,11 @@ type PredefinedMetricSpecification struct {
 
 // Represents a scalable target.
 type ScalableTarget struct {
+
 	// Specifies whether the scaling activities for a scalable target are in a
 	// suspended state.
 	SuspendedState *SuspendedState
+
 	// The scalable dimension associated with the scalable target. This string consists
 	// of the service namespace, resource type, and scaling property.
 	//
@@ -150,12 +179,21 @@ type ScalableTarget struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	// This member is required.
 	ScalableDimension ScalableDimension
+
 	// The Unix timestamp for when the scalable target was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The namespace of the AWS service that provides the resource, or a
 	// custom-resource.
+	//
+	// This member is required.
 	ServiceNamespace ServiceNamespace
+
 	// The identifier of the resource associated with the scalable target. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -213,37 +251,60 @@ type ScalableTarget struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The ARN of an IAM role that allows Application Auto Scaling to modify the
 	// scalable target on your behalf.
+	//
+	// This member is required.
 	RoleARN *string
+
 	// The minimum value to scale to in response to a scale-in activity.
+	//
+	// This member is required.
 	MinCapacity *int32
+
 	// The maximum value to scale to in response to a scale-out activity.
+	//
+	// This member is required.
 	MaxCapacity *int32
 }
 
 // Represents the minimum and maximum capacity for a scheduled action.
 type ScalableTargetAction struct {
+
 	// The minimum capacity. For Lambda provisioned concurrency, the minimum value
 	// allowed is 0. For all other resources, the minimum value allowed is 1.
 	MinCapacity *int32
+
 	// The maximum capacity.
 	MaxCapacity *int32
 }
 
 // Represents a scaling activity.
 type ScalingActivity struct {
+
 	// Indicates the status of the scaling activity.
+	//
+	// This member is required.
 	StatusCode ScalingActivityStatusCode
+
 	// The details about the scaling activity.
 	Details *string
+
 	// The Unix timestamp for when the scaling activity ended.
 	EndTime *time.Time
+
 	// A simple description of what action the scaling activity intends to accomplish.
+	//
+	// This member is required.
 	Description *string
+
 	// A simple message about the current status of the scaling activity.
 	StatusMessage *string
+
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
 	//
@@ -300,10 +361,16 @@ type ScalingActivity struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	// This member is required.
 	ScalableDimension ScalableDimension
+
 	// The namespace of the AWS service that provides the resource, or a
 	// custom-resource.
+	//
+	// This member is required.
 	ServiceNamespace ServiceNamespace
+
 	// The identifier of the resource associated with the scaling activity. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -361,17 +428,29 @@ type ScalingActivity struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// A simple description of what caused the scaling activity to happen.
+	//
+	// This member is required.
 	Cause *string
+
 	// The Unix timestamp for when the scaling activity began.
+	//
+	// This member is required.
 	StartTime *time.Time
+
 	// The unique identifier of the scaling activity.
+	//
+	// This member is required.
 	ActivityId *string
 }
 
 // Represents a scaling policy to use with Application Auto Scaling.
 type ScalingPolicy struct {
+
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -429,11 +508,18 @@ type ScalingPolicy struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The Amazon Resource Name (ARN) of the scaling policy.
+	//
+	// This member is required.
 	PolicyARN *string
+
 	// A target tracking scaling policy.
 	TargetTrackingScalingPolicyConfiguration *TargetTrackingScalingPolicyConfiguration
+
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
 	//
@@ -490,29 +576,52 @@ type ScalingPolicy struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	// This member is required.
 	ScalableDimension ScalableDimension
+
 	// The scaling policy type.
+	//
+	// This member is required.
 	PolicyType PolicyType
+
 	// The CloudWatch alarms associated with the scaling policy.
 	Alarms []*Alarm
+
 	// A step scaling policy.
 	StepScalingPolicyConfiguration *StepScalingPolicyConfiguration
+
 	// The name of the scaling policy.
+	//
+	// This member is required.
 	PolicyName *string
+
 	// The namespace of the AWS service that provides the resource, or a
 	// custom-resource.
+	//
+	// This member is required.
 	ServiceNamespace ServiceNamespace
+
 	// The Unix timestamp for when the scaling policy was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
 }
 
 // Represents a scheduled action.
 type ScheduledAction struct {
+
 	// The Amazon Resource Name (ARN) of the scheduled action.
+	//
+	// This member is required.
 	ScheduledActionARN *string
+
 	// The namespace of the AWS service that provides the resource, or a
 	// custom-resource.
+	//
+	// This member is required.
 	ServiceNamespace ServiceNamespace
+
 	// The schedule for this action. The following formats are supported:
 	//
 	//     * At
@@ -532,7 +641,10 @@ type ScheduledAction struct {
 	// expressions, see Scheduled Scaling
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
 	// in the Application Auto Scaling User Guide.
+	//
+	// This member is required.
 	Schedule *string
+
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
 	//
@@ -590,20 +702,30 @@ type ScheduledAction struct {
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
 	ScalableDimension ScalableDimension
+
 	// The name of the scheduled action.
+	//
+	// This member is required.
 	ScheduledActionName *string
+
 	// The date and time that the scheduled action was created.
+	//
+	// This member is required.
 	CreationTime *time.Time
+
 	// The new minimum and maximum capacity. You can set both values or just one. At
 	// the scheduled time, if the current capacity is below the minimum capacity,
 	// Application Auto Scaling scales out to the minimum capacity. If the current
 	// capacity is above the maximum capacity, Application Auto Scaling scales in to
 	// the maximum capacity.
 	ScalableTargetAction *ScalableTargetAction
+
 	// The date and time that the action is scheduled to end.
 	EndTime *time.Time
+
 	// The date and time that the action is scheduled to begin.
 	StartTime *time.Time
+
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -661,6 +783,8 @@ type ScheduledAction struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	// This member is required.
 	ResourceId *string
 }
 
@@ -696,10 +820,14 @@ type ScheduledAction struct {
 //     * The upper and lower bound can't
 // be null in the same step adjustment.
 type StepAdjustment struct {
+
 	// The amount by which to scale, based on the specified adjustment type. A positive
 	// value adds to the current capacity while a negative number removes from the
 	// current capacity.
+	//
+	// This member is required.
 	ScalingAdjustment *int32
+
 	// The upper bound for the difference between the alarm threshold and the
 	// CloudWatch metric. If the metric value is above the breach threshold, the upper
 	// bound is exclusive (the metric must be less than the threshold plus the upper
@@ -707,6 +835,7 @@ type StepAdjustment struct {
 	// threshold plus the upper bound). A null value indicates positive infinity. The
 	// upper bound must be greater than the lower bound.
 	MetricIntervalUpperBound *float64
+
 	// The lower bound for the difference between the alarm threshold and the
 	// CloudWatch metric. If the metric value is above the breach threshold, the lower
 	// bound is inclusive (the metric must be greater than or equal to the threshold
@@ -719,6 +848,7 @@ type StepAdjustment struct {
 // Represents a step scaling policy configuration to use with Application Auto
 // Scaling.
 type StepScalingPolicyConfiguration struct {
+
 	// The amount of time, in seconds, to wait for a previous scaling activity to take
 	// effect. With scale-out policies, the intention is to continuously (but not
 	// excessively) scale out. After Application Auto Scaling successfully scales out
@@ -770,19 +900,23 @@ type StepScalingPolicyConfiguration struct {
 	//
 	//     * Amazon Keyspaces tables
 	Cooldown *int32
+
 	// A set of adjustments that enable you to scale based on the size of the alarm
 	// breach. At least one step adjustment is required if you are adding a new step
 	// scaling policy configuration.
 	StepAdjustments []*StepAdjustment
+
 	// Specifies whether the ScalingAdjustment value in a StepAdjustment
 	// (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepAdjustment.html)
 	// is an absolute number or a percentage of the current capacity. AdjustmentType is
 	// required if you are adding a new step scaling policy configuration.
 	AdjustmentType AdjustmentType
+
 	// The aggregation type for the CloudWatch metrics. Valid values are Minimum,
 	// Maximum, and Average. If the aggregation type is null, the value is treated as
 	// Average.
 	MetricAggregationType MetricAggregationType
+
 	// The minimum value to scale by when scaling by percentages. For example, suppose
 	// that you create a step scaling policy to scale out an Amazon ECS service by 25
 	// percent and you specify a MinAdjustmentMagnitude of 2. If the service has 4
@@ -796,14 +930,17 @@ type StepScalingPolicyConfiguration struct {
 // Specifies whether the scaling activities for a scalable target are in a
 // suspended state.
 type SuspendedState struct {
+
 	// Whether scale in by a target tracking scaling policy or a step scaling policy is
 	// suspended. Set the value to true if you don't want Application Auto Scaling to
 	// remove capacity when a scaling policy is triggered. The default is false.
 	DynamicScalingInSuspended *bool
+
 	// Whether scheduled scaling is suspended. Set the value to true if you don't want
 	// Application Auto Scaling to add or remove capacity by initiating scheduled
 	// actions. The default is false.
 	ScheduledScalingSuspended *bool
+
 	// Whether scale out by a target tracking scaling policy or a step scaling policy
 	// is suspended. Set the value to true if you don't want Application Auto Scaling
 	// to add capacity when a scaling policy is triggered. The default is false.
@@ -813,6 +950,7 @@ type SuspendedState struct {
 // Represents a target tracking scaling policy configuration to use with
 // Application Auto Scaling.
 type TargetTrackingScalingPolicyConfiguration struct {
+
 	// The amount of time, in seconds, to wait for a previous scale-out activity to
 	// take effect. With the scale-out cooldown period, the intention is to
 	// continuously (but not excessively) scale out. After Application Auto Scaling
@@ -854,12 +992,15 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	//
 	//     * Amazon Keyspaces tables
 	ScaleOutCooldown *int32
+
 	// A customized metric. You can specify either a predefined metric or a customized
 	// metric.
 	CustomizedMetricSpecification *CustomizedMetricSpecification
+
 	// A predefined metric. You can specify either a predefined metric or a customized
 	// metric.
 	PredefinedMetricSpecification *PredefinedMetricSpecification
+
 	// The amount of time, in seconds, after a scale-in activity completes before
 	// another scale-in activity can start. With the scale-in cooldown period, the
 	// intention is to scale in conservatively to protect your application’s
@@ -901,9 +1042,13 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	//
 	//     * Amazon Keyspaces tables
 	ScaleInCooldown *int32
+
 	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
 	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	//
+	// This member is required.
 	TargetValue *float64
+
 	// Indicates whether scale in by the target tracking scaling policy is disabled. If
 	// the value is true, scale in is disabled and the target tracking scaling policy
 	// won't remove capacity from the scalable target. Otherwise, scale in is enabled

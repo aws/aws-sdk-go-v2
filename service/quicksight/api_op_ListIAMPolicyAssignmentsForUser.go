@@ -58,23 +58,37 @@ func (c *Client) ListIAMPolicyAssignmentsForUser(ctx context.Context, params *Li
 }
 
 type ListIAMPolicyAssignmentsForUserInput struct {
+
 	// The ID of the AWS account that contains the assignments.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The namespace of the assignment.
+	//
+	// This member is required.
 	Namespace *string
+
 	// The name of the user.
+	//
+	// This member is required.
 	UserName *string
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
 }
 
 type ListIAMPolicyAssignmentsForUserOutput struct {
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
+
 	// The active assignments for this user.
 	ActiveAssignments []*types.ActiveIAMPolicyAssignment
 

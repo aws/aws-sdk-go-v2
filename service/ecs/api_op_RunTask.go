@@ -81,14 +81,17 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 }
 
 type RunTaskInput struct {
+
 	// The placement strategy objects to use for the task. You can specify a maximum of
 	// five strategy rules per task.
 	PlacementStrategy []*types.PlacementStrategy
+
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
 	// information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags *bool
+
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
@@ -119,6 +122,7 @@ type RunTaskInput struct {
 	// this prefix. Tags with this prefix do not count against your tags per resource
 	// limit.
 	Tags []*types.Tag
+
 	// The capacity provider strategy to use for the task. A capacity provider strategy
 	// consists of one or more capacity providers along with the base and weight to
 	// assign to them. A capacity provider must be associated with the cluster to be
@@ -137,18 +141,21 @@ type RunTaskInput struct {
 	// used to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+
 	// The launch type on which to run your task. For more information, see Amazon ECS
 	// Launch Types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
 	LaunchType types.LaunchType
+
 	// Specifies whether to propagate the tags from the task definition to the task. If
 	// no value is specified, the tags are not propagated. Tags can only be propagated
 	// to the task during task creation. To add tags to a task after task creation, use
 	// the TagResource () API action. An error will be received if you specify the
 	// SERVICE option when running a task.
 	PropagateTags types.PropagateTags
+
 	// A list of container overrides in JSON format that specify the name of a
 	// container in the specified task definition and the overrides it should receive.
 	// You can override the default command for a container (that is specified in the
@@ -158,8 +165,10 @@ type RunTaskInput struct {
 	// environment override. A total of 8192 characters are allowed for overrides. This
 	// limit includes the JSON formatting characters of the override structure.
 	Overrides *types.TaskOverride
+
 	// The reference ID to use for the task.
 	ReferenceId *string
+
 	// An optional tag specified when a task is started. For example, if you
 	// automatically trigger a task to run a batch process job, you could apply a
 	// unique identifier for that job to your task with the startedBy parameter. You
@@ -169,6 +178,7 @@ type RunTaskInput struct {
 	// by an Amazon ECS service, then the startedBy parameter contains the deployment
 	// ID of the service that starts it.
 	StartedBy *string
+
 	// The network configuration for the task. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it is not supported for other network modes. For more
@@ -176,19 +186,26 @@ type RunTaskInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	NetworkConfiguration *types.NetworkConfiguration
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
 	// your task. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
+
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string
+
 	// An array of placement constraint objects to use for the task. You can specify up
 	// to 10 constraints per task (including constraints in the task definition and
 	// those specified at runtime).
 	PlacementConstraints []*types.PlacementConstraint
+
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// run. If a revision is not specified, the latest ACTIVE revision is used.
+	//
+	// This member is required.
 	TaskDefinition *string
+
 	// The platform version the task should run. A platform version is only specified
 	// for tasks using the Fargate launch type. If one is not specified, the LATEST
 	// platform version is used by default. For more information, see AWS Fargate
@@ -196,15 +213,18 @@ type RunTaskInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
+
 	// The number of instantiations of the specified task to place on your cluster. You
 	// can specify up to 10 tasks per call.
 	Count *int32
 }
 
 type RunTaskOutput struct {
+
 	// A full description of the tasks that were run. The tasks that were successfully
 	// placed on your cluster are described here.
 	Tasks []*types.Task
+
 	// Any failures associated with the call.
 	Failures []*types.Failure
 

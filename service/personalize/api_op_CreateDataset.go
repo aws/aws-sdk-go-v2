@@ -86,13 +86,23 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 }
 
 type CreateDatasetInput struct {
+
 	// The Amazon Resource Name (ARN) of the dataset group to add the dataset to.
+	//
+	// This member is required.
 	DatasetGroupArn *string
+
 	// The name for the dataset.
+	//
+	// This member is required.
 	Name *string
+
 	// The ARN of the schema to associate with the dataset. The schema defines the
 	// dataset fields.
+	//
+	// This member is required.
 	SchemaArn *string
+
 	// The type of dataset. One of the following (case insensitive) values:
 	//
 	//     *
@@ -101,10 +111,13 @@ type CreateDatasetInput struct {
 	//     * Items
 	//
 	//     * Users
+	//
+	// This member is required.
 	DatasetType *string
 }
 
 type CreateDatasetOutput struct {
+
 	// The ARN of the dataset.
 	DatasetArn *string
 

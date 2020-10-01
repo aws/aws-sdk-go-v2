@@ -56,18 +56,26 @@ func (c *Client) ModifyVpnTunnelCertificate(ctx context.Context, params *ModifyV
 }
 
 type ModifyVpnTunnelCertificateInput struct {
+
 	// The ID of the AWS Site-to-Site VPN connection.
+	//
+	// This member is required.
 	VpnConnectionId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
 	// The external IP address of the VPN tunnel.
+	//
+	// This member is required.
 	VpnTunnelOutsideIpAddress *string
 }
 
 type ModifyVpnTunnelCertificateOutput struct {
+
 	// Describes a VPN connection.
 	VpnConnection *types.VpnConnection
 

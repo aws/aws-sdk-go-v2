@@ -57,15 +57,24 @@ func (c *Client) DeleteBranch(ctx context.Context, params *DeleteBranchInput, op
 
 // The request structure for the delete branch request.
 type DeleteBranchInput struct {
+
 	// The unique ID for an Amplify app.
+	//
+	// This member is required.
 	AppId *string
+
 	// The name for the branch.
+	//
+	// This member is required.
 	BranchName *string
 }
 
 // The result structure for the delete branch request.
 type DeleteBranchOutput struct {
+
 	// The branch for an Amplify app, which maps to a third-party repository branch.
+	//
+	// This member is required.
 	Branch *types.Branch
 
 	// Metadata pertaining to the operation's result.

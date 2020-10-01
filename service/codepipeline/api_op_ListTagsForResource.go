@@ -56,22 +56,29 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 }
 
 type ListTagsForResourceInput struct {
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
 	// The token that was returned from the previous API call, which would be used to
 	// return the next page of the list. The ListTagsforResource call lists all
 	// available tags in one call and does not use pagination.
 	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the resource to get tags for.
+	//
+	// This member is required.
 	ResourceArn *string
 }
 
 type ListTagsForResourceOutput struct {
+
 	// If the amount of returned information is significantly large, an identifier is
 	// also returned and can be used in a subsequent API call to return the next page
 	// of the list. The ListTagsforResource call lists all available tags in one call
 	// and does not use pagination.
 	NextToken *string
+
 	// The tags for the resource.
 	Tags []*types.Tag
 

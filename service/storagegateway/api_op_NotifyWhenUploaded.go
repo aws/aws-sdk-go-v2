@@ -66,13 +66,18 @@ func (c *Client) NotifyWhenUploaded(ctx context.Context, params *NotifyWhenUploa
 }
 
 type NotifyWhenUploadedInput struct {
+
 	// The Amazon Resource Name (ARN) of the file share.
+	//
+	// This member is required.
 	FileShareARN *string
 }
 
 type NotifyWhenUploadedOutput struct {
+
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string
+
 	// The randomly generated ID of the notification that was sent. This ID is in UUID
 	// format.
 	NotificationId *string

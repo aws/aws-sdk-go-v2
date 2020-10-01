@@ -59,15 +59,22 @@ func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternI
 }
 
 type TestEventPatternInput struct {
+
 	// The event, in JSON format, to test against the event pattern.
+	//
+	// This member is required.
 	Event *string
+
 	// The event pattern. For more information, see Events and Event Patterns
 	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 	// in the Amazon EventBridge User Guide.
+	//
+	// This member is required.
 	EventPattern *string
 }
 
 type TestEventPatternOutput struct {
+
 	// Indicates whether the event matches the event pattern.
 	Result *bool
 

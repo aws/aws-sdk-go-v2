@@ -55,12 +55,22 @@ func (c *Client) GetCodeBindingSource(ctx context.Context, params *GetCodeBindin
 }
 
 type GetCodeBindingSourceInput struct {
+
 	// The name of the registry.
+	//
+	// This member is required.
 	RegistryName *string
+
 	// The language of the code binding.
+	//
+	// This member is required.
 	Language *string
+
 	// The name of the schema.
+	//
+	// This member is required.
 	SchemaName *string
+
 	// Specifying this limits the results to only this schema version.
 	SchemaVersion *string
 }

@@ -71,9 +71,15 @@ func (c *Client) TagQueue(ctx context.Context, params *TagQueueInput, optFns ...
 }
 
 type TagQueueInput struct {
+
 	// The list of tags to be added to the specified queue.
+	//
+	// This member is required.
 	Tags map[string]*string
+
 	// The URL of the queue.
+	//
+	// This member is required.
 	QueueUrl *string
 }
 

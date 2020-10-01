@@ -56,6 +56,7 @@ func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns .
 }
 
 type GetObjectInput struct {
+
 	// The path (including the file name) where the object is stored in the container.
 	// Format: // For example, to upload the file mlaw.avi to the folder path
 	// premium\canada in the container movies, enter the path premium/canada/mlaw.avi.
@@ -71,7 +72,10 @@ type GetObjectInput struct {
 	// that is assigned to the file that you upload. The file can have the same name
 	// inside and outside of AWS Elemental MediaStore, or it can have the same name.
 	// The file name can include or omit an extension.
+	//
+	// This member is required.
 	Path *string
+
 	// The range bytes of an object to retrieve. For more information about the Range
 	// header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
 	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35).
@@ -79,22 +83,29 @@ type GetObjectInput struct {
 }
 
 type GetObjectOutput struct {
+
 	// The content type of the object.
 	ContentType *string
+
 	// The length of the object in bytes.
 	ContentLength *int64
+
 	// An optional CacheControl header that allows the caller to control the object's
 	// cache behavior. Headers can be passed in as specified in the HTTP spec at
 	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9). Headers with
 	// a custom user-defined value are also accepted.
 	CacheControl *string
+
 	// The range of bytes to retrieve.
 	ContentRange *string
+
 	// The ETag that represents a unique instance of the object.
 	ETag *string
+
 	// The date and time that the object was last modified.
 	LastModified *time.Time
+
 	// The bytes of the object.
 	Body io.ReadCloser
 

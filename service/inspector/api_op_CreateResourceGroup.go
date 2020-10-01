@@ -60,14 +60,20 @@ func (c *Client) CreateResourceGroup(ctx context.Context, params *CreateResource
 }
 
 type CreateResourceGroupInput struct {
+
 	// A collection of keys and an array of possible values,
 	// '[{"key":"key1","values":["Value1","Value2"]},{"key":"Key2","values":["Value3"]}]'.
 	// For example,'[{"key":"Name","values":["TestEC2Instance"]}]'.
+	//
+	// This member is required.
 	ResourceGroupTags []*types.ResourceGroupTag
 }
 
 type CreateResourceGroupOutput struct {
+
 	// The ARN that specifies the resource group that is created.
+	//
+	// This member is required.
 	ResourceGroupArn *string
 
 	// Metadata pertaining to the operation's result.

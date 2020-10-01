@@ -68,18 +68,30 @@ func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, op
 }
 
 type CreateWebACLInput struct {
+
 	// The name of the Web ACL. You cannot change the name of a Web ACL after you
 	// create it.
+	//
+	// This member is required.
 	Name *string
+
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//
+	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
+
 	// The action to perform if none of the Rules contained in the WebACL match.
+	//
+	// This member is required.
 	DefaultAction *types.DefaultAction
+
 	// A description of the Web ACL that helps with identification. You cannot change
 	// the description of a Web ACL after you create it.
 	Description *string
+
 	// An array of key:value pairs to associate with the resource.
 	Tags []*types.Tag
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -90,7 +102,10 @@ type CreateWebACLInput struct {
 	//
 	//     * API and SDKs
 	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
 	// The Rule () statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
@@ -99,6 +114,7 @@ type CreateWebACLInput struct {
 }
 
 type CreateWebACLOutput struct {
+
 	// High-level information about a WebACL (), returned by operations like create and
 	// list. This provides information like the ID, that you can use to retrieve and
 	// manage a WebACL, and the ARN, that you provide to operations like

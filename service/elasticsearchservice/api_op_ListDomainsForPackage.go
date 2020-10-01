@@ -57,18 +57,24 @@ func (c *Client) ListDomainsForPackage(ctx context.Context, params *ListDomainsF
 
 // Container for request parameters to ListDomainsForPackage () operation.
 type ListDomainsForPackageInput struct {
+
 	// Used for pagination. Only necessary if a previous API call includes a non-null
 	// NextToken value. If provided, returns results for the next page.
 	NextToken *string
+
 	// Limits results to a maximum number of domains.
 	MaxResults *int32
+
 	// The package for which to list domains.
+	//
+	// This member is required.
 	PackageID *string
 }
 
 // Container for response parameters to ListDomainsForPackage () operation.
 type ListDomainsForPackageOutput struct {
 	NextToken *string
+
 	// List of DomainPackageDetails objects.
 	DomainPackageDetailsList []*types.DomainPackageDetails
 

@@ -57,6 +57,7 @@ func (c *Client) PutAccountDetails(ctx context.Context, params *PutAccountDetail
 
 // A request to submit new account details.
 type PutAccountDetailsInput struct {
+
 	// Indicates whether or not your account should have production access in the
 	// current AWS Region. If the value is false, then your account is in the sandbox.
 	// When your account is in the sandbox, you can only send email to verified
@@ -67,17 +68,28 @@ type PutAccountDetailsInput struct {
 	// can send email to any address. The sending quota and maximum sending rate for
 	// your account vary based on your specific use case.
 	ProductionAccessEnabled *bool
+
 	// The type of email your account will send.
+	//
+	// This member is required.
 	MailType types.MailType
+
 	// The language you would prefer to be contacted with.
 	ContactLanguage types.ContactLanguage
+
 	// A description of the types of email that you plan to send.
+	//
+	// This member is required.
 	UseCaseDescription *string
+
 	// Additional email addresses that you would like to be notified regarding Amazon
 	// SES matters.
 	AdditionalContactEmailAddresses []*string
+
 	// The URL of your website. This information helps us better understand the type of
 	// content that you plan to send.
+	//
+	// This member is required.
 	WebsiteURL *string
 }
 

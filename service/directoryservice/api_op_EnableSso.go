@@ -58,12 +58,17 @@ func (c *Client) EnableSso(ctx context.Context, params *EnableSsoInput, optFns .
 
 // Contains the inputs for the EnableSso () operation.
 type EnableSsoInput struct {
+
 	// The password of an alternate account to use to enable single-sign on. This is
 	// only used for AD Connector directories. For more information, see the UserName
 	// parameter.
 	Password *string
+
 	// The identifier of the directory for which to enable single-sign on.
+	//
+	// This member is required.
 	DirectoryId *string
+
 	// The username of an alternate account to use to enable single-sign on. This is
 	// only used for AD Connector directories. This account must have privileges to add
 	// a service principal name. If the AD Connector service account does not have

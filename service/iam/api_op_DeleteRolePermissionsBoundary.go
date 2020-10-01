@@ -58,8 +58,11 @@ func (c *Client) DeleteRolePermissionsBoundary(ctx context.Context, params *Dele
 }
 
 type DeleteRolePermissionsBoundaryInput struct {
+
 	// The name (friendly name, not ARN) of the IAM role from which you want to remove
 	// the permissions boundary.
+	//
+	// This member is required.
 	RoleName *string
 }
 

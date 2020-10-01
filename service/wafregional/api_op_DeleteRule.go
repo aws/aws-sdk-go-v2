@@ -74,14 +74,21 @@ func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns
 }
 
 type DeleteRuleInput struct {
+
 	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
 	ChangeToken *string
+
 	// The RuleId of the Rule () that you want to delete. RuleId is returned by
 	// CreateRule () and by ListRules ().
+	//
+	// This member is required.
 	RuleId *string
 }
 
 type DeleteRuleOutput struct {
+
 	// The ChangeToken that you used to submit the DeleteRule request. You can also use
 	// this value to query the status of the request. For more information, see
 	// GetChangeTokenStatus ().

@@ -55,7 +55,10 @@ func (c *Client) DeleteTopicRuleDestination(ctx context.Context, params *DeleteT
 }
 
 type DeleteTopicRuleDestinationInput struct {
+
 	// The ARN of the topic rule destination to delete.
+	//
+	// This member is required.
 	Arn *string
 }
 

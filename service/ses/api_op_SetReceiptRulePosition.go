@@ -62,11 +62,18 @@ func (c *Client) SetReceiptRulePosition(ctx context.Context, params *SetReceiptR
 // information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type SetReceiptRulePositionInput struct {
+
 	// The name of the receipt rule to reposition.
+	//
+	// This member is required.
 	RuleName *string
+
 	// The name of the receipt rule after which to place the specified receipt rule.
 	After *string
+
 	// The name of the receipt rule set that contains the receipt rule to reposition.
+	//
+	// This member is required.
 	RuleSetName *string
 }
 

@@ -56,10 +56,17 @@ func (c *Client) CreateUserDefinedFunction(ctx context.Context, params *CreateUs
 }
 
 type CreateUserDefinedFunctionInput struct {
+
 	// The name of the catalog database in which to create the function.
+	//
+	// This member is required.
 	DatabaseName *string
+
 	// A FunctionInput object that defines the function to create in the Data Catalog.
+	//
+	// This member is required.
 	FunctionInput *types.UserDefinedFunctionInput
+
 	// The ID of the Data Catalog in which to create the function. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string

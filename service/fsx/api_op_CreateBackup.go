@@ -92,21 +92,27 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 
 // The request object for the CreateBackup operation.
 type CreateBackupInput struct {
+
 	// The tags to apply to the backup at backup creation. The key value of the Name
 	// tag appears in the console as the backup name. If you have set CopyTagsToBackups
 	// to true, and you specify one or more tags using the CreateBackup action, no
 	// existing tags on the file system are copied from the file system to the backup.
 	Tags []*types.Tag
+
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
 	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
+
 	// The ID of the file system to back up.
+	//
+	// This member is required.
 	FileSystemId *string
 }
 
 // The response object for the CreateBackup operation.
 type CreateBackupOutput struct {
+
 	// A description of the backup.
 	Backup *types.Backup
 

@@ -97,26 +97,32 @@ func (c *Client) LookupEvents(ctx context.Context, params *LookupEventsInput, op
 
 // Contains a request for LookupEvents.
 type LookupEventsInput struct {
+
 	// Contains a list of lookup attributes. Currently the list can contain only one
 	// item.
 	LookupAttributes []*types.LookupAttribute
+
 	// Specifies that only events that occur after or at the specified time are
 	// returned. If the specified start time is after the specified end time, an error
 	// is returned.
 	StartTime *time.Time
+
 	// The token to use to get the next page of results after a previous API call. This
 	// token must be passed in with the same parameters that were specified in the the
 	// original call. For example, if the original call specified an AttributeKey of
 	// 'Username' with a value of 'root', the call with NextToken should include those
 	// same parameters.
 	NextToken *string
+
 	// Specifies the event category. If you do not specify an event category, events of
 	// the category are not returned in the response. For example, if you do not
 	// specify insight as the value of EventCategory, no Insights events are returned.
 	EventCategory types.EventCategory
+
 	// The number of events to return. Possible values are 1 through 50. The default is
 	// 50.
 	MaxResults *int32
+
 	// Specifies that only events that occur before or at the specified time are
 	// returned. If the specified end time is before the specified start time, an error
 	// is returned.
@@ -125,10 +131,12 @@ type LookupEventsInput struct {
 
 // Contains a response to a LookupEvents action.
 type LookupEventsOutput struct {
+
 	// A list of events returned based on the lookup attributes specified and the
 	// CloudTrail event. The events list is sorted by time. The most recent event is
 	// listed first.
 	Events []*types.Event
+
 	// The token to use to get the next page of results after a previous API call. If
 	// the token does not appear, there are no more results to return. The token must
 	// be passed in with the same parameters as the previous call. For example, if the

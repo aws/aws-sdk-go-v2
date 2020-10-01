@@ -59,20 +59,34 @@ func (c *Client) CreateMultiplex(ctx context.Context, params *CreateMultiplexInp
 
 // A request to create a multiplex.
 type CreateMultiplexInput struct {
+
 	// A list of availability zones for the multiplex. You must specify exactly two.
+	//
+	// This member is required.
 	AvailabilityZones []*string
+
 	// Configuration for a multiplex event.
+	//
+	// This member is required.
 	MultiplexSettings *types.MultiplexSettings
+
 	// Unique request ID. This prevents retries from creating multiple resources.
+	//
+	// This member is required.
 	RequestId *string
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
+
 	// Name of multiplex.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Placeholder documentation for CreateMultiplexResponse
 type CreateMultiplexOutput struct {
+
 	// The newly created multiplex.
 	Multiplex *types.Multiplex
 

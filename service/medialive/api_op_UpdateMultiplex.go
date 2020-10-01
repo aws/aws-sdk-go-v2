@@ -57,16 +57,22 @@ func (c *Client) UpdateMultiplex(ctx context.Context, params *UpdateMultiplexInp
 
 // A request to update a multiplex.
 type UpdateMultiplexInput struct {
+
 	// ID of the multiplex to update.
+	//
+	// This member is required.
 	MultiplexId *string
+
 	// Name of the multiplex.
 	Name *string
+
 	// The new settings for a multiplex.
 	MultiplexSettings *types.MultiplexSettings
 }
 
 // Placeholder documentation for UpdateMultiplexResponse
 type UpdateMultiplexOutput struct {
+
 	// The updated multiplex.
 	Multiplex *types.Multiplex
 

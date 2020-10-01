@@ -57,23 +57,32 @@ func (c *Client) DeleteLag(ctx context.Context, params *DeleteLagInput, optFns .
 }
 
 type DeleteLagInput struct {
+
 	// The ID of the LAG.
+	//
+	// This member is required.
 	LagId *string
 }
 
 // Information about a link aggregation group (LAG).
 type DeleteLagOutput struct {
+
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
+
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
+
 	// The AWS Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
+
 	// The AWS Direct Connect endpoint that hosts the LAG.
 	AwsDevice *string
+
 	// The ID of the LAG.
 	LagId *string
+
 	// The state of the LAG. The following are the possible values:
 	//
 	//     * requested:
@@ -96,27 +105,38 @@ type DeleteLagOutput struct {
 	//
 	//     * unknown: The state of the LAG is not available.
 	LagState types.LagState
+
 	// Indicates whether jumbo frames (9001 MTU) are supported.
 	JumboFrameCapable *bool
+
 	// Indicates whether the LAG can host other connections.
 	AllowsHostedConnections *bool
+
 	// The individual bandwidth of the physical connections bundled by the LAG. The
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
+
 	// The tags associated with the LAG.
 	Tags []*types.Tag
+
 	// The location of the LAG.
 	Location *string
+
 	// The name of the LAG.
 	LagName *string
+
 	// The number of physical connections bundled by the LAG, up to a maximum of 10.
 	NumberOfConnections *int32
+
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string
+
 	// The connections bundled by the LAG.
 	Connections []*types.Connection
+
 	// The AWS Region where the connection is located.
 	Region *string
+
 	// The minimum number of physical connections that must be operational for the LAG
 	// itself to be operational.
 	MinimumLinks *int32

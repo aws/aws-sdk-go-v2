@@ -80,13 +80,19 @@ func (c *Client) DeleteVault(ctx context.Context, params *DeleteVaultInput, optF
 
 // Provides options for deleting a vault from Amazon S3 Glacier.
 type DeleteVaultInput struct {
+
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
+	//
+	// This member is required.
 	AccountId *string
+
 	// The name of the vault.
+	//
+	// This member is required.
 	VaultName *string
 }
 

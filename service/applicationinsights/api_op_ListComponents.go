@@ -56,18 +56,25 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 }
 
 type ListComponentsInput struct {
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
+
 	// The name of the resource group.
+	//
+	// This member is required.
 	ResourceGroupName *string
+
 	// The token to request the next page of results.
 	NextToken *string
 }
 
 type ListComponentsOutput struct {
+
 	// The token to request the next page of results.
 	NextToken *string
+
 	// The list of application components.
 	ApplicationComponentList []*types.ApplicationComponent
 

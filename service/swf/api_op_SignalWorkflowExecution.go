@@ -76,15 +76,26 @@ func (c *Client) SignalWorkflowExecution(ctx context.Context, params *SignalWork
 }
 
 type SignalWorkflowExecutionInput struct {
+
 	// The workflowId of the workflow execution to signal.
+	//
+	// This member is required.
 	WorkflowId *string
+
 	// The name of the domain containing the workflow execution to signal.
+	//
+	// This member is required.
 	Domain *string
+
 	// The name of the signal. This name must be meaningful to the target workflow.
+	//
+	// This member is required.
 	SignalName *string
+
 	// Data to attach to the WorkflowExecutionSignaled event in the target workflow
 	// execution's history.
 	Input *string
+
 	// The runId of the workflow execution to signal.
 	RunId *string
 }

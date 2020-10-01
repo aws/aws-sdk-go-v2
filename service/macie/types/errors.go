@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have required permissions to access the requested resource.
@@ -26,18 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *AccessDeniedException) HasResourceType() bool {
-	return e.ResourceType != nil
-}
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Internal server error.
 type InternalException struct {
@@ -57,18 +44,6 @@ func (e *InternalException) ErrorMessage() string {
 }
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *InternalException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InternalException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InternalException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InternalException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // The request was rejected because an invalid or out-of-range value was supplied
 // for an input parameter.
@@ -90,24 +65,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 }
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidInputException) GetFieldName() string {
-	return ptr.ToString(e.FieldName)
-}
-func (e *InvalidInputException) HasFieldName() bool {
-	return e.FieldName != nil
-}
-func (e *InvalidInputException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidInputException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *InvalidInputException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *InvalidInputException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
 
 // The request was rejected because it attempted to create resources beyond the
 // current AWS account limits. The error code describes the limit exceeded.
@@ -129,21 +86,3 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
-func (e *LimitExceededException) GetErrorCode_() string {
-	return ptr.ToString(e.ErrorCode_)
-}
-func (e *LimitExceededException) HasErrorCode_() bool {
-	return e.ErrorCode_ != nil
-}
-func (e *LimitExceededException) GetResourceType() string {
-	return ptr.ToString(e.ResourceType)
-}
-func (e *LimitExceededException) HasResourceType() bool {
-	return e.ResourceType != nil
-}

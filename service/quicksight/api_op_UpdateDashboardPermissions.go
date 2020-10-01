@@ -56,24 +56,36 @@ func (c *Client) UpdateDashboardPermissions(ctx context.Context, params *UpdateD
 }
 
 type UpdateDashboardPermissionsInput struct {
+
 	// The ID of the AWS account that contains the dashboard whose permissions you're
 	// updating.
+	//
+	// This member is required.
 	AwsAccountId *string
+
 	// The ID for the dashboard.
+	//
+	// This member is required.
 	DashboardId *string
+
 	// The permissions that you want to grant on this resource.
 	GrantPermissions []*types.ResourcePermission
+
 	// The permissions that you want to revoke from this resource.
 	RevokePermissions []*types.ResourcePermission
 }
 
 type UpdateDashboardPermissionsOutput struct {
+
 	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string
+
 	// Information about the permissions on the dashboard.
 	Permissions []*types.ResourcePermission
+
 	// The ID for the dashboard.
 	DashboardId *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 

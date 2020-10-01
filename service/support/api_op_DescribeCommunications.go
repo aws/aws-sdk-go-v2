@@ -72,26 +72,35 @@ func (c *Client) DescribeCommunications(ctx context.Context, params *DescribeCom
 }
 
 type DescribeCommunicationsInput struct {
+
 	// The AWS Support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
 	// case-12345678910-2013-c4c1d2bf33c5cf47
+	//
+	// This member is required.
 	CaseId *string
+
 	// The maximum number of results to return before paginating.
 	MaxResults *int32
+
 	// The start date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	AfterTime *string
+
 	// The end date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	BeforeTime *string
+
 	// A resumption point for pagination.
 	NextToken *string
 }
 
 // The communications returned by the DescribeCommunications () operation.
 type DescribeCommunicationsOutput struct {
+
 	// The communications for the case.
 	Communications []*types.Communication
+
 	// A resumption point for pagination.
 	NextToken *string
 

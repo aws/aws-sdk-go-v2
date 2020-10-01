@@ -59,13 +59,16 @@ func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns .
 }
 
 type ListTasksInput struct {
+
 	// The startedBy value with which to filter the task results. Specifying a
 	// startedBy value limits the results to tasks that were started with that value.
 	StartedBy *string
+
 	// The container instance ID or full ARN of the container instance with which to
 	// filter the ListTasks results. Specifying a containerInstance limits the results
 	// to tasks that belong to that container instance.
 	ContainerInstance *string
+
 	// The maximum number of task results returned by ListTasks in paginated output.
 	// When this parameter is used, ListTasks only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
@@ -74,6 +77,7 @@ type ListTasksInput struct {
 	// is not used, then ListTasks returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
+
 	// The nextToken value returned from a ListTasks request indicating that more
 	// results are available to fulfill the request and further calls will be needed.
 	// If maxResults was provided, it is possible the number of results to be fewer
@@ -81,17 +85,22 @@ type ListTasksInput struct {
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// tasks to list. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
+
 	// The launch type for services to list.
 	LaunchType types.LaunchType
+
 	// The name of the family with which to filter the ListTasks results. Specifying a
 	// family limits the results to tasks that belong to that family.
 	Family *string
+
 	// The name of the service with which to filter the ListTasks results. Specifying a
 	// serviceName limits the results to tasks that belong to that service.
 	ServiceName *string
+
 	// The task desired status with which to filter the ListTasks results. Specifying a
 	// desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set the
 	// desired status to STOPPED. This can be useful for debugging tasks that are not
@@ -104,8 +113,10 @@ type ListTasksInput struct {
 }
 
 type ListTasksOutput struct {
+
 	// The list of task ARN entries for the ListTasks request.
 	TaskArns []*string
+
 	// The nextToken value to include in a future ListTasks request. When the results
 	// of a ListTasks request exceed maxResults, this value can be used to retrieve the
 	// next page of results. This value is null when there are no more results to

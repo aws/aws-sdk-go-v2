@@ -105,10 +105,17 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 
 // The request to update a distribution.
 type UpdateDistributionInput struct {
+
 	// The distribution's configuration information.
+	//
+	// This member is required.
 	DistributionConfig *types.DistributionConfig
+
 	// The distribution's id.
+	//
+	// This member is required.
 	Id *string
+
 	// The value of the ETag header that you received when retrieving the
 	// distribution's configuration. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
@@ -116,8 +123,10 @@ type UpdateDistributionInput struct {
 
 // The returned result of the corresponding request.
 type UpdateDistributionOutput struct {
+
 	// The distribution's information.
 	Distribution *types.Distribution
+
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string
 

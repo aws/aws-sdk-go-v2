@@ -61,22 +61,31 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 }
 
 type ListTagsInput struct {
+
 	// The NextToken value that you received in the previous response. Use this value
 	// to get more tags.
 	NextToken *string
+
 	// The cluster identifier (ID) for the cluster whose tags you are getting. To find
 	// the cluster ID, use DescribeClusters ().
+	//
+	// This member is required.
 	ResourceId *string
+
 	// The maximum number of tags to return in the response. When there are more tags
 	// than the number you specify, the response contains a NextToken value.
 	MaxResults *int32
 }
 
 type ListTagsOutput struct {
+
 	// An opaque string that indicates that the response contains only a subset of
 	// tags. Use this value in a subsequent ListTags request to get more tags.
 	NextToken *string
+
 	// A list of tags.
+	//
+	// This member is required.
 	TagList []*types.Tag
 
 	// Metadata pertaining to the operation's result.

@@ -56,16 +56,23 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 }
 
 type UpdateDataSourceInput struct {
+
 	// The ID assigned to the DataSource during creation.
+	//
+	// This member is required.
 	DataSourceId *string
+
 	// A new user-supplied name or description of the DataSource that will replace the
 	// current description.
+	//
+	// This member is required.
 	DataSourceName *string
 }
 
 // Represents the output of an UpdateDataSource operation. You can see the updated
 // content by using the GetBatchPrediction operation.
 type UpdateDataSourceOutput struct {
+
 	// The ID assigned to the DataSource during creation. This value should be
 	// identical to the value of the DataSourceID in the request.
 	DataSourceId *string

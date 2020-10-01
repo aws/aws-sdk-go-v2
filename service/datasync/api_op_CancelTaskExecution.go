@@ -63,7 +63,10 @@ func (c *Client) CancelTaskExecution(ctx context.Context, params *CancelTaskExec
 
 // CancelTaskExecutionRequest
 type CancelTaskExecutionInput struct {
+
 	// The Amazon Resource Name (ARN) of the task execution to cancel.
+	//
+	// This member is required.
 	TaskExecutionArn *string
 }
 

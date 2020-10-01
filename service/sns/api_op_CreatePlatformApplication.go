@@ -84,21 +84,31 @@ func (c *Client) CreatePlatformApplication(ctx context.Context, params *CreatePl
 
 // Input for CreatePlatformApplication action.
 type CreatePlatformApplicationInput struct {
+
 	// For a list of attributes, see SetPlatformApplicationAttributes
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
+	//
+	// This member is required.
 	Attributes map[string]*string
+
 	// The following platforms are supported: ADM (Amazon Device Messaging), APNS
 	// (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase Cloud
 	// Messaging).
+	//
+	// This member is required.
 	Platform *string
+
 	// Application names must be made up of only uppercase and lowercase ASCII letters,
 	// numbers, underscores, hyphens, and periods, and must be between 1 and 256
 	// characters long.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Response from CreatePlatformApplication action.
 type CreatePlatformApplicationOutput struct {
+
 	// PlatformApplicationArn is returned.
 	PlatformApplicationArn *string
 

@@ -72,6 +72,7 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 }
 
 type ListSecretVersionIdsInput struct {
+
 	// (Optional) Limits the number of results you want to include in the response. If
 	// you don't include this parameter, it defaults to a value that's specific to the
 	// operation. If additional items exist beyond the maximum you specify, the
@@ -82,10 +83,12 @@ type ListSecretVersionIdsInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
 	// (Optional) Specifies that you want the results to include versions that do not
 	// have any staging labels attached to them. Such versions are considered
 	// deprecated and are subject to deletion by Secrets Manager as needed.
 	IncludeDeprecated *bool
+
 	// The identifier for the secret containing the versions you want to list. You can
 	// specify either the Amazon Resource Name (ARN) or the friendly name of the
 	// secret. If you specify an ARN, we generally recommend that you specify a
@@ -103,7 +106,10 @@ type ListSecretVersionIdsInput struct {
 	// random suffix. If you do include the random suffix added by Secrets Manager, you
 	// receive either a ResourceNotFoundException or an AccessDeniedException error,
 	// depending on your permissions.
+	//
+	// This member is required.
 	SecretId *string
+
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request indicating there's more output available. In a subsequent
 	// call, set it to the value of the previous call NextToken response to indicate
@@ -112,6 +118,7 @@ type ListSecretVersionIdsInput struct {
 }
 
 type ListSecretVersionIdsOutput struct {
+
 	// The Amazon Resource Name (ARN) for the secret. Secrets Manager automatically
 	// adds several random characters to the name at the end of the ARN when you
 	// initially create a secret. This affects only the ARN and not the actual friendly
@@ -119,8 +126,10 @@ type ListSecretVersionIdsOutput struct {
 	// secret that you previously deleted, then users with access to the old secret
 	// don't automatically get access to the new secret because the ARNs are different.
 	ARN *string
+
 	// The friendly name of the secret.
 	Name *string
+
 	// If present in the response, this value indicates that there's more output
 	// available than included in the current response. This can occur even when the
 	// response includes no values at all, such as when you ask for a filtered view of
@@ -129,6 +138,7 @@ type ListSecretVersionIdsOutput struct {
 	// the output. You should repeat this until the NextToken response element comes
 	// back empty (as null).
 	NextToken *string
+
 	// The list of the currently available versions of the specified secret.
 	Versions []*types.SecretVersionsListEntry
 

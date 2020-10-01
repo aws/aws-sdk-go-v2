@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // You do not have sufficient access to perform this action.
@@ -24,12 +23,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 }
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *AccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The action you attempted is not allowed unless Service Access with Service
 // Quotas is enabled in your organization. To enable, call
@@ -53,12 +46,6 @@ func (e *AWSServiceAccessNotEnabledException) ErrorCode() string {
 func (e *AWSServiceAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *AWSServiceAccessNotEnabledException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *AWSServiceAccessNotEnabledException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You can't perform this action because a dependency does not have access.
 type DependencyAccessDeniedException struct {
@@ -78,12 +65,6 @@ func (e *DependencyAccessDeniedException) ErrorCode() string {
 	return "DependencyAccessDeniedException"
 }
 func (e *DependencyAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DependencyAccessDeniedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyAccessDeniedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Invalid input was provided.
 type IllegalArgumentException struct {
@@ -101,12 +82,6 @@ func (e *IllegalArgumentException) ErrorMessage() string {
 }
 func (e *IllegalArgumentException) ErrorCode() string             { return "IllegalArgumentException" }
 func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *IllegalArgumentException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *IllegalArgumentException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Invalid input was provided.
 type InvalidPaginationTokenException struct {
@@ -126,12 +101,6 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 	return "InvalidPaginationTokenException"
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidPaginationTokenException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidPaginationTokenException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Invalid input was provided for the .
 type InvalidResourceStateException struct {
@@ -149,12 +118,6 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 }
 func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidResourceStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidResourceStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The account making this call is not a member of an organization.
 type NoAvailableOrganizationException struct {
@@ -174,12 +137,6 @@ func (e *NoAvailableOrganizationException) ErrorCode() string {
 	return "NoAvailableOrganizationException"
 }
 func (e *NoAvailableOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoAvailableOrganizationException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoAvailableOrganizationException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource does not exist.
 type NoSuchResourceException struct {
@@ -197,12 +154,6 @@ func (e *NoSuchResourceException) ErrorMessage() string {
 }
 func (e *NoSuchResourceException) ErrorCode() string             { return "NoSuchResourceException" }
 func (e *NoSuchResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *NoSuchResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *NoSuchResourceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The organization that your account belongs to, is not in All Features mode. To
 // enable all features mode, see EnableAllFeatures
@@ -226,12 +177,6 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
 func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *OrganizationNotInAllFeaturesModeException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OrganizationNotInAllFeaturesModeException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // You have exceeded your service quota. To perform the requested action, remove
 // some of the relevant resources, or use Service Quotas to request a service quota
@@ -251,12 +196,6 @@ func (e *QuotaExceededException) ErrorMessage() string {
 }
 func (e *QuotaExceededException) ErrorCode() string             { return "QuotaExceededException" }
 func (e *QuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *QuotaExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *QuotaExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -274,12 +213,6 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceAlreadyExistsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceAlreadyExistsException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Something went wrong.
 type ServiceException struct {
@@ -297,12 +230,6 @@ func (e *ServiceException) ErrorMessage() string {
 }
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *ServiceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The quota request template is not associated with your organization. To use the
 // template, call AssociateServiceQuotaTemplate ().
@@ -324,12 +251,6 @@ func (e *ServiceQuotaTemplateNotInUseException) ErrorCode() string {
 }
 func (e *ServiceQuotaTemplateNotInUseException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (e *ServiceQuotaTemplateNotInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ServiceQuotaTemplateNotInUseException) HasMessage() bool {
-	return e.Message != nil
 }
 
 // The Service Quotas template is not available in the Region where you are making
@@ -353,12 +274,6 @@ func (e *TemplatesNotAvailableInRegionException) ErrorCode() string {
 func (e *TemplatesNotAvailableInRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (e *TemplatesNotAvailableInRegionException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TemplatesNotAvailableInRegionException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // Due to throttling, the request was denied. Slow down the rate of request calls,
 // or request an increase for this quota.
@@ -377,9 +292,3 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TooManyRequestsException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TooManyRequestsException) HasMessage() bool {
-	return e.Message != nil
-}

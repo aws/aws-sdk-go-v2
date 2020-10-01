@@ -56,18 +56,22 @@ func (c *Client) ListAttacks(ctx context.Context, params *ListAttacksInput, optF
 }
 
 type ListAttacksInput struct {
+
 	// The ListAttacksRequest.NextMarker value from a previous call to
 	// ListAttacksRequest. Pass null if this is the first call.
 	NextToken *string
+
 	// The ARN (Amazon Resource Name) of the resource that was attacked. If this is
 	// left blank, all applicable resources for this account will be included.
 	ResourceArns []*string
+
 	// The end of the time period for the attacks. This is a timestamp type. The sample
 	// request above indicates a number type because the default used by WAF is Unix
 	// time in seconds. However any valid timestamp format
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types)
 	// is allowed.
 	EndTime *types.TimeRange
+
 	// The maximum number of AttackSummary () objects to be returned. If this is left
 	// blank, the first 20 results will be returned. This is a maximum value; it is
 	// possible that AWS WAF will return the results in smaller batches. That is, the
@@ -76,6 +80,7 @@ type ListAttacksInput struct {
 	// more AttackSummary () objects to return, AWS WAF will always also return a
 	// NextToken.
 	MaxResults *int32
+
 	// The start of the time period for the attacks. This is a timestamp type. The
 	// sample request above indicates a number type because the default used by WAF is
 	// Unix time in seconds. However any valid timestamp format
@@ -85,6 +90,7 @@ type ListAttacksInput struct {
 }
 
 type ListAttacksOutput struct {
+
 	// The token returned by a previous call to indicate that there is more data
 	// available. If not null, more results are available. Pass this value for the
 	// NextMarker parameter in a subsequent call to ListAttacks to retrieve the next
@@ -92,6 +98,7 @@ type ListAttacksOutput struct {
 	// batches smaller than the number specified by MaxResults. If there are more
 	// AttackSummary () objects to return, AWS WAF will always also return a NextToken.
 	NextToken *string
+
 	// The attack information for the specified time range.
 	AttackSummaries []*types.AttackSummary
 

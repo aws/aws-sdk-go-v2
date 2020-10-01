@@ -55,17 +55,24 @@ func (c *Client) ListTagsForProject(ctx context.Context, params *ListTagsForProj
 }
 
 type ListTagsForProjectInput struct {
+
 	// Reserved for future use.
 	NextToken *string
+
 	// Reserved for future use.
 	MaxResults *int32
+
 	// The ID of the project to get tags for.
+	//
+	// This member is required.
 	Id *string
 }
 
 type ListTagsForProjectOutput struct {
+
 	// The tags for the project.
 	Tags map[string]*string
+
 	// Reserved for future use.
 	NextToken *string
 

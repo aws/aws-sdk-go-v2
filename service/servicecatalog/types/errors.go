@@ -5,7 +5,6 @@ package types
 import (
 	"fmt"
 	smithy "github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // The specified resource is a duplicate.
@@ -24,12 +23,6 @@ func (e *DuplicateResourceException) ErrorMessage() string {
 }
 func (e *DuplicateResourceException) ErrorCode() string             { return "DuplicateResourceException" }
 func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DuplicateResourceException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DuplicateResourceException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // One or more parameters provided to the operation are not valid.
 type InvalidParametersException struct {
@@ -47,12 +40,6 @@ func (e *InvalidParametersException) ErrorMessage() string {
 }
 func (e *InvalidParametersException) ErrorCode() string             { return "InvalidParametersException" }
 func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidParametersException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidParametersException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An attempt was made to modify a resource that is in a state that is not valid.
 // Check your resources to ensure that they are in valid states before retrying the
@@ -72,12 +59,6 @@ func (e *InvalidStateException) ErrorMessage() string {
 }
 func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *InvalidStateException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *InvalidStateException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The current limits of the service would have been exceeded by this operation.
 // Decrease your resource use or increase your service limits and retry the
@@ -97,12 +78,6 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *LimitExceededException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LimitExceededException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The operation is not supported.
 type OperationNotSupportedException struct {
@@ -120,12 +95,6 @@ func (e *OperationNotSupportedException) ErrorMessage() string {
 }
 func (e *OperationNotSupportedException) ErrorCode() string             { return "OperationNotSupportedException" }
 func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *OperationNotSupportedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *OperationNotSupportedException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // A resource that is currently in use. Ensure that the resource is not in use and
 // retry the operation.
@@ -144,12 +113,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 }
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceInUseException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceInUseException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -167,12 +130,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *ResourceNotFoundException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *ResourceNotFoundException) HasMessage() bool {
-	return e.Message != nil
-}
 
 // An operation requiring TagOptions failed because the TagOptions migration
 // process has not been performed for this account. Please use the AWS console to
@@ -192,9 +149,3 @@ func (e *TagOptionNotMigratedException) ErrorMessage() string {
 }
 func (e *TagOptionNotMigratedException) ErrorCode() string             { return "TagOptionNotMigratedException" }
 func (e *TagOptionNotMigratedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *TagOptionNotMigratedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *TagOptionNotMigratedException) HasMessage() bool {
-	return e.Message != nil
-}

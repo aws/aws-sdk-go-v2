@@ -65,12 +65,16 @@ func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipC
 }
 
 type AdvertiseByoipCidrInput struct {
+
 	// The address range, in CIDR notation. This must be the exact range that you
 	// provisioned. You can't advertise only a portion of the provisioned range.
+	//
+	// This member is required.
 	Cidr *string
 }
 
 type AdvertiseByoipCidrOutput struct {
+
 	// Information about the address range.
 	ByoipCidr *types.ByoipCidr
 

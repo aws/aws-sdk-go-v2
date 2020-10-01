@@ -56,11 +56,15 @@ func (c *Client) StopImageBuilder(ctx context.Context, params *StopImageBuilderI
 }
 
 type StopImageBuilderInput struct {
+
 	// The name of the image builder.
+	//
+	// This member is required.
 	Name *string
 }
 
 type StopImageBuilderOutput struct {
+
 	// Information about the image builder.
 	ImageBuilder *types.ImageBuilder
 

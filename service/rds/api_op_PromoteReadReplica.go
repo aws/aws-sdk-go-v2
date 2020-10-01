@@ -71,6 +71,7 @@ func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadRepl
 
 //
 type PromoteReadReplicaInput struct {
+
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
 	//
@@ -78,7 +79,10 @@ type PromoteReadReplicaInput struct {
 	// instance.
 	//
 	// Example: mydbinstance
+	//
+	// This member is required.
 	DBInstanceIdentifier *string
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -98,6 +102,7 @@ type PromoteReadReplicaInput struct {
 	//     * Must be at least 30
 	// minutes.
 	PreferredBackupWindow *string
+
 	// The number of days for which automated backups are retained. Setting this
 	// parameter to a positive number enables backups. Setting this parameter to 0
 	// disables automated backups. Default: 1 Constraints:
@@ -111,6 +116,7 @@ type PromoteReadReplicaInput struct {
 }
 
 type PromoteReadReplicaOutput struct {
+
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
 	// response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance

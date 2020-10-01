@@ -58,7 +58,10 @@ func (c *Client) UpdatePhoneNumberSettings(ctx context.Context, params *UpdatePh
 }
 
 type UpdatePhoneNumberSettingsInput struct {
+
 	// The default outbound calling name for the account.
+	//
+	// This member is required.
 	CallingName *string
 }
 

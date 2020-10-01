@@ -60,13 +60,20 @@ func (c *Client) UpdateDomainEntry(ctx context.Context, params *UpdateDomainEntr
 }
 
 type UpdateDomainEntryInput struct {
+
 	// An array of key-value pairs containing information about the domain entry.
+	//
+	// This member is required.
 	DomainEntry *types.DomainEntry
+
 	// The name of the domain recordset to update.
+	//
+	// This member is required.
 	DomainName *string
 }
 
 type UpdateDomainEntryOutput struct {
+
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.

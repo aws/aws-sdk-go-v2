@@ -8,12 +8,14 @@ import (
 
 // Represents information about an action configuration.
 type ActionConfiguration struct {
+
 	// The configuration data for the action.
 	Configuration map[string]*string
 }
 
 // Represents information about an action configuration property.
 type ActionConfigurationProperty struct {
+
 	// Indicates that the property is used with PollForJobs. When creating a custom
 	// action, an action can have up to one queryable property. If it has one, that
 	// property must be both required and not secret. If you create a pipeline with a
@@ -22,46 +24,72 @@ type ActionConfigurationProperty struct {
 	// value must be less than or equal to twenty (20) characters. The value can
 	// contain only alphanumeric characters, underscores, and hyphens.
 	Queryable *bool
+
 	// The description of the action configuration property that is displayed to users.
 	Description *string
+
 	// Whether the configuration property is a required value.
+	//
+	// This member is required.
 	Required *bool
+
 	// The type of the configuration property.
 	Type ActionConfigurationPropertyType
+
 	// Whether the configuration property is a key.
+	//
+	// This member is required.
 	Key *bool
+
 	// The name of the action configuration property.
+	//
+	// This member is required.
 	Name *string
+
 	// Whether the configuration property is secret. Secrets are hidden from all calls
 	// except for GetJobDetails, GetThirdPartyJobDetails, PollForJobs, and
 	// PollForThirdPartyJobs. When updating a pipeline, passing * * * * * without
 	// changing any other values of the action preserves the previous value of the
 	// secret.
+	//
+	// This member is required.
 	Secret *bool
 }
 
 // Represents the context of an action in the stage of a pipeline to a job worker.
 type ActionContext struct {
+
 	// The system-generated unique ID that corresponds to an action's execution.
 	ActionExecutionId *string
+
 	// The name of the action in the context of a job.
 	Name *string
 }
 
 // Represents information about an action declaration.
 type ActionDeclaration struct {
+
 	// The ARN of the IAM service role that performs the declared action. This is
 	// assumed through the roleArn for the pipeline.
 	RoleArn *string
+
 	// The action declaration's name.
+	//
+	// This member is required.
 	Name *string
+
 	// The variable namespace associated with the action. All variables produced as
 	// output by this action fall under this namespace.
 	Namespace *string
+
 	// The action declaration's AWS Region, such as us-east-1.
 	Region *string
+
 	// Specifies the action type and the provider of the action.
+	//
+	// This member is required.
 	ActionTypeId *ActionTypeId
+
 	// The action's configuration. These are key-value pairs that specify input values
 	// for an action. For more information, see Action Structure Requirements in
 	// CodePipeline
@@ -76,11 +104,14 @@ type ActionDeclaration struct {
 	// JSON or YAML format. For example, the JSON configuration item format is as
 	// follows: JSON: "Configuration" : { Key : Value },
 	Configuration map[string]*string
+
 	// The order in which actions are run.
 	RunOrder *int32
+
 	// The name or ID of the artifact consumed by the action, such as a test or build
 	// artifact.
 	InputArtifacts []*InputArtifact
+
 	// The name or ID of the result of the action declaration, such as a test or build
 	// artifact.
 	OutputArtifacts []*OutputArtifact
@@ -88,24 +119,33 @@ type ActionDeclaration struct {
 
 // Represents information about the run of an action.
 type ActionExecution struct {
+
 	// The URL of a resource external to AWS that is used when running the action (for
 	// example, an external repository URL).
 	ExternalExecutionUrl *string
+
 	// A summary of the run of the action.
 	Summary *string
+
 	// The ARN of the user who last changed the pipeline.
 	LastUpdatedBy *string
+
 	// The last status change of the action.
 	LastStatusChange *time.Time
+
 	// A percentage of completeness of the action as it runs.
 	PercentComplete *int32
+
 	// The details of an error returned by a URL external to AWS.
 	ErrorDetails *ErrorDetails
+
 	// The status of the action, or for a completed action, the last status of the
 	// action.
 	Status ActionExecutionStatus
+
 	// The external ID of the run of the action.
 	ExternalExecutionId *string
+
 	// The system-generated token used to identify a unique approval request. The token
 	// for each open approval request can be obtained using the GetPipelineState
 	// command. It is used to validate that the approval request corresponding to this
@@ -116,53 +156,71 @@ type ActionExecution struct {
 // Returns information about an execution of an action, including the action
 // execution ID, and the name, version, and timing of the action.
 type ActionExecutionDetail struct {
+
 	// The pipeline execution ID for the action execution.
 	PipelineExecutionId *string
+
 	// The start time of the action execution.
 	StartTime *time.Time
+
 	// The last update time of the action execution.
 	LastUpdateTime *time.Time
+
 	// Input details for the action execution, such as role ARN, Region, and input
 	// artifacts.
 	Input *ActionExecutionInput
+
 	// The version of the pipeline where the action was run.
 	PipelineVersion *int32
+
 	// The status of the action execution. Status categories are InProgress, Succeeded,
 	// and Failed.
 	Status ActionExecutionStatus
+
 	// The name of the action.
 	ActionName *string
+
 	// The action execution ID.
 	ActionExecutionId *string
+
 	// The name of the stage that contains the action.
 	StageName *string
+
 	// Output details for the action execution, such as the action execution result.
 	Output *ActionExecutionOutput
 }
 
 // Filter values for the action execution.
 type ActionExecutionFilter struct {
+
 	// The pipeline execution ID used to filter action execution history.
 	PipelineExecutionId *string
 }
 
 // Input information used for an action execution.
 type ActionExecutionInput struct {
+
 	// Configuration data for an action execution with all variable references replaced
 	// with their real values for the execution.
 	ResolvedConfiguration map[string]*string
+
 	// Represents information about an action type.
 	ActionTypeId *ActionTypeId
+
 	// The ARN of the IAM service role that performs the declared action. This is
 	// assumed through the roleArn for the pipeline.
 	RoleArn *string
+
 	// The AWS Region for the action, such as us-east-1.
 	Region *string
+
 	// Configuration data for an action execution.
 	Configuration map[string]*string
+
 	// The variable namespace associated with the action. All variables produced as
 	// output by this action fall under this namespace.
 	Namespace *string
+
 	// Details of input artifacts of the action that correspond to the action
 	// execution.
 	InputArtifacts []*ArtifactDetail
@@ -171,12 +229,15 @@ type ActionExecutionInput struct {
 // Output details listed for an action execution, such as the action execution
 // result.
 type ActionExecutionOutput struct {
+
 	// Execution result information listed in the output details for an action
 	// execution.
 	ExecutionResult *ActionExecutionResult
+
 	// The outputVariables field shows the key-value pairs that were output as part of
 	// that execution.
 	OutputVariables map[string]*string
+
 	// Details of output artifacts of the action that correspond to the action
 	// execution.
 	OutputArtifacts []*ArtifactDetail
@@ -184,39 +245,56 @@ type ActionExecutionOutput struct {
 
 // Execution result information, such as the external execution ID.
 type ActionExecutionResult struct {
+
 	// The action provider's summary for the action execution.
 	ExternalExecutionSummary *string
+
 	// The deepest external link to the external resource (for example, a repository
 	// URL or deployment endpoint) that is used when running the action.
 	ExternalExecutionUrl *string
+
 	// The action provider's external ID for the action execution.
 	ExternalExecutionId *string
 }
 
 // Represents information about the version (or revision) of an action.
 type ActionRevision struct {
+
 	// The system-generated unique ID that identifies the revision number of the
 	// action.
+	//
+	// This member is required.
 	RevisionId *string
+
 	// The unique identifier of the change that set the state to this revision (for
 	// example, a deployment ID or timestamp).
+	//
+	// This member is required.
 	RevisionChangeId *string
+
 	// The date and time when the most recent version of the action was created, in
 	// timestamp format.
+	//
+	// This member is required.
 	Created *time.Time
 }
 
 // Represents information about the state of an action.
 type ActionState struct {
+
 	// Represents information about the version (or revision) of an action.
 	CurrentRevision *ActionRevision
+
 	// The name of the action.
 	ActionName *string
+
 	// Represents information about the run of an action.
 	LatestExecution *ActionExecution
+
 	// A URL link for more information about the revision, such as a commit details
 	// page.
 	RevisionUrl *string
+
 	// A URL link for more information about the state of the action, such as a
 	// deployment group details page.
 	EntityUrl *string
@@ -224,52 +302,79 @@ type ActionState struct {
 
 // Returns information about the details of an action type.
 type ActionType struct {
+
 	// The settings for the action type.
 	Settings *ActionTypeSettings
+
 	// Represents information about an action type.
+	//
+	// This member is required.
 	Id *ActionTypeId
+
 	// The details of the output artifact of the action, such as its commit ID.
+	//
+	// This member is required.
 	OutputArtifactDetails *ArtifactDetails
+
 	// The details of the input artifact for the action, such as its commit ID.
+	//
+	// This member is required.
 	InputArtifactDetails *ArtifactDetails
+
 	// The configuration properties for the action type.
 	ActionConfigurationProperties []*ActionConfigurationProperty
 }
 
 // Represents information about an action type.
 type ActionTypeId struct {
+
 	// A category defines what kind of action can be taken in the stage, and constrains
 	// the provider type for the action. Valid categories are limited to one of the
 	// following values.
+	//
+	// This member is required.
 	Category ActionCategory
+
 	// A string that describes the action version.
+	//
+	// This member is required.
 	Version *string
+
 	// The creator of the action being called.
+	//
+	// This member is required.
 	Owner ActionOwner
+
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
 	// type might have a provider of AWS CodeDeploy, which would be specified as
 	// CodeDeploy. For more information, see Valid Action Types and Providers in
 	// CodePipeline
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
+	//
+	// This member is required.
 	Provider *string
 }
 
 // Returns information about the settings for an action type.
 type ActionTypeSettings struct {
+
 	// The URL of a sign-up page where users can sign up for an external service and
 	// perform initial configuration of the action provided by that service.
 	ThirdPartyConfigurationUrl *string
+
 	// The URL returned to the AWS CodePipeline console that provides a deep link to
 	// the resources of the external system, such as the configuration page for an AWS
 	// CodeDeploy deployment group. This link is provided as part of the action display
 	// in the pipeline.
 	EntityUrlTemplate *string
+
 	// The URL returned to the AWS CodePipeline console that contains a link to the
 	// top-level landing page for the external system, such as the console page for AWS
 	// CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline
 	// console and provides a link to the execution entity of the external action.
 	ExecutionUrlTemplate *string
+
 	// The URL returned to the AWS CodePipeline console that contains a link to the
 	// page where customers can update or change the configuration of the external
 	// action.
@@ -278,66 +383,91 @@ type ActionTypeSettings struct {
 
 // Represents information about the result of an approval request.
 type ApprovalResult struct {
+
 	// The summary of the current status of the approval request.
+	//
+	// This member is required.
 	Summary *string
+
 	// The response submitted by a reviewer assigned to an approval action request.
+	//
+	// This member is required.
 	Status ApprovalStatus
 }
 
 // Represents information about an artifact that is worked on by actions in the
 // pipeline.
 type Artifact struct {
+
 	// The artifact's revision ID. Depending on the type of object, this could be a
 	// commit ID (GitHub) or a revision ID (Amazon S3).
 	Revision *string
+
 	// The artifact's name.
 	Name *string
+
 	// The location of an artifact.
 	Location *ArtifactLocation
 }
 
 // Artifact details for the action execution, such as the artifact location.
 type ArtifactDetail struct {
+
 	// The Amazon S3 artifact location for the action execution.
 	S3location *S3Location
+
 	// The artifact object name for the action execution.
 	Name *string
 }
 
 // Returns information about the details of an artifact.
 type ArtifactDetails struct {
+
 	// The maximum number of artifacts allowed for the action type.
+	//
+	// This member is required.
 	MaximumCount *int32
+
 	// The minimum number of artifacts allowed for the action type.
+	//
+	// This member is required.
 	MinimumCount *int32
 }
 
 // Represents information about the location of an artifact.
 type ArtifactLocation struct {
+
 	// The type of artifact in the location.
 	Type ArtifactLocationType
+
 	// The S3 bucket that contains the artifact.
 	S3Location *S3ArtifactLocation
 }
 
 // Represents revision details of an artifact.
 type ArtifactRevision struct {
+
 	// An additional identifier for a revision, such as a commit date or, for artifacts
 	// stored in Amazon S3 buckets, the ETag value.
 	RevisionChangeIdentifier *string
+
 	// The name of an artifact. This name might be system-generated, such as "MyApp",
 	// or defined by the user when an action is created.
 	Name *string
+
 	// The revision ID of the artifact.
 	RevisionId *string
+
 	// Summary information about the most recent revision of the artifact. For GitHub
 	// and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or
 	// actions, the user-provided content of a codepipeline-artifact-revision-summary
 	// key specified in the object metadata.
 	RevisionSummary *string
+
 	// The date and time when the most recent revision of the artifact was created, in
 	// timestamp format.
 	Created *time.Time
+
 	// The commit ID for the artifact revision. For artifacts stored in GitHub or AWS
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
@@ -348,17 +478,24 @@ type ArtifactRevision struct {
 // both. If you create a cross-region action in your pipeline, you must use
 // artifactStores.
 type ArtifactStore struct {
+
 	// The type of the artifact store, such as S3.
+	//
+	// This member is required.
 	Type ArtifactStoreType
+
 	// The encryption key used to encrypt the data in the artifact store, such as an
 	// AWS Key Management Service (AWS KMS) key. If this is undefined, the default key
 	// for Amazon S3 is used.
 	EncryptionKey *EncryptionKey
+
 	// The S3 bucket used for storing the artifacts for a pipeline. You can specify the
 	// name of an S3 bucket but not a folder in the bucket. A folder to contain the
 	// pipeline artifacts is created for you based on the name of the pipeline. You can
 	// use any S3 bucket in the same AWS Region as the pipeline to store your pipeline
 	// artifacts.
+	//
+	// This member is required.
 	Location *string
 }
 
@@ -367,52 +504,83 @@ type ArtifactStore struct {
 // to access input and output artifacts in the S3 bucket used to store artifact for
 // the pipeline in AWS CodePipeline.
 type AWSSessionCredentials struct {
+
 	// The token for the session.
+	//
+	// This member is required.
 	SessionToken *string
+
 	// The access key for the session.
+	//
+	// This member is required.
 	AccessKeyId *string
+
 	// The secret access key for the session.
+	//
+	// This member is required.
 	SecretAccessKey *string
 }
 
 // Reserved for future use.
 type BlockerDeclaration struct {
+
 	// Reserved for future use.
+	//
+	// This member is required.
 	Name *string
+
 	// Reserved for future use.
+	//
+	// This member is required.
 	Type BlockerType
 }
 
 // Represents information about a current revision.
 type CurrentRevision struct {
+
 	// The summary of the most recent revision of the artifact.
 	RevisionSummary *string
+
 	// The date and time when the most recent revision of the artifact was created, in
 	// timestamp format.
 	Created *time.Time
+
 	// The change identifier for the current revision.
+	//
+	// This member is required.
 	ChangeIdentifier *string
+
 	// The revision ID of the current version of an artifact.
+	//
+	// This member is required.
 	Revision *string
 }
 
 // Represents information about the key used to encrypt data in the artifact store,
 // such as an AWS Key Management Service (AWS KMS) key.
 type EncryptionKey struct {
+
 	// The type of encryption key, such as an AWS Key Management Service (AWS KMS) key.
 	// When creating or updating a pipeline, the value must be set to 'KMS'.
+	//
+	// This member is required.
 	Type EncryptionKeyType
+
 	// The ID used to identify the key. For an AWS KMS key, you can use the key ID, the
 	// key ARN, or the alias ARN. Aliases are recognized only in the account that
 	// created the customer master key (CMK). For cross-account actions, you can only
 	// use the key ID or key ARN to identify the key.
+	//
+	// This member is required.
 	Id *string
 }
 
 // Represents information about an error in AWS CodePipeline.
 type ErrorDetails struct {
+
 	// The text of the error message.
 	Message *string
+
 	// The system ID or number code of the error.
 	Code *string
 }
@@ -420,11 +588,14 @@ type ErrorDetails struct {
 // The details of the actions taken and results produced on an artifact as it
 // passes through stages in the pipeline.
 type ExecutionDetails struct {
+
 	// The summary of the current status of the actions.
 	Summary *string
+
 	// The system-generated unique ID of this action used to identify this job worker
 	// in any external systems, such as AWS CodeDeploy.
 	ExternalExecutionId *string
+
 	// The percentage of work completed on the action, represented on a scale of 0 to
 	// 100 percent.
 	PercentComplete *int32
@@ -432,9 +603,11 @@ type ExecutionDetails struct {
 
 // The interaction or event that started a pipeline execution.
 type ExecutionTrigger struct {
+
 	// The type of change-detection method, command, or user interaction that started a
 	// pipeline execution.
 	TriggerType TriggerType
+
 	// Detail related to the event that started a pipeline execution, such as the
 	// webhook ARN of the webhook that triggered the pipeline execution or the user ARN
 	// for a user-initiated start-pipeline-execution CLI command.
@@ -443,36 +616,50 @@ type ExecutionTrigger struct {
 
 // Represents information about failure details.
 type FailureDetails struct {
+
 	// The external ID of the run of the action that failed.
 	ExternalExecutionId *string
+
 	// The message about the failure.
+	//
+	// This member is required.
 	Message *string
+
 	// The type of the failure.
+	//
+	// This member is required.
 	Type FailureType
 }
 
 // Represents information about an artifact to be worked on, such as a test or
 // build artifact.
 type InputArtifact struct {
+
 	// The name of the artifact to be worked on (for example, "My App"). The input
 	// artifact of an action must exactly match the output artifact declared in a
 	// preceding action, but the input artifact does not have to be the next action in
 	// strict sequence from the action that provided the output artifact. Actions in
 	// parallel can declare different output artifacts, which are in turn consumed by
 	// different following actions.
+	//
+	// This member is required.
 	Name *string
 }
 
 // Represents information about a job.
 type Job struct {
+
 	// The ID of the AWS account to use when performing the job.
 	AccountId *string
+
 	// A system-generated random number that AWS CodePipeline uses to ensure that the
 	// job is being worked on by only one job worker. Use this number in an
 	// AcknowledgeJob () request.
 	Nonce *string
+
 	// The unique system-generated ID of the job.
 	Id *string
+
 	// Other data about a job.
 	Data *JobData
 }
@@ -480,37 +667,48 @@ type Job struct {
 // Represents other information about a job required for a job worker to complete
 // the job.
 type JobData struct {
+
 	// Represents information about a pipeline to a job worker. Includes pipelineArn
 	// and pipelineExecutionId for custom jobs.
 	PipelineContext *PipelineContext
+
 	// Represents an AWS session credentials object. These credentials are temporary
 	// credentials that are issued by AWS Secure Token Service (STS). They can be used
 	// to access input and output artifacts in the S3 bucket used to store artifacts
 	// for the pipeline in AWS CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials
+
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, required by a
 	// job to continue the job asynchronously.
 	ContinuationToken *string
+
 	// Represents information about the key used to encrypt data in the artifact store,
 	// such as an AWS Key Management Service (AWS KMS) key.
 	EncryptionKey *EncryptionKey
+
 	// Represents information about an action configuration.
 	ActionConfiguration *ActionConfiguration
+
 	// Represents information about an action type.
 	ActionTypeId *ActionTypeId
+
 	// The artifact supplied to the job.
 	InputArtifacts []*Artifact
+
 	// The output of the job.
 	OutputArtifacts []*Artifact
 }
 
 // Represents information about the details of a job.
 type JobDetails struct {
+
 	// Represents other information about a job required for a job worker to complete
 	// the job.
 	Data *JobData
+
 	// The unique system-generated ID of the job.
 	Id *string
+
 	// The AWS account ID associated with the job.
 	AccountId *string
 }
@@ -518,35 +716,49 @@ type JobDetails struct {
 // The detail returned for each webhook after listing webhooks, such as the webhook
 // URL, the webhook name, and the webhook ARN.
 type ListWebhookItem struct {
+
 	// The date and time a webhook was last successfully triggered, in timestamp
 	// format.
 	LastTriggered *time.Time
+
 	// A unique URL generated by CodePipeline. When a POST request is made to this URL,
 	// the defined pipeline is started as long as the body of the post request
 	// satisfies the defined authentication and filtering conditions. Deleting and
 	// re-creating a webhook makes the old URL invalid and generates a new one.
+	//
+	// This member is required.
 	Url *string
+
 	// The text of the error message about the webhook.
 	ErrorMessage *string
+
 	// The number code of the error.
 	ErrorCode *string
+
 	// Specifies the tags applied to the webhook.
 	Tags []*Tag
+
 	// The Amazon Resource Name (ARN) of the webhook.
 	Arn *string
+
 	// The detail returned for each webhook, such as the webhook authentication type
 	// and filter rules.
+	//
+	// This member is required.
 	Definition *WebhookDefinition
 }
 
 // Represents information about the output of an action.
 type OutputArtifact struct {
+
 	// The name of the output of an artifact, such as "My App". The input artifact of
 	// an action must exactly match the output artifact declared in a preceding action,
 	// but the input artifact does not have to be the next action in strict sequence
 	// from the action that provided the output artifact. Actions in parallel can
 	// declare different output artifacts, which are in turn consumed by different
 	// following actions. Output artifact names must be unique within a pipeline.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -555,38 +767,55 @@ type OutputArtifact struct {
 // pipelineArn and pipelineExecutionId fields are not populated for ThirdParty
 // action jobs.
 type PipelineContext struct {
+
 	// The context of an action to a job worker in the stage of a pipeline.
 	Action *ActionContext
+
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
+
 	// The execution ID of the pipeline.
 	PipelineExecutionId *string
+
 	// The name of the pipeline. This is a user-specified value. Pipeline names must be
 	// unique across all pipeline names under an Amazon Web Services account.
 	PipelineName *string
+
 	// The stage of the pipeline.
 	Stage *StageContext
 }
 
 // Represents the structure of actions and stages to be performed in the pipeline.
 type PipelineDeclaration struct {
+
 	// The name of the action to be performed.
+	//
+	// This member is required.
 	Name *string
+
 	// A mapping of artifactStore objects and their corresponding AWS Regions. There
 	// must be an artifact store for the pipeline Region and for each cross-region
 	// action in the pipeline. You must include either artifactStore or artifactStores
 	// in your pipeline, but you cannot use both. If you create a cross-region action
 	// in your pipeline, you must use artifactStores.
 	ArtifactStores map[string]*ArtifactStore
+
 	// The stage in which to perform the action.
+	//
+	// This member is required.
 	Stages []*StageDeclaration
+
 	// The version number of the pipeline. A new pipeline always has a version number
 	// of 1. This number is incremented when a pipeline is updated.
 	Version *int32
+
 	// The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform
 	// actions with no actionRoleArn, or to use to assume roles for actions with an
 	// actionRoleArn.
+	//
+	// This member is required.
 	RoleArn *string
+
 	// Represents information about the S3 bucket where artifacts are stored for the
 	// pipeline. You must include either artifactStore or artifactStores in your
 	// pipeline, but you cannot use both. If you create a cross-region action in your
@@ -596,10 +825,13 @@ type PipelineDeclaration struct {
 
 // Represents information about an execution of a pipeline.
 type PipelineExecution struct {
+
 	// The version number of the pipeline with the specified pipeline execution.
 	PipelineVersion *int32
+
 	// The name of the pipeline with the specified pipeline execution.
 	PipelineName *string
+
 	// The status of the pipeline execution.
 	//
 	//     * InProgress: The pipeline execution
@@ -627,28 +859,37 @@ type PipelineExecution struct {
 	//
 	// * Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
+
 	// A list of ArtifactRevision objects included in a pipeline execution.
 	ArtifactRevisions []*ArtifactRevision
+
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string
 }
 
 // Summary information about a pipeline execution.
 type PipelineExecutionSummary struct {
+
 	// The interaction or event that started a pipeline execution, such as automated
 	// change detection or a StartPipelineExecution API call.
 	Trigger *ExecutionTrigger
+
 	// The date and time when the pipeline execution began, in timestamp format.
 	StartTime *time.Time
+
 	// The date and time of the last change to the pipeline execution, in timestamp
 	// format.
 	LastUpdateTime *time.Time
+
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string
+
 	// The interaction that stopped a pipeline execution.
 	StopTrigger *StopExecutionTrigger
+
 	// A list of the source artifact revisions that initiated a pipeline execution.
 	SourceRevisions []*SourceRevision
+
 	// The status of the pipeline execution.
 	//
 	//     * InProgress: The pipeline execution
@@ -680,39 +921,54 @@ type PipelineExecutionSummary struct {
 
 // Information about a pipeline.
 type PipelineMetadata struct {
+
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
+
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time
+
 	// The date and time the pipeline was created, in timestamp format.
 	Created *time.Time
 }
 
 // Returns a summary of a pipeline.
 type PipelineSummary struct {
+
 	// The date and time of the last update to the pipeline, in timestamp format.
 	Updated *time.Time
+
 	// The name of the pipeline.
 	Name *string
+
 	// The version number of the pipeline.
 	Version *int32
+
 	// The date and time the pipeline was created, in timestamp format.
 	Created *time.Time
 }
 
 // The location of the S3 bucket that contains a revision.
 type S3ArtifactLocation struct {
+
 	// The key of the object in the S3 bucket, which uniquely identifies the object in
 	// the bucket.
+	//
+	// This member is required.
 	ObjectKey *string
+
 	// The name of the S3 bucket.
+	//
+	// This member is required.
 	BucketName *string
 }
 
 // The Amazon S3 artifact location for an action's artifacts.
 type S3Location struct {
+
 	// The artifact name.
 	Key *string
+
 	// The Amazon S3 artifact bucket for an action's artifacts.
 	Bucket *string
 }
@@ -720,53 +976,77 @@ type S3Location struct {
 // Information about the version (or revision) of a source artifact that initiated
 // a pipeline execution.
 type SourceRevision struct {
+
 	// Summary information about the most recent revision of the artifact. For GitHub
 	// and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or
 	// actions, the user-provided content of a codepipeline-artifact-revision-summary
 	// key specified in the object metadata.
 	RevisionSummary *string
+
 	// The commit ID for the artifact revision. For artifacts stored in GitHub or AWS
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
+
 	// The system-generated unique ID that identifies the revision number of the
 	// artifact.
 	RevisionId *string
+
 	// The name of the action that processed the revision to the source artifact.
+	//
+	// This member is required.
 	ActionName *string
 }
 
 // Represents information about a stage to a job worker.
 type StageContext struct {
+
 	// The name of the stage.
 	Name *string
 }
 
 // Represents information about a stage and its definition.
 type StageDeclaration struct {
+
 	// Reserved for future use.
 	Blockers []*BlockerDeclaration
+
 	// The name of the stage.
+	//
+	// This member is required.
 	Name *string
+
 	// The actions included in a stage.
+	//
+	// This member is required.
 	Actions []*ActionDeclaration
 }
 
 // Represents information about the run of a stage.
 type StageExecution struct {
+
 	// The status of the stage, or for a completed stage, the last status of the stage.
+	//
+	// This member is required.
 	Status StageExecutionStatus
+
 	// The ID of the pipeline execution associated with the stage.
+	//
+	// This member is required.
 	PipelineExecutionId *string
 }
 
 // Represents information about the state of the stage.
 type StageState struct {
+
 	// The state of the stage.
 	ActionStates []*ActionState
+
 	// The name of the stage.
 	StageName *string
+
 	// The state of the inbound transition, which is either enabled or disabled.
 	InboundTransitionState *TransitionState
+
 	// Information about the latest execution in the stage, including its ID and
 	// status.
 	LatestExecution *StageExecution
@@ -774,23 +1054,32 @@ type StageState struct {
 
 // The interaction that stopped a pipeline execution.
 type StopExecutionTrigger struct {
+
 	// The user-specified reason the pipeline was stopped.
 	Reason *string
 }
 
 // A tag is a key-value pair that is used to manage the resource.
 type Tag struct {
+
 	// The tag's value.
+	//
+	// This member is required.
 	Value *string
+
 	// The tag's key.
+	//
+	// This member is required.
 	Key *string
 }
 
 // A response to a PollForThirdPartyJobs request returned by AWS CodePipeline when
 // there is a job to be worked on by a partner action.
 type ThirdPartyJob struct {
+
 	// The identifier used to identify the job in AWS CodePipeline.
 	JobId *string
+
 	// The clientToken portion of the clientId and clientToken pair used to verify that
 	// the calling entity is allowed access to the job and its details.
 	ClientId *string
@@ -798,29 +1087,37 @@ type ThirdPartyJob struct {
 
 // Represents information about the job data for a partner action.
 type ThirdPartyJobData struct {
+
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a job
 	// requires to continue the job asynchronously.
 	ContinuationToken *string
+
 	// Represents an AWS session credentials object. These credentials are temporary
 	// credentials that are issued by AWS Secure Token Service (STS). They can be used
 	// to access input and output artifacts in the S3 bucket used to store artifact for
 	// the pipeline in AWS CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials
+
 	// Represents information about an action configuration.
 	ActionConfiguration *ActionConfiguration
+
 	// The name of the artifact that is the result of the action, if any. This name
 	// might be system-generated, such as "MyBuiltApp", or it might be defined by the
 	// user when the action is created.
 	OutputArtifacts []*Artifact
+
 	// The encryption key used to encrypt and decrypt data in the artifact store for
 	// the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is
 	// optional and might not be present.
 	EncryptionKey *EncryptionKey
+
 	// Represents information about a pipeline to a job worker. Does not include
 	// pipelineArn and pipelineExecutionId for ThirdParty jobs.
 	PipelineContext *PipelineContext
+
 	// Represents information about an action type.
 	ActionTypeId *ActionTypeId
+
 	// The name of the artifact that is worked on by the action, if any. This name
 	// might be system-generated, such as "MyApp", or it might be defined by the user
 	// when the action is created. The input artifact name must match the name of an
@@ -831,12 +1128,15 @@ type ThirdPartyJobData struct {
 
 // The details of a job sent in response to a GetThirdPartyJobDetails request.
 type ThirdPartyJobDetails struct {
+
 	// A system-generated random number that AWS CodePipeline uses to ensure that the
 	// job is being worked on by only one job worker. Use this number in an
 	// AcknowledgeThirdPartyJob () request.
 	Nonce *string
+
 	// The identifier used to identify the job details in AWS CodePipeline.
 	Id *string
+
 	// The data to be returned by the third party job worker.
 	Data *ThirdPartyJobData
 }
@@ -844,22 +1144,28 @@ type ThirdPartyJobDetails struct {
 // Represents information about the state of transitions between one stage and
 // another stage.
 type TransitionState struct {
+
 	// The timestamp when the transition state was last changed.
 	LastChangedAt *time.Time
+
 	// The ID of the user who last changed the transition state.
 	LastChangedBy *string
+
 	// The user-specified reason why the transition between two stages of a pipeline
 	// was disabled.
 	DisabledReason *string
+
 	// Whether the transition between stages is enabled (true) or disabled (false).
 	Enabled *bool
 }
 
 // The authentication applied to incoming webhook trigger requests.
 type WebhookAuthConfiguration struct {
+
 	// The property used to configure GitHub authentication. For GITHUB_HMAC, only the
 	// SecretToken property must be set.
 	SecretToken *string
+
 	// The property used to configure acceptance of webhooks in an IP address range.
 	// For IP, only the AllowedIPRange property must be set. This property must be set
 	// to a valid CIDR range.
@@ -868,11 +1174,18 @@ type WebhookAuthConfiguration struct {
 
 // Represents information about a webhook and its definition.
 type WebhookDefinition struct {
+
 	// The name of the action in a pipeline you want to connect to the webhook. The
 	// action must be from the source (first) stage of the pipeline.
+	//
+	// This member is required.
 	TargetAction *string
+
 	// The name of the pipeline you want to connect to the webhook.
+	//
+	// This member is required.
 	TargetPipeline *string
+
 	// Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.
 	//
 	//     * For
@@ -886,23 +1199,35 @@ type WebhookDefinition struct {
 	//
 	//     * UNAUTHENTICATED accepts all webhook trigger
 	// requests regardless of origin.
+	//
+	// This member is required.
 	Authentication WebhookAuthenticationType
+
 	// Properties that configure the authentication applied to incoming webhook trigger
 	// requests. The required properties depend on the authentication type. For
 	// GITHUB_HMAC, only the SecretToken property must be set. For IP, only the
 	// AllowedIPRange property must be set to a valid CIDR range. For UNAUTHENTICATED,
 	// no properties can be set.
+	//
+	// This member is required.
 	AuthenticationConfiguration *WebhookAuthConfiguration
+
 	// The name of the webhook.
+	//
+	// This member is required.
 	Name *string
+
 	// A list of rules applied to the body/payload sent in the POST request to a
 	// webhook URL. All defined rules must pass for the request to be accepted and the
 	// pipeline started.
+	//
+	// This member is required.
 	Filters []*WebhookFilterRule
 }
 
 // The event criteria that specify when a webhook notification is sent to your URL.
 type WebhookFilterRule struct {
+
 	// The value selected by the JsonPath expression must match what is supplied in the
 	// MatchEquals field. Otherwise, the request is ignored. Properties from the target
 	// action configuration can be included as placeholders in this value by
@@ -914,9 +1239,12 @@ type WebhookFilterRule struct {
 	// Reference Action Requirements
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
 	MatchEquals *string
+
 	// A JsonPath expression that is applied to the body/payload of the webhook. The
 	// value selected by the JsonPath expression must match the value specified in the
 	// MatchEquals field. Otherwise, the request is ignored. For more information, see
 	// Java JsonPath implementation (https://github.com/json-path/JsonPath) in GitHub.
+	//
+	// This member is required.
 	JsonPath *string
 }

@@ -82,6 +82,7 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 }
 
 type AbortMultipartUploadInput struct {
+
 	// The bucket name to which the upload was taking place. When using this API with
 	// an access point, you must direct requests to the access point hostname. The
 	// access point hostname takes the form
@@ -91,7 +92,10 @@ type AbortMultipartUploadInput struct {
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
 	Bucket *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -99,13 +103,20 @@ type AbortMultipartUploadInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
 	// Upload ID that identifies the multipart upload.
+	//
+	// This member is required.
 	UploadId *string
+
 	// Key of the object for which the multipart upload was initiated.
+	//
+	// This member is required.
 	Key *string
 }
 
 type AbortMultipartUploadOutput struct {
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged

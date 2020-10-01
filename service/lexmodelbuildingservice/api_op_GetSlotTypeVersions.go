@@ -62,11 +62,16 @@ func (c *Client) GetSlotTypeVersions(ctx context.Context, params *GetSlotTypeVer
 }
 
 type GetSlotTypeVersionsInput struct {
+
 	// The maximum number of slot type versions to return in the response. The default
 	// is 10.
 	MaxResults *int32
+
 	// The name of the slot type for which versions should be returned.
+	//
+	// This member is required.
 	Name *string
+
 	// A pagination token for fetching the next page of slot type versions. If the
 	// response to this call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of versions, specify the pagination token in
@@ -75,9 +80,11 @@ type GetSlotTypeVersionsInput struct {
 }
 
 type GetSlotTypeVersionsOutput struct {
+
 	// An array of SlotTypeMetadata objects, one for each numbered version of the slot
 	// type plus one for the $LATEST version.
 	SlotTypes []*types.SlotTypeMetadata
+
 	// A pagination token for fetching the next page of slot type versions. If the
 	// response to this call is truncated, Amazon Lex returns a pagination token in the
 	// response. To fetch the next page of versions, specify the pagination token in

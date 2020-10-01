@@ -55,7 +55,10 @@ func (c *Client) StopCrawler(ctx context.Context, params *StopCrawlerInput, optF
 }
 
 type StopCrawlerInput struct {
+
 	// Name of the crawler to stop.
+	//
+	// This member is required.
 	Name *string
 }
 

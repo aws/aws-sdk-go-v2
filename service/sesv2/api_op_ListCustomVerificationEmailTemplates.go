@@ -62,12 +62,14 @@ func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, param
 // Represents a request to list the existing custom verification email templates
 // for your account.
 type ListCustomVerificationEmailTemplatesInput struct {
+
 	// The number of results to show in a single call to
 	// ListCustomVerificationEmailTemplates. If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
 	// NextToken element, which you can use to obtain additional results. The value you
 	// specify has to be at least 1, and can be no more than 50.
 	PageSize *int32
+
 	// A token returned from a previous call to ListCustomVerificationEmailTemplates to
 	// indicate the position in the list of custom verification email templates.
 	NextToken *string
@@ -75,8 +77,10 @@ type ListCustomVerificationEmailTemplatesInput struct {
 
 // The following elements are returned by the service.
 type ListCustomVerificationEmailTemplatesOutput struct {
+
 	// A list of the custom verification email templates that exist in your account.
 	CustomVerificationEmailTemplates []*types.CustomVerificationEmailTemplateMetadata
+
 	// A token indicating that there are additional custom verification email templates
 	// available to be listed. Pass this token to a subsequent call to
 	// ListCustomVerificationEmailTemplates to retrieve the next 50 custom verification

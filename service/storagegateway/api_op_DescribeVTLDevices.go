@@ -59,32 +59,41 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 
 // DescribeVTLDevicesInput
 type DescribeVTLDevicesInput struct {
+
 	// An opaque string that indicates the position at which to begin describing the
 	// VTL devices.
 	Marker *string
+
 	// Specifies that the number of VTL devices described be limited to the specified
 	// number.
 	Limit *int32
+
 	// An array of strings, where each string represents the Amazon Resource Name (ARN)
 	// of a VTL device.  <note> <p>All of the specified VTL devices must be from the
 	// same gateway. If no VTL devices are specified, the result will contain all
 	// devices on the specified gateway.</p> </note>
 	VTLDeviceARNs []*string
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
 	GatewayARN *string
 }
 
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
+
 	// An array of VTL device objects composed of the Amazon Resource Name (ARN) of the
 	// VTL devices.
 	VTLDevices []*types.VTLDevice
+
 	// An opaque string that indicates the position at which the VTL devices that were
 	// fetched for description ended. Use the marker in your next request to fetch the
 	// next set of VTL devices in the list. If there are no more VTL devices to
 	// describe, this field does not appear in the response.
 	Marker *string
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string

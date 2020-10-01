@@ -63,8 +63,10 @@ func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns
 
 // ListAgentsRequest
 type ListAgentsInput struct {
+
 	// The maximum number of agents to list.
 	MaxResults *int32
+
 	// An opaque string that indicates the position at which to begin the next list of
 	// agents.
 	NextToken *string
@@ -72,8 +74,10 @@ type ListAgentsInput struct {
 
 // ListAgentsResponse
 type ListAgentsOutput struct {
+
 	// A list of agents in your account.
 	Agents []*types.AgentListEntry
+
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of agents.
 	NextToken *string

@@ -154,19 +154,25 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 }
 
 type CreateServiceInput struct {
+
 	// Optional deployment parameters that control how many tasks run during the
 	// deployment and the ordering of stopping and starting tasks.
 	DeploymentConfiguration *types.DeploymentConfiguration
+
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// run in your service. If a revision is not specified, the latest ACTIVE revision
 	// is used. A task definition must be specified if the service is using the ECS
 	// deployment controller.
 	TaskDefinition *string
+
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
 	// and hyphens are allowed. Service names must be unique within a cluster, but you
 	// can have similarly named services in multiple clusters within a Region or across
 	// multiple Regions.
+	//
+	// This member is required.
 	ServiceName *string
+
 	// A load balancer object representing the load balancers to use with your service.
 	// For more information, see Service Load Balancing
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
@@ -208,6 +214,7 @@ type CreateServiceInput struct {
 	// awsvpc network mode are associated with an elastic network interface, not an
 	// Amazon EC2 instance.
 	LoadBalancers []*types.LoadBalancer
+
 	// The network configuration for the service. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it is not supported for other network modes. For more
@@ -215,9 +222,11 @@ type CreateServiceInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	NetworkConfiguration *types.NetworkConfiguration
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 32 ASCII characters are allowed.
 	ClientToken *string
+
 	// The scheduling strategy to use for the service. For more information, see
 	// Services
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
@@ -240,6 +249,7 @@ type CreateServiceInput struct {
 	// policies. Tasks using the Fargate launch type or the CODE_DEPLOY or EXTERNAL
 	// deployment controller types don't support the DAEMON scheduling strategy.
 	SchedulingStrategy types.SchedulingStrategy
+
 	// The platform version that your tasks in the service are running on. A platform
 	// version is specified only for tasks using the Fargate launch type. If one isn't
 	// specified, the LATEST platform version is used by default. For more information,
@@ -247,13 +257,16 @@ type CreateServiceInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
+
 	// An array of placement constraint objects to use for tasks in your service. You
 	// can specify a maximum of 10 constraints per task (this limit includes
 	// constraints in the task definition and those specified at runtime).
 	PlacementConstraints []*types.PlacementConstraint
+
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
 	// your service. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
+
 	// The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon
 	// ECS to make calls to your load balancer on your behalf. This parameter is only
 	// permitted if you are using a load balancer with your service and your task
@@ -275,6 +288,7 @@ type CreateServiceInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
 	// in the IAM User Guide.
 	Role *string
+
 	// The period of time, in seconds, that the Amazon ECS service scheduler should
 	// ignore unhealthy Elastic Load Balancing target health checks after a task has
 	// first started. This is only used when your service is configured to use a load
@@ -287,6 +301,7 @@ type CreateServiceInput struct {
 	// from marking tasks as unhealthy and stopping them before they have time to come
 	// up.
 	HealthCheckGracePeriodSeconds *int32
+
 	// The capacity provider strategy to use for the service. A capacity provider
 	// strategy consists of one or more capacity providers along with the base and
 	// weight to assign to them. A capacity provider must be associated with the
@@ -305,12 +320,14 @@ type CreateServiceInput struct {
 	// used to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+
 	// The launch type on which to run your service. For more information, see Amazon
 	// ECS Launch Types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
 	LaunchType types.LaunchType
+
 	// The metadata that you apply to the service to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. When a service is deleted, the tags are deleted as well. The following
@@ -341,11 +358,13 @@ type CreateServiceInput struct {
 	// AWS use. You cannot edit or delete tag keys or values with this prefix. Tags
 	// with this prefix do not count against your tags per resource limit.
 	Tags []*types.Tag
+
 	// Specifies whether to enable Amazon ECS managed tags for the tasks within the
 	// service. For more information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags *bool
+
 	// The details of the service discovery registries to assign to this service. For
 	// more information, see Service Discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
@@ -353,17 +372,21 @@ type CreateServiceInput struct {
 	// version v1.1.0 or later. For more information, see AWS Fargate Platform Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
 	ServiceRegistries []*types.ServiceRegistry
+
 	// The deployment controller to use for the service.
 	DeploymentController *types.DeploymentController
+
 	// Specifies whether to propagate the tags from the task definition or the service
 	// to the tasks in the service. If no value is specified, the tags are not
 	// propagated. Tags can only be propagated to the tasks within the service during
 	// service creation. To add tags to a task after service creation, use the
 	// TagResource () API action.
 	PropagateTags types.PropagateTags
+
 	// The placement strategy objects to use for tasks in your service. You can specify
 	// a maximum of five strategy rules per service.
 	PlacementStrategy []*types.PlacementStrategy
+
 	// The number of instantiations of the specified task definition to place and keep
 	// running on your cluster. This is required if schedulingStrategy is REPLICA or is
 	// not specified. If schedulingStrategy is DAEMON then this is not required.
@@ -371,6 +394,7 @@ type CreateServiceInput struct {
 }
 
 type CreateServiceOutput struct {
+
 	// The full description of your service following the create call. If a service is
 	// using the ECS deployment controller, the deploymentController and taskSets
 	// parameters will not be returned. If the service is using the CODE_DEPLOY

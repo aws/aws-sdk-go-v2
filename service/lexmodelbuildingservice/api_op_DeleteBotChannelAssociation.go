@@ -56,12 +56,21 @@ func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *Delete
 }
 
 type DeleteBotChannelAssociationInput struct {
+
 	// The name of the Amazon Lex bot.
+	//
+	// This member is required.
 	BotName *string
+
 	// An alias that points to the specific version of the Amazon Lex bot to which this
 	// association is being made.
+	//
+	// This member is required.
 	BotAlias *string
+
 	// The name of the association. The name is case sensitive.
+	//
+	// This member is required.
 	Name *string
 }
 

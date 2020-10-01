@@ -58,23 +58,29 @@ func (c *Client) ListQualificationRequests(ctx context.Context, params *ListQual
 }
 
 type ListQualificationRequestsInput struct {
+
 	// The ID of the QualificationType.
 	QualificationTypeId *string
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 }
 
 type ListQualificationRequestsOutput struct {
+
 	// The number of Qualification requests on this page in the filtered results list,
 	// equivalent to the number of Qualification requests being returned by this call.
 	NumResults *int32
+
 	// The Qualification request. The response includes one QualificationRequest
 	// element for each Qualification request returned by the query.
 	QualificationRequests []*types.QualificationRequest
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.

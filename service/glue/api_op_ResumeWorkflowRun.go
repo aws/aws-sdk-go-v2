@@ -55,18 +55,29 @@ func (c *Client) ResumeWorkflowRun(ctx context.Context, params *ResumeWorkflowRu
 }
 
 type ResumeWorkflowRunInput struct {
+
 	// The name of the workflow to resume.
+	//
+	// This member is required.
 	Name *string
+
 	// The ID of the workflow run to resume.
+	//
+	// This member is required.
 	RunId *string
+
 	// A list of the node IDs for the nodes you want to restart. The nodes that are to
 	// be restarted must have an execution attempt in the original run.
+	//
+	// This member is required.
 	NodeIds []*string
 }
 
 type ResumeWorkflowRunOutput struct {
+
 	// A list of the node IDs for the nodes that were actually restarted.
 	NodeIds []*string
+
 	// The new ID assigned to the resumed workflow run. Each resume of a workflow run
 	// will have a new run ID.
 	RunId *string

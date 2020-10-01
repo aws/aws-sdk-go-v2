@@ -63,21 +63,30 @@ func (c *Client) DefineExpression(ctx context.Context, params *DefineExpressionI
 // Container for the parameters to the DefineExpression () operation. Specifies the
 // name of the domain you want to update and the expression you want to configure.
 type DefineExpressionInput struct {
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
 	// and - (hyphen).
+	//
+	// This member is required.
 	DomainName *string
+
 	// A named expression that can be evaluated at search time. Can be used to sort the
 	// search results, define other expressions, or return computed information in the
 	// search results.
+	//
+	// This member is required.
 	Expression *types.Expression
 }
 
 // The result of a DefineExpression request. Contains the status of the
 // newly-configured expression.
 type DefineExpressionOutput struct {
+
 	// The value of an Expression and its current status.
+	//
+	// This member is required.
 	Expression *types.ExpressionStatus
 
 	// Metadata pertaining to the operation's result.

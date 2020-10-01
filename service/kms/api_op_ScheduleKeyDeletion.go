@@ -81,6 +81,7 @@ func (c *Client) ScheduleKeyDeletion(ctx context.Context, params *ScheduleKeyDel
 }
 
 type ScheduleKeyDeletionInput struct {
+
 	// The unique identifier of the customer master key (CMK) to delete.  <p>Specify
 	// the key ID or the Amazon Resource Name (ARN) of the CMK.</p> <p>For example:</p>
 	// <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p>
@@ -88,7 +89,10 @@ type ScheduleKeyDeletionInput struct {
 	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
 	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
 	// or <a>DescribeKey</a>.</p>
+	//
+	// This member is required.
 	KeyId *string
+
 	// The waiting period, specified in number of days. After the waiting period ends,
 	// AWS KMS deletes the customer master key (CMK). This value is optional. If you
 	// include a value, it must be between 7 and 30, inclusive. If you do not include a
@@ -97,10 +101,12 @@ type ScheduleKeyDeletionInput struct {
 }
 
 type ScheduleKeyDeletionOutput struct {
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK whose deletion is scheduled.
 	KeyId *string
+
 	// The date and time after which AWS KMS deletes the customer master key (CMK).
 	DeletionDate *time.Time
 
