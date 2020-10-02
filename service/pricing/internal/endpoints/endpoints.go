@@ -44,7 +44,7 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "pricing",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"ap-south-1": endpoints.Endpoint{},

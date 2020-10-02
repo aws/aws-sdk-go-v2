@@ -41,12 +41,18 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:       regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-global",
 		Endpoints: endpoints.Endpoints{
 			"aws-global": endpoints.Endpoint{
 				Hostname: "organizations.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-aws-global": endpoints.Endpoint{
+				Hostname: "organizations-fips.us-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -60,8 +66,23 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
-		IsRegionalized: true,
+		RegionRegex:       regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-cn-global",
+		Endpoints: endpoints.Endpoints{
+			"aws-cn-global": endpoints.Endpoint{
+				Hostname: "organizations.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
+			"fips-aws-cn-global": endpoints.Endpoint{
+				Hostname: "organizations.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso",
@@ -95,6 +116,12 @@ var defaultPartitions = endpoints.Partitions{
 		PartitionEndpoint: "aws-us-gov-global",
 		Endpoints: endpoints.Endpoints{
 			"aws-us-gov-global": endpoints.Endpoint{
+				Hostname: "organizations.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"fips-aws-us-gov-global": endpoints.Endpoint{
 				Hostname: "organizations.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",

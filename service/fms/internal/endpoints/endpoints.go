@@ -41,9 +41,11 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
+			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
 			"ap-south-1":     endpoints.Endpoint{},
@@ -52,14 +54,106 @@ var defaultPartitions = endpoints.Partitions{
 			"ca-central-1":   endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
+			"eu-south-1":     endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"fips-ap-northeast-1": endpoints.Endpoint{
+				Hostname: "fms-fips.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			"fips-ap-northeast-2": endpoints.Endpoint{
+				Hostname: "fms-fips.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			"fips-ap-south-1": endpoints.Endpoint{
+				Hostname: "fms-fips.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
+			"fips-ap-southeast-1": endpoints.Endpoint{
+				Hostname: "fms-fips.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			"fips-ap-southeast-2": endpoints.Endpoint{
+				Hostname: "fms-fips.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
+			"fips-ca-central-1": endpoints.Endpoint{
+				Hostname: "fms-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"fips-eu-central-1": endpoints.Endpoint{
+				Hostname: "fms-fips.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
+			"fips-eu-west-1": endpoints.Endpoint{
+				Hostname: "fms-fips.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
+			"fips-eu-west-2": endpoints.Endpoint{
+				Hostname: "fms-fips.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
+			"fips-eu-west-3": endpoints.Endpoint{
+				Hostname: "fms-fips.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
+			"fips-sa-east-1": endpoints.Endpoint{
+				Hostname: "fms-fips.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "fms-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "fms-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "fms-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "fms-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"sa-east-1":  endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
+			"us-east-2":  endpoints.Endpoint{},
+			"us-west-1":  endpoints.Endpoint{},
+			"us-west-2":  endpoints.Endpoint{},
 		},
 	},
 	{

@@ -41,9 +41,10 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
 			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
@@ -53,6 +54,7 @@ var defaultPartitions = endpoints.Partitions{
 			"ca-central-1":   endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
+			"eu-south-1":     endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
@@ -81,7 +83,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "autoscaling.us-iso-east-1.c2s.ic.gov",
+			Hostname:          "application-autoscaling.{region}.c2s.ic.gov",
 			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -94,7 +96,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso-b",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "autoscaling.us-isob-east-1.sc2s.sgov.gov",
+			Hostname:          "application-autoscaling.{region}.sc2s.sgov.gov",
 			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 		},

@@ -41,8 +41,28 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"ap-northeast-1": endpoints.Endpoint{
+				Hostname: "api.elastic-inference.ap-northeast-1.amazonaws.com",
+			},
+			"ap-northeast-2": endpoints.Endpoint{
+				Hostname: "api.elastic-inference.ap-northeast-2.amazonaws.com",
+			},
+			"eu-west-1": endpoints.Endpoint{
+				Hostname: "api.elastic-inference.eu-west-1.amazonaws.com",
+			},
+			"us-east-1": endpoints.Endpoint{
+				Hostname: "api.elastic-inference.us-east-1.amazonaws.com",
+			},
+			"us-east-2": endpoints.Endpoint{
+				Hostname: "api.elastic-inference.us-east-2.amazonaws.com",
+			},
+			"us-west-2": endpoints.Endpoint{
+				Hostname: "api.elastic-inference.us-west-2.amazonaws.com",
+			},
+		},
 	},
 	{
 		ID: "aws-cn",

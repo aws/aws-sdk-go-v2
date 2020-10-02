@@ -41,11 +41,28 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"us-east-2": endpoints.Endpoint{},
-			"us-west-2": endpoints.Endpoint{},
+			"af-south-1":     endpoints.Endpoint{},
+			"ap-southeast-2": endpoints.Endpoint{},
+			"eu-north-1":     endpoints.Endpoint{},
+			"eu-west-1":      endpoints.Endpoint{},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "groundstation-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "groundstation-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"us-east-2":  endpoints.Endpoint{},
+			"us-west-2":  endpoints.Endpoint{},
 		},
 	},
 	{

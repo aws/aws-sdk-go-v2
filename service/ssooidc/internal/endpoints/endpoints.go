@@ -41,9 +41,27 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"ap-northeast-1": endpoints.Endpoint{
+				Hostname: "oidc.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			"ap-northeast-2": endpoints.Endpoint{
+				Hostname: "oidc.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			"ap-south-1": endpoints.Endpoint{
+				Hostname: "oidc.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
 			"ap-southeast-1": endpoints.Endpoint{
 				Hostname: "oidc.ap-southeast-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -66,6 +84,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "oidc.eu-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-central-1",
+				},
+			},
+			"eu-north-1": endpoints.Endpoint{
+				Hostname: "oidc.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
 				},
 			},
 			"eu-west-1": endpoints.Endpoint{

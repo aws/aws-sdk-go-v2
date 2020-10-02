@@ -41,7 +41,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"ap-east-1": endpoints.Endpoint{
@@ -109,6 +109,14 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"cn-north-1": endpoints.Endpoint{
+				Protocols: []string{"https"},
+			},
+			"cn-northwest-1": endpoints.Endpoint{
+				Protocols: []string{"https"},
+			},
+		},
 	},
 	{
 		ID: "aws-iso",
@@ -141,10 +149,18 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"us-gov-east-1": endpoints.Endpoint{
+				Hostname:  "serverlessrepo.us-gov-east-1.amazonaws.com",
 				Protocols: []string{"https"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
 			},
 			"us-gov-west-1": endpoints.Endpoint{
+				Hostname:  "serverlessrepo.us-gov-west-1.amazonaws.com",
 				Protocols: []string{"https"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
 			},
 		},
 	},

@@ -41,7 +41,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"s3v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"ap-northeast-1": endpoints.Endpoint{
@@ -81,6 +81,13 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			"ca-central-1": endpoints.Endpoint{
 				Hostname:          "s3-control.ca-central-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"ca-central-1-fips": endpoints.Endpoint{
+				Hostname:          "s3-control-fips.ca-central-1.amazonaws.com",
 				SignatureVersions: []string{"s3v4"},
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ca-central-1",

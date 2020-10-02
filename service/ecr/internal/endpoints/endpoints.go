@@ -41,9 +41,15 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1": endpoints.Endpoint{
+				Hostname: "api.ecr.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
 			"ap-east-1": endpoints.Endpoint{
 				Hostname: "api.ecr.ap-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -98,6 +104,12 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "eu-north-1",
 				},
 			},
+			"eu-south-1": endpoints.Endpoint{
+				Hostname: "api.ecr.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
 			"eu-west-1": endpoints.Endpoint{
 				Hostname: "api.ecr.eu-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -114,6 +126,54 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "api.ecr.eu-west-3.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-west-3",
+				},
+			},
+			"fips-dkr-us-east-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-dkr-us-east-2": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-dkr-us-west-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-dkr-us-west-2": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
 				},
 			},
 			"me-south-1": endpoints.Endpoint{
@@ -216,6 +276,30 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"fips-dkr-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			"fips-dkr-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "ecr-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 			"us-gov-east-1": endpoints.Endpoint{
 				Hostname: "api.ecr.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{

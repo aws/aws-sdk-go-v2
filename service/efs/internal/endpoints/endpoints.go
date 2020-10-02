@@ -41,9 +41,10 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
 			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
@@ -53,15 +54,136 @@ var defaultPartitions = endpoints.Partitions{
 			"ca-central-1":   endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
+			"eu-south-1":     endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
-			"me-south-1":     endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"fips-af-south-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			"fips-ap-east-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
+			"fips-ap-northeast-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			"fips-ap-northeast-2": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			"fips-ap-south-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
+			"fips-ap-southeast-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			"fips-ap-southeast-2": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
+			"fips-ca-central-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"fips-eu-central-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
+			"fips-eu-north-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			"fips-eu-south-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			"fips-eu-west-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
+			"fips-eu-west-2": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
+			"fips-eu-west-3": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
+			"fips-me-south-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.me-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
+			"fips-sa-east-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"sa-east-1":  endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
+			"us-east-2":  endpoints.Endpoint{},
+			"us-west-1":  endpoints.Endpoint{},
+			"us-west-2":  endpoints.Endpoint{},
 		},
 	},
 	{
@@ -73,6 +195,22 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"cn-north-1":     endpoints.Endpoint{},
+			"cn-northwest-1": endpoints.Endpoint{},
+			"fips-cn-north-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+			"fips-cn-northwest-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso",
@@ -104,6 +242,19 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-east-1": endpoints.Endpoint{},
 			"us-gov-west-1": endpoints.Endpoint{},
 		},
 	},
