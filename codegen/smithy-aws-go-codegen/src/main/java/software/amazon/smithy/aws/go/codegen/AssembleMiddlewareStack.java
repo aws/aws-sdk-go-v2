@@ -87,11 +87,11 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .build())
                         .build(),
 
-                // Add newAttempt middleware to operation stack
+                // Add retryer middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddRetryMiddlewares", AwsGoDependency.AWS_RETRY)
+                                        AwsRetryMiddlewareHelper.ADD_RETRY_MIDDLEWARES_HELPER)
                                         .build())
                                 .useClientOptions()
                                 .build())

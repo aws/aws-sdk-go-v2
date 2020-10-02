@@ -45,7 +45,7 @@ import software.amazon.smithy.utils.ListUtils;
  */
 final class EndpointGenerator implements Runnable {
     public static final String MIDDLEWARE_NAME = "ResolveEndpoint";
-    public static final String ADD_MIDDLEWARE_HELPER_NAME = String.format("Add%sMiddleware", MIDDLEWARE_NAME);
+    public static final String ADD_MIDDLEWARE_HELPER_NAME = String.format("add%sMiddleware", MIDDLEWARE_NAME);
     public static final String RESOLVER_INTERFACE_NAME = "EndpointResolver";
     public static final String RESOLVER_FUNC_NAME = "EndpointResolverFunc";
     public static final String RESOLVER_OPTIONS = "ResolverOptions";
@@ -192,32 +192,22 @@ final class EndpointGenerator implements Runnable {
 
         Symbol stackSymbol = SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE)
                 .build();
-        Symbol optionsSymbol = SymbolUtils.createValueSymbolBuilder(String.format("%sMiddlewareOptions",
-                MIDDLEWARE_NAME)).build();
-
-        // Generate Middleware options interface
-        writer.openBlock("type $T interface {", "}", optionsSymbol, () -> {
-            writer.write("GetEndpointResolver() $L", RESOLVER_INTERFACE_NAME);
-            writer.write("GetEndpointOptions() $L", RESOLVER_OPTIONS);
-        });
-        writer.write("");
 
         // Generate Middleware Adder Helper
-        writer.openBlock("func $L(stack $P, options $T) {", "}", ADD_MIDDLEWARE_HELPER_NAME, stackSymbol,
-                optionsSymbol, () -> {
-                    writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
-                    String closeBlock = String.format("}, \"%s\", middleware.Before)",
-                            ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID);
-                    writer.openBlock("stack.Serialize.Insert(&$T{", closeBlock,
-                            middleware.getMiddlewareSymbol(),
-                            () -> {
-                                writer.write("Resolver: options.GetEndpointResolver(),");
-                                writer.write("Options: options.GetEndpointOptions(),");
-                            });
-                });
+        writer.openBlock("func $L(stack $P, o Options) error {", "}", ADD_MIDDLEWARE_HELPER_NAME, stackSymbol, () -> {
+            writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
+            String closeBlock = String.format("}, \"%s\", middleware.Before)",
+                    ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID);
+            writer.openBlock("return stack.Serialize.Insert(&$T{", closeBlock,
+                    middleware.getMiddlewareSymbol(),
+                    () -> {
+                        writer.write("Resolver: o.EndpointResolver,");
+                        writer.write("Options: o.EndpointOptions,");
+                    });
+        });
         writer.write("");
         // Generate Middleware Remover Helper
-        writer.openBlock("func Remove$LMiddleware(stack $P) error {", "}", middleware.getMiddlewareSymbol(),
+        writer.openBlock("func remove$LMiddleware(stack $P) error {", "}", middleware.getMiddlewareSymbol(),
                 stackSymbol, () -> {
                     writer.write("return stack.Serialize.Remove((&$T{}).ID())", middleware.getMiddlewareSymbol());
                 });

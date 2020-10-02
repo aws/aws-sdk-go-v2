@@ -57,7 +57,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateOperationDocumentSerializer(GenerationContext context, OperationShape operation) {
         Model model = context.getModel();
-        HttpBindingIndex bindingIndex = model.getKnowledge(HttpBindingIndex.class);
+        HttpBindingIndex bindingIndex = HttpBindingIndex.of(model);
 
         Set<MemberShape> documentBindings = bindingIndex.getRequestBindings(operation, HttpBinding.Location.DOCUMENT)
                 .stream()
@@ -213,7 +213,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         if (isShapeWithResponseBindings(model, operation, HttpBinding.Location.PAYLOAD)) {
             // since payload trait can only be applied to a single member in a output shape
-            MemberShape memberShape = model.getKnowledge(HttpBindingIndex.class)
+            MemberShape memberShape = HttpBindingIndex.of(model)
                     .getResponseBindings(operation, HttpBinding.Location.PAYLOAD).stream()
                     .findFirst()
                     .orElseThrow(() -> new CodegenException("Expected payload binding member"))
@@ -239,7 +239,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             GenerationContext context, OperationShape operation
     ) {
         Model model = context.getModel();
-        HttpBindingIndex bindingIndex = model.getKnowledge(HttpBindingIndex.class);
+        HttpBindingIndex bindingIndex = HttpBindingIndex.of(model);
         Set<MemberShape> documentBindings = bindingIndex.getResponseBindings(operation, HttpBinding.Location.DOCUMENT)
                 .stream()
                 .map(HttpBinding::getMember)
