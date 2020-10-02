@@ -48,7 +48,9 @@ var timeNow = time.Now
 
 // Expired returns if the token is expired.
 func (t *apiToken) Expired() bool {
-	return timeNow().Truncate(0).After(t.expires)
+	// Calling Round(0) on the current time will truncate the monotonic reading only. Ensures credential expiry
+	// time is always based on reported wall-clock time.
+	return timeNow().Round(0).After(t.expires)
 }
 
 func (t *tokenProvider) ID() string { return "APITokenProvider" }
@@ -114,7 +116,6 @@ func (t *tokenProvider) HandleDeserialize(
 
 	if resp.StatusCode == http.StatusUnauthorized { // unauthorized
 		err = &retryableError{Err: err}
-		t.clearToken()
 		t.enable()
 	}
 
@@ -229,12 +230,8 @@ func (t *tokenProvider) disable() {
 // enable enables the token provide to start refreshing tokens, and adding them
 // to the pending request.
 func (t *tokenProvider) enable() {
-	atomic.StoreUint32(&t.disabled, 0)
-}
-
-// clearToken clears the current token present
-func (t *tokenProvider) clearToken() {
 	t.tokenMux.Lock()
-	defer t.tokenMux.Unlock()
 	t.token = nil
+	t.tokenMux.Unlock()
+	atomic.StoreUint32(&t.disabled, 0)
 }
