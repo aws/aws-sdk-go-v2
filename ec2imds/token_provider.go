@@ -112,8 +112,9 @@ func (t *tokenProvider) HandleDeserialize(
 		return out, metadata, fmt.Errorf("expect HTTP transport, got %T", out.RawResponse)
 	}
 
-	if resp.StatusCode == 401 { // unauthorized
+	if resp.StatusCode == http.StatusUnauthorized { // unauthorized
 		err = &retryableError{Err: err}
+		t.clearToken()
 		t.enable()
 	}
 
@@ -229,4 +230,11 @@ func (t *tokenProvider) disable() {
 // to the pending request.
 func (t *tokenProvider) enable() {
 	atomic.StoreUint32(&t.disabled, 0)
+}
+
+// clearToken clears the current token present
+func (t *tokenProvider) clearToken() {
+	t.tokenMux.Lock()
+	defer t.tokenMux.Unlock()
+	t.token = nil
 }
