@@ -22,7 +22,7 @@ func (e *ResponseError) ServiceRequestID() string { return e.RequestID }
 // Error returns the formatted error
 func (e *ResponseError) Error() string {
 	return fmt.Sprintf(
-		"https response error StatusCode: %d, RequsetID: %s, %v",
+		"https response error StatusCode: %d, RequestID: %s, %v",
 		e.Response.StatusCode, e.RequestID, e.Err)
 }
 

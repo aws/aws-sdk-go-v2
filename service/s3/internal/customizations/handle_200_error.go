@@ -58,13 +58,14 @@ func (m *processResponseFor200ErrorMiddleware) HandleDeserialize(
 		}
 	}
 
+	// rewind response body
+	response.Body = ioutil.NopCloser(io.MultiReader(&readBuff, response.Body))
+
 	// if start tag is "Error", the response is consider error response.
 	if strings.EqualFold(t.Name.Local, "Error") {
 		// according to https://aws.amazon.com/premiumsupport/knowledge-center/s3-resolve-200-internalerror/
 		// 200 error responses are similar to 5xx errors.
 		response.StatusCode = 500
-		// rewind response body
-		response.Body = ioutil.NopCloser(io.MultiReader(&readBuff, response.Body))
 	}
 
 	return out, metadata, err

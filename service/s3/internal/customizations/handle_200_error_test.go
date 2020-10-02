@@ -22,9 +22,10 @@ func (fn EndpointResolverFunc) ResolveEndpoint(region string, options s3.Resolve
 
 func TestErrorResponseWith200StatusCode(t *testing.T) {
 	cases := map[string]struct {
-		response      []byte
-		statusCode    int
-		expectedError string
+		response       []byte
+		statusCode     int
+		expectedError  string
+		expectedBucket string
 	}{
 		"200ErrorBody": {
 			response: []byte(`<Error><Type>Sender</Type>
@@ -48,6 +49,14 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
     <RequestId>foo-id`),
 			statusCode:    200,
 			expectedError: "unexpected EOF",
+		},
+		"200SuccessResponse": {
+			response: []byte(`<CompleteMultipartUploadResult>
+   			<Bucket>bucket</Bucket>
+			</CompleteMultipartUploadResult>`),
+			statusCode:     200,
+			expectedError:  "",
+			expectedBucket: "bucket",
 		},
 	}
 
@@ -73,19 +82,27 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 			}
 
 			svc := s3.New(options)
-			_, err := svc.CompleteMultipartUpload(context.Background(), &s3.CompleteMultipartUploadInput{
+			resp, err := svc.CompleteMultipartUpload(context.Background(), &s3.CompleteMultipartUploadInput{
 				UploadId:     aws.String("mockID"),
 				RequestPayer: types.RequestPayerRequester,
 				Bucket:       aws.String("bucket"),
 				Key:          aws.String("mockKey"),
 			})
 
-			if err == nil {
-				t.Fatalf("expected error, got none")
+			if len(c.expectedError) != 0 {
+				if err == nil {
+					t.Fatalf("expected error, got none")
+				}
+
+				if e, a := c.expectedError, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expected %v, got %v", e, a)
+				}
 			}
 
-			if e, a := c.expectedError, err.Error(); !strings.Contains(a, e) {
-				t.Fatalf("expected %v, got %v", e, a)
+			if len(c.expectedBucket) != 0 {
+				if e, a := c.expectedBucket, *resp.Bucket; !strings.EqualFold(e, a) {
+					t.Fatalf("expected bucket name to be %v, got %v", e, a)
+				}
 			}
 		})
 	}
