@@ -90,7 +90,7 @@ type Credentials struct {
 // Expired returns if the credentials have expired.
 func (v Credentials) Expired() bool {
 	if v.CanExpire {
-		return !v.Expires.After(sdk.NowTime())
+		return !v.Expires.After(sdk.NowTime().Truncate(0))
 	}
 
 	return false

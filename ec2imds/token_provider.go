@@ -48,7 +48,7 @@ var timeNow = time.Now
 
 // Expired returns if the token is expired.
 func (t *apiToken) Expired() bool {
-	return timeNow().After(t.expires)
+	return timeNow().Truncate(0).After(t.expires)
 }
 
 func (t *tokenProvider) ID() string { return "APITokenProvider" }
