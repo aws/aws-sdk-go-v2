@@ -7,6 +7,8 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	kinesiscust "github.com/aws/aws-sdk-go-v2/service/kinesis/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -84,6 +86,7 @@ func (c *Client) GetRecords(ctx context.Context, params *GetRecordsInput, optFns
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecords(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	awshttp.AddResponseReadTimeoutMiddleware(stack, kinesiscust.ReadTimeoutDuration)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

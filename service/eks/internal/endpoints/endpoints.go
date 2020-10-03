@@ -38,21 +38,65 @@ var defaultPartitions = endpoints.Partitions{
 		ID: "aws",
 		Defaults: endpoints.Endpoint{
 			Hostname:          "eks.{region}.amazonaws.com",
-			Protocols:         []string{"https"},
+			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
+			"ap-east-1":      endpoints.Endpoint{},
+			"ap-northeast-1": endpoints.Endpoint{},
+			"ap-northeast-2": endpoints.Endpoint{},
+			"ap-south-1":     endpoints.Endpoint{},
+			"ap-southeast-1": endpoints.Endpoint{},
+			"ap-southeast-2": endpoints.Endpoint{},
+			"ca-central-1":   endpoints.Endpoint{},
+			"eu-central-1":   endpoints.Endpoint{},
+			"eu-north-1":     endpoints.Endpoint{},
+			"eu-south-1":     endpoints.Endpoint{},
+			"eu-west-1":      endpoints.Endpoint{},
+			"eu-west-2":      endpoints.Endpoint{},
+			"eu-west-3":      endpoints.Endpoint{},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "fips.eks.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "fips.eks.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "fips.eks.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"sa-east-1":  endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
+			"us-east-2":  endpoints.Endpoint{},
+			"us-west-1":  endpoints.Endpoint{},
+			"us-west-2":  endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",
 		Defaults: endpoints.Endpoint{
 			Hostname:          "eks.{region}.amazonaws.com.cn",
-			Protocols:         []string{"https"},
+			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 		},
 		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"cn-north-1":     endpoints.Endpoint{},
+			"cn-northwest-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso",
@@ -78,10 +122,14 @@ var defaultPartitions = endpoints.Partitions{
 		ID: "aws-us-gov",
 		Defaults: endpoints.Endpoint{
 			Hostname:          "eks.{region}.amazonaws.com",
-			Protocols:         []string{"https"},
+			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

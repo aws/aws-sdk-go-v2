@@ -41,7 +41,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"ap-east-1":      endpoints.Endpoint{},
@@ -73,6 +73,10 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"cn-north-1":     endpoints.Endpoint{},
+			"cn-northwest-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso",
@@ -103,5 +107,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

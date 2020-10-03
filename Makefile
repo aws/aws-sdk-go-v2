@@ -27,6 +27,10 @@ SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 RUN_NONE=-run '^$$'
 RUN_INTEG=-run '^TestInteg_'
 
+CODEGEN_RESOURCES_PATH=$(shell pwd)/codegen/smithy-aws-go-codegen/src/main/resources/software/amazon/smithy/aws/go/codegen
+ENDPOINTS_JSON=${CODEGEN_RESOURCES_PATH}/endpoints.json
+ENDPOINT_PREFIX_JSON=${CODEGEN_RESOURCES_PATH}/endpoint-prefix.json
+
 LICENSE_FILE=$(shell pwd)/LICENSE.txt
 
 all: generate unit
@@ -73,6 +77,21 @@ add-module-license-files:
 	cd internal/repotools/cmd/eachmodule && \
     	go run . -skip-root \
             "cp $(LICENSE_FILE) ."
+
+sync-endpoint-models: clone-v1-models sync-endpoints.json gen-endpoint-prefix.json
+
+clone-v1-models:
+	rm -rf /tmp/aws-sdk-go-model-sync
+	git clone https://github.com/aws/aws-sdk-go.git --depth 1 /tmp/aws-sdk-go-model-sync
+
+sync-endpoints.json:
+	cp /tmp/aws-sdk-go-model-sync/models/endpoints/endpoints.json ${ENDPOINTS_JSON}
+
+gen-endpoint-prefix.json:
+	cd internal/repotools/cmd/endpointPrefix && \
+		go run . \
+			-m '/tmp/aws-sdk-go-model-sync/models/apis/*/*/api-2.json' \
+			-o ${ENDPOINT_PREFIX_JSON}
 
 
 ################

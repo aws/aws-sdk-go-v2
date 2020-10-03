@@ -41,9 +41,10 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
 			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
@@ -53,9 +54,16 @@ var defaultPartitions = endpoints.Partitions{
 			"ca-central-1":   endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
+			"eu-south-1":     endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
+			"fips-ca-central-1": endpoints.Endpoint{
+				Hostname: "datasync-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
 			"fips-us-east-1": endpoints.Endpoint{
 				Hostname: "datasync-fips.us-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -128,6 +136,12 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "datasync-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			"fips-us-gov-west-1": endpoints.Endpoint{
 				Hostname: "datasync-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{

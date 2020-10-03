@@ -41,25 +41,249 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"ap-northeast-1": endpoints.Endpoint{},
-			"ap-northeast-2": endpoints.Endpoint{},
-			"ap-south-1":     endpoints.Endpoint{},
-			"ap-southeast-1": endpoints.Endpoint{},
-			"ap-southeast-2": endpoints.Endpoint{},
-			"ca-central-1":   endpoints.Endpoint{},
-			"eu-central-1":   endpoints.Endpoint{},
-			"eu-north-1":     endpoints.Endpoint{},
-			"eu-west-1":      endpoints.Endpoint{},
-			"eu-west-2":      endpoints.Endpoint{},
-			"eu-west-3":      endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"af-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			"ap-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
+			"ap-northeast-1": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			"ap-northeast-2": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			"ap-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
+			"ap-southeast-1": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			"ap-southeast-2": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
+			"ca-central-1": endpoints.Endpoint{
+				Hostname: "waf-regional.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"eu-central-1": endpoints.Endpoint{
+				Hostname: "waf-regional.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
+			"eu-north-1": endpoints.Endpoint{
+				Hostname: "waf-regional.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			"eu-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			"eu-west-1": endpoints.Endpoint{
+				Hostname: "waf-regional.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
+			"eu-west-2": endpoints.Endpoint{
+				Hostname: "waf-regional.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
+			"eu-west-3": endpoints.Endpoint{
+				Hostname: "waf-regional.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
+			"fips-af-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			"fips-ap-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
+			"fips-ap-northeast-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
+			"fips-ap-northeast-2": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
+			"fips-ap-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
+			"fips-ap-southeast-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
+			"fips-ap-southeast-2": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
+			"fips-ca-central-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"fips-eu-central-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
+			"fips-eu-north-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			"fips-eu-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			"fips-eu-west-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
+			"fips-eu-west-2": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
+			"fips-eu-west-3": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
+			"fips-me-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.me-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
+			"fips-sa-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{
+				Hostname: "waf-regional.me-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
+			"sa-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
+			"us-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"us-east-2": endpoints.Endpoint{
+				Hostname: "waf-regional.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"us-west-1": endpoints.Endpoint{
+				Hostname: "waf-regional.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"us-west-2": endpoints.Endpoint{
+				Hostname: "waf-regional.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -102,7 +326,18 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"us-gov-west-1": endpoints.Endpoint{},
+			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-west-1": endpoints.Endpoint{
+				Hostname: "waf-regional.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

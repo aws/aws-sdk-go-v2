@@ -44,15 +44,41 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "mobiletargeting",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"ap-northeast-1": endpoints.Endpoint{},
+			"ap-northeast-2": endpoints.Endpoint{},
 			"ap-south-1":     endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
+			"ca-central-1":   endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"eu-west-2":      endpoints.Endpoint{},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "pinpoint-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "pinpoint-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"us-east-1": endpoints.Endpoint{
+				Hostname: "pinpoint.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"us-west-2": endpoints.Endpoint{
+				Hostname: "pinpoint.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -91,8 +117,20 @@ var defaultPartitions = endpoints.Partitions{
 			Hostname:          "pinpoint.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
+			CredentialScope: endpoints.CredentialScope{
+				Service: "mobiletargeting",
+			},
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "pinpoint.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

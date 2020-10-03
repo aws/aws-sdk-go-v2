@@ -41,10 +41,11 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"s3v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"ap-east-1": endpoints.Endpoint{},
+			"af-south-1": endpoints.Endpoint{},
+			"ap-east-1":  endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{
 				Hostname:          "s3.ap-northeast-1.amazonaws.com",
 				SignatureVersions: []string{"s3", "s3v4"},
@@ -59,9 +60,17 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "s3.ap-southeast-2.amazonaws.com",
 				SignatureVersions: []string{"s3", "s3v4"},
 			},
+			"aws-global": endpoints.Endpoint{
+				Hostname:          "s3.amazonaws.com",
+				SignatureVersions: []string{"s3", "s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"ca-central-1": endpoints.Endpoint{},
 			"eu-central-1": endpoints.Endpoint{},
 			"eu-north-1":   endpoints.Endpoint{},
+			"eu-south-1":   endpoints.Endpoint{},
 			"eu-west-1": endpoints.Endpoint{
 				Hostname:          "s3.eu-west-1.amazonaws.com",
 				SignatureVersions: []string{"s3", "s3v4"},
@@ -81,7 +90,7 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"s3", "s3v4"},
 			},
 			"us-east-1": endpoints.Endpoint{
-				Hostname:          "s3.amazonaws.com",
+				Hostname:          "s3.us-east-1.amazonaws.com",
 				SignatureVersions: []string{"s3", "s3v4"},
 			},
 			"us-east-2": endpoints.Endpoint{},
@@ -149,7 +158,7 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"fips-us-gov-west-1": endpoints.Endpoint{
-				Hostname: "s3-fips-us-gov-west-1.amazonaws.com",
+				Hostname: "s3-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},

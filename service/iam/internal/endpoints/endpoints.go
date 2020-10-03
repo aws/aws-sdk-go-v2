@@ -41,12 +41,18 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
+		RegionRegex:       regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-global",
 		Endpoints: endpoints.Endpoints{
 			"aws-global": endpoints.Endpoint{
 				Hostname: "iam.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"iam-fips": endpoints.Endpoint{
+				Hostname: "iam-fips.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -122,6 +128,12 @@ var defaultPartitions = endpoints.Partitions{
 		PartitionEndpoint: "aws-us-gov-global",
 		Endpoints: endpoints.Endpoints{
 			"aws-us-gov-global": endpoints.Endpoint{
+				Hostname: "iam.us-gov.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"iam-govcloud-fips": endpoints.Endpoint{
 				Hostname: "iam.us-gov.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
