@@ -33,6 +33,7 @@ func TestCustomErrorDeserialization(t *testing.T) {
 			expectedError:     "InvalidChangeBatch: ChangeBatch errors occurred",
 			expectedRequestID: "b25f48e8-84fd-11e6-80d9-574e0c4664cb",
 		},
+
 		"standardRestXMLError": {
 			responseStatus: 500,
 			responseBody: []byte(`<?xml version="1.0"?>
@@ -48,6 +49,7 @@ func TestCustomErrorDeserialization(t *testing.T) {
 			expectedError:     "1 validation error detected:",
 			expectedRequestID: "b25f48e8-84fd-11e6-80d9-574e0c4664cb",
 		},
+
 		"Success response": {
 			responseStatus: 200,
 			responseBody: []byte(`<?xml version="1.0" encoding="UTF-8"?>
@@ -97,12 +99,15 @@ func TestCustomErrorDeserialization(t *testing.T) {
 					t.Fatalf("expected error to be %s, got %s", e, a)
 				}
 
-				var awsResponseError responseError
-				if !errors.As(err, &awsResponseError) {
-					t.Fatalf("expected error to be of type %T, was not", awsResponseError)
+				var responseError interface {
+					ServiceRequestID() string
 				}
 
-				if e, a := c.expectedRequestID, awsResponseError.ServiceRequestID(); !strings.EqualFold(e, a) {
+				if !errors.As(err, &responseError) {
+					t.Fatalf("expected error to be of type %T, was not", responseError)
+				}
+
+				if e, a := c.expectedRequestID, responseError.ServiceRequestID(); !strings.EqualFold(e, a) {
 					t.Fatalf("expected request id to be %s, got %s", e, a)
 				}
 			}
@@ -115,8 +120,4 @@ func TestCustomErrorDeserialization(t *testing.T) {
 
 		})
 	}
-}
-
-type responseError interface {
-	ServiceRequestID() string
 }
