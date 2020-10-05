@@ -1,6 +1,7 @@
 // Package customizations provides customizations for the Amazon Route53 API client.
 //
 // This package provides support for following customizations
+//
 //  Process Response Middleware: used for custom error deserializing
 //
 //
@@ -11,16 +12,17 @@
 // ChangeResourceRecordSets operation of Route53.
 //
 // Here's a sample error response:
-//     <?xml version="1.0" encoding="UTF-8"?>
-//         <InvalidChangeBatch xmlns="https://route53.amazonaws.com/doc/2013-04-01/">
-//         <Messages>
-//             <Message>Tried to create resource record set duplicate.example.com. type A, but it already exists</Message>
-//         </Messages>
-//     </InvalidChangeBatch>
+//
+//  <?xml version="1.0" encoding="UTF-8"?>
+//  <InvalidChangeBatch xmlns="https://route53.amazonaws.com/doc/2013-04-01/">
+//      <Messages>
+//          <Message>Tried to create resource record set duplicate.example.com. type A, but it already exists</Message>
+//      </Messages>
+//  </InvalidChangeBatch>
 //
 //
 // The processResponse middleware customizations enables SDK to check for an error
-// response starting with `InvalidChangeBatch` tag prior to deserialization.
+// response starting with "InvalidChangeBatch" tag prior to deserialization.
 //
 // As this check in error response needs to be performed earlier than response
 // deserialization. Since the behavior of Deserialization is in
@@ -29,7 +31,7 @@
 //
 //  Middleware layering:
 //
-// 	HTTP Response -> process response error -> deserialize
+//  HTTP Response -> process response error -> deserialize
 //
 //
 // In case the returned error response has `InvalidChangeBatch` format, the error is
