@@ -1,5 +1,3 @@
-github.com/aws/aws-sdk-go-v2 v0.0.0-20201002220303-ffee47617303 h1:WvnHYDpFtCsvvaih/t1GB+kXFhcAtjQvxaMTfH7MyOE=
-github.com/aws/aws-sdk-go-v2 v0.0.0-20201002220303-ffee47617303/go.mod h1:KAhGbTQM7VGrReUuwuRBIp+SSiB01L/jdfvwjtCJtEo=
 github.com/awslabs/smithy-go v0.0.0-20200930175536-2cd7f70a8c2f/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.1.1 h1:v1hUSAYf3w2ClKr58C+AtwoyPVoBjWyWT8thf7/VRtU=
 github.com/awslabs/smithy-go v0.1.1/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
