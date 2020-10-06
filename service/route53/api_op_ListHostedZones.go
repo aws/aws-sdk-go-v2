@@ -38,6 +38,7 @@ func (c *Client) ListHostedZones(ctx context.Context, params *ListHostedZonesInp
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedZones(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

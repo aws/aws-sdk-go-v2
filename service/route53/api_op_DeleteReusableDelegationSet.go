@@ -40,6 +40,7 @@ func (c *Client) DeleteReusableDelegationSet(ctx context.Context, params *Delete
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReusableDelegationSet(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

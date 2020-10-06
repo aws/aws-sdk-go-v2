@@ -40,6 +40,7 @@ func (c *Client) GetHostedZoneLimit(ctx context.Context, params *GetHostedZoneLi
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetHostedZoneLimit(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
