@@ -22,4 +22,4 @@ software.amazon.smithy.aws.go.codegen.customization.MachineLearningCustomization
 software.amazon.smithy.aws.go.codegen.customization.S3AcceptEncodingGzip
 software.amazon.smithy.aws.go.codegen.customization.KinesisCustomizations
 software.amazon.smithy.aws.go.codegen.customization.S3ErrorWith200Status
-software.amazon.smithy.aws.go.codegen.customization.Route53ErrorCustomizations
+software.amazon.smithy.aws.go.codegen.customization.Route53Customizations

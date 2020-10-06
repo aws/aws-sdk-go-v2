@@ -49,6 +49,7 @@ func (c *Client) AssociateVPCWithHostedZone(ctx context.Context, params *Associa
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateVPCWithHostedZone(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

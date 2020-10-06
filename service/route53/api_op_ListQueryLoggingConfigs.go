@@ -40,6 +40,7 @@ func (c *Client) ListQueryLoggingConfigs(ctx context.Context, params *ListQueryL
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListQueryLoggingConfigs(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
