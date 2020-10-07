@@ -11,7 +11,9 @@ func wrapWithoutRedirect(c *http.Client) *http.Client {
 	}
 
 	cc := *c
-	cc.CheckRedirect = limitedRedirect
+	if cc.CheckRedirect == nil {
+		cc.CheckRedirect = limitedRedirect
+	}
 	cc.Transport = stubBadHTTPRedirectTransport{
 		tr: tr,
 	}
