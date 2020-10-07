@@ -9,9 +9,10 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/ec2"
 
 	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/ptr"
 )
 
 func Test_EmptyResponse(t *testing.T) {
@@ -48,18 +49,19 @@ func Test_EmptyResponse(t *testing.T) {
 				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					return aws.Endpoint{
 						URL:         server.URL,
-						SigningName: "s3",
+						SigningName: "ec2",
 					}, nil
 				}),
 				Retryer: aws.NoOpRetryer{},
 			}
 
-			client := s3.NewFromConfig(cfg, func(options *s3.Options) {
-				options.UsePathStyle = true
-			})
+			client := ec2.NewFromConfig(cfg)
 
-			params := &s3.HeadBucketInput{Bucket: aws.String("aws-sdk-go-data")}
-			_, err := client.HeadBucket(ctx, params)
+			params := &ec2.DeleteFleetsInput{
+				FleetIds:           ptr.StringSlice([]string{"mockid"}),
+				TerminateInstances: aws.Bool(true),
+			}
+			_, err := client.DeleteFleets(ctx, params)
 			if c.expectError {
 				var apiErr smithy.APIError
 				if !errors.As(err, &apiErr) {

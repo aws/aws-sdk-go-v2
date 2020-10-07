@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 
 	"github.com/awslabs/smithy-go"
 )
@@ -48,18 +48,19 @@ func Test_EmptyResponse(t *testing.T) {
 				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
 					return aws.Endpoint{
 						URL:         server.URL,
-						SigningName: "s3",
+						SigningName: "apigateway",
 					}, nil
 				}),
 				Retryer: aws.NoOpRetryer{},
 			}
 
-			client := s3.NewFromConfig(cfg, func(options *s3.Options) {
-				options.UsePathStyle = true
-			})
+			client := apigateway.NewFromConfig(cfg)
 
-			params := &s3.HeadBucketInput{Bucket: aws.String("aws-sdk-go-data")}
-			_, err := client.HeadBucket(ctx, params)
+			params := &apigateway.GetAccountInput{
+				Name:  aws.String("name"),
+				Title: aws.String("title"),
+			}
+			_, err := client.GetAccount(ctx, params)
 			if c.expectError {
 				var apiErr smithy.APIError
 				if !errors.As(err, &apiErr) {
