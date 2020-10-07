@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/fsx
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.0.0-20201001231852-1fc1ab173989
+	github.com/aws/aws-sdk-go-v2 v0.0.0-20201006075021-8b185f9d6dff
 	github.com/awslabs/smithy-go v0.1.1
 )
 

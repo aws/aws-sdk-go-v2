@@ -37,7 +37,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "forecastquery.{region}.amazonaws.com",
+			Hostname:          "forecast.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -59,7 +59,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-cn",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "forecastquery.{region}.amazonaws.com.cn",
+			Hostname:          "forecast.{region}.amazonaws.com.cn",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -69,7 +69,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "forecastquery.{region}.c2s.ic.gov",
+			Hostname:          "forecast.{region}.c2s.ic.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -79,7 +79,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso-b",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "forecastquery.{region}.sc2s.sgov.gov",
+			Hostname:          "forecast.{region}.sc2s.sgov.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -89,7 +89,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-us-gov",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "forecastquery.{region}.amazonaws.com",
+			Hostname:          "forecast.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
