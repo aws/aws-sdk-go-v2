@@ -17,7 +17,7 @@ type ErrorComponents struct {
 // GetErrorResponseComponents returns the error components from a ec2query error response body
 func GetErrorResponseComponents(r io.Reader) (ErrorComponents, error) {
 	var er ErrorComponents
-	if err := xml.NewDecoder(r).Decode(&er); err != nil {
+	if err := xml.NewDecoder(r).Decode(&er); err != nil && err != io.EOF {
 		return ErrorComponents{}, fmt.Errorf("error while fetching xml error response code: %w", err)
 	}
 	return er, nil

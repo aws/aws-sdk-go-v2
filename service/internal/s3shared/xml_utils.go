@@ -4,7 +4,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	"io/ioutil"
 )
 
 // ErrorComponents represents the error response fields
@@ -18,14 +17,9 @@ type ErrorComponents struct {
 
 // GetErrorResponseComponents returns the error fields from an xml error response body
 func GetErrorResponseComponents(r io.Reader) (ErrorComponents, error) {
-	rb, err := ioutil.ReadAll(r)
-	if err != nil {
-		return ErrorComponents{}, err
-	}
-
 	var errComponents ErrorComponents
-	if err := xml.Unmarshal(rb, &errComponents); err != nil {
-		return ErrorComponents{}, fmt.Errorf("error while deserializingg xml error response : %w", err)
+	if err := xml.NewDecoder(r).Decode(&errComponents); err != nil && err != io.EOF {
+		return ErrorComponents{}, fmt.Errorf("error while deserializing xml error response : %w", err)
 	}
-	return errComponents, err
+	return errComponents, nil
 }
