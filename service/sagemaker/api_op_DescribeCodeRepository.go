@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -15,41 +14,15 @@ import (
 
 // Gets details about the specified Git repository.
 func (c *Client) DescribeCodeRepository(ctx context.Context, params *DescribeCodeRepositoryInput, optFns ...func(*Options)) (*DescribeCodeRepositoryOutput, error) {
-	stack := middleware.NewStack("DescribeCodeRepository", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeCodeRepositoryInput{}
 	}
-	addawsAwsjson11_serdeOpDescribeCodeRepositoryMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDescribeCodeRepositoryValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCodeRepository(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeCodeRepository", params, optFns, addOperationDescribeCodeRepositoryMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeCodeRepository",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeCodeRepositoryOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -95,9 +68,30 @@ type DescribeCodeRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDescribeCodeRepositoryMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCodeRepository{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCodeRepository{}, middleware.After)
+func addOperationDescribeCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCodeRepository{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCodeRepository{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDescribeCodeRepositoryValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCodeRepository(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeCodeRepository(region string) awsmiddleware.RegisterServiceMetadata {

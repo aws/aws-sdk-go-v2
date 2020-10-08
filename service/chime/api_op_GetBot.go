@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Retrieves details for the specified bot, such as bot email address, bot type,
 // status, and display name.
 func (c *Client) GetBot(ctx context.Context, params *GetBotInput, optFns ...func(*Options)) (*GetBotOutput, error) {
-	stack := middleware.NewStack("GetBot", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetBotInput{}
 	}
-	addawsRestjson1_serdeOpGetBotMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetBotValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBot(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetBot", params, optFns, addOperationGetBotMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetBot",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetBotOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -77,9 +50,30 @@ type GetBotOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpGetBotMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpGetBot{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBot{}, middleware.After)
+func addOperationGetBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBot{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBot{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetBotValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetBot(region string) awsmiddleware.RegisterServiceMetadata {

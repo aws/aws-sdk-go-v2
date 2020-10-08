@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // to a user. The user's current access and Id tokens remain valid until their
 // expiry. Access and Id tokens expire one hour after they are issued.
 func (c *Client) GlobalSignOut(ctx context.Context, params *GlobalSignOutInput, optFns ...func(*Options)) (*GlobalSignOutOutput, error) {
-	stack := middleware.NewStack("GlobalSignOut", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GlobalSignOutInput{}
 	}
-	addawsAwsjson11_serdeOpGlobalSignOutMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGlobalSignOutValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGlobalSignOut(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GlobalSignOut", params, optFns, addOperationGlobalSignOutMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GlobalSignOut",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GlobalSignOutOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -70,9 +43,30 @@ type GlobalSignOutOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpGlobalSignOutMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpGlobalSignOut{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpGlobalSignOut{}, middleware.After)
+func addOperationGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGlobalSignOut{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGlobalSignOut{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGlobalSignOutValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGlobalSignOut(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGlobalSignOut(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -25,41 +24,15 @@ import (
 // s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
 // iam:GetRolePolicy.
 func (c *Client) StartSupportDataExport(ctx context.Context, params *StartSupportDataExportInput, optFns ...func(*Options)) (*StartSupportDataExportOutput, error) {
-	stack := middleware.NewStack("StartSupportDataExport", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartSupportDataExportInput{}
 	}
-	addawsAwsjson11_serdeOpStartSupportDataExportMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpStartSupportDataExportValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSupportDataExport(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartSupportDataExport", params, optFns, addOperationStartSupportDataExportMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartSupportDataExport",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartSupportDataExportOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -135,9 +108,30 @@ type StartSupportDataExportOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartSupportDataExportMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartSupportDataExport{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSupportDataExport{}, middleware.After)
+func addOperationStartSupportDataExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSupportDataExport{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSupportDataExport{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpStartSupportDataExportValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSupportDataExport(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStartSupportDataExport(region string) awsmiddleware.RegisterServiceMetadata {

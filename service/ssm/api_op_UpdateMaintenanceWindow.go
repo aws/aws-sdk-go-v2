@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,41 +18,15 @@ import (
 // duration is three hours, and the value you specify for Cutoff is one hour, no
 // maintenance window tasks can start after 5 PM.
 func (c *Client) UpdateMaintenanceWindow(ctx context.Context, params *UpdateMaintenanceWindowInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowOutput, error) {
-	stack := middleware.NewStack("UpdateMaintenanceWindow", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &UpdateMaintenanceWindowInput{}
 	}
-	addawsAwsjson11_serdeOpUpdateMaintenanceWindowMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpUpdateMaintenanceWindowValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMaintenanceWindow(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateMaintenanceWindow", params, optFns, addOperationUpdateMaintenanceWindowMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "UpdateMaintenanceWindow",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*UpdateMaintenanceWindowOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -171,9 +144,30 @@ type UpdateMaintenanceWindowOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpUpdateMaintenanceWindowMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaintenanceWindow{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMaintenanceWindow{}, middleware.After)
+func addOperationUpdateMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaintenanceWindow{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMaintenanceWindow{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpUpdateMaintenanceWindowValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMaintenanceWindow(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opUpdateMaintenanceWindow(region string) awsmiddleware.RegisterServiceMetadata {

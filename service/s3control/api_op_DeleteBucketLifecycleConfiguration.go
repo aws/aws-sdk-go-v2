@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -41,42 +40,15 @@ import (
 // href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html">GetBucketLifecycleConfiguration</a>
 // </p> </li> </ul>
 func (c *Client) DeleteBucketLifecycleConfiguration(ctx context.Context, params *DeleteBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*DeleteBucketLifecycleConfigurationOutput, error) {
-	stack := middleware.NewStack("DeleteBucketLifecycleConfiguration", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeleteBucketLifecycleConfigurationInput{}
 	}
-	addawsRestxml_serdeOpDeleteBucketLifecycleConfigurationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeleteBucketLifecycleConfigurationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketLifecycleConfiguration(options.Region), middleware.Before)
-	addMetadataRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketLifecycleConfiguration", params, optFns, addOperationDeleteBucketLifecycleConfigurationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeleteBucketLifecycleConfiguration",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeleteBucketLifecycleConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -105,9 +77,31 @@ type DeleteBucketLifecycleConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketLifecycleConfiguration{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpDeleteBucketLifecycleConfiguration{}, middleware.After)
+func addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketLifecycleConfiguration{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpDeleteBucketLifecycleConfiguration{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeleteBucketLifecycleConfigurationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketLifecycleConfiguration(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketLifecycleConfiguration(region string) awsmiddleware.RegisterServiceMetadata {

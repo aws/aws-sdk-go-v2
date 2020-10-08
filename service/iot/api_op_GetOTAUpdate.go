@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Gets an OTA update.
 func (c *Client) GetOTAUpdate(ctx context.Context, params *GetOTAUpdateInput, optFns ...func(*Options)) (*GetOTAUpdateOutput, error) {
-	stack := middleware.NewStack("GetOTAUpdate", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetOTAUpdateInput{}
 	}
-	addawsRestjson1_serdeOpGetOTAUpdateMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetOTAUpdateValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOTAUpdate(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetOTAUpdate", params, optFns, addOperationGetOTAUpdateMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetOTAUpdate",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetOTAUpdateOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -71,9 +44,30 @@ type GetOTAUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpGetOTAUpdateMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpGetOTAUpdate{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOTAUpdate{}, middleware.After)
+func addOperationGetOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOTAUpdate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOTAUpdate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetOTAUpdateValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOTAUpdate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetOTAUpdate(region string) awsmiddleware.RegisterServiceMetadata {

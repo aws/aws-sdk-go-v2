@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,40 +14,15 @@ import (
 // Gets information about environment members for an AWS Cloud9 development
 // environment.
 func (c *Client) DescribeEnvironmentMemberships(ctx context.Context, params *DescribeEnvironmentMembershipsInput, optFns ...func(*Options)) (*DescribeEnvironmentMembershipsOutput, error) {
-	stack := middleware.NewStack("DescribeEnvironmentMemberships", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeEnvironmentMembershipsInput{}
 	}
-	addawsAwsjson11_serdeOpDescribeEnvironmentMembershipsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentMemberships(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEnvironmentMemberships", params, optFns, addOperationDescribeEnvironmentMembershipsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeEnvironmentMemberships",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeEnvironmentMembershipsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -106,9 +80,29 @@ type DescribeEnvironmentMembershipsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentMemberships{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEnvironmentMemberships{}, middleware.After)
+func addOperationDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentMemberships{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEnvironmentMemberships{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentMemberships(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEnvironmentMemberships(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -15,41 +14,15 @@ import (
 
 // Creates a simulation application with a specific revision id.
 func (c *Client) CreateSimulationApplicationVersion(ctx context.Context, params *CreateSimulationApplicationVersionInput, optFns ...func(*Options)) (*CreateSimulationApplicationVersionOutput, error) {
-	stack := middleware.NewStack("CreateSimulationApplicationVersion", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateSimulationApplicationVersionInput{}
 	}
-	addawsRestjson1_serdeOpCreateSimulationApplicationVersionMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateSimulationApplicationVersionValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSimulationApplicationVersion(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSimulationApplicationVersion", params, optFns, addOperationCreateSimulationApplicationVersionMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateSimulationApplicationVersion",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateSimulationApplicationVersionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -101,9 +74,30 @@ type CreateSimulationApplicationVersionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpCreateSimulationApplicationVersionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpCreateSimulationApplicationVersion{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSimulationApplicationVersion{}, middleware.After)
+func addOperationCreateSimulationApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSimulationApplicationVersion{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSimulationApplicationVersion{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateSimulationApplicationVersionValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSimulationApplicationVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateSimulationApplicationVersion(region string) awsmiddleware.RegisterServiceMetadata {

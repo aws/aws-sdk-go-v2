@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -26,44 +25,15 @@ import (
 // related to <code>DeleteBucketAnalyticsConfiguration</code>:</p> <ul> <li> <p>
 // </p> </li> <li> <p> </p> </li> <li> <p> </p> </li> </ul>
 func (c *Client) DeleteBucketAnalyticsConfiguration(ctx context.Context, params *DeleteBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*DeleteBucketAnalyticsConfigurationOutput, error) {
-	stack := middleware.NewStack("DeleteBucketAnalyticsConfiguration", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeleteBucketAnalyticsConfigurationInput{}
 	}
-	addawsRestxml_serdeOpDeleteBucketAnalyticsConfigurationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeleteBucketAnalyticsConfigurationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketAnalyticsConfiguration(options.Region), middleware.Before)
-	addMetadataRetrieverMiddleware(stack)
-	addUpdateEndpointMiddleware(stack, options)
-	addResponseErrorMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
-	disableAcceptEncodingGzip(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteBucketAnalyticsConfiguration", params, optFns, addOperationDeleteBucketAnalyticsConfigurationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeleteBucketAnalyticsConfiguration",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeleteBucketAnalyticsConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -87,9 +57,33 @@ type DeleteBucketAnalyticsConfigurationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpDeleteBucketAnalyticsConfigurationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketAnalyticsConfiguration{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpDeleteBucketAnalyticsConfiguration{}, middleware.After)
+func addOperationDeleteBucketAnalyticsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpDeleteBucketAnalyticsConfiguration{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpDeleteBucketAnalyticsConfiguration{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeleteBucketAnalyticsConfigurationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketAnalyticsConfiguration(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
+	disableAcceptEncodingGzip(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketAnalyticsConfiguration(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Returns a description of the cluster operation specified by the ARN.
 func (c *Client) DescribeClusterOperation(ctx context.Context, params *DescribeClusterOperationInput, optFns ...func(*Options)) (*DescribeClusterOperationOutput, error) {
-	stack := middleware.NewStack("DescribeClusterOperation", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeClusterOperationInput{}
 	}
-	addawsRestjson1_serdeOpDescribeClusterOperationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDescribeClusterOperationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterOperation(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeClusterOperation", params, optFns, addOperationDescribeClusterOperationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeClusterOperation",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeClusterOperationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -72,9 +45,30 @@ type DescribeClusterOperationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpDescribeClusterOperationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClusterOperation{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClusterOperation{}, middleware.After)
+func addOperationDescribeClusterOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClusterOperation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClusterOperation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDescribeClusterOperationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterOperation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClusterOperation(region string) awsmiddleware.RegisterServiceMetadata {

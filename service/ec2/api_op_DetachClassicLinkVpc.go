@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // has been unlinked, the VPC security groups are no longer associated with it. An
 // instance is automatically unlinked from a VPC when it's stopped.
 func (c *Client) DetachClassicLinkVpc(ctx context.Context, params *DetachClassicLinkVpcInput, optFns ...func(*Options)) (*DetachClassicLinkVpcOutput, error) {
-	stack := middleware.NewStack("DetachClassicLinkVpc", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DetachClassicLinkVpcInput{}
 	}
-	addawsEc2query_serdeOpDetachClassicLinkVpcMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDetachClassicLinkVpcValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachClassicLinkVpc(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DetachClassicLinkVpc", params, optFns, addOperationDetachClassicLinkVpcMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DetachClassicLinkVpc",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DetachClassicLinkVpcOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -83,9 +56,30 @@ type DetachClassicLinkVpcOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpDetachClassicLinkVpcMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpDetachClassicLinkVpc{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpDetachClassicLinkVpc{}, middleware.After)
+func addOperationDetachClassicLinkVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDetachClassicLinkVpc{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDetachClassicLinkVpc{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDetachClassicLinkVpcValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachClassicLinkVpc(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDetachClassicLinkVpc(region string) awsmiddleware.RegisterServiceMetadata {

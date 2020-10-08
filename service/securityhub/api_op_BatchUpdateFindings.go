@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -43,41 +42,15 @@ import (
 // Member accounts can only use BatchUpdateFindings to update the Note
 // object.
 func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFindingsInput, optFns ...func(*Options)) (*BatchUpdateFindingsOutput, error) {
-	stack := middleware.NewStack("BatchUpdateFindings", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &BatchUpdateFindingsInput{}
 	}
-	addawsRestjson1_serdeOpBatchUpdateFindingsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpBatchUpdateFindingsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateFindings(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateFindings", params, optFns, addOperationBatchUpdateFindingsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "BatchUpdateFindings",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*BatchUpdateFindingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -171,9 +144,30 @@ type BatchUpdateFindingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpBatchUpdateFindingsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateFindings{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateFindings{}, middleware.After)
+func addOperationBatchUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateFindings{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateFindings{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpBatchUpdateFindingsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateFindings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opBatchUpdateFindings(region string) awsmiddleware.RegisterServiceMetadata {

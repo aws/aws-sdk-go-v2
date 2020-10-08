@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Describes the assessment targets that are specified by the ARNs of the
 // assessment targets.
 func (c *Client) DescribeAssessmentTargets(ctx context.Context, params *DescribeAssessmentTargetsInput, optFns ...func(*Options)) (*DescribeAssessmentTargetsOutput, error) {
-	stack := middleware.NewStack("DescribeAssessmentTargets", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeAssessmentTargetsInput{}
 	}
-	addawsAwsjson11_serdeOpDescribeAssessmentTargetsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDescribeAssessmentTargetsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssessmentTargets(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeAssessmentTargets", params, optFns, addOperationDescribeAssessmentTargetsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeAssessmentTargets",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeAssessmentTargetsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -80,9 +53,30 @@ type DescribeAssessmentTargetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDescribeAssessmentTargetsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssessmentTargets{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAssessmentTargets{}, middleware.After)
+func addOperationDescribeAssessmentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssessmentTargets{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAssessmentTargets{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDescribeAssessmentTargetsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssessmentTargets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAssessmentTargets(region string) awsmiddleware.RegisterServiceMetadata {

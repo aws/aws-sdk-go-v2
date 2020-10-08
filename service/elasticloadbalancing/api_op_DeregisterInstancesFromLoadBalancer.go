@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,41 +18,15 @@ import (
 // href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register
 // or De-Register EC2 Instances</a> in the <i>Classic Load Balancers Guide</i>.</p>
 func (c *Client) DeregisterInstancesFromLoadBalancer(ctx context.Context, params *DeregisterInstancesFromLoadBalancerInput, optFns ...func(*Options)) (*DeregisterInstancesFromLoadBalancerOutput, error) {
-	stack := middleware.NewStack("DeregisterInstancesFromLoadBalancer", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeregisterInstancesFromLoadBalancerInput{}
 	}
-	addawsAwsquery_serdeOpDeregisterInstancesFromLoadBalancerMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeregisterInstancesFromLoadBalancerValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterInstancesFromLoadBalancer(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterInstancesFromLoadBalancer", params, optFns, addOperationDeregisterInstancesFromLoadBalancerMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeregisterInstancesFromLoadBalancer",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeregisterInstancesFromLoadBalancerOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -83,9 +56,30 @@ type DeregisterInstancesFromLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpDeregisterInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
+func addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeregisterInstancesFromLoadBalancer{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeregisterInstancesFromLoadBalancerValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterInstancesFromLoadBalancer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeregisterInstancesFromLoadBalancer(region string) awsmiddleware.RegisterServiceMetadata {

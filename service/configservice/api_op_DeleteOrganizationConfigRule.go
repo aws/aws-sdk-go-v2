@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,41 +18,15 @@ import (
 // the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You
 // cannot update a rule while it is in this state.
 func (c *Client) DeleteOrganizationConfigRule(ctx context.Context, params *DeleteOrganizationConfigRuleInput, optFns ...func(*Options)) (*DeleteOrganizationConfigRuleOutput, error) {
-	stack := middleware.NewStack("DeleteOrganizationConfigRule", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeleteOrganizationConfigRuleInput{}
 	}
-	addawsAwsjson11_serdeOpDeleteOrganizationConfigRuleMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeleteOrganizationConfigRuleValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOrganizationConfigRule(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteOrganizationConfigRule", params, optFns, addOperationDeleteOrganizationConfigRuleMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeleteOrganizationConfigRule",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeleteOrganizationConfigRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -72,9 +45,30 @@ type DeleteOrganizationConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDeleteOrganizationConfigRuleMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOrganizationConfigRule{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteOrganizationConfigRule{}, middleware.After)
+func addOperationDeleteOrganizationConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOrganizationConfigRule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteOrganizationConfigRule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeleteOrganizationConfigRuleValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOrganizationConfigRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteOrganizationConfigRule(region string) awsmiddleware.RegisterServiceMetadata {

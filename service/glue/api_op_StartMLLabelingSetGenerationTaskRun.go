@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -24,41 +23,15 @@ import (
 // learning transform will use the new and improved labels and perform a
 // higher-quality transformation.</p>
 func (c *Client) StartMLLabelingSetGenerationTaskRun(ctx context.Context, params *StartMLLabelingSetGenerationTaskRunInput, optFns ...func(*Options)) (*StartMLLabelingSetGenerationTaskRunOutput, error) {
-	stack := middleware.NewStack("StartMLLabelingSetGenerationTaskRun", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartMLLabelingSetGenerationTaskRunInput{}
 	}
-	addawsAwsjson11_serdeOpStartMLLabelingSetGenerationTaskRunMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpStartMLLabelingSetGenerationTaskRunValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartMLLabelingSetGenerationTaskRun(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartMLLabelingSetGenerationTaskRun", params, optFns, addOperationStartMLLabelingSetGenerationTaskRunMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartMLLabelingSetGenerationTaskRun",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartMLLabelingSetGenerationTaskRunOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -87,9 +60,30 @@ type StartMLLabelingSetGenerationTaskRunOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
+func addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpStartMLLabelingSetGenerationTaskRunValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartMLLabelingSetGenerationTaskRun(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStartMLLabelingSetGenerationTaskRun(region string) awsmiddleware.RegisterServiceMetadata {

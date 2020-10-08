@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -15,41 +14,15 @@ import (
 // Describes an activity. This operation is eventually consistent. The results are
 // best effort and may not reflect very recent updates and changes.
 func (c *Client) DescribeActivity(ctx context.Context, params *DescribeActivityInput, optFns ...func(*Options)) (*DescribeActivityOutput, error) {
-	stack := middleware.NewStack("DescribeActivity", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeActivityInput{}
 	}
-	addawsAwsjson10_serdeOpDescribeActivityMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDescribeActivityValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeActivity(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeActivity", params, optFns, addOperationDescribeActivityMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeActivity",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeActivityOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -100,9 +73,30 @@ type DescribeActivityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson10_serdeOpDescribeActivityMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeActivity{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeActivity{}, middleware.After)
+func addOperationDescribeActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeActivity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeActivity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDescribeActivityValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeActivity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeActivity(region string) awsmiddleware.RegisterServiceMetadata {

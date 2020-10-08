@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -68,41 +67,15 @@ import (
 // see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF
 // Developer Guide</a>.</p>
 func (c *Client) CreateRateBasedRule(ctx context.Context, params *CreateRateBasedRuleInput, optFns ...func(*Options)) (*CreateRateBasedRuleOutput, error) {
-	stack := middleware.NewStack("CreateRateBasedRule", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateRateBasedRuleInput{}
 	}
-	addawsAwsjson11_serdeOpCreateRateBasedRuleMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateRateBasedRuleValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRateBasedRule(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRateBasedRule", params, optFns, addOperationCreateRateBasedRuleMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateRateBasedRule",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateRateBasedRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -166,9 +139,30 @@ type CreateRateBasedRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateRateBasedRuleMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRateBasedRule{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRateBasedRule{}, middleware.After)
+func addOperationCreateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRateBasedRule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRateBasedRule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateRateBasedRuleValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRateBasedRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateRateBasedRule(region string) awsmiddleware.RegisterServiceMetadata {

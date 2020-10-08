@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -35,41 +34,15 @@ import (
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
 func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdentityDkimAttributesInput, optFns ...func(*Options)) (*GetIdentityDkimAttributesOutput, error) {
-	stack := middleware.NewStack("GetIdentityDkimAttributes", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetIdentityDkimAttributesInput{}
 	}
-	addawsAwsquery_serdeOpGetIdentityDkimAttributesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetIdentityDkimAttributesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityDkimAttributes(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityDkimAttributes", params, optFns, addOperationGetIdentityDkimAttributesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetIdentityDkimAttributes",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetIdentityDkimAttributesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -104,9 +77,30 @@ type GetIdentityDkimAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpGetIdentityDkimAttributesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityDkimAttributes{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityDkimAttributes{}, middleware.After)
+func addOperationGetIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityDkimAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityDkimAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetIdentityDkimAttributesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityDkimAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetIdentityDkimAttributes(region string) awsmiddleware.RegisterServiceMetadata {

@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // operation, a verification email is sent to the specified address. You can
 // execute this operation no more than once per second.
 func (c *Client) VerifyEmailIdentity(ctx context.Context, params *VerifyEmailIdentityInput, optFns ...func(*Options)) (*VerifyEmailIdentityOutput, error) {
-	stack := middleware.NewStack("VerifyEmailIdentity", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &VerifyEmailIdentityInput{}
 	}
-	addawsAwsquery_serdeOpVerifyEmailIdentityMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpVerifyEmailIdentityValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyEmailIdentity(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "VerifyEmailIdentity", params, optFns, addOperationVerifyEmailIdentityMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "VerifyEmailIdentity",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*VerifyEmailIdentityOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -73,9 +46,30 @@ type VerifyEmailIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpVerifyEmailIdentityMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpVerifyEmailIdentity{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpVerifyEmailIdentity{}, middleware.After)
+func addOperationVerifyEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyEmailIdentity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpVerifyEmailIdentity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpVerifyEmailIdentityValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyEmailIdentity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opVerifyEmailIdentity(region string) awsmiddleware.RegisterServiceMetadata {

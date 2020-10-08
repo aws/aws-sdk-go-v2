@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // might allow anyone who assumes the role to perform all the actions granted in
 // its permissions policies.
 func (c *Client) DeleteRolePermissionsBoundary(ctx context.Context, params *DeleteRolePermissionsBoundaryInput, optFns ...func(*Options)) (*DeleteRolePermissionsBoundaryOutput, error) {
-	stack := middleware.NewStack("DeleteRolePermissionsBoundary", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeleteRolePermissionsBoundaryInput{}
 	}
-	addawsAwsquery_serdeOpDeleteRolePermissionsBoundaryMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeleteRolePermissionsBoundaryValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRolePermissionsBoundary(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteRolePermissionsBoundary", params, optFns, addOperationDeleteRolePermissionsBoundaryMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeleteRolePermissionsBoundary",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeleteRolePermissionsBoundaryOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -70,9 +43,30 @@ type DeleteRolePermissionsBoundaryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpDeleteRolePermissionsBoundaryMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpDeleteRolePermissionsBoundary{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteRolePermissionsBoundary{}, middleware.After)
+func addOperationDeleteRolePermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteRolePermissionsBoundary{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteRolePermissionsBoundary{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeleteRolePermissionsBoundaryValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRolePermissionsBoundary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteRolePermissionsBoundary(region string) awsmiddleware.RegisterServiceMetadata {

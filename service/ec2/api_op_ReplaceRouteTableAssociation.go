@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -21,41 +20,15 @@ import (
 // change which table is the main route table in the VPC. Specify the main route
 // table's association ID and the route table ID of the new main route table.
 func (c *Client) ReplaceRouteTableAssociation(ctx context.Context, params *ReplaceRouteTableAssociationInput, optFns ...func(*Options)) (*ReplaceRouteTableAssociationOutput, error) {
-	stack := middleware.NewStack("ReplaceRouteTableAssociation", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ReplaceRouteTableAssociationInput{}
 	}
-	addawsEc2query_serdeOpReplaceRouteTableAssociationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpReplaceRouteTableAssociationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceRouteTableAssociation(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ReplaceRouteTableAssociation", params, optFns, addOperationReplaceRouteTableAssociationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ReplaceRouteTableAssociation",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ReplaceRouteTableAssociationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -92,9 +65,30 @@ type ReplaceRouteTableAssociationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpReplaceRouteTableAssociationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpReplaceRouteTableAssociation{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpReplaceRouteTableAssociation{}, middleware.After)
+func addOperationReplaceRouteTableAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpReplaceRouteTableAssociation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpReplaceRouteTableAssociation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpReplaceRouteTableAssociationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceRouteTableAssociation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opReplaceRouteTableAssociation(region string) awsmiddleware.RegisterServiceMetadata {

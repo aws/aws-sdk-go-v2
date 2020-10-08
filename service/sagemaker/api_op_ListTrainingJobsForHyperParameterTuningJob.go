@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Gets a list of TrainingJobSummary () objects that describe the training jobs
 // that a hyperparameter tuning job launched.
 func (c *Client) ListTrainingJobsForHyperParameterTuningJob(ctx context.Context, params *ListTrainingJobsForHyperParameterTuningJobInput, optFns ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
-	stack := middleware.NewStack("ListTrainingJobsForHyperParameterTuningJob", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
 	}
-	addawsAwsjson11_serdeOpListTrainingJobsForHyperParameterTuningJobMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingJobsForHyperParameterTuningJob(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListTrainingJobsForHyperParameterTuningJob", params, optFns, addOperationListTrainingJobsForHyperParameterTuningJobMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListTrainingJobsForHyperParameterTuningJob",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListTrainingJobsForHyperParameterTuningJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -99,9 +72,30 @@ type ListTrainingJobsForHyperParameterTuningJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpListTrainingJobsForHyperParameterTuningJobMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpListTrainingJobsForHyperParameterTuningJob{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTrainingJobsForHyperParameterTuningJob{}, middleware.After)
+func addOperationListTrainingJobsForHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTrainingJobsForHyperParameterTuningJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTrainingJobsForHyperParameterTuningJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingJobsForHyperParameterTuningJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListTrainingJobsForHyperParameterTuningJob(region string) awsmiddleware.RegisterServiceMetadata {

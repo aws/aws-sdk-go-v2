@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,40 +16,15 @@ import (
 // time AWS Config failed to invoke the rule, and the related error for the last
 // failure.
 func (c *Client) DescribeConfigRuleEvaluationStatus(ctx context.Context, params *DescribeConfigRuleEvaluationStatusInput, optFns ...func(*Options)) (*DescribeConfigRuleEvaluationStatusOutput, error) {
-	stack := middleware.NewStack("DescribeConfigRuleEvaluationStatus", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeConfigRuleEvaluationStatusInput{}
 	}
-	addawsAwsjson11_serdeOpDescribeConfigRuleEvaluationStatusMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeConfigRuleEvaluationStatus", params, optFns, addOperationDescribeConfigRuleEvaluationStatusMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeConfigRuleEvaluationStatus",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeConfigRuleEvaluationStatusOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -90,9 +64,29 @@ type DescribeConfigRuleEvaluationStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDescribeConfigRuleEvaluationStatusMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
+func addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(region string) awsmiddleware.RegisterServiceMetadata {

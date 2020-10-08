@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Modifies lifecycle settings for an application.
 func (c *Client) UpdateApplicationResourceLifecycle(ctx context.Context, params *UpdateApplicationResourceLifecycleInput, optFns ...func(*Options)) (*UpdateApplicationResourceLifecycleOutput, error) {
-	stack := middleware.NewStack("UpdateApplicationResourceLifecycle", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &UpdateApplicationResourceLifecycleInput{}
 	}
-	addawsAwsquery_serdeOpUpdateApplicationResourceLifecycleMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpUpdateApplicationResourceLifecycleValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationResourceLifecycle(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateApplicationResourceLifecycle", params, optFns, addOperationUpdateApplicationResourceLifecycleMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "UpdateApplicationResourceLifecycle",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*UpdateApplicationResourceLifecycleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -79,9 +52,30 @@ type UpdateApplicationResourceLifecycleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpUpdateApplicationResourceLifecycleMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
+func addOperationUpdateApplicationResourceLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpUpdateApplicationResourceLifecycleValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationResourceLifecycle(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opUpdateApplicationResourceLifecycle(region string) awsmiddleware.RegisterServiceMetadata {

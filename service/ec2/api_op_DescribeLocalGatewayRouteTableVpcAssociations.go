@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,40 +14,15 @@ import (
 // Describes the specified associations between VPCs and local gateway route
 // tables.
 func (c *Client) DescribeLocalGatewayRouteTableVpcAssociations(ctx context.Context, params *DescribeLocalGatewayRouteTableVpcAssociationsInput, optFns ...func(*Options)) (*DescribeLocalGatewayRouteTableVpcAssociationsOutput, error) {
-	stack := middleware.NewStack("DescribeLocalGatewayRouteTableVpcAssociations", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DescribeLocalGatewayRouteTableVpcAssociationsInput{}
 	}
-	addawsEc2query_serdeOpDescribeLocalGatewayRouteTableVpcAssociationsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocalGatewayRouteTableVpcAssociations(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocalGatewayRouteTableVpcAssociations", params, optFns, addOperationDescribeLocalGatewayRouteTableVpcAssociationsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DescribeLocalGatewayRouteTableVpcAssociations",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DescribeLocalGatewayRouteTableVpcAssociationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -102,9 +76,29 @@ type DescribeLocalGatewayRouteTableVpcAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpDescribeLocalGatewayRouteTableVpcAssociationsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpDescribeLocalGatewayRouteTableVpcAssociations{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpDescribeLocalGatewayRouteTableVpcAssociations{}, middleware.After)
+func addOperationDescribeLocalGatewayRouteTableVpcAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDescribeLocalGatewayRouteTableVpcAssociations{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDescribeLocalGatewayRouteTableVpcAssociations{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocalGatewayRouteTableVpcAssociations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLocalGatewayRouteTableVpcAssociations(region string) awsmiddleware.RegisterServiceMetadata {

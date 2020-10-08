@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -20,41 +19,15 @@ import (
 // being passed. To add an admin, fetch the current list and add the new admin to
 // that list and pass that list in this API.</p>
 func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSettingsInput, optFns ...func(*Options)) (*PutDataLakeSettingsOutput, error) {
-	stack := middleware.NewStack("PutDataLakeSettings", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PutDataLakeSettingsInput{}
 	}
-	addawsAwsjson11_serdeOpPutDataLakeSettingsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPutDataLakeSettingsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDataLakeSettings(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "PutDataLakeSettings", params, optFns, addOperationPutDataLakeSettingsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "PutDataLakeSettings",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PutDataLakeSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -80,9 +53,30 @@ type PutDataLakeSettingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpPutDataLakeSettingsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataLakeSettings{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDataLakeSettings{}, middleware.After)
+func addOperationPutDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataLakeSettings{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDataLakeSettings{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpPutDataLakeSettingsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDataLakeSettings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPutDataLakeSettings(region string) awsmiddleware.RegisterServiceMetadata {

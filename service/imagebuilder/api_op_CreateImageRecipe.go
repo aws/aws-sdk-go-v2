@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,42 +15,15 @@ import (
 // Creates a new image recipe. Image recipes define how images are configured,
 // tested, and assessed.
 func (c *Client) CreateImageRecipe(ctx context.Context, params *CreateImageRecipeInput, optFns ...func(*Options)) (*CreateImageRecipeOutput, error) {
-	stack := middleware.NewStack("CreateImageRecipe", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateImageRecipeInput{}
 	}
-	addawsRestjson1_serdeOpCreateImageRecipeMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opCreateImageRecipeMiddleware(stack, options)
-	addOpCreateImageRecipeValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImageRecipe(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateImageRecipe", params, optFns, addOperationCreateImageRecipeMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateImageRecipe",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateImageRecipeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -120,9 +92,31 @@ type CreateImageRecipeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpCreateImageRecipeMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpCreateImageRecipe{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImageRecipe{}, middleware.After)
+func addOperationCreateImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImageRecipe{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImageRecipe{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opCreateImageRecipeMiddleware(stack, options)
+	addOpCreateImageRecipeValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImageRecipe(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpCreateImageRecipe struct {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,44 +17,15 @@ import (
 // <p> <a>CreateBucket</a> </p> </li> <li> <p> <a>PutBucketLogging</a> </p> </li>
 // </ul>
 func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingInput, optFns ...func(*Options)) (*GetBucketLoggingOutput, error) {
-	stack := middleware.NewStack("GetBucketLogging", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetBucketLoggingInput{}
 	}
-	addawsRestxml_serdeOpGetBucketLoggingMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetBucketLoggingValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketLogging(options.Region), middleware.Before)
-	addMetadataRetrieverMiddleware(stack)
-	addUpdateEndpointMiddleware(stack, options)
-	addResponseErrorMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
-	disableAcceptEncodingGzip(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetBucketLogging", params, optFns, addOperationGetBucketLoggingMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetBucketLogging",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetBucketLoggingOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -81,9 +51,33 @@ type GetBucketLoggingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpGetBucketLoggingMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpGetBucketLogging{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpGetBucketLogging{}, middleware.After)
+func addOperationGetBucketLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpGetBucketLogging{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpGetBucketLogging{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetBucketLoggingValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketLogging(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
+	disableAcceptEncodingGzip(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetBucketLogging(region string) awsmiddleware.RegisterServiceMetadata {

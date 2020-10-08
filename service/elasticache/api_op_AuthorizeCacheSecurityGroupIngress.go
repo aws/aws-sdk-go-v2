@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,41 +16,15 @@ import (
 // authorization mechanism. You cannot authorize ingress from an Amazon EC2
 // security group in one region to an ElastiCache cluster in another region.
 func (c *Client) AuthorizeCacheSecurityGroupIngress(ctx context.Context, params *AuthorizeCacheSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
-	stack := middleware.NewStack("AuthorizeCacheSecurityGroupIngress", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AuthorizeCacheSecurityGroupIngressInput{}
 	}
-	addawsAwsquery_serdeOpAuthorizeCacheSecurityGroupIngressMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAuthorizeCacheSecurityGroupIngressValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeCacheSecurityGroupIngress(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeCacheSecurityGroupIngress", params, optFns, addOperationAuthorizeCacheSecurityGroupIngressMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AuthorizeCacheSecurityGroupIngress",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AuthorizeCacheSecurityGroupIngressOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -96,9 +69,30 @@ type AuthorizeCacheSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpAuthorizeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
+func addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeCacheSecurityGroupIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAuthorizeCacheSecurityGroupIngressValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeCacheSecurityGroupIngress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAuthorizeCacheSecurityGroupIngress(region string) awsmiddleware.RegisterServiceMetadata {

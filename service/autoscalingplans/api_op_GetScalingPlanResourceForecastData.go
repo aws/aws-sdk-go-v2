@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -18,41 +17,15 @@ import (
 // historical data points from a specified CloudWatch load metric. Data points are
 // available for up to 56 days.  </p>
 func (c *Client) GetScalingPlanResourceForecastData(ctx context.Context, params *GetScalingPlanResourceForecastDataInput, optFns ...func(*Options)) (*GetScalingPlanResourceForecastDataOutput, error) {
-	stack := middleware.NewStack("GetScalingPlanResourceForecastData", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetScalingPlanResourceForecastDataInput{}
 	}
-	addawsAwsjson11_serdeOpGetScalingPlanResourceForecastDataMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetScalingPlanResourceForecastDataValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetScalingPlanResourceForecastData(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetScalingPlanResourceForecastData", params, optFns, addOperationGetScalingPlanResourceForecastDataMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetScalingPlanResourceForecastData",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetScalingPlanResourceForecastDataOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -157,9 +130,30 @@ type GetScalingPlanResourceForecastDataOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpGetScalingPlanResourceForecastDataMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpGetScalingPlanResourceForecastData{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData{}, middleware.After)
+func addOperationGetScalingPlanResourceForecastDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetScalingPlanResourceForecastData{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetScalingPlanResourceForecastDataValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetScalingPlanResourceForecastData(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetScalingPlanResourceForecastData(region string) awsmiddleware.RegisterServiceMetadata {

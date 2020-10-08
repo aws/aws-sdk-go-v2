@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Get the information about an invalidation.
 func (c *Client) GetInvalidation(ctx context.Context, params *GetInvalidationInput, optFns ...func(*Options)) (*GetInvalidationOutput, error) {
-	stack := middleware.NewStack("GetInvalidation", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetInvalidationInput{}
 	}
-	addawsRestxml_serdeOpGetInvalidationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetInvalidationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvalidation(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetInvalidation", params, optFns, addOperationGetInvalidationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetInvalidation",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetInvalidationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -80,9 +53,30 @@ type GetInvalidationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpGetInvalidationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpGetInvalidation{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpGetInvalidation{}, middleware.After)
+func addOperationGetInvalidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpGetInvalidation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpGetInvalidation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetInvalidationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvalidation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetInvalidation(region string) awsmiddleware.RegisterServiceMetadata {

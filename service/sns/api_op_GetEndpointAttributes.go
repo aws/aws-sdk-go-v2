@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // information, see Using Amazon SNS Mobile Push Notifications
 // (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 func (c *Client) GetEndpointAttributes(ctx context.Context, params *GetEndpointAttributesInput, optFns ...func(*Options)) (*GetEndpointAttributesOutput, error) {
-	stack := middleware.NewStack("GetEndpointAttributes", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetEndpointAttributesInput{}
 	}
-	addawsAwsquery_serdeOpGetEndpointAttributesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetEndpointAttributesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEndpointAttributes(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetEndpointAttributes", params, optFns, addOperationGetEndpointAttributesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetEndpointAttributes",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetEndpointAttributesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -90,9 +63,30 @@ type GetEndpointAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpGetEndpointAttributesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpGetEndpointAttributes{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpGetEndpointAttributes{}, middleware.After)
+func addOperationGetEndpointAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetEndpointAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetEndpointAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetEndpointAttributesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEndpointAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetEndpointAttributes(region string) awsmiddleware.RegisterServiceMetadata {

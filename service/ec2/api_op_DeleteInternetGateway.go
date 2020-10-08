@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -14,41 +13,15 @@ import (
 // Deletes the specified internet gateway. You must detach the internet gateway
 // from the VPC before you can delete it.
 func (c *Client) DeleteInternetGateway(ctx context.Context, params *DeleteInternetGatewayInput, optFns ...func(*Options)) (*DeleteInternetGatewayOutput, error) {
-	stack := middleware.NewStack("DeleteInternetGateway", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeleteInternetGatewayInput{}
 	}
-	addawsEc2query_serdeOpDeleteInternetGatewayMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeleteInternetGatewayValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInternetGateway(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInternetGateway", params, optFns, addOperationDeleteInternetGatewayMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeleteInternetGateway",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeleteInternetGatewayOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -73,9 +46,30 @@ type DeleteInternetGatewayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpDeleteInternetGatewayMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpDeleteInternetGateway{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpDeleteInternetGateway{}, middleware.After)
+func addOperationDeleteInternetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteInternetGateway{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDeleteInternetGateway{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeleteInternetGatewayValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInternetGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteInternetGateway(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,41 +17,15 @@ import (
 // pipeline, if the action requires access to that S3 bucket for input or output
 // artifacts.
 func (c *Client) PollForThirdPartyJobs(ctx context.Context, params *PollForThirdPartyJobsInput, optFns ...func(*Options)) (*PollForThirdPartyJobsOutput, error) {
-	stack := middleware.NewStack("PollForThirdPartyJobs", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PollForThirdPartyJobsInput{}
 	}
-	addawsAwsjson11_serdeOpPollForThirdPartyJobsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPollForThirdPartyJobsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPollForThirdPartyJobs(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "PollForThirdPartyJobs", params, optFns, addOperationPollForThirdPartyJobsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "PollForThirdPartyJobs",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PollForThirdPartyJobsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -80,9 +53,30 @@ type PollForThirdPartyJobsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpPollForThirdPartyJobsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpPollForThirdPartyJobs{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForThirdPartyJobs{}, middleware.After)
+func addOperationPollForThirdPartyJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForThirdPartyJobs{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForThirdPartyJobs{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpPollForThirdPartyJobsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPollForThirdPartyJobs(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPollForThirdPartyJobs(region string) awsmiddleware.RegisterServiceMetadata {

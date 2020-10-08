@@ -5,7 +5,6 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -13,38 +12,15 @@ import (
 // This examples serializes a blob shape in the payload. In this example, no JSON
 // document is synthesized because the payload is not a structure or a union type.
 func (c *Client) HttpPayloadTraits(ctx context.Context, params *HttpPayloadTraitsInput, optFns ...func(*Options)) (*HttpPayloadTraitsOutput, error) {
-	stack := middleware.NewStack("HttpPayloadTraits", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &HttpPayloadTraitsInput{}
 	}
-	addawsRestjson1_serdeOpHttpPayloadTraitsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraits(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "HttpPayloadTraits", params, optFns, addOperationHttpPayloadTraitsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "HttpPayloadTraits",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*HttpPayloadTraitsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -65,9 +41,27 @@ type HttpPayloadTraitsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpHttpPayloadTraitsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadTraits{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadTraits{}, middleware.After)
+func addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadTraits{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadTraits{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraits(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opHttpPayloadTraits(region string) awsmiddleware.RegisterServiceMetadata {

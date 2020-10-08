@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,44 +15,15 @@ import (
 // This operation lists the provisioned capacity units for the specified AWS
 // account.
 func (c *Client) ListProvisionedCapacity(ctx context.Context, params *ListProvisionedCapacityInput, optFns ...func(*Options)) (*ListProvisionedCapacityOutput, error) {
-	stack := middleware.NewStack("ListProvisionedCapacity", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListProvisionedCapacityInput{}
 	}
-	addawsRestjson1_serdeOpListProvisionedCapacityMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListProvisionedCapacityValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListProvisionedCapacity(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	glaciercust.AddTreeHashMiddleware(stack)
-	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
-	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListProvisionedCapacity", params, optFns, addOperationListProvisionedCapacityMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListProvisionedCapacity",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListProvisionedCapacityOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -79,9 +49,33 @@ type ListProvisionedCapacityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpListProvisionedCapacityMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedCapacity{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedCapacity{}, middleware.After)
+func addOperationListProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedCapacity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedCapacity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListProvisionedCapacityValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListProvisionedCapacity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	glaciercust.AddTreeHashMiddleware(stack)
+	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
+	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListProvisionedCapacity(region string) awsmiddleware.RegisterServiceMetadata {

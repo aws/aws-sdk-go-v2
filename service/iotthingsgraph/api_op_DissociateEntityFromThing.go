@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // type of the entity that you need to dissociate because only one entity of a
 // particular type can be associated with a thing.
 func (c *Client) DissociateEntityFromThing(ctx context.Context, params *DissociateEntityFromThingInput, optFns ...func(*Options)) (*DissociateEntityFromThingOutput, error) {
-	stack := middleware.NewStack("DissociateEntityFromThing", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DissociateEntityFromThingInput{}
 	}
-	addawsAwsjson11_serdeOpDissociateEntityFromThingMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDissociateEntityFromThingValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDissociateEntityFromThing(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DissociateEntityFromThing", params, optFns, addOperationDissociateEntityFromThingMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DissociateEntityFromThing",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DissociateEntityFromThingOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -74,9 +47,30 @@ type DissociateEntityFromThingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDissociateEntityFromThingMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDissociateEntityFromThing{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDissociateEntityFromThing{}, middleware.After)
+func addOperationDissociateEntityFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDissociateEntityFromThing{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDissociateEntityFromThing{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDissociateEntityFromThingValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDissociateEntityFromThing(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDissociateEntityFromThing(region string) awsmiddleware.RegisterServiceMetadata {

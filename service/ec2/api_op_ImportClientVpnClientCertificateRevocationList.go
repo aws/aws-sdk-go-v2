@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // client certificate revocation list. Uploading a client certificate revocation
 // list resets existing client connections.
 func (c *Client) ImportClientVpnClientCertificateRevocationList(ctx context.Context, params *ImportClientVpnClientCertificateRevocationListInput, optFns ...func(*Options)) (*ImportClientVpnClientCertificateRevocationListOutput, error) {
-	stack := middleware.NewStack("ImportClientVpnClientCertificateRevocationList", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ImportClientVpnClientCertificateRevocationListInput{}
 	}
-	addawsEc2query_serdeOpImportClientVpnClientCertificateRevocationListMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpImportClientVpnClientCertificateRevocationListValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opImportClientVpnClientCertificateRevocationList(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ImportClientVpnClientCertificateRevocationList", params, optFns, addOperationImportClientVpnClientCertificateRevocationListMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ImportClientVpnClientCertificateRevocationList",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ImportClientVpnClientCertificateRevocationListOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -88,9 +61,30 @@ type ImportClientVpnClientCertificateRevocationListOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpImportClientVpnClientCertificateRevocationListMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpImportClientVpnClientCertificateRevocationList{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpImportClientVpnClientCertificateRevocationList{}, middleware.After)
+func addOperationImportClientVpnClientCertificateRevocationListMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpImportClientVpnClientCertificateRevocationList{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpImportClientVpnClientCertificateRevocationList{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpImportClientVpnClientCertificateRevocationListValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opImportClientVpnClientCertificateRevocationList(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opImportClientVpnClientCertificateRevocationList(region string) awsmiddleware.RegisterServiceMetadata {

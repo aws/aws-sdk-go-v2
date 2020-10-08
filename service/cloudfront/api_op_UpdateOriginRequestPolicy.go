@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -28,41 +27,15 @@ import (
 // request policy configuration, including the fields that you modified and those
 // that you didn’t.
 func (c *Client) UpdateOriginRequestPolicy(ctx context.Context, params *UpdateOriginRequestPolicyInput, optFns ...func(*Options)) (*UpdateOriginRequestPolicyOutput, error) {
-	stack := middleware.NewStack("UpdateOriginRequestPolicy", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &UpdateOriginRequestPolicyInput{}
 	}
-	addawsRestxml_serdeOpUpdateOriginRequestPolicyMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpUpdateOriginRequestPolicyValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOriginRequestPolicy(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateOriginRequestPolicy", params, optFns, addOperationUpdateOriginRequestPolicyMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "UpdateOriginRequestPolicy",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*UpdateOriginRequestPolicyOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -100,9 +73,30 @@ type UpdateOriginRequestPolicyOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpUpdateOriginRequestPolicyMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpUpdateOriginRequestPolicy{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpUpdateOriginRequestPolicy{}, middleware.After)
+func addOperationUpdateOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpUpdateOriginRequestPolicy{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpUpdateOriginRequestPolicy{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpUpdateOriginRequestPolicyValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOriginRequestPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opUpdateOriginRequestPolicy(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Create a new streaming distribution with tags.
 func (c *Client) CreateStreamingDistributionWithTags(ctx context.Context, params *CreateStreamingDistributionWithTagsInput, optFns ...func(*Options)) (*CreateStreamingDistributionWithTagsOutput, error) {
-	stack := middleware.NewStack("CreateStreamingDistributionWithTags", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateStreamingDistributionWithTagsInput{}
 	}
-	addawsRestxml_serdeOpCreateStreamingDistributionWithTagsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateStreamingDistributionWithTagsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamingDistributionWithTags(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStreamingDistributionWithTags", params, optFns, addOperationCreateStreamingDistributionWithTagsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateStreamingDistributionWithTags",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateStreamingDistributionWithTagsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -79,9 +52,30 @@ type CreateStreamingDistributionWithTagsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpCreateStreamingDistributionWithTagsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpCreateStreamingDistributionWithTags{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpCreateStreamingDistributionWithTags{}, middleware.After)
+func addOperationCreateStreamingDistributionWithTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateStreamingDistributionWithTags{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpCreateStreamingDistributionWithTags{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateStreamingDistributionWithTagsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamingDistributionWithTags(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateStreamingDistributionWithTags(region string) awsmiddleware.RegisterServiceMetadata {

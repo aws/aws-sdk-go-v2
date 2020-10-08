@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,41 +18,15 @@ import (
 // the SSL Certificate for Your Load Balancer</a> in the <i>Classic Load Balancers
 // Guide</i>.</p>
 func (c *Client) SetLoadBalancerListenerSSLCertificate(ctx context.Context, params *SetLoadBalancerListenerSSLCertificateInput, optFns ...func(*Options)) (*SetLoadBalancerListenerSSLCertificateOutput, error) {
-	stack := middleware.NewStack("SetLoadBalancerListenerSSLCertificate", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &SetLoadBalancerListenerSSLCertificateInput{}
 	}
-	addawsAwsquery_serdeOpSetLoadBalancerListenerSSLCertificateMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpSetLoadBalancerListenerSSLCertificateValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opSetLoadBalancerListenerSSLCertificate(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "SetLoadBalancerListenerSSLCertificate", params, optFns, addOperationSetLoadBalancerListenerSSLCertificateMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "SetLoadBalancerListenerSSLCertificate",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*SetLoadBalancerListenerSSLCertificateOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -84,9 +57,30 @@ type SetLoadBalancerListenerSSLCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpSetLoadBalancerListenerSSLCertificateMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpSetLoadBalancerListenerSSLCertificate{}, middleware.After)
+func addOperationSetLoadBalancerListenerSSLCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetLoadBalancerListenerSSLCertificate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpSetLoadBalancerListenerSSLCertificateValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opSetLoadBalancerListenerSSLCertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opSetLoadBalancerListenerSSLCertificate(region string) awsmiddleware.RegisterServiceMetadata {

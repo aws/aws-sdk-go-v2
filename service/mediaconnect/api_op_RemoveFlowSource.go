@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -14,41 +13,15 @@ import (
 // Removes a source from an existing flow. This request can be made only if there
 // is more than one source on the flow.
 func (c *Client) RemoveFlowSource(ctx context.Context, params *RemoveFlowSourceInput, optFns ...func(*Options)) (*RemoveFlowSourceOutput, error) {
-	stack := middleware.NewStack("RemoveFlowSource", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RemoveFlowSourceInput{}
 	}
-	addawsRestjson1_serdeOpRemoveFlowSourceMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRemoveFlowSourceValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFlowSource(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowSource", params, optFns, addOperationRemoveFlowSourceMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RemoveFlowSource",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RemoveFlowSourceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -79,9 +52,30 @@ type RemoveFlowSourceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpRemoveFlowSourceMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowSource{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowSource{}, middleware.After)
+func addOperationRemoveFlowSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowSource{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowSource{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRemoveFlowSourceValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFlowSource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRemoveFlowSource(region string) awsmiddleware.RegisterServiceMetadata {

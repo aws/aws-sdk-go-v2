@@ -5,7 +5,6 @@ package cognitoidentity
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,39 +15,15 @@ import (
 // for 10 minutes. This is a public API. You do not need any credentials to call
 // this API.
 func (c *Client) GetOpenIdToken(ctx context.Context, params *GetOpenIdTokenInput, optFns ...func(*Options)) (*GetOpenIdTokenOutput, error) {
-	stack := middleware.NewStack("GetOpenIdToken", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetOpenIdTokenInput{}
 	}
-	addawsAwsjson11_serdeOpGetOpenIdTokenMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetOpenIdTokenValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOpenIdToken(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetOpenIdToken", params, optFns, addOperationGetOpenIdTokenMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetOpenIdToken",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetOpenIdTokenOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -84,9 +59,28 @@ type GetOpenIdTokenOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpGetOpenIdTokenMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpenIdToken{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOpenIdToken{}, middleware.After)
+func addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpenIdToken{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOpenIdToken{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetOpenIdTokenValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOpenIdToken(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetOpenIdToken(region string) awsmiddleware.RegisterServiceMetadata {

@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -130,45 +129,15 @@ import (
 // href="https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html">Copying
 // Objects</a>.</p>
 func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns ...func(*Options)) (*CopyObjectOutput, error) {
-	stack := middleware.NewStack("CopyObject", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CopyObjectInput{}
 	}
-	addawsRestxml_serdeOpCopyObjectMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCopyObjectValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyObject(options.Region), middleware.Before)
-	addMetadataRetrieverMiddleware(stack)
-	addUpdateEndpointMiddleware(stack, options)
-	addResponseErrorMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
-	disableAcceptEncodingGzip(stack)
-	s3cust.HandleResponseErrorWith200Status(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CopyObject", params, optFns, addOperationCopyObjectMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CopyObject",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CopyObjectOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -374,9 +343,34 @@ type CopyObjectOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpCopyObjectMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpCopyObject{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpCopyObject{}, middleware.After)
+func addOperationCopyObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpCopyObject{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpCopyObject{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCopyObjectValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyObject(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
+	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
+	disableAcceptEncodingGzip(stack)
+	s3cust.HandleResponseErrorWith200Status(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCopyObject(region string) awsmiddleware.RegisterServiceMetadata {

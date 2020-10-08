@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,42 +17,15 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html) in the
 // Amazon Simple Storage Service Developer Guide.
 func (c *Client) GetAccessPointPolicyStatus(ctx context.Context, params *GetAccessPointPolicyStatusInput, optFns ...func(*Options)) (*GetAccessPointPolicyStatusOutput, error) {
-	stack := middleware.NewStack("GetAccessPointPolicyStatus", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetAccessPointPolicyStatusInput{}
 	}
-	addawsRestxml_serdeOpGetAccessPointPolicyStatusMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetAccessPointPolicyStatusValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccessPointPolicyStatus(options.Region), middleware.Before)
-	addMetadataRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccessPointPolicyStatus", params, optFns, addOperationGetAccessPointPolicyStatusMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetAccessPointPolicyStatus",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetAccessPointPolicyStatusOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -81,9 +53,31 @@ type GetAccessPointPolicyStatusOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPointPolicyStatus{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpGetAccessPointPolicyStatus{}, middleware.After)
+func addOperationGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpGetAccessPointPolicyStatus{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpGetAccessPointPolicyStatus{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetAccessPointPolicyStatusValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccessPointPolicyStatus(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetAccessPointPolicyStatus(region string) awsmiddleware.RegisterServiceMetadata {

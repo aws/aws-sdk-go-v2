@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -28,41 +27,15 @@ import (
 // <a>RemoveTagsFromCertificate</a> action. To view all of the tags that have been
 // applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>
 func (c *Client) AddTagsToCertificate(ctx context.Context, params *AddTagsToCertificateInput, optFns ...func(*Options)) (*AddTagsToCertificateOutput, error) {
-	stack := middleware.NewStack("AddTagsToCertificate", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AddTagsToCertificateInput{}
 	}
-	addawsAwsjson11_serdeOpAddTagsToCertificateMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAddTagsToCertificateValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAddTagsToCertificate(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AddTagsToCertificate", params, optFns, addOperationAddTagsToCertificateMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AddTagsToCertificate",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AddTagsToCertificateOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -91,9 +64,30 @@ type AddTagsToCertificateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpAddTagsToCertificateMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpAddTagsToCertificate{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddTagsToCertificate{}, middleware.After)
+func addOperationAddTagsToCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddTagsToCertificate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddTagsToCertificate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAddTagsToCertificateValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAddTagsToCertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAddTagsToCertificate(region string) awsmiddleware.RegisterServiceMetadata {

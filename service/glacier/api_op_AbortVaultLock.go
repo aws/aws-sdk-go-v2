@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -28,44 +27,15 @@ import (
 // multiple times, if the vault lock is in the InProgress state or if there is no
 // policy associated with the vault.
 func (c *Client) AbortVaultLock(ctx context.Context, params *AbortVaultLockInput, optFns ...func(*Options)) (*AbortVaultLockOutput, error) {
-	stack := middleware.NewStack("AbortVaultLock", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AbortVaultLockInput{}
 	}
-	addawsRestjson1_serdeOpAbortVaultLockMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAbortVaultLockValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAbortVaultLock(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	glaciercust.AddTreeHashMiddleware(stack)
-	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
-	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AbortVaultLock", params, optFns, addOperationAbortVaultLockMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AbortVaultLock",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AbortVaultLockOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -95,9 +65,33 @@ type AbortVaultLockOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpAbortVaultLockMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpAbortVaultLock{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpAbortVaultLock{}, middleware.After)
+func addOperationAbortVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAbortVaultLock{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAbortVaultLock{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAbortVaultLockValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAbortVaultLock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	glaciercust.AddTreeHashMiddleware(stack)
+	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
+	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAbortVaultLock(region string) awsmiddleware.RegisterServiceMetadata {

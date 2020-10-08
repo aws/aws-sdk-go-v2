@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sts/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -110,39 +109,15 @@ import (
 // a Role for SAML 2.0 Federation</a> in the <i>IAM User Guide</i>. </p> </li>
 // </ul>
 func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeRoleWithSAMLOutput, error) {
-	stack := middleware.NewStack("AssumeRoleWithSAML", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AssumeRoleWithSAMLInput{}
 	}
-	addawsAwsquery_serdeOpAssumeRoleWithSAMLMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAssumeRoleWithSAMLValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeRoleWithSAML(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AssumeRoleWithSAML", params, optFns, addOperationAssumeRoleWithSAMLMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AssumeRoleWithSAML",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AssumeRoleWithSAMLOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -287,9 +262,28 @@ type AssumeRoleWithSAMLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpAssumeRoleWithSAMLMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpAssumeRoleWithSAML{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpAssumeRoleWithSAML{}, middleware.After)
+func addOperationAssumeRoleWithSAMLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpAssumeRoleWithSAML{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAssumeRoleWithSAML{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAssumeRoleWithSAMLValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeRoleWithSAML(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAssumeRoleWithSAML(region string) awsmiddleware.RegisterServiceMetadata {

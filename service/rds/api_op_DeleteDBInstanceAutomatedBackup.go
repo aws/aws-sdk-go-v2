@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Deletes automated backups based on the source instance's DbiResourceId value or
 // the restorable instance's resource ID.
 func (c *Client) DeleteDBInstanceAutomatedBackup(ctx context.Context, params *DeleteDBInstanceAutomatedBackupInput, optFns ...func(*Options)) (*DeleteDBInstanceAutomatedBackupOutput, error) {
-	stack := middleware.NewStack("DeleteDBInstanceAutomatedBackup", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DeleteDBInstanceAutomatedBackupInput{}
 	}
-	addawsAwsquery_serdeOpDeleteDBInstanceAutomatedBackupMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDeleteDBInstanceAutomatedBackupValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBInstanceAutomatedBackup(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDBInstanceAutomatedBackup", params, optFns, addOperationDeleteDBInstanceAutomatedBackupMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DeleteDBInstanceAutomatedBackup",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DeleteDBInstanceAutomatedBackupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -76,9 +49,30 @@ type DeleteDBInstanceAutomatedBackupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
+func addOperationDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBInstanceAutomatedBackup{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDeleteDBInstanceAutomatedBackupValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBInstanceAutomatedBackup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteDBInstanceAutomatedBackup(region string) awsmiddleware.RegisterServiceMetadata {

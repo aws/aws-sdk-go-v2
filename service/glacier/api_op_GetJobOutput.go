@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -52,43 +51,15 @@ import (
 // href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html">Get
 // Job Output </a> </p>
 func (c *Client) GetJobOutput(ctx context.Context, params *GetJobOutputInput, optFns ...func(*Options)) (*GetJobOutputOutput, error) {
-	stack := middleware.NewStack("GetJobOutput", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetJobOutputInput{}
 	}
-	addawsRestjson1_serdeOpGetJobOutputMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	addOpGetJobOutputValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobOutput(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	glaciercust.AddTreeHashMiddleware(stack)
-	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
-	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetJobOutput", params, optFns, addOperationGetJobOutputMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetJobOutput",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetJobOutputOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -189,9 +160,32 @@ type GetJobOutputOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpGetJobOutputMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpGetJobOutput{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJobOutput{}, middleware.After)
+func addOperationGetJobOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJobOutput{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJobOutput{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	addOpGetJobOutputValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobOutput(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	glaciercust.AddTreeHashMiddleware(stack)
+	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
+	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetJobOutput(region string) awsmiddleware.RegisterServiceMetadata {

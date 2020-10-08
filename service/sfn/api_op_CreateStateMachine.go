@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -29,41 +28,15 @@ import (
 // request of the previous. In this case, roleArn and tags will not be updated,
 // even if they are different.
 func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMachineInput, optFns ...func(*Options)) (*CreateStateMachineOutput, error) {
-	stack := middleware.NewStack("CreateStateMachine", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateStateMachineInput{}
 	}
-	addawsAwsjson10_serdeOpCreateStateMachineMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateStateMachineValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStateMachine(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStateMachine", params, optFns, addOperationCreateStateMachineMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateStateMachine",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateStateMachineOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -142,9 +115,30 @@ type CreateStateMachineOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson10_serdeOpCreateStateMachineMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStateMachine{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStateMachine{}, middleware.After)
+func addOperationCreateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStateMachine{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStateMachine{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateStateMachineValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStateMachine(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateStateMachine(region string) awsmiddleware.RegisterServiceMetadata {

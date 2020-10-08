@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,44 +17,15 @@ import (
 // operation is idempotent. The operation will be successful, even if there are no
 // tags attached to the vault.
 func (c *Client) RemoveTagsFromVault(ctx context.Context, params *RemoveTagsFromVaultInput, optFns ...func(*Options)) (*RemoveTagsFromVaultOutput, error) {
-	stack := middleware.NewStack("RemoveTagsFromVault", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RemoveTagsFromVaultInput{}
 	}
-	addawsRestjson1_serdeOpRemoveTagsFromVaultMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRemoveTagsFromVaultValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTagsFromVault(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	glaciercust.AddTreeHashMiddleware(stack)
-	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
-	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveTagsFromVault", params, optFns, addOperationRemoveTagsFromVaultMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RemoveTagsFromVault",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RemoveTagsFromVaultOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -87,9 +57,33 @@ type RemoveTagsFromVaultOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpRemoveTagsFromVaultMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpRemoveTagsFromVault{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveTagsFromVault{}, middleware.After)
+func addOperationRemoveTagsFromVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveTagsFromVault{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveTagsFromVault{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRemoveTagsFromVaultValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTagsFromVault(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	glaciercust.AddTreeHashMiddleware(stack)
+	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
+	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRemoveTagsFromVault(region string) awsmiddleware.RegisterServiceMetadata {

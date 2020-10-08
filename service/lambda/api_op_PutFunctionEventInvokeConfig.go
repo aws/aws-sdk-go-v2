@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -30,41 +29,15 @@ import (
 // and events that fail all processing attempts (on-failure). You can configure
 // destinations in addition to or instead of a dead-letter queue.
 func (c *Client) PutFunctionEventInvokeConfig(ctx context.Context, params *PutFunctionEventInvokeConfigInput, optFns ...func(*Options)) (*PutFunctionEventInvokeConfigOutput, error) {
-	stack := middleware.NewStack("PutFunctionEventInvokeConfig", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PutFunctionEventInvokeConfigInput{}
 	}
-	addawsRestjson1_serdeOpPutFunctionEventInvokeConfigMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPutFunctionEventInvokeConfigValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPutFunctionEventInvokeConfig(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "PutFunctionEventInvokeConfig", params, optFns, addOperationPutFunctionEventInvokeConfigMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "PutFunctionEventInvokeConfig",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PutFunctionEventInvokeConfigOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -146,9 +119,30 @@ type PutFunctionEventInvokeConfigOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpPutFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionEventInvokeConfig{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFunctionEventInvokeConfig{}, middleware.After)
+func addOperationPutFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionEventInvokeConfig{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFunctionEventInvokeConfig{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpPutFunctionEventInvokeConfigValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPutFunctionEventInvokeConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPutFunctionEventInvokeConfig(region string) awsmiddleware.RegisterServiceMetadata {

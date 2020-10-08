@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -39,41 +38,15 @@ import (
 // accepter and the requester for a VPC peering connection, use the
 // DescribeVpcPeeringConnections () command.
 func (c *Client) ModifyVpcPeeringConnectionOptions(ctx context.Context, params *ModifyVpcPeeringConnectionOptionsInput, optFns ...func(*Options)) (*ModifyVpcPeeringConnectionOptionsOutput, error) {
-	stack := middleware.NewStack("ModifyVpcPeeringConnectionOptions", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ModifyVpcPeeringConnectionOptionsInput{}
 	}
-	addawsEc2query_serdeOpModifyVpcPeeringConnectionOptionsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpModifyVpcPeeringConnectionOptionsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpcPeeringConnectionOptions(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyVpcPeeringConnectionOptions", params, optFns, addOperationModifyVpcPeeringConnectionOptionsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ModifyVpcPeeringConnectionOptions",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ModifyVpcPeeringConnectionOptionsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -111,9 +84,30 @@ type ModifyVpcPeeringConnectionOptionsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpModifyVpcPeeringConnectionOptionsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpModifyVpcPeeringConnectionOptions{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpModifyVpcPeeringConnectionOptions{}, middleware.After)
+func addOperationModifyVpcPeeringConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyVpcPeeringConnectionOptions{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpModifyVpcPeeringConnectionOptions{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpModifyVpcPeeringConnectionOptionsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpcPeeringConnectionOptions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opModifyVpcPeeringConnectionOptions(region string) awsmiddleware.RegisterServiceMetadata {

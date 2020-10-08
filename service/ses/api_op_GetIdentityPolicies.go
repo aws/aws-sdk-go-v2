@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -21,41 +20,15 @@ import (
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 // You can execute this operation no more than once per second.
 func (c *Client) GetIdentityPolicies(ctx context.Context, params *GetIdentityPoliciesInput, optFns ...func(*Options)) (*GetIdentityPoliciesOutput, error) {
-	stack := middleware.NewStack("GetIdentityPolicies", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetIdentityPoliciesInput{}
 	}
-	addawsAwsquery_serdeOpGetIdentityPoliciesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetIdentityPoliciesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPolicies(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetIdentityPolicies", params, optFns, addOperationGetIdentityPoliciesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetIdentityPolicies",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetIdentityPoliciesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -97,9 +70,30 @@ type GetIdentityPoliciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpGetIdentityPoliciesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityPolicies{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityPolicies{}, middleware.After)
+func addOperationGetIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetIdentityPolicies{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetIdentityPolicies{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetIdentityPoliciesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPolicies(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetIdentityPolicies(region string) awsmiddleware.RegisterServiceMetadata {

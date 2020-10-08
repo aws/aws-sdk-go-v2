@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -43,42 +42,15 @@ import (
 // zones that don't have overlapping name servers, then migrate the hosted zones
 // again to use the reusable delegation set.</p> </li> </ul>
 func (c *Client) CreateReusableDelegationSet(ctx context.Context, params *CreateReusableDelegationSetInput, optFns ...func(*Options)) (*CreateReusableDelegationSetOutput, error) {
-	stack := middleware.NewStack("CreateReusableDelegationSet", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateReusableDelegationSetInput{}
 	}
-	addawsRestxml_serdeOpCreateReusableDelegationSetMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateReusableDelegationSetValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReusableDelegationSet(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	addSanitizeURLMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateReusableDelegationSet", params, optFns, addOperationCreateReusableDelegationSetMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateReusableDelegationSet",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateReusableDelegationSetOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -116,9 +88,31 @@ type CreateReusableDelegationSetOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpCreateReusableDelegationSetMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpCreateReusableDelegationSet{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpCreateReusableDelegationSet{}, middleware.After)
+func addOperationCreateReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpCreateReusableDelegationSet{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpCreateReusableDelegationSet{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateReusableDelegationSetValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReusableDelegationSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateReusableDelegationSet(region string) awsmiddleware.RegisterServiceMetadata {

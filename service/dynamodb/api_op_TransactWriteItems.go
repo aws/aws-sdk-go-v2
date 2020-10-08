@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -54,44 +53,15 @@ import (
 // MB.</p> </li> <li> <p>There is a user error, such as an invalid data format.</p>
 // </li> </ul>
 func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteItemsInput, optFns ...func(*Options)) (*TransactWriteItemsOutput, error) {
-	stack := middleware.NewStack("TransactWriteItems", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &TransactWriteItemsInput{}
 	}
-	addawsAwsjson10_serdeOpTransactWriteItemsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options)
-	addOpTransactWriteItemsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactWriteItems(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	addValidateResponseChecksum(stack, options)
-	addAcceptEncodingGzip(stack, options)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "TransactWriteItems", params, optFns, addOperationTransactWriteItemsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "TransactWriteItems",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*TransactWriteItemsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -164,9 +134,33 @@ type TransactWriteItemsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson10_serdeOpTransactWriteItemsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson10_serializeOpTransactWriteItems{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson10_deserializeOpTransactWriteItems{}, middleware.After)
+func addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTransactWriteItems{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTransactWriteItems{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options)
+	addOpTransactWriteItemsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactWriteItems(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
+	return nil
 }
 
 type idempotencyToken_initializeOpTransactWriteItems struct {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // indicate which AWS resources were evaluated by the rule, when each resource was
 // last evaluated, and whether each resource complies with the rule.
 func (c *Client) GetComplianceDetailsByConfigRule(ctx context.Context, params *GetComplianceDetailsByConfigRuleInput, optFns ...func(*Options)) (*GetComplianceDetailsByConfigRuleOutput, error) {
-	stack := middleware.NewStack("GetComplianceDetailsByConfigRule", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetComplianceDetailsByConfigRuleInput{}
 	}
-	addawsAwsjson11_serdeOpGetComplianceDetailsByConfigRuleMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetComplianceDetailsByConfigRuleValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceDetailsByConfigRule(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetComplianceDetailsByConfigRule", params, optFns, addOperationGetComplianceDetailsByConfigRuleMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetComplianceDetailsByConfigRule",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetComplianceDetailsByConfigRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -92,9 +65,30 @@ type GetComplianceDetailsByConfigRuleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpGetComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
+func addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetComplianceDetailsByConfigRuleValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceDetailsByConfigRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetComplianceDetailsByConfigRule(region string) awsmiddleware.RegisterServiceMetadata {

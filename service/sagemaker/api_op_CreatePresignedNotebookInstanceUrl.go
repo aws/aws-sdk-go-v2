@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -30,41 +29,15 @@ import (
 // valid only for 5 minutes. If you try to use the URL after the 5-minute limit
 // expires, you are directed to the AWS console sign-in page.
 func (c *Client) CreatePresignedNotebookInstanceUrl(ctx context.Context, params *CreatePresignedNotebookInstanceUrlInput, optFns ...func(*Options)) (*CreatePresignedNotebookInstanceUrlOutput, error) {
-	stack := middleware.NewStack("CreatePresignedNotebookInstanceUrl", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreatePresignedNotebookInstanceUrlInput{}
 	}
-	addawsAwsjson11_serdeOpCreatePresignedNotebookInstanceUrlMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreatePresignedNotebookInstanceUrlValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedNotebookInstanceUrl(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePresignedNotebookInstanceUrl", params, optFns, addOperationCreatePresignedNotebookInstanceUrlMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreatePresignedNotebookInstanceUrl",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreatePresignedNotebookInstanceUrlOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -90,9 +63,30 @@ type CreatePresignedNotebookInstanceUrlOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreatePresignedNotebookInstanceUrlMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
+func addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreatePresignedNotebookInstanceUrlValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedNotebookInstanceUrl(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreatePresignedNotebookInstanceUrl(region string) awsmiddleware.RegisterServiceMetadata {

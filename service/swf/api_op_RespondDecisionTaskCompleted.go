@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -28,41 +27,15 @@ import (
 // IAM to Manage Access to Amazon SWF Workflows</a> in the <i>Amazon SWF Developer
 // Guide</i>.</p>
 func (c *Client) RespondDecisionTaskCompleted(ctx context.Context, params *RespondDecisionTaskCompletedInput, optFns ...func(*Options)) (*RespondDecisionTaskCompletedOutput, error) {
-	stack := middleware.NewStack("RespondDecisionTaskCompleted", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RespondDecisionTaskCompletedInput{}
 	}
-	addawsAwsjson10_serdeOpRespondDecisionTaskCompletedMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRespondDecisionTaskCompletedValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRespondDecisionTaskCompleted(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RespondDecisionTaskCompleted", params, optFns, addOperationRespondDecisionTaskCompletedMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RespondDecisionTaskCompleted",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RespondDecisionTaskCompletedOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -92,9 +65,30 @@ type RespondDecisionTaskCompletedOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson10_serdeOpRespondDecisionTaskCompletedMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson10_serializeOpRespondDecisionTaskCompleted{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson10_deserializeOpRespondDecisionTaskCompleted{}, middleware.After)
+func addOperationRespondDecisionTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondDecisionTaskCompleted{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRespondDecisionTaskCompleted{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRespondDecisionTaskCompletedValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRespondDecisionTaskCompleted(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRespondDecisionTaskCompleted(region string) awsmiddleware.RegisterServiceMetadata {

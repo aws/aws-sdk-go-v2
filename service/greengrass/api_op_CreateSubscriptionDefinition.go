@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a
 // later time.
 func (c *Client) CreateSubscriptionDefinition(ctx context.Context, params *CreateSubscriptionDefinitionInput, optFns ...func(*Options)) (*CreateSubscriptionDefinitionOutput, error) {
-	stack := middleware.NewStack("CreateSubscriptionDefinition", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateSubscriptionDefinitionInput{}
 	}
-	addawsRestjson1_serdeOpCreateSubscriptionDefinitionMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateSubscriptionDefinitionValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriptionDefinition(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSubscriptionDefinition", params, optFns, addOperationCreateSubscriptionDefinitionMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateSubscriptionDefinition",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateSubscriptionDefinitionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -98,9 +71,30 @@ type CreateSubscriptionDefinitionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpCreateSubscriptionDefinitionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriptionDefinition{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriptionDefinition{}, middleware.After)
+func addOperationCreateSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriptionDefinition{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriptionDefinition{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateSubscriptionDefinitionValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriptionDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateSubscriptionDefinition(region string) awsmiddleware.RegisterServiceMetadata {

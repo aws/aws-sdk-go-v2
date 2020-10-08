@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // template. The exclusions preview lists the potential exclusions
 // (ExclusionPreview) that Inspector can detect before it runs the assessment.
 func (c *Client) CreateExclusionsPreview(ctx context.Context, params *CreateExclusionsPreviewInput, optFns ...func(*Options)) (*CreateExclusionsPreviewOutput, error) {
-	stack := middleware.NewStack("CreateExclusionsPreview", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateExclusionsPreviewInput{}
 	}
-	addawsAwsjson11_serdeOpCreateExclusionsPreviewMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateExclusionsPreviewValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExclusionsPreview(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateExclusionsPreview", params, optFns, addOperationCreateExclusionsPreviewMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateExclusionsPreview",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateExclusionsPreviewOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -77,9 +50,30 @@ type CreateExclusionsPreviewOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateExclusionsPreviewMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExclusionsPreview{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExclusionsPreview{}, middleware.After)
+func addOperationCreateExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExclusionsPreview{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExclusionsPreview{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateExclusionsPreviewValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExclusionsPreview(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateExclusionsPreview(region string) awsmiddleware.RegisterServiceMetadata {

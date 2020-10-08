@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,42 +15,15 @@ import (
 // Disassociates a group (batch) of assets from an AWS IoT SiteWise Monitor
 // project.
 func (c *Client) BatchDisassociateProjectAssets(ctx context.Context, params *BatchDisassociateProjectAssetsInput, optFns ...func(*Options)) (*BatchDisassociateProjectAssetsOutput, error) {
-	stack := middleware.NewStack("BatchDisassociateProjectAssets", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &BatchDisassociateProjectAssetsInput{}
 	}
-	addawsRestjson1_serdeOpBatchDisassociateProjectAssetsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opBatchDisassociateProjectAssetsMiddleware(stack, options)
-	addOpBatchDisassociateProjectAssetsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateProjectAssets(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDisassociateProjectAssets", params, optFns, addOperationBatchDisassociateProjectAssetsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "BatchDisassociateProjectAssets",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*BatchDisassociateProjectAssetsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -84,9 +56,31 @@ type BatchDisassociateProjectAssetsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpBatchDisassociateProjectAssetsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateProjectAssets{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateProjectAssets{}, middleware.After)
+func addOperationBatchDisassociateProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateProjectAssets{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateProjectAssets{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opBatchDisassociateProjectAssetsMiddleware(stack, options)
+	addOpBatchDisassociateProjectAssetsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateProjectAssets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpBatchDisassociateProjectAssets struct {

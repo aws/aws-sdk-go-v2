@@ -7,48 +7,20 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDocumentationPartsInput, optFns ...func(*Options)) (*ImportDocumentationPartsOutput, error) {
-	stack := middleware.NewStack("ImportDocumentationParts", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ImportDocumentationPartsInput{}
 	}
-	addawsRestjson1_serdeOpImportDocumentationPartsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpImportDocumentationPartsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opImportDocumentationParts(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	addAcceptHeader(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ImportDocumentationParts", params, optFns, addOperationImportDocumentationPartsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ImportDocumentationParts",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ImportDocumentationPartsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -99,9 +71,31 @@ type ImportDocumentationPartsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpImportDocumentationPartsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpImportDocumentationParts{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpImportDocumentationParts{}, middleware.After)
+func addOperationImportDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportDocumentationParts{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportDocumentationParts{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpImportDocumentationPartsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opImportDocumentationParts(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	addAcceptHeader(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opImportDocumentationParts(region string) awsmiddleware.RegisterServiceMetadata {

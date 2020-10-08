@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -15,41 +14,15 @@ import (
 
 // Gets a list of labeling jobs assigned to a specified work team.
 func (c *Client) ListLabelingJobsForWorkteam(ctx context.Context, params *ListLabelingJobsForWorkteamInput, optFns ...func(*Options)) (*ListLabelingJobsForWorkteamOutput, error) {
-	stack := middleware.NewStack("ListLabelingJobsForWorkteam", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListLabelingJobsForWorkteamInput{}
 	}
-	addawsAwsjson11_serdeOpListLabelingJobsForWorkteamMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListLabelingJobsForWorkteamValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListLabelingJobsForWorkteam(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListLabelingJobsForWorkteam", params, optFns, addOperationListLabelingJobsForWorkteamMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListLabelingJobsForWorkteam",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListLabelingJobsForWorkteamOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -105,9 +78,30 @@ type ListLabelingJobsForWorkteamOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpListLabelingJobsForWorkteamMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpListLabelingJobsForWorkteam{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLabelingJobsForWorkteam{}, middleware.After)
+func addOperationListLabelingJobsForWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLabelingJobsForWorkteam{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLabelingJobsForWorkteam{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListLabelingJobsForWorkteamValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListLabelingJobsForWorkteam(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListLabelingJobsForWorkteam(region string) awsmiddleware.RegisterServiceMetadata {

@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -26,42 +25,15 @@ import (
 // the Export Prefix
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix).
 func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDataRepositoryTaskInput, optFns ...func(*Options)) (*CreateDataRepositoryTaskOutput, error) {
-	stack := middleware.NewStack("CreateDataRepositoryTask", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateDataRepositoryTaskInput{}
 	}
-	addawsAwsjson11_serdeOpCreateDataRepositoryTaskMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opCreateDataRepositoryTaskMiddleware(stack, options)
-	addOpCreateDataRepositoryTaskValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataRepositoryTask(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataRepositoryTask", params, optFns, addOperationCreateDataRepositoryTaskMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateDataRepositoryTask",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateDataRepositoryTaskOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -114,9 +86,31 @@ type CreateDataRepositoryTaskOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateDataRepositoryTaskMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataRepositoryTask{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataRepositoryTask{}, middleware.After)
+func addOperationCreateDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataRepositoryTask{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataRepositoryTask{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opCreateDataRepositoryTaskMiddleware(stack, options)
+	addOpCreateDataRepositoryTaskValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataRepositoryTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpCreateDataRepositoryTask struct {

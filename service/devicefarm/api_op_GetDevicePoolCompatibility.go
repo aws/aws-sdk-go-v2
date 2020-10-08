@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Gets information about compatibility with a device pool.
 func (c *Client) GetDevicePoolCompatibility(ctx context.Context, params *GetDevicePoolCompatibilityInput, optFns ...func(*Options)) (*GetDevicePoolCompatibilityOutput, error) {
-	stack := middleware.NewStack("GetDevicePoolCompatibility", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetDevicePoolCompatibilityInput{}
 	}
-	addawsAwsjson11_serdeOpGetDevicePoolCompatibilityMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetDevicePoolCompatibilityValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevicePoolCompatibility(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetDevicePoolCompatibility", params, optFns, addOperationGetDevicePoolCompatibilityMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetDevicePoolCompatibility",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetDevicePoolCompatibilityOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -132,9 +105,30 @@ type GetDevicePoolCompatibilityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpGetDevicePoolCompatibilityMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevicePoolCompatibility{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDevicePoolCompatibility{}, middleware.After)
+func addOperationGetDevicePoolCompatibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevicePoolCompatibility{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDevicePoolCompatibility{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetDevicePoolCompatibilityValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevicePoolCompatibility(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetDevicePoolCompatibility(region string) awsmiddleware.RegisterServiceMetadata {

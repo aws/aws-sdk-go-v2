@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Revokes ingress from a cache security group. Use this operation to disallow
 // access from an Amazon EC2 security group that had been previously authorized.
 func (c *Client) RevokeCacheSecurityGroupIngress(ctx context.Context, params *RevokeCacheSecurityGroupIngressInput, optFns ...func(*Options)) (*RevokeCacheSecurityGroupIngressOutput, error) {
-	stack := middleware.NewStack("RevokeCacheSecurityGroupIngress", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RevokeCacheSecurityGroupIngressInput{}
 	}
-	addawsAwsquery_serdeOpRevokeCacheSecurityGroupIngressMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRevokeCacheSecurityGroupIngressValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeCacheSecurityGroupIngress(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RevokeCacheSecurityGroupIngress", params, optFns, addOperationRevokeCacheSecurityGroupIngressMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RevokeCacheSecurityGroupIngress",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RevokeCacheSecurityGroupIngressOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -93,9 +66,30 @@ type RevokeCacheSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpRevokeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpRevokeCacheSecurityGroupIngress{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpRevokeCacheSecurityGroupIngress{}, middleware.After)
+func addOperationRevokeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeCacheSecurityGroupIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRevokeCacheSecurityGroupIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRevokeCacheSecurityGroupIngressValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeCacheSecurityGroupIngress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRevokeCacheSecurityGroupIngress(region string) awsmiddleware.RegisterServiceMetadata {

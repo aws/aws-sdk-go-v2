@@ -6,48 +6,21 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Used to enable or disable DKIM authentication for an email identity.
 func (c *Client) PutEmailIdentityDkimAttributes(ctx context.Context, params *PutEmailIdentityDkimAttributesInput, optFns ...func(*Options)) (*PutEmailIdentityDkimAttributesOutput, error) {
-	stack := middleware.NewStack("PutEmailIdentityDkimAttributes", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PutEmailIdentityDkimAttributesInput{}
 	}
-	addawsRestjson1_serdeOpPutEmailIdentityDkimAttributesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPutEmailIdentityDkimAttributesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityDkimAttributes(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "PutEmailIdentityDkimAttributes", params, optFns, addOperationPutEmailIdentityDkimAttributesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "PutEmailIdentityDkimAttributes",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PutEmailIdentityDkimAttributesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -76,9 +49,30 @@ type PutEmailIdentityDkimAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
+func addOperationPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEmailIdentityDkimAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpPutEmailIdentityDkimAttributesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityDkimAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPutEmailIdentityDkimAttributes(region string) awsmiddleware.RegisterServiceMetadata {

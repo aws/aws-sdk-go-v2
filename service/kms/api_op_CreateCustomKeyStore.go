@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -34,41 +33,15 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomKeyStoreInput, optFns ...func(*Options)) (*CreateCustomKeyStoreOutput, error) {
-	stack := middleware.NewStack("CreateCustomKeyStore", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateCustomKeyStoreInput{}
 	}
-	addawsAwsjson11_serdeOpCreateCustomKeyStoreMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateCustomKeyStoreValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomKeyStore(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateCustomKeyStore", params, optFns, addOperationCreateCustomKeyStoreMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateCustomKeyStore",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateCustomKeyStoreOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -120,9 +93,30 @@ type CreateCustomKeyStoreOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateCustomKeyStoreMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomKeyStore{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCustomKeyStore{}, middleware.After)
+func addOperationCreateCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomKeyStore{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCustomKeyStore{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateCustomKeyStoreValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomKeyStore(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateCustomKeyStore(region string) awsmiddleware.RegisterServiceMetadata {

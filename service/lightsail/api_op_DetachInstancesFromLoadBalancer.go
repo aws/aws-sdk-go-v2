@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -19,41 +18,15 @@ import (
 // load balancer name. For more information, see the Lightsail Dev Guide
 // (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) DetachInstancesFromLoadBalancer(ctx context.Context, params *DetachInstancesFromLoadBalancerInput, optFns ...func(*Options)) (*DetachInstancesFromLoadBalancerOutput, error) {
-	stack := middleware.NewStack("DetachInstancesFromLoadBalancer", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DetachInstancesFromLoadBalancerInput{}
 	}
-	addawsAwsjson11_serdeOpDetachInstancesFromLoadBalancerMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDetachInstancesFromLoadBalancerValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachInstancesFromLoadBalancer(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DetachInstancesFromLoadBalancer", params, optFns, addOperationDetachInstancesFromLoadBalancerMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DetachInstancesFromLoadBalancer",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DetachInstancesFromLoadBalancerOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -84,9 +57,30 @@ type DetachInstancesFromLoadBalancerOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDetachInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDetachInstancesFromLoadBalancer{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetachInstancesFromLoadBalancer{}, middleware.After)
+func addOperationDetachInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachInstancesFromLoadBalancer{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetachInstancesFromLoadBalancer{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDetachInstancesFromLoadBalancerValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachInstancesFromLoadBalancer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDetachInstancesFromLoadBalancer(region string) awsmiddleware.RegisterServiceMetadata {

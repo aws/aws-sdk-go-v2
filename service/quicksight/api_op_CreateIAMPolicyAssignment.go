@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // Resource Name (ARN). This policy will be assigned to specified groups or users
 // of Amazon QuickSight. The users and groups need to be in the same namespace.
 func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*CreateIAMPolicyAssignmentOutput, error) {
-	stack := middleware.NewStack("CreateIAMPolicyAssignment", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateIAMPolicyAssignmentInput{}
 	}
-	addawsRestjson1_serdeOpCreateIAMPolicyAssignmentMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateIAMPolicyAssignmentValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIAMPolicyAssignment(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIAMPolicyAssignment", params, optFns, addOperationCreateIAMPolicyAssignmentMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateIAMPolicyAssignment",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateIAMPolicyAssignmentOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -132,9 +105,30 @@ type CreateIAMPolicyAssignmentOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpCreateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpCreateIAMPolicyAssignment{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIAMPolicyAssignment{}, middleware.After)
+func addOperationCreateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIAMPolicyAssignment{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIAMPolicyAssignment{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateIAMPolicyAssignmentValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIAMPolicyAssignment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateIAMPolicyAssignment(region string) awsmiddleware.RegisterServiceMetadata {

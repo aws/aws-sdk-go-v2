@@ -6,48 +6,21 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Stops a medical entities detection job in progress.
 func (c *Client) StopEntitiesDetectionV2Job(ctx context.Context, params *StopEntitiesDetectionV2JobInput, optFns ...func(*Options)) (*StopEntitiesDetectionV2JobOutput, error) {
-	stack := middleware.NewStack("StopEntitiesDetectionV2Job", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StopEntitiesDetectionV2JobInput{}
 	}
-	addawsAwsjson11_serdeOpStopEntitiesDetectionV2JobMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpStopEntitiesDetectionV2JobValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStopEntitiesDetectionV2Job(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StopEntitiesDetectionV2Job", params, optFns, addOperationStopEntitiesDetectionV2JobMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StopEntitiesDetectionV2Job",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StopEntitiesDetectionV2JobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -70,9 +43,30 @@ type StopEntitiesDetectionV2JobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStopEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStopEntitiesDetectionV2Job{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEntitiesDetectionV2Job{}, middleware.After)
+func addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEntitiesDetectionV2Job{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEntitiesDetectionV2Job{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpStopEntitiesDetectionV2JobValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStopEntitiesDetectionV2Job(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStopEntitiesDetectionV2Job(region string) awsmiddleware.RegisterServiceMetadata {

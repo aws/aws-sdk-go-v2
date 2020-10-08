@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -50,44 +49,15 @@ import (
 // href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html">Upload
 // Part </a> in the <i>Amazon Glacier Developer Guide</i>.</p>
 func (c *Client) UploadMultipartPart(ctx context.Context, params *UploadMultipartPartInput, optFns ...func(*Options)) (*UploadMultipartPartOutput, error) {
-	stack := middleware.NewStack("UploadMultipartPart", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &UploadMultipartPartInput{}
 	}
-	addawsRestjson1_serdeOpUploadMultipartPartMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpUploadMultipartPartValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadMultipartPart(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	glaciercust.AddTreeHashMiddleware(stack)
-	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
-	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "UploadMultipartPart", params, optFns, addOperationUploadMultipartPartMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "UploadMultipartPart",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*UploadMultipartPartOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -138,9 +108,33 @@ type UploadMultipartPartOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpUploadMultipartPartMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpUploadMultipartPart{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadMultipartPart{}, middleware.After)
+func addOperationUploadMultipartPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadMultipartPart{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadMultipartPart{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpUploadMultipartPartValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadMultipartPart(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	glaciercust.AddTreeHashMiddleware(stack)
+	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
+	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opUploadMultipartPart(region string) awsmiddleware.RegisterServiceMetadata {

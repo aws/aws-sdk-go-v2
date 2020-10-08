@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -14,41 +13,15 @@ import (
 // Deletes the user attributes in a user pool as an administrator. Works on any
 // user. Calling this action requires developer credentials.
 func (c *Client) AdminDeleteUserAttributes(ctx context.Context, params *AdminDeleteUserAttributesInput, optFns ...func(*Options)) (*AdminDeleteUserAttributesOutput, error) {
-	stack := middleware.NewStack("AdminDeleteUserAttributes", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AdminDeleteUserAttributesInput{}
 	}
-	addawsAwsjson11_serdeOpAdminDeleteUserAttributesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAdminDeleteUserAttributesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminDeleteUserAttributes(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AdminDeleteUserAttributes", params, optFns, addOperationAdminDeleteUserAttributesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AdminDeleteUserAttributes",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AdminDeleteUserAttributesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -82,9 +55,30 @@ type AdminDeleteUserAttributesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpAdminDeleteUserAttributesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDeleteUserAttributes{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDeleteUserAttributes{}, middleware.After)
+func addOperationAdminDeleteUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDeleteUserAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDeleteUserAttributes{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAdminDeleteUserAttributesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminDeleteUserAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAdminDeleteUserAttributes(region string) awsmiddleware.RegisterServiceMetadata {

@@ -6,48 +6,21 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Removes the specified member account from Amazon Macie Classic.
 func (c *Client) DisassociateMemberAccount(ctx context.Context, params *DisassociateMemberAccountInput, optFns ...func(*Options)) (*DisassociateMemberAccountOutput, error) {
-	stack := middleware.NewStack("DisassociateMemberAccount", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DisassociateMemberAccountInput{}
 	}
-	addawsAwsjson11_serdeOpDisassociateMemberAccountMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDisassociateMemberAccountValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateMemberAccount(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateMemberAccount", params, optFns, addOperationDisassociateMemberAccountMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DisassociateMemberAccount",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DisassociateMemberAccountOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -66,9 +39,30 @@ type DisassociateMemberAccountOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDisassociateMemberAccountMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateMemberAccount{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateMemberAccount{}, middleware.After)
+func addOperationDisassociateMemberAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateMemberAccount{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateMemberAccount{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDisassociateMemberAccountValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateMemberAccount(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDisassociateMemberAccount(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // user. This feedback is used for improving the risk evaluation decision for the
 // user pool as part of Amazon Cognito advanced security.
 func (c *Client) AdminUpdateAuthEventFeedback(ctx context.Context, params *AdminUpdateAuthEventFeedbackInput, optFns ...func(*Options)) (*AdminUpdateAuthEventFeedbackOutput, error) {
-	stack := middleware.NewStack("AdminUpdateAuthEventFeedback", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AdminUpdateAuthEventFeedbackInput{}
 	}
-	addawsAwsjson11_serdeOpAdminUpdateAuthEventFeedbackMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAdminUpdateAuthEventFeedbackValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminUpdateAuthEventFeedback(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AdminUpdateAuthEventFeedback", params, optFns, addOperationAdminUpdateAuthEventFeedbackMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AdminUpdateAuthEventFeedback",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AdminUpdateAuthEventFeedbackOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -84,9 +57,30 @@ type AdminUpdateAuthEventFeedbackOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpAdminUpdateAuthEventFeedbackMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUpdateAuthEventFeedback{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminUpdateAuthEventFeedback{}, middleware.After)
+func addOperationAdminUpdateAuthEventFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUpdateAuthEventFeedback{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminUpdateAuthEventFeedback{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAdminUpdateAuthEventFeedbackValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminUpdateAuthEventFeedback(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAdminUpdateAuthEventFeedback(region string) awsmiddleware.RegisterServiceMetadata {

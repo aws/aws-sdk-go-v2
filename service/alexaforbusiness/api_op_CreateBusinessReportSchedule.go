@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,42 +15,15 @@ import (
 // Creates a recurring schedule for usage reports to deliver to the specified S3
 // location with a specified daily or weekly interval.
 func (c *Client) CreateBusinessReportSchedule(ctx context.Context, params *CreateBusinessReportScheduleInput, optFns ...func(*Options)) (*CreateBusinessReportScheduleOutput, error) {
-	stack := middleware.NewStack("CreateBusinessReportSchedule", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateBusinessReportScheduleInput{}
 	}
-	addawsAwsjson11_serdeOpCreateBusinessReportScheduleMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opCreateBusinessReportScheduleMiddleware(stack, options)
-	addOpCreateBusinessReportScheduleValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBusinessReportSchedule(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateBusinessReportSchedule", params, optFns, addOperationCreateBusinessReportScheduleMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateBusinessReportSchedule",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateBusinessReportScheduleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -100,9 +72,31 @@ type CreateBusinessReportScheduleOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateBusinessReportScheduleMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBusinessReportSchedule{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBusinessReportSchedule{}, middleware.After)
+func addOperationCreateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBusinessReportSchedule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBusinessReportSchedule{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opCreateBusinessReportScheduleMiddleware(stack, options)
+	addOpCreateBusinessReportScheduleValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBusinessReportSchedule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpCreateBusinessReportSchedule struct {

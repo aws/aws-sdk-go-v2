@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,41 +17,15 @@ import (
 // structure. You can remove a description for a security group rule by omitting
 // the description parameter in the request.
 func (c *Client) UpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context, params *UpdateSecurityGroupRuleDescriptionsIngressInput, optFns ...func(*Options)) (*UpdateSecurityGroupRuleDescriptionsIngressOutput, error) {
-	stack := middleware.NewStack("UpdateSecurityGroupRuleDescriptionsIngress", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &UpdateSecurityGroupRuleDescriptionsIngressInput{}
 	}
-	addawsEc2query_serdeOpUpdateSecurityGroupRuleDescriptionsIngressMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpUpdateSecurityGroupRuleDescriptionsIngressValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecurityGroupRuleDescriptionsIngress(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSecurityGroupRuleDescriptionsIngress", params, optFns, addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "UpdateSecurityGroupRuleDescriptionsIngress",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*UpdateSecurityGroupRuleDescriptionsIngressOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -90,9 +63,30 @@ type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpUpdateSecurityGroupRuleDescriptionsIngressMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsIngress{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpUpdateSecurityGroupRuleDescriptionsIngress{}, middleware.After)
+func addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpUpdateSecurityGroupRuleDescriptionsIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpUpdateSecurityGroupRuleDescriptionsIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpUpdateSecurityGroupRuleDescriptionsIngressValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecurityGroupRuleDescriptionsIngress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opUpdateSecurityGroupRuleDescriptionsIngress(region string) awsmiddleware.RegisterServiceMetadata {

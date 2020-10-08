@@ -8,49 +8,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Create a new program in the multiplex.
 func (c *Client) CreateMultiplexProgram(ctx context.Context, params *CreateMultiplexProgramInput, optFns ...func(*Options)) (*CreateMultiplexProgramOutput, error) {
-	stack := middleware.NewStack("CreateMultiplexProgram", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateMultiplexProgramInput{}
 	}
-	addawsRestjson1_serdeOpCreateMultiplexProgramMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opCreateMultiplexProgramMiddleware(stack, options)
-	addOpCreateMultiplexProgramValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMultiplexProgram(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateMultiplexProgram", params, optFns, addOperationCreateMultiplexProgramMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateMultiplexProgram",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateMultiplexProgramOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -90,9 +62,31 @@ type CreateMultiplexProgramOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpCreateMultiplexProgramMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpCreateMultiplexProgram{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMultiplexProgram{}, middleware.After)
+func addOperationCreateMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMultiplexProgram{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMultiplexProgram{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opCreateMultiplexProgramMiddleware(stack, options)
+	addOpCreateMultiplexProgramValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMultiplexProgram(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpCreateMultiplexProgram struct {

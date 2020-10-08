@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Gets information about the associations for the specified transit gateway route
 // table.
 func (c *Client) GetTransitGatewayRouteTableAssociations(ctx context.Context, params *GetTransitGatewayRouteTableAssociationsInput, optFns ...func(*Options)) (*GetTransitGatewayRouteTableAssociationsOutput, error) {
-	stack := middleware.NewStack("GetTransitGatewayRouteTableAssociations", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetTransitGatewayRouteTableAssociationsInput{}
 	}
-	addawsEc2query_serdeOpGetTransitGatewayRouteTableAssociationsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetTransitGatewayRouteTableAssociationsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTransitGatewayRouteTableAssociations(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetTransitGatewayRouteTableAssociations", params, optFns, addOperationGetTransitGatewayRouteTableAssociationsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetTransitGatewayRouteTableAssociations",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetTransitGatewayRouteTableAssociationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -100,9 +73,30 @@ type GetTransitGatewayRouteTableAssociationsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpGetTransitGatewayRouteTableAssociationsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpGetTransitGatewayRouteTableAssociations{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpGetTransitGatewayRouteTableAssociations{}, middleware.After)
+func addOperationGetTransitGatewayRouteTableAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpGetTransitGatewayRouteTableAssociations{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpGetTransitGatewayRouteTableAssociations{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetTransitGatewayRouteTableAssociationsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTransitGatewayRouteTableAssociations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetTransitGatewayRouteTableAssociations(region string) awsmiddleware.RegisterServiceMetadata {

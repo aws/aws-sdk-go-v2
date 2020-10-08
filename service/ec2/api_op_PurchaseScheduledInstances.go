@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -21,42 +20,15 @@ import (
 // RunScheduledInstances () during each scheduled time period. After you purchase a
 // Scheduled Instance, you can't cancel, modify, or resell your purchase.
 func (c *Client) PurchaseScheduledInstances(ctx context.Context, params *PurchaseScheduledInstancesInput, optFns ...func(*Options)) (*PurchaseScheduledInstancesOutput, error) {
-	stack := middleware.NewStack("PurchaseScheduledInstances", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PurchaseScheduledInstancesInput{}
 	}
-	addawsEc2query_serdeOpPurchaseScheduledInstancesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opPurchaseScheduledInstancesMiddleware(stack, options)
-	addOpPurchaseScheduledInstancesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseScheduledInstances(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseScheduledInstances", params, optFns, addOperationPurchaseScheduledInstancesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "PurchaseScheduledInstances",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PurchaseScheduledInstancesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -92,9 +64,31 @@ type PurchaseScheduledInstancesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpPurchaseScheduledInstancesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpPurchaseScheduledInstances{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpPurchaseScheduledInstances{}, middleware.After)
+func addOperationPurchaseScheduledInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpPurchaseScheduledInstances{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpPurchaseScheduledInstances{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opPurchaseScheduledInstancesMiddleware(stack, options)
+	addOpPurchaseScheduledInstancesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseScheduledInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpPurchaseScheduledInstances struct {

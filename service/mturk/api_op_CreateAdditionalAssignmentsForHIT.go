@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -26,41 +25,15 @@ import (
 // extended. Attempting to extend HITs that were created before July 22, 2015 will
 // result in an AWS.MechanicalTurk.HITTooOldForExtension exception.
 func (c *Client) CreateAdditionalAssignmentsForHIT(ctx context.Context, params *CreateAdditionalAssignmentsForHITInput, optFns ...func(*Options)) (*CreateAdditionalAssignmentsForHITOutput, error) {
-	stack := middleware.NewStack("CreateAdditionalAssignmentsForHIT", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateAdditionalAssignmentsForHITInput{}
 	}
-	addawsAwsjson11_serdeOpCreateAdditionalAssignmentsForHITMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateAdditionalAssignmentsForHITValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAdditionalAssignmentsForHIT(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateAdditionalAssignmentsForHIT", params, optFns, addOperationCreateAdditionalAssignmentsForHITMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateAdditionalAssignmentsForHIT",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateAdditionalAssignmentsForHITOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -92,9 +65,30 @@ type CreateAdditionalAssignmentsForHITOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateAdditionalAssignmentsForHITMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAdditionalAssignmentsForHIT{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAdditionalAssignmentsForHIT{}, middleware.After)
+func addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAdditionalAssignmentsForHIT{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAdditionalAssignmentsForHIT{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateAdditionalAssignmentsForHITValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAdditionalAssignmentsForHIT(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateAdditionalAssignmentsForHIT(region string) awsmiddleware.RegisterServiceMetadata {

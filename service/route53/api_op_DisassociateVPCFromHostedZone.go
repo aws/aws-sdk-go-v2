@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -36,41 +35,15 @@ import (
 // DisassociateVPCFromHostedZone. If the hosted zone has a value for OwningService,
 // you can't use DisassociateVPCFromHostedZone.
 func (c *Client) DisassociateVPCFromHostedZone(ctx context.Context, params *DisassociateVPCFromHostedZoneInput, optFns ...func(*Options)) (*DisassociateVPCFromHostedZoneOutput, error) {
-	stack := middleware.NewStack("DisassociateVPCFromHostedZone", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DisassociateVPCFromHostedZoneInput{}
 	}
-	addawsRestxml_serdeOpDisassociateVPCFromHostedZoneMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDisassociateVPCFromHostedZoneValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateVPCFromHostedZone(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateVPCFromHostedZone", params, optFns, addOperationDisassociateVPCFromHostedZoneMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DisassociateVPCFromHostedZone",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DisassociateVPCFromHostedZoneOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -109,9 +82,30 @@ type DisassociateVPCFromHostedZoneOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpDisassociateVPCFromHostedZoneMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpDisassociateVPCFromHostedZone{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpDisassociateVPCFromHostedZone{}, middleware.After)
+func addOperationDisassociateVPCFromHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpDisassociateVPCFromHostedZone{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpDisassociateVPCFromHostedZone{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDisassociateVPCFromHostedZoneValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateVPCFromHostedZone(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDisassociateVPCFromHostedZone(region string) awsmiddleware.RegisterServiceMetadata {

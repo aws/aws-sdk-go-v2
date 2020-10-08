@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,42 +15,15 @@ import (
 // Starts an asynchronous topic detection job. Use the DescribeTopicDetectionJob
 // operation to track the status of a job.
 func (c *Client) StartTopicsDetectionJob(ctx context.Context, params *StartTopicsDetectionJobInput, optFns ...func(*Options)) (*StartTopicsDetectionJobOutput, error) {
-	stack := middleware.NewStack("StartTopicsDetectionJob", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartTopicsDetectionJobInput{}
 	}
-	addawsAwsjson11_serdeOpStartTopicsDetectionJobMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opStartTopicsDetectionJobMiddleware(stack, options)
-	addOpStartTopicsDetectionJobValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartTopicsDetectionJob(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartTopicsDetectionJob", params, optFns, addOperationStartTopicsDetectionJobMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartTopicsDetectionJob",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartTopicsDetectionJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -134,9 +106,31 @@ type StartTopicsDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartTopicsDetectionJobMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartTopicsDetectionJob{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTopicsDetectionJob{}, middleware.After)
+func addOperationStartTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTopicsDetectionJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTopicsDetectionJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opStartTopicsDetectionJobMiddleware(stack, options)
+	addOpStartTopicsDetectionJobValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartTopicsDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpStartTopicsDetectionJob struct {

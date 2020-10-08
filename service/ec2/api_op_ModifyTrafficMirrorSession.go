@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Modifies a Traffic Mirror session.
 func (c *Client) ModifyTrafficMirrorSession(ctx context.Context, params *ModifyTrafficMirrorSessionInput, optFns ...func(*Options)) (*ModifyTrafficMirrorSessionOutput, error) {
-	stack := middleware.NewStack("ModifyTrafficMirrorSession", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ModifyTrafficMirrorSessionInput{}
 	}
-	addawsEc2query_serdeOpModifyTrafficMirrorSessionMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpModifyTrafficMirrorSessionValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyTrafficMirrorSession(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyTrafficMirrorSession", params, optFns, addOperationModifyTrafficMirrorSessionMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ModifyTrafficMirrorSession",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ModifyTrafficMirrorSessionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -107,9 +80,30 @@ type ModifyTrafficMirrorSessionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpModifyTrafficMirrorSessionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpModifyTrafficMirrorSession{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpModifyTrafficMirrorSession{}, middleware.After)
+func addOperationModifyTrafficMirrorSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpModifyTrafficMirrorSession{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpModifyTrafficMirrorSession{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpModifyTrafficMirrorSessionValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyTrafficMirrorSession(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opModifyTrafficMirrorSession(region string) awsmiddleware.RegisterServiceMetadata {

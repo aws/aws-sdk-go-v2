@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Associates multiple self-service actions with provisioning artifacts.
 func (c *Client) BatchAssociateServiceActionWithProvisioningArtifact(ctx context.Context, params *BatchAssociateServiceActionWithProvisioningArtifactInput, optFns ...func(*Options)) (*BatchAssociateServiceActionWithProvisioningArtifactOutput, error) {
-	stack := middleware.NewStack("BatchAssociateServiceActionWithProvisioningArtifact", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &BatchAssociateServiceActionWithProvisioningArtifactInput{}
 	}
-	addawsAwsjson11_serdeOpBatchAssociateServiceActionWithProvisioningArtifactMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpBatchAssociateServiceActionWithProvisioningArtifactValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateServiceActionWithProvisioningArtifact(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "BatchAssociateServiceActionWithProvisioningArtifact", params, optFns, addOperationBatchAssociateServiceActionWithProvisioningArtifactMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "BatchAssociateServiceActionWithProvisioningArtifact",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*BatchAssociateServiceActionWithProvisioningArtifactOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -83,9 +56,30 @@ type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpBatchAssociateServiceActionWithProvisioningArtifactMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
+func addOperationBatchAssociateServiceActionWithProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpBatchAssociateServiceActionWithProvisioningArtifactValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateServiceActionWithProvisioningArtifact(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opBatchAssociateServiceActionWithProvisioningArtifact(region string) awsmiddleware.RegisterServiceMetadata {

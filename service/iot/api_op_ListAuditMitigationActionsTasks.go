@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -15,41 +14,15 @@ import (
 
 // Gets a list of audit mitigation action tasks that match the specified filters.
 func (c *Client) ListAuditMitigationActionsTasks(ctx context.Context, params *ListAuditMitigationActionsTasksInput, optFns ...func(*Options)) (*ListAuditMitigationActionsTasksOutput, error) {
-	stack := middleware.NewStack("ListAuditMitigationActionsTasks", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListAuditMitigationActionsTasksInput{}
 	}
-	addawsRestjson1_serdeOpListAuditMitigationActionsTasksMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListAuditMitigationActionsTasksValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditMitigationActionsTasks(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListAuditMitigationActionsTasks", params, optFns, addOperationListAuditMitigationActionsTasksMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListAuditMitigationActionsTasks",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListAuditMitigationActionsTasksOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -99,9 +72,30 @@ type ListAuditMitigationActionsTasksOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpListAuditMitigationActionsTasksMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpListAuditMitigationActionsTasks{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpListAuditMitigationActionsTasks{}, middleware.After)
+func addOperationListAuditMitigationActionsTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuditMitigationActionsTasks{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAuditMitigationActionsTasks{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListAuditMitigationActionsTasksValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditMitigationActionsTasks(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListAuditMitigationActionsTasks(region string) awsmiddleware.RegisterServiceMetadata {

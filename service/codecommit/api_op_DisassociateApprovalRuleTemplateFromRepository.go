@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // created in the specified repository. This does not delete any approval rules
 // previously created for pull requests through the template association.
 func (c *Client) DisassociateApprovalRuleTemplateFromRepository(ctx context.Context, params *DisassociateApprovalRuleTemplateFromRepositoryInput, optFns ...func(*Options)) (*DisassociateApprovalRuleTemplateFromRepositoryOutput, error) {
-	stack := middleware.NewStack("DisassociateApprovalRuleTemplateFromRepository", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DisassociateApprovalRuleTemplateFromRepositoryInput{}
 	}
-	addawsAwsjson11_serdeOpDisassociateApprovalRuleTemplateFromRepositoryMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDisassociateApprovalRuleTemplateFromRepositoryValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateApprovalRuleTemplateFromRepository(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateApprovalRuleTemplateFromRepository", params, optFns, addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DisassociateApprovalRuleTemplateFromRepository",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DisassociateApprovalRuleTemplateFromRepositoryOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -75,9 +48,30 @@ type DisassociateApprovalRuleTemplateFromRepositoryOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpDisassociateApprovalRuleTemplateFromRepositoryMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateApprovalRuleTemplateFromRepository{}, middleware.After)
+func addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateApprovalRuleTemplateFromRepository{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDisassociateApprovalRuleTemplateFromRepositoryValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateApprovalRuleTemplateFromRepository(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDisassociateApprovalRuleTemplateFromRepository(region string) awsmiddleware.RegisterServiceMetadata {

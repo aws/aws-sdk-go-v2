@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -28,41 +27,15 @@ import (
 // interconnect was originally associated with a different LAG, the hosted
 // connections remain associated with the original LAG.
 func (c *Client) AssociateConnectionWithLag(ctx context.Context, params *AssociateConnectionWithLagInput, optFns ...func(*Options)) (*AssociateConnectionWithLagOutput, error) {
-	stack := middleware.NewStack("AssociateConnectionWithLag", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AssociateConnectionWithLagInput{}
 	}
-	addawsAwsjson11_serdeOpAssociateConnectionWithLagMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAssociateConnectionWithLagValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateConnectionWithLag(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AssociateConnectionWithLag", params, optFns, addOperationAssociateConnectionWithLagMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AssociateConnectionWithLag",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AssociateConnectionWithLagOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -171,9 +144,30 @@ type AssociateConnectionWithLagOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpAssociateConnectionWithLagMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateConnectionWithLag{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateConnectionWithLag{}, middleware.After)
+func addOperationAssociateConnectionWithLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateConnectionWithLag{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateConnectionWithLag{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAssociateConnectionWithLagValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateConnectionWithLag(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAssociateConnectionWithLag(region string) awsmiddleware.RegisterServiceMetadata {

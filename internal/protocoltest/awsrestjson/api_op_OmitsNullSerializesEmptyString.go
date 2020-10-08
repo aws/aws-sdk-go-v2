@@ -5,45 +5,21 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Omits null, but serializes empty string value.
 func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *OmitsNullSerializesEmptyStringInput, optFns ...func(*Options)) (*OmitsNullSerializesEmptyStringOutput, error) {
-	stack := middleware.NewStack("OmitsNullSerializesEmptyString", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &OmitsNullSerializesEmptyStringInput{}
 	}
-	addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "OmitsNullSerializesEmptyString", params, optFns, addOperationOmitsNullSerializesEmptyStringMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "OmitsNullSerializesEmptyString",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*OmitsNullSerializesEmptyStringOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -60,9 +36,27 @@ type OmitsNullSerializesEmptyStringOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpOmitsNullSerializesEmptyString{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpOmitsNullSerializesEmptyString{}, middleware.After)
+func addOperationOmitsNullSerializesEmptyStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpOmitsNullSerializesEmptyString{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpOmitsNullSerializesEmptyString{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(region string) awsmiddleware.RegisterServiceMetadata {

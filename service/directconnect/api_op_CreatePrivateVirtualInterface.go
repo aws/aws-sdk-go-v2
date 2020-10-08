@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -26,41 +25,15 @@ import (
 // call DescribeConnections (). To check whether your virtual interface supports
 // jumbo frames, call DescribeVirtualInterfaces ().
 func (c *Client) CreatePrivateVirtualInterface(ctx context.Context, params *CreatePrivateVirtualInterfaceInput, optFns ...func(*Options)) (*CreatePrivateVirtualInterfaceOutput, error) {
-	stack := middleware.NewStack("CreatePrivateVirtualInterface", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreatePrivateVirtualInterfaceInput{}
 	}
-	addawsAwsjson11_serdeOpCreatePrivateVirtualInterfaceMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreatePrivateVirtualInterfaceValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrivateVirtualInterface(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePrivateVirtualInterface", params, optFns, addOperationCreatePrivateVirtualInterfaceMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreatePrivateVirtualInterface",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreatePrivateVirtualInterfaceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -200,9 +173,30 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreatePrivateVirtualInterfaceMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePrivateVirtualInterface{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePrivateVirtualInterface{}, middleware.After)
+func addOperationCreatePrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePrivateVirtualInterface{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePrivateVirtualInterface{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreatePrivateVirtualInterfaceValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrivateVirtualInterface(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreatePrivateVirtualInterface(region string) awsmiddleware.RegisterServiceMetadata {

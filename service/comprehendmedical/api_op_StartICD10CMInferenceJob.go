@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,42 +16,15 @@ import (
 // ICD-10-CM ontology. Use the DescribeICD10CMInferenceJob operation to track the
 // status of a job.
 func (c *Client) StartICD10CMInferenceJob(ctx context.Context, params *StartICD10CMInferenceJobInput, optFns ...func(*Options)) (*StartICD10CMInferenceJobOutput, error) {
-	stack := middleware.NewStack("StartICD10CMInferenceJob", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartICD10CMInferenceJobInput{}
 	}
-	addawsAwsjson11_serdeOpStartICD10CMInferenceJobMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opStartICD10CMInferenceJobMiddleware(stack, options)
-	addOpStartICD10CMInferenceJobValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartICD10CMInferenceJob(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartICD10CMInferenceJob", params, optFns, addOperationStartICD10CMInferenceJobMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartICD10CMInferenceJob",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartICD10CMInferenceJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -106,9 +78,31 @@ type StartICD10CMInferenceJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartICD10CMInferenceJobMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartICD10CMInferenceJob{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartICD10CMInferenceJob{}, middleware.After)
+func addOperationStartICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartICD10CMInferenceJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartICD10CMInferenceJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opStartICD10CMInferenceJobMiddleware(stack, options)
+	addOpStartICD10CMInferenceJobValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartICD10CMInferenceJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpStartICD10CMInferenceJob struct {

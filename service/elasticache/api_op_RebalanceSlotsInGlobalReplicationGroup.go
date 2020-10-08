@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Redistribute slots to ensure uniform distribution across existing shards in the
 // cluster.
 func (c *Client) RebalanceSlotsInGlobalReplicationGroup(ctx context.Context, params *RebalanceSlotsInGlobalReplicationGroupInput, optFns ...func(*Options)) (*RebalanceSlotsInGlobalReplicationGroupOutput, error) {
-	stack := middleware.NewStack("RebalanceSlotsInGlobalReplicationGroup", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RebalanceSlotsInGlobalReplicationGroupInput{}
 	}
-	addawsAwsquery_serdeOpRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRebalanceSlotsInGlobalReplicationGroupValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRebalanceSlotsInGlobalReplicationGroup(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RebalanceSlotsInGlobalReplicationGroup", params, optFns, addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RebalanceSlotsInGlobalReplicationGroup",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RebalanceSlotsInGlobalReplicationGroupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -82,9 +55,30 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
+func addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRebalanceSlotsInGlobalReplicationGroup{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRebalanceSlotsInGlobalReplicationGroupValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRebalanceSlotsInGlobalReplicationGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRebalanceSlotsInGlobalReplicationGroup(region string) awsmiddleware.RegisterServiceMetadata {
