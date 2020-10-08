@@ -86,7 +86,7 @@ func addRequestMiddleware(stack *middleware.Stack,
 	}
 
 	// Retry support
-	retry.AddRetryMiddlewares(stack, options.Retryer)
+	retry.AddRetryMiddlewares(stack, retry.AddRetryMiddlewaresOptions{Retryer: options.Retryer})
 
 	return nil
 }

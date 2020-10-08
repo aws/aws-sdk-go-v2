@@ -175,9 +175,15 @@ func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Conte
 	return context.WithValue(ctx, retryMetadataKey{}, metadata)
 }
 
+// AddRetryMiddlewaresOptions is the set of options that can be passed to AddRetryMiddlewares for configuring retry
+// associated middleware.
+type AddRetryMiddlewaresOptions struct {
+	Retryer Retryer
+}
+
 // AddRetryMiddlewares adds retry middleware to operation middleware stack
-func AddRetryMiddlewares(stack *smithymiddle.Stack, retryer Retryer) error {
-	attemptMiddleware := NewAttemptMiddleware(retryer, http.RequestCloner)
+func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresOptions) error {
+	attemptMiddleware := NewAttemptMiddleware(options.Retryer, http.RequestCloner)
 	if err := stack.Finalize.Add(&attemptMiddleware, smithymiddle.After); err != nil {
 		return err
 	}

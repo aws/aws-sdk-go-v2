@@ -43,10 +43,17 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
                 .build();
         Symbol addRetryMiddlewares = SymbolUtils.createValueSymbolBuilder("AddRetryMiddlewares",
                 AwsGoDependency.AWS_RETRY).build();
+        Symbol addOptions = SymbolUtils.createValueSymbolBuilder("AddRetryMiddlewaresOptions",
+                AwsGoDependency.AWS_RETRY).build();
 
         writer.openBlock("func $L(stack $P, o Options) error {", "}", ADD_RETRY_MIDDLEWARES_HELPER, stackSymbol,
                 () -> {
-                    writer.write("return $T(stack, o.$L)", addRetryMiddlewares, AddAwsConfigFields.RETRYER_CONFIG_NAME);
+                    writer.openBlock("mo := $T{", "}", addOptions, () -> {
+                        writer.write("$L: o.$L,", AddAwsConfigFields.RETRYER_CONFIG_NAME,
+                                AddAwsConfigFields.RETRYER_CONFIG_NAME);
+                    });
+
+                    writer.write("return $T(stack, mo)", addRetryMiddlewares);
                 });
     }
 }
