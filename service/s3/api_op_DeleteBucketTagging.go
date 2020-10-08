@@ -5,7 +5,6 @@ package s3
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -27,9 +26,9 @@ func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTa
 	addawsRestxml_serdeOpDeleteBucketTaggingMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
-	AddResolveEndpointMiddleware(stack, options)
+	addResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
-	retry.AddRetryMiddlewares(stack, options)
+	addRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addClientUserAgent(stack)
@@ -37,9 +36,9 @@ func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketTagging(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
-	addMetadataRetrieverMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	disableAcceptEncodingGzip(stack)
 

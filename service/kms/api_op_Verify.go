@@ -5,7 +5,6 @@ package kms
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 	smithy "github.com/awslabs/smithy-go"
@@ -46,9 +45,9 @@ func (c *Client) Verify(ctx context.Context, params *VerifyInput, optFns ...func
 	addawsAwsjson11_serdeOpVerifyMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
-	AddResolveEndpointMiddleware(stack, options)
+	addResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
-	retry.AddRetryMiddlewares(stack, options)
+	addRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addClientUserAgent(stack)

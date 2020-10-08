@@ -5,7 +5,6 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -20,8 +19,8 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	addawsRestjson1_serdeOpSimpleScalarPropertiesMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
-	AddResolveEndpointMiddleware(stack, options)
-	retry.AddRetryMiddlewares(stack, options)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)

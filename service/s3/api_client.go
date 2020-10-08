@@ -84,34 +84,6 @@ type Options struct {
 	HTTPClient HTTPClient
 }
 
-func (o Options) GetCredentials() aws.CredentialsProvider {
-	return o.Credentials
-}
-
-func (o Options) GetEndpointOptions() ResolverOptions {
-	return o.EndpointOptions
-}
-
-func (o Options) GetEndpointResolver() EndpointResolver {
-	return o.EndpointResolver
-}
-
-func (o Options) GetHTTPSignerV4() HTTPSignerV4 {
-	return o.HTTPSignerV4
-}
-
-func (o Options) GetRegion() string {
-	return o.Region
-}
-
-func (o Options) GetRetryer() retry.Retryer {
-	return o.Retryer
-}
-
-func (o Options) GetUsePathStyle() bool {
-	return o.UsePathStyle
-}
-
 type HTTPClient interface {
 	Do(*http.Request) (*http.Response, error)
 }
@@ -175,6 +147,17 @@ func resolveHTTPSignerV4(o *Options) {
 		return
 	}
 	o.HTTPSignerV4 = v4.NewSigner()
+}
+
+func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
+	mo := retry.AddRetryMiddlewaresOptions{
+		Retryer: o.Retryer,
+	}
+	return retry.AddRetryMiddlewares(stack, mo)
+}
+
+func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
+	s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
 func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
@@ -356,10 +339,6 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 
 func addResponseErrorMiddleware(stack *middleware.Stack) {
 	s3shared.AddResponseErrorMiddleware(stack)
-}
-
-func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
-	s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
 func disableAcceptEncodingGzip(stack *middleware.Stack) {

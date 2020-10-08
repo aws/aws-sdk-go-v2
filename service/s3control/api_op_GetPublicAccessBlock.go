@@ -5,7 +5,6 @@ package s3control
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
@@ -33,9 +32,9 @@ func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAcce
 	addawsRestxml_serdeOpGetPublicAccessBlockMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
-	AddResolveEndpointMiddleware(stack, options)
+	addResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
-	retry.AddRetryMiddlewares(stack, options)
+	addRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addClientUserAgent(stack)
@@ -43,8 +42,8 @@ func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAcce
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPublicAccessBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPublicAccessBlock(options.Region), middleware.Before)
-	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

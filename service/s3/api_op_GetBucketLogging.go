@@ -5,7 +5,6 @@ package s3
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	smithy "github.com/awslabs/smithy-go"
@@ -27,9 +26,9 @@ func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingI
 	addawsRestxml_serdeOpGetBucketLoggingMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
-	AddResolveEndpointMiddleware(stack, options)
+	addResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
-	retry.AddRetryMiddlewares(stack, options)
+	addRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addClientUserAgent(stack)
@@ -37,9 +36,9 @@ func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketLoggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketLogging(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
-	addMetadataRetrieverMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	disableAcceptEncodingGzip(stack)
 

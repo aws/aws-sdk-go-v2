@@ -5,7 +5,6 @@ package s3
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -67,9 +66,9 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 	addawsRestxml_serdeOpCompleteMultipartUploadMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
-	AddResolveEndpointMiddleware(stack, options)
+	addResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
-	retry.AddRetryMiddlewares(stack, options)
+	addRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addClientUserAgent(stack)
@@ -77,9 +76,9 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCompleteMultipartUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteMultipartUpload(options.Region), middleware.Before)
+	addMetadataRetrieverMiddleware(stack)
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
-	addMetadataRetrieverMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	disableAcceptEncodingGzip(stack)
 	s3cust.HandleResponseErrorWith200Status(stack)
