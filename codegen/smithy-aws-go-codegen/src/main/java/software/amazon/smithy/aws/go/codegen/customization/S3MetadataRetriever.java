@@ -30,7 +30,7 @@ public class S3MetadataRetriever implements GoIntegration {
      */
     @Override
     public byte getOrder() {
-        return 127;
+        return 126;
     }
 
     @Override

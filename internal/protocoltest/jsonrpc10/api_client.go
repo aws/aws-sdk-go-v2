@@ -65,22 +65,6 @@ type Options struct {
 	HTTPClient HTTPClient
 }
 
-func (o Options) GetEndpointOptions() ResolverOptions {
-	return o.EndpointOptions
-}
-
-func (o Options) GetEndpointResolver() EndpointResolver {
-	return o.EndpointResolver
-}
-
-func (o Options) GetRegion() string {
-	return o.Region
-}
-
-func (o Options) GetRetryer() retry.Retryer {
-	return o.Retryer
-}
-
 type HTTPClient interface {
 	Do(*http.Request) (*http.Response, error)
 }
@@ -128,6 +112,13 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 
 func addClientUserAgent(stack *middleware.Stack) {
 	awsmiddleware.AddUserAgentKey("jsonrpc10")(stack)
+}
+
+func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
+	mo := retry.AddRetryMiddlewaresOptions{
+		Retryer: o.Retryer,
+	}
+	return retry.AddRetryMiddlewares(stack, mo)
 }
 
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {

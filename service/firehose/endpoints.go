@@ -88,20 +88,14 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 
 	return next.HandleSerialize(ctx, in)
 }
-
-type ResolveEndpointMiddlewareOptions interface {
-	GetEndpointResolver() EndpointResolver
-	GetEndpointOptions() ResolverOptions
-}
-
-func AddResolveEndpointMiddleware(stack *middleware.Stack, options ResolveEndpointMiddlewareOptions) {
-	stack.Serialize.Insert(&ResolveEndpoint{
-		Resolver: options.GetEndpointResolver(),
-		Options:  options.GetEndpointOptions(),
+func addResolveEndpointMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&ResolveEndpoint{
+		Resolver: o.EndpointResolver,
+		Options:  o.EndpointOptions,
 	}, "OperationSerializer", middleware.Before)
 }
 
-func RemoveResolveEndpointMiddleware(stack *middleware.Stack) error {
+func removeResolveEndpointMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Remove((&ResolveEndpoint{}).ID())
 }
 

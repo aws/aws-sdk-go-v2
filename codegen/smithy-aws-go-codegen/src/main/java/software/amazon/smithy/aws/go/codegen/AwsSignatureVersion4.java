@@ -121,8 +121,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
      * @return if the SigV4 trait is used by the service.
      */
     public static boolean isSupportedAuthentication(Model model, ServiceShape serviceShape) {
-        return model.getKnowledge(ServiceIndex.class)
-                .getAuthSchemes(serviceShape).values().stream().anyMatch(trait -> trait.getClass()
+        return ServiceIndex.of(model).getAuthSchemes(serviceShape).values().stream().anyMatch(trait -> trait.getClass()
                         .equals(SigV4Trait.class));
     }
 
@@ -135,8 +134,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
      * @return if SigV4Trait is an auth scheme for the operation and service.
      */
     public static boolean hasSigV4AuthScheme(Model model, ServiceShape service, OperationShape operation) {
-        ServiceIndex serviceIndex = model.getKnowledge(ServiceIndex.class);
-        Map<ShapeId, Trait> auth = serviceIndex.getEffectiveAuthSchemes(service.getId(), operation.getId());
+        Map<ShapeId, Trait> auth = ServiceIndex.of(model).getEffectiveAuthSchemes(service.getId(), operation.getId());
         return auth.containsKey(SigV4Trait.ID) && !operation.hasTrait(OptionalAuthTrait.class);
     }
 }

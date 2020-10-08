@@ -149,13 +149,6 @@ type Options struct {
 	disableAPIToken bool
 }
 
-// GetRetryer returns the retryer.
-//
-// TODO remove this in favor of structured options.
-func (o Options) GetRetryer() retry.Retryer {
-	return o.Retryer
-}
-
 // HTTPClient provides the interface for a client making HTTP requests with the
 // API.
 type HTTPClient interface {

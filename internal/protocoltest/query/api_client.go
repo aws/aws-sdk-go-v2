@@ -74,26 +74,6 @@ type Options struct {
 	HTTPClient HTTPClient
 }
 
-func (o Options) GetEndpointOptions() ResolverOptions {
-	return o.EndpointOptions
-}
-
-func (o Options) GetEndpointResolver() EndpointResolver {
-	return o.EndpointResolver
-}
-
-func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
-	return o.IdempotencyTokenProvider
-}
-
-func (o Options) GetRegion() string {
-	return o.Region
-}
-
-func (o Options) GetRetryer() retry.Retryer {
-	return o.Retryer
-}
-
 type HTTPClient interface {
 	Do(*http.Request) (*http.Response, error)
 }
@@ -148,6 +128,13 @@ func resolveIdempotencyTokenProvider(o *Options) {
 		return
 	}
 	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
+}
+
+func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
+	mo := retry.AddRetryMiddlewaresOptions{
+		Retryer: o.Retryer,
+	}
+	return retry.AddRetryMiddlewares(stack, mo)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token
