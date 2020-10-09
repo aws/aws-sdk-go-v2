@@ -19,7 +19,7 @@ import (
 
 // MaxUploadParts is the maximum allowed number of parts in a multi-part upload
 // on Amazon S3.
-const MaxUploadParts = 10000
+const MaxUploadParts int32 = 10000
 
 // MinUploadPartSize is the minimum allowed part size when uploading a part to
 // Amazon S3.
@@ -151,7 +151,7 @@ type Uploader struct {
 	// error must be used to signal end of stream.
 	//
 	// Defaults to package const's MaxUploadParts value.
-	MaxUploadParts int
+	MaxUploadParts int32
 
 	// The client to use when uploading to S3.
 	S3 UploadAPIClient
@@ -224,62 +224,19 @@ func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
 func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...func(*Uploader)) (*UploadOutput, error) {
 	i := uploader{in: input, cfg: u, ctx: ctx}
 
+	// Copy ClientOptions
+	clientOptions := make([]func(*s3.Options), 0, len(i.cfg.ClientOptions)+1)
+	clientOptions = append(clientOptions, func(o *s3.Options) {
+		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
+	})
+	clientOptions = append(clientOptions, i.cfg.ClientOptions...)
+	i.cfg.ClientOptions = clientOptions
+
 	for _, opt := range opts {
 		opt(&i.cfg)
 	}
 
-	// Copy ClientOptions
-	clientOptions := make([]func(*s3.Options), len(i.cfg.ClientOptions)+1)
-	clientOptions[0] = func(o *s3.Options) {
-		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
-	}
-	copy(clientOptions[1:], i.cfg.ClientOptions)
-	i.cfg.ClientOptions = clientOptions
-
 	return i.upload()
-}
-
-// UploadWithIterator will upload a batched amount of objects to S3. This operation uses
-// the iterator pattern to know which object to upload next. Since this is an interface this
-// allows for custom defined functionality.
-//
-// Example:
-//	uploader := s3manager.NewUploader(client)
-//
-//	objects := []BatchUploadObject{
-//		{
-//			Object:	&s3manager.UploadInput {
-//				Key: aws.String("key"),
-//				Bucket: aws.String("bucket"),
-//			},
-//		},
-//	}
-//
-//	iter := &s3manager.UploadObjectsIterator{Objects: objects}
-//	if err := uploader.UploadWithIterator(context.Background(), iter); err != nil {
-//		return err
-//	}
-func (u Uploader) UploadWithIterator(ctx context.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
-	var errs []error
-	for iter.Next() {
-		object := iter.UploadObject()
-		if _, err := u.Upload(ctx, object.Object, opts...); err != nil {
-			errs = append(errs, newBatchItemError(err, object.Object.Bucket, object.Object.Key))
-		}
-
-		if object.After == nil {
-			continue
-		}
-
-		if err := object.After(); err != nil {
-			errs = append(errs, newBatchItemError(err, object.Object.Bucket, object.Object.Key))
-		}
-	}
-
-	if len(errs) > 0 {
-		return &batchError{message: "some objects have failed to upload", failures: errs}
-	}
-	return nil
 }
 
 // internal structure to manage an upload to S3.
@@ -505,7 +462,7 @@ type multiuploader struct {
 // keeps track of a single chunk of data being sent to S3.
 type chunk struct {
 	buf     io.ReadSeeker
-	num     int64
+	num     int32
 	cleanup func()
 }
 
@@ -540,7 +497,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	}
 
 	// Send part 1 to the workers
-	var num int64 = 1
+	var num int32 = 1
 	ch <- chunk{buf: firstBuf, num: num, cleanup: cleanup}
 
 	// Read and queue the rest of the parts
@@ -585,7 +542,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	}, nil
 }
 
-func (u *multiuploader) shouldContinue(part int64, nextChunkLen int, err error) (bool, error) {
+func (u *multiuploader) shouldContinue(part int32, nextChunkLen int, err error) (bool, error) {
 	if err != nil && err != io.EOF {
 		return false, awserr.New("ReadRequestBody", "read multipart upload data failed", err)
 	}
@@ -599,9 +556,9 @@ func (u *multiuploader) shouldContinue(part int64, nextChunkLen int, err error) 
 
 	part++
 	// This upload exceeded maximum number of supported parts, error now.
-	if part > int64(u.cfg.MaxUploadParts) || part > int64(MaxUploadParts) {
+	if part > u.cfg.MaxUploadParts || part > MaxUploadParts {
 		var msg string
-		if part > int64(u.cfg.MaxUploadParts) {
+		if part > u.cfg.MaxUploadParts {
 			msg = fmt.Sprintf("exceeded total allowed configured MaxUploadParts (%d). Adjust PartSize to fit in this limit",
 				u.cfg.MaxUploadParts)
 		} else {
@@ -645,7 +602,7 @@ func (u *multiuploader) send(c chunk) error {
 		UploadId:             &u.uploadID,
 		SSECustomerAlgorithm: u.in.SSECustomerAlgorithm,
 		SSECustomerKey:       u.in.SSECustomerKey,
-		PartNumber:           aws.Int32(int32(c.num)),
+		PartNumber:           &c.num,
 	}
 
 	resp, err := u.cfg.S3.UploadPart(u.ctx, params, u.cfg.ClientOptions...)
@@ -654,7 +611,7 @@ func (u *multiuploader) send(c chunk) error {
 	}
 
 	n := c.num
-	completed := &types.CompletedPart{ETag: resp.ETag, PartNumber: aws.Int32(int32(n))}
+	completed := &types.CompletedPart{ETag: resp.ETag, PartNumber: &n}
 
 	u.m.Lock()
 	u.parts = append(u.parts, completed)

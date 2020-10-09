@@ -11,6 +11,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	s3testing "github.com/aws/aws-sdk-go-v2/s3manager/internal/testing"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -66,14 +67,16 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
 		client := s3.New(s3.Options{
-			EndpointResolver: mockEndpointResolver(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
+			EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL: server.URL,
 				}, nil
 			}),
 		})
 
-		region, err := GetBucketRegion(context.Background(), client, "bucket")
+		region, err := GetBucketRegion(context.Background(), client, "bucket", func(o *s3.Options) {
+			o.UsePathStyle = true
+		})
 		if err != nil {
 			t.Errorf("%d, expect no error, got %v", i, err)
 			goto closeServer
@@ -92,14 +95,16 @@ func TestGetBucketRegion_NotExists(t *testing.T) {
 	defer server.Close()
 
 	client := s3.New(s3.Options{
-		EndpointResolver: mockEndpointResolver(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
+		EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.ResolverOptions) (aws.Endpoint, error) {
 			return aws.Endpoint{
 				URL: server.URL,
 			}, nil
 		}),
 	})
 
-	region, err := GetBucketRegion(context.Background(), client, "bucket")
+	region, err := GetBucketRegion(context.Background(), client, "bucket", func(o *s3.Options) {
+		o.UsePathStyle = true
+	})
 	if err == nil {
 		t.Fatalf("expect error, but did not get one")
 	}

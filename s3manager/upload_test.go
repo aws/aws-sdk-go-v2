@@ -19,7 +19,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/s3manager"
 	s3testing "github.com/aws/aws-sdk-go-v2/s3manager/internal/testing"
@@ -27,30 +26,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/google/go-cmp/cmp"
 )
-
-const respMsg = `<?xml version="1.0" encoding="UTF-8"?>
-<CompleteMultipartUploadOutput>
-   <Location>mockValue</Location>
-   <Bucket>mockValue</Bucket>
-   <Key>mockValue</Key>
-   <ETag>mockValue</ETag>
-</CompleteMultipartUploadOutput>`
-
-func val(i interface{}, s string) interface{} {
-	v, err := awsutil.ValuesAtPath(i, s)
-	if err != nil || len(v) == 0 {
-		return nil
-	}
-	if _, ok := v[0].(io.Reader); ok {
-		return v[0]
-	}
-
-	if rv := reflect.ValueOf(v[0]); rv.Kind() == reflect.Ptr {
-		return rv.Elem().Interface()
-	}
-
-	return v[0]
-}
 
 // getReaderLength discards the bytes from reader and returns the length
 func getReaderLength(r io.Reader) int64 {
@@ -715,7 +690,7 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
 		Body: &testIncompleteReader{
-			Size: int64(s3manager.MinUploadPartSize + 1),
+			Size: s3manager.MinUploadPartSize + 1,
 		},
 	})
 	if err == nil {
@@ -798,7 +773,7 @@ func TestUploadMaxPartsEOF(t *testing.T) {
 		u.PartSize = s3manager.DefaultUploadPartSize
 		u.MaxUploadParts = 2
 	})
-	f := bytes.NewReader(make([]byte, int(mgr.PartSize)*mgr.MaxUploadParts))
+	f := bytes.NewReader(make([]byte, int(mgr.PartSize)*int(mgr.MaxUploadParts)))
 
 	r1 := io.NewSectionReader(f, 0, s3manager.DefaultUploadPartSize)
 	r2 := io.NewSectionReader(f, s3manager.DefaultUploadPartSize, 2*s3manager.DefaultUploadPartSize)

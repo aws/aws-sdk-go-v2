@@ -98,7 +98,7 @@ gen-endpoint-prefix.json:
 # Unit Testing #
 ################
 
-unit: lint unit-modules-. 
+unit: lint unit-modules-.
 unit-race: lint unit-race-modules-.
 
 unit-test: test-modules-.
@@ -110,11 +110,10 @@ unit-race-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. unit-race-modules-internal_protocoltest
-	export BUILD_ONLY=true \
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"BUILD_ONLY=true go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 
@@ -128,7 +127,7 @@ unit-modules-%:
 		&& cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"BUILD_ONLY=true go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
 
 build: build-modules-.
@@ -139,10 +138,9 @@ build-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. build-modules-internal_protocoltest
-	export BUILD_ONLY=true \
-		&& cd ./internal/repotools/cmd/eachmodule \
+	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
+		"BUILD_ONLY=true go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
 test: test-modules-.
 

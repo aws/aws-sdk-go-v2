@@ -15,14 +15,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-const respBody = `<?xml version="1.0" encoding="UTF-8"?>
-<CompleteMultipartUploadOutput>
-   <Location>mockValue</Location>
-   <Bucket>mockValue</Bucket>
-   <Key>mockValue</Key>
-   <ETag>mockValue</ETag>
-</CompleteMultipartUploadOutput>`
-
 type testReader struct {
 	br *bytes.Reader
 	m  sync.Mutex

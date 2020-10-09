@@ -1,7 +1,7 @@
 ## Performance Utility
 
 Downloads a test file from a S3 bucket using the SDK's S3 download manager. Allows passing
-in custom configuration for the HTTP client and SDK's Download Manager behavior.
+in a custom configuration for the HTTP client and SDK's Download Manager behavior.
 
 ## Build
 ```sh

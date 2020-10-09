@@ -72,9 +72,8 @@ func (b *BuildableHTTPClient) Do(req *http.Request) (*http.Response, error) {
 
 func (b *BuildableHTTPClient) build() {
 	b.client = wrapWithoutRedirect(&http.Client{
-		Timeout:       b.clientTimeout,
-		Transport:     b.GetTransport(),
-		CheckRedirect: b.checkRedirect,
+		Timeout:   b.clientTimeout,
+		Transport: b.GetTransport(),
 	})
 }
 
@@ -83,25 +82,8 @@ func (b *BuildableHTTPClient) clone() *BuildableHTTPClient {
 	cpy.transport = b.GetTransport()
 	cpy.dialer = b.GetDialer()
 	cpy.clientTimeout = b.clientTimeout
-	cpy.checkRedirect = limitedRedirect
 
 	return cpy
-}
-
-// WithCheckRedirect allows for wrapping or overriding the current check redirection function.
-func (b *BuildableHTTPClient) WithCheckRedirect(opts ...func(redirect *func(req *http.Request, via []*http.Request) error)) HTTPClient {
-	cpy := b.clone()
-	redirect := cpy.checkRedirect
-	for _, opt := range opts {
-		opt(&redirect)
-	}
-	cpy.checkRedirect = redirect
-	return cpy
-}
-
-// GetCheckRedirect returns the configured CheckRedirect function.
-func (b *BuildableHTTPClient) GetCheckRedirect() func(req *http.Request, via []*http.Request) error {
-	return b.checkRedirect
 }
 
 // WithTransportOptions copies the BuildableHTTPClient and returns it with the

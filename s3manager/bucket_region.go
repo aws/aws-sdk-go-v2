@@ -19,7 +19,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //
 // The request will not be signed, and will not use your AWS credentials.
 //
-// A "bucket not found" error will be returned if the bucket does not exist in the
+// A BucketNotFound error will be returned if the bucket does not exist in the
 // AWS partition the client region belongs to.
 //
 // For example to get the region of a bucket which exists in "eu-central-1"
@@ -37,24 +37,14 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //	}
 //	fmt.Printf("Bucket %s is in %s region\n", bucket, region)
 //
-// By default the request will be made to the Amazon S3 endpoint using the Path
-// style addressing.
+// By default the request will be made to the Amazon S3 endpoint using the virtual-hosted-style addressing.
 //
-//	s3.us-west-2.amazonaws.com/bucketname
-//
-// This is not compatible with Amazon S3's FIPS endpoints. To override this
-// behavior to use Virtual Host style addressing, provide a functional option
-// that will set the client options UsePathStyle to false.
-//
-//	region, err := s3manager.GetBucketRegion(s3.NewFromConfig(cfg), "bucketname", func(o *s3.Options) {
-//		o.UsePathStyle = false
-//	})
+//	bucketname.s3.us-west-2.amazonaws.com/
 //
 // To configure the GetBucketRegion to make a request via the Amazon
 // S3 FIPS endpoints directly when a FIPS region name is not available, (e.g.
-// fips-us-gov-west-1) set the Config.Endpoint on the Session, or client the
-// utility is called with. The hint region will be ignored if an endpoint URL
-// is configured on the session or client.
+// fips-us-gov-west-1) set the EndpointResolver on the config or client the
+// utility is called with.
 //
 //	cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver{
 //		EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
@@ -64,39 +54,14 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //	if err != nil {
 //		panic(err)
 //	}
-//
-//	region, err := s3manager.GetBucketRegion(context.Background(), s3.NewFromConfig(cfg), "bucketname")
-//	if err != nil {
-//		panic(err)
-//	}
 func GetBucketRegion(ctx context.Context, client HeadBucketAPIClient, bucket string, optFns ...func(*s3.Options)) (string, error) {
 	var captureBucketRegion deserializeBucketRegion
 
-	clientOptionFns := make([]func(*s3.Options), 0, len(optFns)+1)
-	clientOptionFns = append(clientOptionFns, func(options *s3.Options) {
-		options.UsePathStyle = true
+	clientOptionFns := make([]func(*s3.Options), len(optFns)+1)
+	clientOptionFns[0] = func(options *s3.Options) {
 		options.Credentials = aws.AnonymousCredentials{}
-
-		// Disable HTTP redirects to prevent an invalid 301 from eating the response
-		// because Go's HTTP client will fail, and drop the response if an 301 is
-		// received without a location header. S3 will return a 301 without the
-		// location header for HeadObject API calls.
-		// TODO: log warning if we can't configure the client for not following redirect
-		if buildableHTTPClient, ok := options.HTTPClient.(*aws.BuildableHTTPClient); ok {
-			options.HTTPClient = buildableHTTPClient.WithCheckRedirect(func(redirect *func(req *http.Request, via []*http.Request) error) {
-				orig := *redirect
-				*redirect = func(req *http.Request, via []*http.Request) error {
-					err := orig(req, via)
-					if err == nil {
-						return http.ErrUseLastResponse
-					}
-					return err
-				}
-			})
-		}
-
 		options.APIOptions = append(options.APIOptions, captureBucketRegion.RegisterMiddleware)
-	})
+	}
 	copy(clientOptionFns[1:], optFns)
 
 	_, err := client.HeadBucket(ctx, &s3.HeadBucketInput{
@@ -117,9 +82,7 @@ func GetBucketRegion(ctx context.Context, client HeadBucketAPIClient, bucket str
 		return "", err
 	}
 
-	bucketRegion := normalizeBucketLocation(captureBucketRegion.BucketRegion)
-
-	return bucketRegion, nil
+	return captureBucketRegion.BucketRegion, nil
 }
 
 type deserializeBucketRegion struct {
@@ -152,25 +115,6 @@ func (d *deserializeBucketRegion) HandleDeserialize(ctx context.Context, in midd
 	return out, metadata, err
 }
 
-// normalizeBucketLocation is a utility function which will update the
-// passed in value to always be a region ID. Generally this would be used
-// with GetBucketLocation API operation.
-//
-// Replaces empty string with "us-east-1", and "EU" with "eu-west-1".
-//
-// See http://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETlocation.html
-// for more information on the values that can be returned.
-func normalizeBucketLocation(loc string) string {
-	switch loc {
-	case "":
-		loc = "us-east-1"
-	case "EU":
-		loc = "eu-west-1"
-	}
-
-	return loc
-}
-
 // BucketNotFound indicates the bucket was not found in the partition when calling GetBucketRegion.
 type BucketNotFound interface {
 	error
@@ -185,3 +129,5 @@ func (b *bucketNotFound) Error() string {
 }
 
 func (b *bucketNotFound) isBucketNotFound() {}
+
+var _ BucketNotFound = (*bucketNotFound)(nil)

@@ -744,10 +744,3 @@ func (b *badReader) Read(p []byte) (int, error) {
 
 	return len(p), b.err
 }
-
-var mockErrorResponse = []byte(`<Error>
-    <Code>MOCK_S3_ERROR_CODE</Code>
-    <Message>Mocked S3 Error Message</Message>
-    <RequestId>9FEFFF118E15B86F</RequestId>
-    <HostId>WVQ5kzhiT+oiUfDCOiOYv8W4Tk9eNcxWi/MK+hTS/av34Xy4rBU3zsavf0aaaaa</HostId>
-</Error>`)

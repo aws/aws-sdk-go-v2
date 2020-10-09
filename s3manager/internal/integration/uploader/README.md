@@ -1,7 +1,7 @@
 ## Performance Utility
 
 Uploads a file to a S3 bucket using the SDK's S3 upload manager. Allows passing
-in custom configuration for the HTTP client and SDK's Upload Manager behavior.
+in a custom configuration for the HTTP client and SDK's Upload Manager behavior.
 
 ## Build
 ```sh

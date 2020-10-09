@@ -27,7 +27,7 @@ const DefaultDownloadPartSize = 1024 * 1024 * 5
 const DefaultDownloadConcurrency = 5
 
 // DefaultPartBodyMaxRetries is the default number of retries to make when a part fails to upload.
-const DefaultPartBodyMaxRetries = 5
+const DefaultPartBodyMaxRetries = 3
 
 type errReadingBody struct {
 	err error
@@ -52,6 +52,7 @@ type Downloader struct {
 	// PartSize is ignored if the Range input parameter is provided.
 	PartSize int64
 
+	// PartBodyMaxRetries is the number of retry attempts to make for failed part uploads
 	PartBodyMaxRetries int
 
 	// The number of goroutines to spin up in parallel when sending parts.
@@ -65,7 +66,7 @@ type Downloader struct {
 	// An S3 client to use when performing downloads.
 	S3 DownloadAPIClient
 
-	// List of request options that will be passed down to individual API
+	// List of client options that will be passed down to individual API
 	// operation requests made by the downloader.
 	ClientOptions []func(*s3.Options)
 
@@ -123,10 +124,6 @@ func NewDownloader(c DownloadAPIClient, options ...func(*Downloader)) *Downloade
 	return d
 }
 
-type maxRetryer interface {
-	MaxRetries() int
-}
-
 // Download downloads an object in S3 and writes the payload into w
 // using concurrent GET requests. The n int64 returned is the size of the object downloaded
 // in bytes.
@@ -158,11 +155,11 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 	impl := downloader{w: w, in: input, cfg: d, ctx: ctx}
 
 	// Copy ClientOptions
-	clientOptions := make([]func(*s3.Options), len(impl.cfg.ClientOptions)+1)
-	clientOptions[0] = func(o *s3.Options) {
+	clientOptions := make([]func(*s3.Options), 0, len(impl.cfg.ClientOptions)+1)
+	clientOptions = append(clientOptions, func(o *s3.Options) {
 		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
-	}
-	copy(clientOptions[1:], impl.cfg.ClientOptions)
+	})
+	clientOptions = append(clientOptions, impl.cfg.ClientOptions...)
 	impl.cfg.ClientOptions = clientOptions
 
 	for _, option := range options {
@@ -181,66 +178,6 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 	}
 
 	return impl.download()
-}
-
-// DownloadWithIterator will download a batched amount of objects in S3 and writes them
-// to the io.WriterAt specificed in the iterator.
-//
-// Example:
-//	svc := s3manager.NewDownloader(session)
-//
-//	fooFile, err := os.Open("/tmp/foo.file")
-//	if err != nil {
-//		return err
-//	}
-//
-//	barFile, err := os.Open("/tmp/bar.file")
-//	if err != nil {
-//		return err
-//	}
-//
-//	objects := []s3manager.BatchDownloadObject {
-//		{
-//			Object: &s3.GetObjectInput {
-//				Bucket: aws.String("bucket"),
-//				Key: aws.String("foo"),
-//			},
-//			Writer: fooFile,
-//		},
-//		{
-//			Object: &s3.GetObjectInput {
-//				Bucket: aws.String("bucket"),
-//				Key: aws.String("bar"),
-//			},
-//			Writer: barFile,
-//		},
-//	}
-//
-//	iter := &s3manager.DownloadObjectsIterator{Objects: objects}
-//	if err := svc.DownloadWithIterator(context.Context(), iter); err != nil {
-//		return err
-//	}
-func (d Downloader) DownloadWithIterator(ctx context.Context, iter BatchDownloadIterator, opts ...func(*Downloader)) error {
-	var errs []error
-	for iter.Next() {
-		object := iter.DownloadObject()
-		if _, err := d.Download(ctx, object.Writer, object.Object, opts...); err != nil {
-			errs = append(errs, newBatchItemError(err, object.Object.Bucket, object.Object.Key))
-		}
-
-		if object.After == nil {
-			continue
-		}
-
-		if err := object.After(); err != nil {
-			errs = append(errs, newBatchItemError(err, object.Object.Bucket, object.Object.Key))
-		}
-	}
-
-	if len(errs) > 0 {
-		return &batchError{message: "some objects have failed to download.", failures: errs}
-	}
-	return nil
 }
 
 // downloader is the implementation structure used internally by Downloader.
