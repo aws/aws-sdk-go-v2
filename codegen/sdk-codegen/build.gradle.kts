@@ -47,7 +47,7 @@ tasks.register("generate-smithy-build") {
         val modelsDirProp: String by project
         val models = project.file(modelsDirProp);
 
-        fileTree(models).filter { it.isFile }.files.forEach { file ->
+        fileTree(models).filter { it.isFile }.files.forEach lit@{ file ->
             val model = Model.assembler()
                     .addImport(file.absolutePath)
                     // Grab the result directly rather than worrying about checking for errors via unwrap.
@@ -62,6 +62,14 @@ tasks.register("generate-smithy-build") {
             val service = services[0]
             var (sdkId, version, remaining) = file.name.split(".")
             sdkId = sdkId.replace("-", "").toLowerCase();
+
+            // If specific service set only build it.
+            if (project.hasProperty("serviceId")) {
+                if (!service.id.toString().startsWith(project.property("serviceId").toString(), true)) {
+                    return@lit
+                }
+            }
+
             val projectionContents = Node.objectNodeBuilder()
                     .withMember("imports", Node.fromStrings("${models.getAbsolutePath()}${File.separator}${file.name}"))
                     .withMember("plugins", Node.objectNode()
