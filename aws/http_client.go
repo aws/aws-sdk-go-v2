@@ -88,6 +88,7 @@ func (b *BuildableHTTPClient) clone() *BuildableHTTPClient {
 	return cpy
 }
 
+// WithCheckRedirect allows for wrapping or overriding the current check redirection function.
 func (b *BuildableHTTPClient) WithCheckRedirect(opts ...func(redirect *func(req *http.Request, via []*http.Request) error)) HTTPClient {
 	cpy := b.clone()
 	redirect := cpy.checkRedirect
@@ -98,6 +99,7 @@ func (b *BuildableHTTPClient) WithCheckRedirect(opts ...func(redirect *func(req 
 	return cpy
 }
 
+// GetCheckRedirect returns the configured CheckRedirect function.
 func (b *BuildableHTTPClient) GetCheckRedirect() func(req *http.Request, via []*http.Request) error {
 	return b.checkRedirect
 }
