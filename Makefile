@@ -110,6 +110,7 @@ unit-race-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. unit-race-modules-internal_protocoltest
+	export BUILD_ONLY=true \
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
@@ -123,7 +124,8 @@ unit-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. unit-modules-internal_protocoltest
-	cd ./internal/repotools/cmd/eachmodule \
+	export BUILD_ONLY=true \
+		&& cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
@@ -137,7 +139,8 @@ build-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. build-modules-internal_protocoltest
-	cd ./internal/repotools/cmd/eachmodule \
+	export BUILD_ONLY=true \
+		&& cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
@@ -194,7 +197,7 @@ integ-modules-%:
 		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} -count 1 ./..."
 
 cleanup-integ-buckets:
-	@echo "Cleaning up SDK integraiton resources"
+	@echo "Cleaning up SDK integration resources"
 	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
 
 ##############
@@ -208,7 +211,8 @@ bench-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. bench-modules-service_dynamodb
-	cd ./internal/repotools/cmd/eachmodule \
+	export BUILD_ONLY=true \
+	&& cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=10m -bench . --benchmem ${BUILD_TAGS} ${RUN_NONE} ./..."
 

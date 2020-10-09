@@ -222,6 +222,9 @@ func benchUpload(b *testing.B, bucket, key string, reader io.ReadSeeker, sdkConf
 }
 
 func TestMain(m *testing.M) {
+	if strings.EqualFold(os.Getenv("BUILD_ONLY"), "true") {
+		os.Exit(0)
+	}
 	benchConfig.SetupFlags("", flag.CommandLine)
 	flag.Parse()
 	os.Exit(m.Run())

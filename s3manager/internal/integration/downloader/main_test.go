@@ -194,6 +194,9 @@ func benchDownload(b *testing.B, bucket, key string, body io.WriterAt, sdkConfig
 }
 
 func TestMain(m *testing.M) {
+	if strings.EqualFold(os.Getenv("BUILD_ONLY"), "true") {
+		os.Exit(0)
+	}
 	benchConfig.SetupFlags("", flag.CommandLine)
 	flag.Parse()
 	os.Exit(m.Run())

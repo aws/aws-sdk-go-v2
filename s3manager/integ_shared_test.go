@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -32,6 +33,10 @@ var bucketName *string
 var client *s3.Client
 
 func TestMain(m *testing.M) {
+	if strings.EqualFold(os.Getenv("BUILD_ONLY"), "true") {
+		os.Exit(0)
+	}
+
 	client = s3.NewFromConfig(integConfig)
 	bucketName = aws.String(integration.GenerateBucketName())
 	if err := integration.SetupBucket(client, *bucketName, integConfig.Region); err != nil {
