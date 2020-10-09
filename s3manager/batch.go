@@ -18,6 +18,7 @@ const (
 	DefaultBatchSize = 100
 )
 
+// BatchError is a collection of indecent errors that occurred with a given batch.
 type BatchError interface {
 	error
 
@@ -54,6 +55,7 @@ func (errs errSlice) String() string {
 	return buf.String()
 }
 
+// BatchItemError is an error that occurred while processing a given bucket and key.
 type BatchItemError interface {
 	error
 
@@ -110,27 +112,12 @@ type BatchDeleteIterator interface {
 // iterate through a list of objects and delete the objects.
 //
 // Example:
-//	iter := &s3manager.DeleteListIterator{
-//		Client: svc,
-//		Input: &s3.ListObjectsInput{
-//			Bucket:  aws.String("bucket"),
-//			MaxKeys: aws.Int64(5),
-//		},
-//		paginator: request.Pagination{
-//			NewRequest: func() (*request.Request, error) {
-//				var inCpy *ListObjectsInput
-//				if input != nil {
-//					tmp := *input
-//					inCpy = &tmp
-//				}
-//				req, _ := c.ListObjectsRequest(inCpy)
-//				return req, nil
-//			},
-//		},
-//	}
+//	iter := NewDeleteListIterator(client, &s3.ListObjectsV2Input{
+//		Bucket: aws.String("bucket"),
+//	})
 //
-//	batcher := s3manager.NewBatchDeleteWithClient(svc)
-//	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {
+//	batcher := s3manager.NewBatchDelete(svc)
+//	if err := batcher.Delete(context.Background(), iter); err != nil {
 //		return err
 //	}
 type DeleteListIterator struct {
@@ -201,7 +188,7 @@ type BatchDelete struct {
 // objects.
 //
 // Example:
-//	batcher := s3manager.NewBatchDeleteWithClient(client, size)
+//	batcher := s3manager.NewBatchDelete(client)
 //
 //	objects := []BatchDeleteObject{
 //		{
@@ -212,7 +199,7 @@ type BatchDelete struct {
 //		},
 //	}
 //
-//	if err := batcher.Delete(aws.BackgroundContext(), &s3manager.DeleteObjectsIterator{
+//	if err := batcher.Delete(context.Background(), &s3manager.DeleteObjectsIterator{
 //		Objects: objects,
 //	}); err != nil {
 //		return err

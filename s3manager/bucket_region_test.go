@@ -2,12 +2,12 @@ package s3manager
 
 import (
 	"context"
+	"errors"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
-	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -103,9 +103,12 @@ func TestGetBucketRegion_NotExists(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, but did not get one")
 	}
-	if e, a := "bucket not found", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %s error code, got %s", e, a)
+
+	var bnf BucketNotFound
+	if !errors.As(err, &bnf) {
+		t.Errorf("expect %T error, got %v", bnf, err)
 	}
+
 	if len(region) != 0 {
 		t.Errorf("expect region not to be set, got %q", region)
 	}

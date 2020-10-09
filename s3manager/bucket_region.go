@@ -19,36 +19,36 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 //
 // The request will not be signed, and will not use your AWS credentials.
 //
-// A "NotFound" error code will be returned if the bucket does not exist in the
-// AWS partition the regionHint belongs to.
+// A "bucket not found" error will be returned if the bucket does not exist in the
+// AWS partition the client region belongs to.
 //
 // For example to get the region of a bucket which exists in "eu-central-1"
 // you could provide a region hint of "us-west-2".
 //
-//    sess := session.Must(session.NewSession())
+//	cfg := config.LoadDefaultConfig()
 //
-//    bucket := "my-bucket"
-//    region, err := s3manager.GetBucketRegion(ctx, sess, bucket, "us-west-2")
-//    if err != nil {
-//        if aerr, ok := err.(awserr.Error); ok && aerr.Code() == "NotFound" {
-//             fmt.Fprintf(os.Stderr, "unable to find bucket %s's region not found\n", bucket)
-//        }
-//        return err
-//    }
-//    fmt.Printf("Bucket %s is in %s region\n", bucket, region)
+//	bucket := "my-bucket"
+//	region, err := s3manager.GetBucketRegion(ctx, s3.NewFromConfig(cfg), bucket)
+//	if err != nil {
+//		var bnf BucketNotFound
+//		if errors.As(err, &bnf) {
+//			fmt.Fprintf(os.Stderr, "unable to find bucket %s's region\n", bucket)
+//		}
+//	}
+//	fmt.Printf("Bucket %s is in %s region\n", bucket, region)
 //
 // By default the request will be made to the Amazon S3 endpoint using the Path
 // style addressing.
 //
-//    s3.us-west-2.amazonaws.com/bucketname
+//	s3.us-west-2.amazonaws.com/bucketname
 //
 // This is not compatible with Amazon S3's FIPS endpoints. To override this
 // behavior to use Virtual Host style addressing, provide a functional option
-// that will set the Request's Config.S3ForcePathStyle to aws.Bool(false).
+// that will set the client options UsePathStyle to false.
 //
-//    region, err := s3manager.GetBucketRegion(ctx, sess, "bucketname", "us-west-2", func(r *request.Request) {
-//        r.S3ForcePathStyle = aws.Bool(false)
-//    })
+//	region, err := s3manager.GetBucketRegion(s3.NewFromConfig(cfg), "bucketname", func(o *s3.Options) {
+//		o.UsePathStyle = false
+//	})
 //
 // To configure the GetBucketRegion to make a request via the Amazon
 // S3 FIPS endpoints directly when a FIPS region name is not available, (e.g.
@@ -56,11 +56,19 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // utility is called with. The hint region will be ignored if an endpoint URL
 // is configured on the session or client.
 //
-//    sess, err := session.NewSession(&aws.Config{
-//        Endpoint: aws.String("https://s3-fips.us-west-2.amazonaws.com"),
-//    })
+//	cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver{
+//		EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+//			return aws.Endpoint{URL: "https://s3-fips.us-west-2.amazonaws.com"}, nil
+//		}),
+//	})
+//	if err != nil {
+//		panic(err)
+//	}
 //
-//    region, err := s3manager.GetBucketRegion(context.Background(), sess, "bucketname", "")
+//	region, err := s3manager.GetBucketRegion(context.Background(), s3.NewFromConfig(cfg), "bucketname")
+//	if err != nil {
+//		panic(err)
+//	}
 func GetBucketRegion(ctx context.Context, client HeadBucketAPIClient, bucket string, optFns ...func(*s3.Options)) (string, error) {
 	var captureBucketRegion deserializeBucketRegion
 
@@ -103,7 +111,7 @@ func GetBucketRegion(ctx context.Context, client HeadBucketAPIClient, bucket str
 		}
 
 		if httpStatusErr.HTTPStatusCode() == http.StatusNotFound {
-			return "", fmt.Errorf("bucket not found")
+			return "", &bucketNotFound{}
 		}
 
 		return "", err
@@ -112,28 +120,6 @@ func GetBucketRegion(ctx context.Context, client HeadBucketAPIClient, bucket str
 	bucketRegion := normalizeBucketLocation(captureBucketRegion.BucketRegion)
 
 	return bucketRegion, nil
-}
-
-const stubBadHTTPRedirectLocation = "https://amazonaws.com/badhttpredirectlocation"
-
-type s3NoRedirectFollow struct {
-	tr *http.Transport
-}
-
-func (t *s3NoRedirectFollow) RoundTrip(req *http.Request) (*http.Response, error) {
-	resp, err := t.tr.RoundTrip(req)
-	if err != nil {
-		return resp, err
-	}
-
-	switch resp.StatusCode {
-	case 301, 302:
-		if v := resp.Header.Get("Location"); len(v) == 0 {
-			resp.Header.Set("Location", stubBadHTTPRedirectLocation)
-		}
-	}
-
-	return resp, err
 }
 
 type deserializeBucketRegion struct {
@@ -166,7 +152,7 @@ func (d *deserializeBucketRegion) HandleDeserialize(ctx context.Context, in midd
 	return out, metadata, err
 }
 
-// NormalizeBucketLocation is a utility function which will update the
+// normalizeBucketLocation is a utility function which will update the
 // passed in value to always be a region ID. Generally this would be used
 // with GetBucketLocation API operation.
 //
@@ -184,3 +170,18 @@ func normalizeBucketLocation(loc string) string {
 
 	return loc
 }
+
+// BucketNotFound indicates the bucket was not found in the partition when calling GetBucketRegion.
+type BucketNotFound interface {
+	error
+
+	isBucketNotFound()
+}
+
+type bucketNotFound struct{}
+
+func (b *bucketNotFound) Error() string {
+	return "bucket not found"
+}
+
+func (b *bucketNotFound) isBucketNotFound() {}

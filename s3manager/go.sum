@@ -6,10 +6,6 @@ github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20200930084
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20200930084954-897dfb99530c/go.mod h1:GRJ/IvA6A00/2tAw9KgMTM8as5gAlNI0FVCKBc+aRnA=
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.0 h1:2Dek0NFmAJ5YAsZ2KVug5ChkLlwIdOLVHeaP6qJSKuE=
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.0/go.mod h1:MzR0lyREYeeFr9DUmi8sihZHFydsrQZVXBbLMGswWQg=
-github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.1 h1:lffSnQ2m9+f7uvBHdrWLPvo0UCbKVohQ7YAwcbiJlGg=
-github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.1/go.mod h1:jbQSZvTEaVpvfXuU67ZDQaqRNZnyq6fG88OiBmgGaVs=
-github.com/aws/aws-sdk-go-v2/service/s3control v0.26.0 h1:XzbCbwD/npjdIJQBNGuUJ+6kuuoeblraqMrLKPlg5kk=
-github.com/aws/aws-sdk-go-v2/service/s3control v0.26.0/go.mod h1:SfRpCP0pNHSXamdVMVFJFmR+TzhwfI0RLvXBPP7GP7c=
 github.com/aws/aws-sdk-go-v2/service/sts v0.26.0 h1:b0jHfQ+jGRyZ00mmmXo+yKU45GKdI0WpSKkmcDdckkY=
 github.com/aws/aws-sdk-go-v2/service/sts v0.26.0/go.mod h1:IlfuuVUqU+dXG+VI/5oxyepHKqoa/DyLoXm4Q/etmlA=
 github.com/awslabs/smithy-go v0.0.0-20200930175536-2cd7f70a8c2f/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=

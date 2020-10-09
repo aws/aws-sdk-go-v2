@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
+// UploadLoggingClient is a mock client that can be used to record and stub responses for testing the s3manager.Uploader.
 type UploadLoggingClient struct {
 	Invocations []string
 	Params      []interface{}
@@ -31,7 +32,7 @@ type UploadLoggingClient struct {
 	m       sync.Mutex
 }
 
-func (c *UploadLoggingClient) simulateHTTPClientOption(optFns ...func(*s3.Options)) error {
+func (u *UploadLoggingClient) simulateHTTPClientOption(optFns ...func(*s3.Options)) error {
 	o := s3.Options{
 		HTTPClient: httpDoFunc(func(request *http.Request) (*http.Response, error) {
 			return &http.Response{
@@ -72,6 +73,7 @@ func (u *UploadLoggingClient) traceOperation(name string, params interface{}) {
 	u.Params = append(u.Params, params)
 }
 
+// PutObject is the S3 PutObject API.
 func (u *UploadLoggingClient) PutObject(ctx context.Context, params *s3.PutObjectInput, optFns ...func(*s3.Options)) (*s3.PutObjectOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
@@ -94,6 +96,7 @@ func (u *UploadLoggingClient) PutObject(ctx context.Context, params *s3.PutObjec
 	}, nil
 }
 
+// UploadPart is the S3 UploadPart API.
 func (u *UploadLoggingClient) UploadPart(ctx context.Context, params *s3.UploadPartInput, optFns ...func(*s3.Options)) (*s3.UploadPartOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
@@ -118,6 +121,7 @@ func (u *UploadLoggingClient) UploadPart(ctx context.Context, params *s3.UploadP
 	}, nil
 }
 
+// CreateMultipartUpload is the S3 CreateMultipartUpload API.
 func (u *UploadLoggingClient) CreateMultipartUpload(ctx context.Context, params *s3.CreateMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.CreateMultipartUploadOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
@@ -136,6 +140,7 @@ func (u *UploadLoggingClient) CreateMultipartUpload(ctx context.Context, params 
 	}, nil
 }
 
+// CompleteMultipartUpload is the S3 CompleteMultipartUpload API.
 func (u *UploadLoggingClient) CompleteMultipartUpload(ctx context.Context, params *s3.CompleteMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.CompleteMultipartUploadOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
@@ -155,6 +160,7 @@ func (u *UploadLoggingClient) CompleteMultipartUpload(ctx context.Context, param
 	}, nil
 }
 
+// AbortMultipartUpload is the S3 AbortMultipartUpload API.
 func (u *UploadLoggingClient) AbortMultipartUpload(ctx context.Context, params *s3.AbortMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.AbortMultipartUploadOutput, error) {
 	u.m.Lock()
 	defer u.m.Unlock()
@@ -171,6 +177,7 @@ func (u *UploadLoggingClient) AbortMultipartUpload(ctx context.Context, params *
 	return &s3.AbortMultipartUploadOutput{}, nil
 }
 
+// NewUploadLoggingClient returns a new UploadLoggingClient.
 func NewUploadLoggingClient(ignoreOps []string) (*UploadLoggingClient, *[]string, *[]interface{}) {
 	client := &UploadLoggingClient{
 		ignoredOperations: ignoreOps,

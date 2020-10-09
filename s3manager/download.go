@@ -26,6 +26,7 @@ const DefaultDownloadPartSize = 1024 * 1024 * 5
 // when using Download().
 const DefaultDownloadConcurrency = 5
 
+// DefaultPartBodyMaxRetries is the default number of retries to make when a part fails to upload.
 const DefaultPartBodyMaxRetries = 5
 
 type errReadingBody struct {
@@ -90,18 +91,23 @@ func WithDownloaderClientOptions(opts ...func(*s3.Options)) func(*Downloader) {
 // a S3 service client. The session.Session satisfies the client.ConfigProvider
 // interface.
 //
-// TODO: Update example
 // Example:
-//     // The session the S3 Downloader will use
-//     sess := session.Must(session.NewSession())
+// 	// Load AWS Config
+//	cfg, err := config.LoadDefaultConfig()
+//	if err != nil {
+//		panic(err)
+//	}
 //
-//     // Create a downloader with the session and default options
-//     downloader := s3manager.NewDownloader(sess)
+//	// Create an S3 client using the loaded configuration
+//  s3.NewFromConfig(cfg)
 //
-//     // Create a downloader with the session and custom options
-//     downloader := s3manager.NewDownloader(sess, func(d *s3manager.Downloader) {
-//          d.PartSize = 64 * 1024 * 1024 // 64MB per part
-//     })
+//	// Create a downloader passing it the S3 client
+//	downloader := s3manager.NewDownloader(s3.NewFromConfig(cfg))
+//
+//	// Create a downloader with the client and custom downloader options
+//	downloader := s3manager.NewDownloader(client, func(d *s3manager.Downloader) {
+//		d.PartSize = 64 * 1024 * 1024 // 64MB per part
+//	})
 func NewDownloader(c DownloadAPIClient, options ...func(*Downloader)) *Downloader {
 	d := &Downloader{
 		S3:                 c,
@@ -152,10 +158,10 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 	impl := downloader{w: w, in: input, cfg: d, ctx: ctx}
 
 	// Copy ClientOptions
-	clientOptions := make([]func(*s3.Options), 0, len(impl.cfg.ClientOptions)+1)
-	clientOptions = append(clientOptions, func(o *s3.Options) {
+	clientOptions := make([]func(*s3.Options), len(impl.cfg.ClientOptions)+1)
+	clientOptions[0] = func(o *s3.Options) {
 		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
-	})
+	}
 	copy(clientOptions[1:], impl.cfg.ClientOptions)
 	impl.cfg.ClientOptions = clientOptions
 
@@ -211,7 +217,7 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 //	}
 //
 //	iter := &s3manager.DownloadObjectsIterator{Objects: objects}
-//	if err := svc.DownloadWithIterator(aws.BackgroundContext(), iter); err != nil {
+//	if err := svc.DownloadWithIterator(context.Context(), iter); err != nil {
 //		return err
 //	}
 func (d Downloader) DownloadWithIterator(ctx context.Context, iter BatchDownloadIterator, opts ...func(*Downloader)) error {

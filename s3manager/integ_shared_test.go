@@ -34,7 +34,7 @@ var client *s3.Client
 func TestMain(m *testing.M) {
 	client = s3.NewFromConfig(integConfig)
 	bucketName = aws.String(integration.GenerateBucketName())
-	if err := integration.SetupBucket(client, *bucketName); err != nil {
+	if err := integration.SetupBucket(client, *bucketName, integConfig.Region); err != nil {
 		panic(err)
 	}
 
@@ -44,7 +44,7 @@ func TestMain(m *testing.M) {
 			fmt.Fprintln(os.Stderr, err)
 		}
 		if r := recover(); r != nil {
-			fmt.Fprintln(os.Stderr, "S3 integrationt tests paniced,", r)
+			fmt.Fprintln(os.Stderr, "S3 integration tests panicked,", r)
 			result = 1
 		}
 		os.Exit(result)

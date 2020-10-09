@@ -40,17 +40,16 @@ const DefaultUploadConcurrency = 5
 //
 // Example:
 //
-//     u := s3manager.NewUploader(opts)
-//     output, err := u.upload(input)
-//     if err != nil {
-//         if multierr, ok := err.(s3manager.MultiUploadFailure); ok {
-//             // Process error and its associated uploadID
-//             fmt.Println("batchItemError:", multierr.Code(), multierr.Message(), multierr.UploadID())
-//         } else {
-//             // Process error generically
-//             fmt.Println("batchItemError:", err.batchItemError())
-//         }
-//     }
+//	u := s3manager.NewUploader(client)
+//	output, err := u.upload(context.Background(), input)
+//	if err != nil {
+//		var multierr s3manager.MultiUploadFailure
+//		if errors.As(err, &multierr) {
+//			fmt.Printf("upload failure UploadID=%s, %s\n", multierr.UploadID(), multierr.Error())
+//		} else {
+//			fmt.Printf("upload failure, %s\n", err.Error())
+//		}
+//	}
 //
 type MultiUploadFailure interface {
 	error
@@ -109,7 +108,7 @@ type UploadOutput struct {
 	UploadID string
 }
 
-// WithUploaderRequestOptions appends to the Uploader's API request options.
+// WithUploaderRequestOptions appends to the Uploader's API client options.
 func WithUploaderRequestOptions(opts ...func(*s3.Options)) func(*Uploader) {
 	return func(u *Uploader) {
 		u.ClientOptions = append(u.ClientOptions, opts...)
@@ -174,16 +173,22 @@ type Uploader struct {
 // satisfies the client.ConfigProvider interface.
 //
 // Example:
-//     // The session the S3 Uploader will use
-//     sess := session.Must(session.NewSession())
+//	// Load AWS Config
+//	cfg, err := config.LoadDefaultConfig()
+//	if err != nil {
+//		panic(err)
+//	}
 //
-//     // Create an uploader with the session and default options
-//     uploader := s3manager.NewUploader(sess)
+//	// Create an S3 Client with the config
+//	client := s3.NewFromConfig(cfg)
 //
-//     // Create an uploader with the session and custom options
-//     uploader := s3manager.NewUploader(session, func(u *s3manager.Uploader) {
-//          u.PartSize = 64 * 1024 * 1024 // 64MB per part
-//     })
+//	// Create an uploader passing it the client
+//  uploader := s3manager.NewUploader(client)
+//
+//	// Create an uploader with the client and custom options
+//	uploader := s3manager.NewUploader(client, func(u *s3manager.Uploader) {
+//		u.PartSize = 64 * 1024 * 1024 // 64MB per part
+//	})
 func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
 	u := &Uploader{
 		S3:                client,
@@ -224,10 +229,10 @@ func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...
 	}
 
 	// Copy ClientOptions
-	clientOptions := make([]func(*s3.Options), 0, len(i.cfg.ClientOptions)+1)
-	clientOptions = append(clientOptions, func(o *s3.Options) {
+	clientOptions := make([]func(*s3.Options), len(i.cfg.ClientOptions)+1)
+	clientOptions[0] = func(o *s3.Options) {
 		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
-	})
+	}
 	copy(clientOptions[1:], i.cfg.ClientOptions)
 	i.cfg.ClientOptions = clientOptions
 
@@ -239,7 +244,7 @@ func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...
 // allows for custom defined functionality.
 //
 // Example:
-//	svc:= s3manager.NewUploader(sess)
+//	uploader := s3manager.NewUploader(client)
 //
 //	objects := []BatchUploadObject{
 //		{
@@ -251,7 +256,7 @@ func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...
 //	}
 //
 //	iter := &s3manager.UploadObjectsIterator{Objects: objects}
-//	if err := svc.UploadWithIterator(aws.BackgroundContext(), iter); err != nil {
+//	if err := uploader.UploadWithIterator(context.Background(), iter); err != nil {
 //		return err
 //	}
 func (u Uploader) UploadWithIterator(ctx context.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {

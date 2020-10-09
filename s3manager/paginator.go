@@ -3,6 +3,7 @@ package s3manager
 import (
 	"context"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -39,10 +40,8 @@ func (p *listObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*s
 		return nil, err
 	}
 
-	if o.NextContinuationToken != nil {
-		var nextToken string
-		nextToken = *o.NextContinuationToken
-		p.nextToken = &nextToken
+	if aws.ToBool(o.IsTruncated) && o.NextContinuationToken != nil {
+		p.nextToken = aws.String(*o.NextContinuationToken)
 	} else {
 		p.done = true
 	}

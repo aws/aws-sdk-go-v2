@@ -12,10 +12,10 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/s3manager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 var integBuf12MB = make([]byte, 1024*1024*12)
@@ -58,8 +58,8 @@ func (b *invalidateHash) RegisterMiddleware(stack *middleware.Stack) error {
 func (b *invalidateHash) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && aws.ToInt32(input.PartNumber) == 1 {
-		in.Request.(*smithyhttp.Request).Header.Set("X-Amz-Content-Sha256", "000")
+	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && aws.ToInt32(input.PartNumber) == 2 {
+		ctx = v4.SetPayloadHash(ctx, "000")
 	}
 
 	return next.HandleSerialize(ctx, in)
