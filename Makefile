@@ -24,7 +24,7 @@ SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 SDK_EXAMPLES_PKGS=
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
-RUN_NONE=-run '^$$'
+RUN_NONE=-run NONE
 RUN_INTEG=-run '^TestInteg_'
 
 CODEGEN_RESOURCES_PATH=$(shell pwd)/codegen/smithy-aws-go-codegen/src/main/resources/software/amazon/smithy/aws/go/codegen
@@ -113,7 +113,7 @@ unit-race-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
-		"BUILD_ONLY=true go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 
@@ -123,11 +123,10 @@ unit-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. unit-modules-internal_protocoltest
-	export BUILD_ONLY=true \
-		&& cd ./internal/repotools/cmd/eachmodule \
+	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
-		"BUILD_ONLY=true go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
 
 build: build-modules-.
@@ -140,7 +139,7 @@ build-modules-%:
 	@# e.g. build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
-		"BUILD_ONLY=true go test ${BUILD_TAGS} ${RUN_NONE} ./..."
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
 test: test-modules-.
 
@@ -209,8 +208,7 @@ bench-modules-%:
 	@# replaces all "_" with "/".
 	@#
 	@# e.g. bench-modules-service_dynamodb
-	export BUILD_ONLY=true \
-	&& cd ./internal/repotools/cmd/eachmodule \
+	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=10m -bench . --benchmem ${BUILD_TAGS} ${RUN_NONE} ./..."
 

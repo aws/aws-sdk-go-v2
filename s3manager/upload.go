@@ -14,7 +14,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/aws/aws-sdk-go/aws/awserr"
 )
 
 // MaxUploadParts is the maximum allowed number of parts in a multi-part upload
@@ -544,7 +543,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 
 func (u *multiuploader) shouldContinue(part int32, nextChunkLen int, err error) (bool, error) {
 	if err != nil && err != io.EOF {
-		return false, awserr.New("ReadRequestBody", "read multipart upload data failed", err)
+		return false, fmt.Errorf("read multipart upload data failed, %w", err)
 	}
 
 	if nextChunkLen == 0 {
@@ -565,7 +564,7 @@ func (u *multiuploader) shouldContinue(part int32, nextChunkLen int, err error) 
 			msg = fmt.Sprintf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit",
 				MaxUploadParts)
 		}
-		return false, awserr.New("TotalPartsExceeded", msg, nil)
+		return false, fmt.Errorf(msg)
 	}
 
 	return true, err

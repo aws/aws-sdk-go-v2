@@ -3,7 +3,6 @@ module github.com/aws/aws-sdk-go-v2/s3manager
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go v1.35.1
 	github.com/aws/aws-sdk-go-v2 v0.26.0
 	github.com/aws/aws-sdk-go-v2/config v0.1.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.26.0

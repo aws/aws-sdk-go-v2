@@ -38,9 +38,8 @@ type HTTPClient interface {
 // of the BuildableHTTPClient. Only exported member values of the Transport and
 // optional Dialer will be copied between copies of BuildableHTTPClient.
 type BuildableHTTPClient struct {
-	transport     *http.Transport
-	dialer        *net.Dialer
-	checkRedirect func(req *http.Request, via []*http.Request) error
+	transport *http.Transport
+	dialer    *net.Dialer
 
 	initOnce sync.Once
 
