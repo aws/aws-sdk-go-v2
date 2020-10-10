@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Returns an array of DC2 ReservedNodeOfferings that matches the payment type,
 // term, and usage price of the given DC1 reserved node.
 func (c *Client) GetReservedNodeExchangeOfferings(ctx context.Context, params *GetReservedNodeExchangeOfferingsInput, optFns ...func(*Options)) (*GetReservedNodeExchangeOfferingsOutput, error) {
-	stack := middleware.NewStack("GetReservedNodeExchangeOfferings", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetReservedNodeExchangeOfferingsInput{}
 	}
-	addawsAwsquery_serdeOpGetReservedNodeExchangeOfferingsMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservedNodeExchangeOfferings(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservedNodeExchangeOfferings", params, optFns, addOperationGetReservedNodeExchangeOfferingsMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetReservedNodeExchangeOfferings",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetReservedNodeExchangeOfferingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -89,9 +62,30 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpGetReservedNodeExchangeOfferingsMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
+func addOperationGetReservedNodeExchangeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetReservedNodeExchangeOfferings{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservedNodeExchangeOfferings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetReservedNodeExchangeOfferings(region string) awsmiddleware.RegisterServiceMetadata {

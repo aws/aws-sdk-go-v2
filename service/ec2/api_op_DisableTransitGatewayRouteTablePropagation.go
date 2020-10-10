@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Disables the specified resource attachment from propagating routes to the
 // specified propagation route table.
 func (c *Client) DisableTransitGatewayRouteTablePropagation(ctx context.Context, params *DisableTransitGatewayRouteTablePropagationInput, optFns ...func(*Options)) (*DisableTransitGatewayRouteTablePropagationOutput, error) {
-	stack := middleware.NewStack("DisableTransitGatewayRouteTablePropagation", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &DisableTransitGatewayRouteTablePropagationInput{}
 	}
-	addawsEc2query_serdeOpDisableTransitGatewayRouteTablePropagationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpDisableTransitGatewayRouteTablePropagationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableTransitGatewayRouteTablePropagation(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "DisableTransitGatewayRouteTablePropagation", params, optFns, addOperationDisableTransitGatewayRouteTablePropagationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "DisableTransitGatewayRouteTablePropagation",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*DisableTransitGatewayRouteTablePropagationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -83,9 +56,30 @@ type DisableTransitGatewayRouteTablePropagationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpDisableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpDisableTransitGatewayRouteTablePropagation{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpDisableTransitGatewayRouteTablePropagation{}, middleware.After)
+func addOperationDisableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDisableTransitGatewayRouteTablePropagation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDisableTransitGatewayRouteTablePropagation{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpDisableTransitGatewayRouteTablePropagationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableTransitGatewayRouteTablePropagation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDisableTransitGatewayRouteTablePropagation(region string) awsmiddleware.RegisterServiceMetadata {

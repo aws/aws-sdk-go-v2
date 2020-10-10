@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,41 +16,15 @@ import (
 // calling ConfirmTopicRuleDestination to confirm that you own or have access to
 // the endpoint.
 func (c *Client) ConfirmTopicRuleDestination(ctx context.Context, params *ConfirmTopicRuleDestinationInput, optFns ...func(*Options)) (*ConfirmTopicRuleDestinationOutput, error) {
-	stack := middleware.NewStack("ConfirmTopicRuleDestination", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ConfirmTopicRuleDestinationInput{}
 	}
-	addawsRestjson1_serdeOpConfirmTopicRuleDestinationMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpConfirmTopicRuleDestinationValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmTopicRuleDestination(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ConfirmTopicRuleDestination", params, optFns, addOperationConfirmTopicRuleDestinationMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ConfirmTopicRuleDestination",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ConfirmTopicRuleDestinationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -71,9 +44,30 @@ type ConfirmTopicRuleDestinationOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpConfirmTopicRuleDestinationMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpConfirmTopicRuleDestination{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpConfirmTopicRuleDestination{}, middleware.After)
+func addOperationConfirmTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfirmTopicRuleDestination{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfirmTopicRuleDestination{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpConfirmTopicRuleDestinationValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmTopicRuleDestination(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opConfirmTopicRuleDestination(region string) awsmiddleware.RegisterServiceMetadata {

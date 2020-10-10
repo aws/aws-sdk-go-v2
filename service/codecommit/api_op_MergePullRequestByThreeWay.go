@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,41 +16,15 @@ import (
 // three-way merge strategy. If the merge is successful, it closes the pull
 // request.
 func (c *Client) MergePullRequestByThreeWay(ctx context.Context, params *MergePullRequestByThreeWayInput, optFns ...func(*Options)) (*MergePullRequestByThreeWayOutput, error) {
-	stack := middleware.NewStack("MergePullRequestByThreeWay", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &MergePullRequestByThreeWayInput{}
 	}
-	addawsAwsjson11_serdeOpMergePullRequestByThreeWayMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpMergePullRequestByThreeWayValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opMergePullRequestByThreeWay(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "MergePullRequestByThreeWay", params, optFns, addOperationMergePullRequestByThreeWayMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "MergePullRequestByThreeWay",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*MergePullRequestByThreeWayOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -117,9 +90,30 @@ type MergePullRequestByThreeWayOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpMergePullRequestByThreeWayMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestByThreeWay{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergePullRequestByThreeWay{}, middleware.After)
+func addOperationMergePullRequestByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestByThreeWay{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergePullRequestByThreeWay{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpMergePullRequestByThreeWayValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opMergePullRequestByThreeWay(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opMergePullRequestByThreeWay(region string) awsmiddleware.RegisterServiceMetadata {

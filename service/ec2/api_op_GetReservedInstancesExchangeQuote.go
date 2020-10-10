@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -18,41 +17,15 @@ import (
 // exchange cannot be performed, the reason is returned in the response. Use
 // AcceptReservedInstancesExchangeQuote () to perform the exchange.
 func (c *Client) GetReservedInstancesExchangeQuote(ctx context.Context, params *GetReservedInstancesExchangeQuoteInput, optFns ...func(*Options)) (*GetReservedInstancesExchangeQuoteOutput, error) {
-	stack := middleware.NewStack("GetReservedInstancesExchangeQuote", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetReservedInstancesExchangeQuoteInput{}
 	}
-	addawsEc2query_serdeOpGetReservedInstancesExchangeQuoteMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetReservedInstancesExchangeQuoteValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservedInstancesExchangeQuote(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetReservedInstancesExchangeQuote", params, optFns, addOperationGetReservedInstancesExchangeQuoteMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetReservedInstancesExchangeQuote",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetReservedInstancesExchangeQuoteOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -111,9 +84,30 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpGetReservedInstancesExchangeQuoteMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpGetReservedInstancesExchangeQuote{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpGetReservedInstancesExchangeQuote{}, middleware.After)
+func addOperationGetReservedInstancesExchangeQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpGetReservedInstancesExchangeQuote{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpGetReservedInstancesExchangeQuote{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetReservedInstancesExchangeQuoteValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservedInstancesExchangeQuote(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetReservedInstancesExchangeQuote(region string) awsmiddleware.RegisterServiceMetadata {

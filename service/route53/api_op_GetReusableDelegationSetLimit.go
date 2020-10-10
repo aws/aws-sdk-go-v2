@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,42 +17,15 @@ import (
 // in the Amazon Route 53 Developer Guide. To request a higher limit, open a case
 // (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53).
 func (c *Client) GetReusableDelegationSetLimit(ctx context.Context, params *GetReusableDelegationSetLimitInput, optFns ...func(*Options)) (*GetReusableDelegationSetLimitOutput, error) {
-	stack := middleware.NewStack("GetReusableDelegationSetLimit", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetReusableDelegationSetLimitInput{}
 	}
-	addawsRestxml_serdeOpGetReusableDelegationSetLimitMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetReusableDelegationSetLimitValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReusableDelegationSetLimit(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
-	addSanitizeURLMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetReusableDelegationSetLimit", params, optFns, addOperationGetReusableDelegationSetLimitMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetReusableDelegationSetLimit",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetReusableDelegationSetLimitOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -94,9 +66,31 @@ type GetReusableDelegationSetLimitOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpGetReusableDelegationSetLimitMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpGetReusableDelegationSetLimit{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpGetReusableDelegationSetLimit{}, middleware.After)
+func addOperationGetReusableDelegationSetLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpGetReusableDelegationSetLimit{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpGetReusableDelegationSetLimit{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetReusableDelegationSetLimitValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReusableDelegationSetLimit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	addSanitizeURLMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetReusableDelegationSetLimit(region string) awsmiddleware.RegisterServiceMetadata {

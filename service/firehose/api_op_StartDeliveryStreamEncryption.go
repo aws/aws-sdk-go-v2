@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -46,41 +45,15 @@ import (
 // StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour
 // period.
 func (c *Client) StartDeliveryStreamEncryption(ctx context.Context, params *StartDeliveryStreamEncryptionInput, optFns ...func(*Options)) (*StartDeliveryStreamEncryptionOutput, error) {
-	stack := middleware.NewStack("StartDeliveryStreamEncryption", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartDeliveryStreamEncryptionInput{}
 	}
-	addawsAwsjson11_serdeOpStartDeliveryStreamEncryptionMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpStartDeliveryStreamEncryptionValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeliveryStreamEncryption(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartDeliveryStreamEncryption", params, optFns, addOperationStartDeliveryStreamEncryptionMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartDeliveryStreamEncryption",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartDeliveryStreamEncryptionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -104,9 +77,30 @@ type StartDeliveryStreamEncryptionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartDeliveryStreamEncryptionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartDeliveryStreamEncryption{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDeliveryStreamEncryption{}, middleware.After)
+func addOperationStartDeliveryStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDeliveryStreamEncryption{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDeliveryStreamEncryption{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpStartDeliveryStreamEncryptionValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeliveryStreamEncryption(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStartDeliveryStreamEncryption(region string) awsmiddleware.RegisterServiceMetadata {

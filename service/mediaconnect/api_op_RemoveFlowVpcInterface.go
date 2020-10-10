@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // VPC interface is referenced by a Source or Output, you must first delete or
 // update the Source or Output to no longer reference the VPC interface.
 func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowVpcInterfaceInput, optFns ...func(*Options)) (*RemoveFlowVpcInterfaceOutput, error) {
-	stack := middleware.NewStack("RemoveFlowVpcInterface", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RemoveFlowVpcInterfaceInput{}
 	}
-	addawsRestjson1_serdeOpRemoveFlowVpcInterfaceMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRemoveFlowVpcInterfaceValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFlowVpcInterface(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RemoveFlowVpcInterface", params, optFns, addOperationRemoveFlowVpcInterfaceMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RemoveFlowVpcInterface",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RemoveFlowVpcInterfaceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -85,9 +58,30 @@ type RemoveFlowVpcInterfaceOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpRemoveFlowVpcInterfaceMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowVpcInterface{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowVpcInterface{}, middleware.After)
+func addOperationRemoveFlowVpcInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowVpcInterface{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowVpcInterface{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRemoveFlowVpcInterfaceValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFlowVpcInterface(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRemoveFlowVpcInterface(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,48 +7,21 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // Purchases a reserved DB instance offering.
 func (c *Client) PurchaseReservedDBInstancesOffering(ctx context.Context, params *PurchaseReservedDBInstancesOfferingInput, optFns ...func(*Options)) (*PurchaseReservedDBInstancesOfferingOutput, error) {
-	stack := middleware.NewStack("PurchaseReservedDBInstancesOffering", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PurchaseReservedDBInstancesOfferingInput{}
 	}
-	addawsAwsquery_serdeOpPurchaseReservedDBInstancesOfferingMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPurchaseReservedDBInstancesOfferingValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseReservedDBInstancesOffering(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "PurchaseReservedDBInstancesOffering", params, optFns, addOperationPurchaseReservedDBInstancesOfferingMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "PurchaseReservedDBInstancesOffering",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PurchaseReservedDBInstancesOfferingOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -86,9 +59,30 @@ type PurchaseReservedDBInstancesOfferingOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpPurchaseReservedDBInstancesOfferingMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
+func addOperationPurchaseReservedDBInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPurchaseReservedDBInstancesOffering{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpPurchaseReservedDBInstancesOfferingValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseReservedDBInstancesOffering(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPurchaseReservedDBInstancesOffering(region string) awsmiddleware.RegisterServiceMetadata {

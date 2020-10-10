@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -20,41 +19,15 @@ import (
 // subsequent request that specifies the NextMarker value from the current response
 // as the Marker value in the subsequent request.
 func (c *Client) ListDistributionsByOriginRequestPolicyId(ctx context.Context, params *ListDistributionsByOriginRequestPolicyIdInput, optFns ...func(*Options)) (*ListDistributionsByOriginRequestPolicyIdOutput, error) {
-	stack := middleware.NewStack("ListDistributionsByOriginRequestPolicyId", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListDistributionsByOriginRequestPolicyIdInput{}
 	}
-	addawsRestxml_serdeOpListDistributionsByOriginRequestPolicyIdMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListDistributionsByOriginRequestPolicyIdValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributionsByOriginRequestPolicyId(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListDistributionsByOriginRequestPolicyId", params, optFns, addOperationListDistributionsByOriginRequestPolicyIdMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListDistributionsByOriginRequestPolicyId",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListDistributionsByOriginRequestPolicyIdOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -87,9 +60,30 @@ type ListDistributionsByOriginRequestPolicyIdOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestxml_serdeOpListDistributionsByOriginRequestPolicyIdMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestxml_serializeOpListDistributionsByOriginRequestPolicyId{}, middleware.After)
-	stack.Deserialize.Add(&awsRestxml_deserializeOpListDistributionsByOriginRequestPolicyId{}, middleware.After)
+func addOperationListDistributionsByOriginRequestPolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestxml_serializeOpListDistributionsByOriginRequestPolicyId{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestxml_deserializeOpListDistributionsByOriginRequestPolicyId{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListDistributionsByOriginRequestPolicyIdValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributionsByOriginRequestPolicyId(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListDistributionsByOriginRequestPolicyId(region string) awsmiddleware.RegisterServiceMetadata {

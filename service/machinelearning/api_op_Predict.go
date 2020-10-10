@@ -18,42 +18,15 @@ import (
 // Not all response parameters will be populated. Whether a response parameter is
 // populated depends on the type of model requested.
 func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...func(*Options)) (*PredictOutput, error) {
-	stack := middleware.NewStack("Predict", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &PredictInput{}
 	}
-	addawsAwsjson11_serdeOpPredictMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPredictValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPredict(options.Region), middleware.Before)
-	mlcust.AddPredictEndpointMiddleware(stack, getPredictEndpoint)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "Predict", params, optFns, addOperationPredictMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "Predict",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*PredictOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -94,9 +67,31 @@ type PredictOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpPredictMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpPredict{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpPredict{}, middleware.After)
+func addOperationPredictMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPredict{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPredict{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpPredictValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opPredict(options.Region), middleware.Before)
+	mlcust.AddPredictEndpointMiddleware(stack, getPredictEndpoint)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPredict(region string) awsmiddleware.RegisterServiceMetadata {

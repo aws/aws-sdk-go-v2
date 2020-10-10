@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,41 +17,15 @@ import (
 // invoke the DescribeAvailabilityMonitorTest API. Starting this test will cause
 // your gateway to go offline for a brief period.
 func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *StartAvailabilityMonitorTestInput, optFns ...func(*Options)) (*StartAvailabilityMonitorTestOutput, error) {
-	stack := middleware.NewStack("StartAvailabilityMonitorTest", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartAvailabilityMonitorTestInput{}
 	}
-	addawsAwsjson11_serdeOpStartAvailabilityMonitorTestMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpStartAvailabilityMonitorTestValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartAvailabilityMonitorTest(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartAvailabilityMonitorTest", params, optFns, addOperationStartAvailabilityMonitorTestMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartAvailabilityMonitorTest",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartAvailabilityMonitorTestOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -77,9 +50,30 @@ type StartAvailabilityMonitorTestOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartAvailabilityMonitorTestMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartAvailabilityMonitorTest{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAvailabilityMonitorTest{}, middleware.After)
+func addOperationStartAvailabilityMonitorTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAvailabilityMonitorTest{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAvailabilityMonitorTest{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpStartAvailabilityMonitorTestValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartAvailabilityMonitorTest(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStartAvailabilityMonitorTest(region string) awsmiddleware.RegisterServiceMetadata {

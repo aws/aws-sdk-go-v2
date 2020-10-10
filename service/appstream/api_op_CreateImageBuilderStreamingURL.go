@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"time"
@@ -14,41 +13,15 @@ import (
 
 // Creates a URL to start an image builder streaming session.
 func (c *Client) CreateImageBuilderStreamingURL(ctx context.Context, params *CreateImageBuilderStreamingURLInput, optFns ...func(*Options)) (*CreateImageBuilderStreamingURLOutput, error) {
-	stack := middleware.NewStack("CreateImageBuilderStreamingURL", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CreateImageBuilderStreamingURLInput{}
 	}
-	addawsAwsjson11_serdeOpCreateImageBuilderStreamingURLMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateImageBuilderStreamingURLValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImageBuilderStreamingURL(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CreateImageBuilderStreamingURL", params, optFns, addOperationCreateImageBuilderStreamingURLMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CreateImageBuilderStreamingURL",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CreateImageBuilderStreamingURLOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -78,9 +51,30 @@ type CreateImageBuilderStreamingURLOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpCreateImageBuilderStreamingURLMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpCreateImageBuilderStreamingURL{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateImageBuilderStreamingURL{}, middleware.After)
+func addOperationCreateImageBuilderStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateImageBuilderStreamingURL{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateImageBuilderStreamingURL{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCreateImageBuilderStreamingURLValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImageBuilderStreamingURL(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateImageBuilderStreamingURL(region string) awsmiddleware.RegisterServiceMetadata {

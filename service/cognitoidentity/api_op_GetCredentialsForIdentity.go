@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,39 +16,15 @@ import (
 // Service with the appropriate role for the token. This is a public API. You do
 // not need any credentials to call this API.
 func (c *Client) GetCredentialsForIdentity(ctx context.Context, params *GetCredentialsForIdentityInput, optFns ...func(*Options)) (*GetCredentialsForIdentityOutput, error) {
-	stack := middleware.NewStack("GetCredentialsForIdentity", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &GetCredentialsForIdentityInput{}
 	}
-	addawsAwsjson11_serdeOpGetCredentialsForIdentityMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpGetCredentialsForIdentityValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCredentialsForIdentity(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "GetCredentialsForIdentity", params, optFns, addOperationGetCredentialsForIdentityMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "GetCredentialsForIdentity",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*GetCredentialsForIdentityOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -94,9 +69,28 @@ type GetCredentialsForIdentityOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpGetCredentialsForIdentityMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpGetCredentialsForIdentity{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCredentialsForIdentity{}, middleware.After)
+func addOperationGetCredentialsForIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCredentialsForIdentity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCredentialsForIdentity{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpGetCredentialsForIdentityValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCredentialsForIdentity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetCredentialsForIdentity(region string) awsmiddleware.RegisterServiceMetadata {

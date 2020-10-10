@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,41 +16,15 @@ import (
 // VPC peering connection, or to delete a VPC peering connection request that you
 // initiated, use DeleteVpcPeeringConnection ().
 func (c *Client) RejectVpcPeeringConnection(ctx context.Context, params *RejectVpcPeeringConnectionInput, optFns ...func(*Options)) (*RejectVpcPeeringConnectionOutput, error) {
-	stack := middleware.NewStack("RejectVpcPeeringConnection", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &RejectVpcPeeringConnectionInput{}
 	}
-	addawsEc2query_serdeOpRejectVpcPeeringConnectionMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpRejectVpcPeeringConnectionValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opRejectVpcPeeringConnection(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "RejectVpcPeeringConnection", params, optFns, addOperationRejectVpcPeeringConnectionMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "RejectVpcPeeringConnection",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*RejectVpcPeeringConnectionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -80,9 +53,30 @@ type RejectVpcPeeringConnectionOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsEc2query_serdeOpRejectVpcPeeringConnectionMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsEc2query_serializeOpRejectVpcPeeringConnection{}, middleware.After)
-	stack.Deserialize.Add(&awsEc2query_deserializeOpRejectVpcPeeringConnection{}, middleware.After)
+func addOperationRejectVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpRejectVpcPeeringConnection{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpRejectVpcPeeringConnection{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpRejectVpcPeeringConnectionValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opRejectVpcPeeringConnection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opRejectVpcPeeringConnection(region string) awsmiddleware.RegisterServiceMetadata {

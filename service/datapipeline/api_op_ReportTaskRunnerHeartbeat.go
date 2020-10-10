@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // resource managed by AWS Data Pipeline, the web service can use this call to
 // detect when the task runner application has failed and restart a new instance.
 func (c *Client) ReportTaskRunnerHeartbeat(ctx context.Context, params *ReportTaskRunnerHeartbeatInput, optFns ...func(*Options)) (*ReportTaskRunnerHeartbeatOutput, error) {
-	stack := middleware.NewStack("ReportTaskRunnerHeartbeat", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ReportTaskRunnerHeartbeatInput{}
 	}
-	addawsAwsjson11_serdeOpReportTaskRunnerHeartbeatMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpReportTaskRunnerHeartbeatValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opReportTaskRunnerHeartbeat(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ReportTaskRunnerHeartbeat", params, optFns, addOperationReportTaskRunnerHeartbeatMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ReportTaskRunnerHeartbeat",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ReportTaskRunnerHeartbeatOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -90,9 +63,30 @@ type ReportTaskRunnerHeartbeatOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskRunnerHeartbeat{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpReportTaskRunnerHeartbeat{}, middleware.After)
+func addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskRunnerHeartbeat{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReportTaskRunnerHeartbeat{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpReportTaskRunnerHeartbeatValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opReportTaskRunnerHeartbeat(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opReportTaskRunnerHeartbeat(region string) awsmiddleware.RegisterServiceMetadata {

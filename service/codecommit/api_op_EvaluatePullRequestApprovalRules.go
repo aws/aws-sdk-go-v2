@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Evaluates whether a pull request has met all the conditions specified in its
 // associated approval rules.
 func (c *Client) EvaluatePullRequestApprovalRules(ctx context.Context, params *EvaluatePullRequestApprovalRulesInput, optFns ...func(*Options)) (*EvaluatePullRequestApprovalRulesOutput, error) {
-	stack := middleware.NewStack("EvaluatePullRequestApprovalRules", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &EvaluatePullRequestApprovalRulesInput{}
 	}
-	addawsAwsjson11_serdeOpEvaluatePullRequestApprovalRulesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpEvaluatePullRequestApprovalRulesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opEvaluatePullRequestApprovalRules(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "EvaluatePullRequestApprovalRules", params, optFns, addOperationEvaluatePullRequestApprovalRulesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "EvaluatePullRequestApprovalRules",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*EvaluatePullRequestApprovalRulesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -83,9 +56,30 @@ type EvaluatePullRequestApprovalRulesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpEvaluatePullRequestApprovalRulesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpEvaluatePullRequestApprovalRules{}, middleware.After)
+func addOperationEvaluatePullRequestApprovalRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEvaluatePullRequestApprovalRules{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpEvaluatePullRequestApprovalRulesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opEvaluatePullRequestApprovalRules(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opEvaluatePullRequestApprovalRules(region string) awsmiddleware.RegisterServiceMetadata {

@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,41 +15,15 @@ import (
 // only perform this operation before the AutomatedUpdateDate and when the
 // UpdateStatus is in the PENDING_UPDATE state.
 func (c *Client) CancelElasticsearchServiceSoftwareUpdate(ctx context.Context, params *CancelElasticsearchServiceSoftwareUpdateInput, optFns ...func(*Options)) (*CancelElasticsearchServiceSoftwareUpdateOutput, error) {
-	stack := middleware.NewStack("CancelElasticsearchServiceSoftwareUpdate", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &CancelElasticsearchServiceSoftwareUpdateInput{}
 	}
-	addawsRestjson1_serdeOpCancelElasticsearchServiceSoftwareUpdateMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCancelElasticsearchServiceSoftwareUpdateValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelElasticsearchServiceSoftwareUpdate(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "CancelElasticsearchServiceSoftwareUpdate", params, optFns, addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "CancelElasticsearchServiceSoftwareUpdate",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*CancelElasticsearchServiceSoftwareUpdateOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -79,9 +52,30 @@ type CancelElasticsearchServiceSoftwareUpdateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpCancelElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
+func addOperationCancelElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpCancelElasticsearchServiceSoftwareUpdateValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelElasticsearchServiceSoftwareUpdate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCancelElasticsearchServiceSoftwareUpdate(region string) awsmiddleware.RegisterServiceMetadata {

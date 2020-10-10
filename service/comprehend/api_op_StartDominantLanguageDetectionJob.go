@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -16,42 +15,15 @@ import (
 // Starts an asynchronous dominant language detection job for a collection of
 // documents. Use the operation to track the status of a job.
 func (c *Client) StartDominantLanguageDetectionJob(ctx context.Context, params *StartDominantLanguageDetectionJobInput, optFns ...func(*Options)) (*StartDominantLanguageDetectionJobOutput, error) {
-	stack := middleware.NewStack("StartDominantLanguageDetectionJob", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartDominantLanguageDetectionJobInput{}
 	}
-	addawsAwsjson11_serdeOpStartDominantLanguageDetectionJobMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opStartDominantLanguageDetectionJobMiddleware(stack, options)
-	addOpStartDominantLanguageDetectionJobValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDominantLanguageDetectionJob(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartDominantLanguageDetectionJob", params, optFns, addOperationStartDominantLanguageDetectionJobMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartDominantLanguageDetectionJob",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartDominantLanguageDetectionJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -129,9 +101,31 @@ type StartDominantLanguageDetectionJobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartDominantLanguageDetectionJob{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDominantLanguageDetectionJob{}, middleware.After)
+func addOperationStartDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDominantLanguageDetectionJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDominantLanguageDetectionJob{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opStartDominantLanguageDetectionJobMiddleware(stack, options)
+	addOpStartDominantLanguageDetectionJobValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDominantLanguageDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpStartDominantLanguageDetectionJob struct {

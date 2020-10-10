@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -20,41 +19,15 @@ import (
 // packages and the pom.xml file for Maven). Any package version dependencies that
 // are not listed in the configuration file are not returned.
 func (c *Client) ListPackageVersionDependencies(ctx context.Context, params *ListPackageVersionDependenciesInput, optFns ...func(*Options)) (*ListPackageVersionDependenciesOutput, error) {
-	stack := middleware.NewStack("ListPackageVersionDependencies", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListPackageVersionDependenciesInput{}
 	}
-	addawsRestjson1_serdeOpListPackageVersionDependenciesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListPackageVersionDependenciesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListPackageVersionDependencies(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListPackageVersionDependencies", params, optFns, addOperationListPackageVersionDependenciesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListPackageVersionDependencies",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListPackageVersionDependenciesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -167,9 +140,30 @@ type ListPackageVersionDependenciesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpListPackageVersionDependenciesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpListPackageVersionDependencies{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackageVersionDependencies{}, middleware.After)
+func addOperationListPackageVersionDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackageVersionDependencies{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackageVersionDependencies{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListPackageVersionDependenciesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListPackageVersionDependencies(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListPackageVersionDependencies(region string) awsmiddleware.RegisterServiceMetadata {

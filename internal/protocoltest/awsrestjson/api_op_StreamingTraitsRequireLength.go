@@ -5,7 +5,6 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -15,37 +14,15 @@ import (
 // in the request body. In this example, no JSON document is synthesized because
 // the payload is not a structure or a union type.
 func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *StreamingTraitsRequireLengthInput, optFns ...func(*Options)) (*StreamingTraitsRequireLengthOutput, error) {
-	stack := middleware.NewStack("StreamingTraitsRequireLength", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StreamingTraitsRequireLengthInput{}
 	}
-	addawsRestjson1_serdeOpStreamingTraitsRequireLengthMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsRequireLength(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StreamingTraitsRequireLength", params, optFns, addOperationStreamingTraitsRequireLengthMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StreamingTraitsRequireLength",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StreamingTraitsRequireLengthOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -66,9 +43,26 @@ type StreamingTraitsRequireLengthOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpStreamingTraitsRequireLengthMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsRequireLength{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpStreamingTraitsRequireLength{}, middleware.After)
+func addOperationStreamingTraitsRequireLengthMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsRequireLength{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStreamingTraitsRequireLength{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsRequireLength(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStreamingTraitsRequireLength(region string) awsmiddleware.RegisterServiceMetadata {

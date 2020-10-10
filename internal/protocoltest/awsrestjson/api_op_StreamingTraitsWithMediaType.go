@@ -5,7 +5,6 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
@@ -15,37 +14,15 @@ import (
 // This examples uses a @mediaType trait on the payload to force a custom
 // content-type to be serialized.
 func (c *Client) StreamingTraitsWithMediaType(ctx context.Context, params *StreamingTraitsWithMediaTypeInput, optFns ...func(*Options)) (*StreamingTraitsWithMediaTypeOutput, error) {
-	stack := middleware.NewStack("StreamingTraitsWithMediaType", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StreamingTraitsWithMediaTypeInput{}
 	}
-	addawsRestjson1_serdeOpStreamingTraitsWithMediaTypeMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsWithMediaType(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StreamingTraitsWithMediaType", params, optFns, addOperationStreamingTraitsWithMediaTypeMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StreamingTraitsWithMediaType",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StreamingTraitsWithMediaTypeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -66,9 +43,26 @@ type StreamingTraitsWithMediaTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpStreamingTraitsWithMediaTypeMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsWithMediaType{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpStreamingTraitsWithMediaType{}, middleware.After)
+func addOperationStreamingTraitsWithMediaTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraitsWithMediaType{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStreamingTraitsWithMediaType{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsWithMediaType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opStreamingTraitsWithMediaType(region string) awsmiddleware.RegisterServiceMetadata {

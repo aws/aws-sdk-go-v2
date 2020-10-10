@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -14,39 +13,15 @@ import (
 // Resends the confirmation (for confirmation of registration) to a specific user
 // in the user pool.
 func (c *Client) ResendConfirmationCode(ctx context.Context, params *ResendConfirmationCodeInput, optFns ...func(*Options)) (*ResendConfirmationCodeOutput, error) {
-	stack := middleware.NewStack("ResendConfirmationCode", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ResendConfirmationCodeInput{}
 	}
-	addawsAwsjson11_serdeOpResendConfirmationCodeMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	addRetryMiddlewares(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpResendConfirmationCodeValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opResendConfirmationCode(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ResendConfirmationCode", params, optFns, addOperationResendConfirmationCodeMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ResendConfirmationCode",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ResendConfirmationCodeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -119,9 +94,28 @@ type ResendConfirmationCodeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpResendConfirmationCodeMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpResendConfirmationCode{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpResendConfirmationCode{}, middleware.After)
+func addOperationResendConfirmationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendConfirmationCode{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResendConfirmationCode{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	addRetryMiddlewares(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpResendConfirmationCodeValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opResendConfirmationCode(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opResendConfirmationCode(region string) awsmiddleware.RegisterServiceMetadata {

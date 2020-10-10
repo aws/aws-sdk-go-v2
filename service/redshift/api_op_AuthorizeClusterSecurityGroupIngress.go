@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -29,41 +28,15 @@ import (
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, params *AuthorizeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
-	stack := middleware.NewStack("AuthorizeClusterSecurityGroupIngress", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &AuthorizeClusterSecurityGroupIngressInput{}
 	}
-	addawsAwsquery_serdeOpAuthorizeClusterSecurityGroupIngressMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpAuthorizeClusterSecurityGroupIngressValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeClusterSecurityGroupIngress(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "AuthorizeClusterSecurityGroupIngress", params, optFns, addOperationAuthorizeClusterSecurityGroupIngressMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "AuthorizeClusterSecurityGroupIngress",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*AuthorizeClusterSecurityGroupIngressOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -98,9 +71,30 @@ type AuthorizeClusterSecurityGroupIngressOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsquery_serdeOpAuthorizeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
+func addOperationAuthorizeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpAuthorizeClusterSecurityGroupIngressValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeClusterSecurityGroupIngress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opAuthorizeClusterSecurityGroupIngress(region string) awsmiddleware.RegisterServiceMetadata {

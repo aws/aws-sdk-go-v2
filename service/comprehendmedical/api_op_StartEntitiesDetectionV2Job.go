@@ -8,7 +8,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,42 +16,15 @@ import (
 // documents. Use the DescribeEntitiesDetectionV2Job operation to track the status
 // of a job.
 func (c *Client) StartEntitiesDetectionV2Job(ctx context.Context, params *StartEntitiesDetectionV2JobInput, optFns ...func(*Options)) (*StartEntitiesDetectionV2JobOutput, error) {
-	stack := middleware.NewStack("StartEntitiesDetectionV2Job", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &StartEntitiesDetectionV2JobInput{}
 	}
-	addawsAwsjson11_serdeOpStartEntitiesDetectionV2JobMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addIdempotencyToken_opStartEntitiesDetectionV2JobMiddleware(stack, options)
-	addOpStartEntitiesDetectionV2JobValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opStartEntitiesDetectionV2Job(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "StartEntitiesDetectionV2Job", params, optFns, addOperationStartEntitiesDetectionV2JobMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "StartEntitiesDetectionV2Job",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*StartEntitiesDetectionV2JobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -106,9 +78,31 @@ type StartEntitiesDetectionV2JobOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpStartEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpStartEntitiesDetectionV2Job{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEntitiesDetectionV2Job{}, middleware.After)
+func addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEntitiesDetectionV2Job{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEntitiesDetectionV2Job{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opStartEntitiesDetectionV2JobMiddleware(stack, options)
+	addOpStartEntitiesDetectionV2JobValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opStartEntitiesDetectionV2Job(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 type idempotencyToken_initializeOpStartEntitiesDetectionV2Job struct {

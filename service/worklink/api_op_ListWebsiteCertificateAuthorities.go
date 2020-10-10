@@ -7,7 +7,6 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -15,41 +14,15 @@ import (
 // Retrieves a list of certificate authorities added for the current account and
 // Region.
 func (c *Client) ListWebsiteCertificateAuthorities(ctx context.Context, params *ListWebsiteCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListWebsiteCertificateAuthoritiesOutput, error) {
-	stack := middleware.NewStack("ListWebsiteCertificateAuthorities", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListWebsiteCertificateAuthoritiesInput{}
 	}
-	addawsRestjson1_serdeOpListWebsiteCertificateAuthoritiesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListWebsiteCertificateAuthoritiesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListWebsiteCertificateAuthorities(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListWebsiteCertificateAuthorities", params, optFns, addOperationListWebsiteCertificateAuthoritiesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListWebsiteCertificateAuthorities",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListWebsiteCertificateAuthoritiesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -83,9 +56,30 @@ type ListWebsiteCertificateAuthoritiesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsRestjson1_serdeOpListWebsiteCertificateAuthoritiesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsRestjson1_serializeOpListWebsiteCertificateAuthorities{}, middleware.After)
-	stack.Deserialize.Add(&awsRestjson1_deserializeOpListWebsiteCertificateAuthorities{}, middleware.After)
+func addOperationListWebsiteCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWebsiteCertificateAuthorities{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWebsiteCertificateAuthorities{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListWebsiteCertificateAuthoritiesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListWebsiteCertificateAuthorities(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListWebsiteCertificateAuthorities(region string) awsmiddleware.RegisterServiceMetadata {

@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -18,41 +17,15 @@ import (
 // WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces
 // to manage the WorkSpace.
 func (c *Client) ListAvailableManagementCidrRanges(ctx context.Context, params *ListAvailableManagementCidrRangesInput, optFns ...func(*Options)) (*ListAvailableManagementCidrRangesOutput, error) {
-	stack := middleware.NewStack("ListAvailableManagementCidrRanges", smithyhttp.NewStackRequest)
-	options := c.options.Copy()
-	for _, fn := range optFns {
-		fn(&options)
+	if params == nil {
+		params = &ListAvailableManagementCidrRangesInput{}
 	}
-	addawsAwsjson11_serdeOpListAvailableManagementCidrRangesMiddlewares(stack)
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpListAvailableManagementCidrRangesValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableManagementCidrRanges(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
 
-	for _, fn := range options.APIOptions {
-		if err := fn(stack); err != nil {
-			return nil, err
-		}
-	}
-	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, metadata, err := handler.Handle(ctx, params)
+	result, metadata, err := c.invokeOperation(ctx, "ListAvailableManagementCidrRanges", params, optFns, addOperationListAvailableManagementCidrRangesMiddlewares)
 	if err != nil {
-		return nil, &smithy.OperationError{
-			ServiceID:     ServiceID,
-			OperationName: "ListAvailableManagementCidrRanges",
-			Err:           err,
-		}
+		return nil, err
 	}
+
 	out := result.(*ListAvailableManagementCidrRangesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
@@ -88,9 +61,30 @@ type ListAvailableManagementCidrRangesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpListAvailableManagementCidrRangesMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagementCidrRanges{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagementCidrRanges{}, middleware.After)
+func addOperationListAvailableManagementCidrRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagementCidrRanges{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagementCidrRanges{}, middleware.After)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
+	smithyhttp.AddContentLengthMiddleware(stack)
+	addResolveEndpointMiddleware(stack, options)
+	v4.AddComputePayloadSHA256Middleware(stack)
+	addRetryMiddlewares(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
+	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addOpListAvailableManagementCidrRangesValidationMiddleware(stack)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableManagementCidrRanges(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
+	return nil
 }
 
 func newServiceMetadataMiddleware_opListAvailableManagementCidrRanges(region string) awsmiddleware.RegisterServiceMetadata {

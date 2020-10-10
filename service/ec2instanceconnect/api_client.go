@@ -9,7 +9,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"net/http"
 	"time"
 )
@@ -90,6 +92,36 @@ func (o Options) Copy() Options {
 	to.APIOptions = make([]func(*middleware.Stack) error, len(o.APIOptions))
 	copy(to.APIOptions, o.APIOptions)
 	return to
+}
+func (c *Client) invokeOperation(ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error) (result interface{}, metadata middleware.Metadata, err error) {
+	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
+	options := c.options.Copy()
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	for _, fn := range stackFns {
+		if err := fn(stack, options); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	for _, fn := range options.APIOptions {
+		if err := fn(stack); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	handler := middleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
+	result, metadata, err = handler.Handle(ctx, params)
+	if err != nil {
+		err = &smithy.OperationError{
+			ServiceID:     ServiceID,
+			OperationName: opID,
+			Err:           err,
+		}
+	}
+	return result, metadata, err
 }
 
 // NewFromConfig returns a new client from the provided config.
