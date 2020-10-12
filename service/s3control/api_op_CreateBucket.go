@@ -142,6 +142,7 @@ func addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Option
 	addMetadataRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
+	smithyhttp.AddChecksumMiddleware(stack)
 	return nil
 }
 

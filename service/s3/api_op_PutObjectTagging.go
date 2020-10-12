@@ -122,6 +122,7 @@ func addOperationPutObjectTaggingMiddlewares(stack *middleware.Stack, options Op
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	disableAcceptEncodingGzip(stack)
+	smithyhttp.AddChecksumMiddleware(stack)
 	return nil
 }
 
