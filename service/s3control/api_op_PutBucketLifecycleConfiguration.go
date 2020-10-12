@@ -96,6 +96,7 @@ func addOperationPutBucketLifecycleConfigurationMiddlewares(stack *middleware.St
 	addMetadataRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
+	smithyhttp.AddChecksumMiddleware(stack)
 	return nil
 }
 

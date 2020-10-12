@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20200930084954-897dfb99530c
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.0
-	github.com/awslabs/smithy-go v0.1.0
+	github.com/awslabs/smithy-go v0.0.0-20201012164308-5e070c242e0f
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../

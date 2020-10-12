@@ -114,6 +114,7 @@ func addOperationPutBucketCorsMiddlewares(stack *middleware.Stack, options Optio
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	disableAcceptEncodingGzip(stack)
+	smithyhttp.AddChecksumMiddleware(stack)
 	return nil
 }
 
