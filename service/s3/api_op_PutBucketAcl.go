@@ -167,6 +167,7 @@ func addOperationPutBucketAclMiddlewares(stack *middleware.Stack, options Option
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	disableAcceptEncodingGzip(stack)
+	smithyhttp.AddChecksumMiddleware(stack)
 	return nil
 }
 

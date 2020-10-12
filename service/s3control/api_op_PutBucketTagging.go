@@ -133,6 +133,7 @@ func addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack, options Op
 	addMetadataRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
+	smithyhttp.AddChecksumMiddleware(stack)
 	return nil
 }
 
