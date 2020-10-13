@@ -58,8 +58,12 @@ func buildRequestWithBodyReader(serviceName, region string, body io.Reader) (*ht
 func TestPresignRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 
+	query := req.URL.Query()
+	query.Set("X-Amz-Expires", "300")
+	req.URL.RawQuery = query.Encode()
+
 	signer := NewSigner()
-	signed, headers, err := signer.PresignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
+	signed, headers, err := signer.PresignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -106,8 +110,12 @@ func TestPresignBodyWithArrayRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
 
+	query := req.URL.Query()
+	query.Set("X-Amz-Expires", "300")
+	req.URL.RawQuery = query.Encode()
+
 	signer := NewSigner()
-	signed, headers, err := signer.PresignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
+	signed, headers, err := signer.PresignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -173,12 +181,12 @@ func TestSignRequest(t *testing.T) {
 func TestBuildCanonicalRequest(t *testing.T) {
 	req, _ := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
+
 	ctx := &httpSigner{
 		ServiceName:  "dynamodb",
 		Region:       "us-east-1",
 		Request:      req,
 		Time:         v4Internal.NewSigningTime(time.Now()),
-		ExpireTime:   5 * time.Second,
 		KeyDerivator: v4Internal.NewSigningKeyDeriver(),
 	}
 
@@ -215,12 +223,16 @@ func TestRequestHost(t *testing.T) {
 	req, _ := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
 	req.Host = "myhost"
+
+	query := req.URL.Query()
+	query.Set("X-Amz-Expires", "5")
+	req.URL.RawQuery = query.Encode()
+
 	ctx := &httpSigner{
 		ServiceName:  "dynamodb",
 		Region:       "us-east-1",
 		Request:      req,
 		Time:         v4Internal.NewSigningTime(time.Now()),
-		ExpireTime:   5 * time.Second,
 		KeyDerivator: v4Internal.NewSigningKeyDeriver(),
 	}
 
@@ -237,8 +249,13 @@ func TestRequestHost(t *testing.T) {
 func BenchmarkPresignRequest(b *testing.B) {
 	signer := NewSigner()
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
+
+	query := req.URL.Query()
+	query.Set("X-Amz-Expires", "5")
+	req.URL.RawQuery = query.Encode()
+
 	for i := 0; i < b.N; i++ {
-		signer.PresignHTTP(context.Background(), testCredentials, req, bodyHash, "dynamodb", "us-east-1", 300*time.Second, time.Now())
+		signer.PresignHTTP(context.Background(), testCredentials, req, bodyHash, "dynamodb", "us-east-1", time.Now())
 	}
 }
 

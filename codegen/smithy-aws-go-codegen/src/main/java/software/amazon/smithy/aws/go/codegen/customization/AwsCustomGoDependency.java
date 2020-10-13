@@ -39,6 +39,8 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
             "service/machinelearning/internal/customizations", "mlcust");
     public static final GoDependency ROUTE53_CUSTOMIZATION = aws(
             "service/route53/internal/customizations", "route53cust");
+    public static final GoDependency PRESIGNEDURL_CUSTOMIZATION = awsModuleDep(
+            "service/internal/presigned-url", null, Versions.INTERNAL_PRESIGNURL, "presignedurlcust");
 
     private AwsCustomGoDependency() {
         super();
@@ -47,5 +49,6 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
     private static final class Versions {
         private static final String INTERNAL_S3SHARED = "v0.26.1-0.20201016111247-66b2791dafc4";
         private static final String INTERNAL_ACCEPTENCODING = "v0.0.0-20200930084954-897dfb99530c";
+        private static final String INTERNAL_PRESIGNURL = "v0.0.0-20201010031928-2ce41ce966a4";
     }
 }

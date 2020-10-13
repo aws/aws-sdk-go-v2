@@ -111,7 +111,6 @@ type httpSigner struct {
 	ServiceName  string
 	Region       string
 	Time         v4Internal.SigningTime
-	ExpireTime   time.Duration
 	Credentials  aws.Credentials
 	KeyDerivator keyDerivator
 	IsPreSign    bool
@@ -268,23 +267,34 @@ func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *h
 // allows you to specify that a request is signed for the future, and cannot
 // be used until then.
 //
-// Returns the signed URL and the map of HTTP headers that were included in the signature or an
-// error if signing the request failed. For presigned requests these headers
-// and their values must be included on the HTTP request when it is made. This
-// is helpful to know what header values need to be shared with the party the
-// presigned request will be distributed to.
+// Returns the signed URL and the map of HTTP headers that were included in the
+// signature or an error if signing the request failed. For presigned requests
+// these headers and their values must be included on the HTTP request when it
+// is made. This is helpful to know what header values need to be shared with
+// the party the presigned request will be distributed to.
 //
-// PresignHTTP differs from SignHTTP in that it will sign the request using query string
-// instead of header values. This allows you to share the Presigned Request's
-// URL with third parties, or distribute it throughout your system with minimal
-// dependencies.
+// PresignHTTP differs from SignHTTP in that it will sign the request using
+// query string instead of header values. This allows you to share the
+// Presigned Request's URL with third parties, or distribute it throughout your
+// system with minimal dependencies.
 //
-// PresignHTTP also takes an exp value which is the duration the
-// signed request will be valid after the signing time. This is allows you to
-// set when the request will expire.
+// PresignHTTP will not set the expires time of the presigned request
+// automatically. To specify the expire duration for a request add the
+// "X-Amz-Expires" query parameter on the request with the value as the
+// duration in seconds the presigned URL should be considered valid for. This
+// parameter is not used by all AWS services, and is most notable used by
+// Amazon S3 APIs.
+//
+//   expires := 20 * time.Minute
+//   query := req.URL.Query()
+//   query.Set("X-Amz-Expires", strconv.FormatInt(int64(expires/time.Second), 10)
+//   req.URL.RawQuery = query.Encode()
 //
 // This method does not modify the provided request.
-func (v4 *Signer) PresignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, expireTime time.Duration, signingTime time.Time) (signedURI string, signedHeaders http.Header, err error) {
+func (v4 *Signer) PresignHTTP(
+	ctx context.Context, credentials aws.Credentials, r *http.Request,
+	payloadHash string, service string, region string, signingTime time.Time,
+) (signedURI string, signedHeaders http.Header, err error) {
 	signer := &httpSigner{
 		Request:                r.Clone(r.Context()),
 		PayloadHash:            payloadHash,
@@ -293,7 +303,6 @@ func (v4 *Signer) PresignHTTP(ctx context.Context, credentials aws.Credentials, 
 		Credentials:            credentials,
 		Time:                   v4Internal.NewSigningTime(signingTime.UTC()),
 		IsPreSign:              true,
-		ExpireTime:             expireTime,
 		DisableHeaderHoisting:  v4.DisableHeaderHoisting,
 		DisableURIPathEscaping: v4.DisableURIPathEscaping,
 		KeyDerivator:           v4.keyDerivator,
@@ -423,9 +432,7 @@ func (s *httpSigner) setRequiredSigningFields(headers http.Header, query url.Val
 			query.Set("X-Amz-Security-Token", sessionToken)
 		}
 
-		duration := int64(s.ExpireTime / time.Second)
 		query.Set(v4Internal.AmzDateKey, amzDate)
-		query.Set(v4Internal.AmzExpiresKey, strconv.FormatInt(duration, 10))
 		return
 	}
 

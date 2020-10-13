@@ -32,6 +32,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_ENDPOINTS = aws("internal/endpoints");
     public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
+    public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 

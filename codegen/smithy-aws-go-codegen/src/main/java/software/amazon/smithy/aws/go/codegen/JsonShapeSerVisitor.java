@@ -31,6 +31,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
@@ -47,10 +48,10 @@ import software.amazon.smithy.utils.FunctionalUtils;
 /**
  * Visitor to generate serialization functions for shapes in AWS JSON protocol
  * document bodies.
- *
+ * <p>
  * This class handles function body generation for all types expected by the
  * {@code DocumentShapeSerVisitor}. No other shape type serialization is overwritten.
- *
+ * <p>
  * Timestamps are serialized to {@link Format}.EPOCH_SECONDS by default.
  */
 final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
@@ -63,17 +64,17 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
      * @param context The generation context.
      */
     public JsonShapeSerVisitor(GenerationContext context) {
-        this(context, FunctionalUtils.alwaysTrue());
+        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()));
     }
 
     /**
-     * @param context The generation context.
+     * @param context      The generation context.
      * @param memberFilter A filter that is applied to structure members. This is useful for
-     *     members that won't be in the body.
+     *                     members that won't be in the body.
      */
     public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
-        this.memberFilter = memberFilter;
+        this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
