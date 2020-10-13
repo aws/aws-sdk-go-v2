@@ -43,8 +43,18 @@ generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-.
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
-smithy-build:
+smithy-build: gen-repo-mod-replace
 	cd codegen && ./gradlew clean build -Plog-tests
+
+smithy-build-%: gen-repo-mod-replace
+	@# smithy-build- command that uses the pattern to define build filter that
+	@# the smithy API model service id starts with. Strips off the 
+	@# "smithy-build-".
+	@#
+	@# e.g. smithy-build-com.amazonaws.rds
+	@# e.g. smithy-build-com.amazonaws.rds#AmazonRDSv19
+	cd codegen && \
+	SMITHY_GO_BUILD_API="$(subst smithy-build-,,$@)" ./gradlew clean build -Plog-tests
 
 smithy-clean:
 	cd codegen && ./gradlew clean
