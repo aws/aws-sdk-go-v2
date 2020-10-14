@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
@@ -254,15 +253,6 @@ func GetMFATokenFunc(configs Configs) (func() (string, error), bool, error) {
 	}
 
 	return nil, false, nil
-}
-
-// WithAssumeRoleDuration provides a wrapping type of a time.Duration to satisfy
-type WithAssumeRoleDuration time.Duration
-
-// GetAssumeRoleDuration returns the wrapped time.Duration value to use when setting
-// the assume role credentials duration.
-func (w WithAssumeRoleDuration) GetAssumeRoleDuration() (time.Duration, bool, error) {
-	return time.Duration(w), true, nil
 }
 
 // ProcessCredentialOptions is an interface for retrieving a function for setting
