@@ -24,7 +24,7 @@ SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 SDK_EXAMPLES_PKGS=
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
-RUN_NONE=-run '^$$'
+RUN_NONE=-run NONE
 RUN_INTEG=-run '^TestInteg_'
 
 CODEGEN_RESOURCES_PATH=$(shell pwd)/codegen/smithy-aws-go-codegen/src/main/resources/software/amazon/smithy/aws/go/codegen
@@ -98,7 +98,7 @@ gen-endpoint-prefix.json:
 # Unit Testing #
 ################
 
-unit: lint unit-modules-. 
+unit: lint unit-modules-.
 unit-race: lint unit-race-modules-.
 
 unit-test: test-modules-.
@@ -194,7 +194,7 @@ integ-modules-%:
 		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} -count 1 ./..."
 
 cleanup-integ-buckets:
-	@echo "Cleaning up SDK integraiton resources"
+	@echo "Cleaning up SDK integration resources"
 	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
 
 ##############
