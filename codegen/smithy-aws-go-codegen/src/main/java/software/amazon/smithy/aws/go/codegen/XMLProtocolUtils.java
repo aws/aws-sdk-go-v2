@@ -275,7 +275,7 @@ final class XmlProtocolUtils {
 
         if (requiresS3Customization(service)) {
             writer.addUseImports(AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION);
-            writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
+            writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, response.StatusCode)");
             writer.write("if err != nil { return err }");
             writer.insertTrailingNewline();
             writer.openBlock("if hostID := errorComponents.HostID; len(hostID)!=0 {", "}", () -> {
