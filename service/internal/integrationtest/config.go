@@ -16,16 +16,12 @@ func LoadConfigWithDefaultRegion(defaultRegion string) (cfg aws.Config, err erro
 	var opts []config.Config
 
 	if strings.EqualFold(os.Getenv("AWS_DEBUG_REQUEST"), "true") {
-		opts = append(opts, config.WithHTTPClient{
-			HTTPClient: smithyhttp.WrapLogClient(
-				logger{}, aws.NewBuildableHTTPClient(), false),
-		})
+		opts = append(opts, config.WithHTTPClient(smithyhttp.WrapLogClient(
+			logger{}, aws.NewBuildableHTTPClient(), false)))
 
 	} else if strings.EqualFold(os.Getenv("AWS_DEBUG_REQUEST_BODY"), "true") {
-		opts = append(opts, config.WithHTTPClient{
-			HTTPClient: smithyhttp.WrapLogClient(
-				logger{}, aws.NewBuildableHTTPClient(), true),
-		})
+		opts = append(opts, config.WithHTTPClient(smithyhttp.WrapLogClient(
+			logger{}, aws.NewBuildableHTTPClient(), true)))
 	}
 
 	cfg, err = config.LoadDefaultConfig(opts...)
@@ -38,7 +34,7 @@ func LoadConfigWithDefaultRegion(defaultRegion string) (cfg aws.Config, err erro
 	}
 
 	cfg.APIOptions = append(cfg.APIOptions,
-		RemoveOperationInputValidationMiddleware)
+		RemoveOperationInputValieationMiddleware)
 
 	return cfg, nil
 }

@@ -13,14 +13,14 @@ import (
 )
 
 func TestResolveCustomCABundle(t *testing.T) {
-	configs := Configs{
+	configs := configs{
 		WithCustomCABundle(awstesting.TLSBundleCA),
 	}
 
 	cfg := aws.Config{
 		HTTPClient: aws.NewBuildableHTTPClient(),
 	}
-	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
+	if err := resolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -54,14 +54,14 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 		t.Fatalf("failed to read CA file, %v", err)
 	}
 
-	configs := Configs{
+	configs := configs{
 		WithCustomCABundle(caPEM),
 	}
 
 	cfg := aws.Config{
 		HTTPClient: aws.NewBuildableHTTPClient(),
 	}
-	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
+	if err := resolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -78,20 +78,20 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 }
 
 func TestResolveCustomCABundle_ErrorCustomClient(t *testing.T) {
-	configs := Configs{
+	configs := configs{
 		WithCustomCABundle(awstesting.TLSBundleCA),
 	}
 
 	cfg := aws.Config{
 		HTTPClient: &http.Client{},
 	}
-	if err := ResolveCustomCABundle(&cfg, configs); err == nil {
+	if err := resolveCustomCABundle(&cfg, configs); err == nil {
 		t.Fatalf("expect error, got none")
 	}
 }
 
 func TestResolveRegion(t *testing.T) {
-	configs := Configs{
+	configs := configs{
 		WithRegion("mock-region"),
 		WithRegion("ignored-region"),
 	}
@@ -99,7 +99,7 @@ func TestResolveRegion(t *testing.T) {
 	cfg := aws.Config{}
 	cfg.Credentials = nil
 
-	if err := ResolveRegion(&cfg, configs); err != nil {
+	if err := resolveRegion(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -109,20 +109,20 @@ func TestResolveRegion(t *testing.T) {
 }
 
 func TestResolveCredentialsProvider(t *testing.T) {
-	configs := Configs{
-		WithCredentialsProvider{credentials.StaticCredentialsProvider{
+	configs := configs{
+		WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
 				AccessKeyID:     "AKID",
 				SecretAccessKey: "SECRET",
 				Source:          "valid",
 			}},
-		},
+		),
 	}
 
 	cfg := aws.Config{}
 	cfg.Credentials = nil
 
-	if found, err := ResolveCredentialProvider(&cfg, configs); err != nil {
+	if found, err := resolveCredentialProvider(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	} else if e, a := true, found; e != a {
 		t.Fatalf("expected %v, got %v", e, a)
@@ -154,13 +154,13 @@ func TestResolveCredentialsProvider(t *testing.T) {
 }
 
 func TestDefaultRegion(t *testing.T) {
-	configs := Configs{
+	configs := configs{
 		WithDefaultRegion("foo-region"),
 	}
 
 	cfg := unit.Config()
 
-	err := ResolveDefaultRegion(&cfg, configs)
+	err := resolveDefaultRegion(&cfg, configs)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -171,7 +171,7 @@ func TestDefaultRegion(t *testing.T) {
 
 	cfg.Region = ""
 
-	err = ResolveDefaultRegion(&cfg, configs)
+	err = resolveDefaultRegion(&cfg, configs)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}

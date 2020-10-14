@@ -3,15 +3,15 @@ package config_test
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
-	"os"
 	"path/filepath"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
-	smithymiddleware "github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -27,8 +27,7 @@ func ExampleWithSharedConfigProfile() {
 		}),
 	)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	// Region loaded from credentials file.
@@ -41,89 +40,68 @@ func ExampleWithSharedConfigProfile() {
 func ExampleWithCredentialsProvider() {
 	cfg, err := config.LoadDefaultConfig(
 		// Hard coded credentials.
-		config.WithCredentialsProvider{
-			CredentialsProvider: credentials.StaticCredentialsProvider{
-				Value: aws.Credentials{
-					AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
-					Source: "example hard coded credentials",
-				},
+		config.WithCredentialsProvider(credentials.StaticCredentialsProvider{
+			Value: aws.Credentials{
+				AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
+				Source: "example hard coded credentials",
 			},
-		},
-	)
+		}))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	// Credentials retrieve will be called automatically internally to the SDK
 	// service clients created with the cfg value.
 	creds, err := cfg.Credentials.Retrieve(context.Background())
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to get credentials, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 
 	fmt.Println("Credentials Source:", creds.Source)
-
-	// Output:
 	// Credentials Source: example hard coded credentials
 }
 
 func ExampleWithAPIOptions() {
-	cfg, err := config.LoadDefaultConfig(config.WithAPIOptions([]func(stack *smithymiddleware.Stack) error{
+	// import "github.com/awslabs/smithy-go/middleware"
+	// import smithyhttp "github.com/awslabs/smithy-go/transport/http"
+
+	cfg, err := config.LoadDefaultConfig(config.WithAPIOptions([]func(stack *middleware.Stack) error{
 		smithyhttp.AddHeaderValue("X-Custom-Header", "customHeaderValue"),
 	}))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
-	}
-
-	fmt.Println("Number of APIOptions:", len(cfg.APIOptions))
-	// Output:
-	// Number of APIOptions: 1
-}
-
-func ExampleWithEndpointResolver() {
-	cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver{
-		EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
-			return aws.Endpoint{URL: "https://mock.amazonaws.com"}, nil
-		}),
-	})
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
-	}
-
-	resolver, _ := cfg.EndpointResolver.ResolveEndpoint("service", "region")
-
-	fmt.Println(resolver.URL)
-	// Output:
-	// https://mock.amazonaws.com
-}
-
-func ExampleWithHTTPClient() {
-	cfg, err := config.LoadDefaultConfig(config.WithHTTPClient{
-		HTTPClient: aws.NewBuildableHTTPClient().WithTransportOptions(func(tr *http.Transport) {
-			tr.MaxIdleConns = 60
-		}),
-	})
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	_ = cfg
 }
 
-func ExampleWithAssumeRoleCredentialProviderOptions() {
-	cfg, err := config.LoadDefaultConfig(config.WithAssumeRoleCredentialProviderOptions(func(options *stscreds.AssumeRoleOptions) {
-		options.RoleSessionName = "customRoleSessionName"
-		options.TokenProvider = func() (string, error) {
-			return "mfaTokenValue", nil
-		}
+func ExampleWithEndpointResolver() {
+	cfg, err := config.LoadDefaultConfig(config.WithEndpointResolver(
+		aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
+			return aws.Endpoint{URL: "https://mock.amazonaws.com"}, nil
+		})))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = cfg
+}
+
+func ExampleWithHTTPClient() {
+	cfg, err := config.LoadDefaultConfig(config.WithHTTPClient(
+		aws.NewBuildableHTTPClient().WithTransportOptions(func(tr *http.Transport) {
+			tr.MaxIdleConns = 60
+		})))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = cfg
+}
+
+func ExampleWithWebIdentityRoleCredentialOptions() {
+	cfg, err := config.LoadDefaultConfig(config.WithWebIdentityRoleCredentialOptions(func(options *stscreds.WebIdentityRoleOptions) {
+		options.RoleSessionName = "customSessionName"
 	}))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 	_ = cfg
 }
@@ -131,18 +109,29 @@ func ExampleWithAssumeRoleCredentialProviderOptions() {
 func ExampleWithRegion() {
 	cfg, err := config.LoadDefaultConfig(config.WithRegion("us-west-2"))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
-	fmt.Println(cfg.Region)
-	// Output: us-west-2
+	_ = cfg
 }
 
 func ExampleWithEC2IMDSRegion() {
 	cfg, err := config.LoadDefaultConfig(config.WithEC2IMDSRegion{})
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to load config, %v", err)
-		os.Exit(1)
+		log.Fatal(err)
+	}
+	_ = cfg
+}
+
+func ExampleWithAssumeRoleCredentialOptions() {
+	// WithAssumeRoleCredentialOptions can be used to configure the AssumeRoleOptions for the STS credential provider.
+	// For example the TokenProvider can be populated if assuming a role that requires an MFA token.
+	cfg, err := config.LoadDefaultConfig(config.WithAssumeRoleCredentialOptions(func(options *stscreds.AssumeRoleOptions) {
+		options.TokenProvider = func() (string, error) {
+			return "theTokenCode", nil
+		}
+	}))
+	if err != nil {
+		log.Fatal(err)
 	}
 	_ = cfg
 }

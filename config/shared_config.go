@@ -42,9 +42,6 @@ const (
 	// S3 ARN Region Usage
 	s3UseARNRegionKey = "s3_use_arn_region"
 
-	// ErrCodeSharedConfig AWS SDK Error Code for Shared Configuration Errors
-	ErrCodeSharedConfig = "SharedConfigErr"
-
 	// DefaultSharedConfigProfile is the default profile to be used when
 	// loading configuration from the config files if another profile name
 	// is not provided.
@@ -139,7 +136,7 @@ func (c *SharedConfig) GetEnableEndpointDiscovery() (value, ok bool, err error) 
 	return *c.EnableEndpointDiscovery, true, nil
 }
 
-// GetS3UseARNRegion retions if the S3 service should allow ARNs to direct the region
+// GetS3UseARNRegion returns if the S3 service should allow ARNs to direct the region
 // the client's requests are sent to.
 func (c *SharedConfig) GetS3UseARNRegion() (value, ok bool, err error) {
 	if c.S3UseARNRegion == nil {
@@ -159,11 +156,11 @@ func (c SharedConfig) GetCredentialsProvider() (aws.Credentials, error) {
 	return c.Credentials, nil
 }
 
-// LoadSharedConfigIgnoreNotExist is an alias for LoadSharedConfig with the
+// loadSharedConfigIgnoreNotExist is an alias for loadSharedConfig with the
 // addition of ignoring when none of the files exist or when the profile
 // is not found in any of the files.
-func LoadSharedConfigIgnoreNotExist(configs Configs) (Config, error) {
-	cfg, err := LoadSharedConfig(configs)
+func loadSharedConfigIgnoreNotExist(configs configs) (Config, error) {
+	cfg, err := loadSharedConfig(configs)
 	if err != nil {
 		if _, ok := err.(SharedConfigNotExistErrors); ok {
 			return SharedConfig{}, nil
@@ -174,8 +171,8 @@ func LoadSharedConfigIgnoreNotExist(configs Configs) (Config, error) {
 	return cfg, nil
 }
 
-// LoadSharedConfig uses the Configs passed in to load the SharedConfig from file
-// The file names and profile name are sourced from the Configs.
+// loadSharedConfig uses the configs passed in to load the SharedConfig from file
+// The file names and profile name are sourced from the configs.
 //
 // If profile name is not provided DefaultSharedConfigProfile (default) will
 // be used.
@@ -186,13 +183,13 @@ func LoadSharedConfigIgnoreNotExist(configs Configs) (Config, error) {
 // Config providers used:
 // * SharedConfigProfileProvider
 // * SharedConfigFilesProvider
-func LoadSharedConfig(configs Configs) (Config, error) {
+func loadSharedConfig(configs configs) (Config, error) {
 	var profile string
 	var files []string
 	var ok bool
 	var err error
 
-	profile, ok, err = GetSharedConfigProfile(configs)
+	profile, ok, err = getSharedConfigProfile(configs)
 	if err != nil {
 		return nil, err
 	}
@@ -200,7 +197,7 @@ func LoadSharedConfig(configs Configs) (Config, error) {
 		profile = defaultSharedConfigProfile
 	}
 
-	files, ok, err = GetSharedConfigFiles(configs)
+	files, ok, err = getSharedConfigFiles(configs)
 	if err != nil {
 		return nil, err
 	}
@@ -485,7 +482,7 @@ type SharedConfigLoadError struct {
 	Err      error
 }
 
-// Unwrap retunrs the underlying error that caused the failure.
+// Unwrap returns the underlying error that caused the failure.
 func (e SharedConfigLoadError) Unwrap() error {
 	return e.Err
 }

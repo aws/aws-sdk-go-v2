@@ -133,7 +133,7 @@ type EnvConfig struct {
 	//	AWS_CONFIG_FILE=$HOME/my_shared_config
 	SharedConfigFile string
 
-	// Sets the path to a custom Credentials Authroity (CA) Bundle PEM file
+	// Sets the path to a custom Credentials Authority (CA) Bundle PEM file
 	// that the SDK will use instead of the system's root CA bundle.
 	// Only use this if you want to configure the SDK to use a custom set
 	// of CAs.
@@ -179,9 +179,9 @@ type EnvConfig struct {
 	S3UseARNRegion *bool
 }
 
-// LoadEnvConfig reads configuration values from the OS's environment variables.
+// loadEnvConfig reads configuration values from the OS's environment variables.
 // Returning the a Config typed EnvConfig to satisfy the ConfigLoader func type.
-func LoadEnvConfig(cfgs Configs) (Config, error) {
+func loadEnvConfig(cfgs configs) (Config, error) {
 	return NewEnvConfig()
 }
 

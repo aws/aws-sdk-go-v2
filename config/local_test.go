@@ -25,7 +25,6 @@ func TestValidateLocalURL(t *testing.T) {
 
 		h, ok := m[host]
 		if !ok {
-			t.Fatalf("unknown host in test, %v", host)
 			return nil, fmt.Errorf("unknown host")
 		}
 

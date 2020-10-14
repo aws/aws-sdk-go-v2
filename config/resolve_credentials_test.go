@@ -202,7 +202,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			var credChain []string
 
 			configSources := []Config{
-				WithEndpointResolver{endpointResolver},
+				WithEndpointResolver(endpointResolver),
 				WithAPIOptions(append([]func(*middleware.Stack) error{}, func(stack *middleware.Stack) error {
 					return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns", func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
 					) (

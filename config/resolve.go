@@ -9,26 +9,26 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-// ResolveDefaultAWSConfig will write default configuration values into the cfg
+// resolveDefaultAWSConfig will write default configuration values into the cfg
 // value. It will write the default values, overwriting any previous value.
 //
 // This should be used as the first resolver in the slice of resolvers when
 // resolving external configuration.
-func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
+func resolveDefaultAWSConfig(cfg *aws.Config, cfgs configs) error {
 	*cfg = aws.Config{
 		Credentials: aws.AnonymousCredentials{},
 	}
 	return nil
 }
 
-// ResolveCustomCABundle extracts the first instance of a custom CA bundle filename
+// resolveCustomCABundle extracts the first instance of a custom CA bundle filename
 // from the external configurations. It will update the HTTP Client's builder
 // to be configured with the custom CA bundle.
 //
 // Config provider used:
 // * CustomCABundleProvider
-func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
-	pemCerts, found, err := GetCustomCABundle(configs)
+func resolveCustomCABundle(cfg *aws.Config, cfgs configs) error {
+	pemCerts, found, err := getCustomCABundle(cfgs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
@@ -68,12 +68,12 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 	return err
 }
 
-// ResolveRegion extracts the first instance of a Region from the Configs slice.
+// resolveRegion extracts the first instance of a Region from the configs slice.
 //
 // Config providers used:
 // * RegionProvider
-func ResolveRegion(cfg *aws.Config, configs Configs) error {
-	v, found, err := GetRegion(configs)
+func resolveRegion(cfg *aws.Config, configs configs) error {
+	v, found, err := getRegion(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
@@ -87,14 +87,14 @@ func ResolveRegion(cfg *aws.Config, configs Configs) error {
 	return nil
 }
 
-// ResolveDefaultRegion extracts the first instance of a default region and sets `aws.Config.Region` to the default
+// resolveDefaultRegion extracts the first instance of a default region and sets `aws.Config.Region` to the default
 // region if region had not been resolved from other sources.
-func ResolveDefaultRegion(cfg *aws.Config, configs Configs) error {
+func resolveDefaultRegion(cfg *aws.Config, configs configs) error {
 	if len(cfg.Region) > 0 {
 		return nil
 	}
 
-	region, found, err := GetDefaultRegion(configs)
+	region, found, err := getDefaultRegion(configs)
 	if err != nil {
 		return err
 	}
@@ -107,10 +107,10 @@ func ResolveDefaultRegion(cfg *aws.Config, configs Configs) error {
 	return nil
 }
 
-// ResolveHTTPClient extracts the first instance of a HTTPClient and sets `aws.Config.HTTPClient` to the HTTPClient instance
+// resolveHTTPClient extracts the first instance of a HTTPClient and sets `aws.Config.HTTPClient` to the HTTPClient instance
 // if one has not been resolved from other sources.
-func ResolveHTTPClient(cfg *aws.Config, configs Configs) error {
-	c, found, err := GetHTTPClient(configs)
+func resolveHTTPClient(cfg *aws.Config, configs configs) error {
+	c, found, err := getHTTPClient(configs)
 	if err != nil {
 		return err
 	}
@@ -122,10 +122,10 @@ func ResolveHTTPClient(cfg *aws.Config, configs Configs) error {
 	return nil
 }
 
-// ResolveAPIOptions extracts the first instance of APIOptions and sets `aws.Config.APIOptions` to the resolved API options
+// resolveAPIOptions extracts the first instance of APIOptions and sets `aws.Config.APIOptions` to the resolved API options
 // if one has not been resolved from other sources.
-func ResolveAPIOptions(cfg *aws.Config, configs Configs) error {
-	o, found, err := GetAPIOptions(configs)
+func resolveAPIOptions(cfg *aws.Config, configs configs) error {
+	o, found, err := getAPIOptions(configs)
 	if err != nil {
 		return err
 	}
@@ -138,10 +138,10 @@ func ResolveAPIOptions(cfg *aws.Config, configs Configs) error {
 	return nil
 }
 
-// ResolveEndpointResolver extracts the first instance of a EndpointResolverFunc from the config slice
+// resolveEndpointResolver extracts the first instance of a EndpointResolverFunc from the config slice
 // and sets the functions result on the aws.Config.EndpointResolver
-func ResolveEndpointResolver(cfg *aws.Config, configs Configs) error {
-	endpointResolver, found, err := GetEndpointResolver(configs)
+func resolveEndpointResolver(cfg *aws.Config, configs configs) error {
+	endpointResolver, found, err := getEndpointResolver(configs)
 	if err != nil {
 		return err
 	}

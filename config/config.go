@@ -4,30 +4,30 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-// DefaultLoaders are a slice of functions that will read external configuration
+// defaultLoaders are a slice of functions that will read external configuration
 // sources for configuration values. These values are read by the AWSConfigResolvers
 // using interfaces to extract specific information from the external configuration.
-var DefaultLoaders = []Loader{
-	LoadEnvConfig,
-	LoadSharedConfigIgnoreNotExist,
+var defaultLoaders = []loader{
+	loadEnvConfig,
+	loadSharedConfigIgnoreNotExist,
 }
 
-// DefaultAWSConfigResolvers are a slice of functions that will resolve external
+// defaultAWSConfigResolvers are a slice of functions that will resolve external
 // configuration values into AWS configuration values.
 //
 // This will setup the AWS configuration's Region,
-var DefaultAWSConfigResolvers = []AWSConfigResolver{
-	ResolveDefaultAWSConfig,
-	ResolveCustomCABundle,
-	ResolveHTTPClient,
-	ResolveEndpointResolver,
-	ResolveAPIOptions,
+var defaultAWSConfigResolvers = []awsConfigResolver{
+	resolveDefaultAWSConfig,
+	resolveCustomCABundle,
+	resolveHTTPClient,
+	resolveEndpointResolver,
+	resolveAPIOptions,
 
-	ResolveRegion,
+	resolveRegion,
 	// TODO: Add back EC2 Region Resolver Support
-	ResolveDefaultRegion,
+	resolveDefaultRegion,
 
-	ResolveCredentials,
+	resolveCredentials,
 }
 
 // A Config represents a generic configuration value or set of values. This type
@@ -37,22 +37,22 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 // to extract specific data from the Config.
 type Config interface{}
 
-// A Loader is used to load external configuration data and returns it as
+// A loader is used to load external configuration data and returns it as
 // a generic Config type.
 //
 // The loader should return an error if it fails to load the external configuration
 // or the configuration data is malformed, or required components missing.
-type Loader func(Configs) (Config, error)
+type loader func(configs) (Config, error)
 
-// An AWSConfigResolver will extract configuration data from the Configs slice
+// An awsConfigResolver will extract configuration data from the configs slice
 // using the provider interfaces to extract specific functionality. The extracted
 // configuration values will be written to the AWS Config value.
 //
 // The resolver should return an error if it it fails to extract the data, the
 // data is malformed, or incomplete.
-type AWSConfigResolver func(cfg *aws.Config, configs Configs) error
+type awsConfigResolver func(cfg *aws.Config, configs configs) error
 
-// Configs is a slice of Config values. These values will be used by the
+// configs is a slice of Config values. These values will be used by the
 // AWSConfigResolvers to extract external configuration values to populate the
 // AWS Config type.
 //
@@ -61,15 +61,15 @@ type AWSConfigResolver func(cfg *aws.Config, configs Configs) error
 //
 // Use ResolveAWSConfig after external Config values have been added or loaded
 // to extract the loaded configuration values into the AWS Config.
-type Configs []Config
+type configs []Config
 
 // AppendFromLoaders iterates over the slice of loaders passed in calling each
 // loader function in order. The external config value returned by the loader
-// will be added to the returned Configs slice.
+// will be added to the returned configs slice.
 //
 // If a loader returns an error this method will stop iterating and return
 // that error.
-func (cs Configs) AppendFromLoaders(loaders []Loader) (Configs, error) {
+func (cs configs) AppendFromLoaders(loaders []loader) (configs, error) {
 	for _, fn := range loaders {
 		cfg, err := fn(cs)
 		if err != nil {
@@ -88,7 +88,7 @@ func (cs Configs) AppendFromLoaders(loaders []Loader) (Configs, error) {
 //
 // If an resolver returns an error this method will return that error, and stop
 // iterating over the resolvers.
-func (cs Configs) ResolveAWSConfig(resolvers []AWSConfigResolver) (aws.Config, error) {
+func (cs configs) ResolveAWSConfig(resolvers []awsConfigResolver) (aws.Config, error) {
 	var cfg aws.Config
 
 	for _, fn := range resolvers {
@@ -109,7 +109,7 @@ func (cs Configs) ResolveAWSConfig(resolvers []AWSConfigResolver) (aws.Config, e
 
 // ResolveConfig calls the provide function passing slice of configuration sources.
 // This implements the aws.ConfigResolver interface.
-func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
+func (cs configs) ResolveConfig(f func(configs []interface{}) error) error {
 	var cfgs []interface{}
 	for i := range cs {
 		cfgs = append(cfgs, cs[i])
@@ -121,7 +121,7 @@ func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 // populates an AWS Config with the values from the external configurations.
 //
 // An optional variadic set of additional Config values can be provided as input
-// that will be prepended to the Configs slice. Use this to add custom configuration.
+// that will be prepended to the configs slice. Use this to add custom configuration.
 // The custom configurations must satisfy the respective providers for their data
 // or the custom data will be ignored by the resolvers and config loaders.
 //
@@ -136,14 +136,14 @@ func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 // The default configuration sources are:
 // * Environment Variables
 // * Shared Configuration and Shared Credentials files.
-func LoadDefaultConfig(configs ...Config) (aws.Config, error) {
-	var cfgs Configs
-	cfgs = append(cfgs, configs...)
+func LoadDefaultConfig(cfgs ...Config) (aws.Config, error) {
+	var cfgCpy configs
+	cfgCpy = append(cfgCpy, cfgs...)
 
-	cfgs, err := cfgs.AppendFromLoaders(DefaultLoaders)
+	cfgCpy, err := cfgCpy.AppendFromLoaders(defaultLoaders)
 	if err != nil {
 		return aws.Config{}, err
 	}
 
-	return cfgs.ResolveAWSConfig(DefaultAWSConfigResolvers)
+	return cfgCpy.ResolveAWSConfig(defaultAWSConfigResolvers)
 }
