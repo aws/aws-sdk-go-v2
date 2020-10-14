@@ -192,7 +192,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateFargateProfileInput(v *CreateFarg
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
@@ -306,7 +312,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateNodegroupInput(v *CreateNodegroup
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
@@ -450,7 +462,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteClusterInput(v *DeleteClusterInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+		}
 		if err := encoder.SetURI("name").String(*v.Name); err != nil {
 			return err
 		}
@@ -510,13 +528,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFargateProfileInput(v *DeleteFarg
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
 	}
 
+	if v.FargateProfileName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member fargateProfileName must not be empty")}
+	}
 	if v.FargateProfileName != nil {
+		if len(*v.FargateProfileName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member fargateProfileName must not be empty")}
+		}
 		if err := encoder.SetURI("fargateProfileName").String(*v.FargateProfileName); err != nil {
 			return err
 		}
@@ -576,13 +606,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteNodegroupInput(v *DeleteNodegroup
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
 	}
 
+	if v.NodegroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+	}
 	if v.NodegroupName != nil {
+		if len(*v.NodegroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+		}
 		if err := encoder.SetURI("nodegroupName").String(*v.NodegroupName); err != nil {
 			return err
 		}
@@ -642,7 +684,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeClusterInput(v *DescribeCluster
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+		}
 		if err := encoder.SetURI("name").String(*v.Name); err != nil {
 			return err
 		}
@@ -702,13 +750,25 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFargateProfileInput(v *Describe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
 	}
 
+	if v.FargateProfileName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member fargateProfileName must not be empty")}
+	}
 	if v.FargateProfileName != nil {
+		if len(*v.FargateProfileName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member fargateProfileName must not be empty")}
+		}
 		if err := encoder.SetURI("fargateProfileName").String(*v.FargateProfileName); err != nil {
 			return err
 		}
@@ -768,13 +828,25 @@ func awsRestjson1_serializeOpHttpBindingsDescribeNodegroupInput(v *DescribeNodeg
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
 	}
 
+	if v.NodegroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+	}
 	if v.NodegroupName != nil {
+		if len(*v.NodegroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+		}
 		if err := encoder.SetURI("nodegroupName").String(*v.NodegroupName); err != nil {
 			return err
 		}
@@ -834,7 +906,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeUpdateInput(v *DescribeUpdateIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+		}
 		if err := encoder.SetURI("name").String(*v.Name); err != nil {
 			return err
 		}
@@ -844,7 +922,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeUpdateInput(v *DescribeUpdateIn
 		encoder.SetQuery("nodegroupName").String(*v.NodegroupName)
 	}
 
+	if v.UpdateId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member updateId must not be empty")}
+	}
 	if v.UpdateId != nil {
+		if len(*v.UpdateId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member updateId must not be empty")}
+		}
 		if err := encoder.SetURI("updateId").String(*v.UpdateId); err != nil {
 			return err
 		}
@@ -966,7 +1050,13 @@ func awsRestjson1_serializeOpHttpBindingsListFargateProfilesInput(v *ListFargate
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
@@ -1034,7 +1124,13 @@ func awsRestjson1_serializeOpHttpBindingsListNodegroupsInput(v *ListNodegroupsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
@@ -1102,7 +1198,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1166,7 +1268,13 @@ func awsRestjson1_serializeOpHttpBindingsListUpdatesInput(v *ListUpdatesInput, e
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+		}
 		if err := encoder.SetURI("name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1245,7 +1353,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1319,7 +1433,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1399,7 +1519,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateClusterConfigInput(v *UpdateClust
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+		}
 		if err := encoder.SetURI("name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1496,7 +1622,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateClusterVersionInput(v *UpdateClus
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member name must not be empty")}
+		}
 		if err := encoder.SetURI("name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1584,13 +1716,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateNodegroupConfigInput(v *UpdateNod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
 	}
 
+	if v.NodegroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+	}
 	if v.NodegroupName != nil {
+		if len(*v.NodegroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+		}
 		if err := encoder.SetURI("nodegroupName").String(*v.NodegroupName); err != nil {
 			return err
 		}
@@ -1687,13 +1831,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateNodegroupVersionInput(v *UpdateNo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClusterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
 	if v.ClusterName != nil {
+		if len(*v.ClusterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+		}
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
 	}
 
+	if v.NodegroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+	}
 	if v.NodegroupName != nil {
+		if len(*v.NodegroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member nodegroupName must not be empty")}
+		}
 		if err := encoder.SetURI("nodegroupName").String(*v.NodegroupName); err != nil {
 			return err
 		}

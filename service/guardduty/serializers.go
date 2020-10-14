@@ -76,7 +76,13 @@ func awsRestjson1_serializeOpHttpBindingsAcceptInvitationInput(v *AcceptInvitati
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -164,7 +170,13 @@ func awsRestjson1_serializeOpHttpBindingsArchiveFindingsInput(v *ArchiveFindings
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -346,7 +358,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateFilterInput(v *CreateFilterInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -463,7 +481,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateIPSetInput(v *CreateIPSetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -573,7 +597,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateMembersInput(v *CreateMembersInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -658,7 +688,13 @@ func awsRestjson1_serializeOpHttpBindingsCreatePublishingDestinationInput(v *Cre
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -753,7 +789,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateSampleFindingsInput(v *CreateSamp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -838,7 +880,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateThreatIntelSetInput(v *CreateThre
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1012,7 +1060,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDetectorInput(v *DeleteDetectorIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1072,13 +1126,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFilterInput(v *DeleteFilterInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.FilterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FilterName must not be empty")}
+	}
 	if v.FilterName != nil {
+		if len(*v.FilterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FilterName must not be empty")}
+		}
 		if err := encoder.SetURI("FilterName").String(*v.FilterName); err != nil {
 			return err
 		}
@@ -1213,13 +1279,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteIPSetInput(v *DeleteIPSetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.IpSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member IpSetId must not be empty")}
+	}
 	if v.IpSetId != nil {
+		if len(*v.IpSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member IpSetId must not be empty")}
+		}
 		if err := encoder.SetURI("IpSetId").String(*v.IpSetId); err != nil {
 			return err
 		}
@@ -1290,7 +1368,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMembersInput(v *DeleteMembersInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1364,13 +1448,25 @@ func awsRestjson1_serializeOpHttpBindingsDeletePublishingDestinationInput(v *Del
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DestinationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DestinationId must not be empty")}
+	}
 	if v.DestinationId != nil {
+		if len(*v.DestinationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DestinationId must not be empty")}
+		}
 		if err := encoder.SetURI("DestinationId").String(*v.DestinationId); err != nil {
 			return err
 		}
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1430,13 +1526,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteThreatIntelSetInput(v *DeleteThre
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.ThreatIntelSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ThreatIntelSetId must not be empty")}
+	}
 	if v.ThreatIntelSetId != nil {
+		if len(*v.ThreatIntelSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ThreatIntelSetId must not be empty")}
+		}
 		if err := encoder.SetURI("ThreatIntelSetId").String(*v.ThreatIntelSetId); err != nil {
 			return err
 		}
@@ -1496,7 +1604,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeOrganizationConfigurationInput(
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1556,13 +1670,25 @@ func awsRestjson1_serializeOpHttpBindingsDescribePublishingDestinationInput(v *D
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DestinationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DestinationId must not be empty")}
+	}
 	if v.DestinationId != nil {
+		if len(*v.DestinationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DestinationId must not be empty")}
+		}
 		if err := encoder.SetURI("DestinationId").String(*v.DestinationId); err != nil {
 			return err
 		}
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1695,7 +1821,13 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateFromMasterAccountInput(v *D
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1766,7 +1898,13 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateMembersInput(v *Disassociat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1913,7 +2051,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDetectorInput(v *GetDetectorInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -1973,13 +2117,25 @@ func awsRestjson1_serializeOpHttpBindingsGetFilterInput(v *GetFilterInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.FilterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FilterName must not be empty")}
+	}
 	if v.FilterName != nil {
+		if len(*v.FilterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FilterName must not be empty")}
+		}
 		if err := encoder.SetURI("FilterName").String(*v.FilterName); err != nil {
 			return err
 		}
@@ -2050,7 +2206,13 @@ func awsRestjson1_serializeOpHttpBindingsGetFindingsInput(v *GetFindingsInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2142,7 +2304,13 @@ func awsRestjson1_serializeOpHttpBindingsGetFindingsStatisticsInput(v *GetFindin
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2273,13 +2441,25 @@ func awsRestjson1_serializeOpHttpBindingsGetIPSetInput(v *GetIPSetInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.IpSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member IpSetId must not be empty")}
+	}
 	if v.IpSetId != nil {
+		if len(*v.IpSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member IpSetId must not be empty")}
+		}
 		if err := encoder.SetURI("IpSetId").String(*v.IpSetId); err != nil {
 			return err
 		}
@@ -2339,7 +2519,13 @@ func awsRestjson1_serializeOpHttpBindingsGetMasterAccountInput(v *GetMasterAccou
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2410,7 +2596,13 @@ func awsRestjson1_serializeOpHttpBindingsGetMemberDetectorsInput(v *GetMemberDet
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2495,7 +2687,13 @@ func awsRestjson1_serializeOpHttpBindingsGetMembersInput(v *GetMembersInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2569,13 +2767,25 @@ func awsRestjson1_serializeOpHttpBindingsGetThreatIntelSetInput(v *GetThreatInte
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.ThreatIntelSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ThreatIntelSetId must not be empty")}
+	}
 	if v.ThreatIntelSetId != nil {
+		if len(*v.ThreatIntelSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ThreatIntelSetId must not be empty")}
+		}
 		if err := encoder.SetURI("ThreatIntelSetId").String(*v.ThreatIntelSetId); err != nil {
 			return err
 		}
@@ -2646,7 +2856,13 @@ func awsRestjson1_serializeOpHttpBindingsGetUsageStatisticsInput(v *GetUsageStat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2751,7 +2967,13 @@ func awsRestjson1_serializeOpHttpBindingsInviteMembersInput(v *InviteMembersInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2897,7 +3119,13 @@ func awsRestjson1_serializeOpHttpBindingsListFiltersInput(v *ListFiltersInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -2976,7 +3204,13 @@ func awsRestjson1_serializeOpHttpBindingsListFindingsInput(v *ListFindingsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3129,7 +3363,13 @@ func awsRestjson1_serializeOpHttpBindingsListIPSetsInput(v *ListIPSetsInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3197,7 +3437,13 @@ func awsRestjson1_serializeOpHttpBindingsListMembersInput(v *ListMembersInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3331,7 +3577,13 @@ func awsRestjson1_serializeOpHttpBindingsListPublishingDestinationsInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3399,7 +3651,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -3459,7 +3717,13 @@ func awsRestjson1_serializeOpHttpBindingsListThreatIntelSetsInput(v *ListThreatI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3538,7 +3802,13 @@ func awsRestjson1_serializeOpHttpBindingsStartMonitoringMembersInput(v *StartMon
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3623,7 +3893,13 @@ func awsRestjson1_serializeOpHttpBindingsStopMonitoringMembersInput(v *StopMonit
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3708,7 +3984,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -3793,7 +4075,13 @@ func awsRestjson1_serializeOpHttpBindingsUnarchiveFindingsInput(v *UnarchiveFind
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -3867,7 +4155,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -3947,7 +4241,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDetectorInput(v *UpdateDetectorIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -4042,13 +4342,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFilterInput(v *UpdateFilterInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.FilterName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FilterName must not be empty")}
+	}
 	if v.FilterName != nil {
+		if len(*v.FilterName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member FilterName must not be empty")}
+		}
 		if err := encoder.SetURI("FilterName").String(*v.FilterName); err != nil {
 			return err
 		}
@@ -4148,7 +4460,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFindingsFeedbackInput(v *UpdateFi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -4243,13 +4561,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateIPSetInput(v *UpdateIPSetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.IpSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member IpSetId must not be empty")}
+	}
 	if v.IpSetId != nil {
+		if len(*v.IpSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member IpSetId must not be empty")}
+		}
 		if err := encoder.SetURI("IpSetId").String(*v.IpSetId); err != nil {
 			return err
 		}
@@ -4342,7 +4672,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateMemberDetectorsInput(v *UpdateMem
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -4434,7 +4770,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateOrganizationConfigurationInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -4524,13 +4866,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePublishingDestinationInput(v *Upd
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DestinationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DestinationId must not be empty")}
+	}
 	if v.DestinationId != nil {
+		if len(*v.DestinationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DestinationId must not be empty")}
+		}
 		if err := encoder.SetURI("DestinationId").String(*v.DestinationId); err != nil {
 			return err
 		}
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
@@ -4615,13 +4969,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateThreatIntelSetInput(v *UpdateThre
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
 	if v.DetectorId != nil {
+		if len(*v.DetectorId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+		}
 		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
 			return err
 		}
 	}
 
+	if v.ThreatIntelSetId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ThreatIntelSetId must not be empty")}
+	}
 	if v.ThreatIntelSetId != nil {
+		if len(*v.ThreatIntelSetId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ThreatIntelSetId must not be empty")}
+		}
 		if err := encoder.SetURI("ThreatIntelSetId").String(*v.ThreatIntelSetId); err != nil {
 			return err
 		}

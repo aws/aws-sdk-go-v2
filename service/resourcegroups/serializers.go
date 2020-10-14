@@ -471,7 +471,13 @@ func awsRestjson1_serializeOpHttpBindingsGetTagsInput(v *GetTagsInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Arn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
 	if v.Arn != nil {
+		if len(*v.Arn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+		}
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
 			return err
 		}
@@ -889,7 +895,13 @@ func awsRestjson1_serializeOpHttpBindingsTagInput(v *TagInput, encoder *httpbind
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Arn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
 	if v.Arn != nil {
+		if len(*v.Arn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+		}
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
 			return err
 		}
@@ -1054,7 +1066,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagInput(v *UntagInput, encoder *http
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Arn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+	}
 	if v.Arn != nil {
+		if len(*v.Arn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Arn must not be empty")}
+		}
 		if err := encoder.SetURI("Arn").String(*v.Arn); err != nil {
 			return err
 		}

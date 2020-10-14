@@ -176,25 +176,49 @@ func awsRestjson1_serializeOpHttpBindingsInvokeScreenAutomationInput(v *InvokeSc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AppId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
+	}
 	if v.AppId != nil {
+		if len(*v.AppId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
+		}
 		if err := encoder.SetURI("appId").String(*v.AppId); err != nil {
 			return err
 		}
 	}
 
+	if v.ScreenAutomationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member screenAutomationId must not be empty")}
+	}
 	if v.ScreenAutomationId != nil {
+		if len(*v.ScreenAutomationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member screenAutomationId must not be empty")}
+		}
 		if err := encoder.SetURI("screenAutomationId").String(*v.ScreenAutomationId); err != nil {
 			return err
 		}
 	}
 
+	if v.ScreenId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member screenId must not be empty")}
+	}
 	if v.ScreenId != nil {
+		if len(*v.ScreenId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member screenId must not be empty")}
+		}
 		if err := encoder.SetURI("screenId").String(*v.ScreenId); err != nil {
 			return err
 		}
 	}
 
+	if v.WorkbookId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workbookId must not be empty")}
+	}
 	if v.WorkbookId != nil {
+		if len(*v.WorkbookId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member workbookId must not be empty")}
+		}
 		if err := encoder.SetURI("workbookId").String(*v.WorkbookId); err != nil {
 			return err
 		}

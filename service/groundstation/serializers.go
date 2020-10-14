@@ -66,7 +66,13 @@ func awsRestjson1_serializeOpHttpBindingsCancelContactInput(v *CancelContactInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ContactId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member contactId must not be empty")}
+	}
 	if v.ContactId != nil {
+		if len(*v.ContactId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member contactId must not be empty")}
+		}
 		if err := encoder.SetURI("contactId").String(*v.ContactId); err != nil {
 			return err
 		}
@@ -402,13 +408,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigInput(v *DeleteConfigInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ConfigId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configId must not be empty")}
+	}
 	if v.ConfigId != nil {
+		if len(*v.ConfigId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member configId must not be empty")}
+		}
 		if err := encoder.SetURI("configId").String(*v.ConfigId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.ConfigType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configType must not be empty")}
+	}
 	if len(v.ConfigType) > 0 {
+		if len(string(v.ConfigType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member configType must not be empty")}
+		}
 		if err := encoder.SetURI("configType").String(string(v.ConfigType)); err != nil {
 			return err
 		}
@@ -468,7 +486,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDataflowEndpointGroupInput(v *Del
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataflowEndpointGroupId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataflowEndpointGroupId must not be empty")}
+	}
 	if v.DataflowEndpointGroupId != nil {
+		if len(*v.DataflowEndpointGroupId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member dataflowEndpointGroupId must not be empty")}
+		}
 		if err := encoder.SetURI("dataflowEndpointGroupId").String(*v.DataflowEndpointGroupId); err != nil {
 			return err
 		}
@@ -528,7 +552,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMissionProfileInput(v *DeleteMiss
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MissionProfileId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member missionProfileId must not be empty")}
+	}
 	if v.MissionProfileId != nil {
+		if len(*v.MissionProfileId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member missionProfileId must not be empty")}
+		}
 		if err := encoder.SetURI("missionProfileId").String(*v.MissionProfileId); err != nil {
 			return err
 		}
@@ -588,7 +618,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeContactInput(v *DescribeContact
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ContactId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member contactId must not be empty")}
+	}
 	if v.ContactId != nil {
+		if len(*v.ContactId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member contactId must not be empty")}
+		}
 		if err := encoder.SetURI("contactId").String(*v.ContactId); err != nil {
 			return err
 		}
@@ -648,13 +684,25 @@ func awsRestjson1_serializeOpHttpBindingsGetConfigInput(v *GetConfigInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ConfigId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configId must not be empty")}
+	}
 	if v.ConfigId != nil {
+		if len(*v.ConfigId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member configId must not be empty")}
+		}
 		if err := encoder.SetURI("configId").String(*v.ConfigId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.ConfigType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configType must not be empty")}
+	}
 	if len(v.ConfigType) > 0 {
+		if len(string(v.ConfigType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member configType must not be empty")}
+		}
 		if err := encoder.SetURI("configType").String(string(v.ConfigType)); err != nil {
 			return err
 		}
@@ -714,7 +762,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDataflowEndpointGroupInput(v *GetDat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DataflowEndpointGroupId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataflowEndpointGroupId must not be empty")}
+	}
 	if v.DataflowEndpointGroupId != nil {
+		if len(*v.DataflowEndpointGroupId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member dataflowEndpointGroupId must not be empty")}
+		}
 		if err := encoder.SetURI("dataflowEndpointGroupId").String(*v.DataflowEndpointGroupId); err != nil {
 			return err
 		}
@@ -852,7 +906,13 @@ func awsRestjson1_serializeOpHttpBindingsGetMissionProfileInput(v *GetMissionPro
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MissionProfileId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member missionProfileId must not be empty")}
+	}
 	if v.MissionProfileId != nil {
+		if len(*v.MissionProfileId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member missionProfileId must not be empty")}
+		}
 		if err := encoder.SetURI("missionProfileId").String(*v.MissionProfileId); err != nil {
 			return err
 		}
@@ -912,7 +972,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSatelliteInput(v *GetSatelliteInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.SatelliteId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member satelliteId must not be empty")}
+	}
 	if v.SatelliteId != nil {
+		if len(*v.SatelliteId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member satelliteId must not be empty")}
+		}
 		if err := encoder.SetURI("satelliteId").String(*v.SatelliteId); err != nil {
 			return err
 		}
@@ -1396,7 +1462,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1567,7 +1639,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1641,7 +1719,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1721,13 +1805,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateConfigInput(v *UpdateConfigInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ConfigId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configId must not be empty")}
+	}
 	if v.ConfigId != nil {
+		if len(*v.ConfigId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member configId must not be empty")}
+		}
 		if err := encoder.SetURI("configId").String(*v.ConfigId); err != nil {
 			return err
 		}
 	}
 
+	if len(v.ConfigType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member configType must not be empty")}
+	}
 	if len(v.ConfigType) > 0 {
+		if len(string(v.ConfigType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member configType must not be empty")}
+		}
 		if err := encoder.SetURI("configType").String(string(v.ConfigType)); err != nil {
 			return err
 		}
@@ -1817,7 +1913,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateMissionProfileInput(v *UpdateMiss
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MissionProfileId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member missionProfileId must not be empty")}
+	}
 	if v.MissionProfileId != nil {
+		if len(*v.MissionProfileId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member missionProfileId must not be empty")}
+		}
 		if err := encoder.SetURI("missionProfileId").String(*v.MissionProfileId); err != nil {
 			return err
 		}

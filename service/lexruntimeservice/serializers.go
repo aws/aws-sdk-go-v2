@@ -67,19 +67,37 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSessionInput(v *DeleteSessionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BotAlias == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+	}
 	if v.BotAlias != nil {
+		if len(*v.BotAlias) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+		}
 		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
 			return err
 		}
 	}
 
+	if v.BotName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+	}
 	if v.BotName != nil {
+		if len(*v.BotName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+		}
 		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
 			return err
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+		}
 		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -139,13 +157,25 @@ func awsRestjson1_serializeOpHttpBindingsGetSessionInput(v *GetSessionInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BotAlias == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+	}
 	if v.BotAlias != nil {
+		if len(*v.BotAlias) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+		}
 		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
 			return err
 		}
 	}
 
+	if v.BotName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+	}
 	if v.BotName != nil {
+		if len(*v.BotName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+		}
 		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
 			return err
 		}
@@ -155,7 +185,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSessionInput(v *GetSessionInput, enc
 		encoder.SetQuery("checkpointLabelFilter").String(*v.CheckpointLabelFilter)
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+		}
 		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -233,13 +269,25 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 		}
 	}
 
+	if v.BotAlias == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+	}
 	if v.BotAlias != nil {
+		if len(*v.BotAlias) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+		}
 		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
 			return err
 		}
 	}
 
+	if v.BotName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+	}
 	if v.BotName != nil {
+		if len(*v.BotName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+		}
 		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
 			return err
 		}
@@ -268,7 +316,13 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+		}
 		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -339,19 +393,37 @@ func awsRestjson1_serializeOpHttpBindingsPostTextInput(v *PostTextInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BotAlias == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+	}
 	if v.BotAlias != nil {
+		if len(*v.BotAlias) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+		}
 		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
 			return err
 		}
 	}
 
+	if v.BotName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+	}
 	if v.BotName != nil {
+		if len(*v.BotName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+		}
 		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
 			return err
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+		}
 		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
 			return err
 		}
@@ -455,19 +527,37 @@ func awsRestjson1_serializeOpHttpBindingsPutSessionInput(v *PutSessionInput, enc
 		}
 	}
 
+	if v.BotAlias == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+	}
 	if v.BotAlias != nil {
+		if len(*v.BotAlias) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botAlias must not be empty")}
+		}
 		if err := encoder.SetURI("botAlias").String(*v.BotAlias); err != nil {
 			return err
 		}
 	}
 
+	if v.BotName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+	}
 	if v.BotName != nil {
+		if len(*v.BotName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member botName must not be empty")}
+		}
 		if err := encoder.SetURI("botName").String(*v.BotName); err != nil {
 			return err
 		}
 	}
 
+	if v.UserId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+	}
 	if v.UserId != nil {
+		if len(*v.UserId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member userId must not be empty")}
+		}
 		if err := encoder.SetURI("userId").String(*v.UserId); err != nil {
 			return err
 		}

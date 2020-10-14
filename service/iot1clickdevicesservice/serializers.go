@@ -66,7 +66,13 @@ func awsRestjson1_serializeOpHttpBindingsClaimDevicesByClaimCodeInput(v *ClaimDe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ClaimCode == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClaimCode must not be empty")}
+	}
 	if v.ClaimCode != nil {
+		if len(*v.ClaimCode) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ClaimCode must not be empty")}
+		}
 		if err := encoder.SetURI("ClaimCode").String(*v.ClaimCode); err != nil {
 			return err
 		}
@@ -126,7 +132,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDeviceInput(v *DescribeDeviceIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -197,7 +209,13 @@ func awsRestjson1_serializeOpHttpBindingsFinalizeDeviceClaimInput(v *FinalizeDev
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -271,7 +289,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDeviceMethodsInput(v *GetDeviceMetho
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -331,7 +355,13 @@ func awsRestjson1_serializeOpHttpBindingsInitiateDeviceClaimInput(v *InitiateDev
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -402,7 +432,13 @@ func awsRestjson1_serializeOpHttpBindingsInvokeDeviceMethodInput(v *InvokeDevice
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -481,7 +517,13 @@ func awsRestjson1_serializeOpHttpBindingsListDeviceEventsInput(v *ListDeviceEven
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -623,7 +665,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -694,7 +742,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -768,7 +822,13 @@ func awsRestjson1_serializeOpHttpBindingsUnclaimDeviceInput(v *UnclaimDeviceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
@@ -828,7 +888,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -908,7 +974,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDeviceStateInput(v *UpdateDeviceS
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}

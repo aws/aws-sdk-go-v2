@@ -65,7 +65,13 @@ func awsRestjson1_serializeOpHttpBindingsCancelSigningProfileInput(v *CancelSign
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfileName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
 	if v.ProfileName != nil {
+		if len(*v.ProfileName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+		}
 		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
 			return err
 		}
@@ -125,7 +131,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeSigningJobInput(v *DescribeSign
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.JobId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
+	}
 	if v.JobId != nil {
+		if len(*v.JobId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
+		}
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -185,7 +197,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSigningPlatformInput(v *GetSigningPl
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PlatformId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member platformId must not be empty")}
+	}
 	if v.PlatformId != nil {
+		if len(*v.PlatformId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member platformId must not be empty")}
+		}
 		if err := encoder.SetURI("platformId").String(*v.PlatformId); err != nil {
 			return err
 		}
@@ -245,7 +263,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSigningProfileInput(v *GetSigningPro
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfileName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
 	if v.ProfileName != nil {
+		if len(*v.ProfileName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+		}
 		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
 			return err
 		}
@@ -519,7 +543,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -590,7 +620,13 @@ func awsRestjson1_serializeOpHttpBindingsPutSigningProfileInput(v *PutSigningPro
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfileName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
 	if v.ProfileName != nil {
+		if len(*v.ProfileName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+		}
 		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
 			return err
 		}
@@ -793,7 +829,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -867,7 +909,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}

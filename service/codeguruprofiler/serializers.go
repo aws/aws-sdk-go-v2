@@ -77,7 +77,13 @@ func awsRestjson1_serializeOpHttpBindingsConfigureAgentInput(v *ConfigureAgentIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -249,7 +255,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteProfilingGroupInput(v *DeleteProf
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -309,7 +321,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeProfilingGroupInput(v *Describe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -446,7 +464,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateProfilingGroupInput(v *UpdateProf
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -520,7 +544,13 @@ func awsRestjson1_serializeOpHttpBindingsGetPolicyInput(v *GetPolicyInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -591,13 +621,25 @@ func awsRestjson1_serializeOpHttpBindingsPutPermissionInput(v *PutPermissionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.ActionGroup) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member actionGroup must not be empty")}
+	}
 	if len(v.ActionGroup) > 0 {
+		if len(string(v.ActionGroup)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member actionGroup must not be empty")}
+		}
 		if err := encoder.SetURI("actionGroup").String(string(v.ActionGroup)); err != nil {
 			return err
 		}
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -676,13 +718,25 @@ func awsRestjson1_serializeOpHttpBindingsRemovePermissionInput(v *RemovePermissi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.ActionGroup) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member actionGroup must not be empty")}
+	}
 	if len(v.ActionGroup) > 0 {
+		if len(string(v.ActionGroup)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member actionGroup must not be empty")}
+		}
 		if err := encoder.SetURI("actionGroup").String(string(v.ActionGroup)); err != nil {
 			return err
 		}
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -765,7 +819,13 @@ func awsRestjson1_serializeOpHttpBindingsGetProfileInput(v *GetProfileInput, enc
 		encoder.SetQuery("period").String(*v.Period)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -849,7 +909,13 @@ func awsRestjson1_serializeOpHttpBindingsListProfileTimesInput(v *ListProfileTim
 		encoder.SetQuery("period").String(string(v.Period))
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -935,7 +1001,13 @@ func awsRestjson1_serializeOpHttpBindingsPostAgentProfileInput(v *PostAgentProfi
 		encoder.SetQuery("profileToken").String(*v.ProfileToken)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}
@@ -1014,7 +1086,13 @@ func awsRestjson1_serializeOpHttpBindingsRetrieveTimeSeriesInput(v *RetrieveTime
 		encoder.SetQuery("period").String(*v.Period)
 	}
 
+	if v.ProfilingGroupName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+	}
 	if v.ProfilingGroupName != nil {
+		if len(*v.ProfilingGroupName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member profilingGroupName must not be empty")}
+		}
 		if err := encoder.SetURI("profilingGroupName").String(*v.ProfilingGroupName); err != nil {
 			return err
 		}

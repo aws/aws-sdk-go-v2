@@ -221,13 +221,25 @@ func awsRestjson1_serializeOpHttpBindingsCreateApplicationVersionInput(v *Create
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
 	}
 
+	if v.SemanticVersion == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SemanticVersion must not be empty")}
+	}
 	if v.SemanticVersion != nil {
+		if len(*v.SemanticVersion) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SemanticVersion must not be empty")}
+		}
 		if err := encoder.SetURI("SemanticVersion").String(*v.SemanticVersion); err != nil {
 			return err
 		}
@@ -325,7 +337,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateCloudFormationChangeSetInput(v *C
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -475,7 +493,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateCloudFormationTemplateInput(v *Cr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -547,7 +571,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteApplicationInput(v *DeleteApplica
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -607,7 +637,13 @@ func awsRestjson1_serializeOpHttpBindingsGetApplicationInput(v *GetApplicationIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -671,7 +707,13 @@ func awsRestjson1_serializeOpHttpBindingsGetApplicationPolicyInput(v *GetApplica
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -731,13 +773,25 @@ func awsRestjson1_serializeOpHttpBindingsGetCloudFormationTemplateInput(v *GetCl
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
 	}
 
+	if v.TemplateId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateId must not be empty")}
+	}
 	if v.TemplateId != nil {
+		if len(*v.TemplateId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateId must not be empty")}
+		}
 		if err := encoder.SetURI("TemplateId").String(*v.TemplateId); err != nil {
 			return err
 		}
@@ -797,7 +851,13 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationDependenciesInput(v *Lis
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -931,7 +991,13 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationVersionsInput(v *ListApp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -1010,7 +1076,13 @@ func awsRestjson1_serializeOpHttpBindingsPutApplicationPolicyInput(v *PutApplica
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -1095,7 +1167,13 @@ func awsRestjson1_serializeOpHttpBindingsUnshareApplicationInput(v *UnshareAppli
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
@@ -1178,7 +1256,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateApplicationInput(v *UpdateApplica
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ApplicationId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
 	if v.ApplicationId != nil {
+		if len(*v.ApplicationId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+		}
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}

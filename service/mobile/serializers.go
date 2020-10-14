@@ -140,7 +140,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteProjectInput(v *DeleteProjectInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProjectId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectId must not be empty")}
+	}
 	if v.ProjectId != nil {
+		if len(*v.ProjectId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member projectId must not be empty")}
+		}
 		if err := encoder.SetURI("projectId").String(*v.ProjectId); err != nil {
 			return err
 		}
@@ -200,7 +206,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBundleInput(v *DescribeBundleIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BundleId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
 	if v.BundleId != nil {
+		if len(*v.BundleId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+		}
 		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
 			return err
 		}
@@ -322,7 +334,13 @@ func awsRestjson1_serializeOpHttpBindingsExportBundleInput(v *ExportBundleInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BundleId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
 	if v.BundleId != nil {
+		if len(*v.BundleId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+		}
 		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
 			return err
 		}
@@ -390,7 +408,13 @@ func awsRestjson1_serializeOpHttpBindingsExportProjectInput(v *ExportProjectInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ProjectId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member projectId must not be empty")}
+	}
 	if v.ProjectId != nil {
+		if len(*v.ProjectId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member projectId must not be empty")}
+		}
 		if err := encoder.SetURI("projectId").String(*v.ProjectId); err != nil {
 			return err
 		}
