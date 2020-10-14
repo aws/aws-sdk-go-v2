@@ -34,7 +34,7 @@ func LoadConfigWithDefaultRegion(defaultRegion string) (cfg aws.Config, err erro
 	}
 
 	cfg.APIOptions = append(cfg.APIOptions,
-		RemoveOperationInputValieationMiddleware)
+		RemoveOperationInputValidationMiddleware)
 
 	return cfg, nil
 }
