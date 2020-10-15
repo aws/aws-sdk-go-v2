@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
@@ -30,7 +31,7 @@ func TestAssumeRole(t *testing.T) {
 		}, nil
 	})
 
-	config, err := LoadDefaultConfig(WithHTTPClient{client})
+	config, err := LoadDefaultConfig(WithHTTPClient(client))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -85,12 +86,14 @@ func TestAssumeRole_WithMFA(t *testing.T) {
 	config, err := LoadDefaultConfig(
 		WithRegion("us-east-1"),
 		WithSharedConfigProfile("assume_role_w_mfa"),
-		WithMFATokenFunc(func() (string, error) {
-			customProviderCalled = true
+		WithAssumeRoleCredentialOptions(func(options *stscreds.AssumeRoleOptions) {
+			options.TokenProvider = func() (string, error) {
+				customProviderCalled = true
 
-			return "tokencode", nil
+				return "tokencode", nil
+			}
 		}),
-		WithHTTPClient{client},
+		WithHTTPClient(client),
 	)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -175,7 +178,7 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 		}, nil
 	})
 
-	config, err := LoadDefaultConfig(WithHTTPClient{client})
+	config, err := LoadDefaultConfig(WithHTTPClient(client))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

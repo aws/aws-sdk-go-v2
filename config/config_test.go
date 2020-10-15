@@ -10,11 +10,11 @@ import (
 )
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
-	_, err := Configs{
+	_, err := configs{
 		WithSharedConfigProfile("profile-name"),
 		WithSharedConfigFiles([]string{"creds-file"}),
-	}.AppendFromLoaders([]Loader{
-		func(configs Configs) (Config, error) {
+	}.AppendFromLoaders([]loader{
+		func(configs configs) (Config, error) {
 			var profile string
 			var files []string
 			var err error
@@ -54,8 +54,8 @@ func TestConfigs_SharedConfigOptions(t *testing.T) {
 func TestConfigs_AppendFromLoaders(t *testing.T) {
 	expectCfg := WithRegion("mock-region")
 
-	cfgs, err := Configs{}.AppendFromLoaders([]Loader{
-		func(configs Configs) (Config, error) {
+	cfgs, err := configs{}.AppendFromLoaders([]loader{
+		func(configs configs) (Config, error) {
 			if e, a := 0, len(configs); e != a {
 				t.Errorf("expect %v configs, got %v", e, a)
 			}
@@ -77,19 +77,19 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 }
 
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
-	configSources := Configs{
+	configSources := configs{
 		WithRegion("mock-region"),
-		WithCredentialsProvider{credentials.StaticCredentialsProvider{
+		WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				Source: "provider",
 			},
-		}},
+		}),
 	}
 
-	cfg, err := configSources.ResolveAWSConfig([]AWSConfigResolver{
-		ResolveRegion,
-		ResolveCredentials,
+	cfg, err := configSources.ResolveAWSConfig([]awsConfigResolver{
+		resolveRegion,
+		resolveCredentials,
 	})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)

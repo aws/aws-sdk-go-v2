@@ -1,6 +1,6 @@
 # AWS SDK for Go v2
 
-![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoib1lGQ3N6RFJsalI5a3BPcXB3Rytaak9kYVh1ZW1lZExPNjgzaU9Udng3VE5OL1I3czIwcVhkMUlUeG91ajBVaWRYcVVJSEVQcmZwTWVyT1p5MGszbnA4PSIsIml2UGFyYW1ldGVyU3BlYyI6IkhrZ1VMN20zRmtYY1BrR0wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://docs.aws.amazon.com/sdk-for-go/v2/api) [![Join the chat at https://gitter.im/aws/aws-sdk-go](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aws/aws-sdk-go-v2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
+![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoib1lGQ3N6RFJsalI5a3BPcXB3Rytaak9kYVh1ZW1lZExPNjgzaU9Udng3VE5OL1I3czIwcVhkMUlUeG91ajBVaWRYcVVJSEVQcmZwTWVyT1p5MGszbnA4PSIsIml2UGFyYW1ldGVyU3BlYyI6IkhrZ1VMN20zRmtYY1BrR0wiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
 
 
 `aws-sdk-go-v2` is the **Developer Preview** (aka **beta**) for the v2 AWS SDK for the Go programming language. This Developer Preview is provided to receive feedback from the language community on SDK changes prior to the final release. As such users should expect the SDK to release minor version releases that break backwards compatability. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
@@ -12,7 +12,6 @@ We'll be expanding out the [Issues] and [Projects] sections with additional chan
 Jump To:
 * [Project Status](_#Project-Status_)
 * [Getting Started](_#Getting-Started_)
-* [Quick Examples](_#Quick-Examples_)
 * [Getting Help](_#Getting-Help_)
 * [Contributing](_#Feedback-and-contributing_)
 * [More Resources](_#Resources_)
@@ -33,61 +32,71 @@ Users should expect significant changes that could affect the following (non-exh
 * Minimum Supported Go Release following the [Language Release Policy](https://golang.org/doc/devel/release.html#policy)
 
 ## Getting started
+To get started working with the SDK setup your project for Go modules, and retrieve the SDK dependencies with `go get`.
+This example shows how you can use the v2 SDK to make an API request using the SDK's [Amazon DynamoDB] client.
 
-To get started working with the SDK is to use `go get` to add the SDK to your application dependencies using Go modules.
-
+###### Initialize Project
 ```sh
-go get github.com/aws/aws-sdk-go-v2
-go get github.com/aws/aws-sdk-go-v2/service/dynamodb
+$ mkdir ~/helloaws
+$ cd ~/helloaws
+$ go mod init helloaws
+```
+###### Add SDK Dependencies
+```sh
+$ go get github.com/aws/aws-sdk-go-v2/aws
+$ go get github.com/aws/aws-sdk-go-v2/aws/config
+$ go get github.com/aws/aws-sdk-go-v2/service/dynamodb
 ```
 
-## Quick Examples
-
-### Hello AWS
-
-This example shows how you can use the v2 SDK to make an API request using the SDK's [Amazon DynamoDB] client.
+###### Write Code
+In your preferred editor add the following content to `main.go`
 
 ```go
 package main
 
 import (
-	"context"
-	"fmt"
+    "context"
+    "fmt"
+    "log"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+    "github.com/aws/aws-sdk-go-v2/aws"
+    "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
 func main() {
-	// Using the SDK's default configuration, loading additional config
-	// and credentials values from the environment variables, shared
-	// credentials, and shared configuration files
-	cfg, err := config.LoadDefaultConfig()
-	if err != nil {
-		panic("unable to load SDK config, " + err.Error())
-	}
+    // Using the SDK's default configuration, loading additional config
+    // and credentials values from the environment variables, shared
+    // credentials, and shared configuration files
+    cfg, err := config.LoadDefaultConfig(config.WithRegion("us-west-2"))
+    if err != nil {
+        log.Fatalf("unable to load SDK config, %v", err)
+    }
 
-	// Set the AWS Region that the service clients should use
-	cfg.Region = "us-west-2"
+    // Using the Config value, create the DynamoDB client
+    svc := dynamodb.NewFromConfig(cfg)
 
-	// Using the Config value, create the DynamoDB client
-	svc := dynamodb.NewFromConfig(cfg)
+    // Build the request with its input parameters
+    resp, err := svc.ListTables(context.Background(), &dynamodb.ListTablesInput{
+        Limit: aws.Int32(5),
+    })
+    if err != nil {
+        log.Fatalf("failed to list tables, %v", err)
+    }
 
-	// Build the request with its input parameters
-	resp, err := svc.DescribeTable(context.Background(), &dynamodb.DescribeTableInput{
-		TableName: aws.String("myTable"),
-	})
-	if err != nil {
-		panic("failed to describe table, " + err.Error())
-	}
-
-	if err != nil {
-		panic("failed to describe table, " + err.Error())
-	}
-
-	fmt.Println("Response", resp)
+    fmt.Println("Tables:")
+    for _, tableName := range resp.TableNames {
+        fmt.Println(aws.ToString(tableName))
+    }
 }
+```
+
+###### Compile and Execute
+```sh
+$ go run .
+Table:
+tableOne
+tableTwo
 ```
 
 ## Getting Help

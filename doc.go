@@ -7,56 +7,52 @@
 // Getting started
 //
 // The best way to get started working with the SDK is to use `go get` to add the
-// SDK to your Go Workspace manually.
+// SDK and desired service clients to your Go dependencies explicitly.
 //
 // 	go get github.com/aws/aws-sdk-go-v2
-//
-// You could also use [Dep] to add the SDK to your application's dependencies.
-// Using [Dep] will simplify your update story and help your application keep
-// pinned to specific version of the SDK
-//
-// 	dep ensure --add github.com/aws/aws-sdk-go-v2
+//	go get github.com/aws/aws-sdk-go-v2/config
+//	go get github.com/aws/aws-sdk-go-v2/service/dynamodb
 //
 // Hello AWS
 //
 // This example shows how you can use the v2 SDK to make an API request using the
 // SDK's Amazon DynamoDB client.
 //
-// 	package main
+//	package main
 //
-// 	import (
-// 		"context"
-// 		"fmt"
-// 		"log"
+//	import (
+//	    "context"
+//	    "fmt"
+//	    "log"
 //
-// 		"github.com/aws/aws-sdk-go-v2/aws"
-// 		"github.com/aws/aws-sdk-go-v2/config"
-// 		"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-// 	)
+//	    "github.com/aws/aws-sdk-go-v2/aws"
+//	    "github.com/aws/aws-sdk-go-v2/config"
+//	    "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+//	)
 //
-// 	func main() {
-// 		// Using the SDK's default configuration, loading additional config
-// 		// and credentials values from the environment variables, shared
-// 		// credentials, and shared configuration files
-// 		cfg, err := config.LoadDefaultConfig()
-// 		if err != nil {
-// 			log.Fatalf("unable to load SDK config, %v", err)
-// 		}
+//	func main() {
+//	    // Using the SDK's default configuration, loading additional config
+//	    // and credentials values from the environment variables, shared
+//	    // credentials, and shared configuration files
+//	    cfg, err := config.LoadDefaultConfig(config.WithRegion("us-west-2"))
+//	    if err != nil {
+//	        log.Fatalf("unable to load SDK config, %v", err)
+//	    }
 //
-// 		// Set the AWS Region that the service clients should use
-// 		cfg.Region = "us-west-2"
+//	    // Using the Config value, create the DynamoDB client
+//	    svc := dynamodb.NewFromConfig(cfg)
 //
-// 		// Using the Config value, create the DynamoDB client
-// 		svc := dynamodb.NewFromConfig(cfg)
+//	    // Build the request with its input parameters
+//	    resp, err := svc.ListTables(context.Background(), &dynamodb.ListTablesInput{
+//	        Limit: aws.Int32(5),
+//	    })
+//	    if err != nil {
+//	        log.Fatalf("failed to list tables, %v", err)
+//	    }
 //
-// 		// Send the request, and get the response or error back
-// 		resp, err := svc.DescribeTable(&dynamodb.DescribeTableInput{
-// 			TableName: aws.String("myTable"),
-// 		})
-// 		if err != nil {
-// 			log.Fatalf("failed to describe table, %v", err)
-// 		}
-//
-// 		fmt.Println("Response", resp)
-// 	}
+//	    fmt.Println("Tables:")
+//	    for _, tableName := range resp.TableNames {
+//	        fmt.Println(aws.ToString(tableName))
+//	    }
+//	}
 package sdk

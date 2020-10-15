@@ -424,86 +424,86 @@ func TestLoadSharedConfig(t *testing.T) {
 	}()
 
 	cases := []struct {
-		Configs Configs
+		Configs configs
 		Files   []string
 		Profile string
-		LoadFn  func(Configs) (Config, error)
+		LoadFn  func(configs) (Config, error)
 		Expect  SharedConfig
 		Err     string
 	}{
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigProfile("alt_profile_name"),
 			},
 			Files: []string{
 				filepath.Join("testdata", "shared_config"),
 			},
-			LoadFn: LoadSharedConfig,
+			LoadFn: loadSharedConfig,
 			Expect: SharedConfig{
 				Profile: "alt_profile_name",
 				Region:  "alt_profile_name_region",
 			},
 		},
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigFiles([]string{
 					filepath.Join("testdata", "shared_config"),
 				}),
 			},
 			Profile: "alt_profile_name",
-			LoadFn:  LoadSharedConfig,
+			LoadFn:  loadSharedConfig,
 			Expect: SharedConfig{
 				Profile: "alt_profile_name",
 				Region:  "alt_profile_name_region",
 			},
 		},
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigProfile("default"),
 			},
 			Files: []string{
 				filepath.Join("file_not_exist"),
 			},
-			LoadFn: LoadSharedConfig,
+			LoadFn: loadSharedConfig,
 			Err:    "failed to open shared config file, file_not_exist",
 		},
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigProfile("profile_not_exist"),
 			},
 			Files: []string{
 				filepath.Join("testdata", "shared_config"),
 			},
-			LoadFn: LoadSharedConfig,
+			LoadFn: loadSharedConfig,
 			Err:    "failed to get shared config profile, profile_not_exist",
 		},
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigProfile("default"),
 			},
 			Files: []string{
 				filepath.Join("file_not_exist"),
 			},
-			LoadFn: LoadSharedConfigIgnoreNotExist,
+			LoadFn: loadSharedConfigIgnoreNotExist,
 		},
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigProfile("assume_role_invalid_source_profile"),
 			},
 			Files: []string{
 				testConfigOtherFilename, testConfigFilename,
 			},
-			LoadFn: LoadSharedConfig,
+			LoadFn: loadSharedConfig,
 			Err:    "failed to get shared config profile",
 		},
 		{
-			Configs: Configs{
+			Configs: configs{
 				WithSharedConfigProfile("assume_role_invalid_source_profile"),
 			},
 			Files: []string{
 				testConfigOtherFilename, testConfigFilename,
 			},
-			LoadFn: LoadSharedConfigIgnoreNotExist,
+			LoadFn: loadSharedConfigIgnoreNotExist,
 			Err:    "failed to get shared config profile",
 		},
 	}
