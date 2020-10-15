@@ -51,7 +51,7 @@ type CreateSchemaInput struct {
 type CreateSchemaOutput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns ().
+	// information, see arns.
 	SchemaArn *string
 
 	// Metadata pertaining to the operation's result.

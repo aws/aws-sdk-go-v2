@@ -19,7 +19,8 @@ import (
 const ServiceID = "Kafka"
 const ServiceAPIVersion = "2018-11-14"
 
-// The operations for managing an Amazon MSK cluster.
+// Client provides the API client to make operations call for Managed Streaming for
+// Kafka.
 type Client struct {
 	options Options
 }

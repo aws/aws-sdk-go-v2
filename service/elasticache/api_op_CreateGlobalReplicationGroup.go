@@ -15,7 +15,7 @@ import (
 // cross-region replication. Using Global Datastore for Redis, you can create
 // cross-region read replica clusters for ElastiCache for Redis to enable
 // low-latency reads and disaster recovery across regions. For more information,
-// see Replication Across Regions Using Global Datastore ().
+// see Replication Across Regions Using Global Datastore.
 //
 //     * The
 // GlobalReplicationGroupIdSuffix is the name of the Global Datastore.
@@ -61,9 +61,10 @@ type CreateGlobalReplicationGroupOutput struct {
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
-	// secondary cluster.  <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b>
-	// represents the name of the Global Datastore, which is what you use to associate
-	// a secondary cluster.</p> </li> </ul>
+	// secondary cluster.
+	//
+	//     * The GlobalReplicationGroupIdSuffix represents the name
+	// of the Global Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

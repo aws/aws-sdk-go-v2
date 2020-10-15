@@ -35,7 +35,7 @@ type CreateChannelInput struct {
 	// Channel name.
 	Name *string
 
-	// See Channel$tags ().
+	// See Channel$tags.
 	Tags map[string]*string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you

@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Call this operation from your consumer after you call RegisterStreamConsumer ()
-// to register the consumer with Kinesis Data Streams. If the call succeeds, your
-// consumer starts receiving events of type SubscribeToShardEvent () for up to 5
+// Call this operation from your consumer after you call RegisterStreamConsumer to
+// register the consumer with Kinesis Data Streams. If the call succeeds, your
+// consumer starts receiving events of type SubscribeToShardEvent for up to 5
 // minutes, after which time you need to call SubscribeToShard again to renew the
 // subscription if you want to continue to receive records. You can make one call
 // to SubscribeToShard per second per ConsumerARN. If your call succeeds, and then
 // you call the operation again less than 5 seconds later, the second call
-// generates a ResourceInUseException (). If you call the operation a second time
-// more than 5 seconds after the first call succeeds, the second call succeeds and
-// the first connection gets shut down.
+// generates a ResourceInUseException. If you call the operation a second time more
+// than 5 seconds after the first call succeeds, the second call succeeds and the
+// first connection gets shut down.
 func (c *Client) SubscribeToShard(ctx context.Context, params *SubscribeToShardInput, optFns ...func(*Options)) (*SubscribeToShardOutput, error) {
 	if params == nil {
 		params = &SubscribeToShardInput{}
@@ -39,13 +39,13 @@ func (c *Client) SubscribeToShard(ctx context.Context, params *SubscribeToShardI
 type SubscribeToShardInput struct {
 
 	// For this parameter, use the value you obtained when you called
-	// RegisterStreamConsumer ().
+	// RegisterStreamConsumer.
 	//
 	// This member is required.
 	ConsumerARN *string
 
 	// The ID of the shard you want to subscribe to. To see a list of all the shards
-	// for a given stream, use ListShards ().
+	// for a given stream, use ListShards.
 	//
 	// This member is required.
 	ShardId *string

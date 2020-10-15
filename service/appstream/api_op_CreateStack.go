@@ -67,12 +67,12 @@ type CreateStackInput struct {
 
 	// The tags to associate with the stack. A tag is a key-value pair, and the value
 	// is optional. For example, Environment=Test. If you do not specify a value,
-	// Environment=.  <p>If you do not specify a value, the value is set to an empty
-	// string.</p> <p>Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following special characters: </p> <p>_ . : / =
-	// + \ - @</p> <p>For more information about tags, see <a
-	// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging
-	// Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+	// Environment=. If you do not specify a value, the value is set to an empty
+	// string. Generally allowed characters are: letters, numbers, and spaces
+	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
+	// For more information about tags, see Tagging Your Resources
+	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]*string
 
 	// The actions that are enabled or disabled for users during their streaming

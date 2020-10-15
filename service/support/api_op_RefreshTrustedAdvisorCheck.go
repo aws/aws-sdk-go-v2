@@ -12,11 +12,11 @@ import (
 )
 
 // Refreshes the AWS Trusted Advisor check that you specify using the check ID. You
-// can get the check IDs by calling the DescribeTrustedAdvisorChecks () operation.
+// can get the check IDs by calling the DescribeTrustedAdvisorChecks operation.
 // Some checks are refreshed automatically. If you call the
 // RefreshTrustedAdvisorCheck operation to refresh them, you might see the
 // InvalidParameterValue error. The response contains a
-// TrustedAdvisorCheckRefreshStatus () object.
+// TrustedAdvisorCheckRefreshStatus object.
 //
 //     * You must have a Business or
 // Enterprise support plan to use the AWS Support API.

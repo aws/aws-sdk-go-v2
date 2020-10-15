@@ -41,7 +41,7 @@ type PutNotificationConfigurationInput struct {
 
 	// The type of event that causes the notification to be sent. To query the
 	// notification types supported by Amazon EC2 Auto Scaling, call the
-	// DescribeAutoScalingNotificationTypes () API.
+	// DescribeAutoScalingNotificationTypes API.
 	//
 	// This member is required.
 	NotificationTypes []*string

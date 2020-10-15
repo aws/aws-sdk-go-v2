@@ -541,7 +541,7 @@ type HealthCheckPolicy struct {
 	Path *string
 
 	// The destination port for the health check request. This port must match the port
-	// defined in the PortMapping () for the listener.
+	// defined in the PortMapping for the listener.
 	Port *int32
 }
 
@@ -1347,7 +1347,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	Path *string
 
 	// The destination port for the health check request. This port must match the port
-	// defined in the PortMapping () for the listener.
+	// defined in the PortMapping for the listener.
 	Port *int32
 }
 

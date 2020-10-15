@@ -57,7 +57,7 @@ type AddSourceIdentifierToSubscriptionInput struct {
 type AddSourceIdentifierToSubscriptionOutput struct {
 
 	// Contains the results of a successful invocation of the
-	// DescribeEventSubscriptions () action.
+	// DescribeEventSubscriptions action.
 	EventSubscription *types.EventSubscription
 
 	// Metadata pertaining to the operation's result.

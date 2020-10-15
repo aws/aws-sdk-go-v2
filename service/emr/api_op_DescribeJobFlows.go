@@ -13,12 +13,12 @@ import (
 )
 
 // This API is deprecated and will eventually be removed. We recommend you use
-// ListClusters (), DescribeCluster (), ListSteps (), ListInstanceGroups () and
-// ListBootstrapActions () instead. DescribeJobFlows returns a list of job flows
-// that match all of the supplied parameters. The parameters can include a list of
-// job flow IDs, job flow states, and restrictions on job flow creation date and
-// time. Regardless of supplied parameters, only job flows created within the last
-// two months are returned. If no parameters are supplied, then job flows matching
+// ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and
+// ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that
+// match all of the supplied parameters. The parameters can include a list of job
+// flow IDs, job flow states, and restrictions on job flow creation date and time.
+// Regardless of supplied parameters, only job flows created within the last two
+// months are returned. If no parameters are supplied, then job flows matching
 // either of the following criteria are returned:
 //
 //     * Job flows created and
@@ -44,7 +44,7 @@ func (c *Client) DescribeJobFlows(ctx context.Context, params *DescribeJobFlowsI
 	return out, nil
 }
 
-// The input for the DescribeJobFlows () operation.
+// The input for the DescribeJobFlows operation.
 type DescribeJobFlowsInput struct {
 
 	// Return only job flows created after this date and time.
@@ -60,7 +60,7 @@ type DescribeJobFlowsInput struct {
 	JobFlowStates []types.JobFlowExecutionState
 }
 
-// The output for the DescribeJobFlows () operation.
+// The output for the DescribeJobFlows operation.
 type DescribeJobFlowsOutput struct {
 
 	// A list of job flows matching the parameters supplied.

@@ -15,10 +15,10 @@ import (
 // certificate revocation list (CRL) when you create or update your private CA,
 // information about the revoked certificates will be included in the CRL. ACM
 // Private CA writes the CRL to an S3 bucket that you specify. For more information
-// about revocation, see the CrlConfiguration () structure. ACM Private CA also
-// writes revocation information to the audit report. For more information, see
-// CreateCertificateAuthorityAuditReport (). You cannot revoke a root CA
-// self-signed certificate.
+// about revocation, see the CrlConfiguration structure. ACM Private CA also writes
+// revocation information to the audit report. For more information, see
+// CreateCertificateAuthorityAuditReport. You cannot revoke a root CA self-signed
+// certificate.
 func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificateInput, optFns ...func(*Options)) (*RevokeCertificateOutput, error) {
 	if params == nil {
 		params = &RevokeCertificateInput{}
@@ -44,7 +44,7 @@ type RevokeCertificateInput struct {
 	CertificateAuthorityArn *string
 
 	// Serial number of the certificate to be revoked. This must be in hexadecimal
-	// format. You can retrieve the serial number by calling GetCertificate () with the
+	// format. You can retrieve the serial number by calling GetCertificate with the
 	// Amazon Resource Name (ARN) of the certificate you want and the ARN of your
 	// private CA. The GetCertificate action retrieves the certificate in the PEM
 	// format. You can use the following OpenSSL command to list the certificate in

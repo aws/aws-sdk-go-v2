@@ -13,13 +13,13 @@ import (
 
 // Returns detailed information about one or more specified events for one or more
 // accounts in your organization. Information includes standard event data (Region,
-// service, and so on, as returned by DescribeEventsForOrganization (), a detailed
+// service, and so on, as returned by DescribeEventsForOrganization, a detailed
 // event description, and possible additional metadata that depends upon the nature
 // of the event. Affected entities are not included; to retrieve those, use the
-// DescribeAffectedEntitiesForOrganization () operation. Before you can call this
+// DescribeAffectedEntitiesForOrganization operation. Before you can call this
 // operation, you must first enable AWS Health to work with AWS Organizations. To
-// do this, call the EnableHealthServiceAccessForOrganization () operation from
-// your organization's master account.
+// do this, call the EnableHealthServiceAccessForOrganization operation from your
+// organization's master account.
 func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params *DescribeEventDetailsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventDetailsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventDetailsForOrganizationInput{}

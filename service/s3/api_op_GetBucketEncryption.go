@@ -14,18 +14,21 @@ import (
 // Returns the default encryption configuration for an Amazon S3 bucket. For
 // information about the Amazon S3 default encryption feature, see Amazon S3
 // Default Bucket Encryption
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html).  <p>
-// To use this operation, you must have permission to perform the
-// <code>s3:GetEncryptionConfiguration</code> action. The bucket owner has this
-// permission by default. The bucket owner can grant this permission to others. For
-// more information about permissions, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions
-// Related to Bucket Subresource Operations</a> and <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing
-// Access Permissions to Your Amazon S3 Resources</a>.</p> <p>The following
-// operations are related to <code>GetBucketEncryption</code>:</p> <ul> <li> <p>
-// <a>PutBucketEncryption</a> </p> </li> <li> <p> <a>DeleteBucketEncryption</a>
-// </p> </li> </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html). To use
+// this operation, you must have permission to perform the
+// s3:GetEncryptionConfiguration action. The bucket owner has this permission by
+// default. The bucket owner can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
+// following operations are related to GetBucketEncryption:
+//
+//     *
+// PutBucketEncryption
+//
+//     * DeleteBucketEncryption
 func (c *Client) GetBucketEncryption(ctx context.Context, params *GetBucketEncryptionInput, optFns ...func(*Options)) (*GetBucketEncryptionOutput, error) {
 	if params == nil {
 		params = &GetBucketEncryptionInput{}

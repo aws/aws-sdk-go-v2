@@ -11,7 +11,7 @@ import (
 )
 
 // Revokes function-use permission from an AWS service or another account. You can
-// get the ID of the statement from the output of GetPolicy ().
+// get the ID of the statement from the output of GetPolicy.
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}

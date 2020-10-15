@@ -18,7 +18,7 @@ import (
 // automatically renew your private CA's certificates, you must assign all possible
 // permissions from the CA to the ACM service principal. At this time, you can only
 // assign permissions to ACM (acm.amazonaws.com). Permissions can be revoked with
-// the DeletePermission () action and listed with the ListPermissions () action.
+// the DeletePermission action and listed with the ListPermissions action.
 func (c *Client) CreatePermission(ctx context.Context, params *CreatePermissionInput, optFns ...func(*Options)) (*CreatePermissionOutput, error) {
 	if params == nil {
 		params = &CreatePermissionInput{}
@@ -43,7 +43,7 @@ type CreatePermissionInput struct {
 	Actions []types.ActionType
 
 	// The Amazon Resource Name (ARN) of the CA that grants the permissions. You can
-	// find the ARN by calling the ListCertificateAuthorities () action. This must have
+	// find the ARN by calling the ListCertificateAuthorities action. This must have
 	// the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .

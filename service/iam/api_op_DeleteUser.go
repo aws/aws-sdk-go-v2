@@ -17,29 +17,29 @@ import (
 // Before attempting to delete a user, remove the following items:
 //
 //     * Password
-// (DeleteLoginProfile ())
+// (DeleteLoginProfile)
 //
-//     * Access keys (DeleteAccessKey ())
+//     * Access keys (DeleteAccessKey)
 //
 //     * Signing
-// certificate (DeleteSigningCertificate ())
+// certificate (DeleteSigningCertificate)
 //
 //     * SSH public key
-// (DeleteSSHPublicKey ())
+// (DeleteSSHPublicKey)
 //
-//     * Git credentials (DeleteServiceSpecificCredential
-// ())
+//     * Git credentials (DeleteServiceSpecificCredential)
 //
-//     * Multi-factor authentication (MFA) device (DeactivateMFADevice (),
-// DeleteVirtualMFADevice ())
 //
-//     * Inline policies (DeleteUserPolicy ())
+// * Multi-factor authentication (MFA) device (DeactivateMFADevice,
+// DeleteVirtualMFADevice)
+//
+//     * Inline policies (DeleteUserPolicy)
 //
 //     *
-// Attached managed policies (DetachUserPolicy ())
+// Attached managed policies (DetachUserPolicy)
 //
 //     * Group memberships
-// (RemoveUserFromGroup ())
+// (RemoveUserFromGroup)
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

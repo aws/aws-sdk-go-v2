@@ -12,8 +12,8 @@ import (
 
 // Deletes the specified version of the specified policy. You cannot delete the
 // default version of a policy using this API. To delete the default version of a
-// policy, use DeletePolicy (). To find out which version of a policy is marked as
-// the default version, use ListPolicyVersions.
+// policy, use DeletePolicy. To find out which version of a policy is marked as the
+// default version, use ListPolicyVersions.
 func (c *Client) DeletePolicyVersion(ctx context.Context, params *DeletePolicyVersionInput, optFns ...func(*Options)) (*DeletePolicyVersionOutput, error) {
 	if params == nil {
 		params = &DeletePolicyVersionInput{}

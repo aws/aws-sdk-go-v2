@@ -11,7 +11,7 @@ import (
 type AssumedRoleUser struct {
 
 	// The ARN of the temporary security credentials that are returned from the
-	// AssumeRole () action. For more information about ARNs and how to use them in
+	// AssumeRole action. For more information about ARNs and how to use them in
 	// policies, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
 	// the IAM User Guide.

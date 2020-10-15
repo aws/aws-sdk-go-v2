@@ -20,25 +20,25 @@ import (
 // Related
 // operations
 //
-//     * CreateMatchmakingConfiguration ()
+//     * CreateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingConfigurations ()
+// DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration ()
-//
-//
-// * DeleteMatchmakingConfiguration ()
-//
-//     * CreateMatchmakingRuleSet ()
+//     * UpdateMatchmakingConfiguration
 //
 //     *
-// DescribeMatchmakingRuleSets ()
+// DeleteMatchmakingConfiguration
 //
-//     * ValidateMatchmakingRuleSet ()
+//     * CreateMatchmakingRuleSet
 //
 //     *
-// DeleteMatchmakingRuleSet ()
+// DescribeMatchmakingRuleSets
+//
+//     * ValidateMatchmakingRuleSet
+//
+//     *
+// DeleteMatchmakingRuleSet
 func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMatchmakingRuleSetInput, optFns ...func(*Options)) (*DeleteMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingRuleSetInput{}

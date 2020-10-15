@@ -12,12 +12,17 @@ import (
 )
 
 // Returns the access control list (ACL) of an object. To use this operation, you
-// must have READ_ACP access to the object.  <p> <b>Versioning</b> </p> <p>By
-// default, GET returns ACL information about the current version of an object. To
-// return ACL information about a different version, use the versionId
-// subresource.</p> <p>The following operations are related to
-// <code>GetObjectAcl</code>:</p> <ul> <li> <p> <a>GetObject</a> </p> </li> <li>
-// <p> <a>DeleteObject</a> </p> </li> <li> <p> <a>PutObject</a> </p> </li> </ul>
+// must have READ_ACP access to the object. Versioning By default, GET returns ACL
+// information about the current version of an object. To return ACL information
+// about a different version, use the versionId subresource. The following
+// operations are related to GetObjectAcl:
+//
+//     * GetObject
+//
+//     * DeleteObject
+//
+//
+// * PutObject
 func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, optFns ...func(*Options)) (*GetObjectAclOutput, error) {
 	if params == nil {
 		params = &GetObjectAclInput{}

@@ -14,11 +14,10 @@ import (
 // OFFLINE. An OFFLINE server cannot accept and process file transfer jobs.
 // Information tied to your server, such as server and user properties, are not
 // affected by stopping your server. Stopping the server will not reduce or impact
-// your file transfer protocol endpoint billing.  <p>The state of
-// <code>STOPPING</code> indicates that the server is in an intermediate state,
-// either not fully able to respond, or not fully offline. The values of
-// <code>STOP_FAILED</code> can indicate an error condition.</p> <p>No response is
-// returned from this call.</p>
+// your file transfer protocol endpoint billing. The state of STOPPING indicates
+// that the server is in an intermediate state, either not fully able to respond,
+// or not fully offline. The values of STOP_FAILED can indicate an error condition.
+// No response is returned from this call.
 func (c *Client) StopServer(ctx context.Context, params *StopServerInput, optFns ...func(*Options)) (*StopServerOutput, error) {
 	if params == nil {
 		params = &StopServerInput{}

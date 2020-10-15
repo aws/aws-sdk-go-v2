@@ -15,36 +15,41 @@ import (
 // Downloads an MP4 file (clip) containing the archived, on-demand media from the
 // specified video stream over the specified time range. Both the StreamName and
 // the StreamARN parameters are optional, but you must specify either the
-// StreamName or the StreamARN when invoking this API operation.  <p>As a
-// prerequsite to using GetCLip API, you must obtain an endpoint using
-// <code>GetDataEndpoint</code>, specifying GET_CLIP for<code></code> the
-// <code>APIName</code> parameter. </p> <p>An Amazon Kinesis video stream has the
-// following requirements for providing data through MP4:</p> <ul> <li> <p>The
-// media must contain h.264 or h.265 encoded video and, optionally, AAC or G.711
-// encoded audio. Specifically, the codec ID of track 1 should be
-// <code>V_MPEG/ISO/AVC</code> (for h.264) or V_MPEGH/ISO/HEVC (for H.265).
-// Optionally, the codec ID of track 2 should be <code>A_AAC</code> (for AAC) or
-// A_MS/ACM (for G.711).</p> </li> <li> <p>Data retention must be greater than
-// 0.</p> </li> <li> <p>The video track of each fragment must contain codec private
-// data in the Advanced Video Coding (AVC) for H.264 format and HEVC for H.265
-// format. For more information, see <a
-// href="https://www.iso.org/standard/55980.html">MPEG-4 specification ISO/IEC
-// 14496-15</a>. For information about adapting stream data to a given format, see
-// <a
-// href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html">NAL
-// Adaptation Flags</a>.</p> </li> <li> <p>The audio track (if present) of each
-// fragment must contain codec private data in the AAC format (<a
-// href="https://www.iso.org/standard/43345.html">AAC specification ISO/IEC
-// 13818-7</a>) or the <a
-// href="http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html">MS
-// Wave format</a>.</p> </li> </ul> <p>You can monitor the amount of outgoing data
-// by monitoring the <code>GetClip.OutgoingBytes</code> Amazon CloudWatch metric.
-// For information about using CloudWatch to monitor Kinesis Video Streams, see <a
-// href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html">Monitoring
-// Kinesis Video Streams</a>. For pricing information, see <a
-// href="https://aws.amazon.com/kinesis/video-streams/pricing/">Amazon Kinesis
-// Video Streams Pricing</a> and <a href="https://aws.amazon.com/pricing/">AWS
-// Pricing</a>. Charges for outgoing AWS data apply.</p>
+// StreamName or the StreamARN when invoking this API operation. As a prerequsite
+// to using GetCLip API, you must obtain an endpoint using GetDataEndpoint,
+// specifying GET_CLIP for the APIName parameter. An Amazon Kinesis video stream
+// has the following requirements for providing data through MP4:
+//
+//     * The media
+// must contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded
+// audio. Specifically, the codec ID of track 1 should be V_MPEG/ISO/AVC (for
+// h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID of track 2
+// should be A_AAC (for AAC) or A_MS/ACM (for G.711).
+//
+//     * Data retention must be
+// greater than 0.
+//
+//     * The video track of each fragment must contain codec
+// private data in the Advanced Video Coding (AVC) for H.264 format and HEVC for
+// H.265 format. For more information, see MPEG-4 specification ISO/IEC 14496-15
+// (https://www.iso.org/standard/55980.html). For information about adapting stream
+// data to a given format, see NAL Adaptation Flags
+// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html).
+//
+//
+// * The audio track (if present) of each fragment must contain codec private data
+// in the AAC format (AAC specification ISO/IEC 13818-7
+// (https://www.iso.org/standard/43345.html)) or the MS Wave format
+// (http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html).
+//
+// You can
+// monitor the amount of outgoing data by monitoring the GetClip.OutgoingBytes
+// Amazon CloudWatch metric. For information about using CloudWatch to monitor
+// Kinesis Video Streams, see Monitoring Kinesis Video Streams
+// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html). For
+// pricing information, see Amazon Kinesis Video Streams Pricing
+// (https://aws.amazon.com/kinesis/video-streams/pricing/) and AWS Pricing
+// (https://aws.amazon.com/pricing/). Charges for outgoing AWS data apply.
 func (c *Client) GetClip(ctx context.Context, params *GetClipInput, optFns ...func(*Options)) (*GetClipOutput, error) {
 	if params == nil {
 		params = &GetClipInput{}
@@ -84,7 +89,7 @@ type GetClipOutput struct {
 	// Traditional MP4 file that contains the media clip from the specified video
 	// stream. The output will contain the first 100 MB or the first 200 fragments from
 	// the specified start timestamp. For more information, see Kinesis Video Streams
-	// Limits ().
+	// Limits.
 	Payload io.ReadCloser
 
 	// Metadata pertaining to the operation's result.

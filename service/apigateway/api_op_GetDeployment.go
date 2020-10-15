@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about a Deployment () resource.
+// Gets information about a Deployment resource.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}
@@ -28,22 +28,21 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 	return out, nil
 }
 
-// Requests API Gateway to get information about a Deployment () resource.
+// Requests API Gateway to get information about a Deployment resource.
 type GetDeploymentInput struct {
 
-	// [Required] The identifier of the Deployment () resource to get information
-	// about.
+	// [Required] The identifier of the Deployment resource to get information about.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
 	// A query parameter to retrieve the specified embedded resources of the returned
-	// Deployment () resource in the response. In a REST API call, this embed parameter
+	// Deployment resource in the response. In a REST API call, this embed parameter
 	// value is a list of comma-separated strings, as in GET
 	// /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2. The SDK and
 	// other platform-dependent libraries might use a different format for the list.
@@ -62,19 +61,19 @@ type GetDeploymentInput struct {
 	Title *string
 }
 
-// An immutable representation of a RestApi () resource that can be called by users
-// using Stages (). A deployment must be associated with a Stage () for it to be
-// callable over the Internet. To create a deployment, call POST on the Deployments
-// () resource of a RestApi (). To view, update, or delete a deployment, call GET,
-// PATCH, or DELETE on the specified deployment resource
-// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi (), Deployments
-// (), Stage (), AWS CLI
+// An immutable representation of a RestApi resource that can be called by users
+// using Stages. A deployment must be associated with a Stage for it to be callable
+// over the Internet. To create a deployment, call POST on the Deployments resource
+// of a RestApi. To view, update, or delete a deployment, call GET, PATCH, or
+// DELETE on the specified deployment resource
+// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi, Deployments,
+// Stage, AWS CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
 // AWS SDKs (https://aws.amazon.com/tools/)
 type GetDeploymentOutput struct {
 
-	// A summary of the RestApi () at the date and time that the deployment resource
-	// was created.
+	// A summary of the RestApi at the date and time that the deployment resource was
+	// created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
 
 	// The date and time that the deployment resource was created.

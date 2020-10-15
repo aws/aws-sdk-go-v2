@@ -19,10 +19,11 @@ import (
 // parameters are set to pending-reboot to take effect on the next DB instance
 // restart or RebootDBInstance request. You must call RebootDBInstance for every DB
 // instance in your DB cluster that you want the updated static parameter to apply
-// to.  <p>For more information on Amazon Aurora, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html">
-// What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note>
-// <p>This action only applies to Aurora DB clusters.</p> </note>
+// to. For more information on Amazon Aurora, see
+//
+// What Is Amazon Aurora?
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *ResetDBClusterParameterGroupInput, optFns ...func(*Options)) (*ResetDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &ResetDBClusterParameterGroupInput{}

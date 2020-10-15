@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the ApiKey () resource.
+// Deletes the ApiKey resource.
 func (c *Client) DeleteApiKey(ctx context.Context, params *DeleteApiKeyInput, optFns ...func(*Options)) (*DeleteApiKeyOutput, error) {
 	if params == nil {
 		params = &DeleteApiKeyInput{}
@@ -26,10 +26,10 @@ func (c *Client) DeleteApiKey(ctx context.Context, params *DeleteApiKeyInput, op
 	return out, nil
 }
 
-// A request to delete the ApiKey () resource.
+// A request to delete the ApiKey resource.
 type DeleteApiKeyInput struct {
 
-	// [Required] The identifier of the ApiKey () resource to be deleted.
+	// [Required] The identifier of the ApiKey resource to be deleted.
 	//
 	// This member is required.
 	ApiKey *string

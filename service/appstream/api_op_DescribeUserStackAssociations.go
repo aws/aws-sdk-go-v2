@@ -50,8 +50,8 @@ type DescribeUserStackAssociationsInput struct {
 	// The name of the stack that is associated with the user.
 	StackName *string
 
-	// The email address of the user who is associated with the stack.  <note>
-	// <p>Users' email addresses are case-sensitive.</p> </note>
+	// The email address of the user who is associated with the stack. Users' email
+	// addresses are case-sensitive.
 	UserName *string
 }
 

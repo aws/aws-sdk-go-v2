@@ -14,7 +14,7 @@ import (
 // Returns a list of Amazon Kinesis Data Analytics applications in your account.
 // For each application, the response includes the application name, Amazon
 // Resource Name (ARN), and status. If you want detailed information about a
-// specific application, use DescribeApplication ().
+// specific application, use DescribeApplication.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}

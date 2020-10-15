@@ -112,7 +112,7 @@ type CreateMaintenanceWindowInput struct {
 	// Key=Environment,Value=Production
 	//
 	// To add tags to an existing maintenance window,
-	// use the AddTagsToResource () action.
+	// use the AddTagsToResource action.
 	Tags []*types.Tag
 }
 

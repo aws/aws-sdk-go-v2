@@ -18,19 +18,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * DescribeFleetAttributes ()
 //
-//     * UpdateFleetAttributes ()
+// * DescribeFleetAttributes
 //
-//     *
-// StartFleetActions () or StopFleetActions ()
+//     * UpdateFleetAttributes
+//
+//     * StartFleetActions
+// or StopFleetActions
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}
@@ -75,8 +75,7 @@ type ListFleetsOutput struct {
 
 	// Set of fleet IDs matching the list request. You can retrieve additional
 	// information about all returned fleets by passing this result set to a call to
-	// DescribeFleetAttributes (), DescribeFleetCapacity (), or
-	// DescribeFleetUtilization ().
+	// DescribeFleetAttributes, DescribeFleetCapacity, or DescribeFleetUtilization.
 	FleetIds []*string
 
 	// Token that indicates where to resume retrieving results on the next call to this

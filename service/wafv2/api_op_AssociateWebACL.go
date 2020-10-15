@@ -39,12 +39,15 @@ func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInp
 type AssociateWebACLInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource to associate with the web ACL.
-	// <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For an
-	// Application Load Balancer:
-	// <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>
-	// </code> </p> </li> <li> <p>For an Amazon API Gateway stage:
-	// <code>arn:aws:apigateway:<i>region</i>::/restapis/<i>api-id</i>/stages/<i>stage-name</i>
-	// </code> </p> </li> </ul>
+	// The ARN must be in one of the following formats:
+	//
+	//     * For an Application Load
+	// Balancer:
+	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+	//
+	//
+	// * For an Amazon API Gateway stage:
+	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
 	//
 	// This member is required.
 	ResourceArn *string

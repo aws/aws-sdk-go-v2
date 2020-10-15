@@ -37,13 +37,12 @@ type ListAttacksInput struct {
 	// is allowed.
 	EndTime *types.TimeRange
 
-	// The maximum number of AttackSummary () objects to be returned. If this is left
+	// The maximum number of AttackSummary objects to be returned. If this is left
 	// blank, the first 20 results will be returned. This is a maximum value; it is
 	// possible that AWS WAF will return the results in smaller batches. That is, the
-	// number of AttackSummary () objects returned could be less than MaxResults, even
-	// if there are still more AttackSummary () objects yet to return. If there are
-	// more AttackSummary () objects to return, AWS WAF will always also return a
-	// NextToken.
+	// number of AttackSummary objects returned could be less than MaxResults, even if
+	// there are still more AttackSummary objects yet to return. If there are more
+	// AttackSummary objects to return, AWS WAF will always also return a NextToken.
 	MaxResults *int32
 
 	// The ListAttacksRequest.NextMarker value from a previous call to
@@ -70,9 +69,9 @@ type ListAttacksOutput struct {
 	// The token returned by a previous call to indicate that there is more data
 	// available. If not null, more results are available. Pass this value for the
 	// NextMarker parameter in a subsequent call to ListAttacks to retrieve the next
-	// set of items. AWS WAF might return the list of AttackSummary () objects in
-	// batches smaller than the number specified by MaxResults. If there are more
-	// AttackSummary () objects to return, AWS WAF will always also return a NextToken.
+	// set of items. AWS WAF might return the list of AttackSummary objects in batches
+	// smaller than the number specified by MaxResults. If there are more AttackSummary
+	// objects to return, AWS WAF will always also return a NextToken.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -22,9 +22,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
-// Amazon Simple Storage Service Developer Guide.  <p class="title"> <b>Related
-// Resources</b> </p> <ul> <li> <p> <a>PutBucketEncryption</a> </p> </li> <li> <p>
-// <a>GetBucketEncryption</a> </p> </li> </ul>
+// Amazon Simple Storage Service Developer Guide. Related Resources
+//
+//     *
+// PutBucketEncryption
+//
+//     * GetBucketEncryption
 func (c *Client) DeleteBucketEncryption(ctx context.Context, params *DeleteBucketEncryptionInput, optFns ...func(*Options)) (*DeleteBucketEncryptionOutput, error) {
 	if params == nil {
 		params = &DeleteBucketEncryptionInput{}

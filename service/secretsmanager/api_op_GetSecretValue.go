@@ -26,10 +26,10 @@ import (
 // Related operations
 //
 //     * To create a new version of the secret with
-// different encrypted information, use PutSecretValue ().
+// different encrypted information, use PutSecretValue.
 //
 //     * To retrieve the
-// non-encrypted details for the secret, use DescribeSecret ().
+// non-encrypted details for the secret, use DescribeSecret.
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
 	if params == nil {
 		params = &GetSecretValueInput{}
@@ -112,10 +112,10 @@ type GetSecretValueOutput struct {
 	// console then only the SecretString parameter contains data. Secrets Manager
 	// stores the information as a JSON structure of key/value pairs that the Lambda
 	// rotation function knows how to parse. If you store custom information in the
-	// secret by using the CreateSecret (), UpdateSecret (), or PutSecretValue () API
-	// operations instead of the Secrets Manager console, or by using the Other secret
-	// type in the console, then you must code your Lambda rotation function to parse
-	// and interpret those values.
+	// secret by using the CreateSecret, UpdateSecret, or PutSecretValue API operations
+	// instead of the Secrets Manager console, or by using the Other secret type in the
+	// console, then you must code your Lambda rotation function to parse and interpret
+	// those values.
 	SecretString *string
 
 	// The unique identifier of this version of the secret.

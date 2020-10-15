@@ -109,10 +109,9 @@ type FailedCreateWorkspaceRequest struct {
 	WorkspaceRequest *WorkspaceRequest
 }
 
-// Describes a WorkSpace that could not be rebooted. (RebootWorkspaces ()), rebuilt
-// (RebuildWorkspaces ()), restored (RestoreWorkspace ()), terminated
-// (TerminateWorkspaces ()), started (StartWorkspaces ()), or stopped
-// (StopWorkspaces ()).
+// Describes a WorkSpace that could not be rebooted. (RebootWorkspaces), rebuilt
+// (RebuildWorkspaces), restored (RestoreWorkspace), terminated
+// (TerminateWorkspaces), started (StartWorkspaces), or stopped (StopWorkspaces).
 type FailedWorkspaceChangeRequest struct {
 
 	// The error code that is returned if the WorkSpace cannot be rebooted.
@@ -544,13 +543,13 @@ type WorkspaceProperties struct {
 type WorkspaceRequest struct {
 
 	// The identifier of the bundle for the WorkSpace. You can use
-	// DescribeWorkspaceBundles () to list the available bundles.
+	// DescribeWorkspaceBundles to list the available bundles.
 	//
 	// This member is required.
 	BundleId *string
 
 	// The identifier of the AWS Directory Service directory for the WorkSpace. You can
-	// use DescribeWorkspaceDirectories () to list the available directories.
+	// use DescribeWorkspaceDirectories to list the available directories.
 	//
 	// This member is required.
 	DirectoryId *string

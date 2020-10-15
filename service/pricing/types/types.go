@@ -17,10 +17,9 @@ type Filter struct {
 	// the service code to see all products for a specific service, filter by just the
 	// attribute name to see a specific attribute for multiple services, or use both a
 	// service code and an attribute name to retrieve only products that match both
-	// fields. Valid values include: ServiceCode, and all attribute names  <p>For
-	// example, you can filter by the <code>AmazonEC2</code> service code and the
-	// <code>volumeType</code> attribute name to get the prices for only Amazon EC2
-	// volumes.</p>
+	// fields. Valid values include: ServiceCode, and all attribute names For example,
+	// you can filter by the AmazonEC2 service code and the volumeType attribute name
+	// to get the prices for only Amazon EC2 volumes.
 	//
 	// This member is required.
 	Field *string

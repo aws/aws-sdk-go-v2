@@ -22,7 +22,7 @@ import (
 // API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 // Removes one or more tags from the specified AWS CloudHSM resource. To remove a
 // tag, specify only the tag key to remove (not the value). To overwrite the value
-// for an existing tag, use AddTagsToResource ().
+// for an existing tag, use AddTagsToResource.
 func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsFromResourceInput, optFns ...func(*Options)) (*RemoveTagsFromResourceOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromResourceInput{}
@@ -46,7 +46,7 @@ type RemoveTagsFromResourceInput struct {
 	ResourceArn *string
 
 	// The tag key or keys to remove. Specify only the tag key to remove (not the
-	// value). To overwrite the value for an existing tag, use AddTagsToResource ().
+	// value). To overwrite the value for an existing tag, use AddTagsToResource.
 	//
 	// This member is required.
 	TagKeyList []*string

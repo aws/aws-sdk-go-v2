@@ -12,26 +12,26 @@ import (
 
 // Removes a VPC peering connection. To delete the connection, you must have a
 // valid authorization for the VPC peering connection that you want to delete. You
-// can check for an authorization by calling DescribeVpcPeeringAuthorizations () or
-// request a new one using CreateVpcPeeringAuthorization (). Once a valid
+// can check for an authorization by calling DescribeVpcPeeringAuthorizations or
+// request a new one using CreateVpcPeeringAuthorization. Once a valid
 // authorization exists, call this operation from the AWS account that is used to
 // manage the Amazon GameLift fleets. Identify the connection to delete by the
 // connection ID and fleet ID. If successful, the connection is removed.
 //
 //     *
-// CreateVpcPeeringAuthorization ()
+// CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations ()
-//
-//
-// * DeleteVpcPeeringAuthorization ()
-//
-//     * CreateVpcPeeringConnection ()
+//     * DescribeVpcPeeringAuthorizations
 //
 //     *
-// DescribeVpcPeeringConnections ()
+// DeleteVpcPeeringAuthorization
 //
-//     * DeleteVpcPeeringConnection ()
+//     * CreateVpcPeeringConnection
+//
+//     *
+// DescribeVpcPeeringConnections
+//
+//     * DeleteVpcPeeringConnection
 func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteVpcPeeringConnectionInput, optFns ...func(*Options)) (*DeleteVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteVpcPeeringConnectionInput{}
@@ -58,8 +58,8 @@ type DeleteVpcPeeringConnectionInput struct {
 	FleetId *string
 
 	// A unique identifier for a VPC peering connection. This value is included in the
-	// VpcPeeringConnection () object, which can be retrieved by calling
-	// DescribeVpcPeeringConnections ().
+	// VpcPeeringConnection object, which can be retrieved by calling
+	// DescribeVpcPeeringConnections.
 	//
 	// This member is required.
 	VpcPeeringConnectionId *string

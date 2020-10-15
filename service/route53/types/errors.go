@@ -781,10 +781,9 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // current limit for an account, see GetAccountLimit
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
 // To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-// with the AWS Support Center.  <p>You have reached the maximum number of active
-// health checks for an AWS account. To request a higher limit, <a
-// href="http://aws.amazon.com/route53-request">create a case</a> with the AWS
-// Support Center.</p>
+// with the AWS Support Center. You have reached the maximum number of active
+// health checks for an AWS account. To request a higher limit, create a case
+// (http://aws.amazon.com/route53-request) with the AWS Support Center.
 type TooManyHealthChecks struct {
 	Message *string
 }

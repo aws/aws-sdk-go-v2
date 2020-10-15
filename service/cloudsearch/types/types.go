@@ -242,7 +242,7 @@ type DomainStatus struct {
 	// This member is required.
 	DomainName *string
 
-	// True if IndexDocuments () needs to be called to activate the current domain
+	// True if IndexDocuments needs to be called to activate the current domain
 	// configuration.
 	//
 	// This member is required.
@@ -255,15 +255,15 @@ type DomainStatus struct {
 	ARN *string
 
 	// True if the search domain is created. It can take several minutes to initialize
-	// a domain when CreateDomain () is called. Newly created search domains are
-	// returned from DescribeDomains () with a false value for Created until domain
-	// creation is complete.
+	// a domain when CreateDomain is called. Newly created search domains are returned
+	// from DescribeDomains with a false value for Created until domain creation is
+	// complete.
 	Created *bool
 
 	// True if the search domain has been deleted. The system must clean up resources
-	// dedicated to the search domain when DeleteDomain () is called. Newly deleted
-	// search domains are returned from DescribeDomains () with a true value for
-	// IsDeleted for several minutes until resource cleanup is complete.
+	// dedicated to the search domain when DeleteDomain is called. Newly deleted search
+	// domains are returned from DescribeDomains with a true value for IsDeleted for
+	// several minutes until resource cleanup is complete.
 	Deleted *bool
 
 	// The service endpoint for updating documents in a search domain.
@@ -370,7 +370,7 @@ type ExpressionStatus struct {
 }
 
 // Configuration information for a field in the index, including its name, type,
-// and options. The supported options depend on the IndexFieldType ().
+// and options. The supported options depend on the IndexFieldType.
 type IndexField struct {
 
 	// A string that represents the name of an index field. CloudSearch supports
@@ -453,7 +453,7 @@ type IndexField struct {
 type IndexFieldStatus struct {
 
 	// Configuration information for a field in the index, including its name, type,
-	// and options. The supported options depend on the IndexFieldType ().
+	// and options. The supported options depend on the IndexFieldType.
 	//
 	// This member is required.
 	Options *IndexField
@@ -616,13 +616,13 @@ type OptionStatus struct {
 	//
 	//     *
 	// RequiresIndexDocuments: the option's latest value will not be deployed until
-	// IndexDocuments () has been called and indexing is complete.
+	// IndexDocuments has been called and indexing is complete.
 	//
-	//     * Processing:
-	// the option's latest value is in the process of being activated.
+	//     * Processing: the
+	// option's latest value is in the process of being activated.
 	//
-	//     * Active:
-	// the option's latest value is completely deployed.
+	//     * Active: the
+	// option's latest value is completely deployed.
 	//
 	//     * FailedToValidate: the
 	// option value is not compatible with the domain's data and cannot be used to

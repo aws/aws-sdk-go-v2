@@ -42,7 +42,7 @@ type GetInstanceProfileInput struct {
 	InstanceProfileName *string
 }
 
-// Contains the response to a successful GetInstanceProfile () request.
+// Contains the response to a successful GetInstanceProfile request.
 type GetInstanceProfileOutput struct {
 
 	// A structure containing details about the instance profile.

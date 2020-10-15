@@ -59,16 +59,15 @@ type UpdateOpsItemInput struct {
 	// details about the OpsItem. For example, you can specify log files, error
 	// strings, license keys, troubleshooting tips, or other relevant data. You enter
 	// operational data as key-value pairs. The key has a maximum length of 128
-	// characters. The value has a maximum size of 20 KB.  <important> <p>Operational
-	// data keys <i>can't</i> begin with the following: amazon, aws, amzn, ssm,
-	// /amazon, /aws, /amzn, /ssm.</p> </important> <p>You can choose to make the data
-	// searchable by other users in the account or you can restrict  search access.
-	// Searchable data means that all users with access to the OpsItem Overview page
-	// (as provided by the DescribeOpsItems () API action) can view and search on the
-	// specified data. Operational data that is not searchable is only viewable by
-	// users who have access to the OpsItem (as provided by the GetOpsItem () API
-	// action).  <p>Use the <code>/aws/resources</code> key in OperationalData to
-	// specify a related resource in  the request. Use the /aws/automations key in
+	// characters. The value has a maximum size of 20 KB. Operational data keys can't
+	// begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.
+	// You can choose to make the data searchable by other users in the account or you
+	// can restrict search access. Searchable data means that all users with access to
+	// the OpsItem Overview page (as provided by the DescribeOpsItems API action) can
+	// view and search on the specified data. Operational data that is not searchable
+	// is only viewable by users who have access to the OpsItem (as provided by the
+	// GetOpsItem API action). Use the /aws/resources key in OperationalData to specify
+	// a related resource in the request. Use the /aws/automations key in
 	// OperationalData to associate an Automation runbook with the OpsItem. To view AWS
 	// CLI example commands that use these keys, see Creating OpsItems manually
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)

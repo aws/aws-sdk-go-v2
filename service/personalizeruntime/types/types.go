@@ -9,6 +9,6 @@ type PredictedItem struct {
 	ItemId *string
 
 	// A numeric representation of the model's certainty that the item will be the next
-	// user selection. For more information on scoring logic, see how-scores-work ().
+	// user selection. For more information on scoring logic, see how-scores-work.
 	Score *float64
 }

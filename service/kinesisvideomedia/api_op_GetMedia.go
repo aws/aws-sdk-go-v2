@@ -32,21 +32,25 @@ import (
 // * Kinesis Video Streams sends media data at a rate of up to 25 megabytes per
 // second (or 200 megabits per second) during a GetMedia session.
 //
-//     <note> <p>If
-// an error is thrown after invoking a Kinesis Video Streams media API, in addition
-// to the HTTP status code and the response body, it includes the following pieces
-// of information: </p> <ul> <li> <p> <code>x-amz-ErrorType</code> HTTP header –
-// contains a more specific error type in addition to what the HTTP status code
-// provides. </p> </li> <li> <p> <code>x-amz-RequestId</code> HTTP header – if you
-// want to report an issue to AWS, the support team can better diagnose the problem
-// if given the Request Id.</p> </li> </ul> <p>Both the HTTP status code and the
+// If an error is
+// thrown after invoking a Kinesis Video Streams media API, in addition to the HTTP
+// status code and the response body, it includes the following pieces of
+// information:
+//
+//     * x-amz-ErrorType HTTP header – contains a more specific error
+// type in addition to what the HTTP status code provides.
+//
+//     * x-amz-RequestId
+// HTTP header – if you want to report an issue to AWS, the support team can better
+// diagnose the problem if given the Request Id.
+//
+// Both the HTTP status code and the
 // ErrorType header can be utilized to make programmatic decisions about whether
 // errors are retry-able and under what conditions, as well as provide information
 // on what actions the client programmer might need to take in order to
-// successfully try again.</p> <p>For more information, see the <b>Errors</b>
-// section at the bottom of this topic, as well as <a
-// href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html">Common
-// Errors</a>. </p> </note>
+// successfully try again. For more information, see the Errors section at the
+// bottom of this topic, as well as Common Errors
+// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 func (c *Client) GetMedia(ctx context.Context, params *GetMediaInput, optFns ...func(*Options)) (*GetMediaOutput, error) {
 	if params == nil {
 		params = &GetMediaInput{}

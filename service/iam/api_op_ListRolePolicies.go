@@ -12,8 +12,8 @@ import (
 
 // Lists the names of the inline policies that are embedded in the specified IAM
 // role. An IAM role can also have managed policies attached to it. To list the
-// managed policies that are attached to a role, use ListAttachedRolePolicies ().
-// For more information about policies, see Managed Policies and Inline Policies
+// managed policies that are attached to a role, use ListAttachedRolePolicies. For
+// more information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. You can paginate the results using the MaxItems and
 // Marker parameters. If there are no inline policies embedded with the specified
@@ -59,7 +59,7 @@ type ListRolePoliciesInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListRolePolicies () request.
+// Contains the response to a successful ListRolePolicies request.
 type ListRolePoliciesOutput struct {
 
 	// A list of policy names.

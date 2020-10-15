@@ -271,9 +271,9 @@ type ProductViewSummary struct {
 	Distributor *string
 
 	// Indicates whether the product has a default path. If the product does not have a
-	// default path, call ListLaunchPaths () to disambiguate between paths. Otherwise,
-	// ListLaunchPaths () is not required, and the output of ProductViewSummary () can
-	// be used directly with DescribeProvisioningParameters ().
+	// default path, call ListLaunchPaths to disambiguate between paths. Otherwise,
+	// ListLaunchPaths is not required, and the output of ProductViewSummary can be
+	// used directly with DescribeProvisioningParameters.
 	HasDefaultPath *bool
 
 	// The product view identifier.
@@ -457,7 +457,7 @@ type ProvisionedProductPlanDetails struct {
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths ().
+	// paths for a product, use ListLaunchPaths.
 	PathId *string
 
 	// The plan identifier.

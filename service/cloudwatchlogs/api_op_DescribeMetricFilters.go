@@ -12,8 +12,8 @@ import (
 )
 
 // Lists the specified metric filters. You can list all the metric filters or
-// filter the results by log name, prefix, metric name, or metric namespace.  The
-// results are ASCII-sorted by filter name.</p>
+// filter the results by log name, prefix, metric name, or metric namespace. The
+// results are ASCII-sorted by filter name.
 func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetricFiltersInput, optFns ...func(*Options)) (*DescribeMetricFiltersOutput, error) {
 	if params == nil {
 		params = &DescribeMetricFiltersInput{}

@@ -25,7 +25,7 @@ import (
 // a hyperparameter tuning job are also added to all training jobs that the
 // hyperparameter tuning job launches, add the tags when you first create the
 // tuning job by specifying them in the Tags parameter of
-// CreateHyperParameterTuningJob ()
+// CreateHyperParameterTuningJob
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}

@@ -44,10 +44,10 @@ func (c *Client) DescribeClusterParameterGroups(ctx context.Context, params *Des
 type DescribeClusterParameterGroupsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterParameterGroups ()
-	// request exceed the value specified in MaxRecords, AWS returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
+	// response records. When the results of a DescribeClusterParameterGroups request
+	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
+	// field of the response. You can retrieve the next set of response records by
+	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
 
@@ -79,7 +79,7 @@ type DescribeClusterParameterGroupsInput struct {
 	TagValues []*string
 }
 
-// Contains the output from the DescribeClusterParameterGroups () action.
+// Contains the output from the DescribeClusterParameterGroups action.
 type DescribeClusterParameterGroupsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -89,8 +89,8 @@ type DescribeClusterParameterGroupsOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of ClusterParameterGroup () instances. Each instance describes one
-	// cluster parameter group.
+	// A list of ClusterParameterGroup instances. Each instance describes one cluster
+	// parameter group.
 	ParameterGroups []*types.ClusterParameterGroup
 
 	// Metadata pertaining to the operation's result.

@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of SqlInjectionMatchSet () objects.
+// global use. Returns an array of SqlInjectionMatchSet objects.
 func (c *Client) ListSqlInjectionMatchSets(ctx context.Context, params *ListSqlInjectionMatchSetsInput, optFns ...func(*Options)) (*ListSqlInjectionMatchSetsOutput, error) {
 	if params == nil {
 		params = &ListSqlInjectionMatchSetsInput{}
@@ -33,36 +33,36 @@ func (c *Client) ListSqlInjectionMatchSets(ctx context.Context, params *ListSqlI
 	return out, nil
 }
 
-// A request to list the SqlInjectionMatchSet () objects created by the current AWS
+// A request to list the SqlInjectionMatchSet objects created by the current AWS
 // account.
 type ListSqlInjectionMatchSetsInput struct {
 
-	// Specifies the number of SqlInjectionMatchSet () objects that you want AWS WAF to
+	// Specifies the number of SqlInjectionMatchSet objects that you want AWS WAF to
 	// return for this request. If you have more SqlInjectionMatchSet objects than the
 	// number you specify for Limit, the response includes a NextMarker value that you
 	// can use to get another batch of Rules.
 	Limit *int32
 
-	// If you specify a value for Limit and you have more SqlInjectionMatchSet ()
-	// objects than the value of Limit, AWS WAF returns a NextMarker value in the
-	// response that allows you to list another group of SqlInjectionMatchSets. For the
-	// second and subsequent ListSqlInjectionMatchSets requests, specify the value of
-	// NextMarker from the previous response to get information about another batch of
+	// If you specify a value for Limit and you have more SqlInjectionMatchSet objects
+	// than the value of Limit, AWS WAF returns a NextMarker value in the response that
+	// allows you to list another group of SqlInjectionMatchSets. For the second and
+	// subsequent ListSqlInjectionMatchSets requests, specify the value of NextMarker
+	// from the previous response to get information about another batch of
 	// SqlInjectionMatchSets.
 	NextMarker *string
 }
 
-// The response to a ListSqlInjectionMatchSets () request.
+// The response to a ListSqlInjectionMatchSets request.
 type ListSqlInjectionMatchSetsOutput struct {
 
-	// If you have more SqlInjectionMatchSet () objects than the number that you
-	// specified for Limit in the request, the response includes a NextMarker value. To
-	// list more SqlInjectionMatchSet objects, submit another ListSqlInjectionMatchSets
-	// request, and specify the NextMarker value from the response in the NextMarker
-	// value in the next request.
+	// If you have more SqlInjectionMatchSet objects than the number that you specified
+	// for Limit in the request, the response includes a NextMarker value. To list more
+	// SqlInjectionMatchSet objects, submit another ListSqlInjectionMatchSets request,
+	// and specify the NextMarker value from the response in the NextMarker value in
+	// the next request.
 	NextMarker *string
 
-	// An array of SqlInjectionMatchSetSummary () objects.
+	// An array of SqlInjectionMatchSetSummary objects.
 	SqlInjectionMatchSets []*types.SqlInjectionMatchSetSummary
 
 	// Metadata pertaining to the operation's result.

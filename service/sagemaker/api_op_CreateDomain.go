@@ -73,7 +73,7 @@ type CreateDomainInput struct {
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the
-	// Search () API.
+	// Search API.
 	Tags []*types.Tag
 }
 

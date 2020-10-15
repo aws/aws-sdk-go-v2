@@ -28,7 +28,7 @@ func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *
 	return out, nil
 }
 
-// Represents the input to DescribePendingMaintenanceActions ().
+// Represents the input to DescribePendingMaintenanceActions.
 type DescribePendingMaintenanceActionsInput struct {
 
 	// A filter that specifies one or more resources to return pending maintenance
@@ -59,7 +59,7 @@ type DescribePendingMaintenanceActionsInput struct {
 	ResourceIdentifier *string
 }
 
-// Represents the output of DescribePendingMaintenanceActions ().
+// Represents the output of DescribePendingMaintenanceActions.
 type DescribePendingMaintenanceActionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

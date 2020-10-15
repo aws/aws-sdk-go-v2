@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Creates a new Stage () resource that references a pre-existing Deployment () for
-// the API.
+// Creates a new Stage resource that references a pre-existing Deployment for the
+// API.
 func (c *Client) CreateStage(ctx context.Context, params *CreateStageInput, optFns ...func(*Options)) (*CreateStageOutput, error) {
 	if params == nil {
 		params = &CreateStageInput{}
@@ -29,21 +29,20 @@ func (c *Client) CreateStage(ctx context.Context, params *CreateStageInput, optF
 	return out, nil
 }
 
-// Requests API Gateway to create a Stage () resource.
+// Requests API Gateway to create a Stage resource.
 type CreateStageInput struct {
 
-	// [Required] The identifier of the Deployment () resource for the Stage ()
-	// resource.
+	// [Required] The identifier of the Deployment resource for the Stage resource.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name for the Stage () resource. Stage names can only contain
+	// [Required] The name for the Stage resource. Stage names can only contain
 	// alphanumeric characters, hyphens, and underscores. Maximum length is 128
 	// characters.
 	//
@@ -59,7 +58,7 @@ type CreateStageInput struct {
 	// The canary deployment settings of this stage.
 	CanarySettings *types.CanarySettings
 
-	// The description of the Stage () resource.
+	// The description of the Stage resource.
 	Description *string
 
 	// The version of the associated API documentation.
@@ -78,16 +77,16 @@ type CreateStageInput struct {
 
 	Title *string
 
-	// Specifies whether active tracing with X-ray is enabled for the Stage ().
+	// Specifies whether active tracing with X-ray is enabled for the Stage.
 	TracingEnabled *bool
 
-	// A map that defines the stage variables for the new Stage () resource. Variable
+	// A map that defines the stage variables for the new Stage resource. Variable
 	// names can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]*string
 }
 
-// Represents a unique identifier for a version of a deployed RestApi () that is
+// Represents a unique identifier for a version of a deployed RestApi that is
 // callable by users. Deploy an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
 type CreateStageOutput struct {
@@ -113,7 +112,7 @@ type CreateStageOutput struct {
 	// The timestamp when the stage was created.
 	CreatedDate *time.Time
 
-	// The identifier of the Deployment () that the stage points to.
+	// The identifier of the Deployment that the stage points to.
 	DeploymentId *string
 
 	// The stage's description.
@@ -125,8 +124,8 @@ type CreateStageOutput struct {
 	// The timestamp when the stage last updated.
 	LastUpdatedDate *time.Time
 
-	// A map that defines the method settings for a Stage () resource. Keys (designated
-	// as /{method_setting_key below) are method paths defined as
+	// A map that defines the method settings for a Stage resource. Keys (designated as
+	// /{method_setting_key below) are method paths defined as
 	// {resource_path}/{http_method} for an individual method override, or /\*/\* for
 	// overriding all methods in the stage.
 	MethodSettings map[string]*types.MethodSetting
@@ -140,15 +139,15 @@ type CreateStageOutput struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 
-	// Specifies whether active tracing with X-ray is enabled for the Stage ().
+	// Specifies whether active tracing with X-ray is enabled for the Stage.
 	TracingEnabled *bool
 
-	// A map that defines the stage variables for a Stage () resource. Variable names
-	// can have alphanumeric and underscore characters, and the values must match
+	// A map that defines the stage variables for a Stage resource. Variable names can
+	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]*string
 
-	// The ARN of the WebAcl associated with the Stage ().
+	// The ARN of the WebAcl associated with the Stage.
 	WebAclArn *string
 
 	// Metadata pertaining to the operation's result.

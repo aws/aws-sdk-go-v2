@@ -25,8 +25,8 @@ import (
 // additional features enabled only after all administrators in the invited
 // accounts approve the change by accepting the handshake. After you enable all
 // features, you can separately enable or disable individual policy types in a root
-// using EnablePolicyType () and DisablePolicyType (). To see the status of policy
-// types in a root, use ListRoots (). After all invited member accounts accept the
+// using EnablePolicyType and DisablePolicyType. To see the status of policy types
+// in a root, use ListRoots. After all invited member accounts accept the
 // handshake, you finalize the feature set change by accepting the handshake that
 // contains "Action": "ENABLE_ALL_FEATURES". This completes the change. After you
 // enable all features in your organization, the master account in the organization

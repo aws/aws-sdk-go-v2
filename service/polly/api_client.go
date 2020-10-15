@@ -19,11 +19,7 @@ import (
 const ServiceID = "Polly"
 const ServiceAPIVersion = "2016-06-10"
 
-// Amazon Polly is a web service that makes it easy to synthesize speech from text.
-// The Amazon Polly service provides API operations for synthesizing high-quality
-// speech from plain text and Speech Synthesis Markup Language (SSML), along with
-// managing pronunciations lexicons that enable you to get the best results for
-// your application domain.
+// Client provides the API client to make operations call for Amazon Polly.
 type Client struct {
 	options Options
 }

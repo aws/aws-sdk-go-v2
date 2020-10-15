@@ -14,12 +14,12 @@ import (
 // You might need to reboot your DB instance, usually for maintenance reasons. For
 // example, if you make certain modifications, or if you change the DB parameter
 // group associated with the DB instance, you must reboot the instance for the
-// changes to take effect.  <p>Rebooting a DB instance restarts the database engine
+// changes to take effect. Rebooting a DB instance restarts the database engine
 // service. Rebooting a DB instance results in a momentary outage, during which the
-// DB instance status is set to rebooting. </p> <p>For more information about
-// rebooting, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html">Rebooting
-// a DB Instance</a> in the <i>Amazon RDS User Guide.</i> </p>
+// DB instance status is set to rebooting. For more information about rebooting,
+// see Rebooting a DB Instance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html)
+// in the Amazon RDS User Guide.
 func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceInput, optFns ...func(*Options)) (*RebootDBInstanceOutput, error) {
 	if params == nil {
 		params = &RebootDBInstanceInput{}

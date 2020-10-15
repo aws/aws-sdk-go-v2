@@ -26,7 +26,7 @@ type BatchResultErrorEntry struct {
 }
 
 // Encloses a receipt handle and an entry id for each message in
-// ChangeMessageVisibilityBatch (). All of the following list parameters must be
+// ChangeMessageVisibilityBatch. All of the following list parameters must be
 // prefixed with ChangeMessageVisibilityBatchRequestEntry.n, where n is an integer
 // value starting with 1. For example, a parameter list for this action might look
 // like this:
@@ -55,7 +55,7 @@ type ChangeMessageVisibilityBatchRequestEntry struct {
 	VisibilityTimeout *int32
 }
 
-// Encloses the Id of an entry in ChangeMessageVisibilityBatch ().
+// Encloses the Id of an entry in ChangeMessageVisibilityBatch.
 type ChangeMessageVisibilityBatchResultEntry struct {
 
 	// Represents a message whose visibility timeout has been changed successfully.
@@ -81,7 +81,7 @@ type DeleteMessageBatchRequestEntry struct {
 	ReceiptHandle *string
 }
 
-// Encloses the Id of an entry in DeleteMessageBatch ().
+// Encloses the Id of an entry in DeleteMessageBatch.
 type DeleteMessageBatchResultEntry struct {
 
 	// Represents a successfully deleted message.
@@ -93,8 +93,8 @@ type DeleteMessageBatchResultEntry struct {
 // An Amazon SQS message.
 type Message struct {
 
-	// A map of the attributes requested in ReceiveMessage () to their respective
-	// values. Supported attributes:
+	// A map of the attributes requested in ReceiveMessage to their respective values.
+	// Supported attributes:
 	//
 	//     * ApproximateReceiveCount
 	//
@@ -148,8 +148,8 @@ type Message struct {
 
 // The user-specified message attribute value. For string data types, the Value
 // attribute has the same restrictions on the content as the message body. For more
-// information, see SendMessage ().Name, type, value and the message body must not
-// be empty or null. All parts of the message attribute, including Name, Type, and
+// information, see SendMessage.Name, type, value and the message body must not be
+// empty or null. All parts of the message attribute, including Name, Type, and
 // Value, are part of the message size restriction (256 KB or 262,144 bytes).
 type MessageAttributeValue struct {
 
@@ -180,7 +180,7 @@ type MessageAttributeValue struct {
 
 // The user-specified message system attribute value. For string data types, the
 // Value attribute has the same restrictions on the content as the message body.
-// For more information, see SendMessage ().Name, type, value and the message body
+// For more information, see SendMessage.Name, type, value and the message body
 // must not be empty or null.
 type MessageSystemAttributeValue struct {
 
@@ -329,8 +329,7 @@ type SendMessageBatchRequestEntry struct {
 	MessageSystemAttributes map[string]*MessageSystemAttributeValue
 }
 
-// Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch
-// ().
+// Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch.
 type SendMessageBatchResultEntry struct {
 
 	// An identifier for the message in this batch.

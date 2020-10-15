@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Changes information about the DomainName () resource.
+// Changes information about the DomainName resource.
 func (c *Client) UpdateDomainName(ctx context.Context, params *UpdateDomainNameInput, optFns ...func(*Options)) (*UpdateDomainNameOutput, error) {
 	if params == nil {
 		params = &UpdateDomainNameInput{}
@@ -28,10 +28,10 @@ func (c *Client) UpdateDomainName(ctx context.Context, params *UpdateDomainNameI
 	return out, nil
 }
 
-// A request to change information about the DomainName () resource.
+// A request to change information about the DomainName resource.
 type UpdateDomainNameInput struct {
 
-	// [Required] The name of the DomainName () resource to be changed.
+	// [Required] The name of the DomainName resource to be changed.
 	//
 	// This member is required.
 	DomainName *string
@@ -49,15 +49,15 @@ type UpdateDomainNameInput struct {
 	Title *string
 }
 
-// Represents a custom domain name as a user-friendly host name of an API (RestApi
-// ()). When you deploy an API, API Gateway creates a default host name for the
-// API. This default API host name is of the
+// Represents a custom domain name as a user-friendly host name of an API
+// (RestApi). When you deploy an API, API Gateway creates a default host name for
+// the API. This default API host name is of the
 // {restapi-id}.execute-api.{region}.amazonaws.com format. With the default host
 // name, you can access the API's root resource with the URL of
 // https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/. When you set
 // up a custom domain name of apis.example.com for this API, you can then access
 // the same resource using the URL of the https://apis.examples.com/myApi, where
-// myApi is the base path mapping (BasePathMapping ()) of your API under the custom
+// myApi is the base path mapping (BasePathMapping) of your API under the custom
 // domain name. Set a Custom Host Name for an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type UpdateDomainNameOutput struct {
@@ -93,18 +93,18 @@ type UpdateDomainNameOutput struct {
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string
 
-	// The status of the DomainName () migration. The valid values are AVAILABLE and
+	// The status of the DomainName migration. The valid values are AVAILABLE and
 	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
 	// the existing operation is complete. If it is AVAILABLE, the domain can be
 	// updated.
 	DomainNameStatus types.DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
-	// DomainName () migration.
+	// DomainName migration.
 	DomainNameStatusMessage *string
 
-	// The endpoint configuration of this DomainName () showing the endpoint types of
-	// the domain name.
+	// The endpoint configuration of this DomainName showing the endpoint types of the
+	// domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
 	// The reference to an AWS-managed certificate that will be used for validating the
@@ -128,8 +128,8 @@ type UpdateDomainNameOutput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
 	RegionalHostedZoneId *string
 
-	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
-	// (). The valid values are TLS_1_0 and TLS_1_2.
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
+	// The valid values are TLS_1_0 and TLS_1_2.
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.

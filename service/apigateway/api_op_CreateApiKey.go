@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Create an ApiKey () resource. AWS CLI
+// Create an ApiKey resource. AWS CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html)
 func (c *Client) CreateApiKey(ctx context.Context, params *CreateApiKeyInput, optFns ...func(*Options)) (*CreateApiKeyOutput, error) {
 	if params == nil {
@@ -29,24 +29,24 @@ func (c *Client) CreateApiKey(ctx context.Context, params *CreateApiKeyInput, op
 	return out, nil
 }
 
-// Request to create an ApiKey () resource.
+// Request to create an ApiKey resource.
 type CreateApiKeyInput struct {
 
 	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
 	// Marketplace.
 	CustomerId *string
 
-	// The description of the ApiKey ().
+	// The description of the ApiKey.
 	Description *string
 
-	// Specifies whether the ApiKey () can be used by callers.
+	// Specifies whether the ApiKey can be used by callers.
 	Enabled *bool
 
 	// Specifies whether (true) or not (false) the key identifier is distinct from the
 	// created API key value. This parameter is deprecated and should not be used.
 	GenerateDistinctId *bool
 
-	// The name of the ApiKey ().
+	// The name of the ApiKey.
 	Name *string
 
 	// DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.
@@ -67,9 +67,9 @@ type CreateApiKeyInput struct {
 	Value *string
 }
 
-// A resource that can be distributed to callers for executing Method () resources
-// that require an API key. API keys can be mapped to any Stage () on any RestApi
-// (), which indicates that the callers with the API key can make requests to that
+// A resource that can be distributed to callers for executing Method resources
+// that require an API key. API keys can be mapped to any Stage on any RestApi,
+// which indicates that the callers with the API key can make requests to that
 // stage. Use API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type CreateApiKeyOutput struct {
@@ -96,7 +96,7 @@ type CreateApiKeyOutput struct {
 	// The name of the API Key.
 	Name *string
 
-	// A list of Stage () resources that are associated with the ApiKey () resource.
+	// A list of Stage resources that are associated with the ApiKey resource.
 	StageKeys []*string
 
 	// The collection of tags. Each tag element is associated with a given resource.

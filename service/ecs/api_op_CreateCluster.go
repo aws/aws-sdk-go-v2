@@ -14,7 +14,7 @@ import (
 // Creates a new Amazon ECS cluster. By default, your account receives a default
 // cluster when you launch your first container instance. However, you can create
 // your own cluster with a unique name with the CreateCluster action. When you call
-// the CreateCluster () API operation, Amazon ECS attempts to create the Amazon ECS
+// the CreateCluster API operation, Amazon ECS attempts to create the Amazon ECS
 // service-linked role for your account so that required resources in other AWS
 // services can be managed on your behalf. However, if the IAM user that makes the
 // call does not have permissions to create the service-linked role, it is not
@@ -42,10 +42,10 @@ type CreateClusterInput struct {
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created and not already associated with another
 	// cluster. New capacity providers can be created with the CreateCapacityProvider
-	// () API operation. To use a AWS Fargate capacity provider, specify either the
+	// API operation. To use a AWS Fargate capacity provider, specify either the
 	// FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers
 	// are available to all accounts and only need to be associated with a cluster to
-	// be used. The PutClusterCapacityProviders () API operation is used to update the
+	// be used. The PutClusterCapacityProviders API operation is used to update the
 	// list of available capacity providers for a cluster after the cluster is created.
 	CapacityProviders []*string
 
@@ -60,22 +60,22 @@ type CreateClusterInput struct {
 	// used. A capacity provider strategy consists of one or more capacity providers
 	// along with the base and weight to assign to them. A capacity provider must be
 	// associated with the cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders () API is used to associate a capacity provider with
-	// a cluster. Only capacity providers with an ACTIVE or UPDATING status can be
-	// used. If specifying a capacity provider that uses an Auto Scaling group, the
-	// capacity provider must already be created. New capacity providers can be created
-	// with the CreateCapacityProvider () API operation. To use a AWS Fargate capacity
-	// provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS
-	// Fargate capacity providers are available to all accounts and only need to be
-	// associated with a cluster to be used. If a default capacity provider strategy is
-	// not defined for a cluster during creation, it can be defined later with the
-	// PutClusterCapacityProviders () API operation.
+	// PutClusterCapacityProviders API is used to associate a capacity provider with a
+	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
+	// provider must already be created. New capacity providers can be created with the
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
+	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
+	// capacity providers are available to all accounts and only need to be associated
+	// with a cluster to be used. If a default capacity provider strategy is not
+	// defined for a cluster during creation, it can be defined later with the
+	// PutClusterCapacityProviders API operation.
 	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
 
 	// The setting to use when creating a cluster. This parameter is used to enable
 	// CloudWatch Container Insights for a cluster. If this value is specified, it will
-	// override the containerInsights value set with PutAccountSetting () or
-	// PutAccountSettingDefault ().
+	// override the containerInsights value set with PutAccountSetting or
+	// PutAccountSettingDefault.
 	Settings []*types.ClusterSetting
 
 	// The metadata that you apply to the cluster to help you categorize and organize

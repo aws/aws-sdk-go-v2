@@ -19,7 +19,8 @@ import (
 const ServiceID = "SageMaker Runtime"
 const ServiceAPIVersion = "2017-05-13"
 
-// Amazon SageMaker runtime API.
+// Client provides the API client to make operations call for Amazon SageMaker
+// Runtime.
 type Client struct {
 	options Options
 }

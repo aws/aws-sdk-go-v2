@@ -723,7 +723,7 @@ type PendingModifiedValues struct {
 	StorageType *string
 }
 
-// Represents the output of ApplyPendingMaintenanceAction ().
+// Represents the output of ApplyPendingMaintenanceAction.
 type ResourcePendingMaintenanceActions struct {
 
 	// A list that provides details about the pending maintenance actions for the

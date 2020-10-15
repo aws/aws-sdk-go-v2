@@ -12,10 +12,10 @@ import (
 )
 
 // Returns a list of forecast export jobs created using the CreateForecastExportJob
-// () operation. For each forecast export job, this operation returns a summary of
-// its properties, including its Amazon Resource Name (ARN). To retrieve the
-// complete set of properties, use the ARN with the DescribeForecastExportJob ()
-// operation. You can filter the list using an array of Filter () objects.
+// operation. For each forecast export job, this operation returns a summary of its
+// properties, including its Amazon Resource Name (ARN). To retrieve the complete
+// set of properties, use the ARN with the DescribeForecastExportJob operation. You
+// can filter the list using an array of Filter objects.
 func (c *Client) ListForecastExportJobs(ctx context.Context, params *ListForecastExportJobsInput, optFns ...func(*Options)) (*ListForecastExportJobsOutput, error) {
 	if params == nil {
 		params = &ListForecastExportJobsInput{}

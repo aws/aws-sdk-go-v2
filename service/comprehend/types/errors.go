@@ -280,7 +280,7 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // entity recognition APIs (such as CreateEntityRecognizer), only English is
 // accepted. For most other APIs, such as those for Custom Classification, Amazon
 // Comprehend accepts text in all supported languages. For a list of supported
-// languages, see supported-languages ().
+// languages, see supported-languages.
 type UnsupportedLanguageException struct {
 	Message *string
 }

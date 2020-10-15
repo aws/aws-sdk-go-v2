@@ -30,30 +30,41 @@ import (
 // "yes", Amazon Lex might return a conclusion statement: "Thank you, your cheese
 // pizza has been ordered.".
 //
-//     <p> Not all Amazon Lex messages require a user
-// response. For example, a conclusion statement does not require a response. Some
-// messages require only a "yes" or "no" user response. In addition to the
-// <code>message</code>, Amazon Lex provides additional context about the message
-// in the response that you might use to enhance client behavior, for example, to
-// display the appropriate client user interface. These are the
-// <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>,
-// and <code>slots</code> fields in the response. Consider the following examples:
-// </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the
-// following context information:</p> <ul> <li> <p> <code>dialogState</code> set to
-// ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in
-// the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the
-// slot name for which the <code>message</code> is eliciting information </p> </li>
-// <li> <p> <code>slots</code> set to a map of slots, configured for the intent,
-// with currently known values </p> </li> </ul> </li> <li> <p> If the message is a
-// confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and
-// <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a
-// clarification prompt (configured for the intent) that indicates that user intent
-// is not understood, the <code>dialogState</code> is set to ElicitIntent and
-// <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition,
-// Amazon Lex also returns your application-specific
-// <code>sessionAttributes</code>. For more information, see <a
-// href="https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing
-// Conversation Context</a>. </p>
+// Not all Amazon Lex messages require a user response.
+// For example, a conclusion statement does not require a response. Some messages
+// require only a "yes" or "no" user response. In addition to the message, Amazon
+// Lex provides additional context about the message in the response that you might
+// use to enhance client behavior, for example, to display the appropriate client
+// user interface. These are the slotToElicit, dialogState, intentName, and slots
+// fields in the response. Consider the following examples:
+//
+//     * If the message
+// is to elicit slot data, Amazon Lex returns the following context information:
+//
+//
+// * dialogState set to ElicitSlot
+//
+//         * intentName set to the intent name in
+// the current context
+//
+//         * slotToElicit set to the slot name for which the
+// message is eliciting information
+//
+//         * slots set to a map of slots,
+// configured for the intent, with currently known values
+//
+//     * If the message is
+// a confirmation prompt, the dialogState is set to ConfirmIntent and SlotToElicit
+// is set to null.
+//
+//     * If the message is a clarification prompt (configured for
+// the intent) that indicates that user intent is not understood, the dialogState
+// is set to ElicitIntent and slotToElicit is set to null.
+//
+// In addition, Amazon Lex
+// also returns your application-specific sessionAttributes. For more information,
+// see Managing Conversation Context
+// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...func(*Options)) (*PostTextOutput, error) {
 	if params == nil {
 		params = &PostTextInput{}
@@ -153,14 +164,16 @@ type PostTextOutput struct {
 	//
 	//
 	// * Fulfilled - Conveys that the Lambda function configured for the intent has
-	// successfully fulfilled the intent.  </li> <li> <p>
-	// <code>ReadyForFulfillment</code> - Conveys that the client has to fulfill the
-	// intent. </p> </li> <li> <p> <code>Failed</code> - Conveys that the conversation
-	// with the user failed. </p> <p> This can happen for various reasons including
-	// that the user did not provide an appropriate response to prompts from the
-	// service (you can configure how many times Amazon Lex can prompt a user for
-	// specific information), or the Lambda function failed to fulfill the intent. </p>
-	// </li> </ul>
+	// successfully fulfilled the intent.
+	//
+	//     * ReadyForFulfillment - Conveys that the
+	// client has to fulfill the intent.
+	//
+	//     * Failed - Conveys that the conversation
+	// with the user failed. This can happen for various reasons including that the
+	// user did not provide an appropriate response to prompts from the service (you
+	// can configure how many times Amazon Lex can prompt a user for specific
+	// information), or the Lambda function failed to fulfill the intent.
 	DialogState types.DialogState
 
 	// The current user intent that Amazon Lex is aware of.
@@ -176,7 +189,7 @@ type PostTextOutput struct {
 	// you can assign messages to groups. When messages are assigned to groups Amazon
 	// Lex returns one message from each group in the response. The message field is an
 	// escaped JSON string containing the messages. For more information about the
-	// structure of the JSON string returned, see msg-prompts-formats (). If the Lambda
+	// structure of the JSON string returned, see msg-prompts-formats. If the Lambda
 	// function returns a message, Amazon Lex passes it to the client in its response.
 	Message *string
 

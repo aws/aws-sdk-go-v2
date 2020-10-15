@@ -19,12 +19,8 @@ import (
 const ServiceID = "DynamoDB Streams"
 const ServiceAPIVersion = "2012-08-10"
 
-// Amazon DynamoDB  <p>Amazon DynamoDB Streams provides API actions for accessing
-// streams and processing stream records. To learn more about application
-// development with Streams, see <a
-// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html">Capturing
-// Table Activity with DynamoDB Streams</a> in the Amazon DynamoDB Developer
-// Guide.</p>
+// Client provides the API client to make operations call for Amazon DynamoDB
+// Streams.
 type Client struct {
 	options Options
 }

@@ -19,7 +19,8 @@ import (
 const ServiceID = "Transcribe"
 const ServiceAPIVersion = "2017-10-26"
 
-// Operations and objects for transcribing speech to text.
+// Client provides the API client to make operations call for Amazon Transcribe
+// Service.
 type Client struct {
 	options Options
 }

@@ -137,22 +137,40 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance ().  <p>For
-	// more information about IAM database authentication, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
-	// User Guide.</i> </p>
+	// For information about the supported DB engines, see CreateDBInstance. For more
+	// information about IAM database authentication, see  IAM Database Authentication
+	// for MySQL and PostgreSQL
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// The database engine to use for the new instance. Default: The same as source
-	// Constraint: Must be compatible with the engine of the source  <p>Valid
-	// Values:</p> <ul> <li> <p> <code>mariadb</code> </p> </li> <li> <p>
-	// <code>mysql</code> </p> </li> <li> <p> <code>oracle-ee</code> </p> </li> <li>
-	// <p> <code>oracle-se2</code> </p> </li> <li> <p> <code>oracle-se1</code> </p>
-	// </li> <li> <p> <code>oracle-se</code> </p> </li> <li> <p> <code>postgres</code>
-	// </p> </li> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p>
-	// <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p>
-	// </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>
+	// Constraint: Must be compatible with the engine of the source Valid Values:
+	//
+	//
+	// * mariadb
+	//
+	//     * mysql
+	//
+	//     * oracle-ee
+	//
+	//     * oracle-se2
+	//
+	//     * oracle-se1
+	//
+	//
+	// * oracle-se
+	//
+	//     * postgres
+	//
+	//     * sqlserver-ee
+	//
+	//     * sqlserver-se
+	//
+	//     *
+	// sqlserver-ex
+	//
+	//     * sqlserver-web
 	Engine *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
@@ -170,10 +188,10 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// is a Multi-AZ deployment.
 	MultiAZ *bool
 
-	// The name of the option group to be used for the restored DB instance.
-	// <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE,
-	// can't be removed from an option group, and that option group can't be removed
-	// from a DB instance once it is associated with a DB instance</p>
+	// The name of the option group to be used for the restored DB instance. Permanent
+	// options, such as the TDE option for Oracle Advanced Security TDE, can't be
+	// removed from an option group, and that option group can't be removed from a DB
+	// instance once it is associated with a DB instance
 	OptionGroupName *string
 
 	// The port number on which the database accepts connections. Constraints: Value
@@ -192,7 +210,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// permitted if the security group assigned to the DB instance doesn't permit it.
 	// When the DB instance isn't publicly accessible, it is an internal DB instance
 	// with a DNS name that resolves to a private IP address. For more information, see
-	// CreateDBInstance ().
+	// CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// The date and time to restore from. Valid Values: Value must be a time in

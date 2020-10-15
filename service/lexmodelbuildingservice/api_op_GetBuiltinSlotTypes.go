@@ -14,8 +14,8 @@ import (
 // Gets a list of built-in slot types that meet the specified criteria. For a list
 // of built-in slot types, see Slot Type Reference
 // (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
-// in the Alexa Skills Kit.  <p>This operation requires permission for the
-// <code>lex:GetBuiltInSlotTypes</code> action.</p>
+// in the Alexa Skills Kit. This operation requires permission for the
+// lex:GetBuiltInSlotTypes action.
 func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlotTypesInput, optFns ...func(*Options)) (*GetBuiltinSlotTypesOutput, error) {
 	if params == nil {
 		params = &GetBuiltinSlotTypesInput{}

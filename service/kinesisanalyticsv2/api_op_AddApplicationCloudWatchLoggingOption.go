@@ -41,7 +41,7 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	CloudWatchLoggingOption *types.CloudWatchLoggingOption
 
 	// The version ID of the Kinesis Data Analytics application. You can retrieve the
-	// application version ID using DescribeApplication ().
+	// application version ID using DescribeApplication.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

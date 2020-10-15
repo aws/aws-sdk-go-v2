@@ -35,7 +35,7 @@ import (
 //
 //     * Notifications -- Get event notifications for
 // changes in ticket status using Amazon Simple Notification Service (SNS).
-// Notifications are easy to set up (see CreateMatchmakingConfiguration ()) and
+// Notifications are easy to set up (see CreateMatchmakingConfiguration) and
 // typically deliver match status changes faster and more efficiently than polling.
 // We recommend that you use polling to back up to notifications (since delivery is
 // not guaranteed) and call DescribeMatchmaking only when notifications are not
@@ -56,9 +56,9 @@ import (
 // player acceptance (set in the matchmaking configuration), the tickets move into
 // status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit
 // acceptance from all players in every ticket involved in the match, and then call
-// AcceptMatch () for each player. If any player rejects or fails to accept the
-// match before a specified timeout, the proposed match is dropped (see AcceptMatch
-// for more details).
+// AcceptMatch for each player. If any player rejects or fails to accept the match
+// before a specified timeout, the proposed match is dropped (see AcceptMatch for
+// more details).
 //
 //     * Once a match is proposed and accepted, the matchmaking
 // tickets move into status PLACING. FlexMatch locates resources for a new game
@@ -81,16 +81,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html)
 // Related operations
 //
-//     * StartMatchmaking ()
+//     * StartMatchmaking
 //
-//     * DescribeMatchmaking ()
+//     * DescribeMatchmaking
 //
+//     *
+// StopMatchmaking
 //
-// * StopMatchmaking ()
+//     * AcceptMatch
 //
-//     * AcceptMatch ()
-//
-//     * StartMatchBackfill ()
+//     * StartMatchBackfill
 func (c *Client) StartMatchmaking(ctx context.Context, params *StartMatchmakingInput, optFns ...func(*Options)) (*StartMatchmakingOutput, error) {
 	if params == nil {
 		params = &StartMatchmakingInput{}

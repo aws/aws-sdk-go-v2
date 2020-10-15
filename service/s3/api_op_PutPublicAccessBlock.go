@@ -16,21 +16,25 @@ import (
 // permission. For more information about Amazon S3 permissions, see Specifying
 // Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-// <important> <p>When Amazon S3 evaluates the <code>PublicAccessBlock</code>
-// configuration for a bucket or an object, it checks the
-// <code>PublicAccessBlock</code> configuration for both the bucket (or the bucket
-// that contains the object) and the bucket owner's account. If the
-// <code>PublicAccessBlock</code> configurations are different between the bucket
-// and the account, Amazon S3 uses the most restrictive combination of the
-// bucket-level and account-level settings.</p> </important> <p>For more
-// information about when Amazon S3 considers a bucket or an object public, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The
-// Meaning of "Public"</a>.</p> <p class="title"> <b>Related Resources</b> </p>
-// <ul> <li> <p> <a>GetPublicAccessBlock</a> </p> </li> <li> <p>
-// <a>DeletePublicAccessBlock</a> </p> </li> <li> <p> <a>GetBucketPolicyStatus</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using
-// Amazon S3 Block Public Access</a> </p> </li> </ul>
+// When Amazon S3 evaluates the PublicAccessBlock configuration for a bucket or an
+// object, it checks the PublicAccessBlock configuration for both the bucket (or
+// the bucket that contains the object) and the bucket owner's account. If the
+// PublicAccessBlock configurations are different between the bucket and the
+// account, Amazon S3 uses the most restrictive combination of the bucket-level and
+// account-level settings. For more information about when Amazon S3 considers a
+// bucket or an object public, see The Meaning of "Public"
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status).
+// Related Resources
+//
+//     * GetPublicAccessBlock
+//
+//     * DeletePublicAccessBlock
+//
+//
+// * GetBucketPolicyStatus
+//
+//     * Using Amazon S3 Block Public Access
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAccessBlockInput, optFns ...func(*Options)) (*PutPublicAccessBlockOutput, error) {
 	if params == nil {
 		params = &PutPublicAccessBlockInput{}

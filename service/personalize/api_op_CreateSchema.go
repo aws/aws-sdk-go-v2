@@ -14,9 +14,14 @@ import (
 // schema you create must be in Avro JSON format. Amazon Personalize recognizes
 // three schema variants. Each schema is associated with a dataset type and has a
 // set of required field and keywords. You specify a schema when you call
-// CreateDataset ().  <p class="title"> <b>Related APIs</b> </p> <ul> <li> <p>
-// <a>ListSchemas</a> </p> </li> <li> <p> <a>DescribeSchema</a> </p> </li> <li> <p>
-// <a>DeleteSchema</a> </p> </li> </ul>
+// CreateDataset. Related APIs
+//
+//     * ListSchemas
+//
+//     * DescribeSchema
+//
+//     *
+// DeleteSchema
 func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, optFns ...func(*Options)) (*CreateSchemaOutput, error) {
 	if params == nil {
 		params = &CreateSchemaInput{}

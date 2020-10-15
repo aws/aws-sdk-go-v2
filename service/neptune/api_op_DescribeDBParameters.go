@@ -63,7 +63,7 @@ type DescribeDBParametersOutput struct {
 	// value specified by MaxRecords.
 	Marker *string
 
-	// A list of Parameter () values.
+	// A list of Parameter values.
 	Parameters []*types.Parameter
 
 	// Metadata pertaining to the operation's result.

@@ -33,7 +33,7 @@ func (c *Client) GenerateCredentialReport(ctx context.Context, params *GenerateC
 type GenerateCredentialReportInput struct {
 }
 
-// Contains the response to a successful GenerateCredentialReport () request.
+// Contains the response to a successful GenerateCredentialReport request.
 type GenerateCredentialReportOutput struct {
 
 	// Information about the credential report.

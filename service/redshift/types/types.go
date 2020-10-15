@@ -492,7 +492,7 @@ type ClusterSubnetGroup struct {
 	// and Invalid.
 	SubnetGroupStatus *string
 
-	// A list of the VPC Subnet () elements.
+	// A list of the VPC Subnet elements.
 	Subnets []*Subnet
 
 	// The list of tags for the cluster subnet group.
@@ -813,7 +813,7 @@ type MaintenanceTrack struct {
 	// The name of the maintenance track. Possible values are current and trailing.
 	MaintenanceTrackName *string
 
-	// An array of UpdateTarget () objects to update with the maintenance track.
+	// An array of UpdateTarget objects to update with the maintenance track.
 	UpdateTargets []*UpdateTarget
 }
 
@@ -969,8 +969,8 @@ type RecurringCharge struct {
 	RecurringChargeFrequency *string
 }
 
-// Describes a reserved node. You can call the DescribeReservedNodeOfferings () API
-// to obtain the available reserved node offerings.
+// Describes a reserved node. You can call the DescribeReservedNodeOfferings API to
+// obtain the available reserved node offerings.
 type ReservedNode struct {
 
 	// The currency code for the reserved cluster.
@@ -1144,20 +1144,20 @@ type ResumeClusterMessage struct {
 type RevisionTarget struct {
 
 	// A unique string that identifies the version to update the cluster to. You can
-	// use this value in ModifyClusterDbRevision ().
+	// use this value in ModifyClusterDbRevision.
 	DatabaseRevision *string
 
 	// The date on which the database revision was released.
 	DatabaseRevisionReleaseDate *time.Time
 
 	// A string that describes the changes and features that will be applied to the
-	// cluster when it is updated to the corresponding ClusterDbRevision ().
+	// cluster when it is updated to the corresponding ClusterDbRevision.
 	Description *string
 }
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
 // Amazon Redshift API operations on a schedule. For information about which API
-// operations can be scheduled, see ScheduledActionType ().
+// operations can be scheduled, see ScheduledActionType.
 type ScheduledAction struct {
 
 	// The end time in UTC when the schedule is no longer active. After this time, the
@@ -1301,8 +1301,8 @@ type Snapshot struct {
 	ManualSnapshotRemainingDays *int32
 
 	// The number of days that a manual snapshot is retained. If the value is -1, the
-	// manual snapshot is retained indefinitely.  <p>The value must be either -1 or an
-	// integer between 1 and 3,653.</p>
+	// manual snapshot is retained indefinitely. The value must be either -1 or an
+	// integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
 
 	// The master user name for the cluster.
@@ -1335,8 +1335,8 @@ type Snapshot struct {
 	// A timestamp representing the start of the retention period for the snapshot.
 	SnapshotRetentionStartTime *time.Time
 
-	// The snapshot type. Snapshots created using CreateClusterSnapshot () and
-	// CopyClusterSnapshot () are of type "manual".
+	// The snapshot type. Snapshots created using CreateClusterSnapshot and
+	// CopyClusterSnapshot are of type "manual".
 	SnapshotType *string
 
 	// The source region from which the snapshot was copied.
@@ -1345,14 +1345,14 @@ type Snapshot struct {
 	// The snapshot status. The value of the status depends on the API operation
 	// used:
 	//
-	//     * CreateClusterSnapshot () and CopyClusterSnapshot () returns status
-	// as "creating".
+	//     * CreateClusterSnapshot and CopyClusterSnapshot returns status as
+	// "creating".
 	//
-	//     * DescribeClusterSnapshots () returns status as "creating",
+	//     * DescribeClusterSnapshots returns status as "creating",
 	// "available", "final snapshot", or "failed".
 	//
-	//     * DeleteClusterSnapshot ()
-	// returns status as "deleted".
+	//     * DeleteClusterSnapshot returns
+	// status as "deleted".
 	Status *string
 
 	// The list of tags for the cluster snapshot.
@@ -1468,7 +1468,7 @@ type SupportedPlatform struct {
 	Name *string
 }
 
-// Describes the status of a RestoreTableFromClusterSnapshot () operation.
+// Describes the status of a RestoreTableFromClusterSnapshot operation.
 type TableRestoreStatus struct {
 
 	// The identifier of the Amazon Redshift cluster that the table is being restored

@@ -13,15 +13,15 @@ import (
 
 // Returns the results of the AWS Trusted Advisor check that has the specified
 // check ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
-// () operation. The response contains a TrustedAdvisorCheckResult () object, which
+// operation. The response contains a TrustedAdvisorCheckResult object, which
 // contains these three objects:
 //
-//     * TrustedAdvisorCategorySpecificSummary ()
+//     * TrustedAdvisorCategorySpecificSummary
 //
 //
-// * TrustedAdvisorResourceDetail ()
+// * TrustedAdvisorResourceDetail
 //
-//     * TrustedAdvisorResourcesSummary ()
+//     * TrustedAdvisorResourcesSummary
 //
 // In
 // addition, the response contains these fields:
@@ -35,14 +35,14 @@ import (
 //
 // * checkId - The unique identifier for the check.
 //
-//     <note> <ul> <li> <p>You
-// must have a Business or Enterprise support plan to use the AWS Support API. </p>
-// </li> <li> <p>If you call the AWS Support API from an account that does not have
-// a Business or Enterprise support plan, the
-// <code>SubscriptionRequiredException</code> error message appears. For
-// information about changing your support plan, see <a
-// href="http://aws.amazon.com/premiumsupport/">AWS Support</a>.</p> </li> </ul>
-// </note>
+//     * You must have a Business
+// or Enterprise support plan to use the AWS Support API.
+//
+//     * If you call the
+// AWS Support API from an account that does not have a Business or Enterprise
+// support plan, the SubscriptionRequiredException error message appears. For
+// information about changing your support plan, see AWS Support
+// (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *DescribeTrustedAdvisorCheckResultInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckResultOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckResultInput{}
@@ -73,7 +73,7 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 }
 
 // The result of the Trusted Advisor check returned by the
-// DescribeTrustedAdvisorCheckResult () operation.
+// DescribeTrustedAdvisorCheckResult operation.
 type DescribeTrustedAdvisorCheckResultOutput struct {
 
 	// The detailed results of the Trusted Advisor check.

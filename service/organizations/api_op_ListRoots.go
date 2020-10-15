@@ -22,7 +22,7 @@ import (
 // organization. When you enable all features, you make policy types available for
 // use in that organization. Individual policy types can then be enabled and
 // disabled in a root. To see the availability of a policy type in an organization,
-// use DescribeOrganization ().
+// use DescribeOrganization.
 func (c *Client) ListRoots(ctx context.Context, params *ListRootsInput, optFns ...func(*Options)) (*ListRootsOutput, error) {
 	if params == nil {
 		params = &ListRootsInput{}

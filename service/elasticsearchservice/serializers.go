@@ -65,7 +65,13 @@ func awsRestjson1_serializeOpHttpBindingsAcceptInboundCrossClusterSearchConnecti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CrossClusterSearchConnectionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+	}
 	if v.CrossClusterSearchConnectionId != nil {
+		if len(*v.CrossClusterSearchConnectionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+		}
 		if err := encoder.SetURI("CrossClusterSearchConnectionId").String(*v.CrossClusterSearchConnectionId); err != nil {
 			return err
 		}
@@ -205,13 +211,25 @@ func awsRestjson1_serializeOpHttpBindingsAssociatePackageInput(v *AssociatePacka
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
 	}
 
+	if v.PackageID == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+	}
 	if v.PackageID != nil {
+		if len(*v.PackageID) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+		}
 		if err := encoder.SetURI("PackageID").String(*v.PackageID); err != nil {
 			return err
 		}
@@ -681,7 +699,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteElasticsearchDomainInput(v *Delet
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
@@ -791,7 +815,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteInboundCrossClusterSearchConnecti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CrossClusterSearchConnectionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+	}
 	if v.CrossClusterSearchConnectionId != nil {
+		if len(*v.CrossClusterSearchConnectionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+		}
 		if err := encoder.SetURI("CrossClusterSearchConnectionId").String(*v.CrossClusterSearchConnectionId); err != nil {
 			return err
 		}
@@ -851,7 +881,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteOutboundCrossClusterSearchConnect
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CrossClusterSearchConnectionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+	}
 	if v.CrossClusterSearchConnectionId != nil {
+		if len(*v.CrossClusterSearchConnectionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+		}
 		if err := encoder.SetURI("CrossClusterSearchConnectionId").String(*v.CrossClusterSearchConnectionId); err != nil {
 			return err
 		}
@@ -911,7 +947,13 @@ func awsRestjson1_serializeOpHttpBindingsDeletePackageInput(v *DeletePackageInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PackageID == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+	}
 	if v.PackageID != nil {
+		if len(*v.PackageID) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+		}
 		if err := encoder.SetURI("PackageID").String(*v.PackageID); err != nil {
 			return err
 		}
@@ -971,7 +1013,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeElasticsearchDomainInput(v *Des
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
@@ -1031,7 +1079,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeElasticsearchDomainConfigInput(
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
@@ -1170,13 +1224,25 @@ func awsRestjson1_serializeOpHttpBindingsDescribeElasticsearchInstanceTypeLimits
 		encoder.SetQuery("domainName").String(*v.DomainName)
 	}
 
+	if v.ElasticsearchVersion == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ElasticsearchVersion must not be empty")}
+	}
 	if v.ElasticsearchVersion != nil {
+		if len(*v.ElasticsearchVersion) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ElasticsearchVersion must not be empty")}
+		}
 		if err := encoder.SetURI("ElasticsearchVersion").String(*v.ElasticsearchVersion); err != nil {
 			return err
 		}
 	}
 
+	if len(v.InstanceType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceType must not be empty")}
+	}
 	if len(v.InstanceType) > 0 {
+		if len(string(v.InstanceType)) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceType must not be empty")}
+		}
 		if err := encoder.SetURI("InstanceType").String(string(v.InstanceType)); err != nil {
 			return err
 		}
@@ -1623,13 +1689,25 @@ func awsRestjson1_serializeOpHttpBindingsDissociatePackageInput(v *DissociatePac
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
 	}
 
+	if v.PackageID == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+	}
 	if v.PackageID != nil {
+		if len(*v.PackageID) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+		}
 		if err := encoder.SetURI("PackageID").String(*v.PackageID); err != nil {
 			return err
 		}
@@ -1747,7 +1825,13 @@ func awsRestjson1_serializeOpHttpBindingsGetUpgradeHistoryInput(v *GetUpgradeHis
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
@@ -1815,7 +1899,13 @@ func awsRestjson1_serializeOpHttpBindingsGetUpgradeStatusInput(v *GetUpgradeStat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
@@ -1933,7 +2023,13 @@ func awsRestjson1_serializeOpHttpBindingsListDomainsForPackageInput(v *ListDomai
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.PackageID == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+	}
 	if v.PackageID != nil {
+		if len(*v.PackageID) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PackageID must not be empty")}
+		}
 		if err := encoder.SetURI("PackageID").String(*v.PackageID); err != nil {
 			return err
 		}
@@ -1997,7 +2093,13 @@ func awsRestjson1_serializeOpHttpBindingsListElasticsearchInstanceTypesInput(v *
 		encoder.SetQuery("domainName").String(*v.DomainName)
 	}
 
+	if v.ElasticsearchVersion == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ElasticsearchVersion must not be empty")}
+	}
 	if v.ElasticsearchVersion != nil {
+		if len(*v.ElasticsearchVersion) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ElasticsearchVersion must not be empty")}
+		}
 		if err := encoder.SetURI("ElasticsearchVersion").String(*v.ElasticsearchVersion); err != nil {
 			return err
 		}
@@ -2127,7 +2229,13 @@ func awsRestjson1_serializeOpHttpBindingsListPackagesForDomainInput(v *ListPacka
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}
@@ -2336,7 +2444,13 @@ func awsRestjson1_serializeOpHttpBindingsRejectInboundCrossClusterSearchConnecti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CrossClusterSearchConnectionId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+	}
 	if v.CrossClusterSearchConnectionId != nil {
+		if len(*v.CrossClusterSearchConnectionId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CrossClusterSearchConnectionId must not be empty")}
+		}
 		if err := encoder.SetURI("CrossClusterSearchConnectionId").String(*v.CrossClusterSearchConnectionId); err != nil {
 			return err
 		}
@@ -2560,7 +2674,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateElasticsearchDomainConfigInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DomainName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
 	if v.DomainName != nil {
+		if len(*v.DomainName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+		}
 		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
 			return err
 		}

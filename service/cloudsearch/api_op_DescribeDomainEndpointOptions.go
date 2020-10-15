@@ -31,7 +31,7 @@ func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainEndpointOptions () operation.
+// Container for the parameters to the DescribeDomainEndpointOptions operation.
 // Specify the name of the domain you want to describe. To show the active
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeDomainEndpointOptionsInput struct {

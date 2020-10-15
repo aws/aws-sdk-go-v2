@@ -19,7 +19,8 @@ import (
 const ServiceID = "DocDB"
 const ServiceAPIVersion = "2014-10-31"
 
-// Amazon DocumentDB API documentation
+// Client provides the API client to make operations call for Amazon DocumentDB
+// with MongoDB compatibility.
 type Client struct {
 	options Options
 }

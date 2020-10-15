@@ -12,7 +12,7 @@ import (
 )
 
 // Inspects text for syntax and the part of speech of words in the document. For
-// more information, how-syntax ().
+// more information, how-syntax.
 func (c *Client) DetectSyntax(ctx context.Context, params *DetectSyntaxInput, optFns ...func(*Options)) (*DetectSyntaxOutput, error) {
 	if params == nil {
 		params = &DetectSyntaxInput{}
@@ -49,7 +49,7 @@ type DetectSyntaxOutput struct {
 	// A collection of syntax tokens describing the text. For each token, the response
 	// provides the text, the token type, where the text begins and ends, and the level
 	// of confidence that Amazon Comprehend has that the token is correct. For a list
-	// of token types, see how-syntax ().
+	// of token types, see how-syntax.
 	SyntaxTokens []*types.SyntaxToken
 
 	// Metadata pertaining to the operation's result.

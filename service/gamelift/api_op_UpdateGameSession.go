@@ -16,32 +16,32 @@ import (
 // can be terminated during a scale-down event, and the player session creation
 // policy, which controls whether or not new players can join the session. To
 // update a game session, specify the game session ID and the values you want to
-// change. If successful, an updated GameSession () object is returned.
+// change. If successful, an updated GameSession object is returned.
 //
 //     *
-// CreateGameSession ()
+// CreateGameSession
 //
-//     * DescribeGameSessions ()
-//
-//     *
-// DescribeGameSessionDetails ()
-//
-//     * SearchGameSessions ()
+//     * DescribeGameSessions
 //
 //     *
-// UpdateGameSession ()
+// DescribeGameSessionDetails
 //
-//     * GetGameSessionLogUrl ()
+//     * SearchGameSessions
 //
-//     * Game session
-// placements
+//     * UpdateGameSession
 //
-//         * StartGameSessionPlacement ()
+//
+// * GetGameSessionLogUrl
+//
+//     * Game session placements
 //
 //         *
-// DescribeGameSessionPlacement ()
+// StartGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * DescribeGameSessionPlacement
+//
+//         *
+// StopGameSessionPlacement
 func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessionInput, optFns ...func(*Options)) (*UpdateGameSessionOutput, error) {
 	if params == nil {
 		params = &UpdateGameSessionInput{}

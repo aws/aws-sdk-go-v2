@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists information about a collection of Resource () resources.
+// Lists information about a collection of Resource resources.
 func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, optFns ...func(*Options)) (*GetResourcesOutput, error) {
 	if params == nil {
 		params = &GetResourcesInput{}
@@ -30,16 +30,16 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 // Request to list information about a collection of resources.
 type GetResourcesInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
 	// A query parameter used to retrieve the specified resources embedded in the
-	// returned Resources () resource in the response. This embed parameter value is a
+	// returned Resources resource in the response. This embed parameter value is a
 	// list of comma-separated strings. Currently, the request supports only retrieval
-	// of the embedded Method () resources this way. The query parameter value must be
-	// a single-valued list and contain the "methods" string. For example, GET
+	// of the embedded Method resources this way. The query parameter value must be a
+	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources?embed=methods.
 	Embed []*string
 
@@ -59,7 +59,7 @@ type GetResourcesInput struct {
 	Title *string
 }
 
-// Represents a collection of Resource () resources. Create an API
+// Represents a collection of Resource resources. Create an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type GetResourcesOutput struct {
 

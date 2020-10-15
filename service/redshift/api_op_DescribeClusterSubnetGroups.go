@@ -43,7 +43,7 @@ type DescribeClusterSubnetGroupsInput struct {
 	ClusterSubnetGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSubnetGroups () request
+	// response records. When the results of a DescribeClusterSubnetGroups request
 	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
 	// field of the response. You can retrieve the next set of response records by
 	// providing the returned marker value in the Marker parameter and retrying the
@@ -74,10 +74,10 @@ type DescribeClusterSubnetGroupsInput struct {
 	TagValues []*string
 }
 
-// Contains the output from the DescribeClusterSubnetGroups () action.
+// Contains the output from the DescribeClusterSubnetGroups action.
 type DescribeClusterSubnetGroupsOutput struct {
 
-	// A list of ClusterSubnetGroup () instances.
+	// A list of ClusterSubnetGroup instances.
 	ClusterSubnetGroups []*types.ClusterSubnetGroup
 
 	// A value that indicates the starting point for the next set of response records

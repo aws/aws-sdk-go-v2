@@ -14,31 +14,30 @@ import (
 // This action is part of Amazon GameLift FleetIQ with game server groups, which is
 // in preview release and is subject to change. Reinstates activity on a game
 // server group after it has been suspended. A game server group may be suspended
-// by calling SuspendGameServerGroup (), or it may have been involuntarily
-// suspended due to a configuration problem. You can manually resume activity on
-// the group once the configuration problem has been resolved. Refer to the game
-// server group status and status reason for more information on why group activity
-// is suspended. To resume activity, specify a game server group ARN and the type
-// of activity to be resumed. Learn more GameLift FleetIQ Guide
+// by calling SuspendGameServerGroup, or it may have been involuntarily suspended
+// due to a configuration problem. You can manually resume activity on the group
+// once the configuration problem has been resolved. Refer to the game server group
+// status and status reason for more information on why group activity is
+// suspended. To resume activity, specify a game server group ARN and the type of
+// activity to be resumed. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup ()
+//     * CreateGameServerGroup
 //
 //     * ListGameServerGroups
-// ()
 //
-//     * DescribeGameServerGroup ()
 //
-//     * UpdateGameServerGroup ()
+// * DescribeGameServerGroup
 //
-//     *
-// DeleteGameServerGroup ()
-//
-//     * ResumeGameServerGroup ()
+//     * UpdateGameServerGroup
 //
 //     *
-// SuspendGameServerGroup ()
+// DeleteGameServerGroup
+//
+//     * ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
 func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameServerGroupInput, optFns ...func(*Options)) (*ResumeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &ResumeGameServerGroupInput{}
@@ -57,7 +56,7 @@ func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameSe
 type ResumeGameServerGroupInput struct {
 
 	// The unique identifier of the game server group to resume activity on. Use either
-	// the GameServerGroup () name or ARN value.
+	// the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

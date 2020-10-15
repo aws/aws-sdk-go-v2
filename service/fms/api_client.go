@@ -19,11 +19,8 @@ import (
 const ServiceID = "FMS"
 const ServiceAPIVersion = "2018-01-01"
 
-// AWS Firewall Manager This is the AWS Firewall Manager API Reference. This guide
-// is for developers who need detailed information about the AWS Firewall Manager
-// API actions, data types, and errors. For detailed information about AWS Firewall
-// Manager features, see the AWS Firewall Manager Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html).
+// Client provides the API client to make operations call for Firewall Management
+// Service.
 type Client struct {
 	options Options
 }

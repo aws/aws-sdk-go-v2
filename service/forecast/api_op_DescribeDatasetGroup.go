@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes a dataset group created using the CreateDatasetGroup () operation. In
+// Describes a dataset group created using the CreateDatasetGroup operation. In
 // addition to listing the parameters provided in the CreateDatasetGroup request,
 // this operation includes the following properties:
 //
@@ -67,7 +67,7 @@ type DescribeDatasetGroupOutput struct {
 	Domain types.Domain
 
 	// When the dataset group was created or last updated from a call to the
-	// UpdateDatasetGroup () operation. While the dataset group is being updated,
+	// UpdateDatasetGroup operation. While the dataset group is being updated,
 	// LastModificationTime is the current time of the DescribeDatasetGroup call.
 	LastModificationTime *time.Time
 
@@ -84,7 +84,7 @@ type DescribeDatasetGroupOutput struct {
 	//     * UPDATE_PENDING, UPDATE_IN_PROGRESS,
 	// UPDATE_FAILED
 	//
-	// The UPDATE states apply when you call the UpdateDatasetGroup ()
+	// The UPDATE states apply when you call the UpdateDatasetGroup
 	// operation. The Status of the dataset group must be ACTIVE before you can use the
 	// dataset group to create a predictor.
 	Status *string

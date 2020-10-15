@@ -29,7 +29,7 @@ func (c *Client) ListStackResources(ctx context.Context, params *ListStackResour
 	return out, nil
 }
 
-// The input for the ListStackResource () action.
+// The input for the ListStackResource action.
 type ListStackResourcesInput struct {
 
 	// The name or the unique stack ID that is associated with the stack, which are not
@@ -51,7 +51,7 @@ type ListStackResourcesInput struct {
 	NextToken *string
 }
 
-// The output for a ListStackResources () action.
+// The output for a ListStackResources action.
 type ListStackResourcesOutput struct {
 
 	// If the output exceeds 1 MB, a string that identifies the next page of stack

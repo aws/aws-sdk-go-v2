@@ -40,14 +40,14 @@ type DescribeOrderableClusterOptionsInput struct {
 
 	// The version filter value. Specify this parameter to show only the available
 	// offerings matching the specified version. Default: All versions. Constraints:
-	// Must be one of the version returned from DescribeClusterVersions ().
+	// Must be one of the version returned from DescribeClusterVersions.
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeOrderableClusterOptions ()
-	// request exceed the value specified in MaxRecords, AWS returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
+	// response records. When the results of a DescribeOrderableClusterOptions request
+	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
+	// field of the response. You can retrieve the next set of response records by
+	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
 
@@ -63,7 +63,7 @@ type DescribeOrderableClusterOptionsInput struct {
 	NodeType *string
 }
 
-// Contains the output from the DescribeOrderableClusterOptions () action.
+// Contains the output from the DescribeOrderableClusterOptions action.
 type DescribeOrderableClusterOptionsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

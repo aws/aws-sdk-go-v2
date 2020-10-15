@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns information about provisioned instances, and supports pagination.
-// <note> <p>This operation can also return information for Amazon RDS instances
-// and Amazon DocDB instances.</p> </note>
+// Returns information about provisioned instances, and supports pagination. This
+// operation can also return information for Amazon RDS instances and Amazon DocDB
+// instances.
 func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInstancesInput, optFns ...func(*Options)) (*DescribeDBInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeDBInstancesInput{}
@@ -50,9 +50,9 @@ type DescribeDBInstancesInput struct {
 	//     * engine - Accepts an engine name (such as neptune), and restricts
 	// the results list to DB instances created by that engine.
 	//
-	//     <p>For example, to
-	// invoke this API from the AWS CLI and filter so that only Neptune DB instances
-	// are returned, you could use the following command:</p>
+	// For example, to invoke
+	// this API from the AWS CLI and filter so that only Neptune DB instances are
+	// returned, you could use the following command:
 	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.
@@ -69,7 +69,7 @@ type DescribeDBInstancesInput struct {
 
 type DescribeDBInstancesOutput struct {
 
-	// A list of DBInstance () instances.
+	// A list of DBInstance instances.
 	DBInstances []*types.DBInstance
 
 	// An optional pagination token provided by a previous request. If this parameter

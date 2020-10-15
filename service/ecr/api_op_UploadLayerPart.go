@@ -53,7 +53,7 @@ type UploadLayerPartInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The upload ID from a previous InitiateLayerUpload () operation to associate with
+	// The upload ID from a previous InitiateLayerUpload operation to associate with
 	// the layer part upload.
 	//
 	// This member is required.

@@ -162,7 +162,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLifecyclePolicyInput(v *DeleteLif
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PolicyId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
+	}
 	if v.PolicyId != nil {
+		if len(*v.PolicyId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
+		}
 		if err := encoder.SetURI("PolicyId").String(*v.PolicyId); err != nil {
 			return err
 		}
@@ -313,7 +319,13 @@ func awsRestjson1_serializeOpHttpBindingsGetLifecyclePolicyInput(v *GetLifecycle
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PolicyId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
+	}
 	if v.PolicyId != nil {
+		if len(*v.PolicyId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
+		}
 		if err := encoder.SetURI("PolicyId").String(*v.PolicyId); err != nil {
 			return err
 		}
@@ -373,7 +385,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -444,7 +462,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -518,7 +542,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -598,7 +628,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLifecyclePolicyInput(v *UpdateLif
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PolicyId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
+	}
 	if v.PolicyId != nil {
+		if len(*v.PolicyId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyId must not be empty")}
+		}
 		if err := encoder.SetURI("PolicyId").String(*v.PolicyId); err != nil {
 			return err
 		}

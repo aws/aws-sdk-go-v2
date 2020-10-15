@@ -21,10 +21,10 @@ import (
 // policy granting them the S3:GetBucketWebsite permission. The following
 // operations are related to DeleteBucketWebsite:
 //
-//     * DeleteBucketWebsite ()
+//     * DeleteBucketWebsite
 //
-//
-// * PutBucketWebsite ()
+//     *
+// PutBucketWebsite
 func (c *Client) GetBucketWebsite(ctx context.Context, params *GetBucketWebsiteInput, optFns ...func(*Options)) (*GetBucketWebsiteOutput, error) {
 	if params == nil {
 		params = &GetBucketWebsiteInput{}

@@ -46,7 +46,7 @@ type PutAggregationAuthorizationInput struct {
 
 type PutAggregationAuthorizationOutput struct {
 
-	// Returns an AggregationAuthorization object.  </p>
+	// Returns an AggregationAuthorization object.
 	AggregationAuthorization *types.AggregationAuthorization
 
 	// Metadata pertaining to the operation's result.

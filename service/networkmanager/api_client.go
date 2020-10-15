@@ -19,9 +19,7 @@ import (
 const ServiceID = "NetworkManager"
 const ServiceAPIVersion = "2019-07-05"
 
-// Transit Gateway Network Manager (Network Manager) enables you to create a global
-// network, in which you can monitor your AWS and on-premises networks that are
-// built around transit gateways.
+// Client provides the API client to make operations call for AWS Network Manager.
 type Client struct {
 	options Options
 }

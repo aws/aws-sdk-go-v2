@@ -27,15 +27,23 @@ func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateM
 	return out, nil
 }
 
-// A JSON object containing the following fields:  <ul> <li> <p>
-// <a>UpdateMaintenanceStartTimeInput$DayOfMonth</a> </p> </li> <li> <p>
-// <a>UpdateMaintenanceStartTimeInput$DayOfWeek</a> </p> </li> <li> <p>
-// <a>UpdateMaintenanceStartTimeInput$HourOfDay</a> </p> </li> <li> <p>
-// <a>UpdateMaintenanceStartTimeInput$MinuteOfHour</a> </p> </li> </ul>
+// A JSON object containing the following fields:
+//
+//     *
+// UpdateMaintenanceStartTimeInput$DayOfMonth
+//
+//     *
+// UpdateMaintenanceStartTimeInput$DayOfWeek
+//
+//     *
+// UpdateMaintenanceStartTimeInput$HourOfDay
+//
+//     *
+// UpdateMaintenanceStartTimeInput$MinuteOfHour
 type UpdateMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -67,8 +75,8 @@ type UpdateMaintenanceStartTimeInput struct {
 // maintenance start time is updated.
 type UpdateMaintenanceStartTimeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

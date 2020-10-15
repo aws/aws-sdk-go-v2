@@ -16,7 +16,7 @@ import (
 // product. You can copy a product to the same account or another account. You can
 // copy a product to the same region or another region. This operation is performed
 // asynchronously. To track the progress of the operation, use
-// DescribeCopyProductStatus ().
+// DescribeCopyProductStatus.
 func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optFns ...func(*Options)) (*CopyProductOutput, error) {
 	if params == nil {
 		params = &CopyProductInput{}

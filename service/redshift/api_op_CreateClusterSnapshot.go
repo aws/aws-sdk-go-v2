@@ -59,8 +59,8 @@ type CreateClusterSnapshotInput struct {
 	SnapshotIdentifier *string
 
 	// The number of days that a manual snapshot is retained. If the value is -1, the
-	// manual snapshot is retained indefinitely.  <p>The value must be either -1 or an
-	// integer between 1 and 3,653.</p> <p>The default value is -1.</p>
+	// manual snapshot is retained indefinitely. The value must be either -1 or an
+	// integer between 1 and 3,653. The default value is -1.
 	ManualSnapshotRetentionPeriod *int32
 
 	// A list of tag instances.

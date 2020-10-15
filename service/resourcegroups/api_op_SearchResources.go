@@ -32,7 +32,7 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 type SearchResourcesInput struct {
 
 	// The search query, using the same formats that are supported for resource group
-	// definition. For more information, see CreateGroup ().
+	// definition. For more information, see CreateGroup.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery

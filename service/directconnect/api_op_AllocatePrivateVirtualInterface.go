@@ -13,7 +13,7 @@ import (
 
 // Provisions a private virtual interface to be owned by the specified AWS account.
 // Virtual interfaces created using this action must be confirmed by the owner
-// using ConfirmPrivateVirtualInterface (). Until then, the virtual interface is in
+// using ConfirmPrivateVirtualInterface. Until then, the virtual interface is in
 // the Confirming state and is not available to handle traffic.
 func (c *Client) AllocatePrivateVirtualInterface(ctx context.Context, params *AllocatePrivateVirtualInterfaceInput, optFns ...func(*Options)) (*AllocatePrivateVirtualInterfaceOutput, error) {
 	if params == nil {
@@ -145,18 +145,18 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	//
 	//     * deleting: A
 	// virtual interface is in this state immediately after calling
-	// DeleteVirtualInterface () until it can no longer forward traffic.
+	// DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//     *
-	// deleted: A virtual interface that cannot forward traffic.
+	//     * deleted: A
+	// virtual interface that cannot forward traffic.
 	//
-	//     * rejected: The
-	// virtual interface owner has declined creation of the virtual interface. If a
-	// virtual interface in the Confirming state is deleted by the virtual interface
-	// owner, the virtual interface enters the Rejected state.
+	//     * rejected: The virtual
+	// interface owner has declined creation of the virtual interface. If a virtual
+	// interface in the Confirming state is deleted by the virtual interface owner, the
+	// virtual interface enters the Rejected state.
 	//
-	//     * unknown: The
-	// state of the virtual interface is not available.
+	//     * unknown: The state of the
+	// virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
 	// The type of virtual interface. The possible values are private and public.

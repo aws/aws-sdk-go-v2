@@ -647,10 +647,10 @@ type MessageTemplateType struct {
 
 // This data type is no longer supported. You can use it only for SMS MFA
 // configurations. You can't use it for TOTP software token MFA configurations. To
-// set either type of MFA configuration, use the AdminSetUserMFAPreference () or
-// SetUserMFAPreference () actions. To look up information about either type of MFA
-// configuration, use the AdminGetUserResponse$UserMFASettingList () or
-// GetUserResponse$UserMFASettingList () responses.
+// set either type of MFA configuration, use the AdminSetUserMFAPreference or
+// SetUserMFAPreference actions. To look up information about either type of MFA
+// configuration, use the AdminGetUserResponse$UserMFASettingList or
+// GetUserResponse$UserMFASettingList responses.
 type MFAOptionType struct {
 
 	// The attribute name of the MFA option type. The only valid value is phone_number.
@@ -1253,28 +1253,28 @@ type UserPoolClientType struct {
 	// This
 	// setting affects the behavior of following APIs:
 	//
-	//     * AdminInitiateAuth ()
-	//
-	//
-	// * AdminRespondToAuthChallenge ()
-	//
-	//     * InitiateAuth ()
+	//     * AdminInitiateAuth
 	//
 	//     *
-	// RespondToAuthChallenge ()
+	// AdminRespondToAuthChallenge
 	//
-	//     * ForgotPassword ()
+	//     * InitiateAuth
+	//
+	//     * RespondToAuthChallenge
+	//
+	//
+	// * ForgotPassword
 	//
 	//     * ConfirmForgotPassword
-	// ()
 	//
-	//     * ConfirmSignUp ()
+	//     * ConfirmSignUp
 	//
-	//     * ResendConfirmationCode ()
+	//     *
+	// ResendConfirmationCode
 	//
-	// After February 15th
-	// 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly
-	// created user pool clients if no value is provided.
+	// After February 15th 2020, the value of
+	// PreventUserExistenceErrors will default to ENABLED for newly created user pool
+	// clients if no value is provided.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
 	// The Read-only attributes.

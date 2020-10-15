@@ -34,7 +34,7 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 // as the request body.
 type PutRestApiInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -50,7 +50,7 @@ type PutRestApiInput struct {
 	Name *string
 
 	// Custom header parameters as part of the request. For example, to exclude
-	// DocumentationParts () from an imported API, set ignore=documentation as a
+	// DocumentationParts from an imported API, set ignore=documentation as a
 	// parameters value, as in the AWS CLI command of aws apigateway import-rest-api
 	// --parameters ignore=documentation --body
 	// 'file:///path/to/imported-api-body.json'.
@@ -77,8 +77,8 @@ type PutRestApiOutput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the RestApi
+	// supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
@@ -87,7 +87,7 @@ type PutRestApiOutput struct {
 	// The API's description.
 	Description *string
 
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
 
@@ -106,7 +106,7 @@ type PutRestApiOutput struct {
 	Name *string
 
 	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
+	// the caller and Method configuration.
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.

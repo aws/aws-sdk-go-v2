@@ -13,7 +13,7 @@ import (
 
 // Registers a new workflow type and its configuration settings in the specified
 // domain. The retention period for the workflow history is set by the
-// RegisterDomain () action. If the type already exists, then a TypeAlreadyExists
+// RegisterDomain action. If the type already exists, then a TypeAlreadyExists
 // fault is returned. You cannot change the configuration settings of a workflow
 // type once it is registered and it must be registered as a new version. Access
 // Control You can use IAM policies to control this action's access to Amazon SWF
@@ -66,33 +66,30 @@ type RegisterWorkflowTypeInput struct {
 	// This member is required.
 	Domain *string
 
-	// The name of the workflow type.  <p>The specified string must not start or end
-	// with whitespace. It must not contain a <code>:</code> (colon), <code>/</code>
-	// (slash), <code>|</code> (vertical bar), or any control characters
-	// (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it must not
-	// <i>be</i> the literal string <code>arn</code>.</p>
+	// The name of the workflow type. The specified string must not start or end with
+	// whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
+	// control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the
+	// literal string arn.
 	//
 	// This member is required.
 	Name *string
 
 	// The version of the workflow type. The workflow type consists of the name and
 	// version, the combination of which must be unique within the domain. To get a
-	// list of all currently registered workflow types, use the ListWorkflowTypes ()
-	// action.  <p>The specified string must not start or end with whitespace. It must
-	// not contain a <code>:</code> (colon), <code>/</code> (slash), <code>|</code>
-	// (vertical bar), or any control characters (<code>\u0000-\u001f</code> |
-	// <code>\u007f-\u009f</code>). Also, it must not <i>be</i> the literal string
-	// <code>arn</code>.</p>
+	// list of all currently registered workflow types, use the ListWorkflowTypes
+	// action. The specified string must not start or end with whitespace. It must not
+	// contain a : (colon), / (slash), | (vertical bar), or any control characters
+	// (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// This member is required.
 	Version *string
 
 	// If set, specifies the default policy to use for the child workflow executions
 	// when a workflow execution of this type is terminated, by calling the
-	// TerminateWorkflowExecution () action explicitly or due to an expired timeout.
-	// This default can be overridden when starting a workflow execution using the
-	// StartWorkflowExecution () action or the StartChildWorkflowExecutionDecision ().
-	// The supported child policies are:
+	// TerminateWorkflowExecution action explicitly or due to an expired timeout. This
+	// default can be overridden when starting a workflow execution using the
+	// StartWorkflowExecution action or the StartChildWorkflowExecutionDecision. The
+	// supported child policies are:
 	//
 	//     * TERMINATE – The child executions are
 	// terminated.
@@ -108,12 +105,12 @@ type RegisterWorkflowTypeInput struct {
 
 	// If set, specifies the default maximum duration for executions of this workflow
 	// type. You can override this default when starting an execution through the
-	// StartWorkflowExecution () Action or StartChildWorkflowExecutionDecision ().
-	// <p>The duration is specified in seconds; an integer greater than or equal to 0.
-	// Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a
-	// value of "NONE" for <code>defaultExecutionStartToCloseTimeout</code>; there is a
-	// one-year max limit on the time that a workflow execution can run. Exceeding this
-	// limit always causes the workflow execution to time out.</p>
+	// StartWorkflowExecution Action or StartChildWorkflowExecutionDecision. The
+	// duration is specified in seconds; an integer greater than or equal to 0. Unlike
+	// some of the other timeout parameters in Amazon SWF, you cannot specify a value
+	// of "NONE" for defaultExecutionStartToCloseTimeout; there is a one-year max limit
+	// on the time that a workflow execution can run. Exceeding this limit always
+	// causes the workflow execution to time out.
 	DefaultExecutionStartToCloseTimeout *string
 
 	// The default IAM role attached to this workflow type. Executions of this workflow
@@ -127,8 +124,8 @@ type RegisterWorkflowTypeInput struct {
 
 	// If set, specifies the default task list to use for scheduling decision tasks for
 	// executions of this workflow type. This default is used only if a task list isn't
-	// provided when starting the execution through the StartWorkflowExecution ()
-	// Action or StartChildWorkflowExecutionDecision ().
+	// provided when starting the execution through the StartWorkflowExecution Action
+	// or StartChildWorkflowExecutionDecision.
 	DefaultTaskList *types.TaskList
 
 	// The default task priority to assign to the workflow type. If not assigned, then
@@ -142,8 +139,8 @@ type RegisterWorkflowTypeInput struct {
 
 	// If set, specifies the default maximum duration of decision tasks for this
 	// workflow type. This default can be overridden when starting a workflow execution
-	// using the StartWorkflowExecution () action or the
-	// StartChildWorkflowExecutionDecision (). The duration is specified in seconds, an
+	// using the StartWorkflowExecution action or the
+	// StartChildWorkflowExecutionDecision. The duration is specified in seconds, an
 	// integer greater than or equal to 0. You can use NONE to specify unlimited
 	// duration.
 	DefaultTaskStartToCloseTimeout *string

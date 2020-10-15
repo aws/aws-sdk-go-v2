@@ -13,8 +13,8 @@ import (
 
 // Creates an Auto Scaling group with the specified name and attributes. If you
 // exceed your maximum limit of Auto Scaling groups, the call fails. To query this
-// limit, call the DescribeAccountLimits () API. For information about updating
-// this limit, see Amazon EC2 Auto Scaling Service Quotas
+// limit, call the DescribeAccountLimits API. For information about updating this
+// limit, see Amazon EC2 Auto Scaling Service Quotas
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for
 // creating an Auto Scaling group, see Getting Started with Amazon EC2 Auto Scaling
@@ -119,11 +119,11 @@ type CreateAutoScalingGroupInput struct {
 	InstanceId *string
 
 	// The name of the launch configuration to use when an instance is launched. To get
-	// the launch configuration name, use the DescribeLaunchConfigurations () API
+	// the launch configuration name, use the DescribeLaunchConfigurations API
 	// operation. New launch configurations can be created with the
-	// CreateLaunchConfiguration () API. You must specify one of the following
-	// parameters in your request: LaunchConfigurationName, LaunchTemplate, InstanceId,
-	// or MixedInstancesPolicy.
+	// CreateLaunchConfiguration API. You must specify one of the following parameters
+	// in your request: LaunchConfigurationName, LaunchTemplate, InstanceId, or
+	// MixedInstancesPolicy.
 	LaunchConfigurationName *string
 
 	// Parameters used to specify the launch template and version to use when an
@@ -161,16 +161,15 @@ type CreateAutoScalingGroupInput struct {
 	// distribution of On-Demand Instances and Spot Instances, the maximum price to pay
 	// for Spot Instances, and how the Auto Scaling group allocates instance types to
 	// fulfill On-Demand and Spot capacity, but also the parameters that specify the
-	// instance configuration information—the launch template and instance types.
-	// <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html">MixedInstancesPolicy</a>
-	// in the <i>Amazon EC2 Auto Scaling API Reference</i> and <a
-	// href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto
-	// Scaling Groups with Multiple Instance Types and Purchase Options</a> in the
-	// <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>You must specify one of the
-	// following parameters in your request: <code>LaunchConfigurationName</code>,
-	// <code>LaunchTemplate</code>, <code>InstanceId</code>, or
-	// <code>MixedInstancesPolicy</code>.</p>
+	// instance configuration information—the launch template and instance types. For
+	// more information, see MixedInstancesPolicy
+	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html)
+	// in the Amazon EC2 Auto Scaling API Reference and Auto Scaling Groups with
+	// Multiple Instance Types and Purchase Options
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// in the Amazon EC2 Auto Scaling User Guide. You must specify one of the following
+	// parameters in your request: LaunchConfigurationName, LaunchTemplate, InstanceId,
+	// or MixedInstancesPolicy.
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by

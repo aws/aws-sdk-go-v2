@@ -58,8 +58,8 @@ import (
 // (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords)
 // in the Amazon Kinesis Data Streams Developer Guide. By default, data records are
 // accessible for 24 hours from the time that they are added to a stream. You can
-// use IncreaseStreamRetentionPeriod () or DecreaseStreamRetentionPeriod () to
-// modify this retention period.
+// use IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to modify
+// this retention period.
 func (c *Client) PutRecords(ctx context.Context, params *PutRecordsInput, optFns ...func(*Options)) (*PutRecordsOutput, error) {
 	if params == nil {
 		params = &PutRecordsInput{}

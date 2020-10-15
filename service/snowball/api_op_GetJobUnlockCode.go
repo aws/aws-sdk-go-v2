@@ -12,14 +12,13 @@ import (
 
 // Returns the UnlockCode code value for the specified job. A particular UnlockCode
 // value can be accessed for up to 90 days after the associated job has been
-// created.  <p>The <code>UnlockCode</code> value is a 29-character code with 25
-// alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest
-// file when it is passed along with the manifest to the Snowball through the
-// Snowball client when the client is started for the first time.</p> <p>As a best
-// practice, we recommend that you don't save a copy of the <code>UnlockCode</code>
-// in the same location as the manifest file for that job. Saving these separately
-// helps prevent unauthorized parties from gaining access to the Snowball
-// associated with that job.</p>
+// created. The UnlockCode value is a 29-character code with 25 alphanumeric
+// characters and 4 hyphens. This code is used to decrypt the manifest file when it
+// is passed along with the manifest to the Snowball through the Snowball client
+// when the client is started for the first time. As a best practice, we recommend
+// that you don't save a copy of the UnlockCode in the same location as the
+// manifest file for that job. Saving these separately helps prevent unauthorized
+// parties from gaining access to the Snowball associated with that job.
 func (c *Client) GetJobUnlockCode(ctx context.Context, params *GetJobUnlockCodeInput, optFns ...func(*Options)) (*GetJobUnlockCodeOutput, error) {
 	if params == nil {
 		params = &GetJobUnlockCodeInput{}

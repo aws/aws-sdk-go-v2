@@ -256,11 +256,10 @@ type Fleet struct {
 	// operation and passes the ARN of the role to use. The operation creates a new
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the AppStream_Machine_Role credential profile on the
-	// instance.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using
-	// an IAM Role to Grant Permissions to Applications and Scripts Running on
-	// AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0
-	// Administration Guide</i>.</p>
+	// instance. For more information, see Using an IAM Role to Grant Permissions to
+	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
+	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -274,14 +273,14 @@ type Fleet struct {
 	// activity. If users continue to be idle after the time interval in
 	// IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users
 	// from being disconnected due to inactivity, specify a value of 0. Otherwise,
-	// specify a value between 60 and 3600. The default value is 0.  <note> <p>If you
-	// enable this feature, we recommend that you specify a value that corresponds
-	// exactly to a whole number of minutes (for example, 60, 120, and 180). If you
-	// don't do this, the value is rounded to the nearest minute. For example, if you
-	// specify a value of 70, users are disconnected after 1 minute of inactivity. If
-	// you specify a value that is at the midpoint between two different minutes, the
-	// value is rounded up. For example, if you specify a value of 90, users are
-	// disconnected after 2 minutes of inactivity. </p> </note>
+	// specify a value between 60 and 3600. The default value is 0. If you enable this
+	// feature, we recommend that you specify a value that corresponds exactly to a
+	// whole number of minutes (for example, 60, 120, and 180). If you don't do this,
+	// the value is rounded to the nearest minute. For example, if you specify a value
+	// of 70, users are disconnected after 1 minute of inactivity. If you specify a
+	// value that is at the midpoint between two different minutes, the value is
+	// rounded up. For example, if you specify a value of 90, users are disconnected
+	// after 2 minutes of inactivity.
 	IdleDisconnectTimeoutInSeconds *int32
 
 	// The ARN for the public, private, or shared image.
@@ -411,11 +410,10 @@ type ImageBuilder struct {
 	// operation and passes the ARN of the role to use. The operation creates a new
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the AppStream_Machine_Role credential profile on the
-	// instance.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using
-	// an IAM Role to Grant Permissions to Applications and Scripts Running on
-	// AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0
-	// Administration Guide</i>.</p>
+	// instance. For more information, see Using an IAM Role to Grant Permissions to
+	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
+	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
 	// The ARN of the image from which this builder was created.
@@ -725,13 +723,13 @@ type UsageReportSubscription struct {
 	// The time when the last usage report was generated.
 	LastGeneratedReportDate *time.Time
 
-	// The Amazon S3 bucket where generated reports are stored.  <p>If you enabled
+	// The Amazon S3 bucket where generated reports are stored. If you enabled
 	// on-instance session scripts and Amazon S3 logging for your session script
 	// configuration, AppStream 2.0 created an S3 bucket to store the script output.
 	// The bucket is unique to your account and Region. When you enable usage reporting
 	// in this case, AppStream 2.0 uses the same bucket to store your usage reports. If
 	// you haven't already enabled on-instance session scripts, when you enable usage
-	// reports, AppStream 2.0 creates a new S3 bucket.</p>
+	// reports, AppStream 2.0 creates a new S3 bucket.
 	S3BucketName *string
 
 	// The schedule for generating usage reports.
@@ -781,8 +779,7 @@ type User struct {
 	//     * UNKNOWN – The user status is not known.
 	Status *string
 
-	// The email address of the user.  <note> <p>Users' email addresses are
-	// case-sensitive.</p> </note>
+	// The email address of the user. Users' email addresses are case-sensitive.
 	UserName *string
 }
 
@@ -814,8 +811,8 @@ type UserStackAssociation struct {
 	// This member is required.
 	StackName *string
 
-	// The email address of the user who is associated with the stack.  <note>
-	// <p>Users' email addresses are case-sensitive.</p> </note>
+	// The email address of the user who is associated with the stack. Users' email
+	// addresses are case-sensitive.
 	//
 	// This member is required.
 	UserName *string

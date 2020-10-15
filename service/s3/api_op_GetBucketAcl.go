@@ -15,8 +15,7 @@ import (
 // access control list (ACL) of a bucket. To use GET to return the ACL of the
 // bucket, you must have READ_ACP access to the bucket. If READ_ACP permission is
 // granted to the anonymous user, you can return the ACL of the bucket without
-// using an authorization header.  <p class="title"> <b>Related Resources</b> </p>
-// <ul> <li> <p> </p> </li> </ul>
+// using an authorization header. Related Resources
 func (c *Client) GetBucketAcl(ctx context.Context, params *GetBucketAclInput, optFns ...func(*Options)) (*GetBucketAclOutput, error) {
 	if params == nil {
 		params = &GetBucketAclInput{}

@@ -67,7 +67,7 @@ type StartTranscriptionJobInput struct {
 
 	// The location where the transcription is stored. If you set the OutputBucketName,
 	// Amazon Transcribe puts the transcript in the specified S3 bucket. When you call
-	// the GetTranscriptionJob () operation, the operation returns this location in the
+	// the GetTranscriptionJob operation, the operation returns this location in the
 	// TranscriptFileUri field. If you enable content redaction, the redacted
 	// transcript appears in RedactedTranscriptFileUri. If you enable content redaction
 	// and choose to output an unredacted transcript, that transcript's location still

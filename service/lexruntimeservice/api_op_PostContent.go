@@ -286,8 +286,8 @@ type PostContentOutput struct {
 	// groups Amazon Lex returns one message from each group in the response. The
 	// message field is an escaped JSON string containing the messages. For more
 	// information about the structure of the JSON string returned, see
-	// msg-prompts-formats (). If the Lambda function returns a message, Amazon Lex
-	// passes it to the client in its response.
+	// msg-prompts-formats. If the Lambda function returns a message, Amazon Lex passes
+	// it to the client in its response.
 	Message *string
 
 	// The format of the response message. One of the following values:

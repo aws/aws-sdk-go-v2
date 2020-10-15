@@ -15,10 +15,9 @@ import (
 // allocation tag is a key-value pair where the key is case-sensitive and the value
 // is optional. You can use cost allocation tags to categorize and track your AWS
 // costs. If the cluster is not in the available state, ListTagsForResource returns
-// an error.  <p>You can have a maximum of 50 cost allocation tags on an
-// ElastiCache resource. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Monitoring
-// Costs with Tags</a>.</p>
+// an error. You can have a maximum of 50 cost allocation tags on an ElastiCache
+// resource. For more information, see Monitoring Costs with Tags
+// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html).
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

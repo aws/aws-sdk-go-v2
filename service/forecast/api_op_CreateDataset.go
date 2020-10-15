@@ -30,12 +30,12 @@ import (
 //
 // After creating a dataset, you import your training data into it and add
 // the dataset to a dataset group. You use the dataset group to create a predictor.
-// For more information, see howitworks-datasets-groups (). To get a list of all
-// your datasets, use the ListDatasets () operation. For example Forecast datasets,
-// see the Amazon Forecast Sample GitHub repository
+// For more information, see howitworks-datasets-groups. To get a list of all your
+// datasets, use the ListDatasets operation. For example Forecast datasets, see the
+// Amazon Forecast Sample GitHub repository
 // (https://github.com/aws-samples/amazon-forecast-samples). The Status of a
 // dataset must be ACTIVE before you can import training data. Use the
-// DescribeDataset () operation to get the status.
+// DescribeDataset operation to get the status.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -65,12 +65,12 @@ type CreateDatasetInput struct {
 
 	// The domain associated with the dataset. When you add a dataset to a dataset
 	// group, this value and the value specified for the Domain parameter of the
-	// CreateDatasetGroup () operation must match. The Domain and DatasetType that you
+	// CreateDatasetGroup operation must match. The Domain and DatasetType that you
 	// choose determine the fields that must be present in the training data that you
 	// import to the dataset. For example, if you choose the RETAIL domain and
 	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id,
 	// timestamp, and demand fields to be present in your data. For more information,
-	// see howitworks-datasets-groups ().
+	// see howitworks-datasets-groups.
 	//
 	// This member is required.
 	Domain types.Domain
@@ -79,7 +79,7 @@ type CreateDatasetInput struct {
 	// fields in your data. The dataset Domain and DatasetType that you choose
 	// determine the minimum required fields in your training data. For information
 	// about the required fields for a specific dataset domain and type, see
-	// howitworks-domains-ds-types ().
+	// howitworks-domains-ds-types.
 	//
 	// This member is required.
 	Schema *types.Schema

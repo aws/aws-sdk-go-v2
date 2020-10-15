@@ -12,10 +12,10 @@ import (
 )
 
 // Returns a list of dataset import jobs created using the CreateDatasetImportJob
-// () operation. For each import job, this operation returns a summary of its
+// operation. For each import job, this operation returns a summary of its
 // properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the ARN with the DescribeDatasetImportJob ()
-// operation. You can filter the list by providing an array of Filter () objects.
+// complete set of properties by using the ARN with the DescribeDatasetImportJob
+// operation. You can filter the list by providing an array of Filter objects.
 func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetImportJobsInput, optFns ...func(*Options)) (*ListDatasetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetImportJobsInput{}

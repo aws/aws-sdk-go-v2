@@ -22,18 +22,19 @@ import (
 //     * Allowed characters are a-z,
 // A-Z, 0-9, '_' (underscore), '-' (hyphen), and '.' (period).
 //
-//     <p>This
-// operation is idempotent.</p> <p>An AWS account has full permission to perform
-// all operations (actions). However, AWS Identity and Access Management (IAM)
-// users don't have any permissions by default. You must grant them explicit
-// permission to perform specific actions. For more information, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html">Access
-// Control Using AWS Identity and Access Management (IAM)</a>.</p> <p> For
-// conceptual information and underlying REST API, see <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html">Creating
-// a Vault in Amazon Glacier</a> and <a
-// href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html">Create
-// Vault </a> in the <i>Amazon Glacier Developer Guide</i>. </p>
+// This operation is
+// idempotent. An AWS account has full permission to perform all operations
+// (actions). However, AWS Identity and Access Management (IAM) users don't have
+// any permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see Access Control Using AWS Identity
+// and Access Management (IAM)
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// For conceptual information and underlying REST API, see Creating a Vault in
+// Amazon Glacier
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html) and
+// Create Vault
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html) in the
+// Amazon Glacier Developer Guide.
 func (c *Client) CreateVault(ctx context.Context, params *CreateVaultInput, optFns ...func(*Options)) (*CreateVaultOutput, error) {
 	if params == nil {
 		params = &CreateVaultInput{}

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates a Lambda function's code.  <p>The function's code is locked when you
-// publish a version. You can't modify the code of a published version, only the
-// unpublished version.</p>
+// Updates a Lambda function's code. The function's code is locked when you publish
+// a version. You can't modify the code of a published version, only the
+// unpublished version.
 func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionCodeInput, optFns ...func(*Options)) (*UpdateFunctionCodeOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionCodeInput{}
@@ -54,7 +54,7 @@ type UpdateFunctionCodeInput struct {
 	DryRun *bool
 
 	// Set to true to publish a new version of the function after updating the code.
-	// This has the same effect as calling PublishVersion () separately.
+	// This has the same effect as calling PublishVersion separately.
 	Publish *bool
 
 	// Only update the function if the revision ID matches the ID that's specified. Use

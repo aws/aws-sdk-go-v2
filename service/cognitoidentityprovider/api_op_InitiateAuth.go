@@ -109,29 +109,46 @@ type InitiateAuthInput struct {
 	//
 	// * User migration
 	//
-	//     <p>When Amazon Cognito invokes the functions for these
-	// triggers, it passes a JSON payload, which the function receives as input. This
-	// payload contains a <code>validationData</code> attribute, which provides the
-	// data that you assigned to the ClientMetadata parameter in your InitiateAuth
-	// request. In your function code in AWS Lambda, you can process the
-	// <code>validationData</code> value to enhance your workflow for your specific
-	// needs.</p> <p>When you use the InitiateAuth API action, Amazon Cognito also
-	// invokes the functions for the following triggers, but it does not provide the
-	// ClientMetadata value as input:</p> <ul> <li> <p>Post authentication</p> </li>
-	// <li> <p>Custom message</p> </li> <li> <p>Pre token generation</p> </li> <li>
-	// <p>Create auth challenge</p> </li> <li> <p>Define auth challenge</p> </li> <li>
-	// <p>Verify auth challenge</p> </li> </ul> <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html">Customizing
-	// User Pool Workflows with Lambda Triggers</a> in the <i>Amazon Cognito Developer
-	// Guide</i>.</p> <note> <p>Take the following limitations into consideration when
-	// you use the ClientMetadata parameter:</p> <ul> <li> <p>Amazon Cognito does not
-	// store the ClientMetadata value. This data is available only to AWS Lambda
-	// triggers that are assigned to a user pool to support custom workflows. If your
-	// user pool configuration does not include triggers, the ClientMetadata parameter
-	// serves no purpose.</p> </li> <li> <p>Amazon Cognito does not validate the
-	// ClientMetadata value.</p> </li> <li> <p>Amazon Cognito does not encrypt the the
-	// ClientMetadata value, so don't use it to provide sensitive information.</p>
-	// </li> </ul> </note>
+	// When Amazon Cognito invokes the functions for these triggers,
+	// it passes a JSON payload, which the function receives as input. This payload
+	// contains a validationData attribute, which provides the data that you assigned
+	// to the ClientMetadata parameter in your InitiateAuth request. In your function
+	// code in AWS Lambda, you can process the validationData value to enhance your
+	// workflow for your specific needs. When you use the InitiateAuth API action,
+	// Amazon Cognito also invokes the functions for the following triggers, but it
+	// does not provide the ClientMetadata value as input:
+	//
+	//     * Post authentication
+	//
+	//
+	// * Custom message
+	//
+	//     * Pre token generation
+	//
+	//     * Create auth challenge
+	//
+	//     *
+	// Define auth challenge
+	//
+	//     * Verify auth challenge
+	//
+	// For more information, see
+	// Customizing User Pool Workflows with Lambda Triggers
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
+	// in the Amazon Cognito Developer Guide. Take the following limitations into
+	// consideration when you use the ClientMetadata parameter:
+	//
+	//     * Amazon Cognito
+	// does not store the ClientMetadata value. This data is available only to AWS
+	// Lambda triggers that are assigned to a user pool to support custom workflows. If
+	// your user pool configuration does not include triggers, the ClientMetadata
+	// parameter serves no purpose.
+	//
+	//     * Amazon Cognito does not validate the
+	// ClientMetadata value.
+	//
+	//     * Amazon Cognito does not encrypt the the
+	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a Resource () resource.
+// Creates a Resource resource.
 func (c *Client) CreateResource(ctx context.Context, params *CreateResourceInput, optFns ...func(*Options)) (*CreateResourceOutput, error) {
 	if params == nil {
 		params = &CreateResourceInput{}
@@ -27,7 +27,7 @@ func (c *Client) CreateResource(ctx context.Context, params *CreateResourceInput
 	return out, nil
 }
 
-// Requests API Gateway to create a Resource () resource.
+// Requests API Gateway to create a Resource resource.
 type CreateResourceInput struct {
 
 	// [Required] The parent resource's identifier.
@@ -40,7 +40,7 @@ type CreateResourceInput struct {
 	// This member is required.
 	PathPart *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

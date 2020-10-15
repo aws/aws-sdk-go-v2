@@ -13,7 +13,7 @@ import (
 
 // Returns the stack instance that's associated with the specified stack set, AWS
 // account, and Region. For a list of stack instances that are associated with a
-// specific stack set, use ListStackInstances ().
+// specific stack set, use ListStackInstances.
 func (c *Client) DescribeStackInstance(ctx context.Context, params *DescribeStackInstanceInput, optFns ...func(*Options)) (*DescribeStackInstanceOutput, error) {
 	if params == nil {
 		params = &DescribeStackInstanceInput{}

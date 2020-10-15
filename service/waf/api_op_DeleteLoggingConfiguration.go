@@ -16,8 +16,8 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Permanently deletes the LoggingConfiguration () from the specified
-// web ACL.
+// global use. Permanently deletes the LoggingConfiguration from the specified web
+// ACL.
 func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteLoggingConfigurationInput, optFns ...func(*Options)) (*DeleteLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteLoggingConfigurationInput{}
@@ -36,7 +36,7 @@ func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteL
 type DeleteLoggingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL from which you want to delete the
-	// LoggingConfiguration ().
+	// LoggingConfiguration.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -19,8 +19,8 @@ import (
 const ServiceID = "CodeGuruProfiler"
 const ServiceAPIVersion = "2019-07-18"
 
-// This section provides documentation for the Amazon CodeGuru Profiler API
-// operations.
+// Client provides the API client to make operations call for Amazon CodeGuru
+// Profiler.
 type Client struct {
 	options Options
 }

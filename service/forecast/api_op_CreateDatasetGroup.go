@@ -13,12 +13,12 @@ import (
 
 // Creates a dataset group, which holds a collection of related datasets. You can
 // add datasets to the dataset group when you create the dataset group, or later by
-// using the UpdateDatasetGroup () operation. After creating a dataset group and
+// using the UpdateDatasetGroup operation. After creating a dataset group and
 // adding datasets, you use the dataset group when you create a predictor. For more
-// information, see howitworks-datasets-groups (). To get a list of all your
-// datasets groups, use the ListDatasetGroups () operation. The Status of a dataset
-// group must be ACTIVE before you can create use the dataset group to create a
-// predictor. To get the status, use the DescribeDatasetGroup () operation.
+// information, see howitworks-datasets-groups. To get a list of all your datasets
+// groups, use the ListDatasetGroups operation. The Status of a dataset group must
+// be ACTIVE before you can create use the dataset group to create a predictor. To
+// get the status, use the DescribeDatasetGroup operation.
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}
@@ -43,12 +43,12 @@ type CreateDatasetGroupInput struct {
 
 	// The domain associated with the dataset group. When you add a dataset to a
 	// dataset group, this value and the value specified for the Domain parameter of
-	// the CreateDataset () operation must match. The Domain and DatasetType that you
+	// the CreateDataset operation must match. The Domain and DatasetType that you
 	// choose determine the fields that must be present in training data that you
 	// import to a dataset. For example, if you choose the RETAIL domain and
 	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires that item_id,
 	// timestamp, and demand fields are present in your data. For more information, see
-	// howitworks-datasets-groups ().
+	// howitworks-datasets-groups.
 	//
 	// This member is required.
 	Domain types.Domain

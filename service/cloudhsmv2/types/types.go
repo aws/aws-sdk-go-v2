@@ -119,7 +119,7 @@ type Cluster struct {
 }
 
 // Contains information about the backup that will be copied and created by the
-// CopyBackupToRegion () operation.
+// CopyBackupToRegion operation.
 type DestinationBackup struct {
 
 	// The date and time when both the source backup was created.

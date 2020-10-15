@@ -59,7 +59,7 @@ type AddAttachmentsToSetInput struct {
 }
 
 // The ID and expiry time of the attachment set returned by the AddAttachmentsToSet
-// () operation.
+// operation.
 type AddAttachmentsToSetOutput struct {
 
 	// The ID of the attachment set. If an attachmentSetId was not specified, a new

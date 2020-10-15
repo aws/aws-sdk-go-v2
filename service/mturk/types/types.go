@@ -317,7 +317,7 @@ type QualificationRequest struct {
 	Answer *string
 
 	// The ID of the Qualification request, a unique identifier generated when the
-	// request was submitted.  </p>
+	// request was submitted.
 	QualificationRequestId *string
 
 	// The ID of the Qualification type the Worker is requesting, as returned by the

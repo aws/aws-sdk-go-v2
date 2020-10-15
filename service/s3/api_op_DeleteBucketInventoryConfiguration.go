@@ -24,12 +24,12 @@ import (
 // Operations related to DeleteBucketInventoryConfiguration include:
 //
 //     *
-// GetBucketInventoryConfiguration ()
+// GetBucketInventoryConfiguration
 //
-//     * PutBucketInventoryConfiguration ()
+//     * PutBucketInventoryConfiguration
 //
-//
-// * ListBucketInventoryConfigurations ()
+//     *
+// ListBucketInventoryConfigurations
 func (c *Client) DeleteBucketInventoryConfiguration(ctx context.Context, params *DeleteBucketInventoryConfigurationInput, optFns ...func(*Options)) (*DeleteBucketInventoryConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteBucketInventoryConfigurationInput{}

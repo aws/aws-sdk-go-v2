@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about one or more Stage () resources.
+// Gets information about one or more Stage resources.
 func (c *Client) GetStages(ctx context.Context, params *GetStagesInput, optFns ...func(*Options)) (*GetStagesOutput, error) {
 	if params == nil {
 		params = &GetStagesInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetStages(ctx context.Context, params *GetStagesInput, optFns .
 	return out, nil
 }
 
-// Requests API Gateway to get information about one or more Stage () resources.
+// Requests API Gateway to get information about one or more Stage resources.
 type GetStagesInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -47,7 +47,7 @@ type GetStagesInput struct {
 	Title *string
 }
 
-// A list of Stage () resources that are associated with the ApiKey () resource.
+// A list of Stage resources that are associated with the ApiKey resource.
 // Deploying API in Stages
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html)
 type GetStagesOutput struct {

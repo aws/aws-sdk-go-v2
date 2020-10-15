@@ -12,7 +12,7 @@ import (
 
 // Gets the names of the key policies that are attached to a customer master key
 // (CMK). This operation is designed to get policy names that you can use in a
-// GetKeyPolicy () operation. However, the only valid policy name is default. You
+// GetKeyPolicy operation. However, the only valid policy name is default. You
 // cannot perform this operation on a CMK in a different AWS account.
 func (c *Client) ListKeyPolicies(ctx context.Context, params *ListKeyPoliciesInput, optFns ...func(*Options)) (*ListKeyPoliciesOutput, error) {
 	if params == nil {
@@ -41,7 +41,7 @@ type ListKeyPoliciesInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

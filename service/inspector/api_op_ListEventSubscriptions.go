@@ -13,7 +13,7 @@ import (
 
 // Lists all the event subscriptions for the assessment template that is specified
 // by the ARN of the assessment template. For more information, see
-// SubscribeToEvent () and UnsubscribeFromEvent ().
+// SubscribeToEvent and UnsubscribeFromEvent.
 func (c *Client) ListEventSubscriptions(ctx context.Context, params *ListEventSubscriptionsInput, optFns ...func(*Options)) (*ListEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &ListEventSubscriptionsInput{}

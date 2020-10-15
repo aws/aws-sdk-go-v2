@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the RestApis () resources for your collection.
+// Lists the RestApis resources for your collection.
 func (c *Client) GetRestApis(ctx context.Context, params *GetRestApisInput, optFns ...func(*Options)) (*GetRestApisOutput, error) {
 	if params == nil {
 		params = &GetRestApisInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetRestApis(ctx context.Context, params *GetRestApisInput, optF
 	return out, nil
 }
 
-// The GET request to list existing RestApis () defined for your collection.
+// The GET request to list existing RestApis defined for your collection.
 type GetRestApisInput struct {
 
 	// The maximum number of returned results per page. The default value is 25 and the

@@ -48,13 +48,12 @@ type CreateVocabularyInput struct {
 
 	// The S3 location of the text file that contains the definition of the custom
 	// vocabulary. The URI must be in the same region as the API endpoint that you are
-	// calling. The general form is  <p>For more information about S3 object names, see
-	// <a
-	// href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object
-	// Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information
-	// about custom vocabularies, see <a
-	// href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom
-	// Vocabularies</a>.</p>
+	// calling. The general form is For more information about S3 object names, see
+	// Object Keys
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// in the Amazon S3 Developer Guide. For more information about custom
+	// vocabularies, see Custom Vocabularies
+	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
 	VocabularyFileUri *string
 }
 

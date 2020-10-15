@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes the scaling process types for use with the ResumeProcesses () and
-// SuspendProcesses () APIs.
+// Describes the scaling process types for use with the ResumeProcesses and
+// SuspendProcesses APIs.
 func (c *Client) DescribeScalingProcessTypes(ctx context.Context, params *DescribeScalingProcessTypesInput, optFns ...func(*Options)) (*DescribeScalingProcessTypesOutput, error) {
 	if params == nil {
 		params = &DescribeScalingProcessTypesInput{}

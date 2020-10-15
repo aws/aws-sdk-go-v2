@@ -55,7 +55,7 @@ type ListMFADevicesInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful ListMFADevices () request.
+// Contains the response to a successful ListMFADevices request.
 type ListMFADevicesOutput struct {
 
 	// A list of MFA devices.

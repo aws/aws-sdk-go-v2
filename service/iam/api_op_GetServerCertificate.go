@@ -43,7 +43,7 @@ type GetServerCertificateInput struct {
 	ServerCertificateName *string
 }
 
-// Contains the response to a successful GetServerCertificate () request.
+// Contains the response to a successful GetServerCertificate request.
 type GetServerCertificateOutput struct {
 
 	// A structure containing details about the server certificate.

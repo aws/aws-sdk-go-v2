@@ -57,11 +57,10 @@ type CopySnapshotInput struct {
 
 	// The destination Region to use in the PresignedUrl parameter of a snapshot copy
 	// operation. This parameter is only valid for specifying the destination Region in
-	// a PresignedUrl parameter, where it is required.  <p>The snapshot copy is sent to
-	// the regional endpoint that you sent the HTTP request to (for example,
-	// <code>ec2.us-east-1.amazonaws.com</code>). With the AWS CLI, this is specified
-	// using the <code>--region</code> parameter or the default Region in your AWS
-	// configuration file.</p>
+	// a PresignedUrl parameter, where it is required. The snapshot copy is sent to the
+	// regional endpoint that you sent the HTTP request to (for example,
+	// ec2.us-east-1.amazonaws.com). With the AWS CLI, this is specified using the
+	// --region parameter or the default Region in your AWS configuration file.
 	DestinationRegion *string
 
 	// Checks whether you have the required permissions for the action, without

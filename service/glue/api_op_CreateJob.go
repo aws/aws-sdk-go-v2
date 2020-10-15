@@ -44,12 +44,12 @@ type CreateJobInput struct {
 	// This member is required.
 	Role *string
 
-	// This parameter is deprecated. Use MaxCapacity instead.  <p>The number of AWS
-	// Glue data processing units (DPUs) to allocate to this Job. You can allocate from
-	// 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
-	// power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p>
+	// This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue
+	// data processing units (DPUs) to allocate to this Job. You can allocate from 2 to
+	// 100 DPUs; the default is 10. A DPU is a relative measure of processing power
+	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+	// information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int32
 
 	// The connections used for this job.
@@ -75,11 +75,11 @@ type CreateJobInput struct {
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark.  <p>For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Jobs that are created without specifying a Glue
-	// version default to Glue 0.9.</p>
+	// Spark. For more information about the available AWS Glue versions and
+	// corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide. Jobs that are created without specifying a Glue version default to Glue
+	// 0.9.
 	GlueVersion *string
 
 	// This field is reserved for future use.
@@ -88,17 +88,19 @@ type CreateJobInput struct {
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
 	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).  <p>Do not set
-	// <code>Max Capacity</code> if using <code>WorkerType</code> and
-	// <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for
-	// <code>MaxCapacity</code> depends on whether you are running a Python shell job
-	// or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job
-	// (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or
-	// 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache
-	// Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming
-	// ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2
-	// to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
-	// allocation.</p> </li> </ul>
+	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
+	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
+	// allocated for MaxCapacity depends on whether you are running a Python shell job
+	// or an Apache Spark ETL job:
+	//
+	//     * When you specify a Python shell job
+	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
+	// default is 0.0625 DPU.
+	//
+	//     * When you specify an Apache Spark ETL job
+	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
+	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
+	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job if it fails.
@@ -111,8 +113,8 @@ type CreateJobInput struct {
 	NotificationProperty *types.NotificationProperty
 
 	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	// runs. The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
 	NumberOfWorkers *int32
 
 	// The name of the SecurityConfiguration structure to be used with this job.

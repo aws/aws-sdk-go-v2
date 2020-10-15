@@ -12,10 +12,13 @@ import (
 )
 
 // Returns the logging status of a bucket and the permissions users have to view
-// and modify that status. To use GET, you must be the bucket owner.  <p>The
-// following operations are related to <code>GetBucketLogging</code>:</p> <ul> <li>
-// <p> <a>CreateBucket</a> </p> </li> <li> <p> <a>PutBucketLogging</a> </p> </li>
-// </ul>
+// and modify that status. To use GET, you must be the bucket owner. The following
+// operations are related to GetBucketLogging:
+//
+//     * CreateBucket
+//
+//     *
+// PutBucketLogging
 func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingInput, optFns ...func(*Options)) (*GetBucketLoggingOutput, error) {
 	if params == nil {
 		params = &GetBucketLoggingInput{}

@@ -36,7 +36,7 @@ import (
 // to an event. For example, if the status of the volume is impaired and the volume
 // event shows potential-data-inconsistency, then the action shows
 // enable-volume-io. This means that you may want to enable the I/O operations for
-// the volume by calling the EnableVolumeIO () action and then check the volume for
+// the volume by calling the EnableVolumeIO action and then check the volume for
 // data consistency. Volume status is based on the volume status checks, and does
 // not reflect the volume state. Therefore, volume status does not indicate volumes
 // in the error state (for example, when a volume is incapable of accepting I/O.)

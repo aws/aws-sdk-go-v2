@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes a delivery stream and its data. To check the state of a delivery stream,
-// use DescribeDeliveryStream (). You can delete a delivery stream only if it is in
+// use DescribeDeliveryStream. You can delete a delivery stream only if it is in
 // one of the following states: ACTIVE, DELETING, CREATING_FAILED, or
 // DELETING_FAILED. You can't delete a delivery stream that is in the CREATING
 // state. While the deletion request is in process, the delivery stream is in the

@@ -17,8 +17,8 @@ import (
 // when the plan is executed. You can create one plan per provisioned product. To
 // create a plan for an existing provisioned product, the product status must be
 // AVAILBLE or TAINTED. To view the resource changes in the change set, use
-// DescribeProvisionedProductPlan (). To create or modify the provisioned product,
-// use ExecuteProvisionedProductPlan ().
+// DescribeProvisionedProductPlan. To create or modify the provisioned product, use
+// ExecuteProvisionedProductPlan.
 func (c *Client) CreateProvisionedProductPlan(ctx context.Context, params *CreateProvisionedProductPlanInput, optFns ...func(*Options)) (*CreateProvisionedProductPlanOutput, error) {
 	if params == nil {
 		params = &CreateProvisionedProductPlanInput{}
@@ -85,7 +85,7 @@ type CreateProvisionedProductPlanInput struct {
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths ().
+	// paths for a product, use ListLaunchPaths.
 	PathId *string
 
 	// Parameters specified by the administrator that are required for provisioning the

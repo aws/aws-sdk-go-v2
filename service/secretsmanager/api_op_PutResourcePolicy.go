@@ -30,13 +30,13 @@ import (
 // operations
 //
 //     * To retrieve the resource policy attached to a secret, use
-// GetResourcePolicy ().
+// GetResourcePolicy.
 //
-//     * To delete the resource-based policy that's attached
-// to a secret, use DeleteResourcePolicy ().
+//     * To delete the resource-based policy that's attached to
+// a secret, use DeleteResourcePolicy.
 //
 //     * To list all of the currently
-// available secrets, use ListSecrets ().
+// available secrets, use ListSecrets.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}

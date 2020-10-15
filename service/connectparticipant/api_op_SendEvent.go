@@ -35,10 +35,13 @@ type SendEventInput struct {
 	// This member is required.
 	ConnectionToken *string
 
-	// The content type of the request. Supported types are:  <ul> <li>
-	// <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li>
-	// <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li>
-	// </ul>
+	// The content type of the request. Supported types are:
+	//
+	//     *
+	// application/vnd.amazonaws.connect.event.typing
+	//
+	//     *
+	// application/vnd.amazonaws.connect.event.connection.acknowledged
 	//
 	// This member is required.
 	ContentType *string

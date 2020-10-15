@@ -21,8 +21,7 @@ import (
 const ServiceID = "Route 53"
 const ServiceAPIVersion = "2013-04-01"
 
-// Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web
-// service.
+// Client provides the API client to make operations call for Amazon Route 53.
 type Client struct {
 	options Options
 }

@@ -13,7 +13,7 @@ import (
 
 // Returns information about a specific Amazon Kinesis Data Analytics application.
 // If you want to retrieve a list of all applications in your account, use the
-// ListApplications () operation.
+// ListApplications operation.
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}

@@ -32,7 +32,7 @@ func (c *Client) SignalResource(ctx context.Context, params *SignalResourceInput
 	return out, nil
 }
 
-// The input for the SignalResource () action.
+// The input for the SignalResource action.
 type SignalResourceInput struct {
 
 	// The logical ID of the resource that you want to signal. The logical ID is the

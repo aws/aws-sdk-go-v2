@@ -33,7 +33,7 @@ func (c *Client) CreateStorageLocation(ctx context.Context, params *CreateStorag
 type CreateStorageLocationInput struct {
 }
 
-// Results of a CreateStorageLocationResult () call.
+// Results of a CreateStorageLocationResult call.
 type CreateStorageLocationOutput struct {
 
 	// The name of the Amazon S3 bucket created.

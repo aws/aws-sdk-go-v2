@@ -16,16 +16,16 @@ import (
 // specific instance. To get a specific instance, specify fleet ID and instance ID.
 // To get all instances in a fleet, specify a fleet ID only. Use the pagination
 // parameters to retrieve results as a set of sequential pages. If successful, an
-// Instance () object is returned for each result. Learn more Remotely Access Fleet
+// Instance object is returned for each result. Learn more Remotely Access Fleet
 // Instances
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
 // Fleet Issues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
 // Related operations
 //
-//     * DescribeInstances ()
+//     * DescribeInstances
 //
-//     * GetInstanceAccess ()
+//     * GetInstanceAccess
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesInput{}

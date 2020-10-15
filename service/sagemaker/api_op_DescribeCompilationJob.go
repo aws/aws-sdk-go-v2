@@ -13,8 +13,8 @@ import (
 )
 
 // Returns information about a model compilation job. To create a model compilation
-// job, use CreateCompilationJob (). To get information about multiple model
-// compilation jobs, use ListCompilationJobs ().
+// job, use CreateCompilationJob. To get information about multiple model
+// compilation jobs, use ListCompilationJobs.
 func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCompilationJobInput, optFns ...func(*Options)) (*DescribeCompilationJobOutput, error) {
 	if params == nil {
 		params = &DescribeCompilationJobInput{}
@@ -110,7 +110,7 @@ type DescribeCompilationJobOutput struct {
 
 	// The time when the model compilation job started the CompilationJob instances.
 	// You are billed for the time between this timestamp and the timestamp in the
-	// DescribeCompilationJobResponse$CompilationEndTime () field. In Amazon CloudWatch
+	// DescribeCompilationJobResponse$CompilationEndTime field. In Amazon CloudWatch
 	// Logs, the start time might be later than this time. That's because it takes time
 	// to download the compilation job, which depends on the size of the compilation
 	// job container.

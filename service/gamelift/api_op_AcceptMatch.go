@@ -34,16 +34,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-events.html)
 // Related operations
 //
-//     * StartMatchmaking ()
+//     * StartMatchmaking
 //
-//     * DescribeMatchmaking ()
+//     * DescribeMatchmaking
 //
+//     *
+// StopMatchmaking
 //
-// * StopMatchmaking ()
+//     * AcceptMatch
 //
-//     * AcceptMatch ()
-//
-//     * StartMatchBackfill ()
+//     * StartMatchBackfill
 func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optFns ...func(*Options)) (*AcceptMatchOutput, error) {
 	if params == nil {
 		params = &AcceptMatchInput{}

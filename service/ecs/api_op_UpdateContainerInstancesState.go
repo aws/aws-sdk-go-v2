@@ -25,7 +25,7 @@ import (
 // container instance that are in the RUNNING state are stopped and replaced
 // according to the service's deployment configuration parameters,
 // minimumHealthyPercent and maximumPercent. You can change the deployment
-// configuration of your service using UpdateService ().
+// configuration of your service using UpdateService.
 //
 //     * If
 // minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount
@@ -50,9 +50,9 @@ import (
 // PENDING or RUNNING tasks that do not belong to a service are not affected. You
 // must wait for them to finish or stop them manually. A container instance has
 // completed draining when it has no more RUNNING tasks. You can verify this using
-// ListTasks (). When a container instance has been drained, you can set a
-// container instance to ACTIVE status and once it has reached that status the
-// Amazon ECS scheduler can begin scheduling tasks on the instance again.
+// ListTasks. When a container instance has been drained, you can set a container
+// instance to ACTIVE status and once it has reached that status the Amazon ECS
+// scheduler can begin scheduling tasks on the instance again.
 func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *UpdateContainerInstancesStateInput, optFns ...func(*Options)) (*UpdateContainerInstancesStateOutput, error) {
 	if params == nil {
 		params = &UpdateContainerInstancesStateInput{}

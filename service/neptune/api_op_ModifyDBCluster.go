@@ -76,8 +76,8 @@ type ModifyDBClusterInput struct {
 
 	// The version number of the database engine. Currently, setting this parameter has
 	// no effect. To upgrade your database engine to the most recent release, use the
-	// ApplyPendingMaintenanceAction () API.  <p>For a list of valid engine versions,
-	// see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>
+	// ApplyPendingMaintenanceAction API. For a list of valid engine versions, see
+	// CreateDBInstance, or call DescribeDBEngineVersions.
 	EngineVersion *string
 
 	// The new password for the master database user. This password can contain any
@@ -137,7 +137,7 @@ type ModifyDBClusterInput struct {
 type ModifyDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters () action.
+	// a response element in the DescribeDBClusters action.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

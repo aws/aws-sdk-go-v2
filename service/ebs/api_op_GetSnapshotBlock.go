@@ -30,16 +30,14 @@ func (c *Client) GetSnapshotBlock(ctx context.Context, params *GetSnapshotBlockI
 
 type GetSnapshotBlockInput struct {
 
-	// The block index of the block from which to get data.  <p>Obtain the
-	// <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or
-	// <code>ListSnapshotBlocks</code> operations.</p>
+	// The block index of the block from which to get data. Obtain the BlockIndex by
+	// running the ListChangedBlocks or ListSnapshotBlocks operations.
 	//
 	// This member is required.
 	BlockIndex *int32
 
-	// The block token of the block from which to get data.  <p>Obtain the
-	// <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or
-	// <code>ListSnapshotBlocks</code> operations.</p>
+	// The block token of the block from which to get data. Obtain the BlockToken by
+	// running the ListChangedBlocks or ListSnapshotBlocks operations.
 	//
 	// This member is required.
 	BlockToken *string

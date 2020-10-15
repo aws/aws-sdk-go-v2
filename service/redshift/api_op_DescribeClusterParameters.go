@@ -16,7 +16,7 @@ import (
 // such as parameter name, description, data type, value, whether the parameter
 // value is modifiable, and so on. You can specify source filter to retrieve
 // parameters of only specific type. For example, to retrieve parameters that were
-// modified by a user action such as from ModifyClusterParameterGroup (), you can
+// modified by a user action such as from ModifyClusterParameterGroup, you can
 // specify source equal to user. For more information about parameters and
 // parameter groups, go to Amazon Redshift Parameter Groups
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
@@ -45,11 +45,10 @@ type DescribeClusterParametersInput struct {
 	ParameterGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterParameters () request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterParameters request exceed
+	// the value specified in MaxRecords, AWS returns a value in the Marker field of
+	// the response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -66,7 +65,7 @@ type DescribeClusterParametersInput struct {
 	Source *string
 }
 
-// Contains the output from the DescribeClusterParameters () action.
+// Contains the output from the DescribeClusterParameters action.
 type DescribeClusterParametersOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -76,8 +75,8 @@ type DescribeClusterParametersOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of Parameter () instances. Each instance lists the parameters of one
-	// cluster parameter group.
+	// A list of Parameter instances. Each instance lists the parameters of one cluster
+	// parameter group.
 	Parameters []*types.Parameter
 
 	// Metadata pertaining to the operation's result.

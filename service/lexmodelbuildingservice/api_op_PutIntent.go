@@ -36,21 +36,27 @@ import (
 // information to the client application.
 //
 // You can specify other optional
-// information in the request, such as:  <ul> <li> <p>A confirmation prompt to ask
-// the user to confirm an intent. For example, "Shall I order your pizza?"</p>
-// </li> <li> <p>A conclusion statement to send to the user after the intent has
-// been fulfilled. For example, "I placed your pizza order."</p> </li> <li> <p>A
-// follow-up prompt that asks the user for additional activity. For example, asking
-// "Do you want to order a drink with your pizza?"</p> </li> </ul> <p>If you
-// specify an existing intent name to update the intent, Amazon Lex replaces the
-// values in the <code>$LATEST</code> version of the intent with the values in the
-// request. Amazon Lex removes fields that you don't provide in the request. If you
-// don't specify the required fields, Amazon Lex throws an exception. When you
-// update the <code>$LATEST</code> version of an intent, the <code>status</code>
-// field of any bot that uses the <code>$LATEST</code> version of the intent is set
-// to <code>NOT_BUILT</code>.</p> <p>For more information, see
-// <a>how-it-works</a>.</p> <p>This operation requires permissions for the
-// <code>lex:PutIntent</code> action.</p>
+// information in the request, such as:
+//
+//     * A confirmation prompt to ask the
+// user to confirm an intent. For example, "Shall I order your pizza?"
+//
+//     * A
+// conclusion statement to send to the user after the intent has been fulfilled.
+// For example, "I placed your pizza order."
+//
+//     * A follow-up prompt that asks
+// the user for additional activity. For example, asking "Do you want to order a
+// drink with your pizza?"
+//
+// If you specify an existing intent name to update the
+// intent, Amazon Lex replaces the values in the $LATEST version of the intent with
+// the values in the request. Amazon Lex removes fields that you don't provide in
+// the request. If you don't specify the required fields, Amazon Lex throws an
+// exception. When you update the $LATEST version of an intent, the status field of
+// any bot that uses the $LATEST version of the intent is set to NOT_BUILT. For
+// more information, see how-it-works. This operation requires permissions for the
+// lex:PutIntent action.
 func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns ...func(*Options)) (*PutIntentOutput, error) {
 	if params == nil {
 		params = &PutIntentInput{}
@@ -139,10 +145,9 @@ type PutIntentInput struct {
 	//     * If it
 	// doesn't recognize the utterance it repeats the follow-up prompt again.
 	//
-	//
-	// <p>The <code>followUpPrompt</code> field and the
-	// <code>conclusionStatement</code> field are mutually exclusive. You can specify
-	// only one. </p>
+	// The
+	// followUpPrompt field and the conclusionStatement field are mutually exclusive.
+	// You can specify only one.
 	FollowUpPrompt *types.FollowUpPrompt
 
 	// Required. Describes how the intent is fulfilled. For example, after a user
@@ -172,13 +177,13 @@ type PutIntentInput struct {
 	RejectionStatement *types.Statement
 
 	// An array of utterances (strings) that a user might say to signal the intent. For
-	// example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
-	// <p>In each utterance, a slot name is enclosed in curly braces. </p>
+	// example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas". In
+	// each utterance, a slot name is enclosed in curly braces.
 	SampleUtterances []*string
 
 	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
 	// from the user using prompts defined in the slots. For more information, see
-	// how-it-works ().
+	// how-it-works.
 	Slots []*types.Slot
 }
 

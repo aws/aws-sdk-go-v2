@@ -35,8 +35,7 @@ type AddRoleToDBInstanceInput struct {
 	DBInstanceIdentifier *string
 
 	// The name of the feature for the DB instance that the IAM role is to be
-	// associated with. For the list of supported feature names, see DBEngineVersion
-	// ().
+	// associated with. For the list of supported feature names, see DBEngineVersion.
 	//
 	// This member is required.
 	FeatureName *string

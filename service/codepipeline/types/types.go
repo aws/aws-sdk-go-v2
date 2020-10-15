@@ -660,7 +660,7 @@ type Job struct {
 
 	// A system-generated random number that AWS CodePipeline uses to ensure that the
 	// job is being worked on by only one job worker. Use this number in an
-	// AcknowledgeJob () request.
+	// AcknowledgeJob request.
 	Nonce *string
 }
 
@@ -1137,7 +1137,7 @@ type ThirdPartyJobDetails struct {
 
 	// A system-generated random number that AWS CodePipeline uses to ensure that the
 	// job is being worked on by only one job worker. Use this number in an
-	// AcknowledgeThirdPartyJob () request.
+	// AcknowledgeThirdPartyJob request.
 	Nonce *string
 }
 

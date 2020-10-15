@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the SizeConstraintSet () specified by SizeConstraintSetId.
+// global use. Returns the SizeConstraintSet specified by SizeConstraintSetId.
 func (c *Client) GetSizeConstraintSet(ctx context.Context, params *GetSizeConstraintSetInput, optFns ...func(*Options)) (*GetSizeConstraintSetOutput, error) {
 	if params == nil {
 		params = &GetSizeConstraintSetInput{}
@@ -35,9 +35,9 @@ func (c *Client) GetSizeConstraintSet(ctx context.Context, params *GetSizeConstr
 
 type GetSizeConstraintSetInput struct {
 
-	// The SizeConstraintSetId of the SizeConstraintSet () that you want to get.
-	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
-	// ListSizeConstraintSets ().
+	// The SizeConstraintSetId of the SizeConstraintSet that you want to get.
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by
+	// ListSizeConstraintSets.
 	//
 	// This member is required.
 	SizeConstraintSetId *string
@@ -45,18 +45,18 @@ type GetSizeConstraintSetInput struct {
 
 type GetSizeConstraintSetOutput struct {
 
-	// Information about the SizeConstraintSet () that you specified in the
+	// Information about the SizeConstraintSet that you specified in the
 	// GetSizeConstraintSet request. For more information, see the following topics:
 	//
 	//
-	// * SizeConstraintSet (): Contains SizeConstraintSetId, SizeConstraints, and
-	// Name
+	// * SizeConstraintSet: Contains SizeConstraintSetId, SizeConstraints, and Name
 	//
-	//     * SizeConstraints: Contains an array of SizeConstraint () objects.
-	// Each SizeConstraint object contains FieldToMatch (), TextTransformation,
+	//
+	// * SizeConstraints: Contains an array of SizeConstraint objects. Each
+	// SizeConstraint object contains FieldToMatch, TextTransformation,
 	// ComparisonOperator, and Size
 	//
-	//     * FieldToMatch (): Contains Data and Type
+	//     * FieldToMatch: Contains Data and Type
 	SizeConstraintSet *types.SizeConstraintSet
 
 	// Metadata pertaining to the operation's result.

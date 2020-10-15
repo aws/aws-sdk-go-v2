@@ -38,7 +38,7 @@ type UpdateApplicationInput struct {
 	ApplicationName *string
 
 	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication ().
+	// using DescribeApplication.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -48,7 +48,7 @@ type UpdateApplicationInput struct {
 
 	// Describes application Amazon CloudWatch logging option updates. You can only
 	// update existing CloudWatch logging options with this action. To add a new
-	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption ().
+	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
 	CloudWatchLoggingOptionUpdates []*types.CloudWatchLoggingOptionUpdate
 
 	// Describes updates to the application's starting parameters.

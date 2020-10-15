@@ -31,9 +31,8 @@ import (
 //
 // If a parameter is null, then
 // the corresponding field is not modified. Also, if you set Replace to true, then
-// all fields required by the RegisterTaskWithMaintenanceWindow () action are
-// required for this request. Optional fields that aren't specified are set to
-// null.
+// all fields required by the RegisterTaskWithMaintenanceWindow action are required
+// for this request. Optional fields that aren't specified are set to null.
 func (c *Client) UpdateMaintenanceWindowTask(ctx context.Context, params *UpdateMaintenanceWindowTaskInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowTaskOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceWindowTaskInput{}
@@ -69,7 +68,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options for
 	// the supported maintenance window task types, see
-	// MaintenanceWindowTaskInvocationParameters ().
+	// MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
 	// The new MaxConcurrency value you want to specify. MaxConcurrency is the number
@@ -125,9 +124,9 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// parameters to pass to a task when it runs, instead use the Parameters option in
 	// the TaskInvocationParameters structure. For information about how Systems
 	// Manager handles these options for the supported maintenance window task types,
-	// see MaintenanceWindowTaskInvocationParameters (). The map has the following
-	// format: Key: string, between 1 and 255 characters Value: an array of strings,
-	// each string is between 1 and 255 characters
+	// see MaintenanceWindowTaskInvocationParameters. The map has the following format:
+	// Key: string, between 1 and 255 characters Value: an array of strings, each
+	// string is between 1 and 255 characters
 	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
 }
 
@@ -140,7 +139,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// To specify an S3 bucket to contain logs, instead use the OutputS3BucketName and
 	// OutputS3KeyPrefix options in the TaskInvocationParameters structure. For
 	// information about how Systems Manager handles these options for the supported
-	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
+	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
 	// The updated MaxConcurrency value.
@@ -172,7 +171,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// parameters to pass to a task when it runs, instead use the Parameters option in
 	// the TaskInvocationParameters structure. For information about how Systems
 	// Manager handles these options for the supported maintenance window task types,
-	// see MaintenanceWindowTaskInvocationParameters ().
+	// see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
 
 	// The ID of the maintenance window that was updated.

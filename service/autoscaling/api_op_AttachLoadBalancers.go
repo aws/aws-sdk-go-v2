@@ -11,13 +11,13 @@ import (
 )
 
 // To attach an Application Load Balancer or a Network Load Balancer, use the
-// AttachLoadBalancerTargetGroups () API operation instead. Attaches one or more
+// AttachLoadBalancerTargetGroups API operation instead. Attaches one or more
 // Classic Load Balancers to the specified Auto Scaling group. Amazon EC2 Auto
 // Scaling registers the running instances with these Classic Load Balancers. To
 // describe the load balancers for an Auto Scaling group, call the
-// DescribeLoadBalancers () API. To detach the load balancer from the Auto Scaling
-// group, call the DetachLoadBalancers () API. For more information, see Attaching
-// a Load Balancer to Your Auto Scaling Group
+// DescribeLoadBalancers API. To detach the load balancer from the Auto Scaling
+// group, call the DetachLoadBalancers API. For more information, see Attaching a
+// Load Balancer to Your Auto Scaling Group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancers(ctx context.Context, params *AttachLoadBalancersInput, optFns ...func(*Options)) (*AttachLoadBalancersOutput, error) {

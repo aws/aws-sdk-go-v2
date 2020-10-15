@@ -64,7 +64,7 @@ type CreateUserInput struct {
 	Tags []*types.Tag
 }
 
-// Contains the response to a successful CreateUser () request.
+// Contains the response to a successful CreateUser request.
 type CreateUserOutput struct {
 
 	// A structure with details about the new IAM user.

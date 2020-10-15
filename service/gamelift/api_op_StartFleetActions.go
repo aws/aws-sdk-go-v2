@@ -11,30 +11,30 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Resumes activity on a fleet that was suspended with StopFleetActions ().
-// Currently, this operation is used to restart a fleet's auto-scaling activity. To
-// start fleet actions, specify the fleet ID and the type of actions to restart.
-// When auto-scaling fleet actions are restarted, Amazon GameLift once again
-// initiates scaling events as triggered by the fleet's scaling policies. If
-// actions on the fleet were never stopped, this operation will have no effect. You
-// can view a fleet's stopped actions using DescribeFleetAttributes (). Learn more
-// Setting up GameLift Fleets
+// Resumes activity on a fleet that was suspended with StopFleetActions. Currently,
+// this operation is used to restart a fleet's auto-scaling activity. To start
+// fleet actions, specify the fleet ID and the type of actions to restart. When
+// auto-scaling fleet actions are restarted, Amazon GameLift once again initiates
+// scaling events as triggered by the fleet's scaling policies. If actions on the
+// fleet were never stopped, this operation will have no effect. You can view a
+// fleet's stopped actions using DescribeFleetAttributes. Learn more Setting up
+// GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * DescribeFleetAttributes ()
 //
-//     * UpdateFleetAttributes ()
+// * DescribeFleetAttributes
 //
-//     *
-// StartFleetActions () or StopFleetActions ()
+//     * UpdateFleetAttributes
+//
+//     * StartFleetActions
+// or StopFleetActions
 func (c *Client) StartFleetActions(ctx context.Context, params *StartFleetActionsInput, optFns ...func(*Options)) (*StartFleetActionsOutput, error) {
 	if params == nil {
 		params = &StartFleetActionsInput{}

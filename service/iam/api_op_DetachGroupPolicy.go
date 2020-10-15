@@ -12,8 +12,8 @@ import (
 
 // Removes the specified managed policy from the specified IAM group. A group can
 // also have inline policies embedded with it. To delete an inline policy, use the
-// DeleteGroupPolicy () API. For information about policies, see Managed Policies
-// and Inline Policies
+// DeleteGroupPolicy API. For information about policies, see Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DetachGroupPolicy(ctx context.Context, params *DetachGroupPolicyInput, optFns ...func(*Options)) (*DetachGroupPolicyOutput, error) {

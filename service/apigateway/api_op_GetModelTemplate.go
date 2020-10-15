@@ -35,7 +35,7 @@ type GetModelTemplateInput struct {
 	// This member is required.
 	ModelName *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

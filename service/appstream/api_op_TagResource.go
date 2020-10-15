@@ -13,12 +13,12 @@ import (
 // Adds or overwrites one or more tags for the specified AppStream 2.0 resource.
 // You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag
 // consists of a key and an optional value. If a resource already has a tag with
-// the same key, this operation updates its value.  <p>To list the current tags for
-// your resources, use <a>ListTagsForResource</a>. To disassociate tags from your
-// resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see
-// <a
-// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging
-// Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+// the same key, this operation updates its value. To list the current tags for
+// your resources, use ListTagsForResource. To disassociate tags from your
+// resources, use UntagResource. For more information about tags, see Tagging Your
+// Resources
+// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+// in the Amazon AppStream 2.0 Administration Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -42,10 +42,10 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// The tags to associate. A tag is a key-value pair, and the value is optional. For
-	// example, Environment=Test. If you do not specify a value, Environment=.  <p>If
-	// you do not specify a value, the value is set to an empty string.</p>
-	// <p>Generally allowed characters are: letters, numbers, and spaces representable
-	// in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p>
+	// example, Environment=Test. If you do not specify a value, Environment=. If you
+	// do not specify a value, the value is set to an empty string. Generally allowed
+	// characters are: letters, numbers, and spaces representable in UTF-8, and the
+	// following special characters: _ . : / = + \ - @
 	//
 	// This member is required.
 	Tags map[string]*string

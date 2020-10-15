@@ -13,7 +13,7 @@ import (
 
 // Retrieves a list of configurations for asynchronous invocation for a function.
 // To configure options for asynchronous invocation, use
-// PutFunctionEventInvokeConfig ().
+// PutFunctionEventInvokeConfig.
 func (c *Client) ListFunctionEventInvokeConfigs(ctx context.Context, params *ListFunctionEventInvokeConfigsInput, optFns ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error) {
 	if params == nil {
 		params = &ListFunctionEventInvokeConfigsInput{}

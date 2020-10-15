@@ -28,7 +28,7 @@ func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusI
 	return out, nil
 }
 
-// Container for request parameters to GetUpgradeStatus () operation.
+// Container for request parameters to GetUpgradeStatus operation.
 type GetUpgradeStatusInput struct {
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
@@ -40,11 +40,11 @@ type GetUpgradeStatusInput struct {
 	DomainName *string
 }
 
-// Container for response returned by GetUpgradeStatus () operation.
+// Container for response returned by GetUpgradeStatus operation.
 type GetUpgradeStatusOutput struct {
 
 	// One of 4 statuses that a step can go through returned as part of the
-	// GetUpgradeStatusResponse () object. The status can take one of the following
+	// GetUpgradeStatusResponse object. The status can take one of the following
 	// values:
 	//
 	//     * In Progress

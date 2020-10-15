@@ -31,7 +31,7 @@ type RotationRulesType struct {
 
 // A structure that contains the details about a secret. It does not include the
 // encrypted SecretString and SecretBinary values. To get those values, use the
-// GetSecretValue () operation.
+// GetSecretValue operation.
 type SecretListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the secret. For more information about ARNs in
@@ -46,7 +46,7 @@ type SecretListEntry struct {
 	// The date and time the deletion of the secret occurred. Not present on active
 	// secrets. The secret can be recovered until the number of days in the recovery
 	// window has passed, as specified in the RecoveryWindowInDays parameter of the
-	// DeleteSecret () operation.
+	// DeleteSecret operation.
 	DeletedDate *time.Time
 
 	// The user-provided description of the secret.
@@ -82,7 +82,7 @@ type SecretListEntry struct {
 
 	// The ARN of an AWS Lambda function invoked by Secrets Manager to rotate and
 	// expire the secret either automatically per the schedule or manually by a call to
-	// RotateSecret ().
+	// RotateSecret.
 	RotationLambdaARN *string
 
 	// A structure that defines the rotation configuration for the secret.
@@ -96,7 +96,7 @@ type SecretListEntry struct {
 	SecretVersionsToStages map[string][]*string
 
 	// The list of user-defined tags associated with the secret. To add tags to a
-	// secret, use TagResource (). To remove tags, use UntagResource ().
+	// secret, use TagResource. To remove tags, use UntagResource.
 	Tags []*Tag
 }
 

@@ -476,8 +476,9 @@ type CodeContentUpdate struct {
 // For an SQL-based application, provides additional mapping information when the
 // record format uses delimiters, such as CSV. For example, the following sample
 // records use CSV format, where the records use the '\n' as the row delimiter and
-// a comma (",") as the column delimiter:  <p> <code>"name1", "address1"</code>
-// </p> <p> <code>"name2", "address2"</code> </p>
+// a comma (",") as the column delimiter: "name1", "address1"
+//     "name2",
+// "address2"
 type CSVMappingParameters struct {
 
 	// The column delimiter. For example, in a CSV format, a comma (",") is the typical
@@ -566,8 +567,8 @@ type FlinkApplicationConfigurationDescription struct {
 	// in the Apache Flink Documentation
 	// (https://ci.apache.org/projects/flink/flink-docs-release-1.6/). To retrieve the
 	// job plan for the application, use the
-	// DescribeApplicationRequest$IncludeAdditionalDetails () parameter of the
-	// DescribeApplication () operation.
+	// DescribeApplicationRequest$IncludeAdditionalDetails parameter of the
+	// DescribeApplication operation.
 	JobPlanDescription *string
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -635,10 +636,10 @@ type Input struct {
 	// Describes the number of in-application streams to create.
 	InputParallelism *InputParallelism
 
-	// The InputProcessingConfiguration () for the input. An input processor transforms
+	// The InputProcessingConfiguration for the input. An input processor transforms
 	// records as they are received from the stream, before the application's SQL code
 	// executes. Currently, the only input processing configuration available is
-	// InputLambdaProcessor ().
+	// InputLambdaProcessor.
 	InputProcessingConfiguration *InputProcessingConfiguration
 
 	// If the streaming source is an Amazon Kinesis Data Firehose delivery stream,
@@ -698,7 +699,7 @@ type InputLambdaProcessor struct {
 	// The ARN of the AWS Lambda function that operates on records in the stream. To
 	// specify an earlier version of the Lambda function than the latest, include the
 	// Lambda function version in the Lambda function ARN. For more information about
-	// Lambda ARNs, see Example ARNs: AWS Lambda ()
+	// Lambda ARNs, see Example ARNs: AWS Lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -712,7 +713,7 @@ type InputLambdaProcessorDescription struct {
 	// The ARN of the AWS Lambda function that is used to preprocess the records in the
 	// stream. To specify an earlier version of the Lambda function than the latest,
 	// include the Lambda function version in the Lambda function ARN. For more
-	// information about Lambda ARNs, see Example ARNs: AWS Lambda ()
+	// information about Lambda ARNs, see Example ARNs: AWS Lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -725,7 +726,7 @@ type InputLambdaProcessorDescription struct {
 }
 
 // For an SQL-based Amazon Kinesis Data Analytics application, represents an update
-// to the InputLambdaProcessor () that is used to preprocess the records in the
+// to the InputLambdaProcessor that is used to preprocess the records in the
 // stream.
 type InputLambdaProcessorUpdate struct {
 
@@ -733,7 +734,7 @@ type InputLambdaProcessorUpdate struct {
 	// preprocess the records in the stream. To specify an earlier version of the
 	// Lambda function than the latest, include the Lambda function version in the
 	// Lambda function ARN. For more information about Lambda ARNs, see Example ARNs:
-	// AWS Lambda ()
+	// AWS Lambda
 	//
 	// This member is required.
 	ResourceARNUpdate *string
@@ -764,7 +765,7 @@ type InputParallelismUpdate struct {
 // available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
 type InputProcessingConfiguration struct {
 
-	// The InputLambdaProcessor () that is used to preprocess the records in the stream
+	// The InputLambdaProcessor that is used to preprocess the records in the stream
 	// before being processed by your application code.
 	//
 	// This member is required.
@@ -778,15 +779,15 @@ type InputProcessingConfiguration struct {
 type InputProcessingConfigurationDescription struct {
 
 	// Provides configuration information about the associated
-	// InputLambdaProcessorDescription ()
+	// InputLambdaProcessorDescription
 	InputLambdaProcessorDescription *InputLambdaProcessorDescription
 }
 
 // For an SQL-based Amazon Kinesis Data Analytics application, describes updates to
-// an InputProcessingConfiguration ().
+// an InputProcessingConfiguration.
 type InputProcessingConfigurationUpdate struct {
 
-	// Provides update information for an InputLambdaProcessor ().
+	// Provides update information for an InputLambdaProcessor.
 	//
 	// This member is required.
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate
@@ -816,11 +817,15 @@ type InputStartingPositionConfiguration struct {
 	//
 	//     * NOW - Start reading just after the
 	// most recent record in the stream, and start at the request timestamp that the
-	// customer issued.  </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at
-	// the last untrimmed record in the stream, which is the oldest record available in
-	// the stream. This option is not available for an Amazon Kinesis Data Firehose
-	// delivery stream.</p> </li> <li> <p> <code>LAST_STOPPED_POINT</code> - Resume
-	// reading from where the application last stopped reading.</p> </li> </ul>
+	// customer issued.
+	//
+	//     * TRIM_HORIZON - Start reading at the last untrimmed
+	// record in the stream, which is the oldest record available in the stream. This
+	// option is not available for an Amazon Kinesis Data Firehose delivery stream.
+	//
+	//
+	// * LAST_STOPPED_POINT - Resume reading from where the application last stopped
+	// reading.
 	InputStartingPosition InputStartingPosition
 }
 
@@ -837,7 +842,7 @@ type InputUpdate struct {
 	// Data Analytics creates for the specific streaming source).
 	InputParallelismUpdate *InputParallelismUpdate
 
-	// Describes updates to an InputProcessingConfiguration ().
+	// Describes updates to an InputProcessingConfiguration.
 	InputProcessingConfigurationUpdate *InputProcessingConfigurationUpdate
 
 	// Describes the data format on the streaming source, and how record elements on
@@ -935,9 +940,9 @@ type KinesisFirehoseOutputDescription struct {
 }
 
 // For an SQL-based Amazon Kinesis Data Analytics application, when updating an
-// output configuration using the UpdateApplication () operation, provides
-// information about a Kinesis Data Firehose delivery stream that is configured as
-// the destination.
+// output configuration using the UpdateApplication operation, provides information
+// about a Kinesis Data Firehose delivery stream that is configured as the
+// destination.
 type KinesisFirehoseOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream to write to.
@@ -1012,8 +1017,8 @@ type KinesisStreamsOutputDescription struct {
 }
 
 // When you update an SQL-based Amazon Kinesis Data Analytics application's output
-// configuration using the UpdateApplication () operation, provides information
-// about a Kinesis data stream that is configured as the destination.
+// configuration using the UpdateApplication operation, provides information about
+// a Kinesis data stream that is configured as the destination.
 type KinesisStreamsOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the Kinesis data stream where you want to
@@ -1031,7 +1036,7 @@ type LambdaOutput struct {
 	// The Amazon Resource Name (ARN) of the destination Lambda function to write to.
 	// To specify an earlier version of the Lambda function than the latest, include
 	// the Lambda function version in the Lambda function ARN. For more information
-	// about Lambda ARNs, see Example ARNs: AWS Lambda ()
+	// about Lambda ARNs, see Example ARNs: AWS Lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -1054,14 +1059,14 @@ type LambdaOutputDescription struct {
 }
 
 // When you update an SQL-based Amazon Kinesis Data Analytics application's output
-// configuration using the UpdateApplication () operation, provides information
-// about an AWS Lambda function that is configured as the destination.
+// configuration using the UpdateApplication operation, provides information about
+// an AWS Lambda function that is configured as the destination.
 type LambdaOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the destination AWS Lambda function. To
 	// specify an earlier version of the Lambda function than the latest, include the
 	// Lambda function version in the Lambda function ARN. For more information about
-	// Lambda ARNs, see Example ARNs: AWS Lambda ()
+	// Lambda ARNs, see Example ARNs: AWS Lambda
 	//
 	// This member is required.
 	ResourceARNUpdate *string
@@ -1136,7 +1141,7 @@ type MonitoringConfigurationUpdate struct {
 // Describes an SQL-based Amazon Kinesis Data Analytics application's output
 // configuration, in which you identify an in-application stream and a destination
 // where you want the in-application stream data to be written. The destination can
-// be a Kinesis data stream or a Kinesis Data Firehose delivery stream.  <p></p>
+// be a Kinesis data stream or a Kinesis Data Firehose delivery stream.
 type Output struct {
 
 	// Describes the data format when records are written to the destination.
@@ -1391,10 +1396,10 @@ type ReferenceDataSource struct {
 	// This member is required.
 	TableName *string
 
-	// Identifies the S3 bucket and object that contains the reference data.  A Kinesis
+	// Identifies the S3 bucket and object that contains the reference data. A Kinesis
 	// Data Analytics application loads reference data only once. If the data changes,
-	// you call the <a>UpdateApplication</a> operation to trigger reloading of data
-	// into your application. </p>
+	// you call the UpdateApplication operation to trigger reloading of data into your
+	// application.
 	S3ReferenceDataSource *S3ReferenceDataSource
 }
 
@@ -1404,7 +1409,7 @@ type ReferenceDataSourceDescription struct {
 
 	// The ID of the reference data source. This is the ID that Kinesis Data Analytics
 	// assigns when you add the reference data source to your application using the
-	// CreateApplication () or UpdateApplication () operation.
+	// CreateApplication or UpdateApplication operation.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -1434,7 +1439,7 @@ type ReferenceDataSourceDescription struct {
 type ReferenceDataSourceUpdate struct {
 
 	// The ID of the reference data source that is being updated. You can use the
-	// DescribeApplication () operation to get this value.
+	// DescribeApplication operation to get this value.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -1560,10 +1565,10 @@ type S3ContentLocationUpdate struct {
 }
 
 // For an SQL-based Amazon Kinesis Data Analytics application, identifies the
-// Amazon S3 bucket and object that contains the reference data.  <p>A Kinesis Data
+// Amazon S3 bucket and object that contains the reference data. A Kinesis Data
 // Analytics application loads reference data only once. If the data changes, you
-// call the <a>UpdateApplication</a> operation to trigger reloading of data into
-// your application. </p>
+// call the UpdateApplication operation to trigger reloading of data into your
+// application.
 type S3ReferenceDataSource struct {
 
 	// The Amazon Resource Name (ARN) of the S3 bucket.
@@ -1652,16 +1657,15 @@ type SourceSchema struct {
 // Kinesis Data Analytics application.
 type SqlApplicationConfiguration struct {
 
-	// The array of Input () objects describing the input streams used by the
-	// application.
+	// The array of Input objects describing the input streams used by the application.
 	Inputs []*Input
 
-	// The array of Output () objects describing the destination streams used by the
+	// The array of Output objects describing the destination streams used by the
 	// application.
 	Outputs []*Output
 
-	// The array of ReferenceDataSource () objects describing the reference data
-	// sources used by the application.
+	// The array of ReferenceDataSource objects describing the reference data sources
+	// used by the application.
 	ReferenceDataSources []*ReferenceDataSource
 }
 
@@ -1669,15 +1673,15 @@ type SqlApplicationConfiguration struct {
 // Kinesis Data Analytics application.
 type SqlApplicationConfigurationDescription struct {
 
-	// The array of InputDescription () objects describing the input streams used by
-	// the application.
+	// The array of InputDescription objects describing the input streams used by the
+	// application.
 	InputDescriptions []*InputDescription
 
-	// The array of OutputDescription () objects describing the destination streams
-	// used by the application.
+	// The array of OutputDescription objects describing the destination streams used
+	// by the application.
 	OutputDescriptions []*OutputDescription
 
-	// The array of ReferenceDataSourceDescription () objects describing the reference
+	// The array of ReferenceDataSourceDescription objects describing the reference
 	// data sources used by the application.
 	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription
 }
@@ -1686,16 +1690,16 @@ type SqlApplicationConfigurationDescription struct {
 // sources for an SQL-based Kinesis Data Analytics application.
 type SqlApplicationConfigurationUpdate struct {
 
-	// The array of InputUpdate () objects describing the new input streams used by the
+	// The array of InputUpdate objects describing the new input streams used by the
 	// application.
 	InputUpdates []*InputUpdate
 
-	// The array of OutputUpdate () objects describing the new destination streams used
-	// by the application.
+	// The array of OutputUpdate objects describing the new destination streams used by
+	// the application.
 	OutputUpdates []*OutputUpdate
 
-	// The array of ReferenceDataSourceUpdate () objects describing the new reference
-	// data sources used by the application.
+	// The array of ReferenceDataSourceUpdate objects describing the new reference data
+	// sources used by the application.
 	ReferenceDataSourceUpdates []*ReferenceDataSourceUpdate
 }
 
@@ -1703,7 +1707,7 @@ type SqlApplicationConfigurationUpdate struct {
 // application.
 type SqlRunConfiguration struct {
 
-	// The input source ID. You can get this ID by calling the DescribeApplication ()
+	// The input source ID. You can get this ID by calling the DescribeApplication
 	// operation.
 	//
 	// This member is required.

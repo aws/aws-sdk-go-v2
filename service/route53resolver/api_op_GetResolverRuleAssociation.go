@@ -12,7 +12,7 @@ import (
 )
 
 // Gets information about an association between a specified resolver rule and a
-// VPC. You associate a resolver rule and a VPC using AssociateResolverRule ().
+// VPC. You associate a resolver rule and a VPC using AssociateResolverRule.
 func (c *Client) GetResolverRuleAssociation(ctx context.Context, params *GetResolverRuleAssociationInput, optFns ...func(*Options)) (*GetResolverRuleAssociationOutput, error) {
 	if params == nil {
 		params = &GetResolverRuleAssociationInput{}

@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates a Server Message Block (SMB) file share.  <note> <p>To leave a file
-// share field unchanged, set the corresponding input field to null. This operation
-// is only supported for file gateways.</p> </note> <important> <p>File gateways
-// require AWS Security Token Service (AWS STS) to be activated to enable you to
-// create a file share. Make sure that AWS STS is activated in the AWS Region you
-// are creating your file gateway in. If AWS STS is not activated in this AWS
-// Region, activate it. For information about how to activate AWS STS, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
-// and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access
-// Management User Guide</i>.</p> <p>File gateways don't support creating hard or
-// symbolic links on a file share.</p> </important>
+// Updates a Server Message Block (SMB) file share. To leave a file share field
+// unchanged, set the corresponding input field to null. This operation is only
+// supported for file gateways. File gateways require AWS Security Token Service
+// (AWS STS) to be activated to enable you to create a file share. Make sure that
+// AWS STS is activated in the AWS Region you are creating your file gateway in. If
+// AWS STS is not activated in this AWS Region, activate it. For information about
+// how to activate AWS STS, see Activating and deactivating AWS STS in an AWS
+// Region
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide. File gateways don't
+// support creating hard or symbolic links on a file share.
 func (c *Client) UpdateSMBFileShare(ctx context.Context, params *UpdateSMBFileShareInput, optFns ...func(*Options)) (*UpdateSMBFileShareOutput, error) {
 	if params == nil {
 		params = &UpdateSMBFileShareInput{}
@@ -63,19 +63,17 @@ type UpdateSMBFileShareInput struct {
 	CaseSensitivity types.CaseSensitivity
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
-	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
-	// <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>
+	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
-	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
-	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
+	// name is set in LocationARN.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
 	// A list of users or groups in the Active Directory that are not allowed to access
@@ -85,8 +83,7 @@ type UpdateSMBFileShareInput struct {
 	InvalidUserList []*string
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -99,27 +96,25 @@ type UpdateSMBFileShareInput struct {
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set write status to read-only, otherwise set to false.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// set write status to read-only, otherwise set to false. Valid Values: true |
+	// false
 	ReadOnly *bool
 
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data.  <note> <p>
-	// <code>RequesterPays</code> is a configuration for the S3 bucket that backs the
-	// file share, so make sure that the configuration on the file share is the same as
-	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// owner always pays the cost of storing data. RequesterPays is a configuration for
+	// the S3 bucket that backs the file share, so make sure that the configuration on
+	// the file share is the same as the S3 bucket configuration. Valid Values: true |
+	// false
 	RequesterPays *bool
 
 	// Set this value to true to enable access control list (ACL) on the SMB file
 	// share. Set it to false to map file and directory permissions to the POSIX
-	// permissions.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using
-	// Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS
-	// Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// permissions. For more information, see Using Microsoft Windows ACLs to control
+	// access to an SMB file share
+	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html) in
+	// the AWS Storage Gateway User Guide. Valid Values: true | false
 	SMBACLEnabled *bool
 
 	// A list of users or groups in the Active Directory that are allowed to access the

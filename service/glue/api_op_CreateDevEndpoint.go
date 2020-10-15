@@ -56,15 +56,14 @@ type CreateDevEndpointInput struct {
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for running your
-	// ETL scripts on development endpoints.  <p>For more information about the
-	// available AWS Glue versions and corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Development endpoints that are created without
-	// specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version
-	// of Python support for development endpoints by using the <code>Arguments</code>
-	// parameter in the <code>CreateDevEndpoint</code> or
-	// <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version
-	// defaults to Python 2.</p>
+	// ETL scripts on development endpoints. For more information about the available
+	// AWS Glue versions and corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide. Development endpoints that are created without specifying a Glue version
+	// default to Glue 0.9. You can specify a version of Python support for development
+	// endpoints by using the Arguments parameter in the CreateDevEndpoint or
+	// UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
+	// Python 2.
 	GlueVersion *string
 
 	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this
@@ -72,8 +71,8 @@ type CreateDevEndpointInput struct {
 	NumberOfNodes *int32
 
 	// The number of workers of a defined workerType that are allocated to the
-	// development endpoint.  <p>The maximum number of workers you can define are 299
-	// for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	// development endpoint. The maximum number of workers you can define are 299 for
+	// G.1X, and 149 for G.2X.
 	NumberOfWorkers *int32
 
 	// The public key to be used by this DevEndpoint for authentication. This attribute
@@ -83,12 +82,11 @@ type CreateDevEndpointInput struct {
 
 	// A list of public keys to be used by the development endpoints for
 	// authentication. The use of this attribute is preferred over a single public key
-	// because the public keys allow you to have a different private key per client.
-	// <note> <p>If you previously created an endpoint with a public key, you must
-	// remove that key to be able to set a list of public keys. Call the
-	// <code>UpdateDevEndpoint</code> API with the public key content in the
-	// <code>deletePublicKeys</code> attribute, and the list of new keys in the
-	// <code>addPublicKeys</code> attribute.</p> </note>
+	// because the public keys allow you to have a different private key per client. If
+	// you previously created an endpoint with a public key, you must remove that key
+	// to be able to set a list of public keys. Call the UpdateDevEndpoint API with the
+	// public key content in the deletePublicKeys attribute, and the list of new keys
+	// in the addPublicKeys attribute.
 	PublicKeys []*string
 
 	// The name of the SecurityConfiguration structure to be used with this
@@ -131,14 +129,20 @@ type CreateDevEndpointInput struct {
 
 type CreateDevEndpointOutput struct {
 
-	// The map of arguments used to configure this DevEndpoint.  <p>Valid arguments
-	// are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li>
-	// <li> <p> <code>"GLUE_PYTHON_VERSION": "3"</code> </p> </li> <li> <p>
-	// <code>"GLUE_PYTHON_VERSION": "2"</code> </p> </li> </ul> <p>You can specify a
-	// version of Python support for development endpoints by using the
-	// <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or
-	// <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version
-	// defaults to Python 2.</p>
+	// The map of arguments used to configure this DevEndpoint. Valid arguments are:
+	//
+	//
+	// * "--enable-glue-datacatalog": ""
+	//
+	//     * "GLUE_PYTHON_VERSION": "3"
+	//
+	//     *
+	// "GLUE_PYTHON_VERSION": "2"
+	//
+	// You can specify a version of Python support for
+	// development endpoints by using the Arguments parameter in the CreateDevEndpoint
+	// or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
+	// Python 2.
 	Arguments map[string]*string
 
 	// The AWS Availability Zone where this DevEndpoint is located.

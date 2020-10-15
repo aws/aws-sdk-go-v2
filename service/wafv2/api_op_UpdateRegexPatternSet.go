@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Updates the specified RegexPatternSet ().
+// Updates the specified RegexPatternSet.
 func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexPatternSetInput, optFns ...func(*Options)) (*UpdateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &UpdateRegexPatternSetInput{}

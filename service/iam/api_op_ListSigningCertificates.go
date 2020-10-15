@@ -59,7 +59,7 @@ type ListSigningCertificatesInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful ListSigningCertificates () request.
+// Contains the response to a successful ListSigningCertificates request.
 type ListSigningCertificatesOutput struct {
 
 	// A list of the user's signing certificate information.

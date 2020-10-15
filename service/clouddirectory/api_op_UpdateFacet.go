@@ -42,19 +42,19 @@ type UpdateFacetInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) that is associated with the Facet (). For more
-	// information, see arns ().
+	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// List of attributes that need to be updated in a given schema Facet (). Each
+	// List of attributes that need to be updated in a given schema Facet. Each
 	// attribute is followed by AttributeAction, which specifies the type of update
 	// operation to perform.
 	AttributeUpdates []*types.FacetAttributeUpdate
 
 	// The object type that is associated with the facet. See
-	// CreateFacetRequest$ObjectType () for more details.
+	// CreateFacetRequest$ObjectType for more details.
 	ObjectType types.ObjectType
 }
 

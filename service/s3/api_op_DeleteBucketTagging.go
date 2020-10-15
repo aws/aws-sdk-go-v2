@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the tags from the bucket.  <p>To use this operation, you must have
-// permission to perform the <code>s3:PutBucketTagging</code> action. By default,
-// the bucket owner has this permission and can grant this permission to others.
-// </p> <p>The following operations are related to
-// <code>DeleteBucketTagging</code>:</p> <ul> <li> <p> <a>GetBucketTagging</a> </p>
-// </li> <li> <p> <a>PutBucketTagging</a> </p> </li> </ul>
+// Deletes the tags from the bucket. To use this operation, you must have
+// permission to perform the s3:PutBucketTagging action. By default, the bucket
+// owner has this permission and can grant this permission to others. The following
+// operations are related to DeleteBucketTagging:
+//
+//     * GetBucketTagging
+//
+//     *
+// PutBucketTagging
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {
 	if params == nil {
 		params = &DeleteBucketTaggingInput{}

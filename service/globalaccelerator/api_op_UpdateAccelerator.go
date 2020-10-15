@@ -12,8 +12,8 @@ import (
 )
 
 // Update an accelerator. To see an AWS CLI example of updating an accelerator,
-// scroll down to Example.  <important> <p>You must specify the US West (Oregon)
-// Region to create or update accelerators.</p> </important>
+// scroll down to Example. You must specify the US West (Oregon) Region to create
+// or update accelerators.
 func (c *Client) UpdateAccelerator(ctx context.Context, params *UpdateAcceleratorInput, optFns ...func(*Options)) (*UpdateAcceleratorOutput, error) {
 	if params == nil {
 		params = &UpdateAcceleratorInput{}

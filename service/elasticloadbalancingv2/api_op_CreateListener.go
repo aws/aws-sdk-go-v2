@@ -12,12 +12,12 @@ import (
 )
 
 // Creates a listener for the specified Application Load Balancer or Network Load
-// Balancer. To update a listener, use ModifyListener (). When you are finished
-// with a listener, you can delete it using DeleteListener (). If you are finished
-// with both the listener and the load balancer, you can delete them both using
-// DeleteLoadBalancer (). This operation is idempotent, which means that it
-// completes at most one time. If you attempt to create multiple listeners with the
-// same settings, each call succeeds. For more information, see Listeners for Your
+// Balancer. To update a listener, use ModifyListener. When you are finished with a
+// listener, you can delete it using DeleteListener. If you are finished with both
+// the listener and the load balancer, you can delete them both using
+// DeleteLoadBalancer. This operation is idempotent, which means that it completes
+// at most one time. If you attempt to create multiple listeners with the same
+// settings, each call succeeds. For more information, see Listeners for Your
 // Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
 // in the Application Load Balancers Guide and Listeners for Your Network Load
@@ -97,7 +97,7 @@ type CreateListenerInput struct {
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
 	// do not set IsDefault. To create a certificate list for the listener, use
-	// AddListenerCertificates ().
+	// AddListenerCertificates.
 	Certificates []*types.Certificate
 
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and

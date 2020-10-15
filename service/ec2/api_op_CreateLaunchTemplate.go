@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a launch template. A launch template contains the parameters to launch
-// an instance. When you launch an instance using RunInstances (), you can specify
-// a launch template instead of providing the launch parameters in the request. For
+// an instance. When you launch an instance using RunInstances, you can specify a
+// launch template instead of providing the launch parameters in the request. For
 // more information, see Launching an instance from a launch template
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)in
 // the Amazon Elastic Compute Cloud User Guide.

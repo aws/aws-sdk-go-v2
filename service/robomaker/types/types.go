@@ -15,13 +15,12 @@ type BatchPolicy struct {
 	// terminal states.
 	MaxConcurrency *int32
 
-	// The amount of time, in seconds, to wait for the batch to complete.  </p> <p>If a
-	// batch times out, and there are pending requests that were failing due to an
-	// internal failure (like <code>InternalServiceError</code>), they will be moved to
-	// the failed list and the batch status will be <code>Failed</code>. If the pending
-	// requests were failing for any other reason, the failed pending requests will be
-	// moved to the failed list and the batch status will be <code>TimedOut</code>.
-	// </p>
+	// The amount of time, in seconds, to wait for the batch to complete. If a batch
+	// times out, and there are pending requests that were failing due to an internal
+	// failure (like InternalServiceError), they will be moved to the failed list and
+	// the batch status will be Failed. If the pending requests were failing for any
+	// other reason, the failed pending requests will be moved to the failed list and
+	// the batch status will be TimedOut.
 	TimeoutInSeconds *int64
 }
 

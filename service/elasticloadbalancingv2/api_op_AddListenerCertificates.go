@@ -14,10 +14,10 @@ import (
 // Adds the specified SSL server certificate to the certificate list for the
 // specified HTTPS or TLS listener. If the certificate in already in the
 // certificate list, the call is successful but the certificate is not added again.
-// To get the certificate list for a listener, use DescribeListenerCertificates ().
-// To remove certificates from the certificate list for a listener, use
-// RemoveListenerCertificates (). To replace the default certificate for a
-// listener, use ModifyListener (). For more information, see SSL Certificates
+// To get the certificate list for a listener, use DescribeListenerCertificates. To
+// remove certificates from the certificate list for a listener, use
+// RemoveListenerCertificates. To replace the default certificate for a listener,
+// use ModifyListener. For more information, see SSL Certificates
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates)
 // in the Application Load Balancers Guide.
 func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListenerCertificatesInput, optFns ...func(*Options)) (*AddListenerCertificatesOutput, error) {

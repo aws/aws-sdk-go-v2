@@ -17,11 +17,11 @@ import (
 // in the Amazon Chime Administration Guide. Users suspended from a Team account
 // are disassociated from the account, but they can continue to use Amazon Chime as
 // free users. To remove the suspension from suspended Team account users, invite
-// them to the Team account again. You can use the InviteUsers () action to do so.
+// them to the Team account again. You can use the InviteUsers action to do so.
 // Users suspended from an EnterpriseLWA account are immediately signed out of
 // Amazon Chime and can no longer sign in. To remove the suspension from suspended
-// EnterpriseLWA account users, use the BatchUnsuspendUser () action. To sign out
-// users without suspending them, use the LogoutUser () action.
+// EnterpriseLWA account users, use the BatchUnsuspendUser action. To sign out
+// users without suspending them, use the LogoutUser action.
 func (c *Client) BatchSuspendUser(ctx context.Context, params *BatchSuspendUserInput, optFns ...func(*Options)) (*BatchSuspendUserOutput, error) {
 	if params == nil {
 		params = &BatchSuspendUserInput{}
@@ -52,7 +52,7 @@ type BatchSuspendUserInput struct {
 
 type BatchSuspendUserOutput struct {
 
-	// If the BatchSuspendUser () action fails for one or more of the user IDs in the
+	// If the BatchSuspendUser action fails for one or more of the user IDs in the
 	// request, a list of the user IDs is returned, along with error codes and error
 	// messages.
 	UserErrors []*types.UserError

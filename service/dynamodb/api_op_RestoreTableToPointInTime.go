@@ -32,12 +32,24 @@ import (
 // * Encryption settings All these settings come from the current settings of the
 // source table at the time of restore.
 //
-//     <p>You must manually set up the
-// following on the restored table:</p> <ul> <li> <p>Auto scaling policies</p>
-// </li> <li> <p>IAM policies</p> </li> <li> <p>Amazon CloudWatch metrics and
-// alarms</p> </li> <li> <p>Tags</p> </li> <li> <p>Stream settings</p> </li> <li>
-// <p>Time to Live (TTL) settings</p> </li> <li> <p>Point in time recovery
-// settings</p> </li> </ul>
+// You must manually set up the following on
+// the restored table:
+//
+//     * Auto scaling policies
+//
+//     * IAM policies
+//
+//     *
+// Amazon CloudWatch metrics and alarms
+//
+//     * Tags
+//
+//     * Stream settings
+//
+//     *
+// Time to Live (TTL) settings
+//
+//     * Point in time recovery settings
 func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreTableToPointInTimeInput, optFns ...func(*Options)) (*RestoreTableToPointInTimeOutput, error) {
 	if params == nil {
 		params = &RestoreTableToPointInTimeInput{}

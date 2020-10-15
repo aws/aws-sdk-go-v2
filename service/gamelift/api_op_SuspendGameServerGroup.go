@@ -14,8 +14,8 @@ import (
 // This action is part of Amazon GameLift FleetIQ with game server groups, which is
 // in preview release and is subject to change. Temporarily stops activity on a
 // game server group without terminating instances or the game server group.
-// Activity can be restarted by calling ResumeGameServerGroup (). Activities that
-// can suspended are:
+// Activity can be restarted by calling ResumeGameServerGroup. Activities that can
+// suspended are:
 //
 //     * Instance type replacement. This activity evaluates the
 // current Spot viability of all instance types that are defined for the game
@@ -32,22 +32,21 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup ()
+//     * CreateGameServerGroup
 //
 //     * ListGameServerGroups
-// ()
 //
-//     * DescribeGameServerGroup ()
 //
-//     * UpdateGameServerGroup ()
+// * DescribeGameServerGroup
 //
-//     *
-// DeleteGameServerGroup ()
-//
-//     * ResumeGameServerGroup ()
+//     * UpdateGameServerGroup
 //
 //     *
-// SuspendGameServerGroup ()
+// DeleteGameServerGroup
+//
+//     * ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
 func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGameServerGroupInput, optFns ...func(*Options)) (*SuspendGameServerGroupOutput, error) {
 	if params == nil {
 		params = &SuspendGameServerGroupInput{}
@@ -66,7 +65,7 @@ func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGame
 type SuspendGameServerGroupInput struct {
 
 	// The unique identifier of the game server group to stop activity on. Use either
-	// the GameServerGroup () name or ARN value.
+	// the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

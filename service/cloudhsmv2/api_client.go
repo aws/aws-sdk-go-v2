@@ -19,9 +19,7 @@ import (
 const ServiceID = "CloudHSM V2"
 const ServiceAPIVersion = "2017-04-28"
 
-// For more information about AWS CloudHSM, see AWS CloudHSM
-// (http://aws.amazon.com/cloudhsm/) and the AWS CloudHSM User Guide
-// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/).
+// Client provides the API client to make operations call for AWS CloudHSM V2.
 type Client struct {
 	options Options
 }

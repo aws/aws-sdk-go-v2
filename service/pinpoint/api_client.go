@@ -19,7 +19,7 @@ import (
 const ServiceID = "Pinpoint"
 const ServiceAPIVersion = "2016-12-01"
 
-// Doc Engage API - Amazon Pinpoint API
+// Client provides the API client to make operations call for Amazon Pinpoint.
 type Client struct {
 	options Options
 }

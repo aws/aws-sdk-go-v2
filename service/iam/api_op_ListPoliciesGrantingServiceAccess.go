@@ -44,7 +44,7 @@ import (
 // in the IAM User Guide. Policies that are attached to users and roles as
 // permissions boundaries are not returned. To view which managed policy is
 // currently used to set the permissions boundary for a user or role, use the
-// GetUser () or GetRole () operations.
+// GetUser or GetRole operations.
 func (c *Client) ListPoliciesGrantingServiceAccess(ctx context.Context, params *ListPoliciesGrantingServiceAccessInput, optFns ...func(*Options)) (*ListPoliciesGrantingServiceAccessOutput, error) {
 	if params == nil {
 		params = &ListPoliciesGrantingServiceAccessInput{}

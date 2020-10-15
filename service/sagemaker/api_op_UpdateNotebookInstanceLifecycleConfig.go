@@ -12,7 +12,7 @@ import (
 )
 
 // Updates a notebook instance lifecycle configuration created with the
-// CreateNotebookInstanceLifecycleConfig () API.
+// CreateNotebookInstanceLifecycleConfig API.
 func (c *Client) UpdateNotebookInstanceLifecycleConfig(ctx context.Context, params *UpdateNotebookInstanceLifecycleConfigInput, optFns ...func(*Options)) (*UpdateNotebookInstanceLifecycleConfigOutput, error) {
 	if params == nil {
 		params = &UpdateNotebookInstanceLifecycleConfigInput{}

@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Retrieves an array of IPSetSummary () objects for the IP sets that you manage.
+// Retrieves an array of IPSetSummary objects for the IP sets that you manage.
 func (c *Client) ListIPSets(ctx context.Context, params *ListIPSetsInput, optFns ...func(*Options)) (*ListIPSetsOutput, error) {
 	if params == nil {
 		params = &ListIPSetsInput{}

@@ -12,8 +12,8 @@ import (
 
 // Registers an Amazon EBS volume with a specified stack. A volume can be
 // registered with only one stack at a time. If the volume is already registered,
-// you must first deregister it by calling DeregisterVolume (). For more
-// information, see Resource Management
+// you must first deregister it by calling DeregisterVolume. For more information,
+// see Resource Management
 // (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html). Required
 // Permissions: To use this action, an IAM user must have a Manage permissions
 // level for the stack, or an attached policy that explicitly grants permissions.

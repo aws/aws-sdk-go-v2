@@ -229,53 +229,56 @@ type AliasTarget struct {
 	// weighted alias resource record sets: When EvaluateTargetHealth is true, an alias
 	// resource record set inherits the health of the referenced AWS resource, such as
 	// an ELB load balancer or another resource record set in the hosted zone. Note the
-	// following:  <dl> <dt>CloudFront distributions</dt> <dd> <p>You can't set
-	// <code>EvaluateTargetHealth</code> to <code>true</code> when the alias target is
-	// a CloudFront distribution.</p> </dd> <dt>Elastic Beanstalk environments that
-	// have regionalized subdomains</dt> <dd> <p>If you specify an Elastic Beanstalk
-	// environment in <code>DNSName</code> and the environment contains an ELB load
+	// following: CloudFront distributions You can't set EvaluateTargetHealth to true
+	// when the alias target is a CloudFront distribution. Elastic Beanstalk
+	// environments that have regionalized subdomains If you specify an Elastic
+	// Beanstalk environment in DNSName and the environment contains an ELB load
 	// balancer, Elastic Load Balancing routes queries only to the healthy Amazon EC2
 	// instances that are registered with the load balancer. (An environment
 	// automatically contains an ELB load balancer if it includes more than one Amazon
-	// EC2 instance.) If you set <code>EvaluateTargetHealth</code> to <code>true</code>
-	// and either no Amazon EC2 instances are healthy or the load balancer itself is
-	// unhealthy, Route 53 routes queries to other available resources that are
-	// healthy, if any. </p> <p>If the environment contains a single Amazon EC2
-	// instance, there are no special requirements.</p> </dd> <dt>ELB load
-	// balancers</dt> <dd> <p>Health checking behavior depends on the type of load
-	// balancer:</p> <ul> <li> <p> <b>Classic Load Balancers</b>: If you specify an ELB
-	// Classic Load Balancer in <code>DNSName</code>, Elastic Load Balancing routes
-	// queries only to the healthy Amazon EC2 instances that are registered with the
-	// load balancer. If you set <code>EvaluateTargetHealth</code> to <code>true</code>
-	// and either no EC2 instances are healthy or the load balancer itself is
-	// unhealthy, Route 53 routes queries to other resources.</p> </li> <li> <p>
-	// <b>Application and Network Load Balancers</b>: If you specify an ELB Application
-	// or Network Load Balancer and you set <code>EvaluateTargetHealth</code> to
-	// <code>true</code>, Route 53 routes queries to the load balancer based on the
-	// health of the target groups that are associated with the load balancer:</p> <ul>
-	// <li> <p>For an Application or Network Load Balancer to be considered healthy,
-	// every target group that contains targets must contain at least one healthy
-	// target. If any target group contains only unhealthy targets, the load balancer
-	// is considered unhealthy, and Route 53 routes queries to other resources.</p>
-	// </li> <li> <p>A target group that has no registered targets is considered
-	// unhealthy.</p> </li> </ul> </li> </ul> <note> <p>When you create a load
-	// balancer, you configure settings for Elastic Load Balancing health checks;
-	// they're not Route 53 health checks, but they perform a similar function. Do not
-	// create Route 53 health checks for the EC2 instances that you register with an
-	// ELB load balancer. </p> </note> </dd> <dt>S3 buckets</dt> <dd> <p>There are no
-	// special requirements for setting <code>EvaluateTargetHealth</code> to
-	// <code>true</code> when the alias target is an S3 bucket.</p> </dd> <dt>Other
-	// records in the same hosted zone</dt> <dd> <p>If the AWS resource that you
-	// specify in <code>DNSName</code> is a record or a group of records (for example,
-	// a group of weighted records) but is not another alias record, we recommend that
-	// you associate a health check with all of the records in the alias target. For
-	// more information, see <a
-	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting">What
-	// Happens When You Omit Health Checks?</a> in the <i>Amazon Route 53 Developer
-	// Guide</i>.</p> </dd> </dl> <p>For more information and examples, see <a
-	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Amazon
-	// Route 53 Health Checks and DNS Failover</a> in the <i>Amazon Route 53 Developer
-	// Guide</i>.</p>
+	// EC2 instance.) If you set EvaluateTargetHealth to true and either no Amazon EC2
+	// instances are healthy or the load balancer itself is unhealthy, Route 53 routes
+	// queries to other available resources that are healthy, if any. If the
+	// environment contains a single Amazon EC2 instance, there are no special
+	// requirements. ELB load balancers Health checking behavior depends on the type of
+	// load balancer:
+	//
+	//     * Classic Load Balancers: If you specify an ELB Classic Load
+	// Balancer in DNSName, Elastic Load Balancing routes queries only to the healthy
+	// Amazon EC2 instances that are registered with the load balancer. If you set
+	// EvaluateTargetHealth to true and either no EC2 instances are healthy or the load
+	// balancer itself is unhealthy, Route 53 routes queries to other resources.
+	//
+	//     *
+	// Application and Network Load Balancers: If you specify an ELB Application or
+	// Network Load Balancer and you set EvaluateTargetHealth to true, Route 53 routes
+	// queries to the load balancer based on the health of the target groups that are
+	// associated with the load balancer:
+	//
+	//         * For an Application or Network Load
+	// Balancer to be considered healthy, every target group that contains targets must
+	// contain at least one healthy target. If any target group contains only unhealthy
+	// targets, the load balancer is considered unhealthy, and Route 53 routes queries
+	// to other resources.
+	//
+	//         * A target group that has no registered targets is
+	// considered unhealthy.
+	//
+	// When you create a load balancer, you configure settings
+	// for Elastic Load Balancing health checks; they're not Route 53 health checks,
+	// but they perform a similar function. Do not create Route 53 health checks for
+	// the EC2 instances that you register with an ELB load balancer. S3 buckets There
+	// are no special requirements for setting EvaluateTargetHealth to true when the
+	// alias target is an S3 bucket. Other records in the same hosted zone If the AWS
+	// resource that you specify in DNSName is a record or a group of records (for
+	// example, a group of weighted records) but is not another alias record, we
+	// recommend that you associate a health check with all of the records in the alias
+	// target. For more information, see What Happens When You Omit Health Checks?
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting)
+	// in the Amazon Route 53 Developer Guide. For more information and examples, see
+	// Amazon Route 53 Health Checks and DNS Failover
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html) in
+	// the Amazon Route 53 Developer Guide.
 	//
 	// This member is required.
 	EvaluateTargetHealth *bool
@@ -699,15 +702,15 @@ type HealthCheckConfig struct {
 	//     * Health checks that monitor CloudWatch
 	// alarms: Route 53 stops monitoring the corresponding CloudWatch metrics.
 	//
-	//
-	// <p>After you disable a health check, Route 53 considers the status of the health
-	// check to always be healthy. If you configured DNS failover, Route 53 continues
-	// to route traffic to the corresponding resources. If you want to stop routing
-	// traffic to a resource, change the value of <a
-	// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted">Inverted</a>.
-	// </p> <p>Charges for a health check still apply when the health check is
-	// disabled. For more information, see <a
-	// href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p>
+	// After
+	// you disable a health check, Route 53 considers the status of the health check to
+	// always be healthy. If you configured DNS failover, Route 53 continues to route
+	// traffic to the corresponding resources. If you want to stop routing traffic to a
+	// resource, change the value of Inverted
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted).
+	// Charges for a health check still apply when the health check is disabled. For
+	// more information, see Amazon Route 53 Pricing
+	// (http://aws.amazon.com/route53/pricing/).
 	Disabled *bool
 
 	// Specify whether you want Amazon Route 53 to send the value of
@@ -739,53 +742,50 @@ type HealthCheckConfig struct {
 	FailureThreshold *int32
 
 	// Amazon Route 53 behavior depends on whether you specify a value for IPAddress.
-	// <p> <b>If you specify a value for</b> <code>IPAddress</code>:</p> <p>Amazon
-	// Route 53 sends health check requests to the specified IPv4 or IPv6 address and
-	// passes the value of <code>FullyQualifiedDomainName</code> in the
-	// <code>Host</code> header for all health checks except TCP health checks. This is
-	// typically the fully qualified DNS name of the endpoint on which you want Route
-	// 53 to perform health checks.</p> <p>When Route 53 checks the health of an
-	// endpoint, here is how it constructs the <code>Host</code> header:</p> <ul> <li>
-	// <p>If you specify a value of <code>80</code> for <code>Port</code> and
-	// <code>HTTP</code> or <code>HTTP_STR_MATCH</code> for <code>Type</code>, Route 53
-	// passes the value of <code>FullyQualifiedDomainName</code> to the endpoint in the
-	// Host header. </p> </li> <li> <p>If you specify a value of <code>443</code> for
-	// <code>Port</code> and <code>HTTPS</code> or <code>HTTPS_STR_MATCH</code> for
-	// <code>Type</code>, Route 53 passes the value of
-	// <code>FullyQualifiedDomainName</code> to the endpoint in the <code>Host</code>
-	// header.</p> </li> <li> <p>If you specify another value for <code>Port</code> and
-	// any value except <code>TCP</code> for <code>Type</code>, Route 53 passes
-	// <code>FullyQualifiedDomainName:Port</code> to the endpoint in the
-	// <code>Host</code> header.</p> </li> </ul> <p>If you don't specify a value for
-	// <code>FullyQualifiedDomainName</code>, Route 53 substitutes the value of
-	// <code>IPAddress</code> in the <code>Host</code> header in each of the preceding
-	// cases.</p> <p> <b>If you don't specify a value for <code>IPAddress</code>
-	// </b>:</p> <p>Route 53 sends a DNS request to the domain that you specify for
-	// <code>FullyQualifiedDomainName</code> at the interval that you specify for
-	// <code>RequestInterval</code>. Using an IPv4 address that DNS returns, Route 53
-	// then checks the health of the endpoint.</p> <note> <p>If you don't specify a
-	// value for <code>IPAddress</code>, Route 53 uses only IPv4 to send health checks
-	// to the endpoint. If there's no resource record set with a type of A for the name
-	// that you specify for <code>FullyQualifiedDomainName</code>, the health check
-	// fails with a "DNS resolution failed" error.</p> </note> <p>If you want to check
-	// the health of weighted, latency, or failover resource record sets and you choose
-	// to specify the endpoint only by <code>FullyQualifiedDomainName</code>, we
-	// recommend that you create a separate health check for each endpoint. For
-	// example, create a health check for each HTTP server that is serving content for
-	// www.example.com. For the value of <code>FullyQualifiedDomainName</code>, specify
-	// the domain name of the server (such as us-east-2-www.example.com), not the name
-	// of the resource record sets (www.example.com).</p> <important> <p>In this
-	// configuration, if you create a health check for which the value of
-	// <code>FullyQualifiedDomainName</code> matches the name of the resource record
+	// If you specify a value for IPAddress: Amazon Route 53 sends health check
+	// requests to the specified IPv4 or IPv6 address and passes the value of
+	// FullyQualifiedDomainName in the Host header for all health checks except TCP
+	// health checks. This is typically the fully qualified DNS name of the endpoint on
+	// which you want Route 53 to perform health checks. When Route 53 checks the
+	// health of an endpoint, here is how it constructs the Host header:
+	//
+	//     * If you
+	// specify a value of 80 for Port and HTTP or HTTP_STR_MATCH for Type, Route 53
+	// passes the value of FullyQualifiedDomainName to the endpoint in the Host
+	// header.
+	//
+	//     * If you specify a value of 443 for Port and HTTPS or
+	// HTTPS_STR_MATCH for Type, Route 53 passes the value of FullyQualifiedDomainName
+	// to the endpoint in the Host header.
+	//
+	//     * If you specify another value for Port
+	// and any value except TCP for Type, Route 53 passes FullyQualifiedDomainName:Port
+	// to the endpoint in the Host header.
+	//
+	// If you don't specify a value for
+	// FullyQualifiedDomainName, Route 53 substitutes the value of IPAddress in the
+	// Host header in each of the preceding cases. If you don't specify a value for
+	// IPAddress : Route 53 sends a DNS request to the domain that you specify for
+	// FullyQualifiedDomainName at the interval that you specify for RequestInterval.
+	// Using an IPv4 address that DNS returns, Route 53 then checks the health of the
+	// endpoint. If you don't specify a value for IPAddress, Route 53 uses only IPv4 to
+	// send health checks to the endpoint. If there's no resource record set with a
+	// type of A for the name that you specify for FullyQualifiedDomainName, the health
+	// check fails with a "DNS resolution failed" error. If you want to check the
+	// health of weighted, latency, or failover resource record sets and you choose to
+	// specify the endpoint only by FullyQualifiedDomainName, we recommend that you
+	// create a separate health check for each endpoint. For example, create a health
+	// check for each HTTP server that is serving content for www.example.com. For the
+	// value of FullyQualifiedDomainName, specify the domain name of the server (such
+	// as us-east-2-www.example.com), not the name of the resource record sets
+	// (www.example.com). In this configuration, if you create a health check for which
+	// the value of FullyQualifiedDomainName matches the name of the resource record
 	// sets and you then associate the health check with those resource record sets,
-	// health check results will be unpredictable.</p> </important> <p>In addition, if
-	// the value that you specify for <code>Type</code> is <code>HTTP</code>,
-	// <code>HTTPS</code>, <code>HTTP_STR_MATCH</code>, or
-	// <code>HTTPS_STR_MATCH</code>, Route 53 passes the value of
-	// <code>FullyQualifiedDomainName</code> in the <code>Host</code> header, as it
-	// does when you specify a value for <code>IPAddress</code>. If the value of
-	// <code>Type</code> is <code>TCP</code>, Route 53 doesn't pass a <code>Host</code>
-	// header.</p>
+	// health check results will be unpredictable. In addition, if the value that you
+	// specify for Type is HTTP, HTTPS, HTTP_STR_MATCH, or HTTPS_STR_MATCH, Route 53
+	// passes the value of FullyQualifiedDomainName in the Host header, as it does when
+	// you specify a value for IPAddress. If the value of Type is TCP, Route 53 doesn't
+	// pass a Host header.
 	FullyQualifiedDomainName *string
 
 	// The number of child health checks that are associated with a CALCULATED health
@@ -808,31 +808,39 @@ type HealthCheckConfig struct {
 	// sends a DNS request to resolve the domain name that you specify in
 	// FullyQualifiedDomainName at the interval that you specify in RequestInterval.
 	// Using an IP address returned by DNS, Route 53 then checks the health of the
-	// endpoint.  <p>Use one of the following formats for the value of
-	// <code>IPAddress</code>: </p> <ul> <li> <p> <b>IPv4 address</b>: four values
-	// between 0 and 255, separated by periods (.), for example,
-	// <code>192.0.2.44</code>.</p> </li> <li> <p> <b>IPv6 address</b>: eight groups of
-	// four hexadecimal values, separated by colons (:), for example,
-	// <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>. You can also shorten IPv6
-	// addresses as described in RFC 5952, for example,
-	// <code>2001:db8:85a3::abcd:1:2345</code>.</p> </li> </ul> <p>If the endpoint is
-	// an EC2 instance, we recommend that you create an Elastic IP address, associate
-	// it with your EC2 instance, and specify the Elastic IP address for
-	// <code>IPAddress</code>. This ensures that the IP address of your instance will
-	// never change.</p> <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName">FullyQualifiedDomainName</a>.
-	// </p> <p>Constraints: Route 53 can't check the health of endpoints for which the
-	// IP address is in local, private, non-routable, or multicast ranges. For more
+	// endpoint. Use one of the following formats for the value of IPAddress:
+	//
+	//     *
+	// IPv4 address: four values between 0 and 255, separated by periods (.), for
+	// example, 192.0.2.44.
+	//
+	//     * IPv6 address: eight groups of four hexadecimal
+	// values, separated by colons (:), for example,
+	// 2001:0db8:85a3:0000:0000:abcd:0001:2345. You can also shorten IPv6 addresses as
+	// described in RFC 5952, for example, 2001:db8:85a3::abcd:1:2345.
+	//
+	// If the endpoint
+	// is an EC2 instance, we recommend that you create an Elastic IP address,
+	// associate it with your EC2 instance, and specify the Elastic IP address for
+	// IPAddress. This ensures that the IP address of your instance will never change.
+	// For more information, see FullyQualifiedDomainName
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName).
+	// Constraints: Route 53 can't check the health of endpoints for which the IP
+	// address is in local, private, non-routable, or multicast ranges. For more
 	// information about IP addresses for which you can't create health checks, see the
-	// following documents:</p> <ul> <li> <p> <a
-	// href="https://tools.ietf.org/html/rfc5735">RFC 5735, Special Use IPv4
-	// Addresses</a> </p> </li> <li> <p> <a
-	// href="https://tools.ietf.org/html/rfc6598">RFC 6598, IANA-Reserved IPv4 Prefix
-	// for Shared Address Space</a> </p> </li> <li> <p> <a
-	// href="https://tools.ietf.org/html/rfc5156">RFC 5156, Special-Use IPv6
-	// Addresses</a> </p> </li> </ul> <p>When the value of <code>Type</code> is
-	// <code>CALCULATED</code> or <code>CLOUDWATCH_METRIC</code>, omit
-	// <code>IPAddress</code>.</p>
+	// following documents:
+	//
+	//     * RFC 5735, Special Use IPv4 Addresses
+	// (https://tools.ietf.org/html/rfc5735)
+	//
+	//     * RFC 6598, IANA-Reserved IPv4 Prefix
+	// for Shared Address Space (https://tools.ietf.org/html/rfc6598)
+	//
+	//     * RFC 5156,
+	// Special-Use IPv6 Addresses (https://tools.ietf.org/html/rfc5156)
+	//
+	// When the value
+	// of Type is CALCULATED or CLOUDWATCH_METRIC, omit IPAddress.
 	IPAddress *string
 
 	// When CloudWatch has insufficient data about the metric to determine the alarm
@@ -1090,32 +1098,35 @@ type ResourceRecordSet struct {
 
 	// For ChangeResourceRecordSets requests, the name of the record that you want to
 	// create, update, or delete. For ListResourceRecordSets responses, the name of a
-	// record in the specified hosted zone.  <p> <b>ChangeResourceRecordSets Only</b>
-	// </p> <p>Enter a fully qualified domain name, for example,
-	// <code>www.example.com</code>. You can optionally include a trailing dot. If you
-	// omit the trailing dot, Amazon Route 53 assumes that the domain name that you
-	// specify is fully qualified. This means that Route 53 treats
-	// <code>www.example.com</code> (without a trailing dot) and
-	// <code>www.example.com.</code> (with a trailing dot) as identical.</p> <p>For
-	// information about how to specify characters other than <code>a-z</code>,
-	// <code>0-9</code>, and <code>-</code> (hyphen) and how to specify
-	// internationalized domain names, see <a
-	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html">DNS
-	// Domain Name Format</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>You
-	// can use the asterisk (*) wildcard to replace the leftmost label in a domain
-	// name, for example, <code>*.example.com</code>. Note the following:</p> <ul> <li>
-	// <p>The * must replace the entire label. For example, you can't specify
-	// <code>*prod.example.com</code> or <code>prod*.example.com</code>.</p> </li> <li>
-	// <p>The * can't replace any of the middle labels, for example,
-	// marketing.*.example.com.</p> </li> <li> <p>If you include * in any position
-	// other than the leftmost label in a domain name, DNS treats it as an * character
-	// (ASCII 42), not as a wildcard.</p> <important> <p>You can't use the * wildcard
-	// for resource records sets that have a type of NS.</p> </important> </li> </ul>
-	// <p>You can use the * wildcard as the leftmost label in a domain name, for
-	// example, <code>*.example.com</code>. You can't use an * for one of the middle
-	// labels, for example, <code>marketing.*.example.com</code>. In addition, the *
-	// must replace the entire label; for example, you can't specify
-	// <code>prod*.example.com</code>.</p>
+	// record in the specified hosted zone. ChangeResourceRecordSets Only Enter a fully
+	// qualified domain name, for example, www.example.com. You can optionally include
+	// a trailing dot. If you omit the trailing dot, Amazon Route 53 assumes that the
+	// domain name that you specify is fully qualified. This means that Route 53 treats
+	// www.example.com (without a trailing dot) and www.example.com. (with a trailing
+	// dot) as identical. For information about how to specify characters other than
+	// a-z, 0-9, and - (hyphen) and how to specify internationalized domain names, see
+	// DNS Domain Name Format
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
+	// in the Amazon Route 53 Developer Guide. You can use the asterisk () wildcard to
+	// replace the leftmost label in a domain name, for example, .example.com. Note the
+	// following:
+	//
+	//     * The * must replace the entire label. For example, you can't
+	// specify prod.example.com or prod.example.com.
+	//
+	//     * The * can't replace any of
+	// the middle labels, for example, marketing..example.com.
+	//
+	//     * If you include *
+	// in any position other than the leftmost label in a domain name, DNS treats it as
+	// an * character (ASCII 42), not as a wildcard. You can't use the * wildcard for
+	// resource records sets that have a type of NS.
+	//
+	// You can use the * wildcard as the
+	// leftmost label in a domain name, for example, .example.com. You can't use an *
+	// for one of the middle labels, for example, marketing..example.com. In addition,
+	// the * must replace the entire label; for example, you can't specify
+	// prod.example.com.
 	//
 	// This member is required.
 	Name *string
@@ -1276,74 +1287,99 @@ type ResourceRecordSet struct {
 	//     * By determining the
 	// current state of a CloudWatch alarm (CloudWatch metric health checks)
 	//
+	// Route 53
+	// doesn't check the health of the endpoint that is specified in the resource
+	// record set, for example, the endpoint specified by the IP address in the Value
+	// element. When you add a HealthCheckId element to a resource record set, Route 53
+	// checks the health of the endpoint that you specified in the health check. For
+	// more information, see the following topics in the Amazon Route 53 Developer
+	// Guide:
 	//
-	// <important> <p>Route 53 doesn't check the health of the endpoint that is
-	// specified in the resource record set, for example, the endpoint specified by the
-	// IP address in the <code>Value</code> element. When you add a
-	// <code>HealthCheckId</code> element to a resource record set, Route 53 checks the
-	// health of the endpoint that you specified in the health check. </p> </important>
-	// <p>For more information, see the following topics in the <i>Amazon Route 53
-	// Developer Guide</i>:</p> <ul> <li> <p> <a
-	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html">How
-	// Amazon Route 53 Determines Whether an Endpoint Is Healthy</a> </p> </li> <li>
-	// <p> <a
-	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route
-	// 53 Health Checks and DNS Failover</a> </p> </li> <li> <p> <a
-	// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html">Configuring
-	// Failover in a Private Hosted Zone</a> </p> </li> </ul> <p> <b>When to Specify
-	// HealthCheckId</b> </p> <p>Specifying a value for <code>HealthCheckId</code> is
-	// useful only when Route 53 is choosing between two or more resource record sets
-	// to respond to a DNS query, and you want Route 53 to base the choice in part on
-	// the status of a health check. Configuring health checks makes sense only in the
-	// following configurations:</p> <ul> <li> <p> <b>Non-alias resource record
-	// sets</b>: You're checking the health of a group of non-alias resource record
-	// sets that have the same routing policy, name, and type (such as multiple
-	// weighted records named www.example.com with a type of A) and you specify health
-	// check IDs for all the resource record sets. </p> <p>If the health check status
-	// for a resource record set is healthy, Route 53 includes the record among the
-	// records that it responds to DNS queries with.</p> <p>If the health check status
-	// for a resource record set is unhealthy, Route 53 stops responding to DNS queries
-	// using the value for that resource record set.</p> <p>If the health check status
-	// for all resource record sets in the group is unhealthy, Route 53 considers all
-	// resource record sets in the group healthy and responds to DNS queries
-	// accordingly. </p> </li> <li> <p> <b>Alias resource record sets</b>: You specify
-	// the following settings:</p> <ul> <li> <p>You set
-	// <code>EvaluateTargetHealth</code> to true for an alias resource record set in a
-	// group of resource record sets that have the same routing policy, name, and type
-	// (such as multiple weighted records named www.example.com with a type of A). </p>
-	// </li> <li> <p>You configure the alias resource record set to route traffic to a
-	// non-alias resource record set in the same hosted zone.</p> </li> <li> <p>You
-	// specify a health check ID for the non-alias resource record set. </p> </li>
-	// </ul> <p>If the health check status is healthy, Route 53 considers the alias
-	// resource record set to be healthy and includes the alias record among the
-	// records that it responds to DNS queries with.</p> <p>If the health check status
-	// is unhealthy, Route 53 stops responding to DNS queries using the alias resource
-	// record set.</p> <note> <p>The alias resource record set can also route traffic
-	// to a <i>group</i> of non-alias resource record sets that have the same routing
-	// policy, name, and type. In that configuration, associate health checks with all
-	// of the resource record sets in the group of non-alias resource record sets.</p>
-	// </note> </li> </ul> <p> <b>Geolocation Routing</b> </p> <p>For geolocation
-	// resource record sets, if an endpoint is unhealthy, Route 53 looks for a resource
-	// record set for the larger, associated geographic region. For example, suppose
-	// you have resource record sets for a state in the United States, for the entire
-	// United States, for North America, and a resource record set that has
-	// <code>*</code> for <code>CountryCode</code> is <code>*</code>, which applies to
-	// all locations. If the endpoint for the state resource record set is unhealthy,
-	// Route 53 checks for healthy resource record sets in the following order until it
-	// finds a resource record set for which the endpoint is healthy:</p> <ul> <li>
-	// <p>The United States</p> </li> <li> <p>North America</p> </li> <li> <p>The
-	// default resource record set</p> </li> </ul> <p> <b>Specifying the Health Check
-	// Endpoint by Domain Name</b> </p> <p>If your health checks specify the endpoint
-	// only by domain name, we recommend that you create a separate health check for
-	// each endpoint. For example, create a health check for each <code>HTTP</code>
-	// server that is serving content for <code>www.example.com</code>. For the value
-	// of <code>FullyQualifiedDomainName</code>, specify the domain name of the server
-	// (such as <code>us-east-2-www.example.com</code>), not the name of the resource
-	// record sets (<code>www.example.com</code>).</p> <important> <p>Health check
-	// results will be unpredictable if you do the following:</p> <ul> <li> <p>Create a
-	// health check that has the same value for <code>FullyQualifiedDomainName</code>
-	// as the name of a resource record set.</p> </li> <li> <p>Associate that health
-	// check with the resource record set.</p> </li> </ul> </important>
+	//     * How Amazon Route 53 Determines Whether an Endpoint Is Healthy
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
+	//
+	//
+	// * Route 53 Health Checks and DNS Failover
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html)
+	//
+	//
+	// * Configuring Failover in a Private Hosted Zone
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
+	//
+	// When
+	// to Specify HealthCheckId Specifying a value for HealthCheckId is useful only
+	// when Route 53 is choosing between two or more resource record sets to respond to
+	// a DNS query, and you want Route 53 to base the choice in part on the status of a
+	// health check. Configuring health checks makes sense only in the following
+	// configurations:
+	//
+	//     * Non-alias resource record sets: You're checking the
+	// health of a group of non-alias resource record sets that have the same routing
+	// policy, name, and type (such as multiple weighted records named www.example.com
+	// with a type of A) and you specify health check IDs for all the resource record
+	// sets. If the health check status for a resource record set is healthy, Route 53
+	// includes the record among the records that it responds to DNS queries with. If
+	// the health check status for a resource record set is unhealthy, Route 53 stops
+	// responding to DNS queries using the value for that resource record set. If the
+	// health check status for all resource record sets in the group is unhealthy,
+	// Route 53 considers all resource record sets in the group healthy and responds to
+	// DNS queries accordingly.
+	//
+	//     * Alias resource record sets: You specify the
+	// following settings:
+	//
+	//         * You set EvaluateTargetHealth to true for an alias
+	// resource record set in a group of resource record sets that have the same
+	// routing policy, name, and type (such as multiple weighted records named
+	// www.example.com with a type of A).
+	//
+	//         * You configure the alias resource
+	// record set to route traffic to a non-alias resource record set in the same
+	// hosted zone.
+	//
+	//         * You specify a health check ID for the non-alias resource
+	// record set.
+	//
+	//     If the health check status is healthy, Route 53 considers the
+	// alias resource record set to be healthy and includes the alias record among the
+	// records that it responds to DNS queries with. If the health check status is
+	// unhealthy, Route 53 stops responding to DNS queries using the alias resource
+	// record set. The alias resource record set can also route traffic to a group of
+	// non-alias resource record sets that have the same routing policy, name, and
+	// type. In that configuration, associate health checks with all of the resource
+	// record sets in the group of non-alias resource record sets.
+	//
+	// Geolocation Routing
+	// For geolocation resource record sets, if an endpoint is unhealthy, Route 53
+	// looks for a resource record set for the larger, associated geographic region.
+	// For example, suppose you have resource record sets for a state in the United
+	// States, for the entire United States, for North America, and a resource record
+	// set that has  for CountryCode is , which applies to all locations. If the
+	// endpoint for the state resource record set is unhealthy, Route 53 checks for
+	// healthy resource record sets in the following order until it finds a resource
+	// record set for which the endpoint is healthy:
+	//
+	//     * The United States
+	//
+	//     *
+	// North America
+	//
+	//     * The default resource record set
+	//
+	// Specifying the Health
+	// Check Endpoint by Domain Name If your health checks specify the endpoint only by
+	// domain name, we recommend that you create a separate health check for each
+	// endpoint. For example, create a health check for each HTTP server that is
+	// serving content for www.example.com. For the value of FullyQualifiedDomainName,
+	// specify the domain name of the server (such as us-east-2-www.example.com), not
+	// the name of the resource record sets (www.example.com). Health check results
+	// will be unpredictable if you do the following:
+	//
+	//     * Create a health check that
+	// has the same value for FullyQualifiedDomainName as the name of a resource record
+	// set.
+	//
+	//     * Associate that health check with the resource record set.
 	HealthCheckId *string
 
 	// Multivalue answer resource record sets only: To route traffic approximately

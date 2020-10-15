@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates and starts a new SPICE ingestion on a dataset  <p>Any ingestions
-// operating on tagged datasets inherit the same tags automatically for use in
-// access control. For an example, see <a
-// href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/">How
-// do I create an IAM policy to control access to Amazon EC2 resources using
-// tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset,
-// but not on the ingestion resource.</p>
+// Creates and starts a new SPICE ingestion on a dataset Any ingestions operating
+// on tagged datasets inherit the same tags automatically for use in access
+// control. For an example, see How do I create an IAM policy to control access to
+// Amazon EC2 resources using tags?
+// (https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/)
+// in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on
+// the ingestion resource.
 func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInput, optFns ...func(*Options)) (*CreateIngestionOutput, error) {
 	if params == nil {
 		params = &CreateIngestionInput{}

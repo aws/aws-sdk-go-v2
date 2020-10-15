@@ -12,22 +12,21 @@ import (
 )
 
 // Gets face detection results for a Amazon Rekognition Video analysis started by
-// StartFaceDetection (). Face detection with Amazon Rekognition Video is an
+// StartFaceDetection. Face detection with Amazon Rekognition Video is an
 // asynchronous operation. You start face detection by calling StartFaceDetection
-// () which returns a job identifier (JobId). When the face detection operation
+// which returns a job identifier (JobId). When the face detection operation
 // finishes, Amazon Rekognition Video publishes a completion status to the Amazon
 // Simple Notification Service topic registered in the initial call to
 // StartFaceDetection. To get the results of the face detection operation, first
 // check that the status value published to the Amazon SNS topic is SUCCEEDED. If
-// so, call GetFaceDetection () and pass the job identifier (JobId) from the
-// initial call to StartFaceDetection. GetFaceDetection returns an array of
-// detected faces (Faces) sorted by the time the faces were detected. Use
-// MaxResults parameter to limit the number of labels returned. If there are more
-// results than specified in MaxResults, the value of NextToken in the operation
-// response contains a pagination token for getting the next set of results. To get
-// the next page of results, call GetFaceDetection and populate the NextToken
-// request parameter with the token value returned from the previous call to
-// GetFaceDetection.
+// so, call GetFaceDetection and pass the job identifier (JobId) from the initial
+// call to StartFaceDetection. GetFaceDetection returns an array of detected faces
+// (Faces) sorted by the time the faces were detected. Use MaxResults parameter to
+// limit the number of labels returned. If there are more results than specified in
+// MaxResults, the value of NextToken in the operation response contains a
+// pagination token for getting the next set of results. To get the next page of
+// results, call GetFaceDetection and populate the NextToken request parameter with
+// the token value returned from the previous call to GetFaceDetection.
 func (c *Client) GetFaceDetection(ctx context.Context, params *GetFaceDetectionInput, optFns ...func(*Options)) (*GetFaceDetectionOutput, error) {
 	if params == nil {
 		params = &GetFaceDetectionInput{}

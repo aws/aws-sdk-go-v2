@@ -19,7 +19,8 @@ import (
 const ServiceID = "Kinesis Video Archived Media"
 const ServiceAPIVersion = "2017-09-30"
 
-//
+// Client provides the API client to make operations call for Amazon Kinesis Video
+// Streams Archived Media.
 type Client struct {
 	options Options
 }

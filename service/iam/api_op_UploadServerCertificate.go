@@ -128,7 +128,7 @@ type UploadServerCertificateInput struct {
 	Path *string
 }
 
-// Contains the response to a successful UploadServerCertificate () request.
+// Contains the response to a successful UploadServerCertificate request.
 type UploadServerCertificateOutput struct {
 
 	// The meta information of the uploaded server certificate without its certificate

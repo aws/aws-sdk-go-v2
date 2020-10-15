@@ -15,7 +15,7 @@ import (
 // resulting cluster with the same configuration as the original cluster from which
 // the snapshot was created, except that the new cluster is created with the
 // default cluster security and parameter groups. After Amazon Redshift creates the
-// cluster, you can use the ModifyCluster () API to associate a different security
+// cluster, you can use the ModifyCluster API to associate a different security
 // group and different parameter group with the restored cluster. If you are using
 // a DS node type, you can also choose to change to another DS node type of the
 // same size during restore. If you restore a cluster into a VPC, you must provide
@@ -75,7 +75,7 @@ type RestoreFromClusterSnapshotInput struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot ().
+	// can still create manual snapshots when you want with CreateClusterSnapshot.
 	// Default: The value selected for the cluster from which the snapshot was taken.
 	// Constraints: Must be a value from 0 to 35.
 	AutomatedSnapshotRetentionPeriod *int32

@@ -12,11 +12,11 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. The ActivatedRule object in an UpdateWebACL () request specifies a
-// Rule that you want to insert or delete, the priority of the Rule in the WebACL,
-// and the action that you want AWS WAF to take when a web request matches the Rule
+// global use. The ActivatedRule object in an UpdateWebACL request specifies a Rule
+// that you want to insert or delete, the priority of the Rule in the WebACL, and
+// the action that you want AWS WAF to take when a web request matches the Rule
 // (ALLOW, BLOCK, or COUNT). To specify whether to insert or delete a Rule, use the
-// Action parameter in the WebACLUpdate () data type.
+// Action parameter in the WebACLUpdate data type.
 type ActivatedRule struct {
 
 	// Specifies the order in which the Rules in a WebACL are evaluated. Rules with a
@@ -28,9 +28,9 @@ type ActivatedRule struct {
 	Priority *int32
 
 	// The RuleId for a Rule. You use RuleId to get more information about a Rule (see
-	// GetRule ()), update a Rule (see UpdateRule ()), insert a Rule into a WebACL or
-	// delete a one from a WebACL (see UpdateWebACL ()), or delete a Rule from AWS WAF
-	// (see DeleteRule ()). RuleId is returned by CreateRule () and by ListRules ().
+	// GetRule), update a Rule (see UpdateRule), insert a Rule into a WebACL or delete
+	// a one from a WebACL (see UpdateWebACL), or delete a Rule from AWS WAF (see
+	// DeleteRule). RuleId is returned by CreateRule and by ListRules.
 	//
 	// This member is required.
 	RuleId *string
@@ -74,11 +74,11 @@ type ActivatedRule struct {
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html).
 	//
 	//     *
-	// Submit an UpdateWebACL () request that has two actions:
+	// Submit an UpdateWebACL request that has two actions:
 	//
-	//         * The first
-	// action deletes the existing rule group from the web ACL. That is, in the
-	// UpdateWebACL () request, the first Updates:Action should be DELETE and
+	//         * The first action
+	// deletes the existing rule group from the web ACL. That is, in the UpdateWebACL
+	// request, the first Updates:Action should be DELETE and
 	// Updates:ActivatedRule:RuleId should be the rule group that contains the rules
 	// that you want to exclude.
 	//
@@ -87,8 +87,6 @@ type ActivatedRule struct {
 	// Updates:Action should be INSERT, Updates:ActivatedRule:RuleId should be the rule
 	// group that you just removed, and ExcludedRules should contain the rules that you
 	// want to exclude.
-	//
-	//     </li> </ol>
 	ExcludedRules []*ExcludedRule
 
 	// Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can
@@ -98,18 +96,18 @@ type ActivatedRule struct {
 	// to test the RuleGroup, set the OverrideAction to Count. The RuleGroup will then
 	// override any block action specified by individual rules contained within the
 	// group. Instead of blocking matching requests, those requests will be counted.
-	// You can view a record of counted requests using GetSampledRequests ().
+	// You can view a record of counted requests using GetSampledRequests.
 	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to
 	// a WebACL. In this case you do not use ActivatedRule|Action. For all other update
 	// requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
 	OverrideAction *WafOverrideAction
 
-	// The rule type, either REGULAR, as defined by Rule (), RATE_BASED, as defined by
-	// RateBasedRule (), or GROUP, as defined by RuleGroup (). The default is REGULAR.
+	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by
+	// RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR.
 	// Although this field is optional, be aware that if you try to add a RATE_BASED
-	// rule to a web ACL without setting the type, the UpdateWebACL () request will
-	// fail because the request tries to add a REGULAR rule with the specified ID,
-	// which does not exist.
+	// rule to a web ACL without setting the type, the UpdateWebACL request will fail
+	// because the request tries to add a REGULAR rule with the specified ID, which
+	// does not exist.
 	Type WafRuleType
 }
 
@@ -119,7 +117,7 @@ type ActivatedRule struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. In a GetByteMatchSet () request, ByteMatchSet is a complex type that
+// global use. In a GetByteMatchSet request, ByteMatchSet is a complex type that
 // contains the ByteMatchSetId and Name of a ByteMatchSet, and the values that you
 // specified when you updated the ByteMatchSet. A complex type that contains
 // ByteMatchTuple objects, which specify the parts of web requests that you want
@@ -129,11 +127,11 @@ type ActivatedRule struct {
 type ByteMatchSet struct {
 
 	// The ByteMatchSetId for a ByteMatchSet. You use ByteMatchSetId to get information
-	// about a ByteMatchSet (see GetByteMatchSet ()), update a ByteMatchSet (see
-	// UpdateByteMatchSet ()), insert a ByteMatchSet into a Rule or delete one from a
-	// Rule (see UpdateRule ()), and delete a ByteMatchSet from AWS WAF (see
-	// DeleteByteMatchSet ()). ByteMatchSetId is returned by CreateByteMatchSet () and
-	// by ListByteMatchSets ().
+	// about a ByteMatchSet (see GetByteMatchSet), update a ByteMatchSet (see
+	// UpdateByteMatchSet), insert a ByteMatchSet into a Rule or delete one from a Rule
+	// (see UpdateRule), and delete a ByteMatchSet from AWS WAF (see
+	// DeleteByteMatchSet). ByteMatchSetId is returned by CreateByteMatchSet and by
+	// ListByteMatchSets.
 	//
 	// This member is required.
 	ByteMatchSetId *string
@@ -145,8 +143,8 @@ type ByteMatchSet struct {
 	// This member is required.
 	ByteMatchTuples []*ByteMatchTuple
 
-	// A friendly name or description of the ByteMatchSet (). You can't change Name
-	// after you create a ByteMatchSet.
+	// A friendly name or description of the ByteMatchSet. You can't change Name after
+	// you create a ByteMatchSet.
 	Name *string
 }
 
@@ -156,20 +154,20 @@ type ByteMatchSet struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returned by ListByteMatchSets (). Each ByteMatchSetSummary object
-// includes the Name and ByteMatchSetId for one ByteMatchSet ().
+// global use. Returned by ListByteMatchSets. Each ByteMatchSetSummary object
+// includes the Name and ByteMatchSetId for one ByteMatchSet.
 type ByteMatchSetSummary struct {
 
 	// The ByteMatchSetId for a ByteMatchSet. You use ByteMatchSetId to get information
 	// about a ByteMatchSet, update a ByteMatchSet, remove a ByteMatchSet from a Rule,
 	// and delete a ByteMatchSet from AWS WAF. ByteMatchSetId is returned by
-	// CreateByteMatchSet () and by ListByteMatchSets ().
+	// CreateByteMatchSet and by ListByteMatchSets.
 	//
 	// This member is required.
 	ByteMatchSetId *string
 
-	// A friendly name or description of the ByteMatchSet (). You can't change Name
-	// after you create a ByteMatchSet.
+	// A friendly name or description of the ByteMatchSet. You can't change Name after
+	// you create a ByteMatchSet.
 	//
 	// This member is required.
 	Name *string
@@ -181,12 +179,12 @@ type ByteMatchSetSummary struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. In an UpdateByteMatchSet () request, ByteMatchSetUpdate specifies
-// whether to insert or delete a ByteMatchTuple () and includes the settings for
-// the ByteMatchTuple.
+// global use. In an UpdateByteMatchSet request, ByteMatchSetUpdate specifies
+// whether to insert or delete a ByteMatchTuple and includes the settings for the
+// ByteMatchTuple.
 type ByteMatchSetUpdate struct {
 
-	// Specifies whether to insert or delete a ByteMatchTuple ().
+	// Specifies whether to insert or delete a ByteMatchTuple.
 	//
 	// This member is required.
 	Action ChangeAction
@@ -212,7 +210,7 @@ type ByteMatchSetUpdate struct {
 type ByteMatchTuple struct {
 
 	// The part of a web request that you want AWS WAF to search, such as a specified
-	// header or a query string. For more information, see FieldToMatch ().
+	// header or a query string. For more information, see FieldToMatch.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
@@ -258,11 +256,11 @@ type ByteMatchTuple struct {
 	// that you specified for FieldToMatch:
 	//
 	//     * HEADER: The value that you want AWS
-	// WAF to search for in the request header that you specified in FieldToMatch (),
-	// for example, the value of the User-Agent or Referer header.
+	// WAF to search for in the request header that you specified in FieldToMatch, for
+	// example, the value of the User-Agent or Referer header.
 	//
-	//     * METHOD: The
-	// HTTP method, which indicates the type of operation specified in the request.
+	//     * METHOD: The HTTP
+	// method, which indicates the type of operation specified in the request.
 	// CloudFront supports the following methods: DELETE, GET, HEAD, OPTIONS, PATCH,
 	// POST, and PUT.
 	//
@@ -279,7 +277,7 @@ type ByteMatchTuple struct {
 	// request body immediately follows the request headers. Note that only the first
 	// 8192 bytes of the request body are forwarded to AWS WAF for inspection. To allow
 	// or block requests based on the length of the body, you can create a size
-	// constraint set. For more information, see CreateSizeConstraintSet ().
+	// constraint set. For more information, see CreateSizeConstraintSet.
 	//
 	//     *
 	// SINGLE_QUERY_ARG: The parameter in the query string that you will inspect, such
@@ -290,19 +288,16 @@ type ByteMatchTuple struct {
 	// inspecting a single parameter, AWS WAF inspects all parameters within the query
 	// string for the value or regex pattern that you specify in TargetString.
 	//
-	//
-	// <p>If <code>TargetString</code> includes alphabetic characters A-Z and a-z, note
-	// that the value is case sensitive.</p> <p> <b>If you're using the AWS WAF API</b>
-	// </p> <p>Specify a base64-encoded version of the value. The maximum length of the
-	// value before you base64-encode it is 50 bytes.</p> <p>For example, suppose the
-	// value of <code>Type</code> is <code>HEADER</code> and the value of
-	// <code>Data</code> is <code>User-Agent</code>. If you want to search the
-	// <code>User-Agent</code> header for the value <code>BadBot</code>, you
-	// base64-encode <code>BadBot</code> using MIME base64-encoding and include the
-	// resulting value, <code>QmFkQm90</code>, in the value of
-	// <code>TargetString</code>.</p> <p> <b>If you're using the AWS CLI or one of the
-	// AWS SDKs</b> </p> <p>The value that you want AWS WAF to search for. The SDK
-	// automatically base64 encodes the value.</p>
+	// If
+	// TargetString includes alphabetic characters A-Z and a-z, note that the value is
+	// case sensitive. If you're using the AWS WAF API Specify a base64-encoded version
+	// of the value. The maximum length of the value before you base64-encode it is 50
+	// bytes. For example, suppose the value of Type is HEADER and the value of Data is
+	// User-Agent. If you want to search the User-Agent header for the value BadBot,
+	// you base64-encode BadBot using MIME base64-encoding and include the resulting
+	// value, QmFkQm90, in the value of TargetString. If you're using the AWS CLI or
+	// one of the AWS SDKs The value that you want AWS WAF to search for. The SDK
+	// automatically base64 encodes the value.
 	//
 	// This member is required.
 	TargetString []byte
@@ -329,27 +324,50 @@ type ByteMatchTuple struct {
 	//     * Convert uppercase letters (A-Z) to
 	// lowercase (a-z)
 	//
-	//     <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to
-	// replace the following characters with a space character (decimal 32):</p> <ul>
-	// <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li>
-	// <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal
-	// 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking
-	// space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also
-	// replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p>
-	// <p>Use this option to replace HTML-encoded characters with unencoded characters.
-	// <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li>
-	// <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li>
-	// <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal
-	// 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than"
-	// symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with
-	// <code>></code> </p> </li> <li> <p>Replaces characters that are represented in
-	// hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding
-	// characters</p> </li> <li> <p>Replaces characters that are represented in decimal
-	// format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p>
-	// </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase
-	// letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this
-	// option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify
-	// <code>NONE</code> if you don't want to perform any text transformations.</p>
+	// COMPRESS_WHITE_SPACE Use this option to replace the following
+	// characters with a space character (decimal 32):
+	//
+	//     * \f, formfeed, decimal
+	// 12
+	//
+	//     * \t, tab, decimal 9
+	//
+	//     * \n, newline, decimal 10
+	//
+	//     * \r, carriage
+	// return, decimal 13
+	//
+	//     * \v, vertical tab, decimal 11
+	//
+	//     * non-breaking
+	// space, decimal 160
+	//
+	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one
+	// space. HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters
+	// with unencoded characters. HTML_ENTITY_DECODE performs the following
+	// operations:
+	//
+	//     * Replaces (ampersand)quot; with "
+	//
+	//     * Replaces
+	// (ampersand)nbsp; with a non-breaking space, decimal 160
+	//
+	//     * Replaces
+	// (ampersand)lt; with a "less than" symbol
+	//
+	//     * Replaces (ampersand)gt; with >
+	//
+	//
+	// * Replaces characters that are represented in hexadecimal format,
+	// (ampersand)#xhhhh;, with the corresponding characters
+	//
+	//     * Replaces characters
+	// that are represented in decimal format, (ampersand)#nnnn;, with the
+	// corresponding characters
+	//
+	// LOWERCASE Use this option to convert uppercase letters
+	// (A-Z) to lowercase (a-z). URL_DECODE Use this option to decode a URL-encoded
+	// value. NONE Specify NONE if you don't want to perform any text transformations.
 	//
 	// This member is required.
 	TextTransformation TextTransformation
@@ -406,10 +424,10 @@ type FieldToMatch struct {
 	// immediately follows the request headers. Note that only the first 8192 bytes of
 	// the request body are forwarded to AWS WAF for inspection. To allow or block
 	// requests based on the length of the body, you can create a size constraint set.
-	// For more information, see CreateSizeConstraintSet ().
+	// For more information, see CreateSizeConstraintSet.
 	//
-	//     * SINGLE_QUERY_ARG:
-	// The parameter in the query string that you will inspect, such as UserName or
+	//     * SINGLE_QUERY_ARG: The
+	// parameter in the query string that you will inspect, such as UserName or
 	// SalesRegion. The maximum length for SINGLE_QUERY_ARG is 30 characters.
 	//
 	//     *
@@ -460,24 +478,23 @@ type GeoMatchConstraint struct {
 // global use. Contains one or more countries that AWS WAF will search for.
 type GeoMatchSet struct {
 
-	// An array of GeoMatchConstraint () objects, which contain the country that you
-	// want AWS WAF to search for.
+	// An array of GeoMatchConstraint objects, which contain the country that you want
+	// AWS WAF to search for.
 	//
 	// This member is required.
 	GeoMatchConstraints []*GeoMatchConstraint
 
 	// The GeoMatchSetId for an GeoMatchSet. You use GeoMatchSetId to get information
-	// about a GeoMatchSet (see GeoMatchSet ()), update a GeoMatchSet (see
-	// UpdateGeoMatchSet ()), insert a GeoMatchSet into a Rule or delete one from a
-	// Rule (see UpdateRule ()), and delete a GeoMatchSet from AWS WAF (see
-	// DeleteGeoMatchSet ()). GeoMatchSetId is returned by CreateGeoMatchSet () and by
-	// ListGeoMatchSets ().
+	// about a GeoMatchSet (see GeoMatchSet), update a GeoMatchSet (see
+	// UpdateGeoMatchSet), insert a GeoMatchSet into a Rule or delete one from a Rule
+	// (see UpdateRule), and delete a GeoMatchSet from AWS WAF (see DeleteGeoMatchSet).
+	// GeoMatchSetId is returned by CreateGeoMatchSet and by ListGeoMatchSets.
 	//
 	// This member is required.
 	GeoMatchSetId *string
 
-	// A friendly name or description of the GeoMatchSet (). You can't change the name
-	// of an GeoMatchSet after you create it.
+	// A friendly name or description of the GeoMatchSet. You can't change the name of
+	// an GeoMatchSet after you create it.
 	Name *string
 }
 
@@ -490,14 +507,14 @@ type GeoMatchSet struct {
 // global use. Contains the identifier and the name of the GeoMatchSet.
 type GeoMatchSetSummary struct {
 
-	// The GeoMatchSetId for an GeoMatchSet (). You can use GeoMatchSetId in a
-	// GetGeoMatchSet () request to get detailed information about an GeoMatchSet ().
+	// The GeoMatchSetId for an GeoMatchSet. You can use GeoMatchSetId in a
+	// GetGeoMatchSet request to get detailed information about an GeoMatchSet.
 	//
 	// This member is required.
 	GeoMatchSetId *string
 
-	// A friendly name or description of the GeoMatchSet (). You can't change the name
-	// of an GeoMatchSet after you create it.
+	// A friendly name or description of the GeoMatchSet. You can't change the name of
+	// an GeoMatchSet after you create it.
 	//
 	// This member is required.
 	Name *string
@@ -509,11 +526,11 @@ type GeoMatchSetSummary struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Specifies the type of update to perform to an GeoMatchSet () with
-// UpdateGeoMatchSet ().
+// global use. Specifies the type of update to perform to an GeoMatchSet with
+// UpdateGeoMatchSet.
 type GeoMatchSetUpdate struct {
 
-	// Specifies whether to insert or delete a country with UpdateGeoMatchSet ().
+	// Specifies whether to insert or delete a country with UpdateGeoMatchSet.
 	//
 	// This member is required.
 	Action ChangeAction
@@ -531,7 +548,7 @@ type GeoMatchSetUpdate struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. The response from a GetSampledRequests () request includes an
+// global use. The response from a GetSampledRequests request includes an
 // HTTPHeader complex type that appears as Headers in the response syntax.
 // HTTPHeader contains the names and values of all of the headers that appear in
 // one of the web requests that were returned by GetSampledRequests.
@@ -550,7 +567,7 @@ type HTTPHeader struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. The response from a GetSampledRequests () request includes an
+// global use. The response from a GetSampledRequests request includes an
 // HTTPRequest complex type that appears as Request in the response syntax.
 // HTTPRequest contains information about one of the web requests that were
 // returned by GetSampledRequests.
@@ -615,15 +632,14 @@ type IPSet struct {
 	IPSetDescriptors []*IPSetDescriptor
 
 	// The IPSetId for an IPSet. You use IPSetId to get information about an IPSet (see
-	// GetIPSet ()), update an IPSet (see UpdateIPSet ()), insert an IPSet into a Rule
-	// or delete one from a Rule (see UpdateRule ()), and delete an IPSet from AWS WAF
-	// (see DeleteIPSet ()). IPSetId is returned by CreateIPSet () and by ListIPSets
-	// ().
+	// GetIPSet), update an IPSet (see UpdateIPSet), insert an IPSet into a Rule or
+	// delete one from a Rule (see UpdateRule), and delete an IPSet from AWS WAF (see
+	// DeleteIPSet). IPSetId is returned by CreateIPSet and by ListIPSets.
 	//
 	// This member is required.
 	IPSetId *string
 
-	// A friendly name or description of the IPSet (). You can't change the name of an
+	// A friendly name or description of the IPSet. You can't change the name of an
 	// IPSet after you create it.
 	Name *string
 }
@@ -653,18 +669,21 @@ type IPSetDescriptor struct {
 	// or count requests that originated from IP addresses from 192.0.2.0 to
 	// 192.0.2.255, specify 192.0.2.0/24.
 	//
-	//     <p>For more information about CIDR
-	// notation, see the Wikipedia entry <a
-	// href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless
-	// Inter-Domain Routing</a>.</p> <p>Specify an IPv6 address by using CIDR notation.
-	// For example:</p> <ul> <li> <p>To configure AWS WAF to allow, block, or count
-	// requests that originated from the IP address
+	// For more information about CIDR notation,
+	// see the Wikipedia entry Classless Inter-Domain Routing
+	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Specify an IPv6
+	// address by using CIDR notation. For example:
+	//
+	//     * To configure AWS WAF to
+	// allow, block, or count requests that originated from the IP address
 	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
-	// <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p> </li> <li> <p>To
-	// configure AWS WAF to allow, block, or count requests that originated from IP
-	// addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
+	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
+	//
+	//     * To configure AWS WAF to
+	// allow, block, or count requests that originated from IP addresses
+	// 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
-	// <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p> </li> </ul>
+	// 1111:0000:0000:0000:0000:0000:0000:0000/64.
 	//
 	// This member is required.
 	Value *string
@@ -679,13 +698,13 @@ type IPSetDescriptor struct {
 // global use. Contains the identifier and the name of the IPSet.
 type IPSetSummary struct {
 
-	// The IPSetId for an IPSet (). You can use IPSetId in a GetIPSet () request to get
-	// detailed information about an IPSet ().
+	// The IPSetId for an IPSet. You can use IPSetId in a GetIPSet request to get
+	// detailed information about an IPSet.
 	//
 	// This member is required.
 	IPSetId *string
 
-	// A friendly name or description of the IPSet (). You can't change the name of an
+	// A friendly name or description of the IPSet. You can't change the name of an
 	// IPSet after you create it.
 	//
 	// This member is required.
@@ -698,11 +717,11 @@ type IPSetSummary struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Specifies the type of update to perform to an IPSet () with
-// UpdateIPSet ().
+// global use. Specifies the type of update to perform to an IPSet with
+// UpdateIPSet.
 type IPSetUpdate struct {
 
-	// Specifies whether to insert or delete an IP address with UpdateIPSet ().
+	// Specifies whether to insert or delete an IP address with UpdateIPSet.
 	//
 	// This member is required.
 	Action ChangeAction
@@ -746,11 +765,11 @@ type LoggingConfiguration struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Specifies the ByteMatchSet (), IPSet (), SqlInjectionMatchSet (),
-// XssMatchSet (), RegexMatchSet (), GeoMatchSet (), and SizeConstraintSet ()
-// objects that you want to add to a Rule and, for each object, indicates whether
-// you want to negate the settings, for example, requests that do NOT originate
-// from the IP address 192.0.2.44.
+// global use. Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet,
+// XssMatchSet, RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
+// want to add to a Rule and, for each object, indicates whether you want to negate
+// the settings, for example, requests that do NOT originate from the IP address
+// 192.0.2.44.
 type Predicate struct {
 
 	// A unique identifier for a predicate in a Rule, such as ByteMatchSetId or
@@ -760,15 +779,15 @@ type Predicate struct {
 	DataId *string
 
 	// Set Negated to False if you want AWS WAF to allow, block, or count requests
-	// based on the settings in the specified ByteMatchSet (), IPSet (),
-	// SqlInjectionMatchSet (), XssMatchSet (), RegexMatchSet (), GeoMatchSet (), or
-	// SizeConstraintSet (). For example, if an IPSet includes the IP address
-	// 192.0.2.44, AWS WAF will allow or block requests based on that IP address. Set
-	// Negated to True if you want AWS WAF to allow or block a request based on the
-	// negation of the settings in the ByteMatchSet (), IPSet (), SqlInjectionMatchSet
-	// (), XssMatchSet (), RegexMatchSet (), GeoMatchSet (), or SizeConstraintSet ().
-	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow,
-	// block, or count requests based on all IP addresses except 192.0.2.44.
+	// based on the settings in the specified ByteMatchSet, IPSet,
+	// SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or
+	// SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44,
+	// AWS WAF will allow or block requests based on that IP address. Set Negated to
+	// True if you want AWS WAF to allow or block a request based on the negation of
+	// the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+	// RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example, if an IPSet
+	// includes the IP address 192.0.2.44, AWS WAF will allow, block, or count requests
+	// based on all IP addresses except 192.0.2.44.
 	//
 	// This member is required.
 	Negated *bool
@@ -785,25 +804,25 @@ type Predicate struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. A RateBasedRule is identical to a regular Rule (), with one
-// addition: a RateBasedRule counts the number of requests that arrive from a
-// specified IP address every five minutes. For example, based on recent requests
-// that you've seen from an attacker, you might create a RateBasedRule that
-// includes the following conditions:
+// global use. A RateBasedRule is identical to a regular Rule, with one addition: a
+// RateBasedRule counts the number of requests that arrive from a specified IP
+// address every five minutes. For example, based on recent requests that you've
+// seen from an attacker, you might create a RateBasedRule that includes the
+// following conditions:
 //
 //     * The requests come from 192.0.2.44.
 //
+//     * They
+// contain the value BadBot in the User-Agent header.
 //
-// * They contain the value BadBot in the User-Agent header.
-//
-// In the rule, you also
-// define the rate limit as 1,000. Requests that meet both of these conditions and
-// exceed 1,000 requests every five minutes trigger the rule's action (block or
-// count), which is defined in the web ACL.
+// In the rule, you also define
+// the rate limit as 1,000. Requests that meet both of these conditions and exceed
+// 1,000 requests every five minutes trigger the rule's action (block or count),
+// which is defined in the web ACL.
 type RateBasedRule struct {
 
-	// The Predicates object contains one Predicate element for each ByteMatchSet (),
-	// IPSet (), or SqlInjectionMatchSet () object that you want to include in a
+	// The Predicates object contains one Predicate element for each ByteMatchSet,
+	// IPSet, or SqlInjectionMatchSet object that you want to include in a
 	// RateBasedRule.
 	//
 	// This member is required.
@@ -826,10 +845,10 @@ type RateBasedRule struct {
 	RateLimit *int64
 
 	// A unique identifier for a RateBasedRule. You use RuleId to get more information
-	// about a RateBasedRule (see GetRateBasedRule ()), update a RateBasedRule (see
-	// UpdateRateBasedRule ()), insert a RateBasedRule into a WebACL or delete one from
-	// a WebACL (see UpdateWebACL ()), or delete a RateBasedRule from AWS WAF (see
-	// DeleteRateBasedRule ()).
+	// about a RateBasedRule (see GetRateBasedRule), update a RateBasedRule (see
+	// UpdateRateBasedRule), insert a RateBasedRule into a WebACL or delete one from a
+	// WebACL (see UpdateWebACL), or delete a RateBasedRule from AWS WAF (see
+	// DeleteRateBasedRule).
 	//
 	// This member is required.
 	RuleId *string
@@ -852,28 +871,28 @@ type RateBasedRule struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. In a GetRegexMatchSet () request, RegexMatchSet is a complex type
-// that contains the RegexMatchSetId and Name of a RegexMatchSet, and the values
-// that you specified when you updated the RegexMatchSet. The values are contained
-// in a RegexMatchTuple object, which specify the parts of web requests that you
-// want AWS WAF to inspect and the values that you want AWS WAF to search for. If a
+// global use. In a GetRegexMatchSet request, RegexMatchSet is a complex type that
+// contains the RegexMatchSetId and Name of a RegexMatchSet, and the values that
+// you specified when you updated the RegexMatchSet. The values are contained in a
+// RegexMatchTuple object, which specify the parts of web requests that you want
+// AWS WAF to inspect and the values that you want AWS WAF to search for. If a
 // RegexMatchSet contains more than one RegexMatchTuple object, a request needs to
 // match the settings in only one ByteMatchTuple to be considered a match.
 type RegexMatchSet struct {
 
-	// A friendly name or description of the RegexMatchSet (). You can't change Name
-	// after you create a RegexMatchSet.
+	// A friendly name or description of the RegexMatchSet. You can't change Name after
+	// you create a RegexMatchSet.
 	Name *string
 
 	// The RegexMatchSetId for a RegexMatchSet. You use RegexMatchSetId to get
-	// information about a RegexMatchSet (see GetRegexMatchSet ()), update a
-	// RegexMatchSet (see UpdateRegexMatchSet ()), insert a RegexMatchSet into a Rule
-	// or delete one from a Rule (see UpdateRule ()), and delete a RegexMatchSet from
-	// AWS WAF (see DeleteRegexMatchSet ()). RegexMatchSetId is returned by
-	// CreateRegexMatchSet () and by ListRegexMatchSets ().
+	// information about a RegexMatchSet (see GetRegexMatchSet), update a RegexMatchSet
+	// (see UpdateRegexMatchSet), insert a RegexMatchSet into a Rule or delete one from
+	// a Rule (see UpdateRule), and delete a RegexMatchSet from AWS WAF (see
+	// DeleteRegexMatchSet). RegexMatchSetId is returned by CreateRegexMatchSet and by
+	// ListRegexMatchSets.
 	RegexMatchSetId *string
 
-	// Contains an array of RegexMatchTuple () objects. Each RegexMatchTuple object
+	// Contains an array of RegexMatchTuple objects. Each RegexMatchTuple object
 	// contains:
 	//
 	//     * The part of a web request that you want AWS WAF to inspect,
@@ -881,7 +900,7 @@ type RegexMatchSet struct {
 	//
 	//     * The
 	// identifier of the pattern (a regular expression) that you want AWS WAF to look
-	// for. For more information, see RegexPatternSet ().
+	// for. For more information, see RegexPatternSet.
 	//
 	//     * Whether to perform any
 	// conversions on the request, such as converting it to lowercase, before
@@ -895,12 +914,12 @@ type RegexMatchSet struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returned by ListRegexMatchSets (). Each RegexMatchSetSummary object
-// includes the Name and RegexMatchSetId for one RegexMatchSet ().
+// global use. Returned by ListRegexMatchSets. Each RegexMatchSetSummary object
+// includes the Name and RegexMatchSetId for one RegexMatchSet.
 type RegexMatchSetSummary struct {
 
-	// A friendly name or description of the RegexMatchSet (). You can't change Name
-	// after you create a RegexMatchSet.
+	// A friendly name or description of the RegexMatchSet. You can't change Name after
+	// you create a RegexMatchSet.
 	//
 	// This member is required.
 	Name *string
@@ -908,8 +927,7 @@ type RegexMatchSetSummary struct {
 	// The RegexMatchSetId for a RegexMatchSet. You use RegexMatchSetId to get
 	// information about a RegexMatchSet, update a RegexMatchSet, remove a
 	// RegexMatchSet from a Rule, and delete a RegexMatchSet from AWS WAF.
-	// RegexMatchSetId is returned by CreateRegexMatchSet () and by ListRegexMatchSets
-	// ().
+	// RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
 	//
 	// This member is required.
 	RegexMatchSetId *string
@@ -921,12 +939,12 @@ type RegexMatchSetSummary struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. In an UpdateRegexMatchSet () request, RegexMatchSetUpdate specifies
-// whether to insert or delete a RegexMatchTuple () and includes the settings for
-// the RegexMatchTuple.
+// global use. In an UpdateRegexMatchSet request, RegexMatchSetUpdate specifies
+// whether to insert or delete a RegexMatchTuple and includes the settings for the
+// RegexMatchTuple.
 type RegexMatchSetUpdate struct {
 
-	// Specifies whether to insert or delete a RegexMatchTuple ().
+	// Specifies whether to insert or delete a RegexMatchTuple.
 	//
 	// This member is required.
 	Action ChangeAction
@@ -957,11 +975,10 @@ type RegexMatchSetUpdate struct {
 //
 //     * The identifier of the pattern (a regular
 // expression) that you want AWS WAF to look for. For more information, see
-// RegexPatternSet ().
+// RegexPatternSet.
 //
-//     * Whether to perform any conversions on the request,
-// such as converting it to lowercase, before inspecting it for the specified
-// string.
+//     * Whether to perform any conversions on the request, such
+// as converting it to lowercase, before inspecting it for the specified string.
 type RegexMatchTuple struct {
 
 	// Specifies where in a web request to look for the RegexPatternSet.
@@ -970,12 +987,12 @@ type RegexMatchTuple struct {
 	FieldToMatch *FieldToMatch
 
 	// The RegexPatternSetId for a RegexPatternSet. You use RegexPatternSetId to get
-	// information about a RegexPatternSet (see GetRegexPatternSet ()), update a
-	// RegexPatternSet (see UpdateRegexPatternSet ()), insert a RegexPatternSet into a
-	// RegexMatchSet or delete one from a RegexMatchSet (see UpdateRegexMatchSet ()),
-	// and delete an RegexPatternSet from AWS WAF (see DeleteRegexPatternSet ()).
-	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
-	// ListRegexPatternSets ().
+	// information about a RegexPatternSet (see GetRegexPatternSet), update a
+	// RegexPatternSet (see UpdateRegexPatternSet), insert a RegexPatternSet into a
+	// RegexMatchSet or delete one from a RegexMatchSet (see UpdateRegexMatchSet), and
+	// delete an RegexPatternSet from AWS WAF (see DeleteRegexPatternSet).
+	// RegexPatternSetId is returned by CreateRegexPatternSet and by
+	// ListRegexPatternSets.
 	//
 	// This member is required.
 	RegexPatternSetId *string
@@ -1002,27 +1019,50 @@ type RegexMatchTuple struct {
 	//     * Convert uppercase letters (A-Z) to
 	// lowercase (a-z)
 	//
-	//     <p> <b>COMPRESS_WHITE_SPACE</b> </p> <p>Use this option to
-	// replace the following characters with a space character (decimal 32):</p> <ul>
-	// <li> <p>\f, formfeed, decimal 12</p> </li> <li> <p>\t, tab, decimal 9</p> </li>
-	// <li> <p>\n, newline, decimal 10</p> </li> <li> <p>\r, carriage return, decimal
-	// 13</p> </li> <li> <p>\v, vertical tab, decimal 11</p> </li> <li> <p>non-breaking
-	// space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also
-	// replaces multiple spaces with one space.</p> <p> <b>HTML_ENTITY_DECODE</b> </p>
-	// <p>Use this option to replace HTML-encoded characters with unencoded characters.
-	// <code>HTML_ENTITY_DECODE</code> performs the following operations:</p> <ul> <li>
-	// <p>Replaces <code>(ampersand)quot;</code> with <code>"</code> </p> </li> <li>
-	// <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal
-	// 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a "less than"
-	// symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with
-	// <code>></code> </p> </li> <li> <p>Replaces characters that are represented in
-	// hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding
-	// characters</p> </li> <li> <p>Replaces characters that are represented in decimal
-	// format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p>
-	// </li> </ul> <p> <b>LOWERCASE</b> </p> <p>Use this option to convert uppercase
-	// letters (A-Z) to lowercase (a-z).</p> <p> <b>URL_DECODE</b> </p> <p>Use this
-	// option to decode a URL-encoded value.</p> <p> <b>NONE</b> </p> <p>Specify
-	// <code>NONE</code> if you don't want to perform any text transformations.</p>
+	// COMPRESS_WHITE_SPACE Use this option to replace the following
+	// characters with a space character (decimal 32):
+	//
+	//     * \f, formfeed, decimal
+	// 12
+	//
+	//     * \t, tab, decimal 9
+	//
+	//     * \n, newline, decimal 10
+	//
+	//     * \r, carriage
+	// return, decimal 13
+	//
+	//     * \v, vertical tab, decimal 11
+	//
+	//     * non-breaking
+	// space, decimal 160
+	//
+	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one
+	// space. HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters
+	// with unencoded characters. HTML_ENTITY_DECODE performs the following
+	// operations:
+	//
+	//     * Replaces (ampersand)quot; with "
+	//
+	//     * Replaces
+	// (ampersand)nbsp; with a non-breaking space, decimal 160
+	//
+	//     * Replaces
+	// (ampersand)lt; with a "less than" symbol
+	//
+	//     * Replaces (ampersand)gt; with >
+	//
+	//
+	// * Replaces characters that are represented in hexadecimal format,
+	// (ampersand)#xhhhh;, with the corresponding characters
+	//
+	//     * Replaces characters
+	// that are represented in decimal format, (ampersand)#nnnn;, with the
+	// corresponding characters
+	//
+	// LOWERCASE Use this option to convert uppercase letters
+	// (A-Z) to lowercase (a-z). URL_DECODE Use this option to decode a URL-encoded
+	// value. NONE Specify NONE if you don't want to perform any text transformations.
 	//
 	// This member is required.
 	TextTransformation TextTransformation
@@ -1042,8 +1082,8 @@ type RegexPatternSet struct {
 	// The identifier for the RegexPatternSet. You use RegexPatternSetId to get
 	// information about a RegexPatternSet, update a RegexPatternSet, remove a
 	// RegexPatternSet from a RegexMatchSet, and delete a RegexPatternSet from AWS WAF.
-	// RegexMatchSetId is returned by CreateRegexPatternSet () and by
-	// ListRegexPatternSets ().
+	// RegexMatchSetId is returned by CreateRegexPatternSet and by
+	// ListRegexPatternSets.
 	//
 	// This member is required.
 	RegexPatternSetId *string
@@ -1054,7 +1094,7 @@ type RegexPatternSet struct {
 	// This member is required.
 	RegexPatternStrings []*string
 
-	// A friendly name or description of the RegexPatternSet (). You can't change Name
+	// A friendly name or description of the RegexPatternSet. You can't change Name
 	// after you create a RegexPatternSet.
 	Name *string
 }
@@ -1065,11 +1105,11 @@ type RegexPatternSet struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returned by ListRegexPatternSets (). Each RegexPatternSetSummary
-// object includes the Name and RegexPatternSetId for one RegexPatternSet ().
+// global use. Returned by ListRegexPatternSets. Each RegexPatternSetSummary object
+// includes the Name and RegexPatternSetId for one RegexPatternSet.
 type RegexPatternSetSummary struct {
 
-	// A friendly name or description of the RegexPatternSet (). You can't change Name
+	// A friendly name or description of the RegexPatternSet. You can't change Name
 	// after you create a RegexPatternSet.
 	//
 	// This member is required.
@@ -1078,8 +1118,8 @@ type RegexPatternSetSummary struct {
 	// The RegexPatternSetId for a RegexPatternSet. You use RegexPatternSetId to get
 	// information about a RegexPatternSet, update a RegexPatternSet, remove a
 	// RegexPatternSet from a RegexMatchSet, and delete a RegexPatternSet from AWS WAF.
-	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
-	// ListRegexPatternSets ().
+	// RegexPatternSetId is returned by CreateRegexPatternSet and by
+	// ListRegexPatternSets.
 	//
 	// This member is required.
 	RegexPatternSetId *string
@@ -1091,9 +1131,9 @@ type RegexPatternSetSummary struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. In an UpdateRegexPatternSet () request, RegexPatternSetUpdate
-// specifies whether to insert or delete a RegexPatternString and includes the
-// settings for the RegexPatternString.
+// global use. In an UpdateRegexPatternSet request, RegexPatternSetUpdate specifies
+// whether to insert or delete a RegexPatternString and includes the settings for
+// the RegexPatternString.
 type RegexPatternSetUpdate struct {
 
 	// Specifies whether to insert or delete a RegexPatternString.
@@ -1114,34 +1154,32 @@ type RegexPatternSetUpdate struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. A combination of ByteMatchSet (), IPSet (), and/or
-// SqlInjectionMatchSet () objects that identify the web requests that you want to
-// allow, block, or count. For example, you might create a Rule that includes the
-// following predicates:
+// global use. A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet
+// objects that identify the web requests that you want to allow, block, or count.
+// For example, you might create a Rule that includes the following predicates:
 //
-//     * An IPSet that causes AWS WAF to search for web
-// requests that originate from the IP address 192.0.2.44
 //
-//     * A ByteMatchSet
-// that causes AWS WAF to search for web requests for which the value of the
-// User-Agent header is BadBot.
+// * An IPSet that causes AWS WAF to search for web requests that originate from
+// the IP address 192.0.2.44
 //
-// To match the settings in this Rule, a request must
-// originate from 192.0.2.44 AND include a User-Agent header for which the value is
-// BadBot.
+//     * A ByteMatchSet that causes AWS WAF to search
+// for web requests for which the value of the User-Agent header is BadBot.
+//
+// To
+// match the settings in this Rule, a request must originate from 192.0.2.44 AND
+// include a User-Agent header for which the value is BadBot.
 type Rule struct {
 
-	// The Predicates object contains one Predicate element for each ByteMatchSet (),
-	// IPSet (), or SqlInjectionMatchSet () object that you want to include in a Rule.
+	// The Predicates object contains one Predicate element for each ByteMatchSet,
+	// IPSet, or SqlInjectionMatchSet object that you want to include in a Rule.
 	//
 	// This member is required.
 	Predicates []*Predicate
 
 	// A unique identifier for a Rule. You use RuleId to get more information about a
-	// Rule (see GetRule ()), update a Rule (see UpdateRule ()), insert a Rule into a
-	// WebACL or delete a one from a WebACL (see UpdateWebACL ()), or delete a Rule
-	// from AWS WAF (see DeleteRule ()). RuleId is returned by CreateRule () and by
-	// ListRules ().
+	// Rule (see GetRule), update a Rule (see UpdateRule), insert a Rule into a WebACL
+	// or delete a one from a WebACL (see UpdateWebACL), or delete a Rule from AWS WAF
+	// (see DeleteRule). RuleId is returned by CreateRule and by ListRules.
 	//
 	// This member is required.
 	RuleId *string
@@ -1177,10 +1215,10 @@ type Rule struct {
 type RuleGroup struct {
 
 	// A unique identifier for a RuleGroup. You use RuleGroupId to get more information
-	// about a RuleGroup (see GetRuleGroup ()), update a RuleGroup (see UpdateRuleGroup
-	// ()), insert a RuleGroup into a WebACL or delete a one from a WebACL (see
-	// UpdateWebACL ()), or delete a RuleGroup from AWS WAF (see DeleteRuleGroup ()).
-	// RuleGroupId is returned by CreateRuleGroup () and by ListRuleGroups ().
+	// about a RuleGroup (see GetRuleGroup), update a RuleGroup (see UpdateRuleGroup),
+	// insert a RuleGroup into a WebACL or delete a one from a WebACL (see
+	// UpdateWebACL), or delete a RuleGroup from AWS WAF (see DeleteRuleGroup).
+	// RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
 	//
 	// This member is required.
 	RuleGroupId *string
@@ -1207,17 +1245,17 @@ type RuleGroup struct {
 // RuleGroup.
 type RuleGroupSummary struct {
 
-	// A friendly name or description of the RuleGroup (). You can't change the name of
-	// a RuleGroup after you create it.
+	// A friendly name or description of the RuleGroup. You can't change the name of a
+	// RuleGroup after you create it.
 	//
 	// This member is required.
 	Name *string
 
 	// A unique identifier for a RuleGroup. You use RuleGroupId to get more information
-	// about a RuleGroup (see GetRuleGroup ()), update a RuleGroup (see UpdateRuleGroup
-	// ()), insert a RuleGroup into a WebACL or delete one from a WebACL (see
-	// UpdateWebACL ()), or delete a RuleGroup from AWS WAF (see DeleteRuleGroup ()).
-	// RuleGroupId is returned by CreateRuleGroup () and by ListRuleGroups ().
+	// about a RuleGroup (see GetRuleGroup), update a RuleGroup (see UpdateRuleGroup),
+	// insert a RuleGroup into a WebACL or delete one from a WebACL (see UpdateWebACL),
+	// or delete a RuleGroup from AWS WAF (see DeleteRuleGroup). RuleGroupId is
+	// returned by CreateRuleGroup and by ListRuleGroups.
 	//
 	// This member is required.
 	RuleGroupId *string
@@ -1257,17 +1295,16 @@ type RuleGroupUpdate struct {
 // Rule.
 type RuleSummary struct {
 
-	// A friendly name or description of the Rule (). You can't change the name of a
-	// Rule after you create it.
+	// A friendly name or description of the Rule. You can't change the name of a Rule
+	// after you create it.
 	//
 	// This member is required.
 	Name *string
 
 	// A unique identifier for a Rule. You use RuleId to get more information about a
-	// Rule (see GetRule ()), update a Rule (see UpdateRule ()), insert a Rule into a
-	// WebACL or delete one from a WebACL (see UpdateWebACL ()), or delete a Rule from
-	// AWS WAF (see DeleteRule ()). RuleId is returned by CreateRule () and by
-	// ListRules ().
+	// Rule (see GetRule), update a Rule (see UpdateRule), insert a Rule into a WebACL
+	// or delete one from a WebACL (see UpdateWebACL), or delete a Rule from AWS WAF
+	// (see DeleteRule). RuleId is returned by CreateRule and by ListRules.
 	//
 	// This member is required.
 	RuleId *string
@@ -1301,7 +1338,7 @@ type RuleUpdate struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. The response from a GetSampledRequests () request includes a
+// global use. The response from a GetSampledRequests request includes a
 // SampledHTTPRequests complex type that appears as SampledRequests in the response
 // syntax. SampledHTTPRequests contains one SampledHTTPRequest object for each web
 // request that is returned by GetSampledRequests.
@@ -1463,12 +1500,12 @@ type SizeConstraint struct {
 type SizeConstraintSet struct {
 
 	// A unique identifier for a SizeConstraintSet. You use SizeConstraintSetId to get
-	// information about a SizeConstraintSet (see GetSizeConstraintSet ()), update a
-	// SizeConstraintSet (see UpdateSizeConstraintSet ()), insert a SizeConstraintSet
-	// into a Rule or delete one from a Rule (see UpdateRule ()), and delete a
-	// SizeConstraintSet from AWS WAF (see DeleteSizeConstraintSet ()).
-	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
-	// ListSizeConstraintSets ().
+	// information about a SizeConstraintSet (see GetSizeConstraintSet), update a
+	// SizeConstraintSet (see UpdateSizeConstraintSet), insert a SizeConstraintSet into
+	// a Rule or delete one from a Rule (see UpdateRule), and delete a
+	// SizeConstraintSet from AWS WAF (see DeleteSizeConstraintSet).
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by
+	// ListSizeConstraintSets.
 	//
 	// This member is required.
 	SizeConstraintSetId *string
@@ -1497,12 +1534,12 @@ type SizeConstraintSetSummary struct {
 	Name *string
 
 	// A unique identifier for a SizeConstraintSet. You use SizeConstraintSetId to get
-	// information about a SizeConstraintSet (see GetSizeConstraintSet ()), update a
-	// SizeConstraintSet (see UpdateSizeConstraintSet ()), insert a SizeConstraintSet
-	// into a Rule or delete one from a Rule (see UpdateRule ()), and delete a
-	// SizeConstraintSet from AWS WAF (see DeleteSizeConstraintSet ()).
-	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
-	// ListSizeConstraintSets ().
+	// information about a SizeConstraintSet (see GetSizeConstraintSet), update a
+	// SizeConstraintSet (see UpdateSizeConstraintSet), insert a SizeConstraintSet into
+	// a Rule or delete one from a Rule (see UpdateRule), and delete a
+	// SizeConstraintSet from AWS WAF (see DeleteSizeConstraintSet).
+	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by
+	// ListSizeConstraintSets.
 	//
 	// This member is required.
 	SizeConstraintSetId *string
@@ -1516,11 +1553,11 @@ type SizeConstraintSetSummary struct {
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Specifies the part of a web request that you want to inspect the
 // size of and indicates whether you want to add the specification to a
-// SizeConstraintSet () or delete it from a SizeConstraintSet.
+// SizeConstraintSet or delete it from a SizeConstraintSet.
 type SizeConstraintSetUpdate struct {
 
-	// Specify INSERT to add a SizeConstraintSetUpdate () to a SizeConstraintSet ().
-	// Use DELETE to remove a SizeConstraintSetUpdate from a SizeConstraintSet.
+	// Specify INSERT to add a SizeConstraintSetUpdate to a SizeConstraintSet. Use
+	// DELETE to remove a SizeConstraintSetUpdate from a SizeConstraintSet.
 	//
 	// This member is required.
 	Action ChangeAction
@@ -1549,12 +1586,12 @@ type SizeConstraintSetUpdate struct {
 type SqlInjectionMatchSet struct {
 
 	// A unique identifier for a SqlInjectionMatchSet. You use SqlInjectionMatchSetId
-	// to get information about a SqlInjectionMatchSet (see GetSqlInjectionMatchSet
-	// ()), update a SqlInjectionMatchSet (see UpdateSqlInjectionMatchSet ()), insert a
-	// SqlInjectionMatchSet into a Rule or delete one from a Rule (see UpdateRule ()),
-	// and delete a SqlInjectionMatchSet from AWS WAF (see DeleteSqlInjectionMatchSet
-	// ()). SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet () and by
-	// ListSqlInjectionMatchSets ().
+	// to get information about a SqlInjectionMatchSet (see GetSqlInjectionMatchSet),
+	// update a SqlInjectionMatchSet (see UpdateSqlInjectionMatchSet), insert a
+	// SqlInjectionMatchSet into a Rule or delete one from a Rule (see UpdateRule), and
+	// delete a SqlInjectionMatchSet from AWS WAF (see DeleteSqlInjectionMatchSet).
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
+	// ListSqlInjectionMatchSets.
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
@@ -1584,12 +1621,12 @@ type SqlInjectionMatchSetSummary struct {
 	Name *string
 
 	// A unique identifier for a SqlInjectionMatchSet. You use SqlInjectionMatchSetId
-	// to get information about a SqlInjectionMatchSet (see GetSqlInjectionMatchSet
-	// ()), update a SqlInjectionMatchSet (see UpdateSqlInjectionMatchSet ()), insert a
-	// SqlInjectionMatchSet into a Rule or delete one from a Rule (see UpdateRule ()),
-	// and delete a SqlInjectionMatchSet from AWS WAF (see DeleteSqlInjectionMatchSet
-	// ()). SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet () and by
-	// ListSqlInjectionMatchSets ().
+	// to get information about a SqlInjectionMatchSet (see GetSqlInjectionMatchSet),
+	// update a SqlInjectionMatchSet (see UpdateSqlInjectionMatchSet), insert a
+	// SqlInjectionMatchSet into a Rule or delete one from a Rule (see UpdateRule), and
+	// delete a SqlInjectionMatchSet from AWS WAF (see DeleteSqlInjectionMatchSet).
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
+	// ListSqlInjectionMatchSets.
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
@@ -1603,13 +1640,12 @@ type SqlInjectionMatchSetSummary struct {
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Specifies the part of a web request that you want to inspect for
 // snippets of malicious SQL code and indicates whether you want to add the
-// specification to a SqlInjectionMatchSet () or delete it from a
+// specification to a SqlInjectionMatchSet or delete it from a
 // SqlInjectionMatchSet.
 type SqlInjectionMatchSetUpdate struct {
 
-	// Specify INSERT to add a SqlInjectionMatchSetUpdate () to a SqlInjectionMatchSet
-	// (). Use DELETE to remove a SqlInjectionMatchSetUpdate from a
-	// SqlInjectionMatchSet.
+	// Specify INSERT to add a SqlInjectionMatchSetUpdate to a SqlInjectionMatchSet.
+	// Use DELETE to remove a SqlInjectionMatchSetUpdate from a SqlInjectionMatchSet.
 	//
 	// This member is required.
 	Action ChangeAction
@@ -1795,17 +1831,17 @@ type TagInfoForResource struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. In a GetSampledRequests () request, the StartTime and EndTime
-// objects specify the time range for which you want AWS WAF to return a sample of
-// web requests. You must specify the times in Coordinated Universal Time (UTC)
-// format. UTC format includes the special designator, Z. For example,
-// "2016-09-27T14:50Z". In a GetSampledRequests () response, the StartTime and
-// EndTime objects specify the time range for which AWS WAF actually returned a
-// sample of web requests. AWS WAF gets the specified number of requests from among
-// the first 5,000 requests that your AWS resource receives during the specified
-// time period. If your resource receives more than 5,000 requests during that
-// period, AWS WAF stops sampling after the 5,000th request. In that case, EndTime
-// is the time that AWS WAF received the 5,000th request.
+// global use. In a GetSampledRequests request, the StartTime and EndTime objects
+// specify the time range for which you want AWS WAF to return a sample of web
+// requests. You must specify the times in Coordinated Universal Time (UTC) format.
+// UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z".
+// In a GetSampledRequests response, the StartTime and EndTime objects specify the
+// time range for which AWS WAF actually returned a sample of web requests. AWS WAF
+// gets the specified number of requests from among the first 5,000 requests that
+// your AWS resource receives during the specified time period. If your resource
+// receives more than 5,000 requests during that period, AWS WAF stops sampling
+// after the 5,000th request. In that case, EndTime is the time that AWS WAF
+// received the 5,000th request.
 type TimeWindow struct {
 
 	// The end of the time range from which you want GetSampledRequests to return a
@@ -1887,11 +1923,11 @@ type WafOverrideAction struct {
 // referrers. You also associate the WebACL with a CloudFront distribution to
 // identify the requests that you want AWS WAF to filter. If you add more than one
 // Rule to a WebACL, a request needs to match only one of the specifications to be
-// allowed, blocked, or counted. For more information, see UpdateWebACL ().
+// allowed, blocked, or counted. For more information, see UpdateWebACL.
 type WebACL struct {
 
 	// The action to perform if none of the Rules contained in the WebACL match. The
-	// action is specified by the WafAction () object.
+	// action is specified by the WafAction object.
 	//
 	// This member is required.
 	DefaultAction *WafAction
@@ -1903,9 +1939,9 @@ type WebACL struct {
 	Rules []*ActivatedRule
 
 	// A unique identifier for a WebACL. You use WebACLId to get information about a
-	// WebACL (see GetWebACL ()), update a WebACL (see UpdateWebACL ()), and delete a
-	// WebACL from AWS WAF (see DeleteWebACL ()). WebACLId is returned by CreateWebACL
-	// () and by ListWebACLs ().
+	// WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete a WebACL
+	// from AWS WAF (see DeleteWebACL). WebACLId is returned by CreateWebACL and by
+	// ListWebACLs.
 	//
 	// This member is required.
 	WebACLId *string
@@ -1931,20 +1967,19 @@ type WebACL struct {
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Contains the identifier and the name or description of the WebACL
-// ().
+// global use. Contains the identifier and the name or description of the WebACL.
 type WebACLSummary struct {
 
-	// A friendly name or description of the WebACL (). You can't change the name of a
+	// A friendly name or description of the WebACL. You can't change the name of a
 	// WebACL after you create it.
 	//
 	// This member is required.
 	Name *string
 
 	// A unique identifier for a WebACL. You use WebACLId to get information about a
-	// WebACL (see GetWebACL ()), update a WebACL (see UpdateWebACL ()), and delete a
-	// WebACL from AWS WAF (see DeleteWebACL ()). WebACLId is returned by CreateWebACL
-	// () and by ListWebACLs ().
+	// WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete a WebACL
+	// from AWS WAF (see DeleteWebACL). WebACLId is returned by CreateWebACL and by
+	// ListWebACLs.
 	//
 	// This member is required.
 	WebACLId *string
@@ -1965,7 +2000,7 @@ type WebACLUpdate struct {
 	// This member is required.
 	Action ChangeAction
 
-	// The ActivatedRule object in an UpdateWebACL () request specifies a Rule that you
+	// The ActivatedRule object in an UpdateWebACL request specifies a Rule that you
 	// want to insert or delete, the priority of the Rule in the WebACL, and the action
 	// that you want AWS WAF to take when a web request matches the Rule (ALLOW, BLOCK,
 	// or COUNT).
@@ -1989,11 +2024,11 @@ type WebACLUpdate struct {
 type XssMatchSet struct {
 
 	// A unique identifier for an XssMatchSet. You use XssMatchSetId to get information
-	// about an XssMatchSet (see GetXssMatchSet ()), update an XssMatchSet (see
-	// UpdateXssMatchSet ()), insert an XssMatchSet into a Rule or delete one from a
-	// Rule (see UpdateRule ()), and delete an XssMatchSet from AWS WAF (see
-	// DeleteXssMatchSet ()). XssMatchSetId is returned by CreateXssMatchSet () and by
-	// ListXssMatchSets ().
+	// about an XssMatchSet (see GetXssMatchSet), update an XssMatchSet (see
+	// UpdateXssMatchSet), insert an XssMatchSet into a Rule or delete one from a Rule
+	// (see UpdateRule), and delete an XssMatchSet from AWS WAF (see
+	// DeleteXssMatchSet). XssMatchSetId is returned by CreateXssMatchSet and by
+	// ListXssMatchSets.
 	//
 	// This member is required.
 	XssMatchSetId *string
@@ -2023,11 +2058,11 @@ type XssMatchSetSummary struct {
 	Name *string
 
 	// A unique identifier for an XssMatchSet. You use XssMatchSetId to get information
-	// about a XssMatchSet (see GetXssMatchSet ()), update an XssMatchSet (see
-	// UpdateXssMatchSet ()), insert an XssMatchSet into a Rule or delete one from a
-	// Rule (see UpdateRule ()), and delete an XssMatchSet from AWS WAF (see
-	// DeleteXssMatchSet ()). XssMatchSetId is returned by CreateXssMatchSet () and by
-	// ListXssMatchSets ().
+	// about a XssMatchSet (see GetXssMatchSet), update an XssMatchSet (see
+	// UpdateXssMatchSet), insert an XssMatchSet into a Rule or delete one from a Rule
+	// (see UpdateRule), and delete an XssMatchSet from AWS WAF (see
+	// DeleteXssMatchSet). XssMatchSetId is returned by CreateXssMatchSet and by
+	// ListXssMatchSets.
 	//
 	// This member is required.
 	XssMatchSetId *string
@@ -2041,11 +2076,11 @@ type XssMatchSetSummary struct {
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Specifies the part of a web request that you want to inspect for
 // cross-site scripting attacks and indicates whether you want to add the
-// specification to an XssMatchSet () or delete it from an XssMatchSet.
+// specification to an XssMatchSet or delete it from an XssMatchSet.
 type XssMatchSetUpdate struct {
 
-	// Specify INSERT to add an XssMatchSetUpdate () to an XssMatchSet (). Use DELETE
-	// to remove an XssMatchSetUpdate from an XssMatchSet.
+	// Specify INSERT to add an XssMatchSetUpdate to an XssMatchSet. Use DELETE to
+	// remove an XssMatchSetUpdate from an XssMatchSet.
 	//
 	// This member is required.
 	Action ChangeAction

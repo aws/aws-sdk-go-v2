@@ -252,12 +252,14 @@ type UpdateItemInput struct {
 	// example, if the attribute value was the set [a,b,c] and the DELETE action
 	// specifies [a,c], then the final attribute value is [b]. Specifying an empty set
 	// is an error. The DELETE action only supports set data types. In addition, DELETE
-	// can only be used on top-level attributes, not nested attributes.  </li> </ul>
-	// <p>You can have many actions in a single expression, such as the following:
-	// <code>SET a=:value1, b=:value2 DELETE :value3, :value4, :value5</code> </p>
-	// <p>For more information on update expressions, see <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html">Modifying
-	// Items and Attributes</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
+	// can only be used on top-level attributes, not nested attributes.
+	//
+	// You can have
+	// many actions in a single expression, such as the following: SET a=:value1,
+	// b=:value2 DELETE :value3, :value4, :value5 For more information on update
+	// expressions, see Modifying Items and Attributes
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html)
+	// in the Amazon DynamoDB Developer Guide.
 	UpdateExpression *string
 }
 

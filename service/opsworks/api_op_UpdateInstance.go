@@ -52,7 +52,7 @@ type UpdateInstanceInput struct {
 	// The default setting is INHERIT. To specify an agent
 	// version, you must use the complete version number, not the abbreviated number
 	// shown on the console. For a list of available agent version numbers, call
-	// DescribeAgentVersions (). AgentVersion cannot be set to Chef 12.2.
+	// DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
 	AgentVersion *string
 
 	// The ID of the AMI that was used to create the instance. The value of this
@@ -80,10 +80,10 @@ type UpdateInstanceInput struct {
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
-	// () to run the update_dependencies stack command or by manually running yum
-	// (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using
-	// the default value of true, to ensure that your instances have the latest
-	// security updates.
+	// to run the update_dependencies stack command or by manually running yum (Amazon
+	// Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the
+	// default value of true, to ensure that your instances have the latest security
+	// updates.
 	InstallUpdatesOnBoot *bool
 
 	// The instance type, such as t2.micro. For a list of supported instance types,

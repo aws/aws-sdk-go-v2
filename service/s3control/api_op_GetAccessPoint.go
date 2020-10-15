@@ -12,21 +12,26 @@ import (
 	"time"
 )
 
-// Returns configuration information about the specified access point.  <p>All
-// Amazon S3 on Outposts REST API requests for this action require an additional
-// parameter of outpost-id to be passed with the request and an S3 on Outposts
-// endpoint hostname prefix instead of s3-control. For an example of the request
-// syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname
-// prefix and the outpost-id derived using the access point ARN, see the <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetAccessPoint.html#API_control_GetAccessPoint_Examples">
-// Example</a> section below.</p> <p>The following actions are related to
-// <code>GetAccessPoint</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html">CreateAccessPoint</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html">DeleteAccessPoint</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html">ListAccessPoints</a>
-// </p> </li> </ul>
+// Returns configuration information about the specified access point. All Amazon
+// S3 on Outposts REST API requests for this action require an additional parameter
+// of outpost-id to be passed with the request and an S3 on Outposts endpoint
+// hostname prefix instead of s3-control. For an example of the request syntax for
+// Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and
+// the outpost-id derived using the access point ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
+// section below. The following actions are related to GetAccessPoint:
+//
+//     *
+// CreateAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
+//
+//
+// * DeleteAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
+//
+//
+// * ListAccessPoints
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
 func (c *Client) GetAccessPoint(ctx context.Context, params *GetAccessPointInput, optFns ...func(*Options)) (*GetAccessPointOutput, error) {
 	if params == nil {
 		params = &GetAccessPointInput{}

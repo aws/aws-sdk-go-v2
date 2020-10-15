@@ -55,7 +55,7 @@ type AlgorithmImage struct {
 	Name *string
 }
 
-// When the solution performs AutoML (performAutoML is true in CreateSolution ()),
+// When the solution performs AutoML (performAutoML is true in CreateSolution),
 // Amazon Personalize determines which recipe, from the specified list, optimizes
 // the given metric. Amazon Personalize then uses that recipe for the solution.
 type AutoMLConfig struct {
@@ -67,7 +67,7 @@ type AutoMLConfig struct {
 	RecipeList []*string
 }
 
-// When the solution performs AutoML (performAutoML is true in CreateSolution ()),
+// When the solution performs AutoML (performAutoML is true in CreateSolution),
 // specifies the recipe that best optimized the specified metric.
 type AutoMLResult struct {
 
@@ -149,8 +149,8 @@ type BatchInferenceJobOutput struct {
 	S3DataDestination *S3DataConfig
 }
 
-// A truncated version of the BatchInferenceJob () datatype. The
-// ListBatchInferenceJobs () operation returns a list of batch inference job
+// A truncated version of the BatchInferenceJob datatype. The
+// ListBatchInferenceJobs operation returns a list of batch inference job
 // summaries.
 type BatchInferenceJobSummary struct {
 
@@ -186,7 +186,7 @@ type BatchInferenceJobSummary struct {
 }
 
 // Describes a deployed solution version, otherwise known as a campaign. For more
-// information on campaigns, see CreateCampaign ().
+// information on campaigns, see CreateCampaign.
 type Campaign struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.
@@ -202,7 +202,7 @@ type Campaign struct {
 	LastUpdatedDateTime *time.Time
 
 	// Provides a summary of the properties of a campaign update. For a complete
-	// listing, call the DescribeCampaign () API.
+	// listing, call the DescribeCampaign API.
 	LatestCampaignUpdate *CampaignUpdateSummary
 
 	// Specifies the requested minimum provisioned transactions (recommendations) per
@@ -226,7 +226,7 @@ type Campaign struct {
 }
 
 // Provides a summary of the properties of a campaign. For a complete listing, call
-// the DescribeCampaign () API.
+// the DescribeCampaign API.
 type CampaignSummary struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.
@@ -255,7 +255,7 @@ type CampaignSummary struct {
 }
 
 // Provides a summary of the properties of a campaign update. For a complete
-// listing, call the DescribeCampaign () API.
+// listing, call the DescribeCampaign API.
 type CampaignUpdateSummary struct {
 
 	// The date and time (in Unix time) that the campaign update was created.
@@ -348,12 +348,11 @@ type Dataset struct {
 }
 
 // A dataset group is a collection of related datasets (Interactions, User, and
-// Item). You create a dataset group by calling CreateDatasetGroup (). You then
-// create a dataset and add it to a dataset group by calling CreateDataset (). The
-// dataset group is used to create and train a solution by calling CreateSolution
-// (). A dataset group can contain only one of each type of dataset. You can
-// specify an AWS Key Management Service (KMS) key to encrypt the datasets in the
-// group.
+// Item). You create a dataset group by calling CreateDatasetGroup. You then create
+// a dataset and add it to a dataset group by calling CreateDataset. The dataset
+// group is used to create and train a solution by calling CreateSolution. A
+// dataset group can contain only one of each type of dataset. You can specify an
+// AWS Key Management Service (KMS) key to encrypt the datasets in the group.
 type DatasetGroup struct {
 
 	// The creation date and time (in Unix time) of the dataset group.
@@ -388,7 +387,7 @@ type DatasetGroup struct {
 }
 
 // Provides a summary of the properties of a dataset group. For a complete listing,
-// call the DescribeDatasetGroup () API.
+// call the DescribeDatasetGroup API.
 type DatasetGroupSummary struct {
 
 	// The date and time (in Unix time) that the dataset group was created.
@@ -418,7 +417,7 @@ type DatasetGroupSummary struct {
 
 // Describes a job that imports training data from a data source (Amazon S3 bucket)
 // to an Amazon Personalize dataset. For more information, see
-// CreateDatasetImportJob (). A dataset import job can be in one of the following
+// CreateDatasetImportJob. A dataset import job can be in one of the following
 // states:
 //
 //     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
@@ -458,7 +457,7 @@ type DatasetImportJob struct {
 }
 
 // Provides a summary of the properties of a dataset import job. For a complete
-// listing, call the DescribeDatasetImportJob () API.
+// listing, call the DescribeDatasetImportJob API.
 type DatasetImportJobSummary struct {
 
 	// The date and time (in Unix time) that the dataset import job was created.
@@ -485,7 +484,7 @@ type DatasetImportJobSummary struct {
 }
 
 // Describes the schema for a dataset. For more information on schemas, see
-// CreateSchema ().
+// CreateSchema.
 type DatasetSchema struct {
 
 	// The date and time (in Unix time) that the schema was created.
@@ -505,7 +504,7 @@ type DatasetSchema struct {
 }
 
 // Provides a summary of the properties of a dataset schema. For a complete
-// listing, call the DescribeSchema () API.
+// listing, call the DescribeSchema API.
 type DatasetSchemaSummary struct {
 
 	// The date and time (in Unix time) that the schema was created.
@@ -522,7 +521,7 @@ type DatasetSchemaSummary struct {
 }
 
 // Provides a summary of the properties of a dataset. For a complete listing, call
-// the DescribeDataset () API.
+// the DescribeDataset API.
 type DatasetSummary struct {
 
 	// The date and time (in Unix time) that the dataset was created.
@@ -669,7 +668,7 @@ type EventTracker struct {
 }
 
 // Provides a summary of the properties of an event tracker. For a complete
-// listing, call the DescribeEventTracker () API.
+// listing, call the DescribeEventTracker API.
 type EventTrackerSummary struct {
 
 	// The date and time (in Unix time) that the event tracker was created.
@@ -847,7 +846,7 @@ type IntegerHyperParameterRange struct {
 }
 
 // Provides information about a recipe. Each recipe provides an algorithm that
-// Amazon Personalize uses in model training when you use the CreateSolution ()
+// Amazon Personalize uses in model training when you use the CreateSolution
 // operation.
 type Recipe struct {
 
@@ -888,7 +887,7 @@ type Recipe struct {
 }
 
 // Provides a summary of the properties of a recipe. For a complete listing, call
-// the DescribeRecipe () API.
+// the DescribeRecipe API.
 type RecipeSummary struct {
 
 	// The date and time (in Unix time) that the recipe was created.
@@ -983,7 +982,7 @@ type SolutionConfig struct {
 	// Lists the hyperparameter names and ranges.
 	AlgorithmHyperParameters map[string]*string
 
-	// The AutoMLConfig () object containing a list of recipes to search when AutoML is
+	// The AutoMLConfig object containing a list of recipes to search when AutoML is
 	// performed.
 	AutoMLConfig *AutoMLConfig
 
@@ -999,7 +998,7 @@ type SolutionConfig struct {
 }
 
 // Provides a summary of the properties of a solution. For a complete listing, call
-// the DescribeSolution () API.
+// the DescribeSolution API.
 type SolutionSummary struct {
 
 	// The date and time (in Unix time) that the solution was created.
@@ -1024,7 +1023,7 @@ type SolutionSummary struct {
 	Status *string
 }
 
-// An object that provides information about a specific version of a Solution ().
+// An object that provides information about a specific version of a Solution.
 type SolutionVersion struct {
 
 	// The date and time (in Unix time) that this version of the solution was created.
@@ -1089,7 +1088,7 @@ type SolutionVersion struct {
 	// want to start recommending items added to the dataset without retraining the
 	// model. The UPDATE option can only be used after you've created a solution
 	// version with the FULL option and the training solution uses the
-	// native-recipe-hrnn-coldstart ().
+	// native-recipe-hrnn-coldstart.
 	TrainingMode TrainingMode
 
 	// If hyperparameter optimization was performed, contains the hyperparameter values
@@ -1098,7 +1097,7 @@ type SolutionVersion struct {
 }
 
 // Provides a summary of the properties of a solution version. For a complete
-// listing, call the DescribeSolutionVersion () API.
+// listing, call the DescribeSolutionVersion API.
 type SolutionVersionSummary struct {
 
 	// The date and time (in Unix time) that this version of a solution was created.

@@ -34,7 +34,7 @@ func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInp
 	return out, nil
 }
 
-// Contains the inputs for the CreateDirectory () operation.
+// Contains the inputs for the CreateDirectory operation.
 type CreateDirectoryInput struct {
 
 	// The fully qualified name for the directory, such as corp.example.com.
@@ -45,7 +45,7 @@ type CreateDirectoryInput struct {
 	// The password for the directory administrator. The directory creation process
 	// creates a directory administrator account with the user name Administrator and
 	// this password. If you need to change the password for the administrator account,
-	// you can use the ResetUserPassword () API call.
+	// you can use the ResetUserPassword API call.
 	//
 	// This member is required.
 	Password *string
@@ -64,12 +64,12 @@ type CreateDirectoryInput struct {
 	// The tags to be assigned to the Simple AD directory.
 	Tags []*types.Tag
 
-	// A DirectoryVpcSettings () object that contains additional information for the
+	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
 	VpcSettings *types.DirectoryVpcSettings
 }
 
-// Contains the results of the CreateDirectory () operation.
+// Contains the results of the CreateDirectory operation.
 type CreateDirectoryOutput struct {
 
 	// The identifier of the directory that was created.

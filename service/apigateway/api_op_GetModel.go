@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes an existing model defined for a RestApi () resource.
+// Describes an existing model defined for a RestApi resource.
 func (c *Client) GetModel(ctx context.Context, params *GetModelInput, optFns ...func(*Options)) (*GetModelOutput, error) {
 	if params == nil {
 		params = &GetModelInput{}
@@ -26,7 +26,7 @@ func (c *Client) GetModel(ctx context.Context, params *GetModelInput, optFns ...
 	return out, nil
 }
 
-// Request to list information about a model in an existing RestApi () resource.
+// Request to list information about a model in an existing RestApi resource.
 type GetModelInput struct {
 
 	// [Required] The name of the model as an identifier.
@@ -34,7 +34,7 @@ type GetModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	// [Required] The RestApi () identifier under which the Model () exists.
+	// [Required] The RestApi identifier under which the Model exists.
 	//
 	// This member is required.
 	RestApiId *string
@@ -59,7 +59,7 @@ type GetModelInput struct {
 // the back end. Although not required, models are useful for mapping payloads
 // between the front end and back end. A model is used for generating an API's SDK,
 // validating the input request body, and creating a skeletal mapping template.
-// Method (), MethodResponse (), Models and Mappings
+// Method, MethodResponse, Models and Mappings
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type GetModelOutput struct {
 

@@ -19,8 +19,8 @@ import (
 const ServiceID = "Route 53 Domains"
 const ServiceAPIVersion = "2014-05-15"
 
-// Amazon Route 53 API actions let you register domain names and perform related
-// operations.
+// Client provides the API client to make operations call for Amazon Route 53
+// Domains.
 type Client struct {
 	options Options
 }

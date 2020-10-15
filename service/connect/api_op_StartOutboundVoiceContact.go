@@ -13,11 +13,11 @@ import (
 
 // This API places an outbound call to a contact, and then initiates the contact
 // flow. It performs the actions in the contact flow that's specified (in
-// ContactFlowId).  <p>Agents are not involved in initiating the outbound API (that
-// is, dialing the contact). If  the contact flow places an outbound call to a
-// contact, and then puts the contact in queue, that's when the call is routed to
-// the agent, like any other inbound case.  <p>There is a 60 second dialing timeout
-// for this operation. If the call is not connected after  60 seconds, it fails.
+// ContactFlowId). Agents are not involved in initiating the outbound API (that is,
+// dialing the contact). If the contact flow places an outbound call to a contact,
+// and then puts the contact in queue, that's when the call is routed to the agent,
+// like any other inbound case. There is a 60 second dialing timeout for this
+// operation. If the call is not connected after 60 seconds, it fails.
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
 	if params == nil {
 		params = &StartOutboundVoiceContactInput{}

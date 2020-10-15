@@ -19,7 +19,8 @@ import (
 const ServiceID = "Machine Learning"
 const ServiceAPIVersion = "2014-12-12"
 
-// Definition of the public APIs exposed by Amazon Machine Learning
+// Client provides the API client to make operations call for Amazon Machine
+// Learning.
 type Client struct {
 	options Options
 }

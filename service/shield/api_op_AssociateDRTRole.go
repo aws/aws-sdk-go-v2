@@ -25,20 +25,18 @@ import (
 // The role must also trust the service principal  drt.shield.amazonaws.com. For
 // more information, see IAM JSON Policy Elements: Principal
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
-// <p>The DRT will have access only to your AWS WAF and Shield resources. By
+// The DRT will have access only to your AWS WAF and Shield resources. By
 // submitting this request, you authorize the DRT to inspect your AWS WAF and
 // Shield configuration and create and update AWS WAF rules and web ACLs on your
-// behalf. The DRT takes these actions only if explicitly authorized by you.</p>
-// <p>You must have the <code>iam:PassRole</code> permission to make an
-// <code>AssociateDRTRole</code> request. For more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">Granting
-// a User Permissions to Pass a Role to an AWS Service</a>. </p> <p>To use the
-// services of the DRT and make an <code>AssociateDRTRole</code> request, you must
-// be subscribed to the <a
-// href="https://aws.amazon.com/premiumsupport/business-support/">Business Support
-// plan</a> or the <a
-// href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise
-// Support plan</a>.</p>
+// behalf. The DRT takes these actions only if explicitly authorized by you. You
+// must have the iam:PassRole permission to make an AssociateDRTRole request. For
+// more information, see Granting a User Permissions to Pass a Role to an AWS
+// Service
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
+// To use the services of the DRT and make an AssociateDRTRole request, you must be
+// subscribed to the Business Support plan
+// (https://aws.amazon.com/premiumsupport/business-support/) or the Enterprise
+// Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
 func (c *Client) AssociateDRTRole(ctx context.Context, params *AssociateDRTRoleInput, optFns ...func(*Options)) (*AssociateDRTRoleOutput, error) {
 	if params == nil {
 		params = &AssociateDRTRoleInput{}

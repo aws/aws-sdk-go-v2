@@ -49,11 +49,10 @@ func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput
 type RegisterDomainInput struct {
 
 	// Name of the domain to register. The name must be unique in the region that the
-	// domain is registered in.  <p>The specified string must not start or end with
-	// whitespace. It must not contain a <code>:</code> (colon), <code>/</code>
-	// (slash), <code>|</code> (vertical bar), or any control characters
-	// (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it must not
-	// <i>be</i> the literal string <code>arn</code>.</p>
+	// domain is registered in. The specified string must not start or end with
+	// whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
+	// control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the
+	// literal string arn.
 	//
 	// This member is required.
 	Name *string

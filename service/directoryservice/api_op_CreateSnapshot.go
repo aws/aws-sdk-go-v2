@@ -27,7 +27,7 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 	return out, nil
 }
 
-// Contains the inputs for the CreateSnapshot () operation.
+// Contains the inputs for the CreateSnapshot operation.
 type CreateSnapshotInput struct {
 
 	// The identifier of the directory of which to take a snapshot.
@@ -39,7 +39,7 @@ type CreateSnapshotInput struct {
 	Name *string
 }
 
-// Contains the results of the CreateSnapshot () operation.
+// Contains the results of the CreateSnapshot operation.
 type CreateSnapshotOutput struct {
 
 	// The identifier of the snapshot that was created.

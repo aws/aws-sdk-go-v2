@@ -158,8 +158,7 @@ type EventSelector struct {
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
-	// in the AWS CloudTrail User Guide.  <p>By default, the value is
-	// <code>true</code>.</p>
+	// in the AWS CloudTrail User Guide. By default, the value is true.
 	IncludeManagementEvents *bool
 
 	// Specify if you want your trail to log read-only events, write-only events, or
@@ -287,7 +286,7 @@ type Trail struct {
 	// Specifies whether log file validation is enabled.
 	LogFileValidationEnabled *bool
 
-	// Name of the trail set by calling CreateTrail (). The maximum length is 128
+	// Name of the trail set by calling CreateTrail. The maximum length is 128
 	// characters.
 	Name *string
 

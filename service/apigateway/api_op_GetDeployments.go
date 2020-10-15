@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about a Deployments () collection.
+// Gets information about a Deployments collection.
 func (c *Client) GetDeployments(ctx context.Context, params *GetDeploymentsInput, optFns ...func(*Options)) (*GetDeploymentsOutput, error) {
 	if params == nil {
 		params = &GetDeploymentsInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetDeployments(ctx context.Context, params *GetDeploymentsInput
 	return out, nil
 }
 
-// Requests API Gateway to get information about a Deployments () collection.
+// Requests API Gateway to get information about a Deployments collection.
 type GetDeploymentsInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -54,10 +54,10 @@ type GetDeploymentsInput struct {
 // Represents a collection resource that contains zero or more references to your
 // existing deployments, and links that guide you on how to interact with your
 // collection. The collection offers a paginated view of the contained deployments.
-// To create a new deployment of a RestApi (), make a POST request against this
+// To create a new deployment of a RestApi, make a POST request against this
 // resource. To view, update, or delete an existing deployment, make a GET, PATCH,
-// or DELETE request, respectively, on a specified Deployment () resource.
-// Deploying an API
+// or DELETE request, respectively, on a specified Deployment resource. Deploying
+// an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html),
 // AWS CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),

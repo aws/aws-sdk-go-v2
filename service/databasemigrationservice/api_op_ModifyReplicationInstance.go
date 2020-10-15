@@ -13,7 +13,7 @@ import (
 
 // Modifies the replication instance to apply new settings. You can change one or
 // more parameters by specifying these parameters and the new values in the
-// request. Some settings are applied during the maintenance window.  <p></p>
+// request. Some settings are applied during the maintenance window.
 func (c *Client) ModifyReplicationInstance(ctx context.Context, params *ModifyReplicationInstanceInput, optFns ...func(*Options)) (*ModifyReplicationInstanceOutput, error) {
 	if params == nil {
 		params = &ModifyReplicationInstanceInput{}

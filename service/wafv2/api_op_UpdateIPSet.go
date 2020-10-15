@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Updates the specified IPSet ().
+// Updates the specified IPSet.
 func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optFns ...func(*Options)) (*UpdateIPSetOutput, error) {
 	if params == nil {
 		params = &UpdateIPSetInput{}

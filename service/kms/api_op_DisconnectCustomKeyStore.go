@@ -21,8 +21,8 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 // will fail. This action can prevent users from storing and accessing sensitive
 // data. To find the connection state of a custom key store, use the
-// DescribeCustomKeyStores () operation. To reconnect a custom key store, use the
-// ConnectCustomKeyStore () operation. If the operation succeeds, it returns a JSON
+// DescribeCustomKeyStores operation. To reconnect a custom key store, use the
+// ConnectCustomKeyStore operation. If the operation succeeds, it returns a JSON
 // object with no properties. This operation is part of the Custom Key Store
 // feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
@@ -46,7 +46,7 @@ func (c *Client) DisconnectCustomKeyStore(ctx context.Context, params *Disconnec
 type DisconnectCustomKeyStoreInput struct {
 
 	// Enter the ID of the custom key store you want to disconnect. To find the ID of a
-	// custom key store, use the DescribeCustomKeyStores () operation.
+	// custom key store, use the DescribeCustomKeyStores operation.
 	//
 	// This member is required.
 	CustomKeyStoreId *string

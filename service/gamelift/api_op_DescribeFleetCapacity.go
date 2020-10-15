@@ -14,10 +14,10 @@ import (
 // Retrieves the current capacity statistics for one or more fleets. These
 // statistics present a snapshot of the fleet's instances and provide insight on
 // current or imminent scaling activity. To get statistics on game hosting activity
-// in the fleet, see DescribeFleetUtilization (). You can request capacity for all
+// in the fleet, see DescribeFleetUtilization. You can request capacity for all
 // fleets or specify a list of one or more fleet identifiers. When requesting
 // multiple fleets, use the pagination parameters to retrieve results as a set of
-// sequential pages. If successful, a FleetCapacity () object is returned for each
+// sequential pages. If successful, a FleetCapacity object is returned for each
 // requested fleet ID. When a list of fleet IDs is provided, attribute objects are
 // returned only for fleets that currently exist. Some API actions may limit the
 // number of fleet IDs allowed in one request. If a request exceeds this limit, the
@@ -28,36 +28,36 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * Describe fleets:
 //
-//         * DescribeFleetAttributes ()
+// * Describe fleets:
 //
-//         *
-// DescribeFleetCapacity ()
-//
-//         * DescribeFleetPortSettings ()
+//         * DescribeFleetAttributes
 //
 //         *
-// DescribeFleetUtilization ()
+// DescribeFleetCapacity
 //
-//         * DescribeRuntimeConfiguration ()
+//         * DescribeFleetPortSettings
 //
+//         *
+// DescribeFleetUtilization
 //
-// * DescribeEC2InstanceLimits ()
+//         * DescribeRuntimeConfiguration
 //
-//         * DescribeFleetEvents ()
+//         *
+// DescribeEC2InstanceLimits
+//
+//         * DescribeFleetEvents
 //
 //     *
-// UpdateFleetAttributes ()
+// UpdateFleetAttributes
 //
-//     * StartFleetActions () or StopFleetActions ()
+//     * StartFleetActions or StopFleetActions
 func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFleetCapacityInput, optFns ...func(*Options)) (*DescribeFleetCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetCapacityInput{}

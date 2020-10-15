@@ -12,9 +12,9 @@ import (
 
 // Adds or updates an inline policy document that is embedded in the specified IAM
 // user. An IAM user can also have a managed policy attached to it. To attach a
-// managed policy to a user, use AttachUserPolicy (). To create a new managed
-// policy, use CreatePolicy (). For information about policies, see Managed
-// Policies and Inline Policies
+// managed policy to a user, use AttachUserPolicy. To create a new managed policy,
+// use CreatePolicy. For information about policies, see Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For information about limits on the number of inline
 // policies that you can embed in a user, see Limitations on IAM Entities

@@ -15,8 +15,8 @@ import (
 // tags to your stream, you can invoke this operation multiple times. In total,
 // each stream can have up to 50 tags. If tags have already been assigned to the
 // stream, AddTagsToStream overwrites any existing tags that correspond to the
-// specified tag keys. AddTagsToStream () has a limit of five transactions per
-// second per account.
+// specified tag keys. AddTagsToStream has a limit of five transactions per second
+// per account.
 func (c *Client) AddTagsToStream(ctx context.Context, params *AddTagsToStreamInput, optFns ...func(*Options)) (*AddTagsToStreamOutput, error) {
 	if params == nil {
 		params = &AddTagsToStreamInput{}

@@ -158,7 +158,7 @@ type TerminologyProperties struct {
 }
 
 // Provides information for filtering a list of translation jobs. For more
-// information, see ListTextTranslationJobs ().
+// information, see ListTextTranslationJobs.
 type TextTranslationJobFilter struct {
 
 	// Filters the list of jobs by name.
@@ -224,7 +224,7 @@ type TextTranslationJobProperties struct {
 	TargetLanguageCodes []*string
 
 	// A list containing the names of the terminologies applied to a translation job.
-	// Only one terminology can be applied per StartTextTranslationJob () request at
-	// this time.
+	// Only one terminology can be applied per StartTextTranslationJob request at this
+	// time.
 	TerminologyNames []*string
 }

@@ -16,7 +16,7 @@ import (
 // storing snapshots or tapes, the time zone for scheduled snapshots the gateway
 // snapshot schedule window, an activation key, and a name for your gateway. The
 // activation process also associates your gateway with your account. For more
-// information, see UpdateGatewayInformation (). You must turn on the gateway VM
+// information, see UpdateGatewayInformation. You must turn on the gateway VM
 // before you can activate your gateway.
 func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInput, optFns ...func(*Options)) (*ActivateGatewayOutput, error) {
 	if params == nil {
@@ -33,14 +33,26 @@ func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInp
 	return out, nil
 }
 
-// A JSON object containing one or more of the following fields:  <ul> <li> <p>
-// <a>ActivateGatewayInput$ActivationKey</a> </p> </li> <li> <p>
-// <a>ActivateGatewayInput$GatewayName</a> </p> </li> <li> <p>
-// <a>ActivateGatewayInput$GatewayRegion</a> </p> </li> <li> <p>
-// <a>ActivateGatewayInput$GatewayTimezone</a> </p> </li> <li> <p>
-// <a>ActivateGatewayInput$GatewayType</a> </p> </li> <li> <p>
-// <a>ActivateGatewayInput$MediumChangerType</a> </p> </li> <li> <p>
-// <a>ActivateGatewayInput$TapeDriveType</a> </p> </li> </ul>
+// A JSON object containing one or more of the following fields:
+//
+//     *
+// ActivateGatewayInput$ActivationKey
+//
+//     * ActivateGatewayInput$GatewayName
+//
+//
+// * ActivateGatewayInput$GatewayRegion
+//
+//     *
+// ActivateGatewayInput$GatewayTimezone
+//
+//     * ActivateGatewayInput$GatewayType
+//
+//
+// * ActivateGatewayInput$MediumChangerType
+//
+//     *
+// ActivateGatewayInput$TapeDriveType
 type ActivateGatewayInput struct {
 
 	// Your gateway activation key. You can obtain the activation key by sending an
@@ -49,9 +61,9 @@ type ActivateGatewayInput struct {
 	// gateway in the query string parameter activationKey. It may also include other
 	// activation-related parameters, however, these are merely defaults -- the
 	// arguments you pass to the ActivateGateway API call determine the actual
-	// configuration of your gateway.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html">Getting
-	// activation key</a> in the <i>AWS Storage Gateway User Guide</i>.</p>
+	// configuration of your gateway. For more information, see Getting activation key
+	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html)
+	// in the AWS Storage Gateway User Guide.
 	//
 	// This member is required.
 	ActivationKey *string
@@ -66,9 +78,9 @@ type ActivateGatewayInput struct {
 	// your Host header in the request. For more information about available AWS
 	// Regions and endpoints for AWS Storage Gateway, see AWS Storage Gateway endpoints
 	// and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the AWS
-	// General Reference.  <p>Valid Values: See <a
-	// href="https://docs.aws.amazon.com/general/latest/gr/sg.html">AWS Storage Gateway
-	// endpoints and quotas</a> in the <i>AWS General Reference</i>. </p>
+	// General Reference. Valid Values: See AWS Storage Gateway endpoints and quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the AWS General
+	// Reference.
 	//
 	// This member is required.
 	GatewayRegion *string
@@ -84,39 +96,36 @@ type ActivateGatewayInput struct {
 
 	// A value that defines the type of gateway to activate. The type specified is
 	// critical to all later functions of the gateway and cannot be changed after
-	// activation. The default value is CACHED.  <p>Valid Values: <code>STORED</code> |
-	// <code>CACHED</code> | <code>VTL</code> | <code>FILE_S3</code> </p>
+	// activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL |
+	// FILE_S3
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.
-	// This field is optional.  <p>Valid Values: <code>STK-L700</code> |
-	// <code>AWS-Gateway-VTL</code> </p>
+	// This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL
 	MediumChangerType *string
 
 	// A list of up to 50 tags that you can assign to the gateway. Each tag is a
-	// key-value pair.  <note> <p>Valid characters for key and value are letters,
-	// spaces, and numbers that can be represented in UTF-8 format, and the following
-	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256 characters.</p>
-	// </note>
+	// key-value pair. Valid characters for key and value are letters, spaces, and
+	// numbers that can be represented in UTF-8 format, and the following special
+	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
+	// characters, and the maximum length for a tag's value is 256 characters.
 	Tags []*types.Tag
 
 	// The value that indicates the type of tape drive to use for tape gateway. This
-	// field is optional.  <p>Valid Values: <code>IBM-ULT3580-TD5</code> </p>
+	// field is optional. Valid Values: IBM-ULT3580-TD5
 	TapeDriveType *string
 }
 
 // AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated
 // gateway. It is a string made of information such as your account, gateway name,
 // and AWS Region. This ARN is used to reference the gateway in other API
-// operations as well as resource-based authorization.  <note> <p>For gateways
-// activated prior to September 02, 2015, the gateway ARN contains the gateway name
-// rather than the gateway ID. Changing the name of the gateway has no effect on
-// the gateway ARN.</p> </note>
+// operations as well as resource-based authorization. For gateways activated prior
+// to September 02, 2015, the gateway ARN contains the gateway name rather than the
+// gateway ID. Changing the name of the gateway has no effect on the gateway ARN.
 type ActivateGatewayOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

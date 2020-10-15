@@ -15,11 +15,12 @@ import (
 // ReplicationSourceIdentifier parameter to create the DB cluster as a read replica
 // of another DB cluster or Amazon RDS MySQL DB instance. For cross-region
 // replication where the DB cluster identified by ReplicationSourceIdentifier is
-// encrypted, you must also specify the PreSignedUrl parameter.  <p>For more
-// information on Amazon Aurora, see <a
-// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html">
-// What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note>
-// <p>This action only applies to Aurora DB clusters.</p> </note>
+// encrypted, you must also specify the PreSignedUrl parameter. For more
+// information on Amazon Aurora, see
+//
+// What Is Amazon Aurora?
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
 func (c *Client) CreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*Options)) (*CreateDBClusterOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterInput{}
@@ -150,9 +151,9 @@ type CreateDBClusterInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
+	// For more information, see  IAM Database Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless,
@@ -249,34 +250,38 @@ type CreateDBClusterInput struct {
 	// A URL that contains a Signature Version 4 signed request for the CreateDBCluster
 	// action to be called in the source AWS Region where the DB cluster is replicated
 	// from. You only need to specify PreSignedUrl when you are performing cross-region
-	// replication from an encrypted DB cluster.  <p>The pre-signed URL must be a valid
-	// request for the <code>CreateDBCluster</code> API action that can be executed in
-	// the source AWS Region that contains the encrypted DB cluster to be copied.</p>
-	// <p>The pre-signed URL request must contain the following parameter values:</p>
-	// <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to
-	// use to encrypt the copy of the DB cluster in the destination AWS Region. This
-	// should refer to the same KMS key for both the <code>CreateDBCluster</code>
-	// action that is called in the destination AWS Region, and the action contained in
-	// the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name
-	// of the AWS Region that Aurora read replica will be created in.</p> </li> <li>
-	// <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the
-	// encrypted DB cluster to be copied. This identifier must be in the Amazon
-	// Resource Name (ARN) format for the source AWS Region. For example, if you are
-	// copying an encrypted DB cluster from the us-west-2 AWS Region, then your
-	// <code>ReplicationSourceIdentifier</code> would look like Example:
-	// <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p>
-	// </li> </ul> <p>To learn how to generate a Signature Version 4 signed request,
-	// see <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">
-	// Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a>
-	// and <a
-	// href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">
-	// Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS
-	// SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or
-	// <code>--source-region</code> for the AWS CLI) instead of specifying
-	// <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code>
-	// autogenerates a pre-signed URL that is a valid request for the operation that
-	// can be executed in the source AWS Region.</p> </note>
+	// replication from an encrypted DB cluster. The pre-signed URL must be a valid
+	// request for the CreateDBCluster API action that can be executed in the source
+	// AWS Region that contains the encrypted DB cluster to be copied. The pre-signed
+	// URL request must contain the following parameter values:
+	//
+	//     * KmsKeyId - The
+	// AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster
+	// in the destination AWS Region. This should refer to the same KMS key for both
+	// the CreateDBCluster action that is called in the destination AWS Region, and the
+	// action contained in the pre-signed URL.
+	//
+	//     * DestinationRegion - The name of
+	// the AWS Region that Aurora read replica will be created in.
+	//
+	//     *
+	// ReplicationSourceIdentifier - The DB cluster identifier for the encrypted DB
+	// cluster to be copied. This identifier must be in the Amazon Resource Name (ARN)
+	// format for the source AWS Region. For example, if you are copying an encrypted
+	// DB cluster from the us-west-2 AWS Region, then your ReplicationSourceIdentifier
+	// would look like Example:
+	// arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1.
+	//
+	// To learn how to
+	// generate a Signature Version 4 signed request, see  Authenticating Requests:
+	// Using Query Parameters (AWS Signature Version 4)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
+	// and  Signature Version 4 Signing Process
+	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). If you
+	// are using an AWS SDK tool or the AWS CLI, you can specify SourceRegion (or
+	// --source-region for the AWS CLI) instead of specifying PreSignedUrl manually.
+	// Specifying SourceRegion autogenerates a pre-signed URL that is a valid request
+	// for the operation that can be executed in the source AWS Region.
 	PreSignedUrl *string
 
 	// The daily time range during which automated backups are created if automated

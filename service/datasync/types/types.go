@@ -3,7 +3,7 @@
 package types
 
 // Represents a single entry in a list of agents. AgentListEntry returns an array
-// that contains a list of agents when the ListAgents () operation is called.
+// that contains a list of agents when the ListAgents operation is called.
 type AgentListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the agent.
@@ -49,7 +49,7 @@ type FilterRule struct {
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns an
-// array that contains a list of locations when the ListLocations () operation is
+// array that contains a list of locations when the ListLocations operation is
 // called.
 type LocationListEntry struct {
 
@@ -59,16 +59,16 @@ type LocationListEntry struct {
 	LocationArn *string
 
 	// Represents a list of URLs of a location. LocationUri returns an array that
-	// contains a list of locations when the ListLocations () operation is called.
-	// Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid
-	// values: NFS | EFS | S3. GLOBAL_ID is the globally unique identifier of the
-	// resource that backs the location. An example for EFS is us-east-2.fs-abcd1234.
-	// An example for Amazon S3 is the bucket name, such as myBucket. An example for
-	// NFS is a valid IPv4 address or a host name compliant with Domain Name Service
-	// (DNS). SUBDIR is a valid file system path, delimited by forward slashes as is
-	// the *nix convention. For NFS and Amazon EFS, it's the export path to mount the
-	// location. For Amazon S3, it's the prefix path that you mount to and treat as the
-	// root of the location.
+	// contains a list of locations when the ListLocations operation is called. Format:
+	// TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS
+	// | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that
+	// backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for
+	// Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid
+	// IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is
+	// a valid file system path, delimited by forward slashes as is the *nix
+	// convention. For NFS and Amazon EFS, it's the export path to mount the location.
+	// For Amazon S3, it's the prefix path that you mount to and treat as the root of
+	// the location.
 	LocationUri *string
 }
 
@@ -79,17 +79,21 @@ type NfsMountOptions struct {
 	// The specific NFS version that you want DataSync to use to mount your NFS share.
 	// If the server refuses to use the version specified, the sync will fail. If you
 	// don't specify a version, DataSync defaults to AUTOMATIC. That is, DataSync
-	// automatically selects a version based on negotiation with the NFS server.
-	// <p>You can specify the following NFS versions:</p> <ul> <li> <p> <b> <a
-	// href="https://tools.ietf.org/html/rfc1813">NFSv3</a> </b> - stateless protocol
-	// version that allows for asynchronous writes on the server.</p> </li> <li> <p>
-	// <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b> - stateful,
-	// firewall-friendly protocol version that supports delegations and pseudo
-	// filesystems.</p> </li> <li> <p> <b> <a
-	// href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b> - stateful protocol
-	// version that supports sessions, directory delegations, and parallel data
-	// processing. Version 4.1 also includes all features available in version 4.0.</p>
-	// </li> </ul>
+	// automatically selects a version based on negotiation with the NFS server. You
+	// can specify the following NFS versions:
+	//
+	//     * NFSv3
+	// (https://tools.ietf.org/html/rfc1813) - stateless protocol version that allows
+	// for asynchronous writes on the server.
+	//
+	//     * NFSv4.0
+	// (https://tools.ietf.org/html/rfc3530) - stateful, firewall-friendly protocol
+	// version that supports delegations and pseudo filesystems.
+	//
+	//     * NFSv4.1
+	// (https://tools.ietf.org/html/rfc5661) - stateful protocol version that supports
+	// sessions, directory delegations, and parallel data processing. Version 4.1 also
+	// includes all features available in version 4.0.
 	Version NfsVersion
 }
 
@@ -104,13 +108,13 @@ type OnPremConfig struct {
 }
 
 // Represents the options that are available to control the behavior of a
-// StartTaskExecution () operation. Behavior includes preserving metadata such as
-// user ID (UID), group ID (GID), and file permissions, and also overwriting files
-// in the destination, data integrity verification, and so on. A task has a set of
+// StartTaskExecution operation. Behavior includes preserving metadata such as user
+// ID (UID), group ID (GID), and file permissions, and also overwriting files in
+// the destination, data integrity verification, and so on. A task has a set of
 // default options associated with it. If you don't specify an option in
-// StartTaskExecution (), the default value is used. You can override the defaults
+// StartTaskExecution, the default value is used. You can override the defaults
 // options on each task execution by specifying an overriding Options value to
-// StartTaskExecution ().
+// StartTaskExecution.
 type Options struct {
 
 	// A file metadata value that shows the last time a file was accessed (that is,
@@ -154,7 +158,7 @@ type Options struct {
 	// file. If you modify files in the destination and you sync the files, you can use
 	// this value to protect against overwriting those changes. Some storage classes
 	// have specific behaviors that can affect your S3 storage cost. For detailed
-	// information, see using-storage-classes () in the AWS DataSync User Guide.
+	// information, see using-storage-classes in the AWS DataSync User Guide.
 	OverwriteMode OverwriteMode
 
 	// A value that determines which users or groups can access a file for a specific
@@ -167,8 +171,8 @@ type Options struct {
 	// source file system should be preserved. This option can affect your storage
 	// cost. If your task deletes objects, you might incur minimum storage duration
 	// charges for certain storage classes. For detailed information, see
-	// using-storage-classes () in the AWS DataSync User Guide. Default value:
-	// PRESERVE. PRESERVE: Ignore such destination files (recommended). REMOVE: Delete
+	// using-storage-classes in the AWS DataSync User Guide. Default value: PRESERVE.
+	// PRESERVE: Ignore such destination files (recommended). REMOVE: Delete
 	// destination files that aren’t present in the source.
 	PreserveDeletedFiles PreserveDeletedFiles
 
@@ -184,7 +188,7 @@ type Options struct {
 	// A value that determines whether tasks should be queued before executing the
 	// tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If
 	// you use the same agent to run multiple tasks, you can enable the tasks to run in
-	// series. For more information, see queue-task-execution ().
+	// series. For more information, see queue-task-execution.
 	TaskQueueing TaskQueueing
 
 	// TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental"
@@ -200,15 +204,15 @@ type Options struct {
 
 	// A value that determines whether a data integrity verification should be
 	// performed at the end of a task execution after all data and metadata have been
-	// transferred. For more information, see create-task () Default value:
+	// transferred. For more information, see create-task Default value:
 	// POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform
-	// verification only on files that were transferred.  <p>POINT_IN_TIME_CONSISTENT:
-	// Scan the entire source and entire destination at the end of the transfer to
-	// verify that source and destination are fully synchronized. This option isn't
-	// supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage
-	// classes.</p> <p>NONE: No additional verification is done at the end of the
-	// transfer, but all data transmissions are integrity-checked with checksum
-	// verification during the transfer.</p>
+	// verification only on files that were transferred. POINT_IN_TIME_CONSISTENT: Scan
+	// the entire source and entire destination at the end of the transfer to verify
+	// that source and destination are fully synchronized. This option isn't supported
+	// when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes.
+	// NONE: No additional verification is done at the end of the transfer, but all
+	// data transmissions are integrity-checked with checksum verification during the
+	// transfer.
 	VerifyMode VerifyMode
 }
 
@@ -238,13 +242,13 @@ type PrivateLinkConfig struct {
 }
 
 // The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-// role that is used to access an Amazon S3 bucket.  <p>For detailed information
-// about using such a role, see Creating a Location for Amazon S3 in the <i>AWS
-// DataSync User Guide</i>.</p>
+// role that is used to access an Amazon S3 bucket. For detailed information about
+// using such a role, see Creating a Location for Amazon S3 in the AWS DataSync
+// User Guide.
 type S3Config struct {
 
 	// The Amazon S3 bucket to access. This bucket is used as a parameter in the
-	// CreateLocationS3 () operation.
+	// CreateLocationS3 operation.
 	//
 	// This member is required.
 	BucketAccessRoleArn *string
@@ -262,8 +266,8 @@ type SmbMountOptions struct {
 }
 
 // Represents a single entry in a list of AWS resource tags. TagListEntry returns
-// an array that contains a list of tasks when the ListTagsForResource () operation
-// is called.
+// an array that contains a list of tasks when the ListTagsForResource operation is
+// called.
 type TagListEntry struct {
 
 	// The key for an AWS resource tag.
@@ -277,7 +281,7 @@ type TagListEntry struct {
 
 // Represents a single entry in a list of task executions. TaskExecutionListEntry
 // returns an array that contains a list of specific invocations of a task when
-// ListTaskExecutions () operation is called.
+// ListTaskExecutions operation is called.
 type TaskExecutionListEntry struct {
 
 	// The status of a task execution.
@@ -325,7 +329,7 @@ type TaskExecutionResultDetail struct {
 }
 
 // Represents a single entry in a list of tasks. TaskListEntry returns an array
-// that contains a list of tasks when the ListTasks () operation is called. A task
+// that contains a list of tasks when the ListTasks operation is called. A task
 // includes the source and destination file systems to sync and the options to use
 // for the tasks.
 type TaskListEntry struct {

@@ -16,20 +16,18 @@ import (
 // rules in your account are triggered by these events arriving to an event bus in
 // your account. For another account to send events to your account, that external
 // account must have an EventBridge rule with your account's event bus as a target.
-// <p>To enable multiple AWS accounts to put events to your event bus, run
-// <code>PutPermission</code> once for each of these accounts. Or, if all the
-// accounts are members of the same AWS organization, you can run
-// <code>PutPermission</code> once specifying <code>Principal</code> as "*" and
-// specifying the AWS organization ID in <code>Condition</code>, to grant
-// permissions to all accounts in that organization.</p> <p>If you grant
-// permissions using an organization, then accounts in that organization must
-// specify a <code>RoleArn</code> with proper permissions when they use
-// <code>PutTarget</code> to add your account's event bus as a target. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending
-// and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User
-// Guide</i>.</p> <p>The permission policy on the default event bus cannot exceed
-// 10 KB in size.</p>
+// To enable multiple AWS accounts to put events to your event bus, run
+// PutPermission once for each of these accounts. Or, if all the accounts are
+// members of the same AWS organization, you can run PutPermission once specifying
+// Principal as "*" and specifying the AWS organization ID in Condition, to grant
+// permissions to all accounts in that organization. If you grant permissions using
+// an organization, then accounts in that organization must specify a RoleArn with
+// proper permissions when they use PutTarget to add your account's event bus as a
+// target. For more information, see Sending and Receiving Events Between AWS
+// Accounts
+// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
+// in the Amazon EventBridge User Guide. The permission policy on the default event
+// bus cannot exceed 10 KB in size.
 func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, optFns ...func(*Options)) (*PutPermissionOutput, error) {
 	if params == nil {
 		params = &PutPermissionInput{}
@@ -55,19 +53,18 @@ type PutPermissionInput struct {
 
 	// The 12-digit AWS account ID that you are permitting to put events to your
 	// default event bus. Specify "*" to permit any account to put events to your
-	// default event bus.  <p>If you specify "*" without specifying
-	// <code>Condition</code>, avoid creating rules that may match undesirable events.
-	// To create more secure rules, make sure that the event pattern for each rule
-	// contains an <code>account</code> field with a specific account ID from which to
-	// receive events. Rules with an account field do not match any events sent from
-	// other accounts.</p>
+	// default event bus. If you specify "*" without specifying Condition, avoid
+	// creating rules that may match undesirable events. To create more secure rules,
+	// make sure that the event pattern for each rule contains an account field with a
+	// specific account ID from which to receive events. Rules with an account field do
+	// not match any events sent from other accounts.
 	//
 	// This member is required.
 	Principal *string
 
 	// An identifier string for the external account that you are granting permissions
 	// to. If you later want to revoke the permission for this external account,
-	// specify this StatementId when you run RemovePermission ().
+	// specify this StatementId when you run RemovePermission.
 	//
 	// This member is required.
 	StatementId *string
@@ -78,9 +75,8 @@ type PutPermissionInput struct {
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
 	// in the AWS Organizations User Guide. If you specify Condition with an AWS
 	// organization ID, and specify "*" as the value for Principal, you grant
-	// permission to all the accounts in the named organization.  <p>The
-	// <code>Condition</code> is a JSON string which must contain <code>Type</code>,
-	// <code>Key</code>, and <code>Value</code> fields.</p>
+	// permission to all the accounts in the named organization. The Condition is a
+	// JSON string which must contain Type, Key, and Value fields.
 	Condition *types.Condition
 
 	// The event bus associated with the rule. If you omit this, the default event bus

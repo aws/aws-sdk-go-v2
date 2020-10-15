@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists all policies from the root of the Directory () to the object specified. If
+// Lists all policies from the root of the Directory to the object specified. If
 // there are no policies present, an empty list is returned. If policies are
 // present, and if some objects don't have the policies attached, it returns the
 // ObjectIdentifier for such objects. If policies are present, it returns
@@ -35,8 +35,8 @@ func (c *Client) LookupPolicy(ctx context.Context, params *LookupPolicyInput, op
 
 type LookupPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory (). For
-	// more information, see arns ().
+	// The Amazon Resource Name (ARN) that is associated with the Directory. For more
+	// information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string

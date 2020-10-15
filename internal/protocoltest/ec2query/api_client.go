@@ -19,7 +19,7 @@ import (
 const ServiceID = "EC2 Protocol"
 const ServiceAPIVersion = "2020-01-08"
 
-// An EC2 query service that sends query requests and XML responses.
+// Client provides the API client to make operations call for the API.
 type Client struct {
 	options Options
 }

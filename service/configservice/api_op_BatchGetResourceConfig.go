@@ -53,9 +53,9 @@ type BatchGetResourceConfigOutput struct {
 
 	// A list of resource keys that were not processed with the current response. The
 	// unprocessesResourceKeys value is in the same form as ResourceKeys, so the value
-	// can be directly provided to a subsequent BatchGetResourceConfig operation.  If
+	// can be directly provided to a subsequent BatchGetResourceConfig operation. If
 	// there are no unprocessed resource keys, the response contains an empty
-	// unprocessedResourceKeys list. </p>
+	// unprocessedResourceKeys list.
 	UnprocessedResourceKeys []*types.ResourceKey
 
 	// Metadata pertaining to the operation's result.

@@ -13,7 +13,7 @@ import (
 // Revokes the permission of another AWS account to be able to put events to the
 // specified event bus. Specify the account to revoke by the StatementId value that
 // you associated with the account when you granted it permission with
-// PutPermission. You can find the StatementId by using DescribeEventBus ().
+// PutPermission. You can find the StatementId by using DescribeEventBus.
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}

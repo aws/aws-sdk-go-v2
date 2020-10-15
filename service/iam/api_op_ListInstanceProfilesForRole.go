@@ -57,7 +57,7 @@ type ListInstanceProfilesForRoleInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListInstanceProfilesForRole () request.
+// Contains the response to a successful ListInstanceProfilesForRole request.
 type ListInstanceProfilesForRoleOutput struct {
 
 	// A list of instance profiles.

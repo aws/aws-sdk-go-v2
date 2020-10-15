@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about a Stage () resource.
+// Gets information about a Stage resource.
 func (c *Client) GetStage(ctx context.Context, params *GetStageInput, optFns ...func(*Options)) (*GetStageOutput, error) {
 	if params == nil {
 		params = &GetStageInput{}
@@ -28,15 +28,15 @@ func (c *Client) GetStage(ctx context.Context, params *GetStageInput, optFns ...
 	return out, nil
 }
 
-// Requests API Gateway to get information about a Stage () resource.
+// Requests API Gateway to get information about a Stage resource.
 type GetStageInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage () resource to get information about.
+	// [Required] The name of the Stage resource to get information about.
 	//
 	// This member is required.
 	StageName *string
@@ -50,7 +50,7 @@ type GetStageInput struct {
 	Title *string
 }
 
-// Represents a unique identifier for a version of a deployed RestApi () that is
+// Represents a unique identifier for a version of a deployed RestApi that is
 // callable by users. Deploy an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
 type GetStageOutput struct {
@@ -76,7 +76,7 @@ type GetStageOutput struct {
 	// The timestamp when the stage was created.
 	CreatedDate *time.Time
 
-	// The identifier of the Deployment () that the stage points to.
+	// The identifier of the Deployment that the stage points to.
 	DeploymentId *string
 
 	// The stage's description.
@@ -88,8 +88,8 @@ type GetStageOutput struct {
 	// The timestamp when the stage last updated.
 	LastUpdatedDate *time.Time
 
-	// A map that defines the method settings for a Stage () resource. Keys (designated
-	// as /{method_setting_key below) are method paths defined as
+	// A map that defines the method settings for a Stage resource. Keys (designated as
+	// /{method_setting_key below) are method paths defined as
 	// {resource_path}/{http_method} for an individual method override, or /\*/\* for
 	// overriding all methods in the stage.
 	MethodSettings map[string]*types.MethodSetting
@@ -103,15 +103,15 @@ type GetStageOutput struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 
-	// Specifies whether active tracing with X-ray is enabled for the Stage ().
+	// Specifies whether active tracing with X-ray is enabled for the Stage.
 	TracingEnabled *bool
 
-	// A map that defines the stage variables for a Stage () resource. Variable names
-	// can have alphanumeric and underscore characters, and the values must match
+	// A map that defines the stage variables for a Stage resource. Variable names can
+	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]*string
 
-	// The ARN of the WebAcl associated with the Stage ().
+	// The ARN of the WebAcl associated with the Stage.
 	WebAclArn *string
 
 	// Metadata pertaining to the operation's result.

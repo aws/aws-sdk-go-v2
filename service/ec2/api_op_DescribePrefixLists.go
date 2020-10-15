@@ -13,7 +13,7 @@ import (
 
 // Describes available AWS services in a prefix list format, which includes the
 // prefix list name and prefix list ID of the service and the IP address range for
-// the service. We recommend that you use DescribeManagedPrefixLists () instead.
+// the service. We recommend that you use DescribeManagedPrefixLists instead.
 func (c *Client) DescribePrefixLists(ctx context.Context, params *DescribePrefixListsInput, optFns ...func(*Options)) (*DescribePrefixListsOutput, error) {
 	if params == nil {
 		params = &DescribePrefixListsInput{}

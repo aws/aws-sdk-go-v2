@@ -18,38 +18,44 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 // only when the request includes a particular encryption context
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context),
-// use the Constraints parameter. For details, see GrantConstraints (). You can
-// create grants on symmetric and asymmetric CMKs. However, if the grant allows an
+// use the Constraints parameter. For details, see GrantConstraints. You can create
+// grants on symmetric and asymmetric CMKs. However, if the grant allows an
 // operation that the CMK does not support, CreateGrant fails with a
-// ValidationException.  <ul> <li> <p>Grants for symmetric CMKs cannot allow
-// operations that are not supported for symmetric CMKs, including <a>Sign</a>,
-// <a>Verify</a>, and <a>GetPublicKey</a>. (There are limited exceptions to this
-// rule for legacy operations, but you should not create a grant for an operation
-// that AWS KMS does not support.)</p> </li> <li> <p>Grants for asymmetric CMKs
-// cannot allow operations that are not supported for asymmetric CMKs, including
-// operations that <a
-// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey">generate
-// data keys</a> or <a
-// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKeyPair">data
-// key pairs</a>, or operations related to <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html">automatic
-// key rotation</a>, <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">imported
-// key material</a>, or CMKs in <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html">custom
-// key stores</a>.</p> </li> <li> <p>Grants for asymmetric CMKs with a
-// <code>KeyUsage</code> of <code>ENCRYPT_DECRYPT</code> cannot allow the
-// <a>Sign</a> or <a>Verify</a> operations. Grants for asymmetric CMKs with a
-// <code>KeyUsage</code> of <code>SIGN_VERIFY</code> cannot allow the
-// <a>Encrypt</a> or <a>Decrypt</a> operations.</p> </li> <li> <p>Grants for
+// ValidationException.
+//
+//     * Grants for symmetric CMKs cannot allow operations
+// that are not supported for symmetric CMKs, including Sign, Verify, and
+// GetPublicKey. (There are limited exceptions to this rule for legacy operations,
+// but you should not create a grant for an operation that AWS KMS does not
+// support.)
+//
+//     * Grants for asymmetric CMKs cannot allow operations that are not
+// supported for asymmetric CMKs, including operations that generate data keys
+// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey) or
+// data key pairs
+// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKeyPair),
+// or operations related to automatic key rotation
+// (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html),
+// imported key material
+// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
+// CMKs in custom key stores
+// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
+//
+//
+// * Grants for asymmetric CMKs with a KeyUsage of ENCRYPT_DECRYPT cannot allow the
+// Sign or Verify operations. Grants for asymmetric CMKs with a KeyUsage of
+// SIGN_VERIFY cannot allow the Encrypt or Decrypt operations.
+//
+//     * Grants for
 // asymmetric CMKs cannot include an encryption context grant constraint. An
-// encryption context is not supported on asymmetric CMKs.</p> </li> </ul> <p>For
-// information about symmetric and asymmetric CMKs, see <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using
-// Symmetric and Asymmetric CMKs</a> in the <i>AWS Key Management Service Developer
-// Guide</i>.</p> <p>To perform this operation on a CMK in a different AWS account,
-// specify the key  ARN in the value of the KeyId parameter. For more information
-// about grants, see Grants
+// encryption context is not supported on asymmetric CMKs.
+//
+// For information about
+// symmetric and asymmetric CMKs, see Using Symmetric and Asymmetric CMKs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+// in the AWS Key Management Service Developer Guide. To perform this operation on
+// a CMK in a different AWS account, specify the key ARN in the value of the KeyId
+// parameter. For more information about grants, see Grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
 // Key Management Service Developer Guide . The CMK that you use for this operation
 // must be in a compatible key state. For details, see How Key State Affects Use of
@@ -87,17 +93,17 @@ type CreateGrantInput struct {
 	GranteePrincipal *string
 
 	// The unique identifier for the customer master key (CMK) that the grant applies
-	// to.  <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
-	// specify a CMK in a  different AWS account, you must use the key ARN. For
-	// example:
+	// to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
+	// a CMK in a different AWS account, you must use the key ARN. For example:
 	//
-	//     * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//     *
+	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//     * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
@@ -134,7 +140,7 @@ type CreateGrantInput struct {
 	Name *string
 
 	// The principal that is given permission to retire the grant by using RetireGrant
-	// () operation. To specify the principal, use the Amazon Resource Name (ARN)
+	// operation. To specify the principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// an AWS principal. Valid AWS principals include AWS accounts (root), IAM users,
 	// federated users, and assumed role users. For examples of the ARN syntax to use
@@ -147,7 +153,7 @@ type CreateGrantInput struct {
 type CreateGrantOutput struct {
 
 	// The unique identifier for the grant. You can use the GrantId in a subsequent
-	// RetireGrant () or RevokeGrant () operation.
+	// RetireGrant or RevokeGrant operation.
 	GrantId *string
 
 	// The grant token. For more information, see Grant Tokens

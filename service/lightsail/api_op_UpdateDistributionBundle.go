@@ -12,14 +12,14 @@ import (
 )
 
 // Updates the bundle of your Amazon Lightsail content delivery network (CDN)
-// distribution.  <p>A distribution bundle specifies the monthly network transfer
-// quota and monthly cost of your dsitribution.</p> <p>Update your distribution's
-// bundle if your distribution is going over its monthly network transfer quota and
-// is incurring an overage fee.</p> <p>You can update your distribution's bundle
-// only one time within your monthly AWS billing cycle. To determine if you can
-// update your distribution's bundle, use the <code>GetDistributions</code> action.
-// The <code>ableToUpdateBundle</code> parameter in the result will indicate
-// whether you can currently update your distribution's bundle.</p>
+// distribution. A distribution bundle specifies the monthly network transfer quota
+// and monthly cost of your dsitribution. Update your distribution's bundle if your
+// distribution is going over its monthly network transfer quota and is incurring
+// an overage fee. You can update your distribution's bundle only one time within
+// your monthly AWS billing cycle. To determine if you can update your
+// distribution's bundle, use the GetDistributions action. The ableToUpdateBundle
+// parameter in the result will indicate whether you can currently update your
+// distribution's bundle.
 func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDistributionBundleInput, optFns ...func(*Options)) (*UpdateDistributionBundleOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionBundleInput{}
@@ -42,9 +42,9 @@ type UpdateDistributionBundleInput struct {
 	// can specify.
 	BundleId *string
 
-	// The name of the distribution for which to update the bundle.  <p>Use the
-	// <code>GetDistributions</code> action to get a list of distribution names that
-	// you can specify.</p>
+	// The name of the distribution for which to update the bundle. Use the
+	// GetDistributions action to get a list of distribution names that you can
+	// specify.
 	DistributionName *string
 }
 

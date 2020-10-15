@@ -41,12 +41,12 @@ type ModifyDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The new amount of storage (in gibibytes) to allocate for the DB instance.
-	// <p>For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be at
-	// least 10% greater than the current value. Values that are not at least 10%
-	// greater than the existing value are rounded up so that they are 10% greater than
-	// the current value. </p> <p>For the valid values for allocated storage for each
-	// engine, see <code>CreateDBInstance</code>. </p>
+	// The new amount of storage (in gibibytes) to allocate for the DB instance. For
+	// MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be at least 10%
+	// greater than the current value. Values that are not at least 10% greater than
+	// the existing value are rounded up so that they are 10% greater than the current
+	// value. For the valid values for allocated storage for each engine, see
+	// CreateDBInstance.
 	AllocatedStorage *int32
 
 	// A value that indicates whether major version upgrades are allowed. Changing this
@@ -61,7 +61,7 @@ type ModifyDBInstanceInput struct {
 	// PreferredMaintenanceWindow setting for the DB instance. By default, this
 	// parameter is disabled. If this parameter is disabled, changes to the DB instance
 	// are applied during the next maintenance window. Some parameter changes can cause
-	// an outage and are applied on the next call to RebootDBInstance (), or the next
+	// an outage and are applied on the next call to RebootDBInstance, or the next
 	// failure reboot. Review the table of parameters in Modifying a DB Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)
 	// in the Amazon RDS User Guide. to see the impact of enabling or disabling
@@ -178,16 +178,14 @@ type ModifyDBInstanceInput struct {
 	DBSecurityGroups []*string
 
 	// The new DB subnet group for the DB instance. You can use this parameter to move
-	// your DB instance to a different VPC.  If your DB instance isn't in a VPC, you
-	// can also use this parameter to move your DB instance into a VPC. For more
-	// information, see <a
-	// href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC">Updating
-	// the VPC for a DB Instance</a> in the <i>Amazon RDS User Guide.</i> </p>
-	// <p>Changing the subnet group causes an outage during the change. The change is
-	// applied during the next maintenance window, unless you enable
-	// <code>ApplyImmediately</code>. </p> <p>Constraints: If supplied, must match the
-	// name of an existing DBSubnetGroup.</p> <p>Example: <code>mySubnetGroup</code>
-	// </p>
+	// your DB instance to a different VPC. If your DB instance isn't in a VPC, you can
+	// also use this parameter to move your DB instance into a VPC. For more
+	// information, see Updating the VPC for a DB Instance
+	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
+	// in the Amazon RDS User Guide. Changing the subnet group causes an outage during
+	// the change. The change is applied during the next maintenance window, unless you
+	// enable ApplyImmediately. Constraints: If supplied, must match the name of an
+	// existing DBSubnetGroup. Example: mySubnetGroup
 	DBSubnetGroupName *string
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
@@ -218,11 +216,11 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance ().  <p>For
-	// more information about IAM database authentication, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
-	// User Guide.</i> </p>
+	// For information about the supported DB engines, see CreateDBInstance. For more
+	// information about IAM database authentication, see  IAM Database Authentication
+	// for MySQL and PostgreSQL
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to enable Performance Insights for the DB
@@ -274,18 +272,16 @@ type ModifyDBInstanceInput struct {
 	// in an outage and the change is asynchronously applied as soon as possible.
 	// Between the time of the request and the completion of the request, the
 	// MasterUserPassword element exists in the PendingModifiedValues element of the
-	// operation response.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The
-	// password for the master user is managed by the DB cluster. For more information,
-	// see <code>ModifyDBCluster</code>. </p> <p>Default: Uses existing setting</p> <p>
-	// <b>MariaDB</b> </p> <p>Constraints: Must contain from 8 to 41 characters.</p>
-	// <p> <b>Microsoft SQL Server</b> </p> <p>Constraints: Must contain from 8 to 128
-	// characters.</p> <p> <b>MySQL</b> </p> <p>Constraints: Must contain from 8 to 41
-	// characters.</p> <p> <b>Oracle</b> </p> <p>Constraints: Must contain from 8 to 30
-	// characters.</p> <p> <b>PostgreSQL</b> </p> <p>Constraints: Must contain from 8
-	// to 128 characters.</p> <note> <p>Amazon RDS API actions never return the
+	// operation response. Amazon Aurora Not applicable. The password for the master
+	// user is managed by the DB cluster. For more information, see ModifyDBCluster.
+	// Default: Uses existing setting MariaDB Constraints: Must contain from 8 to 41
+	// characters. Microsoft SQL Server Constraints: Must contain from 8 to 128
+	// characters. MySQL Constraints: Must contain from 8 to 41 characters. Oracle
+	// Constraints: Must contain from 8 to 30 characters. PostgreSQL Constraints: Must
+	// contain from 8 to 128 characters. Amazon RDS API actions never return the
 	// password, so this action provides a way to regain access to a primary instance
 	// user if the password is lost. This includes restoring privileges that might have
-	// been accidentally revoked. </p> </note>
+	// been accidentally revoked.
 	MasterUserPassword *string
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
@@ -318,10 +314,17 @@ type ModifyDBInstanceInput struct {
 	// When you change the DB instance identifier, an instance reboot occurs
 	// immediately if you enable ApplyImmediately, or will occur during the next
 	// maintenance window if you disable Apply Immediately. This value is stored as a
-	// lowercase string.  <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63
-	// letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a
-	// letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive
-	// hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>
+	// lowercase string. Constraints:
+	//
+	//     * Must contain from 1 to 63 letters,
+	// numbers, or hyphens.
+	//
+	//     * The first character must be a letter.
+	//
+	//     * Can't
+	// end with a hyphen or contain two consecutive hyphens.
+	//
+	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
 
 	// Indicates that the DB instance should be associated with the specified option
@@ -351,13 +354,20 @@ type ModifyDBInstanceInput struct {
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, as determined by the BackupRetentionPeriod parameter.
 	// Changing this parameter doesn't result in an outage and the change is
-	// asynchronously applied as soon as possible.  <p> <b>Amazon Aurora</b> </p>
-	// <p>Not applicable. The daily time range for creating automated backups is
-	// managed by the DB cluster. For more information, see
-	// <code>ModifyDBCluster</code>.</p> <p>Constraints:</p> <ul> <li> <p>Must be in
-	// the format hh24:mi-hh24:mi</p> </li> <li> <p>Must be in Universal Time
-	// Coordinated (UTC)</p> </li> <li> <p>Must not conflict with the preferred
-	// maintenance window</p> </li> <li> <p>Must be at least 30 minutes</p> </li> </ul>
+	// asynchronously applied as soon as possible. Amazon Aurora Not applicable. The
+	// daily time range for creating automated backups is managed by the DB cluster.
+	// For more information, see ModifyDBCluster. Constraints:
+	//
+	//     * Must be in the
+	// format hh24:mi-hh24:mi
+	//
+	//     * Must be in Universal Time Coordinated (UTC)
+	//
+	//     *
+	// Must not conflict with the preferred maintenance window
+	//
+	//     * Must be at least
+	// 30 minutes
 	PreferredBackupWindow *string
 
 	// The weekly time range (in UTC) during which system maintenance can occur, which

@@ -19,8 +19,8 @@ import (
 // your own IP address ranges to AWS Global Accelerator (BYOIP), you can assign IP
 // addresses from your own pool to your accelerator as the static IP address entry
 // points. Only one IP address from each of your IP address ranges can be used for
-// each accelerator.  <important> <p>You must specify the US West (Oregon) Region
-// to create or update accelerators.</p> </important>
+// each accelerator. You must specify the US West (Oregon) Region to create or
+// update accelerators.
 func (c *Client) CreateAccelerator(ctx context.Context, params *CreateAcceleratorInput, optFns ...func(*Options)) (*CreateAcceleratorOutput, error) {
 	if params == nil {
 		params = &CreateAcceleratorInput{}

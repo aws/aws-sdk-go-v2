@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Activates AWS Shield Advanced for an account.  <p>When you initally create a
+// Activates AWS Shield Advanced for an account. When you initally create a
 // subscription, your subscription is set to be automatically renewed at the end of
 // the existing subscription period. You can change this by submitting an
-// <code>UpdateSubscription</code> request. </p>
+// UpdateSubscription request.
 func (c *Client) CreateSubscription(ctx context.Context, params *CreateSubscriptionInput, optFns ...func(*Options)) (*CreateSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateSubscriptionInput{}

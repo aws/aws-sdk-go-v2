@@ -19,18 +19,7 @@ import (
 const ServiceID = "Macie"
 const ServiceAPIVersion = "2017-12-19"
 
-// Amazon Macie Classic Amazon Macie Classic is a security service that uses
-// machine learning to automatically discover, classify, and protect sensitive data
-// in AWS. Macie Classic recognizes sensitive data such as personally identifiable
-// information (PII) or intellectual property, and provides you with dashboards and
-// alerts that give visibility into how this data is being accessed or moved. For
-// more information, see the Amazon Macie Classic User Guide
-// (https://docs.aws.amazon.com/macie/latest/userguide/what-is-macie.html). A new
-// Amazon Macie is now available with significant design improvements and
-// additional features, at a lower price and in most AWS Regions. We encourage you
-// to explore and use the new and improved features, and benefit from the reduced
-// cost. To learn about features and pricing for the new Amazon Macie, see Amazon
-// Macie (https://aws.amazon.com/macie/).
+// Client provides the API client to make operations call for Amazon Macie.
 type Client struct {
 	options Options
 }

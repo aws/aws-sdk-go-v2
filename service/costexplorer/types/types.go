@@ -68,13 +68,13 @@ type CostCategoryRule struct {
 	// object used to categorize costs. This supports dimensions, Tags, and nested
 	// expressions. Currently the only dimensions supported are LINKED_ACCOUNT,
 	// SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR is not
-	// supported. We recommend that you create a separate rule instead.  <p>
-	// <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also
-	// supported for Cost Category expressions. This dimension uses different terms,
-	// depending on whether you're using the console or API/JSON editor. For a detailed
-	// comparison, see <a
-	// href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term
-	// Comparisons</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>
+	// supported. We recommend that you create a separate rule instead. RECORD_TYPE is
+	// a dimension used for Cost Explorer APIs, and is also supported for Cost Category
+	// expressions. This dimension uses different terms, depending on whether you're
+	// using the console or API/JSON editor. For a detailed comparison, see Term
+	// Comparisons
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
+	// in the AWS Billing and Cost Management User Guide.
 	//
 	// This member is required.
 	Rule *Expression

@@ -17,8 +17,8 @@ import (
 // can use the decode method of the java.net.URLDecoder utility class in the Java
 // SDK. Other languages and SDKs provide similar functionality. An IAM group can
 // also have managed policies attached to it. To retrieve a managed policy document
-// that is attached to a group, use GetPolicy () to determine the policy's default
-// version, then use GetPolicyVersion () to retrieve the policy document. For more
+// that is attached to a group, use GetPolicy to determine the policy's default
+// version, then use GetPolicyVersion to retrieve the policy document. For more
 // information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
@@ -56,7 +56,7 @@ type GetGroupPolicyInput struct {
 	PolicyName *string
 }
 
-// Contains the response to a successful GetGroupPolicy () request.
+// Contains the response to a successful GetGroupPolicy request.
 type GetGroupPolicyOutput struct {
 
 	// The group the policy is associated with.

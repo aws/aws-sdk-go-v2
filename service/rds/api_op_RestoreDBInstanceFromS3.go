@@ -47,16 +47,23 @@ type RestoreDBInstanceFromS3Input struct {
 	DBInstanceClass *string
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
-	// <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or
-	// hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li>
-	// <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>
-	// <p>Example: <code>mydbinstance</code> </p>
+	// Constraints:
+	//
+	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
+	//
+	// * First character must be a letter.
+	//
+	//     * Can't end with a hyphen or contain
+	// two consecutive hyphens.
+	//
+	// Example: mydbinstance
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The name of the database engine to be used for this instance.  <p>Valid Values:
-	// <code>mysql</code> </p>
+	// The name of the database engine to be used for this instance. Valid Values:
+	// mysql
 	//
 	// This member is required.
 	Engine *string
@@ -72,8 +79,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// This member is required.
 	S3IngestionRoleArn *string
 
-	// The name of the engine of your source database.  <p>Valid Values:
-	// <code>mysql</code> </p>
+	// The name of the engine of your source database. Valid Values: mysql
 	//
 	// This member is required.
 	SourceEngine *string
@@ -85,10 +91,9 @@ type RestoreDBInstanceFromS3Input struct {
 	SourceEngineVersion *string
 
 	// The amount of storage (in gigabytes) to allocate initially for the DB instance.
-	// Follow the allocation rules specified in CreateDBInstance.  <note> <p>Be sure to
-	// allocate enough memory for your new DB instance so that the restore operation
-	// can succeed. You can also allocate additional memory for future growth. </p>
-	// </note>
+	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
+	// enough memory for your new DB instance so that the restore operation can
+	// succeed. You can also allocate additional memory for future growth.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically
@@ -147,11 +152,11 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// For information about the supported DB engines, see CreateDBInstance ().  <p>For
-	// more information about IAM database authentication, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
-	// User Guide.</i> </p>
+	// For information about the supported DB engines, see CreateDBInstance. For more
+	// information about IAM database authentication, see  IAM Database Authentication
+	// for MySQL and PostgreSQL
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to enable Performance Insights for the DB
@@ -187,21 +192,26 @@ type RestoreDBInstanceFromS3Input struct {
 	LicenseModel *string
 
 	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@".  <p>Constraints: Must contain from 8 to 41
-	// characters.</p>
+	// character except "/", """, or "@". Constraints: Must contain from 8 to 41
+	// characters.
 	MasterUserPassword *string
 
-	// The name for the master user.  <p>Constraints: </p> <ul> <li> <p>Must be 1 to 16
-	// letters or numbers.</p> </li> <li> <p>First character must be a letter.</p>
-	// </li> <li> <p>Can't be a reserved word for the chosen database engine.</p> </li>
-	// </ul>
+	// The name for the master user. Constraints:
+	//
+	//     * Must be 1 to 16 letters or
+	// numbers.
+	//
+	//     * First character must be a letter.
+	//
+	//     * Can't be a reserved
+	// word for the chosen database engine.
 	MasterUsername *string
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
-	// metrics, specify 0.  <p>If <code>MonitoringRoleArn</code> is specified, then you
-	// must also set <code>MonitoringInterval</code> to a value other than 0. </p>
-	// <p>Valid Values: 0, 1, 5, 10, 15, 30, 60 </p> <p>Default: <code>0</code> </p>
+	// metrics, specify 0. If MonitoringRoleArn is specified, then you must also set
+	// MonitoringInterval to a value other than 0. Valid Values: 0, 1, 5, 10, 15, 30,
+	// 60 Default: 0
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to
@@ -241,21 +251,37 @@ type RestoreDBInstanceFromS3Input struct {
 	// The time range each day during which automated backups are created if automated
 	// backups are enabled. For more information, see The Backup Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
-	// in the Amazon RDS User Guide.  <p>Constraints:</p> <ul> <li> <p>Must be in the
-	// format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal
-	// Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred
-	// maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li>
-	// </ul>
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	//     * Must be in the format
+	// hh24:mi-hh24:mi.
+	//
+	//     * Must be in Universal Coordinated Time (UTC).
+	//
+	//     * Must
+	// not conflict with the preferred maintenance window.
+	//
+	//     * Must be at least 30
+	// minutes.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). For more information, see Amazon RDS Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance)
-	// in the Amazon RDS User Guide.  <p>Constraints:</p> <ul> <li> <p>Must be in the
-	// format <code>ddd:hh24:mi-ddd:hh24:mi</code>.</p> </li> <li> <p>Valid Days: Mon,
-	// Tue, Wed, Thu, Fri, Sat, Sun.</p> </li> <li> <p>Must be in Universal Coordinated
-	// Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred backup
-	// window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	//     * Must be in the format
+	// ddd:hh24:mi-ddd:hh24:mi.
+	//
+	//     * Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//
+	//
+	// * Must be in Universal Coordinated Time (UTC).
+	//
+	//     * Must not conflict with the
+	// preferred backup window.
+	//
+	//     * Must be at least 30 minutes.
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
@@ -270,7 +296,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// permitted if the security group assigned to the DB instance doesn't permit it.
 	// When the DB instance isn't publicly accessible, it is an internal DB instance
 	// with a DNS name that resolves to a private IP address. For more information, see
-	// CreateDBInstance ().
+	// CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// The prefix of your Amazon S3 bucket.

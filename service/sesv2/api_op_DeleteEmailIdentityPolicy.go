@@ -18,7 +18,7 @@ import (
 // senders to use its identities. For information about using sending
 // authorization, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-// <p>You can execute this operation no more than once per second.</p>
+// You can execute this operation no more than once per second.
 func (c *Client) DeleteEmailIdentityPolicy(ctx context.Context, params *DeleteEmailIdentityPolicyInput, optFns ...func(*Options)) (*DeleteEmailIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteEmailIdentityPolicyInput{}
@@ -46,8 +46,8 @@ type DeleteEmailIdentityPolicyInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// The name of the policy.  <p>The policy name cannot exceed 64 characters and can
-	// only include alphanumeric characters, dashes, and underscores.</p>
+	// The name of the policy. The policy name cannot exceed 64 characters and can only
+	// include alphanumeric characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string

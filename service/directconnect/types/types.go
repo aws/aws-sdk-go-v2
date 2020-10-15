@@ -143,7 +143,7 @@ type Connection struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.
@@ -186,13 +186,13 @@ type DirectConnectGateway struct {
 	// values:
 	//
 	//     * pending: The initial state after calling
-	// CreateDirectConnectGateway ().
+	// CreateDirectConnectGateway.
 	//
 	//     * available: The Direct Connect gateway is
 	// ready for use.
 	//
 	//     * deleting: The initial state after calling
-	// DeleteDirectConnectGateway ().
+	// DeleteDirectConnectGateway.
 	//
 	//     * deleted: The Direct Connect gateway is
 	// deleted and cannot pass traffic.
@@ -222,17 +222,17 @@ type DirectConnectGatewayAssociation struct {
 	//
 	//     *
 	// associating: The initial state after calling
-	// CreateDirectConnectGatewayAssociation ().
+	// CreateDirectConnectGatewayAssociation.
 	//
 	//     * associated: The Direct Connect
 	// gateway and virtual private gateway or transit gateway are successfully
 	// associated and ready to pass traffic.
 	//
 	//     * disassociating: The initial state
-	// after calling DeleteDirectConnectGatewayAssociation ().
+	// after calling DeleteDirectConnectGatewayAssociation.
 	//
-	//     * disassociated:
-	// The virtual private gateway or transit gateway is disassociated from the Direct
+	//     * disassociated: The
+	// virtual private gateway or transit gateway is disassociated from the Direct
 	// Connect gateway. Traffic flow between the Direct Connect gateway and virtual
 	// private gateway or transit gateway is stopped.
 	AssociationState DirectConnectGatewayAssociationState
@@ -308,7 +308,7 @@ type DirectConnectGatewayAttachment struct {
 	// interface are attached and ready to pass traffic.
 	//
 	//     * detaching: The initial
-	// state after calling DeleteVirtualInterface ().
+	// state after calling DeleteVirtualInterface.
 	//
 	//     * detached: The virtual
 	// interface is detached from the Direct Connect gateway. Traffic flow between the
@@ -386,7 +386,7 @@ type Interconnect struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.
@@ -933,18 +933,18 @@ type VirtualInterface struct {
 	//
 	//     * deleting: A
 	// virtual interface is in this state immediately after calling
-	// DeleteVirtualInterface () until it can no longer forward traffic.
+	// DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//     *
-	// deleted: A virtual interface that cannot forward traffic.
+	//     * deleted: A
+	// virtual interface that cannot forward traffic.
 	//
-	//     * rejected: The
-	// virtual interface owner has declined creation of the virtual interface. If a
-	// virtual interface in the Confirming state is deleted by the virtual interface
-	// owner, the virtual interface enters the Rejected state.
+	//     * rejected: The virtual
+	// interface owner has declined creation of the virtual interface. If a virtual
+	// interface in the Confirming state is deleted by the virtual interface owner, the
+	// virtual interface enters the Rejected state.
 	//
-	//     * unknown: The
-	// state of the virtual interface is not available.
+	//     * unknown: The state of the
+	// virtual interface is not available.
 	VirtualInterfaceState VirtualInterfaceState
 
 	// The type of virtual interface. The possible values are private and public.

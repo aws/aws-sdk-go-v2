@@ -1021,16 +1021,36 @@ type ReplicationInstance struct {
 	ReplicationInstancePublicIpAddresses []*string
 
 	// The status of the replication instance. The possible return values include:
-	// <ul> <li> <p> <code>"available"</code> </p> </li> <li> <p>
-	// <code>"creating"</code> </p> </li> <li> <p> <code>"deleted"</code> </p> </li>
-	// <li> <p> <code>"deleting"</code> </p> </li> <li> <p> <code>"failed"</code> </p>
-	// </li> <li> <p> <code>"modifying"</code> </p> </li> <li> <p>
-	// <code>"upgrading"</code> </p> </li> <li> <p> <code>"rebooting"</code> </p> </li>
-	// <li> <p> <code>"resetting-master-credentials"</code> </p> </li> <li> <p>
-	// <code>"storage-full"</code> </p> </li> <li> <p>
-	// <code>"incompatible-credentials"</code> </p> </li> <li> <p>
-	// <code>"incompatible-network"</code> </p> </li> <li> <p>
-	// <code>"maintenance"</code> </p> </li> </ul>
+	//
+	//
+	// * "available"
+	//
+	//     * "creating"
+	//
+	//     * "deleted"
+	//
+	//     * "deleting"
+	//
+	//     *
+	// "failed"
+	//
+	//     * "modifying"
+	//
+	//     * "upgrading"
+	//
+	//     * "rebooting"
+	//
+	//     *
+	// "resetting-master-credentials"
+	//
+	//     * "storage-full"
+	//
+	//     *
+	// "incompatible-credentials"
+	//
+	//     * "incompatible-network"
+	//
+	//     * "maintenance"
 	ReplicationInstanceStatus *string
 
 	// The subnet group for the replication instance.
@@ -1428,12 +1448,11 @@ type S3Settings struct {
 	// operations at the source. For more information about how these settings work
 	// together, see Indicating Source DB Operations in Migrated S3 Data
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
-	// in the AWS Database Migration Service User Guide..  <p>AWS DMS supports the use
-	// of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and
-	// later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code>
-	// can't both be set to <code>true</code> for the same endpoint. Set either
-	// <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to
-	// <code>true</code> for the same endpoint, but not both.</p> </note>
+	// in the AWS Database Migration Service User Guide.. AWS DMS supports the use of
+	// the CdcInsertsAndUpdates parameter in versions 3.3.1 and later. CdcInsertsOnly
+	// and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set
+	// either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but
+	// not both.
 	CdcInsertsAndUpdates *bool
 
 	// A value that enables a change data capture (CDC) load to write only INSERT
@@ -1450,13 +1469,12 @@ type S3Settings struct {
 	// INSERT operation at the source. For more information about how these settings
 	// work together, see Indicating Source DB Operations in Migrated S3 Data
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
-	// in the AWS Database Migration Service User Guide..  <note> <p>AWS DMS supports
-	// the interaction described preceding between the <code>CdcInsertsOnly</code> and
-	// <code>IncludeOpForFullLoad</code> parameters in versions 3.1.4 and later. </p>
-	// <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't both
-	// be set to <code>true</code> for the same endpoint. Set either
-	// <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to
-	// <code>true</code> for the same endpoint, but not both.</p> </note>
+	// in the AWS Database Migration Service User Guide.. AWS DMS supports the
+	// interaction described preceding between the CdcInsertsOnly and
+	// IncludeOpForFullLoad parameters in versions 3.1.4 and later. CdcInsertsOnly and
+	// CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either
+	// CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not
+	// both.
 	CdcInsertsOnly *bool
 
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP to
@@ -1576,12 +1594,11 @@ type S3Settings struct {
 	// writes them with microsecond precision. Currently, Amazon Athena and AWS Glue
 	// can handle only millisecond precision for TIMESTAMP values. Set this parameter
 	// to true for S3 endpoint object files that are .parquet formatted only if you
-	// plan to query or process the data with Athena or AWS Glue.  <p>AWS DMS writes
-	// any <code>TIMESTAMP</code> column values written to an S3 file in .csv format
-	// with microsecond precision.</p> <p>Setting
-	// <code>ParquetTimestampInMillisecond</code> has no effect on the string format of
-	// the timestamp column value that is inserted by setting the
-	// <code>TimestampColumnName</code> parameter.</p> </note>
+	// plan to query or process the data with Athena or AWS Glue. AWS DMS writes any
+	// TIMESTAMP column values written to an S3 file in .csv format with microsecond
+	// precision. Setting ParquetTimestampInMillisecond has no effect on the string
+	// format of the timestamp column value that is inserted by setting the
+	// TimestampColumnName parameter.
 	ParquetTimestampInMillisecond *bool
 
 	// The version of the Apache Parquet format that you want to use: parquet_1_0 (the

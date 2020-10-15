@@ -13,7 +13,7 @@ type BatchDetectDominantLanguageItemResult struct {
 	// The zero-based index of the document in the input list.
 	Index *int32
 
-	// One or more DominantLanguage () objects describing the dominant languages in the
+	// One or more DominantLanguage objects describing the dominant languages in the
 	// document.
 	Languages []*DominantLanguage
 }
@@ -22,7 +22,7 @@ type BatchDetectDominantLanguageItemResult struct {
 // document that is successfully processed by the operation.
 type BatchDetectEntitiesItemResult struct {
 
-	// One or more Entity () objects, one for each entity detected in the document.
+	// One or more Entity objects, one for each entity detected in the document.
 	Entities []*Entity
 
 	// The zero-based index of the document in the input list.
@@ -36,8 +36,7 @@ type BatchDetectKeyPhrasesItemResult struct {
 	// The zero-based index of the document in the input list.
 	Index *int32
 
-	// One or more KeyPhrase () objects, one for each key phrase detected in the
-	// document.
+	// One or more KeyPhrase objects, one for each key phrase detected in the document.
 	KeyPhrases []*KeyPhrase
 }
 
@@ -262,8 +261,7 @@ type DocumentClassifierFilter struct {
 }
 
 // The input properties for training a document classifier. For more information on
-// how the input file is formatted, see how-document-classification-training-data
-// ().
+// how the input file is formatted, see how-document-classification-training-data.
 type DocumentClassifierInputDataConfig struct {
 
 	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
@@ -1026,7 +1024,7 @@ type OutputDataConfig struct {
 // Identifies the part of speech represented by the token and gives the confidence
 // that Amazon Comprehend has that the part of speech was correctly identified. For
 // more information about the parts of speech that Amazon Comprehend can identify,
-// see how-syntax ().
+// see how-syntax.
 type PartOfSpeechTag struct {
 
 	// The confidence that Amazon Comprehend has that the part of speech was correctly
@@ -1150,7 +1148,7 @@ type SyntaxToken struct {
 
 	// Provides the part of speech label and the confidence level that Amazon
 	// Comprehend has that the part of speech was correctly identified. For more
-	// information, see how-syntax ().
+	// information, see how-syntax.
 	PartOfSpeech *PartOfSpeechTag
 
 	// The word that was recognized in the source text.

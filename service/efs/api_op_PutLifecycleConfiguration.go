@@ -20,17 +20,22 @@ import (
 // exists for the specified file system, a PutLifecycleConfiguration call modifies
 // the existing configuration. A PutLifecycleConfiguration call with an empty
 // LifecyclePolicies array in the request body deletes any existing
-// LifecycleConfiguration and disables lifecycle management.  <p>In the request,
-// specify the following: </p> <ul> <li> <p>The ID for the file system for which
-// you are enabling, disabling, or modifying lifecycle management.</p> </li> <li>
-// <p>A <code>LifecyclePolicies</code> array of <code>LifecyclePolicy</code>
-// objects that define when files are moved to the IA storage class. The array can
-// contain only one <code>LifecyclePolicy</code> item.</p> </li> </ul> <p>This
-// operation requires permissions for the
-// <code>elasticfilesystem:PutLifecycleConfiguration</code> operation.</p> <p>To
-// apply a <code>LifecycleConfiguration</code> object to an encrypted file system,
-// you need the same AWS Key Management Service (AWS KMS) permissions as when you
-// created the encrypted file system. </p>
+// LifecycleConfiguration and disables lifecycle management. In the request,
+// specify the following:
+//
+//     * The ID for the file system for which you are
+// enabling, disabling, or modifying lifecycle management.
+//
+//     * A
+// LifecyclePolicies array of LifecyclePolicy objects that define when files are
+// moved to the IA storage class. The array can contain only one LifecyclePolicy
+// item.
+//
+// This operation requires permissions for the
+// elasticfilesystem:PutLifecycleConfiguration operation. To apply a
+// LifecycleConfiguration object to an encrypted file system, you need the same AWS
+// Key Management Service (AWS KMS) permissions as when you created the encrypted
+// file system.
 func (c *Client) PutLifecycleConfiguration(ctx context.Context, params *PutLifecycleConfigurationInput, optFns ...func(*Options)) (*PutLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLifecycleConfigurationInput{}

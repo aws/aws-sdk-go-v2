@@ -27,7 +27,7 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 	return out, nil
 }
 
-// Represents the input to DescribeOrderableDBInstanceOptions ().
+// Represents the input to DescribeOrderableDBInstanceOptions.
 type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The name of the engine to retrieve instance options for.
@@ -66,7 +66,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	Vpc *bool
 }
 
-// Represents the output of DescribeOrderableDBInstanceOptions ().
+// Represents the output of DescribeOrderableDBInstanceOptions.
 type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

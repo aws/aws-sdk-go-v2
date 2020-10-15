@@ -79,7 +79,7 @@ func (e *InvalidArnException) ErrorCode() string             { return "InvalidAr
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The token specified in the NextToken argument is not valid. Use the token
-// returned from your previous call to ListCertificateAuthorities ().
+// returned from your previous call to ListCertificateAuthorities.
 type InvalidNextTokenException struct {
 	Message *string
 }

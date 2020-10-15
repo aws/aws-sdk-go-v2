@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Lists the RestApi () resource in the collection.
+// Lists the RestApi resource in the collection.
 func (c *Client) GetRestApi(ctx context.Context, params *GetRestApiInput, optFns ...func(*Options)) (*GetRestApiOutput, error) {
 	if params == nil {
 		params = &GetRestApiInput{}
@@ -28,10 +28,10 @@ func (c *Client) GetRestApi(ctx context.Context, params *GetRestApiInput, optFns
 	return out, nil
 }
 
-// The GET request to list an existing RestApi () defined for your collection.
+// The GET request to list an existing RestApi defined for your collection.
 type GetRestApiInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -59,8 +59,8 @@ type GetRestApiOutput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the RestApi
+	// supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
@@ -69,7 +69,7 @@ type GetRestApiOutput struct {
 	// The API's description.
 	Description *string
 
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
 
@@ -88,7 +88,7 @@ type GetRestApiOutput struct {
 	Name *string
 
 	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
+	// the caller and Method configuration.
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.

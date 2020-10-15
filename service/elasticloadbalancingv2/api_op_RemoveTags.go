@@ -11,7 +11,7 @@ import (
 )
 
 // Removes the specified tags from the specified Elastic Load Balancing resource.
-// To list the current tags for your resources, use DescribeTags ().
+// To list the current tags for your resources, use DescribeTags.
 func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns ...func(*Options)) (*RemoveTagsOutput, error) {
 	if params == nil {
 		params = &RemoveTagsInput{}

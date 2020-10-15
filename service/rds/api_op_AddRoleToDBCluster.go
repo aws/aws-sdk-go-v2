@@ -44,7 +44,7 @@ type AddRoleToDBClusterInput struct {
 	RoleArn *string
 
 	// The name of the feature for the DB cluster that the IAM role is to be associated
-	// with. For the list of supported feature names, see DBEngineVersion ().
+	// with. For the list of supported feature names, see DBEngineVersion.
 	FeatureName *string
 }
 

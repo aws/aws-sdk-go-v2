@@ -76,7 +76,13 @@ func awsRestjson1_serializeOpHttpBindingsAssociateCustomerGatewayInput(v *Associ
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -169,7 +175,13 @@ func awsRestjson1_serializeOpHttpBindingsAssociateLinkInput(v *AssociateLinkInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -257,7 +269,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateDeviceInput(v *CreateDeviceInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -459,7 +477,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateLinkInput(v *CreateLinkInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -571,7 +595,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateSiteInput(v *CreateSiteInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -657,13 +687,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDeviceInput(v *DeleteDeviceInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -723,7 +765,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteGlobalNetworkInput(v *DeleteGloba
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -783,13 +831,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLinkInput(v *DeleteLinkInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.LinkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LinkId must not be empty")}
+	}
 	if v.LinkId != nil {
+		if len(*v.LinkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member LinkId must not be empty")}
+		}
 		if err := encoder.SetURI("LinkId").String(*v.LinkId); err != nil {
 			return err
 		}
@@ -849,13 +909,25 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSiteInput(v *DeleteSiteInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.SiteId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SiteId must not be empty")}
+	}
 	if v.SiteId != nil {
+		if len(*v.SiteId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SiteId must not be empty")}
+		}
 		if err := encoder.SetURI("SiteId").String(*v.SiteId); err != nil {
 			return err
 		}
@@ -915,13 +987,25 @@ func awsRestjson1_serializeOpHttpBindingsDeregisterTransitGatewayInput(v *Deregi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.TransitGatewayArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TransitGatewayArn must not be empty")}
+	}
 	if v.TransitGatewayArn != nil {
+		if len(*v.TransitGatewayArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member TransitGatewayArn must not be empty")}
+		}
 		if err := encoder.SetURI("TransitGatewayArn").String(*v.TransitGatewayArn); err != nil {
 			return err
 		}
@@ -1052,13 +1136,25 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateCustomerGatewayInput(v *Dis
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CustomerGatewayArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CustomerGatewayArn must not be empty")}
+	}
 	if v.CustomerGatewayArn != nil {
+		if len(*v.CustomerGatewayArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member CustomerGatewayArn must not be empty")}
+		}
 		if err := encoder.SetURI("CustomerGatewayArn").String(*v.CustomerGatewayArn); err != nil {
 			return err
 		}
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1122,7 +1218,13 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateLinkInput(v *DisassociateLi
 		encoder.SetQuery("deviceId").String(*v.DeviceId)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1195,7 +1297,13 @@ func awsRestjson1_serializeOpHttpBindingsGetCustomerGatewayAssociationsInput(v *
 		}
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1272,7 +1380,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDevicesInput(v *GetDevicesInput, enc
 		}
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1348,7 +1462,13 @@ func awsRestjson1_serializeOpHttpBindingsGetLinkAssociationsInput(v *GetLinkAsso
 		encoder.SetQuery("deviceId").String(*v.DeviceId)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1420,7 +1540,13 @@ func awsRestjson1_serializeOpHttpBindingsGetLinksInput(v *GetLinksInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1509,7 +1635,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSitesInput(v *GetSitesInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1586,7 +1718,13 @@ func awsRestjson1_serializeOpHttpBindingsGetTransitGatewayRegistrationsInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1663,7 +1801,13 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1734,7 +1878,13 @@ func awsRestjson1_serializeOpHttpBindingsRegisterTransitGatewayInput(v *Register
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -1817,7 +1967,13 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1891,7 +2047,13 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ResourceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
 	if v.ResourceArn != nil {
+		if len(*v.ResourceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+		}
 		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1971,13 +2133,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDeviceInput(v *UpdateDeviceInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+	}
 	if v.DeviceId != nil {
+		if len(*v.DeviceId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
+		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -2092,7 +2266,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateGlobalNetworkInput(v *UpdateGloba
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
@@ -2175,13 +2355,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLinkInput(v *UpdateLinkInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.LinkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LinkId must not be empty")}
+	}
 	if v.LinkId != nil {
+		if len(*v.LinkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member LinkId must not be empty")}
+		}
 		if err := encoder.SetURI("LinkId").String(*v.LinkId); err != nil {
 			return err
 		}
@@ -2281,13 +2473,25 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSiteInput(v *UpdateSiteInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GlobalNetworkId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+	}
 	if v.GlobalNetworkId != nil {
+		if len(*v.GlobalNetworkId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member GlobalNetworkId must not be empty")}
+		}
 		if err := encoder.SetURI("GlobalNetworkId").String(*v.GlobalNetworkId); err != nil {
 			return err
 		}
 	}
 
+	if v.SiteId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member SiteId must not be empty")}
+	}
 	if v.SiteId != nil {
+		if len(*v.SiteId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member SiteId must not be empty")}
+		}
 		if err := encoder.SetURI("SiteId").String(*v.SiteId); err != nil {
 			return err
 		}

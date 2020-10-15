@@ -89,11 +89,16 @@ import (
 //
 //     For example, the following x-amz-grant-read header
 // grants the AWS accounts identified by account IDs permissions to read object
-// data and its metadata: x-amz-grant-read: id="11112222333", id="444455556666"
-// </li> </ul> <note> <p>You can use either a canned ACL or specify access
-// permissions explicitly. You cannot do both.</p> </note> <p>The following
-// operations are related to <code>CreateBucket</code>:</p> <ul> <li> <p>
-// <a>PutObject</a> </p> </li> <li> <p> <a>DeleteBucket</a> </p> </li> </ul>
+// data and its metadata: x-amz-grant-read: id="11112222333",
+// id="444455556666"
+//
+// You can use either a canned ACL or specify access permissions
+// explicitly. You cannot do both. The following operations are related to
+// CreateBucket:
+//
+//     * PutObject
+//
+//     * DeleteBucket
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {
 	if params == nil {
 		params = &CreateBucketInput{}

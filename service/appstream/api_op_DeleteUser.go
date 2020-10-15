@@ -34,8 +34,7 @@ type DeleteUserInput struct {
 	// This member is required.
 	AuthenticationType types.AuthenticationType
 
-	// The email address of the user.  <note> <p>Users' email addresses are
-	// case-sensitive.</p> </note>
+	// The email address of the user. Users' email addresses are case-sensitive.
 	//
 	// This member is required.
 	UserName *string

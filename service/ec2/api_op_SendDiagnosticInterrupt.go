@@ -13,18 +13,18 @@ import (
 // Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a
 // kernel panic (on Linux instances), or a blue screen/stop error (on Windows
 // instances). For instances based on Intel and AMD processors, the interrupt is
-// received as a non-maskable interrupt (NMI).  <p>In general, the operating system
+// received as a non-maskable interrupt (NMI). In general, the operating system
 // crashes and reboots when a kernel panic or stop error is triggered. The
 // operating system can also be configured to perform diagnostic tasks, such as
 // generating a memory dump file, loading a secondary kernel, or obtaining a call
-// trace.</p> <p>Before sending a diagnostic interrupt to your instance, ensure
-// that its operating system is configured to perform the required diagnostic
-// tasks.</p> <p>For more information about configuring your operating system to
-// generate a crash dump when a kernel panic or stop error occurs, see <a
-// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html">Send
-// a diagnostic interrupt</a> (Linux instances) or <a
-// href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html">Send
-// a Diagnostic Interrupt</a> (Windows instances).</p>
+// trace. Before sending a diagnostic interrupt to your instance, ensure that its
+// operating system is configured to perform the required diagnostic tasks. For
+// more information about configuring your operating system to generate a crash
+// dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html)
+// (Linux instances) or Send a Diagnostic Interrupt
+// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html)
+// (Windows instances).
 func (c *Client) SendDiagnosticInterrupt(ctx context.Context, params *SendDiagnosticInterruptInput, optFns ...func(*Options)) (*SendDiagnosticInterruptOutput, error) {
 	if params == nil {
 		params = &SendDiagnosticInterruptInput{}

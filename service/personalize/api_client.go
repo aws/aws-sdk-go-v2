@@ -19,8 +19,7 @@ import (
 const ServiceID = "Personalize"
 const ServiceAPIVersion = "2018-05-22"
 
-// Amazon Personalize is a machine learning service that makes it easy to add
-// individualized recommendations to customers.
+// Client provides the API client to make operations call for Amazon Personalize.
 type Client struct {
 	options Options
 }

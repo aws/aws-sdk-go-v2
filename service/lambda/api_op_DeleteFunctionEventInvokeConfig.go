@@ -12,7 +12,7 @@ import (
 
 // Deletes the configuration for asynchronous invocation for a function, version,
 // or alias. To configure options for asynchronous invocation, use
-// PutFunctionEventInvokeConfig ().
+// PutFunctionEventInvokeConfig.
 func (c *Client) DeleteFunctionEventInvokeConfig(ctx context.Context, params *DeleteFunctionEventInvokeConfigInput, optFns ...func(*Options)) (*DeleteFunctionEventInvokeConfigOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionEventInvokeConfigInput{}

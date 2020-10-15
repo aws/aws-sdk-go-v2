@@ -132,23 +132,32 @@ type Filter struct {
 	// ListChangeSets, the supported values are as follows:
 	Name *string
 
-	// ListEntities - This is a list of unique EntityIds.  <p>
-	// <code>ListChangeSets</code> - The supported filter names and associated
-	// <code>ValueList</code>s is as follows:</p> <ul> <li> <p>
-	// <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of
-	// non-unique <code>ChangeSetName</code>s. These are defined when you call the
-	// <code>StartChangeSet</code> action.</p> </li> <li> <p> <code>Status</code> - The
-	// supported <code>ValueList</code> is a list of statuses for all change set
-	// requests.</p> </li> <li> <p> <code>EntityId</code> - The supported
-	// <code>ValueList</code> is a list of unique <code>EntityId</code>s.</p> </li>
-	// <li> <p> <code>BeforeStartTime</code> - The supported <code>ValueList</code> is
-	// a list of all change sets that started before the filter value.</p> </li> <li>
-	// <p> <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list
-	// of all change sets that started after the filter value.</p> </li> <li> <p>
-	// <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of
-	// all change sets that ended before the filter value.</p> </li> <li> <p>
-	// <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of
-	// all change sets that ended after the filter value.</p> </li> </ul>
+	// ListEntities - This is a list of unique EntityIds. ListChangeSets - The
+	// supported filter names and associated ValueLists is as follows:
+	//
+	//     *
+	// ChangeSetName - The supported ValueList is a list of non-unique ChangeSetNames.
+	// These are defined when you call the StartChangeSet action.
+	//
+	//     * Status - The
+	// supported ValueList is a list of statuses for all change set requests.
+	//
+	//     *
+	// EntityId - The supported ValueList is a list of unique EntityIds.
+	//
+	//     *
+	// BeforeStartTime - The supported ValueList is a list of all change sets that
+	// started before the filter value.
+	//
+	//     * AfterStartTime - The supported ValueList
+	// is a list of all change sets that started after the filter value.
+	//
+	//     *
+	// BeforeEndTime - The supported ValueList is a list of all change sets that ended
+	// before the filter value.
+	//
+	//     * AfterEndTime - The supported ValueList is a list
+	// of all change sets that ended after the filter value.
 	ValueList []*string
 }
 
@@ -156,8 +165,8 @@ type Filter struct {
 type Sort struct {
 
 	// For ListEntities, supported attributes include LastModifiedDate (default),
-	// Visibility, EntityId, and Name.  <p>For <code>ListChangeSets</code>, supported
-	// attributes include <code>StartTime</code> and <code>EndTime</code>.</p>
+	// Visibility, EntityId, and Name. For ListChangeSets, supported attributes include
+	// StartTime and EndTime.
 	SortBy *string
 
 	// The sorting order. Can be ASCENDING or DESCENDING. The default value is

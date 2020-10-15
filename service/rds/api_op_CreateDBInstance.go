@@ -56,18 +56,40 @@ type CreateDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The name of the database engine to be used for this instance.  <p>Not every
-	// database engine is available for every AWS Region. </p> <p>Valid Values: </p>
-	// <ul> <li> <p> <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p> </li>
-	// <li> <p> <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora)</p> </li>
-	// <li> <p> <code>aurora-postgresql</code> </p> </li> <li> <p> <code>mariadb</code>
-	// </p> </li> <li> <p> <code>mysql</code> </p> </li> <li> <p>
-	// <code>oracle-ee</code> </p> </li> <li> <p> <code>oracle-se2</code> </p> </li>
-	// <li> <p> <code>oracle-se1</code> </p> </li> <li> <p> <code>oracle-se</code> </p>
-	// </li> <li> <p> <code>postgres</code> </p> </li> <li> <p>
-	// <code>sqlserver-ee</code> </p> </li> <li> <p> <code>sqlserver-se</code> </p>
-	// </li> <li> <p> <code>sqlserver-ex</code> </p> </li> <li> <p>
-	// <code>sqlserver-web</code> </p> </li> </ul>
+	// The name of the database engine to be used for this instance. Not every database
+	// engine is available for every AWS Region. Valid Values:
+	//
+	//     * aurora (for MySQL
+	// 5.6-compatible Aurora)
+	//
+	//     * aurora-mysql (for MySQL 5.7-compatible Aurora)
+	//
+	//
+	// * aurora-postgresql
+	//
+	//     * mariadb
+	//
+	//     * mysql
+	//
+	//     * oracle-ee
+	//
+	//     *
+	// oracle-se2
+	//
+	//     * oracle-se1
+	//
+	//     * oracle-se
+	//
+	//     * postgres
+	//
+	//     *
+	// sqlserver-ee
+	//
+	//     * sqlserver-se
+	//
+	//     * sqlserver-ex
+	//
+	//     * sqlserver-web
 	//
 	// This member is required.
 	Engine *string
@@ -75,38 +97,82 @@ type CreateDBInstanceInput struct {
 	// The amount of storage (in gibibytes) to allocate for the DB instance. Type:
 	// Integer Amazon Aurora Not applicable. Aurora cluster volumes automatically grow
 	// as the amount of data in your database increases, though you are only charged
-	// for the space that you use in an Aurora cluster volume.  <p> <b>MySQL</b> </p>
-	// <p>Constraints to the amount of storage for each storage type are the following:
-	// </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from
-	// 20 to 65536.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an
-	// integer from 100 to 65536.</p> </li> <li> <p>Magnetic storage (standard): Must
-	// be an integer from 5 to 3072.</p> </li> </ul> <p> <b>MariaDB</b> </p>
-	// <p>Constraints to the amount of storage for each storage type are the following:
-	// </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from
-	// 20 to 65536.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an
-	// integer from 100 to 65536.</p> </li> <li> <p>Magnetic storage (standard): Must
-	// be an integer from 5 to 3072.</p> </li> </ul> <p> <b>PostgreSQL</b> </p>
-	// <p>Constraints to the amount of storage for each storage type are the following:
-	// </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from
-	// 20 to 65536.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an
-	// integer from 100 to 65536.</p> </li> <li> <p>Magnetic storage (standard): Must
-	// be an integer from 5 to 3072.</p> </li> </ul> <p> <b>Oracle</b> </p>
-	// <p>Constraints to the amount of storage for each storage type are the following:
-	// </p> <ul> <li> <p>General Purpose (SSD) storage (gp2): Must be an integer from
-	// 20 to 65536.</p> </li> <li> <p>Provisioned IOPS storage (io1): Must be an
-	// integer from 100 to 65536.</p> </li> <li> <p>Magnetic storage (standard): Must
-	// be an integer from 10 to 3072.</p> </li> </ul> <p> <b>SQL Server</b> </p>
-	// <p>Constraints to the amount of storage for each storage type are the following:
-	// </p> <ul> <li> <p>General Purpose (SSD) storage (gp2):</p> <ul> <li>
-	// <p>Enterprise and Standard editions: Must be an integer from 200 to 16384.</p>
-	// </li> <li> <p>Web and Express editions: Must be an integer from 20 to 16384.</p>
-	// </li> </ul> </li> <li> <p>Provisioned IOPS storage (io1):</p> <ul> <li>
-	// <p>Enterprise and Standard editions: Must be an integer from 200 to 16384.</p>
-	// </li> <li> <p>Web and Express editions: Must be an integer from 100 to
-	// 16384.</p> </li> </ul> </li> <li> <p>Magnetic storage (standard):</p> <ul> <li>
-	// <p>Enterprise and Standard editions: Must be an integer from 200 to 1024.</p>
-	// </li> <li> <p>Web and Express editions: Must be an integer from 20 to 1024.</p>
-	// </li> </ul> </li> </ul>
+	// for the space that you use in an Aurora cluster volume. MySQL Constraints to the
+	// amount of storage for each storage type are the following:
+	//
+	//     * General
+	// Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	//     *
+	// Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	//     *
+	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	//
+	// MariaDB
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	//
+	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	//
+	// * Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	//     *
+	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	//
+	// PostgreSQL
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	//
+	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	//
+	// * Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	//     *
+	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	//
+	// Oracle
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	//
+	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	//
+	// * Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	//     *
+	// Magnetic storage (standard): Must be an integer from 10 to 3072.
+	//
+	// SQL Server
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	//
+	// * General Purpose (SSD) storage (gp2):
+	//
+	//         * Enterprise and Standard
+	// editions: Must be an integer from 200 to 16384.
+	//
+	//         * Web and Express
+	// editions: Must be an integer from 20 to 16384.
+	//
+	//     * Provisioned IOPS storage
+	// (io1):
+	//
+	//         * Enterprise and Standard editions: Must be an integer from 200
+	// to 16384.
+	//
+	//         * Web and Express editions: Must be an integer from 100 to
+	// 16384.
+	//
+	//     * Magnetic storage (standard):
+	//
+	//         * Enterprise and Standard
+	// editions: Must be an integer from 200 to 1024.
+	//
+	//         * Web and Express
+	// editions: Must be an integer from 20 to 1024.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically
@@ -140,9 +206,8 @@ type CreateDBInstanceInput struct {
 	BackupRetentionPeriod *int32
 
 	// For supported engines, indicates that the DB instance should be associated with
-	// the specified CharacterSet.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable.
-	// The character set is managed by the DB cluster. For more information, see
-	// <code>CreateDBCluster</code>.</p>
+	// the specified CharacterSet. Amazon Aurora Not applicable. The character set is
+	// managed by the DB cluster. For more information, see CreateDBCluster.
 	CharacterSetName *string
 
 	// A value that indicates whether to copy tags from the DB instance to snapshots of
@@ -267,17 +332,31 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	// You can enable IAM database authentication for the following database engines:
-	// <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Mapping AWS IAM accounts to
-	// database accounts is managed by the DB cluster.</p> <p> <b>MySQL</b> </p> <ul>
-	// <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For
-	// MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>For MySQL 8.0, minor
-	// version 8.0.16 or higher</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <ul> <li>
-	// <p>For PostgreSQL 9.5, minor version 9.5.15 or higher</p> </li> <li> <p>For
-	// PostgreSQL 9.6, minor version 9.6.11 or higher</p> </li> <li> <p>PostgreSQL
-	// 10.6, 10.7, and 10.9</p> </li> </ul> <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
-	// User Guide.</i> </p>
+	// Amazon Aurora Not applicable. Mapping AWS IAM accounts to database accounts is
+	// managed by the DB cluster. MySQL
+	//
+	//     * For MySQL 5.6, minor version 5.6.34 or
+	// higher
+	//
+	//     * For MySQL 5.7, minor version 5.7.16 or higher
+	//
+	//     * For MySQL
+	// 8.0, minor version 8.0.16 or higher
+	//
+	// PostgreSQL
+	//
+	//     * For PostgreSQL 9.5, minor
+	// version 9.5.15 or higher
+	//
+	//     * For PostgreSQL 9.6, minor version 9.6.11 or
+	// higher
+	//
+	//     * PostgreSQL 10.6, 10.7, and 10.9
+	//
+	// For more information, see  IAM
+	// Database Authentication for MySQL and PostgreSQL
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to enable Performance Insights for the DB
@@ -290,23 +369,21 @@ type CreateDBInstanceInput struct {
 	// versions, use the DescribeDBEngineVersions action. The following are the
 	// database engines and links to information about the major and minor versions
 	// that are available with Amazon RDS. Not every database engine is available for
-	// every AWS Region.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version
-	// number of the database engine to be used by the DB instance is managed by the DB
-	// cluster.</p> <p> <b>MariaDB</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB
-	// on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p>
-	// <b>Microsoft SQL Server</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version
-	// and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>
-	// <p> <b>MySQL</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL
-	// on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p>
-	// <b>Oracle</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle
-	// Database Engine Release Notes</a> in the <i>Amazon RDS User Guide.</i> </p> <p>
-	// <b>PostgreSQL</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported
-	// PostgreSQL Database Versions</a> in the <i>Amazon RDS User Guide.</i> </p>
+	// every AWS Region. Amazon Aurora Not applicable. The version number of the
+	// database engine to be used by the DB instance is managed by the DB cluster.
+	// MariaDB See MariaDB on Amazon RDS Versions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
+	// in the Amazon RDS User Guide. Microsoft SQL Server See Version and Feature
+	// Support on Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport)
+	// in the Amazon RDS User Guide. MySQL See MySQL on Amazon RDS Versions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
+	// in the Amazon RDS User Guide. Oracle See Oracle Database Engine Release Notes
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)
+	// in the Amazon RDS User Guide. PostgreSQL See Supported PostgreSQL Database
+	// Versions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions)
+	// in the Amazon RDS User Guide.
 	EngineVersion *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
@@ -325,11 +402,10 @@ type CreateDBInstanceInput struct {
 	// key used to encrypt the new DB instance, then you can use the KMS key alias
 	// instead of the ARN for the KM encryption key. Amazon Aurora Not applicable. The
 	// KMS key identifier is managed by the DB cluster. For more information, see
-	// CreateDBCluster.  <p>If <code>StorageEncrypted</code> is enabled, and you do not
-	// specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will
-	// use your default encryption key. AWS KMS creates the default encryption key for
-	// your AWS account. Your AWS account has a different default encryption key for
-	// each AWS Region.</p>
+	// CreateDBCluster. If StorageEncrypted is enabled, and you do not specify a value
+	// for the KmsKeyId parameter, then Amazon RDS will use your default encryption
+	// key. AWS KMS creates the default encryption key for your AWS account. Your AWS
+	// account has a different default encryption key for each AWS Region.
 	KmsKeyId *string
 
 	// License model information for this DB instance. Valid values: license-included |
@@ -337,36 +413,75 @@ type CreateDBInstanceInput struct {
 	LicenseModel *string
 
 	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@".  <p> <b>Amazon Aurora</b> </p> <p>Not
-	// applicable. The password for the master user is managed by the DB cluster.</p>
-	// <p> <b>MariaDB</b> </p> <p>Constraints: Must contain from 8 to 41
-	// characters.</p> <p> <b>Microsoft SQL Server</b> </p> <p>Constraints: Must
-	// contain from 8 to 128 characters.</p> <p> <b>MySQL</b> </p> <p>Constraints: Must
-	// contain from 8 to 41 characters.</p> <p> <b>Oracle</b> </p> <p>Constraints: Must
-	// contain from 8 to 30 characters.</p> <p> <b>PostgreSQL</b> </p> <p>Constraints:
-	// Must contain from 8 to 128 characters.</p>
+	// character except "/", """, or "@". Amazon Aurora Not applicable. The password
+	// for the master user is managed by the DB cluster. MariaDB Constraints: Must
+	// contain from 8 to 41 characters. Microsoft SQL Server Constraints: Must contain
+	// from 8 to 128 characters. MySQL Constraints: Must contain from 8 to 41
+	// characters. Oracle Constraints: Must contain from 8 to 30 characters. PostgreSQL
+	// Constraints: Must contain from 8 to 128 characters.
 	MasterUserPassword *string
 
-	// The name for the master user.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable.
-	// The name for the master user is managed by the DB cluster. </p> <p>
-	// <b>MariaDB</b> </p> <p>Constraints:</p> <ul> <li> <p>Required for MariaDB.</p>
-	// </li> <li> <p>Must be 1 to 16 letters or numbers.</p> </li> <li> <p>Can't be a
-	// reserved word for the chosen database engine.</p> </li> </ul> <p> <b>Microsoft
-	// SQL Server</b> </p> <p>Constraints:</p> <ul> <li> <p>Required for SQL
-	// Server.</p> </li> <li> <p>Must be 1 to 128 letters or numbers.</p> </li> <li>
-	// <p>The first character must be a letter.</p> </li> <li> <p>Can't be a reserved
-	// word for the chosen database engine.</p> </li> </ul> <p> <b>MySQL</b> </p>
-	// <p>Constraints:</p> <ul> <li> <p>Required for MySQL.</p> </li> <li> <p>Must be 1
-	// to 16 letters or numbers.</p> </li> <li> <p>First character must be a
-	// letter.</p> </li> <li> <p>Can't be a reserved word for the chosen database
-	// engine.</p> </li> </ul> <p> <b>Oracle</b> </p> <p>Constraints:</p> <ul> <li>
-	// <p>Required for Oracle.</p> </li> <li> <p>Must be 1 to 30 letters or
-	// numbers.</p> </li> <li> <p>First character must be a letter.</p> </li> <li>
-	// <p>Can't be a reserved word for the chosen database engine.</p> </li> </ul> <p>
-	// <b>PostgreSQL</b> </p> <p>Constraints:</p> <ul> <li> <p>Required for
-	// PostgreSQL.</p> </li> <li> <p>Must be 1 to 63 letters or numbers.</p> </li> <li>
-	// <p>First character must be a letter.</p> </li> <li> <p>Can't be a reserved word
-	// for the chosen database engine.</p> </li> </ul>
+	// The name for the master user. Amazon Aurora Not applicable. The name for the
+	// master user is managed by the DB cluster. MariaDB Constraints:
+	//
+	//     * Required
+	// for MariaDB.
+	//
+	//     * Must be 1 to 16 letters or numbers.
+	//
+	//     * Can't be a
+	// reserved word for the chosen database engine.
+	//
+	// Microsoft SQL Server
+	// Constraints:
+	//
+	//     * Required for SQL Server.
+	//
+	//     * Must be 1 to 128 letters or
+	// numbers.
+	//
+	//     * The first character must be a letter.
+	//
+	//     * Can't be a reserved
+	// word for the chosen database engine.
+	//
+	// MySQL Constraints:
+	//
+	//     * Required for
+	// MySQL.
+	//
+	//     * Must be 1 to 16 letters or numbers.
+	//
+	//     * First character must be
+	// a letter.
+	//
+	//     * Can't be a reserved word for the chosen database
+	// engine.
+	//
+	// Oracle Constraints:
+	//
+	//     * Required for Oracle.
+	//
+	//     * Must be 1 to 30
+	// letters or numbers.
+	//
+	//     * First character must be a letter.
+	//
+	//     * Can't be a
+	// reserved word for the chosen database engine.
+	//
+	// PostgreSQL Constraints:
+	//
+	//     *
+	// Required for PostgreSQL.
+	//
+	//     * Must be 1 to 63 letters or numbers.
+	//
+	//     * First
+	// character must be a letter.
+	//
+	//     * Can't be a reserved word for the chosen
+	// database engine.
 	MasterUsername *string
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
@@ -424,17 +539,24 @@ type CreateDBInstanceInput struct {
 	// backups are enabled, using the BackupRetentionPeriod parameter. For more
 	// information, see The Backup Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
-	// in the Amazon RDS User Guide.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable.
-	// The daily time range for creating automated backups is managed by the DB
-	// cluster.</p> <p> The default is a 30-minute window selected at random from an
-	// 8-hour block of time for each AWS Region. To see the time blocks available, see
-	// <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow">
-	// Adjusting the Preferred DB Instance Maintenance Window</a> in the <i>Amazon RDS
-	// User Guide</i>. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format
-	// <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated
-	// Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance
-	// window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>
+	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. The daily time range
+	// for creating automated backups is managed by the DB cluster. The default is a
+	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// Region. To see the time blocks available, see  Adjusting the Preferred DB
+	// Instance Maintenance Window
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow)
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	//     * Must be in the format
+	// hh24:mi-hh24:mi.
+	//
+	//     * Must be in Universal Coordinated Time (UTC).
+	//
+	//     * Must
+	// not conflict with the preferred maintenance window.
+	//
+	//     * Must be at least 30
+	// minutes.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in Universal
@@ -488,8 +610,8 @@ type CreateDBInstanceInput struct {
 	PubliclyAccessible *bool
 
 	// A value that indicates whether the DB instance is encrypted. By default, it
-	// isn't encrypted.  <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The
-	// encryption for DB instances is managed by the DB cluster.</p>
+	// isn't encrypted. Amazon Aurora Not applicable. The encryption for DB instances
+	// is managed by the DB cluster.
 	StorageEncrypted *bool
 
 	// Specifies the storage type to be associated with the DB instance. Valid values:
@@ -513,9 +635,9 @@ type CreateDBInstanceInput struct {
 	Timezone *string
 
 	// A list of Amazon EC2 VPC security groups to associate with this DB instance.
-	// <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The associated list of EC2 VPC
-	// security groups is managed by the DB cluster.</p> <p>Default: The default EC2
-	// VPC security group for the DB subnet group's VPC.</p>
+	// Amazon Aurora Not applicable. The associated list of EC2 VPC security groups is
+	// managed by the DB cluster. Default: The default EC2 VPC security group for the
+	// DB subnet group's VPC.
 	VpcSecurityGroupIds []*string
 }
 

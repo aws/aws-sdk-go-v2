@@ -32,9 +32,13 @@ type CopyDBParameterGroupInput struct {
 	// The identifier or ARN for the source DB parameter group. For information about
 	// creating an ARN, see  Constructing an Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
-	// <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB parameter group.</p>
-	// </li> <li> <p>Must specify a valid DB parameter group identifier, for example
-	// <code>my-db-param-group</code>, or a valid ARN.</p> </li> </ul>
+	// Constraints:
+	//
+	//     * Must specify a valid DB parameter group.
+	//
+	//     * Must specify
+	// a valid DB parameter group identifier, for example my-db-param-group, or a valid
+	// ARN.
 	//
 	// This member is required.
 	SourceDBParameterGroupIdentifier *string
@@ -57,8 +61,7 @@ type CopyDBParameterGroupInput struct {
 	//     * Cannot end with a
 	// hyphen or contain two consecutive hyphens.
 	//
-	//     <p>Example:
-	// <code>my-db-parameter-group</code> </p>
+	// Example: my-db-parameter-group
 	//
 	// This member is required.
 	TargetDBParameterGroupIdentifier *string
@@ -70,7 +73,7 @@ type CopyDBParameterGroupInput struct {
 type CopyDBParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB parameter group. This data type is
-	// used as a response element in the DescribeDBParameterGroups () action.
+	// used as a response element in the DescribeDBParameterGroups action.
 	DBParameterGroup *types.DBParameterGroup
 
 	// Metadata pertaining to the operation's result.

@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Exports a forecast created by the CreateForecast () operation to your Amazon
-// Simple Storage Service (Amazon S3) bucket. The forecast file name will match the
+// Exports a forecast created by the CreateForecast operation to your Amazon Simple
+// Storage Service (Amazon S3) bucket. The forecast file name will match the
 // following conventions: __ where the component is in Java SimpleDateFormat
-// (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination () object that
-// includes an AWS Identity and Access Management (IAM) role that Amazon Forecast
-// can assume to access the Amazon S3 bucket. For more information, see
-// aws-forecast-iam-roles (). For more information, see howitworks-forecast (). To
-// get a list of all your forecast export jobs, use the ListForecastExportJobs ()
-// operation. The Status of the forecast export job must be ACTIVE before you can
-// access the forecast in your Amazon S3 bucket. To get the status, use the
-// DescribeForecastExportJob () operation.
+// (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes
+// an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume
+// to access the Amazon S3 bucket. For more information, see
+// aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a
+// list of all your forecast export jobs, use the ListForecastExportJobs operation.
+// The Status of the forecast export job must be ACTIVE before you can access the
+// forecast in your Amazon S3 bucket. To get the status, use the
+// DescribeForecastExportJob operation.
 func (c *Client) CreateForecastExportJob(ctx context.Context, params *CreateForecastExportJobInput, optFns ...func(*Options)) (*CreateForecastExportJobOutput, error) {
 	if params == nil {
 		params = &CreateForecastExportJobInput{}

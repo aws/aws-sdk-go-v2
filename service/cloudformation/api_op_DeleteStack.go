@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a specified stack. Once the call completes successfully, stack deletion
-// starts. Deleted stacks do not show up in the DescribeStacks () API if the
-// deletion has been completed successfully.
+// starts. Deleted stacks do not show up in the DescribeStacks API if the deletion
+// has been completed successfully.
 func (c *Client) DeleteStack(ctx context.Context, params *DeleteStackInput, optFns ...func(*Options)) (*DeleteStackOutput, error) {
 	if params == nil {
 		params = &DeleteStackInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteStack(ctx context.Context, params *DeleteStackInput, optF
 	return out, nil
 }
 
-// The input for DeleteStack () action.
+// The input for DeleteStack action.
 type DeleteStackInput struct {
 
 	// The name or the unique stack ID that is associated with the stack.

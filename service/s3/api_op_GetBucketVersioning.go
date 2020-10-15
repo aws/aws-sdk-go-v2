@@ -12,13 +12,17 @@ import (
 )
 
 // Returns the versioning state of a bucket. To retrieve the versioning state of a
-// bucket, you must be the bucket owner.  <p>This implementation also returns the
-// MFA Delete status of the versioning state. If the MFA Delete status is
-// <code>enabled</code>, the bucket owner must use an authentication device to
-// change the versioning state of the bucket.</p> <p>The following operations are
-// related to <code>GetBucketVersioning</code>:</p> <ul> <li> <p> <a>GetObject</a>
-// </p> </li> <li> <p> <a>PutObject</a> </p> </li> <li> <p> <a>DeleteObject</a>
-// </p> </li> </ul>
+// bucket, you must be the bucket owner. This implementation also returns the MFA
+// Delete status of the versioning state. If the MFA Delete status is enabled, the
+// bucket owner must use an authentication device to change the versioning state of
+// the bucket. The following operations are related to GetBucketVersioning:
+//
+//     *
+// GetObject
+//
+//     * PutObject
+//
+//     * DeleteObject
 func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersioningInput, optFns ...func(*Options)) (*GetBucketVersioningOutput, error) {
 	if params == nil {
 		params = &GetBucketVersioningInput{}

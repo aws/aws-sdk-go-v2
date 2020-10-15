@@ -15,24 +15,24 @@ import (
 // being used in any active matchmaking tickets. Related operations
 //
 //     *
-// CreateMatchmakingConfiguration ()
+// CreateMatchmakingConfiguration
 //
-//     * DescribeMatchmakingConfigurations ()
-//
-//
-// * UpdateMatchmakingConfiguration ()
-//
-//     * DeleteMatchmakingConfiguration ()
-//
-//
-// * CreateMatchmakingRuleSet ()
-//
-//     * DescribeMatchmakingRuleSets ()
+//     * DescribeMatchmakingConfigurations
 //
 //     *
-// ValidateMatchmakingRuleSet ()
+// UpdateMatchmakingConfiguration
 //
-//     * DeleteMatchmakingRuleSet ()
+//     * DeleteMatchmakingConfiguration
+//
+//     *
+// CreateMatchmakingRuleSet
+//
+//     * DescribeMatchmakingRuleSets
+//
+//     *
+// ValidateMatchmakingRuleSet
+//
+//     * DeleteMatchmakingRuleSet
 func (c *Client) DeleteMatchmakingConfiguration(ctx context.Context, params *DeleteMatchmakingConfigurationInput, optFns ...func(*Options)) (*DeleteMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingConfigurationInput{}

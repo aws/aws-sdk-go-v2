@@ -35,7 +35,7 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 type ListTagsInput struct {
 
 	// The cluster identifier (ID) for the cluster whose tags you are getting. To find
-	// the cluster ID, use DescribeClusters ().
+	// the cluster ID, use DescribeClusters.
 	//
 	// This member is required.
 	ResourceId *string

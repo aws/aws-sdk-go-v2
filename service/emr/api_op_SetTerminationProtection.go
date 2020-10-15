@@ -17,14 +17,15 @@ import (
 // calling the Amazon EC2 DisableAPITermination API on all EC2 instances in a
 // cluster. SetTerminationProtection is used to prevent accidental termination of a
 // cluster and to ensure that in the event of an error, the instances persist so
-// that you can recover any data stored in their ephemeral instance storage.  <p>
-// To terminate a cluster that has been locked by setting
-// <code>SetTerminationProtection</code> to <code>true</code>, you must first
-// unlock the job flow by a subsequent call to
-// <code>SetTerminationProtection</code> in which you set the value to
-// <code>false</code>. </p> <p> For more information, see<a
-// href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing
-// Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>
+// that you can recover any data stored in their ephemeral instance storage. To
+// terminate a cluster that has been locked by setting SetTerminationProtection to
+// true, you must first unlock the job flow by a subsequent call to
+// SetTerminationProtection in which you set the value to false.
+//
+// For more
+// information, seeManaging Cluster Termination
+// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html)
+// in the Amazon EMR Management Guide.
 func (c *Client) SetTerminationProtection(ctx context.Context, params *SetTerminationProtectionInput, optFns ...func(*Options)) (*SetTerminationProtectionOutput, error) {
 	if params == nil {
 		params = &SetTerminationProtectionInput{}
@@ -40,12 +41,12 @@ func (c *Client) SetTerminationProtection(ctx context.Context, params *SetTermin
 	return out, nil
 }
 
-// The input argument to the TerminationProtection () operation.
+// The input argument to the TerminationProtection operation.
 type SetTerminationProtectionInput struct {
 
 	// A list of strings that uniquely identify the clusters to protect. This
-	// identifier is returned by RunJobFlow () and can also be obtained from
-	// DescribeJobFlows () .
+	// identifier is returned by RunJobFlow and can also be obtained from
+	// DescribeJobFlows .
 	//
 	// This member is required.
 	JobFlowIds []*string

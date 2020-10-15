@@ -21,29 +21,30 @@ import (
 // belong to the bucket owner's account to use this operation. For more
 // information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide.  <p>If you don't have
-// <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403
-// Access Denied</code> error. If you have the correct permissions, but you're not
-// using an identity that belongs to the bucket owner's account, Amazon S3 returns
-// a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security
+// Simple Storage Service Developer Guide. If you don't have DeleteBucketPolicy
+// permissions, Amazon S3 returns a 403 Access Denied error. If you have the
+// correct permissions, but you're not using an identity that belongs to the bucket
+// owner's account, Amazon S3 returns a 405 Method Not Allowed error. As a security
 // precaution, the root user of the AWS account that owns a bucket can always use
 // this operation, even if the policy explicitly denies the root user the ability
-// to perform this action.</p> </important> <p>For more information about bucket
-// policies, see <a href="
-// https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using
-// Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST
-// API requests for this action require an additional parameter of outpost-id to be
-// passed with the request and an S3 on Outposts endpoint hostname prefix instead
-// of s3-control. For an example of the request syntax for Amazon S3 on Outposts
-// that uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-// using the access point ARN, see the <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples">
-// Example</a> section below.</p> <p>The following actions are related to
-// <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html">GetBucketPolicy</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketPolicy.html">PutBucketPolicy</a>
-// </p> </li> </ul>
+// to perform this action. For more information about bucket policies, see Using
+// Bucket Policies and User Policies
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). All
+// Amazon S3 on Outposts REST API requests for this action require an additional
+// parameter of outpost-id to be passed with the request and an S3 on Outposts
+// endpoint hostname prefix instead of s3-control. For an example of the request
+// syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname
+// prefix and the outpost-id derived using the access point ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples)
+// section below. The following actions are related to DeleteBucketPolicy:
+//
+//     *
+// GetBucketPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html)
+//
+//
+// * PutBucketPolicy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketPolicy.html)
 func (c *Client) DeleteBucketPolicy(ctx context.Context, params *DeleteBucketPolicyInput, optFns ...func(*Options)) (*DeleteBucketPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteBucketPolicyInput{}

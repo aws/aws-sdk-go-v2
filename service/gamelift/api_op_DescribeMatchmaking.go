@@ -16,17 +16,25 @@ import (
 // connection information for the resulting new game session. You can use this
 // operation to track the progress of matchmaking requests (through polling) as an
 // alternative to using event notifications. See more details on tracking
-// matchmaking requests through polling or notifications in StartMatchmaking (). To
+// matchmaking requests through polling or notifications in StartMatchmaking. To
 // request matchmaking tickets, provide a list of up to 10 ticket IDs. If the
 // request is successful, a ticket object is returned for each requested ID that
 // currently exists. Learn more  Add FlexMatch to a Game Client
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
 // Set Up FlexMatch Event Notification
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
-// Related operations  <ul> <li> <p> <a>StartMatchmaking</a> </p> </li> <li> <p>
-// <a>DescribeMatchmaking</a> </p> </li> <li> <p> <a>StopMatchmaking</a> </p> </li>
-// <li> <p> <a>AcceptMatch</a> </p> </li> <li> <p> <a>StartMatchBackfill</a> </p>
-// </li> </ul>
+// Related operations
+//
+//     * StartMatchmaking
+//
+//     * DescribeMatchmaking
+//
+//     *
+// StopMatchmaking
+//
+//     * AcceptMatch
+//
+//     * StartMatchBackfill
 func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchmakingInput, optFns ...func(*Options)) (*DescribeMatchmakingOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingInput{}

@@ -48,7 +48,6 @@ type BotChannelAssociation struct {
 
 	// The name of the Amazon Lex bot to which this association is being made.
 	// Currently, Amazon Lex supports associations with Facebook and Slack, and Twilio.
-	// </note>
 	BotName *string
 
 	// The date that the association between the Amazon Lex bot and the channel was
@@ -143,7 +142,7 @@ type BuiltinSlotTypeMetadata struct {
 type CodeHook struct {
 
 	// The version of the request-response that you want Amazon Lex to use to invoke
-	// your Lambda function. For more information, see using-lambda ().
+	// your Lambda function. For more information, see using-lambda.
 	//
 	// This member is required.
 	MessageVersion *string
@@ -229,14 +228,17 @@ type FollowUpPrompt struct {
 // application. We recommend that you use a Lambda function so that the relevant
 // logic lives in the Cloud and limit the client-side code primarily to
 // presentation. If you need to update the logic, you only update the Lambda
-// function; you don't need to upgrade your client application.  <p>Consider the
-// following examples:</p> <ul> <li> <p>In a pizza ordering application, after the
-// user provides all of the information for placing an order, you use a Lambda
-// function to place an order with a pizzeria. </p> </li> <li> <p>In a gaming
-// application, when a user says "pick up a rock," this information must go back to
-// the client application so that it can perform the operation and update the
-// graphics. In this case, you want Amazon Lex to return the intent data to the
-// client. </p> </li> </ul>
+// function; you don't need to upgrade your client application. Consider the
+// following examples:
+//
+//     * In a pizza ordering application, after the user
+// provides all of the information for placing an order, you use a Lambda function
+// to place an order with a pizzeria.
+//
+//     * In a gaming application, when a user
+// says "pick up a rock," this information must go back to the client application
+// so that it can perform the operation and update the graphics. In this case, you
+// want Amazon Lex to return the intent data to the client.
 type FulfillmentActivity struct {
 
 	// How the intent should be fulfilled, either by running a Lambda function or by
@@ -386,7 +388,7 @@ type Message struct {
 // Obtains information from the user. To define a prompt, provide one or more
 // messages and specify the number of attempts to get information from the user. If
 // you provide more than one message, Amazon Lex chooses one of the messages to use
-// to prompt the user. For more information, see how-it-works ().
+// to prompt the user. For more information, see how-it-works.
 type Prompt struct {
 
 	// The number of times to prompt the user for information.
@@ -403,7 +405,7 @@ type Prompt struct {
 
 	// A response card. Amazon Lex uses this prompt at runtime, in the PostText API
 	// response. It substitutes session attributes and slot values for placeholders in
-	// the response card. For more information, see ex-resp-card ().
+	// the response card. For more information, see ex-resp-card.
 	ResponseCard *string
 }
 
@@ -583,7 +585,7 @@ type UtteranceList struct {
 	// The version of the bot that processed the list.
 	BotVersion *string
 
-	// One or more UtteranceData () objects that contain information about the
-	// utterances that have been made to a bot. The maximum number of object is 100.
+	// One or more UtteranceData objects that contain information about the utterances
+	// that have been made to a bot. The maximum number of object is 100.
 	Utterances []*UtteranceData
 }

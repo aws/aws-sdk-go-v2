@@ -46,7 +46,7 @@ type UpdateApplicationInput struct {
 // Result message containing a single description of an application.
 type UpdateApplicationOutput struct {
 
-	// The ApplicationDescription () of the application.
+	// The ApplicationDescription of the application.
 	Application *types.ApplicationDescription
 
 	// Metadata pertaining to the operation's result.

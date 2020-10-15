@@ -15,7 +15,7 @@ import (
 // completed and provide information about the final status. A task runner makes
 // this call regardless of whether the task was sucessful. A task runner does not
 // need to call SetTaskStatus for tasks that are canceled by the web service during
-// a call to ReportTaskProgress ().
+// a call to ReportTaskProgress.
 func (c *Client) SetTaskStatus(ctx context.Context, params *SetTaskStatusInput, optFns ...func(*Options)) (*SetTaskStatusOutput, error) {
 	if params == nil {
 		params = &SetTaskStatusInput{}
@@ -35,7 +35,7 @@ func (c *Client) SetTaskStatus(ctx context.Context, params *SetTaskStatusInput, 
 type SetTaskStatusInput struct {
 
 	// The ID of the task assigned to the task runner. This value is provided in the
-	// response for PollForTask ().
+	// response for PollForTask.
 	//
 	// This member is required.
 	TaskId *string

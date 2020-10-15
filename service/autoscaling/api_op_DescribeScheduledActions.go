@@ -14,7 +14,7 @@ import (
 
 // Describes the actions scheduled for your Auto Scaling group that haven't run or
 // that have not reached their end time. To describe the actions that have already
-// run, call the DescribeScalingActivities () API.
+// run, call the DescribeScalingActivities API.
 func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeScheduledActionsInput, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
 	if params == nil {
 		params = &DescribeScheduledActionsInput{}

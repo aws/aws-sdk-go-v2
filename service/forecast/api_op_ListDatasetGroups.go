@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns a list of dataset groups created using the CreateDatasetGroup ()
-// operation. For each dataset group, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the dataset group ARN with the
-// DescribeDatasetGroup () operation.
+// Returns a list of dataset groups created using the CreateDatasetGroup operation.
+// For each dataset group, this operation returns a summary of its properties,
+// including its Amazon Resource Name (ARN). You can retrieve the complete set of
+// properties by using the dataset group ARN with the DescribeDatasetGroup
+// operation.
 func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroupsInput, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
 	if params == nil {
 		params = &ListDatasetGroupsInput{}

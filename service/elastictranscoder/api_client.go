@@ -19,7 +19,8 @@ import (
 const ServiceID = "Elastic Transcoder"
 const ServiceAPIVersion = "2012-09-25"
 
-// AWS Elastic Transcoder Service The AWS Elastic Transcoder Service.
+// Client provides the API client to make operations call for Amazon Elastic
+// Transcoder.
 type Client struct {
 	options Options
 }

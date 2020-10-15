@@ -15,11 +15,11 @@ import (
 // order for it to succeed. If the group has policies, deleting the group deletes
 // the policies, the underlying alarm actions, and any alarm that no longer has an
 // associated action. To remove instances from the Auto Scaling group before
-// deleting it, call the DetachInstances () API with the list of instances and the
+// deleting it, call the DetachInstances API with the list of instances and the
 // option to decrement the desired capacity. This ensures that Amazon EC2 Auto
 // Scaling does not launch replacement instances. To terminate all instances before
-// deleting the Auto Scaling group, call the UpdateAutoScalingGroup () API and set
-// the minimum size and desired capacity of the Auto Scaling group to zero.
+// deleting the Auto Scaling group, call the UpdateAutoScalingGroup API and set the
+// minimum size and desired capacity of the Auto Scaling group to zero.
 func (c *Client) DeleteAutoScalingGroup(ctx context.Context, params *DeleteAutoScalingGroupInput, optFns ...func(*Options)) (*DeleteAutoScalingGroupOutput, error) {
 	if params == nil {
 		params = &DeleteAutoScalingGroupInput{}

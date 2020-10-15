@@ -59,7 +59,7 @@ type ListUsersInput struct {
 	PathPrefix *string
 }
 
-// Contains the response to a successful ListUsers () request.
+// Contains the response to a successful ListUsers request.
 type ListUsersOutput struct {
 
 	// A list of users.

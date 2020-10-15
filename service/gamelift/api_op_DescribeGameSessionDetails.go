@@ -18,33 +18,32 @@ import (
 // sessions running on a fleet. To get game session record(s), specify just one of
 // the following: game session ID, fleet ID, or alias ID. You can filter this
 // request by game session status. Use the pagination parameters to retrieve
-// results as a set of sequential pages. If successful, a GameSessionDetail ()
-// object is returned for each session matching the request.
+// results as a set of sequential pages. If successful, a GameSessionDetail object
+// is returned for each session matching the request.
+//
+//     * CreateGameSession
+//
+//
+// * DescribeGameSessions
+//
+//     * DescribeGameSessionDetails
 //
 //     *
-// CreateGameSession ()
+// SearchGameSessions
 //
-//     * DescribeGameSessions ()
+//     * UpdateGameSession
 //
-//     *
-// DescribeGameSessionDetails ()
-//
-//     * SearchGameSessions ()
+//     * GetGameSessionLogUrl
 //
 //     *
-// UpdateGameSession ()
+// Game session placements
 //
-//     * GetGameSessionLogUrl ()
-//
-//     * Game session
-// placements
-//
-//         * StartGameSessionPlacement ()
+//         * StartGameSessionPlacement
 //
 //         *
-// DescribeGameSessionPlacement ()
+// DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * StopGameSessionPlacement
 func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *DescribeGameSessionDetailsInput, optFns ...func(*Options)) (*DescribeGameSessionDetailsOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionDetailsInput{}

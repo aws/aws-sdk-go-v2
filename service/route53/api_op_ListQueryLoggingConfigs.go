@@ -13,11 +13,13 @@ import (
 
 // Lists the configurations for DNS query logging that are associated with the
 // current AWS account or the configuration that is associated with a specified
-// hosted zone.  <p>For more information about DNS query logs, see <a
-// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html">CreateQueryLoggingConfig</a>.
-// Additional information, including the format of DNS query logs, appears in <a
-// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html">Logging
-// DNS Queries</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>
+// hosted zone. For more information about DNS query logs, see
+// CreateQueryLoggingConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html).
+// Additional information, including the format of DNS query logs, appears in
+// Logging DNS Queries
+// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html) in
+// the Amazon Route 53 Developer Guide.
 func (c *Client) ListQueryLoggingConfigs(ctx context.Context, params *ListQueryLoggingConfigsInput, optFns ...func(*Options)) (*ListQueryLoggingConfigsOutput, error) {
 	if params == nil {
 		params = &ListQueryLoggingConfigsInput{}

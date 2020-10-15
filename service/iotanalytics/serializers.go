@@ -146,13 +146,25 @@ func awsRestjson1_serializeOpHttpBindingsCancelPipelineReprocessingInput(v *Canc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PipelineName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+	}
 	if v.PipelineName != nil {
+		if len(*v.PipelineName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
 	}
 
+	if v.ReprocessingId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member reprocessingId must not be empty")}
+	}
 	if v.ReprocessingId != nil {
+		if len(*v.ReprocessingId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member reprocessingId must not be empty")}
+		}
 		if err := encoder.SetURI("reprocessingId").String(*v.ReprocessingId); err != nil {
 			return err
 		}
@@ -421,7 +433,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateDatasetContentInput(v *CreateData
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -662,7 +680,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelInput(v *DeleteChannelInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ChannelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+	}
 	if v.ChannelName != nil {
+		if len(*v.ChannelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -722,7 +746,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatasetInput(v *DeleteDatasetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -782,7 +812,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatasetContentInput(v *DeleteData
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -846,7 +882,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatastoreInput(v *DeleteDatastore
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatastoreName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
+	}
 	if v.DatastoreName != nil {
+		if len(*v.DatastoreName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
+		}
 		if err := encoder.SetURI("datastoreName").String(*v.DatastoreName); err != nil {
 			return err
 		}
@@ -906,7 +948,13 @@ func awsRestjson1_serializeOpHttpBindingsDeletePipelineInput(v *DeletePipelineIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PipelineName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+	}
 	if v.PipelineName != nil {
+		if len(*v.PipelineName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -966,7 +1014,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelInput(v *DescribeChannel
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ChannelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+	}
 	if v.ChannelName != nil {
+		if len(*v.ChannelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -1030,7 +1084,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDatasetInput(v *DescribeDataset
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -1090,7 +1150,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDatastoreInput(v *DescribeDatas
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatastoreName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
+	}
 	if v.DatastoreName != nil {
+		if len(*v.DatastoreName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
+		}
 		if err := encoder.SetURI("datastoreName").String(*v.DatastoreName); err != nil {
 			return err
 		}
@@ -1204,7 +1270,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribePipelineInput(v *DescribePipeli
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PipelineName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+	}
 	if v.PipelineName != nil {
+		if len(*v.PipelineName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -1264,7 +1336,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDatasetContentInput(v *GetDatasetCon
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -1390,7 +1468,13 @@ func awsRestjson1_serializeOpHttpBindingsListDatasetContentsInput(v *ListDataset
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -1867,7 +1951,13 @@ func awsRestjson1_serializeOpHttpBindingsSampleChannelDataInput(v *SampleChannel
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ChannelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+	}
 	if v.ChannelName != nil {
+		if len(*v.ChannelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -1950,7 +2040,13 @@ func awsRestjson1_serializeOpHttpBindingsStartPipelineReprocessingInput(v *Start
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PipelineName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+	}
 	if v.PipelineName != nil {
+		if len(*v.PipelineName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}
@@ -2188,7 +2284,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelInput(v *UpdateChannelInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ChannelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+	}
 	if v.ChannelName != nil {
+		if len(*v.ChannelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member channelName must not be empty")}
+		}
 		if err := encoder.SetURI("channelName").String(*v.ChannelName); err != nil {
 			return err
 		}
@@ -2280,7 +2382,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDatasetInput(v *UpdateDatasetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatasetName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+	}
 	if v.DatasetName != nil {
+		if len(*v.DatasetName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datasetName must not be empty")}
+		}
 		if err := encoder.SetURI("datasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
@@ -2393,7 +2501,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDatastoreInput(v *UpdateDatastore
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DatastoreName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
+	}
 	if v.DatastoreName != nil {
+		if len(*v.DatastoreName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member datastoreName must not be empty")}
+		}
 		if err := encoder.SetURI("datastoreName").String(*v.DatastoreName); err != nil {
 			return err
 		}
@@ -2485,7 +2599,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePipelineInput(v *UpdatePipelineIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.PipelineName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+	}
 	if v.PipelineName != nil {
+		if len(*v.PipelineName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member pipelineName must not be empty")}
+		}
 		if err := encoder.SetURI("pipelineName").String(*v.PipelineName); err != nil {
 			return err
 		}

@@ -43,7 +43,7 @@ type GetAWSDefaultServiceQuotaInput struct {
 
 type GetAWSDefaultServiceQuotaOutput struct {
 
-	// Returns the ServiceQuota () object which contains all values for a quota.
+	// Returns the ServiceQuota object which contains all values for a quota.
 	Quota *types.ServiceQuota
 
 	// Metadata pertaining to the operation's result.

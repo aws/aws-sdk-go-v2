@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a dataset import job created using the CreateDatasetImportJob ()
-// operation. You can delete only dataset import jobs that have a status of ACTIVE
-// or CREATE_FAILED. To get the status, use the DescribeDatasetImportJob ()
-// operation.
+// Deletes a dataset import job created using the CreateDatasetImportJob operation.
+// You can delete only dataset import jobs that have a status of ACTIVE or
+// CREATE_FAILED. To get the status, use the DescribeDatasetImportJob operation.
 func (c *Client) DeleteDatasetImportJob(ctx context.Context, params *DeleteDatasetImportJobInput, optFns ...func(*Options)) (*DeleteDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetImportJobInput{}

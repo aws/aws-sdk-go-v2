@@ -20,9 +20,9 @@ import (
 // context
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // of a ciphertext. The ReEncrypt operation can decrypt ciphertext that was
-// encrypted by using an AWS KMS CMK in an AWS KMS operation, such as Encrypt () or
-// GenerateDataKey (). It can also decrypt ciphertext that was encrypted by using
-// the public key of an asymmetric CMK
+// encrypted by using an AWS KMS CMK in an AWS KMS operation, such as Encrypt or
+// GenerateDataKey. It can also decrypt ciphertext that was encrypted by using the
+// public key of an asymmetric CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks)
 // outside of AWS KMS. However, it cannot decrypt ciphertext produced by other
 // libraries, such as the AWS Encryption SDK
@@ -48,28 +48,34 @@ import (
 // data, you must specify the destination CMK, that is, the CMK that re-encrypts
 // the data after it is decrypted. You can select a symmetric or asymmetric CMK. If
 // the destination CMK is an asymmetric CMK, you must also provide the encryption
-// algorithm. The algorithm that you choose must be compatible with the CMK.
-// <important> <p>When you use an asymmetric CMK to encrypt or reencrypt data, be
-// sure to record the CMK and encryption algorithm that you choose. You will be
-// required to provide the same CMK and encryption algorithm when you decrypt the
-// data. If the CMK and algorithm do not match the values used to encrypt the data,
-// the decrypt operation fails.</p> <p>You are not required to supply the CMK ID
-// and encryption algorithm when you decrypt with symmetric CMKs because AWS KMS
-// stores this information in the ciphertext blob. AWS KMS cannot store metadata in
-// ciphertext generated with asymmetric keys. The standard format for asymmetric
-// key ciphertext does not include configurable fields.</p> </important> </li>
-// </ul> <p>Unlike other AWS KMS API operations, <code>ReEncrypt</code> callers
-// must have two permissions:</p> <ul> <li> <p> <code>kms:ReEncryptFrom</code>
-// permission on the source CMK</p> </li> <li> <p> <code>kms:ReEncryptTo</code>
-// permission on the destination CMK</p> </li> </ul> <p>To permit reencryption from
-// or to a CMK, include the <code>"kms:ReEncrypt*"</code> permission in your <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">key
-// policy</a>. This permission is automatically included in the key policy when you
-// use the console to create a CMK. But you must include it manually when you
-// create a CMK programmatically or when you use the <a>PutKeyPolicy</a> operation
-// to set a key policy.</p> <p>The CMK that you use for this operation must be in a
-// compatible key state. For  details, see How Key State Affects Use of a Customer
-// Master Key
+// algorithm. The algorithm that you choose must be compatible with the CMK. When
+// you use an asymmetric CMK to encrypt or reencrypt data, be sure to record the
+// CMK and encryption algorithm that you choose. You will be required to provide
+// the same CMK and encryption algorithm when you decrypt the data. If the CMK and
+// algorithm do not match the values used to encrypt the data, the decrypt
+// operation fails. You are not required to supply the CMK ID and encryption
+// algorithm when you decrypt with symmetric CMKs because AWS KMS stores this
+// information in the ciphertext blob. AWS KMS cannot store metadata in ciphertext
+// generated with asymmetric keys. The standard format for asymmetric key
+// ciphertext does not include configurable fields.
+//
+// Unlike other AWS KMS API
+// operations, ReEncrypt callers must have two permissions:
+//
+//     *
+// kms:ReEncryptFrom permission on the source CMK
+//
+//     * kms:ReEncryptTo permission
+// on the destination CMK
+//
+// To permit reencryption from or to a CMK, include the
+// "kms:ReEncrypt*" permission in your key policy
+// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html). This
+// permission is automatically included in the key policy when you use the console
+// to create a CMK. But you must include it manually when you create a CMK
+// programmatically or when you use the PutKeyPolicy operation to set a key policy.
+// The CMK that you use for this operation must be in a compatible key state. For
+// details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) ReEncrypt(ctx context.Context, params *ReEncryptInput, optFns ...func(*Options)) (*ReEncryptOutput, error) {
@@ -96,7 +102,7 @@ type ReEncryptInput struct {
 
 	// A unique identifier for the CMK that is used to reencrypt the data. Specify a
 	// symmetric or asymmetric CMK with a KeyUsage value of ENCRYPT_DECRYPT. To find
-	// the KeyUsage value of a CMK, use the DescribeKey () operation. To specify a CMK,
+	// the KeyUsage value of a CMK, use the DescribeKey operation. To specify a CMK,
 	// use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using
 	// an alias name, prefix it with "alias/". To specify a CMK in a different AWS
 	// account, you must use the key ARN or alias ARN. For example:
@@ -114,8 +120,8 @@ type ReEncryptInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
-	// alias ARN, use ListAliases ().
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	DestinationKeyId *string
@@ -171,16 +177,24 @@ type ReEncryptInput struct {
 	// particular CMK (of any kind) is used to decrypt the ciphertext before it is
 	// reencrypted. If you specify a KeyId value, the decrypt part of the ReEncrypt
 	// operation succeeds only if the specified CMK was used to encrypt the ciphertext.
-	// <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or
-	// alias ARN. When using an alias name, prefix it with <code>"alias/"</code>.</p>
-	// <p>For example:</p> <ul> <li> <p>Key ID:
-	// <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN:
-	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
-	// </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li>
-	// <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>
-	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
-	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
-	// <a>ListAliases</a>.</p>
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or
+	// alias ARN. When using an alias name, prefix it with "alias/". For example:
+	//
+	//
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//     * Key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//
+	// * Alias name: alias/ExampleAlias
+	//
+	//     * Alias ARN:
+	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	SourceKeyId *string
 }
 

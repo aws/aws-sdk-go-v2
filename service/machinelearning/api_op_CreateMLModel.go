@@ -18,12 +18,10 @@ import (
 // Machine Learning (Amazon ML) immediately returns and sets the MLModel status to
 // PENDING. After the MLModel has been created and ready is for use, Amazon ML sets
 // the status to COMPLETED. You can use the GetMLModel operation to check the
-// progress of the MLModel during the creation operation.  <p>
-// <code>CreateMLModel</code> requires a <code>DataSource</code> with computed
-// statistics, which can be created by setting <code>ComputeStatistics</code> to
-// <code>true</code> in <code>CreateDataSourceFromRDS</code>,
-// <code>CreateDataSourceFromS3</code>, or
-// <code>CreateDataSourceFromRedshift</code> operations. </p>
+// progress of the MLModel during the creation operation. CreateMLModel requires a
+// DataSource with computed statistics, which can be created by setting
+// ComputeStatistics to true in CreateDataSourceFromRDS, CreateDataSourceFromS3, or
+// CreateDataSourceFromRedshift operations.
 func (c *Client) CreateMLModel(ctx context.Context, params *CreateMLModelInput, optFns ...func(*Options)) (*CreateMLModelOutput, error) {
 	if params == nil {
 		params = &CreateMLModelInput{}

@@ -58,7 +58,7 @@ type ListPolicyVersionsInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListPolicyVersions () request.
+// Contains the response to a successful ListPolicyVersions request.
 type ListPolicyVersionsOutput struct {
 
 	// A flag that indicates whether there are more items to return. If your results

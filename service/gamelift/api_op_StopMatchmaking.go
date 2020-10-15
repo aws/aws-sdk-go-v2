@@ -23,16 +23,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
 // Related operations
 //
-//     * StartMatchmaking ()
+//     * StartMatchmaking
 //
-//     * DescribeMatchmaking ()
+//     * DescribeMatchmaking
 //
+//     *
+// StopMatchmaking
 //
-// * StopMatchmaking ()
+//     * AcceptMatch
 //
-//     * AcceptMatch ()
-//
-//     * StartMatchBackfill ()
+//     * StartMatchBackfill
 func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInput, optFns ...func(*Options)) (*StopMatchmakingOutput, error) {
 	if params == nil {
 		params = &StopMatchmakingInput{}

@@ -345,9 +345,8 @@ type Condition struct {
 }
 
 // The confusion matrix shows you what your transform is predicting accurately and
-// what types of errors it is making.  <p>For more information, see <a
-// href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a> in
-// Wikipedia.</p>
+// what types of errors it is making. For more information, see Confusion matrix
+// (https://en.wikipedia.org/wiki/Confusion_matrix) in Wikipedia.
 type ConfusionMatrix struct {
 
 	// The number of matches in the data that the transform didn't find, in the
@@ -526,13 +525,13 @@ type ConnectionInput struct {
 // The data structure used by the Data Catalog to encrypt the password as part of
 // CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD
 // field in the connection properties. You can enable catalog encryption or only
-// password encryption.  <p>When a <code>CreationConnection</code> request arrives
-// containing a password, the Data Catalog first encrypts the password using your
-// AWS KMS key. It then encrypts the whole connection object again if catalog
-// encryption is also enabled.</p> <p>This encryption requires that you set AWS KMS
-// key permissions to enable or restrict access on the password key according to
-// your security requirements. For example, you might want only administrators to
-// have decrypt permission on the password key.</p>
+// password encryption. When a CreationConnection request arrives containing a
+// password, the Data Catalog first encrypts the password using your AWS KMS key.
+// It then encrypts the whole connection object again if catalog encryption is also
+// enabled. This encryption requires that you set AWS KMS key permissions to enable
+// or restrict access on the password key according to your security requirements.
+// For example, you might want only administrators to have decrypt permission on
+// the password key.
 type ConnectionPasswordEncryption struct {
 
 	// When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords
@@ -542,13 +541,12 @@ type ConnectionPasswordEncryption struct {
 	// This member is required.
 	ReturnConnectionPasswordEncrypted *bool
 
-	// An AWS KMS key that is used to encrypt the connection password.  <p>If
-	// connection password protection is enabled, the caller of
-	// <code>CreateConnection</code> and <code>UpdateConnection</code> needs at least
-	// <code>kms:Encrypt</code> permission on the specified AWS KMS key, to encrypt
-	// passwords before storing them in the Data Catalog. </p> <p>You can set the
-	// decrypt permission to enable or restrict access on the password key according to
-	// your security requirements.</p>
+	// An AWS KMS key that is used to encrypt the connection password. If connection
+	// password protection is enabled, the caller of CreateConnection and
+	// UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS
+	// key, to encrypt passwords before storing them in the Data Catalog. You can set
+	// the decrypt permission to enable or restrict access on the password key
+	// according to your security requirements.
 	AwsKmsKeyId *string
 }
 
@@ -981,10 +979,10 @@ type DevEndpoint struct {
 	//     *
 	// "GLUE_PYTHON_VERSION": "2"
 	//
-	//     <p>You can specify a version of Python support
-	// for development endpoints by using the <code>Arguments</code> parameter in the
-	// <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no
-	// arguments are provided, the version defaults to Python 2.</p>
+	// You can specify a version of Python support for
+	// development endpoints by using the Arguments parameter in the CreateDevEndpoint
+	// or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
+	// Python 2.
 	Arguments map[string]*string
 
 	// The AWS Availability Zone where this DevEndpoint is located.
@@ -1002,10 +1000,9 @@ type DevEndpoint struct {
 
 	// The paths to one or more Python libraries in an Amazon S3 bucket that should be
 	// loaded in your DevEndpoint. Multiple values must be complete paths separated by
-	// a comma.  <note> <p>You can only use pure Python libraries with a
-	// <code>DevEndpoint</code>. Libraries that rely on C extensions, such as the <a
-	// href="http://pandas.pydata.org/">pandas</a> Python data analysis library, are
-	// not currently supported.</p> </note>
+	// a comma. You can only use pure Python libraries with a DevEndpoint. Libraries
+	// that rely on C extensions, such as the pandas (http://pandas.pydata.org/) Python
+	// data analysis library, are not currently supported.
 	ExtraPythonLibsS3Path *string
 
 	// The reason for a current failure in this DevEndpoint.
@@ -1013,15 +1010,14 @@ type DevEndpoint struct {
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for running your
-	// ETL scripts on development endpoints.  <p>For more information about the
-	// available AWS Glue versions and corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Development endpoints that are created without
-	// specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version
-	// of Python support for development endpoints by using the <code>Arguments</code>
-	// parameter in the <code>CreateDevEndpoint</code> or
-	// <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version
-	// defaults to Python 2.</p>
+	// ETL scripts on development endpoints. For more information about the available
+	// AWS Glue versions and corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide. Development endpoints that are created without specifying a Glue version
+	// default to Glue 0.9. You can specify a version of Python support for development
+	// endpoints by using the Arguments parameter in the CreateDevEndpoint or
+	// UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
+	// Python 2.
 	GlueVersion *string
 
 	// The point in time at which this DevEndpoint was last modified.
@@ -1035,8 +1031,8 @@ type DevEndpoint struct {
 	NumberOfNodes *int32
 
 	// The number of workers of a defined workerType that are allocated to the
-	// development endpoint.  <p>The maximum number of workers you can define are 299
-	// for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	// development endpoint. The maximum number of workers you can define are 299 for
+	// G.1X, and 149 for G.2X.
 	NumberOfWorkers *int32
 
 	// A private IP address to access the DevEndpoint within a VPC if the DevEndpoint
@@ -1094,13 +1090,12 @@ type DevEndpoint struct {
 	//
 	//     * For the G.2X worker type,
 	// each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1
-	// executor per worker. We recommend this worker type for memory-intensive jobs.
+	// executor per worker. We recommend this worker type for memory-intensive
+	// jobs.
 	//
-	//
-	// <p>Known issue: when a development endpoint is created with the
-	// <code>G.2X</code> <code>WorkerType</code> configuration, the Spark drivers for
-	// the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
-	// </p>
+	// Known issue: when a development endpoint is created with the
+	// G.2XWorkerType configuration, the Spark drivers for the development endpoint
+	// will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
 	WorkerType WorkerType
 
 	// The YARN endpoint address used by this DevEndpoint.
@@ -1154,18 +1149,18 @@ type DynamoDBTarget struct {
 
 	// Indicates whether to scan all the records, or to sample rows from the table.
 	// Scanning all the records can take a long time when the table is not a high
-	// throughput table.  <p>A value of <code>true</code> means to scan all records,
-	// while a value of <code>false</code> means to sample the records. If no value is
-	// specified, the value defaults to <code>true</code>.</p>
+	// throughput table. A value of true means to scan all records, while a value of
+	// false means to sample the records. If no value is specified, the value defaults
+	// to true.
 	ScanAll *bool
 
 	// The percentage of the configured read capacity units to use by the AWS Glue
 	// crawler. Read capacity units is a term defined by DynamoDB, and is a numeric
 	// value that acts as rate limiter for the number of reads that can be performed on
-	// that table per second.  <p>The valid values are null or a value between 0.1 to
-	// 1.5. A null value is used when user does not provide a value, and defaults to
-	// 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of
-	// the max configured Read Capacity Unit (for tables using on-demand mode).</p>
+	// that table per second. The valid values are null or a value between 0.1 to 1.5.
+	// A null value is used when user does not provide a value, and defaults to 0.5 of
+	// the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max
+	// configured Read Capacity Unit (for tables using on-demand mode).
 	ScanRate *float64
 }
 
@@ -1291,11 +1286,11 @@ type FindMatchesParameters struct {
 	// cost concerns. A value of 1.0 means a bias purely for accuracy, which typically
 	// results in a higher cost, sometimes substantially higher. A value of 0.0 means a
 	// bias purely for cost, which results in a less accurate FindMatches transform,
-	// sometimes with unacceptable accuracy.  <p>Accuracy measures how well the
-	// transform finds true positives and true negatives. Increasing accuracy requires
-	// more machine resources and cost. But it also results in increased recall. </p>
-	// <p>Cost measures how many compute resources, and thus money, are consumed to run
-	// the transform.</p>
+	// sometimes with unacceptable accuracy. Accuracy measures how well the transform
+	// finds true positives and true negatives. Increasing accuracy requires more
+	// machine resources and cost. But it also results in increased recall. Cost
+	// measures how many compute resources, and thus money, are consumed to run the
+	// transform.
 	AccuracyCostTradeoff *float64
 
 	// The value to switch on or off to force the output to match the provided labels
@@ -1310,10 +1305,10 @@ type FindMatchesParameters struct {
 	// and recall. A value of 0.5 means no preference; a value of 1.0 means a bias
 	// purely for precision, and a value of 0.0 means a bias for recall. Because this
 	// is a tradeoff, choosing values close to 1.0 means very low recall, and choosing
-	// values close to 0.0 results in very low precision.  <p>The precision metric
-	// indicates how often your model is correct when it predicts a match. </p> <p>The
-	// recall metric indicates that for an actual match, how often your model predicts
-	// the match.</p>
+	// values close to 0.0 results in very low precision. The precision metric
+	// indicates how often your model is correct when it predicts a match. The recall
+	// metric indicates that for an actual match, how often your model predicts the
+	// match.
 	PrecisionRecallTradeoff *float64
 
 	// The name of a column that uniquely identifies rows in the source table. Used to
@@ -1448,12 +1443,12 @@ type JdbcTarget struct {
 // Specifies a job definition.
 type Job struct {
 
-	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
-	// data processing units (DPUs) allocated to runs of this job. You can allocate
-	// from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
-	// power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p> <p></p>
+	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// processing units (DPUs) allocated to runs of this job. You can allocate from 2
+	// to 100 DPUs; the default is 10. A DPU is a relative measure of processing power
+	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+	// information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int32
 
 	// The JobCommand that executes this job.
@@ -1485,11 +1480,11 @@ type Job struct {
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark.  <p>For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Jobs that are created without specifying a Glue
-	// version default to Glue 0.9.</p>
+	// Spark. For more information about the available AWS Glue versions and
+	// corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide. Jobs that are created without specifying a Glue version default to Glue
+	// 0.9.
 	GlueVersion *string
 
 	// The last point in time when this job definition was modified.
@@ -1501,18 +1496,19 @@ type Job struct {
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
 	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).  <p>Do not set
-	// <code>Max Capacity</code> if using <code>WorkerType</code> and
-	// <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for
-	// <code>MaxCapacity</code> depends on whether you are running a Python shell job,
-	// an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li>
-	// <p>When you specify a Python shell job
-	// (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or
-	// 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache
-	// Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming
-	// ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2
-	// to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
-	// allocation.</p> </li> </ul>
+	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
+	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
+	// allocated for MaxCapacity depends on whether you are running a Python shell job,
+	// an Apache Spark ETL job, or an Apache Spark streaming ETL job:
+	//
+	//     * When you
+	// specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate
+	// either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
+	//     * When you specify an
+	// Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL
+	// job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
+	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job after a JobRun fails.
@@ -1528,8 +1524,8 @@ type Job struct {
 	NotificationProperty *NotificationProperty
 
 	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	// runs. The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
 	NumberOfWorkers *int32
 
 	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
@@ -1622,12 +1618,12 @@ type JobNodeDetails struct {
 // Contains information about a job run.
 type JobRun struct {
 
-	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
-	// data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be
+	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be
 	// allocated; the default is 10. A DPU is a relative measure of processing power
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p>
+	// information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int32
 
 	// The job arguments associated with this run. For this job run, they replace the
@@ -1656,11 +1652,11 @@ type JobRun struct {
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark.  <p>For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Jobs that are created without specifying a Glue
-	// version default to Glue 0.9.</p>
+	// Spark. For more information about the available AWS Glue versions and
+	// corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide. Jobs that are created without specifying a Glue version default to Glue
+	// 0.9.
 	GlueVersion *string
 
 	// The ID of this job run.
@@ -1687,24 +1683,26 @@ type JobRun struct {
 	// this job runs. A DPU is a relative measure of processing power that consists of
 	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
 	// AWS Glue pricing page
-	// (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/).  <p>Do not
-	// set <code>Max Capacity</code> if using <code>WorkerType</code> and
-	// <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for
-	// <code>MaxCapacity</code> depends on whether you are running a Python shell job
-	// or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job
-	// (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or
-	// 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache
-	// Spark ETL job (<code>JobCommand.Name</code>="glueetl"), you can allocate from 2
-	// to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
-	// allocation.</p> </li> </ul>
+	// (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/). Do not set
+	// Max Capacity if using WorkerType and NumberOfWorkers. The value that can be
+	// allocated for MaxCapacity depends on whether you are running a Python shell job
+	// or an Apache Spark ETL job:
+	//
+	//     * When you specify a Python shell job
+	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
+	// default is 0.0625 DPU.
+	//
+	//     * When you specify an Apache Spark ETL job
+	// (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is
+	// 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
 
 	// Specifies configuration properties of a job run notification.
 	NotificationProperty *NotificationProperty
 
 	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	// runs. The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
 	NumberOfWorkers *int32
 
 	// A list of predecessors to this job run.
@@ -1749,12 +1747,12 @@ type JobRun struct {
 // job definition is completely overwritten by this information.
 type JobUpdate struct {
 
-	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
-	// data processing units (DPUs) to allocate to this job. You can allocate from 2 to
-	// 100 DPUs; the default is 10. A DPU is a relative measure of processing power
-	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p>
+	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// processing units (DPUs) to allocate to this job. You can allocate from 2 to 100
+	// DPUs; the default is 10. A DPU is a relative measure of processing power that
+	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+	// information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int32
 
 	// The JobCommand that executes this job (required).
@@ -1783,10 +1781,10 @@ type JobUpdate struct {
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark.  <p>For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p>
+	// Spark. For more information about the available AWS Glue versions and
+	// corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide.
 	GlueVersion *string
 
 	// This field is reserved for future use.
@@ -1795,17 +1793,19 @@ type JobUpdate struct {
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
 	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).  <p>Do not set
-	// <code>Max Capacity</code> if using <code>WorkerType</code> and
-	// <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for
-	// <code>MaxCapacity</code> depends on whether you are running a Python shell job
-	// or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job
-	// (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or
-	// 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache
-	// Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming
-	// ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2
-	// to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
-	// allocation.</p> </li> </ul>
+	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
+	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
+	// allocated for MaxCapacity depends on whether you are running a Python shell job
+	// or an Apache Spark ETL job:
+	//
+	//     * When you specify a Python shell job
+	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
+	// default is 0.0625 DPU.
+	//
+	//     * When you specify an Apache Spark ETL job
+	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
+	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
+	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job if it fails.
@@ -1818,8 +1818,8 @@ type JobUpdate struct {
 	NotificationProperty *NotificationProperty
 
 	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	// runs. The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
 	NumberOfWorkers *int32
 
 	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job
@@ -2000,18 +2000,24 @@ type MLTransform struct {
 	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
 	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
 	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (http://aws.amazon.com/glue/pricing/).  <p>
-	// <code>MaxCapacity</code> is a mutually exclusive option with
-	// <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If
-	// either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then
-	// <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If
-	// <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or
-	// <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code>
-	// is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>
-	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
-	// both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is
-	// set to a value other than <code>Standard</code>, the <code>MaxCapacity</code>
-	// field is set automatically and becomes read-only.</p>
+	// pricing page (http://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually
+	// exclusive option with NumberOfWorkers and WorkerType.
+	//
+	//     * If either
+	// NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
+	//
+	//     * If
+	// MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
+	//
+	//     *
+	// If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	//
+	//     *
+	// MaxCapacity and NumberOfWorkers must both be at least 1.
+	//
+	// When the WorkerType
+	// field is set to a value other than Standard, the MaxCapacity field is set
+	// automatically and becomes read-only.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry after an MLTaskRun of the machine learning
@@ -2023,8 +2029,8 @@ type MLTransform struct {
 	Name *string
 
 	// The number of workers of a defined workerType that are allocated when a task of
-	// the transform runs.  <p>If <code>WorkerType</code> is set, then
-	// <code>NumberOfWorkers</code> is required (and vice versa).</p>
+	// the transform runs. If WorkerType is set, then NumberOfWorkers is required (and
+	// vice versa).
 	NumberOfWorkers *int32
 
 	// A TransformParameters object. You can use parameters to tune (customize) the
@@ -2036,13 +2042,17 @@ type MLTransform struct {
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions. The required permissions include both AWS Glue service role
 	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
-	// transform.  <ul> <li> <p>This role needs AWS Glue service role permissions to
-	// allow access to resources in AWS Glue. See <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach
-	// a Policy to IAM Users That Access AWS Glue</a>.</p> </li> <li> <p>This role
-	// needs permission to your Amazon Simple Storage Service (Amazon S3) sources,
-	// targets, temporary directory, scripts, and any libraries used by the task run
-	// for this transform.</p> </li> </ul>
+	// transform.
+	//
+	//     * This role needs AWS Glue service role permissions to allow
+	// access to resources in AWS Glue. See Attach a Policy to IAM Users That Access
+	// AWS Glue
+	// (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
+	//
+	//     *
+	// This role needs permission to your Amazon Simple Storage Service (Amazon S3)
+	// sources, targets, temporary directory, scripts, and any libraries used by the
+	// task run for this transform.
 	Role *string
 
 	// A map of key-value pairs representing the columns and data types that this
@@ -2073,15 +2083,20 @@ type MLTransform struct {
 	// G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk,
 	// and 1 executor per worker.
 	//
-	//     <p> <code>MaxCapacity</code> is a mutually
-	// exclusive option with <code>NumberOfWorkers</code> and
-	// <code>WorkerType</code>.</p> <ul> <li> <p>If either <code>NumberOfWorkers</code>
-	// or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be
-	// set.</p> </li> <li> <p>If <code>MaxCapacity</code> is set then neither
-	// <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p> </li>
-	// <li> <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is
-	// required (and vice versa).</p> </li> <li> <p> <code>MaxCapacity</code> and
-	// <code>NumberOfWorkers</code> must both be at least 1.</p> </li> </ul>
+	// MaxCapacity is a mutually exclusive option with
+	// NumberOfWorkers and WorkerType.
+	//
+	//     * If either NumberOfWorkers or WorkerType
+	// is set, then MaxCapacity cannot be set.
+	//
+	//     * If MaxCapacity is set then
+	// neither NumberOfWorkers or WorkerType can be set.
+	//
+	//     * If WorkerType is set,
+	// then NumberOfWorkers is required (and vice versa).
+	//
+	//     * MaxCapacity and
+	// NumberOfWorkers must both be at least 1.
 	WorkerType WorkerType
 }
 
@@ -2188,10 +2203,10 @@ type PartitionInput struct {
 	StorageDescriptor *StorageDescriptor
 
 	// The values of the partition. Although this parameter is not required by the SDK,
-	// you must specify this parameter for a valid input.  <p>The values for the keys
-	// for the new partition must be passed as an array of String objects that must be
+	// you must specify this parameter for a valid input. The values for the keys for
+	// the new partition must be passed as an array of String objects that must be
 	// ordered in the same order as the partition keys appearing in the Amazon S3
-	// prefix. Otherwise AWS Glue will add the values to the wrong keys.</p>
+	// prefix. Otherwise AWS Glue will add the values to the wrong keys.
 	Values []*string
 }
 

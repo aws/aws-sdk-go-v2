@@ -62,7 +62,13 @@ func awsRestjson1_serializeOpHttpBindingsGetRawMessageContentInput(v *GetRawMess
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.MessageId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member messageId must not be empty")}
+	}
 	if v.MessageId != nil {
+		if len(*v.MessageId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member messageId must not be empty")}
+		}
 		if err := encoder.SetURI("messageId").String(*v.MessageId); err != nil {
 			return err
 		}

@@ -11,9 +11,8 @@ import (
 )
 
 // Enables the specified rule. If the rule does not exist, the operation fails.
-// <p>When you enable a rule, incoming events might not immediately start matching
-// to a newly enabled rule. Allow a short period of time for changes to take
-// effect.</p>
+// When you enable a rule, incoming events might not immediately start matching to
+// a newly enabled rule. Allow a short period of time for changes to take effect.
 func (c *Client) EnableRule(ctx context.Context, params *EnableRuleInput, optFns ...func(*Options)) (*EnableRuleOutput, error) {
 	if params == nil {
 		params = &EnableRuleInput{}

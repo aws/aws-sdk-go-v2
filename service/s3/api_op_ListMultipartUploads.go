@@ -13,29 +13,36 @@ import (
 
 // This operation lists in-progress multipart uploads. An in-progress multipart
 // upload is a multipart upload that has been initiated using the Initiate
-// Multipart Upload request, but has not yet been completed or aborted.  <p>This
+// Multipart Upload request, but has not yet been completed or aborted. This
 // operation returns at most 1,000 multipart uploads in the response. 1,000
 // multipart uploads is the maximum number of uploads a response can include, which
 // is also the default value. You can further limit the number of uploads in a
-// response by specifying the <code>max-uploads</code> parameter in the response.
-// If additional multipart uploads satisfy the list criteria, the response will
-// contain an <code>IsTruncated</code> element with the value true. To list the
-// additional multipart uploads, use the <code>key-marker</code> and
-// <code>upload-id-marker</code> request parameters.</p> <p>In the response, the
-// uploads are sorted by key. If your application has initiated more than one
-// multipart upload using the same object key, then uploads in the response are
-// first sorted by key. Additionally, uploads are sorted in ascending order within
-// each key by the upload initiation time.</p> <p>For more information on multipart
-// uploads, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html">Uploading
-// Objects Using Multipart Upload</a>.</p> <p>For information on permissions
-// required to use the multipart upload API, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html">Multipart
-// Upload API and Permissions</a>.</p> <p>The following operations are related to
-// <code>ListMultipartUploads</code>:</p> <ul> <li> <p>
-// <a>CreateMultipartUpload</a> </p> </li> <li> <p> <a>UploadPart</a> </p> </li>
-// <li> <p> <a>CompleteMultipartUpload</a> </p> </li> <li> <p> <a>ListParts</a>
-// </p> </li> <li> <p> <a>AbortMultipartUpload</a> </p> </li> </ul>
+// response by specifying the max-uploads parameter in the response. If additional
+// multipart uploads satisfy the list criteria, the response will contain an
+// IsTruncated element with the value true. To list the additional multipart
+// uploads, use the key-marker and upload-id-marker request parameters. In the
+// response, the uploads are sorted by key. If your application has initiated more
+// than one multipart upload using the same object key, then uploads in the
+// response are first sorted by key. Additionally, uploads are sorted in ascending
+// order within each key by the upload initiation time. For more information on
+// multipart uploads, see Uploading Objects Using Multipart Upload
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html). For
+// information on permissions required to use the multipart upload API, see
+// Multipart Upload API and Permissions
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
+// following operations are related to ListMultipartUploads:
+//
+//     *
+// CreateMultipartUpload
+//
+//     * UploadPart
+//
+//     * CompleteMultipartUpload
+//
+//     *
+// ListParts
+//
+//     * AbortMultipartUpload
 func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipartUploadsInput, optFns ...func(*Options)) (*ListMultipartUploadsOutput, error) {
 	if params == nil {
 		params = &ListMultipartUploadsInput{}
@@ -85,10 +92,9 @@ type ListMultipartUploadsInput struct {
 	// Together with upload-id-marker, this parameter specifies the multipart upload
 	// after which listing should begin. If upload-id-marker is not specified, only the
 	// keys lexicographically greater than the specified key-marker will be included in
-	// the list.  <p>If <code>upload-id-marker</code> is specified, any multipart
-	// uploads for a key equal to the <code>key-marker</code> might also be included,
-	// provided those multipart uploads have upload IDs lexicographically greater than
-	// the specified <code>upload-id-marker</code>.</p>
+	// the list. If upload-id-marker is specified, any multipart uploads for a key
+	// equal to the key-marker might also be included, provided those multipart uploads
+	// have upload IDs lexicographically greater than the specified upload-id-marker.
 	KeyMarker *string
 
 	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the
@@ -127,8 +133,7 @@ type ListMultipartUploadsOutput struct {
 	// Encoding type used by Amazon S3 to encode object keys in the response. If you
 	// specify encoding-type request parameter, Amazon S3 includes this element in the
 	// response, and returns encoded key name values in the following response
-	// elements:  <p> <code>Delimiter</code>, <code>KeyMarker</code>,
-	// <code>Prefix</code>, <code>NextKeyMarker</code>, <code>Key</code>.</p>
+	// elements: Delimiter, KeyMarker, Prefix, NextKeyMarker, Key.
 	EncodingType types.EncodingType
 
 	// Indicates whether the returned list of multipart uploads is truncated. A value

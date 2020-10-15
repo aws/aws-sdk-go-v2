@@ -19,12 +19,14 @@ import (
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). It can
 // take a while for the deletion of a replication configuration to fully propagate.
-// <p> For information about replication configuration, see <a href="
-// https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a>
-// in the <i>Amazon S3 Developer Guide</i>. </p> <p>The following operations are
-// related to <code>DeleteBucketReplication</code>:</p> <ul> <li> <p>
-// <a>PutBucketReplication</a> </p> </li> <li> <p> <a>GetBucketReplication</a> </p>
-// </li> </ul>
+// For information about replication configuration, see Replication
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
+// S3 Developer Guide. The following operations are related to
+// DeleteBucketReplication:
+//
+//     * PutBucketReplication
+//
+//     * GetBucketReplication
 func (c *Client) DeleteBucketReplication(ctx context.Context, params *DeleteBucketReplicationInput, optFns ...func(*Options)) (*DeleteBucketReplicationOutput, error) {
 	if params == nil {
 		params = &DeleteBucketReplicationInput{}

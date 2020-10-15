@@ -18,8 +18,8 @@ import (
 // the default rule are performed. For more information, see Listener Rules
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules)
 // in the Application Load Balancers Guide. To view your current rules, use
-// DescribeRules (). To update a rule, use ModifyRule (). To set the priorities of
-// your rules, use SetRulePriorities (). To delete a rule, use DeleteRule ().
+// DescribeRules. To update a rule, use ModifyRule. To set the priorities of your
+// rules, use SetRulePriorities. To delete a rule, use DeleteRule.
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
 		params = &CreateRuleInput{}

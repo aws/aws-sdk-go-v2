@@ -12,16 +12,16 @@ import (
 )
 
 // Creates an AWS Glue machine learning transform. This operation creates the
-// transform and all the necessary parameters to train it.  <p>Call this operation
-// as the first step in the process of using a machine learning transform (such as
-// the <code>FindMatches</code> transform) for deduplicating data. You can provide
-// an optional <code>Description</code>, in addition to the parameters that you
-// want to use for your algorithm.</p> <p>You must also specify certain parameters
-// for the tasks that AWS Glue runs on your behalf as part of learning from your
-// data and creating a high-quality machine learning transform. These parameters
-// include <code>Role</code>, and optionally, <code>AllocatedCapacity</code>,
-// <code>Timeout</code>, and <code>MaxRetries</code>. For more information, see <a
-// href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html">Jobs</a>.</p>
+// transform and all the necessary parameters to train it. Call this operation as
+// the first step in the process of using a machine learning transform (such as the
+// FindMatches transform) for deduplicating data. You can provide an optional
+// Description, in addition to the parameters that you want to use for your
+// algorithm. You must also specify certain parameters for the tasks that AWS Glue
+// runs on your behalf as part of learning from your data and creating a
+// high-quality machine learning transform. These parameters include Role, and
+// optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information,
+// see Jobs
+// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html).
 func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransformInput, optFns ...func(*Options)) (*CreateMLTransformOutput, error) {
 	if params == nil {
 		params = &CreateMLTransformInput{}
@@ -58,13 +58,17 @@ type CreateMLTransformInput struct {
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions. The required permissions include both AWS Glue service role
 	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
-	// transform.  <ul> <li> <p>This role needs AWS Glue service role permissions to
-	// allow access to resources in AWS Glue. See <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach
-	// a Policy to IAM Users That Access AWS Glue</a>.</p> </li> <li> <p>This role
-	// needs permission to your Amazon Simple Storage Service (Amazon S3) sources,
-	// targets, temporary directory, scripts, and any libraries used by the task run
-	// for this transform.</p> </li> </ul>
+	// transform.
+	//
+	//     * This role needs AWS Glue service role permissions to allow
+	// access to resources in AWS Glue. See Attach a Policy to IAM Users That Access
+	// AWS Glue
+	// (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
+	//
+	//     *
+	// This role needs permission to your Amazon Simple Storage Service (Amazon S3)
+	// sources, targets, temporary directory, scripts, and any libraries used by the
+	// task run for this transform.
 	//
 	// This member is required.
 	Role *string
@@ -85,21 +89,26 @@ type CreateMLTransformInput struct {
 	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
 	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
 	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/).  <p>
-	// <code>MaxCapacity</code> is a mutually exclusive option with
-	// <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If
-	// either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then
-	// <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If
-	// <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or
-	// <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code>
-	// is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>
-	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
-	// both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is
-	// set to a value other than <code>Standard</code>, the <code>MaxCapacity</code>
-	// field is set automatically and becomes read-only.</p> <p>When the
-	// <code>WorkerType</code> field is set to a value other than
-	// <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically
-	// and becomes read-only.</p>
+	// pricing page (https://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually
+	// exclusive option with NumberOfWorkers and WorkerType.
+	//
+	//     * If either
+	// NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
+	//
+	//     * If
+	// MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
+	//
+	//     *
+	// If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	//
+	//     *
+	// MaxCapacity and NumberOfWorkers must both be at least 1.
+	//
+	// When the WorkerType
+	// field is set to a value other than Standard, the MaxCapacity field is set
+	// automatically and becomes read-only. When the WorkerType field is set to a value
+	// other than Standard, the MaxCapacity field is set automatically and becomes
+	// read-only.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry a task for this transform after a task run
@@ -107,8 +116,7 @@ type CreateMLTransformInput struct {
 	MaxRetries *int32
 
 	// The number of workers of a defined workerType that are allocated when this task
-	// runs.  <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code>
-	// is required (and vice versa).</p>
+	// runs. If WorkerType is set, then NumberOfWorkers is required (and vice versa).
 	NumberOfWorkers *int32
 
 	// The tags to use with this machine learning transform. You may use tags to limit
@@ -137,15 +145,20 @@ type CreateMLTransformInput struct {
 	// type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1
 	// executor per worker.
 	//
-	//     <p> <code>MaxCapacity</code> is a mutually exclusive
-	// option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul>
-	// <li> <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is
-	// set, then <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If
-	// <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or
-	// <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code>
-	// is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>
-	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
-	// both be at least 1.</p> </li> </ul>
+	// MaxCapacity is a mutually exclusive option with
+	// NumberOfWorkers and WorkerType.
+	//
+	//     * If either NumberOfWorkers or WorkerType
+	// is set, then MaxCapacity cannot be set.
+	//
+	//     * If MaxCapacity is set then
+	// neither NumberOfWorkers or WorkerType can be set.
+	//
+	//     * If WorkerType is set,
+	// then NumberOfWorkers is required (and vice versa).
+	//
+	//     * MaxCapacity and
+	// NumberOfWorkers must both be at least 1.
 	WorkerType types.WorkerType
 }
 

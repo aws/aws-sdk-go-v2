@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Represents a collection of DomainName () resources.
+// Represents a collection of DomainName resources.
 func (c *Client) GetDomainNames(ctx context.Context, params *GetDomainNamesInput, optFns ...func(*Options)) (*GetDomainNamesOutput, error) {
 	if params == nil {
 		params = &GetDomainNamesInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetDomainNames(ctx context.Context, params *GetDomainNamesInput
 	return out, nil
 }
 
-// Request to describe a collection of DomainName () resources.
+// Request to describe a collection of DomainName resources.
 type GetDomainNamesInput struct {
 
 	// The maximum number of returned results per page. The default value is 25 and the
@@ -46,7 +46,7 @@ type GetDomainNamesInput struct {
 	Title *string
 }
 
-// Represents a collection of DomainName () resources. Use Client-Side Certificate
+// Represents a collection of DomainName resources. Use Client-Side Certificate
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type GetDomainNamesOutput struct {
 

@@ -48,10 +48,10 @@ type JobExecutionSettings struct {
 type Media struct {
 
 	// The S3 object location of the input media file. The URI must be in the same
-	// region as the API endpoint that you are calling. The general form is:  <p>For
-	// example:</p> <p>For more information about S3 object names, see <a
-	// href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object
-	// Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>
+	// region as the API endpoint that you are calling. The general form is: For
+	// example: For more information about S3 object names, see Object Keys
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// in the Amazon S3 Developer Guide.
 	MediaFileUri *string
 }
 
@@ -158,7 +158,6 @@ type MedicalTranscriptionJob struct {
 	// The type of speech in the transcription job. CONVERSATION is generally used for
 	// patient-physician dialogues. DICTATION is the setting for physicians speaking
 	// their notes after seeing a patient. For more information, see how-it-works-med
-	// ()
 	Type Type
 }
 
@@ -198,7 +197,7 @@ type MedicalTranscriptionJobSummary struct {
 	Type Type
 }
 
-// Optional settings for the StartMedicalTranscriptionJob () operation.
+// Optional settings for the StartMedicalTranscriptionJob operation.
 type MedicalTranscriptionSetting struct {
 
 	// Instructs Amazon Transcribe Medical to process each audio channel separately and
@@ -293,11 +292,11 @@ type Settings struct {
 // Identifies the location of a transcription.
 type Transcript struct {
 
-	// The S3 object location of the redacted transcript.  <p>Use this URI to access
-	// the redacated transcript. If you specified an S3 bucket in the
-	// <code>OutputBucketName</code> field when you created the job, this is the URI of
-	// that bucket. If you chose to store the transcript in Amazon Transcribe, this is
-	// a shareable URL that provides secure access to that location.</p>
+	// The S3 object location of the redacted transcript. Use this URI to access the
+	// redacated transcript. If you specified an S3 bucket in the OutputBucketName
+	// field when you created the job, this is the URI of that bucket. If you chose to
+	// store the transcript in Amazon Transcribe, this is a shareable URL that provides
+	// secure access to that location.
 	RedactedTranscriptFileUri *string
 
 	// The S3 object location of the the transcript. Use this URI to access the

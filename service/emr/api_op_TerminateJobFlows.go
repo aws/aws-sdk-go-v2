@@ -33,7 +33,7 @@ func (c *Client) TerminateJobFlows(ctx context.Context, params *TerminateJobFlow
 	return out, nil
 }
 
-// Input to the TerminateJobFlows () operation.
+// Input to the TerminateJobFlows operation.
 type TerminateJobFlowsInput struct {
 
 	// A list of job flows to be shutdown.

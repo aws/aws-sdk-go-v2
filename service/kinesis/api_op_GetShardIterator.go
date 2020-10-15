@@ -23,26 +23,25 @@ import (
 // specific sequence number by using the AT_SEQUENCE_NUMBER shard iterator type.
 // Alternatively, the parameter can read right after the sequence number by using
 // the AFTER_SEQUENCE_NUMBER shard iterator type, using sequence numbers returned
-// by earlier calls to PutRecord (), PutRecords (), GetRecords (), or
-// DescribeStream (). In the request, you can specify the shard iterator type
-// AT_TIMESTAMP to read records from an arbitrary point in time, TRIM_HORIZON to
-// cause ShardIterator to point to the last untrimmed record in the shard in the
-// system (the oldest data record in the shard), or LATEST so that you always read
-// the most recent data in the shard. When you read repeatedly from a stream, use a
-// GetShardIterator () request to get the first shard iterator for use in your
-// first GetRecords () request and for subsequent reads use the shard iterator
-// returned by the GetRecords () request in NextShardIterator. A new shard iterator
-// is returned by every GetRecords () request in NextShardIterator, which you use
-// in the ShardIterator parameter of the next GetRecords () request. If a
-// GetShardIterator () request is made too often, you receive a
-// ProvisionedThroughputExceededException. For more information about throughput
-// limits, see GetRecords (), and Streams Limits
+// by earlier calls to PutRecord, PutRecords, GetRecords, or DescribeStream. In the
+// request, you can specify the shard iterator type AT_TIMESTAMP to read records
+// from an arbitrary point in time, TRIM_HORIZON to cause ShardIterator to point to
+// the last untrimmed record in the shard in the system (the oldest data record in
+// the shard), or LATEST so that you always read the most recent data in the shard.
+// When you read repeatedly from a stream, use a GetShardIterator request to get
+// the first shard iterator for use in your first GetRecords request and for
+// subsequent reads use the shard iterator returned by the GetRecords request in
+// NextShardIterator. A new shard iterator is returned by every GetRecords request
+// in NextShardIterator, which you use in the ShardIterator parameter of the next
+// GetRecords request. If a GetShardIterator request is made too often, you receive
+// a ProvisionedThroughputExceededException. For more information about throughput
+// limits, see GetRecords, and Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. If the shard is closed,
-// GetShardIterator () returns a valid iterator for the last sequence number of the
-// shard. A shard can be closed as a result of using SplitShard () or MergeShards
-// (). GetShardIterator () has a limit of five transactions per second per account
-// per open shard.
+// GetShardIterator returns a valid iterator for the last sequence number of the
+// shard. A shard can be closed as a result of using SplitShard or MergeShards.
+// GetShardIterator has a limit of five transactions per second per account per
+// open shard.
 func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorInput, optFns ...func(*Options)) (*GetShardIteratorOutput, error) {
 	if params == nil {
 		params = &GetShardIteratorInput{}

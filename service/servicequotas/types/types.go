@@ -107,7 +107,7 @@ type RequestedServiceQuotaChange struct {
 
 // A structure that contains the ServiceName and ServiceCode. It does not include
 // all details of the service quota. To get those values, use the ListServiceQuotas
-// () operation.
+// operation.
 type ServiceInfo struct {
 
 	// Specifies the service that you want to use.

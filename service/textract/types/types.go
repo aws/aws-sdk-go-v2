@@ -5,14 +5,14 @@ package types
 // A Block represents items that are recognized in a document within a group of
 // pixels close to each other. The information returned in a Block object depends
 // on the type of operation. In text detection for documents (for example
-// DetectDocumentText ()), you get information about the detected words and lines
-// of text. In text analysis (for example AnalyzeDocument ()), you can also get
+// DetectDocumentText), you get information about the detected words and lines of
+// text. In text analysis (for example AnalyzeDocument), you can also get
 // information about the fields, tables, and selection elements that are detected
 // in the document. An array of Block objects is returned by both synchronous and
-// asynchronous operations. In synchronous operations, such as DetectDocumentText
-// (), the array of Block objects is the entire set of results. In asynchronous
-// operations, such as GetDocumentAnalysis (), the array is returned over one or
-// more responses. For more information, see How Amazon Textract Works
+// asynchronous operations. In synchronous operations, such as DetectDocumentText,
+// the array of Block objects is the entire set of results. In asynchronous
+// operations, such as GetDocumentAnalysis, the array is returned over one or more
+// responses. For more information, see How Amazon Textract Works
 // (https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html).
 type Block struct {
 
@@ -171,8 +171,8 @@ type BoundingBox struct {
 // Amazon Textract operations. If you use the AWS CLI to call Amazon Textract
 // operations, passing image bytes using the Bytes property isn't supported. You
 // must first upload the document to an Amazon S3 bucket, and then call the
-// operation using the S3Object property.  <p>For Amazon Textract to process an S3
-// object, the user must have permission to access the S3 object. </p>
+// operation using the S3Object property. For Amazon Textract to process an S3
+// object, the user must have permission to access the S3 object.
 type Document struct {
 
 	// A blob of base64-encoded document bytes. The maximum size of a document that's
@@ -187,9 +187,8 @@ type Document struct {
 }
 
 // The Amazon S3 bucket that contains the document to be processed. It's used by
-// asynchronous operations such as StartDocumentTextDetection (). The input
-// document can be an image file in JPEG or PNG format. It can also be a file in
-// PDF format.
+// asynchronous operations such as StartDocumentTextDetection. The input document
+// can be an image file in JPEG or PNG format. It can also be a file in PDF format.
 type DocumentLocation struct {
 
 	// The Amazon S3 bucket that contains the input document.
@@ -263,7 +262,7 @@ type HumanLoopDataAttributes struct {
 
 // The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon
 // Textract publishes the completion status of an asynchronous document operation,
-// such as StartDocumentTextDetection ().
+// such as StartDocumentTextDetection.
 type NotificationChannel struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that gives Amazon Textract
@@ -281,11 +280,10 @@ type NotificationChannel struct {
 // The X and Y coordinates of a point on a document page. The X and Y values that
 // are returned are ratios of the overall document page size. For example, if the
 // input document is 700 x 200 and the operation returns X=0.5 and Y=0.25, then the
-// point is at the (350,50) pixel coordinate on the document page.  <p>An array of
-// <code>Point</code> objects, <code>Polygon</code>, is returned by
-// <a>DetectDocumentText</a>. <code>Polygon</code> represents a fine-grained
-// polygon around detected text. For more information, see Geometry in the Amazon
-// Textract Developer Guide. </p>
+// point is at the (350,50) pixel coordinate on the document page. An array of
+// Point objects, Polygon, is returned by DetectDocumentText. Polygon represents a
+// fine-grained polygon around detected text. For more information, see Geometry in
+// the Amazon Textract Developer Guide.
 type Point struct {
 
 	// The value of the X coordinate for a point on a Polygon.
@@ -297,8 +295,8 @@ type Point struct {
 
 // Information about how blocks are related to each other. A Block object contains
 // 0 or more Relation objects in a list, Relationships. For more information, see
-// Block (). The Type element provides the type of the relationship for all blocks
-// in the IDs array.
+// Block. The Type element provides the type of the relationship for all blocks in
+// the IDs array.
 type Relationship struct {
 
 	// An array of IDs for related blocks. You can get the type of the relationship
@@ -315,8 +313,8 @@ type Relationship struct {
 
 // The S3 bucket name and file name that identifies the document. The AWS Region
 // for the S3 bucket that contains the document must match the Region that you use
-// for Amazon Textract operations.  <p>For Amazon Textract to process a file in an
-// S3 bucket, the user must have permission to access the S3 bucket and file. </p>
+// for Amazon Textract operations. For Amazon Textract to process a file in an S3
+// bucket, the user must have permission to access the S3 bucket and file.
 type S3Object struct {
 
 	// The name of the S3 bucket.
@@ -332,8 +330,8 @@ type S3Object struct {
 }
 
 // A warning about an issue that occurred during asynchronous text analysis
-// (StartDocumentAnalysis ()) or asynchronous document text detection
-// (StartDocumentTextDetection ()).
+// (StartDocumentAnalysis) or asynchronous document text detection
+// (StartDocumentTextDetection).
 type Warning struct {
 
 	// The error code for the warning.

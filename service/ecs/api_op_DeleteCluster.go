@@ -16,8 +16,8 @@ import (
 // for a period of time. However, this behavior is subject to change in the future,
 // so you should not rely on INACTIVE clusters persisting. You must deregister all
 // container instances from this cluster before you may delete it. You can list the
-// container instances in a cluster with ListContainerInstances () and deregister
-// them with DeregisterContainerInstance ().
+// container instances in a cluster with ListContainerInstances and deregister them
+// with DeregisterContainerInstance.
 func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, optFns ...func(*Options)) (*DeleteClusterOutput, error) {
 	if params == nil {
 		params = &DeleteClusterInput{}

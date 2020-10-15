@@ -15,7 +15,7 @@ import (
 // your Amazon GameLift fleet and a virtual private cloud (VPC) in your AWS
 // account. VPC peering enables the game servers on your fleet to communicate
 // directly with other AWS resources. Once you've received authorization, call
-// CreateVpcPeeringConnection () to establish the peering connection. For more
+// CreateVpcPeeringConnection to establish the peering connection. For more
 // information, see VPC Peering with Amazon GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 // You can peer with VPCs that are owned by any AWS account you have access to,
@@ -32,23 +32,23 @@ import (
 // GameLift fleet. Identify the following values: (1) VPC ID that you want to
 // delete the peering connection for, and (2) ID of the AWS account that you use to
 // manage Amazon GameLift. The authorization remains valid for 24 hours unless it
-// is canceled by a call to DeleteVpcPeeringAuthorization (). You must create or
+// is canceled by a call to DeleteVpcPeeringAuthorization. You must create or
 // delete the peering connection while the authorization is valid.
 //
 //     *
-// CreateVpcPeeringAuthorization ()
+// CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations ()
-//
-//
-// * DeleteVpcPeeringAuthorization ()
-//
-//     * CreateVpcPeeringConnection ()
+//     * DescribeVpcPeeringAuthorizations
 //
 //     *
-// DescribeVpcPeeringConnections ()
+// DeleteVpcPeeringAuthorization
 //
-//     * DeleteVpcPeeringConnection ()
+//     * CreateVpcPeeringConnection
+//
+//     *
+// DescribeVpcPeeringConnections
+//
+//     * DeleteVpcPeeringConnection
 func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *CreateVpcPeeringAuthorizationInput, optFns ...func(*Options)) (*CreateVpcPeeringAuthorizationOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringAuthorizationInput{}

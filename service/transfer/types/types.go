@@ -57,11 +57,15 @@ type DescribedServer struct {
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
 	// protocol client can connect to your server's endpoint. The available protocols
-	// are:  <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer
-	// Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File
-	// Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p>
-	// <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li>
-	// </ul>
+	// are:
+	//
+	//     * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
+	// SSH
+	//
+	//     * FTPS (File Transfer Protocol Secure): File transfer with TLS
+	// encryption
+	//
+	//     * FTP (File Transfer Protocol): Unencrypted file transfer
 	Protocols []Protocol
 
 	// Specifies the unique system-assigned identifier for a file transfer
@@ -71,11 +75,10 @@ type DescribedServer struct {
 	// Specifies the condition of a file transfer protocol-enabled server for the
 	// server that was described. A value of ONLINE indicates that the server can
 	// accept jobs and transfer files. A State value of OFFLINE means that the server
-	// cannot perform file transfer operations.  <p>The states of <code>STARTING</code>
-	// and <code>STOPPING</code> indicate that the server is in an intermediate state,
-	// either not fully able to respond, or not fully offline. The values of
-	// <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error
-	// condition.</p>
+	// cannot perform file transfer operations. The states of STARTING and STOPPING
+	// indicate that the server is in an intermediate state, either not fully able to
+	// respond, or not fully offline. The values of START_FAILED or STOP_FAILED can
+	// indicate an error condition.
 	State State
 
 	// Specifies the key-value pairs that you can use to search for and group file
@@ -108,10 +111,10 @@ type DescribedUser struct {
 	// path is made visible and Target is the actual Amazon S3 path. If you only
 	// specify a target, it will be displayed as is. You will need to also make sure
 	// that your AWS Identity and Access Management (IAM) role provides access to paths
-	// in Target.  <p>In most cases, you can use this value instead of the scope-down
+	// in Target. In most cases, you can use this value instead of the scope-down
 	// policy to lock your user down to the designated home directory ("chroot"). To do
-	// this, you can set <code>Entry</code> to '/' and set <code>Target</code> to the
-	// HomeDirectory parameter value.</p>
+	// this, you can set Entry to '/' and set Target to the HomeDirectory parameter
+	// value.
 	HomeDirectoryMappings []*HomeDirectoryMapEntry
 
 	// Specifies the type of landing directory (folder) you mapped for your users to
@@ -156,22 +159,22 @@ type EndpointDetails struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
 	// address to your file transfer protocol-enabled server's endpoint. This is only
-	// valid in the UpdateServer API.  <note> <p>This property can only be use when
-	// <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+	// valid in the UpdateServer API. This property can only be use when EndpointType
+	// is set to VPC.
 	AddressAllocationIds []*string
 
 	// A list of subnet IDs that are required to host your file transfer
-	// protocol-enabled server endpoint in your VPC.  <note> <p>This property can only
-	// be used when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+	// protocol-enabled server endpoint in your VPC. This property can only be used
+	// when EndpointType is set to VPC.
 	SubnetIds []*string
 
-	// The ID of the VPC endpoint.  <note> <p>This property can only be used when
-	// <code>EndpointType</code> is set to <code>VPC_ENDPOINT</code>.</p> </note>
+	// The ID of the VPC endpoint. This property can only be used when EndpointType is
+	// set to VPC_ENDPOINT.
 	VpcEndpointId *string
 
 	// The VPC ID of the VPC in which a file transfer protocol-enabled server's
-	// endpoint will be hosted.  <note> <p>This property can only be used when
-	// <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+	// endpoint will be hosted. This property can only be used when EndpointType is set
+	// to VPC.
 	VpcId *string
 }
 
@@ -234,11 +237,10 @@ type ListedServer struct {
 	// Specifies the condition of a file transfer protocol-enabled server for the
 	// server that was described. A value of ONLINE indicates that the server can
 	// accept jobs and transfer files. A State value of OFFLINE means that the server
-	// cannot perform file transfer operations.  <p>The states of <code>STARTING</code>
-	// and <code>STOPPING</code> indicate that the server is in an intermediate state,
-	// either not fully able to respond, or not fully offline. The values of
-	// <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error
-	// condition.</p>
+	// cannot perform file transfer operations. The states of STARTING and STOPPING
+	// indicate that the server is in an intermediate state, either not fully able to
+	// respond, or not fully offline. The values of START_FAILED or STOP_FAILED can
+	// indicate an error condition.
 	State State
 
 	// Specifies the number of users that are assigned to a file transfer

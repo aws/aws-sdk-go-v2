@@ -19,7 +19,7 @@ import (
 // SageMaker Python SDK, all experiments, trials, and trial components are
 // automatically tracked, logged, and indexed. When you use the AWS SDK for Python
 // (Boto), you must use the logging APIs provided by the SDK. You can add tags to a
-// trial component and then use the Search () API to search for the tags.
+// trial component and then use the Search API to search for the tags.
 // CreateTrialComponent can only be invoked from within an Amazon SageMaker managed
 // environment. This includes Amazon SageMaker training jobs, processing jobs,
 // transform jobs, and Amazon SageMaker notebooks. A call to CreateTrialComponent
@@ -78,8 +78,8 @@ type CreateTrialComponentInput struct {
 	//     * Failed
 	Status *types.TrialComponentStatus
 
-	// A list of tags to associate with the component. You can use Search () API to
-	// search on the tags.
+	// A list of tags to associate with the component. You can use Search API to search
+	// on the tags.
 	Tags []*types.Tag
 }
 

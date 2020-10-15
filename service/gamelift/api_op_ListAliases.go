@@ -16,19 +16,18 @@ import (
 // retrieve results in sequential pages. Returned aliases are not listed in any
 // particular order.
 //
-//     * CreateAlias ()
+//     * CreateAlias
 //
-//     * ListAliases ()
+//     * ListAliases
 //
-//     *
-// DescribeAlias ()
+//     * DescribeAlias
 //
-//     * UpdateAlias ()
 //
-//     * DeleteAlias ()
+// * UpdateAlias
+//
+//     * DeleteAlias
 //
 //     * ResolveAlias
-// ()
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -70,7 +69,7 @@ type ListAliasesInput struct {
 	//
 	//     * TERMINAL -- The alias does not resolve to a fleet but instead can
 	// be used to display a message to the user. A terminal alias throws a
-	// TerminalRoutingStrategyException with the RoutingStrategy () message embedded.
+	// TerminalRoutingStrategyException with the RoutingStrategy message embedded.
 	RoutingStrategyType types.RoutingStrategyType
 }
 

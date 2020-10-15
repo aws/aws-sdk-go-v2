@@ -20,7 +20,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // in the AWS Key Management Service Developer Guide. You do not need to download
 // the public key. Instead, you can use the public key within AWS KMS by calling
-// the Encrypt (), ReEncrypt (), or Verify () operations with the identifier of an
+// the Encrypt, ReEncrypt, or Verify operations with the identifier of an
 // asymmetric CMK. When you use the public key within AWS KMS, you benefit from the
 // authentication, authorization, and logging that are part of every AWS KMS
 // operation. You also reduce of risk of encrypting data that cannot be decrypted.
@@ -28,26 +28,33 @@ import (
 // Considerations for Downloading Public Keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/download-public-key.html#download-public-key-considerations).
 // To help you use the public key safely outside of AWS KMS, GetPublicKey returns
-// important information about the public key in the response, including:  <ul>
-// <li> <p> <a
-// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-CustomerMasterKeySpec">CustomerMasterKeySpec</a>:
-// The type of key material in the public key, such as <code>RSA_4096</code> or
-// <code>ECC_NIST_P521</code>.</p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyUsage">KeyUsage</a>:
-// Whether the key is used for encryption or signing.</p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-EncryptionAlgorithms">EncryptionAlgorithms</a>
-// or <a
-// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms">SigningAlgorithms</a>:
-// A list of the encryption algorithms or the signing algorithms for the key.</p>
-// </li> </ul> <p>Although AWS KMS cannot enforce these restrictions on external
-// operations, it is crucial that you use this information to prevent the public
-// key from being used improperly. For example, you can prevent a public signing
-// key from being used encrypt data, or prevent a public key from being used with
-// an encryption algorithm that is not supported by AWS KMS. You can also avoid
-// errors, such as using the wrong signing algorithm in a verification
-// operation.</p> <p>The CMK that you use for this operation must be in a
-// compatible key state. For  details, see How Key State Affects Use of a Customer
-// Master Key
+// important information about the public key in the response, including:
+//
+//     *
+// CustomerMasterKeySpec
+// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-CustomerMasterKeySpec):
+// The type of key material in the public key, such as RSA_4096 or ECC_NIST_P521.
+//
+//
+// * KeyUsage
+// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyUsage):
+// Whether the key is used for encryption or signing.
+//
+//     * EncryptionAlgorithms
+// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-EncryptionAlgorithms)
+// or SigningAlgorithms
+// (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms):
+// A list of the encryption algorithms or the signing algorithms for the
+// key.
+//
+// Although AWS KMS cannot enforce these restrictions on external operations,
+// it is crucial that you use this information to prevent the public key from being
+// used improperly. For example, you can prevent a public signing key from being
+// used encrypt data, or prevent a public key from being used with an encryption
+// algorithm that is not supported by AWS KMS. You can also avoid errors, such as
+// using the wrong signing algorithm in a verification operation. The CMK that you
+// use for this operation must be in a compatible key state. For details, see How
+// Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, optFns ...func(*Options)) (*GetPublicKeyOutput, error) {
@@ -67,18 +74,26 @@ func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, op
 
 type GetPublicKeyInput struct {
 
-	// Identifies the asymmetric CMK that includes the public key.  <p>To specify a
-	// CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When
-	// using an alias name, prefix it with <code>"alias/"</code>. To specify a CMK in a
-	// different AWS account, you must use the key ARN or alias ARN.</p> <p>For
-	// example:</p> <ul> <li> <p>Key ID:
-	// <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN:
-	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
-	// </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li>
-	// <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>
-	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
-	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
-	// <a>ListAliases</a>.</p>
+	// Identifies the asymmetric CMK that includes the public key. To specify a CMK,
+	// use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using
+	// an alias name, prefix it with "alias/". To specify a CMK in a different AWS
+	// account, you must use the key ARN or alias ARN. For example:
+	//
+	//     * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//     * Key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//
+	// * Alias name: alias/ExampleAlias
+	//
+	//     * Alias ARN:
+	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	KeyId *string

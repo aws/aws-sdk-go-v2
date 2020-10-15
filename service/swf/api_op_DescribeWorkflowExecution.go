@@ -89,7 +89,7 @@ type DescribeWorkflowExecutionOutput struct {
 
 	// The latest executionContext provided by the decider for this workflow execution.
 	// A decider can provide an executionContext (a free-form string) when closing a
-	// decision task using RespondDecisionTaskCompleted ().
+	// decision task using RespondDecisionTaskCompleted.
 	LatestExecutionContext *string
 
 	// Metadata pertaining to the operation's result.

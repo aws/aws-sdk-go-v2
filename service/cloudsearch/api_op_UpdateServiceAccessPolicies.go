@@ -30,7 +30,7 @@ func (c *Client) UpdateServiceAccessPolicies(ctx context.Context, params *Update
 	return out, nil
 }
 
-// Container for the parameters to the UpdateServiceAccessPolicies () operation.
+// Container for the parameters to the UpdateServiceAccessPolicies operation.
 // Specifies the name of the domain you want to update and the access rules you
 // want to configure.
 type UpdateServiceAccessPoliciesInput struct {

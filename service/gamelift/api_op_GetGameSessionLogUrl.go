@@ -18,29 +18,29 @@ import (
 // page for maximum log file sizes. Log files that exceed this limit are not
 // saved.
 //
-//     * CreateGameSession ()
+//     * CreateGameSession
 //
-//     * DescribeGameSessions ()
-//
-//     *
-// DescribeGameSessionDetails ()
-//
-//     * SearchGameSessions ()
+//     * DescribeGameSessions
 //
 //     *
-// UpdateGameSession ()
+// DescribeGameSessionDetails
 //
-//     * GetGameSessionLogUrl ()
+//     * SearchGameSessions
 //
-//     * Game session
-// placements
+//     * UpdateGameSession
 //
-//         * StartGameSessionPlacement ()
+//
+// * GetGameSessionLogUrl
+//
+//     * Game session placements
 //
 //         *
-// DescribeGameSessionPlacement ()
+// StartGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * DescribeGameSessionPlacement
+//
+//         *
+// StopGameSessionPlacement
 func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessionLogUrlInput, optFns ...func(*Options)) (*GetGameSessionLogUrlOutput, error) {
 	if params == nil {
 		params = &GetGameSessionLogUrlInput{}

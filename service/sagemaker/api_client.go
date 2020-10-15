@@ -19,15 +19,8 @@ import (
 const ServiceID = "SageMaker"
 const ServiceAPIVersion = "2017-07-24"
 
-// Provides APIs for creating and managing Amazon SageMaker resources. Other
-// Resources:
-//
-//     * Amazon SageMaker Developer Guide
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html#first-time-user)
-//
-//
-// * Amazon Augmented AI Runtime API Reference
-// (https://docs.aws.amazon.com/augmented-ai/2019-11-07/APIReference/Welcome.html)
+// Client provides the API client to make operations call for Amazon SageMaker
+// Service.
 type Client struct {
 	options Options
 }

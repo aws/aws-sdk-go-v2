@@ -14,7 +14,7 @@ import (
 // Defines and adds a quota to the service quota template. To add a quota to the
 // template, you must provide the ServiceCode, QuotaCode, AwsRegion, and
 // DesiredValue. Once you add a quota to the template, use
-// ListServiceQuotaIncreaseRequestsInTemplate () to see the list of quotas in the
+// ListServiceQuotaIncreaseRequestsInTemplate to see the list of quotas in the
 // template.
 func (c *Client) PutServiceQuotaIncreaseRequestIntoTemplate(ctx context.Context, params *PutServiceQuotaIncreaseRequestIntoTemplateInput, optFns ...func(*Options)) (*PutServiceQuotaIncreaseRequestIntoTemplateOutput, error) {
 	if params == nil {

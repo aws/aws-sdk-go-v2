@@ -13,7 +13,7 @@ import (
 
 // Modifies the health checks used when evaluating the health state of the targets
 // in the specified target group. To monitor the health of the targets, use
-// DescribeTargetHealth ().
+// DescribeTargetHealth.
 func (c *Client) ModifyTargetGroup(ctx context.Context, params *ModifyTargetGroupInput, optFns ...func(*Options)) (*ModifyTargetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyTargetGroupInput{}

@@ -16,19 +16,19 @@ import (
 // This includes those initiated and received by this account.
 //
 //     *
-// CreateVpcPeeringAuthorization ()
+// CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations ()
-//
-//
-// * DeleteVpcPeeringAuthorization ()
-//
-//     * CreateVpcPeeringConnection ()
+//     * DescribeVpcPeeringAuthorizations
 //
 //     *
-// DescribeVpcPeeringConnections ()
+// DeleteVpcPeeringAuthorization
 //
-//     * DeleteVpcPeeringConnection ()
+//     * CreateVpcPeeringConnection
+//
+//     *
+// DescribeVpcPeeringConnections
+//
+//     * DeleteVpcPeeringConnection
 func (c *Client) DescribeVpcPeeringAuthorizations(ctx context.Context, params *DescribeVpcPeeringAuthorizationsInput, optFns ...func(*Options)) (*DescribeVpcPeeringAuthorizationsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcPeeringAuthorizationsInput{}

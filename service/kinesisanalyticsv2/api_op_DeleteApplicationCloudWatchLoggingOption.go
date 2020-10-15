@@ -36,14 +36,14 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	ApplicationName *string
 
 	// The CloudWatchLoggingOptionId of the Amazon CloudWatch logging option to delete.
-	// You can get the CloudWatchLoggingOptionId by using the DescribeApplication ()
+	// You can get the CloudWatchLoggingOptionId by using the DescribeApplication
 	// operation.
 	//
 	// This member is required.
 	CloudWatchLoggingOptionId *string
 
 	// The version ID of the application. You can retrieve the application version ID
-	// using DescribeApplication ().
+	// using DescribeApplication.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

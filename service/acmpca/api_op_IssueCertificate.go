@@ -13,9 +13,9 @@ import (
 
 // Uses your private certificate authority (CA) to issue a client certificate. This
 // action returns the Amazon Resource Name (ARN) of the certificate. You can
-// retrieve the certificate by calling the GetCertificate () action and specifying
-// the ARN. You cannot use the ACM ListCertificateAuthorities action to retrieve
-// the ARNs of the certificates that you issue by using ACM Private CA.
+// retrieve the certificate by calling the GetCertificate action and specifying the
+// ARN. You cannot use the ACM ListCertificateAuthorities action to retrieve the
+// ARNs of the certificates that you issue by using ACM Private CA.
 func (c *Client) IssueCertificate(ctx context.Context, params *IssueCertificateInput, optFns ...func(*Options)) (*IssueCertificateOutput, error) {
 	if params == nil {
 		params = &IssueCertificateInput{}
@@ -34,7 +34,7 @@ func (c *Client) IssueCertificate(ctx context.Context, params *IssueCertificateI
 type IssueCertificateInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority (). This must be of the form:
+	// CreateCertificateAuthority. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.

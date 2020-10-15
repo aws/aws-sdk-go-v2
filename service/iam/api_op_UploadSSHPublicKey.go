@@ -63,7 +63,7 @@ type UploadSSHPublicKeyInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful UploadSSHPublicKey () request.
+// Contains the response to a successful UploadSSHPublicKey request.
 type UploadSSHPublicKeyOutput struct {
 
 	// Contains information about the SSH public key.

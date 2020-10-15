@@ -14,7 +14,7 @@ import (
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation (). Adds a CloudWatch log stream to monitor
+// Analytics API V2 Documentation. Adds a CloudWatch log stream to monitor
 // application configuration errors. For more information about using CloudWatch
 // log streams with Amazon Kinesis Analytics applications, see Working with Amazon
 // CloudWatch Logs

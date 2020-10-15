@@ -505,14 +505,22 @@ type EnvironmentDescription struct {
 	// The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
 
-	// The current operational status of the environment:  <ul> <li> <p>
-	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
-	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
-	// its configuration settings or application version.</p> </li> <li> <p>
-	// <code>Ready</code>: Environment is available to have an action performed on it,
-	// such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>:
-	// Environment is in the shut-down process.</p> </li> <li> <p>
-	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
+	// The current operational status of the environment:
+	//
+	//     * Launching: Environment
+	// is in the process of initial deployment.
+	//
+	//     * Updating: Environment is in the
+	// process of updating its configuration settings or application version.
+	//
+	//     *
+	// Ready: Environment is available to have an action performed on it, such as
+	// update or terminate.
+	//
+	//     * Terminating: Environment is in the shut-down
+	// process.
+	//
+	//     * Terminated: Environment is not running.
 	Status EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this
@@ -789,7 +797,7 @@ type ManagedAction struct {
 	ActionType ActionType
 
 	// The status of the managed action. If the action is Scheduled, you can apply it
-	// immediately with ApplyEnvironmentManagedAction ().
+	// immediately with ApplyEnvironmentManagedAction.
 	Status ActionStatus
 
 	// The start time of the maintenance window in which the managed action will

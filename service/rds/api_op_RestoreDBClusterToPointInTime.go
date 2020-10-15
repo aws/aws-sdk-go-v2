@@ -123,9 +123,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
-	// <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
-	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
+	// For more information, see  IAM Database Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
+	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from an
@@ -146,8 +146,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//     * If the DB cluster isn't encrypted, then the restored
 	// DB cluster isn't encrypted.
 	//
-	//     <p>If <code>DBClusterIdentifier</code> refers
-	// to a DB cluster that isn't encrypted, then the restore request is rejected.</p>
+	// If DBClusterIdentifier refers to a DB cluster that
+	// isn't encrypted, then the restore request is rejected.
 	KmsKeyId *string
 
 	// The name of the option group for the new DB cluster.

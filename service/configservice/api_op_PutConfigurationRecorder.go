@@ -33,7 +33,7 @@ func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfig
 	return out, nil
 }
 
-// The input for the PutConfigurationRecorder () action.
+// The input for the PutConfigurationRecorder action.
 type PutConfigurationRecorderInput struct {
 
 	// The configuration recorder object that records each configuration change made to

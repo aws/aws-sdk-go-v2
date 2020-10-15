@@ -50,7 +50,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	// OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options for
 	// the supported maintenance window task types, see
-	// MaintenanceWindowTaskInvocationParameters ().
+	// MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
 	// The maximum number of targets allowed to run this task in parallel.
@@ -86,7 +86,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
 	// the Parameters option in the TaskInvocationParameters structure. For information
 	// about how Systems Manager handles these options for the supported maintenance
-	// window task types, see MaintenanceWindowTaskInvocationParameters ().
+	// window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
 
 	// The type of task to run.

@@ -15,7 +15,7 @@ import (
 // based on whether or not they are tagged by using the tagStatus filter and
 // specifying either TAGGED, UNTAGGED or ANY. For example, you can filter your
 // results to return only UNTAGGED images and then pipe that result to a
-// BatchDeleteImage () operation to delete them. Or, you can filter your results to
+// BatchDeleteImage operation to delete them. Or, you can filter your results to
 // return only TAGGED images to list all of the tags in your repository.
 func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns ...func(*Options)) (*ListImagesOutput, error) {
 	if params == nil {

@@ -61,7 +61,7 @@ type CreateServerInput struct {
 	// CloudFormation template, located at
 	// https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
 	// This template creates a CloudFormation stack that includes the instance profile
-	// you need.  </p>
+	// you need.
 	//
 	// This member is required.
 	InstanceProfileArn *string

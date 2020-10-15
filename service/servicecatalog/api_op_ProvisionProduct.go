@@ -15,10 +15,10 @@ import (
 // Provisions the specified product. A provisioned product is a resourced instance
 // of a product. For example, provisioning a product based on a CloudFormation
 // template launches a CloudFormation stack and its underlying resources. You can
-// check the status of this request using DescribeRecord (). If the request
-// contains a tag key with an empty list of values, there is a tag conflict for
-// that key. Do not include conflicted keys as tags, or this causes the error
-// "Parameter validation failed: Missing required parameter in Tags[N]:Value".
+// check the status of this request using DescribeRecord. If the request contains a
+// tag key with an empty list of values, there is a tag conflict for that key. Do
+// not include conflicted keys as tags, or this causes the error "Parameter
+// validation failed: Missing required parameter in Tags[N]:Value".
 func (c *Client) ProvisionProduct(ctx context.Context, params *ProvisionProductInput, optFns ...func(*Options)) (*ProvisionProductOutput, error) {
 	if params == nil {
 		params = &ProvisionProductInput{}
@@ -63,8 +63,8 @@ type ProvisionProductInput struct {
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths (). You must provide the name or ID,
-	// but not both.
+	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but
+	// not both.
 	PathId *string
 
 	// The name of the path. You must provide the name or ID, but not both.

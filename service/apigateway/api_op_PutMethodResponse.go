@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds a MethodResponse () to an existing Method () resource.
+// Adds a MethodResponse to an existing Method resource.
 func (c *Client) PutMethodResponse(ctx context.Context, params *PutMethodResponseInput, optFns ...func(*Options)) (*PutMethodResponseOutput, error) {
 	if params == nil {
 		params = &PutMethodResponseInput{}
@@ -26,20 +26,20 @@ func (c *Client) PutMethodResponse(ctx context.Context, params *PutMethodRespons
 	return out, nil
 }
 
-// Request to add a MethodResponse () to an existing Method () resource.
+// Request to add a MethodResponse to an existing Method resource.
 type PutMethodResponseInput struct {
 
-	// [Required] The HTTP verb of the Method () resource.
+	// [Required] The HTTP verb of the Method resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] The Resource () identifier for the Method () resource.
+	// [Required] The Resource identifier for the Method resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -51,9 +51,9 @@ type PutMethodResponseInput struct {
 
 	Name *string
 
-	// Specifies the Model () resources used for the response's content type. Response
+	// Specifies the Model resources used for the response's content type. Response
 	// models are represented as a key/value map, with a content type as the key and a
-	// Model () name as the value.
+	// Model name as the value.
 	ResponseModels map[string]*string
 
 	// A key-value map specifying required or optional response parameters that API
@@ -105,14 +105,14 @@ type PutMethodResponseInput struct {
 // "methodresponse:update": { "href":
 // "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } },
 // "responseModels": { "application/json": "Empty" }, "responseParameters": {
-// "method.response.header.Content-Type": false }, "statusCode": "200" }Method (),
-// IntegrationResponse (), Integration ()Creating an API
+// "method.response.header.Content-Type": false }, "statusCode": "200" }Method,
+// IntegrationResponse, IntegrationCreating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type PutMethodResponseOutput struct {
 
-	// Specifies the Model () resources used for the response's content-type. Response
+	// Specifies the Model resources used for the response's content-type. Response
 	// models are represented as a key/value map, with a content-type as the key and a
-	// Model () name as the value.
+	// Model name as the value.
 	ResponseModels map[string]*string
 
 	// A key-value map specifying required or optional response parameters that API
@@ -122,12 +122,12 @@ type PutMethodResponseOutput struct {
 	// method.response.header.{name}, where name is a valid and unique header name. API
 	// Gateway passes certain integration response data to the method response headers
 	// specified here according to the mapping you prescribe in the API's
-	// IntegrationResponse (). The integration response data that can be mapped include
-	// an integration response header expressed in integration.response.header.{name},
-	// a static value enclosed within a pair of single quotes (e.g.,
-	// 'application/json'), or a JSON expression from the back-end response payload in
-	// the form of integration.response.body.{JSON-expression}, where JSON-expression
-	// is a valid JSON expression without the $ prefix.)
+	// IntegrationResponse. The integration response data that can be mapped include an
+	// integration response header expressed in integration.response.header.{name}, a
+	// static value enclosed within a pair of single quotes (e.g., 'application/json'),
+	// or a JSON expression from the back-end response payload in the form of
+	// integration.response.body.{JSON-expression}, where JSON-expression is a valid
+	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
 
 	// The method response's status code.

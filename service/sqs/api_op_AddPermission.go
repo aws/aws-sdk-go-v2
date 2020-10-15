@@ -20,7 +20,7 @@ import (
 // in the Amazon Simple Queue Service Developer Guide.
 //
 //     * AddPermission
-// generates a policy for you. You can use SetQueueAttributes () to upload your
+// generates a policy for you. You can use SetQueueAttributes to upload your
 // policy. For more information, see Using Custom Policies with the Amazon SQS
 // Access Policy Language
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)

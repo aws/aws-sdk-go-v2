@@ -34,9 +34,9 @@ func (c *Client) UpdateScalingParameters(ctx context.Context, params *UpdateScal
 	return out, nil
 }
 
-// Container for the parameters to the UpdateScalingParameters () operation.
-// Specifies the name of the domain you want to update and the scaling parameters
-// you want to configure.
+// Container for the parameters to the UpdateScalingParameters operation. Specifies
+// the name of the domain you want to update and the scaling parameters you want to
+// configure.
 type UpdateScalingParametersInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

@@ -16,7 +16,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Permanently deletes a RegexPatternSet (). You can't delete a
+// global use. Permanently deletes a RegexPatternSet. You can't delete a
 // RegexPatternSet if it's still used in any RegexMatchSet or if the
 // RegexPatternSet is not empty.
 func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexPatternSetInput, optFns ...func(*Options)) (*DeleteRegexPatternSetOutput, error) {
@@ -36,14 +36,14 @@ func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexP
 
 type DeleteRegexPatternSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The RegexPatternSetId of the RegexPatternSet () that you want to delete.
-	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
-	// ListRegexPatternSets ().
+	// The RegexPatternSetId of the RegexPatternSet that you want to delete.
+	// RegexPatternSetId is returned by CreateRegexPatternSet and by
+	// ListRegexPatternSets.
 	//
 	// This member is required.
 	RegexPatternSetId *string
@@ -53,7 +53,7 @@ type DeleteRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus ().
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

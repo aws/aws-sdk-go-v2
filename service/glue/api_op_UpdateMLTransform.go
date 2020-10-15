@@ -12,11 +12,10 @@ import (
 )
 
 // Updates an existing machine learning transform. Call this operation to tune the
-// algorithm parameters to achieve better results.  <p>After calling this
-// operation, you can call the <code>StartMLEvaluationTaskRun</code> operation to
-// assess how well your new parameters achieved your goals (such as improving the
-// quality of your machine learning transform, or making it more
-// cost-effective).</p>
+// algorithm parameters to achieve better results. After calling this operation,
+// you can call the StartMLEvaluationTaskRun operation to assess how well your new
+// parameters achieved your goals (such as improving the quality of your machine
+// learning transform, or making it more cost-effective).
 func (c *Client) UpdateMLTransform(ctx context.Context, params *UpdateMLTransformInput, optFns ...func(*Options)) (*UpdateMLTransformOutput, error) {
 	if params == nil {
 		params = &UpdateMLTransformInput{}
@@ -54,10 +53,9 @@ type UpdateMLTransformInput struct {
 	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
 	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
 	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/).  <p>When the
-	// <code>WorkerType</code> field is set to a value other than
-	// <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically
-	// and becomes read-only.</p>
+	// pricing page (https://aws.amazon.com/glue/pricing/). When the WorkerType field
+	// is set to a value other than Standard, the MaxCapacity field is set
+	// automatically and becomes read-only.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry a task for this transform after a task run

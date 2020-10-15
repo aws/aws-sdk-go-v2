@@ -16,7 +16,7 @@ import (
 // more information, see Suspending and Resuming Scaling Processes
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html)
 // in the Amazon EC2 Auto Scaling User Guide. To resume processes that have been
-// suspended, call the ResumeProcesses () API.
+// suspended, call the ResumeProcesses API.
 func (c *Client) SuspendProcesses(ctx context.Context, params *SuspendProcessesInput, optFns ...func(*Options)) (*SuspendProcessesOutput, error) {
 	if params == nil {
 		params = &SuspendProcessesInput{}

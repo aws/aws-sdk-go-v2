@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// An object representing a device for a placement template (see PlacementTemplate
-// ()).
+// An object representing a device for a placement template (see
+// PlacementTemplate).
 type DeviceTemplate struct {
 
 	// An optional Lambda function to invoke instead of the default Lambda function
@@ -80,8 +80,8 @@ type PlacementTemplate struct {
 	// this template.
 	DefaultAttributes map[string]*string
 
-	// An object specifying the DeviceTemplate () for all placements using this
-	// (PlacementTemplate ()) template.
+	// An object specifying the DeviceTemplate for all placements using this
+	// (PlacementTemplate) template.
 	DeviceTemplates map[string]*DeviceTemplate
 }
 

@@ -46,8 +46,7 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	NetworkLoadBalancerArns []*string
 
 	// Indicates whether requests from service consumers to create an endpoint to your
-	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections
-	// ().
+	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
 	AcceptanceRequired *bool
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

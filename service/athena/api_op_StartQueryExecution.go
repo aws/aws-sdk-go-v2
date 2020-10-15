@@ -14,7 +14,7 @@ import (
 
 // Runs the SQL query statements contained in the Query. Requires you to have
 // access to the workgroup in which the query ran. Running queries against an
-// external catalog requires GetDataCatalog () permission to the catalog. For code
+// external catalog requires GetDataCatalog permission to the catalog. For code
 // samples using the AWS SDK for Java, see Examples and Code Samples
 // (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
 // Athena User Guide.
@@ -57,7 +57,7 @@ type StartQueryExecutionInput struct {
 	// override query settings. This affects the query results location. The workgroup
 	// settings override is specified in EnforceWorkGroupConfiguration (true/false) in
 	// the WorkGroupConfiguration. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration ().
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	ResultConfiguration *types.ResultConfiguration
 
 	// The name of the workgroup in which the query is being started.

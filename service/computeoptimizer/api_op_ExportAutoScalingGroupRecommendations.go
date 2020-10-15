@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Exports optimization recommendations for Auto Scaling groups.
-// <p>Recommendations are exported in a comma-separated values (.csv) file, and its
-// metadata in a JavaScript Object Notation (.json) file, to an existing Amazon
-// Simple Storage Service (Amazon S3) bucket that you specify. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting
-// Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can
-// have only one Auto Scaling group export job in progress per AWS Region.</p>
+// Exports optimization recommendations for Auto Scaling groups. Recommendations
+// are exported in a comma-separated values (.csv) file, and its metadata in a
+// JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage
+// Service (Amazon S3) bucket that you specify. For more information, see Exporting
+// Recommendations
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
+// in the Compute Optimizer User Guide. You can have only one Auto Scaling group
+// export job in progress per AWS Region.
 func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, params *ExportAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*ExportAutoScalingGroupRecommendationsOutput, error) {
 	if params == nil {
 		params = &ExportAutoScalingGroupRecommendationsInput{}

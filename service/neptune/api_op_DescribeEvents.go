@@ -94,7 +94,7 @@ type DescribeEventsInput struct {
 
 type DescribeEventsOutput struct {
 
-	// A list of Event () instances.
+	// A list of Event instances.
 	Events []*types.Event
 
 	// An optional pagination token provided by a previous Events request. If this

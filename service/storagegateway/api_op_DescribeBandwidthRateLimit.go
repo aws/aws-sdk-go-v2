@@ -12,11 +12,11 @@ import (
 
 // Returns the bandwidth rate limits of a gateway. By default, these limits are not
 // set, which means no bandwidth rate limiting is in effect. This operation is
-// supported for the stored volume, cached volume and tape gateway types.  <p>This
+// supported for the stored volume, cached volume and tape gateway types. This
 // operation only returns a value for a bandwidth rate limit only if the limit is
 // set. If no limits are set for the gateway, then this operation returns only the
 // gateway ARN in the response body. To specify which gateway to describe, use the
-// Amazon Resource Name (ARN) of the gateway in your request.</p>
+// Amazon Resource Name (ARN) of the gateway in your request.
 func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *DescribeBandwidthRateLimitInput, optFns ...func(*Options)) (*DescribeBandwidthRateLimitOutput, error) {
 	if params == nil {
 		params = &DescribeBandwidthRateLimitInput{}
@@ -35,8 +35,8 @@ func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *Describ
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeBandwidthRateLimitInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -53,8 +53,8 @@ type DescribeBandwidthRateLimitOutput struct {
 	// appear in the response if the upload rate limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

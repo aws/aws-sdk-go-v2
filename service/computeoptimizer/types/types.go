@@ -247,11 +247,10 @@ type ProjectedMetric struct {
 	Values []*float64
 }
 
-// Describes a recommendation export job.  <p>Use the
-// <code>DescribeRecommendationExportJobs</code> action to view your recommendation
-// export jobs.</p> <p>Use the <code>ExportAutoScalingGroupRecommendations</code>
-// or <code>ExportEC2InstanceRecommendations</code> actions to request an export of
-// your recommendations.</p>
+// Describes a recommendation export job. Use the DescribeRecommendationExportJobs
+// action to view your recommendation export jobs. Use the
+// ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
+// actions to request an export of your recommendations.
 type RecommendationExportJob struct {
 
 	// The timestamp of when the export job was created.

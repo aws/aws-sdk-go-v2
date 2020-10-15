@@ -12,8 +12,8 @@ import (
 
 // Updates a stack using the input information that was provided when the specified
 // change set was created. After the call successfully completes, AWS
-// CloudFormation starts updating the stack. Use the DescribeStacks () action to
-// view the status of the update. When you execute a change set, AWS CloudFormation
+// CloudFormation starts updating the stack. Use the DescribeStacks action to view
+// the status of the update. When you execute a change set, AWS CloudFormation
 // deletes all other change sets associated with the stack because they aren't
 // valid for the updated stack. If a stack policy is associated with the stack, AWS
 // CloudFormation enforces the policy during the update. You can't specify a
@@ -33,7 +33,7 @@ func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetI
 	return out, nil
 }
 
-// The input for the ExecuteChangeSet () action.
+// The input for the ExecuteChangeSet action.
 type ExecuteChangeSetInput struct {
 
 	// The name or ARN of the change set that you want use to update the specified
@@ -54,7 +54,7 @@ type ExecuteChangeSetInput struct {
 	StackName *string
 }
 
-// The output for the ExecuteChangeSet () action.
+// The output for the ExecuteChangeSet action.
 type ExecuteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

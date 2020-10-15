@@ -31,8 +31,8 @@ import (
 // and strategies, and health check grace period using this API. If the launch
 // type, load balancer, network configuration, platform version, or task definition
 // need to be updated, you should create a new task set. For more information, see
-// CreateTaskSet (). You can add to or subtract from the number of instantiations
-// of a task definition in a service by specifying the cluster that the service is
+// CreateTaskSet. You can add to or subtract from the number of instantiations of a
+// task definition in a service by specifying the cluster that the service is
 // running in and a new desiredCount parameter. If you have updated the Docker
 // image of your application, you can create a new task definition with that image
 // and deploy it to your service. The service scheduler uses the minimum healthy
@@ -64,7 +64,7 @@ import (
 // stopping the four older tasks (provided that the cluster resources required to
 // do this are available).
 //
-// When UpdateService () stops a task during a deployment,
+// When UpdateService stops a task during a deployment,
 // the equivalent of docker stop is issued to the containers running in the task.
 // This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent
 // and the containers are forcibly stopped. If the container handles the SIGTERM
@@ -136,16 +136,16 @@ type UpdateServiceInput struct {
 	// provider strategy consists of one or more capacity providers along with the base
 	// and weight to assign to them. A capacity provider must be associated with the
 	// cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders () API is used to associate a capacity provider with
-	// a cluster. Only capacity providers with an ACTIVE or UPDATING status can be
-	// used. If specifying a capacity provider that uses an Auto Scaling group, the
-	// capacity provider must already be created. New capacity providers can be created
-	// with the CreateCapacityProvider () API operation. To use a AWS Fargate capacity
-	// provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS
-	// Fargate capacity providers are available to all accounts and only need to be
-	// associated with a cluster to be used. The PutClusterCapacityProviders () API
-	// operation is used to update the list of available capacity providers for a
-	// cluster after the cluster is created.
+	// PutClusterCapacityProviders API is used to associate a capacity provider with a
+	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
+	// provider must already be created. New capacity providers can be created with the
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
+	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
+	// capacity providers are available to all accounts and only need to be associated
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
+	// to update the list of available capacity providers for a cluster after the
+	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your

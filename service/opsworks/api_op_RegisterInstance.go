@@ -20,8 +20,8 @@ import (
 // more information, see  Registering an Instance with an AWS OpsWorks Stacks Stack
 // (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html).
 // Registered instances have the same requirements as instances that are created by
-// using the CreateInstance () API. For example, registered instances must be
-// running a supported Linux-based operating system, and they must have a supported
+// using the CreateInstance API. For example, registered instances must be running
+// a supported Linux-based operating system, and they must have a supported
 // instance type. For more information about requirements for instances that you
 // want to register, see  Preparing the Instance
 // (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html).

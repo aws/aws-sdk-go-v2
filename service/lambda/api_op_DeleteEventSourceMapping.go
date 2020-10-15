@@ -14,9 +14,9 @@ import (
 
 // Deletes an event source mapping
 // (https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html). You
-// can get the identifier of a mapping from the output of ListEventSourceMappings
-// (). When you delete an event source mapping, it enters a Deleting state and
-// might not be completely deleted for several seconds.
+// can get the identifier of a mapping from the output of ListEventSourceMappings.
+// When you delete an event source mapping, it enters a Deleting state and might
+// not be completely deleted for several seconds.
 func (c *Client) DeleteEventSourceMapping(ctx context.Context, params *DeleteEventSourceMappingInput, optFns ...func(*Options)) (*DeleteEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &DeleteEventSourceMappingInput{}
@@ -41,7 +41,7 @@ type DeleteEventSourceMappingInput struct {
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
-// CreateEventSourceMapping () for details.
+// CreateEventSourceMapping for details.
 type DeleteEventSourceMappingOutput struct {
 
 	// The maximum number of items to retrieve in a single batch.

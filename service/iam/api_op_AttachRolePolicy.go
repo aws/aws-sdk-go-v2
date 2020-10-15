@@ -14,10 +14,10 @@ import (
 // a managed policy to a role, the managed policy becomes part of the role's
 // permission (access) policy. You cannot use a managed policy as the role's trust
 // policy. The role's trust policy is created at the same time as the role, using
-// CreateRole (). You can update a role's trust policy using UpdateAssumeRolePolicy
-// (). Use this API to attach a managed policy to a role. To embed an inline policy
-// in a role, use PutRolePolicy (). For more information about policies, see
-// Managed Policies and Inline Policies
+// CreateRole. You can update a role's trust policy using UpdateAssumeRolePolicy.
+// Use this API to attach a managed policy to a role. To embed an inline policy in
+// a role, use PutRolePolicy. For more information about policies, see Managed
+// Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) AttachRolePolicy(ctx context.Context, params *AttachRolePolicyInput, optFns ...func(*Options)) (*AttachRolePolicyOutput, error) {

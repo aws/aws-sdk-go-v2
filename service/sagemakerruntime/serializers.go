@@ -88,7 +88,13 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		}
 	}
 
+	if v.EndpointName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
+	}
 	if v.EndpointName != nil {
+		if len(*v.EndpointName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
+		}
 		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
 			return err
 		}

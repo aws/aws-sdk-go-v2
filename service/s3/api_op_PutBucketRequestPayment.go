@@ -15,10 +15,13 @@ import (
 // owner pays for downloads from the bucket. This configuration parameter enables
 // the bucket owner (only) to specify that the person requesting the download will
 // be charged for the download. For more information, see Requester Pays Buckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html).
-// <p>The following operations are related to
-// <code>PutBucketRequestPayment</code>:</p> <ul> <li> <p> <a>CreateBucket</a> </p>
-// </li> <li> <p> <a>GetBucketRequestPayment</a> </p> </li> </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html). The
+// following operations are related to PutBucketRequestPayment:
+//
+//     *
+// CreateBucket
+//
+//     * GetBucketRequestPayment
 func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketRequestPaymentInput, optFns ...func(*Options)) (*PutBucketRequestPaymentOutput, error) {
 	if params == nil {
 		params = &PutBucketRequestPaymentInput{}

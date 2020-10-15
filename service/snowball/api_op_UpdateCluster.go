@@ -38,7 +38,7 @@ type UpdateClusterInput struct {
 	// This member is required.
 	ClusterId *string
 
-	// The ID of the updated Address () object.
+	// The ID of the updated Address object.
 	AddressId *string
 
 	// The updated description of this cluster.
@@ -48,11 +48,11 @@ type UpdateClusterInput struct {
 	// supported in most regions.
 	ForwardingAddressId *string
 
-	// The new or updated Notification () object.
+	// The new or updated Notification object.
 	Notification *types.Notification
 
-	// The updated arrays of JobResource () objects that can include updated S3Resource
-	// () objects or LambdaResource () objects.
+	// The updated arrays of JobResource objects that can include updated S3Resource
+	// objects or LambdaResource objects.
 	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
@@ -61,7 +61,7 @@ type UpdateClusterInput struct {
 	// action in AWS Identity and Access Management (IAM).
 	RoleARN *string
 
-	// The updated shipping option value of this cluster's ShippingDetails () object.
+	// The updated shipping option value of this cluster's ShippingDetails object.
 	ShippingOption types.ShippingOption
 }
 

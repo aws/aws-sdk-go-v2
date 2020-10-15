@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Forecast dataset that was created using the CreateDataset ()
+// Deletes an Amazon Forecast dataset that was created using the CreateDataset
 // operation. You can only delete datasets that have a status of ACTIVE or
-// CREATE_FAILED. To get the status use the DescribeDataset () operation. Forecast
+// CREATE_FAILED. To get the status use the DescribeDataset operation. Forecast
 // does not automatically update any dataset groups that contain the deleted
 // dataset. In order to update the dataset group, use the operation, omitting the
 // deleted dataset's ARN.

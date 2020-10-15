@@ -83,7 +83,7 @@ type CreatePolicyInput struct {
 	Path *string
 }
 
-// Contains the response to a successful CreatePolicy () request.
+// Contains the response to a successful CreatePolicy request.
 type CreatePolicyOutput struct {
 
 	// A structure containing details about the new policy.

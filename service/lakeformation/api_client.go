@@ -19,8 +19,7 @@ import (
 const ServiceID = "LakeFormation"
 const ServiceAPIVersion = "2017-03-31"
 
-// AWS Lake Formation Defines the public endpoint for the AWS Lake Formation
-// service.
+// Client provides the API client to make operations call for AWS Lake Formation.
 type Client struct {
 	options Options
 }

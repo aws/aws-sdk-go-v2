@@ -255,7 +255,7 @@ type HttpHeaderConditionConfig struct {
 	// The name of the HTTP header field. The maximum size is 40 characters. The header
 	// name is case insensitive. The allowed characters are specified by RFC 7230.
 	// Wildcards are not supported. You can't use an HTTP header condition to specify
-	// the host header. Use HostHeaderConditionConfig () to specify a host header
+	// the host header. Use HostHeaderConditionConfig to specify a host header
 	// condition.
 	HttpHeaderName *string
 
@@ -507,7 +507,7 @@ type PathPatternConditionConfig struct {
 	// and ? (matches exactly 1 character). If you specify multiple strings, the
 	// condition is satisfied if one of them matches the request URL. The path pattern
 	// is compared only to the path of the URL, not to its query string. To compare
-	// against the query string, use QueryStringConditionConfig ().
+	// against the query string, use QueryStringConditionConfig.
 	Values []*string
 }
 
@@ -709,7 +709,7 @@ type SourceIpConditionConfig struct {
 	// condition is satisfied if the source IP address of the request matches one of
 	// the CIDR blocks. This condition is not satisfied by the addresses in the
 	// X-Forwarded-For header. To search for addresses in the X-Forwarded-For header,
-	// use HttpHeaderConditionConfig ().
+	// use HttpHeaderConditionConfig.
 	Values []*string
 }
 
@@ -853,48 +853,64 @@ type TargetGroup struct {
 // Information about a target group attribute.
 type TargetGroupAttribute struct {
 
-	// The name of the attribute.  <p>The following attributes are supported by both
-	// Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p>
-	// <code>deregistration_delay.timeout_seconds</code> - The amount of time, in
-	// seconds, for Elastic Load Balancing to wait before changing the state of a
-	// deregistering target from <code>draining</code> to <code>unused</code>. The
-	// range is 0-3600 seconds. The default value is 300 seconds. If the target is a
-	// Lambda function, this attribute is not supported.</p> </li> <li> <p>
-	// <code>stickiness.enabled</code> - Indicates whether sticky sessions are enabled.
-	// The value is <code>true</code> or <code>false</code>. The default is
-	// <code>false</code>.</p> </li> <li> <p> <code>stickiness.type</code> - The type
-	// of sticky sessions. The possible values are <code>lb_cookie</code> for
-	// Application Load Balancers or <code>source_ip</code> for Network Load
-	// Balancers.</p> </li> </ul> <p>The following attributes are supported only if the
-	// load balancer is an Application Load Balancer and the target is an instance or
-	// an IP address:</p> <ul> <li> <p> <code>load_balancing.algorithm.type</code> -
-	// The load balancing algorithm determines how the load balancer selects targets
-	// when routing requests. The value is <code>round_robin</code> or
-	// <code>least_outstanding_requests</code>. The default is
-	// <code>round_robin</code>.</p> </li> <li> <p>
-	// <code>slow_start.duration_seconds</code> - The time period, in seconds, during
-	// which a newly registered target receives an increasing share of the traffic to
-	// the target group. After this time period ends, the target receives its full
-	// share of traffic. The range is 30-900 seconds (15 minutes). Slow start mode is
-	// disabled by default.</p> </li> <li> <p>
-	// <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in
+	// The name of the attribute. The following attributes are supported by both
+	// Application Load Balancers and Network Load Balancers:
+	//
+	//     *
+	// deregistration_delay.timeout_seconds - The amount of time, in seconds, for
+	// Elastic Load Balancing to wait before changing the state of a deregistering
+	// target from draining to unused. The range is 0-3600 seconds. The default value
+	// is 300 seconds. If the target is a Lambda function, this attribute is not
+	// supported.
+	//
+	//     * stickiness.enabled - Indicates whether sticky sessions are
+	// enabled. The value is true or false. The default is false.
+	//
+	//     *
+	// stickiness.type - The type of sticky sessions. The possible values are
+	//
+	//
+	// lb_cookie for Application Load Balancers or source_ip for Network Load
+	// Balancers.
+	//
+	// The following attributes are supported only if the load balancer is
+	// an Application Load Balancer and the target is an instance or an IP address:
+	//
+	//
+	// * load_balancing.algorithm.type - The load balancing algorithm determines how
+	// the load balancer selects targets when routing requests. The value is
+	// round_robin or least_outstanding_requests. The default is round_robin.
+	//
+	//     *
+	// slow_start.duration_seconds - The time period, in seconds, during which a newly
+	// registered target receives an increasing share of the traffic to the target
+	// group. After this time period ends, the target receives its full share of
+	// traffic. The range is 30-900 seconds (15 minutes). Slow start mode is disabled
+	// by default.
+	//
+	//     * stickiness.lb_cookie.duration_seconds - The time period, in
 	// seconds, during which requests from a client should be routed to the same
 	// target. After this time period expires, the load balancer-generated cookie is
 	// considered stale. The range is 1 second to 1 week (604800 seconds). The default
-	// value is 1 day (86400 seconds).</p> </li> </ul> <p>The following attribute is
-	// supported only if the load balancer is an Application Load Balancer and the
-	// target is a Lambda function:</p> <ul> <li> <p>
-	// <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request
-	// and response headers that are exchanged between the load balancer and the Lambda
-	// function include arrays of values or strings. The value is <code>true</code> or
-	// <code>false</code>. The default is <code>false</code>. If the value is
-	// <code>false</code> and the request contains a duplicate header field name or
-	// query parameter key, the load balancer uses the last value sent by the
-	// client.</p> </li> </ul> <p>The following attribute is supported only by Network
-	// Load Balancers:</p> <ul> <li> <p> <code>proxy_protocol_v2.enabled</code> -
-	// Indicates whether Proxy Protocol version 2 is enabled. The value is
-	// <code>true</code> or <code>false</code>. The default is <code>false</code>.</p>
-	// </li> </ul>
+	// value is 1 day (86400 seconds).
+	//
+	// The following attribute is supported only if
+	// the load balancer is an Application Load Balancer and the target is a Lambda
+	// function:
+	//
+	//     * lambda.multi_value_headers.enabled - Indicates whether the
+	// request and response headers that are exchanged between the load balancer and
+	// the Lambda function include arrays of values or strings. The value is true or
+	// false. The default is false. If the value is false and the request contains a
+	// duplicate header field name or query parameter key, the load balancer uses the
+	// last value sent by the client.
+	//
+	// The following attribute is supported only by
+	// Network Load Balancers:
+	//
+	//     * proxy_protocol_v2.enabled - Indicates whether
+	// Proxy Protocol version 2 is enabled. The value is true or false. The default is
+	// false.
 	Key *string
 
 	// The value of the attribute.
@@ -930,41 +946,68 @@ type TargetHealth struct {
 	// state is healthy, a description is not provided.
 	Description *string
 
-	// The reason code.  <p>If the target state is <code>healthy</code>, a reason code
-	// is not provided.</p> <p>If the target state is <code>initial</code>, the reason
-	// code can be one of the following values:</p> <ul> <li> <p>
-	// <code>Elb.RegistrationInProgress</code> - The target is in the process of being
-	// registered with the load balancer.</p> </li> <li> <p>
-	// <code>Elb.InitialHealthChecking</code> - The load balancer is still sending the
-	// target the minimum number of health checks required to determine its health
-	// status.</p> </li> </ul> <p>If the target state is <code>unhealthy</code>, the
-	// reason code can be one of the following values:</p> <ul> <li> <p>
-	// <code>Target.ResponseCodeMismatch</code> - The health checks did not return an
-	// expected HTTP code. Applies only to Application Load Balancers.</p> </li> <li>
-	// <p> <code>Target.Timeout</code> - The health check requests timed out. Applies
-	// only to Application Load Balancers.</p> </li> <li> <p>
-	// <code>Target.FailedHealthChecks</code> - The load balancer received an error
-	// while establishing a connection to the target or the target response was
-	// malformed.</p> </li> <li> <p> <code>Elb.InternalError</code> - The health checks
-	// failed due to an internal error. Applies only to Application Load Balancers.</p>
-	// </li> </ul> <p>If the target state is <code>unused</code>, the reason code can
-	// be one of the following values:</p> <ul> <li> <p>
-	// <code>Target.NotRegistered</code> - The target is not registered with the target
-	// group.</p> </li> <li> <p> <code>Target.NotInUse</code> - The target group is not
-	// used by any load balancer or the target is in an Availability Zone that is not
-	// enabled for its load balancer.</p> </li> <li> <p>
-	// <code>Target.InvalidState</code> - The target is in the stopped or terminated
-	// state.</p> </li> <li> <p> <code>Target.IpUnusable</code> - The target IP address
-	// is reserved for use by a load balancer.</p> </li> </ul> <p>If the target state
-	// is <code>draining</code>, the reason code can be the following value:</p> <ul>
-	// <li> <p> <code>Target.DeregistrationInProgress</code> - The target is in the
-	// process of being deregistered and the deregistration delay period has not
-	// expired.</p> </li> </ul> <p>If the target state is <code>unavailable</code>, the
-	// reason code can be the following value:</p> <ul> <li> <p>
-	// <code>Target.HealthCheckDisabled</code> - Health checks are disabled for the
-	// target group. Applies only to Application Load Balancers.</p> </li> <li> <p>
-	// <code>Elb.InternalError</code> - Target health is unavailable due to an internal
-	// error. Applies only to Network Load Balancers.</p> </li> </ul>
+	// The reason code. If the target state is healthy, a reason code is not provided.
+	// If the target state is initial, the reason code can be one of the following
+	// values:
+	//
+	//     * Elb.RegistrationInProgress - The target is in the process of
+	// being registered with the load balancer.
+	//
+	//     * Elb.InitialHealthChecking - The
+	// load balancer is still sending the target the minimum number of health checks
+	// required to determine its health status.
+	//
+	// If the target state is unhealthy, the
+	// reason code can be one of the following values:
+	//
+	//     *
+	// Target.ResponseCodeMismatch - The health checks did not return an expected HTTP
+	// code. Applies only to Application Load Balancers.
+	//
+	//     * Target.Timeout - The
+	// health check requests timed out. Applies only to Application Load Balancers.
+	//
+	//
+	// * Target.FailedHealthChecks - The load balancer received an error while
+	// establishing a connection to the target or the target response was malformed.
+	//
+	//
+	// * Elb.InternalError - The health checks failed due to an internal error. Applies
+	// only to Application Load Balancers.
+	//
+	// If the target state is unused, the reason
+	// code can be one of the following values:
+	//
+	//     * Target.NotRegistered - The
+	// target is not registered with the target group.
+	//
+	//     * Target.NotInUse - The
+	// target group is not used by any load balancer or the target is in an
+	// Availability Zone that is not enabled for its load balancer.
+	//
+	//     *
+	// Target.InvalidState - The target is in the stopped or terminated state.
+	//
+	//     *
+	// Target.IpUnusable - The target IP address is reserved for use by a load
+	// balancer.
+	//
+	// If the target state is draining, the reason code can be the following
+	// value:
+	//
+	//     * Target.DeregistrationInProgress - The target is in the process of
+	// being deregistered and the deregistration delay period has not expired.
+	//
+	// If the
+	// target state is unavailable, the reason code can be the following value:
+	//
+	//     *
+	// Target.HealthCheckDisabled - Health checks are disabled for the target group.
+	// Applies only to Application Load Balancers.
+	//
+	//     * Elb.InternalError - Target
+	// health is unavailable due to an internal error. Applies only to Network Load
+	// Balancers.
 	Reason TargetHealthReasonEnum
 
 	// The state of the target.

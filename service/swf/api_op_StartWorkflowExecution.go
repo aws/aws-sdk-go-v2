@@ -12,35 +12,51 @@ import (
 )
 
 // Starts an execution of the workflow type in the specified domain using the
-// provided workflowId and input data.  <p>This action returns the newly started
-// workflow execution.</p> <p> <b>Access Control</b> </p> <p>You can use IAM
-// policies to control this action's access to Amazon SWF resources as follows:</p>
-// <ul> <li> <p>Use a <code>Resource</code> element with the domain name to limit
-// the action to only specified domains.</p> </li> <li> <p>Use an
-// <code>Action</code> element to allow or deny permission to call this action.</p>
-// </li> <li> <p>Constrain the following parameters by using a
-// <code>Condition</code> element with the appropriate keys.</p> <ul> <li> <p>
-// <code>tagList.member.0</code>: The key is <code>swf:tagList.member.0</code>.</p>
-// </li> <li> <p> <code>tagList.member.1</code>: The key is
-// <code>swf:tagList.member.1</code>.</p> </li> <li> <p>
-// <code>tagList.member.2</code>: The key is <code>swf:tagList.member.2</code>.</p>
-// </li> <li> <p> <code>tagList.member.3</code>: The key is
-// <code>swf:tagList.member.3</code>.</p> </li> <li> <p>
-// <code>tagList.member.4</code>: The key is <code>swf:tagList.member.4</code>.</p>
-// </li> <li> <p> <code>taskList</code>: String constraint. The key is
-// <code>swf:taskList.name</code>.</p> </li> <li> <p>
-// <code>workflowType.name</code>: String constraint. The key is
-// <code>swf:workflowType.name</code>.</p> </li> <li> <p>
-// <code>workflowType.version</code>: String constraint. The key is
-// <code>swf:workflowType.version</code>.</p> </li> </ul> </li> </ul> <p>If the
-// caller doesn't have sufficient permissions to invoke the action, or the
-// parameter values fall outside the specified constraints, the action fails. The
-// associated event attribute's <code>cause</code> parameter is set to
-// <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see
-// <a
-// href="https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html">Using
-// IAM to Manage Access to Amazon SWF Workflows</a> in the <i>Amazon SWF Developer
-// Guide</i>.</p>
+// provided workflowId and input data. This action returns the newly started
+// workflow execution. Access Control You can use IAM policies to control this
+// action's access to Amazon SWF resources as follows:
+//
+//     * Use a Resource
+// element with the domain name to limit the action to only specified domains.
+//
+//
+// * Use an Action element to allow or deny permission to call this action.
+//
+//     *
+// Constrain the following parameters by using a Condition element with the
+// appropriate keys.
+//
+//         * tagList.member.0: The key is
+// swf:tagList.member.0.
+//
+//         * tagList.member.1: The key is
+// swf:tagList.member.1.
+//
+//         * tagList.member.2: The key is
+// swf:tagList.member.2.
+//
+//         * tagList.member.3: The key is
+// swf:tagList.member.3.
+//
+//         * tagList.member.4: The key is
+// swf:tagList.member.4.
+//
+//         * taskList: String constraint. The key is
+// swf:taskList.name.
+//
+//         * workflowType.name: String constraint. The key is
+// swf:workflowType.name.
+//
+//         * workflowType.version: String constraint. The
+// key is swf:workflowType.version.
+//
+// If the caller doesn't have sufficient
+// permissions to invoke the action, or the parameter values fall outside the
+// specified constraints, the action fails. The associated event attribute's cause
+// parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM
+// policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// in the Amazon SWF Developer Guide.
 func (c *Client) StartWorkflowExecution(ctx context.Context, params *StartWorkflowExecutionInput, optFns ...func(*Options)) (*StartWorkflowExecutionOutput, error) {
 	if params == nil {
 		params = &StartWorkflowExecutionInput{}
@@ -67,11 +83,10 @@ type StartWorkflowExecutionInput struct {
 	// this to associate a custom identifier with the workflow execution. You may
 	// specify the same identifier if a workflow execution is logically a restart of a
 	// previous execution. You cannot have two open workflow executions with the same
-	// workflowId at the same time within the same domain.  <p>The specified string
-	// must not start or end with whitespace. It must not contain a <code>:</code>
-	// (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control
-	// characters (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it
-	// must not <i>be</i> the literal string <code>arn</code>.</p>
+	// workflowId at the same time within the same domain. The specified string must
+	// not start or end with whitespace. It must not contain a : (colon), / (slash), |
+	// (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also,
+	// it must not be the literal string arn.
 	//
 	// This member is required.
 	WorkflowId *string
@@ -83,9 +98,9 @@ type StartWorkflowExecutionInput struct {
 
 	// If set, specifies the policy to use for the child workflow executions of this
 	// workflow execution if it is terminated, by calling the
-	// TerminateWorkflowExecution () action explicitly or due to an expired timeout.
-	// This policy overrides the default child policy specified when registering the
-	// workflow type using RegisterWorkflowType (). The supported child policies are:
+	// TerminateWorkflowExecution action explicitly or due to an expired timeout. This
+	// policy overrides the default child policy specified when registering the
+	// workflow type using RegisterWorkflowType. The supported child policies are:
 	//
 	//
 	// * TERMINATE – The child executions are terminated.
@@ -107,15 +122,14 @@ type StartWorkflowExecutionInput struct {
 
 	// The total duration for this workflow execution. This overrides the
 	// defaultExecutionStartToCloseTimeout specified when registering the workflow
-	// type.  <p>The duration is specified in seconds; an integer greater than or equal
-	// to <code>0</code>. Exceeding this limit causes the workflow execution to time
-	// out. Unlike some of the other timeout parameters in Amazon SWF, you cannot
-	// specify a value of "NONE" for this timeout; there is a one-year max limit on the
-	// time that a workflow execution can run.</p> <note> <p>An execution
-	// start-to-close timeout must be specified either through this parameter or as a
-	// default when the workflow type is registered. If neither this parameter nor a
-	// default execution start-to-close timeout is specified, a fault is returned.</p>
-	// </note>
+	// type. The duration is specified in seconds; an integer greater than or equal to
+	// 0. Exceeding this limit causes the workflow execution to time out. Unlike some
+	// of the other timeout parameters in Amazon SWF, you cannot specify a value of
+	// "NONE" for this timeout; there is a one-year max limit on the time that a
+	// workflow execution can run. An execution start-to-close timeout must be
+	// specified either through this parameter or as a default when the workflow type
+	// is registered. If neither this parameter nor a default execution start-to-close
+	// timeout is specified, a fault is returned.
 	ExecutionStartToCloseTimeout *string
 
 	// The input for the workflow execution. This is a free form string which should be
@@ -134,8 +148,8 @@ type StartWorkflowExecutionInput struct {
 
 	// The list of tags to associate with the workflow execution. You can specify a
 	// maximum of 5 tags. You can list workflow executions with a specific tag by
-	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
-	// specifying a TagFilter ().
+	// calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
+	// specifying a TagFilter.
 	TagList []*string
 
 	// The task list to use for the decision tasks generated for this workflow
@@ -143,11 +157,10 @@ type StartWorkflowExecutionInput struct {
 	// workflow type. A task list for this workflow execution must be specified either
 	// as a default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default task list was specified at registration time then
-	// a fault is returned.  <p>The specified string must not start or end with
-	// whitespace. It must not contain a <code>:</code> (colon), <code>/</code>
-	// (slash), <code>|</code> (vertical bar), or any control characters
-	// (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it must not
-	// <i>be</i> the literal string <code>arn</code>.</p>
+	// a fault is returned. The specified string must not start or end with whitespace.
+	// It must not contain a : (colon), / (slash), | (vertical bar), or any control
+	// characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal
+	// string arn.
 	TaskList *types.TaskList
 
 	// The task priority to use for this workflow execution. This overrides any default
@@ -162,7 +175,7 @@ type StartWorkflowExecutionInput struct {
 
 	// Specifies the maximum duration of decision tasks for this workflow execution.
 	// This parameter overrides the defaultTaskStartToCloseTimout specified when
-	// registering the workflow type using RegisterWorkflowType (). The duration is
+	// registering the workflow type using RegisterWorkflowType. The duration is
 	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
 	// specify unlimited duration. A task start-to-close timeout for this workflow
 	// execution must be specified either as a default for the workflow type or through

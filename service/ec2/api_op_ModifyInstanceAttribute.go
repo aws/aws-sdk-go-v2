@@ -16,9 +16,9 @@ import (
 // associated with an elastic network interface (ENI) attached to an instance in a
 // VPC can result in an error if the instance has more than one ENI. To change the
 // security groups associated with an ENI attached to an instance that has multiple
-// ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute () action.
-// To modify some attributes, the instance must be stopped. For more information,
-// see Modifying attributes of a stopped instance
+// ENIs, we recommend that you use the ModifyNetworkInterfaceAttribute action. To
+// modify some attributes, the instance must be stopped. For more information, see
+// Modifying attributes of a stopped instance
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) ModifyInstanceAttribute(ctx context.Context, params *ModifyInstanceAttributeInput, optFns ...func(*Options)) (*ModifyInstanceAttributeOutput, error) {

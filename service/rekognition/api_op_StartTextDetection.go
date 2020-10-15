@@ -12,15 +12,15 @@ import (
 )
 
 // Starts asynchronous detection of text in a stored video. Amazon Rekognition
-// Video can detect text in a video stored in an Amazon S3 bucket. Use Video () to
+// Video can detect text in a video stored in an Amazon S3 bucket. Use Video to
 // specify the bucket name and the filename of the video. StartTextDetection
 // returns a job identifier (JobId) which you use to get the results of the
 // operation. When text detection is finished, Amazon Rekognition Video publishes a
 // completion status to the Amazon Simple Notification Service topic that you
 // specify in NotificationChannel. To get the results of the text detection
 // operation, first check that the status value published to the Amazon SNS topic
-// is SUCCEEDED. if so, call GetTextDetection () and pass the job identifier
-// (JobId) from the initial call to StartTextDetection.
+// is SUCCEEDED. if so, call GetTextDetection and pass the job identifier (JobId)
+// from the initial call to StartTextDetection.
 func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetectionInput, optFns ...func(*Options)) (*StartTextDetectionOutput, error) {
 	if params == nil {
 		params = &StartTextDetectionInput{}
@@ -39,7 +39,7 @@ func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetect
 type StartTextDetectionInput struct {
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection () use Video to specify a video for
+	// operations such as StartLabelDetection use Video to specify a video for
 	// analysis. The supported file formats are .mp4, .mov and .avi.
 	//
 	// This member is required.
@@ -62,7 +62,7 @@ type StartTextDetectionInput struct {
 
 	// The Amazon Simple Notification Service topic to which Amazon Rekognition
 	// publishes the completion status of a video analysis operation. For more
-	// information, see api-video ().
+	// information, see api-video.
 	NotificationChannel *types.NotificationChannel
 }
 

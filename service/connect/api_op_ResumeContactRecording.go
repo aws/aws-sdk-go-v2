@@ -11,8 +11,8 @@ import (
 )
 
 // When a contact is being recorded, and the recording has been suspended using
-// SuspendContactRecording, this API resumes recording the call.  <p>Only voice
-// recordings are supported at this time.</p>
+// SuspendContactRecording, this API resumes recording the call. Only voice
+// recordings are supported at this time.
 func (c *Client) ResumeContactRecording(ctx context.Context, params *ResumeContactRecordingInput, optFns ...func(*Options)) (*ResumeContactRecordingOutput, error) {
 	if params == nil {
 		params = &ResumeContactRecordingInput{}

@@ -13,13 +13,19 @@ import (
 
 // Returns metadata about all of the versions of objects in a bucket. You can also
 // use request parameters as selection criteria to return metadata about a subset
-// of all the object versions.  <note> <p> A 200 OK response can contain valid or
-// invalid XML. Make sure to design your application to parse the contents of the
-// response and handle it appropriately.</p> </note> <p>To use this operation, you
-// must have READ access to the bucket.</p> <p>The following operations are related
-// to <code>ListObjectVersions</code>:</p> <ul> <li> <p> <a>ListObjectsV2</a> </p>
-// </li> <li> <p> <a>GetObject</a> </p> </li> <li> <p> <a>PutObject</a> </p> </li>
-// <li> <p> <a>DeleteObject</a> </p> </li> </ul>
+// of all the object versions. A 200 OK response can contain valid or invalid XML.
+// Make sure to design your application to parse the contents of the response and
+// handle it appropriately. To use this operation, you must have READ access to the
+// bucket. The following operations are related to ListObjectVersions:
+//
+//     *
+// ListObjectsV2
+//
+//     * GetObject
+//
+//     * PutObject
+//
+//     * DeleteObject
 func (c *Client) ListObjectVersions(ctx context.Context, params *ListObjectVersionsInput, optFns ...func(*Options)) (*ListObjectVersionsOutput, error) {
 	if params == nil {
 		params = &ListObjectVersionsInput{}
@@ -103,10 +109,9 @@ type ListObjectVersionsOutput struct {
 	Delimiter *string
 
 	// Encoding type used by Amazon S3 to encode object key names in the XML response.
-	// <p>If you specify encoding-type request parameter, Amazon S3 includes this
-	// element in the response, and returns encoded key name values in the following
-	// response elements:</p> <p> <code>KeyMarker, NextKeyMarker, Prefix, Key</code>,
-	// and <code>Delimiter</code>.</p>
+	// If you specify encoding-type request parameter, Amazon S3 includes this element
+	// in the response, and returns encoded key name values in the following response
+	// elements: KeyMarker, NextKeyMarker, Prefix, Key, and Delimiter.
 	EncodingType types.EncodingType
 
 	// A flag that indicates whether Amazon S3 returned all of the results that

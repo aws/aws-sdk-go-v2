@@ -62,7 +62,7 @@ func (e *ServiceUnavailable) ErrorMessage() string {
 func (e *ServiceUnavailable) ErrorCode() string             { return "ServiceUnavailable" }
 func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Inspect your request and try again.  </p>
+// Inspect your request and try again.
 type ValidationError struct {
 	Message *string
 }

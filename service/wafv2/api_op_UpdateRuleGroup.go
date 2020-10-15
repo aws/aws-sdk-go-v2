@@ -15,11 +15,11 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Updates the specified RuleGroup (). A rule group defines a collection of rules
-// to inspect and control web requests that you can use in a WebACL (). When you
-// create a rule group, you define an immutable capacity limit. If you update a
-// rule group, you must stay within the capacity. This allows others to reuse the
-// rule group with confidence in its capacity requirements.
+// Updates the specified RuleGroup. A rule group defines a collection of rules to
+// inspect and control web requests that you can use in a WebACL. When you create a
+// rule group, you define an immutable capacity limit. If you update a rule group,
+// you must stay within the capacity. This allows others to reuse the rule group
+// with confidence in its capacity requirements.
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
 	if params == nil {
 		params = &UpdateRuleGroupInput{}
@@ -83,7 +83,7 @@ type UpdateRuleGroupInput struct {
 	// change the description of a rule group after you create it.
 	Description *string
 
-	// The Rule () statements used to identify the web requests that you want to allow,
+	// The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.

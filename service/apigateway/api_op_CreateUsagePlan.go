@@ -75,7 +75,7 @@ type CreateUsagePlanOutput struct {
 	// The description of a usage plan.
 	Description *string
 
-	// The identifier of a UsagePlan () resource.
+	// The identifier of a UsagePlan resource.
 	Id *string
 
 	// The name of a usage plan.

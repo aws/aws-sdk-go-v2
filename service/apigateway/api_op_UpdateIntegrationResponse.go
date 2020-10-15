@@ -41,7 +41,7 @@ type UpdateIntegrationResponseInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -65,7 +65,7 @@ type UpdateIntegrationResponseInput struct {
 }
 
 // Represents an integration response. The status code must map to an existing
-// MethodResponse (), and parameters and templates can be used to transform the
+// MethodResponse, and parameters and templates can be used to transform the
 // back-end response. Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateIntegrationResponseOutput struct {
@@ -113,7 +113,7 @@ type UpdateIntegrationResponseOutput struct {
 	SelectionPattern *string
 
 	// Specifies the status code that is used to map the integration response to an
-	// existing MethodResponse ().
+	// existing MethodResponse.
 	StatusCode *string
 
 	// Metadata pertaining to the operation's result.

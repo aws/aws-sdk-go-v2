@@ -33,7 +33,7 @@ func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *Reset
 	return out, nil
 }
 
-// Represents the input to ResetDBClusterParameterGroup ().
+// Represents the input to ResetDBClusterParameterGroup.
 type ResetDBClusterParameterGroupInput struct {
 
 	// The name of the cluster parameter group to reset.

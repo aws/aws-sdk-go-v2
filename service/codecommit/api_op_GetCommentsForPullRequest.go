@@ -32,7 +32,7 @@ func (c *Client) GetCommentsForPullRequest(ctx context.Context, params *GetComme
 type GetCommentsForPullRequestInput struct {
 
 	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests ().
+	// ListPullRequests.
 	//
 	// This member is required.
 	PullRequestId *string

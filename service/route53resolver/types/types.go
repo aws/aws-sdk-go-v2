@@ -19,8 +19,8 @@ type Filter struct {
 	Values []*string
 }
 
-// In an CreateResolverEndpoint () request, a subnet and IP address that you want
-// to use for DNS queries.
+// In an CreateResolverEndpoint request, a subnet and IP address that you want to
+// use for DNS queries.
 type IpAddressRequest struct {
 
 	// The subnet that contains the IP address.
@@ -32,7 +32,7 @@ type IpAddressRequest struct {
 	Ip *string
 }
 
-// In the response to a GetResolverEndpoint () request, information about the IP
+// In the response to a GetResolverEndpoint request, information about the IP
 // addresses that the resolver endpoint uses for DNS queries.
 type IpAddressResponse struct {
 
@@ -60,26 +60,25 @@ type IpAddressResponse struct {
 	SubnetId *string
 }
 
-// In an UpdateResolverEndpoint () request, information about an IP address to
-// update.
+// In an UpdateResolverEndpoint request, information about an IP address to update.
 type IpAddressUpdate struct {
 
 	// The new IP address.
 	Ip *string
 
 	// Only when removing an IP address from a resolver endpoint: The ID of the IP
-	// address that you want to remove. To get this ID, use GetResolverEndpoint ().
+	// address that you want to remove. To get this ID, use GetResolverEndpoint.
 	IpId *string
 
 	// The ID of the subnet that includes the IP address that you want to update. To
-	// get this ID, use GetResolverEndpoint ().
+	// get this ID, use GetResolverEndpoint.
 	SubnetId *string
 }
 
-// In the response to a CreateResolverEndpoint (), DeleteResolverEndpoint (),
-// GetResolverEndpoint (), ListResolverEndpoints (), or UpdateResolverEndpoint ()
-// request, a complex type that contains settings for an existing inbound or
-// outbound resolver endpoint.
+// In the response to a CreateResolverEndpoint, DeleteResolverEndpoint,
+// GetResolverEndpoint, ListResolverEndpoints, or UpdateResolverEndpoint request, a
+// complex type that contains settings for an existing inbound or outbound resolver
+// endpoint.
 type ResolverEndpoint struct {
 
 	// The ARN (Amazon Resource Name) for the resolver endpoint.
@@ -118,7 +117,7 @@ type ResolverEndpoint struct {
 	ModificationTime *string
 
 	// The name that you assigned to the resolver endpoint when you submitted a
-	// CreateResolverEndpoint () request.
+	// CreateResolverEndpoint request.
 	Name *string
 
 	// The ID of one or more security groups that control access to this VPC. The
@@ -134,8 +133,8 @@ type ResolverEndpoint struct {
 
 // For queries that originate in your VPC, detailed information about a resolver
 // rule, which specifies how to route DNS queries out of the VPC. The ResolverRule
-// parameter appears in the response to a CreateResolverRule (), DeleteResolverRule
-// (), GetResolverRule (), ListResolverRules (), or UpdateResolverRule () request.
+// parameter appears in the response to a CreateResolverRule, DeleteResolverRule,
+// GetResolverRule, ListResolverRules, or UpdateResolverRule request.
 type ResolverRule struct {
 
 	// The ARN (Amazon Resource Name) for the resolver rule specified by Id.
@@ -184,13 +183,13 @@ type ResolverRule struct {
 	TargetIps []*TargetAddress
 }
 
-// In the response to an AssociateResolverRule (), DisassociateResolverRule (), or
-// ListResolverRuleAssociations () request, information about an association
-// between a resolver rule and a VPC.
+// In the response to an AssociateResolverRule, DisassociateResolverRule, or
+// ListResolverRuleAssociations request, information about an association between a
+// resolver rule and a VPC.
 type ResolverRuleAssociation struct {
 
 	// The ID of the association between a resolver rule and a VPC. Resolver assigns
-	// this value when you submit an AssociateResolverRule () request.
+	// this value when you submit an AssociateResolverRule request.
 	Id *string
 
 	// The name of an association between a resolver rule and a VPC.
@@ -212,8 +211,8 @@ type ResolverRuleAssociation struct {
 	VPCId *string
 }
 
-// In an UpdateResolverRule () request, information about the changes that you want
-// to make.
+// In an UpdateResolverRule request, information about the changes that you want to
+// make.
 type ResolverRuleConfig struct {
 
 	// The new name for the resolver rule. The name that you specify appears in the
@@ -243,7 +242,7 @@ type Tag struct {
 	Value *string
 }
 
-// In a CreateResolverRule () request, an array of the IPs that you want to forward
+// In a CreateResolverRule request, an array of the IPs that you want to forward
 // DNS queries to.
 type TargetAddress struct {
 

@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of RegexMatchSetSummary () objects.
+// global use. Returns an array of RegexMatchSetSummary objects.
 func (c *Client) ListRegexMatchSets(ctx context.Context, params *ListRegexMatchSetsInput, optFns ...func(*Options)) (*ListRegexMatchSetsOutput, error) {
 	if params == nil {
 		params = &ListRegexMatchSetsInput{}
@@ -58,7 +58,7 @@ type ListRegexMatchSetsOutput struct {
 	// request.
 	NextMarker *string
 
-	// An array of RegexMatchSetSummary () objects.
+	// An array of RegexMatchSetSummary objects.
 	RegexMatchSets []*types.RegexMatchSetSummary
 
 	// Metadata pertaining to the operation's result.

@@ -26,7 +26,7 @@ import (
 // a Shard
 // (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html)
 // in the Amazon Kinesis Data Streams Developer Guide. You can use DescribeStream
-// () to determine the shard ID and hash key values for the ShardToSplit and
+// to determine the shard ID and hash key values for the ShardToSplit and
 // NewStartingHashKey parameters that are specified in the SplitShard request.
 // SplitShard is an asynchronous operation. Upon receiving a SplitShard request,
 // Kinesis Data Streams immediately returns a response and sets the stream status
@@ -44,8 +44,8 @@ import (
 // in the Amazon Kinesis Data Streams Developer Guide. To increase this limit,
 // contact AWS Support
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html). If you
-// try to operate on too many streams simultaneously using CreateStream (),
-// DeleteStream (), MergeShards (), and/or SplitShard (), you receive a
+// try to operate on too many streams simultaneously using CreateStream,
+// DeleteStream, MergeShards, and/or SplitShard, you receive a
 // LimitExceededException. SplitShard has a limit of five transactions per second
 // per account.
 func (c *Client) SplitShard(ctx context.Context, params *SplitShardInput, optFns ...func(*Options)) (*SplitShardOutput, error) {

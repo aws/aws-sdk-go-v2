@@ -58,7 +58,7 @@ type GetSSHPublicKeyInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful GetSSHPublicKey () request.
+// Contains the response to a successful GetSSHPublicKey request.
 type GetSSHPublicKeyOutput struct {
 
 	// A structure containing details about the SSH public key.

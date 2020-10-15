@@ -19,7 +19,8 @@ import (
 const ServiceID = "Personalize Runtime"
 const ServiceAPIVersion = "2018-05-22"
 
-//
+// Client provides the API client to make operations call for Amazon Personalize
+// Runtime.
 type Client struct {
 	options Options
 }

@@ -80,7 +80,7 @@ type RestoreTableFromClusterSnapshotInput struct {
 
 type RestoreTableFromClusterSnapshotOutput struct {
 
-	// Describes the status of a RestoreTableFromClusterSnapshot () operation.
+	// Describes the status of a RestoreTableFromClusterSnapshot operation.
 	TableRestoreStatus *types.TableRestoreStatus
 
 	// Metadata pertaining to the operation's result.

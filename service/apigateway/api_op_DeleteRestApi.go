@@ -29,7 +29,7 @@ func (c *Client) DeleteRestApi(ctx context.Context, params *DeleteRestApiInput, 
 // Request to delete the specified API from your collection.
 type DeleteRestApiInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

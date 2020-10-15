@@ -16,8 +16,8 @@ import (
 // STOP_REQUESTED state. If the job completes before it can be stopped, it is put
 // into the COMPLETED state. Otherwise, the job is put into the STOPPED state.
 // Asynchronous batch translation jobs are started with the StartTextTranslationJob
-// () operation. You can use the DescribeTextTranslationJob () or
-// ListTextTranslationJobs () operations to get a batch translation job's JobId.
+// operation. You can use the DescribeTextTranslationJob or ListTextTranslationJobs
+// operations to get a batch translation job's JobId.
 func (c *Client) StopTextTranslationJob(ctx context.Context, params *StopTextTranslationJobInput, optFns ...func(*Options)) (*StopTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StopTextTranslationJobInput{}

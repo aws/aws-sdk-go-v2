@@ -13,7 +13,7 @@ import (
 
 // Deletes an Amazon Rekognition Custom Labels project. To delete a project you
 // must first delete all models associated with the project. To delete a model, see
-// DeleteProjectVersion (). This operation requires permissions to perform the
+// DeleteProjectVersion. This operation requires permissions to perform the
 // rekognition:DeleteProject action.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {

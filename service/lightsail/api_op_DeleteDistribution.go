@@ -29,9 +29,8 @@ func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistribut
 
 type DeleteDistributionInput struct {
 
-	// The name of the distribution to delete.  <p>Use the
-	// <code>GetDistributions</code> action to get a list of distribution names that
-	// you can specify.</p>
+	// The name of the distribution to delete. Use the GetDistributions action to get a
+	// list of distribution names that you can specify.
 	DistributionName *string
 }
 

@@ -13,16 +13,14 @@ import (
 // Generates predictions for a group of observations. The observations to process
 // exist in one or more data files referenced by a DataSource. This operation
 // creates a new BatchPrediction, and uses an MLModel and the data files referenced
-// by the DataSource as information sources.  <p>
-// <code>CreateBatchPrediction</code> is an asynchronous operation. In response to
-// <code>CreateBatchPrediction</code>, Amazon Machine Learning (Amazon ML)
-// immediately returns and sets the <code>BatchPrediction</code> status to
-// <code>PENDING</code>. After the <code>BatchPrediction</code> completes, Amazon
-// ML sets the status to <code>COMPLETED</code>. </p> <p>You can poll for status
-// updates by using the <a>GetBatchPrediction</a> operation and checking the
-// <code>Status</code> parameter of the result. After the <code>COMPLETED</code>
+// by the DataSource as information sources. CreateBatchPrediction is an
+// asynchronous operation. In response to CreateBatchPrediction, Amazon Machine
+// Learning (Amazon ML) immediately returns and sets the BatchPrediction status to
+// PENDING. After the BatchPrediction completes, Amazon ML sets the status to
+// COMPLETED. You can poll for status updates by using the GetBatchPrediction
+// operation and checking the Status parameter of the result. After the COMPLETED
 // status appears, the results are available in the location specified by the
-// <code>OutputUri</code> parameter.</p>
+// OutputUri parameter.
 func (c *Client) CreateBatchPrediction(ctx context.Context, params *CreateBatchPredictionInput, optFns ...func(*Options)) (*CreateBatchPredictionOutput, error) {
 	if params == nil {
 		params = &CreateBatchPredictionInput{}

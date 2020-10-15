@@ -156,8 +156,8 @@ type AutoScalingGroup struct {
 	// group uses to call other AWS services on your behalf.
 	ServiceLinkedRoleARN *string
 
-	// The current state of the group when the DeleteAutoScalingGroup () operation is
-	// in progress.
+	// The current state of the group when the DeleteAutoScalingGroup operation is in
+	// progress.
 	Status *string
 
 	// The suspended processes associated with the group.
@@ -567,8 +567,8 @@ type InstanceRefresh struct {
 }
 
 // Describes an instances distribution for an Auto Scaling group with a
-// MixedInstancesPolicy (). The instances distribution specifies the distribution
-// of On-Demand Instances and Spot Instances, the maximum price to pay for Spot
+// MixedInstancesPolicy. The instances distribution specifies the distribution of
+// On-Demand Instances and Spot Instances, the maximum price to pay for Spot
 // Instances, and how the Auto Scaling group allocates instance types to fulfill
 // On-Demand and Spot capacity. When you update SpotAllocationStrategy,
 // SpotInstancePools, or SpotMaxPrice, this update action does not deploy any
@@ -582,8 +582,8 @@ type InstancesDistribution struct {
 
 	// Indicates how to allocate instance types to fulfill On-Demand capacity. The only
 	// valid value is prioritized, which is also the default value. This strategy uses
-	// the order of instance type overrides for the LaunchTemplate () to define the
-	// launch priority of each instance type. The first instance type in the array is
+	// the order of instance type overrides for the LaunchTemplate to define the launch
+	// priority of each instance type. The first instance type in the array is
 	// prioritized higher than the last. If all your On-Demand capacity cannot be
 	// fulfilled using your highest priority instance, then the Auto Scaling groups
 	// launches the remaining capacity using the second priority instance type, and so
@@ -624,7 +624,7 @@ type InstancesDistribution struct {
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
 	// The Spot pools are determined from the different instance types in the Overrides
-	// array of LaunchTemplate (). Default if not set is 2. Used only when the Spot
+	// array of LaunchTemplate. Default if not set is 2. Used only when the Spot
 	// allocation strategy is lowest-price. Valid Range: Minimum value of 1. Maximum
 	// value of 20.
 	SpotInstancePools *int32
@@ -953,7 +953,7 @@ type LifecycleHookSpecification struct {
 	// The maximum time, in seconds, that can elapse before the lifecycle hook times
 	// out. If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
 	// action that you specified in the DefaultResult parameter. You can prevent the
-	// lifecycle hook from timing out by calling RecordLifecycleActionHeartbeat ().
+	// lifecycle hook from timing out by calling RecordLifecycleActionHeartbeat.
 	HeartbeatTimeout *int32
 
 	// Additional information that you want to include any time Amazon EC2 Auto Scaling
@@ -1108,7 +1108,7 @@ type MetricGranularityType struct {
 // policy for a new Auto Scaling group, or you can create it for an existing group
 // by updating the group to specify MixedInstancesPolicy as the top-level parameter
 // instead of a launch configuration or launch template. For more information, see
-// CreateAutoScalingGroup () and UpdateAutoScalingGroup ().
+// CreateAutoScalingGroup and UpdateAutoScalingGroup.
 type MixedInstancesPolicy struct {
 
 	// The instances distribution to use. If you leave this parameter unspecified, the
@@ -1353,8 +1353,8 @@ type ScheduledUpdateGroupAction struct {
 }
 
 // Describes information used for one or more scheduled scaling action updates in a
-// BatchPutScheduledUpdateGroupAction () operation. When updating a scheduled
-// scaling action, all optional parameters are left unchanged if not specified.
+// BatchPutScheduledUpdateGroupAction operation. When updating a scheduled scaling
+// action, all optional parameters are left unchanged if not specified.
 type ScheduledUpdateGroupActionRequest struct {
 
 	// The name of the scaling action.

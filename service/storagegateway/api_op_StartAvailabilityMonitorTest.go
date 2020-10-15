@@ -33,8 +33,8 @@ func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *Start
 
 type StartAvailabilityMonitorTestInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -42,8 +42,8 @@ type StartAvailabilityMonitorTestInput struct {
 
 type StartAvailabilityMonitorTestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

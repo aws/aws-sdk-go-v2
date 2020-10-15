@@ -20,15 +20,20 @@ import (
 // The action can't be canceled or reverted once submitted. When a DB instance is
 // in a failure state and has a status of failed, incompatible-restore, or
 // incompatible-network, you can only delete it when you skip creation of the final
-// snapshot with the SkipFinalSnapshot parameter.  <p>If the specified DB instance
-// is part of an Amazon Aurora DB cluster, you can't delete the DB instance if both
-// of the following conditions are true:</p> <ul> <li> <p>The DB cluster is a read
-// replica of another Amazon Aurora DB cluster.</p> </li> <li> <p>The DB instance
-// is the only instance in the DB cluster.</p> </li> </ul> <p>To delete a DB
-// instance in this case, first call the <code>PromoteReadReplicaDBCluster</code>
-// API action to promote the DB cluster so it's no longer a read replica. After the
-// promotion completes, then call the <code>DeleteDBInstance</code> API action to
-// delete the final instance in the DB cluster.</p>
+// snapshot with the SkipFinalSnapshot parameter. If the specified DB instance is
+// part of an Amazon Aurora DB cluster, you can't delete the DB instance if both of
+// the following conditions are true:
+//
+//     * The DB cluster is a read replica of
+// another Amazon Aurora DB cluster.
+//
+//     * The DB instance is the only instance in
+// the DB cluster.
+//
+// To delete a DB instance in this case, first call the
+// PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no
+// longer a read replica. After the promotion completes, then call the
+// DeleteDBInstance API action to delete the final instance in the DB cluster.
 func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceInput, optFns ...func(*Options)) (*DeleteDBInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteDBInstanceInput{}

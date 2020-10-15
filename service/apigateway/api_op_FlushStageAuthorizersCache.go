@@ -29,7 +29,7 @@ func (c *Client) FlushStageAuthorizersCache(ctx context.Context, params *FlushSt
 // Request to flush authorizer cache entries on a specified stage.
 type FlushStageAuthorizersCacheInput struct {
 
-	// The string identifier of the associated RestApi ().
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

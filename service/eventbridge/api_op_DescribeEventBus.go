@@ -15,8 +15,8 @@ import (
 // bus, and the associated policy. For custom event buses and partner event buses,
 // it displays the name, ARN, policy, state, and creation time. To enable your
 // account to receive events from other accounts on its default event bus, use
-// PutPermission (). For more information about partner event buses, see
-// CreateEventBus ().
+// PutPermission. For more information about partner event buses, see
+// CreateEventBus.
 func (c *Client) DescribeEventBus(ctx context.Context, params *DescribeEventBusInput, optFns ...func(*Options)) (*DescribeEventBusOutput, error) {
 	if params == nil {
 		params = &DescribeEventBusInput{}

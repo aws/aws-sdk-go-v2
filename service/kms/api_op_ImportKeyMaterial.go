@@ -22,22 +22,22 @@ import (
 // key material, see Importing Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
 // the AWS Key Management Service Developer Guide. Before using this operation,
-// call GetParametersForImport (). Its response includes a public key and an import
+// call GetParametersForImport. Its response includes a public key and an import
 // token. Use the public key to encrypt the key material. Then, submit the import
 // token from the same GetParametersForImport response. When calling this
 // operation, you must specify the following values:
 //
 //     * The key ID or key ARN
 // of a CMK with no key material. Its Origin must be EXTERNAL. To create a CMK with
-// no key material, call CreateKey () and set the value of its Origin parameter to
-// EXTERNAL. To get the Origin of a CMK, call DescribeKey ().)
+// no key material, call CreateKey and set the value of its Origin parameter to
+// EXTERNAL. To get the Origin of a CMK, call DescribeKey.)
 //
 //     * The encrypted
 // key material. To get the public key to encrypt the key material, call
-// GetParametersForImport ().
+// GetParametersForImport.
 //
 //     * The import token that GetParametersForImport
-// () returned. You must use a public key and token from the same
+// returned. You must use a public key and token from the same
 // GetParametersForImport response.
 //
 //     * Whether the key material expires and if
@@ -51,8 +51,8 @@ import (
 // changes from PendingImport to Enabled, and you can use the CMK. If this
 // operation fails, use the exception to help determine the problem. If the error
 // is related to the key material, the import token, or wrapping key, use
-// GetParametersForImport () to get a new public key and import token for the CMK
-// and repeat the import procedure. For help, see How To Import Key Material
+// GetParametersForImport to get a new public key and import token for the CMK and
+// repeat the import procedure. For help, see How To Import Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#importing-keys-overview)
 // in the AWS Key Management Service Developer Guide. The CMK that you use for this
 // operation must be in a compatible key state. For details, see How Key State
@@ -77,24 +77,23 @@ func (c *Client) ImportKeyMaterial(ctx context.Context, params *ImportKeyMateria
 type ImportKeyMaterialInput struct {
 
 	// The encrypted key material to import. The key material must be encrypted with
-	// the public wrapping key that GetParametersForImport () returned, using the
-	// wrapping algorithm that you specified in the same GetParametersForImport
-	// request.
+	// the public wrapping key that GetParametersForImport returned, using the wrapping
+	// algorithm that you specified in the same GetParametersForImport request.
 	//
 	// This member is required.
 	EncryptedKeyMaterial []byte
 
 	// The import token that you received in the response to a previous
-	// GetParametersForImport () request. It must be from the same response that
-	// contained the public key that you used to encrypt the key material.
+	// GetParametersForImport request. It must be from the same response that contained
+	// the public key that you used to encrypt the key material.
 	//
 	// This member is required.
 	ImportToken []byte
 
 	// The identifier of the symmetric CMK that receives the imported key material. The
 	// CMK's Origin must be EXTERNAL. This must be the same CMK specified in the KeyID
-	// parameter of the corresponding GetParametersForImport () request. Specify the
-	// key ID or the Amazon Resource Name (ARN) of the CMK. For example:
+	// parameter of the corresponding GetParametersForImport request. Specify the key
+	// ID or the Amazon Resource Name (ARN) of the CMK. For example:
 	//
 	//     * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -103,7 +102,7 @@ type ImportKeyMaterialInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

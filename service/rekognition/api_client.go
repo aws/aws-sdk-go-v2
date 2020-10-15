@@ -19,7 +19,7 @@ import (
 const ServiceID = "Rekognition"
 const ServiceAPIVersion = "2016-06-27"
 
-// This is the Amazon Rekognition API reference.
+// Client provides the API client to make operations call for Amazon Rekognition.
 type Client struct {
 	options Options
 }

@@ -12,8 +12,8 @@ import (
 )
 
 // Returns a list of upgrade compatible Elastisearch versions. You can optionally
-// pass a DomainName () to get all upgrade compatible Elasticsearch versions for
-// that specific domain.
+// pass a DomainName to get all upgrade compatible Elasticsearch versions for that
+// specific domain.
 func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params *GetCompatibleElasticsearchVersionsInput, optFns ...func(*Options)) (*GetCompatibleElasticsearchVersionsOutput, error) {
 	if params == nil {
 		params = &GetCompatibleElasticsearchVersionsInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params 
 	return out, nil
 }
 
-// Container for request parameters to GetCompatibleElasticsearchVersions ()
+// Container for request parameters to GetCompatibleElasticsearchVersions
 // operation.
 type GetCompatibleElasticsearchVersionsInput struct {
 
@@ -40,12 +40,11 @@ type GetCompatibleElasticsearchVersionsInput struct {
 	DomainName *string
 }
 
-// Container for response returned by GetCompatibleElasticsearchVersions ()
-// operation.
+// Container for response returned by GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
 
 	// A map of compatible Elasticsearch versions returned as part of the
-	// GetCompatibleElasticsearchVersions () operation.
+	// GetCompatibleElasticsearchVersions operation.
 	CompatibleElasticsearchVersions []*types.CompatibleVersionsMap
 
 	// Metadata pertaining to the operation's result.

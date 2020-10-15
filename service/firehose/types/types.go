@@ -117,7 +117,7 @@ type DeliveryStreamDescription struct {
 	// The status of the delivery stream. If the status of a delivery stream is
 	// CREATING_FAILED, this status doesn't change, and you can't invoke
 	// CreateDeliveryStream again on it. However, you can invoke the
-	// DeleteDeliveryStream () operation to delete it.
+	// DeleteDeliveryStream operation to delete it.
 	//
 	// This member is required.
 	DeliveryStreamStatus DeliveryStreamStatus
@@ -159,27 +159,27 @@ type DeliveryStreamDescription struct {
 	DeliveryStreamEncryptionConfiguration *DeliveryStreamEncryptionConfiguration
 
 	// Provides details in case one of the following operations fails due to an error
-	// related to KMS: CreateDeliveryStream (), DeleteDeliveryStream (),
-	// StartDeliveryStreamEncryption (), StopDeliveryStreamEncryption ().
+	// related to KMS: CreateDeliveryStream, DeleteDeliveryStream,
+	// StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 	FailureDescription *FailureDescription
 
 	// The date and time that the delivery stream was last updated.
 	LastUpdateTimestamp *time.Time
 
 	// If the DeliveryStreamType parameter is KinesisStreamAsSource, a
-	// SourceDescription () object describing the source Kinesis data stream.
+	// SourceDescription object describing the source Kinesis data stream.
 	Source *SourceDescription
 }
 
 // Contains information about the server-side encryption (SSE) status for the
 // delivery stream, the type customer master key (CMK) in use, if any, and the ARN
 // of the CMK. You can get DeliveryStreamEncryptionConfiguration by invoking the
-// DescribeDeliveryStream () operation.
+// DescribeDeliveryStream operation.
 type DeliveryStreamEncryptionConfiguration struct {
 
 	// Provides details in case one of the following operations fails due to an error
-	// related to KMS: CreateDeliveryStream (), DeleteDeliveryStream (),
-	// StartDeliveryStreamEncryption (), StopDeliveryStreamEncryption ().
+	// related to KMS: CreateDeliveryStream, DeleteDeliveryStream,
+	// StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 	FailureDescription *FailureDescription
 
 	// If KeyType is CUSTOMER_MANAGED_CMK, this field contains the ARN of the customer
@@ -195,9 +195,9 @@ type DeliveryStreamEncryptionConfiguration struct {
 
 	// This is the server-side encryption (SSE) status for the delivery stream. For a
 	// full description of the different values of this status, see
-	// StartDeliveryStreamEncryption () and StopDeliveryStreamEncryption (). If this
-	// status is ENABLING_FAILED or DISABLING_FAILED, it is the status of the most
-	// recent attempt to enable or disable SSE, respectively.
+	// StartDeliveryStreamEncryption and StopDeliveryStreamEncryption. If this status
+	// is ENABLING_FAILED or DISABLING_FAILED, it is the status of the most recent
+	// attempt to enable or disable SSE, respectively.
 	Status DeliveryStreamEncryptionStatus
 }
 
@@ -209,19 +209,19 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 	// default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer
 	// Master Keys (CMKs)
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
-	// When you invoke CreateDeliveryStream () or StartDeliveryStreamEncryption () with
+	// When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with
 	// KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon
 	// KMS operation CreateGrant
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html) to
 	// create a grant that allows the Kinesis Data Firehose service to use the customer
 	// managed CMK to perform encryption and decryption. Kinesis Data Firehose manages
-	// that grant. When you invoke StartDeliveryStreamEncryption () to change the CMK
-	// for a delivery stream that is encrypted with a customer managed CMK, Kinesis
-	// Data Firehose schedules the grant it had on the old CMK for retirement. You can
-	// use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If
-	// a CreateDeliveryStream () or StartDeliveryStreamEncryption () operation exceeds
-	// this limit, Kinesis Data Firehose throws a LimitExceededException. To encrypt
-	// your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support
+	// that grant. When you invoke StartDeliveryStreamEncryption to change the CMK for
+	// a delivery stream that is encrypted with a customer managed CMK, Kinesis Data
+	// Firehose schedules the grant it had on the old CMK for retirement. You can use a
+	// CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a
+	// CreateDeliveryStream or StartDeliveryStreamEncryption operation exceeds this
+	// limit, Kinesis Data Firehose throws a LimitExceededException. To encrypt your
+	// delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support
 	// asymmetric CMKs. For information about symmetric and asymmetric CMKs, see About
 	// Symmetric and Asymmetric CMKs
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html)
@@ -238,7 +238,7 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 
 // The deserializer you want Kinesis Data Firehose to use for converting the input
 // data from JSON. Kinesis Data Firehose then serializes the data to its final
-// format using the Serializer (). Kinesis Data Firehose supports two types of
+// format using the Serializer. Kinesis Data Firehose supports two types of
 // deserializers: the Apache Hive JSON SerDe
 // (https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON)
 // and the OpenX JSON SerDe (https://github.com/rcongiu/Hive-JSON-Serde).
@@ -343,7 +343,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// For more information, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	// <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
+	// Specify either ClusterEndpoint or DomainARN.
 	DomainARN *string
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
@@ -374,8 +374,8 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
 	// per index. If you try to specify a new type for an existing index that already
-	// has another type, Kinesis Data Firehose returns an error during run time.
-	// <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>
+	// has another type, Kinesis Data Firehose returns an error during run time. For
+	// Elasticsearch 7.x, don't specify a TypeName.
 	TypeName *string
 
 	// The details of the VPC of the Amazon ES destination.
@@ -399,8 +399,8 @@ type ElasticsearchDestinationDescription struct {
 	// The ARN of the Amazon ES domain. For more information, see Amazon Resource Names
 	// (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	// <p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or
-	// <code>DomainARN</code> to send data to Amazon ES.</p>
+	// Kinesis Data Firehose uses either ClusterEndpoint or DomainARN to send data to
+	// Amazon ES.
 	DomainARN *string
 
 	// The Elasticsearch index name.
@@ -454,7 +454,7 @@ type ElasticsearchDestinationUpdate struct {
 	// RoleARN. For more information, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	// <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
+	// Specify either ClusterEndpoint or DomainARN.
 	DomainARN *string
 
 	// The Elasticsearch index name.
@@ -488,11 +488,11 @@ type ElasticsearchDestinationUpdate struct {
 
 	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
 	// per index. If you try to specify a new type for an existing index that already
-	// has another type, Kinesis Data Firehose returns an error during runtime.  <p>If
-	// you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,
+	// has another type, Kinesis Data Firehose returns an error during runtime. If you
+	// upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,
 	// Kinesis Data Firehose still delivers data to Elasticsearch with the old index
 	// name and type name. If you want to update your delivery stream with a new index
-	// name, provide an empty string for <code>TypeName</code>. </p>
+	// name, provide an empty string for TypeName.
 	TypeName *string
 }
 
@@ -693,8 +693,8 @@ type ExtendedS3DestinationUpdate struct {
 }
 
 // Provides details in case one of the following operations fails due to an error
-// related to KMS: CreateDeliveryStream (), DeleteDeliveryStream (),
-// StartDeliveryStreamEncryption (), StopDeliveryStreamEncryption ().
+// related to KMS: CreateDeliveryStream, DeleteDeliveryStream,
+// StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 type FailureDescription struct {
 
 	// A message providing details about the error that caused the failure.
@@ -1074,7 +1074,7 @@ type OrcSerDe struct {
 	// available size within the block is more than 3.2 MiB, a new, smaller stripe is
 	// inserted to fit within that space. This ensures that no stripe crosses block
 	// boundaries and causes remote reads within a node-local task. Kinesis Data
-	// Firehose ignores this parameter when OrcSerDe$EnablePadding () is false.
+	// Firehose ignores this parameter when OrcSerDe$EnablePadding is false.
 	PaddingTolerance *float64
 
 	// The number of rows between index entries. The default is 10,000 and the minimum
@@ -1166,10 +1166,10 @@ type ProcessorParameter struct {
 	ParameterValue *string
 }
 
-// Contains the result for an individual record from a PutRecordBatch () request.
-// If the record is successfully added to your delivery stream, it receives a
-// record ID. If the record fails to be added to your delivery stream, the result
-// includes an error code and an error message.
+// Contains the result for an individual record from a PutRecordBatch request. If
+// the record is successfully added to your delivery stream, it receives a record
+// ID. If the record fails to be added to your delivery stream, the result includes
+// an error code and an error message.
 type PutRecordBatchResponseEntry struct {
 
 	// The error code for an individual record result.
@@ -1219,10 +1219,10 @@ type RedshiftDestinationConfiguration struct {
 
 	// The configuration for the intermediate Amazon S3 location from which Amazon
 	// Redshift obtains data. Restrictions are described in the topic for
-	// CreateDeliveryStream (). The compression formats SNAPPY or ZIP cannot be
-	// specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon
-	// Redshift COPY operation that reads from the S3 bucket doesn't support these
-	// compression formats.
+	// CreateDeliveryStream. The compression formats SNAPPY or ZIP cannot be specified
+	// in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift
+	// COPY operation that reads from the S3 bucket doesn't support these compression
+	// formats.
 	//
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
@@ -1548,7 +1548,7 @@ type Serializer struct {
 // Firehose delivery stream.
 type SourceDescription struct {
 
-	// The KinesisStreamSourceDescription () value for the source Kinesis data stream.
+	// The KinesisStreamSourceDescription value for the source Kinesis data stream.
 	KinesisStreamSourceDescription *KinesisStreamSourceDescription
 }
 

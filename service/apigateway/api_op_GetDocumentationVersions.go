@@ -29,7 +29,7 @@ func (c *Client) GetDocumentationVersions(ctx context.Context, params *GetDocume
 // Gets the documentation versions of an API.
 type GetDocumentationVersionsInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -51,10 +51,10 @@ type GetDocumentationVersionsInput struct {
 }
 
 // The collection of documentation snapshots of an API. Use the
-// DocumentationVersions () to manage documentation snapshots associated with
-// various API stages. Documenting an API
+// DocumentationVersions to manage documentation snapshots associated with various
+// API stages. Documenting an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart (), DocumentationVersion ()
+// DocumentationPart, DocumentationVersion
 type GetDocumentationVersionsOutput struct {
 
 	// The current page of elements from this collection.

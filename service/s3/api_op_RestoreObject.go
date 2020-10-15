@@ -49,9 +49,9 @@ import (
 // the S3 structure in the request body, see the following:
 //
 //         * PutObject
-// ()
 //
-//         * Managing Access with ACLs
+//
+// * Managing Access with ACLs
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html) in the
 // Amazon Simple Storage Service Developer Guide
 //
@@ -175,7 +175,7 @@ import (
 // example, if you restore an object copy for 10 days, but the object is scheduled
 // to expire in 3 days, Amazon S3 deletes the object in 3 days. For more
 // information about lifecycle configuration, see PutBucketLifecycleConfiguration
-// () and Object Lifecycle Management
+// and Object Lifecycle Management
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in
 // Amazon Simple Storage Service Developer Guide. Responses A successful operation
 // returns either the 200 OK or 202 Accepted status code.
@@ -214,12 +214,17 @@ import (
 //         * SOAP Fault Code Prefix:
 // N/A
 //
-//     <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p>
-// <a>PutBucketLifecycleConfiguration</a> </p> </li> <li> <p>
-// <a>GetBucketNotificationConfiguration</a> </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html">SQL
-// Reference for Amazon S3 Select and S3 Glacier Select </a> in the <i>Amazon
-// Simple Storage Service Developer Guide</i> </p> </li> </ul>
+// Related Resources
+//
+//     * PutBucketLifecycleConfiguration
+//
+//     *
+// GetBucketNotificationConfiguration
+//
+//     * SQL Reference for Amazon S3 Select and
+// S3 Glacier Select
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
+// in the Amazon Simple Storage Service Developer Guide
 func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, optFns ...func(*Options)) (*RestoreObjectOutput, error) {
 	if params == nil {
 		params = &RestoreObjectInput{}

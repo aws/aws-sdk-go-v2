@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Creates an IPSet (), which you use to identify web requests that originate from
+// Creates an IPSet, which you use to identify web requests that originate from
 // specific IP addresses or ranges of IP addresses. For example, if you're
 // receiving a lot of requests from a ranges of IP addresses, you can configure AWS
 // WAF to block them using an IPSet that lists those IP addresses.
@@ -101,10 +101,10 @@ type CreateIPSetInput struct {
 
 type CreateIPSetOutput struct {
 
-	// High-level information about an IPSet (), returned by operations like create and
+	// High-level information about an IPSet, returned by operations like create and
 	// list. This provides information like the ID, that you can use to retrieve and
-	// manage an IPSet, and the ARN, that you provide to the IPSetReferenceStatement ()
-	// to use the address set in a Rule ().
+	// manage an IPSet, and the ARN, that you provide to the IPSetReferenceStatement to
+	// use the address set in a Rule.
 	Summary *types.IPSetSummary
 
 	// Metadata pertaining to the operation's result.

@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Use this operation to delete a workforce.  <p>If you want to create a new
-// workforce in an AWS Region where the a workforce already exists, use this
-// operation to delete the existing workforce and then use to create a new
-// workforce.</p>
+// Use this operation to delete a workforce. If you want to create a new workforce
+// in an AWS Region where the a workforce already exists, use this operation to
+// delete the existing workforce and then use to create a new workforce.
 func (c *Client) DeleteWorkforce(ctx context.Context, params *DeleteWorkforceInput, optFns ...func(*Options)) (*DeleteWorkforceOutput, error) {
 	if params == nil {
 		params = &DeleteWorkforceInput{}

@@ -81,7 +81,7 @@ type CreateSnapshotOutput struct {
 	// the original volume or snapshot copy. Because data encryption keys are inherited
 	// by volumes created from snapshots, and vice versa, if snapshots share the same
 	// data encryption key identifier, then they belong to the same volume/snapshot
-	// lineage. This parameter is only returned by DescribeSnapshots ().
+	// lineage. This parameter is only returned by DescribeSnapshots.
 	DataEncryptionKeyId *string
 
 	// The description for the snapshot.
@@ -121,15 +121,15 @@ type CreateSnapshotOutput struct {
 	// operation fails (for example, if the proper AWS Key Management Service (AWS KMS)
 	// permissions are not obtained) this field displays error state details to help
 	// you diagnose why the error occurred. This parameter is only returned by
-	// DescribeSnapshots ().
+	// DescribeSnapshots.
 	StateMessage *string
 
 	// Any tags assigned to the snapshot.
 	Tags []*types.Tag
 
 	// The ID of the volume that was used to create the snapshot. Snapshots created by
-	// the CopySnapshot () action have an arbitrary volume ID that should not be used
-	// for any purpose.
+	// the CopySnapshot action have an arbitrary volume ID that should not be used for
+	// any purpose.
 	VolumeId *string
 
 	// The size of the volume, in GiB.

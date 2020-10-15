@@ -46,7 +46,7 @@ type GetRoleInput struct {
 	RoleName *string
 }
 
-// Contains the response to a successful GetRole () request.
+// Contains the response to a successful GetRole request.
 type GetRoleOutput struct {
 
 	// A structure containing details about the IAM role.

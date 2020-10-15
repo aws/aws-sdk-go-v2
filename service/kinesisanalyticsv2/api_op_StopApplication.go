@@ -11,7 +11,7 @@ import (
 )
 
 // Stops the application from processing data. You can stop an application only if
-// it is in the running state. You can use the DescribeApplication () operation to
+// it is in the running state. You can use the DescribeApplication operation to
 // find the application state.
 func (c *Client) StopApplication(ctx context.Context, params *StopApplicationInput, optFns ...func(*Options)) (*StopApplicationOutput, error) {
 	if params == nil {

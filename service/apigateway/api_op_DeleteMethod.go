@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an existing Method () resource.
+// Deletes an existing Method resource.
 func (c *Client) DeleteMethod(ctx context.Context, params *DeleteMethodInput, optFns ...func(*Options)) (*DeleteMethodOutput, error) {
 	if params == nil {
 		params = &DeleteMethodInput{}
@@ -26,20 +26,20 @@ func (c *Client) DeleteMethod(ctx context.Context, params *DeleteMethodInput, op
 	return out, nil
 }
 
-// Request to delete an existing Method () resource.
+// Request to delete an existing Method resource.
 type DeleteMethodInput struct {
 
-	// [Required] The HTTP verb of the Method () resource.
+	// [Required] The HTTP verb of the Method resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] The Resource () identifier for the Method () resource.
+	// [Required] The Resource identifier for the Method resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

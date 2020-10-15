@@ -53,18 +53,17 @@ type ModifyHostsInput struct {
 
 	// Specifies the instance family to be supported by the Dedicated Host. Specify
 	// this parameter to modify a Dedicated Host to support multiple instance types
-	// within its current instance family.  <p>If you want to modify a Dedicated Host
-	// to support a specific instance type only, omit this parameter and specify
-	// <b>InstanceType</b> instead. You cannot specify <b>InstanceFamily</b> and
-	// <b>InstanceType</b> in the same request.</p>
+	// within its current instance family. If you want to modify a Dedicated Host to
+	// support a specific instance type only, omit this parameter and specify
+	// InstanceType instead. You cannot specify InstanceFamily and InstanceType in the
+	// same request.
 	InstanceFamily *string
 
 	// Specifies the instance type to be supported by the Dedicated Host. Specify this
 	// parameter to modify a Dedicated Host to support only a specific instance type.
-	// <p>If you want to modify a Dedicated Host to support multiple instance types in
-	// its current instance family, omit this parameter and specify
-	// <b>InstanceFamily</b> instead. You cannot specify <b>InstanceType</b> and
-	// <b>InstanceFamily</b> in the same request.</p>
+	// If you want to modify a Dedicated Host to support multiple instance types in its
+	// current instance family, omit this parameter and specify InstanceFamily instead.
+	// You cannot specify InstanceType and InstanceFamily in the same request.
 	InstanceType *string
 }
 

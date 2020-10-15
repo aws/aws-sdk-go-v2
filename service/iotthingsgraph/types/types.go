@@ -233,7 +233,7 @@ type SystemInstanceSummary struct {
 	// The target of the system instance.
 	Target DeploymentTarget
 
-	// The date and time when the system instance was last updated.</p>
+	// The date and time when the system instance was last updated.
 	UpdatedAt *time.Time
 }
 

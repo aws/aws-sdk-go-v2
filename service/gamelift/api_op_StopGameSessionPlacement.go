@@ -15,29 +15,29 @@ import (
 // provide the placement ID values. If successful, the placement is moved to
 // CANCELLED status.
 //
-//     * CreateGameSession ()
+//     * CreateGameSession
 //
-//     * DescribeGameSessions ()
-//
-//
-// * DescribeGameSessionDetails ()
-//
-//     * SearchGameSessions ()
+//     * DescribeGameSessions
 //
 //     *
-// UpdateGameSession ()
+// DescribeGameSessionDetails
 //
-//     * GetGameSessionLogUrl ()
+//     * SearchGameSessions
 //
-//     * Game session
-// placements
+//     * UpdateGameSession
 //
-//         * StartGameSessionPlacement ()
+//
+// * GetGameSessionLogUrl
+//
+//     * Game session placements
 //
 //         *
-// DescribeGameSessionPlacement ()
+// StartGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * DescribeGameSessionPlacement
+//
+//         *
+// StopGameSessionPlacement
 func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameSessionPlacementInput, optFns ...func(*Options)) (*StopGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StopGameSessionPlacementInput{}

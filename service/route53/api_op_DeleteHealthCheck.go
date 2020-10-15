@@ -18,12 +18,12 @@ import (
 // failover configuration. For more information, see Replacing and Deleting Health
 // Checks
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html)
-// in the Amazon Route 53 Developer Guide.  <p>If you're using AWS Cloud Map and
-// you configured Cloud Map to create a Route 53 health check when you register an
-// instance, you can't use the Route 53 <code>DeleteHealthCheck</code> command to
-// delete the health check. The health check is deleted automatically when you
-// deregister the instance; there can be a delay of several hours before the health
-// check is deleted from Route 53. </p>
+// in the Amazon Route 53 Developer Guide. If you're using AWS Cloud Map and you
+// configured Cloud Map to create a Route 53 health check when you register an
+// instance, you can't use the Route 53 DeleteHealthCheck command to delete the
+// health check. The health check is deleted automatically when you deregister the
+// instance; there can be a delay of several hours before the health check is
+// deleted from Route 53.
 func (c *Client) DeleteHealthCheck(ctx context.Context, params *DeleteHealthCheckInput, optFns ...func(*Options)) (*DeleteHealthCheckOutput, error) {
 	if params == nil {
 		params = &DeleteHealthCheckInput{}

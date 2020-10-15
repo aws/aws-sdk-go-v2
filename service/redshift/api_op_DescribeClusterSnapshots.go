@@ -72,11 +72,10 @@ type DescribeClusterSnapshotsInput struct {
 	EndTime *time.Time
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSnapshots () request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterSnapshots request exceed
+	// the value specified in MaxRecords, AWS returns a value in the Marker field of
+	// the response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -125,7 +124,7 @@ type DescribeClusterSnapshotsInput struct {
 	TagValues []*string
 }
 
-// Contains the output from the DescribeClusterSnapshots () action.
+// Contains the output from the DescribeClusterSnapshots action.
 type DescribeClusterSnapshotsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -135,7 +134,7 @@ type DescribeClusterSnapshotsOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of Snapshot () instances.
+	// A list of Snapshot instances.
 	Snapshots []*types.Snapshot
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an existing VpcLink () of a specified identifier.
+// Updates an existing VpcLink of a specified identifier.
 func (c *Client) UpdateVpcLink(ctx context.Context, params *UpdateVpcLinkInput, optFns ...func(*Options)) (*UpdateVpcLinkOutput, error) {
 	if params == nil {
 		params = &UpdateVpcLinkInput{}
@@ -27,11 +27,11 @@ func (c *Client) UpdateVpcLink(ctx context.Context, params *UpdateVpcLinkInput, 
 	return out, nil
 }
 
-// Updates an existing VpcLink () of a specified identifier.
+// Updates an existing VpcLink of a specified identifier.
 type UpdateVpcLinkInput struct {
 
-	// [Required] The identifier of the VpcLink (). It is used in an Integration () to
-	// reference this VpcLink ().
+	// [Required] The identifier of the VpcLink. It is used in an Integration to
+	// reference this VpcLink.
 	//
 	// This member is required.
 	VpcLinkId *string
@@ -49,21 +49,21 @@ type UpdateVpcLinkInput struct {
 	Title *string
 }
 
-// An API Gateway VPC link for a RestApi () to access resources in an Amazon
-// Virtual Private Cloud (VPC). To enable access to a resource in an Amazon Virtual
-// Private Cloud through Amazon API Gateway, you, as an API developer, create a
-// VpcLink () resource targeted for one or more network load balancers of the VPC
-// and then integrate an API method with a private integration that uses the
-// VpcLink (). The private integration has an integration type of HTTP or
-// HTTP_PROXY and has a connection type of VPC_LINK. The integration uses the
-// connectionId property to identify the VpcLink () used.
+// An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
+// Private Cloud (VPC). To enable access to a resource in an Amazon Virtual Private
+// Cloud through Amazon API Gateway, you, as an API developer, create a VpcLink
+// resource targeted for one or more network load balancers of the VPC and then
+// integrate an API method with a private integration that uses the VpcLink. The
+// private integration has an integration type of HTTP or HTTP_PROXY and has a
+// connection type of VPC_LINK. The integration uses the connectionId property to
+// identify the VpcLink used.
 type UpdateVpcLinkOutput struct {
 
 	// The description of the VPC link.
 	Description *string
 
-	// The identifier of the VpcLink (). It is used in an Integration () to reference
-	// this VpcLink ().
+	// The identifier of the VpcLink. It is used in an Integration to reference this
+	// VpcLink.
 	Id *string
 
 	// The name used to label and identify the VPC link.

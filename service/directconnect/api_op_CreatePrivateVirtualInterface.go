@@ -22,8 +22,8 @@ import (
 // if it wasn't updated to support jumbo frames. Updating the connection disrupts
 // network connectivity for all virtual interfaces associated with the connection
 // for up to 30 seconds. To check whether your connection supports jumbo frames,
-// call DescribeConnections (). To check whether your virtual interface supports
-// jumbo frames, call DescribeVirtualInterfaces ().
+// call DescribeConnections. To check whether your virtual interface supports jumbo
+// frames, call DescribeVirtualInterfaces.
 func (c *Client) CreatePrivateVirtualInterface(ctx context.Context, params *CreatePrivateVirtualInterfaceInput, optFns ...func(*Options)) (*CreatePrivateVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &CreatePrivateVirtualInterfaceInput{}
@@ -149,18 +149,18 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	//
 	//     * deleting: A
 	// virtual interface is in this state immediately after calling
-	// DeleteVirtualInterface () until it can no longer forward traffic.
+	// DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//     *
-	// deleted: A virtual interface that cannot forward traffic.
+	//     * deleted: A
+	// virtual interface that cannot forward traffic.
 	//
-	//     * rejected: The
-	// virtual interface owner has declined creation of the virtual interface. If a
-	// virtual interface in the Confirming state is deleted by the virtual interface
-	// owner, the virtual interface enters the Rejected state.
+	//     * rejected: The virtual
+	// interface owner has declined creation of the virtual interface. If a virtual
+	// interface in the Confirming state is deleted by the virtual interface owner, the
+	// virtual interface enters the Rejected state.
 	//
-	//     * unknown: The
-	// state of the virtual interface is not available.
+	//     * unknown: The state of the
+	// virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
 	// The type of virtual interface. The possible values are private and public.

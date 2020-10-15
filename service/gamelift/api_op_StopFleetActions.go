@@ -14,27 +14,27 @@ import (
 // Suspends activity on a fleet. Currently, this operation is used to stop a
 // fleet's auto-scaling activity. It is used to temporarily stop triggering scaling
 // events. The policies can be retained and auto-scaling activity can be restarted
-// using StartFleetActions (). You can view a fleet's stopped actions using
-// DescribeFleetAttributes (). To stop fleet actions, specify the fleet ID and the
+// using StartFleetActions. You can view a fleet's stopped actions using
+// DescribeFleetAttributes. To stop fleet actions, specify the fleet ID and the
 // type of actions to suspend. When auto-scaling fleet actions are stopped, Amazon
 // GameLift no longer initiates scaling events except in response to manual changes
-// using UpdateFleetCapacity (). Learn more Setting up GameLift Fleets
+// using UpdateFleetCapacity. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * DescribeFleetAttributes ()
 //
-//     * UpdateFleetAttributes ()
+// * DescribeFleetAttributes
 //
-//     *
-// StartFleetActions () or StopFleetActions ()
+//     * UpdateFleetAttributes
+//
+//     * StartFleetActions
+// or StopFleetActions
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a user's Secure Shell (SSH) public key.  <p>No response is returned from
-// this operation.</p>
+// Deletes a user's Secure Shell (SSH) public key. No response is returned from
+// this operation.
 func (c *Client) DeleteSshPublicKey(ctx context.Context, params *DeleteSshPublicKeyInput, optFns ...func(*Options)) (*DeleteSshPublicKeyOutput, error) {
 	if params == nil {
 		params = &DeleteSshPublicKeyInput{}

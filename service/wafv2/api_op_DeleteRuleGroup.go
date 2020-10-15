@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Deletes the specified RuleGroup ().
+// Deletes the specified RuleGroup.
 func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInput, optFns ...func(*Options)) (*DeleteRuleGroupOutput, error) {
 	if params == nil {
 		params = &DeleteRuleGroupInput{}

@@ -25,8 +25,8 @@ func (e *AccessDeniedException) ErrorCode() string             { return "AccessD
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can apply up to 10 custom attributes per resource. You can view the
-// attributes of a resource with ListAttributes (). You can remove existing
-// attributes on a resource with DeleteAttributes ().
+// attributes of a resource with ListAttributes. You can remove existing attributes
+// on a resource with DeleteAttributes.
 type AttributeLimitExceededException struct {
 	Message *string
 }
@@ -84,7 +84,7 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 
 // You cannot delete a cluster that has registered container instances. First,
 // deregister the container instances before you can delete the cluster. For more
-// information, see DeregisterContainerInstance ().
+// information, see DeregisterContainerInstance.
 type ClusterContainsContainerInstancesException struct {
 	Message *string
 }
@@ -107,7 +107,7 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 
 // You cannot delete a cluster that contains services. First, update the service to
 // reduce its desired task count to 0 and then delete the service. For more
-// information, see UpdateService () and DeleteService ().
+// information, see UpdateService and DeleteService.
 type ClusterContainsServicesException struct {
 	Message *string
 }
@@ -144,7 +144,7 @@ func (e *ClusterContainsTasksException) ErrorCode() string             { return 
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified cluster could not be found. You can view your available clusters
-// with ListClusters (). Amazon ECS clusters are Region-specific.
+// with ListClusters. Amazon ECS clusters are Region-specific.
 type ClusterNotFoundException struct {
 	Message *string
 }
@@ -328,7 +328,7 @@ func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 
 // The specified service is not active. You can't update a service that is
 // inactive. If you have previously deleted a service, you can re-create it with
-// CreateService ().
+// CreateService.
 type ServiceNotActiveException struct {
 	Message *string
 }
@@ -346,8 +346,7 @@ func (e *ServiceNotActiveException) ErrorCode() string             { return "Ser
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified service could not be found. You can view your available services
-// with ListServices (). Amazon ECS services are cluster-specific and
-// Region-specific.
+// with ListServices. Amazon ECS services are cluster-specific and Region-specific.
 type ServiceNotFoundException struct {
 	Message *string
 }
@@ -365,7 +364,7 @@ func (e *ServiceNotFoundException) ErrorCode() string             { return "Serv
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified target could not be found. You can view your available container
-// instances with ListContainerInstances (). Amazon ECS container instances are
+// instances with ListContainerInstances. Amazon ECS container instances are
 // cluster-specific and Region-specific.
 type TargetNotFoundException struct {
 	Message *string
@@ -384,7 +383,7 @@ func (e *TargetNotFoundException) ErrorCode() string             { return "Targe
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified task set could not be found. You can view your available task sets
-// with DescribeTaskSets (). Task sets are specific to each cluster, service and
+// with DescribeTaskSets. Task sets are specific to each cluster, service and
 // Region.
 type TaskSetNotFoundException struct {
 	Message *string

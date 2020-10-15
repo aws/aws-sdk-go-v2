@@ -10,17 +10,25 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves attributes for a list of configuration item IDs.  <note> <p>All of the
-// supplied IDs must be for the same asset type from one of the following:</p> <ul>
-// <li> <p>server</p> </li> <li> <p>application</p> </li> <li> <p>process</p> </li>
-// <li> <p>connection</p> </li> </ul> <p>Output fields are specific to the asset
-// type specified. For example, the output for a <i>server</i> configuration item
-// includes a list of attributes about the server, such as host name, operating
-// system, number of network cards, etc.</p> <p>For a complete list of outputs for
-// each asset type, see <a
-// href="https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations">Using
-// the DescribeConfigurations Action</a> in the <i>AWS Application Discovery
-// Service User Guide</i>.</p> </note>
+// Retrieves attributes for a list of configuration item IDs. All of the supplied
+// IDs must be for the same asset type from one of the following:
+//
+//     * server
+//
+//
+// * application
+//
+//     * process
+//
+//     * connection
+//
+// Output fields are specific to
+// the asset type specified. For example, the output for a server configuration
+// item includes a list of attributes about the server, such as host name,
+// operating system, number of network cards, etc. For a complete list of outputs
+// for each asset type, see Using the DescribeConfigurations Action
+// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
+// in the AWS Application Discovery Service User Guide.
 func (c *Client) DescribeConfigurations(ctx context.Context, params *DescribeConfigurationsInput, optFns ...func(*Options)) (*DescribeConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationsInput{}

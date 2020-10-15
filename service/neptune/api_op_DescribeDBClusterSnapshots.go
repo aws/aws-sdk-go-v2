@@ -55,14 +55,14 @@ type DescribeDBClusterSnapshotsInput struct {
 	// True to include manual DB cluster snapshots that are public and can be copied or
 	// restored by any AWS account, and otherwise false. The default is false. The
 	// default is false. You can share a manual DB cluster snapshot as public by using
-	// the ModifyDBClusterSnapshotAttribute () API action.
+	// the ModifyDBClusterSnapshotAttribute API action.
 	IncludePublic *bool
 
 	// True to include shared manual DB cluster snapshots from other AWS accounts that
 	// this AWS account has been given permission to copy or restore, and otherwise
 	// false. The default is false. You can give an AWS account permission to restore a
 	// manual DB cluster snapshot from another AWS account by the
-	// ModifyDBClusterSnapshotAttribute () API action.
+	// ModifyDBClusterSnapshotAttribute API action.
 	IncludeShared *bool
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
@@ -109,7 +109,7 @@ type DescribeDBClusterSnapshotsOutput struct {
 	DBClusterSnapshots []*types.DBClusterSnapshot
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
-	// () request. If this parameter is specified, the response includes only records
+	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
 

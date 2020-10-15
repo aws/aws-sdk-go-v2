@@ -12,12 +12,25 @@ import (
 )
 
 // Modifies the target of an existing maintenance window. You can change the
-// following:  <ul> <li> <p>Name</p> </li> <li> <p>Description</p> </li> <li>
-// <p>Owner</p> </li> <li> <p>IDs for an ID target</p> </li> <li> <p>Tags for a Tag
-// target</p> </li> <li> <p>From any supported tag type to another. The three
-// supported tag types are ID target, Tag target, and resource group. For more
-// information, see <a>Target</a>.</p> </li> </ul> <note> <p>If a parameter is
-// null, then the corresponding field is not modified.</p> </note>
+// following:
+//
+//     * Name
+//
+//     * Description
+//
+//     * Owner
+//
+//     * IDs for an ID
+// target
+//
+//     * Tags for a Tag target
+//
+//     * From any supported tag type to
+// another. The three supported tag types are ID target, Tag target, and resource
+// group. For more information, see Target.
+//
+// If a parameter is null, then the
+// corresponding field is not modified.
 func (c *Client) UpdateMaintenanceWindowTarget(ctx context.Context, params *UpdateMaintenanceWindowTargetInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowTargetOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceWindowTargetInput{}

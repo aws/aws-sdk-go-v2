@@ -21,27 +21,27 @@ import (
 // the game server group and instance where the game server is running, and provide
 // a unique identifier for the game server. You can also include connection and
 // game server data; when a game client or service requests a game server by
-// calling ClaimGameServer (), this information is returned in response. Once a
-// game server is successfully registered, it is put in status AVAILABLE. A request
-// to register a game server may fail if the instance it is in the process of
-// shutting down as part of instance rebalancing or scale-down activity. Learn more
-// GameLift FleetIQ Guide
+// calling ClaimGameServer, this information is returned in response. Once a game
+// server is successfully registered, it is put in status AVAILABLE. A request to
+// register a game server may fail if the instance it is in the process of shutting
+// down as part of instance rebalancing or scale-down activity. Learn more GameLift
+// FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer ()
+//     * RegisterGameServer
 //
-//     * ListGameServers ()
+//     * ListGameServers
 //
 //     *
-// ClaimGameServer ()
+// ClaimGameServer
 //
-//     * DescribeGameServer ()
+//     * DescribeGameServer
 //
-//     * UpdateGameServer ()
+//     * UpdateGameServer
 //
-//
-// * DeregisterGameServer ()
+//     *
+// DeregisterGameServer
 func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameServerInput, optFns ...func(*Options)) (*RegisterGameServerOutput, error) {
 	if params == nil {
 		params = &RegisterGameServerInput{}
@@ -60,7 +60,7 @@ func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameSer
 type RegisterGameServerInput struct {
 
 	// An identifier for the game server group where the game server is running. You
-	// can use either the GameServerGroup () name or ARN value.
+	// can use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
@@ -83,13 +83,13 @@ type RegisterGameServerInput struct {
 	ConnectionInfo *string
 
 	// A game server tag that can be used to request sorted lists of game servers using
-	// ListGameServers (). Custom sort keys are developer-defined based on how you want
-	// to organize the retrieved game server information.
+	// ListGameServers. Custom sort keys are developer-defined based on how you want to
+	// organize the retrieved game server information.
 	CustomSortKey *string
 
 	// A set of custom game server properties, formatted as a single string value. This
 	// data is passed to a game client or service when it requests information on a
-	// game servers using ListGameServers () or ClaimGameServer ().
+	// game servers using ListGameServers or ClaimGameServer.
 	GameServerData *string
 
 	// A list of labels to assign to the new game server resource. Tags are
@@ -97,8 +97,8 @@ type RegisterGameServerInput struct {
 	// management, access management, and cost allocation. For more information, see
 	// Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource (),
-	// UntagResource (), and ListTagsForResource () to add, remove, and view tags. The
+	// General Reference. Once the resource is created, you can use TagResource,
+	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag

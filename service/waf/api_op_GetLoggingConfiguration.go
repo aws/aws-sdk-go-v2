@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns the LoggingConfiguration () for the specified web ACL.
+// global use. Returns the LoggingConfiguration for the specified web ACL.
 func (c *Client) GetLoggingConfiguration(ctx context.Context, params *GetLoggingConfigurationInput, optFns ...func(*Options)) (*GetLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetLoggingConfigurationInput{}
@@ -36,7 +36,7 @@ func (c *Client) GetLoggingConfiguration(ctx context.Context, params *GetLogging
 type GetLoggingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL for which you want to get the
-	// LoggingConfiguration ().
+	// LoggingConfiguration.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -44,7 +44,7 @@ type GetLoggingConfigurationInput struct {
 
 type GetLoggingConfigurationOutput struct {
 
-	// The LoggingConfiguration () for the specified web ACL.
+	// The LoggingConfiguration for the specified web ACL.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

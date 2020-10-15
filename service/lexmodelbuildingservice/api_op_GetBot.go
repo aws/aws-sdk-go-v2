@@ -46,7 +46,7 @@ type GetBotInput struct {
 type GetBotOutput struct {
 
 	// The message that Amazon Lex returns when the user elects to end the conversation
-	// without completing it. For more information, see PutBot ().
+	// without completing it. For more information, see PutBot.
 	AbortStatement *types.Statement
 
 	// Checksum of the bot used to identify a specific revision of the bot's $LATEST
@@ -77,7 +77,7 @@ type GetBotOutput struct {
 	ChildDirected *bool
 
 	// The message Amazon Lex uses when it doesn't understand the user's request. For
-	// more information, see PutBot ().
+	// more information, see PutBot.
 	ClarificationPrompt *types.Prompt
 
 	// The date that the bot was created.
@@ -94,10 +94,10 @@ type GetBotOutput struct {
 	FailureReason *string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
-	// conversation. For more information, see PutBot ().
+	// conversation. For more information, see PutBot.
 	IdleSessionTTLInSeconds *int32
 
-	// An array of intent objects. For more information, see PutBot ().
+	// An array of intent objects. For more information, see PutBot.
 	Intents []*types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation date
@@ -123,7 +123,7 @@ type GetBotOutput struct {
 	Version *string
 
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
-	// user. For more information, see PutBot ().
+	// user. For more information, see PutBot.
 	VoiceId *string
 
 	// Metadata pertaining to the operation's result.

@@ -35,12 +35,11 @@ type ModifyUsageLimitInput struct {
 	// This member is required.
 	UsageLimitId *string
 
-	// The new limit amount. For more information about this parameter, see UsageLimit
-	// ().
+	// The new limit amount. For more information about this parameter, see UsageLimit.
 	Amount *int64
 
 	// The new action that Amazon Redshift takes when the limit is reached. For more
-	// information about this parameter, see UsageLimit ().
+	// information about this parameter, see UsageLimit.
 	BreachAction types.UsageLimitBreachAction
 }
 

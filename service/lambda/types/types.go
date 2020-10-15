@@ -26,7 +26,7 @@ type AccountLimit struct {
 	TotalCodeSize *int64
 
 	// The maximum number of simultaneous function executions, minus the capacity
-	// that's reserved for individual functions with PutFunctionConcurrency ().
+	// that's reserved for individual functions with PutFunctionConcurrency.
 	UnreservedConcurrentExecutions *int32
 }
 
@@ -133,7 +133,7 @@ type EnvironmentResponse struct {
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
-// CreateEventSourceMapping () for details.
+// CreateEventSourceMapping for details.
 type EventSourceMappingConfiguration struct {
 
 	// The maximum number of items to retrieve in a single batch.

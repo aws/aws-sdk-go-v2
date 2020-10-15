@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes an Expression () from the search domain. For more information, see
+// Removes an Expression from the search domain. For more information, see
 // Configuring Expressions
 // (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
 // in the Amazon CloudSearch Developer Guide.
@@ -30,7 +30,7 @@ func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionI
 	return out, nil
 }
 
-// Container for the parameters to the DeleteExpression () operation. Specifies the
+// Container for the parameters to the DeleteExpression operation. Specifies the
 // name of the domain you want to update and the name of the expression you want to
 // delete.
 type DeleteExpressionInput struct {
@@ -43,13 +43,13 @@ type DeleteExpressionInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The name of the Expression () to delete.
+	// The name of the Expression to delete.
 	//
 	// This member is required.
 	ExpressionName *string
 }
 
-// The result of a DeleteExpression () request. Specifies the expression being
+// The result of a DeleteExpression request. Specifies the expression being
 // deleted.
 type DeleteExpressionOutput struct {
 

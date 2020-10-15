@@ -13,37 +13,30 @@ import (
 
 // Creates a DataSource from a database hosted on an Amazon Redshift cluster. A
 // DataSource references data that can be used to perform either CreateMLModel,
-// CreateEvaluation, or CreateBatchPrediction operations.  <p>
-// <code>CreateDataSourceFromRedshift</code> is an asynchronous operation. In
-// response to <code>CreateDataSourceFromRedshift</code>, Amazon Machine Learning
-// (Amazon ML) immediately returns and sets the <code>DataSource</code> status to
-// <code>PENDING</code>. After the <code>DataSource</code> is created and ready for
-// use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>.
-// <code>DataSource</code> in <code>COMPLETED</code> or <code>PENDING</code> states
-// can be used to perform only <code>CreateMLModel</code>,
-// <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.
-// </p> <p> If Amazon ML can't accept the input source, it sets the
-// <code>Status</code> parameter to <code>FAILED</code> and includes an error
-// message in the <code>Message</code> attribute of the <code>GetDataSource</code>
-// operation response. </p> <p>The observations should be contained in the database
-// hosted on an Amazon Redshift cluster and should be specified by a
-// <code>SelectSqlQuery</code> query. Amazon ML executes an <code>Unload</code>
-// command in Amazon Redshift to transfer the result set of the
-// <code>SelectSqlQuery</code> query to <code>S3StagingLocation</code>.</p>
-// <p>After the <code>DataSource</code> has been created, it's ready for use in
-// evaluations and batch predictions. If you plan to use the
-// <code>DataSource</code> to train an <code>MLModel</code>, the
-// <code>DataSource</code> also requires a recipe. A recipe describes how each
-// input variable will be used in training an <code>MLModel</code>. Will the
-// variable be included or excluded from training? Will the variable be
-// manipulated; for example, will it be combined with another variable or will it
-// be split apart into word combinations? The recipe provides answers to these
-// questions.</p> <p>You can't change an existing datasource, but you can copy and
+// CreateEvaluation, or CreateBatchPrediction operations.
+// CreateDataSourceFromRedshift is an asynchronous operation. In response to
+// CreateDataSourceFromRedshift, Amazon Machine Learning (Amazon ML) immediately
+// returns and sets the DataSource status to PENDING. After the DataSource is
+// created and ready for use, Amazon ML sets the Status parameter to COMPLETED.
+// DataSource in COMPLETED or PENDING states can be used to perform only
+// CreateMLModel, CreateEvaluation, or CreateBatchPrediction operations. If Amazon
+// ML can't accept the input source, it sets the Status parameter to FAILED and
+// includes an error message in the Message attribute of the GetDataSource
+// operation response. The observations should be contained in the database hosted
+// on an Amazon Redshift cluster and should be specified by a SelectSqlQuery query.
+// Amazon ML executes an Unload command in Amazon Redshift to transfer the result
+// set of the SelectSqlQuery query to S3StagingLocation. After the DataSource has
+// been created, it's ready for use in evaluations and batch predictions. If you
+// plan to use the DataSource to train an MLModel, the DataSource also requires a
+// recipe. A recipe describes how each input variable will be used in training an
+// MLModel. Will the variable be included or excluded from training? Will the
+// variable be manipulated; for example, will it be combined with another variable
+// or will it be split apart into word combinations? The recipe provides answers to
+// these questions. You can't change an existing datasource, but you can copy and
 // modify the settings from an existing Amazon Redshift datasource to create a new
-// datasource. To do so, call <code>GetDataSource</code> for an existing datasource
-// and copy the values to a <code>CreateDataSource</code> call. Change the settings
-// that you want to change and make sure that all required fields have the
-// appropriate values.</p>
+// datasource. To do so, call GetDataSource for an existing datasource and copy the
+// values to a CreateDataSource call. Change the settings that you want to change
+// and make sure that all required fields have the appropriate values.
 func (c *Client) CreateDataSourceFromRedshift(ctx context.Context, params *CreateDataSourceFromRedshiftInput, optFns ...func(*Options)) (*CreateDataSourceFromRedshiftOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceFromRedshiftInput{}
@@ -103,10 +96,14 @@ type CreateDataSourceFromRedshiftInput struct {
 	DataSpec *types.RedshiftDataSpec
 
 	// A fully specified role Amazon Resource Name (ARN). Amazon ML assumes the role on
-	// behalf of the user to create the following:  <ul> <li> <p>A security group to
-	// allow Amazon ML to execute the <code>SelectSqlQuery</code> query on an Amazon
-	// Redshift cluster</p> </li> <li> <p>An Amazon S3 bucket policy to grant Amazon ML
-	// read/write permissions on the <code>S3StagingLocation</code> </p> </li> </ul>
+	// behalf of the user to create the following:
+	//
+	//     * A security group to allow
+	// Amazon ML to execute the SelectSqlQuery query on an Amazon Redshift cluster
+	//
+	//
+	// * An Amazon S3 bucket policy to grant Amazon ML read/write permissions on the
+	// S3StagingLocation
 	//
 	// This member is required.
 	RoleARN *string

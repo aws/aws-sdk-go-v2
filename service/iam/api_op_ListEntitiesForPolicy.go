@@ -82,7 +82,7 @@ type ListEntitiesForPolicyInput struct {
 	PolicyUsageFilter types.PolicyUsageType
 }
 
-// Contains the response to a successful ListEntitiesForPolicy () request.
+// Contains the response to a successful ListEntitiesForPolicy request.
 type ListEntitiesForPolicyOutput struct {
 
 	// A flag that indicates whether there are more items to return. If your results

@@ -13,32 +13,27 @@ import (
 
 // Creates a DataSource object. A DataSource references data that can be used to
 // perform CreateMLModel, CreateEvaluation, or CreateBatchPrediction operations.
-// <p> <code>CreateDataSourceFromS3</code> is an asynchronous operation. In
-// response to <code>CreateDataSourceFromS3</code>, Amazon Machine Learning (Amazon
-// ML) immediately returns and sets the <code>DataSource</code> status to
-// <code>PENDING</code>. After the <code>DataSource</code> has been created and is
-// ready for use, Amazon ML sets the <code>Status</code> parameter to
-// <code>COMPLETED</code>. <code>DataSource</code> in the <code>COMPLETED</code> or
-// <code>PENDING</code> state can be used to perform only
-// <code>CreateMLModel</code>, <code>CreateEvaluation</code> or
-// <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML can't
-// accept the input source, it sets the <code>Status</code> parameter to
-// <code>FAILED</code> and includes an error message in the <code>Message</code>
-// attribute of the <code>GetDataSource</code> operation response. </p> <p>The
-// observation data used in a <code>DataSource</code> should be ready to use; that
-// is, it should have a consistent structure, and missing data values should be
-// kept to a minimum. The observation data must reside in one or more .csv files in
-// an Amazon Simple Storage Service (Amazon S3) location, along with a schema that
-// describes the data items by name and type. The same schema must be used for all
-// of the data files referenced by the <code>DataSource</code>. </p> <p>After the
-// <code>DataSource</code> has been created, it's ready to use in evaluations and
-// batch predictions. If you plan to use the <code>DataSource</code> to train an
-// <code>MLModel</code>, the <code>DataSource</code> also needs a recipe. A recipe
-// describes how each input variable will be used in training an
-// <code>MLModel</code>. Will the variable be included or excluded from training?
-// Will the variable be manipulated; for example, will it be combined with another
-// variable or will it be split apart into word combinations? The recipe provides
-// answers to these questions.</p>
+// CreateDataSourceFromS3 is an asynchronous operation. In response to
+// CreateDataSourceFromS3, Amazon Machine Learning (Amazon ML) immediately returns
+// and sets the DataSource status to PENDING. After the DataSource has been created
+// and is ready for use, Amazon ML sets the Status parameter to COMPLETED.
+// DataSource in the COMPLETED or PENDING state can be used to perform only
+// CreateMLModel, CreateEvaluation or CreateBatchPrediction operations. If Amazon
+// ML can't accept the input source, it sets the Status parameter to FAILED and
+// includes an error message in the Message attribute of the GetDataSource
+// operation response. The observation data used in a DataSource should be ready to
+// use; that is, it should have a consistent structure, and missing data values
+// should be kept to a minimum. The observation data must reside in one or more
+// .csv files in an Amazon Simple Storage Service (Amazon S3) location, along with
+// a schema that describes the data items by name and type. The same schema must be
+// used for all of the data files referenced by the DataSource. After the
+// DataSource has been created, it's ready to use in evaluations and batch
+// predictions. If you plan to use the DataSource to train an MLModel, the
+// DataSource also needs a recipe. A recipe describes how each input variable will
+// be used in training an MLModel. Will the variable be included or excluded from
+// training? Will the variable be manipulated; for example, will it be combined
+// with another variable or will it be split apart into word combinations? The
+// recipe provides answers to these questions.
 func (c *Client) CreateDataSourceFromS3(ctx context.Context, params *CreateDataSourceFromS3Input, optFns ...func(*Options)) (*CreateDataSourceFromS3Output, error) {
 	if params == nil {
 		params = &CreateDataSourceFromS3Input{}

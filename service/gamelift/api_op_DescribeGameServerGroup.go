@@ -14,27 +14,26 @@ import (
 // This action is part of Amazon GameLift FleetIQ with game server groups, which is
 // in preview release and is subject to change. Retrieves information on a game
 // server group. To get attributes for a game server group, provide a group name or
-// ARN value. If successful, a GameServerGroup () object is returned. Learn more
+// ARN value. If successful, a GameServerGroup object is returned. Learn more
 // GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup ()
+//     * CreateGameServerGroup
 //
 //     * ListGameServerGroups
-// ()
 //
-//     * DescribeGameServerGroup ()
 //
-//     * UpdateGameServerGroup ()
+// * DescribeGameServerGroup
 //
-//     *
-// DeleteGameServerGroup ()
-//
-//     * ResumeGameServerGroup ()
+//     * UpdateGameServerGroup
 //
 //     *
-// SuspendGameServerGroup ()
+// DeleteGameServerGroup
+//
+//     * ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
 func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGameServerGroupInput, optFns ...func(*Options)) (*DescribeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerGroupInput{}
@@ -53,7 +52,7 @@ func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGa
 type DescribeGameServerGroupInput struct {
 
 	// The unique identifier for the game server group being requested. Use either the
-	// GameServerGroup () name or ARN value.
+	// GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

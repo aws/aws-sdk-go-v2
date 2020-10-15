@@ -84,7 +84,7 @@ type ActivityScheduleFailedEventDetails struct {
 type ActivityStartedEventDetails struct {
 
 	// The name of the worker that the task is assigned to. These names are provided by
-	// the workers when calling GetActivityTask ().
+	// the workers when calling GetActivityTask.
 	WorkerName *string
 }
 

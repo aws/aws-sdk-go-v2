@@ -48,8 +48,8 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	HyperParameterTuningJobArn *string
 
-	// The HyperParameterTuningJobConfig () object that specifies the configuration of
-	// the tuning job.
+	// The HyperParameterTuningJobConfig object that specifies the configuration of the
+	// tuning job.
 	//
 	// This member is required.
 	HyperParameterTuningJobConfig *types.HyperParameterTuningJobConfig
@@ -65,21 +65,21 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	HyperParameterTuningJobStatus types.HyperParameterTuningJobStatus
 
-	// The ObjectiveStatusCounters () object that specifies the number of training
-	// jobs, categorized by the status of their final objective metric, that this
-	// tuning job launched.
+	// The ObjectiveStatusCounters object that specifies the number of training jobs,
+	// categorized by the status of their final objective metric, that this tuning job
+	// launched.
 	//
 	// This member is required.
 	ObjectiveStatusCounters *types.ObjectiveStatusCounters
 
-	// The TrainingJobStatusCounters () object that specifies the number of training
-	// jobs, categorized by status, that this tuning job launched.
+	// The TrainingJobStatusCounters object that specifies the number of training jobs,
+	// categorized by status, that this tuning job launched.
 	//
 	// This member is required.
 	TrainingJobStatusCounters *types.TrainingJobStatusCounters
 
-	// A TrainingJobSummary () object that describes the training job that completed
-	// with the best current HyperParameterTuningJobObjective ().
+	// A TrainingJobSummary object that describes the training job that completed with
+	// the best current HyperParameterTuningJobObjective.
 	BestTrainingJob *types.HyperParameterTrainingJobSummary
 
 	// If the tuning job failed, the reason it failed.
@@ -92,17 +92,17 @@ type DescribeHyperParameterTuningJobOutput struct {
 	LastModifiedTime *time.Time
 
 	// If the hyperparameter tuning job is an warm start tuning job with a
-	// WarmStartType of IDENTICAL_DATA_AND_ALGORITHM, this is the TrainingJobSummary ()
+	// WarmStartType of IDENTICAL_DATA_AND_ALGORITHM, this is the TrainingJobSummary
 	// for the training job with the best objective metric value of all training jobs
 	// launched by this tuning job and all parent jobs specified for the warm start
 	// tuning job.
 	OverallBestTrainingJob *types.HyperParameterTrainingJobSummary
 
-	// The HyperParameterTrainingJobDefinition () object that specifies the definition
-	// of the training jobs that this tuning job launches.
+	// The HyperParameterTrainingJobDefinition object that specifies the definition of
+	// the training jobs that this tuning job launches.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
 
-	// A list of the HyperParameterTrainingJobDefinition () objects launched for this
+	// A list of the HyperParameterTrainingJobDefinition objects launched for this
 	// tuning job.
 	TrainingJobDefinitions []*types.HyperParameterTrainingJobDefinition
 

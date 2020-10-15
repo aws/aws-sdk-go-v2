@@ -19,16 +19,16 @@ import (
 // list of RDS sources (SourceIds) that triggers the events, and provide a list of
 // event categories (EventCategories) for events you want to be notified of. For
 // example, you can specify SourceType = db-instance, SourceIds = mydbinstance1,
-// mydbinstance2 and EventCategories = Availability, Backup.  <p>If you specify
-// both the SourceType and SourceIds, such as SourceType = db-instance and
+// mydbinstance2 and EventCategories = Availability, Backup. If you specify both
+// the SourceType and SourceIds, such as SourceType = db-instance and
 // SourceIdentifier = myDBInstance1, you are notified of all the db-instance events
 // for the specified source. If you specify a SourceType but do not specify a
 // SourceIdentifier, you receive notice of the events for that source type for all
 // your RDS sources. If you don't specify either the SourceType or the
 // SourceIdentifier, you are notified of events generated from all RDS sources
-// belonging to your customer account.</p> <note> <p>RDS event notification is only
-// available for unencrypted SNS topics. If you specify an encrypted SNS topic,
-// event notifications aren't sent for the topic.</p> </note>
+// belonging to your customer account. RDS event notification is only available for
+// unencrypted SNS topics. If you specify an encrypted SNS topic, event
+// notifications aren't sent for the topic.
 func (c *Client) CreateEventSubscription(ctx context.Context, params *CreateEventSubscriptionInput, optFns ...func(*Options)) (*CreateEventSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateEventSubscriptionInput{}

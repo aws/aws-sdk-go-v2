@@ -18,30 +18,38 @@ import (
 // evaluated and its state is set appropriately. Any actions associated with the
 // new state are then executed. When you update an existing alarm, its state is
 // left unchanged, but the update completely overwrites the previous configuration
-// of the alarm.  <p>If you are an IAM user, you must have Amazon EC2 permissions
-// for some alarm operations:</p> <ul> <li> <p>
-// <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p>
-// </li> <li> <p> <code>ec2:DescribeInstanceStatus</code> and
-// <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status
-// metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop
-// actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with
-// terminate actions</p> </li> <li> <p>No specific permissions are needed for
-// alarms with recover actions</p> </li> </ul> <p>If you have read/write
-// permissions for Amazon CloudWatch but not for Amazon EC2, you can still create
-// an alarm, but the stop or terminate actions are not performed. However, if you
-// are later granted the required permissions, the alarm actions that you created
-// earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2
-// instance profile), you cannot stop or terminate the instance using alarm
-// actions. However, you can still see the alarm state and perform any other
-// actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you
+// of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for
+// some alarm operations:
+//
+//     * iam:CreateServiceLinkedRole for all alarms with
+// EC2 actions
+//
+//     * ec2:DescribeInstanceStatus and ec2:DescribeInstances for all
+// alarms on EC2 instance status metrics
+//
+//     * ec2:StopInstances for alarms with
+// stop actions
+//
+//     * ec2:TerminateInstances for alarms with terminate actions
+//
+//
+// * No specific permissions are needed for alarms with recover actions
+//
+// If you
+// have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you
+// can still create an alarm, but the stop or terminate actions are not performed.
+// However, if you are later granted the required permissions, the alarm actions
+// that you created earlier are performed. If you are using an IAM role (for
+// example, an EC2 instance profile), you cannot stop or terminate the instance
+// using alarm actions. However, you can still see the alarm state and perform any
+// other actions such as Amazon SNS notifications or Auto Scaling policies. If you
 // are using temporary security credentials granted using AWS STS, you cannot stop
-// or terminate an EC2 instance using alarm actions.</p> <p>The first time you
-// create an alarm in the AWS Management Console, the CLI, or by using the
-// PutMetricAlarm API, CloudWatch creates the necessary service-linked role for
-// you. The service-linked role is called
-// <code>AWSServiceRoleForCloudWatchEvents</code>. For more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS
-// service-linked role</a>.</p>
+// or terminate an EC2 instance using alarm actions. The first time you create an
+// alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm
+// API, CloudWatch creates the necessary service-linked role for you. The
+// service-linked role is called AWSServiceRoleForCloudWatchEvents. For more
+// information, see AWS service-linked role
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role).
 func (c *Client) PutMetricAlarm(ctx context.Context, params *PutMetricAlarmInput, optFns ...func(*Options)) (*PutMetricAlarmOutput, error) {
 	if params == nil {
 		params = &PutMetricAlarmInput{}
@@ -88,21 +96,15 @@ type PutMetricAlarmInput struct {
 	ActionsEnabled *bool
 
 	// The actions to execute when this alarm transitions to the ALARM state from any
-	// other state. Each action is specified as an Amazon Resource Name (ARN).
-	// <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
-	// <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code>
-	// |
-	// <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
-	// </code> </p> <p>Valid Values (for use with IAM roles):
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code>
-	// |
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code>
-	// |
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
-	// </p>
+	// other state. Each action is specified as an Amazon Resource Name (ARN). Valid
+	// Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate
+	// | arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot |
+	// arn:aws:sns:region:account-id:sns-topic-name  |
+	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	// Valid Values (for use with IAM roles):
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
 	AlarmActions []*string
 
 	// The description for the alarm.
@@ -135,20 +137,15 @@ type PutMetricAlarmInput struct {
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
-	// (ARN).  <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
-	// <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code>
-	// |
-	// <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
-	// </code> </p> <p>Valid Values (for use with IAM roles):
-	// <code>>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code>
-	// |
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code>
-	// |
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
-	// </p>
+	// (ARN). Valid Values: arn:aws:automate:region:ec2:stop |
+	// arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover |
+	// arn:aws:automate:region:ec2:reboot |
+	// arn:aws:sns:region:account-id:sns-topic-name  |
+	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	// Valid Values (for use with IAM roles):
+	// >arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
 	InsufficientDataActions []*string
 
 	// The name for the metric associated with the alarm. For each PutMetricAlarm
@@ -176,21 +173,15 @@ type PutMetricAlarmInput struct {
 	Namespace *string
 
 	// The actions to execute when this alarm transitions to an OK state from any other
-	// state. Each action is specified as an Amazon Resource Name (ARN).  <p>Valid
-	// Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:recover</code> |
-	// <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> |
-	// <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code>
-	// |
-	// <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i>
-	// </code> </p> <p>Valid Values (for use with IAM roles):
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code>
-	// |
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code>
-	// |
-	// <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
-	// </p>
+	// state. Each action is specified as an Amazon Resource Name (ARN). Valid Values:
+	// arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate |
+	// arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot |
+	// arn:aws:sns:region:account-id:sns-topic-name  |
+	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	// Valid Values (for use with IAM roles):
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
 	OKActions []*string
 
 	// The length, in seconds, used each time the metric specified in MetricName is

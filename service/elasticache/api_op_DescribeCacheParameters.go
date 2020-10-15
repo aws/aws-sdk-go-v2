@@ -43,8 +43,8 @@ type DescribeCacheParametersInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.  <p>Default: 100</p>
-	// <p>Constraints: minimum 20; maximum 100.</p>
+	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
+	// 20; maximum 100.
 	MaxRecords *int32
 
 	// The parameter types to return. Valid values: user | system | engine-default
@@ -61,7 +61,7 @@ type DescribeCacheParametersOutput struct {
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
 
-	// A list of Parameter () instances.
+	// A list of Parameter instances.
 	Parameters []*types.Parameter
 
 	// Metadata pertaining to the operation's result.

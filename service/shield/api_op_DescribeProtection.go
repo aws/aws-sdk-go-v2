@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the details of a Protection () object.
+// Lists the details of a Protection object.
 func (c *Client) DescribeProtection(ctx context.Context, params *DescribeProtectionInput, optFns ...func(*Options)) (*DescribeProtectionOutput, error) {
 	if params == nil {
 		params = &DescribeProtectionInput{}
@@ -29,12 +29,12 @@ func (c *Client) DescribeProtection(ctx context.Context, params *DescribeProtect
 
 type DescribeProtectionInput struct {
 
-	// The unique identifier (ID) for the Protection () object that is described. When
+	// The unique identifier (ID) for the Protection object that is described. When
 	// submitting the DescribeProtection request you must provide either the
 	// ResourceArn or the ProtectionID, but not both.
 	ProtectionId *string
 
-	// The ARN (Amazon Resource Name) of the AWS resource for the Protection () object
+	// The ARN (Amazon Resource Name) of the AWS resource for the Protection object
 	// that is described. When submitting the DescribeProtection request you must
 	// provide either the ResourceArn or the ProtectionID, but not both.
 	ResourceArn *string
@@ -42,7 +42,7 @@ type DescribeProtectionInput struct {
 
 type DescribeProtectionOutput struct {
 
-	// The Protection () object that is described.
+	// The Protection object that is described.
 	Protection *types.Protection
 
 	// Metadata pertaining to the operation's result.

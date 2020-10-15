@@ -11,7 +11,7 @@ import (
 )
 
 // Creates an empty dataset and adds it to the specified dataset group. Use
-// CreateDatasetImportJob () to import your training data to a dataset. There are
+// CreateDatasetImportJob to import your training data to a dataset. There are
 // three types of datasets:
 //
 //     * Interactions
@@ -32,16 +32,16 @@ import (
 // PENDING > DELETE IN_PROGRESS
 //
 // To get the status of the dataset, call
-// DescribeDataset (). Related APIs
+// DescribeDataset. Related APIs
 //
-//     * CreateDatasetGroup ()
+//     * CreateDatasetGroup
 //
-//     *
-// ListDatasets ()
+//     * ListDatasets
 //
-//     * DescribeDataset ()
 //
-//     * DeleteDataset ()
+// * DescribeDataset
+//
+//     * DeleteDataset
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}

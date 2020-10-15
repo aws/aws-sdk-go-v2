@@ -295,7 +295,7 @@ type BundleTask struct {
 	UpdateTime *time.Time
 }
 
-// Describes an error for BundleInstance ().
+// Describes an error for BundleInstance.
 type BundleTaskError struct {
 
 	// The error code.
@@ -1960,47 +1960,79 @@ type EventInformation struct {
 	// The description of the event.
 	EventDescription *string
 
-	// The event.  <p>The following are the <code>error</code> events:</p> <ul> <li>
-	// <p> <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet did not have
-	// the required permissions either to launch or terminate an instance.</p> </li>
-	// <li> <p> <code>spotFleetRequestConfigurationInvalid</code> - The configuration
-	// is not valid. For more information, see the description of the event.</p> </li>
-	// <li> <p> <code>spotInstanceCountLimitExceeded</code> - You've reached the limit
-	// on the number of Spot Instances that you can launch.</p> </li> </ul> <p>The
-	// following are the <code>fleetRequestChange</code> events:</p> <ul> <li> <p>
-	// <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and
-	// Amazon EC2 is attempting to maintain the target number of running Spot
-	// Instances.</p> </li> <li> <p> <code>cancelled</code> - The EC2 Fleet or Spot
-	// Fleet request is canceled and has no running Spot Instances. The EC2 Fleet or
-	// Spot Fleet will be deleted two days after its instances were terminated.</p>
-	// </li> <li> <p> <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet
-	// request is canceled and does not launch additional Spot Instances. Existing Spot
-	// Instances continue to run until they are interrupted or terminated.</p> </li>
-	// <li> <p> <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet
-	// request is canceled and its Spot Instances are terminating.</p> </li> <li> <p>
-	// <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. A
-	// subsequent event indicates that the instances were terminated, if the request
-	// was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li>
-	// <li> <p> <code>modify_in_progress</code> - A request to modify the EC2 Fleet or
-	// Spot Fleet request was accepted and is in progress.</p> </li> <li> <p>
-	// <code>modify_successful</code> - The EC2 Fleet or Spot Fleet request was
-	// modified.</p> </li> <li> <p> <code>price_update</code> - The price for a launch
-	// configuration was adjusted because it was too high. This change is
-	// permanent.</p> </li> <li> <p> <code>submitted</code> - The EC2 Fleet or Spot
+	// The event. The following are the error events:
+	//
+	//     * iamFleetRoleInvalid - The
+	// EC2 Fleet or Spot Fleet did not have the required permissions either to launch
+	// or terminate an instance.
+	//
+	//     * spotFleetRequestConfigurationInvalid - The
+	// configuration is not valid. For more information, see the description of the
+	// event.
+	//
+	//     * spotInstanceCountLimitExceeded - You've reached the limit on the
+	// number of Spot Instances that you can launch.
+	//
+	// The following are the
+	// fleetRequestChange events:
+	//
+	//     * active - The EC2 Fleet or Spot Fleet request
+	// has been validated and Amazon EC2 is attempting to maintain the target number of
+	// running Spot Instances.
+	//
+	//     * cancelled - The EC2 Fleet or Spot Fleet request
+	// is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will
+	// be deleted two days after its instances were terminated.
+	//
+	//     *
+	// cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not
+	// launch additional Spot Instances. Existing Spot Instances continue to run until
+	// they are interrupted or terminated.
+	//
+	//     * cancelled_terminating - The EC2 Fleet
+	// or Spot Fleet request is canceled and its Spot Instances are terminating.
+	//
+	//     *
+	// expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent event
+	// indicates that the instances were terminated, if the request was created with
+	// TerminateInstancesWithExpiration set.
+	//
+	//     * modify_in_progress - A request to
+	// modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.
+	//
+	//
+	// * modify_successful - The EC2 Fleet or Spot Fleet request was modified.
+	//
+	//     *
+	// price_update - The price for a launch configuration was adjusted because it was
+	// too high. This change is permanent.
+	//
+	//     * submitted - The EC2 Fleet or Spot
 	// Fleet request is being evaluated and Amazon EC2 is preparing to launch the
-	// target number of Spot Instances.</p> </li> </ul> <p>The following are the
-	// <code>instanceChange</code> events:</p> <ul> <li> <p> <code>launched</code> - A
-	// request was fulfilled and a new instance was launched.</p> </li> <li> <p>
-	// <code>terminated</code> - An instance was terminated by the user.</p> </li>
-	// </ul> <p>The following are the <code>Information</code> events:</p> <ul> <li>
-	// <p> <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not
-	// valid and several attempts to launch instances have failed. For more
-	// information, see the description of the event.</p> </li> <li> <p>
-	// <code>launchSpecUnusable</code> - The price in a launch specification is not
-	// valid because it is below the Spot price or the Spot price is above the
-	// On-Demand price.</p> </li> <li> <p> <code>fleetProgressHalted</code> - The price
-	// in every launch specification is not valid. A launch specification might become
-	// valid if the Spot price changes.</p> </li> </ul>
+	// target number of Spot Instances.
+	//
+	// The following are the instanceChange events:
+	//
+	//
+	// * launched - A request was fulfilled and a new instance was launched.
+	//
+	//     *
+	// terminated - An instance was terminated by the user.
+	//
+	// The following are the
+	// Information events:
+	//
+	//     * launchSpecTemporarilyBlacklisted - The configuration
+	// is not valid and several attempts to launch instances have failed. For more
+	// information, see the description of the event.
+	//
+	//     * launchSpecUnusable - The
+	// price in a launch specification is not valid because it is below the Spot price
+	// or the Spot price is above the On-Demand price.
+	//
+	//     * fleetProgressHalted - The
+	// price in every launch specification is not valid. A launch specification might
+	// become valid if the Spot price changes.
 	EventSubType *string
 
 	// The ID of the instance. This information is available only for instanceChange
@@ -2153,28 +2185,28 @@ type FederatedAuthenticationRequest struct {
 // supported by a describe operation are documented with the describe operation.
 // For example:
 //
-//     * DescribeAvailabilityZones ()
+//     * DescribeAvailabilityZones
 //
-//     * DescribeImages ()
+//     * DescribeImages
 //
 //     *
-// DescribeInstances ()
+// DescribeInstances
 //
-//     * DescribeKeyPairs ()
+//     * DescribeKeyPairs
 //
 //     * DescribeSecurityGroups
-// ()
 //
-//     * DescribeSnapshots ()
+//     *
+// DescribeSnapshots
 //
-//     * DescribeSubnets ()
+//     * DescribeSubnets
 //
 //     * DescribeTags
-// ()
 //
-//     * DescribeVolumes ()
+//     *
+// DescribeVolumes
 //
-//     * DescribeVpcs ()
+//     * DescribeVpcs
 type Filter struct {
 
 	// The name of the filter. Filter names are case-sensitive.
@@ -3886,7 +3918,7 @@ type InstanceStatus struct {
 	// The ID of the instance.
 	InstanceId *string
 
-	// The intended state of the instance. DescribeInstanceStatus () requires that an
+	// The intended state of the instance. DescribeInstanceStatus requires that an
 	// instance be in the running state.
 	InstanceState *InstanceState
 
@@ -4201,9 +4233,9 @@ type Ipv6Range struct {
 // Describes a key pair.
 type KeyPairInfo struct {
 
-	// If you used CreateKeyPair () to create the key pair, this is the SHA-1 digest of
-	// the DER encoded private key. If you used ImportKeyPair () to provide AWS the
-	// public key, this is the MD5 public key fingerprint as specified in section 4 of
+	// If you used CreateKeyPair to create the key pair, this is the SHA-1 digest of
+	// the DER encoded private key. If you used ImportKeyPair to provide AWS the public
+	// key, this is the MD5 public key fingerprint as specified in section 4 of
 	// RFC4716.
 	KeyFingerprint *string
 
@@ -6867,7 +6899,7 @@ type ReservedInstancesOffering struct {
 	RecurringCharges []*RecurringCharge
 
 	// The ID of the Reserved Instance offering. This is the offering ID used in
-	// GetReservedInstancesExchangeQuote () to confirm that an exchange can be made.
+	// GetReservedInstancesExchangeQuote to confirm that an exchange can be made.
 	ReservedInstancesOfferingId *string
 
 	// Whether the Reserved Instance is applied to instances in a Region or an
@@ -7656,7 +7688,7 @@ type Snapshot struct {
 	// the original volume or snapshot copy. Because data encryption keys are inherited
 	// by volumes created from snapshots, and vice versa, if snapshots share the same
 	// data encryption key identifier, then they belong to the same volume/snapshot
-	// lineage. This parameter is only returned by DescribeSnapshots ().
+	// lineage. This parameter is only returned by DescribeSnapshots.
 	DataEncryptionKeyId *string
 
 	// The description for the snapshot.
@@ -7696,15 +7728,15 @@ type Snapshot struct {
 	// operation fails (for example, if the proper AWS Key Management Service (AWS KMS)
 	// permissions are not obtained) this field displays error state details to help
 	// you diagnose why the error occurred. This parameter is only returned by
-	// DescribeSnapshots ().
+	// DescribeSnapshots.
 	StateMessage *string
 
 	// Any tags assigned to the snapshot.
 	Tags []*Tag
 
 	// The ID of the volume that was used to create the snapshot. Snapshots created by
-	// the CopySnapshot () action have an arbitrary volume ID that should not be used
-	// for any purpose.
+	// the CopySnapshot action have an arbitrary volume ID that should not be used for
+	// any purpose.
 	VolumeId *string
 
 	// The size of the volume, in GiB.
@@ -8509,7 +8541,7 @@ type StorageLocation struct {
 type Subnet struct {
 
 	// Indicates whether a network interface created in this subnet (including a
-	// network interface created by RunInstances ()) receives an IPv6 address.
+	// network interface created by RunInstances) receives an IPv6 address.
 	AssignIpv6AddressOnCreation *bool
 
 	// The Availability Zone of the subnet.
@@ -8535,7 +8567,7 @@ type Subnet struct {
 	Ipv6CidrBlockAssociationSet []*SubnetIpv6CidrBlockAssociation
 
 	// Indicates whether a network interface created in this subnet (including a
-	// network interface created by RunInstances ()) receives a customer-owned IPv4
+	// network interface created by RunInstances) receives a customer-owned IPv4
 	// address.
 	MapCustomerOwnedIpOnLaunch *bool
 
@@ -10180,9 +10212,9 @@ type VpnConnection struct {
 	Category *string
 
 	// The configuration information for the VPN connection's customer gateway (in the
-	// native XML format). This element is always present in the CreateVpnConnection ()
-	// response; however, it's present in the DescribeVpnConnections () response only
-	// if the VPN connection is in the pending or available state.
+	// native XML format). This element is always present in the CreateVpnConnection
+	// response; however, it's present in the DescribeVpnConnections response only if
+	// the VPN connection is in the pending or available state.
 	CustomerGatewayConfiguration *string
 
 	// The ID of the customer gateway at your end of the VPN connection.
@@ -10238,7 +10270,7 @@ type VpnConnectionOptionsSpecification struct {
 
 	// Indicate whether the VPN connection uses static routes only. If you are creating
 	// a VPN connection for a device that does not support BGP, you must specify true.
-	// Use CreateVpnConnectionRoute () to create a static route. Default: false
+	// Use CreateVpnConnectionRoute to create a static route. Default: false
 	StaticRoutesOnly *bool
 
 	// The tunnel options for the VPN connection.

@@ -23,9 +23,7 @@ import (
 // Amazon Simple Storage Service Developer Guide. For information about Amazon S3
 // analytics feature, see Amazon S3 Analytics – Storage Class Analysis
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html)
-// in the Amazon Simple Storage Service Developer Guide.  <p class="title">
-// <b>Related Resources</b> </p> <ul> <li> <p> </p> </li> <li> <p> </p> </li> <li>
-// <p> </p> </li> </ul>
+// in the Amazon Simple Storage Service Developer Guide. Related Resources
 func (c *Client) GetBucketAnalyticsConfiguration(ctx context.Context, params *GetBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*GetBucketAnalyticsConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketAnalyticsConfigurationInput{}

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Generates a client SDK for a RestApi () and Stage ().
+// Generates a client SDK for a RestApi and Stage.
 func (c *Client) GetSdk(ctx context.Context, params *GetSdkInput, optFns ...func(*Options)) (*GetSdkOutput, error) {
 	if params == nil {
 		params = &GetSdkInput{}
@@ -26,10 +26,10 @@ func (c *Client) GetSdk(ctx context.Context, params *GetSdkInput, optFns ...func
 	return out, nil
 }
 
-// Request a new generated client SDK for a RestApi () and Stage ().
+// Request a new generated client SDK for a RestApi and Stage.
 type GetSdkInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -40,7 +40,7 @@ type GetSdkInput struct {
 	// This member is required.
 	SdkType *string
 
-	// [Required] The name of the Stage () that the SDK will use.
+	// [Required] The name of the Stage that the SDK will use.
 	//
 	// This member is required.
 	StageName *string
@@ -53,10 +53,10 @@ type GetSdkInput struct {
 	Parameters map[string]*string
 }
 
-// The binary blob response to GetSdk (), which contains the generated SDK.
+// The binary blob response to GetSdk, which contains the generated SDK.
 type GetSdkOutput struct {
 
-	// The binary blob response to GetSdk (), which contains the generated SDK.
+	// The binary blob response to GetSdk, which contains the generated SDK.
 	Body []byte
 
 	// The content-disposition header value in the HTTP response.

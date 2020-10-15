@@ -17,7 +17,7 @@ import (
 // its identities. For information about using sending authorization, see the
 // Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-// <p>You can execute this operation no more than once per second.</p>
+// You can execute this operation no more than once per second.
 func (c *Client) CreateEmailIdentityPolicy(ctx context.Context, params *CreateEmailIdentityPolicyInput, optFns ...func(*Options)) (*CreateEmailIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &CreateEmailIdentityPolicyInput{}
@@ -53,8 +53,8 @@ type CreateEmailIdentityPolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The name of the policy.  <p>The policy name cannot exceed 64 characters and can
-	// only include alphanumeric characters, dashes, and underscores.</p>
+	// The name of the policy. The policy name cannot exceed 64 characters and can only
+	// include alphanumeric characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string

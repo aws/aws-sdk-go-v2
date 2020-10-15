@@ -30,7 +30,7 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 	return out, nil
 }
 
-// The input for a GetTemplate () action.
+// The input for a GetTemplate action.
 type GetTemplateInput struct {
 
 	// The name or Amazon Resource Name (ARN) of a change set for which AWS
@@ -58,7 +58,7 @@ type GetTemplateInput struct {
 	TemplateStage types.TemplateStage
 }
 
-// The output for GetTemplate () action.
+// The output for GetTemplate action.
 type GetTemplateOutput struct {
 
 	// The stage of the template that you can retrieve. For stacks, the Original and

@@ -33,36 +33,46 @@ import (
 // exponential backoff, the individual requests in the batch are much more likely
 // to succeed. For more information, see Batch Operations and Error Handling
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations)
-// in the Amazon DynamoDB Developer Guide.  <p>With <code>BatchWriteItem</code>,
-// you can efficiently write or delete large amounts of data, such as from Amazon
-// EMR, or copy data from another database into DynamoDB. In order to improve
-// performance with these large-scale operations, <code>BatchWriteItem</code> does
-// not behave in the same way as individual <code>PutItem</code> and
-// <code>DeleteItem</code> calls would. For example, you cannot specify conditions
-// on individual put and delete requests, and <code>BatchWriteItem</code> does not
-// return deleted items in the response.</p> <p>If you use a programming language
-// that supports concurrency, you can use threads to write items in parallel. Your
+// in the Amazon DynamoDB Developer Guide. With BatchWriteItem, you can efficiently
+// write or delete large amounts of data, such as from Amazon EMR, or copy data
+// from another database into DynamoDB. In order to improve performance with these
+// large-scale operations, BatchWriteItem does not behave in the same way as
+// individual PutItem and DeleteItem calls would. For example, you cannot specify
+// conditions on individual put and delete requests, and BatchWriteItem does not
+// return deleted items in the response. If you use a programming language that
+// supports concurrency, you can use threads to write items in parallel. Your
 // application must include the necessary logic to manage the threads. With
 // languages that don't support threading, you must update or delete the specified
-// items one at a time. In both situations, <code>BatchWriteItem</code> performs
-// the specified put and delete operations in parallel, giving you the power of the
-// thread pool approach without having to introduce complexity into your
-// application.</p> <p>Parallel processing reduces latency, but each specified put
-// and delete request consumes the same number of write capacity units whether it
-// is processed in parallel or not. Delete operations on nonexistent items consume
-// one write capacity unit.</p> <p>If one or more of the following is true,
-// DynamoDB rejects the entire batch write operation:</p> <ul> <li> <p>One or more
-// tables specified in the <code>BatchWriteItem</code> request does not exist.</p>
-// </li> <li> <p>Primary key attributes specified on an item in the request do not
-// match those in the corresponding table's primary key schema.</p> </li> <li>
-// <p>You try to perform multiple operations on the same item in the same
-// <code>BatchWriteItem</code> request. For example, you cannot put and delete the
-// same item in the same <code>BatchWriteItem</code> request. </p> </li> <li> <p>
-// Your request contains at least two items with identical hash and range keys
-// (which essentially is two put operations). </p> </li> <li> <p>There are more
-// than 25 requests in the batch.</p> </li> <li> <p>Any individual item in a batch
-// exceeds 400 KB.</p> </li> <li> <p>The total request size exceeds 16 MB.</p>
-// </li> </ul>
+// items one at a time. In both situations, BatchWriteItem performs the specified
+// put and delete operations in parallel, giving you the power of the thread pool
+// approach without having to introduce complexity into your application. Parallel
+// processing reduces latency, but each specified put and delete request consumes
+// the same number of write capacity units whether it is processed in parallel or
+// not. Delete operations on nonexistent items consume one write capacity unit. If
+// one or more of the following is true, DynamoDB rejects the entire batch write
+// operation:
+//
+//     * One or more tables specified in the BatchWriteItem request
+// does not exist.
+//
+//     * Primary key attributes specified on an item in the
+// request do not match those in the corresponding table's primary key schema.
+//
+//
+// * You try to perform multiple operations on the same item in the same
+// BatchWriteItem request. For example, you cannot put and delete the same item in
+// the same BatchWriteItem request.
+//
+//     * Your request contains at least two items
+// with identical hash and range keys (which essentially is two put operations).
+//
+//
+// * There are more than 25 requests in the batch.
+//
+//     * Any individual item in a
+// batch exceeds 400 KB.
+//
+//     * The total request size exceeds 16 MB.
 func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput, optFns ...func(*Options)) (*BatchWriteItemOutput, error) {
 	if params == nil {
 		params = &BatchWriteItemInput{}

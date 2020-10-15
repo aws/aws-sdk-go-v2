@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Adds a new Authorizer () resource to an existing RestApi () resource. AWS CLI
+// Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html)
 func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerInput, optFns ...func(*Options)) (*CreateAuthorizerOutput, error) {
 	if params == nil {
@@ -28,7 +28,7 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 	return out, nil
 }
 
-// Request to add a new Authorizer () to an existing RestApi () resource.
+// Request to add a new Authorizer to an existing RestApi resource.
 type CreateAuthorizerInput struct {
 
 	// [Required] The name of the authorizer.
@@ -36,7 +36,7 @@ type CreateAuthorizerInput struct {
 	// This member is required.
 	Name *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

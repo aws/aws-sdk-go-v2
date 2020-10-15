@@ -13,7 +13,7 @@ import (
 
 // Creates an import instance task using metadata from the specified disk image.
 // ImportInstance only supports single-volume VMs. To import multi-volume VMs, use
-// ImportImage (). For more information, see Importing a Virtual Machine Using the
+// ImportImage. For more information, see Importing a Virtual Machine Using the
 // Amazon EC2 CLI
 // (https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html).
 // For information about the import manifest referenced by this API action, see VM

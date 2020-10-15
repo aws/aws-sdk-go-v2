@@ -117,11 +117,11 @@ type CreateImageBuilderInput struct {
 	// AssumeRole API operation and passes the ARN of the role to use. The operation
 	// creates a new session with temporary credentials. AppStream 2.0 retrieves the
 	// temporary credentials and creates the AppStream_Machine_Role credential profile
-	// on the instance.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using
-	// an IAM Role to Grant Permissions to Applications and Scripts Running on
-	// AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0
-	// Administration Guide</i>.</p>
+	// on the instance. For more information, see Using an IAM Role to Grant
+	// Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
+	// Instances
+	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	IamRoleArn *string
 
 	// The ARN of the public, private, or shared image to use.
@@ -132,12 +132,12 @@ type CreateImageBuilderInput struct {
 
 	// The tags to associate with the image builder. A tag is a key-value pair, and the
 	// value is optional. For example, Environment=Test. If you do not specify a value,
-	// Environment=.  <p>Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following special characters: </p> <p>_ . : / =
-	// + \ - @</p> <p>If you do not specify a value, the value is set to an empty
-	// string.</p> <p>For more information about tags, see <a
-	// href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging
-	// Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+	// Environment=. Generally allowed characters are: letters, numbers, and spaces
+	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
+	// If you do not specify a value, the value is set to an empty string. For more
+	// information about tags, see Tagging Your Resources
+	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
+	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]*string
 
 	// The VPC configuration for the image builder. You can specify only one subnet.

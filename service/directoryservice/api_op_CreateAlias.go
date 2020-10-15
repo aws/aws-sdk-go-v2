@@ -29,7 +29,7 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 	return out, nil
 }
 
-// Contains the inputs for the CreateAlias () operation.
+// Contains the inputs for the CreateAlias operation.
 type CreateAliasInput struct {
 
 	// The requested alias. The alias must be unique amongst all aliases in AWS. This
@@ -45,7 +45,7 @@ type CreateAliasInput struct {
 	DirectoryId *string
 }
 
-// Contains the results of the CreateAlias () operation.
+// Contains the results of the CreateAlias operation.
 type CreateAliasOutput struct {
 
 	// The alias for the directory.

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates a new RestApi () resource.
+// Creates a new RestApi resource.
 func (c *Client) CreateRestApi(ctx context.Context, params *CreateRestApiInput, optFns ...func(*Options)) (*CreateRestApiOutput, error) {
 	if params == nil {
 		params = &CreateRestApiInput{}
@@ -28,10 +28,10 @@ func (c *Client) CreateRestApi(ctx context.Context, params *CreateRestApiInput, 
 	return out, nil
 }
 
-// The POST Request to add a new RestApi () resource to your collection.
+// The POST Request to add a new RestApi resource to your collection.
 type CreateRestApiInput struct {
 
-	// [Required] The name of the RestApi ().
+	// [Required] The name of the RestApi.
 	//
 	// This member is required.
 	Name *string
@@ -46,17 +46,17 @@ type CreateRestApiInput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the RestApi
+	// supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []*string
 
-	// The ID of the RestApi () that you want to clone from.
+	// The ID of the RestApi that you want to clone from.
 	CloneFrom *string
 
-	// The description of the RestApi ().
+	// The description of the RestApi.
 	Description *string
 
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
 
@@ -68,7 +68,7 @@ type CreateRestApiInput struct {
 	MinimumCompressionSize *int32
 
 	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
+	// the caller and Method configuration.
 	Policy *string
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
@@ -100,8 +100,8 @@ type CreateRestApiOutput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
+	// The list of binary media types supported by the RestApi. By default, the RestApi
+	// supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
@@ -110,7 +110,7 @@ type CreateRestApiOutput struct {
 	// The API's description.
 	Description *string
 
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
 
@@ -129,7 +129,7 @@ type CreateRestApiOutput struct {
 	Name *string
 
 	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
+	// the caller and Method configuration.
 	Policy *string
 
 	// The collection of tags. Each tag element is associated with a given resource.

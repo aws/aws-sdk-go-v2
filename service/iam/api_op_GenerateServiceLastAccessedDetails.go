@@ -30,16 +30,16 @@ import (
 // a JobId. Use this parameter in the following operations to retrieve the
 // following details from your report:
 //
-//     * GetServiceLastAccessedDetails () –
-// Use this operation for users, groups, roles, or policies to list every AWS
-// service that the resource could access using permissions policies. For each
-// service, the response includes information about the most recent access attempt.
-// The JobId returned by GenerateServiceLastAccessedDetail must be used by the same
-// role within a session, or by the same user when used to call
+//     * GetServiceLastAccessedDetails – Use
+// this operation for users, groups, roles, or policies to list every AWS service
+// that the resource could access using permissions policies. For each service, the
+// response includes information about the most recent access attempt. The JobId
+// returned by GenerateServiceLastAccessedDetail must be used by the same role
+// within a session, or by the same user when used to call
 // GetServiceLastAccessedDetail.
 //
-//     * GetServiceLastAccessedDetailsWithEntities
-// () – Use this operation for groups and policies to list information about the
+//     * GetServiceLastAccessedDetailsWithEntities –
+// Use this operation for groups and policies to list information about the
 // associated entities (users or roles) that attempted to access a specific AWS
 // service.
 //
@@ -47,8 +47,8 @@ import (
 // use the JobId parameter in the same operations and test the JobStatus response
 // parameter. For additional information about the permissions policies that allow
 // an identity (user, group, or role) to access specific services, use the
-// ListPoliciesGrantingServiceAccess () operation. Service last accessed data does
-// not use other policy types when determining whether a resource could access a
+// ListPoliciesGrantingServiceAccess operation. Service last accessed data does not
+// use other policy types when determining whether a resource could access a
 // service. These other policy types include resource-based policies, access
 // control lists, AWS Organizations policies, IAM permissions boundaries, and AWS
 // STS assume role policies. It only applies permissions policy logic. For more
@@ -93,8 +93,8 @@ type GenerateServiceLastAccessedDetailsInput struct {
 
 type GenerateServiceLastAccessedDetailsOutput struct {
 
-	// The JobId that you can use in the GetServiceLastAccessedDetails () or
-	// GetServiceLastAccessedDetailsWithEntities () operations. The JobId returned by
+	// The JobId that you can use in the GetServiceLastAccessedDetails or
+	// GetServiceLastAccessedDetailsWithEntities operations. The JobId returned by
 	// GenerateServiceLastAccessedDetail must be used by the same role within a
 	// session, or by the same user when used to call GetServiceLastAccessedDetail.
 	JobId *string

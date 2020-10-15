@@ -12,7 +12,7 @@ import (
 )
 
 // Get details of a parameter. Don't confuse this API action with the GetParameter
-// () API action.
+// API action.
 func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, optFns ...func(*Options)) (*GetParametersOutput, error) {
 	if params == nil {
 		params = &GetParametersInput{}

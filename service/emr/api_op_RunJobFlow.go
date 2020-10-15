@@ -14,26 +14,25 @@ import (
 // RunJobFlow creates and starts running a new cluster (job flow). The cluster runs
 // the steps specified. After the steps complete, the cluster stops and the HDFS
 // partition is lost. To prevent loss of data, configure the last step of the job
-// flow to store results in Amazon S3. If the JobFlowInstancesConfig
-// ()KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the cluster transitions
-// to the WAITING state rather than shutting down after the steps have completed.
-// <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a>
-// <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the
-// cluster and prevent it from being terminated by API call, user intervention, or
-// in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in
-// each job flow.</p> <p>If your cluster is long-running (such as a Hive data
-// warehouse) or complex, you may require more than 256 steps to process your data.
-// You can bypass the 256-step limitation in various ways, including using the SSH
-// shell to connect to the master node and submitting queries directly to the
-// software running on the master node, such as Hive and Hadoop. For more
-// information on how to do this, see <a
-// href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html">Add
-// More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management
-// Guide</i>.</p> <p>For long running clusters, we recommend that you periodically
-// store your results.</p> <note> <p>The instance fleets configuration is available
-// only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The
-// RunJobFlow request can contain InstanceFleets parameters or InstanceGroups
-// parameters, but not both.</p> </note>
+// flow to store results in Amazon S3. If the
+// JobFlowInstancesConfigKeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the
+// cluster transitions to the WAITING state rather than shutting down after the
+// steps have completed. For additional protection, you can set the
+// JobFlowInstancesConfigTerminationProtected parameter to TRUE to lock the cluster
+// and prevent it from being terminated by API call, user intervention, or in the
+// event of a job flow error. A maximum of 256 steps are allowed in each job flow.
+// If your cluster is long-running (such as a Hive data warehouse) or complex, you
+// may require more than 256 steps to process your data. You can bypass the
+// 256-step limitation in various ways, including using the SSH shell to connect to
+// the master node and submitting queries directly to the software running on the
+// master node, such as Hive and Hadoop. For more information on how to do this,
+// see Add More than 256 Steps to a Cluster
+// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html)
+// in the Amazon EMR Management Guide. For long running clusters, we recommend that
+// you periodically store your results. The instance fleets configuration is
+// available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
+// The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups
+// parameters, but not both.
 func (c *Client) RunJobFlow(ctx context.Context, params *RunJobFlowInput, optFns ...func(*Options)) (*RunJobFlowOutput, error) {
 	if params == nil {
 		params = &RunJobFlowInput{}
@@ -49,7 +48,7 @@ func (c *Client) RunJobFlow(ctx context.Context, params *RunJobFlowInput, optFns
 	return out, nil
 }
 
-// Input to the RunJobFlow () operation.
+// Input to the RunJobFlow operation.
 type RunJobFlowInput struct {
 
 	// A specification of the number and type of Amazon EC2 instances.
@@ -235,7 +234,7 @@ type RunJobFlowInput struct {
 	VisibleToAllUsers *bool
 }
 
-// The result of the RunJobFlow () operation.
+// The result of the RunJobFlow operation.
 type RunJobFlowOutput struct {
 
 	// The Amazon Resource Name of the cluster.

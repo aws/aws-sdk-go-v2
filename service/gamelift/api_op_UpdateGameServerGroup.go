@@ -27,22 +27,21 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-asgroups.html)
 // Related operations
 //
-//     * CreateGameServerGroup ()
+//     * CreateGameServerGroup
 //
 //     * ListGameServerGroups
-// ()
 //
-//     * DescribeGameServerGroup ()
 //
-//     * UpdateGameServerGroup ()
+// * DescribeGameServerGroup
 //
-//     *
-// DeleteGameServerGroup ()
-//
-//     * ResumeGameServerGroup ()
+//     * UpdateGameServerGroup
 //
 //     *
-// SuspendGameServerGroup ()
+// DeleteGameServerGroup
+//
+//     * ResumeGameServerGroup
+//
+//     * SuspendGameServerGroup
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}
@@ -61,7 +60,7 @@ func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameSe
 type UpdateGameServerGroupInput struct {
 
 	// The unique identifier of the game server group to update. Use either the
-	// GameServerGroup () name or ARN value.
+	// GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

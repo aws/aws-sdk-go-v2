@@ -13,7 +13,7 @@ import (
 )
 
 // Completes a multipart upload by assembling previously uploaded parts. You first
-// initiate the multipart upload and then upload all parts using the UploadPart ()
+// initiate the multipart upload and then upload all parts using the UploadPart
 // operation. After successfully uploading all relevant parts of an upload, you
 // call this operation to complete the upload. Upon receiving this request, Amazon
 // S3 concatenates all the parts in ascending order by part number to create a new
@@ -35,27 +35,58 @@ import (
 // Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html).
 // For information about permissions required to use the multipart upload API, see
 // Multipart Upload API and Permissions
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).  <p>
-// <code>GetBucketLifecycle</code> has the following special errors:</p> <ul> <li>
-// <p>Error code: <code>EntityTooSmall</code> </p> <ul> <li> <p>Description: Your
-// proposed upload is smaller than the minimum allowed object size. Each part must
-// be at least 5 MB in size, except the last part.</p> </li> <li> <p>400 Bad
-// Request</p> </li> </ul> </li> <li> <p>Error code: <code>InvalidPart</code> </p>
-// <ul> <li> <p>Description: One or more of the specified parts could not be found.
-// The part might not have been uploaded, or the specified entity tag might not
-// have matched the part's entity tag.</p> </li> <li> <p>400 Bad Request</p> </li>
-// </ul> </li> <li> <p>Error code: <code>InvalidPartOrder</code> </p> <ul> <li>
-// <p>Description: The list of parts was not in ascending order. The parts list
-// must be specified in order by part number.</p> </li> <li> <p>400 Bad Request</p>
-// </li> </ul> </li> <li> <p>Error code: <code>NoSuchUpload</code> </p> <ul> <li>
-// <p>Description: The specified multipart upload does not exist. The upload ID
-// might be invalid, or the multipart upload might have been aborted or
-// completed.</p> </li> <li> <p>404 Not Found</p> </li> </ul> </li> </ul> <p>The
-// following operations are related to <code>CompleteMultipartUpload</code>:</p>
-// <ul> <li> <p> <a>CreateMultipartUpload</a> </p> </li> <li> <p> <a>UploadPart</a>
-// </p> </li> <li> <p> <a>AbortMultipartUpload</a> </p> </li> <li> <p>
-// <a>ListParts</a> </p> </li> <li> <p> <a>ListMultipartUploads</a> </p> </li>
-// </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
+// GetBucketLifecycle has the following special errors:
+//
+//     * Error code:
+// EntityTooSmall
+//
+//         * Description: Your proposed upload is smaller than the
+// minimum allowed object size. Each part must be at least 5 MB in size, except the
+// last part.
+//
+//         * 400 Bad Request
+//
+//     * Error code: InvalidPart
+//
+//         *
+// Description: One or more of the specified parts could not be found. The part
+// might not have been uploaded, or the specified entity tag might not have matched
+// the part's entity tag.
+//
+//         * 400 Bad Request
+//
+//     * Error code:
+// InvalidPartOrder
+//
+//         * Description: The list of parts was not in ascending
+// order. The parts list must be specified in order by part number.
+//
+//         * 400
+// Bad Request
+//
+//     * Error code: NoSuchUpload
+//
+//         * Description: The
+// specified multipart upload does not exist. The upload ID might be invalid, or
+// the multipart upload might have been aborted or completed.
+//
+//         * 404 Not
+// Found
+//
+// The following operations are related to CompleteMultipartUpload:
+//
+//     *
+// CreateMultipartUpload
+//
+//     * UploadPart
+//
+//     * AbortMultipartUpload
+//
+//     *
+// ListParts
+//
+//     * ListMultipartUploads
 func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMultipartUploadInput, optFns ...func(*Options)) (*CompleteMultipartUploadOutput, error) {
 	if params == nil {
 		params = &CompleteMultipartUploadInput{}

@@ -13,7 +13,7 @@ import (
 
 // Inspects the text of a batch of documents for the syntax and part of speech of
 // the words in the document and returns information about them. For more
-// information, see how-syntax ().
+// information, see how-syntax.
 func (c *Client) BatchDetectSyntax(ctx context.Context, params *BatchDetectSyntaxInput, optFns ...func(*Options)) (*BatchDetectSyntaxOutput, error) {
 	if params == nil {
 		params = &BatchDetectSyntaxInput{}

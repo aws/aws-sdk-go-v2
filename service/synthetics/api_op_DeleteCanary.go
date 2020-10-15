@@ -33,10 +33,10 @@ import (
 // log groups created for the canary. These logs groups have the name
 // /aws/lambda/cwsyn-MyCanaryName .
 //
-//     <p>Before you delete a canary, you might
-// want to use <code>GetCanary</code> to display the information about this canary.
-// Make note of the information returned by this operation so that you can delete
-// these resources after you delete the canary.</p>
+// Before you delete a canary, you might want to
+// use GetCanary to display the information about this canary. Make note of the
+// information returned by this operation so that you can delete these resources
+// after you delete the canary.
 func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, optFns ...func(*Options)) (*DeleteCanaryOutput, error) {
 	if params == nil {
 		params = &DeleteCanaryInput{}

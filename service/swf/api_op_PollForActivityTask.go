@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Used by workers to get an ActivityTask () from the specified activity taskList.
+// Used by workers to get an ActivityTask from the specified activity taskList.
 // This initiates a long poll, where the service holds the HTTP connection open and
 // responds as soon as a task becomes available. The maximum time the service holds
 // on to the request before responding is 60 seconds. If no task is available
@@ -63,11 +63,10 @@ type PollForActivityTaskInput struct {
 	// This member is required.
 	Domain *string
 
-	// Specifies the task list to poll for activity tasks.  <p>The specified string
-	// must not start or end with whitespace. It must not contain a <code>:</code>
-	// (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control
-	// characters (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it
-	// must not <i>be</i> the literal string <code>arn</code>.</p>
+	// Specifies the task list to poll for activity tasks. The specified string must
+	// not start or end with whitespace. It must not contain a : (colon), / (slash), |
+	// (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also,
+	// it must not be the literal string arn.
 	//
 	// This member is required.
 	TaskList *types.TaskList

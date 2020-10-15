@@ -36,7 +36,7 @@ func (c *Client) ListAvailableZones(ctx context.Context, params *ListAvailableZo
 	return out, nil
 }
 
-// Contains the inputs for the ListAvailableZones () action.
+// Contains the inputs for the ListAvailableZones action.
 type ListAvailableZonesInput struct {
 }
 

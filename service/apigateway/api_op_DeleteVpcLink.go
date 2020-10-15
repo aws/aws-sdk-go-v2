@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an existing VpcLink () of a specified identifier.
+// Deletes an existing VpcLink of a specified identifier.
 func (c *Client) DeleteVpcLink(ctx context.Context, params *DeleteVpcLinkInput, optFns ...func(*Options)) (*DeleteVpcLinkOutput, error) {
 	if params == nil {
 		params = &DeleteVpcLinkInput{}
@@ -26,11 +26,11 @@ func (c *Client) DeleteVpcLink(ctx context.Context, params *DeleteVpcLinkInput, 
 	return out, nil
 }
 
-// Deletes an existing VpcLink () of a specified identifier.
+// Deletes an existing VpcLink of a specified identifier.
 type DeleteVpcLinkInput struct {
 
-	// [Required] The identifier of the VpcLink (). It is used in an Integration () to
-	// reference this VpcLink ().
+	// [Required] The identifier of the VpcLink. It is used in an Integration to
+	// reference this VpcLink.
 	//
 	// This member is required.
 	VpcLinkId *string

@@ -12,8 +12,8 @@ import (
 
 // Assigns the DELETED status to an MLModel, rendering it unusable. After using the
 // DeleteMLModel operation, you can use the GetMLModel operation to verify that the
-// status of the MLModel changed to DELETED.  <p> <b>Caution:</b> The result of the
-// <code>DeleteMLModel</code> operation is irreversible.</p>
+// status of the MLModel changed to DELETED. Caution: The result of the
+// DeleteMLModel operation is irreversible.
 func (c *Client) DeleteMLModel(ctx context.Context, params *DeleteMLModelInput, optFns ...func(*Options)) (*DeleteMLModelOutput, error) {
 	if params == nil {
 		params = &DeleteMLModelInput{}

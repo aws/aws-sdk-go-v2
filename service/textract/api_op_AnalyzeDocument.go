@@ -15,7 +15,7 @@ import (
 // of information returned are as follows:
 //
 //     * Form data (key-value pairs). The
-// related information is returned in two Block () objects, each of type
+// related information is returned in two Block objects, each of type
 // KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name:
 // Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva
 // Carolina is the value.
@@ -29,17 +29,15 @@ import (
 // in the document are returned (including text that doesn't have a relationship
 // with the value of FeatureTypes).
 //
-//     <p>Selection elements such as check boxes
-// and option buttons (radio buttons) can be detected in form data and in tables. A
-// SELECTION_ELEMENT <code>Block</code> object contains information about a
-// selection element, including the selection status.</p> <p>You can choose which
-// type of analysis to perform by specifying the <code>FeatureTypes</code> list.
-// </p> <p>The output is returned in a list of <code>Block</code> objects.</p> <p>
-// <code>AnalyzeDocument</code> is a synchronous operation. To analyze documents
-// asynchronously, use <a>StartDocumentAnalysis</a>.</p> <p>For more information,
-// see <a
-// href="https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html">Document
-// Text Analysis</a>.</p>
+// Selection elements such as check boxes and
+// option buttons (radio buttons) can be detected in form data and in tables. A
+// SELECTION_ELEMENT Block object contains information about a selection element,
+// including the selection status. You can choose which type of analysis to perform
+// by specifying the FeatureTypes list. The output is returned in a list of Block
+// objects. AnalyzeDocument is a synchronous operation. To analyze documents
+// asynchronously, use StartDocumentAnalysis. For more information, see Document
+// Text Analysis
+// (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html).
 func (c *Client) AnalyzeDocument(ctx context.Context, params *AnalyzeDocumentInput, optFns ...func(*Options)) (*AnalyzeDocumentOutput, error) {
 	if params == nil {
 		params = &AnalyzeDocumentInput{}

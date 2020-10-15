@@ -11,17 +11,15 @@ import (
 )
 
 // Starts the active learning workflow for your machine learning transform to
-// improve the transform's quality by generating label sets and adding labels.
-// <p>When the <code>StartMLLabelingSetGenerationTaskRun</code> finishes, AWS Glue
-// will have generated a "labeling set" or a set of questions for humans to
-// answer.</p> <p>In the case of the <code>FindMatches</code> transform, these
-// questions are of the form, “What is the correct way to group these rows together
-// into groups composed entirely of matching records?” </p> <p>After the labeling
-// process is finished, you can upload your labels with a call to
-// <code>StartImportLabelsTaskRun</code>. After
-// <code>StartImportLabelsTaskRun</code> finishes, all future runs of the machine
-// learning transform will use the new and improved labels and perform a
-// higher-quality transformation.</p>
+// improve the transform's quality by generating label sets and adding labels. When
+// the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue will have generated a
+// "labeling set" or a set of questions for humans to answer. In the case of the
+// FindMatches transform, these questions are of the form, “What is the correct way
+// to group these rows together into groups composed entirely of matching records?”
+// After the labeling process is finished, you can upload your labels with a call
+// to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future
+// runs of the machine learning transform will use the new and improved labels and
+// perform a higher-quality transformation.
 func (c *Client) StartMLLabelingSetGenerationTaskRun(ctx context.Context, params *StartMLLabelingSetGenerationTaskRunInput, optFns ...func(*Options)) (*StartMLLabelingSetGenerationTaskRunOutput, error) {
 	if params == nil {
 		params = &StartMLLabelingSetGenerationTaskRunInput{}

@@ -14,24 +14,32 @@ import (
 
 // Lists the parts that have been uploaded for a specific multipart upload. This
 // operation must include the upload ID, which you obtain by sending the initiate
-// multipart upload request (see CreateMultipartUpload ()). This request returns a
+// multipart upload request (see CreateMultipartUpload). This request returns a
 // maximum of 1,000 uploaded parts. The default number of parts returned is 1,000
 // parts. You can restrict the number of parts returned by specifying the max-parts
 // request parameter. If your multipart upload consists of more than 1,000 parts,
 // the response returns an IsTruncated field with the value of true, and a
 // NextPartNumberMarker element. In subsequent ListParts requests you can include
 // the part-number-marker query string parameter and set its value to the
-// NextPartNumberMarker field value from the previous response.  <p>For more
-// information on multipart uploads, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html">Uploading
-// Objects Using Multipart Upload</a>.</p> <p>For information on permissions
-// required to use the multipart upload API, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html">Multipart
-// Upload API and Permissions</a>.</p> <p>The following operations are related to
-// <code>ListParts</code>:</p> <ul> <li> <p> <a>CreateMultipartUpload</a> </p>
-// </li> <li> <p> <a>UploadPart</a> </p> </li> <li> <p>
-// <a>CompleteMultipartUpload</a> </p> </li> <li> <p> <a>AbortMultipartUpload</a>
-// </p> </li> <li> <p> <a>ListMultipartUploads</a> </p> </li> </ul>
+// NextPartNumberMarker field value from the previous response. For more
+// information on multipart uploads, see Uploading Objects Using Multipart Upload
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html). For
+// information on permissions required to use the multipart upload API, see
+// Multipart Upload API and Permissions
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
+// following operations are related to ListParts:
+//
+//     * CreateMultipartUpload
+//
+//
+// * UploadPart
+//
+//     * CompleteMultipartUpload
+//
+//     * AbortMultipartUpload
+//
+//     *
+// ListMultipartUploads
 func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns ...func(*Options)) (*ListPartsOutput, error) {
 	if params == nil {
 		params = &ListPartsInput{}
@@ -97,9 +105,8 @@ type ListPartsOutput struct {
 	// information, see Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
 	// Policy
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config).
-	// <p>The response will also include the <code>x-amz-abort-rule-id</code> header
-	// that will provide the ID of the lifecycle configuration rule that defines this
-	// action.</p>
+	// The response will also include the x-amz-abort-rule-id header that will provide
+	// the ID of the lifecycle configuration rule that defines this action.
 	AbortDate *time.Time
 
 	// This header is returned along with the x-amz-abort-date header. It identifies

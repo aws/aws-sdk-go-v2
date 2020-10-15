@@ -55,7 +55,7 @@ type DescribeEngineDefaultClusterParametersInput struct {
 type DescribeEngineDefaultClusterParametersOutput struct {
 
 	// Contains the result of a successful invocation of the
-	// DescribeEngineDefaultParameters () action.
+	// DescribeEngineDefaultParameters action.
 	EngineDefaults *types.EngineDefaults
 
 	// Metadata pertaining to the operation's result.

@@ -33,7 +33,7 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains () operation. Specifies the
+// Container for the parameters to the DescribeDomains operation. Specifies the
 // name of the domain you want to describe. To restrict the response to particular
 // expressions, specify the names of the expressions you want to describe. To show
 // the active configuration and exclude any pending changes, set the Deployed
@@ -49,7 +49,7 @@ type DescribeExpressionsInput struct {
 	// changes (false). Defaults to false.
 	Deployed *bool
 
-	// Limits the DescribeExpressions () response to the specified expressions. If not
+	// Limits the DescribeExpressions response to the specified expressions. If not
 	// specified, all expressions are shown.
 	ExpressionNames []*string
 }

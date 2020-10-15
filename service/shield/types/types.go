@@ -15,7 +15,7 @@ type AttackDetail struct {
 	// The unique identifier (ID) of the attack.
 	AttackId *string
 
-	// The array of AttackProperty () objects.
+	// The array of AttackProperty objects.
 	AttackProperties []*AttackProperty
 
 	// The time the attack ended, in Unix time in seconds. For more information see
@@ -52,8 +52,8 @@ type AttackProperty struct {
 	// for WordPress reflective pingback DDoS attacks.
 	AttackPropertyIdentifier AttackPropertyIdentifier
 
-	// The array of Contributor () objects that includes the top five contributors to
-	// an attack.
+	// The array of Contributor objects that includes the top five contributors to an
+	// attack.
 	TopContributors []*Contributor
 
 	// The total contributions made to this attack by all contributors, not just the
@@ -145,8 +145,8 @@ type Contributor struct {
 	// be United States.
 	Name *string
 
-	// The contribution of this contributor expressed in Protection () units. For
-	// example 10,000.
+	// The contribution of this contributor expressed in Protection units. For example
+	// 10,000.
 	Value *int64
 }
 

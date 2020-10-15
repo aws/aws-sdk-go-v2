@@ -12,7 +12,7 @@ import (
 
 // Lists the names of the inline policies embedded in the specified IAM user. An
 // IAM user can also have managed policies attached to it. To list the managed
-// policies that are attached to a user, use ListAttachedUserPolicies (). For more
+// policies that are attached to a user, use ListAttachedUserPolicies. For more
 // information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. You can paginate the results using the MaxItems and
@@ -59,7 +59,7 @@ type ListUserPoliciesInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListUserPolicies () request.
+// Contains the response to a successful ListUserPolicies request.
 type ListUserPoliciesOutput struct {
 
 	// A list of policy names.

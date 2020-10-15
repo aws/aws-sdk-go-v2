@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns a list of forecasts created using the CreateForecast () operation. For
-// each forecast, this operation returns a summary of its properties, including its
+// Returns a list of forecasts created using the CreateForecast operation. For each
+// forecast, this operation returns a summary of its properties, including its
 // Amazon Resource Name (ARN). To retrieve the complete set of properties, specify
-// the ARN with the DescribeForecast () operation. You can filter the list using an
-// array of Filter () objects.
+// the ARN with the DescribeForecast operation. You can filter the list using an
+// array of Filter objects.
 func (c *Client) ListForecasts(ctx context.Context, params *ListForecastsInput, optFns ...func(*Options)) (*ListForecastsOutput, error) {
 	if params == nil {
 		params = &ListForecastsInput{}

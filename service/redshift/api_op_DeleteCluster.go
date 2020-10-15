@@ -13,7 +13,7 @@ import (
 
 // Deletes a previously provisioned cluster without its final snapshot being
 // created. A successful response from the web service indicates that the request
-// was received correctly. Use DescribeClusters () to monitor the status of the
+// was received correctly. Use DescribeClusters to monitor the status of the
 // deletion. The delete operation cannot be canceled or reverted once submitted.
 // For more information about managing clusters, go to Amazon Redshift Clusters
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html) in

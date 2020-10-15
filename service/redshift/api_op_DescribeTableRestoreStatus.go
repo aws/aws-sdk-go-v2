@@ -12,8 +12,8 @@ import (
 )
 
 // Lists the status of one or more table restore requests made using the
-// RestoreTableFromClusterSnapshot () API action. If you don't specify a value for
-// the TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the
+// RestoreTableFromClusterSnapshot API action. If you don't specify a value for the
+// TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the
 // status of all table restore requests ordered by the date and time of the request
 // in ascending order. Otherwise DescribeTableRestoreStatus returns the status of
 // the table specified by TableRestoreRequestId.
@@ -58,7 +58,7 @@ type DescribeTableRestoreStatusInput struct {
 type DescribeTableRestoreStatusOutput struct {
 
 	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus
-	// () request.
+	// request.
 	Marker *string
 
 	// A list of status details for one or more table restore requests.

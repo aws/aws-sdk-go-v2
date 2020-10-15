@@ -30,7 +30,7 @@ func (c *Client) DeleteAnalysisScheme(ctx context.Context, params *DeleteAnalysi
 	return out, nil
 }
 
-// Container for the parameters to the DeleteAnalysisScheme () operation. Specifies
+// Container for the parameters to the DeleteAnalysisScheme operation. Specifies
 // the name of the domain you want to update and the analysis scheme you want to
 // delete.
 type DeleteAnalysisSchemeInput struct {

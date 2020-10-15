@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a RequestValidator () of a given RestApi ().
+// Deletes a RequestValidator of a given RestApi.
 func (c *Client) DeleteRequestValidator(ctx context.Context, params *DeleteRequestValidatorInput, optFns ...func(*Options)) (*DeleteRequestValidatorOutput, error) {
 	if params == nil {
 		params = &DeleteRequestValidatorInput{}
@@ -26,15 +26,15 @@ func (c *Client) DeleteRequestValidator(ctx context.Context, params *DeleteReque
 	return out, nil
 }
 
-// Deletes a specified RequestValidator () of a given RestApi ().
+// Deletes a specified RequestValidator of a given RestApi.
 type DeleteRequestValidatorInput struct {
 
-	// [Required] The identifier of the RequestValidator () to be deleted.
+	// [Required] The identifier of the RequestValidator to be deleted.
 	//
 	// This member is required.
 	RequestValidatorId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

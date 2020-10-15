@@ -2214,15 +2214,13 @@ type LambdaFunctionAssociation struct {
 }
 
 // A complex type that specifies a list of Lambda functions associations for a
-// cache behavior.  <p>If you want to invoke one or more Lambda functions triggered
-// by requests that match the <code>PathPattern</code> of the cache behavior,
-// specify the applicable values for <code>Quantity</code> and <code>Items</code>.
-// Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in
-// this list (one for each possible value of <code>EventType</code>) and each
-// <code>EventType</code> can be associated with the Lambda function only once.</p>
-// <p>If you don't want to invoke any Lambda functions for the requests that match
-// <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and
-// omit <code>Items</code>. </p>
+// cache behavior. If you want to invoke one or more Lambda functions triggered by
+// requests that match the PathPattern of the cache behavior, specify the
+// applicable values for Quantity and Items. Note that there can be up to 4
+// LambdaFunctionAssociation items in this list (one for each possible value of
+// EventType) and each EventType can be associated with the Lambda function only
+// once. If you don't want to invoke any Lambda functions for the requests that
+// match PathPattern, specify 0 for Quantity and omit Items.
 type LambdaFunctionAssociations struct {
 
 	// The number of Lambda function associations for this cache behavior.
@@ -3386,33 +3384,41 @@ type TrustedSigners struct {
 //         *
 // To accept HTTPS connections from only viewers that support SNI, set
 // SSLSupportMethod to sni-only. This is recommended. Most browsers and clients
-// support SNI.  </p> </li> <li> <p>To accept HTTPS connections from all viewers,
-// including those that don’t support SNI, set <code>SSLSupportMethod</code> to
-// <code>vip</code>. This is not recommended, and results in additional monthly
-// charges from CloudFront. </p> </li> </ul> </li> <li> <p>The minimum SSL/TLS
-// protocol version that the distribution can use to communicate with viewers. To
-// specify a minimum version, choose a value for
-// <code>MinimumProtocolVersion</code>. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValues-security-policy">Security
-// Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </li> <li>
-// <p>The location of the SSL/TLS certificate, <a
-// href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">AWS
-// Certificate Manager (ACM)</a> (recommended) or <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">AWS
-// Identity and Access Management (AWS IAM)</a>. You specify the location by
-// setting a value in one of the following fields (not both):</p> <ul> <li> <p>
-// <code>ACMCertificateArn</code> </p> </li> <li> <p> <code>IAMCertificateId</code>
-// </p> </li> </ul> </li> </ul> <p>All distributions support HTTPS connections from
-// viewers. To require viewers to use HTTPS only, or to redirect them from HTTP to
-// HTTPS, use <code>ViewerProtocolPolicy</code> in the <code>CacheBehavior</code>
-// or <code>DefaultCacheBehavior</code>. To specify how CloudFront should use
-// SSL/TLS to communicate with your custom origin, use
-// <code>CustomOriginConfig</code>.</p> <p>For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https.html">Using
-// HTTPS with CloudFront</a> and <a
-// href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-alternate-domain-names.html">
-// Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer
-// Guide</i>.</p>
+// support SNI.
+//
+//         * To accept HTTPS connections from all viewers, including
+// those that don’t support SNI, set SSLSupportMethod to vip. This is not
+// recommended, and results in additional monthly charges from CloudFront.
+//
+//     *
+// The minimum SSL/TLS protocol version that the distribution can use to
+// communicate with viewers. To specify a minimum version, choose a value for
+// MinimumProtocolVersion. For more information, see Security Policy
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValues-security-policy)
+// in the Amazon CloudFront Developer Guide.
+//
+//     * The location of the SSL/TLS
+// certificate, AWS Certificate Manager (ACM)
+// (https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html)
+// (recommended) or AWS Identity and Access Management (AWS IAM)
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html).
+// You specify the location by setting a value in one of the following fields (not
+// both):
+//
+//         * ACMCertificateArn
+//
+//         * IAMCertificateId
+//
+// All
+// distributions support HTTPS connections from viewers. To require viewers to use
+// HTTPS only, or to redirect them from HTTP to HTTPS, use ViewerProtocolPolicy in
+// the CacheBehavior or DefaultCacheBehavior. To specify how CloudFront should use
+// SSL/TLS to communicate with your custom origin, use CustomOriginConfig. For more
+// information, see Using HTTPS with CloudFront
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https.html)
+// and  Using Alternate Domain Names and HTTPS
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-alternate-domain-names.html)
+// in the Amazon CloudFront Developer Guide.
 type ViewerCertificate struct {
 
 	// If the distribution uses Aliases (alternate domain names or CNAMEs) and the
@@ -3427,15 +3433,21 @@ type ViewerCertificate struct {
 	// This field is deprecated. Use one of the following fields instead:
 	//
 	//     *
-	// ACMCertificateArn </p> </li> <li> <p> <code>IAMCertificateId</code> </p> </li>
-	// <li> <p> <code>CloudFrontDefaultCertificate</code> </p> </li> </ul>
+	// ACMCertificateArn
+	//
+	//     * IAMCertificateId
+	//
+	//     * CloudFrontDefaultCertificate
 	Certificate *string
 
 	// This field is deprecated. Use one of the following fields instead:
 	//
 	//     *
-	// ACMCertificateArn </p> </li> <li> <p> <code>IAMCertificateId</code> </p> </li>
-	// <li> <p> <code>CloudFrontDefaultCertificate</code> </p> </li> </ul>
+	// ACMCertificateArn
+	//
+	//     * IAMCertificateId
+	//
+	//     * CloudFrontDefaultCertificate
 	CertificateSource CertificateSource
 
 	// If the distribution uses the CloudFront domain name such as
@@ -3444,9 +3456,12 @@ type ViewerCertificate struct {
 	// values for the following fields:
 	//
 	//     * ACMCertificateArn or IAMCertificateId
-	// (specify a value for one, not both)  </li> <li> <p>
-	// <code>MinimumProtocolVersion</code> </p> </li> <li> <p>
-	// <code>SSLSupportMethod</code> </p> </li> </ul>
+	// (specify a value for one, not both)
+	//
+	//     * MinimumProtocolVersion
+	//
+	//     *
+	// SSLSupportMethod
 	CloudFrontDefaultCertificate *bool
 
 	// If the distribution uses Aliases (alternate domain names or CNAMEs) and the
@@ -3491,8 +3506,9 @@ type ViewerCertificate struct {
 	//     * vip – The
 	// distribution accepts HTTPS connections from all viewers including those that
 	// don’t support SNI. This is not recommended, and results in additional monthly
-	// charges from CloudFront.  </li> </ul> <p>If the distribution uses the CloudFront
-	// domain name such as <code>d111111abcdef8.cloudfront.net</code>, don’t set a
-	// value for this field.</p>
+	// charges from CloudFront.
+	//
+	// If the distribution uses the CloudFront domain name
+	// such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
 	SSLSupportMethod SSLSupportMethod
 }

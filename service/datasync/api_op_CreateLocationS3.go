@@ -16,9 +16,9 @@ import (
 // that has the required permissions. You can set up the required permissions by
 // creating an IAM policy that grants the required permissions and attaching the
 // policy to the role. An example of such a policy is shown in the examples
-// section.  <p>For more information, see
+// section. For more information, see
 // https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location
-// in the <i>AWS DataSync User Guide.</i> </p>
+// in the AWS DataSync User Guide.
 func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3Input, optFns ...func(*Options)) (*CreateLocationS3Output, error) {
 	if params == nil {
 		params = &CreateLocationS3Input{}
@@ -43,9 +43,9 @@ type CreateLocationS3Input struct {
 	S3BucketArn *string
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that is used to access an Amazon S3 bucket.  <p>For detailed information
-	// about using such a role, see Creating a Location for Amazon S3 in the <i>AWS
-	// DataSync User Guide</i>.</p>
+	// role that is used to access an Amazon S3 bucket. For detailed information about
+	// using such a role, see Creating a Location for Amazon S3 in the AWS DataSync
+	// User Guide.
 	//
 	// This member is required.
 	S3Config *types.S3Config
@@ -55,7 +55,7 @@ type CreateLocationS3Input struct {
 	// classes, see Amazon S3 Storage Classes
 	// (https://aws.amazon.com/s3/storage-classes/) in the Amazon Simple Storage
 	// Service Developer Guide. Some storage classes have behaviors that can affect
-	// your S3 storage cost. For detailed information, see using-storage-classes ().
+	// your S3 storage cost. For detailed information, see using-storage-classes.
 	S3StorageClass types.S3StorageClass
 
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used

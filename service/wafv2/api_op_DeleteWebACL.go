@@ -15,8 +15,8 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Deletes the specified WebACL (). You can only use this if
-// ManagedByFirewallManager is false in the specified WebACL ().
+// Deletes the specified WebACL. You can only use this if ManagedByFirewallManager
+// is false in the specified WebACL.
 func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, optFns ...func(*Options)) (*DeleteWebACLOutput, error) {
 	if params == nil {
 		params = &DeleteWebACLInput{}

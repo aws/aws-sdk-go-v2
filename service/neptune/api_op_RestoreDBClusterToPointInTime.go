@@ -18,7 +18,7 @@ import (
 // configuration as the original DB cluster, except that the new DB cluster is
 // created with the default DB security group. This action only restores the DB
 // cluster, not the DB instances for that DB cluster. You must invoke the
-// CreateDBInstance () action to create DB instances for the restored DB cluster,
+// CreateDBInstance action to create DB instances for the restored DB cluster,
 // specifying the identifier of the restored DB cluster in DBClusterIdentifier. You
 // can create DB instances only after the RestoreDBClusterToPointInTime action has
 // completed and the DB cluster is available.
@@ -159,7 +159,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 type RestoreDBClusterToPointInTimeOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters () action.
+	// a response element in the DescribeDBClusters action.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

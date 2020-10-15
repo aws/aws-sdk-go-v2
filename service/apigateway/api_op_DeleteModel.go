@@ -26,7 +26,7 @@ func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optF
 	return out, nil
 }
 
-// Request to delete an existing model in an existing RestApi () resource.
+// Request to delete an existing model in an existing RestApi resource.
 type DeleteModelInput struct {
 
 	// [Required] The name of the model to delete.
@@ -34,7 +34,7 @@ type DeleteModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

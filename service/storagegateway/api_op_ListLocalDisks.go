@@ -13,12 +13,12 @@ import (
 
 // Returns a list of the gateway's local disks. To specify which gateway to
 // describe, you use the Amazon Resource Name (ARN) of the gateway in the body of
-// the request.  <p>The request returns a list of all disks, specifying which are
+// the request. The request returns a list of all disks, specifying which are
 // configured as working storage, cache storage, or stored volume or not configured
-// at all. The response includes a <code>DiskStatus</code> field. This field can
-// have a value of present (the disk is available to use), missing (the disk is no
-// longer connected to the gateway), or mismatch (the disk node is occupied by a
-// disk that has incorrect metadata or the disk content is corrupted).</p>
+// at all. The response includes a DiskStatus field. This field can have a value of
+// present (the disk is available to use), missing (the disk is no longer connected
+// to the gateway), or mismatch (the disk node is occupied by a disk that has
+// incorrect metadata or the disk content is corrupted).
 func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput, optFns ...func(*Options)) (*ListLocalDisksOutput, error) {
 	if params == nil {
 		params = &ListLocalDisksInput{}
@@ -37,8 +37,8 @@ func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type ListLocalDisksInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -46,12 +46,13 @@ type ListLocalDisksInput struct {
 
 type ListLocalDisksOutput struct {
 
-	// A JSON object containing the following fields:  <ul> <li> <p>
-	// <a>ListLocalDisksOutput$Disks</a> </p> </li> </ul>
+	// A JSON object containing the following fields:
+	//
+	//     * ListLocalDisksOutput$Disks
 	Disks []*types.Disk
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

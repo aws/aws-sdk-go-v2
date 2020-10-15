@@ -17,8 +17,8 @@ import (
 // can use the decode method of the java.net.URLDecoder utility class in the Java
 // SDK. Other languages and SDKs provide similar functionality. An IAM user can
 // also have managed policies attached to it. To retrieve a managed policy document
-// that is attached to a user, use GetPolicy () to determine the policy's default
-// version. Then use GetPolicyVersion () to retrieve the policy document. For more
+// that is attached to a user, use GetPolicy to determine the policy's default
+// version. Then use GetPolicyVersion to retrieve the policy document. For more
 // information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
@@ -56,7 +56,7 @@ type GetUserPolicyInput struct {
 	UserName *string
 }
 
-// Contains the response to a successful GetUserPolicy () request.
+// Contains the response to a successful GetUserPolicy request.
 type GetUserPolicyOutput struct {
 
 	// The policy document. IAM stores policies in JSON format. However, resources that

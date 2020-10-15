@@ -118,10 +118,8 @@ type PutCompositeAlarmInput struct {
 	ActionsEnabled *bool
 
 	// The actions to execute when this alarm transitions to the ALARM state from any
-	// other state. Each action is specified as an Amazon Resource Name (ARN).
-	// <p>Valid Values:
-	// <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code>
-	// </p>
+	// other state. Each action is specified as an Amazon Resource Name (ARN). Valid
+	// Values: arn:aws:sns:region:account-id:sns-topic-name
 	AlarmActions []*string
 
 	// The description for the composite alarm.
@@ -129,15 +127,12 @@ type PutCompositeAlarmInput struct {
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
-	// (ARN).  <p>Valid Values:
-	// <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code>
-	// </p>
+	// (ARN). Valid Values: arn:aws:sns:region:account-id:sns-topic-name
 	InsufficientDataActions []*string
 
 	// The actions to execute when this alarm transitions to an OK state from any other
-	// state. Each action is specified as an Amazon Resource Name (ARN).  <p>Valid
-	// Values: <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
-	// </code> </p>
+	// state. Each action is specified as an Amazon Resource Name (ARN). Valid Values:
+	// arn:aws:sns:region:account-id:sns-topic-name
 	OKActions []*string
 
 	// A list of key-value pairs to associate with the composite alarm. You can

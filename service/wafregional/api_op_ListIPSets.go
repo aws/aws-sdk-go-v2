@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of IPSetSummary () objects in the response.
+// global use. Returns an array of IPSetSummary objects in the response.
 func (c *Client) ListIPSets(ctx context.Context, params *ListIPSetsInput, optFns ...func(*Options)) (*ListIPSetsOutput, error) {
 	if params == nil {
 		params = &ListIPSetsInput{}
@@ -50,7 +50,7 @@ type ListIPSetsInput struct {
 
 type ListIPSetsOutput struct {
 
-	// An array of IPSetSummary () objects.
+	// An array of IPSetSummary objects.
 	IPSets []*types.IPSetSummary
 
 	// To list more IPSet objects, submit another ListIPSets request, and in the next

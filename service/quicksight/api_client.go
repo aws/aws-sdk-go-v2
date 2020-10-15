@@ -19,11 +19,7 @@ import (
 const ServiceID = "QuickSight"
 const ServiceAPIVersion = "2018-04-01"
 
-// Amazon QuickSight API Reference Amazon QuickSight is a fully managed, serverless
-// business intelligence service for the AWS Cloud that makes it easy to extend
-// data and insights to every user in your organization. This API reference
-// contains documentation for a programming interface that you can use to manage
-// Amazon QuickSight.
+// Client provides the API client to make operations call for Amazon QuickSight.
 type Client struct {
 	options Options
 }

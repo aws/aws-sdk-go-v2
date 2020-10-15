@@ -19,7 +19,7 @@ import (
 // Availability Zone redundancy. If you specified a VPC when you created the Client
 // VPN endpoint or if you have previous subnet associations, the specified subnet
 // must be in the same VPC. To specify a subnet that's in a different VPC, you must
-// first modify the Client VPN endpoint (ModifyClientVpnEndpoint ()) and change the
+// first modify the Client VPN endpoint (ModifyClientVpnEndpoint) and change the
 // VPC that's associated with it.
 func (c *Client) AssociateClientVpnTargetNetwork(ctx context.Context, params *AssociateClientVpnTargetNetworkInput, optFns ...func(*Options)) (*AssociateClientVpnTargetNetworkOutput, error) {
 	if params == nil {

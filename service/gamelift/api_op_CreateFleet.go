@@ -20,29 +20,51 @@ import (
 // EC2 instance type and fleet type (spot or on-demand), (3) the build ID for your
 // game build or script ID if using Realtime Servers, and (4) a runtime
 // configuration, which determines how game servers will run on each instance in
-// the fleet.  <p>If the <code>CreateFleet</code> call is successful, Amazon
-// GameLift performs the following tasks. You can track the process of a fleet by
-// checking the fleet status or by monitoring fleet creation events:</p> <ul> <li>
-// <p>Creates a fleet resource. Status: <code>NEW</code>.</p> </li> <li> <p>Begins
-// writing events to the fleet event log, which can be accessed in the Amazon
-// GameLift console.</p> </li> <li> <p>Sets the fleet's target capacity to 1
-// (desired instances), which triggers Amazon GameLift to start one new EC2
-// instance.</p> </li> <li> <p>Downloads the game build or Realtime script to the
-// new instance and installs it. Statuses: <code>DOWNLOADING</code>,
-// <code>VALIDATING</code>, <code>BUILDING</code>. </p> </li> <li> <p>Starts
+// the fleet. If the CreateFleet call is successful, Amazon GameLift performs the
+// following tasks. You can track the process of a fleet by checking the fleet
+// status or by monitoring fleet creation events:
+//
+//     * Creates a fleet resource.
+// Status: NEW.
+//
+//     * Begins writing events to the fleet event log, which can be
+// accessed in the Amazon GameLift console.
+//
+//     * Sets the fleet's target capacity
+// to 1 (desired instances), which triggers Amazon GameLift to start one new EC2
+// instance.
+//
+//     * Downloads the game build or Realtime script to the new instance
+// and installs it. Statuses: DOWNLOADING, VALIDATING, BUILDING.
+//
+//     * Starts
 // launching server processes on the instance. If the fleet is configured to run
 // multiple server processes per instance, Amazon GameLift staggers each process
-// launch by a few seconds. Status: <code>ACTIVATING</code>.</p> </li> <li> <p>Sets
-// the fleet's status to <code>ACTIVE</code> as soon as one server process is ready
-// to host a game session.</p> </li> </ul> <p> <b>Learn more</b> </p> <p> <a
-// href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html">Setting
-// Up Fleets</a> </p> <p> <a
-// href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation">Debug
-// Fleet Creation Issues</a> </p> <p> <b>Related operations</b> </p> <ul> <li> <p>
-// <a>CreateFleet</a> </p> </li> <li> <p> <a>ListFleets</a> </p> </li> <li> <p>
-// <a>DeleteFleet</a> </p> </li> <li> <p> <a>DescribeFleetAttributes</a> </p> </li>
-// <li> <p> <a>UpdateFleetAttributes</a> </p> </li> <li> <p>
-// <a>StartFleetActions</a> or <a>StopFleetActions</a> </p> </li> </ul>
+// launch by a few seconds. Status: ACTIVATING.
+//
+//     * Sets the fleet's status to
+// ACTIVE as soon as one server process is ready to host a game session.
+//
+// Learn
+// more Setting Up Fleets
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Debug
+// Fleet Creation Issues
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
+// Related operations
+//
+//     * CreateFleet
+//
+//     * ListFleets
+//
+//     * DeleteFleet
+//
+//
+// * DescribeFleetAttributes
+//
+//     * UpdateFleetAttributes
+//
+//     * StartFleetActions
+// or StopFleetActions
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -144,9 +166,9 @@ type CreateFleetInput struct {
 
 	// A game session protection policy to apply to all instances in this fleet. If
 	// this parameter is not set, instances in this fleet default to no protection. You
-	// can change a fleet's protection policy using UpdateFleetAttributes (), but this
+	// can change a fleet's protection policy using UpdateFleetAttributes, but this
 	// change will only affect sessions created after the policy change. You can also
-	// set protection for individual instances using UpdateGameSession ().
+	// set protection for individual instances using UpdateGameSession.
 	//
 	//     *
 	// NoProtection - The game session can be terminated during a scale-down event.
@@ -207,10 +229,10 @@ type CreateFleetInput struct {
 	// key-value pairs. Tagging AWS resources are useful for resource management,
 	// access management and cost allocation. For more information, see  Tagging AWS
 	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the AWS General Reference. Once the resource is created, you can use TagResource
-	// (), UntagResource (), and ListTagsForResource () to add, remove, and view tags.
-	// The maximum tag limit may be lower than stated. See the AWS General Reference
-	// for actual tagging limits.
+	// the AWS General Reference. Once the resource is created, you can use
+	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
+	// tags. The maximum tag limit may be lower than stated. See the AWS General
+	// Reference for actual tagging limits.
 	Tags []*types.Tag
 }
 

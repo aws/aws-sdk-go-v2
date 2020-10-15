@@ -13,10 +13,10 @@ import (
 
 // Updates a stack as specified in the template. After the call completes
 // successfully, the stack update starts. You can check the status of the stack via
-// the DescribeStacks () action. To get a copy of the template for an existing
-// stack, you can use the GetTemplate () action. For more information about
-// creating an update template, updating a stack, and monitoring the progress of
-// the update, see Updating a Stack
+// the DescribeStacks action. To get a copy of the template for an existing stack,
+// you can use the GetTemplate action. For more information about creating an
+// update template, updating a stack, and monitoring the progress of the update,
+// see Updating a Stack
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html).
 func (c *Client) UpdateStack(ctx context.Context, params *UpdateStackInput, optFns ...func(*Options)) (*UpdateStackOutput, error) {
 	if params == nil {
@@ -33,7 +33,7 @@ func (c *Client) UpdateStack(ctx context.Context, params *UpdateStackInput, optF
 	return out, nil
 }
 
-// The input for an UpdateStack () action.
+// The input for an UpdateStack action.
 type UpdateStackInput struct {
 
 	// The name or unique stack ID of the stack to update.
@@ -238,7 +238,7 @@ type UpdateStackInput struct {
 	UsePreviousTemplate *bool
 }
 
-// The output for an UpdateStack () action.
+// The output for an UpdateStack action.
 type UpdateStackOutput struct {
 
 	// Unique identifier of the stack.

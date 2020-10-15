@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Places a request for a new game session in a queue (see CreateGameSessionQueue
-// ()). When processing a placement request, Amazon GameLift searches for available
+// Places a request for a new game session in a queue (see CreateGameSessionQueue).
+// When processing a placement request, Amazon GameLift searches for available
 // resources on the queue's destinations, scanning each until it finds resources or
 // the placement request times out. A game session placement request can also
 // request player sessions. When a new game session is successfully created, Amazon
@@ -45,34 +45,34 @@ import (
 //
 // If successful, a new game session placement
 // is created. To track the status of a placement request, call
-// DescribeGameSessionPlacement () and check the request's status. If the status is
+// DescribeGameSessionPlacement and check the request's status. If the status is
 // FULFILLED, a new game session has been created and a game session ARN and Region
 // are referenced. If the placement request times out, you can resubmit the request
 // or retry it with a different queue.
 //
-//     * CreateGameSession ()
+//     * CreateGameSession
 //
 //     *
-// DescribeGameSessions ()
+// DescribeGameSessions
 //
-//     * DescribeGameSessionDetails ()
+//     * DescribeGameSessionDetails
 //
 //     *
-// SearchGameSessions ()
+// SearchGameSessions
 //
-//     * UpdateGameSession ()
+//     * UpdateGameSession
 //
 //     * GetGameSessionLogUrl
-// ()
 //
-//     * Game session placements
+//     *
+// Game session placements
 //
-//         * StartGameSessionPlacement ()
+//         * StartGameSessionPlacement
 //
+//         *
+// DescribeGameSessionPlacement
 //
-// * DescribeGameSessionPlacement ()
-//
-//         * StopGameSessionPlacement ()
+//         * StopGameSessionPlacement
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StartGameSessionPlacementInput{}
@@ -114,14 +114,14 @@ type StartGameSessionPlacementInput struct {
 	DesiredPlayerSessions []*types.DesiredPlayerSession
 
 	// Set of custom properties for a game session, formatted as key:value pairs. These
-	// properties are passed to a game server process in the GameSession () object with
-	// a request to start a new game session (see Start a Game Session
+	// properties are passed to a game server process in the GameSession object with a
+	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameProperties []*types.GameProperty
 
 	// Set of custom game session properties, formatted as a single string value. This
-	// data is passed to a game server process in the GameSession () object with a
-	// request to start a new game session (see Start a Game Session
+	// data is passed to a game server process in the GameSession object with a request
+	// to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
 

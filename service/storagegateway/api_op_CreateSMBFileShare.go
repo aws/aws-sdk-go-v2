@@ -14,15 +14,15 @@ import (
 // Creates a Server Message Block (SMB) file share on an existing file gateway. In
 // Storage Gateway, a file share is a file system mount point backed by Amazon S3
 // cloud storage. Storage Gateway expose file shares using an SMB interface. This
-// operation is only supported for file gateways.  <important> <p>File gateways
-// require AWS Security Token Service (AWS STS) to be activated to enable you to
-// create a file share. Make sure that AWS STS is activated in the AWS Region you
-// are creating your file gateway in. If AWS STS is not activated in this AWS
-// Region, activate it. For information about how to activate AWS STS, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating
-// and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access
-// Management User Guide</i>.</p> <p>File gateways don't support creating hard or
-// symbolic links on a file share.</p> </important>
+// operation is only supported for file gateways. File gateways require AWS
+// Security Token Service (AWS STS) to be activated to enable you to create a file
+// share. Make sure that AWS STS is activated in the AWS Region you are creating
+// your file gateway in. If AWS STS is not activated in this AWS Region, activate
+// it. For information about how to activate AWS STS, see Activating and
+// deactivating AWS STS in an AWS Region
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide. File gateways don't
+// support creating hard or symbolic links on a file share.
 func (c *Client) CreateSMBFileShare(ctx context.Context, params *CreateSMBFileShareInput, optFns ...func(*Options)) (*CreateSMBFileShareOutput, error) {
 	if params == nil {
 		params = &CreateSMBFileShareInput{}
@@ -67,17 +67,16 @@ type CreateSMBFileShareInput struct {
 	// A list of users or groups in the Active Directory that will be granted
 	// administrator privileges on the file share. These users can do all file
 	// operations as the super-user. Acceptable formats include: DOMAIN\User1, user1,
-	// @group1, and @DOMAIN\group1.  <important> <p>Use this option very carefully,
-	// because any user in this list can do anything they like on the file share,
-	// regardless of file permissions.</p> </important>
+	// @group1, and @DOMAIN\group1. Use this option very carefully, because any user in
+	// this list can do anything they like on the file share, regardless of file
+	// permissions.
 	AdminUserList []*string
 
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
 
 	// The authentication method that users use to access the file share. The default
-	// is ActiveDirectory.  <p>Valid Values: <code>ActiveDirectory</code> |
-	// <code>GuestAccess</code> </p>
+	// is ActiveDirectory. Valid Values: ActiveDirectory | GuestAccess
 	Authentication *string
 
 	// Refresh cache information.
@@ -89,19 +88,17 @@ type CreateSMBFileShareInput struct {
 	CaseSensitivity types.CaseSensitivity
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
-	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
-	// <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>
+	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
-	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
-	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
+	// name is set in LocationARN.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
 	// A list of users or groups in the Active Directory that are not allowed to access
@@ -111,8 +108,7 @@ type CreateSMBFileShareInput struct {
 	InvalidUserList []*string
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -125,40 +121,38 @@ type CreateSMBFileShareInput struct {
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// set the write status to read-only, otherwise set to false. Valid Values: true |
+	// false
 	ReadOnly *bool
 
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data.  <note> <p>
-	// <code>RequesterPays</code> is a configuration for the S3 bucket that backs the
-	// file share, so make sure that the configuration on the file share is the same as
-	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// owner always pays the cost of storing data. RequesterPays is a configuration for
+	// the S3 bucket that backs the file share, so make sure that the configuration on
+	// the file share is the same as the S3 bucket configuration. Valid Values: true |
+	// false
 	RequesterPays *bool
 
 	// Set this value to true to enable access control list (ACL) on the SMB file
 	// share. Set it to false to map file and directory permissions to the POSIX
-	// permissions.  <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using
-	// Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS
-	// Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// permissions. For more information, see Using Microsoft Windows ACLs to control
+	// access to an SMB file share
+	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html) in
+	// the AWS Storage Gateway User Guide. Valid Values: true | false
 	SMBACLEnabled *bool
 
 	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag is
-	// a key-value pair.  <note> <p>Valid characters for key and value are letters,
-	// spaces, and numbers representable in UTF-8 format, and the following special
-	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256.</p> </note>
+	// a key-value pair. Valid characters for key and value are letters, spaces, and
+	// numbers representable in UTF-8 format, and the following special characters: + -
+	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
+	// maximum length for a tag's value is 256.
 	Tags []*types.Tag
 
 	// A list of users or groups in the Active Directory that are allowed to access the
-	// file  () share. A group must be prefixed with the @ character. Acceptable
-	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
-	// set if Authentication is set to ActiveDirectory.
+	// file  share. A group must be prefixed with the @ character. Acceptable formats
+	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
+	// Authentication is set to ActiveDirectory.
 	ValidUserList []*string
 }
 

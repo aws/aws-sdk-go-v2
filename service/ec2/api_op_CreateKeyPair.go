@@ -18,7 +18,7 @@ import (
 // to five thousand key pairs per Region. The key pair returned to you is available
 // only in the Region in which you create it. If you prefer, you can create your
 // own key pair using a third-party tool and upload it to any Region using
-// ImportKeyPair (). For more information, see Key Pairs
+// ImportKeyPair. For more information, see Key Pairs
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateKeyPair(ctx context.Context, params *CreateKeyPairInput, optFns ...func(*Options)) (*CreateKeyPairOutput, error) {

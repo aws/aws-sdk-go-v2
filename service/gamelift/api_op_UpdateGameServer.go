@@ -43,19 +43,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer ()
+//     * RegisterGameServer
 //
-//     * ListGameServers ()
+//     * ListGameServers
 //
 //     *
-// ClaimGameServer ()
+// ClaimGameServer
 //
-//     * DescribeGameServer ()
+//     * DescribeGameServer
 //
-//     * UpdateGameServer ()
+//     * UpdateGameServer
 //
-//
-// * DeregisterGameServer ()
+//     *
+// DeregisterGameServer
 func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerInput, optFns ...func(*Options)) (*UpdateGameServerOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerInput{}
@@ -74,7 +74,7 @@ func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerI
 type UpdateGameServerInput struct {
 
 	// An identifier for the game server group where the game server is running. Use
-	// either the GameServerGroup () name or ARN value.
+	// either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
@@ -85,13 +85,13 @@ type UpdateGameServerInput struct {
 	GameServerId *string
 
 	// A game server tag that can be used to request sorted lists of game servers using
-	// ListGameServers (). Custom sort keys are developer-defined based on how you want
-	// to organize the retrieved game server information.
+	// ListGameServers. Custom sort keys are developer-defined based on how you want to
+	// organize the retrieved game server information.
 	CustomSortKey *string
 
 	// A set of custom game server properties, formatted as a single string value. This
 	// data is passed to a game client or service when it requests information on a
-	// game servers using DescribeGameServer () or ClaimGameServer ().
+	// game servers using DescribeGameServer or ClaimGameServer.
 	GameServerData *string
 
 	// Indicates health status of the game server. An update that explicitly includes

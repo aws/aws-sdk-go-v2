@@ -15,8 +15,9 @@ import (
 // bucket owner has this permission by default and can grant this permission to
 // others. For information about cors, see Enabling Cross-Origin Resource Sharing
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple
-// Storage Service Developer Guide.  <p class="title"> <b>Related Resources:</b>
-// </p> <ul> <li> <p> </p> </li> <li> <p> <a>RESTOPTIONSobject</a> </p> </li> </ul>
+// Storage Service Developer Guide. Related Resources:
+//
+//     * RESTOPTIONSobject
 func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsInput, optFns ...func(*Options)) (*DeleteBucketCorsOutput, error) {
 	if params == nil {
 		params = &DeleteBucketCorsInput{}

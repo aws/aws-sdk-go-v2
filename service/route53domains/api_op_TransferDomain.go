@@ -40,13 +40,13 @@ import (
 // you transfer your registration. Some registrars provide free DNS service when
 // you purchase a domain registration. When you transfer the registration, the
 // previous registrar will not renew your domain registration and could end your
-// DNS service at any time.  <important> <p>If the registrar for your domain is
-// also the DNS service provider for the domain and you don't transfer DNS service
-// to another provider, your website, email, and the web applications associated
-// with the domain might become unavailable.</p> </important> <p>If the transfer is
-// successful, this method returns an operation ID that you can use to track the
-// progress and completion of the action. If the transfer doesn't complete
-// successfully, the domain registrant will be notified by email.</p>
+// DNS service at any time. If the registrar for your domain is also the DNS
+// service provider for the domain and you don't transfer DNS service to another
+// provider, your website, email, and the web applications associated with the
+// domain might become unavailable. If the transfer is successful, this method
+// returns an operation ID that you can use to track the progress and completion of
+// the action. If the transfer doesn't complete successfully, the domain registrant
+// will be notified by email.
 func (c *Client) TransferDomain(ctx context.Context, params *TransferDomainInput, optFns ...func(*Options)) (*TransferDomainOutput, error) {
 	if params == nil {
 		params = &TransferDomainInput{}

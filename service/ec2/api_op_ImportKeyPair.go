@@ -12,7 +12,7 @@ import (
 )
 
 // Imports the public key from an RSA key pair that you created with a third-party
-// tool. Compare this with CreateKeyPair (), in which AWS creates the key pair and
+// tool. Compare this with CreateKeyPair, in which AWS creates the key pair and
 // gives the keys to you (AWS keeps a copy of the public key). With ImportKeyPair,
 // you create the key pair and give AWS just the public key. The private key is
 // never transferred between you and AWS. For more information about key pairs, see

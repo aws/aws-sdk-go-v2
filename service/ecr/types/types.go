@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// This data type is used in the ImageScanFinding () data type.
+// This data type is used in the ImageScanFinding data type.
 type Attribute struct {
 
 	// The attribute key.
@@ -37,11 +37,11 @@ type AuthorizationData struct {
 	ProxyEndpoint *string
 }
 
-// An object representing a filter on a DescribeImages () operation.
+// An object representing a filter on a DescribeImages operation.
 type DescribeImagesFilter struct {
 
-	// The tag status with which to filter your DescribeImages () results. You can
-	// filter results based on whether they are TAGGED or UNTAGGED.
+	// The tag status with which to filter your DescribeImages results. You can filter
+	// results based on whether they are TAGGED or UNTAGGED.
 	TagStatus TagStatus
 }
 
@@ -103,7 +103,7 @@ type Image struct {
 	RepositoryName *string
 }
 
-// An object that describes an image returned by a DescribeImages () operation.
+// An object that describes an image returned by a DescribeImages operation.
 type ImageDetail struct {
 
 	// The sha256 digest of the image manifest.
@@ -124,7 +124,7 @@ type ImageDetail struct {
 	// Docker version 1.9, the Docker client compresses image layers before pushing
 	// them to a V2 Docker registry. The output of the docker images command shows the
 	// uncompressed image size, so it may return a larger image size than the image
-	// sizes returned by DescribeImages ().
+	// sizes returned by DescribeImages.
 	ImageSizeInBytes *int64
 
 	// The list of tags associated with this image.
@@ -214,7 +214,7 @@ type ImageScanningConfiguration struct {
 	// The setting that determines whether images are scanned after being pushed to a
 	// repository. If set to true, images will be scanned after being pushed. If this
 	// parameter is not specified, it will default to false and images will not be
-	// scanned unless a scan is manually started with the StartImageScan () API.
+	// scanned unless a scan is manually started with the StartImageScan API.
 	ScanOnPush *bool
 }
 
@@ -300,10 +300,10 @@ type LifecyclePolicyRuleAction struct {
 	Type ImageActionType
 }
 
-// An object representing a filter on a ListImages () operation.
+// An object representing a filter on a ListImages operation.
 type ListImagesFilter struct {
 
-	// The tag status with which to filter your ListImages () results. You can filter
+	// The tag status with which to filter your ListImages results. You can filter
 	// results based on whether they are TAGGED or UNTAGGED.
 	TagStatus TagStatus
 }

@@ -19,7 +19,8 @@ import (
 const ServiceID = "Marketplace Commerce Analytics"
 const ServiceAPIVersion = "2015-07-01"
 
-// Provides AWS Marketplace business intelligence data on-demand.
+// Client provides the API client to make operations call for AWS Marketplace
+// Commerce Analytics.
 type Client struct {
 	options Options
 }

@@ -28,8 +28,8 @@ func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInp
 	return out, nil
 }
 
-// Container for the parameters to the BuildSuggester () operation. Specifies the
-// name of the domain you want to update.
+// Container for the parameters to the BuildSuggester operation. Specifies the name
+// of the domain you want to update.
 type BuildSuggestersInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

@@ -59,25 +59,32 @@ type CreateTopicInput struct {
 	// can access your topic. By default, only the topic owner can publish or subscribe
 	// to the topic.
 	//
-	//     <p>The following attribute applies only to <a
-	// href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>:</p>
-	// <ul> <li> <p> <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer
-	// master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a
-	// href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key
-	// Terms</a>. For more examples, see <a
-	// href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a>
-	// in the <i>AWS Key Management Service API Reference</i>. </p> </li> </ul> <p>The
-	// following attribute applies only to FIFO topics:</p> <ul> <li> <p>
-	// <code>ContentBasedDeduplication</code> – Enables content-based deduplication.
-	// Amazon SNS uses a SHA-256 hash to generate the
-	// <code>MessageDeduplicationId</code> using the body of the message (but not the
-	// attributes of the message). </p> </li> <li> <p> When
-	// <code>ContentBasedDeduplication</code> is in effect, messages with identical
-	// content sent within the deduplication interval are treated as duplicates and
-	// only one copy of the message is delivered. </p> </li> <li> <p> If the queue has
-	// <code>ContentBasedDeduplication</code> set, your
-	// <code>MessageDeduplicationId</code> overrides the generated one. </p> </li>
-	// </ul>
+	// The following attribute applies only to server-side-encryption
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
+	//
+	//
+	// * KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon
+	// SNS or a custom CMK. For more information, see Key Terms
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
+	// For more examples, see KeyId
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	// in the AWS Key Management Service API Reference.
+	//
+	// The following attribute
+	// applies only to FIFO topics:
+	//
+	//     * ContentBasedDeduplication – Enables
+	// content-based deduplication. Amazon SNS uses a SHA-256 hash to generate the
+	// MessageDeduplicationId using the body of the message (but not the attributes of
+	// the message).
+	//
+	//     * When ContentBasedDeduplication is in effect, messages with
+	// identical content sent within the deduplication interval are treated as
+	// duplicates and only one copy of the message is delivered.
+	//
+	//     * If the queue
+	// has ContentBasedDeduplication set, your MessageDeduplicationId overrides the
+	// generated one.
 	Attributes map[string]*string
 
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,

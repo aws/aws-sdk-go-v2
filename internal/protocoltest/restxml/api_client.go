@@ -19,7 +19,7 @@ import (
 const ServiceID = "Rest Xml Protocol"
 const ServiceAPIVersion = "2019-12-16"
 
-// A REST XML service that sends XML requests and responses.
+// Client provides the API client to make operations call for the API.
 type Client struct {
 	options Options
 }

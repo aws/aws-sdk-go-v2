@@ -29,13 +29,13 @@ import (
 //     * Does not support object lock for S3 on
 // Outposts buckets.
 //
-// For more information, see Using Amazon S3 on Outposts () in
-// the Amazon Simple Storage Service Developer Guide . All Amazon S3 on Outposts
-// REST API requests for this action require an additional parameter of outpost-id
-// to be passed with the request and an S3 on Outposts endpoint hostname prefix
-// instead of s3-control. For an example of the request syntax for Amazon S3 on
-// Outposts that uses the S3 on Outposts endpoint hostname prefix and the
-// outpost-id derived using the access point ARN, see the  Example
+// For more information, see Using Amazon S3 on Outposts in the
+// Amazon Simple Storage Service Developer Guide . All Amazon S3 on Outposts REST
+// API requests for this action require an additional parameter of outpost-id to be
+// passed with the request and an S3 on Outposts endpoint hostname prefix instead
+// of s3-control. For an example of the request syntax for Amazon S3 on Outposts
+// that uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
+// using the access point ARN, see the  Example
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples)
 // section below. The following actions are related to CreateAccessPoint:
 //

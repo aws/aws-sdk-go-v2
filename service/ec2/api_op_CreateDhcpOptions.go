@@ -47,14 +47,14 @@ import (
 // supported). For more information about these node types, see RFC 2132
 // (http://www.ietf.org/rfc/rfc2132.txt).
 //
-//     <p>Your VPC automatically starts out
-// with a set of DHCP options that includes only a DNS server that we provide
+// Your VPC automatically starts out with a
+// set of DHCP options that includes only a DNS server that we provide
 // (AmazonProvidedDNS). If you create a set of options, and if your VPC has an
-// internet gateway, make sure to set the <code>domain-name-servers</code> option
-// either to <code>AmazonProvidedDNS</code> or to a domain name server of your
-// choice. For more information, see <a
-// href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html">DHCP
-// Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+// internet gateway, make sure to set the domain-name-servers option either to
+// AmazonProvidedDNS or to a domain name server of your choice. For more
+// information, see DHCP Options Sets
+// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the
+// Amazon Virtual Private Cloud User Guide.
 func (c *Client) CreateDhcpOptions(ctx context.Context, params *CreateDhcpOptionsInput, optFns ...func(*Options)) (*CreateDhcpOptionsOutput, error) {
 	if params == nil {
 		params = &CreateDhcpOptionsInput{}

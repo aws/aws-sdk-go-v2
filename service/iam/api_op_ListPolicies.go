@@ -82,7 +82,7 @@ type ListPoliciesInput struct {
 	Scope types.PolicyScopeType
 }
 
-// Contains the response to a successful ListPolicies () request.
+// Contains the response to a successful ListPolicies request.
 type ListPoliciesOutput struct {
 
 	// A flag that indicates whether there are more items to return. If your results

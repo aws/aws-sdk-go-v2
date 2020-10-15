@@ -18,7 +18,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
 // the AWS Key Management Service Developer Guide. This operation returns a public
 // key and an import token. Use the public key to encrypt the symmetric key
-// material. Store the import token to send with a subsequent ImportKeyMaterial ()
+// material. Store the import token to send with a subsequent ImportKeyMaterial
 // request. You must specify the key ID of the symmetric CMK into which you will
 // import key material. This CMK's Origin must be EXTERNAL. You must also specify
 // the wrapping algorithm and type of wrapping key (public key) that you will use
@@ -27,7 +27,7 @@ import (
 // use the public key and import token from the same response. These items are
 // valid for 24 hours. The expiration date and time appear in the
 // GetParametersForImport response. You cannot use an expired token in an
-// ImportKeyMaterial () request. If your key and token expire, send another
+// ImportKeyMaterial request. If your key and token expire, send another
 // GetParametersForImport request. The CMK that you use for this operation must be
 // in a compatible key state. For details, see How Key State Affects Use of a
 // Customer Master Key
@@ -61,13 +61,13 @@ type GetParametersForImportInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys () or DescribeKey ().
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
 
 	// The algorithm you will use to encrypt the key material before importing it with
-	// ImportKeyMaterial (). For more information, see Encrypt the Key Material
+	// ImportKeyMaterial. For more information, see Encrypt the Key Material
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html)
 	// in the AWS Key Management Service Developer Guide.
 	//
@@ -83,22 +83,22 @@ type GetParametersForImportInput struct {
 
 type GetParametersForImportOutput struct {
 
-	// The import token to send in a subsequent ImportKeyMaterial () request.
+	// The import token to send in a subsequent ImportKeyMaterial request.
 	ImportToken []byte
 
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the CMK to use in a subsequent ImportKeyMaterial () request. This is the same
+	// of the CMK to use in a subsequent ImportKeyMaterial request. This is the same
 	// CMK specified in the GetParametersForImport request.
 	KeyId *string
 
 	// The time at which the import token and public key are no longer valid. After
-	// this time, you cannot use them to make an ImportKeyMaterial () request and you
-	// must send another GetParametersForImport request to get new ones.
+	// this time, you cannot use them to make an ImportKeyMaterial request and you must
+	// send another GetParametersForImport request to get new ones.
 	ParametersValidTo *time.Time
 
 	// The public key to use to encrypt the key material before importing it with
-	// ImportKeyMaterial ().
+	// ImportKeyMaterial.
 	PublicKey []byte
 
 	// Metadata pertaining to the operation's result.

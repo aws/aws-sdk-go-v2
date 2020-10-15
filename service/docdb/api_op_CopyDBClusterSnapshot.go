@@ -32,7 +32,7 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 	return out, nil
 }
 
-// Represents the input to CopyDBClusterSnapshot ().
+// Represents the input to CopyDBClusterSnapshot.
 type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the cluster snapshot to copy. This parameter is not case

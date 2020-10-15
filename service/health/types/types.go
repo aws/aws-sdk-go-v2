@@ -40,8 +40,8 @@ type AffectedEntity struct {
 	Tags map[string]*string
 }
 
-// A range of dates and times that is used by the EventFilter () and EntityFilter
-// () objects. If from is set and to is set: match items where the timestamp
+// A range of dates and times that is used by the EventFilter and EntityFilter
+// objects. If from is set and to is set: match items where the timestamp
 // (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 // from is set and to is not set: match items where the timestamp value is equal to
 // or after from. If from is not set and to is set: match items where the timestamp
@@ -56,7 +56,7 @@ type DateTimeRange struct {
 }
 
 // The number of entities that are affected by one or more events. Returned by the
-// DescribeEntityAggregates () operation.
+// DescribeEntityAggregates operation.
 type EntityAggregate struct {
 
 	// The number entities that match the criteria for the specified events.
@@ -69,8 +69,7 @@ type EntityAggregate struct {
 	EventArn *string
 }
 
-// The values to use to filter results from the DescribeAffectedEntities ()
-// operation.
+// The values to use to filter results from the DescribeAffectedEntities operation.
 type EntityFilter struct {
 
 	// A list of event ARNs (unique identifiers). For example:
@@ -139,7 +138,7 @@ type Event struct {
 }
 
 // The values used to filter results from the DescribeEventDetailsForOrganization
-// () and DescribeAffectedEntitiesForOrganization () operations.
+// and DescribeAffectedEntitiesForOrganization operations.
 type EventAccountFilter struct {
 
 	// The unique identifier for the event. Format:
@@ -155,7 +154,7 @@ type EventAccountFilter struct {
 }
 
 // The number of events of each issue type. Returned by the DescribeEventAggregates
-// () operation.
+// operation.
 type EventAggregate struct {
 
 	// The issue type for the associated count.
@@ -166,16 +165,16 @@ type EventAggregate struct {
 }
 
 // The detailed description of the event. Included in the information returned by
-// the DescribeEventDetails () operation.
+// the DescribeEventDetails operation.
 type EventDescription struct {
 
 	// The most recent description of the event.
 	LatestDescription *string
 }
 
-// Detailed information about an event. A combination of an Event () object, an
-// EventDescription () object, and additional metadata about the event. Returned by
-// the DescribeEventDetails () operation.
+// Detailed information about an event. A combination of an Event object, an
+// EventDescription object, and additional metadata about the event. Returned by
+// the DescribeEventDetails operation.
 type EventDetails struct {
 
 	// Summary information about the event.
@@ -188,8 +187,8 @@ type EventDetails struct {
 	EventMetadata map[string]*string
 }
 
-// Error information returned when a DescribeEventDetails () operation cannot find
-// a specified event.
+// Error information returned when a DescribeEventDetails operation cannot find a
+// specified event.
 type EventDetailsErrorItem struct {
 
 	// A message that describes the error.
@@ -205,8 +204,8 @@ type EventDetailsErrorItem struct {
 	EventArn *string
 }
 
-// The values to use to filter results from the DescribeEvents () and
-// DescribeEventAggregates () operations.
+// The values to use to filter results from the DescribeEvents and
+// DescribeEventAggregates operations.
 type EventFilter struct {
 
 	// A list of AWS availability zones.
@@ -271,7 +270,7 @@ type EventType struct {
 	Service *string
 }
 
-// The values to use to filter results from the DescribeEventTypes () operation.
+// The values to use to filter results from the DescribeEventTypes operation.
 type EventTypeFilter struct {
 
 	// A list of event type category codes (issue, scheduledChange, or
@@ -285,7 +284,7 @@ type EventTypeFilter struct {
 	Services []*string
 }
 
-// Error information returned when a DescribeAffectedEntitiesForOrganization ()
+// Error information returned when a DescribeAffectedEntitiesForOrganization
 // operation cannot find or process a specific entity.
 type OrganizationAffectedEntitiesErrorItem struct {
 
@@ -307,7 +306,7 @@ type OrganizationAffectedEntitiesErrorItem struct {
 }
 
 // Summary information about an event, returned by the
-// DescribeEventsForOrganization () operation.
+// DescribeEventsForOrganization operation.
 type OrganizationEvent struct {
 
 	// The unique identifier for the event. Format:
@@ -345,9 +344,9 @@ type OrganizationEvent struct {
 	StatusCode EventStatusCode
 }
 
-// Detailed information about an event. A combination of an Event () object, an
-// EventDescription () object, and additional metadata about the event. Returned by
-// the DescribeEventDetailsForOrganization () operation.
+// Detailed information about an event. A combination of an Event object, an
+// EventDescription object, and additional metadata about the event. Returned by
+// the DescribeEventDetailsForOrganization operation.
 type OrganizationEventDetails struct {
 
 	// The 12-digit AWS account numbers that contains the affected entities.
@@ -357,19 +356,19 @@ type OrganizationEventDetails struct {
 	Event *Event
 
 	// The detailed description of the event. Included in the information returned by
-	// the DescribeEventDetails () operation.
+	// the DescribeEventDetails operation.
 	EventDescription *EventDescription
 
 	// Additional metadata about the event.
 	EventMetadata map[string]*string
 }
 
-// Error information returned when a DescribeEventDetailsForOrganization ()
-// operation cannot find a specified event.
+// Error information returned when a DescribeEventDetailsForOrganization operation
+// cannot find a specified event.
 type OrganizationEventDetailsErrorItem struct {
 
-	// Error information returned when a DescribeEventDetailsForOrganization ()
-	// operation cannot find a specified event.
+	// Error information returned when a DescribeEventDetailsForOrganization operation
+	// cannot find a specified event.
 	AwsAccountId *string
 
 	// A message that describes the error.
@@ -385,15 +384,14 @@ type OrganizationEventDetailsErrorItem struct {
 	EventArn *string
 }
 
-// The values to filter results from the DescribeEventsForOrganization ()
-// operation.
+// The values to filter results from the DescribeEventsForOrganization operation.
 type OrganizationEventFilter struct {
 
 	// A list of 12-digit AWS account numbers that contains the affected entities.
 	AwsAccountIds []*string
 
-	// A range of dates and times that is used by the EventFilter () and EntityFilter
-	// () objects. If from is set and to is set: match items where the timestamp
+	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// objects. If from is set and to is set: match items where the timestamp
 	// (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 	// from is set and to is not set: match items where the timestamp value is equal to
 	// or after from. If from is not set and to is set: match items where the timestamp
@@ -417,8 +415,8 @@ type OrganizationEventFilter struct {
 	// "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".
 	EventTypeCodes []*string
 
-	// A range of dates and times that is used by the EventFilter () and EntityFilter
-	// () objects. If from is set and to is set: match items where the timestamp
+	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// objects. If from is set and to is set: match items where the timestamp
 	// (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 	// from is set and to is not set: match items where the timestamp value is equal to
 	// or after from. If from is not set and to is set: match items where the timestamp
@@ -431,8 +429,8 @@ type OrganizationEventFilter struct {
 	// The AWS services associated with the event. For example, EC2, RDS.
 	Services []*string
 
-	// A range of dates and times that is used by the EventFilter () and EntityFilter
-	// () objects. If from is set and to is set: match items where the timestamp
+	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// objects. If from is set and to is set: match items where the timestamp
 	// (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 	// from is set and to is not set: match items where the timestamp value is equal to
 	// or after from. If from is not set and to is set: match items where the timestamp

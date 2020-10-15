@@ -13,8 +13,8 @@ import (
 
 // Assigns new properties to a user. Parameters you pass modify any or all of the
 // following: the home directory, role, and policy for the UserName and ServerId
-// you specify.  <p>The response returns the <code>ServerId</code> and the
-// <code>UserName</code> for the updated user.</p>
+// you specify. The response returns the ServerId and the UserName for the updated
+// user.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -49,8 +49,8 @@ type UpdateUserInput struct {
 	UserName *string
 
 	// Specifies the landing directory (folder) for a user when they log in to the file
-	// transfer protocol-enabled server using their file transfer protocol client.
-	// <p>An example is <code>your-Amazon-S3-bucket-name>/home/username</code>.</p>
+	// transfer protocol-enabled server using their file transfer protocol client. An
+	// example is your-Amazon-S3-bucket-name>/home/username.
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 paths and keys should be
@@ -58,20 +58,18 @@ type UpdateUserInput struct {
 	// specify the "Entry" and "Target" pair, where Entry shows how the path is made
 	// visible and Target is the actual Amazon S3 path. If you only specify a target,
 	// it will be displayed as is. You will need to also make sure that your IAM role
-	// provides access to paths in Target. The following is an example.  <p> <code>'[
+	// provides access to paths in Target. The following is an example. '[
 	// "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target":
-	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'</code> </p> <p>In
-	// most cases, you can use this value instead of the scope-down policy to lock your
-	// user down to the designated home directory ("chroot"). To do this, you can set
-	// <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory
-	// parameter value.</p> <note> <p>If the target of a logical directory entry does
-	// not exist in Amazon S3, the entry will be ignored. As a workaround, you can use
-	// the Amazon S3 api to create 0 byte objects as place holders for your directory.
-	// If using the CLI, use the <code>s3api</code> call instead of <code>s3</code> so
-	// you can use the put-object operation. For example, you use the following:
-	// <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>.
-	// Make sure that the end of the key name ends in a / for it to be considered a
-	// folder.</p> </note>
+	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]' In most cases, you
+	// can use this value instead of the scope-down policy to lock your user down to
+	// the designated home directory ("chroot"). To do this, you can set Entry to '/'
+	// and set Target to the HomeDirectory parameter value. If the target of a logical
+	// directory entry does not exist in Amazon S3, the entry will be ignored. As a
+	// workaround, you can use the Amazon S3 api to create 0 byte objects as place
+	// holders for your directory. If using the CLI, use the s3api call instead of s3
+	// so you can use the put-object operation. For example, you use the following: aws
+	// s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the
+	// end of the key name ends in a / for it to be considered a folder.
 	HomeDirectoryMappings []*types.HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
@@ -88,12 +86,12 @@ type UpdateUserInput struct {
 	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}. For
 	// scope-down policies, AWS Transfer Family stores the policy as a JSON blob,
 	// instead of the Amazon Resource Name (ARN) of the policy. You save the policy as
-	// a JSON blob and pass it in the Policy argument.  <p>For an example of a
-	// scope-down policy, see <a
-	// href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating
-	// a scope-down policy</a>.</p> <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a>
-	// in the <i>AWS Security Token Service API Reference</i>.</p> </note>
+	// a JSON blob and pass it in the Policy argument. For an example of a scope-down
+	// policy, see Creating a scope-down policy
+	// (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
+	// For more information, see AssumeRole
+	// (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) in the
+	// AWS Security Token Service API Reference.
 	Policy *string
 
 	// The IAM role that controls your users' access to your Amazon S3 bucket. The

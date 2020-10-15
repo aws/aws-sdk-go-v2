@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Changes information about the BasePathMapping () resource.
+// Changes information about the BasePathMapping resource.
 func (c *Client) UpdateBasePathMapping(ctx context.Context, params *UpdateBasePathMappingInput, optFns ...func(*Options)) (*UpdateBasePathMappingOutput, error) {
 	if params == nil {
 		params = &UpdateBasePathMappingInput{}
@@ -27,16 +27,16 @@ func (c *Client) UpdateBasePathMapping(ctx context.Context, params *UpdateBasePa
 	return out, nil
 }
 
-// A request to change information about the BasePathMapping () resource.
+// A request to change information about the BasePathMapping resource.
 type UpdateBasePathMappingInput struct {
 
-	// [Required] The base path of the BasePathMapping () resource to change. To
-	// specify an empty base path, set this parameter to '(none)'.
+	// [Required] The base path of the BasePathMapping resource to change. To specify
+	// an empty base path, set this parameter to '(none)'.
 	//
 	// This member is required.
 	BasePath *string
 
-	// [Required] The domain name of the BasePathMapping () resource to change.
+	// [Required] The domain name of the BasePathMapping resource to change.
 	//
 	// This member is required.
 	DomainName *string
@@ -56,8 +56,8 @@ type UpdateBasePathMappingInput struct {
 
 // Represents the base path that callers of the API must provide as part of the URL
 // after the domain name. A custom domain name plus a BasePathMapping specification
-// identifies a deployed RestApi () in a given stage of the owner Account (). Use
-// Custom Domain Names
+// identifies a deployed RestApi in a given stage of the owner Account. Use Custom
+// Domain Names
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type UpdateBasePathMappingOutput struct {
 
@@ -65,7 +65,7 @@ type UpdateBasePathMappingOutput struct {
 	// the domain name.
 	BasePath *string
 
-	// The string identifier of the associated RestApi ().
+	// The string identifier of the associated RestApi.
 	RestApiId *string
 
 	// The name of the associated stage.

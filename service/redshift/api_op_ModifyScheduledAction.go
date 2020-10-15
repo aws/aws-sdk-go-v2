@@ -40,32 +40,32 @@ type ModifyScheduledActionInput struct {
 	Enable *bool
 
 	// A modified end time of the scheduled action. For more information about this
-	// parameter, see ScheduledAction ().
+	// parameter, see ScheduledAction.
 	EndTime *time.Time
 
 	// A different IAM role to assume to run the target action. For more information
-	// about this parameter, see ScheduledAction ().
+	// about this parameter, see ScheduledAction.
 	IamRole *string
 
 	// A modified schedule in either at( ) or cron( ) format. For more information
-	// about this parameter, see ScheduledAction ().
+	// about this parameter, see ScheduledAction.
 	Schedule *string
 
 	// A modified description of the scheduled action.
 	ScheduledActionDescription *string
 
 	// A modified start time of the scheduled action. For more information about this
-	// parameter, see ScheduledAction ().
+	// parameter, see ScheduledAction.
 	StartTime *time.Time
 
 	// A modified JSON format of the scheduled action. For more information about this
-	// parameter, see ScheduledAction ().
+	// parameter, see ScheduledAction.
 	TargetAction *types.ScheduledActionType
 }
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
 // Amazon Redshift API operations on a schedule. For information about which API
-// operations can be scheduled, see ScheduledActionType ().
+// operations can be scheduled, see ScheduledActionType.
 type ModifyScheduledActionOutput struct {
 
 	// The end time in UTC when the schedule is no longer active. After this time, the

@@ -12,18 +12,18 @@ import (
 
 // Restores a certificate authority (CA) that is in the DELETED state. You can
 // restore a CA during the period that you defined in the
-// PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthority ()
-// action. Currently, you can specify 7 to 30 days. If you did not specify a
+// PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthority action.
+// Currently, you can specify 7 to 30 days. If you did not specify a
 // PermanentDeletionTimeInDays value, by default you can restore the CA at any time
 // in a 30 day period. You can check the time remaining in the restoration period
 // of a private CA in the DELETED state by calling the DescribeCertificateAuthority
-// () or ListCertificateAuthorities () actions. The status of a restored CA is set
-// to its pre-deletion status when the RestoreCertificateAuthority action returns.
-// To change its status to ACTIVE, call the UpdateCertificateAuthority () action.
-// If the private CA was in the PENDING_CERTIFICATE state at deletion, you must use
-// the ImportCertificateAuthorityCertificate () action to import a certificate
-// authority into the private CA before it can be activated. You cannot restore a
-// CA after the restoration period has ended.
+// or ListCertificateAuthorities actions. The status of a restored CA is set to its
+// pre-deletion status when the RestoreCertificateAuthority action returns. To
+// change its status to ACTIVE, call the UpdateCertificateAuthority action. If the
+// private CA was in the PENDING_CERTIFICATE state at deletion, you must use the
+// ImportCertificateAuthorityCertificate action to import a certificate authority
+// into the private CA before it can be activated. You cannot restore a CA after
+// the restoration period has ended.
 func (c *Client) RestoreCertificateAuthority(ctx context.Context, params *RestoreCertificateAuthorityInput, optFns ...func(*Options)) (*RestoreCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &RestoreCertificateAuthorityInput{}
@@ -42,7 +42,7 @@ func (c *Client) RestoreCertificateAuthority(ctx context.Context, params *Restor
 type RestoreCertificateAuthorityInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority () action. This must be of the form:
+	// CreateCertificateAuthority action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.

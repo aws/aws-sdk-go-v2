@@ -33,7 +33,7 @@ func (c *Client) DecreaseReplicaCount(ctx context.Context, params *DecreaseRepli
 type DecreaseReplicaCountInput struct {
 
 	// If True, the number of replica nodes is decreased immediately.
-	// <code>ApplyImmediately=False</code> is not currently supported.</p>
+	// ApplyImmediately=False is not currently supported.
 	//
 	// This member is required.
 	ApplyImmediately *bool

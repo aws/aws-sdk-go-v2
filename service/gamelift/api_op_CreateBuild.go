@@ -46,16 +46,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 // Related operations
 //
-//     * CreateBuild ()
+//     * CreateBuild
 //
-//     * ListBuilds ()
+//     * ListBuilds
 //
-//     *
-// DescribeBuild ()
+//     * DescribeBuild
 //
-//     * UpdateBuild ()
 //
-//     * DeleteBuild ()
+// * UpdateBuild
+//
+//     * DeleteBuild
 func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optFns ...func(*Options)) (*CreateBuildOutput, error) {
 	if params == nil {
 		params = &CreateBuildInput{}
@@ -75,7 +75,7 @@ func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optF
 type CreateBuildInput struct {
 
 	// A descriptive label that is associated with a build. Build names do not need to
-	// be unique. You can use UpdateBuild () to change this value later.
+	// be unique. You can use UpdateBuild to change this value later.
 	Name *string
 
 	// The operating system that the game server binaries are built to run on. This
@@ -97,14 +97,14 @@ type CreateBuildInput struct {
 	// key-value pairs. Tagging AWS resources are useful for resource management,
 	// access management and cost allocation. For more information, see  Tagging AWS
 	// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-	// the AWS General Reference. Once the resource is created, you can use TagResource
-	// (), UntagResource (), and ListTagsForResource () to add, remove, and view tags.
-	// The maximum tag limit may be lower than stated. See the AWS General Reference
-	// for actual tagging limits.
+	// the AWS General Reference. Once the resource is created, you can use
+	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
+	// tags. The maximum tag limit may be lower than stated. See the AWS General
+	// Reference for actual tagging limits.
 	Tags []*types.Tag
 
 	// Version information that is associated with a build or script. Version strings
-	// do not need to be unique. You can use UpdateBuild () to change this value later.
+	// do not need to be unique. You can use UpdateBuild to change this value later.
 	Version *string
 }
 
@@ -120,7 +120,7 @@ type CreateBuildOutput struct {
 	// This element is returned only when the operation is called without a storage
 	// location. It contains credentials to use when you are uploading a build file to
 	// an S3 bucket that is owned by Amazon GameLift. Credentials have a limited life
-	// span. To refresh these credentials, call RequestUploadCredentials ().
+	// span. To refresh these credentials, call RequestUploadCredentials.
 	UploadCredentials *types.AwsCredentials
 
 	// Metadata pertaining to the operation's result.

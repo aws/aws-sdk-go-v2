@@ -67,9 +67,8 @@ type ModifyCacheClusterInput struct {
 	//     * Cannot
 	// contain any of the following characters: '/', '"', or '@', '%'
 	//
-	//     For more
-	// information, see AUTH password at <a
-	// href="http://redis.io/commands/AUTH">AUTH</a>.</p>
+	// For more
+	// information, see AUTH password at AUTH (http://redis.io/commands/AUTH).
 	AuthToken *string
 
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
@@ -112,12 +111,13 @@ type ModifyCacheClusterInput struct {
 	// characters. Must not be "Default".
 	CacheSecurityGroupNames []*string
 
-	// The upgraded version of the cache engine to be run on the cache nodes.  <p>
-	// <b>Important:</b> You can upgrade to a newer engine version (see <a
-	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement">Selecting
-	// a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine
-	// version. If you want to use an earlier engine version, you must delete the
-	// existing cluster and create it anew with the earlier engine version. </p>
+	// The upgraded version of the cache engine to be run on the cache nodes.
+	// Important: You can upgrade to a newer engine version (see Selecting a Cache
+	// Engine and Version
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
+	// but you cannot downgrade to an earlier engine version. If you want to use an
+	// earlier engine version, you must delete the existing cluster and create it anew
+	// with the earlier engine version.
 	EngineVersion *string
 
 	// The list of Availability Zones where the new Memcached cache nodes are created.
@@ -140,31 +140,59 @@ type ModifyCacheClusterInput struct {
 	// want to cancel all pending operations. Specify NumCacheNodes=3 to cancel all
 	// pending operations.
 	//
-	//     <p>The Availability Zone placement of nodes pending
-	// creation cannot be modified. If you wish to cancel any nodes pending creation,
-	// add 0 nodes by setting <code>NumCacheNodes</code> to the number of current
-	// nodes.</p> <p>If <code>cross-az</code> is specified, existing Memcached nodes
-	// remain in their current Availability Zone. Only newly created nodes can be
-	// located in different Availability Zones. For guidance on how to move existing
-	// Memcached nodes to different Availability Zones, see the <b>Availability Zone
-	// Considerations</b> section of <a
-	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html">Cache
-	// Node Considerations for Memcached</a>.</p> <p> <b>Impact of new add/remove
-	// requests upon pending requests</b> </p> <ul> <li> <p>Scenario-1</p> <ul> <li>
-	// <p>Pending Action: Delete</p> </li> <li> <p>New Request: Delete</p> </li> <li>
-	// <p>Result: The new delete, pending or immediate, replaces the pending
-	// delete.</p> </li> </ul> </li> <li> <p>Scenario-2</p> <ul> <li> <p>Pending
-	// Action: Delete</p> </li> <li> <p>New Request: Create</p> </li> <li> <p>Result:
-	// The new create, pending or immediate, replaces the pending delete.</p> </li>
-	// </ul> </li> <li> <p>Scenario-3</p> <ul> <li> <p>Pending Action: Create</p> </li>
-	// <li> <p>New Request: Delete</p> </li> <li> <p>Result: The new delete, pending or
-	// immediate, replaces the pending create.</p> </li> </ul> </li> <li>
-	// <p>Scenario-4</p> <ul> <li> <p>Pending Action: Create</p> </li> <li> <p>New
-	// Request: Create</p> </li> <li> <p>Result: The new create is added to the pending
-	// create.</p> <important> <p> <b>Important:</b> If the new create request is
-	// <b>Apply Immediately - Yes</b>, all creates are performed immediately. If the
-	// new create request is <b>Apply Immediately - No</b>, all creates are
-	// pending.</p> </important> </li> </ul> </li> </ul>
+	// The Availability Zone placement of nodes pending creation
+	// cannot be modified. If you wish to cancel any nodes pending creation, add 0
+	// nodes by setting NumCacheNodes to the number of current nodes. If cross-az is
+	// specified, existing Memcached nodes remain in their current Availability Zone.
+	// Only newly created nodes can be located in different Availability Zones. For
+	// guidance on how to move existing Memcached nodes to different Availability
+	// Zones, see the Availability Zone Considerations section of Cache Node
+	// Considerations for Memcached
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
+	// Impact of new add/remove requests upon pending requests
+	//
+	//     * Scenario-1
+	//
+	//
+	// * Pending Action: Delete
+	//
+	//         * New Request: Delete
+	//
+	//         * Result: The
+	// new delete, pending or immediate, replaces the pending delete.
+	//
+	//     *
+	// Scenario-2
+	//
+	//         * Pending Action: Delete
+	//
+	//         * New Request: Create
+	//
+	//
+	// * Result: The new create, pending or immediate, replaces the pending delete.
+	//
+	//
+	// * Scenario-3
+	//
+	//         * Pending Action: Create
+	//
+	//         * New Request: Delete
+	//
+	//
+	// * Result: The new delete, pending or immediate, replaces the pending create.
+	//
+	//
+	// * Scenario-4
+	//
+	//         * Pending Action: Create
+	//
+	//         * New Request: Create
+	//
+	//
+	// * Result: The new create is added to the pending create. Important: If the new
+	// create request is Apply Immediately - Yes, all creates are performed
+	// immediately. If the new create request is Apply Immediately - No, all creates
+	// are pending.
 	NewAvailabilityZones []*string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications
@@ -183,24 +211,23 @@ type ModifyCacheClusterInput struct {
 	// add or remove requests are canceled. If you are removing cache nodes, you must
 	// use the CacheNodeIdsToRemove parameter to provide the IDs of the specific cache
 	// nodes to remove. For clusters running Redis, this value must be 1. For clusters
-	// running Memcached, this value must be between 1 and 20.  <note> <p>Adding or
-	// removing Memcached cache nodes can be applied immediately or as a pending
-	// operation (see <code>ApplyImmediately</code>).</p> <p>A pending operation to
-	// modify the number of cache nodes in a cluster during its maintenance window,
-	// whether by adding or removing nodes in accordance with the scale out
-	// architecture, is not queued. The customer's latest request to add or remove
-	// nodes to the cluster overrides any previous pending operations to modify the
-	// number of cache nodes in the cluster. For example, a request to remove 2 nodes
-	// would override a previous pending operation to remove 3 nodes. Similarly, a
-	// request to add 2 nodes would override a previous pending operation to remove 3
-	// nodes and vice versa. As Memcached cache nodes may now be provisioned in
-	// different Availability Zones with flexible cache node placement, a request to
-	// add nodes does not automatically override a previous pending operation to add
-	// nodes. The customer can modify the previous pending operation to add more nodes
-	// or explicitly cancel the pending request and retry the new request. To cancel
-	// pending operations to modify the number of cache nodes in a cluster, use the
-	// <code>ModifyCacheCluster</code> request and set <code>NumCacheNodes</code> equal
-	// to the number of cache nodes currently in the cluster.</p> </note>
+	// running Memcached, this value must be between 1 and 20. Adding or removing
+	// Memcached cache nodes can be applied immediately or as a pending operation (see
+	// ApplyImmediately). A pending operation to modify the number of cache nodes in a
+	// cluster during its maintenance window, whether by adding or removing nodes in
+	// accordance with the scale out architecture, is not queued. The customer's latest
+	// request to add or remove nodes to the cluster overrides any previous pending
+	// operations to modify the number of cache nodes in the cluster. For example, a
+	// request to remove 2 nodes would override a previous pending operation to remove
+	// 3 nodes. Similarly, a request to add 2 nodes would override a previous pending
+	// operation to remove 3 nodes and vice versa. As Memcached cache nodes may now be
+	// provisioned in different Availability Zones with flexible cache node placement,
+	// a request to add nodes does not automatically override a previous pending
+	// operation to add nodes. The customer can modify the previous pending operation
+	// to add more nodes or explicitly cancel the pending request and retry the new
+	// request. To cancel pending operations to modify the number of cache nodes in a
+	// cluster, use the ModifyCacheCluster request and set NumCacheNodes equal to the
+	// number of cache nodes currently in the cluster.
 	NumCacheNodes *int32
 
 	// Specifies the weekly time range during which maintenance on the cluster is

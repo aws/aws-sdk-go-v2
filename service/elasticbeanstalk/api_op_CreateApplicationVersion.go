@@ -95,7 +95,7 @@ type CreateApplicationVersionInput struct {
 // Result message wrapping a single description of an application version.
 type CreateApplicationVersionOutput struct {
 
-	// The ApplicationVersionDescription () of the application version.
+	// The ApplicationVersionDescription of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 
 	// Metadata pertaining to the operation's result.

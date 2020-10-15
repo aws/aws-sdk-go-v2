@@ -35,7 +35,7 @@ type Application struct {
 // An automatic scaling policy for a core instance group or task instance group in
 // an Amazon EMR cluster. An automatic scaling policy defines how an instance group
 // dynamically adds and terminates EC2 instances in response to the value of a
-// CloudWatch metric. See PutAutoScalingPolicy ().
+// CloudWatch metric. See PutAutoScalingPolicy.
 type AutoScalingPolicy struct {
 
 	// The upper and lower EC2 instance limits for an automatic scaling policy.
@@ -54,7 +54,7 @@ type AutoScalingPolicy struct {
 // An automatic scaling policy for a core instance group or task instance group in
 // an Amazon EMR cluster. The automatic scaling policy defines how an instance
 // group dynamically adds and terminates EC2 instances in response to the value of
-// a CloudWatch metric. See PutAutoScalingPolicy ().
+// a CloudWatch metric. See PutAutoScalingPolicy.
 type AutoScalingPolicyDescription struct {
 
 	// The upper and lower EC2 instance limits for an automatic scaling policy.
@@ -69,7 +69,7 @@ type AutoScalingPolicyDescription struct {
 	Status *AutoScalingPolicyStatus
 }
 
-// The reason for an AutoScalingPolicyStatus () change.
+// The reason for an AutoScalingPolicyStatus change.
 type AutoScalingPolicyStateChangeReason struct {
 
 	// The code indicating the reason for the change in status.USER_REQUEST indicates
@@ -368,7 +368,7 @@ type Cluster struct {
 	// users in the AWS account can perform cluster actions if they have the proper IAM
 	// policy permissions. If this value is false, only the IAM user that created the
 	// cluster can perform actions. This value can be changed on a running cluster by
-	// using the SetVisibleToAllUsers () action. You can override the default value of
+	// using the SetVisibleToAllUsers action. You can override the default value of
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
 	VisibleToAllUsers *bool
@@ -764,14 +764,14 @@ type InstanceFleet struct {
 	// The target capacity of On-Demand units for the instance fleet, which determines
 	// how many On-Demand instances to provision. When the instance fleet launches,
 	// Amazon EMR tries to provision On-Demand instances as specified by
-	// InstanceTypeConfig (). Each instance configuration has a specified
+	// InstanceTypeConfig. Each instance configuration has a specified
 	// WeightedCapacity. When an On-Demand instance is provisioned, the
 	// WeightedCapacity units count toward the target capacity. Amazon EMR provisions
 	// instances until the target capacity is totally fulfilled, even if this results
 	// in an overage. For example, if there are 2 units remaining to fulfill capacity,
 	// and Amazon EMR can only provision an instance with a WeightedCapacity of 5
 	// units, the instance is provisioned, and the target capacity is exceeded by 3
-	// units. You can use InstanceFleet$ProvisionedOnDemandCapacity () to determine the
+	// units. You can use InstanceFleet$ProvisionedOnDemandCapacity to determine the
 	// Spot capacity units that have been provisioned for the instance fleet. If not
 	// specified or set to 0, only Spot instances are provisioned for the instance
 	// fleet using TargetSpotCapacity. At least one of TargetSpotCapacity and
@@ -782,7 +782,7 @@ type InstanceFleet struct {
 
 	// The target capacity of Spot units for the instance fleet, which determines how
 	// many Spot instances to provision. When the instance fleet launches, Amazon EMR
-	// tries to provision Spot instances as specified by InstanceTypeConfig (). Each
+	// tries to provision Spot instances as specified by InstanceTypeConfig. Each
 	// instance configuration has a specified WeightedCapacity. When a Spot instance is
 	// provisioned, the WeightedCapacity units count toward the target capacity. Amazon
 	// EMR provisions instances until the target capacity is totally fulfilled, even if
@@ -790,9 +790,9 @@ type InstanceFleet struct {
 	// fulfill capacity, and Amazon EMR can only provision an instance with a
 	// WeightedCapacity of 5 units, the instance is provisioned, and the target
 	// capacity is exceeded by 3 units. You can use
-	// InstanceFleet$ProvisionedSpotCapacity () to determine the Spot capacity units
-	// that have been provisioned for the instance fleet. If not specified or set to 0,
-	// only On-Demand instances are provisioned for the instance fleet. At least one of
+	// InstanceFleet$ProvisionedSpotCapacity to determine the Spot capacity units that
+	// have been provisioned for the instance fleet. If not specified or set to 0, only
+	// On-Demand instances are provisioned for the instance fleet. At least one of
 	// TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a
 	// master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity
 	// can be specified, and its value must be 1.
@@ -823,7 +823,7 @@ type InstanceFleetConfig struct {
 	// The target capacity of On-Demand units for the instance fleet, which determines
 	// how many On-Demand instances to provision. When the instance fleet launches,
 	// Amazon EMR tries to provision On-Demand instances as specified by
-	// InstanceTypeConfig (). Each instance configuration has a specified
+	// InstanceTypeConfig. Each instance configuration has a specified
 	// WeightedCapacity. When an On-Demand instance is provisioned, the
 	// WeightedCapacity units count toward the target capacity. Amazon EMR provisions
 	// instances until the target capacity is totally fulfilled, even if this results
@@ -839,7 +839,7 @@ type InstanceFleetConfig struct {
 
 	// The target capacity of Spot units for the instance fleet, which determines how
 	// many Spot instances to provision. When the instance fleet launches, Amazon EMR
-	// tries to provision Spot instances as specified by InstanceTypeConfig (). Each
+	// tries to provision Spot instances as specified by InstanceTypeConfig. Each
 	// instance configuration has a specified WeightedCapacity. When a Spot instance is
 	// provisioned, the WeightedCapacity units count toward the target capacity. Amazon
 	// EMR provisions instances until the target capacity is totally fulfilled, even if
@@ -865,11 +865,11 @@ type InstanceFleetModifyConfig struct {
 	InstanceFleetId *string
 
 	// The target capacity of On-Demand units for the instance fleet. For more
-	// information see InstanceFleetConfig$TargetOnDemandCapacity ().
+	// information see InstanceFleetConfig$TargetOnDemandCapacity.
 	TargetOnDemandCapacity *int32
 
 	// The target capacity of Spot units for the instance fleet. For more information,
-	// see InstanceFleetConfig$TargetSpotCapacity ().
+	// see InstanceFleetConfig$TargetSpotCapacity.
 	TargetSpotCapacity *int32
 }
 
@@ -1049,7 +1049,7 @@ type InstanceGroupConfig struct {
 	// An automatic scaling policy for a core instance group or task instance group in
 	// an Amazon EMR cluster. The automatic scaling policy defines how an instance
 	// group dynamically adds and terminates EC2 instances in response to the value of
-	// a CloudWatch metric. See PutAutoScalingPolicy ().
+	// a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicy
 
 	// The bid price for each EC2 Spot instance type as defined by InstanceType.
@@ -1278,9 +1278,9 @@ type InstanceTypeConfig struct {
 	EbsConfiguration *EbsConfiguration
 
 	// The number of units that a provisioned instance of this type provides toward
-	// fulfilling the target capacities defined in InstanceFleetConfig (). This value
-	// is 1 for a master instance fleet, and must be 1 or greater for core and task
-	// instance fleets. Defaults to 1 if not specified.
+	// fulfilling the target capacities defined in InstanceFleetConfig. This value is 1
+	// for a master instance fleet, and must be 1 or greater for core and task instance
+	// fleets. Defaults to 1 if not specified.
 	WeightedCapacity *int32
 }
 
@@ -1313,9 +1313,9 @@ type InstanceTypeSpecification struct {
 	InstanceType *string
 
 	// The number of units that a provisioned instance of this type provides toward
-	// fulfilling the target capacities defined in InstanceFleetConfig (). Capacity
-	// values represent performance characteristics such as vCPUs, memory, or I/O. If
-	// not specified, the default value is 1.
+	// fulfilling the target capacities defined in InstanceFleetConfig. Capacity values
+	// represent performance characteristics such as vCPUs, memory, or I/O. If not
+	// specified, the default value is 1.
 	WeightedCapacity *int32
 }
 
@@ -1399,7 +1399,7 @@ type JobFlowDetail struct {
 	// users in the AWS account can perform cluster actions if they have the proper IAM
 	// policy permissions. If this value is false, only the IAM user that created the
 	// cluster can perform actions. This value can be changed on a running cluster by
-	// using the SetVisibleToAllUsers () action. You can override the default value of
+	// using the SetVisibleToAllUsers action. You can override the default value of
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
 	VisibleToAllUsers *bool

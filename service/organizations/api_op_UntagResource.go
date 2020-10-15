@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes a tag from the specified resource.  <p>Currently, you can tag and untag
-// accounts in AWS Organizations.</p> <p>This operation can be called only from the
-// organization's master account.</p>
+// Removes a tag from the specified resource. Currently, you can tag and untag
+// accounts in AWS Organizations. This operation can be called only from the
+// organization's master account.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

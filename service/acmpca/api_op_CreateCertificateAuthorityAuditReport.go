@@ -13,7 +13,7 @@ import (
 
 // Creates an audit report that lists every time that your CA private key is used.
 // The report is saved in the Amazon S3 bucket that you specify on input. The
-// IssueCertificate () and RevokeCertificate () actions use the private key.
+// IssueCertificate and RevokeCertificate actions use the private key.
 func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, params *CreateCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*CreateCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityAuditReportInput{}

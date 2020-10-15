@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-// Gets information about the current ApiKey () resource.
+// Gets information about the current ApiKey resource.
 func (c *Client) GetApiKey(ctx context.Context, params *GetApiKeyInput, optFns ...func(*Options)) (*GetApiKeyOutput, error) {
 	if params == nil {
 		params = &GetApiKeyInput{}
@@ -27,10 +27,10 @@ func (c *Client) GetApiKey(ctx context.Context, params *GetApiKeyInput, optFns .
 	return out, nil
 }
 
-// A request to get information about the current ApiKey () resource.
+// A request to get information about the current ApiKey resource.
 type GetApiKeyInput struct {
 
-	// [Required] The identifier of the ApiKey () resource.
+	// [Required] The identifier of the ApiKey resource.
 	//
 	// This member is required.
 	ApiKey *string
@@ -48,9 +48,9 @@ type GetApiKeyInput struct {
 	Title *string
 }
 
-// A resource that can be distributed to callers for executing Method () resources
-// that require an API key. API keys can be mapped to any Stage () on any RestApi
-// (), which indicates that the callers with the API key can make requests to that
+// A resource that can be distributed to callers for executing Method resources
+// that require an API key. API keys can be mapped to any Stage on any RestApi,
+// which indicates that the callers with the API key can make requests to that
 // stage. Use API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type GetApiKeyOutput struct {
@@ -77,7 +77,7 @@ type GetApiKeyOutput struct {
 	// The name of the API Key.
 	Name *string
 
-	// A list of Stage () resources that are associated with the ApiKey () resource.
+	// A list of Stage resources that are associated with the ApiKey resource.
 	StageKeys []*string
 
 	// The collection of tags. Each tag element is associated with a given resource.

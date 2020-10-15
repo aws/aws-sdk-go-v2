@@ -12,7 +12,7 @@ import (
 )
 
 // Gets summary information about all or the specified data lifecycle policies. To
-// get complete information about a policy, use GetLifecyclePolicy ().
+// get complete information about a policy, use GetLifecyclePolicy.
 func (c *Client) GetLifecyclePolicies(ctx context.Context, params *GetLifecyclePoliciesInput, optFns ...func(*Options)) (*GetLifecyclePoliciesOutput, error) {
 	if params == nil {
 		params = &GetLifecyclePoliciesInput{}

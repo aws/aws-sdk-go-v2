@@ -19,7 +19,8 @@ import (
 const ServiceID = "forecast"
 const ServiceAPIVersion = "2018-06-26"
 
-// Provides APIs for creating and managing Amazon Forecast resources.
+// Client provides the API client to make operations call for Amazon Forecast
+// Service.
 type Client struct {
 	options Options
 }

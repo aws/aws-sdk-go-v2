@@ -36,12 +36,18 @@ type ImportInstallationMediaInput struct {
 	// This member is required.
 	CustomAvailabilityZoneId *string
 
-	// The name of the database engine to be used for this instance.  <p>The list only
+	// The name of the database engine to be used for this instance. The list only
 	// includes supported DB engines that require an on-premises customer provided
-	// license. </p> <p>Valid Values: </p> <ul> <li> <p> <code>sqlserver-ee</code> </p>
-	// </li> <li> <p> <code>sqlserver-se</code> </p> </li> <li> <p>
-	// <code>sqlserver-ex</code> </p> </li> <li> <p> <code>sqlserver-web</code> </p>
-	// </li> </ul>
+	// license. Valid Values:
+	//
+	//     * sqlserver-ee
+	//
+	//     * sqlserver-se
+	//
+	//     *
+	// sqlserver-ex
+	//
+	//     * sqlserver-web
 	//
 	// This member is required.
 	Engine *string
@@ -53,12 +59,12 @@ type ImportInstallationMediaInput struct {
 	EngineInstallationMediaPath *string
 
 	// The version number of the database engine to use. For a list of valid engine
-	// versions, call DescribeDBEngineVersions (). The following are the database
-	// engines and links to information about the major and minor versions. The list
-	// only includes DB engines that require an on-premises customer provided license.
-	// <p> <b>Microsoft SQL Server</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version
-	// and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>
+	// versions, call DescribeDBEngineVersions. The following are the database engines
+	// and links to information about the major and minor versions. The list only
+	// includes DB engines that require an on-premises customer provided license.
+	// Microsoft SQL Server See Version and Feature Support on Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport)
+	// in the Amazon RDS User Guide.
 	//
 	// This member is required.
 	EngineVersion *string

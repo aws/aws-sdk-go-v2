@@ -32,7 +32,7 @@ func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceI
 	return out, nil
 }
 
-// Represents the input to RebootDBInstance ().
+// Represents the input to RebootDBInstance.
 type RebootDBInstanceInput struct {
 
 	// The instance identifier. This parameter is stored as a lowercase string.

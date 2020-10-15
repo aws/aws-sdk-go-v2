@@ -18,8 +18,8 @@ import (
 // attach only one policy with each PutPermissionPolicy request.
 //
 //     * The ARN in
-// the request must be a valid WAF RuleGroup () ARN and the rule group must exist
-// in the same region.
+// the request must be a valid WAF RuleGroup ARN and the rule group must exist in
+// the same region.
 //
 //     * The user making the request must be the owner of the
 // rule group.
@@ -40,25 +40,33 @@ func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionP
 
 type PutPermissionPolicyInput struct {
 
-	// The policy to attach to the specified rule group.  <p>The policy specifications
-	// must conform to the following:</p> <ul> <li> <p>The policy must be composed
-	// using IAM Policy version 2012-10-17 or version 2015-01-01.</p> </li> <li> <p>The
-	// policy must include specifications for <code>Effect</code>, <code>Action</code>,
-	// and <code>Principal</code>.</p> </li> <li> <p> <code>Effect</code> must specify
-	// <code>Allow</code>.</p> </li> <li> <p> <code>Action</code> must specify
-	// <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and
-	// <code>wafv2:PutFirewallManagerRuleGroups</code>. AWS WAF rejects any extra
-	// actions or wildcard actions in the policy.</p> </li> <li> <p>The policy must not
-	// include a <code>Resource</code> parameter.</p> </li> </ul> <p>For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">IAM
-	// Policies</a>. </p>
+	// The policy to attach to the specified rule group. The policy specifications must
+	// conform to the following:
+	//
+	//     * The policy must be composed using IAM Policy
+	// version 2012-10-17 or version 2015-01-01.
+	//
+	//     * The policy must include
+	// specifications for Effect, Action, and Principal.
+	//
+	//     * Effect must specify
+	// Allow.
+	//
+	//     * Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
+	// wafv2:PutFirewallManagerRuleGroups. AWS WAF rejects any extra actions or
+	// wildcard actions in the policy.
+	//
+	//     * The policy must not include a Resource
+	// parameter.
+	//
+	// For more information, see IAM Policies
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
 	//
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the RuleGroup () to which you want to attach
-	// the policy.
+	// The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach the
+	// policy.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -50,8 +50,8 @@ type ModifyClusterInput struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot ().
-	// If you decrease the automated snapshot retention period from its current value,
+	// can still create manual snapshots when you want with CreateClusterSnapshot. If
+	// you decrease the automated snapshot retention period from its current value,
 	// existing automated snapshots that fall outside of the new retention period will
 	// be immediately deleted. Default: Uses existing setting. Constraints: Must be a
 	// value from 0 to 35.
@@ -59,7 +59,7 @@ type ModifyClusterInput struct {
 
 	// The name of the cluster parameter group to apply to this cluster. This change is
 	// applied only after the cluster is rebooted. To reboot a cluster use
-	// RebootCluster (). Default: Uses existing setting. Constraints: The cluster
+	// RebootCluster. Default: Uses existing setting. Constraints: The cluster
 	// parameter group must be in the same parameter group family that matches the
 	// cluster version.
 	ClusterParameterGroupName *string
@@ -82,8 +82,8 @@ type ModifyClusterInput struct {
 	// cluster goes into a read-only mode. After Amazon Redshift provisions a new
 	// cluster based on your resize requirements, there will be outage for a period
 	// while the old cluster is deleted and your connection is switched to the new
-	// cluster. You can use DescribeResize () to track the progress of the resize
-	// request. Valid Values:  multi-node | single-node
+	// cluster. You can use DescribeResize to track the progress of the resize request.
+	// Valid Values:  multi-node | single-node
 	ClusterType *string
 
 	// The new version number of the Amazon Redshift engine to upgrade to. For major
@@ -186,26 +186,24 @@ type ModifyClusterInput struct {
 	//     * Must be unique for all
 	// clusters within an AWS account.
 	//
-	//     <p>Example: <code>examplecluster</code>
-	// </p>
+	// Example: examplecluster
 	NewClusterIdentifier *string
 
 	// The new node type of the cluster. If you specify a new node type, you must also
 	// specify the number of nodes parameter. For more information about resizing
 	// clusters, go to Resizing Clusters in Amazon Redshift
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html) in
-	// the Amazon Redshift Cluster Management Guide.  <p>Valid Values:
-	// <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> |
-	// <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> |
-	// <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>
+	// the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge |
+	// ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge |
+	// ra3.16xlarge
 	NodeType *string
 
 	// The new number of nodes of the cluster. If you specify a new number of nodes,
 	// you must also specify the node type parameter. For more information about
 	// resizing clusters, go to Resizing Clusters in Amazon Redshift
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html) in
-	// the Amazon Redshift Cluster Management Guide.  <p>Valid Values: Integer greater
-	// than <code>0</code>.</p>
+	// the Amazon Redshift Cluster Management Guide. Valid Values: Integer greater than
+	// 0.
 	NumberOfNodes *int32
 
 	// The weekly time range (in UTC) during which system maintenance can occur, if

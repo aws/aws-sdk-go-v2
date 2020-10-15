@@ -37,7 +37,7 @@ func (c *Client) DescribeHapg(ctx context.Context, params *DescribeHapgInput, op
 	return out, nil
 }
 
-// Contains the inputs for the DescribeHapg () action.
+// Contains the inputs for the DescribeHapg action.
 type DescribeHapgInput struct {
 
 	// The ARN of the high-availability partition group to describe.
@@ -46,7 +46,7 @@ type DescribeHapgInput struct {
 	HapgArn *string
 }
 
-// Contains the output of the DescribeHapg () action.
+// Contains the output of the DescribeHapg action.
 type DescribeHapgOutput struct {
 
 	// The ARN of the high-availability partition group.

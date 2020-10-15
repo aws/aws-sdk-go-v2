@@ -12,19 +12,19 @@ import (
 )
 
 // Creates one or more flow logs to capture information about IP traffic for a
-// specific network interface, subnet, or VPC.  <p>Flow log data for a monitored
+// specific network interface, subnet, or VPC. Flow log data for a monitored
 // network interface is recorded as flow log records, which are log events
 // consisting of fields that describe the traffic flow. For more information, see
-// <a
-// href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow
-// Log Records</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
-// <p>When publishing to CloudWatch Logs, flow log records are published to a log
-// group, and each network interface has a unique log stream in the log group. When
-// publishing to Amazon S3, flow log records for all of the monitored network
-// interfaces are published to a single log file object that is stored in the
-// specified bucket.</p> <p>For more information, see <a
-// href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">VPC Flow
-// Logs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>
+// Flow Log Records
+// (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records)
+// in the Amazon Virtual Private Cloud User Guide. When publishing to CloudWatch
+// Logs, flow log records are published to a log group, and each network interface
+// has a unique log stream in the log group. When publishing to Amazon S3, flow log
+// records for all of the monitored network interfaces are published to a single
+// log file object that is stored in the specified bucket. For more information,
+// see VPC Flow Logs
+// (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html) in the Amazon
+// Virtual Private Cloud User Guide.
 func (c *Client) CreateFlowLogs(ctx context.Context, params *CreateFlowLogsInput, optFns ...func(*Options)) (*CreateFlowLogsOutput, error) {
 	if params == nil {
 		params = &CreateFlowLogsInput{}

@@ -11,7 +11,7 @@ import (
 )
 
 // Copies the input published schema, at the specified version, into the Directory
-// () with the same name and version as that of the published schema.
+// with the same name and version as that of the published schema.
 func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optFns ...func(*Options)) (*ApplySchemaOutput, error) {
 	if params == nil {
 		params = &ApplySchemaInput{}
@@ -29,14 +29,14 @@ func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optF
 
 type ApplySchemaInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory () into
-	// which the schema is copied. For more information, see arns ().
+	// The Amazon Resource Name (ARN) that is associated with the Directory into which
+	// the schema is copied. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string
 
 	// Published schema Amazon Resource Name (ARN) that needs to be copied. For more
-	// information, see arns ().
+	// information, see arns.
 	//
 	// This member is required.
 	PublishedSchemaArn *string
@@ -45,12 +45,11 @@ type ApplySchemaInput struct {
 type ApplySchemaOutput struct {
 
 	// The applied schema ARN that is associated with the copied schema in the
-	// Directory (). You can use this ARN to describe the schema information applied on
-	// this directory. For more information, see arns ().
+	// Directory. You can use this ARN to describe the schema information applied on
+	// this directory. For more information, see arns.
 	AppliedSchemaArn *string
 
-	// The ARN that is associated with the Directory (). For more information, see arns
-	// ().
+	// The ARN that is associated with the Directory. For more information, see arns.
 	DirectoryArn *string
 
 	// Metadata pertaining to the operation's result.

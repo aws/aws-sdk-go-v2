@@ -46,9 +46,8 @@ type PutEvaluationsInput struct {
 	// Use this parameter to specify a test run for PutEvaluations. You can verify
 	// whether your AWS Lambda function will deliver evaluation results to AWS Config.
 	// No updates occur to your existing evaluations, and evaluation results are not
-	// sent to AWS Config.  <note> <p>When <code>TestMode</code> is <code>true</code>,
-	// <code>PutEvaluations</code> doesn't require a valid value for the
-	// <code>ResultToken</code> parameter, but the value cannot be null.</p> </note>
+	// sent to AWS Config. When TestMode is true, PutEvaluations doesn't require a
+	// valid value for the ResultToken parameter, but the value cannot be null.
 	TestMode *bool
 }
 

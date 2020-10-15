@@ -167,58 +167,78 @@ type QueryInput struct {
 	IndexName *string
 
 	// The condition that specifies the key values for items to be retrieved by the
-	// Query action.  <p>The condition must perform an equality test on a single
-	// partition key value.</p> <p>The condition can optionally perform one of several
-	// comparison tests on a single sort key value. This allows <code>Query</code> to
-	// retrieve one item with a given partition key value and sort key value, or
-	// several items that have the same partition key value but different sort key
-	// values.</p> <p>The partition key equality test is required, and must be
-	// specified in the following format:</p> <p> <code>partitionKeyName</code>
-	// <i>=</i> <code>:partitionkeyval</code> </p> <p>If you also want to provide a
-	// condition for the sort key, it must be combined using <code>AND</code> with the
-	// condition for the sort key. Following is an example, using the <b>=</b>
-	// comparison operator for the sort key:</p> <p> <code>partitionKeyName</code>
-	// <code>=</code> <code>:partitionkeyval</code> <code>AND</code>
-	// <code>sortKeyName</code> <code>=</code> <code>:sortkeyval</code> </p> <p>Valid
-	// comparisons for the sort key condition are as follows:</p> <ul> <li> <p>
-	// <code>sortKeyName</code> <code>=</code> <code>:sortkeyval</code> - true if the
-	// sort key value is equal to <code>:sortkeyval</code>.</p> </li> <li> <p>
-	// <code>sortKeyName</code> <code><</code> <code>:sortkeyval</code> - true if the
-	// sort key value is less than <code>:sortkeyval</code>.</p> </li> <li> <p>
-	// <code>sortKeyName</code> <code><=</code> <code>:sortkeyval</code> - true if the
-	// sort key value is less than or equal to <code>:sortkeyval</code>.</p> </li> <li>
-	// <p> <code>sortKeyName</code> <code>></code> <code>:sortkeyval</code> - true if
-	// the sort key value is greater than <code>:sortkeyval</code>.</p> </li> <li> <p>
-	// <code>sortKeyName</code> <code>>= </code> <code>:sortkeyval</code> - true if the
-	// sort key value is greater than or equal to <code>:sortkeyval</code>.</p> </li>
-	// <li> <p> <code>sortKeyName</code> <code>BETWEEN</code> <code>:sortkeyval1</code>
-	// <code>AND</code> <code>:sortkeyval2</code> - true if the sort key value is
-	// greater than or equal to <code>:sortkeyval1</code>, and less than or equal to
-	// <code>:sortkeyval2</code>.</p> </li> <li> <p> <code>begins_with (</code>
-	// <code>sortKeyName</code>, <code>:sortkeyval</code> <code>)</code> - true if the
-	// sort key value begins with a particular operand. (You cannot use this function
-	// with a sort key that is of type Number.) Note that the function name
-	// <code>begins_with</code> is case-sensitive.</p> </li> </ul> <p>Use the
-	// <code>ExpressionAttributeValues</code> parameter to replace tokens such as
-	// <code>:partitionval</code> and <code>:sortval</code> with actual values at
-	// runtime.</p> <p>You can optionally use the <code>ExpressionAttributeNames</code>
-	// parameter to replace the names of the partition key and sort key with
-	// placeholder tokens. This option might be necessary if an attribute name
-	// conflicts with a DynamoDB reserved word. For example, the following
-	// <code>KeyConditionExpression</code> parameter causes an error because
-	// <i>Size</i> is a reserved word:</p> <ul> <li> <p> <code>Size = :myval</code>
-	// </p> </li> </ul> <p>To work around this, define a placeholder (such a
-	// <code>#S</code>) to represent the attribute name <i>Size</i>.
-	// <code>KeyConditionExpression</code> then is as follows:</p> <ul> <li> <p>
-	// <code>#S = :myval</code> </p> </li> </ul> <p>For a list of reserved words, see
-	// <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html">Reserved
-	// Words</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> <p>For more
-	// information on <code>ExpressionAttributeNames</code> and
-	// <code>ExpressionAttributeValues</code>, see <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html">Using
-	// Placeholders for Attribute Names and Values</a> in the <i>Amazon DynamoDB
-	// Developer Guide</i>.</p>
+	// Query action. The condition must perform an equality test on a single partition
+	// key value. The condition can optionally perform one of several comparison tests
+	// on a single sort key value. This allows Query to retrieve one item with a given
+	// partition key value and sort key value, or several items that have the same
+	// partition key value but different sort key values. The partition key equality
+	// test is required, and must be specified in the following format:
+	// partitionKeyName = :partitionkeyval If you also want to provide a condition for
+	// the sort key, it must be combined using AND with the condition for the sort key.
+	// Following is an example, using the = comparison operator for the sort key:
+	// partitionKeyName
+	//     =
+	//
+	//     :partitionkeyval
+	//
+	//     AND
+	//
+	//     sortKeyName
+	//
+	//
+	// =
+	//
+	// :sortkeyval Valid comparisons for the sort key condition are as follows:
+	//
+	//
+	// * sortKeyName=:sortkeyval - true if the sort key value is equal to
+	// :sortkeyval.
+	//
+	//     * sortKeyName<:sortkeyval - true if the sort key value is less
+	// than :sortkeyval.
+	//
+	//     * sortKeyName<=:sortkeyval - true if the sort key value
+	// is less than or equal to :sortkeyval.
+	//
+	//     * sortKeyName>:sortkeyval - true if
+	// the sort key value is greater than :sortkeyval.
+	//
+	//     * sortKeyName>= :sortkeyval
+	// - true if the sort key value is greater than or equal to :sortkeyval.
+	//
+	//     *
+	// sortKeyNameBETWEEN:sortkeyval1AND:sortkeyval2 - true if the sort key value is
+	// greater than or equal to :sortkeyval1, and less than or equal to :sortkeyval2.
+	//
+	//
+	// * begins_with (sortKeyName, :sortkeyval) - true if the sort key value begins
+	// with a particular operand. (You cannot use this function with a sort key that is
+	// of type Number.) Note that the function name begins_with is case-sensitive.
+	//
+	// Use
+	// the ExpressionAttributeValues parameter to replace tokens such as :partitionval
+	// and :sortval with actual values at runtime. You can optionally use the
+	// ExpressionAttributeNames parameter to replace the names of the partition key and
+	// sort key with placeholder tokens. This option might be necessary if an attribute
+	// name conflicts with a DynamoDB reserved word. For example, the following
+	// KeyConditionExpression parameter causes an error because Size is a reserved
+	// word:
+	//
+	//     * Size = :myval
+	//
+	// To work around this, define a placeholder (such a
+	// #S) to represent the attribute name Size. KeyConditionExpression then is as
+	// follows:
+	//
+	//     * #S = :myval
+	//
+	// For a list of reserved words, see Reserved Words
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
+	// in the Amazon DynamoDB Developer Guide. For more information on
+	// ExpressionAttributeNames and ExpressionAttributeValues, see Using Placeholders
+	// for Attribute Names and Values
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html)
+	// in the Amazon DynamoDB Developer Guide.
 	KeyConditionExpression *string
 
 	// This is a legacy parameter. Use KeyConditionExpression instead. For more

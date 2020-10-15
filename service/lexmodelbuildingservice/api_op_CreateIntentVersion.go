@@ -18,8 +18,8 @@ import (
 // created. You can update only the $LATEST version of the intent. You can't update
 // the numbered versions that you create with the CreateIntentVersion operation.
 // When you create a version of an intent, Amazon Lex sets the version to 1.
-// Subsequent versions increment by 1. For more information, see versioning-intro
-// (). This operation requires permissions to perform the lex:CreateIntentVersion
+// Subsequent versions increment by 1. For more information, see versioning-intro.
+// This operation requires permissions to perform the lex:CreateIntentVersion
 // action.
 func (c *Client) CreateIntentVersion(ctx context.Context, params *CreateIntentVersionInput, optFns ...func(*Options)) (*CreateIntentVersionOutput, error) {
 	if params == nil {

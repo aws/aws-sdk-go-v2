@@ -102,12 +102,12 @@ type DescribeTransformJobOutput struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob ()
+	//     * CreateProcessingJob
 	//
 	//     *
-	// CreateTrainingJob ()
+	// CreateTrainingJob
 	//
-	//     * CreateTransformJob ()
+	//     * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the transform job failed, FailureReason describes why it failed. A transform
@@ -132,9 +132,9 @@ type DescribeTransformJobOutput struct {
 	// invocation.
 	ModelClientConfig *types.ModelClientConfig
 
-	// Indicates when the transform job has been  completed, or has stopped or failed.
+	// Indicates when the transform job has been completed, or has stopped or failed.
 	// You are billed for the time interval between this time and the value of
-	// <code>TransformStartTime</code>.</p>
+	// TransformStartTime.
 	TransformEndTime *time.Time
 
 	// Identifies the Amazon S3 location where you want Amazon SageMaker to save the

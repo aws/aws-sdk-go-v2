@@ -12,9 +12,8 @@ import (
 )
 
 // Accepts ownership of a transit virtual interface created by another AWS account.
-// <p> After the owner of the transit virtual interface makes this call, the
-// specified transit virtual interface is created and made available to handle
-// traffic.</p>
+// After the owner of the transit virtual interface makes this call, the specified
+// transit virtual interface is created and made available to handle traffic.
 func (c *Client) ConfirmTransitVirtualInterface(ctx context.Context, params *ConfirmTransitVirtualInterfaceInput, optFns ...func(*Options)) (*ConfirmTransitVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &ConfirmTransitVirtualInterfaceInput{}
@@ -69,18 +68,18 @@ type ConfirmTransitVirtualInterfaceOutput struct {
 	//
 	//     * deleting: A
 	// virtual interface is in this state immediately after calling
-	// DeleteVirtualInterface () until it can no longer forward traffic.
+	// DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//     *
-	// deleted: A virtual interface that cannot forward traffic.
+	//     * deleted: A
+	// virtual interface that cannot forward traffic.
 	//
-	//     * rejected: The
-	// virtual interface owner has declined creation of the virtual interface. If a
-	// virtual interface in the Confirming state is deleted by the virtual interface
-	// owner, the virtual interface enters the Rejected state.
+	//     * rejected: The virtual
+	// interface owner has declined creation of the virtual interface. If a virtual
+	// interface in the Confirming state is deleted by the virtual interface owner, the
+	// virtual interface enters the Rejected state.
 	//
-	//     * unknown: The
-	// state of the virtual interface is not available.
+	//     * unknown: The state of the
+	// virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
 	// Metadata pertaining to the operation's result.

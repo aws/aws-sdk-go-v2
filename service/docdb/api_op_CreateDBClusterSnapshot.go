@@ -27,7 +27,7 @@ func (c *Client) CreateDBClusterSnapshot(ctx context.Context, params *CreateDBCl
 	return out, nil
 }
 
-// Represents the input of CreateDBClusterSnapshot ().
+// Represents the input of CreateDBClusterSnapshot.
 type CreateDBClusterSnapshotInput struct {
 
 	// The identifier of the cluster to create a snapshot for. This parameter is not

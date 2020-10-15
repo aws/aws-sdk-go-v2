@@ -32,7 +32,7 @@ func (c *Client) DescribeStackEvents(ctx context.Context, params *DescribeStackE
 	return out, nil
 }
 
-// The input for DescribeStackEvents () action.
+// The input for DescribeStackEvents action.
 type DescribeStackEventsInput struct {
 
 	// A string that identifies the next page of events that you want to retrieve.
@@ -51,7 +51,7 @@ type DescribeStackEventsInput struct {
 	StackName *string
 }
 
-// The output for a DescribeStackEvents () action.
+// The output for a DescribeStackEvents action.
 type DescribeStackEventsOutput struct {
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of

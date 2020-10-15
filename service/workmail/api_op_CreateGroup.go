@@ -11,7 +11,7 @@ import (
 )
 
 // Creates a group that can be used in Amazon WorkMail by calling the
-// RegisterToWorkMail () operation.
+// RegisterToWorkMail operation.
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
 		params = &CreateGroupInput{}

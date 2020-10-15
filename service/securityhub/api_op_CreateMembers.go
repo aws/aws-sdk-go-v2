@@ -15,16 +15,16 @@ import (
 // the account used to make the request, which is the master account. To
 // successfully create a member, you must use this action from an account that
 // already has Security Hub enabled. To enable Security Hub, you can use the
-// EnableSecurityHub () operation. After you use CreateMembers to create member
-// account associations in Security Hub, you must use the InviteMembers ()
-// operation to invite the accounts to enable Security Hub and become member
-// accounts in Security Hub. If the account owner accepts the invitation, the
-// account becomes a member account in Security Hub. A permissions policy is added
-// that permits the master account to view the findings generated in the member
-// account. When Security Hub is enabled in the invited account, findings start to
-// be sent to both the member and master accounts. To remove the association
-// between the master and member accounts, use the DisassociateFromMasterAccount ()
-// or DisassociateMembers () operation.
+// EnableSecurityHub operation. After you use CreateMembers to create member
+// account associations in Security Hub, you must use the InviteMembers operation
+// to invite the accounts to enable Security Hub and become member accounts in
+// Security Hub. If the account owner accepts the invitation, the account becomes a
+// member account in Security Hub. A permissions policy is added that permits the
+// master account to view the findings generated in the member account. When
+// Security Hub is enabled in the invited account, findings start to be sent to
+// both the member and master accounts. To remove the association between the
+// master and member accounts, use the DisassociateFromMasterAccount or
+// DisassociateMembers operation.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}

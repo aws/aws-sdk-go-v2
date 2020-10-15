@@ -432,7 +432,7 @@ type SamplingRule struct {
 	RuleName *string
 }
 
-// A SamplingRule () and its metadata.
+// A SamplingRule and its metadata.
 type SamplingRuleRecord struct {
 
 	// When the rule was created.
@@ -492,7 +492,7 @@ type SamplingRuleUpdate struct {
 
 // Request sampling results for a single rule from a service. Results are for the
 // last 10 seconds unless the service has been assigned a longer reporting interval
-// after a previous call to GetSamplingTargets ().
+// after a previous call to GetSamplingTargets.
 type SamplingStatisticsDocument struct {
 
 	// A unique identifier for the service in hexadecimal.
@@ -556,7 +556,7 @@ type SamplingStrategy struct {
 
 // Temporary changes to a sampling rule configuration. To meet the global sampling
 // target for a rule, X-Ray calculates a new reservoir for each service based on
-// the recent sampling results of all services that called GetSamplingTargets ().
+// the recent sampling results of all services that called GetSamplingTargets.
 type SamplingTargetDocument struct {
 
 	// The percentage of matching requests to instrument, after the reservoir is
@@ -578,7 +578,7 @@ type SamplingTargetDocument struct {
 }
 
 // A segment from a trace that has been ingested by the X-Ray service. The segment
-// can be compiled from documents uploaded with PutTraceSegments (), or an inferred
+// can be compiled from documents uploaded with PutTraceSegments, or an inferred
 // segment for a downstream service, generated from a subsegment sent by the
 // service that called it. For the full segment document schema, see AWS X-Ray
 // Segment Documents
@@ -823,7 +823,7 @@ type TraceUser struct {
 	UserName *string
 }
 
-// Sampling statistics from a call to GetSamplingTargets () that X-Ray could not
+// Sampling statistics from a call to GetSamplingTargets that X-Ray could not
 // process.
 type UnprocessedStatistics struct {
 

@@ -28,7 +28,7 @@ func (c *Client) ListElasticsearchInstanceTypes(ctx context.Context, params *Lis
 	return out, nil
 }
 
-// Container for the parameters to the ListElasticsearchInstanceTypes () operation.
+// Container for the parameters to the ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesInput struct {
 
 	// Version of Elasticsearch for which list of supported elasticsearch instance
@@ -51,12 +51,12 @@ type ListElasticsearchInstanceTypesInput struct {
 	NextToken *string
 }
 
-// Container for the parameters returned by ListElasticsearchInstanceTypes ()
+// Container for the parameters returned by ListElasticsearchInstanceTypes
 // operation.
 type ListElasticsearchInstanceTypesOutput struct {
 
 	// List of instance types supported by Amazon Elasticsearch service for given
-	// ElasticsearchVersion ()
+	// ElasticsearchVersion
 	ElasticsearchInstanceTypes []types.ESPartitionInstanceType
 
 	// In case if there are more results available NextToken would be present, make

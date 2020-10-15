@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes a schema. Before deleting a schema, you must delete all datasets
-// referencing the schema. For more information on schemas, see CreateSchema ().
+// referencing the schema. For more information on schemas, see CreateSchema.
 func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, optFns ...func(*Options)) (*DeleteSchemaOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaInput{}

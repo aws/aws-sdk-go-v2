@@ -12,7 +12,7 @@ import (
 
 // This action is no longer supported. You can use it to configure only SMS MFA.
 // You can't use it to configure TOTP software token MFA. To configure either type
-// of MFA, use the SetUserMFAPreference () action instead.
+// of MFA, use the SetUserMFAPreference action instead.
 func (c *Client) SetUserSettings(ctx context.Context, params *SetUserSettingsInput, optFns ...func(*Options)) (*SetUserSettingsOutput, error) {
 	if params == nil {
 		params = &SetUserSettingsInput{}

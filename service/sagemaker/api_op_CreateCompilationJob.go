@@ -34,9 +34,9 @@ import (
 // You can also provide a Tag to track the model
 // compilation job's resource use and costs. The response body contains the
 // CompilationJobArn for the compiled job. To stop a model compilation job, use
-// StopCompilationJob (). To get information about a particular model compilation
-// job, use DescribeCompilationJob (). To get information about multiple model
-// compilation jobs, use ListCompilationJobs ().
+// StopCompilationJob. To get information about a particular model compilation job,
+// use DescribeCompilationJob. To get information about multiple model compilation
+// jobs, use ListCompilationJobs.
 func (c *Client) CreateCompilationJob(ctx context.Context, params *CreateCompilationJobInput, optFns ...func(*Options)) (*CreateCompilationJobOutput, error) {
 	if params == nil {
 		params = &CreateCompilationJobInput{}

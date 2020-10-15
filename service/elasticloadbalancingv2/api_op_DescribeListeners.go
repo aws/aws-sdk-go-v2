@@ -15,7 +15,7 @@ import (
 // Load Balancer or Network Load Balancer. You must specify either a load balancer
 // or one or more listeners. For an HTTPS or TLS listener, the output includes the
 // default certificate for the listener. To describe the certificate list for the
-// listener, use DescribeListenerCertificates ().
+// listener, use DescribeListenerCertificates.
 func (c *Client) DescribeListeners(ctx context.Context, params *DescribeListenersInput, optFns ...func(*Options)) (*DescribeListenersOutput, error) {
 	if params == nil {
 		params = &DescribeListenersInput{}

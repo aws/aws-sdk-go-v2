@@ -46,10 +46,15 @@ type TestIdentityProviderInput struct {
 	// This member is required.
 	UserName *string
 
-	// The type of file transfer protocol to be tested.  <p>The available protocols
-	// are:</p> <ul> <li> <p>Secure Shell (SSH) File Transfer Protocol (SFTP)</p> </li>
-	// <li> <p>File Transfer Protocol Secure (FTPS)</p> </li> <li> <p>File Transfer
-	// Protocol (FTP)</p> </li> </ul>
+	// The type of file transfer protocol to be tested. The available protocols are:
+	//
+	//
+	// * Secure Shell (SSH) File Transfer Protocol (SFTP)
+	//
+	//     * File Transfer Protocol
+	// Secure (FTPS)
+	//
+	//     * File Transfer Protocol (FTP)
 	ServerProtocol types.Protocol
 
 	// The source IP address of the user account to be tested.

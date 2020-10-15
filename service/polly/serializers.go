@@ -65,7 +65,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLexiconInput(v *DeleteLexiconInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -195,7 +201,13 @@ func awsRestjson1_serializeOpHttpBindingsGetLexiconInput(v *GetLexiconInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -255,7 +267,13 @@ func awsRestjson1_serializeOpHttpBindingsGetSpeechSynthesisTaskInput(v *GetSpeec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.TaskId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TaskId must not be empty")}
+	}
 	if v.TaskId != nil {
+		if len(*v.TaskId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member TaskId must not be empty")}
+		}
 		if err := encoder.SetURI("TaskId").String(*v.TaskId); err != nil {
 			return err
 		}
@@ -450,7 +468,13 @@ func awsRestjson1_serializeOpHttpBindingsPutLexiconInput(v *PutLexiconInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Name == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
 	if v.Name != nil {
+		if len(*v.Name) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}

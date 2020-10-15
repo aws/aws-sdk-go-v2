@@ -22,8 +22,8 @@ import (
 // deletion is complete. When you delete a table, any indexes on that table are
 // also deleted. If you have DynamoDB Streams enabled on the table, then the
 // corresponding stream on that table goes into the DISABLED state, and the stream
-// is automatically deleted after 24 hours.  <p>Use the <code>DescribeTable</code>
-// action to check the status of the table. </p>
+// is automatically deleted after 24 hours. Use the DescribeTable action to check
+// the status of the table.
 func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
 	if params == nil {
 		params = &DeleteTableInput{}

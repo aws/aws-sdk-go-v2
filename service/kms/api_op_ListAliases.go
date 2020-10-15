@@ -12,8 +12,8 @@ import (
 )
 
 // Gets a list of aliases in the caller's AWS account and region. You cannot list
-// aliases in other accounts. For more information about aliases, see CreateAlias
-// (). By default, the ListAliases command returns all aliases in the account and
+// aliases in other accounts. For more information about aliases, see CreateAlias.
+// By default, the ListAliases command returns all aliases in the account and
 // region. To get only the aliases that point to a particular customer master key
 // (CMK), use the KeyId parameter. The ListAliases response can include aliases
 // that you created and associated with your customer managed CMKs, and aliases

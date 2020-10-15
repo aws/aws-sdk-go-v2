@@ -54,7 +54,7 @@ type DescribeDBParameterGroupsInput struct {
 
 type DescribeDBParameterGroupsOutput struct {
 
-	// A list of DBParameterGroup () instances.
+	// A list of DBParameterGroup instances.
 	DBParameterGroups []*types.DBParameterGroup
 
 	// An optional pagination token provided by a previous request. If this parameter

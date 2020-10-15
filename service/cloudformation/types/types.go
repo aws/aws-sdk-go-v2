@@ -1094,9 +1094,9 @@ type StackResourceDetail struct {
 // list of resources that support drift detection, see Resources that Support Drift
 // Detection
 // (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
-// Use DetectStackResourceDrift () to detect drift on individual resources, or
-// DetectStackDrift () to detect drift on all resources in a given stack that
-// support drift detection.
+// Use DetectStackResourceDrift to detect drift on individual resources, or
+// DetectStackDrift to detect drift on all resources in a given stack that support
+// drift detection.
 type StackResourceDrift struct {
 
 	// The logical name of the resource specified in the template.
@@ -1217,10 +1217,10 @@ type StackResourceDriftInformationSummary struct {
 	// that do not currently support drift detection have a status of NOT_CHECKED. For
 	// more information, see Resources that Support Drift Detection
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
-	// If you performed an ContinueUpdateRollback () operation on a stack, any
-	// resources included in ResourcesToSkip will also have a status of NOT_CHECKED.
-	// For more information on skipping resources during rollback operations, see
-	// Continue Rolling Back an Update
+	// If you performed an ContinueUpdateRollback operation on a stack, any resources
+	// included in ResourcesToSkip will also have a status of NOT_CHECKED. For more
+	// information on skipping resources during rollback operations, see Continue
+	// Rolling Back an Update
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html)
 	// in the AWS CloudFormation User Guide.
 	//
@@ -1846,7 +1846,7 @@ type TypeSummary struct {
 
 	// The ID of the default version of the type. The default version is used when the
 	// type version is not specified. To set the default version of a type, use
-	// SetTypeDefaultVersion ().
+	// SetTypeDefaultVersion.
 	DefaultVersionId *string
 
 	// The description of the type.

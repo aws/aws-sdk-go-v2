@@ -27,24 +27,24 @@ import (
 // supports. DescribeKey does not return the following information:
 //
 //     * Aliases
-// associated with the CMK. To get this information, use ListAliases ().
+// associated with the CMK. To get this information, use ListAliases.
 //
 //     *
 // Whether automatic key rotation is enabled on the CMK. To get this information,
-// use GetKeyRotationStatus (). Also, some key states prevent a CMK from being
+// use GetKeyRotationStatus. Also, some key states prevent a CMK from being
 // automatically rotated. For details, see How Automatic Key Rotation Works
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works)
 // in AWS Key Management Service Developer Guide.
 //
 //     * Tags on the CMK. To get
-// this information, use ListResourceTags ().
+// this information, use ListResourceTags.
 //
 //     * Key policies and grants on the
-// CMK. To get this information, use GetKeyPolicy () and ListGrants ().
+// CMK. To get this information, use GetKeyPolicy and ListGrants.
 //
-// If you
-// call the DescribeKey operation on a predefined AWS alias, that is, an AWS alias
-// with no key ID, AWS KMS creates an AWS managed CMK
+// If you call the
+// DescribeKey operation on a predefined AWS alias, that is, an AWS alias with no
+// key ID, AWS KMS creates an AWS managed CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
 // Then, it associates the alias with the new CMK, and returns the KeyId and Arn of
 // the new CMK in the response. To perform this operation on a CMK in a different
@@ -89,8 +89,8 @@ type DescribeKeyInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
-	// alias ARN, use ListAliases ().
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	KeyId *string

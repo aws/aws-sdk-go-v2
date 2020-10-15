@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Exports a deployed version of a RestApi () in a specified format.
+// Exports a deployed version of a RestApi in a specified format.
 func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns ...func(*Options)) (*GetExportOutput, error) {
 	if params == nil {
 		params = &GetExportInput{}
@@ -26,7 +26,7 @@ func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns .
 	return out, nil
 }
 
-// Request a new export of a RestApi () for a particular Stage ().
+// Request a new export of a RestApi for a particular Stage.
 type GetExportInput struct {
 
 	// [Required] The type of export. Acceptable values are 'oas30' for OpenAPI 3.0.x
@@ -35,12 +35,12 @@ type GetExportInput struct {
 	// This member is required.
 	ExportType *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage () that will be exported.
+	// [Required] The name of the Stage that will be exported.
 	//
 	// This member is required.
 	StageName *string
@@ -60,10 +60,10 @@ type GetExportInput struct {
 	Parameters map[string]*string
 }
 
-// The binary blob response to GetExport (), which contains the generated SDK.
+// The binary blob response to GetExport, which contains the generated SDK.
 type GetExportOutput struct {
 
-	// The binary blob response to GetExport (), which contains the export.
+	// The binary blob response to GetExport, which contains the export.
 	Body []byte
 
 	// The content-disposition header value in the HTTP response.

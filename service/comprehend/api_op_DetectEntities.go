@@ -12,7 +12,7 @@ import (
 )
 
 // Inspects text for named entities, and returns information about them. For more
-// information, about named entities, see how-entities ().
+// information, about named entities, see how-entities.
 func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput, optFns ...func(*Options)) (*DetectEntitiesOutput, error) {
 	if params == nil {
 		params = &DetectEntitiesInput{}
@@ -60,7 +60,7 @@ type DetectEntitiesOutput struct {
 	// If your request uses a custom entity recognition model, Amazon Comprehend
 	// detects the entities that the model is trained to recognize. Otherwise, it
 	// detects the default entity types. For a list of default entity types, see
-	// how-entities ().
+	// how-entities.
 	Entities []*types.Entity
 
 	// Metadata pertaining to the operation's result.

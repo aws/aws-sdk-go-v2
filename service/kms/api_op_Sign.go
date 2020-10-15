@@ -13,8 +13,8 @@ import (
 
 // Creates a digital signature (https://en.wikipedia.org/wiki/Digital_signature)
 // for a message or message digest by using the private key in an asymmetric CMK.
-// To verify the signature, use the Verify () operation, or use the public key in
-// the same asymmetric CMK outside of AWS KMS. For information about symmetric and
+// To verify the signature, use the Verify operation, or use the public key in the
+// same asymmetric CMK outside of AWS KMS. For information about symmetric and
 // asymmetric CMKs, see Using Symmetric and Asymmetric CMKs
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // in the AWS Key Management Service Developer Guide. Digital signatures are
@@ -27,13 +27,13 @@ import (
 //
 //     * Use the KeyId
 // parameter to identify an asymmetric CMK with a KeyUsage value of SIGN_VERIFY. To
-// get the KeyUsage value of a CMK, use the DescribeKey () operation. The caller
-// must have kms:Sign permission on the CMK.
+// get the KeyUsage value of a CMK, use the DescribeKey operation. The caller must
+// have kms:Sign permission on the CMK.
 //
-//     * Use the Message parameter to
-// specify the message or message digest to sign. You can submit messages of up to
-// 4096 bytes. To sign a larger message, generate a hash digest of the message, and
-// then provide the hash digest in the Message parameter. To indicate whether the
+//     * Use the Message parameter to specify
+// the message or message digest to sign. You can submit messages of up to 4096
+// bytes. To sign a larger message, generate a hash digest of the message, and then
+// provide the hash digest in the Message parameter. To indicate whether the
 // message is a full message or a digest, use the MessageType parameter.
 //
 //     *
@@ -42,7 +42,7 @@ import (
 // When signing a
 // message, be sure to record the CMK and the signing algorithm. This information
 // is required to verify the signature. To verify the signature that this operation
-// generates, use the Verify () operation. Or use the GetPublicKey () operation to
+// generates, use the Verify operation. Or use the GetPublicKey operation to
 // download the public key and then use the public key to verify the signature
 // outside of AWS KMS. The CMK that you use for this operation must be in a
 // compatible key state. For details, see How Key State Affects Use of a Customer
@@ -68,18 +68,26 @@ type SignInput struct {
 
 	// Identifies an asymmetric CMK. AWS KMS uses the private key in the asymmetric CMK
 	// to sign the message. The KeyUsage type of the CMK must be SIGN_VERIFY. To find
-	// the KeyUsage of a CMK, use the DescribeKey () operation.  <p>To specify a CMK,
-	// use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using
-	// an alias name, prefix it with <code>"alias/"</code>. To specify a CMK in a
-	// different AWS account, you must use the key ARN or alias ARN.</p> <p>For
-	// example:</p> <ul> <li> <p>Key ID:
-	// <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN:
-	// <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
-	// </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li>
-	// <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>
-	// </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a>
-	// or <a>DescribeKey</a>. To get the alias name and alias ARN, use
-	// <a>ListAliases</a>.</p>
+	// the KeyUsage of a CMK, use the DescribeKey operation. To specify a CMK, use its
+	// key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an
+	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
+	// account, you must use the key ARN or alias ARN. For example:
+	//
+	//     * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//     * Key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//
+	// * Alias name: alias/ExampleAlias
+	//
+	//     * Alias ARN:
+	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	KeyId *string

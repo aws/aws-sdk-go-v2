@@ -19,9 +19,7 @@ import (
 const ServiceID = "Kinesis"
 const ServiceAPIVersion = "2013-12-02"
 
-// Amazon Kinesis Data Streams Service API Reference Amazon Kinesis Data Streams is
-// a managed service that scales elastically for real-time processing of streaming
-// big data.
+// Client provides the API client to make operations call for Amazon Kinesis.
 type Client struct {
 	options Options
 }

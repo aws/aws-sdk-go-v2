@@ -46,8 +46,7 @@ type AllocateHostsInput struct {
 	// launches that specify its unique host ID. For more information, see
 	// Understanding Instance Placement and Host Affinity
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-understanding)
-	// in the Amazon EC2 User Guide for Linux Instances.  <p>Default: <code>on</code>
-	// </p>
+	// in the Amazon EC2 User Guide for Linux Instances. Default: on
 	AutoPlacement types.AutoPlacement
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
@@ -63,18 +62,17 @@ type AllocateHostsInput struct {
 
 	// Specifies the instance family to be supported by the Dedicated Hosts. If you
 	// specify an instance family, the Dedicated Hosts support multiple instance types
-	// within that instance family.  <p>If you want the Dedicated Hosts to support a
-	// specific instance type only, omit this parameter and specify <b>InstanceType</b>
-	// instead. You cannot specify <b>InstanceFamily</b> and <b>InstanceType</b> in the
-	// same request.</p>
+	// within that instance family. If you want the Dedicated Hosts to support a
+	// specific instance type only, omit this parameter and specify InstanceType
+	// instead. You cannot specify InstanceFamily and InstanceType in the same request.
 	InstanceFamily *string
 
 	// Specifies the instance type to be supported by the Dedicated Hosts. If you
 	// specify an instance type, the Dedicated Hosts support instances of the specified
-	// instance type only.  <p>If you want the Dedicated Hosts to support multiple
-	// instance types in a specific instance family, omit this parameter and specify
-	// <b>InstanceFamily</b> instead. You cannot specify <b>InstanceType</b> and
-	// <b>InstanceFamily</b> in the same request.</p>
+	// instance type only. If you want the Dedicated Hosts to support multiple instance
+	// types in a specific instance family, omit this parameter and specify
+	// InstanceFamily instead. You cannot specify InstanceType and InstanceFamily in
+	// the same request.
 	InstanceType *string
 
 	// The tags to apply to the Dedicated Host during creation.

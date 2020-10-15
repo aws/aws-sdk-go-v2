@@ -14,30 +14,30 @@ import (
 // Reserves an open player slot in an active game session. Before a player can be
 // added, a game session must have an ACTIVE status, have a creation policy of
 // ALLOW_ALL, and have an open player slot. To add a group of players to a game
-// session, use CreatePlayerSessions (). When the player connects to the game
-// server and references a player session ID, the game server contacts the Amazon
-// GameLift service to validate the player reservation and accept the player. To
-// create a player session, specify a game session ID, player ID, and optionally a
-// string of player data. If successful, a slot is reserved in the game session for
-// the player and a new PlayerSession () object is returned. Player sessions cannot
-// be updated. Available in Amazon GameLift Local.
+// session, use CreatePlayerSessions. When the player connects to the game server
+// and references a player session ID, the game server contacts the Amazon GameLift
+// service to validate the player reservation and accept the player. To create a
+// player session, specify a game session ID, player ID, and optionally a string of
+// player data. If successful, a slot is reserved in the game session for the
+// player and a new PlayerSession object is returned. Player sessions cannot be
+// updated. Available in Amazon GameLift Local.
 //
-//     * CreatePlayerSession ()
+//     * CreatePlayerSession
 //
+//     *
+// CreatePlayerSessions
 //
-// * CreatePlayerSessions ()
-//
-//     * DescribePlayerSessions ()
+//     * DescribePlayerSessions
 //
 //     * Game session
 // placements
 //
-//         * StartGameSessionPlacement ()
+//         * StartGameSessionPlacement
 //
 //         *
-// DescribeGameSessionPlacement ()
+// DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement ()
+//         * StopGameSessionPlacement
 func (c *Client) CreatePlayerSession(ctx context.Context, params *CreatePlayerSessionInput, optFns ...func(*Options)) (*CreatePlayerSessionOutput, error) {
 	if params == nil {
 		params = &CreatePlayerSessionInput{}

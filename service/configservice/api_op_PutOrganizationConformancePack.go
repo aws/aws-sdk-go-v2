@@ -22,16 +22,16 @@ import (
 // only when the role does not exist in the caller account. To use this API with
 // delegated administrator, register a delegated administrator by calling AWS
 // Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.
-// <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to
-// enable all features in an organization.</p> <p>You must specify either the
-// <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not
-// both. If you provide both AWS Config uses the <code>TemplateS3Uri</code>
-// parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config
-// sets the state of a conformance pack to CREATE_IN_PROGRESS and
-// UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot
-// update a conformance pack while it is in this state.</p> <p>You can create 6
-// conformance packs with 25 AWS Config rules in each pack and 3 delegated
-// administrator per organization. </p> </note>
+// Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an
+// organization. You must specify either the TemplateS3Uri or the TemplateBody
+// parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri
+// parameter and ignores the TemplateBody parameter. AWS Config sets the state of a
+// conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the
+// conformance pack is created or updated.
+//
+// You cannot update a conformance pack
+// while it is in this state. You can create 6 conformance packs with 25 AWS Config
+// rules in each pack and 3 delegated administrator per organization.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConformancePackInput{}

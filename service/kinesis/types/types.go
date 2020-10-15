@@ -10,8 +10,8 @@ import (
 type Consumer struct {
 
 	// When you register a consumer, Kinesis Data Streams generates an ARN for it. You
-	// need this ARN to be able to call SubscribeToShard (). If you delete a consumer
-	// and then create a new one with the same name, it won't have the same ARN. That's
+	// need this ARN to be able to call SubscribeToShard. If you delete a consumer and
+	// then create a new one with the same name, it won't have the same ARN. That's
 	// because consumer ARNs contain the creation timestamp. This is important to keep
 	// in mind if you have IAM policies that reference consumer ARNs.
 	//
@@ -38,8 +38,8 @@ type Consumer struct {
 type ConsumerDescription struct {
 
 	// When you register a consumer, Kinesis Data Streams generates an ARN for it. You
-	// need this ARN to be able to call SubscribeToShard (). If you delete a consumer
-	// and then create a new one with the same name, it won't have the same ARN. That's
+	// need this ARN to be able to call SubscribeToShard. If you delete a consumer and
+	// then create a new one with the same name, it won't have the same ARN. That's
 	// because consumer ARNs contain the creation timestamp. This is important to keep
 	// in mind if you have IAM policies that reference consumer ARNs.
 	//
@@ -249,7 +249,7 @@ type StartingPosition struct {
 	Timestamp *time.Time
 }
 
-// Represents the output for DescribeStream ().
+// Represents the output for DescribeStream.
 type StreamDescription struct {
 
 	// Represents the current enhanced monitoring settings of the stream.
@@ -341,7 +341,7 @@ type StreamDescription struct {
 	KeyId *string
 }
 
-// Represents the output for DescribeStreamSummary ()
+// Represents the output for DescribeStreamSummary
 type StreamDescriptionSummary struct {
 
 	// Represents the current enhanced monitoring settings of the stream.
@@ -429,11 +429,11 @@ type StreamDescriptionSummary struct {
 	KeyId *string
 }
 
-// After you call SubscribeToShard (), Kinesis Data Streams sends events of this
-// type to your consumer.
+// After you call SubscribeToShard, Kinesis Data Streams sends events of this type
+// to your consumer.
 type SubscribeToShardEvent struct {
 
-	// Use this as StartingSequenceNumber in the next call to SubscribeToShard ().
+	// Use this as StartingSequenceNumber in the next call to SubscribeToShard.
 	//
 	// This member is required.
 	ContinuationSequenceNumber *string
@@ -509,8 +509,8 @@ type SubscribeToShardEventStreamMemberResourceNotFoundException struct {
 
 func (*SubscribeToShardEventStreamMemberResourceNotFoundException) isSubscribeToShardEventStream() {}
 
-// After you call SubscribeToShard (), Kinesis Data Streams sends events of this
-// type to your consumer.
+// After you call SubscribeToShard, Kinesis Data Streams sends events of this type
+// to your consumer.
 type SubscribeToShardEventStreamMemberSubscribeToShardEvent struct {
 	Value *SubscribeToShardEvent
 }

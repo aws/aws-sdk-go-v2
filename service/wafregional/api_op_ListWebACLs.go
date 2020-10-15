@@ -17,7 +17,7 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Returns an array of WebACLSummary () objects in the response.
+// global use. Returns an array of WebACLSummary objects in the response.
 func (c *Client) ListWebACLs(ctx context.Context, params *ListWebACLsInput, optFns ...func(*Options)) (*ListWebACLsOutput, error) {
 	if params == nil {
 		params = &ListWebACLsInput{}
@@ -57,7 +57,7 @@ type ListWebACLsOutput struct {
 	// from the response in the NextMarker value in the next request.
 	NextMarker *string
 
-	// An array of WebACLSummary () objects.
+	// An array of WebACLSummary objects.
 	WebACLs []*types.WebACLSummary
 
 	// Metadata pertaining to the operation's result.

@@ -31,7 +31,7 @@ func (c *Client) ListOpenIDConnectProviders(ctx context.Context, params *ListOpe
 type ListOpenIDConnectProvidersInput struct {
 }
 
-// Contains the response to a successful ListOpenIDConnectProviders () request.
+// Contains the response to a successful ListOpenIDConnectProviders request.
 type ListOpenIDConnectProvidersOutput struct {
 
 	// The list of IAM OIDC provider resource objects defined in the AWS account.

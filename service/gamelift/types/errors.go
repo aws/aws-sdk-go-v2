@@ -198,7 +198,7 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // The specified game server group has no available game servers to fulfill a
 // ClaimGameServer request. Clients can retry such requests immediately or after a
-// waiting period.  </p>
+// waiting period.
 type OutOfCapacityException struct {
 	Message *string
 }
@@ -235,10 +235,10 @@ func (e *TaggingFailedException) ErrorCode() string             { return "Taggin
 func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unable to resolve the routing for a particular alias because it
-// has a terminal RoutingStrategy () associated with it. The message returned in
-// this exception is the message defined in the routing strategy itself. Such
-// requests should only be retried if the routing strategy for the specified alias
-// is modified.
+// has a terminal RoutingStrategy associated with it. The message returned in this
+// exception is the message defined in the routing strategy itself. Such requests
+// should only be retried if the routing strategy for the specified alias is
+// modified.
 type TerminalRoutingStrategyException struct {
 	Message *string
 }

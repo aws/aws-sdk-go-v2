@@ -16,18 +16,19 @@ import (
 // systems. Therefore, a get request soon after put or delete can return a wrong
 // result. For information about replication configuration, see Replication
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
-// Simple Storage Service Developer Guide.  <p>This operation requires permissions
-// for the <code>s3:GetReplicationConfiguration</code> action. For more information
-// about permissions, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using
-// Bucket Policies and User Policies</a>.</p> <p>If you include the
-// <code>Filter</code> element in a replication configuration, you must also
-// include the <code>DeleteMarkerReplication</code> and <code>Priority</code>
-// elements. The response also returns those elements.</p> <p>For information about
-// <code>GetBucketReplication</code> errors, see <a>ReplicationErrorCodeList</a>
-// </p> <p>The following operations are related to
-// <code>GetBucketReplication</code>:</p> <ul> <li> <p> <a>PutBucketReplication</a>
-// </p> </li> <li> <p> <a>DeleteBucketReplication</a> </p> </li> </ul>
+// Simple Storage Service Developer Guide. This operation requires permissions for
+// the s3:GetReplicationConfiguration action. For more information about
+// permissions, see Using Bucket Policies and User Policies
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). If
+// you include the Filter element in a replication configuration, you must also
+// include the DeleteMarkerReplication and Priority elements. The response also
+// returns those elements. For information about GetBucketReplication errors, see
+// ReplicationErrorCodeList The following operations are related to
+// GetBucketReplication:
+//
+//     * PutBucketReplication
+//
+//     * DeleteBucketReplication
 func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketReplicationInput, optFns ...func(*Options)) (*GetBucketReplicationOutput, error) {
 	if params == nil {
 		params = &GetBucketReplicationInput{}

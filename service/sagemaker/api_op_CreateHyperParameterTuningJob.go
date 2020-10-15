@@ -33,7 +33,7 @@ func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *Crea
 
 type CreateHyperParameterTuningJobInput struct {
 
-	// The HyperParameterTuningJobConfig () object that describes the tuning job,
+	// The HyperParameterTuningJobConfig object that describes the tuning job,
 	// including the search strategy, the objective metric used to evaluate training
 	// jobs, ranges of parameters to search, and resource limits for the tuning job.
 	// For more information, see How Hyperparameter Tuning Works
@@ -59,13 +59,13 @@ type CreateHyperParameterTuningJobInput struct {
 	// that the tuning job launches.
 	Tags []*types.Tag
 
-	// The HyperParameterTrainingJobDefinition () object that describes the training
-	// jobs that this tuning job launches, including static hyperparameters, input data
+	// The HyperParameterTrainingJobDefinition object that describes the training jobs
+	// that this tuning job launches, including static hyperparameters, input data
 	// configuration, output data configuration, resource configuration, and stopping
 	// condition.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
 
-	// A list of the HyperParameterTrainingJobDefinition () objects launched for this
+	// A list of the HyperParameterTrainingJobDefinition objects launched for this
 	// tuning job.
 	TrainingJobDefinitions []*types.HyperParameterTrainingJobDefinition
 

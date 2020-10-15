@@ -67,9 +67,9 @@ type CreateLocationNfsInput struct {
 	// must additionally enable all execute access. If you are copying data to or from
 	// your AWS Snowcone device, see NFS Server on AWS Snowcone
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
-	// for more information.  <p>For information about NFS export configuration, see
-	// 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux
-	// documentation.</p>
+	// for more information. For information about NFS export configuration, see 18.7.
+	// The /etc/exports Configuration File in the Red Hat Enterprise Linux
+	// documentation.
 	//
 	// This member is required.
 	Subdirectory *string

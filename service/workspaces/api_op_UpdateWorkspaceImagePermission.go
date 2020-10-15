@@ -13,12 +13,15 @@ import (
 // Shares or unshares an image with one account by specifying whether that account
 // has permission to copy the image. If the copy image permission is granted, the
 // image is shared with that account. If the copy image permission is revoked, the
-// image is unshared with the account.  <note> <ul> <li> <p>To delete an image that
-// has been shared, you must unshare the image before you delete it.</p> </li> <li>
-// <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn't
-// supported at this time in the AWS GovCloud (US-West) Region. To share BYOL
-// images across accounts in the AWS GovCloud (US-West) Region, contact AWS
-// Support.</p> </li> </ul> </note>
+// image is unshared with the account.
+//
+//     * To delete an image that has been
+// shared, you must unshare the image before you delete it.
+//
+//     * Sharing Bring
+// Your Own License (BYOL) images across AWS accounts isn't supported at this time
+// in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in
+// the AWS GovCloud (US-West) Region, contact AWS Support.
 func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *UpdateWorkspaceImagePermissionInput, optFns ...func(*Options)) (*UpdateWorkspaceImagePermissionOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceImagePermissionInput{}

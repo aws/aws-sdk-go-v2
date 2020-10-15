@@ -13,8 +13,8 @@ import (
 
 // Returns the version-specific settings of a Lambda function or version. The
 // output includes only options that can vary between versions of a function. To
-// modify these settings, use UpdateFunctionConfiguration (). To get all of a
-// function's details, including function-level settings, use GetFunction ().
+// modify these settings, use UpdateFunctionConfiguration. To get all of a
+// function's details, including function-level settings, use GetFunction.
 func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFunctionConfigurationInput, optFns ...func(*Options)) (*GetFunctionConfigurationOutput, error) {
 	if params == nil {
 		params = &GetFunctionConfigurationInput{}

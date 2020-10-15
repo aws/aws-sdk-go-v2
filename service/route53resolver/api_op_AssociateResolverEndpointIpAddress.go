@@ -14,7 +14,7 @@ import (
 // Adds IP addresses to an inbound or an outbound resolver endpoint. If you want to
 // adding more than one IP address, submit one AssociateResolverEndpointIpAddress
 // request for each IP address. To remove an IP address from an endpoint, see
-// DisassociateResolverEndpointIpAddress ().
+// DisassociateResolverEndpointIpAddress.
 func (c *Client) AssociateResolverEndpointIpAddress(ctx context.Context, params *AssociateResolverEndpointIpAddressInput, optFns ...func(*Options)) (*AssociateResolverEndpointIpAddressOutput, error) {
 	if params == nil {
 		params = &AssociateResolverEndpointIpAddressInput{}

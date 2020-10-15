@@ -29,7 +29,7 @@ func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *D
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterParameterGroups ().
+// Represents the input to DescribeDBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific cluster parameter group to return details for.
@@ -54,7 +54,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 	MaxRecords *int32
 }
 
-// Represents the output of DBClusterParameterGroups ().
+// Represents the output of DBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsOutput struct {
 
 	// A list of cluster parameter groups.

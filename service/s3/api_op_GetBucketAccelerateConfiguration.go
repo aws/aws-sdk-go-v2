@@ -24,14 +24,16 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
 // Amazon Simple Storage Service Developer Guide. You set the Transfer Acceleration
 // state of an existing bucket to Enabled or Suspended by using the
-// PutBucketAccelerateConfiguration () operation. A GET accelerate request does not
+// PutBucketAccelerateConfiguration operation. A GET accelerate request does not
 // return a state value for a bucket that has no transfer acceleration state. A
 // bucket has no Transfer Acceleration state if a state has never been set on the
-// bucket.  <p>For more information about transfer acceleration, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html">Transfer
-// Acceleration</a> in the Amazon Simple Storage Service Developer Guide.</p> <p
-// class="title"> <b>Related Resources</b> </p> <ul> <li> <p>
-// <a>PutBucketAccelerateConfiguration</a> </p> </li> </ul>
+// bucket. For more information about transfer acceleration, see Transfer
+// Acceleration
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in
+// the Amazon Simple Storage Service Developer Guide. Related Resources
+//
+//     *
+// PutBucketAccelerateConfiguration
 func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *GetBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*GetBucketAccelerateConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketAccelerateConfigurationInput{}

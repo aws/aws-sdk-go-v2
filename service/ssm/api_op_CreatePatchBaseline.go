@@ -108,7 +108,7 @@ type CreatePatchBaselineInput struct {
 	//     * Key=OS,Value=Windows
 	//
 	// To add tags to an
-	// existing patch baseline, use the AddTagsToResource () action.
+	// existing patch baseline, use the AddTagsToResource action.
 	Tags []*types.Tag
 }
 

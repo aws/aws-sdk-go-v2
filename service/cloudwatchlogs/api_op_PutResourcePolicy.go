@@ -40,7 +40,6 @@ type PutResourcePolicyInput struct {
 	// "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [
 	// "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn"
 	// } ] }
-	//     </p>
 	PolicyDocument *string
 
 	// Name of the new policy. This parameter is required.

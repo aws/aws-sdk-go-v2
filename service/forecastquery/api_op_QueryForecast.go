@@ -40,10 +40,10 @@ type QueryForecastInput struct {
 
 	// The filtering criteria to apply when retrieving the forecast. For example, to
 	// get the forecast for client_21 in the electricity usage dataset, specify the
-	// following: {"item_id" : "client_21"}
-	//     <p>To get the full forecast, use the <a
-	// href="https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html">CreateForecastExportJob</a>
-	// operation.</p>
+	// following: {"item_id" : "client_21"} To get the full forecast, use the
+	// CreateForecastExportJob
+	// (https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html)
+	// operation.
 	//
 	// This member is required.
 	Filters map[string]*string

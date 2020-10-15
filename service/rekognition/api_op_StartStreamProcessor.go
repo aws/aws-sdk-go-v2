@@ -11,7 +11,7 @@ import (
 )
 
 // Starts processing a stream processor. You create a stream processor by calling
-// CreateStreamProcessor (). To tell StartStreamProcessor which stream processor to
+// CreateStreamProcessor. To tell StartStreamProcessor which stream processor to
 // start, use the value of the Name field specified in the call to
 // CreateStreamProcessor.
 func (c *Client) StartStreamProcessor(ctx context.Context, params *StartStreamProcessorInput, optFns ...func(*Options)) (*StartStreamProcessorOutput, error) {

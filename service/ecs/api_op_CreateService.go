@@ -49,7 +49,7 @@ import (
 // You can optionally
 // specify a deployment configuration for your service. The deployment is triggered
 // by changing properties, such as the task definition or the desired count of a
-// service, with an UpdateService () operation. The default value for a replica
+// service, with an UpdateService operation. The default value for a replica
 // service for minimumHealthyPercent is 100%. The default value for a daemon
 // service for minimumHealthyPercent is 0%. If a service is using the ECS
 // deployment controller, the minimum healthy percent represents a lower limit on
@@ -84,7 +84,7 @@ import (
 // visible when describing your service. When creating a service that uses the
 // EXTERNAL deployment controller, you can specify only parameters that aren't
 // controlled at the task set level. The only required parameter is the service
-// name. You control your services using the CreateTaskSet () operation. For more
+// name. You control your services using the CreateTaskSet operation. For more
 // information, see Amazon ECS Deployment Types
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide. When the service
@@ -139,18 +139,18 @@ type CreateServiceInput struct {
 	// strategy consists of one or more capacity providers along with the base and
 	// weight to assign to them. A capacity provider must be associated with the
 	// cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders () API is used to associate a capacity provider with
-	// a cluster. Only capacity providers with an ACTIVE or UPDATING status can be
-	// used. If a capacityProviderStrategy is specified, the launchType parameter must
-	// be omitted. If no capacityProviderStrategy or launchType is specified, the
+	// PutClusterCapacityProviders API is used to associate a capacity provider with a
+	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// If a capacityProviderStrategy is specified, the launchType parameter must be
+	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
 	// capacity provider that uses an Auto Scaling group, the capacity provider must
 	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider () API operation. To use a AWS Fargate capacity provider,
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
 	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
 	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders () API operation is
-	// used to update the list of available capacity providers for a cluster after the
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
+	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
 
@@ -271,7 +271,7 @@ type CreateServiceInput struct {
 	// to the tasks in the service. If no value is specified, the tags are not
 	// propagated. Tags can only be propagated to the tasks within the service during
 	// service creation. To add tags to a task after service creation, use the
-	// TagResource () API action.
+	// TagResource API action.
 	PropagateTags types.PropagateTags
 
 	// The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon

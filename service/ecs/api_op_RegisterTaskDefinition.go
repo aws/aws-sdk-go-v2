@@ -28,9 +28,9 @@ import (
 // in Network settings
 // (https://docs.docker.com/engine/reference/run/#/network-settings) in the Docker
 // run reference. If you specify the awsvpc network mode, the task is allocated an
-// elastic network interface, and you must specify a NetworkConfiguration () when
-// you create a service or run a task with the task definition. For more
-// information, see Task Networking
+// elastic network interface, and you must specify a NetworkConfiguration when you
+// create a service or run a task with the task definition. For more information,
+// see Task Networking
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) RegisterTaskDefinition(ctx context.Context, params *RegisterTaskDefinitionInput, optFns ...func(*Options)) (*RegisterTaskDefinitionOutput, error) {
@@ -176,7 +176,7 @@ type RegisterTaskDefinitionInput struct {
 	// host port (for the host network mode) or the attached elastic network interface
 	// port (for the awsvpc network mode), so you cannot take advantage of dynamic host
 	// port mappings. If the network mode is awsvpc, the task is allocated an elastic
-	// network interface, and you must specify a NetworkConfiguration () value when you
+	// network interface, and you must specify a NetworkConfiguration value when you
 	// create a service or run a task with the task definition. For more information,
 	// see Task Networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)

@@ -17,23 +17,28 @@ import (
 // and see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). With
 // the latest version, AWS WAF has a single set of endpoints for regional and
-// global use. Inserts or deletes ActivatedRule () objects in a RuleGroup. You can
+// global use. Inserts or deletes ActivatedRule objects in a RuleGroup. You can
 // only insert REGULAR rules into a rule group. You can have a maximum of ten rules
-// per rule group.  <p>To create and configure a <code>RuleGroup</code>, perform
-// the following steps:</p> <ol> <li> <p>Create and update the <code>Rules</code>
-// that you want to include in the <code>RuleGroup</code>. See
-// <a>CreateRule</a>.</p> </li> <li> <p>Use <code>GetChangeToken</code> to get the
-// change token that you provide in the <code>ChangeToken</code> parameter of an
-// <a>UpdateRuleGroup</a> request.</p> </li> <li> <p>Submit an
-// <code>UpdateRuleGroup</code> request to add <code>Rules</code> to the
-// <code>RuleGroup</code>.</p> </li> <li> <p>Create and update a
-// <code>WebACL</code> that contains the <code>RuleGroup</code>. See
-// <a>CreateWebACL</a>.</p> </li> </ol> <p>If you want to replace one
-// <code>Rule</code> with another, you delete the existing one and add the new
-// one.</p> <p>For more information about how to use the AWS WAF API to allow or
-// block HTTP requests, see the <a
-// href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF Developer
-// Guide</a>.</p>
+// per rule group. To create and configure a RuleGroup, perform the following
+// steps:
+//
+//     * Create and update the Rules that you want to include in the
+// RuleGroup. See CreateRule.
+//
+//     * Use GetChangeToken to get the change token
+// that you provide in the ChangeToken parameter of an UpdateRuleGroup request.
+//
+//
+// * Submit an UpdateRuleGroup request to add Rules to the RuleGroup.
+//
+//     * Create
+// and update a WebACL that contains the RuleGroup. See CreateWebACL.
+//
+// If you want
+// to replace one Rule with another, you delete the existing one and add the new
+// one. For more information about how to use the AWS WAF API to allow or block
+// HTTP requests, see the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
 	if params == nil {
 		params = &UpdateRuleGroupInput{}
@@ -51,19 +56,19 @@ func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInp
 
 type UpdateRuleGroupInput struct {
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// The RuleGroupId of the RuleGroup () that you want to update. RuleGroupId is
-	// returned by CreateRuleGroup () and by ListRuleGroups ().
+	// The RuleGroupId of the RuleGroup that you want to update. RuleGroupId is
+	// returned by CreateRuleGroup and by ListRuleGroups.
 	//
 	// This member is required.
 	RuleGroupId *string
 
 	// An array of RuleGroupUpdate objects that you want to insert into or delete from
-	// a RuleGroup (). You can only insert REGULAR rules into a rule group.
+	// a RuleGroup. You can only insert REGULAR rules into a rule group.
 	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to
 	// a WebACL. In this case you do not use ActivatedRule|Action. For all other update
 	// requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
@@ -76,7 +81,7 @@ type UpdateRuleGroupOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRuleGroup request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus ().
+	// see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.

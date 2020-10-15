@@ -14,31 +14,30 @@ import (
 // Reserves open slots in a game session for a group of players. Before players can
 // be added, a game session must have an ACTIVE status, have a creation policy of
 // ALLOW_ALL, and have an open player slot. To add a single player to a game
-// session, use CreatePlayerSession (). When a player connects to the game server
-// and references a player session ID, the game server contacts the Amazon GameLift
+// session, use CreatePlayerSession. When a player connects to the game server and
+// references a player session ID, the game server contacts the Amazon GameLift
 // service to validate the player reservation and accept the player. To create
 // player sessions, specify a game session ID, a list of player IDs, and optionally
 // a set of player data strings. If successful, a slot is reserved in the game
-// session for each player and a set of new PlayerSession () objects is returned.
+// session for each player and a set of new PlayerSession objects is returned.
 // Player sessions cannot be updated. Available in Amazon GameLift Local.
 //
 //     *
-// CreatePlayerSession ()
+// CreatePlayerSession
 //
-//     * CreatePlayerSessions ()
+//     * CreatePlayerSessions
 //
-//     *
-// DescribePlayerSessions ()
+//     * DescribePlayerSessions
 //
-//     * Game session placements
+//
+// * Game session placements
+//
+//         * StartGameSessionPlacement
 //
 //         *
-// StartGameSessionPlacement ()
+// DescribeGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement ()
-//
-//
-// * StopGameSessionPlacement ()
+//         * StopGameSessionPlacement
 func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerSessionsInput, optFns ...func(*Options)) (*CreatePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &CreatePlayerSessionsInput{}

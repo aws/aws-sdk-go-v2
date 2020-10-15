@@ -12,8 +12,7 @@ import (
 
 // Deletes the bucket. All objects (including all object versions and delete
 // markers) in the bucket must be deleted before the bucket itself can be deleted.
-// <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p> </p> </li> <li>
-// <p> </p> </li> </ul>
+// Related Resources
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {
 	if params == nil {
 		params = &DeleteBucketInput{}

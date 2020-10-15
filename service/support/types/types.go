@@ -14,7 +14,7 @@ type Attachment struct {
 }
 
 // The file name and ID of an attachment to a case communication. You can use the
-// ID to retrieve the attachment with the DescribeAttachment () operation.
+// ID to retrieve the attachment with the DescribeAttachment operation.
 type AttachmentDetails struct {
 
 	// The ID of the attachment.
@@ -25,65 +25,64 @@ type AttachmentDetails struct {
 }
 
 // A JSON-formatted object that contains the metadata for a support case. It is
-// contained in the response from a DescribeCases () request. CaseDetails contains
-// the following fields:
+// contained in the response from a DescribeCases request. CaseDetails contains the
+// following fields:
 //
-//     * caseId. The AWS Support case ID requested or
-// returned in the call. The case ID is an alphanumeric string formatted as shown
-// in this example: case-12345678910-2013-c4c1d2bf33c5cf47.
+//     * caseId. The AWS Support case ID requested or returned
+// in the call. The case ID is an alphanumeric string formatted as shown in this
+// example: case-12345678910-2013-c4c1d2bf33c5cf47.
 //
-//     * categoryCode.
-// The category of problem for the AWS Support case. Corresponds to the
-// CategoryCode values returned by a call to DescribeServices ().
+//     * categoryCode. The
+// category of problem for the AWS Support case. Corresponds to the CategoryCode
+// values returned by a call to DescribeServices.
 //
-//     * displayId.
-// The identifier for the case on pages in the AWS Support Center.
+//     * displayId. The identifier
+// for the case on pages in the AWS Support Center.
 //
-//     * language.
-// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-// currently supports English ("en") and Japanese ("ja"). Language parameters must
-// be passed explicitly for operations that take them.
+//     * language. The ISO 639-1
+// code for the language in which AWS provides support. AWS Support currently
+// supports English ("en") and Japanese ("ja"). Language parameters must be passed
+// explicitly for operations that take them.
 //
-//     * nextToken. A
-// resumption point for pagination.
+//     * nextToken. A resumption point
+// for pagination.
 //
-//     * recentCommunications. One or more
-// Communication () objects. Fields of these objects are attachments, body, caseId,
-// submittedBy, and timeCreated.
+//     * recentCommunications. One or more Communication objects.
+// Fields of these objects are attachments, body, caseId, submittedBy, and
+// timeCreated.
 //
-//     * serviceCode. The identifier for the AWS
-// service that corresponds to the service code defined in the call to
-// DescribeServices ().
-//
-//     * severityCode. The severity code assigned to the
-// case. Contains one of the values returned by the call to DescribeSeverityLevels
-// (). The possible values are: low, normal, high, urgent, and critical.
+//     * serviceCode. The identifier for the AWS service that
+// corresponds to the service code defined in the call to DescribeServices.
 //
 //     *
-// status. The status of the case in the AWS Support Center. Valid values:
+// severityCode. The severity code assigned to the case. Contains one of the values
+// returned by the call to DescribeSeverityLevels. The possible values are: low,
+// normal, high, urgent, and critical.
 //
+//     * status. The status of the case in the
+// AWS Support Center. Valid values:
 //
-// * opened
+//         * opened
 //
-//         * pending-customer-action
+//         *
+// pending-customer-action
 //
 //         * reopened
 //
-//         *
-// resolved
+//         * resolved
 //
-//         * unassigned
+//         *
+// unassigned
 //
 //         * work-in-progress
 //
-//     * subject. The
-// subject line of the case.
+//     * subject. The subject line of the
+// case.
 //
-//     * submittedBy. The email address of the account
-// that submitted the case.
+//     * submittedBy. The email address of the account that submitted the
+// case.
 //
-//     * timeCreated. The time the case was created, in
-// ISO-8601 format.
+//     * timeCreated. The time the case was created, in ISO-8601 format.
 type CaseDetails struct {
 
 	// The AWS Support case ID requested or returned in the call. The case ID is an
@@ -112,11 +111,10 @@ type CaseDetails struct {
 	RecentCommunications *RecentCaseCommunications
 
 	// The code for the AWS service. You can get a list of codes and the corresponding
-	// service names by calling DescribeServices ().
+	// service names by calling DescribeServices.
 	ServiceCode *string
 
-	// The code for the severity level returned by the call to DescribeSeverityLevels
-	// ().
+	// The code for the severity level returned by the call to DescribeSeverityLevels.
 	SeverityCode *string
 
 	// The status of the case. Valid values:
@@ -147,7 +145,7 @@ type CaseDetails struct {
 }
 
 // A JSON-formatted name/value pair that represents the category name and category
-// code of the problem, selected from the DescribeServices () response for each AWS
+// code of the problem, selected from the DescribeServices response for each AWS
 // service.
 type Category struct {
 
@@ -194,16 +192,16 @@ type RecentCaseCommunications struct {
 	NextToken *string
 }
 
-// Information about an AWS service returned by the DescribeServices () operation.
+// Information about an AWS service returned by the DescribeServices operation.
 type Service struct {
 
 	// A list of categories that describe the type of support issue a case describes.
 	// Categories consist of a category name and a category code. Category names and
-	// codes are passed to AWS Support when you call CreateCase ().
+	// codes are passed to AWS Support when you call CreateCase.
 	Categories []*Category
 
-	// The code for an AWS service returned by the DescribeServices () response. The
-	// name element contains the corresponding friendly name.
+	// The code for an AWS service returned by the DescribeServices response. The name
+	// element contains the corresponding friendly name.
 	Code *string
 
 	// The friendly name for an AWS service. The code element contains the
@@ -277,9 +275,9 @@ type TrustedAdvisorCheckDescription struct {
 
 	// The column headings for the data returned by the Trusted Advisor check. The
 	// order of the headings corresponds to the order of the data in the Metadata
-	// element of the TrustedAdvisorResourceDetail () for the check. Metadata contains
-	// all the data that is shown in the Excel download, even in those cases where the
-	// UI shows just summary data.
+	// element of the TrustedAdvisorResourceDetail for the check. Metadata contains all
+	// the data that is shown in the Excel download, even in those cases where the UI
+	// shows just summary data.
 	//
 	// This member is required.
 	Metadata []*string
@@ -326,7 +324,7 @@ type TrustedAdvisorCheckRefreshStatus struct {
 }
 
 // The results of a Trusted Advisor check returned by
-// DescribeTrustedAdvisorCheckResult ().
+// DescribeTrustedAdvisorCheckResult.
 type TrustedAdvisorCheckResult struct {
 
 	// Summary information that relates to the category of the check. Cost Optimizing
@@ -346,7 +344,7 @@ type TrustedAdvisorCheckResult struct {
 	FlaggedResources []*TrustedAdvisorResourceDetail
 
 	// Details about AWS resources that were analyzed in a call to Trusted Advisor
-	// DescribeTrustedAdvisorCheckSummaries ().
+	// DescribeTrustedAdvisorCheckSummaries.
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
@@ -379,7 +377,7 @@ type TrustedAdvisorCheckSummary struct {
 	CheckId *string
 
 	// Details about AWS resources that were analyzed in a call to Trusted Advisor
-	// DescribeTrustedAdvisorCheckSummaries ().
+	// DescribeTrustedAdvisorCheckSummaries.
 	//
 	// This member is required.
 	ResourcesSummary *TrustedAdvisorResourcesSummary
@@ -420,10 +418,10 @@ type TrustedAdvisorCostOptimizingSummary struct {
 type TrustedAdvisorResourceDetail struct {
 
 	// Additional information about the identified resource. The exact metadata and its
-	// order can be obtained by inspecting the TrustedAdvisorCheckDescription () object
-	// returned by the call to DescribeTrustedAdvisorChecks (). Metadata contains all
-	// the data that is shown in the Excel download, even in those cases where the UI
-	// shows just summary data.
+	// order can be obtained by inspecting the TrustedAdvisorCheckDescription object
+	// returned by the call to DescribeTrustedAdvisorChecks. Metadata contains all the
+	// data that is shown in the Excel download, even in those cases where the UI shows
+	// just summary data.
 	//
 	// This member is required.
 	Metadata []*string
@@ -447,7 +445,7 @@ type TrustedAdvisorResourceDetail struct {
 }
 
 // Details about AWS resources that were analyzed in a call to Trusted Advisor
-// DescribeTrustedAdvisorCheckSummaries ().
+// DescribeTrustedAdvisorCheckSummaries.
 type TrustedAdvisorResourcesSummary struct {
 
 	// The number of AWS resources that were flagged (listed) by the Trusted Advisor

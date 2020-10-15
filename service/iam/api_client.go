@@ -19,13 +19,8 @@ import (
 const ServiceID = "IAM"
 const ServiceAPIVersion = "2010-05-08"
 
-// AWS Identity and Access Management AWS Identity and Access Management (IAM) is a
-// web service for securely controlling access to AWS services. With IAM, you can
-// centrally manage users, security credentials such as access keys, and
-// permissions that control which AWS resources users and applications can access.
-// For more information about IAM, see AWS Identity and Access Management (IAM)
-// (http://aws.amazon.com/iam/) and the AWS Identity and Access Management User
-// Guide (https://docs.aws.amazon.com/IAM/latest/UserGuide/).
+// Client provides the API client to make operations call for AWS Identity and
+// Access Management.
 type Client struct {
 	options Options
 }

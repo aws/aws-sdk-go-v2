@@ -13,12 +13,12 @@ import (
 
 // Creates an Application Load Balancer or a Network Load Balancer. When you create
 // a load balancer, you can specify security groups, public subnets, IP address
-// type, and tags. Otherwise, you could do so later using SetSecurityGroups (),
-// SetSubnets (), SetIpAddressType (), and AddTags (). To create listeners for your
-// load balancer, use CreateListener (). To describe your current load balancers,
-// see DescribeLoadBalancers (). When you are finished with a load balancer, you
-// can delete it using DeleteLoadBalancer (). For limit information, see Limits for
-// Your Application Load Balancer
+// type, and tags. Otherwise, you could do so later using SetSecurityGroups,
+// SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load
+// balancer, use CreateListener. To describe your current load balancers, see
+// DescribeLoadBalancers. When you are finished with a load balancer, you can
+// delete it using DeleteLoadBalancer. For limit information, see Limits for Your
+// Application Load Balancer
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
 // in the Application Load Balancers Guide and Limits for Your Network Load
 // Balancer

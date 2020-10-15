@@ -22,16 +22,16 @@ import (
 // Related operations
 //
 //     * To
-// create a secret, use CreateSecret ().
+// create a secret, use CreateSecret.
 //
 //     * To modify a secret, use
-// UpdateSecret ().
+// UpdateSecret.
 //
-//     * To retrieve the encrypted secret information in a
-// version of the secret, use GetSecretValue ().
+//     * To retrieve the encrypted secret information in a version
+// of the secret, use GetSecretValue.
 //
-//     * To list all of the secrets
-// in the AWS account, use ListSecrets ().
+//     * To list all of the secrets in the AWS
+// account, use ListSecrets.
 func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput, optFns ...func(*Options)) (*DescribeSecretOutput, error) {
 	if params == nil {
 		params = &DescribeSecretInput{}
@@ -83,7 +83,7 @@ type DescribeSecretOutput struct {
 	// specified date and time, Secrets Manager deletes the secret and all of its
 	// versions. If a secret is scheduled for deletion, then its details, including the
 	// encrypted secret information, is not accessible. To cancel a scheduled deletion
-	// and restore access, use RestoreSecret ().
+	// and restore access, use RestoreSecret.
 	DeletedDate *time.Time
 
 	// The user-provided description of the secret.
@@ -114,8 +114,8 @@ type DescribeSecretOutput struct {
 	OwningService *string
 
 	// Specifies whether automatic rotation is enabled for this secret. To enable
-	// rotation, use RotateSecret () with AutomaticallyRotateAfterDays set to a value
-	// greater than 0. To disable rotation, use CancelRotateSecret ().
+	// rotation, use RotateSecret with AutomaticallyRotateAfterDays set to a value
+	// greater than 0. To disable rotation, use CancelRotateSecret.
 	RotationEnabled *bool
 
 	// The ARN of a Lambda function that's invoked by Secrets Manager to rotate the
@@ -127,7 +127,7 @@ type DescribeSecretOutput struct {
 	RotationRules *types.RotationRulesType
 
 	// The list of user-defined tags that are associated with the secret. To add tags
-	// to a secret, use TagResource (). To remove tags, use UntagResource ().
+	// to a secret, use TagResource. To remove tags, use UntagResource.
 	Tags []*types.Tag
 
 	// A list of all of the currently assigned VersionStage staging labels and the

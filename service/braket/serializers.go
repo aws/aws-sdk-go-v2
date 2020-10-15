@@ -76,7 +76,13 @@ func awsRestjson1_serializeOpHttpBindingsCancelQuantumTaskInput(v *CancelQuantum
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.QuantumTaskArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
+	}
 	if v.QuantumTaskArn != nil {
+		if len(*v.QuantumTaskArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
+		}
 		if err := encoder.SetURI("quantumTaskArn").String(*v.QuantumTaskArn); err != nil {
 			return err
 		}
@@ -251,7 +257,13 @@ func awsRestjson1_serializeOpHttpBindingsGetDeviceInput(v *GetDeviceInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeviceArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member deviceArn must not be empty")}
+	}
 	if v.DeviceArn != nil {
+		if len(*v.DeviceArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member deviceArn must not be empty")}
+		}
 		if err := encoder.SetURI("deviceArn").String(*v.DeviceArn); err != nil {
 			return err
 		}
@@ -311,7 +323,13 @@ func awsRestjson1_serializeOpHttpBindingsGetQuantumTaskInput(v *GetQuantumTaskIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.QuantumTaskArn == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
+	}
 	if v.QuantumTaskArn != nil {
+		if len(*v.QuantumTaskArn) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member quantumTaskArn must not be empty")}
+		}
 		if err := encoder.SetURI("quantumTaskArn").String(*v.QuantumTaskArn); err != nil {
 			return err
 		}

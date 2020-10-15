@@ -15,7 +15,7 @@ import (
 // more repositories in your AWS account. When you associate a template with a
 // repository, AWS CodeCommit creates an approval rule that matches the conditions
 // of the template for all pull requests that meet the conditions of the template.
-// For more information, see AssociateApprovalRuleTemplateWithRepository ().
+// For more information, see AssociateApprovalRuleTemplateWithRepository.
 func (c *Client) CreateApprovalRuleTemplate(ctx context.Context, params *CreateApprovalRuleTemplateInput, optFns ...func(*Options)) (*CreateApprovalRuleTemplateOutput, error) {
 	if params == nil {
 		params = &CreateApprovalRuleTemplateInput{}
@@ -67,7 +67,7 @@ type CreateApprovalRuleTemplateInput struct {
 	// For more information about IAM ARNs, wildcards, and formats, see IAM
 	// Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
-	// the IAM User Guide.  </note>
+	// the IAM User Guide.
 	//
 	// This member is required.
 	ApprovalRuleTemplateContent *string

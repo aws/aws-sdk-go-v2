@@ -14,27 +14,27 @@ import (
 // Generates a unique asymmetric data key pair. The
 // GenerateDataKeyPairWithoutPlaintext operation returns a plaintext public key and
 // a copy of the private key that is encrypted under the symmetric CMK you specify.
-// Unlike GenerateDataKeyPair (), this operation does not return a plaintext
-// private key. To generate a data key pair, you must specify a symmetric customer
-// master key (CMK) to encrypt the private key in the data key pair. You cannot use
-// an asymmetric CMK or a CMK in a custom key store. To get the type and origin of
-// your CMK, use the KeySpec field in the DescribeKey () response. You can use the
+// Unlike GenerateDataKeyPair, this operation does not return a plaintext private
+// key. To generate a data key pair, you must specify a symmetric customer master
+// key (CMK) to encrypt the private key in the data key pair. You cannot use an
+// asymmetric CMK or a CMK in a custom key store. To get the type and origin of
+// your CMK, use the KeySpec field in the DescribeKey response. You can use the
 // public key that GenerateDataKeyPairWithoutPlaintext returns to encrypt data or
 // verify a signature outside of AWS KMS. Then, store the encrypted private key
 // with the data. When you are ready to decrypt data or sign a message, you can use
-// the Decrypt () operation to decrypt the encrypted private key.
+// the Decrypt operation to decrypt the encrypted private key.
 // GenerateDataKeyPairWithoutPlaintext returns a unique data key pair for each
 // request. The bytes in the key are not related to the caller or CMK that is used
-// to encrypt the private key.  <p>You can use the optional encryption context to
-// add additional security to the encryption operation. If you specify an
-// <code>EncryptionContext</code>, you must specify the same encryption context (a
+// to encrypt the private key. You can use the optional encryption context to add
+// additional security to the encryption operation. If you specify an
+// EncryptionContext, you must specify the same encryption context (a
 // case-sensitive exact match) when decrypting the encrypted data key. Otherwise,
-// the request to decrypt fails with an <code>InvalidCiphertextException</code>.
-// For more information, see <a
-// href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption
-// Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>The
-// CMK that you use for this operation must be in a compatible key state. For
-// details, see How Key State Affects Use of a Customer Master Key
+// the request to decrypt fails with an InvalidCiphertextException. For more
+// information, see Encryption Context
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+// in the AWS Key Management Service Developer Guide. The CMK that you use for this
+// operation must be in a compatible key state. For details, see How Key State
+// Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) GenerateDataKeyPairWithoutPlaintext(ctx context.Context, params *GenerateDataKeyPairWithoutPlaintextInput, optFns ...func(*Options)) (*GenerateDataKeyPairWithoutPlaintextOutput, error) {
@@ -56,7 +56,7 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 
 	// Specifies the CMK that encrypts the private key in the data key pair. You must
 	// specify a symmetric CMK. You cannot use an asymmetric CMK or a CMK in a custom
-	// key store. To get the type and origin of your CMK, use the DescribeKey ()
+	// key store. To get the type and origin of your CMK, use the DescribeKey
 	// operation. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
 	// name, or alias ARN. When using an alias name, prefix it with "alias/". For
 	// example:
@@ -73,8 +73,8 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys () or DescribeKey (). To get the alias name and
-	// alias ARN, use ListAliases ().
+	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
+	// use ListAliases.
 	//
 	// This member is required.
 	KeyId *string

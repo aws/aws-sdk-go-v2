@@ -19,9 +19,11 @@ type ArchivalSummary struct {
 	ArchivalDateTime *time.Time
 
 	// The reason DynamoDB archived the table. Currently, the only possible value is:
-	// <ul> <li> <p> <code>INACCESSIBLE_ENCRYPTION_CREDENTIALS</code> - The table was
-	// archived due to the table's AWS KMS key being inaccessible for more than seven
-	// days. An On-Demand backup was created at the archival time.</p> </li> </ul>
+	//
+	//
+	// * INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the
+	// table's AWS KMS key being inaccessible for more than seven days. An On-Demand
+	// backup was created at the archival time.
 	ArchivalReason *string
 }
 
@@ -107,53 +109,65 @@ type AttributeValueUpdate struct {
 
 	// Specifies how to perform the update. Valid values are PUT (default), DELETE, and
 	// ADD. The behavior depends on whether the specified primary key already exists in
-	// the table.  <p> <b>If an item with the specified <i>Key</i> is found in the
-	// table:</b> </p> <ul> <li> <p> <code>PUT</code> - Adds the specified attribute to
-	// the item. If the attribute already exists, it is replaced by the new value. </p>
-	// </li> <li> <p> <code>DELETE</code> - If no value is specified, the attribute and
-	// its value are removed from the item. The data type of the specified value must
-	// match the existing value's data type.</p> <p>If a <i>set</i> of values is
+	// the table. If an item with the specified Key is found in the table:
+	//
+	//     * PUT -
+	// Adds the specified attribute to the item. If the attribute already exists, it is
+	// replaced by the new value.
+	//
+	//     * DELETE - If no value is specified, the
+	// attribute and its value are removed from the item. The data type of the
+	// specified value must match the existing value's data type. If a set of values is
 	// specified, then those values are subtracted from the old set. For example, if
-	// the attribute value was the set <code>[a,b,c]</code> and the <code>DELETE</code>
-	// action specified <code>[a,c]</code>, then the final attribute value would be
-	// <code>[b]</code>. Specifying an empty set is an error.</p> </li> <li> <p>
-	// <code>ADD</code> - If the attribute does not already exist, then the attribute
+	// the attribute value was the set [a,b,c] and the DELETE action specified [a,c],
+	// then the final attribute value would be [b]. Specifying an empty set is an
+	// error.
+	//
+	//     * ADD - If the attribute does not already exist, then the attribute
 	// and its values are added to the item. If the attribute does exist, then the
-	// behavior of <code>ADD</code> depends on the data type of the attribute:</p> <ul>
-	// <li> <p>If the existing attribute is a number, and if <code>Value</code> is also
-	// a number, then the <code>Value</code> is mathematically added to the existing
-	// attribute. If <code>Value</code> is a negative number, then it is subtracted
-	// from the existing attribute.</p> <note> <p> If you use <code>ADD</code> to
-	// increment or decrement a number value for an item that doesn't exist before the
-	// update, DynamoDB uses 0 as the initial value.</p> <p>In addition, if you use
-	// <code>ADD</code> to update an existing item, and intend to increment or
-	// decrement an attribute value which does not yet exist, DynamoDB uses
-	// <code>0</code> as the initial value. For example, suppose that the item you want
-	// to update does not yet have an attribute named <i>itemcount</i>, but you decide
-	// to <code>ADD</code> the number <code>3</code> to this attribute anyway, even
-	// though it currently does not exist. DynamoDB will create the <i>itemcount</i>
-	// attribute, set its initial value to <code>0</code>, and finally add
-	// <code>3</code> to it. The result will be a new <i>itemcount</i> attribute in the
-	// item, with a value of <code>3</code>.</p> </note> </li> <li> <p>If the existing
-	// data type is a set, and if the <code>Value</code> is also a set, then the
-	// <code>Value</code> is added to the existing set. (This is a <i>set</i>
-	// operation, not mathematical addition.) For example, if the attribute value was
-	// the set <code>[1,2]</code>, and the <code>ADD</code> action specified
-	// <code>[3]</code>, then the final attribute value would be <code>[1,2,3]</code>.
-	// An error occurs if an Add action is specified for a set attribute and the
-	// attribute type specified does not match the existing set type. </p> <p>Both sets
-	// must have the same primitive data type. For example, if the existing data type
-	// is a set of strings, the <code>Value</code> must also be a set of strings. The
-	// same holds true for number sets and binary sets.</p> </li> </ul> <p>This action
-	// is only valid for an existing attribute whose data type is number or is a set.
-	// Do not use <code>ADD</code> for any other data types.</p> </li> </ul> <p> <b>If
-	// no item with the specified <i>Key</i> is found:</b> </p> <ul> <li> <p>
-	// <code>PUT</code> - DynamoDB creates a new item with the specified primary key,
-	// and then adds the attribute. </p> </li> <li> <p> <code>DELETE</code> - Nothing
-	// happens; there is no attribute to delete.</p> </li> <li> <p> <code>ADD</code> -
-	// DynamoDB creates an item with the supplied primary key and number (or set of
-	// numbers) for the attribute value. The only data types allowed are number and
-	// number set; no other data types can be specified.</p> </li> </ul>
+	// behavior of ADD depends on the data type of the attribute:
+	//
+	//         * If the
+	// existing attribute is a number, and if Value is also a number, then the Value is
+	// mathematically added to the existing attribute. If Value is a negative number,
+	// then it is subtracted from the existing attribute. If you use ADD to increment
+	// or decrement a number value for an item that doesn't exist before the update,
+	// DynamoDB uses 0 as the initial value. In addition, if you use ADD to update an
+	// existing item, and intend to increment or decrement an attribute value which
+	// does not yet exist, DynamoDB uses 0 as the initial value. For example, suppose
+	// that the item you want to update does not yet have an attribute named itemcount,
+	// but you decide to ADD the number 3 to this attribute anyway, even though it
+	// currently does not exist. DynamoDB will create the itemcount attribute, set its
+	// initial value to 0, and finally add 3 to it. The result will be a new itemcount
+	// attribute in the item, with a value of 3.
+	//
+	//         * If the existing data type
+	// is a set, and if the Value is also a set, then the Value is added to the
+	// existing set. (This is a set operation, not mathematical addition.) For example,
+	// if the attribute value was the set [1,2], and the ADD action specified [3], then
+	// the final attribute value would be [1,2,3]. An error occurs if an Add action is
+	// specified for a set attribute and the attribute type specified does not match
+	// the existing set type. Both sets must have the same primitive data type. For
+	// example, if the existing data type is a set of strings, the Value must also be a
+	// set of strings. The same holds true for number sets and binary sets.
+	//
+	//     This
+	// action is only valid for an existing attribute whose data type is number or is a
+	// set. Do not use ADD for any other data types.
+	//
+	// If no item with the specified Key
+	// is found:
+	//
+	//     * PUT - DynamoDB creates a new item with the specified primary
+	// key, and then adds the attribute.
+	//
+	//     * DELETE - Nothing happens; there is no
+	// attribute to delete.
+	//
+	//     * ADD - DynamoDB creates an item with the supplied
+	// primary key and number (or set of numbers) for the attribute value. The only
+	// data types allowed are number and number set; no other data types can be
+	// specified.
 	Action AttributeAction
 
 	// Represents the data for an attribute. Each attribute value is described as a
@@ -2371,22 +2385,29 @@ type TableDescription struct {
 	// distribute data items across partitions, based on their partition key values.
 	// The sort key of an item is also known as its range attribute. The term "range
 	// attribute" derives from the way DynamoDB stores items with the same partition
-	// key physically close together, in sorted order by the sort key value.  </li>
-	// </ul> <p>For more information about primary keys, see <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey">Primary
-	// Key</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
+	// key physically close together, in sorted order by the sort key value.
+	//
+	// For more
+	// information about primary keys, see Primary Key
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey)
+	// in the Amazon DynamoDB Developer Guide.
 	KeySchema []*KeySchemaElement
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the latest stream for
 	// this table.
 	LatestStreamArn *string
 
-	// A timestamp, in ISO 8601 format, for this stream.  <p>Note that
-	// <code>LatestStreamLabel</code> is not a unique identifier for the stream,
-	// because it is possible that a stream from another table might have the same
-	// timestamp. However, the combination of the following three elements is
-	// guaranteed to be unique:</p> <ul> <li> <p>AWS customer ID</p> </li> <li>
-	// <p>Table name</p> </li> <li> <p> <code>StreamLabel</code> </p> </li> </ul>
+	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is
+	// not a unique identifier for the stream, because it is possible that a stream
+	// from another table might have the same timestamp. However, the combination of
+	// the following three elements is guaranteed to be unique:
+	//
+	//     * AWS customer
+	// ID
+	//
+	//     * Table name
+	//
+	//     * StreamLabel
 	LatestStreamLabel *string
 
 	// Represents one or more local secondary indexes on the table. Each index is

@@ -73,41 +73,45 @@ import (
 // keys can’t exceed 128 characters and the values can’t exceed 256 characters. For
 // these and additional limits, see IAM and STS Character Limits
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length)
-// in the IAM User Guide.  <note> <p>An AWS conversion compresses the passed
-// session policies and session tags into a packed binary format that has a
-// separate limit. Your request can fail for this limit even if your plain text
-// meets the other requirements. The <code>PackedPolicySize</code> response element
-// indicates by percentage how close the policies and tags for your request are to
-// the upper size limit. </p> </note> <p>You can pass a session tag with the same
-// key as a tag that is attached to the role. When you do, session tags override
-// the role's tags with the same key.</p> <p>An administrator must grant you the
-// permissions necessary to pass session tags. The administrator can also create
-// granular permissions to allow you to pass only specific session tags. For more
-// information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html">Tutorial:
-// Using Tags for Attribute-Based Access Control</a> in the <i>IAM User
-// Guide</i>.</p> <p>You can set the session tags as transitive. Transitive tags
-// persist during role chaining. For more information, see <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining">Chaining
-// Roles with Session Tags</a> in the <i>IAM User Guide</i>.</p> <p> <b>SAML
-// Configuration</b> </p> <p>Before your application can call
-// <code>AssumeRoleWithSAML</code>, you must configure your SAML identity provider
-// (IdP) to issue the claims required by AWS. Additionally, you must use AWS
-// Identity and Access Management (IAM) to create a SAML provider entity in your
-// AWS account that represents your identity provider. You must also create an IAM
-// role that specifies this SAML provider in its trust policy. </p> <p>For more
-// information, see the following resources:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html">About
-// SAML 2.0-based Federation</a> in the <i>IAM User Guide</i>. </p> </li> <li> <p>
-// <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html">Creating
-// SAML Identity Providers</a> in the <i>IAM User Guide</i>. </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html">Configuring
-// a Relying Party and Claims</a> in the <i>IAM User Guide</i>. </p> </li> <li> <p>
-// <a
-// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html">Creating
-// a Role for SAML 2.0 Federation</a> in the <i>IAM User Guide</i>. </p> </li>
-// </ul>
+// in the IAM User Guide. An AWS conversion compresses the passed session policies
+// and session tags into a packed binary format that has a separate limit. Your
+// request can fail for this limit even if your plain text meets the other
+// requirements. The PackedPolicySize response element indicates by percentage how
+// close the policies and tags for your request are to the upper size limit. You
+// can pass a session tag with the same key as a tag that is attached to the role.
+// When you do, session tags override the role's tags with the same key. An
+// administrator must grant you the permissions necessary to pass session tags. The
+// administrator can also create granular permissions to allow you to pass only
+// specific session tags. For more information, see Tutorial: Using Tags for
+// Attribute-Based Access Control
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html)
+// in the IAM User Guide. You can set the session tags as transitive. Transitive
+// tags persist during role chaining. For more information, see Chaining Roles with
+// Session Tags
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
+// in the IAM User Guide. SAML Configuration Before your application can call
+// AssumeRoleWithSAML, you must configure your SAML identity provider (IdP) to
+// issue the claims required by AWS. Additionally, you must use AWS Identity and
+// Access Management (IAM) to create a SAML provider entity in your AWS account
+// that represents your identity provider. You must also create an IAM role that
+// specifies this SAML provider in its trust policy. For more information, see the
+// following resources:
+//
+//     * About SAML 2.0-based Federation
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
+// in the IAM User Guide.
+//
+//     * Creating SAML Identity Providers
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html)
+// in the IAM User Guide.
+//
+//     * Configuring a Relying Party and Claims
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html)
+// in the IAM User Guide.
+//
+//     * Creating a Role for SAML 2.0 Federation
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html)
+// in the IAM User Guide.
 func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeRoleWithSAMLOutput, error) {
 	if params == nil {
 		params = &AssumeRoleWithSAMLInput{}
@@ -199,19 +203,19 @@ type AssumeRoleWithSAMLInput struct {
 	// Your request can fail for this limit even if your plain text meets the other
 	// requirements. The PackedPolicySize response element indicates by percentage how
 	// close the policies and tags for your request are to the upper size limit.
-	// <p>Passing policies to this operation returns new temporary credentials. The
+	// Passing policies to this operation returns new temporary credentials. The
 	// resulting session's permissions are the intersection of the role's
 	// identity-based policy and the session policies. You can use the role's temporary
 	// credentials in subsequent AWS API calls to access resources in the account that
 	// owns the role. You cannot use session policies to grant more permissions than
 	// those allowed by the identity-based policy of the role that is being assumed.
-	// For more information, see <a
-	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
-	// Policies</a> in the <i>IAM User Guide</i>.</p>
+	// For more information, see Session Policies
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// in the IAM User Guide.
 	PolicyArns []*types.PolicyDescriptorType
 }
 
-// Contains the response to a successful AssumeRoleWithSAML () request, including
+// Contains the response to a successful AssumeRoleWithSAML request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type AssumeRoleWithSAMLOutput struct {
 

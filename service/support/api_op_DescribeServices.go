@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the current list of AWS services and a list of service categories for
-// each service. You then use service names and categories in your CreateCase ()
+// each service. You then use service names and categories in your CreateCase
 // requests. Each AWS service has its own set of categories. The service codes and
 // category codes correspond to the values that appear in the Service and Category
 // lists on the AWS Support Center Create Case
@@ -56,7 +56,7 @@ type DescribeServicesInput struct {
 	ServiceCodeList []*string
 }
 
-// The list of AWS services returned by the DescribeServices () operation.
+// The list of AWS services returned by the DescribeServices operation.
 type DescribeServicesOutput struct {
 
 	// A JSON-formatted list of AWS services.

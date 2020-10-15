@@ -19,11 +19,8 @@ import (
 const ServiceID = "FraudDetector"
 const ServiceAPIVersion = "2019-11-15"
 
-// This is the Amazon Fraud Detector API Reference. This guide is for developers
-// who need detailed information about Amazon Fraud Detector API actions, data
-// types, and errors. For more information about Amazon Fraud Detector features,
-// see the Amazon Fraud Detector User Guide
-// (https://docs.aws.amazon.com/frauddetector/latest/ug/).
+// Client provides the API client to make operations call for Amazon Fraud
+// Detector.
 type Client struct {
 	options Options
 }

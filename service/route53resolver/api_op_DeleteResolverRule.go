@@ -13,7 +13,7 @@ import (
 
 // Deletes a resolver rule. Before you can delete a resolver rule, you must
 // disassociate it from all the VPCs that you associated the resolver rule with.
-// For more infomation, see DisassociateResolverRule ().
+// For more infomation, see DisassociateResolverRule.
 func (c *Client) DeleteResolverRule(ctx context.Context, params *DeleteResolverRuleInput, optFns ...func(*Options)) (*DeleteResolverRuleOutput, error) {
 	if params == nil {
 		params = &DeleteResolverRuleInput{}

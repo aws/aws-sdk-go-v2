@@ -17,9 +17,9 @@ import (
 // Java, you can use the decode method of the java.net.URLDecoder utility class in
 // the Java SDK. Other languages and SDKs provide similar functionality. An IAM
 // role can also have managed policies attached to it. To retrieve a managed policy
-// document that is attached to a role, use GetPolicy () to determine the policy's
-// default version, then use GetPolicyVersion () to retrieve the policy document.
-// For more information about policies, see Managed Policies and Inline Policies
+// document that is attached to a role, use GetPolicy to determine the policy's
+// default version, then use GetPolicyVersion to retrieve the policy document. For
+// more information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For more information about roles, see Using Roles to
 // Delegate Permissions and Federate Identities
@@ -58,7 +58,7 @@ type GetRolePolicyInput struct {
 	RoleName *string
 }
 
-// Contains the response to a successful GetRolePolicy () request.
+// Contains the response to a successful GetRolePolicy request.
 type GetRolePolicyOutput struct {
 
 	// The policy document. IAM stores policies in JSON format. However, resources that

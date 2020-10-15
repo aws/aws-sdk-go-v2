@@ -17,7 +17,7 @@ import (
 //
 //     * The
 // call must refer to an existing email template. You can create email templates
-// using the CreateTemplate () operation.
+// using the CreateTemplate operation.
 //
 //     * The message must be sent from a
 // verified email address or domain.

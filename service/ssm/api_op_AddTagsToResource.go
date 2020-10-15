@@ -19,13 +19,13 @@ import (
 // define. For example, you could define a set of tags for your account's managed
 // instances that helps you track each instance's owner and stack level. For
 // example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
-// Value=Production, Pre-Production, or Test.  <p>Each resource can have a maximum
-// of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets
-// your needs for each resource type.  Using a consistent set of tag keys makes it
-// easier for you to manage your resources. You can search and filter the resources
-// based on the tags you add. Tags don't have any semantic meaning to and are
-// interpreted strictly as a string of characters. For more information about using
-// tags with EC2 instances, see Tagging your Amazon EC2 resources
+// Value=Production, Pre-Production, or Test. Each resource can have a maximum of
+// 50 tags. We recommend that you devise a set of tag keys that meets your needs
+// for each resource type. Using a consistent set of tag keys makes it easier for
+// you to manage your resources. You can search and filter the resources based on
+// the tags you add. Tags don't have any semantic meaning to and are interpreted
+// strictly as a string of characters. For more information about using tags with
+// EC2 instances, see Tagging your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 // Amazon EC2 User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {

@@ -49,7 +49,7 @@ import (
 // that number of results is returned along with a NextToken value that can be
 // passed to a subsequent DescribeSnapshots request to retrieve the remaining
 // results. To get the state of fast snapshot restores for a snapshot, use
-// DescribeFastSnapshotRestores (). For more information about EBS snapshots, see
+// DescribeFastSnapshotRestores. For more information about EBS snapshots, see
 // Amazon EBS Snapshots
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html) in the
 // Amazon Elastic Compute Cloud User Guide.

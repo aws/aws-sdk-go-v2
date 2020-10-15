@@ -28,7 +28,7 @@ func (c *Client) CreateDBSubnetGroup(ctx context.Context, params *CreateDBSubnet
 	return out, nil
 }
 
-// Represents the input to CreateDBSubnetGroup ().
+// Represents the input to CreateDBSubnetGroup.
 type CreateDBSubnetGroupInput struct {
 
 	// The description for the subnet group.

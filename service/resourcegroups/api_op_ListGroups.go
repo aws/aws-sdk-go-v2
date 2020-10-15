@@ -29,7 +29,7 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
-	// Filters, formatted as GroupFilter () objects, that you want to apply to a
+	// Filters, formatted as GroupFilter objects, that you want to apply to a
 	// ListGroups operation.
 	//
 	//     * resource-type - Filter the results to include only
@@ -64,7 +64,7 @@ type ListGroupsInput struct {
 
 type ListGroupsOutput struct {
 
-	// A list of GroupIdentifier () objects. Each identifier is an object that contains
+	// A list of GroupIdentifier objects. Each identifier is an object that contains
 	// both the Name and the GroupArn.
 	GroupIdentifiers []*types.GroupIdentifier
 

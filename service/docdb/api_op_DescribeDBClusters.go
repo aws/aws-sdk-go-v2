@@ -32,7 +32,7 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusters ().
+// Represents the input to DescribeDBClusters.
 type DescribeDBClustersInput struct {
 
 	// The user-provided cluster identifier. If this parameter is specified,
@@ -63,7 +63,7 @@ type DescribeDBClustersInput struct {
 	MaxRecords *int32
 }
 
-// Represents the output of DescribeDBClusters ().
+// Represents the output of DescribeDBClusters.
 type DescribeDBClustersOutput struct {
 
 	// A list of clusters.

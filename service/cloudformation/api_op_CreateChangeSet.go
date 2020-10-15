@@ -26,9 +26,9 @@ import (
 // operation, specify IMPORT for the ChangeSetType parameter. After the
 // CreateChangeSet call successfully completes, AWS CloudFormation starts creating
 // the change set. To check the status of the change set or to review it, use the
-// DescribeChangeSet () action. When you are satisfied with the changes the change
-// set will make, execute the change set by using the ExecuteChangeSet () action.
-// AWS CloudFormation doesn't make changes until you execute the change set.
+// DescribeChangeSet action. When you are satisfied with the changes the change set
+// will make, execute the change set by using the ExecuteChangeSet action. AWS
+// CloudFormation doesn't make changes until you execute the change set.
 func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInput, optFns ...func(*Options)) (*CreateChangeSetOutput, error) {
 	if params == nil {
 		params = &CreateChangeSetInput{}
@@ -44,7 +44,7 @@ func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInp
 	return out, nil
 }
 
-// The input for the CreateChangeSet () action.
+// The input for the CreateChangeSet action.
 type CreateChangeSetInput struct {
 
 	// The name of the change set. The name must be unique among all change sets that
@@ -138,9 +138,9 @@ type CreateChangeSetInput struct {
 	// has no effect. Also, change sets do not currently support nested stacks. If you
 	// want to create a stack from a stack template that contains macros and nested
 	// stacks, you must create or update the stack directly from the template using the
-	// CreateStack () or UpdateStack () action, and specifying this capability. For
-	// more information on macros, see Using AWS CloudFormation Macros to Perform
-	// Custom Processing on Templates
+	// CreateStack or UpdateStack action, and specifying this capability. For more
+	// information on macros, see Using AWS CloudFormation Macros to Perform Custom
+	// Processing on Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
 
@@ -172,7 +172,7 @@ type CreateChangeSetInput struct {
 	NotificationARNs []*string
 
 	// A list of Parameter structures that specify input parameters for the change set.
-	// For more information, see the Parameter () data type.
+	// For more information, see the Parameter data type.
 	Parameters []*types.Parameter
 
 	// The template resource types that you have permissions to work with if you
@@ -229,7 +229,7 @@ type CreateChangeSetInput struct {
 	UsePreviousTemplate *bool
 }
 
-// The output for the CreateChangeSet () action.
+// The output for the CreateChangeSet action.
 type CreateChangeSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the change set.

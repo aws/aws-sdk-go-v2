@@ -264,7 +264,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDetectorModelInput(v *DeleteDetec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorModelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+	}
 	if v.DetectorModelName != nil {
+		if len(*v.DetectorModelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -324,7 +330,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteInputInput(v *DeleteInputInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InputName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
+	}
 	if v.InputName != nil {
+		if len(*v.InputName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
+		}
 		if err := encoder.SetURI("inputName").String(*v.InputName); err != nil {
 			return err
 		}
@@ -384,7 +396,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDetectorModelInput(v *DescribeD
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorModelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+	}
 	if v.DetectorModelName != nil {
+		if len(*v.DetectorModelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -448,7 +466,13 @@ func awsRestjson1_serializeOpHttpBindingsDescribeInputInput(v *DescribeInputInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InputName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
+	}
 	if v.InputName != nil {
+		if len(*v.InputName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
+		}
 		if err := encoder.SetURI("inputName").String(*v.InputName); err != nil {
 			return err
 		}
@@ -620,7 +644,13 @@ func awsRestjson1_serializeOpHttpBindingsListDetectorModelVersionsInput(v *ListD
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorModelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+	}
 	if v.DetectorModelName != nil {
+		if len(*v.DetectorModelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -1044,7 +1074,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDetectorModelInput(v *UpdateDetec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DetectorModelName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+	}
 	if v.DetectorModelName != nil {
+		if len(*v.DetectorModelName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
+		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -1144,7 +1180,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateInputInput(v *UpdateInputInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.InputName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
+	}
 	if v.InputName != nil {
+		if len(*v.InputName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
+		}
 		if err := encoder.SetURI("inputName").String(*v.InputName); err != nil {
 			return err
 		}

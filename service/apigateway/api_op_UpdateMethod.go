@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an existing Method () resource.
+// Updates an existing Method resource.
 func (c *Client) UpdateMethod(ctx context.Context, params *UpdateMethodInput, optFns ...func(*Options)) (*UpdateMethodOutput, error) {
 	if params == nil {
 		params = &UpdateMethodInput{}
@@ -27,20 +27,20 @@ func (c *Client) UpdateMethod(ctx context.Context, params *UpdateMethodInput, op
 	return out, nil
 }
 
-// Request to update an existing Method () resource.
+// Request to update an existing Method resource.
 type UpdateMethodInput struct {
 
-	// [Required] The HTTP verb of the Method () resource.
+	// [Required] The HTTP verb of the Method resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] The Resource () identifier for the Method () resource.
+	// [Required] The Resource identifier for the Method resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -59,15 +59,15 @@ type UpdateMethodInput struct {
 }
 
 // Represents a client-facing interface by which the client calls the API to access
-// back-end resources. A Method resource is integrated with an Integration ()
+// back-end resources. A Method resource is integrated with an Integration
 // resource. Both consist of a request and one or more responses. The method
 // request takes the client input that is passed to the back end through the
 // integration request. A method response returns the output from the back end to
 // the client through an integration response. A method request is embodied in a
-// Method resource, whereas an integration request is embodied in an Integration ()
+// Method resource, whereas an integration request is embodied in an Integration
 // resource. On the other hand, a method response is represented by a
-// MethodResponse () resource, whereas an integration response is represented by an
-// IntegrationResponse () resource.
+// MethodResponse resource, whereas an integration response is represented by an
+// IntegrationResponse resource.
 // Example: Retrive the GET method on a specified
 // resource
 //
@@ -145,12 +145,12 @@ type UpdateMethodInput struct {
 // %3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E
 // and the output is decoded using the $util.urlDecode()
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference)
-// helper function. MethodResponse (), Integration (), IntegrationResponse (),
-// Resource (), Set up an API's method
+// helper function. MethodResponse, Integration, IntegrationResponse, Resource, Set
+// up an API's method
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html)
 type UpdateMethodOutput struct {
 
-	// A boolean flag specifying whether a valid ApiKey () is required to invoke this
+	// A boolean flag specifying whether a valid ApiKey is required to invoke this
 	// method.
 	ApiKeyRequired *bool
 
@@ -169,7 +169,7 @@ type UpdateMethodOutput struct {
 	// COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
 
-	// The identifier of an Authorizer () to use on this method. The authorizationType
+	// The identifier of an Authorizer to use on this method. The authorizationType
 	// must be CUSTOM.
 	AuthorizerId *string
 
@@ -234,7 +234,7 @@ type UpdateMethodOutput struct {
 
 	// Gets a method response associated with a given HTTP status code. The collection
 	// of method responses are encapsulated in a key-value map, where the key is a
-	// response's HTTP status code and the value is a MethodResponse () resource that
+	// response's HTTP status code and the value is a MethodResponse resource that
 	// specifies the response returned to the caller from the back end through the
 	// integration response.
 	// Example: Get a 200 OK response of a GET method
@@ -271,8 +271,8 @@ type UpdateMethodOutput struct {
 	// example.
 	OperationName *string
 
-	// A key-value map specifying data schemas, represented by Model () resources, (as
-	// the mapped value) of the request payloads of given content types (as the mapping
+	// A key-value map specifying data schemas, represented by Model resources, (as the
+	// mapped value) of the request payloads of given content types (as the mapping
 	// key).
 	RequestModels map[string]*string
 
@@ -282,11 +282,11 @@ type UpdateMethodOutput struct {
 	// path, or header and name is a valid and unique parameter name. The value
 	// associated with the key is a Boolean flag indicating whether the parameter is
 	// required (true) or optional (false). The method request parameter names defined
-	// here are available in Integration () to be mapped to integration request
-	// parameters or templates.
+	// here are available in Integration to be mapped to integration request parameters
+	// or templates.
 	RequestParameters map[string]*bool
 
-	// The identifier of a RequestValidator () for request validation.
+	// The identifier of a RequestValidator for request validation.
 	RequestValidatorId *string
 
 	// Metadata pertaining to the operation's result.

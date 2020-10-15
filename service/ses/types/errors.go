@@ -9,7 +9,7 @@ import (
 
 // Indicates that email sending is disabled for your entire Amazon SES account. You
 // can enable or disable email sending for your Amazon SES account using
-// UpdateAccountSendingEnabled ().
+// UpdateAccountSendingEnabled.
 type AccountSendingPausedException struct {
 	Message *string
 }
@@ -113,7 +113,7 @@ func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 
 // Indicates that email sending is disabled for the configuration set. You can
 // enable or disable email sending for a configuration set using
-// UpdateConfigurationSetSendingEnabled ().
+// UpdateConfigurationSetSendingEnabled.
 type ConfigurationSetSendingPausedException struct {
 	Message *string
 

@@ -44,7 +44,7 @@ type CompleteLayerUploadInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The upload ID from a previous InitiateLayerUpload () operation to associate with
+	// The upload ID from a previous InitiateLayerUpload operation to associate with
 	// the image layer.
 	//
 	// This member is required.

@@ -34,7 +34,7 @@ type GetDocumentationVersionInput struct {
 	// This member is required.
 	DocumentationVersion *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -52,7 +52,7 @@ type GetDocumentationVersionInput struct {
 // creating a documentation version associated with an API stage and exporting the
 // versioned documentation to an external (e.g., OpenAPI) file. Documenting an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart (), DocumentationVersions ()
+// DocumentationPart, DocumentationVersions
 type GetDocumentationVersionOutput struct {
 
 	// The date when the API documentation snapshot is created.

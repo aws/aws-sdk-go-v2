@@ -21,7 +21,8 @@ import (
 const ServiceID = "S3"
 const ServiceAPIVersion = "2006-03-01"
 
-//
+// Client provides the API client to make operations call for Amazon Simple Storage
+// Service.
 type Client struct {
 	options Options
 }

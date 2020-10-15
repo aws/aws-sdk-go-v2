@@ -53,7 +53,7 @@ type UpdateStackInput struct {
 	// The default setting is LATEST. To specify an
 	// agent version, you must use the complete version number, not the abbreviated
 	// number shown on the console. For a list of available agent version numbers, call
-	// DescribeAgentVersions (). AgentVersion cannot be set to Chef 12.2. You can also
+	// DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2. You can also
 	// specify an agent version when you create or update an instance, which overrides
 	// the stack's default setting.
 	AgentVersion *string
@@ -92,7 +92,7 @@ type UpdateStackInput struct {
 	// more information, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html). If you also specify
 	// a value for DefaultSubnetId, the subnet must be in the same zone. For more
-	// information, see CreateStack ().
+	// information, see CreateStack.
 	DefaultAvailabilityZone *string
 
 	// The ARN of an IAM profile that is the default profile for all of the stack's EC2

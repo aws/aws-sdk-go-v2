@@ -54,7 +54,7 @@ type UpdateLayerInput struct {
 	AutoAssignPublicIps *bool
 
 	// Specifies CloudWatch Logs configuration options for the layer. For more
-	// information, see CloudWatchLogsLogStream ().
+	// information, see CloudWatchLogsLogStream.
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
 
 	// The ARN of an IAM profile to be used for all of the layer's EC2 instances. For
@@ -80,7 +80,7 @@ type UpdateLayerInput struct {
 	// Whether to install operating system and package updates when the instance boots.
 	// The default value is true. To control when updates are installed, set this value
 	// to false. You must then update your instances manually by using CreateDeployment
-	// () to run the update_dependencies stack command or manually running yum (Amazon
+	// to run the update_dependencies stack command or manually running yum (Amazon
 	// Linux) or apt-get (Ubuntu) on the instances. We strongly recommend using the
 	// default value of true, to ensure that your instances have the latest security
 	// updates.

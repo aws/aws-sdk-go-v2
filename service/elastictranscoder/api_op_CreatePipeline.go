@@ -162,16 +162,19 @@ type CreatePipelineInput struct {
 	// the transcoded files, thumbnails, and playlists.
 	//
 	//     * You do not want to
-	// specify the permissions that Elastic Transcoder grants to the  files. </p>
-	// <important> <p>When Elastic Transcoder saves files in <code>OutputBucket</code>,
-	// it grants full control over the files only to the AWS account that owns the role
-	// that is specified by <code>Role</code>.</p> </important> </li> <li> <p>You want
-	// to associate the transcoded files and thumbnails with the Amazon S3 Standard
-	// storage class.</p> </li> </ul> <p>If you want to save transcoded files and
-	// playlists in one bucket and thumbnails in another bucket, specify which users
-	// can access the transcoded files or the permissions the users have, or change the
-	// Amazon S3 storage class, omit <code>OutputBucket</code> and specify values for
-	// <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead.</p>
+	// specify the permissions that Elastic Transcoder grants to the files. When
+	// Elastic Transcoder saves files in OutputBucket, it grants full control over the
+	// files only to the AWS account that owns the role that is specified by Role.
+	//
+	//
+	// * You want to associate the transcoded files and thumbnails with the Amazon S3
+	// Standard storage class.
+	//
+	// If you want to save transcoded files and playlists in
+	// one bucket and thumbnails in another bucket, specify which users can access the
+	// transcoded files or the permissions the users have, or change the Amazon S3
+	// storage class, omit OutputBucket and specify values for ContentConfig and
+	// ThumbnailConfig instead.
 	OutputBucket *string
 
 	// The ThumbnailConfig object specifies several values, including the Amazon S3

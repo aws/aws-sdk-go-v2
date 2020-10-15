@@ -19,13 +19,7 @@ import (
 const ServiceID = "Amplify"
 const ServiceAPIVersion = "2017-07-25"
 
-// Amplify enables developers to develop and deploy cloud-powered mobile and web
-// apps. The Amplify Console provides a continuous delivery and hosting service for
-// web applications. For more information, see the Amplify Console User Guide
-// (https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html). The Amplify
-// Framework is a comprehensive set of SDKs, libraries, tools, and documentation
-// for client app development. For more information, see the Amplify Framework.
-// (https://docs.amplify.aws/)
+// Client provides the API client to make operations call for AWS Amplify.
 type Client struct {
 	options Options
 }

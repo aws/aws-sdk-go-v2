@@ -76,13 +76,13 @@ type CreateDBInstanceInput struct {
 
 	// The number of days for which automated backups are retained. Not applicable. The
 	// retention period for automated backups is managed by the DB cluster. For more
-	// information, see CreateDBCluster (). Default: 1 Constraints:
+	// information, see CreateDBCluster. Default: 1 Constraints:
 	//
-	//     * Must be a
-	// value from 0 to 35
+	//     * Must be a value
+	// from 0 to 35
 	//
-	//     * Cannot be set to 0 if the DB instance is a source to
-	// Read Replicas
+	//     * Cannot be set to 0 if the DB instance is a source to Read
+	// Replicas
 	BackupRetentionPeriod *int32
 
 	// (Not supported by Neptune)
@@ -93,7 +93,7 @@ type CreateDBInstanceInput struct {
 	CopyTagsToSnapshot *bool
 
 	// The identifier of the DB cluster that the instance will belong to. For
-	// information on creating a DB cluster, see CreateDBCluster (). Type: String
+	// information on creating a DB cluster, see CreateDBCluster. Type: String
 	DBClusterIdentifier *string
 
 	// Not supported.
@@ -124,8 +124,8 @@ type CreateDBInstanceInput struct {
 	// The database can't be deleted when deletion protection is enabled. By default,
 	// deletion protection is disabled. See Deleting a DB Instance
 	// (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
-	// <p>DB instances in a DB cluster can be deleted even when deletion protection is
-	// enabled in their parent DB cluster.</p>
+	// DB instances in a DB cluster can be deleted even when deletion protection is
+	// enabled in their parent DB cluster.
 	DeletionProtection *bool
 
 	// Specify the Active Directory Domain to create the instance in.
@@ -159,7 +159,7 @@ type CreateDBInstanceInput struct {
 	// key used to encrypt the new DB instance, then you can use the KMS key alias
 	// instead of the ARN for the KM encryption key. Not applicable. The KMS key
 	// identifier is managed by the DB cluster. For more information, see
-	// CreateDBCluster (). If the StorageEncrypted parameter is true, and you do not
+	// CreateDBCluster. If the StorageEncrypted parameter is true, and you do not
 	// specify a value for the KmsKeyId parameter, then Amazon Neptune will use your
 	// default encryption key. AWS KMS creates the default encryption key for your AWS
 	// account. Your AWS account has a different default encryption key for each AWS
@@ -201,13 +201,13 @@ type CreateDBInstanceInput struct {
 	PerformanceInsightsKMSKeyId *string
 
 	// The port number on which the database accepts connections. Not applicable. The
-	// port is managed by the DB cluster. For more information, see CreateDBCluster ().
+	// port is managed by the DB cluster. For more information, see CreateDBCluster.
 	// Default: 8182 Type: Integer
 	Port *int32
 
 	// The daily time range during which automated backups are created. Not applicable.
 	// The daily time range for creating automated backups is managed by the DB
-	// cluster. For more information, see CreateDBCluster ().
+	// cluster. For more information, see CreateDBCluster.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in Universal
@@ -227,7 +227,7 @@ type CreateDBInstanceInput struct {
 
 	// Specifies whether the DB instance is encrypted. Not applicable. The encryption
 	// for DB instances is managed by the DB cluster. For more information, see
-	// CreateDBCluster (). Default: false
+	// CreateDBCluster. Default: false
 	StorageEncrypted *bool
 
 	// Specifies the storage type to be associated with the DB instance. Not
@@ -249,15 +249,15 @@ type CreateDBInstanceInput struct {
 
 	// A list of EC2 VPC security groups to associate with this DB instance. Not
 	// applicable. The associated list of EC2 VPC security groups is managed by the DB
-	// cluster. For more information, see CreateDBCluster (). Default: The default EC2
-	// VPC security group for the DB subnet group's VPC.
+	// cluster. For more information, see CreateDBCluster. Default: The default EC2 VPC
+	// security group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []*string
 }
 
 type CreateDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance. This data type is used as
-	// a response element in the DescribeDBInstances () action.
+	// a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

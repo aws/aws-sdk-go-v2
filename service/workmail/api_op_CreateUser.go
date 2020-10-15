@@ -11,7 +11,7 @@ import (
 )
 
 // Creates a user who can be used in Amazon WorkMail by calling the
-// RegisterToWorkMail () operation.
+// RegisterToWorkMail operation.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

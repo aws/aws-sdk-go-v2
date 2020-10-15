@@ -14,13 +14,15 @@ import (
 // parameter to identify the case to which to add communication. You can list a set
 // of email addresses to copy on the communication by using the ccEmailAddresses
 // parameter. The communicationBody value contains the text of the communication.
-// <note> <ul> <li> <p>You must have a Business or Enterprise support plan to use
-// the AWS Support API. </p> </li> <li> <p>If you call the AWS Support API from an
-// account that does not have a Business or Enterprise support plan, the
-// <code>SubscriptionRequiredException</code> error message appears. For
-// information about changing your support plan, see <a
-// href="http://aws.amazon.com/premiumsupport/">AWS Support</a>.</p> </li> </ul>
-// </note>
+//
+//
+// * You must have a Business or Enterprise support plan to use the AWS Support
+// API.
+//
+//     * If you call the AWS Support API from an account that does not have a
+// Business or Enterprise support plan, the SubscriptionRequiredException error
+// message appears. For information about changing your support plan, see AWS
+// Support (http://aws.amazon.com/premiumsupport/).
 func (c *Client) AddCommunicationToCase(ctx context.Context, params *AddCommunicationToCaseInput, optFns ...func(*Options)) (*AddCommunicationToCaseOutput, error) {
 	if params == nil {
 		params = &AddCommunicationToCaseInput{}
@@ -44,7 +46,7 @@ type AddCommunicationToCaseInput struct {
 	CommunicationBody *string
 
 	// The ID of a set of one or more attachments for the communication to add to the
-	// case. Create the set by calling AddAttachmentsToSet ()
+	// case. Create the set by calling AddAttachmentsToSet
 	AttachmentSetId *string
 
 	// The AWS Support case ID requested or returned in the call. The case ID is an
@@ -56,10 +58,10 @@ type AddCommunicationToCaseInput struct {
 	CcEmailAddresses []*string
 }
 
-// The result of the AddCommunicationToCase () operation.
+// The result of the AddCommunicationToCase operation.
 type AddCommunicationToCaseOutput struct {
 
-	// True if AddCommunicationToCase () succeeds. Otherwise, returns an error.
+	// True if AddCommunicationToCase succeeds. Otherwise, returns an error.
 	Result *bool
 
 	// Metadata pertaining to the operation's result.

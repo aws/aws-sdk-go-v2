@@ -19,70 +19,122 @@ import (
 // request body, you can continue to use that approach. For more information, see
 // Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) in the
-// Amazon S3 Developer Guide.  <p> <b>Access Permissions</b> </p> <p>You can set
-// access permissions using one of the following methods:</p> <ul> <li> <p>Specify
-// a canned ACL with the <code>x-amz-acl</code> request header. Amazon S3 supports
-// a set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined
-// set of grantees and permissions. Specify the canned ACL name as the value of
-// <code>x-amz-ac</code>l. If you use this header, you cannot use other access
-// control-specific headers in your request. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL">Canned
-// ACL</a>.</p> </li> <li> <p>Specify access permissions explicitly with the
-// <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>,
-// <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code>
+// Amazon S3 Developer Guide. Access Permissions
+//
+// You can set access permissions
+// using one of the following methods:
+//
+//     * Specify a canned ACL with the
+// x-amz-acl request header. Amazon S3 supports a set of predefined ACLs, known as
+// canned ACLs. Each canned ACL has a predefined set of grantees and permissions.
+// Specify the canned ACL name as the value of x-amz-acl. If you use this header,
+// you cannot use other access control-specific headers in your request. For more
+// information, see Canned ACL
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+//
+//
+// * Specify access permissions explicitly with the x-amz-grant-read,
+// x-amz-grant-read-acp, x-amz-grant-write-acp, and x-amz-grant-full-control
 // headers. When using these headers, you specify explicit access permissions and
 // grantees (AWS accounts or Amazon S3 groups) who will receive the permission. If
-// you use these ACL-specific headers, you cannot use <code>x-amz-acl</code> header
-// to set a canned ACL. These parameters map to the set of permissions that Amazon
-// S3 supports in an ACL. For more information, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access
-// Control List (ACL) Overview</a>.</p> <p>You specify each grantee as a type=value
-// pair, where the type is one of the following:</p> <ul> <li> <p> <code>id</code>
-// – if the value specified is the canonical user ID of an AWS account</p> </li>
-// <li> <p> <code>uri</code> – if you are granting permissions to a predefined
-// group</p> </li> <li> <p> <code>emailAddress</code> – if the value specified is
-// the email address of an AWS account</p> <note> <p>Using email addresses to
-// specify a grantee is only supported in the following AWS Regions: </p> <ul> <li>
-// <p>US East (N. Virginia)</p> </li> <li> <p>US West (N. California)</p> </li>
-// <li> <p> US West (Oregon)</p> </li> <li> <p> Asia Pacific (Singapore)</p> </li>
-// <li> <p>Asia Pacific (Sydney)</p> </li> <li> <p>Asia Pacific (Tokyo)</p> </li>
-// <li> <p>Europe (Ireland)</p> </li> <li> <p>South America (São Paulo)</p> </li>
-// </ul> <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a
-// href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions
-// and Endpoints</a> in the AWS General Reference.</p> </note> </li> </ul> <p>For
-// example, the following <code>x-amz-grant-read</code> header grants list objects
-// permission to the two AWS accounts identified by their email addresses.</p> <p>
-// <code>x-amz-grant-read: emailAddress="xyz@amazon.com",
-// emailAddress="abc@amazon.com" </code> </p> </li> </ul> <p>You can use either a
-// canned ACL or specify access permissions explicitly. You cannot do both.</p> <p>
-// <b>Grantee Values</b> </p> <p>You can specify the person (grantee) to whom
-// you're assigning access rights (using request elements) in the following
-// ways:</p> <ul> <li> <p>By the person's ID:</p> <p> <code><Grantee
-// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-// xsi:type="CanonicalUser"><ID><>ID<></ID><DisplayName><>GranteesEmail<></DisplayName>
-// </Grantee></code> </p> <p>DisplayName is optional and ignored in the
-// request.</p> </li> <li> <p>By URI:</p> <p> <code><Grantee
-// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-// xsi:type="Group"><URI><>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<></URI></Grantee></code>
-// </p> </li> <li> <p>By Email address:</p> <p> <code><Grantee
-// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-// xsi:type="AmazonCustomerByEmail"><EmailAddress><>Grantees@email.com<></EmailAddress>lt;/Grantee></code>
-// </p> <p>The grantee is resolved to the CanonicalUser and, in a response to a GET
-// Object acl request, appears as the CanonicalUser.</p> <note> <p>Using email
-// addresses to specify a grantee is only supported in the following AWS Regions:
-// </p> <ul> <li> <p>US East (N. Virginia)</p> </li> <li> <p>US West (N.
-// California)</p> </li> <li> <p> US West (Oregon)</p> </li> <li> <p> Asia Pacific
-// (Singapore)</p> </li> <li> <p>Asia Pacific (Sydney)</p> </li> <li> <p>Asia
-// Pacific (Tokyo)</p> </li> <li> <p>Europe (Ireland)</p> </li> <li> <p>South
-// America (São Paulo)</p> </li> </ul> <p>For a list of all the Amazon S3 supported
-// Regions and endpoints, see <a
-// href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Regions
-// and Endpoints</a> in the AWS General Reference.</p> </note> </li> </ul> <p>
-// <b>Versioning</b> </p> <p>The ACL of an object is set at the object version
+// you use these ACL-specific headers, you cannot use x-amz-acl header to set a
+// canned ACL. These parameters map to the set of permissions that Amazon S3
+// supports in an ACL. For more information, see Access Control List (ACL) Overview
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You specify
+// each grantee as a type=value pair, where the type is one of the following:
+//
+//
+// * id – if the value specified is the canonical user ID of an AWS account
+//
+//
+// * uri – if you are granting permissions to a predefined group
+//
+//         *
+// emailAddress – if the value specified is the email address of an AWS account
+// Using email addresses to specify a grantee is only supported in the following
+// AWS Regions:
+//
+//             * US East (N. Virginia)
+//
+//             * US West (N.
+// California)
+//
+//             * US West (Oregon)
+//
+//             * Asia Pacific
+// (Singapore)
+//
+//             * Asia Pacific (Sydney)
+//
+//             * Asia Pacific
+// (Tokyo)
+//
+//             * Europe (Ireland)
+//
+//             * South America (São
+// Paulo)
+//
+//         For a list of all the Amazon S3 supported Regions and endpoints,
+// see Regions and Endpoints
+// (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
+// General Reference.
+//
+//     For example, the following x-amz-grant-read header
+// grants list objects permission to the two AWS accounts identified by their email
+// addresses. x-amz-grant-read: emailAddress="xyz@amazon.com",
+// emailAddress="abc@amazon.com"
+//
+// You can use either a canned ACL or specify access
+// permissions explicitly. You cannot do both. Grantee Values
+//
+// You can specify the
+// person (grantee) to whom you're assigning access rights (using request elements)
+// in the following ways:
+//
+//     * By the person's ID: <>ID<><>GranteesEmail<>
+// DisplayName is optional and ignored in the request.
+//
+//     * By URI:
+// <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
+//
+//     * By Email
+// address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved to the
+// CanonicalUser and, in a response to a GET Object acl request, appears as the
+// CanonicalUser. Using email addresses to specify a grantee is only supported in
+// the following AWS Regions:
+//
+//         * US East (N. Virginia)
+//
+//         * US West
+// (N. California)
+//
+//         * US West (Oregon)
+//
+//         * Asia Pacific
+// (Singapore)
+//
+//         * Asia Pacific (Sydney)
+//
+//         * Asia Pacific (Tokyo)
+//
+//
+// * Europe (Ireland)
+//
+//         * South America (São Paulo)
+//
+//     For a list of all
+// the Amazon S3 supported Regions and endpoints, see Regions and Endpoints
+// (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
+// General Reference.
+//
+// Versioning The ACL of an object is set at the object version
 // level. By default, PUT sets the ACL of the current version of an object. To set
-// the ACL of a different version, use the <code>versionId</code> subresource.</p>
-// <p class="title"> <b>Related Resources</b> </p> <ul> <li> <p> <a>CopyObject</a>
-// </p> </li> <li> <p> <a>GetObject</a> </p> </li> </ul>
+// the ACL of a different version, use the versionId subresource. Related
+// Resources
+//
+//     * CopyObject
+//
+//     * GetObject
 func (c *Client) PutObjectAcl(ctx context.Context, params *PutObjectAclInput, optFns ...func(*Options)) (*PutObjectAclOutput, error) {
 	if params == nil {
 		params = &PutObjectAclInput{}

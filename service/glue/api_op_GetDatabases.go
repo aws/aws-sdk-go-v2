@@ -40,10 +40,14 @@ type GetDatabasesInput struct {
 	NextToken *string
 
 	// Allows you to specify that you want to list the databases shared with your
-	// account. The allowable values are FOREIGN or ALL.  <ul> <li> <p>If set to
-	// <code>FOREIGN</code>, will list the databases shared with your account. </p>
-	// </li> <li> <p>If set to <code>ALL</code>, will list the databases shared with
-	// your account, as well as the databases in yor local account. </p> </li> </ul>
+	// account. The allowable values are FOREIGN or ALL.
+	//
+	//     * If set to FOREIGN, will
+	// list the databases shared with your account.
+	//
+	//     * If set to ALL, will list the
+	// databases shared with your account, as well as the databases in yor local
+	// account.
 	ResourceShareType types.ResourceShareType
 }
 

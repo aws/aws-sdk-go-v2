@@ -19,7 +19,7 @@ import (
 const ServiceID = "QLDB"
 const ServiceAPIVersion = "2019-01-02"
 
-// The control plane for Amazon QLDB
+// Client provides the API client to make operations call for Amazon QLDB.
 type Client struct {
 	options Options
 }

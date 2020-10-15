@@ -20,10 +20,10 @@ import (
 // SettingId object to a setting value. AWS services teams define the default value
 // for a SettingId. You can't create a new SettingId, but you can overwrite the
 // default value if you have the ssm:UpdateServiceSetting permission for the
-// setting. Use the GetServiceSetting () API action to view the current value. Use
-// the UpdateServiceSetting () API action to change the default setting.  <p>Reset
-// the service setting for the account to the default value as provisioned by the
-// AWS  service team.
+// setting. Use the GetServiceSetting API action to view the current value. Use the
+// UpdateServiceSetting API action to change the default setting. Reset the service
+// setting for the account to the default value as provisioned by the AWS service
+// team.
 func (c *Client) ResetServiceSetting(ctx context.Context, params *ResetServiceSettingInput, optFns ...func(*Options)) (*ResetServiceSettingOutput, error) {
 	if params == nil {
 		params = &ResetServiceSettingInput{}

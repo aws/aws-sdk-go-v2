@@ -670,7 +670,7 @@ type DBClusterParameterGroup struct {
 type DBClusterRole struct {
 
 	// The name of the feature associated with the AWS Identity and Access Management
-	// (IAM) role. For the list of supported feature names, see DBEngineVersion ().
+	// (IAM) role. For the list of supported feature names, see DBEngineVersion.
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
@@ -982,11 +982,17 @@ type DBInstance struct {
 	EnhancedMonitoringResourceArn *string
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.  <p>IAM database authentication can be
-	// enabled for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor
-	// version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16
-	// or higher</p> </li> <li> <p>Aurora 5.6 or higher. To enable IAM database
-	// authentication for Aurora, see DBCluster Type.</p> </li> </ul>
+	// accounts is enabled, and otherwise false. IAM database authentication can be
+	// enabled for the following database engines
+	//
+	//     * For MySQL 5.6, minor version
+	// 5.6.34 or higher
+	//
+	//     * For MySQL 5.7, minor version 5.7.16 or higher
+	//
+	//     *
+	// Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see
+	// DBCluster Type.
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// Provides the date and time the DB instance was created.
@@ -1074,7 +1080,7 @@ type DBInstance struct {
 	// security group it uses, and that public access is not permitted if the security
 	// group assigned to the DB instance doesn't permit it. When the DB instance isn't
 	// publicly accessible, it is an internal DB instance with a DNS name that resolves
-	// to a private IP address. For more information, see CreateDBInstance ().
+	// to a private IP address. For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// Contains one or more identifiers of Aurora DB clusters to which the RDS DB

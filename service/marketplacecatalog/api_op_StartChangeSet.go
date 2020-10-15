@@ -17,12 +17,11 @@ import (
 // targeted by the different changes are locked until the ChangeSet has completed
 // (either succeeded, cancelled, or failed). If you try to start a ChangeSet
 // containing a change against an entity that is already locked, you will receive a
-// ResourceInUseException.  <p>For example, you cannot start the ChangeSet
-// described in the <a
-// href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a>
+// ResourceInUseException. For example, you cannot start the ChangeSet described in
+// the example
+// (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
 // below because it contains two changes to execute the same change type
-// (<code>AddRevisions</code>) against the same entity
-// (<code>entity-id@1)</code>.</p>
+// (AddRevisions) against the same entity (entity-id@1).
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {
 	if params == nil {
 		params = &StartChangeSetInput{}

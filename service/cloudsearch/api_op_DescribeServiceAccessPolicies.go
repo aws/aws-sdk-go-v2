@@ -33,7 +33,7 @@ func (c *Client) DescribeServiceAccessPolicies(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Container for the parameters to the DescribeServiceAccessPolicies () operation.
+// Container for the parameters to the DescribeServiceAccessPolicies operation.
 // Specifies the name of the domain you want to describe. To show the active
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeServiceAccessPoliciesInput struct {

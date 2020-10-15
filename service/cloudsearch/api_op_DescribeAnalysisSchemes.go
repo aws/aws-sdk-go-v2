@@ -34,11 +34,11 @@ func (c *Client) DescribeAnalysisSchemes(ctx context.Context, params *DescribeAn
 	return out, nil
 }
 
-// Container for the parameters to the DescribeAnalysisSchemes () operation.
-// Specifies the name of the domain you want to describe. To limit the response to
-// particular analysis schemes, specify the names of the analysis schemes you want
-// to describe. To show the active configuration and exclude any pending changes,
-// set the Deployed option to true.
+// Container for the parameters to the DescribeAnalysisSchemes operation. Specifies
+// the name of the domain you want to describe. To limit the response to particular
+// analysis schemes, specify the names of the analysis schemes you want to
+// describe. To show the active configuration and exclude any pending changes, set
+// the Deployed option to true.
 type DescribeAnalysisSchemesInput struct {
 
 	// The name of the domain you want to describe.

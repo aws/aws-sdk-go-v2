@@ -12,7 +12,7 @@ import (
 
 // Lists the names of the inline policies that are embedded in the specified IAM
 // group. An IAM group can also have managed policies attached to it. To list the
-// managed policies that are attached to a group, use ListAttachedGroupPolicies ().
+// managed policies that are attached to a group, use ListAttachedGroupPolicies.
 // For more information about policies, see Managed Policies and Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. You can paginate the results using the MaxItems and
@@ -59,7 +59,7 @@ type ListGroupPoliciesInput struct {
 	MaxItems *int32
 }
 
-// Contains the response to a successful ListGroupPolicies () request.
+// Contains the response to a successful ListGroupPolicies request.
 type ListGroupPoliciesOutput struct {
 
 	// A list of policy names. This parameter allows (through its regex pattern

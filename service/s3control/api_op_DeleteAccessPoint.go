@@ -10,21 +10,26 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the specified access point.  <p>All Amazon S3 on Outposts REST API
-// requests for this action require an additional parameter of outpost-id to be
-// passed with the request and an S3 on Outposts endpoint hostname prefix instead
-// of s3-control. For an example of the request syntax for Amazon S3 on Outposts
-// that uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
-// using the access point ARN, see the ARN, see the <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples">
-// Example</a> section below.</p> <p>The following actions are related to
-// <code>DeleteAccessPoint</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html">CreateAccessPoint</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html">GetAccessPoint</a>
-// </p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html">ListAccessPoints</a>
-// </p> </li> </ul>
+// Deletes the specified access point. All Amazon S3 on Outposts REST API requests
+// for this action require an additional parameter of outpost-id to be passed with
+// the request and an S3 on Outposts endpoint hostname prefix instead of
+// s3-control. For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
+// using the access point ARN, see the ARN, see the  Example
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples)
+// section below. The following actions are related to DeleteAccessPoint:
+//
+//     *
+// CreateAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
+//
+//
+// * GetAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
+//
+//
+// * ListAccessPoints
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
 func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPointInput, optFns ...func(*Options)) (*DeleteAccessPointOutput, error) {
 	if params == nil {
 		params = &DeleteAccessPointInput{}

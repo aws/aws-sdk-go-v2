@@ -33,19 +33,19 @@ type TagResourceInput struct {
 	// get the ARN for a resource, use the applicable Get or List command:
 	//
 	//     *
-	// GetResolverEndpoint ()
+	// GetResolverEndpoint
 	//
-	//     * GetResolverRule ()
+	//     * GetResolverRule
+	//
+	//     * GetResolverRuleAssociation
+	//
+	//
+	// * ListResolverEndpoints
+	//
+	//     * ListResolverRuleAssociations
 	//
 	//     *
-	// GetResolverRuleAssociation ()
-	//
-	//     * ListResolverEndpoints ()
-	//
-	//     *
-	// ListResolverRuleAssociations ()
-	//
-	//     * ListResolverRules ()
+	// ListResolverRules
 	//
 	// This member is required.
 	ResourceArn *string

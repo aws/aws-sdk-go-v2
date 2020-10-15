@@ -26,11 +26,11 @@ type AccessPoliciesStatus struct {
 }
 
 // List of limits that are specific to a given InstanceType and for each of it's
-// InstanceRole () .
+// InstanceRole .
 type AdditionalLimit struct {
 
 	// Name of Additional Limit is specific to a given InstanceType and for each of
-	// it's InstanceRole () etc.
+	// it's InstanceRole etc.
 	//
 	// Attributes and their details:
 	//
@@ -38,15 +38,15 @@ type AdditionalLimit struct {
 	// MaximumNumberOfDataNodesSupported
 	//      This attribute will be present in Master
 	// node only to specify how much data nodes upto which given
-	// ESPartitionInstanceType () can support as master node.
+	// ESPartitionInstanceType can support as master node.
 	//     *
 	// MaximumNumberOfDataNodesWithoutMasterNode
 	//      This attribute will be present in
 	// Data node only to specify how much data nodes of given ESPartitionInstanceType
-	// () upto which you don't need any master nodes to govern them.
+	// upto which you don't need any master nodes to govern them.
 	LimitName *string
 
-	// Value for given AdditionalLimit$LimitName () .
+	// Value for given AdditionalLimit$LimitName .
 	LimitValues []*string
 }
 
@@ -157,8 +157,8 @@ type CognitoOptionsStatus struct {
 	Status *OptionStatus
 }
 
-// A map from an ElasticsearchVersion () to a list of compatible
-// ElasticsearchVersion () s to which the domain can be upgraded.
+// A map from an ElasticsearchVersion to a list of compatible ElasticsearchVersion
+// s to which the domain can be upgraded.
 type CompatibleVersionsMap struct {
 
 	// The current version of Elasticsearch on which a domain is.
@@ -569,17 +569,17 @@ type Filter struct {
 // Specifies details of an inbound connection.
 type InboundCrossClusterSearchConnection struct {
 
-	// Specifies the InboundCrossClusterSearchConnectionStatus () for the outbound
+	// Specifies the InboundCrossClusterSearchConnectionStatus for the outbound
 	// connection.
 	ConnectionStatus *InboundCrossClusterSearchConnectionStatus
 
 	// Specifies the connection id for the inbound cross-cluster search connection.
 	CrossClusterSearchConnectionId *string
 
-	// Specifies the DomainInformation () for the destination Elasticsearch domain.
+	// Specifies the DomainInformation for the destination Elasticsearch domain.
 	DestinationDomainInfo *DomainInformation
 
-	// Specifies the DomainInformation () for the source Elasticsearch domain.
+	// Specifies the DomainInformation for the source Elasticsearch domain.
 	SourceDomainInfo *DomainInformation
 }
 
@@ -634,11 +634,11 @@ type InstanceLimits struct {
 // Limits for given InstanceType and for each of it's role.
 //
 // Limits contains
-// following StorageTypes, ()InstanceLimits () and AdditionalLimits ()
+// following StorageTypes,InstanceLimits and AdditionalLimits
 type Limits struct {
 
 	// List of additional limits that are specific to a given InstanceType and for each
-	// of it's InstanceRole () .
+	// of it's InstanceRole .
 	AdditionalLimits []*AdditionalLimit
 
 	// InstanceLimits represents the list of instance related attributes that are
@@ -750,17 +750,17 @@ type OutboundCrossClusterSearchConnection struct {
 	// Specifies the connection alias for the outbound cross-cluster search connection.
 	ConnectionAlias *string
 
-	// Specifies the OutboundCrossClusterSearchConnectionStatus () for the outbound
+	// Specifies the OutboundCrossClusterSearchConnectionStatus for the outbound
 	// connection.
 	ConnectionStatus *OutboundCrossClusterSearchConnectionStatus
 
 	// Specifies the connection id for the outbound cross-cluster search connection.
 	CrossClusterSearchConnectionId *string
 
-	// Specifies the DomainInformation () for the destination Elasticsearch domain.
+	// Specifies the DomainInformation for the destination Elasticsearch domain.
 	DestinationDomainInfo *DomainInformation
 
-	// Specifies the DomainInformation () for the source Elasticsearch domain.
+	// Specifies the DomainInformation for the source Elasticsearch domain.
 	SourceDomainInfo *DomainInformation
 }
 
@@ -994,7 +994,7 @@ type StorageType struct {
 	//
 	//     * io1
 	//
-	// Refer VolumeType () for more information regarding above EBS
+	// Refer VolumeType for more information regarding above EBS
 	// storage options.
 	StorageSubTypeName *string
 
@@ -1016,7 +1016,7 @@ type StorageType struct {
 type StorageTypeLimit struct {
 
 	// Name of storage limits that are applicable for given storage type. If
-	// StorageType () is ebs, following storage options are applicable
+	// StorageType is ebs, following storage options are applicable
 	//
 	//     *
 	// MinimumVolumeSize
@@ -1035,7 +1035,7 @@ type StorageTypeLimit struct {
 	// applicable for given storage type.It can be empty if it is not applicable.
 	LimitName *string
 
-	// Values for the StorageTypeLimit$LimitName () .
+	// Values for the StorageTypeLimit$LimitName .
 	LimitValues []*string
 }
 
@@ -1064,8 +1064,8 @@ type UpgradeHistory struct {
 	// format.
 	StartTimestamp *time.Time
 
-	// A list of UpgradeStepItem () s representing information about each step
-	// performed as pard of a specific Upgrade or Upgrade Eligibility Check.
+	// A list of UpgradeStepItem s representing information about each step performed
+	// as pard of a specific Upgrade or Upgrade Eligibility Check.
 	StepsList []*UpgradeStepItem
 
 	// A string that describes the update briefly

@@ -185,15 +185,26 @@ type BaseConfigurationItem struct {
 	// The time when the configuration recording was initiated.
 	ConfigurationItemCaptureTime *time.Time
 
-	// The configuration item status. The valid values are:  <ul> <li> <p>OK – The
-	// resource configuration has been updated</p> </li> <li> <p>ResourceDiscovered –
-	// The resource was newly discovered</p> </li> <li> <p>ResourceNotRecorded – The
-	// resource was discovered but its configuration was not recorded since the
-	// recorder excludes the recording of resources of this type</p> </li> <li>
-	// <p>ResourceDeleted – The resource was deleted</p> </li> <li>
-	// <p>ResourceDeletedNotRecorded – The resource was deleted but its configuration
-	// was not recorded since the recorder excludes the recording of resources of this
-	// type</p> </li> </ul> <note> <p>The CIs do not incur any cost.</p> </note>
+	// The configuration item status. The valid values are:
+	//
+	//     * OK – The resource
+	// configuration has been updated
+	//
+	//     * ResourceDiscovered – The resource was
+	// newly discovered
+	//
+	//     * ResourceNotRecorded – The resource was discovered but
+	// its configuration was not recorded since the recorder excludes the recording of
+	// resources of this type
+	//
+	//     * ResourceDeleted – The resource was deleted
+	//
+	//     *
+	// ResourceDeletedNotRecorded – The resource was deleted but its configuration was
+	// not recorded since the recorder excludes the recording of resources of this
+	// type
+	//
+	// The CIs do not incur any cost.
 	ConfigurationItemStatus ConfigurationItemStatus
 
 	// An identifier that indicates the ordering of the configuration items of a
@@ -338,14 +349,14 @@ type ConfigExportDeliveryInfo struct {
 // evaluates configuration items to assess whether your AWS resources comply with
 // your desired configurations. This function can run when AWS Config detects a
 // configuration change to an AWS resource and at a periodic frequency that you
-// choose (for example, every 24 hours).  <note> <p>You can use the AWS CLI and AWS
-// SDKs if you want to create a rule that triggers evaluations for your resources
-// when AWS Config delivers the configuration snapshot. For more information, see
-// <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information
-// about developing and using AWS Config rules, see <a
-// href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating
-// AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer
-// Guide</i>.</p>
+// choose (for example, every 24 hours). You can use the AWS CLI and AWS SDKs if
+// you want to create a rule that triggers evaluations for your resources when AWS
+// Config delivers the configuration snapshot. For more information, see
+// ConfigSnapshotDeliveryProperties. For more information about developing and
+// using AWS Config rules, see Evaluating AWS Resource Configurations with AWS
+// Config
+// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
+// in the AWS Config Developer Guide.
 type ConfigRule struct {
 
 	// Provides the rule owner (AWS or customer), the rule identifier, and the
@@ -366,15 +377,14 @@ type ConfigRule struct {
 
 	// Indicates whether the AWS Config rule is active or is currently being deleted by
 	// AWS Config. It can also indicate the evaluation status for the AWS Config rule.
-	// <p>AWS Config sets the state of the rule to <code>EVALUATING</code> temporarily
-	// after you use the <code>StartConfigRulesEvaluation</code> request to evaluate
-	// your resources against the AWS Config rule.</p> <p>AWS Config sets the state of
-	// the rule to <code>DELETING_RESULTS</code> temporarily after you use the
-	// <code>DeleteEvaluationResults</code> request to delete the current evaluation
-	// results for the AWS Config rule.</p> <p>AWS Config temporarily sets the state of
-	// a rule to <code>DELETING</code> after you use the <code>DeleteConfigRule</code>
-	// request to delete the rule. After AWS Config deletes the rule, the rule and all
-	// of its evaluations are erased and are no longer available.</p>
+	// AWS Config sets the state of the rule to EVALUATING temporarily after you use
+	// the StartConfigRulesEvaluation request to evaluate your resources against the
+	// AWS Config rule. AWS Config sets the state of the rule to DELETING_RESULTS
+	// temporarily after you use the DeleteEvaluationResults request to delete the
+	// current evaluation results for the AWS Config rule. AWS Config temporarily sets
+	// the state of a rule to DELETING after you use the DeleteConfigRule request to
+	// delete the rule. After AWS Config deletes the rule, the rule and all of its
+	// evaluations are erased and are no longer available.
 	ConfigRuleState ConfigRuleState
 
 	// Service principal name of the service that created the rule. The field is
@@ -396,12 +406,11 @@ type ConfigRule struct {
 	//
 	//     * Your custom rule
 	// is triggered when AWS Config delivers the configuration snapshot. For more
-	// information, see ConfigSnapshotDeliveryProperties ().
+	// information, see ConfigSnapshotDeliveryProperties.
 	//
-	//     <note> <p>By default,
-	// rules with a periodic trigger are evaluated every 24 hours. To change the
-	// frequency, specify a valid value for the <code>MaximumExecutionFrequency</code>
-	// parameter.</p> </note>
+	// By default, rules with a
+	// periodic trigger are evaluated every 24 hours. To change the frequency, specify
+	// a valid value for the MaximumExecutionFrequency parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
 	// Defines which resources can trigger an evaluation for the rule. The scope can
@@ -497,33 +506,44 @@ type ConfigRuleEvaluationStatus struct {
 }
 
 // Provides options for how often AWS Config delivers configuration snapshots to
-// the Amazon S3 bucket in your delivery channel.  <p>The frequency for a rule that
+// the Amazon S3 bucket in your delivery channel. The frequency for a rule that
 // triggers evaluations for your resources when AWS Config delivers the
 // configuration snapshot is set by one of two values, depending on which is less
-// frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code>
-// parameter within the delivery channel configuration, which sets how often AWS
-// Config delivers configuration snapshots. This value also sets how often AWS
-// Config invokes evaluations for AWS Config rules.</p> </li> <li> <p>The value for
-// the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum
-// frequency with which AWS Config invokes evaluations for the rule. For more
-// information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the
-// <code>deliveryFrequency</code> value is less frequent than the
-// <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the
-// rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li>
-// <p>For example, you want your rule to run evaluations when AWS Config delivers
-// the configuration snapshot.</p> </li> <li> <p>You specify the
-// <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p>
-// </li> <li> <p>You then specify the delivery channel
-// <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>.</p>
-// </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less
-// frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes
-// evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the
-// <code>MaximumExecutionFrequency</code> value to be at least as frequent as the
-// <code>deliveryFrequency</code> value. You can view the
-// <code>deliveryFrequency</code> value by using the
-// <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the
-// <code>deliveryFrequency</code> with which AWS Config delivers your configuration
-// snapshots, use the <code>PutDeliveryChannel</code> action.</p>
+// frequent:
+//
+//     * The value for the deliveryFrequency parameter within the
+// delivery channel configuration, which sets how often AWS Config delivers
+// configuration snapshots. This value also sets how often AWS Config invokes
+// evaluations for AWS Config rules.
+//
+//     * The value for the
+// MaximumExecutionFrequency parameter, which sets the maximum frequency with which
+// AWS Config invokes evaluations for the rule. For more information, see
+// ConfigRule.
+//
+// If the deliveryFrequency value is less frequent than the
+// MaximumExecutionFrequency value for a rule, AWS Config invokes the rule only as
+// often as the deliveryFrequency value.
+//
+//     * For example, you want your rule to
+// run evaluations when AWS Config delivers the configuration snapshot.
+//
+//     * You
+// specify the MaximumExecutionFrequency value for Six_Hours.
+//
+//     * You then
+// specify the delivery channel deliveryFrequency value for TwentyFour_Hours.
+//
+//
+// * Because the value for deliveryFrequency is less frequent than
+// MaximumExecutionFrequency, AWS Config invokes evaluations for the rule every 24
+// hours.
+//
+// You should set the MaximumExecutionFrequency value to be at least as
+// frequent as the deliveryFrequency value. You can view the deliveryFrequency
+// value by using the DescribeDeliveryChannnels action. To update the
+// deliveryFrequency with which AWS Config delivers your configuration snapshots,
+// use the PutDeliveryChannel action.
 type ConfigSnapshotDeliveryProperties struct {
 
 	// The frequency with which AWS Config delivers configuration snapshots.
@@ -603,15 +623,26 @@ type ConfigurationItem struct {
 	// associated with the same resource.
 	ConfigurationItemMD5Hash *string
 
-	// The configuration item status. The valid values are:  <ul> <li> <p>OK – The
-	// resource configuration has been updated</p> </li> <li> <p>ResourceDiscovered –
-	// The resource was newly discovered</p> </li> <li> <p>ResourceNotRecorded – The
-	// resource was discovered but its configuration was not recorded since the
-	// recorder excludes the recording of resources of this type</p> </li> <li>
-	// <p>ResourceDeleted – The resource was deleted</p> </li> <li>
-	// <p>ResourceDeletedNotRecorded – The resource was deleted but its configuration
-	// was not recorded since the recorder excludes the recording of resources of this
-	// type</p> </li> </ul> <note> <p>The CIs do not incur any cost.</p> </note>
+	// The configuration item status. The valid values are:
+	//
+	//     * OK – The resource
+	// configuration has been updated
+	//
+	//     * ResourceDiscovered – The resource was
+	// newly discovered
+	//
+	//     * ResourceNotRecorded – The resource was discovered but
+	// its configuration was not recorded since the recorder excludes the recording of
+	// resources of this type
+	//
+	//     * ResourceDeleted – The resource was deleted
+	//
+	//     *
+	// ResourceDeletedNotRecorded – The resource was deleted but its configuration was
+	// not recorded since the recorder excludes the recording of resources of this
+	// type
+	//
+	// The CIs do not incur any cost.
 	ConfigurationItemStatus ConfigurationItemStatus
 
 	// An identifier that indicates the ordering of the configuration items of a
@@ -1463,15 +1494,20 @@ type OrganizationCustomRuleMetadata struct {
 	LambdaFunctionArn *string
 
 	// The type of notification that triggers AWS Config to run an evaluation for a
-	// rule. You can specify the following notification types:  <ul> <li> <p>
-	// <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when
-	// AWS Config delivers a configuration item as a result of a resource change.</p>
-	// </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> -
-	// Triggers an evaluation when AWS Config delivers an oversized configuration item.
-	// AWS Config may generate this notification type when a resource changes and the
-	// notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p>
-	// <code>ScheduledNotification</code> - Triggers a periodic evaluation at the
-	// frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> </ul>
+	// rule. You can specify the following notification types:
+	//
+	//     *
+	// ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config
+	// delivers a configuration item as a result of a resource change.
+	//
+	//     *
+	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS
+	// Config delivers an oversized configuration item. AWS Config may generate this
+	// notification type when a resource changes and the notification exceeds the
+	// maximum size allowed by Amazon SNS.
+	//
+	//     * ScheduledNotification - Triggers a
+	// periodic evaluation at the frequency specified for MaximumExecutionFrequency.
 	//
 	// This member is required.
 	OrganizationConfigRuleTriggerTypes []OrganizationConfigRuleTriggerType
@@ -1485,7 +1521,7 @@ type OrganizationCustomRuleMetadata struct {
 
 	// The maximum frequency with which AWS Config runs evaluations for a rule. Your
 	// custom rule is triggered when AWS Config delivers the configuration snapshot.
-	// For more information, see ConfigSnapshotDeliveryProperties (). By default, rules
+	// For more information, see ConfigSnapshotDeliveryProperties. By default, rules
 	// with a periodic trigger are evaluated every 24 hours. To change the frequency,
 	// specify a valid value for the MaximumExecutionFrequency parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
@@ -1713,9 +1749,9 @@ type RemediationConfiguration struct {
 
 	// The maximum number of failed attempts for auto-remediation. If you do not select
 	// a number, the default is 5. For example, if you specify MaximumAutomaticAttempts
-	// as 5 with RetryAttemptsSeconds as 50 seconds,  AWS Config will put a
+	// as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config will put a
 	// RemediationException on your behalf for the failing resource after the 5th
-	// failed attempt within 50 seconds.</p>
+	// failed attempt within 50 seconds.
 	MaximumAutomaticAttempts *int32
 
 	// An object of the RemediationParameterValue.
@@ -1988,32 +2024,38 @@ type SourceDetail struct {
 
 	// The frequency at which you want AWS Config to run evaluations for a custom rule
 	// with a periodic trigger. If you specify a value for MaximumExecutionFrequency,
-	// then MessageType must use the ScheduledNotification value.  <note> <p>By
-	// default, rules with a periodic trigger are evaluated every 24 hours. To change
-	// the frequency, specify a valid value for the
-	// <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid
-	// value you choose, AWS Config runs evaluations once for each valid value. For
-	// example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations
-	// once every three hours. In this case, <code>Three_Hours</code> is the frequency
-	// of this rule. </p> </note>
+	// then MessageType must use the ScheduledNotification value. By default, rules
+	// with a periodic trigger are evaluated every 24 hours. To change the frequency,
+	// specify a valid value for the MaximumExecutionFrequency parameter. Based on the
+	// valid value you choose, AWS Config runs evaluations once for each valid value.
+	// For example, if you choose Three_Hours, AWS Config runs evaluations once every
+	// three hours. In this case, Three_Hours is the frequency of this rule.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
 	// The type of notification that triggers AWS Config to run an evaluation for a
-	// rule. You can specify the following notification types:  <ul> <li> <p>
-	// <code>ConfigurationItemChangeNotification</code> - Triggers an evaluation when
-	// AWS Config delivers a configuration item as a result of a resource change.</p>
-	// </li> <li> <p> <code>OversizedConfigurationItemChangeNotification</code> -
-	// Triggers an evaluation when AWS Config delivers an oversized configuration item.
-	// AWS Config may generate this notification type when a resource changes and the
-	// notification exceeds the maximum size allowed by Amazon SNS.</p> </li> <li> <p>
-	// <code>ScheduledNotification</code> - Triggers a periodic evaluation at the
-	// frequency specified for <code>MaximumExecutionFrequency</code>.</p> </li> <li>
-	// <p> <code>ConfigurationSnapshotDeliveryCompleted</code> - Triggers a periodic
-	// evaluation when AWS Config delivers a configuration snapshot.</p> </li> </ul>
-	// <p>If you want your custom rule to be triggered by configuration changes,
-	// specify two SourceDetail objects, one for
-	// <code>ConfigurationItemChangeNotification</code> and one for
-	// <code>OversizedConfigurationItemChangeNotification</code>.</p>
+	// rule. You can specify the following notification types:
+	//
+	//     *
+	// ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config
+	// delivers a configuration item as a result of a resource change.
+	//
+	//     *
+	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS
+	// Config delivers an oversized configuration item. AWS Config may generate this
+	// notification type when a resource changes and the notification exceeds the
+	// maximum size allowed by Amazon SNS.
+	//
+	//     * ScheduledNotification - Triggers a
+	// periodic evaluation at the frequency specified for MaximumExecutionFrequency.
+	//
+	//
+	// * ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when
+	// AWS Config delivers a configuration snapshot.
+	//
+	// If you want your custom rule to
+	// be triggered by configuration changes, specify two SourceDetail objects, one for
+	// ConfigurationItemChangeNotification and one for
+	// OversizedConfigurationItemChangeNotification.
 	MessageType MessageType
 }
 

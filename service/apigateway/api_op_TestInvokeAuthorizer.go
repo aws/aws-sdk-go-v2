@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Simulate the execution of an Authorizer () in your RestApi () with headers,
+// Simulate the execution of an Authorizer in your RestApi with headers,
 // parameters, and an incoming request body. Use Lambda Function as Authorizer
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)Use
 // Cognito User Pool as Authorizer
@@ -30,15 +30,15 @@ func (c *Client) TestInvokeAuthorizer(ctx context.Context, params *TestInvokeAut
 	return out, nil
 }
 
-// Make a request to simulate the execution of an Authorizer ().
+// Make a request to simulate the execution of an Authorizer.
 type TestInvokeAuthorizerInput struct {
 
-	// [Required] Specifies a test invoke authorizer request's Authorizer () ID.
+	// [Required] Specifies a test invoke authorizer request's Authorizer ID.
 	//
 	// This member is required.
 	AuthorizerId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -63,12 +63,12 @@ type TestInvokeAuthorizerInput struct {
 	// request. Use this to specify path parameters and query string parameters.
 	PathWithQueryString *string
 
-	// A key-value map of stage variables to simulate an invocation on a deployed Stage
-	// ().
+	// A key-value map of stage variables to simulate an invocation on a deployed
+	// Stage.
 	StageVariables map[string]*string
 }
 
-// Represents the response of the test invoke request for a custom Authorizer ()
+// Represents the response of the test invoke request for a custom Authorizer
 type TestInvokeAuthorizerOutput struct {
 	Authorization map[string][]*string
 
@@ -88,10 +88,10 @@ type TestInvokeAuthorizerOutput struct {
 	// The API Gateway execution log for the test authorizer request.
 	Log *string
 
-	// The JSON policy document returned by the Authorizer ()
+	// The JSON policy document returned by the Authorizer
 	Policy *string
 
-	// The principal identity returned by the Authorizer ()
+	// The principal identity returned by the Authorizer
 	PrincipalId *string
 
 	// Metadata pertaining to the operation's result.

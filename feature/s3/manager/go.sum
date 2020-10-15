@@ -1,10 +1,7 @@
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20200930084954-897dfb99530c h1:v1H0WQmb+pNOZ/xDXGT3wXn6aceSN3I2wqK0VpQM/ZM=
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.0.0-20200930084954-897dfb99530c/go.mod h1:GRJ/IvA6A00/2tAw9KgMTM8as5gAlNI0FVCKBc+aRnA=
 github.com/awslabs/smithy-go v0.0.0-20200930175536-2cd7f70a8c2f/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
-github.com/awslabs/smithy-go v0.0.0-20201009221937-21015eb9ec4b/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.1.0/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
-github.com/awslabs/smithy-go v0.1.1 h1:v1hUSAYf3w2ClKr58C+AtwoyPVoBjWyWT8thf7/VRtU=
-github.com/awslabs/smithy-go v0.1.1/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.1.2-0.20201012175301-b4d8737f29d1 h1:5eAoxqWUc2VMuT3ob/pUYCLliBYEk3dccw6P/reTuRY=
 github.com/awslabs/smithy-go v0.1.2-0.20201012175301-b4d8737f29d1/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

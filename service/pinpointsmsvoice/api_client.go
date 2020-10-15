@@ -19,7 +19,8 @@ import (
 const ServiceID = "Pinpoint SMS Voice"
 const ServiceAPIVersion = "2018-09-05"
 
-// Pinpoint SMS and Voice Messaging public facing APIs
+// Client provides the API client to make operations call for Amazon Pinpoint SMS
+// and Voice Service.
 type Client struct {
 	options Options
 }

@@ -38,7 +38,7 @@ type ResetInstanceAttributeInput struct {
 
 	// The attribute to reset. You can only reset the following attributes: kernel |
 	// ramdisk | sourceDestCheck. To change an instance attribute, use
-	// ModifyInstanceAttribute ().
+	// ModifyInstanceAttribute.
 	//
 	// This member is required.
 	Attribute types.InstanceAttributeName

@@ -194,7 +194,7 @@ type ColumnSchema struct {
 	Name *string
 }
 
-// A tag for a column in a TagColumnOperation () structure. This is a variant type
+// A tag for a column in a TagColumnOperation structure. This is a variant type
 // structure. For this structure to be valid, only one of the attributes can be
 // non-null.
 type ColumnTag struct {
@@ -608,7 +608,7 @@ type DataSourceCredentials struct {
 	// DataSourceCredentials structure.
 	CopySourceArn *string
 
-	// Credential pair. For more information, see CredentialPair ().
+	// Credential pair. For more information, see CredentialPair.
 	CredentialPair *CredentialPair
 }
 

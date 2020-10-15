@@ -12,14 +12,25 @@ import (
 )
 
 // Updates a Network File System (NFS) file share. This operation is only supported
-// in the file gateway type.  <note> <p>To leave a file share field unchanged, set
-// the corresponding input field to null.</p> </note> <p>Updates the following file
-// share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p>
-// </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS
-// clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li>
-// <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file
-// share field unchanged, set the corresponding input field to null. This operation
-// is only supported in file gateways.</p> </note>
+// in the file gateway type. To leave a file share field unchanged, set the
+// corresponding input field to null. Updates the following file share setting:
+//
+//
+// * Default storage class for your S3 bucket
+//
+//     * Metadata defaults for your S3
+// bucket
+//
+//     * Allowed NFS clients for your file share
+//
+//     * Squash settings
+//
+//
+// * Write status of your file share
+//
+// To leave a file share field unchanged, set
+// the corresponding input field to null. This operation is only supported in file
+// gateways.
 func (c *Client) UpdateNFSFileShare(ctx context.Context, params *UpdateNFSFileShareInput, optFns ...func(*Options)) (*UpdateNFSFileShareOutput, error) {
 	if params == nil {
 		params = &UpdateNFSFileShareInput{}
@@ -51,24 +62,21 @@ type UpdateNFSFileShareInput struct {
 	ClientList []*string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional.  <p>Valid
-	// Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
-	// <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>
+	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
+	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
-	// The name of the file share. Optional.  <note> <p> <code>FileShareName</code>
-	// must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
+	// name is set in LocationARN.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false. The default value is true.  <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -84,25 +92,29 @@ type UpdateNFSFileShareInput struct {
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
+	// set the write status to read-only, otherwise set to false. Valid Values: true |
+	// false
 	ReadOnly *bool
 
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true, the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data.  <note> <p>
-	// <code>RequesterPays</code> is a configuration for the S3 bucket that backs the
-	// file share, so make sure that the configuration on the file share is the same as
-	// the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> |
-	// <code>false</code> </p>
+	// owner always pays the cost of storing data. RequesterPays is a configuration for
+	// the S3 bucket that backs the file share, so make sure that the configuration on
+	// the file share is the same as the S3 bucket configuration. Valid Values: true |
+	// false
 	RequesterPays *bool
 
-	// The user mapped to anonymous user.  <p>Valid values are the following:</p> <ul>
-	// <li> <p> <code>RootSquash</code>: Only root is mapped to anonymous user.</p>
-	// </li> <li> <p> <code>NoSquash</code>: No one is mapped to anonymous user.</p>
-	// </li> <li> <p> <code>AllSquash</code>: Everyone is mapped to anonymous user.</p>
-	// </li> </ul>
+	// The user mapped to anonymous user. Valid values are the following:
+	//
+	//     *
+	// RootSquash: Only root is mapped to anonymous user.
+	//
+	//     * NoSquash: No one is
+	// mapped to anonymous user.
+	//
+	//     * AllSquash: Everyone is mapped to anonymous
+	// user.
 	Squash *string
 }
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describe a BasePathMapping () resource.
+// Describe a BasePathMapping resource.
 func (c *Client) GetBasePathMapping(ctx context.Context, params *GetBasePathMappingInput, optFns ...func(*Options)) (*GetBasePathMappingOutput, error) {
 	if params == nil {
 		params = &GetBasePathMappingInput{}
@@ -26,7 +26,7 @@ func (c *Client) GetBasePathMapping(ctx context.Context, params *GetBasePathMapp
 	return out, nil
 }
 
-// Request to describe a BasePathMapping () resource.
+// Request to describe a BasePathMapping resource.
 type GetBasePathMappingInput struct {
 
 	// [Required] The base path name that callers of the API must provide as part of
@@ -37,7 +37,7 @@ type GetBasePathMappingInput struct {
 	// This member is required.
 	BasePath *string
 
-	// [Required] The domain name of the BasePathMapping () resource to be described.
+	// [Required] The domain name of the BasePathMapping resource to be described.
 	//
 	// This member is required.
 	DomainName *string
@@ -53,8 +53,8 @@ type GetBasePathMappingInput struct {
 
 // Represents the base path that callers of the API must provide as part of the URL
 // after the domain name. A custom domain name plus a BasePathMapping specification
-// identifies a deployed RestApi () in a given stage of the owner Account (). Use
-// Custom Domain Names
+// identifies a deployed RestApi in a given stage of the owner Account. Use Custom
+// Domain Names
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type GetBasePathMappingOutput struct {
 
@@ -62,7 +62,7 @@ type GetBasePathMappingOutput struct {
 	// the domain name.
 	BasePath *string
 
-	// The string identifier of the associated RestApi ().
+	// The string identifier of the associated RestApi.
 	RestApiId *string
 
 	// The name of the associated stage.

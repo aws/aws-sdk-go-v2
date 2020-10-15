@@ -38,7 +38,7 @@ func (c *Client) ContinueUpdateRollback(ctx context.Context, params *ContinueUpd
 	return out, nil
 }
 
-// The input for the ContinueUpdateRollback () action.
+// The input for the ContinueUpdateRollback action.
 type ContinueUpdateRollbackInput struct {
 
 	// The name or the unique ID of the stack that you want to continue rolling back.
@@ -61,8 +61,8 @@ type ContinueUpdateRollbackInput struct {
 	// in the UPDATE_FAILED state because a rollback failed. You can't specify
 	// resources that are in the UPDATE_FAILED state for other reasons, for example,
 	// because an update was cancelled. To check why a resource update failed, use the
-	// DescribeStackResources () action, and view the resource status reason. Specify
-	// this property to skip rolling back resources that AWS CloudFormation can't
+	// DescribeStackResources action, and view the resource status reason. Specify this
+	// property to skip rolling back resources that AWS CloudFormation can't
 	// successfully roll back. We recommend that you  troubleshoot
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
 	// resources before skipping them. AWS CloudFormation sets the status of the
@@ -99,7 +99,7 @@ type ContinueUpdateRollbackInput struct {
 	RoleARN *string
 }
 
-// The output for a ContinueUpdateRollback () action.
+// The output for a ContinueUpdateRollback action.
 type ContinueUpdateRollbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

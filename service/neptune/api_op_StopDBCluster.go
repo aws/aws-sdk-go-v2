@@ -13,8 +13,8 @@ import (
 
 // Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains
 // the DB cluster's metadata, including its endpoints and DB parameter groups.
-// <p>Neptune also retains the transaction logs so you can do a point-in-time
-// restore if necessary.</p>
+// Neptune also retains the transaction logs so you can do a point-in-time restore
+// if necessary.
 func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, optFns ...func(*Options)) (*StopDBClusterOutput, error) {
 	if params == nil {
 		params = &StopDBClusterInput{}
@@ -42,7 +42,7 @@ type StopDBClusterInput struct {
 type StopDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters () action.
+	// a response element in the DescribeDBClusters action.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

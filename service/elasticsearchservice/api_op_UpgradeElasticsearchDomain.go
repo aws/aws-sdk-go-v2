@@ -27,7 +27,7 @@ func (c *Client) UpgradeElasticsearchDomain(ctx context.Context, params *Upgrade
 	return out, nil
 }
 
-// Container for request parameters to UpgradeElasticsearchDomain () operation.
+// Container for request parameters to UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainInput struct {
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
@@ -48,7 +48,7 @@ type UpgradeElasticsearchDomainInput struct {
 	PerformCheckOnly *bool
 }
 
-// Container for response returned by UpgradeElasticsearchDomain () operation.
+// Container for response returned by UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainOutput struct {
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains

@@ -26,7 +26,7 @@ func (c *Client) GetSdkTypes(ctx context.Context, params *GetSdkTypesInput, optF
 	return out, nil
 }
 
-// Get the SdkTypes () collection.
+// Get the SdkTypes collection.
 type GetSdkTypesInput struct {
 
 	// The maximum number of returned results per page. The default value is 25 and the
@@ -45,7 +45,7 @@ type GetSdkTypesInput struct {
 	Title *string
 }
 
-// The collection of SdkType () instances.
+// The collection of SdkType instances.
 type GetSdkTypesOutput struct {
 
 	// The current page of elements from this collection.

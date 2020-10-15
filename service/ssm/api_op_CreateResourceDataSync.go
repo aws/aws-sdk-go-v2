@@ -18,22 +18,21 @@ import (
 // multiple AWS Regions to a single S3 bucket. For more information, see
 // Configuring Resource Data Sync for Inventory
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html)
-// in the AWS Systems Manager User Guide.  <p>You can configure Systems Manager
-// Explorer to use the <code>SyncFromSource</code> type to synchronize  operational
-// work items (OpsItems) and operational data (OpsData) from multiple AWS Regions
-// to a single S3 bucket. This type can synchronize OpsItems and OpsData from
-// multiple AWS accounts and Regions or EntireOrganization by using AWS
-// Organizations. For more information, see Setting up Systems Manager Explorer to
-// display data from multiple accounts and Regions
+// in the AWS Systems Manager User Guide. You can configure Systems Manager
+// Explorer to use the SyncFromSource type to synchronize operational work items
+// (OpsItems) and operational data (OpsData) from multiple AWS Regions to a single
+// S3 bucket. This type can synchronize OpsItems and OpsData from multiple AWS
+// accounts and Regions or EntireOrganization by using AWS Organizations. For more
+// information, see Setting up Systems Manager Explorer to display data from
+// multiple accounts and Regions
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html)
-// in the AWS Systems Manager User Guide.  <p>A resource data sync is an
-// asynchronous operation that returns immediately. After a  successful initial
-// sync is completed, the system continuously syncs data. To check the status of a
-// sync, use the ListResourceDataSync ().  <note> <p>By default, data is not
-// encrypted in Amazon S3. We strongly recommend that you enable encryption in
-// Amazon S3 to ensure secure data storage. We also recommend that you secure
-// access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>
-// </note>
+// in the AWS Systems Manager User Guide. A resource data sync is an asynchronous
+// operation that returns immediately. After a successful initial sync is
+// completed, the system continuously syncs data. To check the status of a sync,
+// use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We
+// strongly recommend that you enable encryption in Amazon S3 to ensure secure data
+// storage. We also recommend that you secure access to the Amazon S3 bucket by
+// creating a restrictive bucket policy.
 func (c *Client) CreateResourceDataSync(ctx context.Context, params *CreateResourceDataSyncInput, optFns ...func(*Options)) (*CreateResourceDataSyncOutput, error) {
 	if params == nil {
 		params = &CreateResourceDataSyncInput{}

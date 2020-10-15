@@ -12,7 +12,7 @@ import (
 )
 
 // Lists all the accounts in the organization. To request only the accounts in a
-// specified root or organizational unit (OU), use the ListAccountsForParent ()
+// specified root or organizational unit (OU), use the ListAccountsForParent
 // operation instead. Always check the NextToken response parameter for a null
 // value when calling a List* operation. These operations can occasionally return
 // an empty set of results even when there are more results available. The

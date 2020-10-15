@@ -19,10 +19,7 @@ import (
 const ServiceID = "Mobile"
 const ServiceAPIVersion = "2017-07-01"
 
-// AWS Mobile Service provides mobile app and website developers with capabilities
-// required to configure AWS resources and bootstrap their developer desktop
-// projects with the necessary SDKs, constants, tools and samples to make use of
-// those resources.
+// Client provides the API client to make operations call for AWS Mobile.
 type Client struct {
 	options Options
 }

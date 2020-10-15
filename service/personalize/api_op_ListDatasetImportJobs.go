@@ -15,8 +15,8 @@ import (
 // is not specified, all the dataset import jobs associated with the account are
 // listed. The response provides the properties for each dataset import job,
 // including the Amazon Resource Name (ARN). For more information on dataset import
-// jobs, see CreateDatasetImportJob (). For more information on datasets, see
-// CreateDataset ().
+// jobs, see CreateDatasetImportJob. For more information on datasets, see
+// CreateDataset.
 func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetImportJobsInput, optFns ...func(*Options)) (*ListDatasetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetImportJobsInput{}

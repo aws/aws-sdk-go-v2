@@ -28,9 +28,13 @@ func (c *Client) DeleteChapCredentials(ctx context.Context, params *DeleteChapCr
 	return out, nil
 }
 
-// A JSON object containing one or more of the following fields:  <ul> <li> <p>
-// <a>DeleteChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p>
-// <a>DeleteChapCredentialsInput$TargetARN</a> </p> </li> </ul>
+// A JSON object containing one or more of the following fields:
+//
+//     *
+// DeleteChapCredentialsInput$InitiatorName
+//
+//     *
+// DeleteChapCredentialsInput$TargetARN
 type DeleteChapCredentialsInput struct {
 
 	// The iSCSI initiator that connects to the target.
@@ -39,7 +43,7 @@ type DeleteChapCredentialsInput struct {
 	InitiatorName *string
 
 	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumes () operation to return to retrieve the TargetARN for
+	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
 	// specified VolumeARN.
 	//
 	// This member is required.

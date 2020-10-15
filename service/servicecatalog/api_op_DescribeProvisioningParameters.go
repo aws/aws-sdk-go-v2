@@ -15,7 +15,7 @@ import (
 // product using the specified provisioning artifact. If the output contains a
 // TagOption key with an empty list of values, there is a TagOption conflict for
 // that key. The end user cannot take action to fix the conflict, and launch is not
-// blocked. In subsequent calls to ProvisionProduct (), do not include conflicted
+// blocked. In subsequent calls to ProvisionProduct, do not include conflicted
 // TagOption keys as tags, or this causes the error "Parameter validation failed:
 // Missing required parameter in Tags[N]:Value". Tag the provisioned product with
 // the value sc-tagoption-conflict-portfolioId-productId.
@@ -48,8 +48,8 @@ type DescribeProvisioningParametersInput struct {
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths (). You must provide the name or ID,
-	// but not both.
+	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but
+	// not both.
 	PathId *string
 
 	// The name of the path. You must provide the name or ID, but not both.

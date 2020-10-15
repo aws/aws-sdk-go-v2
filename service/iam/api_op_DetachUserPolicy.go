@@ -12,8 +12,8 @@ import (
 
 // Removes the specified managed policy from the specified user. A user can also
 // have inline policies embedded with it. To delete an inline policy, use the
-// DeleteUserPolicy () API. For information about policies, see Managed Policies
-// and Inline Policies
+// DeleteUserPolicy API. For information about policies, see Managed Policies and
+// Inline Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DetachUserPolicy(ctx context.Context, params *DetachUserPolicyInput, optFns ...func(*Options)) (*DetachUserPolicyOutput, error) {

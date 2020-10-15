@@ -16,44 +16,44 @@ import (
 // fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier.
 // When requesting attributes for multiple fleets, use the pagination parameters to
 // retrieve results as a set of sequential pages. If successful, a FleetAttributes
-// () object is returned for each fleet requested, unless the fleet identifier is
-// not found. Some API actions may limit the number of fleet IDs allowed in one
+// object is returned for each fleet requested, unless the fleet identifier is not
+// found. Some API actions may limit the number of fleet IDs allowed in one
 // request. If a request exceeds this limit, the request fails and the error
 // message includes the maximum allowed number. Learn more Setting up GameLift
 // Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet ()
+//     * CreateFleet
 //
-//     * ListFleets ()
+//     * ListFleets
 //
 //     * DeleteFleet
-// ()
 //
-//     * Describe fleets:
 //
-//         * DescribeFleetAttributes ()
+// * Describe fleets:
 //
-//         *
-// DescribeFleetCapacity ()
-//
-//         * DescribeFleetPortSettings ()
+//         * DescribeFleetAttributes
 //
 //         *
-// DescribeFleetUtilization ()
+// DescribeFleetCapacity
 //
-//         * DescribeRuntimeConfiguration ()
+//         * DescribeFleetPortSettings
 //
+//         *
+// DescribeFleetUtilization
 //
-// * DescribeEC2InstanceLimits ()
+//         * DescribeRuntimeConfiguration
 //
-//         * DescribeFleetEvents ()
+//         *
+// DescribeEC2InstanceLimits
+//
+//         * DescribeFleetEvents
 //
 //     *
-// UpdateFleetAttributes ()
+// UpdateFleetAttributes
 //
-//     * StartFleetActions () or StopFleetActions ()
+//     * StartFleetActions or StopFleetActions
 func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFleetAttributesInput, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAttributesInput{}

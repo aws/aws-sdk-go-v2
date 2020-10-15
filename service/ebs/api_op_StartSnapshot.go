@@ -62,10 +62,10 @@ type StartSnapshotInput struct {
 	// is used. To set a default CMK for your account, use  ModifyEbsDefaultKmsKeyId
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html).
 	// If your account is enabled for encryption by default, you cannot set this
-	// parameter to false. In this case, you can omit this parameter.  <p>For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption">
-	// Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+	// parameter to false. In this case, you can omit this parameter. For more
+	// information, see  Using encryption
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	Encrypted *bool
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)

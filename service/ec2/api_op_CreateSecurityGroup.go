@@ -27,10 +27,10 @@ import (
 // instance, the instance is launched into the appropriate default security group.
 // A default security group includes a default rule that grants instances
 // unrestricted network access to each other. You can add or remove rules from your
-// security groups using AuthorizeSecurityGroupIngress (),
-// AuthorizeSecurityGroupEgress (), RevokeSecurityGroupIngress (), and
-// RevokeSecurityGroupEgress (). For more information about VPC security group
-// limits, see Amazon VPC Limits
+// security groups using AuthorizeSecurityGroupIngress,
+// AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and
+// RevokeSecurityGroupEgress. For more information about VPC security group limits,
+// see Amazon VPC Limits
 // (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
 func (c *Client) CreateSecurityGroup(ctx context.Context, params *CreateSecurityGroupInput, optFns ...func(*Options)) (*CreateSecurityGroupOutput, error) {
 	if params == nil {

@@ -49,7 +49,7 @@ type UpdateSAMLProviderInput struct {
 	SAMLProviderArn *string
 }
 
-// Contains the response to a successful UpdateSAMLProvider () request.
+// Contains the response to a successful UpdateSAMLProvider request.
 type UpdateSAMLProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the SAML provider that was updated.

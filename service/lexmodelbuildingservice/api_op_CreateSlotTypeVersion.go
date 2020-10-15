@@ -17,10 +17,10 @@ import (
 // since the last version that you created, Amazon Lex doesn't create a new
 // version. It returns the last version that you created. You can update only the
 // $LATEST version of a slot type. You can't update the numbered versions that you
-// create with the CreateSlotTypeVersion operation.  <p>When you create a version
-// of a slot type, Amazon Lex sets the version to 1. Subsequent versions increment
-// by 1. For more information, see <a>versioning-intro</a>. </p> <p>This operation
-// requires permissions for the <code>lex:CreateSlotTypeVersion</code> action.</p>
+// create with the CreateSlotTypeVersion operation. When you create a version of a
+// slot type, Amazon Lex sets the version to 1. Subsequent versions increment by 1.
+// For more information, see versioning-intro. This operation requires permissions
+// for the lex:CreateSlotTypeVersion action.
 func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTypeVersionInput, optFns ...func(*Options)) (*CreateSlotTypeVersionOutput, error) {
 	if params == nil {
 		params = &CreateSlotTypeVersionInput{}
@@ -81,7 +81,7 @@ type CreateSlotTypeVersionOutput struct {
 	SlotTypeConfigurations []*types.SlotTypeConfiguration
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
-	// information, see PutSlotType ().
+	// information, see PutSlotType.
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version assigned to the new slot type version.

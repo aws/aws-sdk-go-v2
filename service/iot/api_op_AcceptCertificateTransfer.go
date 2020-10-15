@@ -11,8 +11,8 @@ import (
 )
 
 // Accepts a pending certificate transfer. The default state of the certificate is
-// INACTIVE. To check for pending certificate transfers, call ListCertificates ()
-// to enumerate your certificates.
+// INACTIVE. To check for pending certificate transfers, call ListCertificates to
+// enumerate your certificates.
 func (c *Client) AcceptCertificateTransfer(ctx context.Context, params *AcceptCertificateTransferInput, optFns ...func(*Options)) (*AcceptCertificateTransferOutput, error) {
 	if params == nil {
 		params = &AcceptCertificateTransferInput{}

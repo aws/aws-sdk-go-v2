@@ -11,13 +11,18 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Modifies the settings for a replication group.  <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling
-// for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache
-// User Guide</p> </li> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a>
-// in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is
-// valid for Redis only.</p> </note>
+// Modifies the settings for a replication group.
+//
+//     * Scaling for Amazon
+// ElastiCache for Redis (cluster mode enabled)
+// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
+// in the ElastiCache User Guide
+//
+//     * ModifyReplicationGroupShardConfiguration
+// (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
+// in the ElastiCache API Reference
+//
+// This operation is valid for Redis only.
 func (c *Client) ModifyReplicationGroup(ctx context.Context, params *ModifyReplicationGroupInput, optFns ...func(*Options)) (*ModifyReplicationGroupOutput, error) {
 	if params == nil {
 		params = &ModifyReplicationGroupInput{}
@@ -61,9 +66,8 @@ type ModifyReplicationGroupInput struct {
 	//     *
 	// Cannot contain any of the following characters: '/', '"', or '@', '%'
 	//
-	//     For
-	// more information, see AUTH password at <a
-	// href="http://redis.io/commands/AUTH">AUTH</a>.</p>
+	// For more
+	// information, see AUTH password at AUTH (http://redis.io/commands/AUTH).
 	AuthToken *string
 
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
@@ -102,13 +106,12 @@ type ModifyReplicationGroupInput struct {
 	CacheSecurityGroupNames []*string
 
 	// The upgraded version of the cache engine to be run on the clusters in the
-	// replication group.  <p> <b>Important:</b> You can upgrade to a newer engine
-	// version (see <a
-	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement">Selecting
-	// a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine
-	// version. If you want to use an earlier engine version, you must delete the
-	// existing replication group and create it anew with the earlier engine version.
-	// </p>
+	// replication group. Important: You can upgrade to a newer engine version (see
+	// Selecting a Cache Engine and Version
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
+	// but you cannot downgrade to an earlier engine version. If you want to use an
+	// earlier engine version, you must delete the existing replication group and
+	// create it anew with the earlier engine version.
 	EngineVersion *string
 
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For

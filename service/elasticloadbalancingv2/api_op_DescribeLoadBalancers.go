@@ -12,9 +12,8 @@ import (
 )
 
 // Describes the specified load balancers or all of your load balancers. To
-// describe the listeners for a load balancer, use DescribeListeners (). To
-// describe the attributes for a load balancer, use DescribeLoadBalancerAttributes
-// ().
+// describe the listeners for a load balancer, use DescribeListeners. To describe
+// the attributes for a load balancer, use DescribeLoadBalancerAttributes.
 func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoadBalancersInput, optFns ...func(*Options)) (*DescribeLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DescribeLoadBalancersInput{}

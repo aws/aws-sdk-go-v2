@@ -21,8 +21,8 @@ import (
 const ServiceID = "ComprehendMedical"
 const ServiceAPIVersion = "2018-10-30"
 
-// Amazon Comprehend Medical extracts structured information from unstructured
-// clinical text. Use these actions to gain insight in your documents.
+// Client provides the API client to make operations call for AWS Comprehend
+// Medical.
 type Client struct {
 	options Options
 }

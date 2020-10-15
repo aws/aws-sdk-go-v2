@@ -19,9 +19,8 @@ import (
 const ServiceID = "Lex Model Building Service"
 const ServiceAPIVersion = "2017-04-19"
 
-// Amazon Lex Build-Time Actions Amazon Lex is an AWS service for building
-// conversational voice and text interfaces. Use these actions to create, update,
-// and delete conversational bots for new and existing client applications.
+// Client provides the API client to make operations call for Amazon Lex Model
+// Building Service.
 type Client struct {
 	options Options
 }

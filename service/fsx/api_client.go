@@ -21,8 +21,7 @@ import (
 const ServiceID = "FSx"
 const ServiceAPIVersion = "2018-03-01"
 
-// Amazon FSx is a fully managed service that makes it easy for storage and
-// application administrators to launch and use shared file storage.
+// Client provides the API client to make operations call for Amazon FSx.
 type Client struct {
 	options Options
 }

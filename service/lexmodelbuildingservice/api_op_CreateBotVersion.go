@@ -18,7 +18,7 @@ import (
 // You can update only the $LATEST version of the bot. You can't update the
 // numbered versions that you create with the CreateBotVersion operation. When you
 // create the first version of a bot, Amazon Lex sets the version to 1. Subsequent
-// versions increment by 1. For more information, see versioning-intro (). This
+// versions increment by 1. For more information, see versioning-intro. This
 // operation requires permission for the lex:CreateBotVersion action.
 func (c *Client) CreateBotVersion(ctx context.Context, params *CreateBotVersionInput, optFns ...func(*Options)) (*CreateBotVersionOutput, error) {
 	if params == nil {
@@ -54,7 +54,7 @@ type CreateBotVersionInput struct {
 type CreateBotVersionOutput struct {
 
 	// The message that Amazon Lex uses to abort a conversation. For more information,
-	// see PutBot ().
+	// see PutBot.
 	AbortStatement *types.Statement
 
 	// Checksum identifying the version of the bot that was created.
@@ -84,7 +84,7 @@ type CreateBotVersionOutput struct {
 	ChildDirected *bool
 
 	// The message that Amazon Lex uses when it doesn't understand the user's request.
-	// For more information, see PutBot ().
+	// For more information, see PutBot.
 	ClarificationPrompt *types.Prompt
 
 	// The date when the bot version was created.
@@ -102,10 +102,10 @@ type CreateBotVersionOutput struct {
 	FailureReason *string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
-	// conversation. For more information, see PutBot ().
+	// conversation. For more information, see PutBot.
 	IdleSessionTTLInSeconds *int32
 
-	// An array of Intent objects. For more information, see PutBot ().
+	// An array of Intent objects. For more information, see PutBot.
 	Intents []*types.Intent
 
 	// The date when the $LATEST version of this bot was updated.

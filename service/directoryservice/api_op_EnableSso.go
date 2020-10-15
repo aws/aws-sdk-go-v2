@@ -28,7 +28,7 @@ func (c *Client) EnableSso(ctx context.Context, params *EnableSsoInput, optFns .
 	return out, nil
 }
 
-// Contains the inputs for the EnableSso () operation.
+// Contains the inputs for the EnableSso operation.
 type EnableSsoInput struct {
 
 	// The identifier of the directory for which to enable single-sign on.
@@ -51,7 +51,7 @@ type EnableSsoInput struct {
 	UserName *string
 }
 
-// Contains the results of the EnableSso () operation.
+// Contains the results of the EnableSso operation.
 type EnableSsoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

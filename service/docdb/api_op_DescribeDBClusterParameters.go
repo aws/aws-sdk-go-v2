@@ -27,7 +27,7 @@ func (c *Client) DescribeDBClusterParameters(ctx context.Context, params *Descri
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterParameters ().
+// Represents the input to DescribeDBClusterParameters.
 type DescribeDBClusterParametersInput struct {
 
 	// The name of a specific cluster parameter group to return parameter details for.
@@ -58,7 +58,7 @@ type DescribeDBClusterParametersInput struct {
 	Source *string
 }
 
-// Represents the output of DBClusterParameterGroup ().
+// Represents the output of DBClusterParameterGroup.
 type DescribeDBClusterParametersOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

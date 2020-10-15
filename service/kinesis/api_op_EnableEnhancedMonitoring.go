@@ -27,7 +27,7 @@ func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnh
 	return out, nil
 }
 
-// Represents the input for EnableEnhancedMonitoring ().
+// Represents the input for EnableEnhancedMonitoring.
 type EnableEnhancedMonitoringInput struct {
 
 	// List of shard-level metrics to enable. The following are the valid shard-level
@@ -66,8 +66,8 @@ type EnableEnhancedMonitoringInput struct {
 	StreamName *string
 }
 
-// Represents the output for EnableEnhancedMonitoring () and
-// DisableEnhancedMonitoring ().
+// Represents the output for EnableEnhancedMonitoring and
+// DisableEnhancedMonitoring.
 type EnableEnhancedMonitoringOutput struct {
 
 	// Represents the current state of the metrics that are in the enhanced state

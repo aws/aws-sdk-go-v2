@@ -12,7 +12,7 @@ import (
 
 // Creates a new version of the specified AWS IoT policy. To update a policy,
 // create a new policy version. A managed policy can have up to five versions. If
-// the policy has five versions, you must use DeletePolicyVersion () to delete an
+// the policy has five versions, you must use DeletePolicyVersion to delete an
 // existing version before you create a new one. Optionally, you can set the new
 // version as the policy's default version. The default version is the operative
 // version (that is, the version that is in effect for the certificates to which

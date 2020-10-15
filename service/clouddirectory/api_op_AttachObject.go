@@ -39,8 +39,8 @@ type AttachObjectInput struct {
 	// This member is required.
 	ChildReference *types.ObjectReference
 
-	// Amazon Resource Name (ARN) that is associated with the Directory () where both
-	// objects reside. For more information, see arns ().
+	// Amazon Resource Name (ARN) that is associated with the Directory where both
+	// objects reside. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string

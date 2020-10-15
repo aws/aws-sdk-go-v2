@@ -27,7 +27,7 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 	return out, nil
 }
 
-// Container for request parameters to CreatePackage () operation.
+// Container for request parameters to CreatePackage operation.
 type CreatePackageInput struct {
 
 	// Unique identifier for the package.
@@ -49,7 +49,7 @@ type CreatePackageInput struct {
 	PackageDescription *string
 }
 
-// Container for response returned by CreatePackage () operation.
+// Container for response returned by CreatePackage operation.
 type CreatePackageOutput struct {
 
 	// Information about the package PackageDetails.

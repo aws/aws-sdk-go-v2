@@ -36,11 +36,10 @@ type PutResourcePolicyInput struct {
 
 	// Allows you to specify if you want to use both resource-level and
 	// account/catalog-level resource policies. A resource-level policy is a policy
-	// attached to an individual resource such as a database or a table.  <p>The
-	// default value of <code>NO</code> indicates that resource-level policies cannot
-	// co-exist with an account-level policy. A value of <code>YES</code> means the use
-	// of both resource-level and account/catalog-level resource policies is
-	// allowed.</p>
+	// attached to an individual resource such as a database or a table. The default
+	// value of NO indicates that resource-level policies cannot co-exist with an
+	// account-level policy. A value of YES means the use of both resource-level and
+	// account/catalog-level resource policies is allowed.
 	EnableHybrid types.EnableHybridValues
 
 	// A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is used

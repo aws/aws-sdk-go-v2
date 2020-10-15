@@ -75,16 +75,15 @@ import (
 // Related operations
 //
 //     * To retrieve the encrypted value you store in
-// the version of a secret, use GetSecretValue ().
+// the version of a secret, use GetSecretValue.
 //
 //     * To create a secret, use
-// CreateSecret ().
+// CreateSecret.
 //
-//     * To get the details for a secret, use DescribeSecret
-// ().
+//     * To get the details for a secret, use DescribeSecret.
 //
-//     * To list the versions attached to a secret, use ListSecretVersionIds
-// ().
+//     *
+// To list the versions attached to a secret, use ListSecretVersionIds.
 func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput, optFns ...func(*Options)) (*PutSecretValueOutput, error) {
 	if params == nil {
 		params = &PutSecretValueInput{}
@@ -158,26 +157,25 @@ type PutSecretValueInput struct {
 	// recommend that you store your binary data in a file and then use the appropriate
 	// technique for your tool to pass the contents of the file as a parameter. Either
 	// SecretBinary or SecretString must have a value, but not both. They cannot both
-	// be empty.  <p>This parameter is not accessible if the secret using the Secrets
-	// Manager console.</p> <p></p>
+	// be empty. This parameter is not accessible if the secret using the Secrets
+	// Manager console.
 	SecretBinary []byte
 
 	// (Optional) Specifies text data that you want to encrypt and store in this new
 	// version of the secret. Either SecretString or SecretBinary must have a value,
-	// but not both. They cannot both be empty.  <p>If you create this secret by using
-	// the Secrets Manager console then Secrets Manager puts the protected secret text
-	// in only the <code>SecretString</code> parameter. The Secrets Manager console
-	// stores the information as a JSON structure of key/value pairs that the default
-	// Lambda rotation function knows how to parse.</p> <p>For storing multiple values,
-	// we recommend that you use a JSON text string argument and specify key/value
-	// pairs. For information on how to format a JSON parameter for the various command
-	// line tool environments, see <a
-	// href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using
-	// JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.</p> <p> For
-	// example:</p> <p> <code>[{"username":"bob"},{"password":"abc123xyz456"}]</code>
-	// </p> <p>If your command-line tool or SDK requires quotation marks around the
-	// parameter, you should use single quotes to avoid confusion with the double
-	// quotes required in the JSON text.</p>
+	// but not both. They cannot both be empty. If you create this secret by using the
+	// Secrets Manager console then Secrets Manager puts the protected secret text in
+	// only the SecretString parameter. The Secrets Manager console stores the
+	// information as a JSON structure of key/value pairs that the default Lambda
+	// rotation function knows how to parse. For storing multiple values, we recommend
+	// that you use a JSON text string argument and specify key/value pairs. For
+	// information on how to format a JSON parameter for the various command line tool
+	// environments, see Using JSON for Parameters
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
+	// in the AWS CLI User Guide. For example:
+	// [{"username":"bob"},{"password":"abc123xyz456"}] If your command-line tool or
+	// SDK requires quotation marks around the parameter, you should use single quotes
+	// to avoid confusion with the double quotes required in the JSON text.
 	SecretString *string
 
 	// (Optional) Specifies a list of staging labels that are attached to this version

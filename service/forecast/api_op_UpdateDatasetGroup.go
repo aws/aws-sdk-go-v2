@@ -12,7 +12,7 @@ import (
 
 // Replaces the datasets in a dataset group with the specified datasets. The Status
 // of the dataset group must be ACTIVE before you can use the dataset group to
-// create a predictor. Use the DescribeDatasetGroup () operation to get the status.
+// create a predictor. Use the DescribeDatasetGroup operation to get the status.
 func (c *Client) UpdateDatasetGroup(ctx context.Context, params *UpdateDatasetGroupInput, optFns ...func(*Options)) (*UpdateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetGroupInput{}

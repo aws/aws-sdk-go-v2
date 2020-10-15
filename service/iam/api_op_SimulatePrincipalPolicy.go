@@ -18,18 +18,18 @@ import (
 // groups that the user belongs to. You can optionally include a list of one or
 // more additional policies specified as strings to include in the simulation. If
 // you want to simulate only policies specified as strings, use
-// SimulateCustomPolicy () instead. You can also optionally include one
-// resource-based policy to be evaluated with each of the resources included in the
-// simulation. The simulation does not perform the API operations; it only checks
-// the authorization to determine if the simulated policies allow or deny the
+// SimulateCustomPolicy instead. You can also optionally include one resource-based
+// policy to be evaluated with each of the resources included in the simulation.
+// The simulation does not perform the API operations; it only checks the
+// authorization to determine if the simulated policies allow or deny the
 // operations. Note: This API discloses information about the permissions granted
 // to other users. If you do not want users to see other user's permissions, then
-// consider allowing them to use SimulateCustomPolicy () instead. Context keys are
+// consider allowing them to use SimulateCustomPolicy instead. Context keys are
 // variables maintained by AWS and its services that provide details about the
 // context of an API query request. You can use the Condition element of an IAM
 // policy to evaluate context keys. To get the list of context keys that the
-// policies require for correct simulation, use GetContextKeysForPrincipalPolicy
-// (). If the output is long, you can use the MaxItems and Marker parameters to
+// policies require for correct simulation, use GetContextKeysForPrincipalPolicy.
+// If the output is long, you can use the MaxItems and Marker parameters to
 // paginate the results.
 func (c *Client) SimulatePrincipalPolicy(ctx context.Context, params *SimulatePrincipalPolicyInput, optFns ...func(*Options)) (*SimulatePrincipalPolicyOutput, error) {
 	if params == nil {
@@ -223,8 +223,8 @@ type SimulatePrincipalPolicyInput struct {
 	ResourcePolicy *string
 }
 
-// Contains the response to a successful SimulatePrincipalPolicy () or
-// SimulateCustomPolicy () request.
+// Contains the response to a successful SimulatePrincipalPolicy or
+// SimulateCustomPolicy request.
 type SimulatePrincipalPolicyOutput struct {
 
 	// The results of the simulation.

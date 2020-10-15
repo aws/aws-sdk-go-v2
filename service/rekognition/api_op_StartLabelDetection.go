@@ -15,17 +15,16 @@ import (
 // Video can detect labels in a video. Labels are instances of real-world entities.
 // This includes objects like flower, tree, and table; events like wedding,
 // graduation, and birthday party; concepts like landscape, evening, and nature;
-// and activities like a person getting out of a car or a person skiing.  <p>The
-// video must be stored in an Amazon S3 bucket. Use <a>Video</a> to specify the
-// bucket name and the filename of the video. <code>StartLabelDetection</code>
-// returns a job identifier (<code>JobId</code>) which you use to get the results
-// of the operation. When label detection is finished, Amazon Rekognition Video
-// publishes a completion status to the Amazon Simple Notification Service topic
-// that you specify in <code>NotificationChannel</code>.</p> <p>To get the results
-// of the label detection operation, first check that the status value published to
-// the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call
-// <a>GetLabelDetection</a> and pass the job identifier (<code>JobId</code>) from
-// the initial call to <code>StartLabelDetection</code>.</p> <p></p>
+// and activities like a person getting out of a car or a person skiing. The video
+// must be stored in an Amazon S3 bucket. Use Video to specify the bucket name and
+// the filename of the video. StartLabelDetection returns a job identifier (JobId)
+// which you use to get the results of the operation. When label detection is
+// finished, Amazon Rekognition Video publishes a completion status to the Amazon
+// Simple Notification Service topic that you specify in NotificationChannel. To
+// get the results of the label detection operation, first check that the status
+// value published to the Amazon SNS topic is SUCCEEDED. If so, call
+// GetLabelDetection and pass the job identifier (JobId) from the initial call to
+// StartLabelDetection.
 func (c *Client) StartLabelDetection(ctx context.Context, params *StartLabelDetectionInput, optFns ...func(*Options)) (*StartLabelDetectionOutput, error) {
 	if params == nil {
 		params = &StartLabelDetectionInput{}

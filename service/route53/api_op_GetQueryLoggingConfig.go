@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about a specified configuration for DNS query logging.  <p>For
-// more information about DNS query logs, see <a
-// href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html">CreateQueryLoggingConfig</a>
-// and <a
-// href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html">Logging
-// DNS Queries</a>.</p>
+// Gets information about a specified configuration for DNS query logging. For more
+// information about DNS query logs, see CreateQueryLoggingConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html)
+// and Logging DNS Queries
+// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html).
 func (c *Client) GetQueryLoggingConfig(ctx context.Context, params *GetQueryLoggingConfigInput, optFns ...func(*Options)) (*GetQueryLoggingConfigOutput, error) {
 	if params == nil {
 		params = &GetQueryLoggingConfigInput{}

@@ -13,7 +13,7 @@ import (
 
 // Returns the list of schemas associated with the account. The response provides
 // the properties for each schema, including the Amazon Resource Name (ARN). For
-// more information on schemas, see CreateSchema ().
+// more information on schemas, see CreateSchema.
 func (c *Client) ListSchemas(ctx context.Context, params *ListSchemasInput, optFns ...func(*Options)) (*ListSchemasOutput, error) {
 	if params == nil {
 		params = &ListSchemasInput{}

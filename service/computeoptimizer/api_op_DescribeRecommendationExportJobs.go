@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes recommendation export jobs created in the last seven days.  <p>Use the
-// <code>ExportAutoScalingGroupRecommendations</code> or
-// <code>ExportEC2InstanceRecommendations</code> actions to request an export of
-// your recommendations. Then use the <code>DescribeRecommendationExportJobs</code>
-// action to view your export jobs.</p>
+// Describes recommendation export jobs created in the last seven days. Use the
+// ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
+// actions to request an export of your recommendations. Then use the
+// DescribeRecommendationExportJobs action to view your export jobs.
 func (c *Client) DescribeRecommendationExportJobs(ctx context.Context, params *DescribeRecommendationExportJobsInput, optFns ...func(*Options)) (*DescribeRecommendationExportJobsOutput, error) {
 	if params == nil {
 		params = &DescribeRecommendationExportJobsInput{}
@@ -37,11 +36,11 @@ type DescribeRecommendationExportJobsInput struct {
 	// export jobs.
 	Filters []*types.JobFilter
 
-	// The identification numbers of the export jobs to return.  <p>An export job ID is
+	// The identification numbers of the export jobs to return. An export job ID is
 	// returned when you create an export using the
-	// <code>ExportAutoScalingGroupRecommendations</code> or
-	// <code>ExportEC2InstanceRecommendations</code> actions.</p> <p>All export jobs
-	// created in the last seven days are returned if this parameter is omitted.</p>
+	// ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
+	// actions. All export jobs created in the last seven days are returned if this
+	// parameter is omitted.
 	JobIds []*string
 
 	// The maximum number of export jobs to return with a single request. To retrieve

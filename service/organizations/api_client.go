@@ -19,7 +19,7 @@ import (
 const ServiceID = "Organizations"
 const ServiceAPIVersion = "2016-11-28"
 
-// AWS Organizations
+// Client provides the API client to make operations call for AWS Organizations.
 type Client struct {
 	options Options
 }

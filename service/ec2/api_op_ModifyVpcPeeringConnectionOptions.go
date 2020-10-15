@@ -36,7 +36,7 @@ import (
 // VPC to modify the requester VPC peering options and the Region for the accepter
 // VPC to modify the accepter VPC peering options. To verify which VPCs are the
 // accepter and the requester for a VPC peering connection, use the
-// DescribeVpcPeeringConnections () command.
+// DescribeVpcPeeringConnections command.
 func (c *Client) ModifyVpcPeeringConnectionOptions(ctx context.Context, params *ModifyVpcPeeringConnectionOptionsInput, optFns ...func(*Options)) (*ModifyVpcPeeringConnectionOptionsOutput, error) {
 	if params == nil {
 		params = &ModifyVpcPeeringConnectionOptionsInput{}

@@ -16,13 +16,19 @@ import (
 // Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
-// <p>The following operations are related to
-// <code>DeletePublicAccessBlock</code>:</p> <ul> <li> <p> <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">Using
-// Amazon S3 Block Public Access</a> </p> </li> <li> <p>
-// <a>GetPublicAccessBlock</a> </p> </li> <li> <p> <a>PutPublicAccessBlock</a> </p>
-// </li> <li> <p> <a>GetBucketPolicyStatus</a> </p> </li> </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
+// following operations are related to DeletePublicAccessBlock:
+//
+//     * Using Amazon
+// S3 Block Public Access
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+//
+//
+// * GetPublicAccessBlock
+//
+//     * PutPublicAccessBlock
+//
+//     * GetBucketPolicyStatus
 func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePublicAccessBlockInput, optFns ...func(*Options)) (*DeletePublicAccessBlockOutput, error) {
 	if params == nil {
 		params = &DeletePublicAccessBlockInput{}

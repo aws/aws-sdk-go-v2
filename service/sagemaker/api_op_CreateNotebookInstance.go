@@ -28,21 +28,23 @@ import (
 // SageMaker creates a network interface in your own VPC, which is inferred from
 // the subnet ID that you provide in the input. When creating this network
 // interface, Amazon SageMaker attaches the security group that you specified in
-// the request to the network interface that it creates in your VPC.  </li> <li>
-// <p>Launches an EC2 instance of the type specified in the request in the Amazon
-// SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon
-// SageMaker specifies both network interfaces when launching this instance. This
-// enables inbound traffic from your own VPC to the notebook instance, assuming
-// that the security groups allow it.</p> </li> </ol> <p>After creating the
-// notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN). You
-// can't change the name of a notebook instance after you create it.</p> <p>After
-// Amazon SageMaker creates the notebook instance, you can connect to the Jupyter
-// server and work in Jupyter notebooks. For example, you can write code to explore
-// a dataset that you can use for model training, train a model, host models by
-// creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For
-// more information, see <a
-// href="https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html">How It
-// Works</a>. </p>
+// the request to the network interface that it creates in your VPC.
+//
+//     *
+// Launches an EC2 instance of the type specified in the request in the Amazon
+// SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies
+// both network interfaces when launching this instance. This enables inbound
+// traffic from your own VPC to the notebook instance, assuming that the security
+// groups allow it.
+//
+// After creating the notebook instance, Amazon SageMaker returns
+// its Amazon Resource Name (ARN). You can't change the name of a notebook instance
+// after you create it. After Amazon SageMaker creates the notebook instance, you
+// can connect to the Jupyter server and work in Jupyter notebooks. For example,
+// you can write code to explore a dataset that you can use for model training,
+// train a model, host models by creating Amazon SageMaker endpoints, and validate
+// hosted models. For more information, see How It Works
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 func (c *Client) CreateNotebookInstance(ctx context.Context, params *CreateNotebookInstanceInput, optFns ...func(*Options)) (*CreateNotebookInstanceOutput, error) {
 	if params == nil {
 		params = &CreateNotebookInstanceInput{}

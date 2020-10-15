@@ -19,7 +19,8 @@ import (
 const ServiceID = "Personalize Events"
 const ServiceAPIVersion = "2018-03-22"
 
-//
+// Client provides the API client to make operations call for Amazon Personalize
+// Events.
 type Client struct {
 	options Options
 }

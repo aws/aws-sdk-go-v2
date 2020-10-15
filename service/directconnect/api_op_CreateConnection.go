@@ -13,15 +13,14 @@ import (
 )
 
 // Creates a connection between a customer network and a specific AWS Direct
-// Connect location.  <p>A connection links your internal network to an AWS Direct
+// Connect location. A connection links your internal network to an AWS Direct
 // Connect location over a standard Ethernet fiber-optic cable. One end of the
-// cable is connected to your router, the other to an AWS Direct Connect
-// router.</p> <p>To find the locations for your Region, use
-// <a>DescribeLocations</a>.</p> <p>You can automatically add the new connection to
-// a link aggregation group (LAG) by specifying a LAG ID in the request. This
-// ensures that the new connection is allocated on the same AWS Direct Connect
-// endpoint that hosts the specified LAG. If there are no available ports on the
-// endpoint, the request fails and no connection is created.</p>
+// cable is connected to your router, the other to an AWS Direct Connect router. To
+// find the locations for your Region, use DescribeLocations. You can automatically
+// add the new connection to a link aggregation group (LAG) by specifying a LAG ID
+// in the request. This ensures that the new connection is allocated on the same
+// AWS Direct Connect endpoint that hosts the specified LAG. If there are no
+// available ports on the endpoint, the request fails and no connection is created.
 func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionInput, optFns ...func(*Options)) (*CreateConnectionOutput, error) {
 	if params == nil {
 		params = &CreateConnectionInput{}
@@ -125,7 +124,7 @@ type CreateConnectionOutput struct {
 	// The ID of the LAG.
 	LagId *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time
 
 	// The location of the connection.

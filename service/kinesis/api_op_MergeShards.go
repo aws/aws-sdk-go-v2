@@ -27,17 +27,17 @@ import (
 // ACTIVE state, you can call MergeShards. If a stream is in the CREATING,
 // UPDATING, or DELETING state, MergeShards returns a ResourceInUseException. If
 // the specified stream does not exist, MergeShards returns a
-// ResourceNotFoundException. You can use DescribeStream () to check the state of
-// the stream, which is returned in StreamStatus. MergeShards is an asynchronous
+// ResourceNotFoundException. You can use DescribeStream to check the state of the
+// stream, which is returned in StreamStatus. MergeShards is an asynchronous
 // operation. Upon receiving a MergeShards request, Amazon Kinesis Data Streams
 // immediately returns a response and sets the StreamStatus to UPDATING. After the
 // operation is completed, Kinesis Data Streams sets the StreamStatus to ACTIVE.
 // Read and write operations continue to work while the stream is in the UPDATING
-// state. You use DescribeStream () to determine the shard IDs that are specified
-// in the MergeShards request. If you try to operate on too many streams in
-// parallel using CreateStream (), DeleteStream (), MergeShards, or SplitShard (),
-// you receive a LimitExceededException. MergeShards has a limit of five
-// transactions per second per account.
+// state. You use DescribeStream to determine the shard IDs that are specified in
+// the MergeShards request. If you try to operate on too many streams in parallel
+// using CreateStream, DeleteStream, MergeShards, or SplitShard, you receive a
+// LimitExceededException. MergeShards has a limit of five transactions per second
+// per account.
 func (c *Client) MergeShards(ctx context.Context, params *MergeShardsInput, optFns ...func(*Options)) (*MergeShardsOutput, error) {
 	if params == nil {
 		params = &MergeShardsInput{}

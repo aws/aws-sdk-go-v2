@@ -295,7 +295,13 @@ func awsRestjson1_serializeOpHttpBindingsConstantQueryStringInput(v *ConstantQue
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Hello == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member hello must not be empty")}
+	}
 	if v.Hello != nil {
+		if len(*v.Hello) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member hello must not be empty")}
+		}
 		if err := encoder.SetURI("hello").String(*v.Hello); err != nil {
 			return err
 		}
@@ -784,13 +790,25 @@ func awsRestjson1_serializeOpHttpBindingsHttpRequestWithGreedyLabelInPathInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Baz == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member baz must not be empty")}
+	}
 	if v.Baz != nil {
+		if len(*v.Baz) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member baz must not be empty")}
+		}
 		if err := encoder.SetURI("baz").String(*v.Baz); err != nil {
 			return err
 		}
 	}
 
+	if v.Foo == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member foo must not be empty")}
+	}
 	if v.Foo != nil {
+		if len(*v.Foo) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member foo must not be empty")}
+		}
 		if err := encoder.SetURI("foo").String(*v.Foo); err != nil {
 			return err
 		}
@@ -850,48 +868,75 @@ func awsRestjson1_serializeOpHttpBindingsHttpRequestWithLabelsInput(v *HttpReque
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Boolean == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member boolean must not be empty")}
+	}
 	if v.Boolean != nil {
 		if err := encoder.SetURI("boolean").Boolean(*v.Boolean); err != nil {
 			return err
 		}
 	}
 
+	if v.Double == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member double must not be empty")}
+	}
 	if v.Double != nil {
 		if err := encoder.SetURI("double").Double(*v.Double); err != nil {
 			return err
 		}
 	}
 
+	if v.Float == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member float must not be empty")}
+	}
 	if v.Float != nil {
 		if err := encoder.SetURI("float").Float(*v.Float); err != nil {
 			return err
 		}
 	}
 
+	if v.Integer == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member integer must not be empty")}
+	}
 	if v.Integer != nil {
 		if err := encoder.SetURI("integer").Integer(*v.Integer); err != nil {
 			return err
 		}
 	}
 
+	if v.Long == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member long must not be empty")}
+	}
 	if v.Long != nil {
 		if err := encoder.SetURI("long").Long(*v.Long); err != nil {
 			return err
 		}
 	}
 
+	if v.Short == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member short must not be empty")}
+	}
 	if v.Short != nil {
 		if err := encoder.SetURI("short").Short(*v.Short); err != nil {
 			return err
 		}
 	}
 
+	if v.String_ == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member string must not be empty")}
+	}
 	if v.String_ != nil {
+		if len(*v.String_) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member string must not be empty")}
+		}
 		if err := encoder.SetURI("string").String(*v.String_); err != nil {
 			return err
 		}
 	}
 
+	if v.Timestamp == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member timestamp must not be empty")}
+	}
 	if v.Timestamp != nil {
 		if err := encoder.SetURI("timestamp").String(smithytime.FormatDateTime(*v.Timestamp)); err != nil {
 			return err
@@ -952,42 +997,63 @@ func awsRestjson1_serializeOpHttpBindingsHttpRequestWithLabelsAndTimestampFormat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DefaultFormat == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member defaultFormat must not be empty")}
+	}
 	if v.DefaultFormat != nil {
 		if err := encoder.SetURI("defaultFormat").String(smithytime.FormatDateTime(*v.DefaultFormat)); err != nil {
 			return err
 		}
 	}
 
+	if v.MemberDateTime == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member memberDateTime must not be empty")}
+	}
 	if v.MemberDateTime != nil {
 		if err := encoder.SetURI("memberDateTime").String(smithytime.FormatDateTime(*v.MemberDateTime)); err != nil {
 			return err
 		}
 	}
 
+	if v.MemberEpochSeconds == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member memberEpochSeconds must not be empty")}
+	}
 	if v.MemberEpochSeconds != nil {
 		if err := encoder.SetURI("memberEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.MemberEpochSeconds)); err != nil {
 			return err
 		}
 	}
 
+	if v.MemberHttpDate == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member memberHttpDate must not be empty")}
+	}
 	if v.MemberHttpDate != nil {
 		if err := encoder.SetURI("memberHttpDate").String(smithytime.FormatHTTPDate(*v.MemberHttpDate)); err != nil {
 			return err
 		}
 	}
 
+	if v.TargetDateTime == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member targetDateTime must not be empty")}
+	}
 	if v.TargetDateTime != nil {
 		if err := encoder.SetURI("targetDateTime").String(smithytime.FormatDateTime(*v.TargetDateTime)); err != nil {
 			return err
 		}
 	}
 
+	if v.TargetEpochSeconds == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member targetEpochSeconds must not be empty")}
+	}
 	if v.TargetEpochSeconds != nil {
 		if err := encoder.SetURI("targetEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.TargetEpochSeconds)); err != nil {
 			return err
 		}
 	}
 
+	if v.TargetHttpDate == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member targetHttpDate must not be empty")}
+	}
 	if v.TargetHttpDate != nil {
 		if err := encoder.SetURI("targetHttpDate").String(smithytime.FormatHTTPDate(*v.TargetHttpDate)); err != nil {
 			return err

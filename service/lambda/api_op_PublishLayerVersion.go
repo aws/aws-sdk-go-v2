@@ -14,8 +14,8 @@ import (
 // Creates an AWS Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a
 // ZIP archive. Each time you call PublishLayerVersion with the same layer name, a
-// new version is created. Add layers to your function with CreateFunction () or
-// UpdateFunctionConfiguration ().
+// new version is created. Add layers to your function with CreateFunction or
+// UpdateFunctionConfiguration.
 func (c *Client) PublishLayerVersion(ctx context.Context, params *PublishLayerVersionInput, optFns ...func(*Options)) (*PublishLayerVersionOutput, error) {
 	if params == nil {
 		params = &PublishLayerVersionInput{}
@@ -45,7 +45,7 @@ type PublishLayerVersionInput struct {
 
 	// A list of compatible function runtimes
 	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Used for
-	// filtering with ListLayers () and ListLayerVersions ().
+	// filtering with ListLayers and ListLayerVersions.
 	CompatibleRuntimes []types.Runtime
 
 	// The description of the version.

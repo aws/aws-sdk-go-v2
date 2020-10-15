@@ -28,7 +28,7 @@ func (c *Client) DeleteChangeSet(ctx context.Context, params *DeleteChangeSetInp
 	return out, nil
 }
 
-// The input for the DeleteChangeSet () action.
+// The input for the DeleteChangeSet action.
 type DeleteChangeSetInput struct {
 
 	// The name or Amazon Resource Name (ARN) of the change set that you want to
@@ -42,7 +42,7 @@ type DeleteChangeSetInput struct {
 	StackName *string
 }
 
-// The output for the DeleteChangeSet () action.
+// The output for the DeleteChangeSet action.
 type DeleteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

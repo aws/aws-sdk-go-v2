@@ -113,8 +113,6 @@ type SynthesizeSpeechOutput struct {
 	//
 	//     * If you request json as the
 	// OutputFormat, the ContentType returned is audio/json.
-	//
-	//     </p>
 	ContentType *string
 
 	// Number of characters synthesized.

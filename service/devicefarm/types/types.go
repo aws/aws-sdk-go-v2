@@ -204,7 +204,7 @@ type Device struct {
 	Arn *string
 
 	// Indicates how likely a device is available for a test run. Currently available
-	// in the ListDevices () and GetDevice API methods.
+	// in the ListDevices and GetDevice API methods.
 	Availability DeviceAvailability
 
 	// The device's carrier.
@@ -279,8 +279,8 @@ type Device struct {
 // Represents a device filter used to select a set of devices to be included in a
 // test run. This data structure is passed in as the deviceSelectionConfiguration
 // parameter to ScheduleRun. For an example of the JSON request syntax, see
-// ScheduleRun (). It is also passed in as the filters parameter to ListDevices.
-// For an example of the JSON request syntax, see ListDevices ().
+// ScheduleRun. It is also passed in as the filters parameter to ListDevices. For
+// an example of the JSON request syntax, see ListDevices.
 type DeviceFilter struct {
 
 	// The aspect of a device such as platform or model used as the selection criteria
@@ -423,7 +423,7 @@ type DevicePoolCompatibilityResult struct {
 
 // Represents the device filters used in a test run and the maximum number of
 // devices to be included in the run. It is passed in as the
-// deviceSelectionConfiguration request parameter in ScheduleRun ().
+// deviceSelectionConfiguration request parameter in ScheduleRun.
 type DeviceSelectionConfiguration struct {
 
 	// Used to dynamically select a set of devices for a test run. A filter is made up
@@ -525,7 +525,7 @@ type DeviceSelectionConfiguration struct {
 
 // Contains the run results requested by the device selection configuration and how
 // many devices were returned. For an example of the JSON response syntax, see
-// ScheduleRun ().
+// ScheduleRun.
 type DeviceSelectionResult struct {
 
 	// The filters in a device selection result.
@@ -1443,7 +1443,7 @@ type ScheduleRunConfiguration struct {
 }
 
 // Represents test settings. This data structure is passed in as the test parameter
-// to ScheduleRun. For an example of the JSON request syntax, see ScheduleRun ().
+// to ScheduleRun. For an example of the JSON request syntax, see ScheduleRun.
 type ScheduleRunTest struct {
 
 	// The test's type. Must be one of the following values:
@@ -1519,37 +1519,81 @@ type ScheduleRunTest struct {
 	// appium_version: The Appium version. Currently supported values are 1.6.5 (and
 	// later), latest, and default.
 	//
-	//         * <p>latest runs the latest Appium version
-	// supported by Device Farm (1.9.1).</p> </li> <li> <p>For default, Device Farm
-	// selects a compatible version of Appium for the device. The current behavior is
-	// to run 1.7.2 on Android devices and iOS 9 and earlier and 1.7.2 for iOS 10 and
-	// later.</p> </li> <li> <p>This behavior is subject to change.</p> </li> </ul>
-	// </li> </ul> <p>For fuzz tests (Android only):</p> <ul> <li> <p>event_count: The
-	// number of events, between 1 and 10000, that the UI fuzz test should perform.</p>
-	// </li> <li> <p>throttle: The time, in ms, between 0 and 1000, that the UI fuzz
-	// test should wait between events.</p> </li> <li> <p>seed: A seed to use for
+	//         * latest runs the latest Appium version
+	// supported by Device Farm (1.9.1).
+	//
+	//         * For default, Device Farm selects a
+	// compatible version of Appium for the device. The current behavior is to run
+	// 1.7.2 on Android devices and iOS 9 and earlier and 1.7.2 for iOS 10 and later.
+	//
+	//
+	// * This behavior is subject to change.
+	//
+	// For fuzz tests (Android only):
+	//
+	//     *
+	// event_count: The number of events, between 1 and 10000, that the UI fuzz test
+	// should perform.
+	//
+	//     * throttle: The time, in ms, between 0 and 1000, that the
+	// UI fuzz test should wait between events.
+	//
+	//     * seed: A seed to use for
 	// randomizing the UI fuzz test. Using the same seed value between tests ensures
-	// identical event sequences.</p> </li> </ul> <p>For Explorer tests:</p> <ul> <li>
-	// <p>username: A user name to use if the Explorer encounters a login form. If not
-	// supplied, no user name is inserted.</p> </li> <li> <p>password: A password to
-	// use if the Explorer encounters a login form. If not supplied, no password is
-	// inserted.</p> </li> </ul> <p>For Instrumentation:</p> <ul> <li> <p>filter: A
-	// test filter string. Examples:</p> <ul> <li> <p>Running a single test case:
-	// <code>com.android.abc.Test1</code> </p> </li> <li> <p>Running a single test:
-	// <code>com.android.abc.Test1#smoke</code> </p> </li> <li> <p>Running multiple
-	// tests: <code>com.android.abc.Test1,com.android.abc.Test2</code> </p> </li> </ul>
-	// </li> </ul> <p>For XCTest and XCTestUI:</p> <ul> <li> <p>filter: A test filter
-	// string. Examples:</p> <ul> <li> <p>Running a single test class:
-	// <code>LoginTests</code> </p> </li> <li> <p>Running a multiple test classes:
-	// <code>LoginTests,SmokeTests</code> </p> </li> <li> <p>Running a single test:
-	// <code>LoginTests/testValid</code> </p> </li> <li> <p>Running multiple tests:
-	// <code>LoginTests/testValid,LoginTests/testInvalid</code> </p> </li> </ul> </li>
-	// </ul> <p>For UIAutomator:</p> <ul> <li> <p>filter: A test filter string.
-	// Examples:</p> <ul> <li> <p>Running a single test case:
-	// <code>com.android.abc.Test1</code> </p> </li> <li> <p>Running a single test:
-	// <code>com.android.abc.Test1#smoke</code> </p> </li> <li> <p>Running multiple
-	// tests: <code>com.android.abc.Test1,com.android.abc.Test2</code> </p> </li> </ul>
-	// </li> </ul>
+	// identical event sequences.
+	//
+	// For Explorer tests:
+	//
+	//     * username: A user name to
+	// use if the Explorer encounters a login form. If not supplied, no user name is
+	// inserted.
+	//
+	//     * password: A password to use if the Explorer encounters a login
+	// form. If not supplied, no password is inserted.
+	//
+	// For Instrumentation:
+	//
+	//     *
+	// filter: A test filter string. Examples:
+	//
+	//         * Running a single test case:
+	// com.android.abc.Test1
+	//
+	//         * Running a single test:
+	// com.android.abc.Test1#smoke
+	//
+	//         * Running multiple tests:
+	// com.android.abc.Test1,com.android.abc.Test2
+	//
+	// For XCTest and XCTestUI:
+	//
+	//     *
+	// filter: A test filter string. Examples:
+	//
+	//         * Running a single test class:
+	// LoginTests
+	//
+	//         * Running a multiple test classes: LoginTests,SmokeTests
+	//
+	//
+	// * Running a single test: LoginTests/testValid
+	//
+	//         * Running multiple tests:
+	// LoginTests/testValid,LoginTests/testInvalid
+	//
+	// For UIAutomator:
+	//
+	//     * filter: A
+	// test filter string. Examples:
+	//
+	//         * Running a single test case:
+	// com.android.abc.Test1
+	//
+	//         * Running a single test:
+	// com.android.abc.Test1#smoke
+	//
+	//         * Running multiple tests:
+	// com.android.abc.Test1,com.android.abc.Test2
 	Parameters map[string]*string
 
 	// The ARN of the uploaded test to be run.
@@ -1824,8 +1868,8 @@ type TestGridProject struct {
 	Name *string
 }
 
-// A TestGridSession () is a single instance of a browser launched from the URL
-// provided by a call to CreateTestGridUrl ().
+// A TestGridSession is a single instance of a browser launched from the URL
+// provided by a call to CreateTestGridUrl.
 type TestGridSession struct {
 
 	// The ARN of the session.
@@ -1847,7 +1891,7 @@ type TestGridSession struct {
 	Status TestGridSessionStatus
 }
 
-// An action taken by a TestGridSession () browser instance.
+// An action taken by a TestGridSession browser instance.
 type TestGridSessionAction struct {
 
 	// The action taken by the session.

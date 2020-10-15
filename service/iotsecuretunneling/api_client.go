@@ -19,10 +19,8 @@ import (
 const ServiceID = "IoTSecureTunneling"
 const ServiceAPIVersion = "2018-10-05"
 
-// AWS IoT Secure Tunneling AWS IoT Secure Tunnling enables you to create remote
-// connections to devices deployed in the field. For more information about how AWS
-// IoT Secure Tunneling works, see the User Guide
-// (https://docs.aws.amazon.com/secure-tunneling/latest/ug/what-is-secure-tunneling.html).
+// Client provides the API client to make operations call for AWS IoT Secure
+// Tunneling.
 type Client struct {
 	options Options
 }

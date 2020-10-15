@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the provisioned products that are available (not terminated). To use
-// additional filtering, see SearchProvisionedProducts ().
+// additional filtering, see SearchProvisionedProducts.
 func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvisionedProductsInput, optFns ...func(*Options)) (*ScanProvisionedProductsOutput, error) {
 	if params == nil {
 		params = &ScanProvisionedProductsInput{}

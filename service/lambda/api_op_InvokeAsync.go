@@ -11,7 +11,7 @@ import (
 	"io"
 )
 
-// For asynchronous function invocation, use Invoke (). Invokes a function
+// For asynchronous function invocation, use Invoke. Invokes a function
 // asynchronously.
 func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optFns ...func(*Options)) (*InvokeAsyncOutput, error) {
 	if params == nil {

@@ -19,10 +19,7 @@ import (
 const ServiceID = "Inspector"
 const ServiceAPIVersion = "2016-02-16"
 
-// Amazon Inspector Amazon Inspector enables you to analyze the behavior of your
-// AWS resources and to identify potential security issues. For more information,
-// see  Amazon Inspector User Guide
-// (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html).
+// Client provides the API client to make operations call for Amazon Inspector.
 type Client struct {
 	options Options
 }

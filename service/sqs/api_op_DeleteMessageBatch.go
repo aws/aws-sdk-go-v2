@@ -12,13 +12,13 @@ import (
 )
 
 // Deletes up to ten messages from the specified queue. This is a batch version of
-// DeleteMessage (). The result of the action on each message is reported
-// individually in the response. Because the batch request can result in a
-// combination of successful and unsuccessful actions, you should check for batch
-// errors even when the call returns an HTTP status code of 200. Some actions take
-// lists of parameters. These lists are specified using the param.n notation.
-// Values of n are integers starting from 1. For example, a parameter list with two
-// elements looks like this: &AttributeName.1=first
+// DeleteMessage. The result of the action on each message is reported individually
+// in the response. Because the batch request can result in a combination of
+// successful and unsuccessful actions, you should check for batch errors even when
+// the call returns an HTTP status code of 200. Some actions take lists of
+// parameters. These lists are specified using the param.n notation. Values of n
+// are integers starting from 1. For example, a parameter list with two elements
+// looks like this: &AttributeName.1=first
 //     &AttributeName.2=second
 func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBatchInput, optFns ...func(*Options)) (*DeleteMessageBatchOutput, error) {
 	if params == nil {
@@ -51,16 +51,16 @@ type DeleteMessageBatchInput struct {
 }
 
 // For each message in the batch, the response contains a
-// DeleteMessageBatchResultEntry () tag if the message is deleted or a
-// BatchResultErrorEntry () tag if the message can't be deleted.
+// DeleteMessageBatchResultEntry tag if the message is deleted or a
+// BatchResultErrorEntry tag if the message can't be deleted.
 type DeleteMessageBatchOutput struct {
 
-	// A list of BatchResultErrorEntry () items.
+	// A list of BatchResultErrorEntry items.
 	//
 	// This member is required.
 	Failed []*types.BatchResultErrorEntry
 
-	// A list of DeleteMessageBatchResultEntry () items.
+	// A list of DeleteMessageBatchResultEntry items.
 	//
 	// This member is required.
 	Successful []*types.DeleteMessageBatchResultEntry

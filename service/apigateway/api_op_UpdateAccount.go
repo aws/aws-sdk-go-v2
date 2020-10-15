@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Changes information about the current Account () resource.
+// Changes information about the current Account resource.
 func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, optFns ...func(*Options)) (*UpdateAccountOutput, error) {
 	if params == nil {
 		params = &UpdateAccountInput{}
@@ -27,8 +27,7 @@ func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, 
 	return out, nil
 }
 
-// Requests API Gateway to change information about the current Account ()
-// resource.
+// Requests API Gateway to change information about the current Account resource.
 type UpdateAccountInput struct {
 	Name *string
 
@@ -94,14 +93,14 @@ type UpdateAccountOutput struct {
 	// The version of the API keys used for the account.
 	ApiKeyVersion *string
 
-	// The ARN of an Amazon CloudWatch role for the current Account ().
+	// The ARN of an Amazon CloudWatch role for the current Account.
 	CloudwatchRoleArn *string
 
 	// A list of features supported for the account. When usage plans are enabled, the
 	// features list will include an entry of "UsagePlans".
 	Features []*string
 
-	// Specifies the API request limits configured for the current Account ().
+	// Specifies the API request limits configured for the current Account.
 	ThrottleSettings *types.ThrottleSettings
 
 	// Metadata pertaining to the operation's result.

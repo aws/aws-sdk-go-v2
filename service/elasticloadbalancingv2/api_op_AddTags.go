@@ -15,8 +15,8 @@ import (
 // can tag your Application Load Balancers, Network Load Balancers, and your target
 // groups. Each tag consists of a key and an optional value. If a resource already
 // has a tag with the same key, AddTags updates its value. To list the current tags
-// for your resources, use DescribeTags (). To remove tags from your resources, use
-// RemoveTags ().
+// for your resources, use DescribeTags. To remove tags from your resources, use
+// RemoveTags.
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}

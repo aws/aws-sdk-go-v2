@@ -41,9 +41,9 @@ import (
 // access. For more information, see Logging IAM Events with CloudTrail
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html)
 // in the IAM User Guide. This operation returns a JobId. Use this parameter in the
-// GetOrganizationsAccessReport () operation to check the status of the report
+// GetOrganizationsAccessReport operation to check the status of the report
 // generation. To check the status of this request, use the JobId parameter in the
-// GetOrganizationsAccessReport () operation and test the JobStatus response
+// GetOrganizationsAccessReport operation and test the JobStatus response
 // parameter. When the job is complete, you can retrieve the report. To generate a
 // service last accessed data report for entities, specify an entity path without
 // specifying the optional AWS Organizations policy ID. The type of entity that you
@@ -153,7 +153,7 @@ type GenerateOrganizationsAccessReportInput struct {
 
 type GenerateOrganizationsAccessReportOutput struct {
 
-	// The job identifier that you can use in the GetOrganizationsAccessReport ()
+	// The job identifier that you can use in the GetOrganizationsAccessReport
 	// operation.
 	JobId *string
 

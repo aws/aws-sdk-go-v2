@@ -18,12 +18,11 @@ import (
 // Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
-// <p>For information about the Amazon S3 analytics feature, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html">Amazon
-// S3 Analytics – Storage Class Analysis</a>. </p> <p>The following operations are
-// related to <code>DeleteBucketAnalyticsConfiguration</code>:</p> <ul> <li> <p>
-// </p> </li> <li> <p> </p> </li> <li> <p> </p> </li> </ul>
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). For
+// information about the Amazon S3 analytics feature, see Amazon S3 Analytics –
+// Storage Class Analysis
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
+// The following operations are related to DeleteBucketAnalyticsConfiguration:
 func (c *Client) DeleteBucketAnalyticsConfiguration(ctx context.Context, params *DeleteBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*DeleteBucketAnalyticsConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteBucketAnalyticsConfigurationInput{}

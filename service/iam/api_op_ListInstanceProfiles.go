@@ -60,7 +60,7 @@ type ListInstanceProfilesInput struct {
 	PathPrefix *string
 }
 
-// Contains the response to a successful ListInstanceProfiles () request.
+// Contains the response to a successful ListInstanceProfiles request.
 type ListInstanceProfilesOutput struct {
 
 	// A list of instance profiles.

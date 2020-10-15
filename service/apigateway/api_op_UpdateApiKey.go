@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Changes information about an ApiKey () resource.
+// Changes information about an ApiKey resource.
 func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, optFns ...func(*Options)) (*UpdateApiKeyOutput, error) {
 	if params == nil {
 		params = &UpdateApiKeyInput{}
@@ -28,10 +28,10 @@ func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, op
 	return out, nil
 }
 
-// A request to change information about an ApiKey () resource.
+// A request to change information about an ApiKey resource.
 type UpdateApiKeyInput struct {
 
-	// [Required] The identifier of the ApiKey () resource to be updated.
+	// [Required] The identifier of the ApiKey resource to be updated.
 	//
 	// This member is required.
 	ApiKey *string
@@ -49,9 +49,9 @@ type UpdateApiKeyInput struct {
 	Title *string
 }
 
-// A resource that can be distributed to callers for executing Method () resources
-// that require an API key. API keys can be mapped to any Stage () on any RestApi
-// (), which indicates that the callers with the API key can make requests to that
+// A resource that can be distributed to callers for executing Method resources
+// that require an API key. API keys can be mapped to any Stage on any RestApi,
+// which indicates that the callers with the API key can make requests to that
 // stage. Use API Keys
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type UpdateApiKeyOutput struct {
@@ -78,7 +78,7 @@ type UpdateApiKeyOutput struct {
 	// The name of the API Key.
 	Name *string
 
-	// A list of Stage () resources that are associated with the ApiKey () resource.
+	// A list of Stage resources that are associated with the ApiKey resource.
 	StageKeys []*string
 
 	// The collection of tags. Each tag element is associated with a given resource.

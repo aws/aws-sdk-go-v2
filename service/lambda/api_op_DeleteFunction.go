@@ -11,11 +11,11 @@ import (
 )
 
 // Deletes a Lambda function. To delete a specific function version, use the
-// Qualifier parameter. Otherwise, all versions and aliases are deleted.  <p>To
-// delete Lambda event source mappings that invoke a function, use
-// <a>DeleteEventSourceMapping</a>. For AWS services and resources that invoke your
+// Qualifier parameter. Otherwise, all versions and aliases are deleted. To delete
+// Lambda event source mappings that invoke a function, use
+// DeleteEventSourceMapping. For AWS services and resources that invoke your
 // function directly, delete the trigger in the service where you originally
-// configured it.</p>
+// configured it.
 func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput, optFns ...func(*Options)) (*DeleteFunctionOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionInput{}

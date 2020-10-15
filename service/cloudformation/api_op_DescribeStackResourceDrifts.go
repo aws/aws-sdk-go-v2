@@ -20,9 +20,8 @@ import (
 // checked, and so not included. For a list of resources that support drift
 // detection, see Resources that Support Drift Detection
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
-// Use DetectStackResourceDrift () to detect drift on individual resources, or
-// DetectStackDrift () to detect drift on all supported resources for a given
-// stack.
+// Use DetectStackResourceDrift to detect drift on individual resources, or
+// DetectStackDrift to detect drift on all supported resources for a given stack.
 func (c *Client) DescribeStackResourceDrifts(ctx context.Context, params *DescribeStackResourceDriftsInput, optFns ...func(*Options)) (*DescribeStackResourceDriftsOutput, error) {
 	if params == nil {
 		params = &DescribeStackResourceDriftsInput{}

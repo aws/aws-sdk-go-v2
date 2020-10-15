@@ -19,7 +19,7 @@ import (
 const ServiceID = "ApiGatewayV2"
 const ServiceAPIVersion = "2018-11-29"
 
-// Amazon API Gateway V2
+// Client provides the API client to make operations call for AmazonApiGatewayV2.
 type Client struct {
 	options Options
 }

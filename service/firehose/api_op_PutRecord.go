@@ -13,14 +13,14 @@ import (
 
 // Writes a single data record into an Amazon Kinesis Data Firehose delivery
 // stream. To write multiple data records into a delivery stream, use
-// PutRecordBatch (). Applications using these operations are referred to as
+// PutRecordBatch. Applications using these operations are referred to as
 // producers. By default, each delivery stream can take in up to 2,000 transactions
 // per second, 5,000 records per second, or 5 MB per second. If you use PutRecord
-// () and PutRecordBatch (), the limits are an aggregate across these two
-// operations for each delivery stream. For more information about limits and how
-// to request an increase, see Amazon Kinesis Data Firehose Limits
+// and PutRecordBatch, the limits are an aggregate across these two operations for
+// each delivery stream. For more information about limits and how to request an
+// increase, see Amazon Kinesis Data Firehose Limits
 // (https://docs.aws.amazon.com/firehose/latest/dev/limits.html). You must specify
-// the name of the delivery stream and the data record when using PutRecord (). The
+// the name of the delivery stream and the data record when using PutRecord. The
 // data record consists of a data blob that can be up to 1,000 KB in size, and any
 // kind of data. For example, it can be a segment from a log file, geographic
 // location data, website clickstream data, and so on. Kinesis Data Firehose
@@ -36,10 +36,9 @@ import (
 // for the delivery stream. Data records sent to Kinesis Data Firehose are stored
 // for 24 hours from the time they are added to a delivery stream as it tries to
 // send the records to the destination. If the destination is unreachable for more
-// than 24 hours, the data is no longer available.  <important> <p>Don't
-// concatenate two or more base64 strings to form the data fields of your records.
-// Instead, concatenate the raw data, then perform base64 encoding.</p>
-// </important>
+// than 24 hours, the data is no longer available. Don't concatenate two or more
+// base64 strings to form the data fields of your records. Instead, concatenate the
+// raw data, then perform base64 encoding.
 func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns ...func(*Options)) (*PutRecordOutput, error) {
 	if params == nil {
 		params = &PutRecordInput{}

@@ -44,7 +44,7 @@ func (e *BatchWriteException) ErrorMessage() string {
 func (e *BatchWriteException) ErrorCode() string             { return "BatchWriteException" }
 func (e *BatchWriteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Cannot list the parents of a Directory () root.
+// Cannot list the parents of a Directory root.
 type CannotListParentOfRootException struct {
 	Message *string
 }
@@ -63,8 +63,8 @@ func (e *CannotListParentOfRootException) ErrorCode() string {
 }
 func (e *CannotListParentOfRootException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that a Directory () could not be created due to a naming conflict.
-// Choose a different name and try again.
+// Indicates that a Directory could not be created due to a naming conflict. Choose
+// a different name and try again.
 type DirectoryAlreadyExistsException struct {
 	Message *string
 }
@@ -170,7 +170,7 @@ func (e *FacetInUseException) ErrorMessage() string {
 func (e *FacetInUseException) ErrorCode() string             { return "FacetInUseException" }
 func (e *FacetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Facet () could not be found.
+// The specified Facet could not be found.
 type FacetNotFoundException struct {
 	Message *string
 }
@@ -187,8 +187,8 @@ func (e *FacetNotFoundException) ErrorMessage() string {
 func (e *FacetNotFoundException) ErrorCode() string             { return "FacetNotFoundException" }
 func (e *FacetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Facet () that you provided was not well formed or could not be validated
-// with the schema.
+// The Facet that you provided was not well formed or could not be validated with
+// the schema.
 type FacetValidationException struct {
 	Message *string
 }
@@ -301,7 +301,7 @@ func (e *InvalidAttachmentException) ErrorMessage() string {
 func (e *InvalidAttachmentException) ErrorCode() string             { return "InvalidAttachmentException" }
 func (e *InvalidAttachmentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An attempt to modify a Facet () resulted in an invalid schema exception.
+// An attempt to modify a Facet resulted in an invalid schema exception.
 type InvalidFacetUpdateException struct {
 	Message *string
 }

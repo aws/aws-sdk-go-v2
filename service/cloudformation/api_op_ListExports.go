@@ -35,14 +35,14 @@ func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optF
 
 type ListExportsInput struct {
 
-	// A string (provided by the ListExports () response output) that identifies the
-	// next page of exported output values that you asked to retrieve.
+	// A string (provided by the ListExports response output) that identifies the next
+	// page of exported output values that you asked to retrieve.
 	NextToken *string
 }
 
 type ListExportsOutput struct {
 
-	// The output for the ListExports () action.
+	// The output for the ListExports action.
 	Exports []*types.Export
 
 	// If the output exceeds 100 exported output values, a string that identifies the

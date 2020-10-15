@@ -61,7 +61,7 @@ type CreateAssessmentTemplateInput struct {
 
 	// The user-defined attributes that are assigned to every finding that is generated
 	// by the assessment run that uses this assessment template. An attribute is a key
-	// and value pair (an Attribute () object). Within an assessment template, each key
+	// and value pair (an Attribute object). Within an assessment template, each key
 	// must be unique.
 	UserAttributesForFindings []*types.Attribute
 }

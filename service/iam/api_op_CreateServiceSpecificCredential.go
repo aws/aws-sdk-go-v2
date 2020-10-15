@@ -17,7 +17,7 @@ import (
 // maximum of two sets of service-specific credentials for each supported service
 // per user. The only supported service at this time is AWS CodeCommit. You can
 // reset the password to a new service-generated value by calling
-// ResetServiceSpecificCredential (). For more information about service-specific
+// ResetServiceSpecificCredential. For more information about service-specific
 // credentials, see Using IAM with AWS CodeCommit: Git Credentials, SSH Keys, and
 // AWS Access Keys
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html)
@@ -62,7 +62,7 @@ type CreateServiceSpecificCredentialOutput struct {
 	// A structure that contains information about the newly created service-specific
 	// credential. This is the only time that the password for this credential set is
 	// available. It cannot be recovered later. Instead, you must reset the password
-	// with ResetServiceSpecificCredential ().
+	// with ResetServiceSpecificCredential.
 	ServiceSpecificCredential *types.ServiceSpecificCredential
 
 	// Metadata pertaining to the operation's result.

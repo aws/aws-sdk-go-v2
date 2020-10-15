@@ -13,9 +13,9 @@ import (
 // Deletes the draft configuration associated with the running environment.
 // Updating a running environment with any configuration changes creates a draft
 // configuration set. You can get the draft configuration using
-// DescribeConfigurationSettings () while the update is in progress or if the
-// update fails. The DeploymentStatus for the draft configuration indicates whether
-// the deployment is in process or has failed. The draft configuration remains in
+// DescribeConfigurationSettings while the update is in progress or if the update
+// fails. The DeploymentStatus for the draft configuration indicates whether the
+// deployment is in process or has failed. The draft configuration remains in
 // existence until it is deleted with this action.
 func (c *Client) DeleteEnvironmentConfiguration(ctx context.Context, params *DeleteEnvironmentConfigurationInput, optFns ...func(*Options)) (*DeleteEnvironmentConfigurationOutput, error) {
 	if params == nil {

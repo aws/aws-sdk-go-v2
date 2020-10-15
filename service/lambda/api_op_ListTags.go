@@ -12,7 +12,7 @@ import (
 
 // Returns a function's tags
 // (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). You can also view
-// tags with GetFunction ().
+// tags with GetFunction.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}

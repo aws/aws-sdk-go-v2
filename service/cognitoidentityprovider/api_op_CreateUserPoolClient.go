@@ -148,28 +148,28 @@ type CreateUserPoolClientInput struct {
 	// This
 	// setting affects the behavior of following APIs:
 	//
-	//     * AdminInitiateAuth ()
-	//
-	//
-	// * AdminRespondToAuthChallenge ()
-	//
-	//     * InitiateAuth ()
+	//     * AdminInitiateAuth
 	//
 	//     *
-	// RespondToAuthChallenge ()
+	// AdminRespondToAuthChallenge
 	//
-	//     * ForgotPassword ()
+	//     * InitiateAuth
+	//
+	//     * RespondToAuthChallenge
+	//
+	//
+	// * ForgotPassword
 	//
 	//     * ConfirmForgotPassword
-	// ()
 	//
-	//     * ConfirmSignUp ()
+	//     * ConfirmSignUp
 	//
-	//     * ResendConfirmationCode ()
+	//     *
+	// ResendConfirmationCode
 	//
-	// After February 15th
-	// 2020, the value of PreventUserExistenceErrors will default to ENABLED for newly
-	// created user pool clients if no value is provided.
+	// After February 15th 2020, the value of
+	// PreventUserExistenceErrors will default to ENABLED for newly created user pool
+	// clients if no value is provided.
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
 	// The read attributes.

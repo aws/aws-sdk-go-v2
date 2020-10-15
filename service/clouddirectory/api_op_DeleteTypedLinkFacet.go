@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a TypedLinkFacet (). For more information, see Typed Links
+// Deletes a TypedLinkFacet. For more information, see Typed Links
 // (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 func (c *Client) DeleteTypedLinkFacet(ctx context.Context, params *DeleteTypedLinkFacetInput, optFns ...func(*Options)) (*DeleteTypedLinkFacetOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ type DeleteTypedLinkFacetInput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns ().
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string

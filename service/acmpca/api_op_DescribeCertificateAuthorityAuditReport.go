@@ -13,10 +13,9 @@ import (
 )
 
 // Lists information about a specific audit report created by calling the
-// CreateCertificateAuthorityAuditReport () action. Audit information is created
-// every time the certificate authority (CA) private key is used. The private key
-// is used when you call the IssueCertificate () action or the RevokeCertificate ()
-// action.
+// CreateCertificateAuthorityAuditReport action. Audit information is created every
+// time the certificate authority (CA) private key is used. The private key is used
+// when you call the IssueCertificate action or the RevokeCertificate action.
 func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, params *DescribeCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*DescribeCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {
 		params = &DescribeCertificateAuthorityAuditReportInput{}
@@ -34,7 +33,7 @@ func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, pa
 
 type DescribeCertificateAuthorityAuditReportInput struct {
 
-	// The report ID returned by calling the CreateCertificateAuthorityAuditReport ()
+	// The report ID returned by calling the CreateCertificateAuthorityAuditReport
 	// action.
 	//
 	// This member is required.

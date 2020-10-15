@@ -23,11 +23,11 @@ import (
 // policy, one or multiple rule-based scaling policies, or both. We recommend
 // caution, however, because multiple auto-scaling policies can have unintended
 // consequences. You can temporarily suspend all scaling policies for a fleet by
-// calling StopFleetActions () with the fleet action AUTO_SCALING. To resume
-// scaling policies, call StartFleetActions () with the same fleet action. To stop
-// just one scaling policy--or to permanently remove it, you must delete the policy
-// with DeleteScalingPolicy (). Learn more about how to work with auto-scaling in
-// Set Up Fleet Automatic Scaling
+// calling StopFleetActions with the fleet action AUTO_SCALING. To resume scaling
+// policies, call StartFleetActions with the same fleet action. To stop just one
+// scaling policy--or to permanently remove it, you must delete the policy with
+// DeleteScalingPolicy. Learn more about how to work with auto-scaling in Set Up
+// Fleet Automatic Scaling
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html).
 // Target-based policy A target-based policy tracks a single metric:
 // PercentAvailableGameSessions. This metric tells us how much of a fleet's hosting
@@ -42,8 +42,8 @@ import (
 // new instances or stop unused instances in order to return to the 10% buffer. To
 // create or update a target-based policy, specify a fleet ID and name, and set the
 // policy type to "TargetBased". Specify the metric to track
-// (PercentAvailableGameSessions) and reference a TargetConfiguration () object
-// with your desired buffer value. Exclude all other parameters. On a successful
+// (PercentAvailableGameSessions) and reference a TargetConfiguration object with
+// your desired buffer value. Exclude all other parameters. On a successful
 // request, the policy name is returned. The scaling policy is automatically in
 // force as soon as it's successfully created. If the fleet's auto-scaling actions
 // are temporarily suspended, the new policy will be in force once the fleet
@@ -67,29 +67,29 @@ import (
 // temporarily suspended, the new policy will be in force once the fleet actions
 // are restarted.
 //
-//     * DescribeFleetCapacity ()
+//     * DescribeFleetCapacity
 //
-//     * UpdateFleetCapacity ()
+//     * UpdateFleetCapacity
 //
-//
-// * DescribeEC2InstanceLimits ()
+//     *
+// DescribeEC2InstanceLimits
 //
 //     * Manage scaling policies:
 //
 //         *
-// PutScalingPolicy () (auto-scaling)
+// PutScalingPolicy (auto-scaling)
 //
-//         * DescribeScalingPolicies ()
+//         * DescribeScalingPolicies
 // (auto-scaling)
 //
-//         * DeleteScalingPolicy () (auto-scaling)
+//         * DeleteScalingPolicy (auto-scaling)
 //
-//     * Manage
-// fleet actions:
+//     * Manage fleet
+// actions:
 //
-//         * StartFleetActions ()
+//         * StartFleetActions
 //
-//         * StopFleetActions ()
+//         * StopFleetActions
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutScalingPolicyInput{}
@@ -189,20 +189,20 @@ type PutScalingPolicyInput struct {
 	// Amount of adjustment to make, based on the scaling adjustment type.
 	ScalingAdjustment *int32
 
-	// The type of adjustment to make to a fleet's instance count (see FleetCapacity
-	// ()):
+	// The type of adjustment to make to a fleet's instance count (see
+	// FleetCapacity):
 	//
-	//     * ChangeInCapacity -- add (or subtract) the scaling adjustment value
-	// from the current instance count. Positive values scale up while negative values
-	// scale down.
+	//     * ChangeInCapacity -- add (or subtract) the scaling
+	// adjustment value from the current instance count. Positive values scale up while
+	// negative values scale down.
 	//
-	//     * ExactCapacity -- set the instance count to the scaling
-	// adjustment value.
+	//     * ExactCapacity -- set the instance count to
+	// the scaling adjustment value.
 	//
-	//     * PercentChangeInCapacity -- increase or reduce the
-	// current instance count by the scaling adjustment, read as a percentage. Positive
-	// values scale up while negative values scale down; for example, a value of "-10"
-	// scales the fleet down by 10%.
+	//     * PercentChangeInCapacity -- increase or
+	// reduce the current instance count by the scaling adjustment, read as a
+	// percentage. Positive values scale up while negative values scale down; for
+	// example, a value of "-10" scales the fleet down by 10%.
 	ScalingAdjustmentType types.ScalingAdjustmentType
 
 	// The settings for a target-based scaling policy.

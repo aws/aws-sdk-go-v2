@@ -19,7 +19,7 @@ import (
 const ServiceID = "Rest Json Protocol"
 const ServiceAPIVersion = "2019-12-16"
 
-// A REST JSON service that sends JSON requests and responses.
+// Client provides the API client to make operations call for the API.
 type Client struct {
 	options Options
 }

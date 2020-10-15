@@ -27,7 +27,7 @@ import (
 // Related operations
 //
 //     * To list the
-// secrets in an account, use ListSecrets ().
+// secrets in an account, use ListSecrets.
 func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVersionIdsInput, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
 	if params == nil {
 		params = &ListSecretVersionIdsInput{}

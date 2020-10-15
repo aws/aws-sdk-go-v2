@@ -14,19 +14,19 @@ import (
 // Deleting a Global Datastore is a two-step process:
 //
 //     * First, you must
-// DisassociateGlobalReplicationGroup () to remove the secondary clusters in the
+// DisassociateGlobalReplicationGroup to remove the secondary clusters in the
 // Global Datastore.
 //
 //     * Once the Global Datastore contains only the primary
 // cluster, you can use DeleteGlobalReplicationGroup API to delete the Global
 // Datastore while retainining the primary cluster using Retain…= true.
 //
-//
-// <p>Since the Global Datastore has only a primary cluster, you can delete the
-// Global Datastore while retaining the primary by setting
-// <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful
-// response from this operation, Amazon ElastiCache immediately begins deleting the
-// selected resources; you cannot cancel or revert this operation.</p>
+// Since the
+// Global Datastore has only a primary cluster, you can delete the Global Datastore
+// while retaining the primary by setting RetainPrimaryCluster=true. When you
+// receive a successful response from this operation, Amazon ElastiCache
+// immediately begins deleting the selected resources; you cannot cancel or revert
+// this operation.
 func (c *Client) DeleteGlobalReplicationGroup(ctx context.Context, params *DeleteGlobalReplicationGroupInput, optFns ...func(*Options)) (*DeleteGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalReplicationGroupInput{}
@@ -60,9 +60,10 @@ type DeleteGlobalReplicationGroupOutput struct {
 	// Consists of a primary cluster that accepts writes and an associated secondary
 	// cluster that resides in a different AWS region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
-	// secondary cluster.  <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b>
-	// represents the name of the Global Datastore, which is what you use to associate
-	// a secondary cluster.</p> </li> </ul>
+	// secondary cluster.
+	//
+	//     * The GlobalReplicationGroupIdSuffix represents the name
+	// of the Global Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

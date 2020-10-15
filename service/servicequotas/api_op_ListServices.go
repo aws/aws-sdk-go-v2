@@ -13,7 +13,7 @@ import (
 
 // Lists the AWS services available in Service Quotas. Not all AWS services are
 // available in Service Quotas. To list the see the list of the service quotas for
-// a specific service, use ListServiceQuotas ().
+// a specific service, use ListServiceQuotas.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}

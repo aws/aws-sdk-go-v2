@@ -15,7 +15,7 @@ import (
 // 2019. For information, including how to migrate your AWS WAF resources from the
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Retrieves the WebACL () for the specified resource.
+// Retrieves the WebACL for the specified resource.
 func (c *Client) GetWebACLForResource(ctx context.Context, params *GetWebACLForResourceInput, optFns ...func(*Options)) (*GetWebACLForResourceOutput, error) {
 	if params == nil {
 		params = &GetWebACLForResourceInput{}

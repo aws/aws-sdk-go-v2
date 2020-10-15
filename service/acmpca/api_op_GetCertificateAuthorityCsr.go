@@ -12,10 +12,10 @@ import (
 
 // Retrieves the certificate signing request (CSR) for your private certificate
 // authority (CA). The CSR is created when you call the CreateCertificateAuthority
-// () action. Sign the CSR with your ACM Private CA-hosted or on-premises root or
+// action. Sign the CSR with your ACM Private CA-hosted or on-premises root or
 // subordinate CA. Then import the signed certificate back into ACM Private CA by
-// calling the ImportCertificateAuthorityCertificate () action. The CSR is returned
-// as a base64 PEM-encoded string.
+// calling the ImportCertificateAuthorityCertificate action. The CSR is returned as
+// a base64 PEM-encoded string.
 func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCertificateAuthorityCsrInput, optFns ...func(*Options)) (*GetCertificateAuthorityCsrOutput, error) {
 	if params == nil {
 		params = &GetCertificateAuthorityCsrInput{}
@@ -34,7 +34,7 @@ func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCert
 type GetCertificateAuthorityCsrInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority () action. This must be of the form:
+	// CreateCertificateAuthority action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.

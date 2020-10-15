@@ -12,8 +12,8 @@ import (
 )
 
 // Lists the AWS Direct Connect locations in the current AWS Region. These are the
-// locations that can be selected when calling CreateConnection () or
-// CreateInterconnect ().
+// locations that can be selected when calling CreateConnection or
+// CreateInterconnect.
 func (c *Client) DescribeLocations(ctx context.Context, params *DescribeLocationsInput, optFns ...func(*Options)) (*DescribeLocationsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationsInput{}

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a Resource () resource.
+// Deletes a Resource resource.
 func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput, optFns ...func(*Options)) (*DeleteResourceOutput, error) {
 	if params == nil {
 		params = &DeleteResourceInput{}
@@ -26,15 +26,15 @@ func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput
 	return out, nil
 }
 
-// Request to delete a Resource ().
+// Request to delete a Resource.
 type DeleteResourceInput struct {
 
-	// [Required] The identifier of the Resource () resource.
+	// [Required] The identifier of the Resource resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

@@ -11,14 +11,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns the cors configuration information set for the bucket.  <p> To use this
+// Returns the cors configuration information set for the bucket. To use this
 // operation, you must have permission to perform the s3:GetBucketCORS action. By
-// default, the bucket owner has this permission and can grant it to others.</p>
-// <p> For more information about cors, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html"> Enabling
-// Cross-Origin Resource Sharing</a>.</p> <p>The following operations are related
-// to <code>GetBucketCors</code>:</p> <ul> <li> <p> <a>PutBucketCors</a> </p> </li>
-// <li> <p> <a>DeleteBucketCors</a> </p> </li> </ul>
+// default, the bucket owner has this permission and can grant it to others. For
+// more information about cors, see  Enabling Cross-Origin Resource Sharing
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html). The following
+// operations are related to GetBucketCors:
+//
+//     * PutBucketCors
+//
+//     *
+// DeleteBucketCors
 func (c *Client) GetBucketCors(ctx context.Context, params *GetBucketCorsInput, optFns ...func(*Options)) (*GetBucketCorsOutput, error) {
 	if params == nil {
 		params = &GetBucketCorsInput{}

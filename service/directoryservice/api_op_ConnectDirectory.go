@@ -32,11 +32,11 @@ func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryI
 	return out, nil
 }
 
-// Contains the inputs for the ConnectDirectory () operation.
+// Contains the inputs for the ConnectDirectory operation.
 type ConnectDirectoryInput struct {
 
-	// A DirectoryConnectSettings () object that contains additional information for
-	// the operation.
+	// A DirectoryConnectSettings object that contains additional information for the
+	// operation.
 	//
 	// This member is required.
 	ConnectSettings *types.DirectoryConnectSettings
@@ -66,7 +66,7 @@ type ConnectDirectoryInput struct {
 	Tags []*types.Tag
 }
 
-// Contains the results of the ConnectDirectory () operation.
+// Contains the results of the ConnectDirectory operation.
 type ConnectDirectoryOutput struct {
 
 	// The identifier of the new directory.

@@ -13,14 +13,14 @@ import (
 // This operation is useful to determine if a bucket exists and you have permission
 // to access it. The operation returns a 200 OK if the bucket exists and you have
 // permission to access it. Otherwise, the operation might return responses such as
-// 404 Not Found and 403 Forbidden.  <p>To use this operation, you must have
-// permissions to perform the <code>s3:ListBucket</code> action. The bucket owner
-// has this permission by default and can grant this permission to others. For more
-// information about permissions, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions
-// Related to Bucket Subresource Operations</a> and <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing
-// Access Permissions to Your Amazon S3 Resources</a>.</p>
+// 404 Not Found and 403 Forbidden. To use this operation, you must have
+// permissions to perform the s3:ListBucket action. The bucket owner has this
+// permission by default and can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns ...func(*Options)) (*HeadBucketOutput, error) {
 	if params == nil {
 		params = &HeadBucketInput{}

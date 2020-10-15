@@ -13,8 +13,8 @@ import (
 
 // Creates a launch configuration. If you exceed your maximum limit of launch
 // configurations, the call fails. To query this limit, call the
-// DescribeAccountLimits () API. For information about updating this limit, see
-// Amazon EC2 Auto Scaling Service Quotas
+// DescribeAccountLimits API. For information about updating this limit, see Amazon
+// EC2 Auto Scaling Service Quotas
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide. For more information, see Launch
 // Configurations

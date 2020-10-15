@@ -99,20 +99,24 @@ type PredefinedMetricSpecification struct {
 
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
-	// target group attached to the Spot Fleet request or ECS service.  <p>Elastic Load
+	// target group attached to the Spot Fleet request or ECS service. Elastic Load
 	// Balancing sends data about your load balancers to Amazon CloudWatch. CloudWatch
 	// collects the data and specifies the format to use to access the data. The format
-	// is
-	// app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
-	// where:</p> <ul> <li> <p>app/<load-balancer-name>/<load-balancer-id> is the final
-	// portion of the load balancer ARN</p> </li> <li>
-	// <p>targetgroup/<target-group-name>/<target-group-id> is the final portion of the
-	// target group ARN.</p> </li> </ul> <p>To find the ARN for an Application Load
-	// Balancer, use the <a
-	// href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a>
-	// API operation. To find the ARN for the target group, use the <a
-	// href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a>
-	// API operation.</p>
+	// is app///targetgroup//, where:
+	//
+	//     * app// is the final portion of the load
+	// balancer ARN
+	//
+	//     * targetgroup// is the final portion of the target group
+	// ARN.
+	//
+	// To find the ARN for an Application Load Balancer, use the
+	// DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the
+	// DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
 	ResourceLabel *string
 }
 

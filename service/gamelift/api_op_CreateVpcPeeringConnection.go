@@ -19,33 +19,33 @@ import (
 // Amazon GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 // Before calling this operation to establish the peering connection, you first
-// need to call CreateVpcPeeringAuthorization () and identify the VPC you want to
-// peer with. Once the authorization for the specified VPC is issued, you have 24
-// hours to establish the connection. These two operations handle all tasks
-// necessary to peer the two VPCs, including acceptance, updating routing tables,
-// etc. To establish the connection, call this operation from the AWS account that
-// is used to manage the Amazon GameLift fleets. Identify the following values: (1)
-// The ID of the fleet you want to be enable a VPC peering connection for; (2) The
-// AWS account with the VPC that you want to peer with; and (3) The ID of the VPC
-// you want to peer with. This operation is asynchronous. If successful, a
-// VpcPeeringConnection () request is created. You can use continuous polling to
-// track the request's status using DescribeVpcPeeringConnections (), or by
-// monitoring fleet events for success or failure using DescribeFleetEvents ().
-//
-//
-// * CreateVpcPeeringAuthorization ()
-//
-//     * DescribeVpcPeeringAuthorizations ()
-//
-//
-// * DeleteVpcPeeringAuthorization ()
-//
-//     * CreateVpcPeeringConnection ()
+// need to call CreateVpcPeeringAuthorization and identify the VPC you want to peer
+// with. Once the authorization for the specified VPC is issued, you have 24 hours
+// to establish the connection. These two operations handle all tasks necessary to
+// peer the two VPCs, including acceptance, updating routing tables, etc. To
+// establish the connection, call this operation from the AWS account that is used
+// to manage the Amazon GameLift fleets. Identify the following values: (1) The ID
+// of the fleet you want to be enable a VPC peering connection for; (2) The AWS
+// account with the VPC that you want to peer with; and (3) The ID of the VPC you
+// want to peer with. This operation is asynchronous. If successful, a
+// VpcPeeringConnection request is created. You can use continuous polling to track
+// the request's status using DescribeVpcPeeringConnections, or by monitoring fleet
+// events for success or failure using DescribeFleetEvents.
 //
 //     *
-// DescribeVpcPeeringConnections ()
+// CreateVpcPeeringAuthorization
 //
-//     * DeleteVpcPeeringConnection ()
+//     * DescribeVpcPeeringAuthorizations
+//
+//     *
+// DeleteVpcPeeringAuthorization
+//
+//     * CreateVpcPeeringConnection
+//
+//     *
+// DescribeVpcPeeringConnections
+//
+//     * DeleteVpcPeeringConnection
 func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateVpcPeeringConnectionInput, optFns ...func(*Options)) (*CreateVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringConnectionInput{}

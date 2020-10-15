@@ -25,7 +25,7 @@ import (
 // vpn-connection | vpn-gateway. These settings apply to the IAM user who makes the
 // request; they do not apply to the entire AWS account. By default, an IAM user
 // defaults to the same settings as the root user, unless they explicitly override
-// the settings by running the ModifyIdFormat () command. Resources created with
+// the settings by running the ModifyIdFormat command. Resources created with
 // longer IDs are visible to all IAM users, regardless of these settings and
 // provided that they have permission to use the relevant Describe command for the
 // resource type.

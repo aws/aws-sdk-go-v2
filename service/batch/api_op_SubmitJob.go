@@ -12,7 +12,7 @@ import (
 )
 
 // Submits an AWS Batch job from a job definition. Parameters specified during
-// SubmitJob () override parameters defined in the job definition.
+// SubmitJob override parameters defined in the job definition.
 func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns ...func(*Options)) (*SubmitJobOutput, error) {
 	if params == nil {
 		params = &SubmitJobInput{}
@@ -84,12 +84,12 @@ type SubmitJobInput struct {
 	// corresponding parameter defaults from the job definition.
 	Parameters map[string]*string
 
-	// The retry strategy to use for failed jobs from this SubmitJob () operation. When
-	// a retry strategy is specified here, it overrides the retry strategy defined in
-	// the job definition.
+	// The retry strategy to use for failed jobs from this SubmitJob operation. When a
+	// retry strategy is specified here, it overrides the retry strategy defined in the
+	// job definition.
 	RetryStrategy *types.RetryStrategy
 
-	// The timeout configuration for this SubmitJob () operation. You can specify a
+	// The timeout configuration for this SubmitJob operation. You can specify a
 	// timeout duration after which AWS Batch terminates your jobs if they have not
 	// finished. If a job is terminated due to a timeout, it is not retried. The
 	// minimum value for the timeout is 60 seconds. This configuration overrides any

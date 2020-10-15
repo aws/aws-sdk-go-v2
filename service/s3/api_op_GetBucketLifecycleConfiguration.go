@@ -17,25 +17,40 @@ import (
 // new filter element that you can use to specify a filter to select a subset of
 // objects to which the rule applies. If you are still using previous version of
 // the lifecycle configuration, it works. For the earlier API description, see
-// GetBucketLifecycle ().  <p>Returns the lifecycle configuration information set
-// on the bucket. For information about lifecycle configuration, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html">Object
-// Lifecycle Management</a>.</p> <p>To use this operation, you must have permission
-// to perform the <code>s3:GetLifecycleConfiguration</code> action. The bucket
-// owner has this permission, by default. The bucket owner can grant this
-// permission to others. For more information about permissions, see <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions
-// Related to Bucket Subresource Operations</a> and <a
-// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing
-// Access Permissions to Your Amazon S3 Resources</a>.</p> <p>
-// <code>GetBucketLifecycleConfiguration</code> has the following special
-// error:</p> <ul> <li> <p>Error code: <code>NoSuchLifecycleConfiguration</code>
-// </p> <ul> <li> <p>Description: The lifecycle configuration does not exist.</p>
-// </li> <li> <p>HTTP Status Code: 404 Not Found</p> </li> <li> <p>SOAP Fault Code
-// Prefix: Client</p> </li> </ul> </li> </ul> <p>The following operations are
-// related to <code>GetBucketLifecycleConfiguration</code>:</p> <ul> <li> <p>
-// <a>GetBucketLifecycle</a> </p> </li> <li> <p> <a>PutBucketLifecycle</a> </p>
-// </li> <li> <p> <a>DeleteBucketLifecycle</a> </p> </li> </ul>
+// GetBucketLifecycle. Returns the lifecycle configuration information set on the
+// bucket. For information about lifecycle configuration, see Object Lifecycle
+// Management
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html). To
+// use this operation, you must have permission to perform the
+// s3:GetLifecycleConfiguration action. The bucket owner has this permission, by
+// default. The bucket owner can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+// GetBucketLifecycleConfiguration has the following special error:
+//
+//     * Error
+// code: NoSuchLifecycleConfiguration
+//
+//         * Description: The lifecycle
+// configuration does not exist.
+//
+//         * HTTP Status Code: 404 Not Found
+//
+//
+// * SOAP Fault Code Prefix: Client
+//
+// The following operations are related to
+// GetBucketLifecycleConfiguration:
+//
+//     * GetBucketLifecycle
+//
+//     *
+// PutBucketLifecycle
+//
+//     * DeleteBucketLifecycle
 func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *GetBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*GetBucketLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketLifecycleConfigurationInput{}
